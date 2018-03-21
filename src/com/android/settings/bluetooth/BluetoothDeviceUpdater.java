@@ -88,29 +88,8 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback {
         public boolean onPreferenceClick(Preference preference) {
             final CachedBluetoothDevice device =
                 ((BluetoothDevicePreference) preference).getBluetoothDevice();
-            if (device == null) {
-                return false;
-            }
-
-            // Set the device as active per profile only if the device supports that profile
-            // TODO: The active device selector location might change in the future
             Log.i(TAG, "OnPreferenceClickListener: device=" + device);
-            boolean result = false;
-            A2dpProfile a2dpProfile = mLocalManager.getProfileManager().getA2dpProfile();
-            if ((a2dpProfile != null) && device.isConnectedProfile(a2dpProfile)) {
-                if (a2dpProfile.setActiveDevice(device.getDevice())) {
-                    Log.i(TAG, "OnPreferenceClickListener: A2DP active device=" + device);
-                    result = true;
-                }
-            }
-            HeadsetProfile headsetProfile = mLocalManager.getProfileManager().getHeadsetProfile();
-            if ((headsetProfile != null) && device.isConnectedProfile(headsetProfile)) {
-                if (headsetProfile.setActiveDevice(device.getDevice())) {
-                    Log.i(TAG, "OnPreferenceClickListener: Headset active device=" + device);
-                    result = true;
-                }
-            }
-            return result;
+            return device.setActive();
         }
     }
 

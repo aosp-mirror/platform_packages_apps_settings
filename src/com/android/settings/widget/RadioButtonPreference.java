@@ -20,7 +20,9 @@ import android.content.Context;
 import android.support.v4.content.res.TypedArrayUtils;
 import android.support.v7.preference.CheckBoxPreference;
 import android.support.v7.preference.PreferenceViewHolder;
+import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -71,6 +73,12 @@ public class RadioButtonPreference extends CheckBoxPreference {
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
         super.onBindViewHolder(view);
+
+        View summaryContainer = view.findViewById(R.id.summary_container);
+        if (summaryContainer != null) {
+            summaryContainer.setVisibility(
+                TextUtils.isEmpty(getSummary()) ? View.GONE : View.VISIBLE);
+        }
 
         TextView title = (TextView) view.findViewById(android.R.id.title);
         if (title != null) {

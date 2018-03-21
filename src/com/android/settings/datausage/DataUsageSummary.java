@@ -129,14 +129,6 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (UserManager.get(getContext()).isAdminUser()) {
-            inflater.inflate(R.menu.data_usage, menu);
-        }
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.data_usage_menu_cellular_networks: {

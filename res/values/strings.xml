@@ -811,7 +811,7 @@
     <!-- Text shown for the title of the lockdown option -->
     <string name="lockdown_settings_title">Show lockdown option</string>
     <!-- Text shown for the description of the lockdown option -->
-    <string name="lockdown_settings_summary">Display power button option that turns off extended access and fingerprint unlocking.</string>
+    <string name="lockdown_settings_summary">Display power button option that turns off Smart Lock, fingerprint unlocking, and notifications on the lock screen</string>
     <!-- Text shown for summary of owner info setting (if none set) [CHAR LIMIT=40]-->
     <string name="owner_info_settings_summary">None</string>
     <!-- Description of how many characters are used in owner info [CHAR LIMIT=40]-->
@@ -941,7 +941,7 @@
     <!-- Title shown in fingerprint enrollment dialog once enrollment is completed [CHAR LIMIT=29] -->
     <string name="security_settings_fingerprint_enroll_finish_title">Fingerprint added</string>
     <!-- Message shown in fingerprint enrollment dialog once enrollment is completed -->
-    <string name="security_settings_fingerprint_enroll_finish_message">When you see this icon, use your fingerprint for identification or to approve purchases.</string>
+    <string name="security_settings_fingerprint_enroll_finish_message">When you see this icon, use your fingerprint for identification or to approve purchases</string>
     <!-- Button text to skip enrollment of fingerprint [CHAR LIMIT=40] -->
     <string name="security_settings_fingerprint_enroll_enrolling_skip">Do it later</string>
     <!-- Title of the dialog shown when the user tries to skip fingerprint setup, asking them to confirm the action [CHAR LIMIT=40] -->
@@ -3224,7 +3224,7 @@
     <!-- SD card & phone storage settings screen, message on screen after user selects Reset network settings [CHAR LIMIT=NONE] -->
     <string name="reset_network_desc">This will reset all network settings, including:\n\n<li>Wi\u2011Fi</li>\n<li>Mobile data</li>\n<li>Bluetooth</li>"</string>
     <!-- SD card & phone storage settings screen, title for the checkbox to let user decide whether erase eSIM data together [CHAR LIMIT=NONE] -->
-    <string name="reset_esim_title">Also reset eSIMs</string>
+    <string name="reset_esim_title">Also reset eSIM</string>
     <!-- SD card & phone storage settings screen, message for the checkbox to let user decide whether erase eSIM data together [CHAR LIMIT=NONE] -->
     <string name="reset_esim_desc">Erase all eSIMs on the phone. You\u2019ll have to contact your carrier to redownload your eSIMs. This will not cancel your mobile service plan.</string>
     <!-- SD card & phone storage settings screen, button on screen after user selects Reset network settings -->
@@ -3274,7 +3274,7 @@
     <!-- SD card & phone storage settings screen, description for check box to erase USB storage [CHAR LIMIT=NONE] -->
     <string name="erase_external_storage_description" product="default">Erase all the data on the SD card, such as music or photos</string>
     <!-- SD card & phone storage settings screen, label for check box to erase all the carriers information on the embedded SIM card [CHAR LIMIT=30] -->
-    <string name="erase_esim_storage">Erase eSIMs</string>
+    <string name="erase_esim_storage">Erase eSIM</string>
     <!-- SD card & phone storage settings screen, description for check box to erase eSIMs for default devices [CHAR LIMIT=NONE] -->
     <string name="erase_esim_storage_description" product="default">Erase all eSIMs on the phone. This will not cancel your mobile service plan.</string>
     <!-- SD card & phone storage settings screen, description for check box to erase eSIMs for tablets [CHAR LIMIT=NONE] -->
@@ -4191,9 +4191,9 @@
     <!-- On Languages & input settings screen, heading. Inside the "Languages & input settings" screen, this is the header for settings that relate to game controller devices. [CHAR LIMIT=40] -->
     <string name="game_controller_settings_category">Game Controller</string>
     <!-- On Languages & input settings screen, setting title.  Setting to redirect vibration to input devices. [CHAR LIMIT=35] -->
-    <string name="vibrate_input_devices">Use vibrator</string>
+    <string name="vibrate_input_devices">Redirect vibrator</string>
     <!-- On Languages & input settings screen, setting summary.  Setting to redirect vibration to input devices. [CHAR LIMIT=100] -->
-    <string name="vibrate_input_devices_summary">Redirect vibrator to game controller when connected.</string>
+    <string name="vibrate_input_devices_summary">Send vibration to game controller when connected</string>
 
     <!-- Keyboard Layout Preference Dialog --> <skip />
     <!-- Title for the keyboard layout preference dialog. [CHAR LIMIT=35] -->
@@ -4434,6 +4434,10 @@
     <string name="accessibility_summary_state_enabled">On</string>
     <!-- Preference's state when disabled. -->
     <string name="accessibility_summary_state_disabled">Off</string>
+    <!-- Accessibility service's preference's state when enabled but not running (like maybe it crashed). -->
+    <string name="accessibility_summary_state_stopped">Not working. Tap for info.</string>
+    <!-- Accessibility service's description when enabled but not running (like maybe it crashed). -->
+    <string name="accessibility_description_state_stopped">This service is malfunctioning.</string>
 
     <!-- Title for the preference to show a tile for a particular feature in the Quick Settings pane. [CHAR LIMIT=NONE] -->
     <string name="enable_quick_setting">Show in Quick Settings</string>
@@ -7170,6 +7174,9 @@
     <!-- Configure Notifications: Title for the option controlling notifications on the lockscreen. [CHAR LIMIT=30] -->
     <string name="lock_screen_notifications_title">On lock screen</string>
 
+    <!-- Configure Notifications: Title for the option controlling notifications for work profile. [CHAR LIMIT=30] -->
+    <string name="locked_work_profile_notification_title">When work profile is locked</string>
+
     <!-- Configure Notifications: Value for lockscreen notifications:  all information will be
          shown in notifications shown on a secure lock screen
          [CHAR LIMIT=50] -->
@@ -7199,10 +7206,6 @@
          hidden or redacted from work notifications shown on a secure lock screen
          [CHAR LIMIT=50] -->
     <string name="lock_screen_notifications_summary_hide_profile">Hide sensitive work content</string>
-
-    <!-- Configure Notifications: Value for lockscreen notifications: work notifications will not appear on a secure lock screen
-         [CHAR LIMIT=50] -->
-    <string name="lock_screen_notifications_summary_disable_profile">Don\u2019t show work notifications at all</string>
 
     <!-- Security > Choose PIN/PW/Pattern > Notification redaction interstitial: Message asking the user how they want their profile notifications to appear when the device is locked [CHAR LIMIT=NONE] -->
     <string name="lock_screen_notifications_interstitial_message_profile">When your device is locked, how do you want profile notifications to show?</string>
@@ -8594,7 +8597,7 @@
     <string name="condition_airplane_title">Airplane mode is on</string>
 
     <!-- Summary of condition that airplane mode is on [CHAR LIMIT=NONE] -->
-    <string name="condition_airplane_summary">Wi-Fi, Bluetooth, and mobile network are turned off. You can\'t make phone calls or connect to the internet.</string>
+    <string name="condition_airplane_summary">When airplane mode is turned on, Wi\u2011Fi, Bluetooth, and mobile network are turned off. Wi\u2011Fi and Bluetooth can be turned back on.</string>
 
     <!-- Title of condition that do not disturb is on [CHAR LIMIT=36] -->
     <string name="condition_zen_title">Do Not Disturb is on</string>
@@ -8823,7 +8826,7 @@
     <string name="no_carrier_update_text">Updated <xliff:g name="time" example="3m">%1$s</xliff:g></string>
 
     <!-- Button to launch external data plan app [CHAR LIMIT=30] -->
-    <string name="launch_mdp_app_text">VIEW PLAN</string>
+    <string name="launch_mdp_app_text">View plan</string>
 
     <!-- Name of Data Saver screens [CHAR LIMIT=30] -->
     <string name="data_saver_title">Data saver</string>
