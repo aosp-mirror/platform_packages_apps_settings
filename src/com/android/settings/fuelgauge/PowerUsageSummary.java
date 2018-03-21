@@ -68,6 +68,7 @@ import com.android.settings.fuelgauge.anomaly.AnomalyDetectionPolicy;
 import com.android.settings.fuelgauge.anomaly.AnomalyDialogFragment.AnomalyDialogListener;
 import com.android.settings.fuelgauge.anomaly.AnomalyLoader;
 import com.android.settings.fuelgauge.anomaly.AnomalySummaryPreferenceController;
+import com.android.settings.fuelgauge.anomaly.AnomalyUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -151,6 +152,10 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
                 @Override
                 public void onLoadFinished(Loader<List<Anomaly>> loader, List<Anomaly> data) {
+                    final AnomalyUtils anomalyUtils = AnomalyUtils.getInstance(getContext());
+                    anomalyUtils.logAnomalies(mMetricsFeatureProvider, data,
+                            MetricsEvent.FUELGAUGE_POWER_USAGE_SUMMARY);
+
                     // show high usage preference if possible
                     mAnomalySummaryPreferenceController.updateAnomalySummaryPreference(data);
 
