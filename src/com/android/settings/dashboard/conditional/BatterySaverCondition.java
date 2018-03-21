@@ -23,6 +23,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.fuelgauge.batterysaver.BatterySaverSettings;
+import com.android.settingslib.fuelgauge.BatterySaverUtils;
 
 public class BatterySaverCondition extends Condition {
     public BatterySaverCondition(ConditionManager manager) {
@@ -68,7 +69,8 @@ public class BatterySaverCondition extends Condition {
     @Override
     public void onActionClick(int index) {
         if (index == 0) {
-            mManager.getContext().getSystemService(PowerManager.class).setPowerSaveMode(false);
+            BatterySaverUtils.setPowerSaveMode(mManager.getContext(), false,
+                    /*needFirstTimeWarning*/ false);
             refreshState();
         } else {
             throw new IllegalArgumentException("Unexpected index " + index);
