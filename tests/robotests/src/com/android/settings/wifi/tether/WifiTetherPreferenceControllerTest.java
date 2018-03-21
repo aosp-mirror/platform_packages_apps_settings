@@ -123,48 +123,6 @@ public class WifiTetherPreferenceControllerTest {
     }
 
     @Test
-    public void startAndStop_shouldRegisterUnregisterReceiver() {
-        final BroadcastReceiver receiver = ReflectionHelpers.getField(mController, "mReceiver");
-
-        mLifecycle.handleLifecycleEvent(ON_START);
-        mLifecycle.handleLifecycleEvent(ON_STOP);
-
-        assertThat(ShadowWifiTetherSwitchBarController.onStartCalled).isTrue();
-        assertThat(ShadowWifiTetherSwitchBarController.onStopCalled).isTrue();
-        verify(mContext).registerReceiver(eq(receiver), any(IntentFilter.class));
-        verify(mContext).unregisterReceiver(receiver);
-    }
-
-    @Test
-    public void start_wifiApOff_shouldSetInitialStateToOff() {
-        when(mWifiManager.getWifiApState()).thenReturn(WifiManager.WIFI_AP_STATE_DISABLED);
-        final BroadcastReceiver receiver = ReflectionHelpers.getField(mController, "mReceiver");
-        final MasterSwitchPreference pref = mock(MasterSwitchPreference.class);
-        when(mScreen.findPreference(anyString())).thenReturn(pref);
-
-        mController.displayPreference(mScreen);
-        mLifecycle.handleLifecycleEvent(ON_START);
-
-        verify(mContext).registerReceiver(eq(receiver), any(IntentFilter.class));
-        verify(pref).setChecked(false);
-    }
-
-    @Test
-    public void start_wifiApOn_shouldSetInitialStateToOn() {
-        when(mWifiManager.getWifiApState()).thenReturn(WifiManager.WIFI_AP_STATE_ENABLED);
-        final BroadcastReceiver receiver = ReflectionHelpers.getField(mController, "mReceiver");
-        final MasterSwitchPreference pref = mock(MasterSwitchPreference.class);
-        when(mScreen.findPreference(anyString())).thenReturn(pref);
-
-        mController.displayPreference(mScreen);
-        mLifecycle.handleLifecycleEvent(ON_START);
-
-        assertThat(ShadowWifiTetherSwitchBarController.onStartCalled).isTrue();
-        verify(mContext).registerReceiver(eq(receiver), any(IntentFilter.class));
-        verify(pref).setChecked(true);
-    }
-
-    @Test
     public void testReceiver_goingToAirplaneMode_shouldClearPreferenceSummary() {
         final ContentResolver cr = mock(ContentResolver.class);
         when(mContext.getContentResolver()).thenReturn(cr);
