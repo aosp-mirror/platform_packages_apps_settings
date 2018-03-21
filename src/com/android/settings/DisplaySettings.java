@@ -124,7 +124,6 @@ public class DisplaySettings extends DashboardFragment {
                     List<String> keys = super.getNonIndexableKeys(context);
                     keys.add(KEY_DISPLAY_SIZE);
                     keys.add(WallpaperPreferenceController.KEY_WALLPAPER);
-                    keys.add(KEY_AMBIENT_DISPLAY);
                     keys.add(KEY_NIGHT_DISPLAY);
                     return keys;
                 }
