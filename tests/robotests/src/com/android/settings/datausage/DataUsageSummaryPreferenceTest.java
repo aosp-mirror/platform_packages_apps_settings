@@ -16,8 +16,11 @@
 
 package com.android.settings.datausage;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,8 +33,6 @@ import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settingslib.Utils;
-import com.android.settingslib.utils.StringUtil;
-import java.util.concurrent.TimeUnit;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -41,8 +42,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.concurrent.TimeUnit;
-
-import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResourcesImpl.class)
@@ -123,7 +122,88 @@ public class DataUsageSummaryPreferenceTest {
     }
 
     @Test
-    public void testSetUsageInfo_withRecentCarrierUpdate_doesNotSetCarrierInfoWarningColor() {
+    public void testCarrierUpdateTime_shouldFormatDaysCorrectly() {
+        int baseUnit = 2;
+        int smudge = 6;
+        final long updateTime = System.currentTimeMillis()
+                - TimeUnit.DAYS.toMillis(baseUnit) - TimeUnit.HOURS.toMillis(smudge);
+        mCarrierInfo = (TextView) mHolder.findViewById(R.id.carrier_and_update);
+        mSummaryPreference.setUsageInfo(mCycleEnd, updateTime, DUMMY_CARRIER, 1 /* numPlans */,
+                new Intent());
+
+        bindViewHolder();
+        assertThat(mCarrierInfo.getText().toString())
+                .isEqualTo("Updated by " + DUMMY_CARRIER + " " + baseUnit + "d ago");
+    }
+
+    @Test
+    public void testCarrierUpdateTime_shouldFormatHoursCorrectly() {
+        int baseUnit = 2;
+        int smudge = 6;
+        final long updateTime = System.currentTimeMillis()
+                - TimeUnit.HOURS.toMillis(baseUnit) - TimeUnit.MINUTES.toMillis(smudge);
+        mCarrierInfo = (TextView) mHolder.findViewById(R.id.carrier_and_update);
+        mSummaryPreference.setUsageInfo(mCycleEnd, updateTime, DUMMY_CARRIER, 1 /* numPlans */,
+                new Intent());
+
+        bindViewHolder();
+        assertThat(mCarrierInfo.getText().toString())
+                .isEqualTo("Updated by " + DUMMY_CARRIER + " " + baseUnit + "h ago");
+    }
+
+    @Test
+    public void testCarrierUpdateTime_shouldFormatMinutesCorrectly() {
+        int baseUnit = 2;
+        int smudge = 6;
+        final long updateTime = System.currentTimeMillis()
+                - TimeUnit.MINUTES.toMillis(baseUnit) - TimeUnit.SECONDS.toMillis(smudge);
+        mCarrierInfo = (TextView) mHolder.findViewById(R.id.carrier_and_update);
+        mSummaryPreference.setUsageInfo(mCycleEnd, updateTime, DUMMY_CARRIER, 1 /* numPlans */,
+                new Intent());
+
+        bindViewHolder();
+        assertThat(mCarrierInfo.getText().toString())
+                .isEqualTo("Updated by " + DUMMY_CARRIER + " " + baseUnit + "m ago");
+    }
+
+    @Test
+    public void testCarrierUpdateTime_shouldFormatLessThanMinuteCorrectly() {
+        final long updateTime = System.currentTimeMillis() - TimeUnit.SECONDS.toMillis(45);
+        mCarrierInfo = (TextView) mHolder.findViewById(R.id.carrier_and_update);
+        mSummaryPreference.setUsageInfo(mCycleEnd, updateTime, DUMMY_CARRIER, 1 /* numPlans */,
+                new Intent());
+
+        bindViewHolder();
+        assertThat(mCarrierInfo.getText().toString())
+                .isEqualTo("Updated by " + DUMMY_CARRIER + " just now");
+    }
+
+    @Test
+    public void testCarrierUpdateTimeWithNoCarrier_shouldSayJustNow() {
+        final long updateTime = System.currentTimeMillis() - TimeUnit.SECONDS.toMillis(45);
+        mCarrierInfo = (TextView) mHolder.findViewById(R.id.carrier_and_update);
+        mSummaryPreference.setUsageInfo(mCycleEnd, updateTime, null /* carrier */,
+                1 /* numPlans */, new Intent());
+
+        bindViewHolder();
+        assertThat(mCarrierInfo.getText().toString())
+                .isEqualTo("Updated just now");
+    }
+
+    @Test
+    public void testCarrierUpdateTimeWithNoCarrier_shouldFormatTime() {
+        final long updateTime = System.currentTimeMillis() - TimeUnit.MINUTES.toMillis(2);
+        mCarrierInfo = (TextView) mHolder.findViewById(R.id.carrier_and_update);
+        mSummaryPreference.setUsageInfo(mCycleEnd, updateTime, null /* carrier */,
+                1 /* numPlans */, new Intent());
+
+        bindViewHolder();
+        assertThat(mCarrierInfo.getText().toString())
+                .isEqualTo("Updated 2m ago");
+    }
+
+    @Test
+    public void testSetUsageInfo_withRecentCarrierUpdate_doesNotSetCarrierInfoWarningColorAndFont() {
         final long updateTime = System.currentTimeMillis() - TimeUnit.HOURS.toMillis(1);
         mCarrierInfo = (TextView) mHolder.findViewById(R.id.carrier_and_update);
         mSummaryPreference.setUsageInfo(mCycleEnd, updateTime, DUMMY_CARRIER, 1 /* numPlans */,
@@ -132,11 +212,12 @@ public class DataUsageSummaryPreferenceTest {
         bindViewHolder();
         assertThat(mCarrierInfo.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(mCarrierInfo.getCurrentTextColor()).isEqualTo(
-                Utils.getColorAttr(mContext, android.R.attr.textColorPrimary));
+                Utils.getColorAttr(mContext, android.R.attr.textColorSecondary));
+        assertThat(mCarrierInfo.getTypeface()).isEqualTo(Typeface.SANS_SERIF);
     }
 
     @Test
-    public void testSetUsageInfo_withStaleCarrierUpdate_setsCarrierInfoWarningColor() {
+    public void testSetUsageInfo_withStaleCarrierUpdate_setsCarrierInfoWarningColorAndFont() {
         final long updateTime = System.currentTimeMillis() - TimeUnit.HOURS.toMillis(7);
         mSummaryPreference.setUsageInfo(mCycleEnd, updateTime, DUMMY_CARRIER, 1 /* numPlans */,
                 new Intent());
@@ -145,6 +226,8 @@ public class DataUsageSummaryPreferenceTest {
         assertThat(mCarrierInfo.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(mCarrierInfo.getCurrentTextColor()).isEqualTo(
                 Utils.getColorAttr(mContext, android.R.attr.colorError));
+        assertThat(mCarrierInfo.getTypeface()).isEqualTo(
+                DataUsageSummaryPreference.SANS_SERIF_MEDIUM);
     }
 
     @Test
