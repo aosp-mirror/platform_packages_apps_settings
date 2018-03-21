@@ -59,6 +59,7 @@ public class BatteryTipDialogFragmentTest {
     private static final String DISPLAY_NAME = "app";
     private static final long SCREEN_TIME_MS = DateUtils.HOUR_IN_MILLIS;
     private static final long AVERAGE_TIME_MS = DateUtils.HOUR_IN_MILLIS;
+    private static final int METRICS_KEY = 1;
 
     private BatteryTipDialogFragment mDialogFragment;
     private Context mContext;
@@ -102,7 +103,7 @@ public class BatteryTipDialogFragmentTest {
     public void testOnCreateDialog_highUsageTip_fireHighUsageDialog() {
         Robolectric.getForegroundThreadScheduler().pause();
 
-        mDialogFragment = BatteryTipDialogFragment.newInstance(mHighUsageTip);
+        mDialogFragment = BatteryTipDialogFragment.newInstance(mHighUsageTip, METRICS_KEY);
 
         FragmentTestUtil.startFragment(mDialogFragment);
 
@@ -117,7 +118,7 @@ public class BatteryTipDialogFragmentTest {
 
     @Test
     public void testOnCreateDialog_restrictOneAppTip_fireRestrictOneAppDialog() {
-        mDialogFragment = BatteryTipDialogFragment.newInstance(mRestrictedOneAppTip);
+        mDialogFragment = BatteryTipDialogFragment.newInstance(mRestrictedOneAppTip, METRICS_KEY);
 
         FragmentTestUtil.startFragment(mDialogFragment);
 
@@ -134,7 +135,8 @@ public class BatteryTipDialogFragmentTest {
     public void testOnCreateDialog_restrictTwoAppsTip_fireRestrictTwoAppsDialog() {
         Robolectric.getForegroundThreadScheduler().pause();
 
-        mDialogFragment = BatteryTipDialogFragment.newInstance(mRestrictTwoAppsTip);
+        mDialogFragment = BatteryTipDialogFragment.newInstance(mRestrictTwoAppsTip, METRICS_KEY);
+
 
         FragmentTestUtil.startFragment(mDialogFragment);
 
@@ -161,7 +163,7 @@ public class BatteryTipDialogFragmentTest {
         final RestrictAppTip restrictSixAppsTip = new RestrictAppTip(BatteryTip.StateType.NEW,
                 appInfos);
 
-        mDialogFragment = BatteryTipDialogFragment.newInstance(restrictSixAppsTip);
+        mDialogFragment = BatteryTipDialogFragment.newInstance(restrictSixAppsTip, METRICS_KEY);
 
         FragmentTestUtil.startFragment(mDialogFragment);
 
@@ -178,7 +180,8 @@ public class BatteryTipDialogFragmentTest {
 
     @Test
     public void testOnCreateDialog_unRestrictAppTip_fireUnRestrictDialog() {
-        mDialogFragment = BatteryTipDialogFragment.newInstance(mUnrestrictAppTip);
+        mDialogFragment = BatteryTipDialogFragment.newInstance(mUnrestrictAppTip, METRICS_KEY);
+        ShadowUtils.setApplicationLabel(PACKAGE_NAME, DISPLAY_NAME);
 
         FragmentTestUtil.startFragment(mDialogFragment);
 
@@ -193,7 +196,7 @@ public class BatteryTipDialogFragmentTest {
     @Test
     public void testOnCreateDialog_summaryTipWithEstimation_fireDialogWithEstimation() {
         doReturn(AVERAGE_TIME_MS).when(mSummaryTip).getAverageTimeMs();
-        mDialogFragment = BatteryTipDialogFragment.newInstance(mSummaryTip);
+        mDialogFragment = BatteryTipDialogFragment.newInstance(mSummaryTip, METRICS_KEY);
 
         FragmentTestUtil.startFragment(mDialogFragment);
 
@@ -207,7 +210,7 @@ public class BatteryTipDialogFragmentTest {
 
     @Test
     public void testOnCreateDialog_summaryTipWithoutEstimation_fireDialogWithoutEstimation() {
-        mDialogFragment = BatteryTipDialogFragment.newInstance(mSummaryTip);
+        mDialogFragment = BatteryTipDialogFragment.newInstance(mSummaryTip, METRICS_KEY);
 
         FragmentTestUtil.startFragment(mDialogFragment);
 
