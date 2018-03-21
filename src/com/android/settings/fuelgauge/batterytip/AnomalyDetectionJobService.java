@@ -40,8 +40,11 @@ import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 
 import com.android.internal.os.BatteryStatsHelper;
+import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.BatteryUtils;
+import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 import com.android.settingslib.utils.ThreadUtils;
 
@@ -84,11 +87,14 @@ public class AnomalyDetectionJobService extends JobService {
                     true /* collectBatteryBroadcast */);
             final UserManager userManager = getSystemService(UserManager.class);
             final PowerWhitelistBackend powerWhitelistBackend = PowerWhitelistBackend.getInstance();
+            final PowerUsageFeatureProvider powerUsageFeatureProvider = FeatureFactory
+                    .getFactory(this).getPowerUsageFeatureProvider(this);
 
             for (JobWorkItem item = params.dequeueWork(); item != null;
                     item = params.dequeueWork()) {
                 saveAnomalyToDatabase(batteryStatsHelper, userManager, batteryDatabaseManager,
                         batteryUtils, policy, powerWhitelistBackend, contentResolver,
+                        powerUsageFeatureProvider,
                         item.getIntent().getExtras());
             }
             jobFinished(params, false /* wantsReschedule */);
@@ -106,42 +112,52 @@ public class AnomalyDetectionJobService extends JobService {
     void saveAnomalyToDatabase(BatteryStatsHelper batteryStatsHelper, UserManager userManager,
             BatteryDatabaseManager databaseManager, BatteryUtils batteryUtils,
             BatteryTipPolicy policy, PowerWhitelistBackend powerWhitelistBackend,
-            ContentResolver contentResolver, Bundle bundle) {
+            ContentResolver contentResolver, PowerUsageFeatureProvider powerUsageFeatureProvider,
+            Bundle bundle) {
         // The Example of intentDimsValue is: 35:{1:{1:{1:10013|}|}|}
         final StatsDimensionsValue intentDimsValue =
                 bundle.getParcelable(StatsManager.EXTRA_STATS_DIMENSIONS_VALUE);
-        final long subscriptionId = bundle.getLong(StatsManager.EXTRA_STATS_SUBSCRIPTION_ID,
-                -1);
         final long timeMs = bundle.getLong(AnomalyDetectionReceiver.KEY_ANOMALY_TIMESTAMP,
                 System.currentTimeMillis());
+        final String[] cookies = bundle.getStringArray(
+                StatsManager.EXTRA_STATS_BROADCAST_SUBSCRIBER_COOKIES);
+        final AnomalyInfo anomalyInfo = new AnomalyInfo(
+                !ArrayUtils.isEmpty(cookies) ? cookies[0] : "");
         Log.i(TAG, "Extra stats value: " + intentDimsValue.toString());
 
         try {
             final int uid = extractUidFromStatsDimensionsValue(intentDimsValue);
-            final int anomalyType = StatsManagerConfig.getAnomalyTypeFromSubscriptionId(
-                    subscriptionId);
-            final boolean smartBatteryOn = Settings.Global.getInt(contentResolver,
-                    Settings.Global.APP_STANDBY_ENABLED, ON) == ON;
+            final boolean autoFeatureOn = powerUsageFeatureProvider.isSmartBatterySupported()
+                    ? Settings.Global.getInt(contentResolver,
+                            Settings.Global.APP_STANDBY_ENABLED, ON) == ON
+                    : Settings.Global.getInt(contentResolver,
+                            Settings.Global.APP_AUTO_RESTRICTION_ENABLED, ON) == ON;
             final String packageName = batteryUtils.getPackageName(uid);
             if (!powerWhitelistBackend.isSysWhitelistedExceptIdle(packageName)
                     && !isSystemUid(uid)) {
-                if (anomalyType == StatsManagerConfig.AnomalyType.EXCESSIVE_BG) {
-                    // TODO(b/72385333): check battery percentage draining in batterystats
-                    if (batteryUtils.isPreOApp(packageName) && batteryUtils.isAppHeavilyUsed(
-                            batteryStatsHelper, userManager, uid,
+                boolean anomalyDetected = true;
+                if (anomalyInfo.anomalyType == StatsManagerConfig.AnomalyType.EXCESSIVE_BG) {
+                    if (!batteryUtils.isPreOApp(packageName)
+                            || !batteryUtils.isAppHeavilyUsed(batteryStatsHelper, userManager, uid,
                             policy.excessiveBgDrainPercentage)) {
-                        Log.e(TAG, "Excessive detected uid=" + uid);
+                        // Don't report if it is not legacy app or haven't used much battery
+                        anomalyDetected = false;
+                    }
+                }
+
+                if (anomalyDetected) {
+                    if (autoFeatureOn && anomalyInfo.autoRestriction) {
+                        // Auto restrict this app
                         batteryUtils.setForceAppStandby(uid, packageName,
                                 AppOpsManager.MODE_IGNORED);
-                        databaseManager.insertAnomaly(uid, packageName, anomalyType,
-                                smartBatteryOn
-                                        ? AnomalyDatabaseHelper.State.AUTO_HANDLED
-                                        : AnomalyDatabaseHelper.State.NEW,
+                        databaseManager.insertAnomaly(uid, packageName, anomalyInfo.anomalyType,
+                                AnomalyDatabaseHelper.State.AUTO_HANDLED,
+                                timeMs);
+                    } else {
+                        databaseManager.insertAnomaly(uid, packageName, anomalyInfo.anomalyType,
+                                AnomalyDatabaseHelper.State.NEW,
                                 timeMs);
                     }
-                } else {
-                    databaseManager.insertAnomaly(uid, packageName, anomalyType,
-                            AnomalyDatabaseHelper.State.NEW, timeMs);
                 }
             }
         } catch (NullPointerException | IndexOutOfBoundsException e) {
