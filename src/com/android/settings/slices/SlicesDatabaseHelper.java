@@ -78,6 +78,16 @@ public class SlicesDatabaseHelper extends SQLiteOpenHelper {
          * {@link com.android.settings.core.BasePreferenceController}.
          */
         String CONTROLLER = "controller";
+
+        /**
+         * Boolean flag, {@code true} when the Slice is officially platform-supported.
+         */
+        String PLATFORM_SLICE = "platform_slice";
+
+        /**
+         * {@link SliceData.SliceType} representing the inline type of the result.
+         */
+        String SLICE_TYPE = "slice_type";
     }
 
     private static final String CREATE_SLICES_TABLE =
@@ -96,6 +106,10 @@ public class SlicesDatabaseHelper extends SQLiteOpenHelper {
                     IndexColumns.FRAGMENT +
                     ", " +
                     IndexColumns.CONTROLLER +
+                    ", " +
+                    IndexColumns.PLATFORM_SLICE +
+                    ", " +
+                    IndexColumns.SLICE_TYPE+
                     ");";
 
     private final Context mContext;
