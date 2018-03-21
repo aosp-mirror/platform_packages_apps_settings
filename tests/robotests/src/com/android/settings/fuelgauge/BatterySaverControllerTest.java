@@ -15,16 +15,21 @@
  */
 package com.android.settings.fuelgauge;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.os.PowerManager;
+import android.support.v7.preference.Preference;
 
+import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -38,14 +43,18 @@ import org.robolectric.util.ReflectionHelpers;
 public class BatterySaverControllerTest {
 
     @Mock
-    private MasterSwitchPreference mBatterySaverPref;
+    private Preference mBatterySaverPref;
     @Mock
     private PowerManager mPowerManager;
     @Mock
     private Context mContext;
     @Mock
-    private Lifecycle mLifecycle;
+    private ContentResolver mContentResolver;
+
     private BatterySaverController mBatterySaverController;
+
+    private static final String SAVER_ON_SUMMARY = "saver-on";
+    private static final String SAVER_OFF_SUMMARY = "saver-off";
 
     @Before
     public void setUp() {
@@ -55,54 +64,27 @@ public class BatterySaverControllerTest {
         ReflectionHelpers.setField(mBatterySaverController, "mPowerManager", mPowerManager);
         ReflectionHelpers.setField(mBatterySaverController, "mBatterySaverPref", mBatterySaverPref);
         doNothing().when(mBatterySaverController).refreshConditionManager();
+
+        when(mContext.getContentResolver()).thenReturn(mContentResolver);
+
+        when(mContext.getString(anyInt(), any(Object.class)))
+                .thenAnswer((inv) -> "str-" + inv.getArgument(0));
+
+        when(mContext.getString(eq(R.string.battery_saver_on_summary), any(Object.class)))
+                .thenReturn(SAVER_ON_SUMMARY);
+        when(mContext.getString(eq(R.string.battery_saver_off_summary), any(Object.class)))
+                .thenReturn(SAVER_OFF_SUMMARY);
     }
 
     @Test
-    public void testOnPreferenceChange_TurnOnBatterySaver_BatterySaverOn() {
-        testOnPreferenceChangeInner(true);
+    public void testOnPreferenceChange_onStart() {
+        mBatterySaverController.onStart();
+        verify(mBatterySaverPref).setSummary(eq(SAVER_OFF_SUMMARY));
     }
 
     @Test
-    public void testOnPreferenceChange_TurnOffBatterySaver_BatterySaverOff() {
-        testOnPreferenceChangeInner(false);
-    }
-
-    @Test
-    public void testUpdateState_SaverModeOn_PreferenceChecked() {
-        testUpdateStateInner(true);
-    }
-
-    @Test
-    public void testUpdateState_SaverModeOff_PreferenceUnChecked() {
-        testUpdateStateInner(false);
-    }
-
-    @Test
-    public void testOnBatteryChanged_pluggedIn_setDisable() {
-        mBatterySaverController.onBatteryChanged(true /* pluggedIn */);
-
-        verify(mBatterySaverPref).setSwitchEnabled(false);
-    }
-
-    @Test
-    public void testOnBatteryChanged_notPluggedIn_setEnable() {
-        mBatterySaverController.onBatteryChanged(false /* pluggedIn */);
-
-        verify(mBatterySaverPref).setSwitchEnabled(true);
-    }
-
-    private void testOnPreferenceChangeInner(final boolean saverOn) {
-        when(mPowerManager.setPowerSaveMode(saverOn)).thenReturn(true);
-        when(mPowerManager.isPowerSaveMode()).thenReturn(!saverOn);
-
-        mBatterySaverController.onPreferenceChange(mBatterySaverPref, saverOn);
-        verify(mPowerManager).setPowerSaveMode(saverOn);
-    }
-
-    private void testUpdateStateInner(final boolean saverOn) {
-        when(mPowerManager.isPowerSaveMode()).thenReturn(saverOn);
-
-        mBatterySaverController.updateState(mBatterySaverPref);
-        verify(mBatterySaverPref).setChecked(saverOn);
+    public void testOnPreferenceChange_onPowerSaveModeChanged() {
+        mBatterySaverController.onPowerSaveModeChanged();
+        verify(mBatterySaverPref).setSummary(eq(SAVER_OFF_SUMMARY));
     }
 }
