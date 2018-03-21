@@ -21,7 +21,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -99,8 +98,6 @@ public class FingerprintSettings extends SubSettings {
     public static final String ANNOTATION_URL = "url";
     public static final String ANNOTATION_ADMIN_DETAILS = "admin_details";
 
-    public static final String KEY_FINGERPRINT_SETTINGS = "fingerprint_settings";
-
     @Override
     public Intent getIntent() {
         Intent modIntent = new Intent(super.getIntent());
@@ -157,20 +154,6 @@ public class FingerprintSettings extends SubSettings {
         private FingerprintAuthenticateSidecar mAuthenticateSidecar;
         private FingerprintRemoveSidecar mRemovalSidecar;
         private HashMap<Integer, String> mFingerprintsRenaming;
-
-        final AnnotationSpan.LinkInfo mUrlLinkInfo = new AnnotationSpan.LinkInfo(
-                ANNOTATION_URL, (view) -> {
-            final Context context = view.getContext();
-            Intent intent = HelpUtils.getHelpIntent(context, getString(getHelpResource()),
-                    context.getClass().getName());
-            if (intent != null) {
-                try {
-                    view.startActivityForResult(intent, 0);
-                } catch (ActivityNotFoundException e) {
-                    Log.w(TAG, "Activity was not found for intent, " + intent.toString());
-                }
-            }
-        });
 
         FingerprintAuthenticateSidecar.Listener mAuthenticateListener =
             new FingerprintAuthenticateSidecar.Listener() {
@@ -360,11 +343,15 @@ public class FingerprintSettings extends SubSettings {
                     ANNOTATION_ADMIN_DETAILS, (view) -> {
                 RestrictedLockUtils.sendShowAdminSupportDetailsIntent(activity, admin);
             });
+            final Intent helpIntent = HelpUtils.getHelpIntent(
+                    activity, getString(getHelpResource()), activity.getClass().getName());
+            final AnnotationSpan.LinkInfo linkInfo = new AnnotationSpan.LinkInfo(
+                    activity, ANNOTATION_URL, helpIntent);
             pref.setTitle(AnnotationSpan.linkify(getText(admin != null
                             ? R.string
                             .security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled
                             : R.string.security_settings_fingerprint_enroll_disclaimer),
-                    mUrlLinkInfo, adminLinkInfo));
+                    linkInfo, adminLinkInfo));
         }
 
         protected void removeFingerprintPreference(int fingerprintId) {
