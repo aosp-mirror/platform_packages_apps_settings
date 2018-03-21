@@ -22,10 +22,8 @@ import android.provider.SearchIndexableResource;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothFilesPreferenceController;
-import com.android.settings.bluetooth.BluetoothMasterSwitchPreferenceController;
-import com.android.settings.bluetooth.BluetoothSwitchPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.nfc.NfcPreferenceController;
+import com.android.settings.nfc.AndroidBeamPreferenceController;
 import com.android.settings.print.PrintSettingPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -70,21 +68,19 @@ public class AdvancedConnectedDeviceDashboardFragment extends DashboardFragment 
     private static List<AbstractPreferenceController> buildControllers(Context context,
             Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        final NfcPreferenceController nfcPreferenceController =
-                new NfcPreferenceController(context);
-        controllers.add(nfcPreferenceController);
-        final BluetoothSwitchPreferenceController bluetoothPreferenceController =
-                new BluetoothSwitchPreferenceController(context);
-        controllers.add(bluetoothPreferenceController);
+
+        final AndroidBeamPreferenceController beamPreferenceController =
+                new AndroidBeamPreferenceController(context);
+        controllers.add(beamPreferenceController);
 
         controllers.add(new BluetoothFilesPreferenceController(context));
         controllers.add(new BluetoothOnWhileDrivingPreferenceController(context));
+
         final PrintSettingPreferenceController printerController =
                 new PrintSettingPreferenceController(context);
         if (lifecycle != null) {
+            lifecycle.addObserver(beamPreferenceController);
             lifecycle.addObserver(printerController);
-            lifecycle.addObserver(nfcPreferenceController);
-            lifecycle.addObserver(bluetoothPreferenceController);
         }
         controllers.add(printerController);
 
@@ -109,10 +105,8 @@ public class AdvancedConnectedDeviceDashboardFragment extends DashboardFragment 
                     final List<String> keys = super.getNonIndexableKeys(context);
                     PackageManager pm = context.getPackageManager();
                     if (!pm.hasSystemFeature(PackageManager.FEATURE_NFC)) {
-                        keys.add(NfcPreferenceController.KEY_TOGGLE_NFC);
-                        keys.add(NfcPreferenceController.KEY_ANDROID_BEAM_SETTINGS);
+                        keys.add(AndroidBeamPreferenceController.KEY_ANDROID_BEAM_SETTINGS);
                     }
-                    keys.add(BluetoothMasterSwitchPreferenceController.KEY_TOGGLE_BLUETOOTH);
 
                     return keys;
                 }
