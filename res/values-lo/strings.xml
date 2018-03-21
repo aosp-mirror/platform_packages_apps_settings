@@ -330,13 +330,20 @@
     <string name="date_time_set_timezone" msgid="5045627174274377814">"ເລືອກເຂດເວລາ"</string>
     <string name="date_time_set_date_title" msgid="6928286765325608604">"ວັນທີ"</string>
     <string name="date_time_set_date" msgid="7021491668550232105">"ຕັ້ງວັນທີ"</string>
+    <string name="date_time_select_region" msgid="5434001881313168586">"ຂົງເຂດ"</string>
+    <string name="date_time_select_zone" msgid="8883690857762652278">"ເຂດ​ເວ​ລາ"</string>
+    <string name="date_time_select_fixed_offset_time_zones" msgid="6084375085203448645">"ເລືອກການຊົດເຊີຍ UTC"</string>
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"ຮຽງຕາມຕົວອັກສອນ"</string>
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"ຮຽງຕາມເຂດເວລາ"</string>
     <string name="zone_change_to_from_dst" msgid="118656001224045590">"<xliff:g id="TIME_TYPE">%1$s</xliff:g> ເລີ່ມເມື່ອ <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
+    <string name="zone_info_exemplar_location_and_offset" msgid="1359698475641349336">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
+    <string name="zone_info_offset_and_name" msgid="164876167707284017">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
+    <string name="zone_info_footer" msgid="4192803402331390389">"ໃຊ້ <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="DST_TIME_TYPE">%2$s</xliff:g> ເລີ່ມຕົ້ນ <xliff:g id="TRANSITION_DATE">%3$s</xliff:g>."</string>
+    <string name="zone_info_footer_no_dst" msgid="8652423870143056964">"ໃຊ້ <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. ບໍ່ມີເວລາອອມແສງ."</string>
     <string name="zone_time_type_dst" msgid="8850494578766845276">"ການປ່ຽນເວລາກາງເວັນ"</string>
     <string name="zone_time_type_standard" msgid="3462424485380376522">"ເວລາມາດຕະຖານ"</string>
-    <string name="zone_menu_by_region" msgid="4603214570803607532">"ເຂດເວລາຕາມຂົງເຂດ"</string>
-    <string name="zone_menu_by_offset" msgid="1172774718486088771">"ເຂດເວລາຊົດເຊີຍຄົງທີ່"</string>
+    <string name="zone_menu_by_region" msgid="7094872254966039844">"ສະແດງເຂດເວລາຕາມຂົງເຂດ"</string>
+    <string name="zone_menu_by_offset" msgid="5548491286761692269">"ສະແດງເຂດເວລາຕາມການຊົດເຊີຍ UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"ວັນທີ"</string>
     <string name="time_picker_title" msgid="483460752287255019">"ເວລາ"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"ລັອກໂດຍອັດຕະໂນມັດ"</string>
@@ -362,7 +369,9 @@
     <string name="security_settings_title" msgid="4918904614964215087">"ຄວາມປອດໄພ &amp; ສະຖານທີ່"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"ການເຂົ້າລະຫັດ ແລະ ຂໍ້ມູນການເຂົ້າສູ່ລະບົບ"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"ເຂົ້າລະຫັດໂທລະສັບແລ້ວ"</string>
+    <string name="decryption_settings_summary" product="default" msgid="5671817824042639849">"ໂທລະສັບບໍ່ໄດ້ຖືກເຂົ້າລະຫັດ"</string>
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"ເຂົ້າລະຫັດອຸປະກອນແລ້ວ"</string>
+    <string name="decryption_settings_summary" product="tablet" msgid="5794135636155570977">"ອຸປະກອນບໍ່ໄດ້ຖືກເຂົ້າລະຫັດ"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"ການຕັ້ງຄ່າໜ້າຈໍລັອກ"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"ຕັ້ງທີ່ຢູ່ຂອງຂ້ອຍ, ໜ້າຈໍປົດລັອກ, ການລັອກຊິມກາດ, ການລັອກບ່ອນຈັດເກັບຂໍ້ມູນຮັບຮອງ"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"ກຳນົດທີ່ຢູ່ຂອງຂ້ອຍ, ການປົດລັອກໜ້າຈໍ, ການລັອກບ່ອນເຈັດເກັບຂໍ້ມູນຮັບຮອງ"</string>
@@ -469,14 +478,14 @@
     <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"ລະຫັດ​ຜ່ານທີ່​ທ່ານໃສ່​ລົງໄປ​ນັ້ນຖືກ​ຕ້ອງແລ້ວ, ແຕ່ຂໍ້​ມູນ​ຂອງ​ທ່ານ​ເສຍ​ຫາຍ. \n\n1ເພື່ອ​ກັບໄປ​ນຳ​ໃຊ້​ແທັບເລັດ​ຂອງທ່ານ, ທ່ານຕ້ອງ​ຕັ້ງ​ຄ່າ​ແທັບເລັດ​ຂອງທ່ານ​ກັບໄປເປັນ​ຄ່າຈາກ​ໂຮງງານຄືນ. ເມື່ອ​ທ່ານ​ຕັ້ງຄ່າ​ແທັບເລັດ​ຂອງທ່ານ​ຫຼັງຈາກ​ການຕັ້ງ​ຄ່າ​ຄືນ, ທ່ານ​ຈະສາມາດ​ດຶງ​ຂໍ້ມູນ​ທີ່ທ່ານ​ສຳຮອງ​ໄວ້ໃນ​ບັນຊີ Google Account ຂອງທ່ານ​ຄືນມາໄດ້."</string>
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"ລະຫັດ​ຜ່ານທີ່​ທ່ານໃສ່​ລົງໄປ​ນັ້ນຖືກ​ຕ້ອງແລ້ວ, ແຕ່ຂໍ້​ມູນ​ຂອງ​ທ່ານ​ເສຍ​ຫາຍ. \n\nເພື່ອ​ກັບໄປ​ນຳ​ໃຊ້​ໂທລະສັບ​ຂອງທ່ານ, ທ່ານຕ້ອງຕັ້ງ​ຄ່າ​ໂທລະສັບ​ຂອງທ່ານ​ກັບໄປເປັນ​ຄ່າຈາກ​ໂຮງງານຄືນ. ເມື່ອ​ທ່ານ​ຕັ້ງຄ່າ​ໂທລະສັບ​ຂອງທ່ານ​ຫຼັງຈາກ​ການ​ຕັ້ງ​ຄ່າ​ຄືນ, ທ່ານ​ຈະສາມາດ​ດຶງ​ຂໍ້ມູນ​ທີ່ທ່ານ​ສຳຮອງ​ໄວ້ໃນ​ບັນຊີ Google ຂອງທ່ານ​ຄືນມາໄດ້."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"ສະລັບຮູບແບບການປ້ອນຂໍ້ມູນ"</string>
-    <string name="suggested_lock_settings_title" msgid="8195437597439375655">"ຕັ້ງໜ້າຈໍລັອກສຳລັບຄວາມປອດໄພ"</string>
-    <string name="suggested_lock_settings_summary" product="tablet" msgid="7915739444107426777">"ປ້ອງກັນບໍ່ໃຫ້ຄົນອື່ນໃຊ້ແທັບເລັດຂອງທ່ານ"</string>
-    <string name="suggested_lock_settings_summary" product="device" msgid="9202820303111653610">"ປ້ອງກັນບໍ່ໃຫ້ຄົນອື່ນໃຊ້ອຸປະກອນຂອງທ່ານ"</string>
-    <string name="suggested_lock_settings_summary" product="default" msgid="1252628838133344781">"ປ້ອງກັນບໍ່ໃຫ້ຄົນອື່ນໃຊ້ໂທລະສັບຂອງທ່ານ"</string>
+    <string name="suggested_lock_settings_title" msgid="8498743819223200961">"ຮັກສາຄວາມປອດໄພໂທລະສັບຂອງທ່ານ"</string>
+    <string name="suggested_lock_settings_summary" product="tablet" msgid="2296800316150748710">"ຕັ້ງໜ້າຈໍລັອກເພື່ອປົກປ້ອງແທັບເລັດຂອງທ່ານ"</string>
+    <string name="suggested_lock_settings_summary" product="device" msgid="7562847814806365373">"ຕັ້ງໜ້າຈໍລັອກເພື່ອປົກປ້ອງອຸປະກອນຂອງທ່ານ"</string>
+    <string name="suggested_lock_settings_summary" product="default" msgid="1526355348444658181">"ຕັ້ງໜ້າຈໍລັອກເພື່ອປົກປ້ອງໂທລະສັບຂອງທ່ານ"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="414499342011664436">"ປົດລັອກດ້ວຍລາຍນີ້ວມື"</string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="tablet" msgid="2149569133725273864">"ປົດລັອກດ້ວຍລາຍນິ້ວມືຂອງທ່ານ"</string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="2149569133725273864">"ປົດລັອກດ້ວຍລາຍນິ້ວມືຂອງທ່ານ"</string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="2149569133725273864">"ປົດລັອກດ້ວຍລາຍນິ້ວມືຂອງທ່ານ"</string>
+    <string name="suggested_fingerprint_lock_settings_summary" product="tablet" msgid="5738274583658668124"></string>
+    <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="5738274583658668124"></string>
+    <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="5738274583658668124"></string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"ເລືອກການລັອກໜ້າຈໍ"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"ເລືອກການລັອກບ່ອນເຮັດວຽກ"</string>
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"ປົກ​ປ້ອງ​ແທັບ​ເລັດ​ຂອງ​ທ່ານ"</string>
@@ -707,8 +716,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"ຈື່ການຕັ້ງຄ່າ"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="6752690395207847881">"ອຸປະກອນສຽງ Bluetooth ທີ່ເຊື່ອມຕໍ່ສູງສຸດ"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="5936561749790095473">"ເລືອກຈຳນວນອຸປະກອນສຽງ Bluetooth ທີ່ເຊື່ອມຕໍ່ສູງສຸດ"</string>
-    <string name="bluetooth_enable_avdtp_delay_reports" msgid="5101903170688399944">"ເປີດນຳໃຊ້ການລາຍງານການຊັກຊ້າ Bluetooth AVDTP"</string>
-    <string name="bluetooth_enable_avdtp_delay_reports_summary" msgid="7052797876020616399">"ອະນຸຍາດການຮັບລາຍງານການຊັກຊ້າ Bluetooth AVDTP"</string>
+    <string name="bluetooth_disable_avdtp_delay_reports" msgid="7710144996922449248">"ປິດການລາຍງານການເລື່ອນ Bluetooth AVDTP"</string>
+    <string name="bluetooth_disable_avdtp_delay_reports_summary" msgid="6882039901251054992">"ບໍ່ອະນຸຍາດໃຫ້ຮັບລາຍງານການເລື່ອນ Bluetooth AVDTP"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"ການສົ່ງສັນຍານ"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"ເປີດໃຊ້ງານການສະແດງພາບໄຮ້ສາຍ"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"ບໍ່ມີອຸປະກອນຢູ່ໃນບໍລິເວນໃກ້ຄຽງ."</string>
@@ -724,6 +733,8 @@
     <string name="wifi_band_24ghz" msgid="852929254171856911">"2.4 GHz"</string>
     <string name="wifi_band_5ghz" msgid="6433822023268515117">"5 GHz"</string>
     <string name="wifi_sign_in_button_text" msgid="8404345621836792112">"ເຂົ້າສູ່ລະບົບ"</string>
+    <!-- no translation found for wifi_tap_to_sign_in (6990161842394669054) -->
+    <skip />
     <string name="link_speed" msgid="8896664974117585555">"%1$d Mbps"</string>
     <string name="wifi_ask_enable" msgid="2795469717302060104">"<xliff:g id="REQUESTER">%s</xliff:g> ຕ້ອງການເປີດໃຊ້ Wi-Fi"</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"<xliff:g id="REQUESTER">%s</xliff:g> ຕ້ອງການປິດ Wi-Fi"</string>
@@ -927,8 +938,8 @@
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_tether_disabled_by_airplane" msgid="414480185654767932">"ບໍ່ສາມາດໃຊ້ໄດ້ເນື່ອງຈາກເປີດໃຊ້ໂໝດຢູ່ໃນຍົນ"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"ການ​ໂທ Wi-Fi"</string>
-    <string name="wifi_calling_suggestion_title" msgid="7766895085362824508">"ຂະຫຍາຍສັນຍານໂທລະສັບດ້ວຍ Wi‑Fi"</string>
-    <string name="wifi_calling_suggestion_summary" msgid="6460250990899143406">"ເປີດໃຊ້ການໂທ Wi-Fi"</string>
+    <string name="wifi_calling_suggestion_title" msgid="5702964371483390024">"ຂະຫຍາຍການໂທດ້ວຍ Wi‑Fi"</string>
+    <string name="wifi_calling_suggestion_summary" msgid="1331793267608673739">"ເປີດໃຊ້ການໂທ Wi‑Fi ເພື່ອຂະຫຍາບຄວາມຄອບຄຸມ"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"ຄວາ​ມ​ມັກ​ການ​ໂທ"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"ໂໝດການໂທ Wi-Fi"</string>
     <string name="wifi_calling_roaming_mode_title" msgid="1565039047187685115">"ການຕັ້ງຄ່າໂຣມມິງ"</string>
@@ -1443,17 +1454,18 @@
     <string name="managed_profile_location_switch_title" msgid="6712332547063039683">"ຈຸດ​ທີ່​ຕັ້ງ​ສຳ​ລັບ​ໂປ​ຣ​ໄຟ​ລ໌​ບ່ອນ​ເຮັດ​ວຽກ​"</string>
     <string name="location_app_level_permissions" msgid="1825588230817081339">"ສິດອະນຸຍາດລະດັບແອັບ"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"ການຮ້ອງຂໍຂໍ້ມູນສະຖານທີ່ຫຼ້າສຸດ"</string>
-    <!-- no translation found for location_recent_location_requests_see_all (9063541547120162593) -->
-    <skip />
+    <string name="location_recent_location_requests_see_all" msgid="9063541547120162593">"ເບິ່ງທັງໝົດ"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"ຫຼ້າສຸດນີ້ບໍ່ມີແອັບຯໃດເອີ້ນໃຊ້ຂໍ້ມູນຕຳແໜ່ງ"</string>
     <string name="location_category_location_services" msgid="7437150886946685979">"ບໍລິການສະຖານທີ່"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"ໃຊ້ແບັດເຕີຣີ່ຫຼາຍ"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"ໃຊ້ແບັດເຕີຣີ່ໜ້ອຍ"</string>
     <string name="location_scanning_screen_title" msgid="4408076862929611554">"ການສະແກນ"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"ການ​ສະ​ແກນ Wi‑Fi"</string>
-    <string name="location_scanning_wifi_always_scanning_description" msgid="8036382029606868081">"​ປັບ​ປຸງ​ທີ່​ຕັ້ງໂດຍ​ການ​ອະ​ນຸຍາດ​ໃຫ້ແອັບ ແລະ ການ​ບໍ​ລິ​ການຂອງລະບົບເພື່ອກວດຫາ​ເຄືອ​ຂ່າຍ Wi‑Fi ໄດ້​ທຸກ​ເວ​ລາ."</string>
+    <!-- no translation found for location_scanning_wifi_always_scanning_description (2691110218127379249) -->
+    <skip />
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"ການ​ສະ​ແກນ Bluetooth"</string>
-    <string name="location_scanning_bluetooth_always_scanning_description" msgid="8602726521250591852">"​ປັບ​ປຸງ​ທີ່​ຕັ້ງໂດຍ​ການ​ອະ​ນຸຍາດ​ໃຫ້ແອັບ ແລະ ການ​ບໍ​ລິ​ການຂອງລະບົບເພື່ອກວດຫາ​ອຸ​ປະ​ກອນ Bluetooth ໄດ້​ທຸກ​ເວ​ລາ."</string>
+    <!-- no translation found for location_scanning_bluetooth_always_scanning_description (1285526059945206128) -->
+    <skip />
     <string name="location_network_based" msgid="9134175479520582215">"Wi-Fi &amp; ສະຖານທີ່ເຄືອຂ່າຍມືຖື"</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"ໃຫ້ແອັບຯຕ່າງໆໃຊ້ບໍລິການສະຖານທີ່ຂອງ Google ເພື່ອປະເມີນສະຖານທີ່ຂອງທ່ານໄດ້ໄວຂຶ້ນ. ຂໍ້ມູນສະຖານທີ່ທີ່ບໍ່ລະບຸໂຕຕົນຈະຖືກເກັບກຳ ແລະສົ່ງໃຫ້ Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"ສະຖານທີ່ທີ່ລະບຸໂດຍ Wi-Fi"</string>
@@ -1608,7 +1620,7 @@
     <string name="install_text" msgid="884360662922471113">"ຕິດຕັ້ງ"</string>
     <string name="disable_text" msgid="6544054052049395202">"ປິດການນຳໃຊ້"</string>
     <string name="enable_text" msgid="9217362512327828987">"ເປີດນຳໃຊ້"</string>
-    <string name="clear_user_data_text" msgid="5597622864770098388">"ລຶບລ້າງຂໍ້ມູນ"</string>
+    <string name="clear_user_data_text" msgid="355574089263023363">"ລຶບພື້ນທີ່ຈັດເກັບຂໍ້ມູນ"</string>
     <string name="app_factory_reset" msgid="6635744722502563022">"ຖອນການຕິດຕັ້ງອັບເດດ"</string>
     <string name="auto_launch_enable_text" msgid="4275746249511874845">"ທ່ານໄດ້ເລືອກທີ່ຈະເປີດໃຊ້ແອັບຯນີ້ ເປັນຄ່າເລີ່ມຕົ້ນ ສຳລັບການເຮັດວຽກບາງຢ່າງ."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="566822577792032925">"ທ່ານໄດ້ອະນຸຍາດໃຫ້ແອັບຯນີ້ ສ້າງວິກເຈັດ ແລະເຂົ້າເຖິງຂໍ້ມູນຂອງພວກເຂົາໄດ້ແລ້ວ."</string>
@@ -1650,9 +1662,7 @@
     <string name="dlg_cancel" msgid="1674753358972975911">"ຍົກເລີກ"</string>
     <string name="app_not_found_dlg_title" msgid="3127123411738434964"></string>
     <string name="app_not_found_dlg_text" msgid="4893589904687340011">"ບໍ່ພົບແອັບຯດັ່ງກ່າວໃນລາຍຊື່ຂອງແອັບຯທີ່ມີການຕິດຕັ້ງແລ້ວ."</string>
-    <string name="clear_data_failed" msgid="7214074331627422248">"ບໍ່ສາມາດລຶບຂໍ້ມູນແອັບຯໄດ້."</string>
-    <string name="clear_failed_dlg_title" msgid="2387060805294783175">"ລຶບຂໍ້ມູນ"</string>
-    <string name="clear_failed_dlg_text" msgid="5464475937929941008">"ບໍ່ສາມາດລຶບຂໍ້ມູນຂອງແອັບຯໄດ້."</string>
+    <string name="clear_failed_dlg_text" msgid="8651231637137025815">"ບໍ່ສາມາດລຶບພື້ນທີ່ຈັດເກັບຂໍ້ມູນໃຫ້ແອັບໄດ້."</string>
     <string name="security_settings_desc" product="tablet" msgid="1292421279262430109">"ແອັບຯນີ້ສາມາດເຂົ້າເຖິງສິ່ງຕໍ່ໄປນີ້ໃນແທັບເລັດຂອງທ່ານໄດ້:"</string>
     <string name="security_settings_desc" product="default" msgid="61749028818785244">"ແອັບຯນີ້ສາມາດເຂົ້າເຖິງສິ່ງຕໍ່ໄປນີ້ໃນໂທລະສັບຂອງທ່ານໄດ້:"</string>
     <string name="security_settings_desc_multi" product="tablet" msgid="7300932212437084403">"ແອັບຯນີ້ສາມາດເຂົ້າເຖິງສິ່ງຕໍ່ໄປນີ້ໃນແທັບເລັດຂອງທ່ານໄດ້. ເພື່ອປັບປຸງປະສິດທິພາບ ແລະຫຼຸດຜ່ອນການນຳໃຊ້ຄວາມຈຳຂອງລະບົບ, ການອະນຸຍາດບາງຢ່າງເຫຼົ່ານີ້ ຈະສາມາດໃຊ້ໄດ້ກັບ <xliff:g id="BASE_APP_NAME">%1$s</xliff:g> ນຳ ເນື່ອງຈາກມັນໃຊ້ໂປຣເຊສດຽວກັນກັບ <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>:"</string>
@@ -2005,7 +2015,8 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"ເຫຼືອອີກ <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> ​ກ່ອນ​ຈະ​ເຕັມ"</string>
-    <string name="background_activity_title" msgid="4797874712348525348">"ຖືກຈຳກັດ"</string>
+    <!-- no translation found for background_activity_title (4645016676653647542) -->
+    <skip />
     <string name="background_activity_summary" msgid="8140094430510517362">"ອະນຸຍາດໃຫ້ແອັບເຮັດວຽກໃນພື້ນຫຼັງໄດ້"</string>
     <string name="background_activity_summary_on" msgid="649282072540085599">"ແອັບສາມາດເຮັດວຽກໃນພື້ນຫຼັງໄດ້ເມື່ອບໍ່ມີການນຳໃຊ້"</string>
     <string name="background_activity_summary_off" msgid="7666330699090632040">"ການເຄື່ອນໄຫວໃນພື້ນຫຼັງຂອງແອັບແມ່ນຖືກຈຳກັດເມື່ອບໍ່ມີການນຳໃຊ້"</string>
@@ -2082,12 +2093,21 @@
       <item quantity="other">ຈຳກັດ %1$d ແອັບບໍ?</item>
       <item quantity="one">ຈຳກັດແອັບບໍ?</item>
     </plurals>
-    <string name="battery_tip_restrict_app_dialog_message" msgid="5818730114373015028">"ເພື່ອປະຢັດແບັດເຕີຣີ, ທ່ານສາມາດຢຸດບໍ່ໃຫ້ແອັບນີ້ເຮັດວຽກໃນພື້ນຫຼັງເມື່ອບໍ່ໄດ້ໃຊ້ມັນໄດ້."</string>
+    <!-- no translation found for battery_tip_restrict_app_dialog_message (4983821029670590661) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_apps_less_than_5_dialog_message (5461716788680156225) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_apps_more_than_5_dialog_message (7485902289068433938) -->
+    <skip />
     <string name="battery_tip_restrict_app_dialog_ok" msgid="8291115820018013353">"ຈຳກັດ"</string>
     <string name="battery_tip_unrestrict_app_dialog_title" msgid="4550106794311784978">"ລຶບຂໍ້ຈຳກັດ <xliff:g id="APP">%1$s</xliff:g> ອອກບໍ?"</string>
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="4836135946080501395">"ແອັບນີ້ຈະສາມາດໃຊ້ແບັດເຕີຣີໃນພື້ນຫຼັງໄດ້. ນີ້ອາດເຮັດໃຫ້ແບັດເຕີຣີຂອງທ່ານໝົດໄວຂຶ້ນ."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="6022058431218137646">"ລຶບ"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="9062797114255859496">"ບໍ່ຟ້າວເທື່ອ"</string>
+    <!-- no translation found for battery_tip_dialog_summary_message (3483708973495692333) -->
+    <skip />
+    <!-- no translation found for battery_tip_dialog_summary_message_no_estimation (1456026456418786135) -->
+    <skip />
     <string name="smart_battery_manager_title" msgid="5677222263071864438">"ຕົວຈັດການແບັດເຕີຣີອັດສະລິຍະ"</string>
     <string name="smart_battery_title" msgid="7014692334636228916">"ຈັດການແບັດເຕີຣີອັດຕະໂນມັດ"</string>
     <string name="smart_battery_summary" msgid="6435844879637999044">"ປັບລະດັບການໃຊ້ພະລັງງານຂອງແອັບຕ່າງໆໂດຍອັດຕະໂນມັດໂດຍອ້າງອີງຈາກການນຳໃຊ້"</string>
@@ -2096,6 +2116,8 @@
       <item quantity="other">%1$d ແອັບ</item>
       <item quantity="one">%1$d ແອັບ</item>
     </plurals>
+    <string name="battery_auto_restriction_title" msgid="4698846356558232573">"ຈຳກັດແອັບອັດຕະໂນມັດ"</string>
+    <string name="battery_auto_restriction_summary" msgid="1816325499514435434">"ປ້ອງກັນບໍ່ໃຫ້ແອັບໃຊ້ແບັດເຕີຣີເພີ່ມເຕີມໃນພື້ນຫຼັງ"</string>
     <string name="dialog_stop_title" msgid="6395127715596746479">"ຢຸດແອັບໄວ້ບໍ?"</string>
     <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"ໂທລະສັບຂອງທ່ານບໍ່ສາມາດຈັດການແບັດເຕີຣີໄດ້ຕາມປົກກະຕິເນື່ອງຈາກ <xliff:g id="APP">%1$s</xliff:g> ພະຍາຍາມເປີດໜ້າຈໍໂທລະສັບຂອງທ່ານໄວ້.\n\nເພື່ອແກ້ໄຂບັນຫານີ້, ທ່ານສາມາດບັງຄັບປິດແອັບດັ່ງກ່າວໄວ້ໄດ້.\n\nຫາກບັນຫານີ້ຍັງຄົງເກີດຂຶ້ນເລື້ອຍໆ, ທ່ານອາດຈຳເປັນຕ້ອງຖອນການຕິດຕັ້ງແອັບດັ່ງກ່າວເພື່ອປັບປຸງປະສິດທິພາບແບັດເຕີຣີ."</string>
     <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"ແທັບເລັດຂອງທ່ານບໍ່ສາມາດຈັດການແບັດເຕີຣີໄດ້ຕາມປົກກະຕິເນື່ອງຈາກ <xliff:g id="APP">%1$s</xliff:g> ພະຍາຍາມເປີດໜ້າຈໍແທັບເລັດຂອງທ່ານໄວ້.\n\nເພື່ອແກ້ໄຂບັນຫານີ້, ທ່ານສາມາດບັງຄັບປິດແອັບດັ່ງກ່າວໄວ້ໄດ້.\n\nຫາກບັນຫານີ້ຍັງຄົງເກີດຂຶ້ນເລື້ອຍໆ, ທ່ານອາດຈຳເປັນຕ້ອງຖອນການຕິດຕັ້ງແອັບດັ່ງກ່າວເພື່ອປັບປຸງປະສິດທິພາບແບັດເຕີຣີ."</string>
@@ -2317,8 +2339,7 @@
     <string name="credentials_configure_lock_screen_hint" msgid="8058230497337529036">"ກ່ອນທ່ານຈະໃຊ້ບ່ອນຈັດເກັບຂໍ້ມູນຮອງຮັບ, ອຸປະກອນຂອງທ່ານຕ້ອງມີໜ້າຈໍລັອກທີ່ປອດໄພກ່ອນ"</string>
     <string name="credentials_configure_lock_screen_button" msgid="253239765216055321">"ຕັ້ງການລັອກ"</string>
     <string name="usage_access_title" msgid="332333405495457839">"ແອັບທີ່ມີສິດອະນຸຍາດເຂົ້າເຖິງ"</string>
-    <!-- no translation found for emergency_tone_title (254495218194925271) -->
-    <skip />
+    <string name="emergency_tone_title" msgid="254495218194925271">"ສັນຍານການໂທສຸກເສີນ"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"ຕັ້ງຄ່າການເຮັດວຽກເມື່ອມີການໂທຫາໝາຍເລກສຸກເສີນ"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"ສຳຮອງຂໍ້ມູນ"</string>
     <string name="backup_section_title" msgid="7952232291452882740">"ສຳຮອງຂໍ້ມູນ &amp; ດຶງຂໍ້ມູນຄືນ"</string>
@@ -2927,12 +2948,9 @@
     <string name="dock_audio_media_title" msgid="1346838179626123900">"​ສຽງ​ລຳ​ໂພງ​ບ່ອນ​ວາງ"</string>
     <string name="dock_audio_media_disabled" msgid="3430953622491538080">"ສຽງ​ທັງ​ໝົດ"</string>
     <string name="dock_audio_media_enabled" msgid="667849382924908673">"​ສຽງ​ມີ​ເດຍ​ເທົ່າ​ນັ້ນ"</string>
-    <!-- no translation found for emergency_tone_silent (3750231842974733677) -->
-    <skip />
-    <!-- no translation found for emergency_tone_alert (8523447641290736852) -->
-    <skip />
-    <!-- no translation found for emergency_tone_vibrate (2278872257053690683) -->
-    <skip />
+    <string name="emergency_tone_silent" msgid="3750231842974733677">"ງຽບ"</string>
+    <string name="emergency_tone_alert" msgid="8523447641290736852">"ສຽງ"</string>
+    <string name="emergency_tone_vibrate" msgid="2278872257053690683">"ສັ່ນເຕືອນ"</string>
     <string name="boot_sounds_title" msgid="567029107382343709">"ສຽງຕອນເປີດເຄື່ອງ"</string>
     <string name="zen_mode_settings_summary_off" msgid="6119891445378113334">"ບໍ່ໃຊ້"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="7346979080337117366">
@@ -2941,7 +2959,8 @@
     </plurals>
     <string name="zen_mode_settings_title" msgid="1066226840983908121">"ຫ້າມລົບກວນ"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="2297134204747331078">"ເປີດໂໝດຫ້າມລົບກວນ"</string>
-    <string name="zen_mode_behavior_settings_title" msgid="1463303933529313969">"ພຶດຕິກຳ"</string>
+    <string name="zen_mode_behavior_settings_title" msgid="5453115212674008032">"ຂໍ້ຍົກເວັ້ນ"</string>
+    <string name="zen_mode_duration_settings_title" msgid="229547412251222757">"ໄລຍະເວລາ"</string>
     <string name="zen_mode_behavior_allow_title" msgid="3845615648136218141">"ອະນຸຍາດສຽງ ແລະ ການສັ່ນເຕືອນຈາກ"</string>
     <string name="zen_mode_behavior_no_sound" msgid="1219626004723208056">"ບໍ່ມີສຽງ"</string>
     <string name="zen_mode_behavior_total_silence" msgid="2229976744274214528">"ງຽບທັງໝົດ"</string>
@@ -2959,6 +2978,21 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"ບລັອກການລົບກວນທາງພາບ"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"ອະນຸຍາດສັນຍານພາບ"</string>
+    <string name="zen_mode_what_to_block_title" msgid="7326899360743233429">"ຈະບລັອກຫຍັງ"</string>
+    <string name="zen_mode_block_effects_title" msgid="5659522118818678059">"ເມື່ອມີການແຈ້ງເຕືອນເຂົ້າມາ"</string>
+    <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"ປິດສຽງ ແລະ ປິດການສັ່ນເຕືອນ"</string>
+    <string name="zen_mode_block_effect_intent" msgid="350764335391428447">"ຢ່າເປີດໜ້າຈໍ"</string>
+    <string name="zen_mode_block_effect_light" msgid="8106976110224107316">"ຢ່າກະພິບໄຟ"</string>
+    <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"ຢ່າສະແດງການແຈ້ງເຕືອນຢູ່ໜ້າຈໍ"</string>
+    <string name="zen_mode_block_effect_status" msgid="6642532634292373081">"ເຊື່ອງໄອຄອນແຖບສະຖານະ"</string>
+    <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"ເຊື່ອງຈຸດການແຈ້ງເຕືອນ"</string>
+    <string name="zen_mode_block_effect_ambient" msgid="1005494937933402517">"ເຊື່ອງຈາກການສະແດງຜົນຕາມສະພາບແວດລ້ອມ"</string>
+    <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"ເຊື່ອງຈາກລາຍຊື່ການແຈ້ງເຕືອນ"</string>
+    <string name="zen_mode_block_effect_summary_sound" msgid="1065107568053759972">"ສຽງ ແລະ ການສັ່ນ"</string>
+    <string name="zen_mode_block_effect_summary_some" msgid="3635646031575107456">"ສຽງ, ສັ່ນ ແລະ ສັນຍາລັກທາງພາບບາງຢ່າງຂອງການແຈ້ງເຕືອນ"</string>
+    <string name="zen_mode_block_effect_summary_all" msgid="1213328945418248026">"ສຽງ, ສັ່ນ ແລະ ສັນຍາລັກທາງພາບຂອງການແຈ້ງເຕືອນ"</string>
+    <string name="zen_mode_no_exceptions" msgid="7653433997399582247">"ບໍ່ມີ"</string>
+    <string name="zen_mode_other_options" msgid="520015080445012355">"ຕົວເລືອກອື່ນໆ"</string>
     <string name="zen_mode_add" msgid="90014394953272517">"ເພີ່ມ"</string>
     <string name="zen_mode_enable_dialog_turn_on" msgid="8287824809739581837">"ເປີດ"</string>
     <string name="zen_mode_button_turn_on" msgid="2824380626482175552">"ເປີດ​ດຽວ​ນີ້"</string>
@@ -2969,9 +3003,17 @@
     <string name="zen_mode_settings_dnd_automatic_rule_app" msgid="1721179577382915270">"ເປີດໃຊ້ໂໝດຫ້າມລົບກວນໂດຍອັດຕະໂນມັດແລ້ວໂດຍແອັບ <xliff:g id="APP_NAME">%s</xliff:g> ແລ້ວ"</string>
     <string name="zen_interruption_level_priority" msgid="2078370238113347720">"ສຳຄັນເທົ່ານັ້ນ"</string>
     <string name="zen_mode_and_condition" msgid="4927230238450354412">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_on" msgid="9067685807840094102">"ເປີດ / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="zen_mode_sound_summary_on_with_info" msgid="1202632669798211342">"ເປີດ / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_off_with_info" msgid="2348629457144123849">"ປິດ / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_off" msgid="4375814717589425561">"ປິດ"</string>
+    <string name="zen_mode_sound_summary_on" msgid="7718273231309882914">"ເປີດ"</string>
+    <string name="zen_mode_duration_summary_always_prompt" msgid="5976427426278136178">"ຖາມທຸກເທື່ອ (ເວັ້ນເສຍແຕ່ຈະເປີດໃຊ້ໂດຍອັດຕະໂນມັດ)"</string>
+    <string name="zen_mode_duration_summary_forever" msgid="3144786357459137066">"ຈົນກວ່າທ່ານຈະປິດ (ເວັ້ນເສຍແຕ່ຈະເປີດໃຊ້ໂດຍອັດຕະໂນມັດ)"</string>
+    <plurals name="zen_mode_duration_summary_time_hours" formatted="false" msgid="1060823390336822337">
+      <item quantity="other"><xliff:g id="NUM_HOURS">%d</xliff:g> ຊົ່ວໂມງ (ເວັ້ນເສຍແຕ່ຈະເປີດໃຊ້ໂດຍອັດຕະໂນມັດ)</item>
+      <item quantity="one">1 ຊົ່ວໂມງ (ເວັ້ນເສຍແຕ່ຈະເປີດໃຊ້ໂດຍອັດຕະໂນມັດ)</item>
+    </plurals>
+    <string name="zen_mode_duration_summary_time_minutes" msgid="3959860288930526323">"<xliff:g id="NUM_MINUTES">%d</xliff:g> ນາທີ (ເວັ້ນເສຍແຕ່ຈະເປີດໃຊ້ໂດຍອັດຕະໂນມັດ)"</string>
     <plurals name="zen_mode_sound_summary_summary_off_info" formatted="false" msgid="8115159143760078050">
       <item quantity="other">ສາມາດເປີດ <xliff:g id="ON_COUNT">%d</xliff:g> ກົດໂດຍອັດຕະໂນມັດ</item>
       <item quantity="one">ສາມາດເປີດ 1 ກົດໂດຍອັດຕະໂນມັດ</item>
@@ -3112,9 +3154,7 @@
     <string name="zen_mode_choose_rule_type" msgid="5423746638871953459">"ເລືອກ​ປະ​ເພດ​ກົດ​ລະ​ບຽບ"</string>
     <string name="zen_mode_delete_rule_confirmation" msgid="6237882294348570283">"ລຶບ​ເງື່ອນ​ໄຂ \"<xliff:g id="RULE">%1$s</xliff:g>\" ບໍ?"</string>
     <string name="zen_mode_delete_rule_button" msgid="4248741120307752294">"​ລຶບ"</string>
-    <string name="zen_mode_rule_type" msgid="2289413469580142888">"ປະ​ເພດກົດລະບຽບ"</string>
     <string name="zen_mode_rule_type_unknown" msgid="3049377282766700600">"​ບໍ່​ຮູ້​ຈັກ"</string>
-    <string name="zen_mode_configure_rule" msgid="8865785428056490305">"ກຳ​ນົດ​ຄ່າ​ກົດລະບຽບ"</string>
     <string name="zen_mode_app_set_behavior" msgid="1534429320064381355">"ບໍ່ສາມາດປ່ຽນແປງການຕັ້ງຄ່າເຫຼົ່ານີ້ໃນຕອນນີ້ໄດ້. ແອັບ (<xliff:g id="APP_NAME">%1$s</xliff:g>) ໄດ້ເປີດໃຊ້ໂໝດຫ້າມລົບກວນໂດຍອັດຕະໂນມັດດ້ວຍພຶດຕິກຳແບບກຳນົດເອງແລ້ວ."</string>
     <string name="zen_mode_unknown_app_set_behavior" msgid="2558968232814237874">"ບໍ່ສາມາດປ່ຽນແປງການຕັ້ງຄ່າເຫຼົ່ານີ້ໃນຕອນນີ້ໄດ້. ໂໝດຫ້າມລົບກວນຖືກເປີດໃຊ້ໂດຍແອັບດ້ວຍພຶດຕິກຳແບບກຳນົດເອງແລ້ວ."</string>
     <string name="zen_mode_qs_set_behavior" msgid="6200424436456086312">"ບໍ່ສາມາດປ່ຽນແປງການຕັ້ງຄ່າເຫຼົ່ານີ້ໃນຕອນນີ້ໄດ້. ໂໝດຫ້າມລົບກວນຖືກເປີດໃຊ້ໂດຍອັດຕະໂນມັດດ້ວຍພຶດຕິກຳແບບກຳນົດເອງແລ້ວ."</string>
@@ -3151,8 +3191,8 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"ຈາກ​ລາຍ​ຊື່​ຕິດ​ຕໍ່​ໃສ່​ດາວ​ໄວ້​ເທົ່າ​ນັ້ນ"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"ບໍ່ມີ"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"ໂມງປຸກ"</string>
-    <string name="zen_mode_media_system_other" msgid="5937422836400161702">"ມີເດຍ"</string>
-    <string name="zen_mode_media_system_other_secondary_text" msgid="785130341801887185">"ຮວມການຕອບສະໜອງຂອວລະບົບ ເຊັ່ນ: ສຽງການສຳຜັດ ແລະ ສຽງການສາກ"</string>
+    <string name="zen_mode_media" msgid="8808264142134422380">"ມີເດຍ"</string>
+    <string name="zen_mode_system" msgid="2541380718411593581">"​ສຽງ​ສຳ​ຜັດ"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"ການແຈ້ງເຕືອນ"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"ກິດຈະກຳ"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"ຜູ້​ໂທທັງ​ໝົດ"</string>
@@ -3208,8 +3248,10 @@
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"ນອກເໜືອໄປຈາກການໃຊ້ລາຍນິ້ວມືເພື່ອປົດລັອກອຸປະກອນຂອງທ່ານແລ້ວ, ທ່ານສາມາດປ້ອງກັນອຸປະກອນນີ້ໃຫ້ຍິ້ງຂຶ້ນໂດຍການໃຫ້ໃສ່ລະຫັດຜ່ານກ່ອນເລີ່ມຕົ້ນມັນໄດ້. ຫາກບໍ່ເປີດໃຫ້ເລີ່ມເຮັດວຽກແລ້ວ, ມັນຈະບໍ່ສາມາດຮັບສາຍ, ຂໍ້ຄວາມ, ການແຈ້ງເຕືອນ ຫຼື ໂມງປຸກໄດ້.\n\nນີ້ຈະຊ່ວຍປ້ອງກັນຂໍ້ມູນເມື່ອອຸປະກອນເສຍ ຫຼື ຖືກລັກໄດ້. ຕ້ອງໃຫ້ໃສ່ລະຫັດຜ່ານເພື່ອເລີ່ມຕົ້ນອຸປະກອນຂອງທ່ານບໍ?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"ແມ່ນແລ້ວ"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"ບໍ່"</string>
-    <string name="restricted_true_label" msgid="1793719723017395175">"ແມ່ນ"</string>
-    <string name="restricted_false_label" msgid="6374816254102233858">"ບໍ່ແມ່ນ"</string>
+    <!-- no translation found for restricted_true_label (116728938205853067) -->
+    <skip />
+    <!-- no translation found for restricted_false_label (6992110192242654656) -->
+    <skip />
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"ຕ້ອງການລະຫັດ PIN ຫຼື​ບໍ່?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"ຕ້ອງການຮູບແບບ​ປົດລັອກບໍ່?"</string>
     <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"ຕ້ອງການ​ລະຫັດຜ່ານຫຼື​ບໍ່?"</string>
@@ -3550,6 +3592,8 @@
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"ການອັບເດດລະບົບອັດຕະໂນມັດ"</string>
     <string name="usage" msgid="2977875522080448986">"ການໃຊ້"</string>
     <string name="cellular_data_usage" msgid="2155683719898158203">"ການນຳໃຊ້ອິນເຕີເນັດມືຖື"</string>
+    <!-- no translation found for app_cellular_data_usage (5468472735806533448) -->
+    <skip />
     <string name="wifi_data_usage" msgid="686754111095324306">"ການໃຊ້ຂໍ້ມູນ Wi-Fi"</string>
     <string name="ethernet_data_usage" msgid="5108764537574354616">"ການໃຊ້ຂໍ້ມູນອີເທີເນັດ"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi​-Fi"</string>
@@ -3559,7 +3603,14 @@
     <string name="ethernet_data_template" msgid="5782476509881033590">"ຂໍ້ມູນອີເທີເນັດ <xliff:g id="AMOUNT">^1</xliff:g>"</string>
     <string name="cell_warning_only" msgid="763147658209027140">"ຄຳເຕືອນຂໍ້ມູນ <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"ຄຳເຕືອນຂໍ້ມູນ <xliff:g id="ID_1">%1$s</xliff:g> / ຂີດຈຳກັດຂໍ້ມູນ <xliff:g id="ID_2">%2$s</xliff:g>"</string>
-    <string name="billing_cycle" msgid="5169909190811133499">"ຮອບການຮຽກເກັບເງິນ"</string>
+    <string name="billing_cycle" msgid="6614597736285325497">"ການເຕືອນ ແລະ ການຈຳກັດອິນເຕີເນັດ"</string>
+    <string name="app_usage_cycle" msgid="8877223251648092131">"ຮອບການນຳໃຊ້ຂໍ້ມູນແອັບ"</string>
+    <!-- no translation found for cell_data_warning (1985956818884847057) -->
+    <skip />
+    <!-- no translation found for cell_data_limit (1578367585799358854) -->
+    <skip />
+    <!-- no translation found for cell_data_warning_and_limit (6888825370687743208) -->
+    <skip />
     <string name="billing_cycle_fragment_summary" msgid="8231066353654583106">"ທຸກໆເດືອນໃນວັນທີ <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="network_restrictions" msgid="8234695294536675380">"ການ​ຈຳ​ກັດ​ເຄືອ​ຂ່າຍ"</string>
     <plurals name="network_restrictions_summary" formatted="false" msgid="4301618027244595839">
@@ -3570,6 +3621,8 @@
     <string name="data_used_template" msgid="3245919669966296505">"ໃຊ້ໄປແລ້ວ <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="6115364758236594593">"ຕັ້ງການເຕືອນຂໍ້ມູນ"</string>
     <string name="data_warning" msgid="209133958008062117">"ຄຳເຕືອນຂໍ້ມູນ"</string>
+    <!-- no translation found for data_warning_footnote (776341964125603711) -->
+    <skip />
     <string name="set_data_limit" msgid="2901526323210516923">"​ຕັ້ງຂີດຈຳກັດຂໍ້ມູນ"</string>
     <string name="data_limit" msgid="1885406964934590552">"ຂີດຈຳກັດຂໍ້ມູນ"</string>
     <string name="data_usage_template" msgid="2923744765873163859">"ໃຊ້ໄປແລ້ວ <xliff:g id="ID_1">%1$s</xliff:g> <xliff:g id="ID_2">%2$s</xliff:g>"</string>
@@ -3581,8 +3634,14 @@
     </plurals>
     <string name="data_usage_title" msgid="3659356290392241789">"ຂໍ້ມູນຫຼັກ"</string>
     <string name="data_used" msgid="5116389957228457203">"ໃຊ້ໄປແລ້ວ <xliff:g id="ID_1">^1</xliff:g>"</string>
-    <string name="data_remaining" msgid="8998091725895502181">"ຍັງເຫຼືອ <xliff:g id="ID_1">, ^1</xliff:g>"</string>
-    <string name="cycle_left_time_text" msgid="8501602478371081001">"ຍັງເຫຼືອ <xliff:g id="ID_1">%1$s</xliff:g> ໃນຮອບນີ້"</string>
+    <!-- no translation found for data_overusage (1134445012475270295) -->
+    <skip />
+    <string name="data_remaining" msgid="8998091725895502181">"ຍັງເຫຼືອ <xliff:g id="ID_1">^1</xliff:g>"</string>
+    <!-- no translation found for cycle_left_multiple_days (4080948235522858142) -->
+    <skip />
+    <!-- no translation found for billing_cycle_days_left (456503215317213651) -->
+    <!-- no translation found for billing_cycle_less_than_one_day_left (825838050296069404) -->
+    <skip />
     <string name="carrier_and_update_text" msgid="4534395723031386923">"ອັບເດດໂດຍ <xliff:g id="ID_1">%1$s</xliff:g> <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="no_carrier_update_text" msgid="6879630084452907385">"ອັບເດດເມື່ອ <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="launch_mdp_app_text" msgid="7527361210375612985">"ເບິ່ງການວາງແຜນ"</string>
@@ -3863,14 +3922,19 @@
     <string name="bluetooth_on_while_driving_pref" msgid="2460847604498343330">"ໃຊ້ Bluetooth ໃນເວລາຂັບລົດ"</string>
     <string name="bluetooth_on_while_driving_summary" msgid="3196190732516898541">"ເປີດໃຊ້ Bluetooth ໂດຍອັດຕະໂນມັດໃນເວລາຂັບລົດ"</string>
     <string name="dev_android_o_battery_settings_title" msgid="2926578228655006762">"ເບິ່ງການຕັ້ງຄ່າແບັດເຕີຣີ Android 8.0"</string>
-    <!-- no translation found for change_wifi_state_title (2640523995824431999) -->
-    <skip />
-    <!-- no translation found for keywords_change_wifi_state (1439807171750715923) -->
-    <skip />
-    <!-- no translation found for change_wifi_state_app_detail_title (1022360625069880993) -->
-    <skip />
-    <!-- no translation found for change_wifi_state_app_detail_switch (724818064600933957) -->
-    <skip />
-    <!-- no translation found for change_wifi_state_app_detail_summary (2511212187129042304) -->
-    <skip />
+    <string name="change_wifi_state_title" msgid="2640523995824431999">"ປິດ/ເປິດ Wi-Fi"</string>
+    <string name="keywords_change_wifi_state" msgid="1439807171750715923">"ປິດ/ເປິດ Wi-Fi"</string>
+    <string name="change_wifi_state_app_detail_title" msgid="1022360625069880993">"ປິດ/ເປິດ Wi-Fi"</string>
+    <string name="change_wifi_state_app_detail_switch" msgid="724818064600933957">"ອະນຸຍາດໃຫ້ປິດ/ເປິດ Wi-Fi"</string>
+    <string name="change_wifi_state_app_detail_summary" msgid="2511212187129042304">"ອະນຸຍາດໃຫ້ແອັບນີ້ປ່ຽນສະຖານະ Wi-Fi ຮວມທັງການເຊື່ອມຕໍ່ຫາ Wi-Fi ແລະ ການປິດ/ເປິດ Wi-Fi."</string>
+    <string name="media_output_title" msgid="115223550977351699">"ຫຼິ້ນມີເດຍໄປທີ່"</string>
+    <string name="media_output_summary" product="default" msgid="6839458453831567167">"ໂທລະສັບ"</string>
+    <string name="media_output_summary" product="tablet" msgid="7217221078578554515">"ແທັບເລັດ"</string>
+    <string name="media_output_summary" product="device" msgid="5677420090811068649">"ອຸປະກອນ"</string>
+    <string name="media_out_summary_ongoing_call_state" msgid="3533731701018680693">"ບໍ່ສາມາດໃຊ້ໄດ້ລະຫວ່າງການໂທ"</string>
+    <string name="media_output_summary_unavailable" msgid="7970304720507697019">"ບໍ່ສາມາດໃຊ້ໄດ້"</string>
+    <string name="battery_suggestion_title" product="tablet" msgid="752439050748267917">"ປັບປຸງອາຍຸແບັດເຕີຣີແທັບເລັດ"</string>
+    <string name="battery_suggestion_title" product="device" msgid="1507272328369733005">"ປັບປຸງອາຍຸແບັດເຕີຣີອຸປະກອນ"</string>
+    <string name="battery_suggestion_title" product="default" msgid="4038053023336285165">"ປັບປຸງອາຍຸແບັດເຕີຣີໂທລະສັບ"</string>
+    <string name="battery_suggestion_summary" msgid="4585677159811722359"></string>
 </resources>
