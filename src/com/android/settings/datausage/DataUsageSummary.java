@@ -104,18 +104,10 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
             removePreference(KEY_RESTRICT_BACKGROUND);
         }
         if (hasMobileData) {
-            List<SubscriptionInfo> subscriptions =
-                    services.mSubscriptionManager.getActiveSubscriptionInfoList();
-            if (subscriptions == null || subscriptions.size() == 0) {
-                addMobileSection(defaultSubId);
-            }
-            for (int i = 0; subscriptions != null && i < subscriptions.size(); i++) {
-                SubscriptionInfo subInfo = subscriptions.get(i);
-                if (subscriptions.size() > 1) {
-                    addMobileSection(subInfo.getSubscriptionId(), subInfo);
-                } else {
-                    addMobileSection(subInfo.getSubscriptionId());
-                }
+            SubscriptionInfo subInfo
+                    = services.mSubscriptionManager.getDefaultDataSubscriptionInfo();
+            if (subInfo != null) {
+                addMobileSection(subInfo.getSubscriptionId());
             }
         }
         boolean hasWifiRadio = DataUsageUtils.hasWifiRadio(context);
