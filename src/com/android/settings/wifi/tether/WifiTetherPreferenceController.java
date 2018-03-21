@@ -25,14 +25,13 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
+import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.BidiFormatter;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.widget.MasterSwitchController;
-import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -50,10 +49,9 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
     private final String[] mWifiRegexs;
     private final WifiManager mWifiManager;
     private final Lifecycle mLifecycle;
-    private WifiTetherSwitchBarController mSwitchController;
     private int mSoftApState;
     @VisibleForTesting
-    MasterSwitchPreference mPreference;
+    Preference mPreference;
     @VisibleForTesting
     WifiTetherSoftApManager mWifiTetherSoftApManager;
 
@@ -88,14 +86,11 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = (MasterSwitchPreference) screen.findPreference(WIFI_TETHER_SETTINGS);
+        mPreference = screen.findPreference(WIFI_TETHER_SETTINGS);
         if (mPreference == null) {
             // unavailable
             return;
         }
-        mSwitchController = new WifiTetherSwitchBarController(
-                mContext, new MasterSwitchController(mPreference));
-        mLifecycle.addObserver(mSwitchController);
     }
 
     @Override
