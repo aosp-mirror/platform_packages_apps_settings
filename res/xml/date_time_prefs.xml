@@ -22,7 +22,8 @@
     settings:keywords="@string/keywords_date_and_time">
 
     <PreferenceCategory
-        android:key="date_time_preference_category">
+        android:key="date_time_preference_category"
+        android:layout="@layout/preference_category_no_label">
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="auto_time"
             android:title="@string/date_time_auto"
@@ -46,7 +47,8 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="time_zone_preference_category">
+        android:key="time_zone_preference_category"
+        android:layout="@layout/preference_category_no_label">
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="auto_zone"
             android:title="@string/zone_auto"
@@ -63,7 +65,8 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="time_format_preference_category">
+        android:key="time_format_preference_category"
+        android:layout="@layout/preference_category_no_label">
         <SwitchPreference
             android:key="auto_24hour"
             android:title="@string/date_time_24hour_auto"
