@@ -30,6 +30,7 @@ import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.hardware.fingerprint.FingerprintManager;
+import android.media.AudioAttributes;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.VibrationEffect;
@@ -78,6 +79,11 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
 
     private static final VibrationEffect VIBRATE_EFFECT_ERROR =
             VibrationEffect.createWaveform(new long[] {0, 5, 55, 60}, -1);
+    private static final AudioAttributes FINGERPRINT_ENROLLING_SONFICATION_ATTRIBUTES =
+            new AudioAttributes.Builder()
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                    .build();
 
     private ProgressBar mProgressBar;
     private ObjectAnimator mProgressAnim;
@@ -376,7 +382,7 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
             mErrorText.setTranslationY(0f);
         }
         if (isResumed()) {
-            mVibrator.vibrate(VIBRATE_EFFECT_ERROR);
+            mVibrator.vibrate(VIBRATE_EFFECT_ERROR, FINGERPRINT_ENROLLING_SONFICATION_ATTRIBUTES);
         }
     }
 
