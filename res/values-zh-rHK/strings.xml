@@ -776,8 +776,7 @@
     <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"如要使用該功能，請選擇一個網絡評分供應商"</string>
     <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="8472122600853650258">"如要使用該功能，請選擇一個兼容的網絡評分供應商"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"安裝憑證"</string>
-    <!-- no translation found for wifi_scan_notify_text (5544778734762998889) -->
-    <skip />
+    <string name="wifi_scan_notify_text" msgid="5593805423071186757">"為提高定位準確度，系統應用程式和服務仍可掃描 Wi-Fi 網絡。您可以在<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>掃描設定<xliff:g id="LINK_END_1">LINK_END</xliff:g>中更改此設定。"</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"為提高定位準確度，請前往「<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>掃描設定<xliff:g id="LINK_END_1">LINK_END</xliff:g>」開啟 Wi-Fi 掃描功能。"</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"不用再顯示"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"休眠時繼續連接 Wi-Fi 網絡"</string>
@@ -2062,47 +2061,35 @@
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"要求獲取位置資訊的頻率過高"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> 個應用程式運作異常"</string>
     <string name="battery_tip_summary_title" msgid="7060523369832289878">"電池狀況良好"</string>
-    <!-- no translation found for battery_tip_summary_summary (7674026655453457) -->
-    <skip />
+    <string name="battery_tip_summary_summary" msgid="7832491466325707487">"應用程式正常運作"</string>
     <string name="battery_tip_low_battery_title" msgid="5103420355109677385">"電池電量不足"</string>
     <string name="battery_tip_low_battery_summary" msgid="4702986182940709150">"電池耗電過快"</string>
-    <!-- no translation found for battery_tip_smart_battery_title (2542822112725248683) -->
-    <skip />
-    <!-- no translation found for battery_tip_smart_battery_title (6452567046912954866) -->
-    <skip />
-    <!-- no translation found for battery_tip_smart_battery_title (4445149029390556382) -->
-    <skip />
-    <!-- no translation found for battery_tip_smart_battery_summary (2326809294592208069) -->
-    <skip />
-    <!-- no translation found for battery_tip_early_heads_up_title (5788492366387119807) -->
-    <skip />
-    <!-- no translation found for battery_tip_early_heads_up_summary (1639271439914224547) -->
-    <skip />
-    <!-- no translation found for battery_tip_early_heads_up_done_title (4294083319255926811) -->
-    <skip />
-    <!-- no translation found for battery_tip_early_heads_up_done_summary (7054036010928794364) -->
-    <skip />
-    <!-- no translation found for battery_tip_high_usage_title (1282187115295901930) -->
-    <skip />
-    <!-- no translation found for battery_tip_high_usage_title (7422137233845959351) -->
-    <skip />
-    <!-- no translation found for battery_tip_high_usage_title (5483320224273724068) -->
-    <skip />
-    <!-- no translation found for battery_tip_high_usage_summary (6341311803303581798) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (2489003849577202445) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (409808830122732587) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (1948395472652651924) -->
-    <skip />
+    <string name="battery_tip_smart_battery_title" msgid="8471762806923764455">"開啟智能電池管理員"</string>
+    <string name="battery_tip_smart_battery_summary" msgid="3024670691742861841">"開啟即可優化電池用量"</string>
+    <string name="battery_tip_early_heads_up_title" msgid="1454605424618204941">"開啟「電量不足模式」"</string>
+    <string name="battery_tip_early_heads_up_summary" msgid="4003736326324428487">"延長電池壽命"</string>
+    <string name="battery_tip_early_heads_up_done_title" msgid="1545434816346760843">"「電量不足模式」已開啟"</string>
+    <string name="battery_tip_early_heads_up_done_summary" msgid="8191928150995385163">"部分功能受到限制"</string>
+    <string name="battery_tip_high_usage_title" product="default" msgid="7981031050318555946">"頻繁使用手機"</string>
+    <string name="battery_tip_high_usage_title" product="tablet" msgid="8767749911858231430">"頻繁使用平板電腦"</string>
+    <string name="battery_tip_high_usage_title" product="device" msgid="4964729505519290954">"頻繁使用裝置"</string>
+    <string name="battery_tip_high_usage_summary" msgid="5437023146333888605">"自上次完全充滿電後已使用大概 <xliff:g id="HOUR">%1$s</xliff:g>"</string>
+    <string name="battery_tip_dialog_message" product="default" msgid="6744251070067861233">"您的手機因頻繁使用而耗用大量電力。您的電池目前運作正常。\n\n自上次完全充滿電後，您的平板電腦已使用大概 <xliff:g id="HOUR">%1$s</xliff:g>。\n\n總用電量："</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="7091442312127403445">"您的平板電腦因頻繁使用而耗用大量電力。您的電池目前運作正常。\n\n自上次完全充滿電後，您的平板電腦已使用大概 <xliff:g id="HOUR">%1$s</xliff:g>。\n\n總用電量："</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="7621045312469814256">"您的裝置因頻繁使用而耗用大量電力。您的電池目前運作正常。\n\n自上次完全充滿電後，您的平板電腦已使用大概 <xliff:g id="HOUR">%1$s</xliff:g>。\n\n總用電量："</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="other">限制 %1$d 個應用程式</item>
       <item quantity="one">限制 %1$d 個應用程式</item>
     </plurals>
-    <!-- no translation found for battery_tip_restrict_handled_title (2996094393897875408) -->
-    <!-- no translation found for battery_tip_restrict_summary (5768962491638423979) -->
-    <!-- no translation found for battery_tip_restrict_handled_summary (1040488674178753191) -->
+    <plurals name="battery_tip_restrict_handled_title" formatted="false" msgid="5203646029862183763">
+      <item quantity="other">%1$d 個應用程式最近受限制</item>
+      <item quantity="one">%1$d 個應用程式最近受限制</item>
+    </plurals>
+    <plurals name="battery_tip_restrict_summary" formatted="false" msgid="9128154370135347093">
+      <item quantity="other">%2$d 個應用程式的耗電量高</item>
+      <item quantity="one">%1$s的耗電量高</item>
+    </plurals>
+    <string name="battery_tip_restrict_handled_summary" msgid="29466713333477274">"應用程式變更操作進行中"</string>
     <plurals name="battery_tip_restrict_app_dialog_title" formatted="false" msgid="8130618585820429591">
       <item quantity="other">要限制 %1$d 個應用程式嗎？</item>
       <item quantity="one">要限制應用程式嗎？</item>
@@ -2114,32 +2101,22 @@
     <!-- no translation found for battery_tip_restrict_apps_more_than_5_dialog_message (7485902289068433938) -->
     <skip />
     <string name="battery_tip_restrict_app_dialog_ok" msgid="8291115820018013353">"限制"</string>
-    <!-- no translation found for battery_tip_unrestrict_app_dialog_title (4321334634106715162) -->
-    <skip />
-    <!-- no translation found for battery_tip_unrestrict_app_dialog_message (6537761705584610231) -->
-    <skip />
+    <string name="battery_tip_unrestrict_app_dialog_title" msgid="4550106794311784978">"要移除對 <xliff:g id="APP">%1$s</xliff:g> 的限制嗎？"</string>
+    <string name="battery_tip_unrestrict_app_dialog_message" msgid="4836135946080501395">"此應用程式會在背景耗用電量，可能會加快耗盡電量。"</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="6022058431218137646">"移除"</string>
-    <!-- no translation found for battery_tip_unrestrict_app_dialog_cancel (3058235875830858902) -->
-    <skip />
+    <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="9062797114255859496">"暫時不要"</string>
     <!-- no translation found for battery_tip_dialog_summary_message (3483708973495692333) -->
     <skip />
     <!-- no translation found for battery_tip_dialog_summary_message_no_estimation (1456026456418786135) -->
     <skip />
-    <!-- no translation found for smart_battery_manager_title (870632749556793417) -->
-    <skip />
-    <!-- no translation found for smart_battery_title (6218785691872466076) -->
-    <skip />
-    <!-- no translation found for smart_battery_summary (182231450571039702) -->
-    <skip />
-    <!-- no translation found for smart_battery_footer (1927140000844032031) -->
-    <skip />
+    <string name="smart_battery_manager_title" msgid="5677222263071864438">"智能電池管理員"</string>
+    <string name="smart_battery_title" msgid="7014692334636228916">"自動管理電池"</string>
+    <string name="smart_battery_summary" msgid="6435844879637999044">"根據使用情形自動調整應用程式的耗電量"</string>
     <string name="restricted_app_title" msgid="8982477293044330653">"受限制的應用程式"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="2541739220193274244">
       <item quantity="other">%1$d 個應用程式</item>
       <item quantity="one">%1$d 個應用程式</item>
     </plurals>
-    <!-- no translation found for restricted_app_detail_footer (5888756210317863211) -->
-    <skip />
     <string name="battery_auto_restriction_title" msgid="4698846356558232573">"自動限制應用程式"</string>
     <string name="battery_auto_restriction_summary" msgid="1816325499514435434">"防止應用程式執行背景操作而額外耗電"</string>
     <string name="dialog_stop_title" msgid="6395127715596746479">"要停止應用程式嗎？"</string>
@@ -2250,9 +2227,9 @@
     <string name="process_kernel_label" msgid="3916858646836739323">"Android 作業系統"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"媒體伺服器"</string>
     <string name="process_dex2oat_label" msgid="2592408651060518226">"應用程式優化"</string>
-    <string name="battery_saver" msgid="8172485772238572153">"省電模式"</string>
-    <!-- no translation found for battery_saver_auto_title (8368709389419695611) -->
-    <skip />
+    <string name="battery_saver" msgid="6002143200184768727">"省電模式"</string>
+    <string name="battery_saver_auto_title" msgid="6896506441192920565">"時間表"</string>
+    <string name="battery_saver_auto_summary" msgid="8715989830471454219">"在電量不足時自動開啟「省電模式」"</string>
     <string name="battery_saver_seekbar_title" msgid="3428789387167865312">"電量剩餘 <xliff:g id="PERCENT">%1$s</xliff:g> 時自動開啟"</string>
     <string name="battery_saver_master_switch_title" msgid="622539414546588436">"使用省電模式"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"自動開啟"</string>
@@ -3004,9 +2981,9 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>：<xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"封鎖視覺干擾"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"允許視覺訊號"</string>
-    <string name="zen_mode_what_to_block_title" msgid="7326899360743233429">"封鎖項目"</string>
+    <string name="zen_mode_what_to_block_title" msgid="7326899360743233429">"封鎖的項目"</string>
     <string name="zen_mode_block_effects_title" msgid="5659522118818678059">"當收到通知時"</string>
-    <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"關閉音效和震動"</string>
+    <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"禁止音效和震動"</string>
     <string name="zen_mode_block_effect_intent" msgid="350764335391428447">"不要開啟螢幕"</string>
     <string name="zen_mode_block_effect_light" msgid="8106976110224107316">"不要閃燈"</string>
     <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"不要在畫面上彈出通知"</string>
@@ -3015,8 +2992,8 @@
     <string name="zen_mode_block_effect_ambient" msgid="1005494937933402517">"從環境顯示中隱藏"</string>
     <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"從通知清單中隱藏"</string>
     <string name="zen_mode_block_effect_summary_sound" msgid="1065107568053759972">"音效和震動"</string>
-    <string name="zen_mode_block_effect_summary_some" msgid="3635646031575107456">"通知的音效、震動和個別視像訊號"</string>
-    <string name="zen_mode_block_effect_summary_all" msgid="1213328945418248026">"通知的音效、震動和視像訊號"</string>
+    <string name="zen_mode_block_effect_summary_some" msgid="3635646031575107456">"通知的音效、震動和個別視覺訊號"</string>
+    <string name="zen_mode_block_effect_summary_all" msgid="1213328945418248026">"通知的音效、震動和視覺訊號"</string>
     <string name="zen_mode_no_exceptions" msgid="7653433997399582247">"無"</string>
     <string name="zen_mode_other_options" msgid="520015080445012355">"其他選項"</string>
     <string name="zen_mode_add" msgid="90014394953272517">"新增"</string>
@@ -3422,11 +3399,10 @@
     <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"您已向 IT 管理員提供此錯誤報告。請聯絡他們以瞭解詳情。"</string>
     <string name="share_remote_bugreport_action" msgid="532226159318779397">"分享"</string>
     <string name="decline_remote_bugreport_action" msgid="518720235407565134">"拒絕"</string>
-    <!-- no translation found for usb_use_charging_only (4800495064747543954) -->
-    <skip />
+    <string name="usb_use_charging_only" msgid="2180443097365214467">"為此裝置充電"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"只為此裝置充電"</string>
-    <!-- no translation found for usb_use_power_only (3236391691786786070) -->
-    <skip />
+    <string name="usb_use_power_only" msgid="6449381364444187612">"正在為連接的裝置充電"</string>
+    <string name="usb_use_power_only_desc" msgid="5674490059427055197">"開啟後無法使用其他設定"</string>
     <string name="usb_use_file_transfers" msgid="1223134119354320726">"檔案轉移"</string>
     <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"傳送檔案至另一部裝置"</string>
     <string name="usb_use_photo_transfers" msgid="8192719651229326283">"PTP"</string>
@@ -3435,22 +3411,10 @@
     <string name="usb_use_MIDI" msgid="5116404702692483166">"MIDI"</string>
     <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"在 MIDI 模式下使用此裝置"</string>
     <string name="usb_use" msgid="3372728031108932425">"使用 USB 於"</string>
-    <!-- no translation found for usb_default_label (2211094045594574774) -->
-    <skip />
+    <string name="usb_use_also" msgid="557340935190819370">"使用 USB 時同時開啟以下模式"</string>
+    <string name="usb_default_label" msgid="4217189967858707974">"預設 USB 設定"</string>
     <string name="usb_default_info" msgid="8864535445796200695">"連接至其他裝置且您的手機處於解鎖狀態時，系統便會套用這些設定。請務必只連接至信任的裝置。"</string>
     <string name="usb_pref" msgid="1400617804525116158">"USB"</string>
-    <!-- no translation found for usb_preference (7394265019817945275) -->
-    <skip />
-    <!-- no translation found for usb_control_title (4404322722995917160) -->
-    <skip />
-    <!-- no translation found for usb_control_host (2276710819046647200) -->
-    <skip />
-    <!-- no translation found for usb_control_device (5821511964163469463) -->
-    <skip />
-    <!-- no translation found for usb_switching (8995313698715545619) -->
-    <skip />
-    <!-- no translation found for usb_switching_failed (4156073015692409651) -->
-    <skip />
     <string name="usb_summary_charging_only" msgid="7544327009143659751">"為此裝置充電"</string>
     <string name="usb_summary_power_only" msgid="1996391096369798526">"正在為連接的裝置充電"</string>
     <string name="usb_summary_file_transfers" msgid="6925168380589489645">"檔案轉移"</string>
@@ -3673,8 +3637,6 @@
     </plurals>
     <string name="data_usage_title" msgid="3659356290392241789">"主要數據"</string>
     <string name="data_used" msgid="5116389957228457203">"已使用 <xliff:g id="ID_1">^1</xliff:g>"</string>
-    <!-- no translation found for data_used_formatted (2989129931961311051) -->
-    <skip />
     <!-- no translation found for data_overusage (1134445012475270295) -->
     <skip />
     <string name="data_remaining" msgid="8998091725895502181">"剩餘 <xliff:g id="ID_1">^1</xliff:g>"</string>
