@@ -19,6 +19,7 @@ package com.android.settings.widget;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -27,6 +28,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.android.settingslib.CustomEditTextPreference;
 
@@ -42,6 +44,7 @@ public class ValidatedEditTextPreference extends CustomEditTextPreference {
     private final EditTextWatcher mTextWatcher = new EditTextWatcher();
     private Validator mValidator;
     private boolean mIsPassword;
+    private boolean mIsSummaryPassword;
 
     public ValidatedEditTextPreference(Context context, AttributeSet attrs,
             int defStyleAttr, int defStyleRes) {
@@ -78,8 +81,23 @@ public class ValidatedEditTextPreference extends CustomEditTextPreference {
         }
     }
 
+    @Override
+    public void onBindViewHolder(PreferenceViewHolder holder) {
+        super.onBindViewHolder(holder);
+
+        final TextView textView = (TextView) holder.findViewById(android.R.id.summary);
+        if (textView != null && mIsSummaryPassword) {
+            textView.setInputType(
+                    InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        }
+    }
+
     public void setIsPassword(boolean isPassword) {
         mIsPassword = isPassword;
+    }
+
+    public void setIsSummaryPassword(boolean isPassword) {
+        mIsSummaryPassword = isPassword;
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)

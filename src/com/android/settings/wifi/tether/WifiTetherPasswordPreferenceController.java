@@ -51,6 +51,7 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
             Log.d(TAG, "Updating password in Preference, " + mPassword);
         }
         ((ValidatedEditTextPreference) mPreference).setValidator(this);
+        ((ValidatedEditTextPreference) mPreference).setIsSummaryPassword(true);
         updatePasswordDisplay((EditTextPreference) mPreference);
     }
 
