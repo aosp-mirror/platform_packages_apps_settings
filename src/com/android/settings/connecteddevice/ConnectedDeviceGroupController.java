@@ -16,6 +16,7 @@
 package com.android.settings.connecteddevice;
 
 import android.content.pm.PackageManager;
+import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
@@ -26,8 +27,6 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.bluetooth.ConnectedBluetoothDeviceUpdater;
-import com.android.settings.search.ResultPayload;
-import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settings.dashboard.DashboardFragment;
@@ -49,10 +48,11 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
     private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
     private ConnectedUsbDeviceUpdater mConnectedUsbDeviceUpdater;
 
-    public ConnectedDeviceGroupController(DashboardFragment fragment, Lifecycle lifecycle) {
-        super(fragment.getContext(), KEY);
-        init(lifecycle, new ConnectedBluetoothDeviceUpdater(fragment, this),
-                new ConnectedUsbDeviceUpdater(fragment, this));
+    public ConnectedDeviceGroupController(Context context, DashboardFragment fragment,
+            Lifecycle lifecycle) {
+        super(context, KEY);
+        init(lifecycle, new ConnectedBluetoothDeviceUpdater(context, fragment, this),
+                new ConnectedUsbDeviceUpdater(context, fragment, this));
     }
 
     @VisibleForTesting

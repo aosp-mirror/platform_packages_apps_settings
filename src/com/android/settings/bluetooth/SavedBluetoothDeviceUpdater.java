@@ -17,6 +17,7 @@ package com.android.settings.bluetooth;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
@@ -29,9 +30,9 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
  */
 public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater {
 
-    public SavedBluetoothDeviceUpdater(DashboardFragment fragment,
+    public SavedBluetoothDeviceUpdater(Context context, DashboardFragment fragment,
             DevicePreferenceCallback devicePreferenceCallback) {
-        super(fragment, devicePreferenceCallback);
+        super(context, fragment, devicePreferenceCallback);
     }
 
     @VisibleForTesting

@@ -26,16 +26,21 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.nfc.NfcPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ConnectedDeviceDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "ConnectedDeviceFrag";
+
+    @VisibleForTesting
+    static final String KEY_CONNECTED_DEVICES = "connected_device_list";
+    @VisibleForTesting
+    static final String KEY_SAVED_DEVICES = "saved_device_list";
 
     @Override
     public int getMetricsCategory() {
@@ -59,11 +64,14 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        final Lifecycle lifecycle = getLifecycle();
+        return buildPreferenceControllers(context, getLifecycle(), this);
+    }
 
-        controllers.add(new ConnectedDeviceGroupController(this, lifecycle));
-        controllers.add(new SavedDeviceGroupController(this, lifecycle));
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
+            Lifecycle lifecycle, DashboardFragment dashboardFragment) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new ConnectedDeviceGroupController(context, dashboardFragment, lifecycle));
+        controllers.add(new SavedDeviceGroupController(context, dashboardFragment, lifecycle));
 
         return controllers;
     }
@@ -108,18 +116,30 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
     /**
      * For Search.
      */
-    //TODO(b/69333961): update the index for this new fragment
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
-                    return new ArrayList<>();
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.connected_devices;
+                    return Arrays.asList(sir);
+                }
+
+                @Override
+                public List<AbstractPreferenceController> createPreferenceControllers(Context
+                        context) {
+                    return buildPreferenceControllers(context, null /* lifecycle */,
+                            null /* dashboardFragment */);
                 }
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
-                    return new ArrayList<>();
+                    List<String> keys = super.getNonIndexableKeys(context);
+                    // Disable because they show dynamic data
+                    keys.add(KEY_CONNECTED_DEVICES);
+                    keys.add(KEY_SAVED_DEVICES);
+                    return keys;
                 }
             };
 }
