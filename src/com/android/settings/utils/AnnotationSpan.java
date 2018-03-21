@@ -16,11 +16,15 @@
 
 package com.android.settings.utils;
 
+import android.content.ActivityNotFoundException;
+import android.content.Context;
+import android.content.Intent;
 import android.text.Annotation;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.TextPaint;
 import android.text.style.URLSpan;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -28,6 +32,7 @@ import android.view.View;
  * annotation.
  */
 public class AnnotationSpan extends URLSpan {
+
     private final View.OnClickListener mClickListener;
 
     private AnnotationSpan(View.OnClickListener lsn) {
@@ -58,8 +63,8 @@ public class AnnotationSpan extends URLSpan {
             int end = msg.getSpanEnd(annotation);
             AnnotationSpan link = null;
             for (LinkInfo linkInfo : linkInfos) {
-                if (linkInfo.annotation.equals(key)) {
-                    link = new AnnotationSpan(linkInfo.listener);
+                if (linkInfo.mAnnotation.equals(key)) {
+                    link = new AnnotationSpan(linkInfo.mListener);
                     break;
                 }
             }
@@ -74,12 +79,40 @@ public class AnnotationSpan extends URLSpan {
      * Data class to store the annotation and the click action
      */
     public static class LinkInfo {
-        public final String annotation;
-        public final View.OnClickListener listener;
+        private static final String TAG = "AnnotationSpan.LinkInfo";
+        private final String mAnnotation;
+        private final Boolean mActionable;
+        private final View.OnClickListener mListener;
 
         public LinkInfo(String annotation, View.OnClickListener listener) {
-            this.annotation = annotation;
-            this.listener = listener;
+            mAnnotation = annotation;
+            mListener = listener;
+            mActionable = true; // assume actionable
+        }
+
+        public LinkInfo(Context context, String annotation, Intent intent) {
+            mAnnotation = annotation;
+            if (intent != null) {
+                mActionable = context.getPackageManager()
+                        .resolveActivity(intent, 0 /* flags */) != null;
+            } else {
+                mActionable = false;
+            }
+            if (!mActionable) {
+                mListener = null;
+            } else {
+                mListener = view -> {
+                    try {
+                        view.startActivityForResult(intent, 0);
+                    } catch (ActivityNotFoundException e) {
+                        Log.w(TAG, "Activity was not found for intent, " + intent);
+                    }
+                };
+            }
+        }
+
+        public boolean isActionable() {
+            return mActionable;
         }
     }
 }
