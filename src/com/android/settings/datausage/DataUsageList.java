@@ -23,6 +23,7 @@ import static android.telephony.TelephonyManager.SIM_STATE_READY;
 import android.app.ActivityManager;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
+import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.UserInfo;
 import android.graphics.Color;
@@ -39,6 +40,8 @@ import android.os.RemoteException;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.provider.Settings;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.telephony.SubscriptionInfo;
@@ -98,8 +101,10 @@ public class DataUsageList extends DataUsageBase {
     private INetworkStatsSession mStatsSession;
     private ChartDataUsagePreference mChart;
 
-    private NetworkTemplate mTemplate;
-    private int mSubId;
+    @VisibleForTesting
+    NetworkTemplate mTemplate;
+    @VisibleForTesting
+    int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     private ChartData mChartData;
 
     private LoadingViewController mLoadingViewController;
@@ -138,10 +143,7 @@ public class DataUsageList extends DataUsageBase {
         mUsageAmount = findPreference(KEY_USAGE_AMOUNT);
         mChart = (ChartDataUsagePreference) findPreference(KEY_CHART_DATA);
         mApps = (PreferenceGroup) findPreference(KEY_APPS_GROUP);
-
-        final Bundle args = getArguments();
-        mSubId = args.getInt(EXTRA_SUB_ID, SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-        mTemplate = args.getParcelable(EXTRA_NETWORK_TEMPLATE);
+        processArgument();
     }
 
     @Override
@@ -230,6 +232,20 @@ public class DataUsageList extends DataUsageBase {
         TrafficStats.closeQuietly(mStatsSession);
 
         super.onDestroy();
+    }
+
+    void processArgument() {
+        final Bundle args = getArguments();
+        if (args != null) {
+            mSubId = args.getInt(EXTRA_SUB_ID, SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+            mTemplate = args.getParcelable(EXTRA_NETWORK_TEMPLATE);
+        }
+        if (mTemplate == null && mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            final Intent intent = getIntent();
+            mSubId = intent.getIntExtra(Settings.EXTRA_SUB_ID,
+                    SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+            mTemplate = intent.getParcelableExtra(Settings.EXTRA_NETWORK_TEMPLATE);
+        }
     }
 
     /**
