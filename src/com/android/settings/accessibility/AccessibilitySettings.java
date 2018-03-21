@@ -211,7 +211,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private SwitchPreference mToggleDisableAnimationsPreference;
     private SwitchPreference mToggleMasterMonoPreference;
     private ListPreference mSelectLongPressTimeoutPreference;
-    private Preference mNoServicesMessagePreference;
     private Preference mCaptioningPreferenceScreen;
     private Preference mDisplayMagnificationPreferenceScreen;
     private Preference mFontSizePreferenceScreen;
@@ -495,12 +494,12 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
         List<AccessibilityServiceInfo> installedServices =
                 accessibilityManager.getInstalledAccessibilityServiceList();
+        List<AccessibilityServiceInfo> enabledServiceInfos = accessibilityManager
+                .getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_ALL_MASK);
         Set<ComponentName> enabledServices = AccessibilityUtils.getEnabledServicesFromSettings(
                 getActivity());
         List<String> permittedServices = mDpm.getPermittedAccessibilityServices(
                 UserHandle.myUserId());
-        final boolean accessibilityEnabled = Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_ENABLED, 0) == 1;
 
         PreferenceCategory downloadedServicesCategory =
                 mCategoryToPrefCategoryMap.get(CATEGORY_DOWNLOADED_SERVICES);
@@ -513,7 +512,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             final AccessibilityServiceInfo info = installedServices.get(i);
             final ResolveInfo resolveInfo = info.getResolveInfo();
 
-            RestrictedPreference preference =
+            final RestrictedPreference preference =
                     new RestrictedPreference(downloadedServicesCategory.getContext());
             final String title = resolveInfo.loadLabel(getPackageManager()).toString();
 
@@ -524,32 +523,44 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 icon = resolveInfo.loadIcon(getPackageManager());
             }
 
-            ServiceInfo serviceInfo = resolveInfo.serviceInfo;
-            String packageName = serviceInfo.packageName;
-            ComponentName componentName = new ComponentName(packageName, serviceInfo.name);
+            final ServiceInfo serviceInfo = resolveInfo.serviceInfo;
+            final String packageName = serviceInfo.packageName;
+            final ComponentName componentName = new ComponentName(packageName, serviceInfo.name);
 
             preference.setKey(componentName.flattenToString());
 
             preference.setTitle(title);
             Utils.setSafeIcon(preference, icon);
-            final boolean serviceEnabled = accessibilityEnabled
-                    && enabledServices.contains(componentName);
-            final String serviceState = serviceEnabled ?
-                    getString(R.string.accessibility_summary_state_enabled) :
-                    getString(R.string.accessibility_summary_state_disabled);
-            final CharSequence serviceSummary = info.loadSummary(getPackageManager());
-            final String stateSummaryCombo = getString(
-                    R.string.preference_summary_default_combination,
-                    serviceState, serviceSummary);
-            preference.setSummary((TextUtils.isEmpty(serviceSummary)) ? serviceState
-                    : stateSummaryCombo);
+            final boolean serviceEnabled = enabledServices.contains(componentName);
+            String description = info.loadDescription(getPackageManager());
+            if (TextUtils.isEmpty(description)) {
+                description = getString(R.string.accessibility_service_default_description);
+            }
+
+            if (serviceEnabled && AccessibilityUtils.hasServiceCrashed(
+                    packageName, serviceInfo.name, enabledServiceInfos)) {
+                // Update the summaries for services that have crashed.
+                preference.setSummary(R.string.accessibility_summary_state_stopped);
+                description = getString(R.string.accessibility_description_state_stopped);
+            } else {
+                final String serviceState = serviceEnabled ?
+                        getString(R.string.accessibility_summary_state_enabled) :
+                        getString(R.string.accessibility_summary_state_disabled);
+                final CharSequence serviceSummary = info.loadSummary(getPackageManager());
+                final String stateSummaryCombo = getString(
+                        R.string.preference_summary_default_combination,
+                        serviceState, serviceSummary);
+                preference.setSummary((TextUtils.isEmpty(serviceSummary)) ? serviceState
+                        : stateSummaryCombo);
+            }
 
             // Disable all accessibility services that are not permitted.
-            boolean serviceAllowed =
+            final boolean serviceAllowed =
                     permittedServices == null || permittedServices.contains(packageName);
             if (!serviceAllowed && !serviceEnabled) {
-                EnforcedAdmin admin = RestrictedLockUtils.checkIfAccessibilityServiceDisallowed(
-                        getActivity(), packageName, UserHandle.myUserId());
+                final EnforcedAdmin admin =
+                        RestrictedLockUtils.checkIfAccessibilityServiceDisallowed(
+                                getActivity(), packageName, UserHandle.myUserId());
                 if (admin != null) {
                     preference.setDisabledByAdmin(admin);
                 } else {
@@ -562,19 +573,14 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             preference.setFragment(ToggleAccessibilityServicePreferenceFragment.class.getName());
             preference.setPersistent(true);
 
-            Bundle extras = preference.getExtras();
+            final Bundle extras = preference.getExtras();
             extras.putString(EXTRA_PREFERENCE_KEY, preference.getKey());
             extras.putBoolean(EXTRA_CHECKED, serviceEnabled);
             extras.putString(EXTRA_TITLE, title);
             extras.putParcelable(EXTRA_RESOLVE_INFO, resolveInfo);
-
-            String description = info.loadDescription(getPackageManager());
-            if (TextUtils.isEmpty(description)) {
-                description = getString(R.string.accessibility_service_default_description);
-            }
             extras.putString(EXTRA_SUMMARY, description);
 
-            String settingsClassName = info.getSettingsActivityName();
+            final String settingsClassName = info.getSettingsActivityName();
             if (!TextUtils.isEmpty(settingsClassName)) {
                 extras.putString(EXTRA_SETTINGS_TITLE,
                         getString(R.string.accessibility_menu_item_settings));
@@ -595,7 +601,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
         // If the user has not installed any additional services, hide the category.
         if (downloadedServicesCategory.getPreferenceCount() == 0) {
-            PreferenceScreen screen = getPreferenceScreen();
+            final PreferenceScreen screen = getPreferenceScreen();
             screen.removePreference(downloadedServicesCategory);
         }
     }
