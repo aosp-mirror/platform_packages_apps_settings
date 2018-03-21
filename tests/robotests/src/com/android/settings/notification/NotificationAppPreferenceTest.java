@@ -211,28 +211,4 @@ public class NotificationAppPreferenceTest {
 
         assertThat(toggle.getContentDescription()).isEqualTo(label);
     }
-
-    @Test
-    public void setSummary_showSummaryContainer() {
-        final NotificationAppPreference preference = new NotificationAppPreference(mContext);
-        View rootView = View.inflate(mContext, R.layout.preference_app, null /* parent */);
-        PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(rootView);
-        preference.setSummary("test");
-        preference.onBindViewHolder(holder);
-
-        assertThat(holder.findViewById(R.id.summary_container).getVisibility())
-                .isEqualTo(View.VISIBLE);
-    }
-
-    @Test
-    public void noSummary_hideSummaryContainer() {
-        final NotificationAppPreference preference = new NotificationAppPreference(mContext);
-        View rootView = View.inflate(mContext, R.layout.preference_app, null /* parent */);
-        PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(rootView);
-        preference.setSummary(null);
-        preference.onBindViewHolder(holder);
-
-        assertThat(holder.findViewById(R.id.summary_container).getVisibility())
-                .isEqualTo(View.GONE);
-    }
 }

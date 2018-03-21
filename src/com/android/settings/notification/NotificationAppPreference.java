@@ -17,35 +17,38 @@ package com.android.settings.notification;
 
 import android.content.Context;
 import android.support.v7.preference.PreferenceViewHolder;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.Switch;
 
 import com.android.settings.R;
+import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settingslib.RestrictedLockUtils;
-import com.android.settingslib.TwoTargetPreference;
 
 /**
  * Shows an app icon, title and summary. Has a second switch touch target.
  */
-public class NotificationAppPreference extends TwoTargetPreference {
+public class NotificationAppPreference extends MasterSwitchPreference {
 
-    private int mProgress;
-    private boolean mProgressVisible;
     private Switch mSwitch;
     private boolean mChecked;
     private boolean mEnableSwitch = true;
 
     public NotificationAppPreference(Context context) {
         super(context);
-        setLayoutResource(R.layout.preference_app);
     }
 
     public NotificationAppPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setLayoutResource(R.layout.preference_app);
+    }
+
+    public NotificationAppPreference(Context context, AttributeSet attrs,
+            int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+    }
+
+    public NotificationAppPreference(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
     }
 
     @Override
@@ -53,25 +56,9 @@ public class NotificationAppPreference extends TwoTargetPreference {
         return R.layout.preference_widget_master_switch;
     }
 
-    public void setProgress(int amount) {
-        mProgress = amount;
-        mProgressVisible = true;
-        notifyChanged();
-    }
-
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
         super.onBindViewHolder(view);
-
-        view.findViewById(R.id.summary_container)
-                .setVisibility(TextUtils.isEmpty(getSummary()) ? View.GONE : View.VISIBLE);
-        final ProgressBar progress = (ProgressBar) view.findViewById(android.R.id.progress);
-        if (mProgressVisible) {
-            progress.setProgress(mProgress);
-            progress.setVisibility(View.VISIBLE);
-        } else {
-            progress.setVisibility(View.GONE);
-        }
 
         final View widgetView = view.findViewById(android.R.id.widget_frame);
         if (widgetView != null) {

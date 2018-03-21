@@ -290,7 +290,7 @@ public class RecentNotifyingAppsPreferenceControllerTest {
 
         mController.displayPreference(mScreen);
 
-        verify(mCategory).addPreference(argThat(summaryMatches("0 minutes ago")));
+        verify(mCategory).addPreference(argThat(summaryMatches("Just now")));
     }
 
     private static ArgumentMatcher<Preference> summaryMatches(String expected) {
