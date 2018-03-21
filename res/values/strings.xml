@@ -3044,10 +3044,10 @@
     <!-- Next button text of wizard step prompting user to format a storage device [CHAR LIMIT=32] -->
     <string name="storage_wizard_format_confirm_next">Erase &amp; format</string>
 
-    <!-- Title of wizard step showing formatting progress [CHAR LIMIT=32] -->
+    <!-- In-progress title. This string lets the user know the SD card is being formatted. The user won't be able to proceed with setup until this step is finished. The placeholder is for the name of the device (e.g. brand name of the SD card). [CHAR LIMIT=32] -->
     <string name="storage_wizard_format_progress_title">Formatting <xliff:g id="name" example="SD card">^1</xliff:g>\u2026</string>
-    <!-- Body of wizard step showing formatting progress [CHAR LIMIT=NONE] -->
-    <string name="storage_wizard_format_progress_body">Don\u2019t remove the <xliff:g id="name" example="SD card">^1</xliff:g> while it\u2019s formatting.</string>
+    <!-- Subtext for a full-screen title. This string lets the user know that the SD card can't be removed during this process. The user won't be able to proceed with setup until this step is finished. The placeholder is for the specific device (e.g. SD card, USB drive, etc.). [CHAR LIMIT=NONE] -->
+    <string name="storage_wizard_format_progress_body">Don\u2019t remove the <xliff:g id="name" example="SD card">^1</xliff:g> while it\u2019s being formatting.</string>
 
     <!-- Title of wizard step prompting user to migrate data to new storage [CHAR LIMIT=32] -->
     <string name="storage_wizard_migrate_title">Move data to new storage</string>
@@ -3078,12 +3078,10 @@
 \n\u2022 Keep the device charged.
     </string>
 
-    <!-- Title of wizard step indicating that storage is ready [CHAR LIMIT=32] -->
-    <string name="storage_wizard_ready_title"><xliff:g id="name" example="SD card">^1</xliff:g> is ready</string>
+    <!-- Title of a full-screen message. This string lets the user know that their storage device is ready to use. They can tap a button at the bottom of the screen to complete the setup process. The placeholder is for the specific device (e.g. SD card, USB drive, etc.). [CHAR LIMIT=32] -->
+    <string name="storage_wizard_ready_title">Your <xliff:g id="name" example="SD card">^1</xliff:g> is ready to use</string>
     <!-- Body of wizard step indicating that external storage is ready [CHAR LIMIT=NONE] -->
-    <string name="storage_wizard_ready_external_body">
-        Your <xliff:g id="name" example="SD card">^1</xliff:g> is all set to use with photos and other media.
-    </string>
+    <string name="storage_wizard_ready_external_body">Your <xliff:g id="name" example="SD card">^1</xliff:g> is all set to use with photos and other media.</string>
     <!-- Body of wizard step indicating that internal storage is ready [CHAR LIMIT=NONE] -->
     <string name="storage_wizard_ready_internal_body">Your new <xliff:g id="name" example="SD card">^1</xliff:g> is working.
 \n\nTo move photos, files, and app data to this device, go to Settings > Storage.
@@ -3113,6 +3111,85 @@
 \n\nYou can continue, but apps moved to this location may stutter and data transfers may take a long time.
 \n\nConsider using a faster <xliff:g id="name" example="SD card">^1</xliff:g> for better performance.
 </string>
+
+    <!-- This is the title of a full-screen message. After this question, the user will get to choose how they want to use the storage device that they have in their phone. The placeholder is for the specific device (e.g. SD card, USB drive, etc.). [CHAR LIMIT=32] -->
+    <string name="storage_wizard_init_v2_title">How will you use this <xliff:g id="name" example="SD card">^1</xliff:g>?</string>
+
+    <!-- Title of a line item. Below this title, a user can tap a button to select this option if they want to use their SD card as extra device storage. [CHAR LIMIT=32] -->
+    <string name="storage_wizard_init_v2_internal_title" product="tablet">Use for extra tablet storage</string>
+    <!-- Subtext for a line item. Below this subtext, a user can tap a button to select this option if they want to use their SD card as extra device storage. [CHAR LIMIT=64] -->
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet">For apps, files, and media on this tablet only</string>
+    <!-- Button text. A user can tap this button if they want to use their SD card as extra device storage. [CHAR LIMIT=32] -->
+    <string name="storage_wizard_init_v2_internal_action" product="tablet">Tablet storage</string>
+    <!-- Title of a line item. Below this title, a user can tap a button to select this option if they want to use their SD card as extra device storage. [CHAR LIMIT=32] -->
+    <string name="storage_wizard_init_v2_internal_title" product="default">Use for extra phone storage</string>
+    <!-- Subtext for a line item. Below this subtext, a user can tap a button to select this option if they want to use their SD card as extra device storage. [CHAR LIMIT=64] -->
+    <string name="storage_wizard_init_v2_internal_summary" product="default">For apps, files, and media on this phone only</string>
+    <!-- Button text. A user can tap this button if they want to use their SD card as extra device storage. [CHAR LIMIT=32] -->
+    <string name="storage_wizard_init_v2_internal_action" product="default">Phone storage</string>
+    <!-- This text separates two options in a full-screen message. It's used to indicate a user can choose one option or the other. [CHAR LIMIT=16] -->
+    <string name="storage_wizard_init_v2_or">Or</string>
+    <!-- Title of a line item. Below this title, a user can tap a button to select this option if they want to use their SD card as portable device storage. [CHAR LIMIT=32] -->
+    <string name="storage_wizard_init_v2_external_title">Use for portable storage</string>
+    <!-- Subtext for a line item. Below this subtext, a user can tap a button to select this option if they want to use their SD card as portable device storage. [CHAR LIMIT=64] -->
+    <string name="storage_wizard_init_v2_external_summary">For transferring files and media between devices</string>
+    <!-- Button text. A user can tap this button if they want to use their SD card as portable device storage. [CHAR LIMIT=32] -->
+    <string name="storage_wizard_init_v2_external_action">Portable storage</string>
+    <!-- Button text. A user can tap this button if they want to delay setting up their SD card until a later time. [CHAR LIMIT=32] -->
+    <string name="storage_wizard_init_v2_later">Set up later</string>
+
+    <!-- Title of a dialog. This string is asking users if they want to format their SD card or USB drive in order to use it as extra phone storage. The placeholder is for the specific device (e.g. SD card, USB drive, etc.). [CHAR LIMIT=32] -->
+    <string name="storage_wizard_format_confirm_v2_title">Format this <xliff:g id="name" example="SD card">^1</xliff:g>?</string>
+    <!-- Body of a dialog. This text is confirming that the user wants to use their SD card as extra phone storage, but the formatting process will erase existing content on the card. The first placeholder is for the name of the device (e.g. a brand name of the SD card or USB drive). The second and third placeholders are for the general references (e.g. SD card, USB drive). [CHAR LIMIT=NONE] -->
+    <string name="storage_wizard_format_confirm_v2_body">This <xliff:g id="name" example="SanDisk SD card">^1</xliff:g> needs to be formatted to store apps, files, and media.
+\n\nFormatting will erase existing content on the <xliff:g id="name" example="SD card">^2</xliff:g>. To avoid losing content, back it up to another <xliff:g id="name" example="SD card">^3</xliff:g> or device.</string>
+    <!-- Button text. If a user taps this button, their SD card or USB device will be formatted and used as extra phone storage. The placeholder is for the specific device (e.g. SD card, USB drive, etc.). [CHAR LIMIT=16] -->
+    <string name="storage_wizard_format_confirm_v2_action">Format <xliff:g id="name" example="SD card">^1</xliff:g></string>
+
+    <!-- Title of a full-screen message. This string is confirming that a user wants to move their content to the storage device. They can press a button at the bottom of the screen to move their content. The placeholder is for the specific device (e.g. SD card, USB drive, etc.). [CHAR LIMIT=32] -->
+    <string name="storage_wizard_migrate_v2_title">Move content to <xliff:g id="name" example="SD card">^1</xliff:g>?</string>
+    <!-- Main text for a full-screen message. These strings let the user know what they can move to the storage device, how much space will be made in their phone's storage, and how long the move will take. The first placeholder is for the amount of space (e.g. 1.4 GB) that will become available ("free up" is the phrasal verb used for this case). The second placeholder is for the amount of time (e.g. 6 minutes) it'll take to move their content to the storage device. The third placeholder is the name of the storage device (e.g. brand name of the SD card). [CHAR LIMIT=NONE] -->
+    <string name="storage_wizard_migrate_v2_body" product="tablet">You can move files, media, and certain apps to this <xliff:g id="name" example="SanDisk SD card">^1</xliff:g>.
+\n\nThis move will free up <xliff:g id="size" example="3 GB">^2</xliff:g> of your tablet\u2019s storage and should take around <xliff:g id="duration" example="3 minutes">^3</xliff:g>.</string>
+    <!-- Main text for a full-screen message. These strings let the user know what they can move to the storage device, how much space will be made in their device's storage, and how long the move will take. The first placeholder is for the amount of space (e.g. 1.4 GB) that will become available ("free up" is the phrasal verb used for this case). The second placeholder is for the amount of time (e.g. 6 minutes) it'll take to move their content to the storage device. The third placeholder is the name of the storage device (e.g. brand name of the SD card). [CHAR LIMIT=NONE] -->
+    <string name="storage_wizard_migrate_v2_body" product="default">You can move files, media, and certain apps to this <xliff:g id="name" example="SanDisk SD card">^1</xliff:g>.
+\n\nThis move will free up <xliff:g id="size" example="3 GB">^2</xliff:g> of your phone\u2019s storage and should take around <xliff:g id="duration" example="3 minutes">^3</xliff:g>.</string>
+
+    <!-- Title of a section of main text that shows a checklist of items a user should be aware of while moving their content to the SD card. [CHAR LIMIT=64] -->
+    <string name="storage_wizard_migrate_v2_checklist">During the move:</string>
+    <!-- Item that a user should be aware of while moving their content to the storage device. The string tells them not to remove the storage device while the move is happening. The placeholder is for the specific device (e.g. SD card, USB device, etc.). [CHAR LIMIT=64] -->
+    <string name="storage_wizard_migrate_v2_checklist_media">Don\u2019t remove the <xliff:g id="name" example="SD card">^1</xliff:g></string>
+    <!-- Item that a user should be aware of while moving their content to the SD card. Tells them that apps may have trouble working while the move is happening. [CHAR LIMIT=64] -->
+    <string name="storage_wizard_migrate_v2_checklist_apps">Some apps won\u2019t work</string>
+    <!-- Item that a user should be aware of while moving their content to the SD card. Tells them to keep the tablet charged while the move is happening. [CHAR LIMIT=64] -->
+    <string name="storage_wizard_migrate_v2_checklist_battery" product="tablet">Keep this tablet charged</string>
+    <!-- Item that a user should be aware of while moving their content to the SD card. Tells them to keep the phone charged while the move is happening. [CHAR LIMIT=64] -->
+    <string name="storage_wizard_migrate_v2_checklist_battery" product="default">Keep this phone charged</string>
+
+    <!-- Button text. If a user taps this button, they'll start moving their content to the SD card. Move is a verb. [CHAR LIMIT=32] -->
+    <string name="storage_wizard_migrate_v2_now">Move content</string>
+    <!-- Button text. If a user taps this button, they'll be able to move their content later. Move is a verb. [CHAR LIMIT=32] -->
+    <string name="storage_wizard_migrate_v2_later">Move content later</string>
+
+    <!-- In-progress title. This string lets the user know that their content is being moved to the SD card. They won't be able to proceed until the move is complete. [CHAR LIMIT=32] -->
+    <string name="storage_wizard_migrate_progress_v2_title">Moving content\u2026</string>
+
+    <!-- Title of a dialog. This string is telling users that their storage device is performing slowly. The placeholder is for the specific device (e.g. SD card, USB drive, etc.). [CHAR LIMIT=32] -->
+    <string name="storage_wizard_slow_v2_title">Slow <xliff:g id="name" example="SD card">^1</xliff:g></string>
+    <!-- Strings that are part of a full-screen message. These strings let the user know that their storage device is slow, and include some options they can try. The first placeholder is for the name of the storage device (e.g. brand name of the SD card), and the second and third placeholders are for the general references (e.g. SD card, USB drive, etc.). [CHAR LIMIT=NONE] -->
+    <string name="storage_wizard_slow_v2_body">You can still use this <xliff:g id="name" example="SanDisk SD card">^1</xliff:g>, but it may be slow.
+\n\nApps stored on this <xliff:g id="name" example="SD card">^2</xliff:g> may not work properly, and content transfers could take a long time.
+\n\nTry using a faster <xliff:g id="name" example="SD card">^3</xliff:g>, or use this <xliff:g id="name" example="SD card">^4</xliff:g> for portable storage instead.</string>
+    <!-- Action of a dialog. This action will start the wizard from the beginning, letting the user make an alternative choice. [CHAR LIMIT=32] -->
+    <string name="storage_wizard_slow_v2_start_over">Start over</string>
+    <!-- Action of a dialog. This action will continue the wizard, meaning the user acknowledges their card is slow. [CHAR LIMIT=32] -->
+    <string name="storage_wizard_slow_v2_continue">Continue</string>
+
+    <!-- Title of a full-screen message. This text lets the user know how to manage the storage device moving forward. The placeholder is for the name of the device (e.g. brand name of the SD card). [CHAR LIMIT=NONE] -->
+    <string name="storage_wizard_ready_v2_external_body">To move content to <xliff:g id="name" example="SanDisk SD card">^1</xliff:g>, go to <b>Settings > Storage</b></string>
+    <!-- Title of a full-screen message. This text lets the user know that their content was moved to their storage device and how to manage the storage device moving forward. The placeholder is for the name of the device (e.g. brand name of the SD card). [CHAR LIMIT=NONE] -->
+    <string name="storage_wizard_ready_v2_internal_body">Your content was moved to <xliff:g id="name" example="SanDisk SD card">^1</xliff:g>.
+\n\nTo manage this <xliff:g id="name" example="SD card">^2</xliff:g>, go to <b>Settings > Storage</b>.</string>
 
     <!-- Phone info screen, section titles: -->
     <string name="battery_status_title">Battery status</string>
