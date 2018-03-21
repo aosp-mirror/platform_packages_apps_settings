@@ -976,8 +976,8 @@ public final class Utils extends com.android.settingslib.Utils {
     public static Drawable getBadgedIcon(IconDrawableFactory iconDrawableFactory,
             PackageManager packageManager, String packageName, int userId) {
         try {
-            final ApplicationInfo appInfo = packageManager.getApplicationInfo(packageName,
-                    PackageManager.GET_META_DATA);
+            final ApplicationInfo appInfo = packageManager.getApplicationInfoAsUser(
+                    packageName, PackageManager.GET_META_DATA, userId);
             return iconDrawableFactory.getBadgedIcon(appInfo, userId);
         } catch (PackageManager.NameNotFoundException e) {
             return packageManager.getDefaultActivityIcon();
