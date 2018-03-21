@@ -21,13 +21,13 @@ import android.os.PowerManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.fuelgauge.BatteryBroadcastReceiver;
 import com.android.settings.fuelgauge.BatterySaverReceiver;
 import com.android.settings.widget.TwoStateButtonPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
+import com.android.settingslib.fuelgauge.BatterySaverUtils;
 
 /**
  * Controller to update the battery saver button
@@ -73,7 +73,8 @@ public class BatterySaverButtonPreferenceController extends
 
     @Override
     public void onButtonClicked(boolean stateOn) {
-        mPowerManager.setPowerSaveMode(stateOn);
+        // This screen already shows a warning, so we don't need another warning.
+        BatterySaverUtils.setPowerSaveMode(mContext,  stateOn, /*needFirstTimeWarning*/ false);
     }
 
     @Override
