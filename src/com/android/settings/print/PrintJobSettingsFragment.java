@@ -28,6 +28,7 @@ import android.print.PrintManager.PrintJobStateChangeListener;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -45,6 +46,8 @@ import java.text.DateFormat;
  * Fragment for management of a print job.
  */
 public class PrintJobSettingsFragment extends SettingsPreferenceFragment {
+    private static final String LOG_TAG = PrintJobSettingsFragment.class.getSimpleName();
+
     private static final int MENU_ITEM_ID_CANCEL = 1;
     private static final int MENU_ITEM_ID_RESTART = 2;
 
@@ -164,10 +167,17 @@ public class PrintJobSettingsFragment extends SettingsPreferenceFragment {
     private void processArguments() {
         String printJobId = getArguments().getString(EXTRA_PRINT_JOB_ID);
         if (printJobId == null) {
-            finish();
-        } else {
-            mPrintJobId = PrintJobId.unflattenFromString(printJobId);
+            printJobId = getIntent().getStringExtra(EXTRA_PRINT_JOB_ID);
+
+            if (printJobId == null) {
+                Log.w(LOG_TAG, EXTRA_PRINT_JOB_ID + " not set");
+                finish();
+                return;
+            }
         }
+
+
+        mPrintJobId = PrintJobId.unflattenFromString(printJobId);
     }
 
     private PrintJob getPrintJob() {
@@ -190,6 +200,10 @@ public class PrintJobSettingsFragment extends SettingsPreferenceFragment {
         PrintJobInfo info = printJob.getInfo();
 
         switch (info.getState()) {
+            case PrintJobInfo.STATE_CREATED: {
+                mPrintJobPreference.setTitle(getString(
+                        R.string.print_configuring_state_title_template, info.getLabel()));
+            } break;
             case PrintJobInfo.STATE_QUEUED:
             case PrintJobInfo.STATE_STARTED: {
                 if (!printJob.getInfo().isCancelling()) {
