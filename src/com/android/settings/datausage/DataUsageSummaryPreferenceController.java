@@ -37,7 +37,6 @@ import android.util.RecurrenceRule;
 import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.FeatureFlags;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.net.DataUsageController;
 
@@ -150,7 +149,8 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return mSubscriptionManager.getDefaultDataSubscriptionInfo() != null
+                ? AVAILABLE : DISABLED_UNSUPPORTED;
     }
 
     @Override
