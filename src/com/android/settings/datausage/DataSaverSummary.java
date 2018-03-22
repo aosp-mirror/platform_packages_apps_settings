@@ -68,6 +68,9 @@ public class DataSaverSummary extends SettingsPreferenceFragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mSwitchBar = ((SettingsActivity) getActivity()).getSwitchBar();
+        mSwitchBar.setSwitchBarText(
+                R.string.data_saver_switch_title,
+                R.string.data_saver_switch_title);
         mSwitchBar.show();
         mSwitchBar.addOnSwitchChangeListener(this);
     }
