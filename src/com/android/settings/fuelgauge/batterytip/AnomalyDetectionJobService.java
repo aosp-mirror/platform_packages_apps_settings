@@ -38,13 +38,16 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.util.Log;
+import android.util.Pair;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 import com.android.settingslib.utils.ThreadUtils;
 
@@ -78,6 +81,7 @@ public class AnomalyDetectionJobService extends JobService {
     @Override
     public boolean onStartJob(JobParameters params) {
         ThreadUtils.postOnBackgroundThread(() -> {
+            final Context context = AnomalyDetectionJobService.this;
             final BatteryDatabaseManager batteryDatabaseManager =
                     BatteryDatabaseManager.getInstance(this);
             final BatteryTipPolicy policy = new BatteryTipPolicy(this);
@@ -89,12 +93,14 @@ public class AnomalyDetectionJobService extends JobService {
             final PowerWhitelistBackend powerWhitelistBackend = PowerWhitelistBackend.getInstance();
             final PowerUsageFeatureProvider powerUsageFeatureProvider = FeatureFactory
                     .getFactory(this).getPowerUsageFeatureProvider(this);
+            final MetricsFeatureProvider metricsFeatureProvider = FeatureFactory
+                    .getFactory(this).getMetricsFeatureProvider();
 
             for (JobWorkItem item = params.dequeueWork(); item != null;
                     item = params.dequeueWork()) {
-                saveAnomalyToDatabase(batteryStatsHelper, userManager, batteryDatabaseManager,
-                        batteryUtils, policy, powerWhitelistBackend, contentResolver,
-                        powerUsageFeatureProvider,
+                saveAnomalyToDatabase(context, batteryStatsHelper, userManager,
+                        batteryDatabaseManager, batteryUtils, policy, powerWhitelistBackend,
+                        contentResolver, powerUsageFeatureProvider, metricsFeatureProvider,
                         item.getIntent().getExtras());
             }
             jobFinished(params, false /* wantsReschedule */);
@@ -109,11 +115,12 @@ public class AnomalyDetectionJobService extends JobService {
     }
 
     @VisibleForTesting
-    void saveAnomalyToDatabase(BatteryStatsHelper batteryStatsHelper, UserManager userManager,
+    void saveAnomalyToDatabase(Context context, BatteryStatsHelper batteryStatsHelper,
+            UserManager userManager,
             BatteryDatabaseManager databaseManager, BatteryUtils batteryUtils,
             BatteryTipPolicy policy, PowerWhitelistBackend powerWhitelistBackend,
             ContentResolver contentResolver, PowerUsageFeatureProvider powerUsageFeatureProvider,
-            Bundle bundle) {
+            MetricsFeatureProvider metricsFeatureProvider, Bundle bundle) {
         // The Example of intentDimsValue is: 35:{1:{1:{1:10013|}|}|}
         final StatsDimensionsValue intentDimsValue =
                 bundle.getParcelable(StatsManager.EXTRA_STATS_DIMENSIONS_VALUE);
@@ -158,6 +165,11 @@ public class AnomalyDetectionJobService extends JobService {
                                 AnomalyDatabaseHelper.State.NEW,
                                 timeMs);
                     }
+                    metricsFeatureProvider.action(context,
+                            MetricsProto.MetricsEvent.ACTION_ANOMALY_TRIGGERED,
+                            packageName,
+                            Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT,
+                                    anomalyInfo.anomalyType));
                 }
             }
         } catch (NullPointerException | IndexOutOfBoundsException e) {
