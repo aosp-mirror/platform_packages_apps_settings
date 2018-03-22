@@ -41,12 +41,15 @@ import android.view.MenuItem;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.net.DataUsageController;
 
 import java.util.ArrayList;
@@ -155,10 +158,12 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        final Activity activity = getActivity();
         final ArrayList<AbstractPreferenceController> controllers = new ArrayList<>();
         mSummaryController =
-                new DataUsageSummaryPreferenceController(context);
+                new DataUsageSummaryPreferenceController(context, this, activity);
         controllers.add(mSummaryController);
+        getLifecycle().addObserver(mSummaryController);
         return controllers;
     }
 
