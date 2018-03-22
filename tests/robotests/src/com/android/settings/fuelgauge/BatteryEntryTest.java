@@ -39,6 +39,8 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 
+import java.util.Locale;
+
 @RunWith(RobolectricTestRunner.class)
 public class BatteryEntryTest {
 
@@ -147,5 +149,18 @@ public class BatteryEntryTest {
         BatteryEntry entry = createBatteryEntryForApp();
 
         assertThat(entry.extractPackagesFromSipper(entry.sipper)).isEqualTo(entry.sipper.mPackages);
+    }
+
+    @Test
+    public void testUidCache_switchLocale_shouldCleanCache() {
+        BatteryEntry.stopRequestQueue();
+
+        Locale.setDefault(new Locale("en_US"));
+        BatteryEntry.sUidCache.put(Integer.toString(APP_UID), null);
+        assertThat(BatteryEntry.sUidCache).isNotEmpty();
+
+        Locale.setDefault(new Locale("zh_TW"));
+        createBatteryEntryForApp();
+        assertThat(BatteryEntry.sUidCache).isEmpty(); // check if cache is clear
     }
 }
