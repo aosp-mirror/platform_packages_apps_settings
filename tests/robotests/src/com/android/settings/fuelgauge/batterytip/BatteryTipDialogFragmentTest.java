@@ -204,7 +204,7 @@ public class BatteryTipDialogFragmentTest {
         ShadowAlertDialog shadowDialog = shadowOf(dialog);
 
         assertThat(shadowDialog.getMessage()).isEqualTo(
-                "Based on your usage, your battery usually lasts about 1h when fully charged"
+                "Based on your usage, your battery usually lasts about 1 hr when fully charged"
                         + ".\n\nIf you need to extend your battery life, turn on Battery Saver.");
     }
 
