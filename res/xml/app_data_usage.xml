@@ -47,7 +47,9 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="app_data_usage_settings_category">
+        android:key="app_data_usage_settings_category"
+        android:layout="@layout/preference_category_no_label">
+
         <Preference
             android:key="app_settings"
             android:title="@string/data_usage_app_settings" />
