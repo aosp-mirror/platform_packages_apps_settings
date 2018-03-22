@@ -62,7 +62,7 @@ public class DataUsageSummaryLegacy extends DataUsageBaseFragment implements Ind
 
     static final boolean LOGD = false;
 
-    public static final String KEY_RESTRICT_BACKGROUND = "restrict_background";
+    public static final String KEY_RESTRICT_BACKGROUND = "restrict_background_legacy";
 
     private static final String KEY_STATUS_HEADER = "status_header";
     private static final String KEY_LIMIT_SUMMARY = "limit_summary";
@@ -370,7 +370,7 @@ public class DataUsageSummaryLegacy extends DataUsageBaseFragment implements Ind
                     boolean enabled) {
                 List<SearchIndexableResource> resources = new ArrayList<>();
                 SearchIndexableResource resource = new SearchIndexableResource(context);
-                resource.xmlResId = R.xml.data_usage;
+                resource.xmlResId = R.xml.data_usage_legacy;
                 resources.add(resource);
 
                 resource = new SearchIndexableResource(context);
