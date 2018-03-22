@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge.batterytip;
 
 import android.app.AppOpsManager;
 import android.content.Context;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
@@ -35,12 +36,14 @@ public class BatteryManagerPreferenceController extends BasePreferenceController
     private static final int ON = 1;
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
     private AppOpsManager mAppOpsManager;
+    private UserManager mUserManager;
 
     public BatteryManagerPreferenceController(Context context) {
         super(context, KEY_BATTERY_MANAGER);
         mPowerUsageFeatureProvider = FeatureFactory.getFactory(
                 context).getPowerUsageFeatureProvider(context);
         mAppOpsManager = context.getSystemService(AppOpsManager.class);
+        mUserManager = context.getSystemService(UserManager.class);
     }
 
     @Override
@@ -51,7 +54,7 @@ public class BatteryManagerPreferenceController extends BasePreferenceController
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        final int num = BatteryTipUtils.getRestrictedAppsList(mAppOpsManager).size();
+        final int num = BatteryTipUtils.getRestrictedAppsList(mAppOpsManager, mUserManager).size();
         final String setting = mPowerUsageFeatureProvider.isSmartBatterySupported()
                 ? Settings.Global.APP_STANDBY_ENABLED
                 : Settings.Global.APP_AUTO_RESTRICTION_ENABLED;
