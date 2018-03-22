@@ -29,11 +29,14 @@ import static org.mockito.Mockito.verify;
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.fuelgauge.batterytip.AppInfo;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -53,6 +56,7 @@ public class RestrictAppPreferenceControllerTest {
     private static final String ALLOWED_PACKAGE_NAME = "com.android.allowed.package";
     private static final int RESTRICTED_UID = 222;
     private static final String RESTRICTED_PACKAGE_NAME = "com.android.restricted.package";
+    private static final int OTHER_USER_UID = UserHandle.PER_USER_RANGE + RESTRICTED_UID;
 
     @Mock
     private AppOpsManager mAppOpsManager;
@@ -61,9 +65,13 @@ public class RestrictAppPreferenceControllerTest {
     @Mock
     private AppOpsManager.PackageOps mAllowedPackageOps;
     @Mock
+    private AppOpsManager.PackageOps mOtherUserPackageOps;
+    @Mock
     private SettingsActivity mSettingsActivity;
     @Mock
     private InstrumentedPreferenceFragment mFragment;
+    @Mock
+    private UserManager mUserManager;
     private List<AppOpsManager.PackageOps> mPackageOpsList;
     private RestrictAppPreferenceController mRestrictAppPreferenceController;
     private Preference mPreference;
@@ -87,15 +95,23 @@ public class RestrictAppPreferenceControllerTest {
         doReturn(RESTRICTED_UID).when(mRestrictedPackageOps).getUid();
         doReturn(RESTRICTED_PACKAGE_NAME).when(mRestrictedPackageOps).getPackageName();
         doReturn(restrictedOps).when(mRestrictedPackageOps).getOps();
+        doReturn(OTHER_USER_UID).when(mOtherUserPackageOps).getUid();
+        doReturn(RESTRICTED_PACKAGE_NAME).when(mOtherUserPackageOps).getPackageName();
+        doReturn(restrictedOps).when(mOtherUserPackageOps).getOps();
 
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mAppOpsManager).when(mContext).getSystemService(Context.APP_OPS_SERVICE);
+        doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
         doReturn(mContext).when(mSettingsActivity).getApplicationContext();
         mRestrictAppPreferenceController =
                 new RestrictAppPreferenceController(mSettingsActivity, mFragment);
         mPackageOpsList = new ArrayList<>();
         mPreference = new Preference(mContext);
         mPreference.setKey(mRestrictAppPreferenceController.getPreferenceKey());
+
+        final List<UserHandle> userHandles = new ArrayList<>();
+        userHandles.add(new UserHandle(0));
+        doReturn(userHandles).when(mUserManager).getUserProfiles();
     }
 
     @Test
@@ -109,15 +125,33 @@ public class RestrictAppPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_twoRestrictApps_showCorrectSummary() {
+    public void testUpdateState_twoRestrictedAppsForPrimaryUser_showCorrectSummary() {
         mPackageOpsList.add(mRestrictedPackageOps);
         mPackageOpsList.add(mRestrictedPackageOps);
         mPackageOpsList.add(mAllowedPackageOps);
+        mPackageOpsList.add(mOtherUserPackageOps);
         doReturn(mPackageOpsList).when(mAppOpsManager).getPackagesForOps(any());
 
         mRestrictAppPreferenceController.updateState(mPreference);
 
         assertThat(mPreference.getSummary()).isEqualTo("2 apps");
+    }
+
+    @Test
+    public void testUpdateState_oneRestrictedAppForTwoUsers_showSummaryAndContainCorrectApp() {
+        // Two packageOps share same package name but different uid.
+        mPackageOpsList.add(mRestrictedPackageOps);
+        mPackageOpsList.add(mOtherUserPackageOps);
+        doReturn(mPackageOpsList).when(mAppOpsManager).getPackagesForOps(any());
+
+        mRestrictAppPreferenceController.updateState(mPreference);
+
+        assertThat(mPreference.getSummary()).isEqualTo("1 app");
+        assertThat(mRestrictAppPreferenceController.mAppInfos).containsExactly(
+                new AppInfo.Builder()
+                        .setUid(RESTRICTED_UID)
+                        .setPackageName(RESTRICTED_PACKAGE_NAME)
+                        .build());
     }
 
     @Test
