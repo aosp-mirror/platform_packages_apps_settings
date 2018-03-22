@@ -121,8 +121,8 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
             ConfirmLockPassword activity = (ConfirmLockPassword) getActivity();
             View view = inflater.inflate(
-                    activity.getConfirmCredentialTheme() == ConfirmCredentialTheme.INTERNAL
-                            ? R.layout.confirm_lock_password_internal
+                    activity.getConfirmCredentialTheme() == ConfirmCredentialTheme.NORMAL
+                            ? R.layout.confirm_lock_password_normal
                             : R.layout.confirm_lock_password,
                     container,
                     false);
