@@ -58,7 +58,8 @@ public class ConnectedUsbDeviceUpdaterTest {
         mContext = RuntimeEnvironment.application;
         when(mFragment.getContext()).thenReturn(mContext);
         mDeviceUpdater =
-            new ConnectedUsbDeviceUpdater(mFragment, mDevicePreferenceCallback, mUsbBackend);
+                new ConnectedUsbDeviceUpdater(mContext, mFragment, mDevicePreferenceCallback,
+                        mUsbBackend);
         mDeviceUpdater.mUsbReceiver = mUsbReceiver;
     }
 

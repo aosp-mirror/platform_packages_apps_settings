@@ -1584,7 +1584,7 @@
     <!-- Bluetooth settings: The sub heading for devices which have already been paired with this device. [CHAR LIMIT=40] -->
     <string name="bluetooth_preference_paired_devices">Paired devices</string>
     <!-- Bluetooth settings: The sub heading for available devices during and after scanning. [CHAR LIMIT=40] -->
-    <string name="bluetooth_preference_found_devices">Available devices</string>
+    <string name="bluetooth_preference_found_media_devices">Available media devices</string>
     <!-- Bluetooth settings: The message displayed if no Bluetooth devices were found. [CHAR LIMIT=40] -->
     <string name="bluetooth_preference_no_found_devices">No devices available</string>
     <!-- Bluetooth settings.  Context menu item for a device.  Action will connect to all profiles on the device. -->
@@ -2487,6 +2487,8 @@
     <string name="auto_brightness_very_high_summary">Increased battery usage</string>
     <!-- Adaptive brightness settings screen, disclaimer that explains in more detail about how adaptive brightness works [CHAR LIMIT=150] -->
     <string name="auto_brightness_disclaimer">Optimize brightness level for available light. When this feature is on, you can still adjust brightness temporarily.</string>
+    <!-- Description about the feature adaptive brightness -->
+    <string name="auto_brightness_description">Your screen brightness will automatically adjust to your environment and activities. You can move the slider manually to help adaptive brightness learn your preferences.</string>
 
     <!-- Night display screen, setting option name to enable night display (renamed "Night Light" with title caps). [CHAR LIMIT=30] -->
     <string name="night_display_title">Night Light</string>
@@ -4191,7 +4193,7 @@
     <!-- On Languages & input settings screen, heading. Inside the "Languages & input settings" screen, this is the header for settings that relate to game controller devices. [CHAR LIMIT=40] -->
     <string name="game_controller_settings_category">Game Controller</string>
     <!-- On Languages & input settings screen, setting title.  Setting to redirect vibration to input devices. [CHAR LIMIT=35] -->
-    <string name="vibrate_input_devices">Redirect vibrator</string>
+    <string name="vibrate_input_devices">Redirect vibration</string>
     <!-- On Languages & input settings screen, setting summary.  Setting to redirect vibration to input devices. [CHAR LIMIT=100] -->
     <string name="vibrate_input_devices_summary">Send vibration to game controller when connected</string>
 
@@ -4698,6 +4700,9 @@
 
     <!-- Template for the summary of a print job. [CHAR LIMIT=25] -->
     <string name="print_job_summary"><xliff:g id="printer">%1$s</xliff:g>\n<xliff:g id="time">%2$s</xliff:g></string>
+
+    <!-- Template for the label for a configuring print job (i.e. the user is currently selecting the paper size and printer to use). [CHAR LIMIT=25] -->
+    <string name="print_configuring_state_title_template" >Configuring <xliff:g id="print_job_name" example="foo.jpg">%1$s</xliff:g></string>
 
     <!-- Template for the label of the state for a ongoing print job. [CHAR LIMIT=25] -->
     <string name="print_printing_state_title_template">Printing <xliff:g id="print_job_name" example="foo.jpg">%1$s</xliff:g></string>
@@ -5209,6 +5214,9 @@
 
     <!-- Battery saver: Label for seekbar to change battery saver threshold [CHAR_LIMIT=40] -->
     <string name="battery_saver_seekbar_title">Turn on at <xliff:g id="percent">%1$s</xliff:g></string>
+
+    <!-- Battery saver: Placeholder label for seekbar to change battery saver threshold [CHAR_LIMIT=40] -->
+    <string name="battery_saver_seekbar_title_placeholder">Turn on</string>
 
     <!-- Used in the Battery Saver settings screen to control turning on/off the feature entirely -->
     <string name="battery_saver_master_switch_title">Use Battery Saver</string>
@@ -8820,10 +8828,16 @@
     <string name="billing_cycle_less_than_one_day_left">Less than 1 day left</string>
 
     <!-- Informational text about carrier and update time [CHAR LIMIT=30] -->
-    <string name="carrier_and_update_text">Updated by <xliff:g name="carrier" example="T-mobile">%1$s</xliff:g> <xliff:g name="time" example="3m">%2$s</xliff:g></string>
+    <string name="carrier_and_update_text">Updated by <xliff:g name="carrier" example="T-mobile">^1</xliff:g> <xliff:g name="time" example="3m">^2</xliff:g> ago</string>
 
-    <!-- Informational text about update time only, without carrier [CHAR LIMIT=30] -->
-    <string name="no_carrier_update_text">Updated <xliff:g name="time" example="3m">%1$s</xliff:g></string>
+    <!-- Informational text about update time only, without carrier. First argument intentionally skipped. [CHAR LIMIT=30] -->
+    <string name="no_carrier_update_text">Updated <xliff:g name="time" example="3m">^2</xliff:g> ago</string>
+
+    <!-- Informational text about a recent carrier and update time [CHAR LIMIT=30] -->
+    <string name="carrier_and_update_now_text">Updated by <xliff:g name="carrier" example="T-mobile">^1</xliff:g> just now</string>
+
+    <!-- Informational text about recent update time only, without carrier [CHAR LIMIT=30] -->
+    <string name="no_carrier_update_now_text">Updated just now</string>
 
     <!-- Button to launch external data plan app [CHAR LIMIT=30] -->
     <string name="launch_mdp_app_text">View plan</string>
@@ -9560,5 +9574,8 @@
     <string name="battery_suggestion_title" product="default" >Improve phone\'s battery life</string>
     <!--  Summary for battery Suggestion. [CHAR LIMIT=55] -->
     <string name="battery_suggestion_summary"></string>
+
+    <!-- Title for detail page of wifi network [CHAR LIMIT=30] -->
+    <string name="pref_title_network_details">Network details</string>
 
 </resources>

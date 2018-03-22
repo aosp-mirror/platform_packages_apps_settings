@@ -16,14 +16,13 @@
 
 package com.android.settings.fuelgauge;
 
-import android.content.Context;
+import static android.provider.Settings.EXTRA_BATTERY_SAVER_MODE_ENABLED;
+
 import android.content.Intent;
-import android.os.PowerManager;
 import android.util.Log;
 
 import com.android.settings.utils.VoiceSettingsActivity;
-
-import static android.provider.Settings.EXTRA_BATTERY_SAVER_MODE_ENABLED;
+import com.android.settingslib.fuelgauge.BatterySaverUtils;
 
 /**
  * Activity for modifying the {@link android.os.PowerManager} power save mode
@@ -35,9 +34,9 @@ public class BatterySaverModeVoiceActivity extends VoiceSettingsActivity {
     @Override
     protected boolean onVoiceSettingInteraction(Intent intent) {
         if (intent.hasExtra(EXTRA_BATTERY_SAVER_MODE_ENABLED)) {
-            PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
-            if (powerManager.setPowerSaveMode(
-                    intent.getBooleanExtra(EXTRA_BATTERY_SAVER_MODE_ENABLED, false))) {
+            if (BatterySaverUtils.setPowerSaveMode(this,
+                    intent.getBooleanExtra(EXTRA_BATTERY_SAVER_MODE_ENABLED, false),
+                    /*needFirstTimeWarning=*/ true)) {
                 notifySuccess(null);
             } else {
                 Log.v(TAG, "Unable to set power mode");

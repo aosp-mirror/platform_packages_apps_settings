@@ -19,7 +19,7 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/tether_settings_title_all">
 
-    <com.android.settings.widget.MasterSwitchPreference
+    <Preference
         android:key="wifi_tether"
         android:title="@string/wifi_hotspot_checkbox_text"
         android:summary="@string/summary_two_lines_placeholder"

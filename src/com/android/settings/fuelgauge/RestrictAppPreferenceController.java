@@ -19,6 +19,8 @@ package com.android.settings.fuelgauge;
 
 import android.app.AppOpsManager;
 import android.content.Context;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 
@@ -38,14 +40,17 @@ public class RestrictAppPreferenceController extends BasePreferenceController {
     @VisibleForTesting
     static final String KEY_RESTRICT_APP = "restricted_app";
 
+    @VisibleForTesting
+    List<AppInfo> mAppInfos;
     private AppOpsManager mAppOpsManager;
-    private List<AppInfo> mAppInfos;
     private SettingsActivity mSettingsActivity;
     private InstrumentedPreferenceFragment mPreferenceFragment;
+    private UserManager mUserManager;
 
     public RestrictAppPreferenceController(Context context) {
         super(context, KEY_RESTRICT_APP);
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
+        mUserManager = context.getSystemService(UserManager.class);
     }
 
     public RestrictAppPreferenceController(SettingsActivity settingsActivity,
@@ -64,7 +69,7 @@ public class RestrictAppPreferenceController extends BasePreferenceController {
     public void updateState(Preference preference) {
         super.updateState(preference);
 
-        mAppInfos = BatteryTipUtils.getRestrictedAppsList(mAppOpsManager);
+        mAppInfos = BatteryTipUtils.getRestrictedAppsList(mAppOpsManager, mUserManager);
 
         final int num = mAppInfos.size();
         // Enable the preference if some apps already been restricted, otherwise disable it

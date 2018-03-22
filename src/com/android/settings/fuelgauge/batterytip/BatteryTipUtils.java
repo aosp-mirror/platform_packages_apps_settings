@@ -21,6 +21,8 @@ import android.app.PendingIntent;
 import android.app.StatsManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.support.annotation.NonNull;
 
 import com.android.internal.util.CollectionUtils;
@@ -49,7 +51,9 @@ public class BatteryTipUtils {
      * Get a list of restricted apps with {@link AppOpsManager#OP_RUN_ANY_IN_BACKGROUND}
      */
     @NonNull
-    public static List<AppInfo> getRestrictedAppsList(AppOpsManager appOpsManager) {
+    public static List<AppInfo> getRestrictedAppsList(AppOpsManager appOpsManager,
+            UserManager userManager) {
+        final List<UserHandle> userHandles = userManager.getUserProfiles();
         final List<AppOpsManager.PackageOps> packageOpsList = appOpsManager.getPackagesForOps(
                 new int[]{AppOpsManager.OP_RUN_ANY_IN_BACKGROUND});
         final List<AppInfo> appInfos = new ArrayList<>();
@@ -62,7 +66,9 @@ public class BatteryTipUtils {
                 if (entry.getOp() != AppOpsManager.OP_RUN_ANY_IN_BACKGROUND) {
                     continue;
                 }
-                if (entry.getMode() != AppOpsManager.MODE_ALLOWED) {
+                if (entry.getMode() != AppOpsManager.MODE_ALLOWED
+                        && userHandles.contains(
+                        new UserHandle(UserHandle.getUserId(packageOps.getUid())))) {
                     appInfos.add(new AppInfo.Builder()
                             .setPackageName(packageOps.getPackageName())
                             .setUid(packageOps.getUid())

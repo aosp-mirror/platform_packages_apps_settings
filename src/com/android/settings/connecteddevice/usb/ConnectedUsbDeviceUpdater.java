@@ -50,18 +50,18 @@ public class ConnectedUsbDeviceUpdater {
                 }
             };
 
-    public ConnectedUsbDeviceUpdater(DashboardFragment fragment,
+    public ConnectedUsbDeviceUpdater(Context context, DashboardFragment fragment,
             DevicePreferenceCallback devicePreferenceCallback) {
-        this(fragment, devicePreferenceCallback, new UsbBackend(fragment.getContext()));
+        this(context, fragment, devicePreferenceCallback, new UsbBackend(context));
     }
 
     @VisibleForTesting
-    ConnectedUsbDeviceUpdater(DashboardFragment fragment,
+    ConnectedUsbDeviceUpdater(Context context, DashboardFragment fragment,
             DevicePreferenceCallback devicePreferenceCallback, UsbBackend usbBackend) {
         mFragment = fragment;
         mDevicePreferenceCallback = devicePreferenceCallback;
         mUsbBackend = usbBackend;
-        mUsbReceiver = new UsbConnectionBroadcastReceiver(fragment.getContext(),
+        mUsbReceiver = new UsbConnectionBroadcastReceiver(context,
                 mUsbConnectionListener, mUsbBackend);
     }
 

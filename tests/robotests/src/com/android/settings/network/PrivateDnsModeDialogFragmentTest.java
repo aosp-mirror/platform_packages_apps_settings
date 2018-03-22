@@ -29,14 +29,17 @@ import android.widget.Button;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowHelpUtils;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(shadows = ShadowHelpUtils.class)
 public class PrivateDnsModeDialogFragmentTest {
 
     private static final String HOST_NAME = "192.168.1.1";

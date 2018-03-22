@@ -41,12 +41,15 @@ import android.view.MenuItem;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.net.DataUsageController;
 
 import java.util.ArrayList;
@@ -104,18 +107,10 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
             removePreference(KEY_RESTRICT_BACKGROUND);
         }
         if (hasMobileData) {
-            List<SubscriptionInfo> subscriptions =
-                    services.mSubscriptionManager.getActiveSubscriptionInfoList();
-            if (subscriptions == null || subscriptions.size() == 0) {
-                addMobileSection(defaultSubId);
-            }
-            for (int i = 0; subscriptions != null && i < subscriptions.size(); i++) {
-                SubscriptionInfo subInfo = subscriptions.get(i);
-                if (subscriptions.size() > 1) {
-                    addMobileSection(subInfo.getSubscriptionId(), subInfo);
-                } else {
-                    addMobileSection(subInfo.getSubscriptionId());
-                }
+            SubscriptionInfo subInfo
+                    = services.mSubscriptionManager.getDefaultDataSubscriptionInfo();
+            if (subInfo != null) {
+                addMobileSection(subInfo.getSubscriptionId());
             }
         }
         boolean hasWifiRadio = DataUsageUtils.hasWifiRadio(context);
@@ -163,10 +158,12 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        final Activity activity = getActivity();
         final ArrayList<AbstractPreferenceController> controllers = new ArrayList<>();
         mSummaryController =
-                new DataUsageSummaryPreferenceController(context);
+                new DataUsageSummaryPreferenceController(context, this, activity);
         controllers.add(mSummaryController);
+        getLifecycle().addObserver(mSummaryController);
         return controllers;
     }
 
@@ -254,7 +251,10 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
     private void updateState() {
         PreferenceScreen screen = getPreferenceScreen();
         for (int i = 1; i < screen.getPreferenceCount(); i++) {
-            ((TemplatePreferenceCategory) screen.getPreference(i)).pushTemplates(services);
+          Preference currentPreference = screen.getPreference(i);
+          if (currentPreference instanceof TemplatePreferenceCategory) {
+            ((TemplatePreferenceCategory) currentPreference).pushTemplates(services);
+          }
         }
     }
 

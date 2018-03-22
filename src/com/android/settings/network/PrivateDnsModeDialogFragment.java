@@ -22,7 +22,6 @@ import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_PROVIDER_HOSTNAME
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.FragmentManager;
-import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -33,7 +32,6 @@ import android.support.annotation.VisibleForTesting;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -58,7 +56,7 @@ public class PrivateDnsModeDialogFragment extends InstrumentedDialogFragment imp
 
     public static final String ANNOTATION_URL = "url";
 
-    private static final String TAG = "PrivateDnsModeDialogFragment";
+    private static final String TAG = "PrivateDnsModeDialog";
     // DNS_MODE -> RadioButton id
     private static final Map<String, Integer> PRIVATE_DNS_MAP;
 
@@ -82,21 +80,6 @@ public class PrivateDnsModeDialogFragment extends InstrumentedDialogFragment imp
     Button mSaveButton;
     @VisibleForTesting
     String mMode;
-
-    private final AnnotationSpan.LinkInfo mUrlLinkInfo = new AnnotationSpan.LinkInfo(
-            ANNOTATION_URL, (widget) -> {
-        final Context context = widget.getContext();
-        final Intent intent = HelpUtils.getHelpIntent(context,
-                getString(R.string.help_uri_private_dns),
-                context.getClass().getName());
-        if (intent != null) {
-            try {
-                widget.startActivityForResult(intent, 0);
-            } catch (ActivityNotFoundException e) {
-                Log.w(TAG, "Activity was not found for intent, " + intent.toString());
-            }
-        }
-    });
 
     public static void show(FragmentManager fragmentManager) {
         if (fragmentManager.findFragmentByTag(TAG) == null) {
@@ -139,8 +122,15 @@ public class PrivateDnsModeDialogFragment extends InstrumentedDialogFragment imp
 
         final TextView helpTextView = view.findViewById(R.id.private_dns_help_info);
         helpTextView.setMovementMethod(LinkMovementMethod.getInstance());
-        helpTextView.setText(AnnotationSpan.linkify(
-                context.getText(R.string.private_dns_help_message), mUrlLinkInfo));
+        final Intent helpIntent = HelpUtils.getHelpIntent(context,
+                context.getString(R.string.help_uri_private_dns),
+                context.getClass().getName());
+        final AnnotationSpan.LinkInfo linkInfo = new AnnotationSpan.LinkInfo(context,
+                ANNOTATION_URL, helpIntent);
+        if (linkInfo.isActionable()) {
+            helpTextView.setText(AnnotationSpan.linkify(
+                    context.getText(R.string.private_dns_help_message), linkInfo));
+        }
 
         return view;
     }
