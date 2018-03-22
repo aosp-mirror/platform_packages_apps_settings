@@ -44,7 +44,8 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="ambient_display_category_notification">
+        android:key="ambient_display_category_notification"
+        android:layout="@layout/preference_category_no_label">
 
         <SwitchPreference
             android:key="ambient_display_notification"
