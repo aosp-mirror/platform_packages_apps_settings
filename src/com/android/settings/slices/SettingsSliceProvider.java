@@ -74,9 +74,21 @@ public class SettingsSliceProvider extends SliceProvider {
     public static final String ACTION_WIFI_CHANGED =
             "com.android.settings.slice.action.WIFI_CHANGED";
 
+    /**
+     * Action passed for changes to Toggle Slices.
+     */
     public static final String ACTION_TOGGLE_CHANGED =
             "com.android.settings.slice.action.TOGGLE_CHANGED";
 
+    /**
+     * Action passed for changes to Slider Slices.
+     */
+    public static final String ACTION_SLIDER_CHANGED =
+            "com.android.settings.slice.action.SLIDER_CHANGED";
+
+    /**
+     * Intent Extra passed for the key identifying the Setting Slice.
+     */
     public static final String EXTRA_SLICE_KEY = "com.android.settings.slice.extra.key";
 
     // TODO -- Associate slice URI with search result instead of separate hardcoded thing
