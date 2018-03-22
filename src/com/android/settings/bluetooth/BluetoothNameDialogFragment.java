@@ -31,6 +31,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -89,8 +90,15 @@ abstract class BluetoothNameDialogFragment extends InstrumentedDialogFragment
                 })
                 .setNegativeButton(android.R.string.cancel, null);
         mAlertDialog = builder.create();
-        mAlertDialog.getWindow().setSoftInputMode(
-                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        mAlertDialog.setOnShowListener(d -> {
+            if (mDeviceNameView != null && mDeviceNameView.requestFocus()) {
+                InputMethodManager imm = (InputMethodManager) getContext().getSystemService(
+                        Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.showSoftInput(mDeviceNameView, InputMethodManager.SHOW_IMPLICIT);
+                }
+            }
+        });
 
         return mAlertDialog;
     }
