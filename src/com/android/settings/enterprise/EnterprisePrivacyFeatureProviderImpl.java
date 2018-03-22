@@ -244,7 +244,8 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
 
         @Override
         public void onClick(View widget) {
-            mContext.startActivity(new Intent(Settings.ACTION_ENTERPRISE_PRIVACY_SETTINGS));
+            mContext.startActivity(new Intent(Settings.ACTION_ENTERPRISE_PRIVACY_SETTINGS)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
         }
 
         @Override
