@@ -8825,10 +8825,16 @@
     <string name="billing_cycle_less_than_one_day_left">Less than 1 day left</string>
 
     <!-- Informational text about carrier and update time [CHAR LIMIT=30] -->
-    <string name="carrier_and_update_text">Updated by <xliff:g name="carrier" example="T-mobile">%1$s</xliff:g> <xliff:g name="time" example="3m">%2$s</xliff:g></string>
+    <string name="carrier_and_update_text">Updated by <xliff:g name="carrier" example="T-mobile">^1</xliff:g> <xliff:g name="time" example="3m">^2</xliff:g> ago</string>
 
-    <!-- Informational text about update time only, without carrier [CHAR LIMIT=30] -->
-    <string name="no_carrier_update_text">Updated <xliff:g name="time" example="3m">%1$s</xliff:g></string>
+    <!-- Informational text about update time only, without carrier. First argument intentionally skipped. [CHAR LIMIT=30] -->
+    <string name="no_carrier_update_text">Updated <xliff:g name="time" example="3m">^2</xliff:g> ago</string>
+
+    <!-- Informational text about a recent carrier and update time [CHAR LIMIT=30] -->
+    <string name="carrier_and_update_now_text">Updated by <xliff:g name="carrier" example="T-mobile">^1</xliff:g> just now</string>
+
+    <!-- Informational text about recent update time only, without carrier [CHAR LIMIT=30] -->
+    <string name="no_carrier_update_now_text">Updated just now</string>
 
     <!-- Button to launch external data plan app [CHAR LIMIT=30] -->
     <string name="launch_mdp_app_text">View plan</string>
