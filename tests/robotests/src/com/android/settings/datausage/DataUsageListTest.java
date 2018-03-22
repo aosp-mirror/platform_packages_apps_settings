@@ -16,12 +16,19 @@
 
 package com.android.settings.datausage;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.net.NetworkTemplate;
+import android.os.Bundle;
+import android.provider.Settings;
 
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -62,10 +69,38 @@ public class DataUsageListTest {
         mDataUsageList.onAttach(mContext);
         mDataUsageList.onResume();
 
-        verify(mListener).setListener(true, 0, mContext);
+        verify(mListener).setListener(true, mDataUsageList.mSubId, mContext);
 
         mDataUsageList.onPause();
 
-        verify(mListener).setListener(false, 0, mContext);
+        verify(mListener).setListener(false, mDataUsageList.mSubId, mContext);
+    }
+
+    @Test
+    public void processArgument_shouldGetTemplateFromArgument() {
+        final Bundle args = new Bundle();
+        args.putParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE, mock(NetworkTemplate.class));
+        args.putInt(DataUsageList.EXTRA_SUB_ID, 3);
+        mDataUsageList.setArguments(args);
+
+        mDataUsageList.processArgument();
+
+        assertThat(mDataUsageList.mTemplate).isNotNull();
+        assertThat(mDataUsageList.mSubId).isEqualTo(3);
+    }
+
+    @Test
+    public void processArgument_fromIntent_shouldGetTemplateFromIntent() {
+        final Activity activity = mock(Activity.class);
+        final Intent intent = new Intent();
+        intent.putExtra(Settings.EXTRA_NETWORK_TEMPLATE, mock(NetworkTemplate.class));
+        intent.putExtra(Settings.EXTRA_SUB_ID, 3);
+        when(activity.getIntent()).thenReturn(intent);
+        doReturn(activity).when(mDataUsageList).getActivity();
+
+        mDataUsageList.processArgument();
+
+        assertThat(mDataUsageList.mTemplate).isNotNull();
+        assertThat(mDataUsageList.mSubId).isEqualTo(3);
     }
 }
