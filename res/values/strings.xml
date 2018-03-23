@@ -3820,6 +3820,10 @@
     <string name="sort_order_alpha">Sort by name</string>
     <!-- Manage applications screen, menu item. Sorts all of the apps in the list based on their file size.  This is used to uninstall when space is getting low. -->
     <string name="sort_order_size">Sort by size</string>
+    <!-- Manage applications screen, menu item. Sorts all of the apps in the list based on how recently they sent notifications.-->
+    <string name="sort_order_recent_notification">Most recent</string>
+    <!-- Manage applications screen, menu item. Sorts all of the apps in the list based on how often they send notifications. -->
+    <string name="sort_order_frequent_notification">Most frequent</string>
     <!-- [CHAR LIMIT=25] Manage applications screen, menu item.  Show running services. -->
     <string name="show_running_services">Show running services</string>
     <!-- [CHAR LIMIT=25] Manage applications screen, menu item.  Show background cached processes. -->
@@ -7309,6 +7313,13 @@
 
     <!-- Default Apps > Default notification assistant -->
     <string name="default_notification_assistant">Notification assistant</string>
+
+    <!-- app summary of notification app list screen [CHAR LIMIT=100] -->
+    <string name="notifications_sent_daily">~<xliff:g id="number">%1$s</xliff:g> sent daily</string>
+    <!-- app summary of notification app list screen [CHAR LIMIT=100] -->
+    <string name="notifications_sent_weekly">~<xliff:g id="number">%1$s</xliff:g> sent weekly</string>
+    <!-- app summary of notification app list screen [CHAR LIMIT=100] -->
+    <string name="notifications_sent_never">Never</string>
 
     <!-- Sound & notification > Advanced section: Title for managing notification listeners option. [CHAR LIMIT=30] -->
     <string name="manage_notification_access_title">Notification access</string>

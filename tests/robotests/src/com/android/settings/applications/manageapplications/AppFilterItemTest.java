@@ -16,7 +16,6 @@
 
 package com.android.settings.applications.manageapplications;
 
-import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_BLOCKED;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_ENABLED;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_USAGE_ACCESS;
 import static com.google.common.truth.Truth.assertThat;
@@ -80,7 +79,7 @@ public class AppFilterItemTest {
     @Test
     public void hash_differentItem_differentHash() {
         final AppFilterItem item = AppFilterRegistry.getInstance().get(FILTER_APPS_USAGE_ACCESS);
-        final AppFilterItem item2 = AppFilterRegistry.getInstance().get(FILTER_APPS_BLOCKED);
+        final AppFilterItem item2 = AppFilterRegistry.getInstance().get(FILTER_APPS_ENABLED);
 
         assertThat(item.hashCode()).isNotEqualTo(item2.hashCode());
     }
