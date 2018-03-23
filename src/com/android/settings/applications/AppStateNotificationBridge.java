@@ -15,70 +15,191 @@
  */
 package com.android.settings.applications;
 
-import android.app.Notification;
-import android.app.NotificationManager;
+import android.app.usage.UsageEvents;
+import android.app.usage.UsageStatsManager;
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.os.UserHandle;
-import android.service.notification.NotificationListenerService;
+import android.text.format.DateUtils;
+import android.util.ArrayMap;
 
-import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.notification.NotificationBackend;
-import com.android.settings.notification.NotificationBackend.AppRow;
+import com.android.settings.R;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
+import com.android.settingslib.utils.StringUtil;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Map;
 
 /**
- * Connects the info provided by ApplicationsState and the NotificationBackend.
+ * Connects the info provided by ApplicationsState and UsageStatsManager.
  * Also provides app filters that can use the notification data.
  */
 public class AppStateNotificationBridge extends AppStateBaseBridge {
 
-    private final NotificationBackend mNotifBackend;
-    private final PackageManager mPm;
-    private final Context mContext;
+    private UsageStatsManager mUsageStatsManager;
+    private static final int DAYS_TO_CHECK = 7;
 
-    public AppStateNotificationBridge(Context context, ApplicationsState appState,
-            Callback callback, NotificationBackend notifBackend) {
+    public AppStateNotificationBridge(ApplicationsState appState,
+            Callback callback, UsageStatsManager usageStatsManager) {
         super(appState, callback);
-        mContext = context;
-        mPm = mContext.getPackageManager();
-        mNotifBackend = notifBackend;
+        mUsageStatsManager = usageStatsManager;
     }
 
     @Override
     protected void loadAllExtraInfo() {
         ArrayList<AppEntry> apps = mAppSession.getAllApps();
-        final int N = apps.size();
-        for (int i = 0; i < N; i++) {
-            AppEntry app = apps.get(i);
-            app.extraInfo = mNotifBackend.loadAppRow(mContext, mPm, app.info);
+        if (apps == null) return;
+
+        final Map<String, NotificationsSentState> map = getAggregatedUsageEvents();
+        for (AppEntry entry : apps) {
+            NotificationsSentState stats = map.get(entry.info.packageName);
+            calculateAvgSentCounts(stats);
+            entry.extraInfo = stats;
         }
     }
 
     @Override
-    protected void updateExtraInfo(AppEntry app, String pkg, int uid) {
-        app.extraInfo = mNotifBackend.loadAppRow(mContext, mPm, app.info);
+    protected void updateExtraInfo(AppEntry entry, String pkg, int uid) {
+        Map<String, NotificationsSentState> map = getAggregatedUsageEvents();
+        NotificationsSentState stats = map.get(entry.info.packageName);
+        calculateAvgSentCounts(stats);
+        entry.extraInfo = stats;
     }
 
-    public static final AppFilter FILTER_APP_NOTIFICATION_BLOCKED = new AppFilter() {
+    public static CharSequence getSummary(Context context, NotificationsSentState state,
+            boolean sortByRecency) {
+        if (sortByRecency) {
+            if (state.lastSent == 0) {
+                return context.getString(R.string.notifications_sent_never);
+            }
+            return StringUtil.formatRelativeTime(
+                    context, System.currentTimeMillis() - state.lastSent, true);
+        } else {
+            if (state.avgSentWeekly > 0) {
+                return context.getString(R.string.notifications_sent_weekly, state.avgSentWeekly);
+            }
+            return context.getString(R.string.notifications_sent_daily, state.avgSentDaily);
+        }
+    }
+
+    private void calculateAvgSentCounts(NotificationsSentState stats) {
+        if (stats != null) {
+            stats.avgSentDaily = Math.round((float) stats.sentCount / DAYS_TO_CHECK);
+            if (stats.sentCount < DAYS_TO_CHECK) {
+                stats.avgSentWeekly = stats.sentCount;
+            }
+        }
+    }
+
+    protected Map<String, NotificationsSentState> getAggregatedUsageEvents() {
+        ArrayMap<String, NotificationsSentState> aggregatedStats = new ArrayMap<>();
+
+        long now = System.currentTimeMillis();
+        long startTime = now - (DateUtils.DAY_IN_MILLIS * DAYS_TO_CHECK);
+        UsageEvents events = mUsageStatsManager.queryEvents(startTime, now);
+        if (events != null) {
+            UsageEvents.Event event = new UsageEvents.Event();
+            while (events.hasNextEvent()) {
+                events.getNextEvent(event);
+                NotificationsSentState stats = aggregatedStats.get(event.getPackageName());
+                if (stats == null) {
+                    stats = new NotificationsSentState();
+                    aggregatedStats.put(event.getPackageName(), stats);
+                }
+
+                if (event.getEventType() == UsageEvents.Event.NOTIFICATION_INTERRUPTION) {
+                    if (event.getTimeStamp() > stats.lastSent) {
+                        stats.lastSent = event.getTimeStamp();
+                    }
+                    stats.sentCount++;
+                }
+
+            }
+        }
+        return aggregatedStats;
+    }
+
+    private static NotificationsSentState getNotificationsSentState(AppEntry entry) {
+        if (entry == null || entry.extraInfo == null) {
+            return null;
+        }
+        if (entry.extraInfo instanceof NotificationsSentState) {
+            return (NotificationsSentState) entry.extraInfo;
+        }
+        return null;
+    }
+
+    public static final AppFilter FILTER_APP_NOTIFICATION_RECENCY = new AppFilter() {
         @Override
         public void init() {
         }
 
         @Override
         public boolean filterApp(AppEntry info) {
-            if (info == null || info.extraInfo == null) {
-                return false;
-            }
-            if (info.extraInfo instanceof AppRow) {
-                AppRow row = (AppRow) info.extraInfo;
-                return row.banned;
+            NotificationsSentState state = getNotificationsSentState(info);
+            if (state != null) {
+                return state.lastSent != 0;
             }
             return false;
         }
     };
+
+    public static final AppFilter FILTER_APP_NOTIFICATION_FREQUENCY = new AppFilter() {
+        @Override
+        public void init() {
+        }
+
+        @Override
+        public boolean filterApp(AppEntry info) {
+            NotificationsSentState state = getNotificationsSentState(info);
+            if (state != null) {
+                return state.sentCount != 0;
+            }
+            return false;
+        }
+    };
+
+    public static final Comparator<AppEntry> RECENT_NOTIFICATION_COMPARATOR
+            = new Comparator<AppEntry>() {
+        @Override
+        public int compare(AppEntry object1, AppEntry object2) {
+            NotificationsSentState state1 = getNotificationsSentState(object1);
+            NotificationsSentState state2 = getNotificationsSentState(object2);
+            if (state1 == null && state2 != null) return -1;
+            if (state1 != null && state2 == null) return 1;
+            if (state1 != null && state2 != null) {
+                if (state1.lastSent < state2.lastSent) return 1;
+                if (state1.lastSent > state2.lastSent) return -1;
+            }
+            return ApplicationsState.ALPHA_COMPARATOR.compare(object1, object2);
+        }
+    };
+
+    public static final Comparator<AppEntry> FREQUENCY_NOTIFICATION_COMPARATOR
+            = new Comparator<AppEntry>() {
+        @Override
+        public int compare(AppEntry object1, AppEntry object2) {
+            NotificationsSentState state1 = getNotificationsSentState(object1);
+            NotificationsSentState state2 = getNotificationsSentState(object2);
+            if (state1 == null && state2 != null) return -1;
+            if (state1 != null && state2 == null) return 1;
+            if (state1 != null && state2 != null) {
+                if (state1.sentCount < state2.sentCount) return 1;
+                if (state1.sentCount > state2.sentCount) return -1;
+            }
+            return ApplicationsState.ALPHA_COMPARATOR.compare(object1, object2);
+        }
+    };
+
+    /**
+     * NotificationsSentState contains how often an app sends notifications and how recently it sent
+     * one.
+     */
+    public static class NotificationsSentState {
+        public int avgSentDaily = 0;
+        public int avgSentWeekly = 0;
+        public long lastSent = 0;
+        public int sentCount = 0;
+    }
 }
