@@ -27,13 +27,19 @@ import java.util.stream.Collectors;
  */
 public class FilteredCountryTimeZones {
 
+    // New timezone list and the meta data of time zone, notUsedAfter, is introduced in Android P
+    // in 2018. Only show time zone used in or after 2018.
+    private static final long MIN_USE_DATE_OF_TIMEZONE = 1514764800000L; // 1/1/2018 00:00 UTC
+
     private final CountryTimeZones mCountryTimeZones;
     private final List<String> mTimeZoneIds;
 
     public FilteredCountryTimeZones(CountryTimeZones countryTimeZones) {
         mCountryTimeZones = countryTimeZones;
         List<String> timeZoneIds = countryTimeZones.getTimeZoneMappings().stream()
-                .filter(timeZoneMapping -> timeZoneMapping.showInPicker)
+                .filter(timeZoneMapping ->
+                        timeZoneMapping.showInPicker && (timeZoneMapping.notUsedAfter == null
+                                || timeZoneMapping.notUsedAfter >= MIN_USE_DATE_OF_TIMEZONE))
                 .map(timeZoneMapping -> timeZoneMapping.timeZoneId)
                 .collect(Collectors.toList());
         mTimeZoneIds = Collections.unmodifiableList(timeZoneIds);
