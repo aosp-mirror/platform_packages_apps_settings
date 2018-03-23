@@ -109,7 +109,7 @@ public class BluetoothSwitchPreferenceController extends TogglePreferenceControl
      * Control the switch inside {@link SwitchPreference}
      */
     @VisibleForTesting
-    class SwitchController extends SwitchWidgetController implements
+    static class SwitchController extends SwitchWidgetController implements
             Preference.OnPreferenceChangeListener {
         private SwitchPreference mSwitchPreference;
 
@@ -156,7 +156,7 @@ public class BluetoothSwitchPreferenceController extends TogglePreferenceControl
 
         @Override
         public void setDisabledByAdmin(RestrictedLockUtils.EnforcedAdmin admin) {
-            mBtPreference.setEnabled(admin == null);
+            mSwitchPreference.setEnabled(admin == null);
         }
     }
 }
