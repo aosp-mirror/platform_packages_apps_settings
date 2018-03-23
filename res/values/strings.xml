@@ -6804,16 +6804,16 @@
     </string>
 
     <!--Search Keywords [CHAR LIMIT=NONE]-->
-    <string name="keywords_wifi">wifi, wi-fi, network connection</string>
+    <string name="keywords_wifi">wifi, wi-fi, network connection, internet, wireless, data, wi fi</string>
     <string name="keywords_change_wifi_state">wifi, wi-fi, toggle, control</string>
-    <string name="keywords_more_default_sms_app">text message, texting, messages, messaging</string>
+    <string name="keywords_more_default_sms_app">text message, texting, messages, messaging, default</string>
     <string name="keywords_more_mobile_networks">cellular, mobile, cell carrier, wireless, data, 4g,3g, 2g, lte</string>
     <string name="keywords_wifi_calling">wifi, wi-fi, call, calling</string>
-    <string name="keywords_home">launcher</string>
+    <string name="keywords_home">launcher, default, apps</string>
     <string name="keywords_display">screen, touchscreen</string>
-    <string name="keywords_display_brightness_level">dim screen, touchscreen, battery</string>
+    <string name="keywords_display_brightness_level">dim screen, touchscreen, battery, bright</string>
     <string name="keywords_display_auto_brightness">dim screen, touchscreen, battery</string>
-    <string name="keywords_display_night_display">dim screen, night, tint</string>
+    <string name="keywords_display_night_display">dim screen, night, tint, night shift, brightness, screen color, colour, color</string>
     <string name="keywords_display_wallpaper">background, personalize, customize display</string>
     <string name="keywords_display_font_size">text size</string>
     <string name="keywords_display_cast_screen">project, cast</string>
@@ -6824,9 +6824,9 @@
     <string name="keywords_text_to_speech_output">rate, language, default, speak, speaking, tts, accessibility, screen reader, blind</string>
     <string name="keywords_date_and_time">clock, military</string>
     <string name="keywords_network_reset">reset, restore, factory</string>
-    <string name="keywords_factory_data_reset">wipe, delete, restore, clear, remove</string>
+    <string name="keywords_factory_data_reset">wipe, delete, restore, clear, remove, factory reset</string>
     <string name="keywords_printing">printer</string>
-    <string name="keywords_sounds">speaker beep</string>
+    <string name="keywords_sounds">speaker beep, speaker, volume, mute, silence, audio, music</string>
     <string name="keywords_sounds_and_notifications_interruptions">dont don\u2019t disturb, interrupt, interruption, break</string>
     <string name="keywords_app">RAM</string>
     <string name="keywords_location">nearby, location, history, reporting</string>
@@ -6841,7 +6841,7 @@
     <string name="keywords_default_apps">apps, default</string>
     <string name="keywords_ignore_optimizations">ignore optimizations, doze, app standby</string>
     <string name="keywords_color_mode">vibrant, RGB, sRGB, color, natural, standard</string>
-    <string name="keywords_color_temperature">color temperature D65 D73 white yellow blue warm cool</string>
+    <string name="keywords_color_temperature">color, temperature, D65, D73, white, yellow, blue, warm, cool</string>
     <string name="keywords_lockscreen">slide to unlock, password, pattern, PIN</string>
     <string name="keywords_profile_challenge">work challenge, work, profile</string>
     <string name="keywords_unification">work profile, managed profile, unify, unification, work, profile</string>
@@ -6857,6 +6857,51 @@
     <string name="keywords_ambient_display_screen">Ambient display, Lock screen display</string>
     <!-- Search keyword for fingerprint settings. -->
     <string name="keywords_fingerprint_settings">fingerprint</string>
+
+    <!-- List of synonyms for the auto rotate (rotate the virtual display when the device rotates) setting, used to match in settings search [CHAR LIMIT=NONE] -->
+    <string name="keywords_auto_rotate">rotate, flip, rotation, portrait, landscape, orientation, vertical, horizontal</string>
+
+    <!-- List of synonyms for the System Update (update the operating system) setting, used to match in settings search [CHAR LIMIT=NONE] -->
+    <string name="keywords_system_update_settings">upgrade, android</string>
+
+    <!-- List of synonyms for the Do Not Disturb setting, used to match in settings search. Do Not Disturb turns of notification volume, notifications, vibrations, among other things on the device. [CHAR LIMIT=NONE] -->
+    <string name="keywords_zen_mode_settings">dnd, schedule, notifications, block, silence, vibrate, sleep, work, focus, sound, mute, day, weekday, weekend, weeknight, event</string>
+
+    <!-- List of synonyms for the display timeout (how long until the screen turns off) setting, used to match in settings search [CHAR LIMIT=NONE] -->
+    <string name="keywords_screen_timeout">screen, lock time, timeout, lockscreen</string>
+
+    <!-- List of synonyms for Storage settings (everything related to storage on the device), used to match in settings search [CHAR LIMIT=NONE] -->
+    <string name="keywords_storage_settings">memory, data, delete, clear, free, space</string>
+
+    <!-- List of synonyms for the Bluetooth setting, used to match in settings search [CHAR LIMIT=NONE] -->
+    <string name="keywords_bluetooth_settings">connected, device, headphones, headset, speaker, wireless, pair, earbuds, music, media </string>
+
+    <!-- List of synonyms for the Wallpaper picker setting, used to match in settings search [CHAR LIMIT=NONE] -->
+    <string name="keywords_wallpaper">background, screen, lockscreen, theme</string>
+
+    <!-- List of synonyms for the Default Assist and Voice input setting, used to match in settings search [CHAR LIMIT=NONE] -->
+    <string name="keywords_assist_input">default, assistant</string>
+
+    <!-- List of synonyms for the Wallpaper picker setting, used to match in settings search [CHAR LIMIT=NONE] -->
+    <string name="keywords_default_browser">default, default browser</string>
+
+    <!-- List of synonyms for the default payment app setting, used to match in settings search [CHAR LIMIT=NONE] -->
+    <string name="keywords_default_payment_app">payment, default</string>
+
+    <!-- List of synonyms for the default links setting, used to match in settings search [CHAR LIMIT=NONE] -->
+    <string name="keywords_default_links">default</string>
+
+    <!-- List of synonyms for Ambient display setting (when the screen is off), used to match in settings search [CHAR LIMIT=NONE] -->
+    <string name="keywords_ambient_display">incoming notification</string>
+
+    <!-- List of synonyms for hotspot and tethering setting (where you share your wifi with other devices), used to match in settings search [CHAR LIMIT=NONE] -->
+    <string name="keywords_hotspot_tethering">usb tether, bluetooth tether, wifi hotspot</string>
+
+    <!-- List of synonyms for touch vibration setting (where you get a haptic response for touching things on the screen), used to match in settings search [CHAR LIMIT=NONE] -->
+    <string name="keywords_touch_vibration">haptics, vibrate, screen, sensitivity</string>
+
+    <!-- List of synonyms for ring and notification vibration setting (changes whether your phone vibrates when it rings), used to match in settings search [CHAR LIMIT=NONE] -->
+    <string name="keywords_ring_vibration">haptics, vibrate, phone, call, sensitivity</string>
 
     <!-- NFC Wi-Fi pairing/setup strings-->
 
