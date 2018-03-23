@@ -24,12 +24,14 @@
     <com.android.settings.widget.AppPreference
         android:key="assist_and_voice_input"
         android:title="@string/assist_and_voice_input_title"
-        android:fragment="com.android.settings.applications.assist.ManageAssist" />
+        android:fragment="com.android.settings.applications.assist.ManageAssist"
+        settings:keywords="@string/keywords_assist_input"/>
 
     <com.android.settings.widget.AppPreference
         android:key="default_browser"
         android:title="@string/default_browser_title"
-        android:fragment="com.android.settings.applications.defaultapps.DefaultBrowserPicker">
+        android:fragment="com.android.settings.applications.defaultapps.DefaultBrowserPicker"
+        settings:keywords="@string/keywords_default_browser">
         <extra android:name="for_work" android:value="false" />
     </com.android.settings.widget.AppPreference>
 
@@ -55,7 +57,8 @@
         android:key="default_payment_app"
         android:title="@string/nfc_payment_settings_title"
         android:summary="@string/summary_placeholder"
-        android:fragment="com.android.settings.nfc.PaymentSettings" />
+        android:fragment="com.android.settings.nfc.PaymentSettings"
+        settings:keywords="@string/keywords_default_payment_app"/>
 
     <com.android.settings.widget.AppPreference
         android:key="default_emergency_app"
@@ -73,7 +76,8 @@
     <com.android.settings.widget.AppPreference
         android:key="domain_urls"
         android:title="@string/domain_urls_title"
-        android:fragment="com.android.settings.applications.ManageDomainUrls" />
+        android:fragment="com.android.settings.applications.ManageDomainUrls"
+        settings:keywords="@string/keywords_default_links"/>
 
     <com.android.settings.widget.WorkOnlyCategory
         android:key="work_app_defaults"

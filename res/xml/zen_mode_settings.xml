@@ -15,9 +15,12 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="zen_mode_settings"
-    android:title="@string/zen_mode_settings_title">
+    android:title="@string/zen_mode_settings_title"
+    settings:keywords="@string/keywords_zen_mode_settings">
 
     <!-- What to block (effects) -->
     <Preference
