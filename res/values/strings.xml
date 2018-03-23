@@ -6305,7 +6305,7 @@
     <!-- Title for add user confirmation dialog [CHAR LIMIT=30] -->
     <string name="user_add_user_title">Add new user?</string>
     <!-- Message for add user confirmation dialog - long version. [CHAR LIMIT=none] -->
-    <string name="user_add_user_message_long">You can share this device with other people by creating additional users. Each user has their own space, which they can customize with apps, wallpaper, and so on. Users can also adjust device settings like Wi\u2011Fi that affect everyone.\n\nWhen you add a new user, that person needs to set up their space.\n\nAny user can update apps for all other users.</string>
+    <string name="user_add_user_message_long">You can share this device with other people by creating additional users. Each user has their own space, which they can customize with apps, wallpaper, and so on. Users can also adjust device settings like Wi\u2011Fi that affect everyone.\n\nWhen you add a new user, that person needs to set up their space.\n\nAny user can update apps for all other users. Accessibility settings and services may not transfer to the new user.</string>
     <!-- Message for add user confirmation dialog - short version. [CHAR LIMIT=none] -->
     <string name="user_add_user_message_short">When you add a new user, that person needs to set up their space.\n\nAny user can update apps for all other users. </string>
     <!-- Title of dialog to setup a new user [CHAR LIMIT=30] -->
@@ -8642,6 +8642,27 @@
 
     <!-- Summary of condition that work mode is off [CHAR LIMIT=NONE] -->
     <string name="condition_work_summary">Apps, background sync, and other features related to your work profile are turned off.</string>
+
+    <!-- Title of condition that indicates device is muted [CHAR LIMIT=50] -->
+    <string name="condition_device_muted_title" product="tablet">Device is muted</string>
+
+    <!-- Title of condition that indicates device is muted [CHAR LIMIT=50] -->
+    <string name="condition_device_muted_title" product="default">Phone is muted</string>
+
+    <!-- Summary of condition that indicates device is muted -->
+    <string name="condition_device_muted_summary">Calls and notifications will be muted</string>
+
+    <!-- Title of condition that indicates device is set to vibrate [CHAR LIMIT=50] -->
+    <string name="condition_device_vibrate_title" product="tablet">Device is set to vibrate</string>
+
+    <!-- Title of condition that indicates device is muted [CHAR LIMIT=50] -->
+    <string name="condition_device_vibrate_title" product="default">Phone is set to vibrate</string>
+
+    <!-- Summary of condition that indicates device is set to vibrate -->
+    <string name="condition_device_vibrate_summary" product="tablet">Calls and notifications will vibrate device</string>
+
+    <!-- Summary of condition that indicates device is set to vibrate -->
+    <string name="condition_device_vibrate_summary" product="default">Calls and notifications will vibrate phone</string>
 
     <!--  Night display: Title for the night display option Suggestion (renamed "Night Light" with title caps). [CHAR LIMIT=46] -->
     <string name="night_display_suggestion_title">Set Night Light schedule</string>
