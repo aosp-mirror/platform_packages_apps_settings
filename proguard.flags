@@ -1,6 +1,10 @@
 # This is a configuration file for ProGuard.
 # http://proguard.sourceforge.net/index.html#manual/usage.html
 
+# Some tests use thenThrow from Mockito which require information on
+# checked exceptions.
+-keepattributes Exceptions
+
 # Keep all Fragments in this package, which are used by reflection.
 -keep public class com.android.settings.** extends android.app.Fragment
 
