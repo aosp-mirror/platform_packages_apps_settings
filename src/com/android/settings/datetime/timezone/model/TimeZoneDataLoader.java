@@ -32,7 +32,7 @@ public class TimeZoneDataLoader extends AsyncLoader<TimeZoneData> {
     @Override
     public TimeZoneData loadInBackground() {
         // Heavy operation due to reading the underlying file
-        return new TimeZoneData();
+        return TimeZoneData.getInstance();
     }
 
     @Override
