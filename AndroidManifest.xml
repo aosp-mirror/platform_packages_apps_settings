@@ -2397,6 +2397,10 @@
             android:taskAffinity="com.android.settings"
             android:parentActivityName="Settings">
             <!-- TODO(b/70950124): add shortcut intent-filter -->
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.DATA_USAGE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter android:priority="10">
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
@@ -2412,6 +2416,10 @@
             android:icon="@drawable/ic_settings_data_usage"
             android:taskAffinity="com.android.settings"
             android:parentActivityName="Settings">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.DATA_USAGE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
