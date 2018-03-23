@@ -63,6 +63,7 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.gateway.SettingsGateway;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardSummary;
+import com.android.settings.development.DevelopmentSettingsDashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.widget.SwitchBar;
@@ -686,10 +687,10 @@ public class SettingsActivity extends SettingsDrawerActivity
 
         final boolean showDev = DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(this)
                 && !Utils.isMonkeyRunning();
-
+        final boolean isAdminOrDemo = um.isAdminUser() || um.isDemoUser();
         somethingChanged = setTileEnabled(new ComponentName(packageName,
                         Settings.DevelopmentSettingsDashboardActivity.class.getName()),
-                showDev, isAdmin)
+                showDev, isAdminOrDemo)
                 || somethingChanged;
 
         // Enable/disable backup settings depending on whether the user is admin.
@@ -724,10 +725,11 @@ public class SettingsActivity extends SettingsDrawerActivity
                     final int tileCount = category.getTilesCount();
                     for (int i = 0; i < tileCount; i++) {
                         final ComponentName component = category.getTile(i).intent.getComponent();
-
                         final String name = component.getClassName();
                         final boolean isEnabledForRestricted = ArrayUtils.contains(
-                                SettingsGateway.SETTINGS_FOR_RESTRICTED, name);
+                                SettingsGateway.SETTINGS_FOR_RESTRICTED, name) || (isAdminOrDemo
+                                && Settings.DevelopmentSettingsDashboardActivity.class.getName()
+                                .equals(name));
                         if (packageName.equals(component.getPackageName())
                                 && !isEnabledForRestricted) {
                             somethingChanged = setTileEnabled(component, false, isAdmin)
