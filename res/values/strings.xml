@@ -7864,11 +7864,13 @@
     <string name="change_storage">Change storage</string>
 
     <!-- Label for notification settings for an specific app [CHAR LIMIT=40] -->
-    <string name="notifications_label">App notifications</string>
+    <string name="notifications_label">Notifications</string>
     <!-- App notification summary with notifications enabled [CHAR LIMIT=40] -->
     <string name="notifications_enabled">On</string>
+    <!-- App notification summary with notifications enabled [CHAR LIMIT=40] -->
+    <string name="notifications_enabled_with_info">On / <xliff:g id="notifications_categories_off" example="3 categories turned off">%1$s</xliff:g> </string>
     <!-- Label for showing apps with blocked notifications in list [CHAR LIMIT=30] -->
-    <string name="notifications_disabled">Everything turned off</string>
+    <string name="notifications_disabled">Off</string>
     <!-- Label for showing apps with some blocked notifications in list [CHAR LIMIT=30] -->
     <string name="notifications_partly_blocked"><xliff:g id="count" example="1">%1$d</xliff:g> of <xliff:g id="count" example="10">%2$d</xliff:g> categories turned off</string>
     <!-- App notification summary with notifications silenced [CHAR LIMIT=40] -->
@@ -7886,6 +7888,11 @@
     <!-- App notification summary channel divider-->
     <string name="notification_summary_channel"><xliff:g id="channel_name">%1$s</xliff:g> \u2022 <xliff:g id="group_name">%2$s</xliff:g></string>
 
+    <!-- Permissions preference summary [CHAR LIMIT=40] -->
+    <plurals name="notifications_categories_off">
+        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> category turned off</item>
+        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> categories turned off</item>
+    </plurals>
 
     <!-- Permissions preference summary [CHAR LIMIT=40] -->
     <plurals name="permissions_summary">
