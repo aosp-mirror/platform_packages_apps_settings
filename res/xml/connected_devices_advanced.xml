@@ -20,14 +20,15 @@
     android:key="connected_devices_advanced_screen"
     android:title="@string/connected_device_connections_title">
 
-    <SwitchPreference
-      android:key="toggle_bluetooth_switch"
-      android:title="@string/bluetooth_settings_title"
-      android:icon="@drawable/ic_settings_bluetooth"
-      android:summary="@string/bluetooth_pref_summary"
-      android:order="-7"
-      settings:controller="com.android.settings.bluetooth.BluetoothSwitchPreferenceController"
-      settings:platform_slice="true"/>
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="toggle_bluetooth_switch"
+        android:title="@string/bluetooth_settings_title"
+        android:icon="@drawable/ic_settings_bluetooth"
+        android:summary="@string/bluetooth_pref_summary"
+        android:order="-7"
+        settings:controller="com.android.settings.bluetooth.BluetoothSwitchPreferenceController"
+        settings:userRestriction="no_bluetooth"
+        settings:platform_slice="true"/>
 
     <SwitchPreference
         android:key="toggle_nfc"
