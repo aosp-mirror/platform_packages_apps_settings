@@ -58,7 +58,7 @@ public abstract class TogglePreferenceController extends BasePreferenceControlle
 
     @Override
     public final boolean onPreferenceChange(Preference preference, Object newValue) {
-        return setChecked((Boolean) newValue);
+        return setChecked((boolean) newValue);
     }
 
     @Override

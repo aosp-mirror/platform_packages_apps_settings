@@ -16,11 +16,11 @@
 
 package com.android.settings.slices;
 
+import static com.android.settings.slices.SettingsSliceProvider.ACTION_SLIDER_CHANGED;
 import static com.android.settings.slices.SettingsSliceProvider.ACTION_TOGGLE_CHANGED;
 import static com.android.settings.slices.SettingsSliceProvider.ACTION_WIFI_CHANGED;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_KEY;
 
-import android.app.slice.Slice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -30,7 +30,12 @@ import android.os.Handler;
 import android.text.TextUtils;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.SliderPreferenceController;
 import com.android.settings.core.TogglePreferenceController;
+
+import android.app.slice.Slice;
+
+import androidx.slice.core.SliceHints;
 
 /**
  * Responds to actions performed on slices and notifies slices of updates in state changes.
@@ -50,6 +55,10 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
         switch (action) {
             case ACTION_TOGGLE_CHANGED:
                 handleToggleAction(context, key);
+                break;
+            case ACTION_SLIDER_CHANGED:
+                int newPosition = intent.getIntExtra(SliceHints.EXTRA_RANGE_VALUE, -1);
+                handleSliderAction(context, key, newPosition);
                 break;
             case ACTION_WIFI_CHANGED:
                 WifiManager wm = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
@@ -83,6 +92,33 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
         final TogglePreferenceController toggleController = (TogglePreferenceController) controller;
         final boolean currentValue = toggleController.isChecked();
         toggleController.setChecked(!currentValue);
+    }
+
+    private void handleSliderAction(Context context, String key, int newPosition) {
+        if (TextUtils.isEmpty(key)) {
+            throw new IllegalArgumentException(
+                    "No key passed to Intent for slider controller. Use extra: " + EXTRA_SLICE_KEY);
+        }
+
+        if (newPosition == -1) {
+            throw new IllegalArgumentException("Invalid position passed to Slider controller");
+        }
+
+        final BasePreferenceController controller = getPreferenceController(context, key);
+
+        if (!(controller instanceof SliderPreferenceController)) {
+            throw new IllegalArgumentException("Slider action passed for a non-slider key: " + key);
+        }
+
+        final SliderPreferenceController sliderController = (SliderPreferenceController) controller;
+        final int maxSteps = sliderController.getMaxSteps();
+        if (newPosition < 0 || newPosition > maxSteps) {
+            throw new IllegalArgumentException(
+                    "Invalid position passed to Slider controller. Expected between 0 and "
+                            + maxSteps + " but found " + newPosition);
+        }
+
+        sliderController.setSliderPosition(newPosition);
     }
 
     private BasePreferenceController getPreferenceController(Context context, String key) {

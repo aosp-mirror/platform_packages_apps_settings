@@ -18,6 +18,8 @@ package com.android.settings.slices;
 
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_KEY;
 
+import static androidx.slice.builders.ListBuilder.ICON_IMAGE;
+
 import android.app.PendingIntent;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -32,6 +34,7 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.SliderPreferenceController;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -40,6 +43,7 @@ import androidx.slice.Slice;
 import androidx.slice.builders.SliceAction;
 import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.ListBuilder.RowBuilder;
+
 
 /**
  * Utility class to build Slices objects and Preference Controllers based on the Database managed
@@ -57,28 +61,19 @@ public class SliceBuilderUtils {
      * {@param sliceData} is an inline controller.
      */
     public static Slice buildSlice(Context context, SliceData sliceData) {
-        final PendingIntent contentIntent = getContentIntent(context, sliceData);
-        final Icon icon = Icon.createWithResource(context, sliceData.getIconResource());
-        final BasePreferenceController controller = getPreferenceController(context, sliceData);
-
-        final CharSequence subtitleText = getSubtitleText(context, controller, sliceData);
-
-        final RowBuilder builder = new RowBuilder(context, sliceData.getUri())
-                .setTitle(sliceData.getTitle())
-                .setTitleItem(icon)
-                .setSubtitle(subtitleText)
-                .setPrimaryAction(new SliceAction(contentIntent, null, null));
-
         // TODO (b/71640747) Respect setting availability.
-
-        if (sliceData.getSliceType() == SliceData.SliceType.SWITCH) {
-            addToggleAction(context, builder, ((TogglePreferenceController) controller).isChecked(),
-                    sliceData.getKey());
+        final BasePreferenceController controller = getPreferenceController(context, sliceData);
+        switch (sliceData.getSliceType()) {
+            case SliceData.SliceType.INTENT:
+                return buildIntentSlice(context, sliceData, controller);
+            case SliceData.SliceType.SWITCH:
+                return buildToggleSlice(context, sliceData, controller);
+            case SliceData.SliceType.SLIDER:
+                return buildSliderSlice(context, sliceData, controller);
+            default:
+                throw new IllegalArgumentException(
+                        "Slice type passed was invalid: " + sliceData.getSliceType());
         }
-
-        return new ListBuilder(context, sliceData.getUri())
-                .addRow(builder)
-                .build();
     }
 
     /**
@@ -145,6 +140,55 @@ public class SliceBuilderUtils {
                 .build();
     }
 
+    private static Slice buildToggleSlice(Context context, SliceData sliceData,
+            BasePreferenceController controller) {
+        final PendingIntent contentIntent = getContentIntent(context, sliceData);
+        final Icon icon = Icon.createWithResource(context, sliceData.getIconResource());
+        final CharSequence subtitleText = getSubtitleText(context, controller, sliceData);
+        final TogglePreferenceController toggleController =
+                (TogglePreferenceController) controller;
+        final SliceAction sliceAction = getToggleAction(context, sliceData.getKey(),
+                toggleController.isChecked());
+
+        return new ListBuilder(context, sliceData.getUri())
+                .addRow(rowBuilder -> rowBuilder
+                        .setTitle(sliceData.getTitle())
+                        .setTitleItem(icon, ICON_IMAGE)
+                        .setSubtitle(subtitleText)
+                        .setPrimaryAction(new SliceAction(contentIntent, null, null))
+                        .addEndItem(sliceAction))
+                .build();
+    }
+
+    private static Slice buildIntentSlice(Context context, SliceData sliceData,
+            BasePreferenceController controller) {
+        final PendingIntent contentIntent = getContentIntent(context, sliceData);
+        final Icon icon = Icon.createWithResource(context, sliceData.getIconResource());
+        final CharSequence subtitleText = getSubtitleText(context, controller, sliceData);
+
+        return new ListBuilder(context, sliceData.getUri())
+                .addRow(rowBuilder -> rowBuilder
+                        .setTitle(sliceData.getTitle())
+                        .setTitleItem(icon, ICON_IMAGE)
+                        .setSubtitle(subtitleText)
+                        .setPrimaryAction(new SliceAction(contentIntent, null, null)))
+                .build();
+    }
+
+    private static Slice buildSliderSlice(Context context, SliceData sliceData,
+            BasePreferenceController controller) {
+        final SliderPreferenceController sliderController =
+                (SliderPreferenceController) controller;
+        final PendingIntent actionIntent = getSliderAction(context, sliceData.getKey());
+        return new ListBuilder(context, sliceData.getUri())
+                .addInputRange(builder -> builder
+                        .setTitle(sliceData.getTitle())
+                        .setMax(sliderController.getMaxSteps())
+                        .setValue(sliderController.getSliderPosition())
+                        .setAction(actionIntent))
+                .build();
+    }
+
     private static BasePreferenceController getPreferenceController(Context context,
             String controllerClassName, String controllerKey) {
         try {
@@ -156,11 +200,14 @@ public class SliceBuilderUtils {
         return BasePreferenceController.createInstance(context, controllerClassName, controllerKey);
     }
 
-    private static void addToggleAction(Context context, RowBuilder builder, boolean isChecked,
-            String key) {
+    private static SliceAction getToggleAction(Context context, String key, boolean isChecked) {
         PendingIntent actionIntent = getActionIntent(context,
                 SettingsSliceProvider.ACTION_TOGGLE_CHANGED, key);
-        builder.addEndItem(new SliceAction(actionIntent, null, isChecked));
+        return new SliceAction(actionIntent, null, isChecked);
+    }
+
+    private static PendingIntent getSliderAction(Context context, String key) {
+        return getActionIntent(context, SettingsSliceProvider.ACTION_SLIDER_CHANGED, key);
     }
 
     private static PendingIntent getActionIntent(Context context, String action, String key) {
