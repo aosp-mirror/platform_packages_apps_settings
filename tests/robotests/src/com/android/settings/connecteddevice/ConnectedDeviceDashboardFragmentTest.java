@@ -16,9 +16,9 @@
 package com.android.settings.connecteddevice;
 
 import static com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment
-        .KEY_CONNECTED_DEVICES;
+        .KEY_AVAILABLE_DEVICES;
 import static com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment
-        .KEY_SAVED_DEVICES;
+        .KEY_CONNECTED_DEVICES;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -78,7 +78,7 @@ public class ConnectedDeviceDashboardFragmentTest {
         final List<String> niks = ConnectedDeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
                 .getNonIndexableKeys(mContext);
 
-        assertThat(niks).containsExactly(KEY_CONNECTED_DEVICES, KEY_SAVED_DEVICES,
+        assertThat(niks).containsExactly(KEY_CONNECTED_DEVICES, KEY_AVAILABLE_DEVICES,
                 NfcPreferenceController.KEY_TOGGLE_NFC);
     }
 }

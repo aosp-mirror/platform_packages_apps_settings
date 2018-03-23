@@ -23,6 +23,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.preference.Preference;
@@ -32,7 +33,11 @@ import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.HeadsetProfile;
+import com.android.settingslib.bluetooth.A2dpProfile;
 
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,6 +59,14 @@ public class BluetoothDeviceUpdaterTest {
     private BluetoothDevice mBluetoothDevice;
     @Mock
     private SettingsActivity mSettingsActivity;
+    @Mock
+    private LocalBluetoothManager mLocalManager;
+    @Mock
+    private LocalBluetoothProfileManager mLocalBluetoothProfileManager;
+    @Mock
+    private HeadsetProfile mHeadsetProfile;
+    @Mock
+    private A2dpProfile mA2dpProfile;
 
     private Context mContext;
     private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
@@ -66,10 +79,14 @@ public class BluetoothDeviceUpdaterTest {
         mContext = RuntimeEnvironment.application;
         doReturn(mContext).when(mDashboardFragment).getContext();
         when(mCachedBluetoothDevice.getDevice()).thenReturn(mBluetoothDevice);
+        when(mLocalManager.getProfileManager()).thenReturn(mLocalBluetoothProfileManager);
+        when(mLocalBluetoothProfileManager.getHeadsetProfile()).thenReturn(mHeadsetProfile);
+        when(mLocalBluetoothProfileManager.getA2dpProfile()).thenReturn(mA2dpProfile);
 
         mPreference = new BluetoothDevicePreference(mContext, mCachedBluetoothDevice, false);
         mBluetoothDeviceUpdater =
-            new BluetoothDeviceUpdater(mDashboardFragment, mDevicePreferenceCallback, null) {
+            new BluetoothDeviceUpdater(mDashboardFragment, mDevicePreferenceCallback,
+                    mLocalManager) {
             @Override
             public boolean isFilterMatched(CachedBluetoothDevice cachedBluetoothDevice) {
                 return true;
@@ -123,5 +140,21 @@ public class BluetoothDeviceUpdaterTest {
         verify(mSettingsActivity).startActivity(intentCaptor.capture());
         assertThat(intentCaptor.getValue().getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
                 .isEqualTo(BluetoothDeviceDetailsFragment.class.getName());
+    }
+
+    @Test
+    public void isDeviceConnected_deviceConnected() {
+        doReturn(BluetoothDevice.BOND_BONDED).when(mBluetoothDevice).getBondState();
+        doReturn(true).when(mBluetoothDevice).isConnected();
+
+        assertThat(mBluetoothDeviceUpdater.isDeviceConnected(mCachedBluetoothDevice)).isTrue();
+    }
+
+    @Test
+    public void isDeviceConnected_deviceNotConnected() {
+        doReturn(BluetoothDevice.BOND_BONDED).when(mBluetoothDevice).getBondState();
+        doReturn(false).when(mBluetoothDevice).isConnected();
+
+        assertThat(mBluetoothDeviceUpdater.isDeviceConnected(mCachedBluetoothDevice)).isFalse();
     }
 }
