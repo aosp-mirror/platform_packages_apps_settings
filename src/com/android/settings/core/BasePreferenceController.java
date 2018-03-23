@@ -72,8 +72,6 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
 
     protected final String mPreferenceKey;
 
-    protected Lifecycle mLifecycle;
-
     /**
      * Instantiate a controller as specified controller type and user-defined key.
      * <p/>

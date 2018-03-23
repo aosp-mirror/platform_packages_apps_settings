@@ -37,6 +37,7 @@ import android.util.Log;
 import android.util.RecurrenceRule;
 
 import com.android.internal.util.CollectionUtils;
+import android.support.v7.widget.RecyclerView;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -63,8 +64,10 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
     private static final float RELATIVE_SIZE_LARGE = 1.25f * 1.25f;  // (1/0.8)^2
     private static final float RELATIVE_SIZE_SMALL = 1.0f / RELATIVE_SIZE_LARGE;  // 0.8^2
 
-    private final Fragment mFragment;
     private final Activity mActivity;
+    private final EntityHeaderController mEntityHeaderController;
+    private final Lifecycle mLifecycle;
+    private final DataUsageSummary mDataUsageSummary;
     private final DataUsageController mDataUsageController;
     private final DataUsageInfoController mDataInfoController;
     private final NetworkTemplate mDefaultTemplate;
@@ -96,27 +99,30 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
 
     private Intent mManageSubscriptionIntent;
 
-    public DataUsageSummaryPreferenceController(Context context, Fragment fragment,
-            Activity activity) {
-        super(context, KEY);
+    public DataUsageSummaryPreferenceController(Activity activity,
+            Lifecycle lifecycle, DataUsageSummary dataUsageSummary) {
+        super(activity, KEY);
 
-        mFragment = fragment;
         mActivity = activity;
+        mEntityHeaderController = EntityHeaderController.newInstance(activity,
+                dataUsageSummary, null);
+        mLifecycle = lifecycle;
+        mDataUsageSummary = dataUsageSummary;
 
-        final int defaultSubId = DataUsageUtils.getDefaultSubscriptionId(context);
-        mDefaultTemplate = DataUsageUtils.getDefaultTemplate(context, defaultSubId);
-        NetworkPolicyManager policyManager = NetworkPolicyManager.from(context);
+        final int defaultSubId = DataUsageUtils.getDefaultSubscriptionId(activity);
+        mDefaultTemplate = DataUsageUtils.getDefaultTemplate(activity, defaultSubId);
+        NetworkPolicyManager policyManager = NetworkPolicyManager.from(activity);
         mPolicyEditor = new NetworkPolicyEditor(policyManager);
 
-        mHasMobileData = DataUsageUtils.hasMobileData(context)
+        mHasMobileData = DataUsageUtils.hasMobileData(activity)
                 && defaultSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 
-        mDataUsageController = new DataUsageController(context);
+        mDataUsageController = new DataUsageController(activity);
         mDataInfoController = new DataUsageInfoController();
 
         if (mHasMobileData) {
             mDataUsageTemplate = R.string.cell_data_template;
-        } else if (DataUsageUtils.hasWifiRadio(context)) {
+        } else if (DataUsageUtils.hasWifiRadio(activity)) {
             mDataUsageTemplate = R.string.wifi_data_template;
         } else {
             mDataUsageTemplate = R.string.ethernet_data_template;
@@ -128,15 +134,18 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
 
     @VisibleForTesting
     DataUsageSummaryPreferenceController(
-            Context context,
             DataUsageController dataUsageController,
             DataUsageInfoController dataInfoController,
             NetworkTemplate defaultTemplate,
             NetworkPolicyEditor policyEditor,
             int dataUsageTemplate,
             boolean hasMobileData,
-            SubscriptionManager subscriptionManager) {
-        super(context, KEY);
+            SubscriptionManager subscriptionManager,
+            Activity activity,
+            Lifecycle lifecycle,
+            EntityHeaderController entityHeaderController,
+            DataUsageSummary dataUsageSummary) {
+        super(activity, KEY);
         mDataUsageController = dataUsageController;
         mDataInfoController = dataInfoController;
         mDefaultTemplate = defaultTemplate;
@@ -144,13 +153,17 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
         mDataUsageTemplate = dataUsageTemplate;
         mHasMobileData = hasMobileData;
         mSubscriptionManager = subscriptionManager;
-        mFragment = null;
-        mActivity = null;
+        mActivity = activity;
+        mLifecycle = lifecycle;
+        mEntityHeaderController = entityHeaderController;
+        mDataUsageSummary = dataUsageSummary;
     }
 
     @Override
     public void onStart() {
-        EntityHeaderController.newInstance(mActivity, mFragment, null).styleActionBar(mActivity);
+        RecyclerView view = mDataUsageSummary.getListView();
+        mEntityHeaderController.setRecyclerView(view, mLifecycle);
+        mEntityHeaderController.styleActionBar(mActivity);
     }
 
     @VisibleForTesting
