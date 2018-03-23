@@ -18,8 +18,10 @@ package com.android.settings.deviceinfo;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ResolveInfo;
 import android.os.Build;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -118,8 +120,8 @@ public class BuildNumberPreferenceController extends AbstractPreferenceControlle
         if (Utils.isMonkeyRunning()) {
             return false;
         }
-        // Don't enable developer options for secondary users.
-        if (!mUm.isAdminUser()) {
+        // Don't enable developer options for secondary non-demo users.
+        if (!(mUm.isAdminUser() || mUm.isDemoUser())) {
             mMetricsFeatureProvider.action(
                     mContext, MetricsEvent.ACTION_SETTINGS_BUILD_NUMBER_PREF);
             return false;
@@ -133,6 +135,21 @@ public class BuildNumberPreferenceController extends AbstractPreferenceControlle
         }
 
         if (mUm.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES)) {
+            if (mUm.isDemoUser()) {
+                // Route to demo device owner to lift the debugging restriction.
+                final ComponentName componentName = Utils.getDeviceOwnerComponent(mContext);
+                if (componentName != null) {
+                    final Intent requestDebugFeatures = new Intent()
+                            .setPackage(componentName.getPackageName())
+                            .setAction("com.android.settings.action.REQUEST_DEBUG_FEATURES");
+                    final ResolveInfo resolveInfo = mContext.getPackageManager().resolveActivity(
+                        requestDebugFeatures, 0);
+                    if (resolveInfo != null) {
+                        mContext.startActivity(requestDebugFeatures);
+                        return false;
+                    }
+                }
+            }
             if (mDebuggingFeaturesDisallowedAdmin != null &&
                     !mDebuggingFeaturesDisallowedBySystem) {
                 RestrictedLockUtils.sendShowAdminSupportDetailsIntent(mContext,
