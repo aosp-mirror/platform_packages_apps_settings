@@ -196,7 +196,7 @@ public class PowerUsageSummaryTest {
         mFragment.updateLastFullChargePreference();
 
         assertThat(mLastFullChargePref.getTitle()).isEqualTo("Last full charge");
-        assertThat(mLastFullChargePref.getSubtitle()).isEqualTo("2 hr. ago");
+        assertThat(mLastFullChargePref.getSubtitle()).isEqualTo("2 hours ago");
     }
 
     @Test

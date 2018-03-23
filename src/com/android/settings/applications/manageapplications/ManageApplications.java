@@ -17,11 +17,13 @@
 package com.android.settings.applications.manageapplications;
 
 import static com.android.settings.applications.manageapplications.AppFilterRegistry
-        .FILTER_APPS_BLOCKED;
+        .FILTER_APPS_ALL;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry
         .FILTER_APPS_DISABLED;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry
         .FILTER_APPS_ENABLED;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry
+        .FILTER_APPS_FREQUENT;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry
         .FILTER_APPS_INSTANT;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry
@@ -31,11 +33,14 @@ import static com.android.settings.applications.manageapplications.AppFilterRegi
 import static com.android.settings.applications.manageapplications.AppFilterRegistry
         .FILTER_APPS_POWER_WHITELIST_ALL;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry
+        .FILTER_APPS_RECENT;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry
         .FILTER_APPS_WORK;
 
 import android.annotation.Nullable;
 import android.annotation.StringRes;
 import android.app.Activity;
+import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -81,6 +86,7 @@ import com.android.settings.applications.AppStateBaseBridge;
 import com.android.settings.applications.AppStateDirectoryAccessBridge;
 import com.android.settings.applications.AppStateInstallAppsBridge;
 import com.android.settings.applications.AppStateNotificationBridge;
+import com.android.settings.applications.AppStateNotificationBridge.NotificationsSentState;
 import com.android.settings.applications.AppStateOverlayBridge;
 import com.android.settings.applications.AppStatePowerBridge;
 import com.android.settings.applications.AppStateUsageBridge;
@@ -92,7 +98,6 @@ import com.android.settings.applications.DirectoryAccessDetails;
 import com.android.settings.applications.InstalledAppCounter;
 import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
-import com.android.settings.applications.appinfo.AppNotificationPreferenceController;
 import com.android.settings.applications.appinfo.DrawOverlayDetails;
 import com.android.settings.applications.appinfo.ExternalSourcesDetails;
 import com.android.settings.applications.appinfo.WriteSettingsDetails;
@@ -102,8 +107,6 @@ import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.fuelgauge.HighPowerDetail;
 import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
-import com.android.settings.notification.NotificationBackend;
-import com.android.settings.notification.NotificationBackend.AppRow;
 import com.android.settings.widget.LoadingViewController;
 import com.android.settings.wifi.AppStateChangeWifiStateBridge;
 import com.android.settings.wifi.ChangeWifiStateDetails;
@@ -217,7 +220,7 @@ public class ManageApplications extends InstrumentedFragment
     private View mSpinnerHeader;
     private Spinner mFilterSpinner;
     private FilterSpinnerAdapter mFilterAdapter;
-    private NotificationBackend mNotifBackend;
+    private UsageStatsManager mUsageStatsManager;
     private ResetAppsHelper mResetAppsHelper;
     private String mVolumeUuid;
     private int mStorageType;
@@ -283,6 +286,12 @@ public class ManageApplications extends InstrumentedFragment
         } else if (className.equals(Settings.ChangeWifiStateActivity.class.getName())) {
             mListType = LIST_TYPE_WIFI_ACCESS;
             screenTitle = R.string.change_wifi_state_title;
+        } else if (className.equals(Settings.NotificationAppListActivity.class.getName())) {
+            mListType = LIST_TYPE_NOTIFICATION;
+            mUsageStatsManager =
+                    (UsageStatsManager) getContext().getSystemService(Context.USAGE_STATS_SERVICE);
+            mSortOrder = R.id.sort_order_recent_notification;
+            screenTitle = R.string.app_notifications_title;
         } else {
             if (screenTitle == -1) {
                 screenTitle = R.string.application_info_label;
@@ -383,7 +392,9 @@ public class ManageApplications extends InstrumentedFragment
             }
         }
         if (mListType == LIST_TYPE_NOTIFICATION) {
-            mFilterAdapter.enableFilter(FILTER_APPS_BLOCKED);
+            mFilterAdapter.enableFilter(FILTER_APPS_RECENT);
+            mFilterAdapter.enableFilter(FILTER_APPS_FREQUENT);
+            mFilterAdapter.disableFilter(FILTER_APPS_ALL);
         }
         if (mListType == LIST_TYPE_HIGH_POWER) {
             mFilterAdapter.enableFilter(FILTER_APPS_POWER_WHITELIST_ALL);
@@ -579,6 +590,7 @@ public class ManageApplications extends InstrumentedFragment
         HelpUtils.prepareHelpMenuItem(activity, menu, getHelpResource(), getClass().getName());
         mOptionsMenu = menu;
         inflater.inflate(R.menu.manage_apps, menu);
+
         updateOptionsMenu();
     }
 
@@ -620,6 +632,10 @@ public class ManageApplications extends InstrumentedFragment
                 && mListType != LIST_TYPE_HIGH_POWER);
 
         mOptionsMenu.findItem(R.id.reset_app_preferences).setVisible(mListType == LIST_TYPE_MAIN);
+
+        // Hide notification menu items, because sorting happens when filtering
+        mOptionsMenu.findItem(R.id.sort_order_recent_notification).setVisible(false);
+        mOptionsMenu.findItem(R.id.sort_order_frequent_notification).setVisible(false);
     }
 
     @Override
@@ -846,8 +862,8 @@ public class ManageApplications extends InstrumentedFragment
             mContext = manageApplications.getActivity();
             mAppFilter = appFilter;
             if (mManageApplications.mListType == LIST_TYPE_NOTIFICATION) {
-                mExtraInfoBridge = new AppStateNotificationBridge(mContext, mState, this,
-                        manageApplications.mNotifBackend);
+                mExtraInfoBridge = new AppStateNotificationBridge(mState, this,
+                        manageApplications.mUsageStatsManager);
             } else if (mManageApplications.mListType == LIST_TYPE_USAGE_ACCESS) {
                 mExtraInfoBridge = new AppStateUsageBridge(mContext, mState, this);
             } else if (mManageApplications.mListType == LIST_TYPE_HIGH_POWER) {
@@ -877,7 +893,15 @@ public class ManageApplications extends InstrumentedFragment
 
         public void setFilter(AppFilterItem appFilter) {
             mAppFilter = appFilter;
-            rebuild();
+
+            // Notification filters require resorting the list
+            if (FILTER_APPS_FREQUENT == appFilter.getFilterType()) {
+                rebuild(R.id.sort_order_frequent_notification);
+            } else if (FILTER_APPS_RECENT == appFilter.getFilterType()) {
+                rebuild(R.id.sort_order_recent_notification);
+            } else {
+                rebuild();
+            }
         }
 
         public void setExtraViewController(FileViewHolderController extraViewController) {
@@ -994,6 +1018,12 @@ public class ManageApplications extends InstrumentedFragment
                             comparatorObj = ApplicationsState.SIZE_COMPARATOR;
                             break;
                     }
+                    break;
+                case R.id.sort_order_recent_notification:
+                    comparatorObj = AppStateNotificationBridge.RECENT_NOTIFICATION_COMPARATOR;
+                    break;
+                case R.id.sort_order_frequent_notification:
+                    comparatorObj = AppStateNotificationBridge.FREQUENCY_NOTIFICATION_COMPARATOR;
                     break;
                 default:
                     comparatorObj = ApplicationsState.ALPHA_COMPARATOR;
@@ -1235,9 +1265,9 @@ public class ManageApplications extends InstrumentedFragment
             switch (mManageApplications.mListType) {
                 case LIST_TYPE_NOTIFICATION:
                     if (entry.extraInfo != null) {
-                        holder.setSummary(
-                                AppNotificationPreferenceController.getNotificationSummary(
-                                        (AppRow) entry.extraInfo, mContext));
+                        holder.setSummary(AppStateNotificationBridge.getSummary(mContext,
+                                (NotificationsSentState) entry.extraInfo,
+                                (mLastSortMode == R.id.sort_order_recent_notification)));
                     } else {
                         holder.setSummary(null);
                     }

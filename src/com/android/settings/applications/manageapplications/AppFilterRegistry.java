@@ -41,7 +41,8 @@ public class AppFilterRegistry {
             FILTER_APPS_ENABLED,
             FILTER_APPS_INSTANT,
             FILTER_APPS_DISABLED,
-            FILTER_APPS_BLOCKED,
+            FILTER_APPS_RECENT,
+            FILTER_APPS_FREQUENT,
             FILTER_APPS_PERSONAL,
             FILTER_APPS_WORK,
             FILTER_APPS_USAGE_ACCESS,
@@ -60,23 +61,24 @@ public class AppFilterRegistry {
     public static final int FILTER_APPS_ENABLED = 3;
     public static final int FILTER_APPS_INSTANT = 4;
     public static final int FILTER_APPS_DISABLED = 5;
-    public static final int FILTER_APPS_BLOCKED = 6;
-    public static final int FILTER_APPS_PERSONAL = 7;
-    public static final int FILTER_APPS_WORK = 8;
-    public static final int FILTER_APPS_USAGE_ACCESS = 9;
-    public static final int FILTER_APPS_WITH_OVERLAY = 10;
-    public static final int FILTER_APPS_WRITE_SETTINGS = 11;
-    public static final int FILTER_APPS_INSTALL_SOURCES = 12;
-    public static final int FILTER_APP_HAS_DIRECTORY_ACCESS = 13;
-    public static final int FILTER_APP_CAN_CHANGE_WIFI_STATE = 14;
-    // Next id: 15
+    public static final int FILTER_APPS_RECENT = 6;
+    public static final int FILTER_APPS_FREQUENT = 7;
+    public static final int FILTER_APPS_PERSONAL = 8;
+    public static final int FILTER_APPS_WORK = 9;
+    public static final int FILTER_APPS_USAGE_ACCESS = 10;
+    public static final int FILTER_APPS_WITH_OVERLAY = 11;
+    public static final int FILTER_APPS_WRITE_SETTINGS = 12;
+    public static final int FILTER_APPS_INSTALL_SOURCES = 13;
+    public static final int FILTER_APP_HAS_DIRECTORY_ACCESS = 14;
+    public static final int FILTER_APP_CAN_CHANGE_WIFI_STATE = 15;
+    // Next id: 16
 
     private static AppFilterRegistry sRegistry;
 
     private final AppFilterItem[] mFilters;
 
     private AppFilterRegistry() {
-        mFilters = new AppFilterItem[15];
+        mFilters = new AppFilterItem[16];
 
         // High power whitelist, on
         mFilters[FILTER_APPS_POWER_WHITELIST] = new AppFilterItem(
@@ -118,11 +120,17 @@ public class AppFilterRegistry {
                 FILTER_APPS_INSTANT,
                 R.string.filter_instant_apps);
 
-        // Blocked Notifications
-        mFilters[FILTER_APPS_BLOCKED] = new AppFilterItem(
-                AppStateNotificationBridge.FILTER_APP_NOTIFICATION_BLOCKED,
-                FILTER_APPS_BLOCKED,
-                R.string.filter_notif_blocked_apps);
+        // Recent Notifications
+        mFilters[FILTER_APPS_RECENT] = new AppFilterItem(
+                AppStateNotificationBridge.FILTER_APP_NOTIFICATION_RECENCY,
+                FILTER_APPS_RECENT,
+                R.string.sort_order_recent_notification);
+
+        // Frequent Notifications
+        mFilters[FILTER_APPS_FREQUENT] = new AppFilterItem(
+                AppStateNotificationBridge.FILTER_APP_NOTIFICATION_FREQUENCY,
+                FILTER_APPS_FREQUENT,
+                R.string.sort_order_frequent_notification);
 
         // Personal
         mFilters[FILTER_APPS_PERSONAL] = new AppFilterItem(
@@ -196,6 +204,8 @@ public class AppFilterRegistry {
                 return FILTER_APP_HAS_DIRECTORY_ACCESS;
             case ManageApplications.LIST_TYPE_WIFI_ACCESS:
                 return FILTER_APP_CAN_CHANGE_WIFI_STATE;
+            case ManageApplications.LIST_TYPE_NOTIFICATION:
+                return FILTER_APPS_RECENT;
             default:
                 return FILTER_APPS_ALL;
         }

@@ -67,12 +67,16 @@ public class ManageApplicationsTest {
     @Mock
     private Menu mMenu;
     private MenuItem mAppReset;
+    private MenuItem mSortRecent;
+    private MenuItem mSortFrequent;
     private ManageApplications mFragment;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mAppReset = new RoboMenuItem(R.id.reset_app_preferences);
+        mSortRecent = new RoboMenuItem(R.id.sort_order_recent_notification);
+        mSortFrequent = new RoboMenuItem(R.id.sort_order_frequent_notification);
         ReflectionHelpers.setStaticField(ApplicationsState.class, "sInstance", mState);
         when(mState.newSession(any())).thenReturn(mSession);
         when(mState.getBackgroundLooper()).thenReturn(Looper.myLooper());
@@ -99,6 +103,18 @@ public class ManageApplicationsTest {
         mFragment.updateOptionsMenu();
         assertThat(mMenu.findItem(R.id.reset_app_preferences).isVisible()).isFalse();
     }
+
+    @Test
+    public void updateMenu_hideNotificationOptions() {
+        setUpOptionMenus();
+        ReflectionHelpers.setField(mFragment, "mListType", LIST_TYPE_NOTIFICATION);
+        ReflectionHelpers.setField(mFragment, "mOptionsMenu", mMenu);
+
+        mFragment.updateOptionsMenu();
+        assertThat(mMenu.findItem(R.id.sort_order_recent_notification).isVisible()).isFalse();
+        assertThat(mMenu.findItem(R.id.sort_order_frequent_notification).isVisible()).isFalse();
+    }
+
 
     @Test
     public void onCreateView_shouldNotShowLoadingContainer() {
@@ -219,6 +235,12 @@ public class ManageApplicationsTest {
             final int id = (int) args[0];
             if (id == mAppReset.getItemId()) {
                 return mAppReset;
+            }
+            if (id == mSortFrequent.getItemId()) {
+                return mSortFrequent;
+            }
+            if (id == mSortRecent.getItemId()) {
+                return mSortRecent;
             }
             return new RoboMenuItem(id);
         });
