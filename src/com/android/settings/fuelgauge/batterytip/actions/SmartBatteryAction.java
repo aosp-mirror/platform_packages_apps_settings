@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge.batterytip.actions;
 
 import android.app.Fragment;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.SubSettingLauncher;
@@ -38,7 +39,9 @@ public class SmartBatteryAction extends BatteryTipAction {
      * Handle the action when user clicks positive button
      */
     @Override
-    public void handlePositiveAction() {
+    public void handlePositiveAction(int metricsKey) {
+        mMetricsFeatureProvider.action(mContext,
+                MetricsProto.MetricsEvent.ACTION_TIP_OPEN_SMART_BATTERY, metricsKey);
         new SubSettingLauncher(mSettingsActivity)
                 .setSourceMetricsCategory(mFragment instanceof Instrumentable
                         ? ((Instrumentable) mFragment).getMetricsCategory()

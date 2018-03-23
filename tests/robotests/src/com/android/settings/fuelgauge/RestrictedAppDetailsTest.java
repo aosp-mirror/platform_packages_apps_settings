@@ -21,13 +21,13 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceManager;
@@ -54,7 +54,8 @@ import java.util.List;
 public class RestrictedAppDetailsTest {
 
     private static final String PACKAGE_NAME = "com.android.app";
-    private static final int UID = 234;
+    private static final int USER_ID = 10;
+    private static final int UID = UserHandle.getUid(USER_ID, 234);
     private static final String APP_NAME = "app";
 
     @Mock
@@ -99,7 +100,8 @@ public class RestrictedAppDetailsTest {
 
     @Test
     public void testRefreshUi_displayPreference() throws Exception {
-        doReturn(mApplicationInfo).when(mPackageManager).getApplicationInfo(PACKAGE_NAME, 0);
+        doReturn(mApplicationInfo).when(mPackageManager)
+                .getApplicationInfoAsUser(PACKAGE_NAME, 0, USER_ID);
         doReturn(APP_NAME).when(mPackageManager).getApplicationLabel(mApplicationInfo);
 
         mRestrictedAppDetails.refreshUi();

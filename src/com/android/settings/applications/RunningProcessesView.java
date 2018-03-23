@@ -20,6 +20,8 @@ import android.app.ActivityManager;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.os.UserHandle;
@@ -36,6 +38,7 @@ import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.internal.util.MemInfoReader;
@@ -43,7 +46,6 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.widget.LinearColorBar;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -75,7 +77,7 @@ public class RunningProcessesView extends FrameLayout
     ListView mListView;
     View mHeader;
     ServiceListAdapter mAdapter;
-    LinearColorBar mColorBar;
+    ProgressBar mColorBar;
     TextView mBackgroundProcessPrefix;
     TextView mAppsProcessPrefix;
     TextView mForegroundProcessPrefix;
@@ -385,9 +387,9 @@ public class RunningProcessesView extends FrameLayout
                         Formatter.formatShortFileSize(getContext(), highRam));
                 mForegroundProcessText.setText(getResources().getString(
                         R.string.running_processes_header_ram, sizeStr));
-                mColorBar.setRatios(highRam/(float)totalRam,
-                        medRam/(float)totalRam,
-                        lowRam/(float)totalRam);
+                int progress = (int) ((highRam/(float) totalRam) * 100);
+                mColorBar.setProgress(progress);
+                mColorBar.setSecondaryProgress(progress + (int) ((medRam/(float) totalRam) * 100));
             }
         }
     }
@@ -446,17 +448,22 @@ public class RunningProcessesView extends FrameLayout
         mListView.setAdapter(mAdapter);
         mHeader = inflater.inflate(R.layout.running_processes_header, null);
         mListView.addHeaderView(mHeader, null, false /* set as not selectable */);
-        mColorBar = (LinearColorBar)mHeader.findViewById(R.id.color_bar);
+        mColorBar = mHeader.findViewById(R.id.color_bar);
         final Context context = getContext();
-        mColorBar.setColors(context.getColor(R.color.running_processes_system_ram),
-                Utils.getColorAccent(context),
-                context.getColor(R.color.running_processes_free_ram));
-        mBackgroundProcessPrefix = (TextView)mHeader.findViewById(R.id.freeSizePrefix);
-        mAppsProcessPrefix = (TextView)mHeader.findViewById(R.id.appsSizePrefix);
-        mForegroundProcessPrefix = (TextView)mHeader.findViewById(R.id.systemSizePrefix);
-        mBackgroundProcessText = (TextView)mHeader.findViewById(R.id.freeSize);
-        mAppsProcessText = (TextView)mHeader.findViewById(R.id.appsSize);
-        mForegroundProcessText = (TextView)mHeader.findViewById(R.id.systemSize);
+        mColorBar.setProgressTintList(
+                ColorStateList.valueOf(context.getColor(R.color.running_processes_system_ram)));
+        mColorBar.setSecondaryProgressTintList(
+                ColorStateList.valueOf(Utils.getColorAccent(context)));
+        mColorBar.setSecondaryProgressTintMode(PorterDuff.Mode.SRC);
+        mColorBar.setProgressBackgroundTintList(
+                ColorStateList.valueOf(context.getColor(R.color.running_processes_free_ram)));
+        mColorBar.setProgressBackgroundTintMode(PorterDuff.Mode.SRC);
+        mBackgroundProcessPrefix = mHeader.findViewById(R.id.freeSizePrefix);
+        mAppsProcessPrefix = mHeader.findViewById(R.id.appsSizePrefix);
+        mForegroundProcessPrefix = mHeader.findViewById(R.id.systemSizePrefix);
+        mBackgroundProcessText = mHeader.findViewById(R.id.freeSize);
+        mAppsProcessText = mHeader.findViewById(R.id.appsSize);
+        mForegroundProcessText = mHeader.findViewById(R.id.systemSize);
 
         ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
         mAm.getMemoryInfo(memInfo);

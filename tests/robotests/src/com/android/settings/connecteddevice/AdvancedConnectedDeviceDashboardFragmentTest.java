@@ -20,8 +20,12 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
+import com.android.settings.bluetooth.BluetoothMasterSwitchPreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
+import com.android.settings.testutils.shadow.ShadowBluetoothPan;
+import com.android.settings.testutils.shadow.ShadowConnectivityManager;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.drawer.CategoryKey;
 
 import org.junit.Before;
@@ -29,10 +33,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(shadows = {ShadowBluetoothPan.class, ShadowUserManager.class,
+        ShadowConnectivityManager.class})
 public class AdvancedConnectedDeviceDashboardFragmentTest {
 
     private AdvancedConnectedDeviceDashboardFragment mFragment;
@@ -67,12 +74,10 @@ public class AdvancedConnectedDeviceDashboardFragmentTest {
     @Test
     public void testNonIndexableKeys_existInXmlLayout() {
         final Context context = RuntimeEnvironment.application;
-        final List<String> niks = ConnectedDeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(context);
-        final int xmlId = new ConnectedDeviceDashboardFragment().getPreferenceScreenResId();
+        final List<String> niks =
+                AdvancedConnectedDeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
+                        .getNonIndexableKeys(context);
 
-        final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context, xmlId);
-
-        assertThat(keys).containsAllIn(niks);
+        assertThat(niks).contains(BluetoothMasterSwitchPreferenceController.KEY_TOGGLE_BLUETOOTH);
     }
 }

@@ -22,6 +22,7 @@ import android.content.Context;
 import android.view.View.MeasureSpec;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -29,6 +30,7 @@ import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
+@org.robolectric.annotation.Config(shadows = SettingsShadowResourcesImpl.class)
 public class RingProgressBarTest {
 
     private Context mContext = RuntimeEnvironment.application;

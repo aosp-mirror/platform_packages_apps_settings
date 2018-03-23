@@ -69,14 +69,13 @@
 
         <!-- See all apps button -->
         <Preference
-            android:title="@string/notifications_title"
             android:key="all_notifications"
+            android:title="@string/notifications_title"
+            android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
             android:order="22">
-            <intent
-                android:action="android.intent.action.MAIN"
-                android:targetPackage="com.android.settings"
-                android:targetClass="com.android.settings.Settings$ManageApplicationsActivity">
-            </intent>
+            <extra
+                android:name="classname"
+                android:value="com.android.settings.Settings$NotificationAppListActivity" />
         </Preference>
     </PreferenceCategory>
 
@@ -89,10 +88,9 @@
 
         <com.android.settings.RestrictedListPreference
             android:key="lock_screen_notifications_profile"
-            android:title="@string/lock_screen_notifications_title"
+            android:title="@string/locked_work_profile_notification_title"
             android:summary="@string/summary_placeholder"
             android:order="24"/>
-
     </PreferenceCategory>
 
 </PreferenceScreen>

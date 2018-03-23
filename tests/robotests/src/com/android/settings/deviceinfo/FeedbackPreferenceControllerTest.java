@@ -21,6 +21,8 @@ import static org.mockito.Mockito.when;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -38,17 +40,30 @@ public class FeedbackPreferenceControllerTest {
     private Fragment mFragment;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
+    @Mock
+    private Preference mPreference;
+    @Mock
+    private PreferenceScreen mScreen;
+
     private FeedbackPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mController = new FeedbackPreferenceController(mFragment, mContext);
+        final String prefKey = mController.getPreferenceKey();
+        when(mScreen.findPreference(prefKey)).thenReturn(mPreference);
     }
 
     @Test
     public void isAvailable_noReporterPackage_shouldReturnFalse() {
         when(mContext.getResources().getString(anyInt())).thenReturn("");
         assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void isVisible_afterUpdateState_shouldBeSameAsIsAvailable() {
+        mController.updateState(mPreference);
+        assertThat(mPreference.isVisible()).isEqualTo(mController.isAvailable());
     }
 }

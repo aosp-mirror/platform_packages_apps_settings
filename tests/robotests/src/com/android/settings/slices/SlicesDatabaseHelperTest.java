@@ -68,7 +68,9 @@ public class SlicesDatabaseHelperTest {
                 IndexColumns.SCREENTITLE,
                 IndexColumns.ICON_RESOURCE,
                 IndexColumns.FRAGMENT,
-                IndexColumns.CONTROLLER
+                IndexColumns.CONTROLLER,
+                IndexColumns.PLATFORM_SLICE,
+                IndexColumns.SLICE_TYPE,
         };
 
         assertThat(columnNames).isEqualTo(expectedNames);

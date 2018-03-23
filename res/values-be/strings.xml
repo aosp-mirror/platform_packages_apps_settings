@@ -334,13 +334,20 @@
     <string name="date_time_set_timezone" msgid="5045627174274377814">"Часавы пояс"</string>
     <string name="date_time_set_date_title" msgid="6928286765325608604">"Дата"</string>
     <string name="date_time_set_date" msgid="7021491668550232105">"Задаць дату"</string>
+    <string name="date_time_select_region" msgid="5434001881313168586">"Рэгіён"</string>
+    <string name="date_time_select_zone" msgid="8883690857762652278">"Часавы пояс"</string>
+    <string name="date_time_select_fixed_offset_time_zones" msgid="6084375085203448645">"Выбраць зрушэнне адносна UTC"</string>
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Сартаваць па алфавіце"</string>
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Сартаваць па часавым поясе"</string>
     <string name="zone_change_to_from_dst" msgid="118656001224045590">"Змена на <xliff:g id="TIME_TYPE">%1$s</xliff:g> пачынаецца <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
+    <string name="zone_info_exemplar_location_and_offset" msgid="1359698475641349336">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
+    <string name="zone_info_offset_and_name" msgid="164876167707284017">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
+    <string name="zone_info_footer" msgid="4192803402331390389">"Выкарыстоўваецца <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Пераход на <xliff:g id="DST_TIME_TYPE">%2$s</xliff:g>: <xliff:g id="TRANSITION_DATE">%3$s</xliff:g>."</string>
+    <string name="zone_info_footer_no_dst" msgid="8652423870143056964">"Выкарыстоўваецца <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Без пераходу на летні час."</string>
     <string name="zone_time_type_dst" msgid="8850494578766845276">"Летні час"</string>
     <string name="zone_time_type_standard" msgid="3462424485380376522">"Стандартны час"</string>
-    <string name="zone_menu_by_region" msgid="4603214570803607532">"Часавы пояс згодна рэгіёну"</string>
-    <string name="zone_menu_by_offset" msgid="1172774718486088771">"Часавыя паясы з фіксаваным зрухам"</string>
+    <string name="zone_menu_by_region" msgid="7094872254966039844">"Паказаць часавыя паясы паводле рэгіёнаў"</string>
+    <string name="zone_menu_by_offset" msgid="5548491286761692269">"Паказаць часавыя паясы адносна UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Дата"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Час"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Аўтаматычная блакіроўка"</string>
@@ -366,7 +373,9 @@
     <string name="security_settings_title" msgid="4918904614964215087">"Бяспека і месца"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Шыфраванне і ўліковыя даныя"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Тэлефон зашыфраваны"</string>
+    <string name="decryption_settings_summary" product="default" msgid="5671817824042639849">"Тэлефон не зашыфраваны"</string>
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"Прылада зашыфравана"</string>
+    <string name="decryption_settings_summary" product="tablet" msgid="5794135636155570977">"Прылада не зашыфравана"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Параметры блакіроўкі экрана"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Задаць Маё месцазнаходжанне, разблакаванне экрана, блакаванне SIM-карты, блакаванне сховішча ўліковых дадзеных"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Устанавіць маё месцазнаходжанне, разблакаванне экрана, блакаванне сховішча ўліковых дадзеных"</string>
@@ -475,14 +484,14 @@
     <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"Уведзены вамі пароль правільны, але, на жаль, вашы даныя пашкоджаныя. \n\nКаб працягваць выкарыстоўваць планшэт, неабходна скінуць налады. Падчас наладкі планшэта пасля скіду налад у вас з\'явіцца магчымасць аднавіць даныя, рэзервовыя копіі якіх захоўваліся ў вашым уліковым запісе Google."</string>
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Уведзены вамі пароль правільны, але, на жаль, вашы даныя пашкоджаныя. \n\nКаб працягваць выкарыстоўваць тэлефон, неабходна скінуць налады. Падчас наладкі тэлефона пасля скіду налад у вас з\'явіцца магчымасць аднавіць даныя, рэзервовыя копіі якіх захоўваліся ў вашым уліковы запісе Google."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Пераключэнне рэжыму ўводу"</string>
-    <string name="suggested_lock_settings_title" msgid="8195437597439375655">"Настройка блакіроўкі экрана"</string>
-    <string name="suggested_lock_settings_summary" product="tablet" msgid="7915739444107426777">"Абараніць планшэт ад чужых асоб"</string>
-    <string name="suggested_lock_settings_summary" product="device" msgid="9202820303111653610">"Абараніце прыладу ад чужых асоб"</string>
-    <string name="suggested_lock_settings_summary" product="default" msgid="1252628838133344781">"Абараніце тэлефон ад чужых асоб"</string>
+    <string name="suggested_lock_settings_title" msgid="8498743819223200961">"Абараніце тэлефон"</string>
+    <string name="suggested_lock_settings_summary" product="tablet" msgid="2296800316150748710">"Для абароны планшэта наладзьце блакіроўку экрана"</string>
+    <string name="suggested_lock_settings_summary" product="device" msgid="7562847814806365373">"Для абароны прылады наладзьце блакіроўку экрана"</string>
+    <string name="suggested_lock_settings_summary" product="default" msgid="1526355348444658181">"Для абароны тэлефона наладзьце блакіроўку экрана"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="414499342011664436">"Разблакіроўка адбіткам пальца"</string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="tablet" msgid="2149569133725273864">"Разблакіруйце з дапамогай адбітка пальца"</string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="2149569133725273864">"Разблакіруйце з дапамогай адбітка пальца"</string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="2149569133725273864">"Разблакіруйце з дапамогай адбітка пальца"</string>
+    <string name="suggested_fingerprint_lock_settings_summary" product="tablet" msgid="5738274583658668124"></string>
+    <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="5738274583658668124"></string>
+    <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="5738274583658668124"></string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Спосаб блакіроўкі экрана"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"Выб. блак. прац. проф."</string>
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Абараніце свой планшэт"</string>
@@ -729,8 +738,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Запомніць налады"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="6752690395207847881">"Максімальная колькасць падключаных аўдыяпрылад Bluetooth"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="5936561749790095473">"Выбар максімальнай колькасці падключаных аўдыяпрылад Bluetooth"</string>
-    <string name="bluetooth_enable_avdtp_delay_reports" msgid="5101903170688399944">"Уключыць справаздачы аб затрымках AVDTP па Bluetooth"</string>
-    <string name="bluetooth_enable_avdtp_delay_reports_summary" msgid="7052797876020616399">"Дазволіць атрыманне справаздач аб затрымках AVDTP па Bluetooth"</string>
+    <string name="bluetooth_disable_avdtp_delay_reports" msgid="7710144996922449248">"Акдлючыць справаздачы аб затрымках Bluetooth AVDTP"</string>
+    <string name="bluetooth_disable_avdtp_delay_reports_summary" msgid="6882039901251054992">"Забараніць атрыманне справаздач аб затрымках Bluetooth AVDTP"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"Перадача"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Уключыць бесправадны дысплей"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Прылад побач не знойдзена."</string>
@@ -746,6 +755,8 @@
     <string name="wifi_band_24ghz" msgid="852929254171856911">"2,4 ГГц"</string>
     <string name="wifi_band_5ghz" msgid="6433822023268515117">"5 ГГц"</string>
     <string name="wifi_sign_in_button_text" msgid="8404345621836792112">"Увайсці"</string>
+    <!-- no translation found for wifi_tap_to_sign_in (6990161842394669054) -->
+    <skip />
     <string name="link_speed" msgid="8896664974117585555">"%1$d Мб/с"</string>
     <string name="wifi_ask_enable" msgid="2795469717302060104">"<xliff:g id="REQUESTER">%s</xliff:g> хоча ўключыць Wi-Fi"</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"<xliff:g id="REQUESTER">%s</xliff:g> хоча адключыць Wi-Fi"</string>
@@ -951,8 +962,8 @@
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_tether_disabled_by_airplane" msgid="414480185654767932">"Функцыя недаступная, бо ўключаны рэжым палёту"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Wi-Fi-тэлефанія"</string>
-    <string name="wifi_calling_suggestion_title" msgid="7766895085362824508">"Рабіце выклікі праз Wi‑Fi"</string>
-    <string name="wifi_calling_suggestion_summary" msgid="6460250990899143406">"Уключыце Wi-Fi-тэлефанію"</string>
+    <string name="wifi_calling_suggestion_title" msgid="5702964371483390024">"Выклікі па Wi‑Fi"</string>
+    <string name="wifi_calling_suggestion_summary" msgid="1331793267608673739">"Званіце па сетцы Wi‑Fi, калі няма сотавай сувязі"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Перавагі выклікаў"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Рэжым Wi-Fi-тэлефаніі"</string>
     <string name="wifi_calling_roaming_mode_title" msgid="1565039047187685115">"Налады роўмінгу"</string>
@@ -1470,17 +1481,18 @@
     <string name="managed_profile_location_switch_title" msgid="6712332547063039683">"Месца для рабочага профілю"</string>
     <string name="location_app_level_permissions" msgid="1825588230817081339">"Дазволы на ўзроўні праграм"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Апошнія запыты пра месцазнах."</string>
-    <!-- no translation found for location_recent_location_requests_see_all (9063541547120162593) -->
-    <skip />
+    <string name="location_recent_location_requests_see_all" msgid="9063541547120162593">"Паказаць усе"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"У апошні час запытаў ад дадаткаў на вызначэнне месцазнаходжання не паступала"</string>
     <string name="location_category_location_services" msgid="7437150886946685979">"Службы вызначэння месцазнаходжання"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"Выс. узровень выкарыст. акум."</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Нізкі ўзровень выкарыст. акум."</string>
     <string name="location_scanning_screen_title" msgid="4408076862929611554">"Сканіраванне"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"Сканіраванне Wi-Fi"</string>
-    <string name="location_scanning_wifi_always_scanning_description" msgid="8036382029606868081">"Палепшыце функцыю вызначэння месцазнаходжання, дазволіўшы сістэмным праграмам і службам знаходзіць сеткі Wi-Fi у любы час."</string>
+    <!-- no translation found for location_scanning_wifi_always_scanning_description (2691110218127379249) -->
+    <skip />
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"Сканіраванне Bluetooth"</string>
-    <string name="location_scanning_bluetooth_always_scanning_description" msgid="8602726521250591852">"Палепшыце функцыю вызначэння месцазнаходжання, дазволіўшы сістэмным праграмам і службам знаходзіць прылады Bluetooth у любы час."</string>
+    <!-- no translation found for location_scanning_bluetooth_always_scanning_description (1285526059945206128) -->
+    <skip />
     <string name="location_network_based" msgid="9134175479520582215">"Месцазнаходжанне Wi-Fi і мабiльнай сеткi"</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"Дазв. дадаткам выкар. службу вызнач. месцазн., каб знах. вас хутчэй. Ананiмныя даныя пра месцазн. будуць збiр. i адпр. у Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Месцазнаходжанне вызначаецца праз Wi-Fi"</string>
@@ -1637,7 +1649,7 @@
     <string name="install_text" msgid="884360662922471113">"Усталяваць"</string>
     <string name="disable_text" msgid="6544054052049395202">"Адключыць"</string>
     <string name="enable_text" msgid="9217362512327828987">"Уключанае"</string>
-    <string name="clear_user_data_text" msgid="5597622864770098388">"Ачысціць дадзеныя"</string>
+    <string name="clear_user_data_text" msgid="355574089263023363">"Ачысціць сховішча"</string>
     <string name="app_factory_reset" msgid="6635744722502563022">"Выдаліць абнаўленні"</string>
     <string name="auto_launch_enable_text" msgid="4275746249511874845">"Вы выбралi запуск гэтага дадатку па змаўчаннi для некаторых дзеянняў."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="566822577792032925">"Вы дазволілі гэтаму дадатку ствараць віджэты і атрымліваць доступ да іх даных."</string>
@@ -1679,9 +1691,7 @@
     <string name="dlg_cancel" msgid="1674753358972975911">"Скасаваць"</string>
     <string name="app_not_found_dlg_title" msgid="3127123411738434964"></string>
     <string name="app_not_found_dlg_text" msgid="4893589904687340011">"Дадатак не знойдзены ў спісе ўсталяваных дадаткаў."</string>
-    <string name="clear_data_failed" msgid="7214074331627422248">"Не атрымалася выдалiць даныя дадаткаў."</string>
-    <string name="clear_failed_dlg_title" msgid="2387060805294783175">"Ачысціць дадзеныя"</string>
-    <string name="clear_failed_dlg_text" msgid="5464475937929941008">"Не атрымалася выдаліць даныя з дадатку."</string>
+    <string name="clear_failed_dlg_text" msgid="8651231637137025815">"Немагчыма ачысціць сховішча для праграмы."</string>
     <string name="security_settings_desc" product="tablet" msgid="1292421279262430109">"Гэта прыкладанне можа атрымаць на планшэце доступ да наступных дадзеных:"</string>
     <string name="security_settings_desc" product="default" msgid="61749028818785244">"Гэта прыкладанне можа атрымаць на тэлефоне доступ да наступных дадзеных:"</string>
     <string name="security_settings_desc_multi" product="tablet" msgid="7300932212437084403">"Гэта прыкладанне можа атрымліваць доступ да наступных элементаў на вашым тэлефоне. Каб павысіць прадукцыйнасць і зменшыць выкарыстанне памяці, некаторыя з гэтых дазволаў даступныя для прыкладання <xliff:g id="BASE_APP_NAME">%1$s</xliff:g>, таму што яно выкарыстоўвае той жа працэс, што і прыкладанні <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>:"</string>
@@ -2048,7 +2058,8 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"Застаецца <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"Да поўнай зарадкі засталося <xliff:g id="UNTIL_CHARGED">%1$s</xliff:g>"</string>
-    <string name="background_activity_title" msgid="4797874712348525348">"З абмежаваннямі"</string>
+    <!-- no translation found for background_activity_title (4645016676653647542) -->
+    <skip />
     <string name="background_activity_summary" msgid="8140094430510517362">"Дазволіць праграме працаваць у фонавым рэжыме"</string>
     <string name="background_activity_summary_on" msgid="649282072540085599">"Праграма можа працаваць у фонавым рэжыме, калі не выкарыстоўваецца"</string>
     <string name="background_activity_summary_off" msgid="7666330699090632040">"Праца праграмы ў фонавым рэжыме абмежавана, калі праграмай не карыстаюцца"</string>
@@ -2133,12 +2144,21 @@
       <item quantity="many">Абмежаваць працу %1$d праграм?</item>
       <item quantity="other">Абмежаваць працу %1$d праграмы?</item>
     </plurals>
-    <string name="battery_tip_restrict_app_dialog_message" msgid="5818730114373015028">"Для эканоміі зараду акумулятара можна забараніць гэтай праграме працаваць у фонавым рэжыме, калі яна не выкарыстоўваецца."</string>
+    <!-- no translation found for battery_tip_restrict_app_dialog_message (4983821029670590661) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_apps_less_than_5_dialog_message (5461716788680156225) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_apps_more_than_5_dialog_message (7485902289068433938) -->
+    <skip />
     <string name="battery_tip_restrict_app_dialog_ok" msgid="8291115820018013353">"Абмежаваць"</string>
     <string name="battery_tip_unrestrict_app_dialog_title" msgid="4550106794311784978">"Зняць абмежаванне для праграмы \"<xliff:g id="APP">%1$s</xliff:g>\"?"</string>
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="4836135946080501395">"Гэта праграма зможа спажываць энергію ў фонавым рэжыме. Пры гэтым зарад акумулятара будзе расходавацца хутчэй."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="6022058431218137646">"Зняць"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="9062797114255859496">"Не зараз"</string>
+    <!-- no translation found for battery_tip_dialog_summary_message (3483708973495692333) -->
+    <skip />
+    <!-- no translation found for battery_tip_dialog_summary_message_no_estimation (1456026456418786135) -->
+    <skip />
     <string name="smart_battery_manager_title" msgid="5677222263071864438">"Інтэлектуальны менеджар акумулятара"</string>
     <string name="smart_battery_title" msgid="7014692334636228916">"Аўтаматычнае кіраванне акумулятарам"</string>
     <string name="smart_battery_summary" msgid="6435844879637999044">"Аўтаматычная рэгуліроўка спажывання энергіі праграмамі ў залежнасці ад умоў выкарыстання"</string>
@@ -2149,6 +2169,8 @@
       <item quantity="many">%1$d праграм</item>
       <item quantity="other">%1$d праграмы</item>
     </plurals>
+    <string name="battery_auto_restriction_title" msgid="4698846356558232573">"Настройка аўтаматычных абмежаванняў"</string>
+    <string name="battery_auto_restriction_summary" msgid="1816325499514435434">"Забараніць праграмам выкарыстоўваць дадатковы акумулятар у фонавым рэжыме"</string>
     <string name="dialog_stop_title" msgid="6395127715596746479">"Спыніць праграму?"</string>
     <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"Ваш тэлефон не можа нармальна кіраваць зарадам акумулятара, бо <xliff:g id="APP">%1$s</xliff:g> трымае тэлефон у актыўным рэжыме.\n\nВырашыць гэту праблему можна, прымусова спыніўшы праграму.\n\nКалі гэта не дапамагло, трэба выдаліць праграму, каб павысіць прадукцыйнасць акумулятара."</string>
     <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"Ваш планшэт не можа нармальна кіраваць зарадам акумулятара, бо <xliff:g id="APP">%1$s</xliff:g> трымае планшэт у актыўным рэжыме.\n\nВырашыць гэту праблему можна, прымусова спыніўшы праграму.\n\nКалі гэта не дапамагло, трэба выдаліць праграму, каб павысіць прадукцыйнасць акумулятара."</string>
@@ -2370,8 +2392,7 @@
     <string name="credentials_configure_lock_screen_hint" msgid="8058230497337529036">"Перш чым вы зможаце карыстацца сховішчам уліковых даных, трэба наладзіць надзейную блакіроўку экрана прылады"</string>
     <string name="credentials_configure_lock_screen_button" msgid="253239765216055321">"БЛАКІРОЎКА ЭКРАНА"</string>
     <string name="usage_access_title" msgid="332333405495457839">"Праграмы з доступам да даных"</string>
-    <!-- no translation found for emergency_tone_title (254495218194925271) -->
-    <skip />
+    <string name="emergency_tone_title" msgid="254495218194925271">"Сігнал набору нумару ў аварыйнай сітуацыі"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Задаць паводзіны на выпадак экстранага выкліку"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"Рэзервовае капіраванне"</string>
     <string name="backup_section_title" msgid="7952232291452882740">"Рэзервовае капіяванне і аднаўленне"</string>
@@ -2990,12 +3011,9 @@
     <string name="dock_audio_media_title" msgid="1346838179626123900">"Уключыць док-дынамік"</string>
     <string name="dock_audio_media_disabled" msgid="3430953622491538080">"Усё аўдыё"</string>
     <string name="dock_audio_media_enabled" msgid="667849382924908673">"Толькі медыяаўдыё"</string>
-    <!-- no translation found for emergency_tone_silent (3750231842974733677) -->
-    <skip />
-    <!-- no translation found for emergency_tone_alert (8523447641290736852) -->
-    <skip />
-    <!-- no translation found for emergency_tone_vibrate (2278872257053690683) -->
-    <skip />
+    <string name="emergency_tone_silent" msgid="3750231842974733677">"Без гуку"</string>
+    <string name="emergency_tone_alert" msgid="8523447641290736852">"Танальныя сігналы"</string>
+    <string name="emergency_tone_vibrate" msgid="2278872257053690683">"Вібрацыя"</string>
     <string name="boot_sounds_title" msgid="567029107382343709">"Гукі пры ўключэнні"</string>
     <string name="zen_mode_settings_summary_off" msgid="6119891445378113334">"Ніколі"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="7346979080337117366">
@@ -3006,7 +3024,8 @@
     </plurals>
     <string name="zen_mode_settings_title" msgid="1066226840983908121">"Не турбаваць"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="2297134204747331078">"Уключэнне рэжыму \"Не турбаваць\""</string>
-    <string name="zen_mode_behavior_settings_title" msgid="1463303933529313969">"Паводзіны"</string>
+    <string name="zen_mode_behavior_settings_title" msgid="5453115212674008032">"Выключэнні"</string>
+    <string name="zen_mode_duration_settings_title" msgid="229547412251222757">"Працягласць"</string>
     <string name="zen_mode_behavior_allow_title" msgid="3845615648136218141">"Дазволіць гукі і вібрацыю ад:"</string>
     <string name="zen_mode_behavior_no_sound" msgid="1219626004723208056">"Без гуку"</string>
     <string name="zen_mode_behavior_total_silence" msgid="2229976744274214528">"Поўная цішыня"</string>
@@ -3024,6 +3043,21 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Блакіроўка візуальных апавяшчэнняў"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"Дазволіць візуальныя сігналы"</string>
+    <string name="zen_mode_what_to_block_title" msgid="7326899360743233429">"Што блакіраваць"</string>
+    <string name="zen_mode_block_effects_title" msgid="5659522118818678059">"Калі прыходзяць апавяшчэнні"</string>
+    <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"Адключыць гук і вібрацыю"</string>
+    <string name="zen_mode_block_effect_intent" msgid="350764335391428447">"Не ўключаць экран"</string>
+    <string name="zen_mode_block_effect_light" msgid="8106976110224107316">"Не мігаць светлавым індыкатарам"</string>
+    <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"Не паказваць апавяшчэнні на экране"</string>
+    <string name="zen_mode_block_effect_status" msgid="6642532634292373081">"Не паказваць значкі панэлі стану"</string>
+    <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"Не паказваць значкі апавяшчэнняў"</string>
+    <string name="zen_mode_block_effect_ambient" msgid="1005494937933402517">"Не паказваць пры аўтаматычным уключэнні экрана"</string>
+    <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"Не паказваць у спісе апавяшчэнняў"</string>
+    <string name="zen_mode_block_effect_summary_sound" msgid="1065107568053759972">"Гук і вібрацыя"</string>
+    <string name="zen_mode_block_effect_summary_some" msgid="3635646031575107456">"Гук, вібрацыя і некаторыя візуальныя апавяшчэнні"</string>
+    <string name="zen_mode_block_effect_summary_all" msgid="1213328945418248026">"Гук, вібрацыя і візуальныя апавяшчэнні"</string>
+    <string name="zen_mode_no_exceptions" msgid="7653433997399582247">"Няма"</string>
+    <string name="zen_mode_other_options" msgid="520015080445012355">"іншыя параметры"</string>
     <string name="zen_mode_add" msgid="90014394953272517">"Дадаць"</string>
     <string name="zen_mode_enable_dialog_turn_on" msgid="8287824809739581837">"Уключыць"</string>
     <string name="zen_mode_button_turn_on" msgid="2824380626482175552">"Уключыць"</string>
@@ -3034,9 +3068,19 @@
     <string name="zen_mode_settings_dnd_automatic_rule_app" msgid="1721179577382915270">"Рэжым \"Не турбаваць\" быў аўтаматычна ўключаны праграмай (<xliff:g id="APP_NAME">%s</xliff:g>)"</string>
     <string name="zen_interruption_level_priority" msgid="2078370238113347720">"Толькі прыярытэтныя"</string>
     <string name="zen_mode_and_condition" msgid="4927230238450354412">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_on" msgid="9067685807840094102">"Уключана. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="zen_mode_sound_summary_on_with_info" msgid="1202632669798211342">"Уключана / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_off_with_info" msgid="2348629457144123849">"Выключана. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_off" msgid="4375814717589425561">"Выключана"</string>
+    <string name="zen_mode_sound_summary_on" msgid="7718273231309882914">"Уключана"</string>
+    <string name="zen_mode_duration_summary_always_prompt" msgid="5976427426278136178">"Заўсёды пытацца (калі рэжым не быў уключаны аўтаматычна)"</string>
+    <string name="zen_mode_duration_summary_forever" msgid="3144786357459137066">"Пакуль не будзе выключана (калі рэжым не быў уключаны аўтаматычна)"</string>
+    <plurals name="zen_mode_duration_summary_time_hours" formatted="false" msgid="1060823390336822337">
+      <item quantity="one"><xliff:g id="NUM_HOURS">%d</xliff:g> гадзіна (калі рэжым не быў уключаны аўтаматычна)</item>
+      <item quantity="few"><xliff:g id="NUM_HOURS">%d</xliff:g> гадзіны (калі рэжым не быў уключаны аўтаматычна)</item>
+      <item quantity="many"><xliff:g id="NUM_HOURS">%d</xliff:g> гадзін (калі рэжым не быў уключаны аўтаматычна)</item>
+      <item quantity="other"><xliff:g id="NUM_HOURS">%d</xliff:g> гадзіны (калі рэжым не быў уключаны аўтаматычна)</item>
+    </plurals>
+    <string name="zen_mode_duration_summary_time_minutes" msgid="3959860288930526323">"<xliff:g id="NUM_MINUTES">%d</xliff:g> хв (калі рэжым не быў уключаны аўтаматычна)"</string>
     <plurals name="zen_mode_sound_summary_summary_off_info" formatted="false" msgid="8115159143760078050">
       <item quantity="one">Аўтаматычна ўключаць можа <xliff:g id="ON_COUNT">%d</xliff:g> правіла</item>
       <item quantity="few">Аўтаматычна ўключаць могуць <xliff:g id="ON_COUNT">%d</xliff:g> правілы</item>
@@ -3187,9 +3231,7 @@
     <string name="zen_mode_choose_rule_type" msgid="5423746638871953459">"Выберыце тып правіла"</string>
     <string name="zen_mode_delete_rule_confirmation" msgid="6237882294348570283">"Выдаліць правіла “<xliff:g id="RULE">%1$s</xliff:g>”?"</string>
     <string name="zen_mode_delete_rule_button" msgid="4248741120307752294">"Выдаліць"</string>
-    <string name="zen_mode_rule_type" msgid="2289413469580142888">"Тып правіла"</string>
     <string name="zen_mode_rule_type_unknown" msgid="3049377282766700600">"Невядома"</string>
-    <string name="zen_mode_configure_rule" msgid="8865785428056490305">"Наладзіць правіла"</string>
     <string name="zen_mode_app_set_behavior" msgid="1534429320064381355">"Гэтыя налады немагчыма змяніць зараз. Праграма (<xliff:g id="APP_NAME">%1$s</xliff:g>) аўтаматычна ўключыла рэжым \"Не турбаваць\" з карыстальніцкімі паводзінамі."</string>
     <string name="zen_mode_unknown_app_set_behavior" msgid="2558968232814237874">"Гэтыя налады немагчыма змяніць зараз. Праграма аўтаматычна ўключыла рэжым \"Не турбаваць\" з карыстальніцкімі паводзінамі."</string>
     <string name="zen_mode_qs_set_behavior" msgid="6200424436456086312">"Гэтыя налады немагчыма змяніць зараз. Рэжым \"Не турбаваць\" быў уключаны ўручную з карыстальніцкімі паводзінамі."</string>
@@ -3226,8 +3268,8 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Толькі ад кантактаў, пазначаных зоркай"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Ні ад каго"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Будзільнікі"</string>
-    <string name="zen_mode_media_system_other" msgid="5937422836400161702">"Медыя"</string>
-    <string name="zen_mode_media_system_other_secondary_text" msgid="785130341801887185">"Уключае такую рэакцыю сістэмы як гукі націску і зарадкі"</string>
+    <string name="zen_mode_media" msgid="8808264142134422380">"Медыя"</string>
+    <string name="zen_mode_system" msgid="2541380718411593581">"Гукі пры дотыку"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Напаміны"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Падзеі"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Усе абаненты"</string>
@@ -3287,8 +3329,10 @@
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"У дадатак да выкарыстання адбітка пальца для разблакіроўкі прылады, вы можаце абараніць прыладу, наладзіўшы функцыю патрабавання пароля пры запуску. Пакуль прылада не запушчана, на ёй нельга прымаць выклікі, паведамленні або апавяшчэнні, а таксама не працуе функцыя будзільніка.\n\nГэта дапамагае абараніць даныя на страчаных або ўкрадзеных прыладах. Запытваць пароль для запуску вашай прылады?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Так"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Не"</string>
-    <string name="restricted_true_label" msgid="1793719723017395175">"Так"</string>
-    <string name="restricted_false_label" msgid="6374816254102233858">"Не"</string>
+    <!-- no translation found for restricted_true_label (116728938205853067) -->
+    <skip />
+    <!-- no translation found for restricted_false_label (6992110192242654656) -->
+    <skip />
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Запытваць PIN-код?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Патрабаваць узор?"</string>
     <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"Запытваць пароль?"</string>
@@ -3459,10 +3503,8 @@
     <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"Выкарыстоўваць гэту прыладу ў якасці MIDI"</string>
     <string name="usb_use" msgid="3372728031108932425">"Выкарыстоўваць USB для"</string>
     <string name="usb_use_also" msgid="557340935190819370">"Іншыя рэжымы працы USB"</string>
-    <!-- no translation found for usb_default_label (4217189967858707974) -->
-    <skip />
-    <!-- no translation found for usb_default_info (8864535445796200695) -->
-    <skip />
+    <string name="usb_default_label" msgid="4217189967858707974">"Стандартная канфігурацыя USB"</string>
+    <string name="usb_default_info" msgid="8864535445796200695">"Гэтыя налады прымяняюцца, калі падключана іншая прылада, а ваш тэлефон разблакіраваны. Падключайце толькі давераныя прылады."</string>
     <string name="usb_pref" msgid="1400617804525116158">"USB"</string>
     <string name="usb_summary_charging_only" msgid="7544327009143659751">"Зарадка гэтай прылады"</string>
     <string name="usb_summary_power_only" msgid="1996391096369798526">"Зарадка падключанай прылады"</string>
@@ -3652,6 +3694,8 @@
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Аўтаматычныя абнаўленні сістэмы"</string>
     <string name="usage" msgid="2977875522080448986">"Выкарыстанне"</string>
     <string name="cellular_data_usage" msgid="2155683719898158203">"Выкарыстанне мабільнага трафіку"</string>
+    <!-- no translation found for app_cellular_data_usage (5468472735806533448) -->
+    <skip />
     <string name="wifi_data_usage" msgid="686754111095324306">"Выкарыстанне трафіку Wi-Fi"</string>
     <string name="ethernet_data_usage" msgid="5108764537574354616">"Выкарыстанне даных Ethernet"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
@@ -3661,7 +3705,14 @@
     <string name="ethernet_data_template" msgid="5782476509881033590">"<xliff:g id="AMOUNT">^1</xliff:g> трафіку Ethernet"</string>
     <string name="cell_warning_only" msgid="763147658209027140">"Папярэджанне пра трафік - <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Папярэджанне пра трафік - <xliff:g id="ID_1">%1$s</xliff:g> / Ліміт трафіку - <xliff:g id="ID_2">%2$s</xliff:g>"</string>
-    <string name="billing_cycle" msgid="5169909190811133499">"Разліковы цыкл"</string>
+    <string name="billing_cycle" msgid="6614597736285325497">"Папярэджанне і ліміт трафіка"</string>
+    <string name="app_usage_cycle" msgid="8877223251648092131">"Цыкл трафіка праграм"</string>
+    <!-- no translation found for cell_data_warning (1985956818884847057) -->
+    <skip />
+    <!-- no translation found for cell_data_limit (1578367585799358854) -->
+    <skip />
+    <!-- no translation found for cell_data_warning_and_limit (6888825370687743208) -->
+    <skip />
     <string name="billing_cycle_fragment_summary" msgid="8231066353654583106">"Штомесяц у наступны дзень: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="network_restrictions" msgid="8234695294536675380">"Сеткавыя абмежаванні"</string>
     <plurals name="network_restrictions_summary" formatted="false" msgid="4301618027244595839">
@@ -3674,6 +3725,8 @@
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> выкарыстана"</string>
     <string name="set_data_warning" msgid="6115364758236594593">"Папярэджваць аб выкар. даных"</string>
     <string name="data_warning" msgid="209133958008062117">"Папярэджанне пра трафік"</string>
+    <!-- no translation found for data_warning_footnote (776341964125603711) -->
+    <skip />
     <string name="set_data_limit" msgid="2901526323210516923">"Задаць ліміт трафіку"</string>
     <string name="data_limit" msgid="1885406964934590552">"Ліміт трафіку"</string>
     <string name="data_usage_template" msgid="2923744765873163859">"<xliff:g id="ID_1">%1$s</xliff:g> выкарыстоўвалася <xliff:g id="ID_2">%2$s</xliff:g>"</string>
@@ -3687,8 +3740,14 @@
     </plurals>
     <string name="data_usage_title" msgid="3659356290392241789">"Асноўныя даныя"</string>
     <string name="data_used" msgid="5116389957228457203">"Выкарыстана: <xliff:g id="ID_1">^1</xliff:g>"</string>
-    <string name="data_remaining" msgid="8998091725895502181">"Засталося: <xliff:g id="ID_1">, ^1</xliff:g>"</string>
-    <string name="cycle_left_time_text" msgid="8501602478371081001">"Канец плацежнага перыяду праз <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <!-- no translation found for data_overusage (1134445012475270295) -->
+    <skip />
+    <string name="data_remaining" msgid="8998091725895502181">"Засталося: <xliff:g id="ID_1">^1</xliff:g>"</string>
+    <!-- no translation found for cycle_left_multiple_days (4080948235522858142) -->
+    <skip />
+    <!-- no translation found for billing_cycle_days_left (456503215317213651) -->
+    <!-- no translation found for billing_cycle_less_than_one_day_left (825838050296069404) -->
+    <skip />
     <string name="carrier_and_update_text" msgid="4534395723031386923">"Абноўлена <xliff:g id="ID_2">%2$s</xliff:g> таму аператарам <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="no_carrier_update_text" msgid="6879630084452907385">"Абноўлена <xliff:g id="ID_1">%1$s</xliff:g> таму"</string>
     <string name="launch_mdp_app_text" msgid="7527361210375612985">"ПАГЛЯДЗЕЦЬ ТАРЫФНЫ ПЛАН"</string>
@@ -3991,14 +4050,19 @@
     <string name="bluetooth_on_while_driving_pref" msgid="2460847604498343330">"За рулём выкарыстоўвайце Bluetooth"</string>
     <string name="bluetooth_on_while_driving_summary" msgid="3196190732516898541">"Аўтаматычна ўключаць Bluetooth, калі вы за рулём"</string>
     <string name="dev_android_o_battery_settings_title" msgid="2926578228655006762">"Налады акумулятара для Android 8.0"</string>
-    <!-- no translation found for change_wifi_state_title (2640523995824431999) -->
-    <skip />
-    <!-- no translation found for keywords_change_wifi_state (1439807171750715923) -->
-    <skip />
-    <!-- no translation found for change_wifi_state_app_detail_title (1022360625069880993) -->
-    <skip />
-    <!-- no translation found for change_wifi_state_app_detail_switch (724818064600933957) -->
-    <skip />
-    <!-- no translation found for change_wifi_state_app_detail_summary (2511212187129042304) -->
-    <skip />
+    <string name="change_wifi_state_title" msgid="2640523995824431999">"Уключэнне і выключэнне Wi-Fi"</string>
+    <string name="keywords_change_wifi_state" msgid="1439807171750715923">"уключэнне і выключэнне Wi-Fi"</string>
+    <string name="change_wifi_state_app_detail_title" msgid="1022360625069880993">"Уключэнне і выключэнне Wi-Fi"</string>
+    <string name="change_wifi_state_app_detail_switch" msgid="724818064600933957">"Дазволіць уключэнне і выключэнне Wi-Fi"</string>
+    <string name="change_wifi_state_app_detail_summary" msgid="2511212187129042304">"Дазволіць гэтай праграме рабіць падключэнні па Wi-Fi, а таксама ўключаць і выключаць гэту функцыю."</string>
+    <string name="media_output_title" msgid="115223550977351699">"Прайграваць медыяфайлы на"</string>
+    <string name="media_output_summary" product="default" msgid="6839458453831567167">"Тэлефон"</string>
+    <string name="media_output_summary" product="tablet" msgid="7217221078578554515">"Планшэт"</string>
+    <string name="media_output_summary" product="device" msgid="5677420090811068649">"Прылада"</string>
+    <string name="media_out_summary_ongoing_call_state" msgid="3533731701018680693">"Недаступна падчас выклікаў"</string>
+    <string name="media_output_summary_unavailable" msgid="7970304720507697019">"Недаступна"</string>
+    <string name="battery_suggestion_title" product="tablet" msgid="752439050748267917">"Як прадоўжыць час працы акумулятара планшэта"</string>
+    <string name="battery_suggestion_title" product="device" msgid="1507272328369733005">"Як прадоўжыць час працы акумулятара прылады"</string>
+    <string name="battery_suggestion_title" product="default" msgid="4038053023336285165">"Як прадоўжыць час працы акумулятара тэлефона"</string>
+    <string name="battery_suggestion_summary" msgid="4585677159811722359"></string>
 </resources>

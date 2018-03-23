@@ -16,6 +16,9 @@
 
 package com.android.settings.datausage;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.DISABLED_UNSUPPORTED;
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
@@ -25,6 +28,8 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.Intent;
 import android.net.NetworkTemplate;
+import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -61,6 +66,8 @@ public class DataUsageSummaryPreferenceControllerTest {
     private NetworkPolicyEditor mPolicyEditor;
     @Mock
     private NetworkTemplate mNetworkTemplate;
+    @Mock
+    private SubscriptionManager mSubscriptionManager;
 
     private Context mContext;
     private DataUsageSummaryPreferenceController mController;
@@ -228,6 +235,40 @@ public class DataUsageSummaryPreferenceControllerTest {
 
         mController.updateState(mSummaryPreference);
         verify(mSummaryPreference).setLimitInfo("1.00 MB data warning / 1.00 MB data limit");
+    }
+
+    @Test
+    public void testMobileData_preferenceAvailable() {
+        mController = new DataUsageSummaryPreferenceController(
+                mContext,
+                mDataUsageController,
+                mDataInfoController,
+                mNetworkTemplate,
+                mPolicyEditor,
+                R.string.cell_data_template,
+                true,
+                mSubscriptionManager);
+
+        final SubscriptionInfo subInfo = new SubscriptionInfo(0, "123456", 0, "name", "carrier",
+                0, 0, "number", 0, null, 123, 456, "ZX");
+        when(mSubscriptionManager.getDefaultDataSubscriptionInfo()).thenReturn(subInfo);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void testMobileData_preferenceDisabled() {
+        mController = new DataUsageSummaryPreferenceController(
+                mContext,
+                mDataUsageController,
+                mDataInfoController,
+                mNetworkTemplate,
+                mPolicyEditor,
+                R.string.cell_data_template,
+                true,
+                mSubscriptionManager);
+
+        when(mSubscriptionManager.getDefaultDataSubscriptionInfo()).thenReturn(null);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_UNSUPPORTED);
     }
 
     private DataUsageController.DataUsageInfo createTestDataUsageInfo(long now) {

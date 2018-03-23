@@ -85,7 +85,7 @@ public class AutoBatterySeekBarPreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertThat(mPreference.isVisible()).isTrue();
-        assertThat(mPreference.getTitle()).isEqualTo("Turn on automatically at 20%");
+        assertThat(mPreference.getTitle()).isEqualTo("Turn on at 20%");
         assertThat(mPreference.getProgress()).isEqualTo(TRIGGER_LEVEL);
     }
 

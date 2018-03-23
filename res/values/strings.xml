@@ -401,6 +401,10 @@
     <!-- Summary of checkbox for disabling Bluetooth inband ringing in Development Settings -->
     <string name="bluetooth_disable_inband_ringing_summary">Don’t play custom phone ringtones on Bluetooth headsets</string>
 
+    <!-- Title for Bluetooth device group with media capability group [CHAR LIMIT=none]-->
+    <string name="connected_device_available_media_title">Available media devices</string>
+    <!-- Title for Bluetooth device group with media capability group [CHAR LIMIT=none]-->
+    <string name="connected_device_available_call_title">Available call devices</string>
     <!-- Title for connected device group [CHAR LIMIT=none]-->
     <string name="connected_device_connected_title">Currently connected</string>
     <!-- Title for connected device group [CHAR LIMIT=none]-->
@@ -411,6 +415,8 @@
     <string name="connected_device_add_device_summary">Bluetooth will turn on to enable pairing</string>
     <!-- Title for other connection preferences [CHAR LIMIT=none]-->
     <string name="connected_device_connections_title">Connection preferences</string>
+    <!-- Title for Bluetooth preference to open paired but no connection list [CHAR LIMIT=none]-->
+    <string name="connected_device_previously_connected_title">Previously connected devices</string>
 
     <!-- Date & time settings screen title -->
     <string name="date_and_time">Date &amp; time</string>
@@ -805,7 +811,7 @@
     <!-- Text shown for the title of the lockdown option -->
     <string name="lockdown_settings_title">Show lockdown option</string>
     <!-- Text shown for the description of the lockdown option -->
-    <string name="lockdown_settings_summary">Display power button option that turns off extended access and fingerprint unlocking.</string>
+    <string name="lockdown_settings_summary">Display power button option that turns off Smart Lock, fingerprint unlocking, and notifications on the lock screen</string>
     <!-- Text shown for summary of owner info setting (if none set) [CHAR LIMIT=40]-->
     <string name="owner_info_settings_summary">None</string>
     <!-- Description of how many characters are used in owner info [CHAR LIMIT=40]-->
@@ -935,7 +941,7 @@
     <!-- Title shown in fingerprint enrollment dialog once enrollment is completed [CHAR LIMIT=29] -->
     <string name="security_settings_fingerprint_enroll_finish_title">Fingerprint added</string>
     <!-- Message shown in fingerprint enrollment dialog once enrollment is completed -->
-    <string name="security_settings_fingerprint_enroll_finish_message">When you see this icon, use your fingerprint for identification or to approve purchases.</string>
+    <string name="security_settings_fingerprint_enroll_finish_message">When you see this icon, use your fingerprint for identification or to approve purchases</string>
     <!-- Button text to skip enrollment of fingerprint [CHAR LIMIT=40] -->
     <string name="security_settings_fingerprint_enroll_enrolling_skip">Do it later</string>
     <!-- Title of the dialog shown when the user tries to skip fingerprint setup, asking them to confirm the action [CHAR LIMIT=40] -->
@@ -1578,7 +1584,7 @@
     <!-- Bluetooth settings: The sub heading for devices which have already been paired with this device. [CHAR LIMIT=40] -->
     <string name="bluetooth_preference_paired_devices">Paired devices</string>
     <!-- Bluetooth settings: The sub heading for available devices during and after scanning. [CHAR LIMIT=40] -->
-    <string name="bluetooth_preference_found_devices">Available devices</string>
+    <string name="bluetooth_preference_found_media_devices">Available media devices</string>
     <!-- Bluetooth settings: The message displayed if no Bluetooth devices were found. [CHAR LIMIT=40] -->
     <string name="bluetooth_preference_no_found_devices">No devices available</string>
     <!-- Bluetooth settings.  Context menu item for a device.  Action will connect to all profiles on the device. -->
@@ -2429,6 +2435,12 @@
     <string name="color_mode_option_boosted">Boosted</string>
     <!-- Display settings screen, Color mode option for "Saturated color"  [CHAR LIMIT=45] -->
     <string name="color_mode_option_saturated">Saturated</string>
+    <!-- Display settings screen, Color mode option for "Automatic color"  [CHAR LIMIT=45] -->
+    <string name="color_mode_option_automatic">Automatic</string>
+    <!-- Display settings screen, "natural(sRGB) color" setting option summary [CHAR LIMIT=NONE] -->
+    <string name="color_mode_summary_natural">Use accurate colors only</string>
+    <!-- Display settings screen, "Automatic color" setting option summary [CHAR LIMIT=NONE] -->
+    <string name="color_mode_summary_automatic">Adjust between vivid and accurate colors</string>
 
     <!-- Sound & display settings screen, accelerometer-based rotation summary text when check box is selected -->
     <string name="accelerometer_summary_on" product="tablet">Switch orientation automatically when rotating tablet</string>
@@ -2481,6 +2493,8 @@
     <string name="auto_brightness_very_high_summary">Increased battery usage</string>
     <!-- Adaptive brightness settings screen, disclaimer that explains in more detail about how adaptive brightness works [CHAR LIMIT=150] -->
     <string name="auto_brightness_disclaimer">Optimize brightness level for available light. When this feature is on, you can still adjust brightness temporarily.</string>
+    <!-- Description about the feature adaptive brightness -->
+    <string name="auto_brightness_description">Your screen brightness will automatically adjust to your environment and activities. You can move the slider manually to help adaptive brightness learn your preferences.</string>
 
     <!-- Night display screen, setting option name to enable night display (renamed "Night Light" with title caps). [CHAR LIMIT=30] -->
     <string name="night_display_title">Night Light</string>
@@ -3218,7 +3232,7 @@
     <!-- SD card & phone storage settings screen, message on screen after user selects Reset network settings [CHAR LIMIT=NONE] -->
     <string name="reset_network_desc">This will reset all network settings, including:\n\n<li>Wi\u2011Fi</li>\n<li>Mobile data</li>\n<li>Bluetooth</li>"</string>
     <!-- SD card & phone storage settings screen, title for the checkbox to let user decide whether erase eSIM data together [CHAR LIMIT=NONE] -->
-    <string name="reset_esim_title">Also reset eSIMs</string>
+    <string name="reset_esim_title">Also reset eSIM</string>
     <!-- SD card & phone storage settings screen, message for the checkbox to let user decide whether erase eSIM data together [CHAR LIMIT=NONE] -->
     <string name="reset_esim_desc">Erase all eSIMs on the phone. You\u2019ll have to contact your carrier to redownload your eSIMs. This will not cancel your mobile service plan.</string>
     <!-- SD card & phone storage settings screen, button on screen after user selects Reset network settings -->
@@ -3268,7 +3282,7 @@
     <!-- SD card & phone storage settings screen, description for check box to erase USB storage [CHAR LIMIT=NONE] -->
     <string name="erase_external_storage_description" product="default">Erase all the data on the SD card, such as music or photos</string>
     <!-- SD card & phone storage settings screen, label for check box to erase all the carriers information on the embedded SIM card [CHAR LIMIT=30] -->
-    <string name="erase_esim_storage">Erase eSIMs</string>
+    <string name="erase_esim_storage">Erase eSIM</string>
     <!-- SD card & phone storage settings screen, description for check box to erase eSIMs for default devices [CHAR LIMIT=NONE] -->
     <string name="erase_esim_storage_description" product="default">Erase all eSIMs on the phone. This will not cancel your mobile service plan.</string>
     <!-- SD card & phone storage settings screen, description for check box to erase eSIMs for tablets [CHAR LIMIT=NONE] -->
@@ -3523,6 +3537,8 @@
     <string name="lockpassword_confirm_passwords_dont_match">Passwords don\u2019t match</string>
     <!-- Header on pin confirm screen if second pin doesn't match the first. [CHAR LIMIT=30]-->
     <string name="lockpassword_confirm_pins_dont_match">PINs don\u2019t match</string>
+    <!-- Header on pattern confirm screen [CHAR LIMIT=40] -->
+    <string name="lockpassword_draw_your_pattern_again_header">Draw your pattern again</string>
     <!-- Header shown to ask the user to select an unlock method [CHAR LIMIT=30] -->
     <string name="lockpassword_choose_lock_generic_header">Unlock selection</string>
     <!-- Toast shown if setting password was successful -->
@@ -3810,6 +3826,10 @@
     <string name="sort_order_alpha">Sort by name</string>
     <!-- Manage applications screen, menu item. Sorts all of the apps in the list based on their file size.  This is used to uninstall when space is getting low. -->
     <string name="sort_order_size">Sort by size</string>
+    <!-- Manage applications screen, menu item. Sorts all of the apps in the list based on how recently they sent notifications.-->
+    <string name="sort_order_recent_notification">Most recent</string>
+    <!-- Manage applications screen, menu item. Sorts all of the apps in the list based on how often they send notifications. -->
+    <string name="sort_order_frequent_notification">Most frequent</string>
     <!-- [CHAR LIMIT=25] Manage applications screen, menu item.  Show running services. -->
     <string name="show_running_services">Show running services</string>
     <!-- [CHAR LIMIT=25] Manage applications screen, menu item.  Show background cached processes. -->
@@ -4185,9 +4205,9 @@
     <!-- On Languages & input settings screen, heading. Inside the "Languages & input settings" screen, this is the header for settings that relate to game controller devices. [CHAR LIMIT=40] -->
     <string name="game_controller_settings_category">Game Controller</string>
     <!-- On Languages & input settings screen, setting title.  Setting to redirect vibration to input devices. [CHAR LIMIT=35] -->
-    <string name="vibrate_input_devices">Use vibrator</string>
+    <string name="vibrate_input_devices">Redirect vibration</string>
     <!-- On Languages & input settings screen, setting summary.  Setting to redirect vibration to input devices. [CHAR LIMIT=100] -->
-    <string name="vibrate_input_devices_summary">Redirect vibrator to game controller when connected.</string>
+    <string name="vibrate_input_devices_summary">Send vibration to game controller when connected</string>
 
     <!-- Keyboard Layout Preference Dialog --> <skip />
     <!-- Title for the keyboard layout preference dialog. [CHAR LIMIT=35] -->
@@ -4428,6 +4448,10 @@
     <string name="accessibility_summary_state_enabled">On</string>
     <!-- Preference's state when disabled. -->
     <string name="accessibility_summary_state_disabled">Off</string>
+    <!-- Accessibility service's preference's state when enabled but not running (like maybe it crashed). -->
+    <string name="accessibility_summary_state_stopped">Not working. Tap for info.</string>
+    <!-- Accessibility service's description when enabled but not running (like maybe it crashed). -->
+    <string name="accessibility_description_state_stopped">This service is malfunctioning.</string>
 
     <!-- Title for the preference to show a tile for a particular feature in the Quick Settings pane. [CHAR LIMIT=NONE] -->
     <string name="enable_quick_setting">Show in Quick Settings</string>
@@ -4689,6 +4713,9 @@
     <!-- Template for the summary of a print job. [CHAR LIMIT=25] -->
     <string name="print_job_summary"><xliff:g id="printer">%1$s</xliff:g>\n<xliff:g id="time">%2$s</xliff:g></string>
 
+    <!-- Template for the label for a configuring print job (i.e. the user is currently selecting the paper size and printer to use). [CHAR LIMIT=25] -->
+    <string name="print_configuring_state_title_template" >Configuring <xliff:g id="print_job_name" example="foo.jpg">%1$s</xliff:g></string>
+
     <!-- Template for the label of the state for a ongoing print job. [CHAR LIMIT=25] -->
     <string name="print_printing_state_title_template">Printing <xliff:g id="print_job_name" example="foo.jpg">%1$s</xliff:g></string>
 
@@ -4931,6 +4958,16 @@
     <string name="battery_auto_restriction_title">Restrict apps automatically</string>
     <!-- Summary for auto restriction toggle -->
     <string name="battery_auto_restriction_summary">Prevent apps from using extra battery in the background</string>
+
+    <!-- Summary for battery manager when it is on -->
+    <string name="battery_manager_on">On / Restricting apps automatically</string>
+    <!-- Summary for battery manager when it is off -->
+    <string name="battery_manager_off">Off</string>
+    <!-- Summary for battery manager, showing app restricted -->
+    <plurals name="battery_manager_app_restricted">
+        <item quantity="one">%1$d app restricted</item>
+        <item quantity="other">%1$d apps restricted</item>
+    </plurals>
 
     <!-- Title for force stop dialog [CHAR LIMIT=30] -->
     <string name="dialog_stop_title">Stop app?</string>
@@ -5188,7 +5225,10 @@
     <string name="battery_saver_auto_title">Turn on automatically</string>
 
     <!-- Battery saver: Label for seekbar to change battery saver threshold [CHAR_LIMIT=40] -->
-    <string name="battery_saver_seekbar_title">Turn on automatically at <xliff:g id="percent">%1$s</xliff:g></string>
+    <string name="battery_saver_seekbar_title">Turn on at <xliff:g id="percent">%1$s</xliff:g></string>
+
+    <!-- Battery saver: Placeholder label for seekbar to change battery saver threshold [CHAR_LIMIT=40] -->
+    <string name="battery_saver_seekbar_title_placeholder">Turn on</string>
 
     <!-- Used in the Battery Saver settings screen to control turning on/off the feature entirely -->
     <string name="battery_saver_master_switch_title">Use Battery Saver</string>
@@ -6271,7 +6311,7 @@
     <!-- Title for add user confirmation dialog [CHAR LIMIT=30] -->
     <string name="user_add_user_title">Add new user?</string>
     <!-- Message for add user confirmation dialog - long version. [CHAR LIMIT=none] -->
-    <string name="user_add_user_message_long">You can share this device with other people by creating additional users. Each user has their own space, which they can customize with apps, wallpaper, and so on. Users can also adjust device settings like Wi\u2011Fi that affect everyone.\n\nWhen you add a new user, that person needs to set up their space.\n\nAny user can update apps for all other users.</string>
+    <string name="user_add_user_message_long">You can share this device with other people by creating additional users. Each user has their own space, which they can customize with apps, wallpaper, and so on. Users can also adjust device settings like Wi\u2011Fi that affect everyone.\n\nWhen you add a new user, that person needs to set up their space.\n\nAny user can update apps for all other users. Accessibility settings and services may not transfer to the new user.</string>
     <!-- Message for add user confirmation dialog - short version. [CHAR LIMIT=none] -->
     <string name="user_add_user_message_short">When you add a new user, that person needs to set up their space.\n\nAny user can update apps for all other users. </string>
     <!-- Title of dialog to setup a new user [CHAR LIMIT=30] -->
@@ -6897,7 +6937,10 @@
     <string name="touch_sounds_title">Touch sounds</string>
 
     <!-- Sound: Other sounds: Title for the option enabling haptic feedback on touch. [CHAR LIMIT=30] -->
-    <string name="vibrate_on_touch_title">Vibrate on tap</string>
+    <string name="vibrate_on_touch_title">Touch vibration</string>
+
+    <!-- Sound: Other sounds: Preference summary to the option enabling haptic feedback on touch. -->
+    <string name="vibrate_on_touch_summary">Haptic feedback for tap, keyboard, and more</string>
 
     <!-- Sound: Other sounds: Title for the option enabling dock audio media. [CHAR LIMIT=50] -->
     <string name="dock_audio_media_title">Dock speaker plays</string>
@@ -7154,6 +7197,9 @@
     <!-- Configure Notifications: Title for the option controlling notifications on the lockscreen. [CHAR LIMIT=30] -->
     <string name="lock_screen_notifications_title">On lock screen</string>
 
+    <!-- Configure Notifications: Title for the option controlling notifications for work profile. [CHAR LIMIT=30] -->
+    <string name="locked_work_profile_notification_title">When work profile is locked</string>
+
     <!-- Configure Notifications: Value for lockscreen notifications:  all information will be
          shown in notifications shown on a secure lock screen
          [CHAR LIMIT=50] -->
@@ -7183,10 +7229,6 @@
          hidden or redacted from work notifications shown on a secure lock screen
          [CHAR LIMIT=50] -->
     <string name="lock_screen_notifications_summary_hide_profile">Hide sensitive work content</string>
-
-    <!-- Configure Notifications: Value for lockscreen notifications: work notifications will not appear on a secure lock screen
-         [CHAR LIMIT=50] -->
-    <string name="lock_screen_notifications_summary_disable_profile">Don\u2019t show work notifications at all</string>
 
     <!-- Security > Choose PIN/PW/Pattern > Notification redaction interstitial: Message asking the user how they want their profile notifications to appear when the device is locked [CHAR LIMIT=NONE] -->
     <string name="lock_screen_notifications_interstitial_message_profile">When your device is locked, how do you want profile notifications to show?</string>
@@ -7277,6 +7319,13 @@
 
     <!-- Default Apps > Default notification assistant -->
     <string name="default_notification_assistant">Notification assistant</string>
+
+    <!-- app summary of notification app list screen [CHAR LIMIT=100] -->
+    <string name="notifications_sent_daily">~<xliff:g id="number">%1$s</xliff:g> sent daily</string>
+    <!-- app summary of notification app list screen [CHAR LIMIT=100] -->
+    <string name="notifications_sent_weekly">~<xliff:g id="number">%1$s</xliff:g> sent weekly</string>
+    <!-- app summary of notification app list screen [CHAR LIMIT=100] -->
+    <string name="notifications_sent_never">Never</string>
 
     <!-- Sound & notification > Advanced section: Title for managing notification listeners option. [CHAR LIMIT=30] -->
     <string name="manage_notification_access_title">Notification access</string>
@@ -8368,8 +8417,6 @@
     <string name="system_alert_window_access_title">Display over other apps</string>
     <!-- Label for setting which controls whether app can display over other apps [CHAR LIMIT=45] -->
     <string name="permit_draw_overlay">Allow display over other apps</string>
-    <!-- Link to the apps page for SYSTEM_ALERT_WINDOW settings [CHAR LIMIT=45] -->
-    <string name="app_overlay_permission_preference">App display on top permission</string>
     <!-- Description of allowing overlay setting [CHAR LIMIT=NONE] -->
     <string name="allow_overlay_description">Allow this app to display on top of other apps you\u2019re using. It may interfere with your use of those apps or change the way they seem to appear or behave.</string>
 
@@ -8411,8 +8458,6 @@
     <string name="write_settings_title">Can modify system settings</string>
     <!-- Main settings screen item's title to go into the write system settings screen [CHAR LIMIT=30] -->
     <string name="write_system_settings">Modify system settings</string>
-    <!-- Link to the apps page for WRITE_SETTINGS settings [CHAR LIMIT=52] -->
-    <string name="write_settings_preference">App modify system settings permission</string>
     <!-- Label for setting which controls whether app can write system settings [CHAR LIMIT=45] -->
     <string name="permit_write_settings">Allow modifying system settings</string>
     <!-- Description of the write system settings [CHAR LIMIT=NONE] -->
@@ -8582,7 +8627,7 @@
     <string name="condition_airplane_title">Airplane mode is on</string>
 
     <!-- Summary of condition that airplane mode is on [CHAR LIMIT=NONE] -->
-    <string name="condition_airplane_summary">Wi-Fi, Bluetooth, and mobile network are turned off. You can\'t make phone calls or connect to the internet.</string>
+    <string name="condition_airplane_summary">When airplane mode is turned on, Wi\u2011Fi, Bluetooth, and mobile network are turned off. Wi\u2011Fi and Bluetooth can be turned back on.</string>
 
     <!-- Title of condition that do not disturb is on [CHAR LIMIT=36] -->
     <string name="condition_zen_title">Do Not Disturb is on</string>
@@ -8610,6 +8655,27 @@
 
     <!-- Summary of condition that work mode is off [CHAR LIMIT=NONE] -->
     <string name="condition_work_summary">Apps, background sync, and other features related to your work profile are turned off.</string>
+
+    <!-- Title of condition that indicates device is muted [CHAR LIMIT=50] -->
+    <string name="condition_device_muted_title" product="tablet">Device is muted</string>
+
+    <!-- Title of condition that indicates device is muted [CHAR LIMIT=50] -->
+    <string name="condition_device_muted_title" product="default">Phone is muted</string>
+
+    <!-- Summary of condition that indicates device is muted -->
+    <string name="condition_device_muted_summary">Calls and notifications will be muted</string>
+
+    <!-- Title of condition that indicates device is set to vibrate [CHAR LIMIT=50] -->
+    <string name="condition_device_vibrate_title" product="tablet">Device is set to vibrate</string>
+
+    <!-- Title of condition that indicates device is muted [CHAR LIMIT=50] -->
+    <string name="condition_device_vibrate_title" product="default">Phone is set to vibrate</string>
+
+    <!-- Summary of condition that indicates device is set to vibrate -->
+    <string name="condition_device_vibrate_summary" product="tablet">Calls and notifications will vibrate device</string>
+
+    <!-- Summary of condition that indicates device is set to vibrate -->
+    <string name="condition_device_vibrate_summary" product="default">Calls and notifications will vibrate phone</string>
 
     <!--  Night display: Title for the night display option Suggestion (renamed "Night Light" with title caps). [CHAR LIMIT=46] -->
     <string name="night_display_suggestion_title">Set Night Light schedule</string>
@@ -8805,13 +8871,19 @@
     <string name="billing_cycle_less_than_one_day_left">Less than 1 day left</string>
 
     <!-- Informational text about carrier and update time [CHAR LIMIT=30] -->
-    <string name="carrier_and_update_text">Updated by <xliff:g name="carrier" example="T-mobile">%1$s</xliff:g> <xliff:g name="time" example="3m">%2$s</xliff:g></string>
+    <string name="carrier_and_update_text">Updated by <xliff:g name="carrier" example="T-mobile">^1</xliff:g> <xliff:g name="time" example="3m">^2</xliff:g> ago</string>
 
-    <!-- Informational text about update time only, without carrier [CHAR LIMIT=30] -->
-    <string name="no_carrier_update_text">Updated <xliff:g name="time" example="3m">%1$s</xliff:g></string>
+    <!-- Informational text about update time only, without carrier. First argument intentionally skipped. [CHAR LIMIT=30] -->
+    <string name="no_carrier_update_text">Updated <xliff:g name="time" example="3m">^2</xliff:g> ago</string>
+
+    <!-- Informational text about a recent carrier and update time [CHAR LIMIT=30] -->
+    <string name="carrier_and_update_now_text">Updated by <xliff:g name="carrier" example="T-mobile">^1</xliff:g> just now</string>
+
+    <!-- Informational text about recent update time only, without carrier [CHAR LIMIT=30] -->
+    <string name="no_carrier_update_now_text">Updated just now</string>
 
     <!-- Button to launch external data plan app [CHAR LIMIT=30] -->
-    <string name="launch_mdp_app_text">VIEW PLAN</string>
+    <string name="launch_mdp_app_text">View plan</string>
 
     <!-- Name of Data Saver screens [CHAR LIMIT=30] -->
     <string name="data_saver_title">Data saver</string>
@@ -8892,6 +8964,9 @@
 
     <!-- [CHAR LIMIT=30] Title for dialog for setting to control the default spell checker -->
     <string name="choose_spell_checker">Choose spell checker</string>
+
+    <!-- [CHAR LIMIT=45] Title for the master switch for spell checker, turning off will disable entire spell check feature. -->
+    <string name="spell_checker_master_switch_title">Use spell checker</string>
 
     <!-- [CHAR LIMIT=30] Label for the placeholder of the current spell checker name.  Used when no spell checker is currently selected. -->
     <string name="spell_checker_not_selected">Not selected</string>
@@ -9531,6 +9606,9 @@
     <!-- Summary for media output settings when the media stream is being captured by something else. -->
     <string name="media_output_summary_unavailable">Unavailable</string>
 
+    <!-- Title for HFP(hands free profile) output switch button in settings. -->
+    <string name="take_call_on_title">Take call on</string>
+
     <!--  Title for battery Suggestion. (tablet) [CHAR LIMIT=46] -->
     <string name="battery_suggestion_title" product="tablet" >Improve tablet\'s battery life</string>
     <!--  Title for battery Suggestion. (device) [CHAR LIMIT=46] -->
@@ -9539,5 +9617,25 @@
     <string name="battery_suggestion_title" product="default" >Improve phone\'s battery life</string>
     <!--  Summary for battery Suggestion. [CHAR LIMIT=55] -->
     <string name="battery_suggestion_summary"></string>
+
+    <!-- Title for prevent ringing gesture screen -->
+    <string name="gesture_prevent_ringing_screen_title">Prevent ringing</string>
+    <!-- Title for prevent ringing setting -->
+    <string name="gesture_prevent_ringing_title">Press Power &amp; Volume Up together</string>
+    <!-- Option for prevent ringing setting -->
+    <string name="prevent_ringing_option_vibrate">Vibrate</string>
+    <!-- Option for prevent ringing setting -->
+    <string name="prevent_ringing_option_mute">Mute</string>
+    <!-- Option for prevent ringing setting -->
+    <string name="prevent_ringing_option_none">Do nothing</string>
+    <!-- Summary for prevent ringing setting -->
+    <string name="prevent_ringing_option_vibrate_summary">Vibrate all calls and notifications</string>
+    <!-- Summary for prevent ringing setting -->
+    <string name="prevent_ringing_option_mute_summary">Mute all calls and notifications</string>
+    <!-- Summary for prevent ringing setting -->
+    <string name="prevent_ringing_option_none_summary">Do nothing</string>
+
+    <!-- Title for detail page of wifi network [CHAR LIMIT=30] -->
+    <string name="pref_title_network_details">Network details</string>
 
 </resources>

@@ -18,7 +18,10 @@ package com.android.settings.fuelgauge.batterytip.actions;
 
 import android.app.AppOpsManager;
 import android.content.Context;
+import android.support.annotation.VisibleForTesting;
+import android.util.Pair;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
 
@@ -27,7 +30,8 @@ import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
  */
 public class UnrestrictAppAction extends BatteryTipAction {
     private UnrestrictAppTip mUnRestrictAppTip;
-    private BatteryUtils mBatteryUtils;
+    @VisibleForTesting
+    BatteryUtils mBatteryUtils;
 
     public UnrestrictAppAction(Context context, UnrestrictAppTip tip) {
         super(context);
@@ -39,10 +43,13 @@ public class UnrestrictAppAction extends BatteryTipAction {
      * Handle the action when user clicks positive button
      */
     @Override
-    public void handlePositiveAction() {
+    public void handlePositiveAction(int metricsKey) {
         final String packageName = mUnRestrictAppTip.getPackageName();
         // Clear force app standby, then app can run in the background
         mBatteryUtils.setForceAppStandby(mBatteryUtils.getPackageUid(packageName), packageName,
                 AppOpsManager.MODE_ALLOWED);
+        mMetricsFeatureProvider.action(mContext,
+                MetricsProto.MetricsEvent.ACTION_TIP_UNRESTRICT_APP, packageName, Pair.create(
+                        MetricsProto.MetricsEvent.FIELD_CONTEXT, metricsKey));
     }
 }

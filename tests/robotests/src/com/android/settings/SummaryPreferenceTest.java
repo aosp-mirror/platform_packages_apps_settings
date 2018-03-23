@@ -25,13 +25,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.annotation.Config;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(shadows = SettingsShadowResourcesImpl.class)
 public class SummaryPreferenceTest {
 
     private PreferenceViewHolder mHolder;

@@ -17,6 +17,9 @@
 package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.doReturn;
@@ -188,12 +191,13 @@ public class UtilsTest {
     @Test
     public void testGetBadgedIcon_usePackageNameAndUserId()
         throws PackageManager.NameNotFoundException {
-        doReturn(mApplicationInfo).when(mPackageManager).getApplicationInfo(PACKAGE_NAME,
-                PackageManager.GET_META_DATA);
+        doReturn(mApplicationInfo).when(mPackageManager).getApplicationInfoAsUser(
+                PACKAGE_NAME, PackageManager.GET_META_DATA, USER_ID);
 
         Utils.getBadgedIcon(mIconDrawableFactory, mPackageManager, PACKAGE_NAME, USER_ID);
 
         // Verify that it uses the correct user id
+        verify(mPackageManager).getApplicationInfoAsUser(eq(PACKAGE_NAME), anyInt(), eq(USER_ID));
         verify(mIconDrawableFactory).getBadgedIcon(mApplicationInfo, USER_ID);
     }
 }

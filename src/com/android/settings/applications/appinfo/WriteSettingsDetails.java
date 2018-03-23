@@ -45,7 +45,6 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
 
     private static final String KEY_APP_OPS_PREFERENCE_SCREEN = "app_ops_preference_screen";
     private static final String KEY_APP_OPS_SETTINGS_SWITCH = "app_ops_settings_switch";
-    private static final String KEY_APP_OPS_SETTINGS_PREFS = "app_ops_settings_preference";
     private static final String LOG_TAG = "WriteSettingsDetails";
 
     private static final int [] APP_OPS_OP_CODE = {
@@ -57,7 +56,6 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
     private AppStateWriteSettingsBridge mAppBridge;
     private AppOpsManager mAppOpsManager;
     private SwitchPreference mSwitchPref;
-    private Preference mWriteSettingsPrefs;
     private Intent mSettingsIntent;
     private WriteSettingsState mWriteSettingsState;
 
@@ -71,10 +69,8 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
 
         addPreferencesFromResource(R.xml.write_system_settings_permissions_details);
         mSwitchPref = (SwitchPreference) findPreference(KEY_APP_OPS_SETTINGS_SWITCH);
-        mWriteSettingsPrefs = findPreference(KEY_APP_OPS_SETTINGS_PREFS);
 
         mSwitchPref.setOnPreferenceChangeListener(this);
-        mWriteSettingsPrefs.setOnPreferenceClickListener(this);
 
         mSettingsIntent = new Intent(Intent.ACTION_MAIN)
                 .addCategory(Settings.INTENT_CATEGORY_USAGE_ACCESS_CONFIG)
@@ -83,16 +79,6 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        if (preference == mWriteSettingsPrefs) {
-            if (mSettingsIntent != null) {
-                try {
-                    getActivity().startActivityAsUser(mSettingsIntent, new UserHandle(mUserId));
-                } catch (ActivityNotFoundException e) {
-                    Log.w(LOG_TAG, "Unable to launch write system settings " + mSettingsIntent, e);
-                }
-            }
-            return true;
-        }
         return false;
     }
 
@@ -142,15 +128,9 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
         mSwitchPref.setChecked(canWrite);
         // you can't ask a user for a permission you didn't even declare!
         mSwitchPref.setEnabled(mWriteSettingsState.permissionDeclared);
-        mWriteSettingsPrefs.setEnabled(canWrite);
 
         ResolveInfo resolveInfo = mPm.resolveActivityAsUser(mSettingsIntent,
                 PackageManager.GET_META_DATA, mUserId);
-        if (resolveInfo == null) {
-            if (getPreferenceScreen().findPreference(KEY_APP_OPS_SETTINGS_PREFS) != null) {
-                getPreferenceScreen().removePreference(mWriteSettingsPrefs);
-            }
-        }
         return true;
     }
 

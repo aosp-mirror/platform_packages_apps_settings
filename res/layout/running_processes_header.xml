@@ -36,11 +36,12 @@
         android:gravity="left|center_vertical"
         android:text="@string/running_processes_header_title" />
 
-    <view class="com.android.settings.widget.LinearColorBar"
+    <ProgressBar
         android:id="@+id/color_bar"
+        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="16sp"
-        android:orientation="horizontal" />
+        android:layout_height="wrap_content"
+        android:progressDrawable="@drawable/color_bar_progress"/>
 
     <LinearLayout
         android:layout_width="match_parent"

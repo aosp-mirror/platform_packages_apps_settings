@@ -38,6 +38,7 @@ public class FeedbackPreferenceController extends AbstractPreferenceController i
         intent = new Intent("android.intent.action.BUG_REPORT");
     }
 
+    @Override
     public boolean isAvailable() {
         return !TextUtils.isEmpty(DeviceInfoUtils.getFeedbackReporterPackage(mContext));
     }
@@ -47,6 +48,15 @@ public class FeedbackPreferenceController extends AbstractPreferenceController i
         super.updateState(preference);
         intent.setPackage(DeviceInfoUtils.getFeedbackReporterPackage(mContext));
         preference.setIntent(intent);
+
+        // In some cases, cannot retrieve the report package from package manager,
+        // For example, launched from lock screen.
+        // Update this preference visibility after updateState.
+        if (isAvailable() && !preference.isVisible()) {
+            preference.setVisible(true);
+        } else if (!isAvailable() && preference.isVisible()){
+            preference.setVisible(false);
+        }
     }
 
     public String getPreferenceKey() {

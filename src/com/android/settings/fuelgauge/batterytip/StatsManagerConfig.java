@@ -41,22 +41,6 @@ public class StatsManagerConfig {
      */
     public static final long SUBSCRIBER_ID = 1;
 
-    private static final Map<Long, Integer> ANOMALY_TYPE;
-
-    private static final HashFunction HASH_FUNCTION = Hashing.sha256();
-
-    static {
-        ANOMALY_TYPE = new HashMap<>();
-        ANOMALY_TYPE.put(hash("SUBSCRIPTION:SETTINGS_EXCESSIVE_BACKGROUND_SERVICE"),
-                AnomalyType.EXCESSIVE_BG);
-        ANOMALY_TYPE.put(hash("SUBSCRIPTION:SETTINGS_LONG_UNOPTIMIZED_BLE_SCAN"),
-                AnomalyType.BLUETOOTH_SCAN);
-        ANOMALY_TYPE.put(hash("SUBSCRIPTION:SETTINGS_EXCESSIVE_WAKEUPS_IN_BACKGROUND"),
-                AnomalyType.WAKEUP_ALARM);
-        ANOMALY_TYPE.put(hash("SUBSCRIPTION:SETTINGS_EXCESSIVE_WAKELOCK_ALL_SCREEN_OFF"),
-                AnomalyType.WAKE_LOCK);
-    }
-
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({AnomalyType.NULL,
             AnomalyType.WAKE_LOCK,
@@ -71,11 +55,4 @@ public class StatsManagerConfig {
         int EXCESSIVE_BG = 3;
     }
 
-    public static int getAnomalyTypeFromSubscriptionId(long subscriptionId) {
-        return ANOMALY_TYPE.getOrDefault(subscriptionId, AnomalyType.NULL);
-    }
-
-    private static long hash(CharSequence value) {
-        return HASH_FUNCTION.hashUnencodedChars(value).asLong();
-    }
 }

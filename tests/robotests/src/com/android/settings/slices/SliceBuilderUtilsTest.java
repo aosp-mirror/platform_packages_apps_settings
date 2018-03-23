@@ -24,9 +24,11 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
 import android.provider.SettingsSlicesContract;
+import android.util.Pair;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.testutils.FakeSliderController;
 import com.android.settings.testutils.FakeToggleController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -65,6 +67,14 @@ public class SliceBuilderUtilsTest {
         Slice slice = SliceBuilderUtils.buildSlice(mContext, getDummyData());
 
         assertThat(slice).isNotNull(); // TODO improve test for Slice content
+    }
+
+    @Test
+    public void testSliderSlice_returnsSeekBarSlice() {
+        final Slice slice = SliceBuilderUtils.buildSlice(mContext, getDummyData(
+                FakeSliderController.class));
+
+        assertThat(slice).isNotNull();
     }
 
     @Test
@@ -186,6 +196,59 @@ public class SliceBuilderUtilsTest {
         CharSequence summary = SliceBuilderUtils.getSubtitleText(mContext, controller, data);
 
         assertThat(summary).isEqualTo(data.getScreenTitle());
+    }
+
+    @Test
+    public void getPathData_splitsIntentUri() {
+        Uri uri = new Uri.Builder()
+                .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+                .appendPath(SettingsSlicesContract.PATH_SETTING_INTENT)
+                .appendPath(KEY)
+                .build();
+
+        Pair<Boolean, String> pathPair = SliceBuilderUtils.getPathData(uri);
+
+        assertThat(pathPair.first).isFalse();
+        assertThat(pathPair.second).isEqualTo(KEY);
+    }
+
+    @Test
+    public void getPathData_splitsActionUri() {
+        Uri uri = new Uri.Builder()
+                .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+                .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+                .appendPath(KEY)
+                .build();
+
+        Pair<Boolean, String> pathPair = SliceBuilderUtils.getPathData(uri);
+
+        assertThat(pathPair.first).isTrue();
+        assertThat(pathPair.second).isEqualTo(KEY);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getPathData_noKey_returnsNull() {
+        Uri uri = new Uri.Builder()
+                .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+                .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+                .build();
+
+        SliceBuilderUtils.getPathData(uri);
+    }
+
+    @Test
+    public void getPathData_extraArg_returnsNull() {
+        Uri uri = new Uri.Builder()
+                .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+                .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+                .appendPath(KEY)
+                .appendPath(KEY)
+                .build();
+
+        Pair<Boolean, String> pathPair = SliceBuilderUtils.getPathData(uri);
+
+        assertThat(pathPair.first).isTrue();
+        assertThat(pathPair.second).isEqualTo(KEY + "/" + KEY);
     }
 
     private SliceData getDummyData() {

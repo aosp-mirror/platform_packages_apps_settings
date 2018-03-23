@@ -360,7 +360,7 @@ public class PowerUsageSummaryLegacyTest {
 
         mFragment.updateLastFullChargePreference(TIME_SINCE_LAST_FULL_CHARGE_MS);
 
-        assertThat(mLastFullChargePref.getSubtitle()).isEqualTo("2 hr. ago");
+        assertThat(mLastFullChargePref.getSubtitle()).isEqualTo("2 hours ago");
     }
 
     @Test

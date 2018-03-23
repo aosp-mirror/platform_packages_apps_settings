@@ -11,6 +11,9 @@ include $(BUILD_STATIC_JAVA_LIBRARY)
 # Build the Settings APK
 include $(CLEAR_VARS)
 
+# See b/74756073.
+LOCAL_USE_R8 := false
+
 LOCAL_PACKAGE_NAME := Settings
 LOCAL_PRIVATE_PLATFORM_APIS := true
 LOCAL_CERTIFICATE := platform

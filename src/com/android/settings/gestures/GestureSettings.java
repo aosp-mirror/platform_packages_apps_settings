@@ -44,6 +44,7 @@ public class GestureSettings extends DashboardFragment {
     private static final String KEY_DOUBLE_TWIST = "gesture_double_twist_input_summary";
     private static final String KEY_DOUBLE_TAP_SCREEN = "gesture_double_tap_screen_input_summary";
     private static final String KEY_PICK_UP = "gesture_pick_up_input_summary";
+    private static final String KEY_PREVENT_RINGING = "gesture_prevent_ringing_summary";
 
     private AmbientDisplayConfiguration mAmbientDisplayConfig;
 
@@ -86,6 +87,8 @@ public class GestureSettings extends DashboardFragment {
                 ambientDisplayConfiguration, UserHandle.myUserId(), KEY_PICK_UP));
         controllers.add(new DoubleTapScreenPreferenceController(context, lifecycle,
                 ambientDisplayConfiguration, UserHandle.myUserId(), KEY_DOUBLE_TAP_SCREEN));
+        controllers.add(new PreventRingingPreferenceController(
+                context, lifecycle, UserHandle.myUserId(), KEY_PREVENT_RINGING));
         return controllers;
     }
 

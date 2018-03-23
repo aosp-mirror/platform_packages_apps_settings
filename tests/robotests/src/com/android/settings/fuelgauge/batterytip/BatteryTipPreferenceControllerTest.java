@@ -37,6 +37,7 @@ import android.text.format.DateUtils;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.SettingsActivity;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.SummaryTip;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -70,6 +71,8 @@ public class BatteryTipPreferenceControllerTest {
     private SettingsActivity mSettingsActivity;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceManager mPreferenceManager;
+    @Mock
+    private InstrumentedPreferenceFragment mFragment;
 
     private Context mContext;
     private PreferenceGroup mPreferenceGroup;
@@ -98,7 +101,7 @@ public class BatteryTipPreferenceControllerTest {
         mNewBatteryTips.add(new SummaryTip(BatteryTip.StateType.INVISIBLE, AVERAGE_TIME_MS));
 
         mBatteryTipPreferenceController = new BatteryTipPreferenceController(mContext, KEY_PREF,
-                mSettingsActivity, null, mBatteryTipListener);
+                mSettingsActivity, mFragment, mBatteryTipListener);
         mBatteryTipPreferenceController.mPreferenceGroup = mPreferenceGroup;
         mBatteryTipPreferenceController.mPrefContext = mContext;
     }

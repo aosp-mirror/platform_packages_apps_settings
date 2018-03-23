@@ -20,12 +20,16 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 
 import android.app.AppOpsManager;
+import android.content.Context;
+import android.util.Pair;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
 import com.android.settings.testutils.DatabaseTestUtils;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.After;
@@ -44,21 +48,32 @@ public class RestrictAppActionTest {
 
     private static final String PACKAGE_NAME_1 = "com.android.app1";
     private static final String PACKAGE_NAME_2 = "com.android.app2";
+    private static final int ANOMALY_WAKEUP = 0;
+    private static final int ANOMALY_BT = 1;
+    private static final int METRICS_KEY = 1;
 
     @Mock
     private BatteryUtils mBatteryUtils;
     private RestrictAppAction mRestrictAppAction;
+    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
         final List<AppInfo> mAppInfos = new ArrayList<>();
-        mAppInfos.add(new AppInfo.Builder().setPackageName(PACKAGE_NAME_1).build());
-        mAppInfos.add(new AppInfo.Builder().setPackageName(PACKAGE_NAME_2).build());
+        mAppInfos.add(new AppInfo.Builder()
+                .setPackageName(PACKAGE_NAME_1)
+                .build());
+        mAppInfos.add(new AppInfo.Builder()
+                .setPackageName(PACKAGE_NAME_2)
+                .addAnomalyType(ANOMALY_BT)
+                .addAnomalyType(ANOMALY_WAKEUP)
+                .build());
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
 
         mRestrictAppAction = new RestrictAppAction(RuntimeEnvironment.application,
-            new RestrictAppTip(BatteryTip.StateType.NEW, mAppInfos));
+                new RestrictAppTip(BatteryTip.StateType.NEW, mAppInfos));
         mRestrictAppAction.mBatteryUtils = mBatteryUtils;
     }
 
@@ -69,11 +84,22 @@ public class RestrictAppActionTest {
 
     @Test
     public void testHandlePositiveAction() {
-        mRestrictAppAction.handlePositiveAction();
+        mRestrictAppAction.handlePositiveAction(METRICS_KEY);
 
         verify(mBatteryUtils)
-            .setForceAppStandby(anyInt(), eq(PACKAGE_NAME_1), eq(AppOpsManager.MODE_IGNORED));
+                .setForceAppStandby(anyInt(), eq(PACKAGE_NAME_1), eq(AppOpsManager.MODE_IGNORED));
         verify(mBatteryUtils)
-            .setForceAppStandby(anyInt(), eq(PACKAGE_NAME_2), eq(AppOpsManager.MODE_IGNORED));
+                .setForceAppStandby(anyInt(), eq(PACKAGE_NAME_2), eq(AppOpsManager.MODE_IGNORED));
+        verify(mFeatureFactory.metricsFeatureProvider).action(RuntimeEnvironment.application,
+                MetricsProto.MetricsEvent.ACTION_TIP_RESTRICT_APP, PACKAGE_NAME_1, Pair.create(
+                        MetricsProto.MetricsEvent.FIELD_CONTEXT, METRICS_KEY));
+        verify(mFeatureFactory.metricsFeatureProvider).action(RuntimeEnvironment.application,
+                MetricsProto.MetricsEvent.ACTION_TIP_RESTRICT_APP, PACKAGE_NAME_2,
+                Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, METRICS_KEY),
+                Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_TYPE, ANOMALY_WAKEUP));
+        verify(mFeatureFactory.metricsFeatureProvider).action(RuntimeEnvironment.application,
+                MetricsProto.MetricsEvent.ACTION_TIP_RESTRICT_APP, PACKAGE_NAME_2,
+                Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, METRICS_KEY),
+                Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_TYPE, ANOMALY_BT));
     }
 }

@@ -18,6 +18,7 @@ package com.android.settings.dashboard.conditional;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -26,6 +27,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
 
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -47,6 +49,7 @@ public class DndConditionTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        FakeFeatureFactory.setupForTest();
         when(mConditionManager.getContext()).thenReturn(mContext);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
     }
@@ -89,5 +92,16 @@ public class DndConditionTest {
         new DndCondition(mConditionManager).onPause();
 
         verify(mContext).unregisterReceiver(any(DndCondition.Receiver.class));
+    }
+
+    @Test
+    public void onPause_noReceiverRegistered_shouldNotUnregisterReceiver() {
+        DndCondition condition = new DndCondition(mConditionManager);
+        condition.onPause();
+        reset(mContext);
+
+        condition.onPause();
+
+        verify(mContext, never()).unregisterReceiver(any(DndCondition.Receiver.class));
     }
 }

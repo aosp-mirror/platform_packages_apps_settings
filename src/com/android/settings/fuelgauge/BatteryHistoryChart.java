@@ -363,7 +363,8 @@ public class BatteryHistoryChart extends View {
         mThinLineWidth = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 2, getResources().getDisplayMetrics());
 
-        mBatteryBackgroundPaint.setColor(0xFF009688);
+        int accentColor = Utils.getColorAccent(mContext);
+        mBatteryBackgroundPaint.setColor(accentColor);
         mBatteryBackgroundPaint.setStyle(Paint.Style.FILL);
         mBatteryGoodPaint.setARGB(128, 0, 128, 0);
         mBatteryGoodPaint.setStyle(Paint.Style.STROKE);
@@ -383,13 +384,13 @@ public class BatteryHistoryChart extends View {
         mPhoneSignalChart.setColors(com.android.settings.Utils.BADNESS_COLORS);
         mDebugRectPaint.setARGB(255, 255, 0, 0);
         mDebugRectPaint.setStyle(Paint.Style.STROKE);
-        mScreenOnPaint.setColor(0xFF009688);
-        mGpsOnPaint.setColor(0xFF009688);
-        mCameraOnPaint.setColor(0xFF009688);
-        mFlashlightOnPaint.setColor(0xFF009688);
-        mWifiRunningPaint.setColor(0xFF009688);
-        mCpuRunningPaint.setColor(0xFF009688);
-        mChargingPaint.setColor(0xFF009688);
+        mScreenOnPaint.setColor(accentColor);
+        mGpsOnPaint.setColor(accentColor);
+        mCameraOnPaint.setColor(accentColor);
+        mFlashlightOnPaint.setColor(accentColor);
+        mWifiRunningPaint.setColor(accentColor);
+        mCpuRunningPaint.setColor(accentColor);
+        mChargingPaint.setColor(accentColor);
 
         TypedArray a =
             context.obtainStyledAttributes(

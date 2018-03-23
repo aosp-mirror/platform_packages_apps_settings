@@ -22,6 +22,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -37,10 +38,14 @@ import android.os.Bundle;
 import android.os.Process;
 import android.os.StatsDimensionsValue;
 import android.os.UserManager;
+import android.util.Pair;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.BatteryUtils;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 
@@ -60,6 +65,11 @@ import java.util.concurrent.TimeUnit;
 public class AnomalyDetectionJobServiceTest {
     private static final int UID = 123;
     private static final String SYSTEM_PACKAGE = "com.android.system";
+    private static final String SUBSCRIBER_COOKIES_AUTO_RESTRICTION =
+            "anomaly_type=6,auto_restriction=true";
+    private static final String SUBSCRIBER_COOKIES_NOT_AUTO_RESTRICTION =
+            "anomaly_type=6,auto_restriction=false";
+    private static final int ANOMALY_TYPE = 6;
     @Mock
     private BatteryStatsHelper mBatteryStatsHelper;
     @Mock
@@ -76,6 +86,7 @@ public class AnomalyDetectionJobServiceTest {
     private BatteryTipPolicy mPolicy;
     private Bundle mBundle;
     private AnomalyDetectionJobService mAnomalyDetectionJobService;
+    private FakeFeatureFactory mFeatureFactory;
     private Context mContext;
 
     @Before
@@ -86,6 +97,7 @@ public class AnomalyDetectionJobServiceTest {
         mPolicy = new BatteryTipPolicy(mContext);
         mBundle = new Bundle();
         mBundle.putParcelable(StatsManager.EXTRA_STATS_DIMENSIONS_VALUE, mStatsDimensionsValue);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
 
         mAnomalyDetectionJobService = spy(new AnomalyDetectionJobService());
     }
@@ -110,9 +122,11 @@ public class AnomalyDetectionJobServiceTest {
         doReturn(SYSTEM_PACKAGE).when(mBatteryUtils).getPackageName(anyInt());
         doReturn(true).when(mPowerWhitelistBackend).isSysWhitelisted(SYSTEM_PACKAGE);
 
-        mAnomalyDetectionJobService.saveAnomalyToDatabase(mBatteryStatsHelper, mUserManager,
-                mBatteryDatabaseManager, mBatteryUtils, mPolicy, mPowerWhitelistBackend,
-                mContext.getContentResolver(), mBundle);
+        mAnomalyDetectionJobService.saveAnomalyToDatabase(mContext, mBatteryStatsHelper,
+                mUserManager, mBatteryDatabaseManager, mBatteryUtils, mPolicy,
+                mPowerWhitelistBackend, mContext.getContentResolver(),
+                mFeatureFactory.powerUsageFeatureProvider,
+                mFeatureFactory.metricsFeatureProvider, mBundle);
 
         verify(mBatteryDatabaseManager, never()).insertAnomaly(anyInt(), anyString(), anyInt(),
                 anyInt(), anyLong());
@@ -123,26 +137,60 @@ public class AnomalyDetectionJobServiceTest {
         doReturn(Process.SYSTEM_UID).when(
                 mAnomalyDetectionJobService).extractUidFromStatsDimensionsValue(any());
 
-        mAnomalyDetectionJobService.saveAnomalyToDatabase(mBatteryStatsHelper, mUserManager,
-                mBatteryDatabaseManager, mBatteryUtils, mPolicy, mPowerWhitelistBackend,
-                mContext.getContentResolver(), mBundle);
+        mAnomalyDetectionJobService.saveAnomalyToDatabase(mContext, mBatteryStatsHelper,
+                mUserManager, mBatteryDatabaseManager, mBatteryUtils, mPolicy,
+                mPowerWhitelistBackend, mContext.getContentResolver(),
+                mFeatureFactory.powerUsageFeatureProvider, mFeatureFactory.metricsFeatureProvider,
+                mBundle);
 
         verify(mBatteryDatabaseManager, never()).insertAnomaly(anyInt(), anyString(), anyInt(),
                 anyInt(), anyLong());
     }
 
     @Test
-    public void testSaveAnomalyToDatabase_normalApp_save() {
+    public void testSaveAnomalyToDatabase_normalAppWithAutoRestriction_save() {
+        mBundle.putStringArray(StatsManager.EXTRA_STATS_BROADCAST_SUBSCRIBER_COOKIES,
+                new String[]{SUBSCRIBER_COOKIES_AUTO_RESTRICTION});
         doReturn(SYSTEM_PACKAGE).when(mBatteryUtils).getPackageName(anyInt());
         doReturn(false).when(mPowerWhitelistBackend).isSysWhitelisted(SYSTEM_PACKAGE);
         doReturn(Process.FIRST_APPLICATION_UID).when(
                 mAnomalyDetectionJobService).extractUidFromStatsDimensionsValue(any());
 
-        mAnomalyDetectionJobService.saveAnomalyToDatabase(mBatteryStatsHelper, mUserManager,
-                mBatteryDatabaseManager, mBatteryUtils, mPolicy, mPowerWhitelistBackend,
-                mContext.getContentResolver(), mBundle);
+        mAnomalyDetectionJobService.saveAnomalyToDatabase(mContext, mBatteryStatsHelper,
+                mUserManager, mBatteryDatabaseManager, mBatteryUtils, mPolicy,
+                mPowerWhitelistBackend, mContext.getContentResolver(),
+                mFeatureFactory.powerUsageFeatureProvider, mFeatureFactory.metricsFeatureProvider,
+                mBundle);
 
-        verify(mBatteryDatabaseManager).insertAnomaly(anyInt(), anyString(), anyInt(), anyInt(),
-                anyLong());
+        verify(mBatteryDatabaseManager).insertAnomaly(anyInt(), anyString(), eq(6),
+                eq(AnomalyDatabaseHelper.State.AUTO_HANDLED), anyLong());
+        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
+                MetricsProto.MetricsEvent.ACTION_ANOMALY_TRIGGERED,
+                SYSTEM_PACKAGE,
+                Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, ANOMALY_TYPE));
+    }
+
+
+    @Test
+    public void testSaveAnomalyToDatabase_normalAppWithoutAutoRestriction_save() {
+        mBundle.putStringArray(StatsManager.EXTRA_STATS_BROADCAST_SUBSCRIBER_COOKIES,
+                new String[]{SUBSCRIBER_COOKIES_NOT_AUTO_RESTRICTION});
+        doReturn(SYSTEM_PACKAGE).when(mBatteryUtils).getPackageName(anyInt());
+        doReturn(false).when(mPowerWhitelistBackend).isSysWhitelisted(SYSTEM_PACKAGE);
+        doReturn(Process.FIRST_APPLICATION_UID).when(
+                mAnomalyDetectionJobService).extractUidFromStatsDimensionsValue(any());
+
+        mAnomalyDetectionJobService.saveAnomalyToDatabase(mContext, mBatteryStatsHelper,
+                mUserManager, mBatteryDatabaseManager, mBatteryUtils, mPolicy,
+                mPowerWhitelistBackend, mContext.getContentResolver(),
+                mFeatureFactory.powerUsageFeatureProvider, mFeatureFactory.metricsFeatureProvider,
+                mBundle);
+
+        verify(mBatteryDatabaseManager).insertAnomaly(anyInt(), anyString(), eq(6),
+                eq(AnomalyDatabaseHelper.State.NEW), anyLong());
+        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
+                MetricsProto.MetricsEvent.ACTION_ANOMALY_TRIGGERED,
+                SYSTEM_PACKAGE,
+                Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, ANOMALY_TYPE));
     }
 }

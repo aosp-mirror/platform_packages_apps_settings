@@ -16,8 +16,10 @@
 
 package com.android.settings.datausage;
 
+import android.annotation.AttrRes;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.text.Spannable;
@@ -31,6 +33,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settingslib.Utils;
 import com.android.settingslib.utils.StringUtil;
@@ -44,6 +47,8 @@ import java.util.concurrent.TimeUnit;
 public class DataUsageSummaryPreference extends Preference {
     private static final long MILLIS_IN_A_DAY = TimeUnit.DAYS.toMillis(1);
     private static final long WARNING_AGE = TimeUnit.HOURS.toMillis(6L);
+    @VisibleForTesting static final Typeface SANS_SERIF_MEDIUM =
+            Typeface.create("sans-serif-medium", Typeface.NORMAL);
 
     private boolean mChartEnabled = true;
     private String mStartLabel;
@@ -129,14 +134,15 @@ public class DataUsageSummaryPreference extends Preference {
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
 
-
+        ProgressBar bar = (ProgressBar) holder.findViewById(R.id.determinateBar);
         if (mChartEnabled && (!TextUtils.isEmpty(mStartLabel) || !TextUtils.isEmpty(mEndLabel))) {
+            bar.setVisibility(View.VISIBLE);
             holder.findViewById(R.id.label_bar).setVisibility(View.VISIBLE);
-            ProgressBar bar = (ProgressBar) holder.findViewById(R.id.determinateBar);
             bar.setProgress((int) (mProgress * 100));
             ((TextView) holder.findViewById(android.R.id.text1)).setText(mStartLabel);
             ((TextView) holder.findViewById(android.R.id.text2)).setText(mEndLabel);
         } else {
+            bar.setVisibility(View.GONE);
             holder.findViewById(R.id.label_bar).setVisibility(View.GONE);
         }
 
@@ -216,24 +222,64 @@ public class DataUsageSummaryPreference extends Preference {
 
     private void updateCarrierInfo(TextView carrierInfo) {
         if (mNumPlans > 0 && mSnapshotTimeMs >= 0L) {
-            long updateAge = System.currentTimeMillis() - mSnapshotTimeMs;
             carrierInfo.setVisibility(View.VISIBLE);
-            if (mCarrierName != null) {
-                carrierInfo.setText(getContext().getString(R.string.carrier_and_update_text,
-                        mCarrierName, StringUtil.formatRelativeTime(
-                                getContext(), updateAge, false /* withSeconds */)));
-            } else {
-                carrierInfo.setText(getContext().getString(R.string.no_carrier_update_text,
-                        StringUtil.formatRelativeTime(
-                                getContext(), updateAge, false /* withSeconds */)));
-            }
+            long updateAgeMillis = calculateTruncatedUpdateAge();
 
-            carrierInfo.setTextColor(
-                    updateAge <= WARNING_AGE
-                    ? Utils.getColorAttr(getContext(), android.R.attr.textColorPrimary)
-                    : Utils.getColorAttr(getContext(), android.R.attr.colorError));
+            int textResourceId;
+            CharSequence updateTime = null;
+            if (updateAgeMillis == 0) {
+                if (mCarrierName != null) {
+                    textResourceId = R.string.carrier_and_update_now_text;
+                } else {
+                    textResourceId = R.string.no_carrier_update_now_text;
+                }
+            } else {
+                if (mCarrierName != null) {
+                    textResourceId = R.string.carrier_and_update_text;
+                } else {
+                    textResourceId = R.string.no_carrier_update_text;
+                }
+                updateTime = StringUtil.formatElapsedTime(
+                        getContext(), updateAgeMillis, false /* withSeconds */);
+            }
+            carrierInfo.setText(TextUtils.expandTemplate(
+                    getContext().getText(textResourceId),
+                    mCarrierName,
+                    updateTime));
+
+            if (updateAgeMillis <= WARNING_AGE) {
+                setCarrierInfoTextStyle(
+                        carrierInfo, android.R.attr.textColorSecondary, Typeface.SANS_SERIF);
+            } else {
+                setCarrierInfoTextStyle(carrierInfo, android.R.attr.colorError, SANS_SERIF_MEDIUM);
+            }
         } else {
             carrierInfo.setVisibility(View.GONE);
         }
+    }
+
+    /**
+     * Returns the time since the last carrier update, as defined by {@link #mSnapshotTimeMs},
+     * truncated to the nearest day / hour / minute in milliseconds, or 0 if less than 1 min.
+     */
+    private long calculateTruncatedUpdateAge() {
+        long updateAgeMillis = System.currentTimeMillis() - mSnapshotTimeMs;
+
+        // Round to nearest whole unit
+        if (updateAgeMillis >= TimeUnit.DAYS.toMillis(1)) {
+            return (updateAgeMillis / TimeUnit.DAYS.toMillis(1)) * TimeUnit.DAYS.toMillis(1);
+        } else if (updateAgeMillis >= TimeUnit.HOURS.toMillis(1)) {
+            return (updateAgeMillis / TimeUnit.HOURS.toMillis(1)) * TimeUnit.HOURS.toMillis(1);
+        } else if (updateAgeMillis >= TimeUnit.MINUTES.toMillis(1)) {
+            return (updateAgeMillis / TimeUnit.MINUTES.toMillis(1)) * TimeUnit.MINUTES.toMillis(1);
+        } else {
+            return 0;
+        }
+    }
+
+    private void setCarrierInfoTextStyle(
+            TextView carrierInfo, @AttrRes int colorId, Typeface typeface) {
+        carrierInfo.setTextColor(Utils.getColorAttr(getContext(), colorId));
+        carrierInfo.setTypeface(typeface);
     }
 }

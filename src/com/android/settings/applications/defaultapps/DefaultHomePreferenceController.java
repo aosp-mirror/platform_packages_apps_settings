@@ -91,6 +91,9 @@ public class DefaultHomePreferenceController extends DefaultAppPreferenceControl
 
     @Override
     protected Intent getSettingIntent(DefaultAppInfo info) {
+        if (info == null) {
+            return null;
+        }
         final String packageName;
         if (info.componentName != null) {
             packageName = info.componentName.getPackageName();

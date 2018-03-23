@@ -108,6 +108,8 @@ class SlicesIndexer implements Runnable {
             values.put(IndexColumns.ICON_RESOURCE, dataRow.getIconResource());
             values.put(IndexColumns.FRAGMENT, dataRow.getFragmentClassName());
             values.put(IndexColumns.CONTROLLER, dataRow.getPreferenceController());
+            values.put(IndexColumns.PLATFORM_SLICE, dataRow.isPlatformDefined());
+            values.put(IndexColumns.SLICE_TYPE, dataRow.getSliceType());
 
             database.replaceOrThrow(Tables.TABLE_SLICES_INDEX, null /* nullColumnHack */,
                     values);
