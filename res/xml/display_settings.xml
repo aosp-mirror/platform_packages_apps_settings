@@ -65,11 +65,13 @@
         android:title="@string/screen_timeout"
         android:summary="@string/summary_placeholder"
         android:entries="@array/screen_timeout_entries"
-        android:entryValues="@array/screen_timeout_values" />
+        android:entryValues="@array/screen_timeout_values"
+        settings:keywords="@string/keywords_screen_timeout"/>
 
     <SwitchPreference
         android:key="auto_rotate"
-        android:title="@string/accelerometer_title" />
+        android:title="@string/accelerometer_title"
+        settings:keywords="@string/keywords_auto_rotate"/>
 
     <Preference
         android:key="color_mode"
@@ -99,7 +101,6 @@
         android:title="@string/screensaver_settings_title"
         android:fragment="com.android.settings.dream.DreamSettings" />
 
-    <!-- Cross-listed item, if you change this, also change it in power_usage_summary.xml -->
     <com.android.settingslib.RestrictedPreference
         android:key="ambient_display"
         android:title="@string/ambient_display_screen_title"
