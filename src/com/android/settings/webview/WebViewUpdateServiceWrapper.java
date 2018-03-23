@@ -28,8 +28,6 @@ import android.webkit.WebViewProviderInfo;
 import android.widget.Toast;
 
 import com.android.settings.R;
-import com.android.settings.wrapper.UserPackageWrapper;
-import com.android.settings.wrapper.UserPackageWrapperImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +35,8 @@ import java.util.List;
 public class WebViewUpdateServiceWrapper {
     private static final String TAG = "WVUSWrapper";
 
-    public WebViewUpdateServiceWrapper() {}
+    public WebViewUpdateServiceWrapper() {
+    }
 
     /**
      * Fetch the package currently used as WebView implementation.
@@ -75,6 +74,7 @@ public class WebViewUpdateServiceWrapper {
 
     /**
      * Change WebView provider to {@param packageName}.
+     *
      * @return whether the change succeeded.
      */
     public boolean setWebViewProvider(String packageName) {
@@ -90,14 +90,8 @@ public class WebViewUpdateServiceWrapper {
     /**
      * Fetch PackageInfos for the package named {@param packageName} for all users on the device.
      */
-    public List<UserPackageWrapper> getPackageInfosAllUsers(Context context, String packageName) {
-        List<UserPackageWrapper> userPackageWrappers = new ArrayList<>();
-        List<UserPackage> userPackages =
-                UserPackage.getPackageInfosAllUsers(context, packageName, PACKAGE_FLAGS);
-        for (UserPackage userPackage : userPackages) {
-            userPackageWrappers.add(new UserPackageWrapperImpl(userPackage));
-        }
-        return userPackageWrappers;
+    public List<UserPackage> getPackageInfosAllUsers(Context context, String packageName) {
+        return UserPackage.getPackageInfosAllUsers(context, packageName, PACKAGE_FLAGS);
     }
 
     /**
