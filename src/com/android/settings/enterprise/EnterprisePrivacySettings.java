@@ -82,6 +82,7 @@ public class EnterprisePrivacySettings extends DashboardFragment {
         exposureChangesCategoryControllers.add(new CaCertsCurrentUserPreferenceController(context));
         exposureChangesCategoryControllers.add(new CaCertsManagedProfilePreferenceController(
                 context));
+        exposureChangesCategoryControllers.add(new BackupsEnabledPreferenceController(context));
         controllers.addAll(exposureChangesCategoryControllers);
         controllers.add(new PreferenceCategoryController(context, "exposure_changes_category")
                 .setChildren(exposureChangesCategoryControllers));

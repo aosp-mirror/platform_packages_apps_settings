@@ -235,6 +235,11 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
         return activeAdmins;
     }
 
+    @Override
+    public boolean areBackupsMandatory() {
+        return null != mDpm.getMandatoryBackupTransport();
+    }
+
     protected static class EnterprisePrivacySpan extends ClickableSpan {
         private final Context mContext;
 
