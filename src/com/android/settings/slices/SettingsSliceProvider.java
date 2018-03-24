@@ -90,6 +90,12 @@ public class SettingsSliceProvider extends SliceProvider {
      */
     public static final String EXTRA_SLICE_KEY = "com.android.settings.slice.extra.key";
 
+    /**
+     * Boolean extra to indicate if the Slice is platform-defined.
+     */
+    public static final String EXTRA_SLICE_PLATFORM_DEFINED =
+            "com.android.settings.slice.extra.platform";
+
     // TODO -- Associate slice URI with search result instead of separate hardcoded thing
 
     @VisibleForTesting
