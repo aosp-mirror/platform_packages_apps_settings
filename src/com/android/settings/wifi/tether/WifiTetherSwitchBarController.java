@@ -27,6 +27,7 @@ import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
+import android.support.annotation.VisibleForTesting;
 
 import com.android.settings.datausage.DataSaverBackend;
 import com.android.settings.widget.SwitchWidgetController;
@@ -44,6 +45,16 @@ public class WifiTetherSwitchBarController implements SwitchWidgetController.OnS
     private final ConnectivityManager mConnectivityManager;
     private final DataSaverBackend mDataSaverBackend;
     private final WifiManager mWifiManager;
+    @VisibleForTesting
+    final ConnectivityManager.OnStartTetheringCallback mOnStartTetheringCallback =
+            new ConnectivityManager.OnStartTetheringCallback() {
+                @Override
+                public void onTetheringFailed() {
+                    super.onTetheringFailed();
+                    mSwitchBar.setChecked(false);
+                    updateWifiSwitch();
+                }
+            };
 
     static {
         WIFI_INTENT_FILTER = new IntentFilter(WifiManager.WIFI_AP_STATE_CHANGED_ACTION);
@@ -92,7 +103,7 @@ public class WifiTetherSwitchBarController implements SwitchWidgetController.OnS
     void startTether() {
         mSwitchBar.setEnabled(false);
         mConnectivityManager.startTethering(TETHERING_WIFI, true /* showProvisioningUi */,
-                NoOpOnStartTetheringCallback.newInstance(), new Handler(Looper.getMainLooper()));
+                mOnStartTetheringCallback, new Handler(Looper.getMainLooper()));
     }
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
