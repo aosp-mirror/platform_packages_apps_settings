@@ -16,7 +16,12 @@
 
 package com.android.settings.slices;
 
+import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
+import static com.android.settings.core.BasePreferenceController.DISABLED_FOR_USER;
+import static com.android.settings.core.BasePreferenceController.DISABLED_UNSUPPORTED;
+import static com.android.settings.core.BasePreferenceController.UNAVAILABLE_UNKNOWN;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_KEY;
+import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_PLATFORM_DEFINED;
 
 import static androidx.slice.builders.ListBuilder.ICON_IMAGE;
 
@@ -24,6 +29,7 @@ import android.app.PendingIntent;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.provider.SettingsSlicesContract;
@@ -42,7 +48,6 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import androidx.slice.Slice;
 import androidx.slice.builders.SliceAction;
 import androidx.slice.builders.ListBuilder;
-import androidx.slice.builders.ListBuilder.RowBuilder;
 
 
 /**
@@ -61,8 +66,12 @@ public class SliceBuilderUtils {
      * {@param sliceData} is an inline controller.
      */
     public static Slice buildSlice(Context context, SliceData sliceData) {
-        // TODO (b/71640747) Respect setting availability.
         final BasePreferenceController controller = getPreferenceController(context, sliceData);
+
+        if (!controller.isAvailable()) {
+            return buildUnavailableSlice(context, sliceData, controller);
+        }
+
         switch (sliceData.getSliceType()) {
             case SliceData.SliceType.INTENT:
                 return buildIntentSlice(context, sliceData, controller);
@@ -120,8 +129,8 @@ public class SliceBuilderUtils {
     }
 
     /**
-     * Looks at the {@link SliceData#preferenceController} from {@param sliceData} and attempts to
-     * build an {@link AbstractPreferenceController}.
+     * Looks at the controller classname in in {@link SliceData} from {@param sliceData}
+     * and attempts to build an {@link AbstractPreferenceController}.
      */
     public static BasePreferenceController getPreferenceController(Context context,
             SliceData sliceData) {
@@ -147,7 +156,7 @@ public class SliceBuilderUtils {
         final CharSequence subtitleText = getSubtitleText(context, controller, sliceData);
         final TogglePreferenceController toggleController =
                 (TogglePreferenceController) controller;
-        final SliceAction sliceAction = getToggleAction(context, sliceData.getKey(),
+        final SliceAction sliceAction = getToggleAction(context, sliceData,
                 toggleController.isChecked());
 
         return new ListBuilder(context, sliceData.getUri())
@@ -179,7 +188,7 @@ public class SliceBuilderUtils {
             BasePreferenceController controller) {
         final SliderPreferenceController sliderController =
                 (SliderPreferenceController) controller;
-        final PendingIntent actionIntent = getSliderAction(context, sliceData.getKey());
+        final PendingIntent actionIntent = getSliderAction(context, sliceData);
         return new ListBuilder(context, sliceData.getUri())
                 .addInputRange(builder -> builder
                         .setTitle(sliceData.getTitle())
@@ -200,20 +209,22 @@ public class SliceBuilderUtils {
         return BasePreferenceController.createInstance(context, controllerClassName, controllerKey);
     }
 
-    private static SliceAction getToggleAction(Context context, String key, boolean isChecked) {
+    private static SliceAction getToggleAction(Context context, SliceData sliceData,
+            boolean isChecked) {
         PendingIntent actionIntent = getActionIntent(context,
-                SettingsSliceProvider.ACTION_TOGGLE_CHANGED, key);
+                SettingsSliceProvider.ACTION_TOGGLE_CHANGED, sliceData);
         return new SliceAction(actionIntent, null, isChecked);
     }
 
-    private static PendingIntent getSliderAction(Context context, String key) {
-        return getActionIntent(context, SettingsSliceProvider.ACTION_SLIDER_CHANGED, key);
+    private static PendingIntent getSliderAction(Context context, SliceData sliceData) {
+        return getActionIntent(context, SettingsSliceProvider.ACTION_SLIDER_CHANGED, sliceData);
     }
 
-    private static PendingIntent getActionIntent(Context context, String action, String key) {
+    private static PendingIntent getActionIntent(Context context, String action, SliceData data) {
         Intent intent = new Intent(action);
         intent.setClass(context, SliceBroadcastReceiver.class);
-        intent.putExtra(EXTRA_SLICE_KEY, key);
+        intent.putExtra(EXTRA_SLICE_KEY, data.getKey());
+        intent.putExtra(EXTRA_SLICE_PLATFORM_DEFINED, data.isPlatformDefined());
         return PendingIntent.getBroadcast(context, 0 /* requestCode */, intent,
                 PendingIntent.FLAG_CANCEL_CURRENT);
     }
@@ -223,6 +234,12 @@ public class SliceBuilderUtils {
                 sliceData.getFragmentClassName(), sliceData.getKey(), sliceData.getScreenTitle(),
                 0 /* TODO */);
         intent.setClassName("com.android.settings", SubSettings.class.getName());
+        return PendingIntent.getActivity(context, 0 /* requestCode */, intent, 0 /* flags */);
+    }
+
+    private static PendingIntent getSettingsIntent(Context context) {
+        final PackageManager manager = context.getPackageManager();
+        final Intent intent = manager.getLaunchIntentForPackage(context.getPackageName());
         return PendingIntent.getActivity(context, 0 /* requestCode */, intent, 0 /* flags */);
     }
 
@@ -256,5 +273,42 @@ public class SliceBuilderUtils {
 
         return !(TextUtils.equals(summary, placeHolder)
                 || TextUtils.equals(summary, doublePlaceHolder));
+    }
+
+    private static Slice buildUnavailableSlice(Context context, SliceData data,
+            BasePreferenceController controller) {
+        final String title = data.getTitle();
+        final String summary;
+        final SliceAction primaryAction;
+
+        switch (controller.getAvailabilityStatus()) {
+            case DISABLED_UNSUPPORTED:
+                summary = context.getString(R.string.unsupported_setting_summary);
+                primaryAction = new SliceAction(getSettingsIntent(context), null /* actionIcon */,
+                        null /* actionTitle */);
+                break;
+            case DISABLED_FOR_USER:
+                summary = context.getString(R.string.disabled_for_user_setting_summary);
+                primaryAction = new SliceAction(getContentIntent(context, data),
+                        null /* actionIcon */, null /* actionTitle */);
+                break;
+            case DISABLED_DEPENDENT_SETTING:
+                summary = context.getString(R.string.disabled_dependent_setting_summary);
+                primaryAction = new SliceAction(getContentIntent(context, data),
+                        null /* actionIcon */, null /* actionTitle */);
+                break;
+            case UNAVAILABLE_UNKNOWN:
+            default:
+                summary = context.getString(R.string.unknown_unavailability_setting_summary);
+                primaryAction = new SliceAction(getSettingsIntent(context),
+                        null /* actionIcon */, null /* actionTitle */);
+        }
+
+        return new ListBuilder(context, data.getUri())
+                .addRow(builder -> builder
+                        .setTitle(title)
+                        .setSubtitle(summary)
+                        .setPrimaryAction(primaryAction))
+                .build();
     }
 }
