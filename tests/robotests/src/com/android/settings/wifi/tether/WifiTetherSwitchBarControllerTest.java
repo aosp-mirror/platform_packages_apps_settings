@@ -22,6 +22,8 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkPolicyManager;
 import android.net.wifi.WifiManager;
 import android.provider.Settings;
 
@@ -40,9 +42,14 @@ import org.robolectric.RuntimeEnvironment;
 public class WifiTetherSwitchBarControllerTest {
     @Mock
     private WifiManager mWifiManager;
+    @Mock
+    private ConnectivityManager mConnectivityManager;
+    @Mock
+    private NetworkPolicyManager mNetworkPolicyManager;
 
     private Context mContext;
     private SwitchBar mSwitchBar;
+    private WifiTetherSwitchBarController mController;
 
     @Before
     public void setUp() {
@@ -51,6 +58,13 @@ public class WifiTetherSwitchBarControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         mSwitchBar = new SwitchBar(mContext);
         when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
+        when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE)).thenReturn(
+                mConnectivityManager);
+        when(mContext.getSystemService(Context.NETWORK_POLICY_SERVICE)).thenReturn(
+                mNetworkPolicyManager);
+
+        mController = new WifiTetherSwitchBarController(mContext,
+                new SwitchBarController(mSwitchBar));
     }
 
     @Test
@@ -62,5 +76,16 @@ public class WifiTetherSwitchBarControllerTest {
                 mContext, new SwitchBarController(mSwitchBar));
 
         assertThat(mSwitchBar.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void testStartTether_fail_resetSwitchBar() {
+        when(mNetworkPolicyManager.getRestrictBackground()).thenReturn(false);
+
+        mController.startTether();
+        mController.mOnStartTetheringCallback.onTetheringFailed();
+
+        assertThat(mSwitchBar.isChecked()).isFalse();
+        assertThat(mSwitchBar.isEnabled()).isTrue();
     }
 }
