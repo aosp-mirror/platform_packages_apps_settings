@@ -18,6 +18,7 @@ package com.android.settings.datetime.timezone;
 
 import android.icu.text.BreakIterator;
 import android.support.annotation.NonNull;
+import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -42,14 +43,14 @@ public class BaseTimeZoneAdapter<T extends BaseTimeZoneAdapter.AdapterItem>
         extends RecyclerView.Adapter<BaseTimeZoneAdapter.ItemViewHolder> {
 
     private final List<T> mOriginalItems;
-    private final OnListItemClickListener mOnListItemClickListener;
+    private final OnListItemClickListener<T> mOnListItemClickListener;
     private final Locale mLocale;
     private final boolean mShowItemSummary;
 
     private List<T> mItems;
     private ArrayFilter mFilter;
 
-    public BaseTimeZoneAdapter(List<T> items, OnListItemClickListener
+    public BaseTimeZoneAdapter(List<T> items, OnListItemClickListener<T>
             onListItemClickListener, Locale locale, boolean showItemSummary) {
         mOriginalItems = items;
         mItems = items;
@@ -69,14 +70,8 @@ public class BaseTimeZoneAdapter<T extends BaseTimeZoneAdapter.AdapterItem>
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
-        final AdapterItem item = mItems.get(position);
-        holder.mSummaryFrame.setVisibility(
-                mShowItemSummary ? View.VISIBLE : View.GONE);
-        holder.mTitleView.setText(item.getTitle());
-        holder.mIconTextView.setText(item.getIconText());
-        holder.mSummaryView.setText(item.getSummary());
-        holder.mTimeView.setText(item.getCurrentTime());
-        holder.setPosition(position);
+        holder.setAdapterItem(mItems.get(position));
+        holder.mSummaryFrame.setVisibility(mShowItemSummary ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -89,8 +84,7 @@ public class BaseTimeZoneAdapter<T extends BaseTimeZoneAdapter.AdapterItem>
         return mItems.size();
     }
 
-    public  @NonNull
-    Filter getFilter() {
+    public @NonNull ArrayFilter getFilter() {
         if (mFilter == null) {
             mFilter = new ArrayFilter();
         }
@@ -110,18 +104,18 @@ public class BaseTimeZoneAdapter<T extends BaseTimeZoneAdapter.AdapterItem>
         String[] getSearchKeys();
     }
 
-    public static class ItemViewHolder extends RecyclerView.ViewHolder
-            implements View.OnClickListener{
+    public static class ItemViewHolder<T extends BaseTimeZoneAdapter.AdapterItem>
+            extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        final OnListItemClickListener mOnListItemClickListener;
+        final OnListItemClickListener<T> mOnListItemClickListener;
         final View mSummaryFrame;
         final TextView mTitleView;
         final TextView mIconTextView;
         final TextView mSummaryView;
         final TextView mTimeView;
-        private int mPosition;
+        private T mItem;
 
-        public ItemViewHolder(View itemView, OnListItemClickListener onListItemClickListener) {
+        public ItemViewHolder(View itemView, OnListItemClickListener<T> onListItemClickListener) {
             super(itemView);
             itemView.setOnClickListener(this);
             mSummaryFrame = itemView.findViewById(R.id.summary_frame);
@@ -132,13 +126,17 @@ public class BaseTimeZoneAdapter<T extends BaseTimeZoneAdapter.AdapterItem>
             mOnListItemClickListener = onListItemClickListener;
         }
 
-        public void setPosition(int position) {
-            mPosition = position;
+        public void setAdapterItem(T item) {
+            mItem = item;
+            mTitleView.setText(item.getTitle());
+            mIconTextView.setText(item.getIconText());
+            mSummaryView.setText(item.getSummary());
+            mTimeView.setText(item.getCurrentTime());
         }
 
         @Override
         public void onClick(View v) {
-            mOnListItemClickListener.onListItemClick(mPosition);
+            mOnListItemClickListener.onListItemClick(mItem);
         }
     }
 
@@ -151,7 +149,8 @@ public class BaseTimeZoneAdapter<T extends BaseTimeZoneAdapter.AdapterItem>
      * require additional pre-processing. Potentially, a trie structure can be used to match
      * prefixes of the search keys.
      */
-    private class ArrayFilter extends Filter {
+    @VisibleForTesting
+    public class ArrayFilter extends Filter {
 
         private BreakIterator mBreakIterator = BreakIterator.getWordInstance(mLocale);
 
@@ -197,8 +196,9 @@ public class BaseTimeZoneAdapter<T extends BaseTimeZoneAdapter.AdapterItem>
             return results;
         }
 
+        @VisibleForTesting
         @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
+        public void publishResults(CharSequence constraint, FilterResults results) {
             mItems = (List<T>) results.values;
             notifyDataSetChanged();
         }
