@@ -45,20 +45,16 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.DeviceAdminAdd;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.Utils;
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.widget.EntityHeaderController;
 import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settingslib.RestrictedLockUtils;
@@ -157,7 +153,12 @@ public class AppInfoDashboardFragment extends DashboardFragment
                 == PackageManager.COMPONENT_ENABLED_STATE_DISABLED_UNTIL_USED;
     }
 
-    /** Called when the activity is first created. */
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        use(TimeSpentInAppPreferenceController.class).setPackageName(getPackageName());
+    }
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -191,9 +192,10 @@ public class AppInfoDashboardFragment extends DashboardFragment
     @Override
     public void onResume() {
         super.onResume();
-        mAppsControlDisallowedAdmin = RestrictedLockUtils.checkIfRestrictionEnforced(getActivity(),
+        final Activity activity = getActivity();
+        mAppsControlDisallowedAdmin = RestrictedLockUtils.checkIfRestrictionEnforced(activity,
                 UserManager.DISALLOW_APPS_CONTROL, mUserId);
-        mAppsControlDisallowedBySystem = RestrictedLockUtils.hasBaseUserRestriction(getActivity(),
+        mAppsControlDisallowedBySystem = RestrictedLockUtils.hasBaseUserRestriction(activity,
                 UserManager.DISALLOW_APPS_CONTROL, mUserId);
 
         if (!refreshUi()) {
@@ -300,7 +302,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
      *
      * @return true if packageInfo is available.
      */
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     boolean ensurePackageInfoAvailable(Activity activity) {
         if (mPackageInfo == null) {
             mFinishing = true;
