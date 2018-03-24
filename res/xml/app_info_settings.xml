@@ -25,13 +25,13 @@
         android:key="header_view"
         android:layout="@layout/settings_entity_header"
         android:selectable="false"
-        android:order="-10000"/>
+        android:order="-10000" />
 
     <com.android.settings.applications.LayoutPreference
         android:key="instant_app_buttons"
         android:layout="@layout/instant_app_buttons"
         android:selectable="false"
-        android:order="-9999"/>
+        android:order="-9999" />
 
     <com.android.settings.widget.ActionButtonPreference
         android:key="action_buttons"
@@ -39,7 +39,7 @@
 
     <Preference
         android:key="notification_settings"
-        android:title="@string/notifications_label"/>
+        android:title="@string/notifications_label" />
 
     <com.android.settings.widget.FixedLineSummaryPreference
         android:key="permission_settings"
@@ -50,7 +50,7 @@
     <Preference
         android:key="storage_settings"
         android:title="@string/storage_settings"
-        android:summary="@string/summary_placeholder"/>
+        android:summary="@string/summary_placeholder" />
 
     <com.android.settings.applications.AppDomainsPreference
         android:key="instant_app_launch_supported_domain_urls"
@@ -60,24 +60,29 @@
     <Preference
         android:key="data_settings"
         android:title="@string/data_usage_summary_title"
-        android:summary="@string/summary_placeholder"/>
+        android:summary="@string/summary_placeholder" />
+
+    <Preference
+        android:key="time_spent_in_app"
+        android:title="@string/time_spent_in_app_pref_title"
+        app:controller="com.android.settings.applications.appinfo.TimeSpentInAppPreferenceController" />
 
     <Preference
         android:key="battery"
         android:title="@string/power_usage_summary_title"
-        android:summary="@string/summary_placeholder"/>
+        android:summary="@string/summary_placeholder" />
 
     <Preference
         android:key="preferred_settings"
         android:title="@string/launch_by_default"
         android:summary="@string/summary_placeholder"
-        android:selectable="true"/>
+        android:selectable="true" />
 
     <Preference
         android:key="memory"
         android:title="@string/memory_settings_title"
         android:summary="@string/summary_placeholder"
-        android:enabled="false"/>
+        android:enabled="false" />
 
     <!-- Default apps shortcuts -->
     <Preference
@@ -146,6 +151,6 @@
     <Preference
         android:key="app_version"
         android:selectable="false"
-        android:order="9999"/>
+        android:order="9999" />
 
 </PreferenceScreen>

@@ -56,7 +56,7 @@ public class PreferenceControllerListHelper {
             preferenceMetadata = PreferenceXmlParserUtils.extractMetadata(context, xmlResId,
                     MetadataFlag.FLAG_NEED_KEY | MetadataFlag.FLAG_NEED_PREF_CONTROLLER);
         } catch (IOException | XmlPullParserException e) {
-            Log.e(TAG, "Failed to parse preference xml for getting controllers");
+            Log.e(TAG, "Failed to parse preference xml for getting controllers", e);
             return controllers;
         }
 
