@@ -20,6 +20,7 @@ import static com.android.settings.slices.SettingsSliceProvider.ACTION_SLIDER_CH
 import static com.android.settings.slices.SettingsSliceProvider.ACTION_TOGGLE_CHANGED;
 import static com.android.settings.slices.SettingsSliceProvider.ACTION_WIFI_CHANGED;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_KEY;
+import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_PLATFORM_DEFINED;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -27,7 +28,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
+import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SliderPreferenceController;
@@ -49,12 +52,14 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
      */
     @Override
     public void onReceive(Context context, Intent intent) {
-        String action = intent.getAction();
-        String key = intent.getStringExtra(EXTRA_SLICE_KEY);
+        final String action = intent.getAction();
+        final String key = intent.getStringExtra(EXTRA_SLICE_KEY);
+        final boolean isPlatformDefined = intent.getBooleanExtra(EXTRA_SLICE_PLATFORM_DEFINED,
+                false /* default */);
 
         switch (action) {
             case ACTION_TOGGLE_CHANGED:
-                handleToggleAction(context, key);
+                handleToggleAction(context, key, isPlatformDefined);
                 break;
             case ACTION_SLIDER_CHANGED:
                 int newPosition = intent.getIntExtra(SliceHints.EXTRA_RANGE_VALUE, -1);
@@ -76,7 +81,7 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
         }
     }
 
-    private void handleToggleAction(Context context, String key) {
+    private void handleToggleAction(Context context, String key, boolean isPlatformSlice) {
         if (TextUtils.isEmpty(key)) {
             throw new IllegalStateException("No key passed to Intent for toggle controller");
         }
@@ -87,11 +92,17 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
             throw new IllegalStateException("Toggle action passed for a non-toggle key: " + key);
         }
 
+        if (!controller.isAvailable()) {
+            Log.d(TAG, "Can't update " + key + " since the setting is unavailable");
+            updateUri(context, key, isPlatformSlice);
+        }
+
         // TODO post context.getContentResolver().notifyChanged(uri, null) in the Toggle controller
         // so that it's automatically broadcast to any slice.
         final TogglePreferenceController toggleController = (TogglePreferenceController) controller;
         final boolean currentValue = toggleController.isChecked();
         toggleController.setChecked(!currentValue);
+        updateUri(context, key, isPlatformSlice);
     }
 
     private void handleSliderAction(Context context, String key, int newPosition) {
@@ -125,5 +136,11 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
         final SlicesDatabaseAccessor accessor = new SlicesDatabaseAccessor(context);
         final SliceData sliceData = accessor.getSliceDataFromKey(key);
         return SliceBuilderUtils.getPreferenceController(context, sliceData);
+    }
+
+    private void updateUri(Context context, String key, boolean isPlatformDefined) {
+        final String path = SettingsSlicesContract.PATH_SETTING_ACTION + "/" + key;
+        final Uri uri = SliceBuilderUtils.getUri(path, isPlatformDefined);
+        context.getContentResolver().notifyChange(uri, null /* observer */);
     }
 }
