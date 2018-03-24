@@ -16,6 +16,7 @@
 
 package com.android.settings.bluetooth;
 
+import android.support.annotation.Keep;
 import android.text.InputFilter;
 import android.text.Spanned;
 
@@ -40,6 +41,7 @@ import android.text.Spanned;
 public class Utf8ByteLengthFilter implements InputFilter {
     private final int mMaxBytes;
 
+    @Keep
     Utf8ByteLengthFilter(int maxBytes) {
         mMaxBytes = maxBytes;
     }

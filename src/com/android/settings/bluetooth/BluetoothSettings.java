@@ -434,6 +434,7 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
                     data.title = res.getString(R.string.bluetooth_settings);
                     data.screenTitle = res.getString(R.string.bluetooth_settings);
                     data.key = DATA_KEY_REFERENCE;
+                    data.keywords = res.getString(R.string.keywords_bluetooth_settings);
                     result.add(data);
 
                     // Removed paired bluetooth device indexing. See BluetoothSettingsObsolete.java.

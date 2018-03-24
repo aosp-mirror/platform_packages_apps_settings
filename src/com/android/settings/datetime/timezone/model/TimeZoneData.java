@@ -16,6 +16,7 @@
 package com.android.settings.datetime.timezone.model;
 
 import android.support.annotation.VisibleForTesting;
+import android.support.v4.util.ArraySet;
 
 import libcore.util.CountryTimeZones;
 import libcore.util.CountryZonesFinder;
@@ -27,12 +28,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Wrapper of CountryZonesFinder to normalize the country code and only show the regions that are
  * has time zone shown in the time zone picker.
- * The constructor reads the data from underlying file, and this means it should not be called
+ * getInstance() reads the data from underlying file, and this means it should not be called
  * from the UI thread.
  */
 public class TimeZoneData {
@@ -47,13 +47,9 @@ public class TimeZoneData {
         if (data != null) {
             return data;
         }
-        data = new TimeZoneData();
+        data = new TimeZoneData(TimeZoneFinder.getInstance().getCountryZonesFinder());
         sCache = new WeakReference<>(data);
         return data;
-    }
-
-    public TimeZoneData() {
-        this(TimeZoneFinder.getInstance().getCountryZonesFinder());
     }
 
     @VisibleForTesting
@@ -70,13 +66,16 @@ public class TimeZoneData {
         if (tzId == null) {
             return Collections.emptySet();
         }
-        return mCountryZonesFinder.lookupCountryTimeZonesForZoneId(tzId).stream()
-                .filter(countryTimeZones ->
-                    countryTimeZones.getTimeZoneMappings().stream()
-                            .anyMatch(mapping ->
-                                    mapping.timeZoneId.equals(tzId) && mapping.showInPicker))
-                .map(countryTimeZones -> normalizeRegionId(countryTimeZones.getCountryIso()))
-                .collect(Collectors.toSet());
+        List<CountryTimeZones> countryTimeZones = mCountryZonesFinder
+                .lookupCountryTimeZonesForZoneId(tzId);
+        Set<String> regionIds = new ArraySet<>();
+        for (CountryTimeZones countryTimeZone : countryTimeZones) {
+            FilteredCountryTimeZones filteredZones = new FilteredCountryTimeZones(countryTimeZone);
+            if (filteredZones.getTimeZoneIds().contains(tzId)) {
+                regionIds.add(filteredZones.getRegionId());
+            }
+        }
+        return regionIds;
     }
 
     public FilteredCountryTimeZones lookupCountryTimeZones(String regionId) {

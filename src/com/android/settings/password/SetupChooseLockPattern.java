@@ -25,7 +25,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.SetupRedactionInterstitial;
@@ -70,6 +69,17 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
                         ChooseLockTypeDialogFragment.newInstance(mUserId)
                                 .show(getChildFragmentManager(), null));
             }
+            // enable skip button only during setup wizard and not with fingerprint flow.
+            if (!mForFingerprint) {
+                Button skipButton = view.findViewById(R.id.skip_button);
+                skipButton.setVisibility(View.VISIBLE);
+                skipButton.setOnClickListener(v -> {
+                    SetupSkipDialog dialog = SetupSkipDialog.newInstance(
+                            getActivity().getIntent()
+                                    .getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false));
+                    dialog.show(getFragmentManager());
+                });
+            }
             return view;
         }
 
@@ -82,16 +92,6 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
         }
 
         @Override
-        protected void updateFooterLeftButton(Stage stage, TextView footerLeftButton) {
-            super.updateFooterLeftButton(stage, footerLeftButton);
-            // enable skip button only during setupwizard and not with fingerprint flow.
-            if (!mForFingerprint) {
-                footerLeftButton.setVisibility(View.VISIBLE);
-                footerLeftButton.setText(R.string.skip_label);
-            }
-        }
-
-        @Override
         protected void updateStage(Stage stage) {
             super.updateStage(stage);
             if (!getResources().getBoolean(R.bool.config_lock_pattern_minimal_ui)
@@ -99,14 +99,6 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
                 mOptionsButton.setVisibility(
                         stage == Stage.Introduction ? View.VISIBLE : View.INVISIBLE);
             }
-        }
-
-        @Override
-        public void handleLeftButton() {
-            SetupSkipDialog dialog = SetupSkipDialog.newInstance(
-                    getActivity().getIntent()
-                            .getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false));
-            dialog.show(getFragmentManager());
         }
 
         @Override

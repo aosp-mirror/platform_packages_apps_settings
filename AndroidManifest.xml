@@ -255,6 +255,8 @@
                 android:value="com.android.settings.wifi.WifiSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
+            <meta-data android:name="android.metadata.SLICE_URI"
+                android:value="content://android.settings.slices/wifi" />
         </activity>
 
         <activity
@@ -983,7 +985,7 @@
         </activity>
 
         <activity android:name=".Settings$MyDeviceInfoActivity"
-                  android:label="@string/device_info_settings"
+                  android:label="@string/about_settings"
                   android:icon="@drawable/ic_settings_about"
                   android:taskAffinity="com.android.settings"
                   android:parentActivityName="Settings">
@@ -1124,6 +1126,17 @@
                 <action android:name="android.settings.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="package" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".slice.SliceDeepLinkSpringBoard"
+            android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="settings"
+                      android:host="com.android.settings.slices" />
             </intent-filter>
         </activity>
 
@@ -2384,6 +2397,10 @@
             android:taskAffinity="com.android.settings"
             android:parentActivityName="Settings">
             <!-- TODO(b/70950124): add shortcut intent-filter -->
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.DATA_USAGE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter android:priority="10">
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
@@ -2399,6 +2416,10 @@
             android:icon="@drawable/ic_settings_data_usage"
             android:taskAffinity="com.android.settings"
             android:parentActivityName="Settings">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.DATA_USAGE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -3261,7 +3282,16 @@
 
         <provider android:name=".slices.SettingsSliceProvider"
                   android:authorities="com.android.settings.slices;android.settings.slices"
-                  android:exported="true">
+                  android:exported="true"
+                  android:grantUriPermissions="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.app.slice.category.SLICE" />
+                <data android:scheme="settings"
+                      android:host="com.android.settings.slices" />
+            </intent-filter>
         </provider>
 
         <receiver

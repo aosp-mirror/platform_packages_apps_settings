@@ -33,6 +33,7 @@ import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SupportFeatureProvider;
 import com.android.settings.overlay.SurveyFeatureProvider;
+import com.android.settings.search.DeviceIndexFeatureProvider;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.slices.SlicesFeatureProvider;
@@ -63,6 +64,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public final SlicesFeatureProvider slicesFeatureProvider;
     public SearchFeatureProvider searchFeatureProvider;
     public final AccountFeatureProvider mAccountFeatureProvider;
+    public final DeviceIndexFeatureProvider deviceIndexFeatureProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
@@ -101,6 +103,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         bluetoothFeatureProvider = mock(BluetoothFeatureProvider.class);
         slicesFeatureProvider = mock(SlicesFeatureProvider.class);
         mAccountFeatureProvider = mock(AccountFeatureProvider.class);
+        deviceIndexFeatureProvider = mock(DeviceIndexFeatureProvider.class);
     }
 
     @Override
@@ -181,5 +184,10 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public AccountFeatureProvider getAccountFeatureProvider() {
         return mAccountFeatureProvider;
+    }
+
+    @Override
+    public DeviceIndexFeatureProvider getDeviceIndexFeatureProvider() {
+        return deviceIndexFeatureProvider;
     }
 }
