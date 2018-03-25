@@ -17,17 +17,20 @@
 package com.android.settings.slices;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
+import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
 import android.util.Pair;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.testutils.FakeSliderController;
 import com.android.settings.testutils.FakeToggleController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -66,6 +69,14 @@ public class SliceBuilderUtilsTest {
         Slice slice = SliceBuilderUtils.buildSlice(mContext, getDummyData());
 
         assertThat(slice).isNotNull(); // TODO improve test for Slice content
+    }
+
+    @Test
+    public void testSliderSlice_returnsSeekBarSlice() {
+        final Slice slice = SliceBuilderUtils.buildSlice(mContext, getDummyData(
+                FakeSliderController.class));
+
+        assertThat(slice).isNotNull();
     }
 
     @Test
@@ -123,7 +134,7 @@ public class SliceBuilderUtilsTest {
     @Test
     public void testGetPreferenceController_buildsMatchingController() {
         BasePreferenceController controller =
-            SliceBuilderUtils.getPreferenceController(mContext, getDummyData());
+                SliceBuilderUtils.getPreferenceController(mContext, getDummyData());
 
         assertThat(controller).isInstanceOf(FakeToggleController.class);
     }
@@ -131,7 +142,7 @@ public class SliceBuilderUtilsTest {
     @Test
     public void testGetPreferenceController_contextOnly_buildsMatchingController() {
         BasePreferenceController controller =
-            SliceBuilderUtils.getPreferenceController(mContext, getDummyData(PREF_CONTROLLER2));
+                SliceBuilderUtils.getPreferenceController(mContext, getDummyData(PREF_CONTROLLER2));
 
         assertThat(controller).isInstanceOf(FakeContextOnlyPreferenceController.class);
     }
@@ -240,6 +251,54 @@ public class SliceBuilderUtilsTest {
 
         assertThat(pathPair.first).isTrue();
         assertThat(pathPair.second).isEqualTo(KEY + "/" + KEY);
+    }
+
+    @Test
+    public void testUnsupportedSlice_validTitleSummary() {
+        SliceData data = getDummyData(FakeUnavailablePreferenceController.class.getName());
+        Settings.System.putInt(mContext.getContentResolver(),
+                FakeUnavailablePreferenceController.AVAILABILITY_KEY,
+                BasePreferenceController.DISABLED_UNSUPPORTED);
+
+        Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
+
+        assertThat(slice).isNotNull();
+    }
+
+    @Test
+    public void testDisabledForUserSlice_validTitleSummary() {
+        SliceData data = getDummyData(FakeUnavailablePreferenceController.class.getName());
+        Settings.System.putInt(mContext.getContentResolver(),
+                FakeUnavailablePreferenceController.AVAILABILITY_KEY,
+                BasePreferenceController.DISABLED_FOR_USER);
+
+        Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
+
+        assertThat(slice).isNotNull();
+    }
+
+    @Test
+    public void testDisabledDependententSettingSlice_validTitleSummary() {
+        SliceData data = getDummyData(FakeUnavailablePreferenceController.class.getName());
+        Settings.System.putInt(mContext.getContentResolver(),
+                FakeUnavailablePreferenceController.AVAILABILITY_KEY,
+                BasePreferenceController.DISABLED_DEPENDENT_SETTING);
+
+        Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
+
+        assertThat(slice).isNotNull();
+    }
+
+    @Test
+    public void testUnavailableUnknownSlice_validTitleSummary() {
+        SliceData data = getDummyData(FakeUnavailablePreferenceController.class.getName());
+        Settings.System.putInt(mContext.getContentResolver(),
+                FakeUnavailablePreferenceController.AVAILABILITY_KEY,
+                BasePreferenceController.UNAVAILABLE_UNKNOWN);
+
+        Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
+
+        assertThat(slice).isNotNull();
     }
 
     private SliceData getDummyData() {

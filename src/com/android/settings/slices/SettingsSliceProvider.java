@@ -17,27 +17,26 @@
 package com.android.settings.slices;
 
 import android.app.PendingIntent;
-
-import android.content.ContentResolver;
+import android.app.slice.SliceManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
-import android.provider.SettingsSlicesContract;
 import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settingslib.utils.ThreadUtils;
 
+import java.net.URISyntaxException;
 import java.util.Map;
 import java.util.WeakHashMap;
 
 import androidx.slice.Slice;
 import androidx.slice.SliceProvider;
-import androidx.slice.builders.SliceAction;
 import androidx.slice.builders.ListBuilder;
+import androidx.slice.builders.SliceAction;
 
 /**
  * A {@link SliceProvider} for Settings to enabled inline results in system apps.
@@ -74,10 +73,28 @@ public class SettingsSliceProvider extends SliceProvider {
     public static final String ACTION_WIFI_CHANGED =
             "com.android.settings.slice.action.WIFI_CHANGED";
 
+    /**
+     * Action passed for changes to Toggle Slices.
+     */
     public static final String ACTION_TOGGLE_CHANGED =
             "com.android.settings.slice.action.TOGGLE_CHANGED";
 
+    /**
+     * Action passed for changes to Slider Slices.
+     */
+    public static final String ACTION_SLIDER_CHANGED =
+            "com.android.settings.slice.action.SLIDER_CHANGED";
+
+    /**
+     * Intent Extra passed for the key identifying the Setting Slice.
+     */
     public static final String EXTRA_SLICE_KEY = "com.android.settings.slice.extra.key";
+
+    /**
+     * Boolean extra to indicate if the Slice is platform-defined.
+     */
+    public static final String EXTRA_SLICE_PLATFORM_DEFINED =
+            "com.android.settings.slice.extra.platform";
 
     // TODO -- Associate slice URI with search result instead of separate hardcoded thing
 
@@ -92,6 +109,17 @@ public class SettingsSliceProvider extends SliceProvider {
         mSlicesDatabaseAccessor = new SlicesDatabaseAccessor(getContext());
         mSliceDataCache = new WeakHashMap<>();
         return true;
+    }
+
+    @Override
+    public Uri onMapIntentToUri(Intent intent) {
+        try {
+            return getContext().getSystemService(SliceManager.class).mapIntentToUri(
+                    SliceDeepLinkSpringBoard.parse(
+                            intent.getData(), getContext().getPackageName()));
+        } catch (URISyntaxException e) {
+            return null;
+        }
     }
 
     @Override

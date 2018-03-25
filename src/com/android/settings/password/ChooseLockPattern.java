@@ -20,9 +20,11 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.content.res.Resources.Theme;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -171,6 +173,7 @@ public class ChooseLockPattern extends SettingsActivity {
         private String mCurrentPattern;
         private boolean mHasChallenge;
         private long mChallenge;
+        protected TextView mTitleText;
         protected TextView mHeaderText;
         protected TextView mMessageText;
         protected LockPatternView mLockPatternView;
@@ -179,6 +182,7 @@ public class ChooseLockPattern extends SettingsActivity {
         private TextView mFooterRightButton;
         protected List<LockPatternView.Cell> mChosenPattern = null;
         private boolean mHideDrawer = false;
+        private ColorStateList mDefaultHeaderColorList;
 
         // ScrollView that contains title and header, only exist in land mode
         private ScrollView mTitleHeaderScrollView;
@@ -265,6 +269,9 @@ public class ChooseLockPattern extends SettingsActivity {
 
                 private void patternInProgress() {
                     mHeaderText.setText(R.string.lockpattern_recording_inprogress);
+                    if (mDefaultHeaderColorList != null) {
+                        mHeaderText.setTextColor(mDefaultHeaderColorList);
+                    }
                     mFooterText.setText("");
                     mFooterLeftButton.setEnabled(false);
                     mFooterRightButton.setEnabled(false);
@@ -465,10 +472,13 @@ public class ChooseLockPattern extends SettingsActivity {
             return layout;
         }
 
+
         @Override
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
+            mTitleText = view.findViewById(R.id.suw_layout_title);
             mHeaderText = (TextView) view.findViewById(R.id.headerText);
+            mDefaultHeaderColorList = mHeaderText.getTextColors();
             mMessageText = view.findViewById(R.id.message);
             mLockPatternView = (LockPatternView) view.findViewById(R.id.lockPattern);
             mLockPatternView.setOnPatternListener(mChooseNewLockPatternListener);
@@ -662,6 +672,23 @@ public class ChooseLockPattern extends SettingsActivity {
                 mFooterText.setText("");
             } else {
                 mFooterText.setText(stage.footerMessage);
+            }
+
+            if (stage == Stage.ConfirmWrong || stage == Stage.ChoiceTooShort) {
+                TypedValue typedValue = new TypedValue();
+                Theme theme = getActivity().getTheme();
+                theme.resolveAttribute(R.attr.colorError, typedValue, true);
+                mHeaderText.setTextColor(typedValue.data);
+
+            } else {
+                if (mDefaultHeaderColorList != null) {
+                    mHeaderText.setTextColor(mDefaultHeaderColorList);
+                }
+
+                if (stage == Stage.NeedToConfirm && mForFingerprint) {
+                    mHeaderText.setText("");
+                    mTitleText.setText(R.string.lockpassword_draw_your_pattern_again_header);
+                }
             }
 
             updateFooterLeftButton(stage, mFooterLeftButton);

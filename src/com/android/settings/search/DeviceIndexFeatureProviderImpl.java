@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
  * except in compliance with the License. You may obtain a copy of the License at
@@ -12,18 +12,20 @@
  * permissions and limitations under the License.
  */
 
-package com.android.settings.wrapper;
+package com.android.settings.search;
 
-import android.content.pm.PackageInfo;
-import android.content.pm.UserInfo;
+import android.content.Context;
+import android.net.Uri;
 
-/**
- * Wrapper class around android.webkit.UserPackage - to be able to use UserPackage in Robolectric
- * tests (such tests currently don't support mocking hidden classes).
- */
-public interface UserPackageWrapper {
-    UserInfo getUserInfo();
-    PackageInfo getPackageInfo();
-    boolean isEnabledPackage();
-    boolean isInstalledPackage();
+public class DeviceIndexFeatureProviderImpl implements DeviceIndexFeatureProvider {
+
+    @Override
+    public boolean isIndexingEnabled() {
+        return false;
+    }
+
+    @Override
+    public void index(Context context, CharSequence title, Uri sliceUri, Uri launchUri) {
+        // Not enabled by default.
+    }
 }

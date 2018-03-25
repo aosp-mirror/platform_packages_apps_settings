@@ -118,6 +118,7 @@ public class WallpaperTypeSettings extends SettingsPreferenceFragment implements
                     data.intentAction = Intent.ACTION_SET_WALLPAPER;
                     data.intentTargetPackage = info.activityInfo.packageName;
                     data.intentTargetClass = info.activityInfo.name;
+                    data.keywords = context.getString(R.string.keywords_wallpaper);
                     result.add(data);
                 }
 

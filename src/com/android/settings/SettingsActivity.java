@@ -63,7 +63,9 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.gateway.SettingsGateway;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardSummary;
+import com.android.settings.development.DevelopmentSettingsDashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.search.DeviceIndexFeatureProvider;
 import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.instrumentation.Instrumentable;
@@ -71,6 +73,7 @@ import com.android.settingslib.core.instrumentation.SharedPreferencesLogger;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -488,6 +491,7 @@ public class SettingsActivity extends SettingsDrawerActivity
         registerReceiver(mBatteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
         updateTilesList();
+        updateDeviceIndex();
     }
 
     @Override
@@ -608,6 +612,14 @@ public class SettingsActivity extends SettingsDrawerActivity
         });
     }
 
+    private void updateDeviceIndex() {
+        DeviceIndexFeatureProvider indexProvider = FeatureFactory.getFactory(
+                this).getDeviceIndexFeatureProvider();
+
+        ThreadUtils.postOnBackgroundThread(
+                () -> indexProvider.updateIndex(SettingsActivity.this, false /* force */));
+    }
+
     private void doUpdateTilesList() {
         PackageManager pm = getPackageManager();
         final UserManager um = UserManager.get(this);
@@ -686,10 +698,10 @@ public class SettingsActivity extends SettingsDrawerActivity
 
         final boolean showDev = DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(this)
                 && !Utils.isMonkeyRunning();
-
+        final boolean isAdminOrDemo = um.isAdminUser() || um.isDemoUser();
         somethingChanged = setTileEnabled(new ComponentName(packageName,
                         Settings.DevelopmentSettingsDashboardActivity.class.getName()),
-                showDev, isAdmin)
+                showDev, isAdminOrDemo)
                 || somethingChanged;
 
         // Enable/disable backup settings depending on whether the user is admin.
@@ -724,10 +736,11 @@ public class SettingsActivity extends SettingsDrawerActivity
                     final int tileCount = category.getTilesCount();
                     for (int i = 0; i < tileCount; i++) {
                         final ComponentName component = category.getTile(i).intent.getComponent();
-
                         final String name = component.getClassName();
                         final boolean isEnabledForRestricted = ArrayUtils.contains(
-                                SettingsGateway.SETTINGS_FOR_RESTRICTED, name);
+                                SettingsGateway.SETTINGS_FOR_RESTRICTED, name) || (isAdminOrDemo
+                                && Settings.DevelopmentSettingsDashboardActivity.class.getName()
+                                .equals(name));
                         if (packageName.equals(component.getPackageName())
                                 && !isEnabledForRestricted) {
                             somethingChanged = setTileEnabled(component, false, isAdmin)
