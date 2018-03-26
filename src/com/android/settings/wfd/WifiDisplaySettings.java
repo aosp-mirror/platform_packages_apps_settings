@@ -66,6 +66,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,6 +79,7 @@ import java.util.List;
  * on the system.  In that case, the enable option will not be shown but other
  * remote display routes will continue to be made available.
  */
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public final class WifiDisplaySettings extends SettingsPreferenceFragment implements Indexable {
     private static final String TAG = "WifiDisplaySettings";
     private static final boolean DEBUG = false;

@@ -38,11 +38,13 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.datetime.ZoneGetter;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+@SearchIndexable
 public class DateTimeSettings extends DashboardFragment implements
         TimePreferenceController.TimePreferenceHost, DatePreferenceController.DatePreferenceHost {
 

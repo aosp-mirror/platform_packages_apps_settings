@@ -36,11 +36,13 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@SearchIndexable
 public class ConfigureNotificationSettings extends DashboardFragment {
     private static final String TAG = "ConfigNotiSettings";
 

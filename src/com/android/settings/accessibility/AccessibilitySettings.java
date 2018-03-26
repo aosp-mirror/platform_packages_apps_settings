@@ -59,6 +59,7 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.accessibility.AccessibilityUtils;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -70,6 +71,7 @@ import java.util.Set;
 /**
  * Activity with the accessibility settings.
  */
+@SearchIndexable
 public class AccessibilitySettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener, Indexable {
 

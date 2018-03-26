@@ -32,11 +32,13 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.dream.DreamBackend;
 import com.android.settingslib.dream.DreamBackend.WhenToDream;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@SearchIndexable
 public class DreamSettings extends DashboardFragment {
 
     private static final String TAG = "DreamSettings";

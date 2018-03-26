@@ -30,11 +30,13 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@SearchIndexable
 public class DoubleTapScreenSettings extends DashboardFragment {
 
     private static final String TAG = "DoubleTapScreen";

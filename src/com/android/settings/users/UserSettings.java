@@ -73,6 +73,7 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.drawable.CircleFramedDrawable;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -89,6 +90,7 @@ import java.util.List;
  * The first one is always the current user.
  * Owner is the primary user.
  */
+@SearchIndexable
 public class UserSettings extends SettingsPreferenceFragment
         implements OnPreferenceClickListener, OnClickListener, DialogInterface.OnDismissListener,
         EditUserInfoController.OnContentChangedCallback, Indexable {

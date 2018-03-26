@@ -36,6 +36,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +45,7 @@ import java.util.List;
  * AutomaticStorageManagerSettings is the Settings screen for configuration and management of the
  * automatic storage manager.
  */
+@SearchIndexable
 public class AutomaticStorageManagerSettings extends DashboardFragment
         implements OnPreferenceChangeListener {
     private static final String KEY_DAYS = "days";

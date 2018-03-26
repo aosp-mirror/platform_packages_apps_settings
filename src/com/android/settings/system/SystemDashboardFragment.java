@@ -28,10 +28,12 @@ import com.android.settings.backup.BackupSettingsActivityPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.Arrays;
 import java.util.List;
 
+@SearchIndexable
 public class SystemDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "SystemDashboardFrag";

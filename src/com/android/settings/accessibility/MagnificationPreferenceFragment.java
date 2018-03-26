@@ -25,22 +25,20 @@ import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
-import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.SearchIndexable;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+@SearchIndexable
 public final class MagnificationPreferenceFragment extends DashboardFragment {
 
     private static final String TAG = "MagnificationPreferenceFragment";

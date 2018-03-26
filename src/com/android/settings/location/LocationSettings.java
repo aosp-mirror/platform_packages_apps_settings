@@ -34,6 +34,8 @@ import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.location.RecentLocationApps;
+import com.android.settingslib.search.SearchIndexable;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -58,6 +60,7 @@ import java.util.List;
  * other things, this simplifies integration with future changes to the default (AOSP)
  * implementation.
  */
+@SearchIndexable
 public class LocationSettings extends DashboardFragment {
 
     private static final String TAG = "LocationSettings";

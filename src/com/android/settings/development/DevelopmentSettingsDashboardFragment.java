@@ -49,11 +49,13 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.development.SystemPropPoker;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFragment
         implements SwitchBar.OnSwitchChangeListener, OemUnlockDialogHost, AdbDialogHost,
         AdbClearKeysDialogHost, LogPersistDialogHost {
