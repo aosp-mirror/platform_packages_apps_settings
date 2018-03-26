@@ -21,11 +21,11 @@ import android.accounts.AccountManagerCallback;
 import android.accounts.AccountManagerFuture;
 import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
-import android.app.admin.DevicePolicyManager;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -44,6 +44,8 @@ import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.wrapper.DevicePolicyManagerWrapper;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.io.IOException;
@@ -92,12 +94,15 @@ public class RemoveAccountPreferenceController extends AbstractPreferenceControl
 
     @Override
     public void onClick(View v) {
-        final Intent intent = mDpm.createAdminSupportIntent(UserManager.DISALLOW_MODIFY_ACCOUNTS);
-        if (intent != null) {
-            // DISALLOW_MODIFY_ACCOUNTS is active, show admin support dialog
-            mContext.startActivity(intent);
-            return;
+        if (mUserHandle != null) {
+            final EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(mContext,
+                UserManager.DISALLOW_MODIFY_ACCOUNTS, mUserHandle.getIdentifier());
+            if (admin != null) {
+                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(mContext, admin);
+                return;
+            }
         }
+
         ConfirmRemoveAccountDialog.show(mParentFragment, mAccount, mUserHandle);
     }
 
