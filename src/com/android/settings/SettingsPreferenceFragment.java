@@ -375,7 +375,8 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         return mPreferenceCache != null ? mPreferenceCache.size() : 0;
     }
 
-    protected boolean removePreference(String key) {
+    @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
+    public boolean removePreference(String key) {
         return removePreference(getPreferenceScreen(), key);
     }
 
