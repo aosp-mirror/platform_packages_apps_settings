@@ -16,6 +16,7 @@
 
 package com.android.settings.applications.manageapplications;
 
+import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry
         .FILTER_APPS_ALL;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry
@@ -50,6 +51,7 @@ import android.os.Environment;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.PreferenceFrameLayout;
+import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -844,10 +846,15 @@ public class ManageApplications extends InstrumentedFragment
         private boolean mHasReceivedBridgeCallback;
         private FileViewHolderController mExtraViewController;
 
-        // These two variables are used to remember and restore the last scroll position when this
+        // This is to remember and restore the last scroll position when this
         // fragment is paused. We need this special handling because app entries are added gradually
         // when we rebuild the list after the user made some changes, like uninstalling an app.
         private int mLastIndex = -1;
+
+        @VisibleForTesting
+        OnScrollListener mOnScrollListener;
+        private RecyclerView mRecyclerView;
+
 
         public ApplicationsAdapter(ApplicationsState state, ManageApplications manageApplications,
                 AppFilterItem appFilter, Bundle savedInstanceState) {
@@ -884,6 +891,22 @@ public class ManageApplications extends InstrumentedFragment
             if (savedInstanceState != null) {
                 mLastIndex = savedInstanceState.getInt(STATE_LAST_SCROLL_INDEX);
             }
+        }
+
+        @Override
+        public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+            super.onAttachedToRecyclerView(recyclerView);
+            mRecyclerView = recyclerView;
+            mOnScrollListener = new OnScrollListener(this);
+            mRecyclerView.addOnScrollListener(mOnScrollListener);
+        }
+
+        @Override
+        public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
+            super.onDetachedFromRecyclerView(recyclerView);
+            mRecyclerView.removeOnScrollListener(mOnScrollListener);
+            mOnScrollListener = null;
+            mRecyclerView = null;
         }
 
         public void setCompositeFilter(AppFilter compositeFilter) {
@@ -1180,9 +1203,8 @@ public class ManageApplications extends InstrumentedFragment
                     rebuild();
                     return;
                 } else {
-                    notifyItemChanged(i);
+                    mOnScrollListener.postNotifyItemChange(i);
                 }
-
             }
         }
 
@@ -1310,13 +1332,39 @@ public class ManageApplications extends InstrumentedFragment
             return mExtraViewController != null
                     && mExtraViewController.shouldShow();
         }
+
+        public static class OnScrollListener extends RecyclerView.OnScrollListener {
+            private int mScrollState = SCROLL_STATE_IDLE;
+            private boolean mDelayNotifyDataChange;
+            private ApplicationsAdapter mAdapter;
+
+            public OnScrollListener(ApplicationsAdapter adapter) {
+                mAdapter = adapter;
+            }
+
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                mScrollState = newState;
+                if (mScrollState == SCROLL_STATE_IDLE && mDelayNotifyDataChange) {
+                    mDelayNotifyDataChange = false;
+                    mAdapter.notifyDataSetChanged();
+                }
+            }
+
+            public void postNotifyItemChange(int index) {
+                if (mScrollState == SCROLL_STATE_IDLE) {
+                    mAdapter.notifyItemChanged(index);
+                } else {
+                    mDelayNotifyDataChange = true;
+                }
+            }
+        }
     }
 
     private static class SummaryProvider implements SummaryLoader.SummaryProvider {
 
         private final Context mContext;
         private final SummaryLoader mLoader;
-        private ApplicationsState.Session mSession;
 
         private SummaryProvider(Context context, SummaryLoader loader) {
             mContext = context;
