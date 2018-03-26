@@ -17,6 +17,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="tether_prefs_screen"
     android:title="@string/tether_settings_title_all">
 
     <com.android.settings.widget.FixedLineSummaryPreference
@@ -29,12 +30,14 @@
     <SwitchPreference
         android:key="usb_tether_settings"
         android:title="@string/usb_tethering_button_text"
-        android:summary="@string/usb_tethering_subtext" />
+        android:summary="@string/usb_tethering_subtext"
+        settings:keywords="@string/keywords_hotspot_tethering" />
 
     <SwitchPreference
         android:key="enable_bluetooth_tethering"
         android:title="@string/bluetooth_tether_checkbox_text"
-        android:summary="@string/bluetooth_tethering_subtext" />
+        android:summary="@string/bluetooth_tethering_subtext"
+        settings:keywords="@string/keywords_hotspot_tethering" />
 
     <Preference
         android:key="disabled_on_data_saver"
