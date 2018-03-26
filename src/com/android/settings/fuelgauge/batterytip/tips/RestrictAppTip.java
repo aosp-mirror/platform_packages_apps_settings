@@ -112,7 +112,7 @@ public class RestrictAppTip extends BatteryTip {
                     metricsFeatureProvider.action(context,
                             MetricsProto.MetricsEvent.ACTION_APP_RESTRICTION_TIP_LIST,
                             appInfo.packageName,
-                            Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, anomalyType));
+                            Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_TYPE, anomalyType));
                 }
 
             }
