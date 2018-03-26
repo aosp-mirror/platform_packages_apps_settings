@@ -48,13 +48,14 @@ public abstract class DataUsageBaseFragment extends DashboardFragment {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        final Context context = getActivity();
+        Context context = getContext();
 
         services.mNetworkService = INetworkManagementService.Stub.asInterface(
                 ServiceManager.getService(Context.NETWORKMANAGEMENT_SERVICE));
         services.mStatsService = INetworkStatsService.Stub.asInterface(
                 ServiceManager.getService(Context.NETWORK_STATS_SERVICE));
-        services.mPolicyManager = NetworkPolicyManager.from(context);
+        services.mPolicyManager = (NetworkPolicyManager)context
+                .getSystemService(Context.NETWORK_POLICY_SERVICE);
 
         services.mPolicyEditor = new NetworkPolicyEditor(services.mPolicyManager);
 
@@ -100,6 +101,7 @@ public abstract class DataUsageBaseFragment extends DashboardFragment {
 
     /**
      * Test if device has an ethernet network connection.
+     * TODO(b/77590489): Remove this method when DataUsageSummaryLegacy is deprecated.
      */
     public boolean hasEthernet(Context context) {
         if (DataUsageUtils.TEST_RADIOS) {

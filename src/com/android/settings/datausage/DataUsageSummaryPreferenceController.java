@@ -27,6 +27,7 @@ import android.support.v7.preference.Preference;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.SubscriptionPlan;
+import android.telephony.TelephonyManager;
 import android.text.BidiFormatter;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -183,17 +184,35 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
 
     @Override
     public int getAvailabilityStatus() {
-        return mSubscriptionManager.getDefaultDataSubscriptionInfo() != null
-                ? AVAILABLE : DISABLED_UNSUPPORTED;
+        return DataUsageUtils.hasSim(mActivity)
+                || DataUsageUtils.hasWifiRadio(mContext) ? AVAILABLE : DISABLED_UNSUPPORTED;
     }
 
     @Override
     public void updateState(Preference preference) {
         DataUsageSummaryPreference summaryPreference = (DataUsageSummaryPreference) preference;
-        DataUsageController.DataUsageInfo info = mDataUsageController.getDataUsageInfo(
-                mDefaultTemplate);
 
-        mDataInfoController.updateDataLimit(info, mPolicyEditor.getPolicy(mDefaultTemplate));
+        final DataUsageController.DataUsageInfo info;
+        if (DataUsageUtils.hasSim(mActivity)) {
+            info = mDataUsageController.getDataUsageInfo(mDefaultTemplate);
+            mDataInfoController.updateDataLimit(info, mPolicyEditor.getPolicy(mDefaultTemplate));
+            summaryPreference.setWifiMode(/* isWifiMode */ false, /* usagePeriod */ null);
+        } else {
+            info = mDataUsageController.getDataUsageInfo(
+                    NetworkTemplate.buildTemplateWifiWildcard());
+            summaryPreference.setWifiMode(/* isWifiMode */ true, /* usagePeriod */ info.period);
+            summaryPreference.setLimitInfo(null);
+            summaryPreference.setUsageNumbers(info.usageLevel,
+                    /* dataPlanSize */ -1L,
+                    /* hasMobileData */ true);
+            summaryPreference.setChartEnabled(false);
+            summaryPreference.setUsageInfo(info.cycleEnd,
+                    /* snapshotTime */ -1L,
+                    /* carrierName */ null,
+                    /* numPlans */ 0,
+                    /* launchIntent */ null);
+            return;
+        }
 
         if (mSubscriptionManager != null) {
             refreshDataplanInfo(info);
