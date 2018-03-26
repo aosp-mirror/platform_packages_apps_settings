@@ -81,7 +81,6 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
     private PreferenceCategory mCategory;
     private Preference mSeeAllPref;
     private Preference mDivider;
-    private boolean mHasRecentApps;
 
     static {
         SKIP_SYSTEM_PACKAGES.addAll(Arrays.asList(
@@ -142,20 +141,7 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
     public void updateState(Preference preference) {
         super.updateState(preference);
         refreshUi(mCategory.getContext());
-        // Show total number of installed apps as See all's summary.
-        new InstalledAppCounter(mContext, InstalledAppCounter.IGNORE_INSTALL_REASON,
-                new PackageManagerWrapper(mContext.getPackageManager())) {
-            @Override
-            protected void onCountComplete(int num) {
-                if (mHasRecentApps) {
-                    mSeeAllPref.setTitle(
-                            mContext.getString(R.string.recent_notifications_see_all_title));
-                } else {
-                    mSeeAllPref.setSummary(mContext.getString(R.string.apps_summary, num));
-                }
-            }
-        }.execute();
-
+        mSeeAllPref.setTitle(mContext.getString(R.string.recent_notifications_see_all_title));
     }
 
     @VisibleForTesting
@@ -163,10 +149,8 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
         reloadData();
         final List<NotifyingApp> recentApps = getDisplayableRecentAppList();
         if (recentApps != null && !recentApps.isEmpty()) {
-            mHasRecentApps = true;
             displayRecentApps(prefContext, recentApps);
         } else {
-            mHasRecentApps = false;
             displayOnlyAllAppsLink();
         }
     }
@@ -228,7 +212,7 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
             pref.setTitle(appEntry.label);
             pref.setIcon(mIconDrawableFactory.getBadgedIcon(appEntry.info));
             pref.setSummary(StringUtil.formatRelativeTime(mContext,
-                    System.currentTimeMillis() - app.getLastNotified(), false));
+                    System.currentTimeMillis() - app.getLastNotified(), true));
             pref.setOrder(i);
             Bundle args = new Bundle();
             args.putString(AppInfoBase.ARG_PACKAGE_NAME, pkgName);
