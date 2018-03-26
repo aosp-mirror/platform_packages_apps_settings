@@ -636,13 +636,15 @@ public class ChooseLockPassword extends SettingsActivity {
         }
 
         /**
-         * Validates PIN and returns the validation result.
+         * Validates PIN/Password and returns the validation result.
          *
          * @param password the raw password the user typed in
          * @return the validation result.
          */
         private int validatePassword(String password) {
             int errorCode = NO_ERROR;
+            final PasswordMetrics metrics = PasswordMetrics.computeForPassword(password);
+
 
             if (password.length() < mPasswordMinLength) {
                 if (mPasswordMinLength > mPasswordMinLengthToFulfillAllPolicies) {
@@ -652,8 +654,14 @@ public class ChooseLockPassword extends SettingsActivity {
                 errorCode |= TOO_LONG;
             } else {
                 // The length requirements are fulfilled.
-                if (mRequestedQuality == PASSWORD_QUALITY_NUMERIC_COMPLEX) {
+                final int dpmQuality = mLockPatternUtils.getRequestedPasswordQuality(mUserId);
+                if (dpmQuality == PASSWORD_QUALITY_NUMERIC_COMPLEX &&
+                        metrics.numeric == password.length()) {
                     // Check for repeated characters or sequences (e.g. '1234', '0000', '2468')
+                    // if DevicePolicyManager requires a complex numeric password. There can be
+                    // two cases in the UI: 1. User chooses to enroll a PIN, 2. User chooses to
+                    // enroll a password but enters a numeric-only pin. We should carry out the
+                    // sequence check in both cases.
                     final int sequence = PasswordMetrics.maxLengthSequence(password);
                     if (sequence > PasswordMetrics.MAX_ALLOWED_SEQUENCE) {
                         errorCode |= CONTAIN_SEQUENTIAL_DIGITS;
@@ -673,8 +681,6 @@ public class ChooseLockPassword extends SettingsActivity {
                     break;
                 }
             }
-
-            final PasswordMetrics metrics = PasswordMetrics.computeForPassword(password);
 
             // Ensure no non-digits if we are requesting numbers. This shouldn't be possible unless
             // user finds some way to bring up soft keyboard.
