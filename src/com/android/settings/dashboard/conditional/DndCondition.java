@@ -20,7 +20,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.drawable.Icon;
+import android.graphics.drawable.Drawable;
 import android.os.PersistableBundle;
 import android.provider.Settings;
 import android.provider.Settings.Global;
@@ -81,8 +81,8 @@ public class DndCondition extends Condition {
     }
 
     @Override
-    public Icon getIcon() {
-        return Icon.createWithResource(mManager.getContext(), R.drawable.ic_zen);
+    public Drawable getIcon() {
+        return mManager.getContext().getDrawable(R.drawable.ic_zen);
     }
 
     @Override
