@@ -27,17 +27,17 @@ import android.support.v7.preference.PreferenceScreen;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.TelephonyProperties;
 import com.android.settings.AirplaneModeEnabler;
-import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.R;
-import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
-public class AirplaneModePreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause {
+public class AirplaneModePreferenceController extends TogglePreferenceController
+        implements LifecycleObserver, OnResume, OnPause,
+        AirplaneModeEnabler.OnAirplaneModeChangedListener {
 
     public static final int REQUEST_CODE_EXIT_ECM = 1;
 
@@ -45,16 +45,19 @@ public class AirplaneModePreferenceController extends AbstractPreferenceControll
 
     private static final String EXIT_ECM_RESULT = "exit_ecm_result";
 
-    private final Fragment mFragment;
+    private Fragment mFragment;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private AirplaneModeEnabler mAirplaneModeEnabler;
     private SwitchPreference mAirplaneModePreference;
 
 
-    public AirplaneModePreferenceController(Context context, Fragment hostFragment) {
-        super(context);
-        mFragment = hostFragment;
+    public AirplaneModePreferenceController(Context context, String key) {
+        super(context, key);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+    }
+
+    public void setFragment(Fragment hostFragment) {
+        mFragment = hostFragment;
     }
 
     @Override
@@ -75,20 +78,11 @@ public class AirplaneModePreferenceController extends AbstractPreferenceControll
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
         if (isAvailable()) {
             mAirplaneModePreference = (SwitchPreference) screen.findPreference(getPreferenceKey());
-            if (mAirplaneModePreference != null) {
-                mAirplaneModeEnabler = new AirplaneModeEnabler(mContext, mAirplaneModePreference,
-                        mMetricsFeatureProvider);
-            }
-        } else {
-            setVisible(screen, getPreferenceKey(), false /* visible */);
+            mAirplaneModeEnabler = new AirplaneModeEnabler(mContext, mMetricsFeatureProvider, this);
         }
-    }
-
-    @Override
-    public boolean isAvailable() {
-        return isAvailable(mContext);
     }
 
     public static boolean isAvailable(Context context) {
@@ -97,8 +91,9 @@ public class AirplaneModePreferenceController extends AbstractPreferenceControll
     }
 
     @Override
-    public String getPreferenceKey() {
-        return KEY_TOGGLE_AIRPLANE;
+    @AvailabilityStatus
+    public int getAvailabilityStatus() {
+        return isAvailable(mContext) ? AVAILABLE : DISABLED_UNSUPPORTED;
     }
 
     public void onResume() {
@@ -121,5 +116,24 @@ public class AirplaneModePreferenceController extends AbstractPreferenceControll
             mAirplaneModeEnabler.setAirplaneModeInECM(isChoiceYes,
                     mAirplaneModePreference.isChecked());
         }
+    }
+
+    @Override
+    public boolean isChecked() {
+        return mAirplaneModeEnabler.isAirplaneModeOn();
+    }
+
+    @Override
+    public boolean setChecked(boolean isChecked) {
+        if (isChecked() == isChecked) {
+            return false;
+        }
+        mAirplaneModeEnabler.setAirplaneMode(isChecked);
+        return true;
+    }
+
+    @Override
+    public void onAirplaneModeChanged(boolean isAirplaneModeOn) {
+        mAirplaneModePreference.setChecked(isAirplaneModeOn);
     }
 }

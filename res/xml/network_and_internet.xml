@@ -73,6 +73,7 @@
         android:icon="@drawable/ic_airplanemode_active"
         android:disableDependentsState="true"
         android:order="5"
+        settings:controller="com.android.settings.network.AirplaneModePreferenceController"
         settings:userRestriction="no_airplane_mode"/>
 
     <Preference
