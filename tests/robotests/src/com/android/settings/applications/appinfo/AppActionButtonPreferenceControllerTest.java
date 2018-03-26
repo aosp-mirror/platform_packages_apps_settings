@@ -79,6 +79,8 @@ public class AppActionButtonPreferenceControllerTest {
     private AppInfoDashboardFragment mFragment;
     @Mock
     private ApplicationInfo mAppInfo;
+    @Mock
+    private PackageManager mPackageManager;
 
     private Context mContext;
     private AppActionButtonPreferenceController mController;
@@ -95,7 +97,9 @@ public class AppActionButtonPreferenceControllerTest {
         ReflectionHelpers.setField(mController, "mDpm", mDevicePolicyManager);
         ReflectionHelpers.setField(mController, "mApplicationFeatureProvider",
                 mFeatureFactory.applicationFeatureProvider);
+        ReflectionHelpers.setField(mController, "mPm", mPackageManager);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
         final PackageInfo packageInfo = mock(PackageInfo.class);
         packageInfo.applicationInfo = mAppInfo;
         when(mFragment.getPackageInfo()).thenReturn(packageInfo);
@@ -211,6 +215,25 @@ public class AppActionButtonPreferenceControllerTest {
         mController.checkForceStop(appEntry, packageInfo);
 
         verify(mController.mActionButtons).setButton2Visible(false);
+    }
+
+    @Test
+    public void checkForceStop_isStateProtected_shouldDisableForceStop() {
+        ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
+            (InstantAppDataProvider) (i -> false));
+        final String packageName = "Package1";
+        final PackageInfo packageInfo = new PackageInfo();
+        packageInfo.packageName = packageName;
+        final ApplicationInfo appInfo = new ApplicationInfo();
+        appInfo.uid = 42;
+        appInfo.sourceDir = "source";
+        final ApplicationsState.AppEntry appEntry = new ApplicationsState.AppEntry(
+            mContext, appInfo, 0);
+        when(mPackageManager.isPackageStateProtected(packageName, 0)).thenReturn(true);
+
+        mController.checkForceStop(appEntry, packageInfo);
+
+        verify(mController.mActionButtons).setButton2Enabled(false);
     }
 
     @Test
