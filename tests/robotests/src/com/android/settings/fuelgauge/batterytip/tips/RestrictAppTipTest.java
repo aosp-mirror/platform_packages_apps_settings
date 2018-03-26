@@ -172,11 +172,11 @@ public class RestrictAppTipTest {
         verify(mMetricsFeatureProvider).action(mContext,
                 MetricsProto.MetricsEvent.ACTION_APP_RESTRICTION_TIP_LIST,
                 PACKAGE_NAME,
-                Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, ANOMALY_WAKEUP));
+                Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_TYPE, ANOMALY_WAKEUP));
         verify(mMetricsFeatureProvider).action(mContext,
                 MetricsProto.MetricsEvent.ACTION_APP_RESTRICTION_TIP_LIST,
                 PACKAGE_NAME,
-                Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, ANOMALY_WAKELOCK));
+                Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_TYPE, ANOMALY_WAKELOCK));
     }
 
     @Test
