@@ -2208,7 +2208,6 @@
             android:name="Settings$PowerUsageSummaryActivity"
             android:label="@string/power_usage_summary_title"
             android:icon="@drawable/ic_homepage_battery"
-            android:enabled="false"
             android:taskAffinity="com.android.settings"
             android:parentActivityName="Settings">
             <intent-filter android:priority="1">
@@ -2227,24 +2226,6 @@
                 android:value="com.android.settings.category.ia.homepage" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.fuelgauge.PowerUsageSummary" />
-        </activity>
-
-        <activity android:name=".Settings$PowerUsageSummaryLegacyActivity"
-                  android:label="@string/power_usage_summary_title"
-                  android:icon="@drawable/ic_homepage_battery"
-                  android:taskAffinity="com.android.settings"
-                  android:parentActivityName="Settings">
-            <intent-filter>
-                <action android:name="android.intent.action.POWER_USAGE_SUMMARY" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter android:priority="8">
-                <action android:name="com.android.settings.action.SETTINGS" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.homepage" />
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.fuelgauge.PowerUsageSummaryLegacy" />
         </activity>
 
         <activity
