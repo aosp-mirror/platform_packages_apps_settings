@@ -106,11 +106,6 @@ public interface PowerUsageFeatureProvider {
     String getAdvancedUsageScreenInfoString();
 
     /**
-     * Checks whether to display the battery v2.
-     */
-    boolean isBatteryV2Enabled();
-
-    /**
      * Returns a signal to indicate if the device will need to warn the user they may not make it
      * to their next charging time.
      *
