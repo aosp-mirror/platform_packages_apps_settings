@@ -14,9 +14,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.drawable.Icon;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.telephony.TelephonyManager;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.R;
@@ -58,8 +59,8 @@ public class CellularDataCondition extends Condition {
     }
 
     @Override
-    public Icon getIcon() {
-        return Icon.createWithResource(mManager.getContext(), R.drawable.ic_cellular_off);
+    public Drawable getIcon() {
+        return mManager.getContext().getDrawable(R.drawable.ic_cellular_off);
     }
 
     @Override

@@ -16,7 +16,7 @@
 package com.android.settings.dashboard.conditional;
 
 import android.content.Intent;
-import android.graphics.drawable.Icon;
+import android.graphics.drawable.Drawable;
 import android.net.NetworkPolicyManager;
 import android.util.FeatureFlagUtils;
 
@@ -37,8 +37,8 @@ public class BackgroundDataCondition extends Condition {
     }
 
     @Override
-    public Icon getIcon() {
-        return Icon.createWithResource(mManager.getContext(), R.drawable.ic_data_saver);
+    public Drawable getIcon() {
+        return mManager.getContext().getDrawable(R.drawable.ic_data_saver);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class BackgroundDataCondition extends Condition {
 
     @Override
     public CharSequence[] getActions() {
-        return new CharSequence[] { mManager.getContext().getString(R.string.condition_turn_off) };
+        return new CharSequence[] {mManager.getContext().getString(R.string.condition_turn_off)};
     }
 
     @Override

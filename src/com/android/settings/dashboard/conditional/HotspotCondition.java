@@ -19,7 +19,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.drawable.Icon;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
@@ -64,8 +64,8 @@ public class HotspotCondition extends Condition {
     }
 
     @Override
-    public Icon getIcon() {
-        return Icon.createWithResource(mManager.getContext(), R.drawable.ic_hotspot);
+    public Drawable getIcon() {
+        return mManager.getContext().getDrawable(R.drawable.ic_hotspot);
     }
 
     private String getSsid() {
