@@ -29,6 +29,9 @@ import android.util.Pair;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.SlicesDatabaseHelper.IndexColumns;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import androidx.slice.Slice;
 
 /**
@@ -51,10 +54,12 @@ public class SlicesDatabaseAccessor {
     // Cursor value for boolean true
     private final int TRUE = 1;
 
-    Context mContext;
+    private final Context mContext;
+    private final SlicesDatabaseHelper mHelper;
 
     public SlicesDatabaseAccessor(Context context) {
         mContext = context;
+        mHelper = SlicesDatabaseHelper.getInstance(mContext);
     }
 
     /**
@@ -79,16 +84,44 @@ public class SlicesDatabaseAccessor {
         return buildSliceData(cursor, null /* uri */, false /* isInlineOnly */);
     }
 
+    /**
+     * @return a list of keys in the Slices database matching on {@param isPlatformSlice}.
+     */
+    public List<String> getSliceKeys(boolean isPlatformSlice) {
+        final String whereClause;
+
+        if (isPlatformSlice) {
+            whereClause = IndexColumns.PLATFORM_SLICE + " = 1";
+        } else {
+            whereClause = IndexColumns.PLATFORM_SLICE + " = 0";
+        }
+
+        final SQLiteDatabase database = mHelper.getReadableDatabase();
+        final String[] columns = new String[]{IndexColumns.KEY};
+        final List<String> keys = new ArrayList<>();
+
+        try (final Cursor resultCursor = database.query(TABLE_SLICES_INDEX, columns, whereClause,
+                null /* selection */, null /* groupBy */, null /* having */, null /* orderBy */)) {
+            if (!resultCursor.moveToFirst()) {
+                return keys;
+            }
+
+            do {
+                keys.add(resultCursor.getString(0 /* key index */));
+            } while (resultCursor.moveToNext());
+        }
+
+        return keys;
+    }
+
     private Cursor getIndexedSliceData(String path) {
         verifyIndexing();
 
         final String whereClause = buildKeyMatchWhereClause();
-        final SlicesDatabaseHelper helper = SlicesDatabaseHelper.getInstance(mContext);
-        final SQLiteDatabase database = helper.getReadableDatabase();
+        final SQLiteDatabase database = mHelper.getReadableDatabase();
         final String[] selection = new String[]{path};
-
-        Cursor resultCursor = database.query(TABLE_SLICES_INDEX, SELECT_COLUMNS_ALL, whereClause,
-                selection, null /* groupBy */, null /* having */, null /* orderBy */);
+        final Cursor resultCursor = database.query(TABLE_SLICES_INDEX, SELECT_COLUMNS_ALL,
+                whereClause, selection, null /* groupBy */, null /* having */, null /* orderBy */);
 
         int numResults = resultCursor.getCount();
 

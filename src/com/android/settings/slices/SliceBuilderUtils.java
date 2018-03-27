@@ -130,7 +130,7 @@ public class SliceBuilderUtils {
         // Example: "/action/wifi" -> [{}, "action", "wifi"]
         //          "/action/longer/path" -> [{}, "action", "longer/path"]
         if (split.length != 3) {
-            throw new IllegalArgumentException("Uri (" + uri + ") has incomplete path: " + path);
+            return null;
         }
 
         final boolean isInline = TextUtils.equals(SettingsSlicesContract.PATH_SETTING_ACTION,
