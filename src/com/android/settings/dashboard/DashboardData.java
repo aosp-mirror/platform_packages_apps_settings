@@ -16,7 +16,7 @@
 package com.android.settings.dashboard;
 
 import android.annotation.IntDef;
-import android.graphics.drawable.Icon;
+import android.graphics.drawable.Drawable;
 import android.service.settings.suggestions.Suggestion;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.util.DiffUtil;
@@ -432,7 +432,7 @@ public class DashboardData {
      * also be used to check the diff in DiffUtil.Callback
      */
     public static class ConditionHeaderData {
-        public final List<Icon> conditionIcons;
+        public final List<Drawable> conditionIcons;
         public final CharSequence title;
         public final int conditionCount;
 

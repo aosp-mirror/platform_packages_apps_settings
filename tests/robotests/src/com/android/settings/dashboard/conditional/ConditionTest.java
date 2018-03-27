@@ -27,7 +27,7 @@ import static org.mockito.Mockito.when;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
-import android.graphics.drawable.Icon;
+import android.graphics.drawable.Drawable;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -120,7 +120,7 @@ public class ConditionTest {
         }
 
         @Override
-        public Icon getIcon() {
+        public Drawable getIcon() {
             return null;
         }
 
