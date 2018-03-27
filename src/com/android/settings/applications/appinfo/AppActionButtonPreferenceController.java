@@ -283,6 +283,10 @@ public class AppActionButtonPreferenceController extends BasePreferenceControlle
             // User can't force stop device admin.
             Log.w(TAG, "User can't force stop device admin");
             updateForceStopButton(false);
+        } else if (mPm.isPackageStateProtected(packageInfo.packageName,
+            UserHandle.getUserId(appEntry.info.uid))) {
+            Log.w(TAG, "User can't force stop protected packages");
+            updateForceStopButton(false);
         } else if (AppUtils.isInstant(packageInfo.applicationInfo)) {
             updateForceStopButton(false);
             mActionButtons.setButton2Visible(false);
