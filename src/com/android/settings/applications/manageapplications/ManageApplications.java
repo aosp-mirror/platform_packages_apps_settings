@@ -155,6 +155,7 @@ public class ManageApplications extends InstrumentedFragment
     private static final String EXTRA_SHOW_SYSTEM = "showSystem";
     private static final String EXTRA_HAS_ENTRIES = "hasEntries";
     private static final String EXTRA_HAS_BRIDGE = "hasBridge";
+    private static final String EXTRA_FILTER_TYPE = "filterType";
 
     // attributes used as keys when passing values to AppInfoDashboardFragment activity
     public static final String APP_CHG = "chg";
@@ -231,6 +232,7 @@ public class ManageApplications extends InstrumentedFragment
     private boolean mIsWorkOnly;
     private int mWorkUserId;
     private View mEmptyView;
+    private int mFilterType;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -311,6 +313,8 @@ public class ManageApplications extends InstrumentedFragment
         if (savedInstanceState != null) {
             mSortOrder = savedInstanceState.getInt(EXTRA_SORT_ORDER, mSortOrder);
             mShowSystem = savedInstanceState.getBoolean(EXTRA_SHOW_SYSTEM, mShowSystem);
+            mFilterType =
+                    savedInstanceState.getInt(EXTRA_FILTER_TYPE, AppFilterRegistry.FILTER_APPS_ALL);
         }
 
         mInvalidSizeStr = activity.getText(R.string.invalid_size_value);
@@ -493,6 +497,7 @@ public class ManageApplications extends InstrumentedFragment
         outState.putBoolean(EXTRA_SHOW_SYSTEM, mShowSystem);
         outState.putBoolean(EXTRA_HAS_ENTRIES, mApplications.mHasReceivedLoadEntries);
         outState.putBoolean(EXTRA_HAS_BRIDGE, mApplications.mHasReceivedBridgeCallback);
+        outState.putInt(EXTRA_FILTER_TYPE, mFilter.getFilterType());
         if (mApplications != null) {
             mApplications.onSaveInstanceState(outState);
         }
@@ -788,6 +793,16 @@ public class ManageApplications extends InstrumentedFragment
                 }
                 mManageApplications.mFilterSpinner.setSelection(0);
                 mManageApplications.onItemSelected(null, null, 0, 0);
+            }
+            if (mFilterOptions.size() > 1) {
+                if (filterType == mManageApplications.mFilterType) {
+                    int index = mFilterOptions.indexOf(filter);
+                    if (index != -1) {
+                        mManageApplications.mFilterSpinner.setSelection(index);
+                        mManageApplications.onItemSelected(null, null, index, 0);
+                        mManageApplications.mFilterType = AppFilterRegistry.FILTER_APPS_ALL;
+                    }
+                }
             }
         }
 
