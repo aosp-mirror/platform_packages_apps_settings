@@ -16,12 +16,13 @@
 package com.android.settings.dashboard.conditional;
 
 import android.content.Intent;
-import android.graphics.drawable.Icon;
+import android.graphics.drawable.Drawable;
 import android.os.PowerManager;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.fuelgauge.BatterySaverDrawable;
 import com.android.settings.fuelgauge.batterysaver.BatterySaverSettings;
 import com.android.settingslib.fuelgauge.BatterySaverUtils;
 
@@ -37,8 +38,8 @@ public class BatterySaverCondition extends Condition {
     }
 
     @Override
-    public Icon getIcon() {
-        return Icon.createWithResource(mManager.getContext(), R.drawable.ic_settings_battery);
+    public Drawable getIcon() {
+        return new BatterySaverDrawable(mManager.getContext(), 0);
     }
 
     @Override
@@ -53,7 +54,7 @@ public class BatterySaverCondition extends Condition {
 
     @Override
     public CharSequence[] getActions() {
-        return new CharSequence[] { mManager.getContext().getString(R.string.condition_turn_off) };
+        return new CharSequence[] {mManager.getContext().getString(R.string.condition_turn_off)};
     }
 
     @Override

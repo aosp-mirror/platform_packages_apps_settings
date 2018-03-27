@@ -17,7 +17,7 @@
 package com.android.settings.dashboard.conditional;
 
 import android.content.Intent;
-import android.graphics.drawable.Icon;
+import android.graphics.drawable.Drawable;
 
 import com.android.internal.app.ColorDisplayController;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -42,8 +42,8 @@ public final class NightDisplayCondition extends Condition
     }
 
     @Override
-    public Icon getIcon() {
-        return Icon.createWithResource(mManager.getContext(), R.drawable.ic_settings_night_display);
+    public Drawable getIcon() {
+        return mManager.getContext().getDrawable(R.drawable.ic_settings_night_display);
     }
 
     @Override
@@ -58,7 +58,7 @@ public final class NightDisplayCondition extends Condition
 
     @Override
     public CharSequence[] getActions() {
-        return new CharSequence[] { mManager.getContext().getString(R.string.condition_turn_off) };
+        return new CharSequence[] {mManager.getContext().getString(R.string.condition_turn_off)};
     }
 
     @Override
