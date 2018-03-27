@@ -393,8 +393,12 @@
     <string name="bluetooth_paired_device_title">Your devices</string>
     <!-- Title for pairing bluetooth device page [CHAR LIMIT=none] -->
     <string name="bluetooth_pairing_page_title">Pair new device</string>
-    <!-- Summary for bluetooth item in connection detail page -->
-    <string name="bluetooth_pref_summary">Allow device to pair and connect to bluetooth devices</string>
+    <!-- Summary for bluetooth item in connection detail page. (tablet)-->
+    <string name="bluetooth_pref_summary" product="tablet">Allow your tablet to communicate with nearby Bluetooth devices</string>
+    <!-- Summary for bluetooth item in connection detail page. (device)-->
+    <string name="bluetooth_pref_summary" product="device">Allow your device to communicate with nearby Bluetooth devices</string>
+    <!-- Summary for bluetooth item in connection detail page. (phone)-->
+    <string name="bluetooth_pref_summary" product="default">Allow your phone to communicate with nearby Bluetooth devices</string>
 
     <!-- Setting Checkbox title for disabling Bluetooth inband ringing in Development Settings -->
     <string name="bluetooth_disable_inband_ringing">Disable in-band ringing</string>
@@ -412,7 +416,7 @@
     <!-- Title for preference to add a device [CHAR LIMIT=none]-->
     <string name="connected_device_add_device_title">Add device</string>
     <!-- Summary for preference to add a device [CHAR LIMIT=none]-->
-    <string name="connected_device_add_device_summary">Bluetooth will turn on to enable pairing</string>
+    <string name="connected_device_add_device_summary">Bluetooth will turn on to pair</string>
     <!-- Title for other connection preferences [CHAR LIMIT=none]-->
     <string name="connected_device_connections_title">Connection preferences</string>
     <!-- Title for Bluetooth preference to open paired but no connection list [CHAR LIMIT=none]-->
