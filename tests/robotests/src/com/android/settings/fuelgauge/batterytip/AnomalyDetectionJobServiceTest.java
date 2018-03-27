@@ -58,6 +58,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowJobScheduler;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -149,8 +150,9 @@ public class AnomalyDetectionJobServiceTest {
 
     @Test
     public void testSaveAnomalyToDatabase_normalAppWithAutoRestriction_save() {
-        mBundle.putStringArray(StatsManager.EXTRA_STATS_BROADCAST_SUBSCRIBER_COOKIES,
-                new String[]{SUBSCRIBER_COOKIES_AUTO_RESTRICTION});
+        final ArrayList<String> cookies = new ArrayList<>();
+        cookies.add(SUBSCRIBER_COOKIES_AUTO_RESTRICTION);
+        mBundle.putStringArrayList(StatsManager.EXTRA_STATS_BROADCAST_SUBSCRIBER_COOKIES, cookies);
         doReturn(SYSTEM_PACKAGE).when(mBatteryUtils).getPackageName(anyInt());
         doReturn(false).when(mPowerWhitelistBackend).isSysWhitelisted(SYSTEM_PACKAGE);
         doReturn(Process.FIRST_APPLICATION_UID).when(
@@ -173,8 +175,9 @@ public class AnomalyDetectionJobServiceTest {
 
     @Test
     public void testSaveAnomalyToDatabase_normalAppWithoutAutoRestriction_save() {
-        mBundle.putStringArray(StatsManager.EXTRA_STATS_BROADCAST_SUBSCRIBER_COOKIES,
-                new String[]{SUBSCRIBER_COOKIES_NOT_AUTO_RESTRICTION});
+        final ArrayList<String> cookies = new ArrayList<>();
+        cookies.add(SUBSCRIBER_COOKIES_NOT_AUTO_RESTRICTION);
+        mBundle.putStringArrayList(StatsManager.EXTRA_STATS_BROADCAST_SUBSCRIBER_COOKIES, cookies);
         doReturn(SYSTEM_PACKAGE).when(mBatteryUtils).getPackageName(anyInt());
         doReturn(false).when(mPowerWhitelistBackend).isSysWhitelisted(SYSTEM_PACKAGE);
         doReturn(Process.FIRST_APPLICATION_UID).when(

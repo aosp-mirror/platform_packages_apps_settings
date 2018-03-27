@@ -51,6 +51,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 import com.android.settingslib.utils.ThreadUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -126,10 +127,10 @@ public class AnomalyDetectionJobService extends JobService {
                 bundle.getParcelable(StatsManager.EXTRA_STATS_DIMENSIONS_VALUE);
         final long timeMs = bundle.getLong(AnomalyDetectionReceiver.KEY_ANOMALY_TIMESTAMP,
                 System.currentTimeMillis());
-        final String[] cookies = bundle.getStringArray(
+        final ArrayList<String> cookies = bundle.getStringArrayList(
                 StatsManager.EXTRA_STATS_BROADCAST_SUBSCRIBER_COOKIES);
         final AnomalyInfo anomalyInfo = new AnomalyInfo(
-                !ArrayUtils.isEmpty(cookies) ? cookies[0] : "");
+                !ArrayUtils.isEmpty(cookies) ? cookies.get(0) : "");
         Log.i(TAG, "Extra stats value: " + intentDimsValue.toString());
 
         try {
