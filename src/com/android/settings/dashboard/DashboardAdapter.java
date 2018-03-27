@@ -18,7 +18,6 @@ package com.android.settings.dashboard;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.service.settings.suggestions.Suggestion;
 import android.support.annotation.VisibleForTesting;
@@ -262,7 +261,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
     @VisibleForTesting
     void onBindConditionHeader(final ConditionHeaderHolder holder, ConditionHeaderData data) {
-        holder.icon.setImageIcon(data.conditionIcons.get(0));
+        holder.icon.setImageDrawable(data.conditionIcons.get(0));
         if (data.conditionCount == 1) {
             holder.title.setText(data.title);
             holder.summary.setText(null);
@@ -338,7 +337,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         outState.putBoolean(STATE_CONDITION_EXPANDED, mDashboardData.isConditionExpanded());
     }
 
-    private void updateConditionIcons(List<Icon> icons, ViewGroup parent) {
+    private void updateConditionIcons(List<Drawable> icons, ViewGroup parent) {
         if (icons == null || icons.size() < 2) {
             parent.setVisibility(View.INVISIBLE);
             return;
@@ -348,7 +347,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         for (int i = 1, size = icons.size(); i < size; i++) {
             ImageView icon = (ImageView) inflater.inflate(
                     R.layout.condition_header_icon, parent, false);
-            icon.setImageIcon(icons.get(i));
+            icon.setImageDrawable(icons.get(i));
             parent.addView(icon);
         }
         parent.setVisibility(View.VISIBLE);

@@ -32,8 +32,8 @@ import android.accounts.AuthenticatorDescription;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
@@ -48,7 +48,12 @@ import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowAccountManager;
 import com.android.settings.testutils.shadow.ShadowContentResolver;
+import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.wrapper.DevicePolicyManagerWrapper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -60,6 +65,11 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(
+    shadows = {
+        ShadowUserManager.class,
+        ShadowDevicePolicyManager.class
+    })
 public class RemoveAccountPreferenceControllerTest {
 
     private static final String KEY_REMOVE_ACCOUNT = "remove_account";
@@ -125,8 +135,21 @@ public class RemoveAccountPreferenceControllerTest {
     @Test
     public void onClick_shouldNotStartConfirmDialogWhenModifyAccountsIsDisallowed() {
         when(mFragment.isAdded()).thenReturn(true);
-        when(mDevicePolicyManager.createAdminSupportIntent(UserManager.DISALLOW_MODIFY_ACCOUNTS))
-            .thenReturn(new Intent());
+
+        final int userId = UserHandle.myUserId();
+        mController.init(new Account("test", "test"), UserHandle.of(userId));
+
+        List<UserManager.EnforcingUser> enforcingUsers = new ArrayList<>();
+        enforcingUsers.add(new UserManager.EnforcingUser(userId,
+            UserManager.RESTRICTION_SOURCE_DEVICE_OWNER));
+        ComponentName componentName = new ComponentName("test", "test");
+        // Ensure that RestrictedLockUtils.checkIfRestrictionEnforced doesn't return null.
+        ShadowUserManager.getShadow().setUserRestrictionSources(
+            UserManager.DISALLOW_MODIFY_ACCOUNTS,
+            UserHandle.of(userId),
+            enforcingUsers);
+        ShadowDevicePolicyManager.getShadow().setDeviceOwnerComponentOnAnyUser(componentName);
+
         mController.onClick(null);
 
         verify(mFragmentTransaction, never()).add(
