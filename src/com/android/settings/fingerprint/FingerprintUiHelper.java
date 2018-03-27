@@ -79,6 +79,10 @@ public class FingerprintUiHelper extends FingerprintManager.AuthenticationCallba
 
     @Override
     public void onAuthenticationError(int errMsgId, CharSequence errString) {
+        if (errMsgId == FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
+            // Only happens if we get preempted by another activity. Ignored.
+            return;
+        }
         showError(errString);
         setFingerprintIconVisibility(false);
     }
