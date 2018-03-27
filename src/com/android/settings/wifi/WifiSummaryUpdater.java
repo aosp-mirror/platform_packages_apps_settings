@@ -20,13 +20,16 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkScoreManager;
+import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.support.annotation.VisibleForTesting;
+import android.text.TextUtils;
+
 import com.android.settings.R;
 import com.android.settings.widget.SummaryUpdater;
 import com.android.settingslib.wifi.WifiStatusTracker;
-
-import static android.net.wifi.WifiInfo.removeDoubleQuotes;
 
 /**
  * Helper class that listeners to wifi callback and notify client when there is update in
@@ -46,14 +49,18 @@ public final class WifiSummaryUpdater extends SummaryUpdater {
     }
 
     public WifiSummaryUpdater(Context context, OnSummaryChangeListener listener) {
-        this(context, listener, new WifiStatusTracker(context.getSystemService(WifiManager.class)));
+        this(context, listener, null);
     }
 
     @VisibleForTesting
     public WifiSummaryUpdater(Context context, OnSummaryChangeListener listener,
         WifiStatusTracker wifiTracker) {
         super(context, listener);
-        mWifiTracker = wifiTracker;
+        mWifiTracker = wifiTracker != null ? wifiTracker :
+                new WifiStatusTracker(context, context.getSystemService(WifiManager.class),
+                context.getSystemService(NetworkScoreManager.class),
+                context.getSystemService(ConnectivityManager.class),
+                        this::notifyChangeIfNeeded);
         mReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -70,6 +77,7 @@ public final class WifiSummaryUpdater extends SummaryUpdater {
         } else {
             mContext.unregisterReceiver(mReceiver);
         }
+        mWifiTracker.setListening(register);
     }
 
     @Override
@@ -80,7 +88,12 @@ public final class WifiSummaryUpdater extends SummaryUpdater {
         if (!mWifiTracker.connected) {
             return mContext.getString(R.string.disconnected);
         }
-        return removeDoubleQuotes(mWifiTracker.ssid);
+        String ssid = WifiInfo.removeDoubleQuotes(mWifiTracker.ssid);
+        if (TextUtils.isEmpty(mWifiTracker.statusLabel)) {
+            return ssid;
+        }
+        return mContext.getResources().getString(
+                com.android.settingslib.R.string.preference_summary_default_combination,
+                ssid, mWifiTracker.statusLabel);
     }
-
 }
