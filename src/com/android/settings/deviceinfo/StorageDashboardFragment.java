@@ -46,6 +46,7 @@ import com.android.settings.deviceinfo.storage.UserIconLoader;
 import com.android.settings.deviceinfo.storage.VolumeSizesLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settings.widget.EntityHeaderController;
 import com.android.settings.wrapper.UserManagerWrapper;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -106,6 +107,13 @@ public class StorageDashboardFragment extends DashboardFragment
         super.onViewCreated(v, savedInstanceState);
         initializeCacheProvider();
         maybeSetLoading(isQuotaSupported());
+
+        final Activity activity = getActivity();
+        EntityHeaderController.newInstance(activity, this /*fragment*/,
+                null /* header view */)
+                .setRecyclerView(getListView(), getLifecycle())
+                .styleActionBar(activity);
+
     }
 
     @Override
