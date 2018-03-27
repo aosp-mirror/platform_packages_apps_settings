@@ -16,7 +16,20 @@
 
 package com.android.settings.datetime.timezone;
 
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import android.app.Activity;
+import android.app.Fragment;
+import android.widget.Filter;
+import android.widget.LinearLayout;
+
 import com.android.settings.datetime.timezone.BaseTimeZoneAdapter.AdapterItem;
+import com.android.settings.datetime.timezone.BaseTimeZoneAdapter.ItemViewHolder;
+import com.android.settings.datetime.timezone.RegionSearchPicker.RegionItem;
 import com.android.settings.datetime.timezone.model.TimeZoneData;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -24,17 +37,23 @@ import libcore.util.CountryZonesFinder;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(shadows = {
+        RegionSearchPickerTest.ShadowBaseTimeZonePicker.class,
+        RegionSearchPickerTest.ShadowFragment.class,
+    }
+)
 public class RegionSearchPickerTest {
 
     @Test
@@ -44,16 +63,90 @@ public class RegionSearchPickerTest {
         CountryZonesFinder finder = mock(CountryZonesFinder.class);
         when(finder.lookupAllCountryIsoCodes()).thenReturn(regionList);
 
-        RegionSearchPicker picker = new RegionSearchPicker() {
-            @Override
-            protected Locale getLocale() {
-                return Locale.US;
-            }
-        };
+        RegionSearchPicker picker = new RegionSearchPicker();
         BaseTimeZoneAdapter adapter = picker.createAdapter(new TimeZoneData(finder));
         assertEquals(1, adapter.getItemCount());
         AdapterItem item = adapter.getItem(0);
         assertEquals("United States", item.getTitle().toString());
         assertThat(Arrays.asList(item.getSearchKeys())).contains("United States");
+    }
+
+    // Test RegionSearchPicker does not crash due to the wrong assumption that no view is clicked
+    // before all views are updated and after internal data structure is updated for text filtering.
+    // This test mocks the text filtering event and emit click event immediately
+    // http://b/75322108
+    @Test
+    public void clickItemView_duringRegionSearch_shouldNotCrash() {
+        List regionList = new ArrayList();
+        regionList.add("US");
+        CountryZonesFinder finder = mock(CountryZonesFinder.class);
+        when(finder.lookupAllCountryIsoCodes()).thenReturn(regionList);
+
+        // Prepare the picker and adapter
+        RegionSearchPicker picker = new RegionSearchPicker();
+        BaseTimeZoneAdapter<RegionItem> adapter = picker.createAdapter(new TimeZoneData(finder));
+        // Prepare and bind a new ItemViewHolder with United States
+        ItemViewHolder viewHolder = adapter.onCreateViewHolder(
+                new LinearLayout(RuntimeEnvironment.application), 0);
+        adapter.onBindViewHolder(viewHolder, 0);
+        assertEquals(1, adapter.getItemCount());
+
+        // Pretend to search for a unknown region and no result is found.
+        FilterWrapper filterWrapper = new FilterWrapper(adapter.getFilter());
+        filterWrapper.publishEmptyResult("Unknown region 1");
+
+        // Assert that the adapter should have been updated with no item
+        assertEquals(0, adapter.getItemCount());
+        viewHolder.itemView.performClick(); // This should not crash
+    }
+
+    // FilterResults is a protected inner class. Use FilterWrapper to create an empty FilterResults
+    // instance.
+    private static class FilterWrapper extends Filter {
+
+        private final BaseTimeZoneAdapter.ArrayFilter mFilter;
+
+        private FilterWrapper(BaseTimeZoneAdapter.ArrayFilter filter) {
+            mFilter = filter;
+        }
+
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            return null;
+        }
+
+        private void publishEmptyResult(CharSequence charSequence) {
+            FilterResults filterResults = new FilterResults();
+            filterResults.count = 0;
+            filterResults.values = new ArrayList<>();
+            publishResults(charSequence, filterResults);
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            mFilter.publishResults(charSequence, filterResults);
+        }
+    }
+
+    // Robolectric can't start android.app.Fragment with support library v4 resources. Pretend
+    // the fragment has started, and provide the objects in context here.
+    @Implements(BaseTimeZonePicker.class)
+    public static class ShadowBaseTimeZonePicker extends ShadowFragment {
+
+        @Implementation
+        protected Locale getLocale() {
+            return Locale.US;
+        }
+    }
+
+    @Implements(Fragment.class)
+    public static class ShadowFragment {
+
+        private Activity mActivity = Robolectric.setupActivity(Activity.class);
+
+        @Implementation
+        public final Activity getActivity() {
+            return mActivity;
+        }
     }
 }

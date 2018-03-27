@@ -17,6 +17,7 @@
 package com.android.settings.datetime.timezone;
 
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -161,8 +162,8 @@ public abstract class BaseTimeZonePicker extends InstrumentedFragment
         return false;
     }
 
-    public interface OnListItemClickListener {
-        void onListItemClick(int position);
+    public interface OnListItemClickListener<T extends BaseTimeZoneAdapter.AdapterItem> {
+        void onListItemClick(T item);
     }
 
 }
