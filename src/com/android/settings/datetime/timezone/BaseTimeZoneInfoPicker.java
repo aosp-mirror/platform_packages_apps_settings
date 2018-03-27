@@ -31,7 +31,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 
 /**
  * Render a list of {@class TimeZoneInfo} into the list view in {@class BaseTimeZonePicker}
@@ -52,8 +51,8 @@ public abstract class BaseTimeZoneInfoPicker extends BaseTimeZonePicker {
         return mAdapter;
     }
 
-    private void onListItemClick(int position) {
-        final TimeZoneInfo timeZoneInfo = mAdapter.getItem(position).mTimeZoneInfo;
+    private void onListItemClick(TimeZoneInfoItem item) {
+        final TimeZoneInfo timeZoneInfo = item.mTimeZoneInfo;
         getActivity().setResult(Activity.RESULT_OK, prepareResultData(timeZoneInfo));
         getActivity().finish();
     }
@@ -67,7 +66,7 @@ public abstract class BaseTimeZoneInfoPicker extends BaseTimeZonePicker {
     protected static class ZoneAdapter extends BaseTimeZoneAdapter<TimeZoneInfoItem> {
 
         public ZoneAdapter(Context context, List<TimeZoneInfo> timeZones,
-                OnListItemClickListener onListItemClickListener, Locale locale) {
+                OnListItemClickListener<TimeZoneInfoItem> onListItemClickListener, Locale locale) {
             super(createTimeZoneInfoItems(context, timeZones, locale),
                     onListItemClickListener, locale,  true /* showItemSummary */);
         }
