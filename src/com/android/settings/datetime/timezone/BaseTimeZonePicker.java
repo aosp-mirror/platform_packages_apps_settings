@@ -44,7 +44,7 @@ import java.util.Locale;
  * The search matches the prefix of words in the search text.
  */
 public abstract class BaseTimeZonePicker extends InstrumentedFragment
-        implements SearchView.OnQueryTextListener{
+        implements SearchView.OnQueryTextListener {
 
     public static final String EXTRA_RESULT_REGION_ID =
             "com.android.settings.datetime.timezone.result_region_id";
@@ -84,7 +84,7 @@ public abstract class BaseTimeZonePicker extends InstrumentedFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.recycler_view, container, false);
+        final View view = inflater.inflate(R.layout.time_zone_items_list, container, false);
         mRecyclerView = view.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),
                 LinearLayoutManager.VERTICAL, /* reverseLayout */ false));

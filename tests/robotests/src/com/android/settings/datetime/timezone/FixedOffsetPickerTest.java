@@ -65,10 +65,10 @@ public class FixedOffsetPickerTest {
         TestFixedOffsetPicker picker = new TestFixedOffsetPicker();
         BaseTimeZoneAdapter adapter = picker.createAdapter(new TimeZoneData(mFinder));
         assertThat(adapter.getItemCount()).isEqualTo(12 + 1 + 14); // 27 GMT offsets from -12 to +14
-        AdapterItem utc = adapter.getItem(0);
+        AdapterItem utc = adapter.getDataItem(0);
         assertThat(utc.getTitle().toString()).isEqualTo("Coordinated Universal Time");
         assertThat(utc.getSummary().toString()).isEqualTo("GMT+00:00");
-        AdapterItem gmtMinus12 = adapter.getItem(1);
+        AdapterItem gmtMinus12 = adapter.getDataItem(1);
         assertThat(gmtMinus12.getTitle().toString()).isEqualTo("GMT-12:00");
         assertThat(gmtMinus12.getSummary().toString()).isEmpty();
     }
