@@ -27,6 +27,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 
@@ -44,6 +45,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowSecureSettings.class)
@@ -67,8 +69,10 @@ public class AmbientDisplayNotificationsPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mContentResolver = mContext.getContentResolver();
-        mController = new AmbientDisplayNotificationsPreferenceController(mContext, mConfig,
-                mMetricsFeatureProvider);
+        mController = new AmbientDisplayNotificationsPreferenceController(mContext,
+                AmbientDisplayNotificationsPreferenceController.KEY_AMBIENT_DISPLAY_NOTIFICATIONS);
+        mController.setConfig(mConfig);
+        ReflectionHelpers.setField(mController, "mMetricsFeatureProvider", mMetricsFeatureProvider);
     }
 
     @Test
@@ -117,6 +121,20 @@ public class AmbientDisplayNotificationsPreferenceControllerTest {
         when(mConfig.pulseOnNotificationAvailable()).thenReturn(false);
 
         assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void isChecked_checked_shouldReturnTrue() {
+        when(mConfig.pulseOnNotificationEnabled(UserHandle.myUserId())).thenReturn(true);
+
+        assertThat(mController.isChecked()).isTrue();
+    }
+
+    @Test
+    public void isChecked_checked_shouldReturnFalse() {
+        when(mConfig.pulseOnNotificationEnabled(UserHandle.myUserId())).thenReturn(false);
+
+        assertThat(mController.isChecked()).isFalse();
     }
 
     @Test
