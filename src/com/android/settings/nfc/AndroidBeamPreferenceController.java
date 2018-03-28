@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,19 +17,18 @@ package com.android.settings.nfc;
 
 import android.content.Context;
 import android.support.v7.preference.PreferenceScreen;
-import android.support.v14.preference.SwitchPreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
+public class AndroidBeamPreferenceController extends BaseNfcPreferenceController {
 
-public class NfcPreferenceController extends BaseNfcPreferenceController {
+    public static final String KEY_ANDROID_BEAM_SETTINGS = "android_beam_settings";
 
-    public static final String KEY_TOGGLE_NFC = "toggle_nfc";
-
-    public NfcPreferenceController(Context context) {
+    public AndroidBeamPreferenceController(Context context) {
         super(context);
     }
 
@@ -40,11 +39,11 @@ public class NfcPreferenceController extends BaseNfcPreferenceController {
             return;
         }
 
-        mNfcEnabler = new NfcEnabler(mContext, (SwitchPreference) mPreference);
+        mNfcEnabler = new AndroidBeamEnabler(mContext, (RestrictedPreference) mPreference);
     }
 
     @Override
     public String getPreferenceKey() {
-        return KEY_TOGGLE_NFC;
+        return KEY_ANDROID_BEAM_SETTINGS;
     }
 }
