@@ -127,8 +127,9 @@ public class BatteryTipDialogFragmentTest {
 
         assertThat(shadowDialog.getTitle()).isEqualTo("Restrict app?");
         assertThat(shadowDialog.getMessage())
-                .isEqualTo("To save battery, stop app from using "
-                        + "battery in the background.");
+                .isEqualTo(
+                        "To save battery, stop app from using battery in the background. This app"
+                                + " may not work properly and notifications may be delayed.");
     }
 
     @Test
@@ -147,8 +148,10 @@ public class BatteryTipDialogFragmentTest {
 
         assertThat(shadowDialog.getTitle()).isEqualTo("Restrict 2 apps?");
         assertThat(shadowDialog.getMessage())
-                .isEqualTo("To save battery, stop these apps from using battery in the background"
-                        + ".\n\nApps:\n");
+                .isEqualTo(
+                        "To save battery, stop these apps from using battery in the background. "
+                                + "Restricted apps may not work properly and notifications may be"
+                                + " delayed.\n\nApps:\n");
         assertThat(shadowDialog.getView()).isNotNull();
     }
 
@@ -174,8 +177,10 @@ public class BatteryTipDialogFragmentTest {
 
         assertThat(shadowDialog.getTitle()).isEqualTo("Restrict 6 apps?");
         assertThat(shadowDialog.getMessage())
-                .isEqualTo("To save battery, stop these apps from using battery in the background"
-                        + ".\n\nApps:\napp, app, app, app, app, and app.");
+                .isEqualTo(
+                        "To save battery, stop these apps from using battery in the background. "
+                                + "Restricted apps may not work properly and notifications may be"
+                                + " delayed.\n\nApps:\napp, app, app, app, app, and app.");
     }
 
     @Test
