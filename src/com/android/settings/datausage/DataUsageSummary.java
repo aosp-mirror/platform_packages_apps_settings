@@ -155,7 +155,7 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
         final Activity activity = getActivity();
         final ArrayList<AbstractPreferenceController> controllers = new ArrayList<>();
         mSummaryController =
-                new DataUsageSummaryPreferenceController(context, this, activity);
+                new DataUsageSummaryPreferenceController(activity, getLifecycle(), this);
         controllers.add(mSummaryController);
         getLifecycle().addObserver(mSummaryController);
         return controllers;
