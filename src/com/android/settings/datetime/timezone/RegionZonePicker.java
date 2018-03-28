@@ -18,7 +18,10 @@ package com.android.settings.datetime.timezone;
 
 import android.content.Intent;
 import android.icu.text.Collator;
+import android.icu.text.LocaleDisplayNames;
 import android.icu.util.TimeZone;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 
@@ -43,13 +46,30 @@ public class RegionZonePicker extends BaseTimeZoneInfoPicker {
     public static final String EXTRA_REGION_ID =
             "com.android.settings.datetime.timezone.region_id";
 
+    private @Nullable String mRegionName;
+
     public RegionZonePicker() {
-        super(R.string.date_time_select_zone, R.string.search_settings, true, false);
+        super(R.string.date_time_set_timezone_title, R.string.search_settings, true, false);
     }
 
     @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.SETTINGS_ZONE_PICKER_TIME_ZONE;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        final LocaleDisplayNames localeDisplayNames = LocaleDisplayNames.getInstance(getLocale());
+        final String regionId =
+                getArguments() == null ? null : getArguments().getString(EXTRA_REGION_ID);
+        mRegionName = regionId == null ? null : localeDisplayNames.regionDisplayName(regionId);
+    }
+
+    @Override
+    protected @Nullable CharSequence getHeaderText() {
+        return mRegionName;
     }
 
     /**
@@ -67,6 +87,7 @@ public class RegionZonePicker extends BaseTimeZoneInfoPicker {
         if (getArguments() == null) {
             Log.e(TAG, "getArguments() == null");
             getActivity().finish();
+            return Collections.emptyList();
         }
         String regionId = getArguments().getString(EXTRA_REGION_ID);
 
@@ -75,6 +96,7 @@ public class RegionZonePicker extends BaseTimeZoneInfoPicker {
         if (filteredCountryTimeZones == null) {
             Log.e(TAG, "region id is not valid: " + regionId);
             getActivity().finish();
+            return Collections.emptyList();
         }
 
         // It could be a timely operations if there are many time zones. A region in time zone data
