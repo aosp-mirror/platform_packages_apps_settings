@@ -16,6 +16,8 @@
 
 package com.android.settings.dashboard.conditional;
 
+import static android.content.Context.NOTIFICATION_SERVICE;
+
 import android.app.NotificationManager;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
@@ -30,14 +32,19 @@ public class RingerMutedCondition extends AbnormalRingerConditionBase {
 
     RingerMutedCondition(ConditionManager manager) {
         super(manager);
-        mNotificationManager = mManager.getContext().getSystemService(NotificationManager.class);
+        mNotificationManager =
+                (NotificationManager) mManager.getContext().getSystemService(NOTIFICATION_SERVICE);
     }
 
     @Override
     public void refreshState() {
-        int zen = mNotificationManager.getZenMode();
-        boolean zenModeEnabled = zen != Settings.Global.ZEN_MODE_OFF;
-        boolean isSilent = mAudioManager.getRingerModeInternal() == AudioManager.RINGER_MODE_SILENT;
+        int zen = Settings.Global.ZEN_MODE_OFF;
+        if (mNotificationManager != null) {
+            zen = mNotificationManager.getZenMode();
+        }
+        final boolean zenModeEnabled = zen != Settings.Global.ZEN_MODE_OFF;
+        final boolean isSilent =
+                mAudioManager.getRingerModeInternal() == AudioManager.RINGER_MODE_SILENT;
         setActive(isSilent && !zenModeEnabled);
     }
 
