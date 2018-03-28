@@ -33,8 +33,11 @@ import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.usage.UsageEvents;
@@ -44,9 +47,12 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.os.Looper;
 import android.os.Parcel;
+import android.view.ViewGroup;
+import android.widget.Switch;
 
 import com.android.settings.R;
 import com.android.settings.applications.AppStateNotificationBridge.NotificationsSentState;
+import com.android.settings.notification.NotificationBackend;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -74,6 +80,8 @@ public class AppStateNotificationBridgeTest {
     private ApplicationsState mState;
     @Mock
     private UsageStatsManager mUsageStats;
+    @Mock
+    private NotificationBackend mBackend;
     private Context mContext;
     private AppStateNotificationBridge mBridge;
 
@@ -82,10 +90,12 @@ public class AppStateNotificationBridgeTest {
         MockitoAnnotations.initMocks(this);
         when(mState.newSession(any())).thenReturn(mSession);
         when(mState.getBackgroundLooper()).thenReturn(mock(Looper.class));
+        when(mBackend.getNotificationsBanned(anyString(), anyInt())).thenReturn(true);
+        when(mBackend.isSystemApp(any(), any())).thenReturn(true);
         mContext = RuntimeEnvironment.application.getApplicationContext();
 
-        mBridge = new AppStateNotificationBridge(mState,
-                mock(AppStateBaseBridge.Callback.class), mUsageStats);
+        mBridge = new AppStateNotificationBridge(mContext, mState,
+                mock(AppStateBaseBridge.Callback.class), mUsageStats, mBackend);
     }
 
     private AppEntry getMockAppEntry(String pkg) {
@@ -213,6 +223,9 @@ public class AppStateNotificationBridgeTest {
         assertThat(((NotificationsSentState) apps.get(0).extraInfo).lastSent).isEqualTo(6);
         assertThat(((NotificationsSentState) apps.get(0).extraInfo).avgSentDaily).isEqualTo(1);
         assertThat(((NotificationsSentState) apps.get(0).extraInfo).avgSentWeekly).isEqualTo(0);
+        assertThat(((NotificationsSentState) apps.get(0).extraInfo).blocked).isTrue();
+        assertThat(((NotificationsSentState) apps.get(0).extraInfo).systemApp).isTrue();
+        assertThat(((NotificationsSentState) apps.get(0).extraInfo).blockable).isTrue();
     }
 
     @Test
@@ -281,6 +294,9 @@ public class AppStateNotificationBridgeTest {
         assertThat(((NotificationsSentState) entry.extraInfo).lastSent).isEqualTo(12);
         assertThat(((NotificationsSentState) entry.extraInfo).avgSentDaily).isEqualTo(2);
         assertThat(((NotificationsSentState) entry.extraInfo).avgSentWeekly).isEqualTo(0);
+        assertThat(((NotificationsSentState) entry.extraInfo).blocked).isTrue();
+        assertThat(((NotificationsSentState) entry.extraInfo).systemApp).isTrue();
+        assertThat(((NotificationsSentState) entry.extraInfo).blockable).isTrue();
     }
 
     @Test
@@ -409,5 +425,34 @@ public class AppStateNotificationBridgeTest {
 
         assertThat(entries).containsExactly(veryFrequentDailyEntry, notFrequentDailyEntry,
                 veryFrequentWeeklyEntry, notFrequentWeeklyEntry);
+    }
+
+    @Test
+    public void testSwitchOnClickListener() {
+        ViewGroup parent = mock(ViewGroup.class);
+        Switch toggle = mock(Switch.class);
+        when(toggle.isChecked()).thenReturn(true);
+        when(toggle.isEnabled()).thenReturn(true);
+        when(parent.findViewById(anyInt())).thenReturn(toggle);
+
+        AppEntry entry = mock(AppEntry.class);
+        entry.info = new ApplicationInfo();
+        entry.info.packageName = "pkg";
+        entry.info.uid = 1356;
+        entry.extraInfo = new NotificationsSentState();
+
+        ViewGroup.OnClickListener listener = mBridge.getSwitchOnClickListener(entry);
+        listener.onClick(parent);
+
+        verify(toggle).toggle();
+        verify(mBackend).setNotificationsEnabledForPackage(
+                entry.info.packageName, entry.info.uid, true);
+        assertThat(((NotificationsSentState) entry.extraInfo).blocked).isFalse();
+    }
+
+    @Test
+    public void testSwitchViews_nullDoesNotCrash() {
+        mBridge.enableSwitch(null);
+        mBridge.checkSwitch(null);
     }
 }
