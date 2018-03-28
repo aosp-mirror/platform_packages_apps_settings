@@ -43,4 +43,13 @@ public class TimeZoneInfoTest {
         assertThat(timeZoneInfo.getStandardName()).isEqualTo("Pacific Standard Time");
         assertThat(timeZoneInfo.getDaylightName()).isEqualTo("Pacific Daylight Time");
     }
+
+    @Test
+    public void getGmtOffset_zoneLordHowe_correctGmtOffset() {
+        Date date = new Date(1514764800000L); // 00:00 1/1/2018 GMT
+        Formatter formatter = new Formatter(Locale.US, date);
+
+        TimeZoneInfo timeZoneInfo = formatter.format("Australia/Lord_Howe");
+        assertThat(timeZoneInfo.getGmtOffset().toString()).isEqualTo("GMT+11:00");
+    }
 }
