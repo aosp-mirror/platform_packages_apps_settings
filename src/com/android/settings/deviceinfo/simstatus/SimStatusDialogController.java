@@ -26,7 +26,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.os.UserHandle;
@@ -42,7 +41,6 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
-import android.telephony.euicc.EuiccManager;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -88,6 +86,10 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     final static int ICCID_INFO_VALUE_ID = R.id.icc_id_value;
     @VisibleForTesting
     final static int EID_INFO_VALUE_ID = R.id.esim_id_value;
+    @VisibleForTesting
+    final static int IMS_REGISTRATION_STATE_LABEL_ID = R.id.ims_reg_state_label;
+    @VisibleForTesting
+    final static int IMS_REGISTRATION_STATE_VALUE_ID = R.id.ims_reg_state_value;
 
     private final static String CB_AREA_INFO_RECEIVED_ACTION =
             "com.android.cellbroadcastreceiver.CB_AREA_INFO_RECEIVED";
@@ -162,6 +164,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         updateNetworkType();
         updateRoamingStatus(serviceState);
         updateIccidNumber();
+        updateImsRegistrationState();
     }
 
     @Override
@@ -384,6 +387,22 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
 
     private void updateEid() {
         mDialog.setText(EID_INFO_VALUE_ID, mEuiccManager.getEid());
+    }
+
+    private void updateImsRegistrationState() {
+        final int subscriptionId = mSubscriptionInfo.getSubscriptionId();
+        final PersistableBundle carrierConfig =
+            mCarrierConfigManager.getConfigForSubId(subscriptionId);
+        final boolean showImsRegState = carrierConfig == null ? false :
+            carrierConfig.getBoolean(CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL);
+        if (showImsRegState) {
+            final boolean isImsRegistered = mTelephonyManager.isImsRegistered(subscriptionId);
+            mDialog.setText(IMS_REGISTRATION_STATE_VALUE_ID, mRes.getString(isImsRegistered ?
+                R.string.ims_reg_status_registered : R.string.ims_reg_status_not_registered));
+        } else {
+            mDialog.removeSettingFromScreen(IMS_REGISTRATION_STATE_LABEL_ID);
+            mDialog.removeSettingFromScreen(IMS_REGISTRATION_STATE_VALUE_ID);
+        }
     }
 
     private SubscriptionInfo getPhoneSubscriptionInfo(int slotId) {
