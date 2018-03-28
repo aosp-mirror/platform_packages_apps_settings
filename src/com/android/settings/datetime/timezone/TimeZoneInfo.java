@@ -167,7 +167,7 @@ public class TimeZoneInfo {
         public TimeZoneInfo format(TimeZone timeZone) {
             final String id = timeZone.getID();
             final TimeZoneNames timeZoneNames = mTimeZoneFormat.getTimeZoneNames();
-            final java.util.TimeZone javaTimeZone = android.icu.impl.TimeZoneAdapter.wrap(timeZone);
+            final java.util.TimeZone javaTimeZone = java.util.TimeZone.getTimeZone(id);
             final CharSequence gmtOffset = ZoneGetter.getGmtOffsetText(mTimeZoneFormat, mLocale,
                 javaTimeZone, mNow);
             return new TimeZoneInfo.Builder(timeZone)
