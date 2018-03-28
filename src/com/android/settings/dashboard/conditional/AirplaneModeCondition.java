@@ -20,7 +20,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.Icon;
 import android.net.ConnectivityManager;
 import android.provider.Settings;
 import android.util.Log;
