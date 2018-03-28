@@ -50,8 +50,8 @@ public class ConditionAdapter extends RecyclerView.Adapter<DashboardItemHolder> 
             //TODO: get rid of setTag/getTag
             Condition condition = (Condition) v.getTag();
             mMetricsFeatureProvider.action(mContext,
-                MetricsEvent.ACTION_SETTINGS_CONDITION_CLICK,
-                condition.getMetricsConstant());
+                    MetricsEvent.ACTION_SETTINGS_CONDITION_CLICK,
+                    condition.getMetricsConstant());
             condition.onPrimaryClick();
         }
     };
@@ -108,7 +108,7 @@ public class ConditionAdapter extends RecyclerView.Adapter<DashboardItemHolder> 
     @Override
     public void onBindViewHolder(DashboardItemHolder holder, int position) {
         bindViews(mConditions.get(position), holder,
-            position == mConditions.size() - 1, mConditionClickListener);
+                position == mConditions.size() - 1, mConditionClickListener);
     }
 
     @Override
@@ -145,7 +145,7 @@ public class ConditionAdapter extends RecyclerView.Adapter<DashboardItemHolder> 
         View card = view.itemView.findViewById(R.id.content);
         card.setTag(condition);
         card.setOnClickListener(onClickListener);
-        view.icon.setImageIcon(condition.getIcon());
+        view.icon.setImageDrawable(condition.getIcon());
         view.title.setText(condition.getTitle());
 
         CharSequence[] actions = condition.getActions();

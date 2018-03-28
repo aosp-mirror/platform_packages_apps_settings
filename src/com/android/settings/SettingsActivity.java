@@ -655,17 +655,9 @@ public class SettingsActivity extends SettingsDrawerActivity
                 Utils.showSimCardTile(this), isAdmin)
                 || somethingChanged;
 
-        final boolean isBatterySettingsV2Enabled = featureFactory
-                .getPowerUsageFeatureProvider(this)
-                .isBatteryV2Enabled();
-        // Enable new battery page if v2 enabled
         somethingChanged = setTileEnabled(new ComponentName(packageName,
                         Settings.PowerUsageSummaryActivity.class.getName()),
-                mBatteryPresent && isBatterySettingsV2Enabled, isAdmin) || somethingChanged;
-        // Enable legacy battery page if v2 disabled
-        somethingChanged = setTileEnabled(new ComponentName(packageName,
-                        Settings.PowerUsageSummaryLegacyActivity.class.getName()),
-                mBatteryPresent && !isBatterySettingsV2Enabled, isAdmin) || somethingChanged;
+                mBatteryPresent, isAdmin) || somethingChanged;
 
         final boolean isDataUsageSettingsV2Enabled =
                 FeatureFlagUtils.isEnabled(this, FeatureFlags.DATA_USAGE_SETTINGS_V2);

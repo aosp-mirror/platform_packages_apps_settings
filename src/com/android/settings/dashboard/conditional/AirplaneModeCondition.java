@@ -19,7 +19,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.drawable.Icon;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.provider.Settings;
 import android.util.Log;
@@ -58,8 +58,8 @@ public class AirplaneModeCondition extends Condition {
     }
 
     @Override
-    public Icon getIcon() {
-        return Icon.createWithResource(mManager.getContext(), R.drawable.ic_airplane);
+    public Drawable getIcon() {
+        return mManager.getContext().getDrawable(R.drawable.ic_airplane);
     }
 
     @Override

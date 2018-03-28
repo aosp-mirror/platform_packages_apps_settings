@@ -18,15 +18,16 @@ package com.android.settings.datetime.timezone;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Paint;
 import android.icu.text.Collator;
 import android.icu.text.LocaleDisplayNames;
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.datetime.timezone.BaseTimeZoneAdapter.AdapterItem;
 import com.android.settings.datetime.timezone.model.FilteredCountryTimeZones;
 import com.android.settings.datetime.timezone.model.TimeZoneData;
 
@@ -63,8 +64,8 @@ public class RegionSearchPicker extends BaseTimeZonePicker {
         return mAdapter;
     }
 
-    private void onListItemClick(int position) {
-        final String regionId = mAdapter.getItem(position).getId();
+    private void onListItemClick(RegionItem item) {
+        final String regionId = item.getId();
         final FilteredCountryTimeZones countryTimeZones = mTimeZoneData.lookupCountryTimeZones(
                 regionId);
         final Activity activity = getActivity();
@@ -119,7 +120,8 @@ public class RegionSearchPicker extends BaseTimeZonePicker {
         return new ArrayList<>(items);
     }
 
-    private static class RegionItem implements BaseTimeZoneAdapter.AdapterItem {
+    @VisibleForTesting
+    static class RegionItem implements AdapterItem {
 
         private final String mId;
         private final String mName;

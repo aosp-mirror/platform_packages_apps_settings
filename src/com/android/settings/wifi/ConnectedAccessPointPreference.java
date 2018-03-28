@@ -31,15 +31,12 @@ import com.android.settingslib.wifi.AccessPointPreference;
 public class ConnectedAccessPointPreference extends AccessPointPreference implements
         View.OnClickListener {
 
-    private final CaptivePortalStatus mCaptivePortalStatus;
     private OnGearClickListener mOnGearClickListener;
-    private boolean mCaptivePortalNetwork;
+    private boolean mIsCaptivePortal;
 
     public ConnectedAccessPointPreference(AccessPoint accessPoint, Context context,
-            UserBadgeCache cache, @DrawableRes int iconResId, boolean forSavedNetworks,
-            CaptivePortalStatus captivePortalStatus) {
+            UserBadgeCache cache, @DrawableRes int iconResId, boolean forSavedNetworks) {
         super(accessPoint, context, cache, iconResId, forSavedNetworks);
-        mCaptivePortalStatus = captivePortalStatus;
     }
 
     @Override
@@ -51,9 +48,8 @@ public class ConnectedAccessPointPreference extends AccessPointPreference implem
     public void refresh() {
         super.refresh();
 
-        mCaptivePortalNetwork = mCaptivePortalStatus.isCaptivePortalNetwork();
-        setShowDivider(mCaptivePortalNetwork);
-        if (mCaptivePortalNetwork) {
+        setShowDivider(mIsCaptivePortal);
+        if (mIsCaptivePortal) {
             setSummary(R.string.wifi_tap_to_sign_in);
         }
     }
@@ -71,8 +67,8 @@ public class ConnectedAccessPointPreference extends AccessPointPreference implem
         gear.setOnClickListener(this);
 
         final View gearNoBg = holder.findViewById(R.id.settings_button_no_background);
-        gearNoBg.setVisibility(mCaptivePortalNetwork ? View.INVISIBLE : View.VISIBLE);
-        gear.setVisibility(mCaptivePortalNetwork ? View.VISIBLE : View.INVISIBLE);
+        gearNoBg.setVisibility(mIsCaptivePortal ? View.INVISIBLE : View.VISIBLE);
+        gear.setVisibility(mIsCaptivePortal ? View.VISIBLE : View.INVISIBLE);
     }
 
     @Override
@@ -84,11 +80,15 @@ public class ConnectedAccessPointPreference extends AccessPointPreference implem
         }
     }
 
+    public void setCaptivePortal(boolean isCaptivePortal) {
+        if (mIsCaptivePortal != isCaptivePortal) {
+            mIsCaptivePortal = isCaptivePortal;
+            refresh();
+        }
+    }
+
     public interface OnGearClickListener {
         void onGearClick(ConnectedAccessPointPreference p);
     }
 
-    public interface CaptivePortalStatus {
-        boolean isCaptivePortalNetwork();
-    }
 }

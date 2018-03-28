@@ -19,10 +19,10 @@ package com.android.settings.dashboard.conditional;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
-import android.graphics.drawable.Icon;
+import android.graphics.drawable.Drawable;
 import android.os.PersistableBundle;
-
 import android.support.annotation.VisibleForTesting;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -151,7 +151,7 @@ public abstract class Condition {
     public abstract int getMetricsConstant();
 
     // UI.
-    public abstract Icon getIcon();
+    public abstract Drawable getIcon();
     public abstract CharSequence getTitle();
     public abstract CharSequence getSummary();
     public abstract CharSequence[] getActions();
