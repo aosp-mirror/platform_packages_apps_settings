@@ -36,7 +36,8 @@
         android:summary="@string/connected_device_add_device_summary"
         settings:allowDividerAbove="true"
         settings:userRestriction="no_config_bluetooth"
-        settings:useAdminDisabledSummary="true"/>
+        settings:useAdminDisabledSummary="true"
+        settings:controller="com.android.settings.connecteddevice.AddDevicePreferenceController"/>
 
     <Preference
         android:fragment="com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment"
