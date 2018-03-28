@@ -133,7 +133,7 @@ public class DataUsageSummaryPreferenceTest {
 
         bindViewHolder();
         assertThat(mCarrierInfo.getText().toString())
-                .isEqualTo("Updated by " + DUMMY_CARRIER + " " + baseUnit + "d ago");
+                .isEqualTo("Updated by " + DUMMY_CARRIER + " " + baseUnit + " days ago");
     }
 
     @Test
@@ -148,7 +148,7 @@ public class DataUsageSummaryPreferenceTest {
 
         bindViewHolder();
         assertThat(mCarrierInfo.getText().toString())
-                .isEqualTo("Updated by " + DUMMY_CARRIER + " " + baseUnit + "h ago");
+                .isEqualTo("Updated by " + DUMMY_CARRIER + " " + baseUnit + " hr ago");
     }
 
     @Test
@@ -163,7 +163,7 @@ public class DataUsageSummaryPreferenceTest {
 
         bindViewHolder();
         assertThat(mCarrierInfo.getText().toString())
-                .isEqualTo("Updated by " + DUMMY_CARRIER + " " + baseUnit + "m ago");
+                .isEqualTo("Updated by " + DUMMY_CARRIER + " " + baseUnit + " min ago");
     }
 
     @Test
@@ -199,7 +199,7 @@ public class DataUsageSummaryPreferenceTest {
 
         bindViewHolder();
         assertThat(mCarrierInfo.getText().toString())
-                .isEqualTo("Updated 2m ago");
+                .isEqualTo("Updated 2 min ago");
     }
 
     @Test
