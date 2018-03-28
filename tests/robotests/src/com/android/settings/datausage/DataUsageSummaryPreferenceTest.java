@@ -305,6 +305,15 @@ public class DataUsageSummaryPreferenceTest {
     }
 
     @Test
+    public void testSetLimitInfo_withEmptyLimitInfo_dataLimitsNotShown() {
+        final String emptyLimitText = "";
+        mSummaryPreference.setLimitInfo(emptyLimitText);
+
+        bindViewHolder();
+        assertThat(mDataLimits.getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
     public void testSetChartEnabledFalse_hidesLabelBar() {
         setValidLabels();
         mSummaryPreference.setChartEnabled(false);

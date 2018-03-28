@@ -67,7 +67,7 @@ public class DataUsageSummaryPreference extends Preference {
     private long mSnapshotTimeMs;
     /** Name of carrier, or null if not available */
     private CharSequence mCarrierName;
-    private String mLimitInfoText;
+    private CharSequence mLimitInfoText;
     private Intent mLaunchIntent;
 
     /** Progress to display on ProgressBar */
@@ -88,7 +88,7 @@ public class DataUsageSummaryPreference extends Preference {
         setLayoutResource(R.layout.data_usage_summary_preference);
     }
 
-    public void setLimitInfo(String text) {
+    public void setLimitInfo(CharSequence text) {
         if (!Objects.equals(text, mLimitInfoText)) {
             mLimitInfoText = text;
             notifyChanged();
@@ -167,8 +167,7 @@ public class DataUsageSummaryPreference extends Preference {
         }
 
         TextView limitInfo = (TextView) holder.findViewById(R.id.data_limits);
-        limitInfo.setVisibility(
-                mLimitInfoText == null || mLimitInfoText.isEmpty() ? View.GONE : View.VISIBLE);
+        limitInfo.setVisibility(TextUtils.isEmpty(mLimitInfoText) ? View.GONE : View.VISIBLE);
         limitInfo.setText(mLimitInfoText);
     }
 
