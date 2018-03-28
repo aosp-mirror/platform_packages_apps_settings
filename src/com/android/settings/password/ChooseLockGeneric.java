@@ -236,7 +236,8 @@ public class ChooseLockGeneric extends SettingsActivity {
                 boolean managedProfileWithUnifiedLock =
                         UserManager.get(getActivity()).isManagedProfile(mUserId)
                         && !mLockPatternUtils.isSeparateProfileChallengeEnabled(mUserId);
-                if (managedProfileWithUnifiedLock
+                boolean skipConfirmation = managedProfileWithUnifiedLock && !mIsSetNewPassword;
+                if (skipConfirmation
                         || !helper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST,
                         getString(R.string.unlock_set_unlock_launch_picker_title), true, mUserId)) {
                     mPasswordConfirmed = true; // no password set, so no need to confirm
