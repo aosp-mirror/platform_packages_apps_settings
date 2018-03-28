@@ -88,16 +88,17 @@ public class BatterySaverController extends BasePreferenceController
 
     @Override
     public CharSequence getSummary() {
-        final boolean mode = mPowerManager.isPowerSaveMode();
-        final int format = mode ? R.string.battery_saver_on_summary
-                : R.string.battery_saver_off_summary;
+        final boolean isPowerSaveOn = mPowerManager.isPowerSaveMode();
         final int percent = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
-        final int percentFormat = percent > 0 ? R.string.battery_saver_desc_turn_on_auto_pct
-                : R.string.battery_saver_desc_turn_on_auto_never;
-
-        return mContext.getString(format, mContext.getString(percentFormat,
-                Utils.formatPercentage(percent)));
+        if (isPowerSaveOn) {
+            return mContext.getString(R.string.battery_saver_on_summary);
+        } else if (percent != 0) {
+            return mContext.getString(R.string.battery_saver_off_scheduled_summary,
+                    Utils.formatPercentage(percent));
+        } else {
+            return mContext.getString(R.string.battery_saver_off_summary);
+        }
     }
 
     private void updateSummary() {

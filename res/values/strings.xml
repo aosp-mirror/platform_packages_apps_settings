@@ -9127,16 +9127,13 @@
     <string name="suggestion_additional_fingerprints_summary">Unlock with a different finger</string>
 
     <!-- Summary of battery saver when on [CHAR LIMIT=NONE] -->
-    <string name="battery_saver_on_summary">On / <xliff:g name="automatic_state" example="Never turn on automatically">%1$s</xliff:g></string>
+    <string name="battery_saver_on_summary">On</string>
 
-    <!-- Summary of battery saver when off [CHAR LIMIT=NONE] -->
-    <string name="battery_saver_off_summary">Off / <xliff:g name="automatic_state" example="Never turn on automatically">%1$s</xliff:g></string>
+    <!-- Summary of battery saver when it is off and scheduled [CHAR LIMIT=NONE] -->
+    <string name="battery_saver_off_scheduled_summary">Will turn on at <xliff:g id="battery_percentage" example="15%">%1$s</xliff:g></string>
 
-    <!-- [CHAR_LIMIT=NONE] Battery saver: Description for automatic entry option: Never -->
-    <string name="battery_saver_desc_turn_on_auto_never">Never turn on automatically</string>
-
-    <!-- [CHAR_LIMIT=NONE] Battery saver: Description for automatic entry option: pct% battery -->
-    <string name="battery_saver_desc_turn_on_auto_pct">Turn on automatically at %1$s battery</string>
+    <!-- Summary of battery saver when it is off and scheduled [CHAR LIMIT=NONE] -->
+    <string name="battery_saver_off_summary">Off</string>
 
     <!--  Battery saver: Label for button that will turn on battery saver. [CHAR LIMIT=30] -->
     <string name="battery_saver_button_turn_on">Turn on now</string>
