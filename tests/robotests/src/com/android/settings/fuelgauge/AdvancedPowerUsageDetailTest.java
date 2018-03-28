@@ -418,8 +418,8 @@ public class AdvancedPowerUsageDetailTest {
 
         mFragment.initPreference();
 
-        assertThat(mForegroundPreference.getSummary().toString()).isEqualTo("Used for 0m");
-        assertThat(mBackgroundPreference.getSummary().toString()).isEqualTo("Active for 0m");
+        assertThat(mForegroundPreference.getSummary().toString()).isEqualTo("Used for 0 min");
+        assertThat(mBackgroundPreference.getSummary().toString()).isEqualTo("Active for 0 min");
         assertThat(mPowerUsagePreference.getSummary()).isEqualTo("16% of total app usage (150mAh)");
     }
 
