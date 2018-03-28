@@ -48,7 +48,7 @@ public class RegionSearchPicker extends BaseTimeZonePicker {
     private TimeZoneData mTimeZoneData;
 
     public RegionSearchPicker() {
-        super(R.string.date_time_select_region, R.string.search_settings, true, true);
+        super(R.string.date_time_select_region, R.string.date_time_search_region, true, true);
     }
 
     @Override
@@ -60,7 +60,8 @@ public class RegionSearchPicker extends BaseTimeZonePicker {
     protected BaseTimeZoneAdapter createAdapter(TimeZoneData timeZoneData) {
         mTimeZoneData = timeZoneData;
         mAdapter = new BaseTimeZoneAdapter<>(createAdapterItem(timeZoneData.getRegionIds()),
-                this::onListItemClick, getLocale(), false);
+                this::onListItemClick, getLocale(), false /* showItemSummary */,
+                    null /* headerText */);
         return mAdapter;
     }
 

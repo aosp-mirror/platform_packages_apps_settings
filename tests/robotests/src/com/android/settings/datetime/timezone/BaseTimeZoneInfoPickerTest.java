@@ -61,13 +61,13 @@ public class BaseTimeZoneInfoPickerTest {
         BaseTimeZoneAdapter adapter = picker.createAdapter(mock(TimeZoneData.class));
         Truth.assertThat(adapter.getItemCount()).isEqualTo(2);
 
-        BaseTimeZoneAdapter.AdapterItem item1 = adapter.getItem(0);
+        BaseTimeZoneAdapter.AdapterItem item1 = adapter.getDataItem(0);
         Truth.assertThat(item1.getTitle().toString()).isEqualTo("Los Angeles");
         Truth.assertThat(item1.getSummary().toString()).isEqualTo("Pacific Time (GMT-08:00)");
         Truth.assertThat(item1.getCurrentTime())
                 .hasLength(ShadowDataFormat.sTimeFormatString.length());
 
-        BaseTimeZoneAdapter.AdapterItem item2 = adapter.getItem(1);
+        BaseTimeZoneAdapter.AdapterItem item2 = adapter.getDataItem(1);
         Truth.assertThat(item2.getTitle().toString()).isEqualTo("New York");
         Truth.assertThat(item2.getSummary().toString()).isEqualTo("Eastern Time (GMT-05:00)");
         Truth.assertThat(item2.getCurrentTime())

@@ -23,6 +23,7 @@ import android.content.res.Resources;
 import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
+import android.support.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.datetime.timezone.model.TimeZoneData;
@@ -47,8 +48,15 @@ public abstract class BaseTimeZoneInfoPicker extends BaseTimeZonePicker {
     @Override
     protected BaseTimeZoneAdapter createAdapter(TimeZoneData timeZoneData) {
         mAdapter = new ZoneAdapter(getContext(), getAllTimeZoneInfos(timeZoneData),
-                this::onListItemClick, getLocale());
+                this::onListItemClick, getLocale(), getHeaderText());
         return mAdapter;
+    }
+
+    /**
+     * @return the text shown in the header, or null to show no header.
+     */
+    protected @Nullable CharSequence getHeaderText() {
+        return null;
     }
 
     private void onListItemClick(TimeZoneInfoItem item) {
@@ -66,9 +74,11 @@ public abstract class BaseTimeZoneInfoPicker extends BaseTimeZonePicker {
     protected static class ZoneAdapter extends BaseTimeZoneAdapter<TimeZoneInfoItem> {
 
         public ZoneAdapter(Context context, List<TimeZoneInfo> timeZones,
-                OnListItemClickListener<TimeZoneInfoItem> onListItemClickListener, Locale locale) {
+                OnListItemClickListener<TimeZoneInfoItem> onListItemClickListener, Locale locale,
+                CharSequence headerText) {
             super(createTimeZoneInfoItems(context, timeZones, locale),
-                    onListItemClickListener, locale,  true /* showItemSummary */);
+                    onListItemClickListener, locale,  true /* showItemSummary */,
+                    headerText /* headerText */);
         }
 
         private static List<TimeZoneInfoItem> createTimeZoneInfoItems(Context context,
