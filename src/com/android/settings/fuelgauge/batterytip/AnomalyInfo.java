@@ -17,17 +17,21 @@
 package com.android.settings.fuelgauge.batterytip;
 
 import android.util.KeyValueListParser;
+import android.util.Log;
 
 /**
  * Model class to parse and store anomaly info from westworld
  */
 public class AnomalyInfo {
+    private static final String TAG = "AnomalyInfo";
+
     private static final String KEY_ANOMALY_TYPE = "anomaly_type";
     private static final String KEY_AUTO_RESTRICTION = "auto_restriction";
     public final Integer anomalyType;
     public final boolean autoRestriction;
 
     public AnomalyInfo(String info) {
+        Log.i(TAG, "anomalyInfo: " + info);
         KeyValueListParser parser = new KeyValueListParser(',');
         parser.setString(info);
         anomalyType = parser.getInt(KEY_ANOMALY_TYPE, -1);
