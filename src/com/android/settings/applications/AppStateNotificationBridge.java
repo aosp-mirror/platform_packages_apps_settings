@@ -20,8 +20,12 @@ import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.text.format.DateUtils;
 import android.util.ArrayMap;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Switch;
 
 import com.android.settings.R;
+import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
@@ -37,13 +41,18 @@ import java.util.Map;
  */
 public class AppStateNotificationBridge extends AppStateBaseBridge {
 
+    private final Context mContext;
     private UsageStatsManager mUsageStatsManager;
+    private NotificationBackend mBackend;
     private static final int DAYS_TO_CHECK = 7;
 
-    public AppStateNotificationBridge(ApplicationsState appState,
-            Callback callback, UsageStatsManager usageStatsManager) {
+    public AppStateNotificationBridge(Context context, ApplicationsState appState,
+            Callback callback, UsageStatsManager usageStatsManager,
+            NotificationBackend backend) {
         super(appState, callback);
+        mContext = context;
         mUsageStatsManager = usageStatsManager;
+        mBackend = backend;
     }
 
     @Override
@@ -55,6 +64,7 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
         for (AppEntry entry : apps) {
             NotificationsSentState stats = map.get(entry.info.packageName);
             calculateAvgSentCounts(stats);
+            addBlockStatus(entry, stats);
             entry.extraInfo = stats;
         }
     }
@@ -64,6 +74,7 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
         Map<String, NotificationsSentState> map = getAggregatedUsageEvents();
         NotificationsSentState stats = map.get(entry.info.packageName);
         calculateAvgSentCounts(stats);
+        addBlockStatus(entry, stats);
         entry.extraInfo = stats;
     }
 
@@ -80,6 +91,14 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
                 return context.getString(R.string.notifications_sent_weekly, state.avgSentWeekly);
             }
             return context.getString(R.string.notifications_sent_daily, state.avgSentDaily);
+        }
+    }
+
+    private void addBlockStatus(AppEntry entry, NotificationsSentState stats) {
+        if (stats != null) {
+            stats.blocked = mBackend.getNotificationsBanned(entry.info.packageName, entry.info.uid);
+            stats.systemApp = mBackend.isSystemApp(mContext, entry.info);
+            stats.blockable = !stats.systemApp || (stats.systemApp && stats.blocked);
         }
     }
 
@@ -126,6 +145,28 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
         }
         if (entry.extraInfo instanceof NotificationsSentState) {
             return (NotificationsSentState) entry.extraInfo;
+        }
+        return null;
+    }
+
+    public View.OnClickListener getSwitchOnClickListener(final AppEntry entry) {
+        if (entry != null) {
+            return v -> {
+                ViewGroup view = (ViewGroup) v;
+                Switch toggle = view.findViewById(R.id.switchWidget);
+                if (toggle != null) {
+                    if (!toggle.isEnabled()) {
+                        return;
+                    }
+                    toggle.toggle();
+                    mBackend.setNotificationsEnabledForPackage(
+                            entry.info.packageName, entry.info.uid, toggle.isChecked());
+                    NotificationsSentState stats = getNotificationsSentState(entry);
+                    if (stats != null) {
+                        stats.blocked = !toggle.isChecked();
+                    }
+                }
+            };
         }
         return null;
     }
@@ -192,6 +233,24 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
         }
     };
 
+    public static final boolean enableSwitch(AppEntry entry) {
+        NotificationsSentState stats = getNotificationsSentState(entry);
+        if (stats == null) {
+            return false;
+        }
+
+        return stats.blockable;
+    }
+
+    public static final boolean checkSwitch(AppEntry entry) {
+        NotificationsSentState stats = getNotificationsSentState(entry);
+        if (stats == null) {
+            return false;
+        }
+
+        return !stats.blocked;
+    }
+
     /**
      * NotificationsSentState contains how often an app sends notifications and how recently it sent
      * one.
@@ -201,5 +260,8 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
         public int avgSentWeekly = 0;
         public long lastSent = 0;
         public int sentCount = 0;
+        public boolean blockable;
+        public boolean blocked;
+        public boolean systemApp;
     }
 }

@@ -91,4 +91,31 @@ public class ApplicationViewHolderTest {
         mHolder.updateSizeText(entry, invalidStr, ManageApplications.SIZE_EXTERNAL);
         assertThat(mHolder.mSummary.getText()).isEqualTo(invalidStr);
     }
+
+    @Test
+    public void oneTouchTarget() {
+        assertThat(mHolder.mSwitch).isNull();
+        assertThat(mHolder.mWidgetContainer.getChildCount()).isEqualTo(0);
+        // assert no exception
+        mHolder.updateSwitch(null, true, true);
+    }
+
+    @Test
+    public void twoTouchTarget() {
+        mView = ApplicationViewHolder.newView(new FrameLayout(mContext), true);
+        mHolder = new ApplicationViewHolder(mView, false /* useStableHeight */);
+        assertThat(mHolder.mSwitch).isNotNull();
+        assertThat(mHolder.mWidgetContainer.getChildCount()).isEqualTo(1);
+    }
+
+    @Test
+    public void updateSwitch() {
+        mView = ApplicationViewHolder.newView(new FrameLayout(mContext), true);
+        mHolder = new ApplicationViewHolder(mView, false /* useStableHeight */);
+        mHolder.updateSwitch(v -> {}, true, true);
+
+        assertThat(mHolder.mSwitch.isChecked()).isTrue();
+        assertThat(mHolder.mSwitch.isEnabled()).isTrue();
+        assertThat(mHolder.mWidgetContainer.hasOnClickListeners()).isTrue();
+    }
 }

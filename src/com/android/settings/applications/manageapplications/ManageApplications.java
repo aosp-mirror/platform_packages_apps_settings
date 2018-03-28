@@ -109,6 +109,7 @@ import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.fuelgauge.HighPowerDetail;
 import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
+import com.android.settings.notification.NotificationBackend;
 import com.android.settings.widget.LoadingViewController;
 import com.android.settings.wifi.AppStateChangeWifiStateBridge;
 import com.android.settings.wifi.ChangeWifiStateDetails;
@@ -223,6 +224,7 @@ public class ManageApplications extends InstrumentedFragment
     private Spinner mFilterSpinner;
     private FilterSpinnerAdapter mFilterAdapter;
     private UsageStatsManager mUsageStatsManager;
+    private NotificationBackend mNotificationBackend;
     private ResetAppsHelper mResetAppsHelper;
     private String mVolumeUuid;
     private int mStorageType;
@@ -292,6 +294,7 @@ public class ManageApplications extends InstrumentedFragment
             mListType = LIST_TYPE_NOTIFICATION;
             mUsageStatsManager =
                     (UsageStatsManager) getContext().getSystemService(Context.USAGE_STATS_SERVICE);
+            mNotificationBackend = new NotificationBackend();
             mSortOrder = R.id.sort_order_recent_notification;
             screenTitle = R.string.app_notifications_title;
         } else {
@@ -869,8 +872,9 @@ public class ManageApplications extends InstrumentedFragment
             mContext = manageApplications.getActivity();
             mAppFilter = appFilter;
             if (mManageApplications.mListType == LIST_TYPE_NOTIFICATION) {
-                mExtraInfoBridge = new AppStateNotificationBridge(mState, this,
-                        manageApplications.mUsageStatsManager);
+                mExtraInfoBridge = new AppStateNotificationBridge(mContext, mState, this,
+                        manageApplications.mUsageStatsManager,
+                        manageApplications.mNotificationBackend);
             } else if (mManageApplications.mListType == LIST_TYPE_USAGE_ACCESS) {
                 mExtraInfoBridge = new AppStateUsageBridge(mContext, mState, this);
             } else if (mManageApplications.mListType == LIST_TYPE_HIGH_POWER) {
@@ -988,7 +992,12 @@ public class ManageApplications extends InstrumentedFragment
 
         @Override
         public ApplicationViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            final View view = ApplicationViewHolder.newView(parent);
+            View view;
+            if (mManageApplications.mListType == LIST_TYPE_NOTIFICATION) {
+                view = ApplicationViewHolder.newView(parent, true /* twoTarget */);
+            } else {
+                view = ApplicationViewHolder.newView(parent, false /* twoTarget */);
+            }
             return new ApplicationViewHolder(view,
                     shouldUseStableItemHeight(mManageApplications.mListType));
         }
@@ -1276,6 +1285,7 @@ public class ManageApplications extends InstrumentedFragment
                     mState.ensureIcon(entry);
                     holder.setIcon(entry.icon);
                     updateSummary(holder, entry);
+                    updateSwitch(holder, entry);
                     holder.updateDisableView(entry.info);
                 }
                 holder.setEnabled(isEnabled(position));
@@ -1324,6 +1334,24 @@ public class ManageApplications extends InstrumentedFragment
                     break;
                 default:
                     holder.updateSizeText(entry, mManageApplications.mInvalidSizeStr, mWhichSize);
+                    break;
+            }
+        }
+
+        private void updateSwitch(ApplicationViewHolder holder, AppEntry entry) {
+            switch (mManageApplications.mListType) {
+                case LIST_TYPE_NOTIFICATION:
+                    holder.updateSwitch(((AppStateNotificationBridge) mExtraInfoBridge)
+                                    .getSwitchOnClickListener(entry),
+                            AppStateNotificationBridge.enableSwitch(entry),
+                            AppStateNotificationBridge.checkSwitch(entry));
+                    if (entry.extraInfo != null) {
+                        holder.setSummary(AppStateNotificationBridge.getSummary(mContext,
+                                (NotificationsSentState) entry.extraInfo,
+                                (mLastSortMode == R.id.sort_order_recent_notification)));
+                    } else {
+                        holder.setSummary(null);
+                    }
                     break;
             }
         }
