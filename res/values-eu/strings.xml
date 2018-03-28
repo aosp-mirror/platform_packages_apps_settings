@@ -1238,8 +1238,8 @@
     <string name="meid_multi_sim" msgid="748999971744491771">"MEID (%1$d. SIM zirrikitua)"</string>
     <string name="status_meid_number" msgid="1751442889111731088">"MEID"</string>
     <string name="status_icc_id" msgid="943368755577172747">"ICCID"</string>
-    <string name="status_data_network_type" msgid="7570837037428932780">"Datu-konexioaren sare mota"</string>
-    <string name="status_voice_network_type" msgid="5663112239742353547">"Mugikorraren ahots-deien sare mota"</string>
+    <string name="status_data_network_type" msgid="7570837037428932780">"Datuetarako sare mugikor mota"</string>
+    <string name="status_voice_network_type" msgid="5663112239742353547">"Ahots-deietarako sare mugikor mota"</string>
     <string name="status_latest_area_info" msgid="7222470836568238054">"Operadorearen informazioa"</string>
     <string name="status_data_state" msgid="5503181397066522950">"Sare mugikorraren egoera"</string>
     <string name="status_esim_id" msgid="6456255368300906317">"EID"</string>
@@ -1909,7 +1909,7 @@
     <string name="keyboard_shortcuts_helper_summary" msgid="5871299901459743288">"Bistaratu erabilgarri dauden lasterbideak"</string>
     <string name="default_keyboard_layout" msgid="4172606673510531271">"Lehenetsia"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Erakuslearen abiadura"</string>
-    <string name="game_controller_settings_category" msgid="8794508575329923718">"Bideojoko-kontrolagailua"</string>
+    <string name="game_controller_settings_category" msgid="8794508575329923718">"Bideo-jokoen kontrolagailua"</string>
     <string name="vibrate_input_devices" msgid="421936611134697943">"Birbideratu dardara"</string>
     <string name="vibrate_input_devices_summary" msgid="82093256723774584">"Bidali dardara bideo-jokoen kontrolagailura hura konektatzean"</string>
     <string name="keyboard_layout_dialog_title" msgid="8030087214949381372">"Aukeratu teklatuaren diseinua"</string>
@@ -2007,7 +2007,7 @@
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Koloreen alderantzikatzea"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="7052959202195368109">"Baliteke errendimenduan eragina izatea"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2434062071927416098">"Itxarote-denbora"</string>
-    <string name="accessibility_autoclick_description" msgid="4908960598910896933">"Sagu bat erabiltzen ari bazara, kurtsorea konfigura dezakezu denbora-tarte jakin batean geldirik badago, ekintzaren bat gauzatzeko."</string>
+    <string name="accessibility_autoclick_description" msgid="4908960598910896933">"Sagua erabiltzen ari bazara, kurtsorea denbora tarte jakin batean geldirik egon ondoren ekintzaren bat automatikoki gauza dezan konfigura dezakezu."</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="3962261178385106006">"Klik egin aurretiko atzerapena"</string>
     <string name="accessibility_vibration_settings_title" msgid="3453277326300320803">"Dardara"</string>
     <string name="accessibility_notification_vibration_title" msgid="660829933960942244">"Dardara tonua jotzean eta jakinarazpenak daudenean"</string>
@@ -2030,7 +2030,7 @@
     <!-- no translation found for show_number_hearingaid_count (3160782397139295486) -->
     <string name="accessibility_summary_state_enabled" msgid="7914278500885887763">"Aktibatuta"</string>
     <string name="accessibility_summary_state_disabled" msgid="2984230257590246745">"Desaktibatuta"</string>
-    <string name="accessibility_summary_state_stopped" msgid="1144156815350270876">"Ez du funtzionatzen. Sakatu informazio gehiago lotzeko."</string>
+    <string name="accessibility_summary_state_stopped" msgid="1144156815350270876">"Ez du funtzionatzen. Sakatu informazio gehiago lortzeko."</string>
     <string name="accessibility_description_state_stopped" msgid="6953539746047006596">"Zerbitzu hau ez dabil behar bezala."</string>
     <string name="enable_quick_setting" msgid="2366999897816894536">"Erakutsi Ezarpen bizkorretan"</string>
     <string name="daltonizer_type" msgid="1124178250809091080">"Zuzenketa modua"</string>
@@ -2291,10 +2291,6 @@
     <string name="power_idle" product="default" msgid="9055659695602194990">"Telefonoa inaktibo"</string>
     <string name="power_unaccounted" msgid="709925017022660740">"Askotarikoak"</string>
     <string name="power_overcounted" msgid="2762354976171358445">"Uste baino gutxiago erabili da"</string>
-    <string name="power_apps" msgid="2043554781293951327">"Aplikazioak"</string>
-    <string name="power_service" msgid="1599661212370831780">"Zerbitzuak"</string>
-    <string name="power_system" msgid="8290455327965307383">"Sistema"</string>
-    <string name="power_user" msgid="3706143225319881667">"Beste erabiltzaileak"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"PUZaren erabilera, guztira"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"CPUaren aurreko planoa"</string>
     <string name="usage_type_wake_lock" msgid="5125438890233677880">"Mantendu aktibo"</string>
@@ -4143,10 +4139,9 @@
     <string name="my_device_info_device_name_preference_title" msgid="7104085224684165324">"Gailuaren izena"</string>
     <string name="bluetooth_on_while_driving_pref" msgid="2460847604498343330">"Erabili Bluetooth konexioa gidatu bitartean"</string>
     <string name="bluetooth_on_while_driving_summary" msgid="3196190732516898541">"Aktibatu automatikoki Bluetooth konexioa gidatu bitartean"</string>
-    <string name="dev_android_o_battery_settings_title" msgid="2926578228655006762">"Ikusi Android 8.0 sistema eragilearen bateriaren ezarpenak"</string>
     <string name="change_wifi_state_title" msgid="3261945855372885427">"Wi-Fi konexioa kontrolatzeko aukera"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="7942268646980694224">"Baimendu aplikazioari Wi-Fi konexioa kontrolatzea"</string>
-    <string name="change_wifi_state_app_detail_summary" msgid="8434262633905502679">"Baimendu aplikazio honi Wi-Fi konexioa aktibatzea edo desaktibatzea, Wi-Fi sareak bilatzea eta haietara konektatzea, sareak gehitzea edo kentzea, edota sare-publiko lokal bat sortzea"</string>
+    <string name="change_wifi_state_app_detail_summary" msgid="8434262633905502679">"Baimendu aplikazio honi Wi-Fi konexioa aktibatzea edo desaktibatzea, Wi-Fi sareak bilatzea eta haietara konektatzea, sareak gehitzea edo kentzea, edota sare publiko lokal bat sortzea"</string>
     <string name="media_output_title" msgid="115223550977351699">"Erreproduzitu multimedia-edukia hemen:"</string>
     <string name="media_output_summary" product="default" msgid="6839458453831567167">"Telefonoa"</string>
     <string name="media_output_summary" product="tablet" msgid="7217221078578554515">"Tableta"</string>
