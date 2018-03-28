@@ -71,11 +71,10 @@ public class AutoBatterySeekBarPreferenceControllerTest {
     }
 
     @Test
-    public void testPreference_defaultValue_preferenceVisible() {
+    public void testPreference_defaultValue_preferenceNotVisible() {
         mController.updateState(mPreference);
 
-        assertThat(mPreference.isVisible()).isTrue();
-        assertThat(mPreference.getProgress()).isEqualTo(DEFAULT_LEVEL);
+        assertThat(mPreference.isVisible()).isFalse();
     }
 
     @Test
