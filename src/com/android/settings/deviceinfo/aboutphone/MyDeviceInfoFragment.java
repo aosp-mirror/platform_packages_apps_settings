@@ -42,7 +42,6 @@ import com.android.settings.deviceinfo.DeviceModelPreferenceController;
 import com.android.settings.deviceinfo.DeviceNamePreferenceController;
 import com.android.settings.deviceinfo.FccEquipmentIdPreferenceController;
 import com.android.settings.deviceinfo.FeedbackPreferenceController;
-import com.android.settings.deviceinfo.ImsStatusPreferenceController;
 import com.android.settings.deviceinfo.IpAddressPreferenceController;
 import com.android.settings.deviceinfo.ManualPreferenceController;
 import com.android.settings.deviceinfo.PhoneNumberPreferenceController;
@@ -113,7 +112,6 @@ public class MyDeviceInfoFragment extends DashboardFragment {
         controllers.add(new DeviceModelPreferenceController(context, fragment));
         controllers.add(new ImeiInfoPreferenceController(context, fragment));
         controllers.add(new FirmwareVersionPreferenceController(context, fragment));
-        controllers.add(new ImsStatusPreferenceController(context, lifecycle));
         controllers.add(new IpAddressPreferenceController(context, lifecycle));
         controllers.add(new WifiMacAddressPreferenceController(context, lifecycle));
         controllers.add(new BluetoothAddressPreferenceController(context, lifecycle));
