@@ -15,6 +15,7 @@
 -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/SuwDescription"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -24,14 +25,14 @@
 
     <CheckBox
         android:id="@+id/erase_esim"
+        style="@style/SuwCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:paddingEnd="@dimen/reset_checkbox_padding_end"
         android:focusable="false"
         android:clickable="false"
         android:checked="true"
-        android:duplicateParentState="true" />
+        android:duplicateParentState="true"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,16 +42,14 @@
 
         <TextView
             android:id="@+id/erase_esim_title"
+            style="@style/TextAppearance.SuwGlifItemTitle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/reset_checkbox_title_padding_top"
-            android:textSize="@dimen/reset_checkbox_title_text_size" />
+            android:layout_height="wrap_content"/>
 
         <TextView
+            style="@style/TextAppearance.SuwGlifItemSummary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/reset_checkbox_summary_padding_top"
-            android:textSize="@dimen/reset_checkbox_summary_text_size"
-            android:text="@string/reset_esim_desc" />
+            android:text="@string/reset_esim_desc"/>
     </LinearLayout>
 </LinearLayout>
