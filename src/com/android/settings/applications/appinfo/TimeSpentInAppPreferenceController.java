@@ -18,6 +18,7 @@ package com.android.settings.applications.appinfo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.support.annotation.VisibleForTesting;
@@ -61,7 +62,12 @@ public class TimeSpentInAppPreferenceController extends BasePreferenceController
         if (resolved == null || resolved.isEmpty()) {
             return DISABLED_UNSUPPORTED;
         }
-        return AVAILABLE;
+        for (ResolveInfo info : resolved) {
+            if (isSystemApp(info)) {
+                return AVAILABLE;
+            }
+        }
+        return DISABLED_UNSUPPORTED;
     }
 
     @Override
@@ -71,5 +77,12 @@ public class TimeSpentInAppPreferenceController extends BasePreferenceController
         if (pref != null) {
             pref.setIntent(mIntent);
         }
+    }
+
+    private boolean isSystemApp(ResolveInfo info) {
+        return info != null
+                && info.activityInfo != null
+                && info.activityInfo.applicationInfo != null
+                && (info.activityInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
     }
 }
