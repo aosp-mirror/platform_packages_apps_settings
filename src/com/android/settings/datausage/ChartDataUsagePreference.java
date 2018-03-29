@@ -18,6 +18,7 @@ import android.content.Context;
 import android.net.NetworkPolicy;
 import android.net.NetworkStatsHistory;
 import android.net.TrafficStats;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.text.SpannableStringBuilder;
@@ -88,7 +89,8 @@ public class ChartDataUsagePreference extends Preference {
         return (int) (Math.max(totalData, policyMax) / RESOLUTION);
     }
 
-    private void calcPoints(UsageView chart) {
+    @VisibleForTesting
+    void calcPoints(UsageView chart) {
         SparseIntArray points = new SparseIntArray();
         NetworkStatsHistory.Entry entry = null;
 
@@ -108,6 +110,9 @@ public class ChartDataUsagePreference extends Preference {
             // increment by current bucket total
             totalData += entry.rxBytes + entry.txBytes;
 
+            if (i == 0) {
+                points.put(toInt(startTime - mStart) - 1, -1);
+            }
             points.put(toInt(startTime - mStart + 1), (int) (totalData / RESOLUTION));
             points.put(toInt(endTime - mStart), (int) (totalData / RESOLUTION));
         }
