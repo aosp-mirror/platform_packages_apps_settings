@@ -18,6 +18,7 @@ package com.android.settings.core.codeinspection;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import com.android.settings.core.BasePreferenceControllerSignatureInspector;
 import com.android.settings.core.instrumentation.InstrumentableFragmentCodeInspector;
 import com.android.settings.search.SearchIndexProviderCodeInspector;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -47,6 +48,11 @@ public class CodeInspectionTest {
     @Test
     public void runInstrumentableFragmentCodeInspection() {
         new InstrumentableFragmentCodeInspector(mClasses).run();
+    }
+
+    @Test
+    public void runBasePreferenceControllerConstructorSignatureInspection() {
+        new BasePreferenceControllerSignatureInspector(mClasses).run();
     }
 
     @Ignore("b/73960706")
