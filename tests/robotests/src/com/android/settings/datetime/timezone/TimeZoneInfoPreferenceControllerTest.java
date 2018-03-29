@@ -16,6 +16,9 @@
 
 package com.android.settings.datetime.timezone;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.spy;
+
 import android.support.v7.preference.Preference;
 
 import com.android.settings.datetime.timezone.TimeZoneInfo.Formatter;
@@ -28,9 +31,6 @@ import org.robolectric.RuntimeEnvironment;
 import java.util.Date;
 import java.util.Locale;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.spy;
-
 @RunWith(SettingsRobolectricTestRunner.class)
 public class TimeZoneInfoPreferenceControllerTest {
 
@@ -41,12 +41,13 @@ public class TimeZoneInfoPreferenceControllerTest {
 
         TimeZoneInfo timeZoneInfo = formatter.format("America/Los_Angeles");
         TimeZoneInfoPreferenceController controller =
-                new TimeZoneInfoPreferenceController(RuntimeEnvironment.application, now);
+                new TimeZoneInfoPreferenceController(RuntimeEnvironment.application);
+        controller.mDate = now;
         controller.setTimeZoneInfo(timeZoneInfo);
         Preference preference = spy(new Preference(RuntimeEnvironment.application));
         controller.updateState(preference);
         assertEquals("Uses Pacific Time (GMT-08:00). "
-                + "Pacific Daylight Time starts on April 26, 1970.",
+                        + "Pacific Daylight Time starts on April 26, 1970.",
                 preference.getTitle().toString());
     }
 }

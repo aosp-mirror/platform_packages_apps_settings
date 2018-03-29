@@ -33,22 +33,18 @@ import com.android.settingslib.widget.FooterPreference;
 import java.util.Date;
 
 public class TimeZoneInfoPreferenceController extends BaseTimeZonePreferenceController {
-    private static final String PREFERENCE_KEY = FooterPreference.KEY_FOOTER;
 
+    private static final String PREFERENCE_KEY = FooterPreference.KEY_FOOTER;
+    @VisibleForTesting
+    Date mDate;
     private TimeZoneInfo mTimeZoneInfo;
     private final DateFormat mDateFormat;
-    private final Date mDate;
 
     public TimeZoneInfoPreferenceController(Context context) {
-        this(context, new Date());
-    }
-
-    @VisibleForTesting
-    TimeZoneInfoPreferenceController(Context context, Date date) {
         super(context, PREFERENCE_KEY);
         mDateFormat = DateFormat.getDateInstance(SimpleDateFormat.LONG);
         mDateFormat.setContext(DisplayContext.CAPITALIZATION_NONE);
-        mDate = date;
+        mDate = new Date();
     }
 
     @Override
