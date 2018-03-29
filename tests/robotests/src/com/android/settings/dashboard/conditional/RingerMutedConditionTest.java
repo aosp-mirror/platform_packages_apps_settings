@@ -22,7 +22,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.NotificationManager;
 import android.content.Context;
 import android.media.AudioManager;
 import android.provider.Settings;
@@ -59,7 +58,7 @@ public class RingerMutedConditionTest {
         mContext = RuntimeEnvironment.application;
         mAudioManager = Shadow.extract(mContext.getSystemService(Context.AUDIO_SERVICE));
         mNotificationManager = Shadow.extract(
-                mContext.getSystemService(NotificationManager.class));
+                mContext.getSystemService(Context.NOTIFICATION_SERVICE));
         when(mConditionManager.getContext()).thenReturn(mContext);
         mCondition = spy(new RingerMutedCondition(mConditionManager));
     }
