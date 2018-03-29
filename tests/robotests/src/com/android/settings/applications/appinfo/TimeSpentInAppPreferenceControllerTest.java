@@ -22,6 +22,8 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.ResolveInfo;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
@@ -81,13 +83,26 @@ public class TimeSpentInAppPreferenceControllerTest {
     }
 
     @Test
-    public void hasIntentHandler_shouldBeAvailable() {
+    public void hasIntentHandler_notSystemApp_shouldBeDisabled() {
         mPackageManager.addResolveInfoForIntent(TEST_INTENT, new ResolveInfo());
         mController.setPackageName(TEST_INTENT.getStringExtra(EXTRA_PACKAGE_NAME));
 
         assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.AVAILABLE);
+                .isEqualTo(BasePreferenceController.DISABLED_UNSUPPORTED);
 
+    }
+
+    @Test
+    public void hasIntentHandler_resolvedToSystemApp_shouldBeAvailable() {
+        final ResolveInfo info = new ResolveInfo();
+        info.activityInfo = new ActivityInfo();
+        info.activityInfo.applicationInfo = new ApplicationInfo();
+        info.activityInfo.applicationInfo.flags = ApplicationInfo.FLAG_SYSTEM;
+        mPackageManager.addResolveInfoForIntent(TEST_INTENT, info);
+        mController.setPackageName(TEST_INTENT.getStringExtra(EXTRA_PACKAGE_NAME));
+
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.AVAILABLE);
         mController.displayPreference(mScreen);
 
         final Intent intent = mPreference.getIntent();
