@@ -252,6 +252,16 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
     }
 
     /**
+     * @return {@code true} if the setting update asynchronously.
+     * <p>
+     * For example, a Wifi controller would return true, because it needs to update the radio
+     * and wait for it to turn on.
+     */
+    public boolean hasAsyncUpdate() {
+        return false;
+    }
+
+    /**
      * Updates non-indexable keys for search provider.
      *
      * Called by SearchIndexProvider#getNonIndexableKeys
