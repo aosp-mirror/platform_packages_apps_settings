@@ -48,7 +48,6 @@ public class RegionZonePreferenceControllerTest {
                 .setDaylightName("Pacific Daylight Time")
                 .setExemplarLocation("Los Angeles")
                 .setGmtOffset("GMT-08:00")
-                .setItemId(0)
                 .build();
         Preference preference = new Preference(mActivity);
         RegionZonePreferenceController controller = new RegionZonePreferenceController(mActivity);

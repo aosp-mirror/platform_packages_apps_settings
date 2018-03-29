@@ -44,7 +44,6 @@ public class FixedOffsetPreferenceControllerTest {
         TimeZoneInfo fixedOffsetZone = new TimeZoneInfo.Builder(
                     TimeZone.getFrozenTimeZone("Etc/GMT-8"))
                     .setGmtOffset("GMT-08:00")
-                    .setItemId(0)
                     .build();
         Preference preference = new Preference(mActivity);
         FixedOffsetPreferenceController controller = new FixedOffsetPreferenceController(mActivity);
@@ -59,7 +58,6 @@ public class FixedOffsetPreferenceControllerTest {
                     TimeZone.getFrozenTimeZone("Etc/UTC"))
                     .setStandardName("Coordinated Universal Time")
                     .setGmtOffset("GMT+00:00")
-                    .setItemId(0)
                     .build();
         Preference preference = new Preference(mActivity);
         FixedOffsetPreferenceController controller = new FixedOffsetPreferenceController(mActivity);

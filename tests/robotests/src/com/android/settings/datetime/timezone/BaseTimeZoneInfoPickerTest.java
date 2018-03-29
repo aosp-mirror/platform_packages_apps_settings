@@ -89,7 +89,6 @@ public class BaseTimeZoneInfoPickerTest {
                     .setDaylightName("Pacific Daylight Time")
                     .setExemplarLocation("Los Angeles")
                     .setGmtOffset("GMT-08:00")
-                    .setItemId(0)
                     .build();
             TimeZoneInfo zone2 = new TimeZoneInfo.Builder(
                     TimeZone.getFrozenTimeZone("America/New_York"))
@@ -98,7 +97,6 @@ public class BaseTimeZoneInfoPickerTest {
                     .setDaylightName("Eastern Daylight Time")
                     .setExemplarLocation("New York")
                     .setGmtOffset("GMT-05:00")
-                    .setItemId(1)
                     .build();
 
             return Arrays.asList(zone1, zone2);
