@@ -128,7 +128,7 @@ public class ZonePickerSettingsTest {
 
         // Only select time zone explicitly if there are more than one time zones in a region
         if (!assumeOneTimeZoneInRegion) {
-            wait(By.text("Time Zone"));
+            wait(By.text("Time zone"));
             selectItemInList(new UiSelector().textContains(timezone))
                     .click();
         }
