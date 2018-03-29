@@ -18,6 +18,7 @@ package com.android.settings.notification;
 
 import static android.provider.Settings.Secure.NOTIFICATION_BADGING;
 
+import android.app.NotificationChannel;
 import android.content.Context;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
@@ -55,8 +56,12 @@ public class BadgePreferenceController extends NotificationPreferenceController
                 NOTIFICATION_BADGING, SYSTEM_WIDE_ON) == SYSTEM_WIDE_OFF) {
             return false;
         }
-        if (mChannel != null && !mAppRow.showBadge) {
-            return false;
+        if (mChannel != null) {
+            if (NotificationChannel.DEFAULT_CHANNEL_ID.equals(mChannel.getId())) {
+                return true;
+            } else {
+                return mAppRow.showBadge;
+            }
         }
         return true;
     }
