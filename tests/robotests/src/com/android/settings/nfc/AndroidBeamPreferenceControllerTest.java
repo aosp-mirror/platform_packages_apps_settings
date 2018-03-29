@@ -72,7 +72,8 @@ public class AndroidBeamPreferenceControllerTest {
                 UserManager.DISALLOW_OUTGOING_BEAM, UserHandle.myUserId())).thenReturn(false);
         when(NfcAdapter.getDefaultAdapter(mContext)).thenReturn(mNfcAdapter);
 
-        mAndroidBeamController = new AndroidBeamPreferenceController(mContext);
+        mAndroidBeamController = new AndroidBeamPreferenceController(mContext,
+                AndroidBeamPreferenceController.KEY_ANDROID_BEAM_SETTINGS);
         mAndroidBeamPreference = new RestrictedPreference(RuntimeEnvironment.application);
         when(mScreen.findPreference(mAndroidBeamController.getPreferenceKey())).thenReturn(
                 mAndroidBeamPreference);
