@@ -45,8 +45,6 @@ public class AutoBatterySaverPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.integer.config_lowBatteryWarningLevel, 15);
         mContext = RuntimeEnvironment.application;
         mPreference = new SwitchPreference(mContext);
         mController = new AutoBatterySaverPreferenceController(mContext);
@@ -87,7 +85,7 @@ public class AutoBatterySaverPreferenceControllerTest {
     }
 
     @Test
-    public void testIsChecked_useDefaultValue_returnTrue() {
-        assertThat(mController.isChecked()).isTrue();
+    public void testIsChecked_useDefaultValue_returnFalse() {
+        assertThat(mController.isChecked()).isFalse();
     }
 }

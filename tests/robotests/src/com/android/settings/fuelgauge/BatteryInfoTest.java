@@ -61,16 +61,16 @@ import java.util.concurrent.TimeUnit;
 public class BatteryInfoTest {
 
     private static final String STATUS_CHARGING_NO_TIME = "50% - charging";
-    private static final String STATUS_CHARGING_TIME = "50% - 0m until fully charged";
+    private static final String STATUS_CHARGING_TIME = "50% - 0 min until fully charged";
     private static final String STATUS_NOT_CHARGING = "Not charging";
     private static final long REMAINING_TIME_NULL = -1;
     private static final long REMAINING_TIME = 2;
     private static final String ENHANCED_STRING_SUFFIX = "based on your usage";
     private static final long TEST_CHARGE_TIME_REMAINING = TimeUnit.MINUTES.toMicros(1);
     private static final String TEST_CHARGE_TIME_REMAINING_STRINGIFIED =
-            "1m left until fully charged";
+            "1 min left until fully charged";
     private static final String TEST_BATTERY_LEVEL_10 = "10%";
-    private static final String FIFTEEN_MIN_FORMATTED = "15m";
+    private static final String FIFTEEN_MIN_FORMATTED = "15 min";
     public static final Estimate DUMMY_ESTIMATE = new Estimate(
             1000, /* estimateMillis */
             false, /* isBasedOnUsage */
@@ -131,7 +131,7 @@ public class BatteryInfoTest {
                 mBatteryStats, SystemClock.elapsedRealtime() * 1000, true /* shortString */);
 
         assertThat(info.discharging).isEqualTo(false);
-        assertThat(info.chargeLabel.toString()).isEqualTo("50% - 1m until fully charged");
+        assertThat(info.chargeLabel.toString()).isEqualTo("50% - 1 min until fully charged");
     }
 
     @Test

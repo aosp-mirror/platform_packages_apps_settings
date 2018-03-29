@@ -25,27 +25,41 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.NetworkTemplate;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.applications.AppInfoWithHeaderTest;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
+import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.NetworkPolicyEditor;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.net.DataUsageController;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import java.util.concurrent.TimeUnit;
 
+import android.support.v7.widget.RecyclerView;
+
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(shadows = ShadowEntityHeaderController.class)
 public class DataUsageSummaryPreferenceControllerTest {
 
     private static final long UPDATE_BACKOFF_MS = TimeUnit.MINUTES.toMillis(13);
@@ -68,7 +82,15 @@ public class DataUsageSummaryPreferenceControllerTest {
     private NetworkTemplate mNetworkTemplate;
     @Mock
     private SubscriptionManager mSubscriptionManager;
+    @Mock
+    private Lifecycle mLifecycle;
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private EntityHeaderController mHeaderController;
+    @Mock
+    private DataUsageSummary mDataUsageSummary;
 
+    private FakeFeatureFactory mFactory;
+    private Activity mActivity;
     private Context mContext;
     private DataUsageSummaryPreferenceController mController;
 
@@ -79,15 +101,27 @@ public class DataUsageSummaryPreferenceControllerTest {
 
         doReturn("%1$s %2%s").when(mContext)
             .getString(com.android.internal.R.string.fileSizeSuffix);
+
+        mActivity = Robolectric.setupActivity(Activity.class);
+        mFactory = FakeFeatureFactory.setupForTest();
+        when(mFactory.metricsFeatureProvider.getMetricsCategory(any(Object.class)))
+                .thenReturn(MetricsProto.MetricsEvent.SETTINGS_APP_NOTIF_CATEGORY);
+        ShadowEntityHeaderController.setUseMock(mHeaderController);
+
         mController = new DataUsageSummaryPreferenceController(
-                mContext,
                 mDataUsageController,
                 mDataInfoController,
                 mNetworkTemplate,
                 mPolicyEditor,
                 R.string.cell_data_template,
                 true,
-                null);
+                null,
+                mActivity, null, null, null);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowEntityHeaderController.reset();
     }
 
     @Test
@@ -240,14 +274,14 @@ public class DataUsageSummaryPreferenceControllerTest {
     @Test
     public void testMobileData_preferenceAvailable() {
         mController = new DataUsageSummaryPreferenceController(
-                mContext,
                 mDataUsageController,
                 mDataInfoController,
                 mNetworkTemplate,
                 mPolicyEditor,
                 R.string.cell_data_template,
                 true,
-                mSubscriptionManager);
+                mSubscriptionManager,
+                mActivity, null, null, null);
 
         final SubscriptionInfo subInfo = new SubscriptionInfo(0, "123456", 0, "name", "carrier",
                 0, 0, "number", 0, null, 123, 456, "ZX");
@@ -258,17 +292,40 @@ public class DataUsageSummaryPreferenceControllerTest {
     @Test
     public void testMobileData_preferenceDisabled() {
         mController = new DataUsageSummaryPreferenceController(
-                mContext,
                 mDataUsageController,
                 mDataInfoController,
                 mNetworkTemplate,
                 mPolicyEditor,
                 R.string.cell_data_template,
                 true,
-                mSubscriptionManager);
+                mSubscriptionManager,
+                mActivity, null, null, null);
 
         when(mSubscriptionManager.getDefaultDataSubscriptionInfo()).thenReturn(null);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_UNSUPPORTED);
+    }
+
+    @Test
+    public void testMobileData_entityHeaderSet() {
+        final RecyclerView recyclerView = new RecyclerView(mActivity);
+
+        mController = new DataUsageSummaryPreferenceController(
+                mDataUsageController,
+                mDataInfoController,
+                mNetworkTemplate,
+                mPolicyEditor,
+                R.string.cell_data_template,
+                true,
+                mSubscriptionManager,
+                mActivity, mLifecycle, mHeaderController, mDataUsageSummary);
+
+        when(mDataUsageSummary.getListView()).thenReturn(recyclerView);
+
+        mController.onStart();
+
+        verify(mHeaderController)
+                .setRecyclerView(any(RecyclerView.class), any(Lifecycle.class));
+        verify(mHeaderController).styleActionBar(any(Activity.class));
     }
 
     private DataUsageController.DataUsageInfo createTestDataUsageInfo(long now) {

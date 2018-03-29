@@ -21,6 +21,8 @@ import static com.android.settings.deviceinfo.simstatus.SimStatusDialogControlle
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.EID_INFO_VALUE_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.ICCID_INFO_LABEL_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.ICCID_INFO_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.IMS_REGISTRATION_STATE_LABEL_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.IMS_REGISTRATION_STATE_VALUE_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.NETWORK_PROVIDER_VALUE_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.OPERATOR_INFO_LABEL_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.OPERATOR_INFO_VALUE_ID;
@@ -33,6 +35,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -286,4 +289,50 @@ public class SimStatusDialogControllerTest {
 
         verify(mDialog).setText(EID_INFO_VALUE_ID, eid);
     }
+
+    @Test
+    public void initialize_imsRegistered_shouldSetImsRegistrationStateSummaryToRegisterd() {
+        when(mPersistableBundle.getBoolean(
+            CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL)).thenReturn(true);
+        when(mTelephonyManager.isImsRegistered(anyInt())).thenReturn(true);
+
+        mController.initialize();
+
+        verify(mDialog).setText(IMS_REGISTRATION_STATE_VALUE_ID,
+            mContext.getString(R.string.ims_reg_status_registered));
+    }
+
+    @Test
+    public void initialize_imsNotRegistered_shouldSetImsRegistrationStateSummaryToNotRegisterd() {
+        when(mPersistableBundle.getBoolean(
+            CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL)).thenReturn(true);
+        when(mTelephonyManager.isImsRegistered(anyInt())).thenReturn(false);
+
+        mController.initialize();
+
+        verify(mDialog).setText(IMS_REGISTRATION_STATE_VALUE_ID,
+            mContext.getString(R.string.ims_reg_status_not_registered));
+    }
+
+    @Test
+    public void initialize_showImsRegistration_shouldNotRemoveImsRegistrationStateSetting() {
+        when(mPersistableBundle.getBoolean(
+            CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL)).thenReturn(true);
+
+        mController.initialize();
+
+        verify(mDialog, never()).removeSettingFromScreen(IMS_REGISTRATION_STATE_VALUE_ID);
+    }
+
+    @Test
+    public void initialize_doNotShowImsRegistration_shouldRemoveImsRegistrationStateSetting() {
+        when(mPersistableBundle.getBoolean(
+            CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL)).thenReturn(false);
+
+        mController.initialize();
+
+        verify(mDialog).removeSettingFromScreen(IMS_REGISTRATION_STATE_LABEL_ID);
+        verify(mDialog).removeSettingFromScreen(IMS_REGISTRATION_STATE_VALUE_ID);
+    }
+
 }

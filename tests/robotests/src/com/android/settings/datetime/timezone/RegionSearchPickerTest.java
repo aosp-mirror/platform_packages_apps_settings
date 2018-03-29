@@ -66,7 +66,7 @@ public class RegionSearchPickerTest {
         RegionSearchPicker picker = new RegionSearchPicker();
         BaseTimeZoneAdapter adapter = picker.createAdapter(new TimeZoneData(finder));
         assertEquals(1, adapter.getItemCount());
-        AdapterItem item = adapter.getItem(0);
+        AdapterItem item = adapter.getDataItem(0);
         assertEquals("United States", item.getTitle().toString());
         assertThat(Arrays.asList(item.getSearchKeys())).contains("United States");
     }
@@ -86,8 +86,8 @@ public class RegionSearchPickerTest {
         RegionSearchPicker picker = new RegionSearchPicker();
         BaseTimeZoneAdapter<RegionItem> adapter = picker.createAdapter(new TimeZoneData(finder));
         // Prepare and bind a new ItemViewHolder with United States
-        ItemViewHolder viewHolder = adapter.onCreateViewHolder(
-                new LinearLayout(RuntimeEnvironment.application), 0);
+        ItemViewHolder viewHolder = (ItemViewHolder) adapter.onCreateViewHolder(
+                new LinearLayout(RuntimeEnvironment.application), BaseTimeZoneAdapter.TYPE_ITEM);
         adapter.onBindViewHolder(viewHolder, 0);
         assertEquals(1, adapter.getItemCount());
 

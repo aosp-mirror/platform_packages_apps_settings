@@ -62,7 +62,7 @@ public class BaseTimeZoneAdapterTest {
         observer.await();
         assertThat(adapter.getItemCount()).isEqualTo(items.length);
         for (int i = 0; i < items.length; i++) {
-            assertThat(adapter.getItem(i)).isEqualTo(items[i]);
+            assertThat(adapter.getDataItem(i)).isEqualTo(items[i]);
         }
     }
 
@@ -90,7 +90,8 @@ public class BaseTimeZoneAdapterTest {
     private static class TestTimeZoneAdapter extends BaseTimeZoneAdapter<TestItem> {
 
         public TestTimeZoneAdapter(List<TestItem> items) {
-            super(items, position -> {}, Locale.US, false);
+            super(items, position -> {}, Locale.US, false /* showItemSummary */,
+                    null /* headerText */);
         }
     }
 

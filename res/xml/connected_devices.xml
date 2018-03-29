@@ -36,11 +36,27 @@
         android:summary="@string/connected_device_add_device_summary"
         settings:allowDividerAbove="true"
         settings:userRestriction="no_config_bluetooth"
-        settings:useAdminDisabledSummary="true"/>
+        settings:useAdminDisabledSummary="true"
+        settings:controller="com.android.settings.connecteddevice.AddDevicePreferenceController"/>
+
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="toggle_bluetooth_switch"
+        android:title="@string/bluetooth_settings_title"
+        android:icon="@drawable/ic_settings_bluetooth"
+        android:summary="@string/bluetooth_pref_summary"
+        settings:allowDividerAbove="true"
+        settings:controller="com.android.settings.bluetooth.BluetoothSwitchPreferenceController"
+        settings:userRestriction="no_bluetooth"
+        settings:platform_slice="true"/>
+
+    <SwitchPreference
+        android:key="toggle_nfc"
+        android:title="@string/nfc_quick_toggle_title"
+        android:icon="@drawable/ic_nfc"
+        android:summary="@string/nfc_quick_toggle_summary"/>
 
     <Preference
         android:fragment="com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment"
         android:key="connection_preferences"
-        android:title="@string/connected_device_connections_title"
-        settings:allowDividerAbove="true"/>
+        android:title="@string/connected_device_connections_title"/>
 </PreferenceScreen>

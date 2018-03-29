@@ -28,6 +28,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -47,7 +48,10 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
     final TextView mSummary;
     @VisibleForTesting
     final TextView mDisabled;
-
+    @VisibleForTesting
+    final ViewGroup mWidgetContainer;
+    @VisibleForTesting
+    final Switch mSwitch;
 
     ApplicationViewHolder(View itemView, boolean keepStableHeight) {
         super(itemView);
@@ -57,11 +61,30 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
         mSummary = itemView.findViewById(android.R.id.summary);
         mDisabled = itemView.findViewById(R.id.appendix);
         mKeepStableHeight = keepStableHeight;
+        mSwitch = itemView.findViewById(R.id.switchWidget);
+        mWidgetContainer = itemView.findViewById(android.R.id.widget_frame);
     }
 
     static View newView(ViewGroup parent) {
-        return LayoutInflater.from(parent.getContext())
+        return newView(parent, false);
+    }
+
+    static View newView(ViewGroup parent, boolean twoTarget) {
+        ViewGroup view = (ViewGroup) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.preference_app, parent, false);
+        if (twoTarget) {
+            final ViewGroup widgetFrame = view.findViewById(android.R.id.widget_frame);
+            if (widgetFrame != null) {
+               LayoutInflater.from(parent.getContext())
+                       .inflate(R.layout.preference_widget_master_switch, widgetFrame, true);
+
+               View divider = LayoutInflater.from(parent.getContext()).inflate(
+                       R.layout.preference_two_target_divider, view, false);
+               // second to last, before widget frame
+               view.addView(divider, view.getChildCount() - 1);
+            }
+        }
+        return view;
     }
 
     void setSummary(CharSequence summary) {
@@ -139,6 +162,14 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
             }
         } else if (entry.size == ApplicationsState.SIZE_INVALID) {
             setSummary(invalidSizeStr);
+        }
+    }
+
+    void updateSwitch(View.OnClickListener listener, boolean enabled, boolean checked) {
+        if (mSwitch != null && mWidgetContainer != null) {
+            mWidgetContainer.setOnClickListener(listener);
+            mSwitch.setChecked(checked);
+            mSwitch.setEnabled(enabled);
         }
     }
 }

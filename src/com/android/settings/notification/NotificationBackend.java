@@ -65,11 +65,15 @@ public class NotificationBackend {
 
     public AppRow loadAppRow(Context context, PackageManager pm, PackageInfo app) {
         final AppRow row = loadAppRow(context, pm, app.applicationInfo);
+        recordCanBeBlocked(context, pm, app, row);
+        return row;
+    }
+
+    void recordCanBeBlocked(Context context, PackageManager pm, PackageInfo app, AppRow row) {
         row.systemApp = Utils.isSystemPackage(context.getResources(), pm, app);
         final String[] nonBlockablePkgs = context.getResources().getStringArray(
-                    com.android.internal.R.array.config_nonBlockableNotificationPackages);
+                com.android.internal.R.array.config_nonBlockableNotificationPackages);
         markAppRowWithBlockables(nonBlockablePkgs, row, app.packageName);
-        return row;
     }
 
     @VisibleForTesting static void markAppRowWithBlockables(String[] nonBlockablePkgs, AppRow row,
@@ -90,6 +94,19 @@ public class NotificationBackend {
                 }
             }
         }
+    }
+
+    public boolean isSystemApp(Context context, ApplicationInfo app) {
+        try {
+            PackageInfo info = context.getPackageManager().getPackageInfo(
+                    app.packageName, PackageManager.GET_SIGNATURES);
+            final AppRow row = new AppRow();
+            recordCanBeBlocked(context,  context.getPackageManager(), info, row);
+            return row.systemApp;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public boolean getNotificationsBanned(String pkg, int uid) {

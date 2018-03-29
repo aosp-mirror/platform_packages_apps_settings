@@ -16,13 +16,10 @@
 package com.android.settings.connecteddevice;
 
 import static com.google.common.truth.Truth.assertThat;
-
-import android.content.Context;
+;
 import android.provider.SearchIndexableResource;
 
-import com.android.settings.bluetooth.BluetoothMasterSwitchPreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.ShadowBluetoothPan;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
@@ -59,8 +56,8 @@ public class AdvancedConnectedDeviceDashboardFragmentTest {
     @Test
     public void testSearchIndexProvider_shouldIndexResource() {
         final List<SearchIndexableResource> indexRes =
-            AdvancedConnectedDeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
-                .getXmlResourcesToIndex(RuntimeEnvironment.application, true /* enabled */);
+                AdvancedConnectedDeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
+                        .getXmlResourcesToIndex(RuntimeEnvironment.application, true /* enabled */);
 
         assertThat(indexRes).isNotNull();
         assertThat(indexRes.get(0).xmlResId).isEqualTo(mFragment.getPreferenceScreenResId());
@@ -69,15 +66,5 @@ public class AdvancedConnectedDeviceDashboardFragmentTest {
     @Test
     public void testGetCategoryKey_returnCategoryDevice() {
         assertThat(mFragment.getCategoryKey()).isEqualTo(CategoryKey.CATEGORY_DEVICE);
-    }
-
-    @Test
-    public void testNonIndexableKeys_existInXmlLayout() {
-        final Context context = RuntimeEnvironment.application;
-        final List<String> niks =
-                AdvancedConnectedDeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
-                        .getNonIndexableKeys(context);
-
-        assertThat(niks).contains(BluetoothMasterSwitchPreferenceController.KEY_TOGGLE_BLUETOOTH);
     }
 }
