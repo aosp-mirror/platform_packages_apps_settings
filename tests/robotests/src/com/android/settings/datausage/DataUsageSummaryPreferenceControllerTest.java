@@ -53,6 +53,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.mockito.ArgumentCaptor;
 
 import java.util.concurrent.TimeUnit;
 
@@ -136,7 +137,12 @@ public class DataUsageSummaryPreferenceControllerTest {
         mController.setCarrierValues(CARRIER_NAME, now - UPDATE_BACKOFF_MS, info.cycleEnd, intent);
 
         mController.updateState(mSummaryPreference);
-        verify(mSummaryPreference).setLimitInfo("500 MB data warning / 1.00 GB data limit");
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mSummaryPreference).setLimitInfo(captor.capture());
+        CharSequence value = captor.getValue();
+        assertThat(value.toString()).isEqualTo("500 MB data warning / 1.00 GB data limit");
+
         verify(mSummaryPreference).setUsageInfo(info.cycleEnd, now - UPDATE_BACKOFF_MS,
                 CARRIER_NAME, 1 /* numPlans */, intent);
         verify(mSummaryPreference).setChartEnabled(true);
@@ -154,7 +160,12 @@ public class DataUsageSummaryPreferenceControllerTest {
         mController.setCarrierValues(CARRIER_NAME, now - UPDATE_BACKOFF_MS, info.cycleEnd, intent);
 
         mController.updateState(mSummaryPreference);
-        verify(mSummaryPreference).setLimitInfo("500 MB data warning / 1.00 GB data limit");
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mSummaryPreference).setLimitInfo(captor.capture());
+        CharSequence value = captor.getValue();
+        assertThat(value.toString()).isEqualTo("500 MB data warning / 1.00 GB data limit");
+
         verify(mSummaryPreference).setUsageInfo(info.cycleEnd, now - UPDATE_BACKOFF_MS,
                 CARRIER_NAME, 0 /* numPlans */, intent);
         verify(mSummaryPreference).setChartEnabled(true);
@@ -171,7 +182,11 @@ public class DataUsageSummaryPreferenceControllerTest {
                 info.cycleEnd, null /* intent */);
         mController.updateState(mSummaryPreference);
 
-        verify(mSummaryPreference).setLimitInfo("500 MB data warning / 1.00 GB data limit");
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mSummaryPreference).setLimitInfo(captor.capture());
+        CharSequence value = captor.getValue();
+        assertThat(value.toString()).isEqualTo("500 MB data warning / 1.00 GB data limit");
+
         verify(mSummaryPreference).setUsageInfo(
                 info.cycleEnd,
                 -1L /* snapshotTime */,
@@ -193,7 +208,11 @@ public class DataUsageSummaryPreferenceControllerTest {
                 info.cycleEnd, null /* intent */);
         mController.updateState(mSummaryPreference);
 
-        verify(mSummaryPreference).setLimitInfo("500 MB data warning / 1.00 GB data limit");
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mSummaryPreference).setLimitInfo(captor.capture());
+        CharSequence value = captor.getValue();
+        assertThat(value.toString()).isEqualTo("500 MB data warning / 1.00 GB data limit");
+
         verify(mSummaryPreference).setUsageInfo(
                 info.cycleEnd,
                 -1L /* snapshotTime */,
@@ -234,7 +253,11 @@ public class DataUsageSummaryPreferenceControllerTest {
         mController.setCarrierValues(CARRIER_NAME, now - UPDATE_BACKOFF_MS, info.cycleEnd, intent);
 
         mController.updateState(mSummaryPreference);
-        verify(mSummaryPreference).setLimitInfo("1.00 MB data warning");
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mSummaryPreference).setLimitInfo(captor.capture());
+        CharSequence value = captor.getValue();
+        assertThat(value.toString()).isEqualTo("1.00 MB data warning");
     }
 
     @Test
@@ -251,7 +274,11 @@ public class DataUsageSummaryPreferenceControllerTest {
         mController.setCarrierValues(CARRIER_NAME, now - UPDATE_BACKOFF_MS, info.cycleEnd, intent);
 
         mController.updateState(mSummaryPreference);
-        verify(mSummaryPreference).setLimitInfo("1.00 MB data limit");
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mSummaryPreference).setLimitInfo(captor.capture());
+        CharSequence value = captor.getValue();
+        assertThat(value.toString()).isEqualTo("1.00 MB data limit");
     }
 
     @Test
@@ -268,7 +295,11 @@ public class DataUsageSummaryPreferenceControllerTest {
         mController.setCarrierValues(CARRIER_NAME, now - UPDATE_BACKOFF_MS, info.cycleEnd, intent);
 
         mController.updateState(mSummaryPreference);
-        verify(mSummaryPreference).setLimitInfo("1.00 MB data warning / 1.00 MB data limit");
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mSummaryPreference).setLimitInfo(captor.capture());
+        CharSequence value = captor.getValue();
+        assertThat(value.toString()).isEqualTo("1.00 MB data warning / 1.00 MB data limit");
     }
 
     @Test

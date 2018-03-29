@@ -203,15 +203,15 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
                 summaryPreference.setLimitInfo(TextUtils.expandTemplate(
                         mContext.getText(R.string.cell_data_warning_and_limit),
                         Formatter.formatFileSize(mContext, info.warningLevel),
-                        Formatter.formatFileSize(mContext, info.limitLevel)).toString());
+                        Formatter.formatFileSize(mContext, info.limitLevel)));
         } else if (info.warningLevel > 0) {
                 summaryPreference.setLimitInfo(TextUtils.expandTemplate(
                         mContext.getText(R.string.cell_data_warning),
-                        Formatter.formatFileSize(mContext, info.warningLevel)).toString());
+                        Formatter.formatFileSize(mContext, info.warningLevel)));
         } else if (info.limitLevel > 0) {
             summaryPreference.setLimitInfo(TextUtils.expandTemplate(
                     mContext.getText(R.string.cell_data_limit),
-                    Formatter.formatFileSize(mContext, info.limitLevel)).toString());
+                    Formatter.formatFileSize(mContext, info.limitLevel)));
         } else {
             summaryPreference.setLimitInfo(null);
         }
