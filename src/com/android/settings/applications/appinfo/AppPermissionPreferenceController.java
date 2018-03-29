@@ -34,10 +34,9 @@ import java.util.List;
 public class AppPermissionPreferenceController extends AppInfoPreferenceControllerBase {
 
     private static final String TAG = "PermissionPrefControl";
-    private static final String KEY_PERMISSION = "permission_settings";
     private static final String EXTRA_HIDE_INFO_BUTTON = "hideInfoButton";
 
-    private final String mPackageName;
+    private String mPackageName;
 
     @VisibleForTesting
     final PermissionsSummaryHelper.PermissionsResultCallback mPermissionCallback
@@ -76,10 +75,8 @@ public class AppPermissionPreferenceController extends AppInfoPreferenceControll
         }
     };
 
-    public AppPermissionPreferenceController(Context context, AppInfoDashboardFragment parent,
-            String packageName) {
-        super(context, parent, KEY_PERMISSION);
-        mPackageName = packageName;
+    public AppPermissionPreferenceController(Context context, String key) {
+        super(context, key);
     }
 
     @Override
@@ -89,11 +86,15 @@ public class AppPermissionPreferenceController extends AppInfoPreferenceControll
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (KEY_PERMISSION.equals(preference.getKey())) {
+        if (getPreferenceKey().equals(preference.getKey())) {
             startManagePermissionsActivity();
             return true;
         }
         return false;
+    }
+
+    public void setPackageName(String packageName) {
+        mPackageName = packageName;
     }
 
     private void startManagePermissionsActivity() {
@@ -107,5 +108,4 @@ public class AppPermissionPreferenceController extends AppInfoPreferenceControll
             Log.w(TAG, "No app can handle android.intent.action.MANAGE_APP_PERMISSIONS");
         }
     }
-
 }

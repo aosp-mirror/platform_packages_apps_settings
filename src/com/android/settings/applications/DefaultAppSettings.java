@@ -76,7 +76,7 @@ public class DefaultAppSettings extends DashboardFragment {
         workControllers.add(new DefaultWorkBrowserPreferenceController(context));
         controllers.addAll(workControllers);
         controllers.add(new PreferenceCategoryController(
-                context, KEY_DEFAULT_WORK_CATEGORY, workControllers));
+                context, KEY_DEFAULT_WORK_CATEGORY).setChildren(workControllers));
         controllers.add(new DefaultAssistPreferenceController(context, KEY_ASSIST_VOICE_INPUT,
                 false /* showSetting */));
         controllers.add(new DefaultBrowserPreferenceController(context));

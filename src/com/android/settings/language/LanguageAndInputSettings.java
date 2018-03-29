@@ -105,7 +105,7 @@ public class LanguageAndInputSettings extends DashboardFragment {
         controllers.add(virtualKeyboardPreferenceController);
         controllers.add(physicalKeyboardPreferenceController);
         controllers.add(new PreferenceCategoryController(context,
-                KEY_KEYBOARDS_CATEGORY,
+                KEY_KEYBOARDS_CATEGORY).setChildren(
                 Arrays.asList(virtualKeyboardPreferenceController,
                         physicalKeyboardPreferenceController)));
 
@@ -116,7 +116,7 @@ public class LanguageAndInputSettings extends DashboardFragment {
         final PointerSpeedController pointerController = new PointerSpeedController(context);
         controllers.add(pointerController);
         controllers.add(new PreferenceCategoryController(context,
-                KEY_POINTER_AND_TTS_CATEGORY,
+                KEY_POINTER_AND_TTS_CATEGORY).setChildren(
                 Arrays.asList(pointerController, ttsPreferenceController)));
 
         // Input Assistance
@@ -132,7 +132,7 @@ public class LanguageAndInputSettings extends DashboardFragment {
         }
         controllers.add(gameControllerPreferenceController);
         controllers.add(new PreferenceCategoryController(context,
-                KEY_GAME_CONTROLLER_CATEGORY,
+                KEY_GAME_CONTROLLER_CATEGORY).setChildren(
                 Arrays.asList(gameControllerPreferenceController)));
 
         return controllers;
