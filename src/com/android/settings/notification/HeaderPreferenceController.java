@@ -73,27 +73,27 @@ public class HeaderPreferenceController extends NotificationPreferenceController
 
     CharSequence getLabel() {
         return mChannel != null ? mChannel.getName()
-                : mChannelGroup != null && mChannelGroup.getGroup() != null
-                        ? mChannelGroup.getGroup().getName()
+                : mChannelGroup != null
+                        ? mChannelGroup.getName()
                         : mAppRow.label;
     }
 
     @Override
     public CharSequence getSummary() {
         if (mChannel != null) {
-           if (mChannelGroup != null && mChannelGroup.getGroup() != null
-                && !TextUtils.isEmpty(mChannelGroup.getGroup().getName())) {
-               final SpannableStringBuilder summary = new SpannableStringBuilder();
-               BidiFormatter bidi = BidiFormatter.getInstance();
-               summary.append(bidi.unicodeWrap(mAppRow.label.toString()));
-               summary.append(bidi.unicodeWrap(mContext.getText(
-                       R.string.notification_header_divider_symbol_with_spaces)));
-               summary.append(bidi.unicodeWrap(mChannelGroup.getGroup().getName().toString()));
-               return summary.toString();
-           } else {
-               return mAppRow.label.toString();
-           }
-        } else if (mChannelGroup != null && mChannelGroup.getGroup() != null) {
+            if (mChannelGroup != null
+                    && !TextUtils.isEmpty(mChannelGroup.getName())) {
+                final SpannableStringBuilder summary = new SpannableStringBuilder();
+                BidiFormatter bidi = BidiFormatter.getInstance();
+                summary.append(bidi.unicodeWrap(mAppRow.label.toString()));
+                summary.append(bidi.unicodeWrap(mContext.getText(
+                        R.string.notification_header_divider_symbol_with_spaces)));
+                summary.append(bidi.unicodeWrap(mChannelGroup.getName().toString()));
+                return summary.toString();
+            } else {
+                return mAppRow.label.toString();
+            }
+        } else if (mChannelGroup != null) {
             return mAppRow.label.toString();
         } else {
             return "";

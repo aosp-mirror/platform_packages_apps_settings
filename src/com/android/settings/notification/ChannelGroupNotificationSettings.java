@@ -40,7 +40,7 @@ public class ChannelGroupNotificationSettings extends NotificationSettingsBase {
     @Override
     public void onResume() {
         super.onResume();
-        if (mAppRow == null || mChannelGroup == null || mChannelGroup.getGroup() == null) {
+        if (mAppRow == null || mChannelGroup == null) {
             Log.w(TAG, "Missing package or uid or packageinfo or group");
             finish();
             return;
@@ -85,7 +85,7 @@ public class ChannelGroupNotificationSettings extends NotificationSettingsBase {
                 getPreferenceScreen().removePreference(p);
             }
         }
-        if (mChannelGroup.getGroup().getChannels().isEmpty()) {
+        if (mChannelGroup.getChannels().isEmpty()) {
             Preference empty = new Preference(getPrefContext());
             empty.setTitle(R.string.no_channels);
             empty.setEnabled(false);
@@ -93,7 +93,7 @@ public class ChannelGroupNotificationSettings extends NotificationSettingsBase {
             mDynamicPreferences.add(empty);
 
         } else {
-            final List<NotificationChannel> channels = mChannelGroup.getGroup().getChannels();
+            final List<NotificationChannel> channels = mChannelGroup.getChannels();
             Collections.sort(channels, mChannelComparator);
             for (NotificationChannel channel : channels) {
                 mDynamicPreferences.add(populateSingleChannelPrefs(

@@ -49,7 +49,6 @@ import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.widget.MasterCheckBoxPreference;
-import com.android.settings.wrapper.NotificationChannelGroupWrapper;
 import com.android.settingslib.RestrictedLockUtils;
 
 import java.util.ArrayList;
@@ -70,7 +69,7 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
     protected String mPkg;
     protected PackageInfo mPkgInfo;
     protected EnforcedAdmin mSuspendedAppsAdmin;
-    protected NotificationChannelGroupWrapper mChannelGroup;
+    protected NotificationChannelGroup mChannelGroup;
     protected NotificationChannel mChannel;
     protected NotificationBackend.AppRow mAppRow;
 
@@ -168,7 +167,7 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
         if (mChannel != null && !TextUtils.isEmpty(mChannel.getGroup())) {
             group = mBackend.getGroup(mPkg, mUid, mChannel.getGroup());
             if (group != null) {
-                mChannelGroup = new NotificationChannelGroupWrapper(group);
+                mChannelGroup = group;
             }
         }
     }
@@ -209,7 +208,7 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
             }
             if (mChannelGroup != null) {
                 mAppRow.settingsIntent.putExtra(
-                        Notification.EXTRA_CHANNEL_GROUP_ID, mChannelGroup.getGroup().getId());
+                        Notification.EXTRA_CHANNEL_GROUP_ID, mChannelGroup.getId());
             }
         }
     }

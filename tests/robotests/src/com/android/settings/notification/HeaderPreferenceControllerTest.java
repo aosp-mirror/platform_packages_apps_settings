@@ -36,7 +36,6 @@ import android.view.View;
 
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.wrapper.NotificationChannelGroupWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -104,12 +103,11 @@ public class HeaderPreferenceControllerTest {
         assertEquals(appRow.label, mController.getLabel());
 
         NotificationChannelGroup group = new NotificationChannelGroup("id", "name");
-        NotificationChannelGroupWrapper gWrapper = new NotificationChannelGroupWrapper(group);
-        mController.onResume(appRow, null, gWrapper, null);
+        mController.onResume(appRow, null, group, null);
         assertEquals(group.getName(), mController.getLabel());
 
         NotificationChannel channel = new NotificationChannel("cid", "cname", IMPORTANCE_NONE);
-        mController.onResume(appRow, channel, gWrapper, null);
+        mController.onResume(appRow, channel, group, null);
         assertEquals(channel.getName(), mController.getLabel());
     }
 
@@ -121,12 +119,11 @@ public class HeaderPreferenceControllerTest {
         assertEquals("", mController.getSummary());
 
         NotificationChannelGroup group = new NotificationChannelGroup("id", "name");
-        NotificationChannelGroupWrapper gWrapper = new NotificationChannelGroupWrapper(group);
-        mController.onResume(appRow, null, gWrapper, null);
+        mController.onResume(appRow, null, group, null);
         assertEquals(appRow.label, mController.getSummary());
 
         NotificationChannel channel = new NotificationChannel("cid", "cname", IMPORTANCE_NONE);
-        mController.onResume(appRow, channel, gWrapper, null);
+        mController.onResume(appRow, channel, group, null);
         assertTrue(mController.getSummary().toString().contains(group.getName()));
         assertTrue(mController.getSummary().toString().contains(appRow.label));
 
