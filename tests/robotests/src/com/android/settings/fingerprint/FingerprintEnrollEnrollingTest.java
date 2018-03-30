@@ -39,7 +39,6 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settings.testutils.shadow.ShadowVibrator;
-import com.android.settings.wrapper.FingerprintManagerWrapper;
 
 import org.junit.After;
 import org.junit.Before;
@@ -62,7 +61,7 @@ import java.util.concurrent.TimeUnit;
 public class FingerprintEnrollEnrollingTest {
 
     @Mock
-    private FingerprintManagerWrapper mFingerprintManager;
+    private FingerprintManager mFingerprintManager;
 
     private FingerprintEnrollEnrolling mActivity;
 

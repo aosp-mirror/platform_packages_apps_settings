@@ -18,11 +18,11 @@ package com.android.settings.testutils.shadow;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.hardware.fingerprint.FingerprintManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 
 import com.android.settings.Utils;
-import com.android.settings.wrapper.FingerprintManagerWrapper;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
@@ -33,7 +33,7 @@ import java.util.Map;
 @Implements(Utils.class)
 public class ShadowUtils {
 
-    private static FingerprintManagerWrapper sFingerprintManager = null;
+    private static FingerprintManager sFingerprintManager = null;
     private static boolean sIsUserAMonkey;
     private static boolean sIsDemoUser;
     private static ComponentName sDeviceOwnerComponentName;
@@ -45,11 +45,11 @@ public class ShadowUtils {
     }
 
     @Implementation
-    public static FingerprintManagerWrapper getFingerprintManagerWrapperOrNull(Context context) {
+    public static FingerprintManager getFingerprintManagerOrNull(Context context) {
         return sFingerprintManager;
     }
 
-    public static void setFingerprintManager(FingerprintManagerWrapper fingerprintManager) {
+    public static void setFingerprintManager(FingerprintManager fingerprintManager) {
         sFingerprintManager = fingerprintManager;
     }
 
