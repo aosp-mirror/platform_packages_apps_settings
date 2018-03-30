@@ -121,7 +121,7 @@ public class RestrictAppPreferenceControllerTest {
 
         mRestrictAppPreferenceController.updateState(mPreference);
 
-        assertThat(mPreference.getSummary()).isEqualTo("1 app");
+        assertThat(mPreference.getSummary()).isEqualTo("Limiting battery usage for 1 app");
     }
 
     @Test
@@ -134,7 +134,7 @@ public class RestrictAppPreferenceControllerTest {
 
         mRestrictAppPreferenceController.updateState(mPreference);
 
-        assertThat(mPreference.getSummary()).isEqualTo("2 apps");
+        assertThat(mPreference.getSummary()).isEqualTo("Limiting battery usage for 2 apps");
     }
 
     @Test
@@ -146,7 +146,7 @@ public class RestrictAppPreferenceControllerTest {
 
         mRestrictAppPreferenceController.updateState(mPreference);
 
-        assertThat(mPreference.getSummary()).isEqualTo("1 app");
+        assertThat(mPreference.getSummary()).isEqualTo("Limiting battery usage for 1 app");
         assertThat(mRestrictAppPreferenceController.mAppInfos).containsExactly(
                 new AppInfo.Builder()
                         .setUid(RESTRICTED_UID)
