@@ -47,12 +47,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnKeyListener;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.util.ArrayUtils;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -61,6 +61,9 @@ import java.util.Set;
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.TELEPHONY_SERVICE;
 
+/**
+ * TODO: After loading all changes, please move this to network package.
+ */
 public class ApnEditor extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener, OnKeyListener {
 
@@ -1185,6 +1188,88 @@ public class ApnEditor extends SettingsPreferenceFragment
         @Override
         public int getMetricsCategory() {
             return MetricsEvent.DIALOG_APN_EDITOR_ERROR;
+        }
+    }
+
+    public static class InvalidTypeException extends RuntimeException {
+        InvalidTypeException(String msg) {
+            super(msg);
+        }
+    }
+
+    @VisibleForTesting
+    static class ApnData {
+        /**
+         * The uri correspond to a database row of the apn data. This should be null if the apn
+         * is not in the database.
+         */
+        Uri mUri;
+
+        /** Each element correspond to a column of the database row. */
+        Object[] mData;
+
+        ApnData(int numberOfField) {
+            mData = new Object[numberOfField];
+        }
+
+        ApnData(Uri uri, Cursor cursor) {
+            mUri = uri;
+            mData = new Object[cursor.getColumnCount()];
+            for (int i = 0; i < mData.length; i++) {
+                switch (cursor.getType(i)) {
+                    case Cursor.FIELD_TYPE_FLOAT:
+                        mData[i] = cursor.getFloat(i);
+                        break;
+                    case Cursor.FIELD_TYPE_INTEGER:
+                        mData[i] = cursor.getInt(i);
+                        break;
+                    case Cursor.FIELD_TYPE_STRING:
+                        mData[i] = cursor.getString(i);
+                        break;
+                    case Cursor.FIELD_TYPE_BLOB:
+                        mData[i] = cursor.getBlob(i);
+                        break;
+                    default:
+                        mData[i] = null;
+                }
+            }
+        }
+
+        Uri getUri() {
+            return mUri;
+        }
+
+        void setUri(Uri uri) {
+            mUri = uri;
+        }
+
+        Integer getInteger(int index) throws InvalidTypeException {
+            if (!isValidTypeOrNull(mData[index], Integer.class)) {
+                throwInvalidTypeException(Integer.class, mData[index].getClass());
+            }
+            return (Integer) mData[index];
+        }
+
+        Integer getInteger(int index, Integer defaultValue) throws InvalidTypeException {
+            Integer val = getInteger(index);
+            return val == null ? defaultValue : val;
+        }
+
+        String getString(int index) throws InvalidTypeException {
+            if (!isValidTypeOrNull(mData[index], String.class)) {
+                throwInvalidTypeException(String.class, mData[index].getClass());
+            }
+            return (String) mData[index];
+        }
+
+        private boolean isValidTypeOrNull(Object obj, Class expectedClass) {
+            return obj == null || expectedClass.isInstance(obj);
+        }
+
+        private void throwInvalidTypeException(Class<?> expectedClass, Class<?> actualClass) {
+            throw new InvalidTypeException(
+                    String.format(
+                            "Type mismatched, want %s, but is %s", expectedClass, actualClass));
         }
     }
 
