@@ -197,11 +197,6 @@
                 <action android:name="android.settings.BLUETOOTH_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
-            </intent-filter>
             <intent-filter android:priority="10">
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
@@ -396,31 +391,29 @@
                        android:value="com.android.settings.ApnSettings" />
         </activity>
 
-        <activity
+        <!-- Keep compatibility with old shortcuts. -->
+        <activity-alias
             android:name="Settings$BluetoothSettingsActivity"
-            android:label="@string/bluetooth_settings_title"
-            android:icon="@drawable/ic_settings_bluetooth"
-            android:enabled="false"
-            android:taskAffinity="com.android.settings"
-            android:parentActivityName="Settings">
+            android:label="@string/devices_title"
+            android:targetActivity=".Settings$ConnectedDeviceDashboardActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
-                <category android:name="com.android.settings.SHORTCUT" />
                 <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.bluetooth.BluetoothSettings" />
-        </activity>
+                android:value="com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment" />
+        </activity-alias>
 
         <!-- Keep compatibility with old shortcuts. -->
         <activity-alias android:name=".bluetooth.BluetoothSettings"
-                        android:label="@string/bluetooth_settings_title"
+                        android:label="@string/devices_title"
                         android:targetActivity="Settings$BluetoothSettingsActivity"
                         android:exported="true"
                         android:clearTaskOnLaunch="true">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.bluetooth.BluetoothSettings" />
+                       android:value="com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment" />
         </activity-alias>
 
         <activity android:name="Settings$AssistGestureSettingsActivity"

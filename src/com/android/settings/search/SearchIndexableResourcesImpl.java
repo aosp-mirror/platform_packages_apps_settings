@@ -35,7 +35,6 @@ import com.android.settings.applications.SpecialAccessSettings;
 import com.android.settings.applications.assist.ManageAssist;
 import com.android.settings.backup.BackupSettingsActivity;
 import com.android.settings.backup.BackupSettingsFragment;
-import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.usb.UsbDetailsFragment;
 import com.android.settings.datausage.DataUsageSummary;
@@ -110,7 +109,6 @@ public class SearchIndexableResourcesImpl implements SearchIndexableResources {
         addIndex(WifiSettings.class);
         addIndex(NetworkDashboardFragment.class);
         addIndex(ConfigureWifiSettings.class);
-        addIndex(BluetoothSettings.class);
         addIndex(SimSettings.class);
         addIndex(DataUsageSummary.class);
         addIndex(DataUsageSummaryLegacy.class);

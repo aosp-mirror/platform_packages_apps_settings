@@ -17,14 +17,12 @@ package com.android.settings.connecteddevice;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.provider.SearchIndexableResource;
 import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothSwitchPreferenceController;
-import com.android.settings.bluetooth.BluetoothMasterSwitchPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.nfc.NfcPreferenceController;
