@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.net.wifi.WifiManager;
 import android.nfc.FormatException;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
@@ -27,7 +28,6 @@ import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.Ndef;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.PowerManager;
 import android.text.Editable;
 import android.text.InputType;
@@ -42,7 +42,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.wrapper.WifiManagerWrapper;
 import com.android.settingslib.wifi.AccessPoint;
 
 import java.io.IOException;
@@ -67,29 +66,29 @@ class WriteWifiConfigToNfcDialog extends AlertDialog
     private TextView mLabelView;
     private CheckBox mPasswordCheckBox;
     private ProgressBar mProgressBar;
-    private WifiManagerWrapper mWifiManager;
+    private WifiManager mWifiManager;
     private String mWpsNfcConfigurationToken;
     private Context mContext;
     private int mSecurity;
 
-    WriteWifiConfigToNfcDialog(Context context, int security, WifiManagerWrapper wifiManager) {
+    WriteWifiConfigToNfcDialog(Context context, int security) {
         super(context);
 
         mContext = context;
         mWakeLock = ((PowerManager) context.getSystemService(Context.POWER_SERVICE))
                 .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "WriteWifiConfigToNfcDialog:wakeLock");
         mSecurity = security;
-        mWifiManager = wifiManager;
+        mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
     }
 
-    WriteWifiConfigToNfcDialog(Context context, Bundle savedState, WifiManagerWrapper wifiManager) {
+    WriteWifiConfigToNfcDialog(Context context, Bundle savedState) {
         super(context);
 
         mContext = context;
         mWakeLock = ((PowerManager) context.getSystemService(Context.POWER_SERVICE))
                 .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "WriteWifiConfigToNfcDialog:wakeLock");
         mSecurity = savedState.getInt(SECURITY);
-        mWifiManager = wifiManager;
+        mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
     }
 
     @Override

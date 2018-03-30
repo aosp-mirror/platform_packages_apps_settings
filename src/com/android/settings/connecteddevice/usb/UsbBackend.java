@@ -25,7 +25,6 @@ import android.net.ConnectivityManager;
 import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
 
-import com.android.settings.wrapper.UsbManagerWrapper;
 import com.android.settings.wrapper.UserManagerWrapper;
 
 /**
@@ -44,7 +43,6 @@ public class UsbBackend {
     private final boolean mTetheringSupported;
 
     private UsbManager mUsbManager;
-    private UsbManagerWrapper mUsbManagerWrapper;
 
     @Nullable
     private UsbPort mPort;
@@ -52,18 +50,12 @@ public class UsbBackend {
     private UsbPortStatus mPortStatus;
 
     public UsbBackend(Context context) {
-        this(context, new UserManagerWrapper(UserManager.get(context)), null);
+        this(context, new UserManagerWrapper(UserManager.get(context)));
     }
 
     @VisibleForTesting
-    public UsbBackend(Context context, UserManagerWrapper userManagerWrapper,
-            UsbManagerWrapper usbManagerWrapper) {
+    public UsbBackend(Context context, UserManagerWrapper userManagerWrapper) {
         mUsbManager = context.getSystemService(UsbManager.class);
-
-        mUsbManagerWrapper = usbManagerWrapper;
-        if (mUsbManagerWrapper == null) {
-            mUsbManagerWrapper = new UsbManagerWrapper(mUsbManager);
-        }
 
         mFileTransferRestricted = userManagerWrapper.isUsbFileTransferRestricted();
         mFileTransferRestrictedBySystem = userManagerWrapper.isUsbFileTransferRestrictedBySystem();
@@ -79,7 +71,7 @@ public class UsbBackend {
     }
 
     public long getCurrentFunctions() {
-        return mUsbManagerWrapper.getCurrentFunctions();
+        return mUsbManager.getCurrentFunctions();
     }
 
     public void setCurrentFunctions(long functions) {
