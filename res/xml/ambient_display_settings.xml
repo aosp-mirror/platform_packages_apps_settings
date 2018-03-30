@@ -29,7 +29,8 @@
         <SwitchPreference
             android:key="ambient_display_always_on"
             android:title="@string/doze_always_on_title"
-            android:summary="@string/doze_always_on_summary" />
+            android:summary="@string/doze_always_on_summary"
+            settings:controller="com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController" />
 
         <Preference
             android:key="ambient_display_double_tap"
