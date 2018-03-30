@@ -16,6 +16,7 @@
 
 package com.android.settings.notification;
 
+import android.app.NotificationManager;
 import android.content.Context;
 import android.support.v7.preference.CheckBoxPreference;
 import android.support.v7.preference.Preference;
@@ -51,6 +52,10 @@ public class ZenModeVisEffectPreferenceController
 
     @Override
     public boolean isAvailable() {
+        if (mEffect == NotificationManager.Policy.SUPPRESSED_EFFECT_LIGHTS) {
+            return mContext.getResources()
+                    .getBoolean(com.android.internal.R.bool.config_intrusiveNotificationLed);
+        }
         return true;
     }
 
