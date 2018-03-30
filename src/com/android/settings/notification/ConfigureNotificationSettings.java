@@ -91,8 +91,6 @@ public class ConfigureNotificationSettings extends DashboardFragment {
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle, Application app, Fragment host) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        final BadgingNotificationPreferenceController badgeController =
-                new BadgingNotificationPreferenceController(context);
         final PulseNotificationPreferenceController pulseController =
                 new PulseNotificationPreferenceController(context);
         final LockScreenNotificationPreferenceController lockScreenNotificationController =
@@ -106,7 +104,6 @@ public class ConfigureNotificationSettings extends DashboardFragment {
         }
         controllers.add(new RecentNotifyingAppsPreferenceController(
                 context, new NotificationBackend(), app, host));
-        controllers.add(badgeController);
         controllers.add(pulseController);
         controllers.add(lockScreenNotificationController);
         controllers.add(new NotificationRingtonePreferenceController(context) {
