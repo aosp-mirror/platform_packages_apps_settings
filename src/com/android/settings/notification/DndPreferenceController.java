@@ -29,10 +29,9 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 
 public class DndPreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener,
-        LifecycleObserver, OnResume {
+        LifecycleObserver {
 
     private static final String KEY_BYPASS_DND = "bypass_dnd";
-    private boolean mVisualEffectsSuppressed;
 
     public DndPreferenceController(Context context, Lifecycle lifecycle,
             NotificationBackend backend) {
@@ -43,24 +42,16 @@ public class DndPreferenceController extends NotificationPreferenceController
     }
 
     @Override
-    public void onResume() {
-        NotificationManager.Policy policy = mNm.getNotificationPolicy();
-        mVisualEffectsSuppressed = policy != null && policy.suppressedVisualEffects != 0;
-    }
-
-    @Override
     public String getPreferenceKey() {
         return KEY_BYPASS_DND;
     }
 
     @Override
     public boolean isAvailable() {
-        if (!super.isAvailable()) {
+        if (!super.isAvailable() || mChannel == null) {
             return false;
         }
-        return checkCanBeVisible(NotificationManager.IMPORTANCE_DEFAULT)
-                || (checkCanBeVisible(NotificationManager.IMPORTANCE_LOW)
-                && mVisualEffectsSuppressed);
+        return true;
     }
 
     public void updateState(Preference preference) {
@@ -82,5 +73,4 @@ public class DndPreferenceController extends NotificationPreferenceController
         }
         return true;
     }
-
 }
