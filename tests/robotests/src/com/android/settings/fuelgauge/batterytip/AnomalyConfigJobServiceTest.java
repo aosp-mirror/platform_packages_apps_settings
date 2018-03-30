@@ -79,7 +79,7 @@ public class AnomalyConfigJobServiceTest {
         List<JobInfo> pendingJobs = shadowJobScheduler.getAllPendingJobs();
         assertEquals(1, pendingJobs.size());
         JobInfo pendingJob = pendingJobs.get(0);
-        assertThat(pendingJob.getId()).isEqualTo(R.id.job_anomaly_config_update);
+        assertThat(pendingJob.getId()).isEqualTo(R.integer.job_anomaly_config_update);
         assertThat(pendingJob.getIntervalMillis()).isEqualTo(TimeUnit.DAYS.toMillis(1));
         assertThat(pendingJob.isRequireDeviceIdle()).isTrue();
         assertThat(pendingJob.isRequireCharging()).isTrue();

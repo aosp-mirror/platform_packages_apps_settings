@@ -52,7 +52,7 @@ public class AnomalyConfigJobService extends JobService {
 
         final ComponentName component = new ComponentName(context, AnomalyConfigJobService.class);
         final JobInfo.Builder jobBuilder =
-                new JobInfo.Builder(R.id.job_anomaly_config_update, component)
+                new JobInfo.Builder(R.integer.job_anomaly_config_update, component)
                         .setPeriodic(CONFIG_UPDATE_FREQUENCY_MS)
                         .setRequiresDeviceIdle(true)
                         .setRequiresCharging(true);

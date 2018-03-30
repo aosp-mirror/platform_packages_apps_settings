@@ -42,7 +42,7 @@ public class AnomalyCleanupJobService extends JobService {
 
         final ComponentName component = new ComponentName(context, AnomalyCleanupJobService.class);
         final JobInfo.Builder jobBuilder =
-                new JobInfo.Builder(R.id.job_anomaly_clean_up, component)
+                new JobInfo.Builder(R.integer.job_anomaly_clean_up, component)
                         .setPeriodic(CLEAN_UP_FREQUENCY_MS)
                         .setRequiresDeviceIdle(true)
                         .setRequiresCharging(true);

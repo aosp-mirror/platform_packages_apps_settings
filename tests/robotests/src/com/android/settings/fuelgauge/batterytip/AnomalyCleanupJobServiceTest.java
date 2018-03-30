@@ -52,7 +52,7 @@ public class AnomalyCleanupJobServiceTest {
         List<JobInfo> pendingJobs = shadowJobScheduler.getAllPendingJobs();
         assertEquals(1, pendingJobs.size());
         JobInfo pendingJob = pendingJobs.get(0);
-        assertThat(pendingJob.getId()).isEqualTo(R.id.job_anomaly_clean_up);
+        assertThat(pendingJob.getId()).isEqualTo(R.integer.job_anomaly_clean_up);
         assertThat(pendingJob.getIntervalMillis()).isEqualTo(TimeUnit.DAYS.toMillis(1));
         assertThat(pendingJob.isRequireDeviceIdle()).isTrue();
         assertThat(pendingJob.isRequireCharging()).isTrue();
