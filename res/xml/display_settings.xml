@@ -71,7 +71,8 @@
     <SwitchPreference
         android:key="auto_rotate"
         android:title="@string/accelerometer_title"
-        settings:keywords="@string/keywords_auto_rotate"/>
+        settings:keywords="@string/keywords_auto_rotate"
+        settings:controller="com.android.settings.display.AutoRotatePreferenceController"/>
 
     <Preference
         android:key="color_mode"
