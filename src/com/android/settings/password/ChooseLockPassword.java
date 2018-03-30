@@ -241,7 +241,6 @@ public class ChooseLockPassword extends SettingsActivity {
         static final int NOT_ENOUGH_DIGITS = 1 << 9;
         static final int NOT_ENOUGH_SYMBOLS = 1 << 10;
         static final int NOT_ENOUGH_NON_LETTER = 1 << 11;
-        static final int BLACKLISTED = 1 << 12;
 
         /**
          * Keep track internally of where the user is in choosing a pattern.
@@ -728,16 +727,6 @@ public class ChooseLockPassword extends SettingsActivity {
                 }
             }
 
-            // Only check the blacklist if the password is otherwise valid. Checking the blacklist
-            // can be expensive and it is not useful to report the fact it is on a blacklist if it
-            // couldn't be set anyway.
-            if (errorCode == NO_ERROR) {
-                if (mLockPatternUtils.getDevicePolicyManager()
-                        .isPasswordBlacklisted(mUserId, password)) {
-                    errorCode |= BLACKLISTED;
-                }
-            }
-
             return errorCode;
         }
 
@@ -855,11 +844,6 @@ public class ChooseLockPassword extends SettingsActivity {
             if ((errorCode & RECENTLY_USED) > 0) {
                 messages.add(getString((mIsAlphaMode) ? R.string.lockpassword_password_recently_used
                         : R.string.lockpassword_pin_recently_used));
-            }
-            if ((errorCode & BLACKLISTED) > 0) {
-                messages.add(getString((mIsAlphaMode)
-                        ? R.string.lockpassword_password_blacklisted_by_admin
-                        : R.string.lockpassword_pin_blacklisted_by_admin));
             }
             return messages.toArray(new String[0]);
         }
