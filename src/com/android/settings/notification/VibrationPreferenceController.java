@@ -47,7 +47,7 @@ public class VibrationPreferenceController extends NotificationPreferenceControl
             return false;
        }
         return checkCanBeVisible(NotificationManager.IMPORTANCE_DEFAULT)
-                && !NotificationChannel.DEFAULT_CHANNEL_ID.equals(mChannel.getId())
+                && !isDefaultChannel()
                 && mVibrator != null
                 && mVibrator.hasVibrator();
     }
