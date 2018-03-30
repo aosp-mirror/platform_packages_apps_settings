@@ -22,6 +22,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 
+import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
@@ -77,7 +78,18 @@ public class AppNotificationPreferenceController extends AppInfoPreferenceContro
 
     public static CharSequence getNotificationSummary(NotificationBackend.AppRow appRow,
             Context context) {
-        // TODO: implement summary when it is known what it should say
-        return "";
+        if (appRow == null) {
+            return "";
+        }
+        if (appRow.banned || appRow.channelCount == appRow.blockedChannelCount) {
+            return context.getString(R.string.notifications_disabled);
+        } else {
+            if (appRow.blockedChannelCount == 0) {
+                return context.getString(R.string.notifications_enabled);
+            }
+            return context.getString(R.string.notifications_enabled_with_info,
+                    context.getResources().getQuantityString(R.plurals.notifications_categories_off,
+                            appRow.blockedChannelCount, appRow.blockedChannelCount));
+        }
     }
 }
