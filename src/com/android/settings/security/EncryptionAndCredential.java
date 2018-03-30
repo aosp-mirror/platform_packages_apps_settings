@@ -70,7 +70,7 @@ public class EncryptionAndCredential extends DashboardFragment {
                         PREF_KEY_ENCRYPTION_DETAIL_PAGE);
         controllers.add(encryptStatusController);
         controllers.add(new PreferenceCategoryController(context,
-                "encryption_and_credentials_status_category",
+                "encryption_and_credentials_status_category").setChildren(
                 Arrays.asList(encryptStatusController)));
         controllers.add(new CredentialStoragePreferenceController(context));
         controllers.add(new UserCredentialsPreferenceController(context));

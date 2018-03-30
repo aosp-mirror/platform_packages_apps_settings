@@ -57,8 +57,8 @@ public class AppStoragePreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application.getApplicationContext();
-        mController =
-                spy(new AppStoragePreferenceController(mContext, mFragment, null /* lifecycle */));
+        mController = spy(new AppStoragePreferenceController(mContext, "key"));
+        mController.setParentFragment(mFragment);
     }
 
     @Test

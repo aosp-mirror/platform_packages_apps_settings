@@ -28,18 +28,12 @@ import com.android.settingslib.applications.AppUtils;
 
 public class AppInstallerInfoPreferenceController extends AppInfoPreferenceControllerBase {
 
-    private static final String KEY_APP_INSTALLER_INFO = "app_info_store";
+    private String mPackageName;
+    private String mInstallerPackage;
+    private CharSequence mInstallerLabel;
 
-    private final String mPackageName;
-    private final String mInstallerPackage;
-    private final CharSequence mInstallerLabel;
-
-    public AppInstallerInfoPreferenceController(Context context, AppInfoDashboardFragment parent,
-            String packageName) {
-        super(context, parent, KEY_APP_INSTALLER_INFO);
-        mPackageName = packageName;
-        mInstallerPackage = AppStoreUtil.getInstallerPackageName(mContext, mPackageName);
-        mInstallerLabel = Utils.getApplicationLabel(mContext, mInstallerPackage);
+    public AppInstallerInfoPreferenceController(Context context, String key) {
+        super(context, key);
     }
 
     @Override
@@ -47,7 +41,7 @@ public class AppInstallerInfoPreferenceController extends AppInfoPreferenceContr
         if (UserManager.get(mContext).isManagedProfile()) {
             return DISABLED_FOR_USER;
         }
-        return mInstallerLabel!= null ? AVAILABLE : DISABLED_FOR_USER;
+        return mInstallerLabel != null ? AVAILABLE : DISABLED_FOR_USER;
     }
 
     @Override
@@ -65,4 +59,9 @@ public class AppInstallerInfoPreferenceController extends AppInfoPreferenceContr
         }
     }
 
+    public void setPackageName(String packageName) {
+        mPackageName = packageName;
+        mInstallerPackage = AppStoreUtil.getInstallerPackageName(mContext, mPackageName);
+        mInstallerLabel = Utils.getApplicationLabel(mContext, mInstallerPackage);
+    }
 }

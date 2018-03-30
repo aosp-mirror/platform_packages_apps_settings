@@ -28,13 +28,10 @@ import java.util.Set;
 
 public class InstantAppDomainsPreferenceController extends AppInfoPreferenceControllerBase {
 
-    private static final String KEY_INSTANT_APP_SUPPORTED_LINKS =
-            "instant_app_launch_supported_domain_urls";
-
     private PackageManager mPackageManager;
 
-    public InstantAppDomainsPreferenceController(Context context, AppInfoDashboardFragment parent) {
-        super(context, parent, KEY_INSTANT_APP_SUPPORTED_LINKS);
+    public InstantAppDomainsPreferenceController(Context context, String key) {
+        super(context, key);
         mPackageManager = mContext.getPackageManager();
     }
 

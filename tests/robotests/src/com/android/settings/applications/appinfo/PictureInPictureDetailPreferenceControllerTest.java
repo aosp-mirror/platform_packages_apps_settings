@@ -52,8 +52,10 @@ public class PictureInPictureDetailPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
 
-        mController = spy(
-                new PictureInPictureDetailPreferenceController(mContext, mFragment, "Package1"));
+        mController = spy(new PictureInPictureDetailPreferenceController(mContext, "test_key"));
+        mController.setPackageName("Package1");
+        mController.setParentFragment(mFragment);
+
         final String key = mController.getPreferenceKey();
         when(mPreference.getKey()).thenReturn(key);
     }
@@ -63,7 +65,7 @@ public class PictureInPictureDetailPreferenceControllerTest {
         doReturn(false).when(mController).hasPictureInPictureActivites();
 
         assertThat(mController.getAvailabilityStatus())
-            .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
+                .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
     }
 
     @Test
@@ -71,7 +73,7 @@ public class PictureInPictureDetailPreferenceControllerTest {
         doReturn(true).when(mController).hasPictureInPictureActivites();
 
         assertThat(mController.getAvailabilityStatus())
-            .isEqualTo(BasePreferenceController.AVAILABLE);
+                .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 
     @Test

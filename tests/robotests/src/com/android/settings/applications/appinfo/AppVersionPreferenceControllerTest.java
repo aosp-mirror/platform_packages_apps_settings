@@ -48,7 +48,8 @@ public class AppVersionPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = new AppVersionPreferenceController(mContext, mFragment);
+        mController = new AppVersionPreferenceController(mContext, "test_key");
+        mController.setParentFragment(mFragment);
     }
 
     @Test

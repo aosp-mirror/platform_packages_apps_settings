@@ -32,16 +32,14 @@ import com.android.settings.core.BasePreferenceController;
 public abstract class AppInfoPreferenceControllerBase extends BasePreferenceController
         implements AppInfoDashboardFragment.Callback {
 
-    protected final AppInfoDashboardFragment mParent;
-    private final Class<? extends SettingsPreferenceFragment> mDetailFragmenClass;
-
+    protected AppInfoDashboardFragment mParent;
     protected Preference mPreference;
 
-    public AppInfoPreferenceControllerBase(Context context, AppInfoDashboardFragment parent,
-            String preferenceKey) {
+    private final Class<? extends SettingsPreferenceFragment> mDetailFragmentClass;
+
+    public AppInfoPreferenceControllerBase(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mParent = parent;
-        mDetailFragmenClass = getDetailFragmentClass();
+        mDetailFragmentClass = getDetailFragmentClass();
     }
 
     @Override
@@ -57,9 +55,9 @@ public abstract class AppInfoPreferenceControllerBase extends BasePreferenceCont
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (TextUtils.equals(preference.getKey(), mPreferenceKey) && mDetailFragmenClass != null) {
+        if (TextUtils.equals(preference.getKey(), mPreferenceKey) && mDetailFragmentClass != null) {
             AppInfoDashboardFragment.startAppInfoFragment(
-                    mDetailFragmenClass, -1, getArguments(), mParent, mParent.getAppEntry());
+                    mDetailFragmentClass, -1, getArguments(), mParent, mParent.getAppEntry());
             return true;
         }
         return false;
@@ -68,6 +66,11 @@ public abstract class AppInfoPreferenceControllerBase extends BasePreferenceCont
     @Override
     public void refreshUi() {
         updateState(mPreference);
+    }
+
+    public void setParentFragment(AppInfoDashboardFragment parent) {
+        mParent = parent;
+        parent.addToCallbackList(this);
     }
 
     /**

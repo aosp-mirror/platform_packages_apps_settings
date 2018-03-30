@@ -74,7 +74,9 @@ public class AppInstallerInfoPreferenceControllerTest {
         when(mPackageManager.getInstallerPackageName(anyString())).thenReturn(installerPackage);
         when(mPackageManager.getApplicationInfo(eq(installerPackage), anyInt()))
                 .thenReturn(mAppInfo);
-        mController = new AppInstallerInfoPreferenceController(mContext, mFragment, "Package1");
+        mController = new AppInstallerInfoPreferenceController(mContext, "test_key");
+        mController.setPackageName("Package1");
+        mController.setParentFragment(mFragment);
     }
 
     @Test
@@ -82,7 +84,7 @@ public class AppInstallerInfoPreferenceControllerTest {
         when(mUserManager.isManagedProfile()).thenReturn(true);
 
         assertThat(mController.getAvailabilityStatus())
-            .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
+                .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
     }
 
     @Test
@@ -90,17 +92,19 @@ public class AppInstallerInfoPreferenceControllerTest {
         when(mUserManager.isManagedProfile()).thenReturn(false);
 
         assertThat(mController.getAvailabilityStatus())
-            .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
+                .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
     }
 
     @Test
     public void getAvailabilityStatus_hasAppLabel_shouldReturnAvailable() {
         when(mUserManager.isManagedProfile()).thenReturn(false);
         when(mAppInfo.loadLabel(mPackageManager)).thenReturn("Label1");
-        mController = new AppInstallerInfoPreferenceController(mContext, mFragment, "Package1");
+        mController = new AppInstallerInfoPreferenceController(mContext, "test_key");
+        mController.setPackageName("Package1");
+        mController.setParentFragment(mFragment);
 
         assertThat(mController.getAvailabilityStatus())
-            .isEqualTo(BasePreferenceController.AVAILABLE);
+                .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 
     @Test

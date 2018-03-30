@@ -19,17 +19,11 @@ package com.android.settings.applications.appinfo;
 import android.content.Context;
 
 import com.android.settings.widget.PreferenceCategoryController;
-import com.android.settingslib.core.AbstractPreferenceController;
-
-import java.util.List;
 
 public class AppInstallerPreferenceCategoryController extends PreferenceCategoryController {
 
-    private static final String KEY_APP_INSTALLER_INFO_CATEGORY = "app_installer";
-
-    public AppInstallerPreferenceCategoryController(Context context,
-            List<AbstractPreferenceController> childrenControllers) {
-        super(context, KEY_APP_INSTALLER_INFO_CATEGORY, childrenControllers);
+    public AppInstallerPreferenceCategoryController(Context context, String key) {
+        super(context, key);
     }
 
 }

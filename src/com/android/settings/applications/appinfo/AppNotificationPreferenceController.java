@@ -29,14 +29,18 @@ import com.android.settingslib.applications.ApplicationsState;
 
 public class AppNotificationPreferenceController extends AppInfoPreferenceControllerBase {
 
-    private static final String KEY_NOTIFICATION = "notification_settings";
     private String mChannelId = null;
 
     // Used for updating notification preference.
     private final NotificationBackend mBackend = new NotificationBackend();
 
-    public AppNotificationPreferenceController(Context context, AppInfoDashboardFragment parent) {
-        super(context, parent, KEY_NOTIFICATION);
+    public AppNotificationPreferenceController(Context context, String key) {
+        super(context, key);
+    }
+
+    @Override
+    public void setParentFragment(AppInfoDashboardFragment parent) {
+        super.setParentFragment(parent);
         if (parent != null && parent.getActivity() != null
                 && parent.getActivity().getIntent() != null) {
             mChannelId = parent.getActivity().getIntent().getStringExtra(EXTRA_FRAGMENT_ARG_KEY);
@@ -62,6 +66,7 @@ public class AppNotificationPreferenceController extends AppInfoPreferenceContro
         }
         return bundle;
     }
+
 
     private CharSequence getNotificationSummary(ApplicationsState.AppEntry appEntry,
             Context context, NotificationBackend backend) {
