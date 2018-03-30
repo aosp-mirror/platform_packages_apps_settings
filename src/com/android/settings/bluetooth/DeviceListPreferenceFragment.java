@@ -280,6 +280,9 @@ public abstract class DeviceListPreferenceFragment extends
     @Override
     public void onActiveDeviceChanged(CachedBluetoothDevice activeDevice, int bluetoothProfile) { }
 
+    @Override
+    public void onProfileAudioStateChanged(int bluetoothProfile, int state) { }
+
     /**
      * Return the key of the {@link PreferenceGroup} that contains the bluetooth devices
      */
