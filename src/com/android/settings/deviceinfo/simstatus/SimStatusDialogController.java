@@ -17,6 +17,7 @@
 package com.android.settings.deviceinfo.simstatus;
 
 import static android.content.Context.CARRIER_CONFIG_SERVICE;
+import static android.content.Context.EUICC_SERVICE;
 import static android.content.Context.TELEPHONY_SERVICE;
 
 import android.Manifest;
@@ -39,13 +40,13 @@ import android.telephony.SignalStrength;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.telephony.euicc.EuiccManager;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.settings.R;
-import com.android.settings.wrapper.EuiccManagerWrapper;
 import com.android.settingslib.DeviceInfoUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -101,7 +102,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     private final SubscriptionInfo mSubscriptionInfo;
     private final TelephonyManager mTelephonyManager;
     private final CarrierConfigManager mCarrierConfigManager;
-    private final EuiccManagerWrapper mEuiccManager;
+    private final EuiccManager mEuiccManager;
     private final Resources mRes;
     private final Context mContext;
 
@@ -137,7 +138,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
                 TELEPHONY_SERVICE);
         mCarrierConfigManager = (CarrierConfigManager) mContext.getSystemService(
                 CARRIER_CONFIG_SERVICE);
-        mEuiccManager = new EuiccManagerWrapper(mContext);
+        mEuiccManager = (EuiccManager) mContext.getSystemService(EUICC_SERVICE);
 
         mRes = mContext.getResources();
 
