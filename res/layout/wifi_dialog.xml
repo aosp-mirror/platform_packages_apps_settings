@@ -15,6 +15,7 @@
 -->
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/dialog_scrollview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fadeScrollbars="false"
@@ -599,6 +600,33 @@
                             android:text="@string/wifi_shared"
                             android:checked="true" />
                 </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout android:id="@+id/hidden_settings_field"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          style="@style/wifi_item">
+
+                <TextView android:id="@+id/hidden_settings_title"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/wifi_item_label"
+                          android:text="@string/wifi_hidden_network" />
+
+                <Spinner android:id="@+id/hidden_settings"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         style="@style/wifi_item_spinner"
+                         android:prompt="@string/wifi_hidden_network"
+                         android:entries="@array/wifi_hidden_entries"/>
+
+                <TextView android:id="@+id/hidden_settings_warning"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:padding="8dp"
+                          android:text="@string/wifi_hidden_network_warning"
+                          android:textAppearance="?android:attr/textAppearanceSmall"
+                          android:visibility="gone"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
