@@ -21,18 +21,16 @@
     android:key="smart_battery_detail"
     android:title="@string/smart_battery_manager_title">
 
-    <!-- TODO(b/71722498): Add header back, otherwise also remove smart_battery_header
-    <com.android.settings.applications.LayoutPreference
-        android:key="header_view"
-        android:layout="@layout/smart_battery_header"
-        android:selectable="false"
-        android:order="-10000"/>
-     -->
+    <com.android.settings.widget.VideoPreference
+        android:key="auto_awesome_battery"
+        settings:animation="@raw/auto_awesome_battery"
+        settings:preview="@drawable/auto_awesome_battery"/>
 
     <SwitchPreference
         android:key="smart_battery"
         android:title="@string/smart_battery_title"
-        android:summary="@string/smart_battery_summary"/>
+        android:summary="@string/smart_battery_summary"
+        settings:allowDividerAbove="true"/>
 
     <SwitchPreference
         android:key="auto_restriction"

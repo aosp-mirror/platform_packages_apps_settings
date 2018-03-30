@@ -41,7 +41,7 @@ public class AspectRatioFrameLayoutTest {
     }
 
     @Test
-    public void measure_squareAspectRatio_stretchHeight() {
+    public void measure_squareAspectRatio_squeezeWidth() {
         mLayout = new AspectRatioFrameLayout(mContext);
 
         int widthMeasureSpec = View.MeasureSpec.makeMeasureSpec(100, View.MeasureSpec.EXACTLY);
@@ -49,8 +49,8 @@ public class AspectRatioFrameLayoutTest {
 
         mLayout.measure(widthMeasureSpec, heightMeasureSpec);
 
-        assertThat(mLayout.getMeasuredWidth()).isEqualTo(100);
-        assertThat(mLayout.getMeasuredHeight()).isEqualTo(100);
+        assertThat(mLayout.getMeasuredWidth()).isEqualTo(50);
+        assertThat(mLayout.getMeasuredHeight()).isEqualTo(50);
     }
 
     @Test
