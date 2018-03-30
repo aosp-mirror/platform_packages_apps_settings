@@ -32,7 +32,7 @@ import android.telephony.ServiceState;
 import android.telephony.TelephonyManager;
 
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.wrapper.RestrictedLockUtilsWrapper;
+import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -74,9 +74,8 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
     }
 
     public boolean isUserRestricted() {
-        final RestrictedLockUtilsWrapper wrapper = new RestrictedLockUtilsWrapper();
         return mIsSecondaryUser ||
-                wrapper.hasBaseUserRestriction(
+                RestrictedLockUtils.hasBaseUserRestriction(
                         mContext,
                         DISALLOW_CONFIG_MOBILE_NETWORKS,
                         myUserId());
