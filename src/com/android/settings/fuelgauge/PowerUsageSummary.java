@@ -105,6 +105,8 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
     SparseArray<List<Anomaly>> mAnomalySparseArray;
     @VisibleForTesting
     BatteryHeaderPreferenceController mBatteryHeaderPreferenceController;
+    @VisibleForTesting
+    boolean mNeedUpdateBatteryTip;
     private BatteryTipPreferenceController mBatteryTipPreferenceController;
     private int mStatsType = BatteryStats.STATS_SINCE_CHARGED;
 
@@ -211,6 +213,8 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
         mAnomalySparseArray = new SparseArray<>();
 
         restartBatteryInfoLoader();
+        mNeedUpdateBatteryTip = icicle == null;
+        mBatteryTipPreferenceController.restoreInstanceState(icicle);
     }
 
     @Override
@@ -291,7 +295,12 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
             return;
         }
 
-        restartBatteryTipLoader();
+        // Only skip BatteryTipLoader for the first time when device is rotated
+        if (mNeedUpdateBatteryTip) {
+            restartBatteryTipLoader();
+        } else {
+            mNeedUpdateBatteryTip = true;
+        }
 
         // reload BatteryInfo and updateUI
         restartBatteryInfoLoader();
@@ -383,6 +392,12 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
     @Override
     protected void restartBatteryStatsLoader() {
         restartBatteryStatsLoader(true /* clearHeader */);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mBatteryTipPreferenceController.saveInstanceState(outState);
     }
 
     void restartBatteryStatsLoader(boolean clearHeader) {

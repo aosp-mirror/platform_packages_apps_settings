@@ -149,6 +149,13 @@ public class RestrictAppTipTest {
     }
 
     @Test
+    public void update_handledAnomlayBecomeInvisible_stateInvisible() {
+        mHandledBatteryTip.updateState(mInvisibleBatteryTip);
+
+        assertThat(mHandledBatteryTip.getState()).isEqualTo(BatteryTip.StateType.INVISIBLE);
+    }
+
+    @Test
     public void update_newAnomalyComes_stateNew() {
         mInvisibleBatteryTip.updateState(mNewBatteryTip);
         assertThat(mInvisibleBatteryTip.getState()).isEqualTo(BatteryTip.StateType.NEW);
