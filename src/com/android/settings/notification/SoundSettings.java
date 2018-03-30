@@ -229,7 +229,7 @@ public class SoundSettings extends DashboardFragment {
         controllers.add(bootSoundPreferenceController);
         controllers.add(emergencyTonePreferenceController);
         controllers.add(new PreferenceCategoryController(context,
-                "other_sounds_and_vibrations_category",
+                "other_sounds_and_vibrations_category").setChildren(
                 Arrays.asList(dialPadTonePreferenceController,
                         screenLockSoundPreferenceController,
                         chargingSoundPreferenceController,

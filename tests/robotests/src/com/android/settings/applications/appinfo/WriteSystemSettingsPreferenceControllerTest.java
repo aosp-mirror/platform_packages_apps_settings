@@ -57,7 +57,8 @@ public class WriteSystemSettingsPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
-        mController = spy(new WriteSystemSettingsPreferenceController(mContext, mFragment));
+        mController = spy(new WriteSystemSettingsPreferenceController(mContext, "test_key"));
+        mController.setParentFragment(mFragment);
         final String key = mController.getPreferenceKey();
         when(mPreference.getKey()).thenReturn(key);
     }

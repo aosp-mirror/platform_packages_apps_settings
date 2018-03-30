@@ -20,23 +20,6 @@
     android:key="connected_devices_advanced_screen"
     android:title="@string/connected_device_connections_title">
 
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="toggle_bluetooth_switch"
-        android:title="@string/bluetooth_settings_title"
-        android:icon="@drawable/ic_settings_bluetooth"
-        android:summary="@string/bluetooth_pref_summary"
-        android:order="-7"
-        settings:controller="com.android.settings.bluetooth.BluetoothSwitchPreferenceController"
-        settings:userRestriction="no_bluetooth"
-        settings:platform_slice="true"/>
-
-    <SwitchPreference
-        android:key="toggle_nfc"
-        android:title="@string/nfc_quick_toggle_title"
-        android:icon="@drawable/ic_nfc"
-        android:summary="@string/nfc_quick_toggle_summary"
-        android:order="-5"/>
-
     <com.android.settingslib.RestrictedPreference
         android:fragment="com.android.settings.nfc.AndroidBeam"
         android:key="android_beam_settings"
@@ -63,7 +46,7 @@
     <Preference
         android:key="bt_received_files"
         android:icon="@drawable/ic_folder_vd_theme_24"
-        android:title="@string/bluetooth_show_received_files" />
+        android:title="@string/bluetooth_show_received_files"/>
 
     <PreferenceCategory
         android:key="dashboard_tile_placeholder"

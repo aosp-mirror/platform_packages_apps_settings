@@ -128,8 +128,8 @@ public class SecuritySettings extends DashboardFragment {
         securityPreferenceControllers.add(new FingerprintStatusPreferenceController(context));
         securityPreferenceControllers.add(new LockScreenPreferenceController(context, lifecycle));
         securityPreferenceControllers.add(new ChangeScreenLockPreferenceController(context, host));
-        controllers.add(new PreferenceCategoryController(context, SECURITY_CATEGORY,
-                securityPreferenceControllers));
+        controllers.add(new PreferenceCategoryController(context, SECURITY_CATEGORY)
+                .setChildren(securityPreferenceControllers));
         controllers.addAll(securityPreferenceControllers);
 
         final List<AbstractPreferenceController> profileSecurityControllers = new ArrayList<>();
@@ -139,8 +139,8 @@ public class SecuritySettings extends DashboardFragment {
         profileSecurityControllers.add(new VisiblePatternProfilePreferenceController(
                 context, lifecycle));
         profileSecurityControllers.add(new FingerprintProfileStatusPreferenceController(context));
-        controllers.add(new PreferenceCategoryController(context, WORK_PROFILE_SECURITY_CATEGORY,
-                profileSecurityControllers));
+        controllers.add(new PreferenceCategoryController(context, WORK_PROFILE_SECURITY_CATEGORY)
+                .setChildren(profileSecurityControllers));
         controllers.addAll(profileSecurityControllers);
 
         return controllers;

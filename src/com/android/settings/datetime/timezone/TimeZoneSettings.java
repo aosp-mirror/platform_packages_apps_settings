@@ -102,15 +102,12 @@ public class TimeZoneSettings extends DashboardFragment {
         RegionZonePreferenceController regionZonePreferenceController =
                 new RegionZonePreferenceController(context);
         regionZonePreferenceController.setOnClickListener(this::onRegionZonePreferenceClicked);
-        TimeZoneInfoPreferenceController timeZoneInfoPreferenceController =
-                new TimeZoneInfoPreferenceController(context);
         FixedOffsetPreferenceController fixedOffsetPreferenceController =
                 new FixedOffsetPreferenceController(context);
         fixedOffsetPreferenceController.setOnClickListener(this::startFixedOffsetPicker);
 
         controllers.add(regionPreferenceController);
         controllers.add(regionZonePreferenceController);
-        controllers.add(timeZoneInfoPreferenceController);
         controllers.add(fixedOffsetPreferenceController);
         return controllers;
     }

@@ -63,7 +63,6 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.gateway.SettingsGateway;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardSummary;
-import com.android.settings.development.DevelopmentSettingsDashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.DeviceIndexFeatureProvider;
 import com.android.settings.wfd.WifiDisplaySettings;
@@ -83,7 +82,7 @@ public class SettingsActivity extends SettingsDrawerActivity
         PreferenceFragment.OnPreferenceStartFragmentCallback,
         ButtonBarHandler, FragmentManager.OnBackStackChangedListener {
 
-    private static final String LOG_TAG = "Settings";
+    private static final String LOG_TAG = "SettingsActivity";
 
     // Constants for state save/restore
     private static final String SAVE_KEY_CATEGORIES = ":settings:categories";
@@ -234,6 +233,7 @@ public class SettingsActivity extends SettingsDrawerActivity
     @Override
     protected void onCreate(Bundle savedState) {
         super.onCreate(savedState);
+        Log.d(LOG_TAG, "Starting onCreate");
         long startTime = System.currentTimeMillis();
 
         final FeatureFactory factory = FeatureFactory.getFactory(this);
@@ -396,6 +396,7 @@ public class SettingsActivity extends SettingsDrawerActivity
     }
 
     private void setTitleFromIntent(Intent intent) {
+        Log.d(LOG_TAG, "Starting to set activity title");
         final int initialTitleResId = intent.getIntExtra(EXTRA_SHOW_FRAGMENT_TITLE_RESID, -1);
         if (initialTitleResId > 0) {
             mInitialTitle = null;
@@ -423,6 +424,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             mInitialTitle = (initialTitle != null) ? initialTitle : getTitle();
             setTitle(mInitialTitle);
         }
+        Log.d(LOG_TAG, "Done setting title");
     }
 
     @Override
@@ -577,6 +579,7 @@ public class SettingsActivity extends SettingsDrawerActivity
      */
     private Fragment switchToFragment(String fragmentName, Bundle args, boolean validate,
             boolean addToBackStack, int titleResId, CharSequence title, boolean withTransition) {
+        Log.d(LOG_TAG, "Switching to fragment " + fragmentName);
         if (validate && !isValidFragment(fragmentName)) {
             throw new IllegalArgumentException("Invalid fragment for this activity: "
                     + fragmentName);
@@ -597,6 +600,7 @@ public class SettingsActivity extends SettingsDrawerActivity
         }
         transaction.commitAllowingStateLoss();
         getFragmentManager().executePendingTransactions();
+        Log.d(LOG_TAG, "Executed frag manager pendingTransactions");
         return f;
     }
 
@@ -626,12 +630,13 @@ public class SettingsActivity extends SettingsDrawerActivity
         final boolean isAdmin = um.isAdminUser();
         final FeatureFactory featureFactory = FeatureFactory.getFactory(this);
         boolean somethingChanged = false;
-        String packageName = getPackageName();
-        somethingChanged = setTileEnabled(
+        final String packageName = getPackageName();
+        final StringBuilder changedList = new StringBuilder();
+        somethingChanged = setTileEnabled(changedList,
                 new ComponentName(packageName, WifiSettingsActivity.class.getName()),
                 pm.hasSystemFeature(PackageManager.FEATURE_WIFI), isAdmin) || somethingChanged;
 
-        somethingChanged = setTileEnabled(new ComponentName(packageName,
+        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.BluetoothSettingsActivity.class.getName()),
                 pm.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH), isAdmin)
                 || somethingChanged;
@@ -639,59 +644,51 @@ public class SettingsActivity extends SettingsDrawerActivity
 
         // Enable DataUsageSummaryActivity if the data plan feature flag is turned on otherwise
         // enable DataPlanUsageSummaryActivity.
-        somethingChanged = setTileEnabled(
+        somethingChanged = setTileEnabled(changedList,
                 new ComponentName(packageName, Settings.DataUsageSummaryActivity.class.getName()),
                 Utils.isBandwidthControlEnabled() /* enabled */,
                 isAdmin) || somethingChanged;
 
-        somethingChanged = setTileEnabled(
+        somethingChanged = setTileEnabled(changedList,
                 new ComponentName(packageName,
                         Settings.ConnectedDeviceDashboardActivity.class.getName()),
                 !UserManager.isDeviceInDemoMode(this) /* enabled */,
                 isAdmin) || somethingChanged;
 
-        somethingChanged = setTileEnabled(new ComponentName(packageName,
+        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.SimSettingsActivity.class.getName()),
                 Utils.showSimCardTile(this), isAdmin)
                 || somethingChanged;
 
-        final boolean isBatterySettingsV2Enabled = featureFactory
-                .getPowerUsageFeatureProvider(this)
-                .isBatteryV2Enabled();
-        // Enable new battery page if v2 enabled
-        somethingChanged = setTileEnabled(new ComponentName(packageName,
+        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.PowerUsageSummaryActivity.class.getName()),
-                mBatteryPresent && isBatterySettingsV2Enabled, isAdmin) || somethingChanged;
-        // Enable legacy battery page if v2 disabled
-        somethingChanged = setTileEnabled(new ComponentName(packageName,
-                        Settings.PowerUsageSummaryLegacyActivity.class.getName()),
-                mBatteryPresent && !isBatterySettingsV2Enabled, isAdmin) || somethingChanged;
+                mBatteryPresent, isAdmin) || somethingChanged;
 
         final boolean isDataUsageSettingsV2Enabled =
                 FeatureFlagUtils.isEnabled(this, FeatureFlags.DATA_USAGE_SETTINGS_V2);
         // Enable new data usage page if v2 enabled
-        somethingChanged = setTileEnabled(new ComponentName(packageName,
+        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.DataUsageSummaryActivity.class.getName()),
                 Utils.isBandwidthControlEnabled() && isDataUsageSettingsV2Enabled, isAdmin)
                 || somethingChanged;
         // Enable legacy data usage page if v2 disabled
-        somethingChanged = setTileEnabled(new ComponentName(packageName,
+        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.DataUsageSummaryLegacyActivity.class.getName()),
                 Utils.isBandwidthControlEnabled() && !isDataUsageSettingsV2Enabled, isAdmin)
                 || somethingChanged;
 
-        somethingChanged = setTileEnabled(new ComponentName(packageName,
+        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.UserSettingsActivity.class.getName()),
                 UserHandle.MU_ENABLED && UserManager.supportsMultipleUsers()
                         && !Utils.isMonkeyRunning(), isAdmin)
                 || somethingChanged;
 
-        somethingChanged = setTileEnabled(new ComponentName(packageName,
+        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.NetworkDashboardActivity.class.getName()),
                 !UserManager.isDeviceInDemoMode(this), isAdmin)
                 || somethingChanged;
 
-        somethingChanged = setTileEnabled(new ComponentName(packageName,
+        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.DateTimeSettingsActivity.class.getName()),
                 !UserManager.isDeviceInDemoMode(this), isAdmin)
                 || somethingChanged;
@@ -699,17 +696,17 @@ public class SettingsActivity extends SettingsDrawerActivity
         final boolean showDev = DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(this)
                 && !Utils.isMonkeyRunning();
         final boolean isAdminOrDemo = um.isAdminUser() || um.isDemoUser();
-        somethingChanged = setTileEnabled(new ComponentName(packageName,
+        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.DevelopmentSettingsDashboardActivity.class.getName()),
                 showDev, isAdminOrDemo)
                 || somethingChanged;
 
         // Enable/disable backup settings depending on whether the user is admin.
-        somethingChanged = setTileEnabled(new ComponentName(packageName,
+        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                 BackupSettingsActivity.class.getName()), true, isAdmin)
                 || somethingChanged;
 
-        somethingChanged = setTileEnabled(new ComponentName(packageName,
+        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.WifiDisplaySettingsActivity.class.getName()),
                 WifiDisplaySettings.isAvailable(this), isAdmin)
                 || somethingChanged;
@@ -718,11 +715,11 @@ public class SettingsActivity extends SettingsDrawerActivity
         final boolean aboutPhoneV2Enabled = featureFactory
                 .getAccountFeatureProvider()
                 .isAboutPhoneV2Enabled(this);
-        somethingChanged = setTileEnabled(new ComponentName(packageName,
+        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.MyDeviceInfoActivity.class.getName()),
                 aboutPhoneV2Enabled, isAdmin)
                 || somethingChanged;
-        somethingChanged = setTileEnabled(new ComponentName(packageName,
+        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.DeviceInfoSettingsActivity.class.getName()),
                 !aboutPhoneV2Enabled, isAdmin)
                 || somethingChanged;
@@ -743,8 +740,9 @@ public class SettingsActivity extends SettingsDrawerActivity
                                 .equals(name));
                         if (packageName.equals(component.getPackageName())
                                 && !isEnabledForRestricted) {
-                            somethingChanged = setTileEnabled(component, false, isAdmin)
-                                    || somethingChanged;
+                            somethingChanged =
+                                    setTileEnabled(changedList, component, false, isAdmin)
+                                            || somethingChanged;
                         }
                     }
                 }
@@ -753,7 +751,8 @@ public class SettingsActivity extends SettingsDrawerActivity
 
         // Final step, refresh categories.
         if (somethingChanged) {
-            Log.d(LOG_TAG, "Enabled state changed for some tiles, reloading all categories");
+            Log.d(LOG_TAG, "Enabled state changed for some tiles, reloading all categories "
+                    + changedList.toString());
             updateCategories();
         } else {
             Log.d(LOG_TAG, "No enabled state changed, skipping updateCategory call");
@@ -763,13 +762,18 @@ public class SettingsActivity extends SettingsDrawerActivity
     /**
      * @return whether or not the enabled state actually changed.
      */
-    private boolean setTileEnabled(ComponentName component, boolean enabled, boolean isAdmin) {
+    private boolean setTileEnabled(StringBuilder changedList, ComponentName component,
+            boolean enabled, boolean isAdmin) {
         if (UserHandle.MU_ENABLED && !isAdmin && getPackageName().equals(component.getPackageName())
                 && !ArrayUtils.contains(SettingsGateway.SETTINGS_FOR_RESTRICTED,
                 component.getClassName())) {
             enabled = false;
         }
-        return setTileEnabled(component, enabled);
+        boolean changed = setTileEnabled(component, enabled);
+        if (changed) {
+            changedList.append(component.toShortString()).append(",");
+        }
+        return changed;
     }
 
     private void getMetaData() {

@@ -141,7 +141,7 @@ public class BatteryAppListPreferenceControllerTest {
 
         mPreferenceController.setUsageSummary(mPreference, mNormalBatterySipper);
 
-        assertThat(mPreference.getSummary().toString()).isEqualTo("Used for 2m");
+        assertThat(mPreference.getSummary().toString()).isEqualTo("Used for 2 min");
     }
 
     @Test
@@ -152,7 +152,7 @@ public class BatteryAppListPreferenceControllerTest {
 
         mPreferenceController.setUsageSummary(mPreference, mNormalBatterySipper);
 
-        assertThat(mPreference.getSummary().toString()).isEqualTo("2m");
+        assertThat(mPreference.getSummary().toString()).isEqualTo("2 min");
     }
 
     @Test
@@ -163,7 +163,7 @@ public class BatteryAppListPreferenceControllerTest {
 
         mPreferenceController.setUsageSummary(mPreference, mNormalBatterySipper);
 
-        assertThat(mPreference.getSummary().toString()).isEqualTo("2m");
+        assertThat(mPreference.getSummary().toString()).isEqualTo("2 min");
     }
 
     @Test

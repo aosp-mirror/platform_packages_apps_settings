@@ -22,16 +22,14 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
-import android.content.pm.ServiceInfo;
 import android.media.AudioManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.Vibrator;
-import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.notification.VolumeSeekBarPreference.Callback;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -99,7 +97,7 @@ public class RingVolumePreferenceController extends VolumeSeekBarPreferenceContr
 
     @Override
     public int getMuteIcon() {
-        return com.android.internal.R.drawable.ic_audio_ring_notif_mute;
+        return R.drawable.ic_volume_ringer_vibrate;
     }
 
     private void updateRingerMode() {

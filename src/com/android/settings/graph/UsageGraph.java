@@ -185,6 +185,10 @@ public class UsageGraph extends View {
             int x = paths.keyAt(i);
             int y = paths.valueAt(i);
             if (y == PATH_DELIM) {
+                if (i == 1) {
+                    localPaths.put(getX(x+1) - 1, getY(0));
+                    continue;
+                }
                 if (i == paths.size() - 1 && skippedLastPoint) {
                     // Add back skipped point to complete the path.
                     localPaths.put(lx, ly);

@@ -31,7 +31,6 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.AppStorageSettings;
 import com.android.settings.applications.FetchPackageStorageAsyncLoader;
 import com.android.settingslib.applications.StorageStatsSource;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
@@ -40,15 +39,10 @@ public class AppStoragePreferenceController extends AppInfoPreferenceControllerB
         implements LoaderManager.LoaderCallbacks<StorageStatsSource.AppStorageStats>,
         LifecycleObserver, OnResume, OnPause {
 
-    private static final String KEY_STORAGE = "storage_settings";
     private StorageStatsSource.AppStorageStats mLastResult;
 
-    public AppStoragePreferenceController(Context context, AppInfoDashboardFragment parent,
-            Lifecycle lifecycle) {
-        super(context, parent, KEY_STORAGE);
-        if (lifecycle != null) {
-            lifecycle.addObserver(this);
-        }
+    public AppStoragePreferenceController(Context context, String key) {
+        super(context, key);
     }
 
     @Override

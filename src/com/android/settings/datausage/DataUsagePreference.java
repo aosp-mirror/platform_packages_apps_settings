@@ -56,11 +56,19 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
         DataUsageController controller = new DataUsageController(getContext());
         DataUsageController.DataUsageInfo usageInfo = controller.getDataUsageInfo(mTemplate);
         if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.DATA_USAGE_SETTINGS_V2)) {
-          setTitle(getContext().getString(R.string.app_cellular_data_usage));
+            if (mTemplate.isMatchRuleMobile()) {
+                setTitle(getContext().getString(R.string.app_cellular_data_usage));
+            } else {
+                setTitle(mTitleRes);
+                setSummary(getContext().getString(R.string.data_usage_template,
+                        Formatter.formatFileSize(getContext(), usageInfo.usageLevel),
+                                usageInfo.period));
+            }
         } else {
-          setTitle(getContext().getString(R.string.cellular_data_usage));
-          setSummary(getContext().getString(R.string.data_usage_template,
-                  Formatter.formatFileSize(getContext(), usageInfo.usageLevel), usageInfo.period));
+            setTitle(mTitleRes);
+            setSummary(getContext().getString(R.string.data_usage_template,
+                    Formatter.formatFileSize(getContext(), usageInfo.usageLevel),
+                            usageInfo.period));
         }
         setIntent(getIntent());
     }
@@ -75,13 +83,17 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
                 .setDestination(DataUsageList.class.getName())
                 .setSourceMetricsCategory(MetricsProto.MetricsEvent.VIEW_UNKNOWN);
         if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.DATA_USAGE_SETTINGS_V2)) {
-          launcher.setTitle(getContext().getString(R.string.app_cellular_data_usage));
+            if (mTemplate.isMatchRuleMobile()) {
+                launcher.setTitle(getContext().getString(R.string.app_cellular_data_usage));
+            } else {
+                launcher.setTitle(mTitleRes);
+            }
         } else {
-          if (mTitleRes > 0) {
-            launcher.setTitle(mTitleRes);
-          } else {
-            launcher.setTitle(getTitle());
-          }
+            if (mTitleRes > 0) {
+                launcher.setTitle(mTitleRes);
+            } else {
+                launcher.setTitle(getTitle());
+            }
         }
         return launcher.toIntent();
     }

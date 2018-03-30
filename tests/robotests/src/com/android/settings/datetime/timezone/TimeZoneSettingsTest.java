@@ -16,6 +16,10 @@
 
 package com.android.settings.datetime.timezone;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import com.android.settings.datetime.timezone.model.TimeZoneData;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
@@ -29,10 +33,6 @@ import org.robolectric.annotation.Config;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {
@@ -60,10 +60,9 @@ public class TimeZoneSettingsTest {
         TimeZoneSettings settings = new TimeZoneSettings();
         List<AbstractPreferenceController> controllers =
                 settings.createPreferenceControllers(RuntimeEnvironment.application);
-        assertThat(controllers).hasSize(4);
+        assertThat(controllers).hasSize(3);
         assertThat(controllers.get(0)).isInstanceOf(RegionPreferenceController.class);
         assertThat(controllers.get(1)).isInstanceOf(RegionZonePreferenceController.class);
-        assertThat(controllers.get(2)).isInstanceOf(TimeZoneInfoPreferenceController.class);
-        assertThat(controllers.get(3)).isInstanceOf(FixedOffsetPreferenceController.class);
+        assertThat(controllers.get(2)).isInstanceOf(FixedOffsetPreferenceController.class);
     }
 }

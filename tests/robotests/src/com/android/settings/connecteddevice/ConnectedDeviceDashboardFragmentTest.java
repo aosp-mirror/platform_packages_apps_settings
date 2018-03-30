@@ -30,6 +30,7 @@ import android.content.pm.PackageManager;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
+import com.android.settings.nfc.NfcPreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowBluetoothPan;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
@@ -77,6 +78,7 @@ public class ConnectedDeviceDashboardFragmentTest {
         final List<String> niks = ConnectedDeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
                 .getNonIndexableKeys(mContext);
 
-        assertThat(niks).containsExactly(KEY_CONNECTED_DEVICES, KEY_SAVED_DEVICES);
+        assertThat(niks).containsExactly(KEY_CONNECTED_DEVICES, KEY_SAVED_DEVICES,
+                NfcPreferenceController.KEY_TOGGLE_NFC);
     }
 }

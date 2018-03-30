@@ -54,8 +54,9 @@ public class ExternalSourceDetailPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
-        mController = spy(
-                new ExternalSourceDetailPreferenceController(mContext, mFragment, "Package1"));
+        mController = spy(new ExternalSourceDetailPreferenceController(mContext, "test_key"));
+        mController.setPackageName("Package1");
+        mController.setParentFragment(mFragment);
         final String key = mController.getPreferenceKey();
         when(mPreference.getKey()).thenReturn(key);
     }
@@ -65,7 +66,7 @@ public class ExternalSourceDetailPreferenceControllerTest {
         when(mUserManager.isManagedProfile()).thenReturn(true);
 
         assertThat(mController.getAvailabilityStatus())
-            .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
+                .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
     }
 
     @Test
@@ -74,7 +75,7 @@ public class ExternalSourceDetailPreferenceControllerTest {
         doReturn(false).when(mController).isPotentialAppSource();
 
         assertThat(mController.getAvailabilityStatus())
-            .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
+                .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
     }
 
     @Test
@@ -83,7 +84,7 @@ public class ExternalSourceDetailPreferenceControllerTest {
         doReturn(true).when(mController).isPotentialAppSource();
 
         assertThat(mController.getAvailabilityStatus())
-            .isEqualTo(BasePreferenceController.AVAILABLE);
+                .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 
     @Test

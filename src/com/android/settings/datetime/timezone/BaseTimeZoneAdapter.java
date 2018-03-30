@@ -18,6 +18,8 @@ package com.android.settings.datetime.timezone;
 
 import android.icu.text.BreakIterator;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -39,66 +41,113 @@ import java.util.Locale;
  * {@class AdapterItem} must be provided when an instance is created.
  */
 public class BaseTimeZoneAdapter<T extends BaseTimeZoneAdapter.AdapterItem>
-        extends RecyclerView.Adapter<BaseTimeZoneAdapter.ItemViewHolder> {
+        extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    @VisibleForTesting
+    static final int TYPE_HEADER = 0;
+    @VisibleForTesting
+    static final int TYPE_ITEM = 1;
 
     private final List<T> mOriginalItems;
-    private final OnListItemClickListener mOnListItemClickListener;
+    private final OnListItemClickListener<T> mOnListItemClickListener;
     private final Locale mLocale;
     private final boolean mShowItemSummary;
+    private final boolean mShowHeader;
+    private final CharSequence mHeaderText;
 
     private List<T> mItems;
     private ArrayFilter mFilter;
 
-    public BaseTimeZoneAdapter(List<T> items, OnListItemClickListener
-            onListItemClickListener, Locale locale, boolean showItemSummary) {
+    /**
+     * @param headerText the text shown in the header, or null to show no header.
+     */
+    public BaseTimeZoneAdapter(List<T> items, OnListItemClickListener<T> onListItemClickListener,
+            Locale locale, boolean showItemSummary, @Nullable CharSequence headerText) {
         mOriginalItems = items;
         mItems = items;
         mOnListItemClickListener = onListItemClickListener;
         mLocale = locale;
         mShowItemSummary = showItemSummary;
+        mShowHeader = headerText != null;
+        mHeaderText = headerText;
         setHasStableIds(true);
     }
 
     @NonNull
     @Override
-    public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        final View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.time_zone_search_item, parent, false);
-        return new ItemViewHolder(view, mOnListItemClickListener);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        switch(viewType) {
+            case TYPE_HEADER: {
+                final View view = inflater.inflate(R.layout.preference_category_material_settings,
+                        parent, false);
+                return new HeaderViewHolder(view);
+            }
+            case TYPE_ITEM: {
+                final View view = inflater.inflate(R.layout.time_zone_search_item, parent, false);
+                return new ItemViewHolder(view, mOnListItemClickListener);
+            }
+            default:
+                throw new IllegalArgumentException("Unexpected viewType: " + viewType);
+        }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
-        final AdapterItem item = mItems.get(position);
-        holder.mSummaryFrame.setVisibility(
-                mShowItemSummary ? View.VISIBLE : View.GONE);
-        holder.mTitleView.setText(item.getTitle());
-        holder.mIconTextView.setText(item.getIconText());
-        holder.mSummaryView.setText(item.getSummary());
-        holder.mTimeView.setText(item.getCurrentTime());
-        holder.setPosition(position);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof HeaderViewHolder) {
+            ((HeaderViewHolder) holder).setText(mHeaderText);
+        } else if (holder instanceof ItemViewHolder) {
+            ItemViewHolder<T> itemViewHolder = (ItemViewHolder<T>) holder;
+            itemViewHolder.setAdapterItem(getDataItem(position));
+            itemViewHolder.mSummaryFrame.setVisibility(mShowItemSummary ? View.VISIBLE : View.GONE);
+        }
     }
 
     @Override
     public long getItemId(int position) {
-        return getItem(position).getItemId();
+        // Data item can't have negative id
+        return isPositionHeader(position) ? -1 : getDataItem(position).getItemId();
     }
 
     @Override
     public int getItemCount() {
-        return mItems.size();
+        return mItems.size() + getHeaderCount();
     }
 
-    public  @NonNull
-    Filter getFilter() {
+    @Override
+    public int getItemViewType(int position) {
+        return isPositionHeader(position) ? TYPE_HEADER : TYPE_ITEM;
+    }
+
+    /*
+     * Avoid being overridden by making the method final, since constructor shouldn't invoke
+     * overridable method.
+     */
+    @Override
+    public final void setHasStableIds(boolean hasStableIds) {
+        super.setHasStableIds(hasStableIds);
+    }
+
+    private int getHeaderCount() {
+        return mShowHeader ? 1 : 0;
+    }
+
+    private boolean isPositionHeader(int position) {
+        return mShowHeader && position == 0;
+    }
+
+    public @NonNull ArrayFilter getFilter() {
         if (mFilter == null) {
             mFilter = new ArrayFilter();
         }
         return mFilter;
     }
 
-    public T getItem(int position) {
-        return mItems.get(position);
+    /**
+     * @throws IndexOutOfBoundsException if the view type at the position is a header
+     */
+    @VisibleForTesting
+    public T getDataItem(int position) {
+        return mItems.get(position - getHeaderCount());
     }
 
     public interface AdapterItem {
@@ -106,22 +155,40 @@ public class BaseTimeZoneAdapter<T extends BaseTimeZoneAdapter.AdapterItem>
         CharSequence getSummary();
         String getIconText();
         String getCurrentTime();
+
+        /**
+         * @return unique non-negative number
+         */
         long getItemId();
         String[] getSearchKeys();
     }
 
-    public static class ItemViewHolder extends RecyclerView.ViewHolder
-            implements View.OnClickListener{
+    private static class HeaderViewHolder extends RecyclerView.ViewHolder {
+        private final TextView mTextView;
 
-        final OnListItemClickListener mOnListItemClickListener;
+        public HeaderViewHolder(View itemView) {
+            super(itemView);
+            mTextView = itemView.findViewById(android.R.id.title);
+        }
+
+        public void setText(CharSequence text) {
+            mTextView.setText(text);
+        }
+    }
+
+    @VisibleForTesting
+    public static class ItemViewHolder<T extends BaseTimeZoneAdapter.AdapterItem>
+            extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        final OnListItemClickListener<T> mOnListItemClickListener;
         final View mSummaryFrame;
         final TextView mTitleView;
         final TextView mIconTextView;
         final TextView mSummaryView;
         final TextView mTimeView;
-        private int mPosition;
+        private T mItem;
 
-        public ItemViewHolder(View itemView, OnListItemClickListener onListItemClickListener) {
+        public ItemViewHolder(View itemView, OnListItemClickListener<T> onListItemClickListener) {
             super(itemView);
             itemView.setOnClickListener(this);
             mSummaryFrame = itemView.findViewById(R.id.summary_frame);
@@ -132,13 +199,17 @@ public class BaseTimeZoneAdapter<T extends BaseTimeZoneAdapter.AdapterItem>
             mOnListItemClickListener = onListItemClickListener;
         }
 
-        public void setPosition(int position) {
-            mPosition = position;
+        public void setAdapterItem(T item) {
+            mItem = item;
+            mTitleView.setText(item.getTitle());
+            mIconTextView.setText(item.getIconText());
+            mSummaryView.setText(item.getSummary());
+            mTimeView.setText(item.getCurrentTime());
         }
 
         @Override
         public void onClick(View v) {
-            mOnListItemClickListener.onListItemClick(mPosition);
+            mOnListItemClickListener.onListItemClick(mItem);
         }
     }
 
@@ -151,7 +222,8 @@ public class BaseTimeZoneAdapter<T extends BaseTimeZoneAdapter.AdapterItem>
      * require additional pre-processing. Potentially, a trie structure can be used to match
      * prefixes of the search keys.
      */
-    private class ArrayFilter extends Filter {
+    @VisibleForTesting
+    public class ArrayFilter extends Filter {
 
         private BreakIterator mBreakIterator = BreakIterator.getWordInstance(mLocale);
 
@@ -197,8 +269,9 @@ public class BaseTimeZoneAdapter<T extends BaseTimeZoneAdapter.AdapterItem>
             return results;
         }
 
+        @VisibleForTesting
         @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
+        public void publishResults(CharSequence constraint, FilterResults results) {
             mItems = (List<T>) results.values;
             notifyDataSetChanged();
         }

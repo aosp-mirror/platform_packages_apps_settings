@@ -106,6 +106,7 @@ public class DashboardSummary extends InstrumentedFragment
     public void onCreate(Bundle savedInstanceState) {
         long startTime = System.currentTimeMillis();
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "Starting DashboardSummary");
         final Activity activity = getActivity();
         mDashboardFeatureProvider = FeatureFactory.getFactory(activity)
                 .getDashboardFeatureProvider(activity);

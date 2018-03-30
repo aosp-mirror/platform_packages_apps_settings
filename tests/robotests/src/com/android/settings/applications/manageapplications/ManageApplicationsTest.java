@@ -22,6 +22,8 @@ import static com.android.settings.applications.manageapplications.AppFilterRegi
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_MAIN;
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_NOTIFICATION;
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
@@ -263,6 +265,42 @@ public class ManageApplicationsTest {
 
         adapter.mOnScrollListener.onScrollStateChanged(recyclerView, SCROLL_STATE_IDLE);
         verify(adapter).notifyDataSetChanged();
+    }
+
+    @Test
+    public void applicationsAdapter_onBindViewHolder_updateSwitch_notifications() {
+        ManageApplications manageApplications = mock(ManageApplications.class);
+        manageApplications.mListType = LIST_TYPE_NOTIFICATION;
+        ApplicationViewHolder holder = mock(ApplicationViewHolder.class);
+        ReflectionHelpers.setField(holder, "itemView", mock(View.class));
+        ManageApplications.ApplicationsAdapter adapter =
+                new ManageApplications.ApplicationsAdapter(mState,
+                        manageApplications, mock(AppFilterItem.class),
+                        mock(Bundle.class));
+        final ArrayList<ApplicationsState.AppEntry> appList = new ArrayList<>();
+        appList.add(mock(ApplicationsState.AppEntry.class));
+        ReflectionHelpers.setField(adapter, "mEntries", appList);
+
+        adapter.onBindViewHolder(holder, 0);
+        verify(holder).updateSwitch(any(), anyBoolean(), anyBoolean());
+    }
+
+    @Test
+    public void applicationsAdapter_onBindViewHolder_updateSwitch_notNotifications() {
+        ManageApplications manageApplications = mock(ManageApplications.class);
+        manageApplications.mListType = LIST_TYPE_MAIN;
+        ApplicationViewHolder holder = mock(ApplicationViewHolder.class);
+        ReflectionHelpers.setField(holder, "itemView", mock(View.class));
+        ManageApplications.ApplicationsAdapter adapter =
+                new ManageApplications.ApplicationsAdapter(mState,
+                        manageApplications, mock(AppFilterItem.class),
+                        mock(Bundle.class));
+        final ArrayList<ApplicationsState.AppEntry> appList = new ArrayList<>();
+        appList.add(mock(ApplicationsState.AppEntry.class));
+        ReflectionHelpers.setField(adapter, "mEntries", appList);
+
+        adapter.onBindViewHolder(holder, 0);
+        verify(holder, never()).updateSwitch(any(), anyBoolean(), anyBoolean());
     }
 
     private void setUpOptionMenus() {

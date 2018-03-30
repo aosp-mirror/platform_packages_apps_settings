@@ -63,8 +63,8 @@ public class AppDataUsagePreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application.getApplicationContext());
-        mController = spy(
-                new AppDataUsagePreferenceController(mContext, mFragment, null /* lifecycle */));
+        mController = spy(new AppDataUsagePreferenceController(mContext, "test_key"));
+        mController.setParentFragment(mFragment);
     }
 
     @Test

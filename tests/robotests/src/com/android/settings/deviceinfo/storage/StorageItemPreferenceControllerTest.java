@@ -217,8 +217,10 @@ public class StorageItemPreferenceControllerTest {
     @Test
     public void testClickFiles() {
         when(mSvp.findEmulatedForPrivate(nullable(VolumeInfo.class))).thenReturn(mVolume);
+        when(mVolume.buildBrowseIntent()).thenReturn(new Intent());
         mPreference.setKey("pref_files");
-        mController.handlePreferenceTreeClick(mPreference);
+        assertThat(mController.handlePreferenceTreeClick(mPreference))
+            .isTrue();
 
         final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
         verify(mFragment.getActivity()).startActivityAsUser(argumentCaptor.capture(),

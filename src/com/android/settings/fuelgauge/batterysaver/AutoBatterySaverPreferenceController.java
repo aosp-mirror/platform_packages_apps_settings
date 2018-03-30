@@ -18,10 +18,8 @@ package com.android.settings.fuelgauge.batterysaver;
 import android.content.Context;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.TogglePreferenceController;
 
 /**
@@ -29,14 +27,24 @@ import com.android.settings.core.TogglePreferenceController;
  */
 public class AutoBatterySaverPreferenceController extends TogglePreferenceController implements
         Preference.OnPreferenceChangeListener {
-    private final int mDefWarnLevel;
+
+    /**
+     * Default value for {@link Settings.Global#LOW_POWER_MODE_TRIGGER_LEVEL}.
+     */
+    static final int DEFAULT_TRIGGER_LEVEL = 0;
+
+    /**
+     * The default value to set to {@link Settings.Global#LOW_POWER_MODE_TRIGGER_LEVEL} when the
+     * user enables battery saver.
+     */
+    private final int mDefaultTriggerLevelForOn;
 
     @VisibleForTesting
     static final String KEY_AUTO_BATTERY_SAVER = "auto_battery_saver";
 
     public AutoBatterySaverPreferenceController(Context context) {
         super(context, KEY_AUTO_BATTERY_SAVER);
-        mDefWarnLevel = mContext.getResources().getInteger(
+        mDefaultTriggerLevelForOn = mContext.getResources().getInteger(
                 com.android.internal.R.integer.config_lowBatteryWarningLevel);
     }
 
@@ -48,7 +56,7 @@ public class AutoBatterySaverPreferenceController extends TogglePreferenceContro
     @Override
     public boolean isChecked() {
         return Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, mDefWarnLevel) != 0;
+                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, DEFAULT_TRIGGER_LEVEL) != 0;
     }
 
     @Override
@@ -56,7 +64,7 @@ public class AutoBatterySaverPreferenceController extends TogglePreferenceContro
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL,
                 isChecked
-                        ? mDefWarnLevel
+                        ? mDefaultTriggerLevelForOn
                         : 0);
         return true;
     }

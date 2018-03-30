@@ -17,23 +17,19 @@
 package com.android.settings.applications.appinfo;
 
 import android.content.Context;
-import android.support.v7.preference.Preference;
 import android.text.BidiFormatter;
 
 import com.android.settings.R;
 
 public class AppVersionPreferenceController extends AppInfoPreferenceControllerBase {
 
-    private static final String KEY_VERSION = "app_version";
-
-    public AppVersionPreferenceController(Context context, AppInfoDashboardFragment parent) {
-        super(context, parent, KEY_VERSION);
+    public AppVersionPreferenceController(Context context, String key) {
+        super(context, key);
     }
 
     @Override
-    public void updateState(Preference preference) {
-        preference.setSummary(mContext.getString(R.string.version_text,
-                BidiFormatter.getInstance().unicodeWrap(mParent.getPackageInfo().versionName)));
+    public CharSequence getSummary() {
+        return mContext.getString(R.string.version_text,
+                BidiFormatter.getInstance().unicodeWrap(mParent.getPackageInfo().versionName));
     }
-
 }

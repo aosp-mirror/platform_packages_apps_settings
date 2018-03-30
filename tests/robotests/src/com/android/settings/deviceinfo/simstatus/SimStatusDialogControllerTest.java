@@ -16,23 +16,40 @@
 
 package com.android.settings.deviceinfo.simstatus;
 
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.CELL_DATA_NETWORK_TYPE_VALUE_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.CELL_VOICE_NETWORK_TYPE_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
+        .CELL_DATA_NETWORK_TYPE_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
+        .CELL_VOICE_NETWORK_TYPE_VALUE_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.EID_INFO_VALUE_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.ICCID_INFO_LABEL_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.ICCID_INFO_VALUE_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.NETWORK_PROVIDER_VALUE_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.OPERATOR_INFO_LABEL_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.OPERATOR_INFO_VALUE_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.PHONE_NUMBER_VALUE_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.ROAMING_INFO_VALUE_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.SERVICE_STATE_VALUE_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.SIGNAL_STRENGTH_LABEL_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.SIGNAL_STRENGTH_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
+        .ICCID_INFO_LABEL_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
+        .ICCID_INFO_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
+        .IMS_REGISTRATION_STATE_LABEL_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
+        .IMS_REGISTRATION_STATE_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
+        .NETWORK_PROVIDER_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
+        .OPERATOR_INFO_LABEL_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
+        .OPERATOR_INFO_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
+        .PHONE_NUMBER_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
+        .ROAMING_INFO_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
+        .SERVICE_STATE_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
+        .SIGNAL_STRENGTH_LABEL_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
+        .SIGNAL_STRENGTH_VALUE_ID;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -47,10 +64,10 @@ import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
 import android.telephony.SubscriptionInfo;
 import android.telephony.TelephonyManager;
+import android.telephony.euicc.EuiccManager;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.wrapper.EuiccManagerWrapper;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -83,7 +100,7 @@ public class SimStatusDialogControllerTest {
     @Mock
     private PersistableBundle mPersistableBundle;
     @Mock
-    private EuiccManagerWrapper mEuiccManager;
+    private EuiccManager mEuiccManager;
 
     private SimStatusDialogController mController;
     private Context mContext;
@@ -98,14 +115,14 @@ public class SimStatusDialogControllerTest {
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         mController = spy(new SimStatusDialogController(mDialog, mLifecycle, 0 /* phone id */));
-        mEuiccManager = spy(new EuiccManagerWrapper(mContext));
         doReturn(mServiceState).when(mController).getCurrentServiceState();
         doReturn(0).when(mController).getDbm(any());
         doReturn(0).when(mController).getAsuLevel(any());
         doReturn(mPhoneStateListener).when(mController).getPhoneStateListener();
         doReturn("").when(mController).getPhoneNumber();
         doReturn(mSignalStrength).when(mController).getSignalStrength();
-        doReturn("").when(mEuiccManager).getEid();
+
+        when(mEuiccManager.getEid()).thenReturn("");
         ReflectionHelpers.setField(mController, "mTelephonyManager", mTelephonyManager);
         ReflectionHelpers.setField(mController, "mCarrierConfigManager", mCarrierConfigManager);
         ReflectionHelpers.setField(mController, "mSubscriptionInfo", mSubscriptionInfo);
@@ -280,10 +297,56 @@ public class SimStatusDialogControllerTest {
     @Test
     public void initialize_showEid_shouldSetEidToSetting() {
         final String eid = "12351351231241";
-        doReturn(eid).when(mEuiccManager).getEid();
+        when(mEuiccManager.getEid()).thenReturn(eid);
 
         mController.initialize();
 
         verify(mDialog).setText(EID_INFO_VALUE_ID, eid);
     }
+
+    @Test
+    public void initialize_imsRegistered_shouldSetImsRegistrationStateSummaryToRegisterd() {
+        when(mPersistableBundle.getBoolean(
+            CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL)).thenReturn(true);
+        when(mTelephonyManager.isImsRegistered(anyInt())).thenReturn(true);
+
+        mController.initialize();
+
+        verify(mDialog).setText(IMS_REGISTRATION_STATE_VALUE_ID,
+            mContext.getString(R.string.ims_reg_status_registered));
+    }
+
+    @Test
+    public void initialize_imsNotRegistered_shouldSetImsRegistrationStateSummaryToNotRegisterd() {
+        when(mPersistableBundle.getBoolean(
+            CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL)).thenReturn(true);
+        when(mTelephonyManager.isImsRegistered(anyInt())).thenReturn(false);
+
+        mController.initialize();
+
+        verify(mDialog).setText(IMS_REGISTRATION_STATE_VALUE_ID,
+            mContext.getString(R.string.ims_reg_status_not_registered));
+    }
+
+    @Test
+    public void initialize_showImsRegistration_shouldNotRemoveImsRegistrationStateSetting() {
+        when(mPersistableBundle.getBoolean(
+            CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL)).thenReturn(true);
+
+        mController.initialize();
+
+        verify(mDialog, never()).removeSettingFromScreen(IMS_REGISTRATION_STATE_VALUE_ID);
+    }
+
+    @Test
+    public void initialize_doNotShowImsRegistration_shouldRemoveImsRegistrationStateSetting() {
+        when(mPersistableBundle.getBoolean(
+            CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL)).thenReturn(false);
+
+        mController.initialize();
+
+        verify(mDialog).removeSettingFromScreen(IMS_REGISTRATION_STATE_LABEL_ID);
+        verify(mDialog).removeSettingFromScreen(IMS_REGISTRATION_STATE_VALUE_ID);
+    }
+
 }

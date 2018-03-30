@@ -4045,7 +4045,7 @@
     <!-- [CHAR_LIMIT=NONE] Format to put together two unrelated items in a list when "and" is not an appropriate conjunction for these 2 items -->
     <string name="join_two_unrelated_items"><xliff:g id="first_item">%1$s</xliff:g>, <xliff:g id="second_item">%2$s</xliff:g></string>
     <!-- [CHAR_LIMIT=NONE] Format to put the last item at the end of a series of 3 or more items in a list -->
-    <string name="join_many_items_last"><xliff:g id="all_but_last_item">%1$s</xliff:g> and <xliff:g id="last_item">%2$s</xliff:g></string>
+    <string name="join_many_items_last"><xliff:g id="all_but_last_item">%1$s</xliff:g>, and <xliff:g id="last_item">%2$s</xliff:g></string>
     <!-- [CHAR_LIMIT=NONE] Format to put the first item at the start of a series of 3 or more items in a list -->
     <string name="join_many_items_first"><xliff:g id="first_item">%1$s</xliff:g>, <xliff:g id="all_but_first_and_last_item">%2$s</xliff:g></string>
     <!-- [CHAR_LIMIT=NONE] Format to put the middle items together in a series of 4 or more items in a list -->
@@ -5170,14 +5170,6 @@
     <string name="power_unaccounted">Miscellaneous</string>
     <!-- Label for power that we computed too much for -->
     <string name="power_overcounted">Over-counted</string>
-    <!-- Label for power consumed by apps [CHAR LIMIT=30] -->
-    <string name="power_apps">Apps</string>
-    <!-- Label for power consumed by services [CHAR LIMIT=30] -->
-    <string name="power_service">Services</string>
-    <!-- Label for power consumed by system [CHAR LIMIT=30] -->
-    <string name="power_system">System</string>
-    <!-- Label for power consumed by user [CHAR LIMIT=30] -->
-    <string name="power_user">Other users</string>
 
     <!-- Label for CPU usage time -->
     <string name="usage_type_cpu">CPU total</string>
@@ -7670,7 +7662,7 @@
     <string name="app_notification_override_dnd_title">Override Do Not Disturb</string>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: Override DND option description-->
-    <string name="app_notification_override_dnd_summary">Let these notifications continue to interrupt when Do Not Disturb is set to Priority Only</string>
+    <string name="app_notification_override_dnd_summary">Let these notifications continue to interrupt when Do Not Disturb is on</string>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: Visibility override option title -->
     <string name="app_notification_visibility_override_title">On lock screen</string>
@@ -9628,7 +9620,7 @@
     <string name="storage_files">Files</string>
 
     <!-- Summary of a single storage volume used space. [CHAR LIMIT=24] -->
-    <string name="storage_size_large_alternate"><xliff:g id="number" example="128">^1</xliff:g><small> <xliff:g id="unit" example="KB">^2</xliff:g></small></string>
+    <string name="storage_size_large_alternate"><xliff:g id="number" example="128">^1</xliff:g><small> <font size="20"><xliff:g id="unit" example="KB">^2</xliff:g></font></small></string>
     <!-- Summary of a single storage volume total space. [CHAR LIMIT=48]-->
     <string name="storage_volume_total">Used of <xliff:g id="total" example="32GB">%1$s</xliff:g></string>
     <!-- Follows the percent of storage used by a storage volume. Exposed inside of a donut graph. [CHAR LIMIT=7]-->
@@ -9794,8 +9786,6 @@
     <!-- Settings item summary for automatic Bluetooth on while driving preference [CHAR LIMIT=100] -->
     <string name="bluetooth_on_while_driving_summary">Turn on Bluetooth automatically when driving</string>
 
-    <!-- Title for item to go to old battery settings page when clicking [CHAR LIMIT=100] -->
-    <string name="dev_android_o_battery_settings_title">See Android 8.0 battery settings</string>
     <!-- Title for Wifi Access settings [CHAR LIMIT=35] -->
     <string name="change_wifi_state_title">Wi-Fi control</string>
 

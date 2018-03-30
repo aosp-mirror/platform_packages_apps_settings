@@ -140,7 +140,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
             mConfig.setCardLayout(holder, position);
         }
 
-        final ImageView closeButton = holder.itemView.findViewById(R.id.close_button);
+        final View closeButton = holder.itemView.findViewById(R.id.close_button);
         if (closeButton != null) {
             closeButton.setOnClickListener(v -> {
                 mSuggestionFeatureProvider.dismissSuggestion(

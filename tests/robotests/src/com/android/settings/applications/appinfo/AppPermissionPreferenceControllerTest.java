@@ -63,7 +63,10 @@ public class AppPermissionPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = new AppPermissionPreferenceController(mContext, mFragment, "Package1");
+        mController = new AppPermissionPreferenceController(mContext, "permission_settings");
+        mController.setPackageName("package1");
+        mController.setParentFragment(mFragment);
+
         when(mScreen.findPreference(any())).thenReturn(mPreference);
         final String key = mController.getPreferenceKey();
         when(mPreference.getKey()).thenReturn(key);
@@ -133,7 +136,7 @@ public class AppPermissionPreferenceControllerTest {
 
         mController.handlePreferenceTreeClick(mPreference);
 
-        verify(mActivity).startActivityForResult(argThat(intent-> intent != null &&
+        verify(mActivity).startActivityForResult(argThat(intent -> intent != null &&
                 Intent.ACTION_MANAGE_APP_PERMISSIONS.equals(intent.getAction())), anyInt());
     }
 }
