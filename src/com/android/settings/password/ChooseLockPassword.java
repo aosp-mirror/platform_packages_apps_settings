@@ -193,6 +193,7 @@ public class ChooseLockPassword extends SettingsActivity {
         private int mPasswordMinLengthToFulfillAllPolicies = 0;
         protected int mUserId;
         private boolean mHideDrawer = false;
+        private byte[] mPasswordHistoryHashFactor;
         /**
          * Password requirements that we need to verify.
          */
@@ -667,7 +668,8 @@ public class ChooseLockPassword extends SettingsActivity {
                     }
                 }
                 // Is the password recently used?
-                if (mLockPatternUtils.checkPasswordHistory(password, mUserId)) {
+                if (mLockPatternUtils.checkPasswordHistory(password, getPasswordHistoryHashFactor(),
+                        mUserId)) {
                     errorCode |= RECENTLY_USED;
                 }
             }
@@ -728,6 +730,18 @@ public class ChooseLockPassword extends SettingsActivity {
             }
 
             return errorCode;
+        }
+
+        /**
+         * Lazily compute and return the history hash factor of the current user (mUserId), used for
+         * password history check.
+         */
+        private byte[] getPasswordHistoryHashFactor() {
+            if (mPasswordHistoryHashFactor == null) {
+                mPasswordHistoryHashFactor = mLockPatternUtils.getPasswordHistoryHashFactor(
+                        mCurrentPassword, mUserId);
+            }
+            return mPasswordHistoryHashFactor;
         }
 
         public void handleNext() {
