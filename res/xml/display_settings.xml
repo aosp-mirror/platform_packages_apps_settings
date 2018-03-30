@@ -83,6 +83,7 @@
         android:key="font_size"
         android:title="@string/title_font_size"
         android:fragment="com.android.settings.accessibility.ToggleFontSizePreferenceFragment"
+        settings:controller="com.android.settings.display.FontSizePreferenceController"
         settings:keywords="@string/keywords_display_font_size" />
 
     <com.android.settings.display.ScreenZoomPreference
