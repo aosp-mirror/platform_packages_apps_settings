@@ -26,11 +26,8 @@ import com.android.settings.SettingsPreferenceFragment;
 
 public class WriteSystemSettingsPreferenceController extends AppInfoPreferenceControllerBase {
 
-    private static final String KEY = "write_settings_apps";
-
-    public WriteSystemSettingsPreferenceController(Context context,
-            AppInfoDashboardFragment parent) {
-        super(context, parent, KEY);
+    public WriteSystemSettingsPreferenceController(Context context, String prefKey) {
+        super(context, prefKey);
     }
 
     @Override

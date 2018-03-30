@@ -22,6 +22,7 @@ import static com.android.settings.slices.SettingsSliceProvider.ACTION_WIFI_CHAN
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_KEY;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_PLATFORM_DEFINED;
 
+import android.app.slice.Slice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -35,8 +36,6 @@ import android.util.Log;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SliderPreferenceController;
 import com.android.settings.core.TogglePreferenceController;
-
-import android.app.slice.Slice;
 
 import androidx.slice.core.SliceHints;
 

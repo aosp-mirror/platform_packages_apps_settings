@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,19 +17,12 @@
 package com.android.settings.applications.appinfo;
 
 import android.content.Context;
-import android.text.BidiFormatter;
 
-import com.android.settings.R;
+import com.android.settings.widget.PreferenceCategoryController;
 
-public class AppVersionPreferenceController extends AppInfoPreferenceControllerBase {
+public class AdvancedAppInfoPreferenceCategoryController extends PreferenceCategoryController {
 
-    public AppVersionPreferenceController(Context context, String key) {
+    public AdvancedAppInfoPreferenceCategoryController(Context context, String key) {
         super(context, key);
-    }
-
-    @Override
-    public CharSequence getSummary() {
-        return mContext.getString(R.string.version_text,
-                BidiFormatter.getInstance().unicodeWrap(mParent.getPackageInfo().versionName));
     }
 }

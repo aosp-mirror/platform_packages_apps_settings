@@ -61,7 +61,8 @@ public class AppOpenByDefaultPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application.getApplicationContext();
-        mController = spy(new AppOpenByDefaultPreferenceController(mContext, mFragment));
+        mController = spy(new AppOpenByDefaultPreferenceController(mContext, "preferred_app"));
+        mController.setParentFragment(mFragment);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
     }
 

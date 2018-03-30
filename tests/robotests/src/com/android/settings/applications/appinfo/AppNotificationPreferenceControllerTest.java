@@ -17,7 +17,6 @@
 package com.android.settings.applications.appinfo;
 
 import static com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY;
-
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -62,7 +61,8 @@ public class AppNotificationPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = spy(new AppNotificationPreferenceController(mContext, mFragment));
+        mController = spy(new AppNotificationPreferenceController(mContext, "test_key"));
+        mController.setParentFragment(mFragment);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         final String key = mController.getPreferenceKey();
         when(mPreference.getKey()).thenReturn(key);
@@ -99,7 +99,8 @@ public class AppNotificationPreferenceControllerTest {
         when(mFragment.getActivity()).thenReturn(activity);
         when(activity.getIntent()).thenReturn(intent);
         AppNotificationPreferenceController controller =
-                new AppNotificationPreferenceController(mContext, mFragment);
+            new AppNotificationPreferenceController(mContext, "test");
+        controller.setParentFragment(mFragment);
 
         assertThat(controller.getArguments().containsKey(EXTRA_FRAGMENT_ARG_KEY)).isTrue();
         assertThat(controller.getArguments().getString(EXTRA_FRAGMENT_ARG_KEY)).isEqualTo("test");

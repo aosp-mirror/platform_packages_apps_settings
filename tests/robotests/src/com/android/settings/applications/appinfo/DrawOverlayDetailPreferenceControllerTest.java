@@ -57,7 +57,8 @@ public class DrawOverlayDetailPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
-        mController = spy(new DrawOverlayDetailPreferenceController(mContext, mFragment));
+        mController = spy(new DrawOverlayDetailPreferenceController(mContext, "key"));
+        mController.setParentFragment(mFragment);
         final String key = mController.getPreferenceKey();
         when(mPreference.getKey()).thenReturn(key);
     }
@@ -67,7 +68,7 @@ public class DrawOverlayDetailPreferenceControllerTest {
         when(mUserManager.isManagedProfile()).thenReturn(true);
 
         assertThat(mController.getAvailabilityStatus())
-            .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
+                .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
     }
 
     @Test
@@ -76,7 +77,7 @@ public class DrawOverlayDetailPreferenceControllerTest {
         when(mFragment.getPackageInfo()).thenReturn(new PackageInfo());
 
         assertThat(mController.getAvailabilityStatus())
-            .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
+                .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
     }
 
     @Test
@@ -87,7 +88,7 @@ public class DrawOverlayDetailPreferenceControllerTest {
         when(mFragment.getPackageInfo()).thenReturn(info);
 
         assertThat(mController.getAvailabilityStatus())
-            .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
+                .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
     }
 
     @Test
@@ -98,7 +99,7 @@ public class DrawOverlayDetailPreferenceControllerTest {
         when(mFragment.getPackageInfo()).thenReturn(info);
 
         assertThat(mController.getAvailabilityStatus())
-            .isEqualTo(BasePreferenceController.AVAILABLE);
+                .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 
     @Test
