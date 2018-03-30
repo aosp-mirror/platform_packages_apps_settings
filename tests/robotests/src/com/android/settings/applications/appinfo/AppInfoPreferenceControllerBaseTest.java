@@ -102,7 +102,8 @@ public class AppInfoPreferenceControllerBaseTest {
         private boolean preferenceUpdated;
 
         private TestPreferenceController(AppInfoDashboardFragment parent) {
-            super(RuntimeEnvironment.application, parent, "TestKey");
+            super(RuntimeEnvironment.application, "TestKey");
+            setParentFragment(parent);
         }
 
         @Override

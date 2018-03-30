@@ -26,10 +26,8 @@ import com.android.settings.SettingsPreferenceFragment;
 
 public class DrawOverlayDetailPreferenceController extends AppInfoPreferenceControllerBase {
 
-    private static final String KEY = "system_alert_window";
-
-    public DrawOverlayDetailPreferenceController(Context context, AppInfoDashboardFragment parent) {
-        super(context, parent, KEY);
+    public DrawOverlayDetailPreferenceController(Context context, String key) {
+        super(context, key);
     }
 
     @Override

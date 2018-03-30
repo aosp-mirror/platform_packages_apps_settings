@@ -26,14 +26,10 @@ import com.android.settings.applications.AppStateInstallAppsBridge;
 
 public class ExternalSourceDetailPreferenceController extends AppInfoPreferenceControllerBase {
 
-    private static final String KEY = "install_other_apps";
+    private String mPackageName;
 
-    private final String mPackageName;
-
-    public ExternalSourceDetailPreferenceController(Context context,
-            AppInfoDashboardFragment parent, String packageName) {
-        super(context, parent, KEY);
-        mPackageName = packageName;
+    public ExternalSourceDetailPreferenceController(Context context, String key) {
+        super(context, key);
     }
 
     @Override
@@ -67,4 +63,7 @@ public class ExternalSourceDetailPreferenceController extends AppInfoPreferenceC
         return appState.isPotentialAppSource();
     }
 
+    public void setPackageName(String packageName) {
+        mPackageName = packageName;
+    }
 }

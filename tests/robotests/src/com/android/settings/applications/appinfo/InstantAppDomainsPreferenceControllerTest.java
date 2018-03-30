@@ -62,7 +62,7 @@ public class InstantAppDomainsPreferenceControllerTest {
     private InstantAppDomainsPreferenceController mController;
 
     @Before
-    public void setUp() throws PackageManager.NameNotFoundException {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
@@ -70,7 +70,8 @@ public class InstantAppDomainsPreferenceControllerTest {
         packageInfo.applicationInfo = mAppInfo;
         packageInfo.packageName = "Package1";
         when(mFragment.getPackageInfo()).thenReturn(packageInfo);
-        mController = new InstantAppDomainsPreferenceController(mContext, mFragment);
+        mController = new InstantAppDomainsPreferenceController(mContext, "test_key");
+        mController.setParentFragment(mFragment);
     }
 
     @Test
@@ -79,7 +80,7 @@ public class InstantAppDomainsPreferenceControllerTest {
                 (InstantAppDataProvider) (i -> false));
 
         assertThat(mController.getAvailabilityStatus())
-            .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
+                .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
     }
 
     @Test
@@ -88,12 +89,12 @@ public class InstantAppDomainsPreferenceControllerTest {
                 (InstantAppDataProvider) (i -> true));
 
         assertThat(mController.getAvailabilityStatus())
-            .isEqualTo(BasePreferenceController.AVAILABLE);
+                .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 
     @Test
     public void updateState_shouldSetPreferenceTitle() {
-        final String[] domain = { "Domain1" };
+        final String[] domain = {"Domain1"};
         final ArraySet<String> domains = new ArraySet<>();
         domains.add(domain[0]);
         final List<IntentFilterVerificationInfo> infoList = new ArrayList<>();

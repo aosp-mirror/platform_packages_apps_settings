@@ -38,7 +38,6 @@ import com.android.settings.datausage.AppDataUsage;
 import com.android.settings.datausage.DataUsageList;
 import com.android.settings.datausage.DataUsageUtils;
 import com.android.settingslib.AppItem;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
@@ -48,16 +47,11 @@ import com.android.settingslib.net.ChartDataLoader;
 public class AppDataUsagePreferenceController extends AppInfoPreferenceControllerBase
         implements LoaderManager.LoaderCallbacks<ChartData>, LifecycleObserver, OnResume, OnPause {
 
-    private static final String KEY_DATA = "data_settings";
     private ChartData mChartData;
     private INetworkStatsSession mStatsSession;
 
-    public AppDataUsagePreferenceController(Context context, AppInfoDashboardFragment parent,
-            Lifecycle lifecycle) {
-        super(context, parent, KEY_DATA);
-        if (lifecycle != null) {
-            lifecycle.addObserver(this);
-        }
+    public AppDataUsagePreferenceController(Context context,String key) {
+        super(context, key);
     }
 
     @Override

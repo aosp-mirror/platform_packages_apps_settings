@@ -44,12 +44,12 @@ public class PreferenceCategoryControllerTest {
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mChildren = new ArrayList<>();
-        mController = new PreferenceCategoryController(mContext, "pref_key", mChildren);
+        mController = new PreferenceCategoryController(mContext, "pref_key").setChildren(mChildren);
     }
 
     @Test
-    public void isAvailable_noChildren_true() {
-        assertThat(mController.isAvailable()).isTrue();
+    public void isAvailable_noChildren_false() {
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
@@ -57,6 +57,7 @@ public class PreferenceCategoryControllerTest {
         final AbstractPreferenceController child = mock(AbstractPreferenceController.class);
         when(child.isAvailable()).thenReturn(true);
         mChildren.add(child);
+        mController.setChildren(mChildren);
 
         assertThat(mController.isAvailable()).isTrue();
     }
@@ -66,6 +67,7 @@ public class PreferenceCategoryControllerTest {
         final AbstractPreferenceController child = mock(AbstractPreferenceController.class);
         when(child.isAvailable()).thenReturn(false);
         mChildren.add(child);
+        mController.setChildren(mChildren);
 
         assertThat(mController.isAvailable()).isFalse();
     }

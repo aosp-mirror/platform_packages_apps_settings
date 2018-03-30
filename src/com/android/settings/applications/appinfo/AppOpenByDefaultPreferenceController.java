@@ -32,13 +32,11 @@ import com.android.settingslib.applications.ApplicationsState;
 
 public class AppOpenByDefaultPreferenceController extends AppInfoPreferenceControllerBase {
 
-    private static final String KEY_LAUNCH = "preferred_settings";
-
     private IUsbManager mUsbManager;
     private PackageManager mPackageManager;
 
-    public AppOpenByDefaultPreferenceController(Context context, AppInfoDashboardFragment parent) {
-        super(context, parent, KEY_LAUNCH);
+    public AppOpenByDefaultPreferenceController(Context context, String key) {
+        super(context, key);
         mUsbManager = IUsbManager.Stub.asInterface(ServiceManager.getService(Context.USB_SERVICE));
         mPackageManager = context.getPackageManager();
     }
@@ -49,9 +47,9 @@ public class AppOpenByDefaultPreferenceController extends AppInfoPreferenceContr
         final ApplicationsState.AppEntry appEntry = mParent.getAppEntry();
         if (appEntry == null || appEntry.info == null) {
             mPreference.setEnabled(false);
-        } else if ((appEntry.info.flags& ApplicationInfo.FLAG_INSTALLED) == 0
-                    || !appEntry.info.enabled) {
-                mPreference.setEnabled(false);
+        } else if ((appEntry.info.flags & ApplicationInfo.FLAG_INSTALLED) == 0
+                || !appEntry.info.enabled) {
+            mPreference.setEnabled(false);
         }
     }
 
