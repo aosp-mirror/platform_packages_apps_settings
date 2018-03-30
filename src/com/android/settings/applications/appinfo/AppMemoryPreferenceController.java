@@ -109,7 +109,7 @@ public class AppMemoryPreferenceController extends BasePreferenceController
         }
 
         return DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(mContext)
-                ? AVAILABLE : DISABLED_DEPENDENT_SETTING;
+                ? AVAILABLE : DISABLED_UNSUPPORTED;
     }
 
     @Override
