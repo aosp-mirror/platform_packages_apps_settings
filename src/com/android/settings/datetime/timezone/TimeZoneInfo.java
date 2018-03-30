@@ -37,8 +37,6 @@ public class TimeZoneInfo {
     private final String mDaylightName;
     private final String mExemplarLocation;
     private final CharSequence mGmtOffset;
-    // Arbitrary id that's unique within all TimeZoneInfo objects created by a given DataLoader instance.
-    private final long mItemId;
 
     public TimeZoneInfo(Builder builder) {
         mTimeZone = builder.mTimeZone;
@@ -48,7 +46,6 @@ public class TimeZoneInfo {
         mDaylightName = builder.mDaylightName;
         mExemplarLocation = builder.mExemplarLocation;
         mGmtOffset = builder.mGmtOffset;
-        mItemId = builder.mItemId;
     }
 
     public String getId() {
@@ -79,10 +76,6 @@ public class TimeZoneInfo {
         return mGmtOffset;
     }
 
-    public long getItemId() {
-        return mItemId;
-    }
-
     public static class Builder {
         private final TimeZone mTimeZone;
         private String mGenericName;
@@ -90,7 +83,6 @@ public class TimeZoneInfo {
         private String mDaylightName;
         private String mExemplarLocation;
         private CharSequence mGmtOffset;
-        private long mItemId = -1;
 
         public Builder(TimeZone timeZone) {
             if (timeZone == null) {
@@ -124,17 +116,9 @@ public class TimeZoneInfo {
             return this;
         }
 
-        public Builder setItemId(long itemId) {
-            mItemId = itemId;
-            return this;
-        }
-
         public TimeZoneInfo build() {
             if (TextUtils.isEmpty(mGmtOffset)) {
                 throw new IllegalStateException("gmtOffset must not be empty!");
-            }
-            if (mItemId == -1) {
-                throw new IllegalStateException("ItemId not set!");
             }
             return new TimeZoneInfo(this);
         }
@@ -179,8 +163,6 @@ public class TimeZoneInfo {
                             TimeZoneNames.NameType.LONG_DAYLIGHT, mNow.getTime()))
                     .setExemplarLocation(timeZoneNames.getExemplarLocationName(id))
                     .setGmtOffset(gmtOffset)
-                    // TODO: move Item id to TimeZoneInfoAdapter
-                    .setItemId(0)
                     .build();
         }
     }
