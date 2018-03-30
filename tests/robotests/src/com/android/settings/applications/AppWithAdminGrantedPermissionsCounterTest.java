@@ -37,7 +37,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settings.wrapper.IPackageManagerWrapper;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
@@ -84,7 +83,7 @@ public final class AppWithAdminGrantedPermissionsCounterTest {
     @Mock
     private IPackageManagerWrapper mPackageManagerService;
     @Mock
-    private DevicePolicyManagerWrapper mDevicePolicyManager;
+    private DevicePolicyManager mDevicePolicyManager;
 
     private int mAppCount = -1;
     private ApplicationInfo mApp1;
@@ -214,13 +213,13 @@ public final class AppWithAdminGrantedPermissionsCounterTest {
         // * app5 uses install-time permissions. It was installed by the admin but did not request
         //        any of the permissions. It should not be counted.
         when(mPackageManager.getInstalledApplicationsAsUser(PackageManager.GET_DISABLED_COMPONENTS
-                | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS
-                | PackageManager.MATCH_ANY_USER,
+                        | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS
+                        | PackageManager.MATCH_ANY_USER,
                 MAIN_USER_ID)).thenReturn(Arrays.asList(mApp1, mApp2, mApp3, mApp4, mApp5));
         // The second user has one app installed. This app uses run-time permissions. It has been
         // granted both permissions by the admin. It should be counted.
         when(mPackageManager.getInstalledApplicationsAsUser(PackageManager.GET_DISABLED_COMPONENTS
-                | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS,
+                        | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS,
                 MANAGED_PROFILE_ID)).thenReturn(Arrays.asList(mApp6));
 
         // app3 and app5 were installed by enterprise policy.
@@ -250,7 +249,7 @@ public final class AppWithAdminGrantedPermissionsCounterTest {
     }
 
     private class AppWithAdminGrantedPermissionsCounterTestable
-        extends AppWithAdminGrantedPermissionsCounter {
+            extends AppWithAdminGrantedPermissionsCounter {
         private AppWithAdminGrantedPermissionsCounterTestable(String[] permissions) {
             super(mContext, permissions, mPackageManager, mPackageManagerService,
                     mDevicePolicyManager);
