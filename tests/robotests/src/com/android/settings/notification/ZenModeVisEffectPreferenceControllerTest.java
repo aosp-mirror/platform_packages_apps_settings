@@ -17,9 +17,14 @@
 package com.android.settings.notification;
 
 import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_BADGE;
+import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_LIGHTS;
 import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_NOTIFICATION_LIST;
 import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_PEEK;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.mock;
@@ -30,6 +35,7 @@ import static org.mockito.Mockito.when;
 
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.preference.CheckBoxPreference;
 import android.support.v7.preference.PreferenceScreen;
 
@@ -79,6 +85,27 @@ public class ZenModeVisEffectPreferenceControllerTest {
 
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mockPref);
         mController.displayPreference(mScreen);
+    }
+
+    @Test
+    public void isAvailable() {
+        // SUPPRESSED_EFFECT_PEEK is always available:
+        assertTrue(mController.isAvailable());
+
+        // SUPPRESSED_EFFECT_LIGHTS is only available if the device has an LED:
+        Context mockContext = mock(Context.class);
+        mController = new ZenModeVisEffectPreferenceController(mockContext, mock(Lifecycle.class),
+                PREF_KEY, SUPPRESSED_EFFECT_LIGHTS, PREF_METRICS, null);
+        Resources mockResources = mock(Resources.class);
+        when(mockContext.getResources()).thenReturn(mockResources);
+
+        when(mockResources.getBoolean(com.android.internal.R.bool.config_intrusiveNotificationLed))
+                .thenReturn(false); // no light
+        assertFalse(mController.isAvailable());
+
+        when(mockResources.getBoolean(com.android.internal.R.bool.config_intrusiveNotificationLed))
+                .thenReturn(true); // has light
+        assertTrue(mController.isAvailable());
     }
 
     @Test
