@@ -83,4 +83,12 @@ public class WifiMeteredPreferenceControllerTest {
 
         assertThat(mDropDownPreference.getEntry()).isEqualTo("Detect automatically");
     }
+
+    @Test
+    public void testController_resilientToNullConfig() {
+        mPreferenceController = spy(new WifiMeteredPreferenceController(mContext, null));
+
+        mPreferenceController.getMeteredOverride();
+        mPreferenceController.onPreferenceChange(mDropDownPreference, new Integer(1));
+    }
 }
