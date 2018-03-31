@@ -33,6 +33,7 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -65,6 +66,11 @@ public class LocalDeviceNameDialogFragmentTest {
 
         mFragment = spy(LocalDeviceNameDialogFragment.newInstance());
         when(mFragment.getContext()).thenReturn(mContext);
+    }
+
+    @After
+    public void tearDown() {
+        ReflectionHelpers.setStaticField(LocalBluetoothManager.class, "sInstance", null);
     }
 
     @Test
