@@ -15,28 +15,26 @@
  */
 package com.android.settings.fuelgauge;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.eq;
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.os.PowerManager;
+import android.provider.Settings;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -46,45 +44,56 @@ public class BatterySaverControllerTest {
     private Preference mBatterySaverPref;
     @Mock
     private PowerManager mPowerManager;
-    @Mock
-    private Context mContext;
-    @Mock
-    private ContentResolver mContentResolver;
 
     private BatterySaverController mBatterySaverController;
-
-    private static final String SAVER_ON_SUMMARY = "saver-on";
-    private static final String SAVER_OFF_SUMMARY = "saver-off";
+    private Context mContext;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
+        mContext = RuntimeEnvironment.application;
         mBatterySaverController = spy(new BatterySaverController(mContext));
         ReflectionHelpers.setField(mBatterySaverController, "mPowerManager", mPowerManager);
         ReflectionHelpers.setField(mBatterySaverController, "mBatterySaverPref", mBatterySaverPref);
         doNothing().when(mBatterySaverController).refreshConditionManager();
 
-        when(mContext.getContentResolver()).thenReturn(mContentResolver);
-
-        when(mContext.getString(anyInt(), any(Object.class)))
-                .thenAnswer((inv) -> "str-" + inv.getArgument(0));
-
-        when(mContext.getString(eq(R.string.battery_saver_on_summary), any(Object.class)))
-                .thenReturn(SAVER_ON_SUMMARY);
-        when(mContext.getString(eq(R.string.battery_saver_off_summary), any(Object.class)))
-                .thenReturn(SAVER_OFF_SUMMARY);
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
     }
 
     @Test
-    public void testOnPreferenceChange_onStart() {
+    public void onPreferenceChange_onStart() {
         mBatterySaverController.onStart();
-        verify(mBatterySaverPref).setSummary(eq(SAVER_OFF_SUMMARY));
+        verify(mBatterySaverPref).setSummary("Off");
     }
 
     @Test
-    public void testOnPreferenceChange_onPowerSaveModeChanged() {
+    public void onPreferenceChange_onPowerSaveModeChanged() {
         mBatterySaverController.onPowerSaveModeChanged();
-        verify(mBatterySaverPref).setSummary(eq(SAVER_OFF_SUMMARY));
+        verify(mBatterySaverPref).setSummary("Off");
+    }
+
+    @Test
+    public void getSummary_batterySaverOn_showSummaryOn() {
+        when(mPowerManager.isPowerSaveMode()).thenReturn(true);
+
+        assertThat(mBatterySaverController.getSummary()).isEqualTo("On");
+    }
+
+    @Test
+    public void getSummary_batterySaverOffButScheduled_showSummaryScheduled() {
+        when(mPowerManager.isPowerSaveMode()).thenReturn(false);
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, 15);
+
+        assertThat(mBatterySaverController.getSummary()).isEqualTo("Will turn on at 15%");
+    }
+
+    @Test
+    public void getSummary_batterySaverOff_showSummaryOff() {
+        when(mPowerManager.isPowerSaveMode()).thenReturn(false);
+
+        assertThat(mBatterySaverController.getSummary()).isEqualTo("Off");
     }
 }
