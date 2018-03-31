@@ -28,6 +28,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceGroup;
@@ -131,6 +132,21 @@ public class BatteryTipPreferenceControllerTest {
         verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
                 MetricsProto.MetricsEvent.ACTION_SUMMARY_TIP,
                 BatteryTip.StateType.NEW);
+    }
+
+    @Test
+    public void testSaveAndRestore() {
+        mBatteryTipPreferenceController.updateBatteryTips(mOldBatteryTips);
+        final Bundle bundle = new Bundle();
+        mBatteryTipPreferenceController.saveInstanceState(bundle);
+
+        final BatteryTipPreferenceController controller = new BatteryTipPreferenceController(
+                mContext, KEY_PREF, mSettingsActivity, mFragment, mBatteryTipListener);
+        controller.mPreferenceGroup = mPreferenceGroup;
+        controller.mPrefContext = mContext;
+        controller.restoreInstanceState(bundle);
+
+        assertOnlyContainsSummaryTip(mPreferenceGroup);
     }
 
     @Test
