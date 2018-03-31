@@ -19,7 +19,6 @@ package com.android.settings.password;
 import static android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PASSWORD;
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_SOMETHING;
-
 import static com.android.internal.util.Preconditions.checkNotNull;
 
 import android.annotation.Nullable;
@@ -36,7 +35,6 @@ import android.os.UserManager;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.Utils;
-import com.android.settings.wrapper.FingerprintManagerWrapper;
 
 /**
  * Business logic for {@link SetNewPasswordActivity}.
@@ -57,7 +55,8 @@ final class SetNewPasswordController {
      */
     private final int mTargetUserId;
     private final PackageManager mPackageManager;
-    @Nullable private final FingerprintManagerWrapper mFingerprintManager;
+    @Nullable
+    private final FingerprintManager mFingerprintManager;
     private final DevicePolicyManager mDevicePolicyManager;
     private final Ui mUi;
 
@@ -78,13 +77,9 @@ final class SetNewPasswordController {
         }
         // Create a wrapper of FingerprintManager for testing, see IFingerPrintManager for details.
         final FingerprintManager fingerprintManager = Utils.getFingerprintManagerOrNull(context);
-        final FingerprintManagerWrapper fingerprintManagerWrapper =
-                fingerprintManager == null
-                        ? null
-                        : new FingerprintManagerWrapper(fingerprintManager);
         return new SetNewPasswordController(userId,
                 context.getPackageManager(),
-                fingerprintManagerWrapper,
+                fingerprintManager,
                 (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE), ui);
     }
 
@@ -92,7 +87,7 @@ final class SetNewPasswordController {
     SetNewPasswordController(
             int targetUserId,
             PackageManager packageManager,
-            FingerprintManagerWrapper fingerprintManager,
+            FingerprintManager fingerprintManager,
             DevicePolicyManager devicePolicyManager,
             Ui ui) {
         mTargetUserId = targetUserId;

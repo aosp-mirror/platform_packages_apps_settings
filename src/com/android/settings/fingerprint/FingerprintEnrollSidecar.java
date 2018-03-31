@@ -29,7 +29,6 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
-import com.android.settings.wrapper.FingerprintManagerWrapper;
 
 import java.util.ArrayList;
 
@@ -47,7 +46,7 @@ public class FingerprintEnrollSidecar extends InstrumentedFragment {
     private byte[] mToken;
     private boolean mDone;
     private int mUserId;
-    private FingerprintManagerWrapper mFingerprintManager;
+    private FingerprintManager mFingerprintManager;
     private ArrayList<QueuedEvent> mQueuedEvents;
 
     private abstract class QueuedEvent {
@@ -109,7 +108,7 @@ public class FingerprintEnrollSidecar extends InstrumentedFragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        mFingerprintManager = Utils.getFingerprintManagerWrapperOrNull(activity);
+        mFingerprintManager = Utils.getFingerprintManagerOrNull(activity);
         mToken = activity.getIntent().getByteArrayExtra(
                 ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
         mUserId = activity.getIntent().getIntExtra(Intent.EXTRA_USER_ID, UserHandle.USER_NULL);

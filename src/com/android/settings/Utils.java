@@ -58,7 +58,6 @@ import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.INetworkManagementService;
-import android.os.Looper;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
@@ -75,8 +74,6 @@ import android.provider.Settings;
 import android.support.annotation.StringRes;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
-import android.support.v7.preference.PreferenceManager;
-import android.support.v7.preference.PreferenceScreen;
 import android.telephony.TelephonyManager;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -86,7 +83,6 @@ import android.text.style.TtsSpan;
 import android.util.ArraySet;
 import android.util.IconDrawableFactory;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -99,11 +95,8 @@ import com.android.internal.util.ArrayUtils;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.wrapper.DevicePolicyManagerWrapper;
-import com.android.settings.wrapper.FingerprintManagerWrapper;
-import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 
 import java.net.InetAddress;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -810,15 +803,6 @@ public final class Utils extends com.android.settingslib.Utils {
     public static FingerprintManager getFingerprintManagerOrNull(Context context) {
         if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)) {
             return (FingerprintManager) context.getSystemService(Context.FINGERPRINT_SERVICE);
-        } else {
-            return null;
-        }
-    }
-
-    public static FingerprintManagerWrapper getFingerprintManagerWrapperOrNull(Context context) {
-        FingerprintManager fingerprintManager = getFingerprintManagerOrNull(context);
-        if (fingerprintManager != null) {
-            return new FingerprintManagerWrapper(fingerprintManager);
         } else {
             return null;
         }
