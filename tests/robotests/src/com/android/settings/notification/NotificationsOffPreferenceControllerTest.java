@@ -17,20 +17,19 @@
 package com.android.settings.notification;
 
 import static android.app.NotificationManager.IMPORTANCE_NONE;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.app.NotificationChannel;
+import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.wrapper.NotificationChannelGroupWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -70,16 +69,16 @@ public class NotificationsOffPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.banned = true;
         mController.onResume(appRow, null, null, null);
-        assertTrue(mController.isAvailable());
+        assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     public void testIsAvailable_yesIfChannelGroupBlocked() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        NotificationChannelGroupWrapper group = mock(NotificationChannelGroupWrapper.class);
+        NotificationChannelGroup group = mock(NotificationChannelGroup.class);
         when(group.isBlocked()).thenReturn(true);
         mController.onResume(appRow, null, group, null);
-        assertTrue(mController.isAvailable());
+        assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
@@ -88,7 +87,7 @@ public class NotificationsOffPreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_NONE);
         mController.onResume(appRow, channel, null, null);
-        assertTrue(mController.isAvailable());
+        assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
@@ -101,22 +100,22 @@ public class NotificationsOffPreferenceControllerTest {
         Preference pref = new Preference(RuntimeEnvironment.application);
         mController.updateState(pref);
 
-        assertTrue(pref.getTitle().toString().contains("category"));
-        assertFalse(pref.isSelectable());
+        assertThat(pref.getTitle().toString()).contains("category");
+        assertThat(pref.isSelectable()).isFalse();
     }
 
     @Test
     public void testUpdateState_channelGroup() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        NotificationChannelGroupWrapper group = mock(NotificationChannelGroupWrapper.class);
+        NotificationChannelGroup group = mock(NotificationChannelGroup.class);
         when(group.isBlocked()).thenReturn(true);
         mController.onResume(appRow, null, group, null);
 
         Preference pref = new Preference(RuntimeEnvironment.application);
         mController.updateState(pref);
 
-        assertTrue(pref.getTitle().toString().contains("group"));
-        assertFalse(pref.isSelectable());
+        assertThat(pref.getTitle().toString()).contains("group");
+        assertThat(pref.isSelectable()).isFalse();
     }
 
     @Test
@@ -128,7 +127,7 @@ public class NotificationsOffPreferenceControllerTest {
         Preference pref = new Preference(RuntimeEnvironment.application);
         mController.updateState(pref);
 
-        assertTrue(pref.getTitle().toString().contains("app"));
-        assertFalse(pref.isSelectable());
+        assertThat(pref.getTitle().toString()).contains("app");
+        assertThat(pref.isSelectable()).isFalse();
     }
 }

@@ -31,7 +31,6 @@ import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.wrapper.PowerManagerWrapper;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -72,21 +71,15 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
         };
 
     public BrightnessLevelPreferenceController(Context context, Lifecycle lifecycle) {
-        this(context, lifecycle, new PowerManagerWrapper(
-                (PowerManager) context.getSystemService(Context.POWER_SERVICE)));
-    }
-
-    @VisibleForTesting
-    public BrightnessLevelPreferenceController(Context context, Lifecycle lifecycle,
-            PowerManagerWrapper powerManagerWrapper) {
         super(context);
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
-        mMinBrightness = powerManagerWrapper.getMinimumScreenBrightnessSetting();
-        mMaxBrightness = powerManagerWrapper.getMaximumScreenBrightnessSetting();
-        mMinVrBrightness = powerManagerWrapper.getMinimumScreenBrightnessForVrSetting();
-        mMaxVrBrightness = powerManagerWrapper.getMaximumScreenBrightnessForVrSetting();
+        PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+        mMinBrightness = powerManager.getMinimumScreenBrightnessSetting();
+        mMaxBrightness = powerManager.getMaximumScreenBrightnessSetting();
+        mMinVrBrightness = powerManager.getMinimumScreenBrightnessForVrSetting();
+        mMaxVrBrightness = powerManager.getMaximumScreenBrightnessForVrSetting();
         mContentResolver = mContext.getContentResolver();
     }
 

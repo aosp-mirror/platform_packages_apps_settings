@@ -12,35 +12,26 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
 
 package com.android.settings.testutils.shadow;
 
-import com.android.settings.wrapper.PowerManagerWrapper;
+import android.accessibilityservice.AccessibilityServiceInfo;
+import android.content.ComponentName;
+
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
-@Implements(PowerManagerWrapper.class)
-public class ShadowPowerManagerWrapper {
+@Implements(AccessibilityServiceInfo.class)
+public class ShadowAccessibilityServiceInfo {
+    private static ComponentName sComponentName;
 
-    @Implementation
-    public int getMinimumScreenBrightnessSetting() {
-        return 0;
+    public static void setComponentName(String componentName) {
+        sComponentName = ComponentName.unflattenFromString(componentName);
     }
 
     @Implementation
-    public int getMaximumScreenBrightnessSetting() {
-        return 0;
-    }
-
-    @Implementation
-    public int getMinimumScreenBrightnessForVrSetting() {
-        return 0;
-    }
-
-    @Implementation
-    public int getMaximumScreenBrightnessForVrSetting() {
-        return 0;
+    public ComponentName getComponentName() {
+        return sComponentName;
     }
 }
