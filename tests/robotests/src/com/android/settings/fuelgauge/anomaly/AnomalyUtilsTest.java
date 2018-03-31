@@ -28,7 +28,7 @@ import com.android.settings.fuelgauge.anomaly.action.StopAndBackgroundCheckActio
 import com.android.settings.fuelgauge.anomaly.checker.WakeLockAnomalyDetector;
 import com.android.settings.fuelgauge.anomaly.checker.WakeupAlarmAnomalyDetector;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.ShadowKeyValueListParserWrapperImpl;
+import com.android.settings.testutils.shadow.ShadowKeyValueListParser;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
@@ -43,7 +43,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = ShadowKeyValueListParserWrapperImpl.class)
+@Config(shadows = ShadowKeyValueListParser.class)
 public class AnomalyUtilsTest {
 
     private static final String PACKAGE_NAME_WAKEUP = "com.android.app1";

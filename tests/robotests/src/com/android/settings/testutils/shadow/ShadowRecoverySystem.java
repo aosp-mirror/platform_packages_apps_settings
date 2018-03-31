@@ -14,25 +14,32 @@
  * limitations under the License.
  */
 
-package com.android.settings.wrapper;
+package com.android.settings.testutils.shadow;
 
 import android.content.Context;
 import android.os.RecoverySystem;
 
-/**
- * This class replicates a subset of the {@link RecoverySystem}.
- * The interface exists so that we can use a thin wrapper around the RecoverySystem in
- * production code and a mock in tests.
- */
-public class RecoverySystemWrapper {
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
+import org.robolectric.annotation.Resetter;
 
-    /**
-     * Returns whether wipe Euicc data successfully or not.
-     *
-     * @param packageName the package name of the caller app.
-     */
-    public boolean wipeEuiccData(
-            Context context, final String packageName) {
-        return RecoverySystem.wipeEuiccData(context, packageName);
+@Implements(RecoverySystem.class)
+public class ShadowRecoverySystem {
+
+    private static int sWipeEuiccCalledCount;
+
+    @Implementation
+    public static boolean wipeEuiccData(Context context, final String packageName) {
+        sWipeEuiccCalledCount++;
+        return true;
+    }
+
+    @Resetter
+    public static void reset() {
+        sWipeEuiccCalledCount = 0;
+    }
+
+    public static int getWipeEuiccCalledCount() {
+        return sWipeEuiccCalledCount;
     }
 }

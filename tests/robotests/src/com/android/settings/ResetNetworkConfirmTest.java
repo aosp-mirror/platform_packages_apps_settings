@@ -16,55 +16,53 @@
 
 package com.android.settings;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.never;
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 
 import android.app.Activity;
-import android.content.Context;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.wrapper.RecoverySystemWrapper;
+import com.android.settings.testutils.shadow.ShadowRecoverySystem;
 
-import org.junit.Assert;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(shadows = {ShadowRecoverySystem.class})
 public class ResetNetworkConfirmTest {
 
     private Activity mActivity;
     @Mock
     private ResetNetworkConfirm mResetNetworkConfirm;
-    @Mock
-    private RecoverySystemWrapper mRecoverySystem;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mResetNetworkConfirm = spy(new ResetNetworkConfirm());
-        mRecoverySystem = spy(new RecoverySystemWrapper());
-        ResetNetworkConfirm.mRecoverySystem = mRecoverySystem;
         mActivity = Robolectric.setupActivity(Activity.class);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowRecoverySystem.reset();
     }
 
     @Test
     public void testResetNetworkData_resetEsim() {
         mResetNetworkConfirm.mEraseEsim = true;
-        doReturn(true).when(mRecoverySystem).wipeEuiccData(any(Context.class), anyString());
 
         mResetNetworkConfirm.esimFactoryReset(mActivity, "" /* packageName */);
         Robolectric.getBackgroundThreadScheduler().advanceToLastPostedRunnable();
 
-        Assert.assertNotNull(mResetNetworkConfirm.mEraseEsimTask);
-        verify(mRecoverySystem).wipeEuiccData(any(Context.class), anyString());
+        assertThat(mResetNetworkConfirm.mEraseEsimTask).isNotNull();
+        assertThat(ShadowRecoverySystem.getWipeEuiccCalledCount())
+                .isEqualTo(1);
     }
 
     @Test
@@ -73,7 +71,8 @@ public class ResetNetworkConfirmTest {
 
         mResetNetworkConfirm.esimFactoryReset(mActivity, "" /* packageName */);
 
-        Assert.assertNull(mResetNetworkConfirm.mEraseEsimTask);
-        verify(mRecoverySystem, never()).wipeEuiccData(any(Context.class), anyString());
+        assertThat(mResetNetworkConfirm.mEraseEsimTask).isNull();
+        assertThat(ShadowRecoverySystem.getWipeEuiccCalledCount())
+                .isEqualTo(0);
     }
 }
