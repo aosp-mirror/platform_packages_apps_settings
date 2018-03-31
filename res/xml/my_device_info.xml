@@ -28,26 +28,27 @@
         android:layout="@layout/settings_entity_header"
         android:selectable="false"/>
 
+    <!-- Device name -->
+    <com.android.settings.widget.ValidatedEditTextPreference
+        android:key="device_name"
+        android:order="1"
+        android:title="@string/my_device_info_device_name_preference_title"
+        android:summary="@string/summary_placeholder"/>
+
     <!-- Account name -->
     <Preference
         android:key="branded_account"
-        android:order="1"
+        android:order="2"
         android:title="@string/my_device_info_account_preference_title"
         android:summary="@string/summary_placeholder"/>
 
     <!-- Phone number -->
     <Preference
         android:key="phone_number"
-        android:order="2"
-        android:title="@string/status_number"
-        android:summary="@string/summary_placeholder"/>
-
-    <!-- Device name -->
-    <com.android.settings.widget.ValidatedEditTextPreference
-        android:key="device_name"
         android:order="3"
-        android:title="@string/my_device_info_device_name_preference_title"
-        android:summary="@string/summary_placeholder"/>
+        android:title="@string/status_number"
+        android:summary="@string/summary_placeholder"
+        android:selectable="false"/>
 
     <Preference
         android:key="emergency_info"
@@ -110,6 +111,7 @@
         android:order="34"
         android:title="@string/wifi_ip_address"
         android:summary="@string/summary_placeholder"
+        android:selectable="false"
         settings:allowDividerAbove="true"/>
 
     <!-- Wi-Fi MAC address -->
@@ -117,14 +119,16 @@
         android:key="wifi_mac_address"
         android:order="35"
         android:title="@string/status_wifi_mac_address"
-        android:summary="@string/summary_placeholder"/>
+        android:summary="@string/summary_placeholder"
+        android:selectable="false"/>
 
     <!-- Bluetooth address -->
     <Preference
         android:key="bt_address"
         android:order="36"
         android:title="@string/status_bt_address"
-        android:summary="@string/summary_placeholder"/>
+        android:summary="@string/summary_placeholder"
+        android:selectable="false"/>
 
     <!-- Safety & regulatory manual -->
     <Preference

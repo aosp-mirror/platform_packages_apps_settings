@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,35 +12,34 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
 
 package com.android.settings.testutils.shadow;
 
-import com.android.settings.wrapper.PowerManagerWrapper;
+import android.content.Context;
+import android.os.RecoverySystem;
+
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.annotation.Resetter;
 
-@Implements(PowerManagerWrapper.class)
-public class ShadowPowerManagerWrapper {
+@Implements(RecoverySystem.class)
+public class ShadowRecoverySystem {
+
+    private static int sWipeEuiccCalledCount;
 
     @Implementation
-    public int getMinimumScreenBrightnessSetting() {
-        return 0;
+    public static boolean wipeEuiccData(Context context, final String packageName) {
+        sWipeEuiccCalledCount++;
+        return true;
     }
 
-    @Implementation
-    public int getMaximumScreenBrightnessSetting() {
-        return 0;
+    @Resetter
+    public static void reset() {
+        sWipeEuiccCalledCount = 0;
     }
 
-    @Implementation
-    public int getMinimumScreenBrightnessForVrSetting() {
-        return 0;
-    }
-
-    @Implementation
-    public int getMaximumScreenBrightnessForVrSetting() {
-        return 0;
+    public static int getWipeEuiccCalledCount() {
+        return sWipeEuiccCalledCount;
     }
 }

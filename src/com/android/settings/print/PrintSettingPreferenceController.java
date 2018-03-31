@@ -29,7 +29,6 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.wrapper.PrintManagerWrapper;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
@@ -46,13 +45,15 @@ public class PrintSettingPreferenceController extends BasePreferenceController i
     private static final String KEY_PRINTING_SETTINGS = "connected_device_printing";
 
     private final PackageManager mPackageManager;
-    private PrintManagerWrapper mPrintManager;
+    private final PrintManager mPrintManager;
+
     private Preference mPreference;
 
     public PrintSettingPreferenceController(Context context) {
         super(context, KEY_PRINTING_SETTINGS);
         mPackageManager = context.getPackageManager();
-        mPrintManager = new PrintManagerWrapper(context);
+        mPrintManager = ((PrintManager) context.getSystemService(Context.PRINT_SERVICE))
+                .getGlobalPrintManagerForUser(context.getUserId());
     }
 
     @Override
@@ -69,7 +70,7 @@ public class PrintSettingPreferenceController extends BasePreferenceController i
 
     @Override
     public void onStart() {
-        mPrintManager.addPrintJobStateChanegListener(this);
+        mPrintManager.addPrintJobStateChangeListener(this);
     }
 
     @Override

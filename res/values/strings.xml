@@ -1936,7 +1936,7 @@
     <!-- Label for the hidden network status of this network -->
     <string name="wifi_hidden_network">Hidden network</string>
     <!-- Label for the warning shown to users if they try to connect to a network as "hidden" -->
-    <string name="wifi_hidden_network_warning">Hidden network might create privacy risk as this device has to broadcast this SSID name in order to connect.</string>
+    <string name="wifi_hidden_network_warning">If your router is not broadcasting a network ID but you would like to connect to it in the future, you can set the network as hidden.\n\nThis may create a security risk because your phone will regularly broadcast its signal to find the network.\n\nSetting the network as hidden will not change your router settings.</string>
     <!-- Label for the signal strength of the connection -->
     <string name="wifi_signal">Signal strength</string>
     <!-- Label for the status of the connection -->
@@ -4892,7 +4892,7 @@
     <string name="power_charge_remaining"><xliff:g id="until_charged">%1$s</xliff:g> to charge</string>
 
     <!-- Title for the background activity setting, which allows a user to control whether an app can run in the background [CHAR_LIMIT=40] -->
-    <string name="background_activity_title">Battery restrictions</string>
+    <string name="background_activity_title">Background restriction</string>
     <!-- Summary for the background activity [CHAR_LIMIT=120] -->
     <string name="background_activity_summary">Allow the app to run in the background</string>
     <!-- Summary for the background activity when it is on [CHAR_LIMIT=120] -->
@@ -4902,7 +4902,7 @@
     <!-- Summary for the background activity when it is disabled [CHAR_LIMIT=120] -->
     <string name="background_activity_summary_disabled">App not allowed to run in background</string>
     <!-- TODO: Pending UX review. Summary for the background activity when it is whitlisted [CHAR_LIMIT=120] -->
-    <string name="background_activity_summary_whitelisted">App can not be optimized for battery use</string>
+    <string name="background_activity_summary_whitelisted">Background usage can\u2019t be restricted</string>
     <!-- TODO: Pending UX review. Title for the warning dialog to show to the user when limiting background activity for an app -->
     <string name="background_activity_warning_dialog_title">Limit background activity?</string>
     <!-- TODO: Pending UX review. Text for the warning dialog to show to the user when limiting background activity for an app -->
@@ -5051,11 +5051,11 @@
         <item quantity="other">Restrict %1$d apps?</item>
     </plurals>
     <!-- Message for battery tip dialog to show the info to restrict the app [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_restrict_app_dialog_message">To save battery, stop <xliff:g id="app">%1$s</xliff:g> from using battery in the background.</string>
+    <string name="battery_tip_restrict_app_dialog_message">To save battery, stop <xliff:g id="app">%1$s</xliff:g> from using battery in the background. This app may not work properly and notifications may be delayed.</string>
     <!-- Message for battery tip dialog to show the info to restrict the app, below it app list will be shown as a view [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_restrict_apps_less_than_5_dialog_message">To save battery, stop these apps from using battery in the background.\n\nApps:\n</string>
+    <string name="battery_tip_restrict_apps_less_than_5_dialog_message">To save battery, stop these apps from using battery in the background. Restricted apps may not work properly and notifications may be delayed.\n\nApps:\n</string>
     <!-- Message for battery tip dialog to show the info to restrict the app, below it app list will be shown as raw string[CHAR LIMIT=NONE] -->
-    <string name="battery_tip_restrict_apps_more_than_5_dialog_message">To save battery, stop these apps from using battery in the background.\n\nApps:\n<xliff:g id="app_list">%1$s</xliff:g>.</string>
+    <string name="battery_tip_restrict_apps_more_than_5_dialog_message">To save battery, stop these apps from using battery in the background. Restricted apps may not work properly and notifications may be delayed.\n\nApps:\n<xliff:g id="app_list">%1$s</xliff:g>.</string>
     <!-- OK button for battery tip dialog to show the restrict app list [CHAR LIMIT=NONE] -->
     <string name="battery_tip_restrict_app_dialog_ok">Restrict</string>
     <!-- Title for dialog to remove restriction for the app [CHAR LIMIT=NONE] -->
@@ -5077,27 +5077,31 @@
     <!-- Title for the smart battery toggle [CHAR LIMIT=NONE] -->
     <string name="smart_battery_title">Manage apps automatically</string>
     <!-- Summary for the smart battery toggle [CHAR LIMIT=NONE] -->
-    <string name="smart_battery_summary">Limit battery for infrequently used apps and apps that consume battery</string>
+    <string name="smart_battery_summary">Limit battery for apps that you don\u2019t use often</string>
     <!-- Footer for the aosp smart battery page -->
-    <string name="smart_battery_footer">Battery Manager prevents apps from consuming battery when you aren\’t using them</string>
+    <string name="smart_battery_footer" product="default">When Battery Manager detects that apps are draining battery, you\u2019ll have the option to restrict these apps. Restricted apps may not work properly and notifications may be delayed.</string>
+    <!-- Footer for the aosp smart battery page -->
+    <string name="smart_battery_footer" product="tablet">When Battery Manager detects that apps are draining battery, you\u2019ll have the option to restrict these apps. Restricted apps may not work properly and notifications may be delayed.</string>
+    <!-- Footer for the aosp smart battery page -->
+    <string name="smart_battery_footer" product="device">When Battery Manager detects that apps are draining battery, you\u2019ll have the option to restrict these apps. Restricted apps may not work properly and notifications may be delayed.</string>
     <!-- Title for restricted app preference, clicking it will goes to restricted app list [CHAR LIMIT=NONE] -->
     <string name="restricted_app_title">Restricted apps</string>
     <!-- Summary for restricted app preference, clicking it will goes to restricted app list [CHAR LIMIT=NONE] -->
     <plurals name="restricted_app_summary">
-        <item quantity="one">%1$d app</item>
-        <item quantity="other">%1$d apps</item>
+        <item quantity="one">Limiting battery usage for %1$d app</item>
+        <item quantity="other">Limiting battery usage for %1$d apps</item>
     </plurals>
 
     <!-- Footer message for restrict app details page -->
     <string name="restricted_app_detail_footer">Apps shown here aren\'t behaving properly and have been using battery in the background.\n\nThese apps are now blocked from using battery in the background. As a result, some app notifications may be delayed.</string>
 
     <!-- Title for auto restriction toggle -->
-    <string name="battery_auto_restriction_title">Restrict apps automatically</string>
+    <string name="battery_auto_restriction_title">Use Battery Manager</string>
     <!-- Summary for auto restriction toggle -->
-    <string name="battery_auto_restriction_summary">Prevent apps from using extra battery in the background</string>
+    <string name="battery_auto_restriction_summary">Detect when apps drain battery</string>
 
     <!-- Summary for battery manager when it is on -->
-    <string name="battery_manager_on">On / Restricting apps automatically</string>
+    <string name="battery_manager_on">On / Detecting when apps drain battery</string>
     <!-- Summary for battery manager when it is off -->
     <string name="battery_manager_off">Off</string>
     <!-- Summary for battery manager, showing app restricted -->
@@ -5354,7 +5358,7 @@
     <string name="battery_saver_auto_title">Turn on automatically</string>
 
     <!-- Battery saver: Label for seekbar to change battery saver threshold [CHAR_LIMIT=40] -->
-    <string name="battery_saver_seekbar_title">Turn on at <xliff:g id="percent">%1$s</xliff:g></string>
+    <string name="battery_saver_seekbar_title">At <xliff:g id="percent">%1$s</xliff:g></string>
 
     <!-- Battery saver: Placeholder label for seekbar to change battery saver threshold [CHAR_LIMIT=40] -->
     <string name="battery_saver_seekbar_title_placeholder">Turn on</string>
@@ -7994,9 +7998,9 @@
     <string name="encryption_interstitial_no">No</string>
 
     <!-- Label to say yes to the question of whether app is restricted. [CHAR LIMIT=20] -->
-    <string name="restricted_true_label">On / Background usage restricted</string>
+    <string name="restricted_true_label">App can\u2019t use battery in background</string>
     <!-- Label to say no to the question of whether app is restricted. [CHAR LIMIT=20] -->
-    <string name="restricted_false_label">Off / Uses battery in background</string>
+    <string name="restricted_false_label">App can use battery in background</string>
 
     <!-- Title for encryption dialog that disables TalkBack. [CHAR_LIMIT=25] -->
     <string name="encrypt_talkback_dialog_require_pin">Require PIN?</string>
@@ -9033,7 +9037,7 @@
     </plurals>
 
     <!-- Data usage title text [CHAR LIMIT=30] -->
-    <string name="data_usage_title">Current data</string>
+    <string name="data_usage_title">Primary data</string>
 
     <!-- Data usage remaining string [CHAR LIMIT=30] -->
     <string name="data_used"><xliff:g name="bytes" example="2 GB">^1</xliff:g> used</string>
@@ -9123,16 +9127,13 @@
     <string name="suggestion_additional_fingerprints_summary">Unlock with a different finger</string>
 
     <!-- Summary of battery saver when on [CHAR LIMIT=NONE] -->
-    <string name="battery_saver_on_summary">On / <xliff:g name="automatic_state" example="Never turn on automatically">%1$s</xliff:g></string>
+    <string name="battery_saver_on_summary">On</string>
 
-    <!-- Summary of battery saver when off [CHAR LIMIT=NONE] -->
-    <string name="battery_saver_off_summary">Off / <xliff:g name="automatic_state" example="Never turn on automatically">%1$s</xliff:g></string>
+    <!-- Summary of battery saver when it is off and scheduled [CHAR LIMIT=NONE] -->
+    <string name="battery_saver_off_scheduled_summary">Will turn on at <xliff:g id="battery_percentage" example="15%">%1$s</xliff:g></string>
 
-    <!-- [CHAR_LIMIT=NONE] Battery saver: Description for automatic entry option: Never -->
-    <string name="battery_saver_desc_turn_on_auto_never">Never turn on automatically</string>
-
-    <!-- [CHAR_LIMIT=NONE] Battery saver: Description for automatic entry option: pct% battery -->
-    <string name="battery_saver_desc_turn_on_auto_pct">Turn on automatically at %1$s battery</string>
+    <!-- Summary of battery saver when it is off and scheduled [CHAR LIMIT=NONE] -->
+    <string name="battery_saver_off_summary">Off</string>
 
     <!--  Battery saver: Label for button that will turn on battery saver. [CHAR LIMIT=30] -->
     <string name="battery_saver_button_turn_on">Turn on now</string>
@@ -9848,4 +9849,6 @@
     <!--  Warning text about the visibility of device name. [CHAR LIMIT=NONE] -->
     <string name="about_phone_device_name_warning">Your device name is visible to apps on your phone. It may also be seen by other people when you connect to Bluetooth devices or set up a Wi-Fi hotspot.</string>
 
+    <!-- Title for Connected device shortcut [CHAR LIMIT=30] -->
+    <string name="devices_title">Devices</string>
 </resources>

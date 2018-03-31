@@ -37,8 +37,6 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 public class AddDevicePreferenceController extends BasePreferenceController
         implements LifecycleObserver, OnStart, OnStop {
 
-    private static final String KEY = "add_bt_devices";
-
     private Preference mPreference;
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -49,8 +47,8 @@ public class AddDevicePreferenceController extends BasePreferenceController
     private IntentFilter mIntentFilter;
     private BluetoothAdapter mBluetoothAdapter;
 
-    public AddDevicePreferenceController(Context context) {
-        super(context, KEY);
+    public AddDevicePreferenceController(Context context, String key) {
+        super(context, key);
         mIntentFilter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     }
@@ -78,11 +76,6 @@ public class AddDevicePreferenceController extends BasePreferenceController
         return mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)
                 ? AVAILABLE
                 : DISABLED_UNSUPPORTED;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY;
     }
 
     @Override

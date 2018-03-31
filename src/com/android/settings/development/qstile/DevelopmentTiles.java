@@ -34,7 +34,6 @@ import android.view.WindowManagerGlobal;
 import android.widget.Toast;
 
 import com.android.internal.app.LocalePicker;
-import com.android.settings.wrapper.IWindowManagerWrapper;
 import com.android.settingslib.development.SystemPropPoker;
 
 public abstract class DevelopmentTiles extends TileService {
@@ -150,14 +149,13 @@ public abstract class DevelopmentTiles extends TileService {
         @VisibleForTesting
         static final int SURFACE_FLINGER_LAYER_TRACE_STATUS_CODE = 1026;
         private IBinder mSurfaceFlinger;
-        private IWindowManagerWrapper mWindowManager;
+        private IWindowManager mWindowManager;
         private Toast mToast;
 
         @Override
         public void onCreate() {
             super.onCreate();
-            mWindowManager = new IWindowManagerWrapper(WindowManagerGlobal
-                    .getWindowManagerService());
+            mWindowManager = WindowManagerGlobal.getWindowManagerService();
             mSurfaceFlinger = ServiceManager.getService("SurfaceFlinger");
             Context context = getApplicationContext();
             CharSequence text = "Trace files written to /data/misc/wmtrace";

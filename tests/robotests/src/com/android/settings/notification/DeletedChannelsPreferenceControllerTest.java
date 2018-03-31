@@ -26,12 +26,11 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.NotificationChannel;
+import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
-
-import com.android.settings.wrapper.NotificationChannelGroupWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -82,7 +81,7 @@ public class DeletedChannelsPreferenceControllerTest {
     @Test
     public void isAvailable_groupScreen_never() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        mController.onResume(appRow, null, mock(NotificationChannelGroupWrapper.class), null);
+        mController.onResume(appRow, null, mock(NotificationChannelGroup.class), null);
         assertFalse(mController.isAvailable());
     }
 

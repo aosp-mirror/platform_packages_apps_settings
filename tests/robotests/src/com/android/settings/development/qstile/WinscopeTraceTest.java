@@ -16,8 +16,10 @@
 
 package com.android.settings.development.qstile;
 
-import static com.android.settings.development.qstile.DevelopmentTiles.WinscopeTrace.SURFACE_FLINGER_LAYER_TRACE_CONTROL_CODE;
-import static com.android.settings.development.qstile.DevelopmentTiles.WinscopeTrace.SURFACE_FLINGER_LAYER_TRACE_STATUS_CODE;
+import static com.android.settings.development.qstile.DevelopmentTiles.WinscopeTrace
+        .SURFACE_FLINGER_LAYER_TRACE_CONTROL_CODE;
+import static com.android.settings.development.qstile.DevelopmentTiles.WinscopeTrace
+        .SURFACE_FLINGER_LAYER_TRACE_STATUS_CODE;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -30,11 +32,11 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.view.IWindowManager;
 import android.widget.Toast;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowParcel;
-import com.android.settings.wrapper.IWindowManagerWrapper;
 
 import org.junit.After;
 import org.junit.Before;
@@ -49,7 +51,7 @@ import org.robolectric.util.ReflectionHelpers;
 public class WinscopeTraceTest {
 
     @Mock
-    private IWindowManagerWrapper mWindowManager;
+    private IWindowManager mWindowManager;
     @Mock
     private IBinder mSurfaceFlinger;
     @Mock

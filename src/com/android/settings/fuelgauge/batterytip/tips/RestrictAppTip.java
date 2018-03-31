@@ -98,6 +98,9 @@ public class RestrictAppTip extends BatteryTip {
             // If anomaly becomes invisible, show it as handled
             mState = StateType.HANDLED;
             mShowDialog = false;
+        } else {
+            mState = tip.getState();
+            mShowDialog = tip.shouldShowDialog();
         }
     }
 
