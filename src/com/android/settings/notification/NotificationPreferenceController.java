@@ -25,13 +25,11 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserManager;
-import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 
-import com.android.settings.wrapper.NotificationChannelGroupWrapper;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -41,11 +39,12 @@ import java.util.Objects;
  * Parent class for preferences appearing on notification setting pages at the app,
  * notification channel group, or notification channel level.
  */
-public abstract class NotificationPreferenceController extends AbstractPreferenceController
-{
+public abstract class NotificationPreferenceController extends AbstractPreferenceController {
     private static final String TAG = "ChannelPrefContr";
-    @Nullable protected NotificationChannel mChannel;
-    @Nullable protected NotificationChannelGroupWrapper mChannelGroup;
+    @Nullable
+    protected NotificationChannel mChannel;
+    @Nullable
+    protected NotificationChannelGroup mChannelGroup;
     protected RestrictedLockUtils.EnforcedAdmin mAdmin;
     protected NotificationBackend.AppRow mAppRow;
     protected final NotificationManager mNm;
@@ -78,7 +77,7 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
         if (mChannel != null) {
             return mChannel.getImportance() != IMPORTANCE_NONE;
         }
-        if (mChannelGroup != null && mChannelGroup.getGroup() == null) {
+        if (mChannelGroup != null) {
             return !mChannelGroup.isBlocked();
         }
         return true;
@@ -125,7 +124,7 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
     }
 
     protected void onResume(NotificationBackend.AppRow appRow,
-            @Nullable NotificationChannel channel, @Nullable NotificationChannelGroupWrapper group,
+            @Nullable NotificationChannel channel, @Nullable NotificationChannelGroup group,
             RestrictedLockUtils.EnforcedAdmin admin) {
         mAppRow = appRow;
         mChannel = channel;
@@ -172,7 +171,7 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
     }
 
     protected boolean isChannelGroupBlockable() {
-        if (mChannelGroup != null && mChannelGroup.getGroup() != null && mAppRow != null) {
+        if (mChannelGroup != null && mAppRow != null) {
             if (!mAppRow.systemApp) {
                 return true;
             }
@@ -183,6 +182,6 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
     }
 
     protected boolean hasValidGroup() {
-        return mChannelGroup != null && mChannelGroup.getGroup() != null;
+        return mChannelGroup != null;
     }
 }

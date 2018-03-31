@@ -46,7 +46,6 @@ import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.SwitchBar;
-import com.android.settings.wrapper.NotificationChannelGroupWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -113,7 +112,7 @@ public class BlockPreferenceControllerTest {
     public void testIsAvailable_notIfGroupNotBlockable() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.systemApp = true;
-        mController.onResume(appRow, null, mock(NotificationChannelGroupWrapper.class), null);
+        mController.onResume(appRow, null, mock(NotificationChannelGroup.class), null);
         assertFalse(mController.isAvailable());
     }
 
@@ -166,8 +165,7 @@ public class BlockPreferenceControllerTest {
     @Test
     public void testUpdateState_group() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        NotificationChannelGroupWrapper group = mock(NotificationChannelGroupWrapper.class);
-        when(group.getGroup()).thenReturn(mock(NotificationChannelGroup.class));
+        NotificationChannelGroup group = mock(NotificationChannelGroup.class);
         when(group.isBlocked()).thenReturn(true);
         mController.onResume(appRow, null, group, null);
         mController.updateState(mPreference);

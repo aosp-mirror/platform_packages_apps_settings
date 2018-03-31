@@ -40,7 +40,6 @@ import android.os.UserManager;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.wrapper.NotificationChannelGroupWrapper;
 import com.android.settingslib.RestrictedLockUtils;
 
 import org.junit.Before;
@@ -76,7 +75,7 @@ public class NotificationPreferenceControllerTest {
     }
 
     @Test
-    public void noCrashIfNoOnResume() throws Exception {
+    public void noCrashIfNoOnResume() {
         mController.isAvailable();
         mController.updateState(mock(Preference.class));
         assertFalse(mController.checkCanBeVisible(IMPORTANCE_UNSPECIFIED));
@@ -87,22 +86,22 @@ public class NotificationPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_notIfNull() throws Exception {
+    public void isAvailable_notIfNull() {
         mController.onResume(null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
     @Test
-    public void isAvailable_notIfAppBlocked() throws Exception {
+    public void isAvailable_notIfAppBlocked() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.banned = true;
         mController.onResume(appRow, mock(NotificationChannel.class),
-                mock(NotificationChannelGroupWrapper.class), null);
+                mock(NotificationChannelGroup.class), null);
         assertFalse(mController.isAvailable());
     }
 
     @Test
-    public void isAvailable_notIfChannelBlocked() throws Exception {
+    public void isAvailable_notIfChannelBlocked() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_NONE);
@@ -112,10 +111,10 @@ public class NotificationPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_notIfChannelGroupBlocked() throws Exception {
+    public void isAvailable_notIfChannelGroupBlocked() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
-        NotificationChannelGroupWrapper group = mock(NotificationChannelGroupWrapper.class);
+        NotificationChannelGroup group = mock(NotificationChannelGroup.class);
 
         mController.onResume(appRow, channel, group, null);
         when(group.isBlocked()).thenReturn(true);
@@ -123,11 +122,11 @@ public class NotificationPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable() throws Exception {
+    public void isAvailable() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_DEFAULT);
-        NotificationChannelGroupWrapper group = mock(NotificationChannelGroupWrapper.class);
+        NotificationChannelGroup group = mock(NotificationChannelGroup.class);
         when(group.isBlocked()).thenReturn(false);
 
         mController.onResume(appRow, channel, group, null);
@@ -135,10 +134,10 @@ public class NotificationPreferenceControllerTest {
     }
 
     @Test
-    public void testOnResume() throws Exception {
+    public void testOnResume() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
-        NotificationChannelGroupWrapper group = mock(NotificationChannelGroupWrapper.class);
+        NotificationChannelGroup group = mock(NotificationChannelGroup.class);
         RestrictedLockUtils.EnforcedAdmin admin = mock(RestrictedLockUtils.EnforcedAdmin.class);
 
         mController.onResume(appRow, channel, group, admin);
@@ -266,8 +265,7 @@ public class NotificationPreferenceControllerTest {
     public void testIsChannelGroupBlockable_nonSystemBlockable() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.systemApp = false;
-        NotificationChannelGroupWrapper group = mock(NotificationChannelGroupWrapper.class);
-        when(group.getGroup()).thenReturn(mock(NotificationChannelGroup.class));
+        NotificationChannelGroup group = mock(NotificationChannelGroup.class);
         when(group.isBlocked()).thenReturn(false);
 
         mController.onResume(appRow, null, group, null);
@@ -278,8 +276,7 @@ public class NotificationPreferenceControllerTest {
     public void testIsChannelGroupBlockable_SystemNotBlockable() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.systemApp = true;
-        NotificationChannelGroupWrapper group = mock(NotificationChannelGroupWrapper.class);
-        when(group.getGroup()).thenReturn(mock(NotificationChannelGroup.class));
+        NotificationChannelGroup group = mock(NotificationChannelGroup.class);
         when(group.isBlocked()).thenReturn(false);
 
         mController.onResume(appRow, null, group, null);
@@ -290,8 +287,7 @@ public class NotificationPreferenceControllerTest {
     public void testIsChannelGroupBlockable_canUndoSystemBlock() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.systemApp = true;
-        NotificationChannelGroupWrapper group = mock(NotificationChannelGroupWrapper.class);
-        when(group.getGroup()).thenReturn(mock(NotificationChannelGroup.class));
+        NotificationChannelGroup group = mock(NotificationChannelGroup.class);
         when(group.isBlocked()).thenReturn(true);
 
         mController.onResume(appRow, null, group, null);

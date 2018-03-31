@@ -23,11 +23,11 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiManager;
 import android.net.wifi.WifiManager.ActionListener;
 import android.os.Handler;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.wrapper.WifiManagerWrapper;
 import com.android.settingslib.wifi.AccessPoint;
 
 import org.junit.Before;
@@ -40,12 +40,18 @@ import org.robolectric.util.ReflectionHelpers;
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SavedAccessPointsWifiSettingsTest {
 
-    @Mock private WifiManagerWrapper mockWifiManager;
-    @Mock private WifiDialog mockWifiDialog;
-    @Mock private WifiConfigController mockConfigController;
-    @Mock private WifiConfiguration mockWifiConfiguration;
-    @Mock private AccessPoint mockAccessPoint;
-    @Mock private Handler mHandler;
+    @Mock
+    private WifiManager mockWifiManager;
+    @Mock
+    private WifiDialog mockWifiDialog;
+    @Mock
+    private WifiConfigController mockConfigController;
+    @Mock
+    private WifiConfiguration mockWifiConfiguration;
+    @Mock
+    private AccessPoint mockAccessPoint;
+    @Mock
+    private Handler mHandler;
 
     private SavedAccessPointsWifiSettings mSettings;
 
@@ -97,6 +103,6 @@ public class SavedAccessPointsWifiSettingsTest {
         when(mockAccessPoint.getConfig()).thenReturn(mockWifiConfiguration);
         mSettings.onForget(mockWifiDialog);
         verify(mockWifiManager)
-            .forget(eq(mockWifiConfiguration.networkId), any(ActionListener.class));
+                .forget(eq(mockWifiConfiguration.networkId), any(ActionListener.class));
     }
 }
