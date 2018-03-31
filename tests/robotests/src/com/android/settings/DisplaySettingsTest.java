@@ -6,7 +6,7 @@ import android.content.Context;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
-import com.android.settings.testutils.shadow.ShadowPowerManagerWrapper;
+import com.android.settings.testutils.shadow.ShadowPowerManager;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Test;
@@ -21,7 +21,7 @@ import java.util.List;
 public class DisplaySettingsTest {
 
     @Test
-    @Config(shadows = ShadowPowerManagerWrapper.class)
+    @Config(shadows = ShadowPowerManager.class)
     public void testPreferenceControllers_getPreferenceKeys_existInPreferenceScreen() {
         final Context context = RuntimeEnvironment.application;
         final DisplaySettings fragment = new DisplaySettings();

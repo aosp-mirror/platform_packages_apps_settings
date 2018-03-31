@@ -34,14 +34,12 @@ import android.printservice.PrintServiceInfo;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.wrapper.PrintManagerWrapper;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -55,12 +53,13 @@ import java.util.List;
 public class PrintSettingsPreferenceControllerTest {
 
     @Mock
-    private PrintManagerWrapper mPrintManager;
+    private PrintManager mPrintManager;
     @Mock
     private UserManager mUserManager;
-    private Context mContext;
     @Mock
     private RestrictedPreference mPreference;
+
+    private Context mContext;
     private PrintSettingPreferenceController mController;
     private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
@@ -83,7 +82,7 @@ public class PrintSettingsPreferenceControllerTest {
         mLifecycle.handleLifecycleEvent(ON_START);
         mLifecycle.handleLifecycleEvent(ON_STOP);
 
-        verify(mPrintManager).addPrintJobStateChanegListener(mController);
+        verify(mPrintManager).addPrintJobStateChangeListener(mController);
         verify(mPrintManager).removePrintJobStateChangeListener(mController);
     }
 

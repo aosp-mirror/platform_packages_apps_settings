@@ -56,7 +56,7 @@ public class BlockPreferenceController extends NotificationPreferenceController
         }
         if (mChannel != null) {
             return isChannelBlockable();
-        } else if (mChannelGroup != null && mChannelGroup.getGroup() != null) {
+        } else if (mChannelGroup != null) {
             return isChannelGroupBlockable();
         } else {
             return !mAppRow.systemApp || (mAppRow.systemApp && mAppRow.banned);
@@ -80,7 +80,7 @@ public class BlockPreferenceController extends NotificationPreferenceController
             if (mChannel != null) {
                 bar.setChecked(!mAppRow.banned
                         && mChannel.getImportance() != NotificationManager.IMPORTANCE_NONE);
-            } else if (mChannelGroup != null && mChannelGroup.getGroup() != null) {
+            } else if (mChannelGroup != null) {
                 bar.setChecked(!mAppRow.banned && !mChannelGroup.isBlocked());
             } else {
                 bar.setChecked(!mAppRow.banned);
@@ -107,9 +107,9 @@ public class BlockPreferenceController extends NotificationPreferenceController
                 mAppRow.banned = blocked;
                 mBackend.setNotificationsEnabledForPackage(mAppRow.pkg, mAppRow.uid, !blocked);
             }
-        } else if (mChannelGroup != null && mChannelGroup.getGroup() != null) {
+        } else if (mChannelGroup != null) {
             mChannelGroup.setBlocked(blocked);
-            mBackend.updateChannelGroup(mAppRow.pkg, mAppRow.uid, mChannelGroup.getGroup());
+            mBackend.updateChannelGroup(mAppRow.pkg, mAppRow.uid, mChannelGroup);
         } else if (mAppRow != null) {
             mAppRow.banned = blocked;
             mBackend.setNotificationsEnabledForPackage(mAppRow.pkg, mAppRow.uid, !blocked);

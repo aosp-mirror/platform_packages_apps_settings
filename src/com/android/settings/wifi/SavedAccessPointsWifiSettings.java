@@ -28,14 +28,13 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
-
 import android.widget.Toast;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.Indexable;
-import com.android.settings.wrapper.WifiManagerWrapper;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPointPreference;
 import com.android.settingslib.wifi.WifiSavedConfigUtils;
@@ -107,7 +106,7 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
     };
 
     private WifiDialog mDialog;
-    private WifiManagerWrapper mWifiManager;
+    private WifiManager mWifiManager;
     private AccessPoint mDlgAccessPoint;
     private Bundle mAccessPointSavedState;
     private AccessPoint mSelectedAccessPoint;
@@ -139,7 +138,7 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mWifiManager = new WifiManagerWrapper((WifiManager) getSystemService(Context.WIFI_SERVICE));
+        mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 
         if (savedInstanceState != null) {
             if (savedInstanceState.containsKey(SAVE_DIALOG_ACCESS_POINT_STATE)) {
@@ -154,7 +153,7 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
         final Context context = getPrefContext();
 
         final List<AccessPoint> accessPoints =
-                WifiSavedConfigUtils.getAllConfigs(context, mWifiManager.getWifiManager());
+                WifiSavedConfigUtils.getAllConfigs(context, mWifiManager);
         Collections.sort(accessPoints, SAVED_NETWORK_COMPARATOR);
         cacheRemoveAllPrefs(preferenceScreen);
 

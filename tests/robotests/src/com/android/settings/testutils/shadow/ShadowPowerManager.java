@@ -12,38 +12,36 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
  */
 
-package com.android.settings.wrapper;
+package com.android.settings.testutils.shadow;
 
 import android.os.PowerManager;
 
-/**
- * This class replicates a subset of the android.os.PowerManager. The class exists so that we can
- * use a thin wrapper around the PowerManager in production code and a mock in tests. We cannot
- * directly mock or shadow the PowerManager, because some of the methods we rely on are newer than
- * the API version supported by Robolectric or are hidden.
- */
-public class PowerManagerWrapper {
-    private final PowerManager mPowerManager;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
 
-    public PowerManagerWrapper(PowerManager powerManager) {
-        mPowerManager = powerManager;
-    }
+@Implements(PowerManager.class)
+public class ShadowPowerManager {
 
+    @Implementation
     public int getMinimumScreenBrightnessSetting() {
-        return mPowerManager.getMinimumScreenBrightnessSetting();
+        return 0;
     }
 
+    @Implementation
     public int getMaximumScreenBrightnessSetting() {
-        return mPowerManager.getMaximumScreenBrightnessSetting();
+        return 0;
     }
 
+    @Implementation
     public int getMinimumScreenBrightnessForVrSetting() {
-        return mPowerManager.getMinimumScreenBrightnessForVrSetting();
+        return 0;
     }
 
+    @Implementation
     public int getMaximumScreenBrightnessForVrSetting() {
-        return mPowerManager.getMaximumScreenBrightnessForVrSetting();
+        return 0;
     }
 }
