@@ -28,6 +28,11 @@ public class NightDisplayPreferenceController extends AbstractPreferenceControll
         super(context);
     }
 
+    public static boolean isSuggestionComplete(Context context) {
+        final ColorDisplayController controller = new ColorDisplayController(context);
+        return controller.getAutoMode() != ColorDisplayController.AUTO_MODE_DISABLED;
+    }
+
     @Override
     public boolean isAvailable() {
         return ColorDisplayController.isAvailable(mContext);
