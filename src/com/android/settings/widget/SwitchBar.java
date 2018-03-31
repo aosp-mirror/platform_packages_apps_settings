@@ -20,6 +20,7 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Rect;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.ColorInt;
@@ -29,10 +30,9 @@ import android.text.TextUtils;
 import android.text.style.TextAppearanceSpan;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.TouchDelegate;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.accessibility.AccessibilityEvent;
-import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
@@ -46,8 +46,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedChangeListener,
-        View.OnClickListener {
+public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedChangeListener {
 
     public interface OnSwitchChangeListener {
         /**
@@ -114,7 +113,6 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         a.recycle();
 
         mTextView = findViewById(R.id.switch_text);
-        mTextView.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
         mSummarySpan = new TextAppearanceSpan(mContext, R.style.TextAppearance_Small_SwitchBar);
         ViewGroup.MarginLayoutParams lp = (MarginLayoutParams) mTextView.getLayoutParams();
         lp.setMarginStart(switchBarMarginStart);
@@ -123,7 +121,6 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         // Prevent onSaveInstanceState() to be called as we are managing the state of the Switch
         // on our own
         mSwitch.setSaveEnabled(false);
-        mSwitch.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
 
         lp = (MarginLayoutParams) mSwitch.getLayoutParams();
         lp.setMarginEnd(switchBarMarginEnd);
@@ -135,8 +132,6 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
                 (switchView, isChecked) -> setTextViewLabelAndBackground(isChecked));
 
         mRestrictedIcon = findViewById(R.id.restricted_icon);
-
-        setOnClickListener(this);
 
         // Default is hide
         setVisibility(View.GONE);
@@ -231,6 +226,9 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         if (!isShowing()) {
             setVisibility(View.VISIBLE);
             mSwitch.setOnCheckedChangeListener(this);
+            // Make the entire bar work as a switch
+            post(() -> setTouchDelegate(
+                    new TouchDelegate(new Rect(0, 0, getWidth(), getHeight()), mSwitch)));
         }
     }
 
@@ -241,19 +239,15 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         }
     }
 
-    public boolean isShowing() {
-        return (getVisibility() == View.VISIBLE);
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        if ((w > 0) && (h > 0)) {
+            setTouchDelegate(new TouchDelegate(new Rect(0, 0, w, h), mSwitch));
+        }
     }
 
-    @Override
-    public void onClick(View v) {
-        if (mDisabledByAdmin) {
-            mMetricsFeatureProvider.count(mContext, mMetricsTag + "/switch_bar|restricted", 1);
-            RestrictedLockUtils.sendShowAdminSupportDetailsIntent(mContext, mEnforcedAdmin);
-        } else {
-            final boolean isChecked = !mSwitch.isChecked();
-            setChecked(isChecked);
-        }
+    public boolean isShowing() {
+        return (getVisibility() == View.VISIBLE);
     }
 
     public void propagateChecked(boolean isChecked) {
@@ -352,38 +346,5 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         mSwitch.setOnCheckedChangeListener(ss.visible ? this : null);
 
         requestLayout();
-    }
-
-    @Override
-    public CharSequence getAccessibilityClassName() {
-        return Switch.class.getName();
-    }
-
-    @Override
-    public boolean onRequestSendAccessibilityEvent(View child, AccessibilityEvent event) {
-        // Since the children are marked as not important for accessibility, re-dispatch all
-        // of their events as if they came from this view
-        event.setSource(this);
-        return true;
-    }
-
-    /** @hide */
-    @Override
-    public void onInitializeAccessibilityNodeInfoInternal(AccessibilityNodeInfo info) {
-        super.onInitializeAccessibilityNodeInfoInternal(info);
-        info.setText(mTextView.getText());
-        info.setCheckable(true);
-        info.setChecked(mSwitch.isChecked());
-    }
-
-    /** @hide */
-    @Override
-    public void onInitializeAccessibilityEventInternal(AccessibilityEvent event) {
-        super.onInitializeAccessibilityEventInternal(event);
-        // Don't say "on on" or "off off" - rather, speak the state only once. We need to specify
-        // this explicitly as each of our children (the textview and the checkbox) contribute to
-        // the state once, giving us duplicate text by default.
-        event.setContentDescription(mTextView.getText());
-        event.setChecked(mSwitch.isChecked());
     }
 }
