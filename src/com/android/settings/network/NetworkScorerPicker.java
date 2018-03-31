@@ -26,11 +26,11 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.widget.RadioButtonPreference;
-import com.android.settings.wrapper.NetworkScoreManagerWrapper;
 
 import java.util.List;
 
@@ -40,7 +40,7 @@ import java.util.List;
 public class NetworkScorerPicker extends InstrumentedPreferenceFragment implements
         RadioButtonPreference.OnClickListener {
 
-    private NetworkScoreManagerWrapper mNetworkScoreManager;
+    private NetworkScoreManager mNetworkScoreManager;
 
     @Override
     public int getMetricsCategory() {
@@ -56,12 +56,12 @@ public class NetworkScorerPicker extends InstrumentedPreferenceFragment implemen
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mNetworkScoreManager = createNetworkScorerManagerWrapper(context);
+        mNetworkScoreManager = createNetworkScorerManager(context);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
         final View view = super.onCreateView(inflater, container, savedInstanceState);
         // this is needed so the back button goes back to previous fragment
         setHasOptionsMenu(true);
@@ -138,7 +138,7 @@ public class NetworkScorerPicker extends InstrumentedPreferenceFragment implemen
     }
 
     @VisibleForTesting
-    NetworkScoreManagerWrapper createNetworkScorerManagerWrapper(Context context) {
-        return new NetworkScoreManagerWrapper(context.getSystemService(NetworkScoreManager.class));
+    NetworkScoreManager createNetworkScorerManager(Context context) {
+        return (NetworkScoreManager) context.getSystemService(Context.NETWORK_SCORE_SERVICE);
     }
 }
