@@ -18,10 +18,8 @@ package com.android.settings.dashboard.suggestions;
 
 import android.app.ActivityManager;
 import android.content.ComponentName;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.provider.Settings.Secure;
 import android.service.settings.suggestions.Suggestion;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
@@ -31,6 +29,7 @@ import android.util.Pair;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.Settings.NightDisplaySuggestionActivity;
+import com.android.settings.display.NightDisplayPreferenceController;
 import com.android.settings.fingerprint.FingerprintEnrollSuggestionActivity;
 import com.android.settings.fingerprint.FingerprintSuggestionActivity;
 import com.android.settings.overlay.FeatureFactory;
@@ -86,7 +85,7 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
         } else if (className.equals(WifiCallingSuggestionActivity.class.getName())) {
             return WifiCallingSuggestionActivity.isSuggestionComplete(context);
         } else if (className.equals(NightDisplaySuggestionActivity.class.getName())) {
-            return hasUsedNightDisplay(context);
+            return NightDisplayPreferenceController.isSuggestionComplete(context);
         } else if (className.equals(NewDeviceIntroSuggestionActivity.class.getName())) {
             return NewDeviceIntroSuggestionActivity.isSuggestionComplete(context);
         }
@@ -133,12 +132,5 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
         return new Pair[] {Pair.create(
                 MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED,
                 isSmartSuggestionEnabled ? 1 : 0)};
-    }
-
-    @VisibleForTesting
-    boolean hasUsedNightDisplay(Context context) {
-        final ContentResolver cr = context.getContentResolver();
-        return Secure.getInt(cr, Secure.NIGHT_DISPLAY_AUTO_MODE, 0) != 0
-                || Secure.getString(cr, Secure.NIGHT_DISPLAY_LAST_ACTIVATED_TIME) != null;
     }
 }
