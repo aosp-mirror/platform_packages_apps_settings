@@ -63,7 +63,9 @@ public class WifiMeteredPreferenceController extends BasePreferenceController im
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        mWifiConfiguration.meteredOverride = Integer.parseInt((String) newValue);
+        if (mWifiConfiguration != null) {
+            mWifiConfiguration.meteredOverride = Integer.parseInt((String) newValue);
+        }
         mWifiManager.updateNetwork(mWifiConfiguration);
         // Stage the backup of the SettingsProvider package which backs this up
         BackupManager.dataChanged("com.android.providers.settings");
@@ -73,8 +75,11 @@ public class WifiMeteredPreferenceController extends BasePreferenceController im
 
     @VisibleForTesting
     int getMeteredOverride() {
-        // Wrap the meteredOverride since robolectric cannot recognize it
-        return mWifiConfiguration.meteredOverride;
+        if (mWifiConfiguration != null) {
+            // Wrap the meteredOverride since robolectric cannot recognize it
+            return mWifiConfiguration.meteredOverride;
+        }
+        return WifiConfiguration.METERED_OVERRIDE_NONE;
     }
 
     private void updateSummary(DropDownPreference preference, int meteredOverride) {
