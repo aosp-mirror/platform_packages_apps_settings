@@ -41,4 +41,9 @@ public class ShadowAccessibilityManager {
     public List<AccessibilityServiceInfo> getInstalledAccessibilityServiceList() {
         return mInstalledAccessibilityList;
     }
+
+    @Implementation
+    public static boolean isAccessibilityButtonSupported() {
+        return true;
+    }
 }
