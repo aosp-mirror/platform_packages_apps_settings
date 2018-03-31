@@ -22,11 +22,11 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.wrapper.ActivityInfoWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -84,9 +84,9 @@ public class PictureInPictureDetailsTest {
 
     private boolean checkPackageHasPictureInPictureActivities(String packageName,
             boolean... resizeableActivityState) {
-        ActivityInfoWrapper[] activities = null;
+        ActivityInfo[] activities = null;
         if (resizeableActivityState.length > 0) {
-            activities = new ActivityInfoWrapper[resizeableActivityState.length];
+            activities = new ActivityInfo[resizeableActivityState.length];
             for (int i = 0; i < activities.length; i++) {
                 activities[i] = new MockActivityInfo(resizeableActivityState[i]);
             }
@@ -95,12 +95,11 @@ public class PictureInPictureDetailsTest {
                 activities);
     }
 
-    private class MockActivityInfo extends ActivityInfoWrapper {
+    private class MockActivityInfo extends ActivityInfo {
 
         private boolean mSupportsPictureInPicture;
 
         private MockActivityInfo(boolean supportsPictureInPicture) {
-            super(null);
             mSupportsPictureInPicture = supportsPictureInPicture;
         }
 

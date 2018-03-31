@@ -24,8 +24,6 @@ import android.text.format.DateUtils;
 import android.util.KeyValueListParser;
 import android.util.Log;
 
-import com.android.settings.wrapper.KeyValueListParserWrapper;
-
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -118,37 +116,32 @@ public class AnomalyDetectionPolicy {
      */
     public final long bluetoothScanThreshold;
 
-    private final KeyValueListParserWrapper mParserWrapper;
+    private final KeyValueListParser mParser;
 
     public AnomalyDetectionPolicy(Context context) {
-        this(context, new KeyValueListParserWrapper(new KeyValueListParser(',')));
-    }
-
-    @VisibleForTesting
-    AnomalyDetectionPolicy(Context context, KeyValueListParserWrapper parserWrapper) {
-        mParserWrapper = parserWrapper;
+        mParser = new KeyValueListParser(',');
         final String value = Settings.Global.getString(context.getContentResolver(),
                 Settings.Global.ANOMALY_DETECTION_CONSTANTS);
 
         try {
-            mParserWrapper.setString(value);
+            mParser.setString(value);
         } catch (IllegalArgumentException e) {
             Log.e(TAG, "Bad anomaly detection constants");
         }
 
         anomalyDetectionEnabled =
-                mParserWrapper.getBoolean(KEY_ANOMALY_DETECTION_ENABLED, false);
+                mParser.getBoolean(KEY_ANOMALY_DETECTION_ENABLED, false);
         wakeLockDetectionEnabled =
-                mParserWrapper.getBoolean(KEY_WAKELOCK_DETECTION_ENABLED,false);
+                mParser.getBoolean(KEY_WAKELOCK_DETECTION_ENABLED,false);
         wakeupAlarmDetectionEnabled =
-                mParserWrapper.getBoolean(KEY_WAKEUP_ALARM_DETECTION_ENABLED,false);
-        bluetoothScanDetectionEnabled = mParserWrapper.getBoolean(
+                mParser.getBoolean(KEY_WAKEUP_ALARM_DETECTION_ENABLED,false);
+        bluetoothScanDetectionEnabled = mParser.getBoolean(
                 KEY_BLUETOOTH_SCAN_DETECTION_ENABLED, false);
-        wakeLockThreshold = mParserWrapper.getLong(KEY_WAKELOCK_THRESHOLD,
+        wakeLockThreshold = mParser.getLong(KEY_WAKELOCK_THRESHOLD,
                 DateUtils.HOUR_IN_MILLIS);
-        wakeupAlarmThreshold = mParserWrapper.getLong(KEY_WAKEUP_ALARM_THRESHOLD, 10);
+        wakeupAlarmThreshold = mParser.getLong(KEY_WAKEUP_ALARM_THRESHOLD, 10);
         wakeupBlacklistedTags = parseStringSet(KEY_WAKEUP_BLACKLISTED_TAGS, null);
-        bluetoothScanThreshold = mParserWrapper.getLong(KEY_BLUETOOTH_SCAN_THRESHOLD,
+        bluetoothScanThreshold = mParser.getLong(KEY_BLUETOOTH_SCAN_THRESHOLD,
                 30 * DateUtils.MINUTE_IN_MILLIS);
     }
 
@@ -170,7 +163,7 @@ public class AnomalyDetectionPolicy {
     }
 
     private Set<String> parseStringSet(final String key, final Set<String> defaultSet) {
-        final String value = mParserWrapper.getString(key, null);
+        final String value = mParser.getString(key, null);
         if (value != null) {
             return Arrays.stream(value.split(":"))
                     .map(String::trim).map(Uri::decode).collect(Collectors.toSet());
