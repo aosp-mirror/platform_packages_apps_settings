@@ -30,8 +30,6 @@ import android.view.autofill.AutofillManager;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.wrapper.AutofillManagerWrapper;
-import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
@@ -53,7 +51,7 @@ public class DefaultAutofillPreferenceControllerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PackageManagerWrapper mPackageManager;
     @Mock
-    private AutofillManagerWrapper mAutofillManager;
+    private AutofillManager mAutofillManager;
 
     private DefaultAutofillPreferenceController mController;
 
