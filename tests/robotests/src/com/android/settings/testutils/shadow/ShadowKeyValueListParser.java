@@ -13,18 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.wrapper;
 
-import android.hardware.usb.UsbManager;
+package com.android.settings.testutils.shadow;
 
-public class UsbManagerWrapper {
-    private UsbManager mUsbManager;
+import android.util.KeyValueListParser;
 
-    public UsbManagerWrapper(UsbManager manager) {
-        mUsbManager = manager;
-    }
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
 
-    public long getCurrentFunctions() {
-        return mUsbManager.getCurrentFunctions();
+/**
+ * Shadow for {@link KeyValueListParser} so we could implement
+ * {@link #getBoolean(String, boolean)} that doesn't support in the current
+ * robolectric
+ */
+@Implements(KeyValueListParser.class)
+public class ShadowKeyValueListParser {
+
+    @Implementation
+    public boolean getBoolean(String key, boolean defaultValue) {
+        return defaultValue;
     }
 }

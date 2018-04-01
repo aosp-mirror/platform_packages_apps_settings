@@ -42,7 +42,6 @@ import java.util.WeakHashMap;
  * Parent class for settings fragments that contain a list of Bluetooth
  * devices.
  *
- * @see BluetoothSettings
  * @see DevicePickerFragment
  */
 // TODO: Refactor this fragment
@@ -204,10 +203,6 @@ public abstract class DeviceListPreferenceFragment extends
         mDevicePreferenceMap.put(cachedDevice, preference);
     }
 
-    /**
-     * Overridden in {@link BluetoothSettings} to add a listener.
-     * @param preference the newly added preference
-     */
     void initDevicePreference(BluetoothDevicePreference preference) {
         // Does nothing by default
     }
@@ -279,6 +274,9 @@ public abstract class DeviceListPreferenceFragment extends
 
     @Override
     public void onActiveDeviceChanged(CachedBluetoothDevice activeDevice, int bluetoothProfile) { }
+
+    @Override
+    public void onProfileAudioStateChanged(int bluetoothProfile, int state) { }
 
     /**
      * Return the key of the {@link PreferenceGroup} that contains the bluetooth devices

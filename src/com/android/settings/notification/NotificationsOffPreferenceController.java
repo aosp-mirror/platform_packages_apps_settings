@@ -21,7 +21,6 @@ import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.widget.FooterPreference;
 
 public class NotificationsOffPreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin {
@@ -51,7 +50,7 @@ public class NotificationsOffPreferenceController extends NotificationPreference
         if (mAppRow != null) {
             if (mChannel != null) {
                 preference.setTitle(R.string.channel_notifications_off_desc);
-            } else if (mChannelGroup != null && mChannelGroup.getGroup() == null) {
+            } else if (mChannelGroup != null) {
                 preference.setTitle(R.string.channel_group_notifications_off_desc);
             } else {
                 preference.setTitle(R.string.app_notifications_off_desc);

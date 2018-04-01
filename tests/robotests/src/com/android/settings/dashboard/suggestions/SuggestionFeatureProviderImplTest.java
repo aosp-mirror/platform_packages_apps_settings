@@ -163,46 +163,6 @@ public class SuggestionFeatureProviderImplTest {
     }
 
     @Test
-    public void hasUsedNightDisplay_returnsFalse_byDefault() {
-        assertThat(mProvider.hasUsedNightDisplay(mContext)).isFalse();
-    }
-
-    @Test
-    public void hasUsedNightDisplay_returnsTrue_ifPreviouslyActivatedAndManual() {
-        Secure.putString(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_LAST_ACTIVATED_TIME,
-                LocalDateTime.now().toString());
-        Secure.putInt(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_AUTO_MODE, 1);
-        assertThat(mProvider.hasUsedNightDisplay(mContext)).isTrue();
-    }
-
-    @Test
-    public void nightDisplaySuggestion_isCompleted_ifPreviouslyActivated() {
-        Secure.putString(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_LAST_ACTIVATED_TIME,
-                LocalDateTime.now().toString());
-        final ComponentName componentName =
-                new ComponentName(mContext, NightDisplaySuggestionActivity.class);
-        assertThat(mProvider.isSuggestionComplete(mContext, componentName)).isTrue();
-    }
-
-    @Test
-    public void nightDisplaySuggestion_isCompleted_ifNonManualMode() {
-        Secure.putInt(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_AUTO_MODE, 1);
-        final ComponentName componentName =
-                new ComponentName(mContext, NightDisplaySuggestionActivity.class);
-        assertThat(mProvider.isSuggestionComplete(mContext, componentName)).isTrue();
-    }
-
-    @Test
-    public void nightDisplaySuggestion_isCompleted_ifPreviouslyCleared() {
-        Secure.putString(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_LAST_ACTIVATED_TIME,
-                null);
-        Secure.putInt(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_AUTO_MODE, 1);
-        final ComponentName componentName =
-                new ComponentName(mContext, NightDisplaySuggestionActivity.class);
-        assertThat(mProvider.isSuggestionComplete(mContext, componentName)).isTrue();
-    }
-
-    @Test
     public void nightDisplaySuggestion_isNotCompleted_byDefault() {
         final ComponentName componentName =
                 new ComponentName(mContext, NightDisplaySuggestionActivity.class);

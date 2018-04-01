@@ -29,6 +29,8 @@ import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.UserManager;
+import android.provider.Settings;
+import android.provider.Settings.Global;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.telephony.PhoneStateListener;
@@ -36,8 +38,9 @@ import android.telephony.TelephonyManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
-import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsWrapper;
 import com.android.settings.testutils.shadow.ShadowUserManager;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -50,9 +53,8 @@ import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {
-    ShadowRestrictedLockUtilsWrapper.class,
-    ShadowConnectivityManager.class,
-    ShadowUserManager.class}
+        ShadowConnectivityManager.class,
+        ShadowUserManager.class}
 )
 public class MobileNetworkPreferenceControllerTest {
 
@@ -137,5 +139,37 @@ public class MobileNetworkPreferenceControllerTest {
 
         // Carrier name should be set.
         verify(mPreference).setSummary(testCarrierName);
+    }
+
+    @Test
+    public void airplaneModeTurnedOn_shouldDisablePreference() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Global.AIRPLANE_MODE_ON, 1);
+        mController = spy(new MobileNetworkPreferenceController(mContext));
+        final RestrictedPreference mPreference = new RestrictedPreference(mContext);
+        mController.updateState(mPreference);
+        assertThat(mPreference.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void airplaneModeTurnedOffAndNoUserRestriction_shouldEnablePreference() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Global.AIRPLANE_MODE_ON, 0);
+        mController = spy(new MobileNetworkPreferenceController(mContext));
+        final RestrictedPreference mPreference = new RestrictedPreference(mContext);
+        mPreference.setDisabledByAdmin(null);
+        mController.updateState(mPreference);
+        assertThat(mPreference.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void airplaneModeTurnedOffAndHasUserRestriction_shouldDisablePreference() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Global.AIRPLANE_MODE_ON, 0);
+        mController = spy(new MobileNetworkPreferenceController(mContext));
+        final RestrictedPreference mPreference = new RestrictedPreference(mContext);
+        mPreference.setDisabledByAdmin(EnforcedAdmin.MULTIPLE_ENFORCED_ADMIN);
+        mController.updateState(mPreference);
+        assertThat(mPreference.isEnabled()).isFalse();
     }
 }

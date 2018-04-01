@@ -48,7 +48,7 @@ public abstract class TogglePreferenceController extends BasePreferenceControlle
     public abstract boolean setChecked(boolean isChecked);
 
     @Override
-    public final void updateState(Preference preference) {
+    public void updateState(Preference preference) {
         if (preference instanceof TwoStatePreference) {
             ((TwoStatePreference) preference).setChecked(isChecked());
         } if (preference instanceof MasterSwitchPreference) {

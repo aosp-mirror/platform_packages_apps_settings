@@ -15,59 +15,34 @@ package com.android.settings.display;
 
 import android.content.Context;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.TwoStatePreference;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.view.RotationPolicy;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
-public class AutoRotatePreferenceController extends AbstractPreferenceController implements
+public class AutoRotatePreferenceController extends TogglePreferenceController implements
         PreferenceControllerMixin, Preference.OnPreferenceChangeListener, LifecycleObserver,
         OnResume, OnPause {
 
-    private static final String KEY_AUTO_ROTATE = "auto_rotate";
     private final MetricsFeatureProvider mMetricsFeatureProvider;
-    private TwoStatePreference mPreference;
+    private Preference mPreference;
     private RotationPolicy.RotationPolicyListener mRotationPolicyListener;
 
-    public AutoRotatePreferenceController(Context context, Lifecycle lifecycle) {
-        super(context);
+    public AutoRotatePreferenceController(Context context, String key) {
+        super(context, key);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
-        if (lifecycle != null) {
-            lifecycle.addObserver(this);
-        }
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_AUTO_ROTATE;
     }
 
     @Override
     public void updateState(Preference preference) {
-        mPreference = (TwoStatePreference) preference;
-        updatePreference();
-    }
-
-    @Override
-    public boolean isAvailable() {
-        return RotationPolicy.isRotationLockToggleVisible(mContext);
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final boolean locked = !(boolean) newValue;
-        mMetricsFeatureProvider.action(mContext, MetricsProto.MetricsEvent.ACTION_ROTATION_LOCK,
-                locked);
-        RotationPolicy.setRotationLock(mContext, locked);
-        return true;
+        mPreference = preference;
+        super.updateState(preference);
     }
 
     @Override
@@ -76,7 +51,9 @@ public class AutoRotatePreferenceController extends AbstractPreferenceController
             mRotationPolicyListener = new RotationPolicy.RotationPolicyListener() {
                 @Override
                 public void onChange() {
-                    updatePreference();
+                    if (mPreference != null) {
+                        updateState(mPreference);
+                    }
                 }
             };
         }
@@ -91,10 +68,23 @@ public class AutoRotatePreferenceController extends AbstractPreferenceController
         }
     }
 
-    private void updatePreference() {
-        if (mPreference == null) {
-            return;
-        }
-        mPreference.setChecked(!RotationPolicy.isRotationLocked(mContext));
+    @Override
+    public int getAvailabilityStatus() {
+        return RotationPolicy.isRotationLockToggleVisible(mContext)
+                ? AVAILABLE : DISABLED_UNSUPPORTED;
+    }
+
+    @Override
+    public boolean isChecked() {
+        return !RotationPolicy.isRotationLocked(mContext);
+    }
+
+    @Override
+    public boolean setChecked(boolean isChecked) {
+        final boolean isLocked = !isChecked;
+        mMetricsFeatureProvider.action(mContext, MetricsProto.MetricsEvent.ACTION_ROTATION_LOCK,
+                isLocked);
+        RotationPolicy.setRotationLock(mContext, isLocked);
+        return true;
     }
 }

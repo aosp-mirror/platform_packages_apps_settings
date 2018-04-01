@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,19 +16,30 @@
 
 package com.android.settings.testutils.shadow;
 
-import com.android.settings.wrapper.AccessibilityManagerWrapper;
+import android.content.Context;
+import android.os.RecoverySystem;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.annotation.Resetter;
 
-/**
- * This class provides shadow for API that is not supported in current roboletric
- */
-@Implements(AccessibilityManagerWrapper.class)
-public class ShadowAccessibilityManagerWrapperImpl {
+@Implements(RecoverySystem.class)
+public class ShadowRecoverySystem {
+
+    private static int sWipeEuiccCalledCount;
 
     @Implementation
-    public static boolean isAccessibilityButtonSupported() {
+    public static boolean wipeEuiccData(Context context, final String packageName) {
+        sWipeEuiccCalledCount++;
         return true;
+    }
+
+    @Resetter
+    public static void reset() {
+        sWipeEuiccCalledCount = 0;
+    }
+
+    public static int getWipeEuiccCalledCount() {
+        return sWipeEuiccCalledCount;
     }
 }

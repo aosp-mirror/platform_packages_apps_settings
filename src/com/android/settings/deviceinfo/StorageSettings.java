@@ -36,6 +36,7 @@ import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.os.storage.VolumeRecord;
 import android.support.annotation.NonNull;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.text.TextUtils;
@@ -71,10 +72,11 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
 
     private static final String TAG_VOLUME_UNMOUNTED = "volume_unmounted";
     private static final String TAG_DISK_INIT = "disk_init";
+    private static final int METRICS_CATEGORY = MetricsEvent.DEVICEINFO_STORAGE;
 
     static final int COLOR_PUBLIC = Color.parseColor("#ff9e9e9e");
 
-    static final int[] COLOR_PRIVATE = new int[] {
+    static final int[] COLOR_PRIVATE = new int[]{
             Color.parseColor("#ff26a69a"),
             Color.parseColor("#ffab47bc"),
             Color.parseColor("#fff2a600"),
@@ -94,7 +96,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.DEVICEINFO_STORAGE;
+        return METRICS_CATEGORY;
     }
 
     @Override
@@ -139,7 +141,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
     };
 
     private static boolean isInteresting(VolumeInfo vol) {
-        switch(vol.getType()) {
+        switch (vol.getType()) {
             case VolumeInfo.TYPE_PRIVATE:
             case VolumeInfo.TYPE_PUBLIC:
                 return true;
@@ -301,20 +303,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
                 return true;
 
             } else if (vol.getType() == VolumeInfo.TYPE_PUBLIC) {
-                if (vol.isMountedReadable()) {
-                    startActivity(vol.buildBrowseIntent());
-                    return true;
-                } else {
-                    final Bundle args = new Bundle();
-                    args.putString(VolumeInfo.EXTRA_VOLUME_ID, vol.getId());
-                    new SubSettingLauncher(getContext())
-                            .setDestination(PublicVolumeSettings.class.getCanonicalName())
-                            .setTitle(-1)
-                            .setSourceMetricsCategory(getMetricsCategory())
-                            .setArguments(args)
-                            .launch();
-                    return true;
-                }
+                return handlePublicVolumeClick(getContext(), vol);
             }
 
         } else if (key.startsWith("disk:")) {
@@ -328,7 +317,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
             args.putString(VolumeRecord.EXTRA_FS_UUID, key);
             new SubSettingLauncher(getContext())
                     .setDestination(PrivateVolumeForget.class.getCanonicalName())
-                            .setTitle(R.string.storage_menu_forget)
+                    .setTitle(R.string.storage_menu_forget)
                     .setSourceMetricsCategory(getMetricsCategory())
                     .setArguments(args)
                     .launch();
@@ -336,6 +325,25 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
         }
 
         return false;
+    }
+
+    @VisibleForTesting
+    static boolean handlePublicVolumeClick(Context context, VolumeInfo vol) {
+        final Intent intent = vol.buildBrowseIntent();
+        if (vol.isMountedReadable() && intent != null) {
+            context.startActivity(intent);
+            return true;
+        } else {
+            final Bundle args = new Bundle();
+            args.putString(VolumeInfo.EXTRA_VOLUME_ID, vol.getId());
+            new SubSettingLauncher(context)
+                    .setDestination(PublicVolumeSettings.class.getCanonicalName())
+                    .setTitle(-1)
+                    .setSourceMetricsCategory(METRICS_CATEGORY)
+                    .setArguments(args)
+                    .launch();
+            return true;
+        }
     }
 
     public static class MountTask extends AsyncTask<Void, Void, Exception> {
@@ -440,40 +448,45 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
 
             builder.setPositiveButton(R.string.storage_menu_mount,
                     new DialogInterface.OnClickListener() {
-                /**
-                 * Check if an {@link RestrictedLockUtils#sendShowAdminSupportDetailsIntent admin
-                 * details intent} should be shown for the restriction and show it.
-                 *
-                 * @param restriction The restriction to check
-                 * @return {@code true} iff a intent was shown.
-                 */
-                private boolean wasAdminSupportIntentShown(@NonNull String restriction) {
-                    EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(
-                            getActivity(), restriction, UserHandle.myUserId());
-                    boolean hasBaseUserRestriction = RestrictedLockUtils.hasBaseUserRestriction(
-                            getActivity(), restriction, UserHandle.myUserId());
-                    if (admin != null && !hasBaseUserRestriction) {
-                        RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getActivity(), admin);
-                        return true;
-                    }
+                        /**
+                         * Check if an {@link
+                         * RestrictedLockUtils#sendShowAdminSupportDetailsIntent admin
+                         * details intent} should be shown for the restriction and show it.
+                         *
+                         * @param restriction The restriction to check
+                         * @return {@code true} iff a intent was shown.
+                         */
+                        private boolean wasAdminSupportIntentShown(@NonNull String restriction) {
+                            EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(
+                                    getActivity(), restriction, UserHandle.myUserId());
+                            boolean hasBaseUserRestriction =
+                                    RestrictedLockUtils.hasBaseUserRestriction(
+                                            getActivity(), restriction, UserHandle.myUserId());
+                            if (admin != null && !hasBaseUserRestriction) {
+                                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getActivity(),
+                                        admin);
+                                return true;
+                            }
 
-                    return false;
-                }
+                            return false;
+                        }
 
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    if (wasAdminSupportIntentShown(UserManager.DISALLOW_MOUNT_PHYSICAL_MEDIA)) {
-                        return;
-                    }
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (wasAdminSupportIntentShown(
+                                    UserManager.DISALLOW_MOUNT_PHYSICAL_MEDIA)) {
+                                return;
+                            }
 
-                    if (vol.disk != null && vol.disk.isUsb() &&
-                            wasAdminSupportIntentShown(UserManager.DISALLOW_USB_FILE_TRANSFER)) {
-                        return;
-                    }
+                            if (vol.disk != null && vol.disk.isUsb() &&
+                                    wasAdminSupportIntentShown(
+                                            UserManager.DISALLOW_USB_FILE_TRANSFER)) {
+                                return;
+                            }
 
-                    new MountTask(context, vol).execute();
-                }
-            });
+                            new MountTask(context, vol).execute();
+                        }
+                    });
             builder.setNegativeButton(R.string.cancel, null);
 
             return builder.create();
@@ -511,13 +524,13 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
 
             builder.setPositiveButton(R.string.storage_menu_set_up,
                     new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    final Intent intent = new Intent(context, StorageWizardInit.class);
-                    intent.putExtra(DiskInfo.EXTRA_DISK_ID, diskId);
-                    startActivity(intent);
-                }
-            });
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            final Intent intent = new Intent(context, StorageWizardInit.class);
+                            intent.putExtra(DiskInfo.EXTRA_DISK_ID, diskId);
+                            startActivity(intent);
+                        }
+                    });
             builder.setNegativeButton(R.string.cancel, null);
 
             return builder.create();
@@ -586,7 +599,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
                     for (VolumeInfo vol : vols) {
                         if (isInteresting(vol)) {
                             data.title = storage.getBestVolumeDescription(vol);
-                            data.key = "storage_settings_volume_" +vol.id;
+                            data.key = "storage_settings_volume_" + vol.id;
                             data.screenTitle = context.getString(R.string.storage_settings);
                             result.add(data);
                         }

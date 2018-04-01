@@ -14,27 +14,24 @@
  * limitations under the License.
  */
 
-package com.android.settings.wrapper;
+package com.android.settings.testutils.shadow;
 
-import android.content.pm.ActivityInfo;
+import android.accessibilityservice.AccessibilityServiceInfo;
+import android.content.ComponentName;
 
-/**
- * This class replicates a subset of the android.content.pm.ActivityInfo. The class
- * exists so that we can use a thin wrapper around the ActivityInfo in production code and a mock in
- * tests.
- */
-public class ActivityInfoWrapper {
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
 
-    private final ActivityInfo mInfo;
+@Implements(AccessibilityServiceInfo.class)
+public class ShadowAccessibilityServiceInfo {
+    private static ComponentName sComponentName;
 
-    public ActivityInfoWrapper(ActivityInfo info) {
-        mInfo = info;
+    public static void setComponentName(String componentName) {
+        sComponentName = ComponentName.unflattenFromString(componentName);
     }
 
-    /**
-     * Returns whether this activity supports picture-in-picture.
-     */
-    public boolean supportsPictureInPicture() {
-        return mInfo.supportsPictureInPicture();
+    @Implementation
+    public ComponentName getComponentName() {
+        return sComponentName;
     }
 }

@@ -76,7 +76,7 @@ public class BatteryManagerPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        assertThat(mPreference.getSummary()).isEqualTo("On / Restricting apps automatically");
+        assertThat(mPreference.getSummary()).isEqualTo("On / Detecting when apps drain battery");
     }
 
     @Test

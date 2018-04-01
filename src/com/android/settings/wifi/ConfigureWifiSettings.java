@@ -21,18 +21,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.NetworkScoreManager;
 import android.net.wifi.WifiManager;
 import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.network.NetworkScorerPickerPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.wifi.p2p.WifiP2pPreferenceController;
-import com.android.settings.wrapper.NetworkScoreManagerWrapper;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
@@ -74,16 +71,12 @@ public class ConfigureWifiSettings extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        final NetworkScoreManagerWrapper networkScoreManagerWrapper =
-                new NetworkScoreManagerWrapper(context.getSystemService(NetworkScoreManager.class));
         mWifiWakeupPreferenceController = new WifiWakeupPreferenceController(context);
         mUseOpenWifiPreferenceController = new UseOpenWifiPreferenceController(context, this,
-                networkScoreManagerWrapper, getLifecycle());
+                getLifecycle());
         final WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(mWifiWakeupPreferenceController);
-        controllers.add(new NetworkScorerPickerPreferenceController(context,
-                networkScoreManagerWrapper));
         controllers.add(new NotifyOpenNetworksPreferenceController(context, getLifecycle()));
         controllers.add(mUseOpenWifiPreferenceController);
         controllers.add(new WifiInfoPreferenceController(context, getLifecycle(), wifiManager));
@@ -112,7 +105,7 @@ public class ConfigureWifiSettings extends DashboardFragment {
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
-                    List<String> keys =  super.getNonIndexableKeys(context);
+                    List<String> keys = super.getNonIndexableKeys(context);
 
                     // If connected to WiFi, this IP address will be the same as the Status IP.
                     // Or, if there is no connection they will say unavailable.

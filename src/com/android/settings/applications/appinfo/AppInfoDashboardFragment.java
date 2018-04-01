@@ -55,7 +55,6 @@ import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.applications.AppUtils;
@@ -84,8 +83,10 @@ public class AppInfoDashboardFragment extends DashboardFragment
     private static final String TAG = "AppInfoDashboard";
 
     // Menu identifiers
-    @VisibleForTesting static final int UNINSTALL_ALL_USERS_MENU = 1;
-    @VisibleForTesting static final int UNINSTALL_UPDATES = 2;
+    @VisibleForTesting
+    static final int UNINSTALL_ALL_USERS_MENU = 1;
+    @VisibleForTesting
+    static final int UNINSTALL_UPDATES = 2;
     static final int INSTALL_INSTANT_APP_MENU = 3;
 
     // Result code identifiers
@@ -105,8 +106,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
     private static final int DLG_DISABLE = DLG_BASE + 2;
     private static final int DLG_SPECIAL_DISABLE = DLG_BASE + 3;
     static final int DLG_CLEAR_INSTANT_APP = DLG_BASE + 4;
-
-    private static final String KEY_ADVANCED_APP_INFO_CATEGORY = "advanced_app_info";
 
     public static final String ARG_PACKAGE_NAME = "package";
     public static final String ARG_PACKAGE_UID = "uid";
@@ -156,7 +155,42 @@ public class AppInfoDashboardFragment extends DashboardFragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        use(TimeSpentInAppPreferenceController.class).setPackageName(getPackageName());
+        final String packageName = getPackageName();
+        use(TimeSpentInAppPreferenceController.class).setPackageName(packageName);
+
+        use(AppDataUsagePreferenceController.class).setParentFragment(this);
+        final AppInstallerInfoPreferenceController installer =
+                use(AppInstallerInfoPreferenceController.class);
+        installer.setPackageName(packageName);
+        installer.setParentFragment(this);
+        use(AppInstallerPreferenceCategoryController.class).setChildren(Arrays.asList(installer));
+        use(AppNotificationPreferenceController.class).setParentFragment(this);
+        use(AppOpenByDefaultPreferenceController.class).setParentFragment(this);
+        use(AppPermissionPreferenceController.class).setParentFragment(this);
+        use(AppPermissionPreferenceController.class).setPackageName(packageName);
+        use(AppStoragePreferenceController.class).setParentFragment(this);
+        use(AppVersionPreferenceController.class).setParentFragment(this);
+        use(InstantAppDomainsPreferenceController.class).setParentFragment(this);
+
+        final WriteSystemSettingsPreferenceController writeSystemSettings =
+                use(WriteSystemSettingsPreferenceController.class);
+        writeSystemSettings.setParentFragment(this);
+
+        final DrawOverlayDetailPreferenceController drawOverlay =
+                use(DrawOverlayDetailPreferenceController.class);
+        drawOverlay.setParentFragment(this);
+
+        final PictureInPictureDetailPreferenceController pip =
+                use(PictureInPictureDetailPreferenceController.class);
+        pip.setPackageName(packageName);
+        pip.setParentFragment(this);
+        final ExternalSourceDetailPreferenceController externalSource =
+                use(ExternalSourceDetailPreferenceController.class);
+        externalSource.setPackageName(packageName);
+        externalSource.setParentFragment(this);
+
+        use(AdvancedAppInfoPreferenceCategoryController.class).setChildren(Arrays.asList(
+                writeSystemSettings, drawOverlay, pip, externalSource));
     }
 
     @Override
@@ -227,16 +261,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
         // when app state changes.
         controllers.add(
                 new AppHeaderViewPreferenceController(context, this, packageName, lifecycle));
-        controllers.add(new AppStoragePreferenceController(context, this, lifecycle));
-        controllers.add(new AppDataUsagePreferenceController(context, this, lifecycle));
-        controllers.add(new AppNotificationPreferenceController(context, this));
-        controllers.add(new AppOpenByDefaultPreferenceController(context, this));
-        controllers.add(new AppPermissionPreferenceController(context, this, packageName));
-        controllers.add(new AppVersionPreferenceController(context, this));
-        controllers.add(new InstantAppDomainsPreferenceController(context, this));
-        final AppInstallerInfoPreferenceController appInstallerInfoPreferenceController =
-                new AppInstallerInfoPreferenceController(context, this, packageName);
-        controllers.add(appInstallerInfoPreferenceController);
         mAppActionButtonPreferenceController =
                 new AppActionButtonPreferenceController(context, this, packageName);
         controllers.add(mAppActionButtonPreferenceController);
@@ -258,21 +282,13 @@ public class AppInfoDashboardFragment extends DashboardFragment
         controllers.add(new DefaultEmergencyShortcutPreferenceController(context, packageName));
         controllers.add(new DefaultSmsShortcutPreferenceController(context, packageName));
 
-        final List<AbstractPreferenceController> advancedAppInfoControllers = new ArrayList<>();
-        advancedAppInfoControllers.add(new DrawOverlayDetailPreferenceController(context, this));
-        advancedAppInfoControllers.add(new WriteSystemSettingsPreferenceController(context, this));
-        advancedAppInfoControllers.add(
-                new PictureInPictureDetailPreferenceController(context, this, packageName));
-        advancedAppInfoControllers.add(
-                new ExternalSourceDetailPreferenceController(context, this, packageName));
-        controllers.addAll(advancedAppInfoControllers);
-        controllers.add(new PreferenceCategoryController(
-                context, KEY_ADVANCED_APP_INFO_CATEGORY, advancedAppInfoControllers));
-
-        controllers.add(new AppInstallerPreferenceCategoryController(
-                context, Arrays.asList(appInstallerInfoPreferenceController)));
-
         return controllers;
+    }
+
+    void addToCallbackList(Callback callback) {
+        if (callback != null) {
+            mCallbacks.add(callback);
+        }
     }
 
     ApplicationsState.AppEntry getAppEntry() {
@@ -291,7 +307,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
     public void onPackageSizeChanged(String packageName) {
         if (!TextUtils.equals(packageName, mPackageName)) {
             Log.d(TAG, "Package change irrelevant, skipping");
-          return;
+            return;
         }
         refreshUi();
     }
@@ -429,7 +445,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
         if (!mInitialized) {
             // First time init: are we displaying an uninstalled app?
             mInitialized = true;
-            mShowUninstalled = (mAppEntry.info.flags&ApplicationInfo.FLAG_INSTALLED) == 0;
+            mShowUninstalled = (mAppEntry.info.flags & ApplicationInfo.FLAG_INSTALLED) == 0;
         } else {
             // All other times: if the app no longer exists then we want
             // to go away.
@@ -437,12 +453,12 @@ public class AppInfoDashboardFragment extends DashboardFragment
                 final ApplicationInfo ainfo = getActivity().getPackageManager().getApplicationInfo(
                         mAppEntry.info.packageName,
                         PackageManager.MATCH_DISABLED_COMPONENTS
-                        | PackageManager.MATCH_ANY_USER);
+                                | PackageManager.MATCH_ANY_USER);
                 if (!mShowUninstalled) {
                     // If we did not start out with the app uninstalled, then
                     // it transitioning to the uninstalled state for the current
                     // user means we should go away as well.
-                    return (ainfo.flags&ApplicationInfo.FLAG_INSTALLED) != 0;
+                    return (ainfo.flags & ApplicationInfo.FLAG_INSTALLED) != 0;
                 }
             } catch (NameNotFoundException e) {
                 return false;
@@ -460,15 +476,17 @@ public class AppInfoDashboardFragment extends DashboardFragment
                         .setMessage(getActivity().getText(R.string.app_disable_dlg_text))
                         .setPositiveButton(R.string.app_disable_dlg_positive,
                                 new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                // Disable the app
-                                mMetricsFeatureProvider.action(getContext(),
-                                        MetricsEvent.ACTION_SETTINGS_DISABLE_APP);
-                                new DisableChanger(AppInfoDashboardFragment.this, mAppEntry.info,
-                                        PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER)
-                                .execute((Object)null);
-                            }
-                        })
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // Disable the app
+                                        mMetricsFeatureProvider.action(getContext(),
+                                                MetricsEvent.ACTION_SETTINGS_DISABLE_APP);
+                                        new DisableChanger(AppInfoDashboardFragment.this,
+                                                mAppEntry.info,
+                                                PackageManager
+                                                        .COMPONENT_ENABLED_STATE_DISABLED_USER)
+                                                .execute((Object) null);
+                                    }
+                                })
                         .setNegativeButton(R.string.dlg_cancel, null)
                         .create();
             case DLG_SPECIAL_DISABLE:
@@ -476,14 +494,14 @@ public class AppInfoDashboardFragment extends DashboardFragment
                         .setMessage(getActivity().getText(R.string.app_disable_dlg_text))
                         .setPositiveButton(R.string.app_disable_dlg_positive,
                                 new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                // Disable the app and ask for uninstall
-                                mMetricsFeatureProvider.action(getContext(),
-                                        MetricsEvent.ACTION_SETTINGS_DISABLE_APP);
-                                uninstallPkg(mAppEntry.info.packageName,
-                                        false, true);
-                            }
-                        })
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // Disable the app and ask for uninstall
+                                        mMetricsFeatureProvider.action(getContext(),
+                                                MetricsEvent.ACTION_SETTINGS_DISABLE_APP);
+                                        uninstallPkg(mAppEntry.info.packageName,
+                                                false, true);
+                                    }
+                                })
                         .setNegativeButton(R.string.dlg_cancel, null)
                         .create();
             case DLG_FORCE_STOP:
@@ -504,8 +522,8 @@ public class AppInfoDashboardFragment extends DashboardFragment
 
     private void uninstallPkg(String packageName, boolean allUsers, boolean andDisable) {
         stopListeningToPackageRemove();
-         // Create new intent to launch Uninstaller activity
-        final Uri packageURI = Uri.parse("package:"+packageName);
+        // Create new intent to launch Uninstaller activity
+        final Uri packageURI = Uri.parse("package:" + packageName);
         final Intent uninstallIntent = new Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageURI);
         uninstallIntent.putExtra(Intent.EXTRA_UNINSTALL_ALL_USERS, allUsers);
         mMetricsFeatureProvider.action(
@@ -632,7 +650,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
                 if ((info.flags & ApplicationInfo.FLAG_INSTALLED) != 0) {
                     count++;
                 }
-            } catch(NameNotFoundException e) {
+            } catch (NameNotFoundException e) {
                 Log.e(TAG, "Package: " + packageName + " not found for user: " + userInfo.id);
             }
         }
@@ -707,10 +725,10 @@ public class AppInfoDashboardFragment extends DashboardFragment
     }
 
     private void setIntentAndFinish(boolean finish, boolean appChanged) {
-        if (localLOGV) Log.i(TAG, "appChanged="+appChanged);
+        if (localLOGV) Log.i(TAG, "appChanged=" + appChanged);
         final Intent intent = new Intent();
         intent.putExtra(ManageApplications.APP_CHG, appChanged);
-        final SettingsActivity sa = (SettingsActivity)getActivity();
+        final SettingsActivity sa = (SettingsActivity) getActivity();
         sa.finishPreferencePanel(Activity.RESULT_OK, intent);
         mFinishing = true;
     }

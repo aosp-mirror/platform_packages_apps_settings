@@ -73,7 +73,8 @@ public class AddDevicePreferenceControllerTest {
                 mContext.getPackageManager());
         mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, true);
 
-        mAddDevicePreferenceController = new AddDevicePreferenceController(mContext);
+        mAddDevicePreferenceController = new AddDevicePreferenceController(mContext,
+                "add_bt_devices");
         ReflectionHelpers.setField(mAddDevicePreferenceController,
                 "mBluetoothAdapter", mBluetoothAdapter);
 

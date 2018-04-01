@@ -98,7 +98,11 @@ public class UsbConnectionBroadcastReceiver extends BroadcastReceiver implements
             final IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction(UsbManager.ACTION_USB_STATE);
             intentFilter.addAction(UsbManager.ACTION_USB_PORT_CHANGED);
-            mContext.registerReceiver(this, intentFilter);
+            final Intent intent = mContext.registerReceiver(this, intentFilter);
+            // TODO b/77240599 use an api instead of sticky intent
+            if (intent != null) {
+                onReceive(mContext, intent);
+            }
             mListeningToUsbEvents = true;
         }
     }

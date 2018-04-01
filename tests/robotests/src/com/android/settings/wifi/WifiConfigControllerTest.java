@@ -61,6 +61,7 @@ public class WifiConfigControllerTest {
     private AccessPoint mAccessPoint;
     @Mock
     private KeyStore mKeyStore;
+    private Spinner mHiddenSettingsSpinner;
 
     public WifiConfigController mController;
     private static final String HEX_PSK = "01234567012345670123456701234567012345670123456701234567"
@@ -82,6 +83,7 @@ public class WifiConfigControllerTest {
         when(mAccessPoint.getSecurity()).thenReturn(AccessPoint.SECURITY_PSK);
         mView = LayoutInflater.from(mContext).inflate(R.layout.wifi_dialog, null);
         final Spinner ipSettingsSpinner = mView.findViewById(R.id.ip_settings);
+        mHiddenSettingsSpinner = mView.findViewById(R.id.hidden_settings);
         ipSettingsSpinner.setSelection(DHCP);
 
         mController = new TestWifiConfigController(mConfigUiBase, mView, mAccessPoint,
@@ -244,6 +246,16 @@ public class WifiConfigControllerTest {
         final TextView password = mView.findViewById(R.id.password);
         // Verify password get focus when connect to secure wifi without eap type
         assertThat(password.isFocused()).isTrue();
+    }
+
+    @Test
+    public void hiddenWarning_warningVisibilityProperlyUpdated() {
+        View warningView = mView.findViewById(R.id.hidden_settings_warning);
+        mController.onItemSelected(mHiddenSettingsSpinner, null, mController.HIDDEN_NETWORK, 0);
+        assertThat(warningView.getVisibility()).isEqualTo(View.VISIBLE);
+
+        mController.onItemSelected(mHiddenSettingsSpinner, null, mController.NOT_HIDDEN_NETWORK, 0);
+        assertThat(warningView.getVisibility()).isEqualTo(View.GONE);
     }
 
     public class TestWifiConfigController extends WifiConfigController {

@@ -18,8 +18,12 @@ package com.android.settings.network;
 import static android.os.UserHandle.myUserId;
 import static android.os.UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.UserManager;
+import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
@@ -28,7 +32,8 @@ import android.telephony.ServiceState;
 import android.telephony.TelephonyManager;
 
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.wrapper.RestrictedLockUtilsWrapper;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -47,11 +52,20 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
     @VisibleForTesting
     PhoneStateListener mPhoneStateListener;
 
+    private BroadcastReceiver mAirplanModeChangedReceiver;
+
     public MobileNetworkPreferenceController(Context context) {
         super(context);
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         mIsSecondaryUser = !mUserManager.isAdminUser();
+
+        mAirplanModeChangedReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                updateState(mPreference);
+            }
+        };
     }
 
     @Override
@@ -60,9 +74,8 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
     }
 
     public boolean isUserRestricted() {
-        final RestrictedLockUtilsWrapper wrapper = new RestrictedLockUtilsWrapper();
         return mIsSecondaryUser ||
-                wrapper.hasBaseUserRestriction(
+                RestrictedLockUtils.hasBaseUserRestriction(
                         mContext,
                         DISALLOW_CONFIG_MOBILE_NETWORKS,
                         myUserId());
@@ -92,6 +105,10 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
             }
             mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_SERVICE_STATE);
         }
+        if (mAirplanModeChangedReceiver != null) {
+            mContext.registerReceiver(mAirplanModeChangedReceiver,
+                new IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED));
+        }
     }
 
     @Override
@@ -99,6 +116,21 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
         if (mPhoneStateListener != null) {
             mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
         }
+        if (mAirplanModeChangedReceiver != null) {
+            mContext.unregisterReceiver(mAirplanModeChangedReceiver);
+        }
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+
+        if (preference instanceof RestrictedPreference &&
+            ((RestrictedPreference) preference).isDisabledByAdmin()) {
+                return;
+        }
+        preference.setEnabled(Settings.Global.getInt(
+            mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0) == 0);
     }
 
     @Override

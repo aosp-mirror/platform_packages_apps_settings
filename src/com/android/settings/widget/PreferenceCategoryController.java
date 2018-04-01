@@ -18,9 +18,10 @@ package com.android.settings.widget;
 
 import android.content.Context;
 
-import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,35 +29,42 @@ import java.util.List;
  * not-available, this controller will also report not-available, and subsequently will be hidden by
  * UI.
  */
-public class PreferenceCategoryController extends AbstractPreferenceController
-        implements PreferenceControllerMixin {
+public class PreferenceCategoryController extends BasePreferenceController {
 
     private final String mKey;
     private final List<AbstractPreferenceController> mChildren;
 
-    public PreferenceCategoryController(Context context,
-            String key, List<AbstractPreferenceController> childrenControllers) {
-        super(context);
+    public PreferenceCategoryController(Context context, String key) {
+        super(context, key);
         mKey = key;
-        mChildren = childrenControllers;
+        mChildren = new ArrayList<>();
     }
 
     @Override
-    public boolean isAvailable() {
+    public int getAvailabilityStatus() {
         if (mChildren == null || mChildren.isEmpty()) {
-            return true;
+            return DISABLED_DEPENDENT_SETTING;
         }
         // Category is available if any child is available
         for (AbstractPreferenceController controller : mChildren) {
             if (controller.isAvailable()) {
-                return true;
+                return AVAILABLE;
             }
         }
-        return false;
+        return DISABLED_DEPENDENT_SETTING;
     }
 
     @Override
     public String getPreferenceKey() {
         return mKey;
+    }
+
+    public PreferenceCategoryController setChildren(
+            List<AbstractPreferenceController> childrenController) {
+        mChildren.clear();
+        if (childrenController != null) {
+            mChildren.addAll(childrenController);
+        }
+        return this;
     }
 }

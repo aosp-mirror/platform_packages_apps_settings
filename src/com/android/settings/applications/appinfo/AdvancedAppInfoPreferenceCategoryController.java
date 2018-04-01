@@ -14,25 +14,15 @@
  * limitations under the License.
  */
 
-package com.android.settings.wrapper;
+package com.android.settings.applications.appinfo;
 
 import android.content.Context;
-import android.os.RecoverySystem;
 
-/**
- * This class replicates a subset of the {@link RecoverySystem}.
- * The interface exists so that we can use a thin wrapper around the RecoverySystem in
- * production code and a mock in tests.
- */
-public class RecoverySystemWrapper {
+import com.android.settings.widget.PreferenceCategoryController;
 
-    /**
-     * Returns whether wipe Euicc data successfully or not.
-     *
-     * @param packageName the package name of the caller app.
-     */
-    public boolean wipeEuiccData(
-            Context context, final String packageName) {
-        return RecoverySystem.wipeEuiccData(context, packageName);
+public class AdvancedAppInfoPreferenceCategoryController extends PreferenceCategoryController {
+
+    public AdvancedAppInfoPreferenceCategoryController(Context context, String key) {
+        super(context, key);
     }
 }

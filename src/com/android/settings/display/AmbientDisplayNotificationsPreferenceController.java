@@ -14,6 +14,7 @@
 package com.android.settings.display;
 
 import static android.provider.Settings.Secure.DOZE_ENABLED;
+
 import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION_AMBIENT_DISPLAY;
 
 import android.content.Context;
@@ -21,21 +22,19 @@ import android.content.Intent;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.R;
-import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.search.ResultPayload;
-import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class AmbientDisplayNotificationsPreferenceController extends
-        AbstractPreferenceController implements PreferenceControllerMixin,
-        Preference.OnPreferenceChangeListener {
+        TogglePreferenceController implements Preference.OnPreferenceChangeListener {
 
     private final int ON = 1;
     private final int OFF = 0;
@@ -45,18 +44,20 @@ public class AmbientDisplayNotificationsPreferenceController extends
     private static final int MY_USER = UserHandle.myUserId();
 
     private final MetricsFeatureProvider mMetricsFeatureProvider;
-    private final AmbientDisplayConfiguration mConfig;
+    private AmbientDisplayConfiguration mConfig;
 
-    public AmbientDisplayNotificationsPreferenceController(Context context,
-            AmbientDisplayConfiguration config, MetricsFeatureProvider metricsFeatureProvider) {
-        super(context);
-        mMetricsFeatureProvider = metricsFeatureProvider;
-        mConfig = config;
+    public AmbientDisplayNotificationsPreferenceController(Context context, String key) {
+        super(context, key);
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
-    @Override
-    public String getPreferenceKey() {
-        return KEY_AMBIENT_DISPLAY_NOTIFICATIONS;
+    /**
+     * Set AmbientDisplayConfiguration for this controller, please call in onAttach of fragment
+     *
+     * @param config AmbientDisplayConfiguration for this controller
+     */
+    public void setConfig(AmbientDisplayConfiguration config) {
+        mConfig = config;
     }
 
     @Override
@@ -68,23 +69,23 @@ public class AmbientDisplayNotificationsPreferenceController extends
     }
 
     @Override
-    public void updateState(Preference preference) {
-        ((SwitchPreference) preference).setChecked(mConfig.pulseOnNotificationEnabled(MY_USER));
+    public boolean isChecked() {
+        return mConfig.pulseOnNotificationEnabled(MY_USER);
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        boolean value = (Boolean) newValue;
-        Settings.Secure.putInt(mContext.getContentResolver(), DOZE_ENABLED, value ? ON : OFF);
+    public boolean setChecked(boolean isChecked) {
+        Settings.Secure.putInt(mContext.getContentResolver(), DOZE_ENABLED, isChecked ? ON : OFF);
         return true;
     }
 
     @Override
-    public boolean isAvailable() {
-        return mConfig.pulseOnNotificationAvailable();
+    public int getAvailabilityStatus() {
+        return mConfig.pulseOnNotificationAvailable() ? AVAILABLE : DISABLED_UNSUPPORTED;
     }
 
     @Override
+    //TODO (b/69808376): Remove result payload
     public ResultPayload getResultPayload() {
         final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(mContext,
                 AmbientDisplaySettings.class.getName(), KEY_AMBIENT_DISPLAY_NOTIFICATIONS,

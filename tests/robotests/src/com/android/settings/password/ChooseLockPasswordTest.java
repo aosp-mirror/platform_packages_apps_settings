@@ -121,36 +121,6 @@ public class ChooseLockPasswordTest {
     }
 
     @Test
-    public void blacklist_addsErrorMessageForPin() {
-        final ChooseLockPassword activity = buildChooseLockPasswordActivity(
-                new IntentBuilder(application)
-                        .setUserId(UserHandle.myUserId())
-                        // Set to numeric for a PIN
-                        .setPasswordQuality(DevicePolicyManager.PASSWORD_QUALITY_NUMERIC)
-                        .build());
-        final ChooseLockPasswordFragment fragment = getChooseLockPasswordFragment(activity);
-        final int errors = ChooseLockPasswordFragment.BLACKLISTED;
-        final String[] messages = fragment.convertErrorCodeToMessages(errors);
-        assertThat(messages).isEqualTo(new String[] {
-                activity.getString(R.string.lockpassword_pin_blacklisted_by_admin) });
-    }
-
-    @Test
-    public void blacklist_addsErrorMessageForPassword() {
-        final ChooseLockPassword activity = buildChooseLockPasswordActivity(
-                new IntentBuilder(application)
-                        .setUserId(UserHandle.myUserId())
-                        // Set to alphabetic for a password
-                        .setPasswordQuality(DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC)
-                        .build());
-        final ChooseLockPasswordFragment fragment = getChooseLockPasswordFragment(activity);
-        final int errors = ChooseLockPasswordFragment.BLACKLISTED;
-        final String[] messages = fragment.convertErrorCodeToMessages(errors);
-        assertThat(messages).isEqualTo(new String[] {
-                activity.getString(R.string.lockpassword_password_blacklisted_by_admin) });
-    }
-
-    @Test
     public void assertThat_chooseLockIconChanged_WhenFingerprintExtraSet() {
         ShadowDrawable drawable = setActivityAndGetIconDrawable(true);
         assertThat(drawable.getCreatedFromResId()).isEqualTo(R.drawable.ic_fingerprint_header);

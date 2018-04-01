@@ -107,7 +107,7 @@ public class ZenModeSettings extends ZenModeSettingsBase {
             } else if (numCategories == 3){
                 String secondaryText = mContext.getString(R.string.join_two_unrelated_items,
                         enabledCategories.get(0), enabledCategories.get(1).toLowerCase());
-                return mContext.getString(R.string.join_two_items, secondaryText,
+                return mContext.getString(R.string.join_many_items_last, secondaryText,
                         enabledCategories.get(2).toLowerCase());
             } else {
                 String secondaryText = mContext.getString(R.string.join_many_items_middle,

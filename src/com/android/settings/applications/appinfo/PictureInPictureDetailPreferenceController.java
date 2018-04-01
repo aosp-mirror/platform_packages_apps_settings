@@ -28,17 +28,15 @@ import com.android.settings.SettingsPreferenceFragment;
 
 public class PictureInPictureDetailPreferenceController extends AppInfoPreferenceControllerBase {
 
-    private static final String KEY = "picture_in_picture";
     private static final String TAG = "PicInPicDetailControl";
 
     private final PackageManager mPackageManager;
-    private final String mPackageName;
 
-    public PictureInPictureDetailPreferenceController(Context context,
-            AppInfoDashboardFragment parent, String packageName) {
-        super(context, parent, KEY);
+    private String mPackageName;
+
+    public PictureInPictureDetailPreferenceController(Context context, String key) {
+        super(context, key);
         mPackageManager = context.getPackageManager();
-        mPackageName = packageName;
     }
 
     @Override
@@ -77,5 +75,9 @@ public class PictureInPictureDetailPreferenceController extends AppInfoPreferenc
     int getPreferenceSummary() {
         return PictureInPictureDetails.getPreferenceSummary(mContext,
                 mParent.getPackageInfo().applicationInfo.uid, mPackageName);
+    }
+
+    public void setPackageName(String packageName) {
+        mPackageName = packageName;
     }
 }
