@@ -26,6 +26,7 @@ import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.gestures.DoubleTapScreenPreferenceController;
 import com.android.settings.gestures.PickupGesturePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -52,11 +53,9 @@ public class AmbientDisplaySettings extends DashboardFragment {
     private AmbientDisplayConfiguration mConfig;
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Lifecycle lifecycle, AmbientDisplayConfiguration config,
-            MetricsFeatureProvider metricsFeatureProvider) {
+            Lifecycle lifecycle, AmbientDisplayConfiguration config) {
+
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new AmbientDisplayNotificationsPreferenceController(context, config,
-                metricsFeatureProvider));
         controllers.add(new DoubleTapScreenPreferenceController(context, lifecycle, config,
                 MY_USER_ID, KEY_AMBIENT_DISPLAY_DOUBLE_TAP));
         controllers.add(new PickupGesturePreferenceController(context, lifecycle, config,
@@ -71,6 +70,9 @@ public class AmbientDisplaySettings extends DashboardFragment {
                 AmbientDisplayAlwaysOnPreferenceController.class);
         controller.setConfig(getConfig(context));
         controller.setCallback(this::updatePreferenceStates);
+        final AmbientDisplayNotificationsPreferenceController notificationController = use(
+                AmbientDisplayNotificationsPreferenceController.class);
+        notificationController.setConfig(getConfig(context));
     }
 
     @Override
@@ -85,8 +87,7 @@ public class AmbientDisplaySettings extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle(),
-                getConfig(context), mMetricsFeatureProvider);
+        return buildPreferenceControllers(context, getLifecycle(), getConfig(context));
     }
 
     @Override
@@ -111,7 +112,7 @@ public class AmbientDisplaySettings extends DashboardFragment {
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     return buildPreferenceControllers(context, null,
-                            new AmbientDisplayConfiguration(context), null);
+                            new AmbientDisplayConfiguration(context));
                 }
             };
 
