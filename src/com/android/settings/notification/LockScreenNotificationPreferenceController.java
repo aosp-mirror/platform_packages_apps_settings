@@ -19,16 +19,12 @@ package com.android.settings.notification;
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS;
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS;
 
-import android.app.ActivityManager;
 import android.app.admin.DevicePolicyManager;
-import android.app.KeyguardManager;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
-import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -101,6 +97,8 @@ public class LockScreenNotificationPreferenceController extends AbstractPreferen
         }
         if (mProfileUserId != UserHandle.USER_NULL) {
             mLockscreenProfile = (RestrictedListPreference) screen.findPreference(mWorkSettingKey);
+            mLockscreenProfile.setRequiresActiveUnlockedProfile(true);
+            mLockscreenProfile.setProfileUserId(mProfileUserId);
         } else {
             setVisible(screen, mWorkSettingKey, false /* visible */);
             setVisible(screen, mWorkSettingCategoryKey, false /* visible */);
@@ -241,39 +239,6 @@ public class LockScreenNotificationPreferenceController extends AbstractPreferen
             mLockscreenSelectedValue = val;
             return true;
         }
-        return false;
-    }
-
-    @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        final String key = preference.getKey();
-        if (!TextUtils.equals(mWorkSettingKey, key)) {
-            return false;
-        }
-
-        // Check if the profile is started, first.
-        if (Utils.startQuietModeDialogIfNecessary(mContext, UserManager.get(mContext),
-                    mProfileUserId)) {
-            return true;
-        }
-
-        // Next, check if the profile is unlocked.
-        KeyguardManager manager =
-                (KeyguardManager) mContext.getSystemService(Context.KEYGUARD_SERVICE);
-        if (manager.isDeviceLocked(mProfileUserId)) {
-            //TODO: Figure out how to return the user to the current activity so they
-            //don't have to navigate to the settings again.
-            Intent intent = manager.createConfirmDeviceCredentialIntent(
-                    null, null, mProfileUserId);
-            try {
-                ActivityManager.getService().startConfirmDeviceCredentialIntent(intent,
-                        null /*options*/);
-            } catch (RemoteException ignored) {
-            }
-
-            return true;
-        }
-
         return false;
     }
 

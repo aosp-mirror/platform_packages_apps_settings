@@ -44,6 +44,7 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     private final Map<String, List<EnforcingUser>> mRestrictionSources = new HashMap<>();
     private final List<UserInfo> mUserProfileInfos = new ArrayList<>();
     private final Set<Integer> mManagedProfiles = new HashSet<>();
+    private boolean mIsQuietModeEnabled = false;
 
     @Resetter
     public void reset() {
@@ -52,6 +53,7 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
         mUserProfileInfos.clear();
         mRestrictionSources.clear();
         mManagedProfiles.clear();
+        mIsQuietModeEnabled = false;
     }
 
     public void setUserInfo(int userHandle, UserInfo userInfo) {
@@ -109,5 +111,14 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
 
     public void addManagedProfile(int userId) {
         mManagedProfiles.add(userId);
+    }
+
+    @Implementation
+    public boolean isQuietModeEnabled(UserHandle userHandle) {
+        return mIsQuietModeEnabled;
+    }
+
+    public void setQuietModeEnabled(boolean enabled) {
+        mIsQuietModeEnabled = enabled;
     }
 }
