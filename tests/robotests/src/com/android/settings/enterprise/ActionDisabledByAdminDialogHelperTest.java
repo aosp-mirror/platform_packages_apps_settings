@@ -94,7 +94,7 @@ public class ActionDisabledByAdminDialogHelperTest {
         mHelper.showAdminPolicies(admin, mActivity);
         final Intent intent = mActivityShadow.getNextStartedActivity();
         assertEquals(intent.getComponent(), new ComponentName(mActivity,
-                        Settings.DeviceAdminSettingsActivity.class.getName()));
+                Settings.DeviceAdminSettingsActivity.class.getName()));
     }
 
     @Test
@@ -139,9 +139,7 @@ public class ActionDisabledByAdminDialogHelperTest {
 
     @Test
     public void testSetAdminSupportDetails() {
-        final DevicePolicyManager dpm = RuntimeEnvironment.application.getSystemService(
-                DevicePolicyManager.class);
-        final ShadowDevicePolicyManager dpmShadow = Shadow.extract(dpm);
+        final ShadowDevicePolicyManager dpmShadow = ShadowDevicePolicyManager.getShadow();
         final UserManager userManager = RuntimeEnvironment.application.getSystemService(
                 UserManager.class);
         final ShadowUserManager userManagerShadow = Shadow.extract(userManager);
@@ -165,9 +163,7 @@ public class ActionDisabledByAdminDialogHelperTest {
 
     @Test
     public void testSetAdminSupportDetailsNotAdmin() {
-        final DevicePolicyManager dpm = RuntimeEnvironment.application.getSystemService(
-                DevicePolicyManager.class);
-        final ShadowDevicePolicyManager dpmShadow = Shadow.extract(dpm);
+        final ShadowDevicePolicyManager dpmShadow = ShadowDevicePolicyManager.getShadow();
         final UserManager userManager = RuntimeEnvironment.application.getSystemService(
                 UserManager.class);
         final ShadowUserManager userManagerShadow = Shadow.extract(userManager);

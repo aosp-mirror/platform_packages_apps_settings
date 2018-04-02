@@ -17,7 +17,8 @@
 package com.android.settings.applications.appinfo;
 
 import static com.android.settings.applications.appinfo.AppInfoDashboardFragment.ARG_PACKAGE_NAME;
-import static com.android.settings.applications.appinfo.AppInfoDashboardFragment.UNINSTALL_ALL_USERS_MENU;
+import static com.android.settings.applications.appinfo.AppInfoDashboardFragment
+        .UNINSTALL_ALL_USERS_MENU;
 import static com.android.settings.applications.appinfo.AppInfoDashboardFragment.UNINSTALL_UPDATES;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -31,6 +32,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -45,7 +47,6 @@ import android.view.MenuItem;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
@@ -75,7 +76,7 @@ public final class AppInfoDashboardFragmentTest {
     @Mock
     private SettingsActivity mActivity;
     @Mock
-    private DevicePolicyManagerWrapper mDevicePolicyManager;
+    private DevicePolicyManager mDevicePolicyManager;
     @Mock
     private PackageManager mPackageManager;
 
@@ -249,7 +250,7 @@ public final class AppInfoDashboardFragmentTest {
 
     @Test
     public void getNumberOfUserWithPackageInstalled_twoUsersInstalled_shouldReturnTwo()
-            throws PackageManager.NameNotFoundException{
+            throws PackageManager.NameNotFoundException {
         final String packageName = "Package1";
         final int userID1 = 1;
         final int userID2 = 2;
@@ -273,7 +274,7 @@ public final class AppInfoDashboardFragmentTest {
 
     @Test
     public void getNumberOfUserWithPackageInstalled_oneUserInstalled_shouldReturnOne()
-            throws PackageManager.NameNotFoundException{
+            throws PackageManager.NameNotFoundException {
         final String packageName = "Package1";
         final int userID1 = 1;
         final int userID2 = 2;
@@ -311,7 +312,7 @@ public final class AppInfoDashboardFragmentTest {
     @Test
     public void startAppInfoFragment_noCrashOnNullArgs() {
         final SettingsPreferenceFragment caller = mock(SettingsPreferenceFragment.class);
-        final SettingsActivity sa = mock (SettingsActivity.class);
+        final SettingsActivity sa = mock(SettingsActivity.class);
         when(caller.getActivity()).thenReturn(sa);
         when(caller.getContext()).thenReturn(sa);
         final AppEntry appEntry = mock(AppEntry.class);
@@ -324,7 +325,7 @@ public final class AppInfoDashboardFragmentTest {
     @Test
     public void startAppInfoFragment_includesNewAndOldArgs() {
         final SettingsPreferenceFragment caller = mock(SettingsPreferenceFragment.class);
-        final SettingsActivity sa = mock (SettingsActivity.class);
+        final SettingsActivity sa = mock(SettingsActivity.class);
         when(caller.getContext()).thenReturn(sa);
         final AppEntry appEntry = mock(AppEntry.class);
         appEntry.info = mock(ApplicationInfo.class);
@@ -339,10 +340,10 @@ public final class AppInfoDashboardFragmentTest {
 
         verify(caller).startActivityForResult(intent.capture(), any(Integer.class));
         assertThat(intent.getValue().getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
-            .containsKey("test"))
-            .isTrue();
+                .containsKey("test"))
+                .isTrue();
         assertThat(intent.getValue().getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
-            .containsKey(ARG_PACKAGE_NAME))
-            .isTrue();
+                .containsKey(ARG_PACKAGE_NAME))
+                .isTrue();
     }
 }

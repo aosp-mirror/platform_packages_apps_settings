@@ -33,7 +33,6 @@ import android.os.UserManager;
 
 import com.android.settings.testutils.ApplicationTestUtils;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settings.wrapper.IPackageManagerWrapper;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
@@ -75,7 +74,7 @@ public final class ApplicationFeatureProviderImplTest {
     @Mock
     private IPackageManagerWrapper mPackageManagerService;
     @Mock
-    private DevicePolicyManagerWrapper mDevicePolicyManager;
+    private DevicePolicyManager mDevicePolicyManager;
 
     private ApplicationFeatureProvider mProvider;
 
@@ -258,16 +257,16 @@ public final class ApplicationFeatureProviderImplTest {
                 new UserInfo(MANAGED_PROFILE_ID, "managed profile", 0)));
 
         when(mPackageManager.getInstalledApplicationsAsUser(PackageManager.GET_DISABLED_COMPONENTS
-                | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS
-                | PackageManager.MATCH_ANY_USER,
+                        | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS
+                        | PackageManager.MATCH_ANY_USER,
                 MAIN_USER_ID)).thenReturn(Arrays.asList(
-                        ApplicationTestUtils.buildInfo(APP_1_UID, APP_1, 0 /* flags */,
-                                Build.VERSION_CODES.M)));
+                ApplicationTestUtils.buildInfo(APP_1_UID, APP_1, 0 /* flags */,
+                        Build.VERSION_CODES.M)));
         when(mPackageManager.getInstalledApplicationsAsUser(PackageManager.GET_DISABLED_COMPONENTS
-                | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS,
+                        | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS,
                 MANAGED_PROFILE_ID)).thenReturn(Arrays.asList(
-                        ApplicationTestUtils.buildInfo(APP_2_UID, APP_2, 0 /* flags */,
-                                Build.VERSION_CODES.LOLLIPOP)));
+                ApplicationTestUtils.buildInfo(APP_2_UID, APP_2, 0 /* flags */,
+                        Build.VERSION_CODES.LOLLIPOP)));
     }
 
     private ResolveInfo createResolveInfo(String packageName) {

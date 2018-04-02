@@ -19,6 +19,7 @@ package com.android.settings.fuelgauge;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Fragment;
+import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -50,7 +51,6 @@ import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.ActionButtonPreference;
-import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
@@ -102,7 +102,7 @@ public class AppButtonsPreferenceController extends AbstractPreferenceController
     private final int mRequestRemoveDeviceAdmin;
 
     private ApplicationsState.Session mSession;
-    private DevicePolicyManagerWrapper mDpm;
+    private DevicePolicyManager mDpm;
     private UserManager mUserManager;
     private PackageManager mPm;
     private SettingsActivity mActivity;
@@ -118,7 +118,7 @@ public class AppButtonsPreferenceController extends AbstractPreferenceController
 
     public AppButtonsPreferenceController(SettingsActivity activity, Fragment fragment,
             Lifecycle lifecycle, String packageName, ApplicationsState state,
-            DevicePolicyManagerWrapper dpm, UserManager userManager,
+            DevicePolicyManager dpm, UserManager userManager,
             PackageManager packageManager, int requestUninstall, int requestRemoveDeviceAdmin) {
         super(activity);
 
@@ -477,7 +477,7 @@ public class AppButtonsPreferenceController extends AbstractPreferenceController
         } else {
             Intent intent = new Intent(Intent.ACTION_QUERY_PACKAGE_RESTART,
                     Uri.fromParts("package", mAppEntry.info.packageName, null));
-            intent.putExtra(Intent.EXTRA_PACKAGES, new String[]{mAppEntry.info.packageName});
+            intent.putExtra(Intent.EXTRA_PACKAGES, new String[] {mAppEntry.info.packageName});
             intent.putExtra(Intent.EXTRA_UID, mAppEntry.info.uid);
             intent.putExtra(Intent.EXTRA_USER_HANDLE, UserHandle.getUserId(mAppEntry.info.uid));
             Log.d(TAG, "Sending broadcast to query restart status for "

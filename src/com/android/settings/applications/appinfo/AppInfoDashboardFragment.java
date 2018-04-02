@@ -55,7 +55,6 @@ import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
@@ -122,7 +121,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
     private int mUserId;
     private String mPackageName;
 
-    private DevicePolicyManagerWrapper mDpm;
+    private DevicePolicyManager mDpm;
     private UserManager mUserManager;
     private PackageManager mPm;
 
@@ -198,8 +197,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
         super.onCreate(icicle);
         mFinishing = false;
         final Activity activity = getActivity();
-        mDpm = new DevicePolicyManagerWrapper(
-                (DevicePolicyManager) activity.getSystemService(Context.DEVICE_POLICY_SERVICE));
+        mDpm = (DevicePolicyManager) activity.getSystemService(Context.DEVICE_POLICY_SERVICE);
         mUserManager = (UserManager) activity.getSystemService(Context.USER_SERVICE);
         mPm = activity.getPackageManager();
 
