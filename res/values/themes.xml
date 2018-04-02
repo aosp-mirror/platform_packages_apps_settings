@@ -235,6 +235,11 @@
         <item name="android:alertDialogTheme">@style/Theme.AlertDialog</item>
 
         <item name="*android:lockPatternStyle">@style/LockPatternStyle.Setup</item>
+
+        <!-- For battery status icons in -->
+        <item name="batteryGoodColor">@color/battery_good_color_light</item>
+        <item name="batteryMaybeColor">@color/battery_maybe_color_light</item>
+        <item name="batteryBadColor">@color/battery_bad_color_light</item>
     </style>
 
     <style name="Theme.SubSettings" parent="Theme.Settings">

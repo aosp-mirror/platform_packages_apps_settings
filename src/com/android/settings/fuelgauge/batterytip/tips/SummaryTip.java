@@ -54,7 +54,7 @@ public class SummaryTip extends BatteryTip {
 
     @Override
     public int getIconId() {
-        return R.drawable.ic_check_circle_green_24dp;
+        return R.drawable.ic_battery_status_good_24dp;
     }
 
     @Override
