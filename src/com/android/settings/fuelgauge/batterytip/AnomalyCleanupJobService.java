@@ -42,12 +42,17 @@ public class AnomalyCleanupJobService extends JobService {
 
         final ComponentName component = new ComponentName(context, AnomalyCleanupJobService.class);
         final JobInfo.Builder jobBuilder =
-                new JobInfo.Builder(R.id.job_anomaly_clean_up, component)
+                new JobInfo.Builder(R.integer.job_anomaly_clean_up, component)
                         .setPeriodic(CLEAN_UP_FREQUENCY_MS)
                         .setRequiresDeviceIdle(true)
-                        .setRequiresCharging(true);
+                        .setRequiresCharging(true)
+                        .setPersisted(true);
+        final JobInfo pending = jobScheduler.getPendingJob(R.integer.job_anomaly_clean_up);
 
-        if (jobScheduler.schedule(jobBuilder.build()) != JobScheduler.RESULT_SUCCESS) {
+        // Don't schedule it if it already exists, to make sure it runs periodically even after
+        // reboot
+        if (pending == null && jobScheduler.schedule(jobBuilder.build())
+                != JobScheduler.RESULT_SUCCESS) {
             Log.i(TAG, "Anomaly clean up job service schedule failed.");
         }
     }
