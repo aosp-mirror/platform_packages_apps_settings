@@ -26,11 +26,8 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -38,7 +35,6 @@ import java.util.List;
 public class DoubleTapPowerSettings extends DashboardFragment {
 
     private static final String TAG = "DoubleTapPower";
-    private static final String KEY_DOUBLE_TAP_POWER = "gesture_double_tap_power";
 
     public static final String PREF_KEY_SUGGESTION_COMPLETE =
             "pref_double_tap_power_suggestion_complete";
@@ -67,19 +63,6 @@ public class DoubleTapPowerSettings extends DashboardFragment {
         return R.xml.double_tap_power_settings;
     }
 
-    @Override
-    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle());
-    }
-
-    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Lifecycle lifecycle) {
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new DoubleTapPowerPreferenceController(context, lifecycle,
-                KEY_DOUBLE_TAP_POWER));
-        return controllers;
-    }
-
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
@@ -88,12 +71,6 @@ public class DoubleTapPowerSettings extends DashboardFragment {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.double_tap_power_settings;
                     return Arrays.asList(sir);
-                }
-
-                @Override
-                public List<AbstractPreferenceController> createPreferenceControllers(
-                        Context context) {
-                    return buildPreferenceControllers(context, null /* lifecycle */);
                 }
             };
 }

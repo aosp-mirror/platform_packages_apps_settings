@@ -63,6 +63,12 @@ public class ManageAssist extends DashboardFragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        use(AssistGestureSettingsPreferenceController.class).setAssistOnly(true);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
 
@@ -75,8 +81,6 @@ public class ManageAssist extends DashboardFragment {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new DefaultAssistPreferenceController(context, "default_assist",
                 true /* showSetting */));
-        controllers.add(new AssistGestureSettingsPreferenceController(context, lifecycle,
-                KEY_ASSIST, true /* assistOnly */));
         controllers.add(new AssistContextPreferenceController(context, lifecycle));
         controllers.add(new AssistScreenshotPreferenceController(context, lifecycle));
         controllers.add(new AssistFlashScreenPreferenceController(context, lifecycle));

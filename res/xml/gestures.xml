@@ -17,38 +17,45 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="gesture_settings_screen"
-    android:title="@string/gesture_preference_title" >
+    android:title="@string/gesture_preference_title">
 
     <Preference
         android:key="gesture_assist_input_summary"
         android:title="@string/assist_gesture_title"
-        android:fragment="com.android.settings.gestures.AssistGestureSettings" />
+        android:fragment="com.android.settings.gestures.AssistGestureSettings"
+        settings:controller="com.android.settings.gestures.AssistGestureSettingsPreferenceController" />
 
     <Preference
         android:key="gesture_swipe_down_fingerprint_input_summary"
         android:title="@string/fingerprint_swipe_for_notifications_title"
-        android:fragment="com.android.settings.gestures.SwipeToNotificationSettings" />
+        android:fragment="com.android.settings.gestures.SwipeToNotificationSettings"
+        settings:controller="com.android.settings.gestures.SwipeToNotificationPreferenceController" />
 
     <Preference
         android:key="gesture_double_tap_power_input_summary"
         android:title="@string/double_tap_power_for_camera_title"
-        android:fragment="com.android.settings.gestures.DoubleTapPowerSettings" />
+        android:fragment="com.android.settings.gestures.DoubleTapPowerSettings"
+        settings:controller="com.android.settings.gestures.DoubleTapPowerPreferenceController" />
 
     <Preference
         android:key="gesture_double_twist_input_summary"
         android:title="@string/double_twist_for_camera_mode_title"
-        android:fragment="com.android.settings.gestures.DoubleTwistGestureSettings" />
+        android:fragment="com.android.settings.gestures.DoubleTwistGestureSettings"
+        settings:controller="com.android.settings.gestures.DoubleTwistPreferenceController" />
 
     <Preference
         android:key="gesture_double_tap_screen_input_summary"
         android:title="@string/ambient_display_title"
-        android:fragment="com.android.settings.gestures.DoubleTapScreenSettings" />
+        android:fragment="com.android.settings.gestures.DoubleTapScreenSettings"
+        settings:controller="com.android.settings.gestures.DoubleTapScreenPreferenceController" />
 
     <Preference
         android:key="gesture_pick_up_input_summary"
         android:title="@string/ambient_display_pickup_title"
-        android:fragment="com.android.settings.gestures.PickupGestureSettings" />
+        android:fragment="com.android.settings.gestures.PickupGestureSettings"
+        settings:controller="com.android.settings.gestures.PickupGesturePreferenceController" />
 
     <Preference
         android:key="gesture_prevent_ringing_summary"

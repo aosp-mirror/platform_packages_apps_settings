@@ -108,8 +108,6 @@ public class ConfigureNotificationSettings extends DashboardFragment {
         }
         controllers.add(new RecentNotifyingAppsPreferenceController(
                 context, new NotificationBackend(), app, host));
-        controllers.add(new SwipeToNotificationPreferenceController(context, lifecycle,
-                KEY_SWIPE_DOWN));
         controllers.add(badgeController);
         controllers.add(pulseController);
         controllers.add(lockScreenNotificationController);

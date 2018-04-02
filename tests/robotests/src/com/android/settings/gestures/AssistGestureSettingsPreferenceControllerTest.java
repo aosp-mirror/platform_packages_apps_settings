@@ -55,8 +55,8 @@ public class AssistGestureSettingsPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mFactory = FakeFeatureFactory.setupForTest();
-        mController =
-            new AssistGestureSettingsPreferenceController(mContext, null, KEY_ASSIST, false);
+        mController = new AssistGestureSettingsPreferenceController(mContext, KEY_ASSIST);
+        mController.setAssistOnly(false);
     }
 
     @Test
@@ -76,8 +76,8 @@ public class AssistGestureSettingsPreferenceControllerTest {
     public void testPreferenceController_ProperResultPayloadType() {
         final Context context = RuntimeEnvironment.application;
         AssistGestureSettingsPreferenceController controller =
-                new AssistGestureSettingsPreferenceController(context, null /* lifecycle */,
-                        KEY_ASSIST, false /* assistOnly */);
+                new AssistGestureSettingsPreferenceController(context, KEY_ASSIST);
+        controller.setAssistOnly(false);
         ResultPayload payload = controller.getResultPayload();
         assertThat(payload).isInstanceOf(InlineSwitchPayload.class);
     }
