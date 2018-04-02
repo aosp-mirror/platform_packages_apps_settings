@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
+import android.util.EventLog;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -154,7 +155,11 @@ public class BluetoothPermissionActivity extends AlertActivity implements
         String mRemoteName = mDevice != null ? mDevice.getAliasName() : null;
 
         if (mRemoteName == null) mRemoteName = getString(R.string.unknown);
-        return mRemoteName;
+        String nameNoNewline = mRemoteName.replaceAll("[\\t\\n\\r]+", " ");
+        if (!mRemoteName.equals(nameNoNewline)) {
+            EventLog.writeEvent(0x534e4554, "72872376", -1, "");
+        }
+        return nameNoNewline;
     }
 
     // TODO(edjee): createConnectionDialogView, createPhonebookDialogView and createMapDialogView
