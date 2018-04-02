@@ -41,6 +41,7 @@ public class ConfigureWifiSettings extends DashboardFragment {
     private static final String TAG = "ConfigureWifiSettings";
 
     public static final String KEY_IP_ADDRESS = "current_ip_address";
+    public static final int WIFI_WAKEUP_REQUEST_CODE = 600;
 
     private WifiWakeupPreferenceController mWifiWakeupPreferenceController;
     private UseOpenWifiPreferenceController mUseOpenWifiPreferenceController;
@@ -71,7 +72,7 @@ public class ConfigureWifiSettings extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        mWifiWakeupPreferenceController = new WifiWakeupPreferenceController(context);
+        mWifiWakeupPreferenceController = new WifiWakeupPreferenceController(context, this);
         mUseOpenWifiPreferenceController = new UseOpenWifiPreferenceController(context, this,
                 getLifecycle());
         final WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
@@ -87,10 +88,16 @@ public class ConfigureWifiSettings extends DashboardFragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (mUseOpenWifiPreferenceController == null ||
-                !mUseOpenWifiPreferenceController.onActivityResult(requestCode, resultCode)) {
-            super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == WIFI_WAKEUP_REQUEST_CODE && mWifiWakeupPreferenceController != null) {
+            mWifiWakeupPreferenceController.onActivityResult(requestCode, resultCode);
+            return;
         }
+        if (resultCode == UseOpenWifiPreferenceController.REQUEST_CODE_OPEN_WIFI_AUTOMATICALLY
+                && mUseOpenWifiPreferenceController == null) {
+            mUseOpenWifiPreferenceController.onActivityResult(requestCode, resultCode);
+            return;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
