@@ -26,13 +26,13 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
+import android.os.UserManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.SparseArray;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.wrapper.UserManagerWrapper;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.drawable.UserIconDrawable;
@@ -54,7 +54,7 @@ public class SecondaryUserControllerTest {
     private static final String TEST_NAME = "Fred";
     private static final String TARGET_PREFERENCE_GROUP_KEY = "pref_secondary_users";
     @Mock
-    private UserManagerWrapper mUserManager;
+    private UserManager mUserManager;
     @Mock
     private PreferenceScreen mScreen;
     @Mock

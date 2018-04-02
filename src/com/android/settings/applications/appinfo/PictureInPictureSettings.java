@@ -40,7 +40,6 @@ import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.notification.EmptyTextSettings;
 import com.android.settings.widget.AppPreference;
-import com.android.settings.wrapper.UserManagerWrapper;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.text.Collator;
@@ -88,7 +87,7 @@ public class PictureInPictureSettings extends EmptyTextSettings {
 
     private Context mContext;
     private PackageManagerWrapper mPackageManager;
-    private UserManagerWrapper mUserManager;
+    private UserManager mUserManager;
     private IconDrawableFactory mIconDrawableFactory;
 
     /**
@@ -119,7 +118,7 @@ public class PictureInPictureSettings extends EmptyTextSettings {
         // Do nothing
     }
 
-    public PictureInPictureSettings(PackageManagerWrapper pm, UserManagerWrapper um) {
+    public PictureInPictureSettings(PackageManagerWrapper pm, UserManager um) {
         mPackageManager = pm;
         mUserManager = um;
     }
@@ -130,7 +129,7 @@ public class PictureInPictureSettings extends EmptyTextSettings {
 
         mContext = getActivity();
         mPackageManager = new PackageManagerWrapper(mContext.getPackageManager());
-        mUserManager = new UserManagerWrapper(mContext.getSystemService(UserManager.class));
+        mUserManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
         mIconDrawableFactory = IconDrawableFactory.newInstance(mContext);
     }
 

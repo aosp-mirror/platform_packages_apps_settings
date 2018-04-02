@@ -27,7 +27,6 @@ import android.support.annotation.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.wrapper.WallpaperManagerWrapper;
 
 public class WallpaperSuggestionActivity extends Activity {
 
@@ -61,9 +60,16 @@ public class WallpaperSuggestionActivity extends Activity {
 
     @VisibleForTesting
     public static boolean isSuggestionComplete(Context context) {
-        final WallpaperManagerWrapper manager = new WallpaperManagerWrapper(context);
-        return manager.isWallpaperServiceEnabled() ? manager.getWallpaperId(
-                WallpaperManager.FLAG_SYSTEM) > 0 : false;
+        if (!isWallpaperServiceEnabled(context)) {
+            return true;
+        }
+        final WallpaperManager manager = (WallpaperManager) context.getSystemService(
+                WALLPAPER_SERVICE);
+        return manager.getWallpaperId(WallpaperManager.FLAG_SYSTEM) > 0;
     }
 
+    private static boolean isWallpaperServiceEnabled(Context context) {
+        return context.getResources().getBoolean(
+                com.android.internal.R.bool.config_enableWallpaperService);
+    }
 }
