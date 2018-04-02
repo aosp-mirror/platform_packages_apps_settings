@@ -36,9 +36,9 @@ import java.util.List;
 public class UseOpenWifiPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener,
         LifecycleObserver, OnResume, OnPause {
+    public static final int REQUEST_CODE_OPEN_WIFI_AUTOMATICALLY = 400;
+
     private static final String KEY_USE_OPEN_WIFI_AUTOMATICALLY = "use_open_wifi_automatically";
-    @VisibleForTesting
-    static final int REQUEST_CODE_OPEN_WIFI_AUTOMATICALLY = 400;
 
     private final ContentResolver mContentResolver;
     private final Fragment mFragment;

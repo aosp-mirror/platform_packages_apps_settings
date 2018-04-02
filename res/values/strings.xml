@@ -1916,9 +1916,11 @@
     <!-- Wi-Fi settings dialog. Summary text describing why we need Wi-Fi scanning on. [CHAR LIMIT=NONE]-->
     <string name="wifi_settings_scanning_required_summary">To turn on Wi\u2011Fi automatically, you first need to turn on Wi\u2011Fi scanning.</string>
     <!-- Wi-Fi settings dialog. Informational text describing what Wi-Fi scanning does. [CHAR LIMIT=NONE]-->
-    <string name="wifi_settings_scanning_required_info">Wi\2011Fi scanning allows apps and services to scan for Wi\u2011Fi networks at any time, even when Wi\u2011Fi is off. This can be used, for example, to improve location\u2011based features and services.</string>
+    <string name="wifi_settings_scanning_required_info">Wi\u2011Fi scanning allows apps and services to scan for Wi\u2011Fi networks at any time, even when Wi\u2011Fi is off. This can be used, for example, to improve location\u2011based features and services.</string>
     <!-- Wi-Fi settings dialog. Text for the button that takes users to a help article about Wi-Fi scanning. [CHAR LIMIT = 20]-->
     <string name="wifi_settings_scanning_required_turn_on">Turn on</string>
+    <!-- Wi-Fi settings dialog. Text to show in toast for when user turns on wifi scanning. [CHAR LIMIT=NONE] -->
+    <string name="wifi_settings_scanning_required_enabled">Wi\u2011Fi scanning turned on</string>
 
     <!-- Dialog for Access Points --> <skip />
     <!-- Label to show/hide advanced options [CHAR LIMIT=40] -->
@@ -5053,7 +5055,7 @@
     <!-- Message for battery tip dialog to show the info to restrict the app [CHAR LIMIT=NONE] -->
     <string name="battery_tip_restrict_app_dialog_message">To save battery, stop <xliff:g id="app">%1$s</xliff:g> from using battery in the background. This app may not work properly and notifications may be delayed.</string>
     <!-- Message for battery tip dialog to show the info to restrict the app, below it app list will be shown as a view [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_restrict_apps_less_than_5_dialog_message">To save battery, stop these apps from using battery in the background. Restricted apps may not work properly and notifications may be delayed.\n\nApps:\n</string>
+    <string name="battery_tip_restrict_apps_less_than_5_dialog_message">To save battery, stop these apps from using battery in the background. Restricted apps may not work properly and notifications may be delayed.\n\nApps:</string>
     <!-- Message for battery tip dialog to show the info to restrict the app, below it app list will be shown as raw string[CHAR LIMIT=NONE] -->
     <string name="battery_tip_restrict_apps_more_than_5_dialog_message">To save battery, stop these apps from using battery in the background. Restricted apps may not work properly and notifications may be delayed.\n\nApps:\n<xliff:g id="app_list">%1$s</xliff:g>.</string>
     <!-- OK button for battery tip dialog to show the restrict app list [CHAR LIMIT=NONE] -->
