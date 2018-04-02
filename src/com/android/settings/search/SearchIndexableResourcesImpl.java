@@ -58,6 +58,7 @@ import com.android.settings.gestures.DoubleTapScreenSettings;
 import com.android.settings.gestures.DoubleTwistGestureSettings;
 import com.android.settings.gestures.GestureSettings;
 import com.android.settings.gestures.PickupGestureSettings;
+import com.android.settings.gestures.PreventRingingGestureSettings;
 import com.android.settings.gestures.SwipeToNotificationSettings;
 import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment;
@@ -179,6 +180,7 @@ public class SearchIndexableResourcesImpl implements SearchIndexableResources {
         addIndex(MyDeviceInfoFragment.class);
         addIndex(VibrationSettings.class);
         addIndex(RecentLocationRequestSeeAllFragment.class);
+        addIndex(PreventRingingGestureSettings.class);
     }
 
     @Override
