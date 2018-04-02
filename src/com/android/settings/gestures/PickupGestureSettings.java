@@ -18,7 +18,6 @@ package com.android.settings.gestures;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
@@ -28,17 +27,13 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class PickupGestureSettings extends DashboardFragment {
 
     private static final String TAG = "PickupGestureSettings";
-    private static final String KEY_PICK_UP = "gesture_pick_up";
 
     public static final String PREF_KEY_SUGGESTION_COMPLETE =
             "pref_pickup_gesture_suggestion_complete";
@@ -50,6 +45,9 @@ public class PickupGestureSettings extends DashboardFragment {
                 .getSuggestionFeatureProvider(context);
         SharedPreferences prefs = suggestionFeatureProvider.getSharedPrefs(context);
         prefs.edit().putBoolean(PREF_KEY_SUGGESTION_COMPLETE, true).apply();
+
+        use(PickupGesturePreferenceController.class)
+            .setConfig(new AmbientDisplayConfiguration(context));
     }
 
     @Override
@@ -72,19 +70,6 @@ public class PickupGestureSettings extends DashboardFragment {
         return R.string.help_url_pickup_gesture;
     }
 
-    @Override
-    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle());
-    }
-
-    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Lifecycle lifecycle) {
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new PickupGesturePreferenceController(context, lifecycle,
-                new AmbientDisplayConfiguration(context), UserHandle.myUserId(), KEY_PICK_UP));
-        return controllers;
-    }
-
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
@@ -93,12 +78,6 @@ public class PickupGestureSettings extends DashboardFragment {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.pick_up_gesture_settings;
                     return Arrays.asList(sir);
-                }
-
-                @Override
-                public List<AbstractPreferenceController> createPreferenceControllers(
-                        Context context) {
-                    return buildPreferenceControllers(context, null /* lifecycle */);
                 }
             };
 

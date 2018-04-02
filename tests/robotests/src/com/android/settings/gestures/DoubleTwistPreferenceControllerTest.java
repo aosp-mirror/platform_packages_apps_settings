@@ -61,7 +61,7 @@ public class DoubleTwistPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mock(UserManager.class));
-        mController = new DoubleTwistPreferenceController(mContext, null, KEY_DOUBLE_TWIST);
+        mController = new DoubleTwistPreferenceController(mContext, KEY_DOUBLE_TWIST);
     }
 
     @After
@@ -120,7 +120,7 @@ public class DoubleTwistPreferenceControllerTest {
         Settings.Secure.putIntForUser(
                 null, Settings.Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, 0, managedId);
         DoubleTwistPreferenceController controller =
-                spy(new DoubleTwistPreferenceController(mContext, null, KEY_DOUBLE_TWIST));
+                spy(new DoubleTwistPreferenceController(mContext, KEY_DOUBLE_TWIST));
         ShadowDoubleTwistPreferenceController.setManagedProfileId(managedId);
 
         // enable the gesture
@@ -135,24 +135,24 @@ public class DoubleTwistPreferenceControllerTest {
     }
 
     @Test
-    public void testSwitchEnabled_configIsSet_shouldReturnTrue() {
+    public void testIsChecked_configIsSet_shouldReturnTrue() {
         // Set the setting to be enabled.
         final Context context = RuntimeEnvironment.application;
         Settings.System.putInt(context.getContentResolver(),
                 Settings.Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, 1);
-        mController = new DoubleTwistPreferenceController(context, null, KEY_DOUBLE_TWIST);
+        mController = new DoubleTwistPreferenceController(context, KEY_DOUBLE_TWIST);
 
-        assertThat(mController.isSwitchPrefEnabled()).isTrue();
+        assertThat(mController.isChecked()).isTrue();
     }
 
     @Test
-    public void testSwitchEnabled_configIsNotSet_shouldReturnFalse() {
+    public void testIsChecked_configIsNotSet_shouldReturnFalse() {
         // Set the setting to be disabled.
         final Context context = RuntimeEnvironment.application;
         Settings.System.putInt(context.getContentResolver(),
                 Settings.Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, 0);
-        mController = new DoubleTwistPreferenceController(context, null, KEY_DOUBLE_TWIST);
+        mController = new DoubleTwistPreferenceController(context, KEY_DOUBLE_TWIST);
 
-        assertThat(mController.isSwitchPrefEnabled()).isFalse();
+        assertThat(mController.isChecked()).isFalse();
     }
 }
