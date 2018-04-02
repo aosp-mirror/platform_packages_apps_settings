@@ -33,7 +33,7 @@ import android.provider.Settings;
 
 import com.android.settings.TimeoutListPreference;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.ShadowDevicePolicyManagerWrapper;
+import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import org.junit.Before;
@@ -50,7 +50,7 @@ import java.util.Collections;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = ShadowDevicePolicyManagerWrapper.class)
+@Config(shadows = ShadowDevicePolicyManager.class)
 public class TimeoutPreferenceControllerTest {
 
     private static final int TIMEOUT = 30;
@@ -93,7 +93,7 @@ public class TimeoutPreferenceControllerTest {
         final int profileUserId = UserHandle.myUserId();
         final long timeout = 10000;
         when(mUserManager.getProfiles(profileUserId)).thenReturn(Collections.emptyList());
-        ShadowDevicePolicyManagerWrapper.setMaximumTimeToLock(profileUserId, timeout);
+        ShadowDevicePolicyManager.getShadow().setMaximumTimeToLock(profileUserId, timeout);
 
         mController.updateState(mPreference);
         verify(mPreference).removeUnusableTimeouts(timeout, null);
@@ -104,7 +104,7 @@ public class TimeoutPreferenceControllerTest {
         final int profileUserId = UserHandle.myUserId();
         final long timeout = 100;
         when(mUserManager.getProfiles(profileUserId)).thenReturn(Collections.emptyList());
-        ShadowDevicePolicyManagerWrapper.setMaximumTimeToLock(profileUserId, timeout);
+        ShadowDevicePolicyManager.getShadow().setMaximumTimeToLock(profileUserId, timeout);
 
         int userId = UserHandle.myUserId();
         List<UserManager.EnforcingUser> enforcingUsers = new ArrayList<>();
@@ -124,8 +124,8 @@ public class TimeoutPreferenceControllerTest {
         ArgumentCaptor<EnforcedAdmin> adminCaptor = ArgumentCaptor.forClass(EnforcedAdmin.class);
 
         verify(mPreference, times(2))
-            .removeUnusableTimeouts(longCaptor.capture(), adminCaptor.capture());
-        assertEquals(0, (long)longCaptor.getValue());
+                .removeUnusableTimeouts(longCaptor.capture(), adminCaptor.capture());
+        assertEquals(0, (long) longCaptor.getValue());
         assertTrue(adminCaptor.getValue() != null);
     }
 }

@@ -17,7 +17,6 @@
 package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Matchers.anyString;
@@ -28,6 +27,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -48,7 +48,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -74,7 +73,7 @@ public class UtilsTest {
     @Mock
     private ConnectivityManager connectivityManager;
     @Mock
-    private DevicePolicyManagerWrapper mDevicePolicyManager;
+    private DevicePolicyManager mDevicePolicyManager;
     @Mock
     private UserManager mUserManager;
     @Mock
