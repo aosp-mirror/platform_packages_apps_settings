@@ -21,6 +21,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -36,7 +37,6 @@ import android.text.SpannableStringBuilder;
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.wrapper.ConnectivityManagerWrapper;
-import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
@@ -68,7 +68,7 @@ public class EnterprisePrivacyFeatureProviderImplTest {
     private List<UserInfo> mProfiles = new ArrayList<>();
 
     private @Mock Context mContext;
-    private @Mock DevicePolicyManagerWrapper mDevicePolicyManager;
+    private @Mock DevicePolicyManager mDevicePolicyManager;
     private @Mock PackageManagerWrapper mPackageManagerWrapper;
     private @Mock PackageManager mPackageManager;
     private @Mock UserManager mUserManager;

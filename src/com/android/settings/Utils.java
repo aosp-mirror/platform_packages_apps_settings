@@ -94,7 +94,6 @@ import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.password.ChooseLockSettingsHelper;
-import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 
 import java.net.InetAddress;
 import java.util.Iterator;
@@ -874,7 +873,7 @@ public final class Utils extends com.android.settingslib.Utils {
      * @param packageName package to check about
      */
     public static boolean isProfileOrDeviceOwner(UserManager userManager,
-            DevicePolicyManagerWrapper devicePolicyManager, String packageName) {
+            DevicePolicyManager devicePolicyManager, String packageName) {
         List<UserInfo> userInfos = userManager.getUsers();
         if (devicePolicyManager.isDeviceOwnerAppOnAnyUser(packageName)) {
             return true;

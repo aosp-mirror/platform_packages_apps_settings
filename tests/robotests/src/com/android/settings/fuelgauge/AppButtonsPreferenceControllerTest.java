@@ -34,6 +34,7 @@ import static org.mockito.Mockito.when;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.app.Fragment;
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -46,7 +47,6 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.widget.ActionButtonPreference;
 import com.android.settings.widget.ActionButtonPreferenceTest;
-import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
@@ -87,7 +87,7 @@ public class AppButtonsPreferenceControllerTest {
     @Mock
     private PackageManager mPackageManger;
     @Mock
-    private DevicePolicyManagerWrapper mDpm;
+    private DevicePolicyManager mDpm;
     @Mock
     private ActivityManager mAm;
     @Mock
@@ -367,7 +367,7 @@ public class AppButtonsPreferenceControllerTest {
      * {@link ButtonActionDialogFragment.AppButtonsDialogListener}
      */
     public static class TestFragment extends Fragment
-        implements ButtonActionDialogFragment.AppButtonsDialogListener {
+            implements ButtonActionDialogFragment.AppButtonsDialogListener {
 
         @Override
         public void handleDialogClick(int type) {
