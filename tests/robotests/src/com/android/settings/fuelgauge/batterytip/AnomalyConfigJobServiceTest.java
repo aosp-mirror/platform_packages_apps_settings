@@ -25,7 +25,9 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.robolectric.RuntimeEnvironment.application;
 
 import android.app.StatsManager;
@@ -43,6 +45,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowJobScheduler;
 
@@ -57,11 +60,17 @@ public class AnomalyConfigJobServiceTest {
     @Mock
     private StatsManager mStatsManager;
 
+    private Context mContext;
+    private JobScheduler mJobScheduler;
     private AnomalyConfigJobService mJobService;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+
+        mContext = spy(RuntimeEnvironment.application);
+        mJobScheduler = spy(mContext.getSystemService(JobScheduler.class));
+        when(mContext.getSystemService(JobScheduler.class)).thenReturn(mJobScheduler);
 
         mJobService = spy(new AnomalyConfigJobService());
         doReturn(application.getSharedPreferences(AnomalyConfigJobService.PREF_DB,
@@ -71,18 +80,27 @@ public class AnomalyConfigJobServiceTest {
     }
 
     @Test
-    public void testScheduleCleanUp() {
-        AnomalyConfigJobService.scheduleConfigUpdate(application);
+    public void testScheduleConfigUpdate() {
+        AnomalyConfigJobService.scheduleConfigUpdate(mContext);
 
         ShadowJobScheduler shadowJobScheduler =
-                Shadows.shadowOf(application.getSystemService(JobScheduler.class));
+                Shadows.shadowOf(mContext.getSystemService(JobScheduler.class));
         List<JobInfo> pendingJobs = shadowJobScheduler.getAllPendingJobs();
         assertEquals(1, pendingJobs.size());
         JobInfo pendingJob = pendingJobs.get(0);
-        assertThat(pendingJob.getId()).isEqualTo(R.id.job_anomaly_config_update);
+        assertThat(pendingJob.getId()).isEqualTo(R.integer.job_anomaly_config_update);
         assertThat(pendingJob.getIntervalMillis()).isEqualTo(TimeUnit.DAYS.toMillis(1));
         assertThat(pendingJob.isRequireDeviceIdle()).isTrue();
         assertThat(pendingJob.isRequireCharging()).isTrue();
+        assertThat(pendingJob.isPersisted()).isTrue();
+    }
+
+    @Test
+    public void testScheduleConfigUpdate_invokeTwice_onlyScheduleOnce() {
+        AnomalyConfigJobService.scheduleConfigUpdate(mContext);
+        AnomalyConfigJobService.scheduleConfigUpdate(mContext);
+
+        verify(mJobScheduler, times(1)).schedule(any());
     }
 
     @Test

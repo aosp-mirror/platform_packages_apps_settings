@@ -113,7 +113,7 @@ public class AnomalyDetectionJobServiceTest {
         assertThat(pendingJobs).hasSize(1);
 
         JobInfo pendingJob = pendingJobs.get(0);
-        assertThat(pendingJob.getId()).isEqualTo(R.id.job_anomaly_detection);
+        assertThat(pendingJob.getId()).isEqualTo(R.integer.job_anomaly_detection);
         assertThat(pendingJob.getMaxExecutionDelayMillis())
                 .isEqualTo(TimeUnit.MINUTES.toMillis(30));
     }
