@@ -51,7 +51,6 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
 import android.view.View;
@@ -70,7 +69,6 @@ import com.android.settings.widget.ActionButtonPreference;
 import com.android.settings.widget.ActionButtonPreferenceTest;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settings.wifi.WifiDetailPreference;
-import com.android.settings.wrapper.ConnectivityManagerWrapper;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.wifi.AccessPoint;
@@ -91,7 +89,6 @@ import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -118,8 +115,6 @@ public class WifiDetailPreferenceControllerTest {
     private Activity mockActivity;
     @Mock
     private ConnectivityManager mockConnectivityManager;
-    @Mock
-    private ConnectivityManagerWrapper mockConnectivityManagerWrapper;
     @Mock
     private Network mockNetwork;
     @Mock
@@ -173,8 +168,6 @@ public class WifiDetailPreferenceControllerTest {
     private ArgumentCaptor<NetworkCallback> mCallbackCaptor;
     @Captor
     private ArgumentCaptor<View.OnClickListener> mForgetClickListener;
-    @Captor
-    private ArgumentCaptor<Preference> mIpv6AddressCaptor;
 
     private Context mContext;
     private Lifecycle mLifecycle;
@@ -245,12 +238,9 @@ public class WifiDetailPreferenceControllerTest {
         when(mockAccessPoint.getConfig()).thenReturn(mockWifiConfig);
         when(mockAccessPoint.getLevel()).thenReturn(LEVEL);
         when(mockAccessPoint.getSecurityString(false)).thenReturn(SECURITY);
-
-        when(mockConnectivityManagerWrapper.getConnectivityManager())
-                .thenReturn(mockConnectivityManager);
         when(mockConnectivityManager.getNetworkInfo(any(Network.class)))
                 .thenReturn(mockNetworkInfo);
-        doNothing().when(mockConnectivityManagerWrapper).registerNetworkCallback(
+        doNothing().when(mockConnectivityManager).registerNetworkCallback(
                 nullable(NetworkRequest.class), mCallbackCaptor.capture(), nullable(Handler.class));
         mockButtonsPref = ActionButtonPreferenceTest.createMock();
         when(mockButtonsPref.setButton1OnClickListener(mForgetClickListener.capture()))
@@ -281,7 +271,7 @@ public class WifiDetailPreferenceControllerTest {
     private WifiDetailPreferenceController newWifiDetailPreferenceController() {
         return new WifiDetailPreferenceController(
                 mockAccessPoint,
-                mockConnectivityManagerWrapper,
+                mockConnectivityManager,
                 mContext,
                 mockFragment,
                 null,  // Handler
@@ -362,7 +352,7 @@ public class WifiDetailPreferenceControllerTest {
     public void networkCallback_shouldBeRegisteredOnResume() {
         displayAndResume();
 
-        verify(mockConnectivityManagerWrapper, times(1)).registerNetworkCallback(
+        verify(mockConnectivityManager, times(1)).registerNetworkCallback(
                 nullable(NetworkRequest.class), mCallbackCaptor.capture(), nullable(Handler.class));
     }
 
@@ -779,8 +769,6 @@ public class WifiDetailPreferenceControllerTest {
 
         displayAndResume();
 
-        List<Preference> addrs = mIpv6AddressCaptor.getAllValues();
-
         String expectedAddresses = String.join("\n",
                 asString(Constants.IPV6_LINKLOCAL),
                 asString(Constants.IPV6_GLOBAL1),
@@ -826,7 +814,7 @@ public class WifiDetailPreferenceControllerTest {
         ArgumentCaptor<OnClickListener> captor = ArgumentCaptor.forClass(OnClickListener.class);
         verify(mockButtonsPref).setButton2OnClickListener(captor.capture());
         captor.getValue().onClick(null);
-        verify(mockConnectivityManagerWrapper).startCaptivePortalApp(mockNetwork);
+        verify(mockConnectivityManager).startCaptivePortalApp(mockNetwork);
         verify(mockMetricsFeatureProvider)
                 .action(mockActivity, MetricsProto.MetricsEvent.ACTION_WIFI_SIGNIN);
     }
