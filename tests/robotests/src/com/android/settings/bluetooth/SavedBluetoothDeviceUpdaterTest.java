@@ -30,6 +30,8 @@ import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -49,6 +51,10 @@ public class SavedBluetoothDeviceUpdaterTest {
     private CachedBluetoothDevice mCachedBluetoothDevice;
     @Mock
     private BluetoothDevice mBluetoothDevice;
+    @Mock
+    private LocalBluetoothManager mLocalManager;
+    @Mock
+    private LocalBluetoothProfileManager mLocalBluetoothProfileManager;
 
     private Context mContext;
     private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
@@ -60,9 +66,10 @@ public class SavedBluetoothDeviceUpdaterTest {
         mContext = RuntimeEnvironment.application;
         doReturn(mContext).when(mDashboardFragment).getContext();
         when(mCachedBluetoothDevice.getDevice()).thenReturn(mBluetoothDevice);
+        when(mLocalManager.getProfileManager()).thenReturn(mLocalBluetoothProfileManager);
 
         mBluetoothDeviceUpdater = spy(new SavedBluetoothDeviceUpdater(mDashboardFragment,
-                mDevicePreferenceCallback, null));
+                mDevicePreferenceCallback, mLocalManager));
         mBluetoothDeviceUpdater.setPrefContext(mContext);
         doNothing().when(mBluetoothDeviceUpdater).addPreference(any());
         doNothing().when(mBluetoothDeviceUpdater).removePreference(any());

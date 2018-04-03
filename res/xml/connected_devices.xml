@@ -24,27 +24,29 @@
         android:key="connected_device_list"
         android:title="@string/connected_device_connected_title"/>
 
-    <PreferenceCategory
-        android:key="saved_device_list"
-        android:title="@string/connected_device_saved_title"/>
-
     <com.android.settingslib.RestrictedPreference
-        android:fragment="com.android.settings.bluetooth.BluetoothPairingDetail"
         android:key="add_bt_devices"
         android:title="@string/connected_device_add_device_title"
         android:icon="@drawable/ic_menu_add"
         android:summary="@string/connected_device_add_device_summary"
+        android:fragment="com.android.settings.bluetooth.BluetoothPairingDetail"
         settings:allowDividerAbove="true"
         settings:userRestriction="no_config_bluetooth"
         settings:useAdminDisabledSummary="true"
         settings:controller="com.android.settings.connecteddevice.AddDevicePreferenceController"/>
+
+    <Preference
+        android:key="previously_connected_devices"
+        android:title="@string/connected_device_previously_connected_title"
+        android:icon="@drawable/ic_devices_other_black"
+        android:fragment="com.android.settings.connecteddevice.PreviouslyConnectedDeviceDashboardFragment"
+        settings:allowDividerAbove="true"/>
 
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="toggle_bluetooth_switch"
         android:title="@string/bluetooth_settings_title"
         android:icon="@drawable/ic_settings_bluetooth"
         android:summary="@string/bluetooth_pref_summary"
-        settings:allowDividerAbove="true"
         settings:controller="com.android.settings.bluetooth.BluetoothSwitchPreferenceController"
         settings:userRestriction="no_bluetooth"
         settings:platform_slice="true"/>
@@ -56,7 +58,7 @@
         android:summary="@string/nfc_quick_toggle_summary"/>
 
     <Preference
-        android:fragment="com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment"
         android:key="connection_preferences"
-        android:title="@string/connected_device_connections_title"/>
+        android:title="@string/connected_device_connections_title"
+        android:fragment="com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment"/>
 </PreferenceScreen>

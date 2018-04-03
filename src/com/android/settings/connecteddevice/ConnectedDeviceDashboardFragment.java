@@ -72,7 +72,6 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
             Lifecycle lifecycle, DashboardFragment dashboardFragment) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new ConnectedDeviceGroupController(context, dashboardFragment, lifecycle));
-        controllers.add(new SavedDeviceGroupController(context, dashboardFragment, lifecycle));
 
         final NfcPreferenceController nfcPreferenceController =
                 new NfcPreferenceController(context);
