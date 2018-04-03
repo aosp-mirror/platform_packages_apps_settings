@@ -305,7 +305,9 @@
 
     <style name="TextAppearance.Medium" parent="@android:style/TextAppearance.Material.Medium" />
     <style name="TextAppearance.Small" parent="@android:style/TextAppearance.Material.Small" />
-    <style name="TextAppearance.Switch" parent="@android:style/TextAppearance.Material.Title" />
+    <style name="TextAppearance.Switch" parent="@android:style/TextAppearance.Material.Title">
+        <item name="android:textSize">18sp</item>
+    </style>
 
     <style name="TextAppearance.CategoryTitle" parent="@android:style/TextAppearance.Material.Body2">
         <item name="android:textColor">?android:attr/textColorSecondary</item>
