@@ -20,19 +20,18 @@ import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_OPPORTUNISTIC;
 import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_PROVIDER_HOSTNAME;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.FragmentManager;
+import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
-import android.view.LayoutInflater;
+import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,8 +40,9 @@ import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.utils.AnnotationSpan;
+import com.android.settingslib.CustomDialogPreference;
 import com.android.settingslib.HelpUtils;
 
 import java.util.HashMap;
@@ -51,7 +51,7 @@ import java.util.Map;
 /**
  * Dialog to set the private dns
  */
-public class PrivateDnsModeDialogFragment extends InstrumentedDialogFragment implements
+public class PrivateDnsModeDialogPreference extends CustomDialogPreference implements
         DialogInterface.OnClickListener, RadioGroup.OnCheckedChangeListener, TextWatcher {
 
     public static final String ANNOTATION_URL = "url";
@@ -77,41 +77,44 @@ public class PrivateDnsModeDialogFragment extends InstrumentedDialogFragment imp
     @VisibleForTesting
     RadioGroup mRadioGroup;
     @VisibleForTesting
-    Button mSaveButton;
-    @VisibleForTesting
     String mMode;
 
-    public static void show(FragmentManager fragmentManager) {
-        if (fragmentManager.findFragmentByTag(TAG) == null) {
-            final PrivateDnsModeDialogFragment fragment = new PrivateDnsModeDialogFragment();
-            fragment.show(fragmentManager, TAG);
-        }
+    public PrivateDnsModeDialogPreference(Context context) {
+        super(context);
     }
+
+    public PrivateDnsModeDialogPreference(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    public PrivateDnsModeDialogPreference(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+    }
+
+    public PrivateDnsModeDialogPreference(Context context, AttributeSet attrs, int defStyleAttr,
+            int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+    }
+
+    private final AnnotationSpan.LinkInfo mUrlLinkInfo = new AnnotationSpan.LinkInfo(
+            ANNOTATION_URL, (widget) -> {
+        final Context context = widget.getContext();
+        final Intent intent = HelpUtils.getHelpIntent(context,
+                context.getString(R.string.help_uri_private_dns),
+                context.getClass().getName());
+        if (intent != null) {
+            try {
+                widget.startActivityForResult(intent, 0);
+            } catch (ActivityNotFoundException e) {
+                Log.w(TAG, "Activity was not found for intent, " + intent.toString());
+            }
+        }
+    });
 
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    protected void onBindDialogView(View view) {
         final Context context = getContext();
-
-        final AlertDialog dialog = new AlertDialog.Builder(context)
-                .setTitle(R.string.select_private_dns_configuration_title)
-                .setView(buildPrivateDnsView(context))
-                .setPositiveButton(R.string.save, this)
-                .setNegativeButton(R.string.dlg_cancel, null)
-                .create();
-
-        dialog.setOnShowListener(dialogInterface -> {
-            mSaveButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-            updateDialogInfo();
-        });
-        return dialog;
-    }
-
-    private View buildPrivateDnsView(final Context context) {
         final ContentResolver contentResolver = context.getContentResolver();
-        mMode = Settings.Global.getString(contentResolver, MODE_KEY);
-        final View view = LayoutInflater.from(context).inflate(R.layout.private_dns_mode_dialog,
-                null);
-
         mEditText = view.findViewById(R.id.private_dns_mode_provider_hostname);
         mEditText.addTextChangedListener(this);
         mEditText.setText(Settings.Global.getString(contentResolver, HOSTNAME_KEY));
@@ -131,26 +134,20 @@ public class PrivateDnsModeDialogFragment extends InstrumentedDialogFragment imp
             helpTextView.setText(AnnotationSpan.linkify(
                     context.getText(R.string.private_dns_help_message), linkInfo));
         }
-
-        return view;
     }
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
+        final Context context = getContext();
         if (mMode.equals(PRIVATE_DNS_MODE_PROVIDER_HOSTNAME)) {
             // Only clickable if hostname is valid, so we could save it safely
-            Settings.Global.putString(getContext().getContentResolver(), HOSTNAME_KEY,
+            Settings.Global.putString(context.getContentResolver(), HOSTNAME_KEY,
                     mEditText.getText().toString());
         }
 
-        mMetricsFeatureProvider.action(getContext(),
+        FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(context,
                 MetricsProto.MetricsEvent.ACTION_PRIVATE_DNS_MODE, mMode);
-        Settings.Global.putString(getContext().getContentResolver(), MODE_KEY, mMode);
-    }
-
-    @Override
-    public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DIALOG_PRIVATE_DNS;
+        Settings.Global.putString(context.getContentResolver(), MODE_KEY, mMode);
     }
 
     @Override
@@ -179,9 +176,7 @@ public class PrivateDnsModeDialogFragment extends InstrumentedDialogFragment imp
 
     @Override
     public void afterTextChanged(Editable s) {
-        if (mSaveButton != null) {
-            mSaveButton.setEnabled(isWeaklyValidatedHostname(mEditText.getText().toString()));
-        }
+        updateDialogInfo();
     }
 
     private boolean isWeaklyValidatedHostname(String hostname) {
@@ -193,17 +188,24 @@ public class PrivateDnsModeDialogFragment extends InstrumentedDialogFragment imp
         return hostname.matches(WEAK_HOSTNAME_REGEX);
     }
 
+    private Button getSaveButton() {
+        final AlertDialog dialog = (AlertDialog) getDialog();
+        if (dialog == null) {
+            return null;
+        }
+        return dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+    }
+
     private void updateDialogInfo() {
         final boolean modeProvider = PRIVATE_DNS_MODE_PROVIDER_HOSTNAME.equals(mMode);
         if (mEditText != null) {
             mEditText.setEnabled(modeProvider);
         }
-        if (mSaveButton != null) {
-            mSaveButton.setEnabled(
-                    modeProvider
-                            ? isWeaklyValidatedHostname(mEditText.getText().toString())
-                            : true);
+        final Button saveButton = getSaveButton();
+        if (saveButton != null) {
+            saveButton.setEnabled(modeProvider
+                    ? isWeaklyValidatedHostname(mEditText.getText().toString())
+                    : true);
         }
     }
-
 }
