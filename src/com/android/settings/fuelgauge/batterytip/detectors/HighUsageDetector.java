@@ -19,6 +19,7 @@ package com.android.settings.fuelgauge.batterytip.detectors;
 import android.content.Context;
 import android.os.BatteryStats;
 import android.support.annotation.VisibleForTesting;
+import android.text.format.DateUtils;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
@@ -72,18 +73,20 @@ public class HighUsageDetector implements BatteryTipDetector {
                         final long foregroundTimeMs = mBatteryUtils.getProcessTimeMs(
                                 BatteryUtils.StatusType.FOREGROUND, batterySipper.uidObj,
                                 BatteryStats.STATS_SINCE_CHARGED);
-                        mHighUsageAppList.add(new AppInfo.Builder()
-                                .setUid(batterySipper.getUid())
-                                .setPackageName(
-                                        mBatteryUtils.getPackageName(batterySipper.getUid()))
-                                .setScreenOnTimeMs(foregroundTimeMs)
-                                .build());
+                        if (foregroundTimeMs >= DateUtils.MINUTE_IN_MILLIS) {
+                            mHighUsageAppList.add(new AppInfo.Builder()
+                                    .setUid(batterySipper.getUid())
+                                    .setPackageName(
+                                            mBatteryUtils.getPackageName(batterySipper.getUid()))
+                                    .setScreenOnTimeMs(foregroundTimeMs)
+                                    .build());
+                        }
                     }
                 }
 
+                Collections.sort(mHighUsageAppList, Collections.reverseOrder());
                 mHighUsageAppList = mHighUsageAppList.subList(0,
                         Math.min(mPolicy.highUsageAppCount, mHighUsageAppList.size()));
-                Collections.sort(mHighUsageAppList, Collections.reverseOrder());
             }
         }
 
