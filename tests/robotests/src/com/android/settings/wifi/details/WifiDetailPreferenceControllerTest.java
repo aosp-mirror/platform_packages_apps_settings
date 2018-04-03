@@ -63,7 +63,7 @@ import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowBidiFormatter;
-import com.android.settings.testutils.shadow.ShadowDevicePolicyManagerWrapper;
+import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.testutils.shadow.ShadowPackageManagerWrapper;
 import com.android.settings.widget.ActionButtonPreference;
@@ -96,10 +96,10 @@ import java.util.stream.Collectors;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {
-    ShadowDevicePolicyManagerWrapper.class,
-    ShadowEntityHeaderController.class,
-    ShadowPackageManagerWrapper.class,
-    ShadowBidiFormatter.class
+        ShadowDevicePolicyManager.class,
+        ShadowEntityHeaderController.class,
+        ShadowPackageManagerWrapper.class,
+        ShadowBidiFormatter.class
 })
 public class WifiDetailPreferenceControllerTest {
 
@@ -372,7 +372,7 @@ public class WifiDetailPreferenceControllerTest {
         mController.onPause();
 
         verify(mockConnectivityManager, times(1))
-            .unregisterNetworkCallback(mCallbackCaptor.getValue());
+                .unregisterNetworkCallback(mCallbackCaptor.getValue());
     }
 
     @Test
@@ -469,16 +469,16 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void dnsServersPref_shouldHaveDetailTextSet() throws UnknownHostException {
-        mLinkProperties.addDnsServer(InetAddress.getByAddress(new byte[]{8,8,4,4}));
-        mLinkProperties.addDnsServer(InetAddress.getByAddress(new byte[]{8,8,8,8}));
+        mLinkProperties.addDnsServer(InetAddress.getByAddress(new byte[] {8, 8, 4, 4}));
+        mLinkProperties.addDnsServer(InetAddress.getByAddress(new byte[] {8, 8, 8, 8}));
         mLinkProperties.addDnsServer(Constants.IPV6_DNS);
 
         displayAndResume();
 
         verify(mockDnsPref).setDetailText(
                 "8.8.4.4\n" +
-                "8.8.8.8\n" +
-                Constants.IPV6_DNS.getHostAddress());
+                        "8.8.8.8\n" +
+                        Constants.IPV6_DNS.getHostAddress());
     }
 
     @Test
@@ -591,8 +591,8 @@ public class WifiDetailPreferenceControllerTest {
         updateLinkProperties(lp);
         inOrder.verify(mockDnsPref).setDetailText(
                 Constants.IPV6_DNS.getHostAddress() + "\n" +
-                Constants.IPV4_DNS1.getHostAddress() + "\n" +
-                Constants.IPV4_DNS2.getHostAddress());
+                        Constants.IPV4_DNS1.getHostAddress() + "\n" +
+                        Constants.IPV4_DNS2.getHostAddress());
         inOrder.verify(mockDnsPref).setVisible(true);
     }
 
@@ -693,8 +693,8 @@ public class WifiDetailPreferenceControllerTest {
         mockWifiConfig.creatorUid = doUid;
         ComponentName doComponent = new ComponentName(doPackage, "some.Class");
         ShadowPackageManagerWrapper.setPackageUidAsUser(doPackage, doUserId, doUid);
-        ShadowDevicePolicyManagerWrapper.setDeviceOComponentName(doComponent);
-        ShadowDevicePolicyManagerWrapper.setDeviceOwnerUserId(doUserId);
+        ShadowDevicePolicyManager.getShadow().setDeviceOwnerComponentOnAnyUser(doComponent);
+        ShadowDevicePolicyManager.getShadow().setDeviceOwnerUserId(doUserId);
 
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.WIFI_DEVICE_OWNER_CONFIGS_LOCKDOWN, 1);
@@ -779,7 +779,7 @@ public class WifiDetailPreferenceControllerTest {
 
         displayAndResume();
 
-        List <Preference> addrs = mIpv6AddressCaptor.getAllValues();
+        List<Preference> addrs = mIpv6AddressCaptor.getAllValues();
 
         String expectedAddresses = String.join("\n",
                 asString(Constants.IPV6_LINKLOCAL),
@@ -840,6 +840,7 @@ public class WifiDetailPreferenceControllerTest {
         verify(mockAccessPoint, times(2)).getLevel();
         verify(mockIconInjector, times(1)).getIcon(anyInt());
     }
+
     @Test
     public void testRefreshRssiViews_shouldUpdateOnLevelChange() {
         displayAndResume();

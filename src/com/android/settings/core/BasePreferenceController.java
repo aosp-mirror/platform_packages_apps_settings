@@ -22,13 +22,16 @@ import com.android.settings.search.ResultPayload;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.slices.SliceData;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceGroup;
+import android.support.v7.preference.PreferenceScreen;
 
 /**
  * Abstract class to consolidate utility between preference controllers and act as an interface
@@ -39,6 +42,12 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
 
     private static final String TAG = "SettingsPrefController";
 
+    /**
+     * Denotes the availability of the Setting.
+     * <p>
+     * Used both explicitly and by the convenience methods {@link #isAvailable()} and
+     * {@link #isSupported()}.
+     */
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({AVAILABLE, DISABLED_UNSUPPORTED, DISABLED_FOR_USER, DISABLED_DEPENDENT_SETTING,
             UNAVAILABLE_UNKNOWN})
@@ -52,21 +61,42 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
 
     /**
      * The setting is not supported by the device.
+     * <p>
+     * There is no guarantee that the setting page exists, and any links to the Setting should take
+     * you to the home page of Settings.
      */
     public static final int DISABLED_UNSUPPORTED = 1;
 
     /**
      * The setting cannot be changed by the current user.
+     * <p>
+     * Links to the Setting should take you to the page of the Setting, even if it cannot be
+     * changed.
      */
     public static final int DISABLED_FOR_USER = 2;
 
     /**
      * The setting has a dependency in the Settings App which is currently blocking access.
+     * <p>
+     * It must be possible for the Setting to be enabled by changing the configuration of the device
+     * settings. That is, a setting that cannot be changed because of the state of another setting.
+     * This should not be used for a setting that would be hidden from the UI entirely.
+     * <p>
+     * Correct use: Intensity of night display should be {@link #DISABLED_DEPENDENT_SETTING} when
+     * night display is off.
+     * Incorrect use: Mobile Data is {@link #DISABLED_DEPENDENT_SETTING} when there is no
+     * data-enabled sim.
+     * <p>
+     * Links to the Setting should take you to the page of the Setting, even if it cannot be
+     * changed.
      */
     public static final int DISABLED_DEPENDENT_SETTING = 3;
 
     /**
      * A catch-all case for internal errors and inexplicable unavailability.
+     * <p>
+     * There is no guarantee that the setting page exists, and any links to the Setting should take
+     * you to the home page of Settings.
      */
     public static final int UNAVAILABLE_UNKNOWN = 4;
 
@@ -134,9 +164,25 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
         return mPreferenceKey;
     }
 
+    /**
+     * @return {@code true} when the controller can be changed on the device.
+     *
+     * <p>
+     * Will return true for {@link #AVAILABLE} and {@link #DISABLED_DEPENDENT_SETTING}.
+     * <p>
+     * When the availability status returned by {@link #getAvailabilityStatus()} is
+     * {@link #DISABLED_DEPENDENT_SETTING}, then the setting will be disabled by default in the
+     * DashboardFragment, and it is up to the {@link BasePreferenceController} to enable the
+     * preference at the right time.
+     *
+     * TODO (mfritze) Build a dependency mechanism to allow a controller to easily define the
+     * dependent setting.
+     */
     @Override
     public final boolean isAvailable() {
-        return getAvailabilityStatus() == AVAILABLE;
+        final int availabilityStatus = getAvailabilityStatus();
+        return (availabilityStatus == AVAILABLE) ||
+                (availabilityStatus == DISABLED_DEPENDENT_SETTING);
     }
 
     /**
@@ -148,6 +194,21 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
      */
     public final boolean isSupported() {
         return getAvailabilityStatus() != DISABLED_UNSUPPORTED;
+    }
+
+    /**
+     * Displays preference in this controller.
+     */
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        if (getAvailabilityStatus() == DISABLED_DEPENDENT_SETTING) {
+            // Disable preference if it depends on another setting.
+            final Preference preference = screen.findPreference(getPreferenceKey());
+            if (preference != null) {
+                preference.setEnabled(false);
+            }
+        }
     }
 
     /**

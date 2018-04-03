@@ -18,11 +18,9 @@ package com.android.settings;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -52,17 +50,17 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.util.ArrayUtils;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static android.app.Activity.RESULT_OK;
 import static android.content.Context.TELEPHONY_SERVICE;
 
 /**
- * TODO: After loading all changes, please move this to network package.
+ * TODO(b/77339683): After loading all changes, please move this to network package.
  */
 public class ApnEditor extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener, OnKeyListener {
@@ -70,7 +68,6 @@ public class ApnEditor extends SettingsPreferenceFragment
     private final static String TAG = ApnEditor.class.getSimpleName();
     private final static boolean VDBG = false;   // STOPSHIP if true
 
-    private final static String SAVED_POS = "pos";
     private final static String KEY_AUTH_TYPE = "auth_type";
     private final static String KEY_PROTOCOL = "apn_protocol";
     private final static String KEY_ROAMING_PROTOCOL = "apn_roaming_protocol";
@@ -83,37 +80,57 @@ public class ApnEditor extends SettingsPreferenceFragment
     private static final int MENU_SAVE = Menu.FIRST + 1;
     private static final int MENU_CANCEL = Menu.FIRST + 2;
 
-    private static String sNotSet;
-    private EditTextPreference mName;
-    private EditTextPreference mApn;
-    private EditTextPreference mProxy;
-    private EditTextPreference mPort;
-    private EditTextPreference mUser;
-    private EditTextPreference mServer;
-    private EditTextPreference mPassword;
-    private EditTextPreference mMmsc;
-    private EditTextPreference mMcc;
-    private EditTextPreference mMnc;
-    private EditTextPreference mMmsProxy;
-    private EditTextPreference mMmsPort;
-    private ListPreference mAuthType;
-    private EditTextPreference mApnType;
-    private ListPreference mProtocol;
-    private ListPreference mRoamingProtocol;
-    private SwitchPreference mCarrierEnabled;
-    private MultiSelectListPreference mBearerMulti;
-    private ListPreference mMvnoType;
-    private EditTextPreference mMvnoMatchData;
+    @VisibleForTesting
+    static String sNotSet;
+    @VisibleForTesting
+    EditTextPreference mName;
+    @VisibleForTesting
+    EditTextPreference mApn;
+    @VisibleForTesting
+    EditTextPreference mProxy;
+    @VisibleForTesting
+    EditTextPreference mPort;
+    @VisibleForTesting
+    EditTextPreference mUser;
+    @VisibleForTesting
+    EditTextPreference mServer;
+    @VisibleForTesting
+    EditTextPreference mPassword;
+    @VisibleForTesting
+    EditTextPreference mMmsc;
+    @VisibleForTesting
+    EditTextPreference mMcc;
+    @VisibleForTesting
+    EditTextPreference mMnc;
+    @VisibleForTesting
+    EditTextPreference mMmsProxy;
+    @VisibleForTesting
+    EditTextPreference mMmsPort;
+    @VisibleForTesting
+    ListPreference mAuthType;
+    @VisibleForTesting
+    EditTextPreference mApnType;
+    @VisibleForTesting
+    ListPreference mProtocol;
+    @VisibleForTesting
+    ListPreference mRoamingProtocol;
+    @VisibleForTesting
+    SwitchPreference mCarrierEnabled;
+    @VisibleForTesting
+    MultiSelectListPreference mBearerMulti;
+    @VisibleForTesting
+    ListPreference mMvnoType;
+    @VisibleForTesting
+    EditTextPreference mMvnoMatchData;
+
+    @VisibleForTesting
+    ApnData mApnData;
 
     private String mCurMnc;
     private String mCurMcc;
 
-    private Uri mUri;
-    private Cursor mCursor;
     private boolean mNewApn;
-    private boolean mFirstTime;
     private int mSubId;
-    private Resources mRes;
     private TelephonyManager mTelephonyManager;
     private int mBearerInitialVal = 0;
     private String mMvnoTypeStr;
@@ -121,6 +138,7 @@ public class ApnEditor extends SettingsPreferenceFragment
     private String[] mReadOnlyApnTypes;
     private String[] mReadOnlyApnFields;
     private boolean mReadOnlyApn;
+    private Uri mCarrierUri;
 
     /**
      * Standard projection for the interesting columns of a normal note.
@@ -154,22 +172,27 @@ public class ApnEditor extends SettingsPreferenceFragment
     };
 
     private static final int ID_INDEX = 0;
-    private static final int NAME_INDEX = 1;
-    private static final int APN_INDEX = 2;
+    @VisibleForTesting
+    static final int NAME_INDEX = 1;
+    @VisibleForTesting
+    static final int APN_INDEX = 2;
     private static final int PROXY_INDEX = 3;
     private static final int PORT_INDEX = 4;
     private static final int USER_INDEX = 5;
     private static final int SERVER_INDEX = 6;
     private static final int PASSWORD_INDEX = 7;
     private static final int MMSC_INDEX = 8;
-    private static final int MCC_INDEX = 9;
-    private static final int MNC_INDEX = 10;
+    @VisibleForTesting
+    static final int MCC_INDEX = 9;
+    @VisibleForTesting
+    static final int MNC_INDEX = 10;
     private static final int MMSPROXY_INDEX = 12;
     private static final int MMSPORT_INDEX = 13;
     private static final int AUTH_TYPE_INDEX = 14;
     private static final int TYPE_INDEX = 15;
     private static final int PROTOCOL_INDEX = 16;
-    private static final int CARRIER_ENABLED_INDEX = 17;
+    @VisibleForTesting
+    static final int CARRIER_ENABLED_INDEX = 17;
     private static final int BEARER_INDEX = 18;
     private static final int BEARER_BITMASK_INDEX = 19;
     private static final int ROAMING_PROTOCOL_INDEX = 20;
@@ -177,7 +200,6 @@ public class ApnEditor extends SettingsPreferenceFragment
     private static final int MVNO_MATCH_DATA_INDEX = 22;
     private static final int EDITED_INDEX = 23;
     private static final int USER_EDITABLE_INDEX = 24;
-
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -207,14 +229,11 @@ public class ApnEditor extends SettingsPreferenceFragment
         mMvnoType = (ListPreference) findPreference(KEY_MVNO_TYPE);
         mMvnoMatchData = (EditTextPreference) findPreference("mvno_match_data");
 
-        mRes = getResources();
-
         final Intent intent = getIntent();
         final String action = intent.getAction();
         mSubId = intent.getIntExtra(ApnSettings.SUB_ID,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
 
-        mFirstTime = icicle == null;
         mReadOnlyApn = false;
         mReadOnlyApnTypes = null;
         mReadOnlyApnFields = null;
@@ -236,61 +255,47 @@ public class ApnEditor extends SettingsPreferenceFragment
             }
         }
 
+        Uri uri = null;
         if (action.equals(Intent.ACTION_EDIT)) {
-            Uri uri = intent.getData();
+            uri = intent.getData();
             if (!uri.isPathPrefixMatch(Telephony.Carriers.CONTENT_URI)) {
                 Log.e(TAG, "Edit request not for carrier table. Uri: " + uri);
                 finish();
                 return;
             }
-            mUri = uri;
         } else if (action.equals(Intent.ACTION_INSERT)) {
-            if (mFirstTime || icicle.getInt(SAVED_POS) == 0) {
-                Uri uri = intent.getData();
-                if (!uri.isPathPrefixMatch(Telephony.Carriers.CONTENT_URI)) {
-                    Log.e(TAG, "Insert request not for carrier table. Uri: " + uri);
-                    finish();
-                    return;
-                }
-                ContentValues contentValues = new ContentValues();
-                contentValues.put(Telephony.Carriers.EDITED, Telephony.Carriers.USER_EDITED);
-                mUri = getContentResolver().insert(uri, contentValues);
-            } else {
-                mUri = ContentUris.withAppendedId(Telephony.Carriers.CONTENT_URI,
-                        icicle.getInt(SAVED_POS));
+            mCarrierUri = intent.getData();
+            if (!mCarrierUri.isPathPrefixMatch(Telephony.Carriers.CONTENT_URI)) {
+                Log.e(TAG, "Insert request not for carrier table. Uri: " + mCarrierUri);
+                finish();
+                return;
             }
             mNewApn = true;
             mMvnoTypeStr = intent.getStringExtra(ApnSettings.MVNO_TYPE);
             mMvnoMatchDataStr = intent.getStringExtra(ApnSettings.MVNO_MATCH_DATA);
-            // If we were unable to create a new note, then just finish
-            // this activity.  A RESULT_CANCELED will be sent back to the
-            // original activity if they requested a result.
-            if (mUri == null) {
-                Log.w(TAG, "Failed to insert new telephony provider into "
-                        + getIntent().getData());
-                finish();
-                return;
-            }
-
-            // The new entry was created, so assume all will end well and
-            // set the result to be returned.
-            setResult(RESULT_OK, (new Intent()).setAction(mUri.toString()));
-
         } else {
             finish();
             return;
         }
 
-        mCursor = getActivity().managedQuery(mUri, sProjection, null, null);
-        mCursor.moveToFirst();
+        // Creates an ApnData to store the apn data temporary, so that we don't need the cursor to
+        // get the apn data. The uri is null if the action is ACTION_INSERT, that mean there is no
+        // record in the database, so create a empty ApnData to represent a empty row of database.
+        if (uri != null) {
+            mApnData = getApnDataFromUri(uri);
+        } else {
+            mApnData = new ApnData(sProjection.length);
+        }
 
         mTelephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
 
-        Log.d(TAG, "onCreate: EDITED " + mCursor.getInt(EDITED_INDEX));
+        boolean isUserEdited = mApnData.getInteger(EDITED_INDEX, Telephony.Carriers.USER_EDITED)
+                == Telephony.Carriers.USER_EDITED;
+
+        Log.d(TAG, "onCreate: EDITED " + isUserEdited);
         // if it's not a USER_EDITED apn, check if it's read-only
-        if (mCursor.getInt(EDITED_INDEX) != Telephony.Carriers.USER_EDITED &&
-                (mCursor.getInt(USER_EDITABLE_INDEX) == 0 ||
-                apnTypesMatch(mReadOnlyApnTypes, mCursor.getString(TYPE_INDEX)))) {
+        if (!isUserEdited && (mApnData.getInteger(USER_EDITABLE_INDEX, 1) == 0
+                || apnTypesMatch(mReadOnlyApnTypes, mApnData.getString(TYPE_INDEX)))) {
             Log.d(TAG, "onCreate: apnTypesMatch; read-only APN");
             mReadOnlyApn = true;
             disableAllFields();
@@ -302,12 +307,7 @@ public class ApnEditor extends SettingsPreferenceFragment
             getPreferenceScreen().getPreference(i).setOnPreferenceChangeListener(this);
         }
 
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        fillUi();
+        fillUI(icicle == null);
     }
 
     /**
@@ -462,50 +462,23 @@ public class ApnEditor extends SettingsPreferenceFragment
         return MetricsEvent.APN_EDITOR;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        if (mUri == null && mNewApn) {
-            // The URI could have been deleted when activity is paused,
-            // therefore, it needs to be restored.
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(Telephony.Carriers.EDITED, Telephony.Carriers.USER_EDITED);
-            mUri = getContentResolver().insert(getIntent().getData(), contentValues);
-            if (mUri == null) {
-                Log.w(TAG, "Failed to insert new telephony provider into "
-                        + getIntent().getData());
-                finish();
-                return;
-            }
-            mCursor = getActivity().managedQuery(mUri, sProjection, null, null);
-            mCursor.moveToFirst();
-        }
-
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    private void fillUi() {
-        if (mFirstTime) {
-            mFirstTime = false;
+    @VisibleForTesting
+    void fillUI(boolean firstTime) {
+        if (firstTime) {
             // Fill in all the values from the db in both text editor and summary
-            mName.setText(mCursor.getString(NAME_INDEX));
-            mApn.setText(mCursor.getString(APN_INDEX));
-            mProxy.setText(mCursor.getString(PROXY_INDEX));
-            mPort.setText(mCursor.getString(PORT_INDEX));
-            mUser.setText(mCursor.getString(USER_INDEX));
-            mServer.setText(mCursor.getString(SERVER_INDEX));
-            mPassword.setText(mCursor.getString(PASSWORD_INDEX));
-            mMmsProxy.setText(mCursor.getString(MMSPROXY_INDEX));
-            mMmsPort.setText(mCursor.getString(MMSPORT_INDEX));
-            mMmsc.setText(mCursor.getString(MMSC_INDEX));
-            mMcc.setText(mCursor.getString(MCC_INDEX));
-            mMnc.setText(mCursor.getString(MNC_INDEX));
-            mApnType.setText(mCursor.getString(TYPE_INDEX));
+            mName.setText(mApnData.getString(NAME_INDEX));
+            mApn.setText(mApnData.getString(APN_INDEX));
+            mProxy.setText(mApnData.getString(PROXY_INDEX));
+            mPort.setText(mApnData.getString(PORT_INDEX));
+            mUser.setText(mApnData.getString(USER_INDEX));
+            mServer.setText(mApnData.getString(SERVER_INDEX));
+            mPassword.setText(mApnData.getString(PASSWORD_INDEX));
+            mMmsProxy.setText(mApnData.getString(MMSPROXY_INDEX));
+            mMmsPort.setText(mApnData.getString(MMSPORT_INDEX));
+            mMmsc.setText(mApnData.getString(MMSC_INDEX));
+            mMcc.setText(mApnData.getString(MCC_INDEX));
+            mMnc.setText(mApnData.getString(MNC_INDEX));
+            mApnType.setText(mApnData.getString(TYPE_INDEX));
             if (mNewApn) {
                 String numeric = mTelephonyManager.getSimOperator(mSubId);
                 // MCC is first 3 chars and then in 2 - 3 chars of MNC
@@ -521,20 +494,20 @@ public class ApnEditor extends SettingsPreferenceFragment
                     mCurMcc = mcc;
                 }
             }
-            int authVal = mCursor.getInt(AUTH_TYPE_INDEX);
+            int authVal = mApnData.getInteger(AUTH_TYPE_INDEX, -1);
             if (authVal != -1) {
                 mAuthType.setValueIndex(authVal);
             } else {
                 mAuthType.setValue(null);
             }
 
-            mProtocol.setValue(mCursor.getString(PROTOCOL_INDEX));
-            mRoamingProtocol.setValue(mCursor.getString(ROAMING_PROTOCOL_INDEX));
-            mCarrierEnabled.setChecked(mCursor.getInt(CARRIER_ENABLED_INDEX)==1);
-            mBearerInitialVal = mCursor.getInt(BEARER_INDEX);
+            mProtocol.setValue(mApnData.getString(PROTOCOL_INDEX));
+            mRoamingProtocol.setValue(mApnData.getString(ROAMING_PROTOCOL_INDEX));
+            mCarrierEnabled.setChecked(mApnData.getInteger(CARRIER_ENABLED_INDEX, 1) == 1);
+            mBearerInitialVal = mApnData.getInteger(BEARER_INDEX, 0);
 
             HashSet<String> bearers = new HashSet<String>();
-            int bearerBitmask = mCursor.getInt(BEARER_BITMASK_INDEX);
+            int bearerBitmask = mApnData.getInteger(BEARER_BITMASK_INDEX, 0);
             if (bearerBitmask == 0) {
                 if (mBearerInitialVal == 0) {
                     bearers.add("" + 0);
@@ -556,9 +529,9 @@ public class ApnEditor extends SettingsPreferenceFragment
             }
             mBearerMulti.setValues(bearers);
 
-            mMvnoType.setValue(mCursor.getString(MVNO_TYPE_INDEX));
+            mMvnoType.setValue(mApnData.getString(MVNO_TYPE_INDEX));
             mMvnoMatchData.setEnabled(false);
-            mMvnoMatchData.setText(mCursor.getString(MVNO_MATCH_DATA_INDEX));
+            mMvnoMatchData.setText(mApnData.getString(MVNO_MATCH_DATA_INDEX));
             if (mNewApn && mMvnoTypeStr != null && mMvnoMatchDataStr != null) {
                 mMvnoType.setValue(mMvnoTypeStr);
                 mMvnoMatchData.setText(mMvnoMatchDataStr);
@@ -584,7 +557,7 @@ public class ApnEditor extends SettingsPreferenceFragment
             int authValIndex = Integer.parseInt(authVal);
             mAuthType.setValueIndex(authValIndex);
 
-            String []values = mRes.getStringArray(R.array.apn_auth_entries);
+            String[] values = getResources().getStringArray(R.array.apn_auth_entries);
             mAuthType.setSummary(values[authValIndex]);
         } else {
             mAuthType.setSummary(sNotSet);
@@ -617,7 +590,7 @@ public class ApnEditor extends SettingsPreferenceFragment
         if (protocolIndex == -1) {
             return null;
         } else {
-            String[] values = mRes.getStringArray(R.array.apn_protocol_entries);
+            String[] values = getResources().getStringArray(R.array.apn_protocol_entries);
             try {
                 return values[protocolIndex];
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -631,7 +604,7 @@ public class ApnEditor extends SettingsPreferenceFragment
         if (mBearerIndex == -1) {
             return null;
         } else {
-            String[] values = mRes.getStringArray(R.array.bearer_entries);
+            String[] values = getResources().getStringArray(R.array.bearer_entries);
             try {
                 return values[mBearerIndex];
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -641,7 +614,7 @@ public class ApnEditor extends SettingsPreferenceFragment
     }
 
     private String bearerMultiDescription(Set<String> raw) {
-        String[] values = mRes.getStringArray(R.array.bearer_entries);
+        String[] values = getResources().getStringArray(R.array.bearer_entries);
         StringBuilder retVal = new StringBuilder();
         boolean first = true;
         for (String bearer : raw) {
@@ -671,7 +644,7 @@ public class ApnEditor extends SettingsPreferenceFragment
         if (mvnoIndex == -1) {
             return null;
         } else {
-            String[] values = mRes.getStringArray(R.array.mvno_type_entries);
+            String[] values = getResources().getStringArray(R.array.mvno_type_entries);
             boolean mvnoMatchDataUneditable =
                     mReadOnlyApn || (mReadOnlyApnFields != null
                             && Arrays.asList(mReadOnlyApnFields)
@@ -703,7 +676,7 @@ public class ApnEditor extends SettingsPreferenceFragment
                 int index = Integer.parseInt((String) newValue);
                 mAuthType.setValueIndex(index);
 
-                String[] values = mRes.getStringArray(R.array.apn_auth_entries);
+                String[] values = getResources().getStringArray(R.array.apn_auth_entries);
                 mAuthType.setSummary(values[index]);
             } catch (NumberFormatException e) {
                 return false;
@@ -764,22 +737,21 @@ public class ApnEditor extends SettingsPreferenceFragment
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case MENU_DELETE:
-            deleteApn();
-            return true;
-        case MENU_SAVE:
-            if (validateAndSave(false)) {
+            case MENU_DELETE:
+                deleteApn();
                 finish();
-            }
-            return true;
-        case MENU_CANCEL:
-            if (mNewApn) {
-                getContentResolver().delete(mUri, null, null);
-            }
-            finish();
-            return true;
+                return true;
+            case MENU_SAVE:
+                if (validateAndSaveApnData()) {
+                    finish();
+                }
+                return true;
+            case MENU_CANCEL:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -790,11 +762,20 @@ public class ApnEditor extends SettingsPreferenceFragment
         view.requestFocus();
     }
 
+    /**
+     * Try to save the apn data when pressed the back button. An error message will be displayed if
+     * the apn data is invalid.
+     *
+     * TODO(b/77339593): Try to keep the same behavior between back button and up navigate button.
+     * We will save the valid apn data to the database when pressed the back button, but discard all
+     * user changed when pressed the up navigate button.
+     */
+    @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
         if (event.getAction() != KeyEvent.ACTION_DOWN) return false;
         switch (keyCode) {
             case KeyEvent.KEYCODE_BACK: {
-                if (validateAndSave(false)) {
+                if (validateAndSaveApnData()) {
                     finish();
                 }
                 return true;
@@ -803,62 +784,70 @@ public class ApnEditor extends SettingsPreferenceFragment
         return false;
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle icicle) {
-        super.onSaveInstanceState(icicle);
-        if (validateAndSave(true)) {
-            icicle.putInt(SAVED_POS, mCursor.getInt(ID_INDEX));
-        }
-    }
-
     /**
-     * Add key, value to cv and compare the value against the value at index in mCursor. Return true
-     * if values are different. assumeDiff indicates if values can be assumed different in which
-     * case no comparison is needed.
-     * @return true if value is different from the value at index in mCursor
+     * Add key, value to {@code cv} and compare the value against the value at index in
+     * {@link #mApnData}.
+     *
+     * <p>
+     * The key, value will not add to {@code cv} if value is null.
+     *
+     * @return true if values are different. {@code assumeDiff} indicates if values can be assumed
+     * different in which case no comparison is needed.
      */
-    boolean setStringValueAndCheckIfDiff(ContentValues cv, String key, String value,
-                                         boolean assumeDiff, int index) {
-        cv.put(key, value);
-        String valueFromCursor = mCursor.getString(index);
+    boolean setStringValueAndCheckIfDiff(
+            ContentValues cv, String key, String value, boolean assumeDiff, int index) {
+        String valueFromLocalCache = mApnData.getString(index);
         if (VDBG) {
             Log.d(TAG, "setStringValueAndCheckIfDiff: assumeDiff: " + assumeDiff
                     + " key: " + key
                     + " value: '" + value
-                    + "' valueFromCursor: '" + valueFromCursor + "'");
+                    + "' valueFromDb: '" + valueFromLocalCache + "'");
         }
-        return assumeDiff
-                || !((TextUtils.isEmpty(value) && TextUtils.isEmpty(valueFromCursor))
-                || (value != null && value.equals(valueFromCursor)));
+        boolean isDiff = assumeDiff
+                || !((TextUtils.isEmpty(value) && TextUtils.isEmpty(valueFromLocalCache))
+                || (value != null && value.equals(valueFromLocalCache)));
+
+        if (isDiff && value != null) {
+            cv.put(key, value);
+        }
+        return isDiff;
     }
 
     /**
-     * Add key, value to cv and compare the value against the value at index in mCursor. Return true
-     * if values are different. assumeDiff indicates if values can be assumed different in which
-     * case no comparison is needed.
-     * @return true if value is different from the value at index in mCursor
+     * Add key, value to {@code cv} and compare the value against the value at index in
+     * {@link #mApnData}.
+     *
+     * @return true if values are different. {@code assumeDiff} indicates if values can be assumed
+     * different in which case no comparison is needed.
      */
-    boolean setIntValueAndCheckIfDiff(ContentValues cv, String key, int value,
-                                      boolean assumeDiff, int index) {
-        cv.put(key, value);
-        int valueFromCursor = mCursor.getInt(index);
+    boolean setIntValueAndCheckIfDiff(
+            ContentValues cv, String key, int value, boolean assumeDiff, int index) {
+        Integer valueFromLocalCache = mApnData.getInteger(index);
         if (VDBG) {
             Log.d(TAG, "setIntValueAndCheckIfDiff: assumeDiff: " + assumeDiff
                     + " key: " + key
                     + " value: '" + value
-                    + "' valueFromCursor: '" + valueFromCursor + "'");
+                    + "' valueFromDb: '" + valueFromLocalCache + "'");
         }
-        return assumeDiff || value != valueFromCursor;
+
+        boolean isDiff = assumeDiff || value != valueFromLocalCache;
+        if (isDiff) {
+            cv.put(key, value);
+        }
+        return isDiff;
     }
 
     /**
-     * Check the key fields' validity and save if valid.
-     * @param force save even if the fields are not valid, if the app is
-     *        being suspended
-     * @return true if there's no error
+     * Validates the apn data and save it to the database if it's valid.
+     *
+     * <p>
+     * A dialog with error message will be displayed if the APN data is invalid.
+     *
+     * @return true if there is no error
      */
-    private boolean validateAndSave(boolean force) {
-        // nothing to do if it's a read only APN
+    @VisibleForTesting
+    boolean validateAndSaveApnData() {
+        // Nothing to do if it's a read only APN
         if (mReadOnlyApn) {
             return true;
         }
@@ -868,21 +857,9 @@ public class ApnEditor extends SettingsPreferenceFragment
         String mcc = checkNotSet(mMcc.getText());
         String mnc = checkNotSet(mMnc.getText());
 
-        if (getErrorMsg() != null && !force) {
-            ErrorDialog.showError(this);
-            return false;
-        }
-
-        if (!mCursor.moveToFirst()) {
-            Log.w(TAG,
-                    "Could not go to the first row in the Cursor when saving data.");
-            return false;
-        }
-
-        // If it's a new APN and a name or apn haven't been entered, then erase the entry
-        if (force && mNewApn && name.length() < 1 && apn.length() < 1) {
-            getContentResolver().delete(mUri, null, null);
-            mUri = null;
+        String errorMsg = validateApnData();
+        if (errorMsg != null) {
+            showError();
             return false;
         }
 
@@ -890,12 +867,9 @@ public class ApnEditor extends SettingsPreferenceFragment
         // call update() if it's a new APN. If not, check if any field differs from the db value;
         // if any diff is found update() should be called
         boolean callUpdate = mNewApn;
-
-        // Add a dummy name "Untitled", if the user exits the screen without adding a name but
-        // entered other information worth keeping.
         callUpdate = setStringValueAndCheckIfDiff(values,
                 Telephony.Carriers.NAME,
-                name.length() < 1 ? getResources().getString(R.string.untitled_apn) : name,
+                name,
                 callUpdate,
                 NAME_INDEX);
 
@@ -1054,15 +1028,38 @@ public class ApnEditor extends SettingsPreferenceFragment
         values.put(Telephony.Carriers.EDITED, Telephony.Carriers.USER_EDITED);
 
         if (callUpdate) {
-            getContentResolver().update(mUri, values, null, null);
+            final Uri uri = mApnData.getUri() == null ? mCarrierUri : mApnData.getUri();
+            updateApnDataToDatabase(uri, values);
         } else {
-            if (VDBG) Log.d(TAG, "validateAndSave: not calling update()");
+            if (VDBG) Log.d(TAG, "validateAndSaveApnData: not calling update()");
         }
 
         return true;
     }
 
-    private String getErrorMsg() {
+    private void updateApnDataToDatabase(Uri uri, ContentValues values) {
+        ThreadUtils.postOnBackgroundThread(() -> {
+            if (uri.equals(mCarrierUri)) {
+                // Add a new apn to the database
+                final Uri newUri = getContentResolver().insert(mCarrierUri, values);
+                if (newUri == null) {
+                    Log.e(TAG, "Can't add a new apn to database " + mCarrierUri);
+                }
+            } else {
+                // Update the existing apn
+                getContentResolver().update(
+                        uri, values, null /* where */, null /* selection Args */);
+            }
+        });
+    }
+
+    /**
+     * Validates whether the apn data is valid.
+     *
+     * @return An error message if the apn data is invalid, otherwise return null.
+     */
+    @VisibleForTesting
+    String validateApnData() {
         String errorMsg = null;
 
         String name = checkNotSet(mName.getText());
@@ -1070,14 +1067,14 @@ public class ApnEditor extends SettingsPreferenceFragment
         String mcc = checkNotSet(mMcc.getText());
         String mnc = checkNotSet(mMnc.getText());
 
-        if (name.length() < 1) {
-            errorMsg = mRes.getString(R.string.error_name_empty);
-        } else if (apn.length() < 1) {
-            errorMsg = mRes.getString(R.string.error_apn_empty);
-        } else if (mcc.length() != 3) {
-            errorMsg = mRes.getString(R.string.error_mcc_not3);
-        } else if ((mnc.length() & 0xFFFE) != 2) {
-            errorMsg = mRes.getString(R.string.error_mnc_not23);
+        if (TextUtils.isEmpty(name)) {
+            errorMsg = getResources().getString(R.string.error_name_empty);
+        } else if (TextUtils.isEmpty(apn)) {
+            errorMsg = getResources().getString(R.string.error_apn_empty);
+        } else if (mcc == null || mcc.length() != 3) {
+            errorMsg = getResources().getString(R.string.error_mcc_not3);
+        } else if ((mnc == null || (mnc.length() & 0xFFFE) != 2)) {
+            errorMsg = getResources().getString(R.string.error_mnc_not23);
         }
 
         if (errorMsg == null) {
@@ -1088,13 +1085,13 @@ public class ApnEditor extends SettingsPreferenceFragment
                 StringBuilder stringBuilder = new StringBuilder();
                 for (String type : mReadOnlyApnTypes) {
                     stringBuilder.append(type).append(", ");
-                    Log.d(TAG, "getErrorMsg: appending type: " + type);
+                    Log.d(TAG, "validateApnData: appending type: " + type);
                 }
                 // remove last ", "
                 if (stringBuilder.length() >= 2) {
                     stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length());
                 }
-                errorMsg = String.format(mRes.getString(R.string.error_adding_apn_type),
+                errorMsg = String.format(getResources().getString(R.string.error_adding_apn_type),
                         stringBuilder);
             }
         }
@@ -1102,9 +1099,16 @@ public class ApnEditor extends SettingsPreferenceFragment
         return errorMsg;
     }
 
+    @VisibleForTesting
+    void showError() {
+        ErrorDialog.showError(this);
+    }
+
     private void deleteApn() {
-        getContentResolver().delete(mUri, null, null);
-        finish();
+        if (mApnData.getUri() != null) {
+            getContentResolver().delete(mApnData.getUri(), null, null);
+            mApnData = new ApnData(sProjection.length);
+        }
     }
 
     private String starify(String value) {
@@ -1119,20 +1123,21 @@ public class ApnEditor extends SettingsPreferenceFragment
         }
     }
 
+    /**
+     * Returns {@link #sNotSet} if the given string {@code value} is null or empty. The string
+     * {@link #sNotSet} typically used as the default display when an entry in the preference is
+     * null or empty.
+     */
     private String checkNull(String value) {
-        if (value == null || value.length() == 0) {
-            return sNotSet;
-        } else {
-            return value;
-        }
+        return TextUtils.isEmpty(value) ? sNotSet : value;
     }
 
+    /**
+     * Returns null if the given string {@code value} equals to {@link #sNotSet}. This method
+     * should be used when convert a string value from preference to database.
+     */
     private String checkNotSet(String value) {
-        if (value == null || value.equals(sNotSet)) {
-            return "";
-        } else {
-            return value;
-        }
+        return sNotSet.equals(value) ? null : value;
     }
 
     private String getUserEnteredApnType() {
@@ -1176,7 +1181,7 @@ public class ApnEditor extends SettingsPreferenceFragment
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            String msg = ((ApnEditor) getTargetFragment()).getErrorMsg();
+            String msg = ((ApnEditor) getTargetFragment()).validateApnData();
 
             return new AlertDialog.Builder(getContext())
                     .setTitle(R.string.error_title)
@@ -1191,10 +1196,19 @@ public class ApnEditor extends SettingsPreferenceFragment
         }
     }
 
-    public static class InvalidTypeException extends RuntimeException {
-        InvalidTypeException(String msg) {
-            super(msg);
+    private ApnData getApnDataFromUri(Uri uri) {
+        ApnData apnData;
+        try (Cursor cursor = getActivity().managedQuery(
+                uri, sProjection, null /* selection */, null /* sortOrder */)) {
+            cursor.moveToFirst();
+            apnData = new ApnData(uri, cursor);
         }
+
+        if (apnData == null) {
+            Log.d(TAG, "Can't get apnData from Uri " + uri);
+        }
+
+        return apnData;
     }
 
     @VisibleForTesting
@@ -1243,34 +1257,17 @@ public class ApnEditor extends SettingsPreferenceFragment
             mUri = uri;
         }
 
-        Integer getInteger(int index) throws InvalidTypeException {
-            if (!isValidTypeOrNull(mData[index], Integer.class)) {
-                throwInvalidTypeException(Integer.class, mData[index].getClass());
-            }
+        Integer getInteger(int index) {
             return (Integer) mData[index];
         }
 
-        Integer getInteger(int index, Integer defaultValue) throws InvalidTypeException {
+        Integer getInteger(int index, Integer defaultValue) {
             Integer val = getInteger(index);
             return val == null ? defaultValue : val;
         }
 
-        String getString(int index) throws InvalidTypeException {
-            if (!isValidTypeOrNull(mData[index], String.class)) {
-                throwInvalidTypeException(String.class, mData[index].getClass());
-            }
+        String getString(int index) {
             return (String) mData[index];
         }
-
-        private boolean isValidTypeOrNull(Object obj, Class expectedClass) {
-            return obj == null || expectedClass.isInstance(obj);
-        }
-
-        private void throwInvalidTypeException(Class<?> expectedClass, Class<?> actualClass) {
-            throw new InvalidTypeException(
-                    String.format(
-                            "Type mismatched, want %s, but is %s", expectedClass, actualClass));
-        }
     }
-
 }

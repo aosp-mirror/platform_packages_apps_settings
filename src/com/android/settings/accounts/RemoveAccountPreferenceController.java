@@ -25,7 +25,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
-import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -37,13 +36,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -58,26 +55,17 @@ public class RemoveAccountPreferenceController extends AbstractPreferenceControl
     private Account mAccount;
     private Fragment mParentFragment;
     private UserHandle mUserHandle;
-    private DevicePolicyManagerWrapper mDpm;
 
     public RemoveAccountPreferenceController(Context context, Fragment parent) {
-        this(context, parent, new DevicePolicyManagerWrapper(
-                (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE)));
-    }
-
-    @VisibleForTesting
-    RemoveAccountPreferenceController(Context context, Fragment parent,
-            DevicePolicyManagerWrapper dpm) {
         super(context);
         mParentFragment = parent;
-        mDpm = dpm;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         final LayoutPreference removeAccountPreference =
-            (LayoutPreference) screen.findPreference(KEY_REMOVE_ACCOUNT);
+                (LayoutPreference) screen.findPreference(KEY_REMOVE_ACCOUNT);
         Button removeAccountButton = (Button) removeAccountPreference.findViewById(R.id.button);
         removeAccountButton.setOnClickListener(this);
     }
@@ -96,7 +84,7 @@ public class RemoveAccountPreferenceController extends AbstractPreferenceControl
     public void onClick(View v) {
         if (mUserHandle != null) {
             final EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(mContext,
-                UserManager.DISALLOW_MODIFY_ACCOUNTS, mUserHandle.getIdentifier());
+                    UserManager.DISALLOW_MODIFY_ACCOUNTS, mUserHandle.getIdentifier());
             if (admin != null) {
                 RestrictedLockUtils.sendShowAdminSupportDetailsIntent(mContext, admin);
                 return;
@@ -148,11 +136,11 @@ public class RemoveAccountPreferenceController extends AbstractPreferenceControl
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             final Context context = getActivity();
             return new AlertDialog.Builder(context)
-                .setTitle(R.string.really_remove_account_title)
-                .setMessage(R.string.really_remove_account_message)
-                .setNegativeButton(android.R.string.cancel, null)
-                .setPositiveButton(R.string.remove_account_label, this)
-                .create();
+                    .setTitle(R.string.really_remove_account_title)
+                    .setMessage(R.string.really_remove_account_message)
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .setPositiveButton(R.string.remove_account_label, this)
+                    .create();
         }
 
         @Override
@@ -174,7 +162,7 @@ public class RemoveAccountPreferenceController extends AbstractPreferenceControl
                             boolean failed = true;
                             try {
                                 if (future.getResult()
-                                    .getBoolean(AccountManager.KEY_BOOLEAN_RESULT)) {
+                                        .getBoolean(AccountManager.KEY_BOOLEAN_RESULT)) {
                                     failed = false;
                                 }
                             } catch (OperationCanceledException e) {
@@ -216,10 +204,10 @@ public class RemoveAccountPreferenceController extends AbstractPreferenceControl
             final Context context = getActivity();
 
             return new AlertDialog.Builder(context)
-                .setTitle(R.string.really_remove_account_title)
-                .setMessage(R.string.remove_account_failed)
-                .setPositiveButton(android.R.string.ok, null)
-                .create();
+                    .setTitle(R.string.really_remove_account_title)
+                    .setMessage(R.string.remove_account_failed)
+                    .setPositiveButton(android.R.string.ok, null)
+                    .create();
         }
 
         @Override

@@ -44,7 +44,6 @@ import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.ActionButtonPreference;
-import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -67,7 +66,7 @@ public class AppActionButtonPreferenceController extends BasePreferenceControlle
     private final ApplicationFeatureProvider mApplicationFeatureProvider;
 
     private int mUserId;
-    private DevicePolicyManagerWrapper mDpm;
+    private DevicePolicyManager mDpm;
     private UserManager mUserManager;
     private PackageManager mPm;
 
@@ -94,7 +93,7 @@ public class AppActionButtonPreferenceController extends BasePreferenceControlle
     @Override
     public int getAvailabilityStatus() {
         return AppUtils.isInstant(mParent.getPackageInfo().applicationInfo)
-            ? DISABLED_FOR_USER : AVAILABLE;
+                ? DISABLED_FOR_USER : AVAILABLE;
     }
 
     @Override
@@ -112,8 +111,7 @@ public class AppActionButtonPreferenceController extends BasePreferenceControlle
             mPm = mContext.getPackageManager();
         }
         if (mDpm == null) {
-            mDpm = new DevicePolicyManagerWrapper(
-                    (DevicePolicyManager) mContext.getSystemService(Context.DEVICE_POLICY_SERVICE));
+            mDpm = (DevicePolicyManager) mContext.getSystemService(Context.DEVICE_POLICY_SERVICE);
         }
         if (mUserManager == null) {
             mUserManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
@@ -125,7 +123,7 @@ public class AppActionButtonPreferenceController extends BasePreferenceControlle
         final List<ResolveInfo> homeActivities = new ArrayList<ResolveInfo>();
         mPm.getHomeActivities(homeActivities);
         mHomePackages.clear();
-        for (int i = 0; i< homeActivities.size(); i++) {
+        for (int i = 0; i < homeActivities.size(); i++) {
             final ResolveInfo ri = homeActivities.get(i);
             final String activityPkg = ri.activityInfo.packageName;
             mHomePackages.add(activityPkg);
@@ -187,7 +185,7 @@ public class AppActionButtonPreferenceController extends BasePreferenceControlle
                 enabled = false;
             } else {
                 ArrayList<ResolveInfo> homeActivities = new ArrayList<ResolveInfo>();
-                ComponentName currentDefaultHome  = mPm.getHomeActivities(homeActivities);
+                ComponentName currentDefaultHome = mPm.getHomeActivities(homeActivities);
                 if (currentDefaultHome == null) {
                     // No preferred default, so permit uninstall only when
                     // there is more than one candidate
@@ -284,7 +282,7 @@ public class AppActionButtonPreferenceController extends BasePreferenceControlle
             Log.w(TAG, "User can't force stop device admin");
             updateForceStopButton(false);
         } else if (mPm.isPackageStateProtected(packageInfo.packageName,
-            UserHandle.getUserId(appEntry.info.uid))) {
+                UserHandle.getUserId(appEntry.info.uid))) {
             Log.w(TAG, "User can't force stop protected packages");
             updateForceStopButton(false);
         } else if (AppUtils.isInstant(packageInfo.applicationInfo)) {
@@ -298,7 +296,7 @@ public class AppActionButtonPreferenceController extends BasePreferenceControlle
         } else {
             final Intent intent = new Intent(Intent.ACTION_QUERY_PACKAGE_RESTART,
                     Uri.fromParts("package", appEntry.info.packageName, null));
-            intent.putExtra(Intent.EXTRA_PACKAGES, new String[] { appEntry.info.packageName });
+            intent.putExtra(Intent.EXTRA_PACKAGES, new String[] {appEntry.info.packageName});
             intent.putExtra(Intent.EXTRA_UID, appEntry.info.uid);
             intent.putExtra(Intent.EXTRA_USER_HANDLE, UserHandle.getUserId(appEntry.info.uid));
             Log.d(TAG, "Sending broadcast to query restart status for "

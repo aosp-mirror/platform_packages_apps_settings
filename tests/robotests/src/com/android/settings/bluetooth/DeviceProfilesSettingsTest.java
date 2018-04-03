@@ -38,6 +38,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -86,6 +87,11 @@ public class DeviceProfilesSettingsTest {
         when(mManager.getProfileManager()).thenReturn(mProfileManager);
         when(mProfileManager.getMapProfile()).thenReturn(null);
         when(mDeviceManager.findDevice(any())).thenReturn(mCachedDevice);
+    }
+
+    @After
+    public void tearDown() {
+        ReflectionHelpers.setStaticField(LocalBluetoothManager.class, "sInstance", null);
     }
 
     @Test

@@ -43,7 +43,7 @@ public class PreferenceCategoryController extends BasePreferenceController {
     @Override
     public int getAvailabilityStatus() {
         if (mChildren == null || mChildren.isEmpty()) {
-            return DISABLED_DEPENDENT_SETTING;
+            return DISABLED_UNSUPPORTED;
         }
         // Category is available if any child is available
         for (AbstractPreferenceController controller : mChildren) {
@@ -51,7 +51,7 @@ public class PreferenceCategoryController extends BasePreferenceController {
                 return AVAILABLE;
             }
         }
-        return DISABLED_DEPENDENT_SETTING;
+        return DISABLED_UNSUPPORTED;
     }
 
     @Override

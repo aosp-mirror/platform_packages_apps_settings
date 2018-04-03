@@ -151,7 +151,7 @@ public class BatteryTipDialogFragmentTest {
                 .isEqualTo(
                         "To save battery, stop these apps from using battery in the background. "
                                 + "Restricted apps may not work properly and notifications may be"
-                                + " delayed.\n\nApps:\n");
+                                + " delayed.\n\nApps:");
         assertThat(shadowDialog.getView()).isNotNull();
     }
 
