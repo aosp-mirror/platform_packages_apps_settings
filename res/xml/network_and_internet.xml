@@ -18,7 +18,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="network_and_internet_screen"
-    android:title="@string/network_dashboard_title">
+    android:title="@string/network_dashboard_title"
+    settings:initialExpandedChildrenCount="5">
 
     <com.android.settings.widget.MasterSwitchPreference
         android:fragment="com.android.settings.wifi.WifiSettings"
@@ -59,19 +60,10 @@
         settings:useAdminDisabledSummary="true" />
 
     <com.android.settingslib.RestrictedPreference
-        android:fragment="com.android.settings.vpn2.VpnSettings"
-        android:key="vpn_settings"
-        android:title="@string/vpn_settings_title"
-        android:icon="@drawable/ic_vpn_key"
-        android:order="0"
-        android:summary="@string/summary_placeholder"
-        settings:userRestriction="no_config_vpn"
-        settings:useAdminDisabledSummary="true" />
-
-    <com.android.settingslib.RestrictedPreference
         android:key="manage_mobile_plan"
         android:title="@string/manage_mobile_plan_title"
         android:persistent="false"
+        android:order="0"
         settings:userRestriction="no_config_mobile_networks"
         settings:useAdminDisabledSummary="true" />
 
@@ -87,5 +79,23 @@
         android:fragment="com.android.settings.ProxySelector"
         android:key="proxy_settings"
         android:title="@string/proxy_settings_title" />
+
+    <com.android.settingslib.RestrictedPreference
+        android:fragment="com.android.settings.vpn2.VpnSettings"
+        android:key="vpn_settings"
+        android:title="@string/vpn_settings_title"
+        android:icon="@drawable/ic_vpn_key"
+        android:order="10"
+        android:summary="@string/summary_placeholder"
+        settings:userRestriction="no_config_vpn"
+        settings:useAdminDisabledSummary="true" />
+
+    <com.android.settings.network.PrivateDnsModeDialogPreference
+        android:key="private_dns_settings"
+        android:title="@string/select_private_dns_configuration_title"
+        android:order="15"
+        android:dialogTitle="@string/select_private_dns_configuration_dialog_title"
+        android:dialogLayout="@layout/private_dns_mode_dialog"
+        android:positiveButtonText="@string/save" />
 
 </PreferenceScreen>

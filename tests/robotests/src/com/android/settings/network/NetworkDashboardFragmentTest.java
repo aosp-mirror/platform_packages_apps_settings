@@ -76,9 +76,7 @@ public class NetworkDashboardFragmentTest {
     public void testPrepareActionBar_networkResetShouldBeCreated() {
         final NetworkResetActionMenuController resetController =
                 mock(NetworkResetActionMenuController.class);
-        final PrivateDnsMenuController privateDnsController = mock(PrivateDnsMenuController.class);
         ReflectionHelpers.setField(mFragment, "mNetworkResetController", resetController);
-        ReflectionHelpers.setField(mFragment, "mPrivateDnsMenuController", privateDnsController);
 
         mFragment.onCreateOptionsMenu(null, null);
 

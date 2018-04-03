@@ -49,10 +49,8 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
     private static final String TAG = "NetworkDashboardFrag";
     private static final int MENU_NETWORK_RESET = Menu.FIRST;
-    private static final int MENU_PRIVATE_DNS = Menu.FIRST + 1;
 
     private NetworkResetActionMenuController mNetworkResetController;
-    private PrivateDnsMenuController mPrivateDnsMenuController;
 
     @Override
     public int getMetricsCategory() {
@@ -73,8 +71,6 @@ public class NetworkDashboardFragment extends DashboardFragment implements
     public void onAttach(Context context) {
         super.onAttach(context);
         mNetworkResetController = new NetworkResetActionMenuController(context, MENU_NETWORK_RESET);
-        mPrivateDnsMenuController = new PrivateDnsMenuController(getFragmentManager(),
-                MENU_PRIVATE_DNS);
     }
 
     @Override
@@ -86,7 +82,6 @@ public class NetworkDashboardFragment extends DashboardFragment implements
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         mNetworkResetController.buildMenuItem(menu);
-        mPrivateDnsMenuController.buildMenuItem(menu);
     }
 
     @Override
@@ -109,6 +104,8 @@ public class NetworkDashboardFragment extends DashboardFragment implements
                 new MobileNetworkPreferenceController(context);
         final VpnPreferenceController vpnPreferenceController =
                 new VpnPreferenceController(context);
+        final PrivateDnsPreferenceController privateDnsPreferenceController =
+                new PrivateDnsPreferenceController(context);
 
         if (lifecycle != null) {
             lifecycle.addObserver(airplaneModePreferenceController);
@@ -116,6 +113,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
             lifecycle.addObserver(wifiPreferenceController);
             lifecycle.addObserver(mobileNetworkPreferenceController);
             lifecycle.addObserver(vpnPreferenceController);
+            lifecycle.addObserver(privateDnsPreferenceController);
         }
 
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
@@ -126,6 +124,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         controllers.add(new ProxyPreferenceController(context));
         controllers.add(mobilePlanPreferenceController);
         controllers.add(wifiPreferenceController);
+        controllers.add(privateDnsPreferenceController);
         return controllers;
     }
 
