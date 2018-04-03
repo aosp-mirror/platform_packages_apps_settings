@@ -46,6 +46,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
+import com.android.settings.network.ApnSettings;
 import com.android.settingslib.RestrictedLockUtils;
 
 /**

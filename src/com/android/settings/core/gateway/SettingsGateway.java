@@ -16,8 +16,6 @@
 
 package com.android.settings.core.gateway;
 
-import com.android.settings.ApnEditor;
-import com.android.settings.ApnSettings;
 import com.android.settings.DateTimeSettings;
 import com.android.settings.DeviceAdminSettings;
 import com.android.settings.DisplaySettings;
@@ -91,6 +89,8 @@ import com.android.settings.inputmethod.UserDictionarySettings;
 import com.android.settings.language.LanguageAndInputSettings;
 import com.android.settings.localepicker.LocaleListEditor;
 import com.android.settings.location.LocationSettings;
+import com.android.settings.network.ApnEditor;
+import com.android.settings.network.ApnSettings;
 import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.nfc.AndroidBeam;
 import com.android.settings.nfc.PaymentSettings;
