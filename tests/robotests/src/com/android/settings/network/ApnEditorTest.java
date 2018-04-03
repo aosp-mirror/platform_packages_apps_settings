@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.network;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -40,7 +40,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.android.settings.ApnEditor.ApnData;
+import com.android.settings.R;
+import com.android.settings.network.ApnEditor.ApnData;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -52,7 +53,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
-import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ApnEditorTest {

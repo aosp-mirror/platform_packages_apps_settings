@@ -388,7 +388,7 @@
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.ApnSettings" />
+                       android:value="com.android.settings.network.ApnSettings" />
         </activity>
 
         <!-- Keep compatibility with old shortcuts. -->
@@ -1903,7 +1903,7 @@
                 <data android:mimeType="vnd.android.cursor.dir/telephony-carrier" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.ApnEditor" />
+                       android:value="com.android.settings.network.ApnEditor" />
         </activity>
 
         <activity

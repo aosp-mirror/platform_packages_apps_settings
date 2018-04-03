@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.network;
 
 import android.content.ContentUris;
 import android.content.Context;
@@ -31,6 +31,8 @@ import android.view.View.OnClickListener;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
+
+import com.android.settings.R;
 
 public class ApnPreference extends Preference implements
         CompoundButton.OnCheckedChangeListener, OnClickListener {
