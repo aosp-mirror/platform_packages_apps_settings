@@ -35,7 +35,6 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
 import com.android.settings.deviceinfo.StorageProfileFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.wrapper.UserManagerWrapper;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.drawable.UserIconDrawable;
 
@@ -53,8 +52,6 @@ public class UserProfileControllerTest {
     private static final String TEST_NAME = "Fred";
 
     @Mock
-    private UserManagerWrapper mUserManager;
-    @Mock
     private PreferenceScreen mScreen;
 
     private Context mContext;
@@ -66,7 +63,7 @@ public class UserProfileControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         mPrimaryProfile = new UserInfo();
-        mController = new UserProfileController(mContext, mPrimaryProfile, mUserManager, 0);
+        mController = new UserProfileController(mContext, mPrimaryProfile, 0);
         when(mScreen.getContext()).thenReturn(mContext);
         mPrimaryProfile.name = TEST_NAME;
         mPrimaryProfile.id = 10;
@@ -96,7 +93,7 @@ public class UserProfileControllerTest {
         final Intent intent = intentCaptor.getValue();
         assertThat(intent.getComponent().getClassName()).isEqualTo(SubSettings.class.getName());
         assertThat(intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
-            .isEqualTo(StorageProfileFragment.class.getName());
+                .isEqualTo(StorageProfileFragment.class.getName());
     }
 
     @Test
