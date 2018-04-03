@@ -105,4 +105,49 @@ public class AppNotificationPreferenceControllerTest {
         assertThat(controller.getArguments().containsKey(EXTRA_FRAGMENT_ARG_KEY)).isTrue();
         assertThat(controller.getArguments().getString(EXTRA_FRAGMENT_ARG_KEY)).isEqualTo("test");
     }
+
+    @Test
+    public void getNotificationSummary_noCrashOnNull() {
+        mController.getNotificationSummary(null, mContext);
+    }
+
+    @Test
+    public void getNotificationSummary_appBlocked() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.banned = true;
+        appRow.blockedChannelCount = 30;
+        assertThat(mController.getNotificationSummary(appRow, mContext).toString())
+                .isEqualTo("Off");
+    }
+
+    @Test
+    public void getNotificationSummary_appNotBlockedAllChannelsBlocked() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.banned = false;
+        appRow.blockedChannelCount = 30;
+        appRow.channelCount = 30;
+        assertThat(mController.getNotificationSummary(appRow, mContext).toString())
+                .isEqualTo("Off");
+    }
+
+    @Test
+    public void getNotificationSummary_appNotBlocked() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.banned = false;
+        appRow.blockedChannelCount = 30;
+        appRow.channelCount = 60;
+        assertThat(mController.getNotificationSummary(
+                appRow, mContext).toString().contains("30")).isTrue();
+        assertThat(mController.getNotificationSummary(
+                appRow, mContext).toString().contains("On")).isTrue();
+    }
+
+    @Test
+    public void getNotificationSummary_channelsNotBlocked() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.banned = false;
+        appRow.blockedChannelCount = 0;
+        appRow.channelCount = 10;
+        assertThat(mController.getNotificationSummary(appRow, mContext).toString()).isEqualTo("On");
+    }
 }
