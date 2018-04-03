@@ -24,7 +24,6 @@ import com.android.settings.search.SearchIndexProviderCodeInspector;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -55,7 +54,6 @@ public class CodeInspectionTest {
         new BasePreferenceControllerSignatureInspector(mClasses).run();
     }
 
-    @Ignore("b/73960706")
     @Test
     public void runSearchIndexProviderCodeInspection() {
         new SearchIndexProviderCodeInspector(mClasses).run();
