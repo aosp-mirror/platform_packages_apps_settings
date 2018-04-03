@@ -34,7 +34,6 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.deviceinfo.storage.StorageAsyncLoader;
 import com.android.settings.deviceinfo.storage.StorageAsyncLoader.AppsStorageResult;
 import com.android.settings.deviceinfo.storage.StorageItemPreferenceController;
-import com.android.settings.wrapper.UserManagerWrapper;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
@@ -114,9 +113,9 @@ public class StorageProfileFragment extends DashboardFragment
 
     @Override
     public Loader<SparseArray<AppsStorageResult>> onCreateLoader(int id, Bundle args) {
-        Context context = getContext();
+        final Context context = getContext();
         return new StorageAsyncLoader(context,
-                new UserManagerWrapper(context.getSystemService(UserManager.class)),
+                context.getSystemService(UserManager.class),
                 mVolume.fsUuid,
                 new StorageStatsSource(context),
                 new PackageManagerWrapper(context.getPackageManager()));

@@ -20,15 +20,15 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
+import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.res.Resources;
 
 import com.android.settings.SubSettings;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.wrapper.WallpaperManagerWrapper;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,6 +40,7 @@ import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.annotation.Resetter;
 import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowPackageManager;
 
@@ -59,10 +60,15 @@ public class WallpaperSuggestionActivityTest {
         mController = Robolectric.buildActivity(WallpaperSuggestionActivity.class);
     }
 
+    @After
+    public void tearDown() {
+        ShadowWallpaperManager.reset();
+    }
+
     @Test
     public void launch_primarySuggestionActivityDoesNotExist_shouldFallback() {
         ShadowPackageManager packageManager =
-            shadowOf(RuntimeEnvironment.application.getPackageManager());
+                shadowOf(RuntimeEnvironment.application.getPackageManager());
         packageManager.removePackage("com.android.settings");
 
         ShadowActivity activity = shadowOf(mController.setup().get());
@@ -74,32 +80,34 @@ public class WallpaperSuggestionActivityTest {
     }
 
     @Test
-    public void wallpaperServiceEnabled_no_shouldReturnFalse() {
+    public void wallpaperServiceEnabled_no_shouldReturnTrue() {
         when(mContext.getResources()).thenReturn(mResources);
         when(mResources.getBoolean(com.android.internal.R.bool.config_enableWallpaperService))
-            .thenReturn(false);
-
-        assertThat(WallpaperSuggestionActivity.isSuggestionComplete(mContext)).isFalse();
-    }
-
-    @Test
-    @Config(shadows = WallpaperSuggestionActivityTest.ShadowWallpaperManagerWrapper.class)
-    public void hasWallpaperSet_no_shouldReturnFalse() {
-        ShadowWallpaperManagerWrapper.setWallpaperId(0);
-
-        assertThat(WallpaperSuggestionActivity.isSuggestionComplete(mContext)).isFalse();
-    }
-
-    @Test
-    @Config(shadows = WallpaperSuggestionActivityTest.ShadowWallpaperManagerWrapper.class)
-    public void hasWallpaperSet_yes_shouldReturnTrue() {
-        ShadowWallpaperManagerWrapper.setWallpaperId(100);
+                .thenReturn(false);
 
         assertThat(WallpaperSuggestionActivity.isSuggestionComplete(mContext)).isTrue();
     }
 
-    @Implements(WallpaperManagerWrapper.class)
-    public static class ShadowWallpaperManagerWrapper {
+    @Test
+    @Config(shadows = ShadowWallpaperManager.class)
+    public void hasWallpaperSet_no_shouldReturnFalse() {
+        ShadowWallpaperManager.setWallpaperId(0);
+
+        assertThat(WallpaperSuggestionActivity.isSuggestionComplete(RuntimeEnvironment.application))
+                .isFalse();
+    }
+
+    @Test
+    @Config(shadows = ShadowWallpaperManager.class)
+    public void hasWallpaperSet_yes_shouldReturnTrue() {
+        ShadowWallpaperManager.setWallpaperId(100);
+
+        assertThat(WallpaperSuggestionActivity.isSuggestionComplete(RuntimeEnvironment.application))
+                .isTrue();
+    }
+
+    @Implements(WallpaperManager.class)
+    public static class ShadowWallpaperManager {
 
         private static int sWallpaperId;
 
@@ -107,11 +115,9 @@ public class WallpaperSuggestionActivityTest {
             sWallpaperId = id;
         }
 
+        @Resetter
         public static void reset() {
             sWallpaperId = 0;
-        }
-
-        public void __constructor__(Context context) {
         }
 
         @Implementation
