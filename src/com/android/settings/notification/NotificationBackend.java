@@ -60,6 +60,8 @@ public class NotificationBackend {
         row.banned = getNotificationsBanned(row.pkg, row.uid);
         row.showBadge = canShowBadge(row.pkg, row.uid);
         row.userId = UserHandle.getUserId(row.uid);
+        row.blockedChannelCount = getBlockedChannelCount(row.pkg, row.uid);
+        row.channelCount = getChannelCount(row.pkg, row.uid);
         return row;
     }
 
@@ -178,18 +180,6 @@ public class NotificationBackend {
         }
     }
 
-    public NotificationChannelGroup getGroupWithChannels(String pkg, int uid, String groupId) {
-        if (groupId == null) {
-            return null;
-        }
-        try {
-            return sINM.getPopulatedNotificationChannelGroupForPackage(pkg, uid, groupId, true);
-        } catch (Exception e) {
-            Log.w(TAG, "Error calling NoMan", e);
-            return null;
-        }
-    }
-
     public ParceledListSlice<NotificationChannelGroup> getGroups(String pkg, int uid) {
         try {
             return sINM.getNotificationChannelGroupsForPackage(pkg, uid, false);
@@ -224,12 +214,30 @@ public class NotificationBackend {
         }
     }
 
+    public int getBlockedChannelCount(String pkg, int uid) {
+        try {
+            return sINM.getBlockedChannelCount(pkg, uid);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return 0;
+        }
+    }
+
     public boolean onlyHasDefaultChannel(String pkg, int uid) {
         try {
             return sINM.onlyHasDefaultChannel(pkg, uid);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
             return false;
+        }
+    }
+
+    public int getChannelCount(String pkg, int uid) {
+        try {
+            return sINM.getNumNotificationChannelsForPackage(pkg, uid, false);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return 0;
         }
     }
 
@@ -259,5 +267,7 @@ public class NotificationBackend {
         public String lockedChannelId;
         public boolean showBadge;
         public int userId;
+        public int blockedChannelCount;
+        public int channelCount;
     }
 }
