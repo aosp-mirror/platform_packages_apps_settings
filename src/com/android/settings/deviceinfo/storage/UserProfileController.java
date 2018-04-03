@@ -32,7 +32,6 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.deviceinfo.StorageItemPreference;
 import com.android.settings.deviceinfo.StorageProfileFragment;
-import com.android.settings.wrapper.UserManagerWrapper;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 /**
@@ -44,16 +43,13 @@ public class UserProfileController extends AbstractPreferenceController implemen
         UserIconLoader.UserIconHandler {
     private static final String PREFERENCE_KEY_BASE = "pref_profile_";
     private StorageItemPreference mStoragePreference;
-    private UserManagerWrapper mUserManager;
     private UserInfo mUser;
     private long mTotalSizeBytes;
     private final int mPreferenceOrder;
 
-    public UserProfileController(
-            Context context, UserInfo info, UserManagerWrapper userManager, int preferenceOrder) {
+    public UserProfileController(Context context, UserInfo info, int preferenceOrder) {
         super(context);
         mUser = Preconditions.checkNotNull(info);
-        mUserManager = userManager;
         mPreferenceOrder = preferenceOrder;
     }
 

@@ -19,6 +19,7 @@ package com.android.settings.deviceinfo.storage;
 import android.content.Context;
 import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
+import android.os.UserManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
@@ -29,7 +30,6 @@ import android.util.SparseArray;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.deviceinfo.StorageItemPreference;
-import com.android.settings.wrapper.UserManagerWrapper;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
@@ -61,7 +61,7 @@ public class SecondaryUserController extends AbstractPreferenceController implem
      * @param userManager UserManagerWrapper for figuring out which controllers to add.
      */
     public static List<AbstractPreferenceController> getSecondaryUserControllers(
-            Context context, UserManagerWrapper userManager) {
+            Context context, UserManager userManager) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
         UserInfo primaryUser = userManager.getPrimaryUser();
         boolean addedUser = false;
@@ -74,8 +74,7 @@ public class SecondaryUserController extends AbstractPreferenceController implem
 
             if (info == null || Utils.isProfileOf(primaryUser, info)) {
                 controllers.add(
-                        new UserProfileController(
-                                context, info, userManager, USER_PROFILE_INSERTION_LOCATION));
+                        new UserProfileController(context, info, USER_PROFILE_INSERTION_LOCATION));
                 continue;
             }
 
