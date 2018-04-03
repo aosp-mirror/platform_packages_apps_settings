@@ -83,6 +83,7 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
     public void setStream(int stream) {
         mStream = stream;
         setMax(mAudioManager.getStreamMaxVolume(mStream));
+        setMin(mAudioManager.getStreamMinVolume(mStream));
         setProgress(mAudioManager.getStreamVolume(mStream));
     }
 
