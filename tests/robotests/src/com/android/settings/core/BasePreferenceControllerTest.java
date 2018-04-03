@@ -21,7 +21,12 @@ import static com.android.settings.core.BasePreferenceController.DISABLED_FOR_US
 import static com.android.settings.core.BasePreferenceController.DISABLED_UNSUPPORTED;
 import static com.android.settings.core.BasePreferenceController.UNAVAILABLE_UNKNOWN;
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
+import android.content.Context;
 
 import com.android.settings.slices.SliceData;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -29,19 +34,24 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceGroup;
+import android.support.v7.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class BasePreferenceControllerTest {
 
-    @Mock
-    private BasePreferenceController mPreferenceController;
+    private final String KEY = "fake_key";
+
+    private Context mContext;
+    private FakeBasePreferenceController mPreferenceController;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
+        mContext = RuntimeEnvironment.application;
+        mPreferenceController = new FakeBasePreferenceController(mContext, KEY);
     }
 
 
@@ -57,70 +67,70 @@ public class BasePreferenceControllerTest {
 
     @Test
     public void isAvailable_availableStatusAvailable_returnsTrue() {
-        when(mPreferenceController.getAvailabilityStatus()).thenReturn(AVAILABLE);
+        mPreferenceController.setAvailability(AVAILABLE);
 
         assertThat(mPreferenceController.isAvailable()).isTrue();
     }
 
     @Test
     public void isAvailable_availableStatusUnsupported_returnsFalse() {
-        when(mPreferenceController.getAvailabilityStatus()).thenReturn(DISABLED_UNSUPPORTED);
+        mPreferenceController.setAvailability(DISABLED_UNSUPPORTED);
 
         assertThat(mPreferenceController.isAvailable()).isFalse();
     }
 
     @Test
-    public void isAvailable_availableStatusDisabled_returnsFalse() {
-        when(mPreferenceController.getAvailabilityStatus()).thenReturn(DISABLED_FOR_USER);
+    public void isAvailable_availableStatusDisabledForUser_returnsFalse() {
+        mPreferenceController.setAvailability(DISABLED_FOR_USER);
 
         assertThat(mPreferenceController.isAvailable()).isFalse();
     }
 
     @Test
     public void isAvailable_availableStatusBlockedDependent_returnsFalse() {
-        when(mPreferenceController.getAvailabilityStatus()).thenReturn(DISABLED_DEPENDENT_SETTING);
+        mPreferenceController.setAvailability(DISABLED_DEPENDENT_SETTING);
 
-        assertThat(mPreferenceController.isAvailable()).isFalse();
+        assertThat(mPreferenceController.isAvailable()).isTrue();
     }
 
     @Test
     public void isAvailable_availableStatusUnavailable_returnsFalse() {
-        when(mPreferenceController.getAvailabilityStatus()).thenReturn(UNAVAILABLE_UNKNOWN);
+        mPreferenceController.setAvailability(UNAVAILABLE_UNKNOWN);
 
         assertThat(mPreferenceController.isAvailable()).isFalse();
     }
 
     @Test
     public void isSupported_availableStatusAvailable_returnsTrue() {
-        when(mPreferenceController.getAvailabilityStatus()).thenReturn(AVAILABLE);
+        mPreferenceController.setAvailability(AVAILABLE);
 
         assertThat(mPreferenceController.isSupported()).isTrue();
     }
 
     @Test
     public void isSupported_availableStatusUnsupported_returnsFalse() {
-        when(mPreferenceController.getAvailabilityStatus()).thenReturn(DISABLED_UNSUPPORTED);
+        mPreferenceController.setAvailability(DISABLED_UNSUPPORTED);
 
         assertThat(mPreferenceController.isSupported()).isFalse();
     }
 
     @Test
-    public void isSupported_availableStatusDisabled_returnsTrue() {
-        when(mPreferenceController.getAvailabilityStatus()).thenReturn(DISABLED_FOR_USER);
+    public void isSupported_availableStatusDisabledForUser_returnsTrue() {
+        mPreferenceController.setAvailability(DISABLED_FOR_USER);
 
         assertThat(mPreferenceController.isSupported()).isTrue();
     }
 
     @Test
     public void isSupported_availableStatusDependentSetting_returnsTrue() {
-        when(mPreferenceController.getAvailabilityStatus()).thenReturn(DISABLED_DEPENDENT_SETTING);
+        mPreferenceController.setAvailability(DISABLED_DEPENDENT_SETTING);
 
         assertThat(mPreferenceController.isSupported()).isTrue();
     }
 
     @Test
     public void isSupported_availableStatusUnavailable_returnsTrue() {
-        when(mPreferenceController.getAvailabilityStatus()).thenReturn(UNAVAILABLE_UNKNOWN);
+        mPreferenceController.setAvailability(UNAVAILABLE_UNKNOWN);
 
         assertThat(mPreferenceController.isSupported()).isTrue();
     }
@@ -128,5 +138,49 @@ public class BasePreferenceControllerTest {
     @Test
     public void getSliceType_shouldReturnIntent() {
         assertThat(mPreferenceController.getSliceType()).isEqualTo(SliceData.SliceType.INTENT);
+    }
+
+    @Test
+    public void settingAvailable_disabledOnDisplayPreference_preferenceEnabled() {
+        final PreferenceScreen screen = mock(PreferenceScreen.class);
+        final Preference preference = new Preference(mContext);
+        preference.setEnabled(true);
+        when(screen.findPreference(anyString())).thenReturn(preference);
+
+        mPreferenceController.displayPreference(screen);
+
+        assertThat(preference.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void disabledDependentSetting_disabledOnDisplayPreference_preferenceDisabled() {
+        final PreferenceScreen screen = mock(PreferenceScreen.class);
+        final Preference preference = new Preference(mContext);
+        preference.setEnabled(true);
+        when(screen.findPreference(anyString())).thenReturn(preference);
+        mPreferenceController.setAvailability(DISABLED_DEPENDENT_SETTING);
+
+        mPreferenceController.displayPreference(screen);
+
+        assertThat(preference.isEnabled()).isFalse();
+    }
+
+    private class FakeBasePreferenceController extends BasePreferenceController {
+
+        public int mAvailable;
+
+        public FakeBasePreferenceController(Context context, String preferenceKey) {
+            super(context, preferenceKey);
+            mAvailable = AVAILABLE;
+        }
+
+        @Override
+        public int getAvailabilityStatus() {
+            return mAvailable;
+        }
+
+        public void setAvailability(int availability) {
+            mAvailable = availability;
+        }
     }
 }
