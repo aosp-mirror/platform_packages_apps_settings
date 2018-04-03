@@ -27,6 +27,7 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import android.app.admin.DevicePolicyManager;
+import android.content.pm.IPackageManager;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.os.Build;
@@ -34,7 +35,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.wrapper.IPackageManagerWrapper;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
@@ -78,7 +78,7 @@ public final class AppWithAdminGrantedPermissionsListerTest {
     @Mock
     private PackageManagerWrapper mPackageManager;
     @Mock
-    private IPackageManagerWrapper mPackageManagerService;
+    private IPackageManager mPackageManagerService;
     @Mock
     private DevicePolicyManager mDevicePolicyManager;
 

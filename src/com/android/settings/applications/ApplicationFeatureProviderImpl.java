@@ -20,6 +20,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ComponentInfo;
+import android.content.pm.IPackageManager;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
@@ -27,7 +28,6 @@ import android.os.RemoteException;
 import android.os.UserManager;
 import android.util.ArraySet;
 
-import com.android.settings.wrapper.IPackageManagerWrapper;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
@@ -38,12 +38,12 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
 
     private final Context mContext;
     private final PackageManagerWrapper mPm;
-    private final IPackageManagerWrapper mPms;
+    private final IPackageManager mPms;
     private final DevicePolicyManager mDpm;
     private final UserManager mUm;
 
     public ApplicationFeatureProviderImpl(Context context, PackageManagerWrapper pm,
-            IPackageManagerWrapper pms, DevicePolicyManager dpm) {
+            IPackageManager pms, DevicePolicyManager dpm) {
         mContext = context.getApplicationContext();
         mPm = pm;
         mPms = pms;
@@ -149,7 +149,7 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
 
         CurrentUserAndManagedProfileAppWithAdminGrantedPermissionsCounter(Context context,
                 String[] permissions, PackageManagerWrapper packageManager,
-                IPackageManagerWrapper packageManagerService,
+                IPackageManager packageManagerService,
                 DevicePolicyManager devicePolicyManager, NumberOfAppsCallback callback) {
             super(context, permissions, packageManager, packageManagerService, devicePolicyManager);
             mCallback = callback;
@@ -181,7 +181,7 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
         private ListOfAppsCallback mCallback;
 
         CurrentUserAppWithAdminGrantedPermissionsLister(String[] permissions,
-                PackageManagerWrapper packageManager, IPackageManagerWrapper packageManagerService,
+                PackageManagerWrapper packageManager, IPackageManager packageManagerService,
                 DevicePolicyManager devicePolicyManager, UserManager userManager,
                 ListOfAppsCallback callback) {
             super(permissions, packageManager, packageManagerService, devicePolicyManager,

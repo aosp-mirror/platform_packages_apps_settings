@@ -20,13 +20,10 @@ import static com.android.settings.wifi.WifiSettings.WIFI_DIALOG_ID;
 import android.app.Dialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.net.NetworkPolicyManager;
-import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.v7.preference.DropDownPreference;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -37,13 +34,11 @@ import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.wifi.WifiConfigUiBase;
 import com.android.settings.wifi.WifiDialog;
-import com.android.settings.wrapper.ConnectivityManagerWrapper;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.wifi.AccessPoint;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -126,10 +121,10 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        ConnectivityManager cm = context.getSystemService(ConnectivityManager.class);
+        final ConnectivityManager cm = context.getSystemService(ConnectivityManager.class);
         mWifiDetailPreferenceController = WifiDetailPreferenceController.newInstance(
                 mAccessPoint,
-                new ConnectivityManagerWrapper(cm),
+                cm,
                 context,
                 this,
                 new Handler(Looper.getMainLooper()),  // UI thread.

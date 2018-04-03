@@ -19,6 +19,7 @@ import android.app.AppGlobals;
 import android.app.AppOpsManager;
 import android.app.AppOpsManager.PackageOps;
 import android.content.Context;
+import android.content.pm.IPackageManager;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.RemoteException;
@@ -31,7 +32,6 @@ import android.util.SparseArray;
 
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
-import com.android.settings.wrapper.IPackageManagerWrapper;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -47,7 +47,7 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
 
     private static final String TAG = "AppStateAppOpsBridge";
 
-    private final IPackageManagerWrapper mIPackageManager;
+    private final IPackageManager mIPackageManager;
     private final UserManager mUserManager;
     private final List<UserHandle> mProfiles;
     private final AppOpsManager mAppOpsManager;
@@ -58,12 +58,12 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
     public AppStateAppOpsBridge(Context context, ApplicationsState appState, Callback callback,
             int appOpsOpCode, String[] permissions) {
         this(context, appState, callback, appOpsOpCode, permissions,
-            new IPackageManagerWrapper(AppGlobals.getPackageManager()));
+                AppGlobals.getPackageManager());
     }
 
     @VisibleForTesting
     AppStateAppOpsBridge(Context context, ApplicationsState appState, Callback callback,
-            int appOpsOpCode, String[] permissions, IPackageManagerWrapper packageManager) {
+            int appOpsOpCode, String[] permissions, IPackageManager packageManager) {
         super(appState, callback);
         mContext = context;
         mIPackageManager = packageManager;
@@ -210,9 +210,10 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
                 if (entriesForProfile == null) {
                     continue;
                 }
-                @SuppressWarnings("unchecked")
-                final List<PackageInfo> packageInfos = mIPackageManager
-                        .getPackagesHoldingPermissions(mPermissions, 0, profileId).getList();
+                @SuppressWarnings("unchecked") final List<PackageInfo> packageInfos =
+                        mIPackageManager
+                                .getPackagesHoldingPermissions(mPermissions, 0,
+                                        profileId).getList();
                 final int packageInfoCount = packageInfos != null ? packageInfos.size() : 0;
                 for (int i = 0; i < packageInfoCount; i++) {
                     final PackageInfo packageInfo = packageInfos.get(i);
