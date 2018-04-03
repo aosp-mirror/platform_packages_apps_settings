@@ -27,7 +27,6 @@ import android.util.Log;
 
 import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
-import com.android.settings.wrapper.ConnectivityManagerWrapper;
 
 /**
  * Utility functions for vpn.
@@ -89,7 +88,7 @@ public class VpnUtils {
                 ServiceManager.getService(Context.CONNECTIVITY_SERVICE));
     }
 
-    public static boolean isAlwaysOnVpnSet(ConnectivityManagerWrapper cm, final int userId) {
+    public static boolean isAlwaysOnVpnSet(ConnectivityManager cm, final int userId) {
         return cm.getAlwaysOnVpnPackageForUser(userId) != null;
     }
 

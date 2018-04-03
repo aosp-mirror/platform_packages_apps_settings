@@ -48,6 +48,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -60,7 +61,6 @@ import com.android.settings.wifi.WifiDetailPreference;
 import com.android.settings.wifi.WifiDialog;
 import com.android.settings.wifi.WifiDialog.WifiDialogListener;
 import com.android.settings.wifi.WifiUtils;
-import com.android.settings.wrapper.ConnectivityManagerWrapper;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -68,6 +68,7 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.wifi.AccessPoint;
+
 import java.net.Inet4Address;
 import java.net.Inet6Address;
 import java.net.InetAddress;
@@ -114,7 +115,6 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     static final String KEY_IPV6_ADDRESSES_PREF = "ipv6_addresses";
 
     private AccessPoint mAccessPoint;
-    private final ConnectivityManagerWrapper mConnectivityManagerWrapper;
     private final ConnectivityManager mConnectivityManager;
     private final Fragment mFragment;
     private final Handler mHandler;
@@ -152,10 +152,10 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
             switch (intent.getAction()) {
                 case WifiManager.CONFIGURED_NETWORKS_CHANGED_ACTION:
                     if (!intent.getBooleanExtra(WifiManager.EXTRA_MULTIPLE_NETWORKS_CHANGED,
-                        false /* defaultValue */)) {
+                            false /* defaultValue */)) {
                         // only one network changed
                         WifiConfiguration wifiConfiguration = intent
-                            .getParcelableExtra(WifiManager.EXTRA_WIFI_CONFIGURATION);
+                                .getParcelableExtra(WifiManager.EXTRA_WIFI_CONFIGURATION);
                         if (mAccessPoint.matches(wifiConfiguration)) {
                             mWifiConfig = wifiConfiguration;
                         }
@@ -215,7 +215,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
     public static WifiDetailPreferenceController newInstance(
             AccessPoint accessPoint,
-            ConnectivityManagerWrapper connectivityManagerWrapper,
+            ConnectivityManager connectivityManager,
             Context context,
             Fragment fragment,
             Handler handler,
@@ -223,14 +223,14 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
             WifiManager wifiManager,
             MetricsFeatureProvider metricsFeatureProvider) {
         return new WifiDetailPreferenceController(
-                accessPoint, connectivityManagerWrapper, context, fragment, handler, lifecycle,
+                accessPoint, connectivityManager, context, fragment, handler, lifecycle,
                 wifiManager, metricsFeatureProvider, new IconInjector(context));
     }
 
     @VisibleForTesting
-    /* package */ WifiDetailPreferenceController(
+        /* package */ WifiDetailPreferenceController(
             AccessPoint accessPoint,
-            ConnectivityManagerWrapper connectivityManagerWrapper,
+            ConnectivityManager connectivityManager,
             Context context,
             Fragment fragment,
             Handler handler,
@@ -241,8 +241,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         super(context);
 
         mAccessPoint = accessPoint;
-        mConnectivityManager = connectivityManagerWrapper.getConnectivityManager();
-        mConnectivityManagerWrapper = connectivityManagerWrapper;
+        mConnectivityManager = connectivityManager;
         mFragment = fragment;
         mHandler = handler;
         mSignalStr = context.getResources().getStringArray(R.array.wifi_signal);
@@ -326,7 +325,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mNetworkCapabilities = mConnectivityManager.getNetworkCapabilities(mNetwork);
         updateInfo();
         mContext.registerReceiver(mReceiver, mFilter);
-        mConnectivityManagerWrapper.registerNetworkCallback(mNetworkRequest, mNetworkCallback,
+        mConnectivityManager.registerNetworkCallback(mNetworkRequest, mNetworkCallback,
                 mHandler);
     }
 
@@ -486,7 +485,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     private static String ipv4PrefixLengthToSubnetMask(int prefixLength) {
         try {
             InetAddress all = InetAddress.getByAddress(
-                    new byte[]{(byte) 255, (byte) 255, (byte) 255, (byte) 255});
+                    new byte[] {(byte) 255, (byte) 255, (byte) 255, (byte) 255});
             return NetworkUtils.getNetworkPart(all, prefixLength).getHostAddress();
         } catch (UnknownHostException e) {
             return null;
@@ -538,7 +537,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     private void signIntoNetwork() {
         mMetricsFeatureProvider.action(
                 mFragment.getActivity(), MetricsProto.MetricsEvent.ACTION_WIFI_SIGNIN);
-        mConnectivityManagerWrapper.startCaptivePortalApp(mNetwork);
+        mConnectivityManager.startCaptivePortalApp(mNetwork);
     }
 
     @Override
