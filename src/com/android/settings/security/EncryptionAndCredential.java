@@ -30,6 +30,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,6 +39,7 @@ import java.util.List;
 /**
  * Encryption and Credential settings.
  */
+@SearchIndexable
 public class EncryptionAndCredential extends DashboardFragment {
 
     private static final String TAG = "EncryptionAndCredential";

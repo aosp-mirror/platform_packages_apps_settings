@@ -40,6 +40,7 @@ import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -47,6 +48,7 @@ import java.util.List;
 /**
  * Screen pinning settings.
  */
+@SearchIndexable
 public class ScreenPinningSettings extends SettingsPreferenceFragment
         implements SwitchBar.OnSwitchChangeListener, Indexable {
 

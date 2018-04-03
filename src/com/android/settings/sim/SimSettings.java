@@ -42,10 +42,12 @@ import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.Utils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@SearchIndexable
 public class SimSettings extends RestrictedSettingsFragment implements Indexable {
     private static final String TAG = "SimSettings";
     private static final boolean DBG = false;

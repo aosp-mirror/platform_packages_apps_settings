@@ -15,12 +15,15 @@ import android.util.Log;
 import static android.provider.Settings.Secure.TTS_DEFAULT_SYNTH;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.search.SearchIndexable;
+
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
 import java.util.List;
 import java.util.Arrays;
 
+@SearchIndexable
 public class TtsEnginePreferenceFragment extends SettingsPreferenceFragment //implements
         implements RadioButtonGroupState, Indexable {
     private static final String TAG = "TtsEnginePrefFragment";

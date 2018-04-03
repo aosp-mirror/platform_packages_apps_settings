@@ -51,12 +51,14 @@ import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
+import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@SearchIndexable
 public class StorageDashboardFragment extends DashboardFragment
         implements
         LoaderManager.LoaderCallbacks<SparseArray<StorageAsyncLoader.AppsStorageResult>> {

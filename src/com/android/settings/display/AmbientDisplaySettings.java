@@ -32,6 +32,7 @@ import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,7 @@ import java.util.List;
 /**
  * Settings screen for Ambient display.
  */
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class AmbientDisplaySettings extends DashboardFragment {
 
     public static final String KEY_AMBIENT_DISPLAY_ALWAYS_ON = "ambient_display_always_on";

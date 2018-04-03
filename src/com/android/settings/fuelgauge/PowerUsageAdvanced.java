@@ -30,12 +30,14 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class PowerUsageAdvanced extends PowerUsageBase {
     private static final String TAG = "AdvancedBatteryUsage";
     private static final String KEY_BATTERY_GRAPH = "battery_graph";

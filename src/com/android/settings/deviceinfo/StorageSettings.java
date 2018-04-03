@@ -57,6 +57,7 @@ import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -67,6 +68,7 @@ import java.util.List;
  * Panel showing both internal storage (both built-in storage and private
  * volumes) and removable storage (public volumes).
  */
+@SearchIndexable
 public class StorageSettings extends SettingsPreferenceFragment implements Indexable {
     static final String TAG = "StorageSettings";
 

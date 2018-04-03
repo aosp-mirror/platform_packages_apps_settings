@@ -48,6 +48,7 @@ import com.android.settings.search.Indexable;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.net.DataUsageController;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +56,7 @@ import java.util.List;
 /**
  * Legacy {@link DataUsageSummary} fragment.
  */
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class DataUsageSummaryLegacy extends DataUsageBaseFragment implements Indexable,
         DataUsageEditController {
 

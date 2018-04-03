@@ -26,6 +26,7 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,7 @@ import java.util.List;
 /**
  * Fragment showing the items to launch different backup settings screens.
  */
+@SearchIndexable
 public class BackupSettingsFragment extends DashboardFragment {
     private static final String TAG = "BackupSettings";
 

@@ -46,6 +46,7 @@ import com.android.settings.Settings;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.text.Collator;
@@ -55,6 +56,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
+@SearchIndexable
 public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         implements InputManager.InputDeviceListener,
         KeyboardLayoutDialogFragment.OnSetupKeyboardLayoutsListener, Indexable {

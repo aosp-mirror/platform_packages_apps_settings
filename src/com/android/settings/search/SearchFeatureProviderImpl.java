@@ -24,6 +24,8 @@ import android.text.TextUtils;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.indexing.IndexData;
+import com.android.settingslib.search.SearchIndexableResources;
+import com.android.settingslib.search.SearchIndexableResourcesMobile;
 
 import java.util.Locale;
 
@@ -76,7 +78,7 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
     @Override
     public SearchIndexableResources getSearchIndexableResources() {
         if (mSearchIndexableResources == null) {
-            mSearchIndexableResources = new SearchIndexableResourcesImpl();
+            mSearchIndexableResources = new SearchIndexableResourcesMobile();
         }
         return mSearchIndexableResources;
     }

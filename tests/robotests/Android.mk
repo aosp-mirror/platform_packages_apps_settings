@@ -38,7 +38,8 @@ LOCAL_JAVA_LIBRARIES := \
 
 LOCAL_TEST_PACKAGE := Settings
 
-LOCAL_INSTRUMENT_SOURCE_DIRS := $(dir $(LOCAL_PATH))../src
+LOCAL_INSTRUMENT_SOURCE_DIRS := $(dir $(LOCAL_PATH))../src \
+    frameworks/base/packages/SettingsLib/search/src \
 
 LOCAL_ROBOTEST_TIMEOUT := 36000
 

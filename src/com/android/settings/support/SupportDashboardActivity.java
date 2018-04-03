@@ -26,6 +26,7 @@ import com.android.settings.overlay.SupportFeatureProvider;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,7 @@ import java.util.List;
 /**
  * Trampoline activity that decides which version of support should be shown to the user.
  */
+@SearchIndexable
 public class SupportDashboardActivity extends Activity implements Indexable {
 
     @Override

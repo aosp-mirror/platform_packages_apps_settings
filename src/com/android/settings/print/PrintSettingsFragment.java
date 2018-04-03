@@ -56,6 +56,7 @@ import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.utils.ProfileSettingsPreferenceFragment;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -64,6 +65,7 @@ import java.util.List;
 /**
  * Fragment with the top level print settings.
  */
+@SearchIndexable
 public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
         implements Indexable, OnClickListener {
     public static final String TAG = "PrintSettingsFragment";

@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.widget.Toolbar;
 
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.search.SearchIndexableResources;
 
 /**
  * FeatureProvider for Settings Search

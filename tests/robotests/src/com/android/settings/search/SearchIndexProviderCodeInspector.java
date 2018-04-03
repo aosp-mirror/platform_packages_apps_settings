@@ -25,6 +25,7 @@ import android.util.Log;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.codeinspection.CodeInspector;
 import com.android.settings.dashboard.DashboardFragmentSearchIndexProviderInspector;
+import com.android.settingslib.search.SearchIndexableResources;
 
 import org.robolectric.RuntimeEnvironment;
 

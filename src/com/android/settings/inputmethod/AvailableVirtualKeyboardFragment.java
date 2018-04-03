@@ -42,11 +42,13 @@ import com.android.settings.search.Indexable;
 import com.android.settingslib.inputmethod.InputMethodAndSubtypeUtil;
 import com.android.settingslib.inputmethod.InputMethodPreference;
 import com.android.settingslib.inputmethod.InputMethodSettingValuesWrapper;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.List;
 
+@SearchIndexable
 public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFragment
         implements InputMethodPreference.OnSavePreferenceListener, Indexable {
 

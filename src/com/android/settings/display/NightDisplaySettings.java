@@ -33,6 +33,7 @@ import com.android.settings.search.Indexable;
 import com.android.settings.widget.SeekBarPreference;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.text.DateFormat;
 import java.time.LocalTime;
@@ -45,6 +46,7 @@ import java.util.TimeZone;
  * Settings screen for Night display.
  * TODO (b/69912911) Upgrade to Dashboard fragment
  */
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class NightDisplaySettings extends SettingsPreferenceFragment
         implements ColorDisplayController.Callback, Preference.OnPreferenceChangeListener,
         Indexable {
