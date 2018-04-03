@@ -813,8 +813,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         if (!MagnificationPreferenceFragment.isApplicable(context.getResources())) {
             preference.setFragment(ToggleScreenMagnificationPreferenceFragment.class.getName());
             final Bundle extras = preference.getExtras();
-            MagnificationPreferenceFragment.populateMagnificationGesturesPreferenceExtras(extras,
-                    context);
+            MagnificationGesturesPreferenceController
+                    .populateMagnificationGesturesPreferenceExtras(extras, context);
         }
     }
 

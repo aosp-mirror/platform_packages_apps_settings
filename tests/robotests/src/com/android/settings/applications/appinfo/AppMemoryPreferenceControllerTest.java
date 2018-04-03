@@ -110,7 +110,7 @@ public class AppMemoryPreferenceControllerTest {
                 Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
 
         assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.DISABLED_DEPENDENT_SETTING);
+                .isEqualTo(BasePreferenceController.DISABLED_UNSUPPORTED);
     }
 
     @Test

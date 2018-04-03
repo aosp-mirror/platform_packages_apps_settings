@@ -30,7 +30,6 @@ import com.android.settings.fuelgauge.batterytip.BatteryTipDialogFragment;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
 import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
-import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 
@@ -48,7 +47,7 @@ public class BackgroundActivityPreferenceController extends AbstractPreferenceCo
     private final UserManager mUserManager;
     private final int mUid;
     @VisibleForTesting
-    DevicePolicyManagerWrapper mDpm;
+    DevicePolicyManager mDpm;
     @VisibleForTesting
     BatteryUtils mBatteryUtils;
     private InstrumentedPreferenceFragment mFragment;
@@ -66,8 +65,7 @@ public class BackgroundActivityPreferenceController extends AbstractPreferenceCo
         super(context);
         mPowerWhitelistBackend = backend;
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        mDpm = new DevicePolicyManagerWrapper(
-                (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE));
+        mDpm = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
         mUid = uid;
         mFragment = fragment;

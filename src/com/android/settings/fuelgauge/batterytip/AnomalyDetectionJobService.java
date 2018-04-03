@@ -70,7 +70,7 @@ public class AnomalyDetectionJobService extends JobService {
         final ComponentName component = new ComponentName(context,
                 AnomalyDetectionJobService.class);
         final JobInfo.Builder jobBuilder =
-                new JobInfo.Builder(R.id.job_anomaly_detection, component)
+                new JobInfo.Builder(R.integer.job_anomaly_detection, component)
                         .setOverrideDeadline(MAX_DELAY_MS);
 
         if (jobScheduler.enqueue(jobBuilder.build(), new JobWorkItem(intent))

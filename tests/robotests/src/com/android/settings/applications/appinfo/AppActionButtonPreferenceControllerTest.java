@@ -17,7 +17,6 @@
 package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.argThat;
@@ -28,6 +27,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -47,7 +47,6 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.ActionButtonPreference;
 import com.android.settings.widget.ActionButtonPreferenceTest;
-import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settingslib.Utils;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
@@ -74,7 +73,7 @@ public class AppActionButtonPreferenceControllerTest {
     @Mock
     private UserManager mUserManager;
     @Mock
-    private DevicePolicyManagerWrapper mDevicePolicyManager;
+    private DevicePolicyManager mDevicePolicyManager;
     @Mock
     private AppInfoDashboardFragment mFragment;
     @Mock
@@ -108,7 +107,7 @@ public class AppActionButtonPreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_notInstantApp_shouldReturnAvailable() {
         ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
-            (InstantAppDataProvider) (i -> false));
+                (InstantAppDataProvider) (i -> false));
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(mController.AVAILABLE);
     }
@@ -116,7 +115,7 @@ public class AppActionButtonPreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_isInstantApp_shouldReturnDisabled() {
         ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
-            (InstantAppDataProvider) (i -> true));
+                (InstantAppDataProvider) (i -> true));
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(mController.DISABLED_FOR_USER);
     }
@@ -220,7 +219,7 @@ public class AppActionButtonPreferenceControllerTest {
     @Test
     public void checkForceStop_isStateProtected_shouldDisableForceStop() {
         ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
-            (InstantAppDataProvider) (i -> false));
+                (InstantAppDataProvider) (i -> false));
         final String packageName = "Package1";
         final PackageInfo packageInfo = new PackageInfo();
         packageInfo.packageName = packageName;
@@ -228,7 +227,7 @@ public class AppActionButtonPreferenceControllerTest {
         appInfo.uid = 42;
         appInfo.sourceDir = "source";
         final ApplicationsState.AppEntry appEntry = new ApplicationsState.AppEntry(
-            mContext, appInfo, 0);
+                mContext, appInfo, 0);
         when(mPackageManager.isPackageStateProtected(packageName, 0)).thenReturn(true);
 
         mController.checkForceStop(appEntry, packageInfo);
@@ -278,7 +277,7 @@ public class AppActionButtonPreferenceControllerTest {
 
         mController.checkForceStop(appEntry, packageInfo);
 
-        verify(mContext).sendOrderedBroadcastAsUser(argThat(intent-> intent != null
+        verify(mContext).sendOrderedBroadcastAsUser(argThat(intent -> intent != null
                         && intent.getAction().equals(Intent.ACTION_QUERY_PACKAGE_RESTART)),
                 any(UserHandle.class), nullable(String.class), any(BroadcastReceiver.class),
                 nullable(Handler.class), anyInt(), nullable(String.class), nullable(Bundle.class));

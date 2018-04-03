@@ -25,12 +25,13 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.UserInfo;
+import android.os.UserManager;
 import android.util.Pair;
 
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.wrapper.UserManagerWrapper;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
+
 import com.google.common.collect.ImmutableList;
 
 import org.junit.Before;
@@ -52,7 +53,7 @@ public class PictureInPictureSettingsTest {
     @Mock
     private PackageManagerWrapper mPackageManager;
     @Mock
-    private UserManagerWrapper mUserManager;
+    private UserManager mUserManager;
     private ArrayList<PackageInfo> mPrimaryUserPackages;
     private ArrayList<PackageInfo> mProfileUserPackages;
 

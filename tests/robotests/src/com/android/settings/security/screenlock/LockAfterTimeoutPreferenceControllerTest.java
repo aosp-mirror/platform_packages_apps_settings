@@ -34,7 +34,7 @@ import com.android.settings.TimeoutListPreference;
 import com.android.settings.security.trustagent.TrustAgentManager;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.ShadowDevicePolicyManagerWrapper;
+import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -47,7 +47,7 @@ import org.robolectric.annotation.Config;
 import java.util.Collections;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = ShadowDevicePolicyManagerWrapper.class)
+@Config(shadows = ShadowDevicePolicyManager.class)
 public class LockAfterTimeoutPreferenceControllerTest {
 
     private static final int TEST_USER_ID = 0;
@@ -120,11 +120,11 @@ public class LockAfterTimeoutPreferenceControllerTest {
         when(um.getProfiles(userId)).thenReturn(Collections.emptyList());
 
         // Fake list of timeout values.
-        when(mPreference.getEntries()).thenReturn(new CharSequence[] {"10"} );
-        when(mPreference.getEntryValues()).thenReturn(new CharSequence[] {"10000"} );
+        when(mPreference.getEntries()).thenReturn(new CharSequence[] {"10"});
+        when(mPreference.getEntryValues()).thenReturn(new CharSequence[] {"10000"});
 
         Settings.System.putInt(mContext.getContentResolver(), SCREEN_OFF_TIMEOUT, displayTimeout);
-        ShadowDevicePolicyManagerWrapper.setMaximumTimeToLock(userId, adminTimeout);
+        ShadowDevicePolicyManager.getShadow().setMaximumTimeToLock(userId, adminTimeout);
 
         mController.updateState(mPreference);
 

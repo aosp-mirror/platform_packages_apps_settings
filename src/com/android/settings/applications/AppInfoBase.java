@@ -47,7 +47,6 @@ import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -75,7 +74,7 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
     protected String mPackageName;
 
     protected IUsbManager mUsbManager;
-    protected DevicePolicyManagerWrapper mDpm;
+    protected DevicePolicyManager mDpm;
     protected UserManager mUserManager;
     protected PackageManager mPm;
 
@@ -94,8 +93,7 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
                 .getApplicationFeatureProvider(activity);
         mState = ApplicationsState.getInstance(activity.getApplication());
         mSession = mState.newSession(this, getLifecycle());
-        mDpm = new DevicePolicyManagerWrapper(
-                (DevicePolicyManager) activity.getSystemService(Context.DEVICE_POLICY_SERVICE));
+        mDpm = (DevicePolicyManager) activity.getSystemService(Context.DEVICE_POLICY_SERVICE);
         mUserManager = (UserManager) activity.getSystemService(Context.USER_SERVICE);
         mPm = activity.getPackageManager();
         IBinder b = ServiceManager.getService(Context.USB_SERVICE);
@@ -161,10 +159,10 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
     }
 
     protected void setIntentAndFinish(boolean finish, boolean appChanged) {
-        if (localLOGV) Log.i(TAG, "appChanged="+appChanged);
+        if (localLOGV) Log.i(TAG, "appChanged=" + appChanged);
         Intent intent = new Intent();
         intent.putExtra(ManageApplications.APP_CHG, appChanged);
-        SettingsActivity sa = (SettingsActivity)getActivity();
+        SettingsActivity sa = (SettingsActivity) getActivity();
         sa.finishPreferencePanel(Activity.RESULT_OK, intent);
         mFinishing = true;
     }
@@ -176,6 +174,7 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
     }
 
     protected abstract boolean refreshUi();
+
     protected abstract AlertDialog createDialog(int id, int errorCode);
 
     @Override

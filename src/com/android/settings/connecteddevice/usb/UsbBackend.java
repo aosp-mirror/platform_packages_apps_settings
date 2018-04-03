@@ -22,10 +22,9 @@ import android.hardware.usb.UsbManager;
 import android.hardware.usb.UsbPort;
 import android.hardware.usb.UsbPortStatus;
 import android.net.ConnectivityManager;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
-
-import com.android.settings.wrapper.UserManagerWrapper;
 
 /**
  * Provides access to underlying system USB functionality.
@@ -50,17 +49,17 @@ public class UsbBackend {
     private UsbPortStatus mPortStatus;
 
     public UsbBackend(Context context) {
-        this(context, new UserManagerWrapper(UserManager.get(context)));
+        this(context, (UserManager) context.getSystemService(Context.USER_SERVICE));
     }
 
     @VisibleForTesting
-    public UsbBackend(Context context, UserManagerWrapper userManagerWrapper) {
+    public UsbBackend(Context context, UserManager userManager) {
         mUsbManager = context.getSystemService(UsbManager.class);
 
-        mFileTransferRestricted = userManagerWrapper.isUsbFileTransferRestricted();
-        mFileTransferRestrictedBySystem = userManagerWrapper.isUsbFileTransferRestrictedBySystem();
-        mTetheringRestricted = userManagerWrapper.isUsbTetheringRestricted();
-        mTetheringRestrictedBySystem = userManagerWrapper.isUsbTetheringRestrictedBySystem();
+        mFileTransferRestricted = isUsbFileTransferRestricted(userManager);
+        mFileTransferRestrictedBySystem = isUsbFileTransferRestrictedBySystem(userManager);
+        mTetheringRestricted = isUsbTetheringRestricted(userManager);
+        mTetheringRestrictedBySystem = isUsbTetheringRestrictedBySystem(userManager);
 
         mMidiSupported = context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_MIDI);
         ConnectivityManager cm =
@@ -170,6 +169,24 @@ public class UsbBackend {
 
     public static int dataRoleFromString(String role) {
         return Integer.parseInt(role);
+    }
+
+    private static boolean isUsbFileTransferRestricted(UserManager userManager) {
+        return userManager.hasUserRestriction(UserManager.DISALLOW_USB_FILE_TRANSFER);
+    }
+
+    private static boolean isUsbTetheringRestricted(UserManager userManager) {
+        return userManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_TETHERING);
+    }
+
+    private static boolean isUsbFileTransferRestrictedBySystem(UserManager userManager) {
+        return userManager.hasBaseUserRestriction(
+                UserManager.DISALLOW_USB_FILE_TRANSFER, UserHandle.of(UserHandle.myUserId()));
+    }
+
+    private static boolean isUsbTetheringRestrictedBySystem(UserManager userManager) {
+        return userManager.hasBaseUserRestriction(
+                UserManager.DISALLOW_CONFIG_TETHERING, UserHandle.of(UserHandle.myUserId()));
     }
 
     private boolean areFunctionDisallowed(long functions) {

@@ -22,7 +22,6 @@ import android.os.Build;
 import android.os.RemoteException;
 import android.os.UserHandle;
 
-import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settings.wrapper.IPackageManagerWrapper;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
@@ -34,11 +33,11 @@ public abstract class AppWithAdminGrantedPermissionsCounter extends AppCounter {
 
     private final String[] mPermissions;
     private final IPackageManagerWrapper mPackageManagerService;
-    private final DevicePolicyManagerWrapper mDevicePolicyManager;
+    private final DevicePolicyManager mDevicePolicyManager;
 
     public AppWithAdminGrantedPermissionsCounter(Context context, String[] permissions,
             PackageManagerWrapper packageManager, IPackageManagerWrapper packageManagerService,
-            DevicePolicyManagerWrapper devicePolicyManager) {
+            DevicePolicyManager devicePolicyManager) {
         super(context, packageManager);
         mPermissions = permissions;
         mPackageManagerService = packageManagerService;
@@ -52,7 +51,7 @@ public abstract class AppWithAdminGrantedPermissionsCounter extends AppCounter {
     }
 
     public static boolean includeInCount(String[] permissions,
-            DevicePolicyManagerWrapper devicePolicyManager, PackageManagerWrapper packageManager,
+            DevicePolicyManager devicePolicyManager, PackageManagerWrapper packageManager,
             IPackageManagerWrapper packageManagerService, ApplicationInfo info) {
         if (info.targetSdkVersion >= Build.VERSION_CODES.M) {
             // The app uses run-time permissions. Check whether one or more of the permissions were
@@ -70,7 +69,7 @@ public abstract class AppWithAdminGrantedPermissionsCounter extends AppCounter {
         // permissions and was installed by enterprise policy, implicitly granting permissions.
         if (packageManager.getInstallReason(info.packageName,
                 new UserHandle(UserHandle.getUserId(info.uid)))
-                        != PackageManager.INSTALL_REASON_POLICY) {
+                != PackageManager.INSTALL_REASON_POLICY) {
             return false;
         }
         try {
