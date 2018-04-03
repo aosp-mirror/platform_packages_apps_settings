@@ -18,7 +18,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:key="security_settings_password_sub_screen"
-    android:title="@string/security_settings_title">
+    android:title="@string/unlock_set_unlock_launch_picker_title">
 
     <!-- available in pattern -->
     <SwitchPreference
@@ -37,10 +37,5 @@
     <SwitchPreference
         android:key="power_button_instantly_locks"
         android:title="@string/lockpattern_settings_enable_power_button_instantly_locks" />
-
-    <!-- available in pin/pattern/password/slide -->
-    <com.android.settingslib.RestrictedPreference
-        android:key="owner_info_settings"
-        android:title="@string/owner_info_settings_title" />
 
 </PreferenceScreen>
