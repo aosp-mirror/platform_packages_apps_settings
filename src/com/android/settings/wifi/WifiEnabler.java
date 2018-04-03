@@ -34,11 +34,10 @@ import android.widget.Toast;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.widget.SwitchWidgetController;
-import com.android.settings.wrapper.ConnectivityManagerWrapper;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.WirelessUtils;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -46,7 +45,7 @@ public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListene
 
     private final SwitchWidgetController mSwitchWidget;
     private final WifiManager mWifiManager;
-    private final ConnectivityManagerWrapper mConnectivityManager;
+    private final ConnectivityManager mConnectivityManager;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     private Context mContext;
@@ -81,20 +80,20 @@ public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListene
 
     public WifiEnabler(Context context, SwitchWidgetController switchWidget,
         MetricsFeatureProvider metricsFeatureProvider) {
-        this(context, switchWidget, metricsFeatureProvider, new ConnectivityManagerWrapper(
-            (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)));
+        this(context, switchWidget, metricsFeatureProvider,
+            (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));
     }
 
     @VisibleForTesting
     WifiEnabler(Context context, SwitchWidgetController switchWidget,
             MetricsFeatureProvider metricsFeatureProvider,
-            ConnectivityManagerWrapper connectivityManagerWrapper) {
+            ConnectivityManager connectivityManager) {
         mContext = context;
         mSwitchWidget = switchWidget;
         mSwitchWidget.setListener(this);
         mMetricsFeatureProvider = metricsFeatureProvider;
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-        mConnectivityManager = connectivityManagerWrapper;
+        mConnectivityManager = connectivityManager;
 
         mIntentFilter = new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION);
         // The order matters! We really should not depend on this. :(

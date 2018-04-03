@@ -64,7 +64,6 @@ import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.widget.SummaryUpdater.OnSummaryChangeListener;
 import com.android.settings.widget.SwitchBarController;
 import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
-import com.android.settings.wrapper.ConnectivityManagerWrapper;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.wifi.AccessPoint;
@@ -854,9 +853,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                     pref.getAccessPoint().saveWifiState(pref.getExtras());
                     if (mCaptivePortalNetworkCallback != null
                             && mCaptivePortalNetworkCallback.isCaptivePortal()) {
-                        ConnectivityManagerWrapper connectivityManagerWrapper =
-                                new ConnectivityManagerWrapper(mConnectivityManager);
-                        connectivityManagerWrapper.startCaptivePortalApp(
+                        mConnectivityManager.startCaptivePortalApp(
                                 mCaptivePortalNetworkCallback.getNetwork());
                     } else {
                         launchNetworkDetailsFragment(pref);
