@@ -43,6 +43,7 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(SettingsRobolectricTestRunner.class)
 public class AdjustVolumeRestrictedPreferenceControllerTest {
 
+    private static final String KEY = "key";
     @Mock
     private AccountRestrictionHelper mAccountHelper;
 
@@ -54,7 +55,7 @@ public class AdjustVolumeRestrictedPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         mController =
-            new AdjustVolumeRestrictedPreferenceControllerTestable(mContext, mAccountHelper);
+            new AdjustVolumeRestrictedPreferenceControllerTestable(mContext, mAccountHelper, KEY);
     }
 
     @Test
@@ -88,13 +89,18 @@ public class AdjustVolumeRestrictedPreferenceControllerTest {
         extends AdjustVolumeRestrictedPreferenceController {
 
         private AdjustVolumeRestrictedPreferenceControllerTestable(Context context,
-            AccountRestrictionHelper helper) {
-            super(context, helper);
+            AccountRestrictionHelper helper, String key) {
+            super(context, helper, key);
+        }
+
+        @Override
+        public int getAvailabilityStatus() {
+            return 0;
         }
 
         @Override
         public String getPreferenceKey() {
-            return null;
+            return KEY;
         }
 
         @Override
@@ -103,8 +109,18 @@ public class AdjustVolumeRestrictedPreferenceControllerTest {
         }
 
         @Override
-        public boolean isAvailable() {
-            return true;
+        public int getSliderPosition() {
+            return 0;
+        }
+
+        @Override
+        public boolean setSliderPosition(int position) {
+            return false;
+        }
+
+        @Override
+        public int getMaxSteps() {
+            return 0;
         }
     }
 }
