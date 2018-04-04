@@ -23,6 +23,7 @@ import com.android.settings.DisplaySettings;
 import com.android.settings.LegalSettings;
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.PreviouslyConnectedDeviceDashboardFragment;
+import com.android.settings.connecteddevice.BluetoothDashboardFragment;
 import com.android.settings.datausage.DataUsageSummaryLegacy;
 import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment;
 import com.android.settings.accessibility.AccessibilitySettings;
@@ -185,6 +186,7 @@ public class SearchIndexableResourcesImpl implements SearchIndexableResources {
         addIndex(VibrationSettings.class);
         addIndex(RecentLocationRequestSeeAllFragment.class);
         addIndex(PreviouslyConnectedDeviceDashboardFragment.class);
+        addIndex(BluetoothDashboardFragment.class);
     }
 
     @Override

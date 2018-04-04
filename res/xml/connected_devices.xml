@@ -42,14 +42,12 @@
         android:fragment="com.android.settings.connecteddevice.PreviouslyConnectedDeviceDashboardFragment"
         settings:allowDividerAbove="true"/>
 
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="toggle_bluetooth_switch"
+    <Preference
+        android:fragment="com.android.settings.connecteddevice.BluetoothDashboardFragment"
+        android:key="bluetooth_settings"
         android:title="@string/bluetooth_settings_title"
         android:icon="@drawable/ic_settings_bluetooth"
-        android:summary="@string/bluetooth_pref_summary"
-        settings:controller="com.android.settings.bluetooth.BluetoothSwitchPreferenceController"
-        settings:userRestriction="no_bluetooth"
-        settings:platform_slice="true"/>
+        settings:allowDividerAbove="true"/>
 
     <SwitchPreference
         android:key="toggle_nfc"
