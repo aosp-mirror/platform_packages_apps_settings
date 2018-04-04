@@ -18,6 +18,8 @@ package com.android.settings.network;
 import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_OFF;
 import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_OPPORTUNISTIC;
 import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_PROVIDER_HOSTNAME;
+import static android.system.OsConstants.AF_INET;
+import static android.system.OsConstants.AF_INET6;
 
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
@@ -27,6 +29,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
+import android.system.Os;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
@@ -45,6 +48,7 @@ import com.android.settings.utils.AnnotationSpan;
 import com.android.settingslib.CustomDialogPreference;
 import com.android.settingslib.HelpUtils;
 
+import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -66,6 +70,8 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreference imple
         PRIVATE_DNS_MAP.put(PRIVATE_DNS_MODE_OPPORTUNISTIC, R.id.private_dns_mode_opportunistic);
         PRIVATE_DNS_MAP.put(PRIVATE_DNS_MODE_PROVIDER_HOSTNAME, R.id.private_dns_mode_provider);
     }
+
+    private static final int[] ADDRESS_FAMILIES = new int[]{AF_INET, AF_INET6};
 
     @VisibleForTesting
     static final String MODE_KEY = Settings.Global.PRIVATE_DNS_MODE;
@@ -180,12 +186,20 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreference imple
     }
 
     private boolean isWeaklyValidatedHostname(String hostname) {
-        // TODO(b/34953048): Find and use a better validation method.  Specifically:
-        //     [1] this should reject IP string literals, and
-        //     [2] do the best, simplest, future-proof verification that
-        //         the input approximates a DNS hostname.
+        // TODO(b/34953048): Use a validation method that permits more accurate,
+        // but still inexpensive, checking of likely valid DNS hostnames.
         final String WEAK_HOSTNAME_REGEX = "^[a-zA-Z0-9_.-]+$";
-        return hostname.matches(WEAK_HOSTNAME_REGEX);
+        if (!hostname.matches(WEAK_HOSTNAME_REGEX)) {
+            return false;
+        }
+
+        for (int address_family : ADDRESS_FAMILIES) {
+            if (Os.inet_pton(address_family, hostname) != null) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private Button getSaveButton() {

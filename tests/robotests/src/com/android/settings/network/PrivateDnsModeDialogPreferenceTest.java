@@ -37,16 +37,19 @@ import android.widget.LinearLayout;
 
 import com.android.settings.R;
 import com.android.settingslib.CustomDialogPreference.CustomPreferenceDialogFragment;
+import com.android.settings.testutils.shadow.ShadowOs;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.annotation.Config;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(shadows = ShadowOs.class)
 public class PrivateDnsModeDialogPreferenceTest {
 
     private static final String HOST_NAME = "dns.example.com";
@@ -60,6 +63,9 @@ public class PrivateDnsModeDialogPreferenceTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+
+        ReflectionHelpers.setStaticField(android.system.OsConstants.class, "AF_INET", 2);
+        ReflectionHelpers.setStaticField(android.system.OsConstants.class, "AF_INET6", 10);
 
         mContext = RuntimeEnvironment.application;
         mSaveButton = new Button(mContext);
@@ -122,16 +128,24 @@ public class PrivateDnsModeDialogPreferenceTest {
 
     @Test
     public void testOnCheckedChanged_switchMode_saveButtonHasCorrectState() {
-        // Set invalid hostname
-        mPreference.mEditText.setText(INVALID_HOST_NAME);
+        final String[] INVALID_HOST_NAMES = new String[] {
+            INVALID_HOST_NAME,
+            "2001:db8::53",  // IPv6 string literal
+            "192.168.1.1",   // IPv4 string literal
+        };
 
-        mPreference.onCheckedChanged(null, R.id.private_dns_mode_opportunistic);
-        assertThat(mSaveButton.isEnabled()).isTrue();
+        for (String invalid : INVALID_HOST_NAMES) {
+            // Set invalid hostname
+            mPreference.mEditText.setText(invalid);
 
-        mPreference.onCheckedChanged(null, R.id.private_dns_mode_provider);
-        assertThat(mSaveButton.isEnabled()).isFalse();
+            mPreference.onCheckedChanged(null, R.id.private_dns_mode_off);
+            assertThat(mSaveButton.isEnabled()).named("off: " + invalid).isTrue();
 
-        mPreference.onCheckedChanged(null, R.id.private_dns_mode_off);
-        assertThat(mSaveButton.isEnabled()).isTrue();
+            mPreference.onCheckedChanged(null, R.id.private_dns_mode_opportunistic);
+            assertThat(mSaveButton.isEnabled()).named("opportunistic: " + invalid).isTrue();
+
+            mPreference.onCheckedChanged(null, R.id.private_dns_mode_provider);
+            assertThat(mSaveButton.isEnabled()).named("provider: " + invalid).isFalse();
+        }
     }
 }
