@@ -21,6 +21,7 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settingslib.fuelgauge.BatterySaverUtils;
 
 /**
  * Controller that update whether to turn on battery saver automatically
@@ -61,11 +62,8 @@ public class AutoBatterySaverPreferenceController extends TogglePreferenceContro
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL,
-                isChecked
-                        ? mDefaultTriggerLevelForOn
-                        : 0);
+        BatterySaverUtils.setAutoBatterySaverTriggerLevel(mContext,
+                isChecked ? mDefaultTriggerLevelForOn : 0);
         return true;
     }
 }
