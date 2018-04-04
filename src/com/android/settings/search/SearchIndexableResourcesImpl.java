@@ -56,6 +56,7 @@ import com.android.settings.gestures.AssistGestureSettings;
 import com.android.settings.gestures.DoubleTapPowerSettings;
 import com.android.settings.gestures.DoubleTapScreenSettings;
 import com.android.settings.gestures.DoubleTwistGestureSettings;
+import com.android.settings.gestures.SwipeUpGestureSettings;
 import com.android.settings.gestures.GestureSettings;
 import com.android.settings.gestures.PickupGestureSettings;
 import com.android.settings.gestures.SwipeToNotificationSettings;
@@ -130,6 +131,7 @@ public class SearchIndexableResourcesImpl implements SearchIndexableResources {
         addIndex(DoubleTapScreenSettings.class);
         addIndex(DoubleTapPowerSettings.class);
         addIndex(DoubleTwistGestureSettings.class);
+        addIndex(SwipeUpGestureSettings.class);
         addIndex(SwipeToNotificationSettings.class);
         addIndex(GestureSettings.class);
         addIndex(LanguageAndInputSettings.class);
