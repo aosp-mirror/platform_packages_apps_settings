@@ -47,6 +47,7 @@ public class GestureSettings extends DashboardFragment {
     private static final String KEY_DOUBLE_TAP_SCREEN = "gesture_double_tap_screen_input_summary";
     private static final String KEY_PICK_UP = "gesture_pick_up_input_summary";
     private static final String KEY_PREVENT_RINGING = "gesture_prevent_ringing_summary";
+    private static final String KEY_SWIPE_UP = "gesture_swipe_up_input_summary";
 
     private AmbientDisplayConfiguration mAmbientDisplayConfig;
 
@@ -98,6 +99,7 @@ public class GestureSettings extends DashboardFragment {
                     keys.add(KEY_SWIPE_DOWN);
                     keys.add(KEY_DOUBLE_TAP_POWER);
                     keys.add(KEY_DOUBLE_TWIST);
+                    keys.add(KEY_SWIPE_UP);
                     keys.add(KEY_DOUBLE_TAP_SCREEN);
                     keys.add(KEY_PICK_UP);
                     keys.add(KEY_PREVENT_RINGING);

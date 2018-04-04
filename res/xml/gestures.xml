@@ -46,6 +46,12 @@
         settings:controller="com.android.settings.gestures.DoubleTwistPreferenceController" />
 
     <Preference
+        android:key="gesture_swipe_up_input_summary"
+        android:title="@string/swipe_up_to_switch_apps_title"
+        android:fragment="com.android.settings.gestures.SwipeUpGestureSettings"
+        settings:controller="com.android.settings.gestures.SwipeUpPreferenceController" />
+
+    <Preference
         android:key="gesture_double_tap_screen_input_summary"
         android:title="@string/ambient_display_title"
         android:fragment="com.android.settings.gestures.DoubleTapScreenSettings"
