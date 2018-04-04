@@ -370,7 +370,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
     private Preference newManagedProfileSettings() {
         Preference preference = new Preference(mParent.getPreferenceManager().getContext());
         preference.setTitle(R.string.managed_profile_settings_title);
-        preference.setIcon(R.drawable.ic_settings);
+        preference.setIcon(R.drawable.ic_settings_24dp);
         preference.setOnPreferenceClickListener(this);
         preference.setOrder(ORDER_NEXT_TO_LAST);
         return preference;
