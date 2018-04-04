@@ -18,12 +18,16 @@
 package com.android.settings.slices;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.verify;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Pair;
 
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.search.FakeIndexProvider;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.search.SearchFeatureProviderImpl;
@@ -37,6 +41,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.robolectric.RuntimeEnvironment;
 
 import androidx.slice.core.SliceHints;
@@ -56,6 +61,8 @@ public class SliceBroadcastReceiverTest {
     private SliceBroadcastReceiver mReceiver;
     private SearchFeatureProvider mSearchFeatureProvider;
     private FakeFeatureFactory mFakeFeatureFactory;
+    private ArgumentCaptor<Pair<Integer, Object>> mLoggingNameArgumentCatpor;
+    private ArgumentCaptor<Pair<Integer, Object>> mLoggingValueArgumentCatpor;
 
     @Before
     public void setUp() {
@@ -67,6 +74,8 @@ public class SliceBroadcastReceiverTest {
         mSearchFeatureProvider = new SearchFeatureProviderImpl();
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mFakeFeatureFactory.searchFeatureProvider = mSearchFeatureProvider;
+        mLoggingNameArgumentCatpor = ArgumentCaptor.forClass(Pair.class);
+        mLoggingValueArgumentCatpor = ArgumentCaptor.forClass(Pair.class);
     }
 
     @After
@@ -75,8 +84,8 @@ public class SliceBroadcastReceiverTest {
     }
 
     @Test
-    public void testOnReceive_toggleChanged() {
-        String key = "key";
+    public void onReceive_toggleChanged() {
+        final String key = "key";
         mSearchFeatureProvider.getSearchIndexableResources().getProviderValues().clear();
         insertSpecialCase(key);
         // Turn on toggle setting
@@ -91,11 +100,25 @@ public class SliceBroadcastReceiverTest {
         mReceiver.onReceive(mContext, intent);
 
         assertThat(fakeToggleController.isChecked()).isFalse();
+        verify(mFakeFeatureFactory.metricsFeatureProvider)
+                .action(eq(mContext),
+                        eq(MetricsEvent.ACTION_SETTINGS_SLICE_CHANGED),
+                        mLoggingNameArgumentCatpor.capture(),
+                        mLoggingValueArgumentCatpor.capture());
+
+        final Pair<Integer, Object> namePair = mLoggingNameArgumentCatpor.getValue();
+        final Pair<Integer, Object> valuePair = mLoggingValueArgumentCatpor.getValue();
+        assertThat(namePair.first).isEqualTo(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_NAME);
+        assertThat(namePair.second).isEqualTo(fakeToggleController.getPreferenceKey());
+
+        assertThat(valuePair.first)
+                .isEqualTo(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_INT_VALUE);
+        assertThat(valuePair.second).isEqualTo(0);
     }
 
     @Test
-    public void testOnReceive_sliderChanged() {
-        String key = "key";
+    public void onReceive_sliderChanged() {
+        final String key = "key";
         final int position = FakeSliderController.MAX_STEPS - 1;
         final int oldPosition = FakeSliderController.MAX_STEPS;
         mSearchFeatureProvider.getSearchIndexableResources().getProviderValues().clear();
@@ -115,11 +138,25 @@ public class SliceBroadcastReceiverTest {
         mReceiver.onReceive(mContext, intent);
 
         assertThat(fakeSliderController.getSliderPosition()).isEqualTo(position);
+        verify(mFakeFeatureFactory.metricsFeatureProvider)
+                .action(eq(mContext),
+                        eq(MetricsEvent.ACTION_SETTINGS_SLICE_CHANGED),
+                        mLoggingNameArgumentCatpor.capture(),
+                        mLoggingValueArgumentCatpor.capture());
+
+        final Pair<Integer, Object> namePair = mLoggingNameArgumentCatpor.getValue();
+        final Pair<Integer, Object> valuePair = mLoggingValueArgumentCatpor.getValue();
+        assertThat(namePair.first).isEqualTo(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_NAME);
+        assertThat(namePair.second).isEqualTo(key);
+
+        assertThat(valuePair.first)
+                .isEqualTo(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_INT_VALUE);
+        assertThat(valuePair.second).isEqualTo(position);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testOnReceive_invalidController_throwsException() {
-        String key = "key";
+    public void onReceive_invalidController_throwsException() {
+        final String key = "key";
         final int position = 0;
         mSearchFeatureProvider.getSearchIndexableResources().getProviderValues().clear();
         insertSpecialCase(FakeToggleController.class, key);
@@ -136,23 +173,23 @@ public class SliceBroadcastReceiverTest {
     @Test(expected = IllegalArgumentException.class)
     public void sliderOnReceive_noKey_throwsException() {
         // Build action
-        Intent intent = new Intent(SettingsSliceProvider.ACTION_SLIDER_CHANGED);
-        intent.putExtra(SliceHints.EXTRA_RANGE_VALUE, 0);
+        final Intent intent = new Intent(SettingsSliceProvider.ACTION_SLIDER_CHANGED)
+                .putExtra(SliceHints.EXTRA_RANGE_VALUE, 0);
 
         // Trigger the exception.
         mReceiver.onReceive(mContext, intent);
     }
 
-    @Test(expected =  IllegalStateException.class)
+    @Test(expected = IllegalStateException.class)
     public void toggleOnReceive_noExtra_illegalStateException() {
-        Intent intent = new Intent(SettingsSliceProvider.ACTION_TOGGLE_CHANGED);
+        final Intent intent = new Intent(SettingsSliceProvider.ACTION_TOGGLE_CHANGED);
         mReceiver.onReceive(mContext, intent);
     }
 
-    @Test(expected =  IllegalStateException.class)
+    @Test(expected = IllegalStateException.class)
     public void toggleOnReceive_emptyKey_throwsIllegalStateException() {
-        Intent intent = new Intent(SettingsSliceProvider.ACTION_TOGGLE_CHANGED);
-        intent.putExtra(SettingsSliceProvider.EXTRA_SLICE_KEY, (String) null);
+        final Intent intent = new Intent(SettingsSliceProvider.ACTION_TOGGLE_CHANGED)
+                .putExtra(SettingsSliceProvider.EXTRA_SLICE_KEY, (String) null);
         mReceiver.onReceive(mContext, intent);
     }
 

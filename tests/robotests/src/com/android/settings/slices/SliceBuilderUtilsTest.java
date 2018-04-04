@@ -17,9 +17,10 @@
 package com.android.settings.slices;
 
 import static com.google.common.truth.Truth.assertThat;
-
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -28,8 +29,10 @@ import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
 import android.util.Pair;
 
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.FakeSliderController;
 import com.android.settings.testutils.FakeToggleController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -37,6 +40,7 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.robolectric.RuntimeEnvironment;
 
 import androidx.slice.Slice;
@@ -58,10 +62,14 @@ public class SliceBuilderUtilsTest {
     private final String ACTION_PATH = SettingsSlicesContract.PATH_SETTING_ACTION + "/" + KEY;
 
     private Context mContext;
+    private FakeFeatureFactory mFeatureFactory;
+    private ArgumentCaptor<Pair<Integer, Object>> mLoggingArgumentCatpor;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
+        mLoggingArgumentCatpor = ArgumentCaptor.forClass(Pair.class);
     }
 
     @Test
@@ -73,67 +81,76 @@ public class SliceBuilderUtilsTest {
 
     @Test
     public void testSliderSlice_returnsSeekBarSlice() {
-        final Slice slice = SliceBuilderUtils.buildSlice(mContext, getDummyData(
-                FakeSliderController.class));
+        final SliceData data = getDummyData(FakeSliderController.class);
+        final Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
 
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(eq(mContext), eq(MetricsEvent.ACTION_SETTINGS_SLICE_REQUESTED),
+                        mLoggingArgumentCatpor.capture());
+        final Pair<Integer, Object> capturedLoggingPair = mLoggingArgumentCatpor.getValue();
+
+        assertThat(capturedLoggingPair.first)
+                .isEqualTo(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_NAME);
+        assertThat(capturedLoggingPair.second)
+                .isEqualTo(data.getKey());
         assertThat(slice).isNotNull();
     }
 
     @Test
     public void testUriBuilder_oemAuthority_intentPath_returnsValidSliceUri() {
-        Uri expectedUri = new Uri.Builder()
+        final Uri expectedUri = new Uri.Builder()
                 .scheme(ContentResolver.SCHEME_CONTENT)
                 .authority(SettingsSliceProvider.SLICE_AUTHORITY)
                 .appendPath(INTENT_PATH)
                 .build();
 
-        Uri actualUri = SliceBuilderUtils.getUri(INTENT_PATH, false);
+        final Uri actualUri = SliceBuilderUtils.getUri(INTENT_PATH, false);
 
         assertThat(actualUri).isEqualTo(expectedUri);
     }
 
     @Test
     public void testUriBuilder_oemAuthority_actionPath_returnsValidSliceUri() {
-        Uri expectedUri = new Uri.Builder()
+        final Uri expectedUri = new Uri.Builder()
                 .scheme(ContentResolver.SCHEME_CONTENT)
                 .authority(SettingsSliceProvider.SLICE_AUTHORITY)
                 .appendPath(ACTION_PATH)
                 .build();
 
-        Uri actualUri = SliceBuilderUtils.getUri(ACTION_PATH, false);
+        final Uri actualUri = SliceBuilderUtils.getUri(ACTION_PATH, false);
 
         assertThat(actualUri).isEqualTo(expectedUri);
     }
 
     @Test
     public void testUriBuilder_platformAuthority_intentPath_returnsValidSliceUri() {
-        Uri expectedUri = new Uri.Builder()
+        final Uri expectedUri = new Uri.Builder()
                 .scheme(ContentResolver.SCHEME_CONTENT)
                 .authority(SettingsSlicesContract.AUTHORITY)
                 .appendPath(ACTION_PATH)
                 .build();
 
-        Uri actualUri = SliceBuilderUtils.getUri(ACTION_PATH, true);
+        final Uri actualUri = SliceBuilderUtils.getUri(ACTION_PATH, true);
 
         assertThat(actualUri).isEqualTo(expectedUri);
     }
 
     @Test
     public void testUriBuilder_platformAuthority_actionPath_returnsValidSliceUri() {
-        Uri expectedUri = new Uri.Builder()
+        final Uri expectedUri = new Uri.Builder()
                 .scheme(ContentResolver.SCHEME_CONTENT)
                 .authority(SettingsSlicesContract.AUTHORITY)
                 .appendPath(ACTION_PATH)
                 .build();
 
-        Uri actualUri = SliceBuilderUtils.getUri(ACTION_PATH, true);
+        final Uri actualUri = SliceBuilderUtils.getUri(ACTION_PATH, true);
 
         assertThat(actualUri).isEqualTo(expectedUri);
     }
 
     @Test
     public void testGetPreferenceController_buildsMatchingController() {
-        BasePreferenceController controller =
+        final BasePreferenceController controller =
                 SliceBuilderUtils.getPreferenceController(mContext, getDummyData());
 
         assertThat(controller).isInstanceOf(FakeToggleController.class);
@@ -141,7 +158,7 @@ public class SliceBuilderUtilsTest {
 
     @Test
     public void testGetPreferenceController_contextOnly_buildsMatchingController() {
-        BasePreferenceController controller =
+        final BasePreferenceController controller =
                 SliceBuilderUtils.getPreferenceController(mContext, getDummyData(PREF_CONTROLLER2));
 
         assertThat(controller).isInstanceOf(FakeContextOnlyPreferenceController.class);
@@ -149,50 +166,52 @@ public class SliceBuilderUtilsTest {
 
     @Test
     public void testDynamicSummary_returnsSliceSummary() {
-        SliceData data = getDummyData();
-        FakePreferenceController controller = new FakePreferenceController(mContext, KEY);
+        final SliceData data = getDummyData();
+        final FakePreferenceController controller = new FakePreferenceController(mContext, KEY);
 
-        CharSequence summary = SliceBuilderUtils.getSubtitleText(mContext, controller, data);
+        final CharSequence summary = SliceBuilderUtils.getSubtitleText(mContext, controller, data);
 
         assertThat(summary).isEqualTo(data.getSummary());
     }
 
     @Test
     public void testDynamicSummary_returnsFragmentSummary() {
-        SliceData data = getDummyData((String) null);
-        FakePreferenceController controller = spy(new FakePreferenceController(mContext, KEY));
-        String controllerSummary = "new_Summary";
+        final SliceData data = getDummyData((String) null);
+        final FakePreferenceController controller = spy(
+                new FakePreferenceController(mContext, KEY));
+        final String controllerSummary = "new_Summary";
         doReturn(controllerSummary).when(controller).getSummary();
 
-        CharSequence summary = SliceBuilderUtils.getSubtitleText(mContext, controller, data);
+        final CharSequence summary = SliceBuilderUtils.getSubtitleText(mContext, controller, data);
 
         assertThat(summary).isEqualTo(controllerSummary);
     }
 
     @Test
     public void testDynamicSummary_returnsSliceScreenTitle() {
-        SliceData data = getDummyData((String) null);
-        FakePreferenceController controller = new FakePreferenceController(mContext, KEY);
+        final SliceData data = getDummyData((String) null);
+        final FakePreferenceController controller = new FakePreferenceController(mContext, KEY);
 
-        CharSequence summary = SliceBuilderUtils.getSubtitleText(mContext, controller, data);
+        final CharSequence summary = SliceBuilderUtils.getSubtitleText(mContext, controller, data);
 
         assertThat(summary).isEqualTo(data.getScreenTitle());
     }
 
     @Test
     public void testDynamicSummary_placeHolderString_returnsScreenTitle() {
-        SliceData data = getDummyData(mContext.getString(R.string.summary_placeholder));
-        FakePreferenceController controller = new FakePreferenceController(mContext, KEY);
-        CharSequence summary = SliceBuilderUtils.getSubtitleText(mContext, controller, data);
+        final SliceData data = getDummyData(mContext.getString(R.string.summary_placeholder));
+        final FakePreferenceController controller = new FakePreferenceController(mContext, KEY);
+        final CharSequence summary = SliceBuilderUtils.getSubtitleText(mContext, controller, data);
 
         assertThat(summary).isEqualTo(data.getScreenTitle());
     }
 
     @Test
     public void testDynamicSummary_sliceDataAndFragmentPlaceholder_returnsSliceScreenTitle() {
-        String summaryPlaceholder = mContext.getString(R.string.summary_placeholder);
-        SliceData data = getDummyData(summaryPlaceholder);
-        FakePreferenceController controller = spy(new FakePreferenceController(mContext, KEY));
+        final String summaryPlaceholder = mContext.getString(R.string.summary_placeholder);
+        final SliceData data = getDummyData(summaryPlaceholder);
+        final FakePreferenceController controller = spy(
+                new FakePreferenceController(mContext, KEY));
         doReturn(summaryPlaceholder).when(controller).getSummary();
 
         CharSequence summary = SliceBuilderUtils.getSubtitleText(mContext, controller, data);
@@ -202,13 +221,13 @@ public class SliceBuilderUtilsTest {
 
     @Test
     public void getPathData_splitsIntentUri() {
-        Uri uri = new Uri.Builder()
+        final Uri uri = new Uri.Builder()
                 .authority(SettingsSliceProvider.SLICE_AUTHORITY)
                 .appendPath(SettingsSlicesContract.PATH_SETTING_INTENT)
                 .appendPath(KEY)
                 .build();
 
-        Pair<Boolean, String> pathPair = SliceBuilderUtils.getPathData(uri);
+        final Pair<Boolean, String> pathPair = SliceBuilderUtils.getPathData(uri);
 
         assertThat(pathPair.first).isFalse();
         assertThat(pathPair.second).isEqualTo(KEY);
@@ -216,13 +235,13 @@ public class SliceBuilderUtilsTest {
 
     @Test
     public void getPathData_splitsActionUri() {
-        Uri uri = new Uri.Builder()
+        final Uri uri = new Uri.Builder()
                 .authority(SettingsSliceProvider.SLICE_AUTHORITY)
                 .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
                 .appendPath(KEY)
                 .build();
 
-        Pair<Boolean, String> pathPair = SliceBuilderUtils.getPathData(uri);
+        final Pair<Boolean, String> pathPair = SliceBuilderUtils.getPathData(uri);
 
         assertThat(pathPair.first).isTrue();
         assertThat(pathPair.second).isEqualTo(KEY);
@@ -230,7 +249,7 @@ public class SliceBuilderUtilsTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void getPathData_noKey_returnsNull() {
-        Uri uri = new Uri.Builder()
+        final Uri uri = new Uri.Builder()
                 .authority(SettingsSliceProvider.SLICE_AUTHORITY)
                 .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
                 .build();
@@ -240,14 +259,14 @@ public class SliceBuilderUtilsTest {
 
     @Test
     public void getPathData_extraArg_returnsNull() {
-        Uri uri = new Uri.Builder()
+        final Uri uri = new Uri.Builder()
                 .authority(SettingsSliceProvider.SLICE_AUTHORITY)
                 .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
                 .appendPath(KEY)
                 .appendPath(KEY)
                 .build();
 
-        Pair<Boolean, String> pathPair = SliceBuilderUtils.getPathData(uri);
+        final Pair<Boolean, String> pathPair = SliceBuilderUtils.getPathData(uri);
 
         assertThat(pathPair.first).isTrue();
         assertThat(pathPair.second).isEqualTo(KEY + "/" + KEY);
@@ -255,49 +274,68 @@ public class SliceBuilderUtilsTest {
 
     @Test
     public void testUnsupportedSlice_validTitleSummary() {
-        SliceData data = getDummyData(FakeUnavailablePreferenceController.class.getName());
+        final SliceData data = getDummyData(FakeUnavailablePreferenceController.class.getName());
         Settings.System.putInt(mContext.getContentResolver(),
                 FakeUnavailablePreferenceController.AVAILABILITY_KEY,
                 BasePreferenceController.DISABLED_UNSUPPORTED);
 
-        Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
+        final Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
 
         assertThat(slice).isNotNull();
     }
 
     @Test
     public void testDisabledForUserSlice_validTitleSummary() {
-        SliceData data = getDummyData(FakeUnavailablePreferenceController.class.getName());
+        final SliceData data = getDummyData(FakeUnavailablePreferenceController.class.getName());
         Settings.System.putInt(mContext.getContentResolver(),
                 FakeUnavailablePreferenceController.AVAILABILITY_KEY,
                 BasePreferenceController.DISABLED_FOR_USER);
 
-        Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
+        final Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
 
         assertThat(slice).isNotNull();
     }
 
     @Test
     public void testDisabledDependententSettingSlice_validTitleSummary() {
-        SliceData data = getDummyData(FakeUnavailablePreferenceController.class.getName());
+        final SliceData data = getDummyData(FakeUnavailablePreferenceController.class.getName());
         Settings.System.putInt(mContext.getContentResolver(),
                 FakeUnavailablePreferenceController.AVAILABILITY_KEY,
                 BasePreferenceController.DISABLED_DEPENDENT_SETTING);
 
-        Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
+        final Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
 
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(eq(mContext), eq(MetricsEvent.ACTION_SETTINGS_SLICE_REQUESTED),
+                        mLoggingArgumentCatpor.capture());
+        final Pair<Integer, Object> capturedLoggingPair = mLoggingArgumentCatpor.getValue();
+
+        assertThat(capturedLoggingPair.first)
+                .isEqualTo(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_NAME);
+        assertThat(capturedLoggingPair.second)
+                .isEqualTo(data.getKey());
         assertThat(slice).isNotNull();
     }
 
     @Test
     public void testUnavailableUnknownSlice_validTitleSummary() {
-        SliceData data = getDummyData(FakeUnavailablePreferenceController.class.getName());
+        final SliceData data = getDummyData(FakeUnavailablePreferenceController.class.getName());
         Settings.System.putInt(mContext.getContentResolver(),
                 FakeUnavailablePreferenceController.AVAILABILITY_KEY,
                 BasePreferenceController.UNAVAILABLE_UNKNOWN);
 
-        Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
+        final Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
 
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(eq(mContext), eq(MetricsEvent.ACTION_SETTINGS_SLICE_REQUESTED),
+                        mLoggingArgumentCatpor.capture());
+
+        final Pair<Integer, Object> capturedLoggingPair = mLoggingArgumentCatpor.getValue();
+
+        assertThat(capturedLoggingPair.first)
+                .isEqualTo(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_NAME);
+        assertThat(capturedLoggingPair.second)
+                .isEqualTo(data.getKey());
         assertThat(slice).isNotNull();
     }
 
