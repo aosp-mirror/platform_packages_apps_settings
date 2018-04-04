@@ -32,10 +32,13 @@ import android.os.Handler;
 import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Pair;
 
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SliderPreferenceController;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
 
 import androidx.slice.core.SliceHints;
 
@@ -92,7 +95,7 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
         }
 
         if (!controller.isAvailable()) {
-            Log.d(TAG, "Can't update " + key + " since the setting is unavailable");
+            Log.w(TAG, "Can't update " + key + " since the setting is unavailable");
             updateUri(context, key, isPlatformSlice);
         }
 
@@ -100,7 +103,9 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
         // so that it's automatically broadcast to any slice.
         final TogglePreferenceController toggleController = (TogglePreferenceController) controller;
         final boolean currentValue = toggleController.isChecked();
-        toggleController.setChecked(!currentValue);
+        final boolean newValue = !currentValue;
+        toggleController.setChecked(newValue);
+        logSliceValueChange(context, key, newValue ? 1 : 0);
         updateUri(context, key, isPlatformSlice);
     }
 
@@ -129,6 +134,20 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
         }
 
         sliderController.setSliderPosition(newPosition);
+        logSliceValueChange(context, key, newPosition);
+    }
+
+    /**
+     * Log Slice value update events into MetricsFeatureProvider. The logging schema generally
+     * follows the pattern in SharedPreferenceLogger.
+     */
+    private void logSliceValueChange(Context context, String sliceKey, int newValue) {
+        final Pair<Integer, Object> namePair = Pair.create(
+                MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_NAME, sliceKey);
+        final Pair<Integer, Object> valuePair = Pair.create(
+                MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_INT_VALUE, newValue);
+        FeatureFactory.getFactory(context).getMetricsFeatureProvider()
+                .action(context, MetricsEvent.ACTION_SETTINGS_SLICE_CHANGED, namePair, valuePair);
     }
 
     private BasePreferenceController getPreferenceController(Context context, String key) {
