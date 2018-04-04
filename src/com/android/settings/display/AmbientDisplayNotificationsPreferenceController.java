@@ -81,6 +81,9 @@ public class AmbientDisplayNotificationsPreferenceController extends
 
     @Override
     public int getAvailabilityStatus() {
+        if (mConfig == null) {
+            mConfig = new AmbientDisplayConfiguration(mContext);
+        }
         return mConfig.pulseOnNotificationAvailable() ? AVAILABLE : DISABLED_UNSUPPORTED;
     }
 
