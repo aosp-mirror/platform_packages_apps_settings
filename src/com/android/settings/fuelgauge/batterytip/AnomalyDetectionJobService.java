@@ -59,9 +59,11 @@ import java.util.concurrent.TimeUnit;
 /** A JobService to store anomaly data to anomaly database */
 public class AnomalyDetectionJobService extends JobService {
     private static final String TAG = "AnomalyDetectionService";
-    private static final int UID_NULL = 0;
-    private static final int STATSD_UID_FILED = 1;
     private static final int ON = 1;
+    @VisibleForTesting
+    static final int UID_NULL = -1;
+    @VisibleForTesting
+    static final int STATSD_UID_FILED = 1;
 
     @VisibleForTesting
     static final long MAX_DELAY_MS = TimeUnit.MINUTES.toMillis(30);
@@ -143,7 +145,8 @@ public class AnomalyDetectionJobService extends JobService {
                     : Settings.Global.getInt(contentResolver,
                             Settings.Global.APP_AUTO_RESTRICTION_ENABLED, ON) == ON;
             final String packageName = batteryUtils.getPackageName(uid);
-            if (!isSystemUid(uid) && !powerWhitelistBackend.isSysWhitelistedExceptIdle(
+            if (uid != UID_NULL && !isSystemUid(uid)
+                    && !powerWhitelistBackend.isSysWhitelistedExceptIdle(
                     packageManager.getPackagesForUid(uid))) {
                 boolean anomalyDetected = true;
                 if (anomalyInfo.anomalyType
@@ -191,7 +194,6 @@ public class AnomalyDetectionJobService extends JobService {
      */
     @VisibleForTesting
     int extractUidFromStatsDimensionsValue(StatsDimensionsValue statsDimensionsValue) {
-        //TODO(b/73172999): Add robo test for this method
         if (statsDimensionsValue == null) {
             return UID_NULL;
         }
