@@ -24,6 +24,7 @@ LOCAL_STATIC_ANDROID_LIBRARIES := \
     android-slices-builders \
     android-slices-core \
     android-slices-view \
+    android-support-compat \
     android-support-v4 \
     android-support-v13 \
     android-support-v7-appcompat \

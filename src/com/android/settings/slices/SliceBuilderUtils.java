@@ -46,6 +46,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
+import android.support.v4.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.SliceAction;
@@ -170,7 +171,7 @@ public class SliceBuilderUtils {
                         .setTitle(sliceData.getTitle())
                         .setTitleItem(icon, ICON_IMAGE)
                         .setSubtitle(subtitleText)
-                        .setPrimaryAction(new SliceAction(contentIntent, null, null))
+                        .setPrimaryAction(new SliceAction(contentIntent, (IconCompat) null, null))
                         .addEndItem(sliceAction))
                 .build();
     }
@@ -186,7 +187,7 @@ public class SliceBuilderUtils {
                         .setTitle(sliceData.getTitle())
                         .setTitleItem(icon, ICON_IMAGE)
                         .setSubtitle(subtitleText)
-                        .setPrimaryAction(new SliceAction(contentIntent, null, null)))
+                        .setPrimaryAction(new SliceAction(contentIntent, (IconCompat) null, null)))
                 .build();
     }
 
@@ -290,24 +291,25 @@ public class SliceBuilderUtils {
         switch (controller.getAvailabilityStatus()) {
             case DISABLED_UNSUPPORTED:
                 summary = context.getString(R.string.unsupported_setting_summary);
-                primaryAction = new SliceAction(getSettingsIntent(context), null /* actionIcon */,
+                primaryAction = new SliceAction(getSettingsIntent(context),
+                        (IconCompat) null /* actionIcon */,
                         null /* actionTitle */);
                 break;
             case DISABLED_FOR_USER:
                 summary = context.getString(R.string.disabled_for_user_setting_summary);
                 primaryAction = new SliceAction(getContentIntent(context, data),
-                        null /* actionIcon */, null /* actionTitle */);
+                        (IconCompat) null /* actionIcon */, null /* actionTitle */);
                 break;
             case DISABLED_DEPENDENT_SETTING:
                 summary = context.getString(R.string.disabled_dependent_setting_summary);
                 primaryAction = new SliceAction(getContentIntent(context, data),
-                        null /* actionIcon */, null /* actionTitle */);
+                        (IconCompat) null /* actionIcon */, null /* actionTitle */);
                 break;
             case UNAVAILABLE_UNKNOWN:
             default:
                 summary = context.getString(R.string.unknown_unavailability_setting_summary);
                 primaryAction = new SliceAction(getSettingsIntent(context),
-                        null /* actionIcon */, null /* actionTitle */);
+                        (IconCompat) null /* actionIcon */, null /* actionTitle */);
         }
 
         return new ListBuilder(context, data.getUri())
