@@ -45,7 +45,7 @@ public class LegalSettingsTest {
         mContext = spy(RuntimeEnvironment.application);
         mFragment = new LegalSettings() {
             @Override
-            protected boolean removePreference(String key) {
+            public boolean removePreference(String key) {
                 if (LegalSettings.KEY_WALLPAPER_ATTRIBUTIONS.equals(key)) {
                     mWallpaperRemoved = true;
 

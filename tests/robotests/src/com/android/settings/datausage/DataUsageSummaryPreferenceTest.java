@@ -17,10 +17,16 @@
 package com.android.settings.datausage;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verify;
 
+import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.NetworkTemplate;
+import android.os.Bundle;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,16 +36,23 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
+import com.android.settings.SubSettings;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settingslib.Utils;
+import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.Shadows;
+import org.robolectric.shadows.ShadowActivity;
 
 import java.util.concurrent.TimeUnit;
 
@@ -378,6 +391,48 @@ public class DataUsageSummaryPreferenceTest {
         bindViewHolder();
         assertThat(mDataUsed.getText().toString()).isEqualTo("1.00 MB used");
         assertThat(mDataRemaining.getText()).isEqualTo("");
+    }
+
+    @Test
+    public void testSetWifiMode_withUsageInfo_dataUsageShown() {
+        final int daysLeft = 3;
+        final long cycleEnd = System.currentTimeMillis() + TimeUnit.DAYS.toMillis(daysLeft)
+                + TimeUnit.HOURS.toMillis(1);
+        final Activity activity = Robolectric.setupActivity(Activity.class);
+        mSummaryPreference.setUsageInfo(cycleEnd, mUpdateTime, DUMMY_CARRIER, 0 /* numPlans */,
+                new Intent());
+        mSummaryPreference.setUsageNumbers(1000000L, -1L, true);
+        final String cycleText = "The quick fox";
+        mSummaryPreference.setWifiMode(true, cycleText);
+
+        bindViewHolder();
+        assertThat(mUsageTitle.getText().toString())
+                .isEqualTo(mContext.getString(R.string.data_usage_wifi_title));
+        assertThat(mUsageTitle.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(mCycleTime.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(mCycleTime.getText()).isEqualTo(cycleText);
+        assertThat(mCarrierInfo.getVisibility()).isEqualTo(View.GONE);
+        assertThat(mDataLimits.getVisibility()).isEqualTo(View.GONE);
+        assertThat(mLaunchButton.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(mLaunchButton.getText())
+                .isEqualTo(mContext.getString(R.string.launch_wifi_text));
+
+        mLaunchButton.callOnClick();
+        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
+        Intent startedIntent = shadowActivity.getNextStartedActivity();
+        assertThat(startedIntent.getComponent()).isEqualTo(new ComponentName("com.android.settings",
+                SubSettings.class.getName()));
+
+        final Bundle expect = new Bundle(1);
+        expect.putParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE,
+                NetworkTemplate.buildTemplateWifiWildcard());
+        final Bundle actual = startedIntent
+                .getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS);
+        assertThat((NetworkTemplate) actual.getParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE))
+                .isEqualTo(NetworkTemplate.buildTemplateWifiWildcard());
+
+        assertThat(startedIntent.getCharSequenceExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE))
+                .isEqualTo(mContext.getString(R.string.wifi_data_usage));
     }
 
     private void bindViewHolder() {

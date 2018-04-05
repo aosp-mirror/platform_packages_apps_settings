@@ -8710,6 +8710,9 @@
     <!-- Summary of data usage [CHAR LIMIT=NONE] -->
     <string name="data_usage_summary_format"><xliff:g id="amount" example="50%">%1$s</xliff:g> of data used</string>
 
+    <!-- Summary of data usage [CHAR LIMIT=NONE] -->
+    <string name="data_usage_wifi_format"><xliff:g id="amount" example="50%">^1</xliff:g> used on Wi\u2011Fi</string>
+
     <!-- Summary of notifications [CHAR LIMIT=NONE] -->
     <plurals name="notification_summary">
         <item quantity="one">Off for 1 app</item>
@@ -8947,7 +8950,7 @@
     <string name="app_cellular_data_usage">App data usage</string>
 
     <!-- Label for wifi data usage in data usage screen [CHAR LIMIT=60] -->
-    <string name="wifi_data_usage">Wi-Fi data usage</string>
+    <string name="wifi_data_usage">Wi\u2011Fi data usage</string>
 
     <!-- Label for ethernet data usage in data usage screen [CHAR LIMIT=60] -->
     <string name="ethernet_data_usage">Ethernet data usage</string>
@@ -9040,6 +9043,9 @@
     <!-- Data usage title text [CHAR LIMIT=30] -->
     <string name="data_usage_title">Primary data</string>
 
+    <!-- Alternative data usage title text for Wi-Fi only mode [CHAR LIMIT=30] -->
+    <string name="data_usage_wifi_title">Wi\u2011Fi data</string>
+
     <!-- Data usage remaining string [CHAR LIMIT=30] -->
     <string name="data_used"><xliff:g name="bytes" example="2 GB">^1</xliff:g> used</string>
 
@@ -9078,6 +9084,9 @@
 
     <!-- Button to launch external data plan app [CHAR LIMIT=30] -->
     <string name="launch_mdp_app_text">View plan</string>
+
+    <!-- Alternate launch button text for Wi-Fi only mode [CHAR LIMIT=30] -->
+    <string name="launch_wifi_text">View details</string>
 
     <!-- Name of Data Saver screens [CHAR LIMIT=30] -->
     <string name="data_saver_title">Data Saver</string>
