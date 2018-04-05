@@ -1376,9 +1376,9 @@
     <string name="storage_wizard_format_confirm_v2_body" msgid="4614199613500900975">"앱, 파일, 미디어를 저장하려면 <xliff:g id="NAME_0">^1</xliff:g>을(를) 포맷해야 합니다. \n\n포맷하면 <xliff:g id="NAME_1">^2</xliff:g>에 저장된 기존 콘텐츠가 삭제됩니다. 콘텐츠가 삭제되지 않게 하려면 다른 <xliff:g id="NAME_2">^3</xliff:g> 또는 기기에 백업하세요."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="8258363472135537500">"<xliff:g id="NAME">^1</xliff:g> 포맷"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="31406330052996898">"콘텐츠를 <xliff:g id="NAME">^1</xliff:g>(으)로 이동하시겠습니까?"</string>
-    <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4476553430145054781">"파일, 미디어, 일부 앱을 <xliff:g id="NAME">^1</xliff:g>에 옮길 수 있습니다. \n\n이를 통해 태블릿 저장용량 <xliff:g id="SIZE">^2</xliff:g>이(가) 확보되며, <xliff:g id="DURATION">^3</xliff:g> 정도 소요됩니다."</string>
-    <string name="storage_wizard_migrate_v2_body" product="default" msgid="744760728669284385">"파일, 미디어, 일부 앱을 <xliff:g id="NAME">^1</xliff:g>에 옮길 수 있습니다. \n\n이를 통해 휴대전화 저장용량 <xliff:g id="SIZE">^2</xliff:g>이(가) 확보되며, <xliff:g id="DURATION">^3</xliff:g> 정도 소요됩니다."</string>
-    <string name="storage_wizard_migrate_v2_checklist" msgid="1239103359606165360">"이동할 때 알아야 할 점:"</string>
+    <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4476553430145054781">"파일, 미디어, 일부 앱을 <xliff:g id="NAME">^1</xliff:g>에 옮길 수 있습니다. \n\n이를 통해 태블릿 저장용량 <xliff:g id="SIZE">^2</xliff:g>가 확보되며, <xliff:g id="DURATION">^3</xliff:g> 정도 소요됩니다."</string>
+    <string name="storage_wizard_migrate_v2_body" product="default" msgid="744760728669284385">"파일, 미디어, 일부 앱을 <xliff:g id="NAME">^1</xliff:g>에 옮길 수 있습니다. \n\n이를 통해 휴대전화 저장용량 <xliff:g id="SIZE">^2</xliff:g>가 확보되며, <xliff:g id="DURATION">^3</xliff:g> 정도 소요됩니다."</string>
+    <string name="storage_wizard_migrate_v2_checklist" msgid="1239103359606165360">"이동할 때 유의사항:"</string>
     <string name="storage_wizard_migrate_v2_checklist_media" msgid="7176991995007075843">"<xliff:g id="NAME">^1</xliff:g>을(를) 제거하지 마세요."</string>
     <string name="storage_wizard_migrate_v2_checklist_apps" msgid="3671266712947078734">"일부 앱이 작동하지 않습니다."</string>
     <string name="storage_wizard_migrate_v2_checklist_battery" product="tablet" msgid="346012901366624052">"태블릿을 계속해서 충전하세요."</string>
@@ -3013,7 +3013,7 @@
     <string name="keywords_fingerprint_settings" msgid="239222512315619538">"지문"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"돌리기, 뒤집기, 회전, 세로 모드, 가로 모드, 방향, 세로, 가로"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"업그레이드, Android"</string>
-    <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"알림 일시중지, 일정, 알림, 차단, 무음, 진동, 수면, 업무, 집중, 소리, 음소거, 낮, 평일, 주말, 평일 밤, 이벤트"</string>
+    <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"알림 일시중지, 일정, 알림, 차단, 무음, 진동, 절전 모드, 업무, 집중, 소리, 음소거, 낮, 평일, 주말, 평일 밤, 이벤트"</string>
     <string name="keywords_screen_timeout" msgid="8161370660970309476">"화면, 잠금 시간, 시간 초과, 잠금 화면"</string>
     <string name="keywords_storage_settings" msgid="1642340184392317296">"메모리, 데이터, 삭제, 지우기, 공간 확보, 공간"</string>
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"연결됨, 기기, 헤드폰, 헤드셋, 스피커, 무선, 페어링, 이어폰, 음악, 미디어"</string>
@@ -3641,6 +3641,8 @@
     <string name="screen_zoom_conversation_timestamp_4" msgid="2511469395448561259">"화요일 오후 6시 3분"</string>
     <string name="disconnected" msgid="4836600637485526329">"연결되지 않음"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"데이터 <xliff:g id="AMOUNT">%1$s</xliff:g> 사용됨"</string>
+    <!-- no translation found for data_usage_wifi_format (5417296451392612860) -->
+    <skip />
     <plurals name="notification_summary" formatted="false" msgid="3941492005316143599">
       <item quantity="other">앱 <xliff:g id="COUNT">%d</xliff:g>개의 알림이 사용 중지됨</item>
       <item quantity="one">앱 1개의 알림이 사용 중지됨</item>
@@ -3668,6 +3670,8 @@
     <string name="disabled_by_policy_title_camera" msgid="6225008536855644874">"카메라를 사용할 수 없음"</string>
     <string name="disabled_by_policy_title_screen_capture" msgid="4066913623298047094">"스크린샷을 사용할 수 없음"</string>
     <string name="disabled_by_policy_title_turn_off_backups" msgid="6346948990624612516">"백업을 사용 중지할 수 없음"</string>
+    <!-- no translation found for disabled_by_policy_title_suspend_packages (7423998445638650115) -->
+    <skip />
     <string name="default_admin_support_msg" msgid="4489678214035485367">"궁금한 점이 있으면 IT 관리자에게 문의하세요."</string>
     <string name="admin_support_more_info" msgid="8901377038510512654">"세부정보 더보기"</string>
     <string name="admin_profile_owner_message" msgid="5860816886981109626">"관리자는 설정, 권한, 기업 액세스, 네트워크 활동, 기기의 위치 정보 등 직장 프로필과 연결된 데이터와 앱을 모니터링하고 관리할 수 있습니다."</string>
@@ -3727,7 +3731,8 @@
     <string name="usage" msgid="2977875522080448986">"사용량"</string>
     <string name="cellular_data_usage" msgid="2155683719898158203">"모바일 데이터 사용량"</string>
     <string name="app_cellular_data_usage" msgid="5468472735806533448">"앱 데이터 사용량"</string>
-    <string name="wifi_data_usage" msgid="686754111095324306">"Wi-Fi 데이터 사용량"</string>
+    <!-- no translation found for wifi_data_usage (771603760674507659) -->
+    <skip />
     <string name="ethernet_data_usage" msgid="5108764537574354616">"이더넷 데이터 사용량"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="ethernet" msgid="6600095783781389720">"이더넷"</string>
@@ -3762,6 +3767,8 @@
       <item quantity="one">데이터 절약 모드가 켜져 있을 때 1개의 앱이 무제한 데이터를 사용할 수 있도록 허용됨</item>
     </plurals>
     <string name="data_usage_title" msgid="3659356290392241789">"기본 자료"</string>
+    <!-- no translation found for data_usage_wifi_title (7063659423081820720) -->
+    <skip />
     <string name="data_used" msgid="5116389957228457203">"<xliff:g id="ID_1">^1</xliff:g> 사용함"</string>
     <string name="data_used_formatted" msgid="2989129931961311051">"<xliff:g id="ID_1">^1</xliff:g><xliff:g id="ID_2">^2</xliff:g> 사용됨"</string>
     <string name="data_overusage" msgid="1134445012475270295">"<xliff:g id="ID_1">^1</xliff:g> 초과"</string>
@@ -3777,6 +3784,8 @@
     <string name="carrier_and_update_now_text" msgid="4057997726060106722">"조금 전 <xliff:g id="ID_1">^1</xliff:g>에서 업데이트함"</string>
     <string name="no_carrier_update_now_text" msgid="1766859656868932996">"조금 전 업데이트됨"</string>
     <string name="launch_mdp_app_text" msgid="6751296320061773169">"요금제 보기"</string>
+    <!-- no translation found for launch_wifi_text (2311424914664372687) -->
+    <skip />
     <string name="data_saver_title" msgid="8034286939200289826">"데이터 절약 모드"</string>
     <string name="unrestricted_data_saver" msgid="952796077540228711">"무제한 데이터"</string>
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"백그라운드 데이터 사용 중지됨"</string>
