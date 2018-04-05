@@ -21,6 +21,11 @@
     android:key="gesture_swipe_up_screen"
     android:title="@string/swipe_up_to_switch_apps_title">
 
+    <com.android.settings.widget.VideoPreference
+        android:key="gesture_swipe_up_video"
+        app:animation="@raw/gesture_swipe_up"
+        app:preview="@drawable/gesture_swipe_up" />
+
     <SwitchPreference
         android:key="gesture_swipe_up"
         android:title="@string/swipe_up_to_switch_apps_title"
