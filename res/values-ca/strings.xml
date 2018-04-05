@@ -601,7 +601,7 @@
     <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"El PIN ha de tenir com a mínim <xliff:g id="COUNT">%d</xliff:g> dígits"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Continua"</string>
     <string name="lockpassword_password_too_long" msgid="4591720174765403476">"Ha de tenir menys de <xliff:g id="NUMBER">%d</xliff:g> caràcters"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Ha de tenir menys de <xliff:g id="NUMBER">%d</xliff:g> dígits"</string>
+    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Ha de tenir <xliff:g id="NUMBER">%d</xliff:g> dígits o menys"</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Només pot contenir dígits del 0 al 9"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"L\'administrador del dispositiu no permet que s\'utilitzi un PIN recent"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"L\'administrador de TI ha bloquejat els PIN més comuns. Prova un altre PIN."</string>
@@ -828,9 +828,11 @@
     <skip />
     <!-- no translation found for wifi_settings_scanning_required_summary (6352918945128328916) -->
     <skip />
-    <!-- no translation found for wifi_settings_scanning_required_info (1720819171594759585) -->
+    <!-- no translation found for wifi_settings_scanning_required_info (3155631874578023647) -->
     <skip />
     <!-- no translation found for wifi_settings_scanning_required_turn_on (1364287182804820646) -->
+    <skip />
+    <!-- no translation found for wifi_settings_scanning_required_enabled (5527653791584018157) -->
     <skip />
     <string name="wifi_show_advanced" msgid="3409422789616520979">"Opcions avançades"</string>
     <string name="wifi_advanced_toggle_description_expanded" msgid="2380600578544493084">"Llista desplegable Opcions avançades. Fes doble toc per replegar-la."</string>
@@ -840,7 +842,7 @@
     <string name="wifi_security" msgid="6603611185592956936">"Seguretat"</string>
     <!-- no translation found for wifi_hidden_network (973162091800925000) -->
     <skip />
-    <!-- no translation found for wifi_hidden_network_warning (747945140951420201) -->
+    <!-- no translation found for wifi_hidden_network_warning (6674068093531603452) -->
     <skip />
     <string name="wifi_signal" msgid="5514120261628065287">"Intensitat del senyal"</string>
     <string name="wifi_status" msgid="4824568012414605414">"Estat"</string>
@@ -1789,7 +1791,8 @@
     <string name="security_settings_desc_multi" product="default" msgid="6610268420793984752">"Aquesta aplicació pot accedir als elements següents del telèfon. Per millorar el rendiment i per reduir l\'ús de la memòria, alguns d\'aquests permisos estan disponibles per a <xliff:g id="BASE_APP_NAME">%1$s</xliff:g> perquè s\'executa amb el mateix procés que <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>:"</string>
     <string name="join_two_items" msgid="1336880355987539064">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g> i <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
     <string name="join_two_unrelated_items" msgid="1873827777191260824">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>, <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
-    <string name="join_many_items_last" msgid="5925635036718502724">"<xliff:g id="ALL_BUT_LAST_ITEM">%1$s</xliff:g> i <xliff:g id="LAST_ITEM_0">%2$s</xliff:g>"</string>
+    <!-- no translation found for join_many_items_last (218498527304674173) -->
+    <skip />
     <string name="join_many_items_first" msgid="4333907712038448660">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>, <xliff:g id="ALL_BUT_FIRST_AND_LAST_ITEM">%2$s</xliff:g>"</string>
     <string name="join_many_items_middle" msgid="7556692394478220814">"<xliff:g id="ADDED_ITEM">%1$s</xliff:g>, <xliff:g id="REST_OF_ITEMS">%2$s</xliff:g>"</string>
     <string name="security_settings_billing_desc" msgid="8061019011821282358">"Pot ser que aquesta aplicació comporti càrrecs:"</string>
@@ -2152,12 +2155,14 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"Temps restant: <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> per completar la càrrega"</string>
-    <string name="background_activity_title" msgid="4645016676653647542">"Restriccions de bateria"</string>
+    <!-- no translation found for background_activity_title (8482171736539410135) -->
+    <skip />
     <string name="background_activity_summary" msgid="8140094430510517362">"Permet que l\'aplicació s\'executi en segon pla"</string>
     <string name="background_activity_summary_on" msgid="649282072540085599">"L\'aplicació es pot executar en segon pla quan no s\'utilitza"</string>
     <string name="background_activity_summary_off" msgid="7666330699090632040">"L\'activitat en segon pla de l\'aplicació està limitada quan no s\'utilitza"</string>
     <string name="background_activity_summary_disabled" msgid="3710669050484599847">"L\'aplicació no es pot executar en segon pla"</string>
-    <string name="background_activity_summary_whitelisted" msgid="7375400051141016808">"No es pot optimitzar el consum de la bateria de l\'aplicació"</string>
+    <!-- no translation found for background_activity_summary_whitelisted (1079899502347973947) -->
+    <skip />
     <string name="background_activity_warning_dialog_title" msgid="2216249969149568871">"Vols limitar l\'activitat en segon pla?"</string>
     <string name="background_activity_warning_dialog_text" msgid="7049624449246121981">"Si limites l\'activitat en segon pla d\'una aplicació, és possible que no funcioni correctament"</string>
     <string name="device_screen_usage" msgid="3386088035570409683">"Consum de la pantalla des de l\'última càrrega completa"</string>
@@ -2234,9 +2239,12 @@
       <item quantity="other">Vols restringir %1$d aplicacions?</item>
       <item quantity="one">Vols restringir l\'aplicació?</item>
     </plurals>
-    <string name="battery_tip_restrict_app_dialog_message" msgid="4983821029670590661">"Per estalviar bateria, atura <xliff:g id="APP">%1$s</xliff:g> perquè deixi de funcionar en segon pla i no consumeixi bateria."</string>
-    <string name="battery_tip_restrict_apps_less_than_5_dialog_message" msgid="5461716788680156225">"Per estalviar bateria, atura les aplicacions següents perquè deixin de funcionar en segon pla i no consumeixin bateria.\n\nAplicacions:\n"</string>
-    <string name="battery_tip_restrict_apps_more_than_5_dialog_message" msgid="7485902289068433938">"Per estalviar bateria, atura les aplicacions següents perquè deixin de funcionar en segon pla i no consumeixin bateria.\n\nAplicacions:\n<xliff:g id="APP_LIST">%1$s</xliff:g>."</string>
+    <!-- no translation found for battery_tip_restrict_app_dialog_message (7271391929137806299) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_apps_less_than_5_dialog_message (3175700359860699627) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_apps_more_than_5_dialog_message (582641081128076191) -->
+    <skip />
     <string name="battery_tip_restrict_app_dialog_ok" msgid="8291115820018013353">"Restringeix"</string>
     <string name="battery_tip_unrestrict_app_dialog_title" msgid="4321334634106715162">"Vols suprimir la restricció?"</string>
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="6537761705584610231">"Aquesta aplicació podrà consumir bateria en segon pla, cosa que pot provocar que s\'esgoti abans del previst."</string>
@@ -2246,17 +2254,23 @@
     <string name="battery_tip_dialog_summary_message_no_estimation" msgid="1456026456418786135">"Per ampliar la durada de la bateria, activa la funció Estalvi de bateria."</string>
     <string name="smart_battery_manager_title" msgid="870632749556793417">"Gestor de bateria"</string>
     <string name="smart_battery_title" msgid="6218785691872466076">"Gestiona les aplicacions automàticament"</string>
-    <string name="smart_battery_summary" msgid="182231450571039702">"Limita l\'ús de bateria de les aplicacions que no fas servir habitualment i de les que consumeixen bateria"</string>
-    <string name="smart_battery_footer" msgid="1927140000844032031">"El gestor de bateria evita que les aplicacions consumeixin bateria quan no les fas servir"</string>
+    <!-- no translation found for smart_battery_summary (1339184602000004058) -->
+    <skip />
+    <!-- no translation found for smart_battery_footer (5555604955956219544) -->
+    <skip />
+    <!-- no translation found for smart_battery_footer (5555604955956219544) -->
+    <skip />
+    <!-- no translation found for smart_battery_footer (5555604955956219544) -->
+    <skip />
     <string name="restricted_app_title" msgid="8982477293044330653">"Aplicacions restringides"</string>
-    <plurals name="restricted_app_summary" formatted="false" msgid="2541739220193274244">
-      <item quantity="other">%1$d aplicacions</item>
-      <item quantity="one">%1$d aplicació</item>
-    </plurals>
+    <!-- no translation found for restricted_app_summary (7355687633914223530) -->
     <string name="restricted_app_detail_footer" msgid="5888756210317863211">"Les aplicacions que es mostren aquí no tenen un comportament normal i estan consumint bateria en segon pla.\n\nS\'han bloquejat aquestes aplicacions perquè no consumeixin bateria en segon pla i, per tant, és possible que les notificacions d\'algunes aplicacions arribin amb retard."</string>
-    <string name="battery_auto_restriction_title" msgid="4698846356558232573">"Restringeix les aplicacions automàticament"</string>
-    <string name="battery_auto_restriction_summary" msgid="1816325499514435434">"Evita que les aplicacions en segon pla consumeixin bateria"</string>
-    <string name="battery_manager_on" msgid="5220248516776017806">"Activat / Les aplicacions es restringeixen automàticament"</string>
+    <!-- no translation found for battery_auto_restriction_title (6553271897488963709) -->
+    <skip />
+    <!-- no translation found for battery_auto_restriction_summary (8561335400991281062) -->
+    <skip />
+    <!-- no translation found for battery_manager_on (8643310865054362396) -->
+    <skip />
     <string name="battery_manager_off" msgid="5473135235710343576">"Desactivat"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="1026141135861471129">
       <item quantity="other">S\'han restringit %1$d aplicacions</item>
@@ -2369,7 +2383,8 @@
     <string name="process_dex2oat_label" msgid="2592408651060518226">"Optimització de l\'aplicació"</string>
     <string name="battery_saver" msgid="8172485772238572153">"Estalvi de bateria"</string>
     <string name="battery_saver_auto_title" msgid="8368709389419695611">"Activa automàticament"</string>
-    <string name="battery_saver_seekbar_title" msgid="119170185112075767">"Activa quan quedi un <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
+    <!-- no translation found for battery_saver_seekbar_title (4705356758573183963) -->
+    <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="1138980155985636295">"Activa"</string>
     <string name="battery_saver_master_switch_title" msgid="622539414546588436">"Utilitza el mode d\'estalvi de bateria"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Activa automàticament"</string>
@@ -2516,7 +2531,6 @@
     <string name="adding_profile_owner_warning" msgid="1354474524852805802">"En continuar, l\'administrador gestionarà el teu usuari i és possible que també pugui desar dades associades, a més de les teves dades personals.\n\nL\'administrador pot supervisar i gestionar la configuració, l\'accés, les aplicacions i les dades associades a aquest usuari, com ara l\'activitat de xarxa i la informació sobre la ubicació del dispositiu."</string>
     <string name="admin_disabled_other_options" msgid="7712694507069054530">"L\'administrador ha desactivat altres opcions"</string>
     <string name="admin_more_details" msgid="7901420667346456102">"Més dades"</string>
-    <string name="untitled_apn" msgid="1230060359198685513">"Sense títol"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"General"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"Registre de notificacions"</string>
     <string name="sound_category_call_ringtone_vibrate_title" msgid="1543777228646645163">"So de trucada i vibració"</string>
@@ -3317,7 +3331,8 @@
     <string name="notification_badge_title" msgid="6370122441168519809">"Permet el punt de notificació"</string>
     <string name="notification_channel_badge_title" msgid="2240827899882847087">"Mostra el punt de notificació"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Ignora el mode No Molestis"</string>
-    <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Permet que aquestes notificacions continuïn interrompent quan el mode No molestis estigui configurat com a Només amb prioritat"</string>
+    <!-- no translation found for app_notification_override_dnd_summary (2612502099373472686) -->
+    <skip />
     <string name="app_notification_visibility_override_title" msgid="7821124557634786985">"A la pantalla de bloqueig"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Bloquejat"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Prioritat"</string>
@@ -3415,7 +3430,8 @@
     <string name="switch_on_text" msgid="1124106706920572386">"Activat"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Desactivat"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Fixació de pantalla"</string>
-    <string name="screen_pinning_description" msgid="3360904523688769289">"Si aquesta opció està activada, pots fixar la pantalla per mantenir-la visible fins que deixis de fixar-la.\n\nPer fer-ho:\n\n1. Assegura\'t que la fixació de pantalla estigui activada.\n\n2. Obre la pantalla que vulguis fixar.\n\n3. Toca Aplicacions recents.\n\n4. Llisca cap amunt i toca la icona de fixació."</string>
+    <!-- no translation found for screen_pinning_description (1110847562111827766) -->
+    <skip />
     <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Sol·licita el patró de desbloqueig per deixar de fixar"</string>
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"Demana el codi PIN per deixar de fixar"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Demana la contrasenya per deixar de fixar"</string>
@@ -3433,8 +3449,10 @@
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Per millorar la protecció del dispositiu, a més de fer servir la teva empremta digital per desbloquejar-lo, pots configurar-lo perquè sol·liciti una contrasenya abans d\'iniciar-se. Fins que no s\'iniciï, no podrà rebre trucades, missatges ni notificacions, com ara alarmes.\n\nAixò permet protegir les dades en cas de pèrdua o robatori del dispositiu. Vols que se sol·liciti una contrasenya per iniciar el dispositiu?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Sí"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"No"</string>
-    <string name="restricted_true_label" msgid="116728938205853067">"Activa / L\'ús en segon pla està restringit"</string>
-    <string name="restricted_false_label" msgid="6992110192242654656">"Desactiva / Consumeix bateria en segon pla"</string>
+    <!-- no translation found for restricted_true_label (6659564360412697857) -->
+    <skip />
+    <!-- no translation found for restricted_false_label (3279282180297058755) -->
+    <skip />
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Vols demanar el PIN?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Vols demanar el patró?"</string>
     <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"Sol·licitar contrasenya?"</string>
@@ -3832,8 +3850,7 @@
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> aplicacions poden utilitzar dades sense restricció quan l\'Economitzador de dades està activat</item>
       <item quantity="one">1 aplicació pot utilitzar dades sense restricció quan l\'Economitzador de dades està activat</item>
     </plurals>
-    <!-- no translation found for data_usage_title (633700829782808380) -->
-    <skip />
+    <string name="data_usage_title" msgid="3659356290392241789">"Dades principals"</string>
     <string name="data_used" msgid="5116389957228457203">"<xliff:g id="ID_1">^1</xliff:g> utilitzats"</string>
     <string name="data_used_formatted" msgid="2989129931961311051">"Dades utilitzades: <xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g>"</string>
     <string name="data_overusage" msgid="1134445012475270295">"<xliff:g id="ID_1">^1</xliff:g> per sobre del límit"</string>
@@ -3866,10 +3883,12 @@
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"Sol·licita una contrasenya per iniciar el dispositiu. Quan està apagat, aquest dispositiu no pot rebre trucades, missatges, notificacions ni alarmes."</string>
     <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"Afegeix una altra empremta"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="5471253233176471245">"Desbloqueja amb un altre dit"</string>
-    <string name="battery_saver_on_summary" msgid="9072203872401530722">"Activat / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="battery_saver_off_summary" msgid="8309471955051162327">"Desactivat / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"No activis mai automàticament"</string>
-    <string name="battery_saver_desc_turn_on_auto_pct" msgid="7472323223085636533">"Activa automàticament quan quedi un %1$s de bateria"</string>
+    <!-- no translation found for battery_saver_on_summary (7722791295871319534) -->
+    <skip />
+    <!-- no translation found for battery_saver_off_scheduled_summary (3953785517002197881) -->
+    <skip />
+    <!-- no translation found for battery_saver_off_summary (784360321235698247) -->
+    <skip />
     <string name="battery_saver_button_turn_on" msgid="3699954061337848832">"Activa ara"</string>
     <string name="battery_saver_button_turn_off" msgid="5916996792004611890">"Desactiva ara"</string>
     <string name="not_battery_optimizing" msgid="5362861851864837617">"No s\'està fent servir l\'optimització de la bateria"</string>
@@ -4085,7 +4104,8 @@
     <string name="storage_games" msgid="7703159201697117621">"Jocs"</string>
     <string name="storage_other_apps" msgid="5524321740031718083">"Altres aplicacions"</string>
     <string name="storage_files" msgid="8581083146777364063">"Fitxers"</string>
-    <string name="storage_size_large_alternate" msgid="3550744227788333060">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" <xliff:g id="UNIT">^2</xliff:g>"</small>""</string>
+    <!-- no translation found for storage_size_large_alternate (3395208658399637645) -->
+    <skip />
     <string name="storage_volume_total" msgid="3499221850532701342">"Utilitzat de: <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_percent_full" msgid="6095012055875077036">"utilitzat"</string>
     <string name="clear_instant_app_data" msgid="2004222610585890909">"Esborra l\'aplicació"</string>
@@ -4163,5 +4183,7 @@
     <string name="prevent_ringing_option_none_summary" msgid="8037313710474671901">"No facis res"</string>
     <string name="pref_title_network_details" msgid="7186418845727358964">"Detalls de la xarxa"</string>
     <!-- no translation found for about_phone_device_name_warning (8885670415541365348) -->
+    <skip />
+    <!-- no translation found for devices_title (7701726109334110391) -->
     <skip />
 </resources>
