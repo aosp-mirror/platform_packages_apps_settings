@@ -489,7 +489,7 @@
     <string name="suggested_lock_settings_summary" product="tablet" msgid="2296800316150748710">"Állítson be képernyőzárat a táblagép védelme érdekében"</string>
     <string name="suggested_lock_settings_summary" product="device" msgid="7562847814806365373">"Állítson be képernyőzárat az eszköz védelme érdekében"</string>
     <string name="suggested_lock_settings_summary" product="default" msgid="1526355348444658181">"Állítson be képernyőzárat a telefon védelme érdekében"</string>
-    <string name="suggested_fingerprint_lock_settings_title" msgid="2174553391551398081">"Adja meg ujjlenyomatát a zárolás feloldásához"</string>
+    <string name="suggested_fingerprint_lock_settings_title" msgid="2174553391551398081">"Állítson be zárolásfeloldó ujjlenyomatot"</string>
     <string name="suggested_fingerprint_lock_settings_summary" product="tablet" msgid="5738274583658668124"></string>
     <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="5738274583658668124"></string>
     <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="5738274583658668124"></string>
@@ -892,7 +892,7 @@
     <string name="wifi_save" msgid="3331121567988522826">"Mentés"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"Nem sikerült menteni a hálózatot."</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"Mégse"</string>
-    <string name="wifi_forget_dialog_title" msgid="6224151903586192426">"Elfelejti a hálózatot?"</string>
+    <string name="wifi_forget_dialog_title" msgid="6224151903586192426">"Az eszköz felejtse el a hálózatot?"</string>
     <string name="wifi_forget_dialog_message" msgid="2337060138532166680">"A hálózathoz tartozó összes jelszó törlődik"</string>
     <string name="wifi_saved_access_points_titlebar" msgid="2996149477240134064">"Mentett hálózatok"</string>
     <plurals name="wifi_saved_access_points_summary" formatted="false" msgid="6094679048871529675">
@@ -3643,6 +3643,8 @@
     <string name="screen_zoom_conversation_timestamp_4" msgid="2511469395448561259">"Kedd 18:03"</string>
     <string name="disconnected" msgid="4836600637485526329">"Nincs csatlakozás"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"Felhasznált adatmennyiség: <xliff:g id="AMOUNT">%1$s</xliff:g>"</string>
+    <!-- no translation found for data_usage_wifi_format (5417296451392612860) -->
+    <skip />
     <plurals name="notification_summary" formatted="false" msgid="3941492005316143599">
       <item quantity="other">Kikapcsolva <xliff:g id="COUNT">%d</xliff:g> alkalmazás esetén</item>
       <item quantity="one">Kikapcsolva 1 alkalmazás esetén</item>
@@ -3670,6 +3672,8 @@
     <string name="disabled_by_policy_title_camera" msgid="6225008536855644874">"A kamera használata nem engedélyezett"</string>
     <string name="disabled_by_policy_title_screen_capture" msgid="4066913623298047094">"Képernyőkép készítése nem engedélyezett"</string>
     <string name="disabled_by_policy_title_turn_off_backups" msgid="6346948990624612516">"A biztonsági mentéseket nem lehet kikapcsolni"</string>
+    <!-- no translation found for disabled_by_policy_title_suspend_packages (7423998445638650115) -->
+    <skip />
     <string name="default_admin_support_msg" msgid="4489678214035485367">"Ha kérdése van, forduljon a rendszergazdához"</string>
     <string name="admin_support_more_info" msgid="8901377038510512654">"További részletek"</string>
     <string name="admin_profile_owner_message" msgid="5860816886981109626">"A rendszergazda figyelheti és kezelheti a munkaprofilhoz társított alkalmazásokat és adatokat, beleértve a beállításokat, az engedélyeket, a vállalati hozzáférést, a hálózati tevékenységeket és az eszköz helyadatait is."</string>
@@ -3685,7 +3689,7 @@
     <string name="condition_airplane_summary" msgid="7098837989877102577">"A Repülős üzemmód bekapcsolt állapotában a Wi-Fi, a Bluetooth és a mobilhálózat ki van kapcsolva. A Wi‑Fi-t és a Bluetooth-t is újra be lehet kapcsolni."</string>
     <string name="condition_zen_title" msgid="2897779738211625">"Ne zavarjanak mód: bekapcsolva"</string>
     <string name="condition_battery_title" msgid="3272131008388575349">"Akkumulátorkímélő bekapcsolva"</string>
-    <string name="condition_battery_summary" msgid="507347940746895275">"Az akkumulátorkímélő mód kikapcsol egyes eszközfunkciókat és korlátoz alkalmazásokat"</string>
+    <string name="condition_battery_summary" msgid="507347940746895275">"Az akkumulátorkímélő mód kikapcsol egyes eszközfunkciókat, és korlátoz bizonyos alkalmazásokat"</string>
     <string name="condition_cellular_title" msgid="1327317003797575735">"Mobiladatok kikapcsolva"</string>
     <string name="condition_cellular_summary" msgid="1818046558419658463">"Internetkapcsolat csak Wi-Fi-n keresztül lehetséges"</string>
     <string name="condition_bg_data_title" msgid="2483860304802846542">"Adatforgalom-csökkentő aktív"</string>
@@ -3729,7 +3733,8 @@
     <string name="usage" msgid="2977875522080448986">"Használat"</string>
     <string name="cellular_data_usage" msgid="2155683719898158203">"Mobiladat-forgalom"</string>
     <string name="app_cellular_data_usage" msgid="5468472735806533448">"Alkalmazás adathasználata"</string>
-    <string name="wifi_data_usage" msgid="686754111095324306">"Adathasználat – Wi-Fi"</string>
+    <!-- no translation found for wifi_data_usage (771603760674507659) -->
+    <skip />
     <string name="ethernet_data_usage" msgid="5108764537574354616">"Adathasználat Ethernet-kapcsolaton"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="ethernet" msgid="6600095783781389720">"Ethernet"</string>
@@ -3764,6 +3769,8 @@
       <item quantity="one">1 alkalmazás számára engedélyezett a korlátlan adathasználat, ha az Adatforgalom-csökkentő be van kapcsolva</item>
     </plurals>
     <string name="data_usage_title" msgid="3659356290392241789">"Elsődleges Adat"</string>
+    <!-- no translation found for data_usage_wifi_title (7063659423081820720) -->
+    <skip />
     <string name="data_used" msgid="5116389957228457203">"<xliff:g id="ID_1">^1</xliff:g> felhasználva"</string>
     <string name="data_used_formatted" msgid="2989129931961311051">"<xliff:g id="ID_2">^2</xliff:g>/<xliff:g id="ID_1">^1</xliff:g> felhasználva"</string>
     <string name="data_overusage" msgid="1134445012475270295">"<xliff:g id="ID_1">^1</xliff:g> túllépve"</string>
@@ -3779,6 +3786,8 @@
     <string name="carrier_and_update_now_text" msgid="4057997726060106722">"Éppen most frissítette a(z) <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="no_carrier_update_now_text" msgid="1766859656868932996">"Most frissítve"</string>
     <string name="launch_mdp_app_text" msgid="6751296320061773169">"Csomag megtekintése"</string>
+    <!-- no translation found for launch_wifi_text (2311424914664372687) -->
+    <skip />
     <string name="data_saver_title" msgid="8034286939200289826">"Adatforgalom-csökkentő"</string>
     <string name="unrestricted_data_saver" msgid="952796077540228711">"Korlátlan adat"</string>
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"Háttéradatok kikapcsolva"</string>
