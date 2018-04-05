@@ -18,17 +18,24 @@ package com.android.settings.wifi;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.isNull;
+import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.provider.Settings;
 
+import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 
@@ -48,6 +55,8 @@ public class WifiScanningRequiredFragmentTest {
     private ContentResolver mResolver;
     @Mock
     Fragment mCallbackFragment;
+    @Mock
+    AlertDialog.Builder mBuilder;
 
     @Before
     public void setUp() {
@@ -80,5 +89,20 @@ public class WifiScanningRequiredFragmentTest {
         mFragment.onClick(null, DialogInterface.BUTTON_POSITIVE);
 
         verify(mCallbackFragment).onActivityResult(anyInt(), anyInt(), isNull());
+    }
+
+    @Test
+    public void learnMore_launchesHelpWhenIntentFound() {
+        Context context = mock(Context.class);
+        doReturn(context).when(mFragment).getContext();
+        doReturn("").when(context).getString(eq(R.string.help_uri_wifi_scanning_required));
+        mFragment.addButtonIfNeeded(mBuilder);
+        verify(mBuilder, never())
+                .setNeutralButton(anyInt(), nullable(DialogInterface.OnClickListener.class));
+
+        doReturn("help").when(context).getString(eq(R.string.help_uri_wifi_scanning_required));
+        mFragment.addButtonIfNeeded(mBuilder);
+        verify(mBuilder, times(1))
+                .setNeutralButton(anyInt(), nullable(DialogInterface.OnClickListener.class));
     }
 }
