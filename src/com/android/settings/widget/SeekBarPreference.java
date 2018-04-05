@@ -233,8 +233,7 @@ public class SeekBarPreference extends RestrictedPreference
     }
 
     @Override
-    public void onProgressChanged(
-            SeekBar seekBar, int progress, boolean fromUser) {
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         if (fromUser && (mContinuousUpdates || !mTrackingTouch)) {
             syncProgress(seekBar);
         }
