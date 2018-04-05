@@ -150,6 +150,19 @@ public class BatteryTipPreferenceControllerTest {
     }
 
     @Test
+    public void testRestoreFromNull_shouldNotCrash() {
+        final Bundle bundle = new Bundle();
+        // Battery tip list is null at this time
+        mBatteryTipPreferenceController.saveInstanceState(bundle);
+
+        final BatteryTipPreferenceController controller = new BatteryTipPreferenceController(
+                mContext, KEY_PREF, mSettingsActivity, mFragment, mBatteryTipListener);
+
+        // Should not crash
+        controller.restoreInstanceState(bundle);
+    }
+
+    @Test
     public void testHandlePreferenceTreeClick_noDialog_invokeCallback() {
         when(mBatteryTip.getType()).thenReturn(SMART_BATTERY_MANAGER);
         List<BatteryTip> batteryTips = new ArrayList<>();
