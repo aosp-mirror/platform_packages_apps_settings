@@ -22,11 +22,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.pm.ShortcutInfo;
+import android.content.pm.ShortcutManager;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static android.content.pm.PackageManager.GET_ACTIVITIES;
@@ -39,8 +43,8 @@ import com.android.settings.shortcut.CreateShortcut;
 /**
  * Listens to {@link Intent.ACTION_PRE_BOOT_COMPLETED} and {@link Intent.ACTION_USER_INITIALIZED}
  * performs setup steps for a managed profile (disables the launcher icon of the Settings app,
- * adds cross-profile intent filters for the appropriate Settings activities), and disables the
- * webview setting for non-admin users.
+ * adds cross-profile intent filters for the appropriate Settings activities), disables the
+ * webview setting for non-admin users, and updates the intent flags for any existing shortcuts.
  */
 public class SettingsInitialize extends BroadcastReceiver {
     private static final String TAG = "Settings";
@@ -56,6 +60,7 @@ public class SettingsInitialize extends BroadcastReceiver {
         final PackageManager pm  = context.getPackageManager();
         managedProfileSetup(context, pm, broadcast, userInfo);
         webviewSettingSetup(context, pm, userInfo);
+        refreshExistingShortcuts(context);
     }
 
     private void managedProfileSetup(Context context, final PackageManager pm, Intent broadcast,
@@ -113,4 +118,22 @@ public class SettingsInitialize extends BroadcastReceiver {
                         PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                 PackageManager.DONT_KILL_APP);
     }
+
+    // Refresh settings shortcuts to have correct intent flags
+    @VisibleForTesting
+    void refreshExistingShortcuts(Context context) {
+        final ShortcutManager shortcutManager = context.getSystemService(ShortcutManager.class);
+        final List<ShortcutInfo> pinnedShortcuts = shortcutManager.getPinnedShortcuts();
+        final List<ShortcutInfo> updates = new ArrayList<>();
+        for (ShortcutInfo info : pinnedShortcuts) {
+            final Intent shortcutIntent = info.getIntent();
+            shortcutIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            final ShortcutInfo updatedInfo = new ShortcutInfo.Builder(context, info.getId())
+                    .setIntent(shortcutIntent)
+                    .build();
+            updates.add(updatedInfo);
+        }
+        shortcutManager.updateShortcuts(updates);
+    }
+
 }
