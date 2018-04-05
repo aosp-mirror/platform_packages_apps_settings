@@ -64,7 +64,7 @@ import java.util.concurrent.TimeUnit;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class AnomalyDetectionJobServiceTest {
-    private static final int UID = 123;
+    private static final int UID = 12345;
     private static final String SYSTEM_PACKAGE = "com.android.system";
     private static final String SUBSCRIBER_COOKIES_AUTO_RESTRICTION =
             "anomaly_type=6,auto_restriction=true";
@@ -120,8 +120,8 @@ public class AnomalyDetectionJobServiceTest {
 
     @Test
     public void testSaveAnomalyToDatabase_systemWhitelisted_doNotSave() {
-        doReturn(SYSTEM_PACKAGE).when(mBatteryUtils).getPackageName(anyInt());
-        doReturn(true).when(mPowerWhitelistBackend).isSysWhitelisted(SYSTEM_PACKAGE);
+        doReturn(UID).when(mAnomalyDetectionJobService).extractUidFromStatsDimensionsValue(any());
+        doReturn(true).when(mPowerWhitelistBackend).isSysWhitelistedExceptIdle(any(String[].class));
 
         mAnomalyDetectionJobService.saveAnomalyToDatabase(mContext, mBatteryStatsHelper,
                 mUserManager, mBatteryDatabaseManager, mBatteryUtils, mPolicy,
