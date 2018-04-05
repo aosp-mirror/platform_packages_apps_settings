@@ -356,6 +356,8 @@ public class DataUsageSummaryPreferenceTest {
         bindViewHolder();
         assertThat(mDataUsed.getText().toString()).isEqualTo("1.00 MB used");
         assertThat(mDataRemaining.getText().toString()).isEqualTo("9.00 MB left");
+        final int colorId = Utils.getColorAttr(mContext, android.R.attr.colorAccent);
+        assertThat(mDataRemaining.getCurrentTextColor()).isEqualTo(colorId);
     }
 
     @Test
@@ -367,6 +369,8 @@ public class DataUsageSummaryPreferenceTest {
         bindViewHolder();
         assertThat(mDataUsed.getText().toString()).isEqualTo("11.00 MB used");
         assertThat(mDataRemaining.getText().toString()).isEqualTo("1.00 MB over");
+        final int colorId = Utils.getColorAttr(mContext, android.R.attr.colorError);
+        assertThat(mDataRemaining.getCurrentTextColor()).isEqualTo(colorId);
     }
 
     @Test
