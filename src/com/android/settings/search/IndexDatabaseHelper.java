@@ -255,7 +255,7 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
         for (ResolveInfo info : providers) {
             sb.append(info.providerInfo.packageName)
                     .append(':')
-                    .append(info.providerInfo.applicationInfo.versionCode)
+                    .append(info.providerInfo.applicationInfo.longVersionCode)
                     .append(',');
         }
         return sb.toString();
