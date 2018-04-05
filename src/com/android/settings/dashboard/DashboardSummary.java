@@ -58,7 +58,8 @@ public class DashboardSummary extends InstrumentedFragment
     private static final int MAX_WAIT_MILLIS = 3000;
     private static final String TAG = "DashboardSummary";
 
-    private static final String EXTRA_SCROLL_POSITION = "scroll_position";
+    private static final String STATE_SCROLL_POSITION = "scroll_position";
+    private static final String STATE_CATEGORIES_CHANGE_CALLED = "categories_change_called";
 
     private final Handler mHandler = new Handler();
 
@@ -69,7 +70,8 @@ public class DashboardSummary extends InstrumentedFragment
     private LinearLayoutManager mLayoutManager;
     private SuggestionControllerMixin mSuggestionControllerMixin;
     private DashboardFeatureProvider mDashboardFeatureProvider;
-    private boolean isOnCategoriesChangedCalled;
+    @VisibleForTesting
+    boolean mIsOnCategoriesChangedCalled;
     private boolean mOnConditionsChangedCalled;
 
     private DashboardCategory mStagingCategory;
@@ -115,6 +117,10 @@ public class DashboardSummary extends InstrumentedFragment
 
         mConditionManager = ConditionManager.get(activity, false);
         getLifecycle().addObserver(mConditionManager);
+        if (savedInstanceState != null) {
+            mIsOnCategoriesChangedCalled =
+                    savedInstanceState.getBoolean(STATE_CATEGORIES_CHANGE_CALLED);
+        }
         if (DEBUG_TIMING) {
             Log.d(TAG, "onCreate took " + (System.currentTimeMillis() - startTime) + " ms");
         }
@@ -182,7 +188,8 @@ public class DashboardSummary extends InstrumentedFragment
         if (mLayoutManager == null) {
             return;
         }
-        outState.putInt(EXTRA_SCROLL_POSITION, mLayoutManager.findFirstVisibleItemPosition());
+        outState.putBoolean(STATE_CATEGORIES_CHANGE_CALLED, mIsOnCategoriesChangedCalled);
+        outState.putInt(STATE_SCROLL_POSITION, mLayoutManager.findFirstVisibleItemPosition());
     }
 
     @Override
@@ -193,7 +200,7 @@ public class DashboardSummary extends InstrumentedFragment
         mLayoutManager = new LinearLayoutManager(getContext());
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         if (bundle != null) {
-            int scrollPosition = bundle.getInt(EXTRA_SCROLL_POSITION);
+            int scrollPosition = bundle.getInt(STATE_SCROLL_POSITION);
             mLayoutManager.scrollToPosition(scrollPosition);
         }
         mDashboard.setLayoutManager(mLayoutManager);
@@ -201,7 +208,7 @@ public class DashboardSummary extends InstrumentedFragment
         mDashboard.setListener(this);
         mDashboard.setItemAnimator(new DashboardItemAnimator());
         mAdapter = new DashboardAdapter(getContext(), bundle,
-            mConditionManager.getConditions(), mSuggestionControllerMixin, getLifecycle());
+                mConditionManager.getConditions(), mSuggestionControllerMixin, getLifecycle());
         mDashboard.setAdapter(mAdapter);
         mSummaryLoader.setSummaryConsumer(mAdapter);
         ActionBarShadowController.attachToRecyclerView(
@@ -224,10 +231,10 @@ public class DashboardSummary extends InstrumentedFragment
         // Bypass rebuildUI() on the first call of onCategoriesChanged, since rebuildUI() happens
         // in onViewCreated as well when app starts. But, on the subsequent calls we need to
         // rebuildUI() because there might be some changes to suggestions and categories.
-        if (isOnCategoriesChangedCalled) {
+        if (mIsOnCategoriesChangedCalled) {
             rebuildUI();
         }
-        isOnCategoriesChangedCalled = true;
+        mIsOnCategoriesChangedCalled = true;
     }
 
     @Override
