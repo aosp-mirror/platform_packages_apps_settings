@@ -27,6 +27,7 @@ import android.os.BatteryManager;
 import android.os.PowerManager;
 
 import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
+import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -74,10 +75,11 @@ public class EarlyWarningDetectorTest {
     }
 
     @Test
-    public void testDetect_batterySaverOn_tipInvisible() {
+    public void testDetect_batterySaverOn_tipHandled() {
         doReturn(true).when(mPowerManager).isPowerSaveMode();
 
-        assertThat(mEarlyWarningDetector.detect().isVisible()).isFalse();
+        assertThat(mEarlyWarningDetector.detect().getState())
+                .isEqualTo(BatteryTip.StateType.HANDLED);
     }
 
     @Test
