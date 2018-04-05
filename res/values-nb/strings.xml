@@ -1362,10 +1362,10 @@
     <string name="storage_wizard_slow_body" msgid="8010127667184768025">"<xliff:g id="NAME_0">^1</xliff:g> ser ut til å være treg. \n\nDu kan fortsette, men apper flyttet til denne plasseringen, kan hakke, og dataoverføringer kan ta lang tid. \n\nVurder å bruke raskere <xliff:g id="NAME_1">^1</xliff:g> for bedre ytelse."</string>
     <string name="storage_wizard_init_v2_title" msgid="8858395869710288372">"Hvordan skal du bruke <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="4315585580670552654">"Bruk som ekstra nettbrettlagring"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="570443086512059390">"For apper, filer og medier på bare dette nettbrettet"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="570443086512059390">"For apper, filer og medier bare på dette nettbrettet"</string>
     <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="7760758592993284143">"Lagring på nettbrett"</string>
     <string name="storage_wizard_init_v2_internal_title" product="default" msgid="8373070138732653456">"Bruk som ekstra telefonlagring"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="685194340141573218">"For apper, filer og medier på bare denne telefonen"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="685194340141573218">"For apper, filer og medier bare på denne telefonen"</string>
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="904425171564310150">"Telefonlagring"</string>
     <string name="storage_wizard_init_v2_or" msgid="1958295749349454436">"Eller"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="3565348221712759463">"Bruk som bærbar lagring"</string>
@@ -1379,7 +1379,7 @@
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4476553430145054781">"Du kan flytte filer, media og visse apper til <xliff:g id="NAME">^1</xliff:g>. \n\nFlyttingen frigjør <xliff:g id="SIZE">^2</xliff:g> av nettbrettets lagring og bør ta omtrent <xliff:g id="DURATION">^3</xliff:g>."</string>
     <string name="storage_wizard_migrate_v2_body" product="default" msgid="744760728669284385">"Du kan flytte filer, media og visse apper til <xliff:g id="NAME">^1</xliff:g>. \n\nFlyttingen frigjør <xliff:g id="SIZE">^2</xliff:g> av telefonens lagring og bør ta omtrent <xliff:g id="DURATION">^3</xliff:g>."</string>
     <string name="storage_wizard_migrate_v2_checklist" msgid="1239103359606165360">"I løpet av flyttingen"</string>
-    <string name="storage_wizard_migrate_v2_checklist_media" msgid="7176991995007075843">"kan du ikke fjerne <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_migrate_v2_checklist_media" msgid="7176991995007075843">"Ikke fjern <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_checklist_apps" msgid="3671266712947078734">"fungerer ikke enkelte apper"</string>
     <string name="storage_wizard_migrate_v2_checklist_battery" product="tablet" msgid="346012901366624052">"må du holde nettbrettet ladet"</string>
     <string name="storage_wizard_migrate_v2_checklist_battery" product="default" msgid="3061158350109289521">"må du holde telefonen ladet"</string>
@@ -3024,8 +3024,8 @@
     <string name="keywords_default_links" msgid="5830406261253835547">"standard"</string>
     <string name="keywords_ambient_display" msgid="3103487805748659132">"innkommende varsel"</string>
     <string name="keywords_hotspot_tethering" msgid="1137511742967410918">"USB-internettdeling, Bluetooth-internettdeling, Wi-Fi-sone"</string>
-    <string name="keywords_touch_vibration" msgid="5983211715076385822">"haptisk, vibrer, skjerm, sensitivitet"</string>
-    <string name="keywords_ring_vibration" msgid="2393528037008999296">"haptisk, vibrer, telefon, anrop, sensitivitet"</string>
+    <string name="keywords_touch_vibration" msgid="5983211715076385822">"haptisk, vibrer, skjerm, følsomhet"</string>
+    <string name="keywords_ring_vibration" msgid="2393528037008999296">"haptisk, vibrer, telefon, anrop, følsomhet"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Konfigurer NFC-tag for Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Skriv"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Trykk på en brikke for å skrive"</string>
@@ -3641,6 +3641,8 @@
     <string name="screen_zoom_conversation_timestamp_4" msgid="2511469395448561259">"tirs kl. 18.03"</string>
     <string name="disconnected" msgid="4836600637485526329">"Ikke tilkoblet"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> med data er brukt"</string>
+    <!-- no translation found for data_usage_wifi_format (5417296451392612860) -->
+    <skip />
     <plurals name="notification_summary" formatted="false" msgid="3941492005316143599">
       <item quantity="other">Av for <xliff:g id="COUNT">%d</xliff:g> apper</item>
       <item quantity="one">Av for én app</item>
@@ -3668,6 +3670,8 @@
     <string name="disabled_by_policy_title_camera" msgid="6225008536855644874">"Kameraet er ikke tillatt"</string>
     <string name="disabled_by_policy_title_screen_capture" msgid="4066913623298047094">"Skjermdump er ikke tillatt"</string>
     <string name="disabled_by_policy_title_turn_off_backups" msgid="6346948990624612516">"Kan ikke slå av sikkerhetskopier"</string>
+    <!-- no translation found for disabled_by_policy_title_suspend_packages (7423998445638650115) -->
+    <skip />
     <string name="default_admin_support_msg" msgid="4489678214035485367">"Hvis du lurer på noe, kan du kontakte IT-administratoren din"</string>
     <string name="admin_support_more_info" msgid="8901377038510512654">"Mer informasjon"</string>
     <string name="admin_profile_owner_message" msgid="5860816886981109626">"Administratoren kan overvåke og administrere apper og data som er tilknyttet jobbprofilen din, inkludert innstillinger, tillatelser, bedriftstilgang, nettverksaktivitet og enhetens posisjonsinformasjon."</string>
@@ -3727,7 +3731,8 @@
     <string name="usage" msgid="2977875522080448986">"Bruk"</string>
     <string name="cellular_data_usage" msgid="2155683719898158203">"Bruk av mobildata"</string>
     <string name="app_cellular_data_usage" msgid="5468472735806533448">"Appens databruk"</string>
-    <string name="wifi_data_usage" msgid="686754111095324306">"Forbruk av Wi-Fi-data"</string>
+    <!-- no translation found for wifi_data_usage (771603760674507659) -->
+    <skip />
     <string name="ethernet_data_usage" msgid="5108764537574354616">"Ethernet-databruk"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="ethernet" msgid="6600095783781389720">"Ethernet"</string>
@@ -3762,6 +3767,8 @@
       <item quantity="one">1 app kan bruke ubegrenset med data når Datasparing er på</item>
     </plurals>
     <string name="data_usage_title" msgid="3659356290392241789">"Primære data"</string>
+    <!-- no translation found for data_usage_wifi_title (7063659423081820720) -->
+    <skip />
     <string name="data_used" msgid="5116389957228457203">"<xliff:g id="ID_1">^1</xliff:g> er brukt"</string>
     <string name="data_used_formatted" msgid="2989129931961311051">"<xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g> er brukt"</string>
     <string name="data_overusage" msgid="1134445012475270295">"<xliff:g id="ID_1">^1</xliff:g> over grensen"</string>
@@ -3777,6 +3784,8 @@
     <string name="carrier_and_update_now_text" msgid="4057997726060106722">"Oppdatert av <xliff:g id="ID_1">^1</xliff:g> nå nettopp"</string>
     <string name="no_carrier_update_now_text" msgid="1766859656868932996">"Oppdatert nå nettopp"</string>
     <string name="launch_mdp_app_text" msgid="6751296320061773169">"Se abonnement"</string>
+    <!-- no translation found for launch_wifi_text (2311424914664372687) -->
+    <skip />
     <string name="data_saver_title" msgid="8034286939200289826">"Datasparing"</string>
     <string name="unrestricted_data_saver" msgid="952796077540228711">"Ubegrenset datatilgang"</string>
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"Bakgrunnsdata er slått av"</string>
