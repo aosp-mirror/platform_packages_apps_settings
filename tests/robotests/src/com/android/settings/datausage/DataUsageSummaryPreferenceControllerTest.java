@@ -77,8 +77,6 @@ public class DataUsageSummaryPreferenceControllerTest {
     @Mock
     private DataUsageController mDataUsageController;
     @Mock
-    private DataUsageInfoController mDataInfoController;
-    @Mock
     private DataUsageSummaryPreference mSummaryPreference;
     @Mock
     private NetworkPolicyEditor mPolicyEditor;
@@ -97,6 +95,8 @@ public class DataUsageSummaryPreferenceControllerTest {
     @Mock
     private ConnectivityManager mConnectivityManager;
 
+    private DataUsageInfoController mDataInfoController;
+
     private FakeFeatureFactory mFactory;
     private Activity mActivity;
     private Context mContext;
@@ -114,6 +114,7 @@ public class DataUsageSummaryPreferenceControllerTest {
         when(mFactory.metricsFeatureProvider.getMetricsCategory(any(Object.class)))
                 .thenReturn(MetricsProto.MetricsEvent.SETTINGS_APP_NOTIF_CATEGORY);
         ShadowEntityHeaderController.setUseMock(mHeaderController);
+        mDataInfoController = new DataUsageInfoController();
 
         mActivity = spy(Robolectric.buildActivity(Activity.class).get());
         when(mActivity.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
