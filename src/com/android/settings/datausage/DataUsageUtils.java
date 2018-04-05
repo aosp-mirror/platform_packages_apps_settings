@@ -14,11 +14,17 @@
 
 package com.android.settings.datausage;
 
+import static android.net.ConnectivityManager.TYPE_ETHERNET;
 import static android.net.ConnectivityManager.TYPE_WIFI;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.net.INetworkStatsService;
+import android.net.INetworkStatsSession;
 import android.net.NetworkTemplate;
+import android.net.TrafficStats;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -31,8 +37,42 @@ import java.util.List;
 public final class DataUsageUtils {
     static final boolean TEST_RADIOS = false;
     static final String TEST_RADIOS_PROP = "test.radios";
+    private static final String ETHERNET = "ethernet";
 
     private DataUsageUtils() {
+    }
+
+    /**
+     * Test if device has an ethernet network connection.
+     */
+    public static boolean hasEthernet(Context context) {
+        if (DataUsageUtils.TEST_RADIOS) {
+            return SystemProperties.get(DataUsageUtils.TEST_RADIOS_PROP).contains(ETHERNET);
+        }
+
+        final ConnectivityManager conn = ConnectivityManager.from(context);
+        final boolean hasEthernet = conn.isNetworkSupported(ConnectivityManager.TYPE_ETHERNET);
+
+        final long ethernetBytes;
+        try {
+            INetworkStatsService statsService = INetworkStatsService.Stub.asInterface(
+                    ServiceManager.getService(Context.NETWORK_STATS_SERVICE));
+
+            INetworkStatsSession statsSession = statsService.openSession();
+            if (statsSession != null) {
+                ethernetBytes = statsSession.getSummaryForNetwork(
+                        NetworkTemplate.buildTemplateEthernet(), Long.MIN_VALUE, Long.MAX_VALUE)
+                        .getTotalBytes();
+                TrafficStats.closeQuietly(statsSession);
+            } else {
+                ethernetBytes = 0;
+            }
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+
+        // only show ethernet when both hardware present and traffic has occurred
+        return hasEthernet && ethernetBytes > 0;
     }
 
     /**
@@ -53,8 +93,17 @@ public final class DataUsageUtils {
             return SystemProperties.get(TEST_RADIOS_PROP).contains("wifi");
         }
 
-        ConnectivityManager connectivityManager = ConnectivityManager.from(context);
+        ConnectivityManager connectivityManager =
+                context.getSystemService(ConnectivityManager.class);
         return connectivityManager != null && connectivityManager.isNetworkSupported(TYPE_WIFI);
+    }
+
+    public static boolean hasSim(Context context) {
+        TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
+        final int simState = telephonyManager.getSimState();
+        // Note that pulling the SIM card returns UNKNOWN, not ABSENT.
+        return simState != TelephonyManager.SIM_STATE_ABSENT
+                && simState != TelephonyManager.SIM_STATE_UNKNOWN;
     }
 
     /**
