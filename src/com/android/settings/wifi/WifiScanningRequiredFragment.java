@@ -15,23 +15,30 @@
  */
 package com.android.settings.wifi;
 
-import static com.android.settings.wifi.ConfigureWifiSettings.WIFI_WAKEUP_REQUEST_CODE;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.VisibleForTesting;
+import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settingslib.HelpUtils;
 
 public class WifiScanningRequiredFragment extends InstrumentedDialogFragment implements
         DialogInterface.OnClickListener {
+
+    private static final String TAG = "WifiScanReqFrag";
 
     public static WifiScanningRequiredFragment newInstance() {
         WifiScanningRequiredFragment fragment = new WifiScanningRequiredFragment();
@@ -40,19 +47,20 @@ public class WifiScanningRequiredFragment extends InstrumentedDialogFragment imp
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        return new AlertDialog.Builder(getContext())
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
                 .setTitle(R.string.wifi_settings_scanning_required_title)
                 .setView(R.layout.wifi_settings_scanning_required_view)
-                .setNeutralButton(R.string.do_disclosure_learn_more, this)
                 .setPositiveButton(R.string.wifi_settings_scanning_required_turn_on, this)
-                .setNegativeButton(R.string.cancel, null)
-                .create();
+                .setNegativeButton(R.string.cancel, null);
+        addButtonIfNeeded(builder);
+
+
+        return builder.create();
     }
 
     @Override
     public int getMetricsCategory() {
-        // TODO(b/67070896): add metric code
-        return 0;
+        return MetricsProto.MetricsEvent.WIFI_SCANNING_NEEDED_DIALOG;
     }
 
     @Override
@@ -81,7 +89,29 @@ public class WifiScanningRequiredFragment extends InstrumentedDialogFragment imp
         }
     }
 
+    void addButtonIfNeeded(AlertDialog.Builder builder) {
+        // Only show "learn more" if there is a help page to show
+        if (!TextUtils.isEmpty(getContext().getString(R.string.help_uri_wifi_scanning_required))) {
+            builder.setNeutralButton(R.string.do_disclosure_learn_more, this);
+        }
+    }
+
     private void openHelpPage() {
-        // TODO(b/67070896): actually open help page on Pixel only
+        Intent intent = getHelpIntent(getContext());
+        if (intent != null) {
+            try {
+                startActivity(intent);
+            } catch (ActivityNotFoundException e) {
+                Log.e(TAG, "Activity was not found for intent, " + intent.toString());
+            }
+        }
+    }
+
+    @VisibleForTesting
+    Intent getHelpIntent(Context context) {
+        return HelpUtils.getHelpIntent(
+                    context,
+                    context.getString(R.string.help_uri_wifi_scanning_required),
+                    context.getClass().getName());
     }
 }
