@@ -35,7 +35,6 @@ import com.android.settings.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 @SearchIndexable
@@ -142,13 +141,14 @@ public final class MagnificationPreferenceFragment extends DashboardFragment {
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
                         boolean enabled) {
-                    if (isApplicable(context.getResources())) {
-                        final SearchIndexableResource sir = new SearchIndexableResource(context);
-                        sir.xmlResId = R.xml.accessibility_magnification_settings;
-                        return Arrays.asList(sir);
-                    } else {
-                        return Collections.emptyList();
-                    }
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.accessibility_magnification_settings;
+                    return Arrays.asList(sir);
+                }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return isApplicable(context.getResources());
                 }
 
                 @Override
