@@ -91,6 +91,9 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
     }
 
     public void updateBatteryTips(List<BatteryTip> batteryTips) {
+        if (batteryTips == null) {
+            return;
+        }
         if (mBatteryTips == null) {
             mBatteryTips = batteryTips;
         } else {
@@ -100,7 +103,6 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
             }
         }
 
-        //TODO(b/70570352): try to reuse the existing preference rather than remove and add.
         mPreferenceGroup.removeAll();
         for (int i = 0, size = batteryTips.size(); i < size; i++) {
             final BatteryTip batteryTip = mBatteryTips.get(i);
