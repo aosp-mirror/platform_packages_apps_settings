@@ -23,8 +23,6 @@ import com.google.common.hash.Hashing;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * This class provides all the configs needed if we want to use {@link android.app.StatsManager}
@@ -43,16 +41,20 @@ public class StatsManagerConfig {
 
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({AnomalyType.NULL,
-            AnomalyType.WAKE_LOCK,
-            AnomalyType.WAKEUP_ALARM,
-            AnomalyType.BLUETOOTH_SCAN,
-            AnomalyType.EXCESSIVE_BG})
+            AnomalyType.UNKNOWN_REASON,
+            AnomalyType.EXCESSIVE_WAKELOCK_ALL_SCREEN_OFF,
+            AnomalyType.EXCESSIVE_WAKEUPS_IN_BACKGROUND,
+            AnomalyType.EXCESSIVE_UNOPTIMIZED_BLE_SCAN,
+            AnomalyType.EXCESSIVE_BACKGROUND_SERVICE,
+            AnomalyType.EXCESSIVE_WIFI_SCAN})
     public @interface AnomalyType {
         int NULL = -1;
-        int WAKE_LOCK = 0;
-        int WAKEUP_ALARM = 1;
-        int BLUETOOTH_SCAN = 2;
-        int EXCESSIVE_BG = 3;
+        int UNKNOWN_REASON = 0;
+        int EXCESSIVE_WAKELOCK_ALL_SCREEN_OFF = 1;
+        int EXCESSIVE_WAKEUPS_IN_BACKGROUND = 2;
+        int EXCESSIVE_UNOPTIMIZED_BLE_SCAN = 3;
+        int EXCESSIVE_BACKGROUND_SERVICE = 4;
+        int EXCESSIVE_WIFI_SCAN = 5;
     }
 
 }
