@@ -700,6 +700,7 @@
         </activity>
 
         <activity android:name=".inputmethod.UserDictionaryAddWordActivity"
+                  android:visibleToInstantApps="true"
                   android:label="@string/user_dict_settings_title"
                   android:theme="@*android:style/Theme.DeviceDefault.Settings.Dialog.NoActionBar"
                   android:windowSoftInputMode="stateVisible"
