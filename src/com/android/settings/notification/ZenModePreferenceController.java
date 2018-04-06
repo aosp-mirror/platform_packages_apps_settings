@@ -27,13 +27,15 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.Slog;
 
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
-public class ZenModePreferenceController extends AdjustVolumeRestrictedPreferenceController
-        implements LifecycleObserver, OnResume, OnPause {
+public class ZenModePreferenceController extends AbstractPreferenceController
+        implements LifecycleObserver, OnResume, OnPause, PreferenceControllerMixin {
 
     private final String mKey;
     private SettingObserver mSettingObserver;

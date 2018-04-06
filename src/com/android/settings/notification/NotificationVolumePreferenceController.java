@@ -22,32 +22,21 @@ import android.media.AudioManager;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.notification.VolumeSeekBarPreference.Callback;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class NotificationVolumePreferenceController extends
     RingVolumePreferenceController {
 
     private static final String KEY_NOTIFICATION_VOLUME = "notification_volume";
-    private AudioHelper mHelper;
 
-    public NotificationVolumePreferenceController(Context context, Callback callback,
-        Lifecycle lifecycle) {
-        this(context, callback, lifecycle, new AudioHelper(context));
+    public NotificationVolumePreferenceController(Context context) {
+        super(context, KEY_NOTIFICATION_VOLUME);
     }
-
-    @VisibleForTesting
-    NotificationVolumePreferenceController(Context context,
-        Callback callback, Lifecycle lifecycle, AudioHelper helper) {
-        super(context, callback, lifecycle);
-        mHelper = helper;
-    }
-
 
     @Override
-    public boolean isAvailable() {
+    public int getAvailabilityStatus() {
         return mContext.getResources().getBoolean(R.bool.config_show_notification_volume)
-                && !Utils.isVoiceCapable(mContext) && !mHelper.isSingleVolume();
+                && !Utils.isVoiceCapable(mContext) && !mHelper.isSingleVolume()
+                ? AVAILABLE : DISABLED_UNSUPPORTED;
     }
 
     @Override

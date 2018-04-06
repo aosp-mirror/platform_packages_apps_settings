@@ -45,7 +45,8 @@ public class AlarmVolumePreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = new AlarmVolumePreferenceController(mContext, null, null, mHelper);
+        mController = new AlarmVolumePreferenceController(mContext);
+        mController.setAudioHelper(mHelper);
     }
 
     @Test
