@@ -124,7 +124,7 @@ public class SoundSettings extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, this, mVolumeCallback, getLifecycle());
+        return buildPreferenceControllers(context, this, getLifecycle());
     }
 
     @Override
@@ -141,6 +141,15 @@ public class SoundSettings extends DashboardFragment {
         if (mRequestPreference != null) {
             outState.putString(SELECTED_PREFERENCE_KEY, mRequestPreference.getKey());
         }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        use(AlarmVolumePreferenceController.class).setCallback(mVolumeCallback);
+        use(MediaVolumePreferenceController.class).setCallback(mVolumeCallback);
+        use(RingVolumePreferenceController.class).setCallback(mVolumeCallback);
+        use(NotificationVolumePreferenceController.class).setCallback(mVolumeCallback);
     }
 
     // === Volumes ===
@@ -176,18 +185,12 @@ public class SoundSettings extends DashboardFragment {
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            SoundSettings fragment, VolumeSeekBarPreference.Callback callback,
-            Lifecycle lifecycle) {
+            SoundSettings fragment, Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new ZenModePreferenceController(context, lifecycle, KEY_ZEN_MODE));
         controllers.add(new VibrateWhenRingPreferenceController(context));
 
-        // === Volumes ===
-        controllers.add(new AlarmVolumePreferenceController(context, callback, lifecycle));
-        controllers.add(new MediaVolumePreferenceController(context, callback, lifecycle));
-        controllers.add(
-                new NotificationVolumePreferenceController(context, callback, lifecycle));
-        controllers.add(new RingVolumePreferenceController(context, callback, lifecycle));
+        // Volumes are added via xml
 
         // === Phone & notification ringtone ===
         controllers.add(new PhoneRingtonePreferenceController(context));
@@ -257,7 +260,7 @@ public class SoundSettings extends DashboardFragment {
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     return buildPreferenceControllers(context, null /* fragment */,
-                            null /* callback */, null /* lifecycle */);
+                            null /* lifecycle */);
                 }
 
                 @Override

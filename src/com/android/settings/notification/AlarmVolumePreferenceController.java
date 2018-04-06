@@ -20,32 +20,21 @@ import android.content.Context;
 import android.media.AudioManager;
 
 import com.android.internal.annotations.VisibleForTesting;
-import com.android.settings.notification.VolumeSeekBarPreference.Callback;
 import com.android.settings.R;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class AlarmVolumePreferenceController extends
     VolumeSeekBarPreferenceController {
 
     private static final String KEY_ALARM_VOLUME = "alarm_volume";
-    private AudioHelper mHelper;
 
-    public AlarmVolumePreferenceController(Context context, Callback callback,
-        Lifecycle lifecycle) {
-        this(context, callback, lifecycle, new AudioHelper(context));
-    }
-
-    @VisibleForTesting
-    AlarmVolumePreferenceController(Context context, Callback callback, Lifecycle lifecycle,
-        AudioHelper helper) {
-        super(context, callback, lifecycle);
-        mHelper = helper;
+    public AlarmVolumePreferenceController(Context context) {
+        super(context, KEY_ALARM_VOLUME);
     }
 
     @Override
-    public boolean isAvailable() {
+    public int getAvailabilityStatus() {
         return mContext.getResources().getBoolean(R.bool.config_show_alarm_volume)
-                && !mHelper.isSingleVolume();
+                && !mHelper.isSingleVolume() ? AVAILABLE : DISABLED_UNSUPPORTED;
     }
 
     @Override
@@ -62,5 +51,4 @@ public class AlarmVolumePreferenceController extends
     public int getMuteIcon() {
         return com.android.internal.R.drawable.ic_audio_alarm_mute;
     }
-
 }

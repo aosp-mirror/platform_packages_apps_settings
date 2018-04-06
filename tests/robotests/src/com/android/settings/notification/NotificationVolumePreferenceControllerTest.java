@@ -57,7 +57,8 @@ public class NotificationVolumePreferenceControllerTest {
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(Context.AUDIO_SERVICE)).thenReturn(mAudioManager);
         when(mContext.getSystemService(Context.VIBRATOR_SERVICE)).thenReturn(mVibrator);
-        mController = new NotificationVolumePreferenceController(mContext, null, null, mHelper);
+        mController = new NotificationVolumePreferenceController(mContext);
+        mController.setAudioHelper(mHelper);
     }
 
     @Test

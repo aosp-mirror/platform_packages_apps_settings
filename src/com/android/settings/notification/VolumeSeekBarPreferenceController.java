@@ -16,31 +16,37 @@
 
 package com.android.settings.notification;
 
+import android.arch.lifecycle.LifecycleObserver;
+import android.arch.lifecycle.OnLifecycleEvent;
 import android.content.Context;
 import android.support.v7.preference.PreferenceScreen;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.notification.VolumeSeekBarPreference.Callback;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnPause;
-import com.android.settingslib.core.lifecycle.events.OnResume;
 
 /**
  * Base class for preference controller that handles VolumeSeekBarPreference
  */
 public abstract class VolumeSeekBarPreferenceController extends
-        AdjustVolumeRestrictedPreferenceController implements LifecycleObserver, OnResume, OnPause {
+        AdjustVolumeRestrictedPreferenceController implements LifecycleObserver {
 
     protected VolumeSeekBarPreference mPreference;
     protected VolumeSeekBarPreference.Callback mVolumePreferenceCallback;
+    protected AudioHelper mHelper;
 
-    public VolumeSeekBarPreferenceController(Context context, Callback callback,
-            Lifecycle lifecycle) {
-        super(context);
+    public VolumeSeekBarPreferenceController(Context context, String key) {
+        super(context, key);
+        setAudioHelper(new AudioHelper(context));
+    }
+
+    @VisibleForTesting
+    void setAudioHelper(AudioHelper helper) {
+        mHelper = helper;
+    }
+
+    public void setCallback(Callback callback) {
         mVolumePreferenceCallback = callback;
-        if (lifecycle != null) {
-            lifecycle.addObserver(this);
-        }
     }
 
     @Override
@@ -54,18 +60,42 @@ public abstract class VolumeSeekBarPreferenceController extends
         }
     }
 
-    @Override
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     public void onResume() {
         if (mPreference != null) {
             mPreference.onActivityResume();
         }
     }
 
-    @Override
+    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     public void onPause() {
         if (mPreference != null) {
             mPreference.onActivityPause();
         }
+    }
+
+    @Override
+    public int getSliderPosition() {
+        if (mPreference != null) {
+            return mPreference.getProgress();
+        }
+        return mHelper.getStreamVolume(getAudioStream());
+    }
+
+    @Override
+    public boolean setSliderPosition(int position) {
+        if (mPreference != null) {
+            mPreference.setProgress(position);
+        }
+        return mHelper.setStreamVolume(getAudioStream(), position);
+    }
+
+    @Override
+    public int getMaxSteps() {
+        if (mPreference != null) {
+            return mPreference.getMax();
+        }
+        return mHelper.getMaxVolume(getAudioStream());
     }
 
     protected abstract int getAudioStream();

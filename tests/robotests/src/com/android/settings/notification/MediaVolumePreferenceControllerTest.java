@@ -35,8 +35,7 @@ public class MediaVolumePreferenceControllerTest {
 
     @Before
     public void setUp() {
-        mController =
-            new MediaVolumePreferenceController(RuntimeEnvironment.application, null, null);
+        mController = new MediaVolumePreferenceController(RuntimeEnvironment.application);
     }
 
     @Test
