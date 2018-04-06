@@ -16,6 +16,10 @@
 
 package com.android.settings.fuelgauge.batterytip;
 
+import static android.os.StatsDimensionsValue.FLOAT_VALUE_TYPE;
+import static android.os.StatsDimensionsValue.INT_VALUE_TYPE;
+import static android.os.StatsDimensionsValue.TUPLE_VALUE_TYPE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Matchers.any;
@@ -24,9 +28,11 @@ import static org.mockito.Matchers.anyLong;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.robolectric.RuntimeEnvironment.application;
 
 import android.app.StatsManager;
@@ -35,6 +41,8 @@ import android.app.job.JobScheduler;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.os.Process;
 import android.os.StatsDimensionsValue;
 import android.os.UserManager;
@@ -149,6 +157,21 @@ public class AnomalyDetectionJobServiceTest {
     }
 
     @Test
+    public void testSaveAnomalyToDatabase_uidNull_doNotSave() {
+        doReturn(AnomalyDetectionJobService.UID_NULL).when(
+                mAnomalyDetectionJobService).extractUidFromStatsDimensionsValue(any());
+
+        mAnomalyDetectionJobService.saveAnomalyToDatabase(mContext, mBatteryStatsHelper,
+                mUserManager, mBatteryDatabaseManager, mBatteryUtils, mPolicy,
+                mPowerWhitelistBackend, mContext.getContentResolver(),
+                mFeatureFactory.powerUsageFeatureProvider, mFeatureFactory.metricsFeatureProvider,
+                mBundle);
+
+        verify(mBatteryDatabaseManager, never()).insertAnomaly(anyInt(), anyString(), anyInt(),
+                anyInt(), anyLong());
+    }
+
+    @Test
     public void testSaveAnomalyToDatabase_normalAppWithAutoRestriction_save() {
         final ArrayList<String> cookies = new ArrayList<>();
         cookies.add(SUBSCRIBER_COOKIES_AUTO_RESTRICTION);
@@ -195,5 +218,36 @@ public class AnomalyDetectionJobServiceTest {
                 MetricsProto.MetricsEvent.ACTION_ANOMALY_TRIGGERED,
                 SYSTEM_PACKAGE,
                 Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, ANOMALY_TYPE));
+    }
+
+    @Test
+    public void testExtractUidFromStatsDimensionsValue_extractCorrectUid() {
+        // Build an integer dimensions value.
+        final StatsDimensionsValue intValue = mock(StatsDimensionsValue.class);
+        when(intValue.isValueType(INT_VALUE_TYPE)).thenReturn(true);
+        when(intValue.getField()).thenReturn(AnomalyDetectionJobService.STATSD_UID_FILED);
+        when(intValue.getIntValue()).thenReturn(UID);
+
+        // Build a tuple dimensions value and put the previous integer dimensions value inside.
+        final StatsDimensionsValue tupleValue = mock(StatsDimensionsValue.class);
+        when(tupleValue.isValueType(TUPLE_VALUE_TYPE)).thenReturn(true);
+        final List<StatsDimensionsValue> statsDimensionsValues = new ArrayList<>();
+        statsDimensionsValues.add(intValue);
+        when(tupleValue.getTupleValueList()).thenReturn(statsDimensionsValues);
+
+        assertThat(mAnomalyDetectionJobService.extractUidFromStatsDimensionsValue(
+                tupleValue)).isEqualTo(UID);
+    }
+
+    @Test
+    public void testExtractUidFromStatsDimensionsValue_wrongFormat_returnNull() {
+        // Build a float dimensions value
+        final StatsDimensionsValue floatValue = mock(StatsDimensionsValue.class);
+        when(floatValue.isValueType(FLOAT_VALUE_TYPE)).thenReturn(true);
+        when(floatValue.getField()).thenReturn(AnomalyDetectionJobService.STATSD_UID_FILED);
+        when(floatValue.getFloatValue()).thenReturn(0f);
+
+        assertThat(mAnomalyDetectionJobService.extractUidFromStatsDimensionsValue(
+                floatValue)).isEqualTo(AnomalyDetectionJobService.UID_NULL);
     }
 }
