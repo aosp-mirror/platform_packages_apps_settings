@@ -36,12 +36,14 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.inputmethod.InputMethodAndSubtypeUtil;
 import com.android.settingslib.inputmethod.InputMethodPreference;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@SearchIndexable
 public final class VirtualKeyboardFragment extends SettingsPreferenceFragment implements Indexable {
 
     private static final String ADD_VIRTUAL_KEYBOARD_SCREEN = "add_virtual_keyboard_screen";

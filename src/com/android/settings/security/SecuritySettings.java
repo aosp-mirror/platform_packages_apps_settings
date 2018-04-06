@@ -41,10 +41,12 @@ import com.android.settings.security.trustagent.TrustAgentListPreferenceControll
 import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@SearchIndexable
 public class SecuritySettings extends DashboardFragment {
 
     private static final String TAG = "SecuritySettings";

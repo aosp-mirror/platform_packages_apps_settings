@@ -16,6 +16,7 @@
 
 package com.android.settings.datausage;
 
+import static android.net.ConnectivityManager.TYPE_WIFI;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.DISABLED_UNSUPPORTED;
 import static com.google.common.truth.Truth.assertThat;
@@ -28,9 +29,11 @@ import static org.mockito.Mockito.when;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.net.NetworkTemplate;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -74,8 +77,6 @@ public class DataUsageSummaryPreferenceControllerTest {
     @Mock
     private DataUsageController mDataUsageController;
     @Mock
-    private DataUsageInfoController mDataInfoController;
-    @Mock
     private DataUsageSummaryPreference mSummaryPreference;
     @Mock
     private NetworkPolicyEditor mPolicyEditor;
@@ -89,6 +90,12 @@ public class DataUsageSummaryPreferenceControllerTest {
     private EntityHeaderController mHeaderController;
     @Mock
     private DataUsageSummary mDataUsageSummary;
+    @Mock
+    private TelephonyManager mTelephonyManager;
+    @Mock
+    private ConnectivityManager mConnectivityManager;
+
+    private DataUsageInfoController mDataInfoController;
 
     private FakeFeatureFactory mFactory;
     private Activity mActivity;
@@ -103,12 +110,18 @@ public class DataUsageSummaryPreferenceControllerTest {
         doReturn("%1$s %2%s").when(mContext)
             .getString(com.android.internal.R.string.fileSizeSuffix);
 
-        mActivity = Robolectric.setupActivity(Activity.class);
         mFactory = FakeFeatureFactory.setupForTest();
         when(mFactory.metricsFeatureProvider.getMetricsCategory(any(Object.class)))
                 .thenReturn(MetricsProto.MetricsEvent.SETTINGS_APP_NOTIF_CATEGORY);
         ShadowEntityHeaderController.setUseMock(mHeaderController);
+        mDataInfoController = new DataUsageInfoController();
 
+        mActivity = spy(Robolectric.buildActivity(Activity.class).get());
+        when(mActivity.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
+        when(mActivity.getSystemService(ConnectivityManager.class))
+                .thenReturn(mConnectivityManager);
+        when(mTelephonyManager.getSimState()).thenReturn(TelephonyManager.SIM_STATE_READY);
+        when(mConnectivityManager.isNetworkSupported(TYPE_WIFI)).thenReturn(false);
         mController = new DataUsageSummaryPreferenceController(
                 mDataUsageController,
                 mDataInfoController,
@@ -146,6 +159,7 @@ public class DataUsageSummaryPreferenceControllerTest {
         verify(mSummaryPreference).setUsageInfo(info.cycleEnd, now - UPDATE_BACKOFF_MS,
                 CARRIER_NAME, 1 /* numPlans */, intent);
         verify(mSummaryPreference).setChartEnabled(true);
+        verify(mSummaryPreference).setWifiMode(false, null);
     }
 
     @Test
@@ -169,6 +183,7 @@ public class DataUsageSummaryPreferenceControllerTest {
         verify(mSummaryPreference).setUsageInfo(info.cycleEnd, now - UPDATE_BACKOFF_MS,
                 CARRIER_NAME, 0 /* numPlans */, intent);
         verify(mSummaryPreference).setChartEnabled(true);
+        verify(mSummaryPreference).setWifiMode(false, null);
     }
 
     @Test
@@ -194,6 +209,7 @@ public class DataUsageSummaryPreferenceControllerTest {
                 0 /* numPlans */,
                 null /* launchIntent */);
         verify(mSummaryPreference).setChartEnabled(true);
+        verify(mSummaryPreference).setWifiMode(false, null);
     }
 
     @Test
@@ -220,6 +236,7 @@ public class DataUsageSummaryPreferenceControllerTest {
                 0 /* numPlans */,
                 null /* launchIntent */);
         verify(mSummaryPreference).setChartEnabled(false);
+        verify(mSummaryPreference).setWifiMode(false, null);
     }
 
     @Test
@@ -300,6 +317,30 @@ public class DataUsageSummaryPreferenceControllerTest {
         verify(mSummaryPreference).setLimitInfo(captor.capture());
         CharSequence value = captor.getValue();
         assertThat(value.toString()).isEqualTo("1.00 MB data warning / 1.00 MB data limit");
+        verify(mSummaryPreference).setWifiMode(false, null);
+    }
+
+    @Test
+    public void testSummaryUpdate_noSim_shouldSetWifiMode() {
+        final long now = System.currentTimeMillis();
+        final DataUsageController.DataUsageInfo info = createTestDataUsageInfo(now);
+        info.warningLevel = 1000000L;
+        info.limitLevel = 1000000L;
+
+        final Intent intent = new Intent();
+
+        when(mDataUsageController.getDataUsageInfo(any())).thenReturn(info);
+        mController.setPlanValues(0 /* dataPlanCount */, LIMIT1, USAGE1);
+        mController.setCarrierValues(CARRIER_NAME, now - UPDATE_BACKOFF_MS, info.cycleEnd, intent);
+
+        when(mTelephonyManager.getSimState()).thenReturn(TelephonyManager.SIM_STATE_ABSENT);
+        mController.updateState(mSummaryPreference);
+
+        verify(mSummaryPreference).setWifiMode(true, info.period);
+        verify(mSummaryPreference).setLimitInfo(null);
+        verify(mSummaryPreference).setUsageNumbers(info.usageLevel, -1L, true);
+        verify(mSummaryPreference).setChartEnabled(false);
+        verify(mSummaryPreference).setUsageInfo(info.cycleEnd, -1L, null, 0, null);
     }
 
     @Test
@@ -321,7 +362,7 @@ public class DataUsageSummaryPreferenceControllerTest {
     }
 
     @Test
-    public void testMobileData_preferenceDisabled() {
+    public void testMobileData_noSimNoWifi_preferenceDisabled() {
         mController = new DataUsageSummaryPreferenceController(
                 mDataUsageController,
                 mDataInfoController,
@@ -332,8 +373,26 @@ public class DataUsageSummaryPreferenceControllerTest {
                 mSubscriptionManager,
                 mActivity, null, null, null);
 
-        when(mSubscriptionManager.getDefaultDataSubscriptionInfo()).thenReturn(null);
+        when(mTelephonyManager.getSimState()).thenReturn(TelephonyManager.SIM_STATE_ABSENT);
+        when(mConnectivityManager.isNetworkSupported(TYPE_WIFI)).thenReturn(false);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_UNSUPPORTED);
+    }
+
+    @Test
+    public void testMobileData_noSimWifi_preferenceDisabled() {
+        mController = new DataUsageSummaryPreferenceController(
+                mDataUsageController,
+                mDataInfoController,
+                mNetworkTemplate,
+                mPolicyEditor,
+                R.string.cell_data_template,
+                true,
+                mSubscriptionManager,
+                mActivity, null, null, null);
+
+        when(mTelephonyManager.getSimState()).thenReturn(TelephonyManager.SIM_STATE_ABSENT);
+        when(mConnectivityManager.isNetworkSupported(TYPE_WIFI)).thenReturn(true);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test

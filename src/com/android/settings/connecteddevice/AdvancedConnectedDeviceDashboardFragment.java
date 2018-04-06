@@ -28,6 +28,7 @@ import com.android.settings.print.PrintSettingPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,6 +37,7 @@ import java.util.List;
 /**
  * This fragment contains all the advanced connection preferences(i.e, Bluetooth, NFC, USB..)
  */
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class AdvancedConnectedDeviceDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "AdvancedConnectedDeviceFrag";

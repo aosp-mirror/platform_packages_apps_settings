@@ -34,7 +34,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
-import com.android.settings.search.SearchIndexableResources;
+import com.android.settingslib.search.SearchIndexableResources;
 
 import org.junit.Before;
 import org.junit.Test;

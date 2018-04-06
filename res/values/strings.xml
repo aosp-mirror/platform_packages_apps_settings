@@ -6690,6 +6690,8 @@
     <string name="help_uri_private_dns" translatable="false"></string>
     <string name="help_uri_about_phone_v2" translatable="false"></string>
     <string name="help_uri_wifi_calling" translatable="false"></string>
+    <!-- url for the wifi scanning required dialog help page -->
+    <string name="help_uri_wifi_scanning_required" translatable="false"></string>
 
     <!-- User account title [CHAR LIMIT=30] -->
     <string name="user_account_title">Account for content</string>
@@ -7067,6 +7069,9 @@
 
     <!-- Sound: Title for the option managing media volume. [CHAR LIMIT=30] -->
     <string name="media_volume_option_title">Media volume</string>
+
+    <!-- Sound: Title for the option managing call volume. [CHAR LIMIT=30] -->
+    <string name="call_volume_option_title">Call volume</string>
 
     <!-- Sound: Title for the option managing alarm volume. [CHAR LIMIT=30] -->
     <string name="alarm_volume_option_title">Alarm volume</string>
@@ -8710,6 +8715,9 @@
     <!-- Summary of data usage [CHAR LIMIT=NONE] -->
     <string name="data_usage_summary_format"><xliff:g id="amount" example="50%">%1$s</xliff:g> of data used</string>
 
+    <!-- Summary of data usage [CHAR LIMIT=NONE] -->
+    <string name="data_usage_wifi_format"><xliff:g id="amount" example="50%">^1</xliff:g> used on Wi\u2011Fi</string>
+
     <!-- Summary of notifications [CHAR LIMIT=NONE] -->
     <plurals name="notification_summary">
         <item quantity="one">Off for 1 app</item>
@@ -8774,6 +8782,8 @@
     <string name="disabled_by_policy_title_screen_capture">Screenshot not allowed</string>
     <!-- Title for dialog displayed to tell user that turning off backups is disallowed by an admin [CHAR LIMIT=50] -->
     <string name="disabled_by_policy_title_turn_off_backups">Can\'t turn off backups</string>
+    <!-- Title for dialog displayed to tell user that the app was suspended by an admin [CHAR LIMIT=50] -->
+    <string name="disabled_by_policy_title_suspend_packages">Can\'t open this app</string>
     <!-- Shown when the user tries to change a settings locked by an admin [CHAR LIMIT=200] -->
     <string name="default_admin_support_msg">If you have questions, contact your IT admin</string>
     <!-- Shown in dialog to allow user to see more information about the device admin [CHAR LIMIT=30] -->
@@ -8945,7 +8955,7 @@
     <string name="app_cellular_data_usage">App data usage</string>
 
     <!-- Label for wifi data usage in data usage screen [CHAR LIMIT=60] -->
-    <string name="wifi_data_usage">Wi-Fi data usage</string>
+    <string name="wifi_data_usage">Wi\u2011Fi data usage</string>
 
     <!-- Label for ethernet data usage in data usage screen [CHAR LIMIT=60] -->
     <string name="ethernet_data_usage">Ethernet data usage</string>
@@ -9038,6 +9048,9 @@
     <!-- Data usage title text [CHAR LIMIT=30] -->
     <string name="data_usage_title">Primary data</string>
 
+    <!-- Alternative data usage title text for Wi-Fi only mode [CHAR LIMIT=30] -->
+    <string name="data_usage_wifi_title">Wi\u2011Fi data</string>
+
     <!-- Data usage remaining string [CHAR LIMIT=30] -->
     <string name="data_used"><xliff:g name="bytes" example="2 GB">^1</xliff:g> used</string>
 
@@ -9076,6 +9089,9 @@
 
     <!-- Button to launch external data plan app [CHAR LIMIT=30] -->
     <string name="launch_mdp_app_text">View plan</string>
+
+    <!-- Alternate launch button text for Wi-Fi only mode [CHAR LIMIT=30] -->
+    <string name="launch_wifi_text">View details</string>
 
     <!-- Name of Data Saver screens [CHAR LIMIT=30] -->
     <string name="data_saver_title">Data Saver</string>

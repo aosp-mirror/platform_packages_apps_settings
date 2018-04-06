@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.network;
+
+import static android.content.Context.TELEPHONY_SERVICE;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -47,9 +49,11 @@ import android.view.View.OnKeyListener;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.util.ArrayUtils;
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.Arrays;
@@ -57,11 +61,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static android.content.Context.TELEPHONY_SERVICE;
-
-/**
- * TODO(b/77339683): After loading all changes, please move this to network package.
- */
 public class ApnEditor extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener, OnKeyListener {
 

@@ -30,6 +30,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.display.DisplayDensityUtils;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,7 @@ import java.util.List;
 /**
  * Preference fragment used to control screen zoom.
  */
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class ScreenZoomSettings extends PreviewSeekBarPreferenceFragment implements Indexable {
 
     private int mDefaultDensity;

@@ -46,6 +46,7 @@ import com.android.settings.search.Indexable;
 import com.android.settings.widget.ActionButtonPreference;
 import com.android.settings.widget.GearPreference;
 import com.android.settings.widget.SeekBarPreference;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,6 +59,7 @@ import java.util.MissingResourceException;
 import java.util.Objects;
 import java.util.Set;
 
+@SearchIndexable
 public class TextToSpeechSettings extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener,
         GearPreference.OnGearClickListener, Indexable {

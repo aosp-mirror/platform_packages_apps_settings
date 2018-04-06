@@ -36,10 +36,12 @@ import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.accessibility.AccessibilityUtils;
+import com.android.settingslib.search.SearchIndexable;
 
 /**
  * Settings page for accessibility shortcut
  */
+@SearchIndexable
 public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePreferenceFragment
         implements Indexable {
 

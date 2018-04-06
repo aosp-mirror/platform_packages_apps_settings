@@ -128,6 +128,10 @@ public class ActionDisabledByAdminDialogHelperTest {
         assertEquals(Shadows.shadowOf(textView).innerText(),
                 mActivity.getString(R.string.disabled_by_policy_title_turn_off_backups));
 
+        mHelper.setAdminSupportTitle(view, DevicePolicyManager.POLICY_SUSPEND_PACKAGES);
+        assertEquals(Shadows.shadowOf(textView).innerText(),
+                mActivity.getString(R.string.disabled_by_policy_title_suspend_packages));
+
         mHelper.setAdminSupportTitle(view, "another restriction");
         assertEquals(Shadows.shadowOf(textView).innerText(),
                 mActivity.getString(R.string.disabled_by_policy_title));

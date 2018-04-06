@@ -26,7 +26,6 @@ import android.net.wifi.WifiManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.SwitchWidgetController;
-import com.android.settings.wrapper.ConnectivityManagerWrapper;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
@@ -43,7 +42,7 @@ public class WifiEnablerTest {
     @Mock
     private WifiManager mWifiManager;
     @Mock
-    private ConnectivityManagerWrapper mConnectivityManager;
+    private ConnectivityManager mConnectivityManager;
 
     private WifiEnabler mEnabler;
 
@@ -52,7 +51,7 @@ public class WifiEnablerTest {
         MockitoAnnotations.initMocks(this);
         when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
         mEnabler = new WifiEnabler(mContext, mock(SwitchWidgetController.class),
-            mock(MetricsFeatureProvider.class), mConnectivityManager);
+                mock(MetricsFeatureProvider.class), mConnectivityManager);
     }
 
     @Test

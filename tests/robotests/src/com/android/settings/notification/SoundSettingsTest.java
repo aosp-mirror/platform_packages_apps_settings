@@ -24,8 +24,10 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.media.AudioManager;
+import android.os.Handler;
 import android.os.UserManager;
 
+import android.preference.SeekBarVolumizer;
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
@@ -36,6 +38,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
@@ -44,7 +47,7 @@ public class SoundSettingsTest {
 
     @Test
     @Config(shadows = {ShadowUserManager.class, ShadowAudioHelper.class})
-    public void testNonIndexableKeys_existInXmlLayout() {
+    public void getNonIndexableKeys_existInXmlLayout() {
         final Context context = spy(RuntimeEnvironment.application);
         AudioManager audioManager = mock(AudioManager.class);
         doReturn(audioManager).when(context).getSystemService(Context.AUDIO_SERVICE);
@@ -65,5 +68,17 @@ public class SoundSettingsTest {
         keys.add("notification_volume");
 
         assertThat(keys).containsAllIn(niks);
+    }
+
+    @Test
+    public void onStreamValueChanged_shouldRepostStopSampleMessage() {
+        final SoundSettings settings = new SoundSettings();
+        final Handler handler = settings.mHandler;
+        ReflectionHelpers.setField(
+                settings.mVolumeCallback, "mCurrent", mock(SeekBarVolumizer.class));
+
+        settings.mVolumeCallback.onStreamValueChanged(0, 5);
+
+        assertThat(settings.mHandler.hasMessages(SoundSettings.STOP_SAMPLE)).isTrue();
     }
 }

@@ -23,11 +23,11 @@ import static org.mockito.Mockito.when;
 import android.Manifest;
 import android.app.AppOpsManager;
 import android.content.Context;
+import android.content.pm.IPackageManager;
 import android.os.RemoteException;
 import android.os.UserManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.wrapper.IPackageManagerWrapper;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
 import org.junit.Before;
@@ -41,7 +41,7 @@ public final class AppStateAppOpsBridgeTest {
 
     @Mock private Context mContext;
     @Mock private UserManager mUserManager;
-    @Mock private IPackageManagerWrapper mPackageManagerService;
+    @Mock private IPackageManager mPackageManagerService;
     @Mock private AppOpsManager mAppOpsManager;
 
     @Before

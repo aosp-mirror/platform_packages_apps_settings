@@ -17,7 +17,6 @@
 package com.android.settings.deviceinfo.storage;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
@@ -31,11 +30,11 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.UserInfo;
 import android.net.TrafficStats;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.support.test.filters.SmallTest;
 import android.support.test.runner.AndroidJUnit4;
 import android.util.SparseArray;
 
-import com.android.settings.wrapper.UserManagerWrapper;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
@@ -65,7 +64,7 @@ public class StorageAsyncLoaderTest {
     @Mock
     private PackageManagerWrapper mPackageManager;
     @Mock
-    private UserManagerWrapper mUserManager;
+    private UserManager mUserManager;
     private List<ApplicationInfo> mInfo = new ArrayList<>();
     private List<UserInfo> mUsers;
 

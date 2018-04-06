@@ -25,6 +25,7 @@ import android.os.Message;
 import android.os.UserHandle;
 import android.preference.SeekBarVolumizer;
 import android.provider.SearchIndexableResource;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 
@@ -36,11 +37,13 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@SearchIndexable
 public class SoundSettings extends DashboardFragment {
     private static final String TAG = "SoundSettings";
 
@@ -50,8 +53,22 @@ public class SoundSettings extends DashboardFragment {
 
     private static final int SAMPLE_CUTOFF = 2000;  // manually cap sample playback at 2 seconds
 
-    private final VolumePreferenceCallback mVolumeCallback = new VolumePreferenceCallback();
-    private final H mHandler = new H();
+    @VisibleForTesting
+    static final int STOP_SAMPLE = 1;
+
+    @VisibleForTesting
+    final VolumePreferenceCallback mVolumeCallback = new VolumePreferenceCallback();
+    @VisibleForTesting
+    final Handler mHandler = new Handler(Looper.getMainLooper()) {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case STOP_SAMPLE:
+                    mVolumeCallback.stopSample();
+                    break;
+            }
+        }
+    };
 
     private RingtonePreference mRequestPreference;
 
@@ -140,39 +157,22 @@ public class SoundSettings extends DashboardFragment {
             }
             mCurrent = sbv;
             if (mCurrent != null) {
-                mHandler.removeMessages(H.STOP_SAMPLE);
-                mHandler.sendEmptyMessageDelayed(H.STOP_SAMPLE, SAMPLE_CUTOFF);
+                mHandler.removeMessages(STOP_SAMPLE);
+                mHandler.sendEmptyMessageDelayed(STOP_SAMPLE, SAMPLE_CUTOFF);
             }
         }
 
         @Override
         public void onStreamValueChanged(int stream, int progress) {
-            // noop
+            if (mCurrent != null) {
+                mHandler.removeMessages(STOP_SAMPLE);
+                mHandler.sendEmptyMessageDelayed(STOP_SAMPLE, SAMPLE_CUTOFF);
+            }
         }
 
         public void stopSample() {
             if (mCurrent != null) {
                 mCurrent.stopSample();
-            }
-        }
-    }
-
-    // === Callbacks ===
-
-
-    private final class H extends Handler {
-        private static final int STOP_SAMPLE = 1;
-
-        private H() {
-            super(Looper.getMainLooper());
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case STOP_SAMPLE:
-                    mVolumeCallback.stopSample();
-                    break;
             }
         }
     }

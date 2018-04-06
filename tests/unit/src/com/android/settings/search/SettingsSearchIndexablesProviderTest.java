@@ -21,11 +21,13 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.platform.test.annotations.Presubmit;
 import android.provider.SearchIndexablesContract;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.SmallTest;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,10 +38,14 @@ public class SettingsSearchIndexablesProviderTest {
 
     private Context mContext;
 
-
     @Before
     public void setUp() {
         mContext = InstrumentationRegistry.getTargetContext();
+    }
+
+    @After
+    public void cleanUp() {
+        System.clearProperty(SettingsSearchIndexablesProvider.SYSPROP_CRASH_ON_ERROR);
     }
 
     @Test
@@ -58,5 +64,22 @@ public class SettingsSearchIndexablesProviderTest {
                     SearchIndexablesContract.SiteMapColumns.CHILD_CLASS)))
                     .isNotEmpty();
         }
+    }
+
+    /**
+     * All {@link Indexable.SearchIndexProvider} should collect a list of non-indexable keys
+     * without crashing. This test enables crashing of individual providers in the indexing pipeline
+     * and checks that there are no crashes.
+     */
+    @Test
+    @Presubmit
+    public void nonIndexableKeys_shouldNotCrash() {
+        // Allow crashes in the indexing pipeline.
+        System.setProperty(SettingsSearchIndexablesProvider.SYSPROP_CRASH_ON_ERROR,
+                "enabled");
+
+        final Uri uri = Uri.parse("content://" + mContext.getPackageName() + "/" +
+                SearchIndexablesContract.NON_INDEXABLES_KEYS_PATH);
+        mContext.getContentResolver().query(uri, null, null, null, null);
     }
 }

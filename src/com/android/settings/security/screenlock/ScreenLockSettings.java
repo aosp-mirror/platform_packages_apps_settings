@@ -30,10 +30,12 @@ import com.android.settings.search.Indexable;
 import com.android.settings.security.OwnerInfoPreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@SearchIndexable
 public class ScreenLockSettings extends DashboardFragment
         implements OwnerInfoPreferenceController.OwnerInfoCallback {
 

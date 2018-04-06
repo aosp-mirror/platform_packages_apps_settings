@@ -121,9 +121,15 @@ public class DirectoryAccessDetails extends AppInfoBase {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final Context context = getPrefContext();
         addPreferencesFromResource(R.xml.directory_access_details);
+
+    }
+
+    @Override
+    protected boolean refreshUi() {
+        final Context context = getPrefContext();
         final PreferenceScreen prefsGroup = getPreferenceScreen();
+        prefsGroup.removeAll();
 
         final Map<String, ExternalVolume> externalVolumes = new HashMap<>();
 
@@ -135,14 +141,14 @@ public class DirectoryAccessDetails extends AppInfoBase {
                 TABLE_PERMISSIONS_COLUMNS, null, new String[] { mPackageName }, null)) {
             if (cursor == null) {
                 Log.w(TAG, "Didn't get cursor for " + mPackageName);
-                return;
+                return true;
             }
             final int count = cursor.getCount();
             if (count == 0) {
                 // This setting screen should not be reached if there was no permission, so just
                 // ignore it
                 Log.w(TAG, "No permissions for " + mPackageName);
-                return;
+                return true;
             }
 
             while (cursor.moveToNext()) {
@@ -163,9 +169,14 @@ public class DirectoryAccessDetails extends AppInfoBase {
                 }
 
                 if (uuid == null) {
-                    // Primary storage entry: add right away
-                    prefsGroup.addPreference(newPreference(context, dir, providerUri,
-                            /* uuid= */ null, dir, granted, /* children= */ null));
+                    if (dir == null) {
+                        // Sanity check, shouldn't happen
+                        Log.wtf(TAG, "Ignoring permission on primary storage root");
+                    } else {
+                        // Primary storage entry: add right away
+                        prefsGroup.addPreference(newPreference(context, dir, providerUri,
+                                /* uuid= */ null, dir, granted, /* children= */ null));
+                    }
                 } else {
                     // External volume entry: save it for later.
                     ExternalVolume externalVolume = externalVolumes.get(uuid);
@@ -190,7 +201,7 @@ public class DirectoryAccessDetails extends AppInfoBase {
 
         if (externalVolumes.isEmpty()) {
             // We're done!
-            return;
+            return true;
         }
 
         // Add entries from external volumes
@@ -200,7 +211,7 @@ public class DirectoryAccessDetails extends AppInfoBase {
         final List<VolumeInfo> volumes = sm.getVolumes();
         if (volumes.isEmpty()) {
             Log.w(TAG, "StorageManager returned no secondary volumes");
-            return;
+            return true;
         }
         final Map<String, String> volumeNames = new HashMap<>(volumes.size());
         for (VolumeInfo volume : volumes) {
@@ -243,6 +254,7 @@ public class DirectoryAccessDetails extends AppInfoBase {
                 children.add(childPref);
             });
         }
+        return true;
     }
 
     private SwitchPreference newPreference(Context context, String title, Uri providerUri,
@@ -285,11 +297,6 @@ public class DirectoryAccessDetails extends AppInfoBase {
         if (DEBUG) {
             Log.d(TAG, "Updated " + updated + " entries for " + uuid + "/" + directory);
         }
-    }
-
-    @Override
-    protected boolean refreshUi() {
-        return true;
     }
 
     @Override

@@ -180,13 +180,11 @@ public class VpnPreferenceController extends AbstractPreferenceController
             mNetworkCallback = new ConnectivityManager.NetworkCallback() {
         @Override
         public void onAvailable(Network network) {
-            Log.d(TAG, "onAvailable " + network.netId);
             updateSummary();
         }
 
         @Override
         public void onLost(Network network) {
-            Log.d(TAG, "onLost " + network.netId);
             updateSummary();
         }
     };

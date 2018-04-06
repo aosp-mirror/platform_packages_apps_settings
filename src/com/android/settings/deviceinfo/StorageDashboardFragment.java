@@ -47,17 +47,18 @@ import com.android.settings.deviceinfo.storage.VolumeSizesLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.widget.EntityHeaderController;
-import com.android.settings.wrapper.UserManagerWrapper;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
+import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@SearchIndexable
 public class StorageDashboardFragment extends DashboardFragment
         implements
         LoaderManager.LoaderCallbacks<SparseArray<StorageAsyncLoader.AppsStorageResult>> {
@@ -185,8 +186,7 @@ public class StorageDashboardFragment extends DashboardFragment
                 mVolume, new StorageManagerVolumeProvider(sm));
         controllers.add(mPreferenceController);
 
-        UserManagerWrapper userManager =
-                new UserManagerWrapper(context.getSystemService(UserManager.class));
+        final UserManager userManager = context.getSystemService(UserManager.class);
         mSecondaryUsers = SecondaryUserController.getSecondaryUserControllers(context, userManager);
         controllers.addAll(mSecondaryUsers);
 
@@ -235,8 +235,7 @@ public class StorageDashboardFragment extends DashboardFragment
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     final StorageManager sm = context.getSystemService(StorageManager.class);
-                    final UserManagerWrapper userManager =
-                            new UserManagerWrapper(context.getSystemService(UserManager.class));
+                    final UserManager userManager = context.getSystemService(UserManager.class);
                     final List<AbstractPreferenceController> controllers = new ArrayList<>();
                     controllers.add(new StorageSummaryDonutPreferenceController(context));
                     controllers.add(new StorageItemPreferenceController(context, null /* host */,
@@ -251,9 +250,8 @@ public class StorageDashboardFragment extends DashboardFragment
     @Override
     public Loader<SparseArray<StorageAsyncLoader.AppsStorageResult>> onCreateLoader(int id,
             Bundle args) {
-        Context context = getContext();
-        return new StorageAsyncLoader(context,
-                new UserManagerWrapper(context.getSystemService(UserManager.class)),
+        final Context context = getContext();
+        return new StorageAsyncLoader(context, context.getSystemService(UserManager.class),
                 mVolume.fsUuid,
                 new StorageStatsSource(context),
                 new PackageManagerWrapper(context.getPackageManager()));

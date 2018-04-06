@@ -26,11 +26,13 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@SearchIndexable
 public class EnterprisePrivacySettings extends DashboardFragment {
 
     static final String TAG = "EnterprisePrivacySettings";
@@ -82,6 +84,7 @@ public class EnterprisePrivacySettings extends DashboardFragment {
         exposureChangesCategoryControllers.add(new CaCertsCurrentUserPreferenceController(context));
         exposureChangesCategoryControllers.add(new CaCertsManagedProfilePreferenceController(
                 context));
+        exposureChangesCategoryControllers.add(new BackupsEnabledPreferenceController(context));
         controllers.addAll(exposureChangesCategoryControllers);
         controllers.add(new PreferenceCategoryController(context, "exposure_changes_category")
                 .setChildren(exposureChangesCategoryControllers));

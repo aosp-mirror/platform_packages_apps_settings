@@ -64,8 +64,8 @@ import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.widget.SummaryUpdater.OnSummaryChangeListener;
 import com.android.settings.widget.SwitchBarController;
 import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
-import com.android.settings.wrapper.ConnectivityManagerWrapper;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPoint.AccessPointListener;
 import com.android.settingslib.wifi.AccessPointPreference;
@@ -83,6 +83,7 @@ import java.util.List;
  * The second is for Setup Wizard, with a simplified interface that hides the action bar
  * and menus.
  */
+@SearchIndexable
 public class WifiSettings extends RestrictedSettingsFragment
         implements Indexable, WifiTracker.WifiListener, AccessPointListener,
         WifiDialog.WifiDialogListener {
@@ -852,9 +853,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                     pref.getAccessPoint().saveWifiState(pref.getExtras());
                     if (mCaptivePortalNetworkCallback != null
                             && mCaptivePortalNetworkCallback.isCaptivePortal()) {
-                        ConnectivityManagerWrapper connectivityManagerWrapper =
-                                new ConnectivityManagerWrapper(mConnectivityManager);
-                        connectivityManagerWrapper.startCaptivePortalApp(
+                        mConnectivityManager.startCaptivePortalApp(
                                 mCaptivePortalNetworkCallback.getNetwork());
                     } else {
                         launchNetworkDetailsFragment(pref);

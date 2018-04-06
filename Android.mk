@@ -24,6 +24,7 @@ LOCAL_STATIC_ANDROID_LIBRARIES := \
     android-slices-builders \
     android-slices-core \
     android-slices-view \
+    android-support-compat \
     android-support-v4 \
     android-support-v13 \
     android-support-v7-appcompat \
@@ -54,6 +55,7 @@ endif
 
 include frameworks/opt/setupwizard/library/common-gingerbread.mk
 include frameworks/base/packages/SettingsLib/common.mk
+include frameworks/base/packages/SettingsLib/search/common.mk
 
 include $(BUILD_PACKAGE)
 

@@ -16,14 +16,13 @@
 
 package com.android.settings.slices;
 
+import static androidx.slice.builders.ListBuilder.ICON_IMAGE;
 import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
 import static com.android.settings.core.BasePreferenceController.DISABLED_FOR_USER;
 import static com.android.settings.core.BasePreferenceController.DISABLED_UNSUPPORTED;
 import static com.android.settings.core.BasePreferenceController.UNAVAILABLE_UNKNOWN;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_KEY;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_PLATFORM_DEFINED;
-
-import static androidx.slice.builders.ListBuilder.ICON_IMAGE;
 
 import android.app.PendingIntent;
 import android.content.ContentResolver;
@@ -37,17 +36,20 @@ import android.text.TextUtils;
 import android.util.Pair;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SliderPreferenceController;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
+import android.support.v4.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
-import androidx.slice.builders.SliceAction;
 import androidx.slice.builders.ListBuilder;
+import androidx.slice.builders.SliceAction;
 
 
 /**
@@ -67,7 +69,12 @@ public class SliceBuilderUtils {
      */
     public static Slice buildSlice(Context context, SliceData sliceData) {
         final BasePreferenceController controller = getPreferenceController(context, sliceData);
-
+        final Pair<Integer, Object> sliceNamePair =
+                Pair.create(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_NAME, sliceData.getKey());
+        // Log Slice requests using the same schema as SharedPreferenceLogger (but with a different
+        // action name).
+        FeatureFactory.getFactory(context).getMetricsFeatureProvider()
+                .action(context, MetricsEvent.ACTION_SETTINGS_SLICE_REQUESTED, sliceNamePair);
         if (!controller.isAvailable()) {
             return buildUnavailableSlice(context, sliceData, controller);
         }
@@ -164,7 +171,7 @@ public class SliceBuilderUtils {
                         .setTitle(sliceData.getTitle())
                         .setTitleItem(icon, ICON_IMAGE)
                         .setSubtitle(subtitleText)
-                        .setPrimaryAction(new SliceAction(contentIntent, null, null))
+                        .setPrimaryAction(new SliceAction(contentIntent, (IconCompat) null, null))
                         .addEndItem(sliceAction))
                 .build();
     }
@@ -180,7 +187,7 @@ public class SliceBuilderUtils {
                         .setTitle(sliceData.getTitle())
                         .setTitleItem(icon, ICON_IMAGE)
                         .setSubtitle(subtitleText)
-                        .setPrimaryAction(new SliceAction(contentIntent, null, null)))
+                        .setPrimaryAction(new SliceAction(contentIntent, (IconCompat) null, null)))
                 .build();
     }
 
@@ -284,24 +291,25 @@ public class SliceBuilderUtils {
         switch (controller.getAvailabilityStatus()) {
             case DISABLED_UNSUPPORTED:
                 summary = context.getString(R.string.unsupported_setting_summary);
-                primaryAction = new SliceAction(getSettingsIntent(context), null /* actionIcon */,
+                primaryAction = new SliceAction(getSettingsIntent(context),
+                        (IconCompat) null /* actionIcon */,
                         null /* actionTitle */);
                 break;
             case DISABLED_FOR_USER:
                 summary = context.getString(R.string.disabled_for_user_setting_summary);
                 primaryAction = new SliceAction(getContentIntent(context, data),
-                        null /* actionIcon */, null /* actionTitle */);
+                        (IconCompat) null /* actionIcon */, null /* actionTitle */);
                 break;
             case DISABLED_DEPENDENT_SETTING:
                 summary = context.getString(R.string.disabled_dependent_setting_summary);
                 primaryAction = new SliceAction(getContentIntent(context, data),
-                        null /* actionIcon */, null /* actionTitle */);
+                        (IconCompat) null /* actionIcon */, null /* actionTitle */);
                 break;
             case UNAVAILABLE_UNKNOWN:
             default:
                 summary = context.getString(R.string.unknown_unavailability_setting_summary);
                 primaryAction = new SliceAction(getSettingsIntent(context),
-                        null /* actionIcon */, null /* actionTitle */);
+                        (IconCompat) null /* actionIcon */, null /* actionTitle */);
         }
 
         return new ListBuilder(context, data.getUri())

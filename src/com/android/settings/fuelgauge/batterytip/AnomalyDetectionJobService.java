@@ -144,7 +144,8 @@ public class AnomalyDetectionJobService extends JobService {
             if (!powerWhitelistBackend.isSysWhitelistedExceptIdle(packageName)
                     && !isSystemUid(uid)) {
                 boolean anomalyDetected = true;
-                if (anomalyInfo.anomalyType == StatsManagerConfig.AnomalyType.EXCESSIVE_BG) {
+                if (anomalyInfo.anomalyType
+                        == StatsManagerConfig.AnomalyType.EXCESSIVE_BACKGROUND_SERVICE) {
                     if (!batteryUtils.isPreOApp(packageName)
                             || !batteryUtils.isAppHeavilyUsed(batteryStatsHelper, userManager, uid,
                             policy.excessiveBgDrainPercentage)) {

@@ -18,12 +18,19 @@ package com.android.settings.applications;
 
 import static android.content.pm.ApplicationInfo.FLAG_ALLOW_CLEAR_USER_DATA;
 import static android.content.pm.ApplicationInfo.FLAG_SYSTEM;
+import static android.os.storage.StorageVolume.ScopedAccessProviderContract.AUTHORITY;
+import static android.os.storage.StorageVolume.ScopedAccessProviderContract.COL_GRANTED;
+import static android.os.storage.StorageVolume.ScopedAccessProviderContract.TABLE_PERMISSIONS;
+
+import static com.android.settings.applications.AppStateDirectoryAccessBridge.DEBUG;
 
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.AppGlobals;
 import android.app.GrantedUriPermission;
 import android.app.LoaderManager;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -32,6 +39,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageDataObserver;
 import android.content.pm.PackageManager;
 import android.content.pm.ProviderInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -369,7 +377,7 @@ public class AppStorageSettings extends AppInfoWithHeader
         boolean res = am.clearApplicationUserData(packageName, mClearDataObserver);
         if (!res) {
             // Clearing data failed for some obscure reason. Just log error for now
-            Log.i(TAG, "Couldnt clear application user data for package:" + packageName);
+            Log.i(TAG, "Couldn't clear application user data for package:" + packageName);
             showDialogInner(DLG_CANNOT_CLEAR_DATA, 0);
         } else {
             mButtonsPref.setButton1Text(R.string.recompute_size);
@@ -449,10 +457,23 @@ public class AppStorageSettings extends AppInfoWithHeader
     }
 
     private void clearUriPermissions() {
+        final Context context = getActivity();
+        final String packageName = mAppEntry.info.packageName;
         // Synchronously revoke the permissions.
-        final ActivityManager am = (ActivityManager) getActivity().getSystemService(
+        final ActivityManager am = (ActivityManager) context.getSystemService(
                 Context.ACTIVITY_SERVICE);
-        am.clearGrantedUriPermissions(mAppEntry.info.packageName);
+        am.clearGrantedUriPermissions(packageName);
+
+
+        // Also update the Scoped Directory Access UI permissions
+        final Uri providerUri = new Uri.Builder().scheme(ContentResolver.SCHEME_CONTENT)
+                .authority(AUTHORITY).appendPath(TABLE_PERMISSIONS).appendPath("*")
+                .build();
+        Log.v(TAG, "Asking " + providerUri + " to delete permissions for " + packageName);
+        final int deleted = context.getContentResolver().delete(providerUri, null, new String[] {
+                packageName
+        });
+        Log.d(TAG, "Deleted " + deleted + " entries for package " + packageName);
 
         // Update UI
         refreshGrantedUriPermissions();

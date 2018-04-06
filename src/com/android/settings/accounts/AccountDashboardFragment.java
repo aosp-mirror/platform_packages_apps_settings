@@ -34,11 +34,13 @@ import com.android.settings.users.AutoSyncPersonalDataPreferenceController;
 import com.android.settings.users.AutoSyncWorkDataPreferenceController;
 import com.android.settingslib.accounts.AuthenticatorHelper;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@SearchIndexable
 public class AccountDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "AccountDashboardFrag";

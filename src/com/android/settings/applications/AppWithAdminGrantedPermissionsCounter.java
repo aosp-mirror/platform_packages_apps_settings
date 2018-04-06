@@ -17,12 +17,12 @@ package com.android.settings.applications;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.IPackageManager;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.RemoteException;
 import android.os.UserHandle;
 
-import com.android.settings.wrapper.IPackageManagerWrapper;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 /**
@@ -32,11 +32,11 @@ import com.android.settingslib.wrapper.PackageManagerWrapper;
 public abstract class AppWithAdminGrantedPermissionsCounter extends AppCounter {
 
     private final String[] mPermissions;
-    private final IPackageManagerWrapper mPackageManagerService;
+    private final IPackageManager mPackageManagerService;
     private final DevicePolicyManager mDevicePolicyManager;
 
     public AppWithAdminGrantedPermissionsCounter(Context context, String[] permissions,
-            PackageManagerWrapper packageManager, IPackageManagerWrapper packageManagerService,
+            PackageManagerWrapper packageManager, IPackageManager packageManagerService,
             DevicePolicyManager devicePolicyManager) {
         super(context, packageManager);
         mPermissions = permissions;
@@ -52,7 +52,7 @@ public abstract class AppWithAdminGrantedPermissionsCounter extends AppCounter {
 
     public static boolean includeInCount(String[] permissions,
             DevicePolicyManager devicePolicyManager, PackageManagerWrapper packageManager,
-            IPackageManagerWrapper packageManagerService, ApplicationInfo info) {
+            IPackageManager packageManagerService, ApplicationInfo info) {
         if (info.targetSdkVersion >= Build.VERSION_CODES.M) {
             // The app uses run-time permissions. Check whether one or more of the permissions were
             // granted by enterprise policy.

@@ -31,10 +31,12 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.Arrays;
 import java.util.List;
 
+@SearchIndexable
 public class LegalSettings extends SettingsPreferenceFragment implements Indexable {
 
     private static final String KEY_TERMS = "terms";
