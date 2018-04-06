@@ -30,6 +30,7 @@ import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Process;
 import android.os.StatsDimensionsValue;
@@ -131,6 +132,7 @@ public class AnomalyDetectionJobService extends JobService {
                 StatsManager.EXTRA_STATS_BROADCAST_SUBSCRIBER_COOKIES);
         final AnomalyInfo anomalyInfo = new AnomalyInfo(
                 !ArrayUtils.isEmpty(cookies) ? cookies.get(0) : "");
+        final PackageManager packageManager = context.getPackageManager();
         Log.i(TAG, "Extra stats value: " + intentDimsValue.toString());
 
         try {
@@ -141,8 +143,8 @@ public class AnomalyDetectionJobService extends JobService {
                     : Settings.Global.getInt(contentResolver,
                             Settings.Global.APP_AUTO_RESTRICTION_ENABLED, ON) == ON;
             final String packageName = batteryUtils.getPackageName(uid);
-            if (!powerWhitelistBackend.isSysWhitelistedExceptIdle(packageName)
-                    && !isSystemUid(uid)) {
+            if (!isSystemUid(uid) && !powerWhitelistBackend.isSysWhitelistedExceptIdle(
+                    packageManager.getPackagesForUid(uid))) {
                 boolean anomalyDetected = true;
                 if (anomalyInfo.anomalyType
                         == StatsManagerConfig.AnomalyType.EXCESSIVE_BACKGROUND_SERVICE) {
