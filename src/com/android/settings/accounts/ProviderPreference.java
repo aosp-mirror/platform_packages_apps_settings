@@ -34,7 +34,7 @@ public class ProviderPreference extends RestrictedPreference {
     public ProviderPreference(
             Context context, String accountType, Drawable icon, CharSequence providerName) {
         super(context);
-        setUseSmallIcon(true);
+        setIconSize(ICON_SIZE_MEDIUM);
         mAccountType = accountType;
         setIcon(icon);
         setPersistent(false);
