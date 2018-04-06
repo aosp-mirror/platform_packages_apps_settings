@@ -209,6 +209,10 @@ public class BatteryEntry {
                 name = context.getResources().getString(R.string.power_camera);
                 iconId = R.drawable.ic_settings_camera;
                 break;
+            case AMBIENT_DISPLAY:
+                name = context.getResources().getString(R.string.ambient_display_screen_title);
+                iconId = R.drawable.ic_settings_aod;
+                break;
         }
         if (iconId > 0) {
             icon = context.getDrawable(iconId);
