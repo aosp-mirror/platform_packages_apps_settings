@@ -19,7 +19,6 @@ package com.android.settings.slices;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_CONTROLLER;
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
-import static org.mockito.Mockito.spy;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -27,8 +26,8 @@ import android.provider.SearchIndexableResource;
 import android.text.TextUtils;
 
 import com.android.settings.core.PreferenceXmlParserUtils;
+import com.android.settings.core.SliderPreferenceController;
 import com.android.settings.core.TogglePreferenceController;
-import com.android.settings.core.codeinspection.ClassScanner;
 import com.android.settings.core.codeinspection.CodeInspector;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.DatabaseIndexingUtils;
@@ -36,25 +35,21 @@ import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.search.SearchFeatureProviderImpl;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-public class SliceControllerInXmlTest {
+public class SliceControllerInXmlCodeInspector extends CodeInspector {
 
-    private static final List<Class> mSliceControllerClasses = Collections.singletonList(
-            TogglePreferenceController.class
+    private static final List<Class> mSliceControllerClasses = Arrays.asList(
+            TogglePreferenceController.class,
+            SliderPreferenceController.class
     );
 
     private final List<String> mXmlDeclaredControllers = new ArrayList<>();
@@ -66,15 +61,13 @@ public class SliceControllerInXmlTest {
                     + "If it should not appear in XML, add the controller's classname to "
                     + "grandfather_slice_controller_not_in_xml. Controllers:\n";
 
-    private Context mContext;
+    private final Context mContext;
+    private final SearchFeatureProvider mSearchProvider;
+    private final FakeFeatureFactory mFakeFeatureFactory;
 
-    private SearchFeatureProvider mSearchProvider;
-    private FakeFeatureFactory mFakeFeatureFactory;
-
-    @Before
-    public void setUp() throws IOException, XmlPullParserException {
-        mContext = spy(RuntimeEnvironment.application);
-
+    public SliceControllerInXmlCodeInspector(List<Class<?>> classes) throws Exception {
+        super(classes);
+        mContext = RuntimeEnvironment.application;
         mSearchProvider = new SearchFeatureProviderImpl();
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mFakeFeatureFactory.searchFeatureProvider = mSearchProvider;
@@ -102,13 +95,15 @@ public class SliceControllerInXmlTest {
         assertThat(mXmlDeclaredControllers).isNotEmpty();
     }
 
-    @Test
-    public void testAllControllersDeclaredInXml() throws Exception {
-        final List<Class<?>> classes =
-                new ClassScanner().getClassesForPackage(mContext.getPackageName());
+    @Override
+    public void run() {
         final List<String> missingControllersInXml = new ArrayList<>();
 
-        for (Class<?> clazz : classes) {
+        for (Class<?> clazz : mClasses) {
+            if (!isConcreteSettingsClass(clazz)) {
+                // Only care about non-abstract classes.
+                continue;
+            }
             if (!isInlineSliceClass(clazz)) {
                 // Only care about inline-slice controller classes.
                 continue;
