@@ -24,7 +24,6 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.hardware.input.InputManager;
-import androidx.preference.Preference;
 import android.view.InputDevice;
 
 import com.android.settings.R;
@@ -39,6 +38,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class PhysicalKeyboardPreferenceControllerTest {
