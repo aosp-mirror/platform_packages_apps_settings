@@ -16,13 +16,21 @@
 package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.support.annotation.NonNull;
 
+import com.android.settings.fuelgauge.batterytip.AnomalyConfigJobService;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.json.JSONException;
@@ -32,6 +40,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -41,6 +50,7 @@ public class SettingsDumpServiceTest {
 
     private static final String PACKAGE_BROWSER = "com.android.test.browser";
     private static final String PACKAGE_NULL = "android";
+    private static final int ANOMALY_VERSION = 2;
 
     @Mock
     private PackageManager mPackageManager;
@@ -54,7 +64,7 @@ public class SettingsDumpServiceTest {
 
         when(mPackageManager.resolveActivity(TestService.BROWSER_INTENT,
                 PackageManager.MATCH_DEFAULT_ONLY)).thenReturn(mResolveInfo);
-        mTestService = new TestService();
+        mTestService = spy(new TestService());
         mTestService.setPackageManager(mPackageManager);
     }
 
@@ -75,13 +85,29 @@ public class SettingsDumpServiceTest {
     }
 
     @Test
+    public void testDumpAnomalyDetection_returnAnomalyInfo() throws JSONException {
+        final SharedPreferences sharedPreferences =
+                RuntimeEnvironment.application.getSharedPreferences(AnomalyConfigJobService.PREF_DB,
+                        Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(AnomalyConfigJobService.KEY_ANOMALY_CONFIG_VERSION, ANOMALY_VERSION);
+        editor.commit();
+        doReturn(sharedPreferences).when(mTestService).getSharedPreferences(anyString(), anyInt());
+
+        final JSONObject jsonObject = mTestService.dumpAnomalyDetection();
+
+        assertThat(jsonObject.getInt(AnomalyConfigJobService.KEY_ANOMALY_CONFIG_VERSION)).isEqualTo(
+                ANOMALY_VERSION);
+    }
+
+    @Test
     public void testDump_ReturnJsonObject() throws JSONException {
         mResolveInfo.activityInfo = new ActivityInfo();
         mResolveInfo.activityInfo.packageName = PACKAGE_BROWSER;
         TestPrintWriter printWriter = new TestPrintWriter(System.out);
 
         mTestService.dump(null, printWriter, null);
-        JSONObject object = (JSONObject)printWriter.getPrintObject();
+        JSONObject object = (JSONObject) printWriter.getPrintObject();
 
         assertThat(object.get(TestService.KEY_SERVICE)).isNotNull();
     }

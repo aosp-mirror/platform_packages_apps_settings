@@ -39,9 +39,8 @@ import java.util.concurrent.TimeUnit;
 public class AnomalyConfigJobService extends JobService {
     private static final String TAG = "AnomalyConfigJobService";
 
-    @VisibleForTesting
-    static final String PREF_DB = "anomaly_pref";
-    private static final String KEY_ANOMALY_CONFIG_VERSION = "anomaly_config_version";
+    public static final String PREF_DB = "anomaly_pref";
+    public static final String KEY_ANOMALY_CONFIG_VERSION = "anomaly_config_version";
     private static final int DEFAULT_VERSION = 0;
 
     @VisibleForTesting
