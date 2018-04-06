@@ -34,6 +34,7 @@ import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
 import com.android.settings.fuelgauge.batterytip.HighUsageDataParser;
+import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.HighUsageTip;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -106,6 +107,14 @@ public class HighUsageDetectorTest {
         ReflectionHelpers.setField(mPolicy, "highUsageEnabled", false);
 
         assertThat(mHighUsageDetector.detect().isVisible()).isFalse();
+    }
+
+    @Test
+    public void testDetect_testFeatureOn_tipNew() {
+        doReturn(false).when(mDataParser).isDeviceHeavilyUsed();
+        ReflectionHelpers.setField(mPolicy, "testHighUsageTip", true);
+
+        assertThat(mHighUsageDetector.detect().getState()).isEqualTo(BatteryTip.StateType.NEW);
     }
 
     @Test

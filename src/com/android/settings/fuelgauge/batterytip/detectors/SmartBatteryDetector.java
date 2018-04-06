@@ -38,10 +38,10 @@ public class SmartBatteryDetector implements BatteryTipDetector {
     @Override
     public BatteryTip detect() {
         // Show it if there is no other tips shown
-        final boolean smartBatteryOn = Settings.Global.getInt(mContentResolver,
-                Settings.Global.APP_STANDBY_ENABLED, 1) != 0;
+        final boolean smartBatteryOff = Settings.Global.getInt(mContentResolver,
+                Settings.Global.APP_STANDBY_ENABLED, 1) == 0 || mPolicy.testSmartBatteryTip;
         final int state =
-                smartBatteryOn ? BatteryTip.StateType.INVISIBLE : BatteryTip.StateType.NEW;
+                smartBatteryOff ? BatteryTip.StateType.NEW : BatteryTip.StateType.INVISIBLE;
         return new SmartBatteryTip(state);
     }
 }

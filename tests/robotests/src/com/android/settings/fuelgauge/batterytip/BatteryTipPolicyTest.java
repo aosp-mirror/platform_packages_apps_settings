@@ -45,7 +45,10 @@ public class BatteryTipPolicyTest {
             + ",low_battery_enabled=false"
             + ",low_battery_hour=10"
             + ",data_history_retain_day=24"
-            + ",excessive_bg_drain_percentage=25";
+            + ",excessive_bg_drain_percentage=25"
+            + ",test_battery_saver_tip=true"
+            + ",test_high_usage_tip=false"
+            + ",test_smart_battery_tip=true";
     private Context mContext;
 
     @Before
@@ -74,6 +77,9 @@ public class BatteryTipPolicyTest {
         assertThat(batteryTipPolicy.lowBatteryHour).isEqualTo(10);
         assertThat(batteryTipPolicy.dataHistoryRetainDay).isEqualTo(24);
         assertThat(batteryTipPolicy.excessiveBgDrainPercentage).isEqualTo(25);
+        assertThat(batteryTipPolicy.testBatterySaverTip).isTrue();
+        assertThat(batteryTipPolicy.testHighUsageTip).isFalse();
+        assertThat(batteryTipPolicy.testSmartBatteryTip).isTrue();
     }
 
     @Test
@@ -97,5 +103,8 @@ public class BatteryTipPolicyTest {
         assertThat(batteryTipPolicy.lowBatteryHour).isEqualTo(16);
         assertThat(batteryTipPolicy.dataHistoryRetainDay).isEqualTo(30);
         assertThat(batteryTipPolicy.excessiveBgDrainPercentage).isEqualTo(10);
+        assertThat(batteryTipPolicy.testBatterySaverTip).isFalse();
+        assertThat(batteryTipPolicy.testHighUsageTip).isFalse();
+        assertThat(batteryTipPolicy.testSmartBatteryTip).isFalse();
     }
 }

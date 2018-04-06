@@ -24,6 +24,7 @@ import android.content.Context;
 import android.provider.Settings;
 
 import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
+import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -31,6 +32,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SmartBatteryDetectorTest {
@@ -38,6 +40,7 @@ public class SmartBatteryDetectorTest {
     private Context mContext;
     private ContentResolver mContentResolver;
     private SmartBatteryDetector mSmartBatteryDetector;
+    private BatteryTipPolicy mPolicy;
 
     @Before
     public void setUp() {
@@ -45,8 +48,15 @@ public class SmartBatteryDetectorTest {
 
         mContext = RuntimeEnvironment.application;
         mContentResolver = mContext.getContentResolver();
-        final BatteryTipPolicy policy = spy(new BatteryTipPolicy(mContext));
-        mSmartBatteryDetector = new SmartBatteryDetector(policy, mContentResolver);
+        mPolicy = spy(new BatteryTipPolicy(mContext));
+        mSmartBatteryDetector = new SmartBatteryDetector(mPolicy, mContentResolver);
+    }
+
+    @Test
+    public void testDetect_testFeatureOn_tipNew() {
+        ReflectionHelpers.setField(mPolicy, "testSmartBatteryTip", true);
+
+        assertThat(mSmartBatteryDetector.detect().getState()).isEqualTo(BatteryTip.StateType.NEW);
     }
 
     @Test
