@@ -65,7 +65,8 @@ public class RingVolumePreferenceControllerTest {
         shadowContext.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
         mContext = RuntimeEnvironment.application;
         when(mNotificationManager.getEffectsSuppressor()).thenReturn(mSuppressor);
-        mController = new RingVolumePreferenceController(mContext, null, null, mHelper);
+        mController = new RingVolumePreferenceController(mContext);
+        mController.setAudioHelper(mHelper);
     }
 
     @Test

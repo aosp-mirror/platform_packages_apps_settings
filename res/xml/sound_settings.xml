@@ -27,6 +27,7 @@
         android:key="media_volume"
         android:icon="@*android:drawable/ic_audio_media"
         android:title="@string/media_volume_option_title"
+        settings:controller="com.android.settings.notification.MediaVolumePreferenceController"
         android:order="-170"/>
 
     <!-- Alarm volume -->
@@ -34,6 +35,7 @@
         android:key="alarm_volume"
         android:icon="@*android:drawable/ic_audio_alarm"
         android:title="@string/alarm_volume_option_title"
+        settings:controller="com.android.settings.notification.AlarmVolumePreferenceController"
         android:order="-160"/>
 
     <!-- Ring volume -->
@@ -41,6 +43,7 @@
         android:key="ring_volume"
         android:icon="@*android:drawable/ic_audio_ring_notif"
         android:title="@string/ring_volume_option_title"
+        settings:controller="com.android.settings.notification.RingVolumePreferenceController"
         android:order="-150"/>
 
     <!-- Notification volume -->
@@ -48,6 +51,7 @@
         android:key="notification_volume"
         android:icon="@*android:drawable/ic_audio_ring_notif"
         android:title="@string/notification_volume_option_title"
+        settings:controller="com.android.settings.notification.NotificationVolumePreferenceController"
         android:order="-140"/>
 
     <!-- Also vibrate for calls -->
