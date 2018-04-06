@@ -92,7 +92,7 @@ public class WifiScanningRequiredFragment extends InstrumentedDialogFragment imp
     void addButtonIfNeeded(AlertDialog.Builder builder) {
         // Only show "learn more" if there is a help page to show
         if (!TextUtils.isEmpty(getContext().getString(R.string.help_uri_wifi_scanning_required))) {
-            builder.setNeutralButton(R.string.do_disclosure_learn_more, this);
+            builder.setNeutralButton(R.string.learn_more, this);
         }
     }
 
