@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import com.android.settings.core.BasePreferenceControllerSignatureInspector;
 import com.android.settings.core.instrumentation.InstrumentableFragmentCodeInspector;
 import com.android.settings.search.SearchIndexProviderCodeInspector;
+import com.android.settings.slices.SliceControllerInXmlCodeInspector;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -47,6 +48,11 @@ public class CodeInspectionTest {
     @Test
     public void runInstrumentableFragmentCodeInspection() {
         new InstrumentableFragmentCodeInspector(mClasses).run();
+    }
+
+    @Test
+    public void runSliceControllerInXmlInspection() throws Exception {
+        new SliceControllerInXmlCodeInspector(mClasses).run();
     }
 
     @Test
