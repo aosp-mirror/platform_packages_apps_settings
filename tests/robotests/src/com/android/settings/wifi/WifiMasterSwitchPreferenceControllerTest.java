@@ -26,8 +26,11 @@ import static org.mockito.Mockito.when;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkRequest;
 import android.net.NetworkScoreManager;
 import android.net.wifi.WifiManager;
+import android.os.Handler;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceScreen;
 
@@ -54,6 +57,8 @@ public class WifiMasterSwitchPreferenceControllerTest {
     @Mock
     private MasterSwitchPreference mPreference;
     @Mock
+    private ConnectivityManager mConnectivityManager;
+    @Mock
     private NetworkScoreManager mNetworkScoreManager;
 
     private Context mContext;
@@ -65,6 +70,7 @@ public class WifiMasterSwitchPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mMetricsFeatureProvider = FakeFeatureFactory.setupForTest().getMetricsFeatureProvider();
         mContext = spy(RuntimeEnvironment.application.getApplicationContext());
+        when(mContext.getSystemService(ConnectivityManager.class)).thenReturn(mConnectivityManager);
         when(mContext.getSystemService(NetworkScoreManager.class)).thenReturn(mNetworkScoreManager);
         mController = new WifiMasterSwitchPreferenceController(mContext, mMetricsFeatureProvider);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
@@ -89,6 +95,10 @@ public class WifiMasterSwitchPreferenceControllerTest {
         mController.onResume();
 
         verify(mContext).registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class));
+        verify(mConnectivityManager).registerNetworkCallback(
+                any(NetworkRequest.class),
+                any(ConnectivityManager.NetworkCallback.class),
+                any(Handler.class));
     }
 
     @Test
@@ -97,6 +107,8 @@ public class WifiMasterSwitchPreferenceControllerTest {
         mController.onPause();
 
         verify(mContext).unregisterReceiver(any(BroadcastReceiver.class));
+        verify(mConnectivityManager).unregisterNetworkCallback(
+                any(ConnectivityManager.NetworkCallback.class));
     }
 
     @Test
