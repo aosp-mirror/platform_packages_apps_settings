@@ -16,6 +16,7 @@ package com.android.settings.display;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.VisibleForTesting;
+import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.app.ColorDisplayController;
@@ -24,13 +25,15 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.R;
 import com.android.settings.widget.RadioButtonPickerFragment;
+import com.android.settings.widget.RadioButtonPreference;
 import com.android.settingslib.widget.CandidateInfo;
 
 import java.util.Arrays;
 import java.util.List;
 
 @SuppressWarnings("WeakerAccess")
-public class ColorModePreferenceFragment extends RadioButtonPickerFragment {
+public class ColorModePreferenceFragment extends RadioButtonPickerFragment
+        implements ColorDisplayController.Callback {
 
     @VisibleForTesting
     static final String KEY_COLOR_MODE_NATURAL = "color_mode_natural";
@@ -48,6 +51,16 @@ public class ColorModePreferenceFragment extends RadioButtonPickerFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         mController = new ColorDisplayController(context);
+        mController.setListener(this);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        if (mController != null) {
+            mController.setListener(null);
+            mController = null;
+        }
     }
 
     @Override
@@ -71,15 +84,16 @@ public class ColorModePreferenceFragment extends RadioButtonPickerFragment {
     @Override
     protected List<? extends CandidateInfo> getCandidates() {
         Context c = getContext();
+        final boolean enabled = !mController.getAccessibilityTransformActivated();
         return Arrays.asList(
-            new ColorModeCandidateInfo(c.getString(R.string.color_mode_option_natural),
-                    KEY_COLOR_MODE_NATURAL),
-            new ColorModeCandidateInfo(c.getString(R.string.color_mode_option_boosted),
-                    KEY_COLOR_MODE_BOOSTED),
-            new ColorModeCandidateInfo(c.getString(R.string.color_mode_option_saturated),
-                    KEY_COLOR_MODE_SATURATED),
-            new ColorModeCandidateInfo(c.getString(R.string.color_mode_option_automatic),
-                    KEY_COLOR_MODE_AUTOMATIC)
+            new ColorModeCandidateInfo(c.getText(R.string.color_mode_option_natural),
+                    KEY_COLOR_MODE_NATURAL, enabled),
+            new ColorModeCandidateInfo(c.getText(R.string.color_mode_option_boosted),
+                    KEY_COLOR_MODE_BOOSTED, enabled),
+            new ColorModeCandidateInfo(c.getText(R.string.color_mode_option_saturated),
+                    KEY_COLOR_MODE_SATURATED, enabled),
+            new ColorModeCandidateInfo(c.getText(R.string.color_mode_option_automatic),
+                    KEY_COLOR_MODE_AUTOMATIC, enabled)
         );
     }
 
@@ -120,8 +134,8 @@ public class ColorModePreferenceFragment extends RadioButtonPickerFragment {
         private final CharSequence mLabel;
         private final String mKey;
 
-        ColorModeCandidateInfo(CharSequence label, String key) {
-            super(true);
+        ColorModeCandidateInfo(CharSequence label, String key, boolean enabled) {
+            super(enabled);
             mLabel = label;
             mKey = key;
         }
@@ -142,4 +156,18 @@ public class ColorModePreferenceFragment extends RadioButtonPickerFragment {
         }
     }
 
+    @Override
+    public void onAccessibilityTransformChanged(boolean state) {
+        // Disable controls when a11y transforms are enabled, and vice versa
+        final PreferenceScreen screen = getPreferenceScreen();
+        if (screen != null) {
+            final int count = screen.getPreferenceCount();
+            for (int i = 0; i < count; i++) {
+                final Preference pref = screen.getPreference(i);
+                if (pref instanceof RadioButtonPreference) {
+                    pref.setEnabled(!state);
+                }
+            }
+        }
+    }
 }
