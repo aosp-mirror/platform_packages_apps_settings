@@ -72,7 +72,7 @@ public class ActionDisabledByAdminDialogHelper {
                 mRestriction);
         return builder
             .setPositiveButton(R.string.okay, null)
-            .setNeutralButton(R.string.admin_more_details,
+            .setNeutralButton(R.string.learn_more,
                     (dialog, which) -> {
                         showAdminPolicies(mEnforcedAdmin, mActivity);
                         mActivity.finish();
