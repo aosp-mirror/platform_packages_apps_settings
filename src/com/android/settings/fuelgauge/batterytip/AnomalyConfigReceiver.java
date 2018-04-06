@@ -48,13 +48,4 @@ public class AnomalyConfigReceiver extends BroadcastReceiver {
             }
         }
     }
-
-    @VisibleForTesting
-    void uploadPendingIntent(StatsManager statsManager, PendingIntent pendingIntent) {
-        Log.i(TAG, "Upload PendingIntent to StatsManager. configKey: "
-                + StatsManagerConfig.ANOMALY_CONFIG_KEY + " subId: "
-                + StatsManagerConfig.SUBSCRIBER_ID);
-        statsManager.setBroadcastSubscriber(StatsManagerConfig.ANOMALY_CONFIG_KEY,
-                StatsManagerConfig.SUBSCRIBER_ID, pendingIntent);
-    }
 }
