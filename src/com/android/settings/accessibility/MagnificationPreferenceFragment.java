@@ -25,20 +25,15 @@ import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
-import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settingslib.core.AbstractPreferenceController;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public final class MagnificationPreferenceFragment extends DashboardFragment {
@@ -144,13 +139,14 @@ public final class MagnificationPreferenceFragment extends DashboardFragment {
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
                         boolean enabled) {
-                    if (isApplicable(context.getResources())) {
-                        final SearchIndexableResource sir = new SearchIndexableResource(context);
-                        sir.xmlResId = R.xml.accessibility_magnification_settings;
-                        return Arrays.asList(sir);
-                    } else {
-                        return Collections.emptyList();
-                    }
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.accessibility_magnification_settings;
+                    return Arrays.asList(sir);
+                }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return isApplicable(context.getResources());
                 }
 
                 @Override
