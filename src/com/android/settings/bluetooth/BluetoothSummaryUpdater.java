@@ -81,7 +81,7 @@ public final class BluetoothSummaryUpdater extends SummaryUpdater implements Blu
     }
 
     @Override
-    public void onProfileAudioStateChanged(int bluetoothProfile, int state) {
+    public void onAudioModeChanged() {
     }
 
     @Override
