@@ -253,11 +253,7 @@ public class SliceBuilderUtils {
     @VisibleForTesting
     static CharSequence getSubtitleText(Context context, AbstractPreferenceController controller,
             SliceData sliceData) {
-        CharSequence summaryText = sliceData.getSummary();
-        if (isValidSummary(context, summaryText)) {
-            return summaryText;
-        }
-
+        CharSequence summaryText;
         if (controller != null) {
             summaryText = controller.getSummary();
 
@@ -266,7 +262,12 @@ public class SliceBuilderUtils {
             }
         }
 
-        return sliceData.getScreenTitle();
+        summaryText = sliceData.getSummary();
+        if (isValidSummary(context, summaryText)) {
+            return summaryText;
+        }
+
+        return "";
     }
 
     private static boolean isValidSummary(Context context, CharSequence summary) {

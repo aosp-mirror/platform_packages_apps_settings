@@ -16,24 +16,19 @@
 
 package com.android.settings.datausage;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.endsWith;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import android.app.Activity;
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.telephony.TelephonyManager;
+import android.net.NetworkPolicyManager;
+import android.os.Bundle;
 import android.text.format.Formatter;
 
-import com.android.settings.R;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
+import com.android.settings.testutils.shadow.ShadowDashboardFragment;
+import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
+import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -41,18 +36,35 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.endsWith;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+
+@Config(shadows = {
+    SettingsShadowResourcesImpl.class,
+    SettingsShadowResources.SettingsShadowTheme.class,
+    ShadowUtils.class,
+    ShadowDataUsageUtils.class,
+    ShadowDashboardFragment.class
+})
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DataUsageSummaryTest {
 
     @Mock
-    private ConnectivityManager mManager;
-    private Context mContext;
-    @Mock
-    TelephonyManager mTelephonyManager;
-    @Mock
     private SummaryLoader mSummaryLoader;
+    @Mock
+    private NetworkPolicyManager mNetworkPolicyManager;
+    private Context mContext;
     private Activity mActivity;
     private SummaryLoader.SummaryProvider mSummaryProvider;
 
@@ -65,12 +77,10 @@ public class DataUsageSummaryTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         ShadowApplication shadowContext = ShadowApplication.getInstance();
-        shadowContext.setSystemService(Context.CONNECTIVITY_SERVICE, mManager);
-        mContext = shadowContext.getApplicationContext();
-        when(mManager.isNetworkSupported(anyInt())).thenReturn(true);
+        shadowContext.setSystemService(Context.NETWORK_POLICY_SERVICE, mNetworkPolicyManager);
 
+        mContext = shadowContext.getApplicationContext();
         mActivity = spy(Robolectric.buildActivity(Activity.class).get());
-        when(mActivity.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
 
         mSummaryProvider = DataUsageSummary.SUMMARY_PROVIDER_FACTORY
                 .createSummaryProvider(mActivity, mSummaryLoader);
@@ -89,15 +99,73 @@ public class DataUsageSummaryTest {
 
     @Test
     public void setListening_shouldBlankSummaryWithNoSim() {
-        when(mTelephonyManager.getSimState()).thenReturn(TelephonyManager.SIM_STATE_ABSENT);
+        ShadowDataUsageUtils.HAS_SIM = false;
         mSummaryProvider.setListening(true);
         verify(mSummaryLoader).setSummary(mSummaryProvider, null);
     }
 
     @Test
     public void setListening_shouldSetSummaryWithSim() {
-        when(mTelephonyManager.getSimState()).thenReturn(TelephonyManager.SIM_STATE_READY);
+        ShadowDataUsageUtils.HAS_SIM = true;
         mSummaryProvider.setListening(true);
         verify(mSummaryLoader).setSummary(anyObject(), endsWith(" of data used"));
+    }
+
+    @Test
+    public void configuration_withSim_shouldShowMobileAndWifi() {
+        ShadowDataUsageUtils.IS_MOBILE_DATA_SUPPORTED = true;
+        ShadowDataUsageUtils.IS_WIFI_SUPPORTED = true;
+        ShadowDataUsageUtils.DEFAULT_SUBSCRIPTION_ID = 1;
+        ShadowDataUsageUtils.HAS_SIM = true;
+
+        final DataUsageSummary dataUsageSummary = spy(new DataUsageSummary());
+        doReturn(mContext).when(dataUsageSummary).getContext();
+
+        doReturn(true).when(dataUsageSummary).removePreference(anyString());
+        doNothing().when(dataUsageSummary).addWifiSection();
+        doNothing().when(dataUsageSummary).addMobileSection(1);
+
+        dataUsageSummary.onCreate(null);
+
+        verify(dataUsageSummary).addWifiSection();
+        verify(dataUsageSummary).addMobileSection(anyInt());
+    }
+
+    @Test
+    public void configuration_withoutSim_shouldShowWifiSectionOnly() {
+        ShadowDataUsageUtils.IS_MOBILE_DATA_SUPPORTED = true;
+        ShadowDataUsageUtils.IS_WIFI_SUPPORTED = true;
+        ShadowDataUsageUtils.HAS_SIM = false;
+
+        final DataUsageSummary dataUsageSummary = spy(new DataUsageSummary());
+        doReturn(mContext).when(dataUsageSummary).getContext();
+
+        doReturn(true).when(dataUsageSummary).removePreference(anyString());
+        doNothing().when(dataUsageSummary).addWifiSection();
+        doNothing().when(dataUsageSummary).addMobileSection(1);
+
+        dataUsageSummary.onCreate(null);
+
+        verify(dataUsageSummary).addWifiSection();
+        verify(dataUsageSummary, never()).addMobileSection(anyInt());
+    }
+
+    @Test
+    public void configuration_withoutMobile_shouldShowWifiSectionOnly() {
+        ShadowDataUsageUtils.IS_MOBILE_DATA_SUPPORTED = false;
+        ShadowDataUsageUtils.IS_WIFI_SUPPORTED = true;
+        ShadowDataUsageUtils.HAS_SIM = false;
+
+        final DataUsageSummary dataUsageSummary = spy(new DataUsageSummary());
+        doReturn(mContext).when(dataUsageSummary).getContext();
+
+        doReturn(true).when(dataUsageSummary).removePreference(anyString());
+        doNothing().when(dataUsageSummary).addWifiSection();
+        doNothing().when(dataUsageSummary).addMobileSection(1);
+
+        dataUsageSummary.onCreate(null);
+
+        verify(dataUsageSummary).addWifiSection();
+        verify(dataUsageSummary, never()).addMobileSection(anyInt());
     }
 }

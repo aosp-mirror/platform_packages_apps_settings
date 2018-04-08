@@ -30,6 +30,7 @@ import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Process;
 import android.os.StatsDimensionsValue;
@@ -58,9 +59,11 @@ import java.util.concurrent.TimeUnit;
 /** A JobService to store anomaly data to anomaly database */
 public class AnomalyDetectionJobService extends JobService {
     private static final String TAG = "AnomalyDetectionService";
-    private static final int UID_NULL = 0;
-    private static final int STATSD_UID_FILED = 1;
     private static final int ON = 1;
+    @VisibleForTesting
+    static final int UID_NULL = -1;
+    @VisibleForTesting
+    static final int STATSD_UID_FILED = 1;
 
     @VisibleForTesting
     static final long MAX_DELAY_MS = TimeUnit.MINUTES.toMillis(30);
@@ -131,6 +134,7 @@ public class AnomalyDetectionJobService extends JobService {
                 StatsManager.EXTRA_STATS_BROADCAST_SUBSCRIBER_COOKIES);
         final AnomalyInfo anomalyInfo = new AnomalyInfo(
                 !ArrayUtils.isEmpty(cookies) ? cookies.get(0) : "");
+        final PackageManager packageManager = context.getPackageManager();
         Log.i(TAG, "Extra stats value: " + intentDimsValue.toString());
 
         try {
@@ -141,10 +145,12 @@ public class AnomalyDetectionJobService extends JobService {
                     : Settings.Global.getInt(contentResolver,
                             Settings.Global.APP_AUTO_RESTRICTION_ENABLED, ON) == ON;
             final String packageName = batteryUtils.getPackageName(uid);
-            if (!powerWhitelistBackend.isSysWhitelistedExceptIdle(packageName)
-                    && !isSystemUid(uid)) {
+            if (uid != UID_NULL && !isSystemUid(uid)
+                    && !powerWhitelistBackend.isSysWhitelistedExceptIdle(
+                    packageManager.getPackagesForUid(uid))) {
                 boolean anomalyDetected = true;
-                if (anomalyInfo.anomalyType == StatsManagerConfig.AnomalyType.EXCESSIVE_BG) {
+                if (anomalyInfo.anomalyType
+                        == StatsManagerConfig.AnomalyType.EXCESSIVE_BACKGROUND_SERVICE) {
                     if (!batteryUtils.isPreOApp(packageName)
                             || !batteryUtils.isAppHeavilyUsed(batteryStatsHelper, userManager, uid,
                             policy.excessiveBgDrainPercentage)) {
@@ -188,7 +194,6 @@ public class AnomalyDetectionJobService extends JobService {
      */
     @VisibleForTesting
     int extractUidFromStatsDimensionsValue(StatsDimensionsValue statsDimensionsValue) {
-        //TODO(b/73172999): Add robo test for this method
         if (statsDimensionsValue == null) {
             return UID_NULL;
         }

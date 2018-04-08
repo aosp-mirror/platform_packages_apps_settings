@@ -31,6 +31,7 @@ import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.text.format.Formatter;
 import android.text.format.Time;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +42,7 @@ import android.widget.Spinner;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.net.DataUsageController;
@@ -74,6 +76,21 @@ public class BillingCycleSettings extends DataUsageBase implements
     private Preference mDataLimit;
     private DataUsageController mDataUsageController;
 
+    @VisibleForTesting
+    void setUpForTest(NetworkPolicyEditor policyEditor,
+                      Preference billingCycle,
+                      Preference dataLimit,
+                      Preference dataWarning,
+                      SwitchPreference enableLimit,
+                      SwitchPreference enableWarning) {
+        services.mPolicyEditor = policyEditor;
+        mBillingCycle = billingCycle;
+        mDataLimit = dataLimit;
+        mDataWarning = dataWarning;
+        mEnableDataLimit = enableLimit;
+        mEnableDataWarning = enableWarning;
+    }
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -101,9 +118,12 @@ public class BillingCycleSettings extends DataUsageBase implements
         updatePrefs();
     }
 
-    private void updatePrefs() {
+    @VisibleForTesting
+    void updatePrefs() {
         final int cycleDay = services.mPolicyEditor.getPolicyCycleDay(mNetworkTemplate);
-        if (cycleDay != CYCLE_NONE) {
+        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.DATA_USAGE_SETTINGS_V2)) {
+            mBillingCycle.setSummary(null);
+        } else if (cycleDay != CYCLE_NONE) {
             mBillingCycle.setSummary(getString(R.string.billing_cycle_fragment_summary, cycleDay));
         } else {
             mBillingCycle.setSummary(null);

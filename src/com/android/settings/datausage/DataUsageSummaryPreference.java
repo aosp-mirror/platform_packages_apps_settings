@@ -20,6 +20,8 @@ import android.annotation.AttrRes;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.NetworkTemplate;
+import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.text.Spannable;
@@ -34,7 +36,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.core.SubSettingLauncher;
+import com.android.settingslib.AppItem;
 import com.android.settingslib.Utils;
 import com.android.settingslib.utils.StringUtil;
 
@@ -83,6 +88,10 @@ public class DataUsageSummaryPreference extends Preference {
     /** The number of bytes used since the start of the cycle. */
     private long mDataplanUse;
 
+    /** WiFi only mode */
+    private boolean mWifiMode;
+    private String mUsagePeriod;
+
     public DataUsageSummaryPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         setLayoutResource(R.layout.data_usage_summary_preference);
@@ -130,6 +139,12 @@ public class DataUsageSummaryPreference extends Preference {
         notifyChanged();
     }
 
+    void setWifiMode(boolean isWifiMode, String usagePeriod) {
+        mWifiMode = isWifiMode;
+        mUsagePeriod = usagePeriod;
+        notifyChanged();
+    }
+
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
@@ -149,29 +164,52 @@ public class DataUsageSummaryPreference extends Preference {
         updateDataUsageLabels(holder);
 
         TextView usageTitle = (TextView) holder.findViewById(R.id.usage_title);
-        usageTitle.setVisibility(mNumPlans > 1 ? View.VISIBLE : View.GONE);
-
-        updateCycleTimeText(holder);
-
-
-        updateCarrierInfo((TextView) holder.findViewById(R.id.carrier_and_update));
-
+        TextView carrierInfo = (TextView) holder.findViewById(R.id.carrier_and_update);
         Button launchButton = (Button) holder.findViewById(R.id.launch_mdp_app_button);
-        launchButton.setOnClickListener((view) -> {
-            getContext().sendBroadcast(mLaunchIntent);
-        });
-        if (mLaunchIntent != null) {
+        TextView limitInfo = (TextView) holder.findViewById(R.id.data_limits);
+
+        if (mWifiMode) {
+            usageTitle.setText(R.string.data_usage_wifi_title);
+            usageTitle.setVisibility(View.VISIBLE);
+            TextView cycleTime = (TextView) holder.findViewById(R.id.cycle_left_time);
+            cycleTime.setText(mUsagePeriod);
+            carrierInfo.setVisibility(View.GONE);
+            limitInfo.setVisibility(View.GONE);
+
+            launchButton.setOnClickListener((view) -> {
+                launchWifiDataUsage(getContext());
+            });
+            launchButton.setText(R.string.launch_wifi_text);
             launchButton.setVisibility(View.VISIBLE);
         } else {
-            launchButton.setVisibility(View.GONE);
+            usageTitle.setVisibility(mNumPlans > 1 ? View.VISIBLE : View.GONE);
+            updateCycleTimeText(holder);
+            updateCarrierInfo(carrierInfo);
+            if (mLaunchIntent != null) {
+                launchButton.setOnClickListener((view) -> {
+                    getContext().sendBroadcast(mLaunchIntent);
+                });
+                launchButton.setVisibility(View.VISIBLE);
+            } else {
+                launchButton.setVisibility(View.GONE);
+            }
+            limitInfo.setVisibility(
+                    TextUtils.isEmpty(mLimitInfoText) ? View.GONE : View.VISIBLE);
+            limitInfo.setText(mLimitInfoText);
         }
-
-        TextView limitInfo = (TextView) holder.findViewById(R.id.data_limits);
-        limitInfo.setVisibility(
-                mLimitInfoText == null || mLimitInfoText.isEmpty() ? View.GONE : View.VISIBLE);
-        limitInfo.setText(mLimitInfoText);
     }
 
+    private static void launchWifiDataUsage(Context context) {
+        final Bundle args = new Bundle(1);
+        args.putParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE,
+                NetworkTemplate.buildTemplateWifiWildcard());
+        final SubSettingLauncher launcher = new SubSettingLauncher(context)
+                .setArguments(args)
+                .setDestination(DataUsageList.class.getName())
+                .setSourceMetricsCategory(MetricsProto.MetricsEvent.VIEW_UNKNOWN);
+        launcher.setTitle(context.getString(R.string.wifi_data_usage));
+        launcher.launch();
+    }
 
     private void updateDataUsageLabels(PreferenceViewHolder holder) {
         TextView usageNumberField = (TextView) holder.findViewById(R.id.data_usage_view);
@@ -196,10 +234,14 @@ public class DataUsageSummaryPreference extends Preference {
                 usageRemainingField.setText(
                         TextUtils.expandTemplate(getContext().getText(R.string.data_remaining),
                                 Formatter.formatFileSize(getContext(), dataRemaining)));
+                usageRemainingField.setTextColor(
+                        Utils.getColorAttr(getContext(), android.R.attr.colorAccent));
             } else {
                 usageRemainingField.setText(
                         TextUtils.expandTemplate(getContext().getText(R.string.data_overusage),
                                 Formatter.formatFileSize(getContext(), -dataRemaining)));
+                usageRemainingField.setTextColor(
+                        Utils.getColorAttr(getContext(), android.R.attr.colorError));
             }
         }
     }

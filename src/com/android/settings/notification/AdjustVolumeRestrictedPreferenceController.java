@@ -24,6 +24,7 @@ import android.support.v7.preference.Preference;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.accounts.AccountRestrictionHelper;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.SliderPreferenceController;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -32,17 +33,18 @@ import com.android.settingslib.core.AbstractPreferenceController;
  * restriction
  */
 public abstract class AdjustVolumeRestrictedPreferenceController extends
-        AbstractPreferenceController implements PreferenceControllerMixin {
+        SliderPreferenceController implements PreferenceControllerMixin {
 
     private AccountRestrictionHelper mHelper;
 
-    public AdjustVolumeRestrictedPreferenceController(Context context) {
-        this(context, new AccountRestrictionHelper(context));
+    public AdjustVolumeRestrictedPreferenceController(Context context, String key) {
+        this(context, new AccountRestrictionHelper(context), key);
     }
 
     @VisibleForTesting
-    AdjustVolumeRestrictedPreferenceController(Context context, AccountRestrictionHelper helper) {
-        super(context);
+    AdjustVolumeRestrictedPreferenceController(Context context, AccountRestrictionHelper helper,
+            String key) {
+        super(context, key);
         mHelper = helper;
     }
 

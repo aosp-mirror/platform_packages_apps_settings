@@ -27,13 +27,15 @@ public class MediaVolumePreferenceController extends
 
     private static final String KEY_MEDIA_VOLUME = "media_volume";
 
-    public MediaVolumePreferenceController(Context context, Callback callback, Lifecycle lifecycle) {
-        super(context, callback, lifecycle);
+    public MediaVolumePreferenceController(Context context) {
+        super(context, KEY_MEDIA_VOLUME);
     }
 
     @Override
-    public boolean isAvailable() {
-        return mContext.getResources().getBoolean(R.bool.config_show_media_volume);
+    public int getAvailabilityStatus() {
+        return mContext.getResources().getBoolean(R.bool.config_show_media_volume)
+                ? AVAILABLE
+                : DISABLED_UNSUPPORTED;
     }
 
     @Override
@@ -50,5 +52,4 @@ public class MediaVolumePreferenceController extends
     public int getMuteIcon() {
         return com.android.internal.R.drawable.ic_audio_media_mute;
     }
-
 }
