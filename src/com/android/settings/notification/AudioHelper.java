@@ -18,6 +18,7 @@ package com.android.settings.notification;
 
 import android.annotation.UserIdInt;
 import android.content.Context;
+import android.media.AudioManager;
 import android.media.AudioSystem;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -29,9 +30,11 @@ import com.android.settings.Utils;
 public class AudioHelper {
 
     private Context mContext;
+    private AudioManager mAudioManager;
 
     public AudioHelper(Context context) {
         mContext = context;
+        mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
     }
 
     public boolean isSingleVolume() {
@@ -48,5 +51,26 @@ public class AudioHelper {
 
     public Context createPackageContextAsUser(@UserIdInt int profileId) {
         return Utils.createPackageContextAsUser(mContext, profileId);
+    }
+
+    public int getRingerModeInternal() {
+        return mAudioManager.getRingerModeInternal();
+    }
+
+    public int getLastAudibleStreamVolume(int stream) {
+        return mAudioManager.getLastAudibleStreamVolume(stream);
+    }
+
+    public int getStreamVolume(int stream) {
+        return mAudioManager.getStreamVolume(stream);
+    }
+
+    public boolean setStreamVolume(int stream, int volume) {
+        mAudioManager.setStreamVolume(stream, volume, 0);
+        return true;
+    }
+
+    public int getMaxVolume(int stream) {
+        return mAudioManager.getStreamMaxVolume(stream);
     }
 }

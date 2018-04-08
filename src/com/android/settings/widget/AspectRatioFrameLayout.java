@@ -16,6 +16,7 @@ package com.android.settings.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
@@ -30,7 +31,8 @@ public final class AspectRatioFrameLayout extends FrameLayout {
 
     private static final float ASPECT_RATIO_CHANGE_THREASHOLD = 0.01f;
 
-    private float mAspectRatio = 1.0f;
+    @VisibleForTesting
+    float mAspectRatio = 1.0f;
 
     public AspectRatioFrameLayout(Context context) {
         this(context, null);
@@ -51,6 +53,10 @@ public final class AspectRatioFrameLayout extends FrameLayout {
         }
     }
 
+    public void setAspectRatio(float aspectRadio) {
+        mAspectRatio = aspectRadio;
+    }
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -65,11 +71,9 @@ public final class AspectRatioFrameLayout extends FrameLayout {
             // Close enough, skip.
             return;
         }
-        if (aspectRatioDiff > 0) {
-            width = (int) (height * mAspectRatio);
-        } else {
-            height = (int) (width / mAspectRatio);
-        }
+
+        width = (int) (height * mAspectRatio);
+
         super.onMeasure(MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY),
                 MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY));
     }

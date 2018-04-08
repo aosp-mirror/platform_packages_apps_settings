@@ -86,15 +86,18 @@
             android:singleLine="true"
             android:textAppearance="@style/TextAppearance.SuggestionSummary" />
 
-        <Button
-            android:id="@android:id/primary"
-            style="@style/ActionPrimaryButton"
-            android:layout_gravity="center"
+        <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="18dp"
-            android:text="@string/suggestion_button_text" />
+            style="@style/SuggestionCardButton">
+            <Button
+                android:id="@android:id/primary"
+                style="@style/ActionPrimaryButton"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/suggestion_button_text" />
+        </FrameLayout>
 
     </LinearLayout>
 

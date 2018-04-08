@@ -6614,6 +6614,8 @@
 
     <!-- Help URL, WiFi [DO NOT TRANSLATE] -->
     <string name="help_url_wifi" translatable="false"></string>
+    <!-- Help URL, WiFi Direct [DO NOT TRANSLATE] -->
+    <string name="help_url_wifi_p2p" translatable="false"></string>
     <!-- Help URL, Bluetooth [DO NOT TRANSLATE] -->
     <string name="help_url_bluetooth" translatable="false"></string>
     <!-- Help URL, Data usage [DO NOT TRANSLATE] -->
@@ -8769,9 +8771,9 @@
     <string name="android_version_pending_update_summary">Update available</string>
 
     <!-- Title for dialog displayed when user selects on a setting locked by an admin [CHAR LIMIT=30] -->
-    <string name="disabled_by_policy_title">Can\'t change this setting</string>
+    <string name="disabled_by_policy_title">Can’t change this setting</string>
     <!-- Title for dialog displayed to tell user that changing volume was disallowed by an admin [CHAR LIMIT=50] -->
-    <string name="disabled_by_policy_title_adjust_volume">Can\'t change volume</string>
+    <string name="disabled_by_policy_title_adjust_volume">Can’t change volume</string>
     <!-- Title for dialog displayed to tell user that outgoing calls were disabled by an admin [CHAR LIMIT=50] -->
     <string name="disabled_by_policy_title_outgoing_calls">Calling not allowed</string>
     <!-- Title for dialog displayed to tell user that sending SMS were disabled by an admin [CHAR LIMIT=50] -->
@@ -8781,9 +8783,9 @@
     <!-- Title for dialog displayed to tell user that screenshots are disabled by an admin [CHAR LIMIT=50] -->
     <string name="disabled_by_policy_title_screen_capture">Screenshot not allowed</string>
     <!-- Title for dialog displayed to tell user that turning off backups is disallowed by an admin [CHAR LIMIT=50] -->
-    <string name="disabled_by_policy_title_turn_off_backups">Can\'t turn off backups</string>
+    <string name="disabled_by_policy_title_turn_off_backups">Can’t turn off backups</string>
     <!-- Title for dialog displayed to tell user that the app was suspended by an admin [CHAR LIMIT=50] -->
-    <string name="disabled_by_policy_title_suspend_packages">Can\'t open this app</string>
+    <string name="disabled_by_policy_title_suspend_packages">Can’t open this app</string>
     <!-- Shown when the user tries to change a settings locked by an admin [CHAR LIMIT=200] -->
     <string name="default_admin_support_msg">If you have questions, contact your IT admin</string>
     <!-- Shown in dialog to allow user to see more information about the device admin [CHAR LIMIT=30] -->
@@ -9395,6 +9397,15 @@
     <!-- Title for settings suggestion for double twist for camera [CHAR LIMIT=60] -->
     <string name="double_twist_for_camera_suggestion_title">Take selfies faster</string>
 
+    <!-- Title text for swipe up to switch apps [CHAR LIMIT=60] -->
+    <string name="swipe_up_to_switch_apps_title">Swipe up on Home button</string>
+    <!-- Summary text for swipe up to switch apps  [CHAR LIMIT=250] -->
+    <string name="swipe_up_to_switch_apps_summary">To switch apps, swipe up on the Home button. Swipe up again to see all apps. Works from any screen. You’ll no longer have an Overview button on the bottom right of your screen.</string>
+    <!-- Title for settings suggestion for swipe up to switch apps [CHAR LIMIT=60] -->
+    <string name="swipe_up_to_switch_apps_suggestion_title">Try the new Home button</string>
+    <!-- Summary for settings suggestion for swipe up to switch apps [CHAR LIMIT=60] -->
+    <string name="swipe_up_to_switch_apps_suggestion_summary">Turn on the new gesture to switch apps</string>
+
     <!-- Preference and settings suggestion title text for ambient display double tap (phone) [CHAR LIMIT=60]-->
     <string name="ambient_display_title" product="default">Double-tap to check phone</string>
     <!-- Preference and settings suggestion title text for ambient display double tap (tablet) [CHAR LIMIT=60]-->
@@ -9590,8 +9601,8 @@
     <string name="do_disclosure_with_name">This device is managed by <xliff:g id="organization_name" example="Foo, Inc.">%s</xliff:g>.</string>
     <!-- Message indicating that the device is enterprise-managed: Space that separates the main text and the "learn more" link that follows it. [CHAR LIMIT=NONE] -->
     <string name="do_disclosure_learn_more_separator">" "</string>
-    <!-- Message indicating that the device is enterprise-managed: Link to learn more about what a Device Owner app can do [CHAR LIMIT=NONE] -->
-    <string name="do_disclosure_learn_more">Learn more</string>
+    <!-- Button label to allow the user to view additional information [CHAR LIMIT=NONE BACKUP_MESSAGE_ID=2416766240581561009] -->
+    <string name="learn_more">Learn more</string>
 
     <!-- Strings for displaying which applications were set as default for specific actions. -->
     <!-- Title for the apps that have been set as default handlers of camera-related intents. [CHAR LIMIT=30] -->

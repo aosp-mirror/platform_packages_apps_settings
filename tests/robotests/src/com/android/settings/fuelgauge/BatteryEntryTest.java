@@ -29,6 +29,7 @@ import android.os.UserManager;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatterySipper.DrainType;
+import com.android.settings.R;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -38,6 +39,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 
 import java.util.Locale;
 
@@ -134,6 +136,17 @@ public class BatteryEntryTest {
         BatteryEntry entry = createBatteryEntryForApp();
 
         assertThat(entry.getLabel()).isEqualTo(HIGH_DRAIN_PACKAGE);
+    }
+
+    @Test
+    public void batteryEntryForAOD_containCorrectInfo() {
+        final BatterySipper batterySipper = mock(BatterySipper.class);
+        batterySipper.drainType = DrainType.AMBIENT_DISPLAY;
+        final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application, mockHandler,
+                mockUserManager, batterySipper);
+
+        assertThat(entry.iconId).isEqualTo(R.drawable.ic_settings_aod);
+        assertThat(entry.name).isEqualTo("Ambient display");
     }
 
     @Test
