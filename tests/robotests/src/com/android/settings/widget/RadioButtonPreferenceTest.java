@@ -16,6 +16,7 @@
 
 package com.android.settings.widget;
 
+import static com.google.common.truth.Truth.assertThat;
 import static junit.framework.Assert.assertEquals;
 
 import static org.mockito.Mockito.mock;
@@ -43,6 +44,16 @@ public class RadioButtonPreferenceTest {
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mPreference = new RadioButtonPreference(mContext);
+    }
+
+    @Test
+    public void shouldHaveRadioPreferenceLayout() {
+        assertThat(mPreference.getLayoutResource()).isEqualTo(R.layout.preference_radio);
+    }
+
+    @Test
+    public void iconSpaceReservedShouldBeFalse() {
+        assertThat(mPreference.isIconSpaceReserved()).isFalse();
     }
 
     @Test
