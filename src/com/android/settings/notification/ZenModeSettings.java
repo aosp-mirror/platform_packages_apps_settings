@@ -138,7 +138,7 @@ public class ZenModeSettings extends ZenModeSettingsBase {
 
             if (zenMode != Settings.Global.ZEN_MODE_OFF) {
                 ZenModeConfig config = NotificationManager.from(mContext).getZenModeConfig();
-                String description = ZenModeConfig.getDescription(mContext, true, config);
+                String description = ZenModeConfig.getDescription(mContext, true, config, false);
 
                 if (description == null) {
                     return mContext.getString(R.string.zen_mode_sound_summary_on);

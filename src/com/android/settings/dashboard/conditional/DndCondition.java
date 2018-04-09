@@ -42,9 +42,10 @@ public class DndCondition extends Condition {
     @VisibleForTesting
     static final IntentFilter DND_FILTER =
         new IntentFilter(NotificationManager.ACTION_INTERRUPTION_FILTER_CHANGED_INTERNAL);
+    @VisibleForTesting
+    protected ZenModeConfig mConfig;
 
     private int mZen;
-    private ZenModeConfig mConfig;
     private final Receiver mReceiver;
 
     public DndCondition(ConditionManager manager) {
@@ -93,7 +94,7 @@ public class DndCondition extends Condition {
     @Override
     public CharSequence getSummary() {
         return ZenModeConfig.getDescription(mManager.getContext(), mZen != Global.ZEN_MODE_OFF,
-                mConfig);
+                mConfig, true);
     }
 
     @Override
