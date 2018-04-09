@@ -23,12 +23,13 @@
     <com.android.settings.widget.VideoPreference
         android:key="gesture_swipe_down_fingerprint_video"
         app:animation="@raw/gesture_fingerprint_swipe"
-        app:preview="@drawable/gesture_fingerprint_swipe"/>
+        app:preview="@drawable/gesture_fingerprint_swipe" />
 
     <SwitchPreference
         android:key="gesture_swipe_down_fingerprint"
         android:title="@string/fingerprint_swipe_for_notifications_title"
         android:summary="@string/fingerprint_swipe_for_notifications_summary"
-        app:keywords="@string/keywords_gesture"/>
+        app:keywords="@string/keywords_gesture"
+        app:controller="com.android.settings.gestures.SwipeToNotificationPreferenceController" />
 
 </PreferenceScreen>

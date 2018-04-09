@@ -23,13 +23,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.search.ResultPayload;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class DoubleTapPowerPreferenceController extends GesturePreferenceController {
 
@@ -43,8 +41,8 @@ public class DoubleTapPowerPreferenceController extends GesturePreferenceControl
 
     private final String SECURE_KEY = CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED;
 
-    public DoubleTapPowerPreferenceController(Context context, Lifecycle lifecycle, String key) {
-        super(context, lifecycle);
+    public DoubleTapPowerPreferenceController(Context context, String key) {
+        super(context, key);
         mDoubleTapPowerKey = key;
     }
 
@@ -59,8 +57,8 @@ public class DoubleTapPowerPreferenceController extends GesturePreferenceControl
     }
 
     @Override
-    public boolean isAvailable() {
-        return isGestureAvailable(mContext);
+    public int getAvailabilityStatus() {
+        return isGestureAvailable(mContext) ? AVAILABLE : DISABLED_UNSUPPORTED;
     }
 
     @Override
@@ -69,25 +67,20 @@ public class DoubleTapPowerPreferenceController extends GesturePreferenceControl
     }
 
     @Override
-    public String getPreferenceKey() {
-        return mDoubleTapPowerKey;
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        boolean enabled = (boolean) newValue;
-        Settings.Secure.putInt(mContext.getContentResolver(), SECURE_KEY, enabled ? ON : OFF);
-        return true;
-    }
-
-    @Override
-    protected boolean isSwitchPrefEnabled() {
+    public boolean isChecked() {
         final int cameraDisabled = Settings.Secure.getInt(mContext.getContentResolver(),
                 SECURE_KEY, ON);
         return cameraDisabled == ON;
     }
 
     @Override
+    public boolean setChecked(boolean isChecked) {
+        return Settings.Secure.putInt(mContext.getContentResolver(), SECURE_KEY,
+                isChecked ? ON : OFF);
+    }
+
+    @Override
+    //TODO (b/69808376): Remove result payload
     public ResultPayload getResultPayload() {
         final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(mContext,
                 DoubleTapPowerSettings.class.getName(), mDoubleTapPowerKey,

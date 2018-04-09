@@ -56,8 +56,8 @@ public class DoubleTapScreenPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mController = new DoubleTapScreenPreferenceController(
-                mContext, null, mAmbientDisplayConfiguration, 0, KEY_DOUBLE_TAP_SCREEN);
+        mController = new DoubleTapScreenPreferenceController(mContext, KEY_DOUBLE_TAP_SCREEN);
+        mController.setConfig(mAmbientDisplayConfiguration);
     }
 
     @Test
@@ -75,26 +75,26 @@ public class DoubleTapScreenPreferenceControllerTest {
     }
 
     @Test
-    public void testSwitchEnabled_configIsSet_shouldReturnTrue() {
+    public void testIsChecked_configIsSet_shouldReturnTrue() {
         // Set the setting to be enabled.
         when(mAmbientDisplayConfiguration.pulseOnDoubleTapEnabled(anyInt())).thenReturn(true);
 
-        assertThat(mController.isSwitchPrefEnabled()).isTrue();
+        assertThat(mController.isChecked()).isTrue();
     }
 
     @Test
-    public void testSwitchEnabled_configIsNotSet_shouldReturnFalse() {
+    public void testIsChecked_configIsNotSet_shouldReturnFalse() {
         when(mAmbientDisplayConfiguration.pulseOnDoubleTapEnabled(anyInt())).thenReturn(false);
 
-        assertThat(mController.isSwitchPrefEnabled()).isFalse();
+        assertThat(mController.isChecked()).isFalse();
     }
 
     @Test
     public void testPreferenceController_ProperResultPayloadType() {
         final Context context = RuntimeEnvironment.application;
         DoubleTapScreenPreferenceController controller =
-                new DoubleTapScreenPreferenceController(context, null /* lifecycle */,
-                        mAmbientDisplayConfiguration, 0 /* userid */, KEY_DOUBLE_TAP_SCREEN);
+                new DoubleTapScreenPreferenceController(context, KEY_DOUBLE_TAP_SCREEN);
+        controller.setConfig(mAmbientDisplayConfiguration);
         ResultPayload payload = controller.getResultPayload();
         assertThat(payload).isInstanceOf(InlineSwitchPayload.class);
     }

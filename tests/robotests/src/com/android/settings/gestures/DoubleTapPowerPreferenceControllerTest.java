@@ -56,7 +56,7 @@ public class DoubleTapPowerPreferenceControllerTest {
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mContentResolver = mContext.getContentResolver();
-        mController = new DoubleTapPowerPreferenceController(mContext, null, KEY_DOUBLE_TAP_POWER);
+        mController = new DoubleTapPowerPreferenceController(mContext, KEY_DOUBLE_TAP_POWER);
     }
 
     @After
@@ -81,28 +81,27 @@ public class DoubleTapPowerPreferenceControllerTest {
     }
 
     @Test
-    public void testSwitchEnabled_configIsNotSet_shouldReturnTrue() {
+    public void testIsChecked_configIsNotSet_shouldReturnTrue() {
         // Set the setting to be enabled.
         Settings.System.putInt(mContentResolver, CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, ON);
-        mController = new DoubleTapPowerPreferenceController(mContext, null, KEY_DOUBLE_TAP_POWER);
+        mController = new DoubleTapPowerPreferenceController(mContext, KEY_DOUBLE_TAP_POWER);
 
-        assertThat(mController.isSwitchPrefEnabled()).isTrue();
+        assertThat(mController.isChecked()).isTrue();
     }
 
     @Test
-    public void testSwitchEnabled_configIsSet_shouldReturnFalse() {
+    public void testIsChecked_configIsSet_shouldReturnFalse() {
         // Set the setting to be disabled.
         Settings.System.putInt(mContentResolver, CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, OFF);
-        mController = new DoubleTapPowerPreferenceController(mContext, null, KEY_DOUBLE_TAP_POWER);
+        mController = new DoubleTapPowerPreferenceController(mContext, KEY_DOUBLE_TAP_POWER);
 
-        assertThat(mController.isSwitchPrefEnabled()).isFalse();
+        assertThat(mController.isChecked()).isFalse();
     }
 
     @Test
     public void testPreferenceController_ProperResultPayloadType() {
         DoubleTapPowerPreferenceController controller =
-            new DoubleTapPowerPreferenceController(mContext, null /* lifecycle */,
-                KEY_DOUBLE_TAP_POWER);
+            new DoubleTapPowerPreferenceController(mContext, KEY_DOUBLE_TAP_POWER);
         ResultPayload payload = controller.getResultPayload();
         assertThat(payload).isInstanceOf(InlineSwitchPayload.class);
     }

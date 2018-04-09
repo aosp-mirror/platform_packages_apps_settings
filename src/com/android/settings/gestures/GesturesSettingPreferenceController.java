@@ -19,6 +19,7 @@ package com.android.settings.gestures;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.R;
@@ -33,6 +34,7 @@ public class GesturesSettingPreferenceController extends BasePreferenceControlle
     private List<AbstractPreferenceController> mGestureControllers;
 
     private static final String KEY_GESTURES_SETTINGS = "gesture_settings";
+    private static final String FAKE_PREF_KEY = "fake_key_only_for_get_available";
 
     public GesturesSettingPreferenceController(Context context) {
         super(context, KEY_GESTURES_SETTINGS);
@@ -42,16 +44,38 @@ public class GesturesSettingPreferenceController extends BasePreferenceControlle
     @Override
     public int getAvailabilityStatus() {
         if (mGestureControllers == null) {
-            mGestureControllers = GestureSettings.buildPreferenceControllers(mContext,
-                    null /* lifecycle */, new AmbientDisplayConfiguration(mContext));
+            mGestureControllers = buildAllPreferenceControllers(mContext);
         }
         boolean isAvailable = false;
         for (AbstractPreferenceController controller : mGestureControllers) {
             isAvailable = isAvailable || controller.isAvailable();
         }
-        return isAvailable
-                ? AVAILABLE
-                : DISABLED_UNSUPPORTED;
+        return isAvailable ? AVAILABLE : DISABLED_UNSUPPORTED;
+    }
+
+    /**
+     * Get all controllers for their availability status when doing getAvailabilityStatus.
+     * Do not use this method to add controllers into fragment, most of below controllers already
+     * convert to TogglePreferenceController, please register them in xml.
+     * The key is fake because those controllers won't be use to control preference.
+     */
+    private static List<AbstractPreferenceController> buildAllPreferenceControllers(
+            @NonNull Context context) {
+        final AmbientDisplayConfiguration ambientDisplayConfiguration =
+                new AmbientDisplayConfiguration(context);
+        final List<AbstractPreferenceController> controllers =
+                GestureSettings.buildPreferenceControllers(context, null);
+
+        controllers.add(new AssistGestureSettingsPreferenceController(context, FAKE_PREF_KEY)
+                .setAssistOnly(false));
+        controllers.add(new SwipeToNotificationPreferenceController(context, FAKE_PREF_KEY));
+        controllers.add(new DoubleTwistPreferenceController(context, FAKE_PREF_KEY));
+        controllers.add(new DoubleTapPowerPreferenceController(context, FAKE_PREF_KEY));
+        controllers.add(new PickupGesturePreferenceController(context, FAKE_PREF_KEY)
+                .setConfig(ambientDisplayConfiguration));
+        controllers.add(new DoubleTapScreenPreferenceController(context, FAKE_PREF_KEY)
+                .setConfig(ambientDisplayConfiguration));
+        return controllers;
     }
 
     @Override
