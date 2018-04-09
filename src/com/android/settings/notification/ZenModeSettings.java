@@ -25,6 +25,7 @@ import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
 import android.support.annotation.VisibleForTesting;
+import android.support.v7.preference.CheckBoxPreference;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -40,6 +41,17 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class ZenModeSettings extends ZenModeSettingsBase {
+    private static final String KEY_SOUND = "zen_effect_sound";
+    @Override
+    public void onResume() {
+        super.onResume();
+        CheckBoxPreference soundPreference =
+                (CheckBoxPreference) getPreferenceScreen().findPreference(KEY_SOUND);
+        if (soundPreference != null) {
+            soundPreference.setChecked(true);
+        }
+    }
+
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.zen_mode_settings;
@@ -146,15 +158,25 @@ public class ZenModeSettings extends ZenModeSettingsBase {
         }
 
         String getBlockedEffectsSummary(Policy policy) {
-            if (policy.suppressedVisualEffects == 0) {
-                return mContext.getResources().getString(
-                        R.string.zen_mode_block_effect_summary_sound);
-            } else if (Policy.areAllVisualEffectsSuppressed(policy.suppressedVisualEffects)) {
-                return mContext.getResources().getString(
-                        R.string.zen_mode_block_effect_summary_all);
+            List<String> blockedStrings = new ArrayList<>();
+            if (Policy.areAnyScreenOffEffectsSuppressed(policy.suppressedVisualEffects)) {
+                blockedStrings.add(mContext.getResources().getString(
+                        R.string.zen_mode_block_effect_summary_screen_off));
             }
-            return mContext.getResources().getString(
-                    R.string.zen_mode_block_effect_summary_some);
+            if (Policy.areAnyScreenOnEffectsSuppressed(policy.suppressedVisualEffects)) {
+                blockedStrings.add(mContext.getResources().getString(
+                        R.string.zen_mode_block_effect_summary_screen_on));
+            }
+
+            if (blockedStrings.size() == 0) {
+                return mContext.getResources().getString(
+                        R.string.zen_mode_block_effect_summary_none);
+            } else if (blockedStrings.size() == 1) {
+                return blockedStrings.get(0);
+            } else {
+                return mContext.getResources().getString(R.string.join_two_unrelated_items,
+                        blockedStrings.get(0), blockedStrings.get(1));
+            }
         }
 
         String getAutomaticRulesSummary() {
