@@ -86,9 +86,14 @@ public class ValidatedEditTextPreference extends CustomEditTextPreference {
         super.onBindViewHolder(holder);
 
         final TextView textView = (TextView) holder.findViewById(android.R.id.summary);
-        if (textView != null && mIsSummaryPassword) {
+        if (textView == null) {
+            return;
+        }
+        if (mIsSummaryPassword) {
             textView.setInputType(
                     InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        } else {
+            textView.setInputType(InputType.TYPE_CLASS_TEXT);
         }
     }
 
