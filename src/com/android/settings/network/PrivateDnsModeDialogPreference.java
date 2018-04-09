@@ -53,7 +53,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Dialog to set the private dns
+ * Dialog to set the Private DNS
  */
 public class PrivateDnsModeDialogPreference extends CustomDialogPreference implements
         DialogInterface.OnClickListener, RadioGroup.OnCheckedChangeListener, TextWatcher {
@@ -77,6 +77,15 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreference imple
     static final String MODE_KEY = Settings.Global.PRIVATE_DNS_MODE;
     @VisibleForTesting
     static final String HOSTNAME_KEY = Settings.Global.PRIVATE_DNS_SPECIFIER;
+
+    public static String getModeFromSettings(ContentResolver cr) {
+        final String mode = Settings.Global.getString(cr, MODE_KEY);
+        return PRIVATE_DNS_MAP.containsKey(mode) ? mode : PRIVATE_DNS_MODE_OPPORTUNISTIC;
+    }
+
+    public static String getHostnameFromSettings(ContentResolver cr) {
+        return Settings.Global.getString(cr, HOSTNAME_KEY);
+    }
 
     @VisibleForTesting
     EditText mEditText;
@@ -121,9 +130,12 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreference imple
     protected void onBindDialogView(View view) {
         final Context context = getContext();
         final ContentResolver contentResolver = context.getContentResolver();
+
+        mMode = getModeFromSettings(context.getContentResolver());
+
         mEditText = view.findViewById(R.id.private_dns_mode_provider_hostname);
         mEditText.addTextChangedListener(this);
-        mEditText.setText(Settings.Global.getString(contentResolver, HOSTNAME_KEY));
+        mEditText.setText(getHostnameFromSettings(contentResolver));
 
         mRadioGroup = view.findViewById(R.id.private_dns_radio_group);
         mRadioGroup.setOnCheckedChangeListener(this);
