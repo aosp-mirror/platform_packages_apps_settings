@@ -111,8 +111,10 @@ public class PrivateDnsModeDialogPreferenceTest {
 
     @Test
     public void testOnBindDialogView_containsCorrectData() {
+        // Don't set settings to the default value ("opportunistic") as that
+        // risks masking failure to read the mode from settings.
         Settings.Global.putString(mContext.getContentResolver(),
-                PrivateDnsModeDialogPreference.MODE_KEY, PRIVATE_DNS_MODE_OPPORTUNISTIC);
+                PrivateDnsModeDialogPreference.MODE_KEY, PRIVATE_DNS_MODE_OFF);
         Settings.Global.putString(mContext.getContentResolver(),
                 PrivateDnsModeDialogPreference.HOSTNAME_KEY, HOST_NAME);
 
@@ -123,7 +125,7 @@ public class PrivateDnsModeDialogPreferenceTest {
 
         assertThat(mPreference.mEditText.getText().toString()).isEqualTo(HOST_NAME);
         assertThat(mPreference.mRadioGroup.getCheckedRadioButtonId()).isEqualTo(
-                R.id.private_dns_mode_opportunistic);
+                R.id.private_dns_mode_off);
     }
 
     @Test
