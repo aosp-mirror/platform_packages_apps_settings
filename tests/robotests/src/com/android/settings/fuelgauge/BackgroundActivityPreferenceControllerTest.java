@@ -183,7 +183,7 @@ public class BackgroundActivityPreferenceControllerTest {
 
         mController.updateSummary(mPreference);
 
-        assertThat(mPreference.getSummary()).isEqualTo("App can\u2019t use battery in background");
+        assertThat(mPreference.getSummary()).isEqualTo("Restricted");
     }
 
     @Test

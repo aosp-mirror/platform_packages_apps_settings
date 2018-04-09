@@ -4899,10 +4899,6 @@
     <string name="background_activity_title">Background restriction</string>
     <!-- Summary for the background activity [CHAR_LIMIT=120] -->
     <string name="background_activity_summary">Allow the app to run in the background</string>
-    <!-- Summary for the background activity when it is on [CHAR_LIMIT=120] -->
-    <string name="background_activity_summary_on">App can run in the background when not in use</string>
-    <!-- Summary for the background activity when it is off [CHAR_LIMIT=120] -->
-    <string name="background_activity_summary_off">App\'s background activity is limited when not in use</string>
     <!-- Summary for the background activity when it is disabled [CHAR_LIMIT=120] -->
     <string name="background_activity_summary_disabled">App not allowed to run in background</string>
     <!-- TODO: Pending UX review. Summary for the background activity when it is whitlisted [CHAR_LIMIT=120] -->
@@ -5023,11 +5019,11 @@
     <!-- Summary for the battery high usage tip, which presents battery may run out soon [CHAR LIMIT=NONE] -->
     <string name="battery_tip_high_usage_summary">Battery may run out soon</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="default">Your phone has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps since last charge:</string>
+    <string name="battery_tip_dialog_message" product="default">Your phone has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps since last full charge(<xliff:g id="time_period_ago" example="1 hr ago">%2$s</xliff:g>):</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="tablet">Your tablet has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps since last charge:</string>
+    <string name="battery_tip_dialog_message" product="tablet">Your tablet has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps since last full charge(<xliff:g id="time_period_ago" example="1 hr ago">%2$s</xliff:g>):</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="device">Your device has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps since last charge:</string>
+    <string name="battery_tip_dialog_message" product="device">Your device has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps since last full charge(<xliff:g id="time_period_ago" example="1 hr ago">%2$s</xliff:g>):</string>
     <!-- Title for restricted app preference, showing how many app need to be restricted [CHAR LIMIT=NONE] -->
     <plurals name="battery_tip_restrict_title">
         <item quantity="one">Restrict %1$d app</item>
@@ -5097,7 +5093,7 @@
     </plurals>
 
     <!-- Footer message for restrict app details page -->
-    <string name="restricted_app_detail_footer">Apps shown here aren\'t behaving properly and have been using battery in the background.\n\nThese apps are now blocked from using battery in the background. As a result, some app notifications may be delayed.</string>
+    <string name="restricted_app_detail_footer">These apps have been using battery in the background. Restricted apps may not work properly and notifications may be delayed.</string>
 
     <!-- Title for auto restriction toggle -->
     <string name="battery_auto_restriction_title">Use Battery Manager</string>
@@ -8022,7 +8018,7 @@
     <string name="encryption_interstitial_no">No</string>
 
     <!-- Label to say yes to the question of whether app is restricted. [CHAR LIMIT=20] -->
-    <string name="restricted_true_label">App can\u2019t use battery in background</string>
+    <string name="restricted_true_label">Restricted</string>
     <!-- Label to say no to the question of whether app is restricted. [CHAR LIMIT=20] -->
     <string name="restricted_false_label">App can use battery in background</string>
 
