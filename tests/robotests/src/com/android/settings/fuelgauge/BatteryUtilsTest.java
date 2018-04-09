@@ -377,6 +377,18 @@ public class BatteryUtilsTest {
     }
 
     @Test
+    public void testSmearScreenBatterySipper_screenSipperNull_shouldNotCrash() {
+        final BatterySipper sipperFg = createTestSmearBatterySipper(TIME_FOREGROUND,
+                BATTERY_APP_USAGE, 2 /* uid */, false /* isUidNull */);
+
+        final List<BatterySipper> sippers = new ArrayList<>();
+        sippers.add(sipperFg);
+
+        // Shouldn't crash
+        mBatteryUtils.smearScreenBatterySipper(sippers, null /* screenSipper */);
+    }
+
+    @Test
     public void testCalculateRunningTimeBasedOnStatsType() {
         assertThat(mBatteryUtils.calculateRunningTimeBasedOnStatsType(mBatteryStatsHelper,
                 BatteryStats.STATS_SINCE_CHARGED)).isEqualTo(TIME_SINCE_LAST_FULL_CHARGE_MS);
