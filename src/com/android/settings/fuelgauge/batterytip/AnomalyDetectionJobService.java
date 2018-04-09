@@ -172,7 +172,7 @@ public class AnomalyDetectionJobService extends JobService {
                     metricsFeatureProvider.action(context,
                             MetricsProto.MetricsEvent.ACTION_ANOMALY_TRIGGERED,
                             packageName,
-                            Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT,
+                            Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_TYPE,
                                     anomalyInfo.anomalyType));
                 }
             }

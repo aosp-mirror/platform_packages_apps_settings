@@ -169,7 +169,7 @@ public class AnomalyDetectionJobServiceTest {
         verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
                 MetricsProto.MetricsEvent.ACTION_ANOMALY_TRIGGERED,
                 SYSTEM_PACKAGE,
-                Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, ANOMALY_TYPE));
+                Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_TYPE, ANOMALY_TYPE));
     }
 
 
@@ -194,6 +194,6 @@ public class AnomalyDetectionJobServiceTest {
         verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
                 MetricsProto.MetricsEvent.ACTION_ANOMALY_TRIGGERED,
                 SYSTEM_PACKAGE,
-                Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, ANOMALY_TYPE));
+                Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_TYPE, ANOMALY_TYPE));
     }
 }
