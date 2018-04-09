@@ -44,35 +44,18 @@ public class AmbientDisplaySettings extends DashboardFragment {
     public static final String KEY_AMBIENT_DISPLAY_ALWAYS_ON = "ambient_display_always_on";
 
     private static final String TAG = "AmbientDisplaySettings";
-    private static final int MY_USER_ID = UserHandle.myUserId();
-
-    private static final String KEY_AMBIENT_DISPLAY_DOUBLE_TAP = "ambient_display_double_tap";
-    private static final String KEY_AMBIENT_DISPLAY_PICK_UP = "ambient_display_pick_up";
-    private static final String KEY_AMBIENT_DISPLAY_NOTIFICATION = "ambient_display_notification";
 
     private AmbientDisplayConfiguration mConfig;
-
-    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Lifecycle lifecycle, AmbientDisplayConfiguration config) {
-
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new DoubleTapScreenPreferenceController(context, lifecycle, config,
-                MY_USER_ID, KEY_AMBIENT_DISPLAY_DOUBLE_TAP));
-        controllers.add(new PickupGesturePreferenceController(context, lifecycle, config,
-                MY_USER_ID, KEY_AMBIENT_DISPLAY_PICK_UP));
-        return controllers;
-    }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        final AmbientDisplayAlwaysOnPreferenceController controller = use(
-                AmbientDisplayAlwaysOnPreferenceController.class);
-        controller.setConfig(getConfig(context));
-        controller.setCallback(this::updatePreferenceStates);
-        final AmbientDisplayNotificationsPreferenceController notificationController = use(
-                AmbientDisplayNotificationsPreferenceController.class);
-        notificationController.setConfig(getConfig(context));
+        use(AmbientDisplayAlwaysOnPreferenceController.class)
+            .setConfig(getConfig(context))
+            .setCallback(this::updatePreferenceStates);
+        use(AmbientDisplayNotificationsPreferenceController.class).setConfig(getConfig(context));
+        use(DoubleTapScreenPreferenceController.class).setConfig(getConfig(context));
+        use(PickupGesturePreferenceController.class).setConfig(getConfig(context));
     }
 
     @Override
@@ -83,11 +66,6 @@ public class AmbientDisplaySettings extends DashboardFragment {
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.ambient_display_settings;
-    }
-
-    @Override
-    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle(), getConfig(context));
     }
 
     @Override
@@ -106,13 +84,6 @@ public class AmbientDisplaySettings extends DashboardFragment {
                     sir.xmlResId = R.xml.ambient_display_settings;
                     result.add(sir);
                     return result;
-                }
-
-                @Override
-                public List<AbstractPreferenceController> createPreferenceControllers(
-                        Context context) {
-                    return buildPreferenceControllers(context, null,
-                            new AmbientDisplayConfiguration(context));
                 }
             };
 

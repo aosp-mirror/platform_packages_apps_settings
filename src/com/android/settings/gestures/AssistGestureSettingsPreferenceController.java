@@ -24,7 +24,6 @@ import android.content.Intent;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
-import android.support.v7.preference.TwoStatePreference;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
@@ -32,11 +31,8 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.search.ResultPayload;
-import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.core.lifecycle.events.OnResume;
 
-public class AssistGestureSettingsPreferenceController extends GesturePreferenceController
-        implements OnResume {
+public class AssistGestureSettingsPreferenceController extends GesturePreferenceController {
 
     private static final String PREF_KEY_VIDEO = "gesture_assist_video";
 
@@ -55,30 +51,25 @@ public class AssistGestureSettingsPreferenceController extends GesturePreference
     @VisibleForTesting
     boolean mAssistOnly;
 
-    public AssistGestureSettingsPreferenceController(Context context, Lifecycle lifecycle,
-            String key, boolean assistOnly) {
-        super(context, lifecycle);
+    public AssistGestureSettingsPreferenceController(Context context,
+            String key) {
+        super(context, key);
         mFeatureProvider = FeatureFactory.getFactory(context).getAssistGestureFeatureProvider();
         mWasAvailable = isAvailable();
         mAssistGesturePrefKey = key;
-        mAssistOnly = assistOnly;
     }
 
     @Override
-    public boolean isAvailable() {
-        if (mAssistOnly) {
-            return mFeatureProvider.isSupported(mContext);
-        } else {
-            return mFeatureProvider.isSensorAvailable(mContext);
-        }
+    public int getAvailabilityStatus() {
+        final boolean isAvailable = mAssistOnly ? mFeatureProvider.isSupported(mContext)
+                : mFeatureProvider.isSensorAvailable(mContext);
+        return isAvailable ? AVAILABLE : DISABLED_UNSUPPORTED;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         mScreen = screen;
         mPreference = screen.findPreference(getPreferenceKey());
-        // Call super last or AbstractPreferenceController might remove the preference from the
-        // screen (if !isAvailable()) before we can save a reference to it.
         super.displayPreference(screen);
     }
 
@@ -90,6 +81,11 @@ public class AssistGestureSettingsPreferenceController extends GesturePreference
             updatePreference();
             mWasAvailable = isAvailable();
         }
+    }
+
+    public AssistGestureSettingsPreferenceController setAssistOnly(boolean assistOnly) {
+        mAssistOnly = assistOnly;
+        return this;
     }
 
     private void updatePreference() {
@@ -117,31 +113,9 @@ public class AssistGestureSettingsPreferenceController extends GesturePreference
     }
 
     @Override
-    public void updateState(Preference preference) {
-        boolean isEnabled = isAssistGestureEnabled() && mFeatureProvider.isSupported(mContext);
-
-        if (!mAssistOnly) {
-            isEnabled = isEnabled || isSilenceGestureEnabled();
-        }
-
-        if (preference != null) {
-            if (preference instanceof TwoStatePreference) {
-                ((TwoStatePreference) preference).setChecked(isSwitchPrefEnabled());
-            } else {
-                preference.setSummary(isEnabled
-                        ? R.string.gesture_setting_on
-                        : R.string.gesture_setting_off);
-            }
-        }
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final boolean enabled = (boolean) newValue;
-        Settings.Secure.putInt(mContext.getContentResolver(), SECURE_KEY_ASSIST,
-                enabled ? ON : OFF);
-        updateState(preference);
-        return true;
+    public boolean setChecked(boolean isChecked) {
+        return Settings.Secure.putInt(mContext.getContentResolver(), SECURE_KEY_ASSIST,
+                isChecked ? ON : OFF);
     }
 
     @Override
@@ -150,17 +124,22 @@ public class AssistGestureSettingsPreferenceController extends GesturePreference
     }
 
     @Override
-    public String getPreferenceKey() {
-        return mAssistGesturePrefKey;
+    public CharSequence getSummary() {
+        boolean isEnabled = isAssistGestureEnabled() && mFeatureProvider.isSupported(mContext);
+        if (!mAssistOnly) {
+            isEnabled = isEnabled || isSilenceGestureEnabled();
+        }
+        return mContext.getText(
+                isEnabled ? R.string.gesture_setting_on : R.string.gesture_setting_off);
     }
 
     @Override
-    protected boolean isSwitchPrefEnabled() {
-        // Does nothing
-        return true;
+    public boolean isChecked() {
+        return Settings.Secure.getInt(mContext.getContentResolver(), SECURE_KEY_ASSIST, OFF) == ON;
     }
 
     @Override
+    //TODO (b/69808376): Remove result payload
     public ResultPayload getResultPayload() {
         final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(mContext,
                 AssistGestureSettings.class.getName(), mAssistGesturePrefKey,

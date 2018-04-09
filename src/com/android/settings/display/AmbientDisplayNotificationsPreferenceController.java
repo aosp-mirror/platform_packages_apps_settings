@@ -56,8 +56,10 @@ public class AmbientDisplayNotificationsPreferenceController extends
      *
      * @param config AmbientDisplayConfiguration for this controller
      */
-    public void setConfig(AmbientDisplayConfiguration config) {
+    public AmbientDisplayNotificationsPreferenceController setConfig(
+            AmbientDisplayConfiguration config) {
         mConfig = config;
+        return this;
     }
 
     @Override

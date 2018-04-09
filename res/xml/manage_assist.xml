@@ -17,6 +17,7 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="manage_assist_screen"
     android:title="@string/assist_and_voice_input_title">
 
@@ -24,31 +25,32 @@
         android:key="default_assist"
         android:title="@string/default_assist_title"
         android:summary="@string/summary_placeholder"
-        android:fragment="com.android.settings.applications.assist.DefaultAssistPicker"/>
+        android:fragment="com.android.settings.applications.assist.DefaultAssistPicker" />
 
     <Preference
         android:key="gesture_assist_application"
         android:title="@string/assist_gesture_title"
-        android:fragment="com.android.settings.gestures.AssistGestureSettings"/>
+        android:fragment="com.android.settings.gestures.AssistGestureSettings"
+        settings:controller="com.android.settings.gestures.AssistGestureSettingsPreferenceController" />
 
     <SwitchPreference
         android:key="context"
         android:title="@string/assist_access_context_title"
-        android:summary="@string/assist_access_context_summary"/>
+        android:summary="@string/assist_access_context_summary" />
 
     <SwitchPreference
         android:key="screenshot"
         android:title="@string/assist_access_screenshot_title"
-        android:summary="@string/assist_access_screenshot_summary"/>
+        android:summary="@string/assist_access_screenshot_summary" />
 
     <SwitchPreference
         android:key="flash"
         android:title="@string/assist_flash_title"
-        android:summary="@string/assist_flash_summary"/>
+        android:summary="@string/assist_flash_summary" />
 
     <com.android.settings.widget.GearPreference
         android:key="voice_input_settings"
         android:title="@string/voice_input_settings_title"
-        android:fragment="com.android.settings.applications.assist.DefaultVoiceInputPicker"/>
+        android:fragment="com.android.settings.applications.assist.DefaultVoiceInputPicker" />
 
 </PreferenceScreen>
