@@ -54,14 +54,6 @@ public class SwipeToNotificationSettingsTest {
     }
 
     @Test
-    public void testGetPreferenceControllers_shouldAllBeCreated() {
-        final List<AbstractPreferenceController> controllers =
-                mFragment.createPreferenceControllers(mContext);
-
-        assertThat(controllers.isEmpty()).isFalse();
-    }
-
-    @Test
     public void testSearchIndexProvider_shouldIndexResource() {
         final List<SearchIndexableResource> indexRes =
             SwipeToNotificationSettings.SEARCH_INDEX_DATA_PROVIDER

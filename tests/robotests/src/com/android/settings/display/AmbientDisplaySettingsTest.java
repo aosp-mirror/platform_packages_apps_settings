@@ -24,6 +24,8 @@ import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 
+import com.android.settings.gestures.DoubleTapScreenPreferenceController;
+import com.android.settings.gestures.PickupGesturePreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -48,16 +50,46 @@ public class AmbientDisplaySettingsTest {
     }
 
     @Test
-    public void onAttach_shouldInvokeSetters() {
-        final AmbientDisplayAlwaysOnPreferenceController controller = mock(
-                AmbientDisplayAlwaysOnPreferenceController.class);
+    public void onAttach_alwaysOn_shouldInvokeSetters() {
+        final AmbientDisplayAlwaysOnPreferenceController controller = spy(
+                new AmbientDisplayAlwaysOnPreferenceController(mContext, "key"));
         doReturn(controller).when(mTestFragment).use(
                 AmbientDisplayAlwaysOnPreferenceController.class);
 
         mTestFragment.onAttach(mContext);
-
         verify(controller).setConfig(any());
         verify(controller).setCallback(any());
+    }
+
+    @Test
+    public void onAttach_notifications_shouldInvokeSetters() {
+        final AmbientDisplayNotificationsPreferenceController controller = spy(
+                new AmbientDisplayNotificationsPreferenceController(mContext, "key"));
+        doReturn(controller).when(mTestFragment).use(
+                AmbientDisplayNotificationsPreferenceController.class);
+
+        mTestFragment.onAttach(mContext);
+        verify(controller).setConfig(any());
+    }
+
+    @Test
+    public void onAttach_doubleTap_shouldInvokeSetters() {
+        final DoubleTapScreenPreferenceController controller = spy(
+                new DoubleTapScreenPreferenceController(mContext, "key"));
+        doReturn(controller).when(mTestFragment).use(DoubleTapScreenPreferenceController.class);
+
+        mTestFragment.onAttach(mContext);
+        verify(controller).setConfig(any());
+    }
+
+    @Test
+    public void onAttach_pickUp_shouldInvokeSetters() {
+        final PickupGesturePreferenceController controller = spy(
+                new PickupGesturePreferenceController(mContext, "key"));
+        doReturn(controller).when(mTestFragment).use(PickupGesturePreferenceController.class);
+
+        mTestFragment.onAttach(mContext);
+        verify(controller).setConfig(any());
     }
 
     public static class TestFragment extends AmbientDisplaySettings {

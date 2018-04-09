@@ -69,12 +69,16 @@ public class AmbientDisplayAlwaysOnPreferenceController extends TogglePreference
         return true;
     }
 
-    public void setConfig(AmbientDisplayConfiguration config) {
+    public AmbientDisplayAlwaysOnPreferenceController setConfig(
+            AmbientDisplayConfiguration config) {
         mConfig = config;
+        return this;
     }
 
-    public void setCallback(OnPreferenceChangedCallback callback) {
+    public AmbientDisplayAlwaysOnPreferenceController setCallback(
+            OnPreferenceChangedCallback callback) {
         mCallback = callback;
+        return this;
     }
 
     public static boolean isAlwaysOnEnabled(AmbientDisplayConfiguration config) {

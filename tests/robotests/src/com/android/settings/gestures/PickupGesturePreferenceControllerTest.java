@@ -57,8 +57,8 @@ public class PickupGesturePreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mController = new PickupGesturePreferenceController(
-                mContext, null, mAmbientDisplayConfiguration, 0, KEY_PICK_UP);
+        mController = new PickupGesturePreferenceController(mContext, KEY_PICK_UP);
+        mController.setConfig(mAmbientDisplayConfiguration);
     }
 
     @Test
@@ -76,19 +76,19 @@ public class PickupGesturePreferenceControllerTest {
     }
 
     @Test
-    public void testSwitchEnabled_configIsSet_shouldReturnTrue() {
+    public void testIsChecked_configIsSet_shouldReturnTrue() {
         // Set the setting to be enabled.
         when(mAmbientDisplayConfiguration.pulseOnPickupEnabled(anyInt())).thenReturn(true);
 
-        assertThat(mController.isSwitchPrefEnabled()).isTrue();
+        assertThat(mController.isChecked()).isTrue();
     }
 
     @Test
-    public void testSwitchEnabled_configIsNotSet_shouldReturnFalse() {
+    public void testIsChecked_configIsNotSet_shouldReturnFalse() {
         // Set the setting to be disabled.
         when(mAmbientDisplayConfiguration.pulseOnPickupEnabled(anyInt())).thenReturn(false);
 
-        assertThat(mController.isSwitchPrefEnabled()).isFalse();
+        assertThat(mController.isChecked()).isFalse();
     }
 
     @Test
@@ -111,8 +111,8 @@ public class PickupGesturePreferenceControllerTest {
     public void testPreferenceController_ProperResultPayloadType() {
         final Context context = RuntimeEnvironment.application;
         PickupGesturePreferenceController controller =
-                new PickupGesturePreferenceController(
-                        context, null, mAmbientDisplayConfiguration, 0, KEY_PICK_UP);
+                new PickupGesturePreferenceController(context, KEY_PICK_UP);
+        controller.setConfig(mAmbientDisplayConfiguration);
         ResultPayload payload = controller.getResultPayload();
         assertThat(payload).isInstanceOf(InlineSwitchPayload.class);
     }
