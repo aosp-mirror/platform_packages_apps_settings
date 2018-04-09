@@ -19,12 +19,12 @@ import android.content.Context;
 import android.hardware.usb.UsbManager;
 import android.hardware.usb.UsbPort;
 import android.support.annotation.VisibleForTesting;
+import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.widget.GearPreference;
 
 /**
  * Controller to maintain connected usb device
@@ -34,7 +34,7 @@ public class ConnectedUsbDeviceUpdater {
     private UsbBackend mUsbBackend;
     private DevicePreferenceCallback mDevicePreferenceCallback;
     @VisibleForTesting
-    GearPreference mUsbPreference;
+    Preference mUsbPreference;
     @VisibleForTesting
     UsbConnectionBroadcastReceiver mUsbReceiver;
 
@@ -75,17 +75,17 @@ public class ConnectedUsbDeviceUpdater {
     }
 
     public void initUsbPreference(Context context) {
-        mUsbPreference = new GearPreference(context, null /* AttributeSet */);
+        mUsbPreference = new Preference(context, null /* AttributeSet */);
         mUsbPreference.setTitle(R.string.usb_pref);
         mUsbPreference.setIcon(R.drawable.ic_usb);
-        mUsbPreference.setSelectable(false);
-        mUsbPreference.setOnGearClickListener((GearPreference p) -> {
+        mUsbPreference.setOnPreferenceClickListener((Preference p) -> {
             // New version - uses a separate screen.
             new SubSettingLauncher(mFragment.getContext())
                     .setDestination(UsbDetailsFragment.class.getName())
                     .setTitle(R.string.device_details_title)
                     .setSourceMetricsCategory(mFragment.getMetricsCategory())
                     .launch();
+            return true;
         });
 
         forceUpdate();
