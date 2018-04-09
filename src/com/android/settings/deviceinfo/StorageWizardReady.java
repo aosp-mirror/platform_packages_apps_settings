@@ -18,10 +18,12 @@ package com.android.settings.deviceinfo;
 
 import android.os.Bundle;
 import android.os.storage.VolumeInfo;
+import android.view.View;
 
 import com.android.settings.R;
 
 public class StorageWizardReady extends StorageWizardBase {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,27 +33,23 @@ public class StorageWizardReady extends StorageWizardBase {
         }
         setContentView(R.layout.storage_wizard_generic);
 
-        setHeaderText(R.string.storage_wizard_ready_title, mDisk.getDescription());
+        setHeaderText(R.string.storage_wizard_ready_title, mDisk.getShortDescription());
 
-        // TODO: handle mixed partition cases instead of just guessing based on
-        // first volume type we encounter
-        final VolumeInfo publicVol = findFirstVolume(VolumeInfo.TYPE_PUBLIC);
         final VolumeInfo privateVol = findFirstVolume(VolumeInfo.TYPE_PRIVATE);
-        if (publicVol != null) {
-            setIllustrationType(ILLUSTRATION_PORTABLE);
-            setBodyText(R.string.storage_wizard_ready_external_body,
-                    mDisk.getDescription());
-        } else if (privateVol != null) {
-            setIllustrationType(ILLUSTRATION_INTERNAL);
-            setBodyText(R.string.storage_wizard_ready_internal_body,
+        final boolean migrateSkip = getIntent().getBooleanExtra(EXTRA_MIGRATE_SKIP, false);
+        if (privateVol != null && !migrateSkip) {
+            setBodyText(R.string.storage_wizard_ready_v2_internal_body,
+                    mDisk.getDescription(), mDisk.getShortDescription());
+        } else {
+            setBodyText(R.string.storage_wizard_ready_v2_external_body,
                     mDisk.getDescription());
         }
 
-        getNextButton().setText(R.string.done);
+        setNextButtonText(R.string.done);
     }
 
     @Override
-    public void onNavigateNext() {
+    public void onNavigateNext(View view) {
         finishAffinity();
     }
 }

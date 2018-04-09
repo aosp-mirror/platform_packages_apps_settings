@@ -32,6 +32,7 @@ import android.os.UserManager;
 import android.os.storage.StorageManager;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
@@ -67,15 +68,15 @@ public class StorageWizardMoveConfirm extends StorageWizardBase {
         final String appName = getPackageManager().getApplicationLabel(mApp).toString();
         final String volumeName = mStorage.getBestVolumeDescription(mVolume);
 
-        setIllustrationType(ILLUSTRATION_INTERNAL);
+        setIcon(R.drawable.ic_swap_horiz);
         setHeaderText(R.string.storage_wizard_move_confirm_title, appName);
         setBodyText(R.string.storage_wizard_move_confirm_body, appName, volumeName);
 
-        getNextButton().setText(R.string.move_app);
+        setNextButtonText(R.string.move_app);
     }
 
     @Override
-    public void onNavigateNext() {
+    public void onNavigateNext(View view) {
         // Ensure that all users are unlocked so that we can move their data
         if (StorageManager.isFileEncryptedNativeOrEmulated()) {
             for (UserInfo user : getSystemService(UserManager.class).getUsers()) {
@@ -108,7 +109,7 @@ public class StorageWizardMoveConfirm extends StorageWizardBase {
             if (resultCode == RESULT_OK) {
                 // Credentials confirmed, so storage should be unlocked; let's
                 // go look for the next locked user.
-                onNavigateNext();
+                onNavigateNext(null);
             } else {
                 // User wasn't able to confirm credentials, so we're okay
                 // landing back at the wizard page again, where they read

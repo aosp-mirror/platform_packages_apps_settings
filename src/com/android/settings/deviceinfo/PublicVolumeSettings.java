@@ -18,7 +18,6 @@ package com.android.settings.deviceinfo;
 
 import android.app.ActivityManager;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
@@ -223,19 +222,12 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
 
     @Override
     public boolean onPreferenceTreeClick(Preference pref) {
-        final Context context = getActivity();
         if (pref == mMount) {
-            new MountTask(context, mVolume).execute();
+            new MountTask(getActivity(), mVolume).execute();
         } else if (pref == mFormatPublic) {
-            final Intent intent = new Intent(context, StorageWizardFormatConfirm.class);
-            intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
-            intent.putExtra(StorageWizardFormatConfirm.EXTRA_FORMAT_PRIVATE, false);
-            startActivity(intent);
+            StorageWizardFormatConfirm.showPublic(getActivity(), mDisk.getId());
         } else if (pref == mFormatPrivate) {
-            final Intent intent = new Intent(context, StorageWizardFormatConfirm.class);
-            intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
-            intent.putExtra(StorageWizardFormatConfirm.EXTRA_FORMAT_PRIVATE, true);
-            startActivity(intent);
+            StorageWizardFormatConfirm.showPrivate(getActivity(), mDisk.getId());
         }
 
         return super.onPreferenceTreeClick(pref);

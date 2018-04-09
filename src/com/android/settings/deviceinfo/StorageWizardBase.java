@@ -16,12 +16,14 @@
 
 package com.android.settings.deviceinfo;
 
+import static android.os.storage.DiskInfo.EXTRA_DISK_ID;
+import static android.os.storage.VolumeInfo.EXTRA_VOLUME_ID;
+
 import static com.android.settings.deviceinfo.StorageSettings.TAG;
 
 import android.annotation.LayoutRes;
 import android.app.Activity;
-import android.content.Context;
-import android.content.res.TypedArray;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -31,12 +33,15 @@ import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.settings.R;
+import com.android.settingslib.Utils;
 import com.android.setupwizardlib.GlifLayout;
 
 import java.text.NumberFormat;
@@ -44,11 +49,17 @@ import java.util.List;
 import java.util.Objects;
 
 public abstract class StorageWizardBase extends Activity {
+    protected static final String EXTRA_FORMAT_FORGET_UUID = "format_forget_uuid";
+    protected static final String EXTRA_FORMAT_PRIVATE = "format_private";
+    protected static final String EXTRA_FORMAT_SLOW = "format_slow";
+    protected static final String EXTRA_MIGRATE_SKIP = "migrate_skip";
+
     protected StorageManager mStorage;
 
     protected VolumeInfo mVolume;
     protected DiskInfo mDisk;
 
+    private Button mBack;
     private Button mNext;
 
     @Override
@@ -57,12 +68,12 @@ public abstract class StorageWizardBase extends Activity {
 
         mStorage = getSystemService(StorageManager.class);
 
-        final String volumeId = getIntent().getStringExtra(VolumeInfo.EXTRA_VOLUME_ID);
+        final String volumeId = getIntent().getStringExtra(EXTRA_VOLUME_ID);
         if (!TextUtils.isEmpty(volumeId)) {
             mVolume = mStorage.findVolumeById(volumeId);
         }
 
-        final String diskId = getIntent().getStringExtra(DiskInfo.EXTRA_DISK_ID);
+        final String diskId = getIntent().getStringExtra(EXTRA_DISK_ID);
         if (!TextUtils.isEmpty(diskId)) {
             mDisk = mStorage.findDiskById(diskId);
         } else if (mVolume != null) {
@@ -78,13 +89,10 @@ public abstract class StorageWizardBase extends Activity {
     public void setContentView(@LayoutRes int layoutResID) {
         super.setContentView(layoutResID);
 
-        mNext = (Button) findViewById(R.id.storage_next_button);
-        mNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onNavigateNext();
-            }
-        });
+        mBack = requireViewById(R.id.storage_back_button);
+        mNext = requireViewById(R.id.storage_next_button);
+
+        setIcon(com.android.internal.R.drawable.ic_sd_card_48dp);
     }
 
     @Override
@@ -93,60 +101,107 @@ public abstract class StorageWizardBase extends Activity {
         super.onDestroy();
     }
 
+    protected Button getBackButton() {
+        return mBack;
+    }
+
     protected Button getNextButton() {
         return mNext;
     }
 
     protected GlifLayout getGlifLayout() {
-        return (GlifLayout) findViewById(R.id.setup_wizard_layout);
+        return requireViewById(R.id.setup_wizard_layout);
     }
 
     protected ProgressBar getProgressBar() {
-        return (ProgressBar) findViewById(R.id.storage_wizard_progress);
+        return requireViewById(R.id.storage_wizard_progress);
     }
 
     protected void setCurrentProgress(int progress) {
         getProgressBar().setProgress(progress);
-        ((TextView) findViewById(R.id.storage_wizard_progress_summary)).setText(
+        ((TextView) requireViewById(R.id.storage_wizard_progress_summary)).setText(
                 NumberFormat.getPercentInstance().format((double) progress / 100));
     }
 
-    protected void setHeaderText(int resId, String... args) {
+    protected void setHeaderText(int resId, CharSequence... args) {
         final CharSequence headerText = TextUtils.expandTemplate(getText(resId), args);
         getGlifLayout().setHeaderText(headerText);
         setTitle(headerText);
     }
 
-    protected void setBodyText(int resId, String... args) {
-        ((TextView) findViewById(R.id.storage_wizard_body)).setText(
-                TextUtils.expandTemplate(getText(resId), args));
+    protected void setBodyText(int resId, CharSequence... args) {
+        final TextView body = requireViewById(R.id.storage_wizard_body);
+        body.setText(TextUtils.expandTemplate(getText(resId), args));
+        body.setVisibility(View.VISIBLE);
     }
 
-    protected void setSecondaryBodyText(int resId, String... args) {
-        final TextView secondBody = ((TextView) findViewById(R.id.storage_wizard_second_body));
-        secondBody.setText(TextUtils.expandTemplate(getText(resId), args));
-        secondBody.setVisibility(View.VISIBLE);
+    protected void setAuxChecklist() {
+        final FrameLayout aux = requireViewById(R.id.storage_wizard_aux);
+        aux.addView(LayoutInflater.from(aux.getContext())
+                .inflate(R.layout.storage_wizard_checklist, aux, false));
+        aux.setVisibility(View.VISIBLE);
+
+        // Customize string based on disk
+        ((TextView) aux.requireViewById(R.id.storage_wizard_migrate_v2_checklist_media))
+                .setText(TextUtils.expandTemplate(
+                        getText(R.string.storage_wizard_migrate_v2_checklist_media),
+                        mDisk.getShortDescription()));
     }
 
-    protected static final int ILLUSTRATION_SETUP = 0;
-    protected static final int ILLUSTRATION_INTERNAL = 1;
-    protected static final int ILLUSTRATION_PORTABLE = 2;
+    protected void setBackButtonText(int resId, CharSequence... args) {
+        mBack.setText(TextUtils.expandTemplate(getText(resId), args));
+        mBack.setVisibility(View.VISIBLE);
+    }
 
-    protected void setIllustrationType(int type) {
-        // TODO: map type to updated icons once provided by UX
-        TypedArray array = obtainStyledAttributes(new int[] {android.R.attr.colorAccent});
-        Drawable icon = getDrawable(com.android.internal.R.drawable.ic_sd_card_48dp).mutate();
-        icon.setTint(array.getColor(0, 0));
-        array.recycle();
-        getGlifLayout().setIcon(icon);
+    protected void setNextButtonText(int resId, CharSequence... args) {
+        mNext.setText(TextUtils.expandTemplate(getText(resId), args));
+        mNext.setVisibility(View.VISIBLE);
+    }
+
+    protected void setIcon(int resId) {
+        final GlifLayout layout = getGlifLayout();
+        final Drawable icon = getDrawable(resId).mutate();
+        icon.setTint(Utils.getColorAccent(layout.getContext()));
+        layout.setIcon(icon);
     }
 
     protected void setKeepScreenOn(boolean keepScreenOn) {
         getGlifLayout().setKeepScreenOn(keepScreenOn);
     }
 
-    public void onNavigateNext() {
+    public void onNavigateBack(View view) {
         throw new UnsupportedOperationException();
+    }
+
+    public void onNavigateNext(View view) {
+        throw new UnsupportedOperationException();
+    }
+
+    private void copyStringExtra(Intent from, Intent to, String key) {
+        if (from.hasExtra(key) && !to.hasExtra(key)) {
+            to.putExtra(key, from.getStringExtra(key));
+        }
+    }
+
+    private void copyBooleanExtra(Intent from, Intent to, String key) {
+        if (from.hasExtra(key) && !to.hasExtra(key)) {
+            to.putExtra(key, from.getBooleanExtra(key, false));
+        }
+    }
+
+    @Override
+    public void startActivity(Intent intent) {
+        final Intent from = getIntent();
+        final Intent to = intent;
+
+        copyStringExtra(from, to, EXTRA_DISK_ID);
+        copyStringExtra(from, to, EXTRA_VOLUME_ID);
+        copyStringExtra(from, to, EXTRA_FORMAT_FORGET_UUID);
+        copyBooleanExtra(from, to, EXTRA_FORMAT_PRIVATE);
+        copyBooleanExtra(from, to, EXTRA_FORMAT_SLOW);
+        copyBooleanExtra(from, to, EXTRA_MIGRATE_SKIP);
+
+        super.startActivity(intent);
     }
 
     protected VolumeInfo findFirstVolume(int type) {

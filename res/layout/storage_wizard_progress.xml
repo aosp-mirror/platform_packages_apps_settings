@@ -40,7 +40,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:lineSpacingExtra="@dimen/suw_description_line_spacing_extra"
-            android:textAppearance="@android:style/TextAppearance.Material.Body1"
             android:textColor="?android:attr/textColorSecondary" />
 
         <TextView
@@ -49,8 +48,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/suw_description_margin_top"
             android:lineSpacingExtra="@dimen/suw_description_line_spacing_extra"
-            android:textAppearance="@android:style/TextAppearance.Material.Body1"
-            android:textColor="?android:attr/textColorPrimary" />
+            android:textColor="?android:attr/textColorPrimary"
+            android:visibility="gone" />
+
+        <FrameLayout
+            android:id="@+id/storage_wizard_aux"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
 
     </LinearLayout>
 

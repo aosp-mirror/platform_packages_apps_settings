@@ -46,11 +46,9 @@ public class StorageWizardMoveProgress extends StorageWizardBase {
         final String appName = getIntent().getStringExtra(EXTRA_TITLE);
         final String volumeName = mStorage.getBestVolumeDescription(mVolume);
 
-        setIllustrationType(ILLUSTRATION_INTERNAL);
+        setIcon(R.drawable.ic_swap_horiz);
         setHeaderText(R.string.storage_wizard_move_progress_title, appName);
         setBodyText(R.string.storage_wizard_move_progress_body, volumeName, appName);
-
-        getNextButton().setVisibility(View.GONE);
 
         // Register for updates and push through current status
         getPackageManager().registerMoveCallback(mCallback, new Handler());
