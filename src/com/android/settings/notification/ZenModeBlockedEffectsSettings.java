@@ -25,6 +25,7 @@ import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_PEEK;
 import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_STATUS_BAR;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.support.v7.preference.CheckBoxPreference;
 
@@ -43,13 +44,10 @@ import java.util.List;
 public class ZenModeBlockedEffectsSettings extends ZenModeSettingsBase implements Indexable {
 
     @Override
-    public void onResume() {
-        super.onResume();
-        CheckBoxPreference soundPreference =
-                (CheckBoxPreference) getPreferenceScreen().findPreference("zen_effect_sound");
-        if (soundPreference != null) {
-            soundPreference.setChecked(true);
-        }
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        mFooterPreferenceMixin.createFooterPreference().setTitle(
+                R.string.zen_mode_blocked_effects_footer);
     }
 
     @Override

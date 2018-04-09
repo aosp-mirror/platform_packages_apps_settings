@@ -7210,9 +7210,11 @@
     <string name="zen_mode_visual_signals_settings_subtitle">Allow visual signals</string>
 
     <!-- Do not disturb: what to block title [CHAR LIMIT = 60] -->
-    <string name="zen_mode_what_to_block_title">What to block</string>
+    <string name="zen_mode_what_to_block_title">Block visual disturbances</string>
     <!-- Do not disturb: what to block > effects title [CHAR LIMIT = 60] -->
-    <string name="zen_mode_block_effects_title">When notifications arrive</string>
+    <string name="zen_mode_block_effects_screen_on">When the screen is on</string>
+    <!-- Do not disturb: what to block > effects title [CHAR LIMIT = 60] -->
+    <string name="zen_mode_block_effects_screen_off">When the screen is off</string>
     <!-- Do not disturb: what to block option [CHAR LIMIT=NONE] -->
     <string name="zen_mode_block_effect_sound">Mute sound and vibration</string>
     <!-- Do not disturb: what to block option [CHAR LIMIT=NONE] -->
@@ -7230,12 +7232,20 @@
     <!-- Do not disturb: what to block option [CHAR LIMIT=NONE] -->
     <string name="zen_mode_block_effect_list">Hide from notification list</string>
 
+    <!-- Do not disturb: what to block summary, none -->
+    <string name="zen_mode_block_effect_summary_none">Never</string>
+    <!-- Do not disturb: what to block summary, screen off -->
+    <string name="zen_mode_block_effect_summary_screen_off">When screen is off</string>
+    <!-- Do not disturb: what to block summary, screen on -->
+    <string name="zen_mode_block_effect_summary_screen_on">When screen is on</string>
     <!-- Do not disturb: what to block summary, only sound and vibration -->
     <string name="zen_mode_block_effect_summary_sound">Sound and vibration</string>
     <!-- Do not disturb: what to block summary, sound vibration and some visual signals-->
     <string name="zen_mode_block_effect_summary_some">Sound, vibration, and some visual signs of notifications</string>
     <!-- Do not disturb: what to block summary, all effects -->
     <string name="zen_mode_block_effect_summary_all">Sound, vibration, and visual signs of notifications</string>
+
+    <string name="zen_mode_blocked_effects_footer">Notifications needed for basic phone activity and status will never be hidden</string>
 
     <!--  Do not disturb: Zen mode no sounds are exceptions to bypass do not disturb-->
     <string name="zen_mode_no_exceptions">None</string>
