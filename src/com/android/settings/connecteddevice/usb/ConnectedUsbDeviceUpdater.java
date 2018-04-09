@@ -42,8 +42,8 @@ public class ConnectedUsbDeviceUpdater {
     UsbConnectionBroadcastReceiver.UsbConnectionListener mUsbConnectionListener =
             (connected, functions, powerRole, dataRole) -> {
                 if (connected) {
-                    mUsbPreference.setSummary(getSummary(mUsbBackend.getCurrentFunctions(),
-                            mUsbBackend.getPowerRole()));
+                    mUsbPreference.setSummary(getSummary(dataRole == UsbPort.DATA_ROLE_DEVICE
+                                    ? functions : UsbManager.FUNCTION_NONE, powerRole));
                     mDevicePreferenceCallback.onDeviceAdded(mUsbPreference);
                 } else {
                     mDevicePreferenceCallback.onDeviceRemoved(mUsbPreference);
