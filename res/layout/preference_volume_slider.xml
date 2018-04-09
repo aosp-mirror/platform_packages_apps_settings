@@ -56,7 +56,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:paddingStart="16dp"
+                android:paddingStart="12dp"
                 android:singleLine="true"
                 android:textAppearance="@android:style/TextAppearance.Material.Subhead"
                 android:textColor="?android:attr/textColorPrimary"
@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="end|center_vertical"
-                android:paddingStart="16dp"
+                android:paddingStart="12dp"
                 android:orientation="vertical"/>
         </LinearLayout>
 
@@ -80,6 +80,7 @@
             <SeekBar
                 android:id="@*android:id/seekbar"
                 android:layout_gravity="center_vertical"
+                android:paddingStart="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -87,7 +88,7 @@
                 android:id="@+id/suppression_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="16dp"
+                android:paddingStart="12dp"
                 android:layout_gravity="center_vertical|start"
                 android:textAlignment="viewStart"
                 android:singleLine="true"
