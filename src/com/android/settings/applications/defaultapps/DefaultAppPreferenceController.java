@@ -16,6 +16,8 @@
 
 package com.android.settings.applications.defaultapps;
 
+import static com.android.settingslib.TwoTargetPreference.ICON_SIZE_MEDIUM;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -29,8 +31,8 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.GearPreference;
-import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.TwoTargetPreference;
+import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
@@ -59,7 +61,7 @@ public abstract class DefaultAppPreferenceController extends AbstractPreferenceC
             // For use small icon because we are displaying an app preference.
             // We only need to do this for TwoTargetPreference because the other prefs are
             // already using AppPreference so their icon is already normalized.
-            ((TwoTargetPreference) preference).setUseSmallIcon(true);
+            ((TwoTargetPreference) preference).setIconSize(ICON_SIZE_MEDIUM);
         }
         if (!TextUtils.isEmpty(defaultAppLabel)) {
             preference.setSummary(defaultAppLabel);

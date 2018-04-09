@@ -16,6 +16,7 @@
 
 package com.android.settings.accounts;
 
+import static com.android.settingslib.TwoTargetPreference.ICON_SIZE_MEDIUM;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
@@ -42,8 +43,8 @@ public class ProviderPreferenceTest {
     public void shouldUseSmallIcon() {
         final ProviderPreference providerPreference = new ProviderPreference(
                 mContext, "account_type", null /* icon */, "provider_name");
-        final boolean useSmallIcon =
-                ReflectionHelpers.getField(providerPreference, "mUseSmallIcon");
-        assertThat(useSmallIcon).isTrue();
+        final int iconSize =
+                ReflectionHelpers.getField(providerPreference, "mIconSize");
+        assertThat(iconSize).isEqualTo(ICON_SIZE_MEDIUM);
     }
 }
