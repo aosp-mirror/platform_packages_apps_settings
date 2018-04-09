@@ -17,6 +17,7 @@
 package com.android.settings.applications.defaultapps;
 
 
+import static com.android.settingslib.TwoTargetPreference.ICON_SIZE_MEDIUM;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -27,8 +28,8 @@ import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.TwoTargetPreference;
+import com.android.settingslib.applications.DefaultAppInfo;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -78,13 +79,13 @@ public class DefaultAppPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_twoTargetPref_shouldUseSmallIcon() {
+    public void updateState_twoTargetPref_shouldUseMediumIcon() {
         final TwoTargetPreference pref = mock(TwoTargetPreference.class);
         mController = new TestPreferenceController(mContext);
 
         mController.updateState(pref);
 
-        verify(pref).setUseSmallIcon(true);
+        verify(pref).setIconSize(ICON_SIZE_MEDIUM);
     }
 
     private static class TestPreferenceController extends DefaultAppPreferenceController {
