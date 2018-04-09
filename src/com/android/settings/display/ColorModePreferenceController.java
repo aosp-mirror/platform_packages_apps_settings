@@ -41,7 +41,9 @@ public class ColorModePreferenceController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        return mConfigWrapper.isScreenWideColorGamut() ? AVAILABLE : DISABLED_FOR_USER;
+        return mConfigWrapper.isScreenWideColorGamut()
+                && !getColorDisplayController().getAccessibilityTransformActivated() ?
+                AVAILABLE : DISABLED_FOR_USER;
     }
 
     @Override
