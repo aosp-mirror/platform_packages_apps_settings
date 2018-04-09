@@ -79,15 +79,13 @@ public class ColorModePreferenceFragmentTest {
         when(mFragment.getContext()).thenReturn(RuntimeEnvironment.application);
         List<? extends CandidateInfo> candidates = mFragment.getCandidates();
 
-        assertThat(candidates.size()).isEqualTo(4);
+        assertThat(candidates.size()).isEqualTo(3);
         assertThat(candidates.get(0).getKey())
                 .isEqualTo(ColorModePreferenceFragment.KEY_COLOR_MODE_NATURAL);
         assertThat(candidates.get(1).getKey())
                 .isEqualTo(ColorModePreferenceFragment.KEY_COLOR_MODE_BOOSTED);
         assertThat(candidates.get(2).getKey())
                 .isEqualTo(ColorModePreferenceFragment.KEY_COLOR_MODE_SATURATED);
-        assertThat(candidates.get(3).getKey())
-                .isEqualTo(ColorModePreferenceFragment.KEY_COLOR_MODE_AUTOMATIC);
     }
 
     @Test
