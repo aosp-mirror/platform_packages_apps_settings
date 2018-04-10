@@ -57,7 +57,7 @@ public class BadgePreferenceController extends NotificationPreferenceController
             return false;
         }
         if (mChannel != null) {
-            if (NotificationChannel.DEFAULT_CHANNEL_ID.equals(mChannel.getId())) {
+            if (isDefaultChannel()) {
                 return true;
             } else {
                 return mAppRow.showBadge;

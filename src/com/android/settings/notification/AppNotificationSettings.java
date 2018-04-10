@@ -167,9 +167,9 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             getPreferenceScreen().addPreference(groupCategory);
             mDynamicPreferences.add(groupCategory);
             if (group.getId() == null) {
-                groupCategory.setTitle(mChannelGroupList.size() > 1
-                        ? R.string.notification_channels_other
-                        : R.string.notification_channels);
+                if (mChannelGroupList.size() > 1) {
+                    groupCategory.setTitle(R.string.notification_channels_other);
+                }
                 groupCategory.setKey(KEY_GENERAL_CATEGORY);
             } else {
                 groupCategory.setTitle(group.getName());

@@ -58,7 +58,7 @@ public class ImportancePreferenceController extends NotificationPreferenceContro
         if (mChannel == null) {
             return false;
         }
-        return !NotificationChannel.DEFAULT_CHANNEL_ID.equals(mChannel.getId());
+        return !isDefaultChannel();
     }
 
     @Override
