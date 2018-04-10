@@ -31,6 +31,8 @@ import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.EntityHeaderController;
 
+import java.util.Objects;
+
 public class HeaderPreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin {
 
@@ -72,7 +74,7 @@ public class HeaderPreferenceController extends NotificationPreferenceController
     }
 
     CharSequence getLabel() {
-        return mChannel != null ? mChannel.getName()
+        return (mChannel != null && !isDefaultChannel()) ? mChannel.getName()
                 : mChannelGroup != null
                         ? mChannelGroup.getName()
                         : mAppRow.label;
@@ -80,7 +82,7 @@ public class HeaderPreferenceController extends NotificationPreferenceController
 
     @Override
     public CharSequence getSummary() {
-        if (mChannel != null) {
+        if (mChannel != null && !isDefaultChannel()) {
             if (mChannelGroup != null
                     && !TextUtils.isEmpty(mChannelGroup.getName())) {
                 final SpannableStringBuilder summary = new SpannableStringBuilder();
