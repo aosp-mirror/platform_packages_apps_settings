@@ -75,6 +75,16 @@ public class EarlyWarningDetectorTest {
     }
 
     @Test
+    public void testDetect_testFeatureOn_tipNew() {
+        doReturn(false).when(mFakeFeatureFactory.powerUsageFeatureProvider)
+                .getEarlyWarningSignal(any(), any());
+        ReflectionHelpers.setField(mPolicy, "testBatterySaverTip", true);
+
+        assertThat(mEarlyWarningDetector.detect().getState())
+                .isEqualTo(BatteryTip.StateType.NEW);
+    }
+
+    @Test
     public void testDetect_batterySaverOn_tipHandled() {
         doReturn(true).when(mPowerManager).isPowerSaveMode();
 
