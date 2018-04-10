@@ -86,6 +86,8 @@ public abstract class FeatureFactory {
 
     public abstract DashboardFeatureProvider getDashboardFeatureProvider(Context context);
 
+    public abstract DockUpdaterFeatureProvider getDockUpdaterFeatureProvider();
+
     public abstract ApplicationFeatureProvider getApplicationFeatureProvider(Context context);
 
     public abstract LocaleFeatureProvider getLocaleFeatureProvider();
