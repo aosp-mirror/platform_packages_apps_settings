@@ -28,7 +28,6 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
-import com.android.settingslib.widget.FooterPreferenceMixin;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,9 +39,6 @@ import java.util.List;
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class SmartBatterySettings extends DashboardFragment {
     public static final String TAG = "SmartBatterySettings";
-
-    private final FooterPreferenceMixin mFooterPreferenceMixin =
-            new FooterPreferenceMixin(this, getLifecycle());
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -93,11 +89,6 @@ public class SmartBatterySettings extends DashboardFragment {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.smart_battery_detail;
                     return Arrays.asList(sir);
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    return super.getNonIndexableKeys(context);
                 }
 
                 @Override
