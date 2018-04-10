@@ -125,8 +125,7 @@ public class PowerUsageAnomalyDetails extends DashboardFragment implements
 
     @Override
     public int getMetricsCategory() {
-        //TODO(b/37681923): add correct metrics category
-        return 0;
+        return MetricsProto.MetricsEvent.FUELGAUGE_ANOMALY_DETAIL;
     }
 
     void refreshUi() {
