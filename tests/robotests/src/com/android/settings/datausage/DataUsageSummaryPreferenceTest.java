@@ -225,7 +225,7 @@ public class DataUsageSummaryPreferenceTest {
         bindViewHolder();
         assertThat(mCarrierInfo.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(mCarrierInfo.getCurrentTextColor()).isEqualTo(
-                Utils.getColorAttr(mContext, android.R.attr.textColorSecondary));
+                Utils.getColorAttrDefaultColor(mContext, android.R.attr.textColorSecondary));
         assertThat(mCarrierInfo.getTypeface()).isEqualTo(Typeface.SANS_SERIF);
     }
 
@@ -238,7 +238,7 @@ public class DataUsageSummaryPreferenceTest {
         bindViewHolder();
         assertThat(mCarrierInfo.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(mCarrierInfo.getCurrentTextColor()).isEqualTo(
-                Utils.getColorAttr(mContext, android.R.attr.colorError));
+                Utils.getColorAttrDefaultColor(mContext, android.R.attr.colorError));
         assertThat(mCarrierInfo.getTypeface()).isEqualTo(
                 DataUsageSummaryPreference.SANS_SERIF_MEDIUM);
     }
@@ -378,7 +378,7 @@ public class DataUsageSummaryPreferenceTest {
         bindViewHolder();
         assertThat(mDataUsed.getText().toString()).isEqualTo("1.00 MB used");
         assertThat(mDataRemaining.getText().toString()).isEqualTo("9.00 MB left");
-        final int colorId = Utils.getColorAttr(mContext, android.R.attr.colorAccent);
+        final int colorId = Utils.getColorAttrDefaultColor(mContext, android.R.attr.colorAccent);
         assertThat(mDataRemaining.getCurrentTextColor()).isEqualTo(colorId);
     }
 
@@ -391,7 +391,7 @@ public class DataUsageSummaryPreferenceTest {
         bindViewHolder();
         assertThat(mDataUsed.getText().toString()).isEqualTo("11.00 MB used");
         assertThat(mDataRemaining.getText().toString()).isEqualTo("1.00 MB over");
-        final int colorId = Utils.getColorAttr(mContext, android.R.attr.colorError);
+        final int colorId = Utils.getColorAttrDefaultColor(mContext, android.R.attr.colorError);
         assertThat(mDataRemaining.getCurrentTextColor()).isEqualTo(colorId);
     }
 

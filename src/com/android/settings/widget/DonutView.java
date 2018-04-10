@@ -70,7 +70,8 @@ public class DonutView extends View {
     public DonutView(Context context, AttributeSet attrs) {
         super(context, attrs);
         mMeterBackgroundColor = context.getColor(R.color.meter_background_color);
-        mMeterConsumedColor = Utils.getDefaultColor(mContext, R.color.meter_consumed_color);
+        mMeterConsumedColor = Utils.getColorStateListDefaultColor(mContext,
+                R.color.meter_consumed_color);
         boolean applyColorAccent = true;
         Resources resources = context.getResources();
         mStrokeWidth = resources.getDimension(R.dimen.storage_donut_thickness);
@@ -107,7 +108,7 @@ public class DonutView extends View {
         if (applyColorAccent) {
             final ColorFilter mAccentColorFilter =
                     new PorterDuffColorFilter(
-                            Utils.getColorAttr(context, android.R.attr.colorAccent),
+                            Utils.getColorAttrDefaultColor(context, android.R.attr.colorAccent),
                             PorterDuff.Mode.SRC_IN);
             mBackgroundCircle.setColorFilter(mAccentColorFilter);
             mFilledArc.setColorFilter(mAccentColorFilter);
