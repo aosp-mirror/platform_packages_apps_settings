@@ -18,8 +18,13 @@ package com.android.settings.fuelgauge.anomaly;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.os.Build;
+import static org.mockito.Mockito.verify;
 
+import android.os.Build;
+import android.util.Pair;
+
+import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.fuelgauge.anomaly.action.StopAndBackgroundCheckAction;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
@@ -31,18 +36,42 @@ import com.android.settings.fuelgauge.anomaly.checker.WakeupAlarmAnomalyDetector
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows = {
         ShadowKeyValueListParserWrapperImpl.class})
 public class AnomalyUtilsTest {
+    private static final String PACKAGE_NAME_WAKEUP = "com.android.app1";
+    private static final String PACKAGE_NAME_WAKELOCK = "com.android.app2";
+    private static final int CONTEXT_ID = 55;
+
+    @Mock
+    private MetricsFeatureProvider mMetricsFeatureProvider;
     private AnomalyUtils mAnomalyUtils;
+    private Anomaly mWakeupAnomaly;
+    private Anomaly mWakeLockAnomaly;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
+
         mAnomalyUtils = new AnomalyUtils(RuntimeEnvironment.application);
+
+        mWakeLockAnomaly = new Anomaly.Builder()
+                .setType(Anomaly.AnomalyType.WAKE_LOCK)
+                .setPackageName(PACKAGE_NAME_WAKELOCK)
+                .build();
+        mWakeupAnomaly = new Anomaly.Builder()
+                .setType(Anomaly.AnomalyType.WAKEUP_ALARM)
+                .setPackageName(PACKAGE_NAME_WAKEUP)
+                .build();
     }
 
     @Test
@@ -96,5 +125,48 @@ public class AnomalyUtilsTest {
     public void testGetAnomalyDetector_typeWakeUpAlarm_returnWakeUpAlarmDetector() {
         assertThat(mAnomalyUtils.getAnomalyDetector(Anomaly.AnomalyType.WAKEUP_ALARM)).isInstanceOf(
                 WakeupAlarmAnomalyDetector.class);
+    }
+
+    @Test
+    public void testLogAnomaly() {
+        mAnomalyUtils.logAnomaly(mMetricsFeatureProvider, mWakeLockAnomaly, CONTEXT_ID);
+
+        verify(mMetricsFeatureProvider).action(RuntimeEnvironment.application,
+                MetricsProto.MetricsEvent.ANOMALY_TYPE_WAKELOCK,
+                PACKAGE_NAME_WAKELOCK,
+                Pair.create(
+                        MetricsProto.MetricsEvent.FIELD_CONTEXT,
+                        CONTEXT_ID),
+                Pair.create(
+                        MetricsProto.MetricsEvent.FIELD_ANOMALY_ACTION_TYPE,
+                        Anomaly.AnomalyActionType.FORCE_STOP));
+    }
+
+    @Test
+    public void testLogAnomalies() {
+        final List<Anomaly> anomalies = new ArrayList<>();
+        anomalies.add(mWakeLockAnomaly);
+        anomalies.add(mWakeupAnomaly);
+
+        mAnomalyUtils.logAnomalies(mMetricsFeatureProvider, anomalies, CONTEXT_ID);
+
+        verify(mMetricsFeatureProvider).action(RuntimeEnvironment.application,
+                MetricsProto.MetricsEvent.ANOMALY_TYPE_WAKELOCK,
+                PACKAGE_NAME_WAKELOCK,
+                Pair.create(
+                        MetricsProto.MetricsEvent.FIELD_CONTEXT,
+                        CONTEXT_ID),
+                Pair.create(
+                        MetricsProto.MetricsEvent.FIELD_ANOMALY_ACTION_TYPE,
+                        Anomaly.AnomalyActionType.FORCE_STOP));
+        verify(mMetricsFeatureProvider).action(RuntimeEnvironment.application,
+                MetricsProto.MetricsEvent.ANOMALY_TYPE_WAKEUP_ALARM,
+                PACKAGE_NAME_WAKEUP,
+                Pair.create(
+                        MetricsProto.MetricsEvent.FIELD_CONTEXT,
+                        CONTEXT_ID),
+                Pair.create(
+                        MetricsProto.MetricsEvent.FIELD_ANOMALY_ACTION_TYPE,
+                        Anomaly.AnomalyActionType.STOP_AND_BACKGROUND_CHECK));
     }
 }
