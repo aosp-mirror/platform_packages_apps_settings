@@ -27,6 +27,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GesturesSettingPreferenceController extends BasePreferenceController {
@@ -63,8 +64,7 @@ public class GesturesSettingPreferenceController extends BasePreferenceControlle
             @NonNull Context context) {
         final AmbientDisplayConfiguration ambientDisplayConfiguration =
                 new AmbientDisplayConfiguration(context);
-        final List<AbstractPreferenceController> controllers =
-                GestureSettings.buildPreferenceControllers(context, null);
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
 
         controllers.add(new AssistGestureSettingsPreferenceController(context, FAKE_PREF_KEY)
                 .setAssistOnly(false));
@@ -75,6 +75,7 @@ public class GesturesSettingPreferenceController extends BasePreferenceControlle
                 .setConfig(ambientDisplayConfiguration));
         controllers.add(new DoubleTapScreenPreferenceController(context, FAKE_PREF_KEY)
                 .setConfig(ambientDisplayConfiguration));
+        controllers.add(new PreventRingingPreferenceController(context, FAKE_PREF_KEY));
         return controllers;
     }
 
