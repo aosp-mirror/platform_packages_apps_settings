@@ -294,6 +294,30 @@ public class NotificationPreferenceControllerTest {
         assertTrue(mController.isChannelGroupBlockable());
     }
 
+    @Test
+    public void testIsDefaultChannel_noChannel() {
+        mController.onResume(mock(NotificationBackend.AppRow.class), null, null, null);
+
+        assertFalse(mController.isDefaultChannel());
+    }
+
+    @Test
+    public void testIsDefaultChannel_nonDefaultChannel() {
+        NotificationChannel channel = mock(NotificationChannel.class);
+        mController.onResume(mock(NotificationBackend.AppRow.class), channel, null, null);
+
+        assertFalse(mController.isDefaultChannel());
+    }
+
+    @Test
+    public void testIsDefaultChannel() {
+        NotificationChannel channel = mock(NotificationChannel.class);
+        when(channel.getId()).thenReturn(NotificationChannel.DEFAULT_CHANNEL_ID);
+        mController.onResume(mock(NotificationBackend.AppRow.class), channel, null, null);
+
+        assertTrue(mController.isDefaultChannel());
+    }
+
     private final class TestPreferenceController extends NotificationPreferenceController {
 
         private TestPreferenceController(Context context, NotificationBackend backend) {

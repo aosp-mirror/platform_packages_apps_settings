@@ -184,4 +184,11 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
     protected boolean hasValidGroup() {
         return mChannelGroup != null;
     }
+
+    protected final boolean isDefaultChannel() {
+        if (mChannel == null) {
+            return false;
+        }
+        return Objects.equals(NotificationChannel.DEFAULT_CHANNEL_ID, mChannel.getId());
+    }
 }
