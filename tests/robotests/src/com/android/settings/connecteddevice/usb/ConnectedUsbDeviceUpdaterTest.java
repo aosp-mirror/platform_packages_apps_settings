@@ -70,7 +70,7 @@ public class ConnectedUsbDeviceUpdaterTest {
         assertThat(mDeviceUpdater.mUsbPreference.getTitle()).isEqualTo("USB");
         assertThat(mDeviceUpdater.mUsbPreference.getIcon())
             .isEqualTo(mContext.getDrawable(R.drawable.ic_usb));
-        assertThat(mDeviceUpdater.mUsbPreference.isSelectable()).isFalse();
+        assertThat(mDeviceUpdater.mUsbPreference.isSelectable()).isTrue();
     }
 
     @Test

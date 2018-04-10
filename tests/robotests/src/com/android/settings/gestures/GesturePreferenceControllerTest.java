@@ -17,6 +17,9 @@
 package com.android.settings.gestures;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static junit.framework.Assert.assertEquals;
+
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
@@ -31,7 +34,6 @@ import android.support.v7.preference.TwoStatePreference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.VideoPreference;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -49,7 +51,6 @@ public class GesturePreferenceControllerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceScreen mScreen;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Lifecycle mLifecycle;
 
     private TestPrefController mController;
     private Preference mPreference;
@@ -57,7 +58,7 @@ public class GesturePreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mController = new TestPrefController(mContext, mLifecycle);
+        mController = new TestPrefController(mContext, "testKey");
         mPreference = new Preference(RuntimeEnvironment.application);
         mPreference.setKey(mController.getPreferenceKey());
         when(mScreen.findPreference(mPreference.getKey())).thenReturn(mPreference);
@@ -187,7 +188,8 @@ public class GesturePreferenceControllerTest {
         mController.updateState(preference);
 
         // Verify summary is set to off (as setting is disabled).
-        verify(preference).setSummary(com.android.settings.R.string.gesture_setting_off);
+        assertThat(preference.getSummary()).isEqualTo(
+                mContext.getString(com.android.settings.R.string.gesture_setting_off));
     }
 
     private class TestPrefController extends GesturePreferenceController {
@@ -196,18 +198,13 @@ public class GesturePreferenceControllerTest {
         boolean mIsPrefEnabled;
 
         private TestPrefController(Context context,
-                Lifecycle lifecycle) {
-            super(context, lifecycle);
+                String key) {
+            super(context, key);
         }
 
         @Override
-        public boolean isAvailable() {
-            return mIsPrefAvailable;
-        }
-
-        @Override
-        public String getPreferenceKey() {
-            return "testKey";
+        public int getAvailabilityStatus() {
+            return mIsPrefAvailable ? AVAILABLE : DISABLED_UNSUPPORTED;
         }
 
         @Override
@@ -216,12 +213,12 @@ public class GesturePreferenceControllerTest {
         }
 
         @Override
-        protected boolean isSwitchPrefEnabled() {
+        public boolean isChecked() {
             return mIsPrefEnabled;
         }
 
         @Override
-        public boolean onPreferenceChange(Preference preference, Object newValue) {
+        public boolean setChecked(boolean isChecked) {
             return false;
         }
     }

@@ -50,10 +50,11 @@ public class WifiUtils {
         return ssid.length() < SSID_ASCII_MIN_LENGTH;
     }
 
-    public static boolean isPasswordValid(String password) {
+    public static boolean isHotspotPasswordValid(String password) {
         if (TextUtils.isEmpty(password)) {
-            return false;
+            return true;
         }
+
         final int length = password.length();
         return length >= PASSWORD_MIN_LENGTH && length <= PASSWORD_MAX_LENGTH;
     }

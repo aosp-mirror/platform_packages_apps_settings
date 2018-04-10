@@ -28,6 +28,7 @@ import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.settings.R;
@@ -57,30 +58,35 @@ public class StorageWizardMigrateConfirm extends StorageWizardBase {
             return;
         }
 
-        final String sourceDescrip = mStorage.getBestVolumeDescription(sourceVol);
-        final String targetDescrip = mStorage.getBestVolumeDescription(mVolume);
-
-        setIllustrationType(ILLUSTRATION_INTERNAL);
-        setHeaderText(R.string.storage_wizard_migrate_confirm_title, targetDescrip);
+        setIcon(R.drawable.ic_swap_horiz);
+        setHeaderText(R.string.storage_wizard_migrate_v2_title, mDisk.getShortDescription());
         setBodyText(R.string.memory_calculating_size);
-        setSecondaryBodyText(R.string.storage_wizard_migrate_details, targetDescrip);
+        setAuxChecklist();
 
         mEstimate = new MigrateEstimateTask(this) {
             @Override
             public void onPostExecute(String size, String time) {
-                setBodyText(R.string.storage_wizard_migrate_confirm_body, time, size,
-                        sourceDescrip);
+                setBodyText(R.string.storage_wizard_migrate_v2_body,
+                        mDisk.getDescription(), size, time);
             }
         };
 
         mEstimate.copyFrom(getIntent());
         mEstimate.execute();
 
-        getNextButton().setText(R.string.storage_wizard_migrate_confirm_next);
+        setBackButtonText(R.string.storage_wizard_migrate_v2_later);
+        setNextButtonText(R.string.storage_wizard_migrate_v2_now);
     }
 
     @Override
-    public void onNavigateNext() {
+    public void onNavigateBack(View view) {
+        final Intent intent = new Intent(this, StorageWizardReady.class);
+        intent.putExtra(EXTRA_MIGRATE_SKIP, true);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onNavigateNext(View view) {
         // Ensure that all users are unlocked so that we can move their data
         if (StorageManager.isFileEncryptedNativeOrEmulated()) {
             for (UserInfo user : getSystemService(UserManager.class).getUsers()) {
@@ -134,7 +140,7 @@ public class StorageWizardMigrateConfirm extends StorageWizardBase {
             if (resultCode == RESULT_OK) {
                 // Credentials confirmed, so storage should be unlocked; let's
                 // go look for the next locked user.
-                onNavigateNext();
+                onNavigateNext(null);
             } else {
                 // User wasn't able to confirm credentials, so we're okay
                 // landing back at the wizard page again, where they read

@@ -24,19 +24,17 @@ import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.TwoStatePreference;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.widget.VideoPreference;
-import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreate;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 
-public abstract class GesturePreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener,
-        LifecycleObserver, OnResume, OnPause, OnCreate, OnSaveInstanceState  {
+public abstract class GesturePreferenceController extends TogglePreferenceController
+        implements Preference.OnPreferenceChangeListener,
+        LifecycleObserver, OnResume, OnPause, OnCreate, OnSaveInstanceState {
 
     @VisibleForTesting
     static final String KEY_VIDEO_PAUSED = "key_video_paused";
@@ -45,11 +43,8 @@ public abstract class GesturePreferenceController extends AbstractPreferenceCont
     @VisibleForTesting
     boolean mVideoPaused;
 
-    public GesturePreferenceController(Context context, Lifecycle lifecycle) {
-        super(context);
-        if (lifecycle != null) {
-            lifecycle.addObserver(this);
-        }
+    public GesturePreferenceController(Context context, String key) {
+        super(context, key);
     }
 
     @Override
@@ -63,18 +58,19 @@ public abstract class GesturePreferenceController extends AbstractPreferenceCont
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        final boolean isEnabled = isSwitchPrefEnabled();
         if (preference != null) {
-            if (preference instanceof TwoStatePreference) {
-                ((TwoStatePreference) preference).setChecked(isEnabled);
-            } else {
-                preference.setSummary(isEnabled
-                        ? R.string.gesture_setting_on
-                        : R.string.gesture_setting_off);
+            if (!(preference instanceof TwoStatePreference)) {
+                preference.setSummary(getSummary());
             }
             // Different meanings of "Enabled" for the Preference and Controller.
             preference.setEnabled(canHandleClicks());
         }
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        return mContext.getText(
+                isChecked() ? R.string.gesture_setting_on : R.string.gesture_setting_off);
     }
 
     @Override
@@ -105,8 +101,6 @@ public abstract class GesturePreferenceController extends AbstractPreferenceCont
     }
 
     protected abstract String getVideoPrefKey();
-
-    protected abstract boolean isSwitchPrefEnabled();
 
     protected boolean canHandleClicks() {
         return true;

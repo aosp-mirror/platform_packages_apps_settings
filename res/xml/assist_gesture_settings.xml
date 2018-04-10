@@ -29,6 +29,7 @@
     <SwitchPreference
         android:key="gesture_assist"
         android:title="@string/assist_gesture_title"
-        app:keywords="@string/keywords_assist_gesture_launch" />
+        app:keywords="@string/keywords_assist_gesture_launch"
+        app:controller="com.android.settings.gestures.AssistGestureSettingsPreferenceController" />
 
 </PreferenceScreen>

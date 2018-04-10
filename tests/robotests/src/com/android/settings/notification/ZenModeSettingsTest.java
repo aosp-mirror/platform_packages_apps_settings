@@ -72,6 +72,35 @@ public class ZenModeSettingsTest {
     }
 
     @Test
+    public void testBlockedEffectsSummary_none() {
+        NotificationManager.Policy policy = new NotificationManager.Policy(0, 0, 0, 0);
+        assertEquals("Never", mBuilder.getBlockedEffectsSummary(policy));
+    }
+
+    @Test
+    public void testBlockedEffectsSummary_screen_on() {
+        NotificationManager.Policy policy = new NotificationManager.Policy(
+                0, 0, 0, NotificationManager.Policy.SUPPRESSED_EFFECT_PEEK);
+        assertEquals("When screen is on", mBuilder.getBlockedEffectsSummary(policy));
+    }
+
+    @Test
+    public void testBlockedEffectsSummary_screen_off() {
+        NotificationManager.Policy policy = new NotificationManager.Policy(
+                0, 0, 0, NotificationManager.Policy.SUPPRESSED_EFFECT_AMBIENT);
+        assertEquals("When screen is off", mBuilder.getBlockedEffectsSummary(policy));
+    }
+
+    @Test
+    public void testBlockedEffectsSummary_both() {
+        NotificationManager.Policy policy = new NotificationManager.Policy(0, 0, 0,
+                NotificationManager.Policy.SUPPRESSED_EFFECT_NOTIFICATION_LIST
+                        | NotificationManager.Policy.SUPPRESSED_EFFECT_LIGHTS);
+        assertEquals("When screen is off, When screen is on",
+                mBuilder.getBlockedEffectsSummary(policy));
+    }
+
+    @Test
     public void searchProvider_shouldIndexDefaultXml() {
         final List<SearchIndexableResource> sir = ZenModeSettings.SEARCH_INDEX_DATA_PROVIDER
                 .getXmlResourcesToIndex(mContext, true /* enabled */);

@@ -67,31 +67,30 @@ public class GestureSettings extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        if (mAmbientDisplayConfig == null) {
-            mAmbientDisplayConfig = new AmbientDisplayConfiguration(context);
-        }
-
-        return buildPreferenceControllers(context, getLifecycle(), mAmbientDisplayConfig);
+        return buildPreferenceControllers(context, getLifecycle());
     }
 
     static List<AbstractPreferenceController> buildPreferenceControllers(
-            @NonNull Context context, @Nullable Lifecycle lifecycle,
-            @NonNull AmbientDisplayConfiguration ambientDisplayConfiguration) {
+            @NonNull Context context, @Nullable Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new AssistGestureSettingsPreferenceController(context, lifecycle,
-                KEY_ASSIST, false /* assistOnly */));
-        controllers.add(new SwipeToNotificationPreferenceController(context, lifecycle,
-                KEY_SWIPE_DOWN));
-        controllers.add(new DoubleTwistPreferenceController(context, lifecycle, KEY_DOUBLE_TWIST));
-        controllers.add(new DoubleTapPowerPreferenceController(context, lifecycle,
-                KEY_DOUBLE_TAP_POWER));
-        controllers.add(new PickupGesturePreferenceController(context, lifecycle,
-                ambientDisplayConfiguration, UserHandle.myUserId(), KEY_PICK_UP));
-        controllers.add(new DoubleTapScreenPreferenceController(context, lifecycle,
-                ambientDisplayConfiguration, UserHandle.myUserId(), KEY_DOUBLE_TAP_SCREEN));
         controllers.add(new PreventRingingPreferenceController(
                 context, lifecycle, UserHandle.myUserId(), KEY_PREVENT_RINGING));
         return controllers;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        use(AssistGestureSettingsPreferenceController.class).setAssistOnly(false);
+        use(PickupGesturePreferenceController.class).setConfig(getConfig(context));
+        use(DoubleTapScreenPreferenceController.class).setConfig(getConfig(context));
+    }
+
+    private AmbientDisplayConfiguration getConfig(Context context) {
+        if (mAmbientDisplayConfig == null) {
+            mAmbientDisplayConfig = new AmbientDisplayConfiguration(context);
+        }
+        return mAmbientDisplayConfig;
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
@@ -107,8 +106,7 @@ public class GestureSettings extends DashboardFragment {
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
-                    return buildPreferenceControllers(context, null,
-                            new AmbientDisplayConfiguration(context));
+                    return buildPreferenceControllers(context, null);
                 }
 
                 @Override

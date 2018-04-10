@@ -41,9 +41,6 @@ public class ColorModePreferenceFragment extends RadioButtonPickerFragment
     static final String KEY_COLOR_MODE_BOOSTED = "color_mode_boosted";
     @VisibleForTesting
     static final String KEY_COLOR_MODE_SATURATED = "color_mode_saturated";
-    // TODO have a real key for "automatic" rather than just re-using "saturated"
-    @VisibleForTesting
-    static final String KEY_COLOR_MODE_AUTOMATIC = "color_mode_saturated";
 
     private ColorDisplayController mController;
 
@@ -91,18 +88,16 @@ public class ColorModePreferenceFragment extends RadioButtonPickerFragment
             new ColorModeCandidateInfo(c.getText(R.string.color_mode_option_boosted),
                     KEY_COLOR_MODE_BOOSTED, enabled),
             new ColorModeCandidateInfo(c.getText(R.string.color_mode_option_saturated),
-                    KEY_COLOR_MODE_SATURATED, enabled),
-            new ColorModeCandidateInfo(c.getText(R.string.color_mode_option_automatic),
-                    KEY_COLOR_MODE_AUTOMATIC, enabled)
+                    KEY_COLOR_MODE_SATURATED, enabled)
         );
     }
 
     @Override
     protected String getDefaultKey() {
-        if (mController.getColorMode() == ColorDisplayController.COLOR_MODE_SATURATED) {
+        final int colorMode = mController.getColorMode();
+        if (colorMode == ColorDisplayController.COLOR_MODE_SATURATED) {
             return KEY_COLOR_MODE_SATURATED;
-        }
-        if (mController.getColorMode() == ColorDisplayController.COLOR_MODE_BOOSTED) {
+        } else if (colorMode == ColorDisplayController.COLOR_MODE_BOOSTED) {
             return KEY_COLOR_MODE_BOOSTED;
         }
         return KEY_COLOR_MODE_NATURAL;

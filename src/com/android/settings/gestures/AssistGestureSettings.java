@@ -84,9 +84,11 @@ public class AssistGestureSettings extends DashboardFragment {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return new AssistGestureSettingsPreferenceController(context,
-                            null /* lifecycle */, null /* key */, false /* assistOnly */)
-                            .isAvailable();
+                    AssistGestureSettingsPreferenceController controller =
+                            new AssistGestureSettingsPreferenceController(context,
+                                    "gesture_assist_input_summary");
+                    controller.setAssistOnly(false);
+                    return controller.isAvailable();
                 }
             };
 }

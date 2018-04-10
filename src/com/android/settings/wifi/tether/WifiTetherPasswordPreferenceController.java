@@ -20,10 +20,14 @@ import android.content.Context;
 import android.net.wifi.WifiConfiguration;
 import android.support.v7.preference.EditTextPreference;
 import android.support.v7.preference.Preference;
+import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.settings.R;
 import com.android.settings.widget.ValidatedEditTextPreference;
 import com.android.settings.wifi.WifiUtils;
+
+import java.util.UUID;
 
 public class WifiTetherPasswordPreferenceController extends WifiTetherBasePreferenceController
         implements ValidatedEditTextPreference.Validator {
@@ -49,6 +53,8 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
         if (config != null) {
             mPassword = config.preSharedKey;
             Log.d(TAG, "Updating password in Preference, " + mPassword);
+        } else {
+            mPassword = generateRandomPassword();
         }
         ((ValidatedEditTextPreference) mPreference).setValidator(this);
         ((ValidatedEditTextPreference) mPreference).setIsSummaryPassword(true);
@@ -67,13 +73,35 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
         return mPassword;
     }
 
+    public int getSecuritySettingForPassword() {
+        // We should return NONE when no password is set
+        if (TextUtils.isEmpty(mPassword)) {
+            return WifiConfiguration.KeyMgmt.NONE;
+        }
+        // Only other currently supported type is WPA2 so we'll try that
+        return WifiConfiguration.KeyMgmt.WPA2_PSK;
+    }
+
     @Override
     public boolean isTextValid(String value) {
-        return WifiUtils.isPasswordValid(value);
+        return WifiUtils.isHotspotPasswordValid(value);
+    }
+
+    private static String generateRandomPassword() {
+        String randomUUID = UUID.randomUUID().toString();
+        //first 12 chars from xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx
+        return randomUUID.substring(0, 8) + randomUUID.substring(9, 13);
     }
 
     private void updatePasswordDisplay(EditTextPreference preference) {
-        preference.setText(mPassword);
-        preference.setSummary(mPassword);
+        ValidatedEditTextPreference pref = (ValidatedEditTextPreference) preference;
+        pref.setText(mPassword);
+        if (!TextUtils.isEmpty(mPassword)) {
+            pref.setIsSummaryPassword(true);
+            pref.setSummary(mPassword);
+        } else {
+            pref.setIsSummaryPassword(false);
+            pref.setSummary(R.string.wifi_hotspot_no_password_subtext);
+        }
     }
 }
