@@ -194,25 +194,24 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         } else {
             item.setup(account, authority, packageName, uid);
         }
+        final PackageManager packageManager = getPackageManager();
         item.setPersistent(false);
-        final ProviderInfo providerInfo = getPackageManager().resolveContentProviderAsUser(
+        final ProviderInfo providerInfo = packageManager.resolveContentProviderAsUser(
                 authority, 0, mUserHandle.getIdentifier());
         if (providerInfo == null) {
             return;
         }
-        CharSequence providerLabel = providerInfo.loadLabel(getPackageManager());
+        final CharSequence providerLabel = providerInfo.loadLabel(packageManager);
         if (TextUtils.isEmpty(providerLabel)) {
             Log.e(TAG, "Provider needs a label for authority '" + authority + "'");
             return;
         }
-        String title = getString(R.string.sync_item_title, providerLabel);
-        item.setTitle(title);
+        item.setTitle(providerLabel);
         item.setKey(authority);
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-
         MenuItem syncNow = menu.add(0, MENU_SYNC_NOW_ID, 0,
                 getString(R.string.sync_menu_sync_now))
                 .setIcon(R.drawable.ic_menu_refresh_holo_dark);
