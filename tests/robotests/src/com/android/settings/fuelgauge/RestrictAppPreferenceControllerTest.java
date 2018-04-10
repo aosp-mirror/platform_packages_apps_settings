@@ -125,7 +125,7 @@ public class RestrictAppPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_twoRestrictedAppsForPrimaryUser_showCorrectSummary() {
+    public void testUpdateState_twoRestrictedAppsForPrimaryUser_visibleAndShowCorrectSummary() {
         mPackageOpsList.add(mRestrictedPackageOps);
         mPackageOpsList.add(mRestrictedPackageOps);
         mPackageOpsList.add(mAllowedPackageOps);
@@ -135,6 +135,7 @@ public class RestrictAppPreferenceControllerTest {
         mRestrictAppPreferenceController.updateState(mPreference);
 
         assertThat(mPreference.getSummary()).isEqualTo("Limiting battery usage for 2 apps");
+        assertThat(mPreference.isVisible()).isTrue();
     }
 
     @Test
@@ -155,13 +156,13 @@ public class RestrictAppPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_zeroRestrictApp_disabled() {
+    public void testUpdateState_zeroRestrictApp_inVisible() {
         mPackageOpsList.add(mAllowedPackageOps);
         doReturn(mPackageOpsList).when(mAppOpsManager).getPackagesForOps(any());
 
         mRestrictAppPreferenceController.updateState(mPreference);
 
-        assertThat(mPreference.isEnabled()).isFalse();
+        assertThat(mPreference.isVisible()).isFalse();
     }
 
     @Test
