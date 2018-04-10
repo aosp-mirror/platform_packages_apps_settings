@@ -37,8 +37,10 @@ import static org.mockito.Mockito.when;
 
 import android.app.AppOpsManager;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.BatteryStats;
 import android.os.Build;
 import android.os.Bundle;
@@ -575,7 +577,22 @@ public class BatteryUtilsTest {
     }
 
     @Test
-    public void testShouldHideAnomaly_systemApp_returnTrue() {
+    public void testShouldHideAnomaly_systemAppWithLauncher_returnTrue() {
+        final List<ResolveInfo> resolveInfos = new ArrayList<>();
+        final ResolveInfo resolveInfo = new ResolveInfo();
+        resolveInfo.activityInfo = new ActivityInfo();
+        resolveInfo.activityInfo.packageName = HIGH_SDK_PACKAGE;
+
+        doReturn(resolveInfos).when(mPackageManager).queryIntentActivities(any(), anyInt());
+        doReturn(new String[]{HIGH_SDK_PACKAGE}).when(mPackageManager).getPackagesForUid(UID);
+        mHighApplicationInfo.flags = ApplicationInfo.FLAG_SYSTEM;
+
+        assertThat(mBatteryUtils.shouldHideAnomaly(mPowerWhitelistBackend, UID)).isTrue();
+    }
+
+    @Test
+    public void testShouldHideAnomaly_systemAppWithoutLauncher_returnTrue() {
+        doReturn(new ArrayList<>()).when(mPackageManager).queryIntentActivities(any(), anyInt());
         doReturn(new String[]{HIGH_SDK_PACKAGE}).when(mPackageManager).getPackagesForUid(UID);
         mHighApplicationInfo.flags = ApplicationInfo.FLAG_SYSTEM;
 
