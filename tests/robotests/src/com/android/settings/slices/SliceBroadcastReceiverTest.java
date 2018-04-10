@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 
+import android.app.slice.Slice;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -43,8 +44,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.robolectric.RuntimeEnvironment;
-
-import androidx.slice.core.SliceHints;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SliceBroadcastReceiverTest {
@@ -129,7 +128,7 @@ public class SliceBroadcastReceiverTest {
         fakeSliderController.setSliderPosition(oldPosition);
         // Build action
         Intent intent = new Intent(SettingsSliceProvider.ACTION_SLIDER_CHANGED);
-        intent.putExtra(SliceHints.EXTRA_RANGE_VALUE, position);
+        intent.putExtra(Slice.EXTRA_RANGE_VALUE, position);
         intent.putExtra(SettingsSliceProvider.EXTRA_SLICE_KEY, key);
 
         assertThat(fakeSliderController.getSliderPosition()).isEqualTo(oldPosition);
@@ -163,7 +162,7 @@ public class SliceBroadcastReceiverTest {
 
         // Build action
         Intent intent = new Intent(SettingsSliceProvider.ACTION_SLIDER_CHANGED);
-        intent.putExtra(SliceHints.EXTRA_RANGE_VALUE, position);
+        intent.putExtra(Slice.EXTRA_RANGE_VALUE, position);
         intent.putExtra(SettingsSliceProvider.EXTRA_SLICE_KEY, key);
 
         // Trigger the exception.
@@ -174,7 +173,7 @@ public class SliceBroadcastReceiverTest {
     public void sliderOnReceive_noKey_throwsException() {
         // Build action
         final Intent intent = new Intent(SettingsSliceProvider.ACTION_SLIDER_CHANGED)
-                .putExtra(SliceHints.EXTRA_RANGE_VALUE, 0);
+                .putExtra(Slice.EXTRA_RANGE_VALUE, 0);
 
         // Trigger the exception.
         mReceiver.onReceive(mContext, intent);

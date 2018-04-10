@@ -40,8 +40,6 @@ import com.android.settings.core.SliderPreferenceController;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 
-import androidx.slice.core.SliceHints;
-
 /**
  * Responds to actions performed on slices and notifies slices of updates in state changes.
  */
@@ -64,7 +62,7 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
                 handleToggleAction(context, key, isPlatformDefined);
                 break;
             case ACTION_SLIDER_CHANGED:
-                int newPosition = intent.getIntExtra(SliceHints.EXTRA_RANGE_VALUE, -1);
+                int newPosition = intent.getIntExtra(Slice.EXTRA_RANGE_VALUE, -1);
                 handleSliderAction(context, key, newPosition);
                 break;
             case ACTION_WIFI_CHANGED:
