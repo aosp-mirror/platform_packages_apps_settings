@@ -771,7 +771,7 @@
             android:icon="@drawable/ic_settings_notifications"
             android:exported="true"
             android:taskAffinity="com.android.settings"
-            android:parentActivityName="Settings">
+            android:parentActivityName="Settings$ZenModeSettingsActivity">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.ZEN_MODE_AUTOMATION_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -834,7 +834,7 @@
             android:name="Settings$ZenModeScheduleRuleSettingsActivity"
             android:exported="true"
             android:taskAffinity="com.android.settings"
-            android:parentActivityName="Settings">
+            android:parentActivityName="Settings$ZenModeAutomationSettingsActivity">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.ZEN_MODE_SCHEDULE_RULE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -853,7 +853,7 @@
             android:name="Settings$ZenModeEventRuleSettingsActivity"
             android:exported="true"
             android:taskAffinity="com.android.settings"
-            android:parentActivityName="Settings">
+            android:parentActivityName="Settings$ZenModeAutomationSettingsActivity">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.ZEN_MODE_EVENT_RULE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
