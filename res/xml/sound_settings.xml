@@ -20,7 +20,7 @@
     android:title="@string/sound_settings"
     android:key="sound_settings"
     settings:keywords="@string/keywords_sounds"
-    settings:initialExpandedChildrenCount="7">
+    settings:initialExpandedChildrenCount="8">
 
     <!-- Media volume -->
     <com.android.settings.notification.VolumeSeekBarPreference
@@ -69,6 +69,14 @@
         android:fragment="com.android.settings.notification.ZenModeSettings"
         settings:allowDividerAbove="true"
         android:order="-120"/>
+
+    <Preference
+        android:key="gesture_prevent_ringing_sound"
+        android:title="@string/gesture_prevent_ringing_sound_title"
+        settings:allowDividerAbove="true"
+        android:order="-110"
+        android:fragment="com.android.settings.gestures.PreventRingingGestureSettings"
+        settings:controller="com.android.settings.gestures.PreventRingingPreferenceController" />
 
     <!-- Phone ringtone -->
     <com.android.settings.DefaultRingtonePreference
