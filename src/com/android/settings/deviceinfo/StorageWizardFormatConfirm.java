@@ -16,52 +16,91 @@
 
 package com.android.settings.deviceinfo;
 
+import static android.os.storage.DiskInfo.EXTRA_DISK_ID;
+
+import static com.android.settings.deviceinfo.StorageWizardBase.EXTRA_FORMAT_FORGET_UUID;
+import static com.android.settings.deviceinfo.StorageWizardBase.EXTRA_FORMAT_PRIVATE;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.storage.DiskInfo;
+import android.os.storage.StorageManager;
+import android.text.TextUtils;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
-public class StorageWizardFormatConfirm extends StorageWizardBase {
-    public static final String EXTRA_FORMAT_PRIVATE = "format_private";
-    public static final String EXTRA_FORGET_UUID = "forget_uuid";
+public class StorageWizardFormatConfirm extends InstrumentedDialogFragment {
+    private static final String TAG_FORMAT_WARNING = "format_warning";
 
-    private boolean mFormatPrivate;
+    public static void showPublic(Activity activity, String diskId) {
+        show(activity, diskId, null, false);
+    }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (mDisk == null) {
-            finish();
-            return;
-        }
-        setContentView(R.layout.storage_wizard_generic);
+    public static void showPublic(Activity activity, String diskId, String forgetUuid) {
+        show(activity, diskId, forgetUuid, false);
+    }
 
-        mFormatPrivate = getIntent().getBooleanExtra(EXTRA_FORMAT_PRIVATE, false);
-        setIllustrationType(
-                mFormatPrivate ? ILLUSTRATION_INTERNAL : ILLUSTRATION_PORTABLE);
+    public static void showPrivate(Activity activity, String diskId) {
+        show(activity, diskId, null, true);
+    }
 
-        if (mFormatPrivate) {
-            setHeaderText(R.string.storage_wizard_format_confirm_title);
-            setBodyText(R.string.storage_wizard_format_confirm_body,
-                    mDisk.getDescription());
-        } else {
-            setHeaderText(R.string.storage_wizard_format_confirm_public_title);
-            setBodyText(R.string.storage_wizard_format_confirm_public_body,
-                    mDisk.getDescription());
-        }
+    private static void show(Activity activity, String diskId, String formatForgetUuid,
+            boolean formatPrivate) {
+        final Bundle args = new Bundle();
+        args.putString(EXTRA_DISK_ID, diskId);
+        args.putString(EXTRA_FORMAT_FORGET_UUID, formatForgetUuid);
+        args.putBoolean(EXTRA_FORMAT_PRIVATE, formatPrivate);
 
-        getNextButton().setText(R.string.storage_wizard_format_confirm_next);
-        getNextButton().setBackgroundTintList(getColorStateList(R.color.storage_wizard_button_red));
+        final StorageWizardFormatConfirm fragment = new StorageWizardFormatConfirm();
+        fragment.setArguments(args);
+        fragment.showAllowingStateLoss(activity.getFragmentManager(), TAG_FORMAT_WARNING);
     }
 
     @Override
-    public void onNavigateNext() {
-        final Intent intent = new Intent(this, StorageWizardFormatProgress.class);
-        intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
-        intent.putExtra(EXTRA_FORMAT_PRIVATE, mFormatPrivate);
-        intent.putExtra(EXTRA_FORGET_UUID, getIntent().getStringExtra(EXTRA_FORGET_UUID));
-        startActivity(intent);
-        finishAffinity();
+    public int getMetricsCategory() {
+        return MetricsProto.MetricsEvent.DIALOG_VOLUME_FORMAT;
+    }
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        final Context context = getContext();
+
+        final Bundle args = getArguments();
+        final String diskId = args.getString(EXTRA_DISK_ID);
+        final String formatForgetUuid = args.getString(EXTRA_FORMAT_FORGET_UUID);
+        final boolean formatPrivate = args.getBoolean(EXTRA_FORMAT_PRIVATE, false);
+
+        final DiskInfo disk = context.getSystemService(StorageManager.class)
+                .findDiskById(diskId);
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(TextUtils.expandTemplate(
+                getText(R.string.storage_wizard_format_confirm_v2_title),
+                disk.getShortDescription()));
+        builder.setMessage(TextUtils.expandTemplate(
+                getText(R.string.storage_wizard_format_confirm_v2_body),
+                disk.getDescription(),
+                disk.getShortDescription(),
+                disk.getShortDescription()));
+
+        builder.setNegativeButton(android.R.string.cancel, null);
+        builder.setPositiveButton(
+                TextUtils.expandTemplate(getText(R.string.storage_wizard_format_confirm_v2_action),
+                        disk.getShortDescription()),
+                (dialog, which) -> {
+                    final Intent intent = new Intent(context, StorageWizardFormatProgress.class);
+                    intent.putExtra(EXTRA_DISK_ID, diskId);
+                    intent.putExtra(EXTRA_FORMAT_FORGET_UUID, formatForgetUuid);
+                    intent.putExtra(EXTRA_FORMAT_PRIVATE, formatPrivate);
+                    context.startActivity(intent);
+                });
+
+        return builder.create();
     }
 }

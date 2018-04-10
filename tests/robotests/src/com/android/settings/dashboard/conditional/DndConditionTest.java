@@ -23,6 +23,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -103,5 +105,14 @@ public class DndConditionTest {
         condition.onPause();
 
         verify(mContext, never()).unregisterReceiver(any(DndCondition.Receiver.class));
+    }
+
+    @Test
+    public void nullZenConfig_noCrash() {
+        DndCondition condition = new DndCondition(mConditionManager);
+        assertThat(condition.mConfig).isNull();
+
+        // should not crash, instead summary is null
+        assertThat(condition.getSummary()).isNull();
     }
 }

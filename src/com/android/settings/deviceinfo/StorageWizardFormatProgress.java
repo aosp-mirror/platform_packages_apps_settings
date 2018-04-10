@@ -20,34 +20,26 @@ import static android.os.storage.VolumeInfo.TYPE_PRIVATE;
 
 import static com.android.settings.deviceinfo.StorageSettings.TAG;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.IPackageMoveObserver;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IVoldTaskListener;
 import android.os.PersistableBundle;
-import android.os.storage.DiskInfo;
+import android.os.SystemProperties;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
-import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
 public class StorageWizardFormatProgress extends StorageWizardBase {
-    private static final String TAG_SLOW_WARNING = "slow_warning";
+    private static final String PROP_DEBUG_STORAGE_SLOW = "sys.debug.storage_slow";
 
     private boolean mFormatPrivate;
 
@@ -63,15 +55,10 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
         setContentView(R.layout.storage_wizard_progress);
         setKeepScreenOn(true);
 
-        mFormatPrivate = getIntent().getBooleanExtra(
-                StorageWizardFormatConfirm.EXTRA_FORMAT_PRIVATE, false);
-        setIllustrationType(
-                mFormatPrivate ? ILLUSTRATION_INTERNAL : ILLUSTRATION_PORTABLE);
+        mFormatPrivate = getIntent().getBooleanExtra(EXTRA_FORMAT_PRIVATE, false);
 
-        setHeaderText(R.string.storage_wizard_format_progress_title, mDisk.getDescription());
+        setHeaderText(R.string.storage_wizard_format_progress_title, mDisk.getShortDescription());
         setBodyText(R.string.storage_wizard_format_progress_body, mDisk.getDescription());
-
-        getNextButton().setVisibility(View.GONE);
 
         mTask = (PartitionTask) getLastNonConfigurationInstance();
         if (mTask == null) {
@@ -198,93 +185,29 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
                 // changes.
 
                 Log.d(TAG, "New volume took " + mPrivateBench + "ms to run benchmark");
-                if (mPrivateBench > 2000) {
-                    final SlowWarningFragment dialog = new SlowWarningFragment();
-                    dialog.showAllowingStateLoss(activity.getFragmentManager(), TAG_SLOW_WARNING);
+                if (mPrivateBench > 2000
+                        || SystemProperties.getBoolean(PROP_DEBUG_STORAGE_SLOW, false)) {
+                    mActivity.onFormatFinishedSlow();
                 } else {
-                    activity.onFormatFinished();
+                    mActivity.onFormatFinished();
                 }
             } else {
-                activity.onFormatFinished();
+                mActivity.onFormatFinished();
             }
         }
     }
 
-    public static class SlowWarningFragment extends InstrumentedDialogFragment {
-
-        @Override
-        public int getMetricsCategory() {
-            return MetricsProto.MetricsEvent.DIALOG_VOLUME_SLOW_WARNING;
-        }
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            final Context context = getActivity();
-
-            final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-
-            final StorageWizardFormatProgress target =
-                    (StorageWizardFormatProgress) getActivity();
-            final String descrip = target.getDiskDescription();
-            final String genericDescip = target.getGenericDiskDescription();
-            builder.setMessage(TextUtils.expandTemplate(getText(R.string.storage_wizard_slow_body),
-                    descrip, genericDescip));
-
-            builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    final StorageWizardFormatProgress target =
-                            (StorageWizardFormatProgress) getActivity();
-                    target.onFormatFinished();
-                }
-            });
-
-            return builder.create();
-        }
+    public void onFormatFinished() {
+        final Intent intent = new Intent(this, StorageWizardFormatSlow.class);
+        intent.putExtra(EXTRA_FORMAT_SLOW, false);
+        startActivity(intent);
+        finishAffinity();
     }
 
-    private String getDiskDescription() {
-        return mDisk.getDescription();
-    }
-
-    private String getGenericDiskDescription() {
-        // TODO: move this directly to DiskInfo
-        if (mDisk.isSd()) {
-            return getString(com.android.internal.R.string.storage_sd_card);
-        } else if (mDisk.isUsb()) {
-            return getString(com.android.internal.R.string.storage_usb_drive);
-        } else {
-            return null;
-        }
-    }
-
-    private void onFormatFinished() {
-        final String forgetUuid = getIntent().getStringExtra(
-                StorageWizardFormatConfirm.EXTRA_FORGET_UUID);
-        if (!TextUtils.isEmpty(forgetUuid)) {
-            mStorage.forgetVolume(forgetUuid);
-        }
-
-        final boolean offerMigrate;
-        if (mFormatPrivate) {
-            // Offer to migrate only if storage is currently internal
-            final VolumeInfo privateVol = getPackageManager()
-                    .getPrimaryStorageCurrentVolume();
-            offerMigrate = (privateVol != null
-                    && VolumeInfo.ID_PRIVATE_INTERNAL.equals(privateVol.getId()));
-        } else {
-            offerMigrate = false;
-        }
-
-        if (offerMigrate) {
-            final Intent intent = new Intent(this, StorageWizardMigrate.class);
-            intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
-            startActivity(intent);
-        } else {
-            final Intent intent = new Intent(this, StorageWizardReady.class);
-            intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
-            startActivity(intent);
-        }
+    public void onFormatFinishedSlow() {
+        final Intent intent = new Intent(this, StorageWizardFormatSlow.class);
+        intent.putExtra(EXTRA_FORMAT_SLOW, true);
+        startActivity(intent);
         finishAffinity();
     }
 

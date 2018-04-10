@@ -22,8 +22,8 @@ import android.annotation.UserIdInt;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.UserHandle;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
 import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
@@ -31,7 +31,6 @@ import com.android.settings.R;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.search.ResultPayload;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class PickupGesturePreferenceController extends GesturePreferenceController {
 
@@ -43,16 +42,19 @@ public class PickupGesturePreferenceController extends GesturePreferenceControll
 
     private final String SECURE_KEY = DOZE_PULSE_ON_PICK_UP;
 
-    private final AmbientDisplayConfiguration mAmbientConfig;
+    private AmbientDisplayConfiguration mAmbientConfig;
     @UserIdInt
     private final int mUserId;
 
-    public PickupGesturePreferenceController(Context context, Lifecycle lifecycle,
-            AmbientDisplayConfiguration config, @UserIdInt int userId, String key) {
-        super(context, lifecycle);
-        mAmbientConfig = config;
-        mUserId = userId;
+    public PickupGesturePreferenceController(Context context, String key) {
+        super(context, key);
+        mUserId = UserHandle.myUserId();
         mPickUpPrefKey = key;
+    }
+
+    public PickupGesturePreferenceController setConfig(AmbientDisplayConfiguration config) {
+        mAmbientConfig = config;
+        return this;
     }
 
     public static boolean isSuggestionComplete(Context context, SharedPreferences prefs) {
@@ -62,8 +64,11 @@ public class PickupGesturePreferenceController extends GesturePreferenceControll
     }
 
     @Override
-    public boolean isAvailable() {
-        return mAmbientConfig.pulseOnPickupAvailable();
+    public int getAvailabilityStatus() {
+        if (mAmbientConfig == null) {
+            mAmbientConfig = new AmbientDisplayConfiguration(mContext);
+        }
+        return mAmbientConfig.pulseOnPickupAvailable() ? AVAILABLE : DISABLED_UNSUPPORTED;
     }
 
     @Override
@@ -72,7 +77,7 @@ public class PickupGesturePreferenceController extends GesturePreferenceControll
     }
 
     @Override
-    protected boolean isSwitchPrefEnabled() {
+    public boolean isChecked() {
         return mAmbientConfig.pulseOnPickupEnabled(mUserId);
     }
 
@@ -82,11 +87,9 @@ public class PickupGesturePreferenceController extends GesturePreferenceControll
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final boolean enabled = (boolean) newValue;
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                SECURE_KEY, enabled ? ON : OFF);
-        return true;
+    public boolean setChecked(boolean isChecked) {
+        return Settings.Secure.putInt(mContext.getContentResolver(), SECURE_KEY,
+                isChecked ? ON : OFF);
     }
 
     @Override

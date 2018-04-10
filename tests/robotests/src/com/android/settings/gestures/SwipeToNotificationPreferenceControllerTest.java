@@ -53,7 +53,7 @@ public class SwipeToNotificationPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mController = new SwipeToNotificationPreferenceController(mContext, null, KEY_SWIPE_DOWN);
+        mController = new SwipeToNotificationPreferenceController(mContext, KEY_SWIPE_DOWN);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mContext.getSystemService(Context.FINGERPRINT_SERVICE))
                 .thenReturn(mFingerprintManager);
@@ -93,27 +93,27 @@ public class SwipeToNotificationPreferenceControllerTest {
     }
 
     @Test
-    public void testSwitchEnabled_configIsSet_shouldReturnTrue() {
+    public void testIsChecked_configIsSet_shouldReturnTrue() {
         stubFingerprintSupported(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         // Set the setting to be enabled.
         final Context context = RuntimeEnvironment.application;
         Settings.System.putInt(context.getContentResolver(), SYSTEM_NAVIGATION_KEYS_ENABLED, 1);
-        mController = new SwipeToNotificationPreferenceController(context, null, KEY_SWIPE_DOWN);
+        mController = new SwipeToNotificationPreferenceController(context, KEY_SWIPE_DOWN);
 
-        assertThat(mController.isSwitchPrefEnabled()).isTrue();
+        assertThat(mController.isChecked()).isTrue();
     }
 
     @Test
-    public void testSwitchEnabled_configIsNotSet_shouldReturnFalse() {
+    public void testIsChecked_configIsNotSet_shouldReturnFalse() {
         stubFingerprintSupported(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         // Set the setting to be disabled.
         final Context context = RuntimeEnvironment.application;
         Settings.System.putInt(context.getContentResolver(), SYSTEM_NAVIGATION_KEYS_ENABLED, 0);
-        mController = new SwipeToNotificationPreferenceController(context, null, KEY_SWIPE_DOWN);
+        mController = new SwipeToNotificationPreferenceController(context, KEY_SWIPE_DOWN);
 
-        assertThat(mController.isSwitchPrefEnabled()).isFalse();
+        assertThat(mController.isChecked()).isFalse();
     }
 
     @Test

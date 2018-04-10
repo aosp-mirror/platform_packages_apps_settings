@@ -16,6 +16,10 @@
 
 package com.android.settings.deviceinfo;
 
+import static android.content.pm.PackageManager.EXTRA_MOVE_ID;
+
+import static com.android.settings.deviceinfo.StorageSettings.TAG;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -24,13 +28,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.storage.DiskInfo;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import com.android.settings.R;
-
-import static android.content.pm.PackageManager.EXTRA_MOVE_ID;
-import static com.android.settings.deviceinfo.StorageSettings.TAG;
 
 public class StorageWizardMigrateProgress extends StorageWizardBase {
     private static final String ACTION_FINISH_WIZARD = "com.android.systemui.action.FINISH_WIZARD";
@@ -48,12 +48,9 @@ public class StorageWizardMigrateProgress extends StorageWizardBase {
 
         mMoveId = getIntent().getIntExtra(EXTRA_MOVE_ID, -1);
 
-        final String descrip = mStorage.getBestVolumeDescription(mVolume);
-        setIllustrationType(ILLUSTRATION_INTERNAL);
-        setHeaderText(R.string.storage_wizard_migrate_progress_title, descrip);
-        setBodyText(R.string.storage_wizard_migrate_details, descrip);
-
-        getNextButton().setVisibility(View.GONE);
+        setIcon(R.drawable.ic_swap_horiz);
+        setHeaderText(R.string.storage_wizard_migrate_progress_v2_title);
+        setAuxChecklist();
 
         // Register for updates and push through current status
         getPackageManager().registerMoveCallback(mCallback, new Handler());

@@ -16,29 +16,20 @@
 
 package com.android.settings.deviceinfo;
 
-import static com.android.settings.deviceinfo.StorageSettings.TAG;
-
 import android.app.ActivityManager;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.UserManager;
 import android.os.storage.DiskInfo;
 import android.os.storage.VolumeInfo;
-import android.util.DebugUtils;
-import android.util.Log;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.RadioButton;
+import android.view.View;
+import android.widget.Button;
 
 import com.android.settings.R;
 
-import java.io.File;
-
 public class StorageWizardInit extends StorageWizardBase {
-    private RadioButton mRadioExternal;
-    private RadioButton mRadioInternal;
+    private Button mExternal;
+    private Button mInternal;
 
     private boolean mIsPermittedToAdopt;
 
@@ -54,107 +45,46 @@ public class StorageWizardInit extends StorageWizardBase {
         mIsPermittedToAdopt = UserManager.get(this).isAdminUser()
                 && !ActivityManager.isUserAMonkey();
 
-        setIllustrationType(ILLUSTRATION_SETUP);
-        setHeaderText(R.string.storage_wizard_init_title, mDisk.getDescription());
+        setHeaderText(R.string.storage_wizard_init_v2_title, mDisk.getShortDescription());
 
-        mRadioExternal = (RadioButton) findViewById(R.id.storage_wizard_init_external_title);
-        mRadioInternal = (RadioButton) findViewById(R.id.storage_wizard_init_internal_title);
+        mExternal = requireViewById(R.id.storage_wizard_init_external);
+        mInternal = requireViewById(R.id.storage_wizard_init_internal);
 
-        mRadioExternal.setOnCheckedChangeListener(mRadioListener);
-        mRadioInternal.setOnCheckedChangeListener(mRadioListener);
-
-        findViewById(R.id.storage_wizard_init_external_summary).setPadding(
-                mRadioExternal.getCompoundPaddingLeft(), 0,
-                mRadioExternal.getCompoundPaddingRight(), 0);
-        findViewById(R.id.storage_wizard_init_internal_summary).setPadding(
-                mRadioExternal.getCompoundPaddingLeft(), 0,
-                mRadioExternal.getCompoundPaddingRight(), 0);
-
-        getNextButton().setEnabled(false);
+        setBackButtonText(R.string.storage_wizard_init_v2_later);
 
         if (!mDisk.isAdoptable()) {
             // If not adoptable, we only have one choice
-            mRadioExternal.setChecked(true);
-            onNavigateNext();
+            onNavigateExternal(null);
             finish();
         } else if (!mIsPermittedToAdopt) {
             // TODO: Show a message about why this is disabled for guest and
             // that only an admin user can adopt an sd card.
-            mRadioInternal.setEnabled(false);
-        } else if (mVolume != null && mVolume.getType() == VolumeInfo.TYPE_PUBLIC
-                && mVolume.isMountedReadable()) {
-            // Device is mounted, so classify contents to possibly pick a
-            // recommended default operation.
-            new ClassifyTask().execute(mVolume.getPath());
+            mInternal.setEnabled(false);
         }
     }
-
-    private final OnCheckedChangeListener mRadioListener = new OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            if (isChecked) {
-                if (buttonView == mRadioExternal) {
-                    mRadioInternal.setChecked(false);
-                    setIllustrationType(ILLUSTRATION_PORTABLE);
-                } else if (buttonView == mRadioInternal) {
-                    mRadioExternal.setChecked(false);
-                    setIllustrationType(ILLUSTRATION_INTERNAL);
-                }
-                getNextButton().setEnabled(true);
-            }
-        }
-    };
 
     @Override
-    public void onNavigateNext() {
-        if (mRadioExternal.isChecked()) {
-            if (mVolume != null && mVolume.getType() == VolumeInfo.TYPE_PUBLIC
-                    && mVolume.getState() != VolumeInfo.STATE_UNMOUNTABLE) {
-                // Remember that user made decision
-                mStorage.setVolumeInited(mVolume.getFsUuid(), true);
+    public void onNavigateBack(View view) {
+        finish();
+    }
 
-                final Intent intent = new Intent(this, StorageWizardReady.class);
-                intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
-                startActivity(intent);
+    public void onNavigateExternal(View view) {
+        if (mVolume != null && mVolume.getType() == VolumeInfo.TYPE_PUBLIC
+                && mVolume.getState() != VolumeInfo.STATE_UNMOUNTABLE) {
+            // Remember that user made decision
+            mStorage.setVolumeInited(mVolume.getFsUuid(), true);
 
-            } else {
-                // Gotta format to get there
-                final Intent intent = new Intent(this, StorageWizardFormatConfirm.class);
-                intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
-                intent.putExtra(StorageWizardFormatConfirm.EXTRA_FORMAT_PRIVATE, false);
-                startActivity(intent);
-            }
-
-        } else if (mRadioInternal.isChecked()) {
-            final Intent intent = new Intent(this, StorageWizardFormatConfirm.class);
+            final Intent intent = new Intent(this, StorageWizardReady.class);
             intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
-            intent.putExtra(StorageWizardFormatConfirm.EXTRA_FORMAT_PRIVATE, true);
             startActivity(intent);
+
+        } else {
+            // Gotta format to get there
+            StorageWizardFormatConfirm.showPublic(this, mDisk.getId());
         }
     }
 
-    /**
-     * Task that classifies the contents of a mounted storage device, and sets a
-     * recommended default operation based on result.
-     */
-    public class ClassifyTask extends AsyncTask<File, Void, Integer> {
-        @Override
-        protected Integer doInBackground(File... params) {
-            int classes = Environment.classifyExternalStorageDirectory(params[0]);
-            Log.v(TAG, "Classified " + params[0] + " as "
-                    + DebugUtils.flagsToString(Environment.class, "HAS_", classes));
-            return classes;
-        }
-
-        @Override
-        protected void onPostExecute(Integer classes) {
-            if (classes == 0) {
-                // Empty is strong signal for adopt
-                mRadioInternal.setChecked(true);
-            } else if ((classes & (Environment.HAS_PICTURES | Environment.HAS_DCIM)) != 0) {
-                // Photos is strong signal for portable
-                mRadioExternal.setChecked(true);
-            }
-        }
+    public void onNavigateInternal(View view) {
+        StorageWizardFormatConfirm.showPrivate(this, mDisk.getId());
     }
 }

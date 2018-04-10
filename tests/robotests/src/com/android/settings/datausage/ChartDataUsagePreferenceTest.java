@@ -39,11 +39,11 @@ public class ChartDataUsagePreferenceTest {
 
     private static final long MILLIS_IN_ONE_HOUR = 60 * 60 * 1000;
     private static final long MILLIS_IN_ONE_DAY = 24 * MILLIS_IN_ONE_HOUR;
+    private static final long TIMESTAMP_NOW = Integer.MAX_VALUE;
 
     private NetworkStatsHistory mNetworkStatsHistory;
     private Context mContext;
     private ChartDataUsagePreference mPreference;
-    private long mNow;
 
     @Before
     public void setUp() {
@@ -51,7 +51,6 @@ public class ChartDataUsagePreferenceTest {
 
         mContext = RuntimeEnvironment.application;
         mPreference = new ChartDataUsagePreference(mContext, null);
-        mNow = System.currentTimeMillis();
         mNetworkStatsHistory = spy(new NetworkStatsHistory(MILLIS_IN_ONE_HOUR, 10));
         addTestNetworkEntries();
         mPreference.setNetworkStats(mNetworkStatsHistory);
@@ -59,8 +58,8 @@ public class ChartDataUsagePreferenceTest {
 
     @Test
     public void calcPoints_notStartOfData_shouldAddDataPointsOnly() {
-        final long start = mNow - 20 * MILLIS_IN_ONE_DAY;
-        final long end = mNow - 5 * MILLIS_IN_ONE_DAY;
+        final long start = TIMESTAMP_NOW - 20 * MILLIS_IN_ONE_DAY;
+        final long end = TIMESTAMP_NOW - 5 * MILLIS_IN_ONE_DAY;
         mPreference.setVisibleRange(start, end);
         when(mNetworkStatsHistory.getIndexAfter(start)).thenReturn(2);
         when(mNetworkStatsHistory.getIndexAfter(end)).thenReturn(7);
@@ -78,8 +77,8 @@ public class ChartDataUsagePreferenceTest {
 
     @Test
     public void calcPoints_startOfData_shouldIndicateStartOfData() {
-        final long start = mNow - 20 * MILLIS_IN_ONE_DAY;
-        final long end = mNow - 5 * MILLIS_IN_ONE_DAY;
+        final long start = TIMESTAMP_NOW - 20 * MILLIS_IN_ONE_DAY;
+        final long end = TIMESTAMP_NOW - 5 * MILLIS_IN_ONE_DAY;
         mPreference.setVisibleRange(start, end);
         when(mNetworkStatsHistory.getIndexAfter(start)).thenReturn(0);
         when(mNetworkStatsHistory.getIndexAfter(end)).thenReturn(5);
@@ -104,10 +103,10 @@ public class ChartDataUsagePreferenceTest {
         mNetworkStatsHistory.setValues(3, createEntry(1521655200000L, 83849690L, 3558238L));
         mNetworkStatsHistory.setValues(4, createEntry(1521658800000L, 1883657L, 353330L));
         mNetworkStatsHistory.setValues(5, createEntry(1521662400000L, 705259L, 279065L));
-        mNetworkStatsHistory.setValues(5, createEntry(1521666000000L, 216169L, 155302L));
-        mNetworkStatsHistory.setValues(5, createEntry(1521669600000L, 6069175L, 427581L));
-        mNetworkStatsHistory.setValues(5, createEntry(1521673200000L, 120389L, 110807L));
-        mNetworkStatsHistory.setValues(5, createEntry(1521676800000L, 29947L, 73257L));
+        mNetworkStatsHistory.setValues(6, createEntry(1521666000000L, 216169L, 155302L));
+        mNetworkStatsHistory.setValues(7, createEntry(1521669600000L, 6069175L, 427581L));
+        mNetworkStatsHistory.setValues(8, createEntry(1521673200000L, 120389L, 110807L));
+        mNetworkStatsHistory.setValues(9, createEntry(1521676800000L, 29947L, 73257L));
     }
 
     /**

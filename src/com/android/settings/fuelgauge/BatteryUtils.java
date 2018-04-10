@@ -214,6 +214,11 @@ public class BatteryUtils {
         }
 
         if (totalActivityTimeMs >= 10 * DateUtils.MINUTE_IN_MILLIS) {
+            if (screenSipper == null) {
+                Log.e(TAG, "screen sipper is null even when app screen time is not zero");
+                return;
+            }
+
             final double screenPowerMah = screenSipper.totalPowerMah;
             for (int i = 0, size = sippers.size(); i < size; i++) {
                 final BatterySipper sipper = sippers.get(i);

@@ -39,9 +39,10 @@ public class WifiUtilsTest {
     public void testPassword() {
         final String longPassword = "123456789012345678901234567890"
                 + "1234567890123456789012345678901234567890";
-        assertThat(WifiUtils.isPasswordValid("123")).isFalse();
-        assertThat(WifiUtils.isPasswordValid("12345678")).isTrue();
-        assertThat(WifiUtils.isPasswordValid("1234567890")).isTrue();
-        assertThat(WifiUtils.isPasswordValid(longPassword)).isFalse();
+        assertThat(WifiUtils.isHotspotPasswordValid("123")).isFalse();
+        assertThat(WifiUtils.isHotspotPasswordValid("12345678")).isTrue();
+        assertThat(WifiUtils.isHotspotPasswordValid("1234567890")).isTrue();
+        assertThat(WifiUtils.isHotspotPasswordValid(longPassword)).isFalse();
+        assertThat(WifiUtils.isHotspotPasswordValid("")).isTrue();
     }
 }

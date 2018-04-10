@@ -21,10 +21,8 @@ import static android.provider.Settings.Secure.SYSTEM_NAVIGATION_KEYS_ENABLED;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
 
 import com.android.settings.Utils;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class SwipeToNotificationPreferenceController extends GesturePreferenceController {
 
@@ -32,14 +30,11 @@ public class SwipeToNotificationPreferenceController extends GesturePreferenceCo
     private static final int OFF = 0;
 
     private static final String PREF_KEY_VIDEO = "gesture_swipe_down_fingerprint_video";
-    private final String mSwipeDownFingerPrefKey;
 
     private static final String SECURE_KEY = SYSTEM_NAVIGATION_KEYS_ENABLED;
 
-    public SwipeToNotificationPreferenceController(Context context, Lifecycle lifecycle,
-            String key) {
-        super(context, lifecycle);
-        mSwipeDownFingerPrefKey = key;
+    public SwipeToNotificationPreferenceController(Context context, String key) {
+        super(context, key);
     }
 
     public static boolean isSuggestionComplete(Context context, SharedPreferences prefs) {
@@ -55,28 +50,23 @@ public class SwipeToNotificationPreferenceController extends GesturePreferenceCo
     }
 
     @Override
-    public String getPreferenceKey() {
-        return mSwipeDownFingerPrefKey;
-    }
-
-    @Override
     protected String getVideoPrefKey() {
         return PREF_KEY_VIDEO;
     }
 
     @Override
-    public boolean isAvailable() {
-        return SwipeToNotificationPreferenceController.isAvailable(mContext);
+    public int getAvailabilityStatus() {
+        return isAvailable(mContext) ? AVAILABLE : DISABLED_UNSUPPORTED;
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        setSwipeToNotification(mContext, (boolean) newValue);
+    public boolean setChecked(boolean isChecked) {
+        setSwipeToNotification(mContext, isChecked);
         return true;
     }
 
     @Override
-    protected boolean isSwitchPrefEnabled() {
+    public boolean isChecked() {
         return isSwipeToNotificationOn(mContext);
     }
 
