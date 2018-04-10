@@ -110,7 +110,7 @@ public class ApnSettings extends RestrictedSettingsFragment implements
 
     private String mSelectedKey;
 
-    private IntentFilter mMobileStateFilter;
+    private IntentFilter mIntentFilter;
 
     private boolean mUnavailable;
 
@@ -121,7 +121,7 @@ public class ApnSettings extends RestrictedSettingsFragment implements
         super(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
     }
 
-    private final BroadcastReceiver mMobileStateReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(
@@ -135,6 +135,11 @@ public class ApnSettings extends RestrictedSettingsFragment implements
                         showDialog(DIALOG_RESTORE_DEFAULTAPN);
                     }
                     break;
+                }
+            } else if(intent.getAction().equals(
+                    TelephonyManager.ACTION_SUBSCRIPTION_CARRIER_IDENTITY_CHANGED)) {
+                if (!mRestoreDefaultApnMode) {
+                    fillList();
                 }
             }
         }
@@ -161,8 +166,9 @@ public class ApnSettings extends RestrictedSettingsFragment implements
         final int subId = activity.getIntent().getIntExtra(SUB_ID,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
 
-        mMobileStateFilter = new IntentFilter(
+        mIntentFilter = new IntentFilter(
                 TelephonyIntents.ACTION_ANY_DATA_CONNECTION_STATE_CHANGED);
+        mIntentFilter.addAction(TelephonyManager.ACTION_SUBSCRIPTION_CARRIER_IDENTITY_CHANGED);
 
         setIfOnlyAvailableForAdmins(true);
 
@@ -209,7 +215,7 @@ public class ApnSettings extends RestrictedSettingsFragment implements
             return;
         }
 
-        getActivity().registerReceiver(mMobileStateReceiver, mMobileStateFilter);
+        getActivity().registerReceiver(mReceiver, mIntentFilter);
 
         if (!mRestoreDefaultApnMode) {
             fillList();
@@ -224,7 +230,7 @@ public class ApnSettings extends RestrictedSettingsFragment implements
             return;
         }
 
-        getActivity().unregisterReceiver(mMobileStateReceiver);
+        getActivity().unregisterReceiver(mReceiver);
     }
 
     @Override
