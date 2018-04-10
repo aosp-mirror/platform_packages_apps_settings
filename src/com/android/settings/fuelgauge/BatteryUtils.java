@@ -25,7 +25,9 @@ import android.os.BatteryManager;
 import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.Build;
+import android.os.Process;
 import android.os.SystemClock;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
@@ -43,6 +45,7 @@ import com.android.settings.R;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.overlay.FeatureFactory;
 
+import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 import com.android.settingslib.utils.PowerUtil;
 
 import java.lang.annotation.Retention;
@@ -526,6 +529,41 @@ public class BatteryUtils {
                         hiddenAmount,
                         dischargeAmount);
                 return percent >= threshold;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Return {@code true} if we should hide anomaly app represented by {@code uid}
+     */
+    public boolean shouldHideAnomaly(PowerWhitelistBackend powerWhitelistBackend, int uid) {
+        final String[] packageNames = mPackageManager.getPackagesForUid(uid);
+        if (ArrayUtils.isEmpty(packageNames)) {
+            // Don't show it if app has been uninstalled
+            return true;
+        }
+
+        return isSystemUid(uid) || isSystemApp(mPackageManager, packageNames)
+                || powerWhitelistBackend.isSysWhitelistedExceptIdle(packageNames);
+    }
+
+    private boolean isSystemUid(int uid) {
+        final int appUid = UserHandle.getAppId(uid);
+        return appUid >= Process.ROOT_UID && appUid < Process.FIRST_APPLICATION_UID;
+    }
+
+    private boolean isSystemApp(PackageManager packageManager, String[] packageNames) {
+        for (String packageName : packageNames) {
+            try {
+                final ApplicationInfo info = packageManager.getApplicationInfo(packageName,
+                        0 /* flags */);
+                if ((info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
+                    return true;
+                }
+            } catch (PackageManager.NameNotFoundException e) {
+                Log.e(TAG, "Package not found: " + packageName, e);
             }
         }
 

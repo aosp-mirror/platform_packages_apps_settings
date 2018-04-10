@@ -53,6 +53,7 @@ import com.android.settings.R;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -81,7 +82,7 @@ public class BatteryUtilsTest {
     private static final long TIME_SINCE_LAST_FULL_CHARGE_US =
             TIME_SINCE_LAST_FULL_CHARGE_MS * 1000;
 
-    private static final int UID = 123;
+    private static final int UID = 12345;
     private static final long TIME_EXPECTED_FOREGROUND = 1500;
     private static final long TIME_EXPECTED_BACKGROUND = 6000;
     private static final long TIME_EXPECTED_ALL = 7500;
@@ -141,6 +142,8 @@ public class BatteryUtilsTest {
     private ApplicationInfo mHighApplicationInfo;
     @Mock
     private ApplicationInfo mLowApplicationInfo;
+    @Mock
+    private PowerWhitelistBackend mPowerWhitelistBackend;
     private BatteryUtils mBatteryUtils;
     private FakeFeatureFactory mFeatureFactory;
     private PowerUsageFeatureProvider mProvider;
@@ -166,9 +169,9 @@ public class BatteryUtilsTest {
         when(mBatteryStatsHelper.getStats().computeBatteryRealtime(anyLong(), anyInt())).thenReturn(
                 TIME_SINCE_LAST_FULL_CHARGE_US);
 
-        when(mPackageManager.getApplicationInfo(HIGH_SDK_PACKAGE, PackageManager.GET_META_DATA))
+        when(mPackageManager.getApplicationInfo(eq(HIGH_SDK_PACKAGE), anyInt()))
                 .thenReturn(mHighApplicationInfo);
-        when(mPackageManager.getApplicationInfo(LOW_SDK_PACKAGE, PackageManager.GET_META_DATA))
+        when(mPackageManager.getApplicationInfo(eq(LOW_SDK_PACKAGE), anyInt()))
                 .thenReturn(mLowApplicationInfo);
         mHighApplicationInfo.targetSdkVersion = Build.VERSION_CODES.O;
         mLowApplicationInfo.targetSdkVersion = Build.VERSION_CODES.L;
@@ -569,5 +572,28 @@ public class BatteryUtilsTest {
     public void testIsAppHeavilyUsed_usageLessThanThreshold_returnFalse() {
         assertThat(mBatteryUtils.isAppHeavilyUsed(mBatteryStatsHelper, mUserManager, UID,
                 DISCHARGE_AMOUNT /* threshold */ )).isFalse();
+    }
+
+    @Test
+    public void testShouldHideAnomaly_systemApp_returnTrue() {
+        doReturn(new String[]{HIGH_SDK_PACKAGE}).when(mPackageManager).getPackagesForUid(UID);
+        mHighApplicationInfo.flags = ApplicationInfo.FLAG_SYSTEM;
+
+        assertThat(mBatteryUtils.shouldHideAnomaly(mPowerWhitelistBackend, UID)).isTrue();
+    }
+
+    @Test
+    public void testShouldHideAnomaly_systemUid_returnTrue() {
+        final int systemUid = Process.ROOT_UID;
+        doReturn(new String[]{HIGH_SDK_PACKAGE}).when(mPackageManager).getPackagesForUid(systemUid);
+
+        assertThat(mBatteryUtils.shouldHideAnomaly(mPowerWhitelistBackend, systemUid)).isTrue();
+    }
+
+    @Test
+    public void testShouldHideAnomaly_normalApp_returnFalse() {
+        doReturn(new String[]{HIGH_SDK_PACKAGE}).when(mPackageManager).getPackagesForUid(UID);
+
+        assertThat(mBatteryUtils.shouldHideAnomaly(mPowerWhitelistBackend, UID)).isFalse();
     }
 }
