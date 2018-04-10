@@ -16,7 +16,6 @@ package com.android.settings.display;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.app.ColorDisplayController;
@@ -25,7 +24,6 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.R;
 import com.android.settings.widget.RadioButtonPickerFragment;
-import com.android.settings.widget.RadioButtonPreference;
 import com.android.settingslib.widget.CandidateInfo;
 
 import java.util.Arrays;
@@ -81,14 +79,13 @@ public class ColorModePreferenceFragment extends RadioButtonPickerFragment
     @Override
     protected List<? extends CandidateInfo> getCandidates() {
         Context c = getContext();
-        final boolean enabled = !mController.getAccessibilityTransformActivated();
         return Arrays.asList(
             new ColorModeCandidateInfo(c.getText(R.string.color_mode_option_natural),
-                    KEY_COLOR_MODE_NATURAL, enabled),
+                    KEY_COLOR_MODE_NATURAL, true /* enabled */),
             new ColorModeCandidateInfo(c.getText(R.string.color_mode_option_boosted),
-                    KEY_COLOR_MODE_BOOSTED, enabled),
+                    KEY_COLOR_MODE_BOOSTED, true /* enabled */),
             new ColorModeCandidateInfo(c.getText(R.string.color_mode_option_saturated),
-                    KEY_COLOR_MODE_SATURATED, enabled)
+                    KEY_COLOR_MODE_SATURATED, true /* enabled */)
         );
     }
 
@@ -153,16 +150,10 @@ public class ColorModePreferenceFragment extends RadioButtonPickerFragment
 
     @Override
     public void onAccessibilityTransformChanged(boolean state) {
-        // Disable controls when a11y transforms are enabled, and vice versa
-        final PreferenceScreen screen = getPreferenceScreen();
-        if (screen != null) {
-            final int count = screen.getPreferenceCount();
-            for (int i = 0; i < count; i++) {
-                final Preference pref = screen.getPreference(i);
-                if (pref instanceof RadioButtonPreference) {
-                    pref.setEnabled(!state);
-                }
-            }
+        // Color modes are no not configurable when Accessibility transforms are enabled. Close
+        // this fragment in that case.
+        if (state) {
+            getActivity().onBackPressed();
         }
     }
 }
