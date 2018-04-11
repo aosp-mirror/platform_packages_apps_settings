@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,39 +13,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings;
+package com.android.settings.deviceinfo.legal;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.XmlTestUtils;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-
-import java.util.List;
+import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-public class LegalSettingsTest {
+public class WallpaperAttributionsPreferenceControllerTest {
+
+    private Context mContext;
+    private WallpaperAttributionsPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = RuntimeEnvironment.application;
+        mController = new WallpaperAttributionsPreferenceController(mContext, "pref_key");
     }
 
     @Test
-    public void getNonIndexableKeys_existInXmlLayout() {
-        final Context context = RuntimeEnvironment.application;
-        final List<String> niks =
-                LegalSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(context);
+    public void getAvailabilityStatus_byDefault_true() {
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.AVAILABLE);
+    }
 
-        final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context, R.xml.about_legal);
-
-        assertThat(keys).containsAllIn(niks);
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void getAvailabilityStatus_ifNotVisible_false() {
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.DISABLED_UNSUPPORTED);
     }
 }
