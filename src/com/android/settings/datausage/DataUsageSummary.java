@@ -14,7 +14,6 @@
 
 package com.android.settings.datausage;
 
-import android.util.Log;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -28,7 +27,6 @@ import android.support.v7.preference.PreferenceScreen;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.SubscriptionPlan;
-import android.telephony.TelephonyManager;
 import android.text.BidiFormatter;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -233,7 +231,7 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
         final int FLAGS = Spannable.SPAN_INCLUSIVE_INCLUSIVE;
 
         final Formatter.BytesResult usedResult = Formatter.formatBytes(context.getResources(),
-                usageLevel, Formatter.FLAG_CALCULATE_ROUNDED);
+                usageLevel, Formatter.FLAG_CALCULATE_ROUNDED | Formatter.FLAG_IEC_UNITS);
         final SpannableString enlargedValue = new SpannableString(usedResult.value);
         enlargedValue.setSpan(new RelativeSizeSpan(larger), 0, enlargedValue.length(), FLAGS);
 
@@ -311,7 +309,7 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
                         final CharSequence wifiFormat = mActivity
                                 .getText(R.string.data_usage_wifi_format);
                         final CharSequence sizeText =
-                                Formatter.formatFileSize(mActivity, info.usageLevel);
+                                DataUsageUtils.formatDataUsage(mActivity, info.usageLevel);
                         mSummaryLoader.setSummary(this,
                                 TextUtils.expandTemplate(wifiFormat, sizeText));
                     }
@@ -319,7 +317,7 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
             }
         }
 
-        private String formatUsedData() {
+        private CharSequence formatUsedData() {
             SubscriptionManager subscriptionManager = (SubscriptionManager) mActivity
                 .getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE);
             int defaultSubId = subscriptionManager.getDefaultSubscriptionId();
@@ -332,19 +330,19 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
                 return formatFallbackData();
             }
             if (DataUsageSummaryPreferenceController.unlimited(dfltPlan.getDataLimitBytes())) {
-                return Formatter.formatFileSize(mActivity, dfltPlan.getDataUsageBytes());
+                return DataUsageUtils.formatDataUsage(mActivity, dfltPlan.getDataUsageBytes());
             } else {
                 return Utils.formatPercentage(dfltPlan.getDataUsageBytes(),
                     dfltPlan.getDataLimitBytes());
             }
         }
 
-        private String formatFallbackData() {
+        private CharSequence formatFallbackData() {
             DataUsageController.DataUsageInfo info = mDataController.getDataUsageInfo();
             if (info == null) {
-                return Formatter.formatFileSize(mActivity, 0);
+                return DataUsageUtils.formatDataUsage(mActivity, 0);
             } else if (info.limitLevel <= 0) {
-                return Formatter.formatFileSize(mActivity, info.usageLevel);
+                return DataUsageUtils.formatDataUsage(mActivity, info.usageLevel);
             } else {
                 return Utils.formatPercentage(info.usageLevel, info.limitLevel);
             }

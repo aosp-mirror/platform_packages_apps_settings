@@ -23,6 +23,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.telephony.TelephonyManager;
+import android.util.DataUnit;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -77,5 +78,13 @@ public final class DataUsageUtilsTest {
         when(mTelephonyManager.getSimState()).thenReturn(TelephonyManager.SIM_STATE_ABSENT);
         boolean hasSim = DataUsageUtils.hasSim(mContext);
         assertThat(hasSim).isFalse();
+    }
+
+    @Test
+    public void formatDataUsage_useIECUnit() {
+        final CharSequence formattedDataUsage = DataUsageUtils.formatDataUsage(
+                mContext, DataUnit.GIBIBYTES.toBytes(1));
+
+        assertThat(formattedDataUsage).isEqualTo("1.00 GB");
     }
 }

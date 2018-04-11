@@ -35,7 +35,6 @@ import android.os.UserHandle;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
-import android.text.format.Formatter;
 import android.util.ArraySet;
 import android.util.IconDrawableFactory;
 import android.util.Log;
@@ -308,9 +307,9 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
         final long totalBytes = backgroundBytes + foregroundBytes;
         final Context context = getContext();
 
-        mTotalUsage.setSummary(Formatter.formatFileSize(context, totalBytes));
-        mForegroundUsage.setSummary(Formatter.formatFileSize(context, foregroundBytes));
-        mBackgroundUsage.setSummary(Formatter.formatFileSize(context, backgroundBytes));
+        mTotalUsage.setSummary(DataUsageUtils.formatDataUsage(context, totalBytes));
+        mForegroundUsage.setSummary(DataUsageUtils.formatDataUsage(context, foregroundBytes));
+        mBackgroundUsage.setSummary(DataUsageUtils.formatDataUsage(context, backgroundBytes));
     }
 
     private boolean getAppRestrictBackground() {
