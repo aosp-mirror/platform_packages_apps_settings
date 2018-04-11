@@ -110,12 +110,14 @@ public class BatteryTipUtils {
 
     /**
      * Upload the {@link PendingIntent} to {@link StatsManager} for anomaly detection
+     * @throws StatsManager.StatsUnavailableException if failed to communicate with stats service
      */
-    public static void uploadAnomalyPendingIntent(Context context, StatsManager statsManager) {
+    public static void uploadAnomalyPendingIntent(Context context, StatsManager statsManager)
+            throws StatsManager.StatsUnavailableException {
         final Intent extraIntent = new Intent(context, AnomalyDetectionReceiver.class);
         final PendingIntent pendingIntent = PendingIntent.getBroadcast(context, REQUEST_CODE,
                 extraIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        statsManager.setBroadcastSubscriber(StatsManagerConfig.ANOMALY_CONFIG_KEY,
-                StatsManagerConfig.SUBSCRIBER_ID, pendingIntent);
+        statsManager.setBroadcastSubscriber(pendingIntent,
+                StatsManagerConfig.ANOMALY_CONFIG_KEY, StatsManagerConfig.SUBSCRIBER_ID);
     }
 }

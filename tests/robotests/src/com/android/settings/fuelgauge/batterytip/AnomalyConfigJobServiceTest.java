@@ -104,7 +104,8 @@ public class AnomalyConfigJobServiceTest {
     }
 
     @Test
-    public void checkAnomalyConfig_newConfigExist_removeOldConfig() {
+    public void checkAnomalyConfig_newConfigExist_removeOldConfig()
+            throws StatsManager.StatsUnavailableException{
         Settings.Global.putInt(application.getContentResolver(),
                 Settings.Global.ANOMALY_CONFIG_VERSION, ANOMALY_CONFIG_VERSION);
         Settings.Global.putString(application.getContentResolver(), Settings.Global.ANOMALY_CONFIG,
@@ -112,11 +113,12 @@ public class AnomalyConfigJobServiceTest {
 
         mJobService.checkAnomalyConfig(mStatsManager);
 
-        verify(mStatsManager).removeConfiguration(StatsManagerConfig.ANOMALY_CONFIG_KEY);
+        verify(mStatsManager).removeConfig(StatsManagerConfig.ANOMALY_CONFIG_KEY);
     }
 
     @Test
-    public void checkAnomalyConfig_newConfigExist_uploadNewConfig() {
+    public void checkAnomalyConfig_newConfigExist_uploadNewConfig()
+            throws StatsManager.StatsUnavailableException{
         Settings.Global.putInt(application.getContentResolver(),
                 Settings.Global.ANOMALY_CONFIG_VERSION, ANOMALY_CONFIG_VERSION);
         Settings.Global.putString(application.getContentResolver(), Settings.Global.ANOMALY_CONFIG,
@@ -124,7 +126,7 @@ public class AnomalyConfigJobServiceTest {
 
         mJobService.checkAnomalyConfig(mStatsManager);
 
-        verify(mStatsManager).addConfiguration(eq(StatsManagerConfig.ANOMALY_CONFIG_KEY), any());
+        verify(mStatsManager).addConfig(eq(StatsManagerConfig.ANOMALY_CONFIG_KEY), any());
     }
 
 }
