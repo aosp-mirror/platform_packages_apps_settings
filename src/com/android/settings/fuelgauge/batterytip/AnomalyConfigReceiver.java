@@ -41,7 +41,11 @@ public class AnomalyConfigReceiver extends BroadcastReceiver {
             // Check whether to update the config
             AnomalyConfigJobService.scheduleConfigUpdate(context);
 
-            BatteryTipUtils.uploadAnomalyPendingIntent(context, statsManager);
+            try {
+                BatteryTipUtils.uploadAnomalyPendingIntent(context, statsManager);
+            } catch (StatsManager.StatsUnavailableException e) {
+                Log.w(TAG, "Failed to uploadAnomalyPendingIntent.", e);
+            }
 
             if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
                 AnomalyCleanupJobService.scheduleCleanUp(context);
