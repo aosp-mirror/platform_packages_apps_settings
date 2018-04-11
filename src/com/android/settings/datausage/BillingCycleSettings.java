@@ -29,7 +29,6 @@ import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.text.format.Formatter;
 import android.text.format.Time;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
@@ -52,11 +51,10 @@ public class BillingCycleSettings extends DataUsageBase implements
 
     private static final String TAG = "BillingCycleSettings";
     private static final boolean LOGD = false;
-    public static final long KB_IN_BYTES = 1000;
-    public static final long MB_IN_BYTES = KB_IN_BYTES * 1000;
-    public static final long GB_IN_BYTES = MB_IN_BYTES * 1000;
+    public static final long MIB_IN_BYTES = 1024 * 1024;
+    public static final long GIB_IN_BYTES = MIB_IN_BYTES * 1024;
 
-    private static final long MAX_DATA_LIMIT_BYTES = 50000 * GB_IN_BYTES;
+    private static final long MAX_DATA_LIMIT_BYTES = 50000 * GIB_IN_BYTES;
 
     private static final String TAG_CONFIRM_LIMIT = "confirmLimit";
     private static final String TAG_CYCLE_EDITOR = "cycleEditor";
@@ -130,7 +128,7 @@ public class BillingCycleSettings extends DataUsageBase implements
         }
         final long warningBytes = services.mPolicyEditor.getPolicyWarningBytes(mNetworkTemplate);
         if (warningBytes != WARNING_DISABLED) {
-            mDataWarning.setSummary(Formatter.formatFileSize(getContext(), warningBytes));
+            mDataWarning.setSummary(DataUsageUtils.formatDataUsage(getContext(), warningBytes));
             mDataWarning.setEnabled(true);
             mEnableDataWarning.setChecked(true);
         } else {
@@ -140,7 +138,7 @@ public class BillingCycleSettings extends DataUsageBase implements
         }
         final long limitBytes = services.mPolicyEditor.getPolicyLimitBytes(mNetworkTemplate);
         if (limitBytes != LIMIT_DISABLED) {
-            mDataLimit.setSummary(Formatter.formatFileSize(getContext(), limitBytes));
+            mDataLimit.setSummary(DataUsageUtils.formatDataUsage(getContext(), limitBytes));
             mDataLimit.setEnabled(true);
             mEnableDataLimit.setChecked(true);
         } else {
@@ -275,14 +273,14 @@ public class BillingCycleSettings extends DataUsageBase implements
                     : editor.getPolicyWarningBytes(template);
             final long limitDisabled = isLimit ? LIMIT_DISABLED : WARNING_DISABLED;
 
-            if (bytes > 1.5f * GB_IN_BYTES) {
-                final String bytesText = formatText(bytes / (float) GB_IN_BYTES);
+            if (bytes > 1.5f * GIB_IN_BYTES) {
+                final String bytesText = formatText(bytes / (float) GIB_IN_BYTES);
                 bytesPicker.setText(bytesText);
                 bytesPicker.setSelection(0, bytesText.length());
 
                 type.setSelection(1);
             } else {
-                final String bytesText = formatText(bytes / (float) MB_IN_BYTES);
+                final String bytesText = formatText(bytes / (float) MIB_IN_BYTES);
                 bytesPicker.setText(bytesText);
                 bytesPicker.setSelection(0, bytesText.length());
 
@@ -313,7 +311,7 @@ public class BillingCycleSettings extends DataUsageBase implements
                 bytesString = "0";
             }
             final long bytes = (long) (Float.valueOf(bytesString)
-                        * (spinner.getSelectedItemPosition() == 0 ? MB_IN_BYTES : GB_IN_BYTES));
+                    * (spinner.getSelectedItemPosition() == 0 ? MIB_IN_BYTES : GIB_IN_BYTES));
 
             // to fix the overflow problem
             final long correctedBytes = Math.min(MAX_DATA_LIMIT_BYTES, bytes);
@@ -422,7 +420,7 @@ public class BillingCycleSettings extends DataUsageBase implements
 
             // TODO: customize default limits based on network template
             message = res.getString(R.string.data_usage_limit_dialog_mobile);
-            limitBytes = Math.max(5 * GB_IN_BYTES, minLimitBytes);
+            limitBytes = Math.max(5 * GIB_IN_BYTES, minLimitBytes);
 
             final Bundle args = new Bundle();
             args.putCharSequence(EXTRA_MESSAGE, message);

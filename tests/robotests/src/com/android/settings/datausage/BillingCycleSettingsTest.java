@@ -110,6 +110,7 @@ public class BillingCycleSettingsTest {
     @Test
     public void testDataUsageSummary_shouldBeNullWithV2() {
         final BillingCycleSettings billingCycleSettings = spy(new BillingCycleSettings());
+        when(billingCycleSettings.getContext()).thenReturn(mContext);
         billingCycleSettings.setUpForTest(mNetworkPolicyEditor, mBillingCycle,
                 mDataLimit, mDataWarning, mEnableDataLimit, mEnableDataWarning);
 
