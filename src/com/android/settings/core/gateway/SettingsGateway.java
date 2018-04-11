@@ -78,6 +78,7 @@ import com.android.settings.gestures.AssistGestureSettings;
 import com.android.settings.gestures.DoubleTapPowerSettings;
 import com.android.settings.gestures.DoubleTapScreenSettings;
 import com.android.settings.gestures.DoubleTwistGestureSettings;
+import com.android.settings.gestures.SwipeUpGestureSettings;
 import com.android.settings.gestures.PickupGestureSettings;
 import com.android.settings.gestures.SwipeToNotificationSettings;
 import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
@@ -188,6 +189,7 @@ public class SettingsGateway {
             DoubleTapScreenSettings.class.getName(),
             PickupGestureSettings.class.getName(),
             DoubleTwistGestureSettings.class.getName(),
+            SwipeUpGestureSettings.class.getName(),
             CryptKeeperSettings.class.getName(),
             DataUsageSummary.class.getName(),
             DataUsageSummaryLegacy.class.getName(),
