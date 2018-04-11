@@ -18,19 +18,16 @@ package com.android.settings.enterprise;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.AppGlobals;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Process;
-import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
-import android.util.Log;
+import android.util.IconDrawableFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +37,7 @@ import android.widget.TextView;
 import com.android.settings.DeviceAdminAdd;
 import com.android.settings.R;
 import com.android.settings.Settings;
+import com.android.settings.Utils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
@@ -99,20 +97,12 @@ public class ActionDisabledByAdminDialogHelper {
                 || !RestrictedLockUtils.isCurrentUserOrProfile(mActivity, userId)) {
             admin = null;
         } else {
-            ActivityInfo ai = null;
-            try {
-                ai = AppGlobals.getPackageManager().getReceiverInfo(admin, 0 /* flags */,
-                        userId);
-            } catch (RemoteException e) {
-                Log.w(TAG, "Missing reciever info", e);
-            }
-            if (ai != null) {
-                final Drawable icon = ai.loadIcon(mActivity.getPackageManager());
-                final Drawable badgedIcon = mActivity.getPackageManager().getUserBadgedIcon(
-                        icon, new UserHandle(userId));
-                ((ImageView) root.findViewById(R.id.admin_support_icon)).setImageDrawable(
-                        badgedIcon);
-            }
+            final Drawable badgedIcon = Utils.getBadgedIcon(
+                    IconDrawableFactory.newInstance(mActivity),
+                    mActivity.getPackageManager(),
+                    admin.getPackageName(),
+                    userId);
+            ((ImageView) root.findViewById(R.id.admin_support_icon)).setImageDrawable(badgedIcon);
         }
 
         setAdminSupportTitle(root, restriction);
