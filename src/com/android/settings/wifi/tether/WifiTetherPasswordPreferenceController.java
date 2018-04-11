@@ -21,7 +21,6 @@ import android.net.wifi.WifiConfiguration;
 import android.support.v7.preference.EditTextPreference;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.widget.ValidatedEditTextPreference;
@@ -52,7 +51,6 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
         final WifiConfiguration config = mWifiManager.getWifiApConfiguration();
         if (config != null) {
             mPassword = config.preSharedKey;
-            Log.d(TAG, "Updating password in Preference, " + mPassword);
         } else {
             mPassword = generateRandomPassword();
         }
