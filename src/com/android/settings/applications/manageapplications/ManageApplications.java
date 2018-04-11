@@ -176,7 +176,8 @@ public class ManageApplications extends InstrumentedFragment
     private static final int NO_USER_SPECIFIED = -1;
 
     // sort order
-    private int mSortOrder = R.id.sort_order_alpha;
+    @VisibleForTesting
+    int mSortOrder = R.id.sort_order_alpha;
 
     // whether showing system apps.
     private boolean mShowSystem;
@@ -649,9 +650,8 @@ public class ManageApplications extends InstrumentedFragment
         switch (item.getItemId()) {
             case R.id.sort_order_alpha:
             case R.id.sort_order_size:
-                mSortOrder = menuId;
                 if (mApplications != null) {
-                    mApplications.rebuild(mSortOrder);
+                    mApplications.rebuild(menuId);
                 }
                 break;
             case R.id.show_system:
@@ -712,6 +712,7 @@ public class ManageApplications extends InstrumentedFragment
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         mFilter = mFilterAdapter.getFilter(position);
         mApplications.setFilter(mFilter);
+
         if (DEBUG) Log.d(TAG, "Selecting filter " + mFilter);
     }
 
@@ -986,6 +987,7 @@ public class ManageApplications extends InstrumentedFragment
             if (sort == mLastSortMode) {
                 return;
             }
+            mManageApplications.mSortOrder = sort;
             mLastSortMode = sort;
             rebuild();
         }
