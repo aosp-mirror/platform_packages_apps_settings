@@ -167,7 +167,7 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback {
     }
 
     @Override
-    public void onProfileAudioStateChanged(int bluetoothProfile, int state) {
+    public void onAudioModeChanged() {
     }
 
     /**
