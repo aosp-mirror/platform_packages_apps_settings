@@ -33,6 +33,10 @@ public interface DeviceIndexFeatureProvider {
     // TODO: Remove this and index all action and intent slices through search index.
     String[] ACTIONS_TO_INDEX = new String[]{
             Settings.ACTION_WIFI_SETTINGS,
+            Settings.ACTION_BATTERY_SAVER_SETTINGS,
+            Settings.ACTION_BLUETOOTH_SETTINGS,
+            "android.intent.action.POWER_USAGE_SUMMARY",
+            Settings.ACTION_SOUND_SETTINGS,
     };
 
     String TAG = "DeviceIndex";
@@ -40,7 +44,7 @@ public interface DeviceIndexFeatureProvider {
     String INDEX_VERSION = "settings:index_version";
 
     // Increment when new items are added to ensure they get pushed to the device index.
-    int VERSION = 1;
+    int VERSION = 2;
 
     boolean isIndexingEnabled();
 
