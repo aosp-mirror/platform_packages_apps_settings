@@ -23,10 +23,9 @@
     settings:keywords="@string/keywords_zen_mode_settings">
 
     <!-- sound vibration -->
-    <CheckBoxPreference
+    <com.android.settings.widget.DisabledCheckBoxPreference
         android:key="zen_effect_sound"
-        android:title="@string/zen_mode_block_effect_sound"
-        android:enabled="false" />
+        android:title="@string/zen_mode_block_effect_sound" />
 
     <!-- What to block (effects) -->
     <Preference
