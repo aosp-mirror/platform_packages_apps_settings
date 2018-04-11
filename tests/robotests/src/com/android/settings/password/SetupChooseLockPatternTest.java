@@ -101,9 +101,7 @@ public class SetupChooseLockPatternTest {
         ReflectionHelpers.callInstanceMethod(lockPatternView, "notifyPatternDetected");
     }
 
-    @Config(qualifiers = "sw400dp")
-    @Test
-    public void sw400dp_shouldShowScreenLockOptions() {
+    private void verifyScreenLockOptionsShown() {
         Button button = mActivity.findViewById(R.id.screen_lock_options);
         assertThat(button).isNotNull();
         assertThat(button.getVisibility()).isEqualTo(View.VISIBLE);
@@ -115,12 +113,34 @@ public class SetupChooseLockPatternTest {
         assertThat(count).named("List items shown").isEqualTo(3);
     }
 
-    @Config(qualifiers = "sw300dp")
+    @Config(qualifiers = "sw400dp")
     @Test
-    public void smallScreens_shouldHideScreenLockOptions() {
+    public void sw400dp_shouldShowScreenLockOptions() {
+        verifyScreenLockOptionsShown();
+    }
+
+    @Config(qualifiers = "sw400dp-land")
+    @Test
+    public void sw400dpLandscape_shouldShowScreenLockOptions() {
+        verifyScreenLockOptionsShown();
+    }
+
+    private void verifyScreenLockOptionsHidden() {
         Button button = mActivity.findViewById(R.id.screen_lock_options);
         assertThat(button).isNotNull();
         assertThat(button.getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Config(qualifiers = "sw300dp")
+    @Test
+    public void smallScreens_shouldHideScreenLockOptions() {
+        verifyScreenLockOptionsHidden();
+    }
+
+    @Config(qualifiers = "sw300dp-land")
+    @Test
+    public void smallScreensLandscape_shouldHideScreenLockOptions() {
+        verifyScreenLockOptionsHidden();
     }
 
     @Test
