@@ -1592,7 +1592,7 @@
     <!-- Bluetooth settings: The sub heading for devices which have already been paired with this device. [CHAR LIMIT=40] -->
     <string name="bluetooth_preference_paired_devices">Paired devices</string>
     <!-- Bluetooth settings: The sub heading for available devices during and after scanning. [CHAR LIMIT=40] -->
-    <string name="bluetooth_preference_found_media_devices">Available media devices</string>
+    <string name="bluetooth_preference_found_media_devices">Available devices</string>
     <!-- Bluetooth settings: The message displayed if no Bluetooth devices were found. [CHAR LIMIT=40] -->
     <string name="bluetooth_preference_no_found_devices">No devices available</string>
     <!-- Bluetooth settings.  Context menu item for a device.  Action will connect to all profiles on the device. -->
@@ -5924,10 +5924,6 @@
     <string name="really_remove_account_message" product="device">Removing this account will delete all of its messages, contacts, and other data from the device!</string>
     <!-- This is shown if the autheticator for a given account fails to remove it. [CHAR LIMIT=NONE] -->
     <string name="remove_account_failed">This change isn\'t allowed by your admin</string>
-    <!-- What to show in messaging that refers to this provider, e.g. AccountSyncSettings -->
-    <string name="provider_label">Push subscriptions</string>
-    <!-- Formatter in AccountSyncSettings for each application we wish to synchronize, e.g. "Sync Calendar" -->
-    <string name="sync_item_title"><xliff:g id="authority" example="Calendar">%s</xliff:g></string>
     <!-- Title of dialog shown when you can't manually sync an item because it's disabled -->
     <string name="cant_sync_dialog_title">Can\u2019t manually sync</string>
     <!-- Messaage shown in dialog when you can't manually sync -->
@@ -6668,6 +6664,8 @@
     <string name="help_url_font_size" translatable="false"></string>
     <!-- Help URL, Display size [DO NOT TRANSLATE] -->
     <string name="help_url_display_size" translatable="false"></string>
+    <!-- Help URL, Auto brightness [DO NOT TRANSLATE] -->
+    <string name="help_url_auto_brightness" translatable="false" />
 
     <string name="help_url_network_dashboard" translatable="false"></string>
     <string name="help_url_connected_devices" translatable="false"></string>
@@ -7325,6 +7323,16 @@
         <item quantity="other"><xliff:g id="on_count" example="3">%d</xliff:g> rules can turn on automatically</item>
     </plurals>
 
+    <string name="zen_onboarding_ok">Ok</string>
+    <string name="zen_onboarding_settings">Settings</string>
+    <string name="zen_onboarding_more_options">You can further customize this in Settings.</string>
+    <string name="zen_onboarding_screen_on_title">Block when the screen is on</string>
+    <string name="zen_onboarding_screen_off_title">Block when the screen is off</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description">Do Not Disturb can do more than block unwanted sounds - it can block visuals too. This may be helpful if you\'re trying to sleep, focus, or limit time spent on your phone.</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header">Block sounds and visuals</string>
+    <string name="zen_onboarding_screen_off_summary">Don\'t turn on the screen or show notifications in the ambient display</string>
+    <string name="zen_onboarding_screen_on_summary">Don\'t show notifications at all, except for basic phone activity and status</string>
+
     <!-- Work Sounds: Work sound settings section header.  [CHAR LIMIT=50] -->
     <string name="sound_work_settings">Work profile sounds</string>
 
@@ -7515,9 +7523,9 @@
     <string name="default_notification_assistant">Notification assistant</string>
 
     <!-- app summary of notification app list screen [CHAR LIMIT=100] -->
-    <string name="notifications_sent_daily">~<xliff:g id="number">%1$s</xliff:g> sent daily</string>
+    <string name="notifications_sent_daily">~<xliff:g id="number">%1$s</xliff:g> per day</string>
     <!-- app summary of notification app list screen [CHAR LIMIT=100] -->
-    <string name="notifications_sent_weekly">~<xliff:g id="number">%1$s</xliff:g> sent weekly</string>
+    <string name="notifications_sent_weekly">~<xliff:g id="number">%1$s</xliff:g> per week</string>
     <!-- app summary of notification app list screen [CHAR LIMIT=100] -->
     <string name="notifications_sent_never">Never</string>
 
@@ -9835,6 +9843,9 @@
     <!-- Title for media output settings -->
     <string name="media_output_title">Play media to</string>
 
+    <!-- Summary for media output default settings. (this device) [CHAR LIMIT=30] -->
+    <string name="media_output_default_summary">This device</string>
+
     <!-- Summary for media output settings. (phone) -->
     <string name="media_output_summary" product="default">Phone</string>
 
@@ -9866,6 +9877,8 @@
     <string name="gesture_prevent_ringing_screen_title">Prevent ringing</string>
     <!-- Title for prevent ringing setting -->
     <string name="gesture_prevent_ringing_title">Press Power &amp; Volume Up together</string>
+    <!-- Title for prevent ringing setting -->
+    <string name="gesture_prevent_ringing_sound_title">Shortcut to prevent ringing</string>
     <!-- Option for prevent ringing setting -->
     <string name="prevent_ringing_option_vibrate">Vibrate</string>
     <!-- Option for prevent ringing setting -->
@@ -9873,11 +9886,11 @@
     <!-- Option for prevent ringing setting -->
     <string name="prevent_ringing_option_none">Do nothing</string>
     <!-- Summary for prevent ringing setting -->
-    <string name="prevent_ringing_option_vibrate_summary">Vibrate all calls and notifications</string>
+    <string name="prevent_ringing_option_vibrate_summary">On (vibrate)</string>
     <!-- Summary for prevent ringing setting -->
-    <string name="prevent_ringing_option_mute_summary">Mute all calls and notifications</string>
+    <string name="prevent_ringing_option_mute_summary">On (mute)</string>
     <!-- Summary for prevent ringing setting -->
-    <string name="prevent_ringing_option_none_summary">Do nothing</string>
+    <string name="prevent_ringing_option_none_summary">Off</string>
 
     <!-- Title for detail page of wifi network [CHAR LIMIT=30] -->
     <string name="pref_title_network_details">Network details</string>

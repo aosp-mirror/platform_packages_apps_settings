@@ -72,8 +72,8 @@ public class RestrictAppPreferenceController extends BasePreferenceController {
         mAppInfos = BatteryTipUtils.getRestrictedAppsList(mAppOpsManager, mUserManager);
 
         final int num = mAppInfos.size();
-        // Enable the preference if some apps already been restricted, otherwise disable it
-        preference.setEnabled(num > 0);
+        // Don't show it if no app been restricted
+        preference.setVisible(num > 0);
         preference.setSummary(
                 mContext.getResources().getQuantityString(R.plurals.restricted_app_summary, num,
                         num));

@@ -64,19 +64,6 @@ public class GestureSettings extends DashboardFragment {
     }
 
     @Override
-    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle());
-    }
-
-    static List<AbstractPreferenceController> buildPreferenceControllers(
-            @NonNull Context context, @Nullable Lifecycle lifecycle) {
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new PreventRingingPreferenceController(
-                context, lifecycle, UserHandle.myUserId(), KEY_PREVENT_RINGING));
-        return controllers;
-    }
-
-    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         use(AssistGestureSettingsPreferenceController.class).setAssistOnly(false);
@@ -102,12 +89,6 @@ public class GestureSettings extends DashboardFragment {
                 }
 
                 @Override
-                public List<AbstractPreferenceController> createPreferenceControllers(
-                        Context context) {
-                    return buildPreferenceControllers(context, null);
-                }
-
-                @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
                     // Duplicates in summary and details pages.
@@ -117,6 +98,7 @@ public class GestureSettings extends DashboardFragment {
                     keys.add(KEY_DOUBLE_TWIST);
                     keys.add(KEY_DOUBLE_TAP_SCREEN);
                     keys.add(KEY_PICK_UP);
+                    keys.add(KEY_PREVENT_RINGING);
 
                     return keys;
                 }

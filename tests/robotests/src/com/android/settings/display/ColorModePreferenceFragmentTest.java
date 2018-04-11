@@ -16,7 +16,6 @@
 package com.android.settings.display;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Answers.RETURNS_DEEP_STUBS;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
@@ -25,6 +24,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
@@ -34,7 +34,6 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.widget.RadioButtonPreference;
 import com.android.settingslib.widget.CandidateInfo;
 
 import org.junit.Before;
@@ -46,7 +45,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -58,13 +56,13 @@ public class ColorModePreferenceFragmentTest {
     private ColorDisplayController mController;
 
     @Mock
-    private PreferenceScreen mScreen;
+    private Activity mActivity;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
 
-        mFragment = spy(new ColorModePreferenceFragmentTestable(mScreen));
+        mFragment = spy(new ColorModePreferenceFragment());
         ReflectionHelpers.setField(mFragment, "mController", mController);
     }
 
@@ -159,50 +157,8 @@ public class ColorModePreferenceFragmentTest {
 
     @Test
     public void onAccessibilityTransformChanged_toggles() {
-        final int radioPrefsCount = 3;
-        List<RadioButtonPreference> radioPrefs = new ArrayList<>();
-        for (int i = 0; i < radioPrefsCount; i++) {
-            radioPrefs.add(mock(RadioButtonPreference.class));
-        }
-
-        when(mScreen.getPreferenceCount()).thenReturn(radioPrefs.size());
-        when(mScreen.getPreference(anyInt())).thenAnswer(invocation -> {
-            final Object[] args = invocation.getArguments();
-            return radioPrefs.get((int) args[0]);
-        });
-
+        when(mFragment.getActivity()).thenReturn(mActivity);
         mFragment.onAccessibilityTransformChanged(true /* state */);
-        for (int i = 0; i < radioPrefsCount; i++) {
-            verify(radioPrefs.get(i)).setEnabled(false);
-        }
-
-        mFragment.onAccessibilityTransformChanged(false /* state */);
-        for (int i = 0; i < radioPrefsCount; i++) {
-            verify(radioPrefs.get(i)).setEnabled(true);
-        }
-    }
-
-    private static class ColorModePreferenceFragmentTestable
-            extends ColorModePreferenceFragment {
-
-        private final PreferenceScreen mPreferenceScreen;
-
-        private ColorModePreferenceFragmentTestable(PreferenceScreen screen) {
-            mPreferenceScreen = screen;
-        }
-
-        /**
-         * A method to return a mock PreferenceScreen.
-         * A real ColorModePreferenceFragment calls super.getPreferenceScreen() to get its
-         * PreferenceScreen handle, which internally dereferenced a PreferenceManager. But in this
-         * test scenario, the PreferenceManager object is uninitialized, so we need to supply the
-         * PreferenceScreen directly.
-         *
-         * @return a mock PreferenceScreen
-         */
-        @Override
-        public PreferenceScreen getPreferenceScreen() {
-            return mPreferenceScreen;
-        }
+        verify(mActivity).onBackPressed();
     }
 }

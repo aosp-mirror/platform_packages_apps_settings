@@ -14,36 +14,34 @@
  * limitations under the License.
  */
 
-package com.android.settings.gestures;
+package com.android.settings.display;
 
 import android.content.Context;
-import android.os.UserHandle;
+import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class PreventRingingGestureSettings extends DashboardFragment {
+public class AutoBrightnessSettings extends DashboardFragment {
 
-    private static final String TAG = "RingingGestureSettings";
-    private static final String KEY_PREVENT_RINGING = "gesture_prevent_ringing";
+    private static final String TAG = "AutoBrightnessSettings";
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        mFooterPreferenceMixin.createFooterPreference()
+                .setTitle(R.string.auto_brightness_description);
     }
 
     @Override
-    public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_PREVENT_RINGING;
+    protected int getPreferenceScreenResId() {
+        return R.xml.auto_brightness_detail;
     }
 
     @Override
@@ -52,13 +50,13 @@ public class PreventRingingGestureSettings extends DashboardFragment {
     }
 
     @Override
-    protected int getPreferenceScreenResId() {
-        return R.xml.prevent_ringing_gesture_settings;
+    public int getMetricsCategory() {
+        return MetricsProto.MetricsEvent.SETTINGS_AUTO_BRIGHTNESS;
     }
 
     @Override
     public int getHelpResource() {
-        return 0;
+        return R.string.help_url_auto_brightness;
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
@@ -67,9 +65,8 @@ public class PreventRingingGestureSettings extends DashboardFragment {
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.prevent_ringing_gesture_settings;
+                    sir.xmlResId = R.xml.auto_brightness_detail;
                     return Arrays.asList(sir);
                 }
             };
-
 }
