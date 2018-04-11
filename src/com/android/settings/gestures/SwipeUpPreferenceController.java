@@ -33,8 +33,7 @@ public class SwipeUpPreferenceController extends GesturePreferenceController {
     private final int ON = 1;
     private final int OFF = 0;
 
-    // TODO(77474484): Update when swipe up illustration video is ready
-    private static final String PREF_KEY_VIDEO = "";
+    private static final String PREF_KEY_VIDEO = "gesture_swipe_up_video";
     private final UserManager mUserManager;
 
     public SwipeUpPreferenceController(Context context, String key) {
