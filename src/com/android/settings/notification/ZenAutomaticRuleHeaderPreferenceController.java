@@ -75,7 +75,7 @@ public class ZenAutomaticRuleHeaderPreferenceController extends AbstractZenModeP
                         .newInstance(mFragment.getActivity(), mFragment,
                                 pref.findViewById(R.id.entity_header));
 
-                mController.setEditZenRuleNameListener(new View.OnClickListener() {
+                mController.setEditListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         ZenRuleNameDialog.show(mFragment, mRule.getName(), null,
@@ -89,7 +89,7 @@ public class ZenAutomaticRuleHeaderPreferenceController extends AbstractZenModeP
                     .setPackageName(mRule.getOwner().getPackageName())
                     .setUid(mContext.getUserId())
                     .setHasAppInfoLink(false)
-                    .setButtonActions(EntityHeaderController.ActionType.ACTION_DND_RULE_PREFERENCE,
+                    .setButtonActions(EntityHeaderController.ActionType.ACTION_EDIT_PREFERENCE,
                             EntityHeaderController.ActionType.ACTION_NONE)
                     .done(mFragment.getActivity(), mContext);
 
