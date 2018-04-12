@@ -22,13 +22,18 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.arch.lifecycle.LifecycleOwner;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.provider.Settings;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -41,13 +46,17 @@ import org.robolectric.annotation.Config;
 @RunWith(SettingsRobolectricTestRunner.class)
 public class AirplaneModePreferenceControllerTest {
 
-    @Mock
-    private PreferenceScreen mScreen;
+    private static final int ON = 1;
+    private static final int OFF = 0;
 
     @Mock
     private PackageManager mPackageManager;
 
     private Context mContext;
+    private ContentResolver mResolver;
+    private PreferenceManager mPreferenceManager;
+    private PreferenceScreen mScreen;
+    private RestrictedSwitchPreference mPreference;
     private AirplaneModePreferenceController mController;
     private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
@@ -57,8 +66,17 @@ public class AirplaneModePreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest();
         mContext = spy(RuntimeEnvironment.application);
+        mResolver = RuntimeEnvironment.application.getContentResolver();
         doReturn(mPackageManager).when(mContext).getPackageManager();
-        mController = spy(new AirplaneModePreferenceController(mContext, null));
+        mController = new AirplaneModePreferenceController(mContext,
+                AirplaneModePreferenceController.KEY_TOGGLE_AIRPLANE);
+
+        mPreferenceManager = new PreferenceManager(mContext);
+        mScreen = mPreferenceManager.createPreferenceScreen(mContext);
+        mPreference = new RestrictedSwitchPreference(mContext);
+        mPreference.setKey("toggle_airplane");
+        mScreen.addPreference(mPreference);
+        mController.setFragment(null);
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         mLifecycle.addObserver(mController);
@@ -67,7 +85,8 @@ public class AirplaneModePreferenceControllerTest {
     @Test
     @Config(qualifiers = "mcc999")
     public void airplaneModePreference_shouldNotBeAvailable_ifSetToNotVisible() {
-        assertThat(mController.isAvailable()).isFalse();
+        assertThat(mController.getAvailabilityStatus())
+                .isNotEqualTo(BasePreferenceController.AVAILABLE);
 
         mController.displayPreference(mScreen);
 
@@ -79,7 +98,8 @@ public class AirplaneModePreferenceControllerTest {
     @Test
     public void airplaneModePreference_shouldNotBeAvailable_ifHasLeanbackFeature() {
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_LEANBACK)).thenReturn(true);
-        assertThat(mController.isAvailable()).isFalse();
+        assertThat(mController.getAvailabilityStatus())
+                .isNotEqualTo(BasePreferenceController.AVAILABLE);
 
         mController.displayPreference(mScreen);
 
@@ -91,6 +111,70 @@ public class AirplaneModePreferenceControllerTest {
     @Test
     public void airplaneModePreference_shouldBeAvailable_ifNoLeanbackFeature() {
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_LEANBACK)).thenReturn(false);
-        assertThat(mController.isAvailable()).isTrue();
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.AVAILABLE);
+    }
+
+    @Test
+    public void airplaneModePreference_testSetValue_updatesCorrectly() {
+        // Airplane mode default off
+        Settings.Global.putInt(mResolver, Settings.Global.AIRPLANE_MODE_ON, OFF);
+
+        mController.displayPreference(mScreen);
+        mController.onResume();
+
+        assertThat(mPreference.isChecked()).isFalse();
+
+        assertThat(mController.isChecked()).isFalse();
+
+        // Set airplane mode ON by setChecked
+        boolean updated = mController.setChecked(true);
+        assertThat(updated).isTrue();
+
+        // Check return value if set same status.
+        updated = mController.setChecked(true);
+        assertThat(updated).isFalse();
+
+        // UI is updated
+        assertThat(mPreference.isChecked()).isTrue();
+
+        // Settings status changed.
+        int updatedValue = Settings.Global.getInt(mResolver, Settings.Global.AIRPLANE_MODE_ON, OFF);
+        assertThat(updatedValue).isEqualTo(ON);
+
+        // Set to OFF
+        assertThat(mController.setChecked(false)).isTrue();
+        assertThat(mPreference.isChecked()).isFalse();
+        updatedValue = Settings.Global.getInt(mResolver, Settings.Global.AIRPLANE_MODE_ON, OFF);
+        assertThat(updatedValue).isEqualTo(OFF);
+    }
+
+    @Test
+    public void airplaneModePreference_testGetValue_correctValueReturned() {
+        // Set airplane mode ON
+        Settings.Global.putInt(mResolver, Settings.Global.AIRPLANE_MODE_ON, ON);
+
+        mController.displayPreference(mScreen);
+        mController.onResume();
+
+        assertThat(mController.isChecked()).isTrue();
+
+        Settings.Global.putInt(mResolver, Settings.Global.AIRPLANE_MODE_ON, OFF);
+        assertThat(mController.isChecked()).isFalse();
+    }
+
+    @Test
+    public void airplaneModePreference_testPreferenceUI_updatesCorrectly() {
+        // Airplane mode default off
+        Settings.Global.putInt(mResolver, Settings.Global.AIRPLANE_MODE_ON, OFF);
+
+        mController.displayPreference(mScreen);
+        mController.onResume();
+
+        assertThat(mPreference.isChecked()).isFalse();
+
+        mController.onAirplaneModeChanged(true);
+
+        assertThat(mPreference.isChecked()).isTrue();
     }
 }
