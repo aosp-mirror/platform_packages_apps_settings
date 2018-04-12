@@ -26,7 +26,7 @@ import com.android.settings.R;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.utils.StringUtil;
+
 import java.util.List;
 
 /**
@@ -34,28 +34,28 @@ import java.util.List;
  */
 public class HighUsageTip extends BatteryTip {
 
-    private final long mScreenTimeMs;
+    private final long mLastFullChargeTimeMs;
     @VisibleForTesting
     final List<AppInfo> mHighUsageAppList;
 
-    public HighUsageTip(long screenTimeMs, List<AppInfo> appList) {
+    public HighUsageTip(long lastFullChargeTimeMs, List<AppInfo> appList) {
         super(TipType.HIGH_DEVICE_USAGE, appList.isEmpty() ? StateType.INVISIBLE : StateType.NEW,
                 true /* showDialog */);
-        mScreenTimeMs = screenTimeMs;
+        mLastFullChargeTimeMs = lastFullChargeTimeMs;
         mHighUsageAppList = appList;
     }
 
     @VisibleForTesting
     HighUsageTip(Parcel in) {
         super(in);
-        mScreenTimeMs = in.readLong();
+        mLastFullChargeTimeMs = in.readLong();
         mHighUsageAppList = in.createTypedArrayList(AppInfo.CREATOR);
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeLong(mScreenTimeMs);
+        dest.writeLong(mLastFullChargeTimeMs);
         dest.writeTypedList(mHighUsageAppList);
     }
 
@@ -91,8 +91,8 @@ public class HighUsageTip extends BatteryTip {
         }
     }
 
-    public long getScreenTimeMs() {
-        return mScreenTimeMs;
+    public long getLastFullChargeTimeMs() {
+        return mLastFullChargeTimeMs;
     }
 
     public List<AppInfo> getHighUsageAppList() {

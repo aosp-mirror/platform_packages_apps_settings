@@ -63,7 +63,8 @@ public class HighUsageDetector implements BatteryTipDetector {
 
     @Override
     public BatteryTip detect() {
-        final long screenUsageTimeMs = mBatteryUtils.calculateScreenUsageTime(mBatteryStatsHelper);
+        final long lastFullChargeTimeMs = mBatteryUtils.calculateLastFullChargeTime(
+                mBatteryStatsHelper, System.currentTimeMillis());
         if (mPolicy.highUsageEnabled) {
             parseBatteryData();
             if (mDataParser.isDeviceHeavilyUsed() || mPolicy.testHighUsageTip) {
@@ -99,7 +100,7 @@ public class HighUsageDetector implements BatteryTipDetector {
             }
         }
 
-        return new HighUsageTip(screenUsageTimeMs, mHighUsageAppList);
+        return new HighUsageTip(lastFullChargeTimeMs, mHighUsageAppList);
     }
 
     @VisibleForTesting
