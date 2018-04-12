@@ -19,11 +19,8 @@ import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.nfc.NfcAdapter;
-import android.nfc.NfcManager;
 import android.os.Handler;
 import android.provider.Settings;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -31,7 +28,8 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
-import java.util.List;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 public abstract class BaseNfcPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause {
@@ -62,13 +60,6 @@ public abstract class BaseNfcPreferenceController extends AbstractPreferenceCont
         if (!isToggleableInAirplaneMode(mContext)) {
             mAirplaneModeObserver = new AirplaneModeObserver();
             updateNfcPreference();
-        }
-    }
-
-    @Override
-    public void updateNonIndexableKeys(List<String> keys) {
-        if (!isAvailable()) {
-            keys.add(getPreferenceKey());
         }
     }
 
