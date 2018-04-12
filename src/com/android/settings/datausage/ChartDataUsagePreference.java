@@ -50,8 +50,8 @@ public class ChartDataUsagePreference extends Preference {
     public ChartDataUsagePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         setSelectable(false);
-        mLimitColor = Utils.getColorAttr(context, android.R.attr.colorError);
-        mWarningColor = Utils.getColorAttr(context, android.R.attr.textColorSecondary);
+        mLimitColor = Utils.getColorAttrDefaultColor(context, android.R.attr.colorError);
+        mWarningColor = Utils.getColorAttrDefaultColor(context, android.R.attr.textColorSecondary);
         setLayoutResource(R.layout.data_usage_graph);
     }
 
