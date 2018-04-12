@@ -91,6 +91,7 @@ import com.android.settings.inputmethod.UserDictionarySettings;
 import com.android.settings.language.LanguageAndInputSettings;
 import com.android.settings.localepicker.LocaleListEditor;
 import com.android.settings.location.LocationSettings;
+import com.android.settings.location.ScanningSettings;
 import com.android.settings.network.ApnEditor;
 import com.android.settings.network.ApnSettings;
 import com.android.settings.network.NetworkDashboardFragment;
@@ -166,6 +167,7 @@ public class SettingsGateway {
             ProcessStatsUi.class.getName(),
             NotificationStation.class.getName(),
             LocationSettings.class.getName(),
+            ScanningSettings.class.getName(),
             SecuritySettings.class.getName(),
             UsageAccessDetails.class.getName(),
             PrivacySettings.class.getName(),
