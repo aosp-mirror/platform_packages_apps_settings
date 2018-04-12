@@ -23,6 +23,8 @@ import static com.android.settings.applications.manageapplications.ManageApplica
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_NOTIFICATION;
 import static com.google.common.truth.Truth.assertThat;
 
+import static junit.framework.Assert.assertEquals;
+
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
@@ -301,6 +303,23 @@ public class ManageApplicationsTest {
 
         adapter.onBindViewHolder(holder, 0);
         verify(holder, never()).updateSwitch(any(), anyBoolean(), anyBoolean());
+    }
+
+    @Test
+    public void sortOrderSavedOnRebuild() {
+        ManageApplications manageApplications = mock(ManageApplications.class);
+        manageApplications.mListType = LIST_TYPE_NOTIFICATION;
+        manageApplications.mSortOrder = -1;
+        ManageApplications.ApplicationsAdapter adapter =
+                new ManageApplications.ApplicationsAdapter(mState,
+                        manageApplications, mock(AppFilterItem.class),
+                        mock(Bundle.class));
+
+        adapter.rebuild(mSortRecent.getItemId());
+        assertThat(manageApplications.mSortOrder).isEqualTo(mSortRecent.getItemId());
+
+        adapter.rebuild(mSortFrequent.getItemId());
+        assertThat(manageApplications.mSortOrder).isEqualTo(mSortFrequent.getItemId());
     }
 
     private void setUpOptionMenus() {

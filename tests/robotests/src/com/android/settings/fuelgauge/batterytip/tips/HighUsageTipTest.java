@@ -43,6 +43,7 @@ public class HighUsageTipTest {
 
     private static final String PACKAGE_NAME = "com.android.app";
     private static final long SCREEN_TIME = 30 * DateUtils.MINUTE_IN_MILLIS;
+    private static final long LAST_FULL_CHARGE_TIME = 20 * DateUtils.MINUTE_IN_MILLIS;
 
     @Mock
     private MetricsFeatureProvider mMetricsFeatureProvider;
@@ -60,7 +61,7 @@ public class HighUsageTipTest {
                 .setPackageName(PACKAGE_NAME)
                 .setScreenOnTimeMs(SCREEN_TIME)
                 .build());
-        mBatteryTip = new HighUsageTip(SCREEN_TIME, mUsageAppList);
+        mBatteryTip = new HighUsageTip(LAST_FULL_CHARGE_TIME, mUsageAppList);
     }
 
     @Test
@@ -75,7 +76,7 @@ public class HighUsageTipTest {
         assertThat(parcelTip.getTitle(mContext)).isEqualTo("Phone used more than usual");
         assertThat(parcelTip.getType()).isEqualTo(BatteryTip.TipType.HIGH_DEVICE_USAGE);
         assertThat(parcelTip.getState()).isEqualTo(BatteryTip.StateType.NEW);
-        assertThat(parcelTip.getScreenTimeMs()).isEqualTo(SCREEN_TIME);
+        assertThat(parcelTip.getLastFullChargeTimeMs()).isEqualTo(LAST_FULL_CHARGE_TIME);
         assertThat(parcelTip.mHighUsageAppList).isNotNull();
         assertThat(parcelTip.mHighUsageAppList.size()).isEqualTo(1);
         final AppInfo app = parcelTip.mHighUsageAppList.get(0);

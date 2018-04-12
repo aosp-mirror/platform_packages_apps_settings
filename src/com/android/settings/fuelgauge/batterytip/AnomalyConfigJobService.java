@@ -71,7 +71,11 @@ public class AnomalyConfigJobService extends JobService {
         ThreadUtils.postOnBackgroundThread(() -> {
             final StatsManager statsManager = getSystemService(StatsManager.class);
             checkAnomalyConfig(statsManager);
-            BatteryTipUtils.uploadAnomalyPendingIntent(this, statsManager);
+            try {
+                BatteryTipUtils.uploadAnomalyPendingIntent(this, statsManager);
+            } catch (StatsManager.StatsUnavailableException e) {
+                Log.w(TAG, "Failed to uploadAnomalyPendingIntent.", e);
+            }
             jobFinished(params, false /* wantsReschedule */);
         });
 
@@ -96,23 +100,26 @@ public class AnomalyConfigJobService extends JobService {
         Log.i(TAG, "CurrentVersion: " + currentVersion + " new version: " + newVersion);
 
         if (newVersion > currentVersion) {
-            statsManager.removeConfiguration(StatsManagerConfig.ANOMALY_CONFIG_KEY);
+            try {
+                statsManager.removeConfig(StatsManagerConfig.ANOMALY_CONFIG_KEY);
+            } catch (StatsManager.StatsUnavailableException e) {
+                Log.i(TAG, "When updating anomaly config, failed to first remove the old config "
+                        + StatsManagerConfig.ANOMALY_CONFIG_KEY, e);
+            }
             if (!TextUtils.isEmpty(rawConfig)) {
                 try {
                     final byte[] config = Base64.decode(rawConfig, Base64.DEFAULT);
-                    if (statsManager.addConfiguration(StatsManagerConfig.ANOMALY_CONFIG_KEY,
-                            config)) {
-                        Log.i(TAG, "Upload the anomaly config. configKey: "
-                                + StatsManagerConfig.ANOMALY_CONFIG_KEY);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putInt(KEY_ANOMALY_CONFIG_VERSION, newVersion);
-                        editor.commit();
-                    } else {
-                        Log.i(TAG, "Upload the anomaly config failed. configKey: "
-                                + StatsManagerConfig.ANOMALY_CONFIG_KEY);
-                    }
+                    statsManager.addConfig(StatsManagerConfig.ANOMALY_CONFIG_KEY, config);
+                    Log.i(TAG, "Upload the anomaly config. configKey: "
+                            + StatsManagerConfig.ANOMALY_CONFIG_KEY);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putInt(KEY_ANOMALY_CONFIG_VERSION, newVersion);
+                    editor.commit();
                 } catch (IllegalArgumentException e) {
                     Log.e(TAG, "Anomaly raw config is in wrong format", e);
+                } catch (StatsManager.StatsUnavailableException e) {
+                    Log.i(TAG, "Upload of anomaly config failed for configKey "
+                            + StatsManagerConfig.ANOMALY_CONFIG_KEY, e);
                 }
             }
         }
