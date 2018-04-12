@@ -120,6 +120,14 @@
                     android:clipToPadding="false"
                     android:orientation="horizontal">
 
+                    <!-- left : skip -->
+                    <Button android:id="@+id/skip_button"
+                        style="@style/SuwGlifButton.Secondary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/skip_label"
+                        android:visibility="gone" />
+
                     <!-- left / top button: skip, or re-try -->
                     <Button android:id="@+id/footerLeftButton"
                         style="@style/SetupWizardButton.Negative"
