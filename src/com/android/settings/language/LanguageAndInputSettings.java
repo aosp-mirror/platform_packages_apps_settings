@@ -35,7 +35,6 @@ import com.android.settings.R;
 import com.android.settings.applications.defaultapps.DefaultAutofillPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
-import com.android.settings.inputmethod.GameControllerPreferenceController;
 import com.android.settings.inputmethod.PhysicalKeyboardPreferenceController;
 import com.android.settings.inputmethod.SpellCheckerPreferenceController;
 import com.android.settings.inputmethod.VirtualKeyboardPreferenceController;
@@ -125,17 +124,6 @@ public class LanguageAndInputSettings extends DashboardFragment {
         controllers.add(new SpellCheckerPreferenceController(context));
         controllers.add(new DefaultAutofillPreferenceController(context));
         controllers.add(new UserDictionaryPreferenceController(context));
-
-        // Game Controller
-        final GameControllerPreferenceController gameControllerPreferenceController
-                = new GameControllerPreferenceController(context);
-        if (lifecycle != null) {
-            lifecycle.addObserver(gameControllerPreferenceController);
-        }
-        controllers.add(gameControllerPreferenceController);
-        controllers.add(new PreferenceCategoryController(context,
-                KEY_GAME_CONTROLLER_CATEGORY).setChildren(
-                Arrays.asList(gameControllerPreferenceController)));
 
         return controllers;
     }
