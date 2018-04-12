@@ -26,6 +26,8 @@ public class FakeToggleController extends TogglePreferenceController {
 
     private String settingKey = "toggle_key";
 
+    public static final String AVAILABILITY_KEY = "fake_toggle_availability_key";
+
     private final int ON = 1;
     private final int OFF = 0;
 
@@ -47,6 +49,7 @@ public class FakeToggleController extends TogglePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return Settings.Global.getInt(mContext.getContentResolver(),
+                AVAILABILITY_KEY, AVAILABLE);
     }
 }
