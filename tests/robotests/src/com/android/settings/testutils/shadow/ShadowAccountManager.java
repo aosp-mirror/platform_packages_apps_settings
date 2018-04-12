@@ -22,10 +22,24 @@ import android.accounts.AuthenticatorDescription;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Implements(AccountManager.class)
-public class ShadowAccountManager {
+public class ShadowAccountManager{
+
+    private static final Map<String, AuthenticatorDescription> sAuthenticators = new HashMap<>();
+
     @Implementation
     public AuthenticatorDescription[] getAuthenticatorTypesAsUser(int userId) {
-        return null;
+        return sAuthenticators.values().toArray(new AuthenticatorDescription[sAuthenticators.size()]);
+    }
+
+    public static void addAuthenticator(AuthenticatorDescription authenticator) {
+        sAuthenticators.put(authenticator.type, authenticator);
+    }
+
+    public static void resetAuthenticator() {
+        sAuthenticators.clear();
     }
 }

@@ -16,6 +16,7 @@
 package com.android.settings.testutils.shadow;
 
 import android.annotation.UserIdInt;
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 
 import com.android.internal.util.ArrayUtils;
@@ -28,26 +29,31 @@ import org.robolectric.annotation.Resetter;
 
 @Implements(RestrictedLockUtils.class)
 public class ShadowRestrictedLockUtils {
-    private static boolean isRestricted;
-    private static String[] restrictedPkgs;
-    private static boolean adminSupportDetailsIntentLaunched;
-    private static int keyguardDisabledFeatures;
+
+    private static boolean sIsRestricted;
+    private static boolean sAdminSupportDetailsIntentLaunched;
+    private static boolean sHasSystemFeature;
+    private static String[] sRestrictedPkgs;
+    private static DevicePolicyManager sDevicePolicyManager;
+    private static String[] sDisabledTypes;
+    private static int sKeyguardDisabledFeatures;
 
     @Resetter
     public static void reset() {
-        isRestricted = false;
-        restrictedPkgs = null;
-        adminSupportDetailsIntentLaunched = false;
-        keyguardDisabledFeatures = 0;
+        sIsRestricted = false;
+        sRestrictedPkgs = null;
+        sAdminSupportDetailsIntentLaunched = false;
+        sKeyguardDisabledFeatures = 0;
+        sDisabledTypes = new String[0];
     }
 
     @Implementation
     public static EnforcedAdmin checkIfMeteredDataRestricted(Context context,
             String packageName, int userId) {
-        if (isRestricted) {
+        if (sIsRestricted) {
             return new EnforcedAdmin();
         }
-        if (ArrayUtils.contains(restrictedPkgs, packageName)) {
+        if (ArrayUtils.contains(sRestrictedPkgs, packageName)) {
             return new EnforcedAdmin();
         }
         return null;
@@ -55,32 +61,67 @@ public class ShadowRestrictedLockUtils {
 
     @Implementation
     public static void sendShowAdminSupportDetailsIntent(Context context, EnforcedAdmin admin) {
-        adminSupportDetailsIntentLaunched = true;
+        sAdminSupportDetailsIntentLaunched = true;
+    }
+
+    @Implementation
+    public static EnforcedAdmin checkIfAccountManagementDisabled(Context context,
+            String accountType, int userId) {
+        if (accountType == null) {
+            return null;
+        }
+        if (!sHasSystemFeature || sDevicePolicyManager == null) {
+            return null;
+        }
+        boolean isAccountTypeDisabled = false;
+        if (ArrayUtils.contains(sDisabledTypes, accountType)) {
+            isAccountTypeDisabled = true;
+        }
+        if (!isAccountTypeDisabled) {
+            return null;
+        }
+        return new EnforcedAdmin();
     }
 
     @Implementation
     public static EnforcedAdmin checkIfKeyguardFeaturesDisabled(Context context,
             int features, final @UserIdInt int userId) {
-        return (keyguardDisabledFeatures & features) == 0 ? null : new EnforcedAdmin();
+        return (sKeyguardDisabledFeatures & features) == 0 ? null : new EnforcedAdmin();
     }
 
     public static boolean hasAdminSupportDetailsIntentLaunched() {
-        return adminSupportDetailsIntentLaunched;
+        return sAdminSupportDetailsIntentLaunched;
     }
 
     public static void clearAdminSupportDetailsIntentLaunch() {
-        adminSupportDetailsIntentLaunched = false;
+        sAdminSupportDetailsIntentLaunched = false;
     }
 
     public static void setRestricted(boolean restricted) {
-        isRestricted = restricted;
+        sIsRestricted = restricted;
     }
 
     public static void setRestrictedPkgs(String... pkgs) {
-        restrictedPkgs = pkgs;
+        sRestrictedPkgs = pkgs;
+    }
+
+    public static void setHasSystemFeature(boolean hasSystemFeature) {
+        sHasSystemFeature = hasSystemFeature;
+    }
+
+    public static void setDevicePolicyManager(DevicePolicyManager dpm) {
+        sDevicePolicyManager = dpm;
+    }
+
+    public static void setDisabledTypes(String[] disabledTypes) {
+        sDisabledTypes = disabledTypes;
+    }
+
+    public static void clearDisabledTypes() {
+        sDisabledTypes = new String[0];
     }
 
     public static void setKeyguardDisabledFeatures(int features) {
-        keyguardDisabledFeatures = features;
+        sKeyguardDisabledFeatures = features;
     }
 }

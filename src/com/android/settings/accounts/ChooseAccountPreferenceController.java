@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,24 +30,11 @@ import android.content.SyncAdapterType;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.os.UserHandle;
-import android.os.UserManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
 import android.util.Log;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.internal.util.CharSequences;
-import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.Utils;
-import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
-import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.RestrictedLockUtils;
-import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
-import com.android.settingslib.widget.FooterPreference;
-import com.android.settingslib.widget.FooterPreferenceMixin;
 
 import com.google.android.collect.Maps;
 
@@ -55,81 +42,79 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 /**
- * Activity asking a user to select an account to be set up.
- *
  * An extra {@link UserHandle} can be specified in the intent as {@link EXTRA_USER}, if the user for
  * which the action needs to be performed is different to the one the Settings App will run in.
  */
-public class ChooseAccountActivity extends SettingsPreferenceFragment {
+public class ChooseAccountPreferenceController extends BasePreferenceController {
 
-    private static final String TAG = "ChooseAccountActivity";
+    private static final String TAG = "ChooseAccountPrefCtrler";
 
-    private EnterprisePrivacyFeatureProvider mFeatureProvider;
-    private FooterPreference mEnterpriseDisclosurePreference = null;
+    private final List<ProviderEntry> mProviderList;
+    private final Map<String, AuthenticatorDescription> mTypeToAuthDescription;
 
     private String[] mAuthorities;
-    private PreferenceGroup mAddAccountGroup;
-    private final ArrayList<ProviderEntry> mProviderList = new ArrayList<ProviderEntry>();
-    public HashSet<String> mAccountTypesFilter;
+    private Set<String> mAccountTypesFilter;
     private AuthenticatorDescription[] mAuthDescs;
-    private HashMap<String, ArrayList<String>> mAccountTypeToAuthorities = null;
-    private Map<String, AuthenticatorDescription> mTypeToAuthDescription
-            = new HashMap<String, AuthenticatorDescription>();
+    private Map<String, List<String>> mAccountTypeToAuthorities;
     // The UserHandle of the user we are choosing an account for
     private UserHandle mUserHandle;
-    private UserManager mUm;
+    private Activity mActivity;
+    private PreferenceScreen mScreen;
 
-    private static class ProviderEntry implements Comparable<ProviderEntry> {
-        private final CharSequence name;
-        private final String type;
-        ProviderEntry(CharSequence providerName, String accountType) {
-            name = providerName;
-            type = accountType;
-        }
+    public ChooseAccountPreferenceController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
 
-        public int compareTo(ProviderEntry another) {
-            if (name == null) {
-                return -1;
-            }
-            if (another.name == null) {
-                return +1;
-            }
-            return CharSequences.compareToIgnoreCase(name, another.name);
-        }
+        mProviderList = new ArrayList<>();
+        mTypeToAuthDescription = new HashMap<>();
     }
 
-    @Override
-    public int getMetricsCategory() {
-        return MetricsEvent.ACCOUNTS_CHOOSE_ACCOUNT_ACTIVITY;
-    }
+    public void initialize(String[] authorities, String[] accountTypesFilter, UserHandle userHandle,
+            Activity activity) {
+        mActivity = activity;
+        mAuthorities = authorities;
+        mUserHandle = userHandle;
 
-    @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-
-        final Activity activity = getActivity();
-        mFeatureProvider = FeatureFactory.getFactory(activity)
-                .getEnterprisePrivacyFeatureProvider(activity);
-
-        addPreferencesFromResource(R.xml.add_account_settings);
-        mAuthorities = getIntent().getStringArrayExtra(
-                AccountPreferenceBase.AUTHORITIES_FILTER_KEY);
-        String[] accountTypesFilter = getIntent().getStringArrayExtra(
-                AccountPreferenceBase.ACCOUNT_TYPES_FILTER_KEY);
         if (accountTypesFilter != null) {
-            mAccountTypesFilter = new HashSet<String>();
+            mAccountTypesFilter = new HashSet<>();
             for (String accountType : accountTypesFilter) {
                 mAccountTypesFilter.add(accountType);
             }
         }
-        mAddAccountGroup = getPreferenceScreen();
-        mUm = UserManager.get(getContext());
-        mUserHandle = Utils.getSecureTargetUser(getActivity().getActivityToken(), mUm,
-                null /* arguments */, getIntent().getExtras());
+    }
+
+    @Override
+    public int getAvailabilityStatus() {
+        return AVAILABLE;
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mScreen = screen;
         updateAuthDescriptions();
+    }
+
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        if (!(preference instanceof ProviderPreference)) {
+            return false;
+        }
+
+        ProviderPreference pref = (ProviderPreference) preference;
+        if (Log.isLoggable(TAG, Log.VERBOSE)) {
+            Log.v(TAG, "Attempting to add account of type " + pref.getAccountType());
+        }
+        finishWithAccountType(pref.getAccountType());
+        return true;
     }
 
     /**
@@ -137,7 +122,7 @@ public class ChooseAccountActivity extends SettingsPreferenceFragment {
      * and update any UI that depends on AuthenticatorDescriptions in onAuthDescriptionsUpdated().
      */
     private void updateAuthDescriptions() {
-        mAuthDescs = AccountManager.get(getContext()).getAuthenticatorTypesAsUser(
+        mAuthDescs = AccountManager.get(mContext).getAuthenticatorTypesAsUser(
                 mUserHandle.getIdentifier());
         for (int i = 0; i < mAuthDescs.length; i++) {
             mTypeToAuthDescription.put(mAuthDescs[i].type, mAuthDescs[i]);
@@ -148,12 +133,12 @@ public class ChooseAccountActivity extends SettingsPreferenceFragment {
     private void onAuthDescriptionsUpdated() {
         // Create list of providers to show on preference screen
         for (int i = 0; i < mAuthDescs.length; i++) {
-            String accountType = mAuthDescs[i].type;
-            CharSequence providerName = getLabelForType(accountType);
+            final String accountType = mAuthDescs[i].type;
+            final CharSequence providerName = getLabelForType(accountType);
 
             // Skip preferences for authorities not specified. If no authorities specified,
             // then include them all.
-            ArrayList<String> accountAuths = getAuthoritiesForAccountType(accountType);
+            final List<String> accountAuths = getAuthoritiesForAccountType(accountType);
             boolean addAccountPref = true;
             if (mAuthorities != null && mAuthorities.length > 0 && accountAuths != null) {
                 addAccountPref = false;
@@ -169,38 +154,39 @@ public class ChooseAccountActivity extends SettingsPreferenceFragment {
                 addAccountPref = false;
             }
             if (addAccountPref) {
-                mProviderList.add(new ProviderEntry(providerName, accountType));
+                mProviderList.add(
+                        new ProviderEntry(providerName, accountType));
             } else {
                 if (Log.isLoggable(TAG, Log.VERBOSE)) {
                     Log.v(TAG, "Skipped pref " + providerName + ": has no authority we need");
                 }
             }
         }
-
-        final Context context = getPreferenceScreen().getContext();
+        final Context context = mScreen.getContext();
         if (mProviderList.size() == 1) {
             // There's only one provider that matches. If it is disabled by admin show the
             // support dialog otherwise run it.
-            EnforcedAdmin admin = RestrictedLockUtils.checkIfAccountManagementDisabled(
-                    context, mProviderList.get(0).type, mUserHandle.getIdentifier());
+            final RestrictedLockUtils.EnforcedAdmin admin =
+                    RestrictedLockUtils.checkIfAccountManagementDisabled(
+                            context, mProviderList.get(0).getType(), mUserHandle.getIdentifier());
             if (admin != null) {
-                setResult(RESULT_CANCELED, RestrictedLockUtils.getShowAdminSupportDetailsIntent(
-                        context, admin));
-                finish();
+                mActivity.setResult(RESULT_CANCELED,
+                        RestrictedLockUtils.getShowAdminSupportDetailsIntent(
+                                context, admin));
+                mActivity.finish();
             } else {
-                finishWithAccountType(mProviderList.get(0).type);
+                finishWithAccountType(mProviderList.get(0).getType());
             }
         } else if (mProviderList.size() > 0) {
             Collections.sort(mProviderList);
-            mAddAccountGroup.removeAll();
             for (ProviderEntry pref : mProviderList) {
-                Drawable drawable = getDrawableForType(pref.type);
-                ProviderPreference p = new ProviderPreference(getPreferenceScreen().getContext(),
-                        pref.type, drawable, pref.name);
+                final Drawable drawable = getDrawableForType(pref.getType());
+                final ProviderPreference p = new ProviderPreference(context,
+                        pref.getType(), drawable, pref.getName());
+                p.setKey(pref.getType().toString());
                 p.checkAccountManagementAndSetDisabled(mUserHandle.getIdentifier());
-                mAddAccountGroup.addPreference(p);
+                mScreen.addPreference(p);
             }
-            addEnterpriseDisclosure();
         } else {
             if (Log.isLoggable(TAG, Log.VERBOSE)) {
                 final StringBuilder auths = new StringBuilder();
@@ -210,38 +196,25 @@ public class ChooseAccountActivity extends SettingsPreferenceFragment {
                 }
                 Log.v(TAG, "No providers found for authorities: " + auths);
             }
-            setResult(RESULT_CANCELED);
-            finish();
+            mActivity.setResult(RESULT_CANCELED);
+            mActivity.finish();
         }
     }
 
-    private void addEnterpriseDisclosure() {
-        final CharSequence disclosure = mFeatureProvider.getDeviceOwnerDisclosure();
-        if (disclosure == null) {
-            return;
-        }
-        if (mEnterpriseDisclosurePreference == null) {
-            mEnterpriseDisclosurePreference = mFooterPreferenceMixin.createFooterPreference();
-            mEnterpriseDisclosurePreference.setSelectable(false);
-        }
-        mEnterpriseDisclosurePreference.setTitle(disclosure);
-        mAddAccountGroup.addPreference(mEnterpriseDisclosurePreference);
-    }
-
-    public ArrayList<String> getAuthoritiesForAccountType(String type) {
+    private List<String> getAuthoritiesForAccountType(String type) {
         if (mAccountTypeToAuthorities == null) {
             mAccountTypeToAuthorities = Maps.newHashMap();
-            SyncAdapterType[] syncAdapters = ContentResolver.getSyncAdapterTypesAsUser(
+            final SyncAdapterType[] syncAdapters = ContentResolver.getSyncAdapterTypesAsUser(
                     mUserHandle.getIdentifier());
             for (int i = 0, n = syncAdapters.length; i < n; i++) {
                 final SyncAdapterType sa = syncAdapters[i];
-                ArrayList<String> authorities = mAccountTypeToAuthorities.get(sa.accountType);
+                List<String> authorities = mAccountTypeToAuthorities.get(sa.accountType);
                 if (authorities == null) {
-                    authorities = new ArrayList<String>();
+                    authorities = new ArrayList<>();
                     mAccountTypeToAuthorities.put(sa.accountType, authorities);
                 }
                 if (Log.isLoggable(TAG, Log.VERBOSE)) {
-                    Log.d(TAG, "added authority " + sa.authority + " to accountType "
+                    Log.v(TAG, "added authority " + sa.authority + " to accountType "
                             + sa.accountType);
                 }
                 authorities.add(sa.authority);
@@ -252,18 +225,20 @@ public class ChooseAccountActivity extends SettingsPreferenceFragment {
 
     /**
      * Gets an icon associated with a particular account type. If none found, return null.
+     *
      * @param accountType the type of account
      * @return a drawable for the icon or a default icon returned by
      * {@link PackageManager#getDefaultActivityIcon} if one cannot be found.
      */
-    protected Drawable getDrawableForType(final String accountType) {
+    @VisibleForTesting
+    Drawable getDrawableForType(final String accountType) {
         Drawable icon = null;
         if (mTypeToAuthDescription.containsKey(accountType)) {
             try {
-                AuthenticatorDescription desc = mTypeToAuthDescription.get(accountType);
-                Context authContext = getActivity()
+                final AuthenticatorDescription desc = mTypeToAuthDescription.get(accountType);
+                final Context authContext = mActivity
                         .createPackageContextAsUser(desc.packageName, 0, mUserHandle);
-                icon = getPackageManager().getUserBadgedIcon(
+                icon = mContext.getPackageManager().getUserBadgedIcon(
                         authContext.getDrawable(desc.iconId), mUserHandle);
             } catch (PackageManager.NameNotFoundException e) {
                 Log.w(TAG, "No icon name for account type " + accountType);
@@ -274,21 +249,23 @@ public class ChooseAccountActivity extends SettingsPreferenceFragment {
         if (icon != null) {
             return icon;
         } else {
-            return getPackageManager().getDefaultActivityIcon();
+            return mContext.getPackageManager().getDefaultActivityIcon();
         }
     }
 
     /**
      * Gets the label associated with a particular account type. If none found, return null.
+     *
      * @param accountType the type of account
      * @return a CharSequence for the label or null if one cannot be found.
      */
-    protected CharSequence getLabelForType(final String accountType) {
+    @VisibleForTesting
+    CharSequence getLabelForType(final String accountType) {
         CharSequence label = null;
         if (mTypeToAuthDescription.containsKey(accountType)) {
             try {
-                AuthenticatorDescription desc = mTypeToAuthDescription.get(accountType);
-                Context authContext = getActivity()
+                final AuthenticatorDescription desc = mTypeToAuthDescription.get(accountType);
+                final Context authContext = mActivity
                         .createPackageContextAsUser(desc.packageName, 0, mUserHandle);
                 label = authContext.getResources().getText(desc.labelId);
             } catch (PackageManager.NameNotFoundException e) {
@@ -300,23 +277,11 @@ public class ChooseAccountActivity extends SettingsPreferenceFragment {
         return label;
     }
 
-    @Override
-    public boolean onPreferenceTreeClick(Preference preference) {
-        if (preference instanceof ProviderPreference) {
-            ProviderPreference pref = (ProviderPreference) preference;
-            if (Log.isLoggable(TAG, Log.VERBOSE)) {
-                Log.v(TAG, "Attempting to add account of type " + pref.getAccountType());
-            }
-            finishWithAccountType(pref.getAccountType());
-        }
-        return true;
-    }
-
     private void finishWithAccountType(String accountType) {
         Intent intent = new Intent();
         intent.putExtra(AddAccountSettings.EXTRA_SELECTED_ACCOUNT, accountType);
         intent.putExtra(EXTRA_USER, mUserHandle);
-        setResult(RESULT_OK, intent);
-        finish();
+        mActivity.setResult(RESULT_OK, intent);
+        mActivity.finish();
     }
 }
