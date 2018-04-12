@@ -30,6 +30,7 @@ import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Process;
@@ -145,21 +146,24 @@ public class AnomalyDetectionJobService extends JobService {
                     : Settings.Global.getInt(contentResolver,
                             Settings.Global.APP_AUTO_RESTRICTION_ENABLED, ON) == ON;
             final String packageName = batteryUtils.getPackageName(uid);
-            if (uid != UID_NULL && !isSystemUid(uid)
-                    && !powerWhitelistBackend.isSysWhitelistedExceptIdle(
-                    packageManager.getPackagesForUid(uid))) {
-                boolean anomalyDetected = true;
-                if (anomalyInfo.anomalyType
-                        == StatsManagerConfig.AnomalyType.EXCESSIVE_BACKGROUND_SERVICE) {
-                    if (!batteryUtils.isPreOApp(packageName)
-                            || !batteryUtils.isAppHeavilyUsed(batteryStatsHelper, userManager, uid,
-                            policy.excessiveBgDrainPercentage)) {
-                        // Don't report if it is not legacy app or haven't used much battery
-                        anomalyDetected = false;
-                    }
-                }
 
-                if (anomalyDetected) {
+            final boolean anomalyDetected;
+            if (isExcessiveBackgroundAnomaly(anomalyInfo)) {
+                anomalyDetected = batteryUtils.isPreOApp(packageName)
+                        && batteryUtils.isAppHeavilyUsed(batteryStatsHelper, userManager, uid,
+                        policy.excessiveBgDrainPercentage);
+            } else {
+                anomalyDetected = true;
+            }
+
+            if (anomalyDetected) {
+                if (batteryUtils.shouldHideAnomaly(powerWhitelistBackend, uid)) {
+                    metricsFeatureProvider.action(context,
+                            MetricsProto.MetricsEvent.ACTION_ANOMALY_IGNORED,
+                            packageName,
+                            Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT,
+                                    anomalyInfo.anomalyType));
+                } else {
                     if (autoFeatureOn && anomalyInfo.autoRestriction) {
                         // Auto restrict this app
                         batteryUtils.setForceAppStandby(uid, packageName,
@@ -215,8 +219,8 @@ public class AnomalyDetectionJobService extends JobService {
         return UID_NULL;
     }
 
-    private boolean isSystemUid(int uid) {
-        final int appUid = UserHandle.getAppId(uid);
-        return appUid >= Process.ROOT_UID && appUid < Process.FIRST_APPLICATION_UID;
+    private boolean isExcessiveBackgroundAnomaly(AnomalyInfo anomalyInfo) {
+        return anomalyInfo.anomalyType
+                == StatsManagerConfig.AnomalyType.EXCESSIVE_BACKGROUND_SERVICE;
     }
 }
