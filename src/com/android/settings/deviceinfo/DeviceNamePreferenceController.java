@@ -21,10 +21,13 @@ import android.content.Context;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Build;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.SpannedString;
+
+import com.android.internal.annotations.VisibleForTesting;
 
 import com.android.settings.bluetooth.BluetoothLengthDeviceNameFilter;
 import com.android.settings.core.BasePreferenceController;
@@ -32,21 +35,35 @@ import com.android.settings.widget.ValidatedEditTextPreference;
 import com.android.settings.wifi.tether.WifiDeviceNameTextValidator;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnCreate;
+import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 
 public class DeviceNamePreferenceController extends BasePreferenceController
-        implements ValidatedEditTextPreference.Validator, Preference.OnPreferenceChangeListener {
+        implements ValidatedEditTextPreference.Validator,
+                Preference.OnPreferenceChangeListener,
+                LifecycleObserver,
+                OnSaveInstanceState,
+                OnCreate {
     private static final String PREF_KEY = "device_name";
+    public static final int DEVICE_NAME_SET_WARNING_ID = 1;
+    private static final String KEY_PENDING_DEVICE_NAME = "key_pending_device_name";
     private String mDeviceName;
     protected WifiManager mWifiManager;
     private final WifiDeviceNameTextValidator mWifiDeviceNameTextValidator;
     private ValidatedEditTextPreference mPreference;
     @Nullable
     private LocalBluetoothManager mBluetoothManager;
+    private DeviceNamePreferenceHost mHost;
+    private String mPendingDeviceName;
 
     public DeviceNamePreferenceController(Context context) {
         super(context, PREF_KEY);
+
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         mWifiDeviceNameTextValidator = new WifiDeviceNameTextValidator();
+
         initializeDeviceName();
     }
 
@@ -85,9 +102,10 @@ public class DeviceNamePreferenceController extends BasePreferenceController
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        mDeviceName = (String) newValue;
-        setDeviceName(mDeviceName);
-        preference.setSummary(getSummary());
+        mPendingDeviceName = (String) newValue;
+        if (mHost != null) {
+            mHost.showDeviceNameWarningDialog(mPendingDeviceName);
+        }
         return true;
     }
 
@@ -103,13 +121,25 @@ public class DeviceNamePreferenceController extends BasePreferenceController
         mBluetoothManager = localBluetoothManager;
     }
 
+    public void confirmDeviceName() {
+        if (mPendingDeviceName != null) {
+            setDeviceName(mPendingDeviceName);
+        }
+    }
+
+    public void setHost(DeviceNamePreferenceHost host) {
+        mHost = host;
+    }
+
     /**
      * This method presumes that security/validity checks have already been passed.
      */
     private void setDeviceName(String deviceName) {
+        mDeviceName = deviceName;
         setSettingsGlobalDeviceName(deviceName);
         setBluetoothDeviceName(deviceName);
         setTetherSsidName(deviceName);
+        mPreference.setSummary(getSummary());
     }
 
     private void setSettingsGlobalDeviceName(String deviceName) {
@@ -149,5 +179,21 @@ public class DeviceNamePreferenceController extends BasePreferenceController
         config.SSID = deviceName;
         // TODO: If tether is running, turn off the AP and restart it after setting config.
         mWifiManager.setWifiApConfiguration(config);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            mPendingDeviceName = savedInstanceState.getString(KEY_PENDING_DEVICE_NAME, null);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putString(KEY_PENDING_DEVICE_NAME, mPendingDeviceName);
+    }
+
+    public interface DeviceNamePreferenceHost {
+        void showDeviceNameWarningDialog(String deviceName);
     }
 }

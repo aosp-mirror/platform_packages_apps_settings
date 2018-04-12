@@ -19,7 +19,6 @@ package com.android.settings.deviceinfo.aboutphone;
 import static com.android.settings.bluetooth.Utils.getLocalBtManager;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
@@ -62,7 +61,8 @@ import java.util.Arrays;
 import java.util.List;
 
 @SearchIndexable
-public class MyDeviceInfoFragment extends DashboardFragment {
+public class MyDeviceInfoFragment extends DashboardFragment
+        implements DeviceNamePreferenceController.DeviceNamePreferenceHost {
     private static final String LOG_TAG = "MyDeviceInfoFragment";
 
     private static final String KEY_MY_DEVICE_INFO_HEADER = "my_device_info_header";
@@ -100,8 +100,11 @@ public class MyDeviceInfoFragment extends DashboardFragment {
                 getLifecycle());
     }
 
-    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Activity activity, Fragment fragment, Lifecycle lifecycle) {
+    private static List<AbstractPreferenceController> buildPreferenceControllers(
+            Context context,
+            Activity activity,
+            MyDeviceInfoFragment fragment,
+            Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new EmergencyInfoPreferenceController(context));
         controllers.add(new PhoneNumberPreferenceController(context));
@@ -109,6 +112,10 @@ public class MyDeviceInfoFragment extends DashboardFragment {
         DeviceNamePreferenceController deviceNamePreferenceController =
                 new DeviceNamePreferenceController(context);
         deviceNamePreferenceController.setLocalBluetoothManager(getLocalBtManager(context));
+        deviceNamePreferenceController.setHost(fragment);
+        if (lifecycle != null) {
+            lifecycle.addObserver(deviceNamePreferenceController);
+        }
         controllers.add(deviceNamePreferenceController);
         controllers.add(new SimStatusPreferenceController(context, fragment));
         controllers.add(new DeviceModelPreferenceController(context, fragment));
@@ -162,6 +169,16 @@ public class MyDeviceInfoFragment extends DashboardFragment {
         }
 
         controller.done(context, true /* rebindActions */);
+    }
+
+    @Override
+    public void showDeviceNameWarningDialog(String deviceName) {
+        DeviceNameWarningDialog.show(this);
+    }
+
+    public void onSetDeviceNameConfirm() {
+        final DeviceNamePreferenceController controller = use(DeviceNamePreferenceController.class);
+        controller.confirmDeviceName();
     }
 
     private static class SummaryProvider implements SummaryLoader.SummaryProvider {
