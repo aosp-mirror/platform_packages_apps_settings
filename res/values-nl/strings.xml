@@ -80,7 +80,7 @@
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"SD-kaart wissen"</string>
     <string name="preview_pager_content_description" msgid="8926235999291761243">"Voorbeeld"</string>
     <string name="preview_page_indicator_content_description" msgid="4821343428913401264">"Voorbeeldweergave, pagina <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> van <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
-    <string name="font_size_summary" msgid="1690992332887488183">"De tekst op het scherm kleiner of groter maken."</string>
+    <string name="font_size_summary" msgid="1690992332887488183">"Maak de tekst op het scherm kleiner of groter."</string>
     <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Verkleinen"</string>
     <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Vergroten"</string>
     <!-- no translation found for font_size_preview_text (4818424565068376732) -->
@@ -349,8 +349,10 @@
     <string name="zone_info_footer_no_dst" msgid="8652423870143056964">"Gebruikt <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Geen zomertijd."</string>
     <string name="zone_time_type_dst" msgid="8850494578766845276">"Zomertijd"</string>
     <string name="zone_time_type_standard" msgid="3462424485380376522">"Standaardtijd"</string>
-    <string name="zone_menu_by_region" msgid="7094872254966039844">"Tijdzones weergeven op regio"</string>
-    <string name="zone_menu_by_offset" msgid="5548491286761692269">"Tijdzones weergeven op verschil met UTC"</string>
+    <!-- no translation found for zone_menu_by_region (8370437123807764346) -->
+    <skip />
+    <!-- no translation found for zone_menu_by_offset (7161573994228041794) -->
+    <skip />
     <string name="date_picker_title" msgid="1338210036394128512">"Datum"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Tijd"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Automatisch vergrendelen"</string>
@@ -681,7 +683,8 @@
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> wil toegang tot je contacten en oproepgeschiedenis."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> wil koppelen via Bluetooth. Na verbinding heeft het toegang tot je contacten en oproepgeschiedenis."</string>
     <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Gekoppelde apparaten"</string>
-    <string name="bluetooth_preference_found_media_devices" msgid="1622145567918975758">"Beschikbare media-apparaten"</string>
+    <!-- no translation found for bluetooth_preference_found_media_devices (1617401232446299411) -->
+    <skip />
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"Geen apparaten beschikbaar"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Verbinden"</string>
     <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"Verbinding verbreken"</string>
@@ -818,11 +821,9 @@
     <string name="wifi_setup_wps" msgid="8128702488486283957">"Autom. config. (WPS)"</string>
     <string name="wifi_settings_scanning_required_title" msgid="3815269816331500375">"Wifi-scannen inschakelen?"</string>
     <string name="wifi_settings_scanning_required_summary" msgid="6352918945128328916">"Als je wifi automatisch wilt inschakelen, moet je eerst wifi-scannen inschakelen."</string>
-    <!-- no translation found for wifi_settings_scanning_required_info (3155631874578023647) -->
-    <skip />
+    <string name="wifi_settings_scanning_required_info" msgid="3155631874578023647">"Met wifi-scannen sta je apps en services toe altijd te scannen naar wifi-netwerken in de buurt, zelfs als wifi is uitgeschakeld. Dit kan worden gebruikt om bijvoorbeeld locatiegebaseerde functies en services te verbeteren."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1364287182804820646">"Inschakelen"</string>
-    <!-- no translation found for wifi_settings_scanning_required_enabled (5527653791584018157) -->
-    <skip />
+    <string name="wifi_settings_scanning_required_enabled" msgid="5527653791584018157">"Wifi-scannen ingeschakeld"</string>
     <string name="wifi_show_advanced" msgid="3409422789616520979">"Geavanceerde opties"</string>
     <string name="wifi_advanced_toggle_description_expanded" msgid="2380600578544493084">"Dropdownmenu \'Geavanceerde opties\'. Dubbeltik om samen te vouwen."</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="1463812308429197263">"Dropdownmenu \'Geavanceerde opties\'. Dubbeltik om uit te vouwen."</string>
@@ -830,8 +831,7 @@
     <string name="wifi_ssid_hint" msgid="897593601067321355">"Geef de SSID op"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Beveiliging"</string>
     <string name="wifi_hidden_network" msgid="973162091800925000">"Verborgen netwerk"</string>
-    <!-- no translation found for wifi_hidden_network_warning (6674068093531603452) -->
-    <skip />
+    <string name="wifi_hidden_network_warning" msgid="6674068093531603452">"Als je router geen netwerk-id uitzendt maar je in de toekomst verbinding wilt maken met de router, kun je het netwerk instellen als verborgen.\n\nDit kan een beveiligingsrisico vormen omdat je telefoon regelmatig een signaal uitzendt om het netwerk te vinden.\n\nDe instellingen van je router worden niet gewijzigd als je het netwerk instelt op verborgen."</string>
     <string name="wifi_signal" msgid="5514120261628065287">"Signaalsterkte"</string>
     <string name="wifi_status" msgid="4824568012414605414">"Status"</string>
     <string name="wifi_speed" msgid="3526198708812322037">"Linksnelheid"</string>
@@ -940,6 +940,7 @@
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5936710887156133458">"Internetverbinding van deze tablet delen via hotspot"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="5556202634866621632">"Internetverbinding van deze telefoon delen via hotspot"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="5017191966153008">"App deelt content. Als je de internetverbinding wilt delen, schakel je de hotspot uit en weer in."</string>
+    <string name="wifi_hotspot_no_password_subtext" msgid="353306131026431089">"Geen wachtwoord ingesteld"</string>
     <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"Naam hotspot"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> inschakelen..."</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"Andere apparaten kunnen verbinding maken met <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
@@ -1066,7 +1067,7 @@
     <string name="brightness" msgid="8480105032417444275">"Helderheidsniveau"</string>
     <string name="brightness_title" msgid="5746272622112982836">"Helderheid"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Helderheid van het scherm aanpassen"</string>
-    <string name="auto_brightness_title" msgid="6341042882350279391">"Aanpasbare helderheid"</string>
+    <string name="auto_brightness_title" msgid="6341042882350279391">"Helderheid aanpassen"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"Helderheidsniveau optimaliseren voor het beschikbare licht"</string>
     <string name="auto_brightness_summary_off" msgid="2802336459335410626">"Uit"</string>
     <string name="auto_brightness_summary_very_low" msgid="6483976609035853764">"Voorkeurshelderheid is zeer laag"</string>
@@ -1090,7 +1091,7 @@
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Planning"</string>
     <string name="night_display_auto_mode_never" msgid="2483761922928753400">"Geen"</string>
     <string name="night_display_auto_mode_custom" msgid="2379394568898721765">"Schakelt op aangepaste tijd in"</string>
-    <string name="night_display_auto_mode_twilight" msgid="589042813708244059">"Zonsondergang tot zonsopgang aan"</string>
+    <string name="night_display_auto_mode_twilight" msgid="589042813708244059">"Van zonsondergang tot zonsopgang"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"Begintijd"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"Eindtijd"</string>
     <string name="night_display_status_title" msgid="1784041143360286267">"Status"</string>
@@ -1119,7 +1120,7 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Je scherm personaliseren"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Achtergrond kiezen uit"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Screensaver"</string>
-    <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Tijdens opladen of gedockt"</string>
+    <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Tijdens opladen of docken"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Tijdens beide"</string>
     <string name="screensaver_settings_summary_sleep" msgid="9086186698140423493">"Tijdens het opladen"</string>
     <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"Tijdens het docken"</string>
@@ -1734,8 +1735,7 @@
     <string name="security_settings_desc_multi" product="default" msgid="6610268420793984752">"Deze app heeft toegang tot het volgende op je telefoon. Om de prestaties te verbeteren en het geheugengebruik te beperken, zijn sommige van deze machtigingen beschikbaar voor <xliff:g id="BASE_APP_NAME">%1$s</xliff:g> omdat deze wordt uitgevoerd in hetzelfde proces als <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>:"</string>
     <string name="join_two_items" msgid="1336880355987539064">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g> en <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
     <string name="join_two_unrelated_items" msgid="1873827777191260824">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>, <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
-    <!-- no translation found for join_many_items_last (218498527304674173) -->
-    <skip />
+    <string name="join_many_items_last" msgid="218498527304674173">"<xliff:g id="ALL_BUT_LAST_ITEM">%1$s</xliff:g> en <xliff:g id="LAST_ITEM_0">%2$s</xliff:g>"</string>
     <string name="join_many_items_first" msgid="4333907712038448660">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>, <xliff:g id="ALL_BUT_FIRST_AND_LAST_ITEM">%2$s</xliff:g>"</string>
     <string name="join_many_items_middle" msgid="7556692394478220814">"<xliff:g id="ADDED_ITEM">%1$s</xliff:g>, <xliff:g id="REST_OF_ITEMS">%2$s</xliff:g>"</string>
     <string name="security_settings_billing_desc" msgid="8061019011821282358">"Deze app kan je kosten in rekening brengen:"</string>
@@ -2095,14 +2095,10 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> tot batterij leeg is"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> tot batterij is opgeladen"</string>
-    <!-- no translation found for background_activity_title (8482171736539410135) -->
-    <skip />
+    <string name="background_activity_title" msgid="8482171736539410135">"Achtergrondbeperking"</string>
     <string name="background_activity_summary" msgid="8140094430510517362">"Toestaan dat de app wordt uitgevoerd op de achtergrond"</string>
-    <string name="background_activity_summary_on" msgid="649282072540085599">"App kan op de achtergrond worden uitgevoerd wanneer deze niet wordt gebruikt"</string>
-    <string name="background_activity_summary_off" msgid="7666330699090632040">"Achtergrondactiviteit van de app is beperkt wanneer deze niet wordt gebruikt"</string>
     <string name="background_activity_summary_disabled" msgid="3710669050484599847">"App mag niet worden uitgevoerd op de achtergrond"</string>
-    <!-- no translation found for background_activity_summary_whitelisted (1079899502347973947) -->
-    <skip />
+    <string name="background_activity_summary_whitelisted" msgid="1079899502347973947">"Achtergrondgebruik kan niet worden beperkt"</string>
     <string name="background_activity_warning_dialog_title" msgid="2216249969149568871">"Achtergrondactiviteit beperken?"</string>
     <string name="background_activity_warning_dialog_text" msgid="7049624449246121981">"Als je de achtergrondactiviteit voor een app beperkt, functioneert de app mogelijk niet meer correct"</string>
     <string name="device_screen_usage" msgid="3386088035570409683">"Schermgebruik sinds volledige lading"</string>
@@ -2156,9 +2152,12 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"Tablet heeft meer verbruikt dan normaal"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"Apparaat heeft meer verbruikt dan normaal"</string>
     <string name="battery_tip_high_usage_summary" msgid="6341311803303581798">"Batterij is bijna leeg"</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="2489003849577202445">"Je telefoon is vaker gebruikt dan normaal. Je batterij is mogelijk eerder leeg dan verwacht.\n\nDe <xliff:g id="NUMBER">%1$d</xliff:g> apps met het hoogste batterijverbruik sinds de laatste keer dat de telefoon is opgeladen:"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="409808830122732587">"Je tablet is vaker gebruikt dan normaal. Je batterij is mogelijk eerder leeg dan verwacht.\n\nDe <xliff:g id="NUMBER">%1$d</xliff:g> apps met het hoogste batterijverbruik sinds de laatste keer dat de tablet is opgeladen:"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="1948395472652651924">"Je apparaat is vaker gebruikt dan normaal. Je batterij is mogelijk eerder leeg dan verwacht.\n\nDe <xliff:g id="NUMBER">%1$d</xliff:g> apps met het hoogste batterijverbruik sinds de laatste keer dat het apparaat is opgeladen:"</string>
+    <!-- no translation found for battery_tip_dialog_message (7434089311164898581) -->
+    <skip />
+    <!-- no translation found for battery_tip_dialog_message (2987443811119964310) -->
+    <skip />
+    <!-- no translation found for battery_tip_dialog_message (1993039726576708815) -->
+    <skip />
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="other">%1$d apps beperken</item>
       <item quantity="one">%1$d app beperken</item>
@@ -2179,12 +2178,9 @@
       <item quantity="other">%1$d apps beperken?</item>
       <item quantity="one">App beperken?</item>
     </plurals>
-    <!-- no translation found for battery_tip_restrict_app_dialog_message (7271391929137806299) -->
-    <skip />
-    <!-- no translation found for battery_tip_restrict_apps_less_than_5_dialog_message (3175700359860699627) -->
-    <skip />
-    <!-- no translation found for battery_tip_restrict_apps_more_than_5_dialog_message (582641081128076191) -->
-    <skip />
+    <string name="battery_tip_restrict_app_dialog_message" msgid="7271391929137806299">"Voorkom dat <xliff:g id="APP">%1$s</xliff:g> de batterij op de achtergrond gebruikt als je de batterij wilt sparen. Deze app werkt mogelijk niet goed en meldingen worden mogelijk vertraagd."</string>
+    <string name="battery_tip_restrict_apps_less_than_5_dialog_message" msgid="3175700359860699627">"Voorkom dat deze apps de batterij op de achtergrond gebruiken om de batterij te sparen. Beperkte apps werken mogelijk niet goed en meldingen worden mogelijk vertraagd.\n\nApps:"</string>
+    <string name="battery_tip_restrict_apps_more_than_5_dialog_message" msgid="582641081128076191">"Voorkom dat deze apps de batterij op de achtergrond gebruiken om de batterij te sparen. Beperkte apps werken mogelijk niet goed en meldingen worden mogelijk vertraagd.\n\nApps:\n<xliff:g id="APP_LIST">%1$s</xliff:g>."</string>
     <string name="battery_tip_restrict_app_dialog_ok" msgid="8291115820018013353">"Beperken"</string>
     <string name="battery_tip_unrestrict_app_dialog_title" msgid="4321334634106715162">"Beperking verwijderen?"</string>
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="6537761705584610231">"Deze app kan de batterij op de achtergrond gebruiken. Je batterij is mogelijk eerder leeg dan verwacht."</string>
@@ -2194,23 +2190,20 @@
     <string name="battery_tip_dialog_summary_message_no_estimation" msgid="1456026456418786135">"Als je de batterijduur wilt verlengen, schakel je Batterijbesparing in"</string>
     <string name="smart_battery_manager_title" msgid="870632749556793417">"Batterijbeheer"</string>
     <string name="smart_battery_title" msgid="6218785691872466076">"Apps automatisch beheren"</string>
-    <!-- no translation found for smart_battery_summary (1339184602000004058) -->
-    <skip />
-    <!-- no translation found for smart_battery_footer (5555604955956219544) -->
-    <skip />
-    <!-- no translation found for smart_battery_footer (5555604955956219544) -->
-    <skip />
-    <!-- no translation found for smart_battery_footer (5555604955956219544) -->
-    <skip />
+    <string name="smart_battery_summary" msgid="1339184602000004058">"Batterijgebruik beperken voor apps die je niet vaak gebruikt"</string>
+    <string name="smart_battery_footer" product="default" msgid="5555604955956219544">"Wanneer batterijbeheer detecteert dat apps de batterij snel leegmaken, heb je de optie om deze apps te beperken. Beperkte apps werken mogelijk niet goed en meldingen worden mogelijk vertraagd."</string>
+    <string name="smart_battery_footer" product="tablet" msgid="5555604955956219544">"Wanneer batterijbeheer detecteert dat apps de batterij snel leegmaken, heb je de optie om deze apps te beperken. Beperkte apps werken mogelijk niet goed en meldingen worden mogelijk vertraagd."</string>
+    <string name="smart_battery_footer" product="device" msgid="5555604955956219544">"Wanneer batterijbeheer detecteert dat apps de batterij snel leegmaken, heb je de optie om deze apps te beperken. Beperkte apps werken mogelijk niet goed en meldingen worden mogelijk vertraagd."</string>
     <string name="restricted_app_title" msgid="8982477293044330653">"Beperkte apps"</string>
-    <!-- no translation found for restricted_app_summary (7355687633914223530) -->
-    <string name="restricted_app_detail_footer" msgid="5888756210317863211">"Apps die hier worden weergegeven, gedragen zich niet naar behoren en maken op de achtergrond gebruik van de batterij.\n\nDeze apps zijn nu geblokkeerd, zodat ze de batterij niet op de achtergrond kunnen gebruiken. Als gevolg hiervan kunnen sommige app-meldingen met enige vertraging worden weergegeven."</string>
-    <!-- no translation found for battery_auto_restriction_title (6553271897488963709) -->
+    <plurals name="restricted_app_summary" formatted="false" msgid="7355687633914223530">
+      <item quantity="other">Batterijgebruik voor %1$d apps wordt beperkt</item>
+      <item quantity="one">Batterijgebruik voor %1$d app wordt beperkt</item>
+    </plurals>
+    <!-- no translation found for restricted_app_detail_footer (6739863162364046859) -->
     <skip />
-    <!-- no translation found for battery_auto_restriction_summary (8561335400991281062) -->
-    <skip />
-    <!-- no translation found for battery_manager_on (8643310865054362396) -->
-    <skip />
+    <string name="battery_auto_restriction_title" msgid="6553271897488963709">"Batterijbeheer gebruiken"</string>
+    <string name="battery_auto_restriction_summary" msgid="8561335400991281062">"Detecteren wanneer apps de batterij snel leegmaken"</string>
+    <string name="battery_manager_on" msgid="8643310865054362396">"Aan/Detecteren wanneer apps de batterij snel leegmaken"</string>
     <string name="battery_manager_off" msgid="5473135235710343576">"Uit"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="1026141135861471129">
       <item quantity="other">%1$d apps beperkt</item>
@@ -2323,8 +2316,7 @@
     <string name="process_dex2oat_label" msgid="2592408651060518226">"App-optimalisatie"</string>
     <string name="battery_saver" msgid="8172485772238572153">"Batterijbesparing"</string>
     <string name="battery_saver_auto_title" msgid="8368709389419695611">"Automatisch inschakelen"</string>
-    <!-- no translation found for battery_saver_seekbar_title (4705356758573183963) -->
-    <skip />
+    <string name="battery_saver_seekbar_title" msgid="4705356758573183963">"Bij <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_seekbar_title_placeholder" msgid="1138980155985636295">"Inschakelen"</string>
     <string name="battery_saver_master_switch_title" msgid="622539414546588436">"Batterijbesparing gebruiken"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Automatisch inschakelen"</string>
@@ -2549,9 +2541,6 @@
     <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"Als dit account wordt verwijderd, worden ook alle account­berichten, contacten en andere gegevens van de telefoon verwijderd."</string>
     <string name="really_remove_account_message" product="device" msgid="7507474724882080166">"Als dit account wordt verwijderd, worden ook alle bijbehorende berichten, contacten en andere gegevens van het apparaat verwijderd."</string>
     <string name="remove_account_failed" msgid="3901397272647112455">"Deze wijziging is niet toegestaan door je beheerder"</string>
-    <string name="provider_label" msgid="7724593781904508866">"Abonnementen doorvoeren"</string>
-    <!-- no translation found for sync_item_title (4782834606909853006) -->
-    <skip />
     <string name="cant_sync_dialog_title" msgid="2777238588398046285">"Kan niet handmatig synchroniseren"</string>
     <string name="cant_sync_dialog_message" msgid="1938380442159016449">"Synchroniseren is op dit moment uitgeschakeld voor dit item. Als je deze instelling wilt wijzigen, schakel je achtergrondgegevens en automatisch synchroniseren tijdelijk in."</string>
     <string name="enter_password" msgid="8035706727471334122">"Geef je wachtwoord op om Android te starten"</string>
@@ -2852,7 +2841,7 @@
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Pincode wijzigen"</string>
     <string name="app_notifications_switch_label" msgid="9124072219553687583">"Meldingen weergeven"</string>
     <string name="help_label" msgid="6886837949306318591">"Help en feedback"</string>
-    <string name="support_summary" msgid="2705726826263742491">"Help-artikelen, telefonische en chatondersteuning, aan de slag"</string>
+    <string name="support_summary" msgid="2705726826263742491">"Help-artikelen, bel- en chatondersteuning, aan de slag"</string>
     <string name="user_account_title" msgid="1127193807312271167">"Account voor content"</string>
     <string name="user_picture_title" msgid="7297782792000291692">"Foto-ID"</string>
     <string name="extreme_threats_title" msgid="6549541803542968699">"Groot gevaar"</string>
@@ -2867,7 +2856,7 @@
     <string name="call_manager_title" msgid="4479949569744516457">"Oproepbeheer"</string>
     <!-- no translation found for call_manager_summary (5918261959486952674) -->
     <skip />
-    <string name="cell_broadcast_settings" msgid="4124461751977706019">"Noodwaarschuwingen"</string>
+    <string name="cell_broadcast_settings" msgid="4124461751977706019">"Noodmeldingen"</string>
     <string name="network_operators_settings" msgid="2583178259504630435">"Netwerkproviders"</string>
     <string name="access_point_names" msgid="1381602020438634481">"Namen van toegangspunten"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="5808043757309522392">"Geoptimaliseerde 4G LTE-modus"</string>
@@ -2959,7 +2948,6 @@
     <string name="system_dashboard_summary" msgid="5797743225249766685">"Talen, tijd, back-up, updates"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Instellingen"</string>
     <string name="search_menu" msgid="6283419262313758339">"Zoeken in de instellingen"</string>
-    <string name="query_hint_text" msgid="3350700807437473939">"Zoeken in de instellingen"</string>
     <string name="keywords_wifi" msgid="3646884600964177062">"wifi, wifi-netwerk, netwerkverbinding, internet, draadloos, gegevens, wifi-verbinding"</string>
     <string name="keywords_change_wifi_state" msgid="627068244033681010">"wifi, wi-fi, schakelen, inschakelen, uitschakelen, beheren"</string>
     <string name="keywords_more_default_sms_app" msgid="8597706109432491909">"sms, sms\'en, sms\'jes, berichten, sms-berichten, standaard"</string>
@@ -3040,6 +3028,7 @@
     <string name="sound_settings_summary_silent" msgid="5074529767435584948">"Belsoftware ingesteld op stil"</string>
     <string name="sound_settings_example_summary" msgid="2404914514266523165">"Belvolume op 80%"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"Mediavolume"</string>
+    <string name="call_volume_option_title" msgid="1265865226974255384">"Belvolume"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Alarmvolume"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Beltoonvolume"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Meldingsvolume"</string>
@@ -3090,19 +3079,25 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Blokkeer visuele onderbreking"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"Visuele signalen toestaan"</string>
-    <string name="zen_mode_what_to_block_title" msgid="7326899360743233429">"Wat wordt geblokkeerd"</string>
-    <string name="zen_mode_block_effects_title" msgid="5659522118818678059">"Bij inkomende meldingen"</string>
+    <string name="zen_mode_what_to_block_title" msgid="7078190101807944693">"Visuele onderbrekingen blokkeren"</string>
+    <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"Wanneer het scherm is ingeschakeld"</string>
+    <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"Wanneer het scherm is uitgeschakeld"</string>
     <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"Geluid en trillen dempen"</string>
     <string name="zen_mode_block_effect_intent" msgid="350764335391428447">"Scherm niet inschakelen"</string>
     <string name="zen_mode_block_effect_light" msgid="8106976110224107316">"Lampje niet laten knipperen"</string>
     <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"Geen meldingen weergeven op het scherm"</string>
     <string name="zen_mode_block_effect_status" msgid="6642532634292373081">"Pictogrammen op statusbalk verbergen"</string>
     <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"Meldingsstipjes verbergen"</string>
-    <string name="zen_mode_block_effect_ambient" msgid="1005494937933402517">"Verbergen in inactieve display"</string>
+    <!-- no translation found for zen_mode_block_effect_ambient (4704755879961212658) -->
+    <skip />
     <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"Verbergen in meldingenlijst"</string>
+    <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"Nooit"</string>
+    <string name="zen_mode_block_effect_summary_screen_off" msgid="1230265589026355094">"Als scherm uit is"</string>
+    <string name="zen_mode_block_effect_summary_screen_on" msgid="6017536991063513394">"Als scherm aan is"</string>
     <string name="zen_mode_block_effect_summary_sound" msgid="1065107568053759972">"Geluid en trillen"</string>
     <string name="zen_mode_block_effect_summary_some" msgid="3635646031575107456">"Geluid, trillen en enkele visuele tekenen van meldingen"</string>
     <string name="zen_mode_block_effect_summary_all" msgid="1213328945418248026">"Geluid, trillen en visuele tekenen van meldingen"</string>
+    <string name="zen_mode_blocked_effects_footer" msgid="5710896246703497760">"Meldingen die nodig zijn voor basistelefoonactiviteit en -status worden nooit verborgen"</string>
     <string name="zen_mode_no_exceptions" msgid="7653433997399582247">"Geen"</string>
     <string name="zen_mode_other_options" msgid="520015080445012355">"andere opties"</string>
     <string name="zen_mode_add" msgid="90014394953272517">"Toevoegen"</string>
@@ -3130,6 +3125,16 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> regels kunnen automatisch worden ingeschakeld</item>
       <item quantity="one">1 regel kan automatisch worden ingeschakeld</item>
     </plurals>
+    <string name="zen_onboarding_ok" msgid="4332223974819182383">"OK"</string>
+    <string name="zen_onboarding_settings" msgid="9046451821239946868">"Instellingen"</string>
+    <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Je kunt dit aanpassen via Instellingen."</string>
+    <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Blokkeren wanneer het scherm is ingeschakeld"</string>
+    <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Blokkeren als het scherm is uitgeschakeld"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"\'Niet storen\' kan niet alleen ongewenste geluiden blokkeren maar ook beelden. Dit kan handig zijn als je wilt slapen, als je je moet concentreren of als je minder tijd op je telefoon wilt doorbrengen."</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Geluiden en beelden blokkeren"</string>
+    <!-- no translation found for zen_onboarding_screen_off_summary (5393041573999488088) -->
+    <skip />
+    <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Helemaal geen meldingen weergeven, behalve voor basistelefoonactiviteit en -status"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Geluiden voor werkprofiel"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Gebruik geluid persoonsprofiel"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"Geluiden voor werkprofielen en persoonlijke profielen komen overeen"</string>
@@ -3186,8 +3191,8 @@
     <string name="notification_channel_summary_high" msgid="2085017556511003283">"Urgent belang"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"Meldingen weergeven"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Meldingsassistent"</string>
-    <string name="notifications_sent_daily" msgid="113065754206235356">"~<xliff:g id="NUMBER">%1$s</xliff:g> verzonden per dag"</string>
-    <string name="notifications_sent_weekly" msgid="8348151826170109624">"~<xliff:g id="NUMBER">%1$s</xliff:g> verzonden per week"</string>
+    <string name="notifications_sent_daily" msgid="3584506541352710975">"~<xliff:g id="NUMBER">%1$s</xliff:g> per dag"</string>
+    <string name="notifications_sent_weekly" msgid="1030525736746720584">"~<xliff:g id="NUMBER">%1$s</xliff:g> per week"</string>
     <string name="notifications_sent_never" msgid="1001964786456700536">"Nooit"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Toegang tot meldingen"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"Toegang tot werkprofielmeldingen is geblokkeerd"</string>
@@ -3206,7 +3211,7 @@
     <string name="no_vr_listeners" msgid="2689382881717507390">"Er zijn geen geïnstalleerde apps die hebben gevraagd om te worden uitgevoerd als VR-helperservices."</string>
     <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"VR-servicetoegang toestaan voor <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> kan worden uitgevoerd wanneer je apps in de virtual reality-modus gebruikt."</string>
-    <string name="display_vr_pref_title" msgid="8104485269504335481">"Wanneer VR-modus van apparaat is geactiveerd"</string>
+    <string name="display_vr_pref_title" msgid="8104485269504335481">"In VR-modus"</string>
     <string name="display_vr_pref_low_persistence" msgid="5707494209944718537">"Vervaging beperken (aanbevolen)"</string>
     <string name="display_vr_pref_off" msgid="2190091757123260989">"Flikkering beperken"</string>
     <string name="picture_in_picture_title" msgid="5824849294270017113">"Scherm-in-scherm"</string>
@@ -3229,11 +3234,9 @@
     </plurals>
     <string name="no_channels" msgid="3077375508177744586">"Deze app heeft geen meldingen geplaatst"</string>
     <string name="app_settings_link" msgid="8894946007543660906">"Extra instellingen in de app"</string>
-    <string name="app_notification_listing_summary_zero" msgid="6482582965081108108">"Ingeschakeld voor alle apps"</string>
-    <plurals name="app_notification_listing_summary_others" formatted="false" msgid="5668835155965827890">
-      <item quantity="other">Uitgeschakeld voor <xliff:g id="COUNT_1">%d</xliff:g> apps</item>
-      <item quantity="one">Uitgeschakeld voor <xliff:g id="COUNT_0">%d</xliff:g> app</item>
-    </plurals>
+    <!-- no translation found for app_notification_listing_summary_zero (8046168435207424440) -->
+    <skip />
+    <!-- no translation found for app_notification_listing_summary_others (6709582776823665660) -->
     <plurals name="deleted_channels" formatted="false" msgid="8028574302599397935">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> categorieën verwijderd</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> categorie verwijderd</item>
@@ -3247,8 +3250,7 @@
     <string name="notification_badge_title" msgid="6370122441168519809">"Meldingsstipje toestaan"</string>
     <string name="notification_channel_badge_title" msgid="2240827899882847087">"Meldingsstipje weergeven"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"\'Niet storen\' overschrijven"</string>
-    <!-- no translation found for app_notification_override_dnd_summary (2612502099373472686) -->
-    <skip />
+    <string name="app_notification_override_dnd_summary" msgid="2612502099373472686">"Deze meldingen nog steeds laten onderbreken wanneer \'Niet storen\' is ingeschakeld"</string>
     <string name="app_notification_visibility_override_title" msgid="7821124557634786985">"Op vergrendelingsscherm"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Geblokkeerd"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Prioriteit"</string>
@@ -3346,8 +3348,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"Aan"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Uit"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Scherm vastzetten"</string>
-    <!-- no translation found for screen_pinning_description (1110847562111827766) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="1110847562111827766">"Wanneer deze instelling is ingeschakeld, kun je \'Scherm vastzetten\' gebruiken om het scherm in beeld te houden tot je het losmaakt.\n\nSchakel \'Scherm vastzetten\' als volgt in:\n\n1. Zorg dat \'Scherm vastzetten\' is ingeschakeld\n\n2. Open Overzicht\n\n3. Tik op het apppictogram bovenaan en tik op het speldpictogram"</string>
     <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Vraag patroon voor losmaken"</string>
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"Vraag pin voor losmaken"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Vraag wachtwoord voor losmaken"</string>
@@ -3365,10 +3366,9 @@
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Naast het gebruik van je vingerafdruk om je apparaat te ontgrendelen, kun je dit apparaat verder beveiligen door in te stellen dat je wachtwoord moet worden opgegeven voordat het apparaat wordt opgestart. Het apparaat kan pas na het opstarten oproepen, berichten of meldingen (waaronder wekkers) ontvangen.\n\nZo kunnen gegevens op verloren of gestolen apparaten worden beschermd. Wachtwoord vereisen om je apparaat op te starten?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Ja"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Nee"</string>
-    <!-- no translation found for restricted_true_label (6659564360412697857) -->
+    <!-- no translation found for restricted_true_label (4761453839409220473) -->
     <skip />
-    <!-- no translation found for restricted_false_label (3279282180297058755) -->
-    <skip />
+    <string name="restricted_false_label" msgid="3279282180297058755">"App kan de batterij op de achtergrond gebruiken"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Pincode vereisen?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Patroon vereisen?"</string>
     <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"Wachtwoord vereisen?"</string>
@@ -3456,7 +3456,7 @@
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Niet herkend"</string>
     <string name="default_apps_title" msgid="1660450272764331490">"Standaard"</string>
     <string name="default_for_work" msgid="9152194239366247932">"Standaard voor werk"</string>
-    <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Assistent en spraakinvoer"</string>
+    <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Assistentie en spraakinvoer"</string>
     <string name="default_assist_title" msgid="8868488975409247921">"App voor assistentie"</string>
     <string name="assistant_security_warning_title" msgid="8673079231955467177">"<xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> instellen als assistent?"</string>
     <string name="assistant_security_warning" msgid="8498726261327239136">"De assistent kan informatie over de gebruikte apps in je systeem lezen, waaronder informatie die zichtbaar is op je scherm of toegankelijk is in de apps."</string>
@@ -3552,12 +3552,12 @@
     <string name="background_check_pref" msgid="7550258400138010979">"Achtergrondcontrole"</string>
     <string name="background_check_title" msgid="4534254315824525593">"Volledige toegang tot achtergrond"</string>
     <string name="assist_access_context_title" msgid="2269032346698890257">"Tekst van scherm gebruiken"</string>
-    <string name="assist_access_context_summary" msgid="1991421283142279560">"Toestaan dat de assistent-app toegang krijgt tot de scherminhoud als tekst"</string>
+    <string name="assist_access_context_summary" msgid="1991421283142279560">"Toestaan dat de assistentie-app toegang krijgt tot de scherminhoud als tekst"</string>
     <string name="assist_access_screenshot_title" msgid="4034721336291215819">"Screenshot gebruiken"</string>
-    <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"Toestaan dat de assistent-app toegang krijgt tot een afbeelding van het scherm"</string>
+    <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"Toestaan dat de assistentie-app toegang krijgt tot een afbeelding van het scherm"</string>
     <string name="assist_flash_title" msgid="506661221230034891">"Scherm laten knipperen"</string>
     <string name="assist_flash_summary" msgid="9160668468824099262">"Schermranden laten knipperen wanneer assistentie-app toegang verkrijgt tot tekst op scherm of screenshot"</string>
-    <string name="assist_footer" msgid="1982791172085896864">"Assistent-apps kunnen je helpen op basis van de informatie op het scherm dat je bekijkt. Bepaalde apps ondersteunen launcher- en spraakinvoerservices voor geïntegreerde ondersteuning."</string>
+    <string name="assist_footer" msgid="1982791172085896864">"Assistentie-apps kunnen je helpen op basis van de informatie op het scherm dat je bekijkt. Bepaalde apps ondersteunen launcher- en spraakinvoerservices voor geïntegreerde ondersteuning."</string>
     <string name="average_memory_use" msgid="829566450150198512">"Gemiddeld geheugengebruik"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"Maximaal geheugengebruik"</string>
     <string name="memory_usage" msgid="1781358557214390033">"Geheugengebruik"</string>
@@ -3641,8 +3641,7 @@
     <string name="screen_zoom_conversation_timestamp_4" msgid="2511469395448561259">"Di. 18:03 uur"</string>
     <string name="disconnected" msgid="4836600637485526329">"Niet verbonden"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> van data gebruikt"</string>
-    <!-- no translation found for data_usage_wifi_format (5417296451392612860) -->
-    <skip />
+    <string name="data_usage_wifi_format" msgid="5417296451392612860">"<xliff:g id="AMOUNT">^1</xliff:g> gebruikt via wifi"</string>
     <plurals name="notification_summary" formatted="false" msgid="3941492005316143599">
       <item quantity="other">Uitgeschakeld voor <xliff:g id="COUNT">%d</xliff:g> apps</item>
       <item quantity="one">Uitgeschakeld voor 1 app</item>
@@ -3663,15 +3662,14 @@
     <string name="backup_disabled" msgid="485189128759595412">"Back-up uitgeschakeld"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Geüpdatet naar Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"Update beschikbaar"</string>
-    <string name="disabled_by_policy_title" msgid="533408480325333580">"Kan deze instelling niet wijzigen"</string>
-    <string name="disabled_by_policy_title_adjust_volume" msgid="7399450998356045023">"Kan het volume niet wijzigen"</string>
+    <string name="disabled_by_policy_title" msgid="8032916235573765969">"Kan instelling niet wijzigen"</string>
+    <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"Kan het volume niet wijzigen"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"Bellen niet toegestaan"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"Sms niet toegestaan"</string>
     <string name="disabled_by_policy_title_camera" msgid="6225008536855644874">"Camera niet toegestaan"</string>
     <string name="disabled_by_policy_title_screen_capture" msgid="4066913623298047094">"Screenshot niet toegestaan"</string>
-    <string name="disabled_by_policy_title_turn_off_backups" msgid="6346948990624612516">"Kan de back-ups niet uitschakelen"</string>
-    <!-- no translation found for disabled_by_policy_title_suspend_packages (7423998445638650115) -->
-    <skip />
+    <string name="disabled_by_policy_title_turn_off_backups" msgid="7330460584199383321">"Kan back-ups niet uitschakelen"</string>
+    <string name="disabled_by_policy_title_suspend_packages" msgid="7872038990805477554">"Kan deze app niet openen"</string>
     <string name="default_admin_support_msg" msgid="4489678214035485367">"Neem bij vragen contact op met je IT-beheerder"</string>
     <string name="admin_support_more_info" msgid="8901377038510512654">"Meer informatie"</string>
     <string name="admin_profile_owner_message" msgid="5860816886981109626">"Je beheerder kan apps en gegevens bijhouden en beheren die aan je werkprofiel zijn gekoppeld (waaronder instellingen, machtigingen, zakelijke toegang, netwerkactiviteit en locatiegegevens van het apparaat)."</string>
@@ -3731,8 +3729,7 @@
     <string name="usage" msgid="2977875522080448986">"Gebruik"</string>
     <string name="cellular_data_usage" msgid="2155683719898158203">"Gebruik van mobiele data"</string>
     <string name="app_cellular_data_usage" msgid="5468472735806533448">"Gegevensgebruik van app"</string>
-    <!-- no translation found for wifi_data_usage (771603760674507659) -->
-    <skip />
+    <string name="wifi_data_usage" msgid="771603760674507659">"Wifi-datagebruik"</string>
     <string name="ethernet_data_usage" msgid="5108764537574354616">"Ethernet-datagebruik"</string>
     <string name="wifi" msgid="1081550856200013637">"Wifi"</string>
     <string name="ethernet" msgid="6600095783781389720">"Ethernet"</string>
@@ -3767,8 +3764,7 @@
       <item quantity="one">1 app mag onbeperkt data gebruiken terwijl Databesparing is ingeschakeld</item>
     </plurals>
     <string name="data_usage_title" msgid="3659356290392241789">"Primaire data"</string>
-    <!-- no translation found for data_usage_wifi_title (7063659423081820720) -->
-    <skip />
+    <string name="data_usage_wifi_title" msgid="7063659423081820720">"Wifi-gegevens"</string>
     <string name="data_used" msgid="5116389957228457203">"<xliff:g id="ID_1">^1</xliff:g> gebruikt"</string>
     <string name="data_used_formatted" msgid="2989129931961311051">"<xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g> gebruikt"</string>
     <string name="data_overusage" msgid="1134445012475270295">"Nog <xliff:g id="ID_1">^1</xliff:g>"</string>
@@ -3784,8 +3780,7 @@
     <string name="carrier_and_update_now_text" msgid="4057997726060106722">"Zojuist geüpdatet door <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="no_carrier_update_now_text" msgid="1766859656868932996">"Zojuist geüpdatet"</string>
     <string name="launch_mdp_app_text" msgid="6751296320061773169">"Abonnement bekijken"</string>
-    <!-- no translation found for launch_wifi_text (2311424914664372687) -->
-    <skip />
+    <string name="launch_wifi_text" msgid="2311424914664372687">"Details bekijken"</string>
     <string name="data_saver_title" msgid="8034286939200289826">"Databesparing"</string>
     <string name="unrestricted_data_saver" msgid="952796077540228711">"Onbeperkte data"</string>
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"Achtergrondgegevens zijn uitgeschakeld"</string>
@@ -3802,12 +3797,9 @@
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"Wachtwoord vereisen om je apparaat op te starten. Als het apparaat is uitgeschakeld, kan het geen oproepen, berichten, meldingen of wekkers ontvangen."</string>
     <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"Nog een vingerafdruk toevoegen"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="5471253233176471245">"Ontgrendelen met een andere vinger"</string>
-    <!-- no translation found for battery_saver_on_summary (7722791295871319534) -->
-    <skip />
-    <!-- no translation found for battery_saver_off_scheduled_summary (3953785517002197881) -->
-    <skip />
-    <!-- no translation found for battery_saver_off_summary (784360321235698247) -->
-    <skip />
+    <string name="battery_saver_on_summary" msgid="7722791295871319534">"Aan"</string>
+    <string name="battery_saver_off_scheduled_summary" msgid="3953785517002197881">"Batterijbesparing wordt ingeschakeld bij <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="battery_saver_off_summary" msgid="784360321235698247">"Uit"</string>
     <string name="battery_saver_button_turn_on" msgid="3699954061337848832">"Nu inschakelen"</string>
     <string name="battery_saver_button_turn_off" msgid="5916996792004611890">"Nu uitschakelen"</string>
     <string name="not_battery_optimizing" msgid="5362861851864837617">"Batterijoptimalisatie wordt niet gebruikt"</string>
@@ -3906,6 +3898,10 @@
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Schakelen tussen camera\'s"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"Sneller selfies maken"</string>
+    <string name="swipe_up_to_switch_apps_title" msgid="2513907834903543667">"Omhoog vegen over de startknop"</string>
+    <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"Veeg omhoog over de startknop om tussen apps te schakelen. Veeg opnieuw omhoog om alle apps te bekijken. Dit werkt vanuit elk scherm. Je hebt aan de rechterkant van het scherm geen knop Overzicht meer."</string>
+    <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Probeer de nieuwe startknop"</string>
+    <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Schakel het nieuwe gebaar in om tussen apps te schakelen"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Dubbeltikken om telefoon te checken"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Dubbeltikken om tablet te checken"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Dubbeltikken om apparaat te checken"</string>
@@ -3941,7 +3937,7 @@
     <string name="auto_sync_account_title" msgid="898796354710116383">"Gegevens automatisch synchroniseren"</string>
     <string name="auto_sync_personal_account_title" msgid="8496263182646100610">"Persoonlijke gegevens automatisch synchroniseren"</string>
     <string name="auto_sync_work_account_title" msgid="4489172450037434152">"Werkgegevens automatisch synchroniseren"</string>
-    <string name="auto_sync_account_summary" msgid="692499211629185107">"Apps gegevens automatisch laten vernieuwen"</string>
+    <string name="auto_sync_account_summary" msgid="692499211629185107">"Apps automatisch gegevens laten vernieuwen"</string>
     <string name="account_sync_title" msgid="7214747784136106491">"Accountsynchronisatie"</string>
     <string name="account_sync_summary_some_on" msgid="3375930757891381175">"Synchronisatie is ingeschakeld voor <xliff:g id="ID_1">%1$d</xliff:g> van de <xliff:g id="ID_2">%2$d</xliff:g> items"</string>
     <string name="account_sync_summary_all_on" msgid="570431636622254156">"Synchronisatie is ingeschakeld voor alle items"</string>
@@ -3999,7 +3995,7 @@
     <string name="do_disclosure_generic" msgid="8653670456990823307">"Dit apparaat wordt beheerd door je organisatie."</string>
     <string name="do_disclosure_with_name" msgid="1141081465968481380">"Dit apparaat wordt beheerd door <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>."</string>
     <string name="do_disclosure_learn_more_separator" msgid="3558079393757238670">" "</string>
-    <string name="do_disclosure_learn_more" msgid="2416766240581561009">"Meer informatie"</string>
+    <string name="learn_more" msgid="2623878455042103404">"Meer informatie"</string>
     <plurals name="default_camera_app_title" formatted="false" msgid="1134677050353971363">
       <item quantity="other">Camera-apps</item>
       <item quantity="one">Camera-app</item>
@@ -4022,8 +4018,7 @@
     <string name="storage_games" msgid="7703159201697117621">"Games"</string>
     <string name="storage_other_apps" msgid="5524321740031718083">"Andere apps"</string>
     <string name="storage_files" msgid="8581083146777364063">"Bestanden"</string>
-    <!-- no translation found for storage_size_large_alternate (3395208658399637645) -->
-    <skip />
+    <string name="storage_size_large_alternate" msgid="3395208658399637645">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">^2</xliff:g>"</font></small>""</string>
     <string name="storage_volume_total" msgid="3499221850532701342">"gebruikt van <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_percent_full" msgid="6095012055875077036">"gebr."</string>
     <string name="clear_instant_app_data" msgid="2004222610585890909">"Gegevens van app wissen"</string>
@@ -4075,6 +4070,7 @@
     <string name="change_wifi_state_app_detail_switch" msgid="7942268646980694224">"App toestaan om wifi te beheren"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8434262633905502679">"Sta deze app toe om wifi in- of uit te schakelen, wifi-netwerken te scannen en er verbinding mee te maken, netwerken toe te voegen of te verwijderen of een hotspot \'Alleen lokaal\' te starten."</string>
     <string name="media_output_title" msgid="115223550977351699">"Media afspelen naar"</string>
+    <string name="media_output_default_summary" msgid="8115153381240348279">"Dit apparaat"</string>
     <string name="media_output_summary" product="default" msgid="6839458453831567167">"Telefoon"</string>
     <string name="media_output_summary" product="tablet" msgid="7217221078578554515">"Tablet"</string>
     <string name="media_output_summary" product="device" msgid="5677420090811068649">"Apparaat"</string>
@@ -4087,14 +4083,18 @@
     <string name="battery_suggestion_summary" msgid="4585677159811722359"></string>
     <string name="gesture_prevent_ringing_screen_title" msgid="7840226017975251549">"Beltoon voorkomen"</string>
     <string name="gesture_prevent_ringing_title" msgid="2483159069038138740">"Druk tegelijkertijd op de aan/uit-knop en de knop \'Volume omhoog\'"</string>
+    <!-- no translation found for gesture_prevent_ringing_sound_title (5724512060316688779) -->
+    <skip />
     <string name="prevent_ringing_option_vibrate" msgid="7286821846542822661">"Trillen"</string>
     <string name="prevent_ringing_option_mute" msgid="7551545579059879853">"Dempen"</string>
     <string name="prevent_ringing_option_none" msgid="4656046650769569175">"Niets doen"</string>
-    <string name="prevent_ringing_option_vibrate_summary" msgid="1065493645461576417">"Alle oproepen en meldingen laten trillen"</string>
-    <string name="prevent_ringing_option_mute_summary" msgid="4235786586339197293">"Alle oproepen en meldingen dempen"</string>
-    <string name="prevent_ringing_option_none_summary" msgid="8037313710474671901">"Niets doen"</string>
+    <!-- no translation found for prevent_ringing_option_vibrate_summary (1157524435626890116) -->
+    <skip />
+    <!-- no translation found for prevent_ringing_option_mute_summary (4472465110708640980) -->
+    <skip />
+    <!-- no translation found for prevent_ringing_option_none_summary (5013718946609276137) -->
+    <skip />
     <string name="pref_title_network_details" msgid="7186418845727358964">"Netwerkgegevens"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"De naam van je apparaat is zichtbaar voor apps op je telefoon. De apparaatnaam kan ook door andere mensen worden gezien wanneer je verbinding maakt met Bluetooth-apparaten of een wifi-hotspot instelt."</string>
-    <!-- no translation found for devices_title (7701726109334110391) -->
-    <skip />
+    <string name="devices_title" msgid="7701726109334110391">"Apparaten"</string>
 </resources>
