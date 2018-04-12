@@ -81,11 +81,15 @@ public class AppNotificationPreferenceController extends AppInfoPreferenceContro
         if (appRow == null) {
             return "";
         }
-        if (appRow.banned || appRow.channelCount == appRow.blockedChannelCount) {
-            return context.getString(R.string.notifications_disabled);
+        if (appRow.banned) {
+            return context.getText(R.string.notifications_disabled);
+        } else if (appRow.channelCount == 0) {
+            return context.getText(R.string.notifications_enabled);
+        } else if (appRow.channelCount == appRow.blockedChannelCount) {
+            return context.getText(R.string.notifications_disabled);
         } else {
             if (appRow.blockedChannelCount == 0) {
-                return context.getString(R.string.notifications_enabled);
+                return context.getText(R.string.notifications_enabled);
             }
             return context.getString(R.string.notifications_enabled_with_info,
                     context.getResources().getQuantityString(R.plurals.notifications_categories_off,
