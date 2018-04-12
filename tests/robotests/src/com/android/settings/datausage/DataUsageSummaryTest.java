@@ -16,11 +16,20 @@
 
 package com.android.settings.datausage;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.endsWith;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+
 import android.app.Activity;
 import android.content.Context;
 import android.net.NetworkPolicyManager;
-import android.os.Bundle;
-import android.text.format.Formatter;
 
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -38,17 +47,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.endsWith;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 
 @Config(shadows = {
     SettingsShadowResourcesImpl.class,
@@ -93,8 +91,8 @@ public class DataUsageSummaryTest {
         final long usage = 2147483648L; // 2GB
         final String formattedUsage =
                 DataUsageSummary.formatUsage(mContext, "^1", usage).toString();
-        final String formattedAsFileSize = Formatter.formatFileSize(mContext, usage);
-        assertThat(formattedUsage).isEqualTo(formattedAsFileSize);
+        final CharSequence formattedInIECUnit = DataUsageUtils.formatDataUsage(mContext, usage);
+        assertThat(formattedUsage).isEqualTo(formattedInIECUnit);
     }
 
     @Test

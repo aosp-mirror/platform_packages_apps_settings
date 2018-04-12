@@ -48,7 +48,6 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.format.DateUtils;
-import android.text.format.Formatter;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
@@ -329,7 +328,7 @@ public class DataUsageList extends DataUsageBase {
                 SummaryForAllUidLoader.buildArgs(mTemplate, start, end), mSummaryCallbacks);
 
         final long totalBytes = entry != null ? entry.rxBytes + entry.txBytes : 0;
-        final String totalPhrase = Formatter.formatFileSize(context, totalBytes);
+        final CharSequence totalPhrase = DataUsageUtils.formatDataUsage(context, totalBytes);
         mUsageAmount.setTitle(getString(R.string.data_used_template, totalPhrase));
     }
 

@@ -14,7 +14,6 @@
 
 package com.android.settings.datausage;
 
-import static android.net.ConnectivityManager.TYPE_ETHERNET;
 import static android.net.ConnectivityManager.TYPE_WIFI;
 
 import android.content.Context;
@@ -29,6 +28,10 @@ import android.os.SystemProperties;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.text.BidiFormatter;
+import android.text.format.Formatter;
+import android.text.format.Formatter.BytesResult;
+
 import java.util.List;
 
 /**
@@ -40,6 +43,16 @@ public final class DataUsageUtils {
     private static final String ETHERNET = "ethernet";
 
     private DataUsageUtils() {
+    }
+
+    /**
+     * Format byte value to readable string using IEC units.
+     */
+    public static CharSequence formatDataUsage(Context context, long byteValue) {
+        final BytesResult res = Formatter.formatBytes(context.getResources(), byteValue,
+                Formatter.FLAG_IEC_UNITS);
+        return BidiFormatter.getInstance().unicodeWrap(context.getString(
+                com.android.internal.R.string.fileSizeSuffix, res.value, res.units));
     }
 
     /**

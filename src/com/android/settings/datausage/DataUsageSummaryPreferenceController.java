@@ -23,20 +23,16 @@ import android.net.NetworkPolicyManager;
 import android.net.NetworkTemplate;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
+import android.support.v7.widget.RecyclerView;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.SubscriptionPlan;
-import android.text.BidiFormatter;
-import android.text.Spannable;
-import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.format.Formatter;
-import android.text.style.RelativeSizeSpan;
 import android.util.Log;
 import android.util.RecurrenceRule;
 
 import com.android.internal.util.CollectionUtils;
-import android.support.v7.widget.RecyclerView;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -222,16 +218,16 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
         if (info.warningLevel > 0 && info.limitLevel > 0) {
                 summaryPreference.setLimitInfo(TextUtils.expandTemplate(
                         mContext.getText(R.string.cell_data_warning_and_limit),
-                        Formatter.formatFileSize(mContext, info.warningLevel),
-                        Formatter.formatFileSize(mContext, info.limitLevel)).toString());
+                        DataUsageUtils.formatDataUsage(mContext, info.warningLevel),
+                        DataUsageUtils.formatDataUsage(mContext, info.limitLevel)).toString());
         } else if (info.warningLevel > 0) {
                 summaryPreference.setLimitInfo(TextUtils.expandTemplate(
                         mContext.getText(R.string.cell_data_warning),
-                        Formatter.formatFileSize(mContext, info.warningLevel)).toString());
+                        DataUsageUtils.formatDataUsage(mContext, info.warningLevel)).toString());
         } else if (info.limitLevel > 0) {
             summaryPreference.setLimitInfo(TextUtils.expandTemplate(
                     mContext.getText(R.string.cell_data_limit),
-                    Formatter.formatFileSize(mContext, info.limitLevel)).toString());
+                    DataUsageUtils.formatDataUsage(mContext, info.limitLevel)).toString());
         } else {
             summaryPreference.setLimitInfo(null);
         }
@@ -242,19 +238,12 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
             summaryPreference.setChartEnabled(false);
         } else {
             summaryPreference.setChartEnabled(true);
-            summaryPreference.setLabels(Formatter.formatFileSize(mContext, 0 /* sizeBytes */),
-                    Formatter.formatFileSize(mContext, mDataBarSize));
+            summaryPreference.setLabels(DataUsageUtils.formatDataUsage(mContext, 0 /* sizeBytes */),
+                    DataUsageUtils.formatDataUsage(mContext, mDataBarSize));
             summaryPreference.setProgress(mDataplanUse / (float) mDataBarSize);
         }
         summaryPreference.setUsageInfo(mCycleEnd, mSnapshotTime, mCarrierName,
                 mDataplanCount, mManageSubscriptionIntent);
-    }
-
-    private String getLimitText(long limit, int textId) {
-        if (limit <= 0) {
-            return null;
-        }
-        return mContext.getString(textId, Formatter.formatFileSize(mContext, limit));
     }
 
     // TODO(b/70950124) add test for this method once the robolectric shadow run script is
@@ -317,28 +306,5 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
 
     public static boolean unlimited(long size) {
         return size == SubscriptionPlan.BYTES_UNLIMITED;
-    }
-
-    @VisibleForTesting
-    private static CharSequence formatUsage(Context context, String template, long usageLevel) {
-        final int FLAGS = Spannable.SPAN_INCLUSIVE_INCLUSIVE;
-
-        final Formatter.BytesResult usedResult = Formatter.formatBytes(context.getResources(),
-                usageLevel, Formatter.FLAG_CALCULATE_ROUNDED);
-        final SpannableString enlargedValue = new SpannableString(usedResult.value);
-        enlargedValue.setSpan(
-                new RelativeSizeSpan(RELATIVE_SIZE_LARGE), 0, enlargedValue.length(), FLAGS);
-
-        final SpannableString amountTemplate = new SpannableString(
-                context.getString(com.android.internal.R.string.fileSizeSuffix)
-                        .replace("%1$s", "^1").replace("%2$s", "^2"));
-        final CharSequence formattedUsage = TextUtils.expandTemplate(amountTemplate,
-                enlargedValue, usedResult.units);
-
-        final SpannableString fullTemplate = new SpannableString(template);
-        fullTemplate.setSpan(
-                new RelativeSizeSpan(RELATIVE_SIZE_SMALL), 0, fullTemplate.length(), FLAGS);
-        return TextUtils.expandTemplate(fullTemplate,
-                BidiFormatter.getInstance().unicodeWrap(formattedUsage.toString()));
     }
 }

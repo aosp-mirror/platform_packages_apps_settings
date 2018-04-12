@@ -16,7 +16,6 @@ package com.android.settings.datausage;
 
 import android.content.Context;
 import android.support.v7.preference.PreferenceViewHolder;
-import android.text.format.Formatter;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -41,7 +40,7 @@ public class AppDataUsagePreference extends AppPreference {
         if (item.restricted && item.total <= 0) {
             setSummary(com.android.settings.R.string.data_usage_app_restricted);
         } else {
-            setSummary(Formatter.formatFileSize(context, item.total));
+            setSummary(DataUsageUtils.formatDataUsage(context, item.total));
         }
         mDetail = provider.getUidDetail(item.key, false /* blocking */);
         if (mDetail != null) {
