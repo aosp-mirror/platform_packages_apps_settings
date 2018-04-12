@@ -30,6 +30,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.batterytip.actions.BatterySaverAction;
 import com.android.settings.fuelgauge.batterytip.actions.BatteryTipAction;
+import com.android.settings.fuelgauge.batterytip.actions.OpenBatterySaverAction;
 import com.android.settings.fuelgauge.batterytip.actions.OpenRestrictAppFragmentAction;
 import com.android.settings.fuelgauge.batterytip.actions.RestrictAppAction;
 import com.android.settings.fuelgauge.batterytip.actions.SmartBatteryAction;
@@ -93,7 +94,11 @@ public class BatteryTipUtils {
             case BatteryTip.TipType.SMART_BATTERY_MANAGER:
                 return new SmartBatteryAction(settingsActivity, fragment);
             case BatteryTip.TipType.BATTERY_SAVER:
-                return new BatterySaverAction(settingsActivity);
+                if (batteryTip.getState() == BatteryTip.StateType.HANDLED) {
+                    return new OpenBatterySaverAction(settingsActivity);
+                } else {
+                    return new BatterySaverAction(settingsActivity);
+                }
             case BatteryTip.TipType.APP_RESTRICTION:
                 if (batteryTip.getState() == BatteryTip.StateType.HANDLED) {
                     return new OpenRestrictAppFragmentAction(settingsActivity, fragment,
