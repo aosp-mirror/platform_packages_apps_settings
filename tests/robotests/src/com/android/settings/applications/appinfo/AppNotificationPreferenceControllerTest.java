@@ -150,4 +150,13 @@ public class AppNotificationPreferenceControllerTest {
         appRow.channelCount = 10;
         assertThat(mController.getNotificationSummary(appRow, mContext).toString()).isEqualTo("On");
     }
+
+    @Test
+    public void getNotificationSummary_noChannels() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.banned = false;
+        appRow.blockedChannelCount = 0;
+        appRow.channelCount = 0;
+        assertThat(mController.getNotificationSummary(appRow, mContext).toString()).isEqualTo("On");
+    }
 }
