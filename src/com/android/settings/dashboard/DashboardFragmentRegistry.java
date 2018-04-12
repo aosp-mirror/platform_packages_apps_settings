@@ -24,6 +24,7 @@ import com.android.settings.accounts.AccountDetailDashboardFragment;
 import com.android.settings.applications.AppAndNotificationDashboardFragment;
 import com.android.settings.applications.DefaultAppSettings;
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment;
+import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.development.DevelopmentSettingsDashboardFragment;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.fuelgauge.PowerUsageSummary;
@@ -60,6 +61,8 @@ public class DashboardFragmentRegistry {
         PARENT_TO_CATEGORY_KEY_MAP = new ArrayMap<>();
         PARENT_TO_CATEGORY_KEY_MAP.put(
                 NetworkDashboardFragment.class.getName(), CategoryKey.CATEGORY_NETWORK);
+        PARENT_TO_CATEGORY_KEY_MAP.put(ConnectedDeviceDashboardFragment.class.getName(),
+                CategoryKey.CATEGORY_CONNECT);
         PARENT_TO_CATEGORY_KEY_MAP.put(AdvancedConnectedDeviceDashboardFragment.class.getName(),
                 CategoryKey.CATEGORY_DEVICE);
         PARENT_TO_CATEGORY_KEY_MAP.put(AppAndNotificationDashboardFragment.class.getName(),

@@ -51,6 +51,9 @@
         settings:userRestriction="no_bluetooth"
         settings:platform_slice="true"/>
 
+    <PreferenceCategory
+        android:key="dashboard_tile_placeholder" />
+
     <SwitchPreference
         android:key="toggle_nfc"
         android:title="@string/nfc_quick_toggle_title"
@@ -61,4 +64,5 @@
         android:key="connection_preferences"
         android:title="@string/connected_device_connections_title"
         android:fragment="com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment"/>
+
 </PreferenceScreen>
