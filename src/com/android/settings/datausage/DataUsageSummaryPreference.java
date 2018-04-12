@@ -39,7 +39,6 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settingslib.AppItem;
 import com.android.settingslib.Utils;
 import com.android.settingslib.utils.StringUtil;
 
@@ -52,12 +51,13 @@ import java.util.concurrent.TimeUnit;
 public class DataUsageSummaryPreference extends Preference {
     private static final long MILLIS_IN_A_DAY = TimeUnit.DAYS.toMillis(1);
     private static final long WARNING_AGE = TimeUnit.HOURS.toMillis(6L);
-    @VisibleForTesting static final Typeface SANS_SERIF_MEDIUM =
+    @VisibleForTesting
+    static final Typeface SANS_SERIF_MEDIUM =
             Typeface.create("sans-serif-medium", Typeface.NORMAL);
 
     private boolean mChartEnabled = true;
-    private String mStartLabel;
-    private String mEndLabel;
+    private CharSequence mStartLabel;
+    private CharSequence mEndLabel;
 
     /** large vs small size is 36/16 ~ 2.25 */
     private static final float LARGER_FONT_RATIO = 2.25f;
@@ -126,7 +126,7 @@ public class DataUsageSummaryPreference extends Preference {
         }
     }
 
-    public void setLabels(String start, String end) {
+    public void setLabels(CharSequence start, CharSequence end) {
         mStartLabel = start;
         mEndLabel = end;
         notifyChanged();
@@ -215,7 +215,7 @@ public class DataUsageSummaryPreference extends Preference {
         TextView usageNumberField = (TextView) holder.findViewById(R.id.data_usage_view);
 
         final Formatter.BytesResult usedResult = Formatter.formatBytes(getContext().getResources(),
-                mDataplanUse, Formatter.FLAG_CALCULATE_ROUNDED);
+                mDataplanUse, Formatter.FLAG_CALCULATE_ROUNDED | Formatter.FLAG_IEC_UNITS);
         final SpannableString usageNumberText = new SpannableString(usedResult.value);
         final int textSize =
                 getContext().getResources().getDimensionPixelSize(R.dimen.usage_number_text_size);
@@ -233,13 +233,13 @@ public class DataUsageSummaryPreference extends Preference {
             if (dataRemaining >= 0) {
                 usageRemainingField.setText(
                         TextUtils.expandTemplate(getContext().getText(R.string.data_remaining),
-                                Formatter.formatFileSize(getContext(), dataRemaining)));
+                                DataUsageUtils.formatDataUsage(getContext(), dataRemaining)));
                 usageRemainingField.setTextColor(
                         Utils.getColorAttr(getContext(), android.R.attr.colorAccent));
             } else {
                 usageRemainingField.setText(
                         TextUtils.expandTemplate(getContext().getText(R.string.data_overusage),
-                                Formatter.formatFileSize(getContext(), -dataRemaining)));
+                                DataUsageUtils.formatDataUsage(getContext(), -dataRemaining)));
                 usageRemainingField.setTextColor(
                         Utils.getColorAttr(getContext(), android.R.attr.colorError));
             }
@@ -253,10 +253,10 @@ public class DataUsageSummaryPreference extends Preference {
         if (millisLeft <= 0) {
             cycleTime.setText(getContext().getString(R.string.billing_cycle_none_left));
         } else {
-            int daysLeft = (int)(millisLeft / MILLIS_IN_A_DAY);
+            int daysLeft = (int) (millisLeft / MILLIS_IN_A_DAY);
             cycleTime.setText(daysLeft < 1
-                            ? getContext().getString(R.string.billing_cycle_less_than_one_day_left)
-                            : getContext().getResources().getQuantityString(
+                    ? getContext().getString(R.string.billing_cycle_less_than_one_day_left)
+                    : getContext().getResources().getQuantityString(
                             R.plurals.billing_cycle_days_left, daysLeft, daysLeft));
         }
     }
