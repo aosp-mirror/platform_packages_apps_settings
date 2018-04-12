@@ -21,17 +21,20 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.os.BatteryManager;
+import android.content.pm.ResolveInfo;
 import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.Build;
+import android.os.Process;
 import android.os.SystemClock;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
+import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.util.SparseLongArray;
@@ -43,6 +46,7 @@ import com.android.settings.R;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.overlay.FeatureFactory;
 
+import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 import com.android.settingslib.utils.PowerUtil;
 
 import java.lang.annotation.Retention;
@@ -526,6 +530,66 @@ public class BatteryUtils {
                         hiddenAmount,
                         dischargeAmount);
                 return percent >= threshold;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Return {@code true} if we should hide anomaly app represented by {@code uid}
+     */
+    public boolean shouldHideAnomaly(PowerWhitelistBackend powerWhitelistBackend, int uid) {
+        final String[] packageNames = mPackageManager.getPackagesForUid(uid);
+        if (ArrayUtils.isEmpty(packageNames)) {
+            // Don't show it if app has been uninstalled
+            return true;
+        }
+
+        return isSystemUid(uid) || powerWhitelistBackend.isSysWhitelistedExceptIdle(packageNames)
+                || (isSystemApp(mPackageManager, packageNames) && !hasLauncherEntry(packageNames));
+    }
+
+    private boolean isSystemUid(int uid) {
+        final int appUid = UserHandle.getAppId(uid);
+        return appUid >= Process.ROOT_UID && appUid < Process.FIRST_APPLICATION_UID;
+    }
+
+    private boolean isSystemApp(PackageManager packageManager, String[] packageNames) {
+        for (String packageName : packageNames) {
+            try {
+                final ApplicationInfo info = packageManager.getApplicationInfo(packageName,
+                        0 /* flags */);
+                if ((info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
+                    return true;
+                }
+            } catch (PackageManager.NameNotFoundException e) {
+                Log.e(TAG, "Package not found: " + packageName, e);
+            }
+        }
+
+        return false;
+    }
+
+    private boolean hasLauncherEntry(String[] packageNames) {
+        final Intent launchIntent = new Intent(Intent.ACTION_MAIN, null);
+        launchIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+
+        // If we do not specify MATCH_DIRECT_BOOT_AWARE or
+        // MATCH_DIRECT_BOOT_UNAWARE, system will derive and update the flags
+        // according to the user's lock state. When the user is locked,
+        // components
+        // with ComponentInfo#directBootAware == false will be filtered. We should
+        // explicitly include both direct boot aware and unaware components here.
+        final List<ResolveInfo> resolveInfos = mPackageManager.queryIntentActivities(launchIntent,
+                PackageManager.MATCH_DISABLED_COMPONENTS
+                        | PackageManager.MATCH_DIRECT_BOOT_AWARE
+                        | PackageManager.MATCH_DIRECT_BOOT_UNAWARE
+                        | PackageManager.MATCH_SYSTEM_ONLY);
+        for (int i = 0, size = resolveInfos.size(); i < size; i++) {
+            final ResolveInfo resolveInfo = resolveInfos.get(i);
+            if (ArrayUtils.contains(packageNames, resolveInfo.activityInfo.packageName)) {
+                return true;
             }
         }
 

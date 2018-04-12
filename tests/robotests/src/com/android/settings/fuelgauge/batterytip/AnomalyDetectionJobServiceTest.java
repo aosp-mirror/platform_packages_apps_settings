@@ -142,6 +142,31 @@ public class AnomalyDetectionJobServiceTest {
     }
 
     @Test
+    public void testSaveAnomalyToDatabase_systemApp_doNotSaveButLog() {
+        final ArrayList<String> cookies = new ArrayList<>();
+        cookies.add(SUBSCRIBER_COOKIES_AUTO_RESTRICTION);
+        mBundle.putStringArrayList(StatsManager.EXTRA_STATS_BROADCAST_SUBSCRIBER_COOKIES, cookies);
+        doReturn(SYSTEM_PACKAGE).when(mBatteryUtils).getPackageName(anyInt());
+        doReturn(false).when(mPowerWhitelistBackend).isSysWhitelisted(SYSTEM_PACKAGE);
+        doReturn(Process.FIRST_APPLICATION_UID).when(
+                mAnomalyDetectionJobService).extractUidFromStatsDimensionsValue(any());
+        doReturn(true).when(mBatteryUtils).shouldHideAnomaly(any(), anyInt());
+
+        mAnomalyDetectionJobService.saveAnomalyToDatabase(mContext, mBatteryStatsHelper,
+                mUserManager, mBatteryDatabaseManager, mBatteryUtils, mPolicy,
+                mPowerWhitelistBackend, mContext.getContentResolver(),
+                mFeatureFactory.powerUsageFeatureProvider,
+                mFeatureFactory.metricsFeatureProvider, mBundle);
+
+        verify(mBatteryDatabaseManager, never()).insertAnomaly(anyInt(), anyString(), anyInt(),
+                anyInt(), anyLong());
+        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
+                MetricsProto.MetricsEvent.ACTION_ANOMALY_IGNORED,
+                SYSTEM_PACKAGE,
+                Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, ANOMALY_TYPE));
+    }
+
+    @Test
     public void testSaveAnomalyToDatabase_systemUid_doNotSave() {
         doReturn(Process.SYSTEM_UID).when(
                 mAnomalyDetectionJobService).extractUidFromStatsDimensionsValue(any());
