@@ -159,9 +159,10 @@ public class VpnPreferenceController extends AbstractPreferenceController
         ThreadUtils.postOnMainThread(() -> mPreference.setSummary(summary));
     }
 
-    private String getNameForVpnConfig(VpnConfig cfg, UserHandle user) {
+    @VisibleForTesting
+    String getNameForVpnConfig(VpnConfig cfg, UserHandle user) {
         if (cfg.legacy) {
-            return mContext.getString(R.string.bluetooth_connected);
+            return mContext.getString(R.string.wifi_display_status_connected);
         }
         // The package name for an active VPN is stored in the 'user' field of its VpnConfig
         final String vpnPackage = cfg.user;
