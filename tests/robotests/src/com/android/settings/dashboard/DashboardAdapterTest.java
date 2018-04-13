@@ -18,6 +18,7 @@ package com.android.settings.dashboard;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.reset;
@@ -30,6 +31,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
+import android.os.Bundle;
 import android.service.settings.suggestions.Suggestion;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
@@ -46,6 +48,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settingslib.drawer.Tile;
+import com.android.settingslib.drawer.TileUtils;
 import com.android.settingslib.utils.IconCache;
 
 import org.junit.Before;
@@ -193,24 +196,48 @@ public class DashboardAdapterTest {
 
     @Test
     public void onBindTile_externalTile_shouldUpdateIcon() {
-        final Context context = RuntimeEnvironment.application;
+        final Context context = spy(RuntimeEnvironment.application);
         final View view = LayoutInflater.from(context).inflate(R.layout.dashboard_tile, null);
         final DashboardAdapter.DashboardItemHolder holder =
                 new DashboardAdapter.DashboardItemHolder(view);
         final Tile tile = new Tile();
-        tile.icon = mock(Icon.class);
+        tile.icon = Icon.createWithResource(context, R.drawable.ic_settings);
         when(tile.icon.getResPackage()).thenReturn("another.package");
 
-        final IconCache iconCache = mock(IconCache.class);
-        when(iconCache.getIcon(tile.icon)).thenReturn(context.getDrawable(R.drawable.ic_settings));
+        final IconCache iconCache = new IconCache(context);
 
         mDashboardAdapter = new DashboardAdapter(context, null /* savedInstanceState */,
                 null /* conditions */, null /* suggestionControllerMixin */, null /* lifecycle */);
         ReflectionHelpers.setField(mDashboardAdapter, "mCache", iconCache);
 
+        doReturn("another.package").when(context).getPackageName();
         mDashboardAdapter.onBindTile(holder, tile);
 
-        verify(iconCache).updateIcon(eq(tile.icon), any(RoundedHomepageIcon.class));
+        assertThat(iconCache.getIcon(tile.icon)).isInstanceOf(RoundedHomepageIcon.class);
+    }
+
+    @Test
+    public void onBindTile_externalTileWithBackgroundColorHint_shouldUpdateIcon() {
+        final Context context = spy(RuntimeEnvironment.application);
+        final View view = LayoutInflater.from(context).inflate(R.layout.dashboard_tile, null);
+        final DashboardAdapter.DashboardItemHolder holder =
+                new DashboardAdapter.DashboardItemHolder(view);
+        final Tile tile = new Tile();
+        tile.metaData = new Bundle();
+        tile.metaData.putInt(TileUtils.META_DATA_PREFERENCE_ICON_BACKGROUND_HINT,
+                R.color.memory_critical);
+        tile.icon = Icon.createWithResource(context, R.drawable.ic_settings);
+        final IconCache iconCache = new IconCache(context);
+        mDashboardAdapter = new DashboardAdapter(context, null /* savedInstanceState */,
+                null /* conditions */, null /* suggestionControllerMixin */, null /* lifecycle */);
+        ReflectionHelpers.setField(mDashboardAdapter, "mCache", iconCache);
+
+        doReturn("another.package").when(context).getPackageName();
+        mDashboardAdapter.onBindTile(holder, tile);
+
+        final RoundedHomepageIcon homepageIcon = (RoundedHomepageIcon) iconCache.getIcon(tile.icon);
+        assertThat(homepageIcon.mBackgroundColor)
+                .isEqualTo(RuntimeEnvironment.application.getColor(R.color.memory_critical));
     }
 
     @Test
