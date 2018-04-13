@@ -22,7 +22,6 @@ import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.bluetooth.BluetoothSwitchPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.nfc.NfcPreferenceController;
@@ -77,13 +76,8 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
                 new NfcPreferenceController(context);
         controllers.add(nfcPreferenceController);
 
-        final BluetoothSwitchPreferenceController bluetoothPreferenceController =
-                new BluetoothSwitchPreferenceController(context);
-        controllers.add(bluetoothPreferenceController);
-
         if (lifecycle != null) {
             lifecycle.addObserver(nfcPreferenceController);
-            lifecycle.addObserver(bluetoothPreferenceController);
         }
 
         return controllers;

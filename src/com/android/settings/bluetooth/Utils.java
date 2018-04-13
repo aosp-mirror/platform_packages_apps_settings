@@ -21,6 +21,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.widget.Toast;
 
@@ -142,4 +143,8 @@ public final class Utils {
         }
     };
 
+    public static boolean isBluetoothScanningEnabled(Context context) {
+        return Settings.Global.getInt(context.getContentResolver(),
+                Settings.Global.BLE_SCAN_ALWAYS_AVAILABLE, 0) == 1;
+    }
 }
