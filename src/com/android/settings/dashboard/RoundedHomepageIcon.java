@@ -16,13 +16,20 @@
 
 package com.android.settings.dashboard;
 
+import static android.support.annotation.VisibleForTesting.NONE;
+
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.support.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 
 public class RoundedHomepageIcon extends LayerDrawable {
+
+    @VisibleForTesting(otherwise = NONE)
+    int mBackgroundColor = -1;
 
     public RoundedHomepageIcon(Context context, Drawable foreground) {
         super(new Drawable[] {
@@ -32,5 +39,10 @@ public class RoundedHomepageIcon extends LayerDrawable {
         final int insetPx = context.getResources()
                 .getDimensionPixelSize(R.dimen.dashboard_tile_foreground_image_inset);
         setLayerInset(1 /* index */, insetPx, insetPx, insetPx, insetPx);
+    }
+
+    public void setBackgroundColor(int color) {
+        mBackgroundColor = color;
+        getDrawable(0).setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
     }
 }

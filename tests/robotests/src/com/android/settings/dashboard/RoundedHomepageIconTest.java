@@ -17,10 +17,16 @@
 package com.android.settings.dashboard;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.ShapeDrawable;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -43,10 +49,22 @@ public class RoundedHomepageIconTest {
     @Test
     public void createIcon_shouldSetBackgroundAndInset() {
         final RoundedHomepageIcon icon =
-            new RoundedHomepageIcon(mContext, new ColorDrawable(Color.BLACK));
+                new RoundedHomepageIcon(mContext, new ColorDrawable(Color.BLACK));
 
         assertThat(icon.getNumberOfLayers()).isEqualTo(2);
         assertThat(icon.getDrawable(0))
-            .isEqualTo(mContext.getDrawable(R.drawable.ic_homepage_generic_background));
+                .isEqualTo(mContext.getDrawable(R.drawable.ic_homepage_generic_background));
+    }
+
+    @Test
+    public void setBackgroundColor_shouldUpdateColorFilter() {
+        final RoundedHomepageIcon icon =
+                spy(new RoundedHomepageIcon(mContext, new ColorDrawable(Color.BLACK)));
+        final ShapeDrawable background = mock(ShapeDrawable.class);
+        when(icon.getDrawable(0)).thenReturn(background);
+
+        icon.setBackgroundColor(Color.BLUE);
+
+        verify(background).setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_ATOP);
     }
 }
