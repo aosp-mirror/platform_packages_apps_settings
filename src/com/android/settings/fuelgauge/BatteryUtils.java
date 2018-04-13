@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.BatteryStats;
@@ -594,6 +595,22 @@ public class BatteryUtils {
         }
 
         return false;
+    }
+
+    /**
+     * Return version number of an app represented by {@code packageName}, and return -1 if not
+     * found.
+     */
+    public long getAppLongVersionCode(String packageName) {
+        try {
+            final PackageInfo packageInfo = mPackageManager.getPackageInfo(packageName,
+                    0 /* flags */);
+            return packageInfo.getLongVersionCode();
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "Cannot find package: " + packageName, e);
+        }
+
+        return -1L;
     }
 }
 
