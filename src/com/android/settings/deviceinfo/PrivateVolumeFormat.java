@@ -17,7 +17,6 @@
 package com.android.settings.deviceinfo;
 
 import static android.os.storage.DiskInfo.EXTRA_DISK_ID;
-
 import static com.android.settings.deviceinfo.StorageWizardBase.EXTRA_FORMAT_FORGET_UUID;
 import static com.android.settings.deviceinfo.StorageWizardBase.EXTRA_FORMAT_PRIVATE;
 
@@ -36,9 +35,9 @@ import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.core.InstrumentedFragment;
 
-public class PrivateVolumeFormat extends InstrumentedPreferenceFragment {
+public class PrivateVolumeFormat extends InstrumentedFragment {
     private VolumeInfo mVolume;
     private DiskInfo mDisk;
 
