@@ -17,4 +17,27 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/domain_urls_title" />
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/domain_urls_title"
+    android:key="manage_domain_url_screen">
+
+    <PreferenceCategory
+        android:key="web_action_category"
+        android:title="@string/web_action_section_title"
+        settings:controller="com.android.settings.applications.managedomainurls.WebActionCategoryController">
+        <SwitchPreference
+            android:key="instant_app_web_action_toggle"
+            android:title="@string/web_action_enable_title"
+            android:summary="@string/web_action_enable_summary"
+            settings:controller="com.android.settings.applications.managedomainurls.InstantAppWebActionPreferenceController" />
+        <Preference
+            android:key="instant_app_web_action_pref"
+            android:title="@string/instant_apps_settings"
+            settings:controller="com.android.settings.applications.managedomainurls.InstantAppAccountPreferenceController" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="installed_apps_web_action"
+        android:title="@string/domain_url_section_title"
+        settings:controller="com.android.settings.applications.managedomainurls.DomainAppPreferenceController" />
+</PreferenceScreen>
