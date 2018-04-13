@@ -146,6 +146,7 @@ public class AnomalyDetectionJobService extends JobService {
                     : Settings.Global.getInt(contentResolver,
                             Settings.Global.APP_AUTO_RESTRICTION_ENABLED, ON) == ON;
             final String packageName = batteryUtils.getPackageName(uid);
+            final long versionCode = batteryUtils.getAppLongVersionCode(packageName);
 
             final boolean anomalyDetected;
             if (isExcessiveBackgroundAnomaly(anomalyInfo)) {
@@ -162,7 +163,9 @@ public class AnomalyDetectionJobService extends JobService {
                             MetricsProto.MetricsEvent.ACTION_ANOMALY_IGNORED,
                             packageName,
                             Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT,
-                                    anomalyInfo.anomalyType));
+                                    anomalyInfo.anomalyType),
+                            Pair.create(MetricsProto.MetricsEvent.FIELD_APP_VERSION_CODE,
+                                    versionCode));
                 } else {
                     if (autoFeatureOn && anomalyInfo.autoRestriction) {
                         // Auto restrict this app
@@ -180,7 +183,9 @@ public class AnomalyDetectionJobService extends JobService {
                             MetricsProto.MetricsEvent.ACTION_ANOMALY_TRIGGERED,
                             packageName,
                             Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_TYPE,
-                                    anomalyInfo.anomalyType));
+                                    anomalyInfo.anomalyType),
+                            Pair.create(MetricsProto.MetricsEvent.FIELD_APP_VERSION_CODE,
+                                    versionCode));
                 }
             }
         } catch (NullPointerException | IndexOutOfBoundsException e) {

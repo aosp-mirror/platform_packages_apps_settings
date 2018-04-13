@@ -79,6 +79,7 @@ public class AnomalyDetectionJobServiceTest {
     private static final String SUBSCRIBER_COOKIES_NOT_AUTO_RESTRICTION =
             "anomaly_type=6,auto_restriction=false";
     private static final int ANOMALY_TYPE = 6;
+    private static final long VERSION_CODE = 15;
     @Mock
     private BatteryStatsHelper mBatteryStatsHelper;
     @Mock
@@ -107,6 +108,7 @@ public class AnomalyDetectionJobServiceTest {
         mBundle = new Bundle();
         mBundle.putParcelable(StatsManager.EXTRA_STATS_DIMENSIONS_VALUE, mStatsDimensionsValue);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
+        when(mBatteryUtils.getAppLongVersionCode(any())).thenReturn(VERSION_CODE);
 
         mAnomalyDetectionJobService = spy(new AnomalyDetectionJobService());
     }
@@ -163,7 +165,8 @@ public class AnomalyDetectionJobServiceTest {
         verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
                 MetricsProto.MetricsEvent.ACTION_ANOMALY_IGNORED,
                 SYSTEM_PACKAGE,
-                Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, ANOMALY_TYPE));
+                Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, ANOMALY_TYPE),
+                Pair.create(MetricsProto.MetricsEvent.FIELD_APP_VERSION_CODE, VERSION_CODE));
     }
 
     @Test
@@ -217,7 +220,8 @@ public class AnomalyDetectionJobServiceTest {
         verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
                 MetricsProto.MetricsEvent.ACTION_ANOMALY_TRIGGERED,
                 SYSTEM_PACKAGE,
-                Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_TYPE, ANOMALY_TYPE));
+                Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_TYPE, ANOMALY_TYPE),
+                Pair.create(MetricsProto.MetricsEvent.FIELD_APP_VERSION_CODE, VERSION_CODE));
     }
 
 
@@ -242,7 +246,8 @@ public class AnomalyDetectionJobServiceTest {
         verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
                 MetricsProto.MetricsEvent.ACTION_ANOMALY_TRIGGERED,
                 SYSTEM_PACKAGE,
-                Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_TYPE, ANOMALY_TYPE));
+                Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_TYPE, ANOMALY_TYPE),
+                Pair.create(MetricsProto.MetricsEvent.FIELD_APP_VERSION_CODE, VERSION_CODE));
     }
 
     @Test
