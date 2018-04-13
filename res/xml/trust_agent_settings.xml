@@ -14,11 +14,10 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="trust_agents"
-    android:title="@string/manage_trust_agents">
-
-    <!-- Needed so PreferenceGroupAdapter allows SwitchPreference to be
-         recycled. Removed in onResume -->
-    <SwitchPreference android:key="dummy_preference" />
+    android:title="@string/manage_trust_agents"
+    settings:controller="com.android.settings.security.trustagent.TrustAgentsPreferenceController">
 </PreferenceScreen>

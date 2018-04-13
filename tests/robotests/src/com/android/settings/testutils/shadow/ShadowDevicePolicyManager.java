@@ -5,6 +5,7 @@ import android.annotation.Nullable;
 import android.annotation.UserIdInt;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
+import android.os.PersistableBundle;
 
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Implementation;
@@ -12,6 +13,7 @@ import org.robolectric.annotation.Implements;
 import org.robolectric.shadow.api.Shadow;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -74,5 +76,11 @@ public class ShadowDevicePolicyManager extends org.robolectric.shadows.ShadowDev
     public static ShadowDevicePolicyManager getShadow() {
         return (ShadowDevicePolicyManager) Shadow.extract(
                 RuntimeEnvironment.application.getSystemService(DevicePolicyManager.class));
+    }
+
+    public @Nullable
+    List<PersistableBundle> getTrustAgentConfiguration(
+            @Nullable ComponentName admin, @NonNull ComponentName agent) {
+        return null;
     }
 }
