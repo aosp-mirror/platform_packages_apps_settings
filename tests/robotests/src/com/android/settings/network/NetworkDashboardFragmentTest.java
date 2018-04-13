@@ -73,17 +73,6 @@ public class NetworkDashboardFragmentTest {
     }
 
     @Test
-    public void testPrepareActionBar_networkResetShouldBeCreated() {
-        final NetworkResetActionMenuController resetController =
-                mock(NetworkResetActionMenuController.class);
-        ReflectionHelpers.setField(mFragment, "mNetworkResetController", resetController);
-
-        mFragment.onCreateOptionsMenu(null, null);
-
-        verify(resetController).buildMenuItem(nullable(Menu.class));
-    }
-
-    @Test
     public void testSummaryProvider_hasMobileAndHotspot_shouldReturnMobileSummary() {
         final MobileNetworkPreferenceController mobileNetworkPreferenceController =
                 mock(MobileNetworkPreferenceController.class);
