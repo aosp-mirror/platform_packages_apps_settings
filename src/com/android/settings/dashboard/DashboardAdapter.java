@@ -17,6 +17,7 @@ package com.android.settings.dashboard;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.service.settings.suggestions.Suggestion;
@@ -47,6 +48,7 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
+import com.android.settingslib.drawer.TileUtils;
 import com.android.settingslib.suggestions.SuggestionControllerMixin;
 import com.android.settingslib.utils.IconCache;
 
@@ -316,6 +318,20 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         if (!TextUtils.equals(tile.icon.getResPackage(), mContext.getPackageName())
                 && !(icon instanceof RoundedHomepageIcon)) {
             icon = new RoundedHomepageIcon(mContext, icon);
+            try {
+                if (tile.metaData != null) {
+                    final int colorRes = tile.metaData.getInt(
+                            TileUtils.META_DATA_PREFERENCE_ICON_BACKGROUND_HINT, 0 /* default */);
+                    if (colorRes != 0) {
+                        final int bgColor = mContext.getPackageManager()
+                                .getResourcesForApplication(tile.icon.getResPackage())
+                                .getColor(colorRes, null /* theme */);
+                        ((RoundedHomepageIcon) icon).setBackgroundColor(bgColor);
+                    }
+                }
+            } catch (PackageManager.NameNotFoundException e) {
+                Log.e(TAG, "Failed to set background color for " + tile.intent.getPackage());
+            }
             mCache.updateIcon(tile.icon, icon);
         }
         holder.icon.setImageDrawable(icon);
