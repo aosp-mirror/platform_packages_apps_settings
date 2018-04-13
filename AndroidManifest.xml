@@ -1301,6 +1301,22 @@
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
+        <activity
+            android:name="Settings$ScanningSettingsActivity"
+            android:label="@string/location_scanning_screen_title"
+            android:icon="@drawable/ic_settings_location"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:taskAffinity="com.android.settings"
+            android:parentActivityName="Settings">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.LOCATION_SCANNING_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.location.ScanningSettings" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
 
         <activity
             android:name=".Settings$SecurityDashboardActivity"
