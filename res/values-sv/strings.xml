@@ -349,10 +349,8 @@
     <string name="zone_info_footer_no_dst" msgid="8652423870143056964">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> används. Sommartid gäller inte."</string>
     <string name="zone_time_type_dst" msgid="8850494578766845276">"Sommartid"</string>
     <string name="zone_time_type_standard" msgid="3462424485380376522">"Standardtid"</string>
-    <!-- no translation found for zone_menu_by_region (8370437123807764346) -->
-    <skip />
-    <!-- no translation found for zone_menu_by_offset (7161573994228041794) -->
-    <skip />
+    <string name="zone_menu_by_region" msgid="8370437123807764346">"Välj efter område"</string>
+    <string name="zone_menu_by_offset" msgid="7161573994228041794">"Välj efter UTC-förskjutning"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Datum"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Tid"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Lås automatiskt"</string>
@@ -2151,12 +2149,9 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"Surfplattan används mer än vanligt"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"Enheten används mer än vanligt"</string>
     <string name="battery_tip_high_usage_summary" msgid="6341311803303581798">"Batteriet kan ta slut snart"</string>
-    <!-- no translation found for battery_tip_dialog_message (7434089311164898581) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (2987443811119964310) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (1993039726576708815) -->
-    <skip />
+    <string name="battery_tip_dialog_message" product="default" msgid="7434089311164898581">"Mobilen har använts mer än vanligt. Batteriet kan ta slut snabbare än beräknat.\n\nDe <xliff:g id="NUMBER">%1$d</xliff:g> mest använda apparna sedan den senaste fulladdningen (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="2987443811119964310">"Surfplattan har använts mer än vanligt. Batteriet kan ta slut snabbare än beräknat.\n\nDe <xliff:g id="NUMBER">%1$d</xliff:g> mest använda apparna sedan den senaste fulladdningen (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="1993039726576708815">"Enheten har använts mer än vanligt. Batteriet kan ta slut snabbare än beräknat.\n\nDe <xliff:g id="NUMBER">%1$d</xliff:g> mest använda apparna sedan den senaste fulladdningen (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="other">Begränsa %1$d appar</item>
       <item quantity="one">Begränsa %1$d app</item>
@@ -2198,8 +2193,7 @@
       <item quantity="other">Begränsar batterianvändningen för %1$d appar</item>
       <item quantity="one">Begränsar batterianvändningen för %1$d app</item>
     </plurals>
-    <!-- no translation found for restricted_app_detail_footer (6739863162364046859) -->
-    <skip />
+    <string name="restricted_app_detail_footer" msgid="6739863162364046859">"De här apparna har dragit batteri i bakgrunden. Begränsade appar kanske inte fungerar som de ska, och aviseringar kan fördröjas."</string>
     <string name="battery_auto_restriction_title" msgid="6553271897488963709">"Använd Battery Manager"</string>
     <string name="battery_auto_restriction_summary" msgid="8561335400991281062">"Upptäck när appar drar mycket batteri"</string>
     <string name="battery_manager_on" msgid="8643310865054362396">"På/upptäcker när appar drar mycket batteri"</string>
@@ -3087,8 +3081,7 @@
     <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"Visa inte popup-aviseringar på skärmen"</string>
     <string name="zen_mode_block_effect_status" msgid="6642532634292373081">"Dölj ikoner i statusfältet"</string>
     <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"Dölj aviseringsprickar"</string>
-    <!-- no translation found for zen_mode_block_effect_ambient (4704755879961212658) -->
-    <skip />
+    <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"Väck inte enheten för aviseringar"</string>
     <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"Dölj från aviseringslistan"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"Aldrig"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="1230265589026355094">"När skärmen är avstängd"</string>
@@ -3131,8 +3124,7 @@
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Blockera när skärmen inte är på"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Med Stör ej kan du göra mer än att bara blockera ovälkomna ljud – du kan även blockera grafik. Det kan vara användbart när du försöker sova, koncentrera dig eller använda mobilen mindre."</string>
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Blockera ljud och grafik"</string>
-    <!-- no translation found for zen_onboarding_screen_off_summary (5393041573999488088) -->
-    <skip />
+    <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Sätt inte på skärmen eller väck enheten för aviseringar"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Visa inga aviseringar alls, förutom för grundläggande aktivitet och status för mobilen"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Jobbprofilens ljud"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Använd pers. profilens ljud"</string>
@@ -3233,9 +3225,11 @@
     </plurals>
     <string name="no_channels" msgid="3077375508177744586">"Den här appen har inte skickat några aviseringar"</string>
     <string name="app_settings_link" msgid="8894946007543660906">"Fler inställningar i appen"</string>
-    <!-- no translation found for app_notification_listing_summary_zero (8046168435207424440) -->
-    <skip />
-    <!-- no translation found for app_notification_listing_summary_others (6709582776823665660) -->
+    <string name="app_notification_listing_summary_zero" msgid="8046168435207424440">"Aktiverat för alla appar"</string>
+    <plurals name="app_notification_listing_summary_others" formatted="false" msgid="6709582776823665660">
+      <item quantity="other">Inaktiverat för <xliff:g id="COUNT_1">%d</xliff:g> appar</item>
+      <item quantity="one">Inaktiverat för <xliff:g id="COUNT_0">%d</xliff:g> app</item>
+    </plurals>
     <plurals name="deleted_channels" formatted="false" msgid="8028574302599397935">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> kategorier har raderats</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> kategori har raderats</item>
@@ -3365,8 +3359,7 @@
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Förutom att låsa upp enheten med fingeravtryck kan du skydda den med ett lösenord som måste anges vid start. Enheten kan inte ta emot samtal, meddelanden eller aviseringar (inklusive alarm) innan den har startats.\n\nDetta gör det lättare att skydda data på borttappade eller stulna enheter. Vill du att lösenordet ska krävas när enheten startas?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Ja"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Nej"</string>
-    <!-- no translation found for restricted_true_label (4761453839409220473) -->
-    <skip />
+    <string name="restricted_true_label" msgid="4761453839409220473">"Begränsad"</string>
     <string name="restricted_false_label" msgid="3279282180297058755">"Appen kan dra batteri i bakgrunden"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Ska pinkod krävas?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Kräv grafiskt lösenord?"</string>

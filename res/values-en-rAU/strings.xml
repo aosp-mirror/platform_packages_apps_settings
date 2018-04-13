@@ -349,10 +349,8 @@
     <string name="zone_info_footer_no_dst" msgid="8652423870143056964">"Uses <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. No daylight savings time."</string>
     <string name="zone_time_type_dst" msgid="8850494578766845276">"British Summer Time (also known as daylight savings time)"</string>
     <string name="zone_time_type_standard" msgid="3462424485380376522">"Standard time"</string>
-    <!-- no translation found for zone_menu_by_region (8370437123807764346) -->
-    <skip />
-    <!-- no translation found for zone_menu_by_offset (7161573994228041794) -->
-    <skip />
+    <string name="zone_menu_by_region" msgid="8370437123807764346">"Select by region"</string>
+    <string name="zone_menu_by_offset" msgid="7161573994228041794">"Select by UTC offset"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Date"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Time"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Automatically lock"</string>
@@ -683,8 +681,7 @@
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> wants to access your contacts and call history."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> wants to pair with Bluetooth. When connected, it will have access to your contacts and call history."</string>
     <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Paired devices"</string>
-    <!-- no translation found for bluetooth_preference_found_media_devices (1617401232446299411) -->
-    <skip />
+    <string name="bluetooth_preference_found_media_devices" msgid="1617401232446299411">"Available devices"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"No devices available"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Connect"</string>
     <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"Disconnect"</string>
@@ -2152,12 +2149,9 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"Tablet used more than usual"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"Device used more than usual"</string>
     <string name="battery_tip_high_usage_summary" msgid="6341311803303581798">"Battery may run out soon"</string>
-    <!-- no translation found for battery_tip_dialog_message (7434089311164898581) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (2987443811119964310) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (1993039726576708815) -->
-    <skip />
+    <string name="battery_tip_dialog_message" product="default" msgid="7434089311164898581">"Your phone has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="NUMBER">%1$d</xliff:g> apps since last full charge(<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="2987443811119964310">"Your tablet has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="NUMBER">%1$d</xliff:g> apps since last full charge(<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="1993039726576708815">"Your device has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="NUMBER">%1$d</xliff:g> apps since last full charge(<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="other">Restrict %1$d apps</item>
       <item quantity="one">Restrict %1$d app</item>
@@ -2199,8 +2193,7 @@
       <item quantity="other">Limiting battery usage for %1$d apps</item>
       <item quantity="one">Limiting battery usage for %1$d app</item>
     </plurals>
-    <!-- no translation found for restricted_app_detail_footer (6739863162364046859) -->
-    <skip />
+    <string name="restricted_app_detail_footer" msgid="6739863162364046859">"These apps have been using battery in the background. Restricted apps may not work properly and notifications may be delayed."</string>
     <string name="battery_auto_restriction_title" msgid="6553271897488963709">"Use Battery Manager"</string>
     <string name="battery_auto_restriction_summary" msgid="8561335400991281062">"Detect when apps drain battery"</string>
     <string name="battery_manager_on" msgid="8643310865054362396">"On/detecting when apps drain battery"</string>
@@ -3088,8 +3081,7 @@
     <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"Don\'t pop notifications on screen"</string>
     <string name="zen_mode_block_effect_status" msgid="6642532634292373081">"Hide status bar icons"</string>
     <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"Hide notification dots"</string>
-    <!-- no translation found for zen_mode_block_effect_ambient (4704755879961212658) -->
-    <skip />
+    <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"Don\'t wake for notifications"</string>
     <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"Hide from notification list"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"Never"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="1230265589026355094">"When screen is off"</string>
@@ -3132,8 +3124,7 @@
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Block when the screen is off"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Do Not Disturb can do more than block unwanted sounds – it can block visuals too. This may be helpful if you\'re trying to sleep, focus or limit time spent on your phone."</string>
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Block sounds and visuals"</string>
-    <!-- no translation found for zen_onboarding_screen_off_summary (5393041573999488088) -->
-    <skip />
+    <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Don\'t turn on the screen or wake for notifications"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Don\'t show notifications at all, except for basic phone activity and status"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Work profile sounds"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Use personal profile sounds"</string>
@@ -3234,9 +3225,11 @@
     </plurals>
     <string name="no_channels" msgid="3077375508177744586">"This app has not posted any notifications"</string>
     <string name="app_settings_link" msgid="8894946007543660906">"Additional settings in the app"</string>
-    <!-- no translation found for app_notification_listing_summary_zero (8046168435207424440) -->
-    <skip />
-    <!-- no translation found for app_notification_listing_summary_others (6709582776823665660) -->
+    <string name="app_notification_listing_summary_zero" msgid="8046168435207424440">"On for all apps"</string>
+    <plurals name="app_notification_listing_summary_others" formatted="false" msgid="6709582776823665660">
+      <item quantity="other">Off for <xliff:g id="COUNT_1">%d</xliff:g> apps</item>
+      <item quantity="one">Off for <xliff:g id="COUNT_0">%d</xliff:g> app</item>
+    </plurals>
     <plurals name="deleted_channels" formatted="false" msgid="8028574302599397935">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> categories deleted</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> category deleted</item>
@@ -3366,8 +3359,7 @@
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"In addition to using your fingerprint to unlock your device, you can further protect this device by requiring your password before it starts up. Until the device starts up, it can’t receive calls, messages or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices. Require password to start your device?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Yes"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"No"</string>
-    <!-- no translation found for restricted_true_label (4761453839409220473) -->
-    <skip />
+    <string name="restricted_true_label" msgid="4761453839409220473">"Restricted"</string>
     <string name="restricted_false_label" msgid="3279282180297058755">"App can use battery in background"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Require PIN?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Require pattern?"</string>
@@ -3522,7 +3514,7 @@
     <string name="usb_use_charging_only" msgid="4800495064747543954">"No data transfer"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Just charge this device"</string>
     <string name="usb_use_power_only" msgid="3236391691786786070">"Charge connected device"</string>
-    <string name="usb_use_file_transfers" msgid="1223134119354320726">"File Transfer"</string>
+    <string name="usb_use_file_transfers" msgid="1223134119354320726">"File transfer"</string>
     <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"Transfer files to another device"</string>
     <string name="usb_use_photo_transfers" msgid="8192719651229326283">"PTP"</string>
     <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"Transfer photos or files if MTP is not supported (PTP)"</string>
@@ -4083,17 +4075,13 @@
     <string name="battery_suggestion_summary" msgid="4585677159811722359"></string>
     <string name="gesture_prevent_ringing_screen_title" msgid="7840226017975251549">"Prevent ringing"</string>
     <string name="gesture_prevent_ringing_title" msgid="2483159069038138740">"Press Power &amp; Volume Up together"</string>
-    <!-- no translation found for gesture_prevent_ringing_sound_title (5724512060316688779) -->
-    <skip />
+    <string name="gesture_prevent_ringing_sound_title" msgid="5724512060316688779">"Shortcut to prevent ringing"</string>
     <string name="prevent_ringing_option_vibrate" msgid="7286821846542822661">"Vibrate"</string>
     <string name="prevent_ringing_option_mute" msgid="7551545579059879853">"Mute"</string>
     <string name="prevent_ringing_option_none" msgid="4656046650769569175">"Do nothing"</string>
-    <!-- no translation found for prevent_ringing_option_vibrate_summary (1157524435626890116) -->
-    <skip />
-    <!-- no translation found for prevent_ringing_option_mute_summary (4472465110708640980) -->
-    <skip />
-    <!-- no translation found for prevent_ringing_option_none_summary (5013718946609276137) -->
-    <skip />
+    <string name="prevent_ringing_option_vibrate_summary" msgid="1157524435626890116">"On (vibrate)"</string>
+    <string name="prevent_ringing_option_mute_summary" msgid="4472465110708640980">"On (mute)"</string>
+    <string name="prevent_ringing_option_none_summary" msgid="5013718946609276137">"Off"</string>
     <string name="pref_title_network_details" msgid="7186418845727358964">"Network details"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Your device name is visible to apps on your phone. It may also be seen by other people when you connect to Bluetooth devices or set up a Wi-Fi hotspot."</string>
     <string name="devices_title" msgid="7701726109334110391">"Devices"</string>
