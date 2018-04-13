@@ -98,8 +98,7 @@ public class BlockPreferenceController extends NotificationPreferenceController
             // it was blocked and we are unblocking it.
             if (blocked || originalImportance == IMPORTANCE_NONE) {
                 final int importance = blocked ? IMPORTANCE_NONE
-                        : DEFAULT_CHANNEL_ID.equals(mChannel.getId())
-                                ? IMPORTANCE_UNSPECIFIED : IMPORTANCE_DEFAULT;
+                        : isDefaultChannel() ? IMPORTANCE_UNSPECIFIED : IMPORTANCE_DEFAULT;
                 mChannel.setImportance(importance);
                 saveChannel();
             }

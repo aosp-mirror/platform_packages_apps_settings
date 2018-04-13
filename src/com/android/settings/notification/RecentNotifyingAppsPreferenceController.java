@@ -37,14 +37,13 @@ import android.util.Log;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
-import com.android.settings.applications.InstalledAppCounter;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settingslib.TwoTargetPreference;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.utils.StringUtil;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -211,6 +210,7 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
             pref.setKey(pkgName);
             pref.setTitle(appEntry.label);
             pref.setIcon(mIconDrawableFactory.getBadgedIcon(appEntry.info));
+            pref.setIconSize(TwoTargetPreference.ICON_SIZE_SMALL);
             pref.setSummary(StringUtil.formatRelativeTime(mContext,
                     System.currentTimeMillis() - app.getLastNotified(), true));
             pref.setOrder(i);

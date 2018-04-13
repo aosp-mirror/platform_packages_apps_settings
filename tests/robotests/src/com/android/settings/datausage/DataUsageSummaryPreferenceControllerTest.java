@@ -31,13 +31,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkTemplate;
+import android.support.v7.widget.RecyclerView;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.applications.AppInfoWithHeaderTest;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
@@ -60,8 +60,6 @@ import org.mockito.ArgumentCaptor;
 
 import java.util.concurrent.TimeUnit;
 
-import android.support.v7.widget.RecyclerView;
-
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowEntityHeaderController.class)
 public class DataUsageSummaryPreferenceControllerTest {
@@ -69,8 +67,8 @@ public class DataUsageSummaryPreferenceControllerTest {
     private static final long UPDATE_BACKOFF_MS = TimeUnit.MINUTES.toMillis(13);
     private static final long CYCLE_BACKOFF_MS = TimeUnit.DAYS.toMillis(6);
     private static final long CYCLE_LENGTH_MS = TimeUnit.DAYS.toMillis(30);
-    private static final long USAGE1 =  373000000L;
-    private static final long LIMIT1 = 1000000000L;
+    private static final long USAGE1 =  373 * BillingCycleSettings.MIB_IN_BYTES;
+    private static final long LIMIT1 = BillingCycleSettings.GIB_IN_BYTES;
     private static final String CARRIER_NAME = "z-mobile";
     private static final String PERIOD = "Feb";
 
@@ -154,7 +152,7 @@ public class DataUsageSummaryPreferenceControllerTest {
         ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
         verify(mSummaryPreference).setLimitInfo(captor.capture());
         CharSequence value = captor.getValue();
-        assertThat(value.toString()).isEqualTo("500 MB data warning / 1.00 GB data limit");
+        assertThat(value.toString()).isEqualTo("512 MB data warning / 1.00 GB data limit");
 
         verify(mSummaryPreference).setUsageInfo(info.cycleEnd, now - UPDATE_BACKOFF_MS,
                 CARRIER_NAME, 1 /* numPlans */, intent);
@@ -178,7 +176,7 @@ public class DataUsageSummaryPreferenceControllerTest {
         ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
         verify(mSummaryPreference).setLimitInfo(captor.capture());
         CharSequence value = captor.getValue();
-        assertThat(value.toString()).isEqualTo("500 MB data warning / 1.00 GB data limit");
+        assertThat(value.toString()).isEqualTo("512 MB data warning / 1.00 GB data limit");
 
         verify(mSummaryPreference).setUsageInfo(info.cycleEnd, now - UPDATE_BACKOFF_MS,
                 CARRIER_NAME, 0 /* numPlans */, intent);
@@ -200,7 +198,7 @@ public class DataUsageSummaryPreferenceControllerTest {
         ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
         verify(mSummaryPreference).setLimitInfo(captor.capture());
         CharSequence value = captor.getValue();
-        assertThat(value.toString()).isEqualTo("500 MB data warning / 1.00 GB data limit");
+        assertThat(value.toString()).isEqualTo("512 MB data warning / 1.00 GB data limit");
 
         verify(mSummaryPreference).setUsageInfo(
                 info.cycleEnd,
@@ -227,8 +225,7 @@ public class DataUsageSummaryPreferenceControllerTest {
         ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
         verify(mSummaryPreference).setLimitInfo(captor.capture());
         CharSequence value = captor.getValue();
-        assertThat(value.toString()).isEqualTo("500 MB data warning / 1.00 GB data limit");
-
+        assertThat(value.toString()).isEqualTo("512 MB data warning / 1.00 GB data limit");
         verify(mSummaryPreference).setUsageInfo(
                 info.cycleEnd,
                 -1L /* snapshotTime */,
@@ -260,7 +257,7 @@ public class DataUsageSummaryPreferenceControllerTest {
     public void testSummaryUpdate_warningOnly() {
         final long now = System.currentTimeMillis();
         final DataUsageController.DataUsageInfo info = createTestDataUsageInfo(now);
-        info.warningLevel = 1000000L;
+        info.warningLevel = BillingCycleSettings.MIB_IN_BYTES;
         info.limitLevel = 0L;
 
         final Intent intent = new Intent();
@@ -282,7 +279,7 @@ public class DataUsageSummaryPreferenceControllerTest {
         final long now = System.currentTimeMillis();
         final DataUsageController.DataUsageInfo info = createTestDataUsageInfo(now);
         info.warningLevel = 0L;
-        info.limitLevel = 1000000L;
+        info.limitLevel = BillingCycleSettings.MIB_IN_BYTES;
 
         final Intent intent = new Intent();
 
@@ -302,8 +299,8 @@ public class DataUsageSummaryPreferenceControllerTest {
     public void testSummaryUpdate_limitAndWarning() {
         final long now = System.currentTimeMillis();
         final DataUsageController.DataUsageInfo info = createTestDataUsageInfo(now);
-        info.warningLevel = 1000000L;
-        info.limitLevel = 1000000L;
+        info.warningLevel = BillingCycleSettings.MIB_IN_BYTES;
+        info.limitLevel = BillingCycleSettings.MIB_IN_BYTES;
 
         final Intent intent = new Intent();
 
@@ -324,8 +321,8 @@ public class DataUsageSummaryPreferenceControllerTest {
     public void testSummaryUpdate_noSim_shouldSetWifiMode() {
         final long now = System.currentTimeMillis();
         final DataUsageController.DataUsageInfo info = createTestDataUsageInfo(now);
-        info.warningLevel = 1000000L;
-        info.limitLevel = 1000000L;
+        info.warningLevel = BillingCycleSettings.MIB_IN_BYTES;
+        info.limitLevel = BillingCycleSettings.MIB_IN_BYTES;
 
         final Intent intent = new Intent();
 

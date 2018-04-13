@@ -55,6 +55,7 @@ import com.android.settings.backup.ToggleBackupSettingFragment;
 import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
+import com.android.settings.connecteddevice.PreviouslyConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.usb.UsbDetailsFragment;
 import com.android.settings.datausage.DataUsageList;
 import com.android.settings.datausage.DataUsageSummary;
@@ -78,6 +79,7 @@ import com.android.settings.gestures.AssistGestureSettings;
 import com.android.settings.gestures.DoubleTapPowerSettings;
 import com.android.settings.gestures.DoubleTapScreenSettings;
 import com.android.settings.gestures.DoubleTwistGestureSettings;
+import com.android.settings.gestures.SwipeUpGestureSettings;
 import com.android.settings.gestures.PickupGestureSettings;
 import com.android.settings.gestures.SwipeToNotificationSettings;
 import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
@@ -188,6 +190,7 @@ public class SettingsGateway {
             DoubleTapScreenSettings.class.getName(),
             PickupGestureSettings.class.getName(),
             DoubleTwistGestureSettings.class.getName(),
+            SwipeUpGestureSettings.class.getName(),
             CryptKeeperSettings.class.getName(),
             DataUsageSummary.class.getName(),
             DataUsageSummaryLegacy.class.getName(),
@@ -255,6 +258,7 @@ public class SettingsGateway {
             DataUsageList.class.getName(),
             DirectoryAccessDetails.class.getName(),
             ToggleBackupSettingFragment.class.getName(),
+            PreviouslyConnectedDeviceDashboardFragment.class.getName(),
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

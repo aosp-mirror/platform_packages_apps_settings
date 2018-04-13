@@ -778,10 +778,10 @@
     <string name="zone_time_type_dst">Daylight savings time</string>
     <!-- Describes the time type "standard time" (used in zone_change_to_from_dst, when no zone specific name is available) -->
     <string name="zone_time_type_standard">Standard time</string>
-    <!-- The menu item to switch to selecting a time zone by region (default) -->
-    <string name="zone_menu_by_region">Show time zones by region</string>
-    <!-- The menu item to switch to selecting a time zone with a fixed offset (such as UTC or GMT+0200) -->
-    <string name="zone_menu_by_offset">Show time zones by UTC offset</string>
+    <!-- The menu item to switch to selecting a time zone by region (default) [CHAR LIMIT=30] -->
+    <string name="zone_menu_by_region">Select by region</string>
+    <!-- The menu item to switch to selecting a time zone with a fixed offset (such as UTC or GMT+0200) [CHAR LIMIT=30] -->
+    <string name="zone_menu_by_offset">Select by UTC offset</string>
 
     <!-- Title string shown above DatePicker, letting a user select system date
          [CHAR LIMIT=20] -->
@@ -1584,7 +1584,7 @@
     <!-- Bluetooth settings: The sub heading for devices which have already been paired with this device. [CHAR LIMIT=40] -->
     <string name="bluetooth_preference_paired_devices">Paired devices</string>
     <!-- Bluetooth settings: The sub heading for available devices during and after scanning. [CHAR LIMIT=40] -->
-    <string name="bluetooth_preference_found_media_devices">Available media devices</string>
+    <string name="bluetooth_preference_found_media_devices">Available devices</string>
     <!-- Bluetooth settings: The message displayed if no Bluetooth devices were found. [CHAR LIMIT=40] -->
     <string name="bluetooth_preference_no_found_devices">No devices available</string>
     <!-- Bluetooth settings.  Context menu item for a device.  Action will connect to all profiles on the device. -->
@@ -4891,10 +4891,6 @@
     <string name="background_activity_title">Background restriction</string>
     <!-- Summary for the background activity [CHAR_LIMIT=120] -->
     <string name="background_activity_summary">Allow the app to run in the background</string>
-    <!-- Summary for the background activity when it is on [CHAR_LIMIT=120] -->
-    <string name="background_activity_summary_on">App can run in the background when not in use</string>
-    <!-- Summary for the background activity when it is off [CHAR_LIMIT=120] -->
-    <string name="background_activity_summary_off">App\'s background activity is limited when not in use</string>
     <!-- Summary for the background activity when it is disabled [CHAR_LIMIT=120] -->
     <string name="background_activity_summary_disabled">App not allowed to run in background</string>
     <!-- TODO: Pending UX review. Summary for the background activity when it is whitlisted [CHAR_LIMIT=120] -->
@@ -5015,11 +5011,11 @@
     <!-- Summary for the battery high usage tip, which presents battery may run out soon [CHAR LIMIT=NONE] -->
     <string name="battery_tip_high_usage_summary">Battery may run out soon</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="default">Your phone has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps since last charge:</string>
+    <string name="battery_tip_dialog_message" product="default">Your phone has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps since last full charge(<xliff:g id="time_period_ago" example="1 hr ago">%2$s</xliff:g>):</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="tablet">Your tablet has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps since last charge:</string>
+    <string name="battery_tip_dialog_message" product="tablet">Your tablet has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps since last full charge(<xliff:g id="time_period_ago" example="1 hr ago">%2$s</xliff:g>):</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="device">Your device has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps since last charge:</string>
+    <string name="battery_tip_dialog_message" product="device">Your device has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps since last full charge(<xliff:g id="time_period_ago" example="1 hr ago">%2$s</xliff:g>):</string>
     <!-- Title for restricted app preference, showing how many app need to be restricted [CHAR LIMIT=NONE] -->
     <plurals name="battery_tip_restrict_title">
         <item quantity="one">Restrict %1$d app</item>
@@ -5089,7 +5085,7 @@
     </plurals>
 
     <!-- Footer message for restrict app details page -->
-    <string name="restricted_app_detail_footer">Apps shown here aren\'t behaving properly and have been using battery in the background.\n\nThese apps are now blocked from using battery in the background. As a result, some app notifications may be delayed.</string>
+    <string name="restricted_app_detail_footer">These apps have been using battery in the background. Restricted apps may not work properly and notifications may be delayed.</string>
 
     <!-- Title for auto restriction toggle -->
     <string name="battery_auto_restriction_title">Use Battery Manager</string>
@@ -5916,10 +5912,6 @@
     <string name="really_remove_account_message" product="device">Removing this account will delete all of its messages, contacts, and other data from the device!</string>
     <!-- This is shown if the autheticator for a given account fails to remove it. [CHAR LIMIT=NONE] -->
     <string name="remove_account_failed">This change isn\'t allowed by your admin</string>
-    <!-- What to show in messaging that refers to this provider, e.g. AccountSyncSettings -->
-    <string name="provider_label">Push subscriptions</string>
-    <!-- Formatter in AccountSyncSettings for each application we wish to synchronize, e.g. "Sync Calendar" -->
-    <string name="sync_item_title"><xliff:g id="authority" example="Calendar">%s</xliff:g></string>
     <!-- Title of dialog shown when you can't manually sync an item because it's disabled -->
     <string name="cant_sync_dialog_title">Can\u2019t manually sync</string>
     <!-- Messaage shown in dialog when you can't manually sync -->
@@ -6660,6 +6652,10 @@
     <string name="help_url_font_size" translatable="false"></string>
     <!-- Help URL, Display size [DO NOT TRANSLATE] -->
     <string name="help_url_display_size" translatable="false"></string>
+    <!-- Help URL, Auto brightness [DO NOT TRANSLATE] -->
+    <string name="help_url_auto_brightness" translatable="false" />
+    <!-- Help URL, Previously connected bluetooth devices [DO NOT TRANSLATE] -->
+    <string name="help_url_previously_connected_devices" translatable="false"></string>
 
     <string name="help_url_network_dashboard" translatable="false"></string>
     <string name="help_url_connected_devices" translatable="false"></string>
@@ -7230,7 +7226,7 @@
     <!-- Do not disturb: what to block option [CHAR LIMIT=NONE] -->
     <string name="zen_mode_block_effect_badge">Hide notification dots</string>
     <!-- Do not disturb: what to block option [CHAR LIMIT=NONE] -->
-    <string name="zen_mode_block_effect_ambient">Hide from ambient display</string>
+    <string name="zen_mode_block_effect_ambient">Don\'t wake for notifications</string>
     <!-- Do not disturb: what to block option [CHAR LIMIT=NONE] -->
     <string name="zen_mode_block_effect_list">Hide from notification list</string>
 
@@ -7316,6 +7312,16 @@
         <item quantity="one">1 rule can turn on automatically</item>
         <item quantity="other"><xliff:g id="on_count" example="3">%d</xliff:g> rules can turn on automatically</item>
     </plurals>
+
+    <string name="zen_onboarding_ok">Ok</string>
+    <string name="zen_onboarding_settings">Settings</string>
+    <string name="zen_onboarding_more_options">You can further customize this in Settings.</string>
+    <string name="zen_onboarding_screen_on_title">Block when the screen is on</string>
+    <string name="zen_onboarding_screen_off_title">Block when the screen is off</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description">Do Not Disturb can do more than block unwanted sounds - it can block visuals too. This may be helpful if you\'re trying to sleep, focus, or limit time spent on your phone.</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header">Block sounds and visuals</string>
+    <string name="zen_onboarding_screen_off_summary">Don\'t turn on the screen or wake for notifications</string>
+    <string name="zen_onboarding_screen_on_summary">Don\'t show notifications at all, except for basic phone activity and status</string>
 
     <!-- Work Sounds: Work sound settings section header.  [CHAR LIMIT=50] -->
     <string name="sound_work_settings">Work profile sounds</string>
@@ -7507,9 +7513,9 @@
     <string name="default_notification_assistant">Notification assistant</string>
 
     <!-- app summary of notification app list screen [CHAR LIMIT=100] -->
-    <string name="notifications_sent_daily">~<xliff:g id="number">%1$s</xliff:g> sent daily</string>
+    <string name="notifications_sent_daily">~<xliff:g id="number">%1$s</xliff:g> per day</string>
     <!-- app summary of notification app list screen [CHAR LIMIT=100] -->
-    <string name="notifications_sent_weekly">~<xliff:g id="number">%1$s</xliff:g> sent weekly</string>
+    <string name="notifications_sent_weekly">~<xliff:g id="number">%1$s</xliff:g> per week</string>
     <!-- app summary of notification app list screen [CHAR LIMIT=100] -->
     <string name="notifications_sent_never">Never</string>
 
@@ -7633,11 +7639,11 @@
     <string name="app_settings_link">Additional settings in the app</string>
 
     <!-- [CHAR LIMIT=45] App notification listing summary, blocked apps -->
-    <string name="app_notification_listing_summary_zero">Turned on for all apps</string>
+    <string name="app_notification_listing_summary_zero">On for all apps</string>
     <!-- [CHAR LIMIT=45] App notification listing summary, blocked apps -->
     <plurals name="app_notification_listing_summary_others">
-        <item quantity="one">Turned off for <xliff:g id="count" example="1">%d</xliff:g> app</item>
-        <item quantity="other">Turned off for <xliff:g id="count" example="10">%d</xliff:g> apps</item>
+        <item quantity="one">Off for <xliff:g id="count" example="1">%d</xliff:g> app</item>
+        <item quantity="other">Off for <xliff:g id="count" example="10">%d</xliff:g> apps</item>
     </plurals>
 
     <!-- [CHAR LIMIT=NONE] Footer listing a count of deleted channels. -->
@@ -8006,7 +8012,7 @@
     <string name="encryption_interstitial_no">No</string>
 
     <!-- Label to say yes to the question of whether app is restricted. [CHAR LIMIT=20] -->
-    <string name="restricted_true_label">App can\u2019t use battery in background</string>
+    <string name="restricted_true_label">Restricted</string>
     <!-- Label to say no to the question of whether app is restricted. [CHAR LIMIT=20] -->
     <string name="restricted_false_label">App can use battery in background</string>
 
@@ -9861,6 +9867,8 @@
     <string name="gesture_prevent_ringing_screen_title">Prevent ringing</string>
     <!-- Title for prevent ringing setting -->
     <string name="gesture_prevent_ringing_title">Press Power &amp; Volume Up together</string>
+    <!-- Title for prevent ringing setting -->
+    <string name="gesture_prevent_ringing_sound_title">Shortcut to prevent ringing</string>
     <!-- Option for prevent ringing setting -->
     <string name="prevent_ringing_option_vibrate">Vibrate</string>
     <!-- Option for prevent ringing setting -->
@@ -9868,11 +9876,11 @@
     <!-- Option for prevent ringing setting -->
     <string name="prevent_ringing_option_none">Do nothing</string>
     <!-- Summary for prevent ringing setting -->
-    <string name="prevent_ringing_option_vibrate_summary">Vibrate all calls and notifications</string>
+    <string name="prevent_ringing_option_vibrate_summary">On (vibrate)</string>
     <!-- Summary for prevent ringing setting -->
-    <string name="prevent_ringing_option_mute_summary">Mute all calls and notifications</string>
+    <string name="prevent_ringing_option_mute_summary">On (mute)</string>
     <!-- Summary for prevent ringing setting -->
-    <string name="prevent_ringing_option_none_summary">Do nothing</string>
+    <string name="prevent_ringing_option_none_summary">Off</string>
 
     <!-- Title for detail page of wifi network [CHAR LIMIT=30] -->
     <string name="pref_title_network_details">Network details</string>

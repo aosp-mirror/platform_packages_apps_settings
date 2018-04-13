@@ -63,19 +63,6 @@ public class PreventRingingGestureSettings extends DashboardFragment {
         return 0;
     }
 
-    @Override
-    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle());
-    }
-
-    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Lifecycle lifecycle) {
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new PreventRingingPreferenceController(context, lifecycle,
-                UserHandle.myUserId(),  KEY_PREVENT_RINGING));
-        return controllers;
-    }
-
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
@@ -84,12 +71,6 @@ public class PreventRingingGestureSettings extends DashboardFragment {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.prevent_ringing_gesture_settings;
                     return Arrays.asList(sir);
-                }
-
-                @Override
-                public List<AbstractPreferenceController> createPreferenceControllers(
-                        Context context) {
-                    return buildPreferenceControllers(context, null /* lifecycle */);
                 }
             };
 

@@ -68,8 +68,7 @@ public class PreventRingingPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mController = new PreventRingingPreferenceController(
-                mContext, null, 0, KEY_PICK_UP);
+        mController = new PreventRingingPreferenceController(mContext, KEY_PICK_UP);
     }
 
     @Test

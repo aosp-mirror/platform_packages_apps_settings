@@ -17,6 +17,8 @@
 package com.android.settings.slices;
 
 import static androidx.slice.builders.ListBuilder.ICON_IMAGE;
+
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
 import static com.android.settings.core.BasePreferenceController.DISABLED_FOR_USER;
 import static com.android.settings.core.BasePreferenceController.DISABLED_UNSUPPORTED;
@@ -47,6 +49,7 @@ import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import android.support.v4.graphics.drawable.IconCompat;
+
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.SliceAction;
@@ -75,7 +78,8 @@ public class SliceBuilderUtils {
         // action name).
         FeatureFactory.getFactory(context).getMetricsFeatureProvider()
                 .action(context, MetricsEvent.ACTION_SETTINGS_SLICE_REQUESTED, sliceNamePair);
-        if (!controller.isAvailable()) {
+
+        if (controller.getAvailabilityStatus() != AVAILABLE) {
             return buildUnavailableSlice(context, sliceData, controller);
         }
 
@@ -145,6 +149,57 @@ public class SliceBuilderUtils {
                 sliceData.getKey());
     }
 
+    /**
+     * @return {@link PendingIntent} for a non-primary {@link SliceAction}.
+     */
+    public static PendingIntent getActionIntent(Context context, String action, SliceData data) {
+        final Intent intent = new Intent(action);
+        intent.setClass(context, SliceBroadcastReceiver.class);
+        intent.putExtra(EXTRA_SLICE_KEY, data.getKey());
+        intent.putExtra(EXTRA_SLICE_PLATFORM_DEFINED, data.isPlatformDefined());
+        return PendingIntent.getBroadcast(context, 0 /* requestCode */, intent,
+                PendingIntent.FLAG_CANCEL_CURRENT);
+    }
+
+    /**
+     * @return {@link PendingIntent} for the primary {@link SliceAction}.
+     */
+    public static PendingIntent getContentPendingIntent(Context context, SliceData sliceData) {
+        final Intent intent = getContentIntent(context, sliceData);
+        return PendingIntent.getActivity(context, 0 /* requestCode */, intent, 0 /* flags */);
+    }
+
+    /**
+     * @return {@link PendingIntent} to the Settings home page.
+     */
+    public static PendingIntent getSettingsIntent(Context context) {
+        final PackageManager manager = context.getPackageManager();
+        final Intent intent = manager.getLaunchIntentForPackage(context.getPackageName());
+        return PendingIntent.getActivity(context, 0 /* requestCode */, intent, 0 /* flags */);
+    }
+
+    /**
+     * @return the summary text for a {@link Slice} built for {@param sliceData}.
+     */
+    public static CharSequence getSubtitleText(Context context,
+            AbstractPreferenceController controller, SliceData sliceData) {
+        CharSequence summaryText;
+        if (controller != null) {
+            summaryText = controller.getSummary();
+
+            if (isValidSummary(context, summaryText)) {
+                return summaryText;
+            }
+        }
+
+        summaryText = sliceData.getSummary();
+        if (isValidSummary(context, summaryText)) {
+            return summaryText;
+        }
+
+        return "";
+    }
+
     public static Uri getUri(String path, boolean isPlatformSlice) {
         final String authority = isPlatformSlice
                 ? SettingsSlicesContract.AUTHORITY
@@ -156,9 +211,20 @@ public class SliceBuilderUtils {
                 .build();
     }
 
+    @VisibleForTesting
+    static Intent getContentIntent(Context context, SliceData sliceData) {
+        final Uri contentUri = new Uri.Builder().appendPath(sliceData.getKey()).build();
+        final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(context,
+                sliceData.getFragmentClassName(), sliceData.getKey(), sliceData.getScreenTitle(),
+                0 /* TODO */);
+        intent.setClassName(context.getPackageName(), SubSettings.class.getName());
+        intent.setData(contentUri);
+        return intent;
+    }
+
     private static Slice buildToggleSlice(Context context, SliceData sliceData,
             BasePreferenceController controller) {
-        final PendingIntent contentIntent = getContentIntent(context, sliceData);
+        final PendingIntent contentIntent = getContentPendingIntent(context, sliceData);
         final Icon icon = Icon.createWithResource(context, sliceData.getIconResource());
         final CharSequence subtitleText = getSubtitleText(context, controller, sliceData);
         final TogglePreferenceController toggleController =
@@ -178,7 +244,7 @@ public class SliceBuilderUtils {
 
     private static Slice buildIntentSlice(Context context, SliceData sliceData,
             BasePreferenceController controller) {
-        final PendingIntent contentIntent = getContentIntent(context, sliceData);
+        final PendingIntent contentIntent = getContentPendingIntent(context, sliceData);
         final Icon icon = Icon.createWithResource(context, sliceData.getIconResource());
         final CharSequence subtitleText = getSubtitleText(context, controller, sliceData);
 
@@ -227,49 +293,6 @@ public class SliceBuilderUtils {
         return getActionIntent(context, SettingsSliceProvider.ACTION_SLIDER_CHANGED, sliceData);
     }
 
-    private static PendingIntent getActionIntent(Context context, String action, SliceData data) {
-        Intent intent = new Intent(action);
-        intent.setClass(context, SliceBroadcastReceiver.class);
-        intent.putExtra(EXTRA_SLICE_KEY, data.getKey());
-        intent.putExtra(EXTRA_SLICE_PLATFORM_DEFINED, data.isPlatformDefined());
-        return PendingIntent.getBroadcast(context, 0 /* requestCode */, intent,
-                PendingIntent.FLAG_CANCEL_CURRENT);
-    }
-
-    private static PendingIntent getContentIntent(Context context, SliceData sliceData) {
-        Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(context,
-                sliceData.getFragmentClassName(), sliceData.getKey(), sliceData.getScreenTitle(),
-                0 /* TODO */);
-        intent.setClassName("com.android.settings", SubSettings.class.getName());
-        return PendingIntent.getActivity(context, 0 /* requestCode */, intent, 0 /* flags */);
-    }
-
-    private static PendingIntent getSettingsIntent(Context context) {
-        final PackageManager manager = context.getPackageManager();
-        final Intent intent = manager.getLaunchIntentForPackage(context.getPackageName());
-        return PendingIntent.getActivity(context, 0 /* requestCode */, intent, 0 /* flags */);
-    }
-
-    @VisibleForTesting
-    static CharSequence getSubtitleText(Context context, AbstractPreferenceController controller,
-            SliceData sliceData) {
-        CharSequence summaryText;
-        if (controller != null) {
-            summaryText = controller.getSummary();
-
-            if (isValidSummary(context, summaryText)) {
-                return summaryText;
-            }
-        }
-
-        summaryText = sliceData.getSummary();
-        if (isValidSummary(context, summaryText)) {
-            return summaryText;
-        }
-
-        return "";
-    }
-
     private static boolean isValidSummary(Context context, CharSequence summary) {
         if (summary == null || TextUtils.isEmpty(summary.toString().trim())) {
             return false;
@@ -298,12 +321,12 @@ public class SliceBuilderUtils {
                 break;
             case DISABLED_FOR_USER:
                 summary = context.getString(R.string.disabled_for_user_setting_summary);
-                primaryAction = new SliceAction(getContentIntent(context, data),
+                primaryAction = new SliceAction(getContentPendingIntent(context, data),
                         (IconCompat) null /* actionIcon */, null /* actionTitle */);
                 break;
             case DISABLED_DEPENDENT_SETTING:
                 summary = context.getString(R.string.disabled_dependent_setting_summary);
-                primaryAction = new SliceAction(getContentIntent(context, data),
+                primaryAction = new SliceAction(getContentPendingIntent(context, data),
                         (IconCompat) null /* actionIcon */, null /* actionTitle */);
                 break;
             case UNAVAILABLE_UNKNOWN:

@@ -17,8 +17,6 @@
 package com.android.settings.datausage;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.verify;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -41,17 +39,15 @@ import com.android.settings.SubSettings;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settingslib.Utils;
-import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.Shadows;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
 
 import java.util.concurrent.TimeUnit;
@@ -216,7 +212,7 @@ public class DataUsageSummaryPreferenceTest {
     }
 
     @Test
-    public void testSetUsageInfo_withRecentCarrierUpdate_doesNotSetCarrierInfoWarningColorAndFont() {
+    public void setUsageInfo_withRecentCarrierUpdate_doesNotSetCarrierInfoWarningColorAndFont() {
         final long updateTime = System.currentTimeMillis() - TimeUnit.HOURS.toMillis(1);
         mCarrierInfo = (TextView) mHolder.findViewById(R.id.carrier_and_update);
         mSummaryPreference.setUsageInfo(mCycleEnd, updateTime, DUMMY_CARRIER, 1 /* numPlans */,
@@ -225,7 +221,7 @@ public class DataUsageSummaryPreferenceTest {
         bindViewHolder();
         assertThat(mCarrierInfo.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(mCarrierInfo.getCurrentTextColor()).isEqualTo(
-                Utils.getColorAttr(mContext, android.R.attr.textColorSecondary));
+                Utils.getColorAttrDefaultColor(mContext, android.R.attr.textColorSecondary));
         assertThat(mCarrierInfo.getTypeface()).isEqualTo(Typeface.SANS_SERIF);
     }
 
@@ -238,7 +234,7 @@ public class DataUsageSummaryPreferenceTest {
         bindViewHolder();
         assertThat(mCarrierInfo.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(mCarrierInfo.getCurrentTextColor()).isEqualTo(
-                Utils.getColorAttr(mContext, android.R.attr.colorError));
+                Utils.getColorAttrDefaultColor(mContext, android.R.attr.colorError));
         assertThat(mCarrierInfo.getTypeface()).isEqualTo(
                 DataUsageSummaryPreference.SANS_SERIF_MEDIUM);
     }
@@ -373,12 +369,15 @@ public class DataUsageSummaryPreferenceTest {
     public void testSetUsageAndRemainingInfo_withUsageInfo_dataUsageAndRemainingShown() {
         mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, DUMMY_CARRIER, 1 /* numPlans */,
                 new Intent());
-        mSummaryPreference.setUsageNumbers(1000000L, 10000000L, true);
+        mSummaryPreference.setUsageNumbers(
+                BillingCycleSettings.MIB_IN_BYTES,
+                10 * BillingCycleSettings.MIB_IN_BYTES,
+                true /* hasMobileData */);
 
         bindViewHolder();
         assertThat(mDataUsed.getText().toString()).isEqualTo("1.00 MB used");
         assertThat(mDataRemaining.getText().toString()).isEqualTo("9.00 MB left");
-        final int colorId = Utils.getColorAttr(mContext, android.R.attr.colorAccent);
+        final int colorId = Utils.getColorAttrDefaultColor(mContext, android.R.attr.colorAccent);
         assertThat(mDataRemaining.getCurrentTextColor()).isEqualTo(colorId);
     }
 
@@ -386,12 +385,15 @@ public class DataUsageSummaryPreferenceTest {
     public void testSetUsageInfo_withDataOverusage() {
         mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, DUMMY_CARRIER, 1 /* numPlans */,
                 new Intent());
-        mSummaryPreference.setUsageNumbers(11_000_000L, 10_000_000L, true);
+        mSummaryPreference.setUsageNumbers(
+                11 * BillingCycleSettings.MIB_IN_BYTES,
+                10 * BillingCycleSettings.MIB_IN_BYTES,
+                true /* hasMobileData */);
 
         bindViewHolder();
         assertThat(mDataUsed.getText().toString()).isEqualTo("11.00 MB used");
         assertThat(mDataRemaining.getText().toString()).isEqualTo("1.00 MB over");
-        final int colorId = Utils.getColorAttr(mContext, android.R.attr.colorError);
+        final int colorId = Utils.getColorAttrDefaultColor(mContext, android.R.attr.colorError);
         assertThat(mDataRemaining.getCurrentTextColor()).isEqualTo(colorId);
     }
 
@@ -399,7 +401,8 @@ public class DataUsageSummaryPreferenceTest {
     public void testSetUsageInfo_withUsageInfo_dataUsageShown() {
         mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, DUMMY_CARRIER, 0 /* numPlans */,
                 new Intent());
-        mSummaryPreference.setUsageNumbers(1000000L, -1L, true);
+        mSummaryPreference.setUsageNumbers(
+                BillingCycleSettings.MIB_IN_BYTES, -1L, true /* hasMobileData */);
 
         bindViewHolder();
         assertThat(mDataUsed.getText().toString()).isEqualTo("1.00 MB used");

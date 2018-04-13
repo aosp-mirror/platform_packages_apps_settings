@@ -30,6 +30,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.batterytip.actions.BatterySaverAction;
 import com.android.settings.fuelgauge.batterytip.actions.BatteryTipAction;
+import com.android.settings.fuelgauge.batterytip.actions.OpenBatterySaverAction;
 import com.android.settings.fuelgauge.batterytip.actions.OpenRestrictAppFragmentAction;
 import com.android.settings.fuelgauge.batterytip.actions.RestrictAppAction;
 import com.android.settings.fuelgauge.batterytip.actions.SmartBatteryAction;
@@ -93,7 +94,11 @@ public class BatteryTipUtils {
             case BatteryTip.TipType.SMART_BATTERY_MANAGER:
                 return new SmartBatteryAction(settingsActivity, fragment);
             case BatteryTip.TipType.BATTERY_SAVER:
-                return new BatterySaverAction(settingsActivity);
+                if (batteryTip.getState() == BatteryTip.StateType.HANDLED) {
+                    return new OpenBatterySaverAction(settingsActivity);
+                } else {
+                    return new BatterySaverAction(settingsActivity);
+                }
             case BatteryTip.TipType.APP_RESTRICTION:
                 if (batteryTip.getState() == BatteryTip.StateType.HANDLED) {
                     return new OpenRestrictAppFragmentAction(settingsActivity, fragment,
@@ -110,12 +115,14 @@ public class BatteryTipUtils {
 
     /**
      * Upload the {@link PendingIntent} to {@link StatsManager} for anomaly detection
+     * @throws StatsManager.StatsUnavailableException if failed to communicate with stats service
      */
-    public static void uploadAnomalyPendingIntent(Context context, StatsManager statsManager) {
+    public static void uploadAnomalyPendingIntent(Context context, StatsManager statsManager)
+            throws StatsManager.StatsUnavailableException {
         final Intent extraIntent = new Intent(context, AnomalyDetectionReceiver.class);
         final PendingIntent pendingIntent = PendingIntent.getBroadcast(context, REQUEST_CODE,
                 extraIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        statsManager.setBroadcastSubscriber(StatsManagerConfig.ANOMALY_CONFIG_KEY,
-                StatsManagerConfig.SUBSCRIBER_ID, pendingIntent);
+        statsManager.setBroadcastSubscriber(pendingIntent,
+                StatsManagerConfig.ANOMALY_CONFIG_KEY, StatsManagerConfig.SUBSCRIBER_ID);
     }
 }

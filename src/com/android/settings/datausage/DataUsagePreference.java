@@ -21,7 +21,6 @@ import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.support.v4.content.res.TypedArrayUtils;
 import android.support.v7.preference.Preference;
-import android.text.format.Formatter;
 import android.util.AttributeSet;
 import android.util.FeatureFlagUtils;
 
@@ -61,13 +60,13 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
             } else {
                 setTitle(mTitleRes);
                 setSummary(getContext().getString(R.string.data_usage_template,
-                        Formatter.formatFileSize(getContext(), usageInfo.usageLevel),
+                        DataUsageUtils.formatDataUsage(getContext(), usageInfo.usageLevel),
                                 usageInfo.period));
             }
         } else {
             setTitle(mTitleRes);
             setSummary(getContext().getString(R.string.data_usage_template,
-                    Formatter.formatFileSize(getContext(), usageInfo.usageLevel),
+                    DataUsageUtils.formatDataUsage(getContext(), usageInfo.usageLevel),
                             usageInfo.period));
         }
         setIntent(getIntent());

@@ -27,6 +27,7 @@ import android.text.format.Formatter;
 import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
 import android.util.SparseIntArray;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.graph.UsageView;
@@ -50,8 +51,8 @@ public class ChartDataUsagePreference extends Preference {
     public ChartDataUsagePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         setSelectable(false);
-        mLimitColor = Utils.getColorAttr(context, android.R.attr.colorError);
-        mWarningColor = Utils.getColorAttr(context, android.R.attr.textColorSecondary);
+        mLimitColor = Utils.getColorAttrDefaultColor(context, android.R.attr.colorError);
+        mWarningColor = Utils.getColorAttrDefaultColor(context, android.R.attr.textColorSecondary);
         setLayoutResource(R.layout.data_usage_graph);
     }
 
@@ -155,7 +156,7 @@ public class ChartDataUsagePreference extends Preference {
 
     private CharSequence getLabel(long bytes, int str, int mLimitColor) {
         Formatter.BytesResult result = Formatter.formatBytes(getContext().getResources(),
-                bytes, Formatter.FLAG_SHORTER);
+                bytes, Formatter.FLAG_SHORTER | Formatter.FLAG_IEC_UNITS);
         CharSequence label = TextUtils.expandTemplate(getContext().getText(str),
                 result.value, result.units);
         return new SpannableStringBuilder().append(label, new ForegroundColorSpan(mLimitColor), 0);

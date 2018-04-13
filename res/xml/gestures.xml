@@ -46,6 +46,12 @@
         settings:controller="com.android.settings.gestures.DoubleTwistPreferenceController" />
 
     <Preference
+        android:key="gesture_swipe_up_input_summary"
+        android:title="@string/swipe_up_to_switch_apps_title"
+        android:fragment="com.android.settings.gestures.SwipeUpGestureSettings"
+        settings:controller="com.android.settings.gestures.SwipeUpPreferenceController" />
+
+    <Preference
         android:key="gesture_double_tap_screen_input_summary"
         android:title="@string/ambient_display_title"
         android:fragment="com.android.settings.gestures.DoubleTapScreenSettings"
@@ -60,6 +66,7 @@
     <Preference
         android:key="gesture_prevent_ringing_summary"
         android:title="@string/gesture_prevent_ringing_screen_title"
-        android:fragment="com.android.settings.gestures.PreventRingingGestureSettings" />
+        android:fragment="com.android.settings.gestures.PreventRingingGestureSettings"
+        settings:controller="com.android.settings.gestures.PreventRingingPreferenceController" />
 
 </PreferenceScreen>

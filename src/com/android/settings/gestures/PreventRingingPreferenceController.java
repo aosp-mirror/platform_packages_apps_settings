@@ -21,7 +21,6 @@ import static android.provider.Settings.Secure.VOLUME_HUSH_MUTE;
 import static android.provider.Settings.Secure.VOLUME_HUSH_OFF;
 import static android.provider.Settings.Secure.VOLUME_HUSH_VIBRATE;
 
-import android.annotation.UserIdInt;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -31,22 +30,20 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.VideoPreference;
-import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreate;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 
-public class PreventRingingPreferenceController extends AbstractPreferenceController
+public class PreventRingingPreferenceController extends BasePreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener,
         LifecycleObserver, OnResume, OnPause, OnCreate, OnSaveInstanceState {
 
     private static final String PREF_KEY_VIDEO = "gesture_prevent_ringing_video";
-    private final String mPrefKey;
     @VisibleForTesting
     static final String KEY_VIDEO_PAUSED = "key_video_paused";
 
@@ -56,17 +53,15 @@ public class PreventRingingPreferenceController extends AbstractPreferenceContro
 
     private final String SECURE_KEY = VOLUME_HUSH_GESTURE;
 
-    @UserIdInt
-    private final int mUserId;
+    public PreventRingingPreferenceController(Context context, String key) {
+        super(context, key);
+    }
 
-    public PreventRingingPreferenceController(Context context, Lifecycle lifecycle,
-            @UserIdInt int userId, String key) {
-        super(context);
-        if (lifecycle != null) {
-            lifecycle.addObserver(this);
-        }
-        mUserId = userId;
-        mPrefKey = key;
+    @Override
+    public int getAvailabilityStatus() {
+        return mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_volumeHushGestureEnabled)
+                ? AVAILABLE : DISABLED_UNSUPPORTED;
     }
 
     @Override
@@ -144,19 +139,8 @@ public class PreventRingingPreferenceController extends AbstractPreferenceContro
         }
     }
 
-    @Override
-    public boolean isAvailable() {
-        return mContext.getResources()
-                .getBoolean(com.android.internal.R.bool.config_volumeHushGestureEnabled);
-    }
-
     protected String getVideoPrefKey() {
         return PREF_KEY_VIDEO;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return mPrefKey;
     }
 
     @Override
