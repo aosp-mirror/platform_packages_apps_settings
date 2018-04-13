@@ -136,7 +136,6 @@ public class AdvancedPowerUsageDetailTest {
     private Context mContext;
     private Preference mForegroundPreference;
     private Preference mBackgroundPreference;
-    private Preference mPowerUsagePreference;
     private AdvancedPowerUsageDetail mFragment;
     private SettingsActivity mTestActivity;
     private List<Anomaly> mAnomalies;
@@ -214,10 +213,8 @@ public class AdvancedPowerUsageDetailTest {
 
         mForegroundPreference = new Preference(mContext);
         mBackgroundPreference = new Preference(mContext);
-        mPowerUsagePreference = new Preference(mContext);
         mFragment.mForegroundPreference = mForegroundPreference;
         mFragment.mBackgroundPreference = mBackgroundPreference;
-        mFragment.mPowerUsagePreference = mPowerUsagePreference;
         mFragment.mAnomalySummaryPreferenceController = mAnomalySummaryPreferenceController;
 
         mAnomalies = new ArrayList<>();
@@ -412,15 +409,11 @@ public class AdvancedPowerUsageDetailTest {
                 R.string.battery_used_for);
         doReturn(mContext.getText(R.string.battery_active_for)).when(mFragment).getText(
                 R.string.battery_active_for);
-        doReturn(mContext.getString(R.string.battery_detail_power_percentage, USAGE_PERCENT,
-                POWER_MAH)).when(mFragment)
-                .getString(R.string.battery_detail_power_percentage, USAGE_PERCENT, POWER_MAH);
 
         mFragment.initPreference();
 
         assertThat(mForegroundPreference.getSummary().toString()).isEqualTo("Used for 0 min");
         assertThat(mBackgroundPreference.getSummary().toString()).isEqualTo("Active for 0 min");
-        assertThat(mPowerUsagePreference.getSummary()).isEqualTo("16% of total app usage (150mAh)");
     }
 
     @Test
