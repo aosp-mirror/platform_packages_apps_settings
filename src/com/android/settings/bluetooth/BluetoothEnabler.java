@@ -47,6 +47,7 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
     private final LocalBluetoothAdapter mLocalAdapter;
     private final IntentFilter mIntentFilter;
     private final RestrictionUtils mRestrictionUtils;
+    private SwitchWidgetController.OnSwitchChangeListener mCallback;
 
     private static final String EVENT_DATA_IS_BT_ON = "is_bluetooth_on";
     private static final int EVENT_UPDATE_INDEX = 0;
@@ -170,6 +171,7 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
     @Override
     public boolean onSwitchToggled(boolean isChecked) {
         if (maybeEnforceRestrictions()) {
+            triggerParentPreferenceCallback(isChecked);
             return true;
         }
 
@@ -179,6 +181,7 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
             Toast.makeText(mContext, R.string.wifi_in_airplane_mode, Toast.LENGTH_SHORT).show();
             // Reset switch to off
             mSwitchController.setChecked(false);
+            triggerParentPreferenceCallback(false);
             return false;
         }
 
@@ -193,11 +196,22 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
                 mSwitchController.setChecked(false);
                 mSwitchController.setEnabled(true);
                 mSwitchController.updateTitle(false);
+                triggerParentPreferenceCallback(false);
                 return false;
             }
         }
         mSwitchController.setEnabled(false);
+        triggerParentPreferenceCallback(isChecked);
         return true;
+    }
+
+    /**
+     * Sets a callback back that this enabler will trigger in case the preference using the enabler
+     * still needed the callback on the SwitchController (which we now use).
+     * @param listener The listener with a callback to trigger.
+     */
+    public void setToggleCallback(SwitchWidgetController.OnSwitchChangeListener listener) {
+        mCallback = listener;
     }
 
     /**
@@ -227,4 +241,11 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
         return admin;
     }
 
+    // This triggers the callback which was manually set for this enabler since the enabler will
+    // take over the switch controller callback
+    private void triggerParentPreferenceCallback(boolean isChecked) {
+        if (mCallback != null) {
+            mCallback.onSwitchToggled(isChecked);
+        }
+    }
 }

@@ -37,9 +37,11 @@ import android.view.View;
 import android.widget.Switch;
 
 import com.android.settings.R;
-import com.android.settings.bluetooth.BluetoothSwitchPreferenceController.SwitchController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.SwitchBarController;
+import com.android.settings.widget.SwitchWidgetController;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
@@ -77,9 +79,11 @@ public class BluetoothEnablerTest {
     private LocalBluetoothManager mBluetoothManager;
     @Mock
     private LocalBluetoothAdapter mBluetoothAdapter;
+    @Mock
+    private SwitchWidgetController.OnSwitchChangeListener mCallback;
 
     private Context mContext;
-    private SwitchController mSwitchController;
+    private SwitchWidgetController mSwitchController;
     private BluetoothEnabler mBluetoothEnabler;
 
     @Before
@@ -89,7 +93,7 @@ public class BluetoothEnablerTest {
         when(mBluetoothManager.getBluetoothAdapter()).thenReturn(mBluetoothAdapter);
 
         mRestrictedSwitchPreference = new RestrictedSwitchPreference(mContext);
-        mSwitchController = spy(new SwitchController(mRestrictedSwitchPreference));
+        mSwitchController = spy(new SwitchBarController(new SwitchBar(mContext)));
         mBluetoothEnabler = new BluetoothEnabler(
                 mContext,
                 mSwitchController,
@@ -99,6 +103,7 @@ public class BluetoothEnablerTest {
                 mRestrictionUtils);
         mHolder = PreferenceViewHolder.createInstanceForTests(mock(View.class));
         mRestrictedSwitchPreference.onBindViewHolder(mHolder);
+        mBluetoothEnabler.setToggleCallback(mCallback);
     }
 
     @Test
@@ -108,6 +113,15 @@ public class BluetoothEnablerTest {
 
         // THEN the corresponding metrics action is logged.
         verify(mMetricsFeatureProvider).action(mContext, 123, false);
+    }
+
+    @Test
+    public void onSwitchToggled_shouldTriggerCallback() {
+        // WHEN the switch is toggled...
+        mBluetoothEnabler.onSwitchToggled(false);
+
+        // THEN the callback is triggered
+        verify(mCallback).onSwitchToggled(false);
     }
 
     @Test

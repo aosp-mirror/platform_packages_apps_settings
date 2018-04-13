@@ -17,21 +17,21 @@
 package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.doReturn;
+
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.PreferenceScreen;
+import android.provider.Settings;
 
-import com.android.settings.core.BasePreferenceController;
+import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
+import com.android.settings.utils.AnnotationSpan;
+import com.android.settings.widget.SwitchWidgetController;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.widget.FooterPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -44,17 +44,16 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(SettingsRobolectricTestRunner.class)
 public class BluetoothSwitchPreferenceControllerTest {
 
+    public static final String BLUETOOTH_INFO_STRING = "When Bluetooth is turned on, your device"
+            + " can communicate with other nearby Bluetooth devices.";
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private LocalBluetoothManager mBluetoothManager;
     @Mock
-    private PreferenceScreen mScreen;
-    @Mock
-    private SwitchPreference mPreference;
-    @Mock
     private RestrictionUtils mRestrictionUtils;
     @Mock
-    private LocalBluetoothAdapter mLocalBluetoothAdapter;
+    private SwitchWidgetController mSwitchController;
 
+    private FooterPreference mFooterPreference;
     private Context mContext;
     private BluetoothSwitchPreferenceController mController;
 
@@ -62,70 +61,52 @@ public class BluetoothSwitchPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application.getApplicationContext());
+        mFooterPreference = new FooterPreference(mContext);
         FakeFeatureFactory.setupForTest();
 
         mController =
-            new BluetoothSwitchPreferenceController(mContext, mBluetoothManager, mRestrictionUtils);
-        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
-        when(mPreference.getKey()).thenReturn(mController.getPreferenceKey());
+            new BluetoothSwitchPreferenceController(mContext, mBluetoothManager, mRestrictionUtils,
+                    mSwitchController, mFooterPreference);
     }
 
     @Test
-    public void testGetAvailabilityStatus_adapterNull_returnDisabled() {
-        mController.mBluetoothAdapter = null;
+    public void updateText_bluetoothOffScanningOn() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.BLE_SCAN_ALWAYS_AVAILABLE, 1);
+        mController.updateText(false);
+        AnnotationSpan.LinkInfo info = new AnnotationSpan.LinkInfo(
+                AnnotationSpan.LinkInfo.DEFAULT_ANNOTATION, mController);
+        CharSequence text = AnnotationSpan.linkify(
+                mContext.getText(R.string.bluetooth_scanning_on_info_message), info);
 
-        assertThat(mController.getAvailabilityStatus())
-            .isEqualTo(BasePreferenceController.DISABLED_UNSUPPORTED);
+        assertThat(mFooterPreference.getTitle()).isEqualTo(text);
     }
 
     @Test
-    public void testGetAvailabilityStatus_adapterExisted_returnAvailable() {
-        mController.mBluetoothAdapter = mLocalBluetoothAdapter;
+    public void updateText_bluetoothOffScanningOff() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.BLE_SCAN_ALWAYS_AVAILABLE, 0);
+        mController.updateText(false);
 
-        assertThat(mController.getAvailabilityStatus())
-            .isEqualTo(BasePreferenceController.AVAILABLE);
+        assertThat(mFooterPreference.getTitle()).isEqualTo(BLUETOOTH_INFO_STRING);
+
     }
 
     @Test
-    public void testOnStart_shouldRegisterPreferenceChangeListener() {
-        mController.displayPreference(mScreen);
-        mController.onStart();
+    public void updateText_bluetoothOnScanningOff() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.BLE_SCAN_ALWAYS_AVAILABLE, 0);
+        mController.updateText(true);
 
-        verify(mPreference).setOnPreferenceChangeListener(
-                any(BluetoothSwitchPreferenceController.SwitchController.class));
+        assertThat(mFooterPreference.getTitle()).isEqualTo(BLUETOOTH_INFO_STRING);
     }
 
     @Test
-    public void testOnStop_shouldRegisterPreferenceChangeListener() {
-        mController.displayPreference(mScreen);
-        mController.onStart();
+    public void updateText_bluetoothOnScanningOn() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.BLE_SCAN_ALWAYS_AVAILABLE, 1);
+        mController.updateText(true);
 
-        mController.onStop();
-
-        verify(mPreference).setOnPreferenceChangeListener(null);
-    }
-
-    @Test
-    public void testIsChecked_adapterNull_returnFalse() {
-        mController.mBluetoothAdapter = null;
-
-        assertThat(mController.isChecked()).isFalse();
-    }
-
-    @Test
-    public void testIsChecked_adapterExisted_returnFromAdapter() {
-        mController.mBluetoothAdapter = mLocalBluetoothAdapter;
-        doReturn(true).when(mLocalBluetoothAdapter).isEnabled();
-
-        assertThat(mController.isChecked()).isTrue();
-    }
-
-    @Test
-    public void testSetChecked_adapterExisted() {
-        mController.mBluetoothAdapter = mLocalBluetoothAdapter;
-
-        mController.setChecked(true);
-
-        verify(mLocalBluetoothAdapter).setBluetoothEnabled(true);
+        assertThat(mFooterPreference.getTitle()).isEqualTo(BLUETOOTH_INFO_STRING);
     }
 }
