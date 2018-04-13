@@ -940,8 +940,7 @@
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5936710887156133458">"এই ট্যাবলেটের ইন্টারনেট সংযোগ হটস্পটের মাধ্যমে শেয়ার করা হচ্ছে"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="5556202634866621632">"এই ফোনের ইন্টারনেট সংযোগ হটস্পটের মাধ্যমে শেয়ার করা হচ্ছে"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="5017191966153008">"অ্যাপ থেকে কন্টেন্ট শেয়ার করা হচ্ছে। ইন্টারনেট সংযোগ শেয়ার করতে হটস্পট বন্ধ করে আবার চালু করুন"</string>
-    <!-- no translation found for wifi_hotspot_no_password_subtext (353306131026431089) -->
-    <skip />
+    <string name="wifi_hotspot_no_password_subtext" msgid="353306131026431089">"পাসওয়ার্ড সেট করা নেই"</string>
     <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"হটস্পটের নাম"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> চালু করা হচ্ছে..."</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> এর সাথে অন্য ডিভাইস সংযুক্ত হতে পারে"</string>
@@ -3126,24 +3125,16 @@
       <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g>টি নিয়ম নিজে থেকে চালু হতে পারে</item>
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g>টি নিয়ম নিজে থেকে চালু হতে পারে</item>
     </plurals>
-    <!-- no translation found for zen_onboarding_ok (4332223974819182383) -->
-    <skip />
-    <!-- no translation found for zen_onboarding_settings (9046451821239946868) -->
-    <skip />
-    <!-- no translation found for zen_onboarding_more_options (7880013502169957729) -->
-    <skip />
-    <!-- no translation found for zen_onboarding_screen_on_title (6058737686680609254) -->
-    <skip />
-    <!-- no translation found for zen_onboarding_screen_off_title (3153498025037206166) -->
-    <skip />
-    <!-- no translation found for zen_onboarding_dnd_visual_disturbances_description (1941519590822188992) -->
-    <skip />
-    <!-- no translation found for zen_onboarding_dnd_visual_disturbances_header (1442575104084675243) -->
-    <skip />
+    <string name="zen_onboarding_ok" msgid="4332223974819182383">"আচ্ছা"</string>
+    <string name="zen_onboarding_settings" msgid="9046451821239946868">"সেটিংস"</string>
+    <string name="zen_onboarding_more_options" msgid="7880013502169957729">"আপনি সেটিংসে গিয়ে এটি আরও কাস্টমাইজ করতে পারেন।"</string>
+    <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"স্ক্রিন চালু থাকলে ব্লক করতে চাই"</string>
+    <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"স্ক্রিন বন্ধ থাকলে ব্লক করতে চাই"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"\'বিরক্ত করবেন না\' মোডে শুধু সাউন্ড বন্ধ করা ছাড়াও আরও অনেক কিছু করা যায় - এর মাধ্যমে আপনি ভিজুয়ালও ব্লক করতে পারেন। ঘুমানোর সময়, কোনও কাজে ব্যস্ত থাকলে অথবা ফোন নিয়ে বেশি সময় কাটাতে না চাইলে এই বৈশিষ্ট্যটি আপনার কাজে লাগতে পারে।"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"সাউন্ড এবং ভিজুয়াল ব্লক করুন"</string>
     <!-- no translation found for zen_onboarding_screen_off_summary (5393041573999488088) -->
     <skip />
-    <!-- no translation found for zen_onboarding_screen_on_summary (4351138746406623307) -->
-    <skip />
+    <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"ফোনের প্রাথমিক অ্যাক্টিভিটি এবং স্ট্যাটাস ছাড়া অন্য কোনও বিজ্ঞপ্তি দেখতে চাই না"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"কর্মস্থলের প্রোফাইলের ধ্বনিগুলি"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"ব্যক্তিগত প্রোফাইলের ধ্বনিগুলি ব্যবহার করুন"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"কাজ এবং ব্যক্তিগত প্রোফাইলের জন্য একই শব্দ"</string>
@@ -3200,10 +3191,8 @@
     <string name="notification_channel_summary_high" msgid="2085017556511003283">"সর্বাধিক গুরুত্ব"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"বিজ্ঞপ্তি দেখুন"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"বিজ্ঞপ্তি সহায়ক"</string>
-    <!-- no translation found for notifications_sent_daily (3584506541352710975) -->
-    <skip />
-    <!-- no translation found for notifications_sent_weekly (1030525736746720584) -->
-    <skip />
+    <string name="notifications_sent_daily" msgid="3584506541352710975">"দৈনিক ~<xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <string name="notifications_sent_weekly" msgid="1030525736746720584">"প্রতি সপ্তাহে ~<xliff:g id="NUMBER">%1$s</xliff:g>"</string>
     <string name="notifications_sent_never" msgid="1001964786456700536">"কখনও না"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"বিজ্ঞপ্তির অ্যাক্সেস"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"কর্মস্থলের প্রোফাইলের বিজ্ঞপ্তিতে অ্যাক্সেস ব্লক করা হয়েছে"</string>
@@ -4081,8 +4070,7 @@
     <string name="change_wifi_state_app_detail_switch" msgid="7942268646980694224">"অ্যাপটিকে ওয়াই-ফাই নিয়ন্ত্রণ করতে দিন"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8434262633905502679">"এই অ্যাপটিকে ওয়াই-ফাই চালু অথবা বন্ধ করতে, ওয়াই-ফাই নেটওয়ার্ক স্ক্যান করে তাতে কানেক্ট করতে, নেটওয়ার্ক যোগ করতে বা মুছে ফেলতে অথবা শুধুমাত্র স্থানীয় ব্যবহারের জন্য হটস্পট চালু করতে দিন"</string>
     <string name="media_output_title" msgid="115223550977351699">"মিডিয়া এতে চালান"</string>
-    <!-- no translation found for media_output_default_summary (8115153381240348279) -->
-    <skip />
+    <string name="media_output_default_summary" msgid="8115153381240348279">"এই ডিভাইস"</string>
     <string name="media_output_summary" product="default" msgid="6839458453831567167">"ফোন"</string>
     <string name="media_output_summary" product="tablet" msgid="7217221078578554515">"ট্যাবলেট"</string>
     <string name="media_output_summary" product="device" msgid="5677420090811068649">"ডিভাইস"</string>

@@ -23,7 +23,7 @@
     <string name="deny" msgid="6947806159746484865">"நிராகரி"</string>
     <string name="dlg_close" msgid="7471087791340790015">"மூடு"</string>
     <string name="dlg_switch" msgid="6243971420240639064">"மாறு"</string>
-    <string name="device_info_default" msgid="7847265875578739287">"அறியப்படாத"</string>
+    <string name="device_info_default" msgid="7847265875578739287">"தெரியவில்லை"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
       <item quantity="other">டெவெலப்பராவதற்கு இப்போது <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> படிகளே உள்ளன.</item>
       <item quantity="one">டெவெலப்பராவதற்கு இப்போது <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> படியே உள்ளது.</item>
@@ -263,7 +263,7 @@
     <string name="skip_label" msgid="47510779345218297">"தவிர்"</string>
     <string name="next_label" msgid="4693520878012668114">"அடுத்து"</string>
     <string name="language_picker_title" msgid="3596315202551687690">"மொழிகள்"</string>
-    <string name="pref_title_lang_selection" msgid="2014920136978776034">"மொழி விருப்பத்தேர்வுகள்"</string>
+    <string name="pref_title_lang_selection" msgid="2014920136978776034">"மொழி விருப்பத்தேர்வு"</string>
     <string name="locale_remove_menu" msgid="7651301406723638854">"அகற்று"</string>
     <string name="add_a_language" msgid="2330538812283783022">"மொழியைச் சேர்"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="4276642359346122396">
@@ -835,7 +835,7 @@
     <string name="wifi_signal" msgid="5514120261628065287">"சிக்னலின் வலிமை"</string>
     <string name="wifi_status" msgid="4824568012414605414">"நிலை"</string>
     <string name="wifi_speed" msgid="3526198708812322037">"இணைப்பு வேகம்"</string>
-    <string name="wifi_frequency" msgid="7791090119577812214">"காலஇடைவெளி"</string>
+    <string name="wifi_frequency" msgid="7791090119577812214">"அலைவரிசை"</string>
     <string name="wifi_ip_address" msgid="1440054061044402918">"IP முகவரி"</string>
     <string name="passpoint_label" msgid="6381371313076009926">"இதன் வழியாகச் சேமிக்கப்பட்டது"</string>
     <string name="passpoint_content" msgid="8447207162397870483">"<xliff:g id="NAME">%1$s</xliff:g> நற்சான்றிதழ்"</string>
@@ -919,13 +919,13 @@
     <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"கேட்வே"</string>
     <string name="wifi_network_prefix_length" msgid="3028785234245085998">"நெட்வொர்க் முன்னொட்டு நீளம்"</string>
-    <string name="wifi_p2p_settings_title" msgid="5444461191435291082">"வைஃபை Direct"</string>
+    <string name="wifi_p2p_settings_title" msgid="5444461191435291082">"வைஃபை டைரக்ட்"</string>
     <string name="wifi_p2p_device_info" msgid="3191876744469364173">"சாதனத் தகவல்"</string>
     <string name="wifi_p2p_persist_network" msgid="1646424791818168590">"இந்த இணைப்பை நினைவில்கொள்"</string>
     <string name="wifi_p2p_menu_search" msgid="3436429984738771974">"சாதனங்களைத் தேடு"</string>
     <string name="wifi_p2p_menu_searching" msgid="2396704492143633876">"தேடுகிறது..."</string>
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"சாதனத்திற்கு மறுபெயரிடு"</string>
-    <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"பியர் சாதனங்கள்"</string>
+    <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"தெரிந்த சாதனங்கள்"</string>
     <string name="wifi_p2p_remembered_groups" msgid="3847022927914068230">"நினைவிலிருக்கும் குழுக்கள்"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8491862096448192157">"இணைக்க முடியவில்லை."</string>
     <string name="wifi_p2p_failed_rename_message" msgid="2562182284946936380">"சாதனத்திற்கு மறுபெயரிடுவதில் தோல்வி."</string>
@@ -940,8 +940,7 @@
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5936710887156133458">"ஹாட்ஸ்பாட் மூலம் டேப்லெட்டின் இண்டர்நெட்டைப் பகிர்கிறது"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="5556202634866621632">"ஹாட்ஸ்பாட் வழியாக ஃபோனின் இண்டர்நெட்டைப் பகிர்கிறது"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="5017191966153008">"பயன்பாடு, உள்ளடக்கத்தைப் பகிர்கிறது. இண்டர்நெட்டைப் பகிர, ஹாட்ஸ்பாட்டை ஆஃப் செய்து, ஆன் செய்யவும்"</string>
-    <!-- no translation found for wifi_hotspot_no_password_subtext (353306131026431089) -->
-    <skip />
+    <string name="wifi_hotspot_no_password_subtext" msgid="353306131026431089">"கடவுச்சொல் எதுவும் அமைக்கப்படவில்லை"</string>
     <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"ஹாட்ஸ்பாட் பெயர்"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>ஐ இயக்குகிறது..."</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> உடன் பிற சாதனங்களை இணைக்கலாம்"</string>
@@ -1452,7 +1451,7 @@
     <string name="reset_network_complete_toast" msgid="787829973559541880">"நெட்வொர்க் அமைப்புகள் மீட்டமைக்கப்பட்டன"</string>
     <string name="reset_esim_error_title" msgid="1464195710538232590">"eSIMகளை மீட்டமைக்க முடியவில்லை"</string>
     <string name="reset_esim_error_msg" msgid="8434956817922668388">"பிழை காரணமாக eSIMகளை மீட்டமைக்க முடியாது."</string>
-    <string name="master_clear_title" msgid="3531267871084279512">"எல்லாத் டேட்டாவையும் அழி (ஆரம்பநிலை மீட்டமைவு)"</string>
+    <string name="master_clear_title" msgid="3531267871084279512">"எல்லா டேட்டாவையும் அழி (ஆரம்பநிலை மீட்டமைவு)"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"இது, உங்கள் டேப்லெடின் "<b>"அகச் சேமிப்பிடத்தில்"</b>" உள்ள எல்லா டேட்டாவையும் அழித்துவிடும், இவற்றில் உள்ளடங்குவன:\n\n"<li>"உங்கள் Google கணக்கு"</li>\n<li>"சிஸ்டம் மற்றும் ஆப்ஸ் டேட்டா, மற்றும் அமைப்புகள்"</li>\n<li>"பதிவிறக்கப்பட்ட பயன்பாடுகள்"</li></string>
     <string name="master_clear_desc" product="default" msgid="4800386183314202571">"இது, உங்கள் மொபைலின் "<b>"அகச் சேமிப்பிடத்தில்"</b>" உள்ள பின்வரும் எல்லா டேட்டாவையும் அழித்துவிடும்:\n\n"<li>"உங்கள் Google கணக்கு"</li>\n<li>"சிஸ்டம், ஆப்ஸ் டேட்டா மற்றும் அமைப்புகள்"</li>\n<li>"பதிவிறக்கிய பயன்பாடுகள்"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"தற்போது, பின்வரும் கணக்குகளில் உள்நுழைந்துள்ளீர்கள்:\n"</string>
@@ -1499,7 +1498,7 @@
     <string name="bluetooth_tethering_off_subtext_config" msgid="376389105752995580">"புளூடூத் மூலம் இந்த <xliff:g id="DEVICE_NAME">%1$d</xliff:g> சாதனத்தின் இண்டர்நெட்டைப் பகிர்கிறது"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="2135590598511178690">"<xliff:g id="MAXCONNECTION">%1$d</xliff:g> சாதனங்களுக்கு மேல் இணைக்க முடியாது."</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> இன் இணைப்புமுறை நீக்கப்படும்."</string>
-    <string name="tethering_footer_info" msgid="7112228674056306147">"மொபைல் டேட்டா இணைப்பு வழியாக, மற்ற சாதனங்களுக்கு இண்டர்நெட்டை வழங்க, ஹாட்ஸ்பாட் மற்றும் டீத்தரிங் முறையை பயன்படுத்தவும். அருகிலுள்ள சாதனங்களுடன் உள்ளடக்கத்தைப் பகிர, ஆப்ஸும் ஹாட்ஸ்பாட்டை உருவாக்கலாம்."</string>
+    <string name="tethering_footer_info" msgid="7112228674056306147">"மொபைல் டேட்டா இணைப்பு வழியாக, மற்ற சாதனங்களுக்கு இண்டர்நெட்டை வழங்க, ஹாட்ஸ்பாட் மற்றும் டெதெரிங் முறையை பயன்படுத்தவும். அருகிலுள்ள சாதனங்களுடன் உள்ளடக்கத்தைப் பகிர, ஆப்ஸும் ஹாட்ஸ்பாட்டை உருவாக்கலாம்."</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"உதவி"</string>
     <string name="network_settings_title" msgid="2876509814832830757">"மொபைல் நெட்வொர்க்"</string>
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"மொபைல் திட்டம்"</string>
@@ -1844,16 +1843,16 @@
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"கடவுச்சொற்கள் மற்றும் கிரெடிட் கார்டு எண்கள் போன்ற தனிப்பட்ட தரவு உள்பட நீங்கள் உள்ளிடும் எல்லா உரையையும் இந்த பிழைத்திருத்தி சேகரிக்கலாம். இது <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g> பயன்பாட்டிலிருந்து வந்ததாகும். பிழைத்திருத்தியைப் பயன்படுத்தவா?"</string>
     <string name="spellchecker_quick_settings" msgid="246728645150092058">"அமைப்பு"</string>
     <string name="spellchecker_language" msgid="6041050114690541437">"மொழி"</string>
-    <string name="keyboard_and_input_methods_category" msgid="6035224122054465137">"விசைப்பலகையும் உள்ளீடுகளும்"</string>
-    <string name="virtual_keyboard_category" msgid="1012830752318677119">"விர்ச்சுவல் விசைப்பலகை"</string>
+    <string name="keyboard_and_input_methods_category" msgid="6035224122054465137">"கீபோர்டும் உள்ளீடுகளும்"</string>
+    <string name="virtual_keyboard_category" msgid="1012830752318677119">"விர்ச்சுவல் கீபோர்டு"</string>
     <string name="available_virtual_keyboard_category" msgid="7645766574969139819">"கிடைக்கும் விர்ச்சுவல் விசைப்பலகை"</string>
-    <string name="add_virtual_keyboard" msgid="3302152381456516928">"விசைப்பலகைகளை நிர்வகி"</string>
-    <string name="keyboard_assistance_category" msgid="5843634175231134014">"விசைப்பலகை உதவி"</string>
-    <string name="physical_keyboard_title" msgid="8285149877925752042">"கைமுறை விசைப்பலகை"</string>
-    <string name="show_ime" msgid="2658582193437188227">"விர்ச்சுவல் விசைப்பலகையைக் காட்டு"</string>
-    <string name="show_ime_summary" msgid="8164993045923240698">"கைமுறை விசைப்பலகை இயக்கத்தில் இருக்கும் போது IMEஐ திரையில் வைத்திரு"</string>
-    <string name="keyboard_shortcuts_helper" msgid="4839453720463798145">"விசைப்பலகை குறுக்குவழிகளுக்கான உதவி"</string>
-    <string name="keyboard_shortcuts_helper_summary" msgid="5871299901459743288">"கிடைக்கும் குறுக்குவழிகளைக் காட்டு"</string>
+    <string name="add_virtual_keyboard" msgid="3302152381456516928">"கீபோர்டுகளை நிர்வகி"</string>
+    <string name="keyboard_assistance_category" msgid="5843634175231134014">"கீபோர்டு உதவி"</string>
+    <string name="physical_keyboard_title" msgid="8285149877925752042">"கைமுறை கீபோர்டு"</string>
+    <string name="show_ime" msgid="2658582193437188227">"விர்ச்சுவல் கீபோர்டைக் காட்டு"</string>
+    <string name="show_ime_summary" msgid="8164993045923240698">"கைமுறை கீபோர்டு இயக்கத்தில் இருக்கும் போது இதைத் திரையில் வைத்திரு"</string>
+    <string name="keyboard_shortcuts_helper" msgid="4839453720463798145">"கீபோர்ட் ஷார்ட்கட்களுக்கான உதவி"</string>
+    <string name="keyboard_shortcuts_helper_summary" msgid="5871299901459743288">"கிடைக்கும் ஷார்ட்கட்களைக் காட்டு"</string>
     <string name="default_keyboard_layout" msgid="4172606673510531271">"இயல்பு"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"குறிப்பான் வேகம்"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"கேம் கன்ட்ரோலர்"</string>
@@ -2073,7 +2072,7 @@
     <string name="print_feature_state_on" msgid="8098901852502441048">"ஆன்"</string>
     <string name="print_feature_state_off" msgid="7294876968403966040">"முடக்கப்பட்டுள்ளது"</string>
     <string name="print_menu_item_add_service" msgid="3811645167869797802">"சேவையைச் சேர்"</string>
-    <string name="print_menu_item_add_printer" msgid="8251218970577291032">"அச்சுப்பொறியைச் சேர்"</string>
+    <string name="print_menu_item_add_printer" msgid="8251218970577291032">"பிரிண்டரைச் சேர்"</string>
     <string name="print_menu_item_search" msgid="7025589328240514553">"தேடு"</string>
     <string name="print_searching_for_printers" msgid="4680248496457576358">"அச்சுப்பொறிகளைத் தேடுகிறது"</string>
     <string name="print_service_disabled" msgid="7739452396114245222">"சேவை முடக்கப்பட்டுள்ளது"</string>
@@ -2644,7 +2643,7 @@
     <string name="data_usage_metered_wifi" msgid="1761738002328299714">"கட்டண வைஃபை நெட்வொர்க்குகள்"</string>
     <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"கட்டண நெட்வொர்க்குகளைத் தேர்வுசெய்ய, வைஃபையை இயக்கவும்."</string>
     <string name="data_usage_metered_auto" msgid="1262028400911918865">"தானியங்கு"</string>
-    <string name="data_usage_metered_yes" msgid="9217539611385225894">"கட்டணம் அதிகமான நெட்வொர்க்"</string>
+    <string name="data_usage_metered_yes" msgid="9217539611385225894">"கட்டண நெட்வொர்க்"</string>
     <string name="data_usage_metered_no" msgid="4025232961929071789">"கட்டணம் குறைவான நெட்வொர்க்"</string>
     <string name="data_usage_disclaimer" msgid="6887858149980673444">"மொபைல் நிறுவனம் கணக்கிடும் டேட்டா அளவும், சாதனம் கணக்கிடும் டேட்டா அளவும் மாறுபடலாம்."</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"அவசர அழைப்பு"</string>
@@ -2777,7 +2776,7 @@
     <string name="user_add_profile_item_title" msgid="8353515490730363621">"கட்டுப்படுத்தப்பட்ட சுயவிவரம்"</string>
     <string name="user_add_user_title" msgid="2108112641783146007">"புதியவரைச் சேர்க்கவா?"</string>
     <string name="user_add_user_message_long" msgid="6768718238082929201">"கூடுதல் பயனர்களை உருவாக்குவதன் மூலம், பிறருடன் இந்தச் சாதனத்தைப் பகிர்ந்துகொள்ளலாம். ஒவ்வொரு பயனருக்கும் அவர்களுக்கென ஒரு இடம் இருக்கும், அதில் அவர்கள் ஆப்ஸ், வால்பேப்பர் மற்றும் பலவற்றைப் பயன்படுத்தித் தனிப்பயனாக்கலாம். வைஃபை போன்ற மற்ற சாதன அமைப்புகளைப் பயனர்கள் மாற்றலாம், இந்த மாற்றம் அனைவருக்கும் பொருந்தும்.\n\nநீங்கள் புதிய பயனரைச் சேர்க்கும்போது, அவர் தனக்கான இடத்தை அமைக்க வேண்டும்.\n\nஎந்தவொரு பயனரும், பிற எல்லாப் பயனர்களுக்குமான ஆப்ஸைப் புதுப்பிக்கலாம். அணுகல்தன்மை அமைப்புகளையும் சேவைகளையும், புதிய பயனருக்கு இடமாற்ற முடியாமல் போகலாம்."</string>
-    <string name="user_add_user_message_short" msgid="1511354412249044381">"புதியவரைச் சேர்க்கும் போது, அவர் தனக்கான இடத்தை அமைக்க வேண்டும்.\n\nஇருக்கும் பயன்பாடுகளை எவரும் புதுப்பிக்கலாம்."</string>
+    <string name="user_add_user_message_short" msgid="1511354412249044381">"புதியவரைச் சேர்க்கும் போது, அவர் தனக்கான இடத்தை அமைக்க வேண்டும்.\n\nஇருக்கும் ஆப்ஸை எவரும் புதுப்பிக்கலாம்."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"இப்போது பயனரை அமைக்கவா?"</string>
     <string name="user_setup_dialog_message" msgid="1004068621380867148">"இந்தச் சாதனத்தை இவர் பயன்படுத்தும் நிலையிலும், அவருக்கான அமைப்புகளை அவரே செய்து கொள்பவராகவும் இருக்க வேண்டும்."</string>
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"இப்போது சுயவிவரத்தை அமைக்கவா?"</string>
@@ -2859,7 +2858,7 @@
     <skip />
     <string name="cell_broadcast_settings" msgid="4124461751977706019">"அவசரகால எச்சரிக்கைகள்"</string>
     <string name="network_operators_settings" msgid="2583178259504630435">"நெட்வொர்க் ஆபரேட்டர்கள்"</string>
-    <string name="access_point_names" msgid="1381602020438634481">"ஆக்சஸ் பாயிண்ட் நேம்கள்"</string>
+    <string name="access_point_names" msgid="1381602020438634481">"ஆக்சஸ் பாயிண்ட் பெயர்கள்"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="5808043757309522392">"மேம்பட்ட 4G LTE பயன்முறை"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="1376589643017218924">"குரல் மற்றும் தகவல்தொடர்புகளை மேம்படுத்த LTE தரவைப் பயன்படுத்தவும் (பரிந்துரைக்கப்பட்டது)"</string>
     <string name="preferred_network_type_title" msgid="3431041717309776341">"விரும்பும் நெட்வொர்க் வகை"</string>
@@ -3134,24 +3133,16 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> விதிகள் தானாகவே ஆன் செய்யப்படலாம்</item>
       <item quantity="one">1 விதி தானாகவே ஆன் செய்யப்படலாம்</item>
     </plurals>
-    <!-- no translation found for zen_onboarding_ok (4332223974819182383) -->
-    <skip />
-    <!-- no translation found for zen_onboarding_settings (9046451821239946868) -->
-    <skip />
-    <!-- no translation found for zen_onboarding_more_options (7880013502169957729) -->
-    <skip />
-    <!-- no translation found for zen_onboarding_screen_on_title (6058737686680609254) -->
-    <skip />
-    <!-- no translation found for zen_onboarding_screen_off_title (3153498025037206166) -->
-    <skip />
-    <!-- no translation found for zen_onboarding_dnd_visual_disturbances_description (1941519590822188992) -->
-    <skip />
-    <!-- no translation found for zen_onboarding_dnd_visual_disturbances_header (1442575104084675243) -->
-    <skip />
+    <string name="zen_onboarding_ok" msgid="4332223974819182383">"சரி"</string>
+    <string name="zen_onboarding_settings" msgid="9046451821239946868">"அமைப்புகள்"</string>
+    <string name="zen_onboarding_more_options" msgid="7880013502169957729">"இதை அமைப்புகளுக்குச் சென்று, பின்னர் தனிப்பயனாக்கலாம்."</string>
+    <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"திரை ஆன் செய்யப்பட்டிருக்கும்போது தடு"</string>
+    <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"திரை ஆஃப் செய்யப்பட்டிருக்கும்போது தடு"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"தொந்தரவு செய்ய வேண்டாம் பயன்முறையை ஆன் செய்தால், தேவைப்படாத ஒலிகள் தடுக்கப்படுவதோடு, காட்சிகளும் தடுக்கப்படக்கூடும். உறங்கவோ, பிற வேலைகளில் கவனம் செலுத்தவோ அல்லது உங்கள் மொபைலில் செலவிடும் நேரத்தை வரம்பிடவோ விரும்பும் சமயங்களில், இது உங்களுக்குப் பயன்படலாம்."</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"ஒலிகளையும் காட்சிகளையும் தடுத்தல்"</string>
     <!-- no translation found for zen_onboarding_screen_off_summary (5393041573999488088) -->
     <skip />
-    <!-- no translation found for zen_onboarding_screen_on_summary (4351138746406623307) -->
-    <skip />
+    <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"அடிப்படை மொபைல் செயல்பாடு மற்றும் நிலையைத் தவிர்த்து, பிற எதற்கும் அறிவிப்புகளைக் காட்டாது"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"பணி விவர ஒலிகள்"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"தனிப்பட்ட சுயவிவர ஒலிகளைப் பயன்படுத்து"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"பணி மற்றும் தனிப்பட்ட சுயவிவரங்களுக்கு ஒரே ஒலிகள்"</string>
@@ -3208,10 +3199,8 @@
     <string name="notification_channel_summary_high" msgid="2085017556511003283">"மிக அதிக முக்கியத்துவம்"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"அறிவிப்புகளைக் காட்டு"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"அறிவிப்பு உதவி"</string>
-    <!-- no translation found for notifications_sent_daily (3584506541352710975) -->
-    <skip />
-    <!-- no translation found for notifications_sent_weekly (1030525736746720584) -->
-    <skip />
+    <string name="notifications_sent_daily" msgid="3584506541352710975">"நாள் ஒன்றுக்கு ~<xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <string name="notifications_sent_weekly" msgid="1030525736746720584">"வாரம் ஒன்றுக்கு ~<xliff:g id="NUMBER">%1$s</xliff:g>"</string>
     <string name="notifications_sent_never" msgid="1001964786456700536">"ஒருபோதும் அனுப்பியதில்லை"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"அறிவிப்பு அணுகல்"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"பணி விவர அறிவிப்புகளுக்கான அணுகல் தடுக்கப்பட்டுள்ளது"</string>
@@ -3595,7 +3584,7 @@
       <item quantity="other">கடந்த <xliff:g id="DURATION_1">%2$s</xliff:g> இல் <xliff:g id="COUNT">%1$d</xliff:g> பயன்பாடுகள் நினைவகத்தைப் பயன்படுத்தியுள்ளன</item>
       <item quantity="one">கடந்த <xliff:g id="DURATION_0">%2$s</xliff:g> இல் 1 பயன்பாடு நினைவகத்தைப் பயன்படுத்தியுள்ளது</item>
     </plurals>
-    <string name="running_frequency" msgid="6622624669948277693">"கால இடைவெளி"</string>
+    <string name="running_frequency" msgid="6622624669948277693">"அலைவரிசை"</string>
     <string name="memory_maximum_usage" msgid="6513785462055278341">"அதிகபட்ச உபயோகம்"</string>
     <string name="no_data_usage" msgid="9131454024293628063">"தரவு எதுவும் பயன்படுத்தப்படவில்லை"</string>
     <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"<xliff:g id="APP">%1$s</xliff:g>க்கான தொந்தரவு செய்ய வேண்டாம் அணுகலை அனுமதிக்கவா?"</string>
@@ -3762,7 +3751,7 @@
     <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> டேட்டா பயன்பாட்டு எச்சரிக்கை"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> டேட்டா பயன்பாட்டு எச்சரிக்கை / <xliff:g id="ID_2">%2$s</xliff:g> டேட்டா வரம்பு"</string>
     <string name="billing_cycle" msgid="6614597736285325497">"டேட்டா எச்சரிக்கை &amp; வரம்பு"</string>
-    <string name="app_usage_cycle" msgid="8877223251648092131">"ஆப் டேட்டா உபயோகச் சுழற்சி"</string>
+    <string name="app_usage_cycle" msgid="8877223251648092131">"ஆப்ஸ் டேட்டா உபயோகச் சுழற்சி"</string>
     <string name="cell_data_warning" msgid="1985956818884847057">"<xliff:g id="ID_1">^1</xliff:g> டேட்டா எச்சரிக்கை"</string>
     <string name="cell_data_limit" msgid="1578367585799358854">"<xliff:g id="ID_1">^1</xliff:g> டேட்டா வரம்பு"</string>
     <string name="cell_data_warning_and_limit" msgid="6888825370687743208">"<xliff:g id="ID_1">^1</xliff:g> டேட்டா எச்சரிக்கை / <xliff:g id="ID_2">^2</xliff:g> டேட்டா வரம்பு"</string>
@@ -3915,8 +3904,8 @@
     <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"உங்கள் மொபைலைக் கட்டுப்படுத்துவதற்கான உடனடி சைகைகள்"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"டேப்லெட்டைக் கட்டுப்படுத்துவதற்கான உடனடி சைகைகள்"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"சாதனத்தைக் கட்டுப்படுத்துவதற்கான உடனடி சைகைகள்"</string>
-    <string name="double_tap_power_for_camera_title" msgid="64716226816032800">"கேமராவிற்குச் செல்லுதல்"</string>
-    <string name="double_tap_power_for_camera_summary" msgid="242037150983277829">"கேமராவை விரைவாகத் திறக்க, பவர் பொத்தானை இருமுறை அழுத்தவும். எந்தத் திரையிலும் கேமரா இயங்கும்."</string>
+    <string name="double_tap_power_for_camera_title" msgid="64716226816032800">"கேமராவிற்குச் செல்"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="242037150983277829">"கேமராவை விரைவாகத் திறக்க, பவர் பட்டனை இருமுறை அழுத்தவும். எந்தத் திரையிலும் கேமரா இயங்கும்."</string>
     <string name="double_tap_power_for_camera_suggestion_title" msgid="6500405261202883589">"கேமராவை உடனடியாகத் திறக்கவும்"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"கேமராவை மாற்றுதல்"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
@@ -3940,7 +3929,7 @@
     <string name="ambient_display_pickup_summary" product="tablet" msgid="5435283849947236648">"நேரம், அறிவிப்பு ஐகான்கள் மற்றும் பிற தகவலைப் பார்க்க, டேப்லெட்டைக் கையில் எடுக்கவும்."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="8256669101643381568">"நேரம், அறிவிப்பு ஐகான்கள் மற்றும் பிற தகவலைப் பார்க்க, சாதனத்தைக் கையில் எடுக்கவும்."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"அறிவிப்புகளைப் பெற சென்சாரில் ஸ்வைப் செய்தல்"</string>
-    <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"கைரேகையை ஸ்வைப் செய்யவும்"</string>
+    <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"கைரேகை ஸ்வைப்"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"அறிவிப்புகளைப் பார்க்க, மொபைலின் பின்புறத்தில் உள்ள கைரேகை சென்சாரில் கீழ் நோக்கி ஸ்வைப் செய்தல்."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"அறிவிப்புகளைப் பார்க்க, டேப்லெட்டின் பின்புறத்தில் உள்ள கைரேகை உணர்வியில் கீழே ஸ்வைப் செய்யவும்."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"அறிவிப்புகளைப் பார்க்க, சாதனத்தின் பின்புறத்தில் உள்ள கைரேகை உணர்வியில் கீழே ஸ்வைப் செய்யவும்."</string>
@@ -4098,8 +4087,7 @@
     <string name="change_wifi_state_app_detail_switch" msgid="7942268646980694224">"வைஃபை அணுகலைக் கட்டுப்படுத்த, பயன்பாட்டை அனுமதித்தல்"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8434262633905502679">"வைஃபையை ஆன் அல்லது ஆஃப் செய்யவும், வைஃபை நெட்வொர்க்குகளை ஸ்கேன் செய்து இணைக்கவும், நெட்வொர்க்குகளைச் சேர்க்க அல்லது அகற்றவும், குறிப்பிட்ட இடம் அல்லது  சாதனத்திற்குள் மட்டும் இயங்கும் ஹாட்ஸ்பாட்டைத் தொடங்கவும் இந்தப் பயன்பாட்டை அனுமதிக்கவும்"</string>
     <string name="media_output_title" msgid="115223550977351699">"மீடியாவை இதில் இயக்கு:"</string>
-    <!-- no translation found for media_output_default_summary (8115153381240348279) -->
-    <skip />
+    <string name="media_output_default_summary" msgid="8115153381240348279">"இந்தச் சாதனம்"</string>
     <string name="media_output_summary" product="default" msgid="6839458453831567167">"மொபைல்"</string>
     <string name="media_output_summary" product="tablet" msgid="7217221078578554515">"டேப்லெட்"</string>
     <string name="media_output_summary" product="device" msgid="5677420090811068649">"சாதனம்"</string>

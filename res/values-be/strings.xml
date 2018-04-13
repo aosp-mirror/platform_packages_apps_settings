@@ -705,8 +705,7 @@
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> спрабуе атрымаць доступ да вашых кантактаў і гісторыі выклікаў."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> спраб. спалуч. па Bluetooth. Падчас падл. у прыл. будзе доступ да вашых кантактаў і гіст. выклікаў."</string>
     <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Спалучаныя прылады"</string>
-    <!-- no translation found for bluetooth_preference_found_media_devices (1617401232446299411) -->
-    <skip />
+    <string name="bluetooth_preference_found_media_devices" msgid="1617401232446299411">"Даступныя прылады"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"Няма даступных прылад"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Злучыцца"</string>
     <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"Адключыцца"</string>
@@ -1480,7 +1479,7 @@
     <string name="reset_esim_error_msg" msgid="8434956817922668388">"Немагчыма скінуць eSIM-карты з-за памылкі."</string>
     <string name="master_clear_title" msgid="3531267871084279512">"Сцерці ўсе даныя (cкід да заводскіх налад)"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Гэта дазволіць сцерці ўсе даныя з "<b>"унутранага сховiшча"</b>" вашага планшэта, у тым ліку:\n\n"<li>"Ваш улiковы запiс Google"</li>\n<li>"Сістэмныя даныя і налады, а таксама даныя і налады дадаткаў"</li>\n<li>"Спампаваныя дадаткі"</li></string>
-    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Гэта дазволіць сцерці ўсе даныя з "<b>"унутранага сховiшча"</b>" вашага тэлефона, у тым ліку:\n\n"<li>"Ваш улiковы запiс Google"</li>\n<li>"Сістэмныя даныя і налады, а таксама даныя і налады дадаткаў"</li>\n<li>"Спампаваныя дадаткі"</li></string>
+    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Гэта дазволіць сцерці ўсе даныя з "<b>"унутранага сховiшча"</b>" вашага тэлефона, у тым ліку:\n\n"<li>"Ваш уліковы запіс Google"</li>\n<li>"Сістэмныя даныя і налады, а таксама даныя і налады праграм"</li>\n<li>"Спампаваныя праграмы"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"У дадзены момант вы зайшлі ў наступныя ўліковыя запісы:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"На гэтай прыладзе ёсць іншыя карыстальнікі.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Музыка"</li>\n<li>"Фатаграфіі"</li>\n<li>"Іншыя дадзеныя карыстальніка"</li></string>
@@ -2053,7 +2052,7 @@
     <string name="captioning_standard_options_title" msgid="3284211791180335844">"Стандартныя опцыі"</string>
     <string name="captioning_locale" msgid="4559155661018823503">"Мова"</string>
     <string name="captioning_text_size" msgid="6737002449104466028">"Памер тэксту"</string>
-    <string name="captioning_preset" msgid="8939737196538429044">"Стыль подпісаў"</string>
+    <string name="captioning_preset" msgid="8939737196538429044">"Стыль цітраў"</string>
     <string name="captioning_custom_options_title" msgid="5067500939930322405">"Карыстальніцкія параметры"</string>
     <string name="captioning_background_color" msgid="9053011212948992570">"Колер фону"</string>
     <string name="captioning_background_opacity" msgid="6029993616419971202">"Празрыстасць фону"</string>
@@ -2089,8 +2088,8 @@
     <string name="enable_service_password_reason" msgid="1224075277603097951">"Уключэнне <xliff:g id="SERVICE">%1$s</xliff:g> уплывае на шыфраванне даных, таму вы павінны пацвердзіць свой пароль."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Сачыць за вашымі дзеяннямі"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="6640333613848713883">"Атрымліваць інфармацыю пра тое, якія дзеянні вы выконваеце ў праграме."</string>
-    <string name="disable_service_title" msgid="3624005212728512896">"Спыніць службу <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="disable_service_message" msgid="2247101878627941561">"Служба <xliff:g id="SERVICE">%1$s</xliff:g> спынiцца, калi вы краняце кнопку «ОК»."</string>
+    <string name="disable_service_title" msgid="3624005212728512896">"Адключыць \"<xliff:g id="SERVICE">%1$s</xliff:g>\"?"</string>
+    <string name="disable_service_message" msgid="2247101878627941561">"Каб адключыць \"<xliff:g id="SERVICE">%1$s</xliff:g>\", націсніце ОК."</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Няма ўсталяваных службаў"</string>
     <string name="accessibility_no_service_selected" msgid="2840969718780083998">"Служба не выбрана"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"Няма апісання."</string>
@@ -3097,7 +3096,7 @@
     <string name="sound_settings_summary_silent" msgid="5074529767435584948">"Для гуку выкліку заданы бязгучны рэжым"</string>
     <string name="sound_settings_example_summary" msgid="2404914514266523165">"Гучнасць званка – 80 %"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"Гучнасць медыя"</string>
-    <string name="call_volume_option_title" msgid="1265865226974255384">"Гучнасць выкліка"</string>
+    <string name="call_volume_option_title" msgid="1265865226974255384">"Гучнасць выкліку"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Гучнасць будзільніка"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Гучнасць выкліку"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Гучнасць апавяшчэнняў"</string>
@@ -3168,7 +3167,7 @@
     <string name="zen_mode_block_effect_summary_sound" msgid="1065107568053759972">"Гук і вібрацыя"</string>
     <string name="zen_mode_block_effect_summary_some" msgid="3635646031575107456">"Гук, вібрацыя і некаторыя візуальныя апавяшчэнні"</string>
     <string name="zen_mode_block_effect_summary_all" msgid="1213328945418248026">"Гук, вібрацыя і візуальныя апавяшчэнні"</string>
-    <string name="zen_mode_blocked_effects_footer" msgid="5710896246703497760">"Апавяшчэнні, неабходныя для забеспячэння базавых дзеянняў і статуса тэлефона, ніколі не будуць схаванымі"</string>
+    <string name="zen_mode_blocked_effects_footer" msgid="5710896246703497760">"Стан і апавяшчэнні, неабходныя для забеспячэння базавых дзеянняў тэлефона, ніколі не будуць схаванымі"</string>
     <string name="zen_mode_no_exceptions" msgid="7653433997399582247">"Няма"</string>
     <string name="zen_mode_other_options" msgid="520015080445012355">"іншыя параметры"</string>
     <string name="zen_mode_add" msgid="90014394953272517">"Дадаць"</string>
@@ -3953,7 +3952,7 @@
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Аб\'ект ранжыравання не ўтрымлівае гэты сімвал."</string>
     <string name="display_cutout_emulation" msgid="6306593933746393170">"Сімуляцыя дысплэя з выразам для камеры"</string>
     <string name="display_cutout_emulation_none" msgid="5144174674654097316">"Няма"</string>
-    <string name="special_access" msgid="3458780842491881155">"Асобы доступ для праграм"</string>
+    <string name="special_access" msgid="3458780842491881155">"Спецыяльны доступ"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> праграма можа выкарыстоўваць даныя без абмежаванняў</item>
       <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> праграмы могуць выкарыстоўваць даныя без абмежаванняў</item>
@@ -4219,17 +4218,13 @@
     <string name="battery_suggestion_summary" msgid="4585677159811722359"></string>
     <string name="gesture_prevent_ringing_screen_title" msgid="7840226017975251549">"Адключыць гук"</string>
     <string name="gesture_prevent_ringing_title" msgid="2483159069038138740">"Адначасова націсніце кнопкі сілкавання і павелічэння гучнасці"</string>
-    <!-- no translation found for gesture_prevent_ringing_sound_title (5724512060316688779) -->
-    <skip />
+    <string name="gesture_prevent_ringing_sound_title" msgid="5724512060316688779">"Ярлык для адключэння званкоў"</string>
     <string name="prevent_ringing_option_vibrate" msgid="7286821846542822661">"Вібрацыя"</string>
     <string name="prevent_ringing_option_mute" msgid="7551545579059879853">"Без гуку"</string>
     <string name="prevent_ringing_option_none" msgid="4656046650769569175">"Нічога не рабіць"</string>
-    <!-- no translation found for prevent_ringing_option_vibrate_summary (1157524435626890116) -->
-    <skip />
-    <!-- no translation found for prevent_ringing_option_mute_summary (4472465110708640980) -->
-    <skip />
-    <!-- no translation found for prevent_ringing_option_none_summary (5013718946609276137) -->
-    <skip />
+    <string name="prevent_ringing_option_vibrate_summary" msgid="1157524435626890116">"Уключана (вібрацыя)"</string>
+    <string name="prevent_ringing_option_mute_summary" msgid="4472465110708640980">"Уключана (без гуку)"</string>
+    <string name="prevent_ringing_option_none_summary" msgid="5013718946609276137">"Адключана"</string>
     <string name="pref_title_network_details" msgid="7186418845727358964">"Інфармацыя аб сетцы"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Назва вашай прылады даступная для праграм на вашым тэлефоне. Яе таксама будуць бачыць іншыя людзі, калі вы падключыцеся да прылад праз Bluetooth ці наладзіце хот-спот Wi-Fi."</string>
     <string name="devices_title" msgid="7701726109334110391">"Прылады"</string>
