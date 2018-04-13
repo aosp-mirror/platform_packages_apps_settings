@@ -30,7 +30,8 @@
         android:icon="@drawable/ic_storage"
         android:order="1"
         settings:allowDividerAbove="true"
-        settings:allowDividerBelow="true"/>
+        settings:allowDividerBelow="true"
+        settings:controller="com.android.settings.deviceinfo.storage.AutomaticStorageManagementSwitchPreferenceController" />
     <com.android.settings.deviceinfo.StorageItemPreference
         android:key="pref_photos_videos"
         android:title="@string/storage_photos_videos"
