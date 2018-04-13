@@ -17,8 +17,10 @@
 package com.android.settings.deviceinfo;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -84,8 +86,8 @@ public class DeviceNamePreferenceControllerTest {
 
     @Test
     public void constructor_deviceNameLoadedIfSet() {
-        Settings.Global
-            .putString(mContext.getContentResolver(), Settings.Global.DEVICE_NAME, "Test");
+        Settings.Global.putString(
+                mContext.getContentResolver(), Settings.Global.DEVICE_NAME, "Test");
         mController = new DeviceNamePreferenceController(mContext);
         mController.setLocalBluetoothManager(mBluetoothManager);
         assertThat(mController.getSummary()).isEqualTo("Test");
@@ -103,6 +105,8 @@ public class DeviceNamePreferenceControllerTest {
 
     @Test
     public void setDeviceName_preferenceUpdatedWhenDeviceNameUpdated() {
+        forceAcceptDeviceName();
+        mController.displayPreference(mScreen);
         mController.onPreferenceChange(mPreference, TESTING_STRING);
 
         assertThat(mPreference.getSummary()).isEqualTo(TESTING_STRING);
@@ -110,6 +114,8 @@ public class DeviceNamePreferenceControllerTest {
 
     @Test
     public void setDeviceName_bluetoothNameUpdatedWhenDeviceNameUpdated() {
+        forceAcceptDeviceName();
+        mController.displayPreference(mScreen);
         mController.onPreferenceChange(mPreference, TESTING_STRING);
 
         verify(mBluetoothAdapter).setName(eq(TESTING_STRING));
@@ -117,6 +123,8 @@ public class DeviceNamePreferenceControllerTest {
 
     @Test
     public void setDeviceName_wifiTetherNameUpdatedWhenDeviceNameUpdated() {
+        forceAcceptDeviceName();
+        mController.displayPreference(mScreen);
         mController.onPreferenceChange(mPreference, TESTING_STRING);
 
         ArgumentCaptor<WifiConfiguration> captor = ArgumentCaptor.forClass(WifiConfiguration.class);
@@ -129,6 +137,24 @@ public class DeviceNamePreferenceControllerTest {
         mController.displayPreference(mScreen);
 
         assertThat(mPreference.getText()).isEqualTo(Build.MODEL);
+    }
+
+    @Test
+    public void setDeviceName_ignoresIfCancelPressed() {
+        mController.displayPreference(mScreen);
+        mController.onPreferenceChange(mPreference, TESTING_STRING);
+
+        verify(mBluetoothAdapter, never()).setName(eq(TESTING_STRING));
+    }
+
+    private void forceAcceptDeviceName() {
+        mController.setHost(
+                new DeviceNamePreferenceController.DeviceNamePreferenceHost() {
+                    @Override
+                    public void showDeviceNameWarningDialog(String deviceName) {
+                        mController.confirmDeviceName();
+                    }
+                });
     }
 
 }
