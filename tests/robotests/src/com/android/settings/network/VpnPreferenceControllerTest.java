@@ -16,6 +16,7 @@
 
 package com.android.settings.network;
 
+import static com.google.common.truth.Truth.assertThat;
 import static android.arch.lifecycle.Lifecycle.Event.ON_PAUSE;
 import static android.arch.lifecycle.Lifecycle.Event.ON_RESUME;
 import static org.mockito.Matchers.any;
@@ -31,9 +32,11 @@ import android.net.ConnectivityManager;
 import android.net.IConnectivityManager;
 import android.net.NetworkRequest;
 import android.os.IBinder;
+import android.os.UserHandle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
+import com.android.internal.net.VpnConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -42,6 +45,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowServiceManager;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -98,5 +102,17 @@ public class VpnPreferenceControllerTest {
         mLifecycle.handleLifecycleEvent(ON_PAUSE);
         verify(mConnectivityManager).unregisterNetworkCallback(
                 any(ConnectivityManager.NetworkCallback.class));
+    }
+
+    @Test
+    public void getNameForVpnConfig_legacyVPNConfig_shouldSetSummaryToConnected() {
+        final VpnConfig config = new VpnConfig();
+        config.legacy = true;
+        final VpnPreferenceController controller =
+                new VpnPreferenceController(RuntimeEnvironment.application);
+
+        final String summary = controller.getNameForVpnConfig(config, UserHandle.CURRENT);
+
+        assertThat(summary).isEqualTo("Connected");
     }
 }
