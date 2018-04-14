@@ -37,6 +37,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -462,7 +463,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                 syncPref.setSummary(R.string.sync_in_progress);
             } else if (successEndTime != 0) {
                 date.setTime(successEndTime);
-                final String timeString = formatSyncDate(date);
+                final String timeString = formatSyncDate(getContext(), date);
                 syncPref.setSummary(getResources().getString(R.string.last_synced, timeString));
             } else {
                 syncPref.setSummary("");
@@ -574,5 +575,12 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     @Override
     public int getHelpResource() {
         return R.string.help_url_accounts;
+    }
+
+    private static String formatSyncDate(Context context, Date date) {
+        return DateUtils.formatDateTime(context, date.getTime(),
+                DateUtils.FORMAT_SHOW_DATE
+                        | DateUtils.FORMAT_SHOW_YEAR
+                        | DateUtils.FORMAT_SHOW_TIME);
     }
 }

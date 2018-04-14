@@ -33,8 +33,6 @@ import com.android.settings.Utils;
 import com.android.settingslib.accounts.AuthenticatorHelper;
 import com.android.settingslib.utils.ThreadUtils;
 
-import java.util.Date;
-
 abstract class AccountPreferenceBase extends SettingsPreferenceFragment
         implements AuthenticatorHelper.OnAccountsUpdateListener {
 
@@ -128,10 +126,5 @@ abstract class AccountPreferenceBase extends SettingsPreferenceFragment
 
     protected CharSequence getLabelForType(final String accountType) {
         return mAuthenticatorHelper.getLabelForType(getActivity(), accountType);
-    }
-
-    protected String formatSyncDate(Date date) {
-        // TODO: Switch to using DateUtils.formatDateTime
-        return mDateFormat.format(date) + " " + mTimeFormat.format(date);
     }
 }

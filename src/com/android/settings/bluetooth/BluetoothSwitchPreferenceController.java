@@ -16,75 +16,79 @@
 package com.android.settings.bluetooth;
 
 import android.content.Context;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
+import android.view.View;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.R;
+import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.location.ScanningSettings;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.utils.AnnotationSpan;
 import com.android.settings.widget.SwitchWidgetController;
-import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
+import com.android.settingslib.widget.FooterPreference;
 
 /**
- * PreferenceController to update of bluetooth {@link SwitchPreference}. It will
- *
- * 1. Invoke the user toggle
- * 2. Listen to the update from {@link LocalBluetoothManager}
+ * PreferenceController to update of bluetooth state. All behavior except managing the footer text
+ * is delegated to the SwitchWidgetController it uses.
  */
-public class BluetoothSwitchPreferenceController extends TogglePreferenceController
-        implements LifecycleObserver, OnStart, OnStop {
+public class BluetoothSwitchPreferenceController
+        implements LifecycleObserver, OnStart, OnStop,
+        SwitchWidgetController.OnSwitchChangeListener, View.OnClickListener {
 
-    public static final String KEY_TOGGLE_BLUETOOTH = "toggle_bluetooth_switch";
-
-    private LocalBluetoothManager mBluetoothManager;
-    private SwitchPreference mBtPreference;
-    private BluetoothEnabler mBluetoothEnabler;
-    private RestrictionUtils mRestrictionUtils;
     @VisibleForTesting
     LocalBluetoothAdapter mBluetoothAdapter;
 
-    public BluetoothSwitchPreferenceController(Context context) {
-        this(context, Utils.getLocalBtManager(context), new RestrictionUtils());
+    private LocalBluetoothManager mBluetoothManager;
+    private BluetoothEnabler mBluetoothEnabler;
+    private RestrictionUtils mRestrictionUtils;
+    private SwitchWidgetController mSwitch;
+    private Context mContext;
+    private FooterPreference mFooterPreference;
+
+    public BluetoothSwitchPreferenceController(Context context,
+            SwitchWidgetController switchController,
+            FooterPreference footerPreference) {
+        this(context, Utils.getLocalBtManager(context), new RestrictionUtils(), switchController,
+                footerPreference);
     }
 
     @VisibleForTesting
     public BluetoothSwitchPreferenceController(Context context,
-            LocalBluetoothManager bluetoothManager, RestrictionUtils restrictionUtils) {
-        super(context, KEY_TOGGLE_BLUETOOTH);
+            LocalBluetoothManager bluetoothManager, RestrictionUtils restrictionUtils,
+            SwitchWidgetController switchController, FooterPreference footerPreference) {
         mBluetoothManager = bluetoothManager;
         mRestrictionUtils = restrictionUtils;
+        mSwitch = switchController;
+        mContext = context;
+        mFooterPreference = footerPreference;
+
+        mSwitch.setupView();
+        updateText(mSwitch.isChecked());
 
         if (mBluetoothManager != null) {
             mBluetoothAdapter = mBluetoothManager.getBluetoothAdapter();
         }
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        mBtPreference = (SwitchPreference) screen.findPreference(KEY_TOGGLE_BLUETOOTH);
-        mBluetoothEnabler = new BluetoothEnabler(mContext,
-                new SwitchController(mBtPreference),
-                FeatureFactory.getFactory(mContext).getMetricsFeatureProvider(), mBluetoothManager,
+        mBluetoothEnabler = new BluetoothEnabler(context,
+                switchController,
+                FeatureFactory.getFactory(context).getMetricsFeatureProvider(), mBluetoothManager,
                 MetricsEvent.ACTION_SETTINGS_MASTER_SWITCH_BLUETOOTH_TOGGLE,
                 mRestrictionUtils);
-    }
-
-    @Override
-    public int getAvailabilityStatus() {
-        return mBluetoothAdapter != null ? AVAILABLE : DISABLED_UNSUPPORTED;
+        mBluetoothEnabler.setToggleCallback(this);
     }
 
     @Override
     public void onStart() {
         mBluetoothEnabler.resume(mContext);
+        if (mSwitch != null) {
+            updateText(mSwitch.isChecked());
+        }
     }
 
     @Override
@@ -93,70 +97,30 @@ public class BluetoothSwitchPreferenceController extends TogglePreferenceControl
     }
 
     @Override
-    public boolean isChecked() {
-        return mBluetoothAdapter != null ? mBluetoothAdapter.isEnabled() : false;
-    }
-
-    @Override
-    public boolean setChecked(boolean isChecked) {
-        if (mBluetoothAdapter != null) {
-            mBluetoothAdapter.setBluetoothEnabled(isChecked);
-        }
+    public boolean onSwitchToggled(boolean isChecked) {
+        updateText(isChecked);
         return true;
     }
 
-    /**
-     * Control the switch inside {@link SwitchPreference}
-     */
-    @VisibleForTesting
-    static class SwitchController extends SwitchWidgetController implements
-            Preference.OnPreferenceChangeListener {
-        private SwitchPreference mSwitchPreference;
+    @Override
+    public void onClick(View v) {
+        // send users to scanning settings if they click on the link in the summary text
+        new SubSettingLauncher(mContext)
+                .setDestination(ScanningSettings.class.getName())
+                .setSourceMetricsCategory(MetricsProto.MetricsEvent.BLUETOOTH_FRAGMENT)
+                .launch();
+    }
 
-        public SwitchController(SwitchPreference switchPreference) {
-            mSwitchPreference = switchPreference;
-        }
-
-        @Override
-        public void updateTitle(boolean isChecked) {
-        }
-
-        @Override
-        public void startListening() {
-            mSwitchPreference.setOnPreferenceChangeListener(this);
-        }
-
-        @Override
-        public void stopListening() {
-            mSwitchPreference.setOnPreferenceChangeListener(null);
-        }
-
-        @Override
-        public void setChecked(boolean checked) {
-            mSwitchPreference.setChecked(checked);
-        }
-
-        @Override
-        public boolean isChecked() {
-            return mSwitchPreference.isChecked();
-        }
-
-        @Override
-        public void setEnabled(boolean enabled) {
-            mSwitchPreference.setEnabled(enabled);
-        }
-
-        @Override
-        public boolean onPreferenceChange(Preference preference, Object newValue) {
-            if (mListener != null) {
-                return mListener.onSwitchToggled((Boolean) newValue);
-            }
-            return false;
-        }
-
-        @Override
-        public void setDisabledByAdmin(RestrictedLockUtils.EnforcedAdmin admin) {
-            mSwitchPreference.setEnabled(admin == null);
+    @VisibleForTesting void updateText(boolean isChecked) {
+        if (!isChecked
+                && Utils.isBluetoothScanningEnabled(mContext)) {
+            AnnotationSpan.LinkInfo info = new AnnotationSpan.LinkInfo(
+                    AnnotationSpan.LinkInfo.DEFAULT_ANNOTATION, this);
+            CharSequence text = AnnotationSpan.linkify(
+                    mContext.getText(R.string.bluetooth_scanning_on_info_message), info);
+            mFooterPreference.setTitle(text);
+        } else {
+            mFooterPreference.setTitle(R.string.bluetooth_empty_list_bluetooth_off);
         }
     }
 }
