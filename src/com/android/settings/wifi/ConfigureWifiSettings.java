@@ -88,12 +88,12 @@ public class ConfigureWifiSettings extends DashboardFragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == WIFI_WAKEUP_REQUEST_CODE && mWifiWakeupPreferenceController != null) {
+        if (requestCode == WIFI_WAKEUP_REQUEST_CODE && mWifiWakeupPreferenceController != null) {
             mWifiWakeupPreferenceController.onActivityResult(requestCode, resultCode);
             return;
         }
-        if (resultCode == UseOpenWifiPreferenceController.REQUEST_CODE_OPEN_WIFI_AUTOMATICALLY
-                && mUseOpenWifiPreferenceController == null) {
+        if (requestCode == UseOpenWifiPreferenceController.REQUEST_CODE_OPEN_WIFI_AUTOMATICALLY
+                && mUseOpenWifiPreferenceController != null) {
             mUseOpenWifiPreferenceController.onActivityResult(requestCode, resultCode);
             return;
         }
