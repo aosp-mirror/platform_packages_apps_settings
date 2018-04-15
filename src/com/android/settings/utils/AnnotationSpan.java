@@ -80,6 +80,7 @@ public class AnnotationSpan extends URLSpan {
      */
     public static class LinkInfo {
         private static final String TAG = "AnnotationSpan.LinkInfo";
+        public static final String DEFAULT_ANNOTATION = "link";
         private final String mAnnotation;
         private final Boolean mActionable;
         private final View.OnClickListener mListener;
