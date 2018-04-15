@@ -17,8 +17,6 @@
 package com.android.settings.datausage;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.verify;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -41,17 +39,15 @@ import com.android.settings.SubSettings;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settingslib.Utils;
-import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.Shadows;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
 
 import java.util.concurrent.TimeUnit;
@@ -216,7 +212,7 @@ public class DataUsageSummaryPreferenceTest {
     }
 
     @Test
-    public void testSetUsageInfo_withRecentCarrierUpdate_doesNotSetCarrierInfoWarningColorAndFont() {
+    public void setUsageInfo_withRecentCarrierUpdate_doesNotSetCarrierInfoWarningColorAndFont() {
         final long updateTime = System.currentTimeMillis() - TimeUnit.HOURS.toMillis(1);
         mCarrierInfo = (TextView) mHolder.findViewById(R.id.carrier_and_update);
         mSummaryPreference.setUsageInfo(mCycleEnd, updateTime, DUMMY_CARRIER, 1 /* numPlans */,
@@ -364,7 +360,10 @@ public class DataUsageSummaryPreferenceTest {
     public void testSetUsageAndRemainingInfo_withUsageInfo_dataUsageAndRemainingShown() {
         mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, DUMMY_CARRIER, 1 /* numPlans */,
                 new Intent());
-        mSummaryPreference.setUsageNumbers(1000000L, 10000000L, true);
+        mSummaryPreference.setUsageNumbers(
+                BillingCycleSettings.MIB_IN_BYTES,
+                10 * BillingCycleSettings.MIB_IN_BYTES,
+                true /* hasMobileData */);
 
         bindViewHolder();
         assertThat(mDataUsed.getText().toString()).isEqualTo("1.00 MB used");
@@ -377,7 +376,10 @@ public class DataUsageSummaryPreferenceTest {
     public void testSetUsageInfo_withDataOverusage() {
         mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, DUMMY_CARRIER, 1 /* numPlans */,
                 new Intent());
-        mSummaryPreference.setUsageNumbers(11_000_000L, 10_000_000L, true);
+        mSummaryPreference.setUsageNumbers(
+                11 * BillingCycleSettings.MIB_IN_BYTES,
+                10 * BillingCycleSettings.MIB_IN_BYTES,
+                true /* hasMobileData */);
 
         bindViewHolder();
         assertThat(mDataUsed.getText().toString()).isEqualTo("11.00 MB used");
@@ -390,7 +392,8 @@ public class DataUsageSummaryPreferenceTest {
     public void testSetUsageInfo_withUsageInfo_dataUsageShown() {
         mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, DUMMY_CARRIER, 0 /* numPlans */,
                 new Intent());
-        mSummaryPreference.setUsageNumbers(1000000L, -1L, true);
+        mSummaryPreference.setUsageNumbers(
+                BillingCycleSettings.MIB_IN_BYTES, -1L, true /* hasMobileData */);
 
         bindViewHolder();
         assertThat(mDataUsed.getText().toString()).isEqualTo("1.00 MB used");

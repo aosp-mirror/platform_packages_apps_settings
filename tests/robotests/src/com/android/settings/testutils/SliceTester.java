@@ -64,7 +64,7 @@ public class SliceTester {
 
         final PendingIntent primaryPendingIntent = metadata.getPrimaryAction().getAction();
         assertThat(primaryPendingIntent).isEqualTo(
-                SliceBuilderUtils.getContentIntent(context, sliceData));
+                SliceBuilderUtils.getContentPendingIntent(context, sliceData));
 
         final List<SliceItem> sliceItems = slice.getItems();
         assertTitle(sliceItems, sliceData.getTitle());
@@ -97,7 +97,7 @@ public class SliceTester {
         // Check primary intent
         final PendingIntent primaryPendingIntent = metadata.getPrimaryAction().getAction();
         assertThat(primaryPendingIntent).isEqualTo(
-                SliceBuilderUtils.getContentIntent(context, sliceData));
+                SliceBuilderUtils.getContentPendingIntent(context, sliceData));
 
         final List<SliceItem> sliceItems = slice.getItems();
         assertTitle(sliceItems, sliceData.getTitle());
@@ -147,7 +147,7 @@ public class SliceTester {
             case DISABLED_FOR_USER:
             case DISABLED_DEPENDENT_SETTING:
                 assertThat(primaryPendingIntent).isEqualTo(
-                        SliceBuilderUtils.getContentIntent(context, sliceData));
+                        SliceBuilderUtils.getContentPendingIntent(context, sliceData));
                 break;
         }
 

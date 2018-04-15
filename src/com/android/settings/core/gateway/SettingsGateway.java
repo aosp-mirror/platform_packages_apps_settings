@@ -55,6 +55,7 @@ import com.android.settings.backup.ToggleBackupSettingFragment;
 import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
+import com.android.settings.connecteddevice.PreviouslyConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.usb.UsbDetailsFragment;
 import com.android.settings.datausage.DataUsageList;
 import com.android.settings.datausage.DataUsageSummary;
@@ -90,6 +91,7 @@ import com.android.settings.inputmethod.UserDictionarySettings;
 import com.android.settings.language.LanguageAndInputSettings;
 import com.android.settings.localepicker.LocaleListEditor;
 import com.android.settings.location.LocationSettings;
+import com.android.settings.location.ScanningSettings;
 import com.android.settings.network.ApnEditor;
 import com.android.settings.network.ApnSettings;
 import com.android.settings.network.NetworkDashboardFragment;
@@ -165,6 +167,7 @@ public class SettingsGateway {
             ProcessStatsUi.class.getName(),
             NotificationStation.class.getName(),
             LocationSettings.class.getName(),
+            ScanningSettings.class.getName(),
             SecuritySettings.class.getName(),
             UsageAccessDetails.class.getName(),
             PrivacySettings.class.getName(),
@@ -257,6 +260,7 @@ public class SettingsGateway {
             DataUsageList.class.getName(),
             DirectoryAccessDetails.class.getName(),
             ToggleBackupSettingFragment.class.getName(),
+            PreviouslyConnectedDeviceDashboardFragment.class.getName(),
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

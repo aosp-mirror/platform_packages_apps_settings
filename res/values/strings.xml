@@ -786,10 +786,10 @@
     <string name="zone_time_type_dst">Daylight savings time</string>
     <!-- Describes the time type "standard time" (used in zone_change_to_from_dst, when no zone specific name is available) -->
     <string name="zone_time_type_standard">Standard time</string>
-    <!-- The menu item to switch to selecting a time zone by region (default) -->
-    <string name="zone_menu_by_region">Show time zones by region</string>
-    <!-- The menu item to switch to selecting a time zone with a fixed offset (such as UTC or GMT+0200) -->
-    <string name="zone_menu_by_offset">Show time zones by UTC offset</string>
+    <!-- The menu item to switch to selecting a time zone by region (default) [CHAR LIMIT=30] -->
+    <string name="zone_menu_by_region">Select by region</string>
+    <!-- The menu item to switch to selecting a time zone with a fixed offset (such as UTC or GMT+0200) [CHAR LIMIT=30] -->
+    <string name="zone_menu_by_offset">Select by UTC offset</string>
 
     <!-- Title string shown above DatePicker, letting a user select system date
          [CHAR LIMIT=20] -->
@@ -1613,6 +1613,8 @@
     <string name="bluetooth_advanced_titlebar">Advanced Bluetooth</string>
     <!-- Bluetooth settings. Text displayed when Bluetooth is off and device list is empty [CHAR LIMIT=50]-->
     <string name="bluetooth_empty_list_bluetooth_off">When Bluetooth is turned on, your device can communicate with other nearby Bluetooth devices.</string>
+    <!-- Bluetooth settings. Text displayed when Bluetooth is off and bluetooth scanning is turned on [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_scanning_on_info_message">When Bluetooth is turned on, your device can communicate with other nearby Bluetooth devices.\n\nTo improve device experience, apps and services can still scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services. you can change this in <annotation id="link">scanning settings</annotation>.</string>
     <!-- Message to describe "BLE scan always available feature" when Bluetooth is off. The
       place-holders "LINK_BEGIN" and "LINK_END" must NOT be translated. They mark a link to bring
       the user to "scanning settings" screen. -->
@@ -1983,6 +1985,8 @@
     <string name="wifi_ap_2G">2.4 GHz</string>
     <!-- Label for adding to the list of selected bands when 5.0 GHz is selected -->
     <string name="wifi_ap_5G">5.0 GHz</string>
+    <!-- Label that is shown as a dialog summary informing users they must pick at LEAST one band for their hotspot [CHAR LIMIT=NONE]-->
+    <string name="wifi_ap_band_select_one">Choose at least one band for Wi\u2011Fi hotspot:</string>
     <!-- Label for the spinner to show ip settings [CHAR LIMIT=25] -->
     <string name="wifi_ip_settings">IP settings</string>
     <!-- Label for the check box to share a network with other users on the same device -->
@@ -3248,9 +3252,11 @@
     <string name="storage_wizard_slow_v2_continue">Continue</string>
 
     <!-- Title of a full-screen message. This text lets the user know how to manage the storage device moving forward. The placeholder is for the name of the device (e.g. brand name of the SD card). [CHAR LIMIT=NONE] -->
-    <string name="storage_wizard_ready_v2_external_body">To move content to <xliff:g id="name" example="SanDisk SD card">^1</xliff:g>, go to <b>Settings > Storage</b></string>
+    <string name="storage_wizard_ready_v2_external_body">You can move content to <xliff:g id="name" example="SanDisk SD card">^1</xliff:g></string>
     <!-- Title of a full-screen message. This text lets the user know that their content was moved to their storage device and how to manage the storage device moving forward. The placeholder is for the name of the device (e.g. brand name of the SD card). [CHAR LIMIT=NONE] -->
-    <string name="storage_wizard_ready_v2_internal_body">Your content was moved to <xliff:g id="name" example="SanDisk SD card">^1</xliff:g>.
+    <string name="storage_wizard_ready_v2_internal_body">To move content to <xliff:g id="name" example="SanDisk SD card">^1</xliff:g>, go to <b>Settings > Storage</b></string>
+    <!-- Title of a full-screen message. This text lets the user know that their content was moved to their storage device and how to manage the storage device moving forward. The placeholder is for the name of the device (e.g. brand name of the SD card). [CHAR LIMIT=NONE] -->
+    <string name="storage_wizard_ready_v2_internal_moved_body">Your content was moved to <xliff:g id="name" example="SanDisk SD card">^1</xliff:g>.
 \n\nTo manage this <xliff:g id="name" example="SD card">^2</xliff:g>, go to <b>Settings > Storage</b>.</string>
 
     <!-- Phone info screen, section titles: -->
@@ -4960,8 +4966,8 @@
     <!-- Bluetooth on time -->
     <string name="bluetooth_on_time">Wi\u2011Fi on time</string>
 
-    <!-- Activity title for advanced battery usage page [CHAR LIMIT=60] -->
-    <string name="advanced_battery_title">Advanced battery usage</string>
+    <!-- Activity title for advanced battery usage page [CHAR LIMIT=25] -->
+    <string name="advanced_battery_title">Battery usage</string>
     <!-- Activity title for battery usage history details [CHAR LIMIT=60] -->
     <string name="history_details_title">History details</string>
 
@@ -6660,6 +6666,8 @@
     <string name="help_url_font_size" translatable="false"></string>
     <!-- Help URL, Display size [DO NOT TRANSLATE] -->
     <string name="help_url_display_size" translatable="false"></string>
+    <!-- Help URL, Previously connected bluetooth devices [DO NOT TRANSLATE] -->
+    <string name="help_url_previously_connected_devices" translatable="false"></string>
     <!-- Help URL, Auto brightness [DO NOT TRANSLATE] -->
     <string name="help_url_auto_brightness" translatable="false" />
 
@@ -6690,6 +6698,8 @@
     <string name="help_uri_wifi_calling" translatable="false"></string>
     <!-- url for the wifi scanning required dialog help page -->
     <string name="help_uri_wifi_scanning_required" translatable="false"></string>
+    <!-- url for the bluetooth toggle required dialog help page -->
+    <string name="help_uri_bluetooth_screen" translatable="false"></string>
 
     <!-- User account title [CHAR LIMIT=30] -->
     <string name="user_account_title">Account for content</string>
@@ -7645,11 +7655,11 @@
     <string name="app_settings_link">Additional settings in the app</string>
 
     <!-- [CHAR LIMIT=45] App notification listing summary, blocked apps -->
-    <string name="app_notification_listing_summary_zero">Turned on for all apps</string>
+    <string name="app_notification_listing_summary_zero">On for all apps</string>
     <!-- [CHAR LIMIT=45] App notification listing summary, blocked apps -->
     <plurals name="app_notification_listing_summary_others">
-        <item quantity="one">Turned off for <xliff:g id="count" example="1">%d</xliff:g> app</item>
-        <item quantity="other">Turned off for <xliff:g id="count" example="10">%d</xliff:g> apps</item>
+        <item quantity="one">Off for <xliff:g id="count" example="1">%d</xliff:g> app</item>
+        <item quantity="other">Off for <xliff:g id="count" example="10">%d</xliff:g> apps</item>
     </plurals>
 
     <!-- [CHAR LIMIT=NONE] Footer listing a count of deleted channels. -->

@@ -54,7 +54,6 @@ public class WifiScanningRequiredFragment extends InstrumentedDialogFragment imp
                 .setNegativeButton(R.string.cancel, null);
         addButtonIfNeeded(builder);
 
-
         return builder.create();
     }
 

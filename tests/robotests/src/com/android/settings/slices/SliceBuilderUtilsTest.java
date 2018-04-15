@@ -24,8 +24,10 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
+import android.app.PendingIntent;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.provider.Settings;
@@ -387,6 +389,17 @@ public class SliceBuilderUtilsTest {
         assertThat(capturedLoggingPair.second)
                 .isEqualTo(data.getKey());
         SliceTester.testSettingsUnavailableSlice(mContext, slice, data);
+    }
+
+    @Test
+    public void testContentIntent_includesUniqueData() {
+        final SliceData sliceData = getDummyData();
+        final Uri expectedUri = new Uri.Builder().appendPath(sliceData.getKey()).build();
+
+        final Intent intent = SliceBuilderUtils.getContentIntent(mContext, sliceData);
+        final Uri intentData = intent.getData();
+
+        assertThat(intentData).isEqualTo(expectedUri);
     }
 
     private SliceData getDummyData() {
