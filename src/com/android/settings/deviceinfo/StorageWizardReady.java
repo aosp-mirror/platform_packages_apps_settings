@@ -36,10 +36,14 @@ public class StorageWizardReady extends StorageWizardBase {
         setHeaderText(R.string.storage_wizard_ready_title, mDisk.getShortDescription());
 
         final VolumeInfo privateVol = findFirstVolume(VolumeInfo.TYPE_PRIVATE);
-        final boolean migrateSkip = getIntent().getBooleanExtra(EXTRA_MIGRATE_SKIP, false);
-        if (privateVol != null && !migrateSkip) {
-            setBodyText(R.string.storage_wizard_ready_v2_internal_body,
-                    mDisk.getDescription(), mDisk.getShortDescription());
+        if (privateVol != null) {
+            if (getIntent().getBooleanExtra(EXTRA_MIGRATE_SKIP, false)) {
+                setBodyText(R.string.storage_wizard_ready_v2_internal_body,
+                        mDisk.getDescription());
+            } else {
+                setBodyText(R.string.storage_wizard_ready_v2_internal_moved_body,
+                        mDisk.getDescription(), mDisk.getShortDescription());
+            }
         } else {
             setBodyText(R.string.storage_wizard_ready_v2_external_body,
                     mDisk.getDescription());
