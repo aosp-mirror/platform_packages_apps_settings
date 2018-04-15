@@ -1977,6 +1977,8 @@
     <string name="wifi_ap_2G">2.4 GHz</string>
     <!-- Label for adding to the list of selected bands when 5.0 GHz is selected -->
     <string name="wifi_ap_5G">5.0 GHz</string>
+    <!-- Label that is shown as a dialog summary informing users they must pick at LEAST one band for their hotspot [CHAR LIMIT=NONE]-->
+    <string name="wifi_ap_band_select_one">Choose at least one band for Wi\u2011Fi hotspot:</string>
     <!-- Label for the spinner to show ip settings [CHAR LIMIT=25] -->
     <string name="wifi_ip_settings">IP settings</string>
     <!-- Label for the check box to share a network with other users on the same device -->
@@ -3242,9 +3244,11 @@
     <string name="storage_wizard_slow_v2_continue">Continue</string>
 
     <!-- Title of a full-screen message. This text lets the user know how to manage the storage device moving forward. The placeholder is for the name of the device (e.g. brand name of the SD card). [CHAR LIMIT=NONE] -->
-    <string name="storage_wizard_ready_v2_external_body">To move content to <xliff:g id="name" example="SanDisk SD card">^1</xliff:g>, go to <b>Settings > Storage</b></string>
+    <string name="storage_wizard_ready_v2_external_body">You can move content to <xliff:g id="name" example="SanDisk SD card">^1</xliff:g></string>
     <!-- Title of a full-screen message. This text lets the user know that their content was moved to their storage device and how to manage the storage device moving forward. The placeholder is for the name of the device (e.g. brand name of the SD card). [CHAR LIMIT=NONE] -->
-    <string name="storage_wizard_ready_v2_internal_body">Your content was moved to <xliff:g id="name" example="SanDisk SD card">^1</xliff:g>.
+    <string name="storage_wizard_ready_v2_internal_body">To move content to <xliff:g id="name" example="SanDisk SD card">^1</xliff:g>, go to <b>Settings > Storage</b></string>
+    <!-- Title of a full-screen message. This text lets the user know that their content was moved to their storage device and how to manage the storage device moving forward. The placeholder is for the name of the device (e.g. brand name of the SD card). [CHAR LIMIT=NONE] -->
+    <string name="storage_wizard_ready_v2_internal_moved_body">Your content was moved to <xliff:g id="name" example="SanDisk SD card">^1</xliff:g>.
 \n\nTo manage this <xliff:g id="name" example="SD card">^2</xliff:g>, go to <b>Settings > Storage</b>.</string>
 
     <!-- Phone info screen, section titles: -->

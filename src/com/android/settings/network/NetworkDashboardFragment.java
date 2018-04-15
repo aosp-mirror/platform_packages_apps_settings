@@ -26,8 +26,6 @@ import android.content.Context;
 import android.provider.SearchIndexableResource;
 import android.support.annotation.VisibleForTesting;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -50,9 +48,6 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         MobilePlanPreferenceHost {
 
     private static final String TAG = "NetworkDashboardFrag";
-    private static final int MENU_NETWORK_RESET = Menu.FIRST;
-
-    private NetworkResetActionMenuController mNetworkResetController;
 
     @Override
     public int getMetricsCategory() {
@@ -72,7 +67,6 @@ public class NetworkDashboardFragment extends DashboardFragment implements
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mNetworkResetController = new NetworkResetActionMenuController(context, MENU_NETWORK_RESET);
 
         use(AirplaneModePreferenceController.class).setFragment(this);
     }
@@ -80,12 +74,6 @@ public class NetworkDashboardFragment extends DashboardFragment implements
     @Override
     public int getHelpResource() {
         return R.string.help_url_network_dashboard;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        mNetworkResetController.buildMenuItem(menu);
     }
 
     @Override
