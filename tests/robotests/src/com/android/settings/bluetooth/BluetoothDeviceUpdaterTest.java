@@ -107,6 +107,16 @@ public class BluetoothDeviceUpdaterTest {
     }
 
     @Test
+    public void testOnDeviceDeleted_deviceExists_removePreference() {
+        mBluetoothDeviceUpdater.mPreferenceMap.put(mBluetoothDevice, mPreference);
+
+        mBluetoothDeviceUpdater.onDeviceDeleted(mCachedBluetoothDevice);
+
+        verify(mDevicePreferenceCallback).onDeviceRemoved(mPreference);
+        assertThat(mBluetoothDeviceUpdater.mPreferenceMap.containsKey(mBluetoothDevice)).isFalse();
+    }
+
+    @Test
     public void testRemovePreference_deviceNotExist_doNothing() {
         mBluetoothDeviceUpdater.removePreference(mCachedBluetoothDevice);
 
