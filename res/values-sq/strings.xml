@@ -349,10 +349,8 @@
     <string name="zone_info_footer_no_dst" msgid="8652423870143056964">"Përdor <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Nuk ka orë verore."</string>
     <string name="zone_time_type_dst" msgid="8850494578766845276">"Ora verore"</string>
     <string name="zone_time_type_standard" msgid="3462424485380376522">"Ora standarde"</string>
-    <!-- no translation found for zone_menu_by_region (8370437123807764346) -->
-    <skip />
-    <!-- no translation found for zone_menu_by_offset (7161573994228041794) -->
-    <skip />
+    <string name="zone_menu_by_region" msgid="8370437123807764346">"Zgjidh sipas rajonit"</string>
+    <string name="zone_menu_by_offset" msgid="7161573994228041794">"Zgjidh sipas ndryshimit në UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Data"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Ora"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Kyçja automatike"</string>
@@ -694,6 +692,8 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Të përparuara"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Cilësimet e përparuara të Bluetooth-it"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Kur Bluetooth-i është i aktivizuar, pajisja jote mund të komunikojë me pajisjet e tjera me Bluetooth në afërsi."</string>
+    <!-- no translation found for bluetooth_scanning_on_info_message (824285504325592644) -->
+    <skip />
     <string name="ble_scan_notify_text" msgid="1295915006005700650">"Për të përmirësuar saktësinë e vendndodhjes, aplikacionet dhe shërbimet e sistemit mund t\'i zbulojnë akoma pajisjet me Bluetooth. Këtë mund ta ndryshosh te <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>cilësimet e skanimit<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_failed" msgid="4500234659813241053">"Nuk mund të lidhej. Provo përsëri."</string>
     <string name="device_details_title" msgid="6576953269221085300">"Detajet e pajisjes"</string>
@@ -1392,8 +1392,12 @@
     <string name="storage_wizard_slow_v2_body" msgid="6897444467730463117">"Mund ta përdorësh përsëri këtë <xliff:g id="NAME_0">^1</xliff:g>, por mund të jetë e ngadaltë. \n\nAplikacionet e ruajtura në këtë <xliff:g id="NAME_1">^2</xliff:g> mund të mos funksionojnë si duhet dhe transferimet e përmbajtjeve mund të kërkojnë shumë kohë. \n\nProvo të përdorësh një <xliff:g id="NAME_2">^3</xliff:g> më të shpejtë ose përdor më mirë këtë <xliff:g id="NAME_3">^4</xliff:g> për hapësirë ruajtëse të lëvizshme."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="4126873669723115805">"Fillo nga e para"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="49399942893518218">"Vazhdo"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="5993954859154357197">"Për të zhvendosur përmbajtjen te <xliff:g id="NAME">^1</xliff:g>, shko te "<b>"Cilësimet &gt; Hapësira ruajtëse"</b></string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="2574326509794010488">"Përmbajtja jote u zhvendos te <xliff:g id="NAME_0">^1</xliff:g>. \n\nPër të menaxhuar këtë <xliff:g id="NAME_1">^2</xliff:g>, shko te "<b>"Cilësimet &gt; Hapësira ruajtëse"</b>"."</string>
+    <!-- no translation found for storage_wizard_ready_v2_external_body (11937346870534608) -->
+    <skip />
+    <!-- no translation found for storage_wizard_ready_v2_internal_body (4658433206901211269) -->
+    <skip />
+    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (6239886818487538806) -->
+    <skip />
     <string name="battery_status_title" msgid="9159414319574976203">"Statusi i baterisë"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Niveli i baterisë"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN-të"</string>
@@ -2154,12 +2158,9 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"Tableti është përdorur më shumë se zakonisht"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"Pajisja është përdorur më shumë se zakonisht"</string>
     <string name="battery_tip_high_usage_summary" msgid="6341311803303581798">"Bateria mund të mbarojë së shpejti"</string>
-    <!-- no translation found for battery_tip_dialog_message (7434089311164898581) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (2987443811119964310) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (1993039726576708815) -->
-    <skip />
+    <string name="battery_tip_dialog_message" product="default" msgid="7434089311164898581">"Telefoni yt është përdorur më shumë se zakonisht. Bateria mund të mbarojë më shpejt nga sa pritet.\n\n<xliff:g id="NUMBER">%1$d</xliff:g> aplikacionet kryesore nga ngarkimi i fundit i plotë (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="2987443811119964310">"Tableti yt është përdorur më shumë se zakonisht. Bateria mund të mbarojë më shpejt nga sa pritet.\n\n<xliff:g id="NUMBER">%1$d</xliff:g> aplikacionet kryesore nga ngarkimi i fundit i plotë (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="1993039726576708815">"Pajisja jote është përdorur më shumë se zakonisht. Bateria mund të mbarojë më shpejt nga sa pritet.\n\n<xliff:g id="NUMBER">%1$d</xliff:g> aplikacionet kryesore nga ngarkimi i fundit i plotë (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="other">Kufizo %1$d aplikacione</item>
       <item quantity="one">Kufizo %1$d aplikacion</item>
@@ -2201,8 +2202,7 @@
       <item quantity="other">Përdorimi i baterisë po kufizohet për %1$d aplikacione</item>
       <item quantity="one">Përdorimi i baterisë po kufizohet për %1$d aplikacion</item>
     </plurals>
-    <!-- no translation found for restricted_app_detail_footer (6739863162364046859) -->
-    <skip />
+    <string name="restricted_app_detail_footer" msgid="6739863162364046859">"Këto aplikacione kanë përdorur bateri në sfond. Aplikacionet e kufizuara mund të mos funksionojnë siç duhet dhe njoftimet mund të vonohen."</string>
     <string name="battery_auto_restriction_title" msgid="6553271897488963709">"Përdor \"Menaxherin e baterisë\""</string>
     <string name="battery_auto_restriction_summary" msgid="8561335400991281062">"Zbulo kur aplikacionet shkarkojnë baterinë"</string>
     <string name="battery_manager_on" msgid="8643310865054362396">"Aktiv / Po zbulon kur aplikacionet shkarkojnë baterinë"</string>
@@ -3090,8 +3090,7 @@
     <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"Mos shfaq njoftime në ekran"</string>
     <string name="zen_mode_block_effect_status" msgid="6642532634292373081">"Fshih ikonat e shiritit të statusit"</string>
     <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"Fshih pikat e njoftimeve"</string>
-    <!-- no translation found for zen_mode_block_effect_ambient (4704755879961212658) -->
-    <skip />
+    <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"Mos zgjo për njoftimet"</string>
     <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"Fshih nga lista e njoftimeve"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"Asnjëherë"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="1230265589026355094">"Kur ekrani është joaktiv"</string>
@@ -3134,8 +3133,7 @@
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Blloko kur ekrani është i fikur"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Modaliteti \"Mos shqetëso\" mund të bëjë më shumë sesa të bllokojë tingujt e padëshiruar, ai mund të bllokojë edhe pamjet vizuale. Kjo mund të jetë e dobishme nëse po përpiqesh të flesh, të fokusohesh ose të kufizosh kohën që kalon me telefonin."</string>
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Blloko tingujt dhe pamjet vizuale"</string>
-    <!-- no translation found for zen_onboarding_screen_off_summary (5393041573999488088) -->
-    <skip />
+    <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Mos e aktivizo ekranin ose mos e zgjo për njoftimet"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Mos shfaq asnjë njoftim, përveç aktivitetit dhe statusit bazë të telefonit."</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Tingujt e profilit të punës"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Përdor tingujt e profilit personal"</string>
@@ -3236,9 +3234,11 @@
     </plurals>
     <string name="no_channels" msgid="3077375508177744586">"Ky aplikacion nuk ka postuar asnjë njoftim"</string>
     <string name="app_settings_link" msgid="8894946007543660906">"Cilësime shtesë në aplikacion"</string>
-    <!-- no translation found for app_notification_listing_summary_zero (8046168435207424440) -->
-    <skip />
-    <!-- no translation found for app_notification_listing_summary_others (6709582776823665660) -->
+    <string name="app_notification_listing_summary_zero" msgid="8046168435207424440">"Aktiv për të gjitha aplikacionet"</string>
+    <plurals name="app_notification_listing_summary_others" formatted="false" msgid="6709582776823665660">
+      <item quantity="other">Joaktiv për <xliff:g id="COUNT_1">%d</xliff:g> aplikacione</item>
+      <item quantity="one">Joaktiv për <xliff:g id="COUNT_0">%d</xliff:g> aplikacion</item>
+    </plurals>
     <plurals name="deleted_channels" formatted="false" msgid="8028574302599397935">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> kategori u fshinë</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> kategori u fshi</item>
@@ -3368,8 +3368,7 @@
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Përveç përdorimit të gjurmës të gishtit për të shkyçur pajisjen tënde, mund ta mbrosh edhe më shumë këtë pajisje duke kërkuar fjalëkalimin tënd para se të niset. Deri sa pajisja të niset, ajo nuk mund të marrë telefonata, mesazhe apo njoftime, duke përfshirë alarmet.\n\nKjo ndihmon për mbrojtjen e të dhënave në pajisjet e humbura ose të vjedhura. Të kërkohet fjalëkalimi për të nisur pajisjen?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Po"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Jo"</string>
-    <!-- no translation found for restricted_true_label (4761453839409220473) -->
-    <skip />
+    <string name="restricted_true_label" msgid="4761453839409220473">"I kufizuar"</string>
     <string name="restricted_false_label" msgid="3279282180297058755">"Aplikacioni mund të përdorë baterinë në sfond"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Të kërkohet kodi PIN?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Të kërkohet motivi?"</string>

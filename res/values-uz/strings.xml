@@ -692,6 +692,7 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Qo‘shimcha"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Bluetooth kengaytmalari"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Yaqin-atrofdagi Bluetooth qurilmalarga ulanish uchun Bluetooth aloqasini yoqing."</string>
+    <string name="bluetooth_scanning_on_info_message" msgid="824285504325592644">"Yaqin-atrofdagi Bluetooth qurilmalarga ulanish uchun Bluetooth aloqasini yoqing.\n\nQurilmadan foydalanishni yaxshilash uchun istalgan vaqt ilova va xizmatlar hatto Bluetooth o‘chiq bo‘lsa ham Wi-Fi tarmoqlarni qidirishi mumkin. Bundan joylashuv axborotiga asoslangan funksiya va xizmatlarni yaxshilashda foydalanish mumkin. Bu funksiyani "<annotation id="link">"qidiruv sozlamalari"</annotation>" orqali o‘zgartirish mumkin."</string>
     <string name="ble_scan_notify_text" msgid="1295915006005700650">"Joylashuv axborotining aniqligini oshirish maqsadida tizimga oid ilova va xizmatlar yaqin-atrofdagi Bluetooh qurilmalarni qidiraveradi. Buni <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>tarmoqlarni qidirish sozlamalari<xliff:g id="LINK_END_1">LINK_END</xliff:g> orqali bekor qilishingiz mumkin."</string>
     <string name="bluetooth_connect_failed" msgid="4500234659813241053">"Ulanilmadi. Qaytadan urining."</string>
     <string name="device_details_title" msgid="6576953269221085300">"Qurilma tafsilotlari"</string>
@@ -851,8 +852,7 @@
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"5,0 GGs"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2,4 GGs"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5,0 GGs"</string>
-    <!-- no translation found for wifi_ap_band_select_one (3476254666116431650) -->
-    <skip />
+    <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Wi‑Fi hotspot uchun kamida bitta chastota tanlang:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP sozlamalari"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Qurilmaning boshqa foydalanuvchilari bilan ulashish"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(o‘zgartirilmagan)"</string>
@@ -1390,8 +1390,12 @@
     <string name="storage_wizard_slow_v2_body" msgid="6897444467730463117">"<xliff:g id="NAME_0">^1</xliff:g> qurilmasidan foydalanishingiz mumkin, lekin u sekin ishlamoqda.\n\n<xliff:g id="NAME_1">^2</xliff:g> qurilmasida saqlangan ilova xato ishlashi hamda kontentni ko‘chirish ko‘p vaqt olishi mumkin.\n\nTezkor <xliff:g id="NAME_2">^3</xliff:g> ishlatish tavsiya etiladi yoki <xliff:g id="NAME_3">^4</xliff:g> qurilmasini tashqi xotira sifatida sozlang."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="4126873669723115805">"Boshidan boshlash"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="49399942893518218">"Keyingisi"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="5993954859154357197">"Kontentni <xliff:g id="NAME">^1</xliff:g> qurilmasiga ko‘chirish uchun "<b>"Sozlamalar &gt; Xotira"</b>" sahifasiga o‘ting"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="2574326509794010488">"Kontent <xliff:g id="NAME_0">^1</xliff:g> qurilmasiga ko‘chirildi.\n\nMazkur <xliff:g id="NAME_1">^2</xliff:g> qurilmasini boshqarish uchun "<b>"Sozlamalar &gt; Xotira"</b>" sahifasini oching."</string>
+    <!-- no translation found for storage_wizard_ready_v2_external_body (11937346870534608) -->
+    <skip />
+    <!-- no translation found for storage_wizard_ready_v2_internal_body (4658433206901211269) -->
+    <skip />
+    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (6239886818487538806) -->
+    <skip />
     <string name="battery_status_title" msgid="9159414319574976203">"Batareya holati"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Batareya quvvati darajasi"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
@@ -1769,7 +1773,7 @@
     <string name="app_special_disable_dlg_text" msgid="5832078825810635913">"Agar bu ilovani o‘chirib qo‘ysangiz, Android va boshqa ilovalar bundan buyon kutilganidek ishlamasligi mumkin. Ma’lumotlaringiz ham o‘chib ketadi."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Xabarnomalar o‘chirib qo‘yilsinmi?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Agar bu ilova uchun xabarnomalarni o‘chirib qo‘ysangiz, muhim ogohlantirishlar va yangilanishlardan bexabar qolishingiz mumkin."</string>
-    <string name="app_install_details_group_title" msgid="7084623031296083574">"Do‘kon"</string>
+    <string name="app_install_details_group_title" msgid="7084623031296083574">"Market"</string>
     <string name="app_install_details_title" msgid="6905279702654975207">"Ilova haqida"</string>
     <string name="app_install_details_summary" msgid="6464796332049327547">"Ilova <xliff:g id="APP_STORE">%1$s</xliff:g> orqali o‘rnatilgan"</string>
     <string name="instant_app_details_summary" msgid="4529934403276907045">"Batafsil axborot: <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
@@ -1846,7 +1850,7 @@
     <string name="virtual_keyboard_category" msgid="1012830752318677119">"Virtual klaviatura"</string>
     <string name="available_virtual_keyboard_category" msgid="7645766574969139819">"Mavjud virtual klaviaturalar"</string>
     <string name="add_virtual_keyboard" msgid="3302152381456516928">"Klaviaturalarni boshqarish"</string>
-    <string name="keyboard_assistance_category" msgid="5843634175231134014">"Klaviatura bo‘yicha yordam"</string>
+    <string name="keyboard_assistance_category" msgid="5843634175231134014">"Klaviatura yuzasidan yordam"</string>
     <string name="physical_keyboard_title" msgid="8285149877925752042">"Tashqi klaviatura"</string>
     <string name="show_ime" msgid="2658582193437188227">"Virtual klaviatura ko‘rsatilsin"</string>
     <string name="show_ime_summary" msgid="8164993045923240698">"Tashqi klaviaturadan foydalanilayotganda buni ekranda saqlab turish"</string>
@@ -2130,8 +2134,7 @@
     <string name="awake" msgid="387122265874485088">"Qurilmaning uyg‘oqlik vaqti"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"Wi‑Fi o‘z vaqtida"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"Wi‑Fi o‘z vaqtida"</string>
-    <!-- no translation found for advanced_battery_title (6768618303037280828) -->
-    <skip />
+    <string name="advanced_battery_title" msgid="6768618303037280828">"Batareya sarfi"</string>
     <string name="history_details_title" msgid="3608240585315506067">"Tafsilotlar"</string>
     <string name="battery_details_title" msgid="6101394441569858580">"Batareya sarfi"</string>
     <string name="details_subtitle" msgid="32593908269911734">"Batareya sarfi"</string>
@@ -3139,12 +3142,12 @@
     <string name="zen_onboarding_ok" msgid="4332223974819182383">"OK"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Sozlamalar"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Buni keyinchalik Sozlamalar orqali moslashtirish mumkin"</string>
-    <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Ekran yoniqligida bloklash"</string>
-    <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Ekran o‘chiqligida bloklash"</string>
+    <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Ekran yoniqligida"</string>
+    <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Ekran yoniq emasligida"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Bezovta qilinmasin rejimi keraksiz ovozlarni bloklashga nisbatan imkoniyati keng – vizuallarni ham bloklay oladi. Agar uxlamoqchi, diqqatni jamlamoqchi yoki telefoningizda ishlash vaqtingizni cheklamoqchi bo‘lsangiz, buning foydasi tegishi mumkin."</string>
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Ovoz va vizuallarni bloklash"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Bildirishnomalar uchun ekran yoqilmasin yoki faollashtirilmasin"</string>
-    <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Asosiy telefon faoliyati va holatidan boshqa bildirishnomalar ko‘rsatilmasin"</string>
+    <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Asosiy telefon faoliyati va holatidan boshqa bildirishnomalar chiqmaydi"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Ishchi profil ovozlari"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Shaxsiy profil ovozlaridan foydalanish"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"Tovushlar ishchi va shaxsiy profillar uchun bir xil"</string>

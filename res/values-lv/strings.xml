@@ -351,10 +351,8 @@
     <string name="zone_info_footer_no_dst" msgid="8652423870143056964">"Tiek izmantots: <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Nav vasaras laika."</string>
     <string name="zone_time_type_dst" msgid="8850494578766845276">"Vasaras laiks"</string>
     <string name="zone_time_type_standard" msgid="3462424485380376522">"Standarta laiks"</string>
-    <!-- no translation found for zone_menu_by_region (8370437123807764346) -->
-    <skip />
-    <!-- no translation found for zone_menu_by_offset (7161573994228041794) -->
-    <skip />
+    <string name="zone_menu_by_region" msgid="8370437123807764346">"Atlasīt pēc reģiona"</string>
+    <string name="zone_menu_by_offset" msgid="7161573994228041794">"Atlasīt pēc UTC nobīdes"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Datums"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Laiks"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Automātiski bloķēt"</string>
@@ -705,6 +703,8 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Papildu iestatījumi"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Bluetooth papildu iestatījumi"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Kad Bluetooth ir ieslēgts, ierīce var sazināties ar citām Bluetooth ierīcēm tuvumā."</string>
+    <!-- no translation found for bluetooth_scanning_on_info_message (824285504325592644) -->
+    <skip />
     <string name="ble_scan_notify_text" msgid="1295915006005700650">"Lai uzlabotu atrašanās vietas noteikšanas precizitāti, sistēmas lietotnēs un pakalpojumos joprojām var noteikt Bluetooth ierīces. Varat to mainīt <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>meklēšanas iestatījumos<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_failed" msgid="4500234659813241053">"Nevarēja izveidot savienojumu. Mēģiniet vēlreiz."</string>
     <string name="device_details_title" msgid="6576953269221085300">"Ierīces dati"</string>
@@ -1405,8 +1405,12 @@
     <string name="storage_wizard_slow_v2_body" msgid="6897444467730463117">"Varat turpināt lietot ierīci <xliff:g id="NAME_0">^1</xliff:g>, tomēr tā var darboties lēni. \n\nIerīcē <xliff:g id="NAME_1">^2</xliff:g> saglabātās lietotnes var darboties neatbilstoši un satura pārsūtīšanai var būt nepieciešams ilgs laiks. \n\nMēģiniet izmantot ierīci <xliff:g id="NAME_2">^3</xliff:g> ar ātrāku darbību, vai arī šo ierīci <xliff:g id="NAME_3">^4</xliff:g> izmantojiet kā pārnēsājamu krātuvi."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="4126873669723115805">"Sākt vēlreiz"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="49399942893518218">"Tālāk"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="5993954859154357197">"Lai pārvietotu saturu uz ierīci <xliff:g id="NAME">^1</xliff:g>, pārejiet uz sadaļu "<b>"Iestatījumi un krātuve"</b></string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="2574326509794010488">"Saturs tika pārvietots uz ierīci <xliff:g id="NAME_0">^1</xliff:g>. \n\nLai pārvaldītu šo ierīci: <xliff:g id="NAME_1">^2</xliff:g>, pārejiet uz sadaļu "<b>"Iestatījumi &gt; Krātuve"</b>"."</string>
+    <!-- no translation found for storage_wizard_ready_v2_external_body (11937346870534608) -->
+    <skip />
+    <!-- no translation found for storage_wizard_ready_v2_internal_body (4658433206901211269) -->
+    <skip />
+    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (6239886818487538806) -->
+    <skip />
     <string name="battery_status_title" msgid="9159414319574976203">"Akumulatora statuss"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Akumulatora uzlādes līmenis"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
@@ -2176,12 +2180,9 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"Planšetdators tika izmantots vairāk nekā parasti."</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"Ierīce tika izmantota vairāk nekā parasti."</string>
     <string name="battery_tip_high_usage_summary" msgid="6341311803303581798">"Akumulators, iespējams, drīz izlādēsies"</string>
-    <!-- no translation found for battery_tip_dialog_message (7434089311164898581) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (2987443811119964310) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (1993039726576708815) -->
-    <skip />
+    <string name="battery_tip_dialog_message" product="default" msgid="7434089311164898581">"Jūsu tālrunis tika izmantots vairāk nekā parasti. Akumulators var izlādēties ātrāk, nekā paredzēts.\n\n<xliff:g id="NUMBER">%1$d</xliff:g> lietotne(-es), kas patērēja visvairāk akumulatora enerģijas kopš pēdējās uzlādes (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="2987443811119964310">"Jūsu planšetdators tika izmantots vairāk nekā parasti. Akumulators var izlādēties ātrāk, nekā paredzēts.\n\n<xliff:g id="NUMBER">%1$d</xliff:g> lietotne(-es), kas patērēja visvairāk akumulatora enerģijas kopš pēdējās uzlādes (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="1993039726576708815">"Jūsu ierīce tika izmantota vairāk nekā parasti. Akumulators var izlādēties ātrāk, nekā paredzēts.\n\n<xliff:g id="NUMBER">%1$d</xliff:g> lietotne(-es), kas patērēja visvairāk akumulatora enerģijas kopš pēdējās uzlādes (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="zero">Ierobežojiet %1$d lietotnes</item>
       <item quantity="one">Ierobežojiet %1$d lietotni</item>
@@ -2229,8 +2230,7 @@
       <item quantity="one">Akumulatora lietojums tiek ierobežots %1$d lietotnei</item>
       <item quantity="other">Akumulatora lietojums tiek ierobežots %1$d lietotnēm</item>
     </plurals>
-    <!-- no translation found for restricted_app_detail_footer (6739863162364046859) -->
-    <skip />
+    <string name="restricted_app_detail_footer" msgid="6739863162364046859">"Šīs lietotnes fonā patērēja akumulatora enerģiju. Lietotnes ar ierobežotu darbību var darboties neatbilstoši, un paziņojumi var tikt parādīti aizkavēti."</string>
     <string name="battery_auto_restriction_title" msgid="6553271897488963709">"Izmantot akumulatora pārvaldnieku"</string>
     <string name="battery_auto_restriction_summary" msgid="8561335400991281062">"Nosaka lietotnes, kas patērē daudz akumulatora enerģijas"</string>
     <string name="battery_manager_on" msgid="8643310865054362396">"Ieslēgts/nosaka lietotnes, kas patērē daudz akumulatora enerģijas"</string>
@@ -3125,8 +3125,7 @@
     <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"Nerādīt paziņojumus ekrānā"</string>
     <string name="zen_mode_block_effect_status" msgid="6642532634292373081">"Slēpt statusa joslas ikonas"</string>
     <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"Slēpt paziņojumu punktus"</string>
-    <!-- no translation found for zen_mode_block_effect_ambient (4704755879961212658) -->
-    <skip />
+    <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"Neaktivizēt ierīci paziņojumu dēļ"</string>
     <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"Slēpt no paziņojumu saraksta"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"Nekad"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="1230265589026355094">"Kad ekrāns ir izslēgts"</string>
@@ -3171,8 +3170,7 @@
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Bloķēt, kad ekrāns ir izslēgts"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Režīmā “Netraucēt” var bloķēt ne tikai nevēlamas skaņas, bet arī vizuālos elementus. Tas var būt noderīgi, ja mēģināt gulēt, koncentrēties vai ierobežot tālruņa izmantošanas laiku."</string>
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Bloķēt skaņas un vizuālos elementus"</string>
-    <!-- no translation found for zen_onboarding_screen_off_summary (5393041573999488088) -->
-    <skip />
+    <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Neieslēgt ekrānu un neaktivizēt ierīci paziņojumu dēļ"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Nerādīt paziņojumus vispār, izņemot tālruņa pamatdarbībām un statusam"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Darba profila signāli"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Personiskā profila signāli"</string>
@@ -3275,9 +3273,12 @@
     </plurals>
     <string name="no_channels" msgid="3077375508177744586">"Šai lietotnei nav neviena paziņojuma."</string>
     <string name="app_settings_link" msgid="8894946007543660906">"Lietotnes papildu iestatījumi"</string>
-    <!-- no translation found for app_notification_listing_summary_zero (8046168435207424440) -->
-    <skip />
-    <!-- no translation found for app_notification_listing_summary_others (6709582776823665660) -->
+    <string name="app_notification_listing_summary_zero" msgid="8046168435207424440">"Ieslēgti visām lietotnēm"</string>
+    <plurals name="app_notification_listing_summary_others" formatted="false" msgid="6709582776823665660">
+      <item quantity="zero">Izslēgti <xliff:g id="COUNT_1">%d</xliff:g> lietotnēm</item>
+      <item quantity="one">Izslēgti <xliff:g id="COUNT_1">%d</xliff:g> lietotnei</item>
+      <item quantity="other">Izslēgti <xliff:g id="COUNT_1">%d</xliff:g> lietotnēm</item>
+    </plurals>
     <plurals name="deleted_channels" formatted="false" msgid="8028574302599397935">
       <item quantity="zero"><xliff:g id="COUNT_1">%d</xliff:g> kategorijas dzēstas</item>
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> kategorija dzēsta</item>
@@ -3410,8 +3411,7 @@
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Papildus atbloķēšanai ar pirksta nospiedumu varat uzlabot šīs ierīces aizsardzību, iestatot, lai pirms ierīces palaišanas tiktu pieprasīta parole. Kamēr ierīce nav palaista, nevar saņemt zvanus, īsziņas vai paziņojumus, tostarp signālus.\n\nTādējādi tiek uzlabota datu aizsardzība nozaudētās vai nozagtās ierīcēs. Vai pieprasīt paroli pirms ierīces palaišanas?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Jā"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Nē"</string>
-    <!-- no translation found for restricted_true_label (4761453839409220473) -->
-    <skip />
+    <string name="restricted_true_label" msgid="4761453839409220473">"Ierobežota"</string>
     <string name="restricted_false_label" msgid="3279282180297058755">"Lietotne var patērēt akumulatora enerģiju fonā"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Vai pieprasīt PIN?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Vai pieprasīt atslēgu?"</string>

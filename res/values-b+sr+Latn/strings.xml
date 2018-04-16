@@ -31,7 +31,7 @@
     </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Postali ste programer!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"Nema potrebe, već ste programer."</string>
-    <string name="dev_settings_disabled_warning" msgid="4909448907673974370">"Prvo omogućite opcije za programera."</string>
+    <string name="dev_settings_disabled_warning" msgid="4909448907673974370">"Prvo omogućite opcije za programere."</string>
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"Bežična veza i mreže"</string>
     <string name="header_category_connections" msgid="6471513040815680662">"Veze"</string>
     <string name="header_category_device" msgid="4544026001618307754">"Uređaj"</string>
@@ -351,10 +351,8 @@
     <string name="zone_info_footer_no_dst" msgid="8652423870143056964">"Koristi <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Nema letnjeg računanja vremena."</string>
     <string name="zone_time_type_dst" msgid="8850494578766845276">"Letnje računanje vremena"</string>
     <string name="zone_time_type_standard" msgid="3462424485380376522">"Standardno vreme"</string>
-    <!-- no translation found for zone_menu_by_region (8370437123807764346) -->
-    <skip />
-    <!-- no translation found for zone_menu_by_offset (7161573994228041794) -->
-    <skip />
+    <string name="zone_menu_by_region" msgid="8370437123807764346">"Izaberite prema regionu"</string>
+    <string name="zone_menu_by_offset" msgid="7161573994228041794">"Izab. prema odstup. od UTC-a"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Datum"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Vreme"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Automatski zaključaj"</string>
@@ -654,7 +652,7 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> aktivnih aplikacija</item>
     </plurals>
     <string name="manage_trust_agents" msgid="4629279457536987768">"Pouzdani agenti"</string>
-    <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"Da biste ga koristili, prvo podesite zaključavanje ekrana"</string>
+    <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"Da biste ovo koristili, prvo podesite zaključavanje ekrana"</string>
     <string name="manage_trust_agents_summary" msgid="1475819820389620546">"Ništa"</string>
     <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="3935182396726101824">
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> aktivan pouzdani agent</item>
@@ -705,6 +703,8 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Napredna podešavanja"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Napredni Bluetooth"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Kada je Bluetooth uključen, uređaj može da komunicira sa drugim Bluetooth uređajima u blizini."</string>
+    <!-- no translation found for bluetooth_scanning_on_info_message (824285504325592644) -->
+    <skip />
     <string name="ble_scan_notify_text" msgid="1295915006005700650">"Da bi poboljšale tačnost lokacije, sistemske aplikacije i usluge će i dalje prepoznavati Bluetooth uređaje, čak i kada je Bluetooth isključen. Ovo možete da promenite u <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>podešavanjima skeniranja<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_failed" msgid="4500234659813241053">"Povezivanje nije uspelo. Pokušajte ponovo."</string>
     <string name="device_details_title" msgid="6576953269221085300">"Detalji o uređaju"</string>
@@ -1405,8 +1405,12 @@
     <string name="storage_wizard_slow_v2_body" msgid="6897444467730463117">"I dalje možete da koristite uređaj <xliff:g id="NAME_0">^1</xliff:g>, ali će možda sporo raditi. \n\nAplikacije koje se nalaze na uređaju <xliff:g id="NAME_1">^2</xliff:g> možda neće ispravno raditi, a prenosi sadržaja će možda dugo trajati. \n\nProbajte da koristite brži uređaj <xliff:g id="NAME_2">^3</xliff:g> ili koristite uređaj <xliff:g id="NAME_3">^4</xliff:g> kao prenosivi memorijski prostor."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="4126873669723115805">"Počni ponovo"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="49399942893518218">"Nastavi"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="5993954859154357197">"Da biste premestili sadržaj na uređaj <xliff:g id="NAME">^1</xliff:g>, izaberite "<b>"Podešavanja &gt; Memorijski prostor"</b></string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="2574326509794010488">"Sadržaj je premešten na uređaj <xliff:g id="NAME_0">^1</xliff:g>. \n\nDa biste upravljali uređajem <xliff:g id="NAME_1">^2</xliff:g>, izaberite "<b>"Podešavanja &gt; Memorijski prostor"</b>"."</string>
+    <!-- no translation found for storage_wizard_ready_v2_external_body (11937346870534608) -->
+    <skip />
+    <!-- no translation found for storage_wizard_ready_v2_internal_body (4658433206901211269) -->
+    <skip />
+    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (6239886818487538806) -->
+    <skip />
     <string name="battery_status_title" msgid="9159414319574976203">"Status baterije"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Nivo baterije"</string>
     <string name="apn_settings" msgid="3743170484827528406">"Nazivi pristupnih tačaka"</string>
@@ -2176,12 +2180,9 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"Tablet ste koristili duže nego obično"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"Uređaj ste koristili duže nego obično"</string>
     <string name="battery_tip_high_usage_summary" msgid="6341311803303581798">"Baterija će se možda uskoro isprazniti"</string>
-    <!-- no translation found for battery_tip_dialog_message (7434089311164898581) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (2987443811119964310) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (1993039726576708815) -->
-    <skip />
+    <string name="battery_tip_dialog_message" product="default" msgid="7434089311164898581">"Telefon ste koristili duže nego obično. Baterija može da se isprazni ranije od očekivanog.\n\nAplikacije (<xliff:g id="NUMBER">%1$d</xliff:g>) koje su najviše trošile bateriju od poslednjeg potpunog punjenja (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="2987443811119964310">"Tablet ste koristili duže nego obično. Baterija može da se isprazni ranije od očekivanog.\n\nAplikacije (<xliff:g id="NUMBER">%1$d</xliff:g>) koje su najviše trošile bateriju od poslednjeg potpunog punjenja (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="1993039726576708815">"Uređaj ste koristili duže nego obično. Baterija može da se isprazni ranije od očekivanog.\n\n Aplikacije (<xliff:g id="NUMBER">%1$d</xliff:g>) koje su najviše trošile bateriju od poslednjeg potpunog punjenja (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="one">Ograničite %1$d aplikaciju</item>
       <item quantity="few">Ograničite %1$d aplikacije</item>
@@ -2229,8 +2230,7 @@
       <item quantity="few">Ograničite potrošnju baterije za %1$d aplikacije</item>
       <item quantity="other">Ograničite potrošnju baterije za %1$d aplikacija</item>
     </plurals>
-    <!-- no translation found for restricted_app_detail_footer (6739863162364046859) -->
-    <skip />
+    <string name="restricted_app_detail_footer" msgid="6739863162364046859">"Ove aplikacije su trošile bateriju u pozadini. Ograničene aplikacije možda neće raditi kako treba i obaveštenja mogu da kasne."</string>
     <string name="battery_auto_restriction_title" msgid="6553271897488963709">"Koristite menadžer baterije"</string>
     <string name="battery_auto_restriction_summary" msgid="8561335400991281062">"Otkrijte kada aplikacije isprazne bateriju"</string>
     <string name="battery_manager_on" msgid="8643310865054362396">"Uključeno / Otkrivanje kada aplikacije isprazne bateriju"</string>
@@ -2729,7 +2729,7 @@
     <string name="vpn_create" msgid="5628219087569761496">"Dodavanje VPN profila"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"Izmeni profil"</string>
     <string name="vpn_menu_delete" msgid="8098021690546891414">"Izbriši profil"</string>
-    <string name="vpn_menu_lockdown" msgid="7863024538064268139">"Stalno uključeni VPN"</string>
+    <string name="vpn_menu_lockdown" msgid="7863024538064268139">"Stalno uključen VPN"</string>
     <string name="vpn_no_vpns_added" msgid="5002741367858707244">"Niste dodali nijedan VPN"</string>
     <string name="vpn_always_on_summary" msgid="2821344524094363617">"Nikada ne prekidaj vezu sa VPN-om"</string>
     <string name="vpn_always_on_summary_not_supported" msgid="592304911378771510">"Ova aplikacija ne podržava"</string>
@@ -2738,7 +2738,7 @@
     <string name="vpn_require_connection_title" msgid="159053539340576331">"Treba vam VPN veza?"</string>
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Izaberite VPN profil sa kojim ćete uvek biti povezani. Mrežni sadržaj će biti dozvoljen samo kada ste povezani sa ovim VPN-om."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"Nijedan"</string>
-    <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"Stalno uključeni VPN zahteva IP adresu za server i DNS."</string>
+    <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"Stalno uključen VPN zahteva IP adresu za server i DNS."</string>
     <string name="vpn_no_network" msgid="3050233675132726155">"Nije uspostavljena mrežna veza. Probajte ponovo kasnije."</string>
     <string name="vpn_disconnected" msgid="280531508768927471">"Veza sa VPN-om je prekinuta"</string>
     <string name="vpn_disconnected_summary" msgid="3082851661207900606">"Ništa"</string>
@@ -3125,8 +3125,7 @@
     <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"Ne prikazuj iskačuća obaveštenja na ekranu"</string>
     <string name="zen_mode_block_effect_status" msgid="6642532634292373081">"Ne prikazuj ikone na statusnoj traci"</string>
     <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"Ne prikazuj tačke za obaveštenja"</string>
-    <!-- no translation found for zen_mode_block_effect_ambient (4704755879961212658) -->
-    <skip />
+    <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"Ne budi zbog obaveštenja"</string>
     <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"Ne prikazuj na listi obaveštenja"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"Nikad"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="1230265589026355094">"Kada je ekran isključen"</string>
@@ -3171,8 +3170,7 @@
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Blokiraj kada je ekran isključen"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Režim Ne uznemiravaj ima mnogo više mogućnosti od običnog blokiranja neželjenih zvukova – može da blokira i vizuelni sadržaj. To može biti korisno kada spavate, kada treba da budete usredsređeni na nešto ili kada želite da smanjite vreme koje provodite na telefonu."</string>
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Blokiraj zvukove i vizuelni sadržaj"</string>
-    <!-- no translation found for zen_onboarding_screen_off_summary (5393041573999488088) -->
-    <skip />
+    <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Ne uključuj ekran niti budi zbog obaveštenja"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Ne prikazuj nikakva obaveštenja, osim osnovnih aktivnosti i statusa telefona"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Zvuci za profil za Work"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Koristi zvuke ličnog profila"</string>
@@ -3275,9 +3273,12 @@
     </plurals>
     <string name="no_channels" msgid="3077375508177744586">"Ova aplikacija nije postavila nijedno obaveštenje"</string>
     <string name="app_settings_link" msgid="8894946007543660906">"Dodatna podešavanja u aplikaciji"</string>
-    <!-- no translation found for app_notification_listing_summary_zero (8046168435207424440) -->
-    <skip />
-    <!-- no translation found for app_notification_listing_summary_others (6709582776823665660) -->
+    <string name="app_notification_listing_summary_zero" msgid="8046168435207424440">"Uključeno za sve aplikacije"</string>
+    <plurals name="app_notification_listing_summary_others" formatted="false" msgid="6709582776823665660">
+      <item quantity="one">Isključeno za <xliff:g id="COUNT_1">%d</xliff:g> aplikaciju</item>
+      <item quantity="few">Isključeno za <xliff:g id="COUNT_1">%d</xliff:g> aplikacije</item>
+      <item quantity="other">Isključeno za <xliff:g id="COUNT_1">%d</xliff:g> aplikacija</item>
+    </plurals>
     <plurals name="deleted_channels" formatted="false" msgid="8028574302599397935">
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> kategorija je izbrisana</item>
       <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> kategorije su izbrisane</item>
@@ -3410,8 +3411,7 @@
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Pored toga što možete da otključavate uređaj otiskom prsta, možete dodatno da ga zaštitite tako što ćete ga podesiti da traži lozinke pre pokretanja. Dok se uređaj ne pokrene, ne može da prima pozive, poruke niti obaveštenja, uključujući alarme.\n\nTo omogućava zaštitu podataka na izgubljenim ili ukradenim uređajima. Zahtevati lozinku pri pokretanju uređaja?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Da"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Ne"</string>
-    <!-- no translation found for restricted_true_label (4761453839409220473) -->
-    <skip />
+    <string name="restricted_true_label" msgid="4761453839409220473">"Ograničeno"</string>
     <string name="restricted_false_label" msgid="3279282180297058755">"Aplikacija može da troši bateriju u pozadini"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Tražiti PIN?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Tražiti šablon?"</string>
@@ -4036,9 +4036,9 @@
     </plurals>
     <string name="enterprise_privacy_input_method" msgid="6531350246850814920">"Podrazumevana tastatura"</string>
     <string name="enterprise_privacy_input_method_name" msgid="4941106433683067953">"Podešeno je na <xliff:g id="APP_LABEL">%s</xliff:g>"</string>
-    <string name="enterprise_privacy_always_on_vpn_device" msgid="4409098287763221215">"Stalno uključeni VPN je uključen"</string>
-    <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"Stalno uključeni VPN je uključen na ličnom profilu"</string>
-    <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"Stalno uključeni VPN je uključen na profilu za Work"</string>
+    <string name="enterprise_privacy_always_on_vpn_device" msgid="4409098287763221215">"Stalno uključen VPN je uključen"</string>
+    <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"Stalno uključen VPN je uključen na ličnom profilu"</string>
+    <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"Stalno uključen VPN je uključen na profilu za Work"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"Globalni HTTP proksi je podešen"</string>
     <string name="enterprise_privacy_ca_certs_device" msgid="2019652712782510262">"Pouzdani akreditivi"</string>
     <string name="enterprise_privacy_ca_certs_personal" msgid="2279084820904076599">"Pouzdani akreditivi na ličnom profilu"</string>

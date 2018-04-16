@@ -85,7 +85,7 @@
     <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Aumentar el tamaño"</string>
     <!-- no translation found for font_size_preview_text (4818424565068376732) -->
     <skip />
-    <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Texto de muestra"</string>
+    <string name="font_size_preview_text_headline" msgid="7955317408475392247">"Texto de ejemplo"</string>
     <string name="font_size_preview_text_title" msgid="1310536233106975546">"El maravilloso mago de Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="4231671528173110093">"Capítulo 11: La maravillosa Ciudad Esmeralda de Oz"</string>
     <string name="font_size_preview_text_body" msgid="2846183528684496723">"Aun con los ojos protegidos por las gafas verdes, Dorothy y sus amigos quedaron deslumbrados por el brillo de aquella maravillosa ciudad. Las calles estaban formadas por preciosas casas construidas con mármol verde y todo estaba salpicado de relucientes esmeraldas. Pasearon por un camino de mármol verde cuyas baldosas se unían con hileras de esmeraldas, colocadas muy juntas y que relucían bajo la luz del sol. Las ventanas eran de cristal verde y hasta el cielo de la ciudad y los rayos del sol tenían un tono verdoso. \n\nHabía muchos hombres, mujeres y niños paseando y todos tenían la piel verdosa y vestían ropa verde. Miraban con asombro a Dorothy y a sus extraños acompañantes, y los niños corrían a esconderse detrás de sus madres cuando veían al león, pero nadie les dirigía la palabra. Había también muchas tiendas y Dorothy observó que todo lo que había en ellas era verde. Vendían caramelos y palomitas de maíz verdes y también zapatos, sombreros y todo tipo de ropa del mismo color. En una de ellas, un hombre vendía limonada y Dorothy pudo comprobar que los niños pagaban con monedas verdes. \n\nNo parecía que en aquel lugar hubiese caballos ni animales de ningún tipo, pues los hombres lo transportaban todo empujando pequeños carros de este color. Todos parecían felices, satisfechos y afortunados."</string>
@@ -692,6 +692,7 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Ajustes avanzados"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Ajustes avanzados de Bluetooth"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Permite la comunicación con dispositivos Bluetooth cercanos"</string>
+    <string name="bluetooth_scanning_on_info_message" msgid="824285504325592644">"Si el Bluetooth está activado, el dispositivo se puede comunicar con otros dispositivos Bluetooth cercanos.\n\nPara mejorar la experiencia de uso del dispositivo, las aplicaciones y los servicios pueden seguir buscando dispositivos cercanos en cualquier momento, aunque el Bluetooth esté desactivado. Esta opción se puede utilizar, por ejemplo, para mejorar los servicios y funciones basados en la ubicación, y puedes cambiarla en los "<annotation id="link">"ajustes de búsqueda"</annotation>"."</string>
     <string name="ble_scan_notify_text" msgid="1295915006005700650">"Para mejorar la precisión de la ubicación, los servicios y las aplicaciones del sistema pueden detectar dispositivos Bluetooth aunque esta conexión esté desactivada. Puedes cambiar esta opción en los <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>ajustes de búsqueda<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_failed" msgid="4500234659813241053">"No se ha podido establecer conexión. Vuelve a intentarlo."</string>
     <string name="device_details_title" msgid="6576953269221085300">"Detalles del dispositivo"</string>
@@ -851,8 +852,7 @@
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"Banda de 5,0 GHz"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2,4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5,0 GHz"</string>
-    <!-- no translation found for wifi_ap_band_select_one (3476254666116431650) -->
-    <skip />
+    <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Selecciona al menos una banda para el punto de acceso Wi‑Fi:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Ajustes de IP"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Compartir con otros usuarios del dispositivo"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(no modificada)"</string>
@@ -1390,8 +1390,12 @@
     <string name="storage_wizard_slow_v2_body" msgid="6897444467730463117">"Puedes seguir usando tu <xliff:g id="NAME_0">^1</xliff:g>, pero puede que el proceso sea lento. \n\nEs posible que las aplicaciones que estén almacenadas en tu <xliff:g id="NAME_1">^2</xliff:g> no funcionen adecuadamente y que las transferencias de contenido tarden bastante. \n\nPrueba a utilizar una <xliff:g id="NAME_2">^3</xliff:g> más rápida o utiliza esta <xliff:g id="NAME_3">^4</xliff:g> como almacenamiento portátil."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="4126873669723115805">"Volver a empezar"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="49399942893518218">"Continuar"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="5993954859154357197">"Para mover contenido a <xliff:g id="NAME">^1</xliff:g>, accede a "<b>"Ajustes &gt; Almacenamiento"</b></string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="2574326509794010488">"Tu contenido se ha movido a <xliff:g id="NAME_0">^1</xliff:g>. \n\nPara gestionar tu <xliff:g id="NAME_1">^2</xliff:g>, accede a "<b>"Ajustes &gt; Almacenamiento"</b>"."</string>
+    <!-- no translation found for storage_wizard_ready_v2_external_body (11937346870534608) -->
+    <skip />
+    <!-- no translation found for storage_wizard_ready_v2_internal_body (4658433206901211269) -->
+    <skip />
+    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (6239886818487538806) -->
+    <skip />
     <string name="battery_status_title" msgid="9159414319574976203">"Estado de la batería"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Nivel de batería"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
@@ -1955,7 +1959,7 @@
     <string name="accessibility_autoclick_description" msgid="4908960598910896933">"Si utilizas un ratón, puedes definir que el cursor realice acciones automáticamente cuando deja de moverse durante cierto tiempo."</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="3962261178385106006">"Retraso antes del clic"</string>
     <string name="accessibility_vibration_settings_title" msgid="3453277326300320803">"Vibración"</string>
-    <string name="accessibility_notification_vibration_title" msgid="660829933960942244">"Vibración de notificaciones y llamadas"</string>
+    <string name="accessibility_notification_vibration_title" msgid="660829933960942244">"Vibración de llamadas y notificaciones"</string>
     <string name="accessibility_touch_vibration_title" msgid="7931823772673770492">"Vibración al tocar la pantalla"</string>
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Utilizar el servicio"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Utilizar la corrección de color"</string>
@@ -2124,8 +2128,7 @@
     <string name="awake" msgid="387122265874485088">"Tiempo de actividad del dispositivo"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"Tiempo de conexión Wi-Fi"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"Tiempo de conexión Wi-Fi"</string>
-    <!-- no translation found for advanced_battery_title (6768618303037280828) -->
-    <skip />
+    <string name="advanced_battery_title" msgid="6768618303037280828">"Uso de la batería"</string>
     <string name="history_details_title" msgid="3608240585315506067">"Detalles del historial"</string>
     <string name="battery_details_title" msgid="6101394441569858580">"Uso de batería"</string>
     <string name="details_subtitle" msgid="32593908269911734">"Detalles de uso"</string>

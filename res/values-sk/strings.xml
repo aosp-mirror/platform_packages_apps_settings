@@ -353,10 +353,8 @@
     <string name="zone_info_footer_no_dst" msgid="8652423870143056964">"Používa čas: <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Nepoužíva letný čas."</string>
     <string name="zone_time_type_dst" msgid="8850494578766845276">"Obdobie letného času"</string>
     <string name="zone_time_type_standard" msgid="3462424485380376522">"Štandardný čas"</string>
-    <!-- no translation found for zone_menu_by_region (8370437123807764346) -->
-    <skip />
-    <!-- no translation found for zone_menu_by_offset (7161573994228041794) -->
-    <skip />
+    <string name="zone_menu_by_region" msgid="8370437123807764346">"Vybrať podľa oblasti"</string>
+    <string name="zone_menu_by_offset" msgid="7161573994228041794">"Vybrať podľa čas. posunu UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Dátum"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Čas"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Automaticky zamknúť"</string>
@@ -716,6 +714,8 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Rozšírené"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Rozšírené nastavenia Bluetooth"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Keď je zapnuté pripojenie Bluetooth, zariadenie môže komunikovať s ostatnými zariadeniami s funkciou Bluetooth v okolí."</string>
+    <!-- no translation found for bluetooth_scanning_on_info_message (824285504325592644) -->
+    <skip />
     <string name="ble_scan_notify_text" msgid="1295915006005700650">"Systémové aplikácie a služby môžu i tak rozpoznávať zariadenia Bluetooth, aby zlepšili presnosť určovania polohy. Toto správanie môžete zmeniť v <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>nastaveniach vyhľadávania<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_failed" msgid="4500234659813241053">"Nepodarilo sa pripojiť. Skúste to znova."</string>
     <string name="device_details_title" msgid="6576953269221085300">"Podrobnosti o zariadení"</string>
@@ -1418,8 +1418,12 @@
     <string name="storage_wizard_slow_v2_body" msgid="6897444467730463117">"Úložisko <xliff:g id="NAME_0">^1</xliff:g> môžete používať aj naďalej, môže však byť pomalé. \n\nAplikácie uložené v úložisku <xliff:g id="NAME_1">^2</xliff:g> nemusia fungovať správne a prenos obsahu môže trvať dlho. \n\nZvážte použitie rýchlejšieho úložiska <xliff:g id="NAME_2">^3</xliff:g> alebo využite namiesto toho jednotku <xliff:g id="NAME_3">^4</xliff:g> ako prenosné úložisko."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="4126873669723115805">"Začať odznova"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="49399942893518218">"Ďalej"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="5993954859154357197">"Ak chcete presunúť obsah do úložiska <xliff:g id="NAME">^1</xliff:g>, prejdite do časti "<b>"Nastavenia &gt; Úložisko"</b></string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="2574326509794010488">"Obsah bol presunutý do úložiska <xliff:g id="NAME_0">^1</xliff:g>. \n\nAk chcete spravovať úložisko <xliff:g id="NAME_1">^2</xliff:g>, prejdite do časti "<b>"Nastavenia &gt; Úložisko"</b>"."</string>
+    <!-- no translation found for storage_wizard_ready_v2_external_body (11937346870534608) -->
+    <skip />
+    <!-- no translation found for storage_wizard_ready_v2_internal_body (4658433206901211269) -->
+    <skip />
+    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (6239886818487538806) -->
+    <skip />
     <string name="battery_status_title" msgid="9159414319574976203">"Stav batérie"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Nabitie batérie"</string>
     <string name="apn_settings" msgid="3743170484827528406">"Prístupové body"</string>
@@ -2198,12 +2202,9 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"Tablet bol používaný viac ako obvykle"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"Zariadenie bolo používané viac ako obvykle"</string>
     <string name="battery_tip_high_usage_summary" msgid="6341311803303581798">"Batéria sa môže čoskoro minúť"</string>
-    <!-- no translation found for battery_tip_dialog_message (7434089311164898581) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (2987443811119964310) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (1993039726576708815) -->
-    <skip />
+    <string name="battery_tip_dialog_message" product="default" msgid="7434089311164898581">"Telefón sa používa viac ako obvykle. Jeho batéria sa môže minúť skôr, ako sa očakávalo.\n\nNajpoužívanejšie aplikácie (<xliff:g id="NUMBER">%1$d</xliff:g>) od posledného nabitia (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="2987443811119964310">"Tablet sa používa viac ako obvykle. Jeho batéria sa môže minúť skôr, ako sa očakávalo.\n\nNajpoužívanejšie aplikácie (<xliff:g id="NUMBER">%1$d</xliff:g>) od posledného nabitia (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="1993039726576708815">"Zariadenie sa používa viac ako obvykle. Jeho batéria sa môže minúť skôr, ako sa očakávalo.\n\nNajpoužívanejšie aplikácie (<xliff:g id="NUMBER">%1$d</xliff:g>) od posledného nabitia (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="few">Obmedziť %1$d aplikácie</item>
       <item quantity="many">Obmedziť %1$d aplikácie</item>
@@ -2257,8 +2258,7 @@
       <item quantity="other">Obmedzuje sa využitie batérie %1$d aplikáciami</item>
       <item quantity="one">Obmedzuje sa využitie batérie %1$d aplikáciou</item>
     </plurals>
-    <!-- no translation found for restricted_app_detail_footer (6739863162364046859) -->
-    <skip />
+    <string name="restricted_app_detail_footer" msgid="6739863162364046859">"Tieto aplikácie používali batériu na pozadí. Obmedzené aplikácie nemusia správne fungovať a upozornenia môžu byť oneskorené."</string>
     <string name="battery_auto_restriction_title" msgid="6553271897488963709">"Použiť nástroj Battery Manager"</string>
     <string name="battery_auto_restriction_summary" msgid="8561335400991281062">"Zistite, keď aplikácie nadmerne vybíjajú batériu"</string>
     <string name="battery_manager_on" msgid="8643310865054362396">"Zapnuté / zisťovanie nadmerného vybíjania batérie aplikáciami je aktívne"</string>
@@ -3160,8 +3160,7 @@
     <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"Nezobrazovať upozornenia na obrazovke"</string>
     <string name="zen_mode_block_effect_status" msgid="6642532634292373081">"Skryť ikony stavového riadka"</string>
     <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"Skryť bodky upozornení"</string>
-    <!-- no translation found for zen_mode_block_effect_ambient (4704755879961212658) -->
-    <skip />
+    <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"V prípade upozornení nebudiť"</string>
     <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"Skryť zo zoznamu upozornení"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"Nikdy"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="1230265589026355094">"Keď je obrazovka vypnutá"</string>
@@ -3208,8 +3207,7 @@
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Blokovať pri vypnutej obrazovke"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Režim Nerušiť dokáže viac než len blokovať nechcené zvuky – blokuje aj vizuálne prvky. Môže to byť užitočné, ak sa pokúšate zaspať, sústrediť alebo obmedziť čas strávený používaním telefónu."</string>
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Blokovať zvuky a vizuálne prvky"</string>
-    <!-- no translation found for zen_onboarding_screen_off_summary (5393041573999488088) -->
-    <skip />
+    <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"V prípade upozornení nezapínať obrazovku ani nebudiť"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Nezobrazovať žiadne upozornenia okrem základnej aktivity telefónu a stavu"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Zvuky pracovného profilu"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Použiť zvuky osobného profilu"</string>
@@ -3314,9 +3312,13 @@
     </plurals>
     <string name="no_channels" msgid="3077375508177744586">"Táto aplikácia ešte neposlala žiadne upozornenia"</string>
     <string name="app_settings_link" msgid="8894946007543660906">"Ďalšie nastavenia v aplikácii"</string>
-    <!-- no translation found for app_notification_listing_summary_zero (8046168435207424440) -->
-    <skip />
-    <!-- no translation found for app_notification_listing_summary_others (6709582776823665660) -->
+    <string name="app_notification_listing_summary_zero" msgid="8046168435207424440">"Zapnuté pre všetky aplikácie"</string>
+    <plurals name="app_notification_listing_summary_others" formatted="false" msgid="6709582776823665660">
+      <item quantity="few">Vypnuté pre <xliff:g id="COUNT_1">%d</xliff:g> aplikácie</item>
+      <item quantity="many">Off for <xliff:g id="COUNT_1">%d</xliff:g> apps</item>
+      <item quantity="other">Vypnuté pre <xliff:g id="COUNT_1">%d</xliff:g> aplikácií</item>
+      <item quantity="one">Vypnuté pre <xliff:g id="COUNT_0">%d</xliff:g> aplikáciu</item>
+    </plurals>
     <plurals name="deleted_channels" formatted="false" msgid="8028574302599397935">
       <item quantity="few">Boli odstránené <xliff:g id="COUNT_1">%d</xliff:g> kategórie</item>
       <item quantity="many">Bolo odstránenej <xliff:g id="COUNT_1">%d</xliff:g> kategórie</item>
@@ -3452,8 +3454,7 @@
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Okrem odomknutia pomocou odtlačku prsta môžete svoje zariadenie ochrániť aj vyžadovaním hesla pred spustením. Zariadenie nemôže prijímať hovory, správy ani upozornenia (vrátane budíkov), dokým sa nespustí.\n\nPomáha to chrániť dáta v stratených alebo ukradnutých zariadeniach. Vyžadovať heslo na spustenie zariadenia?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Áno"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Nie"</string>
-    <!-- no translation found for restricted_true_label (4761453839409220473) -->
-    <skip />
+    <string name="restricted_true_label" msgid="4761453839409220473">"Obmedzené"</string>
     <string name="restricted_false_label" msgid="3279282180297058755">"Aplikácia môže využívať batériu na pozadí"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Vyžadovať kód PIN?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Vyžadovať vzor?"</string>
@@ -3951,8 +3952,8 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"žiadne"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Chýba objekt hodnotenia."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Objekt hodnotenia neobsahuje tento kľúč."</string>
-    <string name="display_cutout_emulation" msgid="6306593933746393170">"Simulácia obrazovky pomocou výrezu"</string>
-    <string name="display_cutout_emulation_none" msgid="5144174674654097316">"Žiadne"</string>
+    <string name="display_cutout_emulation" msgid="6306593933746393170">"Simulovať obrazovku s výrezom"</string>
+    <string name="display_cutout_emulation_none" msgid="5144174674654097316">"Žiadna"</string>
     <string name="special_access" msgid="3458780842491881155">"Špeciálny prístup aplikácie"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="few">Neobmedzené dáta môžu používať <xliff:g id="COUNT">%d</xliff:g> aplikácie</item>
