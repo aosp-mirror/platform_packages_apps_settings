@@ -21,8 +21,14 @@
     android:title="@string/connected_devices_dashboard_title">
 
     <PreferenceCategory
+        android:key="available_device_list"
+        android:title="@string/connected_device_available_media_title"
+        settings:controller="com.android.settings.connecteddevice.AvailableMediaDeviceGroupController"/>
+
+    <PreferenceCategory
         android:key="connected_device_list"
-        android:title="@string/connected_device_connected_title"/>
+        android:title="@string/connected_device_connected_title"
+        settings:controller="com.android.settings.connecteddevice.ConnectedDeviceGroupController"/>
 
     <com.android.settingslib.RestrictedPreference
         android:key="add_bt_devices"

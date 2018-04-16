@@ -42,7 +42,7 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
     @VisibleForTesting
     static final String KEY_CONNECTED_DEVICES = "connected_device_list";
     @VisibleForTesting
-    static final String KEY_SAVED_DEVICES = "saved_device_list";
+    static final String KEY_AVAILABLE_DEVICES = "available_device_list";
 
     @Override
     public int getMetricsCategory() {
@@ -66,14 +66,12 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle(), this);
+        return buildPreferenceControllers(context, getLifecycle());
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Lifecycle lifecycle, DashboardFragment dashboardFragment) {
+            Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new ConnectedDeviceGroupController(context, dashboardFragment, lifecycle));
-
         final NfcPreferenceController nfcPreferenceController =
                 new NfcPreferenceController(context);
         controllers.add(nfcPreferenceController);
@@ -83,6 +81,13 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
         }
 
         return controllers;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        use(AvailableMediaDeviceGroupController.class).init(this);
+        use(ConnectedDeviceGroupController.class).init(this);
     }
 
     @VisibleForTesting
@@ -138,16 +143,15 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(Context
                         context) {
-                    return buildPreferenceControllers(context, null /* lifecycle */,
-                            null /* dashboardFragment */);
+                    return buildPreferenceControllers(context, null /* lifecycle */);
                 }
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
                     // Disable because they show dynamic data
+                    keys.add(KEY_AVAILABLE_DEVICES);
                     keys.add(KEY_CONNECTED_DEVICES);
-                    keys.add(KEY_SAVED_DEVICES);
                     return keys;
                 }
             };

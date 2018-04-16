@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.support.v7.preference.Preference;
@@ -33,11 +32,9 @@ import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.bluetooth.ConnectedBluetoothDeviceUpdater;
-import com.android.settings.connecteddevice.usb.ConnectedUsbDeviceUpdater;
+import com.android.settings.bluetooth.AvailableMediaBluetoothDeviceUpdater;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,86 +43,81 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplicationPackageManager;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = ShadowApplicationPackageManager.class)
-public class ConnectedDeviceGroupControllerTest {
+public class AvailableMediaDeviceGroupControllerTest {
 
     private static final String PREFERENCE_KEY_1 = "pref_key_1";
 
     @Mock
     private DashboardFragment mDashboardFragment;
     @Mock
-    private ConnectedBluetoothDeviceUpdater mConnectedBluetoothDeviceUpdater;
-    @Mock
-    private ConnectedUsbDeviceUpdater mConnectedUsbDeviceUpdater;
+    private AvailableMediaBluetoothDeviceUpdater mAvailableMediaBluetoothDeviceUpdater;
     @Mock
     private PreferenceScreen mPreferenceScreen;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceManager mPreferenceManager;
+    @Mock
+    private PackageManager mPackageManager;
 
-    private ShadowApplicationPackageManager mPackageManager;
     private PreferenceGroup mPreferenceGroup;
     private Context mContext;
     private Preference mPreference;
-    private ConnectedDeviceGroupController mConnectedDeviceGroupController;
+    private AvailableMediaDeviceGroupController mAvailableMediaDeviceGroupController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
         mPreference = new Preference(mContext);
         mPreference.setKey(PREFERENCE_KEY_1);
-        mPackageManager = (ShadowApplicationPackageManager) Shadows.shadowOf(
-                mContext.getPackageManager());
         mPreferenceGroup = spy(new PreferenceScreen(mContext, null));
         when(mPreferenceGroup.getPreferenceManager()).thenReturn(mPreferenceManager);
         doReturn(mContext).when(mDashboardFragment).getContext();
+        doReturn(mPackageManager).when(mContext).getPackageManager();
+        doReturn(true).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
 
-        mConnectedDeviceGroupController = new ConnectedDeviceGroupController(mContext);
-        mConnectedDeviceGroupController
-                .init(mConnectedBluetoothDeviceUpdater, mConnectedUsbDeviceUpdater);
-        mConnectedDeviceGroupController.mPreferenceGroup = mPreferenceGroup;
+        mAvailableMediaDeviceGroupController = new AvailableMediaDeviceGroupController(mContext);
+        mAvailableMediaDeviceGroupController.
+                setBluetoothDeviceUpdater(mAvailableMediaBluetoothDeviceUpdater);
+        mAvailableMediaDeviceGroupController.mPreferenceGroup = mPreferenceGroup;
     }
 
     @Test
-    public void testOnDeviceAdded_firstAdd_becomeVisibleAndPreferenceAdded() {
-        mConnectedDeviceGroupController.onDeviceAdded(mPreference);
+    public void onDeviceAdded_firstAdd_becomeVisibleAndPreferenceAdded() {
+        mAvailableMediaDeviceGroupController.onDeviceAdded(mPreference);
 
         assertThat(mPreferenceGroup.isVisible()).isTrue();
         assertThat(mPreferenceGroup.findPreference(PREFERENCE_KEY_1)).isEqualTo(mPreference);
     }
 
     @Test
-    public void testOnDeviceRemoved_lastRemove_becomeInvisibleAndPreferenceRemoved() {
+    public void onDeviceRemoved_lastRemove_becomeInvisibleAndPreferenceRemoved() {
         mPreferenceGroup.addPreference(mPreference);
 
-        mConnectedDeviceGroupController.onDeviceRemoved(mPreference);
+        mAvailableMediaDeviceGroupController.onDeviceRemoved(mPreference);
 
         assertThat(mPreferenceGroup.isVisible()).isFalse();
         assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(0);
     }
 
     @Test
-    public void testOnDeviceRemoved_notLastRemove_stillVisible() {
+    public void onDeviceRemoved_notLastRemove_stillVisible() {
         mPreferenceGroup.setVisible(true);
         mPreferenceGroup.addPreference(mPreference);
         mPreferenceGroup.addPreference(new Preference(mContext));
 
-        mConnectedDeviceGroupController.onDeviceRemoved(mPreference);
+        mAvailableMediaDeviceGroupController.onDeviceRemoved(mPreference);
 
         assertThat(mPreferenceGroup.isVisible()).isTrue();
     }
 
     @Test
-    public void testDisplayPreference_becomeInvisible() {
+    public void displayPreference_becomeInvisible() {
         doReturn(mPreferenceGroup).when(mPreferenceScreen).findPreference(anyString());
 
-        mConnectedDeviceGroupController.displayPreference(mPreferenceScreen);
+        mAvailableMediaDeviceGroupController.displayPreference(mPreferenceScreen);
 
         assertThat(mPreferenceGroup.isVisible()).isFalse();
     }
@@ -133,32 +125,30 @@ public class ConnectedDeviceGroupControllerTest {
     @Test
     public void testRegister() {
         // register the callback in onStart()
-        mConnectedDeviceGroupController.onStart();
-        verify(mConnectedBluetoothDeviceUpdater).registerCallback();
-        verify(mConnectedUsbDeviceUpdater).registerCallback();
+        mAvailableMediaDeviceGroupController.onStart();
+        verify(mAvailableMediaBluetoothDeviceUpdater).registerCallback();
     }
 
     @Test
     public void testUnregister() {
         // unregister the callback in onStop()
-        mConnectedDeviceGroupController.onStop();
-        verify(mConnectedBluetoothDeviceUpdater).unregisterCallback();
-        verify(mConnectedUsbDeviceUpdater).unregisterCallback();
+        mAvailableMediaDeviceGroupController.onStop();
+        verify(mAvailableMediaBluetoothDeviceUpdater).unregisterCallback();
     }
 
     @Test
     public void testGetAvailabilityStatus_noBluetoothFeature_returnUnSupported() {
-        mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, false);
+        doReturn(false).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
 
-        assertThat(mConnectedDeviceGroupController.getAvailabilityStatus()).isEqualTo(
+        assertThat(mAvailableMediaDeviceGroupController.getAvailabilityStatus()).isEqualTo(
                 DISABLED_UNSUPPORTED);
     }
 
     @Test
     public void testGetAvailabilityStatus_BluetoothFeature_returnSupported() {
-        mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, true);
+        doReturn(true).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
 
-        assertThat(mConnectedDeviceGroupController.getAvailabilityStatus()).isEqualTo(
+        assertThat(mAvailableMediaDeviceGroupController.getAvailabilityStatus()).isEqualTo(
                 AVAILABLE);
     }
 }
