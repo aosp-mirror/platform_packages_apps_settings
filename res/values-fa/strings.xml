@@ -349,10 +349,8 @@
     <string name="zone_info_footer_no_dst" msgid="8652423870143056964">"از <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> استفاده می‌کند. بدون ساعت تابستانی."</string>
     <string name="zone_time_type_dst" msgid="8850494578766845276">"ساعت تابستانی"</string>
     <string name="zone_time_type_standard" msgid="3462424485380376522">"زمان استاندارد"</string>
-    <!-- no translation found for zone_menu_by_region (8370437123807764346) -->
-    <skip />
-    <!-- no translation found for zone_menu_by_offset (7161573994228041794) -->
-    <skip />
+    <string name="zone_menu_by_region" msgid="8370437123807764346">"انتخاب براساس منطقه"</string>
+    <string name="zone_menu_by_offset" msgid="7161573994228041794">"‏انتخاب براساس اختلاف با UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"تاریخ"</string>
     <string name="time_picker_title" msgid="483460752287255019">"زمان"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"به‌صورت خودکار قفل شود"</string>
@@ -694,6 +692,7 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"پیشرفته"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"بلوتوث پیشرفته"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"با بلوتوث روشن، دستگاهتان می‌تواند با دستگاه‌های بلوتوث اطراف در ارتباط باشد."</string>
+    <string name="bluetooth_scanning_on_info_message" msgid="824285504325592644">"وقتی بلوتوث روشن است،‌ دستگاهتان می‌تواند با سایر دستگاه‌های بلوتوث این اطراف ارتباط برقرار کند.\n\nبرای بهبود تجربه دستگاه، برنامه‌ها و سرویس‌ها همچنان می‌توانند در هرزمانی دستگاه‌های اطراف را اسکن کنند (حتی وقتی بلوتوث خاموش است). می‌توان از این ویژگی مثلاً برای بهبود ویژگی‌ها و سرویس‌های مکان‌مبنا استفاده کرد. می‌توانید انتخابتان را در "<annotation id="link">"تنظمیات اسکن"</annotation>" تغییر دهید."</string>
     <string name="ble_scan_notify_text" msgid="1295915006005700650">"برای بهبود صحت مکان، برنامه‌ها و سرویس‌های سیستم همچنان می‌توانند دستگاه‌های بلوتوث را شناسایی کنند. می‌توانید این مورد را در <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>تنظیمات اسکن<xliff:g id="LINK_END_1">LINK_END</xliff:g> تغییر دهید."</string>
     <string name="bluetooth_connect_failed" msgid="4500234659813241053">"متصل نشد. دوباره امتحان کنید."</string>
     <string name="device_details_title" msgid="6576953269221085300">"جزئیات دستگاه"</string>
@@ -853,8 +852,7 @@
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"باند ۵٫۰ گیگاهرتزی"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"۲٫۴ گیگاهرتز"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"۵٫۰ گیگاهرتز"</string>
-    <!-- no translation found for wifi_ap_band_select_one (3476254666116431650) -->
-    <skip />
+    <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"‏حداقل یک باند برای نقطه اتصال Wi‑Fi انتخاب کنید:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"‏تنظیمات IP"</string>
     <string name="wifi_shared" msgid="844142443226926070">"اشتراک‌گذاری با دیگر استفاده‌کنندگان از دستگاه"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(بدون تغییر)"</string>
@@ -1392,8 +1390,12 @@
     <string name="storage_wizard_slow_v2_body" msgid="6897444467730463117">"همچنان می‌توانید از این <xliff:g id="NAME_0">^1</xliff:g> استفاده کنید اما ممکن است کند باشد. \n\nبرنامه‌های ذخیره‌شده در این <xliff:g id="NAME_1">^2</xliff:g> ممکن است به‌درستی کار نکنند و انتقال محتوا ممکن است مدت زیادی طول بکشد. \n\nدرعوض، برای فضای ذخیره‌سازی قابل‌حمل از <xliff:g id="NAME_2">^3</xliff:g> سریع‌تری یا از <xliff:g id="NAME_3">^4</xliff:g> استفاده کنید."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="4126873669723115805">"شروع مجدد"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="49399942893518218">"ادامه"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="5993954859154357197">"برای انتقال محتوا به <xliff:g id="NAME">^1</xliff:g>، به "<b>"تنظیمات &gt; فضای ذخیره‌سازی"</b>" بروید"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="2574326509794010488">"محتوای شما به <xliff:g id="NAME_0">^1</xliff:g> منتقل شد. \n\nبرای مدیریت این <xliff:g id="NAME_1">^2</xliff:g>، به "<b>"تنظیمات &gt; فضای ذخیره‌سازی"</b>" بروید."</string>
+    <!-- no translation found for storage_wizard_ready_v2_external_body (11937346870534608) -->
+    <skip />
+    <!-- no translation found for storage_wizard_ready_v2_internal_body (4658433206901211269) -->
+    <skip />
+    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (6239886818487538806) -->
+    <skip />
     <string name="battery_status_title" msgid="9159414319574976203">"وضعیت باتری"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"مقدار شارژ باتری"</string>
     <string name="apn_settings" msgid="3743170484827528406">"نام‌های نقاط دستیابی"</string>
@@ -2126,8 +2128,7 @@
     <string name="awake" msgid="387122265874485088">"زمان بیداری دستگاه"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"‏Wi-Fi به موقع"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"‏Wi-Fi به موقع"</string>
-    <!-- no translation found for advanced_battery_title (6768618303037280828) -->
-    <skip />
+    <string name="advanced_battery_title" msgid="6768618303037280828">"مصرف باتری"</string>
     <string name="history_details_title" msgid="3608240585315506067">"جزئیات سابقه"</string>
     <string name="battery_details_title" msgid="6101394441569858580">"مصرف باتری"</string>
     <string name="details_subtitle" msgid="32593908269911734">"جزئیات استفاده"</string>
@@ -2154,12 +2155,9 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"رایانه لوحی بیشتر از حد معمول استفاده شده است"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"دستگاه بیشتر از حد معمول استفاده شده است"</string>
     <string name="battery_tip_high_usage_summary" msgid="6341311803303581798">"ممکن است شارژ باتری به‌زودی تمام شود"</string>
-    <!-- no translation found for battery_tip_dialog_message (7434089311164898581) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (2987443811119964310) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (1993039726576708815) -->
-    <skip />
+    <string name="battery_tip_dialog_message" product="default" msgid="7434089311164898581">"تلفنتان بیش از حد معمول استفاده است. ممکن است شارژ باتری زودتر از انتظار تمام شود.\n\n<xliff:g id="NUMBER">%1$d</xliff:g> برنامه پرمصرف از آخرین شارژ شدن (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="2987443811119964310">"رایانه لوحی‌تان بیش از حد معمول استفاده است. ممکن است شارژ باتری زودتر از انتظار تمام شود.\n\n<xliff:g id="NUMBER">%1$d</xliff:g> برنامه پرمصرف از آخرین شارژ شدن (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="1993039726576708815">"دستگاهتان بیش از حد معمول استفاده است. ممکن است شارژ باتری زودتر از انتظار تمام شود.\n\n<xliff:g id="NUMBER">%1$d</xliff:g> برنامه پرمصرف از آخرین شارژ شدن (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="one">‏%1$d برنامه را محدود کنید</item>
       <item quantity="other">‏%1$d برنامه را محدود کنید</item>
@@ -2201,8 +2199,7 @@
       <item quantity="one">‏محدود کردن مصرف باتری برای %1$d برنامه</item>
       <item quantity="other">‏محدود کردن مصرف باتری برای %1$d برنامه</item>
     </plurals>
-    <!-- no translation found for restricted_app_detail_footer (6739863162364046859) -->
-    <skip />
+    <string name="restricted_app_detail_footer" msgid="6739863162364046859">"این برنامه‌ها در پس‌زمینه از باتری استفاده می‌کند. ممکن است برنامه‌های محدودشده درست کار نکند و اعلان‌هایشان با تأخیر همراه باشد."</string>
     <string name="battery_auto_restriction_title" msgid="6553271897488963709">"استفاده از مدیر باتری"</string>
     <string name="battery_auto_restriction_summary" msgid="8561335400991281062">"تخلیه شدن شارژ باتری توسط برنامه‌ها شناسایی شود"</string>
     <string name="battery_manager_on" msgid="8643310865054362396">"روشن / تخلیه شدن شارژ باتری توسط برنامه‌ها شناسایی می‌شود"</string>
@@ -3090,8 +3087,7 @@
     <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"اعلان‌های بازشو در صفحه نشان داده نشود"</string>
     <string name="zen_mode_block_effect_status" msgid="6642532634292373081">"نمادهای نوار وضعیت پنهان شود"</string>
     <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"پنهان کردن نقطه‌های اعلان"</string>
-    <!-- no translation found for zen_mode_block_effect_ambient (4704755879961212658) -->
-    <skip />
+    <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"با دریافت اعلان بیدار نشود"</string>
     <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"از فهرست اعلان پنهان شود"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"هرگز"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="1230265589026355094">"وقتی صفحه‌نمایش روشن است"</string>
@@ -3134,8 +3130,7 @@
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"مسدود کردن وقتی صفحه خاموش است"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"«مزاحم نشوید» می‌تواند کارهای بیشتری از مسدود کردن صداهای ناخواسته انجام دهد - این ویژگی می‌تواند موارد تصویری را هم مسدود کند. هنگام تلاش برای خوابیدن، تمرکز کردن یا محدود کردن زمانی که صرف استفاده از تلفن می‌کنید، این ویژگی می‌تواند مفید باشد."</string>
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"مسدود کردن صداها و موارد تصویری"</string>
-    <!-- no translation found for zen_onboarding_screen_off_summary (5393041573999488088) -->
-    <skip />
+    <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"با دریافت اعلان صفحه روشن نشود یا دستگاه بیدار نشود"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"هیچ اعلانی نشان داده نشود، به‌جز فعالیت و وضعیت پایه تلفن"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"صداهای نمایه کاری"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"استفاده از صداهای نمایه شخصی"</string>
@@ -3236,9 +3231,11 @@
     </plurals>
     <string name="no_channels" msgid="3077375508177744586">"این برنامه هیچ اعلانی پست نکرده است"</string>
     <string name="app_settings_link" msgid="8894946007543660906">"تنظیمات بیشتر در برنامه"</string>
-    <!-- no translation found for app_notification_listing_summary_zero (8046168435207424440) -->
-    <skip />
-    <!-- no translation found for app_notification_listing_summary_others (6709582776823665660) -->
+    <string name="app_notification_listing_summary_zero" msgid="8046168435207424440">"برای همه برنامه‌ها روشن‌ است"</string>
+    <plurals name="app_notification_listing_summary_others" formatted="false" msgid="6709582776823665660">
+      <item quantity="one">برای <xliff:g id="COUNT_1">%d</xliff:g> برنامه خاموش است</item>
+      <item quantity="other">برای <xliff:g id="COUNT_1">%d</xliff:g> برنامه خاموش است</item>
+    </plurals>
     <plurals name="deleted_channels" formatted="false" msgid="8028574302599397935">
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> دسته حذف‌ شد</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> دسته حذف‌ شد</item>
@@ -3368,8 +3365,7 @@
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"علاوه بر استفاده از اثرانگشت برای باز کردن قفل دستگاه، برای محافظت بیشتر می‌توانید وارد کردن گذرواژه را برای راه‌اندازی آن لازم کنید. تا زمانی‌که دستگاه راه‌اندازی نشود، نمی‌تواند تماس تلفنی، پیام یا اعلان (ازجمله هشدار) دریافت کند.\n\nاین کار به محافظت از داده‌ها در دستگاه‌های گم‌شده یا به‌سرقت‌رفته کمک می‌کند. وارد کردن گذرواژه برای راه‌اندازی دستگاهتان الزامی شود؟"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"بله"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"نه"</string>
-    <!-- no translation found for restricted_true_label (4761453839409220473) -->
-    <skip />
+    <string name="restricted_true_label" msgid="4761453839409220473">"محدودشده"</string>
     <string name="restricted_false_label" msgid="3279282180297058755">"برنامه می‌تواند در پس‌زمینه از باتری استفاده کند"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"پین درخواست شود؟"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"الگو درخواست شود؟"</string>

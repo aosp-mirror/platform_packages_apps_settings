@@ -349,10 +349,8 @@
     <string name="zone_info_footer_no_dst" msgid="8652423870143056964">"采用<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>。没有夏令时。"</string>
     <string name="zone_time_type_dst" msgid="8850494578766845276">"夏令时"</string>
     <string name="zone_time_type_standard" msgid="3462424485380376522">"标准时间"</string>
-    <!-- no translation found for zone_menu_by_region (8370437123807764346) -->
-    <skip />
-    <!-- no translation found for zone_menu_by_offset (7161573994228041794) -->
-    <skip />
+    <string name="zone_menu_by_region" msgid="8370437123807764346">"按区域选择"</string>
+    <string name="zone_menu_by_offset" msgid="7161573994228041794">"按世界协调时间 (UTC) 偏移量选择"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"日期"</string>
     <string name="time_picker_title" msgid="483460752287255019">"时间"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"自动锁定"</string>
@@ -694,6 +692,7 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"高级"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"高级蓝牙设置"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"开启蓝牙后，您的设备可以与附近的其他蓝牙设备通信。"</string>
+    <string name="bluetooth_scanning_on_info_message" msgid="824285504325592644">"开启蓝牙后，您的设备可以与附近的其他蓝牙设备通信。\n\n为了提升设备的使用体验，应用和服务仍然可以随时扫描附近的设备（即使蓝牙已关闭）。这可用于改进基于位置的功能和服务（举例来说）。您可以在"<annotation id="link">"扫描设置"</annotation>"中更改此设置。"</string>
     <string name="ble_scan_notify_text" msgid="1295915006005700650">"为了提高位置信息的精确度，系统应用和服务仍然会检测蓝牙设备。您可以在<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>扫描设置<xliff:g id="LINK_END_1">LINK_END</xliff:g>中更改此设置。"</string>
     <string name="bluetooth_connect_failed" msgid="4500234659813241053">"无法连接，请重试。"</string>
     <string name="device_details_title" msgid="6576953269221085300">"设备详细信息"</string>
@@ -853,8 +852,7 @@
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"5.0 GHz 频段"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2.4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5.0 GHz"</string>
-    <!-- no translation found for wifi_ap_band_select_one (3476254666116431650) -->
-    <skip />
+    <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"请为 WLAN 热点至少选择一个频段："</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP 设置"</string>
     <string name="wifi_shared" msgid="844142443226926070">"与其他设备用户共享"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"（未更改）"</string>
@@ -1392,8 +1390,12 @@
     <string name="storage_wizard_slow_v2_body" msgid="6897444467730463117">"您仍可使用此<xliff:g id="NAME_0">^1</xliff:g>，但它的运行速度可能会很慢。\n\n此<xliff:g id="NAME_1">^2</xliff:g>上存储的应用可能无法正常运行，而且内容转移操作可能会花费很长时间。\n\n建议您使用运行速度更快的<xliff:g id="NAME_2">^3</xliff:g>，或者使用此<xliff:g id="NAME_3">^4</xliff:g>作为便携式存储设备。"</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="4126873669723115805">"重新开始"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="49399942893518218">"继续"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="5993954859154357197">"要将内容移至<xliff:g id="NAME">^1</xliff:g>，请依次转到"<b>"“设置”&gt;“存储”"</b></string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="2574326509794010488">"您的内容已移至<xliff:g id="NAME_0">^1</xliff:g>。\n\n要管理此<xliff:g id="NAME_1">^2</xliff:g>，请依次转到"<b>"“设置”&gt;“存储”"</b>"。"</string>
+    <!-- no translation found for storage_wizard_ready_v2_external_body (11937346870534608) -->
+    <skip />
+    <!-- no translation found for storage_wizard_ready_v2_internal_body (4658433206901211269) -->
+    <skip />
+    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (6239886818487538806) -->
+    <skip />
     <string name="battery_status_title" msgid="9159414319574976203">"电池状态"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"电池电量"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
@@ -2039,8 +2041,8 @@
     <string name="color_cyan" msgid="7033027180641173211">"青色"</string>
     <string name="color_yellow" msgid="9112680561610873529">"黄色"</string>
     <string name="color_magenta" msgid="5059212823607815549">"紫红色"</string>
-    <string name="enable_service_title" msgid="3061307612673835592">"要使用<xliff:g id="SERVICE">%1$s</xliff:g>吗？"</string>
-    <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g>需要："</string>
+    <string name="enable_service_title" msgid="3061307612673835592">"要使用“<xliff:g id="SERVICE">%1$s</xliff:g>”吗？"</string>
+    <string name="capabilities_list_title" msgid="86713361724771971">"“<xliff:g id="SERVICE">%1$s</xliff:g>”需要："</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"由于某个应用遮挡了权限请求界面，因此“设置”应用无法验证您的回应。"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"如果您开启 <xliff:g id="SERVICE">%1$s</xliff:g>，您的设备将无法使用屏幕锁定来增强数据加密。"</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"由于您已开启无障碍服务，因此您的设备将无法使用屏幕锁定来增强数据加密。"</string>
@@ -2049,8 +2051,8 @@
     <string name="enable_service_password_reason" msgid="1224075277603097951">"由于开启 <xliff:g id="SERVICE">%1$s</xliff:g> 会影响数据加密，因此您需要确认您的密码。"</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"监测您的操作"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="6640333613848713883">"在您与应用互动时接收通知。"</string>
-    <string name="disable_service_title" msgid="3624005212728512896">"要停用<xliff:g id="SERVICE">%1$s</xliff:g>吗？"</string>
-    <string name="disable_service_message" msgid="2247101878627941561">"点按“确定”将会停用<xliff:g id="SERVICE">%1$s</xliff:g>。"</string>
+    <string name="disable_service_title" msgid="3624005212728512896">"要停用“<xliff:g id="SERVICE">%1$s</xliff:g>”吗？"</string>
+    <string name="disable_service_message" msgid="2247101878627941561">"点按“确定”将会停用“<xliff:g id="SERVICE">%1$s</xliff:g>”。"</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"未安装任何服务"</string>
     <string name="accessibility_no_service_selected" msgid="2840969718780083998">"未选择任何服务"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"没有提供说明。"</string>
@@ -2126,8 +2128,7 @@
     <string name="awake" msgid="387122265874485088">"设备唤醒时间"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"WLAN开启时间"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"WLAN开启时间"</string>
-    <!-- no translation found for advanced_battery_title (6768618303037280828) -->
-    <skip />
+    <string name="advanced_battery_title" msgid="6768618303037280828">"电池用量"</string>
     <string name="history_details_title" msgid="3608240585315506067">"详细电量使用记录"</string>
     <string name="battery_details_title" msgid="6101394441569858580">"电池用量"</string>
     <string name="details_subtitle" msgid="32593908269911734">"详细使用情况"</string>
@@ -2154,12 +2155,9 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"平板电脑的使用强度比平时高"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"设备的使用强度比平时高"</string>
     <string name="battery_tip_high_usage_summary" msgid="6341311803303581798">"电池电量即将耗尽"</string>
-    <!-- no translation found for battery_tip_dialog_message (7434089311164898581) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (2987443811119964310) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (1993039726576708815) -->
-    <skip />
+    <string name="battery_tip_dialog_message" product="default" msgid="7434089311164898581">"您的手机使用频率比平时高。电池电量耗尽的速度可能会比预期更快。\n\n自上次充满电（<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>）后，耗电量较高的前 <xliff:g id="NUMBER">%1$d</xliff:g> 个应用为："</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="2987443811119964310">"您的平板电脑使用频率比平时高。电池电量耗尽的速度可能会比预期更快。\n\n自上次充满电（<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>）后，耗电量较高的前 <xliff:g id="NUMBER">%1$d</xliff:g> 个应用为："</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="1993039726576708815">"您的设备使用频率比平时高。电池电量耗尽的速度可能会比预期更快。\n\n自上次充满电（<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>）后，耗电量较高的前 <xliff:g id="NUMBER">%1$d</xliff:g> 个应用为："</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="other">限制 %1$d 个应用</item>
       <item quantity="one">限制 %1$d 个应用</item>
@@ -2201,8 +2199,7 @@
       <item quantity="other">正在限制 %1$d 个应用的电池用量</item>
       <item quantity="one">正在限制 %1$d 个应用的电池用量</item>
     </plurals>
-    <!-- no translation found for restricted_app_detail_footer (6739863162364046859) -->
-    <skip />
+    <string name="restricted_app_detail_footer" msgid="6739863162364046859">"这些应用一直在后台消耗电量。受限应用可能无法正常运行，且相关通知可能也会有所延迟。"</string>
     <string name="battery_auto_restriction_title" msgid="6553271897488963709">"使用电池管理器"</string>
     <string name="battery_auto_restriction_summary" msgid="8561335400991281062">"检测应用何时使用电量"</string>
     <string name="battery_manager_on" msgid="8643310865054362396">"已开启/正在检测应用何时使用电量"</string>
@@ -3090,8 +3087,7 @@
     <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"不在屏幕上弹出通知"</string>
     <string name="zen_mode_block_effect_status" msgid="6642532634292373081">"隐藏状态栏图标"</string>
     <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"隐藏通知圆点"</string>
-    <!-- no translation found for zen_mode_block_effect_ambient (4704755879961212658) -->
-    <skip />
+    <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"不要在收到通知时唤醒设备"</string>
     <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"不在通知列表中显示"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"永不"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="1230265589026355094">"屏幕关闭时"</string>
@@ -3134,8 +3130,7 @@
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"屏幕关闭时屏蔽"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"勿扰模式不仅可以屏蔽不需要的声音，还可以屏蔽视觉干扰。如果您正打算入睡、集中注意力或限制使用手机的时间，这一功能会很有用。"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"屏蔽声音和视觉干扰"</string>
-    <!-- no translation found for zen_onboarding_screen_off_summary (5393041573999488088) -->
-    <skip />
+    <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"不要在收到通知时开启屏幕或唤醒设备"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"不显示任何通知（除了基本手机活动和状态）"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"工作资料提示音"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"使用个人资料提示音"</string>
@@ -3236,9 +3231,11 @@
     </plurals>
     <string name="no_channels" msgid="3077375508177744586">"此应用未发布任何通知"</string>
     <string name="app_settings_link" msgid="8894946007543660906">"应用中的其他设置"</string>
-    <!-- no translation found for app_notification_listing_summary_zero (8046168435207424440) -->
-    <skip />
-    <!-- no translation found for app_notification_listing_summary_others (6709582776823665660) -->
+    <string name="app_notification_listing_summary_zero" msgid="8046168435207424440">"已开启所有应用的通知功能"</string>
+    <plurals name="app_notification_listing_summary_others" formatted="false" msgid="6709582776823665660">
+      <item quantity="other">已关闭 <xliff:g id="COUNT_1">%d</xliff:g> 个应用的通知功能</item>
+      <item quantity="one">已关闭 <xliff:g id="COUNT_0">%d</xliff:g> 个应用的通知功能</item>
+    </plurals>
     <plurals name="deleted_channels" formatted="false" msgid="8028574302599397935">
       <item quantity="other">已删除 <xliff:g id="COUNT_1">%d</xliff:g> 个类别</item>
       <item quantity="one">已删除 <xliff:g id="COUNT_0">%d</xliff:g> 个类别</item>
@@ -3368,8 +3365,7 @@
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"为了进一步保护此设备的安全，除了使用指纹解锁设备之外，您还可以将设备设为需要输入密码才能启动。在设备启动之前，无法接听电话、接收消息或通知（包括闹钟）。\n\n这样一来，即使设备丢失或被盗，其中的数据仍安全无虞。要将设备设为需要输入密码才能启动吗？"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"是"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"否"</string>
-    <!-- no translation found for restricted_true_label (4761453839409220473) -->
-    <skip />
+    <string name="restricted_true_label" msgid="4761453839409220473">"受限"</string>
     <string name="restricted_false_label" msgid="3279282180297058755">"应用可以在后台使用电量"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"要求输入 PIN 码吗？"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"要求绘制图案吗？"</string>

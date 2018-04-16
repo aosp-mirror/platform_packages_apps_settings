@@ -349,10 +349,8 @@
     <string name="zone_info_footer_no_dst" msgid="8652423870143056964">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> භාවිත කරයි. දිවා සුරැකුම් කාලය නැත."</string>
     <string name="zone_time_type_dst" msgid="8850494578766845276">"දිවා ආලෝක සුරැකුම් වේලාව"</string>
     <string name="zone_time_type_standard" msgid="3462424485380376522">"සම්මත වේලාව"</string>
-    <!-- no translation found for zone_menu_by_region (8370437123807764346) -->
-    <skip />
-    <!-- no translation found for zone_menu_by_offset (7161573994228041794) -->
-    <skip />
+    <string name="zone_menu_by_region" msgid="8370437123807764346">"කලාපය අනුව තෝරන්න"</string>
+    <string name="zone_menu_by_offset" msgid="7161573994228041794">"UTC ඕෆ්සෙට් අනුව තෝරන්න"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"දිනය"</string>
     <string name="time_picker_title" msgid="483460752287255019">"කාලය"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"ස්වයංක්‍රියව අගුලු දමන්න"</string>
@@ -694,6 +692,7 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"උසස්"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"දියුණු බ්ලූටූත්"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"බ්ලූටූත් සබල විට, ඔබගේ උපාංගයට අවට ඇති බ්ලූටූත් උපාංග සමඟ සන්නිවේදනය කළ හැක."</string>
+    <string name="bluetooth_scanning_on_info_message" msgid="824285504325592644">"බ්ලූටූත් ක්‍රියාත්මක විට, ඔබගේ උපාංගයට වෙනත් බ්ලූටූත් උපාංග සමඟ සන්නිවේදනය කළ හැකිය.\n\nඋපාංග අත්දැකීම වැඩි දියුණු කිරීම සඳහා, ඕනෑම අවස්ථාවක අවට උපාංග සඳහා ස්කෑන් කිරීමට යෙදුම් සහ සේවාවලට හැකිය. උදාහරණයක් ලෙස, ස්ථානය-පදනම් වූ විශේෂාංග සහ සේවා වැඩි දියුණු කිරීම සඳහා මෙය භාවිත කළ හැකි අතර ඔබට මෙය "<annotation id="link">"ස්කෑන් කිරීමේ සැකසීම්"</annotation>" තුළ වෙනස් කළ හැකිය."</string>
     <string name="ble_scan_notify_text" msgid="1295915006005700650">"ස්ථාන නිරවද්‍යතාව වැඩිදියුණු කිරීමට පද්ධති යෙදුම් සහ සේවාවලට තවමත්, බ්ලූටූත් උපාංග අනාවරණය කර ගැනීමට හැකිය. ඔබට මෙය <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>ස්කෑන් කිරීමේ සැකසීම්<xliff:g id="LINK_END_1">LINK_END</xliff:g> තුළ වෙනස් කළ හැකිය."</string>
     <string name="bluetooth_connect_failed" msgid="4500234659813241053">"සම්බන්ධ වීමට නොහැකි විය. නැවත උත්සාහ කරන්න."</string>
     <string name="device_details_title" msgid="6576953269221085300">"උපාංග විස්තර"</string>
@@ -853,8 +852,7 @@
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"5.0 GHz කලාපය"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2.4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5.0 GHz"</string>
-    <!-- no translation found for wifi_ap_band_select_one (3476254666116431650) -->
-    <skip />
+    <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Wi-Fi හොට්ස්පොට් සඳහා අවම වශයෙන් එක් කලාපයක් තෝරන්න:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP සැකසීම්"</string>
     <string name="wifi_shared" msgid="844142443226926070">"අනෙකුත් උපාංග පරිශීලකයන් සමග බෙදා ගන්න"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(වෙනස් නොකළ)"</string>
@@ -1392,8 +1390,12 @@
     <string name="storage_wizard_slow_v2_body" msgid="6897444467730463117">"ඔබට තවම මෙම <xliff:g id="NAME_0">^1</xliff:g> භාවිත කළ හැකිය, නමුත් එය මන්දගාමී විය හැකිය. \n\nමෙහි Apps ගබඩා කිරීම <xliff:g id="NAME_1">^2</xliff:g> නිසි පරිදි ක්‍රියා නොකළ හැකි අතර, අන්තර්ගතය මාරු කිරීමට දිගු වේලාවක් ගත විය හැකිය. \n\nවඩා වේගවත් <xliff:g id="NAME_2">^3</xliff:g>ක් භාවිත කිරීමට, හෝ මෙම <xliff:g id="NAME_3">^4</xliff:g> ඒ වෙනුවට ගෙන යා හැකි ගබඩාව භාවිත කරන්න."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="4126873669723115805">"යළි මුල සිට අරඹන්න"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="49399942893518218">"ඉදිරියට යන්න"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="5993954859154357197">"<xliff:g id="NAME">^1</xliff:g> වෙත අන්තර්ගතය ගෙන යාමට, "<b>"සැකසීම් &gt; ගබඩාව"</b>" වෙත යන්න"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="2574326509794010488">"ඔබේ අන්තර්ගතය <xliff:g id="NAME_0">^1</xliff:g> වෙත ගෙන යන ලදී.\n\nමෙම <xliff:g id="NAME_1">^2</xliff:g> කළමනාකරණය කිරීමට, "<b>"සැකසීම් &gt; ගබඩාව"</b>" වෙත යන්න"</string>
+    <!-- no translation found for storage_wizard_ready_v2_external_body (11937346870534608) -->
+    <skip />
+    <!-- no translation found for storage_wizard_ready_v2_internal_body (4658433206901211269) -->
+    <skip />
+    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (6239886818487538806) -->
+    <skip />
     <string name="battery_status_title" msgid="9159414319574976203">"බැටරි තත්වය"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"බැටරි මට්ටම"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APNs"</string>
@@ -2126,8 +2128,7 @@
     <string name="awake" msgid="387122265874485088">"උපාංග අවදි කාලය"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"Wi‑Fi සක්‍රිය කාලය"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"ප්‍රමාද නොවී Wi-Fi"</string>
-    <!-- no translation found for advanced_battery_title (6768618303037280828) -->
-    <skip />
+    <string name="advanced_battery_title" msgid="6768618303037280828">"බැටරි භාවිතය"</string>
     <string name="history_details_title" msgid="3608240585315506067">"ඉතිහාස විස්තර"</string>
     <string name="battery_details_title" msgid="6101394441569858580">"බැටරි භාවිතය"</string>
     <string name="details_subtitle" msgid="32593908269911734">"විස්තර භාවිත කරන්න"</string>
@@ -2154,12 +2155,9 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"ටැබ්ලට් උපාංගය සාමාන්‍යයට වඩා වැඩියෙන් භාවිත කර ඇත"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"උපාංගය සාමාන්‍යයට වඩා වැඩියෙන් භාවිත කර ඇත"</string>
     <string name="battery_tip_high_usage_summary" msgid="6341311803303581798">"බැටරිය ඉක්මනින් අවසන් විය හැකිය"</string>
-    <!-- no translation found for battery_tip_dialog_message (7434089311164898581) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (2987443811119964310) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (1993039726576708815) -->
-    <skip />
+    <string name="battery_tip_dialog_message" product="default" msgid="7434089311164898581">"ඔබේ දුරකථනය සාමාන්‍යයට වඩා වැඩියෙන් භාවිත කර ඇත. ඔබගේ බැටරිය බලාපොරොත්තු වූවාට වඩා ඉක්මනින් අවසන් වේ. අවසන් ආරෝපණය කිරීමේ සිට \n\nඉහළම <xliff:g id="NUMBER">%1$d</xliff:g> යෙදුම්(<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="2987443811119964310">"ඔබේ ටැබ්ලට් පරිගණකය සාමාන්‍යයට වඩා වැඩියෙන් භාවිත කර ඇත. ඔබගේ බැටරිය බලාපොරොත්තු වූවාට වඩා ඉක්මනින් අවසන් වේ. අවසන් ආරෝපණය කිරීමේ සිට \n\nඉහළම <xliff:g id="NUMBER">%1$d</xliff:g> යෙදුම්(<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="1993039726576708815">"ඔබේ උපාංගය සාමාන්‍යයට වඩා වැඩියෙන් භාවිත කර ඇත. ඔබගේ බැටරිය බලාපොරොත්තු වූවාට වඩා ඉක්මනින් අවසන් වේ. අවසන් ආරෝපණය කිරීමේ සිට \n\nඉහළම <xliff:g id="NUMBER">%1$d</xliff:g> යෙදුම්(<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="one">යෙදුම් %1$dක් සීමා කරන්න</item>
       <item quantity="other">යෙදුම් %1$dක් සීමා කරන්න</item>
@@ -2201,8 +2199,7 @@
       <item quantity="one">යෙදුම් %1$dක් සඳහා බැටරි භාවිතය සීමා කරමින්</item>
       <item quantity="other">යෙදුම් %1$dක් සඳහා බැටරි භාවිතය සීමා කරමින්</item>
     </plurals>
-    <!-- no translation found for restricted_app_detail_footer (6739863162364046859) -->
-    <skip />
+    <string name="restricted_app_detail_footer" msgid="6739863162364046859">"මෙම යෙදුම් පසුබිමින් බැටරිය භාවිත කර ඇත. සීමා කළ යෙදුම් නිසියාකාරව ක්‍රියා නොකළ හැකි අතර දැනුම්දීම් ප්‍රමාද විය හැකිය."</string>
     <string name="battery_auto_restriction_title" msgid="6553271897488963709">"බැටරි කළමනාකරු භාවිත කරන්න"</string>
     <string name="battery_auto_restriction_summary" msgid="8561335400991281062">"යෙදුම් බැටරිය අඩු කරන විට හඳුනා ගන්න"</string>
     <string name="battery_manager_on" msgid="8643310865054362396">"ක්‍රියාත්මකයි / යෙදුම් බැටරිය අඩු කරන විට හඳුනා ගනිමින්"</string>
@@ -3090,8 +3087,7 @@
     <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"තිරය මත දැනුම්දීම් උත්පතනය නොකරන්න"</string>
     <string name="zen_mode_block_effect_status" msgid="6642532634292373081">"තත්ත්ව තීරු අයිකන සඟවන්න"</string>
     <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"දැනුම්දීම් තිත් සඟවන්න"</string>
-    <!-- no translation found for zen_mode_block_effect_ambient (4704755879961212658) -->
-    <skip />
+    <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"දැනුම්දීම් සඳහා අවදි නොකරන්න"</string>
     <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"දැනුම්දීම් ලැයිස්තුවෙන් සඟවන්න"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"කිසි විටක නැත"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="1230265589026355094">"තිරය ක්‍රියාවිරහිත විට"</string>
@@ -3134,8 +3130,7 @@
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"තිරය ක්‍රියාවිරහිත විට අවහිර කරන්න"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"අනවශ්‍ය ශබ්ද අවහිර කිරීමට වඩා වැඩි දෙයක් බාධා නොකරන්නට කළ හැකිය - එය දෘශ්‍යද අවහිර කළ හැකිය. ඔබ දුරකථනයෙහි ගත කරන කාලය නිදා ගැනීමට, අවධානය යොමු කිරීමට හෝ සීමා කිරීමට උත්සාහ කරනවා නම් මෙය ප්‍රයෝජනවත් විය හැකිය."</string>
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"ශබ්ද සහ දෘශ්‍ය අවහිර කරන්න"</string>
-    <!-- no translation found for zen_onboarding_screen_off_summary (5393041573999488088) -->
-    <skip />
+    <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"තිරය ක්‍රියාත්මක නොකරන්න නැතහොත් දැනුම්දීම් සඳහා අවදි නොකරන්න"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"මූලික දුරකථන ක්‍රියාකාරකම් සහ තත්ත්වය හැරුණු විට, දැනුම්දීම් කිසි විටක නොපෙන්වන්න"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"කාර්යාල පැතිකඩ හඬවල්"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"පුද්ගලික පැතිකඩ හඬ භාවිත කර."</string>
@@ -3236,9 +3231,11 @@
     </plurals>
     <string name="no_channels" msgid="3077375508177744586">"මෙම යෙදුම දැනුම්දීම් කිසිවක් පළ කර නැත"</string>
     <string name="app_settings_link" msgid="8894946007543660906">"අමතර සැකසීම් යෙදුම තුළ ඇත"</string>
-    <!-- no translation found for app_notification_listing_summary_zero (8046168435207424440) -->
-    <skip />
-    <!-- no translation found for app_notification_listing_summary_others (6709582776823665660) -->
+    <string name="app_notification_listing_summary_zero" msgid="8046168435207424440">"සියලු යෙදුම් සඳහා ක්‍රියාත්මකයි"</string>
+    <plurals name="app_notification_listing_summary_others" formatted="false" msgid="6709582776823665660">
+      <item quantity="one">යෙදුම් <xliff:g id="COUNT_1">%d</xliff:g>ක් සඳහා ක්‍රියාවිරහිතයි</item>
+      <item quantity="other">යෙදුම් <xliff:g id="COUNT_1">%d</xliff:g>ක් සඳහා ක්‍රියාවිරහිතයි</item>
+    </plurals>
     <plurals name="deleted_channels" formatted="false" msgid="8028574302599397935">
       <item quantity="one">ප්‍රවර්ග <xliff:g id="COUNT_1">%d</xliff:g>ක් මකා දමන ලදි</item>
       <item quantity="other">ප්‍රවර්ග <xliff:g id="COUNT_1">%d</xliff:g>ක් මකා දමන ලදි</item>
@@ -3368,8 +3365,7 @@
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"ඔබේ උපාංගය අගුලු හැරීමට ඔබේ ඇඟිලි සලකුණ භාවිත කිරීමට අමතරව, උපාංගය ආරම්භ වීමට පෙර ඔබගේ මුරපදය අවශ්‍ය වීම මඟින් ඔබට එය තව දුරටත් ආරක්ෂා කළ හැකිය. උපාංගය ආරම්භ වන තෙක්, එයට එලාම ඇතුළත්ව ඇමතුම්, පණිවිඩ හෝ දැනුම්දීම් ලබා ගත නොහැකිය.\n\nනැතිවූ හෝ සොරකම් කළ උපාංගවල දත්ත ආරක්ෂා කිරීමට මෙය උදවු කරයි. ඔබගේ උපාංගය පණ ගැන්වීමට මුරපදය එක අවශ්‍යද?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"ඔව්"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"නැත"</string>
-    <!-- no translation found for restricted_true_label (4761453839409220473) -->
-    <skip />
+    <string name="restricted_true_label" msgid="4761453839409220473">"සීමා කළ"</string>
     <string name="restricted_false_label" msgid="3279282180297058755">"යෙදුම බැටරිය පසුබිමින් භාවිත කළ හැකිය"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"PIN එක අවශ්‍යද?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"රටාව අවශ්‍යද?"</string>

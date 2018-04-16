@@ -349,10 +349,8 @@
     <string name="zone_info_footer_no_dst" msgid="8652423870143056964">"A következőt használja: <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Nincs nyári időszámítás."</string>
     <string name="zone_time_type_dst" msgid="8850494578766845276">"Téli/nyári időszámítás"</string>
     <string name="zone_time_type_standard" msgid="3462424485380376522">"Hivatalos idő"</string>
-    <!-- no translation found for zone_menu_by_region (8370437123807764346) -->
-    <skip />
-    <!-- no translation found for zone_menu_by_offset (7161573994228041794) -->
-    <skip />
+    <string name="zone_menu_by_region" msgid="8370437123807764346">"Kiválasztás régió szerint"</string>
+    <string name="zone_menu_by_offset" msgid="7161573994228041794">"Kiválasztás UTC-eltolódással"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Dátum"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Idő"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Automatikus zárolás"</string>
@@ -694,6 +692,7 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Speciális"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Speciális Bluetooth"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Ha a Bluetooth aktív, az eszköz képes kommunikálni a közelben lévő Bluetooth-eszközökkel."</string>
+    <string name="bluetooth_scanning_on_info_message" msgid="824285504325592644">"Ha a Bluetooth aktív, az eszköz képes kommunikálni a közelben lévő Bluetooth-eszközökkel.\n\nAz élmény javítása érdekében az alkalmazások és szolgáltatások bármikor kereshetnek közeli eszközöket, még akkor is, ha ki van kapcsolva a Bluetooth. Ez például a helyalapú funkciók és szolgáltatások javítására használható. A funkciót a "<annotation id="link">"keresési beállítások"</annotation>" alatt módosíthatja."</string>
     <string name="ble_scan_notify_text" msgid="1295915006005700650">"A pontosabb helyadatok érdekében a rendszeralkalmazások és -szolgáltatások továbbra is kereshetnek Bluetooth-eszközöket. Ezt a <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>keresési beállításoknál<xliff:g id="LINK_END_1">LINK_END</xliff:g> módosíthatja."</string>
     <string name="bluetooth_connect_failed" msgid="4500234659813241053">"A csatlakozás sikertelen. Próbálja újra."</string>
     <string name="device_details_title" msgid="6576953269221085300">"Eszközadatok"</string>
@@ -853,8 +852,7 @@
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"5 GHz-es sáv"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2,4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5 GHz"</string>
-    <!-- no translation found for wifi_ap_band_select_one (3476254666116431650) -->
-    <skip />
+    <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Válasszon legalább egy sávot a Wi-Fi-hotspot számára:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP-beállítások"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Megosztás az eszköz más felhasználóival"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(nem változott)"</string>
@@ -1392,8 +1390,12 @@
     <string name="storage_wizard_slow_v2_body" msgid="6897444467730463117">"A(z) <xliff:g id="NAME_0">^1</xliff:g> továbbra is használható, de előfordulhat, hogy lassú lesz. \n\nA(z) <xliff:g id="NAME_1">^2</xliff:g> eszközön lévő alkalmazások esetleg nem fognak megfelelően működni, a tartalmak átvitele pedig sokáig tarthat. \n\nPróbálkozzon gyorsabb <xliff:g id="NAME_2">^3</xliff:g> vagy ezen <xliff:g id="NAME_3">^4</xliff:g> használatával hordozható tárhelyként."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="4126873669723115805">"Újrakezdés"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="49399942893518218">"Tovább"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="5993954859154357197">"Ha tartalmat szeretne áthelyezni a(z) <xliff:g id="NAME">^1</xliff:g> eszközre, nyissa meg a "<b>"Beállítások &gt; Tárhely"</b>" menüt"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="2574326509794010488">"A tartalom a következő eszközre lett áthelyezve: <xliff:g id="NAME_0">^1</xliff:g>. \n\nA(z) <xliff:g id="NAME_1">^2</xliff:g> kezelését a "<b>"Beállítások &gt; Tárhely"</b>" menüben végezheti el."</string>
+    <!-- no translation found for storage_wizard_ready_v2_external_body (11937346870534608) -->
+    <skip />
+    <!-- no translation found for storage_wizard_ready_v2_internal_body (4658433206901211269) -->
+    <skip />
+    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (6239886818487538806) -->
+    <skip />
     <string name="battery_status_title" msgid="9159414319574976203">"Akkumulátor állapota"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Akkumulátorszint"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN-ek"</string>
@@ -2126,8 +2128,7 @@
     <string name="awake" msgid="387122265874485088">"Eszköz készenléti ideje"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"Wi-Fi időben"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"Wi-Fi időben"</string>
-    <!-- no translation found for advanced_battery_title (6768618303037280828) -->
-    <skip />
+    <string name="advanced_battery_title" msgid="6768618303037280828">"Akkumulátorhasználat"</string>
     <string name="history_details_title" msgid="3608240585315506067">"Előzmények részletei"</string>
     <string name="battery_details_title" msgid="6101394441569858580">"Akkumulátorhasználat"</string>
     <string name="details_subtitle" msgid="32593908269911734">"Használat részletei"</string>
@@ -2154,12 +2155,9 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"A táblagépet többet használja a megszokottnál"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"Az eszközt többet használja a megszokottnál"</string>
     <string name="battery_tip_high_usage_summary" msgid="6341311803303581798">"Az akkumulátor hamarosan lemerül"</string>
-    <!-- no translation found for battery_tip_dialog_message (7434089311164898581) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (2987443811119964310) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (1993039726576708815) -->
-    <skip />
+    <string name="battery_tip_dialog_message" product="default" msgid="7434089311164898581">"A telefont többet használja a megszokottnál. A vártnál hamarabb lemerülhet az akkumulátor.\n\nA(z) <xliff:g id="NUMBER">%1$d</xliff:g> legtöbbet használt alkalmazás a legutóbbi töltés óta (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="2987443811119964310">"A táblagépet többet használja a megszokottnál. A vártnál hamarabb lemerülhet az akkumulátor.\n\nA(z) <xliff:g id="NUMBER">%1$d</xliff:g> legtöbbet használt alkalmazás a legutóbbi töltés óta (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="1993039726576708815">"Az eszközt többet használja a megszokottnál. A vártnál hamarabb lemerülhet az akkumulátor.\n\nA(z) <xliff:g id="NUMBER">%1$d</xliff:g> legtöbbet használt alkalmazás a legutóbbi töltés óta (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="other">%1$d alkalmazás korlátozása</item>
       <item quantity="one">%1$d alkalmazás korlátozása</item>
@@ -2201,8 +2199,7 @@
       <item quantity="other">Az akkumulátorhasználat korlátozása %1$d alkalmazás számára</item>
       <item quantity="one">Az akkumulátorhasználat korlátozása %1$d alkalmazás számára</item>
     </plurals>
-    <!-- no translation found for restricted_app_detail_footer (6739863162364046859) -->
-    <skip />
+    <string name="restricted_app_detail_footer" msgid="6739863162364046859">"Ezek az alkalmazások akkumulátort használtak a háttérben. Előfordulhat, hogy a korlátozott alkalmazások ezután nem működnek megfelelően, és késnek az értesítéseik."</string>
     <string name="battery_auto_restriction_title" msgid="6553271897488963709">"Az Akkumulátorkezelő használata"</string>
     <string name="battery_auto_restriction_summary" msgid="8561335400991281062">"Az akkumulátort merítő alkalmazások észlelése"</string>
     <string name="battery_manager_on" msgid="8643310865054362396">"Be – Az akkumulátort merítő alkalmazások észlelése"</string>
@@ -3092,8 +3089,7 @@
     <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"Ne jelenítsen meg értesítéseket a képernyőn"</string>
     <string name="zen_mode_block_effect_status" msgid="6642532634292373081">"Az állapotsor ikonjainak elrejtése"</string>
     <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"Értesítési pöttyök elrejtése"</string>
-    <!-- no translation found for zen_mode_block_effect_ambient (4704755879961212658) -->
-    <skip />
+    <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"Ne ébredjen fel az értesítéseknél"</string>
     <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"Elrejtés az értesítési listáról"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"Soha"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="1230265589026355094">"Ha a képernyő ki van kapcsolva"</string>
@@ -3136,8 +3132,7 @@
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Letiltás kikapcsolt képernyőnél"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"A Ne zavarjanak mód többre is képes, mint a kéretlen hangok elnémítása – a vizuális jelzéseket is le tudja tiltani. Ez hasznos lehet, ha aludni vagy koncentrálni próbál, illetve korlátozni szeretné a telefon használatával eltöltött időt."</string>
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Hangok és vizuális jelzések letiltása"</string>
-    <!-- no translation found for zen_onboarding_screen_off_summary (5393041573999488088) -->
-    <skip />
+    <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Ne kapcsoljon be a kijelző, illetve ne ébredjen fel az értesítéseknél"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Semmilyen értesítés ne jelenjen meg (az alapvető telefonos tevékenységek és az állapottal kapcsolatos értesítések kivételével)"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Munkaprofil hangebállításai"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Személyes profil hangjainak használata"</string>
@@ -3238,9 +3233,11 @@
     </plurals>
     <string name="no_channels" msgid="3077375508177744586">"Ez az alkalmazás nem küldött semmilyen értesítést"</string>
     <string name="app_settings_link" msgid="8894946007543660906">"Az alkalmazás további beállításai"</string>
-    <!-- no translation found for app_notification_listing_summary_zero (8046168435207424440) -->
-    <skip />
-    <!-- no translation found for app_notification_listing_summary_others (6709582776823665660) -->
+    <string name="app_notification_listing_summary_zero" msgid="8046168435207424440">"Bekapcsolva az összes alkalmazásnál"</string>
+    <plurals name="app_notification_listing_summary_others" formatted="false" msgid="6709582776823665660">
+      <item quantity="other">Kikapcsolva <xliff:g id="COUNT_1">%d</xliff:g> alkalmazásnál</item>
+      <item quantity="one">Kikapcsolva <xliff:g id="COUNT_0">%d</xliff:g> alkalmazásnál</item>
+    </plurals>
     <plurals name="deleted_channels" formatted="false" msgid="8028574302599397935">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> kategória törölve</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> kategória törölve</item>
@@ -3370,8 +3367,7 @@
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Amellett, hogy ujjlenyomattal oldja fel eszköze zárolását, további védelmet nyújthat az eszköznek, ha jelszó magadásához köti a rendszerindítást. Amíg az eszköz el nem indul, nem tud hívásokat, üzeneteket és értesítéseket fogadni (beleértve a riasztásokat is).\n\nEz segíti az elvesztett vagy ellopott eszközökön lévő adatok védelmét. Beállítja jelszó kérését az eszköz indítása előtt?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Igen"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Nem"</string>
-    <!-- no translation found for restricted_true_label (4761453839409220473) -->
-    <skip />
+    <string name="restricted_true_label" msgid="4761453839409220473">"Korlátozott"</string>
     <string name="restricted_false_label" msgid="3279282180297058755">"Használhat háttérben"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Kérjen PIN-kódot?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Kérjen mintát?"</string>
