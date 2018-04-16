@@ -28,17 +28,15 @@ import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.widget.GearPreference;
-import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import com.android.settingslib.bluetooth.HeadsetProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Update the bluetooth devices. It gets bluetooth event from {@link LocalBluetoothManager} using
@@ -48,7 +46,8 @@ import java.util.Objects;
  * In {@link BluetoothDeviceUpdater}, it uses {@link BluetoothDeviceFilter.Filter} to detect
  * whether the {@link CachedBluetoothDevice} is relevant.
  */
-public abstract class BluetoothDeviceUpdater implements BluetoothCallback {
+public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
+        LocalBluetoothProfileManager.ServiceListener {
     private static final String TAG = "BluetoothDeviceUpdater";
     private static final String BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY =
             "persist.bluetooth.showdeviceswithoutnames";
@@ -116,6 +115,7 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback {
     public void registerCallback() {
         mLocalManager.setForegroundActivity(mFragment.getContext());
         mLocalManager.getEventManager().registerCallback(this);
+        mLocalManager.getProfileManager().addServiceListener(this);
         forceUpdate();
     }
 
@@ -125,6 +125,7 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback {
     public void unregisterCallback() {
         mLocalManager.setForegroundActivity(null);
         mLocalManager.getEventManager().unregisterCallback(this);
+        mLocalManager.getProfileManager().removeServiceListener(this);
     }
 
     /**
@@ -173,6 +174,17 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback {
 
     @Override
     public void onAudioModeChanged() {
+    }
+
+    @Override
+    public void onServiceConnected() {
+        // When bluetooth service connected update the UI
+        forceUpdate();
+    }
+
+    @Override
+    public void onServiceDisconnected() {
+
     }
 
     /**
@@ -225,5 +237,17 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback {
             mDevicePreferenceCallback.onDeviceRemoved(mPreferenceMap.get(device));
             mPreferenceMap.remove(device);
         }
+    }
+
+    /**
+     * @return {@code true} if {@code cachedBluetoothDevice} is connected
+     * and the bond state is bonded.
+     */
+    public boolean isDeviceConnected(CachedBluetoothDevice cachedDevice) {
+        if (cachedDevice == null) {
+            return false;
+        }
+        final BluetoothDevice device = cachedDevice.getDevice();
+        return device.getBondState() == BluetoothDevice.BOND_BONDED && device.isConnected();
     }
 }
