@@ -196,8 +196,7 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
         if (mSuppressionTextView != null && mSeekBar != null) {
             mSuppressionTextView.setText(mSuppressionText);
             final boolean showSuppression = !TextUtils.isEmpty(mSuppressionText);
-            mSuppressionTextView.setVisibility(showSuppression ? View.VISIBLE : View.INVISIBLE);
-            mSeekBar.setVisibility(showSuppression ? View.INVISIBLE : View.VISIBLE);
+            mSuppressionTextView.setVisibility(showSuppression ? View.VISIBLE : View.GONE);
         }
     }
 
