@@ -16,6 +16,9 @@
 
 package com.android.settings.sound;
 
+import static android.media.AudioManager.STREAM_VOICE_CALL;
+import static android.media.AudioSystem.DEVICE_OUT_USB_HEADSET;
+
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.support.v7.preference.Preference;
@@ -76,7 +79,7 @@ public class HandsFreeProfileOutputPreferenceController extends
         // Setup devices entries, select active connected device
         setupPreferenceEntries(mediaOutputs, mediaValues, activeDevice);
 
-        if (mAudioManager.isWiredHeadsetOn() && !mAudioManager.isBluetoothScoOn()) {
+        if (isStreamFromOutputDevice(STREAM_VOICE_CALL, DEVICE_OUT_USB_HEADSET)) {
             // If wired headset is plugged in and active, select to default device.
             mSelectedIndex = getDefaultDeviceIndex();
         }

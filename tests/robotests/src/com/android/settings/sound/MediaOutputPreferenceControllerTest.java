@@ -17,6 +17,8 @@
 package com.android.settings.sound;
 
 
+import static android.media.AudioSystem.DEVICE_OUT_USB_HEADSET;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.mock;
@@ -256,8 +258,7 @@ public class MediaOutputPreferenceControllerTest {
     @Test
     public void updateState_a2dpDevicesAvailableWiredHeadsetIsActivated_shouldSetDefaultSummary() {
         mShadowAudioManager.setMode(AudioManager.MODE_NORMAL);
-        mShadowAudioManager.setWiredHeadsetOn(true);
-        mShadowAudioManager.setBluetoothA2dpOn(false);
+        mShadowAudioManager.setStream(DEVICE_OUT_USB_HEADSET);
         when(mA2dpProfile.getConnectedDevices()).thenReturn(mConnectedDevices);
         when(mA2dpProfile.getActiveDevice()).thenReturn(
                 mBluetoothDevice); // BT device is still activated in this case
