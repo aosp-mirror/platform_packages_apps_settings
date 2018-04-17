@@ -52,6 +52,7 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
     private Map<String, BatteryTip> mBatteryTipMap;
     private SettingsActivity mSettingsActivity;
     private MetricsFeatureProvider mMetricsFeatureProvider;
+    private boolean mNeedUpdate;
     @VisibleForTesting
     PreferenceGroup mPreferenceGroup;
     @VisibleForTesting
@@ -71,6 +72,7 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
         mFragment = fragment;
         mSettingsActivity = settingsActivity;
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mNeedUpdate = true;
     }
 
     @Override
@@ -111,6 +113,7 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
                 mBatteryTipMap.put(preference.getKey(), batteryTip);
                 mPreferenceGroup.addPreference(preference);
                 batteryTip.log(mContext, mMetricsFeatureProvider);
+                mNeedUpdate = batteryTip.needUpdate();
                 break;
             }
         }
@@ -151,6 +154,10 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
 
     public void saveInstanceState(Bundle outState) {
         outState.putParcelableList(KEY_BATTERY_TIPS, mBatteryTips);
+    }
+
+    public boolean needUpdate() {
+        return mNeedUpdate;
     }
 
     /**
