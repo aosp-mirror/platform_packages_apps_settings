@@ -16,14 +16,13 @@
 
 package com.android.settings.sound;
 
-import static android.media.AudioManager.STREAM_VOICE_CALL;
+import static android.media.AudioManager.STREAM_MUSIC;
+import static android.media.AudioSystem.DEVICE_OUT_REMOTE_SUBMIX;
 import static android.media.AudioSystem.DEVICE_OUT_USB_HEADSET;
-import static android.media.MediaRouter.ROUTE_TYPE_REMOTE_DISPLAY;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.media.AudioManager;
-import android.media.MediaRouter;
 import android.support.v7.preference.Preference;
 
 import com.android.internal.util.ArrayUtils;
@@ -51,8 +50,7 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
             return;
         }
 
-        if (mAudioManager.isMusicActiveRemotely() || isCastDevice(mMediaRouter)) {
-            // TODO(76455906): Workaround for cast mode, need a solid way to identify cast mode.
+        if (isStreamFromOutputDevice(STREAM_MUSIC, DEVICE_OUT_REMOTE_SUBMIX)) {
             // In cast mode, disable switch entry.
             preference.setEnabled(false);
             preference.setSummary(mContext.getText(R.string.media_output_summary_unavailable));
@@ -93,7 +91,7 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
         // Setup devices entries, select active connected device
         setupPreferenceEntries(mediaOutputs, mediaValues, activeDevice);
 
-        if (isStreamFromOutputDevice(STREAM_VOICE_CALL, DEVICE_OUT_USB_HEADSET)) {
+        if (isStreamFromOutputDevice(STREAM_MUSIC, DEVICE_OUT_USB_HEADSET)) {
             // If wired headset is plugged in and active, select to default device.
             mSelectedIndex = getDefaultDeviceIndex();
         }
@@ -107,12 +105,5 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
         if (mAudioManager.getMode() == AudioManager.MODE_NORMAL) {
             mProfileManager.getA2dpProfile().setActiveDevice(device);
         }
-    }
-
-    private static boolean isCastDevice(MediaRouter mediaRouter) {
-        final MediaRouter.RouteInfo selected = mediaRouter.getSelectedRoute(
-                ROUTE_TYPE_REMOTE_DISPLAY);
-        return selected != null && selected.getPresentationDisplay() != null
-                && selected.getPresentationDisplay().isValid();
     }
 }

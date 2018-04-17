@@ -17,6 +17,7 @@
 package com.android.settings.sound;
 
 
+import static android.media.AudioSystem.DEVICE_OUT_REMOTE_SUBMIX;
 import static android.media.AudioSystem.DEVICE_OUT_USB_HEADSET;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -198,7 +199,7 @@ public class MediaOutputPreferenceControllerTest {
      */
     @Test
     public void updateState_mediaStreamIsCapturedByCast_shouldDisableAndSetDefaultSummary() {
-        mShadowAudioManager.setMusicActiveRemotely(true);
+        mShadowAudioManager.setStream(DEVICE_OUT_REMOTE_SUBMIX);
 
         mController.updateState(mPreference);
 
