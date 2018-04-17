@@ -48,19 +48,8 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
     private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
     private ConnectedUsbDeviceUpdater mConnectedUsbDeviceUpdater;
 
-    public ConnectedDeviceGroupController(Context context, DashboardFragment fragment,
-            Lifecycle lifecycle) {
+    public ConnectedDeviceGroupController(Context context) {
         super(context, KEY);
-        init(lifecycle, new ConnectedBluetoothDeviceUpdater(context, fragment, this),
-                new ConnectedUsbDeviceUpdater(context, fragment, this));
-    }
-
-    @VisibleForTesting
-    ConnectedDeviceGroupController(DashboardFragment fragment, Lifecycle lifecycle,
-            BluetoothDeviceUpdater bluetoothDeviceUpdater,
-            ConnectedUsbDeviceUpdater connectedUsbDeviceUpdater) {
-        super(fragment.getContext(), KEY);
-        init(lifecycle, bluetoothDeviceUpdater, connectedUsbDeviceUpdater);
     }
 
     @Override
@@ -116,12 +105,15 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
         }
     }
 
-    private void init(Lifecycle lifecycle, BluetoothDeviceUpdater bluetoothDeviceUpdater,
+    @VisibleForTesting
+    public void init(BluetoothDeviceUpdater bluetoothDeviceUpdater,
             ConnectedUsbDeviceUpdater connectedUsbDeviceUpdater) {
-        if (lifecycle != null && isAvailable()) {
-            lifecycle.addObserver(this);
-        }
         mBluetoothDeviceUpdater = bluetoothDeviceUpdater;
         mConnectedUsbDeviceUpdater = connectedUsbDeviceUpdater;
+    }
+
+    public void init(DashboardFragment fragment) {
+        init(new ConnectedBluetoothDeviceUpdater(fragment.getContext(), fragment, this),
+                new ConnectedUsbDeviceUpdater(fragment.getContext(), fragment, this));
     }
 }

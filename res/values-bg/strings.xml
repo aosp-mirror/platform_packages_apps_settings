@@ -349,10 +349,8 @@
     <string name="zone_info_footer_no_dst" msgid="8652423870143056964">"Използва <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Няма лятно часово време."</string>
     <string name="zone_time_type_dst" msgid="8850494578766845276">"Лятно часово време"</string>
     <string name="zone_time_type_standard" msgid="3462424485380376522">"Стандартно време"</string>
-    <!-- no translation found for zone_menu_by_region (8370437123807764346) -->
-    <skip />
-    <!-- no translation found for zone_menu_by_offset (7161573994228041794) -->
-    <skip />
+    <string name="zone_menu_by_region" msgid="8370437123807764346">"Избиране по регион"</string>
+    <string name="zone_menu_by_offset" msgid="7161573994228041794">"Избиране по отместване от UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Дата"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Час"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Автоматично заключване"</string>
@@ -694,6 +692,7 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Разширени"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Разширени настр. за Bluetooth"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"При включен Bluetooth устройството ви може да се свързва с други устройства с Bluetooth в района."</string>
+    <string name="bluetooth_scanning_on_info_message" msgid="824285504325592644">"Когато включите Bluetooth, устройството ви може да се свързва с други устройства с Bluetooth в близост.\n\nС цел подобряване на практическата работа с устройството приложенията и услугите пак могат да сканират за устройства в близост по всяко време дори когато функцията за Bluetooth e изключена. Това може да послужи например за подобряване на базиращите се на местоположението функции и услуги. Можете да промените това от "<annotation id="link">"настройките за сканиране"</annotation>"."</string>
     <string name="ble_scan_notify_text" msgid="1295915006005700650">"С цел подобряване на точността на местоположението системните приложения и услуги пак ще могат да откриват устройства с Bluetooth. Можете да промените това от <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>настройките за сканиране<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_failed" msgid="4500234659813241053">"Не можа да се установи връзка. Опитайте отново."</string>
     <string name="device_details_title" msgid="6576953269221085300">"Подробности за устройството"</string>
@@ -853,8 +852,7 @@
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"Честота при 5 ГХц"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2,4 ГХц"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5 ГХц"</string>
-    <!-- no translation found for wifi_ap_band_select_one (3476254666116431650) -->
-    <skip />
+    <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Изберете поне една честота за точката за достъп до Wi‑Fi:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Настройки за IP"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Споделяне с другите потребители на устройството"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(непроменени)"</string>
@@ -1392,8 +1390,12 @@
     <string name="storage_wizard_slow_v2_body" msgid="6897444467730463117">"Пак можете да използвате това хранилище (<xliff:g id="NAME_0">^1</xliff:g>), но то може да е бавно. \n\nСъхранените в хранилището (<xliff:g id="NAME_1">^2</xliff:g>) приложения може да не работят правилно, а прехвърлянето на съдържание може да отнеме дълго време. \n\nОпитайте да използвате по-бързо хранилище (<xliff:g id="NAME_2">^3</xliff:g>) или ползвайте това хранилище (<xliff:g id="NAME_3">^4</xliff:g>) като преносимо."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="4126873669723115805">"Стартиране отначало"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="49399942893518218">"Напред"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="5993954859154357197">"За да преместите съдържание в хранилището (<xliff:g id="NAME">^1</xliff:g>), отворете "<b>"Настройки &gt; Хранилище"</b></string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="2574326509794010488">"Съдържанието ви бе преместено в хранилището (<xliff:g id="NAME_0">^1</xliff:g>). \n\nЗа да управлявате това хранилище (<xliff:g id="NAME_1">^2</xliff:g>), отворете "<b>"Настройки &gt; Хранилище"</b>"."</string>
+    <!-- no translation found for storage_wizard_ready_v2_external_body (11937346870534608) -->
+    <skip />
+    <!-- no translation found for storage_wizard_ready_v2_internal_body (4658433206901211269) -->
+    <skip />
+    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (6239886818487538806) -->
+    <skip />
     <string name="battery_status_title" msgid="9159414319574976203">"Състояние на батерията"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Ниво на батерията"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
@@ -1702,7 +1704,7 @@
     <string name="show_running_services" msgid="5736278767975544570">"Изпълнявани услуги"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"Кеширани процеси"</string>
     <string name="default_emergency_app" msgid="1951760659640369980">"Приложение за спешни случаи"</string>
-    <string name="reset_app_preferences" msgid="1321050641018356925">"Нулиране"</string>
+    <string name="reset_app_preferences" msgid="1321050641018356925">"Нулиране на предпочитанията за приложенията"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Нулиране на предпочитанията?"</string>
     <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Това ще нулира всички предпочитания за:\n\n "<li>"деактивираните приложения;"</li>\n" "<li>"известията за деактивирани приложения;"</li>\n" "<li>"стандартните приложения за действия;"</li>\n" "<li>"ограниченията за данни на заден план за приложенията;"</li>\n" "<li>"ограниченията за всички разрешения."</li>\n\n" Няма да загубите данни от приложенията."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Нулиране на приложенията"</string>
@@ -2126,8 +2128,7 @@
     <string name="awake" msgid="387122265874485088">"Активно време на устройство"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"Време на включен Wi‑Fi"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"Време на включен Wi‑Fi"</string>
-    <!-- no translation found for advanced_battery_title (6768618303037280828) -->
-    <skip />
+    <string name="advanced_battery_title" msgid="6768618303037280828">"Използване на батерията"</string>
     <string name="history_details_title" msgid="3608240585315506067">"История"</string>
     <string name="battery_details_title" msgid="6101394441569858580">"Използване на батерията"</string>
     <string name="details_subtitle" msgid="32593908269911734">"Подробности"</string>
@@ -2154,12 +2155,9 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"Таблетът е използван повече от обикновено"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"Устройството е използвано повече от обикновено"</string>
     <string name="battery_tip_high_usage_summary" msgid="6341311803303581798">"Батерията може скоро да се изтощи"</string>
-    <!-- no translation found for battery_tip_dialog_message (7434089311164898581) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (2987443811119964310) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (1993039726576708815) -->
-    <skip />
+    <string name="battery_tip_dialog_message" product="default" msgid="7434089311164898581">"Телефонът ви е използван повече от обикновено. Батерията може да се изтощи по-скоро от очакваното.\n\nСледните <xliff:g id="NUMBER">%1$d</xliff:g> приложения са я ползвали най-интензивно след последното зареждане (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="2987443811119964310">"Таблетът ви е използван повече от обикновено. Батерията може да се изтощи по-скоро от очакваното.\n\nСледните <xliff:g id="NUMBER">%1$d</xliff:g> приложения са я ползвали най-интензивно след последното зареждане (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="1993039726576708815">"Устройството ви е използвано повече от обикновено. Батерията може да се изтощи по-скоро от очакваното.\n\nСледните <xliff:g id="NUMBER">%1$d</xliff:g> приложения са я ползвали най-интензивно след последното зареждане (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="other">Ограничаване на %1$d приложения</item>
       <item quantity="one">Ограничаване на %1$d приложение</item>
@@ -2201,8 +2199,7 @@
       <item quantity="other">Използването на батерията е ограничено за %1$d приложения</item>
       <item quantity="one">Използването на батерията е ограничено за %1$d приложение</item>
     </plurals>
-    <!-- no translation found for restricted_app_detail_footer (6739863162364046859) -->
-    <skip />
+    <string name="restricted_app_detail_footer" msgid="6739863162364046859">"Тези приложения използват батерията на заден план. Ограничените приложения може да не работят правилно и е възможно да има забавяне на известията."</string>
     <string name="battery_auto_restriction_title" msgid="6553271897488963709">"Използване на мениджъра на батерията"</string>
     <string name="battery_auto_restriction_summary" msgid="8561335400991281062">"Установяване кога приложенията изразходват батерията"</string>
     <string name="battery_manager_on" msgid="8643310865054362396">"Включено/установява се кога приложенията изразходват батерията"</string>
@@ -2427,7 +2424,7 @@
     <string name="credentials_not_erased" msgid="7685932772284216097">"Хран. за идент. данни не можа да бъде изтрито."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"Хранилището за идентификационни данни е активирано."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="8058230497337529036">"Преди да можете да използвате хранилището за идентификационни данни, устройството ви трябва да има защитен заключен екран"</string>
-    <string name="credentials_configure_lock_screen_button" msgid="253239765216055321">"ЗАКЛЮЧВ.: ЗАДАВАНЕ"</string>
+    <string name="credentials_configure_lock_screen_button" msgid="253239765216055321">"ЗАКЛЮЧВАНЕ"</string>
     <string name="usage_access_title" msgid="332333405495457839">"Прил. с достъп до използването"</string>
     <string name="emergency_tone_title" msgid="254495218194925271">"Сигнал за набиране при спешен случай"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Задаване на поведение при спешно обаждане"</string>
@@ -2680,7 +2677,7 @@
     <string name="vpn_save" msgid="4233484051644764510">"Запазване"</string>
     <string name="vpn_connect" msgid="8469608541746132301">"Свързване"</string>
     <string name="vpn_replace" msgid="5442836256121957861">"Замяна"</string>
-    <string name="vpn_edit" msgid="8647191407179996943">"Потребителски профил за VPN: Редактиране"</string>
+    <string name="vpn_edit" msgid="8647191407179996943">"Редактиране на профил за VPN"</string>
     <string name="vpn_forget" msgid="3684651372749415446">"Забравяне"</string>
     <string name="vpn_connect_to" msgid="5965299358485793260">"Свързване със: <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="3743970132487505659">"Да се прекрати ли връзката с тази виртуална частна мрежа (VPN)?"</string>
@@ -3090,8 +3087,7 @@
     <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"Без изскачащи прозорци с известия на екрана"</string>
     <string name="zen_mode_block_effect_status" msgid="6642532634292373081">"Скриване на иконите в лентата на състоянието"</string>
     <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"Скриване на точките за известия"</string>
-    <!-- no translation found for zen_mode_block_effect_ambient (4704755879961212658) -->
-    <skip />
+    <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"Без „събуждане“ при известия"</string>
     <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"Скриване от списъка с известия"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"Никога"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="1230265589026355094">"При изключен екран"</string>
@@ -3134,8 +3130,7 @@
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Блокиране при изключен екран"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Режимът „Не безпокойте“ може да блокира не само нежеланите звуци, но и визуалните сигнали. Тази опция е полезна, ако се опитвате да заспите, да се съсредоточите или да използвате телефона си по-малко."</string>
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Блокиране на звуците и визуалните сигнали"</string>
-    <!-- no translation found for zen_onboarding_screen_off_summary (5393041573999488088) -->
-    <skip />
+    <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Без включване на екрана или „събуждане“ при известия"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Без показване на известия освен за основните активност и състояние на телефона"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Звуци за служебния потребителски профил"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Използване на звуците за личния потребителски профил"</string>
@@ -3236,9 +3231,11 @@
     </plurals>
     <string name="no_channels" msgid="3077375508177744586">"Това приложение не е публикувало известия"</string>
     <string name="app_settings_link" msgid="8894946007543660906">"Допълнителни настройки в приложението"</string>
-    <!-- no translation found for app_notification_listing_summary_zero (8046168435207424440) -->
-    <skip />
-    <!-- no translation found for app_notification_listing_summary_others (6709582776823665660) -->
+    <string name="app_notification_listing_summary_zero" msgid="8046168435207424440">"Включено за всички приложения"</string>
+    <plurals name="app_notification_listing_summary_others" formatted="false" msgid="6709582776823665660">
+      <item quantity="other">Изключено за <xliff:g id="COUNT_1">%d</xliff:g> приложения</item>
+      <item quantity="one">Изключено за <xliff:g id="COUNT_0">%d</xliff:g> приложение</item>
+    </plurals>
     <plurals name="deleted_channels" formatted="false" msgid="8028574302599397935">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> категории са изтрити</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> категория е изтрита</item>
@@ -3368,8 +3365,7 @@
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"В допълнение към отключването посредством отпечатък можете да осигурите допълнителен защитен слой за това устройство, като зададете паролата ви да се изисква при стартиране. Преди въвеждането й няма да се получават обаждания, съобщения или известия. Будилниците също няма да работят.\n\nФункцията помага за защита на данните на загубени или откраднати устройства. Искате ли да я включите?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Да"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Не"</string>
-    <!-- no translation found for restricted_true_label (4761453839409220473) -->
-    <skip />
+    <string name="restricted_true_label" msgid="4761453839409220473">"Ограничено"</string>
     <string name="restricted_false_label" msgid="3279282180297058755">"Може да ползва бат. на заден план"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Да се изисква ли ПИН код?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Да се изисква ли фигура?"</string>
@@ -3551,7 +3547,7 @@
     <string name="usb_summary_tether_power" msgid="5825335393952752238">"Тетъринг през USB и осигуряване на захранване"</string>
     <string name="usb_summary_photo_transfers_power" msgid="6826058111908423069">"PTP и осигуряване на захранване"</string>
     <string name="usb_summary_MIDI_power" msgid="3308250484012677596">"MIDI и осигуряване на захранване"</string>
-    <string name="background_check_pref" msgid="7550258400138010979">"проверка на заден план"</string>
+    <string name="background_check_pref" msgid="7550258400138010979">"Проверка на заден план"</string>
     <string name="background_check_title" msgid="4534254315824525593">"пълен достъп до задния план"</string>
     <string name="assist_access_context_title" msgid="2269032346698890257">"Използване на текста от екрана"</string>
     <string name="assist_access_context_summary" msgid="1991421283142279560">"Разрешаване на помощното приложение да осъществява достъп до текстовото съдържание на екрана"</string>
@@ -3740,8 +3736,8 @@
     <string name="ethernet_data_template" msgid="5782476509881033590">"Данни през Ethernet: <xliff:g id="AMOUNT">^1</xliff:g>"</string>
     <string name="cell_warning_only" msgid="763147658209027140">"Предупреждение за данните: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Предупреждение за данните: <xliff:g id="ID_1">%1$s</xliff:g>/ограничение за данните: <xliff:g id="ID_2">%2$s</xliff:g>"</string>
-    <string name="billing_cycle" msgid="6614597736285325497">"Данни: Предупреждение и лимит"</string>
-    <string name="app_usage_cycle" msgid="8877223251648092131">"Пренос от приложенията: Цикъл"</string>
+    <string name="billing_cycle" msgid="6614597736285325497">"Предупреждения и лимит за данни"</string>
+    <string name="app_usage_cycle" msgid="8877223251648092131">"Цикъл на използване на данни от прилож."</string>
     <string name="cell_data_warning" msgid="1985956818884847057">"Предупреждение за данните: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_limit" msgid="1578367585799358854">"Ограничение за данните: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_warning_and_limit" msgid="6888825370687743208">"Предупреждение за данните: <xliff:g id="ID_1">^1</xliff:g>/ограничение за данните: <xliff:g id="ID_2">^2</xliff:g>"</string>
@@ -3768,9 +3764,9 @@
     <string name="data_usage_title" msgid="3659356290392241789">"Основни данни"</string>
     <string name="data_usage_wifi_title" msgid="7063659423081820720">"Данни през Wi‑Fi"</string>
     <string name="data_used" msgid="5116389957228457203">"Използвали сте <xliff:g id="ID_1">^1</xliff:g>"</string>
-    <string name="data_used_formatted" msgid="2989129931961311051">"Използвано: <xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g>"</string>
+    <string name="data_used_formatted" msgid="2989129931961311051">"Използвани: <xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g>"</string>
     <string name="data_overusage" msgid="1134445012475270295">"<xliff:g id="ID_1">^1</xliff:g> над лимита"</string>
-    <string name="data_remaining" msgid="8998091725895502181">"Оставащо време: <xliff:g id="ID_1">^1</xliff:g>"</string>
+    <string name="data_remaining" msgid="8998091725895502181">"Остават: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <plurals name="billing_cycle_days_left" formatted="false" msgid="456503215317213651">
       <item quantity="other">Остават %d дни</item>
       <item quantity="one">Остава %d ден</item>

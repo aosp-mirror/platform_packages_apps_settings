@@ -321,7 +321,7 @@
     <string name="date_and_time_settings_summary" msgid="7095318986757583584">"Defineix la data, l\'hora, la zona horària i els formats"</string>
     <string name="date_time_auto" msgid="7076906458515908345">"Data i hora automàtiques"</string>
     <string name="date_time_auto_summaryOn" msgid="4609619490075140381">"Utilitza l\'hora proporcionada per la xarxa"</string>
-    <string name="date_time_auto_summaryOff" msgid="8698762649061882791">"Utilitza l\'hora proporcionada per la xarxa"</string>
+    <string name="date_time_auto_summaryOff" msgid="8698762649061882791">"Utilitza les dades proporcionades per la xarxa"</string>
     <string name="zone_auto" msgid="334783869352026648">"Zona horària automàtica"</string>
     <string name="zone_auto_summaryOn" msgid="6142830927278458314">"Utilitza la zona horària proporcionada per la xarxa"</string>
     <string name="zone_auto_summaryOff" msgid="2597745783162041390">"Utilitza la zona horària proporcionada per la xarxa"</string>
@@ -349,10 +349,8 @@
     <string name="zone_info_footer_no_dst" msgid="8652423870143056964">"Utilitza <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Sense horari d\'estiu."</string>
     <string name="zone_time_type_dst" msgid="8850494578766845276">"Horari d\'estiu"</string>
     <string name="zone_time_type_standard" msgid="3462424485380376522">"Hora estàndard"</string>
-    <!-- no translation found for zone_menu_by_region (8370437123807764346) -->
-    <skip />
-    <!-- no translation found for zone_menu_by_offset (7161573994228041794) -->
-    <skip />
+    <string name="zone_menu_by_region" msgid="8370437123807764346">"Selecciona per regió"</string>
+    <string name="zone_menu_by_offset" msgid="7161573994228041794">"Selecciona per compensació UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Data"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Hora"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Bloqueja automàticament"</string>
@@ -694,6 +692,7 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Configuració avançada"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Config. avançada del Bluetooth"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Amb el Bluetooth activat, el dispositiu pot connectar amb més dispositius Bluetooth a prop."</string>
+    <string name="bluetooth_scanning_on_info_message" msgid="824285504325592644">"Amb el Bluetooth activat, el dispositiu pot connectar-se amb d\'altres que estiguin a prop.\n\nPer millorar l\'experiència del dispositiu, les aplicacions i els serveis poden cercar dispositius propers en qualsevol moment, fins i tot quan el Bluetooth estigui desactivat. Aquesta opció es pot utilitzar, per exemple, per millorar les funcions i els serveis basats en la ubicació. Pots canviar-la a la "<annotation id="link">"configuració de cerca"</annotation>"."</string>
     <string name="ble_scan_notify_text" msgid="1295915006005700650">"Per millorar la precisió de la ubicació, les aplicacions i els serveis del sistema poden continuar detectant els dispositius Bluetooth. Pots canviar aquesta opció a la <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>configuració de cerca<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_failed" msgid="4500234659813241053">"No s\'ha pogut connectar. Torna-ho a provar."</string>
     <string name="device_details_title" msgid="6576953269221085300">"Detalls del dispositiu"</string>
@@ -773,7 +772,7 @@
     <string name="wifi_notify_open_networks" msgid="76298880708051981">"Notificació de xarxa oberta"</string>
     <string name="wifi_notify_open_networks_summary" msgid="2761326999921366960">"Notifica\'m quan hi hagi una xarxa pública d\'alta qualitat"</string>
     <string name="wifi_wakeup" msgid="8815640989361538036">"Activa la Wi‑Fi automàticament"</string>
-    <string name="wifi_wakeup_summary" msgid="2530814331062997163">"La Wi-Fi es tornarà a activar automàticament en detectar xarxes desades d\'alta qualitat, com ara la teva xarxa domèstica"</string>
+    <string name="wifi_wakeup_summary" msgid="2530814331062997163">"La Wi-Fi es tornarà a activar automàticament prop de xarxes desades d\'alta qualitat, com la de la teva casa"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="7494539594649967699">"No està disponible perquè la ubicació està desactivada. Activa la "<annotation id="link">"ubicació"</annotation>"."</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"No està disponible perquè la cerca de xarxes Wi-Fi està desactivada"</string>
     <string name="wifi_wakeup_summary_scoring_disabled" msgid="108339002136866897">"Per utilitzar aquesta funció, selecciona un proveïdor de valoració de xarxes"</string>
@@ -853,8 +852,7 @@
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"Banda de 5,0 GHz"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2,4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5,0 GHz"</string>
-    <!-- no translation found for wifi_ap_band_select_one (3476254666116431650) -->
-    <skip />
+    <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Tria almenys una banda per al punt d\'accés Wi-Fi:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Configuració IP"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Comparteix amb altres usuaris del dispositiu"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(sense canvis)"</string>
@@ -1392,8 +1390,12 @@
     <string name="storage_wizard_slow_v2_body" msgid="6897444467730463117">"Pots continuar fent servir aquest suport extern (<xliff:g id="NAME_0">^1</xliff:g>), tot i que pot trigar una mica. \n\nÉs possible que les aplicacions emmagatzemades en aquest suport extern (<xliff:g id="NAME_1">^2</xliff:g>) no funcionin correctament i que les transferències de contingut triguin molt de temps. \n\nProva un altre suport (<xliff:g id="NAME_2">^3</xliff:g>) més ràpid o fes servir aquest (<xliff:g id="NAME_3">^4</xliff:g>) com a emmagatzematge portàtil."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="4126873669723115805">"Torna a començar"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="49399942893518218">"Continua"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="5993954859154357197">"Per transferir contingut al suport extern (<xliff:g id="NAME">^1</xliff:g>), ves a "<b>"Configuració i emmagatzematge"</b></string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="2574326509794010488">"El contingut s\'ha transferit al suport extern (<xliff:g id="NAME_0">^1</xliff:g>). \n\nPer gestionar-lo (<xliff:g id="NAME_1">^2</xliff:g>), ves a "<b>"Configuració i emmagatzematge"</b>"."</string>
+    <!-- no translation found for storage_wizard_ready_v2_external_body (11937346870534608) -->
+    <skip />
+    <!-- no translation found for storage_wizard_ready_v2_internal_body (4658433206901211269) -->
+    <skip />
+    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (6239886818487538806) -->
+    <skip />
     <string name="battery_status_title" msgid="9159414319574976203">"Estat de la bateria"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Nivell de la bateria"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
@@ -1440,7 +1442,7 @@
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"S\'ha restablert la configuració predeterminada d\'APN."</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"Restableix les opcions"</string>
     <string name="reset_dashboard_summary" msgid="4851012632493522755">"Es poden restablir la xarxa, les aplicacions o el dispositiu"</string>
-    <string name="reset_network_title" msgid="6166025966016873843">"Restableix la Wi-Fi, les dades mòbils i el Bluetooth"</string>
+    <string name="reset_network_title" msgid="6166025966016873843">"Restableix Wi-Fi, dades mòbils i Bluetooth"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"Es restabliran totes les opcions de configuració de la xarxa, inclosos:\n\n"<li>"la Wi‑Fi"</li>\n<li>"les dades mòbils"</li>\n<li>"el Bluetooth"</li></string>
     <string name="reset_esim_title" msgid="2419812515540592802">"Restableix també l\'eSIM"</string>
     <string name="reset_esim_desc" msgid="6412324670559060446">"Esborra totes les eSIM del telèfon. Hauràs de contactar amb l\'operador de telefonia mòbil per tornar a baixar-les. No es cancel·larà el teu pla de servei mòbil."</string>
@@ -1455,7 +1457,7 @@
     <string name="master_clear_title" msgid="3531267871084279512">"Esborra totes les dades (restabliment de les dades de fàbrica)"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Aquesta acció esborrarà totes les dades de l\'"<b>"emmagatzematge intern"</b>" de la tauleta, com ara:\n\n"<li>"El teu compte de Google"</li>\n<li>"Les dades i la configuració del sistema i de les aplicacions"</li>\n<li>"Les aplicacions baixades"</li></string>
     <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Aquesta acció esborrarà totes les dades de l\'"<b>"emmagatzematge intern"</b>" del teu telèfon, també:\n\n"<li>"El teu compte de Google"</li>\n<li>"Les dades i la configuració del sistema i de les aplicacions"</li>\n<li>"Les aplicacions baixades"</li></string>
-    <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Actualment has iniciat la sessió als comptes següents:\n"</string>
+    <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Tens la sessió iniciada als comptes següents:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"En aquest dispositiu hi ha altres usuaris.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Música"</li>\n<li>"Fotos"</li>\n<li>"Altres dades de l\'usuari"</li></string>
     <string name="master_clear_desc_also_erases_esim" msgid="6008213558725767177"><li>"Targetes eSIM"</li></string>
@@ -1844,7 +1846,7 @@
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"És possible que aquest corrector ortogràfic pugui recopilar tot el text que escrius, la qual cosa inclou dades personals com ara les contrasenyes i els números de les targetes de crèdit. Prové de l\'aplicació <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Vols fer servir aquest corrector ortogràfic?"</string>
     <string name="spellchecker_quick_settings" msgid="246728645150092058">"Configuració"</string>
     <string name="spellchecker_language" msgid="6041050114690541437">"Idioma"</string>
-    <string name="keyboard_and_input_methods_category" msgid="6035224122054465137">"Teclat i mètodes d\'introducció"</string>
+    <string name="keyboard_and_input_methods_category" msgid="6035224122054465137">"Teclat i introducció de text"</string>
     <string name="virtual_keyboard_category" msgid="1012830752318677119">"Teclat virtual"</string>
     <string name="available_virtual_keyboard_category" msgid="7645766574969139819">"Teclat virtual disponible"</string>
     <string name="add_virtual_keyboard" msgid="3302152381456516928">"Gestiona els teclats"</string>
@@ -1852,8 +1854,8 @@
     <string name="physical_keyboard_title" msgid="8285149877925752042">"Teclat físic"</string>
     <string name="show_ime" msgid="2658582193437188227">"Mostra el teclat virtual"</string>
     <string name="show_ime_summary" msgid="8164993045923240698">"Mantén-lo en pantalla mentre el teclat físic està actiu"</string>
-    <string name="keyboard_shortcuts_helper" msgid="4839453720463798145">"Ajuda per a les tecles de drecera"</string>
-    <string name="keyboard_shortcuts_helper_summary" msgid="5871299901459743288">"Mostra les dreceres disponibles"</string>
+    <string name="keyboard_shortcuts_helper" msgid="4839453720463798145">"Ajuda per a les dreceres de teclat"</string>
+    <string name="keyboard_shortcuts_helper_summary" msgid="5871299901459743288">"Mostra les dreceres de teclat disponibles"</string>
     <string name="default_keyboard_layout" msgid="4172606673510531271">"Predeterminat"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Velocitat del punter"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"Controlador de joc"</string>
@@ -1957,7 +1959,7 @@
     <string name="accessibility_autoclick_description" msgid="4908960598910896933">"Si utilitzes un ratolí, pots configurar-lo perquè el cursor faci accions automàticament quan deixi de moure\'s durant un determinat període de temps."</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="3962261178385106006">"Retard abans del clic"</string>
     <string name="accessibility_vibration_settings_title" msgid="3453277326300320803">"Vibració"</string>
-    <string name="accessibility_notification_vibration_title" msgid="660829933960942244">"Vibració per als sons i per a les notificacions"</string>
+    <string name="accessibility_notification_vibration_title" msgid="660829933960942244">"Vibració per als sons i notificacions"</string>
     <string name="accessibility_touch_vibration_title" msgid="7931823772673770492">"Vibració en tocar"</string>
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Utilitza el servei"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Utilitza la correcció del color"</string>
@@ -1999,7 +2001,7 @@
       <item quantity="one">Retard molt llarg (<xliff:g id="CLICK_DELAY_LABEL_0">%1$d</xliff:g> ms)</item>
     </plurals>
     <string name="accessibility_vibration_summary_off" msgid="1753566394591809629">"S\'ha desactivat la vibració per als sons i per a les notificacions"</string>
-    <string name="accessibility_vibration_summary_low" msgid="7628418309029013867">"La vibració per als sons i per a les notificacions està establerta en Baixa"</string>
+    <string name="accessibility_vibration_summary_low" msgid="7628418309029013867">"Baixa per a trucades i notificacions"</string>
     <string name="accessibility_vibration_summary_medium" msgid="3422136736880414093">"La vibració per als sons i per a les notificacions està establerta en Mitjana"</string>
     <string name="accessibility_vibration_summary_high" msgid="3239807793182635729">"La vibració per als sons i per a les notificacions està establerta en Alta"</string>
     <string name="accessibility_vibration_intensity_off" msgid="4613890213008630847">"Desactivada"</string>
@@ -2126,8 +2128,7 @@
     <string name="awake" msgid="387122265874485088">"Temps d\'activació del dispositiu"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"Wi-Fi a temps"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"Wi-Fi a temps"</string>
-    <!-- no translation found for advanced_battery_title (6768618303037280828) -->
-    <skip />
+    <string name="advanced_battery_title" msgid="6768618303037280828">"Consum de la bateria"</string>
     <string name="history_details_title" msgid="3608240585315506067">"Detalls de l\'historial"</string>
     <string name="battery_details_title" msgid="6101394441569858580">"Consum de la bateria"</string>
     <string name="details_subtitle" msgid="32593908269911734">"Detalls d\'ús"</string>
@@ -2154,12 +2155,9 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"La tauleta s\'ha utilitzat més del que és habitual"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"El dispositiu s\'ha utilitzat més del que és habitual"</string>
     <string name="battery_tip_high_usage_summary" msgid="6341311803303581798">"És possible que la bateria s\'esgoti aviat"</string>
-    <!-- no translation found for battery_tip_dialog_message (7434089311164898581) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (2987443811119964310) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (1993039726576708815) -->
-    <skip />
+    <string name="battery_tip_dialog_message" product="default" msgid="7434089311164898581">"El telèfon s\'ha fet servir més del que és habitual i és possible que la bateria s\'esgoti abans del previst.\n\nAquestes són les <xliff:g id="NUMBER">%1$d</xliff:g> aplicacions que han consumit més bateria des de l\'última càrrega (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="2987443811119964310">"La tauleta s\'ha fet servir més del que és habitual i és possible que la bateria s\'esgoti abans del previst.\n\nAquestes són les <xliff:g id="NUMBER">%1$d</xliff:g> aplicacions que han consumit més bateria des de l\'última càrrega (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="1993039726576708815">"El dispositiu s\'ha fet servir més del que és habitual i és possible que la bateria s\'esgoti abans del previst.\n\nAquestes són les <xliff:g id="NUMBER">%1$d</xliff:g> aplicacions que han consumit més bateria des de l\'última càrrega (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="other">Restringeix %1$d aplicacions</item>
       <item quantity="one">Restringeix %1$d aplicació</item>
@@ -2201,8 +2199,7 @@
       <item quantity="other">S\'ha limitat el consum de la bateria per a %1$d aplicacions</item>
       <item quantity="one">S\'ha limitat el consum de la bateria per a %1$d aplicació</item>
     </plurals>
-    <!-- no translation found for restricted_app_detail_footer (6739863162364046859) -->
-    <skip />
+    <string name="restricted_app_detail_footer" msgid="6739863162364046859">"Aquestes aplicacions han estat consumint bateria en segon pla. És possible que les aplicacions restringides no funcionin correctament i que en rebis les notificacions amb retard."</string>
     <string name="battery_auto_restriction_title" msgid="6553271897488963709">"Utilitza el gestor de bateria"</string>
     <string name="battery_auto_restriction_summary" msgid="8561335400991281062">"Detecta quan les aplicacions consumeixen bateria"</string>
     <string name="battery_manager_on" msgid="8643310865054362396">"Activat: es detecta el consum de bateria de les aplicacions"</string>
@@ -2622,11 +2619,11 @@
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Data d\'inici del cicle d\'ús"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Data de cada mes:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Estableix"</string>
-    <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"Defineix un advertiment d\'ús de dades"</string>
-    <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"Defineix un límit d\'ús de dades"</string>
+    <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"Estableix un advertiment d\'ús de dades"</string>
+    <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"Estableix un límit d\'ús de dades"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"Limitació de l\'ús de dades"</string>
     <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="4983487893343645667">"Es desactivaran les dades mòbils de la tauleta quan s\'arribi al límit que has definit.\n\nCom que la tauleta mesura l\'ús de dades i és possible que l\'operador de telefonia mòbil en faci un recompte diferent, et recomanem que defineixis un límit prudent."</string>
-    <string name="data_usage_limit_dialog_mobile" product="default" msgid="3926320594049434225">"Es desactivaran les dades mòbils del telèfon quan s\'arribi al límit que has definit.\n\nCom que el telèfon mesura l\'ús de dades i és possible que l\'operador de telefonia mòbil en faci un recompte diferent, et recomanem que defineixis un límit prudent."</string>
+    <string name="data_usage_limit_dialog_mobile" product="default" msgid="3926320594049434225">"Es desactivaran les dades mòbils del telèfon quan s\'arribi al límit que has establert.\n\nCom que el telèfon mesura l\'ús de dades i és possible que l\'operador de telefonia mòbil en faci un recompte diferent, et recomanem que estableixis un límit prudent."</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"Vols restringir les dades en segon pla?"</string>
     <string name="data_usage_restrict_background" msgid="434093644726734586">"Si restringeixes les dades mòbils en segon pla, hi ha aplicacions i serveis que no funcionaran sense connexió Wi‑Fi."</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7096707497743363380">"Si restringeixes les dades mòbils en segon pla, hi ha aplicacions i serveis que no funcionaran sense connexió Wi‑Fi.\n\nAquesta configuració afecta tots els usuaris de la tauleta."</string>
@@ -2780,7 +2777,7 @@
     <string name="user_add_user_message_long" msgid="6768718238082929201">"Pots compartir aquest dispositiu amb altres usuaris creant usuaris addicionals. Cada usuari té el seu propi espai, que pot personalitzar amb aplicacions i fons de pantalla, entre d\'altres. Els usuaris també poden ajustar opcions de configuració del dispositiu, com ara la Wi-Fi, que afecten els altres usuaris.\n\nQuan afegeixis un usuari nou, haurà de configurar el seu espai.\n\nTots els usuaris poden actualitzar les aplicacions de la resta. És possible que la configuració i els serveis d\'accessibilitat no es transfereixin a l\'usuari nou."</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"Quan s\'afegeix un usuari nou, aquest usuari ha de configurar el seu espai.\n\nQualsevol usuari pot actualitzar les aplicacions dels altres usuaris."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"Vols configurar l\'usuari ara?"</string>
-    <string name="user_setup_dialog_message" msgid="1004068621380867148">"Comprova que l\'usuari tingui accés al dispositiu i que pugui configurar el seu espai."</string>
+    <string name="user_setup_dialog_message" msgid="1004068621380867148">"Comprova que la persona tingui accés al dispositiu i que pugui configurar el seu espai."</string>
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"Vols configurar el perfil ara?"</string>
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Configura ara"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Ara no"</string>
@@ -3090,8 +3087,7 @@
     <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"No mostris notificacions emergents a la pantalla"</string>
     <string name="zen_mode_block_effect_status" msgid="6642532634292373081">"Amaga les icones de la barra d\'estat"</string>
     <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"Amaga els punts de notificació"</string>
-    <!-- no translation found for zen_mode_block_effect_ambient (4704755879961212658) -->
-    <skip />
+    <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"No activis el dispositiu per mostrar les notificacions"</string>
     <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"Amaga de la llista de notificacions"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"Mai"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="1230265589026355094">"Quan la pantalla estigui desactivada"</string>
@@ -3134,8 +3130,7 @@
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Bloqueja quan la pantalla estigui desactivada"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"El mode No molestis, a més de bloquejar els sons no desitjats, també pot bloquejar els elements visuals. Et pot resultar útil quan vulguis dormir, concentrar-te o limitar el temps que passes fent servir el telèfon."</string>
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Bloqueja els sons i els elements visuals"</string>
-    <!-- no translation found for zen_onboarding_screen_off_summary (5393041573999488088) -->
-    <skip />
+    <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"No activis la pantalla ni el dispositiu per mostrar les notificacions"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"No mostris cap notificació, excepte de l\'activitat bàsica i l\'estat del telèfon"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Sons del perfil professional"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Utilitza sons del perfil pers."</string>
@@ -3236,9 +3231,11 @@
     </plurals>
     <string name="no_channels" msgid="3077375508177744586">"No hi ha cap notificació per a aquesta aplicació"</string>
     <string name="app_settings_link" msgid="8894946007543660906">"Opcions de configuració addicionals a l\'aplicació"</string>
-    <!-- no translation found for app_notification_listing_summary_zero (8046168435207424440) -->
-    <skip />
-    <!-- no translation found for app_notification_listing_summary_others (6709582776823665660) -->
+    <string name="app_notification_listing_summary_zero" msgid="8046168435207424440">"Activades per a totes les aplicacions"</string>
+    <plurals name="app_notification_listing_summary_others" formatted="false" msgid="6709582776823665660">
+      <item quantity="other">Desactivades per a <xliff:g id="COUNT_1">%d</xliff:g> aplicacions</item>
+      <item quantity="one">Desactivades per a <xliff:g id="COUNT_0">%d</xliff:g> aplicació</item>
+    </plurals>
     <plurals name="deleted_channels" formatted="false" msgid="8028574302599397935">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> categories suprimides</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> categoria suprimida</item>
@@ -3368,8 +3365,7 @@
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Per millorar la protecció del dispositiu, a més de fer servir la teva empremta digital per desbloquejar-lo, pots configurar-lo perquè sol·liciti una contrasenya abans d\'iniciar-se. Fins que no s\'iniciï, no podrà rebre trucades, missatges ni notificacions, com ara alarmes.\n\nAixò permet protegir les dades en cas de pèrdua o robatori del dispositiu. Vols que se sol·liciti una contrasenya per iniciar el dispositiu?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Sí"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"No"</string>
-    <!-- no translation found for restricted_true_label (4761453839409220473) -->
-    <skip />
+    <string name="restricted_true_label" msgid="4761453839409220473">"Restringida"</string>
     <string name="restricted_false_label" msgid="3279282180297058755">"L\'aplicació pot consumir bateria en segon pla"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Vols demanar el PIN?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Vols demanar el patró?"</string>
@@ -3656,7 +3652,7 @@
     <string name="display_summary" msgid="6737806235882127328">"Entra en repòs després de <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> d\'inactivitat"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Fons de pantalla, repòs, mida de la lletra"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"Entra en repòs després de 10 minuts d\'inactivitat"</string>
-    <string name="memory_summary" msgid="8080825904671961872">"Memòria utilitzada de mitjana: <xliff:g id="USED_MEMORY">%1$s</xliff:g> de <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
+    <string name="memory_summary" msgid="8080825904671961872">"Memòria mitjana utilitzada: <xliff:g id="USED_MEMORY">%1$s</xliff:g> de <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
     <string name="users_summary" msgid="1674864467098487328">"Sessió iniciada com a <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="payment_summary" msgid="3472482669588561110">"Aplicació predeterminada: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="location_on_summary" msgid="3637699010986988970">"Activada"</string>
@@ -3723,14 +3719,14 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"Utilitza colors de pantalla més freds"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Desactiva la pantalla per aplicar el canvi de color"</string>
     <string name="connectivity_monitor_switch" msgid="9059759348648583421">"Monitor de connectivitat"</string>
-    <string name="connectivity_monitor_switch_summary" msgid="2828658652378866401">"Quan el monitor de connectivitat detecta un problema, recopila registres i mostra una notificació a l\'usuari perquè informi de l\'error"</string>
+    <string name="connectivity_monitor_switch_summary" msgid="2828658652378866401">"ConnectivityMonitor recopila registres en detectar un problema de connexió i mostra una notificació a l\'usuari perquè informi de l\'error"</string>
     <string name="connectivity_monitor_toast" msgid="5551859612881173028">"Per aplicar canvis al monitor de connectivitat, reinicia el dispositiu"</string>
     <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"Sensor del làser de la càmera"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Actualitzacions del sistema automàtiques"</string>
     <string name="ota_disable_automatic_update_summary" msgid="940729694354373087">"Aplica les actualitzacions quan es reiniciï el dispositiu"</string>
     <string name="usage" msgid="2977875522080448986">"Ús"</string>
     <string name="cellular_data_usage" msgid="2155683719898158203">"Ús de dades mòbils"</string>
-    <string name="app_cellular_data_usage" msgid="5468472735806533448">"Ús de dades de l\'aplicació"</string>
+    <string name="app_cellular_data_usage" msgid="5468472735806533448">"Ús de dades de les aplicacions"</string>
     <string name="wifi_data_usage" msgid="771603760674507659">"Ús de dades Wi-Fi"</string>
     <string name="ethernet_data_usage" msgid="5108764537574354616">"Ús de dades Ethernet"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
@@ -3740,8 +3736,8 @@
     <string name="ethernet_data_template" msgid="5782476509881033590">"<xliff:g id="AMOUNT">^1</xliff:g> de dades Ethernet"</string>
     <string name="cell_warning_only" msgid="763147658209027140">"Advertiment de dades: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Advertiment de dades: <xliff:g id="ID_1">%1$s</xliff:g> / Límit de dades: <xliff:g id="ID_2">%2$s</xliff:g>"</string>
-    <string name="billing_cycle" msgid="6614597736285325497">"Avís i límit d\'ús de dades"</string>
-    <string name="app_usage_cycle" msgid="8877223251648092131">"Cicle d\'ús de dades de l\'app"</string>
+    <string name="billing_cycle" msgid="6614597736285325497">"Advertiment i límit de dades"</string>
+    <string name="app_usage_cycle" msgid="8877223251648092131">"Cicle d\'ús de dades d\'aplicacions"</string>
     <string name="cell_data_warning" msgid="1985956818884847057">"Advertiment de dades: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_limit" msgid="1578367585799358854">"Límit de dades: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_warning_and_limit" msgid="6888825370687743208">"Advertiment de dades: <xliff:g id="ID_1">^1</xliff:g> / Límit de dades: <xliff:g id="ID_2">^2</xliff:g>"</string>
@@ -3915,9 +3911,9 @@
     <string name="ambient_display_pickup_summary" product="tablet" msgid="5435283849947236648">"Per veure l\'hora, les icones de notificació i altres dades, agafa la tauleta"</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="8256669101643381568">"Per veure l\'hora, les icones de notificació i altres dades, agafa el dispositiu."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Llisca per veure notificacions"</string>
-    <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"Fes lliscar el dit"</string>
+    <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"Fes lliscar l\'empremta digital"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Per consultar les notificacions, llisca cap avall al sensor d\'empremtes digitals de la part posterior del telèfon."</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Per consultar les notificacions, llisca cap avall al sensor d\'empremtes digitals situat a la part posterior de la tauleta"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Per consultar les notificacions, llisca cap avall al sensor d\'empremtes digitals situat a la part posterior de la tauleta."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Per consultar les notificacions, llisca cap avall al sensor d\'empremtes digitals situat a la part posterior del dispositiu"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"Consulta les notificacions més de pressa"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Activat"</string>

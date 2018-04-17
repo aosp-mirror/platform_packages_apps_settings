@@ -349,10 +349,8 @@
     <string name="zone_info_footer_no_dst" msgid="8652423870143056964">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>를 사용합니다. 일광 절약 시간은 적용되지 않습니다."</string>
     <string name="zone_time_type_dst" msgid="8850494578766845276">"일광 절약 시간"</string>
     <string name="zone_time_type_standard" msgid="3462424485380376522">"표준 시간"</string>
-    <!-- no translation found for zone_menu_by_region (8370437123807764346) -->
-    <skip />
-    <!-- no translation found for zone_menu_by_offset (7161573994228041794) -->
-    <skip />
+    <string name="zone_menu_by_region" msgid="8370437123807764346">"지역별로 선택"</string>
+    <string name="zone_menu_by_offset" msgid="7161573994228041794">"UTC 오프셋으로 선택"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"날짜"</string>
     <string name="time_picker_title" msgid="483460752287255019">"시간"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"자동 잠금"</string>
@@ -694,6 +692,8 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"고급"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"고급 블루투스"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"기기에서 블루투스가 켜져 있으면 주변의 다른 블루투스 기기와 통신할 수 있습니다."</string>
+    <!-- no translation found for bluetooth_scanning_on_info_message (824285504325592644) -->
+    <skip />
     <string name="ble_scan_notify_text" msgid="1295915006005700650">"위치 정확도 개선을 위해 시스템 앱과 서비스에서 블루투스 기기를 계속 감지할 수 있습니다. <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>검색 설정<xliff:g id="LINK_END_1">LINK_END</xliff:g>에서 설정을 변경할 수 있습니다."</string>
     <string name="bluetooth_connect_failed" msgid="4500234659813241053">"연결할 수 없습니다. 다시 시도해 주세요."</string>
     <string name="device_details_title" msgid="6576953269221085300">"기기 세부정보"</string>
@@ -1392,8 +1392,12 @@
     <string name="storage_wizard_slow_v2_body" msgid="6897444467730463117">"<xliff:g id="NAME_0">^1</xliff:g>을(를) 계속 사용할 수 있지만 속도가 느릴 수도 있습니다. \n\n<xliff:g id="NAME_1">^2</xliff:g>에 저장된 앱이 제대로 작동하지 않을 수 있으며, 콘텐츠 전송이 느릴 수 있습니다. \n\n더 빠른 <xliff:g id="NAME_2">^3</xliff:g>을(를) 사용하거나 <xliff:g id="NAME_3">^4</xliff:g>을(를) 휴대용 저장소로 사용하세요."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="4126873669723115805">"다시 시작"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="49399942893518218">"계속"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="5993954859154357197">"<xliff:g id="NAME">^1</xliff:g>(으)로 콘텐츠를 이동하려면 "<b>"설정 &gt; 저장용량"</b>"으로 이동하세요."</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="2574326509794010488">"콘텐츠를 <xliff:g id="NAME_0">^1</xliff:g>(으)로 이동했습니다. \n\n<xliff:g id="NAME_1">^2</xliff:g>을(를) 관리하려면 "<b>"설정 &gt; 저장용량"</b>"으로 이동하세요."</string>
+    <!-- no translation found for storage_wizard_ready_v2_external_body (11937346870534608) -->
+    <skip />
+    <!-- no translation found for storage_wizard_ready_v2_internal_body (4658433206901211269) -->
+    <skip />
+    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (6239886818487538806) -->
+    <skip />
     <string name="battery_status_title" msgid="9159414319574976203">"배터리 상태"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"배터리 수준"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
@@ -2154,12 +2158,9 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"태블릿을 평소보다 더 많이 사용함"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"기기를 평소보다 더 많이 사용함"</string>
     <string name="battery_tip_high_usage_summary" msgid="6341311803303581798">"배터리가 얼마 남지 않았습니다."</string>
-    <!-- no translation found for battery_tip_dialog_message (7434089311164898581) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (2987443811119964310) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (1993039726576708815) -->
-    <skip />
+    <string name="battery_tip_dialog_message" product="default" msgid="7434089311164898581">"휴대전화를 평소보다 더 많이 사용했습니다. 배터리가 예상보다 빨리 소진될 수 있습니다.\n\n마지막으로 완전히 충전(<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>)한 이후 배터리를 가장 많이 사용한 앱 <xliff:g id="NUMBER">%1$d</xliff:g>개는 다음과 같습니다."</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="2987443811119964310">"태블릿을 평소보다 더 많이 사용했습니다. 배터리가 예상보다 빨리 소진될 수 있습니다.\n\n마지막으로 완전히 충전(<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>)한 이후 배터리를 가장 많이 사용한 앱 <xliff:g id="NUMBER">%1$d</xliff:g>개는 다음과 같습니다."</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="1993039726576708815">"기기를 평소보다 더 많이 사용했습니다. 배터리가 예상보다 빨리 소진될 수 있습니다.\n\n마지막으로 완전히 충전(<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>)한 이후 배터리를 가장 많이 사용한 앱 <xliff:g id="NUMBER">%1$d</xliff:g>개는 다음과 같습니다."</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="other">%1$d개 앱 제한</item>
       <item quantity="one">%1$d개 앱 제한</item>
@@ -2201,8 +2202,7 @@
       <item quantity="other">%1$d개 앱의 배터리 사용량 제한</item>
       <item quantity="one">%1$d개 앱의 배터리 사용량 제한</item>
     </plurals>
-    <!-- no translation found for restricted_app_detail_footer (6739863162364046859) -->
-    <skip />
+    <string name="restricted_app_detail_footer" msgid="6739863162364046859">"이 앱은 백그라운드에서 배터리를 사용 중입니다. 제한된 앱이 제대로 작동하지 않을 수 있으며 알림이 지연될 수 있습니다."</string>
     <string name="battery_auto_restriction_title" msgid="6553271897488963709">"배터리 관리자 사용"</string>
     <string name="battery_auto_restriction_summary" msgid="8561335400991281062">"앱에서 배터리를 많이 소모하면 감지"</string>
     <string name="battery_manager_on" msgid="8643310865054362396">"사용/앱에서 배터리를 많이 소모하면 감지"</string>
@@ -3090,8 +3090,7 @@
     <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"화면에 알림 표시하지 않기"</string>
     <string name="zen_mode_block_effect_status" msgid="6642532634292373081">"상태 표시줄 아이콘 숨기기"</string>
     <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"알림 표시 점 숨기기"</string>
-    <!-- no translation found for zen_mode_block_effect_ambient (4704755879961212658) -->
-    <skip />
+    <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"알림을 사용하지 않음"</string>
     <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"알림 목록에서 숨기기"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"차단하지 않음"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="1230265589026355094">"화면이 꺼져 있을 때"</string>
@@ -3134,8 +3133,7 @@
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"화면이 꺼져 있을 때 차단"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"알림 일시중지는 원하지 않는 소리뿐만 아니라 화면에 표시되는 내용까지 차단할 수 있습니다. 이 기능은 잠을 자거나 집중할 때 또는 휴대전화 사용 시간을 제한하고 싶을 때 유용하게 활용할 수 있습니다."</string>
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"소리 및 화면 표시 내용 차단"</string>
-    <!-- no translation found for zen_onboarding_screen_off_summary (5393041573999488088) -->
-    <skip />
+    <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"화면을 켜거나 알림을 사용하지 않음"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"기본적인 휴대전화 활동 및 상태를 제외한 모든 알림을 표시하지 않음"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"직장 프로필 사운드"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"개인 프로필 사운드 사용"</string>
@@ -3236,9 +3234,11 @@
     </plurals>
     <string name="no_channels" msgid="3077375508177744586">"이 앱에서 게시한 알림이 없음"</string>
     <string name="app_settings_link" msgid="8894946007543660906">"앱 내 추가 설정"</string>
-    <!-- no translation found for app_notification_listing_summary_zero (8046168435207424440) -->
-    <skip />
-    <!-- no translation found for app_notification_listing_summary_others (6709582776823665660) -->
+    <string name="app_notification_listing_summary_zero" msgid="8046168435207424440">"모든 앱에서 사용"</string>
+    <plurals name="app_notification_listing_summary_others" formatted="false" msgid="6709582776823665660">
+      <item quantity="other">앱 <xliff:g id="COUNT_1">%d</xliff:g>개의 알림이 사용 중지됨</item>
+      <item quantity="one">앱 <xliff:g id="COUNT_0">%d</xliff:g>개의 알림이 사용 중지됨</item>
+    </plurals>
     <plurals name="deleted_channels" formatted="false" msgid="8028574302599397935">
       <item quantity="other">카테고리 <xliff:g id="COUNT_1">%d</xliff:g>개 삭제됨</item>
       <item quantity="one">카테고리 <xliff:g id="COUNT_0">%d</xliff:g>개 삭제됨</item>
@@ -3368,8 +3368,7 @@
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"지문을 사용하여 기기를 잠금 해제하는 방법에 더해 기기가 시작되기 전에 비밀번호를 입력하도록 설정하여 기기를 더욱 안전하게 보호할 수 있습니다. 기기가 시작되기 전에는 전화, 메시지, 알림(예: 알람)을 받을 수 없습니다.\n\n이렇게 하면 분실하거나 도난당한 기기의 데이터를 보호하는 데 도움이 됩니다. 기기가 시작되기 전에 비밀번호를 입력하도록 설정하시겠습니까?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"예"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"아니요"</string>
-    <!-- no translation found for restricted_true_label (4761453839409220473) -->
-    <skip />
+    <string name="restricted_true_label" msgid="4761453839409220473">"제한됨"</string>
     <string name="restricted_false_label" msgid="3279282180297058755">"앱이 백그라운드에서 배터리를 사용할 수 있습니다."</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"PIN이 필요한가요?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"패턴이 필요한가요?"</string>

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,11 @@
  * limitations under the License
  */
 package com.android.settings.connecteddevice;
+
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.DISABLED_UNSUPPORTED;
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -28,6 +30,7 @@ import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,6 +42,7 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SavedDeviceGroupControllerTest {
     private static final String PREFERENCE_KEY_1 = "pref_key_1";
+
     @Mock
     private DashboardFragment mDashboardFragment;
     @Mock
@@ -47,10 +51,12 @@ public class SavedDeviceGroupControllerTest {
     private PreferenceManager mPreferenceManager;
     @Mock
     private PackageManager mPackageManager;
+
     private Context mContext;
     private SavedDeviceGroupController mSavedDeviceGroupController;
     private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -59,9 +65,10 @@ public class SavedDeviceGroupControllerTest {
         mLifecycle = new Lifecycle(mLifecycleOwner);
         doReturn(mContext).when(mDashboardFragment).getContext();
         doReturn(mPackageManager).when(mContext).getPackageManager();
-        mSavedDeviceGroupController = new SavedDeviceGroupController(mDashboardFragment,
-                mBluetoothDeviceUpdater);
+        mSavedDeviceGroupController = new SavedDeviceGroupController(mContext);
+        mSavedDeviceGroupController.setBluetoothDeviceUpdater(mBluetoothDeviceUpdater);
     }
+
     @Test
     public void testRegister() {
         // register the callback in onStart()

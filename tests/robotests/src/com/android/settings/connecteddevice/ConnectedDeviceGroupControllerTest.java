@@ -15,6 +15,7 @@
  */
 package com.android.settings.connecteddevice;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.DISABLED_UNSUPPORTED;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -45,8 +46,12 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowApplicationPackageManager;
 
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(shadows = ShadowApplicationPackageManager.class)
 public class ConnectedDeviceGroupControllerTest {
 
     private static final String PREFERENCE_KEY_1 = "pref_key_1";
@@ -61,33 +66,29 @@ public class ConnectedDeviceGroupControllerTest {
     private PreferenceScreen mPreferenceScreen;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceManager mPreferenceManager;
-    @Mock
-    private PackageManager mPackageManager;
 
+    private ShadowApplicationPackageManager mPackageManager;
     private PreferenceGroup mPreferenceGroup;
     private Context mContext;
     private Preference mPreference;
     private ConnectedDeviceGroupController mConnectedDeviceGroupController;
-    private LifecycleOwner mLifecycleOwner;
-    private Lifecycle mLifecycle;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = spy(RuntimeEnvironment.application);
+        mContext = RuntimeEnvironment.application;
         mPreference = new Preference(mContext);
         mPreference.setKey(PREFERENCE_KEY_1);
-        mLifecycleOwner = () -> mLifecycle;
-        mLifecycle = new Lifecycle(mLifecycleOwner);
+        mPackageManager = (ShadowApplicationPackageManager) Shadows.shadowOf(
+                mContext.getPackageManager());
         mPreferenceGroup = spy(new PreferenceScreen(mContext, null));
         when(mPreferenceGroup.getPreferenceManager()).thenReturn(mPreferenceManager);
         doReturn(mContext).when(mDashboardFragment).getContext();
-        doReturn(mPackageManager).when(mContext).getPackageManager();
-        doReturn(true).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
 
-        mConnectedDeviceGroupController = new ConnectedDeviceGroupController(mDashboardFragment,
-                mLifecycle, mConnectedBluetoothDeviceUpdater, mConnectedUsbDeviceUpdater);
+        mConnectedDeviceGroupController = new ConnectedDeviceGroupController(mContext);
+        mConnectedDeviceGroupController
+                .init(mConnectedBluetoothDeviceUpdater, mConnectedUsbDeviceUpdater);
         mConnectedDeviceGroupController.mPreferenceGroup = mPreferenceGroup;
     }
 
@@ -130,23 +131,34 @@ public class ConnectedDeviceGroupControllerTest {
     }
 
     @Test
-    public void testLifecycle() {
+    public void testRegister() {
         // register the callback in onStart()
-        mLifecycle.handleLifecycleEvent(android.arch.lifecycle.Lifecycle.Event.ON_START);
+        mConnectedDeviceGroupController.onStart();
         verify(mConnectedBluetoothDeviceUpdater).registerCallback();
         verify(mConnectedUsbDeviceUpdater).registerCallback();
+    }
 
+    @Test
+    public void testUnregister() {
         // unregister the callback in onStop()
-        mLifecycle.handleLifecycleEvent(android.arch.lifecycle.Lifecycle.Event.ON_STOP);
+        mConnectedDeviceGroupController.onStop();
         verify(mConnectedBluetoothDeviceUpdater).unregisterCallback();
         verify(mConnectedUsbDeviceUpdater).unregisterCallback();
     }
 
     @Test
     public void testGetAvailabilityStatus_noBluetoothFeature_returnUnSupported() {
-        doReturn(false).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
+        mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, false);
 
         assertThat(mConnectedDeviceGroupController.getAvailabilityStatus()).isEqualTo(
                 DISABLED_UNSUPPORTED);
+    }
+
+    @Test
+    public void testGetAvailabilityStatus_BluetoothFeature_returnSupported() {
+        mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, true);
+
+        assertThat(mConnectedDeviceGroupController.getAvailabilityStatus()).isEqualTo(
+                AVAILABLE);
     }
 }

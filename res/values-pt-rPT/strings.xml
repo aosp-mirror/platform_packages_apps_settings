@@ -349,10 +349,8 @@
     <string name="zone_info_footer_no_dst" msgid="8652423870143056964">"Utiliza <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Sem mudança de hora."</string>
     <string name="zone_time_type_dst" msgid="8850494578766845276">"Mudança de hora"</string>
     <string name="zone_time_type_standard" msgid="3462424485380376522">"Hora padrão"</string>
-    <!-- no translation found for zone_menu_by_region (8370437123807764346) -->
-    <skip />
-    <!-- no translation found for zone_menu_by_offset (7161573994228041794) -->
-    <skip />
+    <string name="zone_menu_by_region" msgid="8370437123807764346">"Selecionar por região"</string>
+    <string name="zone_menu_by_offset" msgid="7161573994228041794">"Selec. por diferença para UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Data"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Hora"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Bloquear automaticamente"</string>
@@ -694,6 +692,7 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Avançadas"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Bluetooth Avançado"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Com o Bluetooth ativado, o dispositivo pode comunicar com dispositivos próximos."</string>
+    <string name="bluetooth_scanning_on_info_message" msgid="824285504325592644">"Quando o Bluetooth está ativado, o dispositivo pode comunicar com outros dispositivos Bluetooth próximos.\n\nPara melhorar a experiência do dispositivo, as aplicações e os serviços podem continuar a procurar dispositivos próximos a qualquer momento, mesmo quando o Bluetooth está desativado. Pode utilizar esta opção, por exemplo, para melhorar as funcionalidades e os serviços baseados na localização. Pode alterar esta opção nas "<annotation id="link">"definições de análise"</annotation>"."</string>
     <string name="ble_scan_notify_text" msgid="1295915006005700650">"Para melhorar a precisão da localização, os serviços e as aplicações do sistema podem continuar a detetar dispositivos Bluetooth. Pode alterar esta opção nas <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>definições de procura<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_failed" msgid="4500234659813241053">"Não foi possível ligar. Tente novamente."</string>
     <string name="device_details_title" msgid="6576953269221085300">"Detalhes do dispositivo"</string>
@@ -853,8 +852,7 @@
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"Banda de 5,0 GHz"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2,4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5,0 GHz"</string>
-    <!-- no translation found for wifi_ap_band_select_one (3476254666116431650) -->
-    <skip />
+    <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Selecione, pelo menos, uma banda para a zona Wi-Fi:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Definições de IP"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Partilhar com outros utilizadores do dispositivo"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(não alterado)"</string>
@@ -1392,8 +1390,12 @@
     <string name="storage_wizard_slow_v2_body" msgid="6897444467730463117">"Pode continuar a utilizar este <xliff:g id="NAME_0">^1</xliff:g>, mas pode ficar lento. \n\nAs aplicações armazenadas neste <xliff:g id="NAME_1">^2</xliff:g> podem não funcionar corretamente e as transferências de conteúdo podem demorar muito tempo. \n\nExperimente utilizar um <xliff:g id="NAME_2">^3</xliff:g> mais rápido ou, em alternativa, utilize este <xliff:g id="NAME_3">^4</xliff:g> como armazenamento portátil."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="4126873669723115805">"Recomeçar"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="49399942893518218">"Continuar"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="5993954859154357197">"Para mover conteúdo para o <xliff:g id="NAME">^1</xliff:g>, aceda a "<b>"Definições &gt; Armazenamento "</b></string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="2574326509794010488">"O conteúdo foi movido para o <xliff:g id="NAME_0">^1</xliff:g>. \n\nPara gerir este <xliff:g id="NAME_1">^2</xliff:g>, aceda a "<b>"Definições &gt; Armazenamento"</b>"."</string>
+    <!-- no translation found for storage_wizard_ready_v2_external_body (11937346870534608) -->
+    <skip />
+    <!-- no translation found for storage_wizard_ready_v2_internal_body (4658433206901211269) -->
+    <skip />
+    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (6239886818487538806) -->
+    <skip />
     <string name="battery_status_title" msgid="9159414319574976203">"Estado da bateria"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Nível da bateria"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APNs"</string>
@@ -2126,8 +2128,7 @@
     <string name="awake" msgid="387122265874485088">"Hora de activação do dispositivo"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"Tempo de ligação Wi-Fi"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"Tempo de ligação Wi-Fi"</string>
-    <!-- no translation found for advanced_battery_title (6768618303037280828) -->
-    <skip />
+    <string name="advanced_battery_title" msgid="6768618303037280828">"Utilização da bateria"</string>
     <string name="history_details_title" msgid="3608240585315506067">"Detalhes do histórico"</string>
     <string name="battery_details_title" msgid="6101394441569858580">"Utilização da bateria"</string>
     <string name="details_subtitle" msgid="32593908269911734">"Utilizar detalhes"</string>
@@ -2154,12 +2155,9 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"Tablet utilizado mais do que o habitual"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"Dispositivo utilizado mais do que o habitual"</string>
     <string name="battery_tip_high_usage_summary" msgid="6341311803303581798">"Pode ficar sem bateria em breve."</string>
-    <!-- no translation found for battery_tip_dialog_message (7434089311164898581) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (2987443811119964310) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (1993039726576708815) -->
-    <skip />
+    <string name="battery_tip_dialog_message" product="default" msgid="7434089311164898581">"O seu telemóvel foi utilizado mais do que o habitual. Pode ficar sem bateria mais cedo do que o esperado.\n\n<xliff:g id="NUMBER">%1$d</xliff:g> principais aplicações desde o último carregamento completo (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="2987443811119964310">"O seu tablet foi utilizado mais do que o habitual. Pode ficar sem bateria mais cedo do que o esperado.\n\n<xliff:g id="NUMBER">%1$d</xliff:g> principais aplicações desde o último carregamento completo (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="1993039726576708815">"O seu dispositivo foi utilizado mais do que o habitual. Pode ficar sem bateria mais cedo do que o esperado.\n\n<xliff:g id="NUMBER">%1$d</xliff:g> principais aplicações desde o último carregamento completo (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="other">Restringir %1$d aplicações</item>
       <item quantity="one">Restringir %1$d aplicação</item>
@@ -2201,8 +2199,7 @@
       <item quantity="other">Limiar a utilização da bateria para %1$d aplicações</item>
       <item quantity="one">Limitar a utilização da bateria para %1$d aplicação</item>
     </plurals>
-    <!-- no translation found for restricted_app_detail_footer (6739863162364046859) -->
-    <skip />
+    <string name="restricted_app_detail_footer" msgid="6739863162364046859">"Estas aplicações têm consumido bateria em segundo plano. As aplicações restringidas poderão não funcionar corretamente e as notificações poderão sofrer atrasos."</string>
     <string name="battery_auto_restriction_title" msgid="6553271897488963709">"Utilizar o Battery Manager"</string>
     <string name="battery_auto_restriction_summary" msgid="8561335400991281062">"Detetar quando as aplicações consomem rapidamente a bateria"</string>
     <string name="battery_manager_on" msgid="8643310865054362396">"Ativado / A detetar quando as aplicações consomem rapidamente a bateria"</string>
@@ -3090,8 +3087,7 @@
     <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"Não apresentar notificações no ecrã"</string>
     <string name="zen_mode_block_effect_status" msgid="6642532634292373081">"Ocultar os ícones da barra de estado"</string>
     <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"Ocultar pontos de notificação"</string>
-    <!-- no translation found for zen_mode_block_effect_ambient (4704755879961212658) -->
-    <skip />
+    <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"Não ativar para notificações"</string>
     <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"Ocultar da lista de notificações"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"Nunca"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="1230265589026355094">"Quando o ecrã está desligado"</string>
@@ -3134,8 +3130,7 @@
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Bloquear quando o ecrã está desligado"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Para além de bloquear sons indesejados, o modo Não incomodar também pode bloquear imagens. Isto pode ser útil se estiver a tentar dormir, a concentrar-se ou a limitar o tempo despendido no telemóvel."</string>
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Bloquear sons e imagens"</string>
-    <!-- no translation found for zen_onboarding_screen_off_summary (5393041573999488088) -->
-    <skip />
+    <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Não ligar o ecrã nem ativar para notificações"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Não mostrar notificações, exceto o estado e a atividade básica do telemóvel."</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Sons do perfil de trabalho"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Util. sons do perfil pessoal"</string>
@@ -3236,9 +3231,11 @@
     </plurals>
     <string name="no_channels" msgid="3077375508177744586">"Esta aplicação não publicou notificações"</string>
     <string name="app_settings_link" msgid="8894946007543660906">"Definições adicionais na aplicação"</string>
-    <!-- no translation found for app_notification_listing_summary_zero (8046168435207424440) -->
-    <skip />
-    <!-- no translation found for app_notification_listing_summary_others (6709582776823665660) -->
+    <string name="app_notification_listing_summary_zero" msgid="8046168435207424440">"Ativadas para todas as aplicações"</string>
+    <plurals name="app_notification_listing_summary_others" formatted="false" msgid="6709582776823665660">
+      <item quantity="other">Desativadas para <xliff:g id="COUNT_1">%d</xliff:g> aplicações</item>
+      <item quantity="one">Desativadas para <xliff:g id="COUNT_0">%d</xliff:g> aplicação</item>
+    </plurals>
     <plurals name="deleted_channels" formatted="false" msgid="8028574302599397935">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> categorias eliminadas</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> categoria eliminada</item>
@@ -3368,8 +3365,7 @@
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Além de utilizar a sua impressão digital para desbloquear o dispositivo, pode protegê-lo ainda mais ao solicitar a sua palavra-passe antes do arranque. Até que o dispositivo arranque, não pode receber chamadas, mensagens nem notificações, incluindo alarmes.\n\nIsto ajuda a proteger os dados do dispositivo em caso de perda ou de roubo. Pretende que a palavra-passe seja solicitada para o arranque do dispositivo?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Sim"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Não"</string>
-    <!-- no translation found for restricted_true_label (4761453839409220473) -->
-    <skip />
+    <string name="restricted_true_label" msgid="4761453839409220473">"Restrita"</string>
     <string name="restricted_false_label" msgid="3279282180297058755">"A aplicação pode utilizar bateria em segundo plano"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Solicitar PIN?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Solicitar padrão?"</string>
