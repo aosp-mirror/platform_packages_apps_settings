@@ -32,7 +32,7 @@ import com.android.settings.testutils.SliceTester;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.wifi.WifiManager;
-import android.support.v4.graphics.drawable.IconCompat;
+import androidx.core.graphics.drawable.IconCompat;
 
 import org.junit.Before;
 import org.junit.Test;

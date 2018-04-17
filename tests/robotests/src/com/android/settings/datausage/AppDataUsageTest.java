@@ -31,8 +31,8 @@ import static org.mockito.Mockito.when;
 import android.content.pm.PackageManager;
 import android.net.NetworkPolicyManager;
 import android.os.Bundle;
-import android.support.v7.preference.PreferenceManager;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 import android.util.ArraySet;
 import android.view.View;
 

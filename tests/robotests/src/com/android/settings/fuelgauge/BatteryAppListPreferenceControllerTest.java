@@ -22,7 +22,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.support.v7.preference.PreferenceGroup;
+import androidx.preference.PreferenceGroup;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.FeatureFlagUtils;

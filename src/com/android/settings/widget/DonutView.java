@@ -25,7 +25,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Typeface;
 import android.icu.text.DecimalFormatSymbols;
-import android.support.annotation.ColorRes;
+import androidx.annotation.ColorRes;
 import android.text.Layout;
 import android.text.Spannable;
 import android.text.SpannableString;

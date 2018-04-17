@@ -27,8 +27,8 @@ import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.PreferenceCategory;
+import androidx.preference.SwitchPreference;
+import androidx.preference.PreferenceCategory;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

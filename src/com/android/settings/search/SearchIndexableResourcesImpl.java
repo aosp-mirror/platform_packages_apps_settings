@@ -16,7 +16,7 @@
 
 package com.android.settings.search;
 
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.DateTimeSettings;
 import com.android.settings.DisplaySettings;

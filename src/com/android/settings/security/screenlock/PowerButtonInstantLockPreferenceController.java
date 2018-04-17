@@ -18,8 +18,8 @@ package com.android.settings.security.screenlock;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.TwoStatePreference;
+import androidx.preference.Preference;
+import androidx.preference.TwoStatePreference;
 import android.text.TextUtils;
 
 import com.android.internal.widget.LockPatternUtils;

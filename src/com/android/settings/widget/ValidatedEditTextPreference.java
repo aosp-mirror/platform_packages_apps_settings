@@ -18,8 +18,8 @@ package com.android.settings.widget;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.PreferenceViewHolder;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceViewHolder;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;

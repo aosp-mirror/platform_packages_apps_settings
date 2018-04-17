@@ -18,7 +18,7 @@
 package com.android.settings.applications;
 
 import android.content.Context;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.R;
