@@ -297,7 +297,7 @@ public class DashboardFeatureProviderImplTest {
                 "content://com.android.settings/tile_icon");
         mImpl.bindIcon(preference, tile);
 
-        assertThat(tile.icon).isNotNull();
+        assertThat(preference.getIcon()).isNotNull();
     }
 
     @Test
