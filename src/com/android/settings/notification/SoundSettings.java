@@ -148,10 +148,16 @@ public class SoundSettings extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        use(AlarmVolumePreferenceController.class).setCallback(mVolumeCallback);
-        use(MediaVolumePreferenceController.class).setCallback(mVolumeCallback);
-        use(RingVolumePreferenceController.class).setCallback(mVolumeCallback);
-        use(NotificationVolumePreferenceController.class).setCallback(mVolumeCallback);
+        ArrayList<VolumeSeekBarPreferenceController> volumeControllers = new ArrayList<>();
+        volumeControllers.add(use(AlarmVolumePreferenceController.class));
+        volumeControllers.add(use(MediaVolumePreferenceController.class));
+        volumeControllers.add(use(RingVolumePreferenceController.class));
+        volumeControllers.add(use(NotificationVolumePreferenceController.class));
+
+        for (VolumeSeekBarPreferenceController controller : volumeControllers) {
+            controller.setCallback(mVolumeCallback);
+            getLifecycle().addObserver(controller);
+        }
     }
 
     // === Volumes ===
