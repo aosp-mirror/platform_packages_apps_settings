@@ -115,18 +115,22 @@ public class EntityHeaderControllerTest {
         final View header =
             mLayoutInflater.inflate(R.layout.settings_entity_header, null /* root */);
         final TextView label = header.findViewById(R.id.entity_header_title);
-        final TextView version = header.findViewById(R.id.entity_header_summary);
+        final TextView summary = header.findViewById(R.id.entity_header_summary);
+        final TextView secondSummary = header.findViewById(R.id.entity_header_second_summary);
 
         mController = EntityHeaderController.newInstance(mActivity, mFragment, header);
         mController.setLabel(testString);
         mController.setSummary(testString);
+        mController.setSecondSummary(testString);
         mController.setIcon(mShadowContext.getDrawable(R.drawable.ic_add));
         mController.done(mActivity);
 
         assertThat(label).isNotNull();
         assertThat(label.getText()).isEqualTo(testString);
-        assertThat(version).isNotNull();
-        assertThat(version.getText()).isEqualTo(testString);
+        assertThat(summary).isNotNull();
+        assertThat(summary.getText()).isEqualTo(testString);
+        assertThat(secondSummary).isNotNull();
+        assertThat(secondSummary.getText()).isEqualTo(testString);
     }
 
     @Test

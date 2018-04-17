@@ -50,13 +50,6 @@ public class SavedDeviceGroupController extends BasePreferenceController
         super(context, KEY);
     }
 
-    @VisibleForTesting
-    SavedDeviceGroupController(DashboardFragment fragment,
-            BluetoothDeviceUpdater bluetoothDeviceUpdater) {
-        super(fragment.getContext(), KEY);
-        mBluetoothDeviceUpdater = bluetoothDeviceUpdater;
-    }
-
     @Override
     public void onStart() {
         mBluetoothDeviceUpdater.registerCallback();
@@ -108,5 +101,10 @@ public class SavedDeviceGroupController extends BasePreferenceController
     public void init(DashboardFragment fragment) {
         mBluetoothDeviceUpdater = new SavedBluetoothDeviceUpdater(fragment.getContext(),
                 fragment, SavedDeviceGroupController.this);
+    }
+
+    @VisibleForTesting
+    public void setBluetoothDeviceUpdater(BluetoothDeviceUpdater bluetoothDeviceUpdater) {
+        mBluetoothDeviceUpdater  = bluetoothDeviceUpdater;
     }
 }

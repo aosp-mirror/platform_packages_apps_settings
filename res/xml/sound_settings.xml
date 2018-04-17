@@ -30,6 +30,14 @@
         android:order="-180"
         settings:controller="com.android.settings.notification.MediaVolumePreferenceController"/>
 
+    <!-- Media output switcher -->
+    <ListPreference
+        android:key="media_output"
+        android:title="@string/media_output_title"
+        android:dialogTitle="@string/media_output_title"
+        android:order="-175"
+        settings:controller="com.android.settings.sound.MediaOutputPreferenceController"/>
+
     <!-- Ring volume -->
     <com.android.settings.notification.VolumeSeekBarPreference
         android:key="ring_volume"
@@ -44,6 +52,14 @@
         android:key="vibrate_when_ringing"
         android:title="@string/vibrate_when_ringing_title"
         android:order="-160"/>
+
+    <!-- Hands free profile output switcher -->
+    <ListPreference
+        android:key="take_call_on_output"
+        android:title="@string/take_call_on_title"
+        android:dialogTitle="@string/take_call_on_title"
+        android:order="-155"
+        settings:controller="com.android.settings.sound.HandsFreeProfileOutputPreferenceController"/>
 
     <!-- Alarm volume -->
     <com.android.settings.notification.VolumeSeekBarPreference

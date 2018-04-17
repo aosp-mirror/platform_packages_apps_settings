@@ -25,6 +25,7 @@ import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryDatabaseManager;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
+import com.android.settings.fuelgauge.batterytip.tips.AppInfoPredicate;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
 
@@ -44,17 +45,13 @@ public class RestrictAppDetector implements BatteryTipDetector {
     BatteryDatabaseManager mBatteryDatabaseManager;
     private Context mContext;
 
-    private Predicate<AppInfo> mAppInfoPredicate = new Predicate<AppInfo>() {
-        @Override
-        public boolean test(AppInfo appInfo) {
-            return Utils.getApplicationLabel(mContext, appInfo.packageName) == null;
-        }
-    };
+    private AppInfoPredicate mAppInfoPredicate;
 
     public RestrictAppDetector(Context context, BatteryTipPolicy policy) {
         mContext = context;
         mPolicy = policy;
         mBatteryDatabaseManager = BatteryDatabaseManager.getInstance(context);
+        mAppInfoPredicate = new AppInfoPredicate(context);
     }
 
     @Override

@@ -87,7 +87,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
     private static final String KEY_PREF_FOREGROUND = "app_usage_foreground";
     private static final String KEY_PREF_BACKGROUND = "app_usage_background";
-    private static final String KEY_PREF_POWER_USAGE = "app_power_usage";
     private static final String KEY_PREF_HEADER = "header_view";
 
     private static final int REQUEST_UNINSTALL = 0;
@@ -108,8 +107,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     Preference mForegroundPreference;
     @VisibleForTesting
     Preference mBackgroundPreference;
-    @VisibleForTesting
-    Preference mPowerUsagePreference;
     @VisibleForTesting
     AnomalySummaryPreferenceController mAnomalySummaryPreferenceController;
     private AppButtonsPreferenceController mAppButtonsPreferenceController;
@@ -221,7 +218,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
                 (SettingsActivity) getActivity(), this);
         mForegroundPreference = findPreference(KEY_PREF_FOREGROUND);
         mBackgroundPreference = findPreference(KEY_PREF_BACKGROUND);
-        mPowerUsagePreference = findPreference(KEY_PREF_POWER_USAGE);
         mHeaderPreference = (LayoutPreference) findPreference(KEY_PREF_HEADER);
 
         if (mPackageName != null) {
@@ -297,8 +293,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         mBackgroundPreference.setSummary(
                 TextUtils.expandTemplate(getText(R.string.battery_active_for),
                         StringUtil.formatElapsedTime(context, backgroundTimeMs, false)));
-        mPowerUsagePreference.setSummary(
-                getString(R.string.battery_detail_power_percentage, usagePercent, powerMah));
     }
 
     @Override

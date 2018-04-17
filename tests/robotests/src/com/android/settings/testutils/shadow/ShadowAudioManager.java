@@ -16,23 +16,58 @@
 
 package com.android.settings.testutils.shadow;
 
+import static org.robolectric.RuntimeEnvironment.application;
+
+import android.media.AudioDeviceCallback;
 import android.media.AudioManager;
+import android.os.Handler;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.annotation.Resetter;
+import org.robolectric.shadow.api.Shadow;
 
-@Implements(AudioManager.class)
-public class ShadowAudioManager {
+import java.util.ArrayList;
 
+@Implements(value = AudioManager.class, inheritImplementationMethods = true)
+public class ShadowAudioManager extends org.robolectric.shadows.ShadowAudioManager {
     private int mRingerMode;
-
-    @Implementation
-    public void setRingerModeInternal(int mode) {
-        mRingerMode = mode;
-    }
+    private boolean mMusicActiveRemotely = false;
+    private ArrayList<AudioDeviceCallback> mDeviceCallbacks = new ArrayList();
 
     @Implementation
     private int getRingerModeInternal() {
         return mRingerMode;
+    }
+
+    public static ShadowAudioManager getShadow() {
+        return Shadow.extract(application.getSystemService(AudioManager.class));
+    }
+
+    public void setRingerModeInternal(int mode) {
+        mRingerMode = mode;
+    }
+
+    public void registerAudioDeviceCallback(AudioDeviceCallback callback, Handler handler) {
+        mDeviceCallbacks.add(callback);
+    }
+
+    public void unregisterAudioDeviceCallback(AudioDeviceCallback callback) {
+        if (mDeviceCallbacks.contains(callback)) {
+            mDeviceCallbacks.remove(callback);
+        }
+    }
+
+    public void setMusicActiveRemotely(boolean flag) {
+        mMusicActiveRemotely = flag;
+    }
+
+    public boolean isMusicActiveRemotely() {
+        return mMusicActiveRemotely;
+    }
+
+    @Resetter
+    public void reset() {
+        mDeviceCallbacks.clear();
     }
 }
