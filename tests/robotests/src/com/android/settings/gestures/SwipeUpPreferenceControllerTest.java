@@ -17,12 +17,14 @@
 package com.android.settings.gestures;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ResolveInfo;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.UserManager;
@@ -38,7 +40,8 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
+import org.robolectric.Shadows;
+import org.robolectric.shadows.ShadowPackageManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,13 +50,33 @@ import java.util.List;
 public class SwipeUpPreferenceControllerTest {
 
     private Context mContext;
+    private ShadowPackageManager mPackageManager;
     private SwipeUpPreferenceController mController;
+
+    private static final String ACTION_QUICKSTEP = "android.intent.action.QUICKSTEP_SERVICE";
     private static final String KEY_SWIPE_UP = "gesture_swipe_up";
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
+        mPackageManager = Shadows.shadowOf(mContext.getPackageManager());
         mController = new SwipeUpPreferenceController(mContext, KEY_SWIPE_UP);
+    }
+
+    @Test
+    public void testIsGestureAvailable_matchingServiceExists_shouldReturnTrue() {
+        final ComponentName recentsComponentName = ComponentName.unflattenFromString(
+                mContext.getString(com.android.internal.R.string.config_recentsComponentName));
+        final Intent quickStepIntent = new Intent(ACTION_QUICKSTEP)
+                .setPackage(recentsComponentName.getPackageName());
+        mPackageManager.addResolveInfoForIntent(quickStepIntent, new ResolveInfo());
+
+        assertThat(SwipeUpPreferenceController.isGestureAvailable(mContext)).isTrue();
+    }
+
+    @Test
+    public void testIsGestureAvailable_noMatchingServiceExists_shouldReturnFalse() {
+        assertThat(SwipeUpPreferenceController.isGestureAvailable(mContext)).isFalse();
     }
 
     @Test
