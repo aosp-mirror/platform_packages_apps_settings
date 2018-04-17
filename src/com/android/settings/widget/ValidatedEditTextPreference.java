@@ -74,7 +74,7 @@ public class ValidatedEditTextPreference extends CustomEditTextPreference {
             editText.removeTextChangedListener(mTextWatcher);
             if (mIsPassword) {
                 editText.setInputType(
-                        InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                        InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
                 editText.setMaxLines(1);
             }
             editText.addTextChangedListener(mTextWatcher);
