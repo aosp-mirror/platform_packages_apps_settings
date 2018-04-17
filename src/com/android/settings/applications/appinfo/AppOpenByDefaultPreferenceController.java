@@ -22,8 +22,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.hardware.usb.IUsbManager;
 import android.os.ServiceManager;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.AppLaunchSettings;

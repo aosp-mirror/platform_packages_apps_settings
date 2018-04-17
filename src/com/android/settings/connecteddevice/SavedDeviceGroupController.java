@@ -17,10 +17,10 @@ package com.android.settings.connecteddevice;
 
 import android.content.pm.PackageManager;
 import android.content.Context;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceGroup;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.bluetooth.SavedBluetoothDeviceUpdater;

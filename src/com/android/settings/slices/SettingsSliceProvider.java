@@ -26,7 +26,7 @@ import android.net.Uri;
 import android.os.StrictMode;
 import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.KeyValueListParser;

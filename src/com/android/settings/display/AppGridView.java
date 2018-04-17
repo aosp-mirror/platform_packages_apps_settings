@@ -22,7 +22,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.util.IconDrawableFactory;
 import android.view.View;

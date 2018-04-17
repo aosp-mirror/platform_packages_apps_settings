@@ -31,8 +31,8 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.os.SystemProperties;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.os.RoSystemProperties;

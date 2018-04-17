@@ -32,7 +32,7 @@ import android.print.PrintDocumentAdapter;
 import android.print.PrintDocumentInfo;
 import android.print.PrintJob;
 import android.print.PrintManager;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;

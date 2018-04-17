@@ -30,11 +30,11 @@ import android.os.Handler;
 import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings.Secure;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.Preference.OnPreferenceChangeListener;
-import android.support.v7.preference.PreferenceCategory;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.view.InputDevice;
 

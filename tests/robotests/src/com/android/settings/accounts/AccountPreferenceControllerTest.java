@@ -37,10 +37,10 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceGroup;
-import android.support.v7.preference.PreferenceManager;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.settings.AccessiblePreferenceCategory;

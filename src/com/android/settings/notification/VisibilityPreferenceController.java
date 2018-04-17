@@ -25,7 +25,7 @@ import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;

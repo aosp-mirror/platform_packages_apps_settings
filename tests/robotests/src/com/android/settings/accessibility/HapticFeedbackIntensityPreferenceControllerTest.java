@@ -18,7 +18,7 @@ package com.android.settings.accessibility;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.arch.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
 
 import com.android.settings.core.BasePreferenceController;

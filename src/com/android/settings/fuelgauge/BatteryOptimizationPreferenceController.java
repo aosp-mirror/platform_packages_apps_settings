@@ -15,8 +15,8 @@
 package com.android.settings.fuelgauge;
 
 import android.os.Bundle;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.Settings;

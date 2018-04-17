@@ -39,7 +39,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;

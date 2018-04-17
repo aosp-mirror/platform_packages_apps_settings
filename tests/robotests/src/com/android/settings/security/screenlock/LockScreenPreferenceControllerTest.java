@@ -18,7 +18,7 @@ package com.android.settings.security.screenlock;
 
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
-import static android.arch.lifecycle.Lifecycle.Event.ON_RESUME;
+import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.DISABLED_FOR_USER;
 import static com.google.common.truth.Truth.assertThat;
@@ -26,11 +26,11 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
-import android.arch.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.os.UserManager;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.testutils.FakeFeatureFactory;

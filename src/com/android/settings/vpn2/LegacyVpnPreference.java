@@ -19,7 +19,7 @@ package com.android.settings.vpn2;
 import static com.android.internal.net.LegacyVpnInfo.STATE_CONNECTED;
 
 import android.content.Context;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -27,7 +27,7 @@ import com.android.internal.net.VpnProfile;
 import com.android.settings.R;
 
 /**
- * {@link android.support.v7.preference.Preference} tracks the underlying legacy vpn profile and
+ * {@link androidx.preference.Preference} tracks the underlying legacy vpn profile and
  * its connection state.
  */
 public class LegacyVpnPreference extends ManageablePreference {

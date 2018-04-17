@@ -24,7 +24,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.hardware.input.InputManager;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 import android.view.InputDevice;
 
 import com.android.settings.R;

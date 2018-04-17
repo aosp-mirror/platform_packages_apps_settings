@@ -18,7 +18,7 @@ package com.android.settings.connecteddevice;
 import android.content.Context;
 import android.content.pm.PackageManager;
 
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.dashboard.DashboardFragment;

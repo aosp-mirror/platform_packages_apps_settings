@@ -16,7 +16,7 @@
 
 package com.android.settings.applications.manageapplications;
 
-import android.support.annotation.IntDef;
+import androidx.annotation.IntDef;
 
 import com.android.settings.R;
 import com.android.settings.applications.AppStateInstallAppsBridge;

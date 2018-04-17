@@ -19,8 +19,8 @@ package com.android.settings.fuelgauge.anomaly.action;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.permission.RuntimePermissionPresenter;
-import android.support.annotation.VisibleForTesting;
-import android.support.v4.content.PermissionChecker;
+import androidx.annotation.VisibleForTesting;
+import androidx.core.content.PermissionChecker;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.fuelgauge.anomaly.Anomaly;

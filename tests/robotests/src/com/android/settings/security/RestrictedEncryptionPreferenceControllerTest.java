@@ -18,7 +18,7 @@ package com.android.settings.security;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.arch.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.os.UserManager;
 

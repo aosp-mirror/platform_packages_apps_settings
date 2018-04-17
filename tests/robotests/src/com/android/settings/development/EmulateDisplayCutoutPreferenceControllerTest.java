@@ -29,8 +29,8 @@ import android.content.Context;
 import android.content.om.IOverlayManager;
 import android.content.om.OverlayInfo;
 import android.content.pm.PackageManager;
-import android.support.v7.preference.ListPreference;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.ListPreference;
+import androidx.preference.PreferenceScreen;
 import android.os.RemoteException;
 import android.view.DisplayCutout;
 
