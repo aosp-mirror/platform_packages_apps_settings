@@ -17,6 +17,8 @@
 package com.android.settings.sound;
 
 
+import static android.media.AudioSystem.DEVICE_OUT_USB_HEADSET;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.mock;
@@ -205,10 +207,9 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
      * Preference summary should be "This device"
      */
     @Test
-    public void hapBtDevicesAreAvailableButWiredHeadsetIsActivated_shouldSetDefaultSummary() {
+    public void updateState_withAvailableDevicesWiredHeadsetActivated_shouldSetDefaultSummary() {
         mShadowAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
-        mShadowAudioManager.setWiredHeadsetOn(true);
-        mShadowAudioManager.setBluetoothScoOn(false);
+        mShadowAudioManager.setStream(DEVICE_OUT_USB_HEADSET);
         when(mHeadsetProfile.getConnectedDevices()).thenReturn(mConnectedDevices);
         when(mHeadsetProfile.getActiveDevice()).thenReturn(
                 mBluetoothDevice); // BT device is still activated in this case
@@ -226,7 +227,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
      * Preference summary should be "This device"
      */
     @Test
-    public void noAvailableHeadsetBtDevices_preferenceEnableIsFalse_shouldSetDefaultSummary() {
+    public void updateState_noAvailableHeadsetBtDevices_shouldSetDefaultSummary() {
         mShadowAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
         List<BluetoothDevice> emptyDeviceList = new ArrayList<>();
         when(mHeadsetProfile.getConnectedDevices()).thenReturn(emptyDeviceList);
