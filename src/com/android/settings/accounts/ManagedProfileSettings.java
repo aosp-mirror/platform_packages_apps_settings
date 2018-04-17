@@ -24,8 +24,8 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.Preference;
+import androidx.preference.SwitchPreference;
+import androidx.preference.Preference;
 import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto;

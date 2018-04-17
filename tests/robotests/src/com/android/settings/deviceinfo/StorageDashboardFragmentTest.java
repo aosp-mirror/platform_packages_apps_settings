@@ -27,7 +27,7 @@ import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.provider.SearchIndexableResource;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
 

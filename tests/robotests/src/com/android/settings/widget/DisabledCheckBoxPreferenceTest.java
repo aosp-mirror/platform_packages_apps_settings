@@ -35,9 +35,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 
-import android.support.v7.preference.R;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceViewHolder;
+import androidx.preference.R;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 import android.widget.LinearLayout;
 
 @RunWith(SettingsRobolectricTestRunner.class)

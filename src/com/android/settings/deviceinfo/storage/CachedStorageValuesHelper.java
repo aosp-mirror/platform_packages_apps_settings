@@ -19,7 +19,7 @@ package com.android.settings.deviceinfo.storage;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.provider.Settings;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import android.util.SparseArray;
 
 import com.android.settingslib.applications.StorageStatsSource;

@@ -21,8 +21,8 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.os.storage.IStorageManager;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 import android.text.TextUtils;
 
 import com.android.settings.R;

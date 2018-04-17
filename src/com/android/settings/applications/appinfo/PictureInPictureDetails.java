@@ -19,9 +19,9 @@ import android.app.AlertDialog;
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.SwitchPreference;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;

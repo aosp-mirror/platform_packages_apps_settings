@@ -36,7 +36,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.os.storage.VolumeInfo;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.PreferenceScreen;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;

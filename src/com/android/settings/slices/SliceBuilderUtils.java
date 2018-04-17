@@ -49,7 +49,7 @@ import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settingslib.SliceBroadcastRelay;
 import com.android.settingslib.core.AbstractPreferenceController;
 
-import android.support.v4.graphics.drawable.IconCompat;
+import androidx.core.graphics.drawable.IconCompat;
 
 import java.util.ArrayList;
 import java.util.Arrays;

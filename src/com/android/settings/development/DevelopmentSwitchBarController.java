@@ -16,7 +16,7 @@
 
 package com.android.settings.development;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.android.settings.Utils;
 import com.android.settings.widget.SwitchBar;

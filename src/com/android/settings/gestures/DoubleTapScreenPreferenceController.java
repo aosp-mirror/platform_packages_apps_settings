@@ -22,8 +22,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.UserHandle;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
-import android.support.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;

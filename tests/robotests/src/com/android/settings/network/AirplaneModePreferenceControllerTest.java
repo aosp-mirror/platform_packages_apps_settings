@@ -21,14 +21,14 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
-import android.arch.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LifecycleOwner;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
-import android.support.v7.preference.PreferenceManager;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;

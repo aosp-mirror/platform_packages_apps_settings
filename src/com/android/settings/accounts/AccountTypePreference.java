@@ -24,8 +24,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.Preference.OnPreferenceClickListener;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceClickListener;
 
 import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;

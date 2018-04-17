@@ -25,7 +25,7 @@ import android.print.PrintJobId;
 import android.print.PrintJobInfo;
 import android.print.PrintManager;
 import android.print.PrintManager.PrintJobStateChangeListener;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;

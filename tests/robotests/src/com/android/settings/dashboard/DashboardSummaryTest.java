@@ -29,7 +29,7 @@ import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v7.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.android.settings.dashboard.conditional.ConditionManager;
 import com.android.settings.dashboard.conditional.FocusRecyclerView;

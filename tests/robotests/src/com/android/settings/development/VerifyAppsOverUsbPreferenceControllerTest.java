@@ -29,7 +29,7 @@ import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.provider.Settings;
 import android.provider.Settings.Global;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;

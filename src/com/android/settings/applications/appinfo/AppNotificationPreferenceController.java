@@ -20,7 +20,7 @@ import static com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;

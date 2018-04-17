@@ -26,7 +26,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.provider.SettingsSlicesContract;
-import android.support.v4.graphics.drawable.IconCompat;
+import androidx.core.graphics.drawable.IconCompat;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;

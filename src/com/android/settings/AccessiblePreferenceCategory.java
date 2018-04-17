@@ -17,8 +17,8 @@
 package com.android.settings;
 
 import android.content.Context;
-import android.support.v7.preference.PreferenceCategory;
-import android.support.v7.preference.PreferenceViewHolder;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceViewHolder;
 
 /**
  * Preference category that accepts a content description for accessibility.

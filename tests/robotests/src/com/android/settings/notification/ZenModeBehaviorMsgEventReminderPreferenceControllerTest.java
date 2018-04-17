@@ -24,7 +24,7 @@ import static org.mockito.Mockito.when;
 
 import android.app.NotificationManager;
 import android.content.Context;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;

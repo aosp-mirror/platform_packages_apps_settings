@@ -31,7 +31,7 @@ import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.UserManager;
-import android.support.v14.preference.PreferenceFragment;
+import androidx.preference.PreferenceFragment;
 import android.view.View;
 
 import com.android.settings.applications.LayoutPreference;
