@@ -19,12 +19,13 @@ package com.android.settings.testutils;
 import android.content.Context;
 import android.provider.Settings;
 
-import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SliderPreferenceController;
 
 public class FakeSliderController extends SliderPreferenceController {
 
     private final String settingKey = "fake_slider_key";
+
+    public static final String AVAILABILITY_KEY = "fake_slider_availability_key";
 
     public static final int MAX_STEPS = 9;
 
@@ -49,6 +50,7 @@ public class FakeSliderController extends SliderPreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        return BasePreferenceController.AVAILABLE;
+        return Settings.Global.getInt(mContext.getContentResolver(),
+                AVAILABILITY_KEY, AVAILABLE);
     }
 }
