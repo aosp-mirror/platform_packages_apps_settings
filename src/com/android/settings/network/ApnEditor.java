@@ -1195,12 +1195,19 @@ public class ApnEditor extends SettingsPreferenceFragment
         }
     }
 
-    private ApnData getApnDataFromUri(Uri uri) {
-        ApnData apnData;
-        try (Cursor cursor = getActivity().managedQuery(
-                uri, sProjection, null /* selection */, null /* sortOrder */)) {
-            cursor.moveToFirst();
-            apnData = new ApnData(uri, cursor);
+    @VisibleForTesting
+    ApnData getApnDataFromUri(Uri uri) {
+        ApnData apnData = null;
+        try (Cursor cursor = getContentResolver().query(
+                uri,
+                sProjection,
+                null /* selection */,
+                null /* selectionArgs */,
+                null /* sortOrder */)) {
+            if (cursor != null) {
+                cursor.moveToFirst();
+                apnData = new ApnData(uri, cursor);
+            }
         }
 
         if (apnData == null) {
