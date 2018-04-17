@@ -198,13 +198,6 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
         return mAudioManager.getDevicesForStream(streamType) == device;
     }
 
-    protected boolean isOngoingCallStatus() {
-        final int audioMode = mAudioManager.getMode();
-        return audioMode == AudioManager.MODE_RINGTONE
-                || audioMode == AudioManager.MODE_IN_CALL
-                || audioMode == AudioManager.MODE_IN_COMMUNICATION;
-    }
-
     int getDefaultDeviceIndex() {
         // Default device is after all connected devices.
         return ArrayUtils.size(mConnectedDevices);
