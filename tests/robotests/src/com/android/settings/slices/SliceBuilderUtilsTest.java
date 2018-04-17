@@ -295,14 +295,16 @@ public class SliceBuilderUtilsTest {
         assertThat(pathPair.second).isEqualTo(KEY);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void getPathData_noKey_returnsNull() {
         final Uri uri = new Uri.Builder()
                 .authority(SettingsSliceProvider.SLICE_AUTHORITY)
                 .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
                 .build();
 
-        SliceBuilderUtils.getPathData(uri);
+        final Pair<Boolean, String> pathPair = SliceBuilderUtils.getPathData(uri);
+
+        assertThat(pathPair).isNull();
     }
 
     @Test

@@ -18,19 +18,26 @@ package com.android.settings.slices;
 
 import android.app.PendingIntent;
 import android.app.slice.SliceManager;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
+import android.provider.SettingsSlicesContract;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.graphics.drawable.IconCompat;
+import android.text.TextUtils;
 import android.util.Log;
+import android.util.Pair;
 
 import com.android.settings.R;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -142,6 +149,85 @@ public class SettingsSliceProvider extends SliceProvider {
         // Remove the SliceData from the cache after it has been used to prevent a memory-leak.
         mSliceDataCache.remove(sliceUri);
         return SliceBuilderUtils.buildSlice(getContext(), cachedSliceData);
+    }
+
+    /**
+     * Get a list of all valid Uris based on the keys indexed in the Slices database.
+     * <p>
+     * This will return a list of {@link Uri uris} depending on {@param uri}, following:
+     * 1. Authority & Full Path -> Only {@param uri}. It is only a prefix for itself.
+     * 2. Authority & No path -> A list of authority/action/$KEY$, where
+     * {@code $KEY$} is a list of all Slice-enabled keys for the authority.
+     * 3. Authority & action path -> A list of authority/action/$KEY$, where
+     * {@code $KEY$} is a list of all Slice-enabled keys for the authority.
+     * 4. Empty authority & path -> A list of Uris with all keys for both supported authorities.
+     * 5. Else -> Empty list.
+     * <p>
+     * Note that the authority will stay consistent with {@param uri}, and the list of valid Slice
+     * keys depends on if the authority is {@link SettingsSlicesContract#AUTHORITY} or
+     * {@link #SLICE_AUTHORITY}.
+     *
+     * @param uri The uri to look for descendants under.
+     * @returns all valid Settings uris for which {@param uri} is a prefix.
+     */
+    @Override
+    public Collection<Uri> onGetSliceDescendants(Uri uri) {
+        final List<Uri> descendants = new ArrayList<>();
+        final Pair<Boolean, String> pathData = SliceBuilderUtils.getPathData(uri);
+
+        if (pathData != null) {
+            // Uri has a full path and will not have any descendants.
+            descendants.add(uri);
+            return descendants;
+        }
+
+        final String authority = uri.getAuthority();
+        final String pathPrefix = uri.getPath();
+        final boolean isPathEmpty = pathPrefix.isEmpty();
+
+        // No path nor authority. Return all possible Uris.
+        if (isPathEmpty && TextUtils.isEmpty(authority)) {
+            final List<String> platformKeys = mSlicesDatabaseAccessor.getSliceKeys(
+                    true /* isPlatformSlice */);
+            final List<String> oemKeys = mSlicesDatabaseAccessor.getSliceKeys(
+                    false /* isPlatformSlice */);
+            final List<Uri> allUris = buildUrisFromKeys(platformKeys,
+                    SettingsSlicesContract.AUTHORITY);
+            allUris.addAll(buildUrisFromKeys(oemKeys, SettingsSliceProvider.SLICE_AUTHORITY));
+
+            return allUris;
+        }
+
+        // Path is anything but empty, "action", or "intent". Return empty list.
+        if (!isPathEmpty
+                && !TextUtils.equals(pathPrefix, "/" + SettingsSlicesContract.PATH_SETTING_ACTION)
+                && !TextUtils.equals(pathPrefix,
+                "/" + SettingsSlicesContract.PATH_SETTING_INTENT)) {
+            // Invalid path prefix, there are no valid Uri descendants.
+            return descendants;
+        }
+
+        // Can assume authority belongs to the provider. Return all Uris for the authority.
+        final boolean isPlatformUri = TextUtils.equals(authority, SettingsSlicesContract.AUTHORITY);
+        final List<String> keys = mSlicesDatabaseAccessor.getSliceKeys(isPlatformUri);
+        return buildUrisFromKeys(keys, authority);
+    }
+
+    private List<Uri> buildUrisFromKeys(List<String> keys, String authority) {
+        final List<Uri> descendants = new ArrayList<>();
+
+        final Uri.Builder builder = new Uri.Builder()
+                .scheme(ContentResolver.SCHEME_CONTENT)
+                .authority(authority)
+                .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION);
+
+        final String newUriPathPrefix = SettingsSlicesContract.PATH_SETTING_ACTION + "/";
+        for (String key : keys) {
+            builder.path(newUriPathPrefix + key);
+            descendants.add(builder.build());
+        }
+
+        return descendants;
     }
 
     @VisibleForTesting
