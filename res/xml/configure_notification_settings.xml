@@ -33,7 +33,8 @@
     <!-- Pulse notification light -->
     <SwitchPreference
         android:key="notification_pulse"
-        android:title="@string/notification_pulse_title"/>
+        android:title="@string/notification_pulse_title"
+        settings:controller="com.android.settings.notification.PulseNotificationPreferenceController" />
 
     <!-- Default notification ringtone -->
     <com.android.settings.DefaultRingtonePreference
