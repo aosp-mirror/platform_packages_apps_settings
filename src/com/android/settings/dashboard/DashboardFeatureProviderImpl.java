@@ -259,8 +259,10 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                     return;
                 }
                 tile.icon = Icon.createWithResource(iconInfo.first, iconInfo.second);
-                ThreadUtils.postOnMainThread(() ->
-                        preference.setIcon(tile.icon.loadDrawable(preference.getContext()))
+                ThreadUtils.postOnMainThread(() -> {
+                        preference.setIcon(tile.icon.loadDrawable(preference.getContext()));
+                        tile.icon = null;
+                    }
                 );
             });
     }
