@@ -25,6 +25,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 import android.support.annotation.VisibleForTesting;
+import android.text.BidiFormatter;
 import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -174,7 +175,8 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         @Override
         public void setListening(boolean listening) {
             if (listening) {
-                String summary = mContext.getString(R.string.wifi_settings_title);
+                String summary = BidiFormatter.getInstance()
+                        .unicodeWrap(mContext.getString(R.string.wifi_settings_title));
                 if (mMobileNetworkPreferenceController.isAvailable()) {
                     final String mobileSettingSummary = mContext.getString(
                             R.string.network_dashboard_summary_mobile);
