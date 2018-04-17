@@ -18,7 +18,7 @@ package com.android.settings.applications.appinfo;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 
 import com.android.settings.Utils;
 import com.android.settings.applications.AppDomainsPreference;

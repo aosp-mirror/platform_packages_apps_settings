@@ -17,9 +17,9 @@
 package com.android.settings.applications;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
-import android.support.v7.preference.Preference;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.preference.Preference;
 import android.text.format.Formatter;
 
 import com.android.internal.util.Preconditions;

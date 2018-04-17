@@ -17,7 +17,7 @@
 package com.android.settings.widget;
 
 import android.content.Context;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.PreferenceScreen;
 import android.view.View;
 import android.widget.Button;
 

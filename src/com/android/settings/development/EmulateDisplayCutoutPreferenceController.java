@@ -20,10 +20,10 @@ import static android.os.UserHandle.USER_SYSTEM;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.ListPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.view.DisplayCutout;
 

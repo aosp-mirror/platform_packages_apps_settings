@@ -28,7 +28,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.android.settings.fuelgauge.batterytip.AnomalyConfigJobService;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

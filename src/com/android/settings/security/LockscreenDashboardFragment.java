@@ -18,7 +18,7 @@ package com.android.settings.security;
 
 import android.content.Context;
 import android.provider.SearchIndexableResource;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;

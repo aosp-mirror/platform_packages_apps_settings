@@ -18,8 +18,8 @@ package com.android.settings.fuelgauge.batterysaver;
 
 import android.content.Context;
 import android.os.PowerManager;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 import com.android.settings.fuelgauge.BatterySaverReceiver;
 import com.android.settings.widget.TwoStateButtonPreferenceController;

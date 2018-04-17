@@ -17,8 +17,8 @@
 package com.android.settings.display;
 
 import android.content.Context;
-import android.support.v4.content.res.TypedArrayUtils;
-import android.support.v7.preference.Preference;
+import androidx.core.content.res.TypedArrayUtils;
+import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 
@@ -31,7 +31,7 @@ import com.android.settingslib.display.DisplayDensityUtils;
 public class ScreenZoomPreference extends Preference {
     public ScreenZoomPreference(Context context, AttributeSet attrs) {
         super(context, attrs, TypedArrayUtils.getAttr(context,
-                android.support.v7.preference.R.attr.preferenceStyle,
+                androidx.preference.R.attr.preferenceStyle,
                 android.R.attr.preferenceStyle));
 
         final DisplayDensityUtils density = new DisplayDensityUtils(context);

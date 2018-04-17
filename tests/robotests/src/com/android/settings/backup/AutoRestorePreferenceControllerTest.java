@@ -19,7 +19,7 @@ package com.android.settings.backup;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
-import android.support.v14.preference.SwitchPreference;
+import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

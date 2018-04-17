@@ -19,8 +19,8 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
-import android.support.v4.content.res.TypedArrayUtils;
-import android.support.v7.preference.Preference;
+import androidx.core.content.res.TypedArrayUtils;
+import androidx.preference.Preference;
 import android.util.AttributeSet;
 import android.util.FeatureFlagUtils;
 
@@ -41,7 +41,7 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
         final TypedArray a = context.obtainStyledAttributes(
                 attrs, new int[] {com.android.internal.R.attr.title},
                 TypedArrayUtils.getAttr(
-                        context, android.support.v7.preference.R.attr.preferenceStyle,
+                        context, androidx.preference.R.attr.preferenceStyle,
                         android.R.attr.preferenceStyle), 0);
         mTitleRes = a.getResourceId(0, 0);
         a.recycle();

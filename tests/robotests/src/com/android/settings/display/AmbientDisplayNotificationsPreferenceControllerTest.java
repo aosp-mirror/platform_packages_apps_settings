@@ -29,7 +29,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.os.UserHandle;
 import android.provider.Settings;
-import android.support.v14.preference.SwitchPreference;
+import androidx.preference.SwitchPreference;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.search.InlinePayload;

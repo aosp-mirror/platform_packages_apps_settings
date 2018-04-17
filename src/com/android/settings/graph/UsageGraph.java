@@ -28,7 +28,7 @@ import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.Shader.TileMode;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.util.SparseIntArray;
 import android.util.TypedValue;

@@ -19,7 +19,7 @@ package com.android.settings.testutils.shadow;
 import android.content.Context;
 import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Implementation;

@@ -23,7 +23,7 @@ import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
 
 import android.app.NotificationManager;
 import android.content.Context;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 import android.widget.Switch;
 
 import com.android.settings.R;

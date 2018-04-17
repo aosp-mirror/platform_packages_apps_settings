@@ -19,7 +19,7 @@ package com.android.settings.widget;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.os.Parcelable;
-import android.support.v4.view.PagerAdapter;
+import androidx.viewpager.widget.PagerAdapter;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;

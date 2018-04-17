@@ -37,7 +37,7 @@ import androidx.slice.SliceMetadata;
 import androidx.slice.core.SliceAction;
 import androidx.slice.core.SliceQuery;
 
-import android.support.v4.graphics.drawable.IconCompat;
+import androidx.core.graphics.drawable.IconCompat;
 
 import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settings.slices.SliceBuilderUtils;

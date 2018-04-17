@@ -31,7 +31,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserManager;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;

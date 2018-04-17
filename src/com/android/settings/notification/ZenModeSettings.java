@@ -24,8 +24,8 @@ import android.content.Context;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.CheckBoxPreference;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.CheckBoxPreference;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;

@@ -19,7 +19,7 @@ package com.android.settings.fuelgauge.anomaly;
 import android.content.Context;
 import android.net.Uri;
 import android.provider.Settings;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import android.text.format.DateUtils;
 import android.util.KeyValueListParser;
 import android.util.Log;
