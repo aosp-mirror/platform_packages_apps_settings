@@ -32,6 +32,7 @@ import android.os.Build;
 
 import com.android.settings.R;
 import com.android.settings.fuelgauge.anomaly.action.AnomalyAction;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
@@ -68,7 +69,7 @@ public class AnomalyDialogFragmentTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
         mWakeLockAnomaly = new Anomaly.Builder()
                 .setType(Anomaly.AnomalyType.WAKE_LOCK)
                 .setUid(UID)
@@ -94,6 +95,7 @@ public class AnomalyDialogFragmentTest {
                 .setPackageName(PACKAGE_NAME)
                 .setDisplayName(DISPLAY_NAME)
                 .build();
+        FakeFeatureFactory.setupForTest(mContext);
     }
 
     @Test
@@ -163,31 +165,6 @@ public class AnomalyDialogFragmentTest {
                 mContext.getString(R.string.dialog_stop_title));
         assertThat(dialog.getButton(DialogInterface.BUTTON_POSITIVE).getText()).isEqualTo(
                 mContext.getString(R.string.dialog_stop_ok));
-        assertThat(dialog.getButton(DialogInterface.BUTTON_NEGATIVE).getText()).isEqualTo(
-                mContext.getString(R.string.dlg_cancel));
-    }
-
-    @Test
-    public void testOnCreateDialog_bluetoothAnomaly_fireLocationCheckDialog() {
-        mAnomalyDialogFragment = spy(AnomalyDialogFragment.newInstance(mBluetoothAnomaly,
-                0 /* metricskey */));
-        mAnomalyDialogFragment.mAnomalyUtils = mAnomalyUtils;
-        doReturn(mAnomalyAction).when(mAnomalyUtils).getAnomalyAction(any());
-        doNothing().when(mAnomalyDialogFragment).initAnomalyUtils();
-        doReturn(Anomaly.AnomalyActionType.LOCATION_CHECK).when(mAnomalyAction).getActionType();
-
-        FragmentTestUtil.startFragment(mAnomalyDialogFragment);
-
-        final AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
-        ShadowAlertDialog shadowDialog = shadowOf(dialog);
-
-        assertThat(shadowDialog.getMessage()).isEqualTo(
-                mContext.getString(R.string.dialog_location_message,
-                        mWakeLockAnomaly.displayName));
-        assertThat(shadowDialog.getTitle()).isEqualTo(
-                mContext.getString(R.string.dialog_location_title));
-        assertThat(dialog.getButton(DialogInterface.BUTTON_POSITIVE).getText()).isEqualTo(
-                mContext.getString(R.string.dialog_location_ok));
         assertThat(dialog.getButton(DialogInterface.BUTTON_NEGATIVE).getText()).isEqualTo(
                 mContext.getString(R.string.dlg_cancel));
     }

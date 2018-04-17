@@ -23,6 +23,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.fuelgauge.anomaly.action.AnomalyAction;
@@ -79,8 +80,7 @@ public class AnomalyDialogFragment extends InstrumentedDialogFragment implements
 
     @Override
     public int getMetricsCategory() {
-        // TODO(b/37681923): add anomaly metric id
-        return 0;
+        return MetricsProto.MetricsEvent.DIALOG_HANDLE_ANOMALY;
     }
 
     @Override
@@ -100,9 +100,13 @@ public class AnomalyDialogFragment extends InstrumentedDialogFragment implements
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final Bundle bundle = getArguments();
-        mAnomaly = bundle.getParcelable(ARG_ANOMALY);
-
         final Context context = getContext();
+        final AnomalyUtils anomalyUtils = AnomalyUtils.getInstance(context);
+
+        mAnomaly = bundle.getParcelable(ARG_ANOMALY);
+        anomalyUtils.logAnomaly(mMetricsFeatureProvider, mAnomaly,
+                MetricsProto.MetricsEvent.DIALOG_HANDLE_ANOMALY);
+
         final AnomalyAction anomalyAction = mAnomalyUtils.getAnomalyAction(mAnomaly);
         switch (anomalyAction.getActionType()) {
             case Anomaly.AnomalyActionType.FORCE_STOP:
