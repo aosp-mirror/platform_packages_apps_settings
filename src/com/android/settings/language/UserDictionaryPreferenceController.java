@@ -23,6 +23,7 @@ import android.support.v7.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.inputmethod.UserDictionaryList;
+import com.android.settings.inputmethod.UserDictionaryListPreferenceController;
 import com.android.settings.inputmethod.UserDictionarySettings;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -61,10 +62,10 @@ public class UserDictionaryPreferenceController extends AbstractPreferenceContro
                 // parameter in the extras. This will be interpreted by the
                 // UserDictionarySettings class as meaning
                 // "the current locale". Note that with the current code for
-                // UserDictionaryList#getUserDictionaryLocalesSet()
+                // UserDictionaryListPreferenceController#getUserDictionaryLocalesSet()
                 // the locale list always has at least one element, since it
                 // always includes the current locale explicitly.
-                // @see UserDictionaryList.getUserDictionaryLocalesSet().
+                // @see UserDictionaryListPreferenceController.getUserDictionaryLocalesSet().
                 extras.putString("locale", localeSet.first());
             }
             targetFragment = UserDictionarySettings.class;
@@ -75,6 +76,6 @@ public class UserDictionaryPreferenceController extends AbstractPreferenceContro
     }
 
     protected TreeSet<String> getDictionaryLocales() {
-        return UserDictionaryList.getUserDictionaryLocalesSet(mContext);
+        return UserDictionaryListPreferenceController.getUserDictionaryLocalesSet(mContext);
     }
 }
