@@ -64,8 +64,6 @@ public class DndPreferenceControllerTest {
     private UserManager mUm;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceScreen mScreen;
-    @Mock
-    private Lifecycle mLifecycle;
 
     private DndPreferenceController mController;
 
@@ -76,7 +74,7 @@ public class DndPreferenceControllerTest {
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNm);
         shadowApplication.setSystemService(Context.USER_SERVICE, mUm);
         mContext = RuntimeEnvironment.application;
-        mController = spy(new DndPreferenceController(mContext, mLifecycle, mBackend));
+        mController = spy(new DndPreferenceController(mContext, mBackend));
     }
 
     @Test
