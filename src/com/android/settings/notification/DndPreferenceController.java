@@ -28,17 +28,12 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 public class DndPreferenceController extends NotificationPreferenceController
-        implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener,
-        LifecycleObserver {
+        implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
 
     private static final String KEY_BYPASS_DND = "bypass_dnd";
 
-    public DndPreferenceController(Context context, Lifecycle lifecycle,
-            NotificationBackend backend) {
+    public DndPreferenceController(Context context, NotificationBackend backend) {
         super(context, backend);
-        if (lifecycle != null) {
-            lifecycle.addObserver(this);
-        }
     }
 
     @Override
