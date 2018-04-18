@@ -26,14 +26,12 @@ import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
-import android.text.TextUtils;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.RingtonePreference;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
-import com.android.settings.gestures.SwipeToNotificationPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -97,21 +95,17 @@ public class ConfigureNotificationSettings extends DashboardFragment {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         final BadgingNotificationPreferenceController badgeController =
                 new BadgingNotificationPreferenceController(context);
-        final PulseNotificationPreferenceController pulseController =
-                new PulseNotificationPreferenceController(context);
         final LockScreenNotificationPreferenceController lockScreenNotificationController =
                 new LockScreenNotificationPreferenceController(context,
                         KEY_LOCKSCREEN,
                         KEY_LOCKSCREEN_WORK_PROFILE_HEADER,
                         KEY_LOCKSCREEN_WORK_PROFILE);
         if (lifecycle != null) {
-            lifecycle.addObserver(pulseController);
             lifecycle.addObserver(lockScreenNotificationController);
         }
         controllers.add(new RecentNotifyingAppsPreferenceController(
                 context, new NotificationBackend(), app, host));
         controllers.add(badgeController);
-        controllers.add(pulseController);
         controllers.add(lockScreenNotificationController);
         controllers.add(new NotificationRingtonePreferenceController(context) {
             @Override

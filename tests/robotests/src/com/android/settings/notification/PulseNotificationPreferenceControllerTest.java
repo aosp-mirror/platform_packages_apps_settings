@@ -19,14 +19,18 @@ package com.android.settings.notification;
 import static android.provider.Settings.System.NOTIFICATION_LIGHT_PULSE;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.TwoStatePreference;
+
+import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,8 +44,9 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class PulseNotificationPreferenceControllerTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
+    @Mock
+    private Resources mResources;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceScreen mScreen;
 
@@ -51,8 +56,11 @@ public class PulseNotificationPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mController = new PulseNotificationPreferenceController(mContext);
-        mPreference = new Preference(RuntimeEnvironment.application);
+        mContext = spy(RuntimeEnvironment.application);
+        when(mContext.getResources()).thenReturn(mResources);
+
+        mController = new PulseNotificationPreferenceController(mContext, "testkey");
+        mPreference = new Preference(mContext);
         mPreference.setKey(mController.getPreferenceKey());
         when(mScreen.findPreference(mPreference.getKey())).thenReturn(mPreference);
     }
@@ -62,6 +70,7 @@ public class PulseNotificationPreferenceControllerTest {
         when(mContext.getResources().
                 getBoolean(com.android.internal.R.bool.config_intrusiveNotificationLed))
                 .thenReturn(true);
+
         mController.displayPreference(mScreen);
 
         assertThat(mPreference.isVisible()).isTrue();
@@ -84,7 +93,7 @@ public class PulseNotificationPreferenceControllerTest {
         final Context context = RuntimeEnvironment.application;
         Settings.System.putInt(context.getContentResolver(), NOTIFICATION_LIGHT_PULSE, 1);
 
-        mController = new PulseNotificationPreferenceController(context);
+        mController = new PulseNotificationPreferenceController(context, "testkey");
         mController.updateState(preference);
 
         verify(preference).setChecked(true);
@@ -96,9 +105,65 @@ public class PulseNotificationPreferenceControllerTest {
         final Context context = RuntimeEnvironment.application;
         Settings.System.putInt(context.getContentResolver(), NOTIFICATION_LIGHT_PULSE, 0);
 
-        mController = new PulseNotificationPreferenceController(context);
+        mController = new PulseNotificationPreferenceController(context, "testkey");
         mController.updateState(preference);
 
         verify(preference).setChecked(false);
+    }
+
+    @Test
+    public void isAvailable_configTrue_shouldReturnTrue() {
+        when(mContext.getResources().
+                getBoolean(com.android.internal.R.bool.config_intrusiveNotificationLed)).thenReturn(
+                true);
+
+        assertThat(mController.isAvailable()).isTrue();
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.AVAILABLE);
+    }
+
+    @Test
+    public void isAvailable_configFalse_shouldReturnFalse() {
+        when(mContext.getResources().
+                getBoolean(com.android.internal.R.bool.config_intrusiveNotificationLed)).thenReturn(
+                false);
+
+        assertThat(mController.isAvailable()).isFalse();
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.DISABLED_UNSUPPORTED);
+    }
+
+    @Test
+    public void isChecked_configOn_shouldReturnTrue() {
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_LIGHT_PULSE, 1);
+
+        assertThat(mController.isChecked()).isTrue();
+    }
+
+    @Test
+    public void isChecked_configOff_shouldReturnFalse() {
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_LIGHT_PULSE, 0);
+
+        assertThat(mController.isChecked()).isFalse();
+    }
+
+    @Test
+    public void testSetChecked_configIsSet_shouldReturnTrue() {
+        mController.setChecked(true);
+
+        assertThat(mController.isChecked()).isTrue();
+        assertThat(
+                Settings.Secure.getInt(mContext.getContentResolver(), NOTIFICATION_LIGHT_PULSE, 0))
+                .isEqualTo(1);
+    }
+
+    @Test
+    public void testSetChecked_configIsNotSet_shouldReturnFalse() {
+        mController.setChecked(false);
+
+        assertThat(mController.isChecked()).isFalse();
+        assertThat(
+                Settings.Secure.getInt(mContext.getContentResolver(), NOTIFICATION_LIGHT_PULSE, 1))
+                .isEqualTo(0);
     }
 }
