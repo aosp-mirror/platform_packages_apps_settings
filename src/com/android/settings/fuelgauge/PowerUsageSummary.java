@@ -107,7 +107,8 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
     BatteryHeaderPreferenceController mBatteryHeaderPreferenceController;
     @VisibleForTesting
     boolean mNeedUpdateBatteryTip;
-    private BatteryTipPreferenceController mBatteryTipPreferenceController;
+    @VisibleForTesting
+    BatteryTipPreferenceController mBatteryTipPreferenceController;
     private int mStatsType = BatteryStats.STATS_SINCE_CHARGED;
 
     @VisibleForTesting
@@ -213,8 +214,8 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
         mAnomalySparseArray = new SparseArray<>();
 
         restartBatteryInfoLoader();
-        mNeedUpdateBatteryTip = icicle == null;
         mBatteryTipPreferenceController.restoreInstanceState(icicle);
+        updateBatteryTipFlag(icicle);
     }
 
     @Override
@@ -380,6 +381,11 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
             View header = mBatteryLayoutPref.findViewById(R.id.summary1);
             header.setOnLongClickListener(this);
         }
+    }
+
+    @VisibleForTesting
+    void updateBatteryTipFlag(Bundle icicle) {
+        mNeedUpdateBatteryTip = icicle == null || mBatteryTipPreferenceController.needUpdate();
     }
 
     @Override
