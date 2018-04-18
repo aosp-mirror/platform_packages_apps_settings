@@ -81,7 +81,7 @@ public class SlicesDatabaseAccessor {
      */
     public SliceData getSliceDataFromKey(String key) {
         Cursor cursor = getIndexedSliceData(key);
-        return buildSliceData(cursor, null /* uri */, false /* isInlineOnly */);
+        return buildSliceData(cursor, null /* uri */, false /* isIntentOnly */);
     }
 
     /**
@@ -144,7 +144,7 @@ public class SlicesDatabaseAccessor {
                 .toString();
     }
 
-    private SliceData buildSliceData(Cursor cursor, Uri uri, boolean isInlineOnly) {
+    private SliceData buildSliceData(Cursor cursor, Uri uri, boolean isIntentOnly) {
         final String key = cursor.getString(cursor.getColumnIndex(IndexColumns.KEY));
         final String title = cursor.getString(cursor.getColumnIndex(IndexColumns.TITLE));
         final String summary = cursor.getString(cursor.getColumnIndex(IndexColumns.SUMMARY));
@@ -160,7 +160,7 @@ public class SlicesDatabaseAccessor {
         int sliceType = cursor.getInt(
                 cursor.getColumnIndex(IndexColumns.SLICE_TYPE));
 
-        if (!isInlineOnly) {
+        if (isIntentOnly) {
             sliceType = SliceData.SliceType.INTENT;
         }
 

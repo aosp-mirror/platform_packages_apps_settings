@@ -113,13 +113,13 @@ public class SliceBuilderUtils {
      * - key
      * <p>
      * Examples of valid paths are:
-     * - intent/wifi
-     * - intent/bluetooth
-     * - action/wifi
-     * - action/accessibility/servicename
+     * - /intent/wifi
+     * - /intent/bluetooth
+     * - /action/wifi
+     * - /action/accessibility/servicename
      *
      * @param uri of the Slice. Follows pattern outlined in {@link SettingsSliceProvider}.
-     * @return Pair whose first element {@code true} if the path is prepended with "action", and
+     * @return Pair whose first element {@code true} if the path is prepended with "intent", and
      * second is a key.
      */
     public static Pair<Boolean, String> getPathData(Uri uri) {
@@ -133,10 +133,10 @@ public class SliceBuilderUtils {
             return null;
         }
 
-        final boolean isInline = TextUtils.equals(SettingsSlicesContract.PATH_SETTING_ACTION,
+        final boolean isIntent = TextUtils.equals(SettingsSlicesContract.PATH_SETTING_INTENT,
                 split[1]);
 
-        return new Pair<>(isInline, split[2]);
+        return new Pair<>(isIntent, split[2]);
     }
 
     /**
@@ -215,8 +215,8 @@ public class SliceBuilderUtils {
     static Intent getContentIntent(Context context, SliceData sliceData) {
         final Uri contentUri = new Uri.Builder().appendPath(sliceData.getKey()).build();
         final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(context,
-                sliceData.getFragmentClassName(), sliceData.getKey(), sliceData.getScreenTitle(),
-                0 /* TODO */);
+                sliceData.getFragmentClassName(), sliceData.getKey(),
+                sliceData.getScreenTitle().toString(), 0 /* TODO */);
         intent.setClassName(context.getPackageName(), SubSettings.class.getName());
         intent.setData(contentUri);
         return intent;
