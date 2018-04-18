@@ -234,7 +234,7 @@ public class SettingsSliceProvider extends SliceProvider {
     void loadSlice(Uri uri) {
         long startBuildTime = System.currentTimeMillis();
 
-        SliceData sliceData = mSlicesDatabaseAccessor.getSliceDataFromUri(uri);
+        final SliceData sliceData = mSlicesDatabaseAccessor.getSliceDataFromUri(uri);
         mSliceDataCache.put(uri, sliceData);
         getContext().getContentResolver().notifyChange(uri, null /* content observer */);
 
