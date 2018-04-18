@@ -57,7 +57,7 @@ public class SliceData {
 
     private final String mSummary;
 
-    private final String mScreenTitle;
+    private final CharSequence mScreenTitle;
 
     private final int mIconResource;
 
@@ -84,7 +84,7 @@ public class SliceData {
         return mSummary;
     }
 
-    public String getScreenTitle() {
+    public CharSequence getScreenTitle() {
         return mScreenTitle;
     }
 
@@ -146,7 +146,7 @@ public class SliceData {
 
         private String mSummary;
 
-        private String mScreenTitle;
+        private CharSequence mScreenTitle;
 
         private int mIconResource;
 
@@ -175,7 +175,7 @@ public class SliceData {
             return this;
         }
 
-        public Builder setScreenTitle(String screenTitle) {
+        public Builder setScreenTitle(CharSequence screenTitle) {
             mScreenTitle = screenTitle;
             return this;
         }

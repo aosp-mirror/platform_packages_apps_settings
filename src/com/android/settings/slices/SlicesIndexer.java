@@ -104,7 +104,7 @@ class SlicesIndexer implements Runnable {
             values.put(IndexColumns.KEY, dataRow.getKey());
             values.put(IndexColumns.TITLE, dataRow.getTitle());
             values.put(IndexColumns.SUMMARY, dataRow.getSummary());
-            values.put(IndexColumns.SCREENTITLE, dataRow.getScreenTitle());
+            values.put(IndexColumns.SCREENTITLE, dataRow.getScreenTitle().toString());
             values.put(IndexColumns.ICON_RESOURCE, dataRow.getIconResource());
             values.put(IndexColumns.FRAGMENT, dataRow.getFragmentClassName());
             values.put(IndexColumns.CONTROLLER, dataRow.getPreferenceController());
