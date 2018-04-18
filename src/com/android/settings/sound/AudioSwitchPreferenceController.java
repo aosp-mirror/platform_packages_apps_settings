@@ -193,8 +193,12 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
     public void onDeviceBondStateChanged(CachedBluetoothDevice cachedDevice, int bondState) {
     }
 
+    protected boolean isStreamFromOutputDevice(int streamType, int device) {
+        return mAudioManager.getDevicesForStream(streamType) == device;
+    }
+
     protected boolean isOngoingCallStatus() {
-        int audioMode = mAudioManager.getMode();
+        final int audioMode = mAudioManager.getMode();
         return audioMode == AudioManager.MODE_RINGTONE
                 || audioMode == AudioManager.MODE_IN_CALL
                 || audioMode == AudioManager.MODE_IN_COMMUNICATION;

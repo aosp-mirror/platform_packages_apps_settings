@@ -146,10 +146,16 @@ public class SoundSettings extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        use(AlarmVolumePreferenceController.class).setCallback(mVolumeCallback);
-        use(MediaVolumePreferenceController.class).setCallback(mVolumeCallback);
-        use(RingVolumePreferenceController.class).setCallback(mVolumeCallback);
-        use(NotificationVolumePreferenceController.class).setCallback(mVolumeCallback);
+        ArrayList<VolumeSeekBarPreferenceController> volumeControllers = new ArrayList<>();
+        volumeControllers.add(use(AlarmVolumePreferenceController.class));
+        volumeControllers.add(use(MediaVolumePreferenceController.class));
+        volumeControllers.add(use(RingVolumePreferenceController.class));
+        volumeControllers.add(use(NotificationVolumePreferenceController.class));
+
+        for (VolumeSeekBarPreferenceController controller : volumeControllers) {
+            controller.setCallback(mVolumeCallback);
+            getLifecycle().addObserver(controller);
+        }
     }
 
     // === Volumes ===
@@ -205,8 +211,6 @@ public class SoundSettings extends DashboardFragment {
                 new DialPadTonePreferenceController(context, fragment, lifecycle);
         final ScreenLockSoundPreferenceController screenLockSoundPreferenceController =
                 new ScreenLockSoundPreferenceController(context, fragment, lifecycle);
-        final ChargingSoundPreferenceController chargingSoundPreferenceController =
-                new ChargingSoundPreferenceController(context, fragment, lifecycle);
         final DockingSoundPreferenceController dockingSoundPreferenceController =
                 new DockingSoundPreferenceController(context, fragment, lifecycle);
         final TouchSoundPreferenceController touchSoundPreferenceController =
@@ -222,7 +226,6 @@ public class SoundSettings extends DashboardFragment {
 
         controllers.add(dialPadTonePreferenceController);
         controllers.add(screenLockSoundPreferenceController);
-        controllers.add(chargingSoundPreferenceController);
         controllers.add(dockingSoundPreferenceController);
         controllers.add(touchSoundPreferenceController);
         controllers.add(vibrateOnTouchPreferenceController);
@@ -233,7 +236,6 @@ public class SoundSettings extends DashboardFragment {
                 "other_sounds_and_vibrations_category").setChildren(
                 Arrays.asList(dialPadTonePreferenceController,
                         screenLockSoundPreferenceController,
-                        chargingSoundPreferenceController,
                         dockingSoundPreferenceController,
                         touchSoundPreferenceController,
                         vibrateOnTouchPreferenceController,

@@ -17,6 +17,8 @@
 package com.android.settings.notification;
 
 import android.app.NotificationManager;
+import android.arch.lifecycle.LifecycleObserver;
+import android.arch.lifecycle.OnLifecycleEvent;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -31,6 +33,7 @@ import android.os.Vibrator;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.Objects;
 
@@ -58,6 +61,7 @@ public class RingVolumePreferenceController extends VolumeSeekBarPreferenceContr
         updateRingerMode();
     }
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     @Override
     public void onResume() {
         super.onResume();
@@ -66,6 +70,7 @@ public class RingVolumePreferenceController extends VolumeSeekBarPreferenceContr
         updatePreferenceIcon();
     }
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     @Override
     public void onPause() {
         super.onPause();
@@ -118,11 +123,10 @@ public class RingVolumePreferenceController extends VolumeSeekBarPreferenceContr
 
     private void updatePreferenceIcon() {
         if (mPreference != null) {
-            mPreference.showIcon(mSuppressor != null
-                ? com.android.internal.R.drawable.ic_audio_ring_notif_mute
-                : mRingerMode == AudioManager.RINGER_MODE_VIBRATE || wasRingerModeVibrate()
-                    ? com.android.internal.R.drawable.ic_audio_ring_notif_vibrate
-                    : com.android.internal.R.drawable.ic_audio_ring_notif);
+            mPreference.showIcon(
+                    mRingerMode == AudioManager.RINGER_MODE_VIBRATE || wasRingerModeVibrate()
+                            ? com.android.internal.R.drawable.ic_audio_ring_notif_vibrate
+                            : com.android.internal.R.drawable.ic_audio_ring_notif);
         }
     }
 

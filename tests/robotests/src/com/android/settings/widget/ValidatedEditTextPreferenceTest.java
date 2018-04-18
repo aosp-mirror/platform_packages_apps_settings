@@ -116,7 +116,7 @@ public class ValidatedEditTextPreferenceTest {
         mPreference.onBindDialogView(mView);
 
         assertThat(editText.getInputType()
-                & (InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_CLASS_TEXT))
+                & (InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD | InputType.TYPE_CLASS_TEXT))
                 .isNotEqualTo(0);
     }
 

@@ -16,8 +16,11 @@
 
 package com.android.settings.gestures;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -33,6 +36,7 @@ public class SwipeUpPreferenceController extends GesturePreferenceController {
     private final int ON = 1;
     private final int OFF = 0;
 
+    private static final String ACTION_QUICKSTEP = "android.intent.action.QUICKSTEP_SERVICE";
     private static final String PREF_KEY_VIDEO = "gesture_swipe_up_video";
     private final UserManager mUserManager;
 
@@ -42,6 +46,14 @@ public class SwipeUpPreferenceController extends GesturePreferenceController {
     }
 
     static boolean isGestureAvailable(Context context) {
+        final ComponentName recentsComponentName = ComponentName.unflattenFromString(
+                context.getString(com.android.internal.R.string.config_recentsComponentName));
+        final Intent quickStepIntent = new Intent(ACTION_QUICKSTEP)
+                .setPackage(recentsComponentName.getPackageName());
+        if (context.getPackageManager().resolveService(quickStepIntent,
+                PackageManager.MATCH_SYSTEM_ONLY) == null) {
+            return false;
+        }
         return true;
     }
 
