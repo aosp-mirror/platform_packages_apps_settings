@@ -86,17 +86,23 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
     protected int mType;
     protected int mState;
     protected boolean mShowDialog;
+    /**
+     * Whether we need to update battery tip when configuration change
+     */
+    protected boolean mNeedUpdate;
 
     BatteryTip(Parcel in) {
         mType = in.readInt();
         mState = in.readInt();
         mShowDialog = in.readBoolean();
+        mNeedUpdate = in.readBoolean();
     }
 
     BatteryTip(int type, int state, boolean showDialog) {
         mType = type;
         mState = state;
         mShowDialog = showDialog;
+        mNeedUpdate = true;
     }
 
     @Override
@@ -109,6 +115,7 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
         dest.writeInt(mType);
         dest.writeInt(mState);
         dest.writeBoolean(mShowDialog);
+        dest.writeBoolean(mNeedUpdate);
     }
 
     public abstract CharSequence getTitle(Context context);
@@ -142,6 +149,10 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
 
     public boolean shouldShowDialog() {
         return mShowDialog;
+    }
+
+    public boolean needUpdate() {
+        return mNeedUpdate;
     }
 
     public String getKey() {
