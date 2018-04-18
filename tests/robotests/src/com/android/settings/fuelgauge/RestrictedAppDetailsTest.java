@@ -67,8 +67,6 @@ public class RestrictedAppDetailsTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceManager mPreferenceManager;
     @Mock
-    private SettingsActivity mSettingsActivity;
-    @Mock
     private InstrumentedPreferenceFragment mFragment;
     private RestrictedAppDetails mRestrictedAppDetails;
     private Context mContext;
@@ -88,6 +86,7 @@ public class RestrictedAppDetailsTest {
 
         doReturn(mPreferenceManager).when(mRestrictedAppDetails).getPreferenceManager();
         doReturn(mContext).when(mPreferenceManager).getContext();
+        doReturn(mContext).when(mFragment).getContext();
         mRestrictedAppDetails.mPackageManager = mPackageManager;
         mRestrictedAppDetails.mIconDrawableFactory = mIconDrawableFactory;
         mRestrictedAppDetails.mAppInfos = new ArrayList<>();
@@ -119,9 +118,9 @@ public class RestrictedAppDetailsTest {
             // Get the intent in which it has the app info bundle
             mIntent = captor.getValue();
             return true;
-        }).when(mSettingsActivity).startActivity(captor.capture());
+        }).when(mContext).startActivity(captor.capture());
 
-        RestrictedAppDetails.startRestrictedAppDetails(mSettingsActivity, mFragment,
+        RestrictedAppDetails.startRestrictedAppDetails(mFragment,
                 mRestrictedAppDetails.mAppInfos);
 
         final Bundle bundle = mIntent.getBundleExtra(

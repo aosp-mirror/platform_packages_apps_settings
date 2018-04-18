@@ -43,7 +43,6 @@ public class RestrictAppPreferenceController extends BasePreferenceController {
     @VisibleForTesting
     List<AppInfo> mAppInfos;
     private AppOpsManager mAppOpsManager;
-    private SettingsActivity mSettingsActivity;
     private InstrumentedPreferenceFragment mPreferenceFragment;
     private UserManager mUserManager;
 
@@ -53,10 +52,8 @@ public class RestrictAppPreferenceController extends BasePreferenceController {
         mUserManager = context.getSystemService(UserManager.class);
     }
 
-    public RestrictAppPreferenceController(SettingsActivity settingsActivity,
-            InstrumentedPreferenceFragment preferenceFragment) {
-        this(settingsActivity.getApplicationContext());
-        mSettingsActivity = settingsActivity;
+    public RestrictAppPreferenceController(InstrumentedPreferenceFragment preferenceFragment) {
+        this(preferenceFragment.getContext());
         mPreferenceFragment = preferenceFragment;
     }
 
@@ -83,7 +80,7 @@ public class RestrictAppPreferenceController extends BasePreferenceController {
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (getPreferenceKey().equals(preference.getKey())) {
             // start fragment
-            RestrictedAppDetails.startRestrictedAppDetails(mSettingsActivity, mPreferenceFragment,
+            RestrictedAppDetails.startRestrictedAppDetails(mPreferenceFragment,
                     mAppInfos);
             return true;
         }

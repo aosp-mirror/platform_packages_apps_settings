@@ -100,6 +100,7 @@ public class AnomalyDetectionJobService extends JobService {
                     .getFactory(this).getPowerUsageFeatureProvider(this);
             final MetricsFeatureProvider metricsFeatureProvider = FeatureFactory
                     .getFactory(this).getMetricsFeatureProvider();
+            batteryUtils.initBatteryStatsHelper(batteryStatsHelper, null /* bundle */, userManager);
 
             for (JobWorkItem item = params.dequeueWork(); item != null;
                     item = params.dequeueWork()) {

@@ -25,22 +25,20 @@ import com.android.settings.fuelgauge.batterytip.AppInfo;
 import java.util.function.Predicate;
 
 /**
- * {@link Predicate} for {@link AppInfo} to check whether it has label or restricted.
+ * {@link Predicate} for {@link AppInfo} to check whether it has label
  */
-public class AppInfoPredicate implements Predicate<AppInfo> {
+public class AppLabelPredicate implements Predicate<AppInfo> {
     private Context mContext;
     private AppOpsManager mAppOpsManager;
 
-    public AppInfoPredicate(Context context) {
+    public AppLabelPredicate(Context context) {
         mContext = context;
         mAppOpsManager = context.getSystemService(AppOpsManager.class);
     }
 
     @Override
     public boolean test(AppInfo appInfo) {
-        // Return true if app doesn't have label or already been restricted
-        return Utils.getApplicationLabel(mContext, appInfo.packageName) == null
-                || mAppOpsManager.checkOpNoThrow(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND,
-                appInfo.uid, appInfo.packageName) == AppOpsManager.MODE_IGNORED;
+        // Return true if app doesn't have label
+        return Utils.getApplicationLabel(mContext, appInfo.packageName) == null;
     }
 }
