@@ -16,7 +16,7 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:settings="http://schemas.android.com/apk/res-auto"
-        settings:initialExpandedChildrenCount="500">
+        android:key="app_notifications">
 
     <com.android.settings.applications.LayoutPreference
         android:key="pref_app_header"
@@ -42,14 +42,6 @@
         android:key="visibility_override"
         android:title="@string/app_notification_visibility_override_title"/>
 
-    <!-- Show badge -->
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="badge"
-        android:title="@string/notification_badge_title"
-        android:order="501"
-        settings:useAdditionalSummary="true"
-        settings:restrictedSwitchSummary="@string/enabled_by_admin" />
-
     <!-- Bypass DND -->
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="bypass_dnd"
@@ -57,10 +49,23 @@
         android:summary="@string/app_notification_override_dnd_summary"
         settings:useAdditionalSummary="true"/>
 
-    <Preference
-        android:key="app_link"
-        android:title="@string/app_settings_link"
-        android:order="502" />
+    <PreferenceCategory
+        android:key="app_advanced"
+        android:order="1000"
+        settings:initialExpandedChildrenCount="0">
+        <!-- Show badge -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="badge"
+            android:title="@string/notification_badge_title"
+            settings:useAdditionalSummary="true"
+            android:order="1001"
+            settings:restrictedSwitchSummary="@string/enabled_by_admin" />
+        <Preference
+            android:key="app_link"
+            android:order="1002"
+            android:title="@string/app_settings_link" />
+
+    </PreferenceCategory>
 
     <com.android.settings.notification.NotificationFooterPreference
         android:key="desc"
