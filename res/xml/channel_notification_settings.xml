@@ -14,9 +14,12 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:settings="http://schemas.android.com/apk/res-auto"
-        settings:initialExpandedChildrenCount="3">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="channel_settings"
+    android:title="@string/notification_channel_title"
+    settings:initialExpandedChildrenCount="3" >
 
     <com.android.settings.applications.LayoutPreference
         android:key="pref_app_header"
