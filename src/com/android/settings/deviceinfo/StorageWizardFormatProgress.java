@@ -57,8 +57,8 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
 
         mFormatPrivate = getIntent().getBooleanExtra(EXTRA_FORMAT_PRIVATE, false);
 
-        setHeaderText(R.string.storage_wizard_format_progress_title, mDisk.getShortDescription());
-        setBodyText(R.string.storage_wizard_format_progress_body, mDisk.getDescription());
+        setHeaderText(R.string.storage_wizard_format_progress_title, getDiskShortDescription());
+        setBodyText(R.string.storage_wizard_format_progress_body, getDiskDescription());
 
         mTask = (PartitionTask) getLastNonConfigurationInstance();
         if (mTask == null) {

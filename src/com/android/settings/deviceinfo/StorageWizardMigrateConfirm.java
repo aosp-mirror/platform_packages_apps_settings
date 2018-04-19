@@ -59,7 +59,7 @@ public class StorageWizardMigrateConfirm extends StorageWizardBase {
         }
 
         setIcon(R.drawable.ic_swap_horiz);
-        setHeaderText(R.string.storage_wizard_migrate_v2_title, mDisk.getShortDescription());
+        setHeaderText(R.string.storage_wizard_migrate_v2_title, getDiskShortDescription());
         setBodyText(R.string.memory_calculating_size);
         setAuxChecklist();
 
@@ -67,7 +67,7 @@ public class StorageWizardMigrateConfirm extends StorageWizardBase {
             @Override
             public void onPostExecute(String size, String time) {
                 setBodyText(R.string.storage_wizard_migrate_v2_body,
-                        mDisk.getDescription(), size, time);
+                        getDiskDescription(), size, time);
             }
         };
 
