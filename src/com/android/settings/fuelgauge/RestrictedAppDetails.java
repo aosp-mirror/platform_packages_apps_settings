@@ -133,7 +133,8 @@ public class RestrictedAppDetails extends DashboardFragment {
             try {
                 final ApplicationInfo applicationInfo = mPackageManager.getApplicationInfoAsUser(
                         appInfo.packageName, 0 /* flags */, UserHandle.getUserId(appInfo.uid));
-                checkBoxPreference.setChecked(true);
+                checkBoxPreference.setChecked(
+                        mBatteryUtils.isForceAppStandbyEnabled(appInfo.uid, appInfo.packageName));
                 checkBoxPreference.setTitle(mPackageManager.getApplicationLabel(applicationInfo));
                 checkBoxPreference.setIcon(
                         Utils.getBadgedIcon(mIconDrawableFactory, mPackageManager,
