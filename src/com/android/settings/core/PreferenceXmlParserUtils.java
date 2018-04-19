@@ -77,6 +77,7 @@ public class PreferenceXmlParserUtils {
         int FLAG_NEED_PREF_SUMMARY = 1 << 5;
         int FLAG_NEED_PREF_ICON = 1 << 6;
         int FLAG_NEED_PLATFORM_SLICE_FLAG = 1 << 7;
+        int FLAG_NEED_KEYWORDS = 1 << 8;
     }
 
     public static final String METADATA_PREF_TYPE = "type";
@@ -86,6 +87,7 @@ public class PreferenceXmlParserUtils {
     public static final String METADATA_SUMMARY = "summary";
     public static final String METADATA_ICON = "icon";
     public static final String METADATA_PLATFORM_SLICE_FLAG = "platform_slice";
+    public static final String METADATA_KEYWORDS = "keywords";
 
     private static final String ENTRIES_SEPARATOR = "|";
 
@@ -226,6 +228,9 @@ public class PreferenceXmlParserUtils {
                 preferenceMetadata.putBoolean(METADATA_PLATFORM_SLICE_FLAG,
                         getPlatformSlice(preferenceAttributes));
             }
+            if (hasFlag(flags, MetadataFlag.FLAG_NEED_KEYWORDS)) {
+                preferenceMetadata.putString(METADATA_KEYWORDS, getKeywords(preferenceAttributes));
+            }
             metadata.add(preferenceMetadata);
 
             preferenceAttributes.recycle();
@@ -304,5 +309,9 @@ public class PreferenceXmlParserUtils {
 
     private static boolean getPlatformSlice(TypedArray styledAttributes) {
         return styledAttributes.getBoolean(R.styleable.Preference_platform_slice, false /* def */);
+    }
+
+    private static String getKeywords(TypedArray styleAttributes) {
+        return styleAttributes.getString(R.styleable.Preference_keywords);
     }
 }
