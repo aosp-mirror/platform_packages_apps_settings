@@ -26,6 +26,7 @@ import android.graphics.Typeface;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.support.v7.preference.PreferenceViewHolder;
+import android.telephony.SubscriptionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -398,6 +399,31 @@ public class DataUsageSummaryPreferenceTest {
         bindViewHolder();
         assertThat(mDataUsed.getText().toString()).isEqualTo("1.00 MB used");
         assertThat(mDataRemaining.getText()).isEqualTo("");
+    }
+
+    @Test
+    public void testSetAppIntent_toMdpApp_intentCorrect() {
+        final Activity activity = Robolectric.setupActivity(Activity.class);
+        final Intent intent = new Intent(SubscriptionManager.ACTION_MANAGE_SUBSCRIPTION_PLANS);
+        intent.setPackage("test-owner.example.com");
+        intent.putExtra(SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX, 42);
+
+        mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, DUMMY_CARRIER, 0 /* numPlans */,
+                intent);
+
+        bindViewHolder();
+        assertThat(mLaunchButton.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(mLaunchButton.getText())
+                .isEqualTo(mContext.getString(R.string.launch_mdp_app_text));
+
+        mLaunchButton.callOnClick();
+        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
+        Intent startedIntent = shadowActivity.getNextStartedActivity();
+        assertThat(startedIntent.getAction())
+                .isEqualTo(SubscriptionManager.ACTION_MANAGE_SUBSCRIPTION_PLANS);
+        assertThat(startedIntent.getPackage()).isEqualTo("test-owner.example.com");
+        assertThat(startedIntent.getIntExtra(SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX, -1))
+                .isEqualTo(42);
     }
 
     @Test
