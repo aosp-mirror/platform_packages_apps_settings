@@ -416,6 +416,11 @@ public class BatteryUtils {
         mAppOpsManager.setMode(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, uid, packageName, mode);
     }
 
+    public boolean isForceAppStandbyEnabled(int uid, String packageName) {
+        return mAppOpsManager.checkOpNoThrow(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, uid,
+                packageName) == AppOpsManager.MODE_IGNORED;
+    }
+
     public void initBatteryStatsHelper(BatteryStatsHelper statsHelper, Bundle bundle,
             UserManager userManager) {
         statsHelper.create(bundle);
