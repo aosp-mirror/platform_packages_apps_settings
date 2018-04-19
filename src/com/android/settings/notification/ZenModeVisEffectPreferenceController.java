@@ -24,6 +24,7 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settings.widget.DisabledCheckBoxPreference;
 
 public class ZenModeVisEffectPreferenceController
         extends AbstractZenModePreferenceController
@@ -78,9 +79,9 @@ public class ZenModeVisEffectPreferenceController
         if (parentSuppressed) {
             ((CheckBoxPreference) preference).setChecked(parentSuppressed);
             onPreferenceChange(preference, parentSuppressed);
-            preference.setEnabled(false);
+            ((DisabledCheckBoxPreference) preference).enableCheckbox(false);
         } else {
-            preference.setEnabled(true);
+            ((DisabledCheckBoxPreference) preference).enableCheckbox(true);
             ((CheckBoxPreference) preference).setChecked(suppressed);
         }
     }
