@@ -23,6 +23,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.icu.text.ListFormatter;
 import android.provider.SearchIndexableResource;
 import android.support.annotation.VisibleForTesting;
 import android.text.BidiFormatter;
@@ -175,25 +176,22 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         @Override
         public void setListening(boolean listening) {
             if (listening) {
-                String summary = BidiFormatter.getInstance()
-                        .unicodeWrap(mContext.getString(R.string.wifi_settings_title));
+                final List<String> summaries = new ArrayList<>();
+
+                summaries.add(BidiFormatter.getInstance()
+                        .unicodeWrap(mContext.getString(R.string.wifi_settings_title)));
                 if (mMobileNetworkPreferenceController.isAvailable()) {
-                    final String mobileSettingSummary = mContext.getString(
-                            R.string.network_dashboard_summary_mobile);
-                    summary = mContext.getString(R.string.join_many_items_middle, summary,
-                            mobileSettingSummary);
+                    summaries.add(mContext.getString(
+                            R.string.network_dashboard_summary_mobile));
                 }
                 final String dataUsageSettingSummary = mContext.getString(
                         R.string.network_dashboard_summary_data_usage);
-                summary = mContext.getString(R.string.join_many_items_middle, summary,
-                        dataUsageSettingSummary);
+                summaries.add(dataUsageSettingSummary);
                 if (mTetherPreferenceController.isAvailable()) {
-                    final String hotspotSettingSummary = mContext.getString(
-                            R.string.network_dashboard_summary_hotspot);
-                    summary = mContext.getString(R.string.join_many_items_middle, summary,
-                            hotspotSettingSummary);
+                    summaries.add(mContext.getString(
+                            R.string.network_dashboard_summary_hotspot));
                 }
-                mSummaryLoader.setSummary(this, summary);
+                mSummaryLoader.setSummary(this, ListFormatter.getInstance().format(summaries));
             }
         }
     }

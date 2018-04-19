@@ -16,18 +16,14 @@
 package com.android.settings.network;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.provider.SearchIndexableResource;
-import android.view.Menu;
 
-import com.android.settings.R;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.drawer.CategoryKey;
@@ -35,45 +31,41 @@ import com.android.settingslib.drawer.CategoryKey;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class NetworkDashboardFragmentTest {
 
-    @Mock
     private Context mContext;
 
     private NetworkDashboardFragment mFragment;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
+        mContext = RuntimeEnvironment.application;
         mFragment = new NetworkDashboardFragment();
     }
 
     @Test
-    public void testCategory_isNetwork() {
+    public void getCategoryKey_isNetwork() {
         assertThat(mFragment.getCategoryKey()).isEqualTo(CategoryKey.CATEGORY_NETWORK);
     }
 
     @Test
-    public void testSearchIndexProvider_shouldIndexResource() {
+    public void getXmlResourcesToIndex_shouldIncludeFragmentXml() {
         final List<SearchIndexableResource> indexRes =
                 NetworkDashboardFragment.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(
-                    RuntimeEnvironment.application,
+                        mContext,
                         true /* enabled */);
 
-        assertThat(indexRes).isNotNull();
+        assertThat(indexRes).hasSize(1);
         assertThat(indexRes.get(0).xmlResId).isEqualTo(mFragment.getPreferenceScreenResId());
     }
 
     @Test
-    public void testSummaryProvider_hasMobileAndHotspot_shouldReturnMobileSummary() {
+    public void summaryProviderSetListening_hasMobileAndHotspot_shouldReturnMobileSummary() {
         final MobileNetworkPreferenceController mobileNetworkPreferenceController =
                 mock(MobileNetworkPreferenceController.class);
         final TetherPreferenceController tetherPreferenceController =
@@ -93,15 +85,11 @@ public class NetworkDashboardFragmentTest {
 
         provider.setListening(true);
 
-        verify(mContext).getString(R.string.wifi_settings_title);
-        verify(mContext).getString(R.string.network_dashboard_summary_data_usage);
-        verify(mContext).getString(R.string.network_dashboard_summary_hotspot);
-        verify(mContext).getString(R.string.network_dashboard_summary_mobile);
-        verify(mContext, times(3)).getString(R.string.join_many_items_middle, null, null);
+        verify(summaryLoader).setSummary(provider, "Wi\u2011Fi, mobile, data usage, and hotspot");
     }
 
     @Test
-    public void testSummaryProvider_noMobileOrHotspot_shouldReturnSimpleSummary() {
+    public void summaryProviderSetListening_noMobileOrHotspot_shouldReturnSimpleSummary() {
         final MobileNetworkPreferenceController mobileNetworkPreferenceController =
                 mock(MobileNetworkPreferenceController.class);
         final TetherPreferenceController tetherPreferenceController =
@@ -121,8 +109,6 @@ public class NetworkDashboardFragmentTest {
 
         provider.setListening(true);
 
-        verify(mContext).getString(R.string.wifi_settings_title);
-        verify(mContext).getString(R.string.network_dashboard_summary_data_usage);
-        verify(mContext).getString(R.string.join_many_items_middle, null, null);
+        verify(summaryLoader).setSummary(provider, "Wi\u2011Fi and data usage");
     }
 }
