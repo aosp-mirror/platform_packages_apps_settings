@@ -39,7 +39,8 @@ public class SmartBatteryDetector implements BatteryTipDetector {
     public BatteryTip detect() {
         // Show it if there is no other tips shown
         final boolean smartBatteryOff = Settings.Global.getInt(mContentResolver,
-                Settings.Global.APP_STANDBY_ENABLED, 1) == 0 || mPolicy.testSmartBatteryTip;
+                Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED, 1) == 0
+                || mPolicy.testSmartBatteryTip;
         final int state =
                 smartBatteryOff ? BatteryTip.StateType.NEW : BatteryTip.StateType.INVISIBLE;
         return new SmartBatteryTip(state);

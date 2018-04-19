@@ -61,14 +61,16 @@ public class SmartBatteryDetectorTest {
 
     @Test
     public void testDetect_smartBatteryOff_tipVisible() {
-        Settings.Global.putInt(mContentResolver, Settings.Global.APP_STANDBY_ENABLED, 0);
+        Settings.Global.putInt(mContentResolver,
+                Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED, 0);
 
         assertThat(mSmartBatteryDetector.detect().isVisible()).isTrue();
     }
 
     @Test
     public void testDetect_smartBatteryOn_tipInvisible() {
-        Settings.Global.putInt(mContentResolver, Settings.Global.APP_STANDBY_ENABLED, 1);
+        Settings.Global.putInt(mContentResolver,
+                Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED, 1);
 
         assertThat(mSmartBatteryDetector.detect().isVisible()).isFalse();
     }
