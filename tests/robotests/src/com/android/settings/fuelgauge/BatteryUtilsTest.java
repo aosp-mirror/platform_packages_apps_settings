@@ -565,6 +565,22 @@ public class BatteryUtilsTest {
     }
 
     @Test
+    public void testIsForceAppStandbyEnabled_enabled_returnTrue() {
+        when(mAppOpsManager.checkOpNoThrow(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID,
+                PACKAGE_NAME)).thenReturn(AppOpsManager.MODE_IGNORED);
+
+        assertThat(mBatteryUtils.isForceAppStandbyEnabled(UID, PACKAGE_NAME)).isTrue();
+    }
+
+    @Test
+    public void testIsForceAppStandbyEnabled_disabled_returnFalse() {
+        when(mAppOpsManager.checkOpNoThrow(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID,
+                PACKAGE_NAME)).thenReturn(AppOpsManager.MODE_ALLOWED);
+
+        assertThat(mBatteryUtils.isForceAppStandbyEnabled(UID, PACKAGE_NAME)).isFalse();
+    }
+
+    @Test
     public void testIsAppHeavilyUsed_usageMoreThanThreshold_returnTrue() {
         assertThat(mBatteryUtils.isAppHeavilyUsed(mBatteryStatsHelper, mUserManager, UID,
                 10 /* threshold */ )).isTrue();
