@@ -19,8 +19,6 @@ package com.android.settings.security;
 import android.content.Context;
 import android.os.UserHandle;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.TwoStatePreference;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.core.BasePreferenceController;
@@ -28,12 +26,10 @@ import com.android.settings.core.TogglePreferenceController;
 
 public class LockdownButtonPreferenceController extends TogglePreferenceController {
 
-    private static final String KEY_LOCKDOWN_ENALBED = "security_setting_lockdown_enabled";
-
     private final LockPatternUtils mLockPatternUtils;
 
-    public LockdownButtonPreferenceController(Context context) {
-        super(context, KEY_LOCKDOWN_ENALBED);
+    public LockdownButtonPreferenceController(Context context, String key) {
+        super(context, key);
         mLockPatternUtils = new LockPatternUtils(context);
     }
 
