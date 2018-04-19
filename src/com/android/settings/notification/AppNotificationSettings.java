@@ -125,7 +125,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
         mControllers.add(new VibrationPreferenceController(context, mBackend));
         mControllers.add(new VisibilityPreferenceController(context, new LockPatternUtils(context),
                 mBackend));
-        mControllers.add(new DndPreferenceController(context, getLifecycle(), mBackend));
+        mControllers.add(new DndPreferenceController(context, mBackend));
         mControllers.add(new AppLinkPreferenceController(context));
         mControllers.add(new DescriptionPreferenceController(context));
         mControllers.add(new NotificationsOffPreferenceController(context));

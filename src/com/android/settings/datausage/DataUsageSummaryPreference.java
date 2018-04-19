@@ -187,7 +187,7 @@ public class DataUsageSummaryPreference extends Preference {
             updateCarrierInfo(carrierInfo);
             if (mLaunchIntent != null) {
                 launchButton.setOnClickListener((view) -> {
-                    getContext().sendBroadcast(mLaunchIntent);
+                    getContext().startActivity(mLaunchIntent);
                 });
                 launchButton.setVisibility(View.VISIBLE);
             } else {

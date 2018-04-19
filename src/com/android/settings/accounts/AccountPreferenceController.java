@@ -40,6 +40,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
+import android.text.BidiFormatter;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.SparseArray;
@@ -313,7 +314,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
         preferenceGroup.setOrder(mAccountProfileOrder++);
         if (isSingleProfile()) {
             preferenceGroup.setTitle(context.getString(R.string.account_for_section_header,
-                userInfo.name));
+                    BidiFormatter.getInstance().unicodeWrap(userInfo.name)));
             preferenceGroup.setContentDescription(
                 mContext.getString(R.string.account_settings));
         } else if (userInfo.isManagedProfile()) {

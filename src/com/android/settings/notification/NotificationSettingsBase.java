@@ -58,6 +58,7 @@ import java.util.List;
 abstract public class NotificationSettingsBase extends DashboardFragment {
     private static final String TAG = "NotifiSettingsBase";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
+    protected static final String ARG_FROM_SETTINGS = "fromSettings";
 
     protected PackageManager mPm;
     protected NotificationBackend mBackend = new NotificationBackend();
@@ -249,6 +250,7 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
         channelArgs.putInt(AppInfoBase.ARG_PACKAGE_UID, mUid);
         channelArgs.putString(AppInfoBase.ARG_PACKAGE_NAME, mPkg);
         channelArgs.putString(Settings.EXTRA_CHANNEL_ID, channel.getId());
+        channelArgs.putBoolean(ARG_FROM_SETTINGS, true);
         channelPref.setIntent(new SubSettingLauncher(getActivity())
                 .setDestination(ChannelNotificationSettings.class.getName())
                 .setArguments(channelArgs)
