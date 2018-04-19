@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
@@ -70,14 +71,28 @@ public class DisabledCheckBoxPreferenceTest {
     }
 
     @Test
-    public void checkboxOnClick_doesNothing() {
+    public void checkboxOnClick_checkboxDisabled() {
         Preference.OnPreferenceClickListener onClick =
                 mock(Preference.OnPreferenceClickListener.class);
         mPref.setOnPreferenceClickListener(onClick);
         inflatePreference();
 
+        mPref.enableCheckbox(false);
         mPref.performClick(mRootView);
 
         verify(onClick, never()).onPreferenceClick(any());
+    }
+
+    @Test
+    public void checkboxOnClick_checkboxEnabled() {
+        Preference.OnPreferenceClickListener onClick =
+                mock(Preference.OnPreferenceClickListener.class);
+        mPref.setOnPreferenceClickListener(onClick);
+        inflatePreference();
+
+        mPref.enableCheckbox(true);
+        mPref.performClick(mRootView);
+
+        verify(onClick, times(1)).onPreferenceClick(any());
     }
 }
