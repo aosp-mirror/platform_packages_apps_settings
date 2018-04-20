@@ -60,6 +60,7 @@ public class SliceBuilderUtilsTest {
     private final String TITLE = "title";
     private final String SUMMARY = "summary";
     private final String SCREEN_TITLE = "screen title";
+    private final String KEYWORDS = "a, b, c";
     private final String FRAGMENT_NAME = "fragment name";
     private final int ICON = 1234; // I declare a thumb war
     private final Uri URI = Uri.parse("content://com.android.settings.slices/test");
@@ -422,6 +423,7 @@ public class SliceBuilderUtilsTest {
                 .setTitle(TITLE)
                 .setSummary(summary)
                 .setScreenTitle(SCREEN_TITLE)
+                .setKeywords(KEYWORDS)
                 .setIcon(ICON)
                 .setFragmentName(FRAGMENT_NAME)
                 .setUri(URI)

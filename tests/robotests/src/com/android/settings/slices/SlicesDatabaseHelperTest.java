@@ -66,6 +66,7 @@ public class SlicesDatabaseHelperTest {
                 IndexColumns.TITLE,
                 IndexColumns.SUMMARY,
                 IndexColumns.SCREENTITLE,
+                IndexColumns.KEYWORDS,
                 IndexColumns.ICON_RESOURCE,
                 IndexColumns.FRAGMENT,
                 IndexColumns.CONTROLLER,
