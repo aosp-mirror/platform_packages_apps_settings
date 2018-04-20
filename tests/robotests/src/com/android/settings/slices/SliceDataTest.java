@@ -67,7 +67,7 @@ public class SliceDataTest {
         assertThat(data.isPlatformDefined()).isEqualTo(IS_PLATFORM_DEFINED);
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test(expected = SliceData.InvalidSliceDataException.class)
     public void testBuilder_noKey_throwsIllegalStateException() {
         new SliceData.Builder()
                 .setTitle(TITLE)
@@ -80,7 +80,7 @@ public class SliceDataTest {
                 .build();
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test(expected = SliceData.InvalidSliceDataException.class)
     public void testBuilder_noTitle_throwsIllegalStateException() {
         new SliceData.Builder()
                 .setKey(KEY)
@@ -93,7 +93,7 @@ public class SliceDataTest {
                 .build();
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test(expected = SliceData.InvalidSliceDataException.class)
     public void testBuilder_noFragment_throwsIllegalStateException() {
         new SliceData.Builder()
                 .setKey(KEY)
@@ -106,7 +106,7 @@ public class SliceDataTest {
                 .build();
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test(expected = SliceData.InvalidSliceDataException.class)
     public void testBuilder_noPrefController_throwsIllegalStateException() {
         new SliceData.Builder()
                 .setKey(KEY)
