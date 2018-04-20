@@ -36,15 +36,17 @@ import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
 public class WifiTetherSwitchBarController implements SwitchWidgetController.OnSwitchChangeListener,
-        LifecycleObserver, OnStart, OnStop {
+        LifecycleObserver, OnStart, OnStop, DataSaverBackend.Listener {
 
     private static final IntentFilter WIFI_INTENT_FILTER;
 
     private final Context mContext;
     private final SwitchWidgetController mSwitchBar;
     private final ConnectivityManager mConnectivityManager;
-    private final DataSaverBackend mDataSaverBackend;
     private final WifiManager mWifiManager;
+
+    @VisibleForTesting
+    final DataSaverBackend mDataSaverBackend;
     @VisibleForTesting
     final ConnectivityManager.OnStartTetheringCallback mOnStartTetheringCallback =
             new ConnectivityManager.OnStartTetheringCallback() {
@@ -75,12 +77,14 @@ public class WifiTetherSwitchBarController implements SwitchWidgetController.OnS
 
     @Override
     public void onStart() {
+        mDataSaverBackend.addListener(this);
         mSwitchBar.startListening();
         mContext.registerReceiver(mReceiver, WIFI_INTENT_FILTER);
     }
 
     @Override
     public void onStop() {
+        mDataSaverBackend.remListener(this);
         mSwitchBar.stopListening();
         mContext.unregisterReceiver(mReceiver);
     }
@@ -156,5 +160,20 @@ public class WifiTetherSwitchBarController implements SwitchWidgetController.OnS
         } else {
             mSwitchBar.setEnabled(false);
         }
+    }
+
+    @Override
+    public void onDataSaverChanged(boolean isDataSaving) {
+        updateWifiSwitch();
+    }
+
+    @Override
+    public void onWhitelistStatusChanged(int uid, boolean isWhitelisted) {
+        // we don't care, since we just want to read the value
+    }
+
+    @Override
+    public void onBlacklistStatusChanged(int uid, boolean isBlacklisted) {
+        // we don't care, since we just want to read the value
     }
 }
