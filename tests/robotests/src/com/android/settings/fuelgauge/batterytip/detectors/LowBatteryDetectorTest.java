@@ -58,6 +58,7 @@ public class LowBatteryDetectorTest {
         mContext = RuntimeEnvironment.application;
         mShadowPowerManager = Shadows.shadowOf(mContext.getSystemService(PowerManager.class));
         ReflectionHelpers.setField(mPolicy, "lowBatteryEnabled", true);
+        ReflectionHelpers.setField(mPolicy, "lowBatteryHour", 3);
         mBatteryInfo.discharging = true;
 
         mLowBatteryDetector = new LowBatteryDetector(mContext, mPolicy, mBatteryInfo);
@@ -69,6 +70,13 @@ public class LowBatteryDetectorTest {
         mShadowPowerManager.setIsPowerSaveMode(true);
 
         assertThat(mLowBatteryDetector.detect().isVisible()).isFalse();
+    }
+
+    @Test
+    public void testDetect_enabledByTest_tipNew() {
+        ReflectionHelpers.setField(mPolicy, "testLowBatteryTip", true);
+
+        assertThat(mLowBatteryDetector.detect().getState()).isEqualTo(BatteryTip.StateType.NEW);
     }
 
     @Test
