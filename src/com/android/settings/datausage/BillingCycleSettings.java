@@ -402,7 +402,6 @@ public class BillingCycleSettings extends DataUsageBase implements
      */
     public static class ConfirmLimitFragment extends InstrumentedDialogFragment implements
             DialogInterface.OnClickListener {
-        private static final String EXTRA_MESSAGE = "message";
         @VisibleForTesting static final String EXTRA_LIMIT_BYTES = "limitBytes";
         public static final float FLOAT = 1.2f;
 
@@ -414,16 +413,13 @@ public class BillingCycleSettings extends DataUsageBase implements
             if (policy == null) return;
 
             final Resources res = parent.getResources();
-            final CharSequence message;
             final long minLimitBytes = (long) (policy.warningBytes * FLOAT);
             final long limitBytes;
 
             // TODO: customize default limits based on network template
-            message = res.getString(R.string.data_usage_limit_dialog_mobile);
             limitBytes = Math.max(5 * GIB_IN_BYTES, minLimitBytes);
 
             final Bundle args = new Bundle();
-            args.putCharSequence(EXTRA_MESSAGE, message);
             args.putLong(EXTRA_LIMIT_BYTES, limitBytes);
 
             final ConfirmLimitFragment dialog = new ConfirmLimitFragment();
@@ -441,11 +437,9 @@ public class BillingCycleSettings extends DataUsageBase implements
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             final Context context = getActivity();
 
-            final CharSequence message = getArguments().getCharSequence(EXTRA_MESSAGE);
-
             return new AlertDialog.Builder(context)
                     .setTitle(R.string.data_usage_limit_dialog_title)
-                    .setMessage(message)
+                    .setMessage(R.string.data_usage_limit_dialog_mobile)
                     .setPositiveButton(android.R.string.ok, this)
                     .setNegativeButton(android.R.string.cancel, null)
                     .create();
