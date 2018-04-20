@@ -255,9 +255,15 @@ public class UsageGraph extends View {
             return;
         }
 
+        canvas.save();
+        if (getLayoutDirection() == LAYOUT_DIRECTION_RTL) {
+            // Flip the canvas along the y-axis of the center of itself before drawing paths.
+            canvas.scale(-1, 1, canvas.getWidth() * 0.5f, 0);
+        }
         drawLinePath(canvas, mLocalProjectedPaths, mDottedPaint);
         drawFilledPath(canvas, mLocalPaths, mFillPaint);
         drawLinePath(canvas, mLocalPaths, mLinePaint);
+        canvas.restore();
         BatteryUtils.logRuntime(LOG_TAG, "onDraw", startTime);
     }
 
