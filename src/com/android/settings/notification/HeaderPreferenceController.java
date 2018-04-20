@@ -18,6 +18,8 @@ package com.android.settings.notification;
 
 import static com.android.settings.widget.EntityHeaderController.PREF_KEY_APP_HEADER;
 
+import android.arch.lifecycle.LifecycleObserver;
+import android.arch.lifecycle.OnLifecycleEvent;
 import android.content.Context;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
@@ -30,13 +32,16 @@ import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.EntityHeaderController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.events.OnStart;
 
 import java.util.Objects;
 
 public class HeaderPreferenceController extends NotificationPreferenceController
-        implements PreferenceControllerMixin {
+        implements PreferenceControllerMixin, LifecycleObserver {
 
     private final PreferenceFragment mFragment;
+    private EntityHeaderController mHeaderController;
 
     public HeaderPreferenceController(Context context, PreferenceFragment fragment) {
         super(context, null);
@@ -57,10 +62,9 @@ public class HeaderPreferenceController extends NotificationPreferenceController
     public void updateState(Preference preference) {
         if (mAppRow != null && mFragment != null) {
             LayoutPreference pref = (LayoutPreference) preference;
-            EntityHeaderController controller = EntityHeaderController
-                    .newInstance(mFragment.getActivity(), mFragment,
-                            pref.findViewById(R.id.entity_header));
-            pref = controller.setIcon(mAppRow.icon)
+            mHeaderController = EntityHeaderController.newInstance(
+                    mFragment.getActivity(), mFragment, pref.findViewById(R.id.entity_header));
+            pref = mHeaderController.setIcon(mAppRow.icon)
                     .setLabel(getLabel())
                     .setSummary(getSummary())
                     .setPackageName(mAppRow.pkg)
@@ -68,7 +72,7 @@ public class HeaderPreferenceController extends NotificationPreferenceController
                     .setButtonActions(EntityHeaderController.ActionType.ACTION_NOTIF_PREFERENCE,
                             EntityHeaderController.ActionType.ACTION_NONE)
                     .setHasAppInfoLink(true)
-                    .done(mFragment.getActivity(), mContext);
+                    .done(null, mContext);
             pref.findViewById(R.id.entity_header).setVisibility(View.VISIBLE);
         }
     }
@@ -99,6 +103,13 @@ public class HeaderPreferenceController extends NotificationPreferenceController
             return mAppRow.label.toString();
         } else {
             return "";
+        }
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    public void onStart() {
+        if (mHeaderController != null) {
+            mHeaderController.styleActionBar(mFragment.getActivity());
         }
     }
 }

@@ -20,6 +20,7 @@ import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
@@ -81,28 +82,25 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
     protected List<Preference> mDynamicPreferences = new ArrayList<>();
     protected ImportanceListener mImportanceListener = new ImportanceListener();
 
+    protected Intent mIntent;
+    protected Bundle mArgs;
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onAttach(Context context) {
+        super.onAttach(context);
         mContext = getActivity();
-        Intent intent = getActivity().getIntent();
-        Bundle args = getArguments();
-        if (DEBUG) Log.d(TAG, "onCreate getIntent()=" + intent);
-        if (intent == null && args == null) {
-            Log.w(TAG, "No intent");
-            toastAndFinish();
-            return;
-        }
+        mIntent = getActivity().getIntent();
+        mArgs = getArguments();
 
         mPm = getPackageManager();
         mNm = NotificationManager.from(mContext);
 
-        mPkg = args != null && args.containsKey(AppInfoBase.ARG_PACKAGE_NAME)
-                ? args.getString(AppInfoBase.ARG_PACKAGE_NAME)
-                : intent.getStringExtra(Settings.EXTRA_APP_PACKAGE);
-        mUid = args != null && args.containsKey(AppInfoBase.ARG_PACKAGE_UID)
-                ? args.getInt(AppInfoBase.ARG_PACKAGE_UID)
-                : intent.getIntExtra(Settings.EXTRA_APP_UID, -1);
+        mPkg = mArgs != null && mArgs.containsKey(AppInfoBase.ARG_PACKAGE_NAME)
+                ? mArgs.getString(AppInfoBase.ARG_PACKAGE_NAME)
+                : mIntent.getStringExtra(Settings.EXTRA_APP_PACKAGE);
+        mUid = mArgs != null && mArgs.containsKey(AppInfoBase.ARG_PACKAGE_UID)
+                ? mArgs.getInt(AppInfoBase.ARG_PACKAGE_UID)
+                : mIntent.getIntExtra(Settings.EXTRA_APP_UID, -1);
 
         if (mUid < 0) {
             try {
@@ -113,13 +111,38 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
 
         mPkgInfo = findPackageInfo(mPkg, mUid);
 
+        mUserId = UserHandle.getUserId(mUid);
+        mSuspendedAppsAdmin = RestrictedLockUtils.checkIfApplicationIsSuspended(
+                mContext, mPkg, mUserId);
+
+        loadChannel();
+        loadAppRow();
+        loadChannelGroup();
+        collectConfigActivities();
+
+        getLifecycle().addObserver(use(HeaderPreferenceController.class));
+
+        for (NotificationPreferenceController controller : mControllers) {
+            controller.onResume(mAppRow, mChannel, mChannelGroup, mSuspendedAppsAdmin);
+        }
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (mIntent == null && mArgs == null) {
+            Log.w(TAG, "No intent");
+            toastAndFinish();
+            return;
+        }
+
         if (mUid < 0 || TextUtils.isEmpty(mPkg) || mPkgInfo == null) {
             Log.w(TAG, "Missing package or uid or packageinfo");
             toastAndFinish();
             return;
         }
 
-        mUserId = UserHandle.getUserId(mUid);
         startListeningToPackageRemove();
     }
 
@@ -132,18 +155,26 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (mUid < 0 || TextUtils.isEmpty(mPkg) || mPkgInfo == null) {
+        if (mUid < 0 || TextUtils.isEmpty(mPkg) || mPkgInfo == null || mAppRow == null) {
             Log.w(TAG, "Missing package or uid or packageinfo");
             finish();
             return;
         }
-        mAppRow = mBackend.loadAppRow(mContext, mPm, mPkgInfo);
+        // Reload app, channel, etc onResume in case they've changed. A little wasteful if we've
+        // just done onAttach but better than making every preference controller reload all
+        // the data
+        loadAppRow();
         if (mAppRow == null) {
             Log.w(TAG, "Can't load package");
             finish();
             return;
         }
+        loadChannel();
+        loadChannelGroup();
         collectConfigActivities();
+    }
+
+    private void loadChannel() {
         Intent intent = getActivity().getIntent();
         String channelId = intent != null ? intent.getStringExtra(Settings.EXTRA_CHANNEL_ID) : null;
         if (channelId == null && intent != null) {
@@ -151,12 +182,13 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
             channelId = args != null ? args.getString(Settings.EXTRA_CHANNEL_ID) : null;
         }
         mChannel = mBackend.getChannel(mPkg, mUid, channelId);
+    }
 
-        NotificationChannelGroup group = null;
+    private void loadAppRow() {
+        mAppRow = mBackend.loadAppRow(mContext, mPm, mPkgInfo);
+    }
 
-        mSuspendedAppsAdmin = RestrictedLockUtils.checkIfApplicationIsSuspended(
-                mContext, mPkg, mUserId);
-
+    private void loadChannelGroup() {
         mShowLegacyChannelConfig = mBackend.onlyHasDefaultChannel(mAppRow.pkg, mAppRow.uid)
                 || (mChannel != null
                 && NotificationChannel.DEFAULT_CHANNEL_ID.equals(mChannel.getId()));
@@ -166,7 +198,7 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
                     mAppRow.pkg, mAppRow.uid, NotificationChannel.DEFAULT_CHANNEL_ID);
         }
         if (mChannel != null && !TextUtils.isEmpty(mChannel.getGroup())) {
-            group = mBackend.getGroup(mPkg, mUid, mChannel.getGroup());
+            NotificationChannelGroup group = mBackend.getGroup(mPkg, mUid, mChannel.getGroup());
             if (group != null) {
                 mChannelGroup = group;
             }
