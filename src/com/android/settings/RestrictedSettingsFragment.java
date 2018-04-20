@@ -27,6 +27,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.support.annotation.VisibleForTesting;
 import android.view.View;
 import android.widget.TextView;
 
@@ -56,7 +57,7 @@ public abstract class RestrictedSettingsFragment extends SettingsPreferenceFragm
     protected static final String RESTRICT_IF_OVERRIDABLE = "restrict_if_overridable";
 
     // No RestrictedSettingsFragment screens should use this number in startActivityForResult.
-    private static final int REQUEST_PIN_CHALLENGE = 12309;
+    @VisibleForTesting static final int REQUEST_PIN_CHALLENGE = 12309;
 
     private static final String KEY_CHALLENGE_SUCCEEDED = "chsc";
     private static final String KEY_CHALLENGE_REQUESTED = "chrq";
@@ -86,7 +87,8 @@ public abstract class RestrictedSettingsFragment extends SettingsPreferenceFragm
         }
     };
 
-    private AlertDialog mActionDisabledDialog;
+    @VisibleForTesting
+    AlertDialog mActionDisabledDialog;
 
     /**
      * @param restrictionKey The restriction key to check before pin protecting
@@ -153,6 +155,10 @@ public abstract class RestrictedSettingsFragment extends SettingsPreferenceFragm
             if (resultCode == Activity.RESULT_OK) {
                 mChallengeSucceeded = true;
                 mChallengeRequested = false;
+                if (mActionDisabledDialog != null && mActionDisabledDialog.isShowing()) {
+                    mActionDisabledDialog.setOnDismissListener(null);
+                    mActionDisabledDialog.dismiss();
+                }
             } else {
                 mChallengeSucceeded = false;
             }

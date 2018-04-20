@@ -23,7 +23,12 @@ import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_PLATFO
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_SUMMARY;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_TITLE;
 
+import android.accessibilityservice.AccessibilityServiceInfo;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
@@ -32,9 +37,14 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
+import android.view.accessibility.AccessibilityManager;
 
+import com.android.settings.accessibility.AccessibilitySlicePreferenceController;
 import com.android.settings.core.PreferenceXmlParserUtils;
 import com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag;
+import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.R;
+import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.DatabaseIndexingUtils;
@@ -46,10 +56,16 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
- * Converts {@link DashboardFragment} to {@link SliceData}.
+ * Converts all Slice sources into {@link SliceData}.
+ * This includes:
+ * - All {@link DashboardFragment DashboardFragments} indexed by settings search
+ * - Accessibility services
  */
 class SliceDataConverter {
 
@@ -101,6 +117,8 @@ class SliceDataConverter {
             mSliceData.addAll(providerSliceData);
         }
 
+        final List<SliceData> a11ySliceData = getAccessibilitySliceData();
+        mSliceData.addAll(a11ySliceData);
         return mSliceData;
     }
 
@@ -207,5 +225,59 @@ class SliceDataConverter {
             if (parser != null) parser.close();
         }
         return xmlSliceData;
+    }
+
+    private List<SliceData> getAccessibilitySliceData() {
+        final List<SliceData> sliceData = new ArrayList<>();
+
+        final String accessibilityControllerClassName =
+                AccessibilitySlicePreferenceController.class.getName();
+        final String fragmentClassName = AccessibilitySettings.class.getName();
+        final CharSequence screenTitle = mContext.getText(R.string.accessibility_settings);
+
+        final SliceData.Builder sliceDataBuilder = new SliceData.Builder()
+                .setFragmentName(fragmentClassName)
+                .setScreenTitle(screenTitle)
+                .setPreferenceControllerClassName(accessibilityControllerClassName);
+
+        final Set<String> a11yServiceNames = new HashSet<>();
+        Collections.addAll(a11yServiceNames, mContext.getResources()
+                .getStringArray(R.array.config_settings_slices_accessibility_components));
+        final List<AccessibilityServiceInfo> installedServices = getAccessibilityServiceInfoList();
+        final PackageManager packageManager = mContext.getPackageManager();
+
+        for (AccessibilityServiceInfo a11yServiceInfo : installedServices) {
+            final ResolveInfo resolveInfo = a11yServiceInfo.getResolveInfo();
+            final ServiceInfo serviceInfo = resolveInfo.serviceInfo;
+            final String packageName = serviceInfo.packageName;
+            final ComponentName componentName = new ComponentName(packageName, serviceInfo.name);
+            final String flattenedName = componentName.flattenToString();
+
+            if (!a11yServiceNames.contains(flattenedName)) {
+                continue;
+            }
+
+            final String title = resolveInfo.loadLabel(packageManager).toString();
+            int iconResource = resolveInfo.getIconResource();
+            if (iconResource == 0) {
+                iconResource = R.mipmap.ic_accessibility_generic;
+            }
+
+            sliceDataBuilder.setKey(flattenedName)
+                    .setTitle(title)
+                    .setIcon(iconResource)
+                    .setSliceType(SliceData.SliceType.SWITCH);
+
+            sliceData.add(sliceDataBuilder.build());
+        }
+
+        return sliceData;
+    }
+
+    @VisibleForTesting
+    List<AccessibilityServiceInfo> getAccessibilityServiceInfoList() {
+        final AccessibilityManager accessibilityManager = AccessibilityManager.getInstance(
+                mContext);
+        return accessibilityManager.getInstalledAccessibilityServiceList();
     }
 }

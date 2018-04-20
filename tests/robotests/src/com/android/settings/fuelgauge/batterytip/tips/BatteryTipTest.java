@@ -74,6 +74,7 @@ public class BatteryTipTest {
         assertThat(parcelTip.getTitle(mContext)).isEqualTo(TITLE);
         assertThat(parcelTip.getSummary(mContext)).isEqualTo(SUMMARY);
         assertThat(parcelTip.getIconId()).isEqualTo(ICON_ID);
+        assertThat(parcelTip.needUpdate()).isTrue();
     }
 
     @Test

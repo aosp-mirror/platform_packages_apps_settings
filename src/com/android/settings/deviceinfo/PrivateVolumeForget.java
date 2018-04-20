@@ -18,13 +18,13 @@ package com.android.settings.deviceinfo;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeRecord;
+import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,17 +35,26 @@ import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.search.actionbar.SearchMenuController;
 
-public class PrivateVolumeForget extends SettingsPreferenceFragment {
-    private static final String TAG_FORGET_CONFIRM = "forget_confirm";
+public class PrivateVolumeForget extends InstrumentedFragment {
+    @VisibleForTesting
+    static final String TAG_FORGET_CONFIRM = "forget_confirm";
 
     private VolumeRecord mRecord;
 
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.DEVICEINFO_STORAGE;
+    }
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        setHasOptionsMenu(true);
+        SearchMenuController.init(this /* host */);
     }
 
     @Override
@@ -116,12 +125,12 @@ public class PrivateVolumeForget extends SettingsPreferenceFragment {
 
             builder.setPositiveButton(R.string.storage_menu_forget,
                     new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    storage.forgetVolume(fsUuid);
-                    getActivity().finish();
-                }
-            });
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            storage.forgetVolume(fsUuid);
+                            getActivity().finish();
+                        }
+                    });
             builder.setNegativeButton(R.string.cancel, null);
 
             return builder.create();

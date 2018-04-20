@@ -54,8 +54,7 @@ public class HomepageDisplayTests {
             "Security & location",
             "Accounts",
             "Accessibility",
-            "System",
-            "Support & tips"
+            "System"
     };
 
     private UiDevice mDevice;

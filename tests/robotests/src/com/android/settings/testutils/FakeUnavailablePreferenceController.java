@@ -1,4 +1,4 @@
-package com.android.settings.slices;
+package com.android.settings.testutils;
 
 import android.content.Context;
 import android.provider.Settings;
@@ -15,7 +15,7 @@ public class FakeUnavailablePreferenceController extends BasePreferenceControlle
 
     @Override
     public int getAvailabilityStatus() {
-        return Settings.System.getInt(mContext.getContentResolver(),
+        return Settings.Global.getInt(mContext.getContentResolver(),
                 AVAILABILITY_KEY, 0);
     }
 }

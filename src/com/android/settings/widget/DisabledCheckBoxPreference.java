@@ -17,46 +17,85 @@
 package com.android.settings.widget;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.support.v7.preference.CheckBoxPreference;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.view.View;
 
-import android.support.v7.preference.CheckBoxPreference;
-import android.support.v7.preference.PreferenceViewHolder;
-
 /**
- * A CheckboxPreference with a disabled checkbox. Differs from CheckboxPreference.setDisabled()
- * in that the text is not dimmed.
+ * A CheckboxPreference that can disable its checkbox separate from its text.
+ * Differs from CheckboxPreference.setDisabled() in that the text is not dimmed.
  */
 public class DisabledCheckBoxPreference extends CheckBoxPreference {
+    private PreferenceViewHolder mViewHolder;
+    private View mCheckBox;
+    private boolean mEnabledCheckBox;
 
-    public DisabledCheckBoxPreference(Context context, AttributeSet attrs,
-            int defStyleAttr, int defStyleRes) {
+    public DisabledCheckBoxPreference(Context context, AttributeSet attrs, int defStyleAttr,
+            int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+        setupDisabledCheckBoxPreference(context, attrs, defStyleAttr, defStyleRes);
     }
 
     public DisabledCheckBoxPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        setupDisabledCheckBoxPreference(context, attrs, defStyleAttr, 0);
     }
 
     public DisabledCheckBoxPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+        setupDisabledCheckBoxPreference(context, attrs, 0, 0);
     }
 
     public DisabledCheckBoxPreference(Context context) {
         super(context);
+        setupDisabledCheckBoxPreference(context, null, 0, 0);
+    }
+
+    private void setupDisabledCheckBoxPreference(Context context, AttributeSet attrs,
+            int defStyleAttr, int defStyleRes) {
+        final TypedArray a = context.obtainStyledAttributes(
+                attrs, com.android.internal.R.styleable.Preference, defStyleAttr, defStyleRes);
+        for (int i = a.getIndexCount() - 1; i >= 0; i--) {
+            int attr = a.getIndex(i);
+            switch (attr) {
+                case com.android.internal.R.styleable.Preference_enabled:
+                    mEnabledCheckBox = a.getBoolean(attr, true);
+                    break;
+            }
+        }
+        a.recycle();
+
+        // Always tell super class this preference is enabled.
+        // We manually enable/disable checkbox using enableCheckBox.
+        super.setEnabled(true);
+        enableCheckbox(mEnabledCheckBox);
+    }
+
+    public void enableCheckbox(boolean enabled) {
+        mEnabledCheckBox = enabled;
+        if (mViewHolder != null && mCheckBox != null) {
+            mCheckBox.setEnabled(mEnabledCheckBox);
+            mViewHolder.itemView.setEnabled(mEnabledCheckBox);
+        }
     }
 
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
+        mViewHolder = holder;
+        mCheckBox = holder.findViewById(android.R.id.checkbox);
 
-        View view = holder.findViewById(android.R.id.checkbox);
-        view.setEnabled(false);
-        holder.itemView.setEnabled(false);
+        enableCheckbox(mEnabledCheckBox);
     }
 
     @Override
     protected void performClick(View view) {
-        // Do nothing
+        // only perform clicks if the checkbox is enabled
+        if (mEnabledCheckBox) {
+            super.performClick(view);
+        }
     }
+
 }

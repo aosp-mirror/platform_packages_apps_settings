@@ -169,7 +169,7 @@ public class EntityHeaderControllerTest {
     }
 
     @Test
-    public void bindButton_hasEditRuleNameClickListener_shouldShowButton() {
+    public void bindButton_hasEditClickListener_shouldShowButton() {
         final ResolveInfo info = new ResolveInfo();
         info.activityInfo = new ActivityInfo();
         info.activityInfo.packageName = "123";
@@ -179,13 +179,13 @@ public class EntityHeaderControllerTest {
         when(mActivity.getApplicationContext()).thenReturn(mContext);
 
         mController = EntityHeaderController.newInstance(mActivity, mFragment, view);
-        mController.setEditZenRuleNameListener(new View.OnClickListener() {
+        mController.setEditListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // do nothing
             }
         });
         mController.setButtonActions(
-                EntityHeaderController.ActionType.ACTION_DND_RULE_PREFERENCE,
+                EntityHeaderController.ActionType.ACTION_EDIT_PREFERENCE,
                 EntityHeaderController.ActionType.ACTION_NONE);
         mController.done(mActivity);
 
@@ -197,7 +197,7 @@ public class EntityHeaderControllerTest {
     }
 
     @Test
-    public void bindButton_noEditRuleNameClickListener_shouldNotShowButton() {
+    public void bindButton_noEditClickListener_shouldNotShowButton() {
         final ResolveInfo info = new ResolveInfo();
         info.activityInfo = new ActivityInfo();
         info.activityInfo.packageName = "123";
@@ -207,7 +207,7 @@ public class EntityHeaderControllerTest {
 
         mController = EntityHeaderController.newInstance(mActivity, mFragment, view);
         mController.setButtonActions(
-                EntityHeaderController.ActionType.ACTION_DND_RULE_PREFERENCE,
+                EntityHeaderController.ActionType.ACTION_EDIT_PREFERENCE,
                 EntityHeaderController.ActionType.ACTION_NONE);
         mController.done(mActivity);
 

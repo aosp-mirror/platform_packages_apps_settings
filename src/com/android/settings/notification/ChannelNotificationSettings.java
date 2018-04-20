@@ -18,13 +18,16 @@ package com.android.settings.notification;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
+import com.android.settings.applications.AppInfoBase;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
@@ -36,6 +39,19 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.NOTIFICATION_TOPIC_NOTIFICATION;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        final PreferenceScreen screen = getPreferenceScreen();
+        Bundle args = getArguments();
+        // If linking to this screen from an external app, expand settings
+        if (screen != null && args != null) {
+            if (!args.getBoolean(ARG_FROM_SETTINGS, false)) {
+                screen.setInitialExpandedChildrenCount(Integer.MAX_VALUE);
+            }
+        }
     }
 
     @Override
@@ -92,7 +108,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
                 mBackend));
         mControllers.add(new LightsPreferenceController(context, mBackend));
         mControllers.add(new BadgePreferenceController(context, mBackend));
-        mControllers.add(new DndPreferenceController(context, getLifecycle(), mBackend));
+        mControllers.add(new DndPreferenceController(context, mBackend));
         mControllers.add(new NotificationsOffPreferenceController(context));
         return new ArrayList<>(mControllers);
     }

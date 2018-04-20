@@ -61,13 +61,13 @@ public class EntityHeaderController {
     @IntDef({ActionType.ACTION_NONE,
             ActionType.ACTION_APP_PREFERENCE,
             ActionType.ACTION_NOTIF_PREFERENCE,
-            ActionType.ACTION_DND_RULE_PREFERENCE,})
+            ActionType.ACTION_EDIT_PREFERENCE,})
     @Retention(RetentionPolicy.SOURCE)
     public @interface ActionType {
         int ACTION_NONE = 0;
         int ACTION_APP_PREFERENCE = 1;
         int ACTION_NOTIF_PREFERENCE = 2;
-        int ACTION_DND_RULE_PREFERENCE = 3;
+        int ACTION_EDIT_PREFERENCE = 3;
     }
 
     public static final String PREF_KEY_APP_HEADER = "pref_app_header";
@@ -100,7 +100,7 @@ public class EntityHeaderController {
 
     private boolean mIsInstantApp;
 
-    private View.OnClickListener mEditRuleNameOnClickListener;
+    private View.OnClickListener mEditOnClickListener;
 
     /**
      * Creates a new instance of the controller.
@@ -227,8 +227,8 @@ public class EntityHeaderController {
         return this;
     }
 
-    public EntityHeaderController setEditZenRuleNameListener(View.OnClickListener listener) {
-        this.mEditRuleNameOnClickListener = listener;
+    public EntityHeaderController setEditListener(View.OnClickListener listener) {
+        this.mEditOnClickListener = listener;
         return this;
     }
 
@@ -345,13 +345,13 @@ public class EntityHeaderController {
             return;
         }
         switch (action) {
-            case ActionType.ACTION_DND_RULE_PREFERENCE: {
-                if (mEditRuleNameOnClickListener == null) {
+            case ActionType.ACTION_EDIT_PREFERENCE: {
+                if (mEditOnClickListener == null) {
                     button.setVisibility(View.GONE);
                 } else {
                     button.setImageResource(R.drawable.ic_mode_edit);
                     button.setVisibility(View.VISIBLE);
-                    button.setOnClickListener(mEditRuleNameOnClickListener);
+                    button.setOnClickListener(mEditOnClickListener);
                 }
                 return;
             }

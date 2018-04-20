@@ -33,20 +33,20 @@ public class StorageWizardReady extends StorageWizardBase {
         }
         setContentView(R.layout.storage_wizard_generic);
 
-        setHeaderText(R.string.storage_wizard_ready_title, mDisk.getShortDescription());
+        setHeaderText(R.string.storage_wizard_ready_title, getDiskShortDescription());
 
         final VolumeInfo privateVol = findFirstVolume(VolumeInfo.TYPE_PRIVATE);
         if (privateVol != null) {
             if (getIntent().getBooleanExtra(EXTRA_MIGRATE_SKIP, false)) {
                 setBodyText(R.string.storage_wizard_ready_v2_internal_body,
-                        mDisk.getDescription());
+                        getDiskDescription());
             } else {
                 setBodyText(R.string.storage_wizard_ready_v2_internal_moved_body,
-                        mDisk.getDescription(), mDisk.getShortDescription());
+                        getDiskDescription(), getDiskShortDescription());
             }
         } else {
             setBodyText(R.string.storage_wizard_ready_v2_external_body,
-                    mDisk.getDescription());
+                    getDiskDescription());
         }
 
         setNextButtonText(R.string.done);

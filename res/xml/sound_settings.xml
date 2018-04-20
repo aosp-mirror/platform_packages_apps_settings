@@ -20,7 +20,7 @@
     android:title="@string/sound_settings"
     android:key="sound_settings"
     settings:keywords="@string/keywords_sounds"
-    settings:initialExpandedChildrenCount="8">
+    settings:initialExpandedChildrenCount="9">
 
     <!-- Media volume -->
     <com.android.settings.notification.VolumeSeekBarPreference
@@ -140,11 +140,6 @@
         <SwitchPreference
           android:key="screen_locking_sounds"
           android:title="@string/screen_locking_sounds_title" />
-
-        <!-- Charging sounds -->
-        <SwitchPreference
-          android:key="charging_sounds"
-          android:title="@string/charging_sounds_title" />
 
         <!-- Docking sounds -->
         <SwitchPreference

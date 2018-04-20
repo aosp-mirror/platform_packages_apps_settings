@@ -16,8 +16,6 @@
 
 package com.android.settings.slices;
 
-import static androidx.slice.builders.ListBuilder.ICON_IMAGE;
-
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
 import static com.android.settings.core.BasePreferenceController.DISABLED_FOR_USER;
@@ -31,7 +29,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
@@ -62,6 +59,9 @@ import androidx.slice.builders.SliceAction;
 public class SliceBuilderUtils {
 
     private static final String TAG = "SliceBuilder";
+
+    // A Slice should not be store for longer than 60,000 milliseconds / 1 minute.
+    public static final long SLICE_TTL_MILLIS = 60000;
 
     /**
      * Build a Slice from {@link SliceData}.
@@ -113,13 +113,13 @@ public class SliceBuilderUtils {
      * - key
      * <p>
      * Examples of valid paths are:
-     * - intent/wifi
-     * - intent/bluetooth
-     * - action/wifi
-     * - action/accessibility/servicename
+     * - /intent/wifi
+     * - /intent/bluetooth
+     * - /action/wifi
+     * - /action/accessibility/servicename
      *
      * @param uri of the Slice. Follows pattern outlined in {@link SettingsSliceProvider}.
-     * @return Pair whose first element {@code true} if the path is prepended with "action", and
+     * @return Pair whose first element {@code true} if the path is prepended with "intent", and
      * second is a key.
      */
     public static Pair<Boolean, String> getPathData(Uri uri) {
@@ -130,13 +130,13 @@ public class SliceBuilderUtils {
         // Example: "/action/wifi" -> [{}, "action", "wifi"]
         //          "/action/longer/path" -> [{}, "action", "longer/path"]
         if (split.length != 3) {
-            throw new IllegalArgumentException("Uri (" + uri + ") has incomplete path: " + path);
+            return null;
         }
 
-        final boolean isInline = TextUtils.equals(SettingsSlicesContract.PATH_SETTING_ACTION,
+        final boolean isIntent = TextUtils.equals(SettingsSlicesContract.PATH_SETTING_INTENT,
                 split[1]);
 
-        return new Pair<>(isInline, split[2]);
+        return new Pair<>(isIntent, split[2]);
     }
 
     /**
@@ -215,8 +215,8 @@ public class SliceBuilderUtils {
     static Intent getContentIntent(Context context, SliceData sliceData) {
         final Uri contentUri = new Uri.Builder().appendPath(sliceData.getKey()).build();
         final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(context,
-                sliceData.getFragmentClassName(), sliceData.getKey(), sliceData.getScreenTitle(),
-                0 /* TODO */);
+                sliceData.getFragmentClassName(), sliceData.getKey(),
+                sliceData.getScreenTitle().toString(), 0 /* TODO */);
         intent.setClassName(context.getPackageName(), SubSettings.class.getName());
         intent.setData(contentUri);
         return intent;
@@ -225,19 +225,19 @@ public class SliceBuilderUtils {
     private static Slice buildToggleSlice(Context context, SliceData sliceData,
             BasePreferenceController controller) {
         final PendingIntent contentIntent = getContentPendingIntent(context, sliceData);
-        final Icon icon = Icon.createWithResource(context, sliceData.getIconResource());
+        final IconCompat icon = IconCompat.createWithResource(context, sliceData.getIconResource());
         final CharSequence subtitleText = getSubtitleText(context, controller, sliceData);
         final TogglePreferenceController toggleController =
                 (TogglePreferenceController) controller;
         final SliceAction sliceAction = getToggleAction(context, sliceData,
                 toggleController.isChecked());
 
-        return new ListBuilder(context, sliceData.getUri())
+        return new ListBuilder(context, sliceData.getUri(), SLICE_TTL_MILLIS)
                 .addRow(rowBuilder -> rowBuilder
                         .setTitle(sliceData.getTitle())
-                        .setTitleItem(icon, ICON_IMAGE)
                         .setSubtitle(subtitleText)
-                        .setPrimaryAction(new SliceAction(contentIntent, (IconCompat) null, null))
+                        .setPrimaryAction(
+                                new SliceAction(contentIntent, icon, sliceData.getTitle()))
                         .addEndItem(sliceAction))
                 .build();
     }
@@ -245,29 +245,34 @@ public class SliceBuilderUtils {
     private static Slice buildIntentSlice(Context context, SliceData sliceData,
             BasePreferenceController controller) {
         final PendingIntent contentIntent = getContentPendingIntent(context, sliceData);
-        final Icon icon = Icon.createWithResource(context, sliceData.getIconResource());
+        final IconCompat icon = IconCompat.createWithResource(context, sliceData.getIconResource());
         final CharSequence subtitleText = getSubtitleText(context, controller, sliceData);
 
-        return new ListBuilder(context, sliceData.getUri())
+        return new ListBuilder(context, sliceData.getUri(), SLICE_TTL_MILLIS)
                 .addRow(rowBuilder -> rowBuilder
                         .setTitle(sliceData.getTitle())
-                        .setTitleItem(icon, ICON_IMAGE)
                         .setSubtitle(subtitleText)
-                        .setPrimaryAction(new SliceAction(contentIntent, (IconCompat) null, null)))
+                        .setPrimaryAction(
+                                new SliceAction(contentIntent, icon, sliceData.getTitle())))
                 .build();
     }
 
     private static Slice buildSliderSlice(Context context, SliceData sliceData,
             BasePreferenceController controller) {
-        final SliderPreferenceController sliderController =
-                (SliderPreferenceController) controller;
+        final SliderPreferenceController sliderController = (SliderPreferenceController) controller;
         final PendingIntent actionIntent = getSliderAction(context, sliceData);
-        return new ListBuilder(context, sliceData.getUri())
+        final PendingIntent contentIntent = getContentPendingIntent(context, sliceData);
+        final IconCompat icon = IconCompat.createWithResource(context, sliceData.getIconResource());
+        final SliceAction primaryAction = new SliceAction(contentIntent, icon,
+                sliceData.getTitle());
+
+        return new ListBuilder(context, sliceData.getUri(), SLICE_TTL_MILLIS)
                 .addInputRange(builder -> builder
                         .setTitle(sliceData.getTitle())
                         .setMax(sliderController.getMaxSteps())
                         .setValue(sliderController.getSliderPosition())
-                        .setAction(actionIntent))
+                        .setInputAction(actionIntent)
+                        .setPrimaryAction(primaryAction))
                 .build();
     }
 
@@ -311,32 +316,30 @@ public class SliceBuilderUtils {
         final String title = data.getTitle();
         final String summary;
         final SliceAction primaryAction;
+        final IconCompat icon = IconCompat.createWithResource(context, data.getIconResource());
 
         switch (controller.getAvailabilityStatus()) {
             case DISABLED_UNSUPPORTED:
                 summary = context.getString(R.string.unsupported_setting_summary);
-                primaryAction = new SliceAction(getSettingsIntent(context),
-                        (IconCompat) null /* actionIcon */,
-                        null /* actionTitle */);
+                primaryAction = new SliceAction(getSettingsIntent(context), icon, title);
                 break;
             case DISABLED_FOR_USER:
                 summary = context.getString(R.string.disabled_for_user_setting_summary);
-                primaryAction = new SliceAction(getContentPendingIntent(context, data),
-                        (IconCompat) null /* actionIcon */, null /* actionTitle */);
+                primaryAction = new SliceAction(getContentPendingIntent(context, data), icon,
+                        title);
                 break;
             case DISABLED_DEPENDENT_SETTING:
                 summary = context.getString(R.string.disabled_dependent_setting_summary);
-                primaryAction = new SliceAction(getContentPendingIntent(context, data),
-                        (IconCompat) null /* actionIcon */, null /* actionTitle */);
+                primaryAction = new SliceAction(getContentPendingIntent(context, data), icon,
+                        title);
                 break;
             case UNAVAILABLE_UNKNOWN:
             default:
                 summary = context.getString(R.string.unknown_unavailability_setting_summary);
-                primaryAction = new SliceAction(getSettingsIntent(context),
-                        (IconCompat) null /* actionIcon */, null /* actionTitle */);
+                primaryAction = new SliceAction(getSettingsIntent(context), icon, title);
         }
 
-        return new ListBuilder(context, data.getUri())
+        return new ListBuilder(context, data.getUri(), SLICE_TTL_MILLIS)
                 .addRow(builder -> builder
                         .setTitle(title)
                         .setSubtitle(summary)

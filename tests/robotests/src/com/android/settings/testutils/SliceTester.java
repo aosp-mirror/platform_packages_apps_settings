@@ -115,8 +115,9 @@ public class SliceTester {
                 sliceData.getIconResource());
 
         // Check primary intent
-        final SliceAction primaryAction = metadata.getPrimaryAction();
-        assertThat(primaryAction).isNull();
+        final PendingIntent primaryPendingIntent = metadata.getPrimaryAction().getAction();
+        assertThat(primaryPendingIntent).isEqualTo(
+                SliceBuilderUtils.getContentPendingIntent(context, sliceData));
 
         final List<SliceItem> sliceItems = slice.getItems();
         assertTitle(sliceItems, sliceData.getTitle());
@@ -158,11 +159,15 @@ public class SliceTester {
     private static void assertTitle(List<SliceItem> sliceItems, String title) {
         boolean hasTitle = false;
         for (SliceItem item : sliceItems) {
-            List<SliceItem> titles = SliceQuery.findAll(item, FORMAT_TEXT, HINT_TITLE,
+            List<SliceItem> titleItems = SliceQuery.findAll(item, FORMAT_TEXT, HINT_TITLE,
                     null /* non-hints */);
-            if (titles != null & titles.size() == 1) {
-                assertThat(titles.get(0).getText()).isEqualTo(title);
-                hasTitle = true;
+            if (titleItems == null) {
+                continue;
+            }
+
+            hasTitle = true;
+            for (SliceItem subTitleItem : titleItems) {
+                assertThat(subTitleItem.getText()).isEqualTo(title);
             }
         }
         assertThat(hasTitle).isTrue();
