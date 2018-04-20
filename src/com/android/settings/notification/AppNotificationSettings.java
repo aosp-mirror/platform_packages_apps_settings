@@ -68,10 +68,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             mDynamicPreferences.clear();
         }
 
-        if (mShowLegacyChannelConfig) {
-            addPreferencesFromResource(R.xml.channel_notification_settings);
-        } else {
-            addPreferencesFromResource(R.xml.app_notification_settings);
+        if (!mShowLegacyChannelConfig) {
             // Load channel settings
             new AsyncTask<Void, Void, Void>() {
                 @Override
@@ -106,7 +103,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.notification_settings;
+        return R.xml.app_notification_settings;
     }
 
     @Override

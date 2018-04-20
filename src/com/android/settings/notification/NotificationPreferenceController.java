@@ -96,7 +96,7 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
             if (preference != null) {
                 mPreference = preference;
             }
-            if (this instanceof Preference.OnPreferenceChangeListener) {
+            if (mPreference != null && this instanceof Preference.OnPreferenceChangeListener) {
                 mPreference.setOnPreferenceChangeListener(
                         (Preference.OnPreferenceChangeListener) this);
             }
