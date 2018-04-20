@@ -16,6 +16,8 @@
 
 package com.android.settings.fuelgauge.batterytip;
 
+import static android.database.sqlite.SQLiteDatabase.CONFLICT_IGNORE;
+
 import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.AnomalyColumns
         .ANOMALY_STATE;
 import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.AnomalyColumns
@@ -64,12 +66,15 @@ public class BatteryDatabaseManager {
     /**
      * Insert an anomaly log to database.
      *
+     * @param uid          the uid of the app
      * @param packageName  the package name of the app
      * @param type         the type of the anomaly
      * @param anomalyState the state of the anomaly
      * @param timestampMs  the time when it is happened
+     * @return {@code true} if insert operation succeed
      */
-    public synchronized void insertAnomaly(int uid, String packageName, int type, int anomalyState,
+    public synchronized boolean insertAnomaly(int uid, String packageName, int type,
+            int anomalyState,
             long timestampMs) {
         try (SQLiteDatabase db = mDatabaseHelper.getWritableDatabase()) {
             ContentValues values = new ContentValues();
@@ -78,7 +83,7 @@ public class BatteryDatabaseManager {
             values.put(ANOMALY_TYPE, type);
             values.put(ANOMALY_STATE, anomalyState);
             values.put(TIME_STAMP_MS, timestampMs);
-            db.insert(TABLE_ANOMALY, null, values);
+            return db.insertWithOnConflict(TABLE_ANOMALY, null, values, CONFLICT_IGNORE) != -1;
         }
     }
 
