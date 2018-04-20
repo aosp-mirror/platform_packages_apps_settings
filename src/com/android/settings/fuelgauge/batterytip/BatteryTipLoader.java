@@ -67,7 +67,7 @@ public class BatteryTipLoader extends AsyncLoader<List<BatteryTip>> {
         final BatteryInfo batteryInfo = mBatteryUtils.getBatteryInfo(mBatteryStatsHelper, TAG);
         final Context context = getContext();
 
-        tips.add(new LowBatteryDetector(policy, batteryInfo).detect());
+        tips.add(new LowBatteryDetector(context, policy, batteryInfo).detect());
         tips.add(new HighUsageDetector(context, policy, mBatteryStatsHelper,
                 batteryInfo.discharging).detect());
         tips.add(new SmartBatteryDetector(policy, context.getContentResolver()).detect());
@@ -87,7 +87,8 @@ public class BatteryTipLoader extends AsyncLoader<List<BatteryTip>> {
         final List<BatteryTip> tips = new ArrayList<>();
         tips.add(new SummaryTip(BatteryTip.StateType.NEW,
                 Estimate.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN));
-        tips.add(new LowBatteryTip(BatteryTip.StateType.NEW));
+        tips.add(new LowBatteryTip(BatteryTip.StateType.NEW, false /* powerSaveModeOn */,
+                "Fake data"));
 
         return tips;
     }
