@@ -437,6 +437,16 @@ public class ApnEditorTest {
         assertThat(str).isNull();
     }
 
+    @Test
+    public void formatInteger_shouldParseString() {
+        assertThat(ApnEditor.formatInteger("42")).isEqualTo("42");
+    }
+
+    @Test
+    public void formatInteger_shouldIgnoreNonIntegers() {
+        assertThat(ApnEditor.formatInteger("not an int")).isEqualTo("not an int");
+    }
+
     private void initCursor() {
         doReturn(2).when(mCursor).getColumnCount();
         doReturn(Integer.valueOf(2)).when(mCursor).getInt(CURSOR_INTEGER_INDEX);
