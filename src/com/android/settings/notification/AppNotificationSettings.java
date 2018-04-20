@@ -20,10 +20,12 @@ import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceGroup;
+import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -45,12 +47,34 @@ public class AppNotificationSettings extends NotificationSettingsBase {
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     private static String KEY_GENERAL_CATEGORY = "categories";
+    private static String KEY_ADVANCED_CATEGORY = "app_advanced";
+    private static String KEY_BADGE = "badge";
+    private static String KEY_APP_LINK = "app_link";
 
     private List<NotificationChannelGroup> mChannelGroupList;
 
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.NOTIFICATION_APP_NOTIFICATION;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        final PreferenceScreen screen = getPreferenceScreen();
+        if (mShowLegacyChannelConfig && screen != null) {
+            // if showing legacy settings, pull advanced settings out of the advanced category
+            Preference badge = findPreference(KEY_BADGE);
+            Preference appLink = findPreference(KEY_APP_LINK);
+            removePreference(KEY_ADVANCED_CATEGORY);
+            if (badge != null) {
+                screen.addPreference(badge);
+
+            }
+            if (appLink != null) {
+                screen.addPreference(appLink);
+            }
+        }
     }
 
     @Override
@@ -61,11 +85,6 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             Log.w(TAG, "Missing package or uid or packageinfo");
             finish();
             return;
-        }
-
-        if (getPreferenceScreen() != null) {
-            getPreferenceScreen().removeAll();
-            mDynamicPreferences.clear();
         }
 
         if (!mShowLegacyChannelConfig) {
@@ -87,7 +106,6 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                 }
             }.execute();
         }
-        getPreferenceScreen().setOrderingAsAdded(true);
 
         for (NotificationPreferenceController controller : mControllers) {
             controller.onResume(mAppRow, mChannel, mChannelGroup, mSuspendedAppsAdmin);
@@ -132,13 +150,10 @@ public class AppNotificationSettings extends NotificationSettingsBase {
 
     private void populateList() {
         if (!mDynamicPreferences.isEmpty()) {
-            // If there's anything in mChannelGroups, we've called populateChannelList twice.
-            // Clear out existing channels and log.
-            Log.w(TAG, "Notification channel group posted twice to settings - old size " +
-                    mDynamicPreferences.size() + ", new size " + mChannelGroupList.size());
             for (Preference p : mDynamicPreferences) {
                 getPreferenceScreen().removePreference(p);
             }
+            mDynamicPreferences.clear();
         }
         if (mChannelGroupList.isEmpty()) {
             PreferenceCategory groupCategory = new PreferenceCategory(getPrefContext());
