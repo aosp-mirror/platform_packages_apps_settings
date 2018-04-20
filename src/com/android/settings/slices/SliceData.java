@@ -212,19 +212,19 @@ public class SliceData {
 
         public SliceData build() {
             if (TextUtils.isEmpty(mKey)) {
-                throw new IllegalStateException("Key cannot be empty");
+                throw new InvalidSliceDataException("Key cannot be empty");
             }
 
             if (TextUtils.isEmpty(mTitle)) {
-                throw new IllegalStateException("Title cannot be empty");
+                throw new InvalidSliceDataException("Title cannot be empty");
             }
 
             if (TextUtils.isEmpty(mFragmentClassName)) {
-                throw new IllegalStateException("Fragment Name cannot be empty");
+                throw new InvalidSliceDataException("Fragment Name cannot be empty");
             }
 
             if (TextUtils.isEmpty(mPrefControllerClassName)) {
-                throw new IllegalStateException("Preference Controller cannot be empty");
+                throw new InvalidSliceDataException("Preference Controller cannot be empty");
             }
 
             return new SliceData(this);
@@ -232,6 +232,13 @@ public class SliceData {
 
         public String getKey() {
             return mKey;
+        }
+    }
+
+    public static class InvalidSliceDataException extends RuntimeException {
+
+        public InvalidSliceDataException(String message) {
+            super(message);
         }
     }
 }
