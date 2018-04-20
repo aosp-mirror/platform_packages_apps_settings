@@ -179,7 +179,7 @@
     <string name="connected_device_connected_title" msgid="5871712271201945606">"Csatlakoztatva"</string>
     <string name="connected_device_saved_title" msgid="688364359746674536">"Mentett eszközök"</string>
     <string name="connected_device_add_device_title" msgid="7803521577708810621">"Eszköz hozzáadása"</string>
-    <string name="connected_device_add_device_summary" msgid="4041865900298680338">"A Bluetooth bekapcsol, hogy végre lehessen hajtani a párosítást"</string>
+    <string name="connected_device_add_device_summary" msgid="4041865900298680338">"A Bluetooth bekapcsol a párosítás végrehajtása érdekében"</string>
     <string name="connected_device_connections_title" msgid="5988939345181466770">"Kapcsolati beállítások"</string>
     <string name="connected_device_previously_connected_title" msgid="491765792822244604">"Korábban csatlakoztatott eszközök"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Dátum és idő"</string>
@@ -292,6 +292,8 @@
     <string name="forget" msgid="1400428660472591263">"Elfelejt"</string>
     <string name="save" msgid="879993180139353333">"Mentés"</string>
     <string name="done" msgid="6942539184162713160">"Kész"</string>
+    <!-- no translation found for apply (1577045208487259229) -->
+    <skip />
     <string name="settings_label" msgid="1626402585530130914">"Beállítások"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Beállítások"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Beállítások parancsikon"</string>
@@ -1390,12 +1392,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="6897444467730463117">"A(z) <xliff:g id="NAME_0">^1</xliff:g> továbbra is használható, de előfordulhat, hogy lassú lesz. \n\nA(z) <xliff:g id="NAME_1">^2</xliff:g> eszközön lévő alkalmazások esetleg nem fognak megfelelően működni, a tartalmak átvitele pedig sokáig tarthat. \n\nPróbálkozzon gyorsabb <xliff:g id="NAME_2">^3</xliff:g> vagy ezen <xliff:g id="NAME_3">^4</xliff:g> használatával hordozható tárhelyként."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="4126873669723115805">"Újrakezdés"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="49399942893518218">"Tovább"</string>
-    <!-- no translation found for storage_wizard_ready_v2_external_body (11937346870534608) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_body (4658433206901211269) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (6239886818487538806) -->
-    <skip />
+    <string name="storage_wizard_ready_v2_external_body" msgid="11937346870534608">"Áthelyezheti tartalmait a(z) <xliff:g id="NAME">^1</xliff:g> eszközre"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="4658433206901211269">"Ha tartalmat szeretne áthelyezni a(z) <xliff:g id="NAME">^1</xliff:g> eszközre, nyissa meg a "<b>"Beállítások &gt; Tárhely"</b>" menüt"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="6239886818487538806">"A tartalom a következő eszközre lett áthelyezve: <xliff:g id="NAME_0">^1</xliff:g>. \n\nA(z) <xliff:g id="NAME_1">^2</xliff:g> kezelését a "<b>"Beállítások &gt; Tárhely"</b>" menüben végezheti el."</string>
     <string name="battery_status_title" msgid="9159414319574976203">"Akkumulátor állapota"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Akkumulátorszint"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN-ek"</string>
@@ -2299,7 +2298,6 @@
     <string name="battery_detail_foreground" msgid="3350401514602032183">"Aktív használatban"</string>
     <string name="battery_detail_background" msgid="1929644393553768999">"Háttérben"</string>
     <string name="battery_detail_power_usage" msgid="6485766868610469101">"Akkumulátorhasználat"</string>
-    <string name="battery_detail_power_percentage" msgid="8064814503316094497">"A teljes alkalmazáshasználat <xliff:g id="PERCENT">%1$s</xliff:g>-a (<xliff:g id="POWER">%2$d</xliff:g> mAh)"</string>
     <string name="battery_detail_info_title" msgid="8227822131405620369">"Teljes feltöltés óta"</string>
     <string name="battery_detail_manage_title" msgid="9094314252105828014">"Akkumulátorhasználat kezelése"</string>
     <string name="advanced_battery_graph_subtext" msgid="5621073891377915877">"Az akkumulátor becsült töltöttsége az eszközhasználaton alapszik"</string>
@@ -2624,8 +2622,8 @@
     <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"Adathasználati figyelmeztetés beállítása"</string>
     <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"Adathasználati korlát beállítása"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"Adatforgalom korlátozása"</string>
-    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="4983487893343645667">"Táblagépe kikapcsolja a mobiladat-kapcsolatot, amint eléri a beállított korlátot.\n\nMivel az adatforgalmat a táblagép méri, és szolgáltató mérései ettől eltérhetnek, érdemes lehet szigorúbb korlátot megadnia."</string>
-    <string name="data_usage_limit_dialog_mobile" product="default" msgid="3926320594049434225">"Telefonja kikapcsolja a mobiladat-kapcsolatot, amint eléri a beállított korlátot.\n\nMivel az adatforgalmat a telefon méri, és szolgáltató mérései ettől eltérhetnek, érdemes lehet szigorúbb korlátot megadnia."</string>
+    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="4983487893343645667">"Táblagépe kikapcsolja a mobiladat-kapcsolatot, amint eléri a beállított korlátot.\n\nMivel az adatforgalmat a táblagép méri, és a szolgáltató mérései ettől eltérhetnek, érdemes lehet szigorúbb korlátot megadnia."</string>
+    <string name="data_usage_limit_dialog_mobile" product="default" msgid="3926320594049434225">"Telefonja kikapcsolja a mobiladat-kapcsolatot, amint eléri a beállított korlátot.\n\nMivel az adatforgalmat a telefon méri, és a szolgáltató mérései ettől eltérhetnek, érdemes lehet szigorúbb korlátot megadnia."</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"Korlátozza a háttéradatokat?"</string>
     <string name="data_usage_restrict_background" msgid="434093644726734586">"Ha korlátozza a háttérben zajló mobiladat-forgalmat, néhány alkalmazás és szolgáltatás nem fog működni, ha nem csatlakozik Wi-Fi-hálózathoz."</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7096707497743363380">"Ha korlátozza a háttérben zajló mobiladat-forgalmat, néhány alkalmazás és szolgáltatás nem fog működni, ha nem csatlakozik Wi-Fi-hálózathoz.\n\nEz a beállítás minden felhasználót érint ezen a táblagépen."</string>
@@ -3838,6 +3836,7 @@
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"A rangsortárgy hiányzik."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"A rangsortárgy nem tartalmazza ezt a kulcsot."</string>
     <string name="display_cutout_emulation" msgid="6306593933746393170">"Képernyőkivágás szimulálása"</string>
+    <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"képernyőkivágás, sziget"</string>
     <string name="display_cutout_emulation_none" msgid="5144174674654097316">"Nincs"</string>
     <string name="special_access" msgid="3458780842491881155">"Különleges alkalmazás-hozzáférés"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
