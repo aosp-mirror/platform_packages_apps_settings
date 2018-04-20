@@ -44,28 +44,29 @@ public class HighUsageDetector implements BatteryTipDetector {
     private BatteryTipPolicy mPolicy;
     private BatteryStatsHelper mBatteryStatsHelper;
     private List<AppInfo> mHighUsageAppList;
-    private Context mContext;
     @VisibleForTesting
     HighUsageDataParser mDataParser;
     @VisibleForTesting
     BatteryUtils mBatteryUtils;
+    @VisibleForTesting
+    boolean mDischarging;
 
     public HighUsageDetector(Context context, BatteryTipPolicy policy,
-            BatteryStatsHelper batteryStatsHelper) {
-        mContext = context;
+            BatteryStatsHelper batteryStatsHelper, boolean discharging) {
         mPolicy = policy;
         mBatteryStatsHelper = batteryStatsHelper;
         mHighUsageAppList = new ArrayList<>();
         mBatteryUtils = BatteryUtils.getInstance(context);
         mDataParser = new HighUsageDataParser(mPolicy.highUsagePeriodMs,
                 mPolicy.highUsageBatteryDraining);
+        mDischarging = discharging;
     }
 
     @Override
     public BatteryTip detect() {
         final long lastFullChargeTimeMs = mBatteryUtils.calculateLastFullChargeTime(
                 mBatteryStatsHelper, System.currentTimeMillis());
-        if (mPolicy.highUsageEnabled) {
+        if (mPolicy.highUsageEnabled && mDischarging) {
             parseBatteryData();
             if (mDataParser.isDeviceHeavilyUsed() || mPolicy.testHighUsageTip) {
                 final List<BatterySipper> batterySippers = mBatteryStatsHelper.getUsageList();
