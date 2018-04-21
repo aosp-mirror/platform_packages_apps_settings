@@ -52,21 +52,21 @@ import java.util.List;
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SliceDataConverterTest {
 
-    private final String FAKE_KEY = "key";
-    private final String FAKE_TITLE = "title";
-    private final String FAKE_SUMMARY = "summary";
-    private final String FAKE_SCREEN_TITLE = "screen_title";
-    private final String FAKE_FRAGMENT_CLASSNAME = FakeIndexProvider.class.getName();
-    private final String FAKE_CONTROLLER_NAME = FakePreferenceController.class.getName();
-
-    private final String ACCESSIBILITY_FRAGMENT = AccessibilitySettings.class.getName();
-    private final String A11Y_CONTROLLER_NAME =
+    private static final String FAKE_KEY = "key";
+    private static final String FAKE_TITLE = "title";
+    private static final String FAKE_SUMMARY = "summary";
+    private static final String FAKE_SCREEN_TITLE = "screen_title";
+    private static final String FAKE_KEYWORDS = "a, b, c";
+    private static final String FAKE_FRAGMENT_CLASSNAME = FakeIndexProvider.class.getName();
+    private static final String FAKE_CONTROLLER_NAME = FakePreferenceController.class.getName();
+    private static final String ACCESSIBILITY_FRAGMENT = AccessibilitySettings.class.getName();
+    private static final String A11Y_CONTROLLER_NAME =
             AccessibilitySlicePreferenceController.class.getName();
-    private final String FAKE_SERVICE_NAME = "fake_service";
-    private final String FAKE_ACCESSIBILITY_PACKAGE = "fake_package";
-    private final String FAKE_A11Y_SERVICE_NAME =
+    private static final String FAKE_SERVICE_NAME = "fake_service";
+    private static final String FAKE_ACCESSIBILITY_PACKAGE = "fake_package";
+    private static final String FAKE_A11Y_SERVICE_NAME =
             FAKE_ACCESSIBILITY_PACKAGE + "/" + FAKE_SERVICE_NAME;
-    private final int FAKE_ICON = 1234;
+    private static final int FAKE_ICON = 1234;
 
     private Context mContext;
 
@@ -118,6 +118,7 @@ public class SliceDataConverterTest {
         assertThat(fakeSlice.getTitle()).isEqualTo(FAKE_TITLE);
         assertThat(fakeSlice.getSummary()).isEqualTo(FAKE_SUMMARY);
         assertThat(fakeSlice.getScreenTitle()).isEqualTo(FAKE_SCREEN_TITLE);
+        assertThat(fakeSlice.getKeywords()).isEqualTo(FAKE_KEYWORDS);
         assertThat(fakeSlice.getIconResource()).isNotNull();
         assertThat(fakeSlice.getUri()).isNull();
         assertThat(fakeSlice.getFragmentClassName()).isEqualTo(FAKE_FRAGMENT_CLASSNAME);

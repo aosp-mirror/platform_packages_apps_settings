@@ -32,6 +32,7 @@ public class SliceDataTest {
     private final String TITLE = "title";
     private final String SUMMARY = "summary";
     private final String SCREEN_TITLE = "screen title";
+    private final String KEYWORDS = "a, b, c";
     private final String FRAGMENT_NAME = "fragment name";
     private final int ICON = 1234; // I declare a thumb war
     private final Uri URI = Uri.parse("content://com.android.settings.slices/test");
@@ -46,6 +47,7 @@ public class SliceDataTest {
                 .setTitle(TITLE)
                 .setSummary(SUMMARY)
                 .setScreenTitle(SCREEN_TITLE)
+                .setKeywords(KEYWORDS)
                 .setIcon(ICON)
                 .setFragmentName(FRAGMENT_NAME)
                 .setUri(URI)
@@ -59,6 +61,7 @@ public class SliceDataTest {
         assertThat(data.getTitle()).isEqualTo(TITLE);
         assertThat(data.getSummary()).isEqualTo(SUMMARY);
         assertThat(data.getScreenTitle()).isEqualTo(SCREEN_TITLE);
+        assertThat(data.getKeywords()).isEqualTo(KEYWORDS);
         assertThat(data.getIconResource()).isEqualTo(ICON);
         assertThat(data.getFragmentClassName()).isEqualTo(FRAGMENT_NAME);
         assertThat(data.getUri()).isEqualTo(URI);

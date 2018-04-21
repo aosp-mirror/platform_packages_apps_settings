@@ -22,6 +22,7 @@ import android.text.TextUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.List;
 
 /**
  * Data class representing a slice stored by {@link SlicesIndexer}.
@@ -59,6 +60,8 @@ public class SliceData {
 
     private final CharSequence mScreenTitle;
 
+    private final String mKeywords;
+
     private final int mIconResource;
 
     private final String mFragmentClassName;
@@ -86,6 +89,10 @@ public class SliceData {
 
     public CharSequence getScreenTitle() {
         return mScreenTitle;
+    }
+
+    public String getKeywords() {
+        return mKeywords;
     }
 
     public int getIconResource() {
@@ -117,6 +124,7 @@ public class SliceData {
         mTitle = builder.mTitle;
         mSummary = builder.mSummary;
         mScreenTitle = builder.mScreenTitle;
+        mKeywords = builder.mKeywords;
         mIconResource = builder.mIconResource;
         mFragmentClassName = builder.mFragmentClassName;
         mUri = builder.mUri;
@@ -148,6 +156,8 @@ public class SliceData {
 
         private CharSequence mScreenTitle;
 
+        private String mKeywords;
+
         private int mIconResource;
 
         private String mFragmentClassName;
@@ -177,6 +187,11 @@ public class SliceData {
 
         public Builder setScreenTitle(CharSequence screenTitle) {
             mScreenTitle = screenTitle;
+            return this;
+        }
+
+        public Builder setKeywords(String keywords) {
+            mKeywords = keywords;
             return this;
         }
 
