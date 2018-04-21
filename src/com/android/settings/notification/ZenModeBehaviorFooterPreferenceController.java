@@ -21,7 +21,7 @@ import android.content.ComponentName;
 import android.net.Uri;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 import android.util.Slog;
 
 import com.android.settings.R;

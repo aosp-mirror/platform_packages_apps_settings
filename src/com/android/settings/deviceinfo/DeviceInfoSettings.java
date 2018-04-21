@@ -21,7 +21,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.SearchIndexableResource;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import android.telephony.TelephonyManager;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;

@@ -19,10 +19,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
-import android.support.v7.preference.TwoStatePreference;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.TwoStatePreference;
 import android.util.Log;
 
 import com.android.settings.R;

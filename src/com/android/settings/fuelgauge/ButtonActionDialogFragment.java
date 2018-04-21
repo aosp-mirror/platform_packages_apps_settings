@@ -6,8 +6,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.IntDef;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.IntDef;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;

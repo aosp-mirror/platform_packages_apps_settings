@@ -17,6 +17,7 @@
 package com.android.settings.slices;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
@@ -46,6 +47,7 @@ public class SlicesIndexerTest {
     private final String[] TITLES = new String[]{"title1", "title2", "title3"};
     private final String SUMMARY = "subtitle";
     private final String SCREEN_TITLE = "screen title";
+    private final String KEYWORDS = "a, b, c";
     private final String FRAGMENT_NAME = "fragment name";
     private final int ICON = 1234; // I declare a thumb war
     private final Uri URI = Uri.parse("content://com.android.settings.slices/test");
@@ -119,6 +121,8 @@ public class SlicesIndexerTest {
                     FRAGMENT_NAME);
             assertThat(cursor.getString(cursor.getColumnIndex(IndexColumns.SCREENTITLE))).isEqualTo(
                     SCREEN_TITLE);
+            assertThat(cursor.getString(cursor.getColumnIndex(IndexColumns.KEYWORDS))).isEqualTo(
+                    KEYWORDS);
             assertThat(cursor.getInt(cursor.getColumnIndex(IndexColumns.ICON_RESOURCE))).isEqualTo(
                     ICON);
             assertThat(cursor.getString(cursor.getColumnIndex(IndexColumns.CONTROLLER))).isEqualTo(
@@ -144,6 +148,7 @@ public class SlicesIndexerTest {
         final SliceData.Builder builder = new SliceData.Builder()
                 .setSummary(SUMMARY)
                 .setScreenTitle(SCREEN_TITLE)
+                .setKeywords(KEYWORDS)
                 .setFragmentName(FRAGMENT_NAME)
                 .setIcon(ICON)
                 .setUri(URI)

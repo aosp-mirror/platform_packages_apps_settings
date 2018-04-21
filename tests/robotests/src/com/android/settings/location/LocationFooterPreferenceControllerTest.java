@@ -25,7 +25,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.arch.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LifecycleOwner;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -37,8 +37,8 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceCategory;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;

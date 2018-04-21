@@ -18,7 +18,7 @@ package com.android.settings;
 
 import android.content.Intent;
 import android.os.SystemProperties;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.setupwizardlib.util.WizardManagerHelper;
 

@@ -38,9 +38,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.support.v14.preference.PreferenceFragment;
-import android.support.v7.preference.PreferenceManager;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.PreferenceFragment;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 import android.widget.Button;
 
 import com.android.settings.R;

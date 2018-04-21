@@ -19,7 +19,7 @@ package com.android.settings.slices;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import android.util.Log;
 
 import com.android.settings.dashboard.DashboardFragment;
@@ -105,6 +105,7 @@ class SlicesIndexer implements Runnable {
             values.put(IndexColumns.TITLE, dataRow.getTitle());
             values.put(IndexColumns.SUMMARY, dataRow.getSummary());
             values.put(IndexColumns.SCREENTITLE, dataRow.getScreenTitle().toString());
+            values.put(IndexColumns.KEYWORDS, dataRow.getKeywords());
             values.put(IndexColumns.ICON_RESOURCE, dataRow.getIconResource());
             values.put(IndexColumns.FRAGMENT, dataRow.getFragmentClassName());
             values.put(IndexColumns.CONTROLLER, dataRow.getPreferenceController());

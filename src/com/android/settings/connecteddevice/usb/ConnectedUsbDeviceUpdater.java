@@ -18,8 +18,8 @@ package com.android.settings.connecteddevice.usb;
 import android.content.Context;
 import android.hardware.usb.UsbManager;
 import android.hardware.usb.UsbPort;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;

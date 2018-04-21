@@ -29,8 +29,8 @@ import android.content.Context;
 import android.hardware.input.InputDeviceIdentifier;
 import android.hardware.input.InputManager;
 import android.hardware.input.KeyboardLayout;
-import android.support.v7.preference.PreferenceManager;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 import android.view.InputDevice;
 
 import com.android.settings.core.BasePreferenceController;

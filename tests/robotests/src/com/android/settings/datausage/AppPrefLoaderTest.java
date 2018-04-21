@@ -26,7 +26,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.Drawable;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 import android.util.ArraySet;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

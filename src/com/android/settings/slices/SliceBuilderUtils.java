@@ -45,7 +45,11 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
-import android.support.v4.graphics.drawable.IconCompat;
+import androidx.core.graphics.drawable.IconCompat;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
@@ -231,6 +235,7 @@ public class SliceBuilderUtils {
                 (TogglePreferenceController) controller;
         final SliceAction sliceAction = getToggleAction(context, sliceData,
                 toggleController.isChecked());
+        final List<String> keywords = buildSliceKeywords(sliceData.getKeywords());
 
         return new ListBuilder(context, sliceData.getUri(), SLICE_TTL_MILLIS)
                 .addRow(rowBuilder -> rowBuilder
@@ -239,6 +244,7 @@ public class SliceBuilderUtils {
                         .setPrimaryAction(
                                 new SliceAction(contentIntent, icon, sliceData.getTitle()))
                         .addEndItem(sliceAction))
+                .setKeywords(keywords)
                 .build();
     }
 
@@ -247,6 +253,7 @@ public class SliceBuilderUtils {
         final PendingIntent contentIntent = getContentPendingIntent(context, sliceData);
         final IconCompat icon = IconCompat.createWithResource(context, sliceData.getIconResource());
         final CharSequence subtitleText = getSubtitleText(context, controller, sliceData);
+        final List<String> keywords = buildSliceKeywords(sliceData.getKeywords());
 
         return new ListBuilder(context, sliceData.getUri(), SLICE_TTL_MILLIS)
                 .addRow(rowBuilder -> rowBuilder
@@ -254,6 +261,7 @@ public class SliceBuilderUtils {
                         .setSubtitle(subtitleText)
                         .setPrimaryAction(
                                 new SliceAction(contentIntent, icon, sliceData.getTitle())))
+                .setKeywords(keywords)
                 .build();
     }
 
@@ -265,6 +273,7 @@ public class SliceBuilderUtils {
         final IconCompat icon = IconCompat.createWithResource(context, sliceData.getIconResource());
         final SliceAction primaryAction = new SliceAction(contentIntent, icon,
                 sliceData.getTitle());
+        final List<String> keywords = buildSliceKeywords(sliceData.getKeywords());
 
         return new ListBuilder(context, sliceData.getUri(), SLICE_TTL_MILLIS)
                 .addInputRange(builder -> builder
@@ -273,6 +282,7 @@ public class SliceBuilderUtils {
                         .setValue(sliderController.getSliderPosition())
                         .setInputAction(actionIntent)
                         .setPrimaryAction(primaryAction))
+                .setKeywords(keywords)
                 .build();
     }
 
@@ -311,9 +321,19 @@ public class SliceBuilderUtils {
                 || TextUtils.equals(summary, doublePlaceHolder));
     }
 
+    private static List<String> buildSliceKeywords(String keywordString) {
+        if (keywordString == null) {
+            return new ArrayList<>();
+        }
+
+        final String[] keywords = keywordString.split(",");
+        return Arrays.asList(keywords);
+    }
+
     private static Slice buildUnavailableSlice(Context context, SliceData data,
             BasePreferenceController controller) {
         final String title = data.getTitle();
+        final List<String> keywords = buildSliceKeywords(data.getKeywords());
         final String summary;
         final SliceAction primaryAction;
         final IconCompat icon = IconCompat.createWithResource(context, data.getIconResource());
@@ -344,6 +364,7 @@ public class SliceBuilderUtils {
                         .setTitle(title)
                         .setSubtitle(summary)
                         .setPrimaryAction(primaryAction))
+                .setKeywords(keywords)
                 .build();
     }
 }

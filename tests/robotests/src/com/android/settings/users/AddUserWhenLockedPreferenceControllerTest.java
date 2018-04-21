@@ -22,12 +22,12 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.arch.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.content.pm.UserInfo;
 import android.os.UserManager;
 import android.provider.Settings.Global;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedSwitchPreference;

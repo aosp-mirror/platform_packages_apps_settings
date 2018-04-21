@@ -16,8 +16,8 @@
 
 package com.android.settings.wifi.tether;
 
-import static android.arch.lifecycle.Lifecycle.Event.ON_START;
-import static android.arch.lifecycle.Lifecycle.Event.ON_STOP;
+import static androidx.lifecycle.Lifecycle.Event.ON_START;
+import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
@@ -27,7 +27,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.arch.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LifecycleOwner;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -37,7 +37,7 @@ import android.net.ConnectivityManager;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.provider.Settings;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

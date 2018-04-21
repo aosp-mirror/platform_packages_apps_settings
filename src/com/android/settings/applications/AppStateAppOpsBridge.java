@@ -25,7 +25,7 @@ import android.content.pm.PackageManager;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.SparseArray;

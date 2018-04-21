@@ -18,8 +18,8 @@ package com.android.settings.dashboard;
 import android.annotation.IntDef;
 import android.graphics.drawable.Drawable;
 import android.service.settings.suggestions.Suggestion;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.util.DiffUtil;
+import androidx.annotation.VisibleForTesting;
+import androidx.recyclerview.widget.DiffUtil;
 import android.text.TextUtils;
 
 import com.android.settings.R;

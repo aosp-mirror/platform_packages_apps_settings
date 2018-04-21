@@ -21,7 +21,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import android.util.Log;
 
 import java.util.Locale;
@@ -36,7 +36,7 @@ public class SlicesDatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "slices_index.db";
     private static final String SHARED_PREFS_TAG = "slices_shared_prefs";
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     public interface Tables {
         String TABLE_SLICES_INDEX = "slices_index";
@@ -62,6 +62,11 @@ public class SlicesDatabaseHelper extends SQLiteOpenHelper {
          * Title of the Setting screen on which the Setting lives.
          */
         String SCREENTITLE = "screentitle";
+
+        /**
+         * String with a comma separated list of keywords relating to the Slice.
+         */
+        String KEYWORDS = "keywords";
 
         /**
          * Resource ID for the icon of the setting. Should be 0 for no icon.
@@ -101,6 +106,8 @@ public class SlicesDatabaseHelper extends SQLiteOpenHelper {
                     ", " +
                     IndexColumns.SCREENTITLE +
                     ", " +
+                    IndexColumns.KEYWORDS +
+                    ", " +
                     IndexColumns.ICON_RESOURCE +
                     ", " +
                     IndexColumns.FRAGMENT +
@@ -109,7 +116,7 @@ public class SlicesDatabaseHelper extends SQLiteOpenHelper {
                     ", " +
                     IndexColumns.PLATFORM_SLICE +
                     ", " +
-                    IndexColumns.SLICE_TYPE+
+                    IndexColumns.SLICE_TYPE +
                     ");";
 
     private final Context mContext;

@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.support.v14.preference.SwitchPreference;
+import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

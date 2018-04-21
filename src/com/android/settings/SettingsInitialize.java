@@ -27,7 +27,7 @@ import android.content.pm.ShortcutManager;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import android.util.Log;
 
 import java.util.ArrayList;

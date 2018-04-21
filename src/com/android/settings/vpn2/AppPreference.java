@@ -21,13 +21,13 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 
 import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
 
 /**
- * {@link android.support.v7.preference.Preference} containing information about a VPN
+ * {@link androidx.preference.Preference} containing information about a VPN
  * application. Tracks the package name and connection state.
  */
 public class AppPreference extends ManageablePreference {

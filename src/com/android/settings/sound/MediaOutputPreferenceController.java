@@ -23,7 +23,7 @@ import static android.media.AudioSystem.DEVICE_OUT_USB_HEADSET;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.media.AudioManager;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;

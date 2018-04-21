@@ -27,7 +27,7 @@ import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.datausage.DataSaverBackend;
 import com.android.settings.widget.SwitchWidgetController;

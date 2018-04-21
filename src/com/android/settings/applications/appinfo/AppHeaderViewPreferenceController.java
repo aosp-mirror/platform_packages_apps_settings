@@ -19,7 +19,7 @@ package com.android.settings.applications.appinfo;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageInfo;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.Utils;

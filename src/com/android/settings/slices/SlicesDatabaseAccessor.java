@@ -44,6 +44,7 @@ public class SlicesDatabaseAccessor {
             IndexColumns.TITLE,
             IndexColumns.SUMMARY,
             IndexColumns.SCREENTITLE,
+            IndexColumns.KEYWORDS,
             IndexColumns.ICON_RESOURCE,
             IndexColumns.FRAGMENT,
             IndexColumns.CONTROLLER,
@@ -150,6 +151,7 @@ public class SlicesDatabaseAccessor {
         final String summary = cursor.getString(cursor.getColumnIndex(IndexColumns.SUMMARY));
         final String screenTitle = cursor.getString(
                 cursor.getColumnIndex(IndexColumns.SCREENTITLE));
+        final String keywords = cursor.getString(cursor.getColumnIndex(IndexColumns.KEYWORDS));
         final int iconResource = cursor.getInt(cursor.getColumnIndex(IndexColumns.ICON_RESOURCE));
         final String fragmentClassName = cursor.getString(
                 cursor.getColumnIndex(IndexColumns.FRAGMENT));
@@ -169,6 +171,7 @@ public class SlicesDatabaseAccessor {
                 .setTitle(title)
                 .setSummary(summary)
                 .setScreenTitle(screenTitle)
+                .setKeywords(keywords)
                 .setIcon(iconResource)
                 .setFragmentName(fragmentClassName)
                 .setPreferenceControllerClassName(controllerClassName)

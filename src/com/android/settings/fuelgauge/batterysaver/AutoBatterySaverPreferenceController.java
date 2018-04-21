@@ -17,8 +17,8 @@ package com.android.settings.fuelgauge.batterysaver;
 
 import android.content.Context;
 import android.provider.Settings;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.fuelgauge.BatterySaverUtils;

@@ -18,7 +18,7 @@ package com.android.settings.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.v4.content.res.TypedArrayUtils;
+import androidx.core.content.res.TypedArrayUtils;
 import android.util.AttributeSet;
 import android.widget.Button;
 

@@ -15,8 +15,8 @@
  */
 package com.android.settings.datetime.timezone.model;
 
-import android.support.annotation.VisibleForTesting;
-import android.support.v4.util.ArraySet;
+import androidx.annotation.VisibleForTesting;
+import androidx.collection.ArraySet;
 
 import libcore.util.CountryTimeZones;
 import libcore.util.CountryZonesFinder;

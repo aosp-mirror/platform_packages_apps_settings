@@ -5,7 +5,7 @@ import com.android.settings.R;
 import android.os.Bundle;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import android.support.v7.preference.PreferenceCategory;
+import androidx.preference.PreferenceCategory;
 import android.speech.tts.TtsEngines;
 import android.speech.tts.TextToSpeech.EngineInfo;
 import com.android.settings.SettingsActivity;

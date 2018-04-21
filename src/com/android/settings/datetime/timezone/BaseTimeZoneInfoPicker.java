@@ -23,7 +23,7 @@ import android.content.res.Resources;
 import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.datetime.timezone.model.TimeZoneData;

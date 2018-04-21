@@ -16,7 +16,7 @@ package com.android.settings.datausage;
 
 import android.app.Application;
 import android.os.Bundle;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 import android.widget.Switch;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;

@@ -39,9 +39,8 @@
 
     <Preference
         android:key="data_management"
-        android:persistent="false"
-        settings:controller="com.android.settings.backup.DataManagementPreferenceController">
-    </Preference>
+        android:title="@string/backup_data_management_title"
+        settings:controller="com.android.settings.backup.DataManagementPreferenceController" />
 
     <SwitchPreference
         android:key="auto_restore"
@@ -52,7 +51,6 @@
     <Preference
         android:key="backup_inactive"
         android:title="@string/backup_inactive_title"
-        android:persistent="false"
         android:enabled="false"
         android:selectable="false"
         settings:controller="com.android.settings.backup.BackupInactivePreferenceController" />

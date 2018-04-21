@@ -26,7 +26,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.ValidatedEditTextPreference;

@@ -28,8 +28,8 @@ import android.app.NotificationManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;

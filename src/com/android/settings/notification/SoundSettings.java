@@ -25,8 +25,8 @@ import android.os.Message;
 import android.os.UserHandle;
 import android.preference.SeekBarVolumizer;
 import android.provider.SearchIndexableResource;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 import android.text.TextUtils;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;

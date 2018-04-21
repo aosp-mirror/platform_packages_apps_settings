@@ -19,8 +19,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="auto_brightness_detail"
-    android:title="@string/auto_brightness_title"
-    settings:keywords="@string/keywords_display_auto_brightness">
+    android:title="@string/auto_brightness_title">
 
     <com.android.settings.widget.VideoPreference
         android:key="auto_brightness_video"
@@ -31,6 +30,7 @@
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="auto_brightness"
         android:title="@string/auto_brightness_title"
+        settings:keywords="@string/keywords_display_auto_brightness"
         settings:controller="com.android.settings.display.AutoBrightnessPreferenceController"
         settings:useAdminDisabledSummary="true"
         settings:userRestriction="no_config_brightness" />

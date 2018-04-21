@@ -29,8 +29,8 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.os.PowerManager;
 import android.provider.Settings.System;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 

@@ -296,6 +296,8 @@
     <string name="forget" msgid="1400428660472591263">"Zapomenout"</string>
     <string name="save" msgid="879993180139353333">"Uložit"</string>
     <string name="done" msgid="6942539184162713160">"Hotovo"</string>
+    <!-- no translation found for apply (1577045208487259229) -->
+    <skip />
     <string name="settings_label" msgid="1626402585530130914">"Nastavení"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Nastavení"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Zástupce nastavení"</string>
@@ -349,10 +351,8 @@
     <string name="zone_info_footer_no_dst" msgid="8652423870143056964">"Používá <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Nepoužívá letní čas."</string>
     <string name="zone_time_type_dst" msgid="8850494578766845276">"Letní čas"</string>
     <string name="zone_time_type_standard" msgid="3462424485380376522">"Standardní čas"</string>
-    <!-- no translation found for zone_menu_by_region (8370437123807764346) -->
-    <skip />
-    <!-- no translation found for zone_menu_by_offset (7161573994228041794) -->
-    <skip />
+    <string name="zone_menu_by_region" msgid="8370437123807764346">"Vybrat podle oblasti"</string>
+    <string name="zone_menu_by_offset" msgid="7161573994228041794">"Vybrat podle posunu od UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Datum"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Čas"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Automaticky zamknout za"</string>
@@ -712,8 +712,7 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Rozšířené nastavení"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Rozšířené nastavení Bluetooth"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Když je zapnuté připojení Bluetooth, zařízení může komunikovat s ostatními zařízeními Bluetooth v okolí."</string>
-    <!-- no translation found for bluetooth_scanning_on_info_message (824285504325592644) -->
-    <skip />
+    <string name="bluetooth_scanning_on_info_message" msgid="824285504325592644">"Když je zapnuté připojení Bluetooth, zařízení může komunikovat s ostatními zařízeními Bluetooth v okolí.\n\nZa účelem vylepšení funkcí mohou aplikace a služby nadále vyhledávat zařízení v okolí, i když je Bluetooth vypnuté. Lze tak například vylepšit funkce založené na poloze. Toto chování můžete změnit v "<annotation id="link">"nastavení vyhledávání"</annotation>"."</string>
     <string name="ble_scan_notify_text" msgid="1295915006005700650">"Za účelem zvýšení přesnosti určování polohy mohou systémové aplikace a služby neustále vyhledávat zařízení Bluetooth. Toto chování můžete změnit v <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>nastavení vyhledávání<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_failed" msgid="4500234659813241053">"Nelze se připojit. Zkuste to znovu."</string>
     <string name="device_details_title" msgid="6576953269221085300">"Podrobnosti o zařízení"</string>
@@ -747,7 +746,7 @@
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="5936561749790095473">"Vyberte maximální počet připojených audiozařízení Bluetooth"</string>
     <string name="bluetooth_disable_avdtp_delay_reports" msgid="7710144996922449248">"Zakázat přehledy prodlevy Bluetooth AVDTP"</string>
     <string name="bluetooth_disable_avdtp_delay_reports_summary" msgid="6882039901251054992">"Zakázat příjem protokolů prodlev Bluetooth AVDTP"</string>
-    <string name="wifi_display_settings_title" msgid="8740852850033480136">"Odeslat"</string>
+    <string name="wifi_display_settings_title" msgid="8740852850033480136">"Odesílání"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Povolit bezdrátové zobrazení"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"V okolí nebyla nalezena žádná zařízení."</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"Připojování"</string>
@@ -873,6 +872,7 @@
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"Pásmo 5,0 GHz"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2,4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5,0 GHz"</string>
+    <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Vyberte alespoň jedno pásmo pro hotspot Wi-Fi:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Nastavení IP adresy"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Sdílet s ostatními uživateli zařízení"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(nezměněno)"</string>
@@ -1110,7 +1110,7 @@
     <string name="night_display_title" msgid="2626451512200357686">"Noční režim"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Noční režim obrazovku zbarví do oranžova. Čtení a sledování obrazovky při tlumeném osvětlení tak bude snazší a bude se vám lépe usínat."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Plán"</string>
-    <string name="night_display_auto_mode_never" msgid="2483761922928753400">"Žádné"</string>
+    <string name="night_display_auto_mode_never" msgid="2483761922928753400">"Žádný"</string>
     <string name="night_display_auto_mode_custom" msgid="2379394568898721765">"Zapne se ve zvoleném čas"</string>
     <string name="night_display_auto_mode_twilight" msgid="589042813708244059">"Zapne se od soumraku do úsvitu"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"Čas zahájení"</string>
@@ -1414,8 +1414,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="6897444467730463117">"Toto médium <xliff:g id="NAME_0">^1</xliff:g> můžete nadále používat, ale může být pomalé. \n\nAplikace uložené na médiu <xliff:g id="NAME_1">^2</xliff:g> nemusí fungovat správně a přenosy obsahu mohou trvat dlouho. \n\nZkuste použít rychlejší médium <xliff:g id="NAME_2">^3</xliff:g> nebo toto médium <xliff:g id="NAME_3">^4</xliff:g> použijte jako přenosné úložiště."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="4126873669723115805">"Začít znovu"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="49399942893518218">"Pokračovat"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="5993954859154357197">"Chcete-li obsah přesunout na médium <xliff:g id="NAME">^1</xliff:g>, přejděte do "<b>"Nastavení &gt; Úložiště"</b></string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="2574326509794010488">"Obsah byl přesunut na médium <xliff:g id="NAME_0">^1</xliff:g>. \n\nChcete-li médium <xliff:g id="NAME_1">^2</xliff:g> spravovat, přejděte do "<b>"Nastavení &gt; Úložiště"</b>"."</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="11937346870534608">"Obsah můžete přesunout na médium <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="4658433206901211269">"Chcete-li obsah přesunout na médium <xliff:g id="NAME">^1</xliff:g>, přejděte do "<b>"Nastavení &gt; Úložiště"</b></string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="6239886818487538806">"Obsah byl přesunut na médium <xliff:g id="NAME_0">^1</xliff:g>. \n\nChcete-li médium <xliff:g id="NAME_1">^2</xliff:g> spravovat, přejděte do "<b>"Nastavení &gt; Úložiště"</b>"."</string>
     <string name="battery_status_title" msgid="9159414319574976203">"Stav baterie"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Nabití baterie"</string>
     <string name="apn_settings" msgid="3743170484827528406">"Přístupové body"</string>
@@ -2166,8 +2167,7 @@
     <string name="awake" msgid="387122265874485088">"Doba provozu zařízení"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"Doba provozu Wi-Fi"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"Doba provozu modulu Wi-Fi"</string>
-    <!-- no translation found for advanced_battery_title (6768618303037280828) -->
-    <skip />
+    <string name="advanced_battery_title" msgid="6768618303037280828">"Využití baterie"</string>
     <string name="history_details_title" msgid="3608240585315506067">"Podrobnosti historie"</string>
     <string name="battery_details_title" msgid="6101394441569858580">"Využití baterie"</string>
     <string name="details_subtitle" msgid="32593908269911734">"Podrobnosti využívání"</string>
@@ -2179,7 +2179,7 @@
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"Časté žádosti o polohu"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"Počet aplikací, které se nechovají správně: <xliff:g id="NUMBER">%1$d</xliff:g>"</string>
     <string name="battery_tip_summary_title" msgid="7060523369832289878">"Baterie pracuje bez problémů"</string>
-    <string name="battery_tip_summary_summary" msgid="7674026655453457">"Aplikace běžní normálně"</string>
+    <string name="battery_tip_summary_summary" msgid="7674026655453457">"Aplikace běží normálně"</string>
     <string name="battery_tip_low_battery_title" msgid="5103420355109677385">"Nízká kapacita baterie"</string>
     <string name="battery_tip_low_battery_summary" msgid="4702986182940709150">"Baterie není schopna zajistit dobrou výdrž"</string>
     <string name="battery_tip_smart_battery_title" product="default" msgid="2542822112725248683">"Zvyšte životnost baterie telefonu"</string>
@@ -2194,12 +2194,9 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"Tablet byl využíván víc než obvykle"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"Zařízení bylo využíváno víc než obvykle"</string>
     <string name="battery_tip_high_usage_summary" msgid="6341311803303581798">"Baterie se brzy vybije"</string>
-    <!-- no translation found for battery_tip_dialog_message (7434089311164898581) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (2987443811119964310) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (1993039726576708815) -->
-    <skip />
+    <string name="battery_tip_dialog_message" product="default" msgid="7434089311164898581">"Telefon byl využíván víc než obvykle. Baterie se možná vybije dříve, než bylo očekáváno.\n\nNejvíce využívané aplikace (<xliff:g id="NUMBER">%1$d</xliff:g>) od posledního nabití (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="2987443811119964310">"Tablet byl využíván víc než obvykle. Baterie se možná vybije dříve, než bylo očekáváno.\n\nNejvíce využívané aplikace (<xliff:g id="NUMBER">%1$d</xliff:g>) od posledního nabití (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="1993039726576708815">"Zařízení bylo využíváno víc než obvykle. Baterie se možná vybije dříve, než bylo očekáváno.\n\nNejvíce využívané aplikace (<xliff:g id="NUMBER">%1$d</xliff:g>) od posledního nabití (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="few">Omezit %1$d aplikace</item>
       <item quantity="many">Omezit %1$d aplikace</item>
@@ -2253,8 +2250,7 @@
       <item quantity="other">Omezení využití baterie u %1$d aplikací</item>
       <item quantity="one">Omezení využití baterie u %1$d aplikace</item>
     </plurals>
-    <!-- no translation found for restricted_app_detail_footer (6739863162364046859) -->
-    <skip />
+    <string name="restricted_app_detail_footer" msgid="6739863162364046859">"Tyto aplikace využívají baterii na pozadí. Omezené aplikace nemusí fungovat správně a jejich oznámení se mohou zobrazovat se zpožděním."</string>
     <string name="battery_auto_restriction_title" msgid="6553271897488963709">"Použít správce baterie"</string>
     <string name="battery_auto_restriction_summary" msgid="8561335400991281062">"Zjišťovat, zda aplikace vybíjejí baterii"</string>
     <string name="battery_manager_on" msgid="8643310865054362396">"Zapnuto / Zjišťování, zda aplikace vybíjejí baterii"</string>
@@ -2356,7 +2352,6 @@
     <string name="battery_detail_foreground" msgid="3350401514602032183">"Při aktivním používání"</string>
     <string name="battery_detail_background" msgid="1929644393553768999">"Na pozadí"</string>
     <string name="battery_detail_power_usage" msgid="6485766868610469101">"Využití baterie"</string>
-    <string name="battery_detail_power_percentage" msgid="8064814503316094497">"<xliff:g id="PERCENT">%1$s</xliff:g> z celkového využití aplikacemi (<xliff:g id="POWER">%2$d</xliff:g> mAh)"</string>
     <string name="battery_detail_info_title" msgid="8227822131405620369">"Od úplného nabití"</string>
     <string name="battery_detail_manage_title" msgid="9094314252105828014">"Správa využití baterie"</string>
     <string name="advanced_battery_graph_subtext" msgid="5621073891377915877">"Odhad zbývající výdrže baterie vychází z vašeho používání zařízení"</string>
@@ -3156,8 +3151,7 @@
     <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"Nezobrazovat oznámení na obrazovce"</string>
     <string name="zen_mode_block_effect_status" msgid="6642532634292373081">"Skrýt ikony stavového řádku"</string>
     <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"Skrýt puntíky s oznámením"</string>
-    <!-- no translation found for zen_mode_block_effect_ambient (4704755879961212658) -->
-    <skip />
+    <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"Nebudit kvůli oznámením"</string>
     <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"Skrýt ze seznamu oznámení"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"Nikdy"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="1230265589026355094">"Při vypnuté obrazovce"</string>
@@ -3204,8 +3198,7 @@
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Blokovat, když je obrazovka vypnutá"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Režim Nerušit dokáže více, než jen blokovat nechtěné zvuky – dokáže blokovat i vizuální vyrušení. To může být užitečné, když chcete spát, soustředit se nebo omezit čas strávený na telefonu."</string>
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Blokovat zvuky a vizuální vyrušení"</string>
-    <!-- no translation found for zen_onboarding_screen_off_summary (5393041573999488088) -->
-    <skip />
+    <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Nezapínat obrazovku ani nebudit kvůli oznámení"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Oznámení vůbec nezobrazovat, s výjimkou základní aktivity a stavu telefonu"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Zvuky pracovního profilu"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Použít zvuky osobního profilu"</string>
@@ -3310,9 +3303,13 @@
     </plurals>
     <string name="no_channels" msgid="3077375508177744586">"Tato aplikace neodeslala žádná oznámení"</string>
     <string name="app_settings_link" msgid="8894946007543660906">"Další nastavení v aplikaci"</string>
-    <!-- no translation found for app_notification_listing_summary_zero (8046168435207424440) -->
-    <skip />
-    <!-- no translation found for app_notification_listing_summary_others (6709582776823665660) -->
+    <string name="app_notification_listing_summary_zero" msgid="8046168435207424440">"Zapnuto pro všechny aplikace"</string>
+    <plurals name="app_notification_listing_summary_others" formatted="false" msgid="6709582776823665660">
+      <item quantity="few">Vypnuto pro <xliff:g id="COUNT_1">%d</xliff:g> aplikace</item>
+      <item quantity="many">Vypnuto pro <xliff:g id="COUNT_1">%d</xliff:g> aplikace</item>
+      <item quantity="other">Vypnuto pro <xliff:g id="COUNT_1">%d</xliff:g> aplikací</item>
+      <item quantity="one">Vypnuto pro <xliff:g id="COUNT_0">%d</xliff:g> aplikaci</item>
+    </plurals>
     <plurals name="deleted_channels" formatted="false" msgid="8028574302599397935">
       <item quantity="few">Byly smazány <xliff:g id="COUNT_1">%d</xliff:g> kategorie</item>
       <item quantity="many">Bylo smazáno <xliff:g id="COUNT_1">%d</xliff:g> kategorie</item>
@@ -3448,8 +3445,7 @@
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Kromě odemykání otiskem prstu můžete toto zařízení dále ochránit tím, že před jeho spuštěním bude požadováno heslo. Před spuštěním zařízení nemůže přijímat hovory, zprávy ani oznámení, včetně budíků.\n\nTato funkce pomáhá chránit data ve ztracených nebo ukradených zařízeních. Má být před spuštěním zařízení vyžadováno heslo?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Ano"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Ne"</string>
-    <!-- no translation found for restricted_true_label (4761453839409220473) -->
-    <skip />
+    <string name="restricted_true_label" msgid="4761453839409220473">"Omezené"</string>
     <string name="restricted_false_label" msgid="3279282180297058755">"Aplikace smí využívat baterii na pozadí"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Požadovat kód PIN?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Požadovat gesto?"</string>
@@ -3896,7 +3892,7 @@
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"Data na pozadí jsou vypnuta"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"Zapnuto"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"Vypnuto"</string>
-    <string name="data_saver_switch_title" msgid="836312690356005669">"Použít Spořič dat"</string>
+    <string name="data_saver_switch_title" msgid="836312690356005669">"Použít spořič dat"</string>
     <string name="unrestricted_app_title" msgid="4465437191723332066">"Neomezené využití dat"</string>
     <string name="unrestricted_app_summary" msgid="6458008993501723912">"Povolit neomezený přístup k datům, když je zapnutý Spořič dat"</string>
     <string name="home_app" msgid="4066188520886810030">"Výchozí aplikace"</string>
@@ -3948,6 +3944,7 @@
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Objekt hodnocení chybí."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Objekt hodnocení tento klíč neobsahuje."</string>
     <string name="display_cutout_emulation" msgid="6306593933746393170">"Simulovat displej s výřezem"</string>
+    <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"výřez displeje"</string>
     <string name="display_cutout_emulation_none" msgid="5144174674654097316">"Žádné"</string>
     <string name="special_access" msgid="3458780842491881155">"Přístup ke spec. aplikacím"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">

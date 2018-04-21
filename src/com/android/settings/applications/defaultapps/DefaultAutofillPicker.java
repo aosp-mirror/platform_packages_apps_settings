@@ -30,7 +30,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.service.autofill.AutofillService;
 import android.service.autofill.AutofillServiceInfo;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;

@@ -19,6 +19,7 @@ package com.android.settings.slices;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_CONTROLLER;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_ICON;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEY;
+import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEYWORDS;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_PLATFORM_SLICE_FLAG;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_SUMMARY;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_TITLE;
@@ -39,12 +40,12 @@ import android.util.Log;
 import android.util.Xml;
 import android.view.accessibility.AccessibilityManager;
 
-import com.android.settings.accessibility.AccessibilitySlicePreferenceController;
-import com.android.settings.core.PreferenceXmlParserUtils;
-import com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilitySettings;
+import com.android.settings.accessibility.AccessibilitySlicePreferenceController;
+import com.android.settings.core.PreferenceXmlParserUtils;
+import com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.DatabaseIndexingUtils;
@@ -184,6 +185,7 @@ class SliceDataConverter {
                             | MetadataFlag.FLAG_NEED_PREF_TITLE
                             | MetadataFlag.FLAG_NEED_PREF_ICON
                             | MetadataFlag.FLAG_NEED_PREF_SUMMARY
+                            | MetadataFlag.FLAG_NEED_KEYWORDS
                             | MetadataFlag.FLAG_NEED_PLATFORM_SLICE_FLAG);
 
             for (Bundle bundle : metadata) {
@@ -196,6 +198,7 @@ class SliceDataConverter {
                 final String key = bundle.getString(METADATA_KEY);
                 final String title = bundle.getString(METADATA_TITLE);
                 final String summary = bundle.getString(METADATA_SUMMARY);
+                final String keywords = bundle.getString(METADATA_KEYWORDS);
                 final int iconResId = bundle.getInt(METADATA_ICON);
                 final int sliceType = SliceBuilderUtils.getSliceType(mContext, controllerClassName,
                         key);
@@ -207,6 +210,7 @@ class SliceDataConverter {
                         .setSummary(summary)
                         .setIcon(iconResId)
                         .setScreenTitle(screenTitle)
+                        .setKeywords(keywords)
                         .setPreferenceControllerClassName(controllerClassName)
                         .setFragmentName(fragmentName)
                         .setSliceType(sliceType)
@@ -215,6 +219,8 @@ class SliceDataConverter {
 
                 xmlSliceData.add(xmlSlice);
             }
+        } catch (SliceData.InvalidSliceDataException e) {
+            Log.w(TAG, "Invalid data when building SliceData for " + fragmentName, e);
         } catch (XmlPullParserException e) {
             Log.w(TAG, "XML Error parsing PreferenceScreen: ", e);
         } catch (IOException e) {
@@ -267,8 +273,11 @@ class SliceDataConverter {
                     .setTitle(title)
                     .setIcon(iconResource)
                     .setSliceType(SliceData.SliceType.SWITCH);
-
-            sliceData.add(sliceDataBuilder.build());
+            try {
+                sliceData.add(sliceDataBuilder.build());
+            } catch (SliceData.InvalidSliceDataException e) {
+                Log.w(TAG, "Invalid data when building a11y SliceData for " + flattenedName, e);
+            }
         }
 
         return sliceData;

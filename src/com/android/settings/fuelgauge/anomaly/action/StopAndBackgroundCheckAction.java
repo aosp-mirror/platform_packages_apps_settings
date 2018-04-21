@@ -17,7 +17,7 @@
 package com.android.settings.fuelgauge.anomaly.action;
 
 import android.content.Context;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.fuelgauge.anomaly.Anomaly;

@@ -27,7 +27,7 @@ import android.nfc.NfcManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedLockUtils;
