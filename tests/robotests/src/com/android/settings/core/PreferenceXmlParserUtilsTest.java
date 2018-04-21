@@ -16,6 +16,8 @@
 
 package com.android.settings.core;
 
+import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEYWORDS;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
@@ -242,6 +244,21 @@ public class PreferenceXmlParserUtilsTest {
         }
 
         assertThat(hasPreferenceScreen).isTrue();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void extractMetadata_requestIncludesKeywords_shouldContainKeywords()
+            throws IOException, XmlPullParserException {
+        final String expectedKeywords = "a, b, c";
+        final List<Bundle> metadata = PreferenceXmlParserUtils.extractMetadata(mContext,
+                R.xml.location_settings,
+                MetadataFlag.FLAG_NEED_PREF_TYPE | MetadataFlag.FLAG_NEED_KEYWORDS);
+        final Bundle bundle = metadata.get(0);
+
+        final String keywords = bundle.getString(METADATA_KEYWORDS);
+
+        assertThat(keywords).isEqualTo(expectedKeywords);
     }
 
     /**

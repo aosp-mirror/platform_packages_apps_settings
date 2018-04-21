@@ -44,6 +44,7 @@ public class SlicesDatabaseAccessorTest {
     private final String FAKE_TITLE = "title";
     private final String FAKE_SUMMARY = "summary";
     private final String FAKE_SCREEN_TITLE = "screen_title";
+    private final String FAKE_KEYWORDS = "a, b, c";
     private final int FAKE_ICON = 1234;
     private final String FAKE_FRAGMENT_NAME = FakeIndexProvider.class.getName();
     private final String FAKE_CONTROLLER_NAME = FakePreferenceController.class.getName();
@@ -76,6 +77,7 @@ public class SlicesDatabaseAccessorTest {
         assertThat(data.getTitle()).isEqualTo(FAKE_TITLE);
         assertThat(data.getSummary()).isEqualTo(FAKE_SUMMARY);
         assertThat(data.getScreenTitle()).isEqualTo(FAKE_SCREEN_TITLE);
+        assertThat(data.getKeywords()).isEqualTo(FAKE_KEYWORDS);
         assertThat(data.getIconResource()).isEqualTo(FAKE_ICON);
         assertThat(data.getFragmentClassName()).isEqualTo(FAKE_FRAGMENT_NAME);
         assertThat(data.getUri()).isNull();
@@ -102,6 +104,7 @@ public class SlicesDatabaseAccessorTest {
         assertThat(data.getTitle()).isEqualTo(FAKE_TITLE);
         assertThat(data.getSummary()).isEqualTo(FAKE_SUMMARY);
         assertThat(data.getScreenTitle()).isEqualTo(FAKE_SCREEN_TITLE);
+        assertThat(data.getKeywords()).isEqualTo(FAKE_KEYWORDS);
         assertThat(data.getIconResource()).isEqualTo(FAKE_ICON);
         assertThat(data.getFragmentClassName()).isEqualTo(FAKE_FRAGMENT_NAME);
         assertThat(data.getUri()).isEqualTo(uri);
@@ -164,12 +167,12 @@ public class SlicesDatabaseAccessorTest {
         values.put(SlicesDatabaseHelper.IndexColumns.TITLE, FAKE_TITLE);
         values.put(SlicesDatabaseHelper.IndexColumns.SUMMARY, FAKE_SUMMARY);
         values.put(SlicesDatabaseHelper.IndexColumns.SCREENTITLE, FAKE_SCREEN_TITLE);
+        values.put(SlicesDatabaseHelper.IndexColumns.KEYWORDS, FAKE_KEYWORDS);
         values.put(SlicesDatabaseHelper.IndexColumns.ICON_RESOURCE, FAKE_ICON);
         values.put(SlicesDatabaseHelper.IndexColumns.FRAGMENT, FAKE_FRAGMENT_NAME);
         values.put(SlicesDatabaseHelper.IndexColumns.CONTROLLER, FAKE_CONTROLLER_NAME);
         values.put(SlicesDatabaseHelper.IndexColumns.PLATFORM_SLICE, isPlatformSlice);
         values.put(SlicesDatabaseHelper.IndexColumns.SLICE_TYPE, SliceData.SliceType.INTENT);
-
 
         mDb.replaceOrThrow(SlicesDatabaseHelper.Tables.TABLE_SLICES_INDEX, null, values);
     }
