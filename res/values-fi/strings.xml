@@ -179,7 +179,7 @@
     <string name="connected_device_connected_title" msgid="5871712271201945606">"Yhdistetty tällä hetkellä"</string>
     <string name="connected_device_saved_title" msgid="688364359746674536">"Tallennetut laitteet"</string>
     <string name="connected_device_add_device_title" msgid="7803521577708810621">"Lisää laite"</string>
-    <string name="connected_device_add_device_summary" msgid="4041865900298680338">"Bluetooth käynnistetään parinmuodostusta varten"</string>
+    <string name="connected_device_add_device_summary" msgid="4041865900298680338">"Bluetooth käynnistetään parinmuodostusta varten."</string>
     <string name="connected_device_connections_title" msgid="5988939345181466770">"Yhteysasetukset"</string>
     <string name="connected_device_previously_connected_title" msgid="491765792822244604">"Aiemmin liitetyt laitteet"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Päivämäärä ja aika"</string>
@@ -292,6 +292,8 @@
     <string name="forget" msgid="1400428660472591263">"Unohda"</string>
     <string name="save" msgid="879993180139353333">"Tallenna"</string>
     <string name="done" msgid="6942539184162713160">"Valmis"</string>
+    <!-- no translation found for apply (1577045208487259229) -->
+    <skip />
     <string name="settings_label" msgid="1626402585530130914">"Asetukset"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Asetukset"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Asetukset-pikakuvake"</string>
@@ -692,8 +694,7 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Lisäasetukset"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Bluetooth-lisäasetukset"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Kun Bluetooth on käytössä, laite voi viestiä lähiympäristön Bluetooth-laitteiden kanssa."</string>
-    <!-- no translation found for bluetooth_scanning_on_info_message (824285504325592644) -->
-    <skip />
+    <string name="bluetooth_scanning_on_info_message" msgid="824285504325592644">"Kun Bluetooth on käytössä, laitteesi voi kommunikoida muiden lähellä olevien Bluetooth-laitteiden kanssa.\n\nParantaakseen laitteen käyttökokemusta sovellukset ja palvelut voivat silti hakea lähellä olevia laitteita aina, vaikka Bluetooth olisi pois käytöstä. Näin voidaan esimerkiksi kehittää sijaintiin perustuvia ominaisuuksia ja palveluita. Voit muokata tätä asetusta "<annotation id="link">"hakuasetuksissa"</annotation>"."</string>
     <string name="ble_scan_notify_text" msgid="1295915006005700650">"Parantaakseen sijainnin tarkkuutta järjestelmäsovellukset ja -palvelut voivat edelleen havaita Bluetooth-laitteita. Voit muuttaa tätä <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>etsintäasetuksissa<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_failed" msgid="4500234659813241053">"Yhteyttä ei voi muodostaa. Yritä uudelleen."</string>
     <string name="device_details_title" msgid="6576953269221085300">"Laitteen tiedot"</string>
@@ -853,8 +854,7 @@
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"5,0 GHz:n taajuus"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2,4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5,0 GHz"</string>
-    <!-- no translation found for wifi_ap_band_select_one (3476254666116431650) -->
-    <skip />
+    <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Valitse vähintään yksi kaista Wi‑Fi-hotspotille:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP-asetukset"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Jaa muiden laitteen käyttäjien kanssa"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(ei muutettu)"</string>
@@ -937,7 +937,7 @@
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"Haluatko peruuttaa laitteelle <xliff:g id="PEER_NAME">%1$s</xliff:g> lähetetyn yhteydenmuodostuskutsun?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"Unohdetaanko tämä ryhmä?"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Wi‑Fi-hotspot"</string>
-    <string name="wifi_hotspot_off_subtext" msgid="2199911382555864644">"Internetyhteyttä tai sisältöä ei jaeta muiden laitteiden kanssa"</string>
+    <string name="wifi_hotspot_off_subtext" msgid="2199911382555864644">"Internetyhteyttä tai sisältöä ei jaeta muiden laitteiden kanssa."</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5936710887156133458">"Tabletin internetyhteys jaetaan hotspotin kautta"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="5556202634866621632">"Puhelimen internetyhteys jaetaan hotspotin kautta"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="5017191966153008">"Sovellus jakaa sisältöä – jos haluat jakaa internetyhteyden, sammuta hotspot ja käynnistä se uudelleen"</string>
@@ -1392,12 +1392,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="6897444467730463117">"<xliff:g id="NAME_0">^1</xliff:g> on edelleen käytettävissä, mutta voi toimia hitaasti. \n\nLaitteessa <xliff:g id="NAME_1">^2</xliff:g> olevat sovellukset eivät välttämättä toimi oikein ja sisällön siirtäminen voi kestää pitkään. \n\nKokeile ottaa käyttöön nopeampi <xliff:g id="NAME_2">^3</xliff:g> tai käytä laitetta <xliff:g id="NAME_3">^4</xliff:g> siirrettävänä tallennustilana."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="4126873669723115805">"Aloita alusta"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="49399942893518218">"Jatka"</string>
-    <!-- no translation found for storage_wizard_ready_v2_external_body (11937346870534608) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_body (4658433206901211269) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (6239886818487538806) -->
-    <skip />
+    <string name="storage_wizard_ready_v2_external_body" msgid="11937346870534608">"Voit siirtää sisältöä paikkaan <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="4658433206901211269">"Jos haluat siirtää sisältöä laitteeseen <xliff:g id="NAME">^1</xliff:g>, valitse "<b>"Asetukset &gt; Tallennustila"</b>"."</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="6239886818487538806">"<xliff:g id="NAME_0">^1</xliff:g> vastaanotti sisällön. \n\nJos haluat hallita laitetta <xliff:g id="NAME_1">^2</xliff:g>, valitse "<b>"Asetukset &gt; Tallennustila"</b>"."</string>
     <string name="battery_status_title" msgid="9159414319574976203">"Akun tila"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Akun taso"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN:t"</string>
@@ -1495,11 +1492,11 @@
     <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"Kun Data Saver on käytössä, puhelinta ei voi käyttää modeemina eikä kannettavien hotspotien käyttäminen onnistu."</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"Internetin jakaminen USB:n kautta"</string>
-    <string name="usb_tethering_subtext" product="default" msgid="3711893746716442706">"Jaa puhelimen internetyhteys USB:llä"</string>
+    <string name="usb_tethering_subtext" product="default" msgid="3711893746716442706">"Jaa puhelimen internetyhteys USB:llä."</string>
     <string name="usb_tethering_subtext" product="tablet" msgid="2292916486612255069">"Jaa tabletin internetyhteys USB:llä"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"Jaettu Bluetooth-yhteys"</string>
     <string name="bluetooth_tethering_subtext" product="tablet" msgid="8828883800511737077">"Jaa tabletin internetyhteys Bluetoothilla"</string>
-    <string name="bluetooth_tethering_subtext" product="default" msgid="1904667146601254812">"Jaa puhelimen internetyhteys Bluetoothilla"</string>
+    <string name="bluetooth_tethering_subtext" product="default" msgid="1904667146601254812">"Jaa puhelimen internetyhteys Bluetoothilla."</string>
     <string name="bluetooth_tethering_off_subtext_config" msgid="376389105752995580">"<xliff:g id="DEVICE_NAME">%1$d</xliff:g> jakaa internetyhteyden Bluetoothilla"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="2135590598511178690">"Voidaan yhdistää korkeintaan <xliff:g id="MAXCONNECTION">%1$d</xliff:g> laitteeseen."</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"Jaettu internetyhteys katkaistaan laitteesta <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
@@ -2130,8 +2127,7 @@
     <string name="awake" msgid="387122265874485088">"Laitteen käytössäoloaika"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"Wi-Fi-yhteyden käytössäoloaika"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"Wi-Fi-yhteyden käytössäoloaika"</string>
-    <!-- no translation found for advanced_battery_title (6768618303037280828) -->
-    <skip />
+    <string name="advanced_battery_title" msgid="6768618303037280828">"Akun käyttö"</string>
     <string name="history_details_title" msgid="3608240585315506067">"Historiatiedot"</string>
     <string name="battery_details_title" msgid="6101394441569858580">"Akun käyttö"</string>
     <string name="details_subtitle" msgid="32593908269911734">"Käyttötiedot"</string>
@@ -2143,7 +2139,7 @@
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"Pyytää sijaintitietoja usein"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> sovellusta ei toimi oikein"</string>
     <string name="battery_tip_summary_title" msgid="7060523369832289878">"Akku on hyvässä kunnossa"</string>
-    <string name="battery_tip_summary_summary" msgid="7674026655453457">"Sovellukset toimivat normaalisti"</string>
+    <string name="battery_tip_summary_summary" msgid="7674026655453457">"Sovellukset toimivat normaalisti."</string>
     <string name="battery_tip_low_battery_title" msgid="5103420355109677385">"Huono akunkesto"</string>
     <string name="battery_tip_low_battery_summary" msgid="4702986182940709150">"Akku ei kestä kauaa"</string>
     <string name="battery_tip_smart_battery_title" product="default" msgid="2542822112725248683">"Paranna puhelimesi akunkestoa"</string>
@@ -2193,7 +2189,7 @@
     <string name="battery_tip_dialog_summary_message_no_estimation" msgid="1456026456418786135">"Jos haluat pidentää akunkestoa, ota virransäästö käyttöön."</string>
     <string name="smart_battery_manager_title" msgid="870632749556793417">"Virranhallinta"</string>
     <string name="smart_battery_title" msgid="6218785691872466076">"Hallinnoi sovelluksia automaattisesti"</string>
-    <string name="smart_battery_summary" msgid="1339184602000004058">"Rajoita harvoin käytettyjen sovellusten akunkäyttöä"</string>
+    <string name="smart_battery_summary" msgid="1339184602000004058">"Rajoita harvoin käytettyjen sovellusten akunkäyttöä."</string>
     <string name="smart_battery_footer" product="default" msgid="5555604955956219544">"Voit rajoittaa sovelluksia, joiden virranhallinta havaitsee käyttävän paljon virtaa. Rajoitetut sovellukset eivät ehkä toimi oikein ja ilmoituksia voidaan näyttää viiveellä."</string>
     <string name="smart_battery_footer" product="tablet" msgid="5555604955956219544">"Voit rajoittaa sovelluksia, joiden virranhallinta havaitsee käyttävän paljon virtaa. Rajoitetut sovellukset eivät ehkä toimi oikein ja ilmoituksia voidaan näyttää viiveellä."</string>
     <string name="smart_battery_footer" product="device" msgid="5555604955956219544">"Voit rajoittaa sovelluksia, joiden virranhallinta havaitsee käyttävän paljon virtaa. Rajoitetut sovellukset eivät ehkä toimi oikein ja ilmoituksia voidaan näyttää viiveellä."</string>
@@ -2302,7 +2298,6 @@
     <string name="battery_detail_foreground" msgid="3350401514602032183">"Aktiivisen käytön aikana"</string>
     <string name="battery_detail_background" msgid="1929644393553768999">"Taustalla"</string>
     <string name="battery_detail_power_usage" msgid="6485766868610469101">"Akun käyttö"</string>
-    <string name="battery_detail_power_percentage" msgid="8064814503316094497">"<xliff:g id="PERCENT">%1$s</xliff:g> kaikesta sovellusten virrankulutuksesta (<xliff:g id="POWER">%2$d</xliff:g> mAh)"</string>
     <string name="battery_detail_info_title" msgid="8227822131405620369">"Edellisen täyden latauksen jälkeen"</string>
     <string name="battery_detail_manage_title" msgid="9094314252105828014">"Hallitse akun käyttöä"</string>
     <string name="advanced_battery_graph_subtext" msgid="5621073891377915877">"Arvio akun kestosta perustuu aiempaan laitteen käyttöön."</string>
@@ -3158,7 +3153,7 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"Vilkuta valoa"</string>
     <string name="lock_screen_notifications_title" msgid="2583595963286467672">"Lukitusnäytöllä"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Kun työprofiili on lukittu"</string>
-    <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Näytä ilmoitusten koko sisältö."</string>
+    <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Näytä ilmoitusten koko sisältö"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="8301305044690264958">"Piilota arkaluontoinen sisältö"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Älä näytä ilmoituksia lainkaan"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Miten haluat ilmoitusten näkyvän, kun laite on lukittu?"</string>
@@ -3839,6 +3834,7 @@
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Sijoitustiedot puuttuvat."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Tätä avainta ei ole sijoitustiedoissa."</string>
     <string name="display_cutout_emulation" msgid="6306593933746393170">"Jäljittele näyttöä, jossa on aukko"</string>
+    <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"näyttölovi, näytön lovi"</string>
     <string name="display_cutout_emulation_none" msgid="5144174674654097316">"–"</string>
     <string name="special_access" msgid="3458780842491881155">"Sovellusten erikoiskäyttö"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
@@ -4070,7 +4066,7 @@
     <string name="change_wifi_state_title" msgid="3261945855372885427">"Wi-Fin hallinta"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="7942268646980694224">"Anna sovelluksen hallita Wi-Fiä"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8434262633905502679">"Anna sovelluksen asettaa Wi-Fi päälle ja pois päältä, hakea Wi-Fi-verkkoja ja yhdistää niihin, lisätä ja poistaa verkkoja ja käynnistää paikallisen hotspotin."</string>
-    <string name="media_output_title" msgid="115223550977351699">"Toista mediasisältöä kohteessa"</string>
+    <string name="media_output_title" msgid="115223550977351699">"Toista mediasisältöä:"</string>
     <string name="media_output_default_summary" msgid="8115153381240348279">"Tämä laite"</string>
     <string name="media_output_summary" product="default" msgid="6839458453831567167">"Puhelin"</string>
     <string name="media_output_summary" product="tablet" msgid="7217221078578554515">"Tabletti"</string>

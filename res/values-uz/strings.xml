@@ -292,6 +292,8 @@
     <string name="forget" msgid="1400428660472591263">"O‘chirish"</string>
     <string name="save" msgid="879993180139353333">"Saqlash"</string>
     <string name="done" msgid="6942539184162713160">"Tayyor"</string>
+    <!-- no translation found for apply (1577045208487259229) -->
+    <skip />
     <string name="settings_label" msgid="1626402585530130914">"Sozlamalar"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Sozlamalar"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Sozlamalar yorlig‘i"</string>
@@ -1286,7 +1288,7 @@
     <string name="storage_menu_forget" msgid="6305824238997983426">"Qurilmani unutish"</string>
     <string name="storage_menu_set_up" msgid="4263294929451685366">"Sozlash"</string>
     <string name="storage_menu_explore" msgid="4637496051816521560">"Ochish"</string>
-    <string name="storage_menu_free" msgid="6386070442027135427">"Joy bo‘shatish"</string>
+    <string name="storage_menu_free" msgid="6386070442027135427">"Joy ochish"</string>
     <string name="storage_menu_manage" msgid="5914482953856430780">"Xotirani boshqarish"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"Kompyuter bilan USB ulanish"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Quyidagicha ulanish"</string>
@@ -1390,12 +1392,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="6897444467730463117">"<xliff:g id="NAME_0">^1</xliff:g> qurilmasidan foydalanishingiz mumkin, lekin u sekin ishlamoqda.\n\n<xliff:g id="NAME_1">^2</xliff:g> qurilmasida saqlangan ilova xato ishlashi hamda kontentni ko‘chirish ko‘p vaqt olishi mumkin.\n\nTezkor <xliff:g id="NAME_2">^3</xliff:g> ishlatish tavsiya etiladi yoki <xliff:g id="NAME_3">^4</xliff:g> qurilmasini tashqi xotira sifatida sozlang."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="4126873669723115805">"Boshidan boshlash"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="49399942893518218">"Keyingisi"</string>
-    <!-- no translation found for storage_wizard_ready_v2_external_body (11937346870534608) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_body (4658433206901211269) -->
-    <skip />
-    <!-- no translation found for storage_wizard_ready_v2_internal_moved_body (6239886818487538806) -->
-    <skip />
+    <string name="storage_wizard_ready_v2_external_body" msgid="11937346870534608">"Kontentni <xliff:g id="NAME">^1</xliff:g> qurilmasiga ko‘chirish mumkin"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="4658433206901211269">"Kontentni <xliff:g id="NAME">^1</xliff:g> qurilmasiga ko‘chirish uchun "<b>"Sozlamalar &gt; Xotira"</b>" sahifasiga o‘ting"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="6239886818487538806">"Kontent <xliff:g id="NAME_0">^1</xliff:g> qurilmasiga ko‘chirildi.\n\nMazkur <xliff:g id="NAME_1">^2</xliff:g> qurilmasini boshqarish uchun "<b>"Sozlamalar &gt; Xotira"</b>" sahifasini oching."</string>
     <string name="battery_status_title" msgid="9159414319574976203">"Batareya holati"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Batareya quvvati darajasi"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
@@ -2313,7 +2312,6 @@
     <string name="battery_detail_foreground" msgid="3350401514602032183">"Faol rejimda"</string>
     <string name="battery_detail_background" msgid="1929644393553768999">"Fon rejimida"</string>
     <string name="battery_detail_power_usage" msgid="6485766868610469101">"Batareya sarfi"</string>
-    <string name="battery_detail_power_percentage" msgid="8064814503316094497">"Jami ilovalar sarfining <xliff:g id="PERCENT">%1$s</xliff:g> qismi (<xliff:g id="POWER">%2$d</xliff:g> mA*soat)"</string>
     <!-- String.format failed for translation -->
     <!-- no translation found for battery_detail_info_title (8227822131405620369) -->
     <skip />
@@ -3249,8 +3247,8 @@
     <string name="app_settings_link" msgid="8894946007543660906">"Ilova ichidagi qo‘shimcha sozlamalar"</string>
     <string name="app_notification_listing_summary_zero" msgid="8046168435207424440">"Barcha ilovalar uchun yoniq"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="6709582776823665660">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ta ilova uchun o‘chiq</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ta ilova uchun o‘chiq</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ta ilova uchun yoqilmagan</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ta ilova uchun yoqilmagan</item>
     </plurals>
     <plurals name="deleted_channels" formatted="false" msgid="8028574302599397935">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ta turkum o‘chirib tashlandi</item>
@@ -3852,6 +3850,7 @@
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Obyekt mavjud emas."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Obyektda bu kalit yo‘q."</string>
     <string name="display_cutout_emulation" msgid="6306593933746393170">"Kesimli displey simulyatsiyasi"</string>
+    <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"ekran kesimi, kesim"</string>
     <string name="display_cutout_emulation_none" msgid="5144174674654097316">"Hech biri"</string>
     <string name="special_access" msgid="3458780842491881155">"Maxsus ruxsatlar"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
@@ -3901,7 +3900,7 @@
     <string name="automatic_storage_manager_master_switch_title" msgid="6792996736190821417">"Xotira boshqaruvidan foydalanish"</string>
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"Avtomatik"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Qo‘llanma"</string>
-    <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Joy bo‘shatish"</string>
+    <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Joy ochish"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Imo-ishoralar"</string>
     <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Telefonni boshqarish uchun tezkor imo-ishoralar"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Planshetni boshqarish uchun tezkor imo-ishoralar"</string>
