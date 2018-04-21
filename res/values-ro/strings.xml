@@ -294,6 +294,8 @@
     <string name="forget" msgid="1400428660472591263">"Ștergeți"</string>
     <string name="save" msgid="879993180139353333">"Salvați"</string>
     <string name="done" msgid="6942539184162713160">"Terminat"</string>
+    <!-- no translation found for apply (1577045208487259229) -->
+    <skip />
     <string name="settings_label" msgid="1626402585530130914">"Setări"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Setări"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Comandă rapidă pentru setări"</string>
@@ -699,8 +701,7 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Avansate"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Setări Bluetooth avansate"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Activarea Bluetooth facilitează comunicarea cu alte dispozitive Bluetooth din apropiere."</string>
-    <!-- no translation found for bluetooth_scanning_on_info_message (824285504325592644) -->
-    <skip />
+    <string name="bluetooth_scanning_on_info_message" msgid="824285504325592644">"Când Bluetooth este activat, dispozitivul poate să comunice cu alte dispozitive Bluetooth din apropiere.\n\nPentru a îmbunătăți experiența dispozitivului, aplicațiile și serviciile pot să caute în continuare dispozitive din apropiere chiar și atunci când Bluetooth este dezactivat. Această permisiune poate fi folosită, de exemplu, pentru a îmbunătăți funcțiile și serviciile bazate pe locație. Puteți să vă schimbați preferințele din "<annotation id="link">"setările de scanare"</annotation>"."</string>
     <string name="ble_scan_notify_text" msgid="1295915006005700650">"Pentru a îmbunătăți precizia localizării, aplicațiile și serviciile de sistem pot totuși să detecteze dispozitivele Bluetooth. Puteți să schimbați acest aspect din <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>setările de scanare<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_failed" msgid="4500234659813241053">"Nu s-a putut conecta. Încercați din nou."</string>
     <string name="device_details_title" msgid="6576953269221085300">"Detalii despre dispozitiv"</string>
@@ -857,9 +858,10 @@
     <string name="wifi_ap_band_config" msgid="1611826705989117930">"Selectați banda AP"</string>
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"Automat"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"Banda de 2,4 GHz"</string>
-    <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"Bandă de 5,0 GHz"</string>
+    <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"Banda de 5,0 GHz"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2,4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5,0 GHz"</string>
+    <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Alegeți cel puțin o bandă pentru hotspot Wi-Fi:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Setări IP"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Permiteți accesul și altor utilizatori ai dispozitivului"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(neschimbate)"</string>
@@ -948,10 +950,10 @@
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="5556202634866621632">"Se permite accesul la conexiunea de internet a telefonului prin hotspot"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="5017191966153008">"Aplicația trimite conținut. Pentru a permite accesul la conexiunea de internet, dezactivați hotspotul, apoi activați-l"</string>
     <string name="wifi_hotspot_no_password_subtext" msgid="353306131026431089">"Nu s-a setat nicio parolă"</string>
-    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"Numele pentru hotspot"</string>
+    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"Nume hotspot"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"Se activează <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>..."</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"Alte dispozitive se pot conecta la <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"Parola pentru hotspot"</string>
+    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"Parolă hotspot"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"Banda AP"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="4789553667374849566">"Folosiți hotspotul pentru a crea o rețea Wi-Fi pentru celelalte dispozitive. Hotspotul oferă o conexiune de internet folosind conexiunea dvs. de date mobile. Este posibil să se aplice taxe suplimentare pentru datele mobile."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Aplicațiile pot crea un hotspot pentru a trimite conținut dispozitivelor din apropiere."</string>
@@ -1399,8 +1401,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="6897444467730463117">"Puteți folosi în continuare <xliff:g id="NAME_0">^1</xliff:g>, dar este posibil să fie lent. \n\nEste posibil ca aplicațiile stocate pe <xliff:g id="NAME_1">^2</xliff:g> să nu ruleze corect și transferul conținutului să dureze mai mult. \n\nÎncercați să folosiți un <xliff:g id="NAME_2">^3</xliff:g> mai rapid, sau puteți să folosiți <xliff:g id="NAME_3">^4</xliff:g> pentru stocare mobilă."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="4126873669723115805">"Începeți din nou"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="49399942893518218">"Continuați"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="5993954859154357197">"Pentru a muta conținut pe <xliff:g id="NAME">^1</xliff:g>, accesați "<b>"Setări și stocare"</b></string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="2574326509794010488">"Conținutul a fost mutat pe <xliff:g id="NAME_0">^1</xliff:g>. \n\nPentru a gestiona <xliff:g id="NAME_1">^2</xliff:g>, accesați "<b>"Setări și stocare"</b>"."</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="11937346870534608">"Puteți să mutați conținut pe <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="4658433206901211269">"Pentru a muta conținut pe <xliff:g id="NAME">^1</xliff:g>, accesați "<b>"Setări și stocare"</b></string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="6239886818487538806">"Conținutul a fost mutat pe <xliff:g id="NAME_0">^1</xliff:g>. \n\nPentru a gestiona acest <xliff:g id="NAME_1">^2</xliff:g>, accesați "<b>"Setări și stocare"</b>"."</string>
     <string name="battery_status_title" msgid="9159414319574976203">"Stare baterie"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Nivelul bateriei"</string>
     <string name="apn_settings" msgid="3743170484827528406">"Nume APN"</string>
@@ -2142,8 +2145,7 @@
     <string name="awake" msgid="387122265874485088">"Durată de activitate a dispozitivului"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"Timp de funcționare Wi-Fi"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"Timp de funcționare Wi-Fi"</string>
-    <!-- no translation found for advanced_battery_title (6768618303037280828) -->
-    <skip />
+    <string name="advanced_battery_title" msgid="6768618303037280828">"Utilizarea bateriei"</string>
     <string name="history_details_title" msgid="3608240585315506067">"Detalii istoric"</string>
     <string name="battery_details_title" msgid="6101394441569858580">"Utilizarea bateriei"</string>
     <string name="details_subtitle" msgid="32593908269911734">"Detalii despre utilizare"</string>
@@ -2210,7 +2212,7 @@
     <string name="battery_tip_dialog_summary_message_no_estimation" msgid="1456026456418786135">"Dacă trebuie să prelungiți durata de viață a bateriei, activați Economisirea bateriei"</string>
     <string name="smart_battery_manager_title" msgid="870632749556793417">"Battery Manager"</string>
     <string name="smart_battery_title" msgid="6218785691872466076">"Gestionați automat aplicațiile"</string>
-    <string name="smart_battery_summary" msgid="1339184602000004058">"Limitați bateria pentru aplicațiile pe care nu le utilizați frecvent"</string>
+    <string name="smart_battery_summary" msgid="1339184602000004058">"Limitați utilizarea bateriei de către aplicațiile pe care nu le utilizați frecvent"</string>
     <string name="smart_battery_footer" product="default" msgid="5555604955956219544">"Când Battery Manager detectează că aplicațiile consumă bateria, puteți să restricționați respectivele aplicații. Este posibil ca aplicațiile restricționate să nu funcționeze corespunzător și ca notificările să fie primite cu întârziere."</string>
     <string name="smart_battery_footer" product="tablet" msgid="5555604955956219544">"Când Battery Manager detectează că aplicațiile consumă bateria, puteți să restricționați respectivele aplicații. Este posibil ca aplicațiile restricționate să nu funcționeze corespunzător și ca notificările să fie primite cu întârziere."</string>
     <string name="smart_battery_footer" product="device" msgid="5555604955956219544">"Când Battery Manager detectează că aplicațiile consumă bateria, puteți să restricționați respectivele aplicații. Este posibil ca aplicațiile restricționate să nu funcționeze corespunzător și ca notificările să fie primite cu întârziere."</string>
@@ -2321,7 +2323,6 @@
     <string name="battery_detail_foreground" msgid="3350401514602032183">"În timp ce se află în utilizare activă"</string>
     <string name="battery_detail_background" msgid="1929644393553768999">"În timp ce se află în fundal"</string>
     <string name="battery_detail_power_usage" msgid="6485766868610469101">"Utilizarea bateriei"</string>
-    <string name="battery_detail_power_percentage" msgid="8064814503316094497">"<xliff:g id="PERCENT">%1$s</xliff:g> din utilizarea totală de către aplicații (<xliff:g id="POWER">%2$d</xliff:g>mAh)"</string>
     <string name="battery_detail_info_title" msgid="8227822131405620369">"De la încărcarea completă"</string>
     <string name="battery_detail_manage_title" msgid="9094314252105828014">"Gestionați utilizarea bateriei"</string>
     <string name="advanced_battery_graph_subtext" msgid="5621073891377915877">"Estimarea bateriei rămase se bazează pe utilizarea dispozitivului"</string>
@@ -3886,6 +3887,7 @@
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Obiectul clasificării lipsește."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Obiectul clasificării nu conține această cheie."</string>
     <string name="display_cutout_emulation" msgid="6306593933746393170">"Simulați un afișaj cu o decupare"</string>
+    <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"decupare ecran"</string>
     <string name="display_cutout_emulation_none" msgid="5144174674654097316">"Niciuna"</string>
     <string name="special_access" msgid="3458780842491881155">"Acces special aplicații"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">

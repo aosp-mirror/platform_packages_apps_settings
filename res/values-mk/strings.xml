@@ -292,6 +292,8 @@
     <string name="forget" msgid="1400428660472591263">"Заборави"</string>
     <string name="save" msgid="879993180139353333">"Зачувај"</string>
     <string name="done" msgid="6942539184162713160">"Готово"</string>
+    <!-- no translation found for apply (1577045208487259229) -->
+    <skip />
     <string name="settings_label" msgid="1626402585530130914">"Поставки"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Поставки"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Кратенка за поставки"</string>
@@ -345,10 +347,8 @@
     <string name="zone_info_footer_no_dst" msgid="8652423870143056964">"Користи <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Без летно сметање на времето."</string>
     <string name="zone_time_type_dst" msgid="8850494578766845276">"Летно сметање на времето"</string>
     <string name="zone_time_type_standard" msgid="3462424485380376522">"Стандардно време"</string>
-    <!-- no translation found for zone_menu_by_region (8370437123807764346) -->
-    <skip />
-    <!-- no translation found for zone_menu_by_offset (7161573994228041794) -->
-    <skip />
+    <string name="zone_menu_by_region" msgid="8370437123807764346">"Изберете според регион"</string>
+    <string name="zone_menu_by_offset" msgid="7161573994228041794">"Изберете по UTC со отстапување"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Датум"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Време"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Автоматско заклучување"</string>
@@ -690,8 +690,7 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Напредни"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Напреден Bluetooth"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Кога е вклучен Bluetooth, уредот може да комуницира со други уреди со Bluetooth во близина."</string>
-    <!-- no translation found for bluetooth_scanning_on_info_message (824285504325592644) -->
-    <skip />
+    <string name="bluetooth_scanning_on_info_message" msgid="824285504325592644">"Кога Bluetooth е вклучен, вашиот уред може да комуницира со други уреди со Bluetooth во близина.\n\nЗа да се подобри искуството со уредот, апликациите и услугите сепак може да скенираат уреди во близина во секое време, дури и кога Bluetooth е исклучен. Ова може да се користи, на пример, за да се подобрат функциите и услугите базирани на локација. Може да го измените во "<annotation id="link">"поставките за скенирање"</annotation>"."</string>
     <string name="ble_scan_notify_text" msgid="1295915006005700650">"За да се подобри точноста на локацијата, системските апликации и услуги сѐ уште може да откриваат уреди со Bluetooth. Ова може да го измените во <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>поставките за скенирање<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_failed" msgid="4500234659813241053">"Не можеше да се поврзе. Обидете се повторно."</string>
     <string name="device_details_title" msgid="6576953269221085300">"Детали за уредот"</string>
@@ -851,6 +850,7 @@
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"Појас од 5,0 GHz"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2,4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5,0 GHz"</string>
+    <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Изберете барем еден појас за Wi‑Fi точка на пристап:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Поставки на IP"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Сподели со други корисници на уредот"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(непроменети)"</string>
@@ -1388,8 +1388,9 @@
     <string name="storage_wizard_slow_v2_body" msgid="6897444467730463117">"Сѐ уште може да ја користите надворешната меморија <xliff:g id="NAME_0">^1</xliff:g>, но се чини дека е бавна. \n\nАпликациите складирани на <xliff:g id="NAME_1">^2</xliff:g> можеби нема да работат правилно, а преносот на содржините може да трае долго. \n\nНаместо тоа, обидете се со користење на побрза надворешна меморија <xliff:g id="NAME_2">^3</xliff:g> или користете ја оваа <xliff:g id="NAME_3">^4</xliff:g> за преносливо складирање."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="4126873669723115805">"Почни одново"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="49399942893518218">"Продолжи"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="5993954859154357197">"За преместување содржини на <xliff:g id="NAME">^1</xliff:g>, одете во "<b>"Поставки и складирање"</b></string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="2574326509794010488">"Содржините беа преместени на <xliff:g id="NAME_0">^1</xliff:g>. \n\nЗа да управувате со <xliff:g id="NAME_1">^2</xliff:g>, одете во "<b>"Поставки и складирање"</b>"."</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="11937346870534608">"Може да преместувате содржини на <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="4658433206901211269">"За преместување содржини на <xliff:g id="NAME">^1</xliff:g>, одете во "<b>"Поставки и складирање"</b></string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="6239886818487538806">"Содржините беа преместени на <xliff:g id="NAME_0">^1</xliff:g>. \n\nЗа да управувате со <xliff:g id="NAME_1">^2</xliff:g>, одете во "<b>"Поставки и складирање"</b>"."</string>
     <string name="battery_status_title" msgid="9159414319574976203">"Статус на батеријата"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Ниво на батерија"</string>
     <string name="apn_settings" msgid="3743170484827528406">"Поставки на APN"</string>
@@ -2122,8 +2123,7 @@
     <string name="awake" msgid="387122265874485088">"Време на активност на уред"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"Wi-Fi на време"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"Wi-Fi на време"</string>
-    <!-- no translation found for advanced_battery_title (6768618303037280828) -->
-    <skip />
+    <string name="advanced_battery_title" msgid="6768618303037280828">"Користење на батеријата"</string>
     <string name="history_details_title" msgid="3608240585315506067">"Детали на историја"</string>
     <string name="battery_details_title" msgid="6101394441569858580">"Употреба на батеријата"</string>
     <string name="details_subtitle" msgid="32593908269911734">"Користи детали"</string>
@@ -2150,12 +2150,9 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"Таблетот се користи повеќе од вообичаено"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"Уредот се користи повеќе од вообичаено"</string>
     <string name="battery_tip_high_usage_summary" msgid="6341311803303581798">"Наскоро може да снема батерија"</string>
-    <!-- no translation found for battery_tip_dialog_message (7434089311164898581) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (2987443811119964310) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (1993039726576708815) -->
-    <skip />
+    <string name="battery_tip_dialog_message" product="default" msgid="7434089311164898581">"Сте го користеле телефонот повеќе од вообичаено. Батеријата може да се потроши порано од очекуваното.\n\nТоп <xliff:g id="NUMBER">%1$d</xliff:g> апликации од последното полнење (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="2987443811119964310">"Сте го користеле таблетот повеќе од вообичаено. Батеријата може да се потроши порано од очекуваното.\n\nТоп <xliff:g id="NUMBER">%1$d</xliff:g> апликации од последното полнење (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="1993039726576708815">"Сте го користеле уредот повеќе од вообичаено. Батеријата може да се потроши порано од очекуваното.\n\nТоп <xliff:g id="NUMBER">%1$d</xliff:g> апликации од последното полнење (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="one">Ограничете %1$d апликација</item>
       <item quantity="other">Ограничете %1$d апликации</item>
@@ -2197,8 +2194,7 @@
       <item quantity="one">Ограничување на користењето батерија за %1$d апликација</item>
       <item quantity="other">Ограничување на користењето батерија за %1$d апликации</item>
     </plurals>
-    <!-- no translation found for restricted_app_detail_footer (6739863162364046859) -->
-    <skip />
+    <string name="restricted_app_detail_footer" msgid="6739863162364046859">"Овие апликации ја користеле батеријата во заднина. Ограничените апликации може да не работат правилно и известувањата може да бидат одложени."</string>
     <string name="battery_auto_restriction_title" msgid="6553271897488963709">"Користење управник со батерија"</string>
     <string name="battery_auto_restriction_summary" msgid="8561335400991281062">"Откријте кога апликациите ја трошат батеријата"</string>
     <string name="battery_manager_on" msgid="8643310865054362396">"Вклучено/Се открива кога апликациите ја трошат батеријата"</string>
@@ -2298,7 +2294,6 @@
     <string name="battery_detail_foreground" msgid="3350401514602032183">"Во активна употреба"</string>
     <string name="battery_detail_background" msgid="1929644393553768999">"Употреба во заднина"</string>
     <string name="battery_detail_power_usage" msgid="6485766868610469101">"Употреба на батеријата"</string>
-    <string name="battery_detail_power_percentage" msgid="8064814503316094497">"<xliff:g id="PERCENT">%1$s</xliff:g> од вкупната употреба на апликациите (<xliff:g id="POWER">%2$d</xliff:g>mAh)"</string>
     <string name="battery_detail_info_title" msgid="8227822131405620369">"Употреба по целосно полнење"</string>
     <string name="battery_detail_manage_title" msgid="9094314252105828014">"Управување со употребата на батеријата"</string>
     <string name="advanced_battery_graph_subtext" msgid="5621073891377915877">"Проценката за преостанатата батерија се базира врз користењето на уредот"</string>
@@ -3086,8 +3081,7 @@
     <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"Без скокачки известувања на екранот"</string>
     <string name="zen_mode_block_effect_status" msgid="6642532634292373081">"Сокриј ги иконите на статусната лента"</string>
     <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"Сокриј ги точките за известување"</string>
-    <!-- no translation found for zen_mode_block_effect_ambient (4704755879961212658) -->
-    <skip />
+    <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"Не прикажувај известувања"</string>
     <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"Сокриј од списокот со известувања"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"Никогаш"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="1230265589026355094">"Кога екранот е исклучен"</string>
@@ -3130,8 +3124,7 @@
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Блокирај кога екранот е исклучен"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Освен што ги блокира несаканите звуци, режимот „Не вознемирувај“ може да ги блокира и визуелните вознемирувања. Ова може да биде корисно ако се обидувате да спиете, да се фокусирате или да го ограничите времето што го поминувате на телефонот."</string>
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Блокирање звуци и визуелни вознемирувања"</string>
-    <!-- no translation found for zen_onboarding_screen_off_summary (5393041573999488088) -->
-    <skip />
+    <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Не вклучувај го екранот и не прикажувај известувања"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Воопшто не прикажувај известувања, освен за основната активност на телефонот и статусот"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Звуци на работниот профил"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Користи звуци од личен профил"</string>
@@ -3232,9 +3225,11 @@
     </plurals>
     <string name="no_channels" msgid="3077375508177744586">"Апликацијава не објави ниедно известување"</string>
     <string name="app_settings_link" msgid="8894946007543660906">"Дополнителни поставки во апликацијата"</string>
-    <!-- no translation found for app_notification_listing_summary_zero (8046168435207424440) -->
-    <skip />
-    <!-- no translation found for app_notification_listing_summary_others (6709582776823665660) -->
+    <string name="app_notification_listing_summary_zero" msgid="8046168435207424440">"Вклучено за сите апликации"</string>
+    <plurals name="app_notification_listing_summary_others" formatted="false" msgid="6709582776823665660">
+      <item quantity="one">Исклучено за <xliff:g id="COUNT_1">%d</xliff:g> апликација</item>
+      <item quantity="other">Исклучено за <xliff:g id="COUNT_1">%d</xliff:g> апликации</item>
+    </plurals>
     <plurals name="deleted_channels" formatted="false" msgid="8028574302599397935">
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> категорија е избришана</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> категории се избришани</item>
@@ -3364,8 +3359,7 @@
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Освен користењето на отпечатокот за отклучување на уредот, може дополнително да го заштитите ако бара лозинка пред да се стартува. Сѐ додека уредот не се стартува, не може да прима повици, пораки или известувања, вклучувајќи и аларми.\n\nТоа помага да се заштитат податоците на загубени или украдени уреди. Да се бара лозинка за стартување на уредот?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Да"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Не"</string>
-    <!-- no translation found for restricted_true_label (4761453839409220473) -->
-    <skip />
+    <string name="restricted_true_label" msgid="4761453839409220473">"Ограничено"</string>
     <string name="restricted_false_label" msgid="3279282180297058755">"Апликацијата може да користи батерија во заднина"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Барајте PIN?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Барајте шема?"</string>
@@ -3836,6 +3830,7 @@
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Рангираниот објект недостастасува."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Рангираниот објект не го содржи овој клуч."</string>
     <string name="display_cutout_emulation" msgid="6306593933746393170">"Симулирање екран со пресекување"</string>
+    <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"исечок на екранот, сензор за носење"</string>
     <string name="display_cutout_emulation_none" msgid="5144174674654097316">"Нема"</string>
     <string name="special_access" msgid="3458780842491881155">"Посебни пристапи"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
