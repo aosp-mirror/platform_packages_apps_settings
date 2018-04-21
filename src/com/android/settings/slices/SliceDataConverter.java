@@ -40,12 +40,12 @@ import android.util.Log;
 import android.util.Xml;
 import android.view.accessibility.AccessibilityManager;
 
-import com.android.settings.accessibility.AccessibilitySlicePreferenceController;
-import com.android.settings.core.PreferenceXmlParserUtils;
-import com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilitySettings;
+import com.android.settings.accessibility.AccessibilitySlicePreferenceController;
+import com.android.settings.core.PreferenceXmlParserUtils;
+import com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.DatabaseIndexingUtils;
@@ -219,6 +219,8 @@ class SliceDataConverter {
 
                 xmlSliceData.add(xmlSlice);
             }
+        } catch (SliceData.InvalidSliceDataException e) {
+            Log.w(TAG, "Invalid data when building SliceData for " + fragmentName, e);
         } catch (XmlPullParserException e) {
             Log.w(TAG, "XML Error parsing PreferenceScreen: ", e);
         } catch (IOException e) {
@@ -271,8 +273,11 @@ class SliceDataConverter {
                     .setTitle(title)
                     .setIcon(iconResource)
                     .setSliceType(SliceData.SliceType.SWITCH);
-
-            sliceData.add(sliceDataBuilder.build());
+            try {
+                sliceData.add(sliceDataBuilder.build());
+            } catch (SliceData.InvalidSliceDataException e) {
+                Log.w(TAG, "Invalid data when building a11y SliceData for " + flattenedName, e);
+            }
         }
 
         return sliceData;
