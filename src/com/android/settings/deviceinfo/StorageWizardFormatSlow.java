@@ -39,10 +39,10 @@ public class StorageWizardFormatSlow extends StorageWizardBase {
 
         mFormatPrivate = getIntent().getBooleanExtra(EXTRA_FORMAT_PRIVATE, false);
 
-        setHeaderText(R.string.storage_wizard_slow_v2_title, mDisk.getShortDescription());
-        setBodyText(R.string.storage_wizard_slow_v2_body, mDisk.getDescription(),
-                mDisk.getShortDescription(), mDisk.getShortDescription(),
-                mDisk.getShortDescription());
+        setHeaderText(R.string.storage_wizard_slow_v2_title, getDiskShortDescription());
+        setBodyText(R.string.storage_wizard_slow_v2_body, getDiskDescription(),
+                getDiskShortDescription(), getDiskShortDescription(),
+                getDiskShortDescription());
 
         setBackButtonText(R.string.storage_wizard_slow_v2_start_over);
         setNextButtonText(R.string.storage_wizard_slow_v2_continue);

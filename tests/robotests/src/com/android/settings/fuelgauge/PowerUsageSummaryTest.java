@@ -48,6 +48,7 @@ import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.applications.LayoutPreference;
+import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -373,6 +374,18 @@ public class PowerUsageSummaryTest {
         mFragment.refreshUi();
 
         verify(mFragment).restartBatteryTipLoader();
+    }
+
+    @Test
+    public void getDashboardLabel_returnsCorrectLabel() {
+        BatteryInfo info = new BatteryInfo();
+        info.batteryPercentString = "3%";
+        assertThat(PowerUsageSummary.getDashboardLabel(mRealContext, info))
+                .isEqualTo(info.batteryPercentString);
+
+        info.remainingLabel = "Phone will shut down soon";
+        assertThat(PowerUsageSummary.getDashboardLabel(mRealContext, info))
+                .isEqualTo("3% - Phone will shut down soon");
     }
 
     public static class TestFragment extends PowerUsageSummary {

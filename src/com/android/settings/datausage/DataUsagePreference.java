@@ -56,7 +56,7 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
         DataUsageController.DataUsageInfo usageInfo = controller.getDataUsageInfo(mTemplate);
         if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.DATA_USAGE_SETTINGS_V2)) {
             if (mTemplate.isMatchRuleMobile()) {
-                setTitle(getContext().getString(R.string.app_cellular_data_usage));
+                setTitle(R.string.app_cellular_data_usage);
             } else {
                 setTitle(mTitleRes);
                 setSummary(getContext().getString(R.string.data_usage_template,
@@ -83,7 +83,7 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
                 .setSourceMetricsCategory(MetricsProto.MetricsEvent.VIEW_UNKNOWN);
         if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.DATA_USAGE_SETTINGS_V2)) {
             if (mTemplate.isMatchRuleMobile()) {
-                launcher.setTitle(getContext().getString(R.string.app_cellular_data_usage));
+                launcher.setTitle(R.string.app_cellular_data_usage);
             } else {
                 launcher.setTitle(mTitleRes);
             }

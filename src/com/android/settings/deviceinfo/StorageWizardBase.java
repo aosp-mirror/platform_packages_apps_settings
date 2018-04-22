@@ -22,6 +22,7 @@ import static android.os.storage.VolumeInfo.EXTRA_VOLUME_ID;
 import static com.android.settings.deviceinfo.StorageSettings.TAG;
 
 import android.annotation.LayoutRes;
+import android.annotation.NonNull;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -145,7 +146,7 @@ public abstract class StorageWizardBase extends Activity {
         ((TextView) aux.requireViewById(R.id.storage_wizard_migrate_v2_checklist_media))
                 .setText(TextUtils.expandTemplate(
                         getText(R.string.storage_wizard_migrate_v2_checklist_media),
-                        mDisk.getShortDescription()));
+                        getDiskShortDescription()));
     }
 
     protected void setBackButtonText(int resId, CharSequence... args) {
@@ -225,6 +226,26 @@ public abstract class StorageWizardBase extends Activity {
             } else {
                 return null;
             }
+        }
+    }
+
+    protected @NonNull CharSequence getDiskDescription() {
+        if (mDisk != null) {
+            return mDisk.getDescription();
+        } else if (mVolume != null) {
+            return mVolume.getDescription();
+        } else {
+            return getText(R.string.unknown);
+        }
+    }
+
+    protected @NonNull CharSequence getDiskShortDescription() {
+        if (mDisk != null) {
+            return mDisk.getShortDescription();
+        } else if (mVolume != null) {
+            return mVolume.getDescription();
+        } else {
+            return getText(R.string.unknown);
         }
     }
 

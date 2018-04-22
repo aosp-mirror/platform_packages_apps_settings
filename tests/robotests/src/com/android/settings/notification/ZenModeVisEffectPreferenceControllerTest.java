@@ -42,6 +42,7 @@ import android.support.v7.preference.PreferenceScreen;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settings.widget.DisabledCheckBoxPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -58,7 +59,7 @@ public class ZenModeVisEffectPreferenceControllerTest {
     @Mock
     private ZenModeBackend mBackend;
     @Mock
-    private CheckBoxPreference mockPref;
+    private DisabledCheckBoxPreference mockPref;
     private Context mContext;
     private FakeFeatureFactory mFeatureFactory;
     @Mock
@@ -114,7 +115,7 @@ public class ZenModeVisEffectPreferenceControllerTest {
         mController.updateState(mockPref);
 
         verify(mockPref).setChecked(false);
-        verify(mockPref).setEnabled(true);
+        verify(mockPref).enableCheckbox(true);
     }
 
     @Test
@@ -123,7 +124,7 @@ public class ZenModeVisEffectPreferenceControllerTest {
         mController.updateState(mockPref);
 
         verify(mockPref).setChecked(true);
-        verify(mockPref).setEnabled(true);
+        verify(mockPref).enableCheckbox(true);
     }
 
     @Test
@@ -138,7 +139,7 @@ public class ZenModeVisEffectPreferenceControllerTest {
         mController.updateState(mockPref);
 
         verify(mockPref).setChecked(true);
-        verify(mockPref).setEnabled(false);
+        verify(mockPref).enableCheckbox(false);
         verify(mBackend, times(1)).saveVisualEffectsPolicy(SUPPRESSED_EFFECT_PEEK, true);
     }
 
@@ -154,7 +155,7 @@ public class ZenModeVisEffectPreferenceControllerTest {
         mController.updateState(mockPref);
 
         verify(mockPref).setChecked(false);
-        verify(mockPref).setEnabled(true);
+        verify(mockPref).enableCheckbox(true);
         verify(mBackend, never()).saveVisualEffectsPolicy(SUPPRESSED_EFFECT_PEEK, true);
     }
 

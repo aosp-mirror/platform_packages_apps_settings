@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
+import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.graphics.drawable.IconCompat;
@@ -290,13 +291,14 @@ public class SettingsSliceProvider extends SliceProvider {
                         .addEndItem(new SliceAction(getBroadcastIntent(ACTION_WIFI_CHANGED),
                                 null, finalWifiEnabled))
                         .setPrimaryAction(
-                                new SliceAction(getIntent(Intent.ACTION_MAIN),
+                                new SliceAction(getIntent(Settings.ACTION_WIFI_SETTINGS),
                                         (IconCompat) null, null)))
                 .build();
     }
 
     private PendingIntent getIntent(String action) {
         Intent intent = new Intent(action);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pi = PendingIntent.getActivity(getContext(), 0, intent, 0);
         return pi;
     }

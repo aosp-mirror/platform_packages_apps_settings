@@ -45,7 +45,7 @@ public class StorageWizardInit extends StorageWizardBase {
         mIsPermittedToAdopt = UserManager.get(this).isAdminUser()
                 && !ActivityManager.isUserAMonkey();
 
-        setHeaderText(R.string.storage_wizard_init_v2_title, mDisk.getShortDescription());
+        setHeaderText(R.string.storage_wizard_init_v2_title, getDiskShortDescription());
 
         mExternal = requireViewById(R.id.storage_wizard_init_external);
         mInternal = requireViewById(R.id.storage_wizard_init_internal);

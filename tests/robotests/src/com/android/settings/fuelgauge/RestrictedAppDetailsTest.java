@@ -28,10 +28,12 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.support.v7.preference.CheckBoxPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceManager;
 import android.util.IconDrawableFactory;
+import android.widget.CheckBox;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
@@ -93,7 +95,7 @@ public class RestrictedAppDetailsTest {
         mRestrictedAppDetails.mAppInfos = new ArrayList<>();
         mRestrictedAppDetails.mAppInfos.add(mAppInfo);
         mRestrictedAppDetails.mRestrictedAppListGroup = spy(new PreferenceCategory(mContext));
-        mRestrictedAppDetails.mBatteryUtils = new BatteryUtils(mContext);
+        mRestrictedAppDetails.mBatteryUtils = spy(new BatteryUtils(mContext));
         doReturn(mPreferenceManager).when(
                 mRestrictedAppDetails.mRestrictedAppListGroup).getPreferenceManager();
     }
@@ -103,13 +105,16 @@ public class RestrictedAppDetailsTest {
         doReturn(mApplicationInfo).when(mPackageManager)
                 .getApplicationInfoAsUser(PACKAGE_NAME, 0, USER_ID);
         doReturn(APP_NAME).when(mPackageManager).getApplicationLabel(mApplicationInfo);
+        doReturn(true).when(mRestrictedAppDetails.mBatteryUtils).isForceAppStandbyEnabled(UID,
+                PACKAGE_NAME);
 
         mRestrictedAppDetails.refreshUi();
 
         assertThat(mRestrictedAppDetails.mRestrictedAppListGroup.getPreferenceCount()).isEqualTo(1);
-        final Preference preference = mRestrictedAppDetails.mRestrictedAppListGroup.getPreference(
-                0);
+        final CheckBoxPreference preference =
+                (CheckBoxPreference) mRestrictedAppDetails.mRestrictedAppListGroup.getPreference(0);
         assertThat(preference.getTitle()).isEqualTo(APP_NAME);
+        assertThat(preference.isChecked()).isTrue();
     }
 
     @Test
