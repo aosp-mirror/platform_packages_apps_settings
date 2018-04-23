@@ -31,6 +31,7 @@
         android:title="@string/swipe_up_to_switch_apps_title"
         android:summary="@string/swipe_up_to_switch_apps_summary"
         app:keywords="@string/keywords_gesture"
-        app:controller="com.android.settings.gestures.SwipeUpPreferenceController" />
+        app:controller="com.android.settings.gestures.SwipeUpPreferenceController"
+        app:allowDividerAbove="true" />
 
 </PreferenceScreen>
