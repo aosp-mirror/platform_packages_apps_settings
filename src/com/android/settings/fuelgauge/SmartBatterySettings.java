@@ -73,7 +73,7 @@ public class SmartBatterySettings extends DashboardFragment {
         controllers.add(new SmartBatteryPreferenceController(context));
         if (settingsActivity != null && fragment != null) {
             controllers.add(
-                    new RestrictAppPreferenceController(settingsActivity, fragment));
+                    new RestrictAppPreferenceController(fragment));
         } else {
             controllers.add(new RestrictAppPreferenceController(context));
         }
