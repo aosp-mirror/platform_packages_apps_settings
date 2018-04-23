@@ -67,12 +67,12 @@ public class RestrictedAppDetails extends DashboardFragment {
     private final FooterPreferenceMixin mFooterPreferenceMixin =
             new FooterPreferenceMixin(this, getLifecycle());
 
-    public static void startRestrictedAppDetails(SettingsActivity caller,
-            InstrumentedPreferenceFragment fragment, List<AppInfo> appInfos) {
+    public static void startRestrictedAppDetails(InstrumentedPreferenceFragment fragment,
+            List<AppInfo> appInfos) {
         final Bundle args = new Bundle();
         args.putParcelableList(EXTRA_APP_INFO_LIST, appInfos);
 
-        new SubSettingLauncher(caller)
+        new SubSettingLauncher(fragment.getContext())
                 .setDestination(RestrictedAppDetails.class.getName())
                 .setArguments(args)
                 .setTitle(R.string.restricted_app_title)

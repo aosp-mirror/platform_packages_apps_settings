@@ -55,7 +55,7 @@ public class RestrictAppTest {
     }
 
     @Test
-    public void testBatterySettings_hasOneAnomaly_showAnomaly() throws
+    public void batterySettings_hasOneAnomaly_showAnomaly() throws
             PackageManager.NameNotFoundException {
         mBatteryDatabaseManager.insertAnomaly(mPackageManager.getPackageUid(PACKAGE_SETTINGS, 0),
                 PACKAGE_SETTINGS, 1,
@@ -67,7 +67,7 @@ public class RestrictAppTest {
     }
 
     @Test
-    public void testBatterySettings_hasTwoAnomalies_showAnomalies() throws
+    public void batterySettings_hasTwoAnomalies_showAnomalies() throws
             PackageManager.NameNotFoundException {
         mBatteryDatabaseManager.insertAnomaly(mPackageManager.getPackageUid(PACKAGE_SETTINGS, 0),
                 PACKAGE_SETTINGS, 1,
@@ -79,5 +79,20 @@ public class RestrictAppTest {
         Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
         instrumentation.startActivitySync(new Intent(BATTERY_INTENT));
         onView(withText("Restrict 2 apps")).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void batterySettings_hasAutoHandledAnomalies_showAutoHandled() throws
+            PackageManager.NameNotFoundException {
+        mBatteryDatabaseManager.insertAnomaly(mPackageManager.getPackageUid(PACKAGE_SETTINGS, 0),
+                PACKAGE_SETTINGS, 1,
+                AnomalyDatabaseHelper.State.AUTO_HANDLED, System.currentTimeMillis());
+        mBatteryDatabaseManager.insertAnomaly(mPackageManager.getPackageUid(PACKAGE_SYSTEM_UI, 0),
+                PACKAGE_SYSTEM_UI, 1,
+                AnomalyDatabaseHelper.State.AUTO_HANDLED, System.currentTimeMillis());
+
+        Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
+        instrumentation.startActivitySync(new Intent(BATTERY_INTENT));
+        onView(withText("2 apps recently restricted")).check(matches(isDisplayed()));
     }
 }
