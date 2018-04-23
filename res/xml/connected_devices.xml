@@ -46,7 +46,8 @@
         android:title="@string/connected_device_previously_connected_title"
         android:icon="@drawable/ic_devices_other_black"
         android:fragment="com.android.settings.connecteddevice.PreviouslyConnectedDeviceDashboardFragment"
-        settings:allowDividerAbove="true"/>
+        settings:allowDividerAbove="true"
+        settings:controller="com.android.settings.connecteddevice.PreviouslyConnectedDevicePreferenceController"/>
 
     <Preference
         android:fragment="com.android.settings.connecteddevice.BluetoothDashboardFragment"
