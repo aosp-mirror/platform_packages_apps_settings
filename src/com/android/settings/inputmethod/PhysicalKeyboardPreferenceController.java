@@ -18,7 +18,6 @@ package com.android.settings.inputmethod;
 
 import android.content.Context;
 import android.hardware.input.InputManager;
-import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -30,6 +29,8 @@ import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.List;
+
+import androidx.preference.Preference;
 
 public class PhysicalKeyboardPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause,
@@ -96,7 +97,7 @@ public class PhysicalKeyboardPreferenceController extends AbstractPreferenceCont
         final List<HardKeyboardDeviceInfo> keyboards =
                 PhysicalKeyboardFragment.getHardKeyboards(mContext);
         if (keyboards.isEmpty()) {
-            mPreference.setSummary(R.string.disconnected);
+            mPreference.setSummary(R.string.keyboard_disconnected);
             return;
         }
         String summary = null;
