@@ -64,7 +64,7 @@ public class AnomalyCleanupJobService extends JobService {
         final BatteryTipPolicy policy = new BatteryTipPolicy(this);
         ThreadUtils.postOnBackgroundThread(() -> {
             batteryDatabaseManager.deleteAllAnomaliesBeforeTimeStamp(
-                    System.currentTimeMillis() - TimeUnit.HOURS.toMillis(
+                    System.currentTimeMillis() - TimeUnit.DAYS.toMillis(
                             policy.dataHistoryRetainDay));
             jobFinished(params, false /* wantsReschedule */);
         });
