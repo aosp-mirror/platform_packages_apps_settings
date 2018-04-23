@@ -94,6 +94,8 @@ public class MediaOutputPreferenceControllerTest {
     private A2dpProfile mA2dpProfile;
     @Mock
     private HearingAidProfile mHearingAidProfile;
+    @Mock
+    private AudioSwitchPreferenceController.AudioSwitchCallback mAudioSwitchPreferenceCallback;
 
     private Context mContext;
     private PreferenceScreen mScreen;
@@ -157,6 +159,7 @@ public class MediaOutputPreferenceControllerTest {
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mScreen.addPreference(mPreference);
         mController.displayPreference(mScreen);
+        mController.setCallback(mAudioSwitchPreferenceCallback);
     }
 
     @After

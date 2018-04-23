@@ -25,17 +25,24 @@ import android.os.Message;
 import android.os.UserHandle;
 import android.preference.SeekBarVolumizer;
 import android.provider.SearchIndexableResource;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.RingtonePreference;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.sound.HandsFreeProfileOutputPreferenceController;
+import com.android.settings.sound.MediaOutputPreferenceController;
 import com.android.settings.widget.PreferenceCategoryController;
+import com.android.settings.widget.UpdatableListPreferenceDialogFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -71,6 +78,9 @@ public class SoundSettings extends DashboardFragment {
     };
 
     private RingtonePreference mRequestPreference;
+    private UpdatableListPreferenceDialogFragment mDialogFragment;
+    private String mMediaOutputControllerKey;
+    private String mHfpOutputControllerKey;
 
     @Override
     public int getMetricsCategory() {
@@ -85,6 +95,11 @@ public class SoundSettings extends DashboardFragment {
             if (!TextUtils.isEmpty(selectedPreference)) {
                 mRequestPreference = (RingtonePreference) findPreference(selectedPreference);
             }
+
+            UpdatableListPreferenceDialogFragment dialogFragment =
+                    (UpdatableListPreferenceDialogFragment) getFragmentManager()
+                            .findFragmentByTag(TAG);
+            mDialogFragment = dialogFragment;
         }
     }
 
@@ -112,6 +127,23 @@ public class SoundSettings extends DashboardFragment {
             return true;
         }
         return super.onPreferenceTreeClick(preference);
+    }
+
+    @Override
+    public void onDisplayPreferenceDialog(Preference preference) {
+        final int metricsCategory;
+        if (mHfpOutputControllerKey.equals(preference.getKey())) {
+            metricsCategory = MetricsProto.MetricsEvent.DIALOG_SWITCH_HFP_DEVICES;
+        } else if (mMediaOutputControllerKey.equals(preference.getKey())) {
+            metricsCategory = MetricsProto.MetricsEvent.DIALOG_SWITCH_A2DP_DEVICES;
+        } else {
+            metricsCategory = Instrumentable.METRICS_CATEGORY_UNKNOWN;
+        }
+
+        mDialogFragment = UpdatableListPreferenceDialogFragment.
+                newInstance(preference.getKey(), metricsCategory);
+        mDialogFragment.setTargetFragment(this, 0);
+        mDialogFragment.show(getFragmentManager(), TAG);
     }
 
     @Override
@@ -154,6 +186,14 @@ public class SoundSettings extends DashboardFragment {
         volumeControllers.add(use(RingVolumePreferenceController.class));
         volumeControllers.add(use(NotificationVolumePreferenceController.class));
         volumeControllers.add(use(CallVolumePreferenceController.class));
+
+        use(MediaOutputPreferenceController.class).setCallback(listPreference ->
+                onPreferenceDataChanged(listPreference));
+        mMediaOutputControllerKey = use(MediaOutputPreferenceController.class).getPreferenceKey();
+        use(HandsFreeProfileOutputPreferenceController.class).setCallback(listPreference ->
+            onPreferenceDataChanged(listPreference));
+        mHfpOutputControllerKey =
+                use(HandsFreeProfileOutputPreferenceController.class).getPreferenceKey();
 
         for (VolumeSeekBarPreferenceController controller : volumeControllers) {
             controller.setCallback(mVolumeCallback);
@@ -289,6 +329,12 @@ public class SoundSettings extends DashboardFragment {
                 use(WorkSoundPreferenceController.class);
         if (workSoundController != null) {
             workSoundController.enableWorkSync();
+        }
+    }
+
+    private void onPreferenceDataChanged(ListPreference preference) {
+        if (mDialogFragment != null) {
+            mDialogFragment.onListPreferenceUpdated(preference);
         }
     }
 }
