@@ -55,9 +55,11 @@ import java.util.List;
 public class RestrictAppDetectorTest {
 
     private static final int RESTRICTED_UID = 222;
+    private static final int UNRESTRICTED_UID = 333;
     private static final String PACKAGE_NAME = "com.android.app";
     private static final String UNINSTALLED_PACKAGE_NAME = "com.android.uninstalled";
     private static final String RESTRICTED_PACKAGE_NAME = "com.android.restricted";
+    private static final String UNRESTRICTED_PACKAGE_NAME = "com.android.unrestricted";
     private Context mContext;
     private BatteryTipPolicy mPolicy;
     private RestrictAppDetector mRestrictAppDetector;
@@ -88,9 +90,12 @@ public class RestrictAppDetectorTest {
         doReturn(mAppOpsManager).when(mContext).getSystemService(AppOpsManager.class);
         doReturn(AppOpsManager.MODE_IGNORED).when(mAppOpsManager).checkOpNoThrow(
                 AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, RESTRICTED_UID, RESTRICTED_PACKAGE_NAME);
+        doReturn(AppOpsManager.MODE_ALLOWED).when(mAppOpsManager).checkOpNoThrow(
+                AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UNRESTRICTED_UID,
+                UNRESTRICTED_PACKAGE_NAME);
 
         doReturn(mPackageManager).when(mContext).getPackageManager();
-        doReturn(mApplicationInfo).when(mPackageManager).getApplicationInfo(eq(PACKAGE_NAME),
+        doReturn(mApplicationInfo).when(mPackageManager).getApplicationInfo(any(),
                 anyInt());
         doReturn(PACKAGE_NAME).when(mApplicationInfo).loadLabel(any());
         doThrow(new PackageManager.NameNotFoundException()).when(
@@ -116,6 +121,10 @@ public class RestrictAppDetectorTest {
 
     @Test
     public void testDetect_hasAutoHandledAnomaly_tipHandled() {
+        mAppInfoList.add(new AppInfo.Builder()
+                .setUid(RESTRICTED_UID)
+                .setPackageName(RESTRICTED_PACKAGE_NAME)
+                .build());
         doReturn(new ArrayList<AppInfo>()).when(mBatteryDatabaseManager)
                 .queryAllAnomalies(anyLong(), eq(AnomalyDatabaseHelper.State.NEW));
         doReturn(mAppInfoList).when(mBatteryDatabaseManager)
@@ -126,7 +135,7 @@ public class RestrictAppDetectorTest {
     }
 
     @Test
-    public void testDetect_hasUninstalledAnomaly_removeIt() {
+    public void testDetect_typeNewHasUninstalledAnomaly_removeIt() {
         mAppInfoList.add(new AppInfo.Builder()
                 .setPackageName(UNINSTALLED_PACKAGE_NAME)
                 .build());
@@ -139,7 +148,7 @@ public class RestrictAppDetectorTest {
     }
 
     @Test
-    public void testDetect_hasRestrictedAnomaly_removeIt() throws
+    public void testDetect_typeNewHasRestrictedAnomaly_removeIt() throws
             PackageManager.NameNotFoundException {
         mAppInfoList.add(new AppInfo.Builder()
                 .setUid(RESTRICTED_UID)
@@ -153,6 +162,25 @@ public class RestrictAppDetectorTest {
         final RestrictAppTip restrictAppTip = (RestrictAppTip) mRestrictAppDetector.detect();
         assertThat(restrictAppTip.getState()).isEqualTo(BatteryTip.StateType.NEW);
         assertThat(restrictAppTip.getRestrictAppList()).containsExactly(mAppInfo);
+    }
+
+    @Test
+    public void testDetect_typeHandledHasUnRestrictedAnomaly_removeIt() throws
+            PackageManager.NameNotFoundException {
+        mAppInfoList.clear();
+        mAppInfoList.add(new AppInfo.Builder()
+                .setUid(UNRESTRICTED_UID)
+                .setPackageName(UNRESTRICTED_PACKAGE_NAME)
+                .build());
+        doReturn(new ArrayList<>()).when(mBatteryDatabaseManager)
+                .queryAllAnomalies(anyLong(), eq(AnomalyDatabaseHelper.State.NEW));
+        doReturn(mAppInfoList).when(mBatteryDatabaseManager)
+                .queryAllAnomalies(anyLong(), eq(AnomalyDatabaseHelper.State.AUTO_HANDLED));
+        doReturn(mApplicationInfo).when(mPackageManager).getApplicationInfo(
+                eq(UNRESTRICTED_PACKAGE_NAME), anyInt());
+
+        final RestrictAppTip restrictAppTip = (RestrictAppTip) mRestrictAppDetector.detect();
+        assertThat(restrictAppTip.getState()).isEqualTo(BatteryTip.StateType.INVISIBLE);
     }
 
     @Test
