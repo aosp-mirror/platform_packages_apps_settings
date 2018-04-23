@@ -17,11 +17,14 @@
 package com.android.settings.testutils.shadow;
 
 import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 
 import com.android.internal.widget.LockPatternUtils;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+
+import java.util.List;
 
 @Implements(LockPatternUtils.class)
 public class ShadowLockPatternUtils {
@@ -47,6 +50,11 @@ public class ShadowLockPatternUtils {
     @Implementation
     public static boolean isDeviceEncryptionEnabled() {
         return sDeviceEncryptionEnabled;
+    }
+
+    @Implementation
+    public List<ComponentName> getEnabledTrustAgents(int userId) {
+        return null;
     }
 
     public static void setDeviceEncryptionEnabled(boolean deviceEncryptionEnabled) {
