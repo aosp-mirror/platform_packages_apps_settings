@@ -695,10 +695,9 @@ public class SettingsActivity extends SettingsDrawerActivity
 
         final boolean showDev = DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(this)
                 && !Utils.isMonkeyRunning();
-        final boolean isAdminOrDemo = um.isAdminUser() || um.isDemoUser();
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.DevelopmentSettingsDashboardActivity.class.getName()),
-                showDev, isAdminOrDemo)
+                showDev, isAdmin)
                 || somethingChanged;
 
         // Enable/disable backup settings depending on whether the user is admin.
@@ -735,9 +734,7 @@ public class SettingsActivity extends SettingsDrawerActivity
                         final ComponentName component = category.getTile(i).intent.getComponent();
                         final String name = component.getClassName();
                         final boolean isEnabledForRestricted = ArrayUtils.contains(
-                                SettingsGateway.SETTINGS_FOR_RESTRICTED, name) || (isAdminOrDemo
-                                && Settings.DevelopmentSettingsDashboardActivity.class.getName()
-                                .equals(name));
+                                SettingsGateway.SETTINGS_FOR_RESTRICTED, name);
                         if (packageName.equals(component.getPackageName())
                                 && !isEnabledForRestricted) {
                             somethingChanged =
