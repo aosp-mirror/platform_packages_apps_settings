@@ -74,29 +74,23 @@ public class ZenModeSettingsTest {
     @Test
     public void testBlockedEffectsSummary_none() {
         NotificationManager.Policy policy = new NotificationManager.Policy(0, 0, 0, 0);
-        assertEquals("Never", mBuilder.getBlockedEffectsSummary(policy));
+        assertEquals(mContext.getString(R.string.zen_mode_restrict_notifications_summary_muted),
+                mBuilder.getBlockedEffectsSummary(policy));
     }
 
     @Test
-    public void testBlockedEffectsSummary_screen_on() {
+    public void testBlockedEffectsSummary_some() {
         NotificationManager.Policy policy = new NotificationManager.Policy(
                 0, 0, 0, NotificationManager.Policy.SUPPRESSED_EFFECT_PEEK);
-        assertEquals("When screen is on", mBuilder.getBlockedEffectsSummary(policy));
+        assertEquals(mContext.getString(R.string.zen_mode_restrict_notifications_summary_custom),
+                mBuilder.getBlockedEffectsSummary(policy));
     }
 
     @Test
-    public void testBlockedEffectsSummary_screen_off() {
+    public void testBlockedEffectsSummary_all() {
         NotificationManager.Policy policy = new NotificationManager.Policy(
-                0, 0, 0, NotificationManager.Policy.SUPPRESSED_EFFECT_AMBIENT);
-        assertEquals("When screen is off", mBuilder.getBlockedEffectsSummary(policy));
-    }
-
-    @Test
-    public void testBlockedEffectsSummary_both() {
-        NotificationManager.Policy policy = new NotificationManager.Policy(0, 0, 0,
-                NotificationManager.Policy.SUPPRESSED_EFFECT_NOTIFICATION_LIST
-                        | NotificationManager.Policy.SUPPRESSED_EFFECT_LIGHTS);
-        assertEquals("When screen is off, When screen is on",
+                0, 0, 0, 511);
+        assertEquals(mContext.getString(R.string.zen_mode_restrict_notifications_summary_hidden),
                 mBuilder.getBlockedEffectsSummary(policy));
     }
 
