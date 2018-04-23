@@ -160,7 +160,7 @@ public class MediaOutputPreferenceControllerTest {
 
     /**
      * On going call state:
-     * Preference should be disabled
+     * Preference should be invisible
      * Default string should be "Unavailable during calls"
      */
     @Test
@@ -169,14 +169,14 @@ public class MediaOutputPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        assertThat(mPreference.isEnabled()).isFalse();
+        assertThat(mPreference.isVisible()).isFalse();
         assertThat(mPreference.getSummary()).isEqualTo(
                 mContext.getText(R.string.media_out_summary_ongoing_call_state));
     }
 
     /**
      * No available A2dp BT devices:
-     * Preference should be disabled
+     * Preference should be invisible
      * Preference summary should be "This device"
      */
     @Test
@@ -187,14 +187,14 @@ public class MediaOutputPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        assertThat(mPreference.isEnabled()).isFalse();
+        assertThat(mPreference.isVisible()).isFalse();
         String defaultString = mContext.getString(R.string.media_output_default_summary);
         assertThat(mPreference.getSummary()).isEqualTo(defaultString);
     }
 
     /**
      * Media stream is captured by something else (cast device):
-     * Preference should be disabled
+     * Preference should be invisible
      * Preference summary should be "unavailable"
      */
     @Test
@@ -203,14 +203,14 @@ public class MediaOutputPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        assertThat(mPreference.isEnabled()).isFalse();
+        assertThat(mPreference.isVisible()).isFalse();
         String defaultString = mContext.getString(R.string.media_output_summary_unavailable);
         assertThat(mPreference.getSummary()).isEqualTo(defaultString);
     }
 
     /**
      * One A2DP Bluetooth device is available and active.
-     * Preference should be enabled
+     * Preference should be visible
      * Preference summary should be activate device name
      */
     @Test
@@ -221,13 +221,13 @@ public class MediaOutputPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        assertThat(mPreference.isEnabled()).isTrue();
+        assertThat(mPreference.isVisible()).isTrue();
         assertThat(mPreference.getSummary()).isEqualTo(mBluetoothDevice.getName());
     }
 
     /**
      * More than one A2DP Bluetooth devices are available, and second device is active.
-     * Preference should be enabled
+     * Preference should be visible
      * Preference summary should be activate device name
      */
     @Test
@@ -247,13 +247,13 @@ public class MediaOutputPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        assertThat(mPreference.isEnabled()).isTrue();
+        assertThat(mPreference.isVisible()).isTrue();
         assertThat(mPreference.getSummary()).isEqualTo(secondBluetoothDevice.getName());
     }
 
     /**
      * A2DP Bluetooth device(s) are available, but wired headset is plugged in and activated
-     * Preference should be enabled
+     * Preference should be visible
      * Preference summary should be "This device"
      */
     @Test
@@ -266,7 +266,7 @@ public class MediaOutputPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        assertThat(mPreference.isEnabled()).isTrue();
+        assertThat(mPreference.isVisible()).isTrue();
         String defaultString = mContext.getString(R.string.media_output_default_summary);
         assertThat(mPreference.getSummary()).isEqualTo(defaultString);
     }
@@ -274,7 +274,7 @@ public class MediaOutputPreferenceControllerTest {
 
     /**
      * A2DP Bluetooth device(s) are available, but current device speaker is activated
-     * Preference should be enabled
+     * Preference should be visible
      * Preference summary should be "This device"
      */
     @Test
@@ -285,7 +285,7 @@ public class MediaOutputPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        assertThat(mPreference.isEnabled()).isTrue();
+        assertThat(mPreference.isVisible()).isTrue();
         String defaultString = mContext.getString(R.string.media_output_default_summary);
         assertThat(mPreference.getSummary()).isEqualTo(defaultString);
     }
