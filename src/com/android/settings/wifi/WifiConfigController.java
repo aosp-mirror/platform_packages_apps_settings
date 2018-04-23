@@ -220,6 +220,7 @@ public class WifiConfigController implements TextWatcher,
         mMeteredSettingsSpinner = mView.findViewById(R.id.metered_settings);
         mHiddenSettingsSpinner = mView.findViewById(R.id.hidden_settings);
         mHiddenSettingsSpinner.setOnItemSelectedListener(this);
+        mHiddenSettingsSpinner.setEnabled(false);
         mHiddenWarningView = mView.findViewById(R.id.hidden_settings_warning);
         mHiddenWarningView.setVisibility(
                 mHiddenSettingsSpinner.getSelectedItemPosition() == NOT_HIDDEN_NETWORK
@@ -238,6 +239,8 @@ public class WifiConfigController implements TextWatcher,
             showIpConfigFields();
             showProxyFields();
             mView.findViewById(R.id.wifi_advanced_toggle).setVisibility(View.VISIBLE);
+            // Hidden option can be changed only when the user adds a network manually.
+            mHiddenSettingsSpinner.setEnabled(true);
             ((CheckBox) mView.findViewById(R.id.wifi_advanced_togglebox))
                     .setOnCheckedChangeListener(this);
 
