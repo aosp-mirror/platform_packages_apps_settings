@@ -39,13 +39,10 @@ public class MagnificationNavbarPreferenceController extends BasePreferenceContr
             Bundle extras = preference.getExtras();
             extras.putString(AccessibilitySettings.EXTRA_PREFERENCE_KEY,
                     Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED);
-            extras.putString(AccessibilitySettings.EXTRA_TITLE, mContext.getString(
-                    R.string.accessibility_screen_magnification_navbar_title));
             extras.putInt(AccessibilitySettings.EXTRA_TITLE_RES,
                     R.string.accessibility_screen_magnification_navbar_title);
-            extras.putCharSequence(AccessibilitySettings.EXTRA_SUMMARY,
-                    mContext.getResources().getText(
-                            R.string.accessibility_screen_magnification_navbar_summary));
+            extras.putInt(AccessibilitySettings.EXTRA_SUMMARY_RES,
+                    R.string.accessibility_screen_magnification_navbar_summary);
             extras.putBoolean(AccessibilitySettings.EXTRA_CHECKED,
                     Settings.Secure.getInt(mContext.getContentResolver(),
                             Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED, 0)
