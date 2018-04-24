@@ -23,12 +23,20 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.fuelgauge.BatterySaverDrawable;
+import com.android.settings.fuelgauge.BatterySaverReceiver;
 import com.android.settings.fuelgauge.batterysaver.BatterySaverSettings;
 import com.android.settingslib.fuelgauge.BatterySaverUtils;
 
-public class BatterySaverCondition extends Condition {
+public class BatterySaverCondition extends Condition implements
+        BatterySaverReceiver.BatterySaverListener {
+
+    private final BatterySaverReceiver mReceiver;
+
     public BatterySaverCondition(ConditionManager manager) {
         super(manager);
+
+        mReceiver = new BatterySaverReceiver(manager.getContext());
+        mReceiver.setBatterySaverListener(this);
     }
 
     @Override
@@ -54,7 +62,7 @@ public class BatterySaverCondition extends Condition {
 
     @Override
     public CharSequence[] getActions() {
-        return new CharSequence[] {mManager.getContext().getString(R.string.condition_turn_off)};
+        return new CharSequence[]{mManager.getContext().getString(R.string.condition_turn_off)};
     }
 
     @Override
@@ -81,5 +89,26 @@ public class BatterySaverCondition extends Condition {
     @Override
     public int getMetricsConstant() {
         return MetricsEvent.SETTINGS_CONDITION_BATTERY_SAVER;
+    }
+
+    @Override
+    public void onResume() {
+        mReceiver.setListening(true);
+    }
+
+    @Override
+    public void onPause() {
+        mReceiver.setListening(false);
+    }
+
+    @Override
+    public void onPowerSaveModeChanged() {
+        ConditionManager.get(mManager.getContext()).getCondition(BatterySaverCondition.class)
+                        .refreshState();
+    }
+
+    @Override
+    public void onBatteryChanged(boolean pluggedIn) {
+        // do nothing
     }
 }
