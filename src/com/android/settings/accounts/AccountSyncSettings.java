@@ -35,28 +35,25 @@ import android.os.Binder;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.widget.EntityHeaderController;
 
 import com.google.android.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import androidx.preference.Preference;
 
 public class AccountSyncSettings extends AccountPreferenceBase {
 
@@ -65,10 +62,6 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     private static final int MENU_SYNC_CANCEL_ID = Menu.FIRST + 1;
     private static final int CANT_DO_ONETIME_SYNC_DIALOG = 102;
 
-    private TextView mUserId;
-    private TextView mProviderId;
-    private ImageView mProviderIcon;
-    private TextView mErrorInfoView;
     private Account mAccount;
     private ArrayList<SyncAdapterType> mInvisibleAdapters = Lists.newArrayList();
 
@@ -103,36 +96,8 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        setPreferenceScreen(null);
         addPreferencesFromResource(R.xml.account_sync_settings);
-        getPreferenceScreen().setOrderingAsAdded(false);
         setAccessibilityTitle();
-
-        setHasOptionsMenu(true);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.account_sync_screen, container, false);
-
-        final ViewGroup prefs_container = view.findViewById(R.id.prefs_container);
-        Utils.prepareCustomPreferencesList(container, view, prefs_container, false);
-        View prefs = super.onCreateView(inflater, prefs_container, savedInstanceState);
-        prefs_container.addView(prefs);
-
-        initializeUi(view);
-
-        return view;
-    }
-
-    protected void initializeUi(final View rootView) {
-        mErrorInfoView = (TextView) rootView.findViewById(R.id.sync_settings_error_info);
-        mErrorInfoView.setVisibility(View.GONE);
-
-        mUserId = (TextView) rootView.findViewById(R.id.user_id);
-        mProviderId = (TextView) rootView.findViewById(R.id.provider_id);
-        mProviderIcon = (ImageView) rootView.findViewById(R.id.provider_icon);
     }
 
     @Override
@@ -145,7 +110,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
             finish();
             return;
         }
-        mAccount = (Account) arguments.getParcelable(ACCOUNT_KEY);
+        mAccount = arguments.getParcelable(ACCOUNT_KEY);
         if (!accountExists(mAccount)) {
             Log.e(TAG, "Account provided does not exist: " + mAccount);
             finish();
@@ -154,8 +119,15 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         if (Log.isLoggable(TAG, Log.VERBOSE)) {
             Log.v(TAG, "Got account: " + mAccount);
         }
-        mUserId.setText(mAccount.name);
-        mProviderId.setText(mAccount.type);
+        final Activity activity = getActivity();
+        final Preference pref = EntityHeaderController
+                .newInstance(activity, this, null /* header */)
+                .setRecyclerView(getListView(), getLifecycle())
+                .setIcon(getDrawableForType(mAccount.type))
+                .setLabel(mAccount.name)
+                .setSummary(getLabelForType(mAccount.type))
+                .done(activity, getPrefContext());
+        getPreferenceScreen().addPreference(pref);
     }
 
     private void setAccessibilityTitle() {
@@ -172,7 +144,6 @@ public class AccountSyncSettings extends AccountPreferenceBase {
 
     @Override
     public void onResume() {
-        removePreference("dummy");
         mAuthenticatorHelper.listenToAccountUpdates();
         updateAuthDescriptions();
         onAccountsUpdate(Binder.getCallingUserHandle());
@@ -481,7 +452,10 @@ public class AccountSyncSettings extends AccountPreferenceBase {
             syncPref.setOneTimeSyncMode(oneTimeSyncMode);
             syncPref.setChecked(oneTimeSyncMode || syncEnabled);
         }
-        mErrorInfoView.setVisibility(syncIsFailing ? View.VISIBLE : View.GONE);
+        if (syncIsFailing) {
+            mFooterPreferenceMixin.createFooterPreference()
+                    .setTitle(R.string.sync_is_failing);
+        }
     }
 
     @Override
@@ -536,7 +510,9 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         if (Log.isLoggable(TAG, Log.DEBUG)) {
             Log.d(TAG, "looking for sync adapters that match account " + mAccount);
         }
+
         cacheRemoveAllPrefs(getPreferenceScreen());
+        getCachedPreference(EntityHeaderController.PREF_KEY_APP_HEADER);
         for (int j = 0, m = authorities.size(); j < m; j++) {
             final SyncAdapterType syncAdapter = authorities.get(j);
             // We could check services here....
@@ -558,18 +534,6 @@ public class AccountSyncSettings extends AccountPreferenceBase {
             }
         }
         removeCachedPrefs(getPreferenceScreen());
-    }
-
-    /**
-     * Updates the titlebar with an icon for the provider type.
-     */
-    @Override
-    protected void onAuthDescriptionsUpdated() {
-        super.onAuthDescriptionsUpdated();
-        if (mAccount != null) {
-            mProviderIcon.setImageDrawable(getDrawableForType(mAccount.type));
-            mProviderId.setText(getLabelForType(mAccount.type));
-        }
     }
 
     @Override

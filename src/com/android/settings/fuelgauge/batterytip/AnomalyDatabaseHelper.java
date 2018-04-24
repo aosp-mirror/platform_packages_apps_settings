@@ -34,7 +34,7 @@ public class AnomalyDatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "BatteryDatabaseHelper";
 
     private static final String DATABASE_NAME = "battery_settings.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
 
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({State.NEW,
@@ -79,15 +79,18 @@ public class AnomalyDatabaseHelper extends SQLiteOpenHelper {
             "CREATE TABLE " + Tables.TABLE_ANOMALY +
                     "(" +
                     AnomalyColumns.UID +
-                    " INTEGER, " +
+                    " INTEGER NOT NULL, " +
                     AnomalyColumns.PACKAGE_NAME +
                     " TEXT, " +
                     AnomalyColumns.ANOMALY_TYPE +
-                    " INTEGER, " +
+                    " INTEGER NOT NULL, " +
                     AnomalyColumns.ANOMALY_STATE +
-                    " INTEGER, " +
+                    " INTEGER NOT NULL, " +
                     AnomalyColumns.TIME_STAMP_MS +
-                    " INTEGER)";
+                    " INTEGER NOT NULL, " +
+                    " PRIMARY KEY (" + AnomalyColumns.UID + "," + AnomalyColumns.ANOMALY_TYPE + ","
+                    + AnomalyColumns.ANOMALY_STATE + "," + AnomalyColumns.TIME_STAMP_MS + ")"
+                    + ")";
 
     private static AnomalyDatabaseHelper sSingleton;
 

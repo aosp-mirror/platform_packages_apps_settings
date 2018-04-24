@@ -101,8 +101,7 @@ public class BatteryTipUtils {
                 }
             case BatteryTip.TipType.APP_RESTRICTION:
                 if (batteryTip.getState() == BatteryTip.StateType.HANDLED) {
-                    return new OpenRestrictAppFragmentAction(settingsActivity, fragment,
-                            (RestrictAppTip) batteryTip);
+                    return new OpenRestrictAppFragmentAction(fragment, (RestrictAppTip) batteryTip);
                 } else {
                     return new RestrictAppAction(settingsActivity, (RestrictAppTip) batteryTip);
                 }

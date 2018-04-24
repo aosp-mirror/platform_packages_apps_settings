@@ -15,6 +15,7 @@
  */
 package com.android.settings.testutils.shadow;
 
+import android.annotation.UserIdInt;
 import android.content.Context;
 
 import com.android.internal.util.ArrayUtils;
@@ -23,15 +24,25 @@ import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.annotation.Resetter;
 
 @Implements(RestrictedLockUtils.class)
 public class ShadowRestrictedLockUtils {
     private static boolean isRestricted;
     private static String[] restrictedPkgs;
     private static boolean adminSupportDetailsIntentLaunched;
+    private static int keyguardDisabledFeatures;
+
+    @Resetter
+    public static void reset() {
+        isRestricted = false;
+        restrictedPkgs = null;
+        adminSupportDetailsIntentLaunched = false;
+        keyguardDisabledFeatures = 0;
+    }
 
     @Implementation
-    public static RestrictedLockUtils.EnforcedAdmin checkIfMeteredDataRestricted(Context context,
+    public static EnforcedAdmin checkIfMeteredDataRestricted(Context context,
             String packageName, int userId) {
         if (isRestricted) {
             return new EnforcedAdmin();
@@ -45,6 +56,12 @@ public class ShadowRestrictedLockUtils {
     @Implementation
     public static void sendShowAdminSupportDetailsIntent(Context context, EnforcedAdmin admin) {
         adminSupportDetailsIntentLaunched = true;
+    }
+
+    @Implementation
+    public static EnforcedAdmin checkIfKeyguardFeaturesDisabled(Context context,
+            int features, final @UserIdInt int userId) {
+        return (keyguardDisabledFeatures & features) == 0 ? null : new EnforcedAdmin();
     }
 
     public static boolean hasAdminSupportDetailsIntentLaunched() {
@@ -61,5 +78,9 @@ public class ShadowRestrictedLockUtils {
 
     public static void setRestrictedPkgs(String... pkgs) {
         restrictedPkgs = pkgs;
+    }
+
+    public static void setKeyguardDisabledFeatures(int features) {
+        keyguardDisabledFeatures = features;
     }
 }

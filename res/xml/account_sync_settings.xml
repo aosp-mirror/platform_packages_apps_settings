@@ -14,11 +14,9 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <!-- Needed so PreferenceGroupAdapter allows SyncStateSwitchPreference to be
-         recycled. Removed in onResume -->
-    <com.android.settings.accounts.SyncStateSwitchPreference
-        android:key="dummy" />
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="account_sync_details_screen"
+    android:title="@string/account_sync_title">
 
 </PreferenceScreen>

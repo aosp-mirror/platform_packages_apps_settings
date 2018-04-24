@@ -21,6 +21,8 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
@@ -33,6 +35,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(AndroidJUnit4.class)
@@ -41,6 +44,8 @@ public class RestrictAppTest {
     private static final String BATTERY_INTENT = "android.intent.action.POWER_USAGE_SUMMARY";
     private static final String PACKAGE_SETTINGS = "com.android.settings";
     private static final String PACKAGE_SYSTEM_UI = "com.android.systemui";
+    private static final int ANOMALY_TYPE =
+            StatsManagerConfig.AnomalyType.EXCESSIVE_WAKELOCK_ALL_SCREEN_OFF;
 
     private BatteryDatabaseManager mBatteryDatabaseManager;
     private PackageManager mPackageManager;
@@ -55,10 +60,10 @@ public class RestrictAppTest {
     }
 
     @Test
-    public void testBatterySettings_hasOneAnomaly_showAnomaly() throws
+    public void batterySettings_hasOneAnomaly_showAnomaly() throws
             PackageManager.NameNotFoundException {
         mBatteryDatabaseManager.insertAnomaly(mPackageManager.getPackageUid(PACKAGE_SETTINGS, 0),
-                PACKAGE_SETTINGS, 1,
+                PACKAGE_SETTINGS, ANOMALY_TYPE,
                 AnomalyDatabaseHelper.State.NEW, System.currentTimeMillis());
 
         Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
@@ -67,17 +72,54 @@ public class RestrictAppTest {
     }
 
     @Test
-    public void testBatterySettings_hasTwoAnomalies_showAnomalies() throws
+    public void batterySettings_hasTwoAnomalies_showAnomalies() throws
             PackageManager.NameNotFoundException {
         mBatteryDatabaseManager.insertAnomaly(mPackageManager.getPackageUid(PACKAGE_SETTINGS, 0),
-                PACKAGE_SETTINGS, 1,
+                PACKAGE_SETTINGS, ANOMALY_TYPE,
                 AnomalyDatabaseHelper.State.NEW, System.currentTimeMillis());
         mBatteryDatabaseManager.insertAnomaly(mPackageManager.getPackageUid(PACKAGE_SYSTEM_UI, 0),
-                PACKAGE_SYSTEM_UI, 1,
+                PACKAGE_SYSTEM_UI, ANOMALY_TYPE,
                 AnomalyDatabaseHelper.State.NEW, System.currentTimeMillis());
 
         Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
         instrumentation.startActivitySync(new Intent(BATTERY_INTENT));
         onView(withText("Restrict 2 apps")).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void batterySettings_hasAutoHandledAnomalies_showAutoHandled() throws
+            PackageManager.NameNotFoundException {
+        mBatteryDatabaseManager.insertAnomaly(mPackageManager.getPackageUid(PACKAGE_SETTINGS, 0),
+                PACKAGE_SETTINGS, 1,
+                AnomalyDatabaseHelper.State.AUTO_HANDLED, System.currentTimeMillis());
+        mBatteryDatabaseManager.insertAnomaly(mPackageManager.getPackageUid(PACKAGE_SYSTEM_UI, 0),
+                PACKAGE_SYSTEM_UI, 1,
+                AnomalyDatabaseHelper.State.AUTO_HANDLED, System.currentTimeMillis());
+
+        Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
+        instrumentation.startActivitySync(new Intent(BATTERY_INTENT));
+        onView(withText("2 apps recently restricted")).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void insertDuplicateAnomalies_onlyInsertOnce() throws
+            PackageManager.NameNotFoundException {
+        final int uid = mPackageManager.getPackageUid(PACKAGE_SETTINGS, 0);
+        final long now = System.currentTimeMillis();
+
+        // Insert same anomaly twice, it fails at the second time.
+        assertThat(mBatteryDatabaseManager.insertAnomaly(uid, PACKAGE_SETTINGS, ANOMALY_TYPE,
+                AnomalyDatabaseHelper.State.NEW, now)).isTrue();
+        assertThat(mBatteryDatabaseManager.insertAnomaly(uid, PACKAGE_SETTINGS, ANOMALY_TYPE,
+                AnomalyDatabaseHelper.State.NEW, now)).isFalse();
+
+        // In database, only contains one row
+        List<AppInfo> newAppInfos = mBatteryDatabaseManager.queryAllAnomalies(0,
+                AnomalyDatabaseHelper.State.NEW);
+        assertThat(newAppInfos).containsExactly(new AppInfo.Builder()
+                .setUid(uid)
+                .setPackageName(PACKAGE_SETTINGS)
+                .addAnomalyType(ANOMALY_TYPE)
+                .build());
     }
 }
