@@ -16,15 +16,16 @@
 
 package com.android.settings.fuelgauge.batterytip.actions;
 
-import android.app.Fragment;
+import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
-import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.RestrictedAppDetails;
+import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
+import com.android.settings.fuelgauge.batterytip.BatteryDatabaseManager;
 import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.List;
 
@@ -33,17 +34,16 @@ import java.util.List;
  */
 public class OpenRestrictAppFragmentAction extends BatteryTipAction {
     private final RestrictAppTip mRestrictAppTip;
-    private final BatteryUtils mBatteryUtils;
-    private final SettingsActivity mSettingsActivity;
     private final InstrumentedPreferenceFragment mFragment;
+    @VisibleForTesting
+    BatteryDatabaseManager mBatteryDatabaseManager;
 
-    public OpenRestrictAppFragmentAction(SettingsActivity settingsActivity,
-            InstrumentedPreferenceFragment fragment, RestrictAppTip tip) {
+    public OpenRestrictAppFragmentAction(InstrumentedPreferenceFragment fragment,
+            RestrictAppTip tip) {
         super(fragment.getContext());
-        mSettingsActivity = settingsActivity;
         mFragment = fragment;
         mRestrictAppTip = tip;
-        mBatteryUtils = BatteryUtils.getInstance(mContext);
+        mBatteryDatabaseManager = BatteryDatabaseManager.getInstance(mContext);
     }
 
     /**
@@ -54,7 +54,10 @@ public class OpenRestrictAppFragmentAction extends BatteryTipAction {
         mMetricsFeatureProvider.action(mContext,
                 MetricsProto.MetricsEvent.ACTION_TIP_OPEN_APP_RESTRICTION_PAGE, metricsKey);
         final List<AppInfo> mAppInfos = mRestrictAppTip.getRestrictAppList();
-        RestrictedAppDetails.startRestrictedAppDetails(mSettingsActivity, mFragment,
-                mAppInfos);
+        RestrictedAppDetails.startRestrictedAppDetails(mFragment, mAppInfos);
+
+        // Mark all the anomalies as handled, so it won't show up again.
+        ThreadUtils.postOnBackgroundThread(() -> mBatteryDatabaseManager.updateAnomalies(mAppInfos,
+                AnomalyDatabaseHelper.State.HANDLED));
     }
 }

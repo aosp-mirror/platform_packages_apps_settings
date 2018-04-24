@@ -65,12 +65,10 @@ public class MagnificationGesturesPreferenceController extends BasePreferenceCon
     static void populateMagnificationGesturesPreferenceExtras(Bundle extras, Context context) {
         extras.putString(AccessibilitySettings.EXTRA_PREFERENCE_KEY,
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED);
-        extras.putString(AccessibilitySettings.EXTRA_TITLE, context.getString(
-                R.string.accessibility_screen_magnification_gestures_title));
         extras.putInt(AccessibilitySettings.EXTRA_TITLE_RES,
                 R.string.accessibility_screen_magnification_gestures_title);
-        extras.putCharSequence(AccessibilitySettings.EXTRA_SUMMARY, context.getResources().getText(
-                R.string.accessibility_screen_magnification_summary));
+        extras.putInt(AccessibilitySettings.EXTRA_SUMMARY_RES,
+                R.string.accessibility_screen_magnification_summary);
         extras.putBoolean(AccessibilitySettings.EXTRA_CHECKED,
                 Settings.Secure.getInt(context.getContentResolver(),
                         Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, 0) == 1);

@@ -18,6 +18,8 @@ package com.android.settings.notification;
 
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS;
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS;
+import static android.provider.Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS;
+import static android.provider.Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
@@ -164,15 +166,17 @@ public class RedactionInterstitial extends SettingsActivity {
         }
 
         private void loadFromSettings() {
-            final boolean managed = UserManager.get(getContext()).isManagedProfile(mUserId);
-            final boolean enabled = !managed || Settings.Secure.getIntForUser(getContentResolver(),
-                    Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, 0, mUserId) != 0;
-            final boolean show = Settings.Secure.getIntForUser(getContentResolver(),
-                    Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, 1, mUserId) != 0;
+            final boolean managedProfile = UserManager.get(getContext()).isManagedProfile(mUserId);
+            // Hiding all notifications is device-wide setting, managed profiles can only set
+            // whether their notifications are show in full or redacted.
+            final boolean showNotifications = managedProfile || Settings.Secure.getIntForUser(
+                    getContentResolver(), LOCK_SCREEN_SHOW_NOTIFICATIONS, 0, mUserId) != 0;
+            final boolean showUnredacted = Settings.Secure.getIntForUser(
+                    getContentResolver(), LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, 1, mUserId) != 0;
 
             int checkedButtonId = R.id.hide_all;
-            if (enabled) {
-                if (show && !mShowAllButton.isDisabledByAdmin()) {
+            if (showNotifications) {
+                if (showUnredacted && !mShowAllButton.isDisabledByAdmin()) {
                     checkedButtonId = R.id.show_all;
                 } else if (!mRedactSensitiveButton.isDisabledByAdmin()) {
                     checkedButtonId = R.id.redact_sensitive;
@@ -188,9 +192,9 @@ public class RedactionInterstitial extends SettingsActivity {
             final boolean enabled = (checkedId != R.id.hide_all);
 
             Settings.Secure.putIntForUser(getContentResolver(),
-                    Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, show ? 1 : 0, mUserId);
+                    LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, show ? 1 : 0, mUserId);
             Settings.Secure.putIntForUser(getContentResolver(),
-                    Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, enabled ? 1 : 0, mUserId);
+                    LOCK_SCREEN_SHOW_NOTIFICATIONS, enabled ? 1 : 0, mUserId);
 
         }
     }
