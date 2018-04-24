@@ -21,8 +21,10 @@ import androidx.annotation.VisibleForTesting;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.graphics.drawable.Drawable;
+import android.media.AudioAttributes;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.provider.Settings;
 import android.util.ArrayMap;
@@ -104,6 +106,24 @@ public abstract class VibrationPreferenceFragment extends RadioButtonPickerFragm
      * When a new vibration intensity is selected by the user.
      */
     protected void onVibrationIntensitySelected(int intensity) { }
+
+    /**
+     * Play a vibration effect with intensity just selected by user
+     */
+    protected void playVibrationPreview() {
+        Vibrator vibrator = getContext().getSystemService(Vibrator.class);
+        VibrationEffect effect = VibrationEffect.get(VibrationEffect.EFFECT_CLICK);
+        AudioAttributes.Builder builder = new AudioAttributes.Builder();
+        builder.setUsage(getPreviewVibrationAudioAttributesUsage());
+        vibrator.vibrate(effect, builder.build());
+    }
+
+    /**
+     * Get the AudioAttributes usage for vibration preview.
+     */
+    protected int getPreviewVibrationAudioAttributesUsage() {
+        return AudioAttributes.USAGE_UNKNOWN;
+    }
 
     @Override
     protected List<? extends CandidateInfo> getCandidates() {
@@ -189,6 +209,7 @@ public abstract class VibrationPreferenceFragment extends RadioButtonPickerFragm
         @Override
         public void onChange(boolean selfChange, Uri uri) {
             updateCandidates();
+            playVibrationPreview();
         }
     }
 }
