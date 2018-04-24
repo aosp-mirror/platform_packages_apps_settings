@@ -91,6 +91,18 @@
             <TextView android:id="@+id/roaming" style="@style/info_value" />
         </LinearLayout>
 
+        <!-- Link Bandwidth -->
+        <LinearLayout style="@style/entry_layout" android:orientation="horizontal">
+            <TextView android:text="@string/radio_info_dl_kbps" style="@style/info_label" />
+            <TextView android:id="@+id/dl_kbps" style="@style/info_value" />
+        </LinearLayout>
+
+        <!-- Link Bandwidth -->
+        <LinearLayout style="@style/entry_layout" android:orientation="horizontal">
+            <TextView android:text="@string/radio_info_ul_kbps" style="@style/info_label" />
+            <TextView android:id="@+id/ul_kbps" style="@style/info_value" />
+        </LinearLayout>
+
         <!-- Physical Channel Config -->
         <LinearLayout style="@style/entry_layout">
             <TextView android:text="@string/radio_info_phy_chan_config" style="@style/info_label" />

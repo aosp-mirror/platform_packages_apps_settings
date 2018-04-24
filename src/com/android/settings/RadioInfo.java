@@ -16,6 +16,8 @@
 
 package com.android.settings;
 
+import static android.net.ConnectivityManager.NetworkCallback;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -27,6 +29,10 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.net.NetworkRequest;
 import android.net.TrafficStats;
 import android.net.Uri;
 import android.os.AsyncResult;
@@ -197,6 +203,8 @@ public class RadioInfo extends Activity {
     private TextView mHttpClientTest;
     private TextView mPhyChanConfig;
     private TextView dnsCheckState;
+    private TextView mDownlinkKbps;
+    private TextView mUplinkKbps;
     private EditText smsc;
     private Switch radioPowerOnSwitch;
     private Button cellInfoRefreshRateButton;
@@ -214,6 +222,7 @@ public class RadioInfo extends Activity {
     private Spinner preferredNetworkType;
     private Spinner cellInfoRefreshRateSpinner;
 
+    private ConnectivityManager mConnectivityManager;
     private TelephonyManager mTelephonyManager;
     private ImsManager mImsManager = null;
     private Phone phone = null;
@@ -230,6 +239,19 @@ public class RadioInfo extends Activity {
 
     private int mPreferredNetworkTypeResult;
     private int mCellInfoRefreshRateIndex;
+
+    private final NetworkRequest mDefaultNetworkRequest = new NetworkRequest.Builder()
+            .addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
+            .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+            .build();
+
+    private final NetworkCallback mNetworkCallback = new NetworkCallback() {
+        public void onCapabilitiesChanged(Network n, NetworkCapabilities nc) {
+            int dlbw = nc.getLinkDownstreamBandwidthKbps();
+            int ulbw = nc.getLinkUpstreamBandwidthKbps();
+            updateBandwidths(dlbw, ulbw);
+        }
+    };
 
     private final PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
         @Override
@@ -389,6 +411,7 @@ public class RadioInfo extends Activity {
         log("Started onCreate");
 
         mTelephonyManager = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
+        mConnectivityManager = (ConnectivityManager)getSystemService(CONNECTIVITY_SERVICE);
         phone = PhoneFactory.getDefaultPhone();
 
         //TODO: Need to update this if the default phoneId changes?
@@ -443,6 +466,10 @@ public class RadioInfo extends Activity {
         eabProvisionedSwitch = (Switch) findViewById(R.id.eab_provisioned_switch);
 
         radioPowerOnSwitch = (Switch) findViewById(R.id.radio_power);
+
+        mDownlinkKbps = (TextView) findViewById(R.id.dl_kbps);
+        mUplinkKbps = (TextView) findViewById(R.id.ul_kbps);
+        updateBandwidths(0, 0);
 
         pingTestButton = (Button) findViewById(R.id.ping_test);
         pingTestButton.setOnClickListener(mPingButtonHandler);
@@ -529,6 +556,9 @@ public class RadioInfo extends Activity {
                 | PhoneStateListener.LISTEN_SIGNAL_STRENGTHS
                 | PhoneStateListener.LISTEN_PHYSICAL_CHANNEL_CONFIGURATION);
 
+        mConnectivityManager.registerNetworkCallback(
+                mDefaultNetworkRequest, mNetworkCallback, mHandler);
+
         smsc.clearFocus();
     }
 
@@ -540,6 +570,8 @@ public class RadioInfo extends Activity {
 
         mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
         mTelephonyManager.setCellInfoListRate(CELL_INFO_LIST_RATE_DISABLED);
+        mConnectivityManager.unregisterNetworkCallback(mNetworkCallback);
+
     }
 
     private void restoreFromBundle(Bundle b) {
@@ -618,6 +650,14 @@ public class RadioInfo extends Activity {
         dnsCheckState.setText(phone.isDnsCheckDisabled() ?
                 "0.0.0.0 allowed" :"0.0.0.0 not allowed");
     }
+
+    private void updateBandwidths(int dlbw, int ulbw) {
+        dlbw = (dlbw < 0 || dlbw == Integer.MAX_VALUE) ? -1 : dlbw;
+        ulbw = (ulbw < 0 || ulbw == Integer.MAX_VALUE) ? -1 : ulbw;
+        mDownlinkKbps.setText(String.format("%-5d", dlbw));
+        mUplinkKbps.setText(String.format("%-5d", ulbw));
+    }
+
 
     private final void
     updateSignalStrength(SignalStrength signalStrength) {
