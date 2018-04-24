@@ -33,7 +33,6 @@ import android.view.View;
 
 import com.android.settings.R;
 import com.android.settings.vpn2.VpnUtils;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.Date;
 import java.util.List;
@@ -42,7 +41,7 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
 
     private final Context mContext;
     private final DevicePolicyManager mDpm;
-    private final PackageManagerWrapper mPm;
+    private final PackageManager mPm;
     private final UserManager mUm;
     private final ConnectivityManager mCm;
     private final Resources mResources;
@@ -50,7 +49,7 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
     private static final int MY_USER_ID = UserHandle.myUserId();
 
     public EnterprisePrivacyFeatureProviderImpl(Context context, DevicePolicyManager dpm,
-            PackageManagerWrapper pm, UserManager um, ConnectivityManager cm,
+            PackageManager pm, UserManager um, ConnectivityManager cm,
             Resources resources) {
         mContext = context.getApplicationContext();
         mDpm = dpm;
@@ -194,7 +193,7 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
         }
         try {
             return mPm.getApplicationInfoAsUser(packageName, 0 /* flags */, MY_USER_ID)
-                    .loadLabel(mPm.getPackageManager()).toString();
+                    .loadLabel(mPm).toString();
         } catch (PackageManager.NameNotFoundException e) {
             return null;
         }

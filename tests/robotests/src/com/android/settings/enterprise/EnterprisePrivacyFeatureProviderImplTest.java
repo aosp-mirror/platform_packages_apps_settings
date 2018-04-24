@@ -37,7 +37,6 @@ import android.text.SpannableStringBuilder;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -69,7 +68,6 @@ public class EnterprisePrivacyFeatureProviderImplTest {
 
     private @Mock Context mContext;
     private @Mock DevicePolicyManager mDevicePolicyManager;
-    private @Mock PackageManagerWrapper mPackageManagerWrapper;
     private @Mock PackageManager mPackageManager;
     private @Mock UserManager mUserManager;
     private @Mock ConnectivityManager mConnectivityManger;
@@ -82,13 +80,13 @@ public class EnterprisePrivacyFeatureProviderImplTest {
         MockitoAnnotations.initMocks(this);
 
         when(mContext.getApplicationContext()).thenReturn(mContext);
-        resetAndInitializePackageManagerWrapper();
+        resetAndInitializePackageManager();
         when(mUserManager.getProfiles(MY_USER_ID)).thenReturn(mProfiles);
         mProfiles.add(new UserInfo(MY_USER_ID, "", "", 0 /* flags */));
         mResources = RuntimeEnvironment.application.getResources();
 
         mProvider = new EnterprisePrivacyFeatureProviderImpl(mContext, mDevicePolicyManager,
-                mPackageManagerWrapper, mUserManager, mConnectivityManger, mResources);
+                mPackageManager, mUserManager, mConnectivityManger, mResources);
     }
 
     @Test
@@ -256,7 +254,7 @@ public class EnterprisePrivacyFeatureProviderImplTest {
         when(applicationInfo.loadLabel(mPackageManager)).thenReturn(IME_PACKAGE_LABEL);
 
         Settings.Secure.putString(null, Settings.Secure.DEFAULT_INPUT_METHOD, IME_PACKAGE_ID);
-        when(mPackageManagerWrapper.getApplicationInfoAsUser(IME_PACKAGE_ID, 0, MY_USER_ID))
+        when(mPackageManager.getApplicationInfoAsUser(IME_PACKAGE_ID, 0, MY_USER_ID))
                 .thenReturn(applicationInfo);
 
         // IME not set by Device Owner.
@@ -270,13 +268,13 @@ public class EnterprisePrivacyFeatureProviderImplTest {
 
         // Device Owner set IME to nonexistent package.
         Settings.Secure.putString(null, Settings.Secure.DEFAULT_INPUT_METHOD, IME_PACKAGE_ID);
-        when(mPackageManagerWrapper.getApplicationInfoAsUser(IME_PACKAGE_ID, 0, MY_USER_ID))
+        when(mPackageManager.getApplicationInfoAsUser(IME_PACKAGE_ID, 0, MY_USER_ID))
                 .thenThrow(new PackageManager.NameNotFoundException());
         assertThat(mProvider.getImeLabelIfOwnerSet()).isNull();
 
         // Device Owner set IME to existent package.
-        resetAndInitializePackageManagerWrapper();
-        when(mPackageManagerWrapper.getApplicationInfoAsUser(IME_PACKAGE_ID, 0, MY_USER_ID))
+        resetAndInitializePackageManager();
+        when(mPackageManager.getApplicationInfoAsUser(IME_PACKAGE_ID, 0, MY_USER_ID))
                 .thenReturn(applicationInfo);
         assertThat(mProvider.getImeLabelIfOwnerSet()).isEqualTo(IME_PACKAGE_LABEL);
     }
@@ -356,10 +354,9 @@ public class EnterprisePrivacyFeatureProviderImplTest {
         assertThat(mProvider.areBackupsMandatory()).isTrue();
     }
 
-    private void resetAndInitializePackageManagerWrapper() {
-        reset(mPackageManagerWrapper);
-        when(mPackageManagerWrapper.hasSystemFeature(PackageManager.FEATURE_DEVICE_ADMIN))
+    private void resetAndInitializePackageManager() {
+        reset(mPackageManager);
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_DEVICE_ADMIN))
                 .thenReturn(true);
-        when(mPackageManagerWrapper.getPackageManager()).thenReturn(mPackageManager);
     }
 }

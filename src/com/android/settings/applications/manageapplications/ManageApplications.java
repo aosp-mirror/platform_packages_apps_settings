@@ -122,7 +122,6 @@ import com.android.settingslib.applications.ApplicationsState.VolumeFilter;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 import com.android.settingslib.utils.ThreadUtils;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -1420,7 +1419,7 @@ public class ManageApplications extends InstrumentedFragment
         public void setListening(boolean listening) {
             if (listening) {
                 new InstalledAppCounter(mContext, InstalledAppCounter.IGNORE_INSTALL_REASON,
-                        new PackageManagerWrapper(mContext.getPackageManager())) {
+                        mContext.getPackageManager()) {
                     @Override
                     protected void onCountComplete(int num) {
                         mLoader.setSummary(SummaryProvider.this,

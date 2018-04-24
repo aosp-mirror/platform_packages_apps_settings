@@ -23,10 +23,10 @@ import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.UserManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,7 +46,7 @@ public class DefaultBrowserPickerTest {
     @Mock
     private UserManager mUserManager;
     @Mock
-    private PackageManagerWrapper mPackageManager;
+    private PackageManager mPackageManager;
 
     private DefaultBrowserPicker mPicker;
 

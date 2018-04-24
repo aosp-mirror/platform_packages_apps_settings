@@ -23,8 +23,6 @@ import android.os.AsyncTask;
 import android.os.UserHandle;
 import android.os.UserManager;
 
-import com.android.settingslib.wrapper.PackageManagerWrapper;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,10 +33,10 @@ import java.util.List;
  * of just counting them.
  */
 public abstract class AppLister extends AsyncTask<Void, Void, List<UserAppInfo>> {
-    protected final PackageManagerWrapper mPm;
+    protected final PackageManager mPm;
     protected final UserManager mUm;
 
-    public AppLister(PackageManagerWrapper packageManager, UserManager userManager) {
+    public AppLister(PackageManager packageManager, UserManager userManager) {
         mPm = packageManager;
         mUm = userManager;
     }

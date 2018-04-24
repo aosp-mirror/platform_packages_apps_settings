@@ -53,7 +53,6 @@ import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoader;
 import com.android.settingslib.net.UidDetail;
 import com.android.settingslib.net.UidDetailProvider;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 public class AppDataUsage extends DataUsageBase implements Preference.OnPreferenceChangeListener,
         DataSaverBackend.Listener {
@@ -75,7 +74,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
     private static final int LOADER_CHART_DATA = 2;
     private static final int LOADER_APP_PREF = 3;
 
-    private PackageManagerWrapper mPackageManagerWrapper;
+    private PackageManager mPackageManager;
     private final ArraySet<String> mPackages = new ArraySet<>();
     private Preference mTotalUsage;
     private Preference mForegroundUsage;
@@ -104,7 +103,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        mPackageManagerWrapper = new PackageManagerWrapper(getPackageManager());
+        mPackageManager = getPackageManager();
         final Bundle args = getArguments();
 
         try {
@@ -149,10 +148,10 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
         if (mAppItem.key > 0) {
             if (mPackages.size() != 0) {
                 try {
-                    ApplicationInfo info = mPackageManagerWrapper.getApplicationInfoAsUser(
+                    ApplicationInfo info = mPackageManager.getApplicationInfoAsUser(
                             mPackages.valueAt(0), 0, UserHandle.getUserId(mAppItem.key));
                     mIcon = IconDrawableFactory.newInstance(getActivity()).getBadgedIcon(info);
-                    mLabel = info.loadLabel(mPackageManagerWrapper.getPackageManager());
+                    mLabel = info.loadLabel(mPackageManager);
                     mPackageName = info.packageName;
                 } catch (PackageManager.NameNotFoundException e) {
                 }
@@ -333,7 +332,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
         int uid = 0;
         if (pkg != null) {
             try {
-                uid = mPackageManagerWrapper.getPackageUidAsUser(pkg,
+                uid = mPackageManager.getPackageUidAsUser(pkg,
                         UserHandle.getUserId(mAppItem.key));
             } catch (PackageManager.NameNotFoundException e) {
                 Log.w(TAG, "Skipping UID because cannot find package " + pkg);

@@ -72,7 +72,7 @@ public class DefaultBrowserPreferenceController extends DefaultAppPreferenceCont
             final String packageName = mPackageManager.getDefaultBrowserPackageNameAsUser(mUserId);
             Log.d(TAG, "Get default browser package: " + packageName);
             return new DefaultAppInfo(mContext, mPackageManager,
-                    mPackageManager.getPackageManager().getApplicationInfo(packageName, 0));
+                    mPackageManager.getApplicationInfo(packageName, 0));
         } catch (PackageManager.NameNotFoundException e) {
             return null;
         }
@@ -113,7 +113,7 @@ public class DefaultBrowserPreferenceController extends DefaultAppPreferenceCont
         final List<ResolveInfo> list = getCandidates();
         if (list != null && list.size() == 1) {
             final ResolveInfo info = list.get(0);
-            final String label = info.loadLabel(mPackageManager.getPackageManager()).toString();
+            final String label = info.loadLabel(mPackageManager).toString();
             final ComponentInfo cn = info.getComponentInfo();
             final String packageName = cn == null ? null : cn.packageName;
             Log.d(TAG, "Getting label for the only browser app: " + packageName + label);
@@ -133,7 +133,7 @@ public class DefaultBrowserPreferenceController extends DefaultAppPreferenceCont
             }
             final ApplicationInfo appInfo;
             try {
-                appInfo = mPackageManager.getPackageManager().getApplicationInfo(packageName, 0);
+                appInfo = mPackageManager.getApplicationInfo(packageName, 0);
             } catch (PackageManager.NameNotFoundException e) {
                 Log.w(TAG, "Error getting app info for " + packageName);
                 return null;

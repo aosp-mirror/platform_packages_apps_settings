@@ -58,13 +58,12 @@ public class DefaultAssistPreferenceController extends DefaultAppPreferenceContr
         final Intent probe = new Intent(VoiceInteractionService.SERVICE_INTERFACE)
                 .setPackage(cn.getPackageName());
 
-        final PackageManager pm = mPackageManager.getPackageManager();
-        final List<ResolveInfo> services = pm.queryIntentServices(probe, PackageManager
-                .GET_META_DATA);
+        final List<ResolveInfo> services = mPackageManager.queryIntentServices(probe,
+                PackageManager.GET_META_DATA);
         if (services == null || services.isEmpty()) {
             return null;
         }
-        final String activity = getAssistSettingsActivity(cn, services.get(0), pm);
+        final String activity = getAssistSettingsActivity(cn, services.get(0), mPackageManager);
         if (activity == null) {
             return null;
         }

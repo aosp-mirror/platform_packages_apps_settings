@@ -21,7 +21,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -41,7 +40,7 @@ public class MockLocationAppPreferenceControllerTest {
     @Mock
     private AppOpsManager mAppOpsManager;
     @Mock
-    private PackageManagerWrapper mPackageManager;
+    private PackageManager mPackageManager;
     @Mock
     private Preference mPreference;
     @Mock

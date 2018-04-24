@@ -21,6 +21,7 @@ import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.content.pm.PackageManager;
 import android.os.storage.VolumeInfo;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,7 +29,6 @@ import android.view.MenuItem;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -49,7 +49,7 @@ public class PrivateVolumeOptionMenuControllerTest {
     @Mock
     private MenuInflater mMenuInflater;
     @Mock
-    private PackageManagerWrapper mPm;
+    private PackageManager mPm;
     @Mock
     private VolumeInfo mVolumeInfo;
     @Mock

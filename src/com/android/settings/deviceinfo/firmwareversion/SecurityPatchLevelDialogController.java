@@ -18,15 +18,16 @@ package com.android.settings.deviceinfo.firmwareversion;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
-import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
 import com.android.settings.R;
 import com.android.settingslib.DeviceInfoUtils;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
+
+import androidx.annotation.VisibleForTesting;
 
 public class SecurityPatchLevelDialogController implements View.OnClickListener {
 
@@ -41,13 +42,13 @@ public class SecurityPatchLevelDialogController implements View.OnClickListener 
 
     private final FirmwareVersionDialogFragment mDialog;
     private final Context mContext;
-    private final PackageManagerWrapper mPackageManager;
+    private final PackageManager mPackageManager;
     private final String mCurrentPatch;
 
     public SecurityPatchLevelDialogController(FirmwareVersionDialogFragment dialog) {
         mDialog = dialog;
         mContext = dialog.getContext();
-        mPackageManager = new PackageManagerWrapper(mContext.getPackageManager());
+        mPackageManager = mContext.getPackageManager();
         mCurrentPatch = DeviceInfoUtils.getSecurityPatch();
     }
 

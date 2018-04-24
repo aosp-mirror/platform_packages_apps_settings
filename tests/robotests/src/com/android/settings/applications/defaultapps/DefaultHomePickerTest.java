@@ -43,7 +43,6 @@ import android.os.UserManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.DefaultAppInfo;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -67,8 +66,6 @@ public class DefaultHomePickerTest {
     @Mock
     private UserManager mUserManager;
     @Mock
-    private PackageManagerWrapper mPackageManagerWrapper;
-    @Mock
     private PackageManager mPackageManager;
 
     private Context mContext;
@@ -78,12 +75,11 @@ public class DefaultHomePickerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         when(mActivity.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
-        when(mPackageManagerWrapper.getPackageManager()).thenReturn(mPackageManager);
 
         mPicker = spy(new DefaultHomePicker());
         mPicker.onAttach((Context) mActivity);
 
-        ReflectionHelpers.setField(mPicker, "mPm", mPackageManagerWrapper);
+        ReflectionHelpers.setField(mPicker, "mPm", mPackageManager);
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mContext).when(mPicker).getContext();
     }
@@ -92,7 +88,7 @@ public class DefaultHomePickerTest {
     public void setDefaultAppKey_shouldUpdateDefault() {
         assertThat(mPicker.setDefaultKey(TEST_APP_KEY)).isTrue();
 
-        verify(mPackageManagerWrapper).replacePreferredActivity(any(IntentFilter.class),
+        verify(mPackageManager).replacePreferredActivity(any(IntentFilter.class),
                 anyInt(), any(ComponentName[].class), any(ComponentName.class));
         verify(mContext).startActivity(any());
     }
@@ -100,7 +96,7 @@ public class DefaultHomePickerTest {
     @Test
     public void getDefaultAppKey_shouldReturnDefault() {
         final ComponentName cn = mock(ComponentName.class);
-        when(mPackageManagerWrapper.getHomeActivities(anyList())).thenReturn(cn);
+        when(mPackageManager.getHomeActivities(anyList())).thenReturn(cn);
         mPicker.getDefaultKey();
         verify(cn).flattenToString();
     }
@@ -158,6 +154,6 @@ public class DefaultHomePickerTest {
                         "package.2", "PreLollipopLauncher", Build.VERSION_CODES.KITKAT));
                 return null;
                 })
-                .when(mPackageManagerWrapper).getHomeActivities(anyList());
+                .when(mPackageManager).getHomeActivities(anyList());
     }
 }

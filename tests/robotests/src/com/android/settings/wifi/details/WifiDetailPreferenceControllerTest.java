@@ -34,6 +34,7 @@ import androidx.lifecycle.LifecycleOwner;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
@@ -64,7 +65,6 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowBidiFormatter;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
-import com.android.settings.testutils.shadow.ShadowPackageManagerWrapper;
 import com.android.settings.widget.ActionButtonPreference;
 import com.android.settings.widget.ActionButtonPreferenceTest;
 import com.android.settings.widget.EntityHeaderController;
@@ -80,6 +80,7 @@ import org.mockito.Answers;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.InOrder;
+import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
@@ -95,7 +96,6 @@ import java.util.stream.Collectors;
 @Config(shadows = {
         ShadowDevicePolicyManager.class,
         ShadowEntityHeaderController.class,
-        ShadowPackageManagerWrapper.class,
         ShadowBidiFormatter.class
 })
 public class WifiDetailPreferenceControllerTest {
@@ -163,6 +163,8 @@ public class WifiDetailPreferenceControllerTest {
     private PreferenceCategory mockIpv6Category;
     @Mock
     private WifiDetailPreference mockIpv6AddressesPref;
+    @Mock
+    private PackageManager mockPackageManager;
 
     @Captor
     private ArgumentCaptor<NetworkCallback> mCallbackCaptor;
@@ -235,6 +237,7 @@ public class WifiDetailPreferenceControllerTest {
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
 
+        when(mContext.getPackageManager()).thenReturn(mockPackageManager);
         when(mockAccessPoint.getConfig()).thenReturn(mockWifiConfig);
         when(mockAccessPoint.getLevel()).thenReturn(LEVEL);
         when(mockAccessPoint.getSecurityString(false)).thenReturn(SECURITY);
@@ -682,7 +685,12 @@ public class WifiDetailPreferenceControllerTest {
 
         mockWifiConfig.creatorUid = doUid;
         ComponentName doComponent = new ComponentName(doPackage, "some.Class");
-        ShadowPackageManagerWrapper.setPackageUidAsUser(doPackage, doUserId, doUid);
+        try {
+            when(mockPackageManager.getPackageUidAsUser(Matchers.anyString(), Matchers.anyInt()))
+                    .thenReturn(doUid);
+        } catch (PackageManager.NameNotFoundException e) {
+            //do nothing
+        }
         ShadowDevicePolicyManager.getShadow().setDeviceOwnerComponentOnAnyUser(doComponent);
         ShadowDevicePolicyManager.getShadow().setDeviceOwnerUserId(doUserId);
 

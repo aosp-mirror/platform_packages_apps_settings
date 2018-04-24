@@ -18,6 +18,7 @@ package com.android.settings.development;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -30,7 +31,6 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.List;
 
@@ -65,12 +65,12 @@ public class VerifyAppsOverUsbPreferenceController extends DeveloperOptionsPrefe
             new RestrictedLockUtilsDelegate();
 
     // This field is accessed using reflection in the test, please keep name in sync.
-    private final PackageManagerWrapper mPackageManager;
+    private final PackageManager mPackageManager;
 
     public VerifyAppsOverUsbPreferenceController(Context context) {
         super(context);
 
-        mPackageManager = new PackageManagerWrapper(context.getPackageManager());
+        mPackageManager = context.getPackageManager();
     }
 
     @Override

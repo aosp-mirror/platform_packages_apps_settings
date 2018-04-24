@@ -45,7 +45,6 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.RadioButtonPreference;
 import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -74,7 +73,7 @@ public class WebViewAppPickerTest {
     @Mock
     private UserManager mUserManager;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private PackageManagerWrapper mPackageManager;
+    private PackageManager mPackageManager;
 
     private WebViewAppPicker mPicker;
     private WebViewUpdateServiceWrapper mWvusWrapper;
@@ -336,9 +335,8 @@ public class WebViewAppPickerTest {
 
         PackageInfo packageInfo = new PackageInfo();
         packageInfo.versionName = "myVersionName";
-        PackageManager pm = mock(PackageManager.class);
-        when(pm.getPackageInfo(eq(DEFAULT_PACKAGE_NAME), anyInt())).thenReturn(packageInfo);
-        when(mPackageManager.getPackageManager()).thenReturn(pm);
+        when(mPackageManager.getPackageInfo(eq(DEFAULT_PACKAGE_NAME), anyInt())).thenReturn(
+                packageInfo);
 
         RadioButtonPreference mockPreference = mock(RadioButtonPreference.class);
         mPicker.bindPreference(mockPreference, DEFAULT_PACKAGE_NAME, webviewAppInfo, null);

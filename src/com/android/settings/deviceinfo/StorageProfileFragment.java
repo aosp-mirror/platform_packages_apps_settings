@@ -37,7 +37,6 @@ import com.android.settings.deviceinfo.storage.StorageItemPreferenceController;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,7 +117,7 @@ public class StorageProfileFragment extends DashboardFragment
                 context.getSystemService(UserManager.class),
                 mVolume.fsUuid,
                 new StorageStatsSource(context),
-                new PackageManagerWrapper(context.getPackageManager()));
+                context.getPackageManager());
     }
 
     @Override
