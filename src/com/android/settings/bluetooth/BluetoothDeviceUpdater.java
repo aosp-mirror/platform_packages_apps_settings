@@ -56,29 +56,14 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
     protected final DevicePreferenceCallback mDevicePreferenceCallback;
     protected final Map<BluetoothDevice, Preference> mPreferenceMap;
     protected Context mPrefContext;
+    protected DashboardFragment mFragment;
 
     private final boolean mShowDeviceWithoutNames;
-    private DashboardFragment mFragment;
     private Preference.OnPreferenceClickListener mDevicePreferenceClickListener = null;
 
     @VisibleForTesting
     final GearPreference.OnGearClickListener mDeviceProfilesListener = pref -> {
-        final CachedBluetoothDevice device =
-                ((BluetoothDevicePreference) pref).getBluetoothDevice();
-        if (device == null) {
-            return;
-        }
-        final Bundle args = new Bundle();
-        args.putString(BluetoothDeviceDetailsFragment.KEY_DEVICE_ADDRESS,
-                device.getDevice().getAddress());
-
-        new SubSettingLauncher(mFragment.getContext())
-                .setDestination(BluetoothDeviceDetailsFragment.class.getName())
-                .setArguments(args)
-                .setTitle(R.string.device_details_title)
-                .setSourceMetricsCategory(mFragment.getMetricsCategory())
-                .launch();
-
+        launchDeviceDetails(pref);
     };
 
     private class PreferenceClickListener implements
@@ -201,7 +186,7 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
     public abstract boolean isFilterMatched(CachedBluetoothDevice cachedBluetoothDevice);
 
     /**
-     * Update whether to show {@cde cachedBluetoothDevice} in the list.
+     * Update whether to show {@link CachedBluetoothDevice} in the list.
      */
     protected void update(CachedBluetoothDevice cachedBluetoothDevice) {
         if (isFilterMatched(cachedBluetoothDevice)) {
@@ -237,6 +222,28 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
             mDevicePreferenceCallback.onDeviceRemoved(mPreferenceMap.get(device));
             mPreferenceMap.remove(device);
         }
+    }
+
+    /**
+     * Get {@link CachedBluetoothDevice} from {@link Preference} and it is used to init
+     * {@link SubSettingLauncher} to launch {@link BluetoothDeviceDetailsFragment}
+     */
+    protected void launchDeviceDetails(Preference preference) {
+        final CachedBluetoothDevice device =
+                ((BluetoothDevicePreference) preference).getBluetoothDevice();
+        if (device == null) {
+            return;
+        }
+        final Bundle args = new Bundle();
+        args.putString(BluetoothDeviceDetailsFragment.KEY_DEVICE_ADDRESS,
+                device.getDevice().getAddress());
+
+        new SubSettingLauncher(mFragment.getContext())
+                .setDestination(BluetoothDeviceDetailsFragment.class.getName())
+                .setArguments(args)
+                .setTitle(R.string.device_details_title)
+                .setSourceMetricsCategory(mFragment.getMetricsCategory())
+                .launch();
     }
 
     /**
