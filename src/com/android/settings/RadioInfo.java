@@ -52,6 +52,7 @@ import android.telephony.DataConnectionRealTimeInfo;
 import android.telephony.NeighboringCellInfo;
 import android.telephony.PreciseCallState;
 import android.telephony.PhoneStateListener;
+import android.telephony.PhysicalChannelConfig;
 import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
 import android.telephony.SubscriptionManager;
@@ -194,6 +195,7 @@ public class RadioInfo extends Activity {
     private TextView mPingHostnameV4;
     private TextView mPingHostnameV6;
     private TextView mHttpClientTest;
+    private TextView mPhyChanConfig;
     private TextView dnsCheckState;
     private EditText smsc;
     private Switch radioPowerOnSwitch;
@@ -296,7 +298,28 @@ public class RadioInfo extends Activity {
             updateNetworkType();
             updateImsProvisionedState();
         }
+
+        @Override
+        public void onPhysicalChannelConfigurationChanged(
+                List<PhysicalChannelConfig> configs) {
+            updatePhysicalChannelConfiguration(configs);
+        }
+
     };
+
+    private void updatePhysicalChannelConfiguration(List<PhysicalChannelConfig> configs) {
+            StringBuilder sb = new StringBuilder();
+            String div = "";
+            sb.append("{");
+            if (configs != null) {
+                for(PhysicalChannelConfig c : configs) {
+                    sb.append(div).append(c);
+                    div = ",";
+                }
+            }
+            sb.append("}");
+            mPhyChanConfig.setText(sb.toString());
+    }
 
     private void updatePreferredNetworkType(int type) {
         if (type >= mPreferredNetworkLabels.length || type < 0) {
@@ -400,6 +423,8 @@ public class RadioInfo extends Activity {
         mPingHostnameV6 = (TextView) findViewById(R.id.pingHostnameV6);
         mHttpClientTest = (TextView) findViewById(R.id.httpClientTest);
 
+        mPhyChanConfig = (TextView) findViewById(R.id.phy_chan_config);
+
         preferredNetworkType = (Spinner) findViewById(R.id.preferredNetworkType);
         ArrayAdapter<String> adapter = new ArrayAdapter<String> (this,
                 android.R.layout.simple_spinner_item, mPreferredNetworkLabels);
@@ -502,7 +527,7 @@ public class RadioInfo extends Activity {
                 | PhoneStateListener.LISTEN_CELL_INFO
                 | PhoneStateListener.LISTEN_SERVICE_STATE
                 | PhoneStateListener.LISTEN_SIGNAL_STRENGTHS
-                | PhoneStateListener.LISTEN_DATA_CONNECTION_REAL_TIME_INFO);
+                | PhoneStateListener.LISTEN_PHYSICAL_CHANNEL_CONFIGURATION);
 
         smsc.clearFocus();
     }
