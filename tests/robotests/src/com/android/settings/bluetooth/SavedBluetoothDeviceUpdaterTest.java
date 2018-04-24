@@ -57,7 +57,8 @@ public class SavedBluetoothDeviceUpdaterTest {
     private LocalBluetoothProfileManager mLocalBluetoothProfileManager;
 
     private Context mContext;
-    private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
+    private SavedBluetoothDeviceUpdater mBluetoothDeviceUpdater;
+    private BluetoothDevicePreference mPreference;
 
     @Before
     public void setUp() {
@@ -71,6 +72,7 @@ public class SavedBluetoothDeviceUpdaterTest {
         mBluetoothDeviceUpdater = spy(new SavedBluetoothDeviceUpdater(mDashboardFragment,
                 mDevicePreferenceCallback, mLocalManager));
         mBluetoothDeviceUpdater.setPrefContext(mContext);
+        mPreference = new BluetoothDevicePreference(mContext, mCachedBluetoothDevice, false);
         doNothing().when(mBluetoothDeviceUpdater).addPreference(any());
         doNothing().when(mBluetoothDeviceUpdater).removePreference(any());
     }
@@ -109,5 +111,12 @@ public class SavedBluetoothDeviceUpdaterTest {
                 BluetoothProfile.STATE_DISCONNECTED, BluetoothProfile.A2DP);
 
         verify(mBluetoothDeviceUpdater).addPreference(mCachedBluetoothDevice);
+    }
+
+    @Test
+    public void onClick_Preference_setConnect() {
+        mBluetoothDeviceUpdater.onPreferenceClick(mPreference);
+
+        verify(mCachedBluetoothDevice).connect(true);
     }
 }
