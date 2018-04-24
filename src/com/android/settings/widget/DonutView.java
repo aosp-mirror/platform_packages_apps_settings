@@ -25,7 +25,6 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Typeface;
 import android.icu.text.DecimalFormatSymbols;
-import androidx.annotation.ColorRes;
 import android.text.Layout;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -36,6 +35,8 @@ import android.text.TextUtils;
 import android.text.style.RelativeSizeSpan;
 import android.util.AttributeSet;
 import android.view.View;
+
+import androidx.annotation.ColorRes;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
@@ -207,7 +208,7 @@ public class DonutView extends View {
                                     R.dimen.storage_donut_view_shrunken_label_text_size));
         }
         setContentDescription(getContext().getString(
-                R.string.join_many_items_middle, mPercentString, mFullString));
+                R.string.join_two_unrelated_items, mPercentString, mFullString));
         invalidate();
     }
 
