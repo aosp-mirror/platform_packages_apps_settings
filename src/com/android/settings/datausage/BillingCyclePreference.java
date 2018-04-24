@@ -88,7 +88,7 @@ public class BillingCyclePreference extends Preference implements TemplatePrefer
         return new SubSettingLauncher(getContext())
                 .setDestination(BillingCycleSettings.class.getName())
                 .setArguments(args)
-                .setTitle(getTitle())
+                .setTitle(R.string.billing_cycle)
                 .setSourceMetricsCategory(MetricsProto.MetricsEvent.VIEW_UNKNOWN)
                 .toIntent();
     }
