@@ -73,6 +73,7 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
     private AvailableMediaBluetoothDeviceUpdater mBluetoothDeviceUpdater;
     private Collection<CachedBluetoothDevice> cachedDevices;
     private ShadowAudioManager mShadowAudioManager;
+    private BluetoothDevicePreference mPreference;
 
     @Before
     public void setUp() {
@@ -93,6 +94,7 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
         mBluetoothDeviceUpdater = spy(new AvailableMediaBluetoothDeviceUpdater(mDashboardFragment,
                 mDevicePreferenceCallback, mLocalManager));
         mBluetoothDeviceUpdater.setPrefContext(mContext);
+        mPreference = new BluetoothDevicePreference(mContext, mCachedBluetoothDevice, false);
         doNothing().when(mBluetoothDeviceUpdater).addPreference(any());
         doNothing().when(mBluetoothDeviceUpdater).removePreference(any());
     }
@@ -207,6 +209,13 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
                 BluetoothProfile.STATE_DISCONNECTED, BluetoothProfile.A2DP);
 
         verify(mBluetoothDeviceUpdater).removePreference(mCachedBluetoothDevice);
+    }
+
+    @Test
+    public void onClick_Preference_setActive() {
+        mBluetoothDeviceUpdater.onPreferenceClick(mPreference);
+
+        verify(mCachedBluetoothDevice).setActive();
     }
 }
 

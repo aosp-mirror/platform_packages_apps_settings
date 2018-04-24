@@ -25,11 +25,13 @@ import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import android.support.v7.preference.Preference;
 
 /**
  * Controller to maintain available media Bluetooth devices
  */
-public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater {
+public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
+        implements Preference.OnPreferenceClickListener {
 
     private static final String TAG = "AvailableMediaBluetoothDeviceUpdater";
     private static final boolean DBG = false;
@@ -115,6 +117,13 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
             }
         }
         return isFilterMatched;
+    }
+
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
+        final CachedBluetoothDevice device = ((BluetoothDevicePreference) preference)
+                .getBluetoothDevice();
+        return device.setActive();
     }
 }
 
