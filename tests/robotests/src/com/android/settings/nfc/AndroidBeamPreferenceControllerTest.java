@@ -41,6 +41,9 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RunWith(SettingsRobolectricTestRunner.class)
 public class AndroidBeamPreferenceControllerTest {
 
@@ -131,5 +134,25 @@ public class AndroidBeamPreferenceControllerTest {
         when(mNfcAdapter.getAdapterState()).thenReturn(NfcAdapter.STATE_TURNING_OFF);
         mAndroidBeamController.onResume();
         assertThat(mAndroidBeamPreference.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void updateNonIndexableKeys_available_shouldNotUpdate() {
+        when(mNfcAdapter.isEnabled()).thenReturn(true);
+        final List<String> keys = new ArrayList<>();
+
+        mAndroidBeamController.updateNonIndexableKeys(keys);
+
+        assertThat(keys).isEmpty();
+    }
+
+    @Test
+    public void updateNonIndexableKeys_notAvailable_shouldUpdate() {
+        ReflectionHelpers.setField(mAndroidBeamController, "mNfcAdapter", null);
+        final List<String> keys = new ArrayList<>();
+
+        mAndroidBeamController.updateNonIndexableKeys(keys);
+
+        assertThat(keys).hasSize(1);
     }
 }
