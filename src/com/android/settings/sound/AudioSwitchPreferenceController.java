@@ -134,6 +134,7 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(mPreferenceKey);
+        mPreference.setVisible(false);
     }
 
     @Override
