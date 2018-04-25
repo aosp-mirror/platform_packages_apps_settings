@@ -82,6 +82,7 @@ public class MyDeviceInfoFragment extends DashboardFragment
     public void onAttach(Context context) {
         super.onAttach(context);
         use(FirmwareVersionPreferenceController.class).setHost(this /*parent*/);
+        use(DeviceModelPreferenceController.class).setHost(this /* parent */);
     }
 
     @Override
@@ -122,7 +123,6 @@ public class MyDeviceInfoFragment extends DashboardFragment
         }
         controllers.add(deviceNamePreferenceController);
         controllers.add(new SimStatusPreferenceController(context, fragment));
-        controllers.add(new DeviceModelPreferenceController(context, fragment));
         controllers.add(new ImeiInfoPreferenceController(context, fragment));
         controllers.add(new IpAddressPreferenceController(context, lifecycle));
         controllers.add(new WifiMacAddressPreferenceController(context, lifecycle));
