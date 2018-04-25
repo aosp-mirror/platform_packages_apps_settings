@@ -245,7 +245,7 @@ public class AudioOutputSwitchPreferenceControllerTest {
 
         @Override
         public String getPreferenceKey() {
-            return null;
+            return TEST_KEY;
         }
     }
 }
