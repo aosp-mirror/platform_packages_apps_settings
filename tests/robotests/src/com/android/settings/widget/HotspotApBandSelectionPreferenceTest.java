@@ -116,6 +116,21 @@ public class HotspotApBandSelectionPreferenceTest {
     }
 
     @Test
+    public void onSaveInstanceState_doesNotCrashWhenViewGone() {
+        mPreference.setExistingConfigValue(WifiConfiguration.AP_BAND_2GHZ);
+        mPreference.onBindDialogView(mLayout);
+        // When the device dozes the view and dialog can become null
+        mPreference.mBox5G = null;
+        mPreference.mBox2G = null;
+        ReflectionHelpers.setField(mPreference, "mFragment", null);
+
+        // make sure it does not crash and state is not restored
+        Parcelable parcelable = mPreference.onSaveInstanceState();
+        mPreference.onRestoreInstanceState(parcelable);
+        assertThat(mPreference.mShouldRestore).isFalse();
+    }
+
+    @Test
     public void onSaveInstanceState_presentWhenDialogPresent() {
         mPreference.setExistingConfigValue(WifiConfiguration.AP_BAND_2GHZ);
         mPreference.onBindDialogView(mLayout);

@@ -52,14 +52,14 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
 
         if (isStreamFromOutputDevice(STREAM_MUSIC, DEVICE_OUT_REMOTE_SUBMIX)) {
             // In cast mode, disable switch entry.
-            preference.setEnabled(false);
+            mPreference.setVisible(false);
             preference.setSummary(mContext.getText(R.string.media_output_summary_unavailable));
             return;
         }
 
         if (isOngoingCallStatus()) {
             // Ongoing call status, switch entry for media will be disabled.
-            preference.setEnabled(false);
+            mPreference.setVisible(false);
             preference.setSummary(
                     mContext.getText(R.string.media_out_summary_ongoing_call_state));
             return;
@@ -79,12 +79,12 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
         final int numDevices = ArrayUtils.size(mConnectedDevices);
         if (numDevices == 0) {
             // Disable switch entry if there is no connected devices.
-            preference.setEnabled(false);
+            mPreference.setVisible(false);
             preference.setSummary(mContext.getText(R.string.media_output_default_summary));
             return;
         }
 
-        preference.setEnabled(true);
+        mPreference.setVisible(true);
         CharSequence[] mediaOutputs = new CharSequence[numDevices + 1];
         CharSequence[] mediaValues = new CharSequence[numDevices + 1];
 
