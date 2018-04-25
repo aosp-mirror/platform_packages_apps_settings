@@ -118,8 +118,8 @@ public class HotspotApBandSelectionPreference extends CustomDialogPreference imp
 
         SavedState myState = new SavedState(superState);
         myState.shouldRestore = getDialog() != null;
-        myState.enabled2G = mBox2G.isChecked();
-        myState.enabled5G = mBox5G.isChecked();
+        myState.enabled2G = mBox2G != null && mBox2G.isChecked();
+        myState.enabled5G = mBox5G != null && mBox5G.isChecked();
         return myState;
     }
 
