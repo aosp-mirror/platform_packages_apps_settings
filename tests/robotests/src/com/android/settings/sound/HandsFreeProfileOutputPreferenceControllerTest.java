@@ -159,7 +159,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
 
     /**
      * One Headset Bluetooth device is available and activated
-     * Preference should be enabled
+     * Preference should be visible
      * Preference summary should be activate device name
      */
     @Test
@@ -170,13 +170,13 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        assertThat(mPreference.isEnabled()).isTrue();
+        assertThat(mPreference.isVisible()).isTrue();
         assertThat(mPreference.getSummary()).isEqualTo(mBluetoothDevice.getName());
     }
 
     /**
      * More than one Headset Bluetooth devices are available, and second device is active.
-     * Preference should be enabled
+     * Preference should be visible
      * Preference summary should be activate device name
      */
     @Test
@@ -196,14 +196,14 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        assertThat(mPreference.isEnabled()).isTrue();
+        assertThat(mPreference.isVisible()).isTrue();
         assertThat(mPreference.getSummary()).isEqualTo(secondBluetoothDevice.getName());
     }
 
     /**
      * Hands Free Profile Bluetooth device(s) are available, but wired headset is plugged in
      * and activated.
-     * Preference should be enabled
+     * Preference should be visible
      * Preference summary should be "This device"
      */
     @Test
@@ -216,14 +216,14 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        assertThat(mPreference.isEnabled()).isTrue();
+        assertThat(mPreference.isVisible()).isTrue();
         assertThat(mPreference.getSummary()).isEqualTo(
                 mContext.getText(R.string.media_output_default_summary));
     }
 
     /**
      * No available Headset BT devices
-     * Preference should be disabled
+     * Preference should be invisible
      * Preference summary should be "This device"
      */
     @Test
@@ -234,7 +234,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        assertThat(mPreference.isEnabled()).isFalse();
+        assertThat(mPreference.isVisible()).isFalse();
         assertThat(mPreference.getSummary()).isEqualTo(
                 mContext.getText(R.string.media_output_default_summary));
     }

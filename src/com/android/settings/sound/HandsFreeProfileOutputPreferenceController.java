@@ -47,7 +47,7 @@ public class HandsFreeProfileOutputPreferenceController extends
 
         if (!isOngoingCallStatus()) {
             // Without phone call, disable the switch entry.
-            preference.setEnabled(false);
+            mPreference.setVisible(false);
             preference.setSummary(mContext.getText(R.string.media_output_default_summary));
             return;
         }
@@ -67,12 +67,12 @@ public class HandsFreeProfileOutputPreferenceController extends
         final int numDevices = ArrayUtils.size(mConnectedDevices);
         if (numDevices == 0) {
             // No connected devices, disable switch entry.
-            preference.setEnabled(false);
+            mPreference.setVisible(false);
             preference.setSummary(mContext.getText(R.string.media_output_default_summary));
             return;
         }
 
-        preference.setEnabled(true);
+        mPreference.setVisible(true);
         CharSequence[] mediaOutputs = new CharSequence[numDevices + 1];
         CharSequence[] mediaValues = new CharSequence[numDevices + 1];
 
