@@ -38,12 +38,29 @@
         android:order="-175"
         settings:controller="com.android.settings.sound.MediaOutputPreferenceController"/>
 
+    <!-- Call volume -->
+    <com.android.settings.notification.VolumeSeekBarPreference
+        android:key="call_volume"
+        android:icon="@drawable/ic_local_phone_24_lib"
+        android:title="@string/call_volume_option_title"
+        android:order="-170"
+        settings:allowDividerAbove="true"
+        settings:controller="com.android.settings.notification.CallVolumePreferenceController"/>
+
+    <!-- Hands free profile output switcher -->
+    <ListPreference
+        android:key="take_call_on_output"
+        android:title="@string/take_call_on_title"
+        android:dialogTitle="@string/take_call_on_title"
+        android:order="-165"
+        settings:controller="com.android.settings.sound.HandsFreeProfileOutputPreferenceController"/>
+
     <!-- Ring volume -->
     <com.android.settings.notification.VolumeSeekBarPreference
         android:key="ring_volume"
         android:icon="@*android:drawable/ic_audio_ring_notif"
         android:title="@string/ring_volume_option_title"
-        android:order="-170"
+        android:order="-160"
         settings:controller="com.android.settings.notification.RingVolumePreferenceController"
         settings:allowDividerAbove="true"/>
 
@@ -51,15 +68,7 @@
     <SwitchPreference
         android:key="vibrate_when_ringing"
         android:title="@string/vibrate_when_ringing_title"
-        android:order="-160"/>
-
-    <!-- Hands free profile output switcher -->
-    <ListPreference
-        android:key="take_call_on_output"
-        android:title="@string/take_call_on_title"
-        android:dialogTitle="@string/take_call_on_title"
-        android:order="-155"
-        settings:controller="com.android.settings.sound.HandsFreeProfileOutputPreferenceController"/>
+        android:order="-155"/>
 
     <!-- Alarm volume -->
     <com.android.settings.notification.VolumeSeekBarPreference
