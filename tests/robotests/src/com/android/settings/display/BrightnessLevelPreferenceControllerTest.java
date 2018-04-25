@@ -122,7 +122,7 @@ public class BrightnessLevelPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary("85%");
+        verify(mPreference).setSummary("97%");
     }
 
     @Test
@@ -135,7 +135,7 @@ public class BrightnessLevelPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary("31%");
+        verify(mPreference).setSummary("78%");
     }
 
     @Test
@@ -148,7 +148,7 @@ public class BrightnessLevelPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary("45%");
+        verify(mPreference).setSummary("85%");
     }
 
     @Test
