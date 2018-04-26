@@ -18,7 +18,15 @@ package com.android.settings.wifi.tether;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -68,7 +76,7 @@ public class WifiTetherSwitchBarControllerTest {
     }
 
     @Test
-    public void testConstructor_airplaneModeOn_switchBarDisabled() {
+    public void constructor_airplaneModeOn_switchBarDisabled() {
         Settings.Global.putInt(RuntimeEnvironment.application.getContentResolver(),
                 Settings.Global.AIRPLANE_MODE_ON, 1);
 
@@ -79,7 +87,7 @@ public class WifiTetherSwitchBarControllerTest {
     }
 
     @Test
-    public void testStartTether_fail_resetSwitchBar() {
+    public void startTether_fail_resetSwitchBar() {
         when(mNetworkPolicyManager.getRestrictBackground()).thenReturn(false);
 
         mController.startTether();
@@ -90,7 +98,7 @@ public class WifiTetherSwitchBarControllerTest {
     }
 
     @Test
-    public void testOnDataSaverChanged_setsEnabledCorrectly() {
+    public void onDataSaverChanged_setsEnabledCorrectly() {
         assertThat(mSwitchBar.isEnabled()).isTrue();
 
         // try to turn data saver on
@@ -102,6 +110,19 @@ public class WifiTetherSwitchBarControllerTest {
         when(mNetworkPolicyManager.getRestrictBackground()).thenReturn(false);
         mController.onDataSaverChanged(false);
         assertThat(mSwitchBar.isEnabled()).isTrue();
+    }
 
+    @Test
+    public void onSwitchToggled_onlyStartsTetherWhenNeeded() {
+        when(mWifiManager.isWifiApEnabled()).thenReturn(true);
+        mController.onSwitchToggled(true);
+
+        verify(mConnectivityManager, never()).startTethering(anyInt(), anyBoolean(), any(), any());
+
+        doReturn(false).when(mWifiManager).isWifiApEnabled();
+        mController.onSwitchToggled(true);
+
+        verify(mConnectivityManager, times(1))
+                .startTethering(anyInt(), anyBoolean(), any(), any());
     }
 }
