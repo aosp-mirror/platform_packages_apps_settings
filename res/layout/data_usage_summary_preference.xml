@@ -34,7 +34,7 @@
         android:textColor="?android:attr/colorAccent"
         android:text="@string/data_usage_title" />
 
-    <LinearLayout
+    <com.android.settings.datausage.MeasurableLinearLayout
         android:id="@+id/usage_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="16sp" />
 
-    </LinearLayout>
+    </com.android.settings.datausage.MeasurableLinearLayout>
 
     <android.widget.ProgressBar
         android:id="@+id/determinateBar"
