@@ -16,6 +16,8 @@
 
 package com.android.settings.slices;
 
+import static android.Manifest.permission.READ_SEARCH_INDEXABLES;
+
 import android.app.PendingIntent;
 import android.app.slice.SliceManager;
 import android.content.ContentResolver;
@@ -116,6 +118,10 @@ public class SettingsSliceProvider extends SliceProvider {
     @VisibleForTesting
     Map<Uri, SliceData> mSliceWeakDataCache;
     Map<Uri, SliceData> mSliceDataCache;
+
+    public SettingsSliceProvider() {
+        super(READ_SEARCH_INDEXABLES);
+    }
 
     @Override
     public boolean onCreateSliceProvider() {
