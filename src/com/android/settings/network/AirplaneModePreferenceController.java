@@ -27,9 +27,9 @@ import android.support.v7.preference.PreferenceScreen;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.TelephonyProperties;
 import com.android.settings.AirplaneModeEnabler;
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.R;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
@@ -96,15 +96,16 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
         return isAvailable(mContext) ? AVAILABLE : DISABLED_UNSUPPORTED;
     }
 
+    @Override
     public void onResume() {
-        if (mAirplaneModeEnabler != null) {
+        if (isAvailable()) {
             mAirplaneModeEnabler.resume();
         }
     }
 
     @Override
     public void onPause() {
-        if (mAirplaneModeEnabler != null) {
+        if (isAvailable()) {
             mAirplaneModeEnabler.pause();
         }
     }
@@ -134,6 +135,8 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
 
     @Override
     public void onAirplaneModeChanged(boolean isAirplaneModeOn) {
-        mAirplaneModePreference.setChecked(isAirplaneModeOn);
+        if (mAirplaneModePreference != null) {
+            mAirplaneModePreference.setChecked(isAirplaneModeOn);
+        }
     }
 }
