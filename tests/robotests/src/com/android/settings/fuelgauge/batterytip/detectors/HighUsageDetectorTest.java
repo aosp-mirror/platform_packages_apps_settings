@@ -30,6 +30,7 @@ import android.text.format.DateUtils;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
+import com.android.settings.fuelgauge.BatteryInfo;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
@@ -77,7 +78,8 @@ public class HighUsageDetectorTest {
 
         mContext = RuntimeEnvironment.application;
         mPolicy = spy(new BatteryTipPolicy(mContext));
-        mHighUsageDetector = spy(new HighUsageDetector(mContext, mPolicy, mBatteryStatsHelper));
+        mHighUsageDetector = spy(new HighUsageDetector(mContext, mPolicy, mBatteryStatsHelper,
+                true /* mDischarging */));
         mHighUsageDetector.mBatteryUtils = mBatteryUtils;
         mHighUsageDetector.mDataParser = mDataParser;
         doNothing().when(mHighUsageDetector).parseBatteryData();
@@ -105,6 +107,15 @@ public class HighUsageDetectorTest {
     @Test
     public void testDetect_disabledByPolicy_tipInvisible() {
         ReflectionHelpers.setField(mPolicy, "highUsageEnabled", false);
+
+        assertThat(mHighUsageDetector.detect().isVisible()).isFalse();
+    }
+
+    @Test
+    public void testDetect_deviceCharging_tipInvisible() {
+        ReflectionHelpers.setField(mPolicy, "highUsageEnabled", true);
+        doReturn(true).when(mDataParser).isDeviceHeavilyUsed();
+        mHighUsageDetector.mDischarging = false;
 
         assertThat(mHighUsageDetector.detect().isVisible()).isFalse();
     }
