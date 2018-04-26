@@ -3196,6 +3196,9 @@
             android:exported="true"
             android:permission="android.permission.DUMP" />
 
+         <service android:name=".search.DeviceIndexUpdateJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
         <!-- Quick Settings tiles for Developer Options -->
         <service
             android:name=".development.qstile.DevelopmentTiles$ShowLayout"

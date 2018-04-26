@@ -27,6 +27,8 @@ public class SliceDeepLinkSpringBoard extends Activity {
     private static final String TAG = "DeeplinkSpringboard";
     public static final String INTENT = "intent";
     public static final String SETTINGS = "settings";
+    public static final String ACTION_VIEW_SLICE = "com.android.settings.action.VIEW_SLICE";
+    public static final String EXTRA_SLICE = "slice";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,14 @@ public class SliceDeepLinkSpringBoard extends Activity {
         }
         try {
             Intent intent = parse(uri, getPackageName());
-            startActivity(intent);
+            if (ACTION_VIEW_SLICE.equals(intent.getAction())) {
+                // This shouldn't matter since the slice is shown instead of the device
+                // index caring about the launch uri.
+                Uri slice = Uri.parse(intent.getStringExtra(EXTRA_SLICE));
+                Log.e(TAG, "Slice intent launched: " + slice);
+            } else {
+                startActivity(intent);
+            }
             finish();
         } catch (URISyntaxException e) {
             Log.e(TAG, "Error decoding uri", e);
