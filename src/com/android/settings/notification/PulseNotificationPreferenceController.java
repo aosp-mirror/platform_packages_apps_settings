@@ -16,23 +16,25 @@
 
 package com.android.settings.notification;
 
+import static android.provider.Settings.System.NOTIFICATION_LIGHT_PULSE;
+
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
 import android.provider.Settings;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
-import static android.provider.Settings.System.NOTIFICATION_LIGHT_PULSE;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 public class PulseNotificationPreferenceController extends TogglePreferenceController
-        implements OnResume, OnPause {
+        implements LifecycleObserver, OnResume, OnPause {
 
     private static final int ON = 1;
     private static final int OFF = 0;

@@ -64,4 +64,9 @@ public class CodeInspectionTest {
     public void runSearchIndexProviderCodeInspection() {
         new SearchIndexProviderCodeInspector(mClasses).run();
     }
+
+    @Test
+    public void runLifecycleObserverInspection() {
+        new LifecycleObserverCodeInspector(mClasses).run();
+    }
 }
