@@ -65,7 +65,7 @@ public class ChooseLockSettingsHelperTest {
                 ConfirmDeviceCredentialBaseFragment.ALLOW_FP_AUTHENTICATION, false));
         assertFalse(startedIntent.getBooleanExtra(
                 ConfirmDeviceCredentialBaseFragment.DARK_THEME, false));
-        assertEquals(true, startedIntent.getBooleanExtra(
+        assertFalse(startedIntent.getBooleanExtra(
                 ConfirmDeviceCredentialBaseFragment.SHOW_CANCEL_BUTTON, false));
         assertEquals(true, startedIntent.getBooleanExtra(
                 ConfirmDeviceCredentialBaseFragment.SHOW_WHEN_LOCKED, false));
@@ -103,7 +103,7 @@ public class ChooseLockSettingsHelperTest {
                 ConfirmDeviceCredentialBaseFragment.ALLOW_FP_AUTHENTICATION, false));
         assertFalse(startedIntent.getBooleanExtra(
                 ConfirmDeviceCredentialBaseFragment.DARK_THEME, false));
-        assertEquals(false, startedIntent.getBooleanExtra(
+        assertFalse(startedIntent.getBooleanExtra(
                 ConfirmDeviceCredentialBaseFragment.SHOW_CANCEL_BUTTON, false));
         assertEquals(false, startedIntent.getBooleanExtra(
                 ConfirmDeviceCredentialBaseFragment.SHOW_WHEN_LOCKED, false));
