@@ -89,6 +89,7 @@ public class SlicesDatabaseAccessor {
      * @return a list of keys in the Slices database matching on {@param isPlatformSlice}.
      */
     public List<String> getSliceKeys(boolean isPlatformSlice) {
+        verifyIndexing();
         final String whereClause;
 
         if (isPlatformSlice) {
