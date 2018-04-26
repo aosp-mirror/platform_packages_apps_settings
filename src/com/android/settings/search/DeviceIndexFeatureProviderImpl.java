@@ -17,6 +17,8 @@ package com.android.settings.search;
 import android.content.Context;
 import android.net.Uri;
 
+import java.util.List;
+
 public class DeviceIndexFeatureProviderImpl implements DeviceIndexFeatureProvider {
 
     @Override
@@ -25,7 +27,8 @@ public class DeviceIndexFeatureProviderImpl implements DeviceIndexFeatureProvide
     }
 
     @Override
-    public void index(Context context, CharSequence title, Uri sliceUri, Uri launchUri) {
+    public void index(Context context, CharSequence title, Uri sliceUri, Uri launchUri,
+            List<String> keywords) {
         // Not enabled by default.
     }
 }

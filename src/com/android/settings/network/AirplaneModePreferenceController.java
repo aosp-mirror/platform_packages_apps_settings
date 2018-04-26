@@ -54,6 +54,7 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
     public AirplaneModePreferenceController(Context context, String key) {
         super(context, key);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mAirplaneModeEnabler = new AirplaneModeEnabler(mContext, mMetricsFeatureProvider, this);
     }
 
     public void setFragment(Fragment hostFragment) {
@@ -81,7 +82,6 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
         super.displayPreference(screen);
         if (isAvailable()) {
             mAirplaneModePreference = (SwitchPreference) screen.findPreference(getPreferenceKey());
-            mAirplaneModeEnabler = new AirplaneModeEnabler(mContext, mMetricsFeatureProvider, this);
         }
     }
 
