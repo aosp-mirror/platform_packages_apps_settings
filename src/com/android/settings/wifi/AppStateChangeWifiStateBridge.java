@@ -20,6 +20,7 @@ import android.Manifest;
 import android.app.AppOpsManager;
 import android.content.Context;
 
+import com.android.internal.util.ArrayUtils;
 import com.android.settings.applications.AppStateAppOpsBridge;
 import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
 import com.android.settingslib.applications.ApplicationsState;
@@ -37,6 +38,7 @@ public class AppStateChangeWifiStateBridge extends AppStateAppOpsBridge {
     private static final String TAG = "AppStateChangeWifiStateBridge";
     private static final int APP_OPS_OP_CODE = AppOpsManager.OP_CHANGE_WIFI_STATE;
     private static final String PM_CHANGE_WIFI_STATE = Manifest.permission.CHANGE_WIFI_STATE;
+    private static final String PM_NETWORK_SETTINGS = Manifest.permission.NETWORK_SETTINGS;
 
     private static final String[] PM_PERMISSIONS = {
             PM_CHANGE_WIFI_STATE
@@ -86,6 +88,17 @@ public class AppStateChangeWifiStateBridge extends AppStateAppOpsBridge {
                 return false;
             }
             WifiSettingsState wifiSettingsState = (WifiSettingsState) info.extraInfo;
+            if (wifiSettingsState.packageInfo != null) {
+                final String[] requestedPermissions
+                        = wifiSettingsState.packageInfo.requestedPermissions;
+                if (ArrayUtils.contains(requestedPermissions, PM_NETWORK_SETTINGS)) {
+                    /*
+                     * NETWORK_SETTINGS permission trumps CHANGE_WIFI_CONFIG, so remove this from
+                     * the list.
+                    */
+                    return false;
+                }
+            }
             return wifiSettingsState.permissionDeclared;
         }
     };
