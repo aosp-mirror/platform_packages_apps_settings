@@ -31,7 +31,6 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.database.ContentObserver;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.provider.Settings;
@@ -40,14 +39,13 @@ import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.search.FakeIndexProvider;
+import com.android.settings.testutils.FakeIndexProvider;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.search.SearchFeatureProviderImpl;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.FakeSliderController;
 import com.android.settings.testutils.FakeToggleController;
-import com.android.settings.testutils.FakeUnavailablePreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.After;

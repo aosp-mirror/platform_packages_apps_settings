@@ -30,6 +30,7 @@ import android.database.Cursor;
 import android.text.TextUtils;
 
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.FakeIndexProvider;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.wifi.WifiSettings;
 
