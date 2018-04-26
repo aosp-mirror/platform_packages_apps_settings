@@ -32,6 +32,7 @@
         android:entries="@array/gesture_prevent_ringing_entries"
         android:entryValues="@array/gesture_prevent_ringing_values"
         app:controller="com.android.settings.gestures.PreventRingingPreferenceController"
-        app:keywords="@string/keywords_gesture" />
+        app:keywords="@string/keywords_gesture"
+        app:allowDividerAbove="true" />
 
 </PreferenceScreen>
