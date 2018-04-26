@@ -26,6 +26,7 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
+import android.view.accessibility.AccessibilityNodeInfo;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -61,6 +62,8 @@ public class AutoBatterySeekBarPreferenceController extends BasePreferenceContro
         mPreference = (SeekBarPreference) screen.findPreference(
                 KEY_AUTO_BATTERY_SEEK_BAR);
         mPreference.setContinuousUpdates(true);
+        mPreference.setAccessibilityRangeInfoType(
+                AccessibilityNodeInfo.RangeInfo.RANGE_TYPE_PERCENT);
         updatePreference(mPreference);
     }
 
@@ -123,7 +126,10 @@ public class AutoBatterySeekBarPreferenceController extends BasePreferenceContro
             preference.setVisible(true);
             preference.setTitle(mContext.getString(R.string.battery_saver_seekbar_title,
                     Utils.formatPercentage(level)));
-            ((SeekBarPreference) preference).setProgress(level);
+            SeekBarPreference seekBarPreference = (SeekBarPreference) preference;
+            seekBarPreference.setProgress(level);
+            seekBarPreference.setSeekBarContentDescription(
+                    mContext.getString(R.string.battery_saver_turn_on_automatically_title));
         }
     }
 
