@@ -52,7 +52,6 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
 import com.android.settingslib.search.SearchIndexable;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -97,7 +96,7 @@ public class StorageDashboardFragment extends DashboardFragment
     @VisibleForTesting
     void initializeOptionsMenu(Activity activity) {
         mOptionMenuController = new PrivateVolumeOptionMenuController(
-                activity, mVolume, new PackageManagerWrapper(activity.getPackageManager()));
+                activity, mVolume, activity.getPackageManager());
         getLifecycle().addObserver(mOptionMenuController);
         setHasOptionsMenu(true);
         activity.invalidateOptionsMenu();
@@ -254,7 +253,7 @@ public class StorageDashboardFragment extends DashboardFragment
         return new StorageAsyncLoader(context, context.getSystemService(UserManager.class),
                 mVolume.fsUuid,
                 new StorageStatsSource(context),
-                new PackageManagerWrapper(context.getPackageManager()));
+                context.getPackageManager());
     }
 
     @Override

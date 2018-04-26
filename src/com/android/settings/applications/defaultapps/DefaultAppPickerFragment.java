@@ -23,6 +23,7 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Pair;
@@ -34,19 +35,18 @@ import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settings.widget.RadioButtonPreference;
 import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.widget.CandidateInfo;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 /**
  * A generic app picker fragment that shows a list of app as radio button group.
  */
 public abstract class DefaultAppPickerFragment extends RadioButtonPickerFragment {
 
-    protected PackageManagerWrapper mPm;
+    protected PackageManager mPm;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mPm = new PackageManagerWrapper(context.getPackageManager());
+        mPm = context.getPackageManager();
     }
 
     @Override

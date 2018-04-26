@@ -40,7 +40,6 @@ import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.notification.EmptyTextSettings;
 import com.android.settings.widget.AppPreference;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.text.Collator;
 import java.util.ArrayList;
@@ -86,7 +85,7 @@ public class PictureInPictureSettings extends EmptyTextSettings {
     }
 
     private Context mContext;
-    private PackageManagerWrapper mPackageManager;
+    private PackageManager mPackageManager;
     private UserManager mUserManager;
     private IconDrawableFactory mIconDrawableFactory;
 
@@ -118,7 +117,7 @@ public class PictureInPictureSettings extends EmptyTextSettings {
         // Do nothing
     }
 
-    public PictureInPictureSettings(PackageManagerWrapper pm, UserManager um) {
+    public PictureInPictureSettings(PackageManager pm, UserManager um) {
         mPackageManager = pm;
         mUserManager = um;
     }
@@ -128,7 +127,7 @@ public class PictureInPictureSettings extends EmptyTextSettings {
         super.onCreate(icicle);
 
         mContext = getActivity();
-        mPackageManager = new PackageManagerWrapper(mContext.getPackageManager());
+        mPackageManager = mContext.getPackageManager();
         mUserManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
         mIconDrawableFactory = IconDrawableFactory.newInstance(mContext);
     }
@@ -143,10 +142,9 @@ public class PictureInPictureSettings extends EmptyTextSettings {
 
         // Fetch the set of applications for each profile which have at least one activity that
         // declare that they support picture-in-picture
-        final PackageManager pm = mPackageManager.getPackageManager();
         final ArrayList<Pair<ApplicationInfo, Integer>> pipApps =
                 collectPipApps(UserHandle.myUserId());
-        Collections.sort(pipApps, new AppComparator(pm));
+        Collections.sort(pipApps, new AppComparator(mPackageManager));
 
         // Rebuild the list of prefs
         final Context prefContext = getPrefContext();
@@ -155,11 +153,11 @@ public class PictureInPictureSettings extends EmptyTextSettings {
             final int userId = appData.second;
             final UserHandle user = UserHandle.of(userId);
             final String packageName = appInfo.packageName;
-            final CharSequence label = appInfo.loadLabel(pm);
+            final CharSequence label = appInfo.loadLabel(mPackageManager);
 
             final Preference pref = new AppPreference(prefContext);
             pref.setIcon(mIconDrawableFactory.getBadgedIcon(appInfo, userId));
-            pref.setTitle(pm.getUserBadgedLabel(label, user));
+            pref.setTitle(mPackageManager.getUserBadgedLabel(label, user));
             pref.setSummary(PictureInPictureDetails.getPreferenceSummary(prefContext,
                     appInfo.uid, packageName));
             pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {

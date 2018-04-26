@@ -19,6 +19,7 @@ package com.android.settings.applications.assist;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.provider.Settings;
 import android.text.TextUtils;
 
@@ -27,7 +28,6 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
 import com.android.settingslib.applications.DefaultAppInfo;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -139,7 +139,7 @@ public class DefaultVoiceInputPicker extends DefaultAppPickerFragment {
 
         public VoiceInputHelper.BaseInfo mInfo;
 
-        public VoiceInputDefaultAppInfo(Context context, PackageManagerWrapper pm, int userId,
+        public VoiceInputDefaultAppInfo(Context context, PackageManager pm, int userId,
                 VoiceInputHelper.BaseInfo info, boolean enabled) {
             super(context, pm, userId, info.componentName, null /* summary */, enabled);
             mInfo = info;

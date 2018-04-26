@@ -41,7 +41,7 @@ public class DefaultEmergencyPreferenceController extends DefaultAppPreferenceCo
     public boolean isAvailable() {
         return DEFAULT_EMERGENCY_APP_IS_CONFIGURABLE
                 && isCapable()
-                && mPackageManager.getPackageManager().resolveActivity(QUERY_INTENT, 0) != null;
+                && mPackageManager.resolveActivity(QUERY_INTENT, 0) != null;
     }
 
     @Override

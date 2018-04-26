@@ -30,7 +30,6 @@ import androidx.preference.SwitchPreference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -50,7 +49,7 @@ public class LocalTerminalPreferenceControllerTest {
     @Mock
     private UserManager mUserManager;
     @Mock
-    private PackageManagerWrapper mPackageManagerWrapper;
+    private PackageManager mPackageManager;
 
     private LocalTerminalPreferenceController mController;
 
@@ -61,7 +60,7 @@ public class LocalTerminalPreferenceControllerTest {
         when(mUserManager.isAdminUser()).thenReturn(true);
         mController = spy(new LocalTerminalPreferenceController(mContext));
         doReturn(true).when(mController).isAvailable();
-        doReturn(mPackageManagerWrapper).when(mController).getPackageManagerWrapper();
+        doReturn(mPackageManager).when(mController).getPackageManager();
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
             .thenReturn(mPreference);
         mController.displayPreference(mPreferenceScreen);
@@ -79,7 +78,7 @@ public class LocalTerminalPreferenceControllerTest {
     public void onPreferenceChanged_turnOnTerminal() {
         mController.onPreferenceChange(null, true);
 
-        verify(mPackageManagerWrapper).setApplicationEnabledSetting(TERMINAL_APP_PACKAGE,
+        verify(mPackageManager).setApplicationEnabledSetting(TERMINAL_APP_PACKAGE,
                 PackageManager.COMPONENT_ENABLED_STATE_ENABLED, 0);
     }
 
@@ -87,13 +86,13 @@ public class LocalTerminalPreferenceControllerTest {
     public void onPreferenceChanged_turnOffTerminal() {
         mController.onPreferenceChange(null, false);
 
-        verify(mPackageManagerWrapper).setApplicationEnabledSetting(TERMINAL_APP_PACKAGE,
+        verify(mPackageManager).setApplicationEnabledSetting(TERMINAL_APP_PACKAGE,
                 PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, 0);
     }
 
     @Test
     public void updateState_preferenceShouldBeChecked() {
-        when(mPackageManagerWrapper.getApplicationEnabledSetting(TERMINAL_APP_PACKAGE)).thenReturn(
+        when(mPackageManager.getApplicationEnabledSetting(TERMINAL_APP_PACKAGE)).thenReturn(
                 PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
         mController.updateState(mPreference);
 
@@ -102,7 +101,7 @@ public class LocalTerminalPreferenceControllerTest {
 
     @Test
     public void updateState_preferenceShouldNotBeChecked() {
-        when(mPackageManagerWrapper.getApplicationEnabledSetting(TERMINAL_APP_PACKAGE)).thenReturn(
+        when(mPackageManager.getApplicationEnabledSetting(TERMINAL_APP_PACKAGE)).thenReturn(
                 PackageManager.COMPONENT_ENABLED_STATE_DEFAULT);
         mController.updateState(mPreference);
 
@@ -113,7 +112,7 @@ public class LocalTerminalPreferenceControllerTest {
     public void onDeveloperOptionsSwitchDisabled_shouldDisablePreference() {
         mController.onDeveloperOptionsSwitchDisabled();
 
-        verify(mPackageManagerWrapper).setApplicationEnabledSetting(TERMINAL_APP_PACKAGE,
+        verify(mPackageManager).setApplicationEnabledSetting(TERMINAL_APP_PACKAGE,
                 PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, 0);
         verify(mPreference).setChecked(false);
         verify(mPreference).setEnabled(false);

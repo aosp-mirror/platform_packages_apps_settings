@@ -25,7 +25,7 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserHandle;
-import androidx.annotation.VisibleForTesting;
+
 import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -46,7 +46,6 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreateOptionsMenu;
 import com.android.settingslib.core.lifecycle.events.OnOptionsItemSelected;
 import com.android.settingslib.core.lifecycle.events.OnPrepareOptionsMenu;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.List;
 
@@ -59,7 +58,7 @@ public class InstantAppButtonsPreferenceController extends BasePreferenceControl
 
     private final AppInfoDashboardFragment mParent;
     private final String mPackageName;
-    private final PackageManagerWrapper mPackageManagerWrapper;
+    private final PackageManager mPackageManager;
     private String mLaunchUri;
     private LayoutPreference mPreference;
     private MenuItem mInstallMenu;
@@ -69,7 +68,7 @@ public class InstantAppButtonsPreferenceController extends BasePreferenceControl
         super(context, KEY_INSTANT_APP_BUTTONS);
         mParent = parent;
         mPackageName = packageName;
-        mPackageManagerWrapper = new PackageManagerWrapper(context.getPackageManager());
+        mPackageManager = context.getPackageManager();
         mLaunchUri = getDefaultLaunchUri();
         if (lifecycle != null) {
             lifecycle.addObserver(this);
@@ -123,7 +122,7 @@ public class InstantAppButtonsPreferenceController extends BasePreferenceControl
     public void onClick(DialogInterface dialog, int which) {
         FeatureFactory.getFactory(mContext).getMetricsFeatureProvider()
             .action(mContext, MetricsEvent.ACTION_SETTINGS_CLEAR_INSTANT_APP, mPackageName);
-        mPackageManagerWrapper.deletePackageAsUser(
+        mPackageManager.deletePackageAsUser(
             mPackageName, null, 0, UserHandle.myUserId());
     }
 

@@ -20,11 +20,9 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.UserManager;
 
-import com.android.settingslib.wrapper.PackageManagerWrapper;
-
 public abstract class InstalledAppLister extends AppLister {
 
-    public InstalledAppLister(PackageManagerWrapper packageManager, UserManager userManager) {
+    public InstalledAppLister(PackageManager packageManager, UserManager userManager) {
         super(packageManager, userManager);
     }
 

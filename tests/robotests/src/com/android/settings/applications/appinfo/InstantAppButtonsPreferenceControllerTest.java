@@ -50,7 +50,6 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -289,12 +288,12 @@ public class InstantAppButtonsPreferenceControllerTest {
 
     @Test
     public void onClick_shouldDeleteApp() {
-        PackageManagerWrapper packageManagerWrapper = mock(PackageManagerWrapper.class);
-        ReflectionHelpers.setField(mController, "mPackageManagerWrapper", packageManagerWrapper);
+        PackageManager packageManager = mock(PackageManager.class);
+        ReflectionHelpers.setField(mController, "mPackageManager", packageManager);
 
         mController.onClick(mock(DialogInterface.class), DialogInterface.BUTTON_POSITIVE);
 
-        verify(packageManagerWrapper)
+        verify(packageManager)
             .deletePackageAsUser(eq(TEST_AIA_PACKAGE_NAME), any(), anyInt(),anyInt());
     }
 }

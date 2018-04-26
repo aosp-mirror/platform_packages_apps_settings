@@ -23,6 +23,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.UserManager;
 import android.provider.Settings;
 import androidx.preference.Preference;
@@ -30,7 +31,6 @@ import android.view.autofill.AutofillManager;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -49,7 +49,7 @@ public class DefaultAutofillPreferenceControllerTest {
     @Mock
     private UserManager mUserManager;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private PackageManagerWrapper mPackageManager;
+    private PackageManager mPackageManager;
     @Mock
     private AutofillManager mAutofillManager;
 

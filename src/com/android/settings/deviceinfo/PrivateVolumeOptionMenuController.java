@@ -18,18 +18,17 @@ package com.android.settings.deviceinfo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.storage.VolumeInfo;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.android.settings.R;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreateOptionsMenu;
 import com.android.settingslib.core.lifecycle.events.OnOptionsItemSelected;
 import com.android.settingslib.core.lifecycle.events.OnPrepareOptionsMenu;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.Objects;
 
@@ -42,10 +41,10 @@ public class PrivateVolumeOptionMenuController implements LifecycleObserver, OnC
 
     private Context mContext;
     private VolumeInfo mVolumeInfo;
-    private PackageManagerWrapper mPm;
+    private PackageManager mPm;
 
     public PrivateVolumeOptionMenuController(
-            Context context, VolumeInfo volumeInfo, PackageManagerWrapper packageManager) {
+            Context context, VolumeInfo volumeInfo, PackageManager packageManager) {
         mContext = context;
         mVolumeInfo = volumeInfo;
         mPm = packageManager;

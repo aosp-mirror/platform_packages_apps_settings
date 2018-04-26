@@ -17,7 +17,6 @@ package com.android.settings.applications.appinfo;
 import android.content.Context;
 
 import com.android.settings.applications.defaultapps.DefaultHomePreferenceController;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 public class DefaultHomeShortcutPreferenceController
         extends DefaultAppShortcutPreferenceControllerBase {
@@ -36,7 +35,7 @@ public class DefaultHomeShortcutPreferenceController
     @Override
     protected boolean isDefaultApp() {
         return DefaultHomePreferenceController.isHomeDefault(mPackageName,
-                new PackageManagerWrapper(mContext.getPackageManager()));
+                mContext.getPackageManager());
     }
 
 }
