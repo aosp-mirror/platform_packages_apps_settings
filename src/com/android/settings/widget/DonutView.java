@@ -205,6 +205,8 @@ public class DonutView extends View {
                             .getDimension(
                                     R.dimen.storage_donut_view_shrunken_label_text_size));
         }
+        setContentDescription(getContext().getString(
+                R.string.join_many_items_middle, mPercentString, mFullString));
         invalidate();
     }
 
