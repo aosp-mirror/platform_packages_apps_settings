@@ -17,6 +17,7 @@
 package com.android.settings.display;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
@@ -26,6 +27,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.ContextWrapper;
+import android.content.om.IOverlayManager;
 import android.content.om.OverlayInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -34,8 +36,6 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.SmallTest;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.v7.preference.ListPreference;
-
-import com.android.settings.wrapper.OverlayManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -48,14 +48,14 @@ import java.util.ArrayList;
 @RunWith(AndroidJUnit4.class)
 public class ThemePreferenceControllerTest {
 
-    private OverlayManagerWrapper mMockOverlayManager;
+    private IOverlayManager mMockOverlayManager;
     private ContextWrapper mContext;
     private ThemePreferenceController mPreferenceController;
     private PackageManager mMockPackageManager;
 
     @Before
     public void setup() {
-        mMockOverlayManager = mock(OverlayManagerWrapper.class);
+        mMockOverlayManager = mock(IOverlayManager.class);
         mMockPackageManager = mock(PackageManager.class);
         mContext = new ContextWrapper(InstrumentationRegistry.getTargetContext()) {
             @Override
@@ -69,9 +69,9 @@ public class ThemePreferenceControllerTest {
     @Test
     public void testUpdateState() throws Exception {
         OverlayInfo info1 = new OverlayInfo("com.android.Theme1", "android",
-                "", "", OverlayInfo.STATE_ENABLED, 0, 0, true);
+                OverlayInfo.CATEGORY_THEME, "", OverlayInfo.STATE_ENABLED, 0, 0, true);
         OverlayInfo info2 = new OverlayInfo("com.android.Theme2", "android",
-                "", "", 0, 0, 0, true);
+                OverlayInfo.CATEGORY_THEME, "", 0, 0, 0, true);
         when(mMockPackageManager.getApplicationInfo(any(), anyInt())).thenAnswer(inv -> {
             ApplicationInfo info = mock(ApplicationInfo.class);
             if ("com.android.Theme1".equals(inv.getArguments()[0])) {
@@ -105,9 +105,9 @@ public class ThemePreferenceControllerTest {
     @Test
     public void testUpdateState_withStaticOverlay() throws Exception {
         OverlayInfo info1 = new OverlayInfo("com.android.Theme1", "android",
-                "", "", OverlayInfo.STATE_ENABLED, 0, 0, true);
+                OverlayInfo.CATEGORY_THEME, "", OverlayInfo.STATE_ENABLED, 0, 0, true);
         OverlayInfo info2 = new OverlayInfo("com.android.Theme2", "android",
-                "", "", OverlayInfo.STATE_ENABLED, 0, 0, true);
+                OverlayInfo.CATEGORY_THEME, "", OverlayInfo.STATE_ENABLED, 0, 0, true);
         when(mMockPackageManager.getApplicationInfo(any(), anyInt())).thenAnswer(inv -> {
             ApplicationInfo info = mock(ApplicationInfo.class);
             if ("com.android.Theme1".equals(inv.getArguments()[0])) {
@@ -140,29 +140,10 @@ public class ThemePreferenceControllerTest {
         verify(pref).setValue(eq("com.android.Theme2"));
     }
 
-    @Test
-    public void testAvailable_false() throws Exception {
-        when(mMockPackageManager.getPackageInfo(anyString(), anyInt())).thenReturn(
-                new PackageInfo());
-        when(mMockOverlayManager.getOverlayInfosForTarget(any(), anyInt()))
-                .thenReturn(list(new OverlayInfo("", "", "", "", 0, 0, 0, false)));
-        assertThat(mPreferenceController.isAvailable()).isFalse();
-    }
-
-    @Test
-    public void testAvailable_true() throws Exception {
-        when(mMockPackageManager.getPackageInfo(anyString(), anyInt())).thenReturn(
-                 new PackageInfo());
-        when(mMockOverlayManager.getOverlayInfosForTarget(any(), anyInt()))
-                .thenReturn(list(new OverlayInfo("", "", "", "", 0, 0, 0, true),
-                        new OverlayInfo("", "", "", "", 0, 0, 0, true)));
-        assertThat(mPreferenceController.isAvailable()).isTrue();
-    }
-
-    private ArrayList<OverlayManagerWrapper.OverlayInfo> list(OverlayInfo... infos) {
-        ArrayList<OverlayManagerWrapper.OverlayInfo> list = new ArrayList<>();
+    private ArrayList<OverlayInfo> list(OverlayInfo... infos) {
+        ArrayList<OverlayInfo> list = new ArrayList<>();
         for (OverlayInfo info : infos) {
-            list.add(new OverlayManagerWrapper.OverlayInfo(info));
+            list.add(info);
         }
         return list;
     }

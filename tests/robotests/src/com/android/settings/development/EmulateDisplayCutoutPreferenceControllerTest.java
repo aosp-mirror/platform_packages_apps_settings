@@ -26,14 +26,15 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.om.IOverlayManager;
+import android.content.om.OverlayInfo;
 import android.content.pm.PackageManager;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.PreferenceScreen;
+import android.os.RemoteException;
 import android.view.DisplayCutout;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.wrapper.OverlayManagerWrapper;
-import com.android.settings.wrapper.OverlayManagerWrapper.OverlayInfo;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -41,6 +42,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -54,7 +56,7 @@ public class EmulateDisplayCutoutPreferenceControllerTest {
     @Mock
     private Context mContext;
     @Mock
-    private OverlayManagerWrapper mOverlayManager;
+    private IOverlayManager mOverlayManager;
     @Mock
     private PackageManager mPackageManager;
     @Mock
@@ -64,6 +66,7 @@ public class EmulateDisplayCutoutPreferenceControllerTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
+        when(mContext.getSystemService(Context.OVERLAY_SERVICE)).thenReturn(mOverlayManager);
         mockCurrentOverlays();
         when(mPackageManager.getApplicationInfo(any(), anyInt()))
             .thenThrow(PackageManager.NameNotFoundException.class);
@@ -72,8 +75,12 @@ public class EmulateDisplayCutoutPreferenceControllerTest {
     }
 
     Object mockCurrentOverlays(OverlayInfo... overlays) {
-        return when(mOverlayManager.getOverlayInfosForTarget(eq("android"), anyInt()))
-            .thenReturn(Arrays.asList(overlays));
+        try {
+            return when(mOverlayManager.getOverlayInfosForTarget(eq("android"), anyInt()))
+                .thenReturn(Arrays.asList(overlays));
+        } catch (RemoteException re) {
+            return new ArrayList<OverlayInfo>();
+        }
     }
 
     @Test
@@ -146,6 +153,15 @@ public class EmulateDisplayCutoutPreferenceControllerTest {
     }
 
     private static OverlayInfo createFakeOverlay(String pkg, boolean enabled) {
-        return new OverlayInfo(pkg, DisplayCutout.EMULATION_OVERLAY_CATEGORY, enabled);
+        final int state = (enabled) ? OverlayInfo.STATE_ENABLED : OverlayInfo.STATE_DISABLED;
+
+        return new OverlayInfo(pkg /* packageName */,
+                pkg + ".target" /* targetPackageName */,
+                DisplayCutout.EMULATION_OVERLAY_CATEGORY /* category */,
+                pkg + ".baseCodePath" /* baseCodePath */,
+                state /* state */,
+                0 /* userId */,
+                0 /* priority */,
+                true /* isStatic */);
     }
 }
