@@ -63,8 +63,8 @@ import java.util.List;
 @SearchIndexable
 public class MyDeviceInfoFragment extends DashboardFragment
         implements DeviceNamePreferenceController.DeviceNamePreferenceHost {
-    private static final String LOG_TAG = "MyDeviceInfoFragment";
 
+    private static final String LOG_TAG = "MyDeviceInfoFragment";
     private static final String KEY_MY_DEVICE_INFO_HEADER = "my_device_info_header";
     private static final String KEY_LEGAL_CONTAINER = "legal_container";
 
@@ -79,8 +79,14 @@ public class MyDeviceInfoFragment extends DashboardFragment
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        use(FirmwareVersionPreferenceController.class).setHost(this /*parent*/);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
         initHeader();
     }
 
@@ -101,9 +107,7 @@ public class MyDeviceInfoFragment extends DashboardFragment
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(
-            Context context,
-            Activity activity,
-            MyDeviceInfoFragment fragment,
+            Context context, Activity activity, MyDeviceInfoFragment fragment,
             Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new EmergencyInfoPreferenceController(context));
@@ -120,7 +124,6 @@ public class MyDeviceInfoFragment extends DashboardFragment
         controllers.add(new SimStatusPreferenceController(context, fragment));
         controllers.add(new DeviceModelPreferenceController(context, fragment));
         controllers.add(new ImeiInfoPreferenceController(context, fragment));
-        controllers.add(new FirmwareVersionPreferenceController(context, fragment));
         controllers.add(new IpAddressPreferenceController(context, lifecycle));
         controllers.add(new WifiMacAddressPreferenceController(context, lifecycle));
         controllers.add(new BluetoothAddressPreferenceController(context, lifecycle));
@@ -137,7 +140,7 @@ public class MyDeviceInfoFragment extends DashboardFragment
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         final BuildNumberPreferenceController buildNumberPreferenceController =
-            use(BuildNumberPreferenceController.class);
+                use(BuildNumberPreferenceController.class);
         if (buildNumberPreferenceController.onActivityResult(requestCode, resultCode, data)) {
             return;
         }
@@ -151,7 +154,7 @@ public class MyDeviceInfoFragment extends DashboardFragment
         final View appSnippet = headerPreference.findViewById(R.id.entity_header);
         final Activity context = getActivity();
         final Bundle bundle = getArguments();
-        EntityHeaderController controller = EntityHeaderController
+        final EntityHeaderController controller = EntityHeaderController
                 .newInstance(context, this, appSnippet)
                 .setRecyclerView(getListView(), getLifecycle())
                 .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
@@ -160,9 +163,10 @@ public class MyDeviceInfoFragment extends DashboardFragment
         // TODO: There may be an avatar setting action we can use here.
         final int iconId = bundle.getInt("icon_id", 0);
         if (iconId == 0) {
-            UserManager userManager = (UserManager) getActivity().getSystemService(
+            final UserManager userManager = (UserManager) getActivity().getSystemService(
                     Context.USER_SERVICE);
-            UserInfo info = Utils.getExistingUser(userManager, android.os.Process.myUserHandle());
+            final UserInfo info = Utils.getExistingUser(userManager,
+                    android.os.Process.myUserHandle());
             controller.setLabel(info.name);
             controller.setIcon(
                     com.android.settingslib.Utils.getUserIcon(getActivity(), userManager, info));
