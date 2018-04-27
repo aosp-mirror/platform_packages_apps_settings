@@ -54,6 +54,7 @@ abstract public class AbstractZenModePreferenceController extends
     protected static ZenModeConfigWrapper mZenModeConfigWrapper;
     protected MetricsFeatureProvider mMetricsFeatureProvider;
     protected final ZenModeBackend mBackend;
+    protected PreferenceScreen mScreen;
 
     public AbstractZenModePreferenceController(Context context, String key,
             Lifecycle lifecycle) {
@@ -72,15 +73,25 @@ abstract public class AbstractZenModePreferenceController extends
     }
 
     @Override
+    public String getPreferenceKey() {
+        return KEY;
+    }
+
+    @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mSettingObserver = new SettingObserver(screen.findPreference(KEY));
+        mScreen = screen;
+        Preference pref = screen.findPreference(KEY);
+        if (pref != null) {
+            mSettingObserver = new SettingObserver(pref);
+        }
     }
 
     @Override
     public void onResume() {
         if (mSettingObserver != null) {
             mSettingObserver.register(mContext.getContentResolver());
+            mSettingObserver.onChange(false, null);
         }
     }
 
@@ -89,14 +100,6 @@ abstract public class AbstractZenModePreferenceController extends
         if (mSettingObserver != null) {
             mSettingObserver.unregister(mContext.getContentResolver());
         }
-    }
-
-    @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
-
-        mBackend.updatePolicy();
-        mBackend.updateZenMode();
     }
 
     protected NotificationManager.Policy getPolicy() {
@@ -144,8 +147,13 @@ abstract public class AbstractZenModePreferenceController extends
         @Override
         public void onChange(boolean selfChange, Uri uri) {
             super.onChange(selfChange, uri);
-            if (ZEN_MODE_URI.equals(uri) || ZEN_MODE_CONFIG_ETAG_URI.equals(uri)
+            if (uri == null || ZEN_MODE_URI.equals(uri) || ZEN_MODE_CONFIG_ETAG_URI.equals(uri)
                     || ZEN_MODE_DURATION_URI.equals(uri)) {
+                mBackend.updatePolicy();
+                mBackend.updateZenMode();
+                if (mScreen != null) {
+                    displayPreference(mScreen);
+                }
                 updateState(mPreference);
             }
         }
