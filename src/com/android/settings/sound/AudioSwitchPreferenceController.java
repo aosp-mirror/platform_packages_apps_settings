@@ -16,8 +16,12 @@
 
 package com.android.settings.sound;
 
-
 import static android.media.AudioManager.STREAM_DEVICES_CHANGED_ACTION;
+import static android.media.AudioManager.STREAM_MUSIC;
+import static android.media.AudioManager.STREAM_VOICE_CALL;
+import static android.media.AudioSystem.DEVICE_OUT_ALL_A2DP;
+import static android.media.AudioSystem.DEVICE_OUT_ALL_SCO;
+import static android.media.AudioSystem.DEVICE_OUT_HEARING_AID;
 import static android.media.MediaRouter.ROUTE_TYPE_REMOTE_DISPLAY;
 
 import android.bluetooth.BluetoothDevice;
@@ -43,14 +47,18 @@ import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.FeatureFlags;
+import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.HeadsetProfile;
+import com.android.settingslib.bluetooth.HearingAidProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -198,6 +206,72 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
         return mAudioManager.getDevicesForStream(streamType) == device;
     }
 
+    protected boolean isOngoingCallStatus() {
+        final int audioMode = mAudioManager.getMode();
+        return audioMode == AudioManager.MODE_RINGTONE
+                || audioMode == AudioManager.MODE_IN_CALL
+                || audioMode == AudioManager.MODE_IN_COMMUNICATION;
+    }
+
+    /**
+     * get hands free profile(HFP) connected device
+     */
+    protected List<BluetoothDevice> getConnectedHfpDevices() {
+        final List<BluetoothDevice> connectedDevices = new ArrayList<>();
+        final HeadsetProfile hfpProfile = mProfileManager.getHeadsetProfile();
+        if (hfpProfile == null) {
+            return connectedDevices;
+        }
+        final List<BluetoothDevice> devices = hfpProfile.getConnectedDevices();
+        for (BluetoothDevice device : devices) {
+            if (device.isConnected()) {
+                connectedDevices.add(device);
+            }
+        }
+        return connectedDevices;
+    }
+
+    /**
+     * get A2dp connected device
+     */
+    protected List<BluetoothDevice> getConnectedA2dpDevices() {
+        final List<BluetoothDevice> connectedDevices = new ArrayList<>();
+        final A2dpProfile a2dpProfile = mProfileManager.getA2dpProfile();
+        if (a2dpProfile == null) {
+            return connectedDevices;
+        }
+        final List<BluetoothDevice> devices = a2dpProfile.getConnectedDevices();
+        for (BluetoothDevice device : devices) {
+            if (device.isConnected()) {
+                connectedDevices.add(device);
+            }
+        }
+        return connectedDevices;
+    }
+
+    /**
+     * get hearing aid profile connected device, exclude other devices with same hiSyncId.
+     */
+    protected List<BluetoothDevice> getConnectedHearingAidDevices() {
+        final List<BluetoothDevice> connectedDevices = new ArrayList<>();
+        final HearingAidProfile hapProfile = mProfileManager.getHearingAidProfile();
+        if (hapProfile == null) {
+            return connectedDevices;
+        }
+        final List<Long> devicesHiSyncIds = new ArrayList<>();
+        final List<BluetoothDevice> devices = hapProfile.getConnectedDevices();
+        for (BluetoothDevice device : devices) {
+            final long hiSyncId = hapProfile.getHiSyncId(device);
+            // device with same hiSyncId should not be shown in the UI.
+            // So do not add it into connectedDevices.
+            if (!devicesHiSyncIds.contains(hiSyncId) && device.isConnected()) {
+                devicesHiSyncIds.add(hiSyncId);
+                connectedDevices.add(device);
+            }
+        }
+        return connectedDevices;
+    }
+
     int getDefaultDeviceIndex() {
         // Default device is after all connected devices.
         return ArrayUtils.size(mConnectedDevices);
@@ -261,7 +335,7 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
         mContext.unregisterReceiver(mReceiver);
     }
 
-    /** Callback for headset plugged and unplugged events. */
+    /** Notifications of audio device connection and disconnection events. */
     private class AudioManagerAudioDeviceCallback extends AudioDeviceCallback {
         @Override
         public void onAudioDevicesAdded(AudioDeviceInfo[] addedDevices) {
