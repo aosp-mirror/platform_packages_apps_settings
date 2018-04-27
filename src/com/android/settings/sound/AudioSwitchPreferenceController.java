@@ -42,7 +42,6 @@ import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 
-import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.BasePreferenceController;
@@ -73,12 +72,12 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
 
     private static final int INVALID_INDEX = -1;
 
+    protected final List<BluetoothDevice> mConnectedDevices;
     protected final AudioManager mAudioManager;
     protected final MediaRouter mMediaRouter;
     protected final LocalBluetoothProfileManager mProfileManager;
     protected int mSelectedIndex;
     protected Preference mPreference;
-    protected List<BluetoothDevice> mConnectedDevices;
 
     private final AudioManagerAudioDeviceCallback mAudioManagerAudioDeviceCallback;
     private final LocalBluetoothManager mLocalBluetoothManager;
@@ -97,6 +96,7 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
         mAudioManagerAudioDeviceCallback = new AudioManagerAudioDeviceCallback();
         mReceiver = new WiredHeadsetBroadcastReceiver();
         mMediaRouterCallback = new MediaRouterCallback();
+        mConnectedDevices = new ArrayList<>();
     }
 
     /**
@@ -206,13 +206,6 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
         return (device & mAudioManager.getDevicesForStream(streamType)) != 0;
     }
 
-    protected boolean isOngoingCallStatus() {
-        final int audioMode = mAudioManager.getMode();
-        return audioMode == AudioManager.MODE_RINGTONE
-                || audioMode == AudioManager.MODE_IN_CALL
-                || audioMode == AudioManager.MODE_IN_COMMUNICATION;
-    }
-
     /**
      * get hands free profile(HFP) connected device
      */
@@ -308,7 +301,7 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
 
     int getDefaultDeviceIndex() {
         // Default device is after all connected devices.
-        return ArrayUtils.size(mConnectedDevices);
+        return mConnectedDevices.size();
     }
 
     void setupPreferenceEntries(CharSequence[] mediaOutputs, CharSequence[] mediaValues,
