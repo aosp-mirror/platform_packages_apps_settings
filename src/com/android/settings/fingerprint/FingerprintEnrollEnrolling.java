@@ -97,9 +97,7 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
     private FingerprintEnrollSidecar mSidecar;
     private boolean mAnimationCancelled;
     private AnimatedVectorDrawable mIconAnimationDrawable;
-    private Drawable mIconBackgroundDrawable;
-    private int mIndicatorBackgroundRestingColor;
-    private int mIndicatorBackgroundActivatedColor;
+    private AnimatedVectorDrawable mIconBackgroundBlinksDrawable;
     private boolean mRestoring;
     private Vibrator mVibrator;
 
@@ -120,7 +118,7 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
         final LayerDrawable fingerprintDrawable = (LayerDrawable) mProgressBar.getBackground();
         mIconAnimationDrawable = (AnimatedVectorDrawable)
                 fingerprintDrawable.findDrawableByLayerId(R.id.fingerprint_animation);
-        mIconBackgroundDrawable =
+        mIconBackgroundBlinksDrawable = (AnimatedVectorDrawable)
                 fingerprintDrawable.findDrawableByLayerId(R.id.fingerprint_background);
         mIconAnimationDrawable.registerAnimationCallback(mIconAnimationCallback);
         mFastOutSlowInInterpolator = AnimationUtils.loadInterpolator(
@@ -147,11 +145,6 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
                 return true;
             }
         });
-        mIndicatorBackgroundRestingColor
-                = getColor(R.color.fingerprint_indicator_background_resting);
-        mIndicatorBackgroundActivatedColor
-                = getColor(R.color.fingerprint_indicator_background_activated);
-        mIconBackgroundDrawable.setTint(mIndicatorBackgroundRestingColor);
         mRestoring = savedInstanceState != null;
     }
 
@@ -240,30 +233,7 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
     }
 
     private void animateFlash() {
-        ValueAnimator anim = ValueAnimator.ofArgb(mIndicatorBackgroundRestingColor,
-                mIndicatorBackgroundActivatedColor);
-        final ValueAnimator.AnimatorUpdateListener listener =
-                new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                mIconBackgroundDrawable.setTint((Integer) animation.getAnimatedValue());
-            }
-        };
-        anim.addUpdateListener(listener);
-        anim.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                ValueAnimator anim = ValueAnimator.ofArgb(mIndicatorBackgroundActivatedColor,
-                        mIndicatorBackgroundRestingColor);
-                anim.addUpdateListener(listener);
-                anim.setDuration(300);
-                anim.setInterpolator(mLinearOutSlowInInterpolator);
-                anim.start();
-            }
-        });
-        anim.setInterpolator(mFastOutSlowInInterpolator);
-        anim.setDuration(300);
-        anim.start();
+        mIconBackgroundBlinksDrawable.start();
     }
 
     private void launchFinish(byte[] token) {
