@@ -203,7 +203,7 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
     }
 
     protected boolean isStreamFromOutputDevice(int streamType, int device) {
-        return mAudioManager.getDevicesForStream(streamType) == device;
+        return (device & mAudioManager.getDevicesForStream(streamType)) != 0;
     }
 
     protected boolean isOngoingCallStatus() {
@@ -270,6 +270,40 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
             }
         }
         return connectedDevices;
+    }
+
+    /**
+     * According to different stream and output device, find the active device from
+     * the corresponding profile. Hearing aid device could stream both STREAM_MUSIC
+     * and STREAM_VOICE_CALL.
+     *
+     * @param streamType the type of audio streams.
+     * @return the active device. Return null if the active device is current device
+     * or streamType is not STREAM_MUSIC or STREAM_VOICE_CALL.
+     */
+    protected BluetoothDevice findActiveDevice(int streamType) {
+        if (streamType != STREAM_MUSIC && streamType != STREAM_VOICE_CALL) {
+            return null;
+        }
+        if (isStreamFromOutputDevice(STREAM_MUSIC, DEVICE_OUT_ALL_A2DP)) {
+            return mProfileManager.getA2dpProfile().getActiveDevice();
+        } else if (isStreamFromOutputDevice(STREAM_VOICE_CALL, DEVICE_OUT_ALL_SCO)) {
+            return mProfileManager.getHeadsetProfile().getActiveDevice();
+        } else if (isStreamFromOutputDevice(streamType, DEVICE_OUT_HEARING_AID)) {
+            // The first element is the left active device; the second element is
+            // the right active device. And they will have same hiSyncId. If either
+            // or both side is not active, it will be null on that position.
+            List<BluetoothDevice> activeDevices =
+                    mProfileManager.getHearingAidProfile().getActiveDevices();
+            for (BluetoothDevice btDevice : activeDevices) {
+                if (btDevice != null && mConnectedDevices.contains(btDevice)) {
+                    // also need to check mConnectedDevices, because one of
+                    // the device(same hiSyncId) might not be shown in the UI.
+                    return btDevice;
+                }
+            }
+        }
+        return null;
     }
 
     int getDefaultDeviceIndex() {
