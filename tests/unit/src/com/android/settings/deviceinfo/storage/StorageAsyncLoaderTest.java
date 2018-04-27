@@ -26,6 +26,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.UserInfo;
 import android.net.TrafficStats;
@@ -36,7 +37,6 @@ import android.support.test.runner.AndroidJUnit4;
 import android.util.SparseArray;
 
 import com.android.settingslib.applications.StorageStatsSource;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -62,7 +62,7 @@ public class StorageAsyncLoaderTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock
-    private PackageManagerWrapper mPackageManager;
+    private PackageManager mPackageManager;
     @Mock
     private UserManager mUserManager;
     private List<ApplicationInfo> mInfo = new ArrayList<>();

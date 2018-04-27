@@ -35,7 +35,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -76,7 +75,7 @@ public final class AppWithAdminGrantedPermissionsListerTest {
     @Mock
     private UserManager mUserManager;
     @Mock
-    private PackageManagerWrapper mPackageManager;
+    private PackageManager mPackageManager;
     @Mock
     private IPackageManager mPackageManagerService;
     @Mock

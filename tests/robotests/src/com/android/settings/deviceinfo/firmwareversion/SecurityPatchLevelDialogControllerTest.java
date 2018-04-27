@@ -27,11 +27,11 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.view.View;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -47,7 +47,7 @@ import java.util.Collections;
 public class SecurityPatchLevelDialogControllerTest {
 
     @Mock
-    private PackageManagerWrapper mPackageManager;
+    private PackageManager mPackageManager;
     @Mock
     private FirmwareVersionDialogFragment mDialog;
     @Mock

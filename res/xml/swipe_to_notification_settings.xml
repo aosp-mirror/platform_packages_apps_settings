@@ -30,6 +30,7 @@
         android:title="@string/fingerprint_swipe_for_notifications_title"
         android:summary="@string/fingerprint_swipe_for_notifications_summary"
         app:keywords="@string/keywords_gesture"
-        app:controller="com.android.settings.gestures.SwipeToNotificationPreferenceController" />
+        app:controller="com.android.settings.gestures.SwipeToNotificationPreferenceController"
+        app:allowDividerAbove="true" />
 
 </PreferenceScreen>

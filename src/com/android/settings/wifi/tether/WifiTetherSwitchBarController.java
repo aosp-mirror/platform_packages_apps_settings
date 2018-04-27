@@ -91,10 +91,10 @@ public class WifiTetherSwitchBarController implements SwitchWidgetController.OnS
 
     @Override
     public boolean onSwitchToggled(boolean isChecked) {
-        if (isChecked) {
-            startTether();
-        } else {
+        if (!isChecked) {
             stopTether();
+        } else if (!mWifiManager.isWifiApEnabled()) {
+            startTether();
         }
         return true;
     }

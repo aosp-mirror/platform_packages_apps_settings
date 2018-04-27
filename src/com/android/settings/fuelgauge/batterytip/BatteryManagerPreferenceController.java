@@ -56,7 +56,7 @@ public class BatteryManagerPreferenceController extends BasePreferenceController
         super.updateState(preference);
         final int num = BatteryTipUtils.getRestrictedAppsList(mAppOpsManager, mUserManager).size();
         final String setting = mPowerUsageFeatureProvider.isSmartBatterySupported()
-                ? Settings.Global.APP_STANDBY_ENABLED
+                ? Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED
                 : Settings.Global.APP_AUTO_RESTRICTION_ENABLED;
         final boolean featureOn =
                 Settings.Global.getInt(mContext.getContentResolver(), setting, ON) == ON;

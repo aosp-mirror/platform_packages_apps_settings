@@ -67,7 +67,7 @@ public abstract class BaseNfcPreferenceController extends AbstractPreferenceCont
 
     @Override
     public void updateNonIndexableKeys(List<String> keys) {
-        if (isAvailable()) {
+        if (!isAvailable()) {
             keys.add(getPreferenceKey());
         }
     }

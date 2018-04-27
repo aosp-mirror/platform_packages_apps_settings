@@ -25,9 +25,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.view.accessibility.AccessibilityManager;
 
-import com.android.settings.search.FakeIndexProvider;
+import com.android.settings.testutils.FakeIndexProvider;
+import com.android.settings.search.SearchFeatureProvider;
+import com.android.settings.search.SearchFeatureProviderImpl;
 import com.android.settings.testutils.DatabaseTestUtils;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.After;
@@ -35,8 +39,15 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowAccessibilityManager;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+
+import org.robolectric.shadow.api.Shadow;
+
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SlicesDatabaseAccessorTest {
@@ -155,6 +166,31 @@ public class SlicesDatabaseAccessorTest {
         final List<String> keys = mAccessor.getSliceKeys(isPlatformSlice);
 
         assertThat(keys).containsExactly(key);
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void getSliceKeys_indexesDatabase() {
+        // Force new indexing
+        Locale.setDefault(new Locale("ca"));
+        // Register the fake a11y Service
+        ShadowAccessibilityManager shadowAccessibilityManager = Shadow.extract(
+                RuntimeEnvironment.application.getSystemService(AccessibilityManager.class));
+        shadowAccessibilityManager.setInstalledAccessibilityServiceList(new ArrayList<>());
+        final SearchFeatureProvider provider = new SearchFeatureProviderImpl();
+        final SlicesFeatureProvider sliceProvider = spy(new SlicesFeatureProviderImpl());
+        final FakeFeatureFactory factory = FakeFeatureFactory.setupForTest();
+        factory.searchFeatureProvider = provider;
+        factory.slicesFeatureProvider = sliceProvider;
+        // Fake the indexable list.
+        provider.getSearchIndexableResources().getProviderValues().clear();
+        provider.getSearchIndexableResources().getProviderValues().add(
+                FakeIndexProvider.class);
+
+        final SlicesDatabaseAccessor accessor = new SlicesDatabaseAccessor(mContext);
+        final List<String> keys = accessor.getSliceKeys(true);
+
+        assertThat(keys).isNotEmpty();
     }
 
     private void insertSpecialCase(String key) {

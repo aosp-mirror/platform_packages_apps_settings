@@ -17,74 +17,105 @@
 package com.android.settings.deviceinfo.firmwareversion;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Build;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
+import org.robolectric.annotation.Resetter;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class FirmwareVersionPreferenceControllerTest {
 
-    @Mock
-    private Preference mPreference;
-    @Mock
-    private PreferenceScreen mScreen;
+    private final String KEY = "firmware_key";
+
     @Mock
     private Fragment mFragment;
 
-    private Context mContext;
+    private Preference mPreference;
+    private PreferenceScreen mScreen;
     private FirmwareVersionPreferenceController mController;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
-        mController = new FirmwareVersionPreferenceController(mContext, mFragment);
-        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
+        final Context context = RuntimeEnvironment.application;
+        final PreferenceManager preferenceManager = new PreferenceManager(context);
+        mController = new FirmwareVersionPreferenceController(context, KEY);
+        mController.setHost(mFragment);
+        mPreference = new Preference(context);
+        mPreference.setKey(KEY);
+        mScreen = preferenceManager.createPreferenceScreen(context);
+        mScreen.addPreference(mPreference);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowFirmwareVersionDialogFragment.reset();
     }
 
     @Test
-    public void displayPreference_shouldSetSummaryToBuildNumber() {
-        mController.displayPreference(mScreen);
-
-        verify(mPreference).setSummary(Build.VERSION.RELEASE);
+    public void firmwareVersion_shouldAlwaysBeShown() {
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.AVAILABLE);
     }
 
     @Test
+    public void updatePreference_shouldSetSummaryToBuildNumber() {
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getSummary()).isEqualTo(Build.VERSION.RELEASE);
+    }
+
+    @Test
+    @Config(shadows = ShadowFirmwareVersionDialogFragment.class)
     public void handlePreferenceTreeClick_samePreferenceKey_shouldStartDialogFragment() {
-        when(mPreference.getKey()).thenReturn(mController.getPreferenceKey());
-        when(mFragment.getChildFragmentManager()).thenReturn(
-                mock(FragmentManager.class, Answers.RETURNS_DEEP_STUBS));
+        final boolean result = mController.handlePreferenceTreeClick(mPreference);
 
-        mController.handlePreferenceTreeClick(mPreference);
-
-        verify(mFragment).getChildFragmentManager();
+        assertThat(ShadowFirmwareVersionDialogFragment.isShowing).isTrue();
+        assertThat(result).isTrue();
     }
 
     @Test
     public void handlePreferenceTreeClick_unknownPreferenceKey_shouldDoNothingAndReturnFalse() {
-        when(mPreference.getKey()).thenReturn("foobar");
+        mPreference.setKey("foobar");
 
         final boolean result = mController.handlePreferenceTreeClick(mPreference);
 
+        assertThat(ShadowFirmwareVersionDialogFragment.isShowing).isFalse();
         assertThat(result).isFalse();
-        verify(mFragment, never()).getChildFragmentManager();
+    }
+
+    @Implements(FirmwareVersionDialogFragment.class)
+    public static class ShadowFirmwareVersionDialogFragment {
+
+        private static boolean isShowing = false;
+
+        @Implementation
+        public static void show(Fragment fragemnt) {
+            isShowing = true;
+        }
+
+        @Resetter
+        public static void reset() {
+            isShowing = false;
+        }
     }
 }

@@ -17,70 +17,57 @@ package com.android.settings.search;
 import static com.android.settings.slices.SliceDeepLinkSpringBoard.INTENT;
 import static com.android.settings.slices.SliceDeepLinkSpringBoard.SETTINGS;
 
-import android.app.slice.SliceManager;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.Settings;
-import android.util.Log;
 
+import com.android.settings.R;
 import com.android.settings.slices.SettingsSliceProvider;
+
+import java.util.List;
+import java.util.Objects;
 
 public interface DeviceIndexFeatureProvider {
 
-    // TODO: Remove this and index all action and intent slices through search index.
-    String[] ACTIONS_TO_INDEX = new String[]{
-            Settings.ACTION_WIFI_SETTINGS,
-            Settings.ACTION_BATTERY_SAVER_SETTINGS,
-            Settings.ACTION_BLUETOOTH_SETTINGS,
-            "android.intent.action.POWER_USAGE_SUMMARY",
-            Settings.ACTION_SOUND_SETTINGS,
-    };
 
     String TAG = "DeviceIndex";
 
     String INDEX_VERSION = "settings:index_version";
 
     // Increment when new items are added to ensure they get pushed to the device index.
-    int VERSION = 2;
+    String VERSION = Build.FINGERPRINT;
 
     boolean isIndexingEnabled();
 
-    void index(Context context, CharSequence title, Uri sliceUri, Uri launchUri);
+    void index(Context context, CharSequence title, Uri sliceUri, Uri launchUri,
+            List<String> keywords);
 
     default void updateIndex(Context context, boolean force) {
         if (!isIndexingEnabled()) return;
 
-        if (!force && Settings.Secure.getInt(context.getContentResolver(), INDEX_VERSION, -1)
-                == VERSION) {
+        if (!force && Objects.equals(
+                Settings.Secure.getString(context.getContentResolver(), INDEX_VERSION),  VERSION)) {
             // No need to update.
             return;
         }
 
-        PackageManager pm = context.getPackageManager();
-        for (String action : ACTIONS_TO_INDEX) {
-            Intent intent = new Intent(action);
-            intent.setPackage(context.getPackageName());
-            ResolveInfo activity = pm.resolveActivity(intent, PackageManager.GET_META_DATA);
-            if (activity == null) {
-                Log.e(TAG, "Unable to resolve " + action);
-                continue;
-            }
-            String sliceUri = activity.activityInfo.metaData
-                    .getString(SliceManager.SLICE_METADATA_KEY);
-            if (sliceUri != null) {
-                Log.d(TAG, "Intent: " + createDeepLink(intent.toUri(Intent.URI_ANDROID_APP_SCHEME)));
-                index(context, activity.activityInfo.loadLabel(pm),
-                        Uri.parse(sliceUri),
-                        Uri.parse(createDeepLink(intent.toUri(Intent.URI_ANDROID_APP_SCHEME))));
-            } else {
-                Log.e(TAG, "No slice uri found for " + activity.activityInfo.name);
-            }
-        }
+        ComponentName jobComponent = new ComponentName(context.getPackageName(),
+                DeviceIndexUpdateJobService.class.getName());
+        int jobId = context.getResources().getInteger(R.integer.device_index_update);
+        // Schedule a job so that we know it'll be able to complete, but try to run as
+        // soon as possible.
+        context.getSystemService(JobScheduler.class).schedule(
+                new JobInfo.Builder(jobId, jobComponent)
+                        .setPersisted(true)
+                        .setMinimumLatency(1)
+                        .setOverrideDeadline(1)
+                        .build());
 
-        Settings.Secure.putInt(context.getContentResolver(), INDEX_VERSION, VERSION);
+        Settings.Secure.putString(context.getContentResolver(), INDEX_VERSION, VERSION);
     }
 
     static String createDeepLink(String s) {

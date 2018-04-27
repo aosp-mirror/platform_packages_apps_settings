@@ -24,13 +24,13 @@ import static org.mockito.Mockito.when;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.os.UserManager;
 import android.util.Pair;
 
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import com.google.common.collect.ImmutableList;
 
@@ -51,7 +51,7 @@ public class PictureInPictureSettingsTest {
 
     private PictureInPictureSettings mFragment;
     @Mock
-    private PackageManagerWrapper mPackageManager;
+    private PackageManager mPackageManager;
     @Mock
     private UserManager mUserManager;
     private ArrayList<PackageInfo> mPrimaryUserPackages;

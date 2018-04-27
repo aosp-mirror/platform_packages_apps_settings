@@ -59,6 +59,7 @@ import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.indexing.IndexData;
 import com.android.settings.search.indexing.IndexDataConverter;
 import com.android.settings.search.indexing.PreIndexData;

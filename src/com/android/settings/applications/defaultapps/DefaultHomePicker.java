@@ -138,8 +138,8 @@ public class DefaultHomePicker extends DefaultAppPickerFragment {
 
     private boolean launcherHasManagedProfilesFeature(ResolveInfo resolveInfo) {
         try {
-            ApplicationInfo appInfo = mPm.getPackageManager().getApplicationInfo(
-                    resolveInfo.activityInfo.packageName, 0 /* default flags */);
+            ApplicationInfo appInfo = mPm.getApplicationInfo(resolveInfo.activityInfo.packageName,
+                    0 /* default flags */);
             return versionNumberAtLeastL(appInfo.targetSdkVersion);
         } catch (PackageManager.NameNotFoundException e) {
             return false;

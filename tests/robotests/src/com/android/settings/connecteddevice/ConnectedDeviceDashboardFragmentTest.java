@@ -78,7 +78,6 @@ public class ConnectedDeviceDashboardFragmentTest {
         final List<String> niks = ConnectedDeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
                 .getNonIndexableKeys(mContext);
 
-        assertThat(niks).containsExactly(KEY_CONNECTED_DEVICES, KEY_AVAILABLE_DEVICES,
-                NfcPreferenceController.KEY_TOGGLE_NFC);
+        assertThat(niks).containsExactly(KEY_CONNECTED_DEVICES, KEY_AVAILABLE_DEVICES);
     }
 }

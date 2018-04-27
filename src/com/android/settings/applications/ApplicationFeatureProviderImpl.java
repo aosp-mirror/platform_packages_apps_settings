@@ -28,8 +28,6 @@ import android.os.RemoteException;
 import android.os.UserManager;
 import android.util.ArraySet;
 
-import com.android.settingslib.wrapper.PackageManagerWrapper;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -37,12 +35,12 @@ import java.util.Set;
 public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvider {
 
     private final Context mContext;
-    private final PackageManagerWrapper mPm;
+    private final PackageManager mPm;
     private final IPackageManager mPms;
     private final DevicePolicyManager mDpm;
     private final UserManager mUm;
 
-    public ApplicationFeatureProviderImpl(Context context, PackageManagerWrapper pm,
+    public ApplicationFeatureProviderImpl(Context context, PackageManager pm,
             IPackageManager pms, DevicePolicyManager dpm) {
         mContext = context.getApplicationContext();
         mPm = pm;
@@ -132,7 +130,7 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
         private NumberOfAppsCallback mCallback;
 
         CurrentUserAndManagedProfilePolicyInstalledAppCounter(Context context,
-                PackageManagerWrapper packageManager, NumberOfAppsCallback callback) {
+                PackageManager packageManager, NumberOfAppsCallback callback) {
             super(context, PackageManager.INSTALL_REASON_POLICY, packageManager);
             mCallback = callback;
         }
@@ -148,7 +146,7 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
         private NumberOfAppsCallback mCallback;
 
         CurrentUserAndManagedProfileAppWithAdminGrantedPermissionsCounter(Context context,
-                String[] permissions, PackageManagerWrapper packageManager,
+                String[] permissions, PackageManager packageManager,
                 IPackageManager packageManagerService,
                 DevicePolicyManager devicePolicyManager, NumberOfAppsCallback callback) {
             super(context, permissions, packageManager, packageManagerService, devicePolicyManager);
@@ -164,7 +162,7 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
     private static class CurrentUserPolicyInstalledAppLister extends InstalledAppLister {
         private ListOfAppsCallback mCallback;
 
-        CurrentUserPolicyInstalledAppLister(PackageManagerWrapper packageManager,
+        CurrentUserPolicyInstalledAppLister(PackageManager packageManager,
                 UserManager userManager, ListOfAppsCallback callback) {
             super(packageManager, userManager);
             mCallback = callback;
@@ -181,7 +179,7 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
         private ListOfAppsCallback mCallback;
 
         CurrentUserAppWithAdminGrantedPermissionsLister(String[] permissions,
-                PackageManagerWrapper packageManager, IPackageManager packageManagerService,
+                PackageManager packageManager, IPackageManager packageManagerService,
                 DevicePolicyManager devicePolicyManager, UserManager userManager,
                 ListOfAppsCallback callback) {
             super(permissions, packageManager, packageManagerService, devicePolicyManager,

@@ -27,6 +27,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import androidx.preference.PreferenceManager;
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
+import com.android.settings.connecteddevice.dock.DockUpdater;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -47,6 +48,8 @@ public class SavedDeviceGroupControllerTest {
     private DashboardFragment mDashboardFragment;
     @Mock
     private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
+    @Mock
+    private DockUpdater mSavedDockUpdater;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceManager mPreferenceManager;
     @Mock
@@ -67,6 +70,7 @@ public class SavedDeviceGroupControllerTest {
         doReturn(mPackageManager).when(mContext).getPackageManager();
         mSavedDeviceGroupController = new SavedDeviceGroupController(mContext);
         mSavedDeviceGroupController.setBluetoothDeviceUpdater(mBluetoothDeviceUpdater);
+        mSavedDeviceGroupController.setSavedDockUpdater(mSavedDockUpdater);
     }
 
     @Test
@@ -74,12 +78,14 @@ public class SavedDeviceGroupControllerTest {
         // register the callback in onStart()
         mSavedDeviceGroupController.onStart();
         verify(mBluetoothDeviceUpdater).registerCallback();
+        verify(mSavedDockUpdater).registerCallback();
     }
     @Test
     public void testUnregister() {
         // unregister the callback in onStop()
         mSavedDeviceGroupController.onStop();
         verify(mBluetoothDeviceUpdater).unregisterCallback();
+        verify(mSavedDockUpdater).unregisterCallback();
     }
     @Test
     public void testGetAvailabilityStatus_noBluetoothFeature_returnUnSupported() {

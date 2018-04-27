@@ -49,14 +49,14 @@ public class DefaultEmergencyPicker extends DefaultAppPickerFragment {
     @Override
     protected List<DefaultAppInfo> getCandidates() {
         final List<DefaultAppInfo> candidates = new ArrayList<>();
-        final List<ResolveInfo> infos = mPm.getPackageManager().queryIntentActivities(
+        final List<ResolveInfo> infos = mPm.queryIntentActivities(
                 DefaultEmergencyPreferenceController.QUERY_INTENT, 0);
         PackageInfo bestMatch = null;
         final Context context = getContext();
         for (ResolveInfo info : infos) {
             try {
                 final PackageInfo packageInfo =
-                        mPm.getPackageManager().getPackageInfo(info.activityInfo.packageName, 0);
+                        mPm.getPackageInfo(info.activityInfo.packageName, 0);
                 final ApplicationInfo appInfo = packageInfo.applicationInfo;
                 candidates.add(new DefaultAppInfo(context, mPm, appInfo));
                 // Get earliest installed system app.

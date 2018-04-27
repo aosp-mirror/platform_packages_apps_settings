@@ -30,6 +30,7 @@ import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.gestures.AssistGestureFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
+import com.android.settings.overlay.DockUpdaterFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SupportFeatureProvider;
 import com.android.settings.overlay.SurveyFeatureProvider;
@@ -52,6 +53,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public final MetricsFeatureProvider metricsFeatureProvider;
     public final PowerUsageFeatureProvider powerUsageFeatureProvider;
     public final DashboardFeatureProvider dashboardFeatureProvider;
+    public final DockUpdaterFeatureProvider dockUpdaterFeatureProvider;
     public final LocaleFeatureProvider localeFeatureProvider;
     public final ApplicationFeatureProvider applicationFeatureProvider;
     public final EnterprisePrivacyFeatureProvider enterprisePrivacyFeatureProvider;
@@ -61,10 +63,11 @@ public class FakeFeatureFactory extends FeatureFactory {
     public final UserFeatureProvider userFeatureProvider;
     public final AssistGestureFeatureProvider assistGestureFeatureProvider;
     public final BluetoothFeatureProvider bluetoothFeatureProvider;
-    public final SlicesFeatureProvider slicesFeatureProvider;
-    public SearchFeatureProvider searchFeatureProvider;
     public final AccountFeatureProvider mAccountFeatureProvider;
     public final DeviceIndexFeatureProvider deviceIndexFeatureProvider;
+
+    public SlicesFeatureProvider slicesFeatureProvider;
+    public SearchFeatureProvider searchFeatureProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
@@ -91,6 +94,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         metricsFeatureProvider = mock(MetricsFeatureProvider.class);
         powerUsageFeatureProvider = mock(PowerUsageFeatureProvider.class);
         dashboardFeatureProvider = mock(DashboardFeatureProvider.class);
+        dockUpdaterFeatureProvider = mock(DockUpdaterFeatureProvider.class);
         localeFeatureProvider = mock(LocaleFeatureProvider.class);
         applicationFeatureProvider = mock(ApplicationFeatureProvider.class);
         enterprisePrivacyFeatureProvider = mock(EnterprisePrivacyFeatureProvider.class);
@@ -129,6 +133,11 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public DashboardFeatureProvider getDashboardFeatureProvider(Context context) {
         return dashboardFeatureProvider;
+    }
+
+    @Override
+    public DockUpdaterFeatureProvider getDockUpdaterFeatureProvider() {
+        return dockUpdaterFeatureProvider;
     }
 
     @Override

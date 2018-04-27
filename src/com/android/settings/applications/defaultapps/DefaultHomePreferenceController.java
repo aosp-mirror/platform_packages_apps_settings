@@ -26,7 +26,6 @@ import android.content.pm.ResolveInfo;
 
 import com.android.settings.R;
 import com.android.settingslib.applications.DefaultAppInfo;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -121,7 +120,7 @@ public class DefaultHomePreferenceController extends DefaultAppPreferenceControl
         return false;
     }
 
-    public static boolean isHomeDefault(String pkg, PackageManagerWrapper pm) {
+    public static boolean isHomeDefault(String pkg, PackageManager pm) {
         final ArrayList<ResolveInfo> homeActivities = new ArrayList<>();
         ComponentName def = pm.getHomeActivities(homeActivities);
 

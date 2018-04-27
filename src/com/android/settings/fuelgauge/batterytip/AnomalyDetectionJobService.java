@@ -38,7 +38,10 @@ import android.os.StatsDimensionsValue;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
+
 import androidx.annotation.VisibleForTesting;
+import androidx.annotation.GuardedBy;
+
 import android.util.Log;
 import android.util.Pair;
 
@@ -65,9 +68,12 @@ public class AnomalyDetectionJobService extends JobService {
     static final int UID_NULL = -1;
     @VisibleForTesting
     static final int STATSD_UID_FILED = 1;
-
     @VisibleForTesting
     static final long MAX_DELAY_MS = TimeUnit.MINUTES.toMillis(30);
+
+    private final Object mLock = new Object();
+    @GuardedBy("mLock")
+    private boolean mIsJobCanceled = false;
 
     public static void scheduleAnomalyDetection(Context context, Intent intent) {
         final JobScheduler jobScheduler = context.getSystemService(JobScheduler.class);
@@ -102,14 +108,14 @@ public class AnomalyDetectionJobService extends JobService {
                     .getFactory(this).getMetricsFeatureProvider();
             batteryUtils.initBatteryStatsHelper(batteryStatsHelper, null /* bundle */, userManager);
 
-            for (JobWorkItem item = params.dequeueWork(); item != null;
-                    item = params.dequeueWork()) {
+            for (JobWorkItem item = dequeueWork(params); item != null; item = dequeueWork(params)) {
                 saveAnomalyToDatabase(context, batteryStatsHelper, userManager,
                         batteryDatabaseManager, batteryUtils, policy, powerWhitelistBackend,
                         contentResolver, powerUsageFeatureProvider, metricsFeatureProvider,
                         item.getIntent().getExtras());
+
+                completeWork(params, item);
             }
-            jobFinished(params, false /* wantsReschedule */);
         });
 
         return true;
@@ -117,7 +123,10 @@ public class AnomalyDetectionJobService extends JobService {
 
     @Override
     public boolean onStopJob(JobParameters jobParameters) {
-        return false;
+        synchronized (mLock) {
+            mIsJobCanceled = true;
+        }
+        return true; // Need to reschedule
     }
 
     @VisibleForTesting
@@ -143,7 +152,7 @@ public class AnomalyDetectionJobService extends JobService {
             final int uid = extractUidFromStatsDimensionsValue(intentDimsValue);
             final boolean autoFeatureOn = powerUsageFeatureProvider.isSmartBatterySupported()
                     ? Settings.Global.getInt(contentResolver,
-                            Settings.Global.APP_STANDBY_ENABLED, ON) == ON
+                            Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED, ON) == ON
                     : Settings.Global.getInt(contentResolver,
                             Settings.Global.APP_AUTO_RESTRICTION_ENABLED, ON) == ON;
             final String packageName = batteryUtils.getPackageName(uid);
@@ -228,5 +237,27 @@ public class AnomalyDetectionJobService extends JobService {
     private boolean isExcessiveBackgroundAnomaly(AnomalyInfo anomalyInfo) {
         return anomalyInfo.anomalyType
                 == StatsManagerConfig.AnomalyType.EXCESSIVE_BACKGROUND_SERVICE;
+    }
+
+    @VisibleForTesting
+    JobWorkItem dequeueWork(JobParameters parameters) {
+        synchronized (mLock) {
+            if (mIsJobCanceled) {
+                return null;
+            }
+
+            return parameters.dequeueWork();
+        }
+    }
+
+    @VisibleForTesting
+    void completeWork(JobParameters parameters, JobWorkItem item) {
+        synchronized (mLock) {
+            if (mIsJobCanceled) {
+                return;
+            }
+
+            parameters.completeWork(item);
+        }
     }
 }

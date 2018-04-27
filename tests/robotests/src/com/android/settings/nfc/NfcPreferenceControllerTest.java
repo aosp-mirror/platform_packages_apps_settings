@@ -39,6 +39,9 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RunWith(SettingsRobolectricTestRunner.class)
 public class NfcPreferenceControllerTest {
 
@@ -133,5 +136,25 @@ public class NfcPreferenceControllerTest {
         when(mNfcAdapter.getAdapterState()).thenReturn(NfcAdapter.STATE_TURNING_OFF);
         mNfcController.onResume();
         assertThat(mNfcPreference.isChecked()).isFalse();
+    }
+
+    @Test
+    public void updateNonIndexableKeys_available_shouldNotUpdate() {
+        when(mNfcAdapter.isEnabled()).thenReturn(true);
+        final List<String> keys = new ArrayList<>();
+
+        mNfcController.updateNonIndexableKeys(keys);
+
+        assertThat(keys).isEmpty();
+    }
+
+    @Test
+    public void updateNonIndexableKeys_notAvailable_shouldUpdate() {
+        ReflectionHelpers.setField(mNfcController, "mNfcAdapter", null);
+        final List<String> keys = new ArrayList<>();
+
+        mNfcController.updateNonIndexableKeys(keys);
+
+        assertThat(keys).hasSize(1);
     }
 }

@@ -26,8 +26,6 @@ import android.net.wifi.WifiConfiguration;
 import android.provider.Settings;
 import android.text.TextUtils;
 
-import com.android.settingslib.wrapper.PackageManagerWrapper;
-
 public class WifiUtils {
 
     private static final int SSID_ASCII_MIN_LENGTH = 1;
@@ -72,7 +70,7 @@ public class WifiUtils {
 
         final DevicePolicyManager dpm =
                 (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
-        final PackageManagerWrapper pm = new PackageManagerWrapper(context.getPackageManager());
+        final PackageManager pm = context.getPackageManager();
 
         // Check if device has DPM capability. If it has and dpm is still null, then we
         // treat this case with suspicion and bail out.

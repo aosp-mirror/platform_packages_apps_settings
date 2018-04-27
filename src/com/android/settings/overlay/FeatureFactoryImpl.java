@@ -29,6 +29,7 @@ import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProviderImpl;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProviderImpl;
+import com.android.settings.connecteddevice.dock.DockUpdaterFeatureProviderImpl;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProviderImpl;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
@@ -52,7 +53,6 @@ import com.android.settings.slices.SlicesFeatureProviderImpl;
 import com.android.settings.users.UserFeatureProvider;
 import com.android.settings.users.UserFeatureProviderImpl;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 /**
  * {@link FeatureFactory} implementation for AOSP Settings.
@@ -63,6 +63,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private ApplicationFeatureProvider mApplicationFeatureProvider;
     private MetricsFeatureProvider mMetricsFeatureProvider;
     private DashboardFeatureProviderImpl mDashboardFeatureProvider;
+    private DockUpdaterFeatureProvider mDockUpdaterFeatureProvider;
     private LocaleFeatureProvider mLocaleFeatureProvider;
     private EnterprisePrivacyFeatureProvider mEnterprisePrivacyFeatureProvider;
     private SearchFeatureProvider mSearchFeatureProvider;
@@ -106,10 +107,18 @@ public class FeatureFactoryImpl extends FeatureFactory {
     }
 
     @Override
+    public DockUpdaterFeatureProvider getDockUpdaterFeatureProvider() {
+        if (mDockUpdaterFeatureProvider == null) {
+            mDockUpdaterFeatureProvider = new DockUpdaterFeatureProviderImpl();
+        }
+        return mDockUpdaterFeatureProvider;
+    }
+
+    @Override
     public ApplicationFeatureProvider getApplicationFeatureProvider(Context context) {
         if (mApplicationFeatureProvider == null) {
             mApplicationFeatureProvider = new ApplicationFeatureProviderImpl(context,
-                    new PackageManagerWrapper(context.getPackageManager()),
+                    context.getPackageManager(),
                     AppGlobals.getPackageManager(),
                     (DevicePolicyManager) context
                             .getSystemService(Context.DEVICE_POLICY_SERVICE));
@@ -130,7 +139,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
         if (mEnterprisePrivacyFeatureProvider == null) {
             mEnterprisePrivacyFeatureProvider = new EnterprisePrivacyFeatureProviderImpl(context,
                     (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE),
-                    new PackageManagerWrapper(context.getPackageManager()),
+                    context.getPackageManager(),
                     UserManager.get(context),
                     (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE),
                     context.getResources());

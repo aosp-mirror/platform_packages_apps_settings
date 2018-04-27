@@ -227,6 +227,9 @@ public class DataUsageSummaryPreference extends Preference {
                 TextUtils.expandTemplate(template, usageNumberText, usedResult.units);
         usageNumberField.setText(usageText);
 
+        final MeasurableLinearLayout layout =
+                (MeasurableLinearLayout) holder.findViewById(R.id.usage_layout);
+
         if (mHasMobileData && mNumPlans >= 0 && mDataplanSize > 0L) {
             TextView usageRemainingField = (TextView) holder.findViewById(R.id.data_remaining_view);
             long dataRemaining = mDataplanSize - mDataplanUse;
@@ -243,6 +246,9 @@ public class DataUsageSummaryPreference extends Preference {
                 usageRemainingField.setTextColor(
                         Utils.getColorAttr(getContext(), android.R.attr.colorError));
             }
+            layout.setChildren(usageNumberField, usageRemainingField);
+        } else {
+            layout.setChildren(usageNumberField, null);
         }
     }
 

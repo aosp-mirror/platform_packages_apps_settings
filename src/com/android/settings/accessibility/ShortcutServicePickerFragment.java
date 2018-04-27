@@ -47,7 +47,6 @@ import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settings.widget.RadioButtonPreference;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 import com.android.settingslib.widget.CandidateInfo;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -229,10 +228,9 @@ public class ShortcutServicePickerFragment extends RadioButtonPickerFragment {
 
         @Override
         public CharSequence loadLabel() {
-            final PackageManagerWrapper pmw =
-                    new PackageManagerWrapper(getContext().getPackageManager());
+            final PackageManager pmw = getContext().getPackageManager();
             final CharSequence label =
-                    mServiceInfo.getResolveInfo().serviceInfo.loadLabel(pmw.getPackageManager());
+                    mServiceInfo.getResolveInfo().serviceInfo.loadLabel(pmw);
             if (label != null) {
                 return label;
             }
@@ -242,7 +240,7 @@ public class ShortcutServicePickerFragment extends RadioButtonPickerFragment {
                 try {
                     final ApplicationInfo appInfo = pmw.getApplicationInfoAsUser(
                             componentName.getPackageName(), 0, UserHandle.myUserId());
-                    return appInfo.loadLabel(pmw.getPackageManager());
+                    return appInfo.loadLabel(pmw);
                 } catch (PackageManager.NameNotFoundException e) {
                     return null;
                 }

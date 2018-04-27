@@ -54,6 +54,12 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
     static final int NON_SIM_PREFERENCES_COUNT = 2;
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        use(FirmwareVersionPreferenceController.class).setHost(this /*parent*/);
+    }
+
+    @Override
     public int getMetricsCategory() {
         return MetricsEvent.DEVICEINFO;
     }
@@ -130,7 +136,6 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
         controllers.add(new SimStatusPreferenceController(context, fragment));
         controllers.add(new DeviceModelPreferenceController(context, fragment));
         controllers.add(new ImeiInfoPreferenceController(context, fragment));
-        controllers.add(new FirmwareVersionPreferenceController(context, fragment));
         controllers.add(new IpAddressPreferenceController(context, lifecycle));
         controllers.add(new WifiMacAddressPreferenceController(context, lifecycle));
         controllers.add(new BluetoothAddressPreferenceController(context, lifecycle));

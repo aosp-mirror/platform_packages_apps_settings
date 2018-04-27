@@ -134,12 +134,11 @@ public class DefaultAssistPicker extends DefaultAppPickerFragment {
     }
 
     private void addAssistServices() {
-        final PackageManager pm = mPm.getPackageManager();
-        final List<ResolveInfo> services = pm.queryIntentServices(
+        final List<ResolveInfo> services = mPm.queryIntentServices(
                 ASSIST_SERVICE_PROBE, PackageManager.GET_META_DATA);
         for (ResolveInfo resolveInfo : services) {
             VoiceInteractionServiceInfo voiceInteractionServiceInfo =
-                    new VoiceInteractionServiceInfo(pm, resolveInfo.serviceInfo);
+                    new VoiceInteractionServiceInfo(mPm, resolveInfo.serviceInfo);
             if (!voiceInteractionServiceInfo.getSupportsAssist()) {
                 continue;
             }
@@ -152,8 +151,7 @@ public class DefaultAssistPicker extends DefaultAppPickerFragment {
     }
 
     private void addAssistActivities() {
-        final PackageManager pm = mPm.getPackageManager();
-        final List<ResolveInfo> activities = pm.queryIntentActivities(
+        final List<ResolveInfo> activities = mPm.queryIntentActivities(
                 ASSIST_ACTIVITY_PROBE, PackageManager.MATCH_DEFAULT_ONLY);
         for (ResolveInfo resolveInfo : activities) {
             mAvailableAssistants.add(new Info(
@@ -206,9 +204,8 @@ public class DefaultAssistPicker extends DefaultAppPickerFragment {
     }
 
     private String getDefaultRecognizer() {
-        final ResolveInfo resolveInfo = mPm.getPackageManager().resolveService(
-                new Intent(RecognitionService.SERVICE_INTERFACE),
-                PackageManager.GET_META_DATA);
+        final ResolveInfo resolveInfo = mPm.resolveService(
+                new Intent(RecognitionService.SERVICE_INTERFACE), PackageManager.GET_META_DATA);
         if (resolveInfo == null || resolveInfo.serviceInfo == null) {
             Log.w(TAG, "Unable to resolve default voice recognition service.");
             return "";
