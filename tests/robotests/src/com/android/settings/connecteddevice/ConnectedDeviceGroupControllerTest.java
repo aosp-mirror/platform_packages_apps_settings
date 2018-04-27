@@ -19,6 +19,7 @@ import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.DISABLED_UNSUPPORTED;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
@@ -34,6 +35,7 @@ import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.bluetooth.ConnectedBluetoothDeviceUpdater;
+import com.android.settings.connecteddevice.dock.DockUpdater;
 import com.android.settings.connecteddevice.usb.ConnectedUsbDeviceUpdater;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -63,6 +65,8 @@ public class ConnectedDeviceGroupControllerTest {
     @Mock
     private ConnectedUsbDeviceUpdater mConnectedUsbDeviceUpdater;
     @Mock
+    private DockUpdater mConnectedDockUpdater;
+    @Mock
     private PreferenceScreen mPreferenceScreen;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceManager mPreferenceManager;
@@ -87,8 +91,8 @@ public class ConnectedDeviceGroupControllerTest {
         doReturn(mContext).when(mDashboardFragment).getContext();
 
         mConnectedDeviceGroupController = new ConnectedDeviceGroupController(mContext);
-        mConnectedDeviceGroupController
-                .init(mConnectedBluetoothDeviceUpdater, mConnectedUsbDeviceUpdater);
+        mConnectedDeviceGroupController.init(mConnectedBluetoothDeviceUpdater,
+                mConnectedUsbDeviceUpdater, mConnectedDockUpdater);
         mConnectedDeviceGroupController.mPreferenceGroup = mPreferenceGroup;
     }
 
@@ -136,6 +140,7 @@ public class ConnectedDeviceGroupControllerTest {
         mConnectedDeviceGroupController.onStart();
         verify(mConnectedBluetoothDeviceUpdater).registerCallback();
         verify(mConnectedUsbDeviceUpdater).registerCallback();
+        verify(mConnectedDockUpdater).registerCallback();
     }
 
     @Test
@@ -144,6 +149,7 @@ public class ConnectedDeviceGroupControllerTest {
         mConnectedDeviceGroupController.onStop();
         verify(mConnectedBluetoothDeviceUpdater).unregisterCallback();
         verify(mConnectedUsbDeviceUpdater).unregisterCallback();
+        verify(mConnectedDockUpdater).unregisterCallback();
     }
 
     @Test
