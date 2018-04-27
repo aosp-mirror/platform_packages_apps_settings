@@ -26,6 +26,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
@@ -48,6 +49,8 @@ public class SeekBarPreference extends RestrictedPreference
 
     private SeekBar mSeekBar;
     private boolean mShouldBlink;
+    private int mAccessibilityRangeInfoType = AccessibilityNodeInfo.RangeInfo.RANGE_TYPE_INT;
+    private CharSequence mSeekBarContentDescription;
 
     public SeekBarPreference(
             Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -100,7 +103,9 @@ public class SeekBarPreference extends RestrictedPreference
         mSeekBar.setProgress(mProgress);
         mSeekBar.setEnabled(isEnabled());
         final CharSequence title = getTitle();
-        if (!TextUtils.isEmpty(title)) {
+        if (!TextUtils.isEmpty(mSeekBarContentDescription)) {
+            mSeekBar.setContentDescription(mSeekBarContentDescription);
+        } else if (!TextUtils.isEmpty(title)) {
             mSeekBar.setContentDescription(title);
         }
         if (mSeekBar instanceof DefaultIndicatorSeekBar) {
@@ -119,6 +124,19 @@ public class SeekBarPreference extends RestrictedPreference
                 mShouldBlink = false;
             });
         }
+        mSeekBar.setAccessibilityDelegate(new View.AccessibilityDelegate() {
+            @Override
+            public void onInitializeAccessibilityNodeInfo(View view, AccessibilityNodeInfo info) {
+                super.onInitializeAccessibilityNodeInfo(view, info);
+                // Update the range info with the correct type
+                AccessibilityNodeInfo.RangeInfo rangeInfo = info.getRangeInfo();
+                if (rangeInfo != null) {
+                    info.setRangeInfo(AccessibilityNodeInfo.RangeInfo.obtain(
+                                    mAccessibilityRangeInfoType, rangeInfo.getMin(),
+                                    rangeInfo.getMax(), rangeInfo.getCurrent()));
+                }
+            }
+        });
     }
 
     @Override
@@ -249,6 +267,24 @@ public class SeekBarPreference extends RestrictedPreference
         mTrackingTouch = false;
         if (seekBar.getProgress() != mProgress) {
             syncProgress(seekBar);
+        }
+    }
+
+    /**
+     * Specify the type of range this seek bar represents.
+     *
+     * @param rangeInfoType The type of range to be shared with accessibility
+     *
+     * @see android.view.accessibility.AccessibilityNodeInfo.RangeInfo
+     */
+    public void setAccessibilityRangeInfoType(int rangeInfoType) {
+        mAccessibilityRangeInfoType = rangeInfoType;
+    }
+
+    public void setSeekBarContentDescription(CharSequence contentDescription) {
+        mSeekBarContentDescription = contentDescription;
+        if (mSeekBar != null) {
+            mSeekBar.setContentDescription(contentDescription);
         }
     }
 
