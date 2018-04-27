@@ -22,6 +22,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +47,12 @@ public class FeatureFlagsDashboard extends DashboardFragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        use(FeatureFlagFooterPreferenceController.class).setFooterMixin(mFooterPreferenceMixin);
+    }
+
+    @Override
     public int getHelpResource() {
         return 0;
     }
@@ -53,7 +60,12 @@ public class FeatureFlagsDashboard extends DashboardFragment {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new FeatureFlagsPreferenceController(context, getLifecycle()));
+        final Lifecycle lifecycle = getLifecycle();
+        final FeatureFlagFooterPreferenceController footerController =
+                new FeatureFlagFooterPreferenceController(context);
+        controllers.add(new FeatureFlagsPreferenceController(context, lifecycle));
+        controllers.add(footerController);
+        lifecycle.addObserver(footerController);
         return controllers;
     }
 }
