@@ -160,24 +160,15 @@ public class ZenModeSettings extends ZenModeSettingsBase {
         }
 
         String getBlockedEffectsSummary(Policy policy) {
-            List<String> blockedStrings = new ArrayList<>();
-            if (Policy.areAnyScreenOffEffectsSuppressed(policy.suppressedVisualEffects)) {
-                blockedStrings.add(mContext.getResources().getString(
-                        R.string.zen_mode_block_effect_summary_screen_off));
-            }
-            if (Policy.areAnyScreenOnEffectsSuppressed(policy.suppressedVisualEffects)) {
-                blockedStrings.add(mContext.getResources().getString(
-                        R.string.zen_mode_block_effect_summary_screen_on));
-            }
-
-            if (blockedStrings.size() == 0) {
+            if (policy.suppressedVisualEffects == 0) {
                 return mContext.getResources().getString(
-                        R.string.zen_mode_block_effect_summary_none);
-            } else if (blockedStrings.size() == 1) {
-                return blockedStrings.get(0);
+                        R.string.zen_mode_restrict_notifications_summary_muted);
+            } else if (Policy.areAllVisualEffectsSuppressed(policy.suppressedVisualEffects)) {
+                return mContext.getResources().getString(
+                        R.string.zen_mode_restrict_notifications_summary_hidden);
             } else {
-                return mContext.getResources().getString(R.string.join_two_unrelated_items,
-                        blockedStrings.get(0), blockedStrings.get(1));
+                return mContext.getResources().getString(
+                        R.string.zen_mode_restrict_notifications_summary_custom);
             }
         }
 

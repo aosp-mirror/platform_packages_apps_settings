@@ -31,7 +31,7 @@ import com.android.settings.accessibility.CaptionPropertiesFragment;
 import com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment;
 import com.android.settings.accounts.AccountDashboardFragment;
 import com.android.settings.accounts.AccountSyncSettings;
-import com.android.settings.accounts.ChooseAccountActivity;
+import com.android.settings.accounts.ChooseAccountFragment;
 import com.android.settings.accounts.ManagedProfileSettings;
 import com.android.settings.applications.AppAndNotificationDashboardFragment;
 import com.android.settings.applications.DefaultAppSettings;
@@ -236,7 +236,7 @@ public class SettingsGateway {
             PictureInPictureSettings.class.getName(),
             PictureInPictureDetails.class.getName(),
             ManagedProfileSettings.class.getName(),
-            ChooseAccountActivity.class.getName(),
+            ChooseAccountFragment.class.getName(),
             IccLockSettings.class.getName(),
             TestingSettings.class.getName(),
             WifiAPITest.class.getName(),

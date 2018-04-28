@@ -56,6 +56,7 @@ public final class BluetoothDevicePreference extends GearPreference implements
 
     private AlertDialog mDisconnectDialog;
     private String contentDescription = null;
+    private boolean mHideSecondTarget = false;
     /* Talk-back descriptions for various BT icons */
     Resources mResources;
 
@@ -86,7 +87,8 @@ public final class BluetoothDevicePreference extends GearPreference implements
     protected boolean shouldHideSecondTarget() {
         return mCachedDevice == null
                 || mCachedDevice.getBondState() != BluetoothDevice.BOND_BONDED
-                || mUserManager.hasUserRestriction(DISALLOW_CONFIG_BLUETOOTH);
+                || mUserManager.hasUserRestriction(DISALLOW_CONFIG_BLUETOOTH)
+                || mHideSecondTarget;
     }
 
     @Override
@@ -110,6 +112,10 @@ public final class BluetoothDevicePreference extends GearPreference implements
 
     public CachedBluetoothDevice getBluetoothDevice() {
         return mCachedDevice;
+    }
+
+    public void hideSecondTarget(boolean hideSecondTarget) {
+        mHideSecondTarget = hideSecondTarget;
     }
 
     public void onDeviceAttributesChanged() {
