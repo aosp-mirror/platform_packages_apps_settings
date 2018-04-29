@@ -143,7 +143,7 @@ public class AnomalyDetectionJobService extends JobService {
             final int uid = extractUidFromStatsDimensionsValue(intentDimsValue);
             final boolean autoFeatureOn = powerUsageFeatureProvider.isSmartBatterySupported()
                     ? Settings.Global.getInt(contentResolver,
-                            Settings.Global.APP_STANDBY_ENABLED, ON) == ON
+                            Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED, ON) == ON
                     : Settings.Global.getInt(contentResolver,
                             Settings.Global.APP_AUTO_RESTRICTION_ENABLED, ON) == ON;
             final String packageName = batteryUtils.getPackageName(uid);

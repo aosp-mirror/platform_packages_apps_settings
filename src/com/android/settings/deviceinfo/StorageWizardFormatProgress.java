@@ -91,7 +91,7 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
                     storage.partitionPrivate(activity.mDisk.getId());
                     publishProgress(40);
 
-                    final VolumeInfo privateVol = activity.findFirstVolume(TYPE_PRIVATE, 5);
+                    final VolumeInfo privateVol = activity.findFirstVolume(TYPE_PRIVATE, 25);
                     final CompletableFuture<PersistableBundle> result = new CompletableFuture<>();
                     storage.benchmark(privateVol.getId(), new IVoldTaskListener.Stub() {
                         @Override

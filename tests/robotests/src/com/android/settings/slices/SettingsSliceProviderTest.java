@@ -21,9 +21,12 @@ import static android.content.ContentResolver.SCHEME_CONTENT;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
+import android.app.slice.SliceManager;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -43,7 +46,9 @@ import org.robolectric.RuntimeEnvironment;
 
 import androidx.slice.Slice;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 
 /**
@@ -65,17 +70,22 @@ public class SettingsSliceProviderTest {
     private Context mContext;
     private SettingsSliceProvider mProvider;
     private SQLiteDatabase mDb;
+    private SliceManager mManager;
 
     @Before
     public void setUp() {
         mContext = spy(RuntimeEnvironment.application);
         mProvider = spy(new SettingsSliceProvider());
+        mProvider.mSliceWeakDataCache = new HashMap<>();
         mProvider.mSliceDataCache = new HashMap<>();
         mProvider.mSlicesDatabaseAccessor = new SlicesDatabaseAccessor(mContext);
         when(mProvider.getContext()).thenReturn(mContext);
 
         mDb = SlicesDatabaseHelper.getInstance(mContext).getWritableDatabase();
         SlicesDatabaseHelper.getInstance(mContext).setIndexedState();
+        mManager = mock(SliceManager.class);
+        when(mContext.getSystemService(SliceManager.class)).thenReturn(mManager);
+        when(mManager.getPinnedSlices()).thenReturn(Collections.emptyList());
     }
 
     @After
@@ -99,6 +109,30 @@ public class SettingsSliceProviderTest {
         Uri uri = SliceBuilderUtils.getUri(INTENT_PATH, false);
 
         mProvider.loadSlice(uri);
+        SliceData data = mProvider.mSliceWeakDataCache.get(uri);
+
+        assertThat(data.getKey()).isEqualTo(KEY);
+        assertThat(data.getTitle()).isEqualTo(TITLE);
+    }
+
+    @Test
+    public void testLoadSlice_doesntCacheWithoutPin() {
+        insertSpecialCase(KEY);
+        Uri uri = SliceBuilderUtils.getUri(INTENT_PATH, false);
+
+        mProvider.loadSlice(uri);
+        SliceData data = mProvider.mSliceDataCache.get(uri);
+
+        assertThat(data).isNull();
+    }
+
+    @Test
+    public void testLoadSlice_cachesWithPin() {
+        insertSpecialCase(KEY);
+        Uri uri = SliceBuilderUtils.getUri(INTENT_PATH, false);
+        when(mManager.getPinnedSlices()).thenReturn(Arrays.asList(uri));
+
+        mProvider.loadSlice(uri);
         SliceData data = mProvider.mSliceDataCache.get(uri);
 
         assertThat(data.getKey()).isEqualTo(KEY);
@@ -108,11 +142,23 @@ public class SettingsSliceProviderTest {
     @Test
     public void testLoadSlice_cachedEntryRemovedOnBuild() {
         SliceData data = getDummyData();
-        mProvider.mSliceDataCache.put(data.getUri(), data);
+        mProvider.mSliceWeakDataCache.put(data.getUri(), data);
         mProvider.onBindSlice(data.getUri());
         insertSpecialCase(data.getKey());
 
-        SliceData cachedData = mProvider.mSliceDataCache.get(data.getUri());
+        SliceData cachedData = mProvider.mSliceWeakDataCache.get(data.getUri());
+
+        assertThat(cachedData).isNull();
+    }
+
+    @Test
+    public void testLoadSlice_cachedEntryRemovedOnUnpin() {
+        SliceData data = getDummyData();
+        mProvider.mSliceDataCache.put(data.getUri(), data);
+        mProvider.onSliceUnpinned(data.getUri());
+        insertSpecialCase(data.getKey());
+
+        SliceData cachedData = mProvider.mSliceWeakDataCache.get(data.getUri());
 
         assertThat(cachedData).isNull();
     }

@@ -15,12 +15,14 @@
  *
  */
 
-package com.android.settings.search;
+package com.android.settings.testutils;
 
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -16,12 +16,14 @@ package com.android.settings.search;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
+import android.app.job.JobScheduler;
 
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -40,7 +42,7 @@ public class DeviceIndexFeatureProviderTest {
     @Before
     public void setUp() {
         FakeFeatureFactory.setupForTest();
-        mActivity = Robolectric.buildActivity(Activity.class).create().visible().get();
+        mActivity = spy(Robolectric.buildActivity(Activity.class).create().visible().get());
         mProvider = spy(new DeviceIndexFeatureProviderImpl());
     }
 
@@ -49,14 +51,16 @@ public class DeviceIndexFeatureProviderTest {
         when(mProvider.isIndexingEnabled()).thenReturn(false);
 
         mProvider.updateIndex(mActivity, false);
-        verify(mProvider, never()).index(any(), any(), any(), any());
+        verify(mProvider, never()).index(any(), any(), any(), any(), any());
     }
 
     @Test
     public void verifyIndexing() {
+        JobScheduler jobScheduler = mock(JobScheduler.class);
         when(mProvider.isIndexingEnabled()).thenReturn(true);
+        when(mActivity.getSystemService(JobScheduler.class)).thenReturn(jobScheduler);
 
         mProvider.updateIndex(mActivity, false);
-        verify(mProvider, atLeastOnce()).index(any(), any(), any(), any());
+        verify(jobScheduler).schedule(any());
     }
 }

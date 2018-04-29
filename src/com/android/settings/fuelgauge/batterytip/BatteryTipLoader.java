@@ -68,7 +68,8 @@ public class BatteryTipLoader extends AsyncLoader<List<BatteryTip>> {
         final Context context = getContext();
 
         tips.add(new LowBatteryDetector(policy, batteryInfo).detect());
-        tips.add(new HighUsageDetector(context, policy, mBatteryStatsHelper).detect());
+        tips.add(new HighUsageDetector(context, policy, mBatteryStatsHelper,
+                batteryInfo.discharging).detect());
         tips.add(new SmartBatteryDetector(policy, context.getContentResolver()).detect());
         tips.add(new EarlyWarningDetector(policy, context).detect());
         tips.add(new SummaryDetector(policy, batteryInfo.averageTimeToDischarge).detect());

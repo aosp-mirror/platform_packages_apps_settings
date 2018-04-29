@@ -16,6 +16,8 @@
 
 package com.android.settings.slices;
 
+import static android.Manifest.permission.READ_SEARCH_INDEXABLES;
+
 import android.app.PendingIntent;
 import android.app.slice.SliceManager;
 import android.content.ContentResolver;
@@ -24,11 +26,13 @@ import android.content.Intent;
 import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
+import android.os.StrictMode;
 import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.graphics.drawable.IconCompat;
 import android.text.TextUtils;
+import android.util.ArrayMap;
 import android.util.Log;
 import android.util.Pair;
 
@@ -38,6 +42,7 @@ import com.android.settingslib.utils.ThreadUtils;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -111,12 +116,18 @@ public class SettingsSliceProvider extends SliceProvider {
     SlicesDatabaseAccessor mSlicesDatabaseAccessor;
 
     @VisibleForTesting
+    Map<Uri, SliceData> mSliceWeakDataCache;
     Map<Uri, SliceData> mSliceDataCache;
+
+    public SettingsSliceProvider() {
+        super(READ_SEARCH_INDEXABLES);
+    }
 
     @Override
     public boolean onCreateSliceProvider() {
         mSlicesDatabaseAccessor = new SlicesDatabaseAccessor(getContext());
-        mSliceDataCache = new WeakHashMap<>();
+        mSliceDataCache = new ArrayMap<>();
+        mSliceWeakDataCache = new WeakHashMap<>();
         return true;
     }
 
@@ -132,7 +143,23 @@ public class SettingsSliceProvider extends SliceProvider {
     }
 
     @Override
+    public void onSlicePinned(Uri sliceUri) {
+        // Start warming the slice, we expect someone will want it soon.
+        loadSliceInBackground(sliceUri);
+    }
+
+    @Override
+    public void onSliceUnpinned(Uri sliceUri) {
+        mSliceDataCache.remove(sliceUri);
+    }
+
+    @Override
     public Slice onBindSlice(Uri sliceUri) {
+        // TODO: Remove this when all slices are not breaking strict mode
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+                .permitAll()
+                .build());
+
         String path = sliceUri.getPath();
         // If adding a new Slice, do not directly match Slice URIs.
         // Use {@link SlicesDatabaseAccessor}.
@@ -141,14 +168,16 @@ public class SettingsSliceProvider extends SliceProvider {
                 return createWifiSlice(sliceUri);
         }
 
-        SliceData cachedSliceData = mSliceDataCache.get(sliceUri);
+        SliceData cachedSliceData = mSliceWeakDataCache.get(sliceUri);
         if (cachedSliceData == null) {
             loadSliceInBackground(sliceUri);
             return getSliceStub(sliceUri);
         }
 
         // Remove the SliceData from the cache after it has been used to prevent a memory-leak.
-        mSliceDataCache.remove(sliceUri);
+        if (!mSliceDataCache.containsKey(sliceUri)) {
+            mSliceWeakDataCache.remove(sliceUri);
+        }
         return SliceBuilderUtils.buildSlice(getContext(), cachedSliceData);
     }
 
@@ -236,7 +265,12 @@ public class SettingsSliceProvider extends SliceProvider {
         long startBuildTime = System.currentTimeMillis();
 
         final SliceData sliceData = mSlicesDatabaseAccessor.getSliceDataFromUri(uri);
-        mSliceDataCache.put(uri, sliceData);
+        List<Uri> pinnedSlices = getContext().getSystemService(
+                SliceManager.class).getPinnedSlices();
+        if (pinnedSlices.contains(uri)) {
+            mSliceDataCache.put(uri, sliceData);
+        }
+        mSliceWeakDataCache.put(uri, sliceData);
         getContext().getContentResolver().notifyChange(uri, null /* content observer */);
 
         Log.d(TAG, "Built slice (" + uri + ") in: " +
@@ -255,7 +289,8 @@ public class SettingsSliceProvider extends SliceProvider {
      * {@link SliceData} is loaded from {@link SlicesDatabaseHelper.Tables#TABLE_SLICES_INDEX}.
      */
     private Slice getSliceStub(Uri uri) {
-        return new ListBuilder(getContext(), uri).build();
+        // TODO: Switch back to ListBuilder when slice loading states are fixed.
+        return new Slice.Builder(uri).build();
     }
 
     // TODO (b/70622039) remove this when the proper wifi slice is enabled.

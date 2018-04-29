@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.os.SystemProperties;
 import android.os.UserHandle;
@@ -51,7 +52,7 @@ public class AirplaneModeEnabler {
         void onAirplaneModeChanged(boolean isAirplaneModeOn);
     }
 
-    private Handler mHandler = new Handler() {
+    private Handler mHandler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -62,7 +63,8 @@ public class AirplaneModeEnabler {
         }
     };
 
-    private ContentObserver mAirplaneModeObserver = new ContentObserver(new Handler()) {
+    private ContentObserver mAirplaneModeObserver = new ContentObserver(
+            new Handler(Looper.getMainLooper())) {
         @Override
         public void onChange(boolean selfChange) {
             onAirplaneModeChanged();
