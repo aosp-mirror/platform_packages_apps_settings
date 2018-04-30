@@ -20,7 +20,6 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.content.Intent;
-import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -33,6 +32,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowPrivacySettingsUtils.class})
@@ -56,7 +57,7 @@ public class DataManagementPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mPSCD = new PrivacySettingsConfigData();
+        mPSCD = PrivacySettingsConfigData.getInstance();
         mController = new DataManagementPreferenceController(mContext, KEY);
         mPreference = new Preference(mContext);
         mTitle = "Title";
@@ -68,26 +69,25 @@ public class DataManagementPreferenceControllerTest {
         mPSCD.setBackupGray(false);
         mPSCD.setManageIntent(mIntent);
         mPSCD.setManageLabel(mTitle);
-        mController.setPrivacySettingsConfigData(mPSCD);
         mController.updateState(mPreference);
         assertThat(mPreference.getTitle())
                 .isEqualTo(mTitle);
     }
 
     @Test
-    public void getAvailabilityStatus_isAdmiUser_backupEnabled_hadManageIntent_shouldBeAvailable() {
+    public void getAvailabilityStatus_isAdmin_backupEnabled_hadManageIntent_shouldBeAvailable() {
         ShadowPrivacySettingsUtils.setIsAdminUser(true);
         mPSCD.setBackupEnabled(true);
         mPSCD.setBackupGray(false);
         mPSCD.setManageIntent(mIntent);
         mPSCD.setManageLabel(mTitle);
-        mController.setPrivacySettingsConfigData(mPSCD);
+
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 
     @Test
-    public void getAvailabilityStatus_isnotAdmiUser_shouldBeDisabledForUser() {
+    public void getAvailabilityStatus_isNotAdminUser_shouldBeDisabledForUser() {
         ShadowPrivacySettingsUtils.setIsAdminUser(false);
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
@@ -95,13 +95,13 @@ public class DataManagementPreferenceControllerTest {
 
     @Test
     public void
-    getAvailabilityStatus_isAdmiUser_backupEnabled_nullManageIntent_shouldBeDisabledUnsupported() {
+    getAvailabilityStatus_isAdminUser_backupEnabled_nullManageIntent_shouldBeDisabledUnsupported() {
         ShadowPrivacySettingsUtils.setIsAdminUser(true);
         mPSCD.setBackupEnabled(true);
         mPSCD.setBackupGray(false);
         mPSCD.setManageIntent(null);
         mPSCD.setManageLabel(mTitle);
-        mController.setPrivacySettingsConfigData(mPSCD);
+
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.DISABLED_UNSUPPORTED);
     }
