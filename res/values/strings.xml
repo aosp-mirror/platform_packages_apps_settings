@@ -1371,19 +1371,29 @@
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss">Dismiss</string>
 
     <!-- Hint shown in dialog screen when password is too short -->
-    <string name="lockpassword_password_too_short">Must be at least <xliff:g id="count" example="3">%d</xliff:g> characters</string>
+    <plurals name="lockpassword_password_too_short">
+        <item quantity="one">Must contain at least <xliff:g id="count" example="1">%d</xliff:g> character</item>
+        <item quantity="other">Must be at least <xliff:g id="count" example="3">%d</xliff:g> characters</item>
+    </plurals>
     <!-- Hint shown in dialog screen when PIN is too short -->
-    <string name="lockpassword_pin_too_short">PIN must be at least <xliff:g id="count" example="3">%d</xliff:g> digits</string>
+    <plurals name="lockpassword_pin_too_short">
+        <item quantity="one">PIN must contain at least <xliff:g id="count" example="1">%d</xliff:g> digit</item>
+        <item quantity="other">PIN must be at least <xliff:g id="count" example="3">%d</xliff:g> digits</item>
+    </plurals>
 
     <!-- Hint shown after minimum password criteria is met -->
     <string name="lockpassword_continue_label">Continue</string>
 
     <!-- Error shown in popup when password is too long -->
-    <string name="lockpassword_password_too_long">Must be fewer than
-        <xliff:g id="number" example="17">%d</xliff:g> characters</string>
+    <plurals name="lockpassword_password_too_long">
+        <item quantity="one">Must be fewer than <xliff:g id="number" example="1">%d</xliff:g> character</item>
+        <item quantity="other">Must be fewer than <xliff:g id="number" example="17">%d</xliff:g> characters</item>
+    </plurals>
     <!-- Error shown in popup when PIN is too long -->
-    <string name="lockpassword_pin_too_long">Must be fewer than
-        <xliff:g id="number" example="17">%d</xliff:g> digits</string>
+    <plurals name="lockpassword_pin_too_long">
+        <item quantity="one">Must be fewer than <xliff:g id="number" example="1">%d</xliff:g> digit</item>
+        <item quantity="other">Must be fewer than <xliff:g id="number" example="17">%d</xliff:g> digits</item>
+    </plurals>
 
     <!-- Error shown when in PIN mode and user enters a non-digit -->
     <string name="lockpassword_pin_contains_non_digits">Must contain only digits 0-9</string>

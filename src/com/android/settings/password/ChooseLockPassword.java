@@ -843,14 +843,20 @@ public class ChooseLockPassword extends SettingsActivity {
                         mPasswordMinNonLetter));
             }
             if ((errorCode & TOO_SHORT) > 0) {
-                messages.add(getString(mIsAlphaMode ?
-                        R.string.lockpassword_password_too_short
-                        : R.string.lockpassword_pin_too_short, mPasswordMinLength));
+                messages.add(getResources().getQuantityString(
+                        mIsAlphaMode
+                                ? R.plurals.lockpassword_password_too_short
+                                : R.plurals.lockpassword_pin_too_short,
+                        mPasswordMinLength,
+                        mPasswordMinLength));
             }
             if ((errorCode & TOO_LONG) > 0) {
-                messages.add(getString(mIsAlphaMode ?
-                        R.string.lockpassword_password_too_long
-                        : R.string.lockpassword_pin_too_long, mPasswordMaxLength + 1));
+                messages.add(getResources().getQuantityString(
+                        mIsAlphaMode
+                                ? R.plurals.lockpassword_password_too_long
+                                : R.plurals.lockpassword_pin_too_long,
+                        mPasswordMaxLength + 1,
+                        mPasswordMaxLength + 1));
             }
             if ((errorCode & CONTAIN_SEQUENTIAL_DIGITS) > 0) {
                 messages.add(getString(R.string.lockpassword_pin_no_sequential_digits));
