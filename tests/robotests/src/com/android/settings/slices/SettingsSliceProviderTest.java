@@ -33,6 +33,7 @@ import android.os.StrictMode;
 import android.provider.SettingsSlicesContract;
 
 import com.android.settings.wifi.WifiSliceBuilder;
+import com.android.settings.notification.ZenModeSliceBuilder;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.FakeToggleController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -76,6 +77,10 @@ public class SettingsSliceProviderTest {
 
     private static final List<Uri> SPECIAL_CASE_PLATFORM_URIS = Arrays.asList(
             WifiSliceBuilder.WIFI_URI
+    );
+
+    private static final List<Uri> SPECIAL_CASE_OEM_URIS = Arrays.asList(
+            ZenModeSliceBuilder.ZEN_MODE_URI
     );
 
     @Before
@@ -221,6 +226,7 @@ public class SettingsSliceProviderTest {
                 .build();
 
         final Collection<Uri> descendants = mProvider.onGetSliceDescendants(uri);
+        descendants.removeAll(SPECIAL_CASE_OEM_URIS);
 
         assertThat(descendants).isEmpty();
     }
@@ -248,6 +254,7 @@ public class SettingsSliceProviderTest {
                 .build();
 
         final Collection<Uri> descendants = mProvider.onGetSliceDescendants(uri);
+        descendants.removeAll(SPECIAL_CASE_OEM_URIS);
 
         assertThat(descendants).isEmpty();
     }
@@ -261,16 +268,18 @@ public class SettingsSliceProviderTest {
                 .authority(SettingsSliceProvider.SLICE_AUTHORITY)
                 .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
                 .build();
-        final Uri expectedUri = new Uri.Builder()
+        final Collection<Uri> expectedUris = new HashSet<>();
+        expectedUris.addAll(SPECIAL_CASE_OEM_URIS);
+        expectedUris.add(new Uri.Builder()
                 .scheme(SCHEME_CONTENT)
                 .authority(SettingsSliceProvider.SLICE_AUTHORITY)
                 .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
                 .appendPath(key)
-                .build();
+                .build());
 
         final Collection<Uri> descendants = mProvider.onGetSliceDescendants(uri);
 
-        assertThat(descendants).containsExactly(expectedUri);
+        assertThat(descendants).containsExactlyElementsIn(expectedUris);
     }
 
     @Test
@@ -281,16 +290,18 @@ public class SettingsSliceProviderTest {
                 .scheme(SCHEME_CONTENT)
                 .authority(SettingsSliceProvider.SLICE_AUTHORITY)
                 .build();
-        final Uri expectedUri = new Uri.Builder()
+        final Collection<Uri> expectedUris = new HashSet<>();
+        expectedUris.addAll(SPECIAL_CASE_OEM_URIS);
+        expectedUris.add(new Uri.Builder()
                 .scheme(SCHEME_CONTENT)
                 .authority(SettingsSliceProvider.SLICE_AUTHORITY)
                 .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
                 .appendPath(key)
-                .build();
+                .build());
 
         final Collection<Uri> descendants = mProvider.onGetSliceDescendants(uri);
 
-        assertThat(descendants).containsExactly(expectedUri);
+        assertThat(descendants).containsExactlyElementsIn(expectedUris);
     }
 
     @Test
@@ -349,6 +360,7 @@ public class SettingsSliceProviderTest {
                 .build();
         final Collection<Uri> expectedUris = new HashSet<>();
         expectedUris.addAll(SPECIAL_CASE_PLATFORM_URIS);
+        expectedUris.addAll(SPECIAL_CASE_OEM_URIS);
         expectedUris.add(new Uri.Builder()
                 .scheme(SCHEME_CONTENT)
                 .authority(SettingsSlicesContract.AUTHORITY)

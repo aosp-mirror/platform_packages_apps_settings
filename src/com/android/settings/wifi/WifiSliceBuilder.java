@@ -16,6 +16,7 @@
 
 package com.android.settings.wifi;
 
+import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 import static android.provider.SettingsSlicesContract.KEY_WIFI;
 
 import android.annotation.ColorInt;
@@ -78,8 +79,7 @@ public class WifiSliceBuilder {
     /**
      * Return a Wifi Slice bound to {@link #WIFI_URI}.
      * <p>
-     * Note that you should register a listener with {@link #registerIntentFilter(Context, Uri)}
-     * to get changes from Wifi.
+     * Note that you should register a listener for {@link #INTENT_FILTER} to get changes for Wifi.
      */
     public static Slice getSlice(Context context) {
         final boolean isWifiEnabled = isWifiEnabled(context);
@@ -110,7 +110,7 @@ public class WifiSliceBuilder {
      */
     public static void handleUriChange(Context context, Intent intent) {
         final WifiManager wifiManager = context.getSystemService(WifiManager.class);
-        final boolean newState = intent.getBooleanExtra(android.app.slice.Slice.EXTRA_TOGGLE_STATE,
+        final boolean newState = intent.getBooleanExtra(EXTRA_TOGGLE_STATE,
                 wifiManager.isWifiEnabled());
         wifiManager.setWifiEnabled(newState);
         // Do not notifyChange on Uri. The service takes longer to update the current value than it
