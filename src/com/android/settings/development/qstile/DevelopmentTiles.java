@@ -34,6 +34,7 @@ import android.view.WindowManagerGlobal;
 import android.widget.Toast;
 
 import com.android.internal.app.LocalePicker;
+import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.development.SystemPropPoker;
 
 public abstract class DevelopmentTiles extends TileService {
@@ -50,7 +51,18 @@ public abstract class DevelopmentTiles extends TileService {
     }
 
     public void refresh() {
-        getQsTile().setState(isEnabled() ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
+        final int state;
+        if (!DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(this)) {
+            // Reset to disabled state if dev option is off.
+            if (isEnabled()) {
+                setIsEnabled(false);
+                SystemPropPoker.getInstance().poke();
+            }
+            state = Tile.STATE_UNAVAILABLE;
+        } else {
+            state = isEnabled() ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE;
+        }
+        getQsTile().setState(state);
         getQsTile().updateTile();
     }
 
@@ -124,7 +136,8 @@ public abstract class DevelopmentTiles extends TileService {
             IWindowManager wm = WindowManagerGlobal.getWindowManagerService();
             try {
                 return wm.getAnimationScale(0) != 1;
-            } catch (RemoteException e) { }
+            } catch (RemoteException e) {
+            }
             return false;
         }
 
@@ -136,7 +149,8 @@ public abstract class DevelopmentTiles extends TileService {
                 wm.setAnimationScale(0, scale);
                 wm.setAnimationScale(1, scale);
                 wm.setAnimationScale(2, scale);
-            } catch (RemoteException e) { }
+            } catch (RemoteException e) {
+            }
         }
     }
 
