@@ -19,7 +19,6 @@ package com.android.settings.backup;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
-import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -31,6 +30,8 @@ import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import androidx.preference.SwitchPreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowPrivacySettingsUtils.class})
@@ -44,7 +45,7 @@ public class AutoRestorePreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mPSCD = new PrivacySettingsConfigData();
+        mPSCD = PrivacySettingsConfigData.getInstance();
         mController = new AutoRestorePreferenceController(mContext,
                 PrivacySettingsUtils.AUTO_RESTORE);
         mPreference = new SwitchPreference(mContext);
@@ -59,7 +60,7 @@ public class AutoRestorePreferenceControllerTest {
     public void updateState_backupEnabled_prefShouldBeEnabled() {
         mPSCD.setBackupEnabled(true);
         mPSCD.setBackupGray(false);
-        mController.setPrivacySettingsConfigData(mPSCD);
+
         mController.updateState(mPreference);
         assertThat(mPreference.isEnabled()).isTrue();
     }

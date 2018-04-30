@@ -18,20 +18,18 @@ package com.android.settings.backup;
 
 import android.content.Context;
 import android.content.Intent;
-import androidx.preference.Preference;
 
-import com.android.settings.core.BasePreferenceController;
 import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
+
+import androidx.preference.Preference;
 
 public class ConfigureAccountPreferenceController extends BasePreferenceController {
     private PrivacySettingsConfigData mPSCD;
 
     public ConfigureAccountPreferenceController(Context context, String key) {
         super(context, key);
-    }
-
-    public void setPrivacySettingsConfigData(final PrivacySettingsConfigData pData) {
-        mPSCD = pData;
+        mPSCD = PrivacySettingsConfigData.getInstance();
     }
 
     @Override

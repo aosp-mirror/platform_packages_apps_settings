@@ -20,7 +20,6 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.content.Intent;
-import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -34,6 +33,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowPrivacySettingsUtils.class})
@@ -51,7 +52,7 @@ public class ConfigureAccountPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mPSCD = new PrivacySettingsConfigData();
+        mPSCD = PrivacySettingsConfigData.getInstance();
         mController = new ConfigureAccountPreferenceController(mContext,
                 PrivacySettingsUtils.CONFIGURE_ACCOUNT);
         mPreference = new Preference(mContext);
@@ -68,7 +69,7 @@ public class ConfigureAccountPreferenceControllerTest {
         mPSCD.setBackupEnabled(true);
         mPSCD.setBackupGray(false);
         mPSCD.setConfigIntent(mIntent);
-        mController.setPrivacySettingsConfigData(mPSCD);
+
         mController.updateState(mPreference);
         assertThat(mPreference.isEnabled()).isTrue();
     }
@@ -80,7 +81,7 @@ public class ConfigureAccountPreferenceControllerTest {
         mPSCD.setBackupGray(false);
         mPSCD.setConfigIntent(mIntent);
         mPSCD.setConfigSummary(null);
-        mController.setPrivacySettingsConfigData(mPSCD);
+
         mController.updateState(mPreference);
         assertThat(mPreference.getSummary())
                 .isEqualTo(mContext.getString(R.string.backup_configure_account_default_summary));
@@ -93,7 +94,7 @@ public class ConfigureAccountPreferenceControllerTest {
         mPSCD.setBackupGray(false);
         mPSCD.setConfigIntent(mIntent);
         mPSCD.setConfigSummary(mTestSummary);
-        mController.setPrivacySettingsConfigData(mPSCD);
+
         mController.updateState(mPreference);
         assertThat(mPreference.getSummary()).isEqualTo(mTestSummary);
     }

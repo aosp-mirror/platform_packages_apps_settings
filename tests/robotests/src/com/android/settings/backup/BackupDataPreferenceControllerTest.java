@@ -19,8 +19,6 @@ package com.android.settings.backup;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
-import android.os.UserManager;
-import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -34,6 +32,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import androidx.preference.Preference;
+
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowPrivacySettingsUtils.class})
 public class BackupDataPreferenceControllerTest {
@@ -46,7 +46,7 @@ public class BackupDataPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mPSCD = new PrivacySettingsConfigData();
+        mPSCD = PrivacySettingsConfigData.getInstance();
         mController = new BackupDataPreferenceController(mContext,
                 PrivacySettingsUtils.BACKUP_DATA);
         mPreference = new Preference(mContext);
@@ -61,7 +61,7 @@ public class BackupDataPreferenceControllerTest {
     public void updateState_backupEnabled_prefShouldBeEnabled() {
         mPSCD.setBackupEnabled(true);
         mPSCD.setBackupGray(false);
-        mController.setPrivacySettingsConfigData(mPSCD);
+
         mController.updateState(mPreference);
         assertThat(mPreference.isEnabled()).isTrue();
     }
@@ -70,7 +70,7 @@ public class BackupDataPreferenceControllerTest {
     public void updateState_backupEnabled_prefShouldDisplayOnSummary() {
         mPSCD.setBackupEnabled(true);
         mPSCD.setBackupGray(false);
-        mController.setPrivacySettingsConfigData(mPSCD);
+
         mController.updateState(mPreference);
         assertThat(mPreference.getSummary())
                 .isEqualTo(mContext.getString(R.string.accessibility_feature_state_on));
@@ -80,7 +80,7 @@ public class BackupDataPreferenceControllerTest {
     public void updateState_backupDisabled_prefShouldDisplayOffSummary() {
         mPSCD.setBackupEnabled(false);
         mPSCD.setBackupGray(false);
-        mController.setPrivacySettingsConfigData(mPSCD);
+
         mController.updateState(mPreference);
         assertThat(mPreference.getSummary())
                 .isEqualTo(mContext.getString(R.string.accessibility_feature_state_off));

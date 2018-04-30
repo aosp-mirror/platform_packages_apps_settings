@@ -17,21 +17,17 @@
 package com.android.settings.backup;
 
 import android.content.Context;
-import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
 
+import androidx.preference.Preference;
+
 public class DataManagementPreferenceController extends BasePreferenceController {
     private PrivacySettingsConfigData mPSCD;
-    private boolean mManageEnabled;
 
     public DataManagementPreferenceController(Context context, String key) {
         super(context, key);
-    }
-
-    public void setPrivacySettingsConfigData(final PrivacySettingsConfigData pData) {
-        mPSCD = pData;
-        mManageEnabled = (mPSCD.getManageIntent() != null) && mPSCD.isBackupEnabled();
+        mPSCD = PrivacySettingsConfigData.getInstance();
     }
 
     @Override
@@ -39,7 +35,8 @@ public class DataManagementPreferenceController extends BasePreferenceController
         if (!PrivacySettingsUtils.isAdminUser(mContext)) {
             return DISABLED_FOR_USER;
         }
-        if (!mManageEnabled) {
+        boolean manageEnabled = (mPSCD.getManageIntent() != null) && mPSCD.isBackupEnabled();
+        if (!manageEnabled) {
             return DISABLED_UNSUPPORTED;
         }
         return AVAILABLE;
@@ -47,12 +44,13 @@ public class DataManagementPreferenceController extends BasePreferenceController
 
     @Override
     public void updateState(Preference preference) {
-        if (mManageEnabled) {
-            preference.setIntent(mPSCD.getManageIntent());
-            final String manageLabel = mPSCD.getManageLabel();
-            if (manageLabel != null) {
-                preference.setTitle(manageLabel);
-            }
+        if (!isAvailable()) {
+            return;
+        }
+        preference.setIntent(mPSCD.getManageIntent());
+        final String manageLabel = mPSCD.getManageLabel();
+        if (manageLabel != null) {
+            preference.setTitle(manageLabel);
         }
     }
 }
