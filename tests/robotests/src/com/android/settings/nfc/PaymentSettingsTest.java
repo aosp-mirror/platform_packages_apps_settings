@@ -18,6 +18,7 @@
 package com.android.settings.nfc;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -30,42 +31,66 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(shadows = PaymentSettingsTest.ShadowPaymentBackend.class)
 public class PaymentSettingsTest {
 
-    @Mock
-    Context mContext;
+    static final String PAYMENT_KEY = "nfc_payment";
+    static final String FOREGROUND_KEY = "nfc_foreground";
+
+    private Context mContext;
 
     @Mock
     private PackageManager mManager;
 
-    private PaymentSettings mFragment;
-
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mFragment = new PaymentSettings();
+        mContext = spy(RuntimeEnvironment.application);
         when(mContext.getPackageManager()).thenReturn(mManager);
     }
 
     @Test
-    public void testNonIndexableKey_NoNFC_KeyAdded() {
+    public void getNonIndexableKey_NoNFC_AllKeysAdded() {
         when(mManager.hasSystemFeature(PackageManager.FEATURE_NFC)).thenReturn(false);
 
         final List<String> niks =
-            PaymentSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
-        assertThat(niks).contains(PaymentSettings.PAYMENT_KEY);
+                PaymentSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
+
+        assertThat(niks).contains(PAYMENT_KEY);
+        assertThat(niks).contains(FOREGROUND_KEY);
     }
 
     @Test
-    public void testNonIndexableKey_NFC_NoKeyAdded() {
+    public void getNonIndexableKey_NFC_ForegroundKeyAdded() {
         when(mManager.hasSystemFeature(PackageManager.FEATURE_NFC)).thenReturn(true);
 
         final List<String> niks =
-            PaymentSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
-        assertThat(niks).isEmpty();
+                PaymentSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
+
+        assertThat(niks).contains(FOREGROUND_KEY);
+    }
+
+    @Implements(PaymentBackend.class)
+    public static class ShadowPaymentBackend {
+        private ArrayList<PaymentBackend.PaymentAppInfo> mAppInfos;
+
+        public void __constructor__(Context context) {
+            mAppInfos = new ArrayList<>();
+            mAppInfos.add(new PaymentBackend.PaymentAppInfo());
+        }
+
+        @Implementation
+        public List<PaymentBackend.PaymentAppInfo> getPaymentAppInfos() {
+            return mAppInfos;
+        }
     }
 }
