@@ -742,7 +742,7 @@
             android:name=".notification.ZenOnboardingActivity"
             android:label="@string/zen_onboarding_dnd_visual_disturbances_header"
             android:icon="@drawable/ic_settings_notifications"
-            android:theme="@style/Theme.Settings.NoActionBar"
+            android:theme="@*android:style/Theme.DeviceDefault.Settings.Dialog.NoActionBar"
             android:exported="true"
             android:taskAffinity="com.android.settings"
             android:parentActivityName="Settings">

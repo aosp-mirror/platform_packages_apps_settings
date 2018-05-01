@@ -30,6 +30,8 @@ import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_STATUS_BA
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -59,9 +61,6 @@ public class ZenOnboardingActivityTest {
     @Mock
     NotificationManager mNm;
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
-
     ZenOnboardingActivity mActivity;
 
     @Before
@@ -83,43 +82,9 @@ public class ZenOnboardingActivityTest {
     }
 
     @Test
-    public void toggleCheckBoxRecordsEvents_screenOn() {
-        mActivity.findViewById(R.id.screen_on_option).performClick();
-
-        verify(mMetricsLogger).action(MetricsEvent.ACTION_ZEN_ONBOARDING_SCREEN_ON, false);
-
-        mActivity.findViewById(R.id.screen_on_option).performClick();
-
-        verify(mMetricsLogger).action(MetricsEvent.ACTION_ZEN_ONBOARDING_SCREEN_ON, true);
-    }
-
-    @Test
-    public void toggleCheckBoxRecordsEvents_screenOff() {
-        mActivity.findViewById(R.id.screen_off_option).performClick();
-
-        verify(mMetricsLogger).action(MetricsEvent.ACTION_ZEN_ONBOARDING_SCREEN_OFF, false);
-
-        mActivity.findViewById(R.id.screen_off_option).performClick();
-
-        verify(mMetricsLogger).action(MetricsEvent.ACTION_ZEN_ONBOARDING_SCREEN_OFF, true);
-    }
-
-    @Test
-    public void save_screenOn() {
-        Policy policy = new Policy(
-                PRIORITY_CATEGORY_ALARMS, 0, 0,
-                SUPPRESSED_EFFECT_SCREEN_ON
-                        | SUPPRESSED_EFFECT_SCREEN_OFF
-                        | SUPPRESSED_EFFECT_FULL_SCREEN_INTENT
-                        | SUPPRESSED_EFFECT_LIGHTS
-                        | SUPPRESSED_EFFECT_PEEK
-                        | SUPPRESSED_EFFECT_STATUS_BAR
-                        | SUPPRESSED_EFFECT_BADGE
-                        | SUPPRESSED_EFFECT_AMBIENT
-                        | SUPPRESSED_EFFECT_NOTIFICATION_LIST);
+    public void save() {
+        Policy policy = new Policy(PRIORITY_CATEGORY_ALARMS, 0, 0, SUPPRESSED_EFFECT_SCREEN_ON);
         when(mNm.getNotificationPolicy()).thenReturn(policy);
-
-        mActivity.findViewById(R.id.screen_off_option).performClick();
 
         mActivity.save(null);
 
@@ -130,14 +95,14 @@ public class ZenOnboardingActivityTest {
 
         Policy actual = captor.getValue();
         assertThat(actual.priorityCategories).isEqualTo(PRIORITY_CATEGORY_ALARMS);
+        assertThat(actual.priorityCallSenders).isEqualTo(Policy.PRIORITY_SENDERS_STARRED);
+        assertThat(actual.priorityMessageSenders).isEqualTo(Policy.PRIORITY_SENDERS_ANY);
         assertThat(actual.suppressedVisualEffects).isEqualTo(
-                SUPPRESSED_EFFECT_SCREEN_ON | SUPPRESSED_EFFECT_NOTIFICATION_LIST
-                        | SUPPRESSED_EFFECT_BADGE | SUPPRESSED_EFFECT_STATUS_BAR
-                        | SUPPRESSED_EFFECT_PEEK);
+                Policy.getAllSuppressedVisualEffects());
     }
 
     @Test
-    public void save_screenOff() {
+    public void close() {
         Policy policy = new Policy(
                 PRIORITY_CATEGORY_ALARMS, PRIORITY_SENDERS_ANY, 0,
                 SUPPRESSED_EFFECT_SCREEN_ON
@@ -151,72 +116,10 @@ public class ZenOnboardingActivityTest {
                         | SUPPRESSED_EFFECT_NOTIFICATION_LIST);
         when(mNm.getNotificationPolicy()).thenReturn(policy);
 
-        mActivity.findViewById(R.id.screen_on_option).performClick();
+        mActivity.close(null);
 
-        mActivity.save(null);
+        verify(mMetricsLogger).action(MetricsEvent.ACTION_ZEN_ONBOARDING_KEEP_CURRENT_SETTINGS);
 
-        verify(mMetricsLogger).action(MetricsEvent.ACTION_ZEN_ONBOARDING_OK);
-
-        ArgumentCaptor<Policy> captor = ArgumentCaptor.forClass(Policy.class);
-        verify(mNm).setNotificationPolicy(captor.capture());
-
-        Policy actual = captor.getValue();
-        assertThat(actual.priorityCallSenders).isEqualTo(PRIORITY_SENDERS_ANY);
-        assertThat(actual.suppressedVisualEffects).isEqualTo(
-                SUPPRESSED_EFFECT_SCREEN_OFF | SUPPRESSED_EFFECT_FULL_SCREEN_INTENT
-                        | SUPPRESSED_EFFECT_LIGHTS | SUPPRESSED_EFFECT_AMBIENT);
-    }
-
-    @Test
-    public void save_none() {
-        Policy policy = new Policy(0, 0, 0,
-                SUPPRESSED_EFFECT_SCREEN_ON
-                        | SUPPRESSED_EFFECT_SCREEN_OFF
-                        | SUPPRESSED_EFFECT_FULL_SCREEN_INTENT
-                        | SUPPRESSED_EFFECT_LIGHTS
-                        | SUPPRESSED_EFFECT_PEEK
-                        | SUPPRESSED_EFFECT_STATUS_BAR
-                        | SUPPRESSED_EFFECT_BADGE
-                        | SUPPRESSED_EFFECT_AMBIENT
-                        | SUPPRESSED_EFFECT_NOTIFICATION_LIST);
-        when(mNm.getNotificationPolicy()).thenReturn(policy);
-
-        mActivity.findViewById(R.id.screen_on_option).performClick();
-        mActivity.findViewById(R.id.screen_off_option).performClick();
-
-        mActivity.save(null);
-
-        verify(mMetricsLogger).action(MetricsEvent.ACTION_ZEN_ONBOARDING_OK);
-
-        ArgumentCaptor<Policy> captor = ArgumentCaptor.forClass(Policy.class);
-        verify(mNm).setNotificationPolicy(captor.capture());
-
-        Policy actual = captor.getValue();
-        assertThat(actual.suppressedVisualEffects).isEqualTo(0);
-    }
-
-    @Test
-    public void save_all() {
-        Policy policy = new Policy(0, 0, 0, 0);
-        when(mNm.getNotificationPolicy()).thenReturn(policy);
-
-        mActivity.save(null);
-
-        verify(mMetricsLogger).action(MetricsEvent.ACTION_ZEN_ONBOARDING_OK);
-
-        ArgumentCaptor<Policy> captor = ArgumentCaptor.forClass(Policy.class);
-        verify(mNm).setNotificationPolicy(captor.capture());
-
-        Policy actual = captor.getValue();
-        assertThat(actual.suppressedVisualEffects).isEqualTo(
-                SUPPRESSED_EFFECT_SCREEN_ON
-                        | SUPPRESSED_EFFECT_SCREEN_OFF
-                        | SUPPRESSED_EFFECT_FULL_SCREEN_INTENT
-                        | SUPPRESSED_EFFECT_LIGHTS
-                        | SUPPRESSED_EFFECT_PEEK
-                        | SUPPRESSED_EFFECT_STATUS_BAR
-                        | SUPPRESSED_EFFECT_BADGE
-                        | SUPPRESSED_EFFECT_AMBIENT
-                        | SUPPRESSED_EFFECT_NOTIFICATION_LIST);
+        verify(mNm, never()).setNotificationPolicy(any());
     }
 }
