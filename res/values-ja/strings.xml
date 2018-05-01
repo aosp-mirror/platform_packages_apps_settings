@@ -292,8 +292,7 @@
     <string name="forget" msgid="1400428660472591263">"削除"</string>
     <string name="save" msgid="879993180139353333">"保存"</string>
     <string name="done" msgid="6942539184162713160">"完了"</string>
-    <!-- no translation found for apply (1577045208487259229) -->
-    <skip />
+    <string name="apply" msgid="1577045208487259229">"適用"</string>
     <string name="settings_label" msgid="1626402585530130914">"設定"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"設定"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"設定のショートカット"</string>
@@ -506,7 +505,7 @@
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"このスマートフォンが他人に無断で使用されるのを防ぐには、端末保護機能を有効にします。利用する画面ロックを選択してください。"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"予備の画面ロック方式を選択してください"</string>
     <string name="setup_lock_settings_options_button_label" msgid="8511153243629402929">"画面ロックの方法"</string>
-    <string name="setup_lock_settings_options_dialog_title" msgid="5058207955455973917">"画面ロックの種類"</string>
+    <string name="setup_lock_settings_options_dialog_title" msgid="5058207955455973917">"画面ロックの方法"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"画面ロック"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_immediately" msgid="5967714169972542586">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / スリープ直後"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_after_timeout" msgid="4696710373399258413">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / スリープから <xliff:g id="TIMEOUT_STRING">%2$s</xliff:g>"</string>
@@ -821,7 +820,7 @@
     <string name="wifi_setup_wps" msgid="8128702488486283957">"自動設定（WPS）"</string>
     <string name="wifi_settings_scanning_required_title" msgid="3815269816331500375">"Wi‑Fi のスキャンを ON にする"</string>
     <string name="wifi_settings_scanning_required_summary" msgid="6352918945128328916">"Wi‑Fi を自動的に ON にするには、まず Wi‑Fi のスキャンを ON にしてください。"</string>
-    <string name="wifi_settings_scanning_required_info" msgid="3155631874578023647">"Wi-Fi のスキャンでは、アプリやサービスに対し、Wi‑Fi が OFF の場合でも、常に Wi-Fi ネットワークをスキャンすることを許可します。たとえば、位置情報を使用する機能やサービスの改善に役立ちます。"</string>
+    <string name="wifi_settings_scanning_required_info" msgid="3155631874578023647">"Wi-Fi のスキャンによって、アプリやサービスに対し、Wi‑Fi が OFF の場合でも常に Wi-Fi ネットワークをスキャンすることを許可します。たとえば、位置情報を使用する機能やサービスの改善に役立ちます。"</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1364287182804820646">"ON にする"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="5527653791584018157">"Wi‑Fi のスキャンを ON にしました"</string>
     <string name="wifi_show_advanced" msgid="3409422789616520979">"詳細設定"</string>
@@ -1091,7 +1090,7 @@
     <string name="night_display_text" msgid="1837277457033025056">"読書灯を利用すると画面が黄味がかった色になります。薄明かりの下でも画面を見やすくなり、寝付きを良くする効果も期待できます。"</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"スケジュール"</string>
     <string name="night_display_auto_mode_never" msgid="2483761922928753400">"使用しない"</string>
-    <string name="night_display_auto_mode_custom" msgid="2379394568898721765">"指定した日時に ON"</string>
+    <string name="night_display_auto_mode_custom" msgid="2379394568898721765">"指定した時間に ON"</string>
     <string name="night_display_auto_mode_twilight" msgid="589042813708244059">"日の入りから日の出まで ON"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"開始時間"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"終了時間"</string>
@@ -2311,7 +2310,7 @@
     <string name="process_kernel_label" msgid="3916858646836739323">"Android OS"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"メディアサーバー"</string>
     <string name="process_dex2oat_label" msgid="2592408651060518226">"アプリの最適化"</string>
-    <string name="battery_saver" msgid="8172485772238572153">"バッテリー セーバー"</string>
+    <string name="battery_saver" msgid="8172485772238572153">"バッテリーセーバー"</string>
     <string name="battery_saver_auto_title" msgid="8368709389419695611">"自動的に ON"</string>
     <string name="battery_saver_seekbar_title" msgid="4705356758573183963">"しきい値: <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_seekbar_title_placeholder" msgid="1138980155985636295">"ON にする"</string>
@@ -3080,7 +3079,22 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"視覚的な通知のブロック"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"視覚的な割り込みを許可"</string>
-    <string name="zen_mode_what_to_block_title" msgid="7078190101807944693">"視覚的な通知をブロックする"</string>
+    <string name="zen_mode_restrict_notifications_screen_title" msgid="9027437428488279426">"通知の制限"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"通知"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"マナーモードが ON のとき"</string>
+    <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"通知のミュート"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"通知は表示されますが、通知音やバイブレーションはミュートされます"</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"スマートフォンに新しい通知が届いても、通知音やバイブレーションは作動しません"</string>
+    <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"通知の非表示とミュート"</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"通知はまったく表示されません"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"マナーモードが ON のときに新しい通知や既存の通知は表示されません。基本的なスマートフォンの操作やステータスに必要な通知は表示されます。"</string>
+    <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"カスタム"</string>
+    <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"カスタム設定の有効化"</string>
+    <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"カスタム設定の削除"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"表示"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"一部非表示"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"非表示"</string>
+    <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"カスタムの制限"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"画面が ON のとき"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"画面が OFF のとき"</string>
     <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"音とバイブレーションをミュートする"</string>

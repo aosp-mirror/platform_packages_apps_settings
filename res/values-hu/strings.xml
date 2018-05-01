@@ -292,8 +292,7 @@
     <string name="forget" msgid="1400428660472591263">"Elfelejt"</string>
     <string name="save" msgid="879993180139353333">"Mentés"</string>
     <string name="done" msgid="6942539184162713160">"Kész"</string>
-    <!-- no translation found for apply (1577045208487259229) -->
-    <skip />
+    <string name="apply" msgid="1577045208487259229">"Alkalmaz"</string>
     <string name="settings_label" msgid="1626402585530130914">"Beállítások"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Beállítások"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Beállítások parancsikon"</string>
@@ -505,8 +504,8 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Az eszköz védelmi funkcióinak aktiválásával megakadályozhatja, hogy mások az Ön engedélye nélkül használják az eszközt. Válassza ki a használni kívánt képernyőlezárási módot."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Az eszköz védelmi funkcióinak aktiválásával megakadályozhatja, hogy mások az Ön engedélye nélkül használják a telefont. Válassza ki a használni kívánt képernyőlezárási módot."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Válassza ki a biztonsági képernyő-zárolási módszert"</string>
-    <string name="setup_lock_settings_options_button_label" msgid="8511153243629402929">"A képernyőzár beállításai"</string>
-    <string name="setup_lock_settings_options_dialog_title" msgid="5058207955455973917">"A képernyőzár beállításai"</string>
+    <string name="setup_lock_settings_options_button_label" msgid="8511153243629402929">"A képernyőzár feloldása"</string>
+    <string name="setup_lock_settings_options_dialog_title" msgid="5058207955455973917">"A képernyőzár feloldása"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Képernyő zárolása"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_immediately" msgid="5967714169972542586">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / Közvetlenül az alvó mód kezdete után"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_after_timeout" msgid="4696710373399258413">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / Az alvó mód kezdete után ennyivel: <xliff:g id="TIMEOUT_STRING">%2$s</xliff:g>"</string>
@@ -2408,7 +2407,7 @@
     <string name="user_credentials_summary" msgid="7271228342106080167">"A tárolt hitelesítési adatok megtekintése és módosítása"</string>
     <string name="advanced_security_title" msgid="2434776238010578865">"Speciális"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"Tárhelytípus"</string>
-    <string name="credential_storage_type_hardware" msgid="6077193544333904427">"hardveresen támogatott"</string>
+    <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Hardveresen támogatott"</string>
     <string name="credential_storage_type_software" msgid="4403117271207715378">"Kizárólag szoftveres"</string>
     <string name="credentials_settings_not_available" msgid="7968275634486624215">"A hitelesítési adatok nem érhetők el ennél a felhasználónál"</string>
     <string name="credential_for_vpn_and_apps" msgid="4168197158768443365">"VPN-hez és alkalmazásokhoz telepítve"</string>
@@ -3078,7 +3077,22 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Megjelenő értesítések tiltása"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"Vizuális jelek engedélyezése"</string>
-    <string name="zen_mode_what_to_block_title" msgid="7078190101807944693">"Megjelenő értesítések tiltása"</string>
+    <string name="zen_mode_restrict_notifications_screen_title" msgid="9027437428488279426">"Értesítések korlátozása"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"Értesítések"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"Ha a „Ne zavarjanak” mód aktív"</string>
+    <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"Értesítések némítása"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"Értesítések megjelenítése, de a hangok és a rezgés kikapcsolása"</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"Amikor új értesítés érkezik, a telefon nem ad ki hangot, és nem rezeg"</string>
+    <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"Értesítések elrejtése és némítása"</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"Egyáltalán nem jelennek meg értesítések"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"Ha bekapcsolja a „Ne zavarjanak” módot, nem jelennek meg az új és a már meglévő értesítések. A telefon alapvető funkcióival és állapotával kapcsolatos értesítések azonban így is megjelennek."</string>
+    <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"Egyéni"</string>
+    <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"Egyéni beállítás engedélyezése"</string>
+    <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"Egyéni beállítás törlése"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"Megjelenítve"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"Részben elrejtve"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"Elrejtve"</string>
+    <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"Egyéni korlátozások"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"Ha a képernyő be van kapcsolva"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"Ha a képernyő ki van kapcsolva"</string>
     <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"Hangok és rezgések némítása"</string>
