@@ -101,4 +101,12 @@ public class ExternalSourceDetailPreferenceControllerTest {
 
         verify(mPreference).setSummary(summary);
     }
+
+    @Test
+    public void isPotentialAppSource_nullPackageInfo_shouldNotCrash() {
+        when(mUserManager.isManagedProfile()).thenReturn(false);
+
+        mController.isPotentialAppSource();
+        // no crash
+    }
 }
