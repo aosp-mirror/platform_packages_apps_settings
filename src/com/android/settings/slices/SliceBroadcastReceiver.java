@@ -18,18 +18,16 @@ package com.android.settings.slices;
 
 import static com.android.settings.slices.SettingsSliceProvider.ACTION_SLIDER_CHANGED;
 import static com.android.settings.slices.SettingsSliceProvider.ACTION_TOGGLE_CHANGED;
-import static com.android.settings.slices.SettingsSliceProvider.ACTION_WIFI_CHANGED;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_KEY;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_PLATFORM_DEFINED;
 import static com.android.settings.wifi.calling.WifiCallingSliceHelper.ACTION_WIFI_CALLING_CHANGED;
+import static com.android.settings.wifi.WifiSliceBuilder.ACTION_WIFI_SLICE_CHANGED;
 
 import android.app.slice.Slice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.net.wifi.WifiManager;
-import android.os.Handler;
 import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
 import android.util.Log;
@@ -40,6 +38,8 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SliderPreferenceController;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.wifi.WifiSliceBuilder;
+import com.android.settingslib.SliceBroadcastRelay;
 
 /**
  * Responds to actions performed on slices and notifies slices of updates in state changes.
@@ -67,25 +67,21 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
                 final int newPosition = intent.getIntExtra(Slice.EXTRA_RANGE_VALUE, -1);
                 handleSliderAction(context, key, newPosition, isPlatformSlice);
                 break;
-            case ACTION_WIFI_CHANGED:
-                WifiManager wm = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-                boolean newState = intent.getBooleanExtra(Slice.EXTRA_TOGGLE_STATE,
-                        wm.isWifiEnabled());
-                wm.setWifiEnabled(newState);
-                // Wait a bit for wifi to update (TODO: is there a better way to do this?)
-                Handler h = new Handler();
-                h.postDelayed(() -> {
-                    Uri uri = SliceBuilderUtils.getUri(SettingsSliceProvider.PATH_WIFI,
-                            false /* isPlatformSlice */);
-                    context.getContentResolver().notifyChange(uri, null);
-                }, 1000);
+            case ACTION_WIFI_SLICE_CHANGED:
+                WifiSliceBuilder.handleUriChange(context, intent);
                 break;
             case ACTION_WIFI_CALLING_CHANGED:
                 FeatureFactory.getFactory(context)
-                      .getSlicesFeatureProvider()
-                      .getNewWifiCallingSliceHelper(context)
-                      .handleWifiCallingChanged(intent);
+                        .getSlicesFeatureProvider()
+                        .getNewWifiCallingSliceHelper(context)
+                        .handleWifiCallingChanged(intent);
                 break;
+            default:
+                final String uriString = intent.getStringExtra(SliceBroadcastRelay.EXTRA_URI);
+                if (!TextUtils.isEmpty(uriString)) {
+                    final Uri uri = Uri.parse(uriString);
+                    context.getContentResolver().notifyChange(uri, null /* observer */);
+                }
         }
     }
 

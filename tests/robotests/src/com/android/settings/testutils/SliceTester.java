@@ -35,6 +35,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import androidx.slice.Slice;
 import androidx.slice.SliceItem;
@@ -211,7 +212,7 @@ public class SliceTester {
         assertKeywords(metadata, sliceData);
     }
 
-    private static void assertTitle(List<SliceItem> sliceItems, String title) {
+    public static void assertTitle(List<SliceItem> sliceItems, String title) {
         boolean hasTitle = false;
         for (SliceItem item : sliceItems) {
             List<SliceItem> titleItems = SliceQuery.findAll(item, FORMAT_TEXT, HINT_TITLE,
@@ -230,8 +231,9 @@ public class SliceTester {
 
     private static void assertKeywords(SliceMetadata metadata, SliceData data) {
         final List<String> keywords = metadata.getSliceKeywords();
-        final Set<String> expectedKeywords = new HashSet<>(
-                Arrays.asList(data.getKeywords().split(",")));
+        final Set<String> expectedKeywords = Arrays.stream(data.getKeywords().split(","))
+                .map(s -> s = s.trim())
+                .collect(Collectors.toSet());
         expectedKeywords.add(data.getTitle());
         expectedKeywords.add(data.getScreenTitle().toString());
         assertThat(keywords).containsExactlyElementsIn(expectedKeywords);

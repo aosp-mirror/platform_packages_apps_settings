@@ -20,6 +20,7 @@ import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 
 import android.app.PendingIntent;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -38,6 +39,7 @@ import androidx.slice.builders.SliceAction;
 import com.android.ims.ImsManager;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settings.slices.SliceBroadcastReceiver;
 import com.android.settings.slices.SliceBuilderUtils;
 
@@ -77,14 +79,18 @@ public class WifiCallingSliceHelper {
             "android.settings.WIFI_CALLING_SETTINGS";
 
     /**
+     * Full {@link Uri} for the Wifi Calling Slice.
+     */
+    public static final Uri WIFI_CALLING_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(PATH_WIFI_CALLING)
+            .build();
+
+    /**
      * Timeout for querying wifi calling setting from ims manager.
      */
     private static final int TIMEOUT_MILLIS = 2000;
-
-    /**
-     * Time for which data contained in the slice can remain fresh.
-     */
-    private static final int SLICE_TTL_MILLIS = 60000;
 
     protected SubscriptionManager mSubscriptionManager;
     private final Context mContext;
@@ -182,7 +188,7 @@ public class WifiCallingSliceHelper {
 
         final IconCompat icon = IconCompat.createWithResource(mContext, R.drawable.wifi_signal);
         final String title = mContext.getString(R.string.wifi_calling_settings_title);
-        return new ListBuilder(mContext, sliceUri, SLICE_TTL_MILLIS)
+        return new ListBuilder(mContext, sliceUri, ListBuilder.INFINITY)
                 .setColor(R.color.material_blue_500)
                 .addRow(b -> b
                         .setTitle(title)
@@ -260,7 +266,7 @@ public class WifiCallingSliceHelper {
     private Slice getNonActionableWifiCallingSlice(String title, String subtitle, Uri sliceUri,
             PendingIntent primaryActionIntent) {
         final IconCompat icon = IconCompat.createWithResource(mContext, R.drawable.wifi_signal);
-        return new ListBuilder(mContext, sliceUri, SLICE_TTL_MILLIS)
+        return new ListBuilder(mContext, sliceUri, ListBuilder.INFINITY)
                 .setColor(R.color.material_blue_500)
                 .addRow(b -> b
                         .setTitle(title)
