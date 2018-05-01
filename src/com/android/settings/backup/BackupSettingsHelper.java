@@ -24,13 +24,14 @@ import android.content.Intent;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
-import androidx.annotation.VisibleForTesting;
 import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.Settings.PrivacySettingsActivity;
 
 import java.net.URISyntaxException;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Helper class for {@link BackupSettingsActivity} that interacts with {@link IBackupManager}.

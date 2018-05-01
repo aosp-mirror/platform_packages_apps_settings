@@ -22,11 +22,12 @@ import android.content.Context;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.provider.Settings;
-import androidx.preference.SwitchPreference;
-import androidx.preference.Preference;
 import android.util.Log;
 
 import com.android.settings.core.TogglePreferenceController;
+
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
 
 public class AutoRestorePreferenceController extends TogglePreferenceController {
     private static final String TAG = "AutoRestorePrefCtrler";
@@ -36,10 +37,7 @@ public class AutoRestorePreferenceController extends TogglePreferenceController 
 
     public AutoRestorePreferenceController(Context context, String key) {
         super(context, key);
-    }
-
-    public void setPrivacySettingsConfigData(final PrivacySettingsConfigData pData) {
-        mPSCD = pData;
+        mPSCD = PrivacySettingsConfigData.getInstance();
     }
 
     @Override

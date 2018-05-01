@@ -65,15 +65,10 @@ public class PrivacySettings extends DashboardFragment {
     }
 
     private void updatePrivacySettingsConfigData(final Context context) {
-        final PrivacySettingsConfigData pData = new PrivacySettingsConfigData();
         if (PrivacySettingsUtils.isAdminUser(context)) {
-            PrivacySettingsUtils.updatePrivacyBuffer(context, pData);
+            PrivacySettingsUtils.updatePrivacyBuffer(context,
+                    PrivacySettingsConfigData.getInstance());
         }
-
-        use(BackupDataPreferenceController.class).setPrivacySettingsConfigData(pData);
-        use(ConfigureAccountPreferenceController.class).setPrivacySettingsConfigData(pData);
-        use(DataManagementPreferenceController.class).setPrivacySettingsConfigData(pData);
-        use(AutoRestorePreferenceController.class).setPrivacySettingsConfigData(pData);
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

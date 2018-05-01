@@ -19,6 +19,9 @@ package com.android.settings.backup;
 import android.content.Intent;
 
 public class PrivacySettingsConfigData {
+
+    private static PrivacySettingsConfigData sInstance;
+
     private boolean mBackupEnabled;
     private boolean mBackupGray;
     private Intent mConfigIntent;
@@ -26,13 +29,20 @@ public class PrivacySettingsConfigData {
     private Intent mManageIntent;
     private String mManageLabel;
 
-    public PrivacySettingsConfigData() {
+    private PrivacySettingsConfigData() {
         mBackupEnabled = false;
         mBackupGray = false;
         mConfigIntent = null;
         mConfigSummary = null;
         mManageIntent = null;
         mManageLabel = null;
+    }
+
+    public static PrivacySettingsConfigData getInstance() {
+        if (sInstance == null) {
+            sInstance = new PrivacySettingsConfigData();
+        }
+        return sInstance;
     }
 
     public boolean isBackupEnabled() {

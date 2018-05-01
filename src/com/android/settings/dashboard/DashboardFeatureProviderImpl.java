@@ -133,6 +133,9 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     @Override
     public void bindPreferenceToTile(Activity activity, int sourceMetricsCategory, Preference pref,
             Tile tile, String key, int baseOrder) {
+        if (pref == null) {
+            return;
+        }
         pref.setTitle(tile.title);
         if (!TextUtils.isEmpty(key)) {
             pref.setKey(key);
@@ -239,7 +242,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         if (tile.icon != null) {
             preference.setIcon(tile.icon.loadDrawable(preference.getContext()));
         } else if (tile.metaData != null
-                && tile.metaData.containsKey(META_DATA_PREFERENCE_ICON_URI))
+                && tile.metaData.containsKey(META_DATA_PREFERENCE_ICON_URI)) {
             ThreadUtils.postOnBackgroundThread(() -> {
                 String packageName = null;
                 if (tile.intent != null) {
@@ -259,11 +262,11 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                     return;
                 }
                 final Icon icon = Icon.createWithResource(iconInfo.first, iconInfo.second);
-                ThreadUtils.postOnMainThread(() -> {
-                            preference.setIcon(icon.loadDrawable(preference.getContext()));
-                    }
+                ThreadUtils.postOnMainThread(() ->
+                        preference.setIcon(icon.loadDrawable(preference.getContext()))
                 );
             });
+        }
     }
 
     private void launchIntentOrSelectProfile(Activity activity, Tile tile, Intent intent,
