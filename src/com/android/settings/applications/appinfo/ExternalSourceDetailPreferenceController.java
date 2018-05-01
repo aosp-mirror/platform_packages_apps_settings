@@ -17,6 +17,7 @@
 package com.android.settings.applications.appinfo;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
 import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
@@ -57,9 +58,13 @@ public class ExternalSourceDetailPreferenceController extends AppInfoPreferenceC
 
     @VisibleForTesting
     boolean isPotentialAppSource() {
+        final PackageInfo packageInfo = mParent.getPackageInfo();
+        if (packageInfo == null) {
+            return false;
+        }
         AppStateInstallAppsBridge.InstallAppsState appState =
                 new AppStateInstallAppsBridge(mContext, null, null).createInstallAppsStateFor(
-                        mPackageName, mParent.getPackageInfo().applicationInfo.uid);
+                        mPackageName, packageInfo.applicationInfo.uid);
         return appState.isPotentialAppSource();
     }
 
