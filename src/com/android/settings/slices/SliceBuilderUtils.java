@@ -39,7 +39,6 @@ import android.util.Pair;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
@@ -47,6 +46,7 @@ import com.android.settings.core.SliderPreferenceController;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.DatabaseIndexingUtils;
+import com.android.settingslib.SliceBroadcastRelay;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import android.support.v4.graphics.drawable.IconCompat;
@@ -54,6 +54,7 @@ import android.support.v4.graphics.drawable.IconCompat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
@@ -345,7 +346,10 @@ public class SliceBuilderUtils {
         final String keywordString = data.getKeywords();
         if (keywordString != null) {
             final String[] keywordArray = keywordString.split(",");
-            keywords.addAll(Arrays.asList(keywordArray));
+            final List<String> strippedKeywords = Arrays.stream(keywordArray)
+                    .map(s -> s = s.trim())
+                    .collect(Collectors.toList());
+            keywords.addAll(strippedKeywords);
         }
 
         return keywords;
