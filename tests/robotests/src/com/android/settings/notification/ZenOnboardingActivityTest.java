@@ -17,6 +17,7 @@
 package com.android.settings.notification;
 
 import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_ALARMS;
+import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_REPEAT_CALLERS;
 import static android.app.NotificationManager.Policy.PRIORITY_SENDERS_ANY;
 import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_AMBIENT;
 import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_BADGE;
@@ -94,7 +95,8 @@ public class ZenOnboardingActivityTest {
         verify(mNm).setNotificationPolicy(captor.capture());
 
         Policy actual = captor.getValue();
-        assertThat(actual.priorityCategories).isEqualTo(PRIORITY_CATEGORY_ALARMS);
+        assertThat(actual.priorityCategories).isEqualTo(PRIORITY_CATEGORY_ALARMS
+                | PRIORITY_CATEGORY_REPEAT_CALLERS);
         assertThat(actual.priorityCallSenders).isEqualTo(Policy.PRIORITY_SENDERS_STARRED);
         assertThat(actual.priorityMessageSenders).isEqualTo(Policy.PRIORITY_SENDERS_ANY);
         assertThat(actual.suppressedVisualEffects).isEqualTo(
