@@ -18,6 +18,7 @@ package com.android.settings.accessibility;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -38,10 +39,15 @@ import com.android.settingslib.search.SearchIndexable;
 import java.util.Arrays;
 import java.util.List;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 @SearchIndexable
 public final class MagnificationPreferenceFragment extends DashboardFragment {
+    @VisibleForTesting
+    static final int ON = 1;
+    @VisibleForTesting
+    static final int OFF = 0;
 
     private static final String TAG = "MagnificationPreferenceFragment";
 
@@ -133,6 +139,15 @@ public final class MagnificationPreferenceFragment extends DashboardFragment {
             }
         }
         return null;
+    }
+
+    static boolean isChecked(ContentResolver contentResolver, String settingsKey) {
+        return Settings.Secure.getInt(contentResolver, settingsKey, OFF) == ON;
+    }
+
+    static boolean setChecked(ContentResolver contentResolver, String settingsKey,
+            boolean isChecked) {
+        return Settings.Secure.putInt(contentResolver, settingsKey, isChecked ? ON : OFF);
     }
 
     /**
