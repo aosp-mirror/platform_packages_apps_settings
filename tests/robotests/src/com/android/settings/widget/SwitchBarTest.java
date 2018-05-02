@@ -26,6 +26,7 @@ import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -81,5 +82,17 @@ public class SwitchBarTest {
         assertThat(mBar.getBackground()).isEqualTo(new ColorDrawable(COLOR_BACKGROUND_ACTIVATED));
         assertThat(((TextView) mBar.findViewById(R.id.switch_text)).getText())
                 .isEqualTo(mContext.getString(onText));
+    }
+
+    @Test
+    public void disabledByAdmin_shouldDelegateToRestrictedIcon() {
+        mBar.setDisabledByAdmin(new EnforcedAdmin());
+        assertThat(mBar.getDelegatingView().getId()).isEqualTo(R.id.restricted_icon);
+    }
+
+    @Test
+    public void notDisabledByAdmin_shouldDelegateToSwitch() {
+        mBar.setDisabledByAdmin(null);
+        assertThat(mBar.getDelegatingView().getId()).isEqualTo(R.id.switch_widget);
     }
 }
