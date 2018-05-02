@@ -123,7 +123,7 @@ public class ResetNetwork extends InstrumentedFragment {
         new SubSettingLauncher(getContext())
                 .setDestination(ResetNetworkConfirm.class.getName())
                 .setArguments(args)
-                .setTitle(R.string.reset_network_confirm_title)
+                .setTitleRes(R.string.reset_network_confirm_title)
                 .setSourceMetricsCategory(getMetricsCategory())
                 .launch();
     }

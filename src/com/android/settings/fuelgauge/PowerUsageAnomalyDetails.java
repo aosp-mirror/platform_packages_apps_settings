@@ -70,7 +70,7 @@ public class PowerUsageAnomalyDetails extends DashboardFragment implements
 
         new SubSettingLauncher(caller)
                 .setDestination(PowerUsageAnomalyDetails.class.getName())
-                .setTitle(R.string.battery_abnormal_details_title)
+                .setTitleRes(R.string.battery_abnormal_details_title)
                 .setArguments(args)
                 .setSourceMetricsCategory(fragment.getMetricsCategory())
                 .launch();

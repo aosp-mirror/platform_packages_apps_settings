@@ -82,7 +82,7 @@ public class ConnectedUsbDeviceUpdater {
             // New version - uses a separate screen.
             new SubSettingLauncher(mFragment.getContext())
                     .setDestination(UsbDetailsFragment.class.getName())
-                    .setTitle(R.string.device_details_title)
+                    .setTitleRes(R.string.device_details_title)
                     .setSourceMetricsCategory(mFragment.getMetricsCategory())
                     .launch();
             return true;

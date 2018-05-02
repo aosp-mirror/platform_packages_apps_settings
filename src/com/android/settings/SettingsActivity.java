@@ -200,7 +200,7 @@ public class SettingsActivity extends SettingsDrawerActivity
                 .setSourceMetricsCategory(caller instanceof Instrumentable
                         ? ((Instrumentable) caller).getMetricsCategory()
                         : Instrumentable.METRICS_CATEGORY_UNKNOWN)
-                .setTitle(-1)
+                .setTitleRes(-1)
                 .launch();
         return true;
     }

@@ -89,7 +89,7 @@ public class BatteryOptimizationPreferenceController extends AbstractPreferenceC
         new SubSettingLauncher(mSettingsActivity)
                 .setDestination(ManageApplications.class.getName())
                 .setArguments(args)
-                .setTitle(R.string.high_power_apps)
+                .setTitleRes(R.string.high_power_apps)
                 .setSourceMetricsCategory(mFragment.getMetricsCategory())
                 .launch();
 

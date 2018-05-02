@@ -518,8 +518,8 @@ public class DataUsageSummaryPreferenceTest {
         assertThat((NetworkTemplate) actual.getParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE))
                 .isEqualTo(NetworkTemplate.buildTemplateWifiWildcard());
 
-        assertThat(startedIntent.getCharSequenceExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE))
-                .isEqualTo(mContext.getString(R.string.wifi_data_usage));
+        assertThat(startedIntent.getIntExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, 0))
+                .isEqualTo(R.string.wifi_data_usage);
     }
 
     private void bindViewHolder() {

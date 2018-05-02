@@ -156,7 +156,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
         new SubSettingLauncher(caller)
                 .setDestination(AdvancedPowerUsageDetail.class.getName())
-                .setTitle(R.string.battery_details_title)
+                .setTitleRes(R.string.battery_details_title)
                 .setArguments(args)
                 .setSourceMetricsCategory(fragment.getMetricsCategory())
                 .setUserHandle(new UserHandle(getUserIdToLaunchAdvancePowerUsageDetail(sipper)))
@@ -192,7 +192,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
         new SubSettingLauncher(caller)
                 .setDestination(AdvancedPowerUsageDetail.class.getName())
-                .setTitle(R.string.battery_details_title)
+                .setTitleRes(R.string.battery_details_title)
                 .setArguments(args)
                 .setSourceMetricsCategory(fragment.getMetricsCategory())
                 .launch();

@@ -63,7 +63,7 @@ public abstract class DefaultAppShortcutPreferenceControllerBase extends BasePre
             new SubSettingLauncher(mContext)
                     .setDestination(DefaultAppSettings.class.getName())
                     .setArguments(bundle)
-                    .setTitle(R.string.configure_apps)
+                    .setTitleRes(R.string.configure_apps)
                     .setSourceMetricsCategory(MetricsProto.MetricsEvent.VIEW_UNKNOWN)
                     .launch();
             return true;

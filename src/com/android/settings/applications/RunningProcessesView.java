@@ -416,7 +416,7 @@ public class RunningProcessesView extends FrameLayout
             new SubSettingLauncher(getContext())
                     .setDestination(RunningServiceDetails.class.getName())
                     .setArguments(args)
-                    .setTitle(R.string.runningservicedetails_settings_title)
+                    .setTitleRes(R.string.runningservicedetails_settings_title)
                     .setSourceMetricsCategory(mOwner.getMetricsCategory())
                     .launch();
         }

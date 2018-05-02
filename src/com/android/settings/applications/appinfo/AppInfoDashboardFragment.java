@@ -556,7 +556,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
         new SubSettingLauncher(caller.getContext())
                 .setDestination(fragment.getName())
                 .setArguments(args)
-                .setTitle(title)
+                .setTitleRes(title)
                 .setResultListener(caller, SUB_INFO_FRAGMENT)
                 .setSourceMetricsCategory(caller.getMetricsCategory())
                 .launch();

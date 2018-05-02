@@ -62,7 +62,7 @@ public class DatabaseIndexingUtils {
         final Intent searchDestination = new SubSettingLauncher(context)
                 .setDestination(className)
                 .setArguments(args)
-                .setTitle(screenTitle)
+                .setTitleText(screenTitle)
                 .setSourceMetricsCategory(sourceMetricsCategory)
                 .toIntent();
         searchDestination.putExtra(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, key)

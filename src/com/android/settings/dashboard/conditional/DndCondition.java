@@ -107,7 +107,7 @@ public class DndCondition extends Condition {
         new SubSettingLauncher(mManager.getContext())
                 .setDestination(ZenModeSettings.class.getName())
                 .setSourceMetricsCategory(MetricsEvent.DASHBOARD_SUMMARY)
-                .setTitle(R.string.zen_mode_settings_title)
+                .setTitleRes(R.string.zen_mode_settings_title)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 .launch();
     }

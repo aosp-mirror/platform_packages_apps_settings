@@ -141,7 +141,7 @@ public abstract class ProcessStatsBase extends SettingsPreferenceFragment
         args.putDouble(ProcessStatsDetail.EXTRA_TOTAL_SCALE, memInfo.totalScale);
         new SubSettingLauncher(activity)
                 .setDestination(ProcessStatsDetail.class.getName())
-                .setTitle(R.string.memory_usage)
+                .setTitleRes(R.string.memory_usage)
                 .setArguments(args)
                 .setSourceMetricsCategory(Instrumentable.METRICS_CATEGORY_UNKNOWN)
                 .launch();

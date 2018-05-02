@@ -451,7 +451,7 @@ public class UserSettings extends SettingsPreferenceFragment
             new SubSettingLauncher(getContext())
                     .setDestination(UserDetailsSettings.class.getName())
                     .setArguments(extras)
-                    .setTitle(R.string.user_guest)
+                    .setTitleRes(R.string.user_guest)
                     .setSourceMetricsCategory(getMetricsCategory())
                     .launch();
             return;
@@ -464,7 +464,7 @@ public class UserSettings extends SettingsPreferenceFragment
             new SubSettingLauncher(getContext())
                     .setDestination(RestrictedProfileSettings.class.getName())
                     .setArguments(extras)
-                    .setTitle(R.string.user_restrictions_title)
+                    .setTitleRes(R.string.user_restrictions_title)
                     .setSourceMetricsCategory(getMetricsCategory())
                     .launch();
         } else if (info.id == UserHandle.myUserId()) {
@@ -476,7 +476,7 @@ public class UserSettings extends SettingsPreferenceFragment
             new SubSettingLauncher(getContext())
                     .setDestination(UserDetailsSettings.class.getName())
                     .setArguments(extras)
-                    .setTitle(info.name)
+                    .setTitleText(info.name)
                     .setSourceMetricsCategory(getMetricsCategory())
                     .launch();
         }

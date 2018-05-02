@@ -191,7 +191,7 @@ public class UserDictionarySettings extends ListFragment implements Instrumentab
         new SubSettingLauncher(getContext())
                 .setDestination(UserDictionaryAddWordFragment.class.getName())
                 .setArguments(args)
-                .setTitle(R.string.user_dict_settings_add_dialog_title)
+                .setTitleRes(R.string.user_dict_settings_add_dialog_title)
                 .setSourceMetricsCategory(getMetricsCategory())
                 .launch();
 

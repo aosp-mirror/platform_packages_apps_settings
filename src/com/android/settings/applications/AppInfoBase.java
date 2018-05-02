@@ -228,7 +228,7 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
         new SubSettingLauncher(source.getContext())
                 .setDestination(fragment.getName())
                 .setSourceMetricsCategory(sourceMetricsCategory)
-                .setTitle(titleRes)
+                .setTitleRes(titleRes)
                 .setArguments(args)
                 .setUserHandle(new UserHandle(UserHandle.getUserId(uid)))
                 .setResultListener(source, request)

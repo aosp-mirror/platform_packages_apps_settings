@@ -433,7 +433,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
                 args.putString(VolumeInfo.EXTRA_VOLUME_ID, mVolume.getId());
                 new SubSettingLauncher(context)
                         .setDestination(PrivateVolumeUnmount.class.getCanonicalName())
-                        .setTitle(R.string.storage_menu_unmount)
+                        .setTitleRes(R.string.storage_menu_unmount)
                         .setSourceMetricsCategory(getMetricsCategory())
                         .setArguments(args)
                         .launch();
@@ -442,7 +442,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
                 args.putString(VolumeInfo.EXTRA_VOLUME_ID, mVolume.getId());
                 new SubSettingLauncher(context)
                         .setDestination(PrivateVolumeFormat.class.getCanonicalName())
-                        .setTitle(R.string.storage_menu_format)
+                        .setTitleRes(R.string.storage_menu_format)
                         .setSourceMetricsCategory(getMetricsCategory())
                         .setArguments(args)
                         .launch();
@@ -487,7 +487,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
                 intent = new SubSettingLauncher(getActivity())
                         .setDestination(ManageApplications.class.getName())
                         .setArguments(args)
-                        .setTitle(R.string.apps_storage)
+                        .setTitleRes(R.string.apps_storage)
                         .setSourceMetricsCategory(getMetricsCategory())
                         .toIntent();
 

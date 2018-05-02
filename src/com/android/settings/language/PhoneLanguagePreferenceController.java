@@ -74,7 +74,7 @@ public class PhoneLanguagePreferenceController extends AbstractPreferenceControl
         new SubSettingLauncher(mContext)
                 .setDestination(LocaleListEditor.class.getName())
                 .setSourceMetricsCategory(MetricsProto.MetricsEvent.SETTINGS_LANGUAGE_CATEGORY)
-                .setTitle(R.string.pref_title_lang_selection)
+                .setTitleRes(R.string.pref_title_lang_selection)
                 .launch();
         return true;
     }
