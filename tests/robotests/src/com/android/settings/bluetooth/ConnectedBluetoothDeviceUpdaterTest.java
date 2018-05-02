@@ -15,6 +15,7 @@
  */
 package com.android.settings.bluetooth;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -206,5 +207,16 @@ public class ConnectedBluetoothDeviceUpdaterTest {
                 BluetoothAdapter.STATE_DISCONNECTED);
 
         verify(mBluetoothDeviceUpdater).removePreference(mCachedBluetoothDevice);
+    }
+
+    @Test
+    public void addPreference_addPreference_shouldHideSecondTarget() {
+        BluetoothDevicePreference btPreference =
+                new BluetoothDevicePreference(mContext, mCachedBluetoothDevice, true);
+        mBluetoothDeviceUpdater.mPreferenceMap.put(mBluetoothDevice, btPreference);
+
+        mBluetoothDeviceUpdater.addPreference(mCachedBluetoothDevice);
+
+        assertThat(btPreference.shouldHideSecondTarget()).isTrue();
     }
 }
