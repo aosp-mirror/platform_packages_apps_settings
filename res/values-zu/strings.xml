@@ -292,8 +292,7 @@
     <string name="forget" msgid="1400428660472591263">"Khohlwa"</string>
     <string name="save" msgid="879993180139353333">"Londoloza"</string>
     <string name="done" msgid="6942539184162713160">"Kwenziwe"</string>
-    <!-- no translation found for apply (1577045208487259229) -->
-    <skip />
+    <string name="apply" msgid="1577045208487259229">"Faka"</string>
     <string name="settings_label" msgid="1626402585530130914">"Izilungiselelo"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Izilungiselelo"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Isinqamuleli sezilungiselelo"</string>
@@ -1922,6 +1921,8 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Izilawuli zokubandakanya"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Amasevisi alandiwe"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Okokulinga"</string>
+    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
+    <skip />
     <string name="talkback_title" msgid="7912059827205988080">"I-Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Isifundi sesikrini kakhulukazi esabantu abangaboni nabanokubona okuncane"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Thepha izinto esikrinini sakho ukuze uzizwe zifundelwa phezulu"</string>
@@ -2429,6 +2430,7 @@
     <string name="backup_data_title" msgid="1239105919852668016">"Sekela ngokulondoloza idatha yami"</string>
     <string name="backup_data_summary" msgid="708773323451655666">"Sekela ngokulondoloza idatha yohlelo lokusebenza, amaphasiwedi e-Wi-Fi, nezinye izilungiselelo kwumaseva we-Google"</string>
     <string name="backup_configure_account_title" msgid="3790872965773196615">"Sekela ngokulondoloza i-akhawunti"</string>
+    <string name="backup_data_management_title" msgid="4059093462647090064">"Phatha i-akhawunti yesipele"</string>
     <string name="include_app_data_title" msgid="2829970132260278394">"Bandakanya idatha yohlelo lokusebenza"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Ukubuyisela esimweni okuzenzakalelayo"</string>
     <string name="auto_restore_summary" msgid="4235615056371993807">"Uma ufaka futhi uhlelo lokusebenza, buyisela okuhlelwe ukusebenza kwezipele kanye nemininingo"</string>
@@ -2529,7 +2531,6 @@
     <string name="header_account_settings" msgid="5382475087121880626">"Izilungiselelo ze-akhawunti"</string>
     <string name="remove_account_label" msgid="5921986026504804119">"Susa i-akhawunti"</string>
     <string name="header_add_an_account" msgid="756108499532023798">"Yengeza i-akhawunti"</string>
-    <string name="finish_button_label" msgid="481587707657751116">"Qeda"</string>
     <string name="really_remove_account_title" msgid="8800653398717172460">"Khipha i-akhawunti"</string>
     <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"Ingabe ngempela ufuna ukukhipha le-akhawunti? Ukukukhipha kuzosusa yonke imiyalezo yayo, othintana nabo, neminye imininingo esuka kwi-tablet! BREAK"</string>
     <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"Ingabe ngempela ufuna ukukhipha le-akhawunti? Ukukukhipha kuzosusa yonke imiyalezo yayo, othintana nabo, neminye imininingo esuka kwifoni! BREAK"</string>
@@ -3073,7 +3074,22 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Vimbela ukuphazamiseka okubonakalayo"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"Vumela amasignali okubuka"</string>
-    <string name="zen_mode_what_to_block_title" msgid="7078190101807944693">"Vimbela ukuphazamiseka okubonakalayo"</string>
+    <string name="zen_mode_restrict_notifications_screen_title" msgid="9027437428488279426">"Khawulela izaziso"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"Izaziso"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"Uma kuvulwe okuthi Ungaphazamisi"</string>
+    <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"Thulisa izaziso"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"Bonisa izaziso kodwa thulisa imisindo nokudlidlizela"</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"Uma izaziso ezintsha zifika ifoni yakho ngeke yenze umsindo noma idlidlizele"</string>
+    <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"Fihla uphinde uthulise izaziso"</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"Izaziso ngeke zivele sanhlobo"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"Ngeke ubone izaziso ezintsha noma ezikhona uma kuvulwe okuthi Ungaphazamisi. Kodwa, izaziso ezidingekayo ngokusebenza kwefoni okuyisisekelo kanye nesimo zisazovela."</string>
+    <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"Ngokwezifiso"</string>
+    <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"Nika amandla isilungiselelo sangokwezifiso"</string>
+    <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"Susa isilungiselelo sangokwezifiso"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"Zizovela"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"Kufihlwe kancane"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"Afihliwe"</string>
+    <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"Ukukhawulelwa kwangokwezifiso"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"Uma isikrini sivulekile"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"Uma isikrini sivalekile"</string>
     <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"Thulisa umsindo nokudlidliza"</string>
@@ -3633,6 +3649,7 @@
     <string name="screen_zoom_conversation_timestamp_3" msgid="3785674344762707688">"Lwesibili 6:02PM"</string>
     <string name="screen_zoom_conversation_timestamp_4" msgid="2511469395448561259">"Lwesibili 6:03PM"</string>
     <string name="disconnected" msgid="4836600637485526329">"Akuxhunyiwe"</string>
+    <string name="keyboard_disconnected" msgid="1495037256967224035">"Akuxhunyiwe"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> wedatha esetshenzisiwe"</string>
     <string name="data_usage_wifi_format" msgid="5417296451392612860">"<xliff:g id="AMOUNT">^1</xliff:g> okusetshenziswe ku-Wi-Fi"</string>
     <plurals name="notification_summary" formatted="false" msgid="3941492005316143599">

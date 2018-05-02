@@ -292,8 +292,7 @@
     <string name="forget" msgid="1400428660472591263">"Gleyma"</string>
     <string name="save" msgid="879993180139353333">"Vista"</string>
     <string name="done" msgid="6942539184162713160">"Lokið"</string>
-    <!-- no translation found for apply (1577045208487259229) -->
-    <skip />
+    <string name="apply" msgid="1577045208487259229">"Nota"</string>
     <string name="settings_label" msgid="1626402585530130914">"Stillingar"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Stillingar"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Flýtileið stillinga"</string>
@@ -423,7 +422,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Eyða"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="2068961812439460133">"Snertu lesarann"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Settu fingurinn á skynjarann og lyftu honum þegar þú finnur titring"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="2819679722403209778">"Lyftu fingrinum og settu hann niður aftur"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="2819679722403209778">"Snertu aftur með fingrinum"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"Lyftu fingrinum endurtekið til að bæta við mismunandi hlutum fingrafarsins"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="7567276170287972230">"Fingrafari bætt við"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="8970048776120548976">"Þegar þú sérð þetta tákn skaltu nota fingrafarið til að auðkenna þig eða samþykkja kaup"</string>
@@ -1921,6 +1920,8 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Gagnvirknistýringar"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Sótt þjónusta"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Tilraunastillingar"</string>
+    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
+    <skip />
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Skjálesari sem er fyrst og fremst hugsaður fyrir þá sem eru blindir eða sjóndaprir"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Ýttu á atriði á skjánum til að heyra þau lesin upp"</string>
@@ -2428,6 +2429,7 @@
     <string name="backup_data_title" msgid="1239105919852668016">"Taka öryggisafrit af gögnunum mínum"</string>
     <string name="backup_data_summary" msgid="708773323451655666">"Vista öryggisafrit af gögnum forrita, Wi-Fi aðgangsorðum og öðrum stillingum á þjóna Google"</string>
     <string name="backup_configure_account_title" msgid="3790872965773196615">"Afritunarreikningur"</string>
+    <string name="backup_data_management_title" msgid="4059093462647090064">"Stjórna afritunarreikningi"</string>
     <string name="include_app_data_title" msgid="2829970132260278394">"Fela forritsgögn"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Sjálfvirk endurheimt"</string>
     <string name="auto_restore_summary" msgid="4235615056371993807">"Endurheimta vistaðar stillingar og gögn þegar forrit er enduruppsett"</string>
@@ -2528,7 +2530,6 @@
     <string name="header_account_settings" msgid="5382475087121880626">"Reikningsstillingar"</string>
     <string name="remove_account_label" msgid="5921986026504804119">"Fjarlægja reikning"</string>
     <string name="header_add_an_account" msgid="756108499532023798">"Bæta reikningi við"</string>
-    <string name="finish_button_label" msgid="481587707657751116">"Ljúka"</string>
     <string name="really_remove_account_title" msgid="8800653398717172460">"Fjarlægja reikninginn?"</string>
     <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"Ef þessi reikningur er fjarlægður verður öllum skilaboðum hans, tengiliðum og öðrum gögnum eytt úr spjaldtölvunni!"</string>
     <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"Ef þessi reikningur er fjarlægður verður öllum skilaboðum hans, tengiliðum og öðrum gögnum eytt úr símanum!"</string>
@@ -3072,7 +3073,22 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Útiloka sjónrænt áreiti"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"Leyfa sjónræn merki"</string>
-    <string name="zen_mode_what_to_block_title" msgid="7078190101807944693">"Útiloka sjónrænt áreiti"</string>
+    <string name="zen_mode_restrict_notifications_screen_title" msgid="9027437428488279426">"Takmarka tilkynningar"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"Tilkynningar"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"Þegar kveikt er á „Ónáðið ekki“"</string>
+    <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"Slökkva á tilkynningum"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"Sýna tilkynningar en þagga hljóð og titring"</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"Þegar nýjar tilkynningar berast mun síminn hvorki gefa frá sér hljóð né titra"</string>
+    <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"Fela og þagga tilkynningar"</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"Engar tilkynningar munu birtast"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"Þú munt ekki sjá nýjar eða fyrirliggjandi tilkynningar þegar kveikt er á „Ónáðið ekki“. Tilkynningar um grunnvirkni og stöðu símans verða áfram sýnilegar."</string>
+    <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"Sérsniðið"</string>
+    <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"Kveikja á sérstillingu"</string>
+    <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"Fjarlægja sérstillingu"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"Mun birtast"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"Falið að hluta"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"Falið"</string>
+    <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"Sérsniðnar takmarkanir"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"Þegar kveikt er á skjánum"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"Þegar slökkt er á skjánum"</string>
     <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"Slökkva á hljóði og titringi"</string>
@@ -3632,6 +3648,7 @@
     <string name="screen_zoom_conversation_timestamp_3" msgid="3785674344762707688">"Þri 18:02"</string>
     <string name="screen_zoom_conversation_timestamp_4" msgid="2511469395448561259">"Þri 18:03"</string>
     <string name="disconnected" msgid="4836600637485526329">"Ekki tengt"</string>
+    <string name="keyboard_disconnected" msgid="1495037256967224035">"Ekki tengt"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> notuð"</string>
     <string name="data_usage_wifi_format" msgid="5417296451392612860">"<xliff:g id="AMOUNT">^1</xliff:g> notkun með Wi‑Fi"</string>
     <plurals name="notification_summary" formatted="false" msgid="3941492005316143599">

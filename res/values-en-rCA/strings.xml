@@ -292,8 +292,7 @@
     <string name="forget" msgid="1400428660472591263">"Forget"</string>
     <string name="save" msgid="879993180139353333">"Save"</string>
     <string name="done" msgid="6942539184162713160">"Done"</string>
-    <!-- no translation found for apply (1577045208487259229) -->
-    <skip />
+    <string name="apply" msgid="1577045208487259229">"Apply"</string>
     <string name="settings_label" msgid="1626402585530130914">"Settings"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Settings"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Settings shortcut"</string>
@@ -1921,6 +1920,8 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Interaction controls"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Downloaded services"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Experimental"</string>
+    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
+    <skip />
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Screen reader primarily for people with blindness and low vision"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Tap items on your screen to hear them read aloud"</string>
@@ -2428,6 +2429,7 @@
     <string name="backup_data_title" msgid="1239105919852668016">"Back up my data"</string>
     <string name="backup_data_summary" msgid="708773323451655666">"Back up app data, Wi‑Fi passwords and other settings to Google servers"</string>
     <string name="backup_configure_account_title" msgid="3790872965773196615">"Backup account"</string>
+    <string name="backup_data_management_title" msgid="4059093462647090064">"Manage backup account"</string>
     <string name="include_app_data_title" msgid="2829970132260278394">"Include app data"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Automatic restore"</string>
     <string name="auto_restore_summary" msgid="4235615056371993807">"When reinstalling an app, restore backed-up settings and data"</string>
@@ -2528,7 +2530,6 @@
     <string name="header_account_settings" msgid="5382475087121880626">"Account settings"</string>
     <string name="remove_account_label" msgid="5921986026504804119">"Remove account"</string>
     <string name="header_add_an_account" msgid="756108499532023798">"Add an account"</string>
-    <string name="finish_button_label" msgid="481587707657751116">"Finish"</string>
     <string name="really_remove_account_title" msgid="8800653398717172460">"Remove account?"</string>
     <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"Removing this account will delete all of its messages, contacts and other data from the tablet!"</string>
     <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"Removing this account will delete all of its messages, contacts and other data from the phone!"</string>
@@ -3072,7 +3073,22 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Block visual disturbances"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"Allow visual signals"</string>
-    <string name="zen_mode_what_to_block_title" msgid="7078190101807944693">"Block visual disturbances"</string>
+    <string name="zen_mode_restrict_notifications_screen_title" msgid="9027437428488279426">"Restrict notifications"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"Notifications"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"When do not disturb is turned on"</string>
+    <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"Mute notifications"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"Show notifications, but mute sounds &amp; vibrations"</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"When new notifications arrive, your phone won’t make a sound or vibration"</string>
+    <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"Hide &amp; mute notifications"</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"Notifications will not appear at all"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"You won’t see new or existing notifications when do not disturb is on. However, notifications needed for basic phone activity and status will still appear."</string>
+    <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"Custom"</string>
+    <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"Enable custom setting"</string>
+    <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"Remove custom setting"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"Will appear"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"Partially hidden"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"Hidden"</string>
+    <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"Custom restrictions"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"When the screen is on"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"When the screen is off"</string>
     <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"Mute sound and vibration"</string>
@@ -3632,6 +3648,7 @@
     <string name="screen_zoom_conversation_timestamp_3" msgid="3785674344762707688">"Tue 6:02 p.m."</string>
     <string name="screen_zoom_conversation_timestamp_4" msgid="2511469395448561259">"Tue 6:03 p.m."</string>
     <string name="disconnected" msgid="4836600637485526329">"Not connected"</string>
+    <string name="keyboard_disconnected" msgid="1495037256967224035">"Not connected"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> of data used"</string>
     <string name="data_usage_wifi_format" msgid="5417296451392612860">"<xliff:g id="AMOUNT">^1</xliff:g> used on Wi‑Fi"</string>
     <plurals name="notification_summary" formatted="false" msgid="3941492005316143599">
@@ -3715,7 +3732,7 @@
     <string name="connectivity_monitor_switch" msgid="9059759348648583421">"Connectivity Monitor"</string>
     <string name="connectivity_monitor_switch_summary" msgid="2828658652378866401">"Connectivity Monitor will collect logs when it detects a connectivity problem and prompt notification to user to file a bug"</string>
     <string name="connectivity_monitor_toast" msgid="5551859612881173028">"To apply connectivity monitor change, reboot device"</string>
-    <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"Camera Laser Sensor"</string>
+    <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"Camera laser sensor"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Automatic system updates"</string>
     <string name="ota_disable_automatic_update_summary" msgid="940729694354373087">"Apply updates when device restarts"</string>
     <string name="usage" msgid="2977875522080448986">"Usage"</string>

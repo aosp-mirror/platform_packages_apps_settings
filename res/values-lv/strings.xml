@@ -294,8 +294,7 @@
     <string name="forget" msgid="1400428660472591263">"Aizmirst"</string>
     <string name="save" msgid="879993180139353333">"Saglabāt"</string>
     <string name="done" msgid="6942539184162713160">"Gatavs"</string>
-    <!-- no translation found for apply (1577045208487259229) -->
-    <skip />
+    <string name="apply" msgid="1577045208487259229">"Lietot"</string>
     <string name="settings_label" msgid="1626402585530130914">"Iestatījumi"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Iestatījumi"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Saīsne Iestatījumi"</string>
@@ -1935,6 +1934,8 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Mijiedarbības vadīklas"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Lejupielādētie pakalpojumi"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Eksperimentāla"</string>
+    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
+    <skip />
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Ekrāna lasītājs, kas galvenokārt paredzēts akliem un vājredzīgiem lietotājiem"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Pieskarieties vienumiem ekrānā, lai tie tiktu skaļi nolasīti."</string>
@@ -2457,6 +2458,7 @@
     <string name="backup_data_title" msgid="1239105919852668016">"Dublēt manus datus"</string>
     <string name="backup_data_summary" msgid="708773323451655666">"Dublēt lietotnes datus, Wi-Fi paroles un citus iestatījumus Google serveros"</string>
     <string name="backup_configure_account_title" msgid="3790872965773196615">"Rezerves konts"</string>
+    <string name="backup_data_management_title" msgid="4059093462647090064">"Pārvaldīt dublēšanas kontu"</string>
     <string name="include_app_data_title" msgid="2829970132260278394">"Lietotņu datu iekļaušana"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Automātiska atjaunošana"</string>
     <string name="auto_restore_summary" msgid="4235615056371993807">"Atkārtoti instalējot lietotni, atjaunot dublētos iestatījumus un datus"</string>
@@ -2557,7 +2559,6 @@
     <string name="header_account_settings" msgid="5382475087121880626">"Konta iestatījumi"</string>
     <string name="remove_account_label" msgid="5921986026504804119">"Noņemt kontu"</string>
     <string name="header_add_an_account" msgid="756108499532023798">"Pievienot kontu"</string>
-    <string name="finish_button_label" msgid="481587707657751116">"Pabeigt"</string>
     <string name="really_remove_account_title" msgid="8800653398717172460">"Vai noņemt kontu?"</string>
     <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"Noņemot šo kontu, no planšetdatora tiks dzēsti arī visi šajā kontā esošie ziņojumi, kontaktpersonas un citi dati!"</string>
     <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"Noņemot šo kontu, no tālruņa tiks dzēsti arī visi šajā kontā esošie ziņojumi, kontaktpersonas un citi dati!"</string>
@@ -3107,7 +3108,22 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Bloķēt vizuālos traucējumus"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"Vizuālu signālu atļaušana"</string>
-    <string name="zen_mode_what_to_block_title" msgid="7078190101807944693">"Vizuālo traucējumu bloķēšana"</string>
+    <string name="zen_mode_restrict_notifications_screen_title" msgid="9027437428488279426">"Paziņojumu ierobežošana"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"Paziņojumi"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"Kad aktivizēts režīms Netraucēt"</string>
+    <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"Izslēgt paziņojumu skaņu"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"Rādīt paziņojumus, bet izslēgt skaņas signālus un vibrācijas"</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"Saņemot jaunus paziņojumus, nebūs tālruņa skaņas signāla vai vibrācijas"</string>
+    <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"Paslēpt paziņojumus un izslēgt paziņojumu skaņu"</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"Paziņojumi nemaz netiks rādīti"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"Režīmā “Netraucēt” netiks rādīti jauni un esoši paziņojumi, izņemot tos paziņojumus, kas nepieciešami tālruņa pamatdarbībām un statusam."</string>
+    <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"Pielāgoti"</string>
+    <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"Iespējot pielāgoto iestatījumu"</string>
+    <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"Noņemt pielāgoto iestatījumu"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"Tiks rādīti"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"Daļēji paslēpti"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"Paslēpti"</string>
+    <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"Pielāgoti ierobežojumi"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"Kad ekrāns ir ieslēgts"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"Kad ekrāns ir izslēgts"</string>
     <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"Izslēgt skaņu un vibrāciju"</string>
@@ -3683,6 +3699,7 @@
     <string name="screen_zoom_conversation_timestamp_3" msgid="3785674344762707688">"Otrdien plkst. 18:02"</string>
     <string name="screen_zoom_conversation_timestamp_4" msgid="2511469395448561259">"Otrdien plkst. 18:03"</string>
     <string name="disconnected" msgid="4836600637485526329">"Savienojums nav izveidots"</string>
+    <string name="keyboard_disconnected" msgid="1495037256967224035">"Savienojums nav izveidots"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"Izmantoti <xliff:g id="AMOUNT">%1$s</xliff:g> datu"</string>
     <string name="data_usage_wifi_format" msgid="5417296451392612860">"<xliff:g id="AMOUNT">^1</xliff:g> patērēts, izmantojot Wi‑Fi savienojumu"</string>
     <plurals name="notification_summary" formatted="false" msgid="3941492005316143599">
@@ -3967,7 +3984,7 @@
     <string name="ambient_display_pickup_summary" product="tablet" msgid="5435283849947236648">"Lai skatītu laiku, paziņojumu ikonas un citu informāciju, paņemiet planšetdatoru."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="8256669101643381568">"Lai skatītu laiku, paziņojumu ikonas un citu informāciju, paņemiet ierīci."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Ziņu skatīšana ar pirksta nospiedumu"</string>
-    <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"Pirksta nospieduma žests"</string>
+    <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"Nospiedumu skeneris"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Lai skatītu paziņojumus, velciet uz leju pār pirksta nospieduma sensoru tālruņa aizmugurē."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Lai skatītu paziņojumus, velciet uz leju pār pirksta nospieduma sensoru planšetdatora aizmugurē."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Lai skatītu paziņojumus, velciet uz leju pār pirksta nospieduma sensoru ierīces aizmugurē."</string>

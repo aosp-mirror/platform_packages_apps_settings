@@ -296,8 +296,7 @@
     <string name="forget" msgid="1400428660472591263">"Pozabi"</string>
     <string name="save" msgid="879993180139353333">"Shrani"</string>
     <string name="done" msgid="6942539184162713160">"Končano"</string>
-    <!-- no translation found for apply (1577045208487259229) -->
-    <skip />
+    <string name="apply" msgid="1577045208487259229">"Uporabi"</string>
     <string name="settings_label" msgid="1626402585530130914">"Nastavitve"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Nastavitve"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Bližnjica do nastavitev"</string>
@@ -1937,7 +1936,7 @@
     <string name="app_name_label" msgid="5440362857006046193">"Aplikacija"</string>
     <string name="last_time_used_label" msgid="8459441968795479307">"Zadnjič uporabljeno"</string>
     <string name="usage_time_label" msgid="295954901452833058">"Čas uporabe"</string>
-    <string name="accessibility_settings" msgid="3975902491934816215">"Pripomočki za ljudi s posebnimi potrebami"</string>
+    <string name="accessibility_settings" msgid="3975902491934816215">"Pripom. za ljudi s pos. potreb."</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Nastavitve pripomočkov za ljudi s posebnimi potrebami"</string>
     <string name="accessibility_settings_summary" msgid="981260486011624939">"Bralniki zaslona, prikaz, interakcija"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"Nastavitve vidnosti"</string>
@@ -1949,6 +1948,8 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Kontrolniki za interakcije"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Prenesene storitve"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Poskusno"</string>
+    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
+    <skip />
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Bralnik zaslona je predvsem za slepe in slabovidne"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Če želite slišati vsebino elementov na zaslonu, se jih dotaknite"</string>
@@ -2486,6 +2487,7 @@
     <string name="backup_data_title" msgid="1239105919852668016">"Varn. kopiraj podatke"</string>
     <string name="backup_data_summary" msgid="708773323451655666">"Varnostno kopiranje podatkov aplikacij, gesel za Wi-Fi in drugih nastavitev v Googlove strežnike"</string>
     <string name="backup_configure_account_title" msgid="3790872965773196615">"Račun za kopiranje"</string>
+    <string name="backup_data_management_title" msgid="4059093462647090064">"Upravljanje računa za varnostno kopiranje"</string>
     <string name="include_app_data_title" msgid="2829970132260278394">"Vključi podatke aplikacije"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Samodejna obnovitev"</string>
     <string name="auto_restore_summary" msgid="4235615056371993807">"Obnovitev varnostno kopiranih nastavitev in podatkov pri vnovični namestitvi aplikacije"</string>
@@ -2586,7 +2588,6 @@
     <string name="header_account_settings" msgid="5382475087121880626">"Nastavitve računa"</string>
     <string name="remove_account_label" msgid="5921986026504804119">"Odstrani račun"</string>
     <string name="header_add_an_account" msgid="756108499532023798">"Dodajanje računa"</string>
-    <string name="finish_button_label" msgid="481587707657751116">"Končaj"</string>
     <string name="really_remove_account_title" msgid="8800653398717172460">"Želite odstraniti račun?"</string>
     <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"Z odstranitvijo računa boste iz tabličnega računalnika izbrisali vsa sporočila, stike in druge podatke v računu."</string>
     <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"Z odstranitvijo računa boste iz telefona izbrisali vsa sporočila, stike in druge podatke v računu."</string>
@@ -3142,7 +3143,22 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Blokiranje vizualnih motenj"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"Dovoli vizualne znake"</string>
-    <string name="zen_mode_what_to_block_title" msgid="7078190101807944693">"Blokiranje vizualnih motenj"</string>
+    <string name="zen_mode_restrict_notifications_screen_title" msgid="9027437428488279426">"Omejitev obvestil"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"Obvestila"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"Ko je vklopljena funkcija »ne moti«"</string>
+    <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"Izklopi zvok obvestil"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"Obvestila bodo prikazana, vendar brez predvajanja zvokov in vibriranja"</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"Ob prejemu novih obvestil telefon ne bo predvajal zvoka ali vibriral"</string>
+    <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"Skrij in prezri obvestila"</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"Obvestila ne bodo prikazana"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"Ko je funkcija »ne moti« vklopljena, nova ali obstoječa obvestila ne bodo prikazana, še vedno pa bodo prikazana obvestila, potrebna za osnovno delovanje telefona in obveščanje o njegovem stanju."</string>
+    <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"Po meri"</string>
+    <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"Omogoči nastavitev po meri"</string>
+    <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"Odstrani nastavitev po meri"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"Prikazano"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"Delno skrito"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"Skrito"</string>
+    <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"Omejitve po meri"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"Pri vklopljenem zaslonu"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"Pri izklopljenem zaslonu"</string>
     <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"Izklopi zvok in vibriranje"</string>
@@ -3734,6 +3750,7 @@
     <string name="screen_zoom_conversation_timestamp_3" msgid="3785674344762707688">"Tor., 18.02"</string>
     <string name="screen_zoom_conversation_timestamp_4" msgid="2511469395448561259">"Tor., 18.03"</string>
     <string name="disconnected" msgid="4836600637485526329">"Povezava ni vzpostavljena"</string>
+    <string name="keyboard_disconnected" msgid="1495037256967224035">"Ni priključeno"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"Prenesenih podatkov: <xliff:g id="AMOUNT">%1$s</xliff:g>"</string>
     <string name="data_usage_wifi_format" msgid="5417296451392612860">"Uporabljeno v omrežju Wi-Fi: <xliff:g id="AMOUNT">^1</xliff:g>"</string>
     <plurals name="notification_summary" formatted="false" msgid="3941492005316143599">
@@ -4199,7 +4216,7 @@
     <string name="change_wifi_state_app_detail_switch" msgid="7942268646980694224">"Tej aplikaciji omogočite, da upravlja povezavo Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8434262633905502679">"Tej aplikacij omogočite, da vklopi ali izklopi povezavo Wi-Fi, išče omrežja Wi-Fi in se z njimi poveže, doda ali odstrani omrežja ali pa zažene lokalno dostopno točko"</string>
     <string name="media_output_title" msgid="115223550977351699">"Predvajaj predstavnost v"</string>
-    <string name="media_output_default_summary" msgid="8115153381240348279">"Ta naprava"</string>
+    <string name="media_output_default_summary" msgid="8115153381240348279">"ta naprava"</string>
     <string name="media_output_summary" product="default" msgid="6839458453831567167">"Telefon"</string>
     <string name="media_output_summary" product="tablet" msgid="7217221078578554515">"Tablični računalnik"</string>
     <string name="media_output_summary" product="device" msgid="5677420090811068649">"Naprava"</string>

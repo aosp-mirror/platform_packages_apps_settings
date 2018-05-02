@@ -294,8 +294,7 @@
     <string name="forget" msgid="1400428660472591263">"Zaboravi"</string>
     <string name="save" msgid="879993180139353333">"Sačuvaj"</string>
     <string name="done" msgid="6942539184162713160">"Gotovo"</string>
-    <!-- no translation found for apply (1577045208487259229) -->
-    <skip />
+    <string name="apply" msgid="1577045208487259229">"Primeni"</string>
     <string name="settings_label" msgid="1626402585530130914">"Podešavanja"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Podešavanja"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Prečica podešavanja"</string>
@@ -1935,6 +1934,8 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Kontrole interakcije"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Preuzete usluge"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Eksperimentalno"</string>
+    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
+    <skip />
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Čitač ekrana prvenstveno namenjen slepim i slabovidim osobama"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Dodirnite stavke na ekranu da biste ih čuli"</string>
@@ -2457,6 +2458,7 @@
     <string name="backup_data_title" msgid="1239105919852668016">"Pravljenje rezervnih kopija podataka"</string>
     <string name="backup_data_summary" msgid="708773323451655666">"Pravi rezervne kopije podataka o aplikacijama, Wi-Fi lozinki i drugih podešavanja na Google serverima"</string>
     <string name="backup_configure_account_title" msgid="3790872965773196615">"Rezervna kopija naloga"</string>
+    <string name="backup_data_management_title" msgid="4059093462647090064">"Upravljajte nalogom za rezervne kopije"</string>
     <string name="include_app_data_title" msgid="2829970132260278394">"Uvrštavanje podataka aplikacija"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Automatsko vraćanje"</string>
     <string name="auto_restore_summary" msgid="4235615056371993807">"Kada se aplikacija ponovo instalira, vrati rezervne kopije podešavanja i podataka"</string>
@@ -2557,7 +2559,6 @@
     <string name="header_account_settings" msgid="5382475087121880626">"Podešavanja naloga"</string>
     <string name="remove_account_label" msgid="5921986026504804119">"Ukloni nalog"</string>
     <string name="header_add_an_account" msgid="756108499532023798">"Dodajte nalog"</string>
-    <string name="finish_button_label" msgid="481587707657751116">"Završi"</string>
     <string name="really_remove_account_title" msgid="8800653398717172460">"Želite li da uklonite nalog?"</string>
     <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"Uklanjanjem ovog naloga izbrisaćete sve poruke, kontakte i druge podatke sa tableta!"</string>
     <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"Uklanjanjem ovog naloga izbrisaćete sve poruke, kontakte i druge podatke sa telefona!"</string>
@@ -2801,7 +2802,7 @@
     <string name="user_add_user_item_title" msgid="8212199632466198969">"Korisnik"</string>
     <string name="user_add_profile_item_title" msgid="8353515490730363621">"Ograničeni profil"</string>
     <string name="user_add_user_title" msgid="2108112641783146007">"Dodajete novog korisnika?"</string>
-    <string name="user_add_user_message_long" msgid="6768718238082929201">"Ovaj uređaj sa možete da delite drugim ljudima ako napravite još korisnika. Svaki korisnik ima sopstveni prostor, koji može da prilagođava pomoću aplikacija, pozadine i tako dalje. Korisnici mogu da prilagođavaju i podešavanja uređaja koja utiču na svakoga, poput Wi‑Fi-ja.\n\nKada dodate novog korisnika, ta osoba treba da podesi sopstveni prostor.\n\nSvaki korisnik može da ažurira aplikacije za sve ostale korisnike. Podešavanja i usluge pristupačnosti ne mogu da se prenose na novog korisnika."</string>
+    <string name="user_add_user_message_long" msgid="6768718238082929201">"Ovaj uređaj možete da delite sa drugim ljudima ako napravite još korisnika. Svaki korisnik ima sopstveni prostor, koji može da prilagođava pomoću aplikacija, pozadine i slično. Korisnici mogu da prilagođavaju i podešavanja uređaja koja utiču na svakoga, poput Wi‑Fi-ja.\n\nKada dodate novog korisnika, ta osoba treba da podesi sopstveni prostor.\n\nSvaki korisnik može da ažurira aplikacije za sve ostale korisnike. Podešavanja i usluge pristupačnosti ne mogu da se prenose na novog korisnika."</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"Kada dodate novog korisnika, ta osoba treba da podesi sopstveni prostor.\n\nSvaki korisnik može da ažurira aplikacije za sve ostale korisnike."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"Podešavate korisnika?"</string>
     <string name="user_setup_dialog_message" msgid="1004068621380867148">"Ta osoba treba da uzme uređaj i podesi svoj prostor"</string>
@@ -3107,7 +3108,22 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Blokiraj vizuelna ometanja"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"Dozvoli vizuelne signale"</string>
-    <string name="zen_mode_what_to_block_title" msgid="7078190101807944693">"Blokirajte vizuelne smetnje"</string>
+    <string name="zen_mode_restrict_notifications_screen_title" msgid="9027437428488279426">"Ograničite obaveštenja"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"Obaveštenja"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"Kada je uključena opcija Ne uznemiravaj"</string>
+    <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"Isključi zvuk obaveštenja"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"Prikazuj obaveštenja, ali isključi zvuk i vibracije"</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"Telefon neće emitovati zvuk ni vibrirati kada stignu nova obaveštenja"</string>
+    <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"Sakrijte obaveštenja i isključite im zvuk"</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"Obaveštenja se uopšte neće prikazivati"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"Nećete videti nova ni postojeća obaveštenja kada je uključeno Ne uznemiravaj. Ali i dalje će se prikazivati obaveštenja potrebna za osnovne aktivnosti i status telefona."</string>
+    <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"Prilagođeno"</string>
+    <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"Omogući prilagođeno podešavanje"</string>
+    <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"Ukloni prilagođeno podešavanje"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"Prikazivaće se"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"Delimično skriveno"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"Skriveno"</string>
+    <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"Prilagođena ograničenja"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"Kada je ekran uključen"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"Kada je ekran isključen"</string>
     <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"Isključi zvuk i vibraciju"</string>
@@ -3683,6 +3699,7 @@
     <string name="screen_zoom_conversation_timestamp_3" msgid="3785674344762707688">"Uto 18:02"</string>
     <string name="screen_zoom_conversation_timestamp_4" msgid="2511469395448561259">"Uto 18:03"</string>
     <string name="disconnected" msgid="4836600637485526329">"Nije povezano"</string>
+    <string name="keyboard_disconnected" msgid="1495037256967224035">"Nije povezana"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"Iskorišćeno je <xliff:g id="AMOUNT">%1$s</xliff:g> podataka"</string>
     <string name="data_usage_wifi_format" msgid="5417296451392612860">"<xliff:g id="AMOUNT">^1</xliff:g> potrošeno na Wi‑Fi mreže"</string>
     <plurals name="notification_summary" formatted="false" msgid="3941492005316143599">
