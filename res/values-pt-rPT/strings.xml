@@ -292,8 +292,7 @@
     <string name="forget" msgid="1400428660472591263">"Esquecer"</string>
     <string name="save" msgid="879993180139353333">"Guardar"</string>
     <string name="done" msgid="6942539184162713160">"Concluído"</string>
-    <!-- no translation found for apply (1577045208487259229) -->
-    <skip />
+    <string name="apply" msgid="1577045208487259229">"Aplicar"</string>
     <string name="settings_label" msgid="1626402585530130914">"Definições"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Definições"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Atalho das definições"</string>
@@ -1921,6 +1920,8 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Controlos de interação"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Serviços transferidos"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Experimental"</string>
+    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
+    <skip />
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Leitor de ecrã principalmente para pessoas invisuais ou com visão reduzida"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Toque nos itens no ecrã para que sejam lidos em voz alta"</string>
@@ -2428,6 +2429,7 @@
     <string name="backup_data_title" msgid="1239105919852668016">"Fazer cópia de segurança dos dados"</string>
     <string name="backup_data_summary" msgid="708773323451655666">"Fazer cópia de segurança de dados da aplicação, palavras-passe Wi-Fi e outras definições para os servidores da Google"</string>
     <string name="backup_configure_account_title" msgid="3790872965773196615">"Cópia de segurança da conta"</string>
+    <string name="backup_data_management_title" msgid="4059093462647090064">"Gerir a conta de cópia de segurança"</string>
     <string name="include_app_data_title" msgid="2829970132260278394">"Incluir dados de aplicações"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Restauro automático"</string>
     <string name="auto_restore_summary" msgid="4235615056371993807">"Ao reinstalar uma aplicação, restaurar definições e dados da cópia de segurança"</string>
@@ -2438,7 +2440,7 @@
     <string name="fullbackup_erase_dialog_message" msgid="694766389396659626">"Pretende parar de fazer cópias de segurança dos dados do dispositivo (como palavras-passe de Wi-Fi e o histórico de chamadas) e dos dados das aplicações (como as definições e os ficheiros armazenados pelas aplicações) e apagar todas as cópias nos servidores remotos?"</string>
     <string name="fullbackup_data_summary" msgid="960850365007767734">"Faça cópias de segurança automáticas dos dados do dispositivo (como palavras-passe de Wi-Fi e o histórico de chamadas) e dos dados das aplicações (como as definições e os ficheiros armazenados pelas aplicações) remotamente.\n\nQuando ativa a cópia de segurança automática, os dados do dispositivo e das aplicações são guardados remotamente de forma periódica. Os dados das aplicações podem ser quaisquer dados que uma aplicação tenha guardado (com base nas definições do programador), incluindo dados potencialmente confidenciais como contactos, mensagens e fotos."</string>
     <string name="device_admin_settings_title" msgid="4960761799560705902">"Definições de administração do dispositivo"</string>
-    <string name="active_device_admin_msg" msgid="578748451637360192">"Aplicação de administração do dispositivo"</string>
+    <string name="active_device_admin_msg" msgid="578748451637360192">"App administração do dispositivo"</string>
     <string name="remove_device_admin" msgid="9207368982033308173">"Desativar esta aplicação de administração do dispositivo"</string>
     <string name="uninstall_device_admin" msgid="271120195128542165">"Desinstalar aplicação"</string>
     <string name="remove_and_uninstall_device_admin" msgid="3837625952436169878">"Desativar e desinstalar"</string>
@@ -2528,7 +2530,6 @@
     <string name="header_account_settings" msgid="5382475087121880626">"Definições da conta"</string>
     <string name="remove_account_label" msgid="5921986026504804119">"Remover conta"</string>
     <string name="header_add_an_account" msgid="756108499532023798">"Adicionar uma conta"</string>
-    <string name="finish_button_label" msgid="481587707657751116">"Concluir"</string>
     <string name="really_remove_account_title" msgid="8800653398717172460">"Pretende remover a conta?"</string>
     <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"A remoção desta conta elimina todas as mensagens, contactos e outros dados do tablet!"</string>
     <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"A remoção desta conta elimina todas as mensagens, contactos e outros dados do telemóvel!"</string>
@@ -3072,7 +3073,22 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Bloquear perturbações visuais"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"Permitir sinais visuais"</string>
-    <string name="zen_mode_what_to_block_title" msgid="7078190101807944693">"Bloquear perturbações visuais"</string>
+    <string name="zen_mode_restrict_notifications_screen_title" msgid="9027437428488279426">"Restringir notificações"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"Notificações"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"Quando o modo Não incomodar está ativado"</string>
+    <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"Desativar o som de notificações"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"Mostrar as notificações, mas desativar os sons e as vibrações."</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"O telemóvel não emite sons nem vibra quando receber novas notificações."</string>
+    <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"Ocultar e desativar o som de notificações"</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"As notificações nunca são apresentadas."</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"Quando o modo Não incomodar está ativado, não vê notificações novas nem existentes. No entanto, as notificações necessárias para o estado e a atividade básica do telemóvel continuam a ser apresentadas."</string>
+    <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"Personalizadas"</string>
+    <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"Ativar definição personalizada"</string>
+    <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"Remover definição personalizada"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"Serão apresentadas"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"Parcialmente ocultas"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"Ocultas"</string>
+    <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"Restrições personalizadas"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"Quando o ecrã estiver ligado"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"Quando o ecrã estiver desligado"</string>
     <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"Desativar o som e a vibração"</string>
@@ -3461,7 +3477,7 @@
     <string name="default_app" msgid="6864503001385843060">"(Predefinição)"</string>
     <string name="system_app" msgid="9068313769550747372">"(Sistema)"</string>
     <string name="system_default_app" msgid="3091113402349739037">"(Predefinição do sistema)"</string>
-    <string name="apps_storage" msgid="4353308027210435513">"Armazenamento de aplicações"</string>
+    <string name="apps_storage" msgid="4353308027210435513">"Armaz. de aplicações"</string>
     <string name="usage_access" msgid="5479504953931038165">"Acesso de utilização"</string>
     <string name="permit_usage_access" msgid="4012876269445832300">"Permitir acesso de utilização"</string>
     <string name="app_usage_preference" msgid="7065701732733134991">"Preferências de utilização de aplicações"</string>
@@ -3632,6 +3648,7 @@
     <string name="screen_zoom_conversation_timestamp_3" msgid="3785674344762707688">"Terça-feira às 18:02"</string>
     <string name="screen_zoom_conversation_timestamp_4" msgid="2511469395448561259">"Terça-feira às 18:03"</string>
     <string name="disconnected" msgid="4836600637485526329">"Não ligado"</string>
+    <string name="keyboard_disconnected" msgid="1495037256967224035">"Desligado"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> dos dados utilizados"</string>
     <string name="data_usage_wifi_format" msgid="5417296451392612860">"<xliff:g id="AMOUNT">^1</xliff:g> utilizado em Wi‑Fi"</string>
     <plurals name="notification_summary" formatted="false" msgid="3941492005316143599">
@@ -3906,7 +3923,7 @@
     <string name="ambient_display_pickup_summary" product="tablet" msgid="5435283849947236648">"Para consultar a hora, os ícones das notificações e outras informações, pegue no tablet."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="8256669101643381568">"Para consultar a hora, os ícones das notificações e outras informações, pegue no dispositivo."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Utilizar impressão digital para ver as notificações"</string>
-    <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"Deslizar impressão digital"</string>
+    <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"Usar impressão digital"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Para verificar as suas notificações, deslize rapidamente para baixo no sensor de impressões digitais situado na parte posterior do telemóvel."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Para verificar as suas notificações, deslize rapidamente para baixo no sensor de impressões digitais situado na parte posterior do tablet."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Para verificar as suas notificações, deslize rapidamente para baixo no sensor de impressões digitais situado na parte posterior do dispositivo."</string>

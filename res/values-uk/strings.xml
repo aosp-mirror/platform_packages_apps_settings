@@ -296,8 +296,7 @@
     <string name="forget" msgid="1400428660472591263">"Забути"</string>
     <string name="save" msgid="879993180139353333">"Зберегти"</string>
     <string name="done" msgid="6942539184162713160">"Готово"</string>
-    <!-- no translation found for apply (1577045208487259229) -->
-    <skip />
+    <string name="apply" msgid="1577045208487259229">"Застосувати"</string>
     <string name="settings_label" msgid="1626402585530130914">"Налаштування"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Налаштування"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Ярлик налаштувань"</string>
@@ -1878,7 +1877,7 @@
     <string name="show_ime" msgid="2658582193437188227">"Показати віртуальну клавіатуру"</string>
     <string name="show_ime_summary" msgid="8164993045923240698">"Залишати її на екрані, коли активна фізична клавіатура"</string>
     <string name="keyboard_shortcuts_helper" msgid="4839453720463798145">"Довідник із комбінацій клавіш"</string>
-    <string name="keyboard_shortcuts_helper_summary" msgid="5871299901459743288">"Показати доступні ярлики"</string>
+    <string name="keyboard_shortcuts_helper_summary" msgid="5871299901459743288">"Показати доступні комбінації клавіш"</string>
     <string name="default_keyboard_layout" msgid="4172606673510531271">"За умовчанням"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Швидкість указівника"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"Ігровий контролер"</string>
@@ -1949,6 +1948,8 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Елементи керування взаємодією"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Завантажені служби"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Експериментальні налаштування"</string>
+    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
+    <skip />
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Програма зчитування з екрана для людей, які не бачать або мають слабкий зір"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Щоб почути назву елемента на екрані, торкніться його"</string>
@@ -2486,6 +2487,7 @@
     <string name="backup_data_title" msgid="1239105919852668016">"Резервне копіювання даних"</string>
     <string name="backup_data_summary" msgid="708773323451655666">"Створювати резервні копії даних програм, паролів Wi-Fi та інших налаштувань на серверах Google"</string>
     <string name="backup_configure_account_title" msgid="3790872965773196615">"Резервний обліковий запис"</string>
+    <string name="backup_data_management_title" msgid="4059093462647090064">"Керувати резервним обліковим записом"</string>
     <string name="include_app_data_title" msgid="2829970132260278394">"Включити дані додатка"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Автомат. відновлення"</string>
     <string name="auto_restore_summary" msgid="4235615056371993807">"У разі повторного встановлення додатка відновлювати налаштування та дані з резервних копій"</string>
@@ -2586,7 +2588,6 @@
     <string name="header_account_settings" msgid="5382475087121880626">"Параметри облікового запису"</string>
     <string name="remove_account_label" msgid="5921986026504804119">"Видалити"</string>
     <string name="header_add_an_account" msgid="756108499532023798">"Додати об. запис"</string>
-    <string name="finish_button_label" msgid="481587707657751116">"Закінчити"</string>
     <string name="really_remove_account_title" msgid="8800653398717172460">"Видалити обліковий запис?"</string>
     <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"Видалення цього облікового запису призведе до видалення всіх його повідомлень, контактів та інших даних із планшетного ПК."</string>
     <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"Видалення цього облікового запису призведе до видалення всіх його повідомлень, контактів та інших даних із телефону."</string>
@@ -3142,7 +3143,22 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Блокувати візуальні сповіщення"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"Дозволити візуальні сигнали"</string>
-    <string name="zen_mode_what_to_block_title" msgid="7078190101807944693">"Блокувати візуальні сповіщення"</string>
+    <string name="zen_mode_restrict_notifications_screen_title" msgid="9027437428488279426">"Обмежити сповіщення"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"Сповіщення"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"Коли ввімкнено режим \"Не турбувати\""</string>
+    <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"Вимкнути сповіщення"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"Показувати сповіщення, але вимкнути звук і вібрацію"</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"Коли надходитимуть нові сповіщення, телефон не дзвонитиме й не вібруватиме"</string>
+    <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"Сховати й вимкнути сповіщення"</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"Сповіщення не з’являтимуться"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"Якщо ввімкнено режим \"Не турбувати\", нові чи наявні сповіщення не з’являтимуться (крім тих, які стосуються основних функцій і статусу телефона)."</string>
+    <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"Власні налаштування"</string>
+    <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"Увімкнути власне налаштування"</string>
+    <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"Видалити власне налаштування"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"З’являються"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"Частково ховаються"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"Ховаються"</string>
+    <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"Власні обмеження"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"Коли екран увімкнено"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"Коли екран вимкнено"</string>
     <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"Вимкнути звук і вібросигнал"</string>
@@ -3734,6 +3750,7 @@
     <string name="screen_zoom_conversation_timestamp_3" msgid="3785674344762707688">"Вт 18:02"</string>
     <string name="screen_zoom_conversation_timestamp_4" msgid="2511469395448561259">"Вт 18:03"</string>
     <string name="disconnected" msgid="4836600637485526329">"Не під’єднано"</string>
+    <string name="keyboard_disconnected" msgid="1495037256967224035">"Не під’єднано"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"Використовується трафіку: <xliff:g id="AMOUNT">%1$s</xliff:g>"</string>
     <string name="data_usage_wifi_format" msgid="5417296451392612860">"Wi-Fi споживає <xliff:g id="AMOUNT">^1</xliff:g>"</string>
     <plurals name="notification_summary" formatted="false" msgid="3941492005316143599">
@@ -4053,7 +4070,7 @@
     <string name="auto_sync_personal_account_title" msgid="8496263182646100610">"Автоматично синхронізувати особисті дані"</string>
     <string name="auto_sync_work_account_title" msgid="4489172450037434152">"Автоматично синхронізувати робочі дані"</string>
     <string name="auto_sync_account_summary" msgid="692499211629185107">"Дозволити додаткам автоматично оновлювати дані"</string>
-    <string name="account_sync_title" msgid="7214747784136106491">"Синхронізація облікового запису"</string>
+    <string name="account_sync_title" msgid="7214747784136106491">"Синхронізація обл. запису"</string>
     <string name="account_sync_summary_some_on" msgid="3375930757891381175">"Синхронізацію ввімкнено для стількох елементів: <xliff:g id="ID_1">%1$d</xliff:g> з <xliff:g id="ID_2">%2$d</xliff:g>"</string>
     <string name="account_sync_summary_all_on" msgid="570431636622254156">"Синхронізацію ввімкнено для всіх елементів"</string>
     <string name="account_sync_summary_all_off" msgid="8782409931761182734">"Синхронізацію вимкнено для всіх елементів"</string>

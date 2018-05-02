@@ -292,8 +292,7 @@
     <string name="forget" msgid="1400428660472591263">"Glöm"</string>
     <string name="save" msgid="879993180139353333">"Spara"</string>
     <string name="done" msgid="6942539184162713160">"Klar"</string>
-    <!-- no translation found for apply (1577045208487259229) -->
-    <skip />
+    <string name="apply" msgid="1577045208487259229">"Tillämpa"</string>
     <string name="settings_label" msgid="1626402585530130914">"Inställningar"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Inställningar"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Genväg för inställningar"</string>
@@ -321,7 +320,7 @@
     <string name="date_and_time_settings_title" msgid="3350640463596716780">"Datum och tid"</string>
     <string name="date_and_time_settings_title_setup_wizard" msgid="2391530758339384324">"Ange datum och tid"</string>
     <string name="date_and_time_settings_summary" msgid="7095318986757583584">"Ange datum, tidszon och format"</string>
-    <string name="date_time_auto" msgid="7076906458515908345">"Automatiskt datum och tid"</string>
+    <string name="date_time_auto" msgid="7076906458515908345">"Automatisk datum och tid"</string>
     <string name="date_time_auto_summaryOn" msgid="4609619490075140381">"Använd nätverkets tid"</string>
     <string name="date_time_auto_summaryOff" msgid="8698762649061882791">"Använd nätverkets tid"</string>
     <string name="zone_auto" msgid="334783869352026648">"Automatisk tidszon"</string>
@@ -1437,7 +1436,7 @@
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Återställning av standardinställningar för APN har slutförts."</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"Återställningsalternativ"</string>
     <string name="reset_dashboard_summary" msgid="4851012632493522755">"Nätverk, appar och enheter kan återställas"</string>
-    <string name="reset_network_title" msgid="6166025966016873843">"Återställ inställningarna för Wi-Fi, mobildata och Bluetooth"</string>
+    <string name="reset_network_title" msgid="6166025966016873843">"Återställ Wi-Fi, mobildata och Bluetooth"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"Alla nätverksinställningar återställs, till exempel \n\n"<li>"Wi‑Fi"</li>\n<li>"Mobildata"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_esim_title" msgid="2419812515540592802">"Återställ eSIM-kort också"</string>
     <string name="reset_esim_desc" msgid="6412324670559060446">"Radera alla eSIM-kort på mobilen. Du måste kontakta operatören och ladda ned eSIM-korten på nytt. Detta innebär inte att serviceavtalet avslutas."</string>
@@ -1921,6 +1920,8 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Interaktionsinställningar"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Nedladdade tjänster"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Experimentella"</string>
+    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
+    <skip />
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Skärmläsaren är främst avsedd för blinda eller personer med nedsatt syn"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Tryck på objekt på skärmen om du vill höra dem upplästa"</string>
@@ -2428,6 +2429,7 @@
     <string name="backup_data_title" msgid="1239105919852668016">"Säkerhetskopiera data"</string>
     <string name="backup_data_summary" msgid="708773323451655666">"spara en säkerhetskopia av appdata, Wi-Fi-lösenord och andra inställningar på Googles servrar"</string>
     <string name="backup_configure_account_title" msgid="3790872965773196615">"Backupkonto"</string>
+    <string name="backup_data_management_title" msgid="4059093462647090064">"Hantera konto för säkerhetskopiering"</string>
     <string name="include_app_data_title" msgid="2829970132260278394">"Inkludera appdata"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Automatisk återställning"</string>
     <string name="auto_restore_summary" msgid="4235615056371993807">"När du installerar om en app återställs säkerhetskopierade inställningar och data"</string>
@@ -2528,7 +2530,6 @@
     <string name="header_account_settings" msgid="5382475087121880626">"Kontoinställningar"</string>
     <string name="remove_account_label" msgid="5921986026504804119">"Ta bort konto"</string>
     <string name="header_add_an_account" msgid="756108499532023798">"Lägg till ett konto"</string>
-    <string name="finish_button_label" msgid="481587707657751116">"Avsluta"</string>
     <string name="really_remove_account_title" msgid="8800653398717172460">"Vill du ta bort kontot?"</string>
     <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"Om du tar bort kontot tar du också bort alla meddelanden, kontakter och andra data från surfplattan!"</string>
     <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"Om du tar bort kontot tar du också bort alla meddelanden, kontakter och andra data från mobilen!"</string>
@@ -3072,7 +3073,22 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Blockera synliga störningar"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"Tillåt synliga signaler"</string>
-    <string name="zen_mode_what_to_block_title" msgid="7078190101807944693">"Blockera synliga störningar"</string>
+    <string name="zen_mode_restrict_notifications_screen_title" msgid="9027437428488279426">"Begränsa aviseringar"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"Aviseringar"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"När Stör ej har aktiverats"</string>
+    <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"Dölj aviseringar"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"Visa aviseringar men stäng av ljud och vibrationer"</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"Inga ljud eller vibrationer används när du tar emot nya aviseringar på mobilen"</string>
+    <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"Dölj och stäng av ljudet för aviseringar"</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"Inga aviseringar visas"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"När Stör ej har aktiverats visas inte nya eller befintliga aviseringar, förutom för grundläggande aktivitet och status för mobilen."</string>
+    <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"Anpassa"</string>
+    <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"Aktivera anpassad inställning"</string>
+    <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"Ta bort anpassad inställning"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"Visas"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"Delvis dold"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"Dold"</string>
+    <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"Anpassade begränsningar"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"När skärmen är på"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"När skärmen är av"</string>
     <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"Stäng av ljud och vibration"</string>
@@ -3632,6 +3648,7 @@
     <string name="screen_zoom_conversation_timestamp_3" msgid="3785674344762707688">"Tis. 18:02"</string>
     <string name="screen_zoom_conversation_timestamp_4" msgid="2511469395448561259">"Tis. 18:03"</string>
     <string name="disconnected" msgid="4836600637485526329">"Ingen anslutning"</string>
+    <string name="keyboard_disconnected" msgid="1495037256967224035">"Ingen anslutning"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> data används"</string>
     <string name="data_usage_wifi_format" msgid="5417296451392612860">"<xliff:g id="AMOUNT">^1</xliff:g> används via Wi‑Fi"</string>
     <plurals name="notification_summary" formatted="false" msgid="3941492005316143599">

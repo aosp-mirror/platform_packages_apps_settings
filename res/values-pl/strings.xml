@@ -296,8 +296,7 @@
     <string name="forget" msgid="1400428660472591263">"Zapomnij"</string>
     <string name="save" msgid="879993180139353333">"Zapisz"</string>
     <string name="done" msgid="6942539184162713160">"Gotowe"</string>
-    <!-- no translation found for apply (1577045208487259229) -->
-    <skip />
+    <string name="apply" msgid="1577045208487259229">"Zastosuj"</string>
     <string name="settings_label" msgid="1626402585530130914">"Ustawienia"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Ustawienia"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Skrót do ustawień"</string>
@@ -1242,7 +1241,7 @@
     <string name="status_meid_number" msgid="1751442889111731088">"Numer MEID"</string>
     <string name="status_icc_id" msgid="943368755577172747">"ICCID"</string>
     <string name="status_data_network_type" msgid="7570837037428932780">"Typ sieci do mobilnej transmisji danych"</string>
-    <string name="status_voice_network_type" msgid="5663112239742353547">"Typ sieci komórkowej do połączeń głosowych"</string>
+    <string name="status_voice_network_type" msgid="5663112239742353547">"Typ sieci do połączeń głosowych"</string>
     <string name="status_latest_area_info" msgid="7222470836568238054">"Informacje o operatorze"</string>
     <string name="status_data_state" msgid="5503181397066522950">"Stan sieci komórkowej"</string>
     <string name="status_esim_id" msgid="6456255368300906317">"EID"</string>
@@ -1949,6 +1948,8 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Sterowanie interakcjami"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Pobrane usługi"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Eksperymentalne"</string>
+    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
+    <skip />
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Czytnik ekranu przeznaczony głównie dla osób niewidomych i słabowidzących"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Klikaj elementy na ekranie, by posłuchać ich nazw czytanych na głos"</string>
@@ -2486,6 +2487,7 @@
     <string name="backup_data_title" msgid="1239105919852668016">"Utwórz kopię zapasową"</string>
     <string name="backup_data_summary" msgid="708773323451655666">"Zapisuj na serwerach Google kopie zapasowe danych aplikacji, haseł Wi-Fi i innych ustawień."</string>
     <string name="backup_configure_account_title" msgid="3790872965773196615">"Konto kopii zapasowej"</string>
+    <string name="backup_data_management_title" msgid="4059093462647090064">"Zarządzaj kontem kopii zapasowej"</string>
     <string name="include_app_data_title" msgid="2829970132260278394">"Dołącz dane aplikacji"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Autoprzywracanie"</string>
     <string name="auto_restore_summary" msgid="4235615056371993807">"Przy ponownej instalacji aplikacji przywróć ustawienia i dane z kopii zapasowej"</string>
@@ -2586,7 +2588,6 @@
     <string name="header_account_settings" msgid="5382475087121880626">"Ustawienia konta"</string>
     <string name="remove_account_label" msgid="5921986026504804119">"Usuń konto"</string>
     <string name="header_add_an_account" msgid="756108499532023798">"Dodaj konto"</string>
-    <string name="finish_button_label" msgid="481587707657751116">"Zakończ"</string>
     <string name="really_remove_account_title" msgid="8800653398717172460">"Usunąć konto?"</string>
     <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"Usunięcie tego konta spowoduje usunięcie z tabletu wszystkich powiązanych z nim wiadomości, kontaktów i innych danych."</string>
     <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"Usunięcie tego konta spowoduje usunięcie z telefonu wszystkich powiązanych z nim wiadomości, kontaktów i innych danych."</string>
@@ -3142,7 +3143,38 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Blokuj wyświetlanie"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"Zezwól na sygnały wizualne"</string>
-    <string name="zen_mode_what_to_block_title" msgid="7078190101807944693">"Blokowanie sygnałów wizualnych"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_screen_title (9027437428488279426) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_title (478040192977063582) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_category (1648631487087638037) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_mute (9210062826172341735) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_mute_summary (285566524371041091) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_mute_footer (8473382758368384982) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_hide (3451553435075518722) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_hide_summary (3823881787175376177) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_hide_footer (4224323933073288352) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_custom (7498689167767941034) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_enable_custom (4250962169561739747) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_disable_custom (6676997522330453597) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_summary_muted (4678779044896459009) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_summary_custom (7416121534987213074) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_summary_hidden (7805339105802282234) -->
+    <skip />
+    <!-- no translation found for zen_mode_what_to_block_title (5480903548365697159) -->
+    <skip />
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"Gdy ekran jest włączony"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"Gdy ekran jest wyłączony"</string>
     <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"Wycisz dźwięk i wibracje"</string>
@@ -3718,7 +3750,7 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Szybko uruchom aparat bez odblokowywania ekranu"</string>
     <string name="screen_zoom_title" msgid="5233515303733473927">"Rozmiar interfejsu"</string>
     <string name="screen_zoom_short_summary" msgid="7291960817349834688">"Powiększ lub pomniejsz elementy na ekranie"</string>
-    <string name="screen_zoom_keywords" msgid="9176477565403352552">"wyświetlacz, gęstość, powiększenie ekranu, skala, skalowanie"</string>
+    <string name="screen_zoom_keywords" msgid="9176477565403352552">"układ interfejsu, powiększenie ekranu, skala, skalowanie"</string>
     <string name="screen_zoom_summary" msgid="6445488991799015407">"Powiększ lub pomniejsz elementy na ekranie. Niektóre aplikacje na ekranie głównym mogą przesunąć się w inne miejsce."</string>
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Podgląd"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Pomniejsz"</string>
@@ -3734,6 +3766,7 @@
     <string name="screen_zoom_conversation_timestamp_3" msgid="3785674344762707688">"Wt. 18:02"</string>
     <string name="screen_zoom_conversation_timestamp_4" msgid="2511469395448561259">"Wt. 18:03"</string>
     <string name="disconnected" msgid="4836600637485526329">"Brak połączenia"</string>
+    <string name="keyboard_disconnected" msgid="1495037256967224035">"Brak połączenia"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"Użycie danych: <xliff:g id="AMOUNT">%1$s</xliff:g>"</string>
     <string name="data_usage_wifi_format" msgid="5417296451392612860">"<xliff:g id="AMOUNT">^1</xliff:g> przesłane przez Wi‑Fi"</string>
     <plurals name="notification_summary" formatted="false" msgid="3941492005316143599">
