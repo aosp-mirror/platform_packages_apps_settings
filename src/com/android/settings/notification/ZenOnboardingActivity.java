@@ -18,12 +18,10 @@ package com.android.settings.notification;
 
 import android.app.Activity;
 import android.app.NotificationManager;
-import android.content.Intent;
+import android.app.NotificationManager.Policy;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.view.View;
-import android.widget.CheckBox;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -67,12 +65,13 @@ public class ZenOnboardingActivity extends Activity {
 
     public void save(View button) {
         mMetrics.action(MetricsEvent.ACTION_ZEN_ONBOARDING_OK);
-        NotificationManager.Policy policy = mNm.getNotificationPolicy();
+        Policy policy = mNm.getNotificationPolicy();
 
-        NotificationManager.Policy newPolicy = new NotificationManager.Policy(
-                policy.priorityCategories, NotificationManager.Policy.PRIORITY_SENDERS_STARRED,
+        Policy newPolicy = new NotificationManager.Policy(
+                Policy.PRIORITY_CATEGORY_REPEAT_CALLERS | policy.priorityCategories,
+                Policy.PRIORITY_SENDERS_STARRED,
                 policy.priorityMessageSenders,
-                NotificationManager.Policy.getAllSuppressedVisualEffects());
+                Policy.getAllSuppressedVisualEffects());
         mNm.setNotificationPolicy(newPolicy);
 
         finishAndRemoveTask();
