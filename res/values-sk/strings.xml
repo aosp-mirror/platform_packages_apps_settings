@@ -296,8 +296,7 @@
     <string name="forget" msgid="1400428660472591263">"Zabudnúť"</string>
     <string name="save" msgid="879993180139353333">"Uložiť"</string>
     <string name="done" msgid="6942539184162713160">"Hotovo"</string>
-    <!-- no translation found for apply (1577045208487259229) -->
-    <skip />
+    <string name="apply" msgid="1577045208487259229">"Použiť"</string>
     <string name="settings_label" msgid="1626402585530130914">"Nastavenia"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Nastavenia"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Odkaz na nastavenia"</string>
@@ -361,8 +360,8 @@
     <string name="time_picker_title" msgid="483460752287255019">"Čas"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Automaticky zamknúť"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po prechode do spánku"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Okamžite po režime spánku, ak odomknutie nie je udržované funkciou <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po režime spánku, ak odomknutie nie je udržované funkciou <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Okamžite po režime spánku, ak odomknutie nie je udržiavané funkciou <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po režime spánku, ak odomknutie nie je udržiavané funkciou <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Zobrazovať vlastníka na uzamknutej obrazovke"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Správa na uzamknutej obrazovke"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Aktiv. miniaplikácie"</string>
@@ -385,7 +384,7 @@
     <string name="decryption_settings_summary" product="default" msgid="5671817824042639849">"Telefón nie je šifrovaný"</string>
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"Zariadenie je šifrované"</string>
     <string name="decryption_settings_summary" product="tablet" msgid="5794135636155570977">"Zariadenie nie je šifrované"</string>
-    <string name="lockscreen_settings_title" msgid="3922976395527087455">"Predvoľby uzamknutej obrazovky"</string>
+    <string name="lockscreen_settings_title" msgid="3922976395527087455">"Uzamknutá obrazovka"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Moja poloha, odomknutie obrazovky, zámok SIM, zámok ukladacieho priestoru poverení"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Nastavenie funkcie Moje poloha, odomknutie obrazovky a zamknutie úložiska poverení"</string>
     <string name="security_passwords_title" msgid="2881269890053568809">"Ochrana súkromia"</string>
@@ -1168,7 +1167,7 @@
     <string name="doze_always_on_summary" msgid="6978257596231155345">"Zobrazovať čas, ikony upozornení a ďalšie informácie. Zvýšené využitie batérie."</string>
     <string name="title_font_size" msgid="4405544325522105222">"Veľkosť písma"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Zväčšite alebo zmenšite text"</string>
-    <string name="sim_lock_settings" msgid="3392331196873564292">"Nastavenia zámky SIM karty"</string>
+    <string name="sim_lock_settings" msgid="3392331196873564292">"Zámka SIM karty"</string>
     <string name="sim_lock_settings_category" msgid="6242052161214271091">"Zámka SIM karty"</string>
     <string name="sim_lock_settings_summary_off" msgid="8028944267104896401">"Vypnuté"</string>
     <string name="sim_lock_settings_summary_on" msgid="39103355956342985">"Zamknuté"</string>
@@ -1479,10 +1478,10 @@
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Sieťové nastavenia boli obnovené"</string>
     <string name="reset_esim_error_title" msgid="1464195710538232590">"eSIM karty sa nedajú obnoviť"</string>
     <string name="reset_esim_error_msg" msgid="8434956817922668388">"eSIM karty sa nedajú obnoviť, pretože sa vyskytla chyba."</string>
-    <string name="master_clear_title" msgid="3531267871084279512">"Vymazať všetky dáta (obnovenie výrobných nastavení)"</string>
+    <string name="master_clear_title" msgid="3531267871084279512">"Vymazať dáta (obnova výr. nastavení)"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Táto operácia vymaže všetky dáta v "<b>"internom úložisku"</b>" tabletu, vrátane:\n\n"<li>"účtu Google"</li>\n<li>"dát a nastavení systému a aplikácií"</li>\n<li>"stiahnutých aplikácií"</li></string>
-    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Táto operácia vymaže všetky dáta v "<b>"internom úložisku"</b>" telefónu, vrátane:\n\n"<li>"účtu Google"</li>\n<li>"dát a nastavení systému a aplikácií"</li>\n<li>"stiahnutých aplikácií"</li></string>
-    <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Aktuálne ste prihlásení do nasledujúcich účtov:\n"</string>
+    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Táto operácia vymaže všetky dáta v "<b>"internom úložisku"</b>" telefónu:\n\n"<li>"Účet Google"</li>\n<li>"Dáta a nastavenia systému a aplikácií"</li>\n<li>"Stiahnuté aplikácie"</li></string>
+    <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Aktuálne ste prihlásený/-á do nasledujúcich účtov:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"Na tomto zariadení sú prítomní ďalší používatelia.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Hudba"</li>\n<li>"Fotografie"</li>\n<li>"Iné používateľské údaje"</li></string>
     <string name="master_clear_desc_also_erases_esim" msgid="6008213558725767177"><li>"eSIM karty"</li></string>
@@ -1655,7 +1654,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="4864525074768391381">"Zobrazovať vzor profilu"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="4389015658335522989">"Vibrovať pri klepnutí"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Zamykať vypínačom"</string>
-    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"Ak odomknutie nie je udržované funkciou <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
+    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"Ak odomknutie nie je udržiavané funkciou <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"Nastaviť bezpečnostný vzor"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"Zmena bezpečnostného vzoru"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"Bezpečnostný vzor obrazovky nakreslite takto"</string>
@@ -1943,7 +1942,7 @@
     <string name="usage_time_label" msgid="295954901452833058">"Doba použitia"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"Dostupnosť"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Nastavenia dostupnosti"</string>
-    <string name="accessibility_settings_summary" msgid="981260486011624939">"Čítačky obrazovky, zobrazenie, ovládacie prvky interakcie"</string>
+    <string name="accessibility_settings_summary" msgid="981260486011624939">"Čítačky obrazovky, zobrazenie, ovládacie prvky"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"Pre slabozrakých"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"Zariadenie môžete prispôsobiť, aby zodpovedalo vašim potrebám. Tieto funkcie dostupnosti môžete neskôr zmeniť v Nastaveniach."</string>
     <string name="vision_settings_suggestion_title" msgid="8058794060304707004">"Zmeniť veľkosť písma"</string>
@@ -2189,7 +2188,7 @@
     <string name="battery_tip_smart_battery_title" product="default" msgid="2542822112725248683">"Predĺženie výdrže batérie telefónu"</string>
     <string name="battery_tip_smart_battery_title" product="tablet" msgid="6452567046912954866">"Predĺženie výdrže batérie tabletu"</string>
     <string name="battery_tip_smart_battery_title" product="device" msgid="4445149029390556382">"Predĺženie výdrže batérie zariadenia"</string>
-    <string name="battery_tip_smart_battery_summary" msgid="2326809294592208069">"Zapnúť aplikáciu Battery Manager"</string>
+    <string name="battery_tip_smart_battery_summary" msgid="2326809294592208069">"Zapnúť správcu batérie"</string>
     <string name="battery_tip_early_heads_up_title" msgid="5788492366387119807">"Zapnúť šetrič batérie"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="1639271439914224547">"Batéria sa môže minúť skôr ako obvykle"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="4294083319255926811">"Šetrič batérie je zapnutý"</string>
@@ -2241,12 +2240,12 @@
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="3058235875830858902">"Zrušiť"</string>
     <string name="battery_tip_dialog_summary_message" msgid="3483708973495692333">"Vaša plne nabitá batéria podľa údajov o využívaní bežne vydrží približne <xliff:g id="TIME_DURATION">%1$s</xliff:g>.\n\nAk potrebujete predĺžiť jej výdrž, zapnite Šetrič batérie."</string>
     <string name="battery_tip_dialog_summary_message_no_estimation" msgid="1456026456418786135">"Ak potrebujete predĺžiť výdrž batérie, zapnite šetrič batérie"</string>
-    <string name="smart_battery_manager_title" msgid="870632749556793417">"Battery Manager"</string>
+    <string name="smart_battery_manager_title" msgid="870632749556793417">"Správca batérie"</string>
     <string name="smart_battery_title" msgid="6218785691872466076">"Spravovať aplikácie automaticky"</string>
     <string name="smart_battery_summary" msgid="1339184602000004058">"Obmedzte využívanie batérie aplikáciami, ktoré nepoužívate často"</string>
-    <string name="smart_battery_footer" product="default" msgid="5555604955956219544">"Keď nástroj Battery Manager zistí, že aplikácie nadmerne vybíjajú batériu, zobrazí sa možnosť na ich obmedzenie. Obmedzené aplikácie nemusia správne fungovať a upozornenia môžu byť oneskorené."</string>
-    <string name="smart_battery_footer" product="tablet" msgid="5555604955956219544">"Keď nástroj Battery Manager zistí, že aplikácie nadmerne vybíjajú batériu, zobrazí sa možnosť na ich obmedzenie. Obmedzené aplikácie nemusia správne fungovať a upozornenia môžu byť oneskorené."</string>
-    <string name="smart_battery_footer" product="device" msgid="5555604955956219544">"Keď nástroj Battery Manager zistí, že aplikácie nadmerne vybíjajú batériu, zobrazí sa možnosť na ich obmedzenie. Obmedzené aplikácie nemusia správne fungovať a upozornenia môžu byť oneskorené."</string>
+    <string name="smart_battery_footer" product="default" msgid="5555604955956219544">"Keď správca batérie zistí, že aplikácie nadmerne vybíjajú batériu, zobrazí sa možnosť ich obmedziť. Obmedzené aplikácie nemusia správne fungovať a upozornenia môžu byť oneskorené."</string>
+    <string name="smart_battery_footer" product="tablet" msgid="5555604955956219544">"Keď správca batérie zistí, že aplikácie nadmerne vybíjajú batériu, zobrazí sa možnosť ich obmedziť. Obmedzené aplikácie nemusia správne fungovať a upozornenia môžu byť oneskorené."</string>
+    <string name="smart_battery_footer" product="device" msgid="5555604955956219544">"Keď správca batérie zistí, že aplikácie nadmerne vybíjajú batériu, zobrazí sa možnosť ich obmedziť. Obmedzené aplikácie nemusia správne fungovať a upozornenia môžu byť oneskorené."</string>
     <string name="restricted_app_title" msgid="8982477293044330653">"Obmedzené aplikácie"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="7355687633914223530">
       <item quantity="few">Obmedzuje sa využitie batérie %1$d aplikáciami</item>
@@ -2255,7 +2254,7 @@
       <item quantity="one">Obmedzuje sa využitie batérie %1$d aplikáciou</item>
     </plurals>
     <string name="restricted_app_detail_footer" msgid="6739863162364046859">"Tieto aplikácie používali batériu na pozadí. Obmedzené aplikácie nemusia správne fungovať a upozornenia môžu byť oneskorené."</string>
-    <string name="battery_auto_restriction_title" msgid="6553271897488963709">"Použiť nástroj Battery Manager"</string>
+    <string name="battery_auto_restriction_title" msgid="6553271897488963709">"Použiť správcu batérie"</string>
     <string name="battery_auto_restriction_summary" msgid="8561335400991281062">"Zistite, keď aplikácie nadmerne vybíjajú batériu"</string>
     <string name="battery_manager_on" msgid="8643310865054362396">"Zapnuté / zisťovanie nadmerného vybíjania batérie aplikáciami je aktívne"</string>
     <string name="battery_manager_off" msgid="5473135235710343576">"Vypnuté"</string>
@@ -2884,7 +2883,7 @@
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Rozbaliť nastavenia aplikácie"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Platby mobilom"</string>
     <string name="nfc_payment_how_it_works" msgid="3028822263837896720">"Ako to funguje"</string>
-    <string name="nfc_payment_no_apps" msgid="5477904979148086424">"Plaťte v obchodoch so svojím telefónom"</string>
+    <string name="nfc_payment_no_apps" msgid="5477904979148086424">"Plaťte v obchodoch telefónom"</string>
     <string name="nfc_payment_default" msgid="8648420259219150395">"Predvolená platobná aplikácia"</string>
     <string name="nfc_payment_default_not_set" msgid="7485060884228447765">"Nenastavené"</string>
     <string name="nfc_payment_app_and_desc" msgid="7942415346564794258">"<xliff:g id="APP">%1$s</xliff:g> – <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
@@ -3146,7 +3145,22 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Blokovať vizuálne vyrušenia"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"Povoliť vizuálne signály"</string>
-    <string name="zen_mode_what_to_block_title" msgid="7078190101807944693">"Blokovanie vizuálnych vyrušení"</string>
+    <string name="zen_mode_restrict_notifications_screen_title" msgid="9027437428488279426">"Obmedziť upozornenia"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"Upozornenia"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"Keď je zapnutý režim Nerušiť"</string>
+    <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"Vypnúť zvuk upozornení"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"Zobrazovať upozornenia, ale stlmiť zvuky a vibrácie"</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"Keď do telefónu dostanete nové upozornenia, nevydajú zvuk ani nebudú vibrovať"</string>
+    <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"Skryť a stlmiť zvuk upozornení"</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"Upozornenia sa nebudú vôbec zobrazovať"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"Keď je zapnutý režim Nerušiť, neuvidíte žiadne nové ani existujúce upozornenia. Avšak upozornenia potrebné pre základné aktivity a stav telefónu sa budú naďalej zobrazovať."</string>
+    <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"Vlastné"</string>
+    <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"Povoliť vlastné nastavenie"</string>
+    <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"Odstrániť vlastné nastavenie"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"Budú sa zobrazovať"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"Čiastočne skryté"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"Skryté"</string>
+    <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"Vlastné obmedzenia"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"Keď je obrazovka zapnutá"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"Keď je obrazovka vypnutá"</string>
     <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"Stlmiť zvuk a vibrácie"</string>
@@ -3156,7 +3170,7 @@
     <string name="zen_mode_block_effect_status" msgid="6642532634292373081">"Skryť ikony stavového riadka"</string>
     <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"Skryť bodky upozornení"</string>
     <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"V prípade upozornení nebudiť"</string>
-    <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"Skryť zo zoznamu upozornení"</string>
+    <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"Skryť v zozname upozornení"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"Nikdy"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="1230265589026355094">"Keď je obrazovka vypnutá"</string>
     <string name="zen_mode_block_effect_summary_screen_on" msgid="6017536991063513394">"Keď je obrazovka zapnutá"</string>
@@ -3652,7 +3666,7 @@
     <string name="assist_access_screenshot_title" msgid="4034721336291215819">"Použiť snímku obrazovky"</string>
     <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"Povoliť asistenčnej aplikácii prístup k snímke obrazovky"</string>
     <string name="assist_flash_title" msgid="506661221230034891">"Blikanie obrazovky"</string>
-    <string name="assist_flash_summary" msgid="9160668468824099262">"Blikanie okrajov obrazovky, keď pomocná aplikácia pristupuje k textu z obrazovky alebo snímky obrazovky"</string>
+    <string name="assist_flash_summary" msgid="9160668468824099262">"Blikanie okrajov obrazovky, keď pomocná aplikácia má prístup k textu z obrazovky alebo snímke obrazovky"</string>
     <string name="assist_footer" msgid="1982791172085896864">"Asistenčné aplikácie vám pomáhajú na základe informácií zo zobrazenej obrazovky. Niektoré aplikácie podporujú spúšťač aj služby hlasového výstupu, aby vám poskytli integrovanú pomoc."</string>
     <string name="average_memory_use" msgid="829566450150198512">"Priemerné využitie pamäte"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"Maximálne využitie pamäte"</string>
@@ -3843,7 +3857,7 @@
     <string name="cell_warning_only" msgid="763147658209027140">"Dátové upozornenie <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Dátové upozornenie <xliff:g id="ID_1">%1$s</xliff:g> / dátový limit <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="billing_cycle" msgid="6614597736285325497">"Upozornenie o dátach a limit"</string>
-    <string name="app_usage_cycle" msgid="8877223251648092131">"Cyklus spotreby dát aplikáciou"</string>
+    <string name="app_usage_cycle" msgid="8877223251648092131">"Cyklus využitia dát aplikáciami"</string>
     <string name="cell_data_warning" msgid="1985956818884847057">"Dátové upozornenie: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_limit" msgid="1578367585799358854">"Dátový limit: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_warning_and_limit" msgid="6888825370687743208">"Dátové upozornenie: <xliff:g id="ID_1">^1</xliff:g> / dátový limit: <xliff:g id="ID_2">^2</xliff:g>"</string>
@@ -3950,7 +3964,7 @@
     <string name="display_cutout_emulation" msgid="6306593933746393170">"Simulovať obrazovku s výrezom"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"výrez obrazovky, výrez"</string>
     <string name="display_cutout_emulation_none" msgid="5144174674654097316">"Žiadna"</string>
-    <string name="special_access" msgid="3458780842491881155">"Špeciálny prístup aplikácie"</string>
+    <string name="special_access" msgid="3458780842491881155">"Špeciálny prístup apl."</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="few">Neobmedzené dáta môžu používať <xliff:g id="COUNT">%d</xliff:g> aplikácie</item>
       <item quantity="many">Neobmedzené dáta môže používať <xliff:g id="COUNT">%d</xliff:g> aplikácie</item>

@@ -292,8 +292,7 @@
     <string name="forget" msgid="1400428660472591263">"فراموش کردن"</string>
     <string name="save" msgid="879993180139353333">"ذخیره‌"</string>
     <string name="done" msgid="6942539184162713160">"تمام"</string>
-    <!-- no translation found for apply (1577045208487259229) -->
-    <skip />
+    <string name="apply" msgid="1577045208487259229">"اعمال"</string>
     <string name="settings_label" msgid="1626402585530130914">"تنظیمات"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"تنظیمات"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"میان‌بر تنظیمات"</string>
@@ -1084,7 +1083,7 @@
     <string name="auto_brightness_very_high_title" msgid="8867164854439331022">"بسیار زیاد"</string>
     <string name="auto_brightness_subtitle" msgid="6454652530864093466">"میزان روشنایی ترجیحی"</string>
     <string name="auto_brightness_off_summary" msgid="7629228736838155268">"برای چراغ‌های در دسترس تنظیم نکنید"</string>
-    <string name="auto_brightness_very_high_summary" msgid="4551003097086220709">"مصرف باتری بالا رفته است"</string>
+    <string name="auto_brightness_very_high_summary" msgid="4551003097086220709">"مصرف باتری افزایش‌یافته"</string>
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"میزان روشنایی را برای چراغ‌ در دسترس بهینه کنید. تازمانی‌که این ویژگی روشن است، می‌توانید روشنایی را به‌طورموقت تنظیم کنید."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"روشنایی صفحه‌نمایش به‌طور خودکار با محیط و فعالیت‌هایتان تنظیم می‌شود. می‌توانید لغزاننده را به‌طور دستی حرکت دهید تا روشنایی تطبیقی ترجیح شما را دریابد."</string>
     <string name="night_display_title" msgid="2626451512200357686">"نور شب"</string>
@@ -1135,13 +1134,13 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"روشنایی خودکار"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"بیدار شدن با بالا بردن"</string>
     <string name="ambient_display_screen_title" msgid="4252755516328775766">"نمایشگر محیط"</string>
-    <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"همیشه روشن / مصرف شارژ بالا"</string>
+    <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"همیشه روشن / مصرف باتری افزایش‌یافته"</string>
     <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"اعلان‌های جدید"</string>
     <string name="ambient_display_category_triggers" msgid="4359289754456268573">"زمان نمایش دادن"</string>
     <string name="doze_title" msgid="2375510714460456687">"اعلان‌های جدید"</string>
     <string name="doze_summary" msgid="3846219936142814032">"روشن شدن صفحه‌نمایش هنگامی که اعلانی دریافت می‌کنید"</string>
     <string name="doze_always_on_title" msgid="1046222370442629646">"همیشه روشن"</string>
-    <string name="doze_always_on_summary" msgid="6978257596231155345">"نمایش زمان، نمادهای اعلان و سایر اطلاعات. مصرف شارژ بالا."</string>
+    <string name="doze_always_on_summary" msgid="6978257596231155345">"نمایش زمان، نمادهای اعلان و سایر اطلاعات. مصرف باتری افزایش‌یافته."</string>
     <string name="title_font_size" msgid="4405544325522105222">"اندازه قلم"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"نوشتار را بزرگ‌تر یا کوچک‌تر کنید"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"تنظیمات قفل سیم کارت"</string>
@@ -2166,8 +2165,8 @@
       <item quantity="other">‏%2$d برنامه اخیراً محدود شده است</item>
     </plurals>
     <plurals name="battery_tip_restrict_summary" formatted="false" msgid="5768962491638423979">
-      <item quantity="one">‏%2$d برنامه شارژ بالایی در پس‌زمینه مصرف می‌کنند</item>
-      <item quantity="other">‏%2$d برنامه شارژ بالایی در پس‌زمینه مصرف می‌کنند</item>
+      <item quantity="one">‏%2$d مصرف باتری در پس‌زمینه بالایی دارد</item>
+      <item quantity="other">‏%2$d مصرف باتری در پس‌زمینه بالایی دارد</item>
     </plurals>
     <plurals name="battery_tip_restrict_handled_summary" formatted="false" msgid="1040488674178753191">
       <item quantity="one">این برنامه‌ها نمی‌تواند در پس‌زمینه اجرا شود</item>
@@ -3076,7 +3075,22 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: ‏<xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"مسدود کردن مزاحمت‌های بصری"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"مجاز کردن همه سیگنال‌های تصویری"</string>
-    <string name="zen_mode_what_to_block_title" msgid="7078190101807944693">"مسدود کردن مزاحمت‌های بصری"</string>
+    <string name="zen_mode_restrict_notifications_screen_title" msgid="9027437428488279426">"اعلان‌های محدود‌شده"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"اعلان‌ها"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"وقتی «مزاحم نشوید» روشن باشد"</string>
+    <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"بی‌صدا کردن اعلان‌"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"نشان دادن اعلان‌، اما بی‌صدا و لرزش"</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"هنگام دریافت اعلان‌، تلفنتان صدا نمی‌دهد یا نمی‌لرزد"</string>
+    <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"پنهان و بی‌صدا کردن اعلان‌ها"</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"اعلان‌ به‌هیچ‌وجه نشان داده نخواهد شد"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"وقتی «مزاحم نشوید» روشن باشد، اعلان‌های جدید یا موجود را نمی‌بینید. درهرحال، اعلان‌های لازم برای وضعیت و فعالیت اصلی تلفن همچنان نشان داده می‌شود."</string>
+    <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"سفارشی"</string>
+    <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"فعال کردن تنظیم سفارشی"</string>
+    <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"حذف تنظیم سفارشی"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"نشان داده خواهد شد"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"تا‌حدی پنهان"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"پنهان"</string>
+    <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"محدودیت‌های سفارشی"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"وقتی صفحه‌نمایش روشن است"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"وقتی صفحه‌نمایش خاموش است"</string>
     <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"صدا و لرزش بی‌صدا شود"</string>

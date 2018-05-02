@@ -292,8 +292,7 @@
     <string name="forget" msgid="1400428660472591263">"Olvidar"</string>
     <string name="save" msgid="879993180139353333">"Guardar"</string>
     <string name="done" msgid="6942539184162713160">"Listo"</string>
-    <!-- no translation found for apply (1577045208487259229) -->
-    <skip />
+    <string name="apply" msgid="1577045208487259229">"Aplicar"</string>
     <string name="settings_label" msgid="1626402585530130914">"Configuración"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Configuración"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Configuración"</string>
@@ -1222,7 +1221,7 @@
     <string name="status_data_network_type" msgid="7570837037428932780">"Tipo de red de datos móviles"</string>
     <string name="status_voice_network_type" msgid="5663112239742353547">"Tipo de red de voz móvil"</string>
     <string name="status_latest_area_info" msgid="7222470836568238054">"Información del operador"</string>
-    <string name="status_data_state" msgid="5503181397066522950">"Estado de red de celulares"</string>
+    <string name="status_data_state" msgid="5503181397066522950">"Estado de red móvil"</string>
     <string name="status_esim_id" msgid="6456255368300906317">"EID"</string>
     <string name="status_service_state" msgid="2323931627519429503">"Estado del servicio"</string>
     <string name="status_signal_strength" msgid="3732655254188304547">"Potencia de la señal"</string>
@@ -1629,7 +1628,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="4864525074768391381">"Mostrar el patrón del perfil"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="4389015658335522989">"Vibrar al presionar"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Botón de encendido bloquea"</string>
-    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"Excepto cuando <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> mantiene la pantalla desbloqueada."</string>
+    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"Excepto cuando <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> mantiene la pantalla desbloqueada"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"Conf. patrón de desbloq."</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"Cambiar patrón de desbloqueo"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"Cómo dibujar un patrón de desbloqueo"</string>
@@ -2189,7 +2188,7 @@
     <string name="battery_tip_dialog_summary_message_no_estimation" msgid="1456026456418786135">"Si necesitas extender la duración de la batería, activa el Ahorro de batería"</string>
     <string name="smart_battery_manager_title" msgid="870632749556793417">"Administrador de batería"</string>
     <string name="smart_battery_title" msgid="6218785691872466076">"Administra apps automáticamente"</string>
-    <string name="smart_battery_summary" msgid="1339184602000004058">"Limitar el uso de batería de las apps que no usas con frecuencia"</string>
+    <string name="smart_battery_summary" msgid="1339184602000004058">"Limitar el consumo de batería de las apps que no uses con frecuencia"</string>
     <string name="smart_battery_footer" product="default" msgid="5555604955956219544">"Si el administrador de batería detecta que hay apps que agotan la batería, podrás restringirlas, aunque es posible que no funcionen correctamente y que se retrasen las notificaciones."</string>
     <string name="smart_battery_footer" product="tablet" msgid="5555604955956219544">"Si el administrador de batería detecta que hay apps que agotan la batería, podrás restringirlas, aunque es posible que no funcionen correctamente y que se retrasen las notificaciones."</string>
     <string name="smart_battery_footer" product="device" msgid="5555604955956219544">"Si el administrador de batería detecta que hay apps que agotan la batería, podrás restringirlas, aunque es posible que no funcionen correctamente y que se retrasen las notificaciones."</string>
@@ -2320,7 +2319,7 @@
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Nunca"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="8665950426992057191">"con <xliff:g id="PERCENT">%1$s</xliff:g> de batería"</string>
     <string name="battery_percentage" msgid="723291197508049369">"Porcentaje de batería"</string>
-    <string name="battery_percentage_description" msgid="8511658577507384014">"Muestra el porcentaje de la batería en la barra de estado"</string>
+    <string name="battery_percentage_description" msgid="8511658577507384014">"Mostrar el porcentaje de la batería en la barra de estado"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Estadísticas de procesos"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Estadísticas para geeks sobre procesos activos"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Uso de memoria"</string>
@@ -3076,7 +3075,22 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Bloquear alteraciones visuales"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"Permitir señales visuales"</string>
-    <string name="zen_mode_what_to_block_title" msgid="7078190101807944693">"Bloquear alteraciones visuales"</string>
+    <string name="zen_mode_restrict_notifications_screen_title" msgid="9027437428488279426">"Restringir notificaciones"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"Notificaciones"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"Cuando No interrumpir está activado"</string>
+    <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"Silenciar notificaciones"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"Mostrar notificaciones pero silenciar los sonidos y las vibraciones"</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"Cuando recibas notificaciones, el teléfono no vibrará ni emitirá ningún sonido"</string>
+    <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"Ocultar y silenciar notificaciones"</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"No aparecerán las notificaciones"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"Cuando el modo No interrumpir esté activado, no verás notificaciones nuevas ni anteriores. No obstante, se seguirán mostrando las notificaciones necesarias para el estado y las actividades básicas del teléfono."</string>
+    <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"Personalizada"</string>
+    <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"Habilitar configuración personalizada"</string>
+    <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"Quitar configuración personalizada"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"Se mostrarán"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"Parcialmente ocultas"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"Ocultas"</string>
+    <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"Restricciones personalizadas"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"Cuando se enciende la pantalla"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"Cuando se apaga la pantalla"</string>
     <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"Silenciar el sonido y la vibración"</string>
@@ -4065,13 +4079,13 @@
     <string name="change_wifi_state_app_detail_switch" msgid="7942268646980694224">"Permitir que la app controle Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8434262633905502679">"Permite que esta app active o desactive la conexión Wi-Fi, busque y se conecte a redes Wi-Fi, agregue o quite redes, o inicie un hotspot de acceso local exclusivo."</string>
     <string name="media_output_title" msgid="115223550977351699">"Reproducir contenido multimedia en"</string>
-    <string name="media_output_default_summary" msgid="8115153381240348279">"Este dispositivo"</string>
+    <string name="media_output_default_summary" msgid="8115153381240348279">"este dispositivo"</string>
     <string name="media_output_summary" product="default" msgid="6839458453831567167">"Teléfono"</string>
     <string name="media_output_summary" product="tablet" msgid="7217221078578554515">"Tablet"</string>
     <string name="media_output_summary" product="device" msgid="5677420090811068649">"Dispositivo"</string>
     <string name="media_out_summary_ongoing_call_state" msgid="3533731701018680693">"No disponible durante llamadas"</string>
     <string name="media_output_summary_unavailable" msgid="7970304720507697019">"No disponible"</string>
-    <string name="take_call_on_title" msgid="6066362463436122655">"Atender llamada"</string>
+    <string name="take_call_on_title" msgid="6066362463436122655">"Atender llamada en"</string>
     <string name="battery_suggestion_title" product="tablet" msgid="752439050748267917">"Mejorar duración de la batería de la tablet"</string>
     <string name="battery_suggestion_title" product="device" msgid="1507272328369733005">"Mejorar duración de la batería del dispositivo"</string>
     <string name="battery_suggestion_title" product="default" msgid="4038053023336285165">"Mejorar duración de la batería del teléfono"</string>

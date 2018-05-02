@@ -292,8 +292,7 @@
     <string name="forget" msgid="1400428660472591263">"Supprimer"</string>
     <string name="save" msgid="879993180139353333">"Enregistrer"</string>
     <string name="done" msgid="6942539184162713160">"Terminé"</string>
-    <!-- no translation found for apply (1577045208487259229) -->
-    <skip />
+    <string name="apply" msgid="1577045208487259229">"Appliquer"</string>
     <string name="settings_label" msgid="1626402585530130914">"Paramètres"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Paramètres"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Raccourci vers les paramètres"</string>
@@ -1659,7 +1658,7 @@
     <string name="install_all_warning" product="device" msgid="3648003301476423145">"Votre appareil et vos données personnelles sont plus vulnérables aux attaques provenant d\'applications inconnues. En installant des applications provenant de cette source, vous acceptez d\'être responsable de tout dommage causé à votre appareil ou de toute perte de données pouvant découler de l\'utilisation de telles applications."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Paramètres avancés"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Activer d\'autres paramètres"</string>
-    <string name="application_info_label" msgid="5736524913065714880">"Informations sur l\'application"</string>
+    <string name="application_info_label" msgid="5736524913065714880">"Infos sur l\'application"</string>
     <string name="storage_label" msgid="8700867073480107253">"Stockage"</string>
     <string name="auto_launch_label" msgid="2669236885531442195">"Ouvert par défaut"</string>
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"Valeurs par défaut"</string>
@@ -1881,7 +1880,7 @@
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"Modifier le mot"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"Modifier"</string>
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Supprimer"</string>
-    <string name="user_dict_settings_empty_text" msgid="1971969756133074922">"Votre dictionnaire personnel ne contient aucun mot. Pour ajouter un mot, touchez le bouton d\'ajout (« + »)."</string>
+    <string name="user_dict_settings_empty_text" msgid="1971969756133074922">"Votre dictionnaire personnel ne contient aucun mot. Pour ajouter un mot, touchez le bouton d\'ajout (+)."</string>
     <string name="user_dict_settings_all_languages" msgid="6742000040975959247">"Pour toutes les langues"</string>
     <string name="user_dict_settings_more_languages" msgid="7316375944684977910">"Plus de langues…"</string>
     <string name="testing" msgid="6584352735303604146">"Tests"</string>
@@ -2301,7 +2300,7 @@
     <string name="battery_detail_info_title" msgid="8227822131405620369">"Depuis la charge complète"</string>
     <string name="battery_detail_manage_title" msgid="9094314252105828014">"Gérer l\'utilisation de la pile"</string>
     <string name="advanced_battery_graph_subtext" msgid="5621073891377915877">"L\'estimation de l\'autonomie restante est basée sur l\'utilisation de l\'appareil"</string>
-    <string name="estimated_time_left" msgid="7514194472683370877">"Durée restante estimée"</string>
+    <string name="estimated_time_left" msgid="7514194472683370877">"Temps restant estimé"</string>
     <string name="estimated_charging_time_left" msgid="5614442409326164691">"Jusqu\'à la charge complète"</string>
     <string name="estimated_time_description" msgid="8760210909000037089">"La durée estimée peut changer en fonction de l\'utilisation"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"Débranché depuis <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
@@ -2394,7 +2393,7 @@
     <string name="gadget_brightness_state_off" msgid="946382262872753084">"désactivée"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"RPV"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Stockage des identifiants"</string>
-    <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"Installer depuis la mémoire"</string>
+    <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"Installer à partir de la mémoire"</string>
     <string name="credentials_install" product="default" msgid="953914549998062317">"Installer à partir de la carte SD"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Installer les certificats à partir de la mémoire de stockage"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Installer les certificats à partir de la carte SD"</string>
@@ -3076,7 +3075,22 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g> : <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Bloquer dérangements visuels"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"Autoriser les signaux visuels"</string>
-    <string name="zen_mode_what_to_block_title" msgid="7078190101807944693">"Bloquer les dérangements visuels"</string>
+    <string name="zen_mode_restrict_notifications_screen_title" msgid="9027437428488279426">"Restreindre les notifications"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"Notifications"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"Quand la fonction Ne pas déranger est activée"</string>
+    <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"Ignorer les notifications"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"Afficher les notifications, couper les sons et les vibrations"</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"Lorsque de nouvelles notifications arrivent, votre téléphone n\'émettra aucun son et ne vibrera pas"</string>
+    <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"Masquer et mettre en veille les notifications"</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"Aucune notification ne s\'affichera"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"Vous ne verrez pas les notifications nouvelles ou existantes lorsque la fonction Ne pas déranger est activée. Cependant, les notifications nécessaires pour l\'activité et l\'état de base du téléphone s\'afficheront toujours."</string>
+    <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"Personnalisés"</string>
+    <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"Activer les paramètres personnalisés"</string>
+    <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"Supprimer les paramètres personnalisés"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"Afficher"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"Partiellement masquées"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"Masquées"</string>
+    <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"Restrictions personnalisées"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"Lorsque l\'écran est allumé"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"Lorsque l\'écran est éteint"</string>
     <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"Désactiver les sons et les vibrations"</string>
@@ -3198,7 +3212,7 @@
     </plurals>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Aucune demande d\'accès aux notifications n\'a été envoyée pour les applications installées."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Autoriser <xliff:g id="SERVICE">%1$s</xliff:g> à accéder aux notifications ?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> pourra lire toutes les notifications, y compris des données personnelles, telles que des noms de contacts et le texte de messages que vous recevez. Ce service pourra également masquer des notifications ou déclencher les boutons d\'action que celles-ci contiennent. \n\nCela permettra également à l\'application d\'activer et de désactiver la fonction Ne pas déranger et de modifier les paramètres connexes."</string>
+    <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> pourra lire toutes les notifications, y compris des données personnelles, telles que des noms de contacts et le texte des messages que vous recevez. Ce service pourra également masquer des notifications ou déclencher les boutons d\'action que celles-ci contiennent. \n\nCela permettra également à l\'application d\'activer et de désactiver la fonction Ne pas déranger et de modifier les paramètres connexes."</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"Si vous désactivez l\'accès aux notifications pour <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, l\'accès à la fonction Ne pas déranger peut également être désactivé."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="8333442186428083057">"Désactiver"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8586417377104211584">"Annuler"</string>
@@ -3592,7 +3606,7 @@
     <string name="system_alert_window_settings" msgid="8466613169103527868">"Afficher par-dessus les autres applications"</string>
     <string name="system_alert_window_apps_title" msgid="7005760279028569491">"Applications"</string>
     <string name="system_alert_window_access_title" msgid="6297115362542361241">"Afficher par-dessus les autres applications"</string>
-    <string name="permit_draw_overlay" msgid="7456536798718633432">"Autoriser l\'affichage par-dessus autres applis"</string>
+    <string name="permit_draw_overlay" msgid="7456536798718633432">"Autoriser la superposition d\'applis"</string>
     <string name="allow_overlay_description" msgid="8961670023925421358">"Permet à l\'application d\'afficher des éléments dans d\'autres applications, et cela risque de nuire à l\'utilisation de ces dernières ou de modifier leur apparence ou leur comportement."</string>
     <string name="keywords_vr_listener" msgid="7441221822576384680">"vr réalité virtuelle écouteur service de soutien stéréo"</string>
     <string name="keywords_system_alert_window" msgid="5049498015597864850">"afficher des fenêtres d\'alertes système par-dessus d\'autres applications"</string>
@@ -3780,7 +3794,7 @@
     <string name="data_saver_title" msgid="8034286939200289826">"Économiseur de données"</string>
     <string name="unrestricted_data_saver" msgid="952796077540228711">"Données sans restrictions"</string>
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"Les données en arrière-plan sont désactivées"</string>
-    <string name="data_saver_on" msgid="6774217590237934709">"Activée"</string>
+    <string name="data_saver_on" msgid="6774217590237934709">"Activé"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"Désactivé"</string>
     <string name="data_saver_switch_title" msgid="836312690356005669">"Utiliser l\'Économiseur de données"</string>
     <string name="unrestricted_app_title" msgid="4465437191723332066">"Utilis. donn. sans restriction"</string>
@@ -3836,7 +3850,7 @@
     <string name="display_cutout_emulation" msgid="6306593933746393170">"Simuler un écran avec une découpe"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"découpe d\'affichage, encoche"</string>
     <string name="display_cutout_emulation_none" msgid="5144174674654097316">"Aucun"</string>
-    <string name="special_access" msgid="3458780842491881155">"Accès spéciaux aux applis"</string>
+    <string name="special_access" msgid="3458780842491881155">"Accès spéciaux applis"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> application peut utiliser les données sans restriction</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> applications peuvent utiliser les données sans restriction</item>
@@ -3911,9 +3925,9 @@
     <string name="ambient_display_pickup_summary" product="device" msgid="8256669101643381568">"Pour vérifier l\'heure, les icônes de notification et d\'autres renseignements, saisir votre appareil."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Balayer lecteur d\'empreintes pour voir notif."</string>
     <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"Balayer empreinte"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Pour consulter vos notifications, passez votre doigt de haut en bas sur le capteur d\'empreintes digitales à l\'arrière du téléphone."</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Pour consulter vos notifications, passez votre doigt de haut en bas sur le capteur d\'empreintes digitales à l\'arrière de la tablette."</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Pour consulter vos notifications, passez votre doigt de haut en bas sur le capteur d\'empreintes digitales à l\'arrière de l\'appareil."</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Pour consulter vos notifications, passer votre doigt de haut en bas sur le capteur d\'empreintes digitales à l\'arrière du téléphone."</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Pour consulter vos notifications, passer votre doigt de haut en bas sur le capteur d\'empreintes digitales à l\'arrière de la tablette."</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Pour consulter vos notifications, passer votre doigt de haut en bas sur le capteur d\'empreintes digitales à l\'arrière de l\'appareil."</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"Affichez les notifications rapidement"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Activé"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Désactivé"</string>
@@ -4028,7 +4042,7 @@
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(désactivé pour l\'utilisateur <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="autofill_app" msgid="7338387238377914374">"Service de remplissage auto"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"automatique, remplir, remplissage automatique"</string>
-    <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;Assurez-vous de faire confiance à cette application&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Remplissage automatique&gt;%1$s&lt;/xliff:g&gt;utilise les éléments affichés à l\'écran pour déterminer les champs qui peuvent bénéficier de l\'entrée automatique."</string>
+    <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;Assurez-vous de faire confiance à cette application&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Remplissage automatique&gt;%1$s&lt;/xliff:g&gt; utilise les éléments affichés à l\'écran pour déterminer les champs qui peuvent bénéficier de l\'entrée automatique."</string>
     <string name="device_theme" msgid="4571803018917608588">"Thème de l\'appareil"</string>
     <string name="default_theme" msgid="7085644992078579076">"Par défaut"</string>
     <string name="show_operator_name_title" msgid="805135053530442951">"Nom du réseau"</string>

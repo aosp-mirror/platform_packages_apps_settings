@@ -292,8 +292,7 @@
     <string name="forget" msgid="1400428660472591263">"Vergeet"</string>
     <string name="save" msgid="879993180139353333">"Stoor"</string>
     <string name="done" msgid="6942539184162713160">"Klaar"</string>
-    <!-- no translation found for apply (1577045208487259229) -->
-    <skip />
+    <string name="apply" msgid="1577045208487259229">"Pas toe"</string>
     <string name="settings_label" msgid="1626402585530130914">"Instellings"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Instellings"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Instellingskortpad"</string>
@@ -363,7 +362,7 @@
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Sluitskermboodskap"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Aktiveer legstukke"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Gedeaktiveer deur administrateur"</string>
-    <string name="lockdown_settings_title" msgid="7393790212603280213">"Wys snelsluit-opsie"</string>
+    <string name="lockdown_settings_title" msgid="7393790212603280213">"Wys snelsluitopsie"</string>
     <string name="lockdown_settings_summary" msgid="429230431748285997">"Wys aan/af-skakelaaropsie wat Smart Lock, vingerafdrukontsluiting en kennisgewings op die sluitskerm afskakel"</string>
     <string name="owner_info_settings_summary" msgid="7472393443779227052">"Geen"</string>
     <string name="owner_info_settings_status" msgid="120407527726476378">"<xliff:g id="COUNT_0">%1$d</xliff:g> / <xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
@@ -1144,7 +1143,7 @@
     <string name="doze_always_on_summary" msgid="6978257596231155345">"Wys tyd, kennisgewingikone en ander inligting. Verhoogde batterygebruik."</string>
     <string name="title_font_size" msgid="4405544325522105222">"Lettertipegrootte"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Maak teks groter of kleiner"</string>
-    <string name="sim_lock_settings" msgid="3392331196873564292">"SIM-kaart se sluitinstellings"</string>
+    <string name="sim_lock_settings" msgid="3392331196873564292">"SIM-kaartsluitinstellings"</string>
     <string name="sim_lock_settings_category" msgid="6242052161214271091">"SIM-kaartslot"</string>
     <string name="sim_lock_settings_summary_off" msgid="8028944267104896401">"Af"</string>
     <string name="sim_lock_settings_summary_on" msgid="39103355956342985">"Gesluit"</string>
@@ -1881,7 +1880,7 @@
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"Redigeer woord"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"Redigeer"</string>
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Vee uit"</string>
-    <string name="user_dict_settings_empty_text" msgid="1971969756133074922">"Jy het geen woorde in die gebruikerswoordeboek nie. Tik op die Voeg by- (+) knoppie om \'n woord by te voeg."</string>
+    <string name="user_dict_settings_empty_text" msgid="1971969756133074922">"Jy het geen woorde in die gebruikerwoordeboek nie. Tik op die Voeg by- (+) knoppie om \'n woord by te voeg."</string>
     <string name="user_dict_settings_all_languages" msgid="6742000040975959247">"Vir alle tale"</string>
     <string name="user_dict_settings_more_languages" msgid="7316375944684977910">"Meer tale..."</string>
     <string name="testing" msgid="6584352735303604146">"Toets"</string>
@@ -3076,7 +3075,22 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Blokkeer visuele steurings"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"Laat visuele tekens toe"</string>
-    <string name="zen_mode_what_to_block_title" msgid="7078190101807944693">"Blokkeer visuele steurings"</string>
+    <string name="zen_mode_restrict_notifications_screen_title" msgid="9027437428488279426">"Beperk kennisgewings"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"Kennisgewings"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"Wanneer Moenie Steur Nie aangeskakel is"</string>
+    <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"Demp kennisgewings"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"Wys kennisgewings, maar demp klanke en vibrasies"</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"Wanneer nuwe kennisgewings opdaag, sal jou foon nie \'n klank maak of vibreer nie"</string>
+    <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"Versteek en demp kennisgewings"</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"Kennisgewings sal glad nie verskyn nie"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"Jy sal nie nuwe of bestaande kennisgewings sien wanneer Moenie Steur Nie aan is. Kennisgewings wat vir basiese foonaktiwiteit en -status nodig is, sal egter steeds verskyn."</string>
+    <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"Gepasmaak"</string>
+    <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"Aktiveer gepasmaakte instelling"</string>
+    <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"Verwyder gepasmaakte instelling"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"Sal verskyn"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"Gedeeltelik versteek"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"Versteek"</string>
+    <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"Gepasmaakte beperkings"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"Wanneer die skerm aan is"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"Wanneer die skerm af is"</string>
     <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"Demp klank en vibrasie"</string>
