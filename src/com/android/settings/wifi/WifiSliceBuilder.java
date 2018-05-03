@@ -87,7 +87,7 @@ public class WifiSliceBuilder {
                 R.drawable.ic_settings_wireless);
         final String title = context.getString(R.string.wifi_settings);
         final CharSequence summary = getSummary(context);
-        @ColorInt final int color = Utils.getColorAccent(context);
+        @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
         final PendingIntent toggleAction = getBroadcastIntent(context);
         final PendingIntent primaryAction = getPrimaryAction(context);
         final SliceAction primarySliceAction = new SliceAction(primaryAction, icon, title);

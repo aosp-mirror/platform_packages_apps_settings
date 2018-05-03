@@ -162,7 +162,7 @@ public abstract class StorageWizardBase extends Activity {
     protected void setIcon(int resId) {
         final GlifLayout layout = getGlifLayout();
         final Drawable icon = getDrawable(resId).mutate();
-        icon.setTint(Utils.getColorAccent(layout.getContext()));
+        icon.setTintList(Utils.getColorAccent(layout.getContext()));
         layout.setIcon(icon);
     }
 

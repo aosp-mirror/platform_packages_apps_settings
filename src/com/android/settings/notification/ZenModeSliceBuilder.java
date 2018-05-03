@@ -84,7 +84,7 @@ public class ZenModeSliceBuilder {
     public static Slice getSlice(Context context) {
         final boolean isZenModeEnabled = isZenModeEnabled(context);
         final CharSequence title = context.getText(R.string.zen_mode_settings_title);
-        @ColorInt final int color = Utils.getColorAccent(context);
+        @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
         final PendingIntent toggleAction = getBroadcastIntent(context);
         final PendingIntent primaryAction = getPrimaryAction(context);
         final SliceAction primarySliceAction = new SliceAction(primaryAction,
