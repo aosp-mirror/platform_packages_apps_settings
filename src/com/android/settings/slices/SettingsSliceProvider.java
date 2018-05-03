@@ -36,6 +36,7 @@ import com.android.settings.bluetooth.BluetoothSliceBuilder;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.location.LocationSliceBuilder;
 import com.android.settings.notification.ZenModeSliceBuilder;
+import com.android.settings.mobilenetwork.Enhanced4gLteSliceHelper;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wifi.WifiSliceBuilder;
 import com.android.settings.wifi.calling.WifiCallingSliceHelper;
@@ -190,23 +191,27 @@ public class SettingsSliceProvider extends SliceProvider {
                 Log.e(TAG, "Requested blocked slice with Uri: " + sliceUri);
                 return null;
             }
-
-            // If adding a new Slice, do not directly match Slice URIs.
-            // Use {@link SlicesDatabaseAccessor}.
-            if (WifiCallingSliceHelper.WIFI_CALLING_URI.equals(sliceUri)) {
-                return FeatureFactory.getFactory(getContext())
-                        .getSlicesFeatureProvider()
-                        .getNewWifiCallingSliceHelper(getContext())
-                        .createWifiCallingSlice(sliceUri);
-            } else if (WifiSliceBuilder.WIFI_URI.equals(sliceUri)) {
-                return WifiSliceBuilder.getSlice(getContext());
-            } else if (ZenModeSliceBuilder.ZEN_MODE_URI.equals(sliceUri)) {
-                return ZenModeSliceBuilder.getSlice(getContext());
-            } else if (BluetoothSliceBuilder.BLUETOOTH_URI.equals(sliceUri)) {
-                return BluetoothSliceBuilder.getSlice(getContext());
-            } else if (LocationSliceBuilder.LOCATION_URI.equals(sliceUri)) {
-                return LocationSliceBuilder.getSlice(getContext());
-            }
+        // If adding a new Slice, do not directly match Slice URIs.
+        // Use {@link SlicesDatabaseAccessor}.
+        if (WifiCallingSliceHelper.WIFI_CALLING_URI.equals(sliceUri)) {
+            return FeatureFactory.getFactory(getContext())
+                    .getSlicesFeatureProvider()
+                    .getNewWifiCallingSliceHelper(getContext())
+                    .createWifiCallingSlice(sliceUri);
+        } else if (WifiSliceBuilder.WIFI_URI.equals(sliceUri)) {
+            return WifiSliceBuilder.getSlice(getContext());
+        } else if (ZenModeSliceBuilder.ZEN_MODE_URI.equals(sliceUri)) {
+            return ZenModeSliceBuilder.getSlice(getContext());
+        } else if (BluetoothSliceBuilder.BLUETOOTH_URI.equals(sliceUri)) {
+            return BluetoothSliceBuilder.getSlice(getContext());
+        } else if (LocationSliceBuilder.LOCATION_URI.equals(sliceUri)) {
+            return LocationSliceBuilder.getSlice(getContext());
+        } else if (Enhanced4gLteSliceHelper.SLICE_URI.equals(sliceUri)) {
+            return FeatureFactory.getFactory(getContext())
+                    .getSlicesFeatureProvider()
+                    .getNewEnhanced4gLteSliceHelper(getContext())
+                    .createEnhanced4gLteSlice(sliceUri);
+        }
 
             SliceData cachedSliceData = mSliceWeakDataCache.get(sliceUri);
             if (cachedSliceData == null) {

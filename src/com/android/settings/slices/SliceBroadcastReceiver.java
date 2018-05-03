@@ -24,6 +24,7 @@ import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_KEY;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_PLATFORM_DEFINED;
 import static com.android.settings.wifi.calling.WifiCallingSliceHelper.ACTION_WIFI_CALLING_CHANGED;
 import static com.android.settings.wifi.WifiSliceBuilder.ACTION_WIFI_SLICE_CHANGED;
+import static com.android.settings.mobilenetwork.Enhanced4gLteSliceHelper.ACTION_ENHANCED_4G_LTE_CHANGED;
 
 import android.app.slice.Slice;
 import android.content.BroadcastReceiver;
@@ -83,6 +84,12 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
                 break;
             case ACTION_ZEN_MODE_SLICE_CHANGED:
                 ZenModeSliceBuilder.handleUriChange(context, intent);
+                break;
+            case ACTION_ENHANCED_4G_LTE_CHANGED:
+                FeatureFactory.getFactory(context)
+                        .getSlicesFeatureProvider()
+                        .getNewEnhanced4gLteSliceHelper(context)
+                        .handleEnhanced4gLteChanged(intent);
                 break;
             default:
                 final String uriString = intent.getStringExtra(SliceBroadcastRelay.EXTRA_URI);

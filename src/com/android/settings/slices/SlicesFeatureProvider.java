@@ -2,6 +2,7 @@ package com.android.settings.slices;
 
 import android.content.Context;
 
+import com.android.settings.mobilenetwork.Enhanced4gLteSliceHelper;
 import com.android.settings.wifi.calling.WifiCallingSliceHelper;
 
 /**
@@ -31,4 +32,10 @@ public interface SlicesFeatureProvider {
      * Gets new WifiCallingSliceHelper object
      */
     WifiCallingSliceHelper getNewWifiCallingSliceHelper(Context context);
+
+    /**
+     * Gets new Enhanced4gLteSliceHelper object
+     */
+    Enhanced4gLteSliceHelper getNewEnhanced4gLteSliceHelper(Context context);
 }
+

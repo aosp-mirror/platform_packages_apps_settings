@@ -2,6 +2,7 @@ package com.android.settings.slices;
 
 import android.content.Context;
 
+import com.android.settings.mobilenetwork.Enhanced4gLteSliceHelper;
 import com.android.settings.wifi.calling.WifiCallingSliceHelper;
 import com.android.settingslib.utils.ThreadUtils;
 
@@ -44,5 +45,10 @@ public class SlicesFeatureProviderImpl implements SlicesFeatureProvider {
     @Override
     public WifiCallingSliceHelper getNewWifiCallingSliceHelper(Context context) {
         return new WifiCallingSliceHelper(context);
+    }
+
+    @Override
+    public Enhanced4gLteSliceHelper getNewEnhanced4gLteSliceHelper(Context context) {
+        return new Enhanced4gLteSliceHelper(context);
     }
 }
