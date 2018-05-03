@@ -16,7 +16,7 @@
 package com.android.settings.connecteddevice;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController.DISABLED_UNSUPPORTED;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -121,7 +121,7 @@ public class AddDevicePreferenceControllerTest {
     public void addDevice_Availability_UnSupported() {
         mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, false);
         assertThat(mAddDevicePreferenceController.getAvailabilityStatus())
-                .isEqualTo(DISABLED_UNSUPPORTED);
+                .isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test

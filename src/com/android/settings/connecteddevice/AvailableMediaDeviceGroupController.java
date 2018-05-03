@@ -72,7 +72,7 @@ public class AvailableMediaDeviceGroupController extends BasePreferenceControlle
     public int getAvailabilityStatus() {
         return mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)
                 ? AVAILABLE
-                : DISABLED_UNSUPPORTED;
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

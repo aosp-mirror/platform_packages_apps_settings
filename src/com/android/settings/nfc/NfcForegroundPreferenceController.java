@@ -62,15 +62,15 @@ public class NfcForegroundPreferenceController extends BasePreferenceController 
     public int getAvailabilityStatus() {
         final PackageManager pm = mContext.getPackageManager();
         if (!pm.hasSystemFeature(PackageManager.FEATURE_NFC)) {
-            return DISABLED_UNSUPPORTED;
+            return UNSUPPORTED_ON_DEVICE;
         }
         if (mPaymentBackend == null) {
-            return DISABLED_UNSUPPORTED;
+            return UNSUPPORTED_ON_DEVICE;
         }
         final List<PaymentBackend.PaymentAppInfo> appInfos = mPaymentBackend.getPaymentAppInfos();
         return (appInfos != null && !appInfos.isEmpty())
                 ? AVAILABLE
-                : DISABLED_UNSUPPORTED;
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

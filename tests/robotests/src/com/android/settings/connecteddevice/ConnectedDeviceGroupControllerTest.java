@@ -16,7 +16,7 @@
 package com.android.settings.connecteddevice;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController.DISABLED_UNSUPPORTED;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -39,7 +39,6 @@ import com.android.settings.connecteddevice.dock.DockUpdater;
 import com.android.settings.connecteddevice.usb.ConnectedUsbDeviceUpdater;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -157,7 +156,7 @@ public class ConnectedDeviceGroupControllerTest {
         mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, false);
 
         assertThat(mConnectedDeviceGroupController.getAvailabilityStatus()).isEqualTo(
-                DISABLED_UNSUPPORTED);
+                UNSUPPORTED_ON_DEVICE);
     }
 
     @Test

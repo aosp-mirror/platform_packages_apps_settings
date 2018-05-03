@@ -54,7 +54,7 @@ public class BluetoothOnWhileDrivingPreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_offWhenDisabled() {
         assertThat(mController.getAvailabilityStatus())
-            .isEqualTo(BasePreferenceController.DISABLED_UNSUPPORTED);
+            .isEqualTo(BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test

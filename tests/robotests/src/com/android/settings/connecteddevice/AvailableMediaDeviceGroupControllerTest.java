@@ -16,7 +16,7 @@
 package com.android.settings.connecteddevice;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController.DISABLED_UNSUPPORTED;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyString;
@@ -141,7 +141,7 @@ public class AvailableMediaDeviceGroupControllerTest {
         doReturn(false).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
 
         assertThat(mAvailableMediaDeviceGroupController.getAvailabilityStatus()).isEqualTo(
-                DISABLED_UNSUPPORTED);
+                UNSUPPORTED_ON_DEVICE);
     }
 
     @Test

@@ -17,10 +17,10 @@
 package com.android.settings.slices;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
 import static com.android.settings.core.BasePreferenceController.DISABLED_FOR_USER;
-import static com.android.settings.core.BasePreferenceController.DISABLED_UNSUPPORTED;
-import static com.android.settings.core.BasePreferenceController.UNAVAILABLE_UNKNOWN;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_KEY;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_PLATFORM_DEFINED;
 
@@ -339,7 +339,7 @@ public class SliceBuilderUtils {
         final IconCompat icon = IconCompat.createWithResource(context, data.getIconResource());
 
         switch (controller.getAvailabilityStatus()) {
-            case DISABLED_UNSUPPORTED:
+            case UNSUPPORTED_ON_DEVICE:
                 summary = context.getString(R.string.unsupported_setting_summary);
                 primaryAction = new SliceAction(getSettingsIntent(context), icon, title);
                 break;
@@ -353,7 +353,7 @@ public class SliceBuilderUtils {
                 primaryAction = new SliceAction(getContentPendingIntent(context, data), icon,
                         title);
                 break;
-            case UNAVAILABLE_UNKNOWN:
+            case CONDITIONALLY_UNAVAILABLE:
             default:
                 summary = context.getString(R.string.unknown_unavailability_setting_summary);
                 primaryAction = new SliceAction(getSettingsIntent(context), icon, title);

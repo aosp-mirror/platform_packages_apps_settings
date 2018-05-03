@@ -72,6 +72,6 @@ public class BackupInactivePreferenceControllerTest {
         ShadowPrivacySettingsUtils.setIsAdminUser(true);
         ShadowPrivacySettingsUtils.setIsInvisibleKey(true);
         assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.DISABLED_UNSUPPORTED);
+                .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 }

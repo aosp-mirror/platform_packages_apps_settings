@@ -30,6 +30,6 @@ public class WallpaperAttributionsPreferenceController extends BasePreferenceCon
     public int getAvailabilityStatus() {
         return mContext.getResources().getBoolean(R.bool.config_show_wallpaper_attribution)
                 ? AVAILABLE
-                : DISABLED_UNSUPPORTED;
+                : UNSUPPORTED_ON_DEVICE;
     }
 }

@@ -18,7 +18,8 @@ package com.android.settings.datausage;
 
 import static android.net.ConnectivityManager.TYPE_WIFI;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController.DISABLED_UNSUPPORTED;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
+
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doReturn;
@@ -372,7 +373,7 @@ public class DataUsageSummaryPreferenceControllerTest {
 
         when(mTelephonyManager.getSimState()).thenReturn(TelephonyManager.SIM_STATE_ABSENT);
         when(mConnectivityManager.isNetworkSupported(TYPE_WIFI)).thenReturn(false);
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_UNSUPPORTED);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test

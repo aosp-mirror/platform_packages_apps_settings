@@ -130,7 +130,7 @@ public class BluetoothDashboardFragment extends DashboardFragment {
                         BluetoothAdapter adapter = manager.getAdapter();
                         final int status = adapter != null
                                 ? TogglePreferenceController.AVAILABLE
-                                : TogglePreferenceController.DISABLED_UNSUPPORTED;
+                                : TogglePreferenceController.UNSUPPORTED_ON_DEVICE;
                         if (status != TogglePreferenceController.AVAILABLE) {
                             keys.add(KEY_BLUETOOTH_SCREEN);
                         }

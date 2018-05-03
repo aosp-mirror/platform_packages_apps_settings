@@ -19,7 +19,6 @@ package com.android.settings.notification;
 import android.content.Context;
 import android.media.AudioManager;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
 
@@ -36,7 +35,7 @@ public class NotificationVolumePreferenceController extends
     public int getAvailabilityStatus() {
         return mContext.getResources().getBoolean(R.bool.config_show_notification_volume)
                 && !Utils.isVoiceCapable(mContext) && !mHelper.isSingleVolume()
-                ? AVAILABLE : DISABLED_UNSUPPORTED;
+                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

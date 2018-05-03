@@ -92,11 +92,11 @@ public class LicensePreferenceControllerTest {
         when(mPackageManager.queryIntentActivities(any(Intent.class), anyInt()))
                 .thenReturn(testResolveInfos);
         assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.DISABLED_UNSUPPORTED);
+                .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
 
         when(mPackageManager.queryIntentActivities(any(Intent.class), anyInt())).thenReturn(null);
         assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.DISABLED_UNSUPPORTED);
+                .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 
     /**
