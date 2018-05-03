@@ -163,13 +163,6 @@ public class SuggestionFeatureProviderImplTest {
     }
 
     @Test
-    public void nightDisplaySuggestion_isNotCompleted_byDefault() {
-        final ComponentName componentName =
-                new ComponentName(mContext, NightDisplaySuggestionActivity.class);
-        assertThat(mProvider.isSuggestionComplete(mContext, componentName)).isFalse();
-    }
-
-    @Test
     public void testGetSmartSuggestionEnabledTaggedData_disabled() {
         assertThat(mProvider.getLoggingTaggedData(mContext)).asList().containsExactly(
                 Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0));
