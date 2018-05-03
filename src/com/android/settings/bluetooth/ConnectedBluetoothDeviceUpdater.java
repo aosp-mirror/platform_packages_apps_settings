@@ -16,11 +16,14 @@
 package com.android.settings.bluetooth;
 
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.media.AudioManager;
 import android.support.annotation.VisibleForTesting;
+import android.support.v7.preference.Preference;
 import android.util.Log;
+
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -115,5 +118,21 @@ public class ConnectedBluetoothDeviceUpdater extends BluetoothDeviceUpdater {
             }
         }
         return isFilterMatched;
+    }
+
+    @Override
+    protected void addPreference(CachedBluetoothDevice cachedDevice) {
+        super.addPreference(cachedDevice);
+        final BluetoothDevice device = cachedDevice.getDevice();
+        if (mPreferenceMap.containsKey(device)) {
+            final BluetoothDevicePreference btPreference =
+                    (BluetoothDevicePreference) mPreferenceMap.get(device);
+            btPreference.setOnGearClickListener(null);
+            btPreference.hideSecondTarget(true);
+            btPreference.setOnPreferenceClickListener((Preference p) -> {
+                launchDeviceDetails(p);
+                return true;
+            });
+        }
     }
 }
