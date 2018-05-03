@@ -169,7 +169,7 @@ public class VolumeSeekBarPreferenceControllerTest {
 
         @Override
         public int getAvailabilityStatus() {
-            return mAvailable ? AVAILABLE : DISABLED_UNSUPPORTED;
+            return mAvailable ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
         }
 
         @Override

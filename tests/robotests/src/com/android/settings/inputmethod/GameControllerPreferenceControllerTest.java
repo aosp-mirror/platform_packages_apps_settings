@@ -17,7 +17,8 @@
 package com.android.settings.inputmethod;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController.DISABLED_UNSUPPORTED;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -89,7 +90,7 @@ public class GameControllerPreferenceControllerTest {
         when(mInputDevice.isVirtual()).thenReturn(false);
         when(mInputDevice.getVibrator().hasVibrator()).thenReturn(false);
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_UNSUPPORTED);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
@@ -98,14 +99,14 @@ public class GameControllerPreferenceControllerTest {
         when(mInputManager.getInputDevice(1)).thenReturn(mInputDevice);
         when(mInputDevice.isVirtual()).thenReturn(true);
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_UNSUPPORTED);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
     public void getAvailabilityStatus_hasNoDevice_shouldReturnDisabled() {
         when(mInputManager.getInputDeviceIds()).thenReturn(new int[] {});
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_UNSUPPORTED);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
@@ -113,7 +114,7 @@ public class GameControllerPreferenceControllerTest {
     public void getAvailabilityStatus_ifDisabled_shouldReturnDisabled() {
         mController = new GameControllerPreferenceController(mContext, "testkey");
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_UNSUPPORTED);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test

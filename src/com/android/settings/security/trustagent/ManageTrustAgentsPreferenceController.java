@@ -47,7 +47,7 @@ public class ManageTrustAgentsPreferenceController extends BasePreferenceControl
     @Override
     public int getAvailabilityStatus() {
         return mContext.getResources().getBoolean(R.bool.config_show_manage_trust_agents)
-                ? AVAILABLE : DISABLED_UNSUPPORTED;
+                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

@@ -55,7 +55,7 @@ public class ShowPasswordPreferenceController extends TogglePreferenceController
     @Override
     public int getAvailabilityStatus() {
         return mContext.getResources().getBoolean(R.bool.config_show_show_password)
-                ? AVAILABLE : DISABLED_UNSUPPORTED;
+                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
 }

@@ -91,7 +91,7 @@ public class AutoRestrictionPreferenceControllerTest {
         doReturn(true).when(mFeatureFactory.powerUsageFeatureProvider).isSmartBatterySupported();
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.DISABLED_UNSUPPORTED);
+                BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 
     @Test

@@ -17,6 +17,7 @@
 package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -84,7 +85,8 @@ public class DefaultAppShortcutPreferenceControllerBaseTest {
         mController.capable = false;
         when(mUserManager.isManagedProfile()).thenReturn(false);
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(mController.DISABLED_UNSUPPORTED);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                mController.UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
@@ -110,9 +112,9 @@ public class DefaultAppShortcutPreferenceControllerBaseTest {
     public void handlePreferenceTreeClick_shouldStartDefaultAppSettings() {
         mController.handlePreferenceTreeClick(mPreference);
 
-        verify(mContext).startActivity(argThat(intent-> intent != null
+        verify(mContext).startActivity(argThat(intent -> intent != null
                 && intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT).equals(
-                        DefaultAppSettings.class.getName())
+                DefaultAppSettings.class.getName())
                 && intent.getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
                 .getString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY).equals("TestKey")));
     }

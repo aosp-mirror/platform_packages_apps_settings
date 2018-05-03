@@ -57,7 +57,7 @@ public class AutoBrightnessPreferenceController extends TogglePreferenceControll
         return mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_automatic_brightness_available)
                 ? AVAILABLE
-                : DISABLED_UNSUPPORTED;
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
