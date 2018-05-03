@@ -24,6 +24,10 @@ import android.content.Context;
 import android.content.ContentResolver;
 import android.content.res.Resources;
 import android.database.ContentObserver;
+import android.net.ConnectivityManager;
+import android.net.ConnectivityManager.NetworkCallback;
+import android.net.LinkProperties;
+import android.net.Network;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
@@ -31,6 +35,7 @@ import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
+import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -38,6 +43,8 @@ import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 
+import java.net.InetAddress;
+import java.util.List;
 
 public class PrivateDnsPreferenceController extends BasePreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnStart, OnStop {
@@ -50,12 +57,15 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
 
     private final Handler mHandler;
     private final ContentObserver mSettingsObserver;
+    private final ConnectivityManager mConnectivityManager;
+    private LinkProperties mLatestLinkProperties;
     private Preference mPreference;
 
     public PrivateDnsPreferenceController(Context context) {
         super(context, KEY_PRIVATE_DNS_SETTINGS);
         mHandler = new Handler(Looper.getMainLooper());
         mSettingsObserver = new PrivateDnsSettingsObserver(mHandler);
+        mConnectivityManager = context.getSystemService(ConnectivityManager.class);
     }
 
     @Override
@@ -80,11 +90,17 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
         for (Uri uri : SETTINGS_URIS) {
             mContext.getContentResolver().registerContentObserver(uri, false, mSettingsObserver);
         }
+        final Network defaultNetwork = mConnectivityManager.getActiveNetwork();
+        if (defaultNetwork != null) {
+            mLatestLinkProperties = mConnectivityManager.getLinkProperties(defaultNetwork);
+        }
+        mConnectivityManager.registerDefaultNetworkCallback(mNetworkCallback, mHandler);
     }
 
     @Override
     public void onStop() {
         mContext.getContentResolver().unregisterContentObserver(mSettingsObserver);
+        mConnectivityManager.unregisterNetworkCallback(mNetworkCallback);
     }
 
     @Override
@@ -92,13 +108,23 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
         final Resources res = mContext.getResources();
         final ContentResolver cr = mContext.getContentResolver();
         final String mode = PrivateDnsModeDialogPreference.getModeFromSettings(cr);
+        final LinkProperties lp = mLatestLinkProperties;
+        final List<InetAddress> dnses = (lp == null) ? null : lp.getValidatedPrivateDnsServers();
+        final boolean dnsesResolved = !ArrayUtils.isEmpty(dnses);
         switch (mode) {
             case PRIVATE_DNS_MODE_OFF:
                 return res.getString(R.string.private_dns_mode_off);
             case PRIVATE_DNS_MODE_OPPORTUNISTIC:
-                return res.getString(R.string.private_dns_mode_opportunistic);
+                // TODO (b/79122154) : create a string specifically for this, instead of
+                // hijacking a string from notifications. This is necessary at this time
+                // because string freeze is in the past and this string has the right
+                // content at this moment.
+                return dnsesResolved ? res.getString(R.string.switch_on_text)
+                        : res.getString(R.string.private_dns_mode_opportunistic);
             case PRIVATE_DNS_MODE_PROVIDER_HOSTNAME:
-                return PrivateDnsModeDialogPreference.getHostnameFromSettings(cr);
+                return dnsesResolved
+                        ? PrivateDnsModeDialogPreference.getHostnameFromSettings(cr)
+                        : res.getString(R.string.private_dns_mode_provider_failure);
         }
         return "";
     }
@@ -111,8 +137,25 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
         @Override
         public void onChange(boolean selfChange) {
             if (mPreference != null) {
-                PrivateDnsPreferenceController.this.updateState(mPreference);
+                updateState(mPreference);
             }
         }
     }
+
+    private final NetworkCallback mNetworkCallback = new NetworkCallback() {
+        @Override
+        public void onLinkPropertiesChanged(Network network, LinkProperties lp) {
+            mLatestLinkProperties = lp;
+            if (mPreference != null) {
+                updateState(mPreference);
+            }
+        }
+        @Override
+        public void onLost(Network network) {
+            mLatestLinkProperties = null;
+            if (mPreference != null) {
+                updateState(mPreference);
+            }
+        }
+    };
 }
