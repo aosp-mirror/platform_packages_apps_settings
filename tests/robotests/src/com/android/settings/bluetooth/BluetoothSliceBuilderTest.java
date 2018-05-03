@@ -15,7 +15,7 @@
  *
  */
 
-package com.android.settings.wifi;
+package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -26,18 +26,22 @@ import static org.mockito.Mockito.spy;
 import android.content.Context;
 
 import com.android.settings.R;
-import com.android.settings.wifi.WifiSliceBuilder;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.SliceTester;
+import com.android.settings.testutils.shadow.ShadowLocalBluetoothAdapter;
+import com.android.settings.testutils.shadow.ShadowLocalBluetoothProfileManager;
+import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import android.content.Intent;
 import android.content.res.Resources;
-import android.net.wifi.WifiManager;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import java.util.List;
 
@@ -50,12 +54,14 @@ import androidx.slice.core.SliceAction;
 import androidx.slice.widget.SliceLiveData;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-public class WifiSliceBuilderTest {
+@Config(shadows = {ShadowLocalBluetoothAdapter.class, ShadowLocalBluetoothProfileManager.class})
+public class BluetoothSliceBuilderTest {
 
     private Context mContext;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
 
         // Prevent crash in SliceMetadata.
@@ -68,30 +74,32 @@ public class WifiSliceBuilderTest {
     }
 
     @Test
-    public void getWifiSlice_correctSliceContent() {
-        final Slice wifiSlice = WifiSliceBuilder.getSlice(mContext);
-        final SliceMetadata metadata = SliceMetadata.from(mContext, wifiSlice);
+    public void getBluetoothSlice_correctSliceContent() {
+        final Slice BluetoothSlice = BluetoothSliceBuilder.getSlice(mContext);
+        final SliceMetadata metadata = SliceMetadata.from(mContext, BluetoothSlice);
 
         final List<SliceAction> toggles = metadata.getToggles();
         assertThat(toggles).hasSize(1);
 
         final SliceAction primaryAction = metadata.getPrimaryAction();
         final IconCompat expectedToggleIcon = IconCompat.createWithResource(mContext,
-                R.drawable.ic_settings_wireless);
+                R.drawable.ic_settings_bluetooth);
         assertThat(primaryAction.getIcon().toString()).isEqualTo(expectedToggleIcon.toString());
 
-        final List<SliceItem> sliceItems = wifiSlice.getItems();
-        SliceTester.assertTitle(sliceItems, mContext.getString(R.string.wifi_settings));
+        final List<SliceItem> sliceItems = BluetoothSlice.getItems();
+        SliceTester.assertTitle(sliceItems, mContext.getString(R.string.bluetooth_settings_title));
     }
 
     @Test
-    public void handleUriChange_updatesWifi() {
-        final Intent intent = new Intent(WifiSliceBuilder.ACTION_WIFI_SLICE_CHANGED);
+    public void handleUriChange_updatesBluetooth() {
+        final LocalBluetoothAdapter adapter = LocalBluetoothManager.getInstance(mContext,
+                null /* callback */).getBluetoothAdapter();
+        final Intent intent = new Intent();
         intent.putExtra(android.app.slice.Slice.EXTRA_TOGGLE_STATE, true);
-        final WifiManager wifiManager = mContext.getSystemService(WifiManager.class);
+        adapter.setBluetoothEnabled(false /* enabled */);
 
-        WifiSliceBuilder.handleUriChange(mContext, intent);
+        BluetoothSliceBuilder.handleUriChange(mContext, intent);
 
-        assertThat(wifiManager.getWifiState()).isEqualTo(WifiManager.WIFI_STATE_ENABLED);
+        assertThat(adapter.isEnabled()).isTrue();
     }
 }

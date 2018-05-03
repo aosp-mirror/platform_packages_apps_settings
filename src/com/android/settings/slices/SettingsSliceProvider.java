@@ -33,6 +33,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.wifi.WifiSliceBuilder;
 import com.android.settings.wifi.calling.WifiCallingSliceHelper;
+import com.android.settings.bluetooth.BluetoothSliceBuilder;
 import com.android.settings.notification.ZenModeSliceBuilder;
 import com.android.settingslib.SliceBroadcastRelay;
 import com.android.settingslib.utils.ThreadUtils;
@@ -147,7 +148,9 @@ public class SettingsSliceProvider extends SliceProvider {
             return;
         } else if (ZenModeSliceBuilder.ZEN_MODE_URI.equals(sliceUri)) {
             registerIntentToUri(ZenModeSliceBuilder.INTENT_FILTER, sliceUri);
-            mRegisteredUris.add(sliceUri);
+            return;
+        } else if (BluetoothSliceBuilder.BLUETOOTH_URI.equals(sliceUri)) {
+            registerIntentToUri(BluetoothSliceBuilder.INTENT_FILTER, sliceUri);
             return;
         }
 
@@ -178,6 +181,8 @@ public class SettingsSliceProvider extends SliceProvider {
             return WifiSliceBuilder.getSlice(getContext());
         } else if (ZenModeSliceBuilder.ZEN_MODE_URI.equals(sliceUri)) {
             return ZenModeSliceBuilder.getSlice(getContext());
+        } else if (BluetoothSliceBuilder.BLUETOOTH_URI.equals(sliceUri)) {
+            return BluetoothSliceBuilder.getSlice(getContext());
         }
 
         SliceData cachedSliceData = mSliceWeakDataCache.get(sliceUri);
@@ -325,7 +330,8 @@ public class SettingsSliceProvider extends SliceProvider {
 
     private List<Uri> getSpecialCasePlatformUris() {
         return Arrays.asList(
-                WifiSliceBuilder.WIFI_URI
+                WifiSliceBuilder.WIFI_URI,
+                BluetoothSliceBuilder.BLUETOOTH_URI
         );
     }
 
