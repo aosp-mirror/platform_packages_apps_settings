@@ -16,13 +16,12 @@
 
 package com.android.settings.notification;
 
-import android.content.Context;
 import android.content.ComponentName;
+import android.content.Context;
 import android.net.Uri;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
 import android.support.v7.preference.Preference;
-import android.util.Slog;
 
 import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -30,14 +29,17 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 public class ZenModeBehaviorFooterPreferenceController extends AbstractZenModePreferenceController {
 
     protected static final String KEY = "footer_preference";
+    private final int mTitleRes;
 
-    public ZenModeBehaviorFooterPreferenceController(Context context, Lifecycle lifecycle) {
+    public ZenModeBehaviorFooterPreferenceController(Context context, Lifecycle lifecycle,
+            int titleRes) {
         super(context, KEY, lifecycle);
+        mTitleRes = titleRes;
     }
 
     @Override
     public boolean isAvailable() {
-        return isDeprecatedZenMode(getZenMode());
+        return true;
     }
 
     @Override
@@ -48,45 +50,45 @@ public class ZenModeBehaviorFooterPreferenceController extends AbstractZenModePr
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-
-        boolean isAvailable = isAvailable();
-        preference.setVisible(isAvailable);
-        if (isAvailable) {
-            preference.setTitle(getFooterText());
-        }
-
+        preference.setTitle(getFooterText());
     }
 
     protected String getFooterText() {
-        ZenModeConfig config = getZenModeConfig();
+        if (isDeprecatedZenMode(getZenMode())) {
+            ZenModeConfig config = getZenModeConfig();
 
-        // DND turned on by manual rule with deprecated zen mode
-        if (config.manualRule != null &&
-                isDeprecatedZenMode(config.manualRule.zenMode)) {
-            final Uri id = config.manualRule.conditionId;
-            if (config.manualRule.enabler != null) {
-                // app triggered manual rule
-                String appOwner = mZenModeConfigWrapper.getOwnerCaption(config.manualRule.enabler);
-                if (!appOwner.isEmpty()) {
-                    return mContext.getString(R.string.zen_mode_app_set_behavior, appOwner);
-                }
-            } else {
-                return mContext.getString(R.string.zen_mode_qs_set_behavior);
-            }
-        }
-
-        // DND turned on by an automatic rule with deprecated zen mode
-        for (ZenModeConfig.ZenRule automaticRule : config.automaticRules.values()) {
-            if (automaticRule.isAutomaticActive() && isDeprecatedZenMode(automaticRule.zenMode)) {
-                ComponentName component = automaticRule.component;
-                if (component != null) {
-                    return mContext.getString(R.string.zen_mode_app_set_behavior,
-                            component.getPackageName());
+            // DND turned on by manual rule with deprecated zen mode
+            if (config.manualRule != null &&
+                    isDeprecatedZenMode(config.manualRule.zenMode)) {
+                final Uri id = config.manualRule.conditionId;
+                if (config.manualRule.enabler != null) {
+                    // app triggered manual rule
+                    String appOwner = mZenModeConfigWrapper.getOwnerCaption(
+                            config.manualRule.enabler);
+                    if (!appOwner.isEmpty()) {
+                        return mContext.getString(R.string.zen_mode_app_set_behavior, appOwner);
+                    }
+                } else {
+                    return mContext.getString(R.string.zen_mode_qs_set_behavior);
                 }
             }
-        }
 
-        return mContext.getString(R.string.zen_mode_unknown_app_set_behavior);
+            // DND turned on by an automatic rule with deprecated zen mode
+            for (ZenModeConfig.ZenRule automaticRule : config.automaticRules.values()) {
+                if (automaticRule.isAutomaticActive() && isDeprecatedZenMode(
+                        automaticRule.zenMode)) {
+                    ComponentName component = automaticRule.component;
+                    if (component != null) {
+                        return mContext.getString(R.string.zen_mode_app_set_behavior,
+                                component.getPackageName());
+                    }
+                }
+            }
+
+            return mContext.getString(R.string.zen_mode_unknown_app_set_behavior);
+        } else {
+            return mContext.getString(mTitleRes);
+        }
     }
 
     private boolean isDeprecatedZenMode(int zenMode) {
