@@ -86,10 +86,13 @@ public class ZenCustomRadioButtonPreference extends TwoTargetPreference
         }
 
         final View gear = holder.findViewById(android.R.id.widget_frame);
+        final View divider = holder.findViewById(R.id.two_target_divider);
         if (mOnGearClickListener != null) {
+            divider.setVisibility(View.VISIBLE);
             gear.setVisibility(View.VISIBLE);
             gear.setOnClickListener(this);
         } else {
+            divider.setVisibility(View.GONE);
             gear.setVisibility(View.GONE);
             gear.setOnClickListener(null);
         }
