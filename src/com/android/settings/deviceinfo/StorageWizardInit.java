@@ -25,7 +25,9 @@ import android.os.storage.VolumeInfo;
 import android.view.View;
 import android.widget.Button;
 
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.overlay.FeatureFactory;
 
 public class StorageWizardInit extends StorageWizardBase {
     private Button mExternal;
@@ -68,6 +70,12 @@ public class StorageWizardInit extends StorageWizardBase {
     }
 
     public void onNavigateExternal(View view) {
+        if (view != null) {
+            // User made an explicit choice for external
+            FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(this,
+                    MetricsEvent.ACTION_STORAGE_INIT_EXTERNAL);
+        }
+
         if (mVolume != null && mVolume.getType() == VolumeInfo.TYPE_PUBLIC
                 && mVolume.getState() != VolumeInfo.STATE_UNMOUNTABLE) {
             // Remember that user made decision
@@ -85,6 +93,12 @@ public class StorageWizardInit extends StorageWizardBase {
     }
 
     public void onNavigateInternal(View view) {
+        if (view != null) {
+            // User made an explicit choice for internal
+            FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(this,
+                    MetricsEvent.ACTION_STORAGE_INIT_INTERNAL);
+        }
+
         StorageWizardFormatConfirm.showPrivate(this, mDisk.getId());
     }
 }
