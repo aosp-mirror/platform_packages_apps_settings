@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SearchIndexable
-public class ZenModeBehaviorSettings extends ZenModeSettingsBase implements Indexable {
+public class ZenModeCallsSettings extends ZenModeSettingsBase implements Indexable {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
@@ -41,23 +41,20 @@ public class ZenModeBehaviorSettings extends ZenModeSettingsBase implements Inde
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new ZenModeAlarmsPreferenceController(context, lifecycle));
-        controllers.add(new ZenModeMediaPreferenceController(context, lifecycle));
-        controllers.add(new ZenModeSystemPreferenceController(context, lifecycle));
-        controllers.add(new ZenModeEventsPreferenceController(context, lifecycle));
-        controllers.add(new ZenModeRemindersPreferenceController(context, lifecycle));
-        controllers.add(new ZenModeMessagesPreferenceController(context, lifecycle));
         controllers.add(new ZenModeCallsPreferenceController(context, lifecycle));
+        // TODO: is a controller needed for a pref that just launches an external activity?
+        // or can the contacts app insert this setting themselves?
         controllers.add(new ZenModeRepeatCallersPreferenceController(context, lifecycle,
                 context.getResources().getInteger(com.android.internal.R.integer
                 .config_zen_repeat_callers_threshold)));
-        controllers.add(new ZenModeBehaviorFooterPreferenceController(context, lifecycle));
+        controllers.add(new ZenModeBehaviorFooterPreferenceController(
+                context, lifecycle, R.string.zen_mode_calls_footer));
         return controllers;
     }
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.zen_mode_behavior_settings;
+        return R.xml.zen_mode_calls_settings;
     }
 
     @Override
@@ -68,7 +65,7 @@ public class ZenModeBehaviorSettings extends ZenModeSettingsBase implements Inde
     /**
      * For Search.
      */
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
 
                 @Override
@@ -77,7 +74,7 @@ public class ZenModeBehaviorSettings extends ZenModeSettingsBase implements Inde
                     final ArrayList<SearchIndexableResource> result = new ArrayList<>();
 
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.zen_mode_behavior_settings;
+                    sir.xmlResId = R.xml.zen_mode_calls_settings;
                     result.add(sir);
                     return result;
                 }
