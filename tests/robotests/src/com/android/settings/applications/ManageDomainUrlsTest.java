@@ -17,9 +17,16 @@
 package com.android.settings.applications;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.graphics.drawable.Drawable;
+import android.view.View;
+import android.widget.ProgressBar;
+import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -53,5 +60,23 @@ public class ManageDomainUrlsTest {
                 new ManageDomainUrls.DomainAppPreference(mContext, null, mAppEntry);
 
         assertThat(pref.getLayoutResource()).isEqualTo(R.layout.preference_app);
+    }
+
+    @Test
+    public void onBindViewHolder_shouldSetAppendixViewToGone() {
+        mAppEntry.info = new ApplicationInfo();
+        mAppEntry.info.packageName = "com.android.settings.test";
+        mAppEntry.icon = mock(Drawable.class);
+        final ManageDomainUrls.DomainAppPreference pref =
+            new ManageDomainUrls.DomainAppPreference(mContext, null, mAppEntry);
+        final View holderView = mock(View.class);
+        final View appendixView = mock(View.class);
+        when(holderView.findViewById(R.id.summary_container)).thenReturn(mock(View.class));
+        when(holderView.findViewById(android.R.id.progress)).thenReturn(mock(ProgressBar.class));
+        when(holderView.findViewById(R.id.appendix)).thenReturn(appendixView);
+
+        pref.onBindViewHolder(PreferenceViewHolder.createInstanceForTests(holderView));
+
+        verify(appendixView).setVisibility(View.GONE);
     }
 }

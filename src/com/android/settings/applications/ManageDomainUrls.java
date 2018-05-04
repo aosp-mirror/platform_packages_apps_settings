@@ -268,6 +268,7 @@ public class ManageDomainUrls extends SettingsPreferenceFragment
                 });
             }
             super.onBindViewHolder(holder);
+            holder.itemView.findViewById(R.id.appendix).setVisibility(View.GONE);
         }
 
         private CharSequence getDomainsSummary(String packageName) {
