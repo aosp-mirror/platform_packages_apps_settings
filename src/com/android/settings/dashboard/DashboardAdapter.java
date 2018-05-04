@@ -146,15 +146,14 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     @Override
     public void onSuggestionClosed(Suggestion suggestion) {
         final List<Suggestion> list = mDashboardData.getSuggestions();
-        if (list == null || list.size() == 0) {
+        if (list == null || list.size() == 0 || !list.remove(suggestion)) {
             return;
         }
-        if (list.size() == 1) {
+        if (list.isEmpty()) {
             // The only suggestion is dismissed, and the the empty suggestion container will
             // remain as the dashboard item. Need to refresh the dashboard list.
             setSuggestions(null);
         } else {
-            list.remove(suggestion);
             setSuggestions(list);
         }
     }
