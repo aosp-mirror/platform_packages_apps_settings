@@ -67,7 +67,6 @@ public class ChooseLockPasswordTest {
         Intent intent = new IntentBuilder(application)
                 .setPassword("password")
                 .setPasswordQuality(DevicePolicyManager.PASSWORD_QUALITY_NUMERIC)
-                .setPasswordLengthRange(123, 456)
                 .setUserId(123)
                 .build();
 
@@ -77,12 +76,6 @@ public class ChooseLockPasswordTest {
         assertThat(intent.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD))
                 .named("EXTRA_KEY_PASSWORD")
                 .isEqualTo("password");
-        assertThat(intent.getIntExtra(ChooseLockPassword.PASSWORD_MIN_KEY, 0))
-                .named("PASSWORD_MIN_KEY")
-                .isEqualTo(123);
-        assertThat(intent.getIntExtra(ChooseLockPassword.PASSWORD_MAX_KEY, 0))
-                .named("PASSWORD_MAX_KEY")
-                .isEqualTo(456);
         assertThat(intent.getIntExtra(LockPatternUtils.PASSWORD_TYPE_KEY, 0))
                 .named("PASSWORD_TYPE_KEY")
                 .isEqualTo(DevicePolicyManager.PASSWORD_QUALITY_NUMERIC);
@@ -96,7 +89,6 @@ public class ChooseLockPasswordTest {
         Intent intent = new IntentBuilder(application)
                 .setChallenge(12345L)
                 .setPasswordQuality(DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC)
-                .setPasswordLengthRange(123, 456)
                 .setUserId(123)
                 .build();
 
@@ -106,12 +98,6 @@ public class ChooseLockPasswordTest {
         assertThat(intent.getLongExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0L))
                 .named("EXTRA_KEY_CHALLENGE")
                 .isEqualTo(12345L);
-        assertThat(intent.getIntExtra(ChooseLockPassword.PASSWORD_MIN_KEY, 0))
-                .named("PASSWORD_MIN_KEY")
-                .isEqualTo(123);
-        assertThat(intent.getIntExtra(ChooseLockPassword.PASSWORD_MAX_KEY, 0))
-                .named("PASSWORD_MAX_KEY")
-                .isEqualTo(456);
         assertThat(intent.getIntExtra(LockPatternUtils.PASSWORD_TYPE_KEY, 0))
                 .named("PASSWORD_TYPE_KEY")
                 .isEqualTo(DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC);

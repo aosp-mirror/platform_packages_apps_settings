@@ -73,15 +73,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChooseLockPassword extends SettingsActivity {
-    public static final String PASSWORD_MIN_KEY = "lockscreen.password_min";
-    public static final String PASSWORD_MAX_KEY = "lockscreen.password_max";
-    public static final String PASSWORD_MIN_LETTERS_KEY = "lockscreen.password_min_letters";
-    public static final String PASSWORD_MIN_LOWERCASE_KEY = "lockscreen.password_min_lowercase";
-    public static final String PASSWORD_MIN_UPPERCASE_KEY = "lockscreen.password_min_uppercase";
-    public static final String PASSWORD_MIN_NUMERIC_KEY = "lockscreen.password_min_numeric";
-    public static final String PASSWORD_MIN_SYMBOLS_KEY = "lockscreen.password_min_symbols";
-    public static final String PASSWORD_MIN_NONLETTER_KEY = "lockscreen.password_min_nonletter";
-
     private static final String TAG = "ChooseLockPassword";
 
     @Override
@@ -110,12 +101,6 @@ public class ChooseLockPassword extends SettingsActivity {
 
         public IntentBuilder setPasswordQuality(int quality) {
             mIntent.putExtra(LockPatternUtils.PASSWORD_TYPE_KEY, quality);
-            return this;
-        }
-
-        public IntentBuilder setPasswordLengthRange(int min, int max) {
-            mIntent.putExtra(PASSWORD_MIN_KEY, min);
-            mIntent.putExtra(PASSWORD_MAX_KEY, max);
             return this;
         }
 
@@ -454,54 +439,32 @@ public class ChooseLockPassword extends SettingsActivity {
         }
 
         private void setupPasswordRequirementsView(View view) {
-            // Construct passwordRequirements and requirementDescriptions.
-            List<Integer> passwordRequirements = new ArrayList<>();
-            List<String> requirementDescriptions = new ArrayList<>();
+            final List<Integer> passwordRequirements = new ArrayList<>();
             if (mPasswordMinUpperCase > 0) {
                 passwordRequirements.add(MIN_UPPER_LETTERS_IN_PASSWORD);
-                requirementDescriptions.add(getResources().getQuantityString(
-                        R.plurals.lockpassword_password_requires_uppercase, mPasswordMinUpperCase,
-                        mPasswordMinUpperCase));
             }
             if (mPasswordMinLowerCase > 0) {
                 passwordRequirements.add(MIN_LOWER_LETTERS_IN_PASSWORD);
-                requirementDescriptions.add(getResources().getQuantityString(
-                        R.plurals.lockpassword_password_requires_lowercase, mPasswordMinLowerCase,
-                        mPasswordMinLowerCase));
             }
             if (mPasswordMinLetters > 0) {
                 if (mPasswordMinLetters > mPasswordMinUpperCase + mPasswordMinLowerCase) {
                     passwordRequirements.add(MIN_LETTER_IN_PASSWORD);
-                    requirementDescriptions.add(getResources().getQuantityString(
-                            R.plurals.lockpassword_password_requires_letters, mPasswordMinLetters,
-                            mPasswordMinLetters));
                 }
             }
             if (mPasswordMinNumeric > 0) {
                 passwordRequirements.add(MIN_NUMBER_IN_PASSWORD);
-                requirementDescriptions.add(getResources().getQuantityString(
-                        R.plurals.lockpassword_password_requires_numeric, mPasswordMinNumeric,
-                        mPasswordMinNumeric));
             }
             if (mPasswordMinSymbols > 0) {
                 passwordRequirements.add(MIN_SYMBOLS_IN_PASSWORD);
-                requirementDescriptions.add(getResources().getQuantityString(
-                        R.plurals.lockpassword_password_requires_symbols, mPasswordMinSymbols,
-                        mPasswordMinSymbols));
             }
             if (mPasswordMinNonLetter > 0) {
                 if (mPasswordMinNonLetter > mPasswordMinNumeric + mPasswordMinSymbols) {
                     passwordRequirements.add(MIN_NON_LETTER_IN_PASSWORD);
-                    requirementDescriptions.add(getResources().getQuantityString(
-                            R.plurals.lockpassword_password_requires_nonletter, mPasswordMinNonLetter,
-
-                            mPasswordMinNonLetter));
                 }
             }
             // Convert list to array.
             mPasswordRequirements = passwordRequirements.stream().mapToInt(i -> i).toArray();
-            mPasswordRestrictionView =
-                    (RecyclerView) view.findViewById(R.id.password_requirements_view);
+            mPasswordRestrictionView = view.findViewById(R.id.password_requirements_view);
             mPasswordRestrictionView.setLayoutManager(new LinearLayoutManager(getActivity()));
             mPasswordRequirementAdapter = new PasswordRequirementAdapter();
             mPasswordRestrictionView.setAdapter(mPasswordRequirementAdapter);
@@ -582,29 +545,15 @@ public class ChooseLockPassword extends SettingsActivity {
             final int dpmPasswordQuality = mLockPatternUtils.getRequestedPasswordQuality(mUserId);
             mRequestedQuality = Math.max(intent.getIntExtra(LockPatternUtils.PASSWORD_TYPE_KEY,
                     mRequestedQuality), dpmPasswordQuality);
-            mPasswordMinLength = Math.max(Math.max(
-                    LockPatternUtils.MIN_LOCK_PASSWORD_SIZE,
-                    intent.getIntExtra(PASSWORD_MIN_KEY, mPasswordMinLength)),
+            mPasswordMinLength = Math.max(LockPatternUtils.MIN_LOCK_PASSWORD_SIZE,
                     mLockPatternUtils.getRequestedMinimumPasswordLength(mUserId));
-            mPasswordMaxLength = intent.getIntExtra(PASSWORD_MAX_KEY, mPasswordMaxLength);
-            mPasswordMinLetters = Math.max(intent.getIntExtra(PASSWORD_MIN_LETTERS_KEY,
-                    mPasswordMinLetters), mLockPatternUtils.getRequestedPasswordMinimumLetters(
-                    mUserId));
-            mPasswordMinUpperCase = Math.max(intent.getIntExtra(PASSWORD_MIN_UPPERCASE_KEY,
-                    mPasswordMinUpperCase), mLockPatternUtils.getRequestedPasswordMinimumUpperCase(
-                    mUserId));
-            mPasswordMinLowerCase = Math.max(intent.getIntExtra(PASSWORD_MIN_LOWERCASE_KEY,
-                    mPasswordMinLowerCase), mLockPatternUtils.getRequestedPasswordMinimumLowerCase(
-                    mUserId));
-            mPasswordMinNumeric = Math.max(intent.getIntExtra(PASSWORD_MIN_NUMERIC_KEY,
-                    mPasswordMinNumeric), mLockPatternUtils.getRequestedPasswordMinimumNumeric(
-                    mUserId));
-            mPasswordMinSymbols = Math.max(intent.getIntExtra(PASSWORD_MIN_SYMBOLS_KEY,
-                    mPasswordMinSymbols), mLockPatternUtils.getRequestedPasswordMinimumSymbols(
-                    mUserId));
-            mPasswordMinNonLetter = Math.max(intent.getIntExtra(PASSWORD_MIN_NONLETTER_KEY,
-                    mPasswordMinNonLetter), mLockPatternUtils.getRequestedPasswordMinimumNonLetter(
-                    mUserId));
+            mPasswordMaxLength = mLockPatternUtils.getMaximumPasswordLength(mRequestedQuality);
+            mPasswordMinLetters = mLockPatternUtils.getRequestedPasswordMinimumLetters(mUserId);
+            mPasswordMinUpperCase = mLockPatternUtils.getRequestedPasswordMinimumUpperCase(mUserId);
+            mPasswordMinLowerCase = mLockPatternUtils.getRequestedPasswordMinimumLowerCase(mUserId);
+            mPasswordMinNumeric = mLockPatternUtils.getRequestedPasswordMinimumNumeric(mUserId);
+            mPasswordMinSymbols = mLockPatternUtils.getRequestedPasswordMinimumSymbols(mUserId);
+            mPasswordMinNonLetter = mLockPatternUtils.getRequestedPasswordMinimumNonLetter(mUserId);
 
             // Modify the value based on dpm policy.
             switch (dpmPasswordQuality) {
