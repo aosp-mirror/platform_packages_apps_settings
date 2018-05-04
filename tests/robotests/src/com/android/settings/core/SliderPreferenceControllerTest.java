@@ -30,10 +30,10 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SliderPreferenceControllerTest {
 
-    FakeSlider mSliderController;
+    private FakeSlider mSliderController;
 
-    Context mContext;
-    SeekBarPreference mPreference;
+    private Context mContext;
+    private SeekBarPreference mPreference;
 
     @Before
     public void setUp() {

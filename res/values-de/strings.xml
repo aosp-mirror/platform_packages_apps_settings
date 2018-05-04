@@ -291,8 +291,7 @@
     <string name="forget" msgid="1400428660472591263">"Entfernen"</string>
     <string name="save" msgid="879993180139353333">"Speichern"</string>
     <string name="done" msgid="6942539184162713160">"Fertig"</string>
-    <!-- no translation found for apply (1577045208487259229) -->
-    <skip />
+    <string name="apply" msgid="1577045208487259229">"Anwenden"</string>
     <string name="settings_label" msgid="1626402585530130914">"Einstellungen"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Einstellungen"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Einstellungsverknüpfung"</string>
@@ -391,7 +390,7 @@
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"Displaysperre"</string>
     <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
       <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> Fingerabdrücke eingerichtet</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> Fingerabdrücke eingerichtet</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> Fingerabdruck eingerichtet</item>
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Mit Fingerabdruck entsperren"</string>
@@ -423,7 +422,7 @@
     <string name="security_settings_fingerprint_enroll_start_title" msgid="2068961812439460133">"Sensor berühren"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Lege deinen Finger auf den Sensor und hebe ihn an, wenn du eine Vibration spürst."</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="2819679722403209778">"Anheben und erneut berühren"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"Hebe den Finger immer wieder an, um alle unterschiedlichen Teile deines Fingerabdrucks hinzuzufügen"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"Hebe den Finger immer wieder an, um deinen Fingerabdruck vollständig zu erfassen"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="7567276170287972230">"Fingerabdruck hinzugefügt"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="8970048776120548976">"Wenn du dieses Symbol siehst, kannst du deinen Fingerabdruck zur Identifizierung verwenden oder auch einen Kauf damit autorisieren."</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"Später"</string>
@@ -1921,6 +1920,8 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Interaktionssteuerung"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Heruntergeladene Dienste"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Experimentell"</string>
+    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
+    <skip />
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Der Screenreader ist in erster Linie für Blinde und Menschen mit eingeschränktem Sehvermögen bestimmt"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Tippe auf dem Bildschirm auf Elemente, damit sie vorgelesen werden"</string>
@@ -2282,7 +2283,7 @@
     <string name="battery_msg_unaccounted" msgid="1963583522633067961">"Der Akkuverbrauch ist nur eine ungefähre Angabe, die nicht jede Quelle der Akkuentladung berücksichtigt. Der sonstige Verbrauch bezieht sich auf die Differenz zwischen dem errechneten ungefähren Akkuverbrauch und der ermittelten tatsächlichen Akkuentladung."</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"Zu hoch berechneter Stromverbrauch"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
-    <string name="battery_used_for" msgid="2690821851327075443">"Verwendungsdauer <xliff:g id="TIME">^1</xliff:g>"</string>
+    <string name="battery_used_for" msgid="2690821851327075443">"<xliff:g id="TIME">^1</xliff:g> Verwendungsdauer"</string>
     <string name="battery_active_for" msgid="2964359540508103032">"Aktiv seit <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_screen_usage" msgid="6537658662149713585">"Displaynutzung: <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="PERCENT">%1$s</xliff:g> durch <xliff:g id="APP">%2$s</xliff:g> verbraucht"</string>
@@ -2428,6 +2429,7 @@
     <string name="backup_data_title" msgid="1239105919852668016">"Meine Daten sichern"</string>
     <string name="backup_data_summary" msgid="708773323451655666">"App-Daten, WLAN-Passwörter und andere Einstellungen auf Google-Servern sichern"</string>
     <string name="backup_configure_account_title" msgid="3790872965773196615">"Sicherungskonto"</string>
+    <string name="backup_data_management_title" msgid="4059093462647090064">"Sicherungskonto verwalten"</string>
     <string name="include_app_data_title" msgid="2829970132260278394">"App-Daten einschließen"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Autom. Wiederherstellung"</string>
     <string name="auto_restore_summary" msgid="4235615056371993807">"Nach der Neuinstallation einer App gesicherte Einstellungen und Daten wiederherstellen"</string>
@@ -2528,7 +2530,6 @@
     <string name="header_account_settings" msgid="5382475087121880626">"Kontoeinstellungen"</string>
     <string name="remove_account_label" msgid="5921986026504804119">"Konto entfernen"</string>
     <string name="header_add_an_account" msgid="756108499532023798">"Konto hinzufügen"</string>
-    <string name="finish_button_label" msgid="481587707657751116">"Fertigstellen"</string>
     <string name="really_remove_account_title" msgid="8800653398717172460">"Konto entfernen?"</string>
     <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"Durch das Entfernen dieses Kontos werden alle zugehörigen Nachrichten, Kontakte und andere Daten vom Tablet gelöscht!"</string>
     <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"Durch das Entfernen dieses Kontos werden alle seine Nachrichten, Kontakte und andere Daten vom Telefon gelöscht!"</string>
@@ -3072,7 +3073,38 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Visuelle Störungen blockieren"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"Visuelle Signale zulassen"</string>
-    <string name="zen_mode_what_to_block_title" msgid="7078190101807944693">"Visuelle Störungen blockieren lassen"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_screen_title (9027437428488279426) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_title (478040192977063582) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_category (1648631487087638037) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_mute (9210062826172341735) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_mute_summary (285566524371041091) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_mute_footer (8473382758368384982) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_hide (3451553435075518722) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_hide_summary (3823881787175376177) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_hide_footer (4224323933073288352) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_custom (7498689167767941034) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_enable_custom (4250962169561739747) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_disable_custom (6676997522330453597) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_summary_muted (4678779044896459009) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_summary_custom (7416121534987213074) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_summary_hidden (7805339105802282234) -->
+    <skip />
+    <!-- no translation found for zen_mode_what_to_block_title (5480903548365697159) -->
+    <skip />
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"Bei aktiviertem Display"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"Bei deaktiviertem Display"</string>
     <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"Töne und Vibration ausschalten"</string>
@@ -3342,7 +3374,7 @@
     <string name="switch_off_text" msgid="1139356348100829659">"Aus"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Bildschirmfixierung"</string>
     <string name="screen_pinning_description" msgid="1110847562111827766">"Wenn diese Einstellung aktiviert ist, kannst du die Ansicht des aktuellen Bildschirms fixieren.\n\nSo gehts:\n\n1. Achte darauf, dass die Bildschirmfixierung aktiviert ist.\n\n2. Tippe auf \"Übersicht\".\n\n3. Tippe am oberen Bildschirmrand auf das App-Symbol und dann auf \"Fixieren\"."</string>
-    <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Vor dem Beenden nach Entsperrungsmuster fragen"</string>
+    <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Nach Entsperrungsmuster fragen, um Fixierung aufzuheben"</string>
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"Vor Beenden nach PIN fragen"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Vor dem Beenden nach Passwort fragen"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"Gerät beim Beenden sperren"</string>
@@ -3632,6 +3664,7 @@
     <string name="screen_zoom_conversation_timestamp_3" msgid="3785674344762707688">"Di. 18:02 Uhr"</string>
     <string name="screen_zoom_conversation_timestamp_4" msgid="2511469395448561259">"Di. 18:03 Uhr"</string>
     <string name="disconnected" msgid="4836600637485526329">"Nicht verbunden"</string>
+    <string name="keyboard_disconnected" msgid="1495037256967224035">"Nicht verbunden"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> genutzt"</string>
     <string name="data_usage_wifi_format" msgid="5417296451392612860">"<xliff:g id="AMOUNT">^1</xliff:g> WLAN-Datennutzung"</string>
     <plurals name="notification_summary" formatted="false" msgid="3941492005316143599">
@@ -3758,7 +3791,7 @@
     <string name="data_usage_title" msgid="3659356290392241789">"Primärdaten"</string>
     <string name="data_usage_wifi_title" msgid="7063659423081820720">"WLAN-Daten"</string>
     <string name="data_used" msgid="5116389957228457203">"<xliff:g id="ID_1">^1</xliff:g> genutzt"</string>
-    <string name="data_used_formatted" msgid="2989129931961311051">"<xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g> belegt"</string>
+    <string name="data_used_formatted" msgid="2989129931961311051">"<xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g> verbraucht"</string>
     <string name="data_overusage" msgid="1134445012475270295">"<xliff:g id="ID_1">^1</xliff:g> über dem Limit"</string>
     <string name="data_remaining" msgid="8998091725895502181">"<xliff:g id="ID_1">^1</xliff:g> verbleibend"</string>
     <plurals name="billing_cycle_days_left" formatted="false" msgid="456503215317213651">
@@ -3906,7 +3939,7 @@
     <string name="ambient_display_pickup_summary" product="tablet" msgid="5435283849947236648">"Tablet in die Hand nehmen, um Uhrzeit, Benachrichtigungen und andere Informationen anzusehen."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="8256669101643381568">"Gerät in die Hand nehmen, um Uhrzeit, Benachrichtigungen und andere Informationen anzusehen."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Benachr. mit Fingerabdruck"</string>
-    <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"Mit Finger wischen"</string>
+    <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"Fingerabdrucksensor verwenden"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Auf der Rückseite des Smartphones über den Fingerabdrucksensor nach unten wischen, um Benachrichtigungen zu lesen."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Auf der Rückseite des Tablets über den Fingerabdrucksensor nach unten wischen, um Benachrichtigungen zu lesen."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Auf der Rückseite des Geräts über den Fingerabdrucksensor nach unten wischen, um Benachrichtigungen zu lesen."</string>
@@ -4024,7 +4057,7 @@
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(für Nutzer <xliff:g id="USER">%s</xliff:g> deaktiviert)"</string>
     <string name="autofill_app" msgid="7338387238377914374">"AutoFill-Dienst"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"automatisch, ausfüllen, füllen, autofill"</string>
-    <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;Sorg dafür, dass dieser App vertraut wird.&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; entscheidet anhand der Inhalte auf dem Display, welche Informationen automatisch ausgefüllt werden können."</string>
+    <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;Findest du diese App vertrauenswürdig?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; entscheidet anhand der Inhalte auf dem Display, welche Informationen automatisch ausgefüllt werden können."</string>
     <string name="device_theme" msgid="4571803018917608588">"Gerätedesign"</string>
     <string name="default_theme" msgid="7085644992078579076">"Standard"</string>
     <string name="show_operator_name_title" msgid="805135053530442951">"Netzwerkname"</string>
@@ -4075,7 +4108,7 @@
     <string name="battery_suggestion_title" product="default" msgid="4038053023336285165">"Akkulaufzeit des Smartphones verbessern"</string>
     <string name="battery_suggestion_summary" msgid="4585677159811722359"></string>
     <string name="gesture_prevent_ringing_screen_title" msgid="7840226017975251549">"Klingeln verhindern"</string>
-    <string name="gesture_prevent_ringing_title" msgid="2483159069038138740">"\"Ein/Aus\" &amp; \"Lauter\" zusammen drücken"</string>
+    <string name="gesture_prevent_ringing_title" msgid="2483159069038138740">"\"Ein/Aus\" &amp; \"Lauter\" leicht zusammendrücken"</string>
     <string name="gesture_prevent_ringing_sound_title" msgid="5724512060316688779">"Verknüpfung, um Klingeln zu verhindern"</string>
     <string name="prevent_ringing_option_vibrate" msgid="7286821846542822661">"Vibrieren"</string>
     <string name="prevent_ringing_option_mute" msgid="7551545579059879853">"Stummschalten"</string>

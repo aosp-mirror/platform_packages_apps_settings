@@ -292,8 +292,7 @@
     <string name="forget" msgid="1400428660472591263">"Unut"</string>
     <string name="save" msgid="879993180139353333">"Yadda saxlayın"</string>
     <string name="done" msgid="6942539184162713160">"Hazırdır"</string>
-    <!-- no translation found for apply (1577045208487259229) -->
-    <skip />
+    <string name="apply" msgid="1577045208487259229">"Tətbiq edin"</string>
     <string name="settings_label" msgid="1626402585530130914">"Ayarlar"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Ayarlar"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Ayarlar qısayolunu seçin"</string>
@@ -1921,6 +1920,8 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Qarşılıqlı əlaqə nəzarəti"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Endirilmiş xidmətlər"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Eksperimental"</string>
+    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
+    <skip />
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Ekran oxucusu əsasən korluq və aşağı görmə qabiliyyəti olan insanlar üçündür"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Səsli oxunuş üçün ekrandakı elementlərə toxunun"</string>
@@ -2428,6 +2429,7 @@
     <string name="backup_data_title" msgid="1239105919852668016">"Məlumatlarımın rezervlə"</string>
     <string name="backup_data_summary" msgid="708773323451655666">"Tətbiq datasını, Wi-Fi parolları və digər ayarları Google serverlərinə rezerv kopyalayın"</string>
     <string name="backup_configure_account_title" msgid="3790872965773196615">"Yedək hesab"</string>
+    <string name="backup_data_management_title" msgid="4059093462647090064">"Yedək hesabı idarə edin"</string>
     <string name="include_app_data_title" msgid="2829970132260278394">"Tətbiq datası əlavə edin"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Avtomatik bərpa"</string>
     <string name="auto_restore_summary" msgid="4235615056371993807">"Tətbiqi yenidən quraşdıranda yedəklənən parametr və datanı bərpa edin."</string>
@@ -2528,7 +2530,6 @@
     <string name="header_account_settings" msgid="5382475087121880626">"Hesab ayarları"</string>
     <string name="remove_account_label" msgid="5921986026504804119">"Hesabı sil"</string>
     <string name="header_add_an_account" msgid="756108499532023798">"Hesab əlavə edin"</string>
-    <string name="finish_button_label" msgid="481587707657751116">"Bitir"</string>
     <string name="really_remove_account_title" msgid="8800653398717172460">"Hesab silinsin?"</string>
     <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"Bu hesabın silinməsi bütün mesajları, kontaktları və digər datanı planşetinizdən siləcək"</string>
     <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"Bu hesabın silinməsi həmçinin bütün mesajların, kontaktların və digər datanın telefondan silinməsi ilə müşayət olunacaq!"</string>
@@ -3072,7 +3073,22 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Vizual fəsadları blok edin"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"Görünən siqnallara icazə verin"</string>
-    <string name="zen_mode_what_to_block_title" msgid="7078190101807944693">"Vizual fəsadları blok edin"</string>
+    <string name="zen_mode_restrict_notifications_screen_title" msgid="9027437428488279426">"Bildirişləri məhdudlaşdırın"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"Bildirişlər"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"\"Narahat Etməyin\" əmri aktiv olan zaman"</string>
+    <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"Bildirişləri susdurun"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"Bildirişləri göstərin, lakin səs və vibrasiyaları susdurun"</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"Yeni bildirişlər gəldikdə telefonda səs və ya vibrasiya olmayacaq"</string>
+    <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"Bildirişləri gizlədin və susdurun"</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"Bildirişlər ümumiyyətlə görünməyəcək"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"\"Narahat Etməyin\" rejimi aktiv olduqda yeni və mövcud bildirişləri görməyəcəksiniz. Lakin əsas telefon fəaliyyəti üçün lazım olan bildirişlər və status görünəcək."</string>
+    <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"Fərdi"</string>
+    <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"Fərdi ayarı aktiv edin"</string>
+    <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"Fərdi ayarı silin"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"Görünəcək"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"Qismən gizlədilib"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"Gizli"</string>
+    <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"Fərdi məhdudiyyətlər"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"Ekran yanılı olduqda"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"Ekran sönülü olduqda"</string>
     <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"Səsi və vibrasiyanı susdurun"</string>
@@ -3632,6 +3648,7 @@
     <string name="screen_zoom_conversation_timestamp_3" msgid="3785674344762707688">"Ç.a 6:02GƏ"</string>
     <string name="screen_zoom_conversation_timestamp_4" msgid="2511469395448561259">"Ç.a 6:03GƏ"</string>
     <string name="disconnected" msgid="4836600637485526329">"Qoşulu deyil"</string>
+    <string name="keyboard_disconnected" msgid="1495037256967224035">"Qoşulu deyil"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> data istifadə edildi"</string>
     <string name="data_usage_wifi_format" msgid="5417296451392612860">"Wi‑Fi şəbəkəsində istifadə edilən <xliff:g id="AMOUNT">^1</xliff:g>"</string>
     <plurals name="notification_summary" formatted="false" msgid="3941492005316143599">

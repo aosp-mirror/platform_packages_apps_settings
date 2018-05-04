@@ -67,6 +67,7 @@ public class ZenModeRestrictNotificationsSettings extends ZenModeSettingsBase im
             ZenModeVisEffectsCustomPreferenceController custom =
                     use(ZenModeVisEffectsCustomPreferenceController.class);
             custom.setShownByMenu(mShowMenuSelected);
+            custom.displayPreference(getPreferenceScreen());
 
             if (mShowMenuSelected) {
                 custom.select();
@@ -82,13 +83,19 @@ public class ZenModeRestrictNotificationsSettings extends ZenModeSettingsBase im
 
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
-        if (mShowMenuSelected && !use(ZenModeVisEffectsCustomPreferenceController.class)
-                .areCustomOptionsSelected()) {
+        if (mShowMenuSelected) {
             menu.findItem(APP_MENU_SHOW_CUSTOM)
                     .setTitle(R.string.zen_mode_restrict_notifications_disable_custom);
         } else {
             menu.findItem(APP_MENU_SHOW_CUSTOM)
                     .setTitle(R.string.zen_mode_restrict_notifications_enable_custom);
+        }
+
+        if (mShowMenuSelected && use(ZenModeVisEffectsCustomPreferenceController.class)
+                .areCustomOptionsSelected()) {
+            menu.findItem(APP_MENU_SHOW_CUSTOM).setEnabled(false);
+        } else {
+            menu.findItem(APP_MENU_SHOW_CUSTOM).setEnabled(true);
         }
     }
 

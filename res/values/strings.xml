@@ -1371,19 +1371,29 @@
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss">Dismiss</string>
 
     <!-- Hint shown in dialog screen when password is too short -->
-    <string name="lockpassword_password_too_short">Must be at least <xliff:g id="count" example="3">%d</xliff:g> characters</string>
+    <plurals name="lockpassword_password_too_short">
+        <item quantity="one">Must contain at least <xliff:g id="count" example="1">%d</xliff:g> character</item>
+        <item quantity="other">Must be at least <xliff:g id="count" example="3">%d</xliff:g> characters</item>
+    </plurals>
     <!-- Hint shown in dialog screen when PIN is too short -->
-    <string name="lockpassword_pin_too_short">PIN must be at least <xliff:g id="count" example="3">%d</xliff:g> digits</string>
+    <plurals name="lockpassword_pin_too_short">
+        <item quantity="one">PIN must contain at least <xliff:g id="count" example="1">%d</xliff:g> digit</item>
+        <item quantity="other">PIN must be at least <xliff:g id="count" example="3">%d</xliff:g> digits</item>
+    </plurals>
 
     <!-- Hint shown after minimum password criteria is met -->
     <string name="lockpassword_continue_label">Continue</string>
 
     <!-- Error shown in popup when password is too long -->
-    <string name="lockpassword_password_too_long">Must be fewer than
-        <xliff:g id="number" example="17">%d</xliff:g> characters</string>
+    <plurals name="lockpassword_password_too_long">
+        <item quantity="one">Must be fewer than <xliff:g id="number" example="1">%d</xliff:g> character</item>
+        <item quantity="other">Must be fewer than <xliff:g id="number" example="17">%d</xliff:g> characters</item>
+    </plurals>
     <!-- Error shown in popup when PIN is too long -->
-    <string name="lockpassword_pin_too_long">Must be fewer than
-        <xliff:g id="number" example="17">%d</xliff:g> digits</string>
+    <plurals name="lockpassword_pin_too_long">
+        <item quantity="one">Must be fewer than <xliff:g id="number" example="1">%d</xliff:g> digit</item>
+        <item quantity="other">Must be fewer than <xliff:g id="number" example="17">%d</xliff:g> digits</item>
+    </plurals>
 
     <!-- Error shown when in PIN mode and user enters a non-digit -->
     <string name="lockpassword_pin_contains_non_digits">Must contain only digits 0-9</string>
@@ -7352,14 +7362,26 @@
         <item quantity="other"><xliff:g id="on_count" example="3">%d</xliff:g> rules can turn on automatically</item>
     </plurals>
 
-    <string name="zen_onboarding_ok">Ok</string>
+    <!-- Do not disturb onboarding dialog, accept new settings [CHAR LIMIT=30]-->
+    <string name="zen_onboarding_ok">Update</string>
+    <!-- Do not disturb onboarding dialog, do not accept new settings [CHAR LIMIT=30]-->
+    <string name="zen_onboarding_no_update">Don\'t update</string>
+    <!-- Do not disturb onboarding dialog, description of new settings [CHAR LIMIT=NONE]-->
+    <string name="zen_onboarding_dnd_visual_disturbances_description">Your phone can do more to help you focus.\n\nUpdate settings to:\n\n- Hide notifications completely\n\n- Allow calls from starred contacts and repeat callers</string>
+    <!-- Do not disturb onboarding dialog, header prompt for settings [CHAR LIMIT=80]-->
+    <string name="zen_onboarding_dnd_visual_disturbances_header">Update Do Not Disturb?</string>
+
+    <!-- obsolete -->
     <string name="zen_onboarding_settings">Settings</string>
+    <!-- obsolete -->
     <string name="zen_onboarding_more_options">You can further customize this in Settings.</string>
+    <!-- obsolete -->
     <string name="zen_onboarding_screen_on_title">Block when the screen is on</string>
+    <!-- obsolete -->
     <string name="zen_onboarding_screen_off_title">Block when the screen is off</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description">Do Not Disturb can do more than block unwanted sounds - it can block visuals too. This may be helpful if you\'re trying to sleep, focus, or limit time spent on your phone.</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header">Block sounds and visuals</string>
+    <!-- obsolete -->
     <string name="zen_onboarding_screen_off_summary">Don\'t turn on the screen or wake for notifications</string>
+    <!-- obsolete -->
     <string name="zen_onboarding_screen_on_summary">Don\'t show notifications at all, except for basic phone activity and status</string>
 
     <!-- Work Sounds: Work sound settings section header.  [CHAR LIMIT=50] -->
@@ -8821,7 +8843,7 @@
     <string name="android_version_pending_update_summary">Update available</string>
 
     <!-- Title for dialog displayed when user selects on a setting locked by an admin [CHAR LIMIT=30] -->
-    <string name="disabled_by_policy_title">Can’t change this setting</string>
+    <string name="disabled_by_policy_title">Action not allowed</string>
     <!-- Title for dialog displayed to tell user that changing volume was disallowed by an admin [CHAR LIMIT=50] -->
     <string name="disabled_by_policy_title_adjust_volume">Can’t change volume</string>
     <!-- Title for dialog displayed to tell user that outgoing calls were disabled by an admin [CHAR LIMIT=50] -->
