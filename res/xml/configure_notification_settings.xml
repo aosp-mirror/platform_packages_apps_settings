@@ -28,7 +28,8 @@
     <!-- Notification badging -->
     <SwitchPreference
         android:key="notification_badging"
-        android:title="@string/notification_badging_title"/>
+        android:title="@string/notification_badging_title"
+        settings:controller="com.android.settings.notification.BadgingNotificationPreferenceController"/>
 
     <!-- Pulse notification light -->
     <SwitchPreference

@@ -31,7 +31,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
 import java.util.Objects;
@@ -80,6 +82,9 @@ public class StorageWizardMigrateConfirm extends StorageWizardBase {
 
     @Override
     public void onNavigateBack(View view) {
+        FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(this,
+                MetricsEvent.ACTION_STORAGE_MIGRATE_LATER);
+
         final Intent intent = new Intent(this, StorageWizardReady.class);
         intent.putExtra(EXTRA_MIGRATE_SKIP, true);
         startActivity(intent);
@@ -126,6 +131,9 @@ public class StorageWizardMigrateConfirm extends StorageWizardBase {
 
             return;
         }
+
+        FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(this,
+                MetricsEvent.ACTION_STORAGE_MIGRATE_NOW);
 
         final Intent intent = new Intent(this, StorageWizardMigrateProgress.class);
         intent.putExtra(VolumeInfo.EXTRA_VOLUME_ID, mVolume.getId());
