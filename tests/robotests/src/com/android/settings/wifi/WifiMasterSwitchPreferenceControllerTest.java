@@ -36,6 +36,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowRestrictedLockUtils;
 import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
@@ -48,6 +49,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(shadows = ShadowRestrictedLockUtils.class)
 public class WifiMasterSwitchPreferenceControllerTest {
 
     @Mock
