@@ -4995,9 +4995,13 @@
     <string name="battery_abnormal_apps_summary"><xliff:g id="number">%1$d</xliff:g> apps misbehaving</string>
 
     <!-- Title for the battery summary tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_summary_title">Battery is in good shape</string>
+    <string name="battery_tip_summary_title">Apps are running normally</string>
     <!-- Summary for the battery summary tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_summary_summary">Apps are running normally</string>
+    <string name="battery_tip_summary_summary" product="default">Phone has typical background battery usage</string>
+    <!-- Summary for the battery summary tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_summary_summary" product="tablet">Tablet has typical background battery usage</string>
+    <!-- Summary for the battery summary tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_summary_summary" product="device">Device has typical background battery usage</string>
     <!-- Title for the low battery tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_low_battery_title">Low battery capacity</string>
     <!-- Summary for the low battery tip [CHAR LIMIT=NONE] -->
@@ -5076,9 +5080,11 @@
     <string name="battery_tip_unrestrict_app_dialog_cancel">Cancel</string>
 
     <!-- Message for battery tip dialog to show the battery summary -->
-    <string name="battery_tip_dialog_summary_message">Based on your usage, your battery usually lasts about <xliff:g id="time_duration">%1$s</xliff:g> when fully charged.\n\nIf you need to extend your battery life, turn on Battery Saver.</string>
+    <string name="battery_tip_dialog_summary_message" product="default">Your apps are using a normal amount of battery. If apps use too much battery, your phone will suggest actions you can take.\n\nYou can always turn on Battery Saver if you\u2019re running low on battery.</string>
     <!-- Message for battery tip dialog to show the battery summary -->
-    <string name="battery_tip_dialog_summary_message_no_estimation">If you need to extend your battery life, turn on Battery Saver</string>
+    <string name="battery_tip_dialog_summary_message" product="tablet">Your apps are using a normal amount of battery. If apps use too much battery, your tablet will suggest actions you can take.\n\nYou can always turn on Battery Saver if you\u2019re running low on battery.</string>
+    <!-- Message for battery tip dialog to show the battery summary -->
+    <string name="battery_tip_dialog_summary_message" product="device">Your apps are using a normal amount of battery. If apps use too much battery, your device will suggest actions you can take.\n\nYou can always turn on Battery Saver if you\u2019re running low on battery.</string>
 
     <!-- Title for the smart battery manager preference [CHAR LIMIT=NONE] -->
     <string name="smart_battery_manager_title">Battery Manager</string>
