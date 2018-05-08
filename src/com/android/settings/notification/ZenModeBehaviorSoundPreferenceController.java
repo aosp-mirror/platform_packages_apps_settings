@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,13 +22,13 @@ import android.support.v7.preference.Preference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
-public class ZenModeBehaviorPreferenceController extends
+public class ZenModeBehaviorSoundPreferenceController extends
         AbstractZenModePreferenceController implements PreferenceControllerMixin {
 
-    protected static final String KEY_BEHAVIOR_SETTINGS = "zen_mode_behavior_settings";
+    protected static final String KEY_BEHAVIOR_SETTINGS = "zen_sound_vibration_settings";
     private final ZenModeSettings.SummaryBuilder mSummaryBuilder;
 
-    public ZenModeBehaviorPreferenceController(Context context, Lifecycle lifecycle) {
+    public ZenModeBehaviorSoundPreferenceController(Context context, Lifecycle lifecycle) {
         super(context, KEY_BEHAVIOR_SETTINGS, lifecycle);
         mSummaryBuilder = new ZenModeSettings.SummaryBuilder(context);
     }
@@ -47,7 +47,6 @@ public class ZenModeBehaviorPreferenceController extends
     public void updateState(Preference preference) {
         super.updateState(preference);
 
-        preference.setSummary(mSummaryBuilder.getBehaviorSettingSummary(getPolicy(),
-                getZenMode()));
+        preference.setSummary(mSummaryBuilder.getSoundSettingSummary(getPolicy()));
     }
 }

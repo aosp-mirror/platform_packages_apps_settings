@@ -106,9 +106,10 @@ import com.android.settings.notification.NotificationStation;
 import com.android.settings.notification.SoundSettings;
 import com.android.settings.notification.ZenAccessSettings;
 import com.android.settings.notification.ZenModeAutomationSettings;
-import com.android.settings.notification.ZenModeBehaviorSettings;
+import com.android.settings.notification.ZenModeMsgEventReminderSettings;
 import com.android.settings.notification.ZenModeBlockedEffectsSettings;
 import com.android.settings.notification.ZenModeEventRuleSettings;
+import com.android.settings.notification.ZenModeRestrictNotificationsSettings;
 import com.android.settings.notification.ZenModeScheduleRuleSettings;
 import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.password.ChooseLockPassword;
@@ -220,7 +221,6 @@ public class SettingsGateway {
             ApnSettings.class.getName(),
             ApnEditor.class.getName(),
             WifiCallingSettings.class.getName(),
-            ZenModeBehaviorSettings.class.getName(),
             ZenModeScheduleRuleSettings.class.getName(),
             ZenModeEventRuleSettings.class.getName(),
             ZenModeBlockedEffectsSettings.class.getName(),
