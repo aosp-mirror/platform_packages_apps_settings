@@ -24,6 +24,7 @@ import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothFilesPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.nfc.AndroidBeamPreferenceController;
+import com.android.settings.nfc.NfcPreferenceController;
 import com.android.settings.print.PrintSettingPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -80,10 +81,16 @@ public class AdvancedConnectedDeviceDashboardFragment extends DashboardFragment 
 
         final PrintSettingPreferenceController printerController =
                 new PrintSettingPreferenceController(context);
+        final NfcPreferenceController nfcPreferenceController =
+                new NfcPreferenceController(context);
+
         if (lifecycle != null) {
             lifecycle.addObserver(beamPreferenceController);
             lifecycle.addObserver(printerController);
+            lifecycle.addObserver(nfcPreferenceController);
         }
+
+        controllers.add(nfcPreferenceController);
         controllers.add(printerController);
 
         return controllers;
