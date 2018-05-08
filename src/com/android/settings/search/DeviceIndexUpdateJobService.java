@@ -115,7 +115,7 @@ public class DeviceIndexUpdateJobService extends JobService {
     }
 
     protected CharSequence findTitle(Slice loadedSlice, SliceMetadata metaData) {
-        ListContent content = new ListContent(this, loadedSlice);
+        ListContent content = new ListContent(null, loadedSlice);
         SliceItem headerItem = content.getHeaderItem();
         if (headerItem == null) {
             if (content.getRowItems().size() != 0) {
