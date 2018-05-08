@@ -136,7 +136,6 @@ public class AnomalyDetectionJobService extends JobService {
                 StatsManager.EXTRA_STATS_BROADCAST_SUBSCRIBER_COOKIES);
         final AnomalyInfo anomalyInfo = new AnomalyInfo(
                 !ArrayUtils.isEmpty(cookies) ? cookies.get(0) : "");
-        final PackageManager packageManager = context.getPackageManager();
         Log.i(TAG, "Extra stats value: " + intentDimsValue.toString());
 
         try {
@@ -151,9 +150,7 @@ public class AnomalyDetectionJobService extends JobService {
 
             final boolean anomalyDetected;
             if (isExcessiveBackgroundAnomaly(anomalyInfo)) {
-                anomalyDetected = batteryUtils.isPreOApp(packageName)
-                        && batteryUtils.isAppHeavilyUsed(batteryStatsHelper, userManager, uid,
-                        policy.excessiveBgDrainPercentage);
+                anomalyDetected = batteryUtils.isPreOApp(packageName);
             } else {
                 anomalyDetected = true;
             }
