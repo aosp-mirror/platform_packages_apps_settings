@@ -590,11 +590,27 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Previše netačnih pokušaja. Izbrisaćemo ovog korisnika."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Previše netačnih pokušaja. Izbrisaćemo ovaj profil za Work i njegove podatke."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Odbaci"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Minimalan broj znakova je <xliff:g id="COUNT">%d</xliff:g>"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"Minimalan broj cifara za PIN je <xliff:g id="COUNT">%d</xliff:g>"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="one">Mora da sadrži više od <xliff:g id="COUNT_1">%d</xliff:g> znaka</item>
+      <item quantity="few">Mora da sadrži više od <xliff:g id="COUNT_1">%d</xliff:g> znaka</item>
+      <item quantity="other">Mora da sadrži više od <xliff:g id="COUNT_1">%d</xliff:g> znakova</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="one">PIN mora da sadrži više od <xliff:g id="COUNT_1">%d</xliff:g> cifre</item>
+      <item quantity="few">PIN mora da sadrži više od <xliff:g id="COUNT_1">%d</xliff:g> cifre</item>
+      <item quantity="other">PIN mora da sadrži više od <xliff:g id="COUNT_1">%d</xliff:g> cifara</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Nastavi"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"Maksimalan broj znakova je <xliff:g id="NUMBER">%d</xliff:g>"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Maksimalan broj cifara je <xliff:g id="NUMBER">%d</xliff:g>"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="one">Mora da sadrži manje od <xliff:g id="NUMBER_1">%d</xliff:g> znaka</item>
+      <item quantity="few">Mora da sadrži manje od <xliff:g id="NUMBER_1">%d</xliff:g> znaka</item>
+      <item quantity="other">Mora da sadrži manje od <xliff:g id="NUMBER_1">%d</xliff:g> znakova</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="one">Mora da sadrži manje od <xliff:g id="NUMBER_1">%d</xliff:g> cifre</item>
+      <item quantity="few">Mora da sadrži manje od <xliff:g id="NUMBER_1">%d</xliff:g> cifre</item>
+      <item quantity="other">Mora da sadrži manje od <xliff:g id="NUMBER_1">%d</xliff:g> cifara</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Mora da sadrži samo cifre 0–9"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Administrator uređaja ne dozvoljava upotrebu nedavno korišćenog PIN-a"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"IT administrator blokira česte PIN-ove. Izaberite drugi PIN."</string>
@@ -1934,8 +1950,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Kontrole interakcije"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Preuzete usluge"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Eksperimentalno"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Oznake funkcija"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Čitač ekrana prvenstveno namenjen slepim i slabovidim osobama"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Dodirnite stavke na ekranu da biste ih čuli"</string>
@@ -3170,13 +3185,14 @@
       <item quantity="few"><xliff:g id="ON_COUNT">%d</xliff:g> pravila mogu da se automatski uključe</item>
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> pravila mogu da se automatski uključe</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"Potvrdi"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Ažuriraj"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Ne ažuriraj"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"Telefon može još više da vam pomogne da se koncentrišete.\n\nAžurirajte podešavanja:\n\n– da biste potpuno sakrili obaveštenja\n\n– da biste omogućili da vas zovu kontakti sa zvezdicom i ponovni pozivaoci"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"Želite li da ažurirate režim Ne uznemiravaj?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Podešavanja"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Ovo možete dodatno da prilagodite u podešavanjima."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Blokiraj kada je ekran uključen"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Blokiraj kada je ekran isključen"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Režim Ne uznemiravaj ima mnogo više mogućnosti od običnog blokiranja neželjenih zvukova – može da blokira i vizuelni sadržaj. To može biti korisno kada spavate, kada treba da budete usredsređeni na nešto ili kada želite da smanjite vreme koje provodite na telefonu."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Blokiraj zvukove i vizuelni sadržaj"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Ne uključuj ekran niti budi zbog obaveštenja"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Ne prikazuj nikakva obaveštenja, osim osnovnih aktivnosti i statusa telefona"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Zvuci za profil za Work"</string>
@@ -3723,7 +3739,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Pravljenje rezervne kopije je onemogućeno"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Ažurirano na Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"Dostupno je ažuriranje"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"Podešavanje je zaključano"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"Radnja nije dozvoljena"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"Ne možete da promenite jačinu zvuka"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"Pozivanje nije dozvoljeno"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"SMS-ovi nisu dozvoljeni"</string>
@@ -3919,7 +3935,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Kontrolišite informacije na zaključanom ekranu"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Pregledajte ili sakrijte sadržaj obaveštenja"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Sve"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"Podrška i saveti"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"Najmanja širina"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Nijedna instalirana aplikacija nije zahtevala pristup premijum SMS-ovima"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"Premijum SMS-ovi mogu da koštaju i povećaće račune kod mobilnog operatera. Ako omogućite dozvolu za neku aplikaciju, moći ćete da šaljete premijum SMS-ove pomoću te aplikacije."</string>

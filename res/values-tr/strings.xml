@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Çok fazla sayıda hatalı deneme yapıldı. Bu kullanıcı silinecek."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Çok fazla sayıda hatalı denemede yapıldı. İş profiliniz ve verileri silinecek."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Kapat"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"En az <xliff:g id="COUNT">%d</xliff:g> karakter olmalıdır"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"PIN en az <xliff:g id="COUNT">%d</xliff:g> basamaklı olmalıdır"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="other">En az <xliff:g id="COUNT_1">%d</xliff:g> karakter olmalıdır</item>
+      <item quantity="one">En az <xliff:g id="COUNT_0">%d</xliff:g> karakter içermelidir</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="other">PIN en az <xliff:g id="COUNT_1">%d</xliff:g> basamak olmalıdır</item>
+      <item quantity="one">PIN en az <xliff:g id="COUNT_0">%d</xliff:g> basamak içermelidir</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Devam Et"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"<xliff:g id="NUMBER">%d</xliff:g> karakterden kısa olmalıdır"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"En çok <xliff:g id="NUMBER">%d</xliff:g> basamaklı olmalıdır."</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> karakterden az olmalıdır</item>
+      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> karakterden az olmalıdır</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> basamaktan az olmalıdır</item>
+      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> basamaktan az olmalıdır</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Yalnızca 0-9 arasındaki rakamları içermelidir"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Cihaz yöneticisi yakın zamanda kullanılan bir PIN\'e izin vermiyor"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"Yaygın olarak kullanılan PIN\'ler BT yöneticiniz tarafından engellendi. Farklı bir PIN deneyin."</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Etkileşim denetimleri"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"İndirilen hizmetler"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Deneysel"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Özellik işaretleri"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Özellikle görme engelliler ve gözleri az görenler için tasarlanmış bir ekran okuyucu"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Sesli okunması için ekranınızdaki öğelere dokunun"</string>
@@ -3133,13 +3144,14 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> kural otomatik olarak açılamıyor</item>
       <item quantity="one">1 kural otomatik olarak açılamıyor</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"Tamam"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Güncelle"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Güncelleme"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"Telefonunuz odaklanmanıza yardımcı olmak için daha fazlasını yapabilir.\n\nŞunları yapmak için ayarları güncelleyin:\n\n- Bildirimleri tamamen gizleme\n\n- Yıldız işaretli kişilerden ve tekrar arayan kişilerden gelen aramalara izin verme"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"Rahatsız Etmeyin özelliği güncellensin mi?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Ayarlar"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Bunu Ayarlar\'da daha fazla özelleştirebilirsiniz."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Ekran açıkken engelle"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Ekran kapalıyken engelle"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Rahatsız Etmeyin ayarı istenmeyen sesleri engellemekten fazlasını yapabilir ve görselleri de engelleyebilir. Bu seçenek, uyumaya veya konsantre olmaya çalışıyorsanız ya da telefonunuzda harcadığınız süreyi sınırlamak istiyorsanız size yardımcı olabilir."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Sesleri ve görselleri engelle"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Bildirimler için ekranı açma veya uyandırma"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Temel telefon etkinliği ve durumu hariç bildirimleri hiç gösterme"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"İş profili sesleri"</string>
@@ -3671,7 +3683,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Yedekleme devre dışı"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Android <xliff:g id="VERSION">%1$s</xliff:g> sürümüne güncellendi"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"Uygulama güncellendi"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"Bu ayar değiştirilemez"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"İşleme izin verilmedi"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"Ses düzeyi değiştirilemez"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"Telefon etmeye izin verilmiyor"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"SMS\'e izin verilmiyor"</string>
@@ -3861,7 +3873,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Kilit ekranınızdaki bilgileri kontrol edin"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Bildirim içeriğini gösterin veya gizleyin"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Tümü"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"Destek ve ipuçları"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"En küçük genişlik"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Yüklü hiçbir uygulama, Premium SMS erişimi isteğinde bulunmadı"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"Premium SMS kullanımı, para ödemenizi gerektirebilir ve bu ücret operatör faturanıza eklenir. Bir uygulamaya bu izni verdiğinizde söz konusu uygulamayı kullanarak ücretli SMS gönderebilirsiniz."</string>

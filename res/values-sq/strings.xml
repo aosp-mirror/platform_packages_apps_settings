@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Shumë tentativa të pasakta. Ky përdorues do të fshihet."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Shumë tentativa të pasakta. Ky profil pune dhe të dhënat e tij do të fshihen."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Hiqe"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Duhet të jetë të paktën <xliff:g id="COUNT">%d</xliff:g> karaktere"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"Kodi PIN duhet të jetë të paktën <xliff:g id="COUNT">%d</xliff:g> shifra"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="other">Duhet të përmbajë të paktën <xliff:g id="COUNT_1">%d</xliff:g> karaktere</item>
+      <item quantity="one">Duhet të përmbajë të paktën <xliff:g id="COUNT_0">%d</xliff:g> karakter</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="other">Kodi PIN duhet të përmbajë të paktën <xliff:g id="COUNT_1">%d</xliff:g> shifra</item>
+      <item quantity="one">Kodi PIN duhet të përmbajë të paktën <xliff:g id="COUNT_0">%d</xliff:g> shifër</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Vazhdo"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"Duhet të jetë më pak se <xliff:g id="NUMBER">%d</xliff:g> karaktere"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Duhet të jetë më pak se <xliff:g id="NUMBER">%d</xliff:g> shifra"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="other">Duhet të ketë më pak se <xliff:g id="NUMBER_1">%d</xliff:g> karaktere</item>
+      <item quantity="one">Duhet të ketë më pak se <xliff:g id="NUMBER_0">%d</xliff:g> karakter</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="other">Duhet të ketë më pak se <xliff:g id="NUMBER_1">%d</xliff:g> shifra</item>
+      <item quantity="one">Duhet të ketë më pak se <xliff:g id="NUMBER_0">%d</xliff:g> shifër</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Duhet të përmbajë vetëm shifrat 0-9"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Administratori i pajisjes nuk e lejon përdorimin e një kodi PIN të përdorur së fundi"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"Kodet e zakonshme PIN janë bllokuar nga administratori i TI-së. Provo një kod tjetër PIN."</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Kontrollet e ndërveprimeve"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Shërbimet e shkarkuara"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Eksperimentale"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Raportimet e funksioneve"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Një lexues i ekranit kryesisht për personat e verbër dhe me shikim të dobët"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Trokit artikujt në ekran për t\'i dëgjuar të lexuar me zë të lartë"</string>
@@ -3133,13 +3144,14 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> rregulla mund të kufizohen automatikisht</item>
       <item quantity="one">1 rregull mund të aktivizohet automatikisht</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"Në rregull"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Përditëso"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Mos e përditëso"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"Telefoni yt mund të bëjë më shumë për të të ndihmuar të fokusohesh.\n\nPërditëso cilësimet në:\n\n- Fshih njoftimet plotësisht\n\n- Lejo telefonatat nga kontaktet me yll dhe telefonuesit e përsëritur"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"Dëshiron të përditësosh modalitetin \"Mos shqetëso\"?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Cilësimet"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Këtë mund ta personalizosh më tej te \"Cilësimet\"."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Blloko kur ekrani është i ndezur"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Blloko kur ekrani është i fikur"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Modaliteti \"Mos shqetëso\" mund të bëjë më shumë sesa të bllokojë tingujt e padëshiruar, ai mund të bllokojë edhe pamjet vizuale. Kjo mund të jetë e dobishme nëse po përpiqesh të flesh, të fokusohesh ose të kufizosh kohën që kalon me telefonin."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Blloko tingujt dhe pamjet vizuale"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Mos e aktivizo ekranin ose mos e zgjo për njoftimet"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Mos shfaq asnjë njoftim, përveç aktivitetit dhe statusit bazë të telefonit."</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Tingujt e profilit të punës"</string>
@@ -3671,7 +3683,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Rezervimi u çaktivizua"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Përditësuar në Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"Ofrohet përditësim"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"Ky cilësim nuk mund të ndryshohet"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"Veprimi nuk lejohet"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"Volumi nuk mund të ndryshohet"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"Telefonata nuk lejohet"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"Mesazhi SMS nuk lejohet"</string>
@@ -3861,7 +3873,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Informacioni i kontrollit në ekranin e kyçjes"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Shfaq ose fshih përmbajtjet e njoftimeve"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Të gjitha"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"Mbështetja dhe këshillat"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"Gjerësia më e vogël"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Asnjë aplikacion i instaluar nuk ka kërkuar qasje te mesazhet SMS premium"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"Mesazhet SMS premium mund të kushtojnë dhe do të rritin faturat e operatorit tënd celular. Nëse e aktivizon lejen për një aplikacion, do të mund të dërgosh mesazhe SMS premium me atë aplikacion."</string>

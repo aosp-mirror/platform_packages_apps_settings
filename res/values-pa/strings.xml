@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"ਬਹੁਤ ਸਾਰੀਆਂ ਗਲਤ ਕੋਸ਼ਿਸ਼ਾਂ। ਇਸ ਵਰਤੋਂਕਾਰ ਨੂੰ ਮਿਟਾਇਆ ਜਾਵੇਗਾ।"</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"ਬਹੁਤ ਸਾਰੀਆਂ ਗਲਤ ਕੋਸ਼ਿਸ਼ਾਂ। ਇਹ ਕਾਰਜ ਪ੍ਰੋਫਾਈਲ ਅਤੇ ਇਸਦਾ ਡਾਟਾ ਮਿਟਾਇਆ ਜਾਵੇਗਾ।"</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"ਖਾਰਜ ਕਰੋ"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"ਘੱਟੋ-ਘੱਟ <xliff:g id="COUNT">%d</xliff:g> ਅੱਖਰ-ਚਿੰਨ੍ਹਾਂ ਦਾ ਹੋਣਾ ਲਾਜ਼ਮੀ ਹੈ"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"ਪਿੰਨ ਵਿੱਚ ਘੱਟੋ-ਘੱਟ <xliff:g id="COUNT">%d</xliff:g> ਅੰਕਾਂ ਦਾ ਹੋਣਾ ਲਾਜ਼ਮੀ ਹੈ"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="one">ਘੱਟੋ-ਘੱਟ <xliff:g id="COUNT_1">%d</xliff:g> ਅੱਖਰ-ਚਿੰਨ੍ਹ ਸ਼ਾਮਲ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ</item>
+      <item quantity="other">ਘੱਟੋ-ਘੱਟ <xliff:g id="COUNT_1">%d</xliff:g> ਅੱਖਰ-ਚਿੰਨ੍ਹ ਸ਼ਾਮਲ ਹੋਣੇ ਚਾਹੀਦੇ ਹਨ</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="one">ਪਿੰਨ ਵਿੱਚ ਘੱਟੋ-ਘੱਟ <xliff:g id="COUNT_1">%d</xliff:g> ਅੰਕ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ</item>
+      <item quantity="other">ਪਿੰਨ ਵਿੱਚ ਘੱਟੋ-ਘੱਟ <xliff:g id="COUNT_1">%d</xliff:g> ਅੰਕ ਹੋਣੇ ਚਾਹੀਦੇ ਹਨ</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"ਜਾਰੀ ਰੱਖੋ"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"<xliff:g id="NUMBER">%d</xliff:g> ਅੱਖਰ-ਚਿੰਨ੍ਹਾਂ ਤੋਂ ਘੱਟ ਹੋਣਾ ਲਾਜ਼ਮੀ ਹੈ"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"<xliff:g id="NUMBER">%d</xliff:g> ਤੋਂ ਵਧੇਰੇ ਘੱਟ ਅੰਕ ਹੋਣਾ ਲਾਜ਼ਮੀ ਹੈ"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="one"><xliff:g id="NUMBER_1">%d</xliff:g> ਤੋਂ ਘੱਟ ਅੱਖਰ-ਚਿੰਨ੍ਹ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ</item>
+      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> ਤੋਂ ਵਧੇਰੇ ਘੱਟ ਅੱਖਰ-ਚਿੰਨ੍ਹ ਹੋਣੇ ਚਾਹੀਦੇ ਹਨ</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="one"><xliff:g id="NUMBER_1">%d</xliff:g> ਤੋਂ ਘੱਟ ਅੰਕ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ</item>
+      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> ਤੋਂ ਵਧੇਰੇ ਘੱਟ ਅੰਕ ਹੋਣੇ ਚਾਹੀਦੇ ਹਨ</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"ਸਿਰਫ਼ 0-9 ਤੱਕ ਅੰਕ ਸ਼ਾਮਲ ਹੋਣੇ ਲਾਜ਼ਮੀ ਹਨ"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"ਡੀਵਾਈਸ ਪ੍ਰਸ਼ਾਸਕ ਇੱਕ ਹਾਲੀਆ ਪਿੰਨ ਵਰਤਣ ਦੀ ਇਜਾਜ਼ਤ ਨਹੀਂ ਦਿੰਦਾ ਹੈ"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"ਆਮ ਪਿੰਨ ਤੁਹਾਡੇ IT ਪ੍ਰਸ਼ਾਸਕ ਵੱਲੋਂ ਬਲਾਕ ਕੀਤੇ ਗਏ ਹਨ। ਕੋਈ ਵੱਖਰਾ ਪਿੰਨ ਵਰਤੋ।"</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"ਅੰਤਰਕਿਰਿਆ ਕੰਟਰੋਲ"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"ਡਾਊਨਲੋਡ ਕੀਤੀਆਂ ਸੇਵਾਵਾਂ"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"ਪ੍ਰਯੋਗਮਈ"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"ਵਿਸ਼ੇਸ਼ਤਾ ਵਾਲੇ ਫਲੈਗ"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"ਸਕ੍ਰੀਨ ਰੀਡਰ ਮੁੱਖ ਤੌਰ \'ਤੇ ਨੇਤਰਹੀਣਾਂ ਅਤੇ ਘੱਟ ਨਜ਼ਰ ਵਾਲੇ ਲੋਕਾਂ ਲਈ ਹੈ"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"ਆਪਣੀ ਸਕ੍ਰੀਨ \'ਤੇ ਦਿੱਤੀਆਂ ਆਈਟਮਾਂ ਨੂੰ ਉੱਚੀ ਅਵਾਜ਼ ਵਿੱਚ ਸੁਣਨ ਲਈ ਉਹਨਾਂ \'ਤੇ ਟੈਪ ਕਰੋ"</string>
@@ -3073,38 +3084,22 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"ਦ੍ਰਿਸ਼ਟੀਗਤ ਗੜਬੜੀਆਂ ਬਲਾਕ ਕਰੋ"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"ਦ੍ਰਿਸ਼ਟੀਗਤ ਸਿਗਨਲ ਦਿਖਣ ਦਿਓ"</string>
-    <!-- no translation found for zen_mode_restrict_notifications_screen_title (9027437428488279426) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_title (478040192977063582) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_category (1648631487087638037) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_mute (9210062826172341735) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_mute_summary (285566524371041091) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_mute_footer (8473382758368384982) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_hide (3451553435075518722) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_hide_summary (3823881787175376177) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_hide_footer (4224323933073288352) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_custom (7498689167767941034) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_enable_custom (4250962169561739747) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_disable_custom (6676997522330453597) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_summary_muted (4678779044896459009) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_summary_custom (7416121534987213074) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_summary_hidden (7805339105802282234) -->
-    <skip />
-    <!-- no translation found for zen_mode_what_to_block_title (5480903548365697159) -->
-    <skip />
+    <string name="zen_mode_restrict_notifications_screen_title" msgid="9027437428488279426">"ਸੂਚਨਾਵਾਂ \'ਤੇ ਪਾਬੰਦੀ ਲਗਾਓ"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"ਸੂਚਨਾਵਾਂ"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"ਪਰੇਸ਼ਾਨ ਨਾ ਕਰੋ ਦੇ ਚਾਲੂ ਹੋਣ \'ਤੇ"</string>
+    <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"ਸੂਚਨਾਵਾਂ ਮਿਊਟ ਕਰੋ"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"ਸੂਚਨਾਵਾਂ ਦਿਖਾਓ ਪਰ ਧੁਨੀਆਂ ਮਿਊਟ ਕਰੋ ਅਤੇ ਥਰਥਰਾਹਟ ਬੰਦ ਕਰੋ"</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"ਨਵੀਆਂ ਸੂਚਨਾਵਾਂ ਆਉਣ \'ਤੇ ਤੁਹਾਡਾ ਫ਼ੋਨ ਕੋਈ ਧੁਨੀ ਨਹੀਂ ਬਜਾਵੇਗਾ ਜਾਂ ਥਰਥਰਾਹਟ ਨਹੀਂ ਕਰੇਗਾ"</string>
+    <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"ਸੂਚਨਾਵਾਂ ਨੂੰ ਲੁਕਾਓ ਅਤੇ ਮਿਊਟ ਕਰੋ"</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"ਸੂਚਨਾਵਾਂ ਬਿਲਕੁਲ ਦਿਖਾਈ ਨਹੀਂ ਦੇਣਗੀਆਂ"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"ਪਰੇਸ਼ਾਨ ਨਾ ਕਰੋ ਚਾਲੂ ਹੋਣ \'ਤੇ ਤੁਹਾਨੂੰ ਨਵੀਆਂ ਜਾਂ ਮੌਜੂਦਾ ਸੂਚਨਾਵਾਂ ਦਿਖਾਈ ਨਹੀਂ ਦੇਣਗੀਆਂ। ਹਾਲਾਂਕਿ, ਮੂਲ ਫ਼ੋਨ ਸਰਗਰਮੀ ਅਤੇ ਸਥਿਤੀ ਲਈ ਲੋੜੀਂਦੀਆਂ ਸੂਚਨਾਵਾਂ ਦਿਖਾਈ ਦਿੰਦੀਆਂ ਰਹਿਣਗੀਆਂ।"</string>
+    <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"ਵਿਉਂਤਿਆ"</string>
+    <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"ਵਿਉਂਤੀ ਸੈਟਿੰਗ ਚਾਲੂ ਕਰੋ"</string>
+    <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"ਵਿਉਂਤੀ ਸੈਟਿੰਗ ਹਟਾਓ"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"ਦਿਖਾਈ ਦੇਵੇਗਾ"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"ਅਧੂਰੇ ਤੌਰ \'ਤੇ ਲੁਕਾਓ"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"ਲੁਕਾਇਆ ਹੋਇਆ"</string>
+    <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"ਵਿਉਂਤਬੱਧ ਪਾਬੰਦੀਆਂ"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"ਜਦੋਂ ਸਕ੍ਰੀਨ ਚਾਲੂ ਹੋਵੇ"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"ਜਦੋਂ ਸਕ੍ਰੀਨ ਬੰਦ ਹੋਵੇ"</string>
     <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"ਧੁਨੀ ਅਤੇ ਥਰਥਰਾਹਟ ਮਿਊਟ ਕਰੋ"</string>
@@ -3149,13 +3144,14 @@
       <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> ਨਿਯਮ ਸਵੈਚਲਿਤ ਤੌਰ \'ਤੇ ਚਾਲੂ ਹੋ ਸਕਦਾ ਹੈ</item>
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> ਨਿਯਮ ਸਵੈਚਲਿਤ ਤੌਰ \'ਤੇ ਚਾਲੂ ਹੋ ਸਕਦੇ ਹਨ</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"ਠੀਕ ਹੈ"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"ਅੱਪਡੇਟ ਕਰੋ"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"ਅੱਪਡੇਟ ਨਾ ਕਰੋ"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"ਕਿਸੇ ਕੰਮ \'ਤੇ ਧਿਆਨ ਕੇਂਦਰਿਤ ਕਰਨ ਵਿੱਚ ਤੁਹਾਡਾ ਫ਼ੋਨ ਤੁਹਾਡੀ ਵਧੇਰੇ ਮਦਦ ਕਰ ਸਕਦਾ ਹੈ।\n\nਸੈਟਿੰਗਾਂ ਨੂੰ ਇਸ \'ਤੇ ਅੱਪਡੇਟ ਕਰੋ:\n\n- ਸੂਚਨਾਵਾਂ ਨੂੰ ਪੂਰੀ ਤਰ੍ਹਾਂ ਲੁਕਾਓ\n\n- ਤਾਰਾਬੱਧ ਸੰਪਰਕਾਂ ਅਤੇ ਵਾਰ-ਵਾਰ ਕਾਲ ਕਰਨ ਵਾਲੇ ਕਾਲਰਾਂ ਦੀਆਂ ਕਾਲਾਂ ਹੀ ਆਉਣ ਦਿਓ"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"ਕੀ \'ਪਰੇਸ਼ਾਨ ਨਾ ਕਰੋ\' ਨੂੰ ਅੱਪਡੇਟ ਕਰਨਾ ਹੈ?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"ਸੈਟਿੰਗਾਂ"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"ਤੁਸੀਂ ਬਾਅਦ ਵਿੱਚ ਇਸ ਨੂੰ ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਵਿਉਂਤਬੱਧ ਕਰ ਸਕਦੇ ਹੋ।"</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"ਸਕ੍ਰੀਨ ਚਾਲੂ ਹੋਣ \'ਤੇ ਬਲਾਕ ਕਰੋ"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"ਸਕ੍ਰੀਨ ਬੰਦ ਹੋਣ \'ਤੇ ਬਲਾਕ ਕਰੋ"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"\'ਪਰੇਸ਼ਾਨ ਨਾ ਕਰੋ\' ਮੋਡ ਅਣਚਾਹੀਆਂ ਧੁਨੀਆਂ ਬਲਾਕ ਕਰਨ ਤੋਂ ਇਲਾਵਾ ਵੀ ਹੋਰ ਬਹੁਤ ਕੁਝ ਕਰ ਸਕਦਾ ਹੈ - ਇਹ ਦ੍ਰਿਸ਼ ਨੂੰ ਵੀ ਬਲਾਕ ਕਰ ਸਕਦਾ ਹੈ। ਇਹ ਤੁਹਾਡੇ ਸੌਣ, ਧਿਆਨ ਲਗਾਉਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰਨ ਜਾਂ ਆਪਣੇ ਫ਼ੋਨ \'ਤੇ ਘੱਟ ਤਵੱਜੋ ਦੇਣ ਵੇਲੇ ਮਦਦਗਾਰ ਹੋ ਸਕਦਾ ਹੈ।"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"ਧੁਨੀਆਂ ਅਤੇ ਦ੍ਰਿਸ਼ ਬਲਾਕ ਕਰੋ"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"ਸਕ੍ਰੀਨ ਚਾਲੂ ਨਾ ਕਰੋ ਜਾਂ ਸੂਚਨਾਵਾਂ ਲਈ ਸਕ੍ਰੀਨ ਨੂੰ ਕਿਰਿਆਸ਼ੀਲ ਨਾ ਕਰੋ"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"ਆਮ ਫ਼ੋਨ ਸਰਗਰਮੀ ਅਤੇ ਸਥਿਤੀ ਤੋਂ ਬਿਨਾਂ ਕੋਈ ਵੀ ਸੂਚਨਾਵਾਂ ਨੂੰ ਨਾ ਦਿਖਾਓ"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"ਕਾਰਜ ਪ੍ਰੋਫਾਈਲ ਧੁਨੀਆਂ"</string>
@@ -3664,8 +3660,7 @@
     <string name="screen_zoom_conversation_timestamp_3" msgid="3785674344762707688">"ਮੰਗਲ 6:02PM"</string>
     <string name="screen_zoom_conversation_timestamp_4" msgid="2511469395448561259">"ਮੰਗਲ 6:03PM"</string>
     <string name="disconnected" msgid="4836600637485526329">"ਕਨੈਕਟ ਨਹੀਂ ਹੈ"</string>
-    <!-- no translation found for keyboard_disconnected (1495037256967224035) -->
-    <skip />
+    <string name="keyboard_disconnected" msgid="1495037256967224035">"ਕਨੈਕਟ ਨਹੀਂ ਹੈ"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> ਡਾਟਾ ਵਰਤਿਆ ਗਿਆ"</string>
     <string name="data_usage_wifi_format" msgid="5417296451392612860">"ਵਾਈ-ਫਾਈ ਰਾਹੀਂ <xliff:g id="AMOUNT">^1</xliff:g> ਡਾਟਾ ਵਰਤਿਆ ਗਿਆ"</string>
     <plurals name="notification_summary" formatted="false" msgid="3941492005316143599">
@@ -3688,7 +3683,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"ਬੈਕ ਅੱਪ ਬੰਦ ਕੀਤਾ ਗਿਆ"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"ਅੱਪਡੇਟ ਕਰਕੇ Android <xliff:g id="VERSION">%1$s</xliff:g> ਕੀਤਾ ਗਿਆ"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"ਅੱਪਡੇਟ ਉਪਲਬਧ ਹੈ"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"ਇਹ ਸੈਟਿੰਗ ਬਦਲੀ ਨਹੀਂ ਜਾ ਸਕਦੀ"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"ਕਾਰਵਾਈ ਦੀ ਆਗਿਆ ਨਹੀਂ"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"ਤੁਸੀਂ ਅਵਾਜ਼ ਨੂੰ ਬਦਲ ਨਹੀਂ ਸਕਦੇ"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"ਕਾਲ ਕਰਨ ਦੀ ਇਜਾਜ਼ਤ ਨਹੀਂ ਹੈ"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"SMS ਦੀ ਆਗਿਆ ਨਹੀਂ ਹੈ"</string>
@@ -3878,7 +3873,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">" ਲਾਕ  ਸਕ੍ਰੀਨ \'ਤੇ ਜਾਣਕਾਰੀ ਨੂੰ ਕੰਟਰੋਲ ਕਰੋ"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"ਸੂਚਨਾ ਸਮੱਗਰੀ ਨੂੰ ਦਿਖਾਓ ਜਾਂ ਲੁਕਾਓ"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"ਸਭ"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"ਸਹਾਇਤਾ ਅਤੇ ਨੁਕਤੇ"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"ਸਭ ਤੋਂ ਘੱਟ ਚੁੜਾਈ"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"ਕਿਸੇ ਵੀ ਸਥਾਪਤ ਐਪ ਨੇ ਪ੍ਰੀਮੀਅਮ SMS ਪਹੁੰਚ ਦੀ ਬੇਨਤੀ ਨਹੀਂ ਕੀਤੀ"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"ਪ੍ਰੀਮੀਅਮ SMS ਦਾ ਤੁਹਾਡੇ ਤੋਂ ਖਰਚਾ ਲਿਆ ਜਾ ਸਕਦਾ ਹੈ ਅਤੇ ਤੁਹਾਡੇ ਕੈਰੀਅਰ ਬਿੱਲਾਂ ਵਿੱਚ ਵਾਧਾ ਹੋ ਜਾਵੇਗਾ। ਜੇਕਰ ਤੁਸੀਂ ਕਿਸੇ ਐਪ ਲਈ ਇਜਾਜ਼ਤ ਨੂੰ ਯੋਗ ਬਣਾਉਂਦੇ ਹੋ, ਤਾਂ ਤੁਸੀਂ ਉਸ ਐਪ ਦੀ ਵਰਤੋਂ ਨਾਲ ਪ੍ਰੀਮੀਅਮ SMS ਭੇਜਣ ਦੇ ਯੋਗ ਹੋ ਜਾਵੋਗੇ।"</string>

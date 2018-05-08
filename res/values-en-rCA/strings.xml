@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Too many incorrect attempts. This user will be deleted."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Too many incorrect attempts. This work profile and its data will be deleted."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Dismiss"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Must be at least <xliff:g id="COUNT">%d</xliff:g> characters"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"PIN must be at least <xliff:g id="COUNT">%d</xliff:g> digits"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="other">Must be at least <xliff:g id="COUNT_1">%d</xliff:g> characters</item>
+      <item quantity="one">Must contain at least <xliff:g id="COUNT_0">%d</xliff:g> character</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="other">PIN must be at least <xliff:g id="COUNT_1">%d</xliff:g> digits</item>
+      <item quantity="one">PIN must contain at least <xliff:g id="COUNT_0">%d</xliff:g> digit</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Continue"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"Must be fewer than <xliff:g id="NUMBER">%d</xliff:g> characters"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Must be fewer than <xliff:g id="NUMBER">%d</xliff:g> digits"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="other">Must be fewer than <xliff:g id="NUMBER_1">%d</xliff:g> characters</item>
+      <item quantity="one">Must be fewer than <xliff:g id="NUMBER_0">%d</xliff:g> character</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="other">Must be fewer than <xliff:g id="NUMBER_1">%d</xliff:g> digits</item>
+      <item quantity="one">Must be fewer than <xliff:g id="NUMBER_0">%d</xliff:g> digit</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Must only contain digits 0-9"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Device admin doesn\'t allow using a recent PIN"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"Common PINs are blocked by your IT admin. Try a different PIN."</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Interaction controls"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Downloaded services"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Experimental"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Feature flags"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Screen reader primarily for people with blindness and low vision"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Tap items on your screen to hear them read aloud"</string>
@@ -3133,13 +3144,14 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> rules can turn on automatically</item>
       <item quantity="one">1 rule can turn on automatically</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"OK"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Update"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Don\'t update"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"Your phone can do more to help you focus.\n\nUpdate settings to:\n\n– Hide notifications completely\n\n– Allow calls from starred contacts and repeat callers"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"Update Do Not Disturb?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Settings"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"You can customise this further in Settings."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Block when the screen is on"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Block when the screen is off"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Do Not Disturb can do more than block unwanted sounds – it can block visuals too. This may be helpful if you\'re trying to sleep, focus or limit time spent on your phone."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Block sounds and visuals"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Don\'t turn on the screen or wake for notifications"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Don\'t show notifications at all, except for basic phone activity and status"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Work profile sounds"</string>
@@ -3671,7 +3683,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Backup disabled"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Updated to Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"Update available"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"Can’t change this setting"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"Action not allowed"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"Can’t change volume"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"Calling not allowed"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"SMS not allowed"</string>
@@ -3861,7 +3873,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Control info on lock screen"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Show or hide notification content"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"All"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"Support &amp; tips"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"Smallest width"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"No installed apps have requested Premium SMS access"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"Premium SMS may cost you money and will add up to your mobile bills. If you enable permission for an app, you will be able to send premium SMS using that app."</string>

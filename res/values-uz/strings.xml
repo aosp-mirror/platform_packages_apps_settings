@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Juda ko‘p marta muvaffaqiyatsiz urinishlar amalga oshirildi. Bu foydalanuvchi o‘chirib tashlanadi."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Juda ko‘p marta muvaffaqiyatsiz urinishlar amalga oshirildi. Bu ishchi profil va undagi ma’lumotlar o‘chirib tashlanadi."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Yopish"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Kamida <xliff:g id="COUNT">%d</xliff:g> ta belgi bo‘lishi kerak"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"PIN kod kamida <xliff:g id="COUNT">%d</xliff:g> raqamdan iborat bo‘lishi shart"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="other">Kamida <xliff:g id="COUNT_1">%d</xliff:g> ta belgi bo‘lishi kerak</item>
+      <item quantity="one">Kamida <xliff:g id="COUNT_0">%d</xliff:g> ta belgi bo‘lishi kerak</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="other">PIN kod kamida <xliff:g id="COUNT_1">%d</xliff:g> ta raqamli bo‘lsin</item>
+      <item quantity="one">PIN kod kamida <xliff:g id="COUNT_0">%d</xliff:g> ta raqamli bo‘lsin</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Davom etish"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"Parol ko‘pi bilan <xliff:g id="NUMBER">%d</xliff:g> ta belgidan iborat bo‘lishi lozim"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"PIN kod ko‘pi bilan <xliff:g id="NUMBER">%d</xliff:g> ta raqamdan iborat bo‘lishi lozim"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="other">Parol maksimum <xliff:g id="NUMBER_1">%d</xliff:g> ta belgili bo‘lsin</item>
+      <item quantity="one">Parol maksimum <xliff:g id="NUMBER_0">%d</xliff:g> ta belgili bo‘lsin</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="other">PIN kod maksimum <xliff:g id="NUMBER_1">%d</xliff:g> ta raqamli bo‘lsin</item>
+      <item quantity="one">PIN kod maksimum <xliff:g id="NUMBER_0">%d</xliff:g> ta raqamli bo‘lsin</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"PIN kod faqat 0-9 raqamlaridan iborat bo‘lishi lozim"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Qurilma administratori oxirgi PIN koddan yana foydalanishga ruxsat bermaydi"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"Oddiy PIN kodlar AT admini tomonidan bloklangan. Murakkabroq PIN kod tanlang."</string>
@@ -1388,7 +1400,7 @@
     <string name="storage_wizard_slow_v2_start_over" msgid="4126873669723115805">"Boshidan boshlash"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="49399942893518218">"Keyingisi"</string>
     <string name="storage_wizard_ready_v2_external_body" msgid="11937346870534608">"Kontentni <xliff:g id="NAME">^1</xliff:g> qurilmasiga ko‘chirish mumkin"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="4658433206901211269">"Kontentni <xliff:g id="NAME">^1</xliff:g> qurilmasiga ko‘chirish uchun "<b>"Sozlamalar &gt; Xotira"</b>" sahifasiga o‘ting"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="4658433206901211269">"Kontentni <xliff:g id="NAME">^1</xliff:g> qurilmasiga ko‘chirish uchun "<b>"Sozlamalar &gt; Xotira"</b>" sahifasiga kiring"</string>
     <string name="storage_wizard_ready_v2_internal_moved_body" msgid="6239886818487538806">"Kontent <xliff:g id="NAME_0">^1</xliff:g> qurilmasiga ko‘chirildi.\n\nMazkur <xliff:g id="NAME_1">^2</xliff:g> qurilmasini boshqarish uchun "<b>"Sozlamalar &gt; Xotira"</b>" sahifasini oching."</string>
     <string name="battery_status_title" msgid="9159414319574976203">"Batareya holati"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Batareya quvvati darajasi"</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Boshqaruv elementlari"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Yuklab olingan xizmatlar"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Tajribaviy"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Tajribaviy funksiyalar"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Ko‘r va ko‘rish qobiliyati past odamlar uchun ekrandan o‘qish vositasi"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Ekrandagi elementlarni o‘qib eshittirish uchun ularning ustiga bosing"</string>
@@ -2207,7 +2218,7 @@
     <string name="battery_auto_restriction_title" msgid="6553271897488963709">"Battery Manager ishlatish"</string>
     <string name="battery_auto_restriction_summary" msgid="8561335400991281062">"Ilovalar batareyani ortiqcha sarflayotganini aniqlash"</string>
     <string name="battery_manager_on" msgid="8643310865054362396">"Yoniq / Ilovalar batareyani ortiqcha sarflayotgani aniqlanmoqda"</string>
-    <string name="battery_manager_off" msgid="5473135235710343576">"O‘chiq"</string>
+    <string name="battery_manager_off" msgid="5473135235710343576">"Yoqilmagan"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="1026141135861471129">
       <item quantity="other">%1$d ta ilova cheklandi</item>
       <item quantity="one">%1$d ta ilova cheklandi</item>
@@ -3073,7 +3084,7 @@
     <string name="zen_mode_behavior_settings_title" msgid="5453115212674008032">"Istisnolar"</string>
     <string name="zen_mode_duration_settings_title" msgid="229547412251222757">"Davomiyligi"</string>
     <string name="zen_mode_behavior_allow_title" msgid="3845615648136218141">"Ovoz va tebranishlarga ruxsat:"</string>
-    <string name="zen_mode_behavior_no_sound" msgid="1219626004723208056">"Ovozsiz"</string>
+    <string name="zen_mode_behavior_no_sound" msgid="1219626004723208056">"Tovushsiz"</string>
     <string name="zen_mode_behavior_total_silence" msgid="2229976744274214528">"Jimjitlik"</string>
     <string name="zen_mode_behavior_no_sound_except" msgid="4968477585788243114">"Ovozsiz (istisno: <xliff:g id="CATEGORIES">%1$s</xliff:g>)"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="6455884547877702466">"Signallar va media ovozlaridan boshqasi ovozsiz qilinadi"</string>
@@ -3092,10 +3103,10 @@
     <string name="zen_mode_restrict_notifications_screen_title" msgid="9027437428488279426">"Bildirishnomalar uchun cheklovlar"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"Bildirishnomalar"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"Bezovta qilinmasin rejimi yoniqligida"</string>
-    <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"Bildirishnomalar ovozsiz qilinsin"</string>
-    <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"Bildirishnomalarni ovozsiz va tebranish bilan chiqarish"</string>
-    <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"Yangi bildirishnomalar ovozsiz va tebranish bilan keladi"</string>
-    <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"Bildirishnomalarni berkitish va ularni ovozsiz olish"</string>
+    <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"Bildirishnomalarni tovushsiz qilish"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"Bildirishnomalarni tovushsiz va tebranishsiz chiqarish"</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"Yangi bildirishnomalar tovushsiz va tebranishsiz keladi"</string>
+    <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"Bildirishnomalarni berkitish va ularni tovushsiz olish"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"Bildirishnomalar chiqarilmaydi"</string>
     <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"Bezovta qilinmasin rejimi yoniqligida barcha bildirishnomalar berkitiladi, faqat asosiy telefon faoliyati uchun zarur bildirishnomalar va holati berkitilmaydi."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"Maxsus"</string>
@@ -3149,13 +3160,14 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> ta qoidani avtomatik yoqish mumkin</item>
       <item quantity="one">1 ta qoidani avtomatik yoqish mumkin</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"OK"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Yangilash"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Yangilanmasin"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"Telefoningiz diqqatni jamlashga yordam bera oladi.\n\nSozlamalarni bunga o‘zgartiring:\n\n– Bildirishnomalarni butunlay berkiting\n\n– Tanlangan kontaktlardan chaqiruvlar va qayta chaqiruvlarga ruxsat bering"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"Bezovta qilinmasin rejimi yoqilsinmi?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Sozlamalar"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Buni keyinchalik Sozlamalar orqali moslashtirish mumkin"</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Ekran yoniqligida"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Ekran yoniq emasligida"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Bezovta qilinmasin rejimi keraksiz ovozlarni bloklashga nisbatan imkoniyati keng – vizuallarni ham bloklay oladi. Agar uxlamoqchi, diqqatni jamlamoqchi yoki telefoningizda ishlash vaqtingizni cheklamoqchi bo‘lsangiz, buning foydasi tegishi mumkin."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Ovoz va vizuallarni bloklash"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Bildirishnomalar uchun ekran yoqilmasin yoki faollashtirilmasin"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Asosiy telefon faoliyati va holatidan boshqa bildirishnomalar chiqmaydi"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Ishchi profil ovozlari"</string>
@@ -3191,7 +3203,7 @@
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"Qurilmangiz qulflanganda, profil bildirishnomalari qanday ko‘rsatilsin?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"Profil bildirishnomalari"</string>
     <string name="notifications_title" msgid="8086372779371204971">"Bildirishnomalar"</string>
-    <string name="app_notifications_title" msgid="5810577805218003760">"Ilova bildirishnomalari"</string>
+    <string name="app_notifications_title" msgid="5810577805218003760">"Ilovalar bildirishnomalari"</string>
     <string name="notification_channel_title" msgid="2260666541030178452">"Bildirishnomalar turkumi"</string>
     <string name="notification_group_title" msgid="7180506440133859601">"Bildirishnomalar turkumi guruhi"</string>
     <string name="notification_importance_title" msgid="4368578960344731828">"Xatti-harakatlar"</string>
@@ -3199,8 +3211,8 @@
     <string name="notification_importance_blocked" msgid="7938180808339386300">"Bildirishnomalar hech qachon ko‘rsatilmasin"</string>
     <string name="notification_importance_min" msgid="9054819132085066824">"Ovozsiz ko‘rsatish va kichraytirish"</string>
     <string name="notification_importance_low" msgid="2445139943005315690">"Ovozsiz"</string>
-    <string name="notification_importance_default" msgid="5958338024601957516">"Ovozli"</string>
-    <string name="notification_importance_high" msgid="2082429479238228527">"Ovoz va qalqib chiquvchi oyna"</string>
+    <string name="notification_importance_default" msgid="5958338024601957516">"Tovush bilan"</string>
+    <string name="notification_importance_high" msgid="2082429479238228527">"Tovush va qalqib chiquvchi oyna"</string>
     <string name="notification_importance_high_silent" msgid="2667033773703765252">"Ekranga qalqib chiqish"</string>
     <string name="notification_importance_min_title" msgid="6974673091137544803">"Past"</string>
     <string name="notification_importance_low_title" msgid="8131254047772814309">"O‘rtacha"</string>
@@ -3256,7 +3268,7 @@
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ta turkum</item>
     </plurals>
     <string name="no_channels" msgid="3077375508177744586">"Bu ilova hech qanday bildirishnoma joylamagan"</string>
-    <string name="app_settings_link" msgid="8894946007543660906">"Ilova ichidagi qo‘shimcha sozlamalar"</string>
+    <string name="app_settings_link" msgid="8894946007543660906">"Boshqa sozlamalar ilovada"</string>
     <string name="app_notification_listing_summary_zero" msgid="8046168435207424440">"Barcha ilovalar uchun yoniq"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="6709582776823665660">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ta ilova uchun yoqilmagan</item>
@@ -3272,7 +3284,7 @@
     <string name="app_notification_block_summary" msgid="4744020456943215352">"Bu bildirishnomalar boshqa ko‘rsatilmasin"</string>
     <string name="notification_content_block_title" msgid="5854232570963006360">"Bildirishnomalar ko‘rsatilsin"</string>
     <string name="notification_content_block_summary" msgid="7746185794438882389">"Fonda yoki tashqi qurilmalarda bildirishnomalar hech qachon ko‘rsatilmasin"</string>
-    <string name="notification_badge_title" msgid="6370122441168519809">"Bildirishnoma belgisini ko‘rsatish"</string>
+    <string name="notification_badge_title" msgid="6370122441168519809">"Nuqtali bildirishnoma belgisi"</string>
     <string name="notification_channel_badge_title" msgid="2240827899882847087">"Bildirishnoma belgisini ko‘rsatish"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Bezovta qilinmasin rejimi ustidan yozish"</string>
     <string name="app_notification_override_dnd_summary" msgid="2612502099373472686">"Bezovta qilinmasin rejimi yoniqligida mazkur bildirishnomalarning qalqib chiqishiga ruxsat berish"</string>
@@ -3687,7 +3699,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Zaxiralash o‘chirilgan"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Android <xliff:g id="VERSION">%1$s</xliff:g> versiyasiga yangilandi"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"Yangilanish chiqdi"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"Bu parametrni o‘zgartirish imkonsiz"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"Bu amalga ruxsat berilmagan"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"Tovush balandligini o‘zgartirib bo‘lmaydi"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"Chaqiruvga ruxsat berilmagan"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"SMS yuborishga ruxsat berilmagan"</string>
@@ -3877,7 +3889,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Ekran qulfidagi ma’lumotlarni boshqaring"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Bildirishnomani ko‘rsatish yoki berkitish"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Hammasi"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"Yordam va maslahatlar"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"Eng kichik eni"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"O‘rnatilgan ilovalardan hech biri SMSdan foydalanish uchun ruxsat so‘ramagan."</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"SMS uchun sizdan haq olinishi va operatorga qo‘shimcha to‘lov amalga oshirilishi mumkin. Agar ilova uchun ruxsatnoma taqdim etsangiz, o‘sha ilovadan SMS yuborishingiz mumkin bo‘ladi."</string>
@@ -4103,9 +4116,9 @@
     <string name="media_out_summary_ongoing_call_state" msgid="3533731701018680693">"Chaqiruv paytida ishlamaydi"</string>
     <string name="media_output_summary_unavailable" msgid="7970304720507697019">"Mavjud emas"</string>
     <string name="take_call_on_title" msgid="6066362463436122655">"Chaqiruv qabul qilish"</string>
-    <string name="battery_suggestion_title" product="tablet" msgid="752439050748267917">"Planshet batareyasi quvvatini yaxshilang"</string>
-    <string name="battery_suggestion_title" product="device" msgid="1507272328369733005">"Qurilma batareyasi quvvatini yaxshilang"</string>
-    <string name="battery_suggestion_title" product="default" msgid="4038053023336285165">"Telefon batareyasi quvvatini yaxshilang"</string>
+    <string name="battery_suggestion_title" product="tablet" msgid="752439050748267917">"Batareya quvvatini uzoqroq vaqtga yetkazing"</string>
+    <string name="battery_suggestion_title" product="device" msgid="1507272328369733005">"Batareya quvvatini uzoqroq vaqtga yetkazing"</string>
+    <string name="battery_suggestion_title" product="default" msgid="4038053023336285165">"Batareya quvvatini uzoqroq vaqtga yetkazing"</string>
     <string name="battery_suggestion_summary" msgid="4585677159811722359"></string>
     <string name="gesture_prevent_ringing_screen_title" msgid="7840226017975251549">"Ovozsiz qilish"</string>
     <string name="gesture_prevent_ringing_title" msgid="2483159069038138740">"Bir vaqtda quvvat va tovushni balandlatish tugmalarini bosing"</string>

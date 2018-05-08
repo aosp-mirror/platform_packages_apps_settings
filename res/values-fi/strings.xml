@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Liian monta virheellistä yritystä. Tämä käyttäjä poistetaan."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Liian monta virheellistä yritystä. Tämä työprofiili ja sen tiedot poistetaan."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Hylkää"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Salasanan vähimmäispituus on <xliff:g id="COUNT">%d</xliff:g> merkkiä."</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"PIN-koodin vähimmäispituus on <xliff:g id="COUNT">%d</xliff:g> merkkiä."</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="other">Salasanassa täytyy olla vähintään <xliff:g id="COUNT_1">%d</xliff:g> merkkiä.</item>
+      <item quantity="one">Salasanassa täytyy olla vähintään <xliff:g id="COUNT_0">%d</xliff:g> merkki.</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="other">PIN-koodissa täytyy olla vähintään <xliff:g id="COUNT_1">%d</xliff:g> numeroa.</item>
+      <item quantity="one">PIN-koodissa täytyy olla vähintään <xliff:g id="COUNT_0">%d</xliff:g> numero.</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Jatka"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"Salasanassa saa olla enintään <xliff:g id="NUMBER">%d</xliff:g> merkkiä."</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"PIN-koodissa saa olla enintään <xliff:g id="NUMBER">%d</xliff:g> numeroa."</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="other">Salasanassa saa olla enintään <xliff:g id="NUMBER_1">%d</xliff:g> merkkiä.</item>
+      <item quantity="one">Salasanassa saa olla enintään <xliff:g id="NUMBER_0">%d</xliff:g> merkki.</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="other">PIN-koodissa saa olla enintään <xliff:g id="NUMBER_1">%d</xliff:g> numeroa.</item>
+      <item quantity="one">PIN-koodissa saa olla enintään <xliff:g id="NUMBER_0">%d</xliff:g> numero.</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"PIN-koodi saa sisältää vain numeroita 0–9."</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Järjestelmänvalvoja esti PIN-koodin, koska sitä on käytetty hiljattain."</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"IT-järjestelmänvalvoja on estänyt yleiset PIN-koodit. Kokeile eri PIN-koodia."</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Käytönhallinta"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Ladatut palvelut"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Kokeellinen"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Ominaisuusilmoitukset"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Näytönlukuohjelma ensisijaisesti näkövammaisille ja heikkonäköisille"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Napauta kohteita näytöllä, niin ne luetaan ääneen."</string>
@@ -3133,13 +3144,14 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> sääntöä voi käynnistyä automaattisesti</item>
       <item quantity="one">1 sääntö voi käynnistyä automaattisesti</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"OK"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Päivitä"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Älä päivitä"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"Puhelimesi voi auttaa sinua keskittymään.\n\nPäivittämällä asetuksia voit\n\n– piilottaa ilmoitukset kokonaan\n\n– sallia vain tähdellä merkittyjen kontaktien ja uudelleen soittavien henkilöiden puhelut."</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"Päivitetäänkö Älä häiritse ‑tila?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Asetukset"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Voit räätälöidä tätä lisää asetuksissa."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Estä näytön ollessa päällä"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Estä näytön ollessa pois päältä"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Älä häiritse ‑tila voi tehdä muutakin kuin estää ei-toivottuja ääniä – se voi estää myös grafiikoita. Tästä voi olla hyötyä, jos yrität nukkua, keskittyä tai rajoittaa puhelimen käyttöaikaasi."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Estä äänet ja grafiikat"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Älä anna ilmoitusten käynnistää tai aktivoida näyttöä"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Älä näytä ilmoituksia lainkaan, paitsi jos ne koskevat puhelimen toimintaa ja tilaa"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Työprofiilin äänet"</string>
@@ -3671,7 +3683,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Varmuuskopiointi poistettu käytöstä"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Päivitetty Android-versioon <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"Päivitys saatavilla"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"Tätä asetusta ei voi muuttaa"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"Toiminto ei ole sallittu"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"Äänenvoimakkuutta ei voi muuttaa"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"Puheluja ei sallita"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"Tekstiviestejä ei sallita"</string>
@@ -3861,7 +3873,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Hallinnoi lukitusnäytön tietoja"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Näytä tai piilota ilmoituksien sisältö."</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Kaikki"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"Tuki ja vinkit"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"Pienin leveys"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Yksikään asennettu sovellus ei ole pyytänyt premium-tekstiviestien käyttöoikeutta."</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"Premium-tekstiviestien käyttö saattaa olla maksullista, ja kulut lisätään operaattorisi laskuun. Jos annat sovellukselle käyttöoikeuden, voit lähettää premium-tekstiviestejä kyseisellä sovelluksella."</string>

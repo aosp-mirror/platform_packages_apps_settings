@@ -276,7 +276,7 @@
     <string name="locale_not_translated" msgid="516862628177166755">"És possible que no estigui disponible en algunes aplicacions"</string>
     <string name="action_drag_label_move_up" msgid="9052210023727612540">"Mou amunt"</string>
     <string name="action_drag_label_move_down" msgid="7448713844582912157">"Mou avall"</string>
-    <string name="action_drag_label_move_top" msgid="557081389352288310">"Mou al principi"</string>
+    <string name="action_drag_label_move_top" msgid="557081389352288310">"Mou a la part superior"</string>
     <string name="action_drag_label_move_bottom" msgid="2468642142414126482">"Mou al final"</string>
     <string name="action_drag_label_remove" msgid="2861038147166966206">"Suprimeix l\'idioma"</string>
     <string name="activity_picker_label" msgid="6295660302548177109">"Selecció de l\'activitat"</string>
@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Has superat el nombre d\'intents incorrectes permesos. Se suprimirà l\'usuari."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Has superat el nombre d\'intents incorrectes permesos. Se suprimirà el perfil professional i les dades que contingui."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Ignora"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Ha de tenir com a mínim <xliff:g id="COUNT">%d</xliff:g> caràcters"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"El PIN ha de tenir com a mínim <xliff:g id="COUNT">%d</xliff:g> dígits"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="other">Ha de tenir com a mínim <xliff:g id="COUNT_1">%d</xliff:g> caràcters</item>
+      <item quantity="one">Ha de tenir com a mínim <xliff:g id="COUNT_0">%d</xliff:g> caràcter</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="other">El PIN ha de tenir com a mínim <xliff:g id="COUNT_1">%d</xliff:g> dígits</item>
+      <item quantity="one">El PIN ha de tenir com a mínim <xliff:g id="COUNT_0">%d</xliff:g> dígit</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Continua"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"Ha de tenir menys de <xliff:g id="NUMBER">%d</xliff:g> caràcters"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Ha de tenir <xliff:g id="NUMBER">%d</xliff:g> dígits o menys"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="other">Ha de tenir <xliff:g id="NUMBER_1">%d</xliff:g> caràcters o menys</item>
+      <item quantity="one">Ha de tenir <xliff:g id="NUMBER_0">%d</xliff:g> caràcter o menys</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="other">Ha de tenir <xliff:g id="NUMBER_1">%d</xliff:g> dígits o menys</item>
+      <item quantity="one">Ha de tenir <xliff:g id="NUMBER_0">%d</xliff:g> dígit o menys</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Només pot contenir dígits del 0 al 9"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"L\'administrador del dispositiu no permet que s\'utilitzi un PIN recent"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"L\'administrador de TI ha bloquejat els PIN més comuns. Prova un altre PIN."</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Controls d\'interacció"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Serveis baixats"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Experimental"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Marques de funcions"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Lector de pantalla destinat principalment a persones invidents i amb problemes de visió"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Toca els elements de la pantalla per sentir-los en veu alta"</string>
@@ -3133,13 +3144,14 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> regles ho poden activar automàticament</item>
       <item quantity="one">1 regla ho pot activar automàticament</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"D\'acord"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Actualitza"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"No actualitzis"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"El teu telèfon pot ajudar-te a no perdre la concentració.\n\nActualitza la configuració per poder fer el següent:\n\n- Amagar les notificacions completament.\n\n- Permetre les trucades dels contactes destacats i les trucades repetides."</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"Vols actualitzar al mode No molestis?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Configuració"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Pots personalitzar-ho a Configuració."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Bloqueja quan la pantalla estigui activada"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Bloqueja quan la pantalla estigui desactivada"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"El mode No molestis, a més de bloquejar els sons no desitjats, també pot bloquejar els elements visuals. Et pot resultar útil quan vulguis dormir, concentrar-te o limitar el temps que passes fent servir el telèfon."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Bloqueja els sons i els elements visuals"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"No activis la pantalla ni el dispositiu per mostrar les notificacions"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"No mostris cap notificació, excepte de l\'activitat bàsica i l\'estat del telèfon"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Sons del perfil professional"</string>
@@ -3671,7 +3683,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Còpia de seguretat desactivada"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Actualitzat a Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"Actualització disponible"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"No es pot canviar aquesta opció"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"Acció no permesa"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"No es pot canviar el volum"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"No està permès fer trucades"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"No està permès enviar SMS"</string>
@@ -3861,7 +3873,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Controla la informació de la pantalla de bloqueig"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Mostra o oculta el contingut de la notificació"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Tots"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"Ajuda i consells"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"Amplada més petita"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Cap aplicació instal·lada no ha sol·licitat accés a SMS prèmium"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"Els SMS prèmium et poden costar diners, i aquest import s\'afegirà a la facturació de l\'operador de telefonia mòbil. Si actives el permís en una aplicació, podràs enviar SMS prèmium utilitzant-la."</string>

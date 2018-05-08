@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Te veel onjuiste pogingen. Deze gebruiker worden verwijderd."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Te veel onjuiste pogingen. Dit werkprofiel en de bijbehorende gegevens worden verwijderd."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Sluiten"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Moet ten minste <xliff:g id="COUNT">%d</xliff:g> tekens zijn"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"Pincode moet ten minste <xliff:g id="COUNT">%d</xliff:g> cijfers zijn"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="other">Moet ten minste <xliff:g id="COUNT_1">%d</xliff:g> tekens bevatten</item>
+      <item quantity="one">Moet ten minste <xliff:g id="COUNT_0">%d</xliff:g> teken bevatten</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="other">Pincode moet ten minste <xliff:g id="COUNT_1">%d</xliff:g> cijfers bevatten</item>
+      <item quantity="one">Pincode moet ten minste <xliff:g id="COUNT_0">%d</xliff:g> cijfer bevatten</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Doorgaan"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"Moet korter zijn dan <xliff:g id="NUMBER">%d</xliff:g> tekens"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Pincode moet minder dan <xliff:g id="NUMBER">%d</xliff:g> cijfers lang zijn"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="other">Moet korter zijn dan <xliff:g id="NUMBER_1">%d</xliff:g> tekens</item>
+      <item quantity="one">Moet korter zijn dan <xliff:g id="NUMBER_0">%d</xliff:g> teken</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="other">Moet minder dan <xliff:g id="NUMBER_1">%d</xliff:g> cijfers bevatten</item>
+      <item quantity="one">Moet minder dan <xliff:g id="NUMBER_0">%d</xliff:g> cijfer bevatten</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Mag alleen de cijfers 0-9 bevatten"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Apparaatbeheer staat het gebruik van een recente pincode niet toe"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"Veelvoorkomende pincodes worden geblokkeerd door je IT-beheerder. Probeer een andere pincode."</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Interactieopties"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Gedownloade services"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Experimenteel"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Functievlaggen"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Schermlezer voornamelijk voor blinden en slechtzienden"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Tik op items op je scherm om ze hardop te laten voorlezen"</string>
@@ -3133,13 +3144,14 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> regels kunnen automatisch worden ingeschakeld</item>
       <item quantity="one">1 regel kan automatisch worden ingeschakeld</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"OK"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Updaten"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Niet updaten"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"Je telefoon kan je helpen bij je focus.\n\nUpdate je instellingen om:\n\n- meldingen volledig te verbergen;\n\n- oproepen van contacten met ster en terugkerende bellers toe te staan."</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"\'Niet storen\' updaten?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Instellingen"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Je kunt dit aanpassen via Instellingen."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Blokkeren wanneer het scherm is ingeschakeld"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Blokkeren als het scherm is uitgeschakeld"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"\'Niet storen\' kan niet alleen ongewenste geluiden blokkeren maar ook beelden. Dit kan handig zijn als je wilt slapen, als je je moet concentreren of als je minder tijd op je telefoon wilt doorbrengen."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Geluiden en beelden blokkeren"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Het scherm niet inschakelen of niet activeren voor meldingen"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Helemaal geen meldingen weergeven, behalve voor basistelefoonactiviteit en -status"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Geluiden voor werkprofiel"</string>
@@ -3671,7 +3683,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Back-up uitgeschakeld"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Geüpdatet naar Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"Update beschikbaar"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"Kan instelling niet wijzigen"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"Actie niet toegestaan"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"Kan het volume niet wijzigen"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"Bellen niet toegestaan"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"Sms niet toegestaan"</string>
@@ -3861,7 +3873,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Informatie op vergrendelingsscherm beheren"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Content van meldingen weergeven of verbergen"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Alle"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"Ondersteuning &amp; tips"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"Kleinste breedte"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Er zijn geen geïnstalleerde apps die premium sms-toegang hebben aangevraagd"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"Premium sms\'jes kunnen je geld kosten en worden toegevoegd aan de facturen van je provider. Als je rechten aan een app verleent, kun je premium sms\'jes verzenden met die app."</string>

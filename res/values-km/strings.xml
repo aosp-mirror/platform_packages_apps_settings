@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"ដោយសារមានការព្យាយាមដោះសោមិនត្រឹមត្រូវច្រើនដងពេក អ្នកប្រើប្រាស់នេះនឹងត្រូវបានលុប។"</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"ដោយសារមានការព្យាយាមដោះសោមិនត្រឹមត្រូវច្រើនដងពេក កម្រងព័ត៌មានការងារនេះ និងទិន្នន័យរបស់វានឹងត្រូវបានលុប។"</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"បដិសេធ"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"ត្រូវ​​មាន​យ៉ាង​ហោច​ណាស់ <xliff:g id="COUNT">%d</xliff:g> តួ"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"កូដ PIN ​ត្រូវ​មាន​លេខ​យ៉ាង​ហោច​ណាស់ <xliff:g id="COUNT">%d</xliff:g> ខ្ទង់"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="other">ត្រូវ​តែ​មាន​យ៉ាង​ហោច​ណាស់ <xliff:g id="COUNT_1">%d</xliff:g> តួ</item>
+      <item quantity="one">ត្រូវ​តែ​មាន​យ៉ាង​ហោច​ណាស់ <xliff:g id="COUNT_0">%d</xliff:g> តួ</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="other">កូដ PIN ត្រូវ​តែ​មាន​យ៉ាង​ហោច​ណាស់ <xliff:g id="COUNT_1">%d</xliff:g> ខ្ទង់</item>
+      <item quantity="one">កូដ PIN ត្រូវ​តែ​មាន​យ៉ាង​ហោច​ណាស់ <xliff:g id="COUNT_0">%d</xliff:g> ខ្ទង់</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"បន្ត"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"ត្រូវមានតិចជាង <xliff:g id="NUMBER">%d</xliff:g> តួ"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"ត្រូវមានលេខតិចជាង <xliff:g id="NUMBER">%d</xliff:g> ខ្ទង់"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="other">ត្រូវ​តែ​តិច​ជាង <xliff:g id="NUMBER_1">%d</xliff:g> តួ</item>
+      <item quantity="one">ត្រូវ​តែ​តិច​ជាង <xliff:g id="NUMBER_0">%d</xliff:g> តួ</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="other">ត្រូវ​តែ​តិច​ជាង <xliff:g id="NUMBER_1">%d</xliff:g> ខ្ទង់</item>
+      <item quantity="one">ត្រូវ​តែ​តិច​ជាង <xliff:g id="NUMBER_0">%d</xliff:g> ខ្ទង់</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"ត្រូវមានលេខពី 0-9 តែប៉ុណ្ណោះ"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"អ្នក​គ្រប់គ្រង​ឧបករណ៍​មិនអនុញ្ញាត​កូដ PIN ​ទើបប្រើហើយទេ"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"កូដ PIN លក្ខណៈ​សាមញ្ញ​ត្រូវ​បាន​ទប់ស្កាត់​ដោយ​អ្នក​គ្រប់គ្រង​ព័ត៌មាន​វិទ្យា​របស់អ្នក។ សាកល្បង​ប្រើ​កូដ PIN ផ្សេង​ពី​នេះ។"</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"ការ​គ្រប់គ្រង​អន្តរកម្ម"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"សេវាកម្ម​ដែល​បាន​ទាញយក"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"ពិសោធន៍"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"ទង់​មុខងារ"</string>
     <string name="talkback_title" msgid="7912059827205988080">"កម្មវិធីអានអេក្រង់"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"កម្មវិធីអានអេក្រង់បង្កើតឡើងជាចម្បងសម្រាប់មនុស្សពិការភ្នែក និងអ្នកខ្សោយភ្នែក"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"ចុចធាតុ​នៅលើ​អេក្រង់​របស់អ្នក​ដើម្បី​ស្ដាប់​ធាតុ​ទាំង​នោះ​បញ្ចេញសំឡេង​ឮៗ"</string>
@@ -3081,7 +3092,7 @@
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"នៅ​ពេលមាន​ការ​ជូនដំណឹង​ថ្មី ទូរសព្ទ​របស់អ្នក​នឹង​មិន​បន្លឺ​សំឡេង ឬ​ញ័រ​​ទេ"</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"លាក់ និងបិទសំឡេងការ​ជូនដំណឹង​"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"ការ​ជូនដំណឹង​នឹង​មិន​បង្ហាញ​ឡើយ"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"អ្នក​នឹង​មិន​ឃើញ​ការ​ជូនដំណឹង​ថ្មី ឬ​មានស្រាប់​ទេ នៅពេល​ដែល​មុខងារ​កុំ​រំខាន​បើក។ ប៉ុន្តែ ការជូន​ដំណឹងចាំបាច់សម្រាប់សកម្មភាព និង​ស្ថានភាព​ទូរសព្ទ​មូលដ្ឋាន​នឹងនៅ​តែ​បង្ហាញ​ដដែល។"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"អ្នក​នឹង​មិន​ឃើញ​ការ​ជូនដំណឹង​ថ្មីៗ ឬ​ដែលមានស្រាប់​ទេ នៅពេល​ដែល​មុខងារ​កុំ​រំខាន​បើក។ ប៉ុន្តែ ការជូន​ដំណឹងចាំបាច់សម្រាប់សកម្មភាព និង​ស្ថានភាព​មូលដ្ឋាន​របស់​ទូរសព្ទនឹងនៅ​តែ​បង្ហាញ​ដដែល។"</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"តាម​បំណង"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"បើក​ការ​កំណត់​តាមបំណង"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"លុប​ការ​កំណត់​តាម​បំណង"</string>
@@ -3133,13 +3144,14 @@
       <item quantity="other">ច្បាប់ <xliff:g id="ON_COUNT">%d</xliff:g> អាច​បើក​បាន​ដោយ​ស្វ័យ​ប្រវត្តិ</item>
       <item quantity="one">ច្បាប់ 1 អាច​បើក​បាន​ដោយ​ស្វ័យ​ប្រវត្តិ</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"យល់ព្រម"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"ធ្វើ​បច្ចុប្បន្នភាព"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"កុំ​ធ្វើ​បច្ចុប្បន្នភាព"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"ទូរសព្ទ​របស់អ្នក​អាច​ធ្វើ​អ្វីៗ​បាន​ច្រើន ដើម្បី​ជួយ​ឱ្យ​​អ្នក​ផ្ដោត​អារម្មណ៍។\n\nធ្វើ​បច្ចុប្បន្នភាព​​​ការកំណត់ ដើម្បី៖\n\n- លាក់​ការជូនដំណឹង​ទាំងស្រុង\n\n- អនុញ្ញាត​ឱ្យ​ហៅទូរសព្ទ​ពី​ទំនាក់ទំនង​ដែល​មាន​ផ្កាយ និង​អ្នក​ហៅ​ទូរសព្ទ​ដដែលៗ"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"ធ្វើ​បច្ចុប្បន្នភាព​មុខងារ​កុំរំខាន?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"ការកំណត់"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"អ្នកអាច​ប្ដូរវាបន្ថែម​តាមបំណង​នៅក្នុងការកំណត់។"</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"ទប់ស្កាត់នៅពេល​អេក្រង់បើក"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"ទប់ស្កាត់នៅពេលអេក្រង់បិទ"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"មុខងារកុំរំខានអាចធ្វើសកម្មភាពលើសពីការទប់ស្កាត់សំឡេងមិនចង់ឮ។ វាក៏អាច​ទប់ស្កាត់រូបភាព​ផងដែរ។ ចំណុចនេះអាចមានប្រយោជន៍ ប្រសិនបើអ្នកកំពុងព្យាយាមគេង ផ្តោតអារម្មណ៍ ឬកម្រិតរយៈពេលប្រើប្រាស់ទូរសព្ទរបស់អ្នក។"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"ទប់ស្កាត់សំឡេង និងរូបភាព"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"កុំបើក​អេក្រង់ ឬដាស់សម្រាប់​ការជូនដំណឹង"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"កុំបង្ហាញការជូនដំណឹងឱ្យសោះ លើកលែងតែស្ថានភាព និងសកម្មភាពមូលដ្ឋានរបស់ទូរសព្ទ"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"សំឡេងប្រវត្តិរូបការងារ"</string>
@@ -3671,7 +3683,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"បានបិទដំណើរការការបម្រុងទុក"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"បានដំឡើង​ជំនាន់ទៅ Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"មាន​កំណែថ្មី"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"មិន​អាចផ្លាស់ប្ដូរការ​កំណត់​នេះ​បាន​ទេ"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"សកម្មភាពមិនអនុញ្ញាត"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"មិនអាចផ្លាស់ប្ដូរកម្រិតសំឡេងបានទេ"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"មិន​អនុញ្ញាតឲ្យហៅទូរសព្ទទេ"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"មិនអនុញ្ញាតសារ SMS ទេ"</string>
@@ -3861,7 +3873,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"គ្រប់គ្រង​ព័ត៌មាន​លើអេក្រង់ចាក់សោ"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"បង្ហាញ ឬលាក់មាតិកាជូនដំណឹង"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"ទាំងអស់"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"ជំនួយ និងគន្លឹះ"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"ទទឹងតូចបំផុត"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"មិនមានកម្មវិធីដែលដំឡើងហើយបានស្នើសុំការចូលដំណើរការសេវាកម្ម SMS ពិសេសទេ"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"សេវាកម្ម SMS ពិសេសអាចនឹងគិតថ្លៃ ហើយបន្ថែមតម្លៃនោះទៅក្នុងវិក្កយបត្រក្រុមហ៊ុនផ្តល់សេវាទូរស័ព្ទរបស់អ្នក។ ប្រសិនបើដំណើរការសិទ្ធិអនុញ្ញាតសម្រាប់កម្មវិធីណាមួយ នោះអ្នកនឹងអាចផ្ញើសេវាកម្ម SMS ពិសេសដោយប្រើកម្មវិធីនោះ។"</string>

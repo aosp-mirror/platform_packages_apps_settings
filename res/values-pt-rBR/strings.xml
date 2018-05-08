@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Excesso de tentativas incorretas. O usuário será excluído."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Excesso de tentativas incorretas. Este perfil de trabalho e os dados correspondentes serão excluídos."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Dispensar"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Precisa ter pelo menos <xliff:g id="COUNT">%d</xliff:g> caracteres"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"O PIN precisa ter pelo menos <xliff:g id="COUNT">%d</xliff:g> dígitos"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="one">Precisa ter pelo menos <xliff:g id="COUNT_1">%d</xliff:g> caractere</item>
+      <item quantity="other">Precisa ter pelo menos <xliff:g id="COUNT_1">%d</xliff:g> caracteres</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="one">O PIN precisa ter pelo menos <xliff:g id="COUNT_1">%d</xliff:g> dígito</item>
+      <item quantity="other">O PIN precisa ter pelo menos <xliff:g id="COUNT_1">%d</xliff:g> dígitos</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Continuar"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"Precisa ter menos de <xliff:g id="NUMBER">%d</xliff:g> caracteres"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Precisa ter menos de <xliff:g id="NUMBER">%d</xliff:g> dígitos"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="one">Precisa ter menos de <xliff:g id="NUMBER_1">%d</xliff:g> caractere</item>
+      <item quantity="other">Precisa ter menos de <xliff:g id="NUMBER_1">%d</xliff:g> caracteres</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="one">Precisa ter menos de <xliff:g id="NUMBER_1">%d</xliff:g> dígito</item>
+      <item quantity="other">Precisa ter menos de <xliff:g id="NUMBER_1">%d</xliff:g> dígitos</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Precisa ter apenas dígitos de 0 a 9"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"O administrador do dispositivo não permite o uso de um PIN recente"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"PINs comuns foram bloqueados pelo seu administrador de TI. Tente um PIN diferente."</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Controles de interação"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Serviços transferidos por download"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Experimentais"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Sinalizações de recursos"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Leitor de tela, usado principalmente para pessoas com deficiência visual total ou parcial"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Tocar nos itens exibidos na tela para ouvir a leitura deles em voz alta"</string>
@@ -3121,7 +3132,7 @@
     <string name="zen_mode_sound_summary_on_with_info" msgid="1202632669798211342">"Ativar / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_off_with_info" msgid="2348629457144123849">"Desativado / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_off" msgid="4375814717589425561">"Desativado"</string>
-    <string name="zen_mode_sound_summary_on" msgid="7718273231309882914">"Ativar"</string>
+    <string name="zen_mode_sound_summary_on" msgid="7718273231309882914">"Ativado"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="5976427426278136178">"Perguntar sempre (exceto quando ativado automaticamente)"</string>
     <string name="zen_mode_duration_summary_forever" msgid="3144786357459137066">"Até você desativar (exceto quando ativado automaticamente)"</string>
     <plurals name="zen_mode_duration_summary_time_hours" formatted="false" msgid="1060823390336822337">
@@ -3133,13 +3144,14 @@
       <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> regra pode ser ativada automaticamente</item>
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> regras podem ser ativadas automaticamente</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"Ok"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Atualizar"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Não atualizar"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"Seu smartphone pode ajudar você a manter o foco.\n\nAltere as configurações para:\n\n- ocultar completamente as notificações;\n\n- permitir chamadas repetidas e de contatos com estrela."</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"Atualizar o modo Não perturbe?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Configurações"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Personalize ainda mais em Configurações."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Bloquear quando a tela estiver ligada"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Bloquear quando a tela estiver desligada"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"O Não Perturbe pode fazer mais do que bloquear sons indesejados: ele também bloqueia perturbações visuais. Isso poderá ser útil se você estiver tentando dormir, se concentrar ou limitar o tempo gasto no smartphone."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Bloquear sons e perturbações visuais"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Notificações não ligam nem ativam a tela"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Não mostrar notificações, exceto a atividade básica do smartphone e o status"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Sons do perfil de trabalho"</string>
@@ -3671,7 +3683,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Backup desativado"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Atualizado para o Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"Atualização disponível"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"Impossível alterar config."</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"Ação não permitida"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"Não é possível alterar o volume"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"Chamada não permitida"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"SMS não permitido"</string>
@@ -3861,7 +3873,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Controlar informações na tela de bloqueio"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Mostrar ou ocultar o conteúdo da notificação"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Todas as opções"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"Suporte e dicas"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"Menor largura"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Nenhum app instalado solicitou acesso a SMS premium"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"O SMS premium pode gerar custos e será adicionado ao faturamento da sua operadora. Se você conceder permissão para um app, será possível enviar SMS premium usando esse app."</string>

@@ -593,11 +593,31 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"נעשו יותר מדי ניסיונות שגויים. המשתמש הזה יימחק."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"נעשו יותר מדי ניסיונות שגויים. פרופיל העבודה והנתונים המשויכים אליו יימחקו."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"סגור"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"צריכה להכיל <xliff:g id="COUNT">%d</xliff:g> תווים לפחות"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"קוד הגישה צריך להיות באורך של <xliff:g id="COUNT">%d</xliff:g> ספרות לפחות"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="two">צריכה להכיל לפחות <xliff:g id="COUNT_1">%d</xliff:g> תווים</item>
+      <item quantity="many">צריכה להכיל לפחות <xliff:g id="COUNT_1">%d</xliff:g> תווים</item>
+      <item quantity="other">צריכה להכיל לפחות <xliff:g id="COUNT_1">%d</xliff:g> תווים</item>
+      <item quantity="one">צריכה להכיל לפחות תו אחד (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="two">‏PIN חייב להיות באורך של <xliff:g id="COUNT_1">%d</xliff:g> ספרות לכל הפחות</item>
+      <item quantity="many">‏PIN חייב להיות באורך של <xliff:g id="COUNT_1">%d</xliff:g> ספרות לכל הפחות</item>
+      <item quantity="other">‏PIN חייב להיות באורך של <xliff:g id="COUNT_1">%d</xliff:g> ספרות לכל הפחות</item>
+      <item quantity="one">‏PIN חייב להכיל לפחות ספרה אחת (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"המשך"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"צריכה להכיל פחות מ-<xliff:g id="NUMBER">%d</xliff:g> תווים"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"צריך להיות פחות מ-<xliff:g id="NUMBER">%d</xliff:g> ספרות"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="two">צריכה להכיל פחות מ-<xliff:g id="NUMBER_1">%d</xliff:g> תווים</item>
+      <item quantity="many">צריכה להכיל פחות מ-<xliff:g id="NUMBER_1">%d</xliff:g> תווים</item>
+      <item quantity="other">צריכה להכיל פחות מ-<xliff:g id="NUMBER_1">%d</xliff:g> תווים</item>
+      <item quantity="one">צריכה להכיל פחות מתו אחד (<xliff:g id="NUMBER_0">%d</xliff:g>)</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="two">צריכה להכיל פחות מ-<xliff:g id="NUMBER_1">%d</xliff:g> ספרות</item>
+      <item quantity="many">צריכה להכיל פחות מ-<xliff:g id="NUMBER_1">%d</xliff:g> ספרות</item>
+      <item quantity="other">צריכה להכיל פחות מ-<xliff:g id="NUMBER_1">%d</xliff:g> ספרות</item>
+      <item quantity="one">צריכה להכיל פחות מספרה אחת (<xliff:g id="NUMBER_0">%d</xliff:g>)</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"צריך להכיל רק את הספרות 0-9"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"מנהל המכשיר לא מאפשר להשתמש בקוד גישה שנעשה בו שימוש לאחרונה"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"‏קודי גישה נפוצים חסומים בידי מנהל ה-IT. יש לנסות קוד גישה אחר."</string>
@@ -1948,8 +1968,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"פקדי אינטראקציה"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"שירותים שהורדו"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"ניסיוניות"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"סימוני תכונות"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"קורא מסך המיועד בעיקר לעיוורים או לבעלי ראייה לקויה"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"הקש על פריטים במסך כדי לשמוע הקראה שלהם"</string>
@@ -3149,7 +3168,7 @@
     <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"הודעות"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"כשמצב \'נא לא להפריע\' פועל"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"השתקת ההודעות"</string>
-    <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"הצגת הודעות אבל השתקת צלילים ורטט"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"הצגת הודעות והשתקת צלילים ורטט"</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"כשנכנסות הודעות חדשות, הטלפון לא ישמיע צליל או רטט"</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"הסתרה והשתקה של הודעות"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"הודעות לא יופיעו בכלל"</string>
@@ -3209,13 +3228,14 @@
       <item quantity="other">ניתן להפעיל <xliff:g id="ON_COUNT">%d</xliff:g> כללים אוטומטית</item>
       <item quantity="one">ניתן להפעיל כלל אחד אוטומטית</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"אישור"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"עדכון"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"לא לעדכן"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"ניתן להיעזר בטלפון כדי להתרכז.\n\nיש לעדכן את ההגדרות הבאות:\n\n- הסתרה מוחלטת של הודעות\n\n- מתן אישור לשיחות מאנשי קשר שמסומנים בכוכב וממתקשרים חוזרים"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"לעדכן את מצב \'נא לא להפריע\'?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"הגדרות"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"יש עוד אפשרויות להתאמה אישית של הפריט הזה ב\'הגדרות\'."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"יש לחסום כשהמסך פועל"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"יש לחסום כשהמסך כבוי"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"מצב \'נא לא להפריע\' יכול לחסום צלילים לא רצויים ואפילו יותר מזה - לחסום רכיבים חזותיים. זה יכול לעזור כשמנסים לישון, להתמקד או להגביל את זמן השימוש בטלפון."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"חסימה של צלילים ורכיבים חזותיים"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"אין להפעיל את המסך או להציג הודעות"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"אין להציג הודעות בכלל, למעט פעילות בסיסית בטלפון וסטטוס"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"צלילי פרופיל עבודה"</string>
@@ -3777,7 +3797,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"הגיבוי מושבת"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"‏עודכן ל-Android גרסה ‏<xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"יש עדכון זמין"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"לא ניתן לשנות הגדרה זו"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"הפעולה אינה מותרת"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"לא ניתן לשנות את הנפח"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"לא ניתן לבצע שיחות יוצאות"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"‏לא ניתן לשלוח הודעות SMS"</string>
@@ -3979,7 +3999,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"בחירת הפרטים שמופיעים במסך הנעילה"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"הצג או הסתר תוכן הודעה"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"הכול"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"תמיכה וטיפים"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"הרוחב הקטן ביותר"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"‏אף אפליקציה מותקנת לא ביקשה גישה לפרימיום SMS"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"‏פרימיום SMS עשוי לעלות כסף ויצורף לחשבונות הספק שלך. אם אתה מפעיל הרשאה לאפליקציה, תוכל לשלוח פרימיום SMS באמצעות אפליקציה זו."</string>

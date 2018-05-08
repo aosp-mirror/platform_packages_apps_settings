@@ -223,7 +223,7 @@
     <string name="radio_info_signal_strength_label" msgid="5155734002519307416">"सिग्नल सामर्थ्य:"</string>
     <string name="radio_info_call_status_label" msgid="2611065018172747413">"व्हॉइस कॉल स्थिती:"</string>
     <string name="radio_info_ppp_sent_label" msgid="7748668735880404586">"डेटा पाठविला:"</string>
-    <string name="radio_info_message_waiting_label" msgid="1037302619943328273">"संदेश प्रतीक्षा:"</string>
+    <string name="radio_info_message_waiting_label" msgid="1037302619943328273">"मेसेज प्रतीक्षा:"</string>
     <string name="radio_info_phone_number_label" msgid="7942153178953255231">"फोन नंबर:"</string>
     <string name="radio_info_band_mode_label" msgid="8730871744887454509">"रेडिओ बँड निवडा"</string>
     <string name="radio_info_voice_network_type_label" msgid="1443496502370667071">"व्हॉइस नेटवर्क प्रकार:"</string>
@@ -303,7 +303,7 @@
     <string name="radio_controls_summary" msgid="1838624369870907268">"Wi‑Fi, Bluetooth, विमान मोड, मोबाईल नेटवर्क आणि VPN व्यवस्थापित करा"</string>
     <string name="cellular_data_title" msgid="6835451574385496662">"मोबाइल डेटा"</string>
     <string name="calls_title" msgid="3544471959217176768">"कॉल"</string>
-    <string name="sms_messages_title" msgid="1778636286080572535">"SMS संदेश"</string>
+    <string name="sms_messages_title" msgid="1778636286080572535">"SMS मेसेज"</string>
     <string name="cellular_data_summary" msgid="4660351864416939504">"मोबाइल नेटवर्कवर डेटा वापराला अनुमती द्या"</string>
     <string name="allow_data_usage_title" msgid="2238205944729213062">"रोमिंग करताना डेटा वापरास अनुमती द्या"</string>
     <string name="roaming" msgid="3596055926335478572">"डेटा रोमिंग"</string>
@@ -355,7 +355,7 @@
     <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"निष्क्रियतेनंतर तात्काळ, <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> द्वारे अनलॉक केलेले ठेवले असते ते वगळून"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> निष्‍क्रियतेनंतर, <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> द्वारे अनलॉक केलेले ठेवले असते ते वगळून"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"लॉक स्क्रीनवर मालकाची माहिती दर्शवा"</string>
-    <string name="owner_info_settings_title" msgid="5530285568897386122">"लॉक स्क्रीन संदेश"</string>
+    <string name="owner_info_settings_title" msgid="5530285568897386122">"लॉक स्क्रीन मेसेज"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"विजेट सुरू करा"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"प्रशासकाने अक्षम केलेले"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"लॉकडाउन पर्याय दाखवा"</string>
@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"बरेच चुकीचे प्रयत्‍न. हा वापरकर्ता हटवला जाईल."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"बरेच चुकीचे प्रयत्‍न. ही कामाची प्रोफाइल आणि त्‍याचा डेटा हटवला जाईल."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"डिसमिस करा"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"किमान <xliff:g id="COUNT">%d</xliff:g> वर्ण असणे आवश्यक आहे"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"पिन किमान <xliff:g id="COUNT">%d</xliff:g> अंकी असणे आवश्यक आहे"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="one">किमान <xliff:g id="COUNT_1">%d</xliff:g> वर्णाचा असणे आवश्यक आहे</item>
+      <item quantity="other">किमान <xliff:g id="COUNT_1">%d</xliff:g> वर्णांचा असणे आवश्यक आहे</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="one">पिन किमान <xliff:g id="COUNT_1">%d</xliff:g> अंकी असणे आवश्यक आहे</item>
+      <item quantity="other">पिन किमान <xliff:g id="COUNT_1">%d</xliff:g> अंकी असणे आवश्यक आहे</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"सुरु ठेवा"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"<xliff:g id="NUMBER">%d</xliff:g> वर्णांपेक्षा कमी असणे आवश्यक आहे"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"<xliff:g id="NUMBER">%d</xliff:g> अंकांपेक्षा कमी असणे आवश्यक आहे"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="one"><xliff:g id="NUMBER_1">%d</xliff:g> वर्णापेक्षा कमी असणे आवश्यक आहे</item>
+      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> वर्णांपेक्षा कमी असणे आवश्यक आहे</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="one"><xliff:g id="NUMBER_1">%d</xliff:g> अंकापेक्षा कमी असणे आवश्यक आहे</item>
+      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> अंकांपेक्षा कमी असणे आवश्यक आहे</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"केवळ 0-9 अंक असणे आवश्यक आहे"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"डिव्हाइस प्रशासक अलीकडील पिन वापरण्याची अनुमती देत नाही"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"सामान्यत: वापरले जाणारे पिन तुमच्या IT प्रशासनाने ब्लॉक केलेले आहेत. दुसरा एखादा पिन वापरून पाहा."</string>
@@ -1921,8 +1933,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"संवादात्मकता नियंत्रणे"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"डाउनलोड केलेल्या सेवा"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"प्रायोगिक"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"वैशिष्‍ट्य फ्लॅग"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"स्क्रीनवाचक साधन प्रामुख्याने दृष्टीहीन आणि कमी दृष्टी असलेल्या लोकांसाठी आहे"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"त्‍यांना मोठ्याने ऐकण्यासाठी आपल्या स्क्रीनवरील आयटम टॅप करा"</string>
@@ -2439,7 +2450,7 @@
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"Google सर्व्हरवरील आपल्या वाय-फाय पासवर्ड, बुकमार्क, इतर सेटिंग्ज आणि अॅप डेटाचा बॅक अप घेणे थांबवायचे तसेच सर्व प्रती मिटवायच्या?"</string>
     <string name="fullbackup_erase_dialog_message" msgid="694766389396659626">"डिव्हाइस डेटाचा (जसे की वाय-फाय पासवर्ड आणि कॉल इतिहास) आणि (अॅप्सद्वारे स्टोअर केलेल्या सेटिंग्ज आणि फायली यासारख्या) अॅप डेटाचा बॅकअप घेणे थांबवायचे, तसेच दूरस्थ सर्व्हर वरील सर्व प्रती मिटवायच्या?"</string>
-    <string name="fullbackup_data_summary" msgid="960850365007767734">"आपोआप डिव्हाइस डेटाचा (जसे की वाय-फाय पासवर्ड आणि कॉल इतिहास) आणि अ‍ॅप डेटाचा (जसे की अ‍ॅप्‍स द्वारे स्टोअर केलेल्या सेटिंग्ज आणि फायली) दूरस्‍थपणे बॅकअप घ्‍या.\n\nतुम्ही स्वयंचलित बॅकअप चालू करता तेव्‍हा, डिव्हाइस आणि अ‍ॅप डेटा ठराविक कालावधीने दूरस्‍थपणे सेव्ह केला जातो. अ‍ॅप डेटा हा संपर्क, संदेश आणि फोटो यासारख्‍या संभाव्य संवेदनशील डेटासह अ‍ॅपने सेव्ह केलेला (डेव्हलपरच्या सेटिंग्जवर आधारित) कोणताही डेटा असू शकतो."</string>
+    <string name="fullbackup_data_summary" msgid="960850365007767734">"आपोआप डिव्हाइस डेटाचा (जसे की वाय-फाय पासवर्ड आणि कॉल इतिहास) आणि अ‍ॅप डेटाचा (जसे की अ‍ॅप्‍स द्वारे स्टोअर केलेल्या सेटिंग्ज आणि फायली) दूरस्‍थपणे बॅकअप घ्‍या.\n\nतुम्ही स्वयंचलित बॅकअप चालू करता तेव्‍हा, डिव्हाइस आणि अ‍ॅप डेटा ठराविक कालावधीने दूरस्‍थपणे सेव्ह केला जातो. अ‍ॅप डेटा हा संपर्क, मेसेज आणि फोटो यासारख्‍या संभाव्य संवेदनशील डेटासह अ‍ॅपने सेव्ह केलेला (डेव्हलपरच्या सेटिंग्जवर आधारित) कोणताही डेटा असू शकतो."</string>
     <string name="device_admin_settings_title" msgid="4960761799560705902">"डिव्हाइस प्रशासक सेटिंग्ज"</string>
     <string name="active_device_admin_msg" msgid="578748451637360192">"डिव्हाइस प्रशासक अॅप"</string>
     <string name="remove_device_admin" msgid="9207368982033308173">"हे डिव्हाइस अॅडमिन अॅप बंद करा"</string>
@@ -2532,9 +2543,9 @@
     <string name="remove_account_label" msgid="5921986026504804119">"खाते काढा"</string>
     <string name="header_add_an_account" msgid="756108499532023798">"खाते जोडा"</string>
     <string name="really_remove_account_title" msgid="8800653398717172460">"खाते काढायचे?"</string>
-    <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"हे खाते काढल्याने त्याचे सर्व संदेश, संपर्क आणि टॅब्लेटवरील अन्य डेटा हटतील!"</string>
-    <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"हे खाते काढल्याने त्याचे सर्व संदेश, संपर्क आणि फोनवरील अन्य डेटा हटवला जाईल!"</string>
-    <string name="really_remove_account_message" product="device" msgid="7507474724882080166">"हे खाते काढल्याने त्याचे सर्व संदेश, संपर्क आणि डिव्हाइसवरील इतर डेटा हटवला जाईल!"</string>
+    <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"हे खाते काढल्याने त्याचे सर्व मेसेज, संपर्क आणि टॅब्लेटवरील अन्य डेटा हटतील!"</string>
+    <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"हे खाते काढल्याने त्याचे सर्व मेसेज, संपर्क आणि फोनवरील अन्य डेटा हटवला जाईल!"</string>
+    <string name="really_remove_account_message" product="device" msgid="7507474724882080166">"हे खाते काढल्याने त्याचे सर्व मेसेज, संपर्क आणि डिव्हाइसवरील इतर डेटा हटवला जाईल!"</string>
     <string name="remove_account_failed" msgid="3901397272647112455">"या बदलाला आपल्या प्रशासकाद्वारे अनुमती नाही"</string>
     <string name="cant_sync_dialog_title" msgid="2777238588398046285">"व्यक्तिचलितपणे सिंक करू शकत नाही"</string>
     <string name="cant_sync_dialog_message" msgid="1938380442159016449">"या आयटमसाठी सध्या सिंक अक्षम केले आहे. हे सेटिंग बदलण्यासाठी, पार्श्वभूमीवरील डेटा आणि आपोआप होणारे सिंक तात्पुरते चालू करा."</string>
@@ -2945,7 +2956,7 @@
     <string name="search_menu" msgid="6283419262313758339">"सेटिंग्ज शोधा"</string>
     <string name="keywords_wifi" msgid="3646884600964177062">"वायफाय, वाय-फाय, नेटवर्क कनेक्शन, इंटरनेट, वायरलेस, डेटा, वाय फाय"</string>
     <string name="keywords_change_wifi_state" msgid="627068244033681010">"वायफाय, वाय-फाय, टॉगल, कंट्रोल"</string>
-    <string name="keywords_more_default_sms_app" msgid="8597706109432491909">"एसएमएस, मजकूर पाठवणे, संदेश, मेसेजिंग, डीफॉल्ट"</string>
+    <string name="keywords_more_default_sms_app" msgid="8597706109432491909">"एसएमएस, मजकूर पाठवणे, मेसेज, मेसेजिंग, डीफॉल्ट"</string>
     <string name="keywords_more_mobile_networks" msgid="8995946622054642367">"सेल्युलर, मोबाइल, सेल वाहक, वायरलेस, डेटा, 4g, 3g, 2g, lte"</string>
     <string name="keywords_wifi_calling" msgid="1784064367330122679">"वायफाय, वाय-फाय, कॉल, कॉलिंग"</string>
     <string name="keywords_home" msgid="294182527446892659">"लाँचर, डीफॉल्ट, अॅप्स"</string>
@@ -3074,38 +3085,22 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"दृश्य व्यत्यय ब्लॉक करा"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"व्हिज्युअल सिग्नलना अनुमती द्या"</string>
-    <!-- no translation found for zen_mode_restrict_notifications_screen_title (9027437428488279426) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_title (478040192977063582) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_category (1648631487087638037) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_mute (9210062826172341735) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_mute_summary (285566524371041091) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_mute_footer (8473382758368384982) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_hide (3451553435075518722) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_hide_summary (3823881787175376177) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_hide_footer (4224323933073288352) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_custom (7498689167767941034) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_enable_custom (4250962169561739747) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_disable_custom (6676997522330453597) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_summary_muted (4678779044896459009) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_summary_custom (7416121534987213074) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_summary_hidden (7805339105802282234) -->
-    <skip />
-    <!-- no translation found for zen_mode_what_to_block_title (5480903548365697159) -->
-    <skip />
+    <string name="zen_mode_restrict_notifications_screen_title" msgid="9027437428488279426">"सूचना प्रतिबंधित करा"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"सूचना"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"जेव्हा व्यत्यय आणू नका सुरू असते"</string>
+    <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"सूचना म्यूट करा"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"सूचना दाखवा, परंतु आवाज आणि कंपन म्यूट करा"</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"जेव्हा नवीन सूचना मिळेल तेव्हा तुमचा फोन आवाज किंवा कंपन करणार नाही"</string>
+    <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"लपवा आणि म्यूट सूचना"</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"सूचना अजिबात दिसणार नाहीत"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"जेव्हा व्यत्यय आणू नका सुरू असेल, तेव्हा तुम्हाला नवीन किंवा अस्तित्वात असलेल्या सूचना पाहू शकणार नाही. तरीही, फोनची मूळ अॅक्टिव्हिटी आणि स्थिती अजुनही दिसेल."</string>
+    <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"कस्टम"</string>
+    <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"कस्टम सेटिंग सुरू करा"</string>
+    <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"कस्टम सेटिंग काढून टाका"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"दिसेल"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"अंशतः लपवलेले"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"लपवलेले"</string>
+    <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"कस्टम प्रतिबंध"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"स्क्रीन चालू असताना"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"स्क्रीन बंद असताना"</string>
     <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"ध्वनी आणि व्हायब्रेट म्यूट करा"</string>
@@ -3150,13 +3145,14 @@
       <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> नियम आपोआप चालू केला जाऊ शकतो</item>
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> नियम आपोआप चालू केले जाऊ शकतात</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"ओके"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"अपडेट करा"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"अपडेट करू नका"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"लक्ष केंद्रित करण्याकरता तुम्हाला मदत करण्यासाठी तुमचा फोन बरेच काही करू शकतो.\n\nसूचना पूर्णपणे लपवण्यासाठी\n\nतारांकित संपर्कांकडील आणि नियमित कॉलरकडील कॉल ना अनुमती देण्यासाठी\nसेटिंग्ज अपडेट करा\n"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"व्यत्यय आणू नका अपडेट करायचे का?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"सेटिंग्ज"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"तुम्‍ही हे पुढे सेटिंग्‍जमध्‍ये कस्‍टमाइझ करू शकता."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"स्‍क्रीन सुरू असताना ब्‍लॉक करा"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"स्‍क्रीन बंद असताना ब्‍लॉक करा"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"व्‍यत्‍यय आणू नका नको असलेले ध्‍वनी ब्‍लॉक करण्‍यापेक्षा बरेच काही करू शकते - हे व्हिज्‍युअल देखील ब्‍लॉक करू शकते. तुम्‍ही झोपण्‍याचा, लक्ष देण्‍याचा किंवा तुमच्‍या फोनवर वेळ घालवणे मर्यादित करण्‍याचा प्रयत्‍न करत असल्‍यास, हे उपयुक्‍त ठरू शकते."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"ध्‍वनी आणि व्हिज्‍युअल ब्‍लॉक करा"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"स्क्रीन सुरू करू नका किंवा सूचना सुरू करू नका"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"मुलभूत फोन अॅक्टिव्हिटी आणि स्थितीसाठी सूचना अजिबात दाखवू नका"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"कार्य प्रोफाइल ध्वनी"</string>
@@ -3227,7 +3223,7 @@
     </plurals>
     <string name="no_notification_listeners" msgid="3487091564454192821">"इंस्टॉल केलेल्या कोणत्याही अ‍ॅप्सने सूचना प्रवेशाची विनंती केली नाही."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"<xliff:g id="SERVICE">%1$s</xliff:g> साठी सूचना प्रवेशास अनुमती द्यायची?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> तुम्ही प्राप्त करता ती संपर्क नावे आणि मजकूर संदेश यासारख्या वैयक्तिक माहितीसह सर्व सूचना वाचण्यात सक्षम असेल. तो सूचना डिसमिस करण्यात किंवा त्यामध्ये असलेली क्रिया बटणे ट्रिगर करण्यात देखील सक्षम असेल. \n\nहे अॅपला व्यत्यय आणू नका चालू किंवा बंद करण्याची आणि सबंधित सेटिंग्ज बदलण्याची क्षमता देखील देईल."</string>
+    <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> तुम्ही प्राप्त करता ती संपर्क नावे आणि मजकूर मेसेज यासारख्या वैयक्तिक माहितीसह सर्व सूचना वाचण्यात सक्षम असेल. तो सूचना डिसमिस करण्यात किंवा त्यामध्ये असलेली क्रिया बटणे ट्रिगर करण्यात देखील सक्षम असेल. \n\nहे अॅपला व्यत्यय आणू नका चालू किंवा बंद करण्याची आणि सबंधित सेटिंग्ज बदलण्याची क्षमता देखील देईल."</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"तुम्ही <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> साठी सूचनांमधील प्रवेश बंद केल्यास, व्यत्यय आणू नका मधील प्रवेश देखील बंद केला जाऊ शकतो."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="8333442186428083057">"बंद करा"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8586417377104211584">"रद्द करा"</string>
@@ -3327,9 +3323,9 @@
     <string name="summary_range_symbol_combination" msgid="5695218513421897027">"<xliff:g id="START">%1$s</xliff:g> - <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"<xliff:g id="START">%1$s</xliff:g> ते <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_calls" msgid="7051492091133751208">"कॉल"</string>
-    <string name="zen_mode_messages" msgid="5886440273537510894">"संदेश"</string>
-    <string name="zen_mode_all_messages" msgid="6449223378976743208">"सर्व संदेश"</string>
-    <string name="zen_mode_selected_messages" msgid="8245990149599142281">"निवडलेले संदेश"</string>
+    <string name="zen_mode_messages" msgid="5886440273537510894">"मेसेज"</string>
+    <string name="zen_mode_all_messages" msgid="6449223378976743208">"सर्व मेसेज"</string>
+    <string name="zen_mode_selected_messages" msgid="8245990149599142281">"निवडलेले मेसेज"</string>
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"कोणाहीकडून"</string>
     <string name="zen_mode_from_contacts" msgid="2232335406106711637">"केवळ संपर्कांकडून"</string>
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"केवळ तारांकित संपर्कांकडून"</string>
@@ -3384,12 +3380,12 @@
     <string name="experimental_preference" msgid="7083015446690681376">"(प्रायोगिक)"</string>
     <string name="encryption_interstitial_header" msgid="468015813904595613">"सुरक्षित प्रारंभ"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"सुरु ठेवा"</string>
-    <string name="encryption_interstitial_message_pin" msgid="2317181134653424679">"सुरू होण्यापूर्वी तुमचा पिन आवश्यक करून तुम्ही हे डिव्हाइस अधिक संरक्षित करू शकता. डिव्हाइस सुरू होईपर्यंत, ते कॉल, संदेश किंवा अलार्मसह सूचना प्राप्त करू शकत नाही. \n\nयामुळे हरवलेल्या किंवा चोरीला गेलेल्या डिव्हाइस वरील डेटाचे संरक्षण करण्यात मदत होते. तुमचे डिव्हाइस सुरू करण्यासाठी पिन हवा?"</string>
-    <string name="encryption_interstitial_message_pattern" msgid="7081249914068568570">"सुरू होण्यापूर्वी तुमचा पॅटर्न आवश्यक करून तुम्ही हे डिव्हाइस अधिक संरक्षित करू शकता. डिव्हाइस सुरू होईपर्यंत, ते कॉल, संदेश किंवा अलार्मसह सूचना प्राप्त करू शकत नाही. \n\nयामुळे हरवलेल्या किंवा चोरीला गेलेल्या डिव्हाइस वरील डेटाचे संरक्षण करण्यात मदत होते. तुमचे डिव्हाइस सुरू करण्यासाठी पॅटर्न हवा?"</string>
-    <string name="encryption_interstitial_message_password" msgid="7796567133897436443">"सुरू होण्यापूर्वी तुमचा पासवर्ड आवश्यक करून तुम्ही हे डिव्हाइस अधिक संरक्षित करू शकता. डिव्हाइस सुरू होईपर्यंत, ते कॉल, संदेश किंवा अलार्मसह सूचना प्राप्त करू शकत नाही. \n\nयामुळे हरवलेल्या किंवा चोरीला गेलेल्या डिव्हाइस वरील डेटाचे संरक्षण करण्यात मदत होते. तुमचे डिव्हाइस सुरू करण्यासाठी पासवर्ड हवा?"</string>
-    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"तुमचे डिव्हाइस अनलॉक करण्यासाठी तुमचे फिंगरप्रिंट वापरण्याव्यतिरिक्त, सुरू होण्यापूर्वी तुमचा पिन आवश्यक करून तुम्ही हे डिव्हाइस अधिक संरक्षित करू शकता. डिव्हाइस सुरू होईपर्यंत, ते कॉल, संदेश किंवा अलार्मसह सूचना प्राप्त करू शकत नाही.\n\nयामुळे हरवलेल्या किंवा चोरीला गेलेल्या डिव्हाइस वरील डेटाचे संरक्षण करण्यात मदत होते. तुमचे डिव्हाइस सुरू करण्यासाठी पिन हवा?"</string>
-    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"तुमचे डिव्हाइस अनलॉक करण्यासाठी तुमचे फिंगरप्रिंट वापरण्याव्यतिरिक्त, सुरू होण्यापूर्वी तुमचा पॅटर्न आवश्यक करून तुम्ही हे डिव्हाइस अधिक संरक्षित करू शकता. डिव्हाइस सुरू होईपर्यंत, ते कॉल, संदेश किंवा अलार्मसह सूचना प्राप्त करू शकत नाही.\n\nयामुळे हरवलेल्या किंवा चोरीला गेलेल्या डिव्हाइस वरील डेटाचे संरक्षण करण्यात मदत होते. तुमचे डिव्हाइस सुरू करण्यासाठी पॅटर्न हवा?"</string>
-    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"तुमचे डिव्हाइस अनलॉक करण्‍यासाठी तुमचे फिंगरप्रिंट वापरण्‍याव्यतिरिक्त, ते सुरू होण्‍यापूर्वी तुम्ही तुमचा पासवर्ड आवश्‍यक करून हे डिव्हाइस अधिक सुरक्षित करू शकता. डिव्हाइस सुरू होईपर्यंत, तो कॉल, संदेश किंवा अलार्मसह सूचना प्राप्त करू शकत नाही.\n\nहे हरवलेल्या किंवा चोरीला गेलेल्या डिव्हाइस वरील डेटाचे संरक्षण करण्यात मदत करते. तुमचे डिव्हाइस सुरू करण्यासाठी पासवर्ड आवश्‍यक आहे का?"</string>
+    <string name="encryption_interstitial_message_pin" msgid="2317181134653424679">"सुरू होण्यापूर्वी तुमचा पिन आवश्यक करून तुम्ही हे डिव्हाइस अधिक संरक्षित करू शकता. डिव्हाइस सुरू होईपर्यंत, ते कॉल, मेसेज किंवा अलार्मसह सूचना प्राप्त करू शकत नाही. \n\nयामुळे हरवलेल्या किंवा चोरीला गेलेल्या डिव्हाइस वरील डेटाचे संरक्षण करण्यात मदत होते. तुमचे डिव्हाइस सुरू करण्यासाठी पिन हवा?"</string>
+    <string name="encryption_interstitial_message_pattern" msgid="7081249914068568570">"सुरू होण्यापूर्वी तुमचा पॅटर्न आवश्यक करून तुम्ही हे डिव्हाइस अधिक संरक्षित करू शकता. डिव्हाइस सुरू होईपर्यंत, ते कॉल, मेसेज किंवा अलार्मसह सूचना प्राप्त करू शकत नाही. \n\nयामुळे हरवलेल्या किंवा चोरीला गेलेल्या डिव्हाइस वरील डेटाचे संरक्षण करण्यात मदत होते. तुमचे डिव्हाइस सुरू करण्यासाठी पॅटर्न हवा?"</string>
+    <string name="encryption_interstitial_message_password" msgid="7796567133897436443">"सुरू होण्यापूर्वी तुमचा पासवर्ड आवश्यक करून तुम्ही हे डिव्हाइस अधिक संरक्षित करू शकता. डिव्हाइस सुरू होईपर्यंत, ते कॉल, मेसेज किंवा अलार्मसह सूचना प्राप्त करू शकत नाही. \n\nयामुळे हरवलेल्या किंवा चोरीला गेलेल्या डिव्हाइस वरील डेटाचे संरक्षण करण्यात मदत होते. तुमचे डिव्हाइस सुरू करण्यासाठी पासवर्ड हवा?"</string>
+    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"तुमचे डिव्हाइस अनलॉक करण्यासाठी तुमचे फिंगरप्रिंट वापरण्याव्यतिरिक्त, सुरू होण्यापूर्वी तुमचा पिन आवश्यक करून तुम्ही हे डिव्हाइस अधिक संरक्षित करू शकता. डिव्हाइस सुरू होईपर्यंत, ते कॉल, मेसेज किंवा अलार्मसह सूचना प्राप्त करू शकत नाही.\n\nयामुळे हरवलेल्या किंवा चोरीला गेलेल्या डिव्हाइस वरील डेटाचे संरक्षण करण्यात मदत होते. तुमचे डिव्हाइस सुरू करण्यासाठी पिन हवा?"</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"तुमचे डिव्हाइस अनलॉक करण्यासाठी तुमचे फिंगरप्रिंट वापरण्याव्यतिरिक्त, सुरू होण्यापूर्वी तुमचा पॅटर्न आवश्यक करून तुम्ही हे डिव्हाइस अधिक संरक्षित करू शकता. डिव्हाइस सुरू होईपर्यंत, ते कॉल, मेसेज किंवा अलार्मसह सूचना प्राप्त करू शकत नाही.\n\nयामुळे हरवलेल्या किंवा चोरीला गेलेल्या डिव्हाइस वरील डेटाचे संरक्षण करण्यात मदत होते. तुमचे डिव्हाइस सुरू करण्यासाठी पॅटर्न हवा?"</string>
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"तुमचे डिव्हाइस अनलॉक करण्‍यासाठी तुमचे फिंगरप्रिंट वापरण्‍याव्यतिरिक्त, ते सुरू होण्‍यापूर्वी तुम्ही तुमचा पासवर्ड आवश्‍यक करून हे डिव्हाइस अधिक सुरक्षित करू शकता. डिव्हाइस सुरू होईपर्यंत, तो कॉल, मेसेज किंवा अलार्मसह सूचना प्राप्त करू शकत नाही.\n\nहे हरवलेल्या किंवा चोरीला गेलेल्या डिव्हाइस वरील डेटाचे संरक्षण करण्यात मदत करते. तुमचे डिव्हाइस सुरू करण्यासाठी पासवर्ड आवश्‍यक आहे का?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"होय"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"नाही"</string>
     <string name="restricted_true_label" msgid="4761453839409220473">"प्रतिबंधित"</string>
@@ -3688,7 +3684,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"बॅक अप घेणे अक्षम केले"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Android <xliff:g id="VERSION">%1$s</xliff:g> वर अपडेट केले"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"अपडेट उपलब्ध"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"हे सेटिंग बदलू शकत नाही"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"क्रियेस अनुमती नाही"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"व्हॉल्यूम बदलू शकत नाही"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"कॉलिंगला अनुमती नाही"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"SMS ला अनुमती नाही"</string>
@@ -3818,9 +3814,9 @@
     <string name="home_app" msgid="4066188520886810030">"होम अॅप"</string>
     <string name="no_default_home" msgid="7184117487704520238">"डीफॉल्ट होम नाही"</string>
     <string name="lockpattern_settings_require_cred_before_startup" msgid="3832020101401318248">"सुरक्षित प्रारंभ"</string>
-    <string name="lockpattern_settings_require_pattern_before_startup_summary" msgid="7873036097628404476">"तुमचे डिव्हाइस सुरू करण्यासाठी पॅटर्न आवश्यक आहे. बंद केले असताना, या डिव्हाइस ला कॉल, संदेश, सूचना किंवा अलार्म प्राप्त होणार नाहीत."</string>
-    <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"तुमचे डिव्हाइस सुरू करण्यासाठी पिन आवश्यक आहे. बंद केले असताना, या डिव्हाइस ला कॉल, संदेश, सूचना किंवा अलार्म प्राप्त होणार नाहीत."</string>
-    <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"तुमचे डिव्हाइस सुरू करण्यासाठी पासवर्ड आवश्यक आहे. बंद केले असताना, या डिव्हाइसला कॉल, संदेश, सूचना किंवा अलार्म प्राप्त होणार नाहीत."</string>
+    <string name="lockpattern_settings_require_pattern_before_startup_summary" msgid="7873036097628404476">"तुमचे डिव्हाइस सुरू करण्यासाठी पॅटर्न आवश्यक आहे. बंद केले असताना, या डिव्हाइस ला कॉल, मेसेज, सूचना किंवा अलार्म प्राप्त होणार नाहीत."</string>
+    <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"तुमचे डिव्हाइस सुरू करण्यासाठी पिन आवश्यक आहे. बंद केले असताना, या डिव्हाइस ला कॉल, मेसेज, सूचना किंवा अलार्म प्राप्त होणार नाहीत."</string>
+    <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"तुमचे डिव्हाइस सुरू करण्यासाठी पासवर्ड आवश्यक आहे. बंद केले असताना, या डिव्हाइसला कॉल, मेसेज, सूचना किंवा अलार्म प्राप्त होणार नाहीत."</string>
     <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"आणखी एक फिंगरप्रिंट जोडा"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="5471253233176471245">"दुसर्‍या बोटाने अनलॉक करा"</string>
     <string name="battery_saver_on_summary" msgid="7722791295871319534">"सुरू"</string>
@@ -3878,7 +3874,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"लॉक स्क्रीनवरील माहिती नियंत्रित करा"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"सूचना सामग्री दर्शवा किंवा लपवा"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"सर्व"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"साहाय्य आणि टिपा"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"सर्वात लहान रुंदी"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"इंस्टॉल केलेल्या कोणत्याही अॅप्सनी प्रीमियम SMS प्रवेशाची विनंती केली नाही"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"प्रीमियम SMS मुळे तुम्हाला कदाचित शुल्क द्यावे लागू शकेल आणि आपल्या कॅरियर बिलिंग मध्ये जोडले जाईल. तुम्ही अॅपसाठी परवानगी सक्षम केल्यास, तो अॅप वापरून तुम्ही प्रीमियम SMS पाठविण्यात सक्षम असाल."</string>
