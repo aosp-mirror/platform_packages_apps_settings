@@ -19,6 +19,7 @@ import static android.provider.Settings.EXTRA_AUTHORITIES;
 
 import android.app.Activity;
 import android.content.Context;
+import android.icu.text.ListFormatter;
 import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 import android.text.BidiFormatter;
@@ -96,12 +97,11 @@ public class AccountDashboardFragment extends DashboardFragment {
                 final AuthenticatorHelper authHelper = new AuthenticatorHelper(mContext,
                         UserHandle.of(UserHandle.myUserId()), null /* OnAccountsUpdateListener */);
                 final String[] types = authHelper.getEnabledAccountTypes();
-
                 final BidiFormatter bidiFormatter = BidiFormatter.getInstance();
+                final List<CharSequence> summaries = new ArrayList<>();
 
-                CharSequence summary = null;
                 if (types == null || types.length == 0) {
-                    summary = mContext.getString(R.string.account_dashboard_default_summary);
+                    summaries.add(mContext.getString(R.string.account_dashboard_default_summary));
                 } else {
                     // Show up to 3 account types, ignore any null value
                     int accountToAdd = Math.min(3, types.length);
@@ -111,16 +111,12 @@ public class AccountDashboardFragment extends DashboardFragment {
                         if (TextUtils.isEmpty(label)) {
                             continue;
                         }
-                        if (summary == null) {
-                            summary = bidiFormatter.unicodeWrap(label);
-                        } else {
-                            summary = mContext.getString(R.string.join_many_items_middle, summary,
-                                    bidiFormatter.unicodeWrap(label));
-                        }
+
+                        summaries.add(bidiFormatter.unicodeWrap(label));
                         accountToAdd--;
                     }
                 }
-                mSummaryLoader.setSummary(this, summary);
+                mSummaryLoader.setSummary(this, ListFormatter.getInstance().format(summaries));
             }
         }
     }

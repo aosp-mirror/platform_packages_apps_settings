@@ -17,6 +17,7 @@
 package com.android.settings.applications;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
@@ -31,6 +32,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.PermissionGroupInfo;
 import android.content.pm.PermissionInfo;
+
 import androidx.preference.Preference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -95,21 +97,21 @@ public class AppPermissionsPreferenceControllerTest {
 
         // create permission groups
         when(mPackageManager.getPermissionGroupInfo(eq(PERM_LOCATION), anyInt()))
-            .thenReturn(mGroupLocation);
+                .thenReturn(mGroupLocation);
         when(mGroupLocation.loadLabel(mPackageManager)).thenReturn(LABEL_LOCATION);
         when(mPackageManager.getPermissionGroupInfo(eq(PERM_MICROPHONE), anyInt()))
-            .thenReturn(mGroupMic);
+                .thenReturn(mGroupMic);
         when(mGroupMic.loadLabel(mPackageManager)).thenReturn(LABEL_MICROPHONE);
         when(mPackageManager.getPermissionGroupInfo(eq(PERM_CAMERA), anyInt()))
-            .thenReturn(mGroupCamera);
+                .thenReturn(mGroupCamera);
         when(mGroupCamera.loadLabel(mPackageManager)).thenReturn(LABEL_CAMERA);
         when(mPackageManager.getPermissionGroupInfo(eq(PERM_SMS), anyInt())).thenReturn(mGroupSms);
         when(mGroupSms.loadLabel(mPackageManager)).thenReturn(LABEL_SMS);
         when(mPackageManager.getPermissionGroupInfo(eq(PERM_CONTACTS), anyInt()))
-            .thenReturn(mGroupContacts);
+                .thenReturn(mGroupContacts);
         when(mGroupContacts.loadLabel(mPackageManager)).thenReturn(LABEL_CONTACTS);
         when(mPackageManager.getPermissionGroupInfo(eq(PERM_PHONE), anyInt()))
-            .thenReturn(mGroupPhone);
+                .thenReturn(mGroupPhone);
         when(mGroupPhone.loadLabel(mPackageManager)).thenReturn(LABEL_PHONE);
 
         // create permissions
@@ -139,7 +141,7 @@ public class AppPermissionsPreferenceControllerTest {
         permissions.add(mPermContacts);
         permissions.add(mPermPhone);
         when(mPackageManager.queryPermissionsByGroup(anyString(), anyInt()))
-            .thenReturn(permissions);
+                .thenReturn(permissions);
 
         mController = spy(new AppPermissionsPreferenceController(mContext));
     }
@@ -155,7 +157,7 @@ public class AppPermissionsPreferenceControllerTest {
         final PackageInfo info = new PackageInfo();
         installedPackages.add(info);
         when(mPackageManager.getInstalledPackages(PackageManager.GET_PERMISSIONS))
-            .thenReturn(installedPackages);
+                .thenReturn(installedPackages);
 
         mController.updateState(mPreference);
 
@@ -168,7 +170,7 @@ public class AppPermissionsPreferenceControllerTest {
         final PackageInfo info = new PackageInfo();
         installedPackages.add(info);
         when(mPackageManager.getInstalledPackages(PackageManager.GET_PERMISSIONS))
-            .thenReturn(installedPackages);
+                .thenReturn(installedPackages);
         PermissionInfo[] permissions = new PermissionInfo[4];
         info.permissions = permissions;
 
@@ -177,33 +179,38 @@ public class AppPermissionsPreferenceControllerTest {
         permissions[2] = mPermCamera;
         permissions[3] = mPermSms;
         mController.updateState(mPreference);
-        verify(mPreference).setSummary("Apps using location, microphone, camera");
+
+        verify(mPreference).setSummary("Apps using location, microphone, and camera");
 
         permissions[0] = mPermPhone;
         permissions[1] = mPermMic;
         permissions[2] = mPermCamera;
         permissions[3] = mPermSms;
         mController.updateState(mPreference);
-        verify(mPreference).setSummary("Apps using microphone, camera, sms");
+
+        verify(mPreference).setSummary("Apps using microphone, camera, and sms");
 
         permissions[0] = mPermPhone;
         permissions[1] = mPermMic;
         permissions[2] = mPermContacts;
         permissions[3] = mPermSms;
         mController.updateState(mPreference);
-        verify(mPreference).setSummary("Apps using microphone, sms, contacts");
+
+        verify(mPreference).setSummary("Apps using microphone, sms, and contacts");
 
         permissions = new PermissionInfo[2];
         info.permissions = permissions;
         permissions[0] = mPermLocation;
         permissions[1] = mPermCamera;
         mController.updateState(mPreference);
-        verify(mPreference).setSummary("Apps using location, camera");
+
+        verify(mPreference).setSummary("Apps using location and camera");
 
         permissions = new PermissionInfo[1];
         info.permissions = permissions;
         permissions[0] = mPermCamera;
         mController.updateState(mPreference);
+
         verify(mPreference).setSummary("Apps using camera");
     }
 }

@@ -19,13 +19,14 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.PermissionGroupInfo;
 import android.content.pm.PermissionInfo;
-import android.text.TextUtils;
+import android.icu.text.ListFormatter;
 import android.util.ArraySet;
 import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -33,7 +34,7 @@ public class AppPermissionsPreferenceController extends BasePreferenceController
 
     private static final String TAG = "AppPermissionPrefCtrl";
     private static final String KEY_APP_PERMISSION_GROUPS = "manage_perms";
-    private static final String[] PERMISSION_GROUPS = new String[] {
+    private static final String[] PERMISSION_GROUPS = new String[]{
             "android.permission-group.LOCATION",
             "android.permission-group.MICROPHONE",
             "android.permission-group.CAMERA",
@@ -64,18 +65,20 @@ public class AppPermissionsPreferenceController extends BasePreferenceController
     public CharSequence getSummary() {
         final Set<String> permissions = getAllPermissionsInGroups();
         Set<String> grantedPermissionGroups = getGrantedPermissionGroups(permissions);
-        CharSequence summary = null;
         int count = 0;
+        final List<String> summaries = new ArrayList<>();
+
         for (String group : PERMISSION_GROUPS) {
             if (!grantedPermissionGroups.contains(group)) {
                 continue;
             }
-            summary = concatSummaryText(summary, group);
+            summaries.add(getPermissionGroupLabel(group).toString().toLowerCase());
             if (++count >= NUM_PERMISSION_TO_USE) {
                 break;
             }
         }
-        return count > 0 ? mContext.getString(R.string.app_permissions_summary, summary) : null;
+        return count > 0 ? mContext.getString(R.string.app_permissions_summary,
+                ListFormatter.getInstance().format(summaries)) : null;
     }
 
     private Set<String> getGrantedPermissionGroups(Set<String> permissions) {
@@ -94,14 +97,6 @@ public class AppPermissionsPreferenceController extends BasePreferenceController
             }
         }
         return grantedPermissionGroups;
-    }
-
-    private CharSequence concatSummaryText(CharSequence currentSummary, String permission) {
-        final String label = getPermissionGroupLabel(permission).toString().toLowerCase();
-        if (TextUtils.isEmpty(currentSummary)) {
-            return label;
-        }
-        return mContext.getString(R.string.join_many_items_middle, currentSummary, label);
     }
 
     private CharSequence getPermissionGroupLabel(String group) {

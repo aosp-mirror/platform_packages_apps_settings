@@ -91,44 +91,51 @@ public class DefaultAppSettingsTest {
         when(defaultBrowser.getDefaultAppLabel()).thenReturn("Browser1");
         when(defaultPhone.getDefaultAppLabel()).thenReturn("Phone1");
         summaryProvider.setListening(true);
-        verify(summaryLoader).setSummary(summaryProvider, "Browser1, Phone1, Sms1");
+
+        verify(summaryLoader).setSummary(summaryProvider, "Browser1, Phone1, and Sms1");
 
         // 2 available
         when(defaultSms.getDefaultAppLabel()).thenReturn(null);
         when(defaultBrowser.getDefaultAppLabel()).thenReturn("Browser1");
         when(defaultPhone.getDefaultAppLabel()).thenReturn("Phone1");
         summaryProvider.setListening(true);
-        verify(summaryLoader).setSummary(summaryProvider, "Browser1, Phone1");
+
+        verify(summaryLoader).setSummary(summaryProvider, "Browser1 and Phone1");
 
         when(defaultSms.getDefaultAppLabel()).thenReturn("Sms1");
         when(defaultBrowser.getDefaultAppLabel()).thenReturn(null);
         when(defaultPhone.getDefaultAppLabel()).thenReturn("Phone1");
         summaryProvider.setListening(true);
-        verify(summaryLoader).setSummary(summaryProvider, "Phone1, Sms1");
+
+        verify(summaryLoader).setSummary(summaryProvider, "Phone1 and Sms1");
 
         when(defaultSms.getDefaultAppLabel()).thenReturn("Sms1");
         when(defaultBrowser.getDefaultAppLabel()).thenReturn("Browser1");
         when(defaultPhone.getDefaultAppLabel()).thenReturn(null);
         summaryProvider.setListening(true);
-        verify(summaryLoader).setSummary(summaryProvider, "Phone1, Sms1");
+
+        verify(summaryLoader).setSummary(summaryProvider, "Browser1 and Sms1");
 
         // 1 available
         when(defaultSms.getDefaultAppLabel()).thenReturn(null);
         when(defaultBrowser.getDefaultAppLabel()).thenReturn("Browser1");
         when(defaultPhone.getDefaultAppLabel()).thenReturn(null);
         summaryProvider.setListening(true);
+
         verify(summaryLoader).setSummary(summaryProvider, "Browser1");
 
         when(defaultSms.getDefaultAppLabel()).thenReturn("Sms1");
         when(defaultBrowser.getDefaultAppLabel()).thenReturn(null);
         when(defaultPhone.getDefaultAppLabel()).thenReturn(null);
         summaryProvider.setListening(true);
+
         verify(summaryLoader).setSummary(summaryProvider, "Sms1");
 
         when(defaultSms.getDefaultAppLabel()).thenReturn(null);
         when(defaultBrowser.getDefaultAppLabel()).thenReturn(null);
         when(defaultPhone.getDefaultAppLabel()).thenReturn("Phone1");
         summaryProvider.setListening(true);
+
         verify(summaryLoader).setSummary(summaryProvider, "Phone1");
 
         // None available
@@ -136,6 +143,7 @@ public class DefaultAppSettingsTest {
         when(defaultBrowser.getDefaultAppLabel()).thenReturn(null);
         when(defaultPhone.getDefaultAppLabel()).thenReturn(null);
         summaryProvider.setListening(true);
+
         verify(summaryLoader, never()).setSummary(summaryProvider, eq(anyString()));
 
     }
