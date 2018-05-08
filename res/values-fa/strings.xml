@@ -835,7 +835,7 @@
     <string name="wifi_status" msgid="4824568012414605414">"وضعیت"</string>
     <string name="wifi_speed" msgid="3526198708812322037">"سرعت پیوند"</string>
     <string name="wifi_frequency" msgid="7791090119577812214">"فرکانس"</string>
-    <string name="wifi_ip_address" msgid="1440054061044402918">"‏آدرس IP"</string>
+    <string name="wifi_ip_address" msgid="1440054061044402918">"‏نشانی IP"</string>
     <string name="passpoint_label" msgid="6381371313076009926">"ذخیره از طریق"</string>
     <string name="passpoint_content" msgid="8447207162397870483">"اعتبارنامه‌های <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="wifi_eap_method" msgid="8529436133640730382">"‏روش EAP"</string>
@@ -901,7 +901,7 @@
     </plurals>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"‏Wi-Fi پیشرفته"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"‏آدرس MAC"</string>
-    <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"‏آدرس IP"</string>
+    <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"‏نشانی IP"</string>
     <string name="wifi_details_title" msgid="8954667664081737098">"جزئیات شبکه"</string>
     <string name="wifi_details_subnet_mask" msgid="6720279144174924410">"پوشش زیرشبکه"</string>
     <string name="wifi_details_dns" msgid="8648826607751830768">"DNS"</string>
@@ -911,7 +911,7 @@
     <string name="wifi_advanced_not_available" msgid="5823045095444154586">"‏تنظیمات پیشرفته Wi‑Fi برای این کاربر در دسترس نیست"</string>
     <string name="wifi_ip_settings_menu_save" msgid="7296724066102908366">"ذخیره"</string>
     <string name="wifi_ip_settings_menu_cancel" msgid="6582567330136502340">"لغو"</string>
-    <string name="wifi_ip_settings_invalid_ip_address" msgid="2513142355364274970">"‏یک آدرس IP معتبر تایپ کنید."</string>
+    <string name="wifi_ip_settings_invalid_ip_address" msgid="2513142355364274970">"‏نشانی IP معتبری تایپ کنید."</string>
     <string name="wifi_ip_settings_invalid_gateway" msgid="8164264988361096450">"یک آدرس دروازه معتبر را تایپ کنید."</string>
     <string name="wifi_ip_settings_invalid_dns" msgid="8744583948328391047">"‏یک آدرس DNS معتبر را تایپ کنید."</string>
     <string name="wifi_ip_settings_invalid_network_prefix_length" msgid="40470058023181052">"یک پیشوند شبکه با طول بین 0 تا 32 نویسه تایپ کنید."</string>
@@ -2703,7 +2703,7 @@
     <string name="vpn_require_connection_title" msgid="159053539340576331">"‏به اتصال VPN‌ نیاز است؟"</string>
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"‏یک نمایه VPN انتخاب کنید تا همیشه متصل بمانید. فقط درصورتی‌که به این VPN متصل باشید ترافیک شبکه مجاز خواهد بود."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"هیچ‌کدام"</string>
-    <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"‏VPN همیشه فعال به یک آدرس IP برای سرور و DNS نیاز دارد."</string>
+    <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"‏VPN همیشه‌فعال به نشانی IP برای DNS و سرور نیاز دارد."</string>
     <string name="vpn_no_network" msgid="3050233675132726155">"اتصال شبکه موجود نیست. لطفاً دوباره امتحان کنید."</string>
     <string name="vpn_disconnected" msgid="280531508768927471">"‏ارتباط VPN قطع شد"</string>
     <string name="vpn_disconnected_summary" msgid="3082851661207900606">"هیچ‌کدام"</string>
@@ -3075,15 +3075,21 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: ‏<xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"مسدود کردن مزاحمت‌های بصری"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"مجاز کردن همه سیگنال‌های تصویری"</string>
-    <string name="zen_mode_restrict_notifications_screen_title" msgid="9027437428488279426">"اعلان‌های محدود‌شده"</string>
+    <!-- no translation found for zen_mode_settings_category (3982039687186952865) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"اعلان‌ها"</string>
-    <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"وقتی «مزاحم نشوید» روشن باشد"</string>
-    <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"بی‌صدا کردن اعلان‌"</string>
-    <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"نشان دادن اعلان‌، اما بی‌صدا و لرزش"</string>
-    <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"هنگام دریافت اعلان‌، تلفنتان صدا نمی‌دهد یا نمی‌لرزد"</string>
-    <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"پنهان و بی‌صدا کردن اعلان‌ها"</string>
-    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"اعلان‌ به‌هیچ‌وجه نشان داده نخواهد شد"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"وقتی «مزاحم نشوید» روشن باشد، اعلان‌های جدید یا موجود را نمی‌بینید. درهرحال، اعلان‌های لازم برای وضعیت و فعالیت اصلی تلفن همچنان نشان داده می‌شود."</string>
+    <!-- no translation found for zen_mode_restrict_notifications_mute (8649062661635246283) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_mute_summary (8450964969807231275) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_mute_footer (3465600930732602159) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_hide (9070829387109283980) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_hide_summary (3832808022882158781) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_hide_footer (6559283246372102465) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"سفارشی"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"فعال کردن تنظیم سفارشی"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"حذف تنظیم سفارشی"</string>
@@ -3135,13 +3141,40 @@
       <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> قانون می‌تواند به‌طور خودکار روشن شود</item>
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> قانون می‌تواند به‌طور خودکار روشن شود</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"تأیید"</string>
+    <!-- no translation found for zen_category_behavior (2989256030084350296) -->
+    <skip />
+    <!-- no translation found for zen_category_exceptions (7601136604273265629) -->
+    <skip />
+    <!-- no translation found for zen_category_schedule (9000447592251450453) -->
+    <skip />
+    <!-- no translation found for zen_sound_title (424490228488531372) -->
+    <skip />
+    <!-- no translation found for zen_sound_footer (7621745273287208979) -->
+    <skip />
+    <!-- no translation found for zen_sound_category_title (4336596939661729188) -->
+    <skip />
+    <!-- no translation found for zen_sound_all_muted (4850363350480968114) -->
+    <skip />
+    <!-- no translation found for zen_sound_none_muted (3938508512103612527) -->
+    <skip />
+    <!-- no translation found for zen_sound_one_allowed (8447313454438932276) -->
+    <skip />
+    <!-- no translation found for zen_sound_two_allowed (980491120444358550) -->
+    <skip />
+    <!-- no translation found for zen_sound_three_allowed (3455767205934547985) -->
+    <skip />
+    <!-- no translation found for zen_msg_event_reminder_title (5137894077488924820) -->
+    <skip />
+    <!-- no translation found for zen_msg_event_reminder_footer (3242847055412790819) -->
+    <skip />
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"به‌روزرسانی"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"به‌روزرسانی نشود"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"تلفنتان می‌تواند کارهای بیشتری برای کمک به تمرکز کردن شما انجام دهد.\n\nتنظیمات را به‌روزرسانی کنید:\n\n- پنهان کردن کامل اعلان‌ها\n\n- اجازه دادن به تماس‌های مخاطبین ستاره‌دار و تماس‌گیرندگانی که ظرف ۱۵ دقیقه دو بار تماس گرفته‌اند"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"«مزاحم نشوید» به‌روزرسانی شود؟"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"تنظیمات"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"در «تنظیمات» می‌توانید سفارشی‌سازی بیشتری انجام دهید."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"مسدود کردن وقتی صفحه روشن است"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"مسدود کردن وقتی صفحه خاموش است"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"«مزاحم نشوید» می‌تواند کارهای بیشتری از مسدود کردن صداهای ناخواسته انجام دهد - این ویژگی می‌تواند موارد تصویری را هم مسدود کند. هنگام تلاش برای خوابیدن، تمرکز کردن یا محدود کردن زمانی که صرف استفاده از تلفن می‌کنید، این ویژگی می‌تواند مفید باشد."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"مسدود کردن صداها و موارد تصویری"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"با دریافت اعلان صفحه روشن نشود یا دستگاه بیدار نشود"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"هیچ اعلانی نشان داده نشود، به‌جز فعالیت و وضعیت پایه تلفن"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"صداهای نمایه کاری"</string>
@@ -3312,21 +3345,39 @@
     <string name="summary_range_symbol_combination" msgid="5695218513421897027">"<xliff:g id="START">%1$s</xliff:g> ‏- <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"<xliff:g id="START">%1$s</xliff:g> تا <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_calls" msgid="7051492091133751208">"تماس‌ها"</string>
+    <!-- no translation found for zen_mode_calls_footer (3618700268458237781) -->
+    <skip />
     <string name="zen_mode_messages" msgid="5886440273537510894">"پیام‌ها"</string>
-    <string name="zen_mode_all_messages" msgid="6449223378976743208">"همه پیام‌ها"</string>
-    <string name="zen_mode_selected_messages" msgid="8245990149599142281">"پیام‌های انتخاب شده"</string>
+    <!-- no translation found for zen_mode_all_messages (8257021584561639816) -->
+    <skip />
+    <!-- no translation found for zen_mode_selected_messages (1047355526202106114) -->
+    <skip />
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"از هر کسی"</string>
     <string name="zen_mode_from_contacts" msgid="2232335406106711637">"تنها از مخاطبین"</string>
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"تنها از مخاطین ستاره‌دار"</string>
+    <!-- no translation found for zen_calls_summary_starred_repeat (4046151920710059778) -->
+    <skip />
+    <!-- no translation found for zen_calls_summary_contacts_repeat (1528716671301999084) -->
+    <skip />
+    <!-- no translation found for zen_calls_summary_repeat_only (7105261473107715445) -->
+    <skip />
     <string name="zen_mode_from_none" msgid="8219706639954614136">"هیچ‌کدام"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"هشدارها"</string>
     <string name="zen_mode_media" msgid="8808264142134422380">"رسانه"</string>
     <string name="zen_mode_system" msgid="2541380718411593581">"صداهای لمس"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"یادآوری‌ها"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"رویدادها"</string>
-    <string name="zen_mode_all_callers" msgid="584186167367236922">"همه تماس‌گیرندگان"</string>
-    <string name="zen_mode_selected_callers" msgid="3127598874060615742">"تماس‌گیرنده‌های انتخاب شده"</string>
+    <!-- no translation found for zen_mode_all_callers (2378065871253871057) -->
+    <skip />
+    <!-- no translation found for zen_mode_contacts_callers (5569804103920394175) -->
+    <skip />
+    <!-- no translation found for zen_mode_starred_callers (1023167821338514140) -->
+    <skip />
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"تماس‌گیرنده‌های تکراری"</string>
+    <!-- no translation found for zen_mode_calls_summary_one (2867689575419791866) -->
+    <skip />
+    <!-- no translation found for zen_mode_calls_summary_two (6592821501321201329) -->
+    <skip />
     <string name="zen_mode_repeat_callers_summary" msgid="239685342222975733">"اگر فردی در طول یک دوره <xliff:g id="MINUTES">%d</xliff:g> دقیقه‌ای، برای بار دوم تماس بگیرد"</string>
     <string name="zen_mode_behavior_summary_custom" msgid="168127313238020146">"سفارشی"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"روشن شدن خودکار"</string>
@@ -3672,7 +3723,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"پشتیبان‌گیری غیرفعال است"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"‏به‌روزرسانی‌شده به Android نسخه <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"به‌روزرسانی در دسترس است"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"تغییر این تنظیم ممکن نیست"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"عملکرد مجاز نیست"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"نمی‌توان بلندی صدا را تغییر داد"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"برقراری تماس تلفنی مجاز نیست"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"استفاده از پیامک مجاز نیست"</string>
@@ -3862,7 +3913,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"کنترل اطلاعات روی صفحه درحالت قفل"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"نمایش یا پنهان کردن محتوای اعلان"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"همه"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"پشتیبانی و نکته‌ها"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"کوچک‌ترین عرض"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"هیچ برنامه نصب‌شده‌ای دسترسی به پیامک ممتاز را درخواست نکرده است"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"ممکن است استفاده از «پیامک ممتاز» برای شما هزینه داشته باشد و مبلغ صورت‌حساب‌های شرکت مخابراتی‌تان را افزایش دهد. اگر مجوز را برای برنامه‌ای فعال کنید، می‌توانید با استفاده از آن برنامه پیامک ممتاز ارسال کنید."</string>
