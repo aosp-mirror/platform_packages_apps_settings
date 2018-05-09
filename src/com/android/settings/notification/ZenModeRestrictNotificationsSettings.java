@@ -68,7 +68,6 @@ public class ZenModeRestrictNotificationsSettings extends ZenModeSettingsBase im
             custom.displayPreference(getPreferenceScreen());
 
             if (mShowMenuSelected) {
-                custom.select();
                 metrics.action(mContext, ACTION_ZEN_SHOW_CUSTOM, true);
             } else {
                 metrics.action(mContext, ACTION_ZEN_SHOW_CUSTOM, false);
