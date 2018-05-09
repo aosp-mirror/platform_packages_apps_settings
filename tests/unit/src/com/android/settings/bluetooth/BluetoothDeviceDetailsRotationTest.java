@@ -89,7 +89,7 @@ public class BluetoothDeviceDetailsRotationTest {
         args.putString(BluetoothDeviceDetailsFragment.KEY_DEVICE_ADDRESS, mDeviceAddress);
         new SubSettingLauncher(activity)
                 .setDestination(BluetoothDeviceDetailsFragment.class.getName())
-                .setTitle("test")
+                .setTitleText("test")
                 .setArguments(args)
                 .setSourceMetricsCategory(Instrumentable.METRICS_CATEGORY_UNKNOWN)
                 .launch();

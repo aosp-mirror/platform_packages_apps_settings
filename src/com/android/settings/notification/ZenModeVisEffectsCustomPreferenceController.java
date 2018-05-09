@@ -59,7 +59,7 @@ public class ZenModeVisEffectsCustomPreferenceController
         pref.setOnGearClickListener(p -> {
             new SubSettingLauncher(mContext)
                     .setDestination(ZenModeBlockedEffectsSettings.class.getName())
-                    .setTitle(R.string.zen_mode_what_to_block_title)
+                    .setTitleRes(R.string.zen_mode_what_to_block_title)
                     .setSourceMetricsCategory(MetricsProto.MetricsEvent.SETTINGS_ZEN_NOTIFICATIONS)
                     .launch();
         });

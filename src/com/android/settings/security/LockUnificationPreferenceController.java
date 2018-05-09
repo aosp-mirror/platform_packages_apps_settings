@@ -157,7 +157,7 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
         extras.putInt(Intent.EXTRA_USER_ID, mProfileChallengeUserId);
         new SubSettingLauncher(mContext)
                 .setDestination(ChooseLockGeneric.ChooseLockGenericFragment.class.getName())
-                    .setTitle(R.string.lock_settings_picker_title_profile)
+                    .setTitleRes(R.string.lock_settings_picker_title_profile)
                 .setSourceMetricsCategory(mHost.getMetricsCategory())
                 .setArguments(extras)
                 .launch();
@@ -213,7 +213,7 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
                 mCurrentProfilePassword);
         new SubSettingLauncher(mContext)
                 .setDestination(ChooseLockGeneric.ChooseLockGenericFragment.class.getName())
-                .setTitle(R.string.lock_settings_picker_title)
+                .setTitleRes(R.string.lock_settings_picker_title)
                 .setSourceMetricsCategory(mHost.getMetricsCategory())
                 .launch();
     }

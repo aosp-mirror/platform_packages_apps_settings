@@ -670,14 +670,14 @@ public class ManageApplications extends InstrumentedFragment
                 if (mListType == LIST_TYPE_NOTIFICATION) {
                     new SubSettingLauncher(getContext())
                             .setDestination(ConfigureNotificationSettings.class.getName())
-                            .setTitle(R.string.configure_notification_settings)
+                            .setTitleRes(R.string.configure_notification_settings)
                             .setSourceMetricsCategory(getMetricsCategory())
                             .setResultListener(this, ADVANCED_SETTINGS)
                             .launch();
                 } else {
                     new SubSettingLauncher(getContext())
                             .setDestination(DefaultAppSettings.class.getName())
-                            .setTitle(R.string.configure_apps)
+                            .setTitleRes(R.string.configure_apps)
                             .setSourceMetricsCategory(getMetricsCategory())
                             .setResultListener(this, ADVANCED_SETTINGS)
                             .launch();

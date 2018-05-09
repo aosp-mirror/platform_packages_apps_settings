@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge;
 
 import android.app.AppOpsManager;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -31,7 +30,6 @@ import android.util.IconDrawableFactory;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.SubSettingLauncher;
@@ -75,7 +73,7 @@ public class RestrictedAppDetails extends DashboardFragment {
         new SubSettingLauncher(fragment.getContext())
                 .setDestination(RestrictedAppDetails.class.getName())
                 .setArguments(args)
-                .setTitle(R.string.restricted_app_title)
+                .setTitleRes(R.string.restricted_app_title)
                 .setSourceMetricsCategory(fragment.getMetricsCategory())
                 .launch();
     }

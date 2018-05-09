@@ -161,7 +161,7 @@ public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutL
         new SubSettingLauncher(getContext())
                 .setDestination(MasterClearConfirm.class.getName())
                 .setArguments(args)
-                .setTitle(R.string.master_clear_confirm_title)
+                .setTitleRes(R.string.master_clear_confirm_title)
                 .setSourceMetricsCategory(getMetricsCategory())
                 .launch();
     }

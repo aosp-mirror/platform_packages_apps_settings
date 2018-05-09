@@ -321,7 +321,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                 ManageApplications.STORAGE_TYPE_PHOTOS_VIDEOS);
         return new SubSettingLauncher(mContext)
                 .setDestination(ManageApplications.class.getName())
-                .setTitle(R.string.storage_photos_videos)
+                .setTitleRes(R.string.storage_photos_videos)
                 .setArguments(args)
                 .setSourceMetricsCategory(mMetricsFeatureProvider.getMetricsCategory(mFragment))
                 .toIntent();
@@ -340,7 +340,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         args.putInt(ManageApplications.EXTRA_STORAGE_TYPE, ManageApplications.STORAGE_TYPE_MUSIC);
         return new SubSettingLauncher(mContext)
                 .setDestination(ManageApplications.class.getName())
-                .setTitle(R.string.storage_music_audio)
+                .setTitleRes(R.string.storage_music_audio)
                 .setArguments(args)
                 .setSourceMetricsCategory(mMetricsFeatureProvider.getMetricsCategory(mFragment))
                 .toIntent();
@@ -357,7 +357,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         args.putString(ManageApplications.EXTRA_VOLUME_NAME, mVolume.getDescription());
         return new SubSettingLauncher(mContext)
                 .setDestination(ManageApplications.class.getName())
-                .setTitle(R.string.apps_storage)
+                .setTitleRes(R.string.apps_storage)
                 .setArguments(args)
                 .setSourceMetricsCategory(mMetricsFeatureProvider.getMetricsCategory(mFragment))
                 .toIntent();
@@ -369,7 +369,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                 Settings.GamesStorageActivity.class.getName());
         return new SubSettingLauncher(mContext)
                 .setDestination(ManageApplications.class.getName())
-                .setTitle(R.string.game_storage_settings)
+                .setTitleRes(R.string.game_storage_settings)
                 .setArguments(args)
                 .setSourceMetricsCategory(mMetricsFeatureProvider.getMetricsCategory(mFragment))
                 .toIntent();
@@ -381,7 +381,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                 Settings.MoviesStorageActivity.class.getName());
         return new SubSettingLauncher(mContext)
                 .setDestination(ManageApplications.class.getName())
-                .setTitle(R.string.storage_movies_tv)
+                .setTitleRes(R.string.storage_movies_tv)
                 .setArguments(args)
                 .setSourceMetricsCategory(mMetricsFeatureProvider.getMetricsCategory(mFragment))
                 .toIntent();

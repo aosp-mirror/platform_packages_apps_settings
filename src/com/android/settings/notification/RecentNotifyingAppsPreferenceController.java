@@ -220,7 +220,7 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
 
             pref.setIntent(new SubSettingLauncher(mHost.getActivity())
                     .setDestination(AppNotificationSettings.class.getName())
-                    .setTitle(R.string.notifications_title)
+                    .setTitleRes(R.string.notifications_title)
                     .setArguments(args)
                     .setSourceMetricsCategory(
                             MetricsProto.MetricsEvent.MANAGE_APPLICATIONS_NOTIFICATIONS)

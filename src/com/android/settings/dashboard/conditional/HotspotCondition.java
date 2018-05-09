@@ -103,7 +103,7 @@ public class HotspotCondition extends Condition {
         new SubSettingLauncher(mManager.getContext())
                 .setDestination(TetherSettings.class.getName())
                 .setSourceMetricsCategory(MetricsEvent.DASHBOARD_SUMMARY)
-                .setTitle(R.string.tether_settings_title_all)
+                .setTitleRes(R.string.tether_settings_title_all)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 .launch();
     }

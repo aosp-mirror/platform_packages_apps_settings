@@ -72,7 +72,7 @@ public class BrandedAccountPreferenceController extends BasePreferenceController
 
             new SubSettingLauncher(mContext)
                     .setDestination(AccountDetailDashboardFragment.class.getName())
-                    .setTitle(R.string.account_sync_title)
+                    .setTitleRes(R.string.account_sync_title)
                     .setArguments(args)
                     .setSourceMetricsCategory(MetricsEvent.DEVICEINFO)
                     .launch();

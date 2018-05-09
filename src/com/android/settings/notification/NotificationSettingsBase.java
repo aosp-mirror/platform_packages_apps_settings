@@ -20,7 +20,6 @@ import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
-import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
@@ -286,7 +285,7 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
         channelPref.setIntent(new SubSettingLauncher(getActivity())
                 .setDestination(ChannelNotificationSettings.class.getName())
                 .setArguments(channelArgs)
-                .setTitle(R.string.notification_channel_title)
+                .setTitleRes(R.string.notification_channel_title)
                 .setSourceMetricsCategory(getMetricsCategory())
                 .toIntent());
 

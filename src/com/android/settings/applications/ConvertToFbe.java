@@ -83,7 +83,7 @@ public class ConvertToFbe extends InstrumentedFragment {
     private void convert() {
         new SubSettingLauncher(getContext())
                 .setDestination(ConfirmConvertToFbe.class.getName())
-                .setTitle(R.string.convert_to_file_encryption)
+                .setTitleRes(R.string.convert_to_file_encryption)
                 .setSourceMetricsCategory(getMetricsCategory())
                 .launch();
     }

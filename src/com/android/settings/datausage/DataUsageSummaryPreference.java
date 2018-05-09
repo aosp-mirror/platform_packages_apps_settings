@@ -207,7 +207,7 @@ public class DataUsageSummaryPreference extends Preference {
                 .setArguments(args)
                 .setDestination(DataUsageList.class.getName())
                 .setSourceMetricsCategory(MetricsProto.MetricsEvent.VIEW_UNKNOWN);
-        launcher.setTitle(context.getString(R.string.wifi_data_usage));
+        launcher.setTitleRes(R.string.wifi_data_usage);
         launcher.launch();
     }
 

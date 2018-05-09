@@ -250,7 +250,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
                 new SubSettingLauncher(mContext)
                         .setSourceMetricsCategory(mParent.getMetricsCategory())
                         .setDestination(ManagedProfileSettings.class.getName())
-                        .setTitle(R.string.managed_profile_settings_title)
+                        .setTitleRes(R.string.managed_profile_settings_title)
                         .setArguments(arguments)
                         .launch();
 

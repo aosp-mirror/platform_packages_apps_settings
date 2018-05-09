@@ -107,7 +107,7 @@ public class AccountTypePreference extends AppPreference implements OnPreference
             new SubSettingLauncher(getContext())
                     .setDestination(mFragment)
                     .setArguments(mFragmentArguments)
-                    .setTitle(mTitleResPackageName, mTitleResId)
+                    .setTitleRes(mTitleResPackageName, mTitleResId)
                     .setSourceMetricsCategory(mMetricsCategory)
                     .launch();
             return true;

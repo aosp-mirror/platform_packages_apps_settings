@@ -914,7 +914,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     private void launchNetworkDetailsFragment(ConnectedAccessPointPreference pref) {
         new SubSettingLauncher(getContext())
-                .setTitle(R.string.pref_title_network_details)
+                .setTitleRes(R.string.pref_title_network_details)
                 .setDestination(WifiNetworkDetailsFragment.class.getName())
                 .setArguments(pref.getExtras())
                 .setSourceMetricsCategory(getMetricsCategory())
@@ -973,7 +973,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         final LinkifyUtils.OnClickListener clickListener =
                 () -> new SubSettingLauncher(getContext())
                         .setDestination(ScanningSettings.class.getName())
-                        .setTitle(R.string.location_scanning_screen_title)
+                        .setTitleRes(R.string.location_scanning_screen_title)
                         .setSourceMetricsCategory(getMetricsCategory())
                         .launch();
         mStatusMessagePreference.setText(title, description, clickListener);

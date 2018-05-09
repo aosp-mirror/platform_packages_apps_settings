@@ -52,7 +52,7 @@ public class WallpaperSuggestionActivity extends Activity {
         // fall back to default wallpaper picker
         new SubSettingLauncher(this)
                 .setDestination(WallpaperTypeSettings.class.getName())
-                .setTitle(R.string.wallpaper_suggestion_title)
+                .setTitleRes(R.string.wallpaper_suggestion_title)
                 .setSourceMetricsCategory(MetricsProto.MetricsEvent.DASHBOARD_SUMMARY)
                 .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
                 .launch();

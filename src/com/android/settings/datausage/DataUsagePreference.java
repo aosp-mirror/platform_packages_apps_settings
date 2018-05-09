@@ -83,15 +83,15 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
                 .setSourceMetricsCategory(MetricsProto.MetricsEvent.VIEW_UNKNOWN);
         if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.DATA_USAGE_SETTINGS_V2)) {
             if (mTemplate.isMatchRuleMobile()) {
-                launcher.setTitle(R.string.app_cellular_data_usage);
+                launcher.setTitleRes(R.string.app_cellular_data_usage);
             } else {
-                launcher.setTitle(mTitleRes);
+                launcher.setTitleRes(mTitleRes);
             }
         } else {
             if (mTitleRes > 0) {
-                launcher.setTitle(mTitleRes);
+                launcher.setTitleRes(mTitleRes);
             } else {
-                launcher.setTitle(getTitle());
+                launcher.setTitleText(getTitle());
             }
         }
         return launcher.toIntent();

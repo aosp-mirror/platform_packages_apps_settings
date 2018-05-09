@@ -238,7 +238,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
                 new SubSettingLauncher(getActivity())
                         .setDestination(StorageDashboardFragment.class.getName())
                         .setArguments(args)
-                        .setTitle(R.string.storage_settings)
+                        .setTitleRes(R.string.storage_settings)
                         .setSourceMetricsCategory(getMetricsCategory())
                         .launch();
                 finish();
@@ -285,7 +285,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
                 if (VolumeInfo.ID_PRIVATE_INTERNAL.equals(vol.getId())) {
                     new SubSettingLauncher(getContext())
                             .setDestination(StorageDashboardFragment.class.getCanonicalName())
-                            .setTitle(R.string.storage_settings)
+                            .setTitleRes(R.string.storage_settings)
                             .setSourceMetricsCategory(getMetricsCategory())
                             .setArguments(args)
                             .launch();
@@ -296,7 +296,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
                             sTotalInternalStorage));
                     new SubSettingLauncher(getContext())
                             .setDestination(PrivateVolumeSettings.class.getCanonicalName())
-                            .setTitle(-1)
+                            .setTitleRes(-1)
                             .setSourceMetricsCategory(getMetricsCategory())
                             .setArguments(args)
                             .launch();
@@ -319,7 +319,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
             args.putString(VolumeRecord.EXTRA_FS_UUID, key);
             new SubSettingLauncher(getContext())
                     .setDestination(PrivateVolumeForget.class.getCanonicalName())
-                    .setTitle(R.string.storage_menu_forget)
+                    .setTitleRes(R.string.storage_menu_forget)
                     .setSourceMetricsCategory(getMetricsCategory())
                     .setArguments(args)
                     .launch();
@@ -340,7 +340,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
             args.putString(VolumeInfo.EXTRA_VOLUME_ID, vol.getId());
             new SubSettingLauncher(context)
                     .setDestination(PublicVolumeSettings.class.getCanonicalName())
-                    .setTitle(-1)
+                    .setTitleRes(-1)
                     .setSourceMetricsCategory(METRICS_CATEGORY)
                     .setArguments(args)
                     .launch();
