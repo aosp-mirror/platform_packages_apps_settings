@@ -78,7 +78,7 @@ public class NewDeviceIntroSuggestionActivityTest {
         final long currentTime = System.currentTimeMillis();
 
         getSharedPreferences().edit().putLong(PREF_KEY_SUGGGESTION_FIRST_DISPLAY_TIME,
-                currentTime - 2 * PERMANENT_DISMISS_THRESHOLD);
+                currentTime - 2 * PERMANENT_DISMISS_THRESHOLD).commit();
         assertThat(isSuggestionComplete(mContext)).isTrue();
     }
 

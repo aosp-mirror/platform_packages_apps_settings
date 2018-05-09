@@ -29,6 +29,12 @@ import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_SCREEN_OF
 import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_SCREEN_ON;
 import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_STATUS_BAR;
 
+import static com.android.settings.notification.ZenOnboardingActivity.ALWAYS_SHOW_THRESHOLD;
+import static com.android.settings.notification.ZenOnboardingActivity.PREF_KEY_SUGGESTION_VIEWED;
+import static com.android.settings.notification.ZenOnboardingActivity
+        .PREF_KEY_SUGGGESTION_FIRST_DISPLAY_TIME;
+import static com.android.settings.notification.ZenOnboardingActivity.isSuggestionComplete;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -39,20 +45,22 @@ import static org.mockito.Mockito.when;
 import android.app.NotificationManager;
 import android.app.NotificationManager.Policy;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.provider.Settings;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.R;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ZenOnboardingActivityTest {
@@ -63,6 +71,9 @@ public class ZenOnboardingActivityTest {
     NotificationManager mNm;
 
     ZenOnboardingActivity mActivity;
+
+    private Context mContext;
+    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
@@ -75,6 +86,11 @@ public class ZenOnboardingActivityTest {
         mActivity.setMetricsLogger(mMetricsLogger);
 
         mActivity.setupUI();
+
+        mContext = RuntimeEnvironment.application;
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
+        when(mFeatureFactory.suggestionsFeatureProvider.getSharedPrefs(any(Context.class)))
+                .thenReturn(getSharedPreferences());
     }
 
     @Test
@@ -123,5 +139,74 @@ public class ZenOnboardingActivityTest {
         verify(mMetricsLogger).action(MetricsEvent.ACTION_ZEN_ONBOARDING_KEEP_CURRENT_SETTINGS);
 
         verify(mNm, never()).setNotificationPolicy(any());
+    }
+
+    @Test
+    public void isSuggestionComplete_zenUpdated() {
+        setZenUpdated(true);
+        setShowSettingsSuggestion(false);
+        setWithinTimeThreshold(true);
+        assertThat(isSuggestionComplete(mContext)).isTrue();
+    }
+
+    @Test
+    public void isSuggestionComplete_withinTimeThreshold() {
+        setZenUpdated(false);
+        setShowSettingsSuggestion(false);
+        setWithinTimeThreshold(true);
+        assertThat(isSuggestionComplete(mContext)).isFalse();
+    }
+
+    @Test
+    public void isSuggestionComplete_showSettingsSuggestionTrue() {
+        setZenUpdated(false);
+        setShowSettingsSuggestion(true);
+        setWithinTimeThreshold(false);
+        assertThat(isSuggestionComplete(mContext)).isFalse();
+    }
+
+    @Test
+    public void isSuggestionComplete_showSettingsSuggestionFalse_notWithinTimeThreshold() {
+        setZenUpdated(false);
+        setShowSettingsSuggestion(false);
+        setWithinTimeThreshold(false);
+        assertThat(isSuggestionComplete(mContext)).isTrue();
+    }
+
+    private void setZenUpdated(boolean updated) {
+        int zenUpdated = 0;
+        if (updated) {
+            zenUpdated = 1;
+        }
+
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.ZEN_SETTINGS_UPDATED, zenUpdated);
+    }
+
+    private void setWithinTimeThreshold(boolean withinTime) {
+        long firstTime = System.currentTimeMillis();
+
+        if (withinTime) {
+            firstTime -= ALWAYS_SHOW_THRESHOLD / 2;
+        } else {
+            firstTime -= ALWAYS_SHOW_THRESHOLD * 2;
+        }
+
+        getSharedPreferences().edit().putLong(PREF_KEY_SUGGGESTION_FIRST_DISPLAY_TIME,
+               firstTime).commit();
+    }
+
+    private void setShowSettingsSuggestion(boolean show) {
+        int showZenSuggestion = 0;
+        if (show) {
+            showZenSuggestion = 1;
+        }
+
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.SHOW_ZEN_SETTINGS_SUGGESTION, showZenSuggestion);
+    }
+
+    private SharedPreferences getSharedPreferences() {
+        return mContext.getSharedPreferences("test_zen_sugg", Context.MODE_PRIVATE);
     }
 }
