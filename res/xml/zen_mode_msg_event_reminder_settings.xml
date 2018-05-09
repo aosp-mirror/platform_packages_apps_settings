@@ -30,6 +30,10 @@
           android:entries="@array/zen_mode_contacts_entries"
           android:entryValues="@array/zen_mode_contacts_values"/>
 
+      <Preference
+          android:key="zen_mode_starred_contacts_messages"
+          android:title="@string/zen_mode_starred_contacts_title"/>
+
       <!-- Reminders -->
       <SwitchPreference
           android:key="zen_mode_reminders"

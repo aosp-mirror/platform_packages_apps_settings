@@ -30,7 +30,9 @@
           android:entries="@array/zen_mode_contacts_entries"
           android:entryValues="@array/zen_mode_contacts_values"/>
 
-      <!-- TODO: setting that links to contacts or placeholder for external app -->
+      <Preference
+          android:key="zen_mode_starred_contacts_callers"
+          android:title="@string/zen_mode_starred_contacts_title"/>
 
       <!-- Repeat callers -->
       <SwitchPreference

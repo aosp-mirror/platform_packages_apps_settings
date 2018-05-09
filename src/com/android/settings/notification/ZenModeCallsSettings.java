@@ -16,6 +16,8 @@
 
 package com.android.settings.notification;
 
+import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_CALLS;
+
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
@@ -42,8 +44,8 @@ public class ZenModeCallsSettings extends ZenModeSettingsBase implements Indexab
             Lifecycle lifecycle) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new ZenModeCallsPreferenceController(context, lifecycle));
-        // TODO: is a controller needed for a pref that just launches an external activity?
-        // or can the contacts app insert this setting themselves?
+        controllers.add(new ZenModeStarredContactsPreferenceController(context, lifecycle,
+                PRIORITY_CATEGORY_CALLS, "zen_mode_starred_contacts_callers"));
         controllers.add(new ZenModeRepeatCallersPreferenceController(context, lifecycle,
                 context.getResources().getInteger(com.android.internal.R.integer
                 .config_zen_repeat_callers_threshold)));
