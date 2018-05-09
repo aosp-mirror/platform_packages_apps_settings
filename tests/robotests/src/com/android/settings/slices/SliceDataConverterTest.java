@@ -56,7 +56,6 @@ public class SliceDataConverterTest {
     private static final String FAKE_TITLE = "title";
     private static final String FAKE_SUMMARY = "summary";
     private static final String FAKE_SCREEN_TITLE = "screen_title";
-    private static final String FAKE_KEYWORDS = "a, b, c";
     private static final String FAKE_FRAGMENT_CLASSNAME = FakeIndexProvider.class.getName();
     private static final String FAKE_CONTROLLER_NAME = FakePreferenceController.class.getName();
     private static final String ACCESSIBILITY_FRAGMENT = AccessibilitySettings.class.getName();
@@ -118,7 +117,7 @@ public class SliceDataConverterTest {
         assertThat(fakeSlice.getTitle()).isEqualTo(FAKE_TITLE);
         assertThat(fakeSlice.getSummary()).isEqualTo(FAKE_SUMMARY);
         assertThat(fakeSlice.getScreenTitle()).isEqualTo(FAKE_SCREEN_TITLE);
-        assertThat(fakeSlice.getKeywords()).isEqualTo(FAKE_KEYWORDS);
+        assertThat(fakeSlice.getKeywords()).isNull();
         assertThat(fakeSlice.getIconResource()).isNotNull();
         assertThat(fakeSlice.getUri()).isNull();
         assertThat(fakeSlice.getFragmentClassName()).isEqualTo(FAKE_FRAGMENT_CLASSNAME);
