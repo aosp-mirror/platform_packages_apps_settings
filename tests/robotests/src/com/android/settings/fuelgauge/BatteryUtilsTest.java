@@ -581,18 +581,6 @@ public class BatteryUtilsTest {
     }
 
     @Test
-    public void testIsAppHeavilyUsed_usageMoreThanThreshold_returnTrue() {
-        assertThat(mBatteryUtils.isAppHeavilyUsed(mBatteryStatsHelper, mUserManager, UID,
-                10 /* threshold */ )).isTrue();
-    }
-
-    @Test
-    public void testIsAppHeavilyUsed_usageLessThanThreshold_returnFalse() {
-        assertThat(mBatteryUtils.isAppHeavilyUsed(mBatteryStatsHelper, mUserManager, UID,
-                DISCHARGE_AMOUNT /* threshold */ )).isFalse();
-    }
-
-    @Test
     public void testShouldHideAnomaly_systemAppWithLauncher_returnTrue() {
         final List<ResolveInfo> resolveInfos = new ArrayList<>();
         final ResolveInfo resolveInfo = new ResolveInfo();
