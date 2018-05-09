@@ -16,6 +16,8 @@
 
 package com.android.settings.notification;
 
+import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES;
+
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
@@ -42,6 +44,8 @@ public class ZenModeMsgEventReminderSettings extends ZenModeSettingsBase impleme
         controllers.add(new ZenModeEventsPreferenceController(context, lifecycle));
         controllers.add(new ZenModeRemindersPreferenceController(context, lifecycle));
         controllers.add(new ZenModeMessagesPreferenceController(context, lifecycle));
+        controllers.add(new ZenModeStarredContactsPreferenceController(context, lifecycle,
+                PRIORITY_CATEGORY_MESSAGES));
         controllers.add(new ZenModeBehaviorFooterPreferenceController(context, lifecycle,
                 R.string.zen_msg_event_reminder_footer));
         return controllers;
