@@ -30,7 +30,9 @@ import android.app.PendingIntent;
 import android.content.Context;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import androidx.slice.Slice;
 import androidx.slice.SliceItem;
@@ -188,7 +190,10 @@ public class SliceTester {
 
     private static void assertKeywords(SliceMetadata metadata, SliceData data) {
         final List<String> keywords = metadata.getSliceKeywords();
-        final List<String> expectedKeywords = Arrays.asList(data.getKeywords().split(","));
+        final Set<String> expectedKeywords = new HashSet<>(
+                Arrays.asList(data.getKeywords().split(",")));
+        expectedKeywords.add(data.getTitle());
+        expectedKeywords.add(data.getScreenTitle().toString());
         assertThat(keywords).containsExactlyElementsIn(expectedKeywords);
     }
 }
