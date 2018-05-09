@@ -19,10 +19,10 @@ package com.android.settings.testutils;
 import static android.app.slice.Slice.HINT_TITLE;
 import static android.app.slice.SliceItem.FORMAT_TEXT;
 
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
 import static com.android.settings.core.BasePreferenceController.DISABLED_FOR_USER;
-import static com.android.settings.core.BasePreferenceController.DISABLED_UNSUPPORTED;
-import static com.android.settings.core.BasePreferenceController.UNAVAILABLE_UNKNOWN;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -153,8 +153,8 @@ public class SliceTester {
         final int availabilityStatus = SliceBuilderUtils.getPreferenceController(context,
                 sliceData).getAvailabilityStatus();
         switch (availabilityStatus) {
-            case DISABLED_UNSUPPORTED:
-            case UNAVAILABLE_UNKNOWN:
+            case UNSUPPORTED_ON_DEVICE:
+            case CONDITIONALLY_UNAVAILABLE:
                 assertThat(primaryPendingIntent).isEqualTo(
                         SliceBuilderUtils.getSettingsIntent(context));
                 break;

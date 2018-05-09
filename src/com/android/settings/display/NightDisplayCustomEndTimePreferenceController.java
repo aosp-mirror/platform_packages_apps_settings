@@ -35,7 +35,7 @@ public class NightDisplayCustomEndTimePreferenceController extends BasePreferenc
 
     @Override
     public int getAvailabilityStatus() {
-        return ColorDisplayController.isAvailable(mContext) ? AVAILABLE : DISABLED_UNSUPPORTED;
+        return ColorDisplayController.isAvailable(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

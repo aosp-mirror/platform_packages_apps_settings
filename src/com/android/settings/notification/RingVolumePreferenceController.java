@@ -30,7 +30,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.Vibrator;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -85,7 +84,7 @@ public class RingVolumePreferenceController extends VolumeSeekBarPreferenceContr
     @Override
     public int getAvailabilityStatus() {
         return Utils.isVoiceCapable(mContext) && !mHelper.isSingleVolume()
-                ? AVAILABLE : DISABLED_UNSUPPORTED;
+                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

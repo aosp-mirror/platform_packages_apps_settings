@@ -105,11 +105,11 @@ public class AppMemoryPreferenceController extends BasePreferenceController
     @Override
     public int getAvailabilityStatus() {
         if (!mContext.getResources().getBoolean(R.bool.config_show_app_info_settings_memory)) {
-            return DISABLED_UNSUPPORTED;
+            return UNSUPPORTED_ON_DEVICE;
         }
 
         return DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(mContext)
-                ? AVAILABLE : DISABLED_UNSUPPORTED;
+                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override

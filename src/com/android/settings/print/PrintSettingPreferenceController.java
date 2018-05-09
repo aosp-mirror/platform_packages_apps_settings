@@ -59,7 +59,7 @@ public class PrintSettingPreferenceController extends BasePreferenceController i
     @Override
     public int getAvailabilityStatus() {
         return mPackageManager.hasSystemFeature(PackageManager.FEATURE_PRINTING)
-                ? AVAILABLE : DISABLED_UNSUPPORTED;
+                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

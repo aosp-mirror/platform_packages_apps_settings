@@ -56,7 +56,7 @@ public class SwipeToNotificationPreferenceController extends GesturePreferenceCo
 
     @Override
     public int getAvailabilityStatus() {
-        return isAvailable(mContext) ? AVAILABLE : DISABLED_UNSUPPORTED;
+        return isAvailable(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
