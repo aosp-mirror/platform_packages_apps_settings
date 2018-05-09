@@ -28,6 +28,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.os.StrictMode;
 import android.provider.SettingsSlicesContract;
 
 import com.android.settings.testutils.DatabaseTestUtils;
@@ -53,16 +54,17 @@ import androidx.slice.Slice;
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SettingsSliceProviderTest {
 
-    private final String KEY = "KEY";
-    private final String INTENT_PATH = SettingsSlicesContract.PATH_SETTING_INTENT + "/" + KEY;
-    private final String ACTION_PATH = SettingsSlicesContract.PATH_SETTING_ACTION + "/" + KEY;
-    private final String TITLE = "title";
-    private final String SUMMARY = "summary";
-    private final String SCREEN_TITLE = "screen title";
-    private final String FRAGMENT_NAME = "fragment name";
-    private final int ICON = 1234; // I declare a thumb war
-    private final Uri URI = Uri.parse("content://com.android.settings.slices/test");
-    private final String PREF_CONTROLLER = FakeToggleController.class.getName();
+    private static final String KEY = "KEY";
+    private static final String INTENT_PATH =
+            SettingsSlicesContract.PATH_SETTING_INTENT + "/" + KEY;
+    private static final String TITLE = "title";
+    private static final String SUMMARY = "summary";
+    private static final String SCREEN_TITLE = "screen title";
+    private static final String FRAGMENT_NAME = "fragment name";
+    private static final int ICON = 1234; // I declare a thumb war
+    private static final Uri URI = Uri.parse("content://com.android.settings.slices/test");
+    private static final String PREF_CONTROLLER = FakeToggleController.class.getName();
+
     private Context mContext;
     private SettingsSliceProvider mProvider;
     private SQLiteDatabase mDb;
@@ -145,6 +147,18 @@ public class SettingsSliceProviderTest {
         SliceData cachedData = mProvider.mSliceWeakDataCache.get(data.getUri());
 
         assertThat(cachedData).isNull();
+    }
+
+    @Test
+    public void onBindSlice_shouldNotOverrideStrictMode() {
+        final StrictMode.ThreadPolicy oldThreadPolicy = StrictMode.getThreadPolicy();
+        SliceData data = getDummyData();
+        mProvider.mSliceWeakDataCache.put(data.getUri(), data);
+        mProvider.onBindSlice(data.getUri());
+
+        final StrictMode.ThreadPolicy newThreadPolicy = StrictMode.getThreadPolicy();
+
+        assertThat(newThreadPolicy.toString()).isEqualTo(oldThreadPolicy.toString());
     }
 
     @Test

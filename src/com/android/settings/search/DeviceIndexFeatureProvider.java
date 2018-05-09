@@ -47,7 +47,9 @@ public interface DeviceIndexFeatureProvider {
             List<String> keywords);
 
     default void updateIndex(Context context, boolean force) {
-        if (!isIndexingEnabled()) return;
+        if (!isIndexingEnabled()) {
+            return;
+        }
 
         if (!force && Objects.equals(
                 Settings.Secure.getString(context.getContentResolver(), INDEX_VERSION), VERSION)) {
@@ -55,9 +57,9 @@ public interface DeviceIndexFeatureProvider {
             return;
         }
 
-        ComponentName jobComponent = new ComponentName(context.getPackageName(),
+        final ComponentName jobComponent = new ComponentName(context.getPackageName(),
                 DeviceIndexUpdateJobService.class.getName());
-        int jobId = context.getResources().getInteger(R.integer.device_index_update);
+        final int jobId = context.getResources().getInteger(R.integer.device_index_update);
         // Schedule a job so that we know it'll be able to complete, but try to run as
         // soon as possible.
         context.getSystemService(JobScheduler.class).schedule(
