@@ -199,7 +199,7 @@ public class BatteryTipDialogFragmentTest {
     }
 
     @Test
-    public void testOnCreateDialog_summaryTipWithEstimation_fireDialogWithEstimation() {
+    public void testOnCreateDialog_summaryTip_fireDialog() {
         doReturn(AVERAGE_TIME_MS).when(mSummaryTip).getAverageTimeMs();
         mDialogFragment = BatteryTipDialogFragment.newInstance(mSummaryTip, METRICS_KEY);
 
@@ -209,20 +209,8 @@ public class BatteryTipDialogFragmentTest {
         ShadowAlertDialog shadowDialog = shadowOf(dialog);
 
         assertThat(shadowDialog.getMessage()).isEqualTo(
-                "Based on your usage, your battery usually lasts about 1 hr when fully charged"
-                        + ".\n\nIf you need to extend your battery life, turn on Battery Saver.");
-    }
-
-    @Test
-    public void testOnCreateDialog_summaryTipWithoutEstimation_fireDialogWithoutEstimation() {
-        mDialogFragment = BatteryTipDialogFragment.newInstance(mSummaryTip, METRICS_KEY);
-
-        FragmentTestUtil.startFragment(mDialogFragment);
-
-        final AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
-        ShadowAlertDialog shadowDialog = shadowOf(dialog);
-
-        assertThat(shadowDialog.getMessage()).isEqualTo(
-                "If you need to extend your battery life, turn on Battery Saver");
+                "Your apps are using a normal amount of battery. If apps use too much battery, "
+                        + "your phone will suggest actions you can take.\n\nYou can always turn"
+                        + " on Battery Saver if you’re running low on battery.");
     }
 }
