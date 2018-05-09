@@ -74,7 +74,7 @@ public class DoubleTapScreenPreferenceController extends GesturePreferenceContro
         if (mAmbientConfig == null) {
             mAmbientConfig = new AmbientDisplayConfiguration(mContext);
         }
-        return mAmbientConfig.pulseOnDoubleTapAvailable() ? AVAILABLE : DISABLED_UNSUPPORTED;
+        return mAmbientConfig.pulseOnDoubleTapAvailable() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

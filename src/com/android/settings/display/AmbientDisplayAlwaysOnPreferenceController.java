@@ -50,7 +50,7 @@ public class AmbientDisplayAlwaysOnPreferenceController extends TogglePreference
         if (mConfig == null) {
             mConfig = new AmbientDisplayConfiguration(mContext);
         }
-        return isAvailable(mConfig) ? AVAILABLE : DISABLED_UNSUPPORTED;
+        return isAvailable(mConfig) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

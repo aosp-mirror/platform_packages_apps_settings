@@ -211,7 +211,7 @@ public class SliceBroadcastReceiverTest {
         // Disable Setting
         Settings.Global.putInt(mContext.getContentResolver(),
                 FakeToggleController.AVAILABILITY_KEY,
-                BasePreferenceController.DISABLED_UNSUPPORTED);
+                BasePreferenceController.UNSUPPORTED_ON_DEVICE);
 
         // Insert Fake Toggle into Database
         final String key = "key";
@@ -245,7 +245,7 @@ public class SliceBroadcastReceiverTest {
         // Disable Setting
         Settings.Global.putInt(mContext.getContentResolver(),
                 FakeSliderController.AVAILABILITY_KEY,
-                BasePreferenceController.DISABLED_UNSUPPORTED);
+                BasePreferenceController.UNSUPPORTED_ON_DEVICE);
 
         // Insert Fake Slider into Database
         final String key = "key";

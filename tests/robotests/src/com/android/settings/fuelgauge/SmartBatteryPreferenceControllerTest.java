@@ -103,7 +103,7 @@ public class SmartBatteryPreferenceControllerTest {
         doReturn(false).when(mFeatureFactory.powerUsageFeatureProvider).isSmartBatterySupported();
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.DISABLED_UNSUPPORTED);
+                BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 
     private void putSmartBatteryValue(int value) {

@@ -64,7 +64,7 @@ public class GameControllerPreferenceController extends TogglePreferenceControll
     public int getAvailabilityStatus() {
         // If device explicitly wants to hide this, return early.
         if (!mContext.getResources().getBoolean(R.bool.config_show_vibrate_input_devices)) {
-            return DISABLED_UNSUPPORTED;
+            return UNSUPPORTED_ON_DEVICE;
         }
 
         final int[] devices = mIm.getInputDeviceIds();
@@ -74,7 +74,7 @@ public class GameControllerPreferenceController extends TogglePreferenceControll
                 return AVAILABLE;
             }
         }
-        return DISABLED_UNSUPPORTED;
+        return CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override

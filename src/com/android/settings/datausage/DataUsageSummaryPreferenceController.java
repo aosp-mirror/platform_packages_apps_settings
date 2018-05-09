@@ -28,7 +28,6 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.SubscriptionPlan;
 import android.text.TextUtils;
-import android.text.format.Formatter;
 import android.util.Log;
 import android.util.RecurrenceRule;
 
@@ -182,7 +181,7 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
     @Override
     public int getAvailabilityStatus() {
         return DataUsageUtils.hasSim(mActivity)
-                || DataUsageUtils.hasWifiRadio(mContext) ? AVAILABLE : DISABLED_UNSUPPORTED;
+                || DataUsageUtils.hasWifiRadio(mContext) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override

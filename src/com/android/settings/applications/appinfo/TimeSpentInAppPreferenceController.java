@@ -55,19 +55,19 @@ public class TimeSpentInAppPreferenceController extends BasePreferenceController
     @Override
     public int getAvailabilityStatus() {
         if (TextUtils.isEmpty(mPackageName)) {
-            return DISABLED_UNSUPPORTED;
+            return UNSUPPORTED_ON_DEVICE;
         }
         final List<ResolveInfo> resolved = mPackageManager.queryIntentActivities(mIntent,
                 0 /* flags */);
         if (resolved == null || resolved.isEmpty()) {
-            return DISABLED_UNSUPPORTED;
+            return UNSUPPORTED_ON_DEVICE;
         }
         for (ResolveInfo info : resolved) {
             if (isSystemApp(info)) {
                 return AVAILABLE;
             }
         }
-        return DISABLED_UNSUPPORTED;
+        return UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

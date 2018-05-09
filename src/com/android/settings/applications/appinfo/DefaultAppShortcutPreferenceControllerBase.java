@@ -46,7 +46,7 @@ public abstract class DefaultAppShortcutPreferenceControllerBase extends BasePre
         if (UserManager.get(mContext).isManagedProfile()) {
             return DISABLED_FOR_USER;
         }
-        return hasAppCapability() ? AVAILABLE : DISABLED_UNSUPPORTED;
+        return hasAppCapability() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

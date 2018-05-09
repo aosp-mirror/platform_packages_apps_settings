@@ -56,7 +56,7 @@ public class MagnificationNavbarPreferenceController extends BasePreferenceContr
     public int getAvailabilityStatus() {
         return MagnificationPreferenceFragment.isApplicable(mContext.getResources())
                 ? AVAILABLE
-                : DISABLED_UNSUPPORTED;
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

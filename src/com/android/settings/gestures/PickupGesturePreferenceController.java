@@ -68,7 +68,7 @@ public class PickupGesturePreferenceController extends GesturePreferenceControll
         if (mAmbientConfig == null) {
             mAmbientConfig = new AmbientDisplayConfiguration(mContext);
         }
-        return mAmbientConfig.pulseOnPickupAvailable() ? AVAILABLE : DISABLED_UNSUPPORTED;
+        return mAmbientConfig.pulseOnPickupAvailable() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
