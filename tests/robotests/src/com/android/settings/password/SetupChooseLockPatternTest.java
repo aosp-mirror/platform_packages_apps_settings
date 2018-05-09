@@ -92,13 +92,16 @@ public class SetupChooseLockPatternTest {
     }
 
     @Test
-    public void selectPattern_shouldHideOptionsButton() {
+    public void optionsButton_whenPatternSelected_shouldBeVisible() {
         Button button = mActivity.findViewById(R.id.screen_lock_options);
         assertThat(button).isNotNull();
         assertThat(button.getVisibility()).isEqualTo(View.VISIBLE);
 
         LockPatternView lockPatternView = mActivity.findViewById(R.id.lockPattern);
         ReflectionHelpers.callInstanceMethod(lockPatternView, "notifyPatternDetected");
+
+        enterPattern();
+        assertThat(button.getVisibility()).isEqualTo(View.VISIBLE);
     }
 
     private void verifyScreenLockOptionsShown() {
