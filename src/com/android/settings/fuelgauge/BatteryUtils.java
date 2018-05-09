@@ -512,37 +512,6 @@ public class BatteryUtils {
     }
 
     /**
-     * Check if the app represented by {@code uid} has battery usage more than {@code threshold}
-     *
-     * @param batteryStatsHelper used to check the battery usage
-     * @param userManager        used to init the {@code batteryStatsHelper}
-     * @param uid                represent the app
-     * @param threshold          battery percentage threshold(e.g. 10 means 10% battery usage )
-     * @return {@code true} if battery drain is more than the threshold
-     */
-    public boolean isAppHeavilyUsed(BatteryStatsHelper batteryStatsHelper, UserManager userManager,
-            int uid, int threshold) {
-        initBatteryStatsHelper(batteryStatsHelper, null /* bundle */, userManager);
-        final int dischargeAmount = batteryStatsHelper.getStats().getDischargeAmount(
-                BatteryStats.STATS_SINCE_CHARGED);
-        List<BatterySipper> batterySippers = batteryStatsHelper.getUsageList();
-        final double hiddenAmount = removeHiddenBatterySippers(batterySippers);
-
-        for (int i = 0, size = batterySippers.size(); i < size; i++) {
-            final BatterySipper batterySipper = batterySippers.get(i);
-            if (batterySipper.getUid() == uid) {
-                final int percent = (int) calculateBatteryPercent(
-                        batterySipper.totalPowerMah, batteryStatsHelper.getTotalPower(),
-                        hiddenAmount,
-                        dischargeAmount);
-                return percent >= threshold;
-            }
-        }
-
-        return false;
-    }
-
-    /**
      * Return {@code true} if we should hide anomaly app represented by {@code uid}
      */
     public boolean shouldHideAnomaly(PowerWhitelistBackend powerWhitelistBackend, int uid) {
