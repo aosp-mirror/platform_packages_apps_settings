@@ -30,13 +30,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Pair;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SliderPreferenceController;
@@ -75,6 +78,7 @@ public class SliceBuilderUtils {
      * {@param sliceData} is an inline controller.
      */
     public static Slice buildSlice(Context context, SliceData sliceData) {
+        Log.d(TAG, "Creating slice for: " + sliceData.getPreferenceController());
         final BasePreferenceController controller = getPreferenceController(context, sliceData);
         final Pair<Integer, Object> sliceNamePair =
                 Pair.create(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_NAME, sliceData.getKey());
@@ -177,8 +181,7 @@ public class SliceBuilderUtils {
      * @return {@link PendingIntent} to the Settings home page.
      */
     public static PendingIntent getSettingsIntent(Context context) {
-        final PackageManager manager = context.getPackageManager();
-        final Intent intent = manager.getLaunchIntentForPackage(context.getPackageName());
+        final Intent intent = new Intent(Settings.ACTION_SETTINGS);
         return PendingIntent.getActivity(context, 0 /* requestCode */, intent, 0 /* flags */);
     }
 
