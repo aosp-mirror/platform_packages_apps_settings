@@ -20,6 +20,8 @@ import static android.media.AudioManager.STREAM_MUSIC;
 import static android.media.AudioSystem.DEVICE_OUT_REMOTE_SUBMIX;
 import static android.media.AudioSystem.DEVICE_OUT_USB_HEADSET;
 
+import com.android.settingslib.Utils;
+
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.media.AudioManager;
@@ -57,7 +59,7 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
             return;
         }
 
-        if (isOngoingCallStatus()) {
+        if (Utils.isAudioModeOngoingCall(mContext)) {
             // Ongoing call status, switch entry for media will be disabled.
             mPreference.setVisible(false);
             preference.setSummary(
