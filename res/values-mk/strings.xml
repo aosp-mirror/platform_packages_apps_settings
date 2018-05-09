@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Премногу погрешни обиди. Корисникот ќе се избрише."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Премногу погрешни обиди. Работниот профил и неговите податоци ќе се избришат."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Отфрли"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Мора да има најмалку <xliff:g id="COUNT">%d</xliff:g> знаци"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"PIN-от мора да има најмалку <xliff:g id="COUNT">%d</xliff:g> цифри"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="one">Мора да содржи помалку од <xliff:g id="COUNT_1">%d</xliff:g> знак</item>
+      <item quantity="other">Мора да содржи помалку од <xliff:g id="COUNT_1">%d</xliff:g> знаци</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="one">PIN-от мора да има најмалку <xliff:g id="COUNT_1">%d</xliff:g> цифра</item>
+      <item quantity="other">PIN-от мора да има најмалку <xliff:g id="COUNT_1">%d</xliff:g> цифри</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Продолжи"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"Мора да содржи помалку од <xliff:g id="NUMBER">%d</xliff:g> знаци"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Мора да содржи помалку од <xliff:g id="NUMBER">%d</xliff:g> цифри"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="one">Мора да има помалку од <xliff:g id="NUMBER_1">%d</xliff:g> знак</item>
+      <item quantity="other">Мора да има помалку од <xliff:g id="NUMBER_1">%d</xliff:g> знаци</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="one">Мора да има помалку од <xliff:g id="NUMBER_1">%d</xliff:g> цифра</item>
+      <item quantity="other">Мора да има помалку од <xliff:g id="NUMBER_1">%d</xliff:g> цифри</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Мора да содржи само цифри од 0 до 9"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Администраторот на уредот не дозволува користење на неодамнешен PIN"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"Обичните PIN-кодови се блокирани од вашиот IT-администратор. Обидете се со друг PIN."</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Контроли за интеракција"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Преземени услуги"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Експериментално"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Ознаки за функции"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Читач на екран, првенствено за лица со слепило и слаб вид"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Допрете ставки на екранот за да ги слушнете гласно прочитани"</string>
@@ -3080,7 +3091,7 @@
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"Прикажувај известувања, но исклучи го звукот и вибрациите"</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"Кога ќе пристигнат нови известувања, телефонот нема да испушта звук ниту ќе вибрира"</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"Сокриј ги и исклучи го звукот на известувањата"</string>
-    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"Известувања нема воопшто да се појавуваат"</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"Воопшто нема да се појавуваат известувања"</string>
     <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"Нема да гледате нови ниту постојни известувања кога е вклучен режимот „Не вознемирувај“. Меѓутоа, известувањата што се неопходни за основната активност на телефонот и статусот сѐ уште ќе се појавуваат."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"Приспособени"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"Овозможи ја приспособената поставка"</string>
@@ -3133,13 +3144,14 @@
       <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> правило може да се вклучи автоматски</item>
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> правила може да се вклучат автоматски</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"Во ред"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Ажурирај"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Не ажурирај"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"Телефонот може да стори повеќе за да ви помогне да се фокусирате.\n\nАжурирајте ги поставките за да:\n\n- сокриете известувања целосно\n\n- дозволите повици од контактите со ѕвезди и повторените повикувачи"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"Дали да се ажурира „Не вознемирувај“?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Поставки"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Ова може дополнително да го приспособите во „Поставки“."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Блокирај кога екранот е вклучен"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Блокирај кога екранот е исклучен"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Освен што ги блокира несаканите звуци, режимот „Не вознемирувај“ може да ги блокира и визуелните вознемирувања. Ова може да биде корисно ако се обидувате да спиете, да се фокусирате или да го ограничите времето што го поминувате на телефонот."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Блокирање звуци и визуелни вознемирувања"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Не вклучувај го екранот и не прикажувај известувања"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Воопшто не прикажувај известувања, освен за основната активност на телефонот и статусот"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Звуци на работниот профил"</string>
@@ -3671,7 +3683,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Бекапот е оневозможен"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Ажурирано на Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"Достапно е ажурирање"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"Поставкава не може да се смени"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"Дејството не е дозволено"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"Јачината на звукот не може да се смени"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"Повикувањето не е дозволено"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"SMS-порака не е дозволена"</string>
@@ -3861,7 +3873,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Контролирајте ги информациите на заклучениот екран"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Прикажете или сокријте содржина на известување"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Сите"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"Поддршка и совети"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"Најмала ширина"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Ниедна од инсталираните апликации не побара пристап до премиум SMS"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"Премиум SMS може да ве чини пари, а сумата ќе се додаде на сметките од операторот. Ако овозможите дозвола за апликацијата, ќе може да испраќате премиум SMS со неа."</string>

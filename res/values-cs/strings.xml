@@ -593,11 +593,31 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Příliš mnoho neplatných pokusů. Tento uživatel bude smazán."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Příliš mnoho neplatných pokusů. Tento pracovní profil a přidružená data budou smazána."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Zavřít"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Minimální počet znaků: <xliff:g id="COUNT">%d</xliff:g>"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"Minimální počet čísel kódu PIN: <xliff:g id="COUNT">%d</xliff:g>"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="few">Musí obsahovat alespoň <xliff:g id="COUNT_1">%d</xliff:g> znaky</item>
+      <item quantity="many">Musí obsahovat alespoň <xliff:g id="COUNT_1">%d</xliff:g> znaku</item>
+      <item quantity="other">Musí obsahovat alespoň <xliff:g id="COUNT_1">%d</xliff:g> znaků</item>
+      <item quantity="one">Musí obsahovat alespoň <xliff:g id="COUNT_0">%d</xliff:g> znak</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="few">PIN musí obsahovat alespoň <xliff:g id="COUNT_1">%d</xliff:g> číslice</item>
+      <item quantity="many">PIN musí obsahovat alespoň <xliff:g id="COUNT_1">%d</xliff:g> číslice</item>
+      <item quantity="other">PIN musí obsahovat alespoň <xliff:g id="COUNT_1">%d</xliff:g> číslic</item>
+      <item quantity="one">PIN musí obsahovat alespoň <xliff:g id="COUNT_0">%d</xliff:g> číslici</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Pokračovat"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"Heslo musí být kratší než <xliff:g id="NUMBER">%d</xliff:g> znaků"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"PIN musí obsahovat méně než tento počet číslic: <xliff:g id="NUMBER">%d</xliff:g>"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="few">Musí obsahovat méně než <xliff:g id="NUMBER_1">%d</xliff:g> znaky</item>
+      <item quantity="many">Musí obsahovat méně než <xliff:g id="NUMBER_1">%d</xliff:g> znaku</item>
+      <item quantity="other">Musí obsahovat méně než <xliff:g id="NUMBER_1">%d</xliff:g> znaků</item>
+      <item quantity="one">Musí obsahovat méně než <xliff:g id="NUMBER_0">%d</xliff:g> znak</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="few">Musí obsahovat méně než <xliff:g id="NUMBER_1">%d</xliff:g> číslice</item>
+      <item quantity="many">Musí obsahovat méně než <xliff:g id="NUMBER_1">%d</xliff:g> číslice</item>
+      <item quantity="other">Musí obsahovat méně než <xliff:g id="NUMBER_1">%d</xliff:g> číslic</item>
+      <item quantity="one">Musí obsahovat méně než <xliff:g id="NUMBER_0">%d</xliff:g> číslici</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"PIN smí obsahovat pouze číslice 0 až 9."</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Administrátor zařízení nedovoluje použití nedávno použitého kódu PIN"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"Obvyklé kódy PIN jsou blokovány administrátorem IT. Použijte jiný PIN."</string>
@@ -1948,8 +1968,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Ovládací prvky interakce"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Stažené služby"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Experimentální"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Příznaky experimentálních funkcí"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Čtečka obrazovky určená primárně pro nevidomé a slabozraké"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Klepněte na položky na obrazovce, které chcete přečíst"</string>
@@ -3207,13 +3226,14 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> pravidel se může zapnout automaticky</item>
       <item quantity="one">1 pravidlo se může zapnout automaticky</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"OK"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Aktualizovat"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Neaktualizovat"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"Telefon vám může pomáhat se soustředěním.\n\nAktualizováním nastavení aktivujte následující funkce:\n\n– úplné skrytí oznámení,\n\n– povolení hovorů od kontaktů s hvězdičkou a opakovaných volání."</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"Aktualizovat nastavení režimu Nerušit?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Nastavení"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Tuto možnost můžete více přizpůsobit v Nastavení."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Blokovat, když je obrazovka zapnutá"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Blokovat, když je obrazovka vypnutá"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Režim Nerušit dokáže více, než jen blokovat nechtěné zvuky – dokáže blokovat i vizuální vyrušení. To může být užitečné, když chcete spát, soustředit se nebo omezit čas strávený na telefonu."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Blokovat zvuky a vizuální vyrušení"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Nezapínat obrazovku ani nebudit kvůli oznámení"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Oznámení vůbec nezobrazovat, s výjimkou základní aktivity a stavu telefonu"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Zvuky pracovního profilu"</string>
@@ -3775,7 +3795,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Zálohování bylo zakázáno"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Aktualizováno na Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"K dispozici je aktualizace"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"Toto nastavení nelze změnit"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"Akce není povolena."</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"Hlasitost nelze změnit"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"Volání není povoleno"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"Zprávy SMS nejsou povoleny"</string>
@@ -3977,7 +3997,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Nastavte informace na obrazovce uzamčení"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Zobrazit nebo skrýt obsah oznámení"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Vše"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"Podpora a tipy"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"Minimální šířka"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Žádné nainstalované aplikace o přístup k prémiovým SMS nepožádaly"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"Prémiové SMS mohou být zpoplatněny a jejich cena se přičte k fakturaci operátora. Pokud aplikaci udělíte příslušné oprávnění, budete pomocí této aplikace moci odesílat prémiové SMS."</string>

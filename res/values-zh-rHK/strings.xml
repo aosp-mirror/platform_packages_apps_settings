@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"輸入錯誤的次數太多，系統將會刪除此使用者。"</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"輸入錯誤的次數太多，系統將會刪除此工作設定檔和相關資料。"</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"關閉"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"必須至少有 <xliff:g id="COUNT">%d</xliff:g> 個字元"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"PIN 必須至少有 <xliff:g id="COUNT">%d</xliff:g> 個數字"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="other">必須至少有 <xliff:g id="COUNT_1">%d</xliff:g> 個字元</item>
+      <item quantity="one">必須包含至少 <xliff:g id="COUNT_0">%d</xliff:g> 個字元</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="other">PIN 必須至少有 <xliff:g id="COUNT_1">%d</xliff:g> 個數字</item>
+      <item quantity="one">PIN 必須至少有 <xliff:g id="COUNT_0">%d</xliff:g> 個數字</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"繼續"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"必須少於 <xliff:g id="NUMBER">%d</xliff:g> 個字元"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"必須少於 <xliff:g id="NUMBER">%d</xliff:g> 個數字"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="other">必須少於 <xliff:g id="NUMBER_1">%d</xliff:g> 個字元</item>
+      <item quantity="one">必須少於 <xliff:g id="NUMBER_0">%d</xliff:g> 個字元</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="other">必須少於 <xliff:g id="NUMBER_1">%d</xliff:g> 個數字</item>
+      <item quantity="one">必須少於 <xliff:g id="NUMBER_0">%d</xliff:g> 個數字</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"只可包含數字 0-9"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"裝置管理員不允許使用最近用過的 PIN 碼"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"您的 IT 管理員已禁止使用常用的 PIN 碼，請嘗試輸入另一個 PIN 碼。"</string>
@@ -1921,8 +1933,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"互動控制項"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"已下載的服務"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"實驗性"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"功能標示"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"主要為失明和弱視人士而設的螢幕閱讀器"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"輕按畫面上的項目即可收聽系統朗讀項目"</string>
@@ -3078,13 +3089,13 @@
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"允許視覺訊號"</string>
     <string name="zen_mode_restrict_notifications_screen_title" msgid="9027437428488279426">"限制通知"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"通知"</string>
-    <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"開啟「零打擾」模式時"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"開啟「請勿騷擾」模式時"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"忽略通知"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"顯示通知，但關閉音效和震動"</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"手機收到新通知時不會發出音效或震動"</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"隱藏並忽略通知"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"完全不顯示通知"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"開啟「零打擾」模式後，你不會看到任何新通知或現有通知。不過，系統仍會顯示基本手機活動和狀態所需的通知。"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"開啟「請勿騷擾」模式後，您將不會看到新通知或現有通知。不過，基本手機活動和狀態所需的通知仍會繼續顯示。"</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"自訂"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"啟用自訂設定"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"移除自訂設定"</string>
@@ -3136,13 +3147,14 @@
       <item quantity="other">系統可以自動開啟 <xliff:g id="ON_COUNT">%d</xliff:g> 項規則</item>
       <item quantity="one">系統可以自動開啟 1 項規則</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"確定"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"更新"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"不要更新"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"您的手機可提供更多協助您集中注意力的功能。\n\n您可以將設定更新為：\n\n- 完全隱藏通知\n\n- 允許下列對象來電：已加星號的聯絡人和重複來電者"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"要更新「請勿騷擾」模式嗎？"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"設定"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"您可以在「設定」中自訂此設定。"</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"畫面開啟時封鎖"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"畫面關閉時封鎖"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"除了禁止發出不想聽到的音效外，「請勿騷擾」還能封鎖影像內容。此功能在您要睡覺、專注做事或減少使用手機時非常有效。"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"封鎖音效及影像內容"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"不要在收到通知時開啟螢幕或喚醒裝置"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"完全不顯示通知 (基本手機活動或狀態除外)"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"工作設定檔聲音"</string>
@@ -3674,7 +3686,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"已停用備份功能"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"已更新至 Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"有可用的更新"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"無法變更此設定"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"不允許執行此操作"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"無法變更音量"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"不允許撥打電話"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"不允許傳送短訊"</string>
@@ -3864,7 +3876,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"控制上鎖畫面上顯示的資料"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"顯示或隱藏通知內容"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"全部"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"支援和提示"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"最小寬度"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"沒有已安裝的應用程式要求發送付費短訊的權限"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"付費短訊的費用可能高昂，並會增加您流動網絡供應商帳單的款項。如果您為應用程式開放權限，將可以透過該應用程式發送付費短訊。"</string>

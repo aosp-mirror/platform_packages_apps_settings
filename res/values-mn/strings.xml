@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Түгжээг хэт олон удаа буруу оруулсан тул энэ хэрэглэгчийг устгах болно."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Түгжээг хэт олон удаа буруу оруулсан тул энэ ажлын профайлыг үүний өгөгдлийн хамтаар устгах болно."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Хаах"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Хамгийн багадаа <xliff:g id="COUNT">%d</xliff:g> тэмдэгт байх шаардлагатай"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"ПИН хамгийн багадаа <xliff:g id="COUNT">%d</xliff:g> цифртэй байх шаардлагатай"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="other">Хамгийн багадаа <xliff:g id="COUNT_1">%d</xliff:g> тэмдэгт байх ёстой</item>
+      <item quantity="one">Хамгийн багадаа <xliff:g id="COUNT_0">%d</xliff:g> тэмдэгт агуулах ёстой</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="other">ПИН хамгийн багадаа <xliff:g id="COUNT_1">%d</xliff:g> цифр агуулах ёстой</item>
+      <item quantity="one">ПИН хамгийн багдаа <xliff:g id="COUNT_0">%d</xliff:g> цифр агуулах ёстой</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Үргэлжлүүлэх"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"<xliff:g id="NUMBER">%d</xliff:g>-с цөөн тэмдэгттэй байх шаардлагатай"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"<xliff:g id="NUMBER">%d</xliff:g>-с цөөн цифртэй байх шаардлагатай"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g>-с цөөн тэмдэгт байх ёстой</item>
+      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g>-с цөөн тэмдэгт байх ёстой</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g>-с цөөн цифртэй байх ёстой</item>
+      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g>-с цөөн цифртэй байх ёстой</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Зөвхөн 0-9 хүртэлх цифр агуулах шаардлагатай"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Төхөөрөмжийн админ саяхны ПИН-г ашиглахыг зөвшөөрдөггүй"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"Таны IT админ түгээмэл ПИН-г блоклосон байна. Өөр ПИН оруулна уу."</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Харилцан үйлдлийн хяналт"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Татаж авсан үйлчилгээ"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Туршилтын"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Онцлогийн дарцаг"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Дэлгэц уншигчийг ерөнхийдөө сохор буюу харааны гажигтай хүмүүст зориулсан"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Дэлгэц дээрх зүйлсийг чанга уншуулахын тулд дарна уу"</string>
@@ -3133,13 +3144,14 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> дүрмийг автоматаар асааж болно</item>
       <item quantity="one">1 дүрмийг автоматаар асааж болно</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"Ок"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Шинэчлэх"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Бүү шинэчил"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"Таны утас таныг анхаарлаа төвлөрөхөд туслахын тулд илүү их зүйл хийх боломжтой.\n\nТохиргоог дараахад шинэчилнэ үү:\n\n- Мэдэгдлийг бүрмөсөн нуух\n\n- Одтой харилцагчдын дуудлагыг зөвшөөрч дуудлага хийгчийг давтах"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"Бүү саад бол горимыг шинэчлэх үү?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Тохиргоо"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Та үүнийг цаашид Тохиргооны хэсэгт өөрчлөх боломжтой."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Дэлгэц асаалттай үед хориглох"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Дэлгэц унтраалттай үед хориглох"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Бүү саад бол горим нь сонсохыг хүсэхгүй дууг хориглоод зогсохгүй харагдах зүйлсийг хориглох боломжтой. Энэ нь танд унтах, төвлөрөх буюу эсвэл утсандаа зарцуулах цагаа багасгахаар оролдох үед тусалж болзошгүй."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Дуу болон харагдах зүйлсийг хориглох"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Мэдэгдэл ирэхэд дэлгэцийг асаах эсвэл сэрээх хэрэггүй"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Утасны үндсэн үйл ажиллагаа, төлөвөөс бусад бүх мэдэгдлийг бүү харуул"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Ажлын профайлын дуу"</string>
@@ -3669,7 +3681,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Нөөцлөлт идэвхгүй болсон"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Андройдын <xliff:g id="VERSION">%1$s</xliff:g> хувилбарт шинэчилсэн"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"Шинэчлэх боломжтой"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"Энэ тохиргоог өөрчлөх боломжгүй"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"Үйлдлийг зөвшөөрөөгүй"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"Дууны түвшнийг өөрчлөх боломжгүй"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"Дуудлага хийх боломжгүй"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"SMS илгээх боломжгүй"</string>
@@ -3859,7 +3871,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Түгжигдсэн дэлгэцийн мэдээллийг хянах"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Харуулах эсвэл нуух мэдэгдлийн агуулга"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Бүгд"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"Дэмжлэг &amp; зөвлөгөө"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"Хамгийн бага өргөн"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Суулгасан апп гуравдагч талын SMS хандалтыг шаардаагүй байна"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"Гуравдагч талын SMS нь таны оператор компанийн төлбөр дээр нэмэгдэж болно. Хэрэв та энэ апп-д зөвшөөрлийг идэвхжүүлбэл энэ апп-р гуравдагч тал SMS илгээх боломжтой болно."</string>

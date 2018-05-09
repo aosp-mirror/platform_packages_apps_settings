@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"ഒരുപാട് തെറ്റായ ശ്രമങ്ങൾ. ഈ ഉപയോക്താവ് ഇല്ലാതാക്കപ്പെടും."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"ഒരുപാട് തെറ്റായ ശ്രമങ്ങൾ. ഈ ഔദ്യോഗിക പ്രൊഫൈലും അതിന്റെ ഡാറ്റയും ഇല്ലാതാക്കപ്പെടും."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"നിരസിക്കുക"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"കുറഞ്ഞത് <xliff:g id="COUNT">%d</xliff:g> പ്രതീകങ്ങളെങ്കിലും അടങ്ങിയിരിക്കണം"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"പിൻ നമ്പറിൽ കുറഞ്ഞത് <xliff:g id="COUNT">%d</xliff:g> അക്കങ്ങളെങ്കിലും അടങ്ങിയിരിക്കണം"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="other">കുറഞ്ഞത് <xliff:g id="COUNT_1">%d</xliff:g> പ്രതീകങ്ങൾ അടങ്ങിയിരിക്കണം</item>
+      <item quantity="one">കുറഞ്ഞത് <xliff:g id="COUNT_0">%d</xliff:g> പ്രതീകം അടങ്ങിയിരിക്കണം</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="other">പിന്നിൽ ചുരുങ്ങിയത് <xliff:g id="COUNT_1">%d</xliff:g> അക്കങ്ങൾ അടങ്ങിയിരിക്കണം</item>
+      <item quantity="one">പിന്നിൽ ചുരുങ്ങിയത് <xliff:g id="COUNT_0">%d</xliff:g> അക്കം അടങ്ങിയിരിക്കണം</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"തുടരുക"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"<xliff:g id="NUMBER">%d</xliff:g> പ്രതീകങ്ങളേക്കാൾ കുറവായിരിക്കണം"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"<xliff:g id="NUMBER">%d</xliff:g> അക്കങ്ങളേക്കാൾ കുറവായിരിക്കണം"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> പ്രതീകങ്ങളേക്കാൾ കുറവായിരിക്കണം</item>
+      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> പ്രതീകത്തിനേക്കാൾ കുറവായിരിക്കണം</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> അക്കങ്ങളേക്കാൾ കുറവായിരിക്കണം</item>
+      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> അക്കത്തിനേക്കാൾ കുറവായിരിക്കണം</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"0 മുതൽ 9 വരെയുള്ള അക്കങ്ങൾ മാത്രം അടങ്ങിയിരിക്കണം"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"ഉപകരണ അഡ്‌മിൻ സമീപകാലത്തുള്ള പിൻ ഉപയോഗിക്കുന്നത് അനുവദിക്കുന്നില്ല"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"നിങ്ങളുടെ ഐടി അഡ്‌മിൻ സാധാരണ പിന്നുകൾ ബ്ലോക്ക് ചെയ്‌തിട്ടുണ്ട്. മറ്റൊരു പിൻ പരീക്ഷിക്കുക."</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"ഇടപെടൽ നിയന്ത്രണങ്ങൾ"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"ഡൗൺലോഡുചെയ്‌ത സേവനങ്ങൾ"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"പരീക്ഷണാത്മകം!"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"ഫീച്ചർ ഫ്ലാഗുകൾ"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"പ്രധാനമായും അന്ധതയും കാഴ്ചശക്തി കുറഞ്ഞവർക്കുമുള്ളതാണ് സ്ക്രീൻ റീഡർ"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"നിങ്ങളുടെ സ്‌ക്രീനിലെ ഇനങ്ങൾ ഉറക്കെ വായിക്കുന്നതുകേൾക്കാൻ അവ ടാപ്പുചെയ്യുക"</string>
@@ -3073,38 +3084,22 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"ദൃശ്യതടസങ്ങൾ ബ്ലോക്കുചെയ്യൂ"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"ദൃശ്യ സിഗ്നലുകൾ അനുവദിക്കുക"</string>
-    <!-- no translation found for zen_mode_restrict_notifications_screen_title (9027437428488279426) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_title (478040192977063582) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_category (1648631487087638037) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_mute (9210062826172341735) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_mute_summary (285566524371041091) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_mute_footer (8473382758368384982) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_hide (3451553435075518722) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_hide_summary (3823881787175376177) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_hide_footer (4224323933073288352) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_custom (7498689167767941034) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_enable_custom (4250962169561739747) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_disable_custom (6676997522330453597) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_summary_muted (4678779044896459009) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_summary_custom (7416121534987213074) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_summary_hidden (7805339105802282234) -->
-    <skip />
-    <!-- no translation found for zen_mode_what_to_block_title (5480903548365697159) -->
-    <skip />
+    <string name="zen_mode_restrict_notifications_screen_title" msgid="9027437428488279426">"അറിയിപ്പുകൾ നിയന്ത്രിക്കുക"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"അറിയിപ്പുകൾ"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"ശല്ല്യപ്പെടുത്തരുത് എന്നത് ഓണാക്കുമ്പോൾ"</string>
+    <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"അറിയിപ്പുകൾ മ്യൂട്ട് ചെയ്യുക"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"അറിയിപ്പുകൾ കാണിക്കുക, എന്നാൽ ശബ്‌ദങ്ങളും വൈബ്രേഷനും മ്യൂട്ട് ചെയ്യുക"</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"പുതിയ അറിയിപ്പുകൾ വരുമ്പോൾ നിങ്ങളുടെ ഫോൺ ശബ്‌ദിക്കുകയോ വൈബ്രേറ്റ് ചെയ്യുകയോ ഇല്ല"</string>
+    <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"അറിയിപ്പുകൾ അദൃശ്യമാക്കുക, മ്യൂട്ട് ചെയ്യുക"</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"അറിയിപ്പുകൾ എപ്പോഴും ദൃശ്യമാവില്ല"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"ശല്ല്യപ്പെടുത്തരുത് എന്നത് ഓണായിരിക്കുമ്പോൾ, പുതിയതോ നിലവിലുള്ളതോ ആയ അറിയിപ്പുകൾ നിങ്ങൾ കാണില്ല. എന്നിരുന്നാലും, അടിസ്ഥാന ഫോൺ ആക്‌റ്റിവിറ്റിക്ക് അറിയിപ്പുകൾ ആവശ്യമാണ്, സ്‌റ്റാറ്റസ് തുടർന്നും ദൃശ്യമാവും."</string>
+    <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"ഇഷ്‌ടം"</string>
+    <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"ഇഷ്‌ടാനുസൃത ക്രമീകരണം പ്രവർത്തനക്ഷമമാക്കുക"</string>
+    <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"ഇഷ്‌ടാനുസൃത ക്രമീകരണം നീക്കം ചെയ്യുക"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"ദൃശ്യമാവും"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"ഭാഗികമായി അദൃശ്യമാക്കി"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"അദൃശ്യമാക്കി"</string>
+    <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"ഇഷ്‌ടാനുസൃത നിയന്ത്രണങ്ങൾ"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"സ്‌ക്രീൻ ഓണായിരിക്കുമ്പോൾ"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"സ്‌ക്രീൻ ഓഫായിരിക്കുമ്പോൾ"</string>
     <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"ശബ്‌ദവും വൈബ്രേഷനും മ്യൂട്ട് ചെയ്യുക"</string>
@@ -3149,13 +3144,14 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> നയങ്ങൾ സ്വമേധയാ ഓണാക്കാനാവും</item>
       <item quantity="one">ഒരു നയം സ്വമേധയാ ഓണാക്കാനാവും</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"ശരി"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"അപ്ഡേറ്റ് ചെയ്യുക"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"അപ്‌ഡേറ്റ് ചെയ്യരുത്"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"നിങ്ങൾക്ക് ശ്രദ്ധ കേന്ദ്രീകരിക്കാൻ നിങ്ങളുടെ ഫോണിന് കൂടുതൽ ചെയ്യാനാകും.\n\nഇനിപ്പറയുന്നവയിലേക്ക് ക്രമീകരണം അപ്‌ഡേറ്റ് ചെയ്യുക:\n\n- അറിയിപ്പുകൾ പൂർണ്ണമായി അദൃശ്യമാക്കുക\n\n- നക്ഷത്രചിഹ്നമിട്ട കോൺടാക്‌റ്റുകളിൽ നിന്നും ആവർത്തിച്ച് വിളിക്കുന്ന കോളർമാരിൽ നിന്നുമുള്ള കോളുകൾ അനുവദിക്കുക"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"\'ശല്യപ്പെടുത്തരുത്\' അപ്‌ഡേറ്റ് ചെയ്യണോ?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"ക്രമീകരണം"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"നിങ്ങൾക്ക് ക്രമീകരണത്തിൽ ഇത് കൂടുതൽ ഇഷ്‌ടാനുസൃതമാക്കാം."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"സ്ക്രീൻ ഓണായിരിക്കുമ്പോൾ ബ്ലോക്ക് ചെയ്യുക"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"സ്‌കീൻ ഓഫായിരിക്കുമ്പോൾ ബ്ലോക്ക് ചെയ്യുക"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"ആവശ്യമില്ലാത്ത ശബ്‌ദങ്ങൾ മാത്രമല്ല, വിഷ്വലുകളും ബ്ലോക്ക് ചെയ്യാൻ \'ശല്യപ്പെടുത്തരുത്\' എന്നതിന് കഴിയും. ഉറങ്ങാനോ ശ്രദ്ധ കേന്ദ്രീകരിക്കാനോ അല്ലെങ്കിൽ ഫോണിൽ ചിലവഴിക്കുന്ന സമയം പരിമിതപ്പെടുത്താനോ ശ്രമിക്കുന്നെങ്കിൽ, ഇത് സഹായകമായേക്കാം."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"ശബ്‌ദങ്ങളും വിഷ്വലുകളും ബ്ലോക്ക് ചെയ്യുക‌"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"സ്‌ക്രീൻ ഓണാക്കുകയോ അറിയിപ്പുകൾക്കായി സജീവമാക്കുകയോ ചെയ്യരുത്"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"അടിസ്ഥാന ഫോൺ ആക്റ്റിവിറ്റിയും സ്‌റ്റാറ്റസും ഒഴികെയുള്ള ഒരു അറിയിപ്പും കാണിക്കരുത്"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"ഔദ്യോഗിക പ്രൊഫൈൽ ശബ്ദങ്ങൾ"</string>
@@ -3687,7 +3683,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"ബാക്കപ്പ് പ്രവർത്തനരഹിതമാക്കി"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Android <xliff:g id="VERSION">%1$s</xliff:g>-ലേക്ക് അപ്‌ഡേറ്റ് ചെയ്തു"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"അപ്‌ഡേറ്റ് ലഭ്യമാണ്"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"ഈ ക്രമീകരണം മാറ്റാനാവില്ല"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"പ്രവർത്തനം അനുവദനീയമല്ല"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"വോളിയം മാറ്റാനാകില്ല"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"കോൾ ചെയ്യുന്നത് അനുവദനീയമല്ല"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"SMS അനുവദനീയമല്ല"</string>
@@ -3877,7 +3873,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"ലോക്ക് സ്‌ക്രീനിൽ ‌വിവരം നിയന്ത്രിക്കുക"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"അറിയിപ്പ് ഉള്ളടക്കം കാണിക്കുക അല്ലെങ്കിൽ മറയ്ക്കുക"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"എല്ലാം"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"സഹായവും ‌നുറുങ്ങുകളും"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"ഏറ്റവും ചെറിയ വീതി"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"ഇൻസ്റ്റാൾ ചെയ്തിട്ടുള്ള ആപ്സൊന്നും പ്രീമിയം SMS ആക്‌സസ് അഭ്യർത്ഥിച്ചിട്ടില്ല"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"പ്രീമിയം SMS-ന് നിങ്ങൾ പണം നൽകേണ്ടി വന്നേക്കാം, കാരിയറുടെ ബില്ലിലേക്ക് ഈ തുക ചേർക്കുന്നതാണ്. നിങ്ങളൊരു ആപ്പിന് അനുമതി പ്രവർത്തനക്ഷമമാക്കുന്നുവെങ്കിൽ, ആ ആപ്പ് ഉപയോഗിച്ച് പ്രീമിയം SMS അയയ്ക്കാനാകും."</string>

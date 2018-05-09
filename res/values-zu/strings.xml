@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Imizamo eminingi kakhulu engalungile. Lo msebenzisi uzosuswa."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Imizamo eminingi kakhulu engalungile. Le phrofayela yomsebenzi nedatha yayo izosuswa."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Cashisa"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Kumele okungenani kube izinhlamvu ezingu-<xliff:g id="COUNT">%d</xliff:g>"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"Iphinikhodi kumele ibe okungenani amadijithi angu-<xliff:g id="COUNT">%d</xliff:g>"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="one">Kufanele okungenani kube izinhlamvu ezingu-<xliff:g id="COUNT_1">%d</xliff:g></item>
+      <item quantity="other">Kufanele okungenani kube izinhlamvu ezingu-<xliff:g id="COUNT_1">%d</xliff:g></item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="one">I-PIN kufanele iqukathe amadijithi okungenani angu-<xliff:g id="COUNT_1">%d</xliff:g></item>
+      <item quantity="other">I-PIN kufanele iqukathe amadijithi okungenani angu-<xliff:g id="COUNT_1">%d</xliff:g></item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Qhubeka"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"Kumele ibe izinhlamvu ezincane kunezingu-<xliff:g id="NUMBER">%d</xliff:g>"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Kumele ibe namadijithi ambalwa kunangu-<xliff:g id="NUMBER">%d</xliff:g>"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="one">Kufanele kube nezinhlamvu ezingaphansi kuka-<xliff:g id="NUMBER_1">%d</xliff:g></item>
+      <item quantity="other">Kufanele kube nezinhlamvu ezingaphansi kuka-<xliff:g id="NUMBER_1">%d</xliff:g></item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="one">Kufanele kube amadijithi angaphansi kuka-<xliff:g id="NUMBER_1">%d</xliff:g></item>
+      <item quantity="other">Kufanele kube amadijithi angaphansi kuka-<xliff:g id="NUMBER_1">%d</xliff:g></item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Kumele iqukathe amadijithi angu-0-9 kuphela"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Umlawuli wedivayisi akavumeli ukusebenzisa iphinikhodi yakamuva"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"Ama-PIN avamile avinjelwe umlawuli wakho we-IT. Zama i-PIN ehlukile."</string>
@@ -1921,8 +1933,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Izilawuli zokubandakanya"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Amasevisi alandiwe"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Okokulinga"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Faka amafulegi"</string>
     <string name="talkback_title" msgid="7912059827205988080">"I-Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Isifundi sesikrini kakhulukazi esabantu abangaboni nabanokubona okuncane"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Thepha izinto esikrinini sakho ukuze uzizwe zifundelwa phezulu"</string>
@@ -3134,13 +3145,14 @@
       <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> izimiso zingavulwa ngokuzenzakalela</item>
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> izimiso zingavulwa ngokuzenzakalela</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"Kulungile"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Buyekeza"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Ungabuyekezi"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"Ifoni yakho ingenza okuningi ukukusiza ukuthi ugxile.\n\nBuyekeza izilungiselelo kuya ku-:\n\n- Fihla izaziso ngokuphelele\n\n- Vumela amakholi kusuka koxhumana nabo ababiwe abashayayo abaphindiwe"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"Buyekeza okuthi Ungaphazamisi?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Izilungiselelo"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Futhi ungenza ngezifiso lokhu kuzilungiselelo."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Vimbela uma isikrini sivuliwe"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Vimbela uma isikrini sivaliwe"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Okuthi ungaphazamisi kungenza okuningi kunokuvimbela imisindo engafuneki - ingavimbela ukubuka. Lokhu kungasiza uma uzama ukulala, ukugxila, noma ukukhawulela isikhathi esichithwa efonini yakho."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Vimbela imisindo nokubuka"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Ungavuli isikrini noma ukuvuka kwezaziso"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Ungabonisi izaziso sanhlobo, ngaphandle komsebenzi wefoni ovamile nesimo"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Imisindo yephrofayela yomsebenzi"</string>
@@ -3672,7 +3684,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Ukwenza isipele kukhutshaziwe"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Ibuyekezelwe ku-Android engu-<xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"Isibuyekezo siyatholakala"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"Ayikwazi ukushintsha lesi silungiselelo"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"Isenzo asivunyelwe"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"Ayikwazi ukushintsha ivolumu"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"Ukushaya akuvunyelwe"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"I-SMS ayivunyelwe"</string>
@@ -3862,7 +3874,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Lawula ulwazi ekukhiyeni isikrini"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Bonisa noma fihla okuqukethwe kwesaziso"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Konke"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"Usekelo namathiphu"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"Ububanzi obuncane"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Azikho izinhlelo zokusebenza ezicele ukufinyelela kwe-Premium SMS"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"I-Premium SMS ingakwenzela izindleko zemali futhi izongeza kumabhili enkampani yenethiwekhi. Uma unika amandla imvume yohlelo lokusebenza, uzokwazi ukuthumela i-premium SMS usebenzisa lolo hlelo lokusebenza."</string>

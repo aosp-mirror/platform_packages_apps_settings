@@ -586,11 +586,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Өтө көп жолу туура эмес аракет кылынды. Бул колдонуучу жок кылынат."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Өтө көп жолу туура эмес аракет кылынды. Бул жумуш профили жана анын дайындары жок кылынат."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Этибарга албоо"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Кеминде <xliff:g id="COUNT">%d</xliff:g> белгиден турушу керек"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"PIN код кеминде <xliff:g id="COUNT">%d</xliff:g> орундуу сандан турушу керек"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="other">Кеминде <xliff:g id="COUNT_1">%d</xliff:g> символ болушу керек</item>
+      <item quantity="one">Кеминде <xliff:g id="COUNT_0">%d</xliff:g> символ болушу керек</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="other">PIN коддо кеминде <xliff:g id="COUNT_1">%d</xliff:g> сан болушу керек</item>
+      <item quantity="one">PIN коддо кеминде <xliff:g id="COUNT_0">%d</xliff:g> сан болушу керек</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Улантуу"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"<xliff:g id="NUMBER">%d</xliff:g> белгиден ашпашы керек"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"<xliff:g id="NUMBER">%d</xliff:g> сандан ашпашы керек"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> символдон ашпашы керек</item>
+      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> символдон ашпашы керек</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> сандан ашпашы керек</item>
+      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> сандан ашпашы керек</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"0-9 сандарынан гана турушу керек"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Түзмөктүн администратору акыркы PIN кодду колдонууга тыюу салган"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"Жөнөкөй PIN-коддорду коюу IT администраторуңуз тарабынан бөгөттөлгөн. Татаалыраак PIN-кодду коюп көрүңүз."</string>
@@ -1919,8 +1931,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Башкаруу элементтери"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Жүктөлүп алынган кызматтар"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Сынамык"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Функцияларды белгилөө"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Экрандагы нерсени окуп берүүчү курал көздөрү начар көргөн адамдарга арналган"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Экраныңыздагы элементтерди түзмөк окуп бериши үчүн аларды таптап коюңуз"</string>
@@ -3134,13 +3145,14 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> эреже автоматтык түрдө иштетилет</item>
       <item quantity="one">1 эреже автоматтык түрдө иштетилет</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"Жарайт"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Жаңыртылсын"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Жаңыртылбасын"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"Телефонуңуз сизди алаксытпай, көңүл топтогонго жардам бере алат.\n\nТөмөнкү жөндөөлөрдү иштетиңиз:\n\n- Билдирмелер толугу менен жашырылсын\n\n- Жылдызча коюлган байланыштар менен кайталап чалгандардын чалууларына уруксат берилсин"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"\"Тынчымды алба\" режими жаңыртылсынбы?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Жөндөөлөр"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Муну эми Жөндөөлөрдөн ыңгайлаштырыңыз."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Экран күйүп турганда бөгөттөлсүн"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Экран өчүп турганда бөгөттөлсүн"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"\"Тынчымды алба\" режими керексиз добуштарды бөгөттөгөндөн башка дагы көп нерселерди жасай алат – ал визуалдык графиканы да бөгөттөй алат. Бул, эгер сиз уктап, көңүлүңүздү топтоп же телефондо өткөргөн убактыңызды чектегиңиз келсе жардам берет."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Үндөр жана визуалдык графика бөгөттөлсүн"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Экран күйбөсүн жана билдирмелер көрүнбөсүн"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Телефондун негизги аракеттери жана абалынан тышкары билдирмелер такыр көрүнбөсүн"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Жумуш профилиндеги үндөр"</string>
@@ -3184,15 +3196,15 @@
     <string name="notification_importance_blocked" msgid="7938180808339386300">"Билдирмелер эч качан көрүнбөсүн"</string>
     <string name="notification_importance_min" msgid="9054819132085066824">"Үнсүз жана кичирейтип көрсөтүү"</string>
     <string name="notification_importance_low" msgid="2445139943005315690">"Үнсүз көрсөтүлсүн"</string>
-    <string name="notification_importance_default" msgid="5958338024601957516">"Добуш чыгарсын"</string>
-    <string name="notification_importance_high" msgid="2082429479238228527">"Добуш менен экранга калкып чыксын"</string>
+    <string name="notification_importance_default" msgid="5958338024601957516">"Үн чыгат"</string>
+    <string name="notification_importance_high" msgid="2082429479238228527">"Үнү менен экранга калкып чыгат"</string>
     <string name="notification_importance_high_silent" msgid="2667033773703765252">"Экранга калкып чыксын"</string>
     <string name="notification_importance_min_title" msgid="6974673091137544803">"Төмөн"</string>
     <string name="notification_importance_low_title" msgid="8131254047772814309">"Орто"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Жогору"</string>
     <string name="notification_importance_high_title" msgid="3058778300264746473">"Шашылыш"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Эскертмелерге уруксат берүү"</string>
-    <string name="allow_interruption_summary" msgid="7870159391333957050">"Үндүү сигналдарды, дирилдөөнү иштетип, эскертмелерди башка колдонмолордун үстүнөн көрсөтүү"</string>
+    <string name="allow_interruption_summary" msgid="7870159391333957050">"Үнү чыгат, дирилдейт жана билдирмелер башка колдонмолордун үстүнөн көрүнөт"</string>
     <string name="notification_channel_summary_min" msgid="5401718014765921892">"Маанилүүлү эмес"</string>
     <string name="notification_channel_summary_low" msgid="322317684244981244">"Орточо"</string>
     <string name="notification_channel_summary_default" msgid="1111749130423589931">"Маанилүү"</string>
@@ -3672,7 +3684,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Камдык көчүрмө өчүрүлгөн"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Android <xliff:g id="VERSION">%1$s</xliff:g> версиясына жаңыртылды"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"Жаңы версия бар"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"Бул жөндөө өзгөртүлбөйт"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"Аракетке уруксат жок"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"Үнү өзгөртүлбөйт"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"Чалууга тыюу салынган"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"SMS жөнөтүүгө тыюу салынган"</string>
@@ -3862,7 +3874,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Кулпуланган экрандагы маалыматты көзөмөлдөө"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Эскертме мазмунун көрсөтүү же жашыруу"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Бардыгы"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"Колдоо жана кеңештер"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"Эң кууш"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Орнотулган колдонмолор акы төлөнүүчү SMS пайдаланууга уруксат сураган жок"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"Артыкчылыктуу SMS үчүн сизден акы алынып, ал операторуңуздун эсептерине кошулушу мүмкүн. Эгер кайсы бир колдонмого уруксат берсеңиз, ошол колдонмо аркылуу артыкчылыктуу SMS жөнөтө аласыз."</string>

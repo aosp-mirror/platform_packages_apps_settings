@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"間違えた回数が上限を超えました。このユーザーが削除されます。"</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"間違えた回数が上限を超えました。この仕事用プロファイルと関連データが削除されます。"</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"閉じる"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"<xliff:g id="COUNT">%d</xliff:g> 文字以上必要です"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"PIN は <xliff:g id="COUNT">%d</xliff:g> 桁以上必要です"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 文字以上にしてください</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 文字以上にしてください</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="other">PIN は <xliff:g id="COUNT_1">%d</xliff:g> 桁以上で指定してください</item>
+      <item quantity="one">PIN は <xliff:g id="COUNT_0">%d</xliff:g> 桁以上で指定してください</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"次へ"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"<xliff:g id="NUMBER">%d</xliff:g> 文字未満にしてください"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"<xliff:g id="NUMBER">%d</xliff:g> 桁未満にしてください"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> 文字未満にしてください</item>
+      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> 文字未満にしてください</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> 桁未満にしてください</item>
+      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> 桁未満にしてください</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"使用できるのは 0～9 の数字のみです"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"端末管理により、最近使用した PIN は使用できません"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"一般的な PIN は IT 管理者によってブロックされています。別の PIN をお試しください。"</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"操作のコントロール"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"ダウンロード済みサービス"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"試験運用機能"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"機能フラグ"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"主に視覚障害者を対象としたスクリーンリーダー ツールです"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"画面上の項目をタップすると、読み上げます"</string>
@@ -3137,13 +3148,14 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> 件のルールを自動的に ON にできます</item>
       <item quantity="one">1 件のルールを自動的に ON にできます</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"OK"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"更新する"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"更新しない"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"マナーモードには他にもいろいろな機能があります。\n\n次のように設定を更新できます。\n\n- 通知を完全に非表示にする\n\n- スター付きの連絡先や繰り返し着信のあった相手からの通話を許可する"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"マナーモードを更新しますか？"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"設定"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"これは [設定] でさらにカスタマイズできます。"</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"画面が ON のときでもブロックする"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"画面が OFF のときはブロックする"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"マナーモードでは不要な通知音だけでなく、視覚的な通知もブロックできます。就寝時や集中したいとき、スマートフォンの使用時間を減らしたいときなどに便利です。"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"通知音や視覚的な通知をブロック"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"画面を ON にしない、通知で復帰しない"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"スマートフォンの基本的な操作やステータスに関するものを除き、通知を一切表示しません"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"仕事用プロファイルの音"</string>
@@ -3675,7 +3687,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"バックアップは無効です"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Android <xliff:g id="VERSION">%1$s</xliff:g> に更新済み"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"アップデートを利用できます"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"この設定は変更できません"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"操作が許可されていません"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"音量を変更することはできません"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"発信は許可されていません"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"SMS は許可されていません"</string>
@@ -3865,7 +3877,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"ロック画面に表示される情報の管理"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"通知内容の表示と非表示を切り替える"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"すべて"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"サポートとヒント"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"最小幅"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"プレミアム SMS へのアクセスをリクエストしたインストール済みアプリはありません"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"プレミアム SMS で料金が発生した場合は、携帯通信会社の請求に加算されます。アプリで権限を有効にすると、そのアプリを使用してプレミアム SMS を送信できるようになります。"</string>

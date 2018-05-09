@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"ພະຍາຍາມປົດລັອກບໍ່ສຳເລັດຫຼາຍເທື່ອເກີນໄປ. ຜູ້ໃຊ້ນີ້ຈະຖືກລຶບຂໍ້ມູນອອກ."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"ພະຍາຍາມປົດລັອກບໍ່ສຳເລັດຫຼາຍເທື່ອເກີນໄປ. ໂປຣໄຟລ໌ບ່ອນເຣັດວຽກ ແລະ ຂໍ້ມູນຂອງມັນຈະຖືກລຶບອອກ."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"ປິດໄວ້"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"ຕ້ອງມີຢ່າງຕ່ຳ <xliff:g id="COUNT">%d</xliff:g> ຕົວອັກສອນ"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"ລະ​ຫັດ PIN ຕ້ອງ​ມີ​ຢ່າງ​ໜ້ອຍ <xliff:g id="COUNT">%d</xliff:g> ຕົວເລກ"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="other">ຕ້ອງມີຢ່າງໜ້ອຍ <xliff:g id="COUNT_1">%d</xliff:g> ຕົວອັກສອນ</item>
+      <item quantity="one">ຕ້ອງມີຢ່າງໜ້ອຍ <xliff:g id="COUNT_0">%d</xliff:g> ຕົວອັກສອນ</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="other">PIN ຕ້ອງມີຢ່າງໜ້ອຍ <xliff:g id="COUNT_1">%d</xliff:g> ຕົວເລກ</item>
+      <item quantity="one">PIN ຕ້ອງມີຢ່າງໜ້ອຍ <xliff:g id="COUNT_0">%d</xliff:g> ຕົວເລກ</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"ດຳເນີນການຕໍ່"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"ຕ້ອງມີໜ້ອຍກວ່າ <xliff:g id="NUMBER">%d</xliff:g> ຕົວອັກສອນ"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"ຈະຕ້ອງມີໜ້ອຍກວ່າ <xliff:g id="NUMBER">%d</xliff:g> ຕົວເລກ"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="other">ຕ້ອງໜ້ອຍກວ່າ <xliff:g id="NUMBER_1">%d</xliff:g> ຕົວອັກສອນ</item>
+      <item quantity="one">ຕ້ອງໜ້ອຍກວ່າ <xliff:g id="NUMBER_0">%d</xliff:g> ຕົວອັກສອນ</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="other">ຕ້ອງມີໜ້ອຍກວ່າ <xliff:g id="NUMBER_1">%d</xliff:g> ຕົວເລກ</item>
+      <item quantity="one">ຕ້ອງມີໜ້ອຍກວ່າ <xliff:g id="NUMBER_0">%d</xliff:g> ຕົວເລກ</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"ຕ້ອງມີຕົວເລກ 0 ຫາ 9 ເທົ່ານັ້ນ"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"ຜູ້ເບິ່ງແຍງລະບົບອຸປະກອນບໍ່ອະນຸຍາດໃຫ້ໃຊ້ລະຫັດ PIN ເມື່ອບໍ່ດົນມານີ້"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"ລະຫັດ PIN ທົ່ວໄປແມ່ນຖືກບລັອກໂດຍຜູ້ເບິ່ງແຍງລະບົບໄອທີຂອງທ່ານ. ໃຫ້ລອງໃຊ້ລະຫັດ PIN ອື່ນແທນ."</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"ການຄວບຄຸມການໂຕ້ຕອບ"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"ບໍລິການທີ່ດາວໂຫລດແລ້ວ"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"ຍັງຢູ່ໃນການທົດລອງ"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"ທຸງຄຸນສົມບັດ"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"ໂປຣແກຣມອ່ານໜ້າຈໍໂດຍຕົ້ນຕໍສຳລັບຄົນທີ່ຕາບອດ ແລະ ເບິ່ງເຫັນບໍ່ໄດ້ດີ"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"ແຕະລາຍການໃນໜ້າຈໍຂອງທ່ານເພື່ອຟັງອອກສຽງ"</string>
@@ -3133,13 +3144,14 @@
       <item quantity="other">ສາມາດເປີດ <xliff:g id="ON_COUNT">%d</xliff:g> ກົດໂດຍອັດຕະໂນມັດ</item>
       <item quantity="one">ສາມາດເປີດ 1 ກົດໂດຍອັດຕະໂນມັດ</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"ຕົກລົງ"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"ອັບເດດ"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"ບໍ່ອັບເດດ"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"ໂທລະສັບຂອງທ່ານສາມາດເຮັດຫຍັງໄດ້ເພີ່ມເຕີມເພື່ອຊ່ວຍໃຫ້ທ່ານມີສະມາທິໄດ້.\n\nທ່ານສາມາດອັບເດດການຕັ້ງຄ່າເພື່ອ:\n\n- ເຊື່ອງການແຈ້ງເຕືອນທັງໝົດ\n\n- ອະນຸຍາດສາຍຈາກລາຍຊື່ຜູ້ຕິດຕໍ່ທີ່ມີດາວ ແລະ ຜູ້ທີ່ໂທຊ້ຳໆ"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"ອັບເດດໂໝດຫ້າມລົບກວນບໍ?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"ການຕັ້ງຄ່າ"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"ທ່ານສາມາດປັບແຕ່ງໄດ້ຫຼາຍຂຶ້ນໃນການຕັ້ງຄ່າ."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"ບລັອກເມື່ອເປີດໜ້າຈໍ"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"ບລັອກເມື່ອປິດໜ້າຈໍ"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"ໂໝດຫ້າມລົບກວນສາມາດເຮັດໄດ້ຫຼາຍກວ່າການບລັອກສຽງທີ່ບໍ່ຕ້ອງການ, ມັນສາມາດບລັອກພາບໄດ້ນຳ. ນີ້ອາດເປັນປະໂຫຍດຫາກທ່ານຢາກນອນ, ຕັ້ງໃຈເຮັດວຽກ ຫຼື ຈຳກັດເວລາທີ່ໃຊ້ໂທລະສັບຂອງທ່ານ."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"ບລັອກພາບ ແລະ ສຽງ"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"ຢ່າເປີດໜ້າຈໍ ຫຼື ຕື່ນຂຶ້ນມາເມື່ອມີການແຈ້ງເຕືອນ"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"ຢ່າສະແດງການແຈ້ງເຕືອນເລີຍ, ຍົກເວັ້ນການເຮັດວຽກ ແລະ ສະຖານະພື້ນຖານຂອງໂທລະສັບ"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"ສຽງໂປຣໄຟລ໌ບ່ອນເຮັດວຽກ"</string>
@@ -3671,7 +3683,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"ການສຳຮອງຂໍ້ມູນຖືກປິດໃຊ້ແລ້ວ"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"ອັບເດດເປັນ Android <xliff:g id="VERSION">%1$s</xliff:g> ແລ້ວ"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"ມີອັບເດດໃໝ່"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"ບໍ່ສາມາດປ່ຽນການຕັ້ງຄ່ານີ້ໄດ້"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"ບໍ່ອະນຸຍາດໃຫ້ດຳເນີນການ"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"ບໍ່ສາມາດປ່ຽນລະດັບສຽງໄດ້"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"ບໍ່ອະນຸຍາດການໂທ"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"ບໍ່ອະນຸຍາດໃຫ້ໃຊ້ SMS"</string>
@@ -3861,7 +3873,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"ຂໍ້ມູນການຄວບຄຸມໃນໜ້າຈໍລັອກ"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"ສະແດງ ຫຼື ເຊື່ອງເນື້ອຫາການແຈ້ງເຕືອນ"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"ທັງໝົດ"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"ຊ່ວຍເຫຼືອ ແລະ ເຄັດລັບ"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"ຄວາມກວ້າງນ້ອຍທີ່ສຸດ"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"ບໍ່ມີແອັບທີ່ຕິດຕັ້ງຮ້ອງຂໍການເຂົ້າເຖິງ SMS ແບບພຣີມຽມ"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"SMS ແບບພຣີມຽມອາດເຮັດໃຫ້ທ່ານເສຍເງິນ ແລະ ຈະເພີ່ມຄ່າໃຊ້ຈ່າຍໃຫ້ກັບບິນຜູ້ໃຫ້ບໍລິການຂອງທ່ານ. ຫາກທ່ານເປີດໃຊ້ສິດອະນຸຍາດໃຫ້ກັບແອັບໃດໜຶ່ງ, ທ່ານຈະສາມາດສົ່ງ SMS ແບບພຣີມຽມໂດຍໃຊ້ແອັບນັ້ນໄດ້."</string>

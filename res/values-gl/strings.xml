@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Realizaches demasiados intentos incorrectos. Eliminarase este usuario."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Realizaches demasiados intentos incorrectos. Eliminaranse este perfil de traballo e os datos asociados."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Ignorar"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Debe ter polo menos <xliff:g id="COUNT">%d</xliff:g> caracteres"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"O PIN debe ter polo menos <xliff:g id="COUNT">%d</xliff:g> díxitos"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="other">Debe conter polo menos <xliff:g id="COUNT_1">%d</xliff:g> caracteres</item>
+      <item quantity="one">Debe conter polo menos <xliff:g id="COUNT_0">%d</xliff:g> carácter</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="other">O PIN debe conter polo menos <xliff:g id="COUNT_1">%d</xliff:g> díxitos</item>
+      <item quantity="one">O PIN debe conter polo menos <xliff:g id="COUNT_0">%d</xliff:g> díxito</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Continuar"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"Debe conter menos de <xliff:g id="NUMBER">%d</xliff:g> caracteres"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Debe conter menos de <xliff:g id="NUMBER">%d</xliff:g> díxitos"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="other">Debe conter menos de <xliff:g id="NUMBER_1">%d</xliff:g> caracteres</item>
+      <item quantity="one">Debe conter menos de <xliff:g id="NUMBER_0">%d</xliff:g> carácter</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="other">Debe conter menos de <xliff:g id="NUMBER_1">%d</xliff:g> díxitos</item>
+      <item quantity="one">Debe conter menos de <xliff:g id="NUMBER_0">%d</xliff:g> díxito</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Só pode conter díxitos comprendidos entre o 0 e o 9"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"O administrador de dispositivos non permite o uso dun PIN recente"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"O teu administrador de TI bloqueou os PIN comúns. Proba cun PIN diferente."</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Controis de interacción"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Servizos descargados"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Experimental"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Marcas de funcións"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"O lector de pantalla está destinado principalmente a persoas cegas e con pouca visión"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Toca elementos na pantalla para escoitalos en voz alta"</string>
@@ -3134,13 +3145,14 @@
       <item quantity="other">Pódense activar <xliff:g id="ON_COUNT">%d</xliff:g> normas automaticamente</item>
       <item quantity="one">Pódese activar 1 norma automaticamente</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"Aceptar"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Actualizar"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Non actualizar"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"O teu teléfono pode axudarche a non perder a concentración.\n\nActualiza a configuración para:\n\n- Ocultar completamente as notificacións\n\n- Permitir chamadas de contactos destacados ou de persoas que xa te chamaron"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"Queres actualizar o modo Non molestar?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Configuración"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Podes personalizar máis esta opción en Configuración."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Bloquear cando a pantalla está acendida"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Bloquear cando a pantalla está apagada"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"O modo Non molestar pode realizar máis funcións que bloquear os sons non desexados, por exemplo, pode bloquear o contido visual. Esta opción pode resultar útil se tentas durmir, concentrarte ou ben limitar o tempo que lle adicas ao teléfono."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Bloquear sons e contido visual"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Non activa a pantalla nin se reactiva para mostrar as notificacións"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Non se mostran notificacións, excepto as relacionadas co estado e a actividade básica do teléfono"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Sons do perfil de traballo"</string>
@@ -3672,7 +3684,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Desactivouse a función de copia de seguranza"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Actualizouse a Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"Hai dispoñible unha actualización"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"Non se pode cambiar a opción"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"Acción non permitida"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"Non se pode cambiar o volume"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"As chamadas saíntes non están permitidas"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"As SMS non están permitidas"</string>
@@ -3862,7 +3874,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Información de control sobre a pantalla de bloqueo"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Mostrar ou ocultar o contido das notificacións"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Todo"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"Asistencia e consellos"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"Menor largura"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Ningunha aplicación instalada solicitou acceso ás mensaxes premium"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"É posible que teñas que pagar polas mensaxes premium, cuxos custos se engadirán ás facturas do teu operador. Se activas o permiso para unha aplicación, poderás enviar mensaxes premium a través desa aplicación."</string>

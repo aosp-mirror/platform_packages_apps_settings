@@ -78,7 +78,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Ondoa kadi ya SD"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Futa hifadhi ya USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Futa kadi ya SD"</string>
-    <string name="preview_pager_content_description" msgid="8926235999291761243">"Onyesho la kuchungulia"</string>
+    <string name="preview_pager_content_description" msgid="8926235999291761243">"Kagua kwanza"</string>
     <string name="preview_page_indicator_content_description" msgid="4821343428913401264">"Onyesho la kuchungulia, ukurasa wa <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> kati ya <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"Kuongeza au kupunguza ukubwa wa maandishi kwenye skrini."</string>
     <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Punguza"</string>
@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Umejaribu kufungua mara nyingi mno kwa njia isiyo sahihi. Maelezo ya mtumiaji huyu yatafutwa."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Umejaribu kufungua mara nyingi mno kwa njia isiyo sahihi. Wasifu huu wa kazini utafutwa pamoja na data yake."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Ondoa"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Ni lazima liwe na angalau herufi <xliff:g id="COUNT">%d</xliff:g>"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"Ni lazima PIN iwe na angalau tarakimu <xliff:g id="COUNT">%d</xliff:g>"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="other">Lazima iwe na angalau herufi <xliff:g id="COUNT_1">%d</xliff:g></item>
+      <item quantity="one">Lazima iwe na angalau herufi <xliff:g id="COUNT_0">%d</xliff:g></item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="other">PIN lazima iwe na angalau tarakimu <xliff:g id="COUNT_1">%d</xliff:g></item>
+      <item quantity="one">PIN lazima iwe na angalau tarakimu <xliff:g id="COUNT_0">%d</xliff:g></item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Endelea"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"Ni lazima nenosiri liwe na chini ya herufi <xliff:g id="NUMBER">%d</xliff:g>"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Ni lazima iwe na chini ya tarakimu <xliff:g id="NUMBER">%d</xliff:g>"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="other">Lazima iwe chini ya herufi <xliff:g id="NUMBER_1">%d</xliff:g></item>
+      <item quantity="one">Lazima iwe chini ya herufi <xliff:g id="NUMBER_0">%d</xliff:g></item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="other">Lazima iwe na chini ya tarakimu <xliff:g id="NUMBER_1">%d</xliff:g></item>
+      <item quantity="one">Lazima iwe na chini ya tarakimu <xliff:g id="NUMBER_0">%d</xliff:g></item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Ni lazima iwe na tarakimu 0-9 pekee"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Msimamizi wa kifaa haruhusu utumie PIN uliyotumia hivi majuzi"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"PIN zinazotumika zaidi zimezuiwa na msimamizi wako wa Tehama. Jaribu PIN tofauti."</string>
@@ -955,11 +967,11 @@
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5560680057727007011">"Mtandao pepe wa AndroidAP WPA2 PSK"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_tether_disabled_by_airplane" msgid="414480185654767932">"Haipatikani kwa sababu umewasha hali ya ndegeni"</string>
-    <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Upigaji simu kwa Wi-Fi"</string>
+    <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Kupiga simu kupitia Wi-Fi"</string>
     <string name="wifi_calling_suggestion_title" msgid="5702964371483390024">"Panua eneo la huduma kwa kupiga simu kupitia Wi‑Fi"</string>
     <string name="wifi_calling_suggestion_summary" msgid="1331793267608673739">"Washa kupiga simu kupitia Wi‑Fi ili upanue eneo la huduma"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Mapendeleo ya kupiga simu"</string>
-    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Hali ya upigaji simu kwa Wi-Fi"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Hali ya kupiga simu kupitia Wi-Fi"</string>
     <string name="wifi_calling_roaming_mode_title" msgid="1565039047187685115">"Mapendeleo ya mitandao ya ng\'ambo"</string>
     <!-- no translation found for wifi_calling_roaming_mode_summary (8642014873060687717) -->
     <skip />
@@ -991,7 +1003,7 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Wakati kipengele cha upigaji simu kwa Wi-Fi kimewashwa, simu yako inaweza kuelekeza simu kupitia mitandao ya Wi-Fi au mtandao wa mtoa huduma wako, kutegemea na mapendeleo yako na ni mawimbi yapi yaliyo thabiti. Kabla ya kuwasha kipengele hiki, angalia ada na maelezo mengine kwa mtoa huduma wako."</string>
+    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Wakati kipengele cha kupiga simu kupitia Wi-Fi kimewashwa, simu yako inaweza kuelekeza simu kupitia mitandao ya Wi-Fi au mtandao wa mtoa huduma wako, kutegemea na mapendeleo yako na ni mawimbi yapi yaliyo thabiti. Kabla ya kuwasha kipengele hiki, angalia ada na maelezo mengine kutoka kwa mtoa huduma wako."</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"Anwani ya Dharura"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Inatumika kama anwani ya mahali ulipo ikiwa utapiga simu ukitumia Wi‑Fi"</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Vidhibiti vya mawasiliano"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Huduma zilizopakuliwa"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Ya majaribio"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Alama za vipengele"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Kisoma skrini hasa kwa watu wenye upofu na wenye matatizo ya kuona"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Gusa vipengee kwenye skrini yako ili usikie vikisoma kwa sauti"</string>
@@ -3133,13 +3144,14 @@
       <item quantity="other">Amri <xliff:g id="ON_COUNT">%d</xliff:g> zinaweza kuwaka kiotomatiki</item>
       <item quantity="one">Amri 1 inaweza kuwaka kiotomatiki</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"Sawa"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Sasisha"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Usisasishe"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"Simu yako inaweza kufanya zaidi ili kukusaidia kuangazia.\n\nSasisha mipangilio iwe:\n\nFicha arifa kabisa\n\n-Ruhusu simu kutoka kwa watu unaowasiliana nao wenye nyota na wanaokupigia simu mara kwa mara"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"Ungependa kusasisha kipengele cha Usinisumbue?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Mipangilio"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Unaweza kubadilisha hali hii katika Mipangilio."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Zuia wakati skrini imewashwa"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Zuia wakati skrini imezimwa"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Kipengele cha Usinisumbue kinaweza kufanya mambo mengi mbali na kuzuia sauti zisizohitajika - kinaweza kuzuia picha pia. Hali hii inaweza kukusaidia ikiwa unajaribu kulala, kumakinikia jambo fulani au kupunguza muda unaotumia kwenye simu yako."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Zuia sauti na picha"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Skrini isiwake arifa zikiingia"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Usionyeshe arifa kabisa, ila kwa shughuli na hali za kawaida za simu"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Sauti za wasifu wa kazi"</string>
@@ -3671,7 +3683,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Kipengee cha kuhifadhi nakala kimezimwa"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Imesasishwa na inatumia Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"Sasisho linapatikana"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"Huwezi kubadilisha mipangilio hii"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"Kitendo hakiruhusiwi"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"Haiwezi kubadilisha sauti"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"Huruhusiwi kupiga simu"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"Huruhusiwi kutuma SMS"</string>
@@ -3861,7 +3873,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Dhibiti maelezo kwenye skrini iliyofungwa"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Onyesha au ufiche maudhui ya arifa"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Zote"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"Usaidizi na vidokezo"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"Upana mdogo zaidi"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Hakuna programu zilizosakinishwa ambazo zimeomba kufikia huduma ya SMS zinazolipiwa"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"Gharama ya huduma ya SMS zinazolipiwa itajumuishwa kwenye bili yako ya mtoa huduma. Ikiwa utatoa ruhusa ya programu fulani, utaweza kutuma SMS zinazolipiwa ukitumia programu hiyo."</string>

@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Πάρα πολλές ανεπιτυχείς προσπάθειες. Αυτός ο χρήστης θα διαγραφεί."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Πάρα πολλές ανεπιτυχείς προσπάθειες. Αυτό το προφίλ εργασίας και τα δεδομένα του θα διαγραφούν."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Παράβλεψη"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Πρέπει να αποτελείται από τουλάχιστον <xliff:g id="COUNT">%d</xliff:g> χαρακτήρες"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"Το PIN πρέπει να αποτελείται από τουλάχιστον <xliff:g id="COUNT">%d</xliff:g> ψηφία"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="other">Πρέπει να περιέχει τουλάχιστον <xliff:g id="COUNT_1">%d</xliff:g> χαρακτήρες</item>
+      <item quantity="one">Πρέπει να περιέχει τουλάχιστον <xliff:g id="COUNT_0">%d</xliff:g> χαρακτήρα</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="other">Ο αριθμός PIN πρέπει να περιέχει τουλάχιστον <xliff:g id="COUNT_1">%d</xliff:g> ψηφία</item>
+      <item quantity="one">Ο αριθμός PIN πρέπει να περιέχει τουλάχιστον <xliff:g id="COUNT_0">%d</xliff:g> ψηφίο</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Συνέχεια"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"Πρέπει να αποτελείται από λιγότερους από <xliff:g id="NUMBER">%d</xliff:g> χαρακτήρες"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Πρέπει να αποτελείται από λιγότερα από <xliff:g id="NUMBER">%d</xliff:g> ψηφία"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="other">Πρέπει να αποτελείται από λιγότερους από <xliff:g id="NUMBER_1">%d</xliff:g> χαρακτήρες</item>
+      <item quantity="one">Πρέπει να αποτελείται από λιγότερους από <xliff:g id="NUMBER_0">%d</xliff:g> χαρακτήρα</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="other">Πρέπει να αποτελείται από λιγότερα από <xliff:g id="NUMBER_1">%d</xliff:g> ψηφία</item>
+      <item quantity="one">Πρέπει να αποτελείται από λιγότερα από <xliff:g id="NUMBER_0">%d</xliff:g> ψηφίο</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Πρέπει να περιέχει μόνο ψηφία από το 0 έως το 9"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Ο διαχειριστής της συσκευής δεν επιτρέπει τη χρήση πρόσφατου PIN"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"Τα συνηθισμένα PIN αποκλείονται από τον διαχειριστή IT. Δοκιμάστε να χρησιμοποιήσετε διαφορετικό PIN."</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Στοιχεία ελέγχου αλληλεπίδρασης"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Υπηρεσίες που έχουν ληφθεί"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Σε πειραματικό στάδιο"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Επισημάνσεις λειτουργιών"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Ο αναγνώστης οθόνης απευθύνεται κυρίως σε άτομα με τύφλωση και μειωμένη όραση"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Πατήστε στοιχεία στην οθόνη σας για να ακούσετε την εκφώνησή τους"</string>
@@ -3133,13 +3144,14 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> κανόνες μπορούν να ενεργοποιηθούν αυτόματα</item>
       <item quantity="one">1 κανόνας μπορεί να ενεργοποιηθεί αυτόματα</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"ΟΚ"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Ενημέρωση"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Να μην γίνει ενημέρωση"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"Το τηλέφωνό σας μπορεί να κάνει περισσότερα για να σας βοηθήσει να εστιάζετε σε αυτά που σας ενδιαφέρουν.\n\nΕνημερώστε τις ρυθμίσεις για να κάνετε τα εξής:\n\n- Να αποκρύψετε πλήρως τις ειδοποιήσεις\n\n- Να επιτρέψετε τις κλήσεις από επαφές με αστέρι και καλούντες κατ\' επανάληψη"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"Να ενημερωθεί η λειτουργία \"Μην ενοχλείτε\";"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Ρυθμίσεις"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Μπορείτε να την προσαρμόσετε περαιτέρω στις Ρυθμίσεις."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Αποκλεισμός όταν η οθόνη είναι ενεργή"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Αποκλεισμός όταν η οθόνη είναι απενεργοποιημένη"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Η λειτουργία \"Μην ενοχλείτε\" μπορεί να εκτελέσει περισσότερες ενέργειες πέρα από τον αποκλεισμό ανεπιθύμητων ήχων. Μπορεί να αποκλείσει επίσης οπτικά στοιχεία. Αυτό μπορεί να είναι χρήσιμο εάν προσπαθείτε να κοιμηθείτε, να εστιάσετε κάπου ή να περιορίσετε τον χρόνο χρήσης του τηλεφώνου σας."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Αποκλεισμός ήχων και οπτικών στοιχείων"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Να μην ενεργοποιείται η οθόνη και να μην γίνεται αφύπνιση για ειδοποιήσεις"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Να μην εμφανίζονται καθόλου ειδοποιήσεις, εκτός από τη βασική δραστηριότητα τηλεφώνου και την κατάσταση του τηλεφώνου"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Ήχοι προφίλ εργασίας"</string>
@@ -3671,7 +3683,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Η δημιουργία αντιγράφων ασφαλείας έχει απενεργοποιηθεί"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Ενημερώθηκε σε Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"Διαθέσιμη ενημέρωση"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"Αδύνατη η αλλαγή της ρύθμισης"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"Δεν επιτρέπεται η ενέργεια"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"Δεν είναι δυνατή η αλλαγή της έντασης του ήχου"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"Δεν επιτρέπεται η πραγματοποίηση κλήσεων"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"Δεν επιτρέπεται η αποστολή SMS"</string>
@@ -3861,7 +3873,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Έλεγχος πληροφοριών στην οθόνη κλειδώματος"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Εμφάνιση ή απόκρυψη περιεχομένου ειδοποιήσεων"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Όλες"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"Υποστήριξη και συμβουλές"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"Μικρότερο πλάτος"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Δεν ζητήθηκε πρόσβαση σε SMS ειδικής χρέωσης από εγκατεστημένες εφαρμογές"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"Τα SMS ειδικής χρέωσης ενδέχεται να κοστίσουν και θα αυξήσουν το συνολικό ποσό των λογαριασμών σας κινητού τηλεφώνου. Εάν ενεργοποιήσετε την πρόσβαση για μια εφαρμογή, θα μπορείτε να στέλνετε SMS ειδικής χρέωσης χρησιμοποιώντας τη συγκεκριμένη εφαρμογή."</string>
