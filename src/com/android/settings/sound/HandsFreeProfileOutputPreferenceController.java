@@ -19,6 +19,8 @@ package com.android.settings.sound;
 import static android.media.AudioManager.STREAM_VOICE_CALL;
 import static android.media.AudioSystem.DEVICE_OUT_USB_HEADSET;
 
+import com.android.settingslib.Utils;
+
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.support.v7.preference.Preference;
@@ -45,7 +47,7 @@ public class HandsFreeProfileOutputPreferenceController extends
             return;
         }
 
-        if (!isOngoingCallStatus()) {
+        if (!Utils.isAudioModeOngoingCall(mContext)) {
             // Without phone call, disable the switch entry.
             mPreference.setVisible(false);
             preference.setSummary(mContext.getText(R.string.media_output_default_summary));
@@ -90,7 +92,7 @@ public class HandsFreeProfileOutputPreferenceController extends
 
     @Override
     public void setActiveBluetoothDevice(BluetoothDevice device) {
-        if (isOngoingCallStatus()) {
+        if (Utils.isAudioModeOngoingCall(mContext)) {
             mProfileManager.getHeadsetProfile().setActiveDevice(device);
         }
     }
