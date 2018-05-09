@@ -37,6 +37,7 @@ import android.support.v7.preference.PreferenceScreen;
 import android.text.format.DateUtils;
 
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
@@ -181,7 +182,9 @@ public class BatteryTipPreferenceControllerTest {
         assertThat(preferenceGroup.getPreferenceCount()).isEqualTo(1);
 
         final Preference preference = preferenceGroup.getPreference(0);
-        assertThat(preference.getTitle()).isEqualTo("Battery is in good shape");
-        assertThat(preference.getSummary()).isEqualTo("Apps are running normally");
+        assertThat(preference.getTitle()).isEqualTo(
+                mContext.getString(R.string.battery_tip_summary_title));
+        assertThat(preference.getSummary()).isEqualTo(
+                mContext.getString(R.string.battery_tip_summary_summary));
     }
 }
