@@ -185,7 +185,6 @@ class SliceDataConverter {
                             | MetadataFlag.FLAG_NEED_PREF_TITLE
                             | MetadataFlag.FLAG_NEED_PREF_ICON
                             | MetadataFlag.FLAG_NEED_PREF_SUMMARY
-                            | MetadataFlag.FLAG_NEED_KEYWORDS
                             | MetadataFlag.FLAG_NEED_PLATFORM_SLICE_FLAG);
 
             for (Bundle bundle : metadata) {
@@ -198,7 +197,6 @@ class SliceDataConverter {
                 final String key = bundle.getString(METADATA_KEY);
                 final String title = bundle.getString(METADATA_TITLE);
                 final String summary = bundle.getString(METADATA_SUMMARY);
-                final String keywords = bundle.getString(METADATA_KEYWORDS);
                 final int iconResId = bundle.getInt(METADATA_ICON);
                 final int sliceType = SliceBuilderUtils.getSliceType(mContext, controllerClassName,
                         key);
@@ -210,7 +208,6 @@ class SliceDataConverter {
                         .setSummary(summary)
                         .setIcon(iconResId)
                         .setScreenTitle(screenTitle)
-                        .setKeywords(keywords)
                         .setPreferenceControllerClassName(controllerClassName)
                         .setFragmentName(fragmentName)
                         .setSliceType(sliceType)
