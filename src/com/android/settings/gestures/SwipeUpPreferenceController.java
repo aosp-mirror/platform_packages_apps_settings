@@ -23,6 +23,8 @@ import android.content.pm.PackageManager;
 import android.os.UserManager;
 import android.provider.Settings;
 
+import com.android.settings.R;
+
 public class SwipeUpPreferenceController extends GesturePreferenceController {
 
     private final int ON = 1;
