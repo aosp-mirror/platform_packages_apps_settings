@@ -80,7 +80,7 @@ public class AppDataUsagePreferenceControllerTest {
         doReturn(false).when(mController).isBandwidthControlEnabled();
 
         assertThat(mController.getAvailabilityStatus())
-            .isEqualTo(BasePreferenceController.DISABLED_UNSUPPORTED);
+            .isEqualTo(BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test

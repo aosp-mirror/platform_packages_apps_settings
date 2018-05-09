@@ -34,6 +34,6 @@ public class EnabledVrListenersController extends BasePreferenceController {
     public int getAvailabilityStatus() {
         return mContext.getResources().getBoolean(R.bool.config_show_enabled_vr_listeners)
                 ? AVAILABLE
-                : DISABLED_UNSUPPORTED;
+                : UNSUPPORTED_ON_DEVICE;
     }
 }

@@ -35,6 +35,6 @@ public class DataSaverController extends BasePreferenceController {
     public int getAvailabilityStatus() {
         return mContext.getResources().getBoolean(R.bool.config_show_data_saver)
                 ? AVAILABLE
-                : DISABLED_UNSUPPORTED;
+                : UNSUPPORTED_ON_DEVICE;
     }
 }

@@ -182,7 +182,7 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
     @Override
     public int getAvailabilityStatus() {
         return DataUsageUtils.hasSim(mActivity)
-                || DataUsageUtils.hasWifiRadio(mContext) ? AVAILABLE : DISABLED_UNSUPPORTED;
+                || DataUsageUtils.hasWifiRadio(mContext) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override

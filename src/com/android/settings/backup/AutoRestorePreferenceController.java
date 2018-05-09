@@ -46,7 +46,7 @@ public class AutoRestorePreferenceController extends TogglePreferenceController 
             return DISABLED_FOR_USER;
         }
         if (PrivacySettingsUtils.isInvisibleKey(mContext, PrivacySettingsUtils.AUTO_RESTORE)) {
-            return DISABLED_UNSUPPORTED;
+            return UNSUPPORTED_ON_DEVICE;
         }
         return AVAILABLE;
     }

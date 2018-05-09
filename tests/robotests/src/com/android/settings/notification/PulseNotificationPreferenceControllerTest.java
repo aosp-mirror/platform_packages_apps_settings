@@ -130,7 +130,7 @@ public class PulseNotificationPreferenceControllerTest {
 
         assertThat(mController.isAvailable()).isFalse();
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.DISABLED_UNSUPPORTED);
+                BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 
     @Test

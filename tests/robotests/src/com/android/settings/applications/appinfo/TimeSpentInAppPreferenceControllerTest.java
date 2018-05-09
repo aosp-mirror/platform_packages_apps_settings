@@ -71,7 +71,7 @@ public class TimeSpentInAppPreferenceControllerTest {
         mController.setPackageName(null);
 
         assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.DISABLED_UNSUPPORTED);
+                .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
@@ -79,7 +79,7 @@ public class TimeSpentInAppPreferenceControllerTest {
         mController.setPackageName(TEST_INTENT.getStringExtra(EXTRA_PACKAGE_NAME));
 
         assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.DISABLED_UNSUPPORTED);
+                .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
@@ -88,7 +88,7 @@ public class TimeSpentInAppPreferenceControllerTest {
         mController.setPackageName(TEST_INTENT.getStringExtra(EXTRA_PACKAGE_NAME));
 
         assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.DISABLED_UNSUPPORTED);
+                .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
 
     }
 

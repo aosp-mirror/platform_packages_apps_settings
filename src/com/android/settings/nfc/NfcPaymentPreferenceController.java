@@ -80,7 +80,7 @@ public class NfcPaymentPreferenceController extends BasePreferenceController imp
     public int getAvailabilityStatus() {
         final PackageManager pm = mContext.getPackageManager();
         if (!pm.hasSystemFeature(PackageManager.FEATURE_NFC)) {
-            return DISABLED_UNSUPPORTED;
+            return UNSUPPORTED_ON_DEVICE;
         }
         if (mPaymentBackend == null) {
             mPaymentBackend = new PaymentBackend(mContext);
@@ -88,7 +88,7 @@ public class NfcPaymentPreferenceController extends BasePreferenceController imp
         final List<PaymentAppInfo> appInfos = mPaymentBackend.getPaymentAppInfos();
         return (appInfos != null && !appInfos.isEmpty())
                 ? AVAILABLE
-                : DISABLED_UNSUPPORTED;
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

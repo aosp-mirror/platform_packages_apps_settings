@@ -41,7 +41,7 @@ public abstract class LegalPreferenceController extends BasePreferenceController
         if (findMatchingSpecificActivity() != null) {
             return AVAILABLE;
         } else {
-            return DISABLED_UNSUPPORTED;
+            return UNSUPPORTED_ON_DEVICE;
         }
     }
 

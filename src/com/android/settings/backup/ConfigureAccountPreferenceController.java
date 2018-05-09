@@ -38,7 +38,7 @@ public class ConfigureAccountPreferenceController extends BasePreferenceControll
             return DISABLED_FOR_USER;
         }
         if (PrivacySettingsUtils.isInvisibleKey(mContext, PrivacySettingsUtils.CONFIGURE_ACCOUNT)) {
-            return DISABLED_UNSUPPORTED;
+            return UNSUPPORTED_ON_DEVICE;
         }
         return AVAILABLE;
     }

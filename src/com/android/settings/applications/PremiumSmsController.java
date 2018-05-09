@@ -34,6 +34,6 @@ public class PremiumSmsController extends BasePreferenceController {
     public int getAvailabilityStatus() {
         return mContext.getResources().getBoolean(R.bool.config_show_premium_sms)
                 ? AVAILABLE
-                : DISABLED_UNSUPPORTED;
+                : UNSUPPORTED_ON_DEVICE;
     }
 }

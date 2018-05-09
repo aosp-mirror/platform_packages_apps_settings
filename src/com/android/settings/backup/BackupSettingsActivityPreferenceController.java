@@ -41,7 +41,7 @@ public class BackupSettingsActivityPreferenceController extends BasePreferenceCo
     public int getAvailabilityStatus() {
         return mUm.isAdminUser()
                 ? AVAILABLE
-                : DISABLED_UNSUPPORTED;
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

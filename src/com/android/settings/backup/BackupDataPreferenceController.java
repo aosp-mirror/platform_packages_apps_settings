@@ -37,7 +37,7 @@ public class BackupDataPreferenceController extends BasePreferenceController {
             return DISABLED_FOR_USER;
         }
         if (PrivacySettingsUtils.isInvisibleKey(mContext, PrivacySettingsUtils.BACKUP_DATA)) {
-            return DISABLED_UNSUPPORTED;
+            return UNSUPPORTED_ON_DEVICE;
         }
         return AVAILABLE;
     }

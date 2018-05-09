@@ -34,6 +34,6 @@ public class HighPowerAppsController extends BasePreferenceController {
     public int getAvailabilityStatus() {
         return mContext.getResources().getBoolean(R.bool.config_show_high_power_apps)
                 ? AVAILABLE
-                : DISABLED_UNSUPPORTED;
+                : UNSUPPORTED_ON_DEVICE;
     }
 }

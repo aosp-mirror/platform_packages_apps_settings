@@ -98,7 +98,7 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
     @Override
     public final int getAvailabilityStatus() {
         return FeatureFlagUtils.isEnabled(mContext, FeatureFlags.AUDIO_SWITCHER_SETTINGS)
-                ? AVAILABLE : DISABLED_UNSUPPORTED;
+                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override

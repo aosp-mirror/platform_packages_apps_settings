@@ -48,7 +48,7 @@ public class EnterpriseDisclosurePreferenceController extends BasePreferenceCont
     @Override
     public int getAvailabilityStatus() {
         if (getDisclosure() == null) {
-            return DISABLED_UNSUPPORTED;
+            return UNSUPPORTED_ON_DEVICE;
         }
         return AVAILABLE;
     }

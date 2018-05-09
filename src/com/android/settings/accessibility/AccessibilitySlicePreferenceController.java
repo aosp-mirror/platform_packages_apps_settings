@@ -23,7 +23,6 @@ import android.content.Context;
 import android.provider.Settings;
 import android.view.accessibility.AccessibilityManager;
 
-import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 
@@ -88,7 +87,7 @@ public class AccessibilitySlicePreferenceController extends TogglePreferenceCont
     @Override
     public int getAvailabilityStatus() {
         // Return unsupported when the service is disabled or not installed.
-        return getAccessibilityServiceInfo() == null ? DISABLED_UNSUPPORTED : AVAILABLE;
+        return getAccessibilityServiceInfo() == null ? UNSUPPORTED_ON_DEVICE : AVAILABLE;
     }
 
     private AccessibilityServiceInfo getAccessibilityServiceInfo() {

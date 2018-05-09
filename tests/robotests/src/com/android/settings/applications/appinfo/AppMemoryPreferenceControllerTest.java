@@ -91,7 +91,7 @@ public class AppMemoryPreferenceControllerTest {
                 Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
 
         assertThat(mController.getAvailabilityStatus())
-            .isEqualTo(BasePreferenceController.DISABLED_UNSUPPORTED);
+            .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
@@ -101,7 +101,7 @@ public class AppMemoryPreferenceControllerTest {
                 Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
 
         assertThat(mController.getAvailabilityStatus())
-            .isEqualTo(BasePreferenceController.DISABLED_UNSUPPORTED);
+            .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
@@ -110,7 +110,7 @@ public class AppMemoryPreferenceControllerTest {
                 Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
 
         assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.DISABLED_UNSUPPORTED);
+                .isEqualTo(BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test

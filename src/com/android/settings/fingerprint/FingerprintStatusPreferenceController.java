@@ -60,7 +60,7 @@ public class FingerprintStatusPreferenceController extends BasePreferenceControl
     @Override
     public int getAvailabilityStatus() {
         if (mFingerprintManager == null || !mFingerprintManager.isHardwareDetected()) {
-            return DISABLED_UNSUPPORTED;
+            return UNSUPPORTED_ON_DEVICE;
         }
         if (isUserSupported()) {
             return AVAILABLE;
