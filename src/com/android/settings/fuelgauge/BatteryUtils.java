@@ -552,7 +552,7 @@ public class BatteryUtils {
             return true;
         }
 
-        return isSystemUid(uid) || powerWhitelistBackend.isSysWhitelistedExceptIdle(packageNames)
+        return isSystemUid(uid) || powerWhitelistBackend.isWhitelisted(packageNames)
                 || (isSystemApp(mPackageManager, packageNames) && !hasLauncherEntry(packageNames));
     }
 
