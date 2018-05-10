@@ -113,7 +113,7 @@ public class BatteryTipDialogFragmentTest {
         ShadowAlertDialog shadowDialog = shadowOf(dialog);
 
         assertThat(shadowDialog.getMessage()).isEqualTo(
-                mContext.getString(R.string.battery_tip_dialog_message, 1, "60 minutes ago"));
+                mContext.getString(R.string.battery_tip_dialog_message, 1));
     }
 
     @Test

@@ -94,10 +94,7 @@ public class BatteryTipDialogFragment extends InstrumentedDialogFragment impleme
 
                 return new AlertDialog.Builder(context)
                         .setMessage(getString(R.string.battery_tip_dialog_message,
-                                highUsageTip.getHighUsageAppList().size(),
-                                StringUtil.formatRelativeTime(context,
-                                        highUsageTip.getLastFullChargeTimeMs(),
-                                        false /* withSeconds */)))
+                                highUsageTip.getHighUsageAppList().size()))
                         .setView(view)
                         .setPositiveButton(android.R.string.ok, null)
                         .create();
