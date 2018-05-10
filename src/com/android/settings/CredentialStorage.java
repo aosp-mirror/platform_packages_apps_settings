@@ -35,25 +35,17 @@ import android.security.Credentials;
 import android.security.KeyChain;
 import android.security.KeyChain.KeyChainConnection;
 import android.security.KeyStore;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.internal.widget.LockPatternUtils;
 import com.android.org.bouncycastle.asn1.ASN1InputStream;
 import com.android.org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.security.ConfigureKeyGuardDialog;
 import com.android.settings.vpn2.VpnUtils;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-
 import sun.security.util.ObjectIdentifier;
 import sun.security.x509.AlgorithmId;
 
@@ -78,8 +70,8 @@ import sun.security.x509.AlgorithmId;
  *
  * KeyStore: LOCKED
  * KeyGuard: OFF/ON
- * Action:   old unlock dialog
- * Notes:    assume old password, need to use it to unlock.
+ * Action:   confirm key guard
+ * Notes:    request normal unlock to unlock the keystore.
  * if unlock, ensure key guard before install.
  * if reset, treat as UNINITALIZED/OFF
  *
@@ -114,14 +106,6 @@ public final class CredentialStorage extends Activity {
      * When non-null, the bundle containing credentials to install.
      */
     private Bundle mInstallBundle;
-
-    /**
-     * After unsuccessful KeyStore.unlock, the number of unlock
-     * attempts remaining before the KeyStore will reset itself.
-     *
-     * Reset to -1 on successful unlock or reset.
-     */
-    private int mRetriesRemaining = -1;
 
     @Override
     protected void onResume() {
@@ -166,11 +150,12 @@ public final class CredentialStorage extends Activity {
                 return;
             }
             case LOCKED: {
-                new UnlockDialog();
+                // Force key guard confirmation
+                confirmKeyGuard(CONFIRM_KEY_GUARD_REQUEST);
                 return;
             }
             case UNLOCKED: {
-                if (!checkKeyGuardQuality()) {
+                if (isActivePasswordQualityInsufficient()) {
                     final ConfigureKeyGuardDialog dialog = new ConfigureKeyGuardDialog();
                     dialog.show(getFragmentManager(), ConfigureKeyGuardDialog.TAG);
                     return;
@@ -189,7 +174,7 @@ public final class CredentialStorage extends Activity {
      * case after unlocking with an old-style password).
      */
     private void ensureKeyGuard() {
-        if (!checkKeyGuardQuality()) {
+        if (isActivePasswordQualityInsufficient()) {
             // key guard not setup, doing so will initialize keystore
             final ConfigureKeyGuardDialog dialog = new ConfigureKeyGuardDialog();
             dialog.show(getFragmentManager(), ConfigureKeyGuardDialog.TAG);
@@ -205,9 +190,9 @@ public final class CredentialStorage extends Activity {
     }
 
     /**
-     * Returns true if the currently set key guard matches our minimum quality requirements.
+     * Returns true if the currently set key guard violates our minimum quality requirements.
      */
-    private boolean checkKeyGuardQuality() {
+    private boolean isActivePasswordQualityInsufficient() {
         final int credentialOwner =
                 UserManager.get(this).getCredentialOwnerProfile(UserHandle.myUserId());
         final int quality = new LockPatternUtils(this).getActivePasswordQuality(credentialOwner);
@@ -457,11 +442,8 @@ public final class CredentialStorage extends Activity {
 
         final UserManager userManager = (UserManager) getSystemService(Context.USER_SERVICE);
         final UserInfo parentInfo = userManager.getProfileParent(launchedFromUserId);
-        if (parentInfo == null || parentInfo.id != UserHandle.myUserId()) {
-            // Caller is not running in a profile of this user
-            return false;
-        }
-        return true;
+        // Caller is running in a profile of this user
+        return ((parentInfo != null) && (parentInfo.id == UserHandle.myUserId()));
     }
 
     /**
@@ -469,19 +451,15 @@ public final class CredentialStorage extends Activity {
      */
     private boolean confirmKeyGuard(int requestCode) {
         final Resources res = getResources();
-        boolean launched = new ChooseLockSettingsHelper(this)
+        return new ChooseLockSettingsHelper(this)
                 .launchConfirmationActivity(requestCode,
                         res.getText(R.string.credentials_title), true);
-        return launched;
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        /**
-         * Receive key guard password initiated by confirmKeyGuard.
-         */
+        // Receive key guard password initiated by confirmKeyGuard.
         if (requestCode == CONFIRM_KEY_GUARD_REQUEST) {
             if (resultCode == Activity.RESULT_OK) {
                 final String password = data.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
@@ -500,104 +478,6 @@ public final class CredentialStorage extends Activity {
                 return;
             }
             // failed confirmation, bail
-            finish();
-        }
-    }
-
-    /**
-     * Prompt for unlock with old-style password.
-     *
-     * On successful unlock, ensure migration to key guard before continuing.
-     * On unsuccessful unlock, retry by calling handleUnlockOrInstall.
-     */
-    private class UnlockDialog implements TextWatcher,
-            DialogInterface.OnClickListener, DialogInterface.OnDismissListener {
-        private boolean mUnlockConfirmed;
-
-        private final Button mButton;
-        private final TextView mOldPassword;
-        private final TextView mError;
-
-        private UnlockDialog() {
-            final View view = View.inflate(
-                CredentialStorage.this, R.layout.credentials_dialog, null);
-
-            final CharSequence text;
-            if (mRetriesRemaining == -1) {
-                text = getResources().getText(R.string.credentials_unlock_hint);
-            } else if (mRetriesRemaining > 3) {
-                text = getResources().getText(R.string.credentials_wrong_password);
-            } else if (mRetriesRemaining == 1) {
-                text = getResources().getText(R.string.credentials_reset_warning);
-            } else {
-                text = getString(R.string.credentials_reset_warning_plural, mRetriesRemaining);
-            }
-
-            ((TextView) view.findViewById(R.id.hint)).setText(text);
-            mOldPassword = (TextView) view.findViewById(R.id.old_password);
-            mOldPassword.setVisibility(View.VISIBLE);
-            mOldPassword.addTextChangedListener(this);
-            mError = (TextView) view.findViewById(R.id.error);
-
-            final AlertDialog dialog = new AlertDialog.Builder(CredentialStorage.this)
-                    .setView(view)
-                    .setTitle(R.string.credentials_unlock)
-                    .setPositiveButton(android.R.string.ok, this)
-                    .setNegativeButton(android.R.string.cancel, this)
-                    .create();
-            dialog.setOnDismissListener(this);
-            dialog.show();
-            mButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-            mButton.setEnabled(false);
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-            mButton.setEnabled(mOldPassword == null || mOldPassword.getText().length() > 0);
-        }
-
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-        }
-
-        @Override
-        public void onClick(DialogInterface dialog, int button) {
-            mUnlockConfirmed = (button == DialogInterface.BUTTON_POSITIVE);
-        }
-
-        @Override
-        public void onDismiss(DialogInterface dialog) {
-            if (mUnlockConfirmed) {
-                mUnlockConfirmed = false;
-                mError.setVisibility(View.VISIBLE);
-                mKeyStore.unlock(mOldPassword.getText().toString());
-                final int error = mKeyStore.getLastError();
-                if (error == KeyStore.NO_ERROR) {
-                    mRetriesRemaining = -1;
-                    Toast.makeText(CredentialStorage.this,
-                            R.string.credentials_enabled,
-                            Toast.LENGTH_SHORT).show();
-                    // aha, now we are unlocked, switch to key guard.
-                    // we'll end up back in onResume to install
-                    ensureKeyGuard();
-                } else if (error == KeyStore.UNINITIALIZED) {
-                    mRetriesRemaining = -1;
-                    Toast.makeText(CredentialStorage.this,
-                            R.string.credentials_erased,
-                            Toast.LENGTH_SHORT).show();
-                    // we are reset, we can now set new password with key guard
-                    handleUnlockOrInstall();
-                } else if (error >= KeyStore.WRONG_PASSWORD) {
-                    // we need to try again
-                    mRetriesRemaining = error - KeyStore.WRONG_PASSWORD + 1;
-                    handleUnlockOrInstall();
-                }
-                return;
-            }
             finish();
         }
     }
