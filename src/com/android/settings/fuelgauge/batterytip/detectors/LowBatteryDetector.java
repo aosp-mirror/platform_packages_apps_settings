@@ -16,12 +16,15 @@
 
 package com.android.settings.fuelgauge.batterytip.detectors;
 
-import android.text.format.DateUtils;
+import android.content.Context;
+import android.os.PowerManager;
 
 import com.android.settings.fuelgauge.BatteryInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.LowBatteryTip;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Detect whether the battery is too low
@@ -29,18 +32,36 @@ import com.android.settings.fuelgauge.batterytip.tips.LowBatteryTip;
 public class LowBatteryDetector implements BatteryTipDetector {
     private BatteryInfo mBatteryInfo;
     private BatteryTipPolicy mPolicy;
+    private PowerManager mPowerManager;
+    private int mWarningLevel;
 
-    public LowBatteryDetector(BatteryTipPolicy policy, BatteryInfo batteryInfo) {
+    public LowBatteryDetector(Context context, BatteryTipPolicy policy, BatteryInfo batteryInfo) {
         mPolicy = policy;
         mBatteryInfo = batteryInfo;
+        mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+        mWarningLevel = context.getResources().getInteger(
+                com.android.internal.R.integer.config_lowBatteryWarningLevel);
     }
 
     @Override
     public BatteryTip detect() {
-        // Show it if battery life is less than mPolicy.lowBatteryHour
-        final boolean isShown = mPolicy.lowBatteryEnabled && mBatteryInfo.discharging
-                && mBatteryInfo.remainingTimeUs < mPolicy.lowBatteryHour * DateUtils.HOUR_IN_MILLIS;
+        final boolean powerSaveModeOn = mPowerManager.isPowerSaveMode();
+        final boolean lowBattery = mBatteryInfo.batteryLevel <= mWarningLevel
+                || (mBatteryInfo.discharging
+                && mBatteryInfo.remainingTimeUs < TimeUnit.HOURS.toMicros(mPolicy.lowBatteryHour));
+
+        int state = BatteryTip.StateType.INVISIBLE;
+        if (mPolicy.lowBatteryEnabled) {
+            if (powerSaveModeOn) {
+                // Show it is handled if battery saver is on
+                state = BatteryTip.StateType.HANDLED;
+            } else if (mPolicy.testLowBatteryTip || (mBatteryInfo.discharging && lowBattery)) {
+                // Show it is new if in test or in discharging low battery state
+                state = BatteryTip.StateType.NEW;
+            }
+        }
+
         return new LowBatteryTip(
-                isShown ? BatteryTip.StateType.NEW : BatteryTip.StateType.INVISIBLE);
+                state, powerSaveModeOn, mBatteryInfo.remainingLabel);
     }
 }
