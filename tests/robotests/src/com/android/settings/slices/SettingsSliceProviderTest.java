@@ -18,16 +18,12 @@
 package com.android.settings.slices;
 
 import static android.content.ContentResolver.SCHEME_CONTENT;
-
 import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.app.slice.SliceManager;
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -44,12 +40,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 
-import androidx.slice.Slice;
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+
+import androidx.slice.Slice;
 
 /**
  * TODO Investigate using ShadowContentResolver.registerProviderInternal(String, ContentProvider)
