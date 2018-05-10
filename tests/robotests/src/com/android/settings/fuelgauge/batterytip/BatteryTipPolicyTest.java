@@ -101,7 +101,7 @@ public class BatteryTipPolicyTest {
         assertThat(batteryTipPolicy.appRestrictionEnabled).isTrue();
         assertThat(batteryTipPolicy.reducedBatteryEnabled).isFalse();
         assertThat(batteryTipPolicy.reducedBatteryPercent).isEqualTo(50);
-        assertThat(batteryTipPolicy.lowBatteryEnabled).isFalse();
+        assertThat(batteryTipPolicy.lowBatteryEnabled).isTrue();
         assertThat(batteryTipPolicy.lowBatteryHour).isEqualTo(3);
         assertThat(batteryTipPolicy.dataHistoryRetainDay).isEqualTo(30);
         assertThat(batteryTipPolicy.excessiveBgDrainPercentage).isEqualTo(10);
