@@ -89,6 +89,18 @@ public class ShadowRestrictedLockUtils {
         return (sKeyguardDisabledFeatures & features) == 0 ? null : new EnforcedAdmin();
     }
 
+    @Implementation
+    public static boolean hasBaseUserRestriction(Context context,
+            String userRestriction, int userId) {
+        return sIsRestricted;
+    }
+
+    @Implementation
+    public static EnforcedAdmin checkIfRestrictionEnforced(Context context,
+            String userRestriction, int userId) {
+        return sIsRestricted ? new EnforcedAdmin() : null;
+    }
+
     public static boolean hasAdminSupportDetailsIntentLaunched() {
         return sAdminSupportDetailsIntentLaunched;
     }
