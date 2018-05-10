@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -86,7 +87,7 @@ public class PowerUsageAdvancedTest {
     @Test
     public void testOptionsMenu_menuAppToggle_metricEventInvoked() {
         mFragment.mShowAllApps = false;
-        doNothing().when(mFragment).restartBatteryStatsLoader();
+        doNothing().when(mFragment).restartBatteryStatsLoader(anyInt());
 
         mFragment.onOptionsItemSelected(mToggleAppsMenu);
 
