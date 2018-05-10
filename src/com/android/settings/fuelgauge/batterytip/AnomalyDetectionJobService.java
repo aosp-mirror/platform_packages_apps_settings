@@ -71,7 +71,8 @@ public class AnomalyDetectionJobService extends JobService {
 
     private final Object mLock = new Object();
     @GuardedBy("mLock")
-    private boolean mIsJobCanceled = false;
+    @VisibleForTesting
+    boolean mIsJobCanceled = false;
 
     public static void scheduleAnomalyDetection(Context context, Intent intent) {
         final JobScheduler jobScheduler = context.getSystemService(JobScheduler.class);
@@ -89,6 +90,9 @@ public class AnomalyDetectionJobService extends JobService {
 
     @Override
     public boolean onStartJob(JobParameters params) {
+        synchronized (mLock) {
+            mIsJobCanceled = false;
+        }
         ThreadUtils.postOnBackgroundThread(() -> {
             final Context context = AnomalyDetectionJobService.this;
             final BatteryDatabaseManager batteryDatabaseManager =
@@ -96,18 +100,15 @@ public class AnomalyDetectionJobService extends JobService {
             final BatteryTipPolicy policy = new BatteryTipPolicy(this);
             final BatteryUtils batteryUtils = BatteryUtils.getInstance(this);
             final ContentResolver contentResolver = getContentResolver();
-            final BatteryStatsHelper batteryStatsHelper = new BatteryStatsHelper(this,
-                    true /* collectBatteryBroadcast */);
             final UserManager userManager = getSystemService(UserManager.class);
             final PowerWhitelistBackend powerWhitelistBackend = PowerWhitelistBackend.getInstance();
             final PowerUsageFeatureProvider powerUsageFeatureProvider = FeatureFactory
                     .getFactory(this).getPowerUsageFeatureProvider(this);
             final MetricsFeatureProvider metricsFeatureProvider = FeatureFactory
                     .getFactory(this).getMetricsFeatureProvider();
-            batteryUtils.initBatteryStatsHelper(batteryStatsHelper, null /* bundle */, userManager);
 
             for (JobWorkItem item = dequeueWork(params); item != null; item = dequeueWork(params)) {
-                saveAnomalyToDatabase(context, batteryStatsHelper, userManager,
+                saveAnomalyToDatabase(context, userManager,
                         batteryDatabaseManager, batteryUtils, policy, powerWhitelistBackend,
                         contentResolver, powerUsageFeatureProvider, metricsFeatureProvider,
                         item.getIntent().getExtras());
@@ -128,8 +129,7 @@ public class AnomalyDetectionJobService extends JobService {
     }
 
     @VisibleForTesting
-    void saveAnomalyToDatabase(Context context, BatteryStatsHelper batteryStatsHelper,
-            UserManager userManager,
+    void saveAnomalyToDatabase(Context context, UserManager userManager,
             BatteryDatabaseManager databaseManager, BatteryUtils batteryUtils,
             BatteryTipPolicy policy, PowerWhitelistBackend powerWhitelistBackend,
             ContentResolver contentResolver, PowerUsageFeatureProvider powerUsageFeatureProvider,
