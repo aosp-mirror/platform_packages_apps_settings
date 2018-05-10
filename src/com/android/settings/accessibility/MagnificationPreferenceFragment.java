@@ -23,7 +23,6 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.view.accessibility.AccessibilityManager;
 
@@ -32,10 +31,14 @@ import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settings.search.actionbar.SearchMenuController;
+import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.Arrays;
 import java.util.List;
+
+import androidx.preference.Preference;
 
 @SearchIndexable
 public final class MagnificationPreferenceFragment extends DashboardFragment {
@@ -90,6 +93,10 @@ public final class MagnificationPreferenceFragment extends DashboardFragment {
             // If invoked from SUW, redirect to fragment instrumented for Vision Settings metrics
             preference.setFragment(
                     ToggleScreenMagnificationPreferenceFragmentForSetupWizard.class.getName());
+            Bundle args = preference.getExtras();
+            // Copy from AccessibilitySettingsForSetupWizardActivity, hide search and help menu
+            args.putInt(HelpResourceProvider.HELP_URI_RESOURCE_KEY, 0);
+            args.putBoolean(SearchMenuController.NEED_SEARCH_ICON_IN_ACTION_BAR, false);
         }
         return super.onPreferenceTreeClick(preference);
     }
