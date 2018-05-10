@@ -106,7 +106,7 @@ public class WifiTetherSwitchBarController implements SwitchWidgetController.OnS
 
     void startTether() {
         mSwitchBar.setEnabled(false);
-        mConnectivityManager.startTethering(TETHERING_WIFI, false /* showProvisioningUi */,
+        mConnectivityManager.startTethering(TETHERING_WIFI, true /* showProvisioningUi */,
                 mOnStartTetheringCallback, new Handler(Looper.getMainLooper()));
     }
 
