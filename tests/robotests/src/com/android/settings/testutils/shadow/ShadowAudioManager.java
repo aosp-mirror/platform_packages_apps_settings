@@ -41,7 +41,7 @@ import java.util.ArrayList;
 @Implements(value = AudioManager.class, inheritImplementationMethods = true)
 public class ShadowAudioManager extends org.robolectric.shadows.ShadowAudioManager {
     private int mRingerMode;
-    private int mStream;
+    private int mDeviceCodes;
     private boolean mMusicActiveRemotely = false;
     private ArrayList<AudioDeviceCallback> mDeviceCallbacks = new ArrayList();
 
@@ -79,8 +79,8 @@ public class ShadowAudioManager extends org.robolectric.shadows.ShadowAudioManag
         return mMusicActiveRemotely;
     }
 
-    public void setStream(int stream) {
-        mStream = stream;
+    public void setOutputDevice(int deviceCodes) {
+        mDeviceCodes = deviceCodes;
     }
 
     @Implementation
@@ -94,7 +94,7 @@ public class ShadowAudioManager extends org.robolectric.shadows.ShadowAudioManag
             case STREAM_NOTIFICATION:
             case STREAM_DTMF:
             case STREAM_ACCESSIBILITY:
-                return mStream;
+                return mDeviceCodes;
             default:
                 return 0;
         }
