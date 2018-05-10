@@ -230,7 +230,7 @@ public class BatteryTipPolicy {
         appRestrictionEnabled = mParser.getBoolean(KEY_APP_RESTRICTION_ENABLED, true);
         reducedBatteryEnabled = mParser.getBoolean(KEY_REDUCED_BATTERY_ENABLED, false);
         reducedBatteryPercent = mParser.getInt(KEY_REDUCED_BATTERY_PERCENT, 50);
-        lowBatteryEnabled = mParser.getBoolean(KEY_LOW_BATTERY_ENABLED, false);
+        lowBatteryEnabled = mParser.getBoolean(KEY_LOW_BATTERY_ENABLED, true);
         lowBatteryHour = mParser.getInt(KEY_LOW_BATTERY_HOUR, 3);
         dataHistoryRetainDay = mParser.getInt(KEY_DATA_HISTORY_RETAIN_DAY, 30);
         excessiveBgDrainPercentage = mParser.getInt(KEY_EXCESSIVE_BG_DRAIN_PERCENTAGE, 10);
