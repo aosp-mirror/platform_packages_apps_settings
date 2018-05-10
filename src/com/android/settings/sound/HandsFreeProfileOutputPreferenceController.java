@@ -16,6 +16,7 @@
 
 package com.android.settings.sound;
 
+import static android.bluetooth.IBluetoothHearingAid.HI_SYNC_ID_INVALID;
 import static android.media.AudioManager.STREAM_VOICE_CALL;
 import static android.media.AudioSystem.DEVICE_OUT_USB_HEADSET;
 
@@ -25,12 +26,12 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.support.v7.preference.Preference;
 
-import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settingslib.bluetooth.HeadsetProfile;
+import com.android.settingslib.bluetooth.HearingAidProfile;
 
 /**
- * This class allows switching between HFP-connected BT devices
+ * This class allows switching between HFP-connected & HAP-connected BT devices
  * while in on-call state.
  */
 public class HandsFreeProfileOutputPreferenceController extends
@@ -57,16 +58,11 @@ public class HandsFreeProfileOutputPreferenceController extends
         // Ongoing call status, list all the connected devices support hands free profile.
         // Select current active device.
         // Disable switch entry if there is no connected device.
-        mConnectedDevices = null;
-        BluetoothDevice activeDevice = null;
+        mConnectedDevices.clear();
+        mConnectedDevices.addAll(getConnectedHfpDevices());
+        mConnectedDevices.addAll(getConnectedHearingAidDevices());
 
-        final HeadsetProfile headsetProfile = mProfileManager.getHeadsetProfile();
-        if (headsetProfile != null) {
-            mConnectedDevices = headsetProfile.getConnectedDevices();
-            activeDevice = headsetProfile.getActiveDevice();
-        }
-
-        final int numDevices = ArrayUtils.size(mConnectedDevices);
+        final int numDevices = mConnectedDevices.size();
         if (numDevices == 0) {
             // No connected devices, disable switch entry.
             mPreference.setVisible(false);
@@ -79,7 +75,7 @@ public class HandsFreeProfileOutputPreferenceController extends
         CharSequence[] mediaValues = new CharSequence[numDevices + 1];
 
         // Setup devices entries, select active connected device
-        setupPreferenceEntries(mediaOutputs, mediaValues, activeDevice);
+        setupPreferenceEntries(mediaOutputs, mediaValues, findActiveDevice(STREAM_VOICE_CALL));
 
         if (isStreamFromOutputDevice(STREAM_VOICE_CALL, DEVICE_OUT_USB_HEADSET)) {
             // If wired headset is plugged in and active, select to default device.
@@ -92,8 +88,21 @@ public class HandsFreeProfileOutputPreferenceController extends
 
     @Override
     public void setActiveBluetoothDevice(BluetoothDevice device) {
-        if (Utils.isAudioModeOngoingCall(mContext)) {
-            mProfileManager.getHeadsetProfile().setActiveDevice(device);
+        if (!Utils.isAudioModeOngoingCall(mContext)) {
+            return;
+        }
+        final HearingAidProfile hapProfile = mProfileManager.getHearingAidProfile();
+        final HeadsetProfile hfpProfile = mProfileManager.getHeadsetProfile();
+        if (hapProfile != null && hfpProfile != null && device == null) {
+            hfpProfile.setActiveDevice(null);
+            hapProfile.setActiveDevice(null);
+            return;
+        }
+        if (hapProfile != null && hapProfile.getHiSyncId(device) != HI_SYNC_ID_INVALID) {
+            hapProfile.setActiveDevice(device);
+        }
+        if (hfpProfile != null) {
+            hfpProfile.setActiveDevice(device);
         }
     }
 }
