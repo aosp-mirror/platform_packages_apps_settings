@@ -1114,7 +1114,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".slice.SliceDeepLinkSpringBoard"
+        <activity
+            android:name=".slices.SliceDeepLinkSpringBoard"
+            android:excludeFromRecents="true"
             android:theme="@android:style/Theme.NoDisplay">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

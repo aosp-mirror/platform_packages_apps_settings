@@ -50,7 +50,7 @@ public interface DeviceIndexFeatureProvider {
         if (!isIndexingEnabled()) return;
 
         if (!force && Objects.equals(
-                Settings.Secure.getString(context.getContentResolver(), INDEX_VERSION),  VERSION)) {
+                Settings.Secure.getString(context.getContentResolver(), INDEX_VERSION), VERSION)) {
             // No need to update.
             return;
         }
@@ -70,11 +70,10 @@ public interface DeviceIndexFeatureProvider {
         Settings.Secure.putString(context.getContentResolver(), INDEX_VERSION, VERSION);
     }
 
-    static String createDeepLink(String s) {
+    static Uri createDeepLink(String s) {
         return new Uri.Builder().scheme(SETTINGS)
                 .authority(SettingsSliceProvider.SLICE_AUTHORITY)
                 .appendQueryParameter(INTENT, s)
-                .build()
-                .toString();
+                .build();
     }
 }
