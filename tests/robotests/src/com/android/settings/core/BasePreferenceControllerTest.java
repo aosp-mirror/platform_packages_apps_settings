@@ -16,12 +16,12 @@
 package com.android.settings.core;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
 import static com.android.settings.core.BasePreferenceController.DISABLED_FOR_USER;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -36,8 +36,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -68,6 +70,13 @@ public class BasePreferenceControllerTest {
     @Test
     public void isAvailable_availableStatusAvailable_returnsTrue() {
         mPreferenceController.setAvailability(AVAILABLE);
+
+        assertThat(mPreferenceController.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void isAvailable_availableStatusUnSearchable_returnsTrue() {
+        mPreferenceController.setAvailability(AVAILABLE_UNSEARCHABLE);
 
         assertThat(mPreferenceController.isAvailable()).isTrue();
     }
@@ -157,6 +166,36 @@ public class BasePreferenceControllerTest {
         mPreferenceController.displayPreference(screen);
 
         assertThat(preference.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void updateNonIndexableKeys_controllerUnavailable_shouldAddKey() {
+        final List<String> keys = new ArrayList<>();
+        mPreferenceController.setAvailability(UNSUPPORTED_ON_DEVICE);
+
+        mPreferenceController.updateNonIndexableKeys(keys);
+
+        assertThat(keys).containsExactly(mPreferenceController.getPreferenceKey());
+    }
+
+    @Test
+    public void updateNonIndexableKeys_controllerUnsearchable_shouldAddKey() {
+        final List<String> keys = new ArrayList<>();
+        mPreferenceController.setAvailability(AVAILABLE_UNSEARCHABLE);
+
+        mPreferenceController.updateNonIndexableKeys(keys);
+
+        assertThat(keys).containsExactly(mPreferenceController.getPreferenceKey());
+    }
+
+    @Test
+    public void updateNonIndexableKeys_controllerAvailable_shouldNotAddKey() {
+        final List<String> keys = new ArrayList<>();
+        mPreferenceController.setAvailability(AVAILABLE);
+
+        mPreferenceController.updateNonIndexableKeys(keys);
+
+        assertThat(keys).isEmpty();
     }
 
     private class FakeBasePreferenceController extends BasePreferenceController {
