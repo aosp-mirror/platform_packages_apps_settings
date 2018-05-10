@@ -24,6 +24,8 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 
+import com.android.settings.R;
+
 public class SwipeUpPreferenceController extends GesturePreferenceController {
 
     private final int ON = 1;
@@ -39,6 +41,10 @@ public class SwipeUpPreferenceController extends GesturePreferenceController {
     }
 
     static boolean isGestureAvailable(Context context) {
+        if (!context.getResources().getBoolean(R.bool.config_swipe_up_gesture_setting_available)) {
+            return false;
+        }
+
         final ComponentName recentsComponentName = ComponentName.unflattenFromString(
                 context.getString(com.android.internal.R.string.config_recentsComponentName));
         final Intent quickStepIntent = new Intent(ACTION_QUICKSTEP)
@@ -74,8 +80,10 @@ public class SwipeUpPreferenceController extends GesturePreferenceController {
 
     @Override
     public boolean isChecked() {
+        final int defaultValue = mContext.getResources()
+                .getBoolean(com.android.internal.R.bool.config_swipe_up_gesture_default) ? ON : OFF;
         final int swipeUpEnabled = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.SWIPE_UP_TO_SWITCH_APPS_ENABLED, OFF);
+                Settings.Secure.SWIPE_UP_TO_SWITCH_APPS_ENABLED, defaultValue);
         return swipeUpEnabled != OFF;
     }
 }
