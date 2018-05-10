@@ -612,6 +612,14 @@ public class BatteryUtilsTest {
     }
 
     @Test
+    public void testShouldHideAnomaly_AppInDozeList_returnTrue() {
+        doReturn(new String[]{HIGH_SDK_PACKAGE}).when(mPackageManager).getPackagesForUid(UID);
+        doReturn(true).when(mPowerWhitelistBackend).isWhitelisted(new String[]{HIGH_SDK_PACKAGE});
+
+        assertThat(mBatteryUtils.shouldHideAnomaly(mPowerWhitelistBackend, UID)).isTrue();
+    }
+
+    @Test
     public void testShouldHideAnomaly_normalApp_returnFalse() {
         doReturn(new String[]{HIGH_SDK_PACKAGE}).when(mPackageManager).getPackagesForUid(UID);
 
