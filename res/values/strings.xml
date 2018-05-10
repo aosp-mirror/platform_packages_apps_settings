@@ -4924,9 +4924,7 @@
     <string name="device_cellular_network">Mobile network scanning</string>
 
     <!-- Label for list of apps using battery in power use UI. Note: ^1 should be used in all translations[CHAR_LIMIT=120] -->
-    <string name="power_usage_list_summary">App usage since full charge (<xliff:g id="relative_time">^1</xliff:g>)</string>
-    <!-- Label for device components using battery in power use UI. Note: ^1 should be used in all translations[CHAR_LIMIT=120] -->
-    <string name="power_usage_list_summary_device">Device usage since full charge (<xliff:g id="relative_time">^1</xliff:g>)</string>
+    <string name="power_usage_list_summary">Battery usage since full charge</string>
     <!-- Temp string used to debug new battery estimates [DO NOT TRANSLATE] -->
     <string name="power_usage_enhanced_debug" translatable="false"><xliff:g id="time">%1$s</xliff:g> left (New ML est)</string>
     <!-- Temp string used to debug old battery estimates [DO NOT TRANSLATE] -->
@@ -5031,11 +5029,11 @@
     <!-- Summary for the battery high usage tip, which presents battery may run out soon [CHAR LIMIT=NONE] -->
     <string name="battery_tip_high_usage_summary">Battery may run out soon</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="default">Your phone has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps since last full charge(<xliff:g id="time_period_ago" example="1 hr ago">%2$s</xliff:g>):</string>
+    <string name="battery_tip_dialog_message" product="default">Your phone has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps you used since full charge:</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="tablet">Your tablet has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps since last full charge(<xliff:g id="time_period_ago" example="1 hr ago">%2$s</xliff:g>):</string>
+    <string name="battery_tip_dialog_message" product="tablet">Your tablet has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps you used since full charge:</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="device">Your device has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps since last full charge(<xliff:g id="time_period_ago" example="1 hr ago">%2$s</xliff:g>):</string>
+    <string name="battery_tip_dialog_message" product="device">Your device has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps you used since full charge:</string>
     <!-- Title for restricted app preference, showing how many app need to be restricted [CHAR LIMIT=NONE] -->
     <plurals name="battery_tip_restrict_title">
         <item quantity="one">Restrict %1$d app</item>
