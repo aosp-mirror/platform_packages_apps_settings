@@ -148,7 +148,7 @@ public class AnomalyDetectionJobServiceTest {
     @Test
     public void saveAnomalyToDatabase_systemWhitelisted_doNotSave() {
         doReturn(UID).when(mAnomalyDetectionJobService).extractUidFromStatsDimensionsValue(any());
-        doReturn(true).when(mPowerWhitelistBackend).isSysWhitelistedExceptIdle(any(String[].class));
+        doReturn(true).when(mPowerWhitelistBackend).isWhitelisted(any(String[].class));
 
         mAnomalyDetectionJobService.saveAnomalyToDatabase(mContext, mBatteryStatsHelper,
                 mUserManager, mBatteryDatabaseManager, mBatteryUtils, mPolicy,
