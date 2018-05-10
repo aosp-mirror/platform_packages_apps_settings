@@ -330,7 +330,7 @@ public class SliceBuilderUtilsTest {
                 SliceData.SliceType.SWITCH);
         Settings.Global.putInt(mContext.getContentResolver(),
                 FakeUnavailablePreferenceController.AVAILABILITY_KEY,
-                BasePreferenceController.DISABLED_UNSUPPORTED);
+                BasePreferenceController.UNSUPPORTED_ON_DEVICE);
 
         final Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
 
@@ -373,12 +373,12 @@ public class SliceBuilderUtilsTest {
     }
 
     @Test
-    public void testUnavailableUnknownSlice_validTitleSummary() {
+    public void testConditionallyUnavailableSlice_validTitleSummary() {
         final SliceData data = getDummyData(FakeUnavailablePreferenceController.class,
                 SliceData.SliceType.SWITCH);
         Settings.Global.putInt(mContext.getContentResolver(),
                 FakeUnavailablePreferenceController.AVAILABILITY_KEY,
-                BasePreferenceController.UNAVAILABLE_UNKNOWN);
+                BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
 
         final Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
 

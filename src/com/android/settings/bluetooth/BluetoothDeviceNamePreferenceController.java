@@ -99,7 +99,7 @@ public class BluetoothDeviceNamePreferenceController extends BasePreferenceContr
 
     @Override
     public int getAvailabilityStatus() {
-        return mLocalAdapter != null ? AVAILABLE : DISABLED_UNSUPPORTED;
+        return mLocalAdapter != null ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

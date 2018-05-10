@@ -16,6 +16,9 @@
 
 package com.android.settings.notification;
 
+import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_SCREEN_OFF;
+import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_SCREEN_ON;
+
 import android.app.ActivityManager;
 import android.app.AutomaticZenRule;
 import android.app.NotificationManager;
@@ -146,19 +149,24 @@ public class ZenModeBackend {
     protected void savePolicy(int priorityCategories, int priorityCallSenders,
             int priorityMessageSenders, int suppressedVisualEffects) {
         mPolicy = new NotificationManager.Policy(priorityCategories, priorityCallSenders,
-                priorityMessageSenders,
-                suppressedVisualEffects);
+                priorityMessageSenders, suppressedVisualEffects);
         mNotificationManager.setNotificationPolicy(mPolicy);
     }
 
-    protected int getNewSuppressedEffects(boolean suppress, int effectType) {
+    private int getNewSuppressedEffects(boolean suppress, int effectType) {
         int effects = mPolicy.suppressedVisualEffects;
+
         if (suppress) {
             effects |= effectType;
         } else {
             effects &= ~effectType;
         }
-        return effects;
+
+        return clearDeprecatedEffects(effects);
+    }
+
+    private int clearDeprecatedEffects(int effects) {
+        return effects & ~(SUPPRESSED_EFFECT_SCREEN_ON | SUPPRESSED_EFFECT_SCREEN_OFF);
     }
 
     protected boolean isEffectAllowed(int effect) {

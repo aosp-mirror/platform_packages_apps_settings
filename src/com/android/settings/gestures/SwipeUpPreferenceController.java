@@ -19,17 +19,12 @@ package com.android.settings.gestures;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
-import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
-import android.text.TextUtils;
 
 import com.android.settings.R;
-import com.android.settings.Utils;
 
 public class SwipeUpPreferenceController extends GesturePreferenceController {
 
@@ -46,6 +41,10 @@ public class SwipeUpPreferenceController extends GesturePreferenceController {
     }
 
     static boolean isGestureAvailable(Context context) {
+        if (!context.getResources().getBoolean(R.bool.config_swipe_up_gesture_setting_available)) {
+            return false;
+        }
+
         final ComponentName recentsComponentName = ComponentName.unflattenFromString(
                 context.getString(com.android.internal.R.string.config_recentsComponentName));
         final Intent quickStepIntent = new Intent(ACTION_QUICKSTEP)
@@ -59,7 +58,7 @@ public class SwipeUpPreferenceController extends GesturePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        return isGestureAvailable(mContext) ? AVAILABLE : DISABLED_UNSUPPORTED;
+        return isGestureAvailable(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -81,8 +80,10 @@ public class SwipeUpPreferenceController extends GesturePreferenceController {
 
     @Override
     public boolean isChecked() {
+        final int defaultValue = mContext.getResources()
+                .getBoolean(com.android.internal.R.bool.config_swipe_up_gesture_default) ? ON : OFF;
         final int swipeUpEnabled = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.SWIPE_UP_TO_SWITCH_APPS_ENABLED, OFF);
+                Settings.Secure.SWIPE_UP_TO_SWITCH_APPS_ENABLED, defaultValue);
         return swipeUpEnabled != OFF;
     }
 }

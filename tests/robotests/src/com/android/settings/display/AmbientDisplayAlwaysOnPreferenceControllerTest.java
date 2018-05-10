@@ -77,7 +77,7 @@ public class AmbientDisplayAlwaysOnPreferenceControllerTest {
         when(mConfig.alwaysOnAvailableForUser(anyInt())).thenReturn(false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                AmbientDisplayAlwaysOnPreferenceController.DISABLED_UNSUPPORTED);
+                AmbientDisplayAlwaysOnPreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 
     @Test

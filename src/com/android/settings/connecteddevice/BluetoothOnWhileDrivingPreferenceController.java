@@ -38,7 +38,7 @@ public class BluetoothOnWhileDrivingPreferenceController extends TogglePreferenc
         if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.BLUETOOTH_WHILE_DRIVING)) {
             return AVAILABLE;
         }
-        return DISABLED_UNSUPPORTED;
+        return CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override

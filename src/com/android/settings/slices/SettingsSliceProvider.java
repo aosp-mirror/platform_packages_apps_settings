@@ -32,7 +32,6 @@ import android.provider.SettingsSlicesContract;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.graphics.drawable.IconCompat;
 import android.text.TextUtils;
-import android.util.ArrayMap;
 import android.util.Log;
 import android.util.Pair;
 
@@ -42,10 +41,10 @@ import com.android.settingslib.utils.ThreadUtils;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import androidx.slice.Slice;
 import androidx.slice.SliceProvider;
@@ -117,6 +116,7 @@ public class SettingsSliceProvider extends SliceProvider {
 
     @VisibleForTesting
     Map<Uri, SliceData> mSliceWeakDataCache;
+    @VisibleForTesting
     Map<Uri, SliceData> mSliceDataCache;
 
     public SettingsSliceProvider() {
@@ -126,7 +126,7 @@ public class SettingsSliceProvider extends SliceProvider {
     @Override
     public boolean onCreateSliceProvider() {
         mSlicesDatabaseAccessor = new SlicesDatabaseAccessor(getContext());
-        mSliceDataCache = new ArrayMap<>();
+        mSliceDataCache = new ConcurrentHashMap<>();
         mSliceWeakDataCache = new WeakHashMap<>();
         return true;
     }

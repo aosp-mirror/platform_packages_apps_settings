@@ -56,7 +56,7 @@ public class AppDataUsagePreferenceController extends AppInfoPreferenceControlle
 
     @Override
     public int getAvailabilityStatus() {
-        return isBandwidthControlEnabled() ? AVAILABLE : DISABLED_UNSUPPORTED;
+        return isBandwidthControlEnabled() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override

@@ -17,7 +17,7 @@
 package com.android.settings.accessibility;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController.DISABLED_UNSUPPORTED;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -30,7 +30,6 @@ import android.content.pm.ServiceInfo;
 import android.provider.Settings;
 import android.view.accessibility.AccessibilityManager;
 
-import com.android.settings.accessibility.AccessibilitySlicePreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 
@@ -85,7 +84,7 @@ public class AccessibilitySlicePreferenceControllerTest {
         AccessibilitySlicePreferenceController controller =
                 new AccessibilitySlicePreferenceController(mContext, "fake_service/name");
 
-        assertThat(controller.getAvailabilityStatus()).isEqualTo(DISABLED_UNSUPPORTED);
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test

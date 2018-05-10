@@ -50,6 +50,7 @@ public class BatteryTipPolicy {
     private static final String KEY_TEST_BATTERY_SAVER_TIP = "test_battery_saver_tip";
     private static final String KEY_TEST_HIGH_USAGE_TIP = "test_high_usage_tip";
     private static final String KEY_TEST_SMART_BATTERY_TIP = "test_smart_battery_tip";
+    private static final String KEY_TEST_LOW_BATTERY_TIP = "test_low_battery_tip";
 
     /**
      * {@code true} if general battery tip is enabled
@@ -192,6 +193,14 @@ public class BatteryTipPolicy {
      */
     public final boolean testSmartBatteryTip;
 
+    /**
+     * {@code true} if we want to test low battery tip.
+     *
+     * @see Settings.Global#BATTERY_TIP_CONSTANTS
+     * @see #KEY_TEST_LOW_BATTERY_TIP
+     */
+    public final boolean testLowBatteryTip;
+
     private final KeyValueListParser mParser;
 
     public BatteryTipPolicy(Context context) {
@@ -222,13 +231,14 @@ public class BatteryTipPolicy {
         reducedBatteryEnabled = mParser.getBoolean(KEY_REDUCED_BATTERY_ENABLED, false);
         reducedBatteryPercent = mParser.getInt(KEY_REDUCED_BATTERY_PERCENT, 50);
         lowBatteryEnabled = mParser.getBoolean(KEY_LOW_BATTERY_ENABLED, false);
-        lowBatteryHour = mParser.getInt(KEY_LOW_BATTERY_HOUR, 16);
+        lowBatteryHour = mParser.getInt(KEY_LOW_BATTERY_HOUR, 3);
         dataHistoryRetainDay = mParser.getInt(KEY_DATA_HISTORY_RETAIN_DAY, 30);
         excessiveBgDrainPercentage = mParser.getInt(KEY_EXCESSIVE_BG_DRAIN_PERCENTAGE, 10);
 
         testBatterySaverTip = mParser.getBoolean(KEY_TEST_BATTERY_SAVER_TIP, false);
         testHighUsageTip = mParser.getBoolean(KEY_TEST_HIGH_USAGE_TIP, false);
         testSmartBatteryTip = mParser.getBoolean(KEY_TEST_SMART_BATTERY_TIP, false);
+        testLowBatteryTip = mParser.getBoolean(KEY_TEST_LOW_BATTERY_TIP, false);
     }
 
 }

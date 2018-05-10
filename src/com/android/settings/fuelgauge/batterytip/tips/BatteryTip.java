@@ -74,10 +74,10 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
         TIP_ORDER.append(TipType.APP_RESTRICTION, 0);
         TIP_ORDER.append(TipType.BATTERY_SAVER, 1);
         TIP_ORDER.append(TipType.HIGH_DEVICE_USAGE, 2);
-        TIP_ORDER.append(TipType.SUMMARY, 3);
-        TIP_ORDER.append(TipType.SMART_BATTERY_MANAGER, 4);
-        TIP_ORDER.append(TipType.REDUCED_BATTERY, 5);
-        TIP_ORDER.append(TipType.LOW_BATTERY, 6);
+        TIP_ORDER.append(TipType.LOW_BATTERY, 3);
+        TIP_ORDER.append(TipType.SUMMARY, 4);
+        TIP_ORDER.append(TipType.SMART_BATTERY_MANAGER, 5);
+        TIP_ORDER.append(TipType.REDUCED_BATTERY, 6);
         TIP_ORDER.append(TipType.REMOVE_APP_RESTRICTION, 7);
     }
 
