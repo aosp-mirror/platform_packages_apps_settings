@@ -15,8 +15,8 @@
  */
 package com.android.settings.bluetooth;
 
-import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 
@@ -43,10 +43,11 @@ public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater {
     }
 
     @Override
-    public void onConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state) {
-        if (state == BluetoothAdapter.STATE_CONNECTED) {
+    public void onProfileConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state,
+            int bluetoothProfile) {
+        if (state == BluetoothProfile.STATE_CONNECTED) {
             removePreference(cachedDevice);
-        } else if (state == BluetoothAdapter.STATE_DISCONNECTED) {
+        } else if (state == BluetoothProfile.STATE_DISCONNECTED) {
             addPreference(cachedDevice);
         }
     }
