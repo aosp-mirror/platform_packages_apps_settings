@@ -83,7 +83,9 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
     public void setStream(int stream) {
         mStream = stream;
         setMax(mAudioManager.getStreamMaxVolume(mStream));
-        setMin(mAudioManager.getStreamMinVolume(mStream));
+        // Use getStreamMinVolumeInt for non-public stream type
+        // eg: AudioManager.STREAM_BLUETOOTH_SCO
+        setMin(mAudioManager.getStreamMinVolumeInt(mStream));
         setProgress(mAudioManager.getStreamVolume(mStream));
     }
 
@@ -108,10 +110,6 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
         super.onBindViewHolder(view);
-        if (mStream == 0) {
-            Log.w(TAG, "No stream found, not binding volumizer");
-            return;
-        }
         mSeekBar = (SeekBar) view.findViewById(com.android.internal.R.id.seekbar);
         mIconView = (ImageView) view.findViewById(com.android.internal.R.id.icon);
         mSuppressionTextView = (TextView) view.findViewById(R.id.suppression_text);

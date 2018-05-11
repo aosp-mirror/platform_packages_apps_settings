@@ -50,17 +50,20 @@ public class VolumeSeekBarPreferenceTest {
     }
 
     @Test
-    public void setStream_shouldSetMaxAndProgress() {
+    public void setStream_shouldSetMinMaxAndProgress() {
         final int stream = 5;
         final int max = 17;
+        final int min = 1;
         final int progress = 4;
         when(mAudioManager.getStreamMaxVolume(stream)).thenReturn(max);
+        when(mAudioManager.getStreamMinVolumeInt(stream)).thenReturn(min);
         when(mAudioManager.getStreamVolume(stream)).thenReturn(progress);
         doCallRealMethod().when(mPreference).setStream(anyInt());
 
         mPreference.setStream(stream);
 
         verify(mPreference).setMax(max);
+        verify(mPreference).setMin(min);
         verify(mPreference).setProgress(progress);
     }
 }
