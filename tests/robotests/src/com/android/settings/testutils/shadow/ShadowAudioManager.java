@@ -42,7 +42,8 @@ import java.util.ArrayList;
 public class ShadowAudioManager extends org.robolectric.shadows.ShadowAudioManager {
     private int mRingerMode;
     private int mDeviceCodes;
-    private boolean mMusicActiveRemotely = false;
+    private boolean mMusicActiveRemotely;
+    private boolean mBluetoothScoOn;
     private ArrayList<AudioDeviceCallback> mDeviceCallbacks = new ArrayList();
 
     @Implementation
@@ -104,4 +105,11 @@ public class ShadowAudioManager extends org.robolectric.shadows.ShadowAudioManag
     public void reset() {
         mDeviceCallbacks.clear();
     }
+
+    public void setBluetoothScoOn(boolean bluetoothScoOn) {
+        mBluetoothScoOn = bluetoothScoOn;
+    }
+
+    @Implementation
+    public boolean isBluetoothScoOn() { return mBluetoothScoOn; }
 }
