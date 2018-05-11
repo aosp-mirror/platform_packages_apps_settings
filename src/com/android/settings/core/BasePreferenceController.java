@@ -187,6 +187,7 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
     public final boolean isAvailable() {
         final int availabilityStatus = getAvailabilityStatus();
         return (availabilityStatus == AVAILABLE
+                || availabilityStatus == AVAILABLE_UNSEARCHABLE
                 || availabilityStatus == DISABLED_DEPENDENT_SETTING);
     }
 
@@ -230,16 +231,15 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
      * Called by SearchIndexProvider#getNonIndexableKeys
      */
     public void updateNonIndexableKeys(List<String> keys) {
-        if (this instanceof AbstractPreferenceController) {
-            if (!isAvailable()) {
-                final String key = getPreferenceKey();
-                if (TextUtils.isEmpty(key)) {
-                    Log.w(TAG,
-                            "Skipping updateNonIndexableKeys due to empty key " + this.toString());
-                    return;
-                }
-                keys.add(key);
+        final boolean shouldSuppressFromSearch = !isAvailable()
+                || getAvailabilityStatus() == AVAILABLE_UNSEARCHABLE;
+        if (shouldSuppressFromSearch) {
+            final String key = getPreferenceKey();
+            if (TextUtils.isEmpty(key)) {
+                Log.w(TAG, "Skipping updateNonIndexableKeys due to empty key " + toString());
+                return;
             }
+            keys.add(key);
         }
     }
 
