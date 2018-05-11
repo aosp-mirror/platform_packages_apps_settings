@@ -32,6 +32,8 @@ import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settings.search.actionbar.SearchMenuController;
+import com.android.settings.support.actionbar.HelpResourceProvider;
 
 import java.util.Arrays;
 import java.util.List;
@@ -88,6 +90,10 @@ public final class MagnificationPreferenceFragment extends DashboardFragment {
             // If invoked from SUW, redirect to fragment instrumented for Vision Settings metrics
             preference.setFragment(
                     ToggleScreenMagnificationPreferenceFragmentForSetupWizard.class.getName());
+            Bundle args = preference.getExtras();
+            // Copy from AccessibilitySettingsForSetupWizardActivity, hide search and help menu
+            args.putInt(HelpResourceProvider.HELP_URI_RESOURCE_KEY, 0);
+            args.putBoolean(SearchMenuController.NEED_SEARCH_ICON_IN_ACTION_BAR, false);
         }
         return super.onPreferenceTreeClick(preference);
     }
