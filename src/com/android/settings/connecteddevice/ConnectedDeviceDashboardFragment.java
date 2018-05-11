@@ -26,7 +26,10 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.nfc.NfcPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -60,11 +63,26 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
     }
 
     @Override
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        return buildPreferenceControllers(context);
+    }
+
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        final DiscoverableFooterPreferenceController discoverableFooterPreferenceController =
+                new DiscoverableFooterPreferenceController(context);
+        controllers.add(discoverableFooterPreferenceController);
+
+        return controllers;
+    }
+
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         use(AvailableMediaDeviceGroupController.class).init(this);
         use(ConnectedDeviceGroupController.class).init(this);
         use(PreviouslyConnectedDevicePreferenceController.class).init(this);
+        use(DiscoverableFooterPreferenceController.class).init(this);
     }
 
     @VisibleForTesting
