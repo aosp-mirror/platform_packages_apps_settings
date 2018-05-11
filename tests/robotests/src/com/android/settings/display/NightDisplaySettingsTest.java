@@ -48,8 +48,8 @@ public class NightDisplaySettingsTest {
     }
 
     @Test
-    public void getCategoryKey_isCategoryNightLight() {
+    public void getCategoryKey_isCategoryNightDisplay() {
         NightDisplaySettings settings = new NightDisplaySettings();
-        assertThat(settings.getCategoryKey()).isEqualTo(CategoryKey.CATEGORY_NIGHT_LIGHT);
+        assertThat(settings.getCategoryKey()).isEqualTo(CategoryKey.CATEGORY_NIGHT_DISPLAY);
     }
 }

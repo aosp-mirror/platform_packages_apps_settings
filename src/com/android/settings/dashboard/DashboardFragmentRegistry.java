@@ -100,7 +100,7 @@ public class DashboardFragmentRegistry {
         PARENT_TO_CATEGORY_KEY_MAP.put(GestureSettings.class.getName(),
             CategoryKey.CATEGORY_GESTURES);
         PARENT_TO_CATEGORY_KEY_MAP.put(NightDisplaySettings.class.getName(),
-            CategoryKey.CATEGORY_NIGHT_LIGHT);
+            CategoryKey.CATEGORY_NIGHT_DISPLAY);
 
         CATEGORY_KEY_TO_PARENT_MAP = new ArrayMap<>(PARENT_TO_CATEGORY_KEY_MAP.size());
 
