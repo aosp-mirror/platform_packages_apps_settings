@@ -849,9 +849,10 @@
     <!-- Security Settings screen Encryption and crendential summary -->
     <string name="encryption_and_credential_settings_summary" product="tablet">Device encrypted</string>
     <string name="decryption_settings_summary" product="tablet">Device not encrypted</string>
-    <!-- Security Settings screen setting option title for the item to take you to the lock screen preference screen [CHAR LIMIT=60] -->
-    <string name="lockscreen_settings_title">Lock screen preferences</string>
-
+    <!-- Screen title for a list of settings controlling what to show on user's lockscreen [CHAR LIMIT=60] -->
+    <string name="lockscreen_settings_title">Lock screen display</string>
+    <!-- Category title for the settings that control what lockscreen shows. [CHAR LIMIT=30] -->
+    <string name="lockscreen_settings_what_to_show_category">What to show</string>
     <!-- Main Settings screen setting option summary text for the item tot ake you to the security and location screen -->
     <string name="security_settings_summary">Set My Location, screen unlock, SIM card lock, credential storage lock</string>
     <!-- Main Settings screen setting option summary text for the item to take you to the CDMA security and location screen -->
@@ -2645,6 +2646,7 @@
     <string name="ambient_display_screen_summary_always_on">Always on / Increased battery usage</string>
     <!-- [CHAR LIMIT=30] Summary of the preference that opens the Ambient display settings screen, when Ambient display is set to show when new notifications come in. -->
     <string name="ambient_display_screen_summary_notifications">New notifications</string>
+
     <!-- [CHAR LIMIT=30] Category title for the settings that control when Ambient display shows. -->
     <string name="ambient_display_category_triggers">When to show</string>
     <!-- [CHAR LIMIT=30] Ambient display screen, title for setting to change whether the ambient display feature is triggered for new incoming notifications. -->
