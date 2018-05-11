@@ -162,6 +162,11 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
     }
 
     @Override
+    public void onProfileConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state,
+            int bluetoothProfile) {
+    }
+
+    @Override
     public void onServiceConnected() {
         // When bluetooth service connected update the UI
         forceUpdate();
