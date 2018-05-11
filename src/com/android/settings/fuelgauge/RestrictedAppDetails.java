@@ -122,6 +122,11 @@ public class RestrictedAppDetails extends DashboardFragment {
         return MetricsProto.MetricsEvent.FUELGAUGE_RESTRICTED_APP_DETAILS;
     }
 
+    @Override
+    public int getHelpResource() {
+        return R.string.help_uri_restricted_apps;
+    }
+
     @VisibleForTesting
     void refreshUi() {
         mRestrictedAppListGroup.removeAll();
