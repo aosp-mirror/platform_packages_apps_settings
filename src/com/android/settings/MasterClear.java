@@ -102,7 +102,7 @@ public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutL
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActivity().setTitle(R.string.master_clear_title);
+        getActivity().setTitle(R.string.master_clear_short_title);
     }
 
     /**
@@ -114,7 +114,7 @@ public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutL
     private boolean runKeyguardConfirmation(int request) {
         Resources res = getActivity().getResources();
         return new ChooseLockSettingsHelper(getActivity(), this).launchConfirmationActivity(
-                request, res.getText(R.string.master_clear_title));
+                request, res.getText(R.string.master_clear_short_title));
     }
 
     @VisibleForTesting
