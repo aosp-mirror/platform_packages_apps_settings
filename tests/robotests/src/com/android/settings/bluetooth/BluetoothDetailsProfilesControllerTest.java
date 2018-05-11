@@ -156,6 +156,11 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
         }
 
         @Override
+        public int getProfileId() {
+            return 0;
+        }
+
+        @Override
         public int getOrdinal() {
             return 0;
         }
