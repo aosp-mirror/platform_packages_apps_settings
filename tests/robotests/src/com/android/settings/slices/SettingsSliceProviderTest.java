@@ -18,10 +18,13 @@
 package com.android.settings.slices;
 
 import static android.content.ContentResolver.SCHEME_CONTENT;
+
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.slice.SliceManager;
@@ -107,7 +110,7 @@ public class SettingsSliceProviderTest {
     @Test
     public void testInitialSliceReturned_emptySlice() {
         insertSpecialCase(KEY);
-        Uri uri = SliceBuilderUtils.getUri(INTENT_PATH, false);
+        final Uri uri = SliceBuilderUtils.getUri(INTENT_PATH, false);
         Slice slice = mProvider.onBindSlice(uri);
 
         assertThat(slice.getUri()).isEqualTo(uri);
@@ -117,7 +120,7 @@ public class SettingsSliceProviderTest {
     @Test
     public void testLoadSlice_returnsSliceFromAccessor() {
         insertSpecialCase(KEY);
-        Uri uri = SliceBuilderUtils.getUri(INTENT_PATH, false);
+        final Uri uri = SliceBuilderUtils.getUri(INTENT_PATH, false);
 
         mProvider.loadSlice(uri);
         SliceData data = mProvider.mSliceWeakDataCache.get(uri);
@@ -127,9 +130,19 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    public void loadSlice_registersIntentFilter() {
+        insertSpecialCase(KEY);
+        final Uri uri = SliceBuilderUtils.getUri(INTENT_PATH, false);
+
+        mProvider.loadSlice(uri);
+
+        verify(mProvider).registerIntentToUri(eq(FakeToggleController.INTENT_FILTER), eq(uri));
+    }
+
+    @Test
     public void testLoadSlice_doesNotCacheWithoutPin() {
         insertSpecialCase(KEY);
-        Uri uri = SliceBuilderUtils.getUri(INTENT_PATH, false);
+        final Uri uri = SliceBuilderUtils.getUri(INTENT_PATH, false);
 
         mProvider.loadSlice(uri);
         SliceData data = mProvider.mSliceDataCache.get(uri);
@@ -140,7 +153,7 @@ public class SettingsSliceProviderTest {
     @Test
     public void testLoadSlice_cachesWithPin() {
         insertSpecialCase(KEY);
-        Uri uri = SliceBuilderUtils.getUri(INTENT_PATH, false);
+        final Uri uri = SliceBuilderUtils.getUri(INTENT_PATH, false);
         when(mManager.getPinnedSlices()).thenReturn(Arrays.asList(uri));
 
         mProvider.loadSlice(uri);
@@ -398,7 +411,7 @@ public class SettingsSliceProviderTest {
         values.put(SlicesDatabaseHelper.IndexColumns.SCREENTITLE, "s");
         values.put(SlicesDatabaseHelper.IndexColumns.ICON_RESOURCE, 1234);
         values.put(SlicesDatabaseHelper.IndexColumns.FRAGMENT, "test");
-        values.put(SlicesDatabaseHelper.IndexColumns.CONTROLLER, "test");
+        values.put(SlicesDatabaseHelper.IndexColumns.CONTROLLER, PREF_CONTROLLER);
         values.put(SlicesDatabaseHelper.IndexColumns.PLATFORM_SLICE, isPlatformSlice);
         values.put(SlicesDatabaseHelper.IndexColumns.SLICE_TYPE, SliceData.SliceType.INTENT);
 
