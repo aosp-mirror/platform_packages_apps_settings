@@ -22,7 +22,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.service.settings.suggestions.Suggestion;
 import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 import android.util.Pair;
 
@@ -32,6 +31,8 @@ import com.android.settings.Settings.NightDisplaySuggestionActivity;
 import com.android.settings.display.NightDisplayPreferenceController;
 import com.android.settings.fingerprint.FingerprintEnrollSuggestionActivity;
 import com.android.settings.fingerprint.FingerprintSuggestionActivity;
+import com.android.settings.notification.ZenOnboardingActivity;
+import com.android.settings.notification.ZenSuggestionActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ScreenLockSuggestionActivity;
 import com.android.settings.support.NewDeviceIntroSuggestionActivity;
@@ -88,6 +89,8 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
             return NightDisplayPreferenceController.isSuggestionComplete(context);
         } else if (className.equals(NewDeviceIntroSuggestionActivity.class.getName())) {
             return NewDeviceIntroSuggestionActivity.isSuggestionComplete(context);
+        } else if (className.equals(ZenSuggestionActivity.class.getName())) {
+            return ZenOnboardingActivity.isSuggestionComplete(context);
         }
         return false;
     }
