@@ -18,6 +18,8 @@
 package com.android.settings.testutils;
 
 import android.content.Context;
+import android.content.IntentFilter;
+import android.net.wifi.WifiManager;
 import android.provider.Settings;
 
 import com.android.settings.core.TogglePreferenceController;
@@ -27,6 +29,9 @@ public class FakeToggleController extends TogglePreferenceController {
     private String settingKey = "toggle_key";
 
     public static final String AVAILABILITY_KEY = "fake_toggle_availability_key";
+
+    public static final IntentFilter INTENT_FILTER = new IntentFilter(
+            WifiManager.WIFI_AP_STATE_CHANGED_ACTION);
 
     private final int ON = 1;
     private final int OFF = 0;
@@ -51,5 +56,10 @@ public class FakeToggleController extends TogglePreferenceController {
     public int getAvailabilityStatus() {
         return Settings.Global.getInt(mContext.getContentResolver(),
                 AVAILABILITY_KEY, AVAILABLE);
+    }
+
+    @Override
+    public IntentFilter getIntentFilter() {
+        return INTENT_FILTER;
     }
 }
