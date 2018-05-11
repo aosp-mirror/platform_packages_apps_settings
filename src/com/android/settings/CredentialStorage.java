@@ -127,9 +127,9 @@ public final class CredentialStorage extends Activity {
     protected void onResume() {
         super.onResume();
 
-        Intent intent = getIntent();
-        String action = intent.getAction();
-        UserManager userManager = (UserManager) getSystemService(Context.USER_SERVICE);
+        final Intent intent = getIntent();
+        final String action = intent.getAction();
+        final UserManager userManager = (UserManager) getSystemService(Context.USER_SERVICE);
         if (!userManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_CREDENTIALS)) {
             if (ACTION_RESET.equals(action)) {
                 new ResetDialog();
@@ -208,18 +208,18 @@ public final class CredentialStorage extends Activity {
      * Returns true if the currently set key guard matches our minimum quality requirements.
      */
     private boolean checkKeyGuardQuality() {
-        int credentialOwner =
+        final int credentialOwner =
                 UserManager.get(this).getCredentialOwnerProfile(UserHandle.myUserId());
-        int quality = new LockPatternUtils(this).getActivePasswordQuality(credentialOwner);
+        final int quality = new LockPatternUtils(this).getActivePasswordQuality(credentialOwner);
         return (quality >= MIN_PASSWORD_QUALITY);
     }
 
     private boolean isHardwareBackedKey(byte[] keyData) {
         try {
-            ASN1InputStream bIn = new ASN1InputStream(new ByteArrayInputStream(keyData));
-            PrivateKeyInfo pki = PrivateKeyInfo.getInstance(bIn.readObject());
-            String algOid = pki.getAlgorithmId().getAlgorithm().getId();
-            String algName = new AlgorithmId(new ObjectIdentifier(algOid)).getName();
+            final ASN1InputStream bIn = new ASN1InputStream(new ByteArrayInputStream(keyData));
+            final PrivateKeyInfo pki = PrivateKeyInfo.getInstance(bIn.readObject());
+            final String algOid = pki.getAlgorithmId().getAlgorithm().getId();
+            final String algName = new AlgorithmId(new ObjectIdentifier(algOid)).getName();
 
             return KeyChain.isBoundKeyAlgorithm(algName);
         } catch (IOException e) {
@@ -236,14 +236,13 @@ public final class CredentialStorage extends Activity {
             return;
         }
 
-        Bundle bundle = mInstallBundle;
+        final Bundle bundle = mInstallBundle;
         mInstallBundle = null;
 
         final int uid = bundle.getInt(Credentials.EXTRA_INSTALL_AS_UID, KeyStore.UID_SELF);
 
         if (uid != KeyStore.UID_SELF && !UserHandle.isSameUser(uid, Process.myUid())) {
-            int dstUserId = UserHandle.getUserId(uid);
-            int myUserId = UserHandle.myUserId();
+            final int dstUserId = UserHandle.getUserId(uid);
 
             // Restrict install target to the wifi uid.
             if (uid != Process.WIFI_UID) {
@@ -252,7 +251,7 @@ public final class CredentialStorage extends Activity {
                 return;
             }
 
-            Intent installIntent = new Intent(ACTION_INSTALL)
+            final Intent installIntent = new Intent(ACTION_INSTALL)
                     .setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
                     .putExtras(bundle);
             startActivityAsUser(installIntent, new UserHandle(dstUserId));
@@ -260,8 +259,8 @@ public final class CredentialStorage extends Activity {
         }
 
         if (bundle.containsKey(Credentials.EXTRA_USER_PRIVATE_KEY_NAME)) {
-            String key = bundle.getString(Credentials.EXTRA_USER_PRIVATE_KEY_NAME);
-            byte[] value = bundle.getByteArray(Credentials.EXTRA_USER_PRIVATE_KEY_DATA);
+            final String key = bundle.getString(Credentials.EXTRA_USER_PRIVATE_KEY_NAME);
+            final byte[] value = bundle.getByteArray(Credentials.EXTRA_USER_PRIVATE_KEY_DATA);
 
             int flags = KeyStore.FLAG_ENCRYPTED;
             if (uid == Process.WIFI_UID && isHardwareBackedKey(value)) {
@@ -287,11 +286,11 @@ public final class CredentialStorage extends Activity {
             }
         }
 
-        int flags = KeyStore.FLAG_NONE;
+        final int flags = KeyStore.FLAG_NONE;
 
         if (bundle.containsKey(Credentials.EXTRA_USER_CERTIFICATE_NAME)) {
-            String certName = bundle.getString(Credentials.EXTRA_USER_CERTIFICATE_NAME);
-            byte[] certData = bundle.getByteArray(Credentials.EXTRA_USER_CERTIFICATE_DATA);
+            final String certName = bundle.getString(Credentials.EXTRA_USER_CERTIFICATE_NAME);
+            final byte[] certData = bundle.getByteArray(Credentials.EXTRA_USER_CERTIFICATE_DATA);
 
             if (!mKeyStore.put(certName, certData, uid, flags)) {
                 Log.e(TAG, "Failed to install " + certName + " as uid " + uid);
@@ -300,8 +299,8 @@ public final class CredentialStorage extends Activity {
         }
 
         if (bundle.containsKey(Credentials.EXTRA_CA_CERTIFICATES_NAME)) {
-            String caListName = bundle.getString(Credentials.EXTRA_CA_CERTIFICATES_NAME);
-            byte[] caListData = bundle.getByteArray(Credentials.EXTRA_CA_CERTIFICATES_DATA);
+            final String caListName = bundle.getString(Credentials.EXTRA_CA_CERTIFICATES_NAME);
+            final byte[] caListData = bundle.getByteArray(Credentials.EXTRA_CA_CERTIFICATES_DATA);
 
             if (!mKeyStore.put(caListName, caListData, uid, flags)) {
                 Log.e(TAG, "Failed to install " + caListName + " as uid " + uid);
@@ -310,7 +309,7 @@ public final class CredentialStorage extends Activity {
         }
 
         // Send the broadcast.
-        Intent broadcast = new Intent(KeyChain.ACTION_KEYCHAIN_CHANGED);
+        final Intent broadcast = new Intent(KeyChain.ACTION_KEYCHAIN_CHANGED);
         sendBroadcast(broadcast);
 
         setResult(RESULT_OK);
@@ -324,7 +323,7 @@ public final class CredentialStorage extends Activity {
         private boolean mResetConfirmed;
 
         private ResetDialog() {
-            AlertDialog dialog = new AlertDialog.Builder(CredentialStorage.this)
+            final AlertDialog dialog = new AlertDialog.Builder(CredentialStorage.this)
                     .setTitle(android.R.string.dialog_alert_title)
                     .setMessage(R.string.credentials_reset_hint)
                     .setPositiveButton(android.R.string.ok, this)
@@ -364,7 +363,7 @@ public final class CredentialStorage extends Activity {
             new LockPatternUtils(CredentialStorage.this).resetKeyStore(UserHandle.myUserId());
 
             try {
-                KeyChainConnection keyChainConnection = KeyChain.bind(CredentialStorage.this);
+                final KeyChainConnection keyChainConnection = KeyChain.bind(CredentialStorage.this);
                 try {
                     return keyChainConnection.getService().reset();
                 } catch (RemoteException e) {
@@ -393,7 +392,7 @@ public final class CredentialStorage extends Activity {
     }
 
     private void clearLegacyVpnIfEstablished() {
-        boolean isDone = VpnUtils.disconnectLegacyVpn(getApplicationContext());
+        final boolean isDone = VpnUtils.disconnectLegacyVpn(getApplicationContext());
         if (isDone) {
             Toast.makeText(CredentialStorage.this, R.string.vpn_disconnected,
                     Toast.LENGTH_SHORT).show();
@@ -407,7 +406,7 @@ public final class CredentialStorage extends Activity {
     private class MarkKeyAsUserSelectable extends AsyncTask<Void, Void, Boolean> {
         final String mAlias;
 
-        public MarkKeyAsUserSelectable(String alias) {
+        MarkKeyAsUserSelectable(String alias) {
             mAlias = alias;
         }
 
@@ -440,7 +439,7 @@ public final class CredentialStorage extends Activity {
 
         final int launchedFromUserId;
         try {
-            int launchedFromUid = android.app.ActivityManager.getService()
+            final int launchedFromUid = android.app.ActivityManager.getService()
                     .getLaunchedFromUid(getActivityToken());
             if (launchedFromUid == -1) {
                 Log.e(TAG, ACTION_INSTALL + " must be started with startActivityForResult");
@@ -456,8 +455,8 @@ public final class CredentialStorage extends Activity {
             return false;
         }
 
-        UserManager userManager = (UserManager) getSystemService(Context.USER_SERVICE);
-        UserInfo parentInfo = userManager.getProfileParent(launchedFromUserId);
+        final UserManager userManager = (UserManager) getSystemService(Context.USER_SERVICE);
+        final UserInfo parentInfo = userManager.getProfileParent(launchedFromUserId);
         if (parentInfo == null || parentInfo.id != UserHandle.myUserId()) {
             // Caller is not running in a profile of this user
             return false;
@@ -469,7 +468,7 @@ public final class CredentialStorage extends Activity {
      * Confirm existing key guard, returning password via onActivityResult.
      */
     private boolean confirmKeyGuard(int requestCode) {
-        Resources res = getResources();
+        final Resources res = getResources();
         boolean launched = new ChooseLockSettingsHelper(this)
                 .launchConfirmationActivity(requestCode,
                         res.getText(R.string.credentials_title), true);
@@ -485,7 +484,7 @@ public final class CredentialStorage extends Activity {
          */
         if (requestCode == CONFIRM_KEY_GUARD_REQUEST) {
             if (resultCode == Activity.RESULT_OK) {
-                String password = data.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
+                final String password = data.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
                 if (!TextUtils.isEmpty(password)) {
                     // success
                     mKeyStore.unlock(password);
@@ -520,9 +519,10 @@ public final class CredentialStorage extends Activity {
         private final TextView mError;
 
         private UnlockDialog() {
-            View view = View.inflate(CredentialStorage.this, R.layout.credentials_dialog, null);
+            final View view = View.inflate(
+                CredentialStorage.this, R.layout.credentials_dialog, null);
 
-            CharSequence text;
+            final CharSequence text;
             if (mRetriesRemaining == -1) {
                 text = getResources().getText(R.string.credentials_unlock_hint);
             } else if (mRetriesRemaining > 3) {
@@ -539,7 +539,7 @@ public final class CredentialStorage extends Activity {
             mOldPassword.addTextChangedListener(this);
             mError = (TextView) view.findViewById(R.id.error);
 
-            AlertDialog dialog = new AlertDialog.Builder(CredentialStorage.this)
+            final AlertDialog dialog = new AlertDialog.Builder(CredentialStorage.this)
                     .setView(view)
                     .setTitle(R.string.credentials_unlock)
                     .setPositiveButton(android.R.string.ok, this)
@@ -575,7 +575,7 @@ public final class CredentialStorage extends Activity {
                 mUnlockConfirmed = false;
                 mError.setVisibility(View.VISIBLE);
                 mKeyStore.unlock(mOldPassword.getText().toString());
-                int error = mKeyStore.getLastError();
+                final int error = mKeyStore.getLastError();
                 if (error == KeyStore.NO_ERROR) {
                     mRetriesRemaining = -1;
                     Toast.makeText(CredentialStorage.this,
