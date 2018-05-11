@@ -64,14 +64,19 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context);
+        return buildPreferenceControllers(context, getLifecycle());
     }
 
-    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
+            Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         final DiscoverableFooterPreferenceController discoverableFooterPreferenceController =
                 new DiscoverableFooterPreferenceController(context);
         controllers.add(discoverableFooterPreferenceController);
+
+        if (lifecycle != null) {
+            lifecycle.addObserver(discoverableFooterPreferenceController);
+        }
 
         return controllers;
     }
@@ -133,6 +138,12 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.connected_devices;
                     return Arrays.asList(sir);
+                }
+
+                @Override
+                public List<AbstractPreferenceController> createPreferenceControllers(Context
+                        context) {
+                    return buildPreferenceControllers(context, null /* lifecycle */);
                 }
 
                 @Override
