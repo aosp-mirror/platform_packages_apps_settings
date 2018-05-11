@@ -94,6 +94,7 @@ public class BatteryTipUtils {
             case BatteryTip.TipType.SMART_BATTERY_MANAGER:
                 return new SmartBatteryAction(settingsActivity, fragment);
             case BatteryTip.TipType.BATTERY_SAVER:
+            case BatteryTip.TipType.LOW_BATTERY:
                 if (batteryTip.getState() == BatteryTip.StateType.HANDLED) {
                     return new OpenBatterySaverAction(settingsActivity);
                 } else {
