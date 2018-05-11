@@ -51,6 +51,7 @@
     <Preference
         android:key="connection_preferences"
         android:title="@string/connected_device_connections_title"
-        android:fragment="com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment"/>
+        android:fragment="com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment"
+        settings:controller="com.android.settings.connecteddevice.AdvancedConnectedDeviceController"/>
 
 </PreferenceScreen>
