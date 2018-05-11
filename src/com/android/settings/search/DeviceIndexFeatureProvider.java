@@ -47,17 +47,19 @@ public interface DeviceIndexFeatureProvider {
             List<String> keywords);
 
     default void updateIndex(Context context, boolean force) {
-        if (!isIndexingEnabled()) return;
+        if (!isIndexingEnabled()) {
+            return;
+        }
 
         if (!force && Objects.equals(
-                Settings.Secure.getString(context.getContentResolver(), INDEX_VERSION),  VERSION)) {
+                Settings.Secure.getString(context.getContentResolver(), INDEX_VERSION), VERSION)) {
             // No need to update.
             return;
         }
 
-        ComponentName jobComponent = new ComponentName(context.getPackageName(),
+        final ComponentName jobComponent = new ComponentName(context.getPackageName(),
                 DeviceIndexUpdateJobService.class.getName());
-        int jobId = context.getResources().getInteger(R.integer.device_index_update);
+        final int jobId = context.getResources().getInteger(R.integer.device_index_update);
         // Schedule a job so that we know it'll be able to complete, but try to run as
         // soon as possible.
         context.getSystemService(JobScheduler.class).schedule(
@@ -70,11 +72,10 @@ public interface DeviceIndexFeatureProvider {
         Settings.Secure.putString(context.getContentResolver(), INDEX_VERSION, VERSION);
     }
 
-    static String createDeepLink(String s) {
+    static Uri createDeepLink(String s) {
         return new Uri.Builder().scheme(SETTINGS)
                 .authority(SettingsSliceProvider.SLICE_AUTHORITY)
                 .appendQueryParameter(INTENT, s)
-                .build()
-                .toString();
+                .build();
     }
 }

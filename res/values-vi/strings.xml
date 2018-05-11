@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Quá nhiều lần thử không chính xác. Người dùng này sẽ bị xóa."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Quá nhiều lần thử không chính xác. Hồ sơ công việc này và dữ liệu của hồ sơ công việc sẽ bị xóa."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Loại bỏ"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Phải chứa ít nhất <xliff:g id="COUNT">%d</xliff:g> ký tự"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"Mã PIN phải chứa ít nhất <xliff:g id="COUNT">%d</xliff:g> chữ số"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="other">Phải chứa ít nhất <xliff:g id="COUNT_1">%d</xliff:g> ký tự</item>
+      <item quantity="one">Phải chứa ít nhất <xliff:g id="COUNT_0">%d</xliff:g> ký tự</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="other">Mã PIN phải chứa ít nhất <xliff:g id="COUNT_1">%d</xliff:g> chữ số</item>
+      <item quantity="one">Mã PIN phải chứa ít nhất <xliff:g id="COUNT_0">%d</xliff:g> chữ số</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Tiếp tục"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"Chỉ được có ít hơn <xliff:g id="NUMBER">%d</xliff:g> ký tự"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Phải có ít hơn <xliff:g id="NUMBER">%d</xliff:g> chữ số"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="other">Phải có ít hơn <xliff:g id="NUMBER_1">%d</xliff:g> ký tự</item>
+      <item quantity="one">Phải có ít hơn <xliff:g id="NUMBER_0">%d</xliff:g> ký tự</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="other">Phải có ít hơn <xliff:g id="NUMBER_1">%d</xliff:g> chữ số</item>
+      <item quantity="one">Phải có ít hơn <xliff:g id="NUMBER_0">%d</xliff:g> chữ số</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Chỉ được chứa các chữ số 0-9"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Quản trị viên thiết bị không cho phép dùng mã PIN gần đây"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"Quản vị viên CNTT đã chặn những mã PIN phổ biến. Hãy thử mã PIN khác."</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Điều khiển tương tác"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Các dịch vụ đã tải xuống"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Thử nghiệm"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Cờ tính năng"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Trình đọc màn hình chủ yếu dành cho những người khiếm thị và thị lực kém"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Nhấn vào mục trên màn hình của bạn để nghe mục được đọc to"</string>
@@ -3133,13 +3144,14 @@
       <item quantity="other"> Có thể tự động bật <xliff:g id="ON_COUNT">%d</xliff:g> quy tắc</item>
       <item quantity="one"> Có thể tự động bật 1 quy tắc</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"Ok"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Cập nhật"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Không cập nhật"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"Điện thoại của bạn có thể làm được nhiều việc hơn để giúp bạn tập trung.\n\nCập nhật tùy chọn cài đặt thành:\n\n- Ẩn hoàn toàn thông báo\n\n- Cho phép cuộc gọi từ các liên hệ có gắn dấu sao và người gọi lặp lại"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"Cập nhật tùy chọn cài đặt Không làm phiền?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Cài đặt"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Bạn có thể tùy chỉnh thêm chế độ này trong mục Cài đặt."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Chặn khi màn hình đang bật"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Chặn khi màn hình đang tắt"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Chế độ Không làm phiền có thể chặn cả âm thanh và hình ảnh không mong muốn. Tính năng này có thể hữu ích nếu bạn đang cố gắng ngủ, tập trung hoặc hạn chế thời gian sử dụng điện thoại."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Chặn âm thanh và hình ảnh"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Không bật màn hình hoặc đánh thức khi có thông báo"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Không hiển thị thông báo nào, trừ trạng thái và hoạt động cơ bản của điện thoại"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Âm thanh hồ sơ công việc"</string>
@@ -3671,7 +3683,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Đã tắt sao lưu"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Đã cập nhật lên Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"Đã có bản cập nhật"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"Không thể thay đổi cài đặt này"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"Tác vụ này không được cho phép"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"Không thể thay đổi âm lượng"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"Không cho phép gọi"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"Không cho phép SMS"</string>
@@ -3861,7 +3873,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Kiểm soát thông tin trên màn hình khóa"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Hiển thị hoặc ẩn nội dung thông báo"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Tất cả"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"Hỗ trợ và mẹo"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"Độ rộng nhỏ nhất"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Không có ứng dụng đã cài đặt nào yêu cầu quyền truy cập SMS cao cấp"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"SMS cao cấp có thể làm bạn mất tiền và sẽ tính thêm vào hóa đơn của nhà cung cấp dịch vụ của bạn. Nếu bạn bật quyền cho một ứng dụng, bạn sẽ có thể gửi SMS cao cấp bằng ứng dụng đó."</string>

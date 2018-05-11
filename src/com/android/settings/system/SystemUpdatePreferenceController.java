@@ -35,6 +35,9 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
+
 public class SystemUpdatePreferenceController extends BasePreferenceController {
 
     private static final String TAG = "SysUpdatePrefContr";
@@ -55,7 +58,7 @@ public class SystemUpdatePreferenceController extends BasePreferenceController {
         return mContext.getResources().getBoolean(R.bool.config_show_system_update_settings)
                 && mUm.isAdminUser()
                 ? AVAILABLE
-                : DISABLED_UNSUPPORTED;
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -84,9 +87,19 @@ public class SystemUpdatePreferenceController extends BasePreferenceController {
 
     @Override
     public CharSequence getSummary() {
-        final Bundle updateInfo = mUpdateManager.retrieveSystemUpdateInfo();
         CharSequence summary = mContext.getString(R.string.android_version_summary,
                 Build.VERSION.RELEASE);
+        final FutureTask<Bundle> bundleFutureTask = new FutureTask<>(
+                // Put the API call in a future to avoid StrictMode violation.
+                () -> mUpdateManager.retrieveSystemUpdateInfo());
+        final Bundle updateInfo;
+        try {
+            bundleFutureTask.run();
+            updateInfo = bundleFutureTask.get();
+        } catch (InterruptedException | ExecutionException e) {
+            Log.w(TAG, "Error getting system update info.");
+            return summary;
+        }
         switch (updateInfo.getInt(SystemUpdateManager.KEY_STATUS)) {
             case SystemUpdateManager.STATUS_WAITING_DOWNLOAD:
             case SystemUpdateManager.STATUS_IN_PROGRESS:

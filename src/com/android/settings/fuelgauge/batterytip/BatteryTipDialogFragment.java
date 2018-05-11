@@ -79,16 +79,8 @@ public class BatteryTipDialogFragment extends InstrumentedDialogFragment impleme
 
         switch (mBatteryTip.getType()) {
             case BatteryTip.TipType.SUMMARY:
-                final long averageTimeMs = ((SummaryTip) mBatteryTip).getAverageTimeMs();
-                final String message = context.getString(
-                        averageTimeMs == Estimate.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN
-                                ? R.string.battery_tip_dialog_summary_message_no_estimation
-                                : R.string.battery_tip_dialog_summary_message,
-                        StringUtil.formatElapsedTime(context, averageTimeMs,
-                                false /* withSeconds */));
-
                 return new AlertDialog.Builder(context)
-                        .setMessage(message)
+                        .setMessage(R.string.battery_tip_dialog_summary_message)
                         .setPositiveButton(android.R.string.ok, null)
                         .create();
             case BatteryTip.TipType.HIGH_DEVICE_USAGE:
@@ -102,10 +94,7 @@ public class BatteryTipDialogFragment extends InstrumentedDialogFragment impleme
 
                 return new AlertDialog.Builder(context)
                         .setMessage(getString(R.string.battery_tip_dialog_message,
-                                highUsageTip.getHighUsageAppList().size(),
-                                StringUtil.formatRelativeTime(context,
-                                        highUsageTip.getLastFullChargeTimeMs(),
-                                        false /* withSeconds */)))
+                                highUsageTip.getHighUsageAppList().size()))
                         .setView(view)
                         .setPositiveButton(android.R.string.ok, null)
                         .create();

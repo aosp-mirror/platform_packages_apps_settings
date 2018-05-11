@@ -48,9 +48,9 @@ public class BatteryTipLoaderTest {
             BatteryTip.TipType.APP_RESTRICTION,
             BatteryTip.TipType.BATTERY_SAVER,
             BatteryTip.TipType.HIGH_DEVICE_USAGE,
+            BatteryTip.TipType.LOW_BATTERY,
             BatteryTip.TipType.SUMMARY,
-            BatteryTip.TipType.SMART_BATTERY_MANAGER,
-            BatteryTip.TipType.LOW_BATTERY};
+            BatteryTip.TipType.SMART_BATTERY_MANAGER};
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private BatteryStatsHelper mBatteryStatsHelper;
     @Mock

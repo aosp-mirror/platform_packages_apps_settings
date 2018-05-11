@@ -590,11 +590,27 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Pārāk daudz neveiksmīgu mēģinājumu. Šis lietotājs tiks dzēsts."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Pārāk daudz neveiksmīgu mēģinājumu. Šis darba profils un ar to saistītie dati tiks dzēsti."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Nerādīt"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Ir jāietver vismaz <xliff:g id="COUNT">%d</xliff:g> rakstzīmes."</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"PIN kodā ir jāietver vismaz <xliff:g id="COUNT">%d</xliff:g> cipari."</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="zero">Ir jābūt vismaz <xliff:g id="COUNT_1">%d</xliff:g> rakstzīmēm.</item>
+      <item quantity="one">Ir jābūt vismaz <xliff:g id="COUNT_1">%d</xliff:g> rakstzīmei.</item>
+      <item quantity="other">Ir jābūt vismaz <xliff:g id="COUNT_1">%d</xliff:g> rakstzīmēm.</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="zero">PIN kodā ir jābūt vismaz <xliff:g id="COUNT_1">%d</xliff:g> cipariem.</item>
+      <item quantity="one">PIN kodā ir jābūt vismaz <xliff:g id="COUNT_1">%d</xliff:g> ciparam.</item>
+      <item quantity="other">PIN kodā ir jābūt vismaz <xliff:g id="COUNT_1">%d</xliff:g> cipariem.</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Turpināt"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"Ir jābūt mazāk nekā <xliff:g id="NUMBER">%d</xliff:g> rakstzīmēm."</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Ir jābūt mazāk nekā <xliff:g id="NUMBER">%d</xliff:g> cipariem."</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="zero">Ir jābūt mazāk par <xliff:g id="NUMBER_1">%d</xliff:g> rakstzīmēm.</item>
+      <item quantity="one">Ir jābūt mazāk par <xliff:g id="NUMBER_1">%d</xliff:g> rakstzīmi.</item>
+      <item quantity="other">Ir jābūt mazāk par <xliff:g id="NUMBER_1">%d</xliff:g> rakstzīmēm.</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="zero">Ir jābūt mazāk par <xliff:g id="NUMBER_1">%d</xliff:g> cipariem.</item>
+      <item quantity="one">Ir jābūt mazāk par <xliff:g id="NUMBER_1">%d</xliff:g> ciparu.</item>
+      <item quantity="other">Ir jābūt mazāk par <xliff:g id="NUMBER_1">%d</xliff:g> cipariem.</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Ir jāietver tikai cipari no 0 līdz 9."</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Ierīces administrators neļauj izmantot nesen izveidotu PIN."</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"Jūsu IT administrators ir bloķējis pārāk vienkāršus PIN kodus. Izmēģiniet sarežģītāku PIN kodu."</string>
@@ -1934,8 +1950,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Mijiedarbības vadīklas"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Lejupielādētie pakalpojumi"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Eksperimentāla"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Funkciju karodziņi"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Ekrāna lasītājs, kas galvenokārt paredzēts akliem un vājredzīgiem lietotājiem"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Pieskarieties vienumiem ekrānā, lai tie tiktu skaļi nolasīti."</string>
@@ -3170,13 +3185,14 @@
       <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> kārtula var tikt ieslēgta automātiski</item>
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> kārtulas var tikt ieslēgtas automātiski</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"Labi"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Atjaunināt"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Neatjaunināt"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"Tālrunis var palīdzēt jums koncentrēties.\n\nAtjauniniet iestatījumus:\n\n- pilnībā slēpiet paziņojumus;\n\n- atļaujiet zvanus no kontaktpersonām, kas atzīmētas ar zvaigznīti, un atkārtotiem zvanītājiem."</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"Vai atjaunināt iestatījumu “Netraucēt”?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Iestatījumi"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Iestatījumos varat veikt papildu pielāgošanu."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Bloķēt, kad ekrāns ir ieslēgts"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Bloķēt, kad ekrāns ir izslēgts"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Režīmā “Netraucēt” var bloķēt ne tikai nevēlamas skaņas, bet arī vizuālos elementus. Tas var būt noderīgi, ja mēģināt gulēt, koncentrēties vai ierobežot tālruņa izmantošanas laiku."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Bloķēt skaņas un vizuālos elementus"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Neieslēgt ekrānu un neaktivizēt ierīci paziņojumu dēļ"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Nerādīt paziņojumus vispār, izņemot tālruņa pamatdarbībām un statusam"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Darba profila signāli"</string>
@@ -3723,7 +3739,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Dublēšana atspējota"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Atjaunināta uz Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"Ir pieejams atjauninājums"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"Šo iestatījumu nevar mainīt"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"Darbība nav atļauta"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"Nevar mainīt skaļumu"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"Nav atļauts zvanīt"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"Nav atļauts sūtīt īsziņas"</string>
@@ -3919,7 +3935,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Kontrolējiet informāciju bloķēšanas ekrānā"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Rādīt vai slēpt paziņojumu saturu"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Visas"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"Atbalsts un padomi"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"Mazākais platums"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Nevienā instalētajā lietotnē nav pieprasīta piekļuve maksas īsziņām."</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"Par maksas īsziņām no jums var tikt iekasēta samaksa, kas tiks pievienota jūsu mobilo sakaru operatora rēķinam. Ja kādai lietotnei iespējosiet piekļuves atļauju, varēsiet sūtīt maksas īsziņas, izmantojot šo lietotni."</string>

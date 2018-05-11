@@ -77,7 +77,7 @@ public class ChangeProfileScreenLockPreferenceController extends
         extras.putInt(Intent.EXTRA_USER_ID, mProfileChallengeUserId);
         new SubSettingLauncher(mContext)
                 .setDestination(ChooseLockGeneric.ChooseLockGenericFragment.class.getName())
-                .setTitle(R.string.lock_settings_picker_title_profile)
+                .setTitleRes(R.string.lock_settings_picker_title_profile)
                 .setSourceMetricsCategory(mHost.getMetricsCategory())
                 .setArguments(extras)
                 .launch();

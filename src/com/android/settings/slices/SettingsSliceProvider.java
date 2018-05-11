@@ -26,13 +26,11 @@ import android.content.Intent;
 import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
-import android.os.StrictMode;
 import android.provider.Settings;
 import androidx.annotation.VisibleForTesting;
 import android.provider.SettingsSlicesContract;
 import androidx.core.graphics.drawable.IconCompat;
 import android.text.TextUtils;
-import android.util.ArrayMap;
 import android.util.Log;
 import android.util.Pair;
 
@@ -42,10 +40,10 @@ import com.android.settingslib.utils.ThreadUtils;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import androidx.slice.Slice;
 import androidx.slice.SliceProvider;
@@ -117,6 +115,7 @@ public class SettingsSliceProvider extends SliceProvider {
 
     @VisibleForTesting
     Map<Uri, SliceData> mSliceWeakDataCache;
+    @VisibleForTesting
     Map<Uri, SliceData> mSliceDataCache;
 
     public SettingsSliceProvider() {
@@ -126,7 +125,7 @@ public class SettingsSliceProvider extends SliceProvider {
     @Override
     public boolean onCreateSliceProvider() {
         mSlicesDatabaseAccessor = new SlicesDatabaseAccessor(getContext());
-        mSliceDataCache = new ArrayMap<>();
+        mSliceDataCache = new ConcurrentHashMap<>();
         mSliceWeakDataCache = new WeakHashMap<>();
         return true;
     }
@@ -155,11 +154,6 @@ public class SettingsSliceProvider extends SliceProvider {
 
     @Override
     public Slice onBindSlice(Uri sliceUri) {
-        // TODO: Remove this when all slices are not breaking strict mode
-        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-                .permitAll()
-                .build());
-
         String path = sliceUri.getPath();
         // If adding a new Slice, do not directly match Slice URIs.
         // Use {@link SlicesDatabaseAccessor}.

@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"錯誤次數過多，系統將刪除這位使用者。"</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"錯誤次數過多，系統將刪除這個 Work 設定檔和相關資料。"</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"關閉"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"必須包含至少 <xliff:g id="COUNT">%d</xliff:g> 個字元"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"PIN 碼至少要有 <xliff:g id="COUNT">%d</xliff:g> 位數字"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="other">至少必須包含 <xliff:g id="COUNT_1">%d</xliff:g> 個字元</item>
+      <item quantity="one">至少必須包含 <xliff:g id="COUNT_0">%d</xliff:g> 個字元</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="other">PIN 碼至少必須包含 <xliff:g id="COUNT_1">%d</xliff:g> 個數字</item>
+      <item quantity="one">PIN 碼至少必須包含 <xliff:g id="COUNT_0">%d</xliff:g> 個數字</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"繼續"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"長度必須少於 <xliff:g id="NUMBER">%d</xliff:g> 個字元"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"長度必須少於 <xliff:g id="NUMBER">%d</xliff:g> 位數"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="other">長度必須少於 <xliff:g id="NUMBER_1">%d</xliff:g> 個字元</item>
+      <item quantity="one">長度必須少於 <xliff:g id="NUMBER_0">%d</xliff:g> 個字元</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="other">長度必須少於 <xliff:g id="NUMBER_1">%d</xliff:g> 個數字</item>
+      <item quantity="one">長度必須少於 <xliff:g id="NUMBER_0">%d</xliff:g> 個數字</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"只能包含數字 0 到 9"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"裝置管理員不允許使用最近用過的 PIN"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"你的 IT 管理員已封鎖常見 PIN 碼，請改用其他 PIN 碼。"</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"互動控制項"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"已下載的服務"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"實驗性"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"功能標記"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"這是一種螢幕閱讀器，主要適用於視障和低視能人士"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"輕觸畫面上的項目即可聽取項目內容"</string>
@@ -3137,13 +3148,14 @@
       <item quantity="other">系統可以自動開啟 <xliff:g id="ON_COUNT">%d</xliff:g> 條規則</item>
       <item quantity="one">系統可以自動開啟 1 條規則</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"確定"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"更新"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"不要更新"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"你的手機有更多可協助你集中注意力的功能。\n\n你可以將設定更新為：\n\n- 完全隱藏通知\n\n- 允許下列對象來電：已加星號的聯絡人和曾在短時間內來電的來電者"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"要更新「零打擾」模式嗎？"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"設定"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"你可以前往 [設定] 進一步自訂這項設定。"</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"螢幕開啟時封鎖"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"螢幕關閉時封鎖"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"「零打擾」模式除了可以封鎖擾人的音效，也能封鎖視覺干擾。無論你打算入睡、準備集中注意力或限制使用手機的時間，這項功能對你來說都非常實用。"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"封鎖音效和視覺干擾"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"不要在收到通知時開啟螢幕或喚醒裝置"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"不顯示任何通知，除了基本手機活動和狀態以外"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Work 設定檔音效"</string>
@@ -3675,7 +3687,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"備份功能已停用"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"已更新至 Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"有可用的更新"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"無法變更這項設定"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"不允許此操作"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"無法變更音量"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"不允許使用通話功能"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"不允許使用簡訊功能"</string>
@@ -3865,7 +3877,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"控制鎖定畫面上顯示的資訊"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"顯示或隱藏通知內容"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"全部"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"支援和提示"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"最小寬度"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"沒有任何已安裝的應用程式要求「付費簡訊」存取權"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"「付費簡訊」需要額外計費，相關費用會併入你的電信費帳單。如果你為某個應用程式啟用權限，即可利用該應用程式傳送付費簡訊。"</string>

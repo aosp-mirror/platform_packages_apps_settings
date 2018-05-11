@@ -62,7 +62,7 @@ public class RecentLocationRequestPreferenceController extends LocationBasePrefe
             new SubSettingLauncher(mFragment.getContext())
                     .setDestination(AppInfoDashboardFragment.class.getName())
                     .setArguments(args)
-                    .setTitle(R.string.application_info_label)
+                    .setTitleRes(R.string.application_info_label)
                     .setUserHandle(mUserHandle)
                     .setSourceMetricsCategory(mFragment.getMetricsCategory())
                     .launch();

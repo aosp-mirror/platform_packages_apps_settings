@@ -32,6 +32,6 @@ public class AdditionalSystemUpdatePreferenceController extends BasePreferenceCo
         return mContext.getResources().getBoolean(
                 com.android.settings.R.bool.config_additional_system_update_setting_enable)
                 ? AVAILABLE
-                : DISABLED_UNSUPPORTED;
+                : UNSUPPORTED_ON_DEVICE;
     }
 }

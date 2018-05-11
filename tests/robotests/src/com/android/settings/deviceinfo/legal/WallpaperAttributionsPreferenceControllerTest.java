@@ -52,6 +52,6 @@ public class WallpaperAttributionsPreferenceControllerTest {
     @Config(qualifiers = "mcc999")
     public void getAvailabilityStatus_ifNotVisible_false() {
         assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.DISABLED_UNSUPPORTED);
+                .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 }

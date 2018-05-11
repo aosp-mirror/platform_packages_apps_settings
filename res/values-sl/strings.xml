@@ -593,11 +593,31 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Preveč napačnih poskusov. Uporabnik bo izbrisan."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Preveč napačnih poskusov. Delovni profil in podatki v njem bodo izbrisani."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Opusti"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Geslo mora biti dolgo vsaj toliko znakov: <xliff:g id="COUNT">%d</xliff:g>"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"Koda PIN mora biti vsaj <xliff:g id="COUNT">%d</xliff:g>-mestna"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="one">Vsebovati mora vsaj <xliff:g id="COUNT_1">%d</xliff:g> znak</item>
+      <item quantity="two">Vsebovati mora vsaj <xliff:g id="COUNT_1">%d</xliff:g> znaka</item>
+      <item quantity="few">Vsebovati mora vsaj <xliff:g id="COUNT_1">%d</xliff:g> znake</item>
+      <item quantity="other">Vsebovati mora vsaj <xliff:g id="COUNT_1">%d</xliff:g> znakov</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="one">Koda PIN mora vsebovati vsaj <xliff:g id="COUNT_1">%d</xliff:g> števko</item>
+      <item quantity="two">Koda PIN mora vsebovati vsaj <xliff:g id="COUNT_1">%d</xliff:g> števki</item>
+      <item quantity="few">Koda PIN mora vsebovati vsaj <xliff:g id="COUNT_1">%d</xliff:g> števke</item>
+      <item quantity="other">Koda PIN mora vsebovati vsaj <xliff:g id="COUNT_1">%d</xliff:g> števk</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Naprej"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"Vsebovati mora manj kot toliko znakov: <xliff:g id="NUMBER">%d</xliff:g>."</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Vsebovati mora manj kot toliko števk: <xliff:g id="NUMBER">%d</xliff:g>."</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="one">Vsebovati mora manj kot <xliff:g id="NUMBER_1">%d</xliff:g> znak</item>
+      <item quantity="two">Vsebovati mora manj kot <xliff:g id="NUMBER_1">%d</xliff:g> znaka</item>
+      <item quantity="few">Vsebovati mora manj kot <xliff:g id="NUMBER_1">%d</xliff:g> znake</item>
+      <item quantity="other">Vsebovati mora manj kot <xliff:g id="NUMBER_1">%d</xliff:g> znakov</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="one">Vsebovati mora manj kot <xliff:g id="NUMBER_1">%d</xliff:g> števko</item>
+      <item quantity="two">Vsebovati mora manj kot <xliff:g id="NUMBER_1">%d</xliff:g> števki</item>
+      <item quantity="few">Vsebovati mora manj kot <xliff:g id="NUMBER_1">%d</xliff:g> števke</item>
+      <item quantity="other">Vsebovati mora manj kot <xliff:g id="NUMBER_1">%d</xliff:g> števk</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Vsebovati sme samo števke od 0 do 9."</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Skrbnik naprave ne dovoli uporabe nedavne kode PIN."</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"Skrbnik za IT je blokiral pogoste kode PIN. Poskusite z drugo kodo PIN."</string>
@@ -1948,8 +1968,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Kontrolniki za interakcije"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Prenesene storitve"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Poskusno"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Zastavice za funkcije"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Bralnik zaslona je predvsem za slepe in slabovidne"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Če želite slišati vsebino elementov na zaslonu, se jih dotaknite"</string>
@@ -3207,13 +3226,14 @@
       <item quantity="few"><xliff:g id="ON_COUNT">%d</xliff:g> pravila se lahko samodejno vklopijo</item>
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> pravil se lahko samodejno vklopi</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"V redu"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Posodobi"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Ne posodobi"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"Telefon vam lahko še dodatno pomaga, da se osredotočite.\n\nPosodobite nastavitve, da:\n\n– popolnoma skrijete obvestila\n\n– omogočite klice od stikov z zvezdico in večkratnih klicateljev"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"Želite posodobiti nastavitve načina »ne moti«?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Nastavitve"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"To lahko dodatno prilagodite v nastavitvah."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Blokiraj, ko je zaslon vklopljen"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Blokiraj, ko je zaslon izklopljen"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Način »ne moti« lahko stori več kot samo blokira neželene zvoke, saj lahko blokira tudi vizualne motnje. To vam je lahko v pomoč, če poskušate zaspati, se osredotočiti ali omejiti čas, ki ga namenite telefonu."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Blokiranje zvokov in vizualnih motenj"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Ne vklopi zaslona in ne preklopi iz stanja pripravljenosti za obvestila"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Ne prikazuj obvestil razen za osnovno delovanje telefona in obveščanje o njegovem stanju"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Zvoki v delovnem profilu"</string>
@@ -3775,7 +3795,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Varnostno kopiranje je onemogočeno"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Posodobljeno na Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"Na voljo je posodobljena različica"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"Sprememba nastavitve ni mogoča"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"Dejanje ni dovoljeno"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"Spreminjanje glasnosti ni mogoče"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"Klicanje ni omogočeno"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"Pošiljanje sporočil SMS ni omogočeno"</string>
@@ -3977,7 +3997,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Upravljanje podatkov na zaklenjenem zaslonu"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Prikaz ali skrivanje vsebine obvestil"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Vse"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"Podpora in nasveti"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"Najmanjša širina"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Nobena nameščena aplikacija ni zahtevala dostopa za plačljiva sporočila SMS."</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"Plačljiva sporočila SMS vam lahko povzročijo stroške in povečajo račun za mobilno telefonijo. Če za aplikacijo omogočite dovoljenje, boste lahko s tisto aplikacijo pošiljali plačljiva sporočila SMS."</string>

@@ -593,11 +593,31 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Príliš veľa chybných pokusov. Tento používateľ bude odstránený."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Príliš veľa chybných pokusov. Tento pracovný profil a jeho dáta budú odstránené."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Zatvoriť"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Musí obsahovať aspoň tento počet znakov: <xliff:g id="COUNT">%d</xliff:g>"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"PIN sa musí skladať aspoň z <xliff:g id="COUNT">%d</xliff:g> číslic"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="few">Musí mať aspoň <xliff:g id="COUNT_1">%d</xliff:g> znaky</item>
+      <item quantity="many">Must be at least <xliff:g id="COUNT_1">%d</xliff:g> characters</item>
+      <item quantity="other">Musí mať aspoň <xliff:g id="COUNT_1">%d</xliff:g> znakov</item>
+      <item quantity="one">Musí mať aspoň <xliff:g id="COUNT_0">%d</xliff:g> znak</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="few">PIN musí mať aspoň <xliff:g id="COUNT_1">%d</xliff:g> číslice</item>
+      <item quantity="many">PIN must be at least <xliff:g id="COUNT_1">%d</xliff:g> digits</item>
+      <item quantity="other">PIN musí mať aspoň <xliff:g id="COUNT_1">%d</xliff:g> číslic</item>
+      <item quantity="one">PIN musí mať aspoň ako <xliff:g id="COUNT_0">%d</xliff:g> číslicu</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Pokračovať"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"Musí mať menej ako <xliff:g id="NUMBER">%d</xliff:g> znakov"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Musí mať menej ako <xliff:g id="NUMBER">%d</xliff:g> číslic"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="few">Musí mať menej ako <xliff:g id="NUMBER_1">%d</xliff:g> znaky</item>
+      <item quantity="many">Must be fewer than <xliff:g id="NUMBER_1">%d</xliff:g> characters</item>
+      <item quantity="other">Musí mať menej ako <xliff:g id="NUMBER_1">%d</xliff:g> znakov</item>
+      <item quantity="one">Musí mať menej ako <xliff:g id="NUMBER_0">%d</xliff:g> znak</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="few">Musí mať menej ako <xliff:g id="NUMBER_1">%d</xliff:g> číslice</item>
+      <item quantity="many">Must be fewer than <xliff:g id="NUMBER_1">%d</xliff:g> digits</item>
+      <item quantity="other">Musí mať menej ako <xliff:g id="NUMBER_1">%d</xliff:g> číslic</item>
+      <item quantity="one">Musí mať menej ako <xliff:g id="NUMBER_0">%d</xliff:g> číslicu</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Musí obsahovať len číslice 0 až 9"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Správca zariadenia neumožňuje používať nedávny kód PIN"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"Bežné kódy PIN zablokoval váš správca IT. Skúste iný PIN."</string>
@@ -1948,8 +1968,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Interaktívne ovládanie"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Stiahnuté služby"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Experimentálne"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Experimentálne funkcie"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Čítačka obrazovky je určená hlavne pre nevidiacich a slabozrakých ľudí"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Položky na obrazovke si môžete vypočuť nahlas klepnutím"</string>
@@ -3207,13 +3226,14 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> pravidiel sa môže zapnúť automaticky</item>
       <item quantity="one">1 pravidlo sa môže zapnúť automaticky</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"OK"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Aktualizovať"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Neaktualizovať"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"Telefón vám môže pomôcť sústrediť sa.\n\nAktualizujte nastavenia nasledovne:\n\n– úplne skryte upozornenia,\n\n– povoľte hovory od kontaktov označených hviezdičkou a opakovane volajúcich."</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"Aktualizovať režim Nerušiť?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Nastavenia"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Túto možnosť môžete ďalej prispôsobiť v Nastaveniach."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Blokovať pri zapnutej obrazovke"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Blokovať pri vypnutej obrazovke"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Režim Nerušiť dokáže viac než len blokovať nechcené zvuky – blokuje aj vizuálne prvky. Môže to byť užitočné, ak sa pokúšate zaspať, sústrediť alebo obmedziť čas strávený používaním telefónu."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Blokovať zvuky a vizuálne prvky"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"V prípade upozornení nezapínať obrazovku ani nebudiť"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Nezobrazovať žiadne upozornenia okrem základnej aktivity telefónu a stavu"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Zvuky pracovného profilu"</string>
@@ -3775,7 +3795,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Zálohovanie je zakázané"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Aktualizované na Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"K dispozícii je aktualizácia"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"Toto nastavenie sa nedá zmeniť"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"Akcia nie je povolená"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"Hlasitosť sa nedá zmeniť"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"Hovory sú zakázané"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"Správy SMS sú zakázané"</string>
@@ -3977,7 +3997,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Ovládajte informácie na uzamknutej obrazovke"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Zobrazujte si obsah upozornení alebo ho skryte"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Všetko"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"Podpora a tipy"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"Minimálna šírka"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Prístup k prémiovým správam SMS si nevyžiadali žiadne nainštalované aplikácie"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"Za prémiové správy SMS sa môžu účtovať poplatky, ktoré sa naúčtujú na faktúru operátora. Ak aktivujete toto povolenie pre aplikáciu, budete môcť pomocou nej posielať prémiové správy SMS."</string>

@@ -17,8 +17,17 @@
 package com.android.settings.sound;
 
 
+import static android.media.AudioManager.DEVICE_OUT_BLUETOOTH_SCO;
+import static android.media.AudioManager.STREAM_RING;
+import static android.media.AudioManager.STREAM_VOICE_CALL;
+import static android.media.AudioSystem.DEVICE_OUT_ALL_SCO;
+import static android.media.AudioSystem.DEVICE_OUT_BLUETOOTH_A2DP;
+import static android.media.AudioSystem.DEVICE_OUT_BLUETOOTH_SCO_HEADSET;
+import static android.media.AudioSystem.DEVICE_OUT_HEARING_AID;
+import static android.media.AudioSystem.STREAM_MUSIC;
+
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController.DISABLED_UNSUPPORTED;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -27,6 +36,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import static org.robolectric.Shadows.shadowOf;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -48,7 +59,8 @@ import com.android.settings.testutils.shadow.ShadowMediaRouter;
 import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.BluetoothEventManager;
-import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.HeadsetProfile;
+import com.android.settingslib.bluetooth.HearingAidProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 
@@ -59,7 +71,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowBluetoothDevice;
 
@@ -77,19 +88,24 @@ public class AudioOutputSwitchPreferenceControllerTest {
     private static final String TEST_KEY = "Test_Key";
     private static final String TEST_DEVICE_NAME_1 = "Test_A2DP_BT_Device_NAME_1";
     private static final String TEST_DEVICE_NAME_2 = "Test_A2DP_BT_Device_NAME_2";
-    private static final String TEST_DEVICE_ADDRESS_1 = "00:07:80:78:A4:69";
-    private static final String TEST_DEVICE_ADDRESS_2 = "00:00:00:00:00:00";
+    private static final String TEST_DEVICE_ADDRESS_1 = "00:A1:A1:A1:A1:A1";
+    private static final String TEST_DEVICE_ADDRESS_2 = "00:B2:B2:B2:B2:B2";
+    private static final String TEST_DEVICE_ADDRESS_3 = "00:C3:C3:C3:C3:C3";
+    private final static long HISYNCID1 = 10;
+    private final static long HISYNCID2 = 11;
 
     @Mock
     private LocalBluetoothManager mLocalManager;
     @Mock
     private BluetoothEventManager mBluetoothEventManager;
     @Mock
-    private CachedBluetoothDevice mCachedBluetoothDevice;
-    @Mock
     private LocalBluetoothProfileManager mLocalBluetoothProfileManager;
     @Mock
     private A2dpProfile mA2dpProfile;
+    @Mock
+    private HeadsetProfile mHeadsetProfile;
+    @Mock
+    private HearingAidProfile mHearingAidProfile;
 
     private Context mContext;
     private PreferenceScreen mScreen;
@@ -99,10 +115,13 @@ public class AudioOutputSwitchPreferenceControllerTest {
     private BluetoothManager mBluetoothManager;
     private BluetoothAdapter mBluetoothAdapter;
     private BluetoothDevice mBluetoothDevice;
-    private ShadowBluetoothDevice mShadowBluetoothDevice;
+    private BluetoothDevice mLeftBluetoothHapDevice;
+    private BluetoothDevice mRightBluetoothHapDevice;
     private LocalBluetoothManager mLocalBluetoothManager;
     private AudioSwitchPreferenceController mController;
-    private List<BluetoothDevice> mConnectedDevices;
+    private List<BluetoothDevice> mProfileConnectedDevices;
+    private List<BluetoothDevice> mHearingAidActiveDevices;
+    private List<BluetoothDevice> mEmptyDevices;
 
     @Before
     public void setUp() {
@@ -118,20 +137,27 @@ public class AudioOutputSwitchPreferenceControllerTest {
         when(mLocalBluetoothManager.getEventManager()).thenReturn(mBluetoothEventManager);
         when(mLocalBluetoothManager.getProfileManager()).thenReturn(mLocalBluetoothProfileManager);
         when(mLocalBluetoothProfileManager.getA2dpProfile()).thenReturn(mA2dpProfile);
+        when(mLocalBluetoothProfileManager.getHearingAidProfile()).thenReturn(mHearingAidProfile);
+        when(mLocalBluetoothProfileManager.getHeadsetProfile()).thenReturn(mHeadsetProfile);
 
         mBluetoothManager = new BluetoothManager(mContext);
         mBluetoothAdapter = mBluetoothManager.getAdapter();
 
-        mBluetoothDevice = mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS_1);
-        mShadowBluetoothDevice = Shadows.shadowOf(mBluetoothDevice);
-        mShadowBluetoothDevice.setName(TEST_DEVICE_NAME_1);
-        when(mCachedBluetoothDevice.getDevice()).thenReturn(mBluetoothDevice);
+        mBluetoothDevice = spy(mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS_1));
+        when(mBluetoothDevice.getName()).thenReturn(TEST_DEVICE_NAME_1);
+        when(mBluetoothDevice.isConnected()).thenReturn(true);
+
+        mLeftBluetoothHapDevice = spy(mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS_2));
+        when(mLeftBluetoothHapDevice.isConnected()).thenReturn(true);
+        mRightBluetoothHapDevice = spy(mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS_3));
+        when(mRightBluetoothHapDevice.isConnected()).thenReturn(true);
 
         mController = new AudioSwitchPreferenceControllerTestable(mContext, TEST_KEY);
         mScreen = spy(new PreferenceScreen(mContext, null));
         mPreference = new ListPreference(mContext);
-        mConnectedDevices = new ArrayList<>(1);
-        mConnectedDevices.add(mBluetoothDevice);
+        mProfileConnectedDevices = new ArrayList<>();
+        mHearingAidActiveDevices = new ArrayList<>(2);
+        mEmptyDevices = new ArrayList<>(2);
 
         when(mScreen.getPreferenceManager()).thenReturn(mock(PreferenceManager.class));
         when(mScreen.getContext()).thenReturn(mContext);
@@ -155,7 +181,7 @@ public class AudioOutputSwitchPreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_whenNotVisible_isDisable() {
         FeatureFlagUtils.setEnabled(mContext, FeatureFlags.AUDIO_SWITCHER_SETTINGS, false);
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_UNSUPPORTED);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
@@ -179,7 +205,8 @@ public class AudioOutputSwitchPreferenceControllerTest {
 
     @Test
     public void onPreferenceChange_toThisDevice_shouldSetDefaultSummary() {
-        mController.mConnectedDevices = mConnectedDevices;
+        mController.mConnectedDevices.clear();
+        mController.mConnectedDevices.add(mBluetoothDevice);
 
         mController.onPreferenceChange(mPreference,
                 mContext.getText(R.string.media_output_default_summary));
@@ -194,7 +221,8 @@ public class AudioOutputSwitchPreferenceControllerTest {
      */
     @Test
     public void onPreferenceChange_toBtDevice_shouldSetBtDeviceName() {
-        mController.mConnectedDevices = mConnectedDevices;
+        mController.mConnectedDevices.clear();
+        mController.mConnectedDevices.add(mBluetoothDevice);
 
         mController.onPreferenceChange(mPreference, TEST_DEVICE_ADDRESS_1);
 
@@ -210,12 +238,11 @@ public class AudioOutputSwitchPreferenceControllerTest {
         ShadowBluetoothDevice shadowBluetoothDevice;
         BluetoothDevice secondBluetoothDevice;
         secondBluetoothDevice = mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS_2);
-        shadowBluetoothDevice = Shadows.shadowOf(secondBluetoothDevice);
+        shadowBluetoothDevice = shadowOf(secondBluetoothDevice);
         shadowBluetoothDevice.setName(TEST_DEVICE_NAME_2);
-        List<BluetoothDevice> connectedDevices = new ArrayList<>(2);
-        connectedDevices.add(mBluetoothDevice);
-        connectedDevices.add(secondBluetoothDevice);
-        mController.mConnectedDevices = connectedDevices;
+        mController.mConnectedDevices.clear();
+        mController.mConnectedDevices.add(mBluetoothDevice);
+        mController.mConnectedDevices.add(secondBluetoothDevice);
 
         mController.onPreferenceChange(mPreference, TEST_DEVICE_ADDRESS_2);
 
@@ -223,14 +250,261 @@ public class AudioOutputSwitchPreferenceControllerTest {
     }
 
     /**
-     * mConnectedDevices is Null.
+     * mConnectedDevices is empty.
      * onPreferenceChange should return false.
      */
     @Test
     public void onPreferenceChange_connectedDeviceIsNull_shouldReturnFalse() {
-        mController.mConnectedDevices = null;
+        mController.mConnectedDevices.clear();
 
         assertThat(mController.onPreferenceChange(mPreference, TEST_DEVICE_ADDRESS_1)).isFalse();
+    }
+
+    /**
+     * Audio stream output to bluetooth sco headset which is the subset of all sco device.
+     * isStreamFromOutputDevice should return true.
+     */
+    @Test
+    public void isStreamFromOutputDevice_outputDeviceIsBtScoHeadset_shouldReturnTrue() {
+        mShadowAudioManager.setOutputDevice(DEVICE_OUT_BLUETOOTH_SCO_HEADSET);
+
+        assertThat(mController.isStreamFromOutputDevice(STREAM_MUSIC, DEVICE_OUT_ALL_SCO)).isTrue();
+    }
+
+    /**
+     * Audio stream is not STREAM_MUSIC or STREAM_VOICE_CALL.
+     * findActiveDevice should return null.
+     */
+    @Test
+    public void findActiveDevice_streamIsRing_shouldReturnNull() {
+        assertThat(mController.findActiveDevice(STREAM_RING)).isNull();
+    }
+
+    /**
+     * Audio stream is STREAM_MUSIC and output device is A2dp bluetooth device.
+     * findActiveDevice should return A2dp active device.
+     */
+    @Test
+    public void findActiveDevice_streamMusicToA2dpDevice_shouldReturnActiveA2dpDevice() {
+        mShadowAudioManager.setOutputDevice(DEVICE_OUT_BLUETOOTH_A2DP);
+        mHearingAidActiveDevices.clear();
+        mHearingAidActiveDevices.add(mLeftBluetoothHapDevice);
+        when(mHeadsetProfile.getActiveDevice()).thenReturn(mLeftBluetoothHapDevice);
+        when(mA2dpProfile.getActiveDevice()).thenReturn(mBluetoothDevice);
+        when(mHearingAidProfile.getActiveDevices()).thenReturn(mHearingAidActiveDevices);
+
+        assertThat(mController.findActiveDevice(STREAM_MUSIC)).isEqualTo(mBluetoothDevice);
+    }
+
+    /**
+     * Audio stream is STREAM_VOICE_CALL and output device is Hands free profile bluetooth device.
+     * findActiveDevice should return Hands free profile active device.
+     */
+    @Test
+    public void findActiveDevice_streamVoiceCallToHfpDevice_shouldReturnActiveHfpDevice() {
+        mShadowAudioManager.setOutputDevice(DEVICE_OUT_BLUETOOTH_SCO);
+        mHearingAidActiveDevices.clear();
+        mHearingAidActiveDevices.add(mLeftBluetoothHapDevice);
+        when(mHeadsetProfile.getActiveDevice()).thenReturn(mBluetoothDevice);
+        when(mA2dpProfile.getActiveDevice()).thenReturn(mLeftBluetoothHapDevice);
+        when(mHearingAidProfile.getActiveDevices()).thenReturn(mHearingAidActiveDevices);
+
+        assertThat(mController.findActiveDevice(STREAM_VOICE_CALL)).isEqualTo(mBluetoothDevice);
+    }
+
+    /**
+     * Audio stream is STREAM_MUSIC or STREAM_VOICE_CALL and output device is hearing aid profile
+     * bluetooth device. And left side of HAP device is active.
+     * findActiveDevice should return hearing aid device active device.
+     */
+    @Test
+    public void findActiveDevice_streamToHapDeviceLeftActiveDevice_shouldReturnActiveHapDevice() {
+        mShadowAudioManager.setOutputDevice(DEVICE_OUT_HEARING_AID);
+        mController.mConnectedDevices.clear();
+        mController.mConnectedDevices.add(mBluetoothDevice);
+        mController.mConnectedDevices.add(mLeftBluetoothHapDevice);
+        mHearingAidActiveDevices.clear();
+        mHearingAidActiveDevices.add(mLeftBluetoothHapDevice);
+        mHearingAidActiveDevices.add(null);
+        when(mHeadsetProfile.getActiveDevice()).thenReturn(mBluetoothDevice);
+        when(mA2dpProfile.getActiveDevice()).thenReturn(mBluetoothDevice);
+        when(mHearingAidProfile.getActiveDevices()).thenReturn(mHearingAidActiveDevices);
+
+        assertThat(mController.findActiveDevice(STREAM_MUSIC)).isEqualTo(mLeftBluetoothHapDevice);
+        assertThat(mController.findActiveDevice(STREAM_VOICE_CALL)).isEqualTo(
+                mLeftBluetoothHapDevice);
+    }
+
+    /**
+     * Audio stream is STREAM_MUSIC or STREAM_VOICE_CALL and output device is hearing aid profile
+     * bluetooth device. And right side of HAP device is active.
+     * findActiveDevice should return hearing aid device active device.
+     */
+    @Test
+    public void findActiveDevice_streamToHapDeviceRightActiveDevice_shouldReturnActiveHapDevice() {
+        mShadowAudioManager.setOutputDevice(DEVICE_OUT_HEARING_AID);
+        mController.mConnectedDevices.clear();
+        mController.mConnectedDevices.add(mBluetoothDevice);
+        mController.mConnectedDevices.add(mRightBluetoothHapDevice);
+        mHearingAidActiveDevices.clear();
+        mHearingAidActiveDevices.add(null);
+        mHearingAidActiveDevices.add(mRightBluetoothHapDevice);
+        mHearingAidActiveDevices.add(mRightBluetoothHapDevice);
+        when(mHeadsetProfile.getActiveDevice()).thenReturn(mBluetoothDevice);
+        when(mA2dpProfile.getActiveDevice()).thenReturn(mBluetoothDevice);
+        when(mHearingAidProfile.getActiveDevices()).thenReturn(mHearingAidActiveDevices);
+
+        assertThat(mController.findActiveDevice(STREAM_MUSIC)).isEqualTo(mRightBluetoothHapDevice);
+        assertThat(mController.findActiveDevice(STREAM_VOICE_CALL)).isEqualTo(
+                mRightBluetoothHapDevice);
+    }
+
+    /**
+     * Audio stream is STREAM_MUSIC or STREAM_VOICE_CALL and output device is hearing aid
+     * profile bluetooth device. And both are active device.
+     * findActiveDevice should return only return the active device in mConnectedDevices.
+     */
+    @Test
+    public void findActiveDevice_streamToHapDeviceTwoActiveDevice_shouldReturnActiveHapDevice() {
+        mShadowAudioManager.setOutputDevice(DEVICE_OUT_HEARING_AID);
+        mController.mConnectedDevices.clear();
+        mController.mConnectedDevices.add(mBluetoothDevice);
+        mController.mConnectedDevices.add(mRightBluetoothHapDevice);
+        mHearingAidActiveDevices.clear();
+        mHearingAidActiveDevices.add(mLeftBluetoothHapDevice);
+        mHearingAidActiveDevices.add(mRightBluetoothHapDevice);
+        when(mHeadsetProfile.getActiveDevice()).thenReturn(mBluetoothDevice);
+        when(mA2dpProfile.getActiveDevice()).thenReturn(mBluetoothDevice);
+        when(mHearingAidProfile.getActiveDevices()).thenReturn(mHearingAidActiveDevices);
+
+        assertThat(mController.findActiveDevice(STREAM_MUSIC)).isEqualTo(mRightBluetoothHapDevice);
+        assertThat(mController.findActiveDevice(STREAM_VOICE_CALL)).isEqualTo(
+                mRightBluetoothHapDevice);
+    }
+
+    /**
+     * Audio stream is STREAM_MUSIC or STREAM_VOICE_CALL and output device is hearing aid
+     * profile bluetooth device. And none of them are active.
+     * findActiveDevice should return null.
+     */
+    @Test
+    public void findActiveDevice_streamToOtherDevice_shouldReturnActiveHapDevice() {
+        mShadowAudioManager.setOutputDevice(DEVICE_OUT_HEARING_AID);
+        mController.mConnectedDevices.clear();
+        mController.mConnectedDevices.add(mBluetoothDevice);
+        mController.mConnectedDevices.add(mLeftBluetoothHapDevice);
+        mHearingAidActiveDevices.clear();
+        when(mHeadsetProfile.getActiveDevice()).thenReturn(mBluetoothDevice);
+        when(mA2dpProfile.getActiveDevice()).thenReturn(mBluetoothDevice);
+        when(mHearingAidProfile.getActiveDevices()).thenReturn(mHearingAidActiveDevices);
+
+        assertThat(mController.findActiveDevice(STREAM_MUSIC)).isNull();
+        assertThat(mController.findActiveDevice(STREAM_VOICE_CALL)).isNull();
+    }
+
+    /**
+     * Two hearing aid devices with different HisyncId
+     * getConnectedHearingAidDevices should add both device to list.
+     */
+    @Test
+    public void getConnectedHearingAidDevices_deviceHisyncIdIsDifferent_shouldAddBothToList() {
+        mEmptyDevices.clear();
+        mProfileConnectedDevices.clear();
+        mProfileConnectedDevices.add(mLeftBluetoothHapDevice);
+        mProfileConnectedDevices.add(mRightBluetoothHapDevice);
+        when(mHearingAidProfile.getConnectedDevices()).thenReturn(mProfileConnectedDevices);
+        when(mHearingAidProfile.getHiSyncId(mLeftBluetoothHapDevice)).thenReturn(HISYNCID1);
+        when(mHearingAidProfile.getHiSyncId(mRightBluetoothHapDevice)).thenReturn(HISYNCID2);
+
+        mEmptyDevices.addAll(mController.getConnectedHearingAidDevices());
+
+        assertThat(mEmptyDevices).containsExactly(mLeftBluetoothHapDevice,
+                mRightBluetoothHapDevice);
+    }
+
+    /**
+     * Two hearing aid devices with same HisyncId
+     * getConnectedHearingAidDevices should only add first device to list.
+     */
+    @Test
+    public void getConnectedHearingAidDevices_deviceHisyncIdIsSame_shouldAddOneToList() {
+        mEmptyDevices.clear();
+        mProfileConnectedDevices.clear();
+        mProfileConnectedDevices.add(mLeftBluetoothHapDevice);
+        mProfileConnectedDevices.add(mRightBluetoothHapDevice);
+        when(mHearingAidProfile.getConnectedDevices()).thenReturn(mProfileConnectedDevices);
+        when(mHearingAidProfile.getHiSyncId(mLeftBluetoothHapDevice)).thenReturn(HISYNCID1);
+        when(mHearingAidProfile.getHiSyncId(mRightBluetoothHapDevice)).thenReturn(HISYNCID1);
+
+        mEmptyDevices.addAll(mController.getConnectedHearingAidDevices());
+
+        assertThat(mEmptyDevices).containsExactly(mLeftBluetoothHapDevice);
+    }
+
+    /**
+     * One A2dp device is connected.
+     * getConnectedA2dpDevices should add this device to list.
+     */
+    @Test
+    public void getConnectedA2dpDevices_oneConnectedA2dpDevice_shouldAddDeviceToList() {
+        mEmptyDevices.clear();
+        mProfileConnectedDevices.clear();
+        mProfileConnectedDevices.add(mBluetoothDevice);
+        when(mA2dpProfile.getConnectedDevices()).thenReturn(mProfileConnectedDevices);
+
+        mEmptyDevices.addAll(mController.getConnectedA2dpDevices());
+
+        assertThat(mEmptyDevices).containsExactly(mBluetoothDevice);
+    }
+
+    /**
+     * More than one A2dp devices are connected.
+     * getConnectedA2dpDevices should add all devices to list.
+     */
+    @Test
+    public void getConnectedA2dpDevices_moreThanOneConnectedA2dpDevice_shouldAddDeviceToList() {
+        mEmptyDevices.clear();
+        mProfileConnectedDevices.clear();
+        mProfileConnectedDevices.add(mBluetoothDevice);
+        mProfileConnectedDevices.add(mLeftBluetoothHapDevice);
+        when(mA2dpProfile.getConnectedDevices()).thenReturn(mProfileConnectedDevices);
+
+        mEmptyDevices.addAll(mController.getConnectedA2dpDevices());
+
+        assertThat(mEmptyDevices).containsExactly(mBluetoothDevice, mLeftBluetoothHapDevice);
+    }
+
+    /**
+     * One hands free profile device is connected.
+     * getConnectedA2dpDevices should add this device to list.
+     */
+    @Test
+    public void getConnectedHfpDevices_oneConnectedHfpDevice_shouldAddDeviceToList() {
+        mEmptyDevices.clear();
+        mProfileConnectedDevices.clear();
+        mProfileConnectedDevices.add(mBluetoothDevice);
+        when(mHeadsetProfile.getConnectedDevices()).thenReturn(mProfileConnectedDevices);
+
+        mEmptyDevices.addAll(mController.getConnectedHfpDevices());
+
+        assertThat(mEmptyDevices).containsExactly(mBluetoothDevice);
+    }
+
+    /**
+     * More than one hands free profile devices are connected.
+     * getConnectedA2dpDevices should add all devices to list.
+     */
+    @Test
+    public void getConnectedHfpDevices_moreThanOneConnectedHfpDevice_shouldAddDeviceToList() {
+        mEmptyDevices.clear();
+        mProfileConnectedDevices.clear();
+        mProfileConnectedDevices.add(mBluetoothDevice);
+        mProfileConnectedDevices.add(mLeftBluetoothHapDevice);
+        when(mHeadsetProfile.getConnectedDevices()).thenReturn(mProfileConnectedDevices);
+
+        mEmptyDevices.addAll(mController.getConnectedHfpDevices());
+
+        assertThat(mEmptyDevices).containsExactly(mBluetoothDevice, mLeftBluetoothHapDevice);
     }
 
     private class AudioSwitchPreferenceControllerTestable extends

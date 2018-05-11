@@ -66,7 +66,7 @@ public final class NightDisplayCondition extends Condition
         new SubSettingLauncher(mManager.getContext())
                 .setDestination(NightDisplaySettings.class.getName())
                 .setSourceMetricsCategory(MetricsEvent.DASHBOARD_SUMMARY)
-                .setTitle(R.string.night_display_title)
+                .setTitleRes(R.string.night_display_title)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 .launch();
     }

@@ -104,7 +104,7 @@ public class AutoRotatePreferenceControllerTest {
     @Test
     public void testGetAvailabilityStatus() {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(BasePreferenceController
-                .DISABLED_UNSUPPORTED);
+                .CONDITIONALLY_UNAVAILABLE);
 
         enableAutoRotationPreference();
 
@@ -114,7 +114,7 @@ public class AutoRotatePreferenceControllerTest {
         disableAutoRotationPreference();
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(BasePreferenceController
-                .DISABLED_UNSUPPORTED);
+                .CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test

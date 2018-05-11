@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Həddindən artıq yanlış cəhd. Bu istifadəçi silinəcək."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Həddindən artıq yanlış cəhd. Bu iş profili və datası silinəcək."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Rədd edin"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Ən az <xliff:g id="COUNT">%d</xliff:g> simvol olmalıdır"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"PIN ən azı <xliff:g id="COUNT">%d</xliff:g> rəqəmli olmalıdır"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="other">Minimum <xliff:g id="COUNT_1">%d</xliff:g> simvol olmalıdır</item>
+      <item quantity="one">Minimum <xliff:g id="COUNT_0">%d</xliff:g> simvol olmalıdır</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="other">PIN minimum <xliff:g id="COUNT_1">%d</xliff:g> rəqəm olmalıdır</item>
+      <item quantity="one">PIN minimum <xliff:g id="COUNT_0">%d</xliff:g> rəqəm olmalıdır</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Davam"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"<xliff:g id="NUMBER">%d</xliff:g> simvoldan az olmalıdır"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"<xliff:g id="NUMBER">%d</xliff:g> rəqəmdən az olmalıdır"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> simvoldan az olmalıdır</item>
+      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> simvoldan az olmalıdır</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> rəqəmdən az olmalıdır</item>
+      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> rəqəmdən az olmalıdır</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Yalnız 0-9 rəqəmlərindən ibarət olmalıdır"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Cihaz admini son vaxtlardakı PIN kodu istifadə etməyə icazə vermir"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"Ümumi PIN-lər IT admini tərəfindən blok edilib. Fərqli PIN-i sınayın."</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Qarşılıqlı əlaqə nəzarəti"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Endirilmiş xidmətlər"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Eksperimental"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Funksiya bayrağı"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Ekran oxucusu əsasən korluq və aşağı görmə qabiliyyəti olan insanlar üçündür"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Səsli oxunuş üçün ekrandakı elementlərə toxunun"</string>
@@ -3133,13 +3144,14 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> qayda avtomatik aktiv edilə bilər</item>
       <item quantity="one">1 qayda avtomatik aktiv edilə bilər</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"Ok"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Yeniləyin"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Yeniləməyin"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"Telefon fokuslanmağınıza kömək etmək üçün daha çox şey edə bilər.\n\nAyarları yeniləyin:\n\n- Bildirişləri tamamilə gizlədin\n\n- Ulduzlanmış kontaktlardan gələn zənglərə icazə verin və zəngləri təkrarlayın"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"\"Narahat Etməyin\" rejimi yenilənsin?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Ayarlar"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Bunu daha sonra Ayarlarda fərdiləşdirə bilərsiniz."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Ekran aktiv olduqda blok edin"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Ekran sönülü olduqda blok edin"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Narahat Etməyin rejimi həm istəmədiyiniz səsləri, həm də şəkilləri blok edə bilər. Yatmaq, fokuslanmaq və ya telefonda keçirdiyiniz vaxtı məhdudlaşdırmaq istəyirsinizsə, bu faydalı ola bilər."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Səsləri və şəkilləri blok edin"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Ekranda aktiv etməyin və ya bildirişlər üçün oyatmayın"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Əsas telefon fəaliyyəti və statusundan başqa ümumiyyətlə bildiriş göstərməyin"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"İş profili səsləri"</string>
@@ -3671,7 +3683,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Yedəkləmə deaktiv edildi"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Android <xliff:g id="VERSION">%1$s</xliff:g> versiyasına güncəlləndi"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"Güncəlləmə əlçatandır"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"Bu ayarı dəyişmək mümkün deyil"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"Əməliyyata icazə verilmir"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"Səsi dəyişmək olmur"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"Zəngə icazə verilmir"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"SMS-ə icazə verilmir"</string>
@@ -3861,7 +3873,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Kilid ekranında nəzarət məlumatı"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Bildiriş məzmununu göstərin və ya gizlədin"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Bütün"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"Dəstək və məsləhət"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"Ən kiçik en"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Heç bir quraşdırılmış tətbiq Premium SMS girişi tələb etməyib"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"Premium SMS müəyyən məbləğ tuta bilər və mobil operator fakturasına əlavə oluna bilər. Tətbiq üçün icazəni aktiv etsəniz, həmin tətbiqdən istifadə edərək, Premium SMS göndərə biləcəksiniz."</string>

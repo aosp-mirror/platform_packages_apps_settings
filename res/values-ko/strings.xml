@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"잘못된 시도 횟수가 너무 많습니다. 이 사용자는 삭제됩니다."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"잘못된 시도 횟수가 너무 많습니다. 이 직장 프로필 및 관련 데이터는 삭제됩니다."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"닫기"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"<xliff:g id="COUNT">%d</xliff:g>자 이상이어야 합니다."</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"PIN은 <xliff:g id="COUNT">%d</xliff:g>자 이상이어야 합니다."</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>자 이상이어야 합니다.</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g>자 이상이어야 합니다.</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="other">PIN은 <xliff:g id="COUNT_1">%d</xliff:g>자리 이상이어야 합니다.</item>
+      <item quantity="one">PIN은 <xliff:g id="COUNT_0">%d</xliff:g>자리 이상이어야 합니다.</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"계속"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"<xliff:g id="NUMBER">%d</xliff:g>자 미만이어야 합니다."</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"<xliff:g id="NUMBER">%d</xliff:g>자리 미만이어야 합니다."</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g>자 미만이어야 합니다.</item>
+      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g>자 미만이어야 합니다.</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g>자리 미만이어야 합니다.</item>
+      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g>자리 미만이어야 합니다.</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"0에서 9까지의 숫자만 포함되어야 합니다."</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"기기 관리자가 최근 PIN 사용을 허용하지 않습니다."</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"IT 관리자가 일반 PIN을 차단했습니다. 다른 PIN을 시도해 보세요."</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"상호작용 컨트롤"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"다운로드한 서비스"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"실험"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"기능 플래그"</string>
     <string name="talkback_title" msgid="7912059827205988080">"음성 안내 지원"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"주로 시각 장애가 있는 사용자를 위한 스크린 리더"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"화면에서 항목을 탭하여 읽는 소리 듣기"</string>
@@ -3133,13 +3144,14 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g>개의 규칙이 자동으로 켜질 수 있습니다.</item>
       <item quantity="one">1개의 규칙이 자동으로 사용 설정될 수 있습니다.</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"확인"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"업데이트"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"업데이트 안함"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"중요한 일에 집중할 수 있도록 휴대전화를 설정하세요.\n\n설정을 업데이트하면 다음과 같이 할 수 있습니다.\n\n- 알림 완전히 숨기기\n\n- 별표표시된 연락처와 반복해서 전화하는 발신자의 통화 수신"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"알림 일시중지를 업데이트하시겠습니까?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"설정"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"설정에서 더욱 상세하게 맞춤설정할 수 있습니다."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"화면이 켜져 있을 때 차단"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"화면이 꺼져 있을 때 차단"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"알림 일시중지는 원하지 않는 소리뿐만 아니라 화면에 표시되는 내용까지 차단할 수 있습니다. 이 기능은 잠을 자거나 집중할 때 또는 휴대전화 사용 시간을 제한하고 싶을 때 유용하게 활용할 수 있습니다."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"소리 및 화면 표시 내용 차단"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"화면을 켜거나 알림을 사용하지 않음"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"기본적인 휴대전화 활동 및 상태를 제외한 모든 알림을 표시하지 않음"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"직장 프로필 사운드"</string>
@@ -3671,7 +3683,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"백업 사용 안함"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Android <xliff:g id="VERSION">%1$s</xliff:g> 버전으로 업데이트됨"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"업데이트 가능"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"변경할 수 없는 설정"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"허용되지 않는 작업"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"볼륨을 변경할 수 없음"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"전화를 사용할 수 없음"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"문자 메시지를 사용할 수 없음"</string>
@@ -3861,7 +3873,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"잠금 화면에서 정보 제어"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"알림 내용 표시 또는 숨기기"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"전체"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"지원 및 도움말"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"최소 폭"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"설치된 앱 중에서 프리미엄 SMS 액세스를 요청한 앱이 없습니다."</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"프리미엄 SMS는 요금이 부과될 수 있으며 이는 이동통신사 요금에 추가됩니다. 앱에 권한을 부여하면 해당 앱을 사용하여 프리미엄 SMS를 사용할 수 있게 됩니다."</string>

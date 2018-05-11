@@ -42,7 +42,7 @@ public class AutoRestrictionPreferenceController extends BasePreferenceControlle
     @Override
     public int getAvailabilityStatus() {
         return mPowerUsageFeatureProvider.isSmartBatterySupported()
-                ? DISABLED_UNSUPPORTED
+                ? UNSUPPORTED_ON_DEVICE
                 : AVAILABLE;
     }
 

@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"För många felaktiga försök. Den här användaren raderas."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"För många felaktiga försök. Den här jobbprofilen och dess data raderas."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Ignorera"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Lösenordet måste innehålla minst <xliff:g id="COUNT">%d</xliff:g> tecken"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"Pinkoden måste innehålla minst <xliff:g id="COUNT">%d</xliff:g> siffror"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="other">Måste innehåll minst <xliff:g id="COUNT_1">%d</xliff:g> tecken</item>
+      <item quantity="one">Måste innehåll minst <xliff:g id="COUNT_0">%d</xliff:g> tecken</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="other">Pinkoden måste innehålla minst <xliff:g id="COUNT_1">%d</xliff:g> siffror</item>
+      <item quantity="one">Pinkoden måste innehålla minst <xliff:g id="COUNT_0">%d</xliff:g> siffra</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Fortsätt"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"Måste vara kortare än <xliff:g id="NUMBER">%d</xliff:g> tecken"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Får inte innehålla fler än <xliff:g id="NUMBER">%d</xliff:g> siffror"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="other">Får inte innehålla fler än <xliff:g id="NUMBER_1">%d</xliff:g> tecken</item>
+      <item quantity="one">Får inte innehålla fler än <xliff:g id="NUMBER_0">%d</xliff:g> tecken</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="other">Får inte innehålla fler än <xliff:g id="NUMBER_1">%d</xliff:g> siffror</item>
+      <item quantity="one">Får inte innehålla fler än <xliff:g id="NUMBER_0">%d</xliff:g> siffra</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Får endast innehålla siffrorna 0–9"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Enhetsadministratören tillåter inte att en pinkod som använts nyligen används igen"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"IT-adminstratören har blockerat de vanligaste pinkoderna. Testa en annan pinkod."</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Interaktionsinställningar"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Nedladdade tjänster"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Experimentella"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Funktionsflaggor"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Skärmläsaren är främst avsedd för blinda eller personer med nedsatt syn"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Tryck på objekt på skärmen om du vill höra dem upplästa"</string>
@@ -3133,13 +3144,14 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> regler kan aktiveras automatiskt</item>
       <item quantity="one">1 regel kan aktiveras automatiskt</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"OK"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Uppdatera"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Uppdatera inte"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"Gör det lättare att fokusera med hjälp av mobilen.\n\nUppdatera inställningarna för att\n\n– dölja alla aviseringar\n\n– tillåta samtal från stjärnmarkerade kontakter och någon som ringer flera gånger."</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"Vill du uppdatera Stör ej?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Inställningar"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Du kan anpassa funktionen mer i inställningarna."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Blockera när skärmen är på"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Blockera när skärmen inte är på"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Med Stör ej kan du göra mer än att bara blockera ovälkomna ljud – du kan även blockera grafik. Det kan vara användbart när du försöker sova, koncentrera dig eller använda mobilen mindre."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Blockera ljud och grafik"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Sätt inte på skärmen eller väck enheten för aviseringar"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Visa inga aviseringar alls, förutom för grundläggande aktivitet och status för mobilen"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Jobbprofilens ljud"</string>
@@ -3671,7 +3683,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Säkerhetskopiering har inaktiverats"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Uppdaterad till Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"Det finns en uppdatering"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"Inställningen kan inte ändras"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"Åtgärden är inte tillåten"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"Det gick inte att ändra volymen"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"Utgående samtal har inaktiverats"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"SMS har inaktiverats"</string>
@@ -3861,7 +3873,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Kontrolluppgifter på låsskärm"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Visa eller dölja innehåll i aviseringar"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Alla"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"Support och tips"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"Minsta bredd"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Inga installerade appar har begärt åtkomst till premium-sms"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"Det kan hända att premium-sms kostar pengar och läggs till på dina fakturor från operatören. Om du ger en app åtkomst kan du skicka premium-sms med den appen."</string>

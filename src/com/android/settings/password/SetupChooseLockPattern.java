@@ -97,7 +97,9 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
             if (!getResources().getBoolean(R.bool.config_lock_pattern_minimal_ui)
                     && mOptionsButton != null) {
                 mOptionsButton.setVisibility(
-                        stage == Stage.Introduction ? View.VISIBLE : View.INVISIBLE);
+                        (stage == Stage.Introduction || stage == Stage.HelpScreen ||
+                                stage == Stage.ChoiceTooShort || stage == Stage.FirstChoiceValid)
+                                ? View.VISIBLE : View.INVISIBLE);
             }
         }
 

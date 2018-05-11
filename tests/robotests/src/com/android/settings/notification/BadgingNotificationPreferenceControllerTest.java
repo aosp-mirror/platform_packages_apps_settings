@@ -18,8 +18,6 @@ package com.android.settings.notification;
 
 import static android.provider.Settings.Secure.NOTIFICATION_BADGING;
 
-import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController.DISABLED_UNSUPPORTED;
 import static com.android.settings.notification.BadgingNotificationPreferenceController.OFF;
 import static com.android.settings.notification.BadgingNotificationPreferenceController.ON;
 

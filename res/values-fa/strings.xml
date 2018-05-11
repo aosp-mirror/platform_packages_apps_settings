@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"تلاش‌های اشتباه بسیار زیادی انجام شده است. این کاربر حذف خواهد شد."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"تلاش‌های اشتباه بسیار زیادی انجام شده است. این نمایه کاری و داده‌های آن‌ حذف خواهند شد."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"نپذیرفتن"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"باید حداقل <xliff:g id="COUNT">%d</xliff:g> نویسه داشته باشد"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"پین باید حداقل <xliff:g id="COUNT">%d</xliff:g> رقم داشته باشد"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="one">باید حداقل <xliff:g id="COUNT_1">%d</xliff:g> نویسه داشته باشد</item>
+      <item quantity="other">باید حداقل <xliff:g id="COUNT_1">%d</xliff:g> نویسه داشته باشد</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="one">پین باید حداقل <xliff:g id="COUNT_1">%d</xliff:g> رقم داشته باشد</item>
+      <item quantity="other">پین باید حداقل <xliff:g id="COUNT_1">%d</xliff:g> رقم داشته باشد</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"ادامه"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"باید کمتر از <xliff:g id="NUMBER">%d</xliff:g> نویسه باشد"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"باید کمتر از <xliff:g id="NUMBER">%d</xliff:g> رقم باشد"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="one">باید کمتر از <xliff:g id="NUMBER_1">%d</xliff:g> نویسه باشد</item>
+      <item quantity="other">باید کمتر از <xliff:g id="NUMBER_1">%d</xliff:g> نویسه باشد</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="one">باید کمتر از <xliff:g id="NUMBER_1">%d</xliff:g> رقم باشد</item>
+      <item quantity="other">باید کمتر از <xliff:g id="NUMBER_1">%d</xliff:g> رقم باشد</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"فقط می‌تواند شامل اعداد ۰ تا ۹ باشد"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"سرپرست دستگاه اجازه استفاده از پین اخیر را نمی‌دهد"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"پین‌های رایج توسط سرپرست فناوری اطلاعات شما مسدود شده‌اند. پین متفاوتی را امتحان کنید."</string>
@@ -831,7 +843,7 @@
     <string name="wifi_status" msgid="4824568012414605414">"وضعیت"</string>
     <string name="wifi_speed" msgid="3526198708812322037">"سرعت پیوند"</string>
     <string name="wifi_frequency" msgid="7791090119577812214">"فرکانس"</string>
-    <string name="wifi_ip_address" msgid="1440054061044402918">"‏آدرس IP"</string>
+    <string name="wifi_ip_address" msgid="1440054061044402918">"‏نشانی IP"</string>
     <string name="passpoint_label" msgid="6381371313076009926">"ذخیره از طریق"</string>
     <string name="passpoint_content" msgid="8447207162397870483">"اعتبارنامه‌های <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="wifi_eap_method" msgid="8529436133640730382">"‏روش EAP"</string>
@@ -897,7 +909,7 @@
     </plurals>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"‏Wi-Fi پیشرفته"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"‏آدرس MAC"</string>
-    <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"‏آدرس IP"</string>
+    <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"‏نشانی IP"</string>
     <string name="wifi_details_title" msgid="8954667664081737098">"جزئیات شبکه"</string>
     <string name="wifi_details_subnet_mask" msgid="6720279144174924410">"پوشش زیرشبکه"</string>
     <string name="wifi_details_dns" msgid="8648826607751830768">"DNS"</string>
@@ -907,7 +919,7 @@
     <string name="wifi_advanced_not_available" msgid="5823045095444154586">"‏تنظیمات پیشرفته Wi‑Fi برای این کاربر در دسترس نیست"</string>
     <string name="wifi_ip_settings_menu_save" msgid="7296724066102908366">"ذخیره"</string>
     <string name="wifi_ip_settings_menu_cancel" msgid="6582567330136502340">"لغو"</string>
-    <string name="wifi_ip_settings_invalid_ip_address" msgid="2513142355364274970">"‏یک آدرس IP معتبر تایپ کنید."</string>
+    <string name="wifi_ip_settings_invalid_ip_address" msgid="2513142355364274970">"‏نشانی IP معتبری تایپ کنید."</string>
     <string name="wifi_ip_settings_invalid_gateway" msgid="8164264988361096450">"یک آدرس دروازه معتبر را تایپ کنید."</string>
     <string name="wifi_ip_settings_invalid_dns" msgid="8744583948328391047">"‏یک آدرس DNS معتبر را تایپ کنید."</string>
     <string name="wifi_ip_settings_invalid_network_prefix_length" msgid="40470058023181052">"یک پیشوند شبکه با طول بین 0 تا 32 نویسه تایپ کنید."</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"کنترل‌های تعامل"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"سرویس‌های بارگیری‌شده"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"آزمایشی"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"پرچم‌های ویژه"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"صفحه‌خوان در وهله اول برای افراد نابینا و کم‌بینا در نظر گرفته شده است"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"روی موارد موجود در صفحه‌تان ضربه بزنید تا بلند خوانده شوند"</string>
@@ -2701,7 +2712,7 @@
     <string name="vpn_require_connection_title" msgid="159053539340576331">"‏به اتصال VPN‌ نیاز است؟"</string>
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"‏یک نمایه VPN انتخاب کنید تا همیشه متصل بمانید. فقط درصورتی‌که به این VPN متصل باشید ترافیک شبکه مجاز خواهد بود."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"هیچ‌کدام"</string>
-    <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"‏VPN همیشه فعال به یک آدرس IP برای سرور و DNS نیاز دارد."</string>
+    <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"‏VPN همیشه‌فعال به نشانی IP برای DNS و سرور نیاز دارد."</string>
     <string name="vpn_no_network" msgid="3050233675132726155">"اتصال شبکه موجود نیست. لطفاً دوباره امتحان کنید."</string>
     <string name="vpn_disconnected" msgid="280531508768927471">"‏ارتباط VPN قطع شد"</string>
     <string name="vpn_disconnected_summary" msgid="3082851661207900606">"هیچ‌کدام"</string>
@@ -3133,13 +3144,14 @@
       <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> قانون می‌تواند به‌طور خودکار روشن شود</item>
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> قانون می‌تواند به‌طور خودکار روشن شود</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"تأیید"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"به‌روزرسانی"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"به‌روزرسانی نشود"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"تلفنتان می‌تواند کارهای بیشتری برای کمک به تمرکز کردن شما انجام دهد.\n\nتنظیمات را به‌روزرسانی کنید:\n\n- پنهان کردن کامل اعلان‌ها\n\n- اجازه دادن به تماس‌های مخاطبین ستاره‌دار و تماس‌گیرندگانی که ظرف ۱۵ دقیقه دو بار تماس گرفته‌اند"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"«مزاحم نشوید» به‌روزرسانی شود؟"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"تنظیمات"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"در «تنظیمات» می‌توانید سفارشی‌سازی بیشتری انجام دهید."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"مسدود کردن وقتی صفحه روشن است"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"مسدود کردن وقتی صفحه خاموش است"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"«مزاحم نشوید» می‌تواند کارهای بیشتری از مسدود کردن صداهای ناخواسته انجام دهد - این ویژگی می‌تواند موارد تصویری را هم مسدود کند. هنگام تلاش برای خوابیدن، تمرکز کردن یا محدود کردن زمانی که صرف استفاده از تلفن می‌کنید، این ویژگی می‌تواند مفید باشد."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"مسدود کردن صداها و موارد تصویری"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"با دریافت اعلان صفحه روشن نشود یا دستگاه بیدار نشود"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"هیچ اعلانی نشان داده نشود، به‌جز فعالیت و وضعیت پایه تلفن"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"صداهای نمایه کاری"</string>
@@ -3671,7 +3683,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"پشتیبان‌گیری غیرفعال است"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"‏به‌روزرسانی‌شده به Android نسخه <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"به‌روزرسانی در دسترس است"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"تغییر این تنظیم ممکن نیست"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"عملکرد مجاز نیست"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"نمی‌توان بلندی صدا را تغییر داد"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"برقراری تماس تلفنی مجاز نیست"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"استفاده از پیامک مجاز نیست"</string>
@@ -3861,7 +3873,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"کنترل اطلاعات روی صفحه درحالت قفل"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"نمایش یا پنهان کردن محتوای اعلان"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"همه"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"پشتیبانی و نکته‌ها"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"کوچک‌ترین عرض"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"هیچ برنامه نصب‌شده‌ای دسترسی به پیامک ممتاز را درخواست نکرده است"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"ممکن است استفاده از «پیامک ممتاز» برای شما هزینه داشته باشد و مبلغ صورت‌حساب‌های شرکت مخابراتی‌تان را افزایش دهد. اگر مجوز را برای برنامه‌ای فعال کنید، می‌توانید با استفاده از آن برنامه پیامک ممتاز ارسال کنید."</string>

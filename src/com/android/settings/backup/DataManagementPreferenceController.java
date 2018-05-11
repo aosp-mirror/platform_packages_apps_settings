@@ -37,7 +37,7 @@ public class DataManagementPreferenceController extends BasePreferenceController
         }
         boolean manageEnabled = (mPSCD.getManageIntent() != null) && mPSCD.isBackupEnabled();
         if (!manageEnabled) {
-            return DISABLED_UNSUPPORTED;
+            return UNSUPPORTED_ON_DEVICE;
         }
         return AVAILABLE;
     }

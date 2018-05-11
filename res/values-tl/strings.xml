@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Masyadong maraming maling pagsubok. Made-delete ang user na ito."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Masyadong maraming maling pagsubok. Made-delete ang profile sa trabaho na ito at ang data nito."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"I-dismiss"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Dapat ay binubuo ng kahit <xliff:g id="COUNT">%d</xliff:g> (na) character lang"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"Dapat ay binubuo ng kahit <xliff:g id="COUNT">%d</xliff:g> (na) digit lang ang PIN"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="one">Dapat ay may kahit <xliff:g id="COUNT_1">%d</xliff:g> character</item>
+      <item quantity="other">Dapat ay may kahit <xliff:g id="COUNT_1">%d</xliff:g> na character</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="one">Dapat ay may kahit <xliff:g id="COUNT_1">%d</xliff:g> digit ang PIN</item>
+      <item quantity="other">Dapat ay may kahit <xliff:g id="COUNT_1">%d</xliff:g> na digit ang PIN</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Magpatuloy"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"Mas kaunti dapat sa <xliff:g id="NUMBER">%d</xliff:g> (na) character"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Mas kaunti dapat sa <xliff:g id="NUMBER">%d</xliff:g> (na) digit"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="one">Dapat ay wala pang <xliff:g id="NUMBER_1">%d</xliff:g> character</item>
+      <item quantity="other">Dapat ay wala pang <xliff:g id="NUMBER_1">%d</xliff:g> na character</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="one">Dapat ay wala pang <xliff:g id="NUMBER_1">%d</xliff:g> digit</item>
+      <item quantity="other">Dapat ay wala pang <xliff:g id="NUMBER_1">%d</xliff:g> na digit</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Maglaman lang dapat ng mga digit na 0-9"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Hindi pinapayagan ng admin ng device ang paggamit ng kamakailang PIN"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"Bina-block ng iyong IT admin ang mga pangkaraniwang PIN. Sumubok ng ibang PIN."</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Mga kontrol ng pakikipag-ugnayan"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Mga na-download na serbisyo"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Pang-eksperimento"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Mga flag ng feature"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Screen reader na pangunahing nakalaan para sa mga taong bulag at malabo ang paningin"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Mag-tap ng mga item sa iyong screen upang marinig ang mga ito na binabasa nang malakas"</string>
@@ -3133,13 +3144,14 @@
       <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> panuntunan ang maaaring awtomatikong mag-on</item>
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> na panuntunan ang maaaring awtomatikong mag-on</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"Ok"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"I-update"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Huwag i-update"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"Marami ang magagawa ng iyong telepono para matulungan kang makatuon.\n\nI-update ang mga setting para:\n\n- Itago ang mga notification nang tuluyan\n\n- Payagan ang mga tawag mula sa mga naka-star na contact at umulit na tumatawag"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"I-update ang Huwag Istorbohin?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Mga Setting"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Mas mako-customize mo pa ito sa Mga Setting."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"I-block kapag naka-on ang screen"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"I-block kapag naka-off ang screen"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Maraming nagagawa ang Huwag Istorbohin na higit pa sa pag-block ng mga hindi gustong tunog - naba-block din nito ang mga visual. Maaari itong makatulong kung sinusubukan mong matulog, mag-focus, o limitahan ang oras sa paggamit ng iyong telepono."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"I-block ang mga tunog at visual"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Huwag i-on ang screen o i-wake para sa mga notification"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Huwag nang ipakita ang mga notification, maliban sa pangunahing aktibidad at status ng telepono"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Mga tunog sa profile sa trabaho"</string>
@@ -3671,7 +3683,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Na-disable ang pag-back up"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Na-update sa Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"May available na update"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"Hindi mababago ang setting"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"Hindi pinapayagan ang pagkilos"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"Hindi mababago ang volume"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"Hindi pinapayagan ang pagtawag"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"Hindi pinapayagan ang SMS"</string>
@@ -3861,7 +3873,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Kontrolin ang impormasyon sa lock screen"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Ipakita o itago ang content ng notification"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Lahat"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"Suporta at mga tip"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"Pinakamaliit na lapad"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Walang mga naka-install na app ang humiling ng access sa Premium SMS"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"Maaaring kailanganin mong magbayad para sa Premium SMS at isasama ito sa mga singilin ng iyong carrier. Kung ie-enable mo ang pahintulot para sa isang app, magagawa mong magpadala ng premium SMS gamit ang app na iyon."</string>

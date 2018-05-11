@@ -87,7 +87,7 @@ public class SubSettingLauncherTest {
     public void launch_shouldIncludeAllParams() {
         final ArgumentCaptor<Intent> intentArgumentCaptor = ArgumentCaptor.forClass(Intent.class);
         final SubSettingLauncher launcher = spy(new SubSettingLauncher(mContext));
-        launcher.setTitle("123")
+        launcher.setTitleText("123")
                 .setDestination(SubSettingLauncherTest.class.getName())
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 .setSourceMetricsCategory(123)
@@ -111,7 +111,7 @@ public class SubSettingLauncherTest {
         when(mFragment.getActivity()).thenReturn(mActivity);
 
         final SubSettingLauncher launcher = spy(new SubSettingLauncher(mContext));
-        launcher.setTitle("123")
+        launcher.setTitleText("123")
                 .setDestination(SubSettingLauncherTest.class.getName())
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 .setSourceMetricsCategory(123)
@@ -128,7 +128,7 @@ public class SubSettingLauncherTest {
         final SubSettingLauncher launcher = spy(new SubSettingLauncher(mContext));
         doNothing().when(launcher).launchAsUser(any(Intent.class), any(UserHandle.class));
 
-        launcher.setTitle("123")
+        launcher.setTitleText("123")
                 .setDestination(SubSettingLauncherTest.class.getName())
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 .setSourceMetricsCategory(123)
@@ -147,7 +147,7 @@ public class SubSettingLauncherTest {
         doNothing().when(launcher).launchForResultAsUser(
                 any(Intent.class), any(UserHandle.class), any(Fragment.class), anyInt());
 
-        launcher.setTitle("123")
+        launcher.setTitleText("123")
                 .setDestination(SubSettingLauncherTest.class.getName())
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 .setSourceMetricsCategory(123)

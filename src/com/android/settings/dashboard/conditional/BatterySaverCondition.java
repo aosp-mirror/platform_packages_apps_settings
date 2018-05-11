@@ -70,7 +70,7 @@ public class BatterySaverCondition extends Condition implements
         new SubSettingLauncher(mManager.getContext())
                 .setDestination(BatterySaverSettings.class.getName())
                 .setSourceMetricsCategory(MetricsEvent.DASHBOARD_SUMMARY)
-                .setTitle(R.string.battery_saver)
+                .setTitleRes(R.string.battery_saver)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 .launch();
     }

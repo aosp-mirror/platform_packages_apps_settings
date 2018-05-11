@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Terlalu sering mencoba dengan salah. Pengguna ini akan dihapus."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Terlalu sering mencoba dengan salah. Profil kerja ini dan datanya akan dihapus."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Tutup"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Minimal berisi <xliff:g id="COUNT">%d</xliff:g> karakter"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"PIN minimal <xliff:g id="COUNT">%d</xliff:g> digit"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="other">Minimal berisi <xliff:g id="COUNT_1">%d</xliff:g> karakter</item>
+      <item quantity="one">Minimal berisi <xliff:g id="COUNT_0">%d</xliff:g> karakter</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="other">PIN minimal berisi <xliff:g id="COUNT_1">%d</xliff:g> digit</item>
+      <item quantity="one">PIN minimal berisi <xliff:g id="COUNT_0">%d</xliff:g> digit</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Lanjutkan"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"Harus kurang dari <xliff:g id="NUMBER">%d</xliff:g> karakter."</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Harus kurang dari <xliff:g id="NUMBER">%d</xliff:g> digit."</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="other">Harus kurang dari <xliff:g id="NUMBER_1">%d</xliff:g> karakter</item>
+      <item quantity="one">Harus kurang dari <xliff:g id="NUMBER_0">%d</xliff:g> karakter</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="other">Harus kurang dari <xliff:g id="NUMBER_1">%d</xliff:g> digit</item>
+      <item quantity="one">Harus kurang dari <xliff:g id="NUMBER_0">%d</xliff:g> digit</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Hanya boleh berisi angka 0-9"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Admin perangkat tidak mengizinkan penggunaan PIN terbaru."</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"PIN umum diblokir oleh admin IT. Coba PIN lain."</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Kontrol interaksi"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Layanan yang didownload"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Eksperimental"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Tanda fitur"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Pembaca layar khusus untuk orang yang mengalami kebutaan atau gangguan penglihatan"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Tap item di layar untuk mendengar item tersebut dibacakan"</string>
@@ -2048,7 +2059,7 @@
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Mengamati tindakan Anda"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="6640333613848713883">"Menerima notifikasi saat Anda berinteraksi dengan aplikasi."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"Hentikan <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="disable_service_message" msgid="2247101878627941561">"Mengetuk Oke akan menghentikan <xliff:g id="SERVICE">%1$s</xliff:g>."</string>
+    <string name="disable_service_message" msgid="2247101878627941561">"Menge-tap Oke akan menghentikan <xliff:g id="SERVICE">%1$s</xliff:g>."</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Tidak ada layanan terpasang"</string>
     <string name="accessibility_no_service_selected" msgid="2840969718780083998">"Layanan tidak dipilih"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"Tidak tersedia deskripsi."</string>
@@ -3133,13 +3144,14 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> aturan dapat aktif secara otomatis</item>
       <item quantity="one">1 aturan dapat aktif secara otomatis</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"Oke"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Perbarui"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Jangan diperbarui"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"Ponsel dapat melakukan berbagai hal untuk membantu agar Anda fokus.\n\nPerbarui setelan ke:\n\n- Sembunyikan notifikasi sepenuhnya\n\n- Izinkan panggilan dari kontak berbintang dan penelepon berulang"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"Perbarui mode Jangan Ganggu?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Setelan"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Anda dapat menyesuaikannya lebih lanjut di Setelan."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Blokir saat layar menyala"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Blokir saat layar mati"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Mode Jangan Ganggu tidak hanya dapat memblokir suara yang tidak diinginkan, tetapi juga memblokir visual. Hal ini mungkin berguna jika Anda mencoba untuk tidur, fokus, atau membatasi waktu penggunaan ponsel."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Blok suara dan visual"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Jangan nyalakan layar ataupun aktifkan jika ada notifikasi"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Jangan tampilkan notifikasi sama sekali, kecuali untuk aktivitas dan status ponsel dasar"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Suara profil kerja"</string>
@@ -3391,7 +3403,7 @@
     <string name="app_launch_domain_links_title" msgid="1160925981363706090">"Membuka link"</string>
     <string name="app_launch_open_domain_urls_title" msgid="8914721351596745701">"Buka link yang didukung"</string>
     <string name="app_launch_open_domain_urls_summary" msgid="5367573364240712217">"Buka tanpa perlu bertanya"</string>
-    <string name="app_launch_supported_domain_urls_title" msgid="8250695258211477480">"Tautan yang didukung"</string>
+    <string name="app_launch_supported_domain_urls_title" msgid="8250695258211477480">"Link yang didukung"</string>
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Default lainnya"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> digunakan di <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="6042049833565674948">"Penyimpanan internal"</string>
@@ -3671,7 +3683,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Backup dinonaktifkan"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Diupdate ke Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"Ada update"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"Setelan ini tidak dapat diubah"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"Tindakan tidak diizinkan"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"Volume tidak dapat diubah"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"Menelepon tidak diizinkan"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"SMS tidak diizinkan"</string>
@@ -3861,7 +3873,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Kontrol info di layar kunci"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Menampilkan atau menyembunyikan konten notifikasi"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Semua"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"Dukungan &amp; tips"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"Lebar terkecil"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Tidak ada aplikasi yang terpasang yang meminta akses SMS Premium"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"SMS Premium mungkin memerlukan biaya dan akan menambah tagihan operator. Jika izin aplikasi diaktifkan, Anda dapat mengirim SMS premium menggunakan aplikasi tersebut."</string>

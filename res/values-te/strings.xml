@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"చాలా ఎక్కువ తప్పు ప్రయత్నాలు చేసారు. ఈ వినియోగదారు తొలగించబడతారు."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"చాలా ఎక్కువ తప్పు ప్రయత్నాలు చేసారు. ఈ కార్యాలయ ప్రొఫైల్ మరియు దీని డేటా తొలగించబడతాయి."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"తీసివేయండి"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"తప్పనిసరిగా కనీసం <xliff:g id="COUNT">%d</xliff:g> అక్షరాలను కలిగి ఉండాలి"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"పిన్ తప్పనిసరిగా కనీసం <xliff:g id="COUNT">%d</xliff:g> అంకెలను కలిగి ఉండాలి"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="other">కనీసం <xliff:g id="COUNT_1">%d</xliff:g> అక్షరాలు తప్పక ఉండాలి</item>
+      <item quantity="one">కనీసం <xliff:g id="COUNT_0">%d</xliff:g> అక్షరం తప్పక ఉండాలి</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="other">పిన్‌లో కనీసం <xliff:g id="COUNT_1">%d</xliff:g> అంకెలు తప్పక ఉండాలి</item>
+      <item quantity="one">పిన్‌లో కనీసం <xliff:g id="COUNT_0">%d</xliff:g> అంకె తప్పక ఉండాలి</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"కొనసాగించండి"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"తప్పనిసరిగా <xliff:g id="NUMBER">%d</xliff:g> కంటే తక్కువ అక్షరాలను కలిగి ఉండాలి"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"తప్పనిసరిగా <xliff:g id="NUMBER">%d</xliff:g> కంటే తక్కువ అంకెలను కలిగి ఉండాలి"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> కంటే తక్కువ అక్షరాలు తప్పక ఉండాలి</item>
+      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> కంటే తక్కువ అక్షరం తప్పక ఉండాలి</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> కంటే తక్కువ అంకెలు తప్పక ఉండాలి</item>
+      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> కంటే తక్కువ అంకె తప్పక ఉండాలి</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"తప్పనిసరిగా 0-9 అంకెలను మాత్రమే కలిగి ఉండాలి"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"ఇటీవలి పిన్‌ని ఉపయోగించడానికి డివైజ్ నిర్వాహకులు అనుమతించరు"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"సాధారణ PINలను మా IT నిర్వాహకుడు బ్లాక్ చేసారు. వేరే PINని ప్రయత్నించండి."</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"పరస్పర చర్య నియంత్రణలు"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"డౌన్‌లోడ్ చేయబడిన సేవలు"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"ప్రయోగాత్మకం"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"ఫీచర్ ఫ్లాగ్‌లు"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"స్క్రీన్ రీడర్ ప్రధానంగా అంధులైన, అస్పష్టమైన చూపు కలిగి ఉన్న వ్యక్తుల కోసం ఉద్దేశించినది"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"మీ స్క్రీన్‌పై ఉన్న అంశాలను నొక్కడం ద్వారా అవి బిగ్గరగా చదవబడతాయి"</string>
@@ -3133,13 +3144,14 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> నియమాలు స్వయంచాలకంగా ఆన్ కావచ్చు</item>
       <item quantity="one">1 నియమం స్వయంచాలకంగా ఆన్ కావచ్చు</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"సరే"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"అప్‌డేట్ చేయి"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"అప్‌డేట్ చేయవద్దు"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"మీరు దృష్టి సారించడంలో సహాయపడడానికి మీ ఫోన్ చాలా చేయగలదు.\n\nఇలా సెట్టింగ్‌లను అప్‌డేట్ చేయండి:\n\n- నోటిఫికేషన్‌లను పూర్తిగా దాచండి\n\n- నక్షత్రం ఉంచిన పరిచయాలు మరియు పునరావృత కాలర్‌ల నుండి కాల్‌లను అనుమతించండి"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"అంతరాయం కలిగించవద్దును అప్‌డేట్ చేయాలా?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"సెట్టింగ్‌లు"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"మీరు దీన్ని సెట్టింగ్‌లలో మరింత అనుకూలీకరించవచ్చు."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"స్క్రీన్ ఆన్‌లో ఉన్నప్పుడు బ్లాక్ చేయండి"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"స్క్రీన్ ఆఫ్‌లో ఉన్నప్పుడు బ్లాక్ చేయండి"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"అవాంఛిత ధ్వనులు బ్లాక్ చేయలేనంత ఎక్కువగా అంతరాయం కలిగించవద్దు చేస్తుంది - ఇది దృశ్యలు కూడా బ్లాక్ చేయగలదు. మీరు మీ ఫోన్‌లో నిద్ర, దృష్టి కేంద్రీకరణ లేదా సమయ పరిమితిని ప్రయత్నిస్తున్నట్లయితే ఇది మీకు సహాయం చేయవచ్చు."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"ధ్వనులు మరియు దృశ్యాలను బ్లాక్ చేయండి"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"నోటిఫికేషన్‌ల కోసం స్క్రీన్‌ను లేదా సక్రియపరుచును ఆన్ చేయవద్దు"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"నోటిఫికేషన్‌లను ఎట్టి పరిస్థితుల్లోనూ చూపవద్దు, ప్రాథమిక ఫోన్ కార్యాకలాపం మరియు స్థితి తప్ప"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"కార్యాలయ ప్రొఫైల్ శబ్దాలు"</string>
@@ -3672,7 +3684,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"బ్యాకప్ నిలిపివేయబడింది"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Android <xliff:g id="VERSION">%1$s</xliff:g>కి అప్‌డేట్ చేయబడింది"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"అప్‌డేట్ అందుబాటులో ఉంది"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"ఈ సెట్టింగ్‌ని మార్చలేరు"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"చర్య అనుమతించబడదు"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"వాల్యూమ్‌ని మార్చలేరు"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"కాల్ చేయడానికి అనుమతి లేదు"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"SMS పంపడానికి అనుమతి లేదు"</string>
@@ -3862,7 +3874,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"లాక్ స్క్రీన్‌పై నియంత్రణ సమాచారం"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"నోటిఫికేషన్ కంటెంట్‌ను చూపు లేదా దాచు"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"అన్నీ"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"మద్దతు &amp; చిట్కాలు"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"అతితక్కువ వెడల్పు"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"ఇన్‌స్టాల్ చేసిన అనువర్తనాలు ఏవీ ప్రీమియం SMS ప్రాప్యతను అభ్యర్థించలేదు"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"ప్రీమియం SMSతో మీకు డబ్బు ఖర్చు కావచ్చు, ఈ ఛార్జీ మీ క్యారియర్ బిల్లుల్లో విధించబడుతుంది. మీరు ఒక అనువర్తనానికి అనుమతిని అందిస్తే, ఆ అనువర్తనాన్ని ఉపయోగించి ప్రీమియం SMSను పంపగలరు."</string>

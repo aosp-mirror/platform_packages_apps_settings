@@ -21,9 +21,11 @@ import android.app.FragmentManager;
 import android.app.NotificationManager;
 import android.app.NotificationManager.Policy;
 import android.content.Context;
+import android.icu.text.ListFormatter;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.CheckBoxPreference;
 
@@ -44,6 +46,7 @@ import java.util.Map.Entry;
 @SearchIndexable
 public class ZenModeSettings extends ZenModeSettingsBase {
     private static final String KEY_SOUND = "zen_effect_sound";
+
     @Override
     public void onResume() {
         super.onResume();
@@ -118,18 +121,21 @@ public class ZenModeSettings extends ZenModeSettingsBase {
             } else if (numCategories == 2) {
                 return mContext.getString(R.string.join_two_items, enabledCategories.get(0),
                         enabledCategories.get(1).toLowerCase());
-            } else if (numCategories == 3){
-                String secondaryText = mContext.getString(R.string.join_two_unrelated_items,
-                        enabledCategories.get(0), enabledCategories.get(1).toLowerCase());
-                return mContext.getString(R.string.join_many_items_last, secondaryText,
-                        enabledCategories.get(2).toLowerCase());
+            } else if (numCategories == 3) {
+                final List<String> summaries = new ArrayList<>();
+                summaries.add(enabledCategories.get(0));
+                summaries.add(enabledCategories.get(1).toLowerCase());
+                summaries.add(enabledCategories.get(2).toLowerCase());
+
+                return ListFormatter.getInstance().format(summaries);
             } else {
-                String secondaryText = mContext.getString(R.string.join_many_items_middle,
-                        enabledCategories.get(0), enabledCategories.get(1).toLowerCase());
-                secondaryText = mContext.getString(R.string.join_many_items_middle, secondaryText,
-                        enabledCategories.get(2).toLowerCase());
-                return mContext.getString(R.string.join_many_items_last, secondaryText,
-                        mContext.getString(R.string.zen_mode_other_options));
+                final List<String> summaries = new ArrayList<>();
+                summaries.add(enabledCategories.get(0));
+                summaries.add(enabledCategories.get(1).toLowerCase());
+                summaries.add(enabledCategories.get(2).toLowerCase());
+                summaries.add(mContext.getString(R.string.zen_mode_other_options));
+
+                return ListFormatter.getInstance().format(summaries);
             }
         }
 
@@ -175,15 +181,15 @@ public class ZenModeSettings extends ZenModeSettingsBase {
         String getAutomaticRulesSummary() {
             final int count = getEnabledAutomaticRulesCount();
             return count == 0 ? mContext.getString(R.string.zen_mode_settings_summary_off)
-                : mContext.getResources().getQuantityString(
-                    R.plurals.zen_mode_settings_summary_on, count, count);
+                    : mContext.getResources().getQuantityString(
+                            R.plurals.zen_mode_settings_summary_on, count, count);
         }
 
         @VisibleForTesting
         int getEnabledAutomaticRulesCount() {
             int count = 0;
             final Map<String, AutomaticZenRule> ruleMap =
-                NotificationManager.from(mContext).getAutomaticZenRules();
+                    NotificationManager.from(mContext).getAutomaticZenRules();
             if (ruleMap != null) {
                 for (Entry<String, AutomaticZenRule> ruleEntry : ruleMap.entrySet()) {
                     final AutomaticZenRule rule = ruleEntry.getValue();

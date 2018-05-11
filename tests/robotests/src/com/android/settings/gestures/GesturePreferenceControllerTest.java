@@ -204,7 +204,7 @@ public class GesturePreferenceControllerTest {
 
         @Override
         public int getAvailabilityStatus() {
-            return mIsPrefAvailable ? AVAILABLE : DISABLED_UNSUPPORTED;
+            return mIsPrefAvailable ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
         }
 
         @Override

@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Terlalu banyak percubaan yang salah. Pengguna ini akan dipadamkan."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Terlalu banyak percubaan yang salah. Profil kerja ini dan data profil itu akan dipadamkan."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Ketepikan"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Mestilah sekurang-kurangnya <xliff:g id="COUNT">%d</xliff:g> aksara"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"PIN mestilah sekurang-kurangnya <xliff:g id="COUNT">%d</xliff:g> digit"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="other">Mesti mengandungi sekurang-kurangnya <xliff:g id="COUNT_1">%d</xliff:g> aksara</item>
+      <item quantity="one">Mesti mengandungi sekurang-kurangnya <xliff:g id="COUNT_0">%d</xliff:g> aksara</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="other">PIN mesti mengandungi sekurang-kurangnya <xliff:g id="COUNT_1">%d</xliff:g> digit</item>
+      <item quantity="one">PIN mesti mengandungi sekurang-kurangnya <xliff:g id="COUNT_0">%d</xliff:g> digit</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Teruskan"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"Mesti kurang daripada <xliff:g id="NUMBER">%d</xliff:g> aksara"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Mesti kurang daripada <xliff:g id="NUMBER">%d</xliff:g> digit"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="other">Mesti kurang daripada <xliff:g id="NUMBER_1">%d</xliff:g> aksara</item>
+      <item quantity="one">Mesti kurang daripada <xliff:g id="NUMBER_0">%d</xliff:g> aksara</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="other">Mesti kurang daripada <xliff:g id="NUMBER_1">%d</xliff:g> digit</item>
+      <item quantity="one">Mesti kurang daripada <xliff:g id="NUMBER_0">%d</xliff:g> digit</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Mesti mengandungi angka 0-9 sahaja"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Pentadbir peranti tidak membenarkan penggunaan PIN terbaharu"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"PIN lazim disekat oleh pentadbir IT anda. Cuba PIN yang lain."</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Kawalan interaksi"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Perkhidmatan yang dimuat turun"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Percubaan"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Bendera ciri"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Pembaca skrin terutamanya untuk orang yang buta dan rabun"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Ketik item pada skrn anda untuk mendengar item itu dibaca"</string>
@@ -3133,13 +3144,14 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> peraturan boleh dihidupkan secara automatik</item>
       <item quantity="one">1 peraturan boleh dihidupkan secara automatik</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"Ok"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Kemas Kini"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Jangan kemas kini"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"Telefon anda dapat melakukan pelbagai perkara untuk membantu anda fokus.\n\nKemas kini tetapan kepada:\n\n- Sembunyikan pemberitahuan sepenuhnya\n\n- Benarkan panggilan daripada kenalan yang dibintangi dan pemanggil berulang"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"Kemas Kini Jangan Ganggu?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Tetapan"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Anda boleh memperibadikan perkara ini selanjutnya dalam Tetapan."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Sekat apabila skrin dihidupkan"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Sekat apabila skrin dimatikan"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Jangan Ganggu boleh melakukan lebih banyak perkara selain menyekat bunyi yang tidak diingini - ciri ini boleh menyekat visual juga. Ini mungkin berguna jika anda sedang cuba tidur, menumpukan perhatian atau mengehadkan masa yang diluangkan pada telefon."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Sekat bunyi dan visual"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Jangan hidupkan skrin atau bangkitkan peranti untuk pemberitahuan"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Jangan tunjukkan pemberitahuan sama sekali, kecuali untuk aktiviti telefon asas dan status"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Bunyi profil kerja"</string>
@@ -3671,7 +3683,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Sandaran dilumpuhkan"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Dikemas kini kepada Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"Kemas kini tersedia"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"Tetapan tidak boleh ditukar"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"Tindakan tidak dibenarkan"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"Kelantangan tidak boleh ditukar"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"Panggilan tidak dibenarkan"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"SMS tidak dibenarkan"</string>
@@ -3861,7 +3873,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Kawal maklumat pada skrin kunci"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Tunjukkan atau sembunyikan kandungan pemberitahuan"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Semua"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"Sokongan &amp; petua"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"Lebar terkecil"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Tiada apl terpasang yang telah meminta akses SMS Premium"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"SMS Premium bukan percuma dan cajnya akan ditambahkan pada bil pembawa anda. Jika anda mendayakan kebenaran untuk apl, anda akan dapat menghantar SMS premium menggunakan apl itu."</string>

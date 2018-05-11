@@ -17,6 +17,7 @@ package com.android.settings.applications;
 
 import android.app.Activity;
 import android.content.Context;
+import android.icu.text.ListFormatter;
 import android.provider.SearchIndexableResource;
 import android.text.TextUtils;
 
@@ -138,24 +139,21 @@ public class DefaultAppSettings extends DashboardFragment {
             if (!listening) {
                 return;
             }
-            CharSequence summary = concatSummaryText(
-                    mDefaultBrowserPreferenceController.getDefaultAppLabel(),
-                    mDefaultPhonePreferenceController.getDefaultAppLabel());
-            summary = concatSummaryText(summary,
-                    mDefaultSmsPreferenceController.getDefaultAppLabel());
+            final List<CharSequence> summaries = new ArrayList<>();
+            if(!TextUtils.isEmpty(mDefaultBrowserPreferenceController.getDefaultAppLabel())) {
+                summaries.add(mDefaultBrowserPreferenceController.getDefaultAppLabel());
+            }
+            if(!TextUtils.isEmpty(mDefaultPhonePreferenceController.getDefaultAppLabel())) {
+                summaries.add(mDefaultPhonePreferenceController.getDefaultAppLabel());
+            }
+            if(!TextUtils.isEmpty(mDefaultSmsPreferenceController.getDefaultAppLabel())) {
+                summaries.add(mDefaultSmsPreferenceController.getDefaultAppLabel());
+            }
+
+            CharSequence summary = ListFormatter.getInstance().format(summaries);
             if (!TextUtils.isEmpty(summary)) {
                 mSummaryLoader.setSummary(this, summary);
             }
-        }
-
-        private CharSequence concatSummaryText(CharSequence summary1, CharSequence summary2) {
-            if (TextUtils.isEmpty(summary1)) {
-                return summary2;
-            }
-            if (TextUtils.isEmpty(summary2)) {
-                return summary1;
-            }
-            return mContext.getString(R.string.join_many_items_middle, summary1, summary2);
         }
     }
 

@@ -586,11 +586,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Zu viele Fehlversuche. Dieser Nutzer wird von dem Gerät entfernt."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Zu viele Fehlversuche. Dieses Arbeitsprofil und die zugehörigen Daten werden gelöscht."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Schließen"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Das Passwort muss mindestens <xliff:g id="COUNT">%d</xliff:g> Zeichen umfassen"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"Die PIN muss mindestens <xliff:g id="COUNT">%d</xliff:g> Ziffern umfassen"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="other">Muss mindestens <xliff:g id="COUNT_1">%d</xliff:g> Zeichen haben</item>
+      <item quantity="one">Muss mindestens <xliff:g id="COUNT_0">%d</xliff:g> Zeichen haben</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="other">PIN muss mindestens <xliff:g id="COUNT_1">%d</xliff:g> Ziffern haben</item>
+      <item quantity="one">PIN muss mindestens <xliff:g id="COUNT_0">%d</xliff:g> Ziffer haben</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Weiter"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"Es müssen weniger als <xliff:g id="NUMBER">%d</xliff:g> Zeichen sein"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Es müssen weniger als <xliff:g id="NUMBER">%d</xliff:g> Ziffern sein"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="other">Muss weniger als <xliff:g id="NUMBER_1">%d</xliff:g> Zeichen haben</item>
+      <item quantity="one">Muss weniger als <xliff:g id="NUMBER_0">%d</xliff:g> Zeichen haben</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="other">Muss weniger als <xliff:g id="NUMBER_1">%d</xliff:g> Ziffern haben</item>
+      <item quantity="one">Muss weniger als <xliff:g id="NUMBER_0">%d</xliff:g> Ziffer haben</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Es dürfen nur Ziffern von 0 bis 9 enthalten sein"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Der Geräteadministrator lässt die Verwendung einer früheren PIN nicht zu"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"Häufig verwendete PINs werden von deinem IT-Administrator blockiert. Versuch es mit einer anderen PIN."</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Interaktionssteuerung"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Heruntergeladene Dienste"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Experimentell"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Funktionsmarkierungen"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Der Screenreader ist in erster Linie für Blinde und Menschen mit eingeschränktem Sehvermögen bestimmt"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Tippe auf dem Bildschirm auf Elemente, damit sie vorgelesen werden"</string>
@@ -3073,38 +3084,22 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Visuelle Störungen blockieren"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"Visuelle Signale zulassen"</string>
-    <!-- no translation found for zen_mode_restrict_notifications_screen_title (9027437428488279426) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_title (478040192977063582) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_category (1648631487087638037) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_mute (9210062826172341735) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_mute_summary (285566524371041091) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_mute_footer (8473382758368384982) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_hide (3451553435075518722) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_hide_summary (3823881787175376177) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_hide_footer (4224323933073288352) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_custom (7498689167767941034) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_enable_custom (4250962169561739747) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_disable_custom (6676997522330453597) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_summary_muted (4678779044896459009) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_summary_custom (7416121534987213074) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_summary_hidden (7805339105802282234) -->
-    <skip />
-    <!-- no translation found for zen_mode_what_to_block_title (5480903548365697159) -->
-    <skip />
+    <string name="zen_mode_restrict_notifications_screen_title" msgid="9027437428488279426">"Benachrichtigungen einschränken"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"Benachrichtigungen"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"Wenn \"Bitte nicht stören\" aktiviert ist"</string>
+    <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"Benachrichtigungen stummschalten"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"Benachrichtigungen anzeigen, aber akustische Signale &amp; Vibrationen ausschalten"</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"Wenn du Benachrichtigungen auf deinem Smartphone erhältst, ist weder ein akustisches Signal zu hören noch eine Vibration zu spüren"</string>
+    <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"Benachrichtigungen ausblenden &amp; stummschalten"</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"Keine Benachrichtigungen werden angezeigt"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"Wenn \"Bitte nicht stören\" aktiviert ist, werden keine neuen oder vorhandenen Benachrichtigungen angezeigt. Benachrichtigungen, die für grundlegende Smartphone-Aktivitäten und den Smartphone-Status erforderlich sind, werden jedoch weiterhin angezeigt."</string>
+    <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"Benutzerdefiniert"</string>
+    <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"Benutzerdefinierte Einstellung aktivieren"</string>
+    <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"Benutzerdefinierte Einstellung entfernen"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"Werden angezeigt"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"Teilweise ausgeblendet"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"Ausgeblendet"</string>
+    <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"Benutzerdefinierte Einschränkungen"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"Bei aktiviertem Display"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"Bei deaktiviertem Display"</string>
     <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"Töne und Vibration ausschalten"</string>
@@ -3149,13 +3144,14 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> Regeln können die Option automatisch aktivieren</item>
       <item quantity="one">1 Regel kann die Option automatisch aktivieren</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"OK"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Aktualisieren"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Nicht aktualisieren"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"Dein Smartphone kann noch mehr tun, damit du dich besser auf die wichtigen Dinge konzentrieren kannst.\n\nEinfach Folgendes einstellen:\n\n– Benachrichtigungen komplett ausblenden\n\n– Anrufe von markierten Kontakten und wiederholten Anrufern zulassen"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"\"Bitte nicht stören\" aktualisieren?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Einstellungen"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Du kannst dies unter \"Einstellungen\" weiter anpassen."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Bei aktiviertem Bildschirm blockieren"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Bei deaktiviertem Bildschirm blockieren"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Der Modus \"Bitte nicht stören\" kann neben unerwünschten Tönen auch visuelle Signale blockieren. Dies kann nützlich sein, wenn du schlafen möchtest, dich konzentrieren musst oder versuchst, weniger Zeit mit dem Smartphone zu verbringen."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Töne und visuelle Signale blockieren"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Bildschirm nicht einschalten und \"Bitte nicht stören\"-Modus beim Erhalt von Benachrichtigungen nicht beenden"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Keine Benachrichtigungen anzeigen, mit Ausnahme von grundlegender Smartphoneaktivitäten und Status"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Töne für Arbeitsprofil"</string>
@@ -3191,7 +3187,7 @@
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"Wie sollen Profilbenachrichtigungen angezeigt werden, wenn dein Gerät gesperrt ist?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"Profilbenachrichtigungen"</string>
     <string name="notifications_title" msgid="8086372779371204971">"Benachrichtigungen"</string>
-    <string name="app_notifications_title" msgid="5810577805218003760">"App-Benachrichtigungen"</string>
+    <string name="app_notifications_title" msgid="5810577805218003760">"App-Benachrichtigung"</string>
     <string name="notification_channel_title" msgid="2260666541030178452">"Benachrichtigungskategorie"</string>
     <string name="notification_group_title" msgid="7180506440133859601">"Kategoriegruppe für Benachrichtigungen"</string>
     <string name="notification_importance_title" msgid="4368578960344731828">"Verhalten"</string>
@@ -3687,7 +3683,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"\"Sichern\" deaktiviert"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Aktualisiert auf Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"Update verfügbar"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"Einstellung nicht änderbar"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"Aktion nicht zulässig"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"Lautstärke nicht änderbar"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"Anrufe nicht zulässig"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"SMS nicht zulässig"</string>
@@ -3877,7 +3873,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Infos auf Sperrbildschirm festlegen"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Benachrichtigungsinhalt ein- oder ausblenden"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Alle"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"Support &amp; Tipps"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"Geringste Breite"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Keine installierte App hat Zugriff auf Premium-SMS angefordert."</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"Bei Premium-SMS können Kosten entstehen, die über den Mobilfunkanbieter abgerechnet werden. Wenn du für eine App Premium-SMS zulässt, kannst du aus ihr Premium-SMS versenden."</string>

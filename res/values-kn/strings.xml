@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"ಹಲವಾರು ಬಾರಿ ತಪ್ಪಾಗಿ ಪ್ರಯತ್ನಿಸಿದ್ದೀರಿ. ಈ ಬಳಕೆದಾರಾರನ್ನು ಅಳಿಸಲಾಗುವುದು."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"ಹಲವಾರು ಬಾರಿ ತಪ್ಪಾಗಿ ಪ್ರಯತ್ನಿಸಿದ್ದೀರಿ. ಈ ಕೆಲಸದ ಪ್ರೊಫೈಲ್ ಮತ್ತು ಅದರ ಡೇಟಾವನ್ನು ಅಳಿಸಲಾಗುತ್ತದೆ."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"ವಜಾಗೊಳಿಸಿ"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"ಕನಿಷ್ಠ <xliff:g id="COUNT">%d</xliff:g> ಕ್ಯಾರೆಕ್ಟರ್‌ಗಳನ್ನು ಹೊಂದಿರಬೇಕು"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"ಪಿನ್ ಕನಿಷ್ಠ <xliff:g id="COUNT">%d</xliff:g> ಅಂಕಿಗಳನ್ನು ಹೊಂದಿರಬೇಕು"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="one"> <xliff:g id="COUNT_1">%d</xliff:g> ಕನಿಷ್ಠ ಅಕ್ಷರಗಳನ್ನು ಹೊಂದಿರಬೇಕು</item>
+      <item quantity="other"> <xliff:g id="COUNT_1">%d</xliff:g> ಕನಿಷ್ಠ ಅಕ್ಷರಗಳನ್ನು ಹೊಂದಿರಬೇಕು</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="one">ಪಿನ್‌ ಕನಿಷ್ಠ <xliff:g id="COUNT_1">%d</xliff:g> ಅಂಕಿಗಳನ್ನು ಹೊಂದಿರಬೇಕು</item>
+      <item quantity="other">ಪಿನ್‌ ಕನಿಷ್ಠ <xliff:g id="COUNT_1">%d</xliff:g> ಅಂಕಿಗಳನ್ನು ಹೊಂದಿರಬೇಕು</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"ಮುಂದುವರಿಸು"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"<xliff:g id="NUMBER">%d</xliff:g> ಗಿಂತ ಕಡಿಮೆ ಅಕ್ಷರಗಳನ್ನು ಹೊಂದಿರಬೇಕು"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"<xliff:g id="NUMBER">%d</xliff:g> ಗಿಂತ ಕಡಿಮೆ ಅಂಕಿಗಳನ್ನು ಹೊಂದಿರಬೇಕು."</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="one"> <xliff:g id="NUMBER_1">%d</xliff:g> ಗಿಂತ ಕಡಿಮೆ ಅಕ್ಷರಗಳನ್ನು ಹೊಂದಿರಬೇಕು</item>
+      <item quantity="other"> <xliff:g id="NUMBER_1">%d</xliff:g> ಗಿಂತ ಕಡಿಮೆ ಅಕ್ಷರಗಳನ್ನು ಹೊಂದಿರಬೇಕು</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="one"> <xliff:g id="NUMBER_1">%d</xliff:g> ಗಿಂತ ಕಡಿಮೆ ಅಂಕಿಗಳನ್ನು ಹೊಂದಿರಬೇಕು</item>
+      <item quantity="other"> <xliff:g id="NUMBER_1">%d</xliff:g> ಗಿಂತ ಕಡಿಮೆ ಅಂಕಿಗಳನ್ನು ಹೊಂದಿರಬೇಕು</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"ಕೇವಲ 0-9 ಅಂಕಿಗಳನ್ನು ಮಾತ್ರ ಹೊಂದಿರಬೇಕು"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"ಇತ್ತೀಚಿನ ಪಿನ್ ಬಳಸಲು ಸಾಧನದ ನಿರ್ವಾಹಕರು ಅನುಮತಿಸುವುದಿಲ್ಲ"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"ಸರಳವಾದ ಪಿನ್‌ಗಳನ್ನು ನಿಮ್ಮ IT ನಿರ್ವಾಹಕರಿಂದ ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ. ಬೇರೆಯ ಪಿನ್ ಪ್ರಯತ್ನಿಸಿ."</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"ಸಂವಹನ ನಿಯಂತ್ರಣಗಳು"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"ಡೌನ್‌ಲೋಡ್ ಮಾಡಿದ ಸೇವೆಗಳು"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"ಪ್ರಾಯೋಗಿಕ"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"ವೈಶಿಷ್ಟ್ಯ ಫ್ಲ್ಯಾಗ್‌ಗಳು"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"ಸ್ಕ್ರೀನ್‌ರೀಡರ್ ಪ್ರಮುಖವಾಗಿ ದೃಷ್ಟಿಹೀನತೆ ಮತ್ತು ಕಡಿಮೆ ದೃಷ್ಟಿ ಹೊಂದಿರುವ ಜನರಿಗೆ ಆಗಿದೆ"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"ದೊಡ್ಡದಾಗಿ ಓದಲು ನಿಮ್ಮ ಸ್ಕ್ರೀನ್‌ ಮೇಲಿನ ಐಟಂಗಳನ್ನು ಟ್ಯಾಪ್ ಮಾಡಿ"</string>
@@ -3073,38 +3084,22 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"ದೃಶ್ಯ ಅಡಚಣೆಗಳನ್ನು ನಿರ್ಬಂಧಿಸಿ"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"ದೃಶ್ಯ ಸಂಕೇತಗಳನ್ನು ಅನುಮತಿಸಿ"</string>
-    <!-- no translation found for zen_mode_restrict_notifications_screen_title (9027437428488279426) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_title (478040192977063582) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_category (1648631487087638037) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_mute (9210062826172341735) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_mute_summary (285566524371041091) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_mute_footer (8473382758368384982) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_hide (3451553435075518722) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_hide_summary (3823881787175376177) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_hide_footer (4224323933073288352) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_custom (7498689167767941034) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_enable_custom (4250962169561739747) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_disable_custom (6676997522330453597) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_summary_muted (4678779044896459009) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_summary_custom (7416121534987213074) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_summary_hidden (7805339105802282234) -->
-    <skip />
-    <!-- no translation found for zen_mode_what_to_block_title (5480903548365697159) -->
-    <skip />
+    <string name="zen_mode_restrict_notifications_screen_title" msgid="9027437428488279426">"ಅಧಿಸೂಚನೆಗಳನ್ನು ನಿರ್ಬಂಧಿಸಿ"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"ಅಧಿಸೂಚನೆಗಳು"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"ಆನ್‌ ಇರುವಾಗ ಅಡಚಣೆ ಮಾಡಬೇಡಿ"</string>
+    <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"ಅಧಿಸೂಚನೆಗಳನ್ನು ಮ್ಯೂಟ್ ಮಾಡಿ"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"ಅಧಿಸೂಚನೆಗಳನ್ನು ತೋರಿಸಿ ಆದರೆ ಶಬ್ದಗಳು ಮತ್ತು ವೈಬ್ರೇಟ್‌ಗಳನ್ನು ಮ್ಯೂಟ್ ಮಾಡಿ"</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"ಹೊಸ ಅಧಿಸೂಚನೆಗಳು ಬಂದಾಗ ನಿಮ್ಮ ಫೋನ್ ಧ್ವನಿ ಮಾಡುವುದಿಲ್ಲ ಅಥವಾ ವೈಬ್ರೇಟ್‌ ಆಗುವುದಿಲ್ಲ"</string>
+    <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"ಅಧಿಸೂಚನೆಗಳನ್ನು ಮರೆಮಾಡಿ ಮತ್ತು ಮ್ಯೂಟ್‌ ಮಾಡಿ"</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"ಅಧಿಸೂಚನೆಗಳನ್ನು ಎಂದಿಗೂ ಕಾಣಿಸುವುದಿಲ್ಲ"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"ಅಡಚಣೆ ಮಾಡಬೇಡಿ ಆನ್‌ ಇರುವಾಗ ನೀವು ಹೊಸ ಅಥವಾ ಅಸ್ತಿತ್ವದಲ್ಲಿರುವ ಅಧಿಸೂಚನೆಗಳನ್ನು ವೀಕ್ಷಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ. ಆದಾಗ್ಯೂ, ಮುಖ್ಯ ಫೋನ್ ಚಟುವಟಿಕೆ ಮತ್ತು ಸ್ಥಿತಿಗಾಗಿ ಅಗತ್ಯವಾದ ಅಧಿಸೂಚನೆಗಳು ಇನ್ನೂ ಕಾಣಿಸಿಕೊಳ್ಳುತ್ತವೆ."</string>
+    <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"ಕಸ್ಟಮ್"</string>
+    <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"ಕಸ್ಟಮ್ ಸೆಟ್ಟಿಂಗ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ"</string>
+    <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"ಕಸ್ಟಮ್ ಸೆಟ್ಟಿಂಗ್ ಅನ್ನು ತೆಗೆದುಹಾಕಿ"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"ಗೋಚರಿಸುತ್ತದೆ"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"ಭಾಗಶಃ ಮರೆಮಾಡಲಾಗಿದೆ"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"ಮರೆಮಾಡಿರುವುದು"</string>
+    <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"ಕಸ್ಟಮ್ ನಿರ್ಬಂಧಗಳು"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"ಪರದೆಯು ಆನ್ ಆಗಿರುವಾಗ"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"ಪರದೆಯು ಆಫ್ ಆಗಿರುವಾಗ"</string>
     <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"ಧ್ವನಿ ಮತ್ತು ವೈಬ್ರೇಷನ್‌ ಅನ್ನು ಮ್ಯೂಟ್ ಮಾಡಿ"</string>
@@ -3149,13 +3144,14 @@
       <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> ನಿಯಮಗಳು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಆನ್ ಆಗಬಹುದು</item>
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> ನಿಯಮಗಳು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಆನ್ ಆಗಬಹುದು</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"ಸರಿ"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"ಅಪ್‍ಡೇಟ್ ಮಾಡಿ"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"ಅಪ್‌ಡೇಟ್ ಮಾಡಬೇಡಿ"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"ನಿಮ್ಮ ಗಮನವನ್ನು ಕೇಂದ್ರೀಕರಿಸಲು ನಿಮ್ಮ ಫೋನ್ ನಿಮಗೆ ಸಹಾಯ ಮಾಡಲು ಇನ್ನಷ್ಟು ಮಾಡಬಹುದು.\n\nಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಅಪ್‌ಡೇಟ್‌ ಮಾಡಿ:\n\n- ಅಧಿಸೂಚನೆಗಳನ್ನು ಸಂಪೂರ್ಣವಾಗಿ ಮರೆಮಾಡಿ\n\n- ನಕ್ಷತ್ರ ಹಾಕಿರುವ ಸಂಪರ್ಕಗಳು ಮತ್ತು ಪುನರಾವರ್ತಿತ ಕರೆದಾರರು ಕರೆ ಮಾಡಲು ಅನುಮತಿಸಿ"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"ಅಡಚಣೆ ಮಾಡಬೇಡಿ ಅನ್ನು ಅಪ್‌ಡೇಟ್‌ ಮಾಡುವುದೇ?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"ನೀವು ಸೆಟ್ಟಿಂಗ್‌ಗಳಲ್ಲಿ ಇದನ್ನು ಇನ್ನಷ್ಟು ಕಸ್ಟಮೈಸ್ ಮಾಡಬಹುದು."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"ಸ್ಕ್ರೀನ್ ಆನ್‌ ಆಗಿರುವಾಗ ನಿರ್ಬಂಧಿಸಿ"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"ಪರದೆ ಆಫ್ ಆಗಿರುವಾಗ ಆಫ್‌ ಮಾಡಿ"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"ಅಡಚಣೆ ಮಾಡಬೇಡಿ ಬ್ಲಾಕ್ ಅನಗತ್ಯ ಶಬ್ದಗಳಿಗಿಂತ ಹೆಚ್ಚಿನದನ್ನು ಮಾಡಬಹುದು - ಇದು ದೃಶ್ಯಗಳನ್ನು ನಿರ್ಬಂಧಿಸಬಹುದು. ನಿಮ್ಮ ಫೋನ್‌ನಲ್ಲಿ ಖರ್ಚು ಮಾಡುವ ಸಮಯವನ್ನು ನಿದ್ರೆ, ಗಮನ, ಅಥವಾ ಮಿತಿಗೊಳಿಸಲು ಪ್ರಯತ್ನಿಸುತ್ತಿದ್ದರೆ ಇದು ಸಹಾಯಕವಾಗಬಹುದು."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"ಧ್ವನಿಗಳು ಮತ್ತು ದೃಶ್ಯಗಳನ್ನು ನಿರ್ಬಂಧಿಸಿ"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"ಅಧಿಸೂಚನೆಘಳಿಗೆ ಎಚ್ಚರಿಸಬೇಡಿ ಅಥವಾ ಪರದೆಯನ್ನು ಆನ್‌ ಮಾಡಬೇಡಿ"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"ಮೂಲಭೂತ ಫೋನ್ ಚಟುವಟಿಕೆ ಮತ್ತು ಸ್ಥಿತಿಯನ್ನು ಹೊರತುಪಡಿಸಿ, ಬೇರೆಯಲ್ಲಿ ಅಧಿಸೂಚನೆಗಳನ್ನು ತೋರಿಸಲೇ ಬೇಡ."</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"ಕೆಲಸದ ಪ್ರೊಫೈಲ್ ಧ್ವನಿಗಳು"</string>
@@ -3687,7 +3683,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"ಬ್ಯಾಕ್‌ಅಪ್ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Android <xliff:g id="VERSION">%1$s</xliff:g> ಗೆ ಅಪ್‌ಡೇಟ್ ಮಾಡಲಾಗಿದೆ"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"ಅಪ್‌ಡೇಟ್‌‌ ಲಭ್ಯವಿದೆ"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"ಈ ಸೆಟ್ಟಿಂಗ್ ಅನ್ನು ಬದಲಾಯಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"ಚಟುವಟಿಕೆಯನ್ನು ಅನುಮತಿಸಲಾಗುವುದಿಲ್ಲ"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"ವಾಲ್ಯೂಮ್ ಬದಲಾಯಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"ಕರೆ ಮಾಡುವುದಕ್ಕೆ ಅನುಮತಿಸಲಾಗುವುದಿಲ್ಲ"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"ಎಸ್ಎಂಎಸ್‌ಗೆ ಅನುಮತಿಯಿಲ್ಲ"</string>
@@ -3877,7 +3873,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"ಲಾಕ್ ಪರದೆಯ ಮೇಲೆ ನಿಯಂತ್ರಣದ ಮಾಹಿತಿ"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"ಅಧಿಸೂಚನೆಯ ವಿಷಯವನ್ನು ತೋರಿಸು ಅಥವಾ ಮರೆಮಾಡು"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"ಎಲ್ಲಾ"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"ಬೆಂಬಲ ಮತ್ತು ಸಲಹೆಗಳು"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"ಚಿಕ್ಕದಾದ ಅಗಲ"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"ಯಾವುದೇ ಸ್ಥಾಪಿಸಿದ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು ಪ್ರೀಮಿಯಂ SMS ಪ್ರವೇಶವನ್ನು ವಿನಂತಿಸಿಲ್ಲ"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"ಪ್ರೀಮಿಯಂ SMS ನಿಮ್ಮ ವೆಚ್ಚಗಳಿಗೆ ಕಾರಣವಾಗಬಹುದು ಮತ್ತು ಇದನ್ನು ನಿಮ್ಮ ವಾಹಕ ಬಿಲ್‌ಗಳಿಗೆ ಸೇರಿಸಲಾಗುತ್ತದೆ. ನೀವು ಅಪ್ಲಿಕೇಶನ್‌ಗೆ ಅನುಮತಿಯನ್ನು ಸಕ್ರೀಯಗೊಳಿಸಿದರೆ, ನೀವು ಆ ಅಪ್ಲಿಕೇಶನ್‌ ಬಳಸಿಕೊಂಡು ಪ್ರೀಮಿಯಂ SMS ಕಳುಹಿಸಲು ಸಾಧ್ಯವಾಗುತ್ತದೆ."</string>

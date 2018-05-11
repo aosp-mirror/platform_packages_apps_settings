@@ -45,7 +45,7 @@ public class SmartBatteryPreferenceController extends BasePreferenceController i
     public int getAvailabilityStatus() {
         return mPowerUsageFeatureProvider.isSmartBatterySupported()
                 ? AVAILABLE
-                : DISABLED_UNSUPPORTED;
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

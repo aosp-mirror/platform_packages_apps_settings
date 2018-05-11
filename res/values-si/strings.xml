@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"වැරදි උත්සාහයන් ඉතා වැඩි ගණනකි. මෙම පරිශීලකයා මකනු ඇත."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"වැරදි උත්සාහයන් ඉතා වැඩි ගණනකි. මෙම කාර්යාල පැතිකඩ සහ එහි දත්ත මකනු ඇත."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"ඉවතලන්න"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"අඩු තරමින් අකුරු <xliff:g id="COUNT">%d</xliff:g>ක් තිබිය යුතුය"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"PIN එකෙහි අඩු තරමින් සංඛ්‍යාමය ඉලක්කම් <xliff:g id="COUNT">%d</xliff:g>ක් තිබිය යුතුය"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="one">අඩු තරමින් අනුලකුණු <xliff:g id="COUNT_1">%d</xliff:g>ක් තිබිය යුතුය</item>
+      <item quantity="other">අඩු තරමින් අනුලකුණු <xliff:g id="COUNT_1">%d</xliff:g>ක් තිබිය යුතුය</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="one">PIN හි අඩු තරමින් ඉලක්කම් <xliff:g id="COUNT_1">%d</xliff:g>ක් තිබිය යුතුය</item>
+      <item quantity="other">PIN හි අඩු තරමින් ඉලක්කම් <xliff:g id="COUNT_1">%d</xliff:g>ක් තිබිය යුතුය</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"කරගෙන යන්න"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"අනුලකුණු <xliff:g id="NUMBER">%d</xliff:g>කට වඩා අඩු විය යුතුය"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"ඉලක්කම් <xliff:g id="NUMBER">%d</xliff:g>කට වඩා අඩු විය යුතුය."</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="one">අනුලකුණු <xliff:g id="NUMBER_1">%d</xliff:g>කට වඩා අඩු විය යුතුය</item>
+      <item quantity="other">අනුලකුණු <xliff:g id="NUMBER_1">%d</xliff:g>කට වඩා අඩු විය යුතුය</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="one">ඉලක්කම් <xliff:g id="NUMBER_1">%d</xliff:g>කට වඩා අඩු විය යුතුය</item>
+      <item quantity="other">ඉලක්කම් <xliff:g id="NUMBER_1">%d</xliff:g>කට වඩා අඩු විය යුතුය</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"0-9 දක්වා ඉලක්කම් පමණක් අඩංගු විය යුතුය"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"උපාංග පරිපාලක මෑත PIN එකක් භාවිතා කිරීමට අවසර නොදේ"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"ඔබගේ IT පරිපාලක විසින් සුලබ PIN අවහිර කරනු ලැබේ. වෙනත් PIN එකක් උත්සාහ කරන්න."</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"අන්තර්ක්‍රියා පාලන"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"බාගත් සේවා"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"පරීක්ෂණාත්මක"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"විශේෂාංග සලකුණු කිරීම්"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"තිර කියවනය මූලික වශයෙන් අන්ධ සහ අඩු දෘශ්‍යතාව සහිත පුද්ගලයන් සඳහාය"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"හඬ නඟා කියවීමට සවන් දීම සඳහා ඔබේ තිරය මත අයිතම තට්ටු කරන්න"</string>
@@ -3133,13 +3144,14 @@
       <item quantity="one">රීති <xliff:g id="ON_COUNT">%d</xliff:g>ක් ස්වයංක්‍රියව ක්‍රියාත්මක කළ හැකිය</item>
       <item quantity="other">රීති <xliff:g id="ON_COUNT">%d</xliff:g>ක් ස්වයංක්‍රියව ක්‍රියාත්මක කළ හැකිය</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"හරි"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"යාවත්කාලීන කරන්න"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"යාවත්කාලීන නොකරන්න"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"ඔබගේ දුරකථනයට අවධානය යොමු කිරීමට ඔබට වැඩි යමක් කළ හැකිය.\n\nසැකසීම් යාවත්කාලීන කරන්න:\n\n- දැනුම්දීම් මුළුමනින්ම සඟවන්න\n\n- තරු ලකුණු යෙදූ සම්බන්ධතාවලින් සහ නැවත නැවතත් අමතන්නන් වෙතින් වන ඇමතුම්වලට ඉඩ දෙන්න"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"බාධා නොකරන්න යාවත්කාලීන කරන්නද?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"සැකසීම්"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"තවදුරටත් ඔබට මෙය සැකසීම් තුළ අභිරුචි කළ හැකිය."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"තිරය ක්‍රියාත්මක විට අවහිර කරන්න"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"තිරය ක්‍රියාවිරහිත විට අවහිර කරන්න"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"අනවශ්‍ය ශබ්ද අවහිර කිරීමට වඩා වැඩි දෙයක් බාධා නොකරන්නට කළ හැකිය - එය දෘශ්‍යද අවහිර කළ හැකිය. ඔබ දුරකථනයෙහි ගත කරන කාලය නිදා ගැනීමට, අවධානය යොමු කිරීමට හෝ සීමා කිරීමට උත්සාහ කරනවා නම් මෙය ප්‍රයෝජනවත් විය හැකිය."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"ශබ්ද සහ දෘශ්‍ය අවහිර කරන්න"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"තිරය ක්‍රියාත්මක නොකරන්න නැතහොත් දැනුම්දීම් සඳහා අවදි නොකරන්න"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"මූලික දුරකථන ක්‍රියාකාරකම් සහ තත්ත්වය හැරුණු විට, දැනුම්දීම් කිසි විටක නොපෙන්වන්න"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"කාර්යාල පැතිකඩ හඬවල්"</string>
@@ -3671,7 +3683,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"උපස්ථ කිරීම අබලයි"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Android <xliff:g id="VERSION">%1$s</xliff:g> වෙත යාවත්කාලීන කරන ලදි"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"යාවත්කාලීනයක් ඇත"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"මෙම සැකසීම වෙනස් කළ නොහැකිය"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"ක්‍රියාවට ඉඩ නොදේ"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"හඬ පරිමාව වෙනස් කළ නොහැකිය"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"ඇමතීමට ඉඩ නොදේ"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"SMS සඳහා ඉඩ නොදේ"</string>
@@ -3861,7 +3873,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"අගුලු තිරය මත පාලන තොරතුරු"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"දැනුම්දීම් අන්තර්ගතය පෙන්වන්න නැතහොත් සඟවන්න"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"සියලු"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"සහාය සහ ඉඟි"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"කුඩාම පළල"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"කිසිදු ස්ථාපනය කළ යෙදුමක් වාරික SMS ප්රවේශ ඉල්ලා නැත"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"වාරික SMS ඔබෙන් මුදල් අය කළ හැකි අතර ඔබේ වාහක බිල්පතට එක් කරනු ඇත. ඔබ යෙදුමක් සඳහා අවසර සබල කරන්නේ නම්, ඔබට එම යෙදුම භාවිතයෙන් වාරික SMS යැවීමට හැකි වනු ඇත."</string>

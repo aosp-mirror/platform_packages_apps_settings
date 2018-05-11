@@ -155,7 +155,7 @@ public class DataUsageList extends DataUsageBase {
             args.putParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE, mTemplate);
             new SubSettingLauncher(getContext())
                     .setDestination(BillingCycleSettings.class.getName())
-                    .setTitle(R.string.billing_cycle)
+                    .setTitleRes(R.string.billing_cycle)
                     .setSourceMetricsCategory(getMetricsCategory())
                     .setArguments(args)
                     .launch();
@@ -432,7 +432,7 @@ public class DataUsageList extends DataUsageBase {
 
         new SubSettingLauncher(getContext())
                 .setDestination(AppDataUsage.class.getName())
-                .setTitle(R.string.app_data_usage)
+                .setTitleRes(R.string.app_data_usage)
                 .setArguments(args)
                 .setSourceMetricsCategory(getMetricsCategory())
                 .launch();

@@ -118,7 +118,7 @@ public class ProcessStatsSummary extends ProcessStatsBase implements OnPreferenc
             mStatsManager.xferStats();
             new SubSettingLauncher(getContext())
                     .setDestination(ProcessStatsUi.class.getName())
-                    .setTitle(R.string.memory_usage_apps)
+                    .setTitleRes(R.string.memory_usage_apps)
                     .setArguments(args)
                     .setSourceMetricsCategory(getMetricsCategory())
                     .launch();

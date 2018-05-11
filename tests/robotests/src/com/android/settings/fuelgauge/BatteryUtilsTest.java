@@ -581,18 +581,6 @@ public class BatteryUtilsTest {
     }
 
     @Test
-    public void testIsAppHeavilyUsed_usageMoreThanThreshold_returnTrue() {
-        assertThat(mBatteryUtils.isAppHeavilyUsed(mBatteryStatsHelper, mUserManager, UID,
-                10 /* threshold */ )).isTrue();
-    }
-
-    @Test
-    public void testIsAppHeavilyUsed_usageLessThanThreshold_returnFalse() {
-        assertThat(mBatteryUtils.isAppHeavilyUsed(mBatteryStatsHelper, mUserManager, UID,
-                DISCHARGE_AMOUNT /* threshold */ )).isFalse();
-    }
-
-    @Test
     public void testShouldHideAnomaly_systemAppWithLauncher_returnTrue() {
         final List<ResolveInfo> resolveInfos = new ArrayList<>();
         final ResolveInfo resolveInfo = new ResolveInfo();
@@ -621,6 +609,14 @@ public class BatteryUtilsTest {
         doReturn(new String[]{HIGH_SDK_PACKAGE}).when(mPackageManager).getPackagesForUid(systemUid);
 
         assertThat(mBatteryUtils.shouldHideAnomaly(mPowerWhitelistBackend, systemUid)).isTrue();
+    }
+
+    @Test
+    public void testShouldHideAnomaly_AppInDozeList_returnTrue() {
+        doReturn(new String[]{HIGH_SDK_PACKAGE}).when(mPackageManager).getPackagesForUid(UID);
+        doReturn(true).when(mPowerWhitelistBackend).isWhitelisted(new String[]{HIGH_SDK_PACKAGE});
+
+        assertThat(mBatteryUtils.shouldHideAnomaly(mPowerWhitelistBackend, UID)).isTrue();
     }
 
     @Test

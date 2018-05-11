@@ -16,13 +16,13 @@
 
 package com.android.settings.security;
 
+
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_SOMETHING;
 
 import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
+import android.util.Log;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.Utils;
@@ -32,10 +32,17 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 public class VisiblePatternProfilePreferenceController extends TogglePreferenceController
         implements LifecycleObserver, OnResume {
 
     private static final String KEY_VISIBLE_PATTERN_PROFILE = "visiblepattern_profile";
+    private static final String TAG = "VisPtnProfPrefCtrl";
 
     private final LockPatternUtils mLockPatternUtils;
     private final UserManager mUm;
@@ -45,7 +52,7 @@ public class VisiblePatternProfilePreferenceController extends TogglePreferenceC
     private Preference mPreference;
 
     public VisiblePatternProfilePreferenceController(Context context) {
-         this(context, null /* lifecycle */);
+        this(context, null /* lifecycle */);
     }
 
     // TODO (b/73074893) Replace this constructor without Lifecycle using setter method instead.
@@ -63,12 +70,25 @@ public class VisiblePatternProfilePreferenceController extends TogglePreferenceC
 
     @Override
     public int getAvailabilityStatus() {
-        if (mLockPatternUtils.isSecure(mProfileChallengeUserId)
-                && mLockPatternUtils.getKeyguardStoredPasswordQuality(mProfileChallengeUserId)
-                == PASSWORD_QUALITY_SOMETHING) {
-            return AVAILABLE;
+        final FutureTask<Integer> futureTask = new FutureTask<>(
+                // Put the API call in a future to avoid StrictMode violation.
+                () -> {
+                    final boolean isSecure = mLockPatternUtils.isSecure(mProfileChallengeUserId);
+                    final boolean hasPassword = mLockPatternUtils
+                            .getKeyguardStoredPasswordQuality(mProfileChallengeUserId)
+                            == PASSWORD_QUALITY_SOMETHING;
+                    if (isSecure && hasPassword) {
+                        return AVAILABLE;
+                    }
+                    return DISABLED_FOR_USER;
+                });
+        try {
+            futureTask.run();
+            return futureTask.get();
+        } catch (InterruptedException | ExecutionException e) {
+            Log.w(TAG, "Error getting lock pattern state.");
+            return DISABLED_FOR_USER;
         }
-        return DISABLED_FOR_USER;
     }
 
     @Override

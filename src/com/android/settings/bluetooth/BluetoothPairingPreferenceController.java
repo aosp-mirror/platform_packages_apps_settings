@@ -57,7 +57,7 @@ public class BluetoothPairingPreferenceController extends AbstractPreferenceCont
         if (KEY_PAIRING.equals(preference.getKey())) {
             new SubSettingLauncher(mContext)
                     .setDestination(BluetoothPairingDetail.class.getName())
-                    .setTitle(R.string.bluetooth_pairing_page_title)
+                    .setTitleRes(R.string.bluetooth_pairing_page_title)
                     .setSourceMetricsCategory(mFragment.getMetricsCategory())
                     .launch();
 

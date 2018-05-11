@@ -15,9 +15,13 @@
  */
 package com.android.settings.accounts;
 
-import static com.android.settings.accounts.AccountDashboardFragmentTest.ShadowAuthenticationHelper.LABELS;
-import static com.android.settings.accounts.AccountDashboardFragmentTest.ShadowAuthenticationHelper.TYPES;
+import static com.android.settings.accounts.AccountDashboardFragmentTest
+        .ShadowAuthenticationHelper.LABELS;
+import static com.android.settings.accounts.AccountDashboardFragmentTest
+        .ShadowAuthenticationHelper.TYPES;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -49,116 +53,119 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 public class AccountDashboardFragmentTest {
 
-  private AccountDashboardFragment mFragment;
+    private AccountDashboardFragment mFragment;
 
-  @Before
-  public void setUp() {
-    mFragment = new AccountDashboardFragment();
-  }
-
-  @After
-  public void tearDown() {
-    ShadowAuthenticationHelper.reset();
-  }
-
-  @Test
-  public void testCategory_isAccount() {
-    assertThat(mFragment.getCategoryKey()).isEqualTo(CategoryKey.CATEGORY_ACCOUNT);
-  }
-
-  @Test
-  @Config(shadows = {
-      ShadowAuthenticationHelper.class
-  })
-  public void updateSummary_hasAccount_shouldDisplayUpTo3AccountTypes() {
-    final SummaryLoader loader = mock(SummaryLoader.class);
-    final Activity activity = Robolectric.buildActivity(Activity.class).setup().get();
-
-    final SummaryLoader.SummaryProvider provider =
-        AccountDashboardFragment.SUMMARY_PROVIDER_FACTORY.createSummaryProvider(activity, loader);
-    provider.setListening(true);
-
-    verify(loader).setSummary(provider, LABELS[0] + ", " + LABELS[1] + ", " + LABELS[2]);
-  }
-
-  @Test
-  @Config(shadows = ShadowAuthenticationHelper.class)
-  public void updateSummary_noAccount_shouldDisplayDefaultSummary() {
-    ShadowAuthenticationHelper.setEnabledAccount(null);
-    final SummaryLoader loader = mock(SummaryLoader.class);
-    final Activity activity = Robolectric.buildActivity(Activity.class).setup().get();
-
-    final SummaryLoader.SummaryProvider provider =
-        AccountDashboardFragment.SUMMARY_PROVIDER_FACTORY.createSummaryProvider(activity, loader);
-    provider.setListening(true);
-
-    verify(loader).setSummary(provider,
-        activity.getString(R.string.account_dashboard_default_summary));
-  }
-
-  @Test
-  @Config(shadows = ShadowAuthenticationHelper.class)
-  public void updateSummary_noAccountTypeLabel_shouldNotDisplayNullEntry() {
-    final SummaryLoader loader = mock(SummaryLoader.class);
-    final Activity activity = Robolectric.buildActivity(Activity.class).setup().get();
-    final String[] enabledAccounts = {TYPES[0], "unlabeled_account_type", TYPES[1]};
-    ShadowAuthenticationHelper.setEnabledAccount(enabledAccounts);
-
-    final SummaryLoader.SummaryProvider provider =
-        AccountDashboardFragment.SUMMARY_PROVIDER_FACTORY.createSummaryProvider(activity, loader);
-    provider.setListening(true);
-
-    // should only show the 2 accounts with labels
-    verify(loader).setSummary(provider, LABELS[0] + ", " + LABELS[1]);
-  }
-
-  @Test
-  public void testSearchIndexProvider_shouldIndexResource() {
-    final List<SearchIndexableResource> indexRes =
-        AccountDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
-            .getXmlResourcesToIndex(RuntimeEnvironment.application, true /* enabled */);
-
-    assertThat(indexRes).isNotNull();
-    assertThat(indexRes.get(0).xmlResId).isEqualTo(mFragment.getPreferenceScreenResId());
-  }
-
-  @Implements(AuthenticatorHelper.class)
-  public static class ShadowAuthenticationHelper {
-
-    static final String[] TYPES = {"type1", "type2", "type3", "type4"};
-    static final String[] LABELS = {"LABEL1", "LABEL2", "LABEL3", "LABEL4"};
-    private static String[] sEnabledAccount = TYPES;
-
-    public void __constructor__(Context context, UserHandle userHandle,
-        AuthenticatorHelper.OnAccountsUpdateListener listener) {
+    @Before
+    public void setUp() {
+        mFragment = new AccountDashboardFragment();
     }
 
-    private static void setEnabledAccount(String[] enabledAccount) {
-      sEnabledAccount = enabledAccount;
+    @After
+    public void tearDown() {
+        ShadowAuthenticationHelper.reset();
     }
 
-    @Resetter
-    public static void reset() {
-      sEnabledAccount = TYPES;
+    @Test
+    public void testCategory_isAccount() {
+        assertThat(mFragment.getCategoryKey()).isEqualTo(CategoryKey.CATEGORY_ACCOUNT);
     }
 
-    @Implementation
-    public String[] getEnabledAccountTypes() {
-      return sEnabledAccount;
+    @Test
+    @Config(shadows = {
+            ShadowAuthenticationHelper.class
+    })
+    public void updateSummary_hasAccount_shouldDisplayUpTo3AccountTypes() {
+        final SummaryLoader loader = mock(SummaryLoader.class);
+        final Activity activity = Robolectric.buildActivity(Activity.class).setup().get();
+
+        final SummaryLoader.SummaryProvider provider =
+                AccountDashboardFragment.SUMMARY_PROVIDER_FACTORY.createSummaryProvider(activity,
+                        loader);
+        provider.setListening(true);
+
+        verify(loader).setSummary(provider, LABELS[0] + ", " + LABELS[1] + ", and " + LABELS[2]);
     }
 
-    @Implementation
-    public CharSequence getLabelForType(Context context, final String accountType) {
-      if (TextUtils.equals(accountType, TYPES[0])) {
-        return LABELS[0];
-      } else if (TextUtils.equals(accountType, TYPES[1])) {
-        return LABELS[1];
-      } else if (TextUtils.equals(accountType, TYPES[2])) {
-        return LABELS[2];
-      } else if (TextUtils.equals(accountType, TYPES[3])) {
-        return LABELS[3];
-      }
-      return null;
+    @Test
+    @Config(shadows = ShadowAuthenticationHelper.class)
+    public void updateSummary_noAccount_shouldDisplayDefaultSummary() {
+        ShadowAuthenticationHelper.setEnabledAccount(null);
+        final SummaryLoader loader = mock(SummaryLoader.class);
+        final Activity activity = Robolectric.buildActivity(Activity.class).setup().get();
+
+        final SummaryLoader.SummaryProvider provider =
+                AccountDashboardFragment.SUMMARY_PROVIDER_FACTORY.createSummaryProvider(activity,
+                        loader);
+        provider.setListening(true);
+
+        verify(loader).setSummary(provider,
+                activity.getString(R.string.account_dashboard_default_summary));
     }
-  }
+
+    @Test
+    @Config(shadows = ShadowAuthenticationHelper.class)
+    public void updateSummary_noAccountTypeLabel_shouldNotDisplayNullEntry() {
+        final SummaryLoader loader = mock(SummaryLoader.class);
+        final Activity activity = Robolectric.buildActivity(Activity.class).setup().get();
+        final String[] enabledAccounts = {TYPES[0], "unlabeled_account_type", TYPES[1]};
+        ShadowAuthenticationHelper.setEnabledAccount(enabledAccounts);
+
+        final SummaryLoader.SummaryProvider provider =
+                AccountDashboardFragment.SUMMARY_PROVIDER_FACTORY.createSummaryProvider(activity,
+                        loader);
+        provider.setListening(true);
+
+        // should only show the 2 accounts with labels
+        verify(loader).setSummary(provider, LABELS[0] + " and " + LABELS[1]);
+    }
+
+    @Test
+    public void testSearchIndexProvider_shouldIndexResource() {
+        final List<SearchIndexableResource> indexRes =
+                AccountDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
+                        .getXmlResourcesToIndex(RuntimeEnvironment.application, true /* enabled */);
+
+        assertThat(indexRes).isNotNull();
+        assertThat(indexRes.get(0).xmlResId).isEqualTo(mFragment.getPreferenceScreenResId());
+    }
+
+    @Implements(AuthenticatorHelper.class)
+    public static class ShadowAuthenticationHelper {
+
+        static final String[] TYPES = {"type1", "type2", "type3", "type4"};
+        static final String[] LABELS = {"LABEL1", "LABEL2", "LABEL3", "LABEL4"};
+        private static String[] sEnabledAccount = TYPES;
+
+        public void __constructor__(Context context, UserHandle userHandle,
+                AuthenticatorHelper.OnAccountsUpdateListener listener) {
+        }
+
+        private static void setEnabledAccount(String[] enabledAccount) {
+            sEnabledAccount = enabledAccount;
+        }
+
+        @Resetter
+        public static void reset() {
+            sEnabledAccount = TYPES;
+        }
+
+        @Implementation
+        public String[] getEnabledAccountTypes() {
+            return sEnabledAccount;
+        }
+
+        @Implementation
+        public CharSequence getLabelForType(Context context, final String accountType) {
+            if (TextUtils.equals(accountType, TYPES[0])) {
+                return LABELS[0];
+            } else if (TextUtils.equals(accountType, TYPES[1])) {
+                return LABELS[1];
+            } else if (TextUtils.equals(accountType, TYPES[2])) {
+                return LABELS[2];
+            } else if (TextUtils.equals(accountType, TYPES[3])) {
+                return LABELS[3];
+            }
+            return null;
+        }
+    }
 }

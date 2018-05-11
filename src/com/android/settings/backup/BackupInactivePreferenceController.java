@@ -32,7 +32,7 @@ public class BackupInactivePreferenceController extends BasePreferenceController
             return DISABLED_FOR_USER;
         }
         if (PrivacySettingsUtils.isInvisibleKey(mContext, PrivacySettingsUtils.BACKUP_INACTIVE)) {
-            return DISABLED_UNSUPPORTED;
+            return UNSUPPORTED_ON_DEVICE;
         }
         return AVAILABLE;
     }

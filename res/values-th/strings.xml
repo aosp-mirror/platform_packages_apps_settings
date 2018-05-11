@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"ใช้ความพยายามหลายครั้งเกินไป ระบบจะลบผู้ใช้รายนี้"</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"ใช้ความพยายามหลายครั้งเกินไป ระบบจะลบโปรไฟล์งานนี้และข้อมูลในโปรไฟล์"</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"ปิด"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"ต้องมีอักขระอย่างน้อย <xliff:g id="COUNT">%d</xliff:g> ตัว"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"PIN ต้องมีตัวเลขอย่างน้อย <xliff:g id="COUNT">%d</xliff:g> ตัว"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="other">ต้องมีอักขระอย่างน้อย <xliff:g id="COUNT_1">%d</xliff:g> ตัว</item>
+      <item quantity="one">ต้องมีอักขระอย่างน้อย <xliff:g id="COUNT_0">%d</xliff:g> ตัว</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="other">PIN ต้องมีตัวเลขอย่างน้อย <xliff:g id="COUNT_1">%d</xliff:g> ตัว</item>
+      <item quantity="one">PIN ต้องมีตัวเลขอย่างน้อย <xliff:g id="COUNT_0">%d</xliff:g> ตัว</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"ดำเนินการต่อ"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"ต้องมีอักขระไม่เกิน <xliff:g id="NUMBER">%d</xliff:g> ตัว"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"ต้องมีตัวเลขไม่เกิน <xliff:g id="NUMBER">%d</xliff:g> ตัว"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="other">ต้องมีอักขระไม่เกิน <xliff:g id="NUMBER_1">%d</xliff:g> ตัว</item>
+      <item quantity="one">ต้องมีอักขระไม่เกิน <xliff:g id="NUMBER_0">%d</xliff:g> ตัว</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="other">ต้องมีตัวเลขไม่เกิน <xliff:g id="NUMBER_1">%d</xliff:g> ตัว</item>
+      <item quantity="one">ต้องมีตัวเลขไม่เกิน <xliff:g id="NUMBER_0">%d</xliff:g> ตัว</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"ต้องมีตัวเลข 0-9 เท่านั้น"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"ผู้ดูแลระบบอุปกรณ์ไม่อนุญาตให้ใช้ PIN ที่เพิ่งใช้ไป"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"ผู้ดูแลระบบไอทีบล็อก PIN ที่ไม่รัดกุม ลอง PIN อื่น"</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"ส่วนควบคุมการโต้ตอบ"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"บริการที่ดาวน์โหลด"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"ทดสอบ"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"ติดธงฟีเจอร์"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"โปรแกรมอ่านหน้าจอที่ใช้สำหรับคนตาบอดหรือผู้มีสายตาบกพร่อง"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"แตะรายการบนหน้าจอเพื่อฟังการอ่านออกเสียง"</string>
@@ -3133,13 +3144,14 @@
       <item quantity="other">กฎ <xliff:g id="ON_COUNT">%d</xliff:g> ข้อจะเปิดโดยอัตโนมัติ</item>
       <item quantity="one">กฎ 1 ข้อจะเปิดโดยอัตโนมัติ</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"ตกลง"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"อัปเดต"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"ไม่ต้องอัปเดต"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"โทรศัพท์มีตัวเลือกที่ช่วยให้คุณจดจ่อกับสิ่งที่ทำอยู่ได้\n\nอัปเดตการตั้งค่าให้เป็นตัวเลือกต่อไปนี้\n\n- ซ่อนการแจ้งเตือนทั้งหมด\n\n- อนุญาตการโทรเข้าจากรายชื่อติดต่อที่ติดดาวและผู้ที่โทรซ้ำหลายครั้ง"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"อัปเดตโหมดห้ามรบกวนไหม"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"การตั้งค่า"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"คุณปรับแต่งค่านี้ได้ในการตั้งค่า"</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"บล็อกเมื่อหน้าจอเปิดอยู่"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"บล็อกเมื่อหน้าจอดับ"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"โหมดห้ามรบกวนไม่เพียงบล็อกเสียงที่ไม่ต้องการ แต่ยังบล็อกภาพได้อีกด้วย ซึ่งอาจมีประโยชน์เมื่อคุณพยายามที่จะนอนหลับ ใช้สมาธิ หรือจำกัดเวลาการใช้โทรศัพท์ของคุณ"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"บล็อกเสียงและภาพ"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"ไม่ต้องเปิดหน้าจอหรือปลุกระบบเพื่อแสดงการแจ้งเตือน"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"ไม่ต้องแสดงการแจ้งเตือนเลย เว้นแต่กิจกรรมและสถานะโทรศัพท์พื้นฐาน"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"เสียงในโปรไฟล์งาน"</string>
@@ -3671,7 +3683,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"ปิดใช้การสำรองข้อมูลอยู่"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"อัปเดตเป็น Android <xliff:g id="VERSION">%1$s</xliff:g> แล้ว"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"มีเวอร์ชันอัปเดต"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"เปลี่ยนการตั้งค่านี้ไม่ได้"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"ไม่อนุญาตให้ดำเนินการนี้"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"ปรับระดับเสียงไม่ได้"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"ไม่อนุญาตให้โทรออก"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"ไม่อนุญาตให้ส่ง SMS"</string>
@@ -3861,7 +3873,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"ควบคุมข้อมูลในหน้าจอล็อก"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"แสดงหรือซ่อนเนื้อหาการแจ้งเตือน"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"ทั้งหมด"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"การสนับสนุนและเคล็ดลับ"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"ความกว้างที่เล็กที่สุด"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"ไม่มีแอปใดที่ติดตั้งไว้ขอเข้าถึง SMS แบบพรีเมียม"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"SMS แบบพรีเมียมอาจมีค่าใช้จ่ายและจะเพิ่มเข้าไปในใบเรียกเก็บเงินจากผู้ให้บริการ หากคุณให้สิทธิ์แอปหนึ่งๆ คุณจะใช้แอปนั้นส่ง SMS แบบพรีเมียมได้"</string>

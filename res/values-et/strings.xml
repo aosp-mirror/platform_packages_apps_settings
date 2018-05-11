@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Liiga palju valesid katseid. See kasutaja kustutatakse."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Liiga palju valesid katseid. See tööprofiil ja selle andmed kustutatakse."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Loobu"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Peab sisaldama vähemalt <xliff:g id="COUNT">%d</xliff:g> tähemärki"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"PIN-kood peab sisaldama vähemalt <xliff:g id="COUNT">%d</xliff:g> numbrit"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="other">Peab sisaldama vähemalt <xliff:g id="COUNT_1">%d</xliff:g> tähemärki</item>
+      <item quantity="one">Peab sisaldama vähemalt <xliff:g id="COUNT_0">%d</xliff:g> tähemärki</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="other">PIN-kood peab sisaldama vähemalt <xliff:g id="COUNT_1">%d</xliff:g> numbrit</item>
+      <item quantity="one">PIN-kood peab sisaldama vähemalt <xliff:g id="COUNT_0">%d</xliff:g> numbrit</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Jätka"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"Peab olema lühem kui <xliff:g id="NUMBER">%d</xliff:g> tähemärki"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Peab olema lühem kui <xliff:g id="NUMBER">%d</xliff:g> numbrit"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="other">Peab olema alla <xliff:g id="NUMBER_1">%d</xliff:g> tähemärgi</item>
+      <item quantity="one">Peab olema alla <xliff:g id="NUMBER_0">%d</xliff:g> tähemärgi</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="other">Peab olema alla <xliff:g id="NUMBER_1">%d</xliff:g> numbri</item>
+      <item quantity="one">Peab olema alla <xliff:g id="NUMBER_0">%d</xliff:g> numbri</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Tohib sisaldada ainult numbreid 0–9."</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Seadme administraator ei luba kasutada viimast PIN-koodi"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"IT-administraator on levinud PIN-koodid blokeerinud. Proovige muud PIN-koodi."</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Interaktsiooni juhtnupud"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Allalaaditud teenused"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Katseline"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Funktsiooni märgistamised"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Peamiselt pimedatele ja halva nägemisega inimestele mõeldud ekraanilugeja"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Ekraanil olevate üksuste ettelugemise kuulmiseks puudutage neid"</string>
@@ -3133,13 +3144,14 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> reeglit võivad automaatselt sisse lülituda</item>
       <item quantity="one">1 reegel võib automaatselt sisse lülituda</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"OK"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Värskenda"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Ära värskenda"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"Telefon saab teid keskendumisel rohkem aidata.\n\nVärskendage seadeid:\n\n- Peida märguanded täielikult\n\n- Luba kõned tärniga tähistatud kontaktidelt ja korduvatelt helistajatelt"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"Kas värskendada režiimi Mitte segada?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Seaded"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Jaotises Seaded saate seda täpsemini kohandada."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Blokeeri, kui ekraan on sisse lülitatud"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Blokeeri, kui ekraan on välja lülitatud"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Režiim Mitte segada teeb muudki peale soovimatute helide keelamise – see võib blokeerida ka visuaalse sisu. See võib olla kasulik magamise või keskendumise ajal või juhul, kui püüate telefoni kasutamise aega vähendada."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Helide ja visuaalse sisu blokeerimine"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Ära ärata ega lülita ekraani märguannete puhul sisse"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Ekraanil ei kuvata ühtki märguannet peale telefoni põhitoimingute ja -oleku."</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Tööprofiili helid"</string>
@@ -3671,7 +3683,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Varundamine on keelatud"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Android värskendati versioonile <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"Värskendus on saadaval"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"Seda seadet ei saa muuta"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"Keelatud toiming"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"Helitugevust ei saa muuta"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"Helistamine ei ole lubatud"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"SMS-id ei ole lubatud"</string>
@@ -3861,7 +3873,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Kontrollige lukustuskuva teavet"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Märguande sisu kuvamine või peitmine"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Kõik"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"Tugi ja nõuanded"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"Kõige väiksem laius"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Ükski installitud rakendus pole taotlenud juurdepääsu tasuliste SMS-ide saatmiseks"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"Tasuliste SMS-ide saatmisel võidakse teilt nõuda tasu, mis lisatakse operaatori esitatud arvele. Kui annate rakendusele loa, saate selle rakendusega tasulisi SMS-e saata."</string>

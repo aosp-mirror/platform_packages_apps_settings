@@ -193,14 +193,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
         }
 
         mBatteryStatsHelper = statsHelper;
-        final long lastFullChargeTime = mBatteryUtils.calculateLastFullChargeTime(
-                mBatteryStatsHelper, System.currentTimeMillis());
-        final CharSequence timeSequence = StringUtil.formatRelativeTime(mContext,
-                lastFullChargeTime,
-                false);
-        final int resId = showAllApps ? R.string.power_usage_list_summary_device
-                : R.string.power_usage_list_summary;
-        mAppListGroup.setTitle(TextUtils.expandTemplate(mContext.getText(resId), timeSequence));
+        mAppListGroup.setTitle(R.string.power_usage_list_summary);
 
         final PowerProfile powerProfile = statsHelper.getPowerProfile();
         final BatteryStats stats = statsHelper.getStats();

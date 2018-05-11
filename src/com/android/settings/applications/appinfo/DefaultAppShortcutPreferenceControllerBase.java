@@ -46,7 +46,7 @@ public abstract class DefaultAppShortcutPreferenceControllerBase extends BasePre
         if (UserManager.get(mContext).isManagedProfile()) {
             return DISABLED_FOR_USER;
         }
-        return hasAppCapability() ? AVAILABLE : DISABLED_UNSUPPORTED;
+        return hasAppCapability() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -63,7 +63,7 @@ public abstract class DefaultAppShortcutPreferenceControllerBase extends BasePre
             new SubSettingLauncher(mContext)
                     .setDestination(DefaultAppSettings.class.getName())
                     .setArguments(bundle)
-                    .setTitle(R.string.configure_apps)
+                    .setTitleRes(R.string.configure_apps)
                     .setSourceMetricsCategory(MetricsProto.MetricsEvent.VIEW_UNKNOWN)
                     .launch();
             return true;

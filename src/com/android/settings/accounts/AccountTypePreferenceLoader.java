@@ -235,7 +235,7 @@ public class AccountTypePreferenceLoader {
                     ? ((Instrumentable) mFragment).getMetricsCategory()
                     : Instrumentable.METRICS_CATEGORY_UNKNOWN;
             new SubSettingLauncher(preference.getContext())
-                    .setTitle(mTitleRes)
+                    .setTitleRes(mTitleRes)
                     .setDestination(mClass)
                     .setSourceMetricsCategory(metricsCategory)
                     .launch();

@@ -105,7 +105,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
         new SubSettingLauncher(context)
                 .setDestination(AppManagementFragment.class.getName())
                 .setArguments(args)
-                .setTitle(pref.getLabel())
+                .setTitleText(pref.getLabel())
                 .setSourceMetricsCategory(sourceMetricsCategory)
                 .setUserHandle(new UserHandle(pref.getUserId()))
                 .launch();

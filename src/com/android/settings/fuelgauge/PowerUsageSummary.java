@@ -285,7 +285,7 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
                 new SubSettingLauncher(getContext())
                         .setDestination(PowerUsageAdvanced.class.getName())
                         .setSourceMetricsCategory(getMetricsCategory())
-                        .setTitle(R.string.advanced_battery_title)
+                        .setTitleRes(R.string.advanced_battery_title)
                         .launch();
                 return true;
             default:

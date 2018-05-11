@@ -30,7 +30,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
 /**
@@ -49,23 +48,36 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
      * {@link #isSupported()}.
      */
     @Retention(RetentionPolicy.SOURCE)
-    @IntDef({AVAILABLE, DISABLED_UNSUPPORTED, DISABLED_FOR_USER, DISABLED_DEPENDENT_SETTING,
-            UNAVAILABLE_UNKNOWN})
+    @IntDef({AVAILABLE, AVAILABLE_UNSEARCHABLE, UNSUPPORTED_ON_DEVICE, DISABLED_FOR_USER,
+            DISABLED_DEPENDENT_SETTING, CONDITIONALLY_UNAVAILABLE})
     public @interface AvailabilityStatus {
     }
 
     /**
-     * The setting is available.
+     * The setting is available, and searchable to all search clients.
      */
     public static final int AVAILABLE = 0;
 
     /**
-     * The setting is not supported by the device.
+     * The setting is available, but is not searchable to any search client.
+     */
+    public static final int AVAILABLE_UNSEARCHABLE = 1;
+
+    /**
+     * A generic catch for settings which are currently unavailable, but may become available in
+     * the future. You should use {@link #DISABLED_FOR_USER} or {@link #DISABLED_DEPENDENT_SETTING}
+     * if they describe the condition more accurately.
+     */
+    public static final int CONDITIONALLY_UNAVAILABLE = 2;
+
+    /**
+     * The setting is not, and will not supported by this device.
      * <p>
      * There is no guarantee that the setting page exists, and any links to the Setting should take
      * you to the home page of Settings.
      */
-    public static final int DISABLED_UNSUPPORTED = 1;
+    public static final int UNSUPPORTED_ON_DEVICE = 3;
+
 
     /**
      * The setting cannot be changed by the current user.
@@ -73,7 +85,7 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
      * Links to the Setting should take you to the page of the Setting, even if it cannot be
      * changed.
      */
-    public static final int DISABLED_FOR_USER = 2;
+    public static final int DISABLED_FOR_USER = 4;
 
     /**
      * The setting has a dependency in the Settings App which is currently blocking access.
@@ -90,15 +102,8 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
      * Links to the Setting should take you to the page of the Setting, even if it cannot be
      * changed.
      */
-    public static final int DISABLED_DEPENDENT_SETTING = 3;
+    public static final int DISABLED_DEPENDENT_SETTING = 5;
 
-    /**
-     * A catch-all case for internal errors and inexplicable unavailability.
-     * <p>
-     * There is no guarantee that the setting page exists, and any links to the Setting should take
-     * you to the home page of Settings.
-     */
-    public static final int UNAVAILABLE_UNKNOWN = 4;
 
     protected final String mPreferenceKey;
 
@@ -181,8 +186,8 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
     @Override
     public final boolean isAvailable() {
         final int availabilityStatus = getAvailabilityStatus();
-        return (availabilityStatus == AVAILABLE) ||
-                (availabilityStatus == DISABLED_DEPENDENT_SETTING);
+        return (availabilityStatus == AVAILABLE
+                || availabilityStatus == DISABLED_DEPENDENT_SETTING);
     }
 
     /**
@@ -193,7 +198,7 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
      * Note that a return value of {@code true} does not mean that the setting is available.
      */
     public final boolean isSupported() {
-        return getAvailabilityStatus() != DISABLED_UNSUPPORTED;
+        return getAvailabilityStatus() != UNSUPPORTED_ON_DEVICE;
     }
 
     /**

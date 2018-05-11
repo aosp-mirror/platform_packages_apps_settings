@@ -66,7 +66,7 @@ public class AccountSyncPreferenceController extends AbstractPreferenceControlle
                 .setDestination(AccountSyncSettings.class.getName())
                 .setArguments(args)
                 .setSourceMetricsCategory( MetricsProto.MetricsEvent.ACCOUNT)
-                .setTitle( R.string.account_sync_title)
+                .setTitleRes( R.string.account_sync_title)
                 .launch();
 
         return true;

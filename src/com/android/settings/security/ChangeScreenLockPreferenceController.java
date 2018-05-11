@@ -129,7 +129,7 @@ public class ChangeScreenLockPreferenceController extends AbstractPreferenceCont
 
         new SubSettingLauncher(mContext)
                 .setDestination(ChooseLockGeneric.ChooseLockGenericFragment.class.getName())
-                .setTitle(R.string.lock_settings_picker_title)
+                .setTitleRes(R.string.lock_settings_picker_title)
                 .setSourceMetricsCategory(mHost.getMetricsCategory())
                 .launch();
         return true;

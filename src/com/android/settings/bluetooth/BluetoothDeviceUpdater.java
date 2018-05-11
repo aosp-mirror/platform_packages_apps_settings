@@ -241,7 +241,7 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
         new SubSettingLauncher(mFragment.getContext())
                 .setDestination(BluetoothDeviceDetailsFragment.class.getName())
                 .setArguments(args)
-                .setTitle(R.string.device_details_title)
+                .setTitleRes(R.string.device_details_title)
                 .setSourceMetricsCategory(mFragment.getMetricsCategory())
                 .launch();
     }

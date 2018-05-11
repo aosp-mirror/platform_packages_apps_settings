@@ -82,7 +82,7 @@ public class UserProfileController extends AbstractPreferenceController implemen
             new SubSettingLauncher(mContext)
                     .setDestination(StorageProfileFragment.class.getName())
                     .setArguments(args)
-                    .setTitle(mUser.name)
+                    .setTitleText(mUser.name)
                     .setSourceMetricsCategory(MetricsProto.MetricsEvent.DEVICEINFO_STORAGE)
                     .launch();
             return true;

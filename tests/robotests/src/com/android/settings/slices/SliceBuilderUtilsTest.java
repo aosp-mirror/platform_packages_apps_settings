@@ -24,6 +24,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
+import android.app.PendingIntent;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -329,7 +330,7 @@ public class SliceBuilderUtilsTest {
                 SliceData.SliceType.SWITCH);
         Settings.Global.putInt(mContext.getContentResolver(),
                 FakeUnavailablePreferenceController.AVAILABILITY_KEY,
-                BasePreferenceController.DISABLED_UNSUPPORTED);
+                BasePreferenceController.UNSUPPORTED_ON_DEVICE);
 
         final Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
 
@@ -372,12 +373,12 @@ public class SliceBuilderUtilsTest {
     }
 
     @Test
-    public void testUnavailableUnknownSlice_validTitleSummary() {
+    public void testConditionallyUnavailableSlice_validTitleSummary() {
         final SliceData data = getDummyData(FakeUnavailablePreferenceController.class,
                 SliceData.SliceType.SWITCH);
         Settings.Global.putInt(mContext.getContentResolver(),
                 FakeUnavailablePreferenceController.AVAILABILITY_KEY,
-                BasePreferenceController.UNAVAILABLE_UNKNOWN);
+                BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
 
         final Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
 
@@ -403,6 +404,16 @@ public class SliceBuilderUtilsTest {
         final Uri intentData = intent.getData();
 
         assertThat(intentData).isEqualTo(expectedUri);
+    }
+
+    @Test
+    public void getSettingsIntent_createsIntentToSettings() {
+        final Intent intent = new Intent(Settings.ACTION_SETTINGS);
+        final PendingIntent expectedIntent = PendingIntent.getActivity(mContext, 0, intent, 0);
+
+        final PendingIntent settingsIntent = SliceBuilderUtils.getSettingsIntent(mContext);
+
+        assertThat(expectedIntent).isEqualTo(settingsIntent);
     }
 
     private SliceData getDummyData() {

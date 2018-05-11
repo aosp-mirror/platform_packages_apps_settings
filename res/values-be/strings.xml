@@ -593,11 +593,31 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Занадта шмат няўдалых спроб. Гэты карыстальнік будзе выдалены."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Занадта шмат няўдалых спроб. Гэты рабочы профіль і звязаныя з ім даныя будуць выдалены."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Адхіліць"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Павінен змяшчаць не менш за наступную колькасць сімвалаў: <xliff:g id="COUNT">%d</xliff:g>"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"PIN-код павінен змяшчаць не менш за наступную колькасць лічбаў: <xliff:g id="COUNT">%d</xliff:g>"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="one">Павінна ўтрымліваць не менш як <xliff:g id="COUNT_1">%d</xliff:g> сімвал</item>
+      <item quantity="few">Павінна ўтрымліваць не менш як <xliff:g id="COUNT_1">%d</xliff:g> сімвалы</item>
+      <item quantity="many">Павінна ўтрымліваць не менш як <xliff:g id="COUNT_1">%d</xliff:g> сімвалаў</item>
+      <item quantity="other">Павінна ўтрымліваць не менш як <xliff:g id="COUNT_1">%d</xliff:g> сімвала</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="one">PIN-код павінен утрымліваць не менш як <xliff:g id="COUNT_1">%d</xliff:g> лічбу</item>
+      <item quantity="few">PIN-код павінен утрымліваць не менш як <xliff:g id="COUNT_1">%d</xliff:g> лічбы</item>
+      <item quantity="many">PIN-код павінен утрымліваць не менш як <xliff:g id="COUNT_1">%d</xliff:g> лічбаў</item>
+      <item quantity="other">PIN-код павінен утрымліваць не менш як <xliff:g id="COUNT_1">%d</xliff:g> лічбы</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Працягнуць"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"Павінен змяшчаць менш за наступную колькасць сімвалаў: <xliff:g id="NUMBER">%d</xliff:g>"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Павінен змяшчаць менш за наступную колькасць лічбаў: <xliff:g id="NUMBER">%d</xliff:g>"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="one">Павінна быць менш як <xliff:g id="NUMBER_1">%d</xliff:g> сімвал</item>
+      <item quantity="few">Павінна быць менш як <xliff:g id="NUMBER_1">%d</xliff:g> сімвалы</item>
+      <item quantity="many">Павінна быць менш як <xliff:g id="NUMBER_1">%d</xliff:g> сімвалаў</item>
+      <item quantity="other">Павінна быць менш як <xliff:g id="NUMBER_1">%d</xliff:g> сімвала</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="one">Павінна быць менш як <xliff:g id="NUMBER_1">%d</xliff:g> лічба</item>
+      <item quantity="few">Павінна быць менш як <xliff:g id="NUMBER_1">%d</xliff:g> лічбы</item>
+      <item quantity="many">Павінна быць менш як <xliff:g id="NUMBER_1">%d</xliff:g> лічбаў</item>
+      <item quantity="other">Павінна быць менш як <xliff:g id="NUMBER_1">%d</xliff:g> лічбы</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Павінен змяшчаць толькі лічбы 0-9"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Адміністратар прылады не дазваляе выкарыстоўваць апошні PIN-код"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"IT адміністратар блакіруе папулярныя PIN-коды. Паспрабуйце іншы PIN-код."</string>
@@ -1949,8 +1969,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Элементы кіравання ўзаемадзеяннем"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Спампаваныя сэрвісы"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Эксперыментальныя"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Эксперыментальныя функцыі"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Праграма для чытання з экрана прызначана ў першую чаргу для сляпых людзей і людзей са слабым зрокам"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Дакранайцеся да элементаў на экране, каб пачуць, як іх чытаюць услых"</string>
@@ -3149,10 +3168,10 @@
     <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"Калі ўключаны рэжым \"Не турбаваць\""</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"Выключыць гук апавяшчэнняў"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"Паказваць апавяшчэнні, але выключыць гук і вібрацыю"</string>
-    <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"Падчас паступлення новых апавяшчэнняў тэлефон не выдае гук і не вібрыруе"</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"Калі будуць прыходзіць новыя апавяшчэнні, тэлефон не будзе званіць ці вібрыраваць"</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"Схаваць апавяшчэнні і выключыць іх гук"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"Апавяшчэнні ўвогуле не адлюстроўваюцца"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"Калі рэжым \"Не турбаваць\" уключаны, вы не бачыце новыя ці існуючыя апавяшчэнні. Аднак стан і апавяшчэнні, неабходныя для забеспячэння базавых дзеянняў тэлефона, адлюстоўваюцца."</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"Калі рэжым \"Не турбаваць\" уключаны, усе апавяшчэнні, акрамя неабходных для забеспячэння базавых дзеянняў тэлефона, будуць схаваны."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"Карыстальніцкія налады"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"Уключыць карыстальніцкую наладу"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"Выдаліць карыстальніцкую наладу"</string>
@@ -3208,13 +3227,14 @@
       <item quantity="many">Аўтаматычна ўключаць могуць <xliff:g id="ON_COUNT">%d</xliff:g> правіл</item>
       <item quantity="other">Аўтаматычна ўключаць могуць <xliff:g id="ON_COUNT">%d</xliff:g> правіла</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"OK"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Абнавіць"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Не абнаўляць"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"Ваш тэлефон можа дапамагчы вам сканцэнтравацца.\n\nЗмяніце налады наступным чынам:\n\n- Схаваць усе апавяшчэнні\n\n- Дазволіць выклікі з пазначаных кантактаў і абанентаў, якія выклікаюць паўторна"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"Абнавіць рэжым \"Не турбаваць\"?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Налады"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Наладзіць можна і пазней у раздзеле \"Налады\"."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Блакіраваць, калі экран уключаны"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Блакіраваць, калі экран выключаны"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"У рэжыме \"Не турбаваць\" блакіруюцца не толькі непажаданыя гукі, але і візуальныя элементы. Гэта асабліва карысна, калі карыстальнік спрабуе заснуць, хоча скараціць час карыстання тэлефонам ці яму нельга страчваць увагу."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Блакіраваць гукі і візуальныя элементы"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Не згортваць і не ўключаць экран для апавяшчэнняў"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Паказваць толькі апавяшчэнні пра базавыя дзеянні і статус тэлефона"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Гукі працоўнага профілю"</string>
@@ -3777,7 +3797,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Рэзервовае капіраванне адключана"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Абноўлена да версіі Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"Ёсць абнаўленне"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"Не ўдалося змяніць наладу"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"Дзеянне не дапускаецца"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"Не ўдалося змяніць гучнасць"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"Выклікі забаронены"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"Адпраўка SMS забаронена"</string>
@@ -3979,7 +3999,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Паказваць кантрольную інфармацыю на экране блакiроўцы"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Паказваць ці хаваць змесціва апавяшчэнняў"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Усе"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"Падтрымка і парады"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"Найменшая шырыня"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Няма праграм з доступам да платных SMS"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"За прэміум SMS-доступ з вас можа спаганяцца аплата, гэта можа павялічыць вашыя рахункі за паслугі аператара. Калі вы ўключыце дазвол для праграмы, вы будзеце мець магчымасць адпраўляць прэміум SMS з гэтай праграмы."</string>

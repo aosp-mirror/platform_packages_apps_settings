@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"بہت زیادہ غلط کوششیں۔ اس صارف کو حذف کر دیا جائے گا۔"</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"بہت زیادہ غلط کوششیں۔ یہ دفتری پروفائل اور اس کا ڈیٹا حذف کر دیا جائے گا۔"</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"برخاست کریں"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"کم از کم <xliff:g id="COUNT">%d</xliff:g> حروف پر مشتمل ہونا چاہیے"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"‏PIN کم از کم <xliff:g id="COUNT">%d</xliff:g> ہندسوں کا ہونا چاہیے"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="other">کم از کم <xliff:g id="COUNT_1">%d</xliff:g> حروف پر مشتمل ہونے چاہئیں</item>
+      <item quantity="one">کم از کم <xliff:g id="COUNT_0">%d</xliff:g> حرف پر مشتمل ہونا چاہیے</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="other">‏PIN کا کم از کم <xliff:g id="COUNT_1">%d</xliff:g> ہندسوں پر مشتمل ہونا لازمی ہے</item>
+      <item quantity="one">‏PIN کا کم از کم <xliff:g id="COUNT_0">%d</xliff:g> ہندسہ پر مشتمل ہونا لازمی ہے</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"جاری رکھیں"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"کریکٹرز <xliff:g id="NUMBER">%d</xliff:g> سے کم ہونے چاہئیں"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"ہندسے <xliff:g id="NUMBER">%d</xliff:g> سے کم ہونے چاہئیں۔"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> حروف سے کم ہونے چاہئیں</item>
+      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> حرف سے کم ہونا چاہیے</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g>ہندسوں سے کم ہونے چاہئیں</item>
+      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> ہندسے سے کم ہونا چاہیے</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"‏صرف ‎0-9 ہندسے شامل ہونے چاہئیں"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"‏آلہ کا منتظم ایک حالیہ PIN استعمال کرنے کی اجازت نہیں دیتا ہے"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"‏آپ کے IT منتظم نے عمومی PINs کو مسدود کر دیا ہے۔ کوئی دوسرا PIN آزمائیں۔"</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"تعامل کنٹرولز"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"ڈاؤن لوڈ شدہ سروسز"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"تجرباتی"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"خصوصیت کے پرچم"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"سکرین قاری بنیادی طور پر اندھے پن اور کم بصارت والے لوگوں کیلئے ہے"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"آئٹمز کو بہ آواز بلند پڑھتے ہوئے سننے کیلئے اپنی اسکرین پر ان آئٹمز کو تھپتھپائیں"</string>
@@ -3071,38 +3082,22 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"بصری مداخلتیں مسدود کریں"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"بصری سگنلز کی اجازت دیں"</string>
-    <!-- no translation found for zen_mode_restrict_notifications_screen_title (9027437428488279426) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_title (478040192977063582) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_category (1648631487087638037) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_mute (9210062826172341735) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_mute_summary (285566524371041091) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_mute_footer (8473382758368384982) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_hide (3451553435075518722) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_hide_summary (3823881787175376177) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_hide_footer (4224323933073288352) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_custom (7498689167767941034) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_enable_custom (4250962169561739747) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_disable_custom (6676997522330453597) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_summary_muted (4678779044896459009) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_summary_custom (7416121534987213074) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_summary_hidden (7805339105802282234) -->
-    <skip />
-    <!-- no translation found for zen_mode_what_to_block_title (5480903548365697159) -->
-    <skip />
+    <string name="zen_mode_restrict_notifications_screen_title" msgid="9027437428488279426">"اطلاعات پر پابندی لگائیں"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"اطلاعات"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"جب \"ڈسٹرب نہ کریں\" آن ہو"</string>
+    <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"اطلاعات خاموش کریں"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"اطلاعات دکھائیں لیکن آوازوں اور وائبریشنز کو خاموش کریں"</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"جب اطلاعات آپ تک پہنچیں گی تو آپ کا فون نہ تو آواز کرے گا اور نہ وائبریٹ ہوگا"</string>
+    <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"اطلاعات چھپائیں اور خاموش کریں"</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"اطلاعات بالکل نظر نہیں آئیں گی"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"\"ڈسٹرب نہ کریں\" آن ہونے پر آپ کو نئی یا موجود اطلاعات نظر نہیں آئیں گی۔ تاہم، فون کی بنیادی سرگرمی اور اسٹیٹس کے لئے درکار اطلاعات ابھی بھی نظر آئیں گی۔"</string>
+    <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"حسب ضرورت"</string>
+    <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"حسب ضرورت ترتیب فعال کریں"</string>
+    <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"حسب ضرورت ترتیب ہٹائیں"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"نظر آئیں گی"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"جزوی طور پر پوشیدہ"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"پوشیدہ"</string>
+    <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"حسب ضرورت پابندیاں"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"اسکرین کے آن ہونے پر"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"اسکرین کے آف ہونے پر"</string>
     <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"آواز اور وائبریشن کو خاموش کریں"</string>
@@ -3147,13 +3142,14 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> اصول خود بخود آن ہو جائیں گے</item>
       <item quantity="one">1 اصول خود بخود آن ہو جائے گا</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"ٹھیک ہے"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"اپ ڈیٹ کریں"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"اپ ڈیٹ نہ کریں"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"آپ کا فون توجہ مرکوز کرنے میں آپ کی مدد کرنے کے لیے مزید کچھ کر سکتا ہے۔\n\nذیل میں ترتیبات کو اپ ڈیٹ کریں:\n\n- مکمل طور پر اطلاعات کو چھپائیں\n\n- ستارے کے نشان والے رابطوں اور بار بار کال کرنے والوں سے کالز کی اجازت دیں"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"\'ڈسٹرب نہ کریں\' کو اپ ڈیٹ کریں؟"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"ترتیبات"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"آپ اسے ترتیبات میں مزید حسب ضرورت بنا سکتے ہیں۔"</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"اسکرین آن ہونے پر، مسدود کریں"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"اسکرین آف ہونے پر، مسدود کریں"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"\'ڈسٹرب نہ کریں\' غیر مطلوب آوازوں کو مسدود کرنے کے علاوہ اور بہت کچھ کر سکتا ہے - یہ ویژوئلز کو بھی مسدود کر سکتا ہے۔ اگر آپ سونے، فوکس کرنے یا اپنے فون پر گزرے وقت کو محدود کرنے کی کوشش کر رہے ہیں تو یہ مددگار ثابت ہو سکتا ہے۔"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"آوازوں اور ویژوئلز کو مسدود کریں"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"اسکرین آن نہ کریں یا اطلاعات کے لیے نہ جگائیں"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"اطلاعات بالکل بھی نہ دکھائیں، مگر فون کی بنیادی سرگرمی اور اسٹیٹس کیلئے"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"دفتری پروفائل کی آوازیں"</string>
@@ -3685,7 +3681,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"بیک اپ غیر فعال ہے"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"‏Android <xliff:g id="VERSION">%1$s</xliff:g> پر اپ ڈیٹ کردہ"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"اپ ڈیٹ دستیاب ہے"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"یہ ترتیب تبدیل نہیں کی جا سکتی"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"کارروائی کی اجازت نہیں ہے"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"والیوم تبدیل نہیں کر سکتے"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"کال کرنے کی اجازت نہیں ہے"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"‏SMS کی اجازت نہیں ہے"</string>
@@ -3875,7 +3871,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"مقفل اسکرین پر معلومات کنٹرول کریں"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"اطلاعی مواد دکھائیں یا چھپائیں"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"تمام"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"سپورٹ اور تجاویز"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"سب سے چھوٹی چوڑائی"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"‏کسی انسٹال کردہ ایپ نے پریمیم SMS تک رسائی کی درخواست نہیں کی"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"‏ہو سکتا ہے آپ کو پریمیم SMS کے پیسے ادا کرنا پڑیں اور یہ آپ کے کیرئیر بلز میں شامل ہو جائیں گے۔ اگر آپ ایک ایپ کیلئے اجازت فعال کرتے ہیں تو آپ اس ایپ کو استعمال کرکے آپ پریمیم SMS بھیج پائیں گے۔"</string>

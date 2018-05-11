@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"በጣም ብዙ ትክክል ያልሆኑ ሙከራዎች። ይህ ተጠቃሚ ይሰረዛል።"</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"በጣም ብዙ ትክክል ያልሆኑ ሙከራዎች። የዚህ የሥራ መገለጫ እና ውሂቡ ይሰረዛሉ።"</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"አሰናብት"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"ቢያንስ <xliff:g id="COUNT">%d</xliff:g> ቁምፊዎች መሆን አለበት"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"ፒን ቢያንስ <xliff:g id="COUNT">%d</xliff:g> አኃዞች መሆን አለበት"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="one">ቢያንስ <xliff:g id="COUNT_1">%d</xliff:g> ቁምፊዎች መሆን አለበት</item>
+      <item quantity="other">ቢያንስ <xliff:g id="COUNT_1">%d</xliff:g> ቁምፊዎች መሆን አለበት</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="one">ፒን ቢያንስ <xliff:g id="COUNT_1">%d</xliff:g> አሃዞች መሆን አለበት</item>
+      <item quantity="other">ፒን ቢያንስ <xliff:g id="COUNT_1">%d</xliff:g> አሃዞች መሆን አለበት</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"ቀጥል"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"የይለፍ ቃል ከ<xliff:g id="NUMBER">%d</xliff:g> ቁምፊዎች ያነሰ መሆን አለበት"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"ከ<xliff:g id="NUMBER">%d</xliff:g> አሃዞች ያነሰ መሆን አለበት።"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="one">ከ<xliff:g id="NUMBER_1">%d</xliff:g> ቁምፊዎች ያነሰ መሆን አለበት</item>
+      <item quantity="other">ከ<xliff:g id="NUMBER_1">%d</xliff:g> ቁምፊዎች ያነሰ መሆን አለበት</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="one">ከ<xliff:g id="NUMBER_1">%d</xliff:g> አሃዞች ያነሰ መሆን አለበት</item>
+      <item quantity="other">ከ<xliff:g id="NUMBER_1">%d</xliff:g> አሃዞች ያነሰ መሆን አለበት</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"ከ0-9 የሆኑ አሃዞችን ብቻ ነው መያዝ አለበት"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"የመሣሪያ አስተዳዳሪው የቅርብ ጊዜ ፒን መጠቀም አይፈቅድም"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"የተለመዱ ፒኖች በአይቲ አስተዳዳሪዎ የታገዱ ናቸው። የተለየ ፒን ይሞክሩ።"</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"የመስተጋብር መቆጣጠሪያዎች"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"የወረዱ አገልግሎቶች"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"የሙከራ"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"የባህሪ ጥቆማዎች"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"በዋነኝነት ማየት የተሳናቸው ወይም የማየት ችሎታቸው ዝቅተኛ ለሆኑ ሰዎች የሆነ የማያ ገጽ አንባቢ"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"በማያ ገጽዎ ላይ ያሉ ንጥሎች ጮክ ተብለው ሲነበቡ ለማዳመጥ መታ ያድርጓቸው"</string>
@@ -3133,13 +3144,14 @@
       <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> ደንቦች በራስሰር ሊበሩ ይችላሉ</item>
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> ደንቦች በራስሰር ሊበሩ ይችላሉ</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"እሺ"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"አዘምን"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"አታዘምን"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"የእርስዎ ስልክ ይበልጥ እርስዎ ትኩረት እንዲያደርጉ ሊያግዝዎት ይችላል።\n\nለዚህ ቅንብሮችን ያዘምኑ፦\n\n- ማሳወቂያዎችን ሙሉ በሙሉ ይደብቁ\n\n- ኮከብ ከተደረገባቸው እውቂያዎች እና ተደጋጋሚ ደዋዮች ጥሪዎችን ይፍቀዱ"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"አትረብሽ ይዘመን?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"ቅንብሮች"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"ይህን በተጨማሪ በቅንብሮች ውስጥ ይበልጥ ብጁ ሊያደርጉት ይችላሉ።"</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"ማያ ገጹ ሲበራ አግድ"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"ማያ ገጹ ሲጠፋ አግድ"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"አትረብሽ የማይፈለጉ ድምፆችን ከማገድ በላይ ሊያደርግ ይችላል - ምስሎችንም ማገድ ይችላል። ይህ በተለይ እርስዎ ለመተኛት፣ ለማተኮር ወይም በስልክ ላይ የሚጠፋውን ጊዜ ለመገደብ እየሞከሩ ያሉ ከሆነ አጋዥ ሊሆን ይችላል።"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"ድምፆችን እና ምስሎችን አግድ"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"ማያ ገጹን ለማሳወቂያ አታብራ ወይም አትቀስቅስ"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"ለመሠረታዊ የስልክ እንቅስቃሴ እና ሁኔታ ካልሆነ በስተቀር በጭራሽ ማሳወቂያዎችን አታሳይ"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"የስራ መገለጫ ድምጾች"</string>
@@ -3671,7 +3683,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"ምትኬ ተሰናክሏል"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"ወደ Android <xliff:g id="VERSION">%1$s</xliff:g> ተዘምኗል"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"ዝማኔ ይገኛል"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"ይህን ቅንብር መለወጥ አይቻልም"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"እርምጃ አይፈቀድም"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"የድምጽ መጠንን መለወጥ አይቻልም"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"መደወል አልተፈቀደም"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"ኤስኤምኤስ አልተፈቀደም"</string>
@@ -3861,7 +3873,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"በማያ ገጽ መቆለፊያ ላይ የቁጥጥር መረጃ"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"የማሳወቂያ ይዘት አሳይ ወይም ደብቅ"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"ሁሉም"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"ድጋፍ እና ጠቃሚ ምክሮች"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"አነስተኛ ስፋት"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"ምንም የተጫኑ መተግበሪያዎች የፕሪሚየም ኤስኤምኤስ መዳረሻ አልጠየቁም"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"ፕሪሚየም ኤስኤምኤስ ውድ ገንዘብ ሊያስወጣዎት ይችላል፣ እና በአገልግሎት አቅራቢ ክፍያዎ ላይ ሒሳብ ያስጨምርብዎታል። ለመተግበሪያ ፈቃድን ካነቁ ያንን መተግበሪያ በመጠቀም ፕሪሚየም ኤስኤምኤስ መላክ ይችላሉ።"</string>

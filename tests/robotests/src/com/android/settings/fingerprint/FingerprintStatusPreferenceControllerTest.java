@@ -17,7 +17,7 @@
 package com.android.settings.fingerprint;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController.DISABLED_UNSUPPORTED;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
@@ -84,7 +84,7 @@ public class FingerprintStatusPreferenceControllerTest {
     public void getAvailabilityStatus_noFingerprintManger_DISABLED() {
         when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_UNSUPPORTED);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test

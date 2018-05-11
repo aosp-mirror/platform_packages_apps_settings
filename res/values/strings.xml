@@ -414,13 +414,15 @@
     <!-- Title for connected device group [CHAR LIMIT=none]-->
     <string name="connected_device_saved_title">Saved devices</string>
     <!-- Title for preference to add a device [CHAR LIMIT=none]-->
-    <string name="connected_device_add_device_title">Add device</string>
+    <string name="connected_device_add_device_title">Pair new device</string>
     <!-- Summary for preference to add a device [CHAR LIMIT=none]-->
     <string name="connected_device_add_device_summary">Bluetooth will turn on to pair</string>
     <!-- Title for other connection preferences [CHAR LIMIT=none]-->
     <string name="connected_device_connections_title">Connection preferences</string>
     <!-- Title for Bluetooth preference to open paired but no connection list [CHAR LIMIT=none]-->
     <string name="connected_device_previously_connected_title">Previously connected devices</string>
+    <!-- Preference screen title for Bluetooth preference to open paired but no connection list [CHAR LIMIT=none]-->
+    <string name="connected_device_previously_connected_screen_title">Previously connected</string>
 
     <!-- Date & time settings screen title -->
     <string name="date_and_time">Date &amp; time</string>
@@ -3388,6 +3390,8 @@
     <!-- Master Clear -->
     <!-- Button title to factory data reset the entire device -->
     <string name="master_clear_title">Erase all data (factory reset)</string>
+    <!-- Button title to factory data reset the entire device. The "(factory reset)" part is optional for translation. [CHAR LIMIT=30 BACKUP_MESSAGE_ID=3531267871084279512]-->
+    <string name="master_clear_short_title">Erase all data (factory reset)</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
     <string name="master_clear_desc" product="tablet">"This will erase all data from your tablet\u2019s <b>internal storage</b>, including:\n\n<li>Your Google account</li>\n<li>System and app data and settings</li>\n<li>Downloaded apps</li>"</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
@@ -4058,12 +4062,6 @@
     <string name="join_two_items"><xliff:g id="first_item">%1$s</xliff:g> and <xliff:g id="second_item">%2$s</xliff:g></string>
     <!-- [CHAR_LIMIT=NONE] Format to put together two unrelated items in a list when "and" is not an appropriate conjunction for these 2 items -->
     <string name="join_two_unrelated_items"><xliff:g id="first_item">%1$s</xliff:g>, <xliff:g id="second_item">%2$s</xliff:g></string>
-    <!-- [CHAR_LIMIT=NONE] Format to put the last item at the end of a series of 3 or more items in a list -->
-    <string name="join_many_items_last"><xliff:g id="all_but_last_item">%1$s</xliff:g>, and <xliff:g id="last_item">%2$s</xliff:g></string>
-    <!-- [CHAR_LIMIT=NONE] Format to put the first item at the start of a series of 3 or more items in a list -->
-    <string name="join_many_items_first"><xliff:g id="first_item">%1$s</xliff:g>, <xliff:g id="all_but_first_and_last_item">%2$s</xliff:g></string>
-    <!-- [CHAR_LIMIT=NONE] Format to put the middle items together in a series of 4 or more items in a list -->
-    <string name="join_many_items_middle"><xliff:g id="added_item">%1$s</xliff:g>, <xliff:g id="rest_of_items">%2$s</xliff:g></string>
     <!-- Manage applications, individual application info screen, text that appears under the "Permissions" heading after the app has tried to send to a premium SMS. [CHAR LIMIT=50] -->
     <string name="security_settings_billing_desc">This app may charge you money:</string>
     <!-- Manage applications, text for permission to send to premium SMS short codes. [CHAR LIMIT=40] -->
@@ -4926,9 +4924,7 @@
     <string name="device_cellular_network">Mobile network scanning</string>
 
     <!-- Label for list of apps using battery in power use UI. Note: ^1 should be used in all translations[CHAR_LIMIT=120] -->
-    <string name="power_usage_list_summary">App usage since full charge (<xliff:g id="relative_time">^1</xliff:g>)</string>
-    <!-- Label for device components using battery in power use UI. Note: ^1 should be used in all translations[CHAR_LIMIT=120] -->
-    <string name="power_usage_list_summary_device">Device usage since full charge (<xliff:g id="relative_time">^1</xliff:g>)</string>
+    <string name="power_usage_list_summary">Battery usage since full charge</string>
     <!-- Temp string used to debug new battery estimates [DO NOT TRANSLATE] -->
     <string name="power_usage_enhanced_debug" translatable="false"><xliff:g id="time">%1$s</xliff:g> left (New ML est)</string>
     <!-- Temp string used to debug old battery estimates [DO NOT TRANSLATE] -->
@@ -4997,9 +4993,13 @@
     <string name="battery_abnormal_apps_summary"><xliff:g id="number">%1$d</xliff:g> apps misbehaving</string>
 
     <!-- Title for the battery summary tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_summary_title">Battery is in good shape</string>
+    <string name="battery_tip_summary_title">Apps are running normally</string>
     <!-- Summary for the battery summary tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_summary_summary">Apps are running normally</string>
+    <string name="battery_tip_summary_summary" product="default">Phone has typical background battery usage</string>
+    <!-- Summary for the battery summary tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_summary_summary" product="tablet">Tablet has typical background battery usage</string>
+    <!-- Summary for the battery summary tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_summary_summary" product="device">Device has typical background battery usage</string>
     <!-- Title for the low battery tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_low_battery_title">Low battery capacity</string>
     <!-- Summary for the low battery tip [CHAR LIMIT=NONE] -->
@@ -5029,11 +5029,11 @@
     <!-- Summary for the battery high usage tip, which presents battery may run out soon [CHAR LIMIT=NONE] -->
     <string name="battery_tip_high_usage_summary">Battery may run out soon</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="default">Your phone has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps since last full charge(<xliff:g id="time_period_ago" example="1 hr ago">%2$s</xliff:g>):</string>
+    <string name="battery_tip_dialog_message" product="default">Your phone has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps you used since full charge:</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="tablet">Your tablet has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps since last full charge(<xliff:g id="time_period_ago" example="1 hr ago">%2$s</xliff:g>):</string>
+    <string name="battery_tip_dialog_message" product="tablet">Your tablet has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps you used since full charge:</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="device">Your device has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps since last full charge(<xliff:g id="time_period_ago" example="1 hr ago">%2$s</xliff:g>):</string>
+    <string name="battery_tip_dialog_message" product="device">Your device has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps you used since full charge:</string>
     <!-- Title for restricted app preference, showing how many app need to be restricted [CHAR LIMIT=NONE] -->
     <plurals name="battery_tip_restrict_title">
         <item quantity="one">Restrict %1$d app</item>
@@ -5078,9 +5078,11 @@
     <string name="battery_tip_unrestrict_app_dialog_cancel">Cancel</string>
 
     <!-- Message for battery tip dialog to show the battery summary -->
-    <string name="battery_tip_dialog_summary_message">Based on your usage, your battery usually lasts about <xliff:g id="time_duration">%1$s</xliff:g> when fully charged.\n\nIf you need to extend your battery life, turn on Battery Saver.</string>
+    <string name="battery_tip_dialog_summary_message" product="default">Your apps are using a normal amount of battery. If apps use too much battery, your phone will suggest actions you can take.\n\nYou can always turn on Battery Saver if you\u2019re running low on battery.</string>
     <!-- Message for battery tip dialog to show the battery summary -->
-    <string name="battery_tip_dialog_summary_message_no_estimation">If you need to extend your battery life, turn on Battery Saver</string>
+    <string name="battery_tip_dialog_summary_message" product="tablet">Your apps are using a normal amount of battery. If apps use too much battery, your tablet will suggest actions you can take.\n\nYou can always turn on Battery Saver if you\u2019re running low on battery.</string>
+    <!-- Message for battery tip dialog to show the battery summary -->
+    <string name="battery_tip_dialog_summary_message" product="device">Your apps are using a normal amount of battery. If apps use too much battery, your device will suggest actions you can take.\n\nYou can always turn on Battery Saver if you\u2019re running low on battery.</string>
 
     <!-- Title for the smart battery manager preference [CHAR LIMIT=NONE] -->
     <string name="smart_battery_manager_title">Battery Manager</string>
@@ -8842,7 +8844,7 @@
     <!-- Summary of Android version info (when there is a pending upgrade available) [CHAR LIMIT=NONE] -->
     <string name="android_version_pending_update_summary">Update available</string>
 
-    <!-- Title for dialog displayed when user selects on a setting locked by an admin [CHAR LIMIT=30] -->
+    <!-- Title for dialog displayed when user selects on a setting locked by an admin [CHAR LIMIT=30 BACKUP_MESSAGE_ID:4867639270211833535] -->
     <string name="disabled_by_policy_title">Action not allowed</string>
     <!-- Title for dialog displayed to tell user that changing volume was disallowed by an admin [CHAR LIMIT=50] -->
     <string name="disabled_by_policy_title_adjust_volume">Can’t change volume</string>
@@ -9149,7 +9151,7 @@
     <!-- Informational text about time left in billing cycle [CHAR LIMIT=60] -->
     <string name="billing_cycle_less_than_one_day_left">Less than 1 day left</string>
 
-    <!-- Informational text about carrier and update time [CHAR LIMIT=30] -->
+    <!-- Informational text about carrier and update time [CHAR LIMIT=32] -->
     <string name="carrier_and_update_text">Updated by <xliff:g name="carrier" example="T-mobile">^1</xliff:g> <xliff:g name="time" example="3m">^2</xliff:g> ago</string>
 
     <!-- Informational text about update time only, without carrier. First argument intentionally skipped. [CHAR LIMIT=30] -->
@@ -9808,6 +9810,9 @@
 
     <!-- Help URI, battery saver page [DO NOT TRANSLATE] -->
     <string name="help_url_battery_saver_settings" translatable="false"></string>
+
+    <!-- Help URI, smart battery page [DO NOT TRANSLATE] -->
+    <string name="help_uri_smart_battery_settings" translatable="false"></string>
 
     <!-- Title label for new device suggestion, which is displayed in Settings homepage [CHAR LIMIT=100] -->
     <string name="new_device_suggestion_title">What\'s new and exciting?</string>

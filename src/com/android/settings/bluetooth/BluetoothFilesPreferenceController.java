@@ -26,7 +26,6 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /**
@@ -57,7 +56,7 @@ public class BluetoothFilesPreferenceController extends BasePreferenceController
     public int getAvailabilityStatus() {
         return mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)
                 ? AVAILABLE
-                : DISABLED_UNSUPPORTED;
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

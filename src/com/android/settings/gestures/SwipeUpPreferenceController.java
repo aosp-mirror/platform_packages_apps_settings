@@ -19,17 +19,11 @@ package com.android.settings.gestures;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
-import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
-import androidx.annotation.VisibleForTesting;
-import android.text.TextUtils;
 
 import com.android.settings.R;
-import com.android.settings.Utils;
 
 public class SwipeUpPreferenceController extends GesturePreferenceController {
 
@@ -59,7 +53,7 @@ public class SwipeUpPreferenceController extends GesturePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        return isGestureAvailable(mContext) ? AVAILABLE : DISABLED_UNSUPPORTED;
+        return isGestureAvailable(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

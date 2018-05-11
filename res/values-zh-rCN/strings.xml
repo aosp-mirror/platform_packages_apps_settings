@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"错误次数过多。系统将删除此用户。"</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"错误次数过多。系统将删除此工作资料和相关数据。"</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"关闭"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"必须至少包含 <xliff:g id="COUNT">%d</xliff:g> 个字符"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"PIN 码必须至少为 <xliff:g id="COUNT">%d</xliff:g> 位数"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="other">必须包含至少 <xliff:g id="COUNT_1">%d</xliff:g> 个字符</item>
+      <item quantity="one">必须包含至少 <xliff:g id="COUNT_0">%d</xliff:g> 个字符</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="other">PIN 码必须包含至少 <xliff:g id="COUNT_1">%d</xliff:g> 位数</item>
+      <item quantity="one">PIN 码必须包含至少 <xliff:g id="COUNT_0">%d</xliff:g> 位数</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"继续"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"必须少于 <xliff:g id="NUMBER">%d</xliff:g> 个字符"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"必须少于 <xliff:g id="NUMBER">%d</xliff:g> 位数"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="other">必须少于 <xliff:g id="NUMBER_1">%d</xliff:g> 个字符</item>
+      <item quantity="one">必须少于 <xliff:g id="NUMBER_0">%d</xliff:g> 个字符</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="other">必须少于 <xliff:g id="NUMBER_1">%d</xliff:g> 位数</item>
+      <item quantity="one">必须少于 <xliff:g id="NUMBER_0">%d</xliff:g> 位数</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"只能包含 0-9 的数字"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"设备管理员不允许使用最近用过的 PIN 码"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"常用 PIN 码已被您的 IT 管理员屏蔽。请尝试一个不同的 PIN 码。"</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"互动控件"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"已下载的服务"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"实验性功能"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"功能标记"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"屏幕阅读器主要适用于盲人和视力不佳的人士"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"点按屏幕上的内容即可让系统大声朗读出来"</string>
@@ -3073,38 +3084,22 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>：<xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"屏蔽视觉打扰"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"允许视觉信号"</string>
-    <!-- no translation found for zen_mode_restrict_notifications_screen_title (9027437428488279426) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_title (478040192977063582) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_category (1648631487087638037) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_mute (9210062826172341735) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_mute_summary (285566524371041091) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_mute_footer (8473382758368384982) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_hide (3451553435075518722) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_hide_summary (3823881787175376177) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_hide_footer (4224323933073288352) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_custom (7498689167767941034) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_enable_custom (4250962169561739747) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_disable_custom (6676997522330453597) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_summary_muted (4678779044896459009) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_summary_custom (7416121534987213074) -->
-    <skip />
-    <!-- no translation found for zen_mode_restrict_notifications_summary_hidden (7805339105802282234) -->
-    <skip />
-    <!-- no translation found for zen_mode_what_to_block_title (5480903548365697159) -->
-    <skip />
+    <string name="zen_mode_restrict_notifications_screen_title" msgid="9027437428488279426">"限制通知"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"通知"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"开启勿扰模式时"</string>
+    <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"忽略通知"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"显示通知，但关闭提示音和振动"</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"手机收到新通知时不会发出提示音，也不会振动"</string>
+    <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"隐藏并忽略通知"</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"根本不显示通知"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"开启勿扰模式后，您将不会看到任何新通知和现有的通知。不过，系统仍会显示基本手机活动和状态所需的通知。"</string>
+    <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"自定义"</string>
+    <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"启用自定义设置"</string>
+    <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"移除自定义设置"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"显示"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"隐藏部分通知"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"隐藏"</string>
+    <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"自定义限制"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"屏幕开启时"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"屏幕关闭时"</string>
     <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"关闭提示音和振动"</string>
@@ -3149,13 +3144,14 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> 个规则可以自动开启</item>
       <item quantity="one">1 个规则可以自动开启</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"确定"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"更新"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"不更新"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"您的手机可提供更多协助您保持专注的功能。\n\n您可以将设置更新为：\n\n- 完全隐藏通知\n\n- 允许下列对象来电：已加星标的联系人和重复来电者"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"要更新勿扰模式吗？"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"设置"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"您可以在“设置”中进一步自定义这项设置。"</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"屏幕开启时屏蔽"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"屏幕关闭时屏蔽"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"勿扰模式不仅可以屏蔽不需要的声音，还可以屏蔽视觉干扰。如果您正打算入睡、集中注意力或限制使用手机的时间，这一功能会很有用。"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"屏蔽声音和视觉干扰"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"不要在收到通知时开启屏幕或唤醒设备"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"不显示任何通知（除了基本手机活动和状态）"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"工作资料提示音"</string>
@@ -3687,7 +3683,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"备份功能已停用"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"已更新至 Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"有新版本可用"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"无法更改此设置"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"不允许执行此操作"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"无法调节音量"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"不允许使用通话功能"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"不允许使用短信功能"</string>
@@ -3877,7 +3873,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"控制锁定屏幕上显示的信息"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"显示或隐藏通知内容"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"全部"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"支持和提示"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"最小宽度"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"没有任何已安装的应用申请付费短信权限"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"“付费短信”可能会产生费用，而且相关费用将计入您的运营商帐单。如果您为某个应用启用该权限，那么您将能够使用该应用发送付费短信。"</string>

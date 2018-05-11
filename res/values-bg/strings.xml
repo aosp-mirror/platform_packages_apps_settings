@@ -587,11 +587,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Твърде много неправилни опити. Този потребител ще бъде изтрит."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Твърде много неправилни опити. Този служебен потребителски профил и данните в него ще бъдат изтрити."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Отхвърляне"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Трябва да съдържа поне <xliff:g id="COUNT">%d</xliff:g> знака"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"ПИН кодът трябва да съдържа поне <xliff:g id="COUNT">%d</xliff:g> цифри"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="other">Трябва да съдържа поне <xliff:g id="COUNT_1">%d</xliff:g> знака</item>
+      <item quantity="one">Трябва да съдържа поне <xliff:g id="COUNT_0">%d</xliff:g> знак</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="other">ПИН кодът трябва да съдържа поне <xliff:g id="COUNT_1">%d</xliff:g> цифри</item>
+      <item quantity="one">ПИН кодът трябва да съдържа поне <xliff:g id="COUNT_0">%d</xliff:g> цифра</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Напред"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"Трябва да съдържа по-малко от <xliff:g id="NUMBER">%d</xliff:g> знака"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Трябва да съдържа по-малко от <xliff:g id="NUMBER">%d</xliff:g> цифри"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="other">Трябва да съдържа по-малко от <xliff:g id="NUMBER_1">%d</xliff:g> знака</item>
+      <item quantity="one">Трябва да съдържа по-малко от <xliff:g id="NUMBER_0">%d</xliff:g> знак</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="other">Трябва да съдържа по-малко от <xliff:g id="NUMBER_1">%d</xliff:g> цифри</item>
+      <item quantity="one">Трябва да съдържа по-малко от <xliff:g id="NUMBER_0">%d</xliff:g> цифра</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Трябва да съдържа само цифри (от 0 до 9)"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Администраторът на у-вото не разрешава ползването на скорошен ПИН"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"Често срещаните ПИН кодове се блокират от системния ви администратор. Опитайте с друг ПИН код."</string>
@@ -1920,8 +1932,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Контроли за взаимодействие"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Изтеглени услуги"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Експериментални"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Флагове за функции"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Екранен четец, предимно за хора със слепота и слабо зрение"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Докоснете елементи на екрана си, за да ги чуете прочетени на глас"</string>
@@ -3133,13 +3144,14 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> правила могат да се включат автоматично</item>
       <item quantity="one">1 правило може да се включи автоматично</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"OK"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Актуализиране"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Да не се актуализира"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"Телефонът ви може да прави повече неща, с които да ви помогне да се съсредоточите.\n\nАктуализирайте настройките, така че:\n\n– напълно да скриете известията;\n\n– да разрешите обаждания от контактите със звезда и повторно обаждащите се."</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"Искате ли да актуализирате режима „Не безпокойте“?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Настройки"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Можете да персонализирате този режим допълнително от настройките."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Блокиране при включен екран"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Блокиране при изключен екран"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"Режимът „Не безпокойте“ може да блокира не само нежеланите звуци, но и визуалните сигнали. Тази опция е полезна, ако се опитвате да заспите, да се съсредоточите или да използвате телефона си по-малко."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Блокиране на звуците и визуалните сигнали"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Без включване на екрана или „събуждане“ при известия"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Без показване на известия освен за основните активност и състояние на телефона"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Звуци за служебния потребителски профил"</string>
@@ -3671,7 +3683,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Функцията за резервно копие е деактивирана"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Извършена е актуализация до Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"Налице е актуализация"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"Настройката не може да се променя"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"Непозволено действие"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"Силата на звука не може да бъде променена"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"Обажданията не са разрешени"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"SMS съобщенията не са разрешени"</string>
@@ -3861,7 +3873,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Управление на информацията на заключения екран"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Показване или скриване на съдържанието на известията"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Всички"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"Поддръжка и съвети"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"Най-малката ширина"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Няма инсталирани приложения, които са заявили достъп до SMS съобщения, за които се таксува получателят"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"SMS съобщенията, за които се таксува получателят, може да ви въвлекат в разходи и ще увеличат сметката към оператора ви. Ако дадете разрешението на дадено приложение, ще можете да изпращате такива съобщения чрез него."</string>

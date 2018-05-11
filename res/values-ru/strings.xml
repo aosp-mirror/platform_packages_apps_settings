@@ -593,11 +593,31 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Слишком много неудачных попыток. Этот пользователь будет удален."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Слишком много неудачных попыток. Этот рабочий профиль и его данные будут удалены."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Закрыть"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Должно быть не менее <xliff:g id="COUNT">%d</xliff:g> символов"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"Должно быть не менее <xliff:g id="COUNT">%d</xliff:g> символов"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="one">Пароль должен содержать не менее <xliff:g id="COUNT_1">%d</xliff:g> символа</item>
+      <item quantity="few">Пароль должен содержать не менее <xliff:g id="COUNT_1">%d</xliff:g> символов</item>
+      <item quantity="many">Пароль должен содержать не менее <xliff:g id="COUNT_1">%d</xliff:g> символов</item>
+      <item quantity="other">Пароль должен содержать не менее <xliff:g id="COUNT_1">%d</xliff:g> символа</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="one">PIN-код должен содержать не менее <xliff:g id="COUNT_1">%d</xliff:g> цифры</item>
+      <item quantity="few">PIN-код должен содержать не менее <xliff:g id="COUNT_1">%d</xliff:g> цифр</item>
+      <item quantity="many">PIN-код должен содержать не менее <xliff:g id="COUNT_1">%d</xliff:g> цифр</item>
+      <item quantity="other">PIN-код должен содержать не менее <xliff:g id="COUNT_1">%d</xliff:g> цифры</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Продолжить"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"Максимальное количество символов: <xliff:g id="NUMBER">%d</xliff:g>"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Максимальное количество цифр: <xliff:g id="NUMBER">%d</xliff:g>"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="one">Пароль должен содержать менее <xliff:g id="NUMBER_1">%d</xliff:g> символа</item>
+      <item quantity="few">Пароль должен содержать менее <xliff:g id="NUMBER_1">%d</xliff:g> символов</item>
+      <item quantity="many">Пароль должен содержать менее <xliff:g id="NUMBER_1">%d</xliff:g> символов</item>
+      <item quantity="other">Пароль должен содержать менее <xliff:g id="NUMBER_1">%d</xliff:g> символа</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="one">PIN-код должен содержать менее <xliff:g id="NUMBER_1">%d</xliff:g> цифры</item>
+      <item quantity="few">PIN-код должен содержать менее <xliff:g id="NUMBER_1">%d</xliff:g> цифр</item>
+      <item quantity="many">PIN-код должен содержать менее <xliff:g id="NUMBER_1">%d</xliff:g> цифр</item>
+      <item quantity="other">PIN-код должен содержать менее <xliff:g id="NUMBER_1">%d</xliff:g> цифры</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"PIN-код должен содержать только цифры"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Использовать недавний PIN-код запрещено"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"ИТ-администратор заблокировал простые PIN-коды. Выберите более сложную комбинацию."</string>
@@ -1948,8 +1968,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Элементы управления"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Скачанные сервисы"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Экспериментальная функция"</string>
-    <!-- no translation found for feature_flags_dashboard_title (778619522682769966) -->
-    <skip />
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Экспериментальные функции"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Инструмент для озвучивания данных с экрана для людей с нарушениями зрения"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Чтобы услышать описание элемента, нажмите на него"</string>
@@ -3207,13 +3226,14 @@
       <item quantity="many">Можно автоматически включить <xliff:g id="ON_COUNT">%d</xliff:g> правил.</item>
       <item quantity="other">Можно автоматически включить <xliff:g id="ON_COUNT">%d</xliff:g> правила.</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4332223974819182383">"ОК"</string>
+    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Включить"</string>
+    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Не включать"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"Телефон поможет вам не отвлекаться.\n\nВыберите настройку:\n\n– скрывать все уведомления;\n\n– показывать звонки от избранных контактов и повторные звонки."</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"Включить режим \"Не беспокоить\"?"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Настройки"</string>
     <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Изменить другие параметры этой функции можно в разделе настроек."</string>
     <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"При включенном экране"</string>
     <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"При отключенном экране"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="1941519590822188992">"В режиме \"Не беспокоить\" отключаются не только звуковые, но и текстовые оповещения. Эту функцию удобно использовать, когда вы хотите заснуть, сконцентрироваться на чем-то важном или просто меньше пользоваться телефоном."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1442575104084675243">"Отключить звуковые и текстовые оповещения"</string>
     <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Не включать экран и не показывать уведомления"</string>
     <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Показывать уведомления только для основных функций телефона"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Сигналы в рабочем профиле"</string>
@@ -3775,7 +3795,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Резервное копирование отключено"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Обновлено до Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"Доступно обновление"</string>
-    <string name="disabled_by_policy_title" msgid="8032916235573765969">"Невозможно изменить настройку"</string>
+    <string name="disabled_by_policy_title" msgid="627023216027648534">"Действие запрещено"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="3208724801293696486">"Невозможно изменить громкость"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"Звонки запрещены"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"Отправка SMS запрещена"</string>
@@ -3977,7 +3997,8 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Выберите параметры для информации на заблокированном экране"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Скрыть или показать содержание уведомлений"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Все"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"Помощь и советы"</string>
+    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
+    <skip />
     <string name="developer_smallest_width" msgid="7516950434587313360">"Минимальная ширина"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Установленные приложения не запрашивали доступ к платным SMS"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"Обратите внимание, что такие SMS могут оплачиваться дополнительно. Предоставив разрешение приложению, вы сможете отправлять платные SMS с его помощью."</string>
