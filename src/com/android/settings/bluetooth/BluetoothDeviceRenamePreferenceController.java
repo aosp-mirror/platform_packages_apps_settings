@@ -26,44 +26,35 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class BluetoothDeviceRenamePreferenceController extends
         BluetoothDeviceNamePreferenceController {
 
-    private final Fragment mFragment;
-    private String mPrefKey;
+    private Fragment mFragment;
     private MetricsFeatureProvider mMetricsFeatureProvider;
-
-    public BluetoothDeviceRenamePreferenceController(Context context, String prefKey,
-            Fragment fragment, Lifecycle lifecycle) {
-        super(context, lifecycle);
-        mPrefKey = prefKey;
-        mFragment = fragment;
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
-    }
 
     /**
      * Constructor exclusively used for Slice.
      */
-    public BluetoothDeviceRenamePreferenceController(Context context, String prefKey) {
-        super(context, (Lifecycle) null);
-        mPrefKey = prefKey;
-        mFragment = null;
-    }
-
-    @VisibleForTesting
-    BluetoothDeviceRenamePreferenceController(Context context, String prefKey, Fragment fragment,
-            LocalBluetoothAdapter localAdapter) {
-        super(context, localAdapter);
-        mPrefKey = prefKey;
-        mFragment = fragment;
+    public BluetoothDeviceRenamePreferenceController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
-    @Override
-    public String getPreferenceKey() {
-        return mPrefKey;
+    @VisibleForTesting
+    BluetoothDeviceRenamePreferenceController(Context context, LocalBluetoothAdapter localAdapter,
+            String preferenceKey) {
+        super(context, localAdapter, preferenceKey);
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+    }
+
+    /**
+     * Set the {@link Fragment} that used to show {@link LocalDeviceNameDialogFragment}
+     * in {@code handlePreferenceTreeClick}
+     */
+    @VisibleForTesting
+    public void setFragment(Fragment fragment) {
+        mFragment = fragment;
     }
 
     @Override
@@ -78,7 +69,7 @@ public class BluetoothDeviceRenamePreferenceController extends
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (TextUtils.equals(mPrefKey, preference.getKey()) && mFragment != null) {
+        if (TextUtils.equals(getPreferenceKey(), preference.getKey()) && mFragment != null) {
             mMetricsFeatureProvider.action(mContext,
                     MetricsProto.MetricsEvent.ACTION_BLUETOOTH_RENAME);
             LocalDeviceNameDialogFragment.newInstance()
