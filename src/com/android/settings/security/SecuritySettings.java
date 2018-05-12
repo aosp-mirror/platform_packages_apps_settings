@@ -15,8 +15,7 @@
  */
 package com.android.settings.security;
 
-import static com.android.settings.security.EncryptionStatusPreferenceController
-        .PREF_KEY_ENCRYPTION_SECURITY_PAGE;
+import static com.android.settings.security.EncryptionStatusPreferenceController.PREF_KEY_ENCRYPTION_SECURITY_PAGE;
 
 import android.app.Activity;
 import android.content.Context;
@@ -35,7 +34,6 @@ import com.android.settings.fingerprint.FingerprintProfileStatusPreferenceContro
 import com.android.settings.fingerprint.FingerprintStatusPreferenceController;
 import com.android.settings.location.LocationPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.security.screenlock.LockScreenPreferenceController;
 import com.android.settings.security.trustagent.ManageTrustAgentsPreferenceController;
 import com.android.settings.security.trustagent.TrustAgentListPreferenceController;
 import com.android.settings.widget.PreferenceCategoryController;
@@ -128,7 +126,6 @@ public class SecuritySettings extends DashboardFragment {
 
         final List<AbstractPreferenceController> securityPreferenceControllers = new ArrayList<>();
         securityPreferenceControllers.add(new FingerprintStatusPreferenceController(context));
-        securityPreferenceControllers.add(new LockScreenPreferenceController(context, lifecycle));
         securityPreferenceControllers.add(new ChangeScreenLockPreferenceController(context, host));
         controllers.add(new PreferenceCategoryController(context, SECURITY_CATEGORY)
                 .setChildren(securityPreferenceControllers));
