@@ -20,7 +20,8 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="apps_and_notification_screen"
     android:title="@string/app_and_notification_dashboard_title"
-    settings:initialExpandedChildrenCount="7">
+    settings:initialExpandedChildrenCount="8">
+    <!-- the initial count should include the dynamic tiles -->
 
     <PreferenceCategory
         android:key="recent_apps_category"
