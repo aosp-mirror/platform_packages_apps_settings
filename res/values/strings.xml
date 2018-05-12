@@ -388,6 +388,8 @@
 
     <!-- Description for bluetooth device name summary [CHAR LIMIT=none] -->
     <string name="bluetooth_device_name_summary">Visible as \u201C<xliff:g id="device_name">^1</xliff:g>\u201D to other devices</string>
+    <!-- Footer description for discoverable mode in bluetooth off state [CHAR LIMIT=none] -->
+    <string name="bluetooth_off_footer">Turn on Bluetooth to connect to other devices.</string>
 
     <!-- Title for paired device group [CHAR LIMIT=none] -->
     <string name="bluetooth_paired_device_title">Your devices</string>
@@ -413,8 +415,8 @@
     <string name="connected_device_connected_title">Currently connected</string>
     <!-- Title for connected device group [CHAR LIMIT=none]-->
     <string name="connected_device_saved_title">Saved devices</string>
-    <!-- Title for preference to add a device [CHAR LIMIT=none]-->
-    <string name="connected_device_add_device_title">Pair new device</string>
+    <!-- Title for preference to add a device [CHAR LIMIT=none] [BACKUP_MESSAGE_ID=7803521577708810621] -->
+    <string name="connected_device_add_device_title">Add device</string>
     <!-- Summary for preference to add a device [CHAR LIMIT=none]-->
     <string name="connected_device_add_device_summary">Bluetooth will turn on to pair</string>
     <!-- Title for other connection preferences [CHAR LIMIT=none]-->
@@ -847,9 +849,10 @@
     <!-- Security Settings screen Encryption and crendential summary -->
     <string name="encryption_and_credential_settings_summary" product="tablet">Device encrypted</string>
     <string name="decryption_settings_summary" product="tablet">Device not encrypted</string>
-    <!-- Security Settings screen setting option title for the item to take you to the lock screen preference screen [CHAR LIMIT=60] -->
-    <string name="lockscreen_settings_title">Lock screen preferences</string>
-
+    <!-- Screen title for a list of settings controlling what to show on user's lockscreen [CHAR LIMIT=60] -->
+    <string name="lockscreen_settings_title">Lock screen display</string>
+    <!-- Category title for the settings that control what lockscreen shows. [CHAR LIMIT=30] -->
+    <string name="lockscreen_settings_what_to_show_category">What to show</string>
     <!-- Main Settings screen setting option summary text for the item tot ake you to the security and location screen -->
     <string name="security_settings_summary">Set My Location, screen unlock, SIM card lock, credential storage lock</string>
     <!-- Main Settings screen setting option summary text for the item to take you to the CDMA security and location screen -->
@@ -2643,6 +2646,7 @@
     <string name="ambient_display_screen_summary_always_on">Always on / Increased battery usage</string>
     <!-- [CHAR LIMIT=30] Summary of the preference that opens the Ambient display settings screen, when Ambient display is set to show when new notifications come in. -->
     <string name="ambient_display_screen_summary_notifications">New notifications</string>
+
     <!-- [CHAR LIMIT=30] Category title for the settings that control when Ambient display shows. -->
     <string name="ambient_display_category_triggers">When to show</string>
     <!-- [CHAR LIMIT=30] Ambient display screen, title for setting to change whether the ambient display feature is triggered for new incoming notifications. -->
@@ -4632,6 +4636,9 @@
         <item quantity="one">Very long delay (<xliff:g id="click_delay_label" example="200">%1$d</xliff:g> ms)</item>
         <item quantity="other">Very long delay (<xliff:g id="click_delay_label" example="200">%1$d</xliff:g> ms)</item>
     </plurals>
+
+    <!-- Summary for vibration settings preference when notification vibration and haptic feedback intensity are set. [CHAR LIMIT=32] -->
+    <string name="accessibility_vibration_summary">Ring <xliff:g id="summary_ring" example="Medium">%1$s</xliff:g>, touch <xliff:g id="summary_touch" example="High">%2$s</xliff:g></string>
 
     <!-- Summary for vibration settings preference when ring & notification are set to off-->
     <string name="accessibility_vibration_summary_off">Ring &amp; notification set to off</string>
@@ -7227,24 +7234,23 @@
     <!--  Do not disturb: Subtitle for the Visual signals option to toggle on/off visual signals/alerts when the screen is on/when screen is off. [CHAR LIMIT=30] -->
     <string name="zen_mode_visual_signals_settings_subtitle">Allow visual signals</string>
 
-    <!-- Do not disturb: restrict notifications title [CHAR LIMIT=60] -->
-    <string name="zen_mode_restrict_notifications_screen_title">Restrict notifications</string>
+    <!-- Do not disturb: zen settings screens category title [CHAR LIMIT=100] -->
+    <string name="zen_mode_settings_category">When Do Not Disturb is turned on</string>
+
     <!-- Do not disturb: restrict notifications title [CHAR LIMIT=60] -->
     <string name="zen_mode_restrict_notifications_title">Notifications</string>
-    <!-- Do not disturb: restrict notifications category title [CHAR LIMIT=100] -->
-    <string name="zen_mode_restrict_notifications_category">When Do Not Disturb is turned on</string>
     <!-- Do not disturb: Mute notifications option [CHAR LIMIT=60] -->
-    <string name="zen_mode_restrict_notifications_mute">Mute notifications</string>
+    <string name="zen_mode_restrict_notifications_mute">Show notifications silently</string>
     <!-- Do not disturb:Mute notifications summary [CHAR LIMIT=NONE] -->
-    <string name="zen_mode_restrict_notifications_mute_summary">Show notifications but mute sounds &amp; vibrations</string>
+    <string name="zen_mode_restrict_notifications_mute_summary">Notifications will be muted</string>
     <!-- Do not disturb:Mute notifications footer [CHAR LIMIT=NONE] -->
-    <string name="zen_mode_restrict_notifications_mute_footer">When new notifications arrive your phone won\u2019t make a sound or vibration</string>
+    <string name="zen_mode_restrict_notifications_mute_footer">When notifications arrive, your phone won\u2019t make a sound or vibrate.</string>
     <!-- Do not disturb: Hide notifications option [CHAR LIMIT=60] -->
-    <string name="zen_mode_restrict_notifications_hide">Hide &amp; mute notifications</string>
+    <string name="zen_mode_restrict_notifications_hide">Hide notifications</string>
     <!-- Do not disturb: Hide notifications summary [CHAR LIMIT=NONE] -->
-    <string name="zen_mode_restrict_notifications_hide_summary">Notifications will not appear at all</string>
+    <string name="zen_mode_restrict_notifications_hide_summary">You won\u2019t see new or existing notifications</string>
     <!-- Do not disturb: Hide notifications footer [CHAR LIMIT=NONE] -->
-    <string name="zen_mode_restrict_notifications_hide_footer">You won\u2019t see new or existing notifications when Do Not Disturb is on. However, notifications needed for basic phone activity and status will still appear.</string>
+    <string name="zen_mode_restrict_notifications_hide_footer">Your phone won\u2019t show new or existing notifications, and won\u2019t make a sound or vibrate. Notifications won\u2019t appear when you swipe down from the top of your screen.\n\nKeep in mind, critical notifications for phone activity and status will still appear.</string>
     <!-- Do not disturb: Custom settings option [CHAR LIMIT=60] -->
     <string name="zen_mode_restrict_notifications_custom">Custom</string>
     <!-- Do not disturb: restrict notifications page, menu option [CHAR LIMIT=60] -->
@@ -7363,6 +7369,35 @@
         <item quantity="one">1 rule can turn on automatically</item>
         <item quantity="other"><xliff:g id="on_count" example="3">%d</xliff:g> rules can turn on automatically</item>
     </plurals>
+
+    <!-- Do not disturb settings, category header [CHAR LIMIT=100]-->
+    <string name="zen_category_behavior">Behavior</string>
+    <!-- Do not disturb settings, category header [CHAR LIMIT=100]-->
+    <string name="zen_category_exceptions">Exceptions</string>
+    <!-- Do not disturb settings, category header [CHAR LIMIT=100]-->
+    <string name="zen_category_schedule">Schedule</string>
+
+    <!-- Do not disturb settings, sound and vibrations title [CHAR LIMIT=100]-->
+    <string name="zen_sound_title">Sound &amp; vibration</string>
+    <!-- Do not disturb settings, sound and vibrations screen footer [CHAR LIMIT=NONE]-->
+    <string name="zen_sound_footer">When Do Not Disturb is on, sound and vibration will be muted, except for the items you allow above.</string>
+    <!-- Do not disturb settings, sound and vibrations screen category [CHAR LIMIT=100]-->
+    <string name="zen_sound_category_title">Mute all except</string>
+    <!-- Do not disturb settings, sound and vibrations summary [CHAR LIMIT=100]-->
+    <string name="zen_sound_all_muted">Muted</string>
+    <!-- Do not disturb settings, sound and vibrations summary [CHAR LIMIT=100]-->
+    <string name="zen_sound_none_muted">Not muted</string>
+    <!-- Do not disturb settings, sound and vibrations summary [CHAR LIMIT=100]-->
+    <string name="zen_sound_one_allowed">Muted, but allow <xliff:g id="sound_type" example="alarms">%1$s</xliff:g></string>
+    <!-- Do not disturb settings, sound and vibrations summary [CHAR LIMIT=100]-->
+    <string name="zen_sound_two_allowed">Muted, but allow <xliff:g id="sound_type" example="alarms">%1$s</xliff:g> and <xliff:g id="sound_type" example="media">%2$s</xliff:g></string>
+    <!-- Do not disturb settings, sound and vibrations summary [CHAR LIMIT=100]-->
+    <string name="zen_sound_three_allowed">Muted, but allow <xliff:g id="sound_type" example="alarms">%1$s</xliff:g>, <xliff:g id="sound_type" example="alarms">%2$s</xliff:g>, and <xliff:g id="sound_type" example="media">%3$s</xliff:g></string>
+
+    <!-- Do not disturb settings, messages, events and reminders title [CHAR LIMIT=100]-->
+    <string name="zen_msg_event_reminder_title">Messages, events &amp; reminders</string>
+    <!-- Do not disturb settings, messages, events and reminders footer [CHAR LIMIT=NONE]-->
+    <string name="zen_msg_event_reminder_footer">When Do Not Disturb is on, messages, reminders, and events will muted, except for the items you allow above. You can adjust messages settings to allow your friends, family, or other contacts to reach you.</string>
 
     <!-- Do not disturb onboarding dialog, accept new settings [CHAR LIMIT=30]-->
     <string name="zen_onboarding_ok">Update</string>
@@ -7895,14 +7930,26 @@
     <!-- [CHAR LIMIT=20] Zen mode settings: Calls option -->
     <string name="zen_mode_calls">Calls</string>
 
+    <!-- [CHAR LIMIT=20] Zen mode settings: Calls screen footer -->
+    <string name="zen_mode_calls_footer">When Do Not Disturb is on, incoming calls are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you.</string>
+
+    <!-- [CHAR LIMIT=50] Zen mode settings: Starred contacts preference title -->
+    <string name="zen_mode_starred_contacts_title">Starred contacts</string>
+
+    <!-- Zen mode settings: Starred contacts summary [CHAR LIMIT=NONE] -->
+    <plurals name="zen_mode_starred_contacts_summary_additional_contacts">
+        <item quantity="one">and 1 other</item>
+        <item quantity="other">and <xliff:g id="num_people" example="3">%d</xliff:g> others</item>
+    </plurals>
+
     <!-- [CHAR LIMIT=20] Zen mode settings: Messages option -->
     <string name="zen_mode_messages">Messages</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: All messages summary -->
-    <string name="zen_mode_all_messages">All messages</string>
+    <string name="zen_mode_all_messages">Messages</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Selected messages summary -->
-    <string name="zen_mode_selected_messages">Selected messages</string>
+    <string name="zen_mode_selected_messages">Some messages</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls or messages option value: From anyone -->
     <string name="zen_mode_from_anyone">From anyone</string>
@@ -7912,6 +7959,15 @@
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls or messages option value: From starred contacts only -->
     <string name="zen_mode_from_starred">From starred contacts only</string>
+
+    <!-- Do not disturb settings, calls summary [CHAR LIMIT=100]-->
+    <string name="zen_calls_summary_starred_repeat">From starred contacts and repeat callers</string>
+
+    <!-- Do not disturb settings, calls summary [CHAR LIMIT=100]-->
+    <string name="zen_calls_summary_contacts_repeat">From contacts and repeat callers</string>
+
+    <!-- Do not disturb settings, calls summary [CHAR LIMIT=100]-->
+    <string name="zen_calls_summary_repeat_only">From repeat callers only</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls or messages option value: None -->
     <string name="zen_mode_from_none">None</string>
@@ -7932,13 +7988,22 @@
     <string name="zen_mode_events">Events</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: All callers summary -->
-    <string name="zen_mode_all_callers">All callers</string>
+    <string name="zen_mode_all_callers">anyone</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Selected callers summary -->
-    <string name="zen_mode_selected_callers">Selected callers</string>
+    <string name="zen_mode_contacts_callers">contacts</string>
+
+    <!-- [CHAR LIMIT=50] Zen mode settings: Selected callers summary -->
+    <string name="zen_mode_starred_callers">starred contacts</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Repeat callers option -->
     <string name="zen_mode_repeat_callers">Repeat callers</string>
+
+    <!-- [CHAR LIMIT=50] Zen mode settings: calls summary -->
+    <string name="zen_mode_calls_summary_one">From <xliff:g id="caller type" example="contacts">%1$s</xliff:g> only</string>
+
+    <!-- [CHAR LIMIT=50] Zen mode settings: calls summary -->
+    <string name="zen_mode_calls_summary_two">From <xliff:g id="caller type" example="starred contacts">%1$s</xliff:g> and <xliff:g id="callert tpye" example="repeat callers">%2$s</xliff:g></string>
 
     <!-- [CHAR LIMIT=200] Zen mode settings: Repeat callers option summary -->
     <string name="zen_mode_repeat_callers_summary">If the same person calls a second time within a <xliff:g id="minutes">%d</xliff:g> minute period</string>
@@ -8653,7 +8718,7 @@
     <string name="ignore_optimizations_off">Optimize</string>
 
     <!-- Ignore battery optimizations on description [CHAR LIMIT=NONE] -->
-    <string name="ignore_optimizations_on_desc">May drain your battery more quickly</string>
+    <string name="ignore_optimizations_on_desc">May drain your battery more quickly. App will no longer be restricted from using background battery.</string>
 
     <!-- Ignore battery optimizations off description [CHAR LIMIT=NONE] -->
     <string name="ignore_optimizations_off_desc">Recommended for better battery life</string>
@@ -9807,6 +9872,9 @@
 
     <!-- Help URI, USB Audio [DO NOT TRANSLATE] -->
     <string name="help_url_audio_accessory_not_supported" translatable="false"></string>
+
+    <!-- Help URI, restricted apps page [DO NOT TRANSLATE] -->
+    <string name="help_uri_restricted_apps" translatable="false"></string>
 
     <!-- Help URI, battery saver page [DO NOT TRANSLATE] -->
     <string name="help_url_battery_saver_settings" translatable="false"></string>

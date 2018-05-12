@@ -18,6 +18,7 @@ package com.android.settings.notification;
 
 import android.app.NotificationManager.Policy;
 import android.content.Context;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -57,15 +58,12 @@ public class ZenModeVisEffectsCustomPreferenceController
         pref.setChecked(areCustomOptionsSelected());
 
         pref.setOnGearClickListener(p -> {
-            new SubSettingLauncher(mContext)
-                    .setDestination(ZenModeBlockedEffectsSettings.class.getName())
-                    .setTitleRes(R.string.zen_mode_what_to_block_title)
-                    .setSourceMetricsCategory(MetricsProto.MetricsEvent.SETTINGS_ZEN_NOTIFICATIONS)
-                    .launch();
+            launchCustomSettings();
+
         });
 
         pref.setOnRadioButtonClickListener(p -> {
-            select();
+            launchCustomSettings();
         });
     }
 
@@ -84,9 +82,14 @@ public class ZenModeVisEffectsCustomPreferenceController
     protected void select() {
         mMetricsFeatureProvider.action(mContext,
                 MetricsProto.MetricsEvent.ACTION_ZEN_CUSTOM, true);
-        mBackend.savePolicy(mBackend.mPolicy.priorityCategories,
-                mBackend.mPolicy.priorityCallSenders,
-                mBackend.mPolicy.priorityMessageSenders,
-                INTERRUPTIVE_EFFECTS);
+    }
+
+    private void launchCustomSettings() {
+        select();
+        new SubSettingLauncher(mContext)
+                .setDestination(ZenModeBlockedEffectsSettings.class.getName())
+                .setTitleRes(R.string.zen_mode_what_to_block_title)
+                .setSourceMetricsCategory(MetricsProto.MetricsEvent.SETTINGS_ZEN_NOTIFICATIONS)
+                .launch();
     }
 }

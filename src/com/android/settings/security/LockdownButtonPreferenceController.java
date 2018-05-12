@@ -21,7 +21,6 @@ import android.os.UserHandle;
 import android.provider.Settings;
 
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.TogglePreferenceController;
 
 public class LockdownButtonPreferenceController extends TogglePreferenceController {
@@ -36,9 +35,9 @@ public class LockdownButtonPreferenceController extends TogglePreferenceControll
     @Override
     public int getAvailabilityStatus() {
         if (mLockPatternUtils.isSecure(UserHandle.myUserId())) {
-            return BasePreferenceController.AVAILABLE;
+            return AVAILABLE;
         } else {
-            return BasePreferenceController.DISABLED_FOR_USER;
+            return DISABLED_FOR_USER;
         }
     }
 

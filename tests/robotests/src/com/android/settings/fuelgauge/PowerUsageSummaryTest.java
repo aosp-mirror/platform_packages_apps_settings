@@ -149,7 +149,7 @@ public class PowerUsageSummaryTest {
         mFragment.initFeatureProvider();
         mBatteryMeterView = new BatteryMeterView(mRealContext);
         mBatteryMeterView.mDrawable = new BatteryMeterView.BatteryMeterDrawable(mRealContext, 0);
-        doNothing().when(mFragment).restartBatteryStatsLoader();
+        doNothing().when(mFragment).restartBatteryStatsLoader(anyInt());
         doReturn(mock(LoaderManager.class)).when(mFragment).getLoaderManager();
         doReturn(MENU_ADVANCED_BATTERY).when(mAdvancedPageMenu).getItemId();
 
@@ -317,15 +317,6 @@ public class PowerUsageSummaryTest {
     }
 
     @Test
-    public void restartBatteryStatsLoader_notClearHeader_quickUpdateNotInvoked() {
-        mFragment.mBatteryHeaderPreferenceController = mBatteryHeaderPreferenceController;
-
-        mFragment.restartBatteryStatsLoader(false /* clearHeader */);
-
-        verify(mBatteryHeaderPreferenceController, never()).quickUpdateHeaderPreference();
-    }
-
-    @Test
     public void optionsMenu_advancedPageEnabled() {
         when(mFeatureFactory.powerUsageFeatureProvider.isPowerAccountingToggleEnabled())
                 .thenReturn(true);
@@ -360,7 +351,18 @@ public class PowerUsageSummaryTest {
         when(mFragment.mBatteryTipPreferenceController.needUpdate()).thenReturn(false);
         mFragment.updateBatteryTipFlag(new Bundle());
 
-        mFragment.refreshUi();
+        mFragment.refreshUi(BatteryBroadcastReceiver.BatteryUpdateType.MANUAL);
+
+        verify(mFragment, never()).restartBatteryTipLoader();
+    }
+
+    @Test
+    public void refreshUi_batteryLevelChanged_doNotUpdateBatteryTip() {
+        mFragment.mBatteryTipPreferenceController = mock(BatteryTipPreferenceController.class);
+        when(mFragment.mBatteryTipPreferenceController.needUpdate()).thenReturn(true);
+        mFragment.updateBatteryTipFlag(new Bundle());
+
+        mFragment.refreshUi(BatteryBroadcastReceiver.BatteryUpdateType.BATTERY_LEVEL);
 
         verify(mFragment, never()).restartBatteryTipLoader();
     }
@@ -371,7 +373,7 @@ public class PowerUsageSummaryTest {
         when(mFragment.mBatteryTipPreferenceController.needUpdate()).thenReturn(true);
         mFragment.updateBatteryTipFlag(new Bundle());
 
-        mFragment.refreshUi();
+        mFragment.refreshUi(BatteryBroadcastReceiver.BatteryUpdateType.MANUAL);
 
         verify(mFragment).restartBatteryTipLoader();
     }

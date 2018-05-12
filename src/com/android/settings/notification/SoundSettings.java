@@ -153,6 +153,7 @@ public class SoundSettings extends DashboardFragment {
         volumeControllers.add(use(MediaVolumePreferenceController.class));
         volumeControllers.add(use(RingVolumePreferenceController.class));
         volumeControllers.add(use(NotificationVolumePreferenceController.class));
+        volumeControllers.add(use(CallVolumePreferenceController.class));
 
         for (VolumeSeekBarPreferenceController controller : volumeControllers) {
             controller.setCallback(mVolumeCallback);

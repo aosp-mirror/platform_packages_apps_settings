@@ -27,9 +27,7 @@ import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.provider.Settings;
-import androidx.annotation.VisibleForTesting;
 import android.provider.SettingsSlicesContract;
-import androidx.core.graphics.drawable.IconCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
@@ -45,6 +43,8 @@ import java.util.Map;
 import java.util.WeakHashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.SliceProvider;
 import androidx.slice.builders.ListBuilder;

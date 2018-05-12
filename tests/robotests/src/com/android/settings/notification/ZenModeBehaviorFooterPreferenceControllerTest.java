@@ -41,6 +41,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import android.util.ArrayMap;
 
+import com.android.settings.R;
 import com.android.settings.notification.AbstractZenModePreferenceController.ZenModeConfigWrapper;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -77,6 +78,7 @@ public class ZenModeBehaviorFooterPreferenceControllerTest {
 
     private Context mContext;
     private ContentResolver mContentResolver;
+    private int mTitleResId = R.string.zen_sound_title;
 
     @Before
     public void setup() {
@@ -88,8 +90,8 @@ public class ZenModeBehaviorFooterPreferenceControllerTest {
         mContentResolver = RuntimeEnvironment.application.getContentResolver();
         when(mNotificationManager.getZenModeConfig()).thenReturn(mZenModeConfig);
 
-        mController =
-            new ZenModeBehaviorFooterPreferenceController(mContext, mock(Lifecycle.class));
+        mController = new ZenModeBehaviorFooterPreferenceController(
+                mContext, mock(Lifecycle.class), mTitleResId);
         ReflectionHelpers.setField(mController, "mZenModeConfigWrapper", mConfigWrapper);
 
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
@@ -112,13 +114,13 @@ public class ZenModeBehaviorFooterPreferenceControllerTest {
     @Test
     public void priorityOnly_footerIsAvailable() {
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_IMPORTANT_INTERRUPTIONS);
-        assertFalse(mController.isAvailable());
+        assertTrue(mController.isAvailable());
     }
 
     @Test
-    public void zenModeOff_footerIsNotAvailable() {
+    public void zenModeOff_footerIsAvailable() {
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_OFF);
-        assertFalse(mController.isAvailable());
+        assertTrue(mController.isAvailable());
     }
 
     @Test
@@ -126,7 +128,7 @@ public class ZenModeBehaviorFooterPreferenceControllerTest {
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_OFF);
         mController.updateState(mockPref);
 
-        verify(mockPref, never()).setTitle(any(String.class));
+        verify(mockPref).setTitle(mContext.getString(mTitleResId));
     }
 
     @Test
@@ -134,7 +136,7 @@ public class ZenModeBehaviorFooterPreferenceControllerTest {
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_IMPORTANT_INTERRUPTIONS);
         mController.updateState(mockPref);
 
-        verify(mockPref, never()).setTitle(any(String.class));
+        verify(mockPref).setTitle(mContext.getString(mTitleResId));
     }
 
     @Test

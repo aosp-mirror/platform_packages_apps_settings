@@ -16,6 +16,8 @@
 
 package com.android.settings.fuelgauge;
 
+import static com.android.settings.fuelgauge.BatteryBroadcastReceiver.BatteryUpdateType;
+
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
@@ -279,7 +281,7 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
                 } else {
                     mStatsType = BatteryStats.STATS_SINCE_CHARGED;
                 }
-                refreshUi();
+                refreshUi(BatteryUpdateType.MANUAL);
                 return true;
             case MENU_ADVANCED_BATTERY:
                 new SubSettingLauncher(getContext())
@@ -293,14 +295,15 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
         }
     }
 
-    protected void refreshUi() {
+    protected void refreshUi(@BatteryUpdateType int refreshType) {
         final Context context = getContext();
         if (context == null) {
             return;
         }
 
-        // Only skip BatteryTipLoader for the first time when device is rotated
-        if (mNeedUpdateBatteryTip) {
+        // Skip BatteryTipLoader if device is rotated or only battery level change
+        if (mNeedUpdateBatteryTip
+                && refreshType != BatteryUpdateType.BATTERY_LEVEL) {
             restartBatteryTipLoader();
         } else {
             mNeedUpdateBatteryTip = true;
@@ -399,21 +402,15 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
     }
 
     @Override
-    protected void restartBatteryStatsLoader() {
-        restartBatteryStatsLoader(true /* clearHeader */);
+    protected void restartBatteryStatsLoader(@BatteryUpdateType int refreshType) {
+        super.restartBatteryStatsLoader(refreshType);
+        mBatteryHeaderPreferenceController.quickUpdateHeaderPreference();
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         mBatteryTipPreferenceController.saveInstanceState(outState);
-    }
-
-    void restartBatteryStatsLoader(boolean clearHeader) {
-        super.restartBatteryStatsLoader();
-        if (clearHeader) {
-            mBatteryHeaderPreferenceController.quickUpdateHeaderPreference();
-        }
     }
 
     @Override
@@ -430,7 +427,7 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
             mContext = context;
             mLoader = loader;
             mBatteryBroadcastReceiver = new BatteryBroadcastReceiver(mContext);
-            mBatteryBroadcastReceiver.setBatteryChangedListener(() -> {
+            mBatteryBroadcastReceiver.setBatteryChangedListener(type -> {
                 BatteryInfo.getBatteryInfo(mContext, new BatteryInfo.Callback() {
                     @Override
                     public void onBatteryInfoLoaded(BatteryInfo info) {

@@ -33,6 +33,7 @@ import android.os.UserHandle;
 import android.os.Vibrator;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.SwitchPreference;
 import androidx.core.content.ContextCompat;
 import androidx.preference.ListPreference;
@@ -749,12 +750,34 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         pref.setSummary(entries[index]);
     }
 
-    private void updateVibrationSummary(Preference pref) {
-        Vibrator vibrator = getContext().getSystemService(Vibrator.class);
-        final int intensity = Settings.System.getInt(getContext().getContentResolver(),
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    void updateVibrationSummary(Preference pref) {
+        final Context context = getContext();
+        final Vibrator vibrator = context.getSystemService(Vibrator.class);
+
+        final int ringIntensity = Settings.System.getInt(context.getContentResolver(),
                 Settings.System.NOTIFICATION_VIBRATION_INTENSITY,
                 vibrator.getDefaultNotificationVibrationIntensity());
-        mVibrationPreferenceScreen.setSummary(getVibrationSummary(getContext(), intensity));
+        CharSequence ringIntensityString =
+                VibrationIntensityPreferenceController.getIntensityString(context, ringIntensity);
+
+        final int touchIntensity = Settings.System.getInt(context.getContentResolver(),
+                Settings.System.HAPTIC_FEEDBACK_INTENSITY,
+                vibrator.getDefaultHapticFeedbackIntensity());
+        CharSequence touchIntensityString =
+                VibrationIntensityPreferenceController.getIntensityString(context, touchIntensity);
+
+        if (mVibrationPreferenceScreen == null) {
+            mVibrationPreferenceScreen = findPreference(VIBRATION_PREFERENCE_SCREEN);
+        }
+
+        if (ringIntensity == touchIntensity) {
+            mVibrationPreferenceScreen.setSummary(ringIntensityString);
+        } else {
+            mVibrationPreferenceScreen.setSummary(
+                    getString(R.string.accessibility_vibration_summary,
+                            ringIntensityString, touchIntensityString));
+        }
     }
 
     private String getVibrationSummary(Context context, @VibrationIntensity int intensity) {

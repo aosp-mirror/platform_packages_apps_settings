@@ -161,7 +161,6 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
      */
     @Override
     public void onConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state) {
-        updateState(mPreference);
     }
 
     @Override
@@ -171,6 +170,12 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
 
     @Override
     public void onAudioModeChanged() {
+        updateState(mPreference);
+    }
+
+    @Override
+    public void onProfileConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state,
+            int bluetoothProfile) {
         updateState(mPreference);
     }
 

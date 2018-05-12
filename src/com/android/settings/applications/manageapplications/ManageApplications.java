@@ -549,7 +549,7 @@ public class ManageApplications extends InstrumentedFragment
                 startAppInfoFragment(AppStorageSettings.class, R.string.storage_settings);
                 break;
             case LIST_TYPE_HIGH_POWER:
-                HighPowerDetail.show(this, mCurrentPkgName, INSTALLED_APP_DETAILS);
+                HighPowerDetail.show(this, mCurrentUid, mCurrentPkgName, INSTALLED_APP_DETAILS);
                 break;
             case LIST_TYPE_OVERLAY:
                 startAppInfoFragment(DrawOverlayDetails.class, R.string.overlay_settings);
