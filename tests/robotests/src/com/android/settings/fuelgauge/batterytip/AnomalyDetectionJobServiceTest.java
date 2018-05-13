@@ -46,8 +46,6 @@ import android.app.job.JobWorkItem;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.os.Process;
 import android.os.StatsDimensionsValue;
 import android.os.UserManager;
@@ -57,11 +55,11 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.BatteryUtils;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
+import com.android.settings.testutils.shadow.ShadowPowerWhitelistBackend;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -80,7 +78,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = ShadowConnectivityManager.class)
+@Config(shadows = {ShadowConnectivityManager.class, ShadowPowerWhitelistBackend.class})
 public class AnomalyDetectionJobServiceTest {
     private static final int UID = 12345;
     private static final String SYSTEM_PACKAGE = "com.android.system";
@@ -90,8 +88,6 @@ public class AnomalyDetectionJobServiceTest {
             "anomaly_type=6,auto_restriction=false";
     private static final int ANOMALY_TYPE = 6;
     private static final long VERSION_CODE = 15;
-    @Mock
-    private BatteryStatsHelper mBatteryStatsHelper;
     @Mock
     private UserManager mUserManager;
     @Mock
@@ -148,9 +144,9 @@ public class AnomalyDetectionJobServiceTest {
     @Test
     public void saveAnomalyToDatabase_systemWhitelisted_doNotSave() {
         doReturn(UID).when(mAnomalyDetectionJobService).extractUidFromStatsDimensionsValue(any());
-        doReturn(true).when(mPowerWhitelistBackend).isSysWhitelistedExceptIdle(any(String[].class));
+        doReturn(true).when(mPowerWhitelistBackend).isWhitelisted(any(String[].class));
 
-        mAnomalyDetectionJobService.saveAnomalyToDatabase(mContext, mBatteryStatsHelper,
+        mAnomalyDetectionJobService.saveAnomalyToDatabase(mContext,
                 mUserManager, mBatteryDatabaseManager, mBatteryUtils, mPolicy,
                 mPowerWhitelistBackend, mContext.getContentResolver(),
                 mFeatureFactory.powerUsageFeatureProvider,
@@ -171,7 +167,7 @@ public class AnomalyDetectionJobServiceTest {
                 mAnomalyDetectionJobService).extractUidFromStatsDimensionsValue(any());
         doReturn(true).when(mBatteryUtils).shouldHideAnomaly(any(), anyInt());
 
-        mAnomalyDetectionJobService.saveAnomalyToDatabase(mContext, mBatteryStatsHelper,
+        mAnomalyDetectionJobService.saveAnomalyToDatabase(mContext,
                 mUserManager, mBatteryDatabaseManager, mBatteryUtils, mPolicy,
                 mPowerWhitelistBackend, mContext.getContentResolver(),
                 mFeatureFactory.powerUsageFeatureProvider,
@@ -191,7 +187,7 @@ public class AnomalyDetectionJobServiceTest {
         doReturn(Process.SYSTEM_UID).when(
                 mAnomalyDetectionJobService).extractUidFromStatsDimensionsValue(any());
 
-        mAnomalyDetectionJobService.saveAnomalyToDatabase(mContext, mBatteryStatsHelper,
+        mAnomalyDetectionJobService.saveAnomalyToDatabase(mContext,
                 mUserManager, mBatteryDatabaseManager, mBatteryUtils, mPolicy,
                 mPowerWhitelistBackend, mContext.getContentResolver(),
                 mFeatureFactory.powerUsageFeatureProvider, mFeatureFactory.metricsFeatureProvider,
@@ -206,7 +202,7 @@ public class AnomalyDetectionJobServiceTest {
         doReturn(AnomalyDetectionJobService.UID_NULL).when(
                 mAnomalyDetectionJobService).extractUidFromStatsDimensionsValue(any());
 
-        mAnomalyDetectionJobService.saveAnomalyToDatabase(mContext, mBatteryStatsHelper,
+        mAnomalyDetectionJobService.saveAnomalyToDatabase(mContext,
                 mUserManager, mBatteryDatabaseManager, mBatteryUtils, mPolicy,
                 mPowerWhitelistBackend, mContext.getContentResolver(),
                 mFeatureFactory.powerUsageFeatureProvider, mFeatureFactory.metricsFeatureProvider,
@@ -226,7 +222,7 @@ public class AnomalyDetectionJobServiceTest {
         doReturn(Process.FIRST_APPLICATION_UID).when(
                 mAnomalyDetectionJobService).extractUidFromStatsDimensionsValue(any());
 
-        mAnomalyDetectionJobService.saveAnomalyToDatabase(mContext, mBatteryStatsHelper,
+        mAnomalyDetectionJobService.saveAnomalyToDatabase(mContext,
                 mUserManager, mBatteryDatabaseManager, mBatteryUtils, mPolicy,
                 mPowerWhitelistBackend, mContext.getContentResolver(),
                 mFeatureFactory.powerUsageFeatureProvider, mFeatureFactory.metricsFeatureProvider,
@@ -251,7 +247,7 @@ public class AnomalyDetectionJobServiceTest {
         doReturn(Process.FIRST_APPLICATION_UID).when(
                 mAnomalyDetectionJobService).extractUidFromStatsDimensionsValue(any());
 
-        mAnomalyDetectionJobService.saveAnomalyToDatabase(mContext, mBatteryStatsHelper,
+        mAnomalyDetectionJobService.saveAnomalyToDatabase(mContext,
                 mUserManager, mBatteryDatabaseManager, mBatteryUtils, mPolicy,
                 mPowerWhitelistBackend, mContext.getContentResolver(),
                 mFeatureFactory.powerUsageFeatureProvider, mFeatureFactory.metricsFeatureProvider,
@@ -315,5 +311,13 @@ public class AnomalyDetectionJobServiceTest {
 
         // Should not crash even job is stopped
         mAnomalyDetectionJobService.completeWork(mJobParameters, mJobWorkItem);
+    }
+
+    @Test
+    public void restartWorkAfterBeenStopped_jobStarted() {
+        mAnomalyDetectionJobService.onStopJob(mJobParameters);
+        mAnomalyDetectionJobService.onStartJob(mJobParameters);
+
+        assertThat(mAnomalyDetectionJobService.mIsJobCanceled).isFalse();
     }
 }

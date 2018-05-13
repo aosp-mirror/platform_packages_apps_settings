@@ -388,6 +388,8 @@
 
     <!-- Description for bluetooth device name summary [CHAR LIMIT=none] -->
     <string name="bluetooth_device_name_summary">Visible as \u201C<xliff:g id="device_name">^1</xliff:g>\u201D to other devices</string>
+    <!-- Footer description for discoverable mode in bluetooth off state [CHAR LIMIT=none] -->
+    <string name="bluetooth_off_footer">Turn on Bluetooth to connect to other devices.</string>
 
     <!-- Title for paired device group [CHAR LIMIT=none] -->
     <string name="bluetooth_paired_device_title">Your devices</string>
@@ -413,8 +415,8 @@
     <string name="connected_device_connected_title">Currently connected</string>
     <!-- Title for connected device group [CHAR LIMIT=none]-->
     <string name="connected_device_saved_title">Saved devices</string>
-    <!-- Title for preference to add a device [CHAR LIMIT=none]-->
-    <string name="connected_device_add_device_title">Pair new device</string>
+    <!-- Title for preference to add a device [CHAR LIMIT=none] [BACKUP_MESSAGE_ID=7803521577708810621] -->
+    <string name="connected_device_add_device_title">Add device</string>
     <!-- Summary for preference to add a device [CHAR LIMIT=none]-->
     <string name="connected_device_add_device_summary">Bluetooth will turn on to pair</string>
     <!-- Title for other connection preferences [CHAR LIMIT=none]-->
@@ -3386,6 +3388,8 @@
     <!-- Master Clear -->
     <!-- Button title to factory data reset the entire device -->
     <string name="master_clear_title">Erase all data (factory reset)</string>
+    <!-- Button title to factory data reset the entire device. The "(factory reset)" part is optional for translation. [CHAR LIMIT=30 BACKUP_MESSAGE_ID=3531267871084279512]-->
+    <string name="master_clear_short_title">Erase all data (factory reset)</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
     <string name="master_clear_desc" product="tablet">"This will erase all data from your tablet\u2019s <b>internal storage</b>, including:\n\n<li>Your Google account</li>\n<li>System and app data and settings</li>\n<li>Downloaded apps</li>"</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
@@ -4633,6 +4637,9 @@
         <item quantity="other">Very long delay (<xliff:g id="click_delay_label" example="200">%1$d</xliff:g> ms)</item>
     </plurals>
 
+    <!-- Summary for vibration settings preference when notification vibration and haptic feedback intensity are set. [CHAR LIMIT=32] -->
+    <string name="accessibility_vibration_summary">Ring <xliff:g id="summary_ring" example="Medium">%1$s</xliff:g>, touch <xliff:g id="summary_touch" example="High">%2$s</xliff:g></string>
+
     <!-- Summary for vibration settings preference when ring & notification are set to off-->
     <string name="accessibility_vibration_summary_off">Ring &amp; notification set to off</string>
 
@@ -4924,9 +4931,7 @@
     <string name="device_cellular_network">Mobile network scanning</string>
 
     <!-- Label for list of apps using battery in power use UI. Note: ^1 should be used in all translations[CHAR_LIMIT=120] -->
-    <string name="power_usage_list_summary">App usage since full charge (<xliff:g id="relative_time">^1</xliff:g>)</string>
-    <!-- Label for device components using battery in power use UI. Note: ^1 should be used in all translations[CHAR_LIMIT=120] -->
-    <string name="power_usage_list_summary_device">Device usage since full charge (<xliff:g id="relative_time">^1</xliff:g>)</string>
+    <string name="power_usage_list_summary">Battery usage since full charge</string>
     <!-- Temp string used to debug new battery estimates [DO NOT TRANSLATE] -->
     <string name="power_usage_enhanced_debug" translatable="false"><xliff:g id="time">%1$s</xliff:g> left (New ML est)</string>
     <!-- Temp string used to debug old battery estimates [DO NOT TRANSLATE] -->
@@ -5031,11 +5036,11 @@
     <!-- Summary for the battery high usage tip, which presents battery may run out soon [CHAR LIMIT=NONE] -->
     <string name="battery_tip_high_usage_summary">Battery may run out soon</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="default">Your phone has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps since last full charge(<xliff:g id="time_period_ago" example="1 hr ago">%2$s</xliff:g>):</string>
+    <string name="battery_tip_dialog_message" product="default">Your phone has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps you used since full charge:</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="tablet">Your tablet has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps since last full charge(<xliff:g id="time_period_ago" example="1 hr ago">%2$s</xliff:g>):</string>
+    <string name="battery_tip_dialog_message" product="tablet">Your tablet has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps you used since full charge:</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="device">Your device has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps since last full charge(<xliff:g id="time_period_ago" example="1 hr ago">%2$s</xliff:g>):</string>
+    <string name="battery_tip_dialog_message" product="device">Your device has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps you used since full charge:</string>
     <!-- Title for restricted app preference, showing how many app need to be restricted [CHAR LIMIT=NONE] -->
     <plurals name="battery_tip_restrict_title">
         <item quantity="one">Restrict %1$d app</item>
@@ -7928,6 +7933,15 @@
     <!-- [CHAR LIMIT=20] Zen mode settings: Calls screen footer -->
     <string name="zen_mode_calls_footer">When Do Not Disturb is on, incoming calls are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you.</string>
 
+    <!-- [CHAR LIMIT=50] Zen mode settings: Starred contacts preference title -->
+    <string name="zen_mode_starred_contacts_title">Starred contacts</string>
+
+    <!-- Zen mode settings: Starred contacts summary [CHAR LIMIT=NONE] -->
+    <plurals name="zen_mode_starred_contacts_summary_additional_contacts">
+        <item quantity="one">and 1 other</item>
+        <item quantity="other">and <xliff:g id="num_people" example="3">%d</xliff:g> others</item>
+    </plurals>
+
     <!-- [CHAR LIMIT=20] Zen mode settings: Messages option -->
     <string name="zen_mode_messages">Messages</string>
 
@@ -8704,7 +8718,7 @@
     <string name="ignore_optimizations_off">Optimize</string>
 
     <!-- Ignore battery optimizations on description [CHAR LIMIT=NONE] -->
-    <string name="ignore_optimizations_on_desc">May drain your battery more quickly</string>
+    <string name="ignore_optimizations_on_desc">May drain your battery more quickly. App will no longer be restricted from using background battery.</string>
 
     <!-- Ignore battery optimizations off description [CHAR LIMIT=NONE] -->
     <string name="ignore_optimizations_off_desc">Recommended for better battery life</string>
@@ -9856,8 +9870,20 @@
     <!-- Help URI, USB Audio [DO NOT TRANSLATE] -->
     <string name="help_url_audio_accessory_not_supported" translatable="false"></string>
 
+    <!-- Help URI, restricted apps page [DO NOT TRANSLATE] -->
+    <string name="help_uri_restricted_apps" translatable="false"></string>
+
     <!-- Help URI, battery saver page [DO NOT TRANSLATE] -->
     <string name="help_url_battery_saver_settings" translatable="false"></string>
+
+    <!-- Help URI, smart battery page [DO NOT TRANSLATE] -->
+    <string name="help_uri_smart_battery_settings" translatable="false"></string>
+
+    <!-- Title label for dnd suggestion, which is displayed in Settings homepage [CHAR LIMIT=100] -->
+    <string name="zen_suggestion_title">Update Do Not Disturb</string>
+
+    <!-- Summary label for dnd suggestion, which is displayed in Settings homepage [CHAR LIMIT=100] -->
+    <string name="zen_suggestion_summary">Hide notifications to stay focused</string>
 
     <!-- Title label for new device suggestion, which is displayed in Settings homepage [CHAR LIMIT=100] -->
     <string name="new_device_suggestion_title">What\'s new and exciting?</string>
