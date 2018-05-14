@@ -59,23 +59,11 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
     protected DashboardFragment mFragment;
 
     private final boolean mShowDeviceWithoutNames;
-    private Preference.OnPreferenceClickListener mDevicePreferenceClickListener = null;
 
     @VisibleForTesting
     final GearPreference.OnGearClickListener mDeviceProfilesListener = pref -> {
         launchDeviceDetails(pref);
     };
-
-    private class PreferenceClickListener implements
-        Preference.OnPreferenceClickListener {
-        @Override
-        public boolean onPreferenceClick(Preference preference) {
-            final CachedBluetoothDevice device =
-                ((BluetoothDevicePreference) preference).getBluetoothDevice();
-            Log.i(TAG, "OnPreferenceClickListener: device=" + device);
-            return device.setActive();
-        }
-    }
 
     public BluetoothDeviceUpdater(Context context, DashboardFragment fragment,
             DevicePreferenceCallback devicePreferenceCallback) {
@@ -91,7 +79,6 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
                 BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY, false);
         mPreferenceMap = new HashMap<>();
         mLocalManager = localManager;
-        mDevicePreferenceClickListener = new PreferenceClickListener();
     }
 
     /**
@@ -212,7 +199,10 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
                     new BluetoothDevicePreference(mPrefContext, cachedDevice,
                             mShowDeviceWithoutNames);
             btPreference.setOnGearClickListener(mDeviceProfilesListener);
-            btPreference.setOnPreferenceClickListener(mDevicePreferenceClickListener);
+            if (this instanceof Preference.OnPreferenceClickListener) {
+                btPreference.setOnPreferenceClickListener(
+                        (Preference.OnPreferenceClickListener)this);
+            }
             mPreferenceMap.put(device, btPreference);
             mDevicePreferenceCallback.onDeviceAdded(btPreference);
         }

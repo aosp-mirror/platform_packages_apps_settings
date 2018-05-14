@@ -18,8 +18,9 @@ package com.android.settings.bluetooth;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.media.AudioManager;
-import androidx.annotation.VisibleForTesting;
 import android.util.Log;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
@@ -29,7 +30,8 @@ import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 /**
  * Controller to maintain available media Bluetooth devices
  */
-public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater {
+public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
+        implements Preference.OnPreferenceClickListener {
 
     private static final String TAG = "AvailableMediaBluetoothDeviceUpdater";
     private static final boolean DBG = false;
@@ -115,6 +117,13 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
             }
         }
         return isFilterMatched;
+    }
+
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
+        final CachedBluetoothDevice device = ((BluetoothDevicePreference) preference)
+                .getBluetoothDevice();
+        return device.setActive();
     }
 }
 

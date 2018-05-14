@@ -19,16 +19,20 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import android.util.Log;
 
 /**
  * Maintain and update saved bluetooth devices(bonded but not connected)
  */
-public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater {
+public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
+        implements Preference.OnPreferenceClickListener {
+    private static final String TAG = "SavedBluetoothDeviceUpdater";
 
     public SavedBluetoothDeviceUpdater(Context context, DashboardFragment fragment,
             DevicePreferenceCallback devicePreferenceCallback) {
@@ -56,5 +60,13 @@ public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater {
     public boolean isFilterMatched(CachedBluetoothDevice cachedDevice) {
         final BluetoothDevice device = cachedDevice.getDevice();
         return device.getBondState() == BluetoothDevice.BOND_BONDED && !device.isConnected();
+    }
+
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
+        final CachedBluetoothDevice device = ((BluetoothDevicePreference) preference)
+                .getBluetoothDevice();
+        device.connect(true);
+        return true;
     }
 }
