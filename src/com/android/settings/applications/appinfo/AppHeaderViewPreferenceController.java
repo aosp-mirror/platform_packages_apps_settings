@@ -68,7 +68,7 @@ public class AppHeaderViewPreferenceController extends BasePreferenceController
         mEntityHeaderController = EntityHeaderController
                 .newInstance(activity, mParent, mHeader.findViewById(R.id.entity_header))
                 .setPackageName(mPackageName)
-                .setButtonActions(EntityHeaderController.ActionType.ACTION_APP_PREFERENCE,
+                .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
                         EntityHeaderController.ActionType.ACTION_NONE)
                 .bindHeaderButtons();
     }
