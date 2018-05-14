@@ -30,6 +30,7 @@ import android.app.FragmentManager;
 import android.app.NotificationManager;
 import android.app.NotificationManager.Policy;
 import android.content.Context;
+import android.icu.text.ListFormatter;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
@@ -166,17 +167,20 @@ public class ZenModeSettings extends ZenModeSettingsBase {
                 return mContext.getString(R.string.join_two_items, enabledCategories.get(0),
                         enabledCategories.get(1).toLowerCase());
             } else if (numCategories == 3){
-                String secondaryText = mContext.getString(R.string.join_two_unrelated_items,
-                        enabledCategories.get(0), enabledCategories.get(1).toLowerCase());
-                return mContext.getString(R.string.join_many_items_last, secondaryText,
-                        enabledCategories.get(2).toLowerCase());
+                final List<String> summaries = new ArrayList<>();
+                summaries.add(enabledCategories.get(0));
+                summaries.add(enabledCategories.get(1).toLowerCase());
+                summaries.add(enabledCategories.get(2).toLowerCase());
+
+                return ListFormatter.getInstance().format(summaries);
             } else {
-                String secondaryText = mContext.getString(R.string.join_many_items_middle,
-                        enabledCategories.get(0), enabledCategories.get(1).toLowerCase());
-                secondaryText = mContext.getString(R.string.join_many_items_middle, secondaryText,
-                        enabledCategories.get(2).toLowerCase());
-                return mContext.getString(R.string.join_many_items_last, secondaryText,
-                        mContext.getString(R.string.zen_mode_other_options));
+                final List<String> summaries = new ArrayList<>();
+                summaries.add(enabledCategories.get(0));
+                summaries.add(enabledCategories.get(1).toLowerCase());
+                summaries.add(enabledCategories.get(2).toLowerCase());
+                summaries.add(mContext.getString(R.string.zen_mode_other_options));
+
+                return ListFormatter.getInstance().format(summaries);
             }
         }
 

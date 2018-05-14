@@ -25,7 +25,7 @@
       <!-- Calls -->
       <ListPreference
           android:key="zen_mode_calls"
-          android:title="@string/zen_mode_calls"
+          android:title="@string/zen_mode_calls_title"
           android:entries="@array/zen_mode_contacts_entries"
           android:entryValues="@array/zen_mode_contacts_values"/>
 
@@ -36,7 +36,7 @@
       <!-- Repeat callers -->
       <SwitchPreference
           android:key="zen_mode_repeat_callers"
-          android:title="@string/zen_mode_repeat_callers" />
+          android:title="@string/zen_mode_repeat_callers_title" />
    </PreferenceCategory>
 
    <com.android.settingslib.widget.FooterPreference/>
