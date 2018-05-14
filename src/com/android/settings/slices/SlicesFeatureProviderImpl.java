@@ -2,6 +2,7 @@ package com.android.settings.slices;
 
 import android.content.Context;
 
+import com.android.settings.wifi.calling.WifiCallingSliceHelper;
 import com.android.settingslib.utils.ThreadUtils;
 
 /**
@@ -38,5 +39,10 @@ public class SlicesFeatureProviderImpl implements SlicesFeatureProvider {
     public void indexSliceData(Context context) {
         SlicesIndexer indexer = getSliceIndexer(context);
         indexer.indexSliceData();
+    }
+
+    @Override
+    public WifiCallingSliceHelper getNewWifiCallingSliceHelper(Context context) {
+        return new WifiCallingSliceHelper(context);
     }
 }
