@@ -53,10 +53,12 @@ public class DeviceIndexUpdateJobService extends JobService {
     @Override
     public boolean onStartJob(JobParameters params) {
         if (DEBUG) Log.d(TAG, "onStartJob");
-        mRunningJob = true;
-        Thread thread = new Thread(() -> updateIndex(params));
-        thread.setPriority(Thread.MIN_PRIORITY);
-        thread.start();
+        if (!mRunningJob) {
+            mRunningJob = true;
+            Thread thread = new Thread(() -> updateIndex(params));
+            thread.setPriority(Thread.MIN_PRIORITY);
+            thread.start();
+        }
         return true;
     }
 
