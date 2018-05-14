@@ -21,7 +21,6 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.SearchIndexableResource;
-import androidx.annotation.VisibleForTesting;
 import android.telephony.TelephonyManager;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -41,6 +40,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import androidx.annotation.VisibleForTesting;
+
 @SearchIndexable
 public class DeviceInfoSettings extends DashboardFragment implements Indexable {
 
@@ -57,6 +58,7 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
     public void onAttach(Context context) {
         super.onAttach(context);
         use(FirmwareVersionPreferenceController.class).setHost(this /*parent*/);
+        use(DeviceModelPreferenceController.class).setHost(this /* parent */);
     }
 
     @Override
@@ -134,7 +136,6 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new PhoneNumberPreferenceController(context));
         controllers.add(new SimStatusPreferenceController(context, fragment));
-        controllers.add(new DeviceModelPreferenceController(context, fragment));
         controllers.add(new ImeiInfoPreferenceController(context, fragment));
         controllers.add(new IpAddressPreferenceController(context, lifecycle));
         controllers.add(new WifiMacAddressPreferenceController(context, lifecycle));
