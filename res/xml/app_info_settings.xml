@@ -162,9 +162,16 @@
     </PreferenceCategory>
 
     <Preference
+        android:key="app_settings_link"
+        android:title="@string/app_settings_link"
+        settings:controller="com.android.settings.applications.appinfo.AppSettingPreferenceController"
+        settings:allowDividerAbove="true" />
+
+    <Preference
         android:key="app_version"
         android:selectable="false"
         android:order="9999"
-        settings:controller="com.android.settings.applications.appinfo.AppVersionPreferenceController" />
+        settings:controller="com.android.settings.applications.appinfo.AppVersionPreferenceController"
+        settings:allowDividerAbove="true" />
 
 </PreferenceScreen>
