@@ -13,6 +13,8 @@
  */
 package com.android.settings.fuelgauge;
 
+import static com.android.settings.fuelgauge.BatteryBroadcastReceiver.BatteryUpdateType;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -30,7 +32,6 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -106,7 +107,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                 mMetricsFeatureProvider.action(getContext(),
                         MetricsProto.MetricsEvent.ACTION_SETTINGS_MENU_BATTERY_APPS_TOGGLE,
                         mShowAllApps);
-                restartBatteryStatsLoader();
+                restartBatteryStatsLoader(BatteryUpdateType.MANUAL);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -138,7 +139,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     }
 
     @Override
-    protected void refreshUi() {
+    protected void refreshUi(@BatteryUpdateType int refreshType) {
         final Context context = getContext();
         if (context == null) {
             return;

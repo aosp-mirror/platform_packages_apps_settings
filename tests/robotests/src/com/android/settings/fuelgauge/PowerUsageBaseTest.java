@@ -74,7 +74,7 @@ public class PowerUsageBaseTest {
         }
 
         @Override
-        protected void refreshUi() {
+        protected void refreshUi(int refreshType) {
             // Do nothing
         }
 
