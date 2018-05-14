@@ -170,7 +170,7 @@ public class ZenModeSettings extends ZenModeSettingsBase {
             } else if (numCategories == 2) {
                 return mContext.getString(R.string.join_two_items, enabledCategories.get(0),
                         enabledCategories.get(1).toLowerCase());
-            } else if (numCategories == 3) {
+            } else if (numCategories == 3){
                 final List<String> summaries = new ArrayList<>();
                 summaries.add(enabledCategories.get(0));
                 summaries.add(enabledCategories.get(1).toLowerCase());

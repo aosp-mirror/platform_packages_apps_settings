@@ -134,13 +134,13 @@ public class ZenModeSettingsTest {
     public void testGetCallsSettingSummary_contacts() {
         Policy policy = new Policy(Policy.PRIORITY_CATEGORY_ALARMS | Policy.PRIORITY_CATEGORY_CALLS,
                 Policy.PRIORITY_SENDERS_CONTACTS, 0, 0);
-        assertThat(mBuilder.getCallsSettingSummary(policy)).isEqualTo("From contacts only");
+        assertThat(mBuilder.getCallsSettingSummary(policy)).isEqualTo("From contacts");
     }
 
     @Test
     public void testGetCallsSettingSummary_repeatCallers() {
         Policy policy = new Policy(Policy.PRIORITY_CATEGORY_REPEAT_CALLERS, 0, 0, 0);
-        assertThat(mBuilder.getCallsSettingSummary(policy)).isEqualTo("From repeat callers only");
+        assertThat(mBuilder.getCallsSettingSummary(policy)).isEqualTo("From repeat callers");
     }
 
     @Test
