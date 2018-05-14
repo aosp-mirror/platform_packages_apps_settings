@@ -47,6 +47,8 @@ public class RingVolumePreferenceController extends VolumeSeekBarPreferenceContr
     private final RingReceiver mReceiver = new RingReceiver();
     private final H mHandler = new H();
 
+    private int mMuteIcon;
+
     public RingVolumePreferenceController(Context context) {
         this(context, KEY_RING_VOLUME);
     }
@@ -94,7 +96,7 @@ public class RingVolumePreferenceController extends VolumeSeekBarPreferenceContr
 
     @Override
     public int getMuteIcon() {
-        return R.drawable.ic_volume_ringer_vibrate;
+        return mMuteIcon;
     }
 
     private void updateRingerMode() {
@@ -102,11 +104,6 @@ public class RingVolumePreferenceController extends VolumeSeekBarPreferenceContr
         if (mRingerMode == ringerMode) return;
         mRingerMode = ringerMode;
         updatePreferenceIcon();
-    }
-
-    private boolean wasRingerModeVibrate() {
-        return mVibrator != null && mRingerMode == AudioManager.RINGER_MODE_SILENT
-            && mHelper.getLastAudibleStreamVolume(getAudioStream()) == 0;
     }
 
     private void updateEffectsSuppressor() {
@@ -122,10 +119,15 @@ public class RingVolumePreferenceController extends VolumeSeekBarPreferenceContr
 
     private void updatePreferenceIcon() {
         if (mPreference != null) {
-            mPreference.showIcon(
-                    mRingerMode == AudioManager.RINGER_MODE_VIBRATE || wasRingerModeVibrate()
-                            ? com.android.internal.R.drawable.ic_audio_ring_notif_vibrate
-                            : com.android.internal.R.drawable.ic_audio_ring_notif);
+            if (mRingerMode == AudioManager.RINGER_MODE_VIBRATE) {
+                mMuteIcon = R.drawable.ic_volume_ringer_vibrate;
+                mPreference.showIcon(com.android.internal.R.drawable.ic_audio_ring_notif_vibrate);
+            } else if (mRingerMode == AudioManager.RINGER_MODE_SILENT) {
+                mMuteIcon = R.drawable.ic_volume_ringer_mute;
+                mPreference.showIcon(com.android.internal.R.drawable.ic_audio_ring_notif_mute);
+            } else {
+                mPreference.showIcon(com.android.internal.R.drawable.ic_audio_ring_notif);
+            }
         }
     }
 
