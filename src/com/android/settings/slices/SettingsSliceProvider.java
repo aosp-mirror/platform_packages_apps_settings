@@ -18,6 +18,8 @@ package com.android.settings.slices;
 
 import static android.Manifest.permission.READ_SEARCH_INDEXABLES;
 
+import static com.android.settings.wifi.calling.WifiCallingSliceHelper.PATH_WIFI_CALLING;
+
 import android.app.PendingIntent;
 import android.app.slice.SliceManager;
 import android.content.ContentResolver;
@@ -34,7 +36,13 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
 
+import androidx.slice.Slice;
+import androidx.slice.SliceProvider;
+import androidx.slice.builders.ListBuilder;
+import androidx.slice.builders.SliceAction;
+
 import com.android.settings.R;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.net.URISyntaxException;
@@ -44,11 +52,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 import java.util.concurrent.ConcurrentHashMap;
-
-import androidx.slice.Slice;
-import androidx.slice.SliceProvider;
-import androidx.slice.builders.ListBuilder;
-import androidx.slice.builders.SliceAction;
 
 /**
  * A {@link SliceProvider} for Settings to enabled inline results in system apps.
@@ -160,6 +163,11 @@ public class SettingsSliceProvider extends SliceProvider {
         switch (path) {
             case "/" + PATH_WIFI:
                 return createWifiSlice(sliceUri);
+            case "/" + PATH_WIFI_CALLING:
+                return FeatureFactory.getFactory(getContext())
+                        .getSlicesFeatureProvider()
+                        .getNewWifiCallingSliceHelper(getContext())
+                        .createWifiCallingSlice(sliceUri);
         }
 
         SliceData cachedSliceData = mSliceWeakDataCache.get(sliceUri);
