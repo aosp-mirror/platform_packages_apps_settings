@@ -28,7 +28,6 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 public class ZenModeVisEffectsCustomPreferenceController
         extends AbstractZenModePreferenceController {
 
-    protected boolean mShowMenuSelected;
     protected static final int INTERRUPTIVE_EFFECTS = Policy.SUPPRESSED_EFFECT_AMBIENT
             | Policy.SUPPRESSED_EFFECT_PEEK
             | Policy.SUPPRESSED_EFFECT_LIGHTS
@@ -41,11 +40,7 @@ public class ZenModeVisEffectsCustomPreferenceController
 
     @Override
     public boolean isAvailable() {
-        if (mShowMenuSelected) {
-            return true;
-        }
-
-        return areCustomOptionsSelected();
+        return true;
     }
 
     @Override
@@ -62,10 +57,6 @@ public class ZenModeVisEffectsCustomPreferenceController
         pref.setOnRadioButtonClickListener(p -> {
             launchCustomSettings();
         });
-    }
-
-    protected void setShownByMenu(boolean shown) {
-        mShowMenuSelected = shown;
     }
 
     protected boolean areCustomOptionsSelected() {

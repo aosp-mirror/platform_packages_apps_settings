@@ -25,7 +25,7 @@
       <!-- Messages -->
       <ListPreference
           android:key="zen_mode_messages"
-          android:title="@string/zen_mode_messages"
+          android:title="@string/zen_mode_messages_title"
           android:entries="@array/zen_mode_contacts_entries"
           android:entryValues="@array/zen_mode_contacts_values"/>
 
@@ -36,12 +36,12 @@
       <!-- Reminders -->
       <SwitchPreference
           android:key="zen_mode_reminders"
-          android:title="@string/zen_mode_reminders"/>
+          android:title="@string/zen_mode_reminders_title"/>
 
       <!-- Events -->
       <SwitchPreference
           android:key="zen_mode_events"
-          android:title="@string/zen_mode_events"/>
+          android:title="@string/zen_mode_events_title"/>
    </PreferenceCategory>
 
    <com.android.settingslib.widget.FooterPreference />
