@@ -38,7 +38,6 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
-import android.security.KeyStore;
 import androidx.annotation.StringRes;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -97,7 +96,6 @@ public class ChooseLockGeneric extends SettingsActivity {
     public static class ChooseLockGenericFragment extends SettingsPreferenceFragment {
 
         private static final String TAG = "ChooseLockGenericFragment";
-        private static final int MIN_PASSWORD_LENGTH = 4;
         private static final String KEY_SKIP_FINGERPRINT = "unlock_skip_fingerprint";
         private static final String PASSWORD_CONFIRMED = "password_confirmed";
         private static final String WAITING_FOR_CONFIRMATION = "waiting_for_confirmation";
@@ -136,7 +134,6 @@ public class ChooseLockGeneric extends SettingsActivity {
 
         private ChooseLockSettingsHelper mChooseLockSettingsHelper;
         private DevicePolicyManager mDPM;
-        private KeyStore mKeyStore;
         private boolean mHasChallenge = false;
         private long mChallenge;
         private boolean mPasswordConfirmed = false;
@@ -168,7 +165,6 @@ public class ChooseLockGeneric extends SettingsActivity {
             String chooseLockAction = getActivity().getIntent().getAction();
             mFingerprintManager = Utils.getFingerprintManagerOrNull(getActivity());
             mDPM = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
-            mKeyStore = KeyStore.getInstance();
             mChooseLockSettingsHelper = new ChooseLockSettingsHelper(this.getActivity());
             mLockPatternUtils = new LockPatternUtils(getActivity());
             mIsSetNewPassword = ACTION_SET_NEW_PARENT_PROFILE_PASSWORD.equals(chooseLockAction)
@@ -585,11 +581,10 @@ public class ChooseLockGeneric extends SettingsActivity {
             return mManagedPasswordProvider.createIntent(false, password);
         }
 
-        protected Intent getLockPasswordIntent(int quality, int minLength, int maxLength) {
+        protected Intent getLockPasswordIntent(int quality) {
             ChooseLockPassword.IntentBuilder builder =
                     new ChooseLockPassword.IntentBuilder(getContext())
                             .setPasswordQuality(quality)
-                            .setPasswordLengthRange(minLength, maxLength)
                             .setForFingerprint(mForFingerprint)
                             .setUserId(mUserId);
             if (mHasChallenge) {
@@ -668,12 +663,7 @@ public class ChooseLockGeneric extends SettingsActivity {
             if (quality >= DevicePolicyManager.PASSWORD_QUALITY_MANAGED) {
                 intent = getLockManagedPasswordIntent(mUserPassword);
             } else if (quality >= DevicePolicyManager.PASSWORD_QUALITY_NUMERIC) {
-                int minLength = mDPM.getPasswordMinimumLength(null, mUserId);
-                if (minLength < MIN_PASSWORD_LENGTH) {
-                    minLength = MIN_PASSWORD_LENGTH;
-                }
-                final int maxLength = mDPM.getPasswordMaximumLength(quality);
-                intent = getLockPasswordIntent(quality, minLength, maxLength);
+                intent = getLockPasswordIntent(quality);
             } else if (quality == DevicePolicyManager.PASSWORD_QUALITY_SOMETHING) {
                 intent = getLockPatternIntent();
             }
