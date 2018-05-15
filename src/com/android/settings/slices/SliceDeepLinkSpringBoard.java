@@ -45,7 +45,11 @@ public class SliceDeepLinkSpringBoard extends Activity {
                 // This shouldn't matter since the slice is shown instead of the device
                 // index caring about the launch uri.
                 Uri slice = Uri.parse(intent.getStringExtra(EXTRA_SLICE));
-                Log.e(TAG, "Slice intent launched: " + slice);
+                SlicesDatabaseAccessor slicesDatabaseAccessor = new SlicesDatabaseAccessor(this);
+                // Sadly have to block here because we don't know where to go.
+                final SliceData sliceData = slicesDatabaseAccessor.getSliceDataFromUri(slice);
+                Intent launchIntent = SliceBuilderUtils.getContentIntent(this, sliceData);
+                startActivity(launchIntent);
             } else {
                 startActivity(intent);
             }
