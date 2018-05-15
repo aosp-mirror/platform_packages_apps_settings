@@ -20,9 +20,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
@@ -47,6 +50,8 @@ public class NewDeviceIntroSuggestionActivity extends Activity {
     @VisibleForTesting
     static final long PERMANENT_DISMISS_THRESHOLD = DateUtils.DAY_IN_MILLIS * 14;
 
+    public static final String TIPS_PACKAGE_NAME = "com.google.android.apps.tips";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +67,9 @@ public class NewDeviceIntroSuggestionActivity extends Activity {
     }
 
     public static boolean isSuggestionComplete(Context context) {
-        return !isSupported(context)
+        // Always returns 'true' if Tips application exists. Check b/77652536 for more details.
+        return isTipsInstalledAsSystemApp(context)
+                || !isSupported(context)
                 || isExpired(context)
                 || hasLaunchedBefore(context)
                 || !canOpenUrlInBrowser(context);
@@ -129,5 +136,19 @@ public class NewDeviceIntroSuggestionActivity extends Activity {
                 .setAction(Intent.ACTION_VIEW)
                 .addCategory(Intent.CATEGORY_BROWSABLE)
                 .setData(Uri.parse(url));
+    }
+
+    /**
+     * Check if the specified package exists and is marked with <i>FLAG_SYSTEM</i>
+     */
+    private static boolean isTipsInstalledAsSystemApp(@NonNull Context context) {
+        try {
+            final PackageInfo info = context.getPackageManager().getPackageInfo(TIPS_PACKAGE_NAME,
+                    PackageManager.MATCH_SYSTEM_ONLY);
+            return info != null;
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.w(TAG, "Cannot find the package: " + TIPS_PACKAGE_NAME, e);
+            return false;
+        }
     }
 }

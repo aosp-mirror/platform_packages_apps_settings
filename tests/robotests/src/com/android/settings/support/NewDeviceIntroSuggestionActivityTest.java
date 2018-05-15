@@ -19,7 +19,10 @@ package com.android.settings.support;
 import static com.android.settings.support.NewDeviceIntroSuggestionActivity.PERMANENT_DISMISS_THRESHOLD;
 import static com.android.settings.support.NewDeviceIntroSuggestionActivity.PREF_KEY_SUGGGESTION_COMPLETE;
 import static com.android.settings.support.NewDeviceIntroSuggestionActivity.PREF_KEY_SUGGGESTION_FIRST_DISPLAY_TIME;
+
+import static com.android.settings.support.NewDeviceIntroSuggestionActivity.TIPS_PACKAGE_NAME;
 import static com.android.settings.support.NewDeviceIntroSuggestionActivity.isSuggestionComplete;
+
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
@@ -27,6 +30,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
 import android.content.pm.ResolveInfo;
 
 import com.android.settings.R;
@@ -62,6 +66,40 @@ public class NewDeviceIntroSuggestionActivityTest {
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         when(mFeatureFactory.suggestionsFeatureProvider.getSharedPrefs(any(Context.class)))
                 .thenReturn(getSharedPreferences());
+    }
+
+    @Test
+    public void isSuggestionComplete_TipsNotExistsAndNotExpiredAndCanOpenUrl_shouldReturnFalse() {
+        mShadowPackageManager.removePackage(TIPS_PACKAGE_NAME);
+
+        when(mMockContext.getResources()
+                .getBoolean(R.bool.config_new_device_intro_suggestion_supported))
+                .thenReturn(true);
+
+        when(mFeatureFactory.supportFeatureProvider.getNewDeviceIntroUrl(any(Context.class)))
+                .thenReturn("https://com.android.settings");
+        final Intent intent = NewDeviceIntroSuggestionActivity.getLaunchIntent(mContext);
+        mShadowPackageManager.addResolveInfoForIntent(intent, new ResolveInfo());
+
+        assertThat(isSuggestionComplete(mContext)).isFalse();
+    }
+
+    @Test
+    public void isSuggestionComplete_TipsExistsAndNotExpiredAndCanOpenUrl_shouldReturnTrue() {
+        final PackageInfo mockInfo = new PackageInfo();
+        mockInfo.packageName = TIPS_PACKAGE_NAME;
+        mShadowPackageManager.addPackage(mockInfo);
+
+        when(mMockContext.getResources()
+                .getBoolean(R.bool.config_new_device_intro_suggestion_supported))
+                .thenReturn(true);
+
+        when(mFeatureFactory.supportFeatureProvider.getNewDeviceIntroUrl(any(Context.class)))
+                .thenReturn("https://com.android.settings");
+        final Intent intent = NewDeviceIntroSuggestionActivity.getLaunchIntent(mContext);
+        mShadowPackageManager.addResolveInfoForIntent(intent, new ResolveInfo());
+
+        assertThat(isSuggestionComplete(mContext)).isTrue();
     }
 
     @Test
