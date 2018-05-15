@@ -387,7 +387,6 @@ public class TetherSettings extends RestrictedSettingsFragment
             if (adapter.getState() == BluetoothAdapter.STATE_OFF) {
                 mBluetoothEnableForTether = true;
                 adapter.enable();
-                mBluetoothTether.setSummary(R.string.bluetooth_turning_on);
                 mBluetoothTether.setEnabled(false);
                 return;
             }
