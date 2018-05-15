@@ -276,7 +276,7 @@ public class DashboardSummary extends InstrumentedFragment
         mSummaryLoader.updateSummaryToCache(category);
         mStagingCategory = category;
         if (mSuggestionControllerMixin == null) {
-            mAdapter.setCategory(mStagingCategory);
+            ThreadUtils.postOnMainThread(() -> mAdapter.setCategory(mStagingCategory));
             return;
         }
         if (mSuggestionControllerMixin.isSuggestionLoaded()) {
