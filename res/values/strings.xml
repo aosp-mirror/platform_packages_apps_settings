@@ -402,11 +402,6 @@
     <!-- Summary for bluetooth item in connection detail page. (phone)-->
     <string name="bluetooth_pref_summary" product="default">Allow your phone to communicate with nearby Bluetooth devices</string>
 
-    <!-- Setting Checkbox title for disabling Bluetooth inband ringing in Development Settings -->
-    <string name="bluetooth_disable_inband_ringing">Disable in-band ringing</string>
-    <!-- Summary of checkbox for disabling Bluetooth inband ringing in Development Settings -->
-    <string name="bluetooth_disable_inband_ringing_summary">Don’t play custom phone ringtones on Bluetooth headsets</string>
-
     <!-- Title for Bluetooth device group with media capability group [CHAR LIMIT=none]-->
     <string name="connected_device_available_media_title">Available media devices</string>
     <!-- Title for Bluetooth device group with media capability group [CHAR LIMIT=none]-->
@@ -1696,15 +1691,10 @@
     <!-- Bluetooth settings.  Dock Setting Dialog - Remember setting and don't ask user again -->
     <string name="bluetooth_dock_settings_remember">Remember settings</string>
 
-    <!-- Bluetooth developer options. -->
     <!-- Bluetooth developer settings: Maximum number of connected audio devices -->
     <string name="bluetooth_max_connected_audio_devices_string">Maximum connected Bluetooth audio devices</string>
     <!-- Bluetooth developer settings: Maximum number of connected audio devices -->
     <string name="bluetooth_max_connected_audio_devices_dialog_title">Select maximum number of connected Bluetooth audio devices</string>
-    <!-- Bluetooth developer settings: Checkbox title for disabling Bluetooth receiving AVDTP delay reports -->
-    <string name="bluetooth_disable_avdtp_delay_reports">Disable Bluetooth AVDTP delay reports</string>
-    <!-- Bluetooth developer settings: Summary of checkbox for disabling Bluetooth receiving AVDTP delay reports -->
-    <string name="bluetooth_disable_avdtp_delay_reports_summary">Disallow receiving Bluetooth AVDTP delay reports</string>
 
     <!-- Wifi Display settings. The title of the screen. [CHAR LIMIT=40] -->
     <string name="wifi_display_settings_title">Cast</string>
@@ -2355,6 +2345,17 @@
     <!-- Message of private dns that provides a help link. [CHAR LIMIT=NONE] -->
     <string name="private_dns_help_message"><annotation id="url">Learn more</annotation> about Private DNS features</string>
 
+    <!-- Message to display when setting wifi calling are not editable [CHAR LIMIT=NONE] -->
+    <string name="wifi_calling_pref_managed_by_carrier">Setting managed by carrier</string>
+    <!-- Message to display when wifi calling needs activation [CHAR LIMIT=NONE] -->
+    <string name="wifi_calling_settings_activation_instructions">Activate Wi\u2011Fi Calling</string>
+    <!-- Message to display when wifi calling should be on [CHAR LIMIT=NONE] -->
+    <string name="wifi_calling_turn_on">Turn on Wi\u2011Fi calling</string>
+    <!-- Message to display when carrier does not support wifi calling or doesn't want the user
+         to modify the settings [CHAR LIMIT=NONE] -->
+    <string name="wifi_calling_not_supported">Wi\u2011Fi calling is not supported for %1$s</string>
+    <!-- Carrier string to use in other messages -->
+    <string name="carrier">Carrier</string>
     <!-- Sound and alerts settings -->
     <skip/>
     <string name="display_settings_title">Display</string>
@@ -4922,6 +4923,8 @@
     <string name="background_activity_warning_dialog_title">Limit background activity?</string>
     <!-- TODO: Pending UX review. Text for the warning dialog to show to the user when limiting background activity for an app -->
     <string name="background_activity_warning_dialog_text">If you limit background activity for an app, it may misbehave</string>
+    <!-- Dialog message when app can't been restricted because it is not optimized [CHAR_LIMIT=120] -->
+    <string name="background_activity_disabled_dialog_text">Since this app is not set to optimize battery, you can\u2019t restrict it.\n\nTo restrict the app, first turn on battery optimization.</string>
 
     <!-- Title for the screen usage in power use UI [CHAR_LIMIT=60] -->
     <string name="device_screen_usage">Screen usage since full charge</string>
@@ -7930,6 +7933,9 @@
     <!-- [CHAR LIMIT=20] Zen mode settings: Calls option -->
     <string name="zen_mode_calls">Calls</string>
 
+    <!-- [CHAR LIMIT=40] Zen mode settings: Allow calls toggle title -->
+    <string name="zen_mode_calls_title">Allow calls</string>
+
     <!-- [CHAR LIMIT=20] Zen mode settings: Calls screen footer -->
     <string name="zen_mode_calls_footer">When Do Not Disturb is on, incoming calls are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you.</string>
 
@@ -7944,6 +7950,9 @@
 
     <!-- [CHAR LIMIT=20] Zen mode settings: Messages option -->
     <string name="zen_mode_messages">Messages</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode settings: Allow messages toggle title -->
+    <string name="zen_mode_messages_title">Allow messages</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: All messages summary -->
     <string name="zen_mode_all_messages">Messages</string>
@@ -7984,8 +7993,14 @@
     <!-- [CHAR LIMIT=50] Zen mode settings: Reminders option -->
     <string name="zen_mode_reminders">Reminders</string>
 
+    <!-- [CHAR LIMIT=70] Zen mode settings: Allow reminders toggle title -->
+    <string name="zen_mode_reminders_title">Allow reminders</string>
+
     <!-- [CHAR LIMIT=50] Zen mode settings: Events option -->
     <string name="zen_mode_events">Events</string>
+
+    <!-- [CHAR LIMIT=70] Zen mode settings: Allow events toggle title -->
+    <string name="zen_mode_events_title">Allow events</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: All callers summary -->
     <string name="zen_mode_all_callers">anyone</string>
@@ -7999,8 +8014,11 @@
     <!-- [CHAR LIMIT=50] Zen mode settings: Repeat callers option -->
     <string name="zen_mode_repeat_callers">Repeat callers</string>
 
+    <!-- [CHAR LIMIT=70] Zen mode settings: Allow repeat callers toggle title -->
+    <string name="zen_mode_repeat_callers_title">Allow repeat callers</string>
+
     <!-- [CHAR LIMIT=50] Zen mode settings: calls summary -->
-    <string name="zen_mode_calls_summary_one">From <xliff:g id="caller type" example="contacts">%1$s</xliff:g> only</string>
+    <string name="zen_mode_calls_summary_one">From <xliff:g id="caller type" example="contacts">%1$s</xliff:g></string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: calls summary -->
     <string name="zen_mode_calls_summary_two">From <xliff:g id="caller type" example="starred contacts">%1$s</xliff:g> and <xliff:g id="callert tpye" example="repeat callers">%2$s</xliff:g></string>
@@ -9881,6 +9899,12 @@
 
     <!-- Help URI, smart battery page [DO NOT TRANSLATE] -->
     <string name="help_uri_smart_battery_settings" translatable="false"></string>
+
+    <!-- Title label for dnd suggestion, which is displayed in Settings homepage [CHAR LIMIT=100] -->
+    <string name="zen_suggestion_title">Update Do Not Disturb</string>
+
+    <!-- Summary label for dnd suggestion, which is displayed in Settings homepage [CHAR LIMIT=100] -->
+    <string name="zen_suggestion_summary">Hide notifications to stay focused</string>
 
     <!-- Title label for new device suggestion, which is displayed in Settings homepage [CHAR LIMIT=100] -->
     <string name="new_device_suggestion_title">What\'s new and exciting?</string>

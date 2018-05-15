@@ -18,50 +18,54 @@ package com.android.settings.deviceinfo;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Build;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.DeviceInfoUtils;
-import com.android.settingslib.core.AbstractPreferenceController;
 
-public class DeviceModelPreferenceController extends AbstractPreferenceController implements
-        PreferenceControllerMixin {
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 
-    private static final String KEY_DEVICE_MODEL = "device_model";
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
-    private final Fragment mHost;
 
-    public DeviceModelPreferenceController(Context context, Fragment host) {
-        super(context);
-        mHost = host;
+public class DeviceModelPreferenceController extends BasePreferenceController {
+
+    private static final String TAG = "DeviceModelPrefCtrl";
+
+    private Fragment mHost;
+
+    public DeviceModelPreferenceController(Context context, String key) {
+        super(context, key);
     }
 
-    @Override
-    public boolean isAvailable() {
-        return mContext.getResources().getBoolean(R.bool.config_show_device_model);
+    public void setHost(Fragment fragment) {
+        mHost = fragment;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        final Preference pref = screen.findPreference(KEY_DEVICE_MODEL);
-        if (pref != null) {
-            pref.setSummary(mContext.getResources().getString(R.string.model_summary,
-                    getDeviceModel()));
-        }
     }
 
     @Override
-    public String getPreferenceKey() {
-        return KEY_DEVICE_MODEL;
+    public int getAvailabilityStatus() {
+        return mContext.getResources().getBoolean(R.bool.config_show_device_model)
+                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        return mContext.getResources().getString(R.string.model_summary, getDeviceModel());
     }
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (!TextUtils.equals(preference.getKey(), KEY_DEVICE_MODEL)) {
+        if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
             return false;
         }
         final HardwareInfoDialogFragment fragment = HardwareInfoDialogFragment.newInstance();
@@ -70,6 +74,25 @@ public class DeviceModelPreferenceController extends AbstractPreferenceControlle
     }
 
     public static String getDeviceModel() {
-        return Build.MODEL + DeviceInfoUtils.getMsvSuffix();
+        FutureTask<String> msvSuffixTask = new FutureTask<String>(new Callable<String>() {
+            @Override
+            public String call() {
+                return DeviceInfoUtils.getMsvSuffix();
+            }
+        });
+
+        msvSuffixTask.run();
+        try {
+            // Wait for msv suffix value.
+            final String msvSuffix = msvSuffixTask.get();
+            return Build.MODEL + msvSuffix;
+        } catch (ExecutionException e) {
+            Log.e(TAG, "Execution error, so we only show model name");
+        } catch (InterruptedException e) {
+            Log.e(TAG, "Interruption error, so we only show model name");
+        }
+        // If we can't get an msv suffix value successfully,
+        // it's better to return model name.
+        return Build.MODEL;
     }
 }

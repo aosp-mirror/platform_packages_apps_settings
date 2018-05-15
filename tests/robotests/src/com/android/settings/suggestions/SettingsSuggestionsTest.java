@@ -30,6 +30,8 @@ import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.fingerprint.FingerprintEnrollSuggestionActivity;
 import com.android.settings.fingerprint.FingerprintSuggestionActivity;
+import com.android.settings.notification.ZenOnboardingActivity;
+import com.android.settings.notification.ZenSuggestionActivity;
 import com.android.settings.support.NewDeviceIntroSuggestionActivity;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.wallpaper.WallpaperSuggestionActivity;
@@ -80,6 +82,14 @@ public class SettingsSuggestionsTest {
             Settings.NightDisplaySuggestionActivity.class.getName(),
             R.string.night_display_suggestion_title,
             R.string.night_display_suggestion_summary);
+    }
+
+    @Test
+    public void zenSuggestion_isValid() {
+        assertSuggestionEquals(
+                ZenSuggestionActivity.class.getName(),
+                R.string.zen_suggestion_title,
+                R.string.zen_suggestion_summary);
     }
 
     @Test

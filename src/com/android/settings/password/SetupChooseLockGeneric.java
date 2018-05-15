@@ -170,9 +170,9 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
         }
 
         @Override
-        protected Intent getLockPasswordIntent(int quality, int minLength, int maxLength) {
+        protected Intent getLockPasswordIntent(int quality) {
             final Intent intent = SetupChooseLockPassword.modifyIntentForSetup(
-                    getContext(), super.getLockPasswordIntent(quality, minLength, maxLength));
+                    getContext(), super.getLockPasswordIntent(quality));
             SetupWizardUtils.copySetupExtras(getActivity().getIntent(), intent);
             return intent;
         }

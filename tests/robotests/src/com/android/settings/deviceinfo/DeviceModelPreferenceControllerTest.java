@@ -15,40 +15,44 @@
  */
 package com.android.settings.deviceinfo;
 
-import static com.android.settings.deviceinfo.DeviceModelPreferenceController.getDeviceModel;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
+import android.os.Build;
 
 import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
+
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DeviceModelPreferenceControllerTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Fragment mFragment;
-    @Mock
-    private Preference mPreference;
-    @Mock
-    private PreferenceScreen mPreferenceScreen;
+    private final String KEY = "device_model_key";
 
+    @Mock
+    private Fragment mFragment;
+    private Preference mPreference;
+    private PreferenceScreen mPreferenceScreen;
     private Context mContext;
     private DeviceModelPreferenceController mController;
 
@@ -56,35 +60,49 @@ public class DeviceModelPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = new DeviceModelPreferenceController(mContext, mFragment);
-        when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
-            .thenReturn(mPreference);
-        when(mPreference.getKey()).thenReturn(mController.getPreferenceKey());
+        mController = new DeviceModelPreferenceController(mContext, KEY);
+        mController.setHost(mFragment);
+        mPreference = new Preference(mContext);
+        mPreference.setKey(KEY);
+        final PreferenceManager preferenceManager = new PreferenceManager(mContext);
+        mPreferenceScreen = preferenceManager.createPreferenceScreen(mContext);
+        mPreferenceScreen.addPreference(mPreference);
     }
 
     @Test
     public void isAvailable_returnTrueIfVisible() {
-        assertThat(mController.isAvailable()).isTrue();
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.AVAILABLE);
     }
 
     @Test
     @Config(qualifiers = "mcc999")
     public void isAvailable_returnFalseIfNotVisible() {
-        assertThat(mController.isAvailable()).isFalse();
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
-    public void displayPref_shouldSetSummary() {
-        mController.displayPreference(mPreferenceScreen);
+    public void updatePreference_summaryShouldContainBuildModel() {
+        mController.updateState(mPreference);
 
-        verify(mPreference).setSummary(mContext.getString(R.string.model_summary, getDeviceModel()));
+        assertThat(containBuildModel(mPreference.getSummary())).isTrue();
     }
 
     @Test
     public void clickPreference_shouldLaunchHardwareInfoDialog() {
+        FragmentManager fragmentManager = mock(FragmentManager.class);
+        when(mFragment.getFragmentManager()).thenReturn(fragmentManager);
+        when(fragmentManager.beginTransaction()).thenReturn(mock(FragmentTransaction.class));
+
         assertThat(mController.handlePreferenceTreeClick(mPreference)).isTrue();
-        verify(mFragment).getFragmentManager();
-        verify(mFragment.getFragmentManager().beginTransaction())
+        verify(fragmentManager.beginTransaction())
                 .add(any(HardwareInfoDialogFragment.class), eq(HardwareInfoDialogFragment.TAG));
+    }
+
+    private boolean containBuildModel(CharSequence result) {
+        final String oracle = mContext.getResources().getString(R.string.model_summary,
+                Build.MODEL);
+        return result.toString().contains(oracle);
     }
 }

@@ -16,22 +16,15 @@
 
 package com.android.settings.notification;
 
-import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION_ZEN_SHOW_CUSTOM;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.FooterPreference;
@@ -42,65 +35,19 @@ import java.util.List;
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class ZenModeRestrictNotificationsSettings extends ZenModeSettingsBase implements Indexable {
 
-    protected static final int APP_MENU_SHOW_CUSTOM = 1;
-    protected boolean mShowMenuSelected;
-
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.add(0, APP_MENU_SHOW_CUSTOM, 0, R.string.zen_mode_restrict_notifications_enable_custom)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem) {
-        if (menuItem.getItemId() == APP_MENU_SHOW_CUSTOM) {
-            final FeatureFactory featureFactory = FeatureFactory.getFactory(mContext);
-            MetricsFeatureProvider metrics = featureFactory.getMetricsFeatureProvider();
-
-            mShowMenuSelected = !mShowMenuSelected;
-
-            ZenModeVisEffectsCustomPreferenceController custom =
-                    use(ZenModeVisEffectsCustomPreferenceController.class);
-            custom.setShownByMenu(mShowMenuSelected);
-            custom.displayPreference(getPreferenceScreen());
-
-            if (mShowMenuSelected) {
-                metrics.action(mContext, ACTION_ZEN_SHOW_CUSTOM, true);
-            } else {
-                metrics.action(mContext, ACTION_ZEN_SHOW_CUSTOM, false);
-            }
-
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        if (mShowMenuSelected) {
-            menu.findItem(APP_MENU_SHOW_CUSTOM)
-                    .setTitle(R.string.zen_mode_restrict_notifications_disable_custom);
-        } else {
-            menu.findItem(APP_MENU_SHOW_CUSTOM)
-                    .setTitle(R.string.zen_mode_restrict_notifications_enable_custom);
-        }
-
-        if (mShowMenuSelected && use(ZenModeVisEffectsCustomPreferenceController.class)
-                .areCustomOptionsSelected()) {
-            menu.findItem(APP_MENU_SHOW_CUSTOM).setEnabled(false);
-        } else {
-            menu.findItem(APP_MENU_SHOW_CUSTOM).setEnabled(true);
-        }
-    }
-
-    @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return buildPreferenceControllers(context, getLifecycle());
+    }
+
+    @Override
+    public int getHelpResource() {
+        return R.string.help_uri_interruptions;
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
