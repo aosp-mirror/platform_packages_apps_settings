@@ -88,23 +88,14 @@ public class ZenModeVisEffectsCustomPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_menuOff_noVisEffects() {
+    public void isAvailable_noVisEffects() {
         mBackend.mPolicy = new NotificationManager.Policy(0, 0, 0, 0);
-        mController.mShowMenuSelected = false;
-        assertThat(mController.isAvailable()).isFalse();
-    }
-
-    @Test
-    public void isAvailable_menuOn_noVisEffects() {
-        mBackend.mPolicy = new NotificationManager.Policy(0, 0, 0, 0);
-        mController.mShowMenuSelected = true;
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
-    public void isAvailable_menuOn_visEffects() {
+    public void isAvailable_visEffects() {
         mBackend.mPolicy = new NotificationManager.Policy(0, 0, 0, 1);
-        mController.mShowMenuSelected = false;
         assertThat(mController.isAvailable()).isTrue();
     }
 

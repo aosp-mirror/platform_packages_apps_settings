@@ -21,9 +21,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.PowerManager;
+import android.support.annotation.IntDef;
 import android.support.annotation.VisibleForTesting;
 
 import com.android.settings.Utils;
+import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /**
  * Use this broadcastReceiver to listen to the battery change, and it will invoke
@@ -43,7 +48,19 @@ public class BatteryBroadcastReceiver extends BroadcastReceiver {
      * Battery saver(e.g. off->on)
      */
     public interface OnBatteryChangedListener {
-        void onBatteryChanged();
+        void onBatteryChanged(@BatteryUpdateType int type);
+    }
+
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({BatteryUpdateType.MANUAL,
+            BatteryUpdateType.BATTERY_LEVEL,
+            BatteryUpdateType.BATTERY_SAVER,
+            BatteryUpdateType.BATTERY_STATUS})
+    public @interface BatteryUpdateType {
+        int MANUAL = 0;
+        int BATTERY_LEVEL = 1;
+        int BATTERY_SAVER = 2;
+        int BATTERY_STATUS = 3;
     }
 
     @VisibleForTesting
@@ -85,14 +102,17 @@ public class BatteryBroadcastReceiver extends BroadcastReceiver {
                 final String batteryLevel = Utils.getBatteryPercentage(intent);
                 final String batteryStatus = Utils.getBatteryStatus(
                         mContext.getResources(), intent);
-                if (forceUpdate || !batteryLevel.equals(mBatteryLevel) || !batteryStatus.equals(
-                        mBatteryStatus)) {
-                    mBatteryLevel = batteryLevel;
-                    mBatteryStatus = batteryStatus;
-                    mBatteryListener.onBatteryChanged();
+                if (forceUpdate) {
+                    mBatteryListener.onBatteryChanged(BatteryUpdateType.MANUAL);
+                } else if(!batteryLevel.equals(mBatteryLevel)) {
+                    mBatteryListener.onBatteryChanged(BatteryUpdateType.BATTERY_LEVEL);
+                } else if (!batteryStatus.equals(mBatteryStatus)) {
+                    mBatteryListener.onBatteryChanged(BatteryUpdateType.BATTERY_STATUS);
                 }
+                mBatteryLevel = batteryLevel;
+                mBatteryStatus = batteryStatus;
             } else if (PowerManager.ACTION_POWER_SAVE_MODE_CHANGED.equals(intent.getAction())) {
-                mBatteryListener.onBatteryChanged();
+                mBatteryListener.onBatteryChanged(BatteryUpdateType.BATTERY_SAVER);
             }
         }
     }

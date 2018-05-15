@@ -21,6 +21,7 @@ import static com.android.settings.slices.SettingsSliceProvider.ACTION_TOGGLE_CH
 import static com.android.settings.slices.SettingsSliceProvider.ACTION_WIFI_CHANGED;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_KEY;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_PLATFORM_DEFINED;
+import static com.android.settings.wifi.calling.WifiCallingSliceHelper.ACTION_WIFI_CALLING_CHANGED;
 
 import android.app.slice.Slice;
 import android.content.BroadcastReceiver;
@@ -78,6 +79,12 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
                             false /* isPlatformSlice */);
                     context.getContentResolver().notifyChange(uri, null);
                 }, 1000);
+                break;
+            case ACTION_WIFI_CALLING_CHANGED:
+                FeatureFactory.getFactory(context)
+                      .getSlicesFeatureProvider()
+                      .getNewWifiCallingSliceHelper(context)
+                      .handleWifiCallingChanged(intent);
                 break;
         }
     }

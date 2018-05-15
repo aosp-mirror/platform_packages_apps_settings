@@ -2,6 +2,8 @@ package com.android.settings.slices;
 
 import android.content.Context;
 
+import com.android.settings.wifi.calling.WifiCallingSliceHelper;
+
 /**
  * Manages Slices in Settings.
  */
@@ -24,4 +26,9 @@ public interface SlicesFeatureProvider {
      * If the data is already indexed, the data will not change.
      */
     void indexSliceData(Context context);
+
+    /**
+     * Gets new WifiCallingSliceHelper object
+     */
+    WifiCallingSliceHelper getNewWifiCallingSliceHelper(Context context);
 }
