@@ -83,7 +83,7 @@ public class DndCondition extends Condition {
 
     @Override
     public Drawable getIcon() {
-        return mManager.getContext().getDrawable(R.drawable.ic_zen);
+        return mManager.getContext().getDrawable(R.drawable.ic_do_not_disturb_on_24dp);
     }
 
     @Override
