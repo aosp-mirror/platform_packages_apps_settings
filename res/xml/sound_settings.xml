@@ -44,7 +44,6 @@
         android:icon="@drawable/ic_local_phone_24_lib"
         android:title="@string/call_volume_option_title"
         android:order="-170"
-        settings:allowDividerAbove="true"
         settings:controller="com.android.settings.notification.CallVolumePreferenceController"/>
 
     <!-- Hands free profile output switcher -->
@@ -61,8 +60,7 @@
         android:icon="@*android:drawable/ic_audio_ring_notif"
         android:title="@string/ring_volume_option_title"
         android:order="-160"
-        settings:controller="com.android.settings.notification.RingVolumePreferenceController"
-        settings:allowDividerAbove="true"/>
+        settings:controller="com.android.settings.notification.RingVolumePreferenceController"/>
 
     <!-- Also vibrate for calls -->
     <SwitchPreference
@@ -76,7 +74,6 @@
         android:icon="@*android:drawable/ic_audio_alarm"
         android:title="@string/alarm_volume_option_title"
         android:order="-150"
-        settings:allowDividerAbove="true"
         settings:controller="com.android.settings.notification.AlarmVolumePreferenceController"/>
 
     <!-- Notification volume -->
@@ -102,7 +99,6 @@
         android:title="@string/gesture_prevent_ringing_sound_title"
         android:order="-110"
         android:fragment="com.android.settings.gestures.PreventRingingGestureSettings"
-        settings:allowDividerAbove="true"
         settings:controller="com.android.settings.gestures.PreventRingingPreferenceController" />
 
     <!-- Phone ringtone -->

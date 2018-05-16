@@ -65,7 +65,7 @@ public interface DeviceIndexFeatureProvider {
         context.getSystemService(JobScheduler.class).schedule(
                 new JobInfo.Builder(jobId, jobComponent)
                         .setPersisted(true)
-                        .setMinimumLatency(1)
+                        .setMinimumLatency(1000)
                         .setOverrideDeadline(1)
                         .build());
 

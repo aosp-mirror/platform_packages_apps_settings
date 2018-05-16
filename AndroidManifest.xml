@@ -207,8 +207,6 @@
                 android:value="com.android.settings.category.ia.homepage"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
-            <meta-data android:name="android.metadata.SLICE_URI"
-                android:value="content://android.settings.slices/action/toggle_bluetooth_switch" />
         </activity>
 
         <activity android:name="AirplaneModeVoiceActivity"
@@ -253,8 +251,6 @@
                 android:value="com.android.settings.wifi.WifiSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
-            <meta-data android:name="android.metadata.SLICE_URI"
-                android:value="content://android.settings.slices/wifi" />
         </activity>
 
         <activity
@@ -745,7 +741,7 @@
         <activity
             android:name=".notification.ZenSuggestionActivity"
             android:label="@string/zen_mode_settings_title"
-            android:icon="@drawable/ic_zen"
+            android:icon="@drawable/ic_do_not_disturb_on_24dp"
             android:theme="@android:style/Theme.NoDisplay">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -2246,8 +2242,6 @@
                 android:value="com.android.settings.category.ia.homepage" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.fuelgauge.PowerUsageSummary" />
-            <meta-data android:name="android.metadata.SLICE_URI"
-                android:value="content://android.settings.slices/action/auto_brightness" />
         </activity>
 
         <activity
@@ -2264,8 +2258,6 @@
                 android:value="com.android.settings.fuelgauge.batterysaver.BatterySaverSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
-            <meta-data android:name="android.metadata.SLICE_URI"
-                android:value="content://android.settings.slices/action/battery_saver_summary" />
         </activity>
 
         <activity android:name=".fuelgauge.BatterySaverModeVoiceActivity"
@@ -2687,8 +2679,6 @@
                 android:value="true" />
             <meta-data android:name="com.android.settings.summary"
                 android:resource="@string/sound_dashboard_summary"/>
-            <meta-data android:name="android.metadata.SLICE_URI"
-                android:value="content://android.settings.slices/action/alarm_volume" />
         </activity>
 
         <!-- Show apps for which application-level notification settings are applicable -->
