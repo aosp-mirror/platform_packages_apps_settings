@@ -62,11 +62,6 @@
         android:order="-160"
         settings:controller="com.android.settings.notification.RingVolumePreferenceController"/>
 
-    <!-- Also vibrate for calls -->
-    <SwitchPreference
-        android:key="vibrate_when_ringing"
-        android:title="@string/vibrate_when_ringing_title"
-        android:order="-155"/>
 
     <!-- Alarm volume -->
     <com.android.settings.notification.VolumeSeekBarPreference
@@ -83,6 +78,13 @@
         android:title="@string/notification_volume_option_title"
         android:order="-140"
         settings:controller="com.android.settings.notification.NotificationVolumePreferenceController"/>
+
+    <!-- Also vibrate for calls -->
+    <SwitchPreference
+        android:key="vibrate_when_ringing"
+        android:title="@string/vibrate_when_ringing_title"
+        settings:controller="com.android.settings.notification.VibrateWhenRingPreferenceController"
+        android:order="-130"/>
 
     <!-- Interruptions -->
     <com.android.settingslib.RestrictedPreference
