@@ -190,7 +190,12 @@ public class SliceBuilderUtils {
      */
     public static CharSequence getSubtitleText(Context context,
             AbstractPreferenceController controller, SliceData sliceData) {
-        CharSequence summaryText;
+        CharSequence summaryText = sliceData.getScreenTitle();
+        if (isValidSummary(context, summaryText) && !TextUtils.equals(summaryText,
+                sliceData.getTitle())) {
+            return summaryText;
+        }
+
         if (controller != null) {
             summaryText = controller.getSummary();
 
