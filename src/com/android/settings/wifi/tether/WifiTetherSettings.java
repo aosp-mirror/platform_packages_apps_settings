@@ -28,7 +28,6 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -41,7 +40,6 @@ import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class WifiTetherSettings extends RestrictedDashboardFragment
         implements WifiTetherBasePreferenceController.OnTetherConfigUpdateListener {
@@ -54,6 +52,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     private WifiTetherSSIDPreferenceController mSSIDPreferenceController;
     private WifiTetherPasswordPreferenceController mPasswordPreferenceController;
     private WifiTetherApBandPreferenceController mApBandPreferenceController;
+    private WifiTetherSecurityPreferenceController mSecurityPreferenceController;
 
     private WifiManager mWifiManager;
     private boolean mRestartWifiApAfterConfigChange;
@@ -128,10 +127,12 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         mSSIDPreferenceController = new WifiTetherSSIDPreferenceController(context, this);
+        mSecurityPreferenceController = new WifiTetherSecurityPreferenceController(context, this);
         mPasswordPreferenceController = new WifiTetherPasswordPreferenceController(context, this);
         mApBandPreferenceController = new WifiTetherApBandPreferenceController(context, this);
 
         controllers.add(mSSIDPreferenceController);
+        controllers.add(mSecurityPreferenceController);
         controllers.add(mPasswordPreferenceController);
         controllers.add(mApBandPreferenceController);
         controllers.add(
@@ -142,6 +143,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     @Override
     public void onTetherConfigUpdated() {
         final WifiConfiguration config = buildNewConfig();
+        mPasswordPreferenceController.updateVisibility(config.getAuthType());
+
         /**
          * if soft AP is stopped, bring up
          * else restart with new config
@@ -158,11 +161,11 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
 
     private WifiConfiguration buildNewConfig() {
         final WifiConfiguration config = new WifiConfiguration();
+        final int securityType = mSecurityPreferenceController.getSecurityType();
 
         config.SSID = mSSIDPreferenceController.getSSID();
-        config.preSharedKey = mPasswordPreferenceController.getPassword();
-        config.allowedKeyManagement.set(
-                mPasswordPreferenceController.getSecuritySettingForPassword());
+        config.allowedKeyManagement.set(securityType);
+        config.preSharedKey = mPasswordPreferenceController.getPasswordValidated(securityType);
         config.allowedAuthAlgorithms.set(WifiConfiguration.AuthAlgorithm.OPEN);
         config.apBand = mApBandPreferenceController.getBandIndex();
         return config;
@@ -175,6 +178,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
 
     private void updateDisplayWithNewConfig() {
         use(WifiTetherSSIDPreferenceController.class)
+                .updateDisplay();
+        use(WifiTetherSecurityPreferenceController.class)
                 .updateDisplay();
         use(WifiTetherPasswordPreferenceController.class)
                 .updateDisplay();
