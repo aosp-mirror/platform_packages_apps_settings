@@ -17,6 +17,8 @@
 package com.android.settings.testutils;
 
 import static android.app.slice.Slice.HINT_TITLE;
+import static android.app.slice.Slice.SUBTYPE_COLOR;
+import static android.app.slice.SliceItem.FORMAT_INT;
 import static android.app.slice.SliceItem.FORMAT_TEXT;
 
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
@@ -37,11 +39,13 @@ import java.util.Set;
 import androidx.slice.Slice;
 import androidx.slice.SliceItem;
 import androidx.slice.SliceMetadata;
+import androidx.slice.builders.ListBuilder;
 import androidx.slice.core.SliceAction;
 import androidx.slice.core.SliceQuery;
 
 import android.support.v4.graphics.drawable.IconCompat;
 
+import com.android.settings.Utils;
 import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settings.slices.SliceBuilderUtils;
 import com.android.settings.slices.SliceData;
@@ -59,9 +63,18 @@ public class SliceTester {
      * - Correct intent
      * - Correct title
      * - Correct keywords
+     * - TTL
+     * - Color
      */
     public static void testSettingsIntentSlice(Context context, Slice slice, SliceData sliceData) {
         final SliceMetadata metadata = SliceMetadata.from(context, slice);
+
+        final long sliceTTL = metadata.getExpiry();
+        assertThat(sliceTTL).isEqualTo(ListBuilder.INFINITY);
+
+        final SliceItem colorItem = SliceQuery.findSubtype(slice, FORMAT_INT, SUBTYPE_COLOR);
+        final int color = colorItem.getInt();
+        assertThat(color).isEqualTo(Utils.getColorAccent(context));
 
         final List<SliceAction> toggles = metadata.getToggles();
         assertThat(toggles).isEmpty();
@@ -83,12 +96,21 @@ public class SliceTester {
      * - Correct content intent
      * - Correct title
      * - Correct keywords
+     * - TTL
+     * - Color
      */
     public static void testSettingsToggleSlice(Context context, Slice slice, SliceData sliceData) {
         final SliceMetadata metadata = SliceMetadata.from(context, slice);
 
+        final SliceItem colorItem = SliceQuery.findSubtype(slice, FORMAT_INT, SUBTYPE_COLOR);
+        final int color = colorItem.getInt();
+        assertThat(color).isEqualTo(Utils.getColorAccent(context));
+
         final List<SliceAction> toggles = metadata.getToggles();
         assertThat(toggles).hasSize(1);
+
+        final long sliceTTL = metadata.getExpiry();
+        assertThat(sliceTTL).isEqualTo(ListBuilder.INFINITY);
 
         final SliceAction mainToggleAction = toggles.get(0);
 
@@ -117,12 +139,21 @@ public class SliceTester {
      * - No intent
      * - Correct title
      * - Correct keywords
+     * - TTL
+     * - Color
      */
     public static void testSettingsSliderSlice(Context context, Slice slice, SliceData sliceData) {
         final SliceMetadata metadata = SliceMetadata.from(context, slice);
 
+        final SliceItem colorItem = SliceQuery.findSubtype(slice, FORMAT_INT, SUBTYPE_COLOR);
+        final int color = colorItem.getInt();
+        assertThat(color).isEqualTo(Utils.getColorAccent(context));
+
         final IconCompat expectedToggleIcon = IconCompat.createWithResource(context,
                 sliceData.getIconResource());
+
+        final long sliceTTL = metadata.getExpiry();
+        assertThat(sliceTTL).isEqualTo(ListBuilder.INFINITY);
 
         // Check primary intent
         final PendingIntent primaryPendingIntent = metadata.getPrimaryAction().getAction();
@@ -141,10 +172,19 @@ public class SliceTester {
      * - Correct title
      * - Correct intent
      * - Correct keywords
+     * - Color
+     * - TTL
      */
     public static void testSettingsUnavailableSlice(Context context, Slice slice,
             SliceData sliceData) {
         final SliceMetadata metadata = SliceMetadata.from(context, slice);
+
+        final long sliceTTL = metadata.getExpiry();
+        assertThat(sliceTTL).isEqualTo(ListBuilder.INFINITY);
+
+        final SliceItem colorItem = SliceQuery.findSubtype(slice, FORMAT_INT, SUBTYPE_COLOR);
+        final int color = colorItem.getInt();
+        assertThat(color).isEqualTo(Utils.getColorAccent(context));
 
         final List<SliceAction> toggles = metadata.getToggles();
         assertThat(toggles).isEmpty();
