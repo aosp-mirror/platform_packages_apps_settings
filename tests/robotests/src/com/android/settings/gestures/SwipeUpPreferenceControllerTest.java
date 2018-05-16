@@ -27,7 +27,7 @@ import android.content.pm.ResolveInfo;
 import android.os.UserManager;
 import android.provider.Settings;
 
-import com.android.settings.R;
+import com.android.internal.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 
@@ -57,8 +57,7 @@ public class SwipeUpPreferenceControllerTest {
     public void setUp() {
         SettingsShadowResources.overrideResource(R.bool.config_swipe_up_gesture_setting_available,
                 true);
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_swipe_up_gesture_default, true);
+        SettingsShadowResources.overrideResource(R.bool.config_swipe_up_gesture_default, true);
 
         mContext = RuntimeEnvironment.application;
         mPackageManager = Shadows.shadowOf(mContext.getPackageManager());
@@ -107,8 +106,7 @@ public class SwipeUpPreferenceControllerTest {
 
     @Test
     public void testIsChecked_defaultIsFalse_shouldReturnFalse() {
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_swipe_up_gesture_default, false);
+        SettingsShadowResources.overrideResource(R.bool.config_swipe_up_gesture_default, false);
         assertThat(mController.isChecked()).isFalse();
     }
 
