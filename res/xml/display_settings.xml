@@ -101,9 +101,10 @@
         android:fragment="com.android.settings.dream.DreamSettings" />
 
     <com.android.settingslib.RestrictedPreference
-        android:key="ambient_display"
-        android:title="@string/ambient_display_screen_title"
-        android:fragment="com.android.settings.display.AmbientDisplaySettings"
+        android:key="lockscreen_from_display_settings"
+        android:title="@string/lockscreen_settings_title"
+        android:fragment="com.android.settings.security.LockscreenDashboardFragment"
+        settings:controller="com.android.settings.security.screenlock.LockScreenPreferenceController"
         settings:userRestriction="no_ambient_display" />
 
     <!-- Hide night mode for now

@@ -19,9 +19,14 @@ package com.android.settings.security;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
+import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController;
+import com.android.settings.display.AmbientDisplayNotificationsPreferenceController;
+import com.android.settings.gestures.DoubleTapScreenPreferenceController;
+import com.android.settings.gestures.PickupGesturePreferenceController;
 import com.android.settings.notification.LockScreenNotificationPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.users.AddUserWhenLockedPreferenceController;
@@ -42,6 +47,8 @@ import androidx.annotation.VisibleForTesting;
 public class LockscreenDashboardFragment extends DashboardFragment
         implements OwnerInfoPreferenceController.OwnerInfoCallback {
 
+    public static final String KEY_AMBIENT_DISPLAY_ALWAYS_ON = "ambient_display_always_on";
+
     private static final String TAG = "LockscreenDashboardFragment";
 
     @VisibleForTesting
@@ -56,6 +63,8 @@ public class LockscreenDashboardFragment extends DashboardFragment
     static final String KEY_ADD_USER_FROM_LOCK_SCREEN =
             "security_lockscreen_add_users_when_locked";
 
+
+    private AmbientDisplayConfiguration mConfig;
     private OwnerInfoPreferenceController mOwnerInfoPreferenceController;
 
     @Override
@@ -76,6 +85,17 @@ public class LockscreenDashboardFragment extends DashboardFragment
     @Override
     public int getHelpResource() {
         return R.string.help_url_lockscreen;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        use(AmbientDisplayAlwaysOnPreferenceController.class)
+                .setConfig(getConfig(context))
+                .setCallback(this::updatePreferenceStates);
+        use(AmbientDisplayNotificationsPreferenceController.class).setConfig(getConfig(context));
+        use(DoubleTapScreenPreferenceController.class).setConfig(getConfig(context));
+        use(PickupGesturePreferenceController.class).setConfig(getConfig(context));
     }
 
     @Override
@@ -103,6 +123,13 @@ public class LockscreenDashboardFragment extends DashboardFragment
         if (mOwnerInfoPreferenceController != null) {
             mOwnerInfoPreferenceController.updateSummary();
         }
+    }
+
+    private AmbientDisplayConfiguration getConfig(Context context) {
+        if (mConfig == null) {
+            mConfig = new AmbientDisplayConfiguration(context);
+        }
+        return mConfig;
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

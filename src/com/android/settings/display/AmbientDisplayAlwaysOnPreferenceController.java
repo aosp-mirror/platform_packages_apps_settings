@@ -26,6 +26,7 @@ import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.search.ResultPayload;
+import com.android.settings.security.LockscreenDashboardFragment;
 
 public class AmbientDisplayAlwaysOnPreferenceController extends TogglePreferenceController {
 
@@ -96,7 +97,7 @@ public class AmbientDisplayAlwaysOnPreferenceController extends TogglePreference
     @Override
     public ResultPayload getResultPayload() {
         final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(mContext,
-                AmbientDisplaySettings.class.getName(), getPreferenceKey(),
+                LockscreenDashboardFragment.class.getName(), getPreferenceKey(),
                 mContext.getString(R.string.ambient_display_screen_title));
 
         return new InlineSwitchPayload(Settings.Secure.DOZE_ALWAYS_ON,
