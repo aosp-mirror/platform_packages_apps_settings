@@ -31,7 +31,6 @@ import java.util.UUID;
 public class WifiTetherPasswordPreferenceController extends WifiTetherBasePreferenceController
         implements ValidatedEditTextPreference.Validator {
 
-    private static final String TAG = "WifiTetherPswdPref";
     private static final String PREF_KEY = "wifi_tether_network_password";
 
     private String mPassword;
@@ -49,10 +48,11 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
     @Override
     public void updateDisplay() {
         final WifiConfiguration config = mWifiManager.getWifiApConfiguration();
-        if (config != null) {
-            mPassword = config.preSharedKey;
-        } else {
+        if (config == null || (config.getAuthType() == WifiConfiguration.KeyMgmt.WPA2_PSK
+                && TextUtils.isEmpty(config.preSharedKey))) {
             mPassword = generateRandomPassword();
+        } else {
+            mPassword = config.preSharedKey;
         }
         ((ValidatedEditTextPreference) mPreference).setValidator(this);
         ((ValidatedEditTextPreference) mPreference).setIsPassword(true);
@@ -68,17 +68,27 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
         return true;
     }
 
-    public String getPassword() {
+    /**
+     * This method returns the current password if it is valid for the indicated security type. If
+     * the password currently set is invalid it will forcefully set a random password that is valid.
+     *
+     * @param securityType The security type for the password.
+     * @return The current password if it is valid for the indicated security type. A new randomly
+     * generated password if it is not.
+     */
+    public String getPasswordValidated(int securityType) {
+        // don't actually overwrite unless we get a new config in case it was accidentally toggled.
+        if (securityType == WifiConfiguration.KeyMgmt.NONE) {
+            return "";
+        } else if (!isTextValid(mPassword)) {
+            mPassword = generateRandomPassword();
+            updatePasswordDisplay((EditTextPreference) mPreference);
+        }
         return mPassword;
     }
 
-    public int getSecuritySettingForPassword() {
-        // We should return NONE when no password is set
-        if (TextUtils.isEmpty(mPassword)) {
-            return WifiConfiguration.KeyMgmt.NONE;
-        }
-        // Only other currently supported type is WPA2 so we'll try that
-        return WifiConfiguration.KeyMgmt.WPA2_PSK;
+    public void updateVisibility(int securityType) {
+        mPreference.setVisible(securityType != WifiConfiguration.KeyMgmt.NONE);
     }
 
     @Override
@@ -98,9 +108,11 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
         if (!TextUtils.isEmpty(mPassword)) {
             pref.setIsSummaryPassword(true);
             pref.setSummary(mPassword);
+            pref.setVisible(true);
         } else {
             pref.setIsSummaryPassword(false);
             pref.setSummary(R.string.wifi_hotspot_no_password_subtext);
+            pref.setVisible(false);
         }
     }
 }
