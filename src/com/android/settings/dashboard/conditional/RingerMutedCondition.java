@@ -55,7 +55,7 @@ public class RingerMutedCondition extends AbnormalRingerConditionBase {
 
     @Override
     public Drawable getIcon() {
-        return mManager.getContext().getDrawable(R.drawable.ic_volume_ringer_mute);
+        return mManager.getContext().getDrawable(R.drawable.ic_notifications_off_24dp);
     }
 
     @Override
