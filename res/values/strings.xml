@@ -7407,26 +7407,34 @@
     <string name="zen_msg_event_reminder_footer">When Do Not Disturb is on, messages, reminders, and events will muted, except for the items you allow above. You can adjust messages settings to allow your friends, family, or other contacts to reach you.</string>
 
     <!-- Do not disturb onboarding dialog, accept new settings [CHAR LIMIT=30]-->
-    <string name="zen_onboarding_ok">Update</string>
-    <!-- Do not disturb onboarding dialog, do not accept new settings [CHAR LIMIT=30]-->
-    <string name="zen_onboarding_no_update">Don\'t update</string>
-    <!-- Do not disturb onboarding dialog, description of new settings [CHAR LIMIT=NONE]-->
-    <string name="zen_onboarding_dnd_visual_disturbances_description">Your phone can do more to help you focus.\n\nUpdate settings to:\n\n- Hide notifications completely\n\n- Allow calls from starred contacts and repeat callers</string>
-    <!-- Do not disturb onboarding dialog, header prompt for settings [CHAR LIMIT=80]-->
-    <string name="zen_onboarding_dnd_visual_disturbances_header">Update Do Not Disturb?</string>
-
-    <!-- obsolete -->
+    <string name="zen_onboarding_ok">Done</string>
+    <!-- Do not disturb onboarding dialog, on click user goes to dnd settings page [CHAR LIMIT=30]-->
     <string name="zen_onboarding_settings">Settings</string>
-    <!-- obsolete -->
-    <string name="zen_onboarding_more_options">You can further customize this in Settings.</string>
-    <!-- obsolete -->
-    <string name="zen_onboarding_screen_on_title">Block when the screen is on</string>
-    <!-- obsolete -->
-    <string name="zen_onboarding_screen_off_title">Block when the screen is off</string>
-    <!-- obsolete -->
-    <string name="zen_onboarding_screen_off_summary">Don\'t turn on the screen or wake for notifications</string>
-    <!-- obsolete -->
-    <string name="zen_onboarding_screen_on_summary">Don\'t show notifications at all, except for basic phone activity and status</string>
+
+    <!-- Do not disturb onboarding dialog, title for radio button [CHAR LIMIT=80]-->
+    <string name="zen_onboarding_new_setting_title">No visuals or sounds from notifications</string>
+    <!-- Do not disturb onboarding dialog, title for radio button [CHAR LIMIT=80]-->
+    <string name="zen_onboarding_current_setting_title">No sound from notifications</string>
+    <!-- Do not disturb onboarding dialog, secondary text for radio button [CHAR LIMIT=NONE]-->
+    <string name="zen_onboarding_new_setting_summary">You won\u2019t see or hear notifications. Calls from starred contacts and repeat callers are allowed.</string>
+    <!-- Do not disturb onboarding dialog, secondary text for radio button [CHAR LIMIT=NONE]-->
+    <string name="zen_onboarding_current_setting_summary">(Current setting)</string>
+
+    <!-- Do not disturb onboarding dialog, header prompt for settings [CHAR LIMIT=80]-->
+    <string name="zen_onboarding_dnd_visual_disturbances_header">Change Do Not Disturb notification settings?</string>
+
+    <!-- DO NOT TRANSLATE obsolete [CHAR LIMIT=NONE]-->
+    <string name="zen_onboarding_dnd_visual_disturbances_description" translatable="false">Your phone can do more to help you focus.\n\nUpdate settings to:\n\n- Hide notifications completely\n\n- Allow calls from starred contacts and repeat callers</string>
+    <!-- DO NOT TRANSLATE obsolete -->
+    <string name="zen_onboarding_more_options" translatable="false">You can further customize this in Settings.</string>
+    <!-- DO NOT TRANSLATE obsolete -->
+    <string name="zen_onboarding_screen_on_title" translatable="false">Block when the screen is on</string>
+    <!-- DO NOT TRANSLATE obsolete -->
+    <string name="zen_onboarding_screen_off_title" translatable="false">Block when the screen is off</string>
+    <!-- DO NOT TRANSLATE obsolete -->
+    <string name="zen_onboarding_screen_off_summary" translatable="false">Don\'t turn on the screen or wake for notifications</string>
+    <!-- DO NOT TRANSLATE obsolete -->
+    <string name="zen_onboarding_screen_on_summary" translatable="false">Don\'t show notifications at all, except for basic phone activity and status</string>
 
     <!-- Work Sounds: Work sound settings section header.  [CHAR LIMIT=50] -->
     <string name="sound_work_settings">Work profile sounds</string>
