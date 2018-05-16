@@ -17,7 +17,9 @@ package com.android.settings.connecteddevice;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.provider.Settings;
 import com.android.settings.R;
 import com.android.settings.nfc.NfcPreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -39,16 +41,20 @@ import static org.robolectric.Shadows.shadowOf;
 public class AdvancedConnectedDeviceControllerTest {
 
     private static final String KEY = "test_key";
+    private static final String DRIVING_MODE_SETTINGS_ENABLED =
+            "gearhead:driving_mode_settings_enabled";
 
     private Context mContext;
     private NfcPreferenceController mNfcController;
     private ShadowNfcAdapter mShadowNfcAdapter;
+    private ContentResolver mContentResolver;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
+        mContentResolver = mContext.getContentResolver();
         mNfcController = new NfcPreferenceController(mContext);
         mShadowNfcAdapter = shadowOf(ShadowNfcAdapter.getNfcAdapter(mContext));
     }
@@ -63,42 +69,52 @@ public class AdvancedConnectedDeviceControllerTest {
     }
 
     @Test
+    public void isDrivingModeAvailable_returnTrue() {
+        Settings.System.putInt(mContentResolver, DRIVING_MODE_SETTINGS_ENABLED, 1);
+
+        assertThat(AdvancedConnectedDeviceController.isDrivingModeAvailable(mContext)).isTrue();
+    }
+
+    @Test
+    public void isDrivingModeAvailable_returnFalse() {
+        Settings.System.putInt(mContentResolver, DRIVING_MODE_SETTINGS_ENABLED, 0);
+
+        assertThat(AdvancedConnectedDeviceController.isDrivingModeAvailable(mContext)).isFalse();
+    }
+
+    @Test
     public void getConnectedDevicesSummaryResourceId_NFCAndDrivingModeAvailable() {
         // NFC available, driving mode available
-        final boolean isDrivingModeAvailable = true;
         mShadowNfcAdapter.setEnabled(true);
         assertThat(AdvancedConnectedDeviceController
-                .getConnectedDevicesSummaryResourceId(mNfcController, isDrivingModeAvailable))
+                .getConnectedDevicesSummaryResourceId(mNfcController, true))
                 .isEqualTo(R.string.connected_devices_dashboard_summary);
     }
 
     @Test
     public void getConnectedDevicesSummaryResourceId_NFCAvailableAndDrivingModeNotAvailable() {
         // NFC is available, driving mode not available
-        final boolean isDrivingModeAvailable = false;
         mShadowNfcAdapter.setEnabled(true);
         assertThat(AdvancedConnectedDeviceController
-                .getConnectedDevicesSummaryResourceId(mNfcController, isDrivingModeAvailable))
+                .getConnectedDevicesSummaryResourceId(mNfcController, false))
                 .isEqualTo(R.string.connected_devices_dashboard_no_driving_mode_summary);
     }
 
     @Test
     public void getConnectedDevicesSummaryResourceId_NFCNotAvailableDrivingModeAvailable() {
         // NFC not available, driving mode available
-        final boolean isDrivingModeAvailable = true;
         ReflectionHelpers.setField(mNfcController, "mNfcAdapter", null);
         assertThat(AdvancedConnectedDeviceController
-                .getConnectedDevicesSummaryResourceId(mNfcController, isDrivingModeAvailable))
+                .getConnectedDevicesSummaryResourceId(mNfcController, true))
                 .isEqualTo(R.string.connected_devices_dashboard_no_nfc_summary);
     }
 
     @Test
     public void getConnectedDevicesSummaryResourceId_NFCAndDrivingModeNotAvailable() {
         // NFC not available, driving mode not available
-        final boolean isDrivingModeAvailable = false;
         ReflectionHelpers.setField(mNfcController, "mNfcAdapter", null);
         assertThat(AdvancedConnectedDeviceController
-                .getConnectedDevicesSummaryResourceId(mNfcController, isDrivingModeAvailable))
+                .getConnectedDevicesSummaryResourceId(mNfcController, false))
                 .isEqualTo(R.string.connected_devices_dashboard_no_driving_mode_no_nfc_summary);
     }
 }
