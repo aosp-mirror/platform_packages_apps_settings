@@ -25,10 +25,6 @@ import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.PreferenceViewHolder;
 import android.view.Display;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.WindowManager;
@@ -40,6 +36,10 @@ import android.widget.VideoView;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.widget.SwitchBar;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.PreferenceViewHolder;
 
 public class ToggleScreenMagnificationPreferenceFragment extends
         ToggleFeaturePreferenceFragment implements SwitchBar.OnSwitchChangeListener {
@@ -174,7 +174,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     @Override
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
-        Settings.Secure.putInt(getContentResolver(), preferenceKey, enabled ? 1 : 0);
+        MagnificationPreferenceFragment.setChecked(getContentResolver(), preferenceKey, enabled);
         updateConfigurationWarningIfNeeded();
     }
 
@@ -183,7 +183,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         super.onInstallSwitchBarToggleSwitch();
 
         mSwitchBar.setCheckedInternal(
-                Settings.Secure.getInt(getContentResolver(), mPreferenceKey, 0) == 1);
+                MagnificationPreferenceFragment.isChecked(getContentResolver(), mPreferenceKey));
         mSwitchBar.addOnSwitchChangeListener(this);
     }
 
