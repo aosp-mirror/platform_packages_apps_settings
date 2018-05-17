@@ -18,6 +18,7 @@ import android.content.Context;
 import com.android.internal.app.ColorDisplayController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.R;
 
 public class NightDisplayPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin {
@@ -29,6 +30,12 @@ public class NightDisplayPreferenceController extends AbstractPreferenceControll
     }
 
     public static boolean isSuggestionComplete(Context context) {
+        final boolean isEnabled = context.getResources().getBoolean(
+                R.bool.config_night_light_suggestion_enabled);
+        // The suggestion is always complete if not enabled.
+        if (!isEnabled) {
+            return true;
+        }
         final ColorDisplayController controller = new ColorDisplayController(context);
         return controller.getAutoMode() != ColorDisplayController.AUTO_MODE_DISABLED;
     }
