@@ -78,12 +78,17 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
     protected final LocalBluetoothProfileManager mProfileManager;
     protected int mSelectedIndex;
     protected Preference mPreference;
+    protected AudioSwitchCallback mAudioSwitchPreferenceCallback;
 
     private final AudioManagerAudioDeviceCallback mAudioManagerAudioDeviceCallback;
     private final LocalBluetoothManager mLocalBluetoothManager;
     private final MediaRouterCallback mMediaRouterCallback;
     private final WiredHeadsetBroadcastReceiver mReceiver;
     private final Handler mHandler;
+
+    public interface AudioSwitchCallback {
+        void onPreferenceDataChanged(ListPreference preference);
+    }
 
     public AudioSwitchPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -205,6 +210,10 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
 
     @Override
     public void onDeviceBondStateChanged(CachedBluetoothDevice cachedDevice, int bondState) {
+    }
+
+    public void setCallback(AudioSwitchCallback callback) {
+        mAudioSwitchPreferenceCallback = callback;
     }
 
     protected boolean isStreamFromOutputDevice(int streamType, int device) {
@@ -335,6 +344,7 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
         listPreference.setEntryValues(mediaValues);
         listPreference.setValueIndex(mSelectedIndex);
         listPreference.setSummary(mediaOutputs[mSelectedIndex]);
+        mAudioSwitchPreferenceCallback.onPreferenceDataChanged(listPreference);
     }
 
     private int getConnectedDeviceIndex(String hardwareAddress) {
