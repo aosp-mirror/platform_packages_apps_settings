@@ -24,6 +24,7 @@ import android.support.annotation.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.bluetooth.BluetoothDeviceRenamePreferenceController;
 import com.android.settings.bluetooth.BluetoothSwitchPreferenceController;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.TogglePreferenceController;
@@ -76,6 +77,12 @@ public class BluetoothDashboardFragment extends DashboardFragment {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         mFooterPreference = mFooterPreferenceMixin.createFooterPreference();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        use(BluetoothDeviceRenamePreferenceController.class).setFragment(this);
     }
 
     @Override
