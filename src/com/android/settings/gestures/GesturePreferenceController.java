@@ -59,9 +59,6 @@ public abstract class GesturePreferenceController extends TogglePreferenceContro
     public void updateState(Preference preference) {
         super.updateState(preference);
         if (preference != null) {
-            if (!(preference instanceof TwoStatePreference)) {
-                preference.setSummary(getSummary());
-            }
             // Different meanings of "Enabled" for the Preference and Controller.
             preference.setEnabled(canHandleClicks());
         }

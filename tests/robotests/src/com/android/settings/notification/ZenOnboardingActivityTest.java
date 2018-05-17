@@ -18,21 +18,11 @@ package com.android.settings.notification;
 
 import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_ALARMS;
 import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_REPEAT_CALLERS;
-import static android.app.NotificationManager.Policy.PRIORITY_SENDERS_ANY;
-import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_AMBIENT;
-import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_BADGE;
-import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_FULL_SCREEN_INTENT;
-import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_LIGHTS;
-import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_NOTIFICATION_LIST;
-import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_PEEK;
-import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_SCREEN_OFF;
 import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_SCREEN_ON;
-import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_STATUS_BAR;
 
 import static com.android.settings.notification.ZenOnboardingActivity.ALWAYS_SHOW_THRESHOLD;
-import static com.android.settings.notification.ZenOnboardingActivity.PREF_KEY_SUGGESTION_VIEWED;
 import static com.android.settings.notification.ZenOnboardingActivity
-        .PREF_KEY_SUGGGESTION_FIRST_DISPLAY_TIME;
+        .PREF_KEY_SUGGESTION_FIRST_DISPLAY_TIME;
 import static com.android.settings.notification.ZenOnboardingActivity.isSuggestionComplete;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -99,10 +89,11 @@ public class ZenOnboardingActivityTest {
     }
 
     @Test
-    public void save() {
+    public void saveNewSetting() {
         Policy policy = new Policy(PRIORITY_CATEGORY_ALARMS, 0, 0, SUPPRESSED_EFFECT_SCREEN_ON);
         when(mNm.getNotificationPolicy()).thenReturn(policy);
 
+        mActivity.mNewSetting.performClick();
         mActivity.save(null);
 
         verify(mMetricsLogger).action(MetricsEvent.ACTION_ZEN_ONBOARDING_OK);
@@ -120,24 +111,14 @@ public class ZenOnboardingActivityTest {
     }
 
     @Test
-    public void close() {
-        Policy policy = new Policy(
-                PRIORITY_CATEGORY_ALARMS, PRIORITY_SENDERS_ANY, 0,
-                SUPPRESSED_EFFECT_SCREEN_ON
-                        | SUPPRESSED_EFFECT_SCREEN_OFF
-                        | SUPPRESSED_EFFECT_FULL_SCREEN_INTENT
-                        | SUPPRESSED_EFFECT_LIGHTS
-                        | SUPPRESSED_EFFECT_PEEK
-                        | SUPPRESSED_EFFECT_STATUS_BAR
-                        | SUPPRESSED_EFFECT_BADGE
-                        | SUPPRESSED_EFFECT_AMBIENT
-                        | SUPPRESSED_EFFECT_NOTIFICATION_LIST);
+    public void keepCurrentSetting() {
+        Policy policy = new Policy(PRIORITY_CATEGORY_ALARMS, 0, 0, SUPPRESSED_EFFECT_SCREEN_ON);
         when(mNm.getNotificationPolicy()).thenReturn(policy);
 
-        mActivity.close(null);
+        mActivity.mKeepCurrentSetting.performClick();
+        mActivity.save(null);
 
         verify(mMetricsLogger).action(MetricsEvent.ACTION_ZEN_ONBOARDING_KEEP_CURRENT_SETTINGS);
-
         verify(mNm, never()).setNotificationPolicy(any());
     }
 
@@ -192,7 +173,7 @@ public class ZenOnboardingActivityTest {
             firstTime -= ALWAYS_SHOW_THRESHOLD * 2;
         }
 
-        getSharedPreferences().edit().putLong(PREF_KEY_SUGGGESTION_FIRST_DISPLAY_TIME,
+        getSharedPreferences().edit().putLong(PREF_KEY_SUGGESTION_FIRST_DISPLAY_TIME,
                firstTime).commit();
     }
 

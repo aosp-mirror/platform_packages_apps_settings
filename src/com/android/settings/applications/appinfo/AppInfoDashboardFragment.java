@@ -167,6 +167,9 @@ public class AppInfoDashboardFragment extends DashboardFragment
         use(AppOpenByDefaultPreferenceController.class).setParentFragment(this);
         use(AppPermissionPreferenceController.class).setParentFragment(this);
         use(AppPermissionPreferenceController.class).setPackageName(packageName);
+        use(AppSettingPreferenceController.class)
+                .setPackageName(packageName)
+                .setParentFragment(this);
         use(AppStoragePreferenceController.class).setParentFragment(this);
         use(AppVersionPreferenceController.class).setParentFragment(this);
         use(InstantAppDomainsPreferenceController.class).setParentFragment(this);

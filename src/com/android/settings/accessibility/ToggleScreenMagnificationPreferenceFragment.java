@@ -25,7 +25,6 @@ import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.PreferenceViewHolder;
@@ -174,7 +173,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     @Override
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
-        Settings.Secure.putInt(getContentResolver(), preferenceKey, enabled ? 1 : 0);
+        MagnificationPreferenceFragment.setChecked(getContentResolver(), preferenceKey, enabled);
         updateConfigurationWarningIfNeeded();
     }
 
@@ -183,7 +182,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         super.onInstallSwitchBarToggleSwitch();
 
         mSwitchBar.setCheckedInternal(
-                Settings.Secure.getInt(getContentResolver(), mPreferenceKey, 0) == 1);
+                MagnificationPreferenceFragment.isChecked(getContentResolver(), mPreferenceKey));
         mSwitchBar.addOnSwitchChangeListener(this);
     }
 
