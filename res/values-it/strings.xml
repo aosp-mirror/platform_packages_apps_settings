@@ -167,13 +167,12 @@
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"Richiesta di accesso alla SIM"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> desidera accedere alla tua scheda SIM. Se consenti l\'accesso, la connettività dati sul dispositivo sarà disattivata per tutta la durata della connessione. Consentire l\'accesso a <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>?"</string>
     <string name="bluetooth_device_name_summary" msgid="522235742194965734">"Visibile come <xliff:g id="DEVICE_NAME">^1</xliff:g> agli altri dispositivi"</string>
+    <string name="bluetooth_off_footer" msgid="8406865700572772936">"Attiva il Bluetooth per connetterti ad altri dispositivi."</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"I tuoi dispositivi"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Accoppia nuovo dispositivo"</string>
     <string name="bluetooth_pref_summary" product="tablet" msgid="3520035819421024105">"Consenti la comunicazione del tablet con dispositivi Bluetooth nelle vicinanze"</string>
     <string name="bluetooth_pref_summary" product="device" msgid="2205100629387332862">"Consenti la comunicazione del dispositivo con dispositivi Bluetooth nelle vicinanze"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="782032074675157079">"Consenti la comunicazione del telefono con dispositivi Bluetooth nelle vicinanze"</string>
-    <string name="bluetooth_disable_inband_ringing" msgid="8919353393497325693">"Disattiva suoneria in banda"</string>
-    <string name="bluetooth_disable_inband_ringing_summary" msgid="7898974890913984364">"Non riprodurre le suonerie del telefono personalizzate tramite gli auricolari Bluetooth"</string>
     <string name="connected_device_available_media_title" msgid="2560067541413280645">"Dispositivi multimediali disponibili"</string>
     <string name="connected_device_available_call_title" msgid="697154660967595684">"Dispositivi di chiamata disponibili"</string>
     <string name="connected_device_connected_title" msgid="5871712271201945606">"Attualmente collegati"</string>
@@ -182,6 +181,7 @@
     <string name="connected_device_add_device_summary" msgid="4041865900298680338">"Il Bluetooth verrà attivato per consentire l\'accoppiamento"</string>
     <string name="connected_device_connections_title" msgid="5988939345181466770">"Preferenze di connessione"</string>
     <string name="connected_device_previously_connected_title" msgid="491765792822244604">"Dispositivi connessi in precedenza"</string>
+    <string name="connected_device_previously_connected_screen_title" msgid="6196066429488377795">"Connessi in precedenza"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Data e ora"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Scegli il fuso orario"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -376,7 +376,8 @@
     <string name="decryption_settings_summary" product="default" msgid="5671817824042639849">"Telefono non criptato"</string>
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"Dispositivo criptato"</string>
     <string name="decryption_settings_summary" product="tablet" msgid="5794135636155570977">"Dispositivo non criptato"</string>
-    <string name="lockscreen_settings_title" msgid="3922976395527087455">"Preferenze schermata di blocco"</string>
+    <string name="lockscreen_settings_title" msgid="1099738951060387656">"Visualizzazione schermata di blocco"</string>
+    <string name="lockscreen_settings_what_to_show_category" msgid="278055252361575926">"Cosa mostrare"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Imposta La mia posizione, sblocco schermo, blocco SIM, blocco cred."</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Imposta La mia posizione, sblocco schermo, blocco archivio credenziali"</string>
     <string name="security_passwords_title" msgid="2881269890053568809">"Privacy"</string>
@@ -733,8 +734,6 @@
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Ricorda impostazioni"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="6752690395207847881">"Numero massimo di dispositivi audio Bluetooth connessi"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="5936561749790095473">"Seleziona il numero massimo di dispositivi audio Bluetooth connessi"</string>
-    <string name="bluetooth_disable_avdtp_delay_reports" msgid="7710144996922449248">"Disattiva rapporti su ritardi AVDTP Bluetooth"</string>
-    <string name="bluetooth_disable_avdtp_delay_reports_summary" msgid="6882039901251054992">"Non consentire la ricezione di rapporti sui ritardi AVDTP Bluetooth"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"Trasmetti"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Attiva display wireless"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Nessun dispositivo vicino."</string>
@@ -1008,6 +1007,11 @@
     <string name="emergency_address_title" msgid="932729250447887545">"Indirizzo per le emergenze"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Viene considerato la tua posizione quando fai una chiamata di emergenza tramite Wi‑Fi"</string>
     <string name="private_dns_help_message" msgid="3299567069152568958"><annotation id="url">"Ulteriori informazioni"</annotation>" sulle funzioni di DNS privato"</string>
+    <string name="wifi_calling_pref_managed_by_carrier" msgid="6845711858866828986">"Impostazione gestita dall\'operatore"</string>
+    <string name="wifi_calling_settings_activation_instructions" msgid="7492509632478260955">"Attiva le chiamate Wi-Fi"</string>
+    <string name="wifi_calling_turn_on" msgid="1171403510313983983">"Attiva la funzione Chiamate Wi-Fi"</string>
+    <string name="wifi_calling_not_supported" msgid="7878640438907807754">"%1$s non supporta le chiamate Wi-Fi"</string>
+    <string name="carrier" msgid="5264014738689761132">"Operatore"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Display"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Audio"</string>
     <string name="all_volume_title" msgid="4296957391257836961">"Volumi"</string>
@@ -1461,6 +1465,7 @@
     <string name="reset_esim_error_title" msgid="1464195710538232590">"Impossibile reimpostare le eSIM"</string>
     <string name="reset_esim_error_msg" msgid="8434956817922668388">"Impossibile reimpostare le eSIM a causa di un errore."</string>
     <string name="master_clear_title" msgid="3531267871084279512">"Cancella tutti i dati (ripristino dati fabbrica)"</string>
+    <string name="master_clear_short_title" msgid="8652450915870274285">"Cancella tutti i dati"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Questa operazione cancellerà tutti i dati dalla "<b>"memoria interna"</b>" del tablet, compresi:\n\n"<li>"Il tuo account Google"</li>\n<li>"Dati e impostazioni del sistema e delle app"</li>\n<li>"App scaricate"</li></string>
     <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Questa operazione cancellerà tutti i dati dalla "<b>"memoria interna"</b>" del telefono, compresi:\n\n"<li>"Il tuo account Google"</li>\n<li>"Dati e impostazioni del sistema e delle app"</li>\n<li>"App scaricate"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Al momento sei collegato ai seguenti account:\n"</string>
@@ -1744,9 +1749,6 @@
     <string name="security_settings_desc_multi" product="default" msgid="6610268420793984752">"Elenco dei contenuti a cui può accedere l\'applicazione sul telefono. Per migliorare le prestazioni e ridurre l\'utilizzo di memoria, alcune di queste autorizzazioni sono disponibili per l\'applicazione <xliff:g id="BASE_APP_NAME">%1$s</xliff:g> perché funziona con la stessa procedura di <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>:"</string>
     <string name="join_two_items" msgid="1336880355987539064">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g> e <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
     <string name="join_two_unrelated_items" msgid="1873827777191260824">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>, <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
-    <string name="join_many_items_last" msgid="218498527304674173">"<xliff:g id="ALL_BUT_LAST_ITEM">%1$s</xliff:g> e <xliff:g id="LAST_ITEM_0">%2$s</xliff:g>"</string>
-    <string name="join_many_items_first" msgid="4333907712038448660">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>, <xliff:g id="ALL_BUT_FIRST_AND_LAST_ITEM">%2$s</xliff:g>"</string>
-    <string name="join_many_items_middle" msgid="7556692394478220814">"<xliff:g id="ADDED_ITEM">%1$s</xliff:g>, <xliff:g id="REST_OF_ITEMS">%2$s</xliff:g>"</string>
     <string name="security_settings_billing_desc" msgid="8061019011821282358">"Questa applicazione potrebbe addebitarti dei costi:"</string>
     <string name="security_settings_premium_sms_desc" msgid="8734171334263713717">"Invio di SMS premium"</string>
     <string name="computing_size" msgid="1599186977475211186">"Elaborazione..."</string>
@@ -2007,6 +2009,7 @@
       <item quantity="other">Ritardo molto lungo (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
       <item quantity="one">Ritardo molto lungo (<xliff:g id="CLICK_DELAY_LABEL_0">%1$d</xliff:g> ms)</item>
     </plurals>
+    <string name="accessibility_vibration_summary" msgid="1372393829668784669">"Suoneria <xliff:g id="SUMMARY_RING">%1$s</xliff:g>, tocco <xliff:g id="SUMMARY_TOUCH">%2$s</xliff:g>"</string>
     <string name="accessibility_vibration_summary_off" msgid="1753566394591809629">"Impostazione di suoneria e notifiche: off"</string>
     <string name="accessibility_vibration_summary_low" msgid="7628418309029013867">"Impostazione di suoneria e notifiche: bassa"</string>
     <string name="accessibility_vibration_summary_medium" msgid="3422136736880414093">"Impostazione di suoneria e notifiche: media"</string>
@@ -2111,11 +2114,11 @@
     <string name="background_activity_summary_whitelisted" msgid="1079899502347973947">"L\'utilizzo in background non può essere limitato"</string>
     <string name="background_activity_warning_dialog_title" msgid="2216249969149568871">"Limitare l\'attività in background?"</string>
     <string name="background_activity_warning_dialog_text" msgid="7049624449246121981">"Se limiti l\'attività in background per un\'app, tale app potrebbe funzionare in modo anomalo"</string>
+    <string name="background_activity_disabled_dialog_text" msgid="6133420589651880824">"Per limitare l\'app,\n\ndevi prima attivare l\'ottimizzazione della batteria."</string>
     <string name="device_screen_usage" msgid="3386088035570409683">"Utilizzo dello schermo dall\'ultima ricarica completa"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"Consumo dello schermo"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"Scansione rete mobile"</string>
-    <string name="power_usage_list_summary" msgid="6393929085382334341">"Utilizzo delle app dall\'ultima ricarica completa (<xliff:g id="RELATIVE_TIME">^1</xliff:g>)"</string>
-    <string name="power_usage_list_summary_device" msgid="4461926045610455423">"Utilizzo del dispositivo dall\'ultima ricarica completa (<xliff:g id="RELATIVE_TIME">^1</xliff:g>)"</string>
+    <string name="power_usage_list_summary" msgid="5584049564906462506">"Uso della batteria dalla ricarica completa"</string>
     <string name="screen_usage_summary" msgid="6687403051423153550">"Tempo per cui la schermata è rimasta attiva dalla ricarica completa"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"Utilizzo del dispositivo dall\'ultima ricarica completa"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Utilizzo batteria dallo scollegamento"</string>
@@ -2146,8 +2149,10 @@
     <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"Attivazione del dispositivo in background"</string>
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"Richiesta della posizione frequentemente"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> app con comportamenti anomali"</string>
-    <string name="battery_tip_summary_title" msgid="7060523369832289878">"La batteria è in buone condizioni"</string>
-    <string name="battery_tip_summary_summary" msgid="7674026655453457">"Le app funzionano normalmente"</string>
+    <string name="battery_tip_summary_title" msgid="368729969313047399">"Le app funzionano normalmente"</string>
+    <string name="battery_tip_summary_summary" product="default" msgid="2198778125778121221">"Il telefono ha un consumo tipico della batteria in background"</string>
+    <string name="battery_tip_summary_summary" product="tablet" msgid="1183976728682325345">"Il tablet ha un consumo tipico della batteria in background"</string>
+    <string name="battery_tip_summary_summary" product="device" msgid="363718204492523920">"Il dispositivo ha un consumo tipico della batteria in background"</string>
     <string name="battery_tip_low_battery_title" msgid="5103420355109677385">"Capacità della batteria in esaurimento"</string>
     <string name="battery_tip_low_battery_summary" msgid="4702986182940709150">"La batteria non può fornire una buona durata"</string>
     <string name="battery_tip_smart_battery_title" product="default" msgid="2542822112725248683">"Aumenta la durata della batteria del telefono"</string>
@@ -2162,9 +2167,9 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"Tablet utilizzato più del solito"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"Dispositivo usato più del solito"</string>
     <string name="battery_tip_high_usage_summary" msgid="6341311803303581798">"La batteria potrebbe esaurirsi a breve"</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="7434089311164898581">"Hai utilizzato il telefono più del solito. La batteria potrebbe esaurirsi prima del previsto.\n\nEcco le <xliff:g id="NUMBER">%1$d</xliff:g> app più utilizzate dall\'ultima ricarica completa (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="2987443811119964310">"Hai utilizzato il tablet più del solito. La batteria potrebbe esaurirsi prima del previsto.\n\nEcco le <xliff:g id="NUMBER">%1$d</xliff:g> app più utilizzate dall\'ultima ricarica completa (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="1993039726576708815">"Hai utilizzato il dispositivo più del solito. La batteria potrebbe esaurirsi prima del previsto.\n\nEcco le <xliff:g id="NUMBER">%1$d</xliff:g> app più utilizzate dall\'ultima ricarica completa (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
+    <string name="battery_tip_dialog_message" product="default" msgid="7001932078713215338">"Stai usando il telefono più del solito. La batteria potrebbe esaurirsi prima del previsto.\n\nEcco le <xliff:g id="NUMBER">%1$d</xliff:g> app più utilizzate dall\'ultima ricarica completa:"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="8482296786233647690">"Stai usando il tablet più del solito. La batteria potrebbe esaurirsi prima del previsto.\n\nEcco le <xliff:g id="NUMBER">%1$d</xliff:g> app più utilizzate dall\'ultima ricarica completa:"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="2806861679225286129">"Stai usando il dispositivo più del solito. La batteria potrebbe esaurirsi prima del previsto.\n\nEcco le <xliff:g id="NUMBER">%1$d</xliff:g> app più utilizzate dall\'ultima ricarica completa:"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="other">Limita %1$d app</item>
       <item quantity="one">Limita %1$d app</item>
@@ -2193,8 +2198,9 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="6537761705584610231">"Questa app potrà usare la batteria in background. La batteria potrebbe esaurirsi prima del previsto."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="6022058431218137646">"Rimuovi"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="3058235875830858902">"Annulla"</string>
-    <string name="battery_tip_dialog_summary_message" msgid="3483708973495692333">"In base al tuo utilizzo, solitamente la ricarica completa della batteria dura <xliff:g id="TIME_DURATION">%1$s</xliff:g> circa.\n\nSe vuoi aumentare la durata della batteria, attiva la funzione Risparmio energetico."</string>
-    <string name="battery_tip_dialog_summary_message_no_estimation" msgid="1456026456418786135">"Se vuoi aumentare la durata della batteria, attiva la funzione Risparmio energetico"</string>
+    <string name="battery_tip_dialog_summary_message" product="default" msgid="4628448253185085796">"Le tue app stanno utilizzando un livello di batteria normale. Se le app consumano troppa batteria, il tuo telefono suggerirà le azioni che puoi svolgere.\n\nSe la carica della batteria è scarsa, puoi sempre attivare Risparmio energetico."</string>
+    <string name="battery_tip_dialog_summary_message" product="tablet" msgid="8327950887399420971">"Le tue app stanno utilizzando un livello di batteria normale. Se le app consumano troppa batteria, il tuo tablet suggerirà le azioni che puoi svolgere.\n\nSe la carica della batteria è scarsa, puoi sempre attivare Risparmio energetico."</string>
+    <string name="battery_tip_dialog_summary_message" product="device" msgid="6753742263807939789">"Le tue app stanno utilizzando un livello di batteria normale. Se le app consumano troppa batteria, il tuo dispositivo suggerirà le azioni che puoi svolgere.\n\nSe la carica della batteria è scarsa, puoi sempre attivare Risparmio energetico."</string>
     <string name="smart_battery_manager_title" msgid="870632749556793417">"Gestione batteria"</string>
     <string name="smart_battery_title" msgid="6218785691872466076">"Gestisci le app automaticamente"</string>
     <string name="smart_battery_summary" msgid="1339184602000004058">"Limita l\'utilizzo della batteria per le app che usi di rado"</string>
@@ -2419,16 +2425,9 @@
     <string name="credentials_settings_not_available" msgid="7968275634486624215">"Le credenziali non sono disponibili per questo utente"</string>
     <string name="credential_for_vpn_and_apps" msgid="4168197158768443365">"Installata per VPN e app"</string>
     <string name="credential_for_wifi" msgid="6228425986551591864">"Installata per Wi-Fi"</string>
-    <string name="credentials_unlock" msgid="385427939577366499"></string>
-    <string name="credentials_unlock_hint" msgid="2301301378040499348">"Digita la password per l\'archivio credenziali."</string>
-    <string name="credentials_old_password" msgid="7553393815538684028">"Password attuale:"</string>
     <string name="credentials_reset_hint" msgid="6297256880896133631">"Rimuovere tutti i contenuti?"</string>
-    <string name="credentials_wrong_password" msgid="2541932597104054807">"Password errata."</string>
-    <string name="credentials_reset_warning" msgid="5320653011511797600">"Password non corretta. Hai un\'altra possibilità prima che l\'archivio credenziali venga cancellato."</string>
-    <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"Password non corretta. Hai altre <xliff:g id="NUMBER">%1$d</xliff:g> possibilità prima che l\'archivio credenziali venga cancellato."</string>
     <string name="credentials_erased" msgid="2907836028586342969">"Archivio credenziali cancellato"</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"Impossibile cancellare archivio credenz."</string>
-    <string name="credentials_enabled" msgid="7588607413349978930">"L\'archivio di credenziali è attivo."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="8058230497337529036">"Per poter utilizzare l\'archivio credenziali, sul tuo dispositivo deve essere impostata una schermata di blocco sicura."</string>
     <string name="credentials_configure_lock_screen_button" msgid="253239765216055321">"IMPOSTA BLOCCO"</string>
     <string name="usage_access_title" msgid="332333405495457839">"App con accesso a dati utilizzo"</string>
@@ -2943,8 +2942,14 @@
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"utilizzo dei dati"</string>
     <string name="network_dashboard_summary_hotspot" msgid="8494210248613254574">"hotspot"</string>
     <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"Dispositivi collegati"</string>
-    <string name="connected_devices_dashboard_summary" msgid="2390582103384791904">"Bluetooth, Trasmetti, NFC"</string>
-    <string name="connected_devices_dashboard_no_nfc_summary" msgid="9106040742715366495">"Bluetooth, Trasmetti"</string>
+    <!-- no translation found for connected_devices_dashboard_summary (2665221896894251402) -->
+    <skip />
+    <!-- no translation found for connected_devices_dashboard_no_nfc_summary (3840842725283655533) -->
+    <skip />
+    <!-- no translation found for connected_devices_dashboard_no_driving_mode_summary (5018708106066758867) -->
+    <skip />
+    <!-- no translation found for connected_devices_dashboard_no_driving_mode_no_nfc_summary (5250078362483148199) -->
+    <skip />
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"App e notifiche"</string>
     <string name="app_and_notification_dashboard_summary" msgid="2363314178802548682">"Autorizzazioni, app predefinite"</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"Account"</string>
@@ -3084,15 +3089,14 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Blocca interruzioni visive"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"Consenti segnali visivi"</string>
-    <string name="zen_mode_restrict_notifications_screen_title" msgid="9027437428488279426">"Limita notifiche"</string>
+    <string name="zen_mode_settings_category" msgid="3982039687186952865">"Quando è attiva la modalità Non disturbare"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"Notifiche"</string>
-    <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"Quando è attiva la modalità Non disturbare"</string>
-    <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"Disattiva notifiche"</string>
-    <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"Mostra notifiche ma disattiva suoni e vibrazioni"</string>
-    <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"Quando arrivano nuove notifiche, il telefono non emetterà suoni né vibrazioni"</string>
-    <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"Nascondi e disattiva l\'audio delle notifiche"</string>
-    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"Le notifiche non appariranno mai"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"Quando è attiva la modalità Non disturbare, le notifiche nuove o esistenti non saranno visibili. Tuttavia, le notifiche necessarie per lo stato e le attività di base del telefono continueranno ad apparire."</string>
+    <string name="zen_mode_restrict_notifications_mute" msgid="8649062661635246283">"Mostra notifiche in modalità silenziosa"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="8450964969807231275">"L\'audio delle notifiche verrà disattivato"</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="3465600930732602159">"All\'arrivo delle notifiche, il telefono non emetterà suoni o vibrazioni."</string>
+    <string name="zen_mode_restrict_notifications_hide" msgid="9070829387109283980">"Nascondi notifiche"</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3832808022882158781">"Non vedrai le notifiche nuove o esistenti"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="6559283246372102465">"Il tuo telefono non mostrerà notifiche nuove o esistenti e non emetterà suoni o vibrazioni. Le notifiche non verranno visualizzate quando scorri verso il basso sullo schermo.\n\nRicorda che le notifiche fondamentali per lo stato e le attività del telefono continueranno a essere visualizzate."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"Personalizzata"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"Attiva modalità personalizzata"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"Rimuovi impostazione personalizzata"</string>
@@ -3144,16 +3148,32 @@
       <item quantity="other">Possono essere attivate automaticamente <xliff:g id="ON_COUNT">%d</xliff:g> regole</item>
       <item quantity="one">Può essere attivata automaticamente 1 regola</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Aggiorna"</string>
-    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Non aggiornare"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"Il tuo telefono può fare ancora di più per aiutarti a concentrarti.\n\nAggiorna le impostazioni a:\n\n- Nascondi completamente le notifiche\n\n- Consenti chiamate da contatti speciali e chiamate ripetute"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"Aggiornare Non disturbare?"</string>
+    <string name="zen_category_behavior" msgid="2989256030084350296">"Comportamento"</string>
+    <string name="zen_category_exceptions" msgid="7601136604273265629">"Eccezioni"</string>
+    <string name="zen_category_schedule" msgid="9000447592251450453">"Programmazione"</string>
+    <string name="zen_sound_title" msgid="424490228488531372">"Suoni e vibrazione"</string>
+    <string name="zen_sound_footer" msgid="7621745273287208979">"Quando la modalità Non disturbare è attiva, l\'audio e la vibrazione verranno disattivati, ad eccezione degli elementi da te sopra consentiti."</string>
+    <string name="zen_sound_category_title" msgid="4336596939661729188">"Disattiva l\'audio per tutti tranne"</string>
+    <string name="zen_sound_all_muted" msgid="4850363350480968114">"Audio disattivato"</string>
+    <string name="zen_sound_none_muted" msgid="3938508512103612527">"Audio non disattivato"</string>
+    <string name="zen_sound_one_allowed" msgid="8447313454438932276">"Audio disattivato, ma consenti <xliff:g id="SOUND_TYPE">%1$s</xliff:g>"</string>
+    <string name="zen_sound_two_allowed" msgid="980491120444358550">"Audio disattivato, ma consenti <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> e <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>"</string>
+    <string name="zen_sound_three_allowed" msgid="3455767205934547985">"Audio disattivato, ma consenti <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> e <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>"</string>
+    <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"Messaggi, eventi e promemoria"</string>
+    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"Quando la modalità Non disturbare è attiva, l\'audio di messaggi, promemoria ed eventi verrà disattivato, ad eccezione degli elementi da te sopra consentiti. Puoi regolare le impostazioni dei messaggi affinché amici, familiari o altri contatti possano raggiungerti."</string>
+    <!-- no translation found for zen_onboarding_ok (6131211000824433013) -->
+    <skip />
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Impostazioni"</string>
-    <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Puoi personalizzare ulteriormente questa preferenza nelle Impostazioni."</string>
-    <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Blocca quando lo schermo è acceso"</string>
-    <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Blocca quando lo schermo è spento"</string>
-    <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Non accendere lo schermo e non riattivare per le notifiche"</string>
-    <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Non mostrare le notifiche, tranne quelle relative allo stato e all\'attività di base del telefono"</string>
+    <!-- no translation found for zen_onboarding_new_setting_title (3311718322273907394) -->
+    <skip />
+    <!-- no translation found for zen_onboarding_current_setting_title (776426065129609376) -->
+    <skip />
+    <!-- no translation found for zen_onboarding_new_setting_summary (6293026064871880706) -->
+    <skip />
+    <!-- no translation found for zen_onboarding_current_setting_summary (1280614488924843713) -->
+    <skip />
+    <!-- no translation found for zen_onboarding_dnd_visual_disturbances_header (1352808651270918932) -->
+    <skip />
     <string name="sound_work_settings" msgid="6774324553228566442">"Suoni profilo di lavoro"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Usa suoni profilo personale"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"I suoni dei profili di lavoro e personale sono gli stessi"</string>
@@ -3194,7 +3214,7 @@
     <string name="notification_importance_unspecified" msgid="6622173510486113958">"Attiva audio"</string>
     <string name="notification_importance_blocked" msgid="7938180808339386300">"Non mostrare mai notifiche"</string>
     <string name="notification_importance_min" msgid="9054819132085066824">"Mostra in modalità silenziosa e riduci a icona"</string>
-    <string name="notification_importance_low" msgid="2445139943005315690">"Mostra silenziosamente"</string>
+    <string name="notification_importance_low" msgid="2445139943005315690">"Mostra in modalità silenziosa"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"Con suoneria"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"Suoneria e visualizzazione sullo schermo"</string>
     <string name="notification_importance_high_silent" msgid="2667033773703765252">"Visualizzazione sullo schermo"</string>
@@ -3280,7 +3300,7 @@
     <string name="app_notification_importance_title" msgid="8002263131149345584">"Importanza"</string>
     <string name="notification_show_lights_title" msgid="7671781299688190532">"Luce lampeggiante"</string>
     <string name="notification_vibrate_title" msgid="1646667807969755957">"Vibrazione"</string>
-    <string name="notification_channel_sound_title" msgid="3899212238513507941">"Suono"</string>
+    <string name="notification_channel_sound_title" msgid="3899212238513507941">"Suoneria"</string>
     <string name="zen_mode_rule_delete_button" msgid="903658142711011617">"Elimina"</string>
     <string name="zen_mode_rule_rename_button" msgid="4642843370946599164">"Rinomina"</string>
     <string name="zen_mode_rule_name" msgid="5149068059383837549">"Nome regola"</string>
@@ -3322,21 +3342,38 @@
     <string name="summary_range_symbol_combination" msgid="5695218513421897027">"<xliff:g id="START">%1$s</xliff:g> - <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"Dalle <xliff:g id="START">%1$s</xliff:g> alle <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_calls" msgid="7051492091133751208">"Chiamate"</string>
+    <string name="zen_mode_calls_title" msgid="623395033931747661">"Consenti chiamate"</string>
+    <string name="zen_mode_calls_footer" msgid="3618700268458237781">"Quando la modalità Non disturbare è attiva, le chiamate in arrivo sono bloccate. Puoi regolare le impostazioni affinché amici, familiari e altri contatti possano raggiungerti."</string>
+    <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"Contatti speciali"</string>
+    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="6748832187598909961">
+      <item quantity="other">e altri <xliff:g id="NUM_PEOPLE">%d</xliff:g></item>
+      <item quantity="one">e 1 altro</item>
+    </plurals>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Messaggi"</string>
-    <string name="zen_mode_all_messages" msgid="6449223378976743208">"Tutti i messaggi"</string>
-    <string name="zen_mode_selected_messages" msgid="8245990149599142281">"Messaggi selezionati"</string>
+    <string name="zen_mode_messages_title" msgid="7729380010396411129">"Consenti messaggi"</string>
+    <string name="zen_mode_all_messages" msgid="8257021584561639816">"Messaggi"</string>
+    <string name="zen_mode_selected_messages" msgid="1047355526202106114">"Alcuni messaggi"</string>
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"Da chiunque"</string>
     <string name="zen_mode_from_contacts" msgid="2232335406106711637">"Solo dai contatti"</string>
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Solo da contatti Speciali"</string>
+    <string name="zen_calls_summary_starred_repeat" msgid="4046151920710059778">"Da contatti speciali e chiamate ripetute"</string>
+    <string name="zen_calls_summary_contacts_repeat" msgid="1528716671301999084">"Da contatti e chiamate ripetute"</string>
+    <string name="zen_calls_summary_repeat_only" msgid="7105261473107715445">"Solo da chiamate ripetute"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Nessuno"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Sveglie"</string>
     <string name="zen_mode_media" msgid="8808264142134422380">"Contenuti multimediali"</string>
     <string name="zen_mode_system" msgid="2541380718411593581">"Suoni alla pressione"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Promemoria"</string>
+    <string name="zen_mode_reminders_title" msgid="2345044406347406902">"Consenti promemoria"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Eventi"</string>
-    <string name="zen_mode_all_callers" msgid="584186167367236922">"Tutti i chiamanti"</string>
-    <string name="zen_mode_selected_callers" msgid="3127598874060615742">"Chiamate da utenti selezionati"</string>
+    <string name="zen_mode_events_title" msgid="5597241655883329085">"Consenti eventi"</string>
+    <string name="zen_mode_all_callers" msgid="2378065871253871057">"chiunque"</string>
+    <string name="zen_mode_contacts_callers" msgid="5569804103920394175">"contatti"</string>
+    <string name="zen_mode_starred_callers" msgid="1023167821338514140">"contatti speciali"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"Chiamate ripetute"</string>
+    <string name="zen_mode_repeat_callers_title" msgid="8553876328249671783">"Consenti chiamate ripetute"</string>
+    <string name="zen_mode_calls_summary_one" msgid="3972333792749874863">"Da <xliff:g id="CALLER_TYPE">%1$s</xliff:g>"</string>
+    <string name="zen_mode_calls_summary_two" msgid="6592821501321201329">"Da <xliff:g id="CALLER_TYPE">%1$s</xliff:g> e <xliff:g id="CALLERT_TPYE">%2$s</xliff:g>"</string>
     <string name="zen_mode_repeat_callers_summary" msgid="239685342222975733">"Se la stessa persona chiama una seconda volta entro <xliff:g id="MINUTES">%d</xliff:g> minuti"</string>
     <string name="zen_mode_behavior_summary_custom" msgid="168127313238020146">"Personalizzato"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"Attiva automaticam."</string>
@@ -3606,7 +3643,7 @@
     <string name="zen_access_revoke_warning_dialog_summary" msgid="5518216907304930148">"Tutte le regole Non disturbare create da questa app saranno rimosse."</string>
     <string name="ignore_optimizations_on" msgid="6915689518016285116">"Non ottimizzare"</string>
     <string name="ignore_optimizations_off" msgid="6153196256410296835">"Ottimizza"</string>
-    <string name="ignore_optimizations_on_desc" msgid="2321398930330555815">"La batteria potrebbe scaricarsi più rapidamente."</string>
+    <string name="ignore_optimizations_on_desc" msgid="3549930955839111652">"La batteria potrebbe scaricarsi più rapidamente. L\'uso della batteria in background non sarà più impedito all\'app."</string>
     <string name="ignore_optimizations_off_desc" msgid="5255731062045426544">"Opzione consigliata per una durata maggiore della batteria"</string>
     <string name="ignore_optimizations_title" msgid="2829637961185027768">"Autorizzare <xliff:g id="APP">%s</xliff:g> a ignorare le ottimizzazioni della batteria?"</string>
     <string name="app_list_preference_none" msgid="108006867520327904">"Nessuna"</string>
@@ -3873,8 +3910,7 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Gestisci le informazioni nella schermata di blocco"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Mostra o nascondi i contenuti delle notifiche"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Tutte"</string>
-    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
-    <skip />
+    <string name="page_tab_title_support" msgid="4407600495101788249">"Suggerimenti e assistenza"</string>
     <string name="developer_smallest_width" msgid="7516950434587313360">"Larghezza minima"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Nessuna app installata ha richiesto l\'accesso a SMS premium"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"Gli SMS premium potrebbero comportare costi, che verranno aggiunti alle fatture del tuo operatore. Se attivi l\'autorizzazione per un\'app, potrai utilizzarla per inviare SMS premium."</string>
@@ -4067,6 +4103,8 @@
     <string name="storage_movies_tv" msgid="5498394447562086890">"App per film e programmi televisivi"</string>
     <string name="carrier_provisioning" msgid="4398683675591893169">"Informazioni sul provisioning operatore"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"Attiva provisioning operatore"</string>
+    <string name="zen_suggestion_title" msgid="798067603460192693">"Aggiorna modalità Non disturbare"</string>
+    <string name="zen_suggestion_summary" msgid="4573237195296808909">"Nascondi le notifiche per mantenere la concentrazione"</string>
     <string name="new_device_suggestion_title" msgid="698847081680980774">"Quali entusiasmanti novità ti attendono?"</string>
     <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"Scopri il tuo nuovo telefono"</string>
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Scopri il tuo nuovo tablet"</string>

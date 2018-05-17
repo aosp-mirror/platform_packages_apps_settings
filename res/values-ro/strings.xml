@@ -168,13 +168,12 @@
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"Solicitare de acces la SIM"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> dorește să acceseze cardul SIM. Dacă acordați accesul la cardul SIM, conexiunea de date de pe dispozitiv va fi dezactivată pe durata conectării. Acordați accesul pentru <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
     <string name="bluetooth_device_name_summary" msgid="522235742194965734">"Vizibil ca „<xliff:g id="DEVICE_NAME">^1</xliff:g>” pentru alte dispozitive"</string>
+    <string name="bluetooth_off_footer" msgid="8406865700572772936">"Activați Bluetooth ca să vă conectați la alte dispozitive."</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Dispozitivele dvs."</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Asociați un nou dispozitiv"</string>
     <string name="bluetooth_pref_summary" product="tablet" msgid="3520035819421024105">"Permiteți tabletei să comunice cu dispozitivele Bluetooth din apropiere"</string>
     <string name="bluetooth_pref_summary" product="device" msgid="2205100629387332862">"Permiteți dispozitivului să comunice cu dispozitivele Bluetooth din apropiere"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="782032074675157079">"Permiteți telefonului să comunice cu dispozitivele Bluetooth din apropiere"</string>
-    <string name="bluetooth_disable_inband_ringing" msgid="8919353393497325693">"Dezactivați soneria în căști"</string>
-    <string name="bluetooth_disable_inband_ringing_summary" msgid="7898974890913984364">"Nu redați tonurile de sonerie personalizate ale telefonului prin căștile Bluetooth"</string>
     <string name="connected_device_available_media_title" msgid="2560067541413280645">"Dispozitive media disponibile"</string>
     <string name="connected_device_available_call_title" msgid="697154660967595684">"Dispozitive de apel disponibile"</string>
     <string name="connected_device_connected_title" msgid="5871712271201945606">"Conectat în prezent"</string>
@@ -183,6 +182,7 @@
     <string name="connected_device_add_device_summary" msgid="4041865900298680338">"Bluetooth se va activa pentru asociere"</string>
     <string name="connected_device_connections_title" msgid="5988939345181466770">"Preferințe pentru conexiune"</string>
     <string name="connected_device_previously_connected_title" msgid="491765792822244604">"Dispozitive conectate anterior"</string>
+    <string name="connected_device_previously_connected_screen_title" msgid="6196066429488377795">"Conectat anterior"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Data și ora"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Selectați fusul orar"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -378,7 +378,8 @@
     <string name="decryption_settings_summary" product="default" msgid="5671817824042639849">"Telefonul nu este criptat"</string>
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"Dispozitiv criptat"</string>
     <string name="decryption_settings_summary" product="tablet" msgid="5794135636155570977">"Dispozitivul nu este criptat"</string>
-    <string name="lockscreen_settings_title" msgid="3922976395527087455">"Preferințe ecran de blocare"</string>
+    <string name="lockscreen_settings_title" msgid="1099738951060387656">"Afișajul ecranului de blocare"</string>
+    <string name="lockscreen_settings_what_to_show_category" msgid="278055252361575926">"Ce se afișează"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Setați Locația mea, deblocarea ecranului, blocarea cardului SIM, blocarea stocării acreditărilor"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Setați Locația mea, deblocarea ecranului, blocarea stocării acreditărilor"</string>
     <string name="security_passwords_title" msgid="2881269890053568809">"Confidențialitate"</string>
@@ -748,8 +749,6 @@
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Rețineți setările"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="6752690395207847881">"Numărul maxim de dispozitive audio Bluetooth conectate"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="5936561749790095473">"Selectați numărul maxim de dispozitive audio Bluetooth conectate"</string>
-    <string name="bluetooth_disable_avdtp_delay_reports" msgid="7710144996922449248">"Dezactivați rapoartele de întârziere AVDTP Bluetooth"</string>
-    <string name="bluetooth_disable_avdtp_delay_reports_summary" msgid="6882039901251054992">"Nu permiteți primirea rapoartelor de întârziere Bluetooth AVDTP"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"Proiectare"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Activați ecranul wireless"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Nu s-au găsit dispozitive în apropiere."</string>
@@ -1024,6 +1023,11 @@
     <string name="emergency_address_title" msgid="932729250447887545">"Adresă de urgență"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Folosită ca locație când efectuați un apel de urgență prin Wi-Fi"</string>
     <string name="private_dns_help_message" msgid="3299567069152568958"><annotation id="url">"Aflați mai multe"</annotation>" despre funcțiile DNS-ului privat"</string>
+    <string name="wifi_calling_pref_managed_by_carrier" msgid="6845711858866828986">"Setare gestionată de operator"</string>
+    <string name="wifi_calling_settings_activation_instructions" msgid="7492509632478260955">"Activați Apelarea prin Wi-Fi"</string>
+    <string name="wifi_calling_turn_on" msgid="1171403510313983983">"Activați Apelarea prin Wi-Fi"</string>
+    <string name="wifi_calling_not_supported" msgid="7878640438907807754">"Apelarea prin Wi-Fi nu este disponibilă pentru %1$s"</string>
+    <string name="carrier" msgid="5264014738689761132">"Operator"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Afișaj"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Sunet"</string>
     <string name="all_volume_title" msgid="4296957391257836961">"Volume"</string>
@@ -1478,6 +1482,7 @@
     <string name="reset_esim_error_title" msgid="1464195710538232590">"Cardurile eSIM nu se pot reseta"</string>
     <string name="reset_esim_error_msg" msgid="8434956817922668388">"Cardurile eSIM nu pot fi resetate din cauza unei erori."</string>
     <string name="master_clear_title" msgid="3531267871084279512">"Ștergeți toate datele (reveniți la setările din fabrică)"</string>
+    <string name="master_clear_short_title" msgid="8652450915870274285">"Ștergeți toate datele (reveniți la setările din fabrică)"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Această acțiune va șterge toate datele din "<b>"stocarea internă"</b>" a tabletei dvs., inclusiv:\n\n"<li>"Contul dvs. Google;"</li>\n<li>"datele și setările sistemului și ale aplicațiilor;"</li>\n<li>"aplicațiile descărcate;"</li></string>
     <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Această acțiune va șterge toate datele din "<b>"stocarea internă"</b>" a telefonului dvs., inclusiv:\n\n"<li>"Contul dvs. Google;"</li>\n<li>"datele și setările sistemului și ale aplicațiilor;"</li>\n<li>"aplicațiile descărcate;"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"În prezent sunteți conectat(ă) la următoarele conturi:\n"</string>
@@ -1762,9 +1767,6 @@
     <string name="security_settings_desc_multi" product="default" msgid="6610268420793984752">"Această aplicație poate accesa următoarele elemente pe telefonul dvs. Pentru a îmbunătăți performanța și a reduce consumul de memorie, unele dintre aceste permisiuni sunt disponibile pentru <xliff:g id="BASE_APP_NAME">%1$s</xliff:g>, deoarece aceasta rulează în același proces ca și <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>:"</string>
     <string name="join_two_items" msgid="1336880355987539064">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g> și <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
     <string name="join_two_unrelated_items" msgid="1873827777191260824">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>, <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
-    <string name="join_many_items_last" msgid="218498527304674173">"<xliff:g id="ALL_BUT_LAST_ITEM">%1$s</xliff:g> și <xliff:g id="LAST_ITEM_0">%2$s</xliff:g>"</string>
-    <string name="join_many_items_first" msgid="4333907712038448660">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>, <xliff:g id="ALL_BUT_FIRST_AND_LAST_ITEM">%2$s</xliff:g>"</string>
-    <string name="join_many_items_middle" msgid="7556692394478220814">"<xliff:g id="ADDED_ITEM">%1$s</xliff:g>, <xliff:g id="REST_OF_ITEMS">%2$s</xliff:g>"</string>
     <string name="security_settings_billing_desc" msgid="8061019011821282358">"Această aplicație poate să genereze costuri:"</string>
     <string name="security_settings_premium_sms_desc" msgid="8734171334263713717">"Trimiteți SMS premium"</string>
     <string name="computing_size" msgid="1599186977475211186">"În curs de calculare..."</string>
@@ -2031,6 +2033,7 @@
       <item quantity="other">Întârziere foarte lungă (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
       <item quantity="one">Întârziere foarte lungă (<xliff:g id="CLICK_DELAY_LABEL_0">%1$d</xliff:g> ms)</item>
     </plurals>
+    <string name="accessibility_vibration_summary" msgid="1372393829668784669">"Sunet <xliff:g id="SUMMARY_RING">%1$s</xliff:g>, atingere <xliff:g id="SUMMARY_TOUCH">%2$s</xliff:g>"</string>
     <string name="accessibility_vibration_summary_off" msgid="1753566394591809629">"Vibrații dezactivate pentru sonerie și notificări"</string>
     <string name="accessibility_vibration_summary_low" msgid="7628418309029013867">"Vibrații scăzute setate pentru sonerie și notificări"</string>
     <string name="accessibility_vibration_summary_medium" msgid="3422136736880414093">"Vibrații medii setate pentru sonerie și notificări"</string>
@@ -2137,11 +2140,11 @@
     <string name="background_activity_summary_whitelisted" msgid="1079899502347973947">"Utilizarea în fundal nu poate fi restricționată"</string>
     <string name="background_activity_warning_dialog_title" msgid="2216249969149568871">"Limitați activitatea de fundal?"</string>
     <string name="background_activity_warning_dialog_text" msgid="7049624449246121981">"Dacă limitați activitatea de fundal pentru o aplicație, aceasta se poate comporta necorespunzător"</string>
+    <string name="background_activity_disabled_dialog_text" msgid="6133420589651880824">"Aplicația nu optimizează bateria, deci nu o puteți restricționa.\n\nPentru a o restricționa, activați optimizarea bateriei."</string>
     <string name="device_screen_usage" msgid="3386088035570409683">"Utilizarea ecranului de la încărcare"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"Consumul ecranului"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"Scanarea rețelei mobile"</string>
-    <string name="power_usage_list_summary" msgid="6393929085382334341">"Utilizarea de către aplicații de la ultima încărcare (<xliff:g id="RELATIVE_TIME">^1</xliff:g>)"</string>
-    <string name="power_usage_list_summary_device" msgid="4461926045610455423">"Utilizarea dispozitivului de la ultima încărcare completă (<xliff:g id="RELATIVE_TIME">^1</xliff:g>)"</string>
+    <string name="power_usage_list_summary" msgid="5584049564906462506">"Utilizarea bateriei de la încărcarea completă"</string>
     <string name="screen_usage_summary" msgid="6687403051423153550">"Perioada de timp de la încărcarea completă cât a fost pornit ecranul"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"Utilizarea dispozitivului de la încărcarea completă"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Utilizarea bateriei de la deconectare"</string>
@@ -2172,8 +2175,10 @@
     <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"Se activează dispozitivul în fundal"</string>
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"Se solicită frecvent locația"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> aplicații funcționează incorect"</string>
-    <string name="battery_tip_summary_title" msgid="7060523369832289878">"Bateria este în stare bună"</string>
-    <string name="battery_tip_summary_summary" msgid="7674026655453457">"Aplicațiile rulează normal"</string>
+    <string name="battery_tip_summary_title" msgid="368729969313047399">"Aplicațiile rulează normal"</string>
+    <string name="battery_tip_summary_summary" product="default" msgid="2198778125778121221">"Telefonul determină o utilizare normală a bateriei în fundal"</string>
+    <string name="battery_tip_summary_summary" product="tablet" msgid="1183976728682325345">"Tableta determină o utilizare normală a bateriei în fundal"</string>
+    <string name="battery_tip_summary_summary" product="device" msgid="363718204492523920">"Dispozitivul determină o utilizare normală a bateriei în fundal"</string>
     <string name="battery_tip_low_battery_title" msgid="5103420355109677385">"Capacitate redusă a bateriei"</string>
     <string name="battery_tip_low_battery_summary" msgid="4702986182940709150">"Bateria nu poate asigura o autonomie bună"</string>
     <string name="battery_tip_smart_battery_title" product="default" msgid="2542822112725248683">"Îmbunătățiți autonomia bateriei telefonului"</string>
@@ -2188,9 +2193,9 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"Tabletă folosită mai mult decât de obicei"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"Dispozitiv folosit mai mult decât de obicei"</string>
     <string name="battery_tip_high_usage_summary" msgid="6341311803303581798">"Este posibil ca bateria să se descarce în curând"</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="7434089311164898581">"Telefonul a fost utilizat mai mult decât de obicei. Este posibil ca bateria să se descarce mai repede decât vă așteptați.\n\nCele mai bune <xliff:g id="NUMBER">%1$d</xliff:g> aplicații de la ultima încărcare completă (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="2987443811119964310">"Tableta a fost utilizată mai mult decât de obicei. Este posibil ca bateria să se descarce mai repede decât vă așteptați.\n\nCele mai bune <xliff:g id="NUMBER">%1$d</xliff:g> aplicații de la ultima încărcare completă (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="1993039726576708815">"Dispozitivul a fost utilizat mai mult decât de obicei. Este posibil ca bateria să se descarce mai repede decât vă așteptați.\n\nCele mai bune <xliff:g id="NUMBER">%1$d</xliff:g> aplicații de la ultima încărcare completă (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>):"</string>
+    <string name="battery_tip_dialog_message" product="default" msgid="7001932078713215338">"Telefonul a fost folosit mai mult decât de obicei. Este posibil ca bateria să se descarce mai repede decât vă așteptați.\n\nPrincipalele <xliff:g id="NUMBER">%1$d</xliff:g> aplicații folosite de la ultima încărcare completă:"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="8482296786233647690">"Tableta a fost folosită mai mult decât de obicei. Este posibil ca bateria să se descarce mai repede decât vă așteptați.\n\nPrincipalele <xliff:g id="NUMBER">%1$d</xliff:g> aplicații folosite de la ultima încărcare completă:"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="2806861679225286129">"Dispozitivul a fost folosit mai mult decât de obicei. Este posibil ca bateria să se descarce mai repede decât vă așteptați.\n\nPrincipalele <xliff:g id="NUMBER">%1$d</xliff:g> aplicații folosite de la ultima încărcare completă:"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="few">Restricționați %1$d aplicații</item>
       <item quantity="other">Restricționați %1$d de aplicații</item>
@@ -2224,8 +2229,9 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="6537761705584610231">"Această aplicație va putea utiliza bateria în fundal. Bateria se poate descărca mai repede decât vă așteptați."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="6022058431218137646">"Eliminați"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="3058235875830858902">"Anulați"</string>
-    <string name="battery_tip_dialog_summary_message" msgid="3483708973495692333">"În baza utilizării, autonomia bateriei dvs. este de aproximativ <xliff:g id="TIME_DURATION">%1$s</xliff:g> când este încărcată complet.\n\nDacă trebuie să prelungiți durata de viață a bateriei, activați Economisirea bateriei."</string>
-    <string name="battery_tip_dialog_summary_message_no_estimation" msgid="1456026456418786135">"Dacă trebuie să prelungiți durata de viață a bateriei, activați Economisirea bateriei"</string>
+    <string name="battery_tip_dialog_summary_message" product="default" msgid="4628448253185085796">"Aplicațiile consumă un procent normal de baterie. Dacă aplicațiile consumă prea multă baterie, telefonul va sugera acțiuni posibile.\n\nPuteți oricând să activați Economisirea bateriei dacă aceasta se descarcă."</string>
+    <string name="battery_tip_dialog_summary_message" product="tablet" msgid="8327950887399420971">"Aplicațiile consumă un procent normal de baterie. Dacă aplicațiile consumă prea multă baterie, tableta va sugera acțiuni posibile.\n\nPuteți oricând să activați Economisirea bateriei dacă aceasta se descarcă."</string>
+    <string name="battery_tip_dialog_summary_message" product="device" msgid="6753742263807939789">"Aplicațiile consumă un procent normal de baterie. Dacă aplicațiile consumă prea multă baterie, dispozitivul va sugera acțiuni posibile.\n\nPuteți oricând să activați Economisirea bateriei dacă aceasta se descarcă."</string>
     <string name="smart_battery_manager_title" msgid="870632749556793417">"Battery Manager"</string>
     <string name="smart_battery_title" msgid="6218785691872466076">"Gestionați automat aplicațiile"</string>
     <string name="smart_battery_summary" msgid="1339184602000004058">"Limitați utilizarea bateriei de către aplicațiile pe care nu le utilizați frecvent"</string>
@@ -2452,16 +2458,9 @@
     <string name="credentials_settings_not_available" msgid="7968275634486624215">"Datele de conectare nu sunt disponibile pentru acest utilizator"</string>
     <string name="credential_for_vpn_and_apps" msgid="4168197158768443365">"Instalate pentru VPN și aplicații"</string>
     <string name="credential_for_wifi" msgid="6228425986551591864">"Instalate pentru Wi-Fi"</string>
-    <string name="credentials_unlock" msgid="385427939577366499"></string>
-    <string name="credentials_unlock_hint" msgid="2301301378040499348">"Introduceți parola pentru spațiul de stocare a certificatelor."</string>
-    <string name="credentials_old_password" msgid="7553393815538684028">"Parola actuală:"</string>
     <string name="credentials_reset_hint" msgid="6297256880896133631">"Eliminați întregul conținut?"</string>
-    <string name="credentials_wrong_password" msgid="2541932597104054807">"Parolă incorectă."</string>
-    <string name="credentials_reset_warning" msgid="5320653011511797600">"Parolă incorectă. Mai aveți dreptul la o singură încercare înainte ca acreditările stocate să fie șterse."</string>
-    <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"Parolă incorectă. Mai aveți dreptul la <xliff:g id="NUMBER">%1$d</xliff:g> încercări înainte ca acreditările stocate să fie șterse."</string>
     <string name="credentials_erased" msgid="2907836028586342969">"Acreditările stocate sunt șterse."</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"Nu s-au șters acredit. stocate"</string>
-    <string name="credentials_enabled" msgid="7588607413349978930">"Stocarea acreditărilor este activată."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="8058230497337529036">"Înainte de a putea folosi spațiul de stocare a certificatelor, dispozitivul trebuie să aibă un ecran de blocare de siguranță"</string>
     <string name="credentials_configure_lock_screen_button" msgid="253239765216055321">"CONFIGURAȚI BLOCAREA"</string>
     <string name="usage_access_title" msgid="332333405495457839">"Aplicații cu acces de utilizare"</string>
@@ -2981,8 +2980,14 @@
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"utilizarea datelor"</string>
     <string name="network_dashboard_summary_hotspot" msgid="8494210248613254574">"hotspot"</string>
     <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"Dispozitive conectate"</string>
-    <string name="connected_devices_dashboard_summary" msgid="2390582103384791904">"Bluetooth, proiecție, NFC"</string>
-    <string name="connected_devices_dashboard_no_nfc_summary" msgid="9106040742715366495">"Bluetooth, Cast"</string>
+    <!-- no translation found for connected_devices_dashboard_summary (2665221896894251402) -->
+    <skip />
+    <!-- no translation found for connected_devices_dashboard_no_nfc_summary (3840842725283655533) -->
+    <skip />
+    <!-- no translation found for connected_devices_dashboard_no_driving_mode_summary (5018708106066758867) -->
+    <skip />
+    <!-- no translation found for connected_devices_dashboard_no_driving_mode_no_nfc_summary (5250078362483148199) -->
+    <skip />
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Aplicații și notificări"</string>
     <string name="app_and_notification_dashboard_summary" msgid="2363314178802548682">"Permisiuni, aplicații prestabilite"</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"Conturi"</string>
@@ -3123,15 +3128,14 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Blocați întreruperile vizuale"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"Permiteți semnale vizuale"</string>
-    <string name="zen_mode_restrict_notifications_screen_title" msgid="9027437428488279426">"Restricționați notificările"</string>
+    <string name="zen_mode_settings_category" msgid="3982039687186952865">"Când este activată setarea „Nu deranja”"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"Notificări"</string>
-    <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"Când este activată setarea „Nu deranja”"</string>
-    <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"Ignorați notificările"</string>
-    <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"Afișați notificările, dar ignorați sunetele și vibrațiile"</string>
-    <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"Când sosesc notificări noi, telefonul nu va scoate niciun sunet și nu va vibra"</string>
-    <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"Ascundeți și ignorați notificările"</string>
-    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"Notificările nu vor apărea deloc"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"Nu veți vedea notificări noi sau existente atunci când este activată setarea „Nu deranja”. Totuși, notificările necesare pentru activitatea de bază a telefonului și starea acestuia vor apărea în continuare."</string>
+    <string name="zen_mode_restrict_notifications_mute" msgid="8649062661635246283">"Afișați notificările cu sunet dezactivat"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="8450964969807231275">"Sunetul pentru notificări va fi dezactivat"</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="3465600930732602159">"Când sosesc notificările, telefonul nu va scoate niciun sunet și nu va vibra."</string>
+    <string name="zen_mode_restrict_notifications_hide" msgid="9070829387109283980">"Ascundeți notificările"</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3832808022882158781">"Nu veți vedea notificări noi sau existente"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="6559283246372102465">"Telefonul nu va afișa notificări noi sau existente, nu va emite niciun sunet și nu va vibra. Nu se vor afișa notificările când glisați în jos din partea de sus a ecranului.\n\nRețineți: se vor afișa totuși notificările foarte importante pentru activitatea și starea telefonului."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"Personalizat"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"Activați setarea personalizată"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"Eliminați setarea personalizată"</string>
@@ -3185,16 +3189,32 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> de reguli se pot activa automat</item>
       <item quantity="one">O regulă se poate activa automat</item>
     </plurals>
-    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Actualizați"</string>
-    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Nu actualizați"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"Telefonul poate face mai multe pentru a vă ajuta să vă concentrați.\n\nActualizați setările ca să:\n\n- ascundeți complet notificările;\n\n- permiteți apelurile de la persoanele de contact marcate cu stea și apelanții care revin."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"Actualizați funcția Nu deranja?"</string>
+    <string name="zen_category_behavior" msgid="2989256030084350296">"Comportament"</string>
+    <string name="zen_category_exceptions" msgid="7601136604273265629">"Excepții"</string>
+    <string name="zen_category_schedule" msgid="9000447592251450453">"Program"</string>
+    <string name="zen_sound_title" msgid="424490228488531372">"Sunete și vibrații"</string>
+    <string name="zen_sound_footer" msgid="7621745273287208979">"Când este activată funcția Nu deranja, sunetele și vibrațiile vor fi dezactivate, cu excepția elementelor pe care le permiteți mai sus."</string>
+    <string name="zen_sound_category_title" msgid="4336596939661729188">"Dezactivați sunetul pentru toate, cu excepția"</string>
+    <string name="zen_sound_all_muted" msgid="4850363350480968114">"Sunet dezactivat"</string>
+    <string name="zen_sound_none_muted" msgid="3938508512103612527">"Sunetul nu este dezactivat"</string>
+    <string name="zen_sound_one_allowed" msgid="8447313454438932276">"Sunetul este dezactivat, dar permiteți <xliff:g id="SOUND_TYPE">%1$s</xliff:g>"</string>
+    <string name="zen_sound_two_allowed" msgid="980491120444358550">"Sunetul este dezactivat, dar permiteți <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> și <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>"</string>
+    <string name="zen_sound_three_allowed" msgid="3455767205934547985">"Sunetul este dezactivat, dar permiteți <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> și <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>"</string>
+    <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"Mesaje, evenimente și mementouri"</string>
+    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"Când este activată funcția Nu deranja, sunetele pentru mesaje, mementouri și evenimente vor fi dezactivate, cu excepția elementelor pe care le permiteți mai sus. Puteți să modificați setările pentru mesaje ca să le permiteți prietenilor, familiei sau altor persoane de contact să vă contacteze."</string>
+    <!-- no translation found for zen_onboarding_ok (6131211000824433013) -->
+    <skip />
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Setări"</string>
-    <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Puteți personaliza și mai mult această opțiune în Setări."</string>
-    <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Blocați când ecranul este activat"</string>
-    <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Blocați când ecranul este dezactivat"</string>
-    <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Nu porniți ecranul și nu îl activați pentru notificări"</string>
-    <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Nu afișați nicio notificare, cu excepția celor privind starea și activitatea de bază a telefonului"</string>
+    <!-- no translation found for zen_onboarding_new_setting_title (3311718322273907394) -->
+    <skip />
+    <!-- no translation found for zen_onboarding_current_setting_title (776426065129609376) -->
+    <skip />
+    <!-- no translation found for zen_onboarding_new_setting_summary (6293026064871880706) -->
+    <skip />
+    <!-- no translation found for zen_onboarding_current_setting_summary (1280614488924843713) -->
+    <skip />
+    <!-- no translation found for zen_onboarding_dnd_visual_disturbances_header (1352808651270918932) -->
+    <skip />
     <string name="sound_work_settings" msgid="6774324553228566442">"Sunetele profilului de serviciu"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Folosiți sunetele profilului personal"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"Sunetele profilului de serviciu sunt aceleași ca la profilul personal"</string>
@@ -3367,21 +3387,39 @@
     <string name="summary_range_symbol_combination" msgid="5695218513421897027">"<xliff:g id="START">%1$s</xliff:g> – <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"Între <xliff:g id="START">%1$s</xliff:g> și <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_calls" msgid="7051492091133751208">"Apeluri"</string>
+    <string name="zen_mode_calls_title" msgid="623395033931747661">"Permiteți apeluri"</string>
+    <string name="zen_mode_calls_footer" msgid="3618700268458237781">"Când este activată funcția Nu deranja, apelurile primite sunt blocate. Puteți să modificați setările ca să le permiteți prietenilor, familiei sau altor persoane de contact să vă contacteze."</string>
+    <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"Persoane din agendă marcate cu stea"</string>
+    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="6748832187598909961">
+      <item quantity="few">și încă <xliff:g id="NUM_PEOPLE">%d</xliff:g> persoane</item>
+      <item quantity="other">și încă <xliff:g id="NUM_PEOPLE">%d</xliff:g> de persoane</item>
+      <item quantity="one">și încă o persoană</item>
+    </plurals>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Mesaje"</string>
-    <string name="zen_mode_all_messages" msgid="6449223378976743208">"Toate mesajele"</string>
-    <string name="zen_mode_selected_messages" msgid="8245990149599142281">"Mesajele selectate"</string>
+    <string name="zen_mode_messages_title" msgid="7729380010396411129">"Permiteți mesaje"</string>
+    <string name="zen_mode_all_messages" msgid="8257021584561639816">"Mesaje"</string>
+    <string name="zen_mode_selected_messages" msgid="1047355526202106114">"Anumite mesaje"</string>
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"De la oricine"</string>
     <string name="zen_mode_from_contacts" msgid="2232335406106711637">"Doar de la persoanele de contact"</string>
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Doar de la persoanele de contact cu stea"</string>
+    <string name="zen_calls_summary_starred_repeat" msgid="4046151920710059778">"De la persoanele de contact marcate cu stea și de la apelanții care revin"</string>
+    <string name="zen_calls_summary_contacts_repeat" msgid="1528716671301999084">"De la persoanele de contact și apelanții care revin"</string>
+    <string name="zen_calls_summary_repeat_only" msgid="7105261473107715445">"Doar de la apelanții care revin"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Niciunul"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Alarme"</string>
     <string name="zen_mode_media" msgid="8808264142134422380">"Media"</string>
     <string name="zen_mode_system" msgid="2541380718411593581">"Sunete la atingere"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Mementouri"</string>
+    <string name="zen_mode_reminders_title" msgid="2345044406347406902">"Permiteți mementouri"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Evenimente"</string>
-    <string name="zen_mode_all_callers" msgid="584186167367236922">"Toți apelanții"</string>
-    <string name="zen_mode_selected_callers" msgid="3127598874060615742">"Apelanți selectați"</string>
+    <string name="zen_mode_events_title" msgid="5597241655883329085">"Permiteți evenimente"</string>
+    <string name="zen_mode_all_callers" msgid="2378065871253871057">"oricine"</string>
+    <string name="zen_mode_contacts_callers" msgid="5569804103920394175">"agendă"</string>
+    <string name="zen_mode_starred_callers" msgid="1023167821338514140">"persoane din agendă marcate cu stea"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"Apelanți care revin"</string>
+    <string name="zen_mode_repeat_callers_title" msgid="8553876328249671783">"Permiteți apelanți care revin"</string>
+    <string name="zen_mode_calls_summary_one" msgid="3972333792749874863">"De la <xliff:g id="CALLER_TYPE">%1$s</xliff:g>"</string>
+    <string name="zen_mode_calls_summary_two" msgid="6592821501321201329">"De la <xliff:g id="CALLER_TYPE">%1$s</xliff:g> și <xliff:g id="CALLERT_TPYE">%2$s</xliff:g>"</string>
     <string name="zen_mode_repeat_callers_summary" msgid="239685342222975733">"Dacă aceeași persoană apelează a doua oară într-un interval de <xliff:g id="MINUTES">%d</xliff:g> minute"</string>
     <string name="zen_mode_behavior_summary_custom" msgid="168127313238020146">"Personalizat"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"Activați automat"</string>
@@ -3661,7 +3699,7 @@
     <string name="zen_access_revoke_warning_dialog_summary" msgid="5518216907304930148">"Toate regulile din modul Nu deranja create de această aplicație vor fi eliminate."</string>
     <string name="ignore_optimizations_on" msgid="6915689518016285116">"Nu se optimizează"</string>
     <string name="ignore_optimizations_off" msgid="6153196256410296835">"Se optimizează"</string>
-    <string name="ignore_optimizations_on_desc" msgid="2321398930330555815">"Bateria se poate descărca mai repede"</string>
+    <string name="ignore_optimizations_on_desc" msgid="3549930955839111652">"Este posibil ca bateria să se descarce mai rapid. Aplicațiile vor putea să folosească bateria în fundal."</string>
     <string name="ignore_optimizations_off_desc" msgid="5255731062045426544">"Recomandată pentru o autonomie mai bună a bateriei"</string>
     <string name="ignore_optimizations_title" msgid="2829637961185027768">"Permiteți ca <xliff:g id="APP">%s</xliff:g> să ignore optimizările pentru baterie?"</string>
     <string name="app_list_preference_none" msgid="108006867520327904">"Niciuna"</string>
@@ -3935,8 +3973,7 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Controlați informațiile de pe ecranul de blocare"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Afișați sau ascundeți conținutul notificării"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Toate"</string>
-    <!-- no translation found for page_tab_title_support (4407600495101788249) -->
-    <skip />
+    <string name="page_tab_title_support" msgid="4407600495101788249">"Sfaturi și asistență"</string>
     <string name="developer_smallest_width" msgid="7516950434587313360">"Cea mai mică lățime"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Nicio aplicație instalată nu a solicitat accesul la SMS-urile premium"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"SMS-urile premium pot genera costuri care se vor adăuga la factura operatorului. Dacă activați permisiunea pentru o aplicație, veți putea trimite SMS-uri premium folosind acea aplicație."</string>
@@ -4139,6 +4176,8 @@
     <string name="storage_movies_tv" msgid="5498394447562086890">"Aplicații pentru filme și emisiuni TV"</string>
     <string name="carrier_provisioning" msgid="4398683675591893169">"Informații despre provizionarea operatorului"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"Declanșați provizionarea operatorului"</string>
+    <string name="zen_suggestion_title" msgid="798067603460192693">"Actualizați funcția Nu deranja"</string>
+    <string name="zen_suggestion_summary" msgid="4573237195296808909">"Ascundeți notificările pentru a vă păstra concentrarea"</string>
     <string name="new_device_suggestion_title" msgid="698847081680980774">"Ce este nou și interesant?"</string>
     <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"Faceți un tur al noului dvs. telefon"</string>
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Faceți un tur al noii dvs. tablete"</string>
