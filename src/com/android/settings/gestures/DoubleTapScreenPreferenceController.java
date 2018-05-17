@@ -22,6 +22,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.text.TextUtils;
+
 import androidx.preference.Preference;
 import androidx.annotation.VisibleForTesting;
 
@@ -74,7 +76,18 @@ public class DoubleTapScreenPreferenceController extends GesturePreferenceContro
         if (mAmbientConfig == null) {
             mAmbientConfig = new AmbientDisplayConfiguration(mContext);
         }
-        return mAmbientConfig.pulseOnDoubleTapAvailable() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+
+        // No hardware support for Double Tap
+        if (!mAmbientConfig.doubleTapSensorAvailable()) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
+
+        // Can't change Double Tap when AOD is enabled.
+        if (!mAmbientConfig.ambientDisplayAvailable()) {
+            return DISABLED_DEPENDENT_SETTING;
+        }
+
+        return AVAILABLE;
     }
 
     @Override
