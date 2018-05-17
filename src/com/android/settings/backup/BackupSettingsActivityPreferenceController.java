@@ -49,7 +49,7 @@ public class BackupSettingsActivityPreferenceController extends BasePreferenceCo
         final boolean backupEnabled = mBackupManager.isBackupEnabled();
 
         return backupEnabled
-                ? mContext.getText(R.string.accessibility_feature_state_on)
-                : mContext.getText(R.string.accessibility_feature_state_off);
+                ? mContext.getText(R.string.backup_summary_state_on)
+                : mContext.getText(R.string.backup_summary_state_off);
     }
 }
