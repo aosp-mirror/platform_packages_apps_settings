@@ -58,6 +58,7 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.cdma.CdmaCellLocation;
 import android.telephony.gsm.GsmCellLocation;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -673,12 +674,34 @@ public class RadioInfo extends Activity {
         return (i != Long.MAX_VALUE) ? Long.toString(i) : "";
     }
 
+    private final String getConnectionStatusString(CellInfo ci) {
+        String regStr = "";
+        String connStatStr = "";
+        String connector = "";
+
+        if (ci.isRegistered()) {
+            regStr = "R";
+        }
+        switch (ci.getCellConnectionStatus()) {
+            case CellInfo.CONNECTION_PRIMARY_SERVING: connStatStr = "P"; break;
+            case CellInfo.CONNECTION_SECONDARY_SERVING: connStatStr = "S"; break;
+            case CellInfo.CONNECTION_NONE: connStatStr = "N"; break;
+            case CellInfo.CONNECTION_UNKNOWN: /* Field is unsupported */ break;
+            default: break;
+        }
+        if (!TextUtils.isEmpty(regStr) && !TextUtils.isEmpty(connStatStr)) {
+            connector = "+";
+        }
+
+        return regStr + connector + connStatStr;
+    }
+
     private final String buildCdmaInfoString(CellInfoCdma ci) {
         CellIdentityCdma cidCdma = ci.getCellIdentity();
         CellSignalStrengthCdma ssCdma = ci.getCellSignalStrength();
 
         return String.format("%-3.3s %-5.5s %-5.5s %-5.5s %-6.6s %-6.6s %-6.6s %-6.6s %-5.5s",
-                ci.isRegistered() ? "S  " : "   ",
+                getConnectionStatusString(ci),
                 getCellInfoDisplayString(cidCdma.getSystemId()),
                 getCellInfoDisplayString(cidCdma.getNetworkId()),
                 getCellInfoDisplayString(cidCdma.getBasestationId()),
@@ -694,7 +717,7 @@ public class RadioInfo extends Activity {
         CellSignalStrengthGsm ssGsm = ci.getCellSignalStrength();
 
         return String.format("%-3.3s %-3.3s %-3.3s %-5.5s %-5.5s %-6.6s %-4.4s %-4.4s\n",
-                ci.isRegistered() ? "S  " : "   ",
+                getConnectionStatusString(ci),
                 getCellInfoDisplayString(cidGsm.getMcc()),
                 getCellInfoDisplayString(cidGsm.getMnc()),
                 getCellInfoDisplayString(cidGsm.getLac()),
@@ -709,14 +732,15 @@ public class RadioInfo extends Activity {
         CellSignalStrengthLte ssLte = ci.getCellSignalStrength();
 
         return String.format(
-                "%-3.3s %-3.3s %-3.3s %-5.5s %-5.5s %-3.3s %-6.6s %-4.4s %-4.4s %-2.2s\n",
-                ci.isRegistered() ? "S  " : "   ",
+                "%-3.3s %-3.3s %-3.3s %-5.5s %-5.5s %-3.3s %-6.6s %-2.2s %-4.4s %-4.4s %-2.2s\n",
+                getConnectionStatusString(ci),
                 getCellInfoDisplayString(cidLte.getMcc()),
                 getCellInfoDisplayString(cidLte.getMnc()),
                 getCellInfoDisplayString(cidLte.getTac()),
                 getCellInfoDisplayString(cidLte.getCi()),
                 getCellInfoDisplayString(cidLte.getPci()),
                 getCellInfoDisplayString(cidLte.getEarfcn()),
+                getCellInfoDisplayString(cidLte.getBandwidth()),
                 getCellInfoDisplayString(ssLte.getDbm()),
                 getCellInfoDisplayString(ssLte.getRsrq()),
                 getCellInfoDisplayString(ssLte.getTimingAdvance()));
@@ -727,7 +751,7 @@ public class RadioInfo extends Activity {
         CellSignalStrengthWcdma ssWcdma = ci.getCellSignalStrength();
 
         return String.format("%-3.3s %-3.3s %-3.3s %-5.5s %-5.5s %-6.6s %-3.3s %-4.4s\n",
-                ci.isRegistered() ? "S  " : "   ",
+                getConnectionStatusString(ci),
                 getCellInfoDisplayString(cidWcdma.getMcc()),
                 getCellInfoDisplayString(cidWcdma.getMnc()),
                 getCellInfoDisplayString(cidWcdma.getLac()),
@@ -759,17 +783,21 @@ public class RadioInfo extends Activity {
             }
             if (lteCells.length() != 0) {
                 value += String.format(
-                        "LTE\n%-3.3s %-3.3s %-3.3s %-5.5s %-5.5s %-3.3s %-6.6s %-4.4s %-4.4s %-2.2s\n",
-                        "SRV", "MCC", "MNC", "TAC", "CID", "PCI", "EARFCN", "RSRP", "RSRQ", "TA");
+                        "LTE\n%-3.3s %-3.3s %-3.3s %-5.5s %-5.5s %-3.3s"
+                                + " %-6.6s %-2.2s %-4.4s %-4.4s %-2.2s\n",
+                        "SRV", "MCC", "MNC", "TAC", "CID", "PCI",
+                        "EARFCN", "BW", "RSRP", "RSRQ", "TA");
                 value += lteCells.toString();
             }
             if (wcdmaCells.length() != 0) {
-                value += String.format("WCDMA\n%-3.3s %-3.3s %-3.3s %-5.5s %-5.5s %-6.6s %-3.3s %-4.4s\n",
+                value += String.format(
+                        "WCDMA\n%-3.3s %-3.3s %-3.3s %-5.5s %-5.5s %-6.6s %-3.3s %-4.4s\n",
                         "SRV", "MCC", "MNC", "LAC", "CID", "UARFCN", "PSC", "RSCP");
                 value += wcdmaCells.toString();
             }
             if (gsmCells.length() != 0) {
-                value += String.format("GSM\n%-3.3s %-3.3s %-3.3s %-5.5s %-5.5s %-6.6s %-4.4s %-4.4s\n",
+                value += String.format(
+                        "GSM\n%-3.3s %-3.3s %-3.3s %-5.5s %-5.5s %-6.6s %-4.4s %-4.4s\n",
                         "SRV", "MCC", "MNC", "LAC", "CID", "ARFCN", "BSIC", "RSSI");
                 value += gsmCells.toString();
             }
