@@ -51,8 +51,10 @@ public abstract class TogglePreferenceController extends BasePreferenceControlle
     public void updateState(Preference preference) {
         if (preference instanceof TwoStatePreference) {
             ((TwoStatePreference) preference).setChecked(isChecked());
-        } if (preference instanceof MasterSwitchPreference) {
+        } else if (preference instanceof MasterSwitchPreference) {
             ((MasterSwitchPreference) preference).setChecked(isChecked());
+        } else {
+            refreshSummary(preference);
         }
     }
 
