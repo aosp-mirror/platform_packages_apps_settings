@@ -131,7 +131,8 @@ public class TetherPreferenceController extends AbstractPreferenceController imp
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        if (mBluetoothAdapter != null) {
+        if (mBluetoothAdapter != null &&
+            mBluetoothAdapter.getState() == BluetoothAdapter.STATE_ON) {
             mBluetoothAdapter.getProfileProxy(mContext, mBtProfileServiceListener,
                     BluetoothProfile.PAN);
         }
