@@ -131,6 +131,7 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
 
     @Override
     public boolean isSmartBatterySupported() {
-        return false;
+        return mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_smart_battery_available);
     }
 }
