@@ -123,7 +123,7 @@ public class WifiTetherPreferenceControllerTest {
     }
 
     @Test
-    public void testReceiver_goingToAirplaneMode_shouldClearPreferenceSummary() {
+    public void testReceiver_turnOnAirplaneMode_clearPreferenceSummary() {
         final ContentResolver cr = mock(ContentResolver.class);
         when(mContext.getContentResolver()).thenReturn(cr);
         Settings.Global.putInt(cr, Settings.Global.AIRPLANE_MODE_ON, 1);
@@ -135,6 +135,21 @@ public class WifiTetherPreferenceControllerTest {
 
         assertThat(mPreference.getSummary().toString()).isEqualTo(
                 "Unavailable because airplane mode is turned on");
+    }
+
+    @Test
+    public void testReceiver_turnOffAirplaneMode_displayOffSummary() {
+        final ContentResolver cr = mock(ContentResolver.class);
+        when(mContext.getContentResolver()).thenReturn(cr);
+        Settings.Global.putInt(cr, Settings.Global.AIRPLANE_MODE_ON, 0);
+        mController.displayPreference(mScreen);
+        final BroadcastReceiver receiver = ReflectionHelpers.getField(mController, "mReceiver");
+        final Intent broadcast = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+
+        receiver.onReceive(RuntimeEnvironment.application, broadcast);
+
+        assertThat(mPreference.getSummary().toString()).isEqualTo(
+                "Not sharing internet or content with other devices");
     }
 
     @Test
