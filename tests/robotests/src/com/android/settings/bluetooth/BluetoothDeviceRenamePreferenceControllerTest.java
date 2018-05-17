@@ -67,8 +67,9 @@ public class BluetoothDeviceRenamePreferenceControllerTest {
         mPreference = new Preference(mContext);
         mPreference.setKey(PREF_KEY);
 
-        mController = spy(new BluetoothDeviceRenamePreferenceController(
-                mContext, PREF_KEY, mFragment, mLocalAdapter));
+        mController = spy(new BluetoothDeviceRenamePreferenceController(mContext, mLocalAdapter,
+                PREF_KEY));
+        mController.setFragment(mFragment);
         doReturn(DEVICE_NAME).when(mController).getDeviceName();
     }
 
