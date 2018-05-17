@@ -26,10 +26,7 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.nfc.NfcPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -60,25 +57,6 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.connected_devices;
-    }
-
-    @Override
-    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle());
-    }
-
-    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Lifecycle lifecycle) {
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        final NfcPreferenceController nfcPreferenceController =
-                new NfcPreferenceController(context);
-        controllers.add(nfcPreferenceController);
-
-        if (lifecycle != null) {
-            lifecycle.addObserver(nfcPreferenceController);
-        }
-
-        return controllers;
     }
 
     @Override
@@ -136,12 +114,6 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.connected_devices;
                     return Arrays.asList(sir);
-                }
-
-                @Override
-                public List<AbstractPreferenceController> createPreferenceControllers(Context
-                        context) {
-                    return buildPreferenceControllers(context, null /* lifecycle */);
                 }
 
                 @Override
