@@ -78,10 +78,21 @@ public class TetherPreferenceControllerTest {
 
     @Test
     public void lifeCycle_onCreate_shouldInitBluetoothPan() {
+        when(mBluetoothAdapter.getState()).thenReturn(BluetoothAdapter.STATE_ON);
         mController.onCreate(null);
 
-        verify(mBluetoothAdapter).getProfileProxy(mContext, mController.mBtProfileServiceListener,
-                BluetoothProfile.PAN);
+        verify(mBluetoothAdapter).getState();
+        verify(mBluetoothAdapter)
+                .getProfileProxy(mContext, mController.mBtProfileServiceListener, BluetoothProfile.PAN);
+    }
+
+    @Test
+    public void lifeCycle_onCreate_shouldNotInitBluetoothPanWhenBluetoothOff() {
+        when(mBluetoothAdapter.getState()).thenReturn(BluetoothAdapter.STATE_OFF);
+        mController.onCreate(null);
+
+        verify(mBluetoothAdapter).getState();
+        verifyNoMoreInteractions(mBluetoothAdapter);
     }
 
     @Test
