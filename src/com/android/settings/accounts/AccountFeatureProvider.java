@@ -25,10 +25,4 @@ import com.android.settings.core.FeatureFlags;
 public interface AccountFeatureProvider {
     String getAccountType();
     Account[] getAccounts(Context context);
-    /**
-     * Checks whether or not to display the new About Phone page.
-     */
-    default boolean isAboutPhoneV2Enabled(Context context) {
-        return FeatureFlagUtils.isEnabled(context, FeatureFlags.ABOUT_PHONE_V2);
-    }
 }
