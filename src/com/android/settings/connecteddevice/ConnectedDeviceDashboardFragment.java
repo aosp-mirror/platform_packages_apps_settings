@@ -64,6 +64,7 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
         super.onAttach(context);
         use(AvailableMediaDeviceGroupController.class).init(this);
         use(ConnectedDeviceGroupController.class).init(this);
+        use(PreviouslyConnectedDevicePreferenceController.class).init(this);
     }
 
     @VisibleForTesting
