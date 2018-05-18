@@ -35,6 +35,7 @@ import androidx.annotation.IntDef;
 import androidx.annotation.VisibleForTesting;
 import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -146,9 +147,7 @@ public class EntityHeaderController {
      * accessibility purposes.
      */
     public EntityHeaderController setIcon(ApplicationsState.AppEntry appEntry) {
-        if (appEntry.icon != null) {
-            mIcon = appEntry.icon.getConstantState().newDrawable(mAppContext.getResources());
-        }
+        mIcon = IconDrawableFactory.newInstance(mAppContext).getBadgedIcon(appEntry.info);
         return this;
     }
 
