@@ -54,8 +54,6 @@ import android.telephony.CellSignalStrengthCdma;
 import android.telephony.CellSignalStrengthGsm;
 import android.telephony.CellSignalStrengthLte;
 import android.telephony.CellSignalStrengthWcdma;
-import android.telephony.DataConnectionRealTimeInfo;
-import android.telephony.NeighboringCellInfo;
 import android.telephony.PreciseCallState;
 import android.telephony.PhoneStateListener;
 import android.telephony.PhysicalChannelConfig;
@@ -193,9 +191,7 @@ public class RadioInfo extends Activity {
     private TextView mMwi;
     private TextView mCfi;
     private TextView mLocation;
-    private TextView mNeighboringCids;
     private TextView mCellInfo;
-    private TextView mDcRtInfoTv;
     private TextView sent;
     private TextView received;
     private TextView mPingHostnameV4;
@@ -235,7 +231,6 @@ public class RadioInfo extends Activity {
 
     private List<CellInfo> mCellInfoResult = null;
     private CellLocation mCellLocationResult = null;
-    private List<NeighboringCellInfo> mNeighboringCellResult = null;
 
     private int mPreferredNetworkTypeResult;
     private int mCellInfoRefreshRateIndex;
@@ -298,12 +293,6 @@ public class RadioInfo extends Activity {
             log("onCellInfoChanged: arrayCi=" + arrayCi);
             mCellInfoResult = arrayCi;
             updateCellInfo(mCellInfoResult);
-        }
-
-        @Override
-        public void onDataConnectionRealTimeInfoChanged(DataConnectionRealTimeInfo dcRtInfo) {
-            log("onDataConnectionRealTimeInfoChanged: dcRtInfo=" + dcRtInfo);
-            updateDcRtInfoTv(dcRtInfo);
         }
 
         @Override
@@ -433,10 +422,8 @@ public class RadioInfo extends Activity {
         mMwi = (TextView) findViewById(R.id.mwi);
         mCfi = (TextView) findViewById(R.id.cfi);
         mLocation = (TextView) findViewById(R.id.location);
-        mNeighboringCids = (TextView) findViewById(R.id.neighboring);
         mCellInfo = (TextView) findViewById(R.id.cellinfo);
         mCellInfo.setTypeface(Typeface.MONOSPACE);
-        mDcRtInfoTv = (TextView) findViewById(R.id.dcrtinfo);
 
         sent = (TextView) findViewById(R.id.sent);
         received = (TextView) findViewById(R.id.received);
@@ -520,7 +507,6 @@ public class RadioInfo extends Activity {
         updateDnsCheckState();
         updateNetworkType();
 
-        updateNeighboringCids(mNeighboringCellResult);
         updateLocation(mCellLocationResult);
         updateCellInfo(mCellInfoResult);
 
@@ -714,23 +700,6 @@ public class RadioInfo extends Activity {
 
     }
 
-    private final void updateNeighboringCids(List<NeighboringCellInfo> cids) {
-        StringBuilder sb = new StringBuilder();
-
-        if (cids != null) {
-            if (cids.isEmpty()) {
-                sb.append("no neighboring cells");
-            } else {
-                for (NeighboringCellInfo cell : cids) {
-                    sb.append(cell.toString()).append(" ");
-                }
-            }
-        } else {
-            sb.append("unknown");
-        }
-        mNeighboringCids.setText(sb.toString());
-    }
-
     private final String getCellInfoDisplayString(int i) {
         return (i != Integer.MAX_VALUE) ? Integer.toString(i) : "";
     }
@@ -881,10 +850,6 @@ public class RadioInfo extends Activity {
 
     private final void updateCellInfo(List<CellInfo> arrayCi) {
         mCellInfo.setText(buildCellInfoString(arrayCi));
-    }
-
-    private final void updateDcRtInfoTv(DataConnectionRealTimeInfo dcRtInfo) {
-        mDcRtInfoTv.setText(dcRtInfo.toString());
     }
 
     private final void
@@ -1079,12 +1044,10 @@ public class RadioInfo extends Activity {
     private final void updateAllCellInfo() {
 
         mCellInfo.setText("");
-        mNeighboringCids.setText("");
         mLocation.setText("");
 
         final Runnable updateAllCellInfoResults = new Runnable() {
             public void run() {
-                updateNeighboringCids(mNeighboringCellResult);
                 updateLocation(mCellLocationResult);
                 updateCellInfo(mCellInfoResult);
             }
@@ -1095,7 +1058,6 @@ public class RadioInfo extends Activity {
             public void run() {
                 mCellInfoResult = mTelephonyManager.getAllCellInfo();
                 mCellLocationResult = mTelephonyManager.getCellLocation();
-                mNeighboringCellResult = mTelephonyManager.getNeighboringCellInfo();
 
                 mHandler.post(updateAllCellInfoResults);
             }
