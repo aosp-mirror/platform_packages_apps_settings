@@ -305,7 +305,7 @@ public class MediaOutputPreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertThat(mPreference.isVisible()).isTrue();
-        assertThat(mPreference.getSummary()).isEqualTo(mBluetoothDevice.getName());
+        assertThat(mPreference.getSummary()).isEqualTo(TEST_DEVICE_NAME_1);
     }
 
     /**
@@ -326,7 +326,7 @@ public class MediaOutputPreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertThat(mPreference.isVisible()).isTrue();
-        assertThat(mPreference.getSummary()).isEqualTo(mSecondBluetoothDevice.getName());
+        assertThat(mPreference.getSummary()).isEqualTo(TEST_DEVICE_NAME_2);
     }
 
     /**
