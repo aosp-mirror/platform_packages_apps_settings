@@ -31,6 +31,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.ColorDrawable;
@@ -39,12 +40,14 @@ import android.support.v7.preference.Preference;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
-import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.ShadowIconDrawableFactory;
+import com.android.settingslib.applications.ApplicationsState;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -53,6 +56,7 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class EntityHeaderControllerTest {
@@ -68,12 +72,10 @@ public class EntityHeaderControllerTest {
     private LayoutInflater mLayoutInflater;
     private PackageInfo mInfo;
     private EntityHeaderController mController;
-    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mShadowContext = RuntimeEnvironment.application;
         when(mActivity.getApplicationContext()).thenReturn(mShadowContext);
         when(mContext.getApplicationContext()).thenReturn(mContext);
@@ -252,6 +254,23 @@ public class EntityHeaderControllerTest {
         mController.done(mActivity);
         assertThat(view.findViewById(R.id.entity_header_icon).getContentDescription().toString())
                 .isEqualTo(description);
+    }
+
+    @Test
+    @Config(shadows = ShadowIconDrawableFactory.class)
+    public void setIcon_usingAppEntry_shouldLoadIconFromDrawableFactory() {
+        final View view = mLayoutInflater
+                .inflate(R.layout.settings_entity_header, null /* root */);
+        final ApplicationsState.AppEntry entry = mock(ApplicationsState.AppEntry.class);
+        entry.info = new ApplicationInfo();
+        mController = EntityHeaderController.newInstance(mActivity, mFragment, view);
+        mController.setIcon(entry).done(mActivity);
+        final ImageView iconView = view.findViewById(R.id.entity_header_icon);
+
+        // Icon is set
+        assertThat(iconView.getDrawable()).isNotNull();
+        // ... and entry.icon is still empty. This means the icon didn't come from cache.
+        assertThat(entry.icon).isNull();
     }
 
     @Test
