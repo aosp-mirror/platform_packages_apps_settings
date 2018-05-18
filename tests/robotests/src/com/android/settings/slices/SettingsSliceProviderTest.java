@@ -28,6 +28,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.slice.SliceManager;
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -35,6 +36,7 @@ import android.net.Uri;
 import android.os.StrictMode;
 import android.provider.SettingsSlicesContract;
 
+import com.android.settings.location.LocationSliceBuilder;
 import com.android.settings.wifi.WifiSliceBuilder;
 import com.android.settings.bluetooth.BluetoothSliceBuilder;
 import com.android.settings.notification.ZenModeSliceBuilder;
@@ -81,7 +83,8 @@ public class SettingsSliceProviderTest {
 
     private static final List<Uri> SPECIAL_CASE_PLATFORM_URIS = Arrays.asList(
             WifiSliceBuilder.WIFI_URI,
-            BluetoothSliceBuilder.BLUETOOTH_URI
+            BluetoothSliceBuilder.BLUETOOTH_URI,
+            LocationSliceBuilder.LOCATION_URI
     );
 
     private static final List<Uri> SPECIAL_CASE_OEM_URIS = Arrays.asList(
@@ -399,6 +402,18 @@ public class SettingsSliceProviderTest {
         final Slice wifiSlice = mProvider.onBindSlice(WifiSliceBuilder.WIFI_URI);
 
         assertThat(wifiSlice.getUri()).isEqualTo(WifiSliceBuilder.WIFI_URI);
+    }
+
+    @Test
+    public void onSlicePinned_noIntentRegistered_specialCaseUri_doesNotCrash() {
+        final Uri uri = new Uri.Builder()
+                .scheme(ContentResolver.SCHEME_CONTENT)
+                .authority(SettingsSlicesContract.AUTHORITY)
+                .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+                .appendPath(SettingsSlicesContract.KEY_LOCATION)
+                .build();
+
+        mProvider.onSlicePinned(uri);
     }
 
     private void insertSpecialCase(String key) {

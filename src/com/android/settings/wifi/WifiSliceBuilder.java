@@ -19,6 +19,8 @@ package com.android.settings.wifi;
 import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 import static android.provider.SettingsSlicesContract.KEY_WIFI;
 
+import static androidx.slice.builders.ListBuilder.ICON_IMAGE;
+
 import android.annotation.ColorInt;
 import android.app.PendingIntent;
 import android.content.ContentResolver;

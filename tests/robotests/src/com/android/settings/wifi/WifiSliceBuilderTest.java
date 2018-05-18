@@ -26,7 +26,6 @@ import static org.mockito.Mockito.spy;
 import android.content.Context;
 
 import com.android.settings.R;
-import com.android.settings.wifi.WifiSliceBuilder;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.SliceTester;
 
