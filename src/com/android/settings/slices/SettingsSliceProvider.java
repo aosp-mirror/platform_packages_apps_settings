@@ -35,6 +35,7 @@ import android.util.Pair;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wifi.WifiSliceBuilder;
 import com.android.settings.wifi.calling.WifiCallingSliceHelper;
+import com.android.settings.notification.ZenModeSliceBuilder;
 import com.android.settingslib.SliceBroadcastRelay;
 import com.android.settingslib.utils.ThreadUtils;
 
@@ -105,8 +106,6 @@ public class SettingsSliceProvider extends SliceProvider {
     public static final String EXTRA_SLICE_PLATFORM_DEFINED =
             "com.android.settings.slice.extra.platform";
 
-    // TODO -- Associate slice URI with search result instead of separate hardcoded thing
-
     @VisibleForTesting
     SlicesDatabaseAccessor mSlicesDatabaseAccessor;
 
@@ -147,6 +146,10 @@ public class SettingsSliceProvider extends SliceProvider {
             // TODO (b/) Register IntentFilters for database entries.
             mRegisteredUris.add(sliceUri);
             return;
+        } else if (ZenModeSliceBuilder.ZEN_MODE_URI.equals(sliceUri)) {
+            registerIntentToUri(ZenModeSliceBuilder.INTENT_FILTER, sliceUri);
+            mRegisteredUris.add(sliceUri);
+            return;
         }
 
         // Start warming the slice, we expect someone will want it soon.
@@ -173,6 +176,8 @@ public class SettingsSliceProvider extends SliceProvider {
                     .createWifiCallingSlice(sliceUri);
         } else if (WifiSliceBuilder.WIFI_URI.equals(sliceUri)) {
             return WifiSliceBuilder.getSlice(getContext());
+        } else if (ZenModeSliceBuilder.ZEN_MODE_URI.equals(sliceUri)) {
+            return ZenModeSliceBuilder.getSlice(getContext());
         }
 
         SliceData cachedSliceData = mSliceWeakDataCache.get(sliceUri);
@@ -311,11 +316,15 @@ public class SettingsSliceProvider extends SliceProvider {
     }
 
     private List<Uri> getSpecialCasePlatformUris() {
-        return Arrays.asList(WifiSliceBuilder.WIFI_URI);
+        return Arrays.asList(
+                WifiSliceBuilder.WIFI_URI
+        );
     }
 
     private List<Uri> getSpecialCaseOemUris() {
-        return new ArrayList<>();
+        return Arrays.asList(
+                ZenModeSliceBuilder.ZEN_MODE_URI
+        );
     }
 
     @VisibleForTesting

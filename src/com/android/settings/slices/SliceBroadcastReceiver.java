@@ -16,6 +16,7 @@
 
 package com.android.settings.slices;
 
+import static com.android.settings.notification.ZenModeSliceBuilder.ACTION_ZEN_MODE_SLICE_CHANGED;
 import static com.android.settings.slices.SettingsSliceProvider.ACTION_SLIDER_CHANGED;
 import static com.android.settings.slices.SettingsSliceProvider.ACTION_TOGGLE_CHANGED;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_KEY;
@@ -37,6 +38,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SliderPreferenceController;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.notification.ZenModeSliceBuilder;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wifi.WifiSliceBuilder;
 import com.android.settingslib.SliceBroadcastRelay;
@@ -48,9 +50,6 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
 
     private static String TAG = "SettSliceBroadcastRec";
 
-    /**
-     * TODO (b/) move wifi action into generalized case.
-     */
     @Override
     public void onReceive(Context context, Intent intent) {
         final String action = intent.getAction();
@@ -75,6 +74,9 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
                         .getSlicesFeatureProvider()
                         .getNewWifiCallingSliceHelper(context)
                         .handleWifiCallingChanged(intent);
+                break;
+            case ACTION_ZEN_MODE_SLICE_CHANGED:
+                ZenModeSliceBuilder.handleUriChange(context, intent);
                 break;
             default:
                 final String uriString = intent.getStringExtra(SliceBroadcastRelay.EXTRA_URI);
