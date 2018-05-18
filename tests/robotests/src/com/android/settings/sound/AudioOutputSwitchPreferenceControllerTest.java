@@ -226,7 +226,7 @@ public class AudioOutputSwitchPreferenceControllerTest {
 
         mController.onPreferenceChange(mPreference, TEST_DEVICE_ADDRESS_1);
 
-        assertThat(mPreference.getSummary()).isEqualTo(mBluetoothDevice.getName());
+        assertThat(mPreference.getSummary()).isEqualTo(TEST_DEVICE_NAME_1);
     }
 
     /**
@@ -246,7 +246,7 @@ public class AudioOutputSwitchPreferenceControllerTest {
 
         mController.onPreferenceChange(mPreference, TEST_DEVICE_ADDRESS_2);
 
-        assertThat(mPreference.getSummary()).isEqualTo(secondBluetoothDevice.getName());
+        assertThat(mPreference.getSummary()).isEqualTo(TEST_DEVICE_NAME_2);
     }
 
     /**

@@ -66,7 +66,11 @@ public class HandsFreeProfileOutputPreferenceController extends
         if (numDevices == 0) {
             // No connected devices, disable switch entry.
             mPreference.setVisible(false);
-            preference.setSummary(mContext.getText(R.string.media_output_default_summary));
+            final CharSequence summary = mContext.getText(R.string.media_output_default_summary);
+            final CharSequence[] defaultMediaOutput = new CharSequence[]{summary};
+            mSelectedIndex = getDefaultDeviceIndex();
+            preference.setSummary(summary);
+            setPreference(defaultMediaOutput, defaultMediaOutput, preference);
             return;
         }
 
