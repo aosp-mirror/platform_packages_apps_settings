@@ -46,22 +46,8 @@
         android:title="@string/connected_device_previously_connected_title"
         android:icon="@drawable/ic_devices_other_black"
         android:fragment="com.android.settings.connecteddevice.PreviouslyConnectedDeviceDashboardFragment"
-        settings:allowDividerAbove="true"/>
-
-    <Preference
-        android:fragment="com.android.settings.connecteddevice.BluetoothDashboardFragment"
-        android:key="bluetooth_settings"
-        android:title="@string/bluetooth_settings_title"
-        android:icon="@drawable/ic_settings_bluetooth"/>
-
-    <PreferenceCategory
-        android:key="dashboard_tile_placeholder" />
-
-    <SwitchPreference
-        android:key="toggle_nfc"
-        android:title="@string/nfc_quick_toggle_title"
-        android:icon="@drawable/ic_nfc"
-        android:summary="@string/nfc_quick_toggle_summary"/>
+        settings:allowDividerAbove="true"
+        settings:controller="com.android.settings.connecteddevice.PreviouslyConnectedDevicePreferenceController"/>
 
     <Preference
         android:key="connection_preferences"

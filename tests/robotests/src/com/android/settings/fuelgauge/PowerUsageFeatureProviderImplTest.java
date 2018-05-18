@@ -17,6 +17,7 @@
 package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -29,6 +30,7 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -43,7 +45,7 @@ public class PowerUsageFeatureProviderImplTest {
     private static final String[] PACKAGES_MEDIA = {"com.android.providers.media"};
     private static final String[] PACKAGES_SYSTEMUI = {"com.android.systemui"};
 
-    @Mock
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock
     private BatterySipper mBatterySipper;
@@ -55,6 +57,7 @@ public class PowerUsageFeatureProviderImplTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
+        when(mContext.getApplicationContext()).thenReturn(mContext);
         mPowerFeatureProvider = new PowerUsageFeatureProviderImpl(mContext);
         when(mPackageManager.getPackagesForUid(UID_CALENDAR)).thenReturn(PACKAGES_CALENDAR);
         when(mPackageManager.getPackagesForUid(UID_MEDIA)).thenReturn(PACKAGES_MEDIA);
@@ -138,7 +141,18 @@ public class PowerUsageFeatureProviderImplTest {
     }
 
     @Test
-    public void testIsSmartBatterySupported_returnFalse() {
+    public void testIsSmartBatterySupported_smartBatterySupported_returnTrue() {
+        when(mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_smart_battery_available)).thenReturn(true);
+
+        assertThat(mPowerFeatureProvider.isSmartBatterySupported()).isTrue();
+    }
+
+    @Test
+    public void testIsSmartBatterySupported_smartBatteryNotSupported_returnFalse() {
+        when(mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_smart_battery_available)).thenReturn(false);
+
         assertThat(mPowerFeatureProvider.isSmartBatterySupported()).isFalse();
     }
 }

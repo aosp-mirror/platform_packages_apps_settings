@@ -20,12 +20,14 @@ import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.NotificationManager.Policy;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.RadioButton;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -43,9 +45,12 @@ public class ZenOnboardingActivity extends Activity {
     static final String PREF_KEY_SUGGESTION_FIRST_DISPLAY_TIME =
             "pref_zen_suggestion_first_display_time_ms";
     @VisibleForTesting
-    static final String PREF_KEY_SUGGESTION_VIEWED = "pref_zen_suggestion_viewed";
-    @VisibleForTesting
     static final long ALWAYS_SHOW_THRESHOLD = DateUtils.DAY_IN_MILLIS * 14;
+
+    View mNewSetting;
+    View mKeepCurrentSetting;
+    RadioButton mNewSettingButton;
+    RadioButton mKeepCurrentSettingButton;
 
     private NotificationManager mNm;
     private MetricsLogger mMetrics;
@@ -67,6 +72,34 @@ public class ZenOnboardingActivity extends Activity {
     protected void setupUI() {
         setContentView(R.layout.zen_onboarding);
 
+        mNewSetting = findViewById(R.id.zen_onboarding_new_setting);
+        mKeepCurrentSetting = findViewById(R.id.zen_onboarding_current_setting);
+        mNewSettingButton = findViewById(R.id.zen_onboarding_new_setting_button);
+        mKeepCurrentSettingButton = findViewById(R.id.zen_onboarding_current_setting_button);
+
+        View.OnClickListener newSettingClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mKeepCurrentSettingButton.setChecked(false);
+                mNewSettingButton.setChecked(true);
+            }
+        };
+
+        View.OnClickListener currentSettingClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mKeepCurrentSettingButton.setChecked(true);
+                mNewSettingButton.setChecked(false);
+            }
+        };
+
+        mNewSetting.setOnClickListener(newSettingClickListener);
+        mNewSettingButton.setOnClickListener(newSettingClickListener);
+
+        mKeepCurrentSetting.setOnClickListener(currentSettingClickListener);
+        mKeepCurrentSettingButton.setOnClickListener(currentSettingClickListener);
+
+        mKeepCurrentSettingButton.setChecked(true);
         mMetrics.visible(MetricsEvent.SETTINGS_ZEN_ONBOARDING);
     }
 
@@ -80,25 +113,27 @@ public class ZenOnboardingActivity extends Activity {
         mMetrics = ml;
     }
 
-    public void close(View button) {
-        mMetrics.action(MetricsEvent.ACTION_ZEN_ONBOARDING_KEEP_CURRENT_SETTINGS);
-
-        Settings.Global.putInt(getApplicationContext().getContentResolver(),
-                Settings.Global.ZEN_SETTINGS_UPDATED, 1);
-
-        finishAndRemoveTask();
+    public void launchSettings(View button) {
+        mMetrics.action(MetricsEvent.ACTION_ZEN_ONBOARDING_SETTINGS);
+        Intent settings = new Intent(Settings.ACTION_ZEN_MODE_SETTINGS);
+        settings.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(settings);
     }
 
     public void save(View button) {
-        mMetrics.action(MetricsEvent.ACTION_ZEN_ONBOARDING_OK);
         NotificationManager.Policy policy = mNm.getNotificationPolicy();
 
-        NotificationManager.Policy newPolicy = new NotificationManager.Policy(
-                Policy.PRIORITY_CATEGORY_REPEAT_CALLERS | policy.priorityCategories,
-                Policy.PRIORITY_SENDERS_STARRED,
-                policy.priorityMessageSenders,
-                NotificationManager.Policy.getAllSuppressedVisualEffects());
-        mNm.setNotificationPolicy(newPolicy);
+        if (mNewSettingButton.isChecked()) {
+            NotificationManager.Policy newPolicy = new NotificationManager.Policy(
+                    Policy.PRIORITY_CATEGORY_REPEAT_CALLERS | policy.priorityCategories,
+                    Policy.PRIORITY_SENDERS_STARRED,
+                    policy.priorityMessageSenders,
+                    NotificationManager.Policy.getAllSuppressedVisualEffects());
+            mNm.setNotificationPolicy(newPolicy);
+            mMetrics.action(MetricsEvent.ACTION_ZEN_ONBOARDING_OK);
+        } else {
+            mMetrics.action(MetricsEvent.ACTION_ZEN_ONBOARDING_KEEP_CURRENT_SETTINGS);
+        }
 
         Settings.Global.putInt(getApplicationContext().getContentResolver(),
                 Settings.Global.ZEN_SETTINGS_UPDATED, 1);

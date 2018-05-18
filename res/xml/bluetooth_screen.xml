@@ -19,9 +19,15 @@
     android:key="bluetooth_switchbar_screen"
     android:title="@string/bluetooth_settings_title">
 
+    <Preference
+        android:key="bluetooth_screen_bt_pair_rename_devices"
+        android:title="@string/bluetooth_device_name"
+        android:summary="@string/summary_placeholder"
+        settings:controller="com.android.settings.bluetooth.BluetoothDeviceRenamePreferenceController"/>
+
     <com.android.settingslib.RestrictedPreference
         android:key="bluetooth_screen_add_bt_devices"
-        android:title="@string/connected_device_add_device_title"
+        android:title="@string/bluetooth_pairing_pref_title"
         android:icon="@drawable/ic_menu_add"
         android:summary="@string/connected_device_add_device_summary"
         android:fragment="com.android.settings.bluetooth.BluetoothPairingDetail"

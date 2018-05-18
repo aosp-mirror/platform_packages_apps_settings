@@ -18,35 +18,32 @@ package com.android.settings.gestures;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
 import android.os.UserManager;
 import android.provider.Settings;
 
-import com.android.settings.R;
+import com.android.internal.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowPackageManager;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(shadows = SettingsShadowResources.class)
 public class SwipeUpPreferenceControllerTest {
 
     private Context mContext;
@@ -58,9 +55,18 @@ public class SwipeUpPreferenceControllerTest {
 
     @Before
     public void setUp() {
+        SettingsShadowResources.overrideResource(R.bool.config_swipe_up_gesture_setting_available,
+                true);
+        SettingsShadowResources.overrideResource(R.bool.config_swipe_up_gesture_default, true);
+
         mContext = RuntimeEnvironment.application;
         mPackageManager = Shadows.shadowOf(mContext.getPackageManager());
         mController = new SwipeUpPreferenceController(mContext, KEY_SWIPE_UP);
+    }
+
+    @After
+    public void tearDown() {
+        SettingsShadowResources.reset();
     }
 
     @Test
@@ -75,19 +81,44 @@ public class SwipeUpPreferenceControllerTest {
     }
 
     @Test
+    public void testIsGestureAvailable_overlayDisabled_matchingServiceExists_shouldReturnFalse() {
+        SettingsShadowResources.overrideResource(R.bool.config_swipe_up_gesture_setting_available,
+                false);
+
+        final ComponentName recentsComponentName = ComponentName.unflattenFromString(
+                mContext.getString(com.android.internal.R.string.config_recentsComponentName));
+        final Intent quickStepIntent = new Intent(ACTION_QUICKSTEP)
+                .setPackage(recentsComponentName.getPackageName());
+        mPackageManager.addResolveInfoForIntent(quickStepIntent, new ResolveInfo());
+
+        assertThat(SwipeUpPreferenceController.isGestureAvailable(mContext)).isFalse();
+    }
+
+    @Test
     public void testIsGestureAvailable_noMatchingServiceExists_shouldReturnFalse() {
         assertThat(SwipeUpPreferenceController.isGestureAvailable(mContext)).isFalse();
     }
 
     @Test
-    public void testIsChecked_configIsSet_shouldReturnTrue() {
+    public void testIsChecked_defaultIsTrue_shouldReturnTrue() {
+        assertThat(mController.isChecked()).isTrue();
+    }
+
+    @Test
+    public void testIsChecked_defaultIsFalse_shouldReturnFalse() {
+        SettingsShadowResources.overrideResource(R.bool.config_swipe_up_gesture_default, false);
+        assertThat(mController.isChecked()).isFalse();
+    }
+
+    @Test
+    public void testIsChecked_setCheckedTrue_shouldReturnTrue() {
         // Set the setting to be enabled.
         mController.setChecked(true);
         assertThat(mController.isChecked()).isTrue();
     }
 
     @Test
-    public void testIsChecked_configIsNotSet_shouldReturnFalse() {
+    public void testIsChecked_setCheckedFalse_shouldReturnFalse() {
         // Set the setting to be disabled.
         mController.setChecked(false);
         assertThat(mController.isChecked()).isFalse();

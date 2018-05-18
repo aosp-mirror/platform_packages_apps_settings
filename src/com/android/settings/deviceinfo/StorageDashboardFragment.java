@@ -93,6 +93,13 @@ public class StorageDashboardFragment extends DashboardFragment
         initializeOptionsMenu(activity);
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        use(AutomaticStorageManagementSwitchPreferenceController.class).setFragmentManager(
+                getFragmentManager());
+    }
+
     @VisibleForTesting
     void initializeOptionsMenu(Activity activity) {
         mOptionMenuController = new PrivateVolumeOptionMenuController(
@@ -189,11 +196,6 @@ public class StorageDashboardFragment extends DashboardFragment
         mSecondaryUsers = SecondaryUserController.getSecondaryUserControllers(context, userManager);
         controllers.addAll(mSecondaryUsers);
 
-        final AutomaticStorageManagementSwitchPreferenceController asmController =
-                new AutomaticStorageManagementSwitchPreferenceController(
-                        context, mMetricsFeatureProvider, getFragmentManager());
-        getLifecycle().addObserver(asmController);
-        controllers.add(asmController);
         return controllers;
     }
 

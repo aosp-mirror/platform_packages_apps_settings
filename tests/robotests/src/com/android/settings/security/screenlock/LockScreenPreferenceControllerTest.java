@@ -26,11 +26,8 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
-import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.os.UserManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -44,6 +41,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
+
+import androidx.lifecycle.LifecycleOwner;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class LockScreenPreferenceControllerTest {
@@ -79,7 +80,7 @@ public class LockScreenPreferenceControllerTest {
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
-        mController = new LockScreenPreferenceController(mContext, mLifecycle);
+        mController = new LockScreenPreferenceController(mContext, "Test_key");
     }
 
     @Test

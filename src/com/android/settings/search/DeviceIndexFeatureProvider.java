@@ -24,8 +24,10 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
+import android.util.Log;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.slices.SettingsSliceProvider;
 
 import java.util.List;
@@ -48,6 +50,12 @@ public interface DeviceIndexFeatureProvider {
 
     default void updateIndex(Context context, boolean force) {
         if (!isIndexingEnabled()) {
+            Log.w(TAG, "Skipping: device index is not enabled");
+            return;
+        }
+
+        if (!Utils.isDeviceProvisioned(context)) {
+            Log.w(TAG, "Skipping: device is not provisioned");
             return;
         }
 
@@ -65,7 +73,7 @@ public interface DeviceIndexFeatureProvider {
         context.getSystemService(JobScheduler.class).schedule(
                 new JobInfo.Builder(jobId, jobComponent)
                         .setPersisted(true)
-                        .setMinimumLatency(1)
+                        .setMinimumLatency(1000)
                         .setOverrideDeadline(1)
                         .build());
 

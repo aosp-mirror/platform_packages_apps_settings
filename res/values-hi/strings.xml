@@ -167,13 +167,12 @@
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"सिम का इस्तेमाल करने के लिए अनुरोध"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> आपके SIM कार्ड को ऐक्सेस करना चाहता है. SIM कार्ड की ऐक्सेस देने से कनेक्शन की अवधि तक आपके डिवाइस पर डेटा कनेक्टिविटी अक्षम हो जाएगी. <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g> को ऐक्सेस दें"</string>
     <string name="bluetooth_device_name_summary" msgid="522235742194965734">"दूसरे डिवाइस को \'<xliff:g id="DEVICE_NAME">^1</xliff:g>\' के रूप में दिखाई देता है"</string>
+    <string name="bluetooth_off_footer" msgid="8406865700572772936">"अपने डिवाइस को दूसरे डिवाइस से जोड़ने के लिए ब्लूटूथ चालू करें."</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"आपके डिवाइस"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"नया डिवाइस जोड़ें"</string>
     <string name="bluetooth_pref_summary" product="tablet" msgid="3520035819421024105">"अपने टैबलेट को आस-पास के ब्लूटूथ डिवाइस से संपर्क करने की मंज़ूरी दें"</string>
     <string name="bluetooth_pref_summary" product="device" msgid="2205100629387332862">"अपने डिवाइस को आस-पास के ब्लूटूथ डिवाइस से संपर्क करने की मंज़ूरी दें"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="782032074675157079">"अपने फ़ोन को आस-पास के ब्लूटूथ डिवाइस से संपर्क करने की मंज़ूरी दें"</string>
-    <string name="bluetooth_disable_inband_ringing" msgid="8919353393497325693">"\'इन-बैंड रिंगिंग\' (पसंद वाली रिंगटोन) बंद करें"</string>
-    <string name="bluetooth_disable_inband_ringing_summary" msgid="7898974890913984364">"फ़ोन पर मौजूद पसंद के मुताबिक बनी रिंगटोन ब्लूटूथ हेडसेट पर न चलाएं"</string>
     <string name="connected_device_available_media_title" msgid="2560067541413280645">"मौजूद मीडिया डिवाइस"</string>
     <string name="connected_device_available_call_title" msgid="697154660967595684">"कॉल की सुविधा वाले उपलब्ध डिवाइस"</string>
     <string name="connected_device_connected_title" msgid="5871712271201945606">"इंटरनेट से जुड़े हुए डिवाइस"</string>
@@ -182,6 +181,7 @@
     <string name="connected_device_add_device_summary" msgid="4041865900298680338">"दूसरे डिवाइस से जुड़ने के लिए ब्लूटूथ चालू हो जाएगा"</string>
     <string name="connected_device_connections_title" msgid="5988939345181466770">"कनेक्शन की पसंद"</string>
     <string name="connected_device_previously_connected_title" msgid="491765792822244604">"पहले कनेक्ट किए गए डिवाइस"</string>
+    <string name="connected_device_previously_connected_screen_title" msgid="6196066429488377795">"पहले कनेक्ट किए गए डिवाइस"</string>
     <string name="date_and_time" msgid="9062980487860757694">"तारीख और समय"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"समय क्षेत्र चुनें"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -376,7 +376,8 @@
     <string name="decryption_settings_summary" product="default" msgid="5671817824042639849">"फ़ोन सुरक्षित नहीं है"</string>
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"सुरक्षित किया गया डिवाइस"</string>
     <string name="decryption_settings_summary" product="tablet" msgid="5794135636155570977">"डिवाइस सुरक्षित नहीं है"</string>
-    <string name="lockscreen_settings_title" msgid="3922976395527087455">"लॉक स्क्रीन की पसंद"</string>
+    <string name="lockscreen_settings_title" msgid="1099738951060387656">"लॉक स्क्रीन का डिसप्ले"</string>
+    <string name="lockscreen_settings_what_to_show_category" msgid="278055252361575926">"लाॅक स्क्रीन पर क्या दिखाएं"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"मेरी जगह, स्‍क्रीन का लॉक खोलना, सिम कार्ड लॉक, क्रेडेंशियल स्टोरेज लॉक सेट करें"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"मेरा स्‍थान, स्‍क्रीन अनलॉक, क्रेडेंशियल स्टोरेज लॉक सेट करें"</string>
     <string name="security_passwords_title" msgid="2881269890053568809">"निजता"</string>
@@ -587,11 +588,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"बहुत सारी गलत कोशिशें की गई हैं. इस उपयोगकर्ता को मिटा दिया जाएगा."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"बहुत सारी गलत कोशिशें की गई हैं. इस कार्य प्रोफ़ाइल और इसके डेटा को हटा दिया जाएगा."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"खारिज करें"</string>
-    <!-- no translation found for lockpassword_password_too_short (1957883871187697796) -->
-    <!-- no translation found for lockpassword_pin_too_short (5019935246875659237) -->
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="one">पासवर्ड में कम से कम <xliff:g id="COUNT_1">%d</xliff:g> वर्ण होने चाहिए</item>
+      <item quantity="other">पासवर्ड में कम से कम <xliff:g id="COUNT_1">%d</xliff:g> वर्ण होने चाहिए</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="one">पिन में कम से कम <xliff:g id="COUNT_1">%d</xliff:g> अंक होने चाहिए</item>
+      <item quantity="other">पिन में कम से कम <xliff:g id="COUNT_1">%d</xliff:g> अंक होने चाहिए</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"जारी रखें"</string>
-    <!-- no translation found for lockpassword_password_too_long (4581209996591221075) -->
-    <!-- no translation found for lockpassword_pin_too_long (185568652740755131) -->
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="one">पासवर्ड में <xliff:g id="NUMBER_1">%d</xliff:g> से कम वर्ण होने चाहिए</item>
+      <item quantity="other">पासवर्ड में <xliff:g id="NUMBER_1">%d</xliff:g> से कम वर्ण होने चाहिए</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="one">पिन में <xliff:g id="NUMBER_1">%d</xliff:g> से कम अंक होने चाहिए</item>
+      <item quantity="other">पिन में <xliff:g id="NUMBER_1">%d</xliff:g> से कम अंक होने चाहिए</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"इसमें सिर्फ़ 0 से 9 तक के अंक होने चाहिए"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"डिवाइस व्यवस्थापक हाल ही के पिन का उपयोग करने की अनुमति नहीं देता"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"आपके आईटी एडमिन ने आम तौर पर इस्तेमाल होने वाले पिन पर रोक लगा रखी है. दूसरा पिन बनाएं."</string>
@@ -721,8 +734,6 @@
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"सेटिंग याद रखें"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="6752690395207847881">"ब्लूटूथ के ज़रिए ज़्यादा से ज़्यादा कितने ऑडियो डिवाइस जुड़ सकते हैं"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="5936561749790095473">"यह चुनें कि ब्लूटूथ के ज़रिए ज़्यादा से ज़्यादा कितने ऑडियो डिवाइस जुड़ सकते हैं"</string>
-    <string name="bluetooth_disable_avdtp_delay_reports" msgid="7710144996922449248">"ब्लूटूथ एवीडीटीपी की देरी से जुड़ी रिपाेर्ट पाने की सुविधा बंद करें"</string>
-    <string name="bluetooth_disable_avdtp_delay_reports_summary" msgid="6882039901251054992">"ब्लूटूथ एवीडीटीपी की देरी से जुड़ी रिपाेर्ट पाने की सुविधा बंद करें"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"कास्ट करें"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"बिना वायर के स्क्रीन दिखाना (वायरलेस डिसप्ले) चालू करें"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"आस-पास कोई भी डिवाइस नहीं मिला."</string>
@@ -996,6 +1007,16 @@
     <string name="emergency_address_title" msgid="932729250447887545">"आपातकालीन पता"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"जब आप वाई-फ़ाई पर आपातकालीन कॉल करते हैं, तब आपकी मौजूदा जगह को आपके पते के तौर पर इस्तेमाल किया जाता है"</string>
     <string name="private_dns_help_message" msgid="3299567069152568958">"निजी डीएनएस की सुविधाओं के बारे में "<annotation id="url">"ज़्यादा जानें"</annotation></string>
+    <!-- no translation found for wifi_calling_pref_managed_by_carrier (6845711858866828986) -->
+    <skip />
+    <!-- no translation found for wifi_calling_settings_activation_instructions (7492509632478260955) -->
+    <skip />
+    <!-- no translation found for wifi_calling_turn_on (1171403510313983983) -->
+    <skip />
+    <!-- no translation found for wifi_calling_not_supported (7878640438907807754) -->
+    <skip />
+    <!-- no translation found for carrier (5264014738689761132) -->
+    <skip />
     <string name="display_settings_title" msgid="1708697328627382561">"स्क्रीन सेटिंग देखें"</string>
     <string name="sound_settings" msgid="5534671337768745343">"आवाज़"</string>
     <string name="all_volume_title" msgid="4296957391257836961">"आवाज़"</string>
@@ -1449,6 +1470,7 @@
     <string name="reset_esim_error_title" msgid="1464195710538232590">"ई-सिम रीसेट नहीं किया जा सकता."</string>
     <string name="reset_esim_error_msg" msgid="8434956817922668388">"किसी गड़बड़ी की वजह से ई-सिम रीसेट नहीं किया जा सकता."</string>
     <string name="master_clear_title" msgid="3531267871084279512">"सभी डेटा मिटाएं (फ़ैक्ट्री रीसेट)"</string>
+    <string name="master_clear_short_title" msgid="8652450915870274285">"सारा डेटा हमेशा के लिए मिटाएं (फ़ैक्ट्री रीसेट)"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"इससे आपके टैबलेट के "<b>"मोबाइल मेमोरी"</b>" से सभी डेटा मिट जाएगा, जिसमें शामिल है:\n\n"<li>"आपका Google खाता"</li>\n<li>"सिस्‍टम और ऐप्स डेटा और सेटिंग"</li>\n<li>"डाउनलोड किए गए ऐप्स"</li></string>
     <string name="master_clear_desc" product="default" msgid="4800386183314202571">"इससे आपके फ़ोन की "<b>"मेमोरी"</b>" से सभी डेटा मिट जाएगा, जिसमें शामिल है:\n\n"<li>"आपका Google खाता"</li>\n<li>"सिस्‍टम और ऐप्लिकेशन डेटा और सेटिंग"</li>\n<li>"डाउनलोड किए गए ऐप्लिकेशन"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"आप इस समय नीचे दिए गए खातों में साइन इन किए हुए हैं:\n"</string>
@@ -1732,9 +1754,6 @@
     <string name="security_settings_desc_multi" product="default" msgid="6610268420793984752">"यह ऐप्स आपके फ़ोन पर इन पर पहुंच सकता है. निष्‍पादन को बेहतर बनाने और स्‍मृति उपयोग को कम करने के लिए, इनमें से कुछ अनुमतियां <xliff:g id="BASE_APP_NAME">%1$s</xliff:g> को उपलब्‍ध हैं क्‍योंकि यह <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g> के समान प्रक्रिया में चलता है:"</string>
     <string name="join_two_items" msgid="1336880355987539064">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g> और <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
     <string name="join_two_unrelated_items" msgid="1873827777191260824">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>, <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
-    <string name="join_many_items_last" msgid="218498527304674173">"<xliff:g id="ALL_BUT_LAST_ITEM">%1$s</xliff:g> और <xliff:g id="LAST_ITEM_0">%2$s</xliff:g>"</string>
-    <string name="join_many_items_first" msgid="4333907712038448660">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>, <xliff:g id="ALL_BUT_FIRST_AND_LAST_ITEM">%2$s</xliff:g>"</string>
-    <string name="join_many_items_middle" msgid="7556692394478220814">"<xliff:g id="ADDED_ITEM">%1$s</xliff:g>, <xliff:g id="REST_OF_ITEMS">%2$s</xliff:g>"</string>
     <string name="security_settings_billing_desc" msgid="8061019011821282358">"यह ऐप्स  आपसे शुल्क ले सकता है:"</string>
     <string name="security_settings_premium_sms_desc" msgid="8734171334263713717">"प्रीमियम मैसेज (एसएमएस) भेजें"</string>
     <string name="computing_size" msgid="1599186977475211186">"गणना कर रहा है…"</string>
@@ -1995,6 +2014,7 @@
       <item quantity="one">अत्यधिक समय का विलंब (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> मिसे)</item>
       <item quantity="other">अत्यधिक समय का विलंब (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> मिसे)</item>
     </plurals>
+    <string name="accessibility_vibration_summary" msgid="1372393829668784669">"घंटी पर वाइब्रेशन <xliff:g id="SUMMARY_RING">%1$s</xliff:g>, छूने पर वाइब्रेशन <xliff:g id="SUMMARY_TOUCH">%2$s</xliff:g>"</string>
     <string name="accessibility_vibration_summary_off" msgid="1753566394591809629">"घंटी बजने और सूचना आने के लिए वाइब्रेशन, बंद पर सेट है"</string>
     <string name="accessibility_vibration_summary_low" msgid="7628418309029013867">"घंटी बजने और सूचना आने के लिए वाइब्रेशन, कम पर सेट है"</string>
     <string name="accessibility_vibration_summary_medium" msgid="3422136736880414093">"घंटी बजने और सूचना आने के लिए वाइब्रेशन, सामान्य पर सेट है"</string>
@@ -2099,11 +2119,12 @@
     <string name="background_activity_summary_whitelisted" msgid="1079899502347973947">"बैकग्राउंड में हो रहे बैटरी खर्च पर रोक नहीं लगाई जा सकती"</string>
     <string name="background_activity_warning_dialog_title" msgid="2216249969149568871">"ऐप की बैकग्राउंड गतिविधि को सीमित करें?"</string>
     <string name="background_activity_warning_dialog_text" msgid="7049624449246121981">"अगर आप ऐप की बैकग्राउंड गतिविधि को सीमित करते हैं, तो हो सकता है यह ठीक ढंग से काम न करे"</string>
+    <!-- no translation found for background_activity_disabled_dialog_text (6133420589651880824) -->
+    <skip />
     <string name="device_screen_usage" msgid="3386088035570409683">"पूरा चार्ज होने के बाद से अब तक स्क्रीन का इस्तेमाल"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"स्क्रीन के लिए खपत"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"मोबाइल नेटवर्क स्कैनिंग"</string>
-    <string name="power_usage_list_summary" msgid="6393929085382334341">"(<xliff:g id="RELATIVE_TIME">^1</xliff:g>) पूरी तरह चार्ज होने के बाद से अब तक ऐप्लिकेशन का इस्तेमाल"</string>
-    <string name="power_usage_list_summary_device" msgid="4461926045610455423">"(<xliff:g id="RELATIVE_TIME">^1</xliff:g>) बजे पूरी तरह चार्ज होने के बाद से अब तक डिवाइस का इस्तेमाल"</string>
+    <string name="power_usage_list_summary" msgid="5584049564906462506">"पिछली बार बैटरी पूरी चार्ज करने के बाद, उसके इस्तेमाल से जुड़ी जानकारी"</string>
     <string name="screen_usage_summary" msgid="6687403051423153550">"पिछली बार पूरी तरह चार्ज होने के बाद से अब तक स्क्रीन के चालू रहने का समय"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"पिछली बार पूरी चार्ज होने के बाद से अब तक का डिवाइस उपयोग"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"अनप्‍लग होने के बाद से बैटरी का उपयोग"</string>
@@ -2134,8 +2155,10 @@
     <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"डिवाइस को बैकग्राउंड में सक्रिय करना"</string>
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"बार-बार जगह का अनुरोध कर रहा है"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> ऐप्लिकेशन ठीक से काम नहीं कर रहे हैं"</string>
-    <string name="battery_tip_summary_title" msgid="7060523369832289878">"बैटरी अच्छी हालत में है"</string>
-    <string name="battery_tip_summary_summary" msgid="7674026655453457">"ऐप्लिकेशन सामान्य रूप से काम कर रहे हैं"</string>
+    <string name="battery_tip_summary_title" msgid="368729969313047399">"ऐप्लिकेशन सामान्य रूप से काम कर रहे हैं"</string>
+    <string name="battery_tip_summary_summary" product="default" msgid="2198778125778121221">"फ़ोन पर बैकग्राउंड में सामान्य रूप से बैटरी इस्तेमाल हो रही है"</string>
+    <string name="battery_tip_summary_summary" product="tablet" msgid="1183976728682325345">"टैबलेट पर बैकग्राउंड में सामान्य रूप से बैटरी इस्तेमाल हो रही है"</string>
+    <string name="battery_tip_summary_summary" product="device" msgid="363718204492523920">"डिवाइस पर बैकग्राउंड में सामान्य रूप से बैटरी इस्तेमाल हो रही है"</string>
     <string name="battery_tip_low_battery_title" msgid="5103420355109677385">"बहुत कम बैटरी बची है"</string>
     <string name="battery_tip_low_battery_summary" msgid="4702986182940709150">"बहुत कम बैटरी बची है"</string>
     <string name="battery_tip_smart_battery_title" product="default" msgid="2542822112725248683">"अपने फ़ोन की बैटरी लाइफ़ बेहतर बनाएं"</string>
@@ -2150,9 +2173,9 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"टैबलेट को सामान्य से ज़्यादा इस्तेमाल किया गया"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"डिवाइस को सामान्य से ज़्यादा इस्तेमाल किया गया"</string>
     <string name="battery_tip_high_usage_summary" msgid="6341311803303581798">"बैटरी जल्दी ही खत्म हो जाएगी"</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="7434089311164898581">"आपका फ़ोन सामान्य से ज़्यादा इस्तेमाल किया गया है. आपके फ़ोन की बैटरी समय से पहले ही खत्म हो सकती है.\n\nपिछली बार पूरा चार्ज करने (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>) के बाद से इस्तेमाल किए गए मुख्य <xliff:g id="NUMBER">%1$d</xliff:g> ऐप्लिकेशन:"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="2987443811119964310">"आपका टैबलेट सामान्य से ज़्यादा इस्तेमाल किया गया है. आपके टैबलेट की बैटरी समय से पहले ही खत्म हो सकती है.\n\nपिछली बार पूरा चार्ज करने (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>) के बाद से इस्तेमाल किए गए मुख्य <xliff:g id="NUMBER">%1$d</xliff:g> ऐप्लिकेशन:"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="1993039726576708815">"आपका डिवाइस सामान्य से ज़्यादा इस्तेमाल किया गया है. आपके डिवाइस की बैटरी समय से पहले ही खत्म हो सकती है.\n\nपिछली बार पूरा चार्ज करने (<xliff:g id="TIME_PERIOD_AGO">%2$s</xliff:g>) के बाद से इस्तेमाल किए गए मुख्य <xliff:g id="NUMBER">%1$d</xliff:g> ऐप्लिकेशन:"</string>
+    <string name="battery_tip_dialog_message" product="default" msgid="7001932078713215338">"आपका फ़ोन सामान्य से ज़्यादा इस्तेमाल किया गया है. आपके फ़ोन की बैटरी समय से पहले खत्म हो सकती है.\n\n पिछली बार पूरा चार्ज करने के बाद, सबसे ज़्यादा इस्तेमाल किए गए <xliff:g id="NUMBER">%1$d</xliff:g> ऐप्लिकेशन:"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="8482296786233647690">"आपका टैबलेट सामान्य से ज़्यादा इस्तेमाल किया गया है. आपके टैबलेट की बैटरी समय से पहले ही खत्म हो सकती है.\n\nपिछली बार पूरा चार्ज करने के बाद, सबसे ज़्यादा इस्तेमाल किए गए <xliff:g id="NUMBER">%1$d</xliff:g> ऐप्लिकेशन:"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="2806861679225286129">"आपका डिवाइस सामान्य से ज़्यादा इस्तेमाल किया गया है. आपके डिवाइस की बैटरी समय से पहले खत्म हो सकती है.\n\n पिछली बार पूरा चार्ज करने के बाद, सबसे ज़्यादा इस्तेमाल किए गए <xliff:g id="NUMBER">%1$d</xliff:g> ऐप्लिकेशन:"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="one">%1$d ऐप्लिकेशन पर रोक लगाएं</item>
       <item quantity="other">%1$d ऐप्लिकेशन पर रोक लगाएं</item>
@@ -2181,8 +2204,9 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="6537761705584610231">"यह ऐप्लिकेशन बैकग्राउंड में बैटरी इस्तेमाल कर पाएगा. हो सकता है कि आपके डिवाइस की बैटरी समय से पहले ही खत्म हो जाए."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="6022058431218137646">"ऐप्लिकेशन से रोक हटाएं"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="3058235875830858902">"अभी नहीं"</string>
-    <string name="battery_tip_dialog_summary_message" msgid="3483708973495692333">"आपके इस्तेमाल के हिसाब से, आपकी बैटरी पूरी चार्ज होने पर लगभग <xliff:g id="TIME_DURATION">%1$s</xliff:g> चलती है.\n\nअगर आप अपनी बैटरी लाइफ़ बढ़ाना चाहते हैं तो, बैटरी सेवर चालू करें."</string>
-    <string name="battery_tip_dialog_summary_message_no_estimation" msgid="1456026456418786135">"अगर आप अपनी बैटरी लाइफ़ बढ़ाना चाहते हैं तो, बैटरी सेवर चालू करें"</string>
+    <string name="battery_tip_dialog_summary_message" product="default" msgid="4628448253185085796">"आपके ऐप्लिकेशन सामान्य रूप से बैटरी इस्तेमाल कर रहें हैं. अगर ऐप्लिकेशन ज़्यादा बैटरी खर्च करने लगें तो, फ़ोन बैटरी बचाने के लिए सुझाव देगा.\n\nअगर फ़ोन की बैटरी खत्म होने वाली हो तो, आप बैटरी सेवर चालू कर सकते हैं."</string>
+    <string name="battery_tip_dialog_summary_message" product="tablet" msgid="8327950887399420971">"आपके ऐप्लिकेशन सामान्य रूप से बैटरी इस्तेमाल कर रहें हैं. अगर ऐप्लिकेशन ज़्यादा बैटरी खर्च करने लगें तो, टैबलेट बैटरी बचाने के लिए सुझाव देगा.\n\nअगर टैबलेट की बैटरी खत्म होने वाली हो तो, आप बैटरी सेवर चालू कर सकते हैं."</string>
+    <string name="battery_tip_dialog_summary_message" product="device" msgid="6753742263807939789">"आपके ऐप्लिकेशन सामान्य रूप से बैटरी इस्तेमाल कर रहें हैं. अगर ऐप्लिकेशन ज़्यादा बैटरी खर्च करने लगें तो, डिवाइस बैटरी बचाने के लिए सुझाव देगा.\n\nअगर डिवाइस की बैटरी खत्म होने वाली हो तो, आप बैटरी सेवर चालू कर सकते हैं."</string>
     <string name="smart_battery_manager_title" msgid="870632749556793417">"बैटरी मैनेजर"</string>
     <string name="smart_battery_title" msgid="6218785691872466076">"ऐप्लिकेशन अपने आप प्रबंधित होने की सुविधा"</string>
     <string name="smart_battery_summary" msgid="1339184602000004058">"अक्सर इस्तेमाल न किए जाने वाले ऐप्लिकेशन को बैटरी इस्तेमाल करने से रोकें"</string>
@@ -2407,16 +2431,9 @@
     <string name="credentials_settings_not_available" msgid="7968275634486624215">"इस उपयोगकर्ता के लिए क्रेडेंशियल मौजूद नहीं हैं"</string>
     <string name="credential_for_vpn_and_apps" msgid="4168197158768443365">"VPN और ऐप्लिकेशन के लिए इंस्टॉल किया गया"</string>
     <string name="credential_for_wifi" msgid="6228425986551591864">"वाई-फ़ाई के लिए इंस्टॉल किया गया"</string>
-    <string name="credentials_unlock" msgid="385427939577366499"></string>
-    <string name="credentials_unlock_hint" msgid="2301301378040499348">"प्रमाणिकता मेमोरी के लिए पासवर्ड लिखें."</string>
-    <string name="credentials_old_password" msgid="7553393815538684028">"वर्तमान पासवर्ड:"</string>
     <string name="credentials_reset_hint" msgid="6297256880896133631">"सभी सामग्री हटाएं?"</string>
-    <string name="credentials_wrong_password" msgid="2541932597104054807">"गलत पासवर्ड."</string>
-    <string name="credentials_reset_warning" msgid="5320653011511797600">"गलत पासवर्ड. आपके पास प्रमाणिकता मेमोरी मिटाए जाने के पहले एक और अवसर है."</string>
-    <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"गलत पासवर्ड. आपके पास प्रमाणिकता मेमोरी मिटाए जाने के पहले <xliff:g id="NUMBER">%1$d</xliff:g> और अवसर हैं."</string>
     <string name="credentials_erased" msgid="2907836028586342969">"प्रमाणिकता मेमोरी मिटा दिया गया है."</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"प्रमाणिकता मेमोरी मिटाया नहीं जा सका."</string>
-    <string name="credentials_enabled" msgid="7588607413349978930">"प्रमाणिकता मेमोरी सक्षम किया गया है."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="8058230497337529036">"क्रेडेंशियल स्टोरेज का इस्तेमाल करने से पहले, आपके डिवाइस पर सुरक्षित लॉक स्क्रीन होना ज़रूरी है"</string>
     <string name="credentials_configure_lock_screen_button" msgid="253239765216055321">"लॉक सेट करें"</string>
     <string name="usage_access_title" msgid="332333405495457839">"उपयोग के एक्सेस वाले ऐप्लिकेशन"</string>
@@ -2931,8 +2948,14 @@
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"डेटा खर्च"</string>
     <string name="network_dashboard_summary_hotspot" msgid="8494210248613254574">"हॉटस्पॉट"</string>
     <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"कनेक्ट किए गए डिवाइस"</string>
-    <string name="connected_devices_dashboard_summary" msgid="2390582103384791904">"ब्लूटूथ, कास्ट, एनएफ़सी"</string>
-    <string name="connected_devices_dashboard_no_nfc_summary" msgid="9106040742715366495">"ब्लूटूथ, कास्ट करें"</string>
+    <!-- no translation found for connected_devices_dashboard_summary (2665221896894251402) -->
+    <skip />
+    <!-- no translation found for connected_devices_dashboard_no_nfc_summary (3840842725283655533) -->
+    <skip />
+    <!-- no translation found for connected_devices_dashboard_no_driving_mode_summary (5018708106066758867) -->
+    <skip />
+    <!-- no translation found for connected_devices_dashboard_no_driving_mode_no_nfc_summary (5250078362483148199) -->
+    <skip />
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"ऐप्लिकेशन और सूचनाएं"</string>
     <string name="app_and_notification_dashboard_summary" msgid="2363314178802548682">"अनुमतियां, डिफ़ॉल्ट ऐप"</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"खाते"</string>
@@ -3072,15 +3095,21 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"मैसेज पर स्क्रीन चमकने से रोकें"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"संकेत दिखाए जाने की अनुमति दें"</string>
-    <string name="zen_mode_restrict_notifications_screen_title" msgid="9027437428488279426">"सूचनाओं पर रोक लगाएं"</string>
+    <!-- no translation found for zen_mode_settings_category (3982039687186952865) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"सूचनाएं"</string>
-    <string name="zen_mode_restrict_notifications_category" msgid="1648631487087638037">"परेशान न करें सुविधा चालू होने पर"</string>
-    <string name="zen_mode_restrict_notifications_mute" msgid="9210062826172341735">"सूचनाएं म्यूट करें"</string>
-    <string name="zen_mode_restrict_notifications_mute_summary" msgid="285566524371041091">"सूचनाएं दिखाएं लेकिन फ़ोन की आवाज़ और वाइब्रेशन बंद रखें"</string>
-    <string name="zen_mode_restrict_notifications_mute_footer" msgid="8473382758368384982">"जब नई सूचनाएं आएंगी तो, आपका फ़ोन आवाज़ या वाइब्रेशन नहीं करेगा"</string>
-    <string name="zen_mode_restrict_notifications_hide" msgid="3451553435075518722">"सूचनाएं छिपाएं और म्यूट करें"</string>
-    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3823881787175376177">"किसी भी तरह की सूचनाएं दिखाई नहीं देंगी"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4224323933073288352">"परेशान न करें सुविधा चालू होने पर आपको पहले से मौजूद या नई सूचनाएं दिखाई नहीं देंगी. हालांकि, फ़ोन की सामान्य गतिविधि और स्थिति के लिए ज़रूरी सूचनाएं दिखाई देंगी."</string>
+    <!-- no translation found for zen_mode_restrict_notifications_mute (8649062661635246283) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_mute_summary (8450964969807231275) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_mute_footer (3465600930732602159) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_hide (9070829387109283980) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_hide_summary (3832808022882158781) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_hide_footer (6559283246372102465) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"पसंद के मुताबिक बनाएं"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"पसंद के मुताबिक बनाई गई सेटिंग चालू करें"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"पसंद के मुताबिक बनाई गई सेटिंग हटाएं"</string>
@@ -3132,20 +3161,45 @@
       <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> नियम अपने आप चालू हो सकते हैं</item>
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> नियम अपने आप चालू हो सकते हैं</item>
     </plurals>
-    <!-- no translation found for zen_onboarding_ok (4157146842078658361) -->
+    <!-- no translation found for zen_category_behavior (2989256030084350296) -->
     <skip />
-    <!-- no translation found for zen_onboarding_no_update (3103752501952811308) -->
+    <!-- no translation found for zen_category_exceptions (7601136604273265629) -->
     <skip />
-    <!-- no translation found for zen_onboarding_dnd_visual_disturbances_description (4051020254348888576) -->
+    <!-- no translation found for zen_category_schedule (9000447592251450453) -->
     <skip />
-    <!-- no translation found for zen_onboarding_dnd_visual_disturbances_header (4243599835234481809) -->
+    <!-- no translation found for zen_sound_title (424490228488531372) -->
+    <skip />
+    <!-- no translation found for zen_sound_footer (7621745273287208979) -->
+    <skip />
+    <!-- no translation found for zen_sound_category_title (4336596939661729188) -->
+    <skip />
+    <!-- no translation found for zen_sound_all_muted (4850363350480968114) -->
+    <skip />
+    <!-- no translation found for zen_sound_none_muted (3938508512103612527) -->
+    <skip />
+    <!-- no translation found for zen_sound_one_allowed (8447313454438932276) -->
+    <skip />
+    <!-- no translation found for zen_sound_two_allowed (980491120444358550) -->
+    <skip />
+    <!-- no translation found for zen_sound_three_allowed (3455767205934547985) -->
+    <skip />
+    <!-- no translation found for zen_msg_event_reminder_title (5137894077488924820) -->
+    <skip />
+    <!-- no translation found for zen_msg_event_reminder_footer (3242847055412790819) -->
+    <skip />
+    <!-- no translation found for zen_onboarding_ok (6131211000824433013) -->
     <skip />
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"सेटिंग"</string>
-    <string name="zen_onboarding_more_options" msgid="7880013502169957729">"अाप सेटिंग में जाकर इस सुविधा में मनमुताबिक बदलाव कर सकते हैं."</string>
-    <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"स्क्रीन चालू हाेने के दाैरान सूचनाएं दिखाने पर राेक लगाएं"</string>
-    <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"स्क्रीन बंद हाेने के दाैरान सूचनाएं दिखाने पर राेक लगाएं"</string>
-    <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"सूचनाएं पाने के लिए स्क्रीन को चालू न करें या डिवाइस को न जगाएं"</string>
-    <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"फ़ाेन की बुनियादी गतिविधि अाैर स्थिति से जुड़ी सूचनाओं के अलावा काेई अाैर सूचना न दिखाएं"</string>
+    <!-- no translation found for zen_onboarding_new_setting_title (3311718322273907394) -->
+    <skip />
+    <!-- no translation found for zen_onboarding_current_setting_title (776426065129609376) -->
+    <skip />
+    <!-- no translation found for zen_onboarding_new_setting_summary (6293026064871880706) -->
+    <skip />
+    <!-- no translation found for zen_onboarding_current_setting_summary (1280614488924843713) -->
+    <skip />
+    <!-- no translation found for zen_onboarding_dnd_visual_disturbances_header (1352808651270918932) -->
+    <skip />
     <string name="sound_work_settings" msgid="6774324553228566442">"कार्य प्रोफ़ाइल की ध्वनियां"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"व्यक्तिगत प्रोफाइल ध्वनि काम में लें"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"कार्य और व्यक्तिगत प्रोफ़ाइल के लिए ध्वनियां एक समान होती हैं"</string>
@@ -3314,21 +3368,54 @@
     <string name="summary_range_symbol_combination" msgid="5695218513421897027">"<xliff:g id="START">%1$s</xliff:g> - <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"<xliff:g id="START">%1$s</xliff:g> से <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_calls" msgid="7051492091133751208">"कॉल"</string>
+    <!-- no translation found for zen_mode_calls_title (623395033931747661) -->
+    <skip />
+    <!-- no translation found for zen_mode_calls_footer (3618700268458237781) -->
+    <skip />
+    <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"तारे के निशान वाले संपर्क"</string>
+    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="6748832187598909961">
+      <item quantity="one">और <xliff:g id="NUM_PEOPLE">%d</xliff:g> दूसरे संपर्क</item>
+      <item quantity="other">और <xliff:g id="NUM_PEOPLE">%d</xliff:g> दूसरे संपर्क</item>
+    </plurals>
     <string name="zen_mode_messages" msgid="5886440273537510894">"मैसेज"</string>
-    <string name="zen_mode_all_messages" msgid="6449223378976743208">"सभी संदेश"</string>
-    <string name="zen_mode_selected_messages" msgid="8245990149599142281">"चयनित संदेश"</string>
+    <!-- no translation found for zen_mode_messages_title (7729380010396411129) -->
+    <skip />
+    <!-- no translation found for zen_mode_all_messages (8257021584561639816) -->
+    <skip />
+    <!-- no translation found for zen_mode_selected_messages (1047355526202106114) -->
+    <skip />
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"किसी से भी"</string>
     <string name="zen_mode_from_contacts" msgid="2232335406106711637">"सिर्फ़ संपर्कों से"</string>
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"सिर्फ़ तारांकित संपर्कों से"</string>
+    <!-- no translation found for zen_calls_summary_starred_repeat (4046151920710059778) -->
+    <skip />
+    <!-- no translation found for zen_calls_summary_contacts_repeat (1528716671301999084) -->
+    <skip />
+    <!-- no translation found for zen_calls_summary_repeat_only (7105261473107715445) -->
+    <skip />
     <string name="zen_mode_from_none" msgid="8219706639954614136">"कोई नहीं"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"अलार्म"</string>
     <string name="zen_mode_media" msgid="8808264142134422380">"मीडिया"</string>
     <string name="zen_mode_system" msgid="2541380718411593581">"छूने पर आने वाली आवाज़ें"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"रिमाइंडर"</string>
+    <!-- no translation found for zen_mode_reminders_title (2345044406347406902) -->
+    <skip />
     <string name="zen_mode_events" msgid="7914446030988618264">"इवेंट"</string>
-    <string name="zen_mode_all_callers" msgid="584186167367236922">"सभी कॉल करने वाले (कॉलर)"</string>
-    <string name="zen_mode_selected_callers" msgid="3127598874060615742">"चुनिंदा कॉल करने वाले (कॉलर)"</string>
+    <!-- no translation found for zen_mode_events_title (5597241655883329085) -->
+    <skip />
+    <!-- no translation found for zen_mode_all_callers (2378065871253871057) -->
+    <skip />
+    <!-- no translation found for zen_mode_contacts_callers (5569804103920394175) -->
+    <skip />
+    <!-- no translation found for zen_mode_starred_callers (1023167821338514140) -->
+    <skip />
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"बार-बार कॉल करने वाले (कॉलर)"</string>
+    <!-- no translation found for zen_mode_repeat_callers_title (8553876328249671783) -->
+    <skip />
+    <!-- no translation found for zen_mode_calls_summary_one (3972333792749874863) -->
+    <skip />
+    <!-- no translation found for zen_mode_calls_summary_two (6592821501321201329) -->
+    <skip />
     <string name="zen_mode_repeat_callers_summary" msgid="239685342222975733">"अगर कोई व्यक्ति <xliff:g id="MINUTES">%d</xliff:g> मिनट के अंदर दोबारा कॉल करे"</string>
     <string name="zen_mode_behavior_summary_custom" msgid="168127313238020146">"पसंद के मुताबिक"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"स्वचालित रूप से चालू"</string>
@@ -3598,7 +3685,7 @@
     <string name="zen_access_revoke_warning_dialog_summary" msgid="5518216907304930148">"इस ऐप के द्वारा, परेशान न करें के लिए बनाए गए सभी नियम निकाल दिए जाएंगे."</string>
     <string name="ignore_optimizations_on" msgid="6915689518016285116">"ऑप्‍टिमाइज़ ना करें"</string>
     <string name="ignore_optimizations_off" msgid="6153196256410296835">"ऑप्‍टिमाइज़ करें"</string>
-    <string name="ignore_optimizations_on_desc" msgid="2321398930330555815">"इससे आपकी बैटरी अधिक तेज़ी से खाली हो सकती है"</string>
+    <string name="ignore_optimizations_on_desc" msgid="3549930955839111652">"इससे आपके डिवाइस की बैटरी तेज़ी से खर्च हो सकती है. यह सेटिंग चालू करने के बाद, ऐप्लिकेशन को बैकग्राउंड में बैटरी इस्तेमाल करने से नहीं रोका जाएगा."</string>
     <string name="ignore_optimizations_off_desc" msgid="5255731062045426544">"बेहतर बैटरी जीवनकाल के लिए सुझाया गया"</string>
     <string name="ignore_optimizations_title" msgid="2829637961185027768">"<xliff:g id="APP">%s</xliff:g> को बैटरी ऑप्टिमाइज़ेशन को अनदेखा करने की अनुमति दें?"</string>
     <string name="app_list_preference_none" msgid="108006867520327904">"कोई नहीं"</string>
@@ -4059,6 +4146,8 @@
     <string name="storage_movies_tv" msgid="5498394447562086890">"फ़िल्में और टीवी ऐप्लिकेशन"</string>
     <string name="carrier_provisioning" msgid="4398683675591893169">"मोबाइल और इंटरनेट सेवा देने वाली कंपनी की नेटवर्क से जुड़ी जानकारी"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"मोबाइल और इंटरनेट सेवा देने वाली कंपनी का नेटवर्क ट्रिगर करें"</string>
+    <string name="zen_suggestion_title" msgid="798067603460192693">"\'परेशान न करें सुविधा\' अपडेट करें"</string>
+    <string name="zen_suggestion_summary" msgid="4573237195296808909">"किसी काम में ध्यान लगाने के लिए डिवाइस की सूचनाएं छिपाएं"</string>
     <string name="new_device_suggestion_title" msgid="698847081680980774">"नया और रोमांचक क्या है?"</string>
     <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"अपने नए फ़ोन के बारे में अच्छी तरह जानें"</string>
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"अपने नए टैबलेट के बारे में अच्छी तरह जानें"</string>

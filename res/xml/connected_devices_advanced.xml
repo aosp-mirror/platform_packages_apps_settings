@@ -20,12 +20,26 @@
     android:key="connected_devices_advanced_screen"
     android:title="@string/connected_device_connections_title">
 
+    <Preference
+        android:fragment="com.android.settings.connecteddevice.BluetoothDashboardFragment"
+        android:key="bluetooth_settings"
+        android:title="@string/bluetooth_settings_title"
+        android:icon="@drawable/ic_settings_bluetooth"
+        android:order="-9"/>
+
+    <SwitchPreference
+        android:key="toggle_nfc"
+        android:title="@string/nfc_quick_toggle_title"
+        android:icon="@drawable/ic_nfc"
+        android:summary="@string/nfc_quick_toggle_summary"
+        android:order="-7"/>
+
     <com.android.settingslib.RestrictedPreference
         android:fragment="com.android.settings.nfc.AndroidBeam"
         android:key="android_beam_settings"
         android:title="@string/android_beam_settings_title"
         android:icon="@drawable/ic_android"
-        android:order="-4"/>
+        android:order="-6"/>
 
     <SwitchPreference
         android:key="bluetooth_on_while_driving"
@@ -33,7 +47,7 @@
         android:icon="@drawable/ic_settings_bluetooth"
         android:summary="@string/bluetooth_on_while_driving_summary"
         settings:controller="com.android.settings.connecteddevice.BluetoothOnWhileDrivingPreferenceController"
-        android:order="-2"/>
+        android:order="-4"/>
 
     <com.android.settingslib.RestrictedPreference
         android:key="connected_device_printing"
@@ -41,7 +55,7 @@
         android:summary="@string/summary_placeholder"
         android:icon="@drawable/ic_settings_print"
         android:fragment="com.android.settings.print.PrintSettingsFragment"
-        android:order="-1"/>
+        android:order="-3"/>
 
     <Preference
         android:key="bt_received_files"
@@ -50,6 +64,6 @@
 
     <PreferenceCategory
         android:key="dashboard_tile_placeholder"
-        android:order="50"/>
+        android:order="-8"/>
 
 </PreferenceScreen>

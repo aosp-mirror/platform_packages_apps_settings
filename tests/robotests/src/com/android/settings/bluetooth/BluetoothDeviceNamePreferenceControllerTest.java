@@ -43,6 +43,7 @@ public class BluetoothDeviceNamePreferenceControllerTest {
 
     private static final String DEVICE_NAME = "Nightshade";
     private static final int ORDER = 1;
+    private static final String KEY_DEVICE_NAME = "test_key_name";
 
     private Context mContext;
     @Mock
@@ -61,8 +62,9 @@ public class BluetoothDeviceNamePreferenceControllerTest {
 
         when(mPreferenceScreen.getContext()).thenReturn(mContext);
         mPreference = new Preference(mContext);
-        mPreference.setKey(BluetoothDeviceNamePreferenceController.KEY_DEVICE_NAME);
-        mController = spy(new BluetoothDeviceNamePreferenceController(mContext, mLocalAdapter));
+        mPreference.setKey(KEY_DEVICE_NAME);
+        mController = spy(new BluetoothDeviceNamePreferenceController(mContext, mLocalAdapter,
+                KEY_DEVICE_NAME));
         doReturn(DEVICE_NAME).when(mController).getDeviceName();
     }
 
@@ -82,7 +84,7 @@ public class BluetoothDeviceNamePreferenceControllerTest {
         Preference preference =
             mController.createBluetoothDeviceNamePreference(mPreferenceScreen, ORDER);
 
-        assertThat(preference.getKey()).isEqualTo(mController.KEY_DEVICE_NAME);
+        assertThat(preference.getKey()).isEqualTo(mController.getPreferenceKey());
         assertThat(preference.getOrder()).isEqualTo(ORDER);
         verify(mPreferenceScreen).addPreference(preference);
     }

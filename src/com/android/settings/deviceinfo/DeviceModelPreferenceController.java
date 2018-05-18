@@ -32,8 +32,8 @@ import java.util.concurrent.FutureTask;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-
 public class DeviceModelPreferenceController extends BasePreferenceController {
+
 
     private static final String TAG = "DeviceModelPrefCtrl";
 
