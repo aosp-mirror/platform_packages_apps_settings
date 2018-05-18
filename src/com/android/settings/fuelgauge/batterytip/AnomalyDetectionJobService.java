@@ -155,44 +155,36 @@ public class AnomalyDetectionJobService extends JobService {
             final String packageName = batteryUtils.getPackageName(uid);
             final long versionCode = batteryUtils.getAppLongVersionCode(packageName);
 
-            final boolean anomalyDetected;
-            if (isExcessiveBackgroundAnomaly(anomalyInfo)) {
-                anomalyDetected = batteryUtils.isPreOApp(packageName);
+            if (batteryUtils.shouldHideAnomaly(powerWhitelistBackend, uid, anomalyInfo)) {
+                metricsFeatureProvider.action(context,
+                        MetricsProto.MetricsEvent.ACTION_ANOMALY_IGNORED,
+                        packageName,
+                        Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT,
+                                anomalyInfo.anomalyType),
+                        Pair.create(MetricsProto.MetricsEvent.FIELD_APP_VERSION_CODE,
+                                versionCode));
             } else {
-                anomalyDetected = true;
+                if (autoFeatureOn && anomalyInfo.autoRestriction) {
+                    // Auto restrict this app
+                    batteryUtils.setForceAppStandby(uid, packageName,
+                            AppOpsManager.MODE_IGNORED);
+                    databaseManager.insertAnomaly(uid, packageName, anomalyInfo.anomalyType,
+                            AnomalyDatabaseHelper.State.AUTO_HANDLED,
+                            timeMs);
+                } else {
+                    databaseManager.insertAnomaly(uid, packageName, anomalyInfo.anomalyType,
+                            AnomalyDatabaseHelper.State.NEW,
+                            timeMs);
+                }
+                metricsFeatureProvider.action(context,
+                        MetricsProto.MetricsEvent.ACTION_ANOMALY_TRIGGERED,
+                        packageName,
+                        Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_TYPE,
+                                anomalyInfo.anomalyType),
+                        Pair.create(MetricsProto.MetricsEvent.FIELD_APP_VERSION_CODE,
+                                versionCode));
             }
 
-            if (anomalyDetected) {
-                if (batteryUtils.shouldHideAnomaly(powerWhitelistBackend, uid)) {
-                    metricsFeatureProvider.action(context,
-                            MetricsProto.MetricsEvent.ACTION_ANOMALY_IGNORED,
-                            packageName,
-                            Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT,
-                                    anomalyInfo.anomalyType),
-                            Pair.create(MetricsProto.MetricsEvent.FIELD_APP_VERSION_CODE,
-                                    versionCode));
-                } else {
-                    if (autoFeatureOn && anomalyInfo.autoRestriction) {
-                        // Auto restrict this app
-                        batteryUtils.setForceAppStandby(uid, packageName,
-                                AppOpsManager.MODE_IGNORED);
-                        databaseManager.insertAnomaly(uid, packageName, anomalyInfo.anomalyType,
-                                AnomalyDatabaseHelper.State.AUTO_HANDLED,
-                                timeMs);
-                    } else {
-                        databaseManager.insertAnomaly(uid, packageName, anomalyInfo.anomalyType,
-                                AnomalyDatabaseHelper.State.NEW,
-                                timeMs);
-                    }
-                    metricsFeatureProvider.action(context,
-                            MetricsProto.MetricsEvent.ACTION_ANOMALY_TRIGGERED,
-                            packageName,
-                            Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_TYPE,
-                                    anomalyInfo.anomalyType),
-                            Pair.create(MetricsProto.MetricsEvent.FIELD_APP_VERSION_CODE,
-                                    versionCode));
-                }
-            }
         } catch (NullPointerException | IndexOutOfBoundsException e) {
             Log.e(TAG, "Parse stats dimensions value error.", e);
         }
@@ -227,11 +219,6 @@ public class AnomalyDetectionJobService extends JobService {
         }
 
         return UID_NULL;
-    }
-
-    private boolean isExcessiveBackgroundAnomaly(AnomalyInfo anomalyInfo) {
-        return anomalyInfo.anomalyType
-                == StatsManagerConfig.AnomalyType.EXCESSIVE_BACKGROUND_SERVICE;
     }
 
     @VisibleForTesting
