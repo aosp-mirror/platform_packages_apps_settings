@@ -16,8 +16,6 @@
 
 package com.android.settings.fuelgauge;
 
-import android.app.AppOpsManager;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -31,12 +29,16 @@ import android.util.IconDrawableFactory;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
+import com.android.settings.fuelgauge.batterytip.BatteryTipDialogFragment;
+import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
+import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
+import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
+import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
 import com.android.settings.widget.AppCheckBoxPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.widget.FooterPreferenceMixin;
@@ -46,7 +48,8 @@ import java.util.List;
 /**
  * Fragment to show a list of anomaly apps, where user could handle these anomalies
  */
-public class RestrictedAppDetails extends DashboardFragment {
+public class RestrictedAppDetails extends DashboardFragment implements
+        BatteryTipPreferenceController.BatteryTipListener {
 
     public static final String TAG = "RestrictedAppDetails";
 
@@ -145,12 +148,14 @@ public class RestrictedAppDetails extends DashboardFragment {
                         Utils.getBadgedIcon(mIconDrawableFactory, mPackageManager,
                                 appInfo.packageName,
                                 UserHandle.getUserId(appInfo.uid)));
+                checkBoxPreference.setKey(getKeyFromAppInfo(appInfo));
                 checkBoxPreference.setOnPreferenceChangeListener((pref, value) -> {
-                    // change the toggle
-                    final int mode = (Boolean) value ? AppOpsManager.MODE_IGNORED
-                            : AppOpsManager.MODE_ALLOWED;
-                    mBatteryUtils.setForceAppStandby(appInfo.uid, appInfo.packageName, mode);
-                    return true;
+                    final BatteryTipDialogFragment fragment = createDialogFragment(appInfo,
+                            (Boolean) value);
+                    fragment.setTargetFragment(this, 0 /* requestCode */);
+                    fragment.show(getFragmentManager(), TAG);
+
+                    return false;
                 });
                 mRestrictedAppListGroup.addPreference(checkBoxPreference);
             } catch (PackageManager.NameNotFoundException e) {
@@ -159,4 +164,35 @@ public class RestrictedAppDetails extends DashboardFragment {
         }
     }
 
+    @Override
+    public void onBatteryTipHandled(BatteryTip batteryTip) {
+        final AppInfo appInfo;
+        final boolean isRestricted = batteryTip instanceof RestrictAppTip;
+        if (isRestricted) {
+            appInfo = ((RestrictAppTip) batteryTip).getRestrictAppList().get(0);
+        } else {
+            appInfo = ((UnrestrictAppTip) batteryTip).getUnrestrictAppInfo();
+        }
+
+        CheckBoxPreference preference = (CheckBoxPreference) mRestrictedAppListGroup
+                .findPreference(getKeyFromAppInfo(appInfo));
+        if (preference != null) {
+            preference.setChecked(isRestricted);
+        }
+    }
+
+    @VisibleForTesting
+    BatteryTipDialogFragment createDialogFragment(AppInfo appInfo, boolean toRestrict) {
+        final BatteryTip batteryTip = toRestrict
+                ? new RestrictAppTip(BatteryTip.StateType.NEW, appInfo)
+                : new UnrestrictAppTip(BatteryTip.StateType.NEW, appInfo);
+
+        return BatteryTipDialogFragment.newInstance(
+                batteryTip, getMetricsCategory());
+    }
+
+    @VisibleForTesting
+    String getKeyFromAppInfo(AppInfo appInfo) {
+        return appInfo.uid + "," + appInfo.packageName;
+    }
 }
