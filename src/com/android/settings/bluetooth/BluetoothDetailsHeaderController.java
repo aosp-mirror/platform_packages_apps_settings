@@ -27,6 +27,7 @@ import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -59,7 +60,7 @@ public class BluetoothDetailsHeaderController extends BluetoothDetailsController
     }
 
     protected void setHeaderProperties() {
-        final Pair<Drawable, String> pair = com.android.settingslib.bluetooth.Utils
+        final Pair<Drawable, String> pair = BluetoothUtils
                 .getBtClassDrawableWithDescription(mContext, mCachedDevice,
                 mContext.getResources().getFraction(R.fraction.bt_battery_scale_fraction, 1, 1));
         String summaryText = mCachedDevice.getConnectionSummary();

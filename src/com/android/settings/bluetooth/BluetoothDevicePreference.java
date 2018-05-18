@@ -36,6 +36,7 @@ import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.GearPreference;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
@@ -128,7 +129,7 @@ public final class BluetoothDevicePreference extends GearPreference implements
         // Null check is done at the framework
         setSummary(mCachedDevice.getConnectionSummary());
 
-        final Pair<Drawable, String> pair = com.android.settingslib.bluetooth.Utils
+        final Pair<Drawable, String> pair = BluetoothUtils
                 .getBtClassDrawableWithDescription(getContext(), mCachedDevice);
         if (pair.first != null) {
             setIcon(pair.first);
