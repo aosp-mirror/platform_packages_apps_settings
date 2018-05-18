@@ -60,6 +60,7 @@ public class RestrictAppTipTest {
     private RestrictAppTip mHandledBatteryTip;
     private RestrictAppTip mInvisibleBatteryTip;
     private List<AppInfo> mUsageAppList;
+    private AppInfo mAppInfo;
     @Mock
     private ApplicationInfo mApplicationInfo;
     @Mock
@@ -77,15 +78,16 @@ public class RestrictAppTipTest {
                 PackageManager.MATCH_DISABLED_COMPONENTS | PackageManager.MATCH_ANY_USER);
         doReturn(DISPLAY_NAME).when(mApplicationInfo).loadLabel(mPackageManager);
 
-        mUsageAppList = new ArrayList<>();
-        mUsageAppList.add(new AppInfo.Builder()
+        mAppInfo = new AppInfo.Builder()
                 .setPackageName(PACKAGE_NAME)
                 .addAnomalyType(ANOMALY_WAKEUP)
                 .addAnomalyType(ANOMALY_WAKELOCK)
-                .build());
+                .build();
+        mUsageAppList = new ArrayList<>();
+        mUsageAppList.add(mAppInfo);
         mNewBatteryTip = new RestrictAppTip(BatteryTip.StateType.NEW, mUsageAppList);
         mHandledBatteryTip = new RestrictAppTip(BatteryTip.StateType.HANDLED, mUsageAppList);
-        mInvisibleBatteryTip = new RestrictAppTip(BatteryTip.StateType.INVISIBLE, mUsageAppList);
+        mInvisibleBatteryTip = new RestrictAppTip(BatteryTip.StateType.INVISIBLE, new ArrayList<>());
     }
 
     @Test
@@ -162,6 +164,13 @@ public class RestrictAppTipTest {
 
         mHandledBatteryTip.updateState(mNewBatteryTip);
         assertThat(mHandledBatteryTip.getState()).isEqualTo(BatteryTip.StateType.NEW);
+    }
+
+    @Test
+    public void update_newHandledAnomalyComes_containHandledAnomaly() {
+        mInvisibleBatteryTip.updateState(mHandledBatteryTip);
+        assertThat(mInvisibleBatteryTip.getState()).isEqualTo(BatteryTip.StateType.HANDLED);
+        assertThat(mInvisibleBatteryTip.getRestrictAppList()).containsExactly(mAppInfo);
     }
 
     @Test
