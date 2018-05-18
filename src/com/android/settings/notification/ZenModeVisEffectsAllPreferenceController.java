@@ -28,6 +28,8 @@ public class ZenModeVisEffectsAllPreferenceController
         extends AbstractZenModePreferenceController
         implements ZenCustomRadioButtonPreference.OnRadioButtonClickListener {
 
+    private ZenCustomRadioButtonPreference mPreference;
+
     protected static final int EFFECTS = Policy.SUPPRESSED_EFFECT_SCREEN_OFF
             | Policy.SUPPRESSED_EFFECT_SCREEN_ON
             | Policy.SUPPRESSED_EFFECT_FULL_SCREEN_INTENT
@@ -44,6 +46,13 @@ public class ZenModeVisEffectsAllPreferenceController
     }
 
     @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = (ZenCustomRadioButtonPreference) screen.findPreference(getPreferenceKey());
+        mPreference.setOnRadioButtonClickListener(this);
+    }
+
+    @Override
     public boolean isAvailable() {
         return true;
     }
@@ -54,17 +63,7 @@ public class ZenModeVisEffectsAllPreferenceController
 
         boolean everythingBlocked = Policy.areAllVisualEffectsSuppressed(
                 mBackend.mPolicy.suppressedVisualEffects);
-        ZenCustomRadioButtonPreference pref = (ZenCustomRadioButtonPreference) preference;
-        pref.setOnRadioButtonClickListener(this);
-        pref.setChecked(everythingBlocked);
-    }
-
-    protected void deselect(PreferenceScreen screen) {
-        ZenCustomRadioButtonPreference preference =
-                (ZenCustomRadioButtonPreference) screen.findPreference(getPreferenceKey());
-        if (preference != null) {
-            preference.setChecked(false);
-        }
+        mPreference.setChecked(everythingBlocked);
     }
 
     @Override

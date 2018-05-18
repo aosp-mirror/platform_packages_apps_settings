@@ -16,9 +16,8 @@
 
 package com.android.settings.notification;
 
-import android.app.NotificationManager.Policy;
+import android.app.NotificationManager;
 import android.content.Context;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -30,10 +29,13 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 public class ZenModeVisEffectsCustomPreferenceController
         extends AbstractZenModePreferenceController {
 
-    protected static final int INTERRUPTIVE_EFFECTS = Policy.SUPPRESSED_EFFECT_AMBIENT
-            | Policy.SUPPRESSED_EFFECT_PEEK
-            | Policy.SUPPRESSED_EFFECT_LIGHTS
-            | Policy.SUPPRESSED_EFFECT_FULL_SCREEN_INTENT;
+    private ZenCustomRadioButtonPreference mPreference;
+
+    protected static final int INTERRUPTIVE_EFFECTS =
+            NotificationManager.Policy.SUPPRESSED_EFFECT_AMBIENT
+            | NotificationManager.Policy.SUPPRESSED_EFFECT_PEEK
+            | NotificationManager.Policy.SUPPRESSED_EFFECT_LIGHTS
+            | NotificationManager.Policy.SUPPRESSED_EFFECT_FULL_SCREEN_INTENT;
 
     public ZenModeVisEffectsCustomPreferenceController(Context context, Lifecycle lifecycle,
             String key) {
@@ -46,25 +48,31 @@ public class ZenModeVisEffectsCustomPreferenceController
     }
 
     @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = (ZenCustomRadioButtonPreference) screen.findPreference(getPreferenceKey());
 
-        ZenCustomRadioButtonPreference pref = (ZenCustomRadioButtonPreference) preference;
-        pref.setChecked(areCustomOptionsSelected());
-
-        pref.setOnGearClickListener(p -> {
+        mPreference.setOnGearClickListener(p -> {
             launchCustomSettings();
 
         });
 
-        pref.setOnRadioButtonClickListener(p -> {
+        mPreference.setOnRadioButtonClickListener(p -> {
             launchCustomSettings();
         });
     }
 
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+
+        mPreference.setChecked(areCustomOptionsSelected());
+    }
+
     protected boolean areCustomOptionsSelected() {
         boolean allEffectsSuppressed =
-                Policy.areAllVisualEffectsSuppressed(mBackend.mPolicy.suppressedVisualEffects);
+                NotificationManager.Policy.areAllVisualEffectsSuppressed(
+                        mBackend.mPolicy.suppressedVisualEffects);
         boolean noEffectsSuppressed = mBackend.mPolicy.suppressedVisualEffects == 0;
 
         return !(allEffectsSuppressed || noEffectsSuppressed);
