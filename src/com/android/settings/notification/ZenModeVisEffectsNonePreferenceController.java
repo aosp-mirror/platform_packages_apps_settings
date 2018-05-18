@@ -28,6 +28,9 @@ public class ZenModeVisEffectsNonePreferenceController
         extends AbstractZenModePreferenceController
         implements ZenCustomRadioButtonPreference.OnRadioButtonClickListener {
 
+    private final String KEY;
+    private ZenCustomRadioButtonPreference mPreference;
+
     protected static final int EFFECTS = Policy.SUPPRESSED_EFFECT_SCREEN_OFF
             | Policy.SUPPRESSED_EFFECT_SCREEN_ON
             | Policy.SUPPRESSED_EFFECT_FULL_SCREEN_INTENT
@@ -41,6 +44,14 @@ public class ZenModeVisEffectsNonePreferenceController
     public ZenModeVisEffectsNonePreferenceController(Context context, Lifecycle lifecycle,
             String key) {
         super(context, key, lifecycle);
+        KEY = key;
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = (ZenCustomRadioButtonPreference) screen.findPreference(KEY);
+        mPreference.setOnRadioButtonClickListener(this);
     }
 
     @Override
@@ -53,9 +64,7 @@ public class ZenModeVisEffectsNonePreferenceController
         super.updateState(preference);
 
         boolean nothingBlocked = mBackend.mPolicy.suppressedVisualEffects == 0;
-        ZenCustomRadioButtonPreference pref = (ZenCustomRadioButtonPreference) preference;
-        pref.setOnRadioButtonClickListener(this);
-        pref.setChecked(nothingBlocked);
+        mPreference.setChecked(nothingBlocked);
     }
 
     @Override
@@ -63,13 +72,5 @@ public class ZenModeVisEffectsNonePreferenceController
         mMetricsFeatureProvider.action(mContext,
                 MetricsProto.MetricsEvent.ACTION_ZEN_SOUND_ONLY, true);
         mBackend.saveVisualEffectsPolicy(EFFECTS, false);
-    }
-
-    protected void deselect(PreferenceScreen screen) {
-        ZenCustomRadioButtonPreference preference =
-                (ZenCustomRadioButtonPreference) screen.findPreference(getPreferenceKey());
-        if (preference != null) {
-            preference.setChecked(false);
-        }
     }
 }

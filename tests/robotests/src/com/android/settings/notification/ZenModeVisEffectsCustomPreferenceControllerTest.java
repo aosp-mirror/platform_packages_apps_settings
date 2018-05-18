@@ -85,6 +85,7 @@ public class ZenModeVisEffectsCustomPreferenceControllerTest {
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
 
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mockPref);
+        mController.displayPreference(mScreen);
     }
 
     @Test
