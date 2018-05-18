@@ -15,6 +15,7 @@ package com.android.settings.core;
 
 import android.annotation.IntDef;
 import android.content.Context;
+import android.content.IntentFilter;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -218,6 +219,14 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
     @SliceData.SliceType
     public int getSliceType() {
         return SliceData.SliceType.INTENT;
+    }
+
+    /**
+     * @return an {@link IntentFilter} that includes all broadcasts which can affect the state of
+     * this Setting.
+     */
+    public IntentFilter getIntentFilter() {
+        return null;
     }
 
     /**
