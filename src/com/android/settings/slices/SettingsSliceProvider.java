@@ -30,6 +30,7 @@ import android.util.Log;
 import android.util.Pair;
 
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.wifi.WifiSliceBuilder;
 import com.android.settings.wifi.calling.WifiCallingSliceHelper;
 import com.android.settings.notification.ZenModeSliceBuilder;
@@ -142,7 +143,6 @@ public class SettingsSliceProvider extends SliceProvider {
     public void onSlicePinned(Uri sliceUri) {
         if (WifiSliceBuilder.WIFI_URI.equals(sliceUri)) {
             registerIntentToUri(WifiSliceBuilder.INTENT_FILTER , sliceUri);
-            // TODO (b/78138654) Register IntentFilters for database entries.
             mRegisteredUris.add(sliceUri);
             return;
         } else if (ZenModeSliceBuilder.ZEN_MODE_URI.equals(sliceUri)) {
@@ -158,6 +158,7 @@ public class SettingsSliceProvider extends SliceProvider {
     @Override
     public void onSliceUnpinned(Uri sliceUri) {
         if (mRegisteredUris.contains(sliceUri)) {
+            Log.d(TAG, "Unregistering uri broadcast relay: " + sliceUri);
             SliceBroadcastRelay.unregisterReceivers(getContext(), sliceUri);
             mRegisteredUris.remove(sliceUri);
         }
@@ -279,7 +280,15 @@ public class SettingsSliceProvider extends SliceProvider {
         long startBuildTime = System.currentTimeMillis();
 
         final SliceData sliceData = mSlicesDatabaseAccessor.getSliceDataFromUri(uri);
-        List<Uri> pinnedSlices = getContext().getSystemService(
+
+        final BasePreferenceController controller = SliceBuilderUtils.getPreferenceController(
+                getContext(), sliceData);
+        final IntentFilter filter = controller.getIntentFilter();
+        if (filter != null) {
+            registerIntentToUri(filter, uri);
+        }
+
+        final List<Uri> pinnedSlices = getContext().getSystemService(
                 SliceManager.class).getPinnedSlices();
         if (pinnedSlices.contains(uri)) {
             mSliceDataCache.put(uri, sliceData);
@@ -332,6 +341,8 @@ public class SettingsSliceProvider extends SliceProvider {
      * {@param intentFilter} happen.
      */
     void registerIntentToUri(IntentFilter intentFilter, Uri sliceUri) {
+        Log.d(TAG, "Registering Uri for broadcast relay: " + sliceUri);
+        mRegisteredUris.add(sliceUri);
         SliceBroadcastRelay.registerReceiver(getContext(), sliceUri, SliceBroadcastReceiver.class,
                 intentFilter);
     }
