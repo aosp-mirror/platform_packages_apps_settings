@@ -84,6 +84,11 @@ public class PickupGesturePreferenceController extends GesturePreferenceControll
     }
 
     @Override
+    public boolean isSliceable() {
+        return TextUtils.equals(getPreferenceKey(), "gesture_pick_up");
+    }
+
+    @Override
     protected String getVideoPrefKey() {
         return PREF_KEY_VIDEO;
     }

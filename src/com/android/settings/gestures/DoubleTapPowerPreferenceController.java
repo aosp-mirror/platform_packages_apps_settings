@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
+import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.search.DatabaseIndexingUtils;
@@ -59,6 +60,11 @@ public class DoubleTapPowerPreferenceController extends GesturePreferenceControl
     @Override
     public int getAvailabilityStatus() {
         return isGestureAvailable(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public boolean isSliceable() {
+        return TextUtils.equals(getPreferenceKey(), "gesture_double_tap_power");
     }
 
     @Override

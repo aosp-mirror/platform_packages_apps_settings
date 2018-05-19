@@ -28,6 +28,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.Vibrator;
+import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -86,6 +87,11 @@ public class RingVolumePreferenceController extends VolumeSeekBarPreferenceContr
     public int getAvailabilityStatus() {
         return Utils.isVoiceCapable(mContext) && !mHelper.isSingleVolume()
                 ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public boolean isSliceable() {
+        return TextUtils.equals(getPreferenceKey(), KEY_RING_VOLUME);
     }
 
     @Override

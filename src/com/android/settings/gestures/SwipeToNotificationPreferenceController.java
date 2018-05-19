@@ -21,6 +21,7 @@ import static android.provider.Settings.Secure.SYSTEM_NAVIGATION_KEYS_ENABLED;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.provider.Settings;
+import android.text.TextUtils;
 
 import com.android.settings.Utils;
 
@@ -57,6 +58,11 @@ public class SwipeToNotificationPreferenceController extends GesturePreferenceCo
     @Override
     public int getAvailabilityStatus() {
         return isAvailable(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public boolean isSliceable() {
+        return TextUtils.equals(getPreferenceKey(), "gesture_swipe_down_fingerprint");
     }
 
     @Override

@@ -53,4 +53,9 @@ public class FakeSliderController extends SliderPreferenceController {
         return Settings.Global.getInt(mContext.getContentResolver(),
                 AVAILABILITY_KEY, AVAILABLE);
     }
+
+    @Override
+    public boolean isSliceable() {
+        return true;
+    }
 }

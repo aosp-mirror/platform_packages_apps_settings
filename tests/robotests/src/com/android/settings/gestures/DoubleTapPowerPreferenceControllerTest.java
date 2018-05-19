@@ -17,10 +17,13 @@
 package com.android.settings.gestures;
 
 import static android.provider.Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED;
+
 import static com.android.settings.gestures.DoubleTapPowerPreferenceController.OFF;
 import static com.android.settings.gestures.DoubleTapPowerPreferenceController.ON;
 import static com.android.settings.gestures.DoubleTapPowerPreferenceController.isSuggestionComplete;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
@@ -29,6 +32,7 @@ import android.content.SharedPreferences;
 import android.provider.Settings;
 
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl;
+import com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController;
 import com.android.settings.search.InlinePayload;
 import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.search.ResultPayload;
@@ -67,7 +71,8 @@ public class DoubleTapPowerPreferenceControllerTest {
     @Test
     public void isAvailable_configIsTrue_shouldReturnTrue() {
         SettingsShadowResources.overrideResource(
-            com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled, Boolean.TRUE);
+                com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled,
+                Boolean.TRUE);
 
         assertThat(mController.isAvailable()).isTrue();
     }
@@ -75,7 +80,8 @@ public class DoubleTapPowerPreferenceControllerTest {
     @Test
     public void isAvailable_configIsTrue_shouldReturnFalse() {
         SettingsShadowResources.overrideResource(
-            com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled, Boolean.FALSE);
+                com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled,
+                Boolean.FALSE);
 
         assertThat(mController.isAvailable()).isFalse();
     }
@@ -101,7 +107,7 @@ public class DoubleTapPowerPreferenceControllerTest {
     @Test
     public void testPreferenceController_ProperResultPayloadType() {
         DoubleTapPowerPreferenceController controller =
-            new DoubleTapPowerPreferenceController(mContext, KEY_DOUBLE_TAP_POWER);
+                new DoubleTapPowerPreferenceController(mContext, KEY_DOUBLE_TAP_POWER);
         ResultPayload payload = controller.getResultPayload();
         assertThat(payload).isInstanceOf(InlineSwitchPayload.class);
     }
@@ -111,7 +117,7 @@ public class DoubleTapPowerPreferenceControllerTest {
     public void testSetValue_updatesCorrectly() {
         int newValue = 1;
         Settings.Secure.putInt(mContentResolver,
-            Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, 0);
+                Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, 0);
 
         InlinePayload payload = ((InlineSwitchPayload) mController.getResultPayload());
         payload.setValue(mContext, newValue);
@@ -148,7 +154,7 @@ public class DoubleTapPowerPreferenceControllerTest {
                 com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled, true);
         // No stored value in shared preferences if not visited yet.
         final SharedPreferences prefs =
-            new SuggestionFeatureProviderImpl(mContext).getSharedPrefs(mContext);
+                new SuggestionFeatureProviderImpl(mContext).getSharedPrefs(mContext);
         assertThat(isSuggestionComplete(mContext, prefs)).isFalse();
     }
 
@@ -158,9 +164,23 @@ public class DoubleTapPowerPreferenceControllerTest {
                 com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled, true);
         // No stored value in shared preferences if not visited yet.
         final SharedPreferences prefs =
-            new SuggestionFeatureProviderImpl(mContext).getSharedPrefs(mContext);
+                new SuggestionFeatureProviderImpl(mContext).getSharedPrefs(mContext);
         prefs.edit().putBoolean(DoubleTapPowerSettings.PREF_KEY_SUGGESTION_COMPLETE, true).commit();
 
         assertThat(isSuggestionComplete(mContext, prefs)).isTrue();
+    }
+
+    @Test
+    public void isSliceableCorrectKey_returnsTrue() {
+        final DoubleTapPowerPreferenceController controller =
+                new DoubleTapPowerPreferenceController(mContext, "gesture_double_tap_power");
+        assertThat(controller.isSliceable()).isTrue();
+    }
+
+    @Test
+    public void isSliceableIncorrectKey_returnsFalse() {
+        final DoubleTapPowerPreferenceController controller =
+                new DoubleTapPowerPreferenceController(mContext, "bad_key");
+        assertThat(controller.isSliceable()).isFalse();
     }
 }
