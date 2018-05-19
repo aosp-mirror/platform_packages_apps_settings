@@ -19,7 +19,6 @@ package com.android.settings.slices;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_CONTROLLER;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_ICON;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEY;
-import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEYWORDS;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_PLATFORM_SLICE_FLAG;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_SUMMARY;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_TITLE;
@@ -44,6 +43,7 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.AccessibilitySlicePreferenceController;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceXmlParserUtils;
 import com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag;
 import com.android.settings.dashboard.DashboardFragment;
@@ -194,6 +194,7 @@ class SliceDataConverter {
                 if (TextUtils.isEmpty(controllerClassName)) {
                     continue;
                 }
+
                 final String key = bundle.getString(METADATA_KEY);
                 final String title = bundle.getString(METADATA_TITLE);
                 final String summary = bundle.getString(METADATA_SUMMARY);
@@ -214,7 +215,13 @@ class SliceDataConverter {
                         .setPlatformDefined(isPlatformSlice)
                         .build();
 
-                xmlSliceData.add(xmlSlice);
+                final BasePreferenceController controller =
+                        SliceBuilderUtils.getPreferenceController(mContext, xmlSlice);
+
+                // Only add pre-approved Slices available on the device.
+                if (controller.isAvailable() && controller.isSliceable()) {
+                    xmlSliceData.add(xmlSlice);
+                }
             }
         } catch (SliceData.InvalidSliceDataException e) {
             Log.w(TAG, "Invalid data when building SliceData for " + fragmentName, e);

@@ -18,4 +18,9 @@ public class FakeUnavailablePreferenceController extends BasePreferenceControlle
         return Settings.Global.getInt(mContext.getContentResolver(),
                 AVAILABILITY_KEY, 0);
     }
+
+    @Override
+    public boolean isSliceable() {
+        return true;
+    }
 }

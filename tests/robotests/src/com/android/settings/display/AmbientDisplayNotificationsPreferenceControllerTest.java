@@ -182,4 +182,19 @@ public class AmbientDisplayNotificationsPreferenceControllerTest {
 
         assertThat(newValue).isEqualTo(currentValue);
     }
+
+    @Test
+    public void isSliceableCorrectKey_returnsTrue() {
+        final AmbientDisplayNotificationsPreferenceController controller =
+                new AmbientDisplayNotificationsPreferenceController(mContext,
+                        "ambient_display_notification");
+        assertThat(controller.isSliceable()).isTrue();
+    }
+
+    @Test
+    public void isSliceableIncorrectKey_returnsFalse() {
+        final AmbientDisplayNotificationsPreferenceController controller =
+                new AmbientDisplayNotificationsPreferenceController(mContext, "bad_key");
+        assertThat(controller.isSliceable()).isFalse();
+    }
 }

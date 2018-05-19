@@ -18,6 +18,7 @@ package com.android.settings.notification;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.content.Context;
 import android.media.AudioManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -33,9 +34,12 @@ public class MediaVolumePreferenceControllerTest {
 
     private MediaVolumePreferenceController mController;
 
+    private Context mContext;
+
     @Before
     public void setUp() {
-        mController = new MediaVolumePreferenceController(RuntimeEnvironment.application);
+        mContext = RuntimeEnvironment.application;
+        mController = new MediaVolumePreferenceController(mContext);
     }
 
     @Test
@@ -52,5 +56,12 @@ public class MediaVolumePreferenceControllerTest {
     @Test
     public void getAudioStream_shouldReturnMusic() {
         assertThat(mController.getAudioStream()).isEqualTo(AudioManager.STREAM_MUSIC);
+    }
+
+    @Test
+    public void isSliceableCorrectKey_returnsTrue() {
+        final MediaVolumePreferenceController controller = new MediaVolumePreferenceController(
+                mContext);
+        assertThat(controller.isSliceable()).isTrue();
     }
 }

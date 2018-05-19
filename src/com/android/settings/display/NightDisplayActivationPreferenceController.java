@@ -19,6 +19,7 @@ package com.android.settings.display;
 import android.content.Context;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -51,6 +52,11 @@ public class NightDisplayActivationPreferenceController extends TogglePreference
     @Override
     public int getAvailabilityStatus() {
         return ColorDisplayController.isAvailable(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public boolean isSliceable() {
+        return TextUtils.equals(getPreferenceKey(), "night_display_activated");
     }
 
     @Override

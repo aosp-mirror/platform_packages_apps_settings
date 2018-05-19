@@ -104,7 +104,7 @@ public class AutoRotatePreferenceControllerTest {
     @Test
     public void testGetAvailabilityStatus() {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(BasePreferenceController
-                .CONDITIONALLY_UNAVAILABLE);
+                .UNSUPPORTED_ON_DEVICE);
 
         enableAutoRotationPreference();
 
@@ -114,7 +114,7 @@ public class AutoRotatePreferenceControllerTest {
         disableAutoRotationPreference();
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(BasePreferenceController
-                .CONDITIONALLY_UNAVAILABLE);
+                .UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
@@ -142,6 +142,20 @@ public class AutoRotatePreferenceControllerTest {
         mController.setChecked(true);
         assertThat(mController.isChecked()).isTrue();
         assertThat(RotationPolicy.isRotationLocked(mContext)).isFalse();
+    }
+
+    @Test
+    public void isSliceableCorrectKey_returnsTrue() {
+        final AutoRotatePreferenceController controller =
+                new AutoRotatePreferenceController(mContext, "auto_rotate");
+        assertThat(controller.isSliceable()).isTrue();
+    }
+
+    @Test
+    public void isSliceableIncorrectKey_returnsFalse() {
+        final AutoRotatePreferenceController controller =
+                new AutoRotatePreferenceController(mContext, "bad_key");
+        assertThat(controller.isSliceable()).isFalse();
     }
 
     private void enableAutoRotationPreference() {

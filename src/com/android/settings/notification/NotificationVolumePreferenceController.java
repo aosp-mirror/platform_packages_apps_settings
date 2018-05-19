@@ -18,6 +18,7 @@ package com.android.settings.notification;
 
 import android.content.Context;
 import android.media.AudioManager;
+import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -36,6 +37,11 @@ public class NotificationVolumePreferenceController extends
         return mContext.getResources().getBoolean(R.bool.config_show_notification_volume)
                 && !Utils.isVoiceCapable(mContext) && !mHelper.isSingleVolume()
                 ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public boolean isSliceable() {
+        return TextUtils.equals(getPreferenceKey(), KEY_NOTIFICATION_VOLUME);
     }
 
     @Override

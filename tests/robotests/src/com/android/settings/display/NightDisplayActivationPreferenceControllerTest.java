@@ -73,6 +73,20 @@ public class NightDisplayActivationPreferenceControllerTest {
     }
 
     @Test
+    public void isSliceableCorrectKey_returnsTrue() {
+        final NightDisplayActivationPreferenceController controller =
+                new NightDisplayActivationPreferenceController(mContext,"night_display_activated");
+        assertThat(controller.isSliceable()).isTrue();
+    }
+
+    @Test
+    public void isSliceableIncorrectKey_returnsFalse() {
+        final NightDisplayActivationPreferenceController controller =
+                new NightDisplayActivationPreferenceController(mContext, "bad_key");
+        assertThat(controller.isSliceable()).isFalse();
+    }
+
+    @Test
     public void onClick_activates() {
         Secure.putInt(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_ACTIVATED, 0);
 

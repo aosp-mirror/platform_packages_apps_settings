@@ -183,4 +183,18 @@ public class VibrateWhenRingPreferenceControllerTest {
         assertThat(shadowContentResolver.getContentObservers(
                 Settings.System.getUriFor(VIBRATE_WHEN_RINGING))).isEmpty();
     }
+
+    @Test
+    public void isSliceableCorrectKey_returnsTrue() {
+        final VibrateWhenRingPreferenceController controller =
+                new VibrateWhenRingPreferenceController(mContext, "vibrate_when_ringing");
+        assertThat(controller.isSliceable()).isTrue();
+    }
+
+    @Test
+    public void isSliceableIncorrectKey_returnsFalse() {
+        final VibrateWhenRingPreferenceController controller =
+                new VibrateWhenRingPreferenceController(mContext, "bad_key");
+        assertThat(controller.isSliceable()).isFalse();
+    }
 }

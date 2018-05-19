@@ -76,4 +76,18 @@ public class NightDisplayIntensityPreferenceControllerTest {
                 Secure.NIGHT_DISPLAY_COLOR_TEMPERATURE, -1))
                 .isEqualTo(3030);
     }
+
+    @Test
+    public void isSliceableCorrectKey_returnsTrue() {
+        final NightDisplayIntensityPreferenceController controller =
+                new NightDisplayIntensityPreferenceController(mContext,"night_display_temperature");
+        assertThat(controller.isSliceable()).isTrue();
+    }
+
+    @Test
+    public void isSliceableIncorrectKey_returnsFalse() {
+        final NightDisplayIntensityPreferenceController controller =
+                new NightDisplayIntensityPreferenceController(mContext, "bad_key");
+        assertThat(controller.isSliceable()).isFalse();
+    }
 }

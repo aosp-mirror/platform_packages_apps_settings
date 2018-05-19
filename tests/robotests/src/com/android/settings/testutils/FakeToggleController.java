@@ -62,4 +62,9 @@ public class FakeToggleController extends TogglePreferenceController {
     public IntentFilter getIntentFilter() {
         return INTENT_FILTER;
     }
+
+    @Override
+    public boolean isSliceable() {
+        return true;
+    }
 }
