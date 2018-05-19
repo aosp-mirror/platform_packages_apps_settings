@@ -78,7 +78,11 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
         if (numDevices == 0) {
             // Disable switch entry if there is no connected devices.
             mPreference.setVisible(false);
-            preference.setSummary(mContext.getText(R.string.media_output_default_summary));
+            final CharSequence summary = mContext.getText(R.string.media_output_default_summary);
+            final CharSequence[] defaultMediaOutput = new CharSequence[]{summary};
+            mSelectedIndex = getDefaultDeviceIndex();
+            preference.setSummary(summary);
+            setPreference(defaultMediaOutput, defaultMediaOutput, preference);
             return;
         }
 

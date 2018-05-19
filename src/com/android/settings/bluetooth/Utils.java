@@ -30,7 +30,8 @@ import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager.BluetoothManagerCallback;
-import com.android.settingslib.bluetooth.Utils.ErrorListener;
+import com.android.settingslib.bluetooth.BluetoothUtils;
+import com.android.settingslib.bluetooth.BluetoothUtils.ErrorListener;
 
 /**
  * Utils is a helper class that contains constants for various
@@ -38,8 +39,8 @@ import com.android.settingslib.bluetooth.Utils.ErrorListener;
  * for creating dialogs.
  */
 public final class Utils {
-    static final boolean V = com.android.settingslib.bluetooth.Utils.V; // verbose logging
-    static final boolean D =  com.android.settingslib.bluetooth.Utils.D;  // regular logging
+    static final boolean V = BluetoothUtils.V; // verbose logging
+    static final boolean D =  BluetoothUtils.D;  // regular logging
 
     private Utils() {
     }
@@ -139,7 +140,7 @@ public final class Utils {
         @Override
         public void onBluetoothManagerInitialized(Context appContext,
                 LocalBluetoothManager bluetoothManager) {
-            com.android.settingslib.bluetooth.Utils.setErrorListener(mErrorListener);
+            BluetoothUtils.setErrorListener(mErrorListener);
         }
     };
 

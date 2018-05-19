@@ -165,7 +165,7 @@ public class AnomalyDetectionJobServiceTest {
         doReturn(false).when(mPowerWhitelistBackend).isSysWhitelisted(SYSTEM_PACKAGE);
         doReturn(Process.FIRST_APPLICATION_UID).when(
                 mAnomalyDetectionJobService).extractUidFromStatsDimensionsValue(any());
-        doReturn(true).when(mBatteryUtils).shouldHideAnomaly(any(), anyInt());
+        doReturn(true).when(mBatteryUtils).shouldHideAnomaly(any(), anyInt(), any());
 
         mAnomalyDetectionJobService.saveAnomalyToDatabase(mContext,
                 mUserManager, mBatteryDatabaseManager, mBatteryUtils, mPolicy,

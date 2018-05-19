@@ -101,8 +101,6 @@ public class ChooseLockGeneric extends SettingsActivity {
         private static final String WAITING_FOR_CONFIRMATION = "waiting_for_confirmation";
         public static final String MINIMUM_QUALITY_KEY = "minimum_quality";
         public static final String HIDE_DISABLED_PREFS = "hide_disabled_prefs";
-        public static final String ENCRYPT_REQUESTED_QUALITY = "encrypt_requested_quality";
-        public static final String ENCRYPT_REQUESTED_DISABLED = "encrypt_requested_disabled";
         public static final String TAG_FRP_WARNING_DIALOG = "frp_warning_dialog";
 
         /**
@@ -138,8 +136,6 @@ public class ChooseLockGeneric extends SettingsActivity {
         private long mChallenge;
         private boolean mPasswordConfirmed = false;
         private boolean mWaitingForConfirmation = false;
-        private int mEncryptionRequestQuality;
-        private boolean mEncryptionRequestDisabled;
         private boolean mForChangeCredRequiredForBoot = false;
         private String mUserPassword;
         private LockPatternUtils mLockPatternUtils;
@@ -193,9 +189,6 @@ public class ChooseLockGeneric extends SettingsActivity {
             if (savedInstanceState != null) {
                 mPasswordConfirmed = savedInstanceState.getBoolean(PASSWORD_CONFIRMED);
                 mWaitingForConfirmation = savedInstanceState.getBoolean(WAITING_FOR_CONFIRMATION);
-                mEncryptionRequestQuality = savedInstanceState.getInt(ENCRYPT_REQUESTED_QUALITY);
-                mEncryptionRequestDisabled = savedInstanceState.getBoolean(
-                        ENCRYPT_REQUESTED_DISABLED);
                 if (mUserPassword == null) {
                     mUserPassword = savedInstanceState.getString(
                             ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
@@ -298,8 +291,6 @@ public class ChooseLockGeneric extends SettingsActivity {
                     && LockPatternUtils.isDeviceEncryptionEnabled()
                     && !LockPatternUtils.isFileEncryptionEnabled()
                     && !dpm.getDoNotAskCredentialsOnBoot()) {
-                mEncryptionRequestQuality = quality;
-                mEncryptionRequestDisabled = disabled;
                 // Get the intent that the encryption interstitial should start for creating
                 // the new unlock method.
                 Intent unlockMethodIntent = getIntentForUnlockMethod(quality);
@@ -398,8 +389,6 @@ public class ChooseLockGeneric extends SettingsActivity {
             // Saved so we don't force user to re-enter their password if configuration changes
             outState.putBoolean(PASSWORD_CONFIRMED, mPasswordConfirmed);
             outState.putBoolean(WAITING_FOR_CONFIRMATION, mWaitingForConfirmation);
-            outState.putInt(ENCRYPT_REQUESTED_QUALITY, mEncryptionRequestQuality);
-            outState.putBoolean(ENCRYPT_REQUESTED_DISABLED, mEncryptionRequestDisabled);
             if (mUserPassword != null) {
                 outState.putString(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, mUserPassword);
             }

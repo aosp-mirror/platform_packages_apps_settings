@@ -361,7 +361,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
         RestrictedPreference preference = new RestrictedPreference(
             mParent.getPreferenceManager().getContext());
         preference.setTitle(R.string.remove_managed_profile_label);
-        preference.setIcon(R.drawable.ic_menu_delete);
+        preference.setIcon(R.drawable.ic_delete);
         preference.setOnPreferenceClickListener(this);
         preference.setOrder(ORDER_LAST);
         return preference;

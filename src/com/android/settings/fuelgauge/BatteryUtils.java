@@ -45,6 +45,8 @@ import com.android.internal.os.BatteryStatsHelper;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
+import com.android.settings.fuelgauge.batterytip.AnomalyInfo;
+import com.android.settings.fuelgauge.batterytip.StatsManagerConfig;
 import com.android.settings.overlay.FeatureFactory;
 
 import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
@@ -511,10 +513,25 @@ public class BatteryUtils {
         return false;
     }
 
+    public boolean isPreOApp(final String[] packageNames) {
+        if (ArrayUtils.isEmpty(packageNames)) {
+            return false;
+        }
+
+        for (String packageName : packageNames) {
+            if (isPreOApp(packageName)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     /**
      * Return {@code true} if we should hide anomaly app represented by {@code uid}
      */
-    public boolean shouldHideAnomaly(PowerWhitelistBackend powerWhitelistBackend, int uid) {
+    public boolean shouldHideAnomaly(PowerWhitelistBackend powerWhitelistBackend, int uid,
+            AnomalyInfo anomalyInfo) {
         final String[] packageNames = mPackageManager.getPackagesForUid(uid);
         if (ArrayUtils.isEmpty(packageNames)) {
             // Don't show it if app has been uninstalled
@@ -522,7 +539,13 @@ public class BatteryUtils {
         }
 
         return isSystemUid(uid) || powerWhitelistBackend.isWhitelisted(packageNames)
-                || (isSystemApp(mPackageManager, packageNames) && !hasLauncherEntry(packageNames));
+                || (isSystemApp(mPackageManager, packageNames) && !hasLauncherEntry(packageNames))
+                || (isExcessiveBackgroundAnomaly(anomalyInfo) && !isPreOApp(packageNames));
+    }
+
+    private boolean isExcessiveBackgroundAnomaly(AnomalyInfo anomalyInfo) {
+        return anomalyInfo.anomalyType
+                == StatsManagerConfig.AnomalyType.EXCESSIVE_BACKGROUND_SERVICE;
     }
 
     private boolean isSystemUid(int uid) {
