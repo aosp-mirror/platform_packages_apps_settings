@@ -52,7 +52,7 @@ public class WifiUtils {
 
     public static boolean isHotspotPasswordValid(String password) {
         if (TextUtils.isEmpty(password)) {
-            return true;
+            return false;
         }
 
         final int length = password.length();
