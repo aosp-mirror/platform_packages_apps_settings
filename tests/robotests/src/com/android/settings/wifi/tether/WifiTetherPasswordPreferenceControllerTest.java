@@ -42,6 +42,8 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(SettingsRobolectricTestRunner.class)
 public class WifiTetherPasswordPreferenceControllerTest {
 
+    private static final String VALID_PASS = "12345678";
+    private static final String VALID_PASS2 = "23456789";
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock
@@ -87,11 +89,13 @@ public class WifiTetherPasswordPreferenceControllerTest {
     @Test
     public void changePreference_shouldUpdateValue() {
         mController.displayPreference(mScreen);
-        mController.onPreferenceChange(mPreference, "1");
-        assertThat(mController.getPassword()).isEqualTo("1");
+        mController.onPreferenceChange(mPreference, VALID_PASS);
+        assertThat(mController.getPasswordValidated(WifiConfiguration.KeyMgmt.WPA2_PSK))
+                .isEqualTo(VALID_PASS);
 
-        mController.onPreferenceChange(mPreference, "0");
-        assertThat(mController.getPassword()).isEqualTo("0");
+        mController.onPreferenceChange(mPreference, VALID_PASS2);
+        assertThat(mController.getPasswordValidated(WifiConfiguration.KeyMgmt.WPA2_PSK))
+                .isEqualTo(VALID_PASS2);
 
         verify(mListener, times(2)).onTetherConfigUpdated();
     }
@@ -100,62 +104,33 @@ public class WifiTetherPasswordPreferenceControllerTest {
     public void updateDisplay_shouldUpdateValue() {
         // Set controller password to anything and verify is set.
         mController.displayPreference(mScreen);
-        mController.onPreferenceChange(mPreference, "1");
-        assertThat(mController.getPassword()).isEqualTo("1");
+        mController.onPreferenceChange(mPreference, VALID_PASS);
+        assertThat(mController.getPasswordValidated(WifiConfiguration.KeyMgmt.WPA2_PSK))
+                .isEqualTo(VALID_PASS);
 
         // Create a new config using different password
         final WifiConfiguration config = new WifiConfiguration();
-        config.preSharedKey = "test_1234";
+        config.preSharedKey = VALID_PASS2;
         when(mWifiManager.getWifiApConfiguration()).thenReturn(config);
 
         // Call updateDisplay and verify it's changed.
         mController.updateDisplay();
-        assertThat(mController.getPassword()).isEqualTo(config.preSharedKey);
+        assertThat(mController.getPasswordValidated(WifiConfiguration.KeyMgmt.WPA2_PSK))
+                .isEqualTo(config.preSharedKey);
         assertThat(mPreference.getSummary()).isEqualTo(config.preSharedKey);
-    }
-
-    @Test
-    public void getSecuritySettingForPassword_returnCorrectType() {
-        // valid wpa2 password
-        mController.displayPreference(mScreen);
-        assertThat(mController.getSecuritySettingForPassword())
-                .isEqualTo(WifiConfiguration.KeyMgmt.WPA2_PSK);
-
-        // password which is empty returns NONE
-        mConfig = new WifiConfiguration();
-        mConfig.SSID = "test_1234";
-        mConfig.preSharedKey = "";
-        when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
-        when(mWifiManager.getWifiApConfiguration()).thenReturn(mConfig);
-        mController = new WifiTetherPasswordPreferenceController(mContext, mListener);
-
-        mController.displayPreference(mScreen);
-        assertThat(mController.getSecuritySettingForPassword())
-                .isEqualTo(WifiConfiguration.KeyMgmt.NONE);
-
-        // default for unsupported types is wpa2
-        mConfig = new WifiConfiguration();
-        mConfig.SSID = "test_1234";
-        mConfig.preSharedKey = "short";
-        when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
-        when(mWifiManager.getWifiApConfiguration()).thenReturn(mConfig);
-        mController = new WifiTetherPasswordPreferenceController(mContext, mListener);
-
-        mController.displayPreference(mScreen);
-        assertThat(mController.getSecuritySettingForPassword())
-                .isEqualTo(WifiConfiguration.KeyMgmt.WPA2_PSK);
     }
 
     @Test
     public void updateDisplay_shouldSetInputType() {
         // Set controller password to anything and verify is set.
         mController.displayPreference(mScreen);
-        mController.onPreferenceChange(mPreference, "1");
-        assertThat(mController.getPassword()).isEqualTo("1");
+        mController.onPreferenceChange(mPreference, VALID_PASS);
+        assertThat(mController.getPasswordValidated(WifiConfiguration.KeyMgmt.WPA2_PSK))
+                .isEqualTo(VALID_PASS);
 
         // Create a new config using different password
         final WifiConfiguration config = new WifiConfiguration();
-        config.preSharedKey = "test_1234";
+        config.preSharedKey = VALID_PASS2;
         when(mWifiManager.getWifiApConfiguration()).thenReturn(config);
 
         // Call updateDisplay and verify it's changed.
