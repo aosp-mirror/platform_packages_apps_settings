@@ -103,6 +103,7 @@ public class RestrictAppTip extends BatteryTip {
         } else {
             mState = tip.getState();
             mShowDialog = tip.shouldShowDialog();
+            mRestrictAppList = ((RestrictAppTip) tip).mRestrictAppList;
         }
     }
 
