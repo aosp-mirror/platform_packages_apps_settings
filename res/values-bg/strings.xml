@@ -167,15 +167,12 @@
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"Заявка за достъп до SIM картата"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> иска да получи достъп до SIM картата ви. Предоставянето му ще деактивира мобилните данни на устройството ви за продължителността на връзката. Разрешаване на достъпа до <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
     <string name="bluetooth_device_name_summary" msgid="522235742194965734">"Видимо като „<xliff:g id="DEVICE_NAME">^1</xliff:g>“ за другите устройства"</string>
-    <!-- no translation found for bluetooth_off_footer (8406865700572772936) -->
-    <skip />
+    <string name="bluetooth_off_footer" msgid="8406865700572772936">"Включете Bluetooth, за да се свържете с други устройства."</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Вашите устройства"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Сдвояване на ново устройство"</string>
     <string name="bluetooth_pref_summary" product="tablet" msgid="3520035819421024105">"Разрешете на таблета си да се свързва с устройства с Bluetooth в близост"</string>
     <string name="bluetooth_pref_summary" product="device" msgid="2205100629387332862">"Разрешете на устройството си да се свързва с устройства с Bluetooth в близост"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="782032074675157079">"Разрешаване на телефона да се свързва с устройства с Bluetooth в близост"</string>
-    <string name="bluetooth_disable_inband_ringing" msgid="8919353393497325693">"Деактивиране на звъненето в една и съща честотна лента"</string>
-    <string name="bluetooth_disable_inband_ringing_summary" msgid="7898974890913984364">"Без възпроизвеждане на персонализираните телефонни мелодии на слушалките с Bluetooth"</string>
     <string name="connected_device_available_media_title" msgid="2560067541413280645">"Налични устройства за мултимедия"</string>
     <string name="connected_device_available_call_title" msgid="697154660967595684">"Налични устройства за обаждания"</string>
     <string name="connected_device_connected_title" msgid="5871712271201945606">"Понастоящем свързано"</string>
@@ -209,8 +206,14 @@
     <string name="proxy_error_invalid_port" msgid="5988270202074492710">"Въведеният от вас порт е невалиден."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"HTTP прокси сървърът се използва от браузъра, но не и от други приложения."</string>
     <string name="proxy_url_title" msgid="7185282894936042359">"URL адрес на PAC файла: "</string>
+    <!-- no translation found for radio_info_dl_kbps (6894556071523815984) -->
+    <skip />
+    <!-- no translation found for radio_info_ul_kbps (946464073571185678) -->
+    <skip />
     <string name="radio_info_signal_location_label" msgid="3242990404410530456">"Информация за местоположението на клетките (оттеглено):"</string>
     <string name="radio_info_neighboring_location_label" msgid="5766020323342985397">"Информация за съседните клетки (оттеглено):"</string>
+    <!-- no translation found for radio_info_phy_chan_config (7133247058801474028) -->
+    <skip />
     <string name="radio_info_cell_info_refresh_rate" msgid="7062777594049622128">"Честота на опресняване на информацията за клетките:"</string>
     <string name="radio_info_cellinfo_label" msgid="6213223844927623098">"Цялата измервателна информация за клетките:"</string>
     <string name="radio_info_dcrtinfo_label" msgid="4062076024399431876">"Информация в реално време за връзката за данни:"</string>
@@ -727,8 +730,6 @@
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Запомняне на настройки"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="6752690395207847881">"Максимален брой свързани аудиоустройства с Bluetooth"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="5936561749790095473">"Изберете максималния брой свързани аудиоустройства с Bluetooth"</string>
-    <string name="bluetooth_disable_avdtp_delay_reports" msgid="7710144996922449248">"Деактивиране на отчетите за закъснение от AVDTP през Bluetooth"</string>
-    <string name="bluetooth_disable_avdtp_delay_reports_summary" msgid="6882039901251054992">"Забраняване на получаването на отчети за закъснение от AVDTP през Bluetooth"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"Предаване"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Активир. на безжичния дисплей"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Няма намерени устройства наблизо."</string>
@@ -1002,6 +1003,11 @@
     <string name="emergency_address_title" msgid="932729250447887545">"Адрес за спешни случаи"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Използва се като вашето местоположение, когато извършвате спешно обаждане през Wi-Fi"</string>
     <string name="private_dns_help_message" msgid="3299567069152568958"><annotation id="url">"Научете повече"</annotation>" за функциите на частния DNS"</string>
+    <string name="wifi_calling_pref_managed_by_carrier" msgid="6845711858866828986">"Настройката се управлява от оператора"</string>
+    <string name="wifi_calling_settings_activation_instructions" msgid="7492509632478260955">"Активиране на функцията за обаждания през Wi-Fi"</string>
+    <string name="wifi_calling_turn_on" msgid="1171403510313983983">"Включване на функцията за обаждания през Wi-Fi"</string>
+    <string name="wifi_calling_not_supported" msgid="7878640438907807754">"Функцията за обаждания през Wi-Fi не се поддържа за %1$s"</string>
+    <string name="carrier" msgid="5264014738689761132">"Оператор"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Дисплей"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Звук"</string>
     <string name="all_volume_title" msgid="4296957391257836961">"Сила на звука"</string>
@@ -1455,8 +1461,7 @@
     <string name="reset_esim_error_title" msgid="1464195710538232590">"Електронните SIM карти не могат да бъдат нулирани"</string>
     <string name="reset_esim_error_msg" msgid="8434956817922668388">"Електронните SIM карти не могат да бъдат нулирани поради грешка."</string>
     <string name="master_clear_title" msgid="3531267871084279512">"Изтриване на всички данни (възстановяване на фабричните настройки)"</string>
-    <!-- no translation found for master_clear_short_title (8652450915870274285) -->
-    <skip />
+    <string name="master_clear_short_title" msgid="8652450915870274285">"Изтрив. на данните (възст. на фабр. настр.)"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Това ще изтрие всички данни от "<b>"вътрешното хранилище"</b>" на таблета ви, включително:\n\n"<li>"профила ви в Google;"</li>\n<li>"данни и настройки от системата и приложенията;"</li>\n<li>"изтеглени приложения."</li></string>
     <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Това ще изтрие всички данни от "<b>"вътрешното хранилище"</b>" на телефона ви, включително:\n\n"<li>"профила ви в Google"</li>\n<li>"данни и настройки от системата и приложенията"</li>\n<li>"изтеглени приложения"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Понастоящем сте влезли в следните профили:\n"</string>
@@ -2002,8 +2007,7 @@
       <item quantity="other">Много дълго забавяне (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> милисек)</item>
       <item quantity="one">Много дълго забавяне (<xliff:g id="CLICK_DELAY_LABEL_0">%1$d</xliff:g> милисек)</item>
     </plurals>
-    <!-- no translation found for accessibility_vibration_summary (1372393829668784669) -->
-    <skip />
+    <string name="accessibility_vibration_summary" msgid="1372393829668784669">"Звънене: <xliff:g id="SUMMARY_RING">%1$s</xliff:g>, докосване: <xliff:g id="SUMMARY_TOUCH">%2$s</xliff:g>"</string>
     <string name="accessibility_vibration_summary_off" msgid="1753566394591809629">"За звъненето и известията е зададено „Изключено“"</string>
     <string name="accessibility_vibration_summary_low" msgid="7628418309029013867">"За звъненето и известията е зададено „Слабо“"</string>
     <string name="accessibility_vibration_summary_medium" msgid="3422136736880414093">"За звъненето и известията е зададено „Средно“"</string>
@@ -2108,11 +2112,11 @@
     <string name="background_activity_summary_whitelisted" msgid="1079899502347973947">"Използването на заден план не може да бъде ограничено"</string>
     <string name="background_activity_warning_dialog_title" msgid="2216249969149568871">"Да се ограничи ли активността на заден план?"</string>
     <string name="background_activity_warning_dialog_text" msgid="7049624449246121981">"Ако ограничите активността на заден за дадено приложение, то може да не функционира правилно"</string>
+    <string name="background_activity_disabled_dialog_text" msgid="6133420589651880824">"Тъй като прил. не е зададено да оптимизира батерията, можете да го ограничите.\n\nЗа тази цел първо включете оптим. на батерията."</string>
     <string name="device_screen_usage" msgid="3386088035570409683">"Ползване на екрана след пълно зареждане"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"Консумация от екрана"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"Сканиране за мобилни мрежи"</string>
-    <!-- no translation found for power_usage_list_summary (5584049564906462506) -->
-    <skip />
+    <string name="power_usage_list_summary" msgid="5584049564906462506">"Използване на батерията след пълно зареждане"</string>
     <string name="screen_usage_summary" msgid="6687403051423153550">"Колко време е бил включен екранът след последното пълно зареждане"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"Използване на устройството след пълно зареждане"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Употреба на батерията след изключването"</string>
@@ -2143,14 +2147,10 @@
     <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"Устройството се активира на заден план"</string>
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"Чести заявки за местоположение"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> приложения не функционират правилно"</string>
-    <!-- no translation found for battery_tip_summary_title (368729969313047399) -->
-    <skip />
-    <!-- no translation found for battery_tip_summary_summary (2198778125778121221) -->
-    <skip />
-    <!-- no translation found for battery_tip_summary_summary (1183976728682325345) -->
-    <skip />
-    <!-- no translation found for battery_tip_summary_summary (363718204492523920) -->
-    <skip />
+    <string name="battery_tip_summary_title" msgid="368729969313047399">"Приложенията работят нормално"</string>
+    <string name="battery_tip_summary_summary" product="default" msgid="2198778125778121221">"Използването на батерията на заден план е в обичайните норми за телефона"</string>
+    <string name="battery_tip_summary_summary" product="tablet" msgid="1183976728682325345">"Използването на батерията на заден план е в обичайните норми за таблета"</string>
+    <string name="battery_tip_summary_summary" product="device" msgid="363718204492523920">"Използването на батерията на заден план е в обичайните норми за устройството"</string>
     <string name="battery_tip_low_battery_title" msgid="5103420355109677385">"Батерията е с нисък капацитет"</string>
     <string name="battery_tip_low_battery_summary" msgid="4702986182940709150">"Животът на батерията не е оптимален"</string>
     <string name="battery_tip_smart_battery_title" product="default" msgid="2542822112725248683">"Удължете живота на батерията на телефона си"</string>
@@ -2165,12 +2165,9 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"Таблетът е използван повече от обикновено"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"Устройството е използвано повече от обикновено"</string>
     <string name="battery_tip_high_usage_summary" msgid="6341311803303581798">"Батерията може скоро да се изтощи"</string>
-    <!-- no translation found for battery_tip_dialog_message (7001932078713215338) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (8482296786233647690) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (2806861679225286129) -->
-    <skip />
+    <string name="battery_tip_dialog_message" product="default" msgid="7001932078713215338">"Телефонът ви е използван повече от обикновено. Батерията може да се изтощи по-рано от очакваното.\n\nСледните <xliff:g id="NUMBER">%1$d</xliff:g> приложения са най-използваните от вас след последното пълно зареждане:"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="8482296786233647690">"Таблетът ви е използван повече от обикновено. Батерията може да се изтощи по-рано от очакваното.\n\nСледните <xliff:g id="NUMBER">%1$d</xliff:g> приложения са най-използваните от вас след последното пълно зареждане:"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="2806861679225286129">"Устройството ви е използвано повече от обикновено. Батерията може да се изтощи по-рано от очакваното.\n\nСледните <xliff:g id="NUMBER">%1$d</xliff:g> приложения са най-използваните от вас след последното пълно зареждане:"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="other">Ограничаване на %1$d приложения</item>
       <item quantity="one">Ограничаване на %1$d приложение</item>
@@ -2199,12 +2196,9 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="6537761705584610231">"Това приложение ще може да използва батерията на заден план. Тя може да се изтощи по-рано от очакваното."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="6022058431218137646">"Премахване"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="3058235875830858902">"Отказ"</string>
-    <!-- no translation found for battery_tip_dialog_summary_message (4628448253185085796) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_summary_message (8327950887399420971) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_summary_message (6753742263807939789) -->
-    <skip />
+    <string name="battery_tip_dialog_summary_message" product="default" msgid="4628448253185085796">"Приложенията ви използват обичайното количество от батерията. Ако те изразходват твърде много от нея, телефонът ви ще предложи действия, които можете да предприемете.\n\nВинаги можете да включите режима за запазване на батерията, ако тя е на път да се изтощи."</string>
+    <string name="battery_tip_dialog_summary_message" product="tablet" msgid="8327950887399420971">"Приложенията ви използват обичайното количество от батерията. Ако те изразходват твърде много от нея, таблетът ви ще предложи действия, които можете да предприемете.\n\nВинаги можете да включите режима за запазване на батерията, ако тя е на път да се изтощи."</string>
+    <string name="battery_tip_dialog_summary_message" product="device" msgid="6753742263807939789">"Приложенията ви използват обичайното количество от батерията. Ако те изразходват твърде много от нея, устройството ви ще предложи действия, които можете да предприемете.\n\nВинаги можете да включите режима за запазване на батерията, ако тя е на път да се изтощи."</string>
     <string name="smart_battery_manager_title" msgid="870632749556793417">"Мениджър на батерията"</string>
     <string name="smart_battery_title" msgid="6218785691872466076">"Автоматично управление на приложенията"</string>
     <string name="smart_battery_summary" msgid="1339184602000004058">"Ограничение за батерията за приложения, които не използвате често"</string>
@@ -2953,8 +2947,10 @@
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"пренос на данни"</string>
     <string name="network_dashboard_summary_hotspot" msgid="8494210248613254574">"точка за достъп"</string>
     <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"Свързани устройства"</string>
-    <string name="connected_devices_dashboard_summary" msgid="2390582103384791904">"Bluetooth, предаване, КБП"</string>
-    <string name="connected_devices_dashboard_no_nfc_summary" msgid="9106040742715366495">"Bluetooth, предаване"</string>
+    <string name="connected_devices_dashboard_summary" msgid="2665221896894251402">"Bluetooth, режим за шофиране, КБП"</string>
+    <string name="connected_devices_dashboard_no_nfc_summary" msgid="3840842725283655533">"Bluetooth, режим за шофиране"</string>
+    <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="5018708106066758867">"Bluetooth, КБП"</string>
+    <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="5250078362483148199">"Bluetooth"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Приложения и известия"</string>
     <string name="app_and_notification_dashboard_summary" msgid="2363314178802548682">"Разрешения, приложения по подразбиране"</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"Профили"</string>
@@ -3166,16 +3162,13 @@
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"Звукът е спрян, но <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> и <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g> са разрешени"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"Съобщения, събития и напомняния"</string>
     <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"Когато режимът „Не безпокойте“ е включен, съобщенията, напомнянията и събитията ще бъдат спрени – това не се отнася за елементите, разрешени от вас по-горе. Можете да коригирате настройките за съобщенията, за да разрешите на близки и приятели и други контакти да се свързват с вас."</string>
-    <string name="zen_onboarding_ok" msgid="4157146842078658361">"Актуализиране"</string>
-    <string name="zen_onboarding_no_update" msgid="3103752501952811308">"Да не се актуализира"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_description" msgid="4051020254348888576">"Телефонът ви може да прави повече неща, с които да ви помогне да се съсредоточите.\n\nАктуализирайте настройките, така че:\n\n– напълно да скриете известията;\n\n– да разрешите обаждания от контактите със звезда и повторно обаждащите се."</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="4243599835234481809">"Искате ли да актуализирате режима „Не безпокойте“?"</string>
+    <string name="zen_onboarding_ok" msgid="6131211000824433013">"Готово"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Настройки"</string>
-    <string name="zen_onboarding_more_options" msgid="7880013502169957729">"Можете да персонализирате този режим допълнително от настройките."</string>
-    <string name="zen_onboarding_screen_on_title" msgid="6058737686680609254">"Блокиране при включен екран"</string>
-    <string name="zen_onboarding_screen_off_title" msgid="3153498025037206166">"Блокиране при изключен екран"</string>
-    <string name="zen_onboarding_screen_off_summary" msgid="5393041573999488088">"Без включване на екрана или „събуждане“ при известия"</string>
-    <string name="zen_onboarding_screen_on_summary" msgid="4351138746406623307">"Без показване на известия освен за основните активност и състояние на телефона"</string>
+    <string name="zen_onboarding_new_setting_title" msgid="3311718322273907394">"Без визуално прекъсване или звук от известията"</string>
+    <string name="zen_onboarding_current_setting_title" msgid="776426065129609376">"Без звук от известията"</string>
+    <string name="zen_onboarding_new_setting_summary" msgid="6293026064871880706">"Няма да виждате, нито да чувате известията. Обажданията от контактите със звезда и повторно обаждащите се са разрешени."</string>
+    <string name="zen_onboarding_current_setting_summary" msgid="1280614488924843713">"(Текуща настройка)"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1352808651270918932">"Да се променят ли настройките за известията в режима „Не безпокойте“?"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Звуци за служебния потребителски профил"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Използване на звуците за личния потребителски профил"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"Звуците за служебния и личния потребителски профил са едни и същи"</string>
@@ -3344,11 +3337,15 @@
     <string name="summary_range_symbol_combination" msgid="5695218513421897027">"от <xliff:g id="START">%1$s</xliff:g> до <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"от <xliff:g id="START">%1$s</xliff:g> до <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_calls" msgid="7051492091133751208">"Обаждания"</string>
+    <string name="zen_mode_calls_title" msgid="623395033931747661">"Разрешаване на обаждания"</string>
     <string name="zen_mode_calls_footer" msgid="3618700268458237781">"Когато режимът „Не безпокойте“ е вкл., вх. обаждания се блокират. Можете да коригирате настройките, за да разрешите на близки и приятели и др. контакти да се свързват с вас."</string>
-    <!-- no translation found for zen_mode_starred_contacts_title (1848464279786960190) -->
-    <skip />
-    <!-- no translation found for zen_mode_starred_contacts_summary_additional_contacts (6748832187598909961) -->
+    <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"Контакти със звезда"</string>
+    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="6748832187598909961">
+      <item quantity="other">и още <xliff:g id="NUM_PEOPLE">%d</xliff:g></item>
+      <item quantity="one">и още 1</item>
+    </plurals>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Съобщения"</string>
+    <string name="zen_mode_messages_title" msgid="7729380010396411129">"Разрешаване на съобщения"</string>
     <string name="zen_mode_all_messages" msgid="8257021584561639816">"Съобщения"</string>
     <string name="zen_mode_selected_messages" msgid="1047355526202106114">"Някои съобщения"</string>
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"От всички"</string>
@@ -3362,12 +3359,15 @@
     <string name="zen_mode_media" msgid="8808264142134422380">"Мултимедия"</string>
     <string name="zen_mode_system" msgid="2541380718411593581">"Звуци при докосване"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Напомняния"</string>
+    <string name="zen_mode_reminders_title" msgid="2345044406347406902">"Разрешаване на напомняния"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Събития"</string>
+    <string name="zen_mode_events_title" msgid="5597241655883329085">"Разрешаване на събития"</string>
     <string name="zen_mode_all_callers" msgid="2378065871253871057">"всички"</string>
     <string name="zen_mode_contacts_callers" msgid="5569804103920394175">"контактите"</string>
     <string name="zen_mode_starred_callers" msgid="1023167821338514140">"контактите със звезда"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"Повторно обаждащи се"</string>
-    <string name="zen_mode_calls_summary_one" msgid="2867689575419791866">"Само от <xliff:g id="CALLER_TYPE">%1$s</xliff:g>"</string>
+    <string name="zen_mode_repeat_callers_title" msgid="8553876328249671783">"Разрешаване на повторно обаждащи се"</string>
+    <string name="zen_mode_calls_summary_one" msgid="3972333792749874863">"От <xliff:g id="CALLER_TYPE">%1$s</xliff:g>"</string>
     <string name="zen_mode_calls_summary_two" msgid="6592821501321201329">"От <xliff:g id="CALLER_TYPE">%1$s</xliff:g> и <xliff:g id="CALLERT_TPYE">%2$s</xliff:g>"</string>
     <string name="zen_mode_repeat_callers_summary" msgid="239685342222975733">"Ако един и същ човек се обади втори път в рамките на период от <xliff:g id="MINUTES">%d</xliff:g> мин"</string>
     <string name="zen_mode_behavior_summary_custom" msgid="168127313238020146">"Персонализирани"</string>
@@ -3638,8 +3638,7 @@
     <string name="zen_access_revoke_warning_dialog_summary" msgid="5518216907304930148">"Всички правила за режима „Не безпокойте“, създадени от това приложение, ще бъдат премахнати."</string>
     <string name="ignore_optimizations_on" msgid="6915689518016285116">"Без оптимизиране"</string>
     <string name="ignore_optimizations_off" msgid="6153196256410296835">"Оптимизиране"</string>
-    <!-- no translation found for ignore_optimizations_on_desc (3549930955839111652) -->
-    <skip />
+    <string name="ignore_optimizations_on_desc" msgid="3549930955839111652">"Възможно е да доведе до по-бързо изразходване на батерията. Приложението вече ще може да я използва на заден план."</string>
     <string name="ignore_optimizations_off_desc" msgid="5255731062045426544">"Препоръчително за удължаване на живота на батерията"</string>
     <string name="ignore_optimizations_title" msgid="2829637961185027768">"Да се разреши ли на <xliff:g id="APP">%s</xliff:g> да пренебрегва оптимизациите на батерията?"</string>
     <string name="app_list_preference_none" msgid="108006867520327904">"Няма"</string>
@@ -3777,6 +3776,8 @@
     <string name="connectivity_monitor_switch_summary" msgid="2828658652378866401">"Функцията за наблюдение на връзката ще събира регистрационни файлове, когато установи проблем с връзката, и ще изпрати на потребителя известие с подкана да подаде сигнал за програмна грешка"</string>
     <string name="connectivity_monitor_toast" msgid="5551859612881173028">"За да приложите промяната във функцията за наблюдение на връзката, рестартирайте устройството"</string>
     <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"Сензор на лазера на камерата"</string>
+    <!-- no translation found for logical_camera_default_switch (3310039627275112685) -->
+    <skip />
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Автоматични системни актуализации"</string>
     <string name="ota_disable_automatic_update_summary" msgid="940729694354373087">"Прилагане на актуализациите, когато устройството се рестартира"</string>
     <string name="usage" msgid="2977875522080448986">"Пренос на данни"</string>
@@ -4098,10 +4099,8 @@
     <string name="storage_movies_tv" msgid="5498394447562086890">"Приложения за филми и телевизионни предавания"</string>
     <string name="carrier_provisioning" msgid="4398683675591893169">"Carrier Provisioning Info"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"Задействане на обезпечаването от оператора"</string>
-    <!-- no translation found for zen_suggestion_title (798067603460192693) -->
-    <skip />
-    <!-- no translation found for zen_suggestion_summary (4573237195296808909) -->
-    <skip />
+    <string name="zen_suggestion_title" msgid="798067603460192693">"Актуализиране на режима „Не безпокойте“"</string>
+    <string name="zen_suggestion_summary" msgid="4573237195296808909">"Скрийте известията, за да не ви разсейват"</string>
     <string name="new_device_suggestion_title" msgid="698847081680980774">"Нови и вълнуващи неща"</string>
     <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"Запознайте се с новия си телефон"</string>
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Запознайте се с новия си таблет"</string>
