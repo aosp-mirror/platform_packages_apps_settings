@@ -58,7 +58,8 @@ import java.util.List;
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFragment
         implements SwitchBar.OnSwitchChangeListener, OemUnlockDialogHost, AdbDialogHost,
-        AdbClearKeysDialogHost, LogPersistDialogHost {
+        AdbClearKeysDialogHost, LogPersistDialogHost,
+        BluetoothA2dpHwOffloadRebootDialog.OnA2dpHwDialogConfirmedListener {
 
     private static final String TAG = "DevSettingsDashboard";
 
@@ -272,6 +273,13 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     }
 
     @Override
+    public void onA2dpHwDialogConfirmed() {
+        final BluetoothA2dpHwOffloadPreferenceController controller =
+                getDevelopmentOptionsController(BluetoothA2dpHwOffloadPreferenceController.class);
+        controller.onA2dpHwDialogConfirmed();
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         boolean handledResult = false;
         for (AbstractPreferenceController controller : mPreferenceControllers) {
@@ -408,6 +416,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new BluetoothDeviceNoNamePreferenceController(context));
         controllers.add(new BluetoothAbsoluteVolumePreferenceController(context));
         controllers.add(new BluetoothAvrcpVersionPreferenceController(context));
+        controllers.add(new BluetoothA2dpHwOffloadPreferenceController(context, fragment));
         controllers.add(new BluetoothAudioCodecPreferenceController(context, lifecycle,
                 bluetoothA2dpConfigStore));
         controllers.add(new BluetoothAudioSampleRatePreferenceController(context, lifecycle,
