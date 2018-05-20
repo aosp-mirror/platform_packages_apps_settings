@@ -16,7 +16,6 @@
 
 package com.android.settings.sound;
 
-
 import static android.media.AudioSystem.DEVICE_OUT_BLUETOOTH_SCO;
 import static android.media.AudioSystem.DEVICE_OUT_HEARING_AID;
 import static android.media.AudioSystem.DEVICE_OUT_USB_HEADSET;
@@ -93,6 +92,8 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
     private HeadsetProfile mHeadsetProfile;
     @Mock
     private HearingAidProfile mHearingAidProfile;
+    @Mock
+    private AudioSwitchPreferenceController.AudioSwitchCallback mAudioSwitchPreferenceCallback;
 
     private Context mContext;
     private PreferenceScreen mScreen;
@@ -156,6 +157,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mScreen.addPreference(mPreference);
         mController.displayPreference(mScreen);
+        mController.setCallback(mAudioSwitchPreferenceCallback);
     }
 
     @After
@@ -251,7 +253,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertThat(mPreference.isVisible()).isTrue();
-        assertThat(mPreference.getSummary()).isEqualTo(mBluetoothDevice.getName());
+        assertThat(mPreference.getSummary()).isEqualTo(TEST_DEVICE_NAME_1);
     }
 
     /**
@@ -273,7 +275,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertThat(mPreference.isVisible()).isTrue();
-        assertThat(mPreference.getSummary()).isEqualTo(mSecondBluetoothDevice.getName());
+        assertThat(mPreference.getSummary()).isEqualTo(TEST_DEVICE_NAME_2);
     }
 
     /**

@@ -94,6 +94,8 @@ public class MediaOutputPreferenceControllerTest {
     private A2dpProfile mA2dpProfile;
     @Mock
     private HearingAidProfile mHearingAidProfile;
+    @Mock
+    private AudioSwitchPreferenceController.AudioSwitchCallback mAudioSwitchPreferenceCallback;
 
     private Context mContext;
     private PreferenceScreen mScreen;
@@ -157,6 +159,7 @@ public class MediaOutputPreferenceControllerTest {
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mScreen.addPreference(mPreference);
         mController.displayPreference(mScreen);
+        mController.setCallback(mAudioSwitchPreferenceCallback);
     }
 
     @After
@@ -302,7 +305,7 @@ public class MediaOutputPreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertThat(mPreference.isVisible()).isTrue();
-        assertThat(mPreference.getSummary()).isEqualTo(mBluetoothDevice.getName());
+        assertThat(mPreference.getSummary()).isEqualTo(TEST_DEVICE_NAME_1);
     }
 
     /**
@@ -323,7 +326,7 @@ public class MediaOutputPreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertThat(mPreference.isVisible()).isTrue();
-        assertThat(mPreference.getSummary()).isEqualTo(mSecondBluetoothDevice.getName());
+        assertThat(mPreference.getSummary()).isEqualTo(TEST_DEVICE_NAME_2);
     }
 
     /**

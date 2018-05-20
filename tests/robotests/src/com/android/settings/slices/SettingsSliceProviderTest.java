@@ -18,9 +18,13 @@
 package com.android.settings.slices;
 
 import static android.content.ContentResolver.SCHEME_CONTENT;
+
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.slice.SliceManager;
@@ -31,6 +35,8 @@ import android.net.Uri;
 import android.os.StrictMode;
 import android.provider.SettingsSlicesContract;
 
+import com.android.settings.wifi.WifiSliceBuilder;
+import com.android.settings.notification.ZenModeSliceBuilder;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.FakeToggleController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -45,6 +51,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 
 import androidx.slice.Slice;
 
@@ -70,6 +78,14 @@ public class SettingsSliceProviderTest {
     private SQLiteDatabase mDb;
     private SliceManager mManager;
 
+    private static final List<Uri> SPECIAL_CASE_PLATFORM_URIS = Arrays.asList(
+            WifiSliceBuilder.WIFI_URI
+    );
+
+    private static final List<Uri> SPECIAL_CASE_OEM_URIS = Arrays.asList(
+            ZenModeSliceBuilder.ZEN_MODE_URI
+    );
+
     @Before
     public void setUp() {
         mContext = spy(RuntimeEnvironment.application);
@@ -94,7 +110,7 @@ public class SettingsSliceProviderTest {
     @Test
     public void testInitialSliceReturned_emptySlice() {
         insertSpecialCase(KEY);
-        Uri uri = SliceBuilderUtils.getUri(INTENT_PATH, false);
+        final Uri uri = SliceBuilderUtils.getUri(INTENT_PATH, false);
         Slice slice = mProvider.onBindSlice(uri);
 
         assertThat(slice.getUri()).isEqualTo(uri);
@@ -104,7 +120,7 @@ public class SettingsSliceProviderTest {
     @Test
     public void testLoadSlice_returnsSliceFromAccessor() {
         insertSpecialCase(KEY);
-        Uri uri = SliceBuilderUtils.getUri(INTENT_PATH, false);
+        final Uri uri = SliceBuilderUtils.getUri(INTENT_PATH, false);
 
         mProvider.loadSlice(uri);
         SliceData data = mProvider.mSliceWeakDataCache.get(uri);
@@ -114,9 +130,19 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
-    public void testLoadSlice_doesntCacheWithoutPin() {
+    public void loadSlice_registersIntentFilter() {
         insertSpecialCase(KEY);
-        Uri uri = SliceBuilderUtils.getUri(INTENT_PATH, false);
+        final Uri uri = SliceBuilderUtils.getUri(INTENT_PATH, false);
+
+        mProvider.loadSlice(uri);
+
+        verify(mProvider).registerIntentToUri(eq(FakeToggleController.INTENT_FILTER), eq(uri));
+    }
+
+    @Test
+    public void testLoadSlice_doesNotCacheWithoutPin() {
+        insertSpecialCase(KEY);
+        final Uri uri = SliceBuilderUtils.getUri(INTENT_PATH, false);
 
         mProvider.loadSlice(uri);
         SliceData data = mProvider.mSliceDataCache.get(uri);
@@ -127,7 +153,7 @@ public class SettingsSliceProviderTest {
     @Test
     public void testLoadSlice_cachesWithPin() {
         insertSpecialCase(KEY);
-        Uri uri = SliceBuilderUtils.getUri(INTENT_PATH, false);
+        final Uri uri = SliceBuilderUtils.getUri(INTENT_PATH, false);
         when(mManager.getPinnedSlices()).thenReturn(Arrays.asList(uri));
 
         mProvider.loadSlice(uri);
@@ -213,6 +239,7 @@ public class SettingsSliceProviderTest {
                 .build();
 
         final Collection<Uri> descendants = mProvider.onGetSliceDescendants(uri);
+        descendants.removeAll(SPECIAL_CASE_OEM_URIS);
 
         assertThat(descendants).isEmpty();
     }
@@ -226,6 +253,7 @@ public class SettingsSliceProviderTest {
                 .build();
 
         final Collection<Uri> descendants = mProvider.onGetSliceDescendants(uri);
+        descendants.removeAll(SPECIAL_CASE_PLATFORM_URIS);
 
         assertThat(descendants).isEmpty();
     }
@@ -239,6 +267,7 @@ public class SettingsSliceProviderTest {
                 .build();
 
         final Collection<Uri> descendants = mProvider.onGetSliceDescendants(uri);
+        descendants.removeAll(SPECIAL_CASE_OEM_URIS);
 
         assertThat(descendants).isEmpty();
     }
@@ -252,16 +281,18 @@ public class SettingsSliceProviderTest {
                 .authority(SettingsSliceProvider.SLICE_AUTHORITY)
                 .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
                 .build();
-        final Uri expectedUri = new Uri.Builder()
+        final Collection<Uri> expectedUris = new HashSet<>();
+        expectedUris.addAll(SPECIAL_CASE_OEM_URIS);
+        expectedUris.add(new Uri.Builder()
                 .scheme(SCHEME_CONTENT)
                 .authority(SettingsSliceProvider.SLICE_AUTHORITY)
                 .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
                 .appendPath(key)
-                .build();
+                .build());
 
         final Collection<Uri> descendants = mProvider.onGetSliceDescendants(uri);
 
-        assertThat(descendants).containsExactly(expectedUri);
+        assertThat(descendants).containsExactlyElementsIn(expectedUris);
     }
 
     @Test
@@ -272,16 +303,18 @@ public class SettingsSliceProviderTest {
                 .scheme(SCHEME_CONTENT)
                 .authority(SettingsSliceProvider.SLICE_AUTHORITY)
                 .build();
-        final Uri expectedUri = new Uri.Builder()
+        final Collection<Uri> expectedUris = new HashSet<>();
+        expectedUris.addAll(SPECIAL_CASE_OEM_URIS);
+        expectedUris.add(new Uri.Builder()
                 .scheme(SCHEME_CONTENT)
                 .authority(SettingsSliceProvider.SLICE_AUTHORITY)
                 .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
                 .appendPath(key)
-                .build();
+                .build());
 
         final Collection<Uri> descendants = mProvider.onGetSliceDescendants(uri);
 
-        assertThat(descendants).containsExactly(expectedUri);
+        assertThat(descendants).containsExactlyElementsIn(expectedUris);
     }
 
     @Test
@@ -293,16 +326,18 @@ public class SettingsSliceProviderTest {
                 .authority(SettingsSlicesContract.AUTHORITY)
                 .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
                 .build();
-        final Uri expectedUri = new Uri.Builder()
+        final Collection<Uri> expectedUris = new HashSet<>();
+        expectedUris.addAll(SPECIAL_CASE_PLATFORM_URIS);
+        expectedUris.add(new Uri.Builder()
                 .scheme(SCHEME_CONTENT)
                 .authority(SettingsSlicesContract.AUTHORITY)
                 .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
                 .appendPath(key)
-                .build();
+                .build());
 
         final Collection<Uri> descendants = mProvider.onGetSliceDescendants(uri);
 
-        assertThat(descendants).containsExactly(expectedUri);
+        assertThat(descendants).containsExactlyElementsIn(expectedUris);
     }
 
     @Test
@@ -313,16 +348,18 @@ public class SettingsSliceProviderTest {
                 .scheme(SCHEME_CONTENT)
                 .authority(SettingsSlicesContract.AUTHORITY)
                 .build();
-        final Uri expectedUri = new Uri.Builder()
+        final Collection<Uri> expectedUris = new HashSet<>();
+        expectedUris.addAll(SPECIAL_CASE_PLATFORM_URIS);
+        expectedUris.add(new Uri.Builder()
                 .scheme(SCHEME_CONTENT)
                 .authority(SettingsSlicesContract.AUTHORITY)
                 .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
                 .appendPath(key)
-                .build();
+                .build());
 
         final Collection<Uri> descendants = mProvider.onGetSliceDescendants(uri);
 
-        assertThat(descendants).containsExactly(expectedUri);
+        assertThat(descendants).containsExactlyElementsIn(expectedUris);
     }
 
     @Test
@@ -334,22 +371,32 @@ public class SettingsSliceProviderTest {
         final Uri uri = new Uri.Builder()
                 .scheme(SCHEME_CONTENT)
                 .build();
-        final Uri expectedPlatformUri = new Uri.Builder()
+        final Collection<Uri> expectedUris = new HashSet<>();
+        expectedUris.addAll(SPECIAL_CASE_PLATFORM_URIS);
+        expectedUris.addAll(SPECIAL_CASE_OEM_URIS);
+        expectedUris.add(new Uri.Builder()
                 .scheme(SCHEME_CONTENT)
                 .authority(SettingsSlicesContract.AUTHORITY)
                 .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
                 .appendPath(platformKey)
-                .build();
-        final Uri expectedOemUri = new Uri.Builder()
+                .build());
+        expectedUris.add(new Uri.Builder()
                 .scheme(SCHEME_CONTENT)
                 .authority(SettingsSliceProvider.SLICE_AUTHORITY)
                 .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
                 .appendPath(oemKey)
-                .build();
+                .build());
 
         final Collection<Uri> descendants = mProvider.onGetSliceDescendants(uri);
 
-        assertThat(descendants).containsExactly(expectedPlatformUri, expectedOemUri);
+        assertThat(descendants).containsExactlyElementsIn(expectedUris);
+    }
+
+    @Test
+    public void bindSlice_wifiSlice_returnsWifiSlice() {
+        final Slice wifiSlice = mProvider.onBindSlice(WifiSliceBuilder.WIFI_URI);
+
+        assertThat(wifiSlice.getUri()).isEqualTo(WifiSliceBuilder.WIFI_URI);
     }
 
     private void insertSpecialCase(String key) {
@@ -364,7 +411,7 @@ public class SettingsSliceProviderTest {
         values.put(SlicesDatabaseHelper.IndexColumns.SCREENTITLE, "s");
         values.put(SlicesDatabaseHelper.IndexColumns.ICON_RESOURCE, 1234);
         values.put(SlicesDatabaseHelper.IndexColumns.FRAGMENT, "test");
-        values.put(SlicesDatabaseHelper.IndexColumns.CONTROLLER, "test");
+        values.put(SlicesDatabaseHelper.IndexColumns.CONTROLLER, PREF_CONTROLLER);
         values.put(SlicesDatabaseHelper.IndexColumns.PLATFORM_SLICE, isPlatformSlice);
         values.put(SlicesDatabaseHelper.IndexColumns.SLICE_TYPE, SliceData.SliceType.INTENT);
 

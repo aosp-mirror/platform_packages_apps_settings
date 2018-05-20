@@ -17,6 +17,8 @@
 package com.android.settings.notification;
 
 import android.content.Context;
+import android.content.IntentFilter;
+import android.media.AudioManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
@@ -57,4 +59,12 @@ public abstract class AdjustVolumeRestrictedPreferenceController extends
                 UserManager.DISALLOW_ADJUST_VOLUME, UserHandle.myUserId());
     }
 
+    @Override
+    public IntentFilter getIntentFilter() {
+        final IntentFilter filter = new IntentFilter();
+        filter.addAction(AudioManager.VOLUME_CHANGED_ACTION);
+        filter.addAction(AudioManager.STREAM_MUTE_CHANGED_ACTION);
+        filter.addAction(AudioManager.MASTER_MUTE_CHANGED_ACTION);
+        return filter;
+    }
 }

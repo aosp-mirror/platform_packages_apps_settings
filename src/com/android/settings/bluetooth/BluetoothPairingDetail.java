@@ -30,11 +30,7 @@ import com.android.settings.R;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.widget.FooterPreference;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * BluetoothPairingDetail is a page to scan bluetooth devices and pair them.
@@ -47,7 +43,6 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
     static final String KEY_AVAIL_DEVICES = "available_devices";
     @VisibleForTesting
     static final String KEY_FOOTER_PREF = "footer_preference";
-    private static final String KEY_RENAME_DEVICES = "bt_pair_rename_devices";
 
     @VisibleForTesting
     BluetoothProgressCategory mAvailableDevicesCategory;
@@ -78,6 +73,12 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
         }
         updateBluetooth();
         mAvailableDevicesCategory.setProgress(mLocalAdapter.isDiscovering());
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        use(BluetoothDeviceRenamePreferenceController.class).setFragment(this);
     }
 
     @VisibleForTesting
@@ -197,16 +198,6 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.bluetooth_pairing_detail;
-    }
-
-    @Override
-    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(
-                new BluetoothDeviceRenamePreferenceController(context, KEY_RENAME_DEVICES, this,
-                        getLifecycle()));
-
-        return controllers;
     }
 
     @Override

@@ -200,6 +200,7 @@
         <item name="android:textAlignment">viewStart</item>
         <item name="android:textAppearance">@android:style/TextAppearance.Material.Subhead</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:minHeight">@dimen/min_tap_target_size</item>
     </style>
 
     <style name="wifi_item_spinner" parent="wifi_item_content">
@@ -219,6 +220,7 @@
         <item name="android:layout_marginStart">4dip</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textAlignment">viewStart</item>
+        <item name="android:minHeight">@dimen/min_tap_target_size</item>
     </style>
 
     <style name="wifi_section">
@@ -285,6 +287,7 @@
         <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
         <item name="android:singleLine">true</item>
         <item name="android:textAlignment">viewStart</item>
+        <item name="android:minHeight">@dimen/min_tap_target_size</item>
     </style>
 
     <style name="vpn_warning">

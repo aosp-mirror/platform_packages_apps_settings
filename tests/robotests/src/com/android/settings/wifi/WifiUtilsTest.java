@@ -43,6 +43,6 @@ public class WifiUtilsTest {
         assertThat(WifiUtils.isHotspotPasswordValid("12345678")).isTrue();
         assertThat(WifiUtils.isHotspotPasswordValid("1234567890")).isTrue();
         assertThat(WifiUtils.isHotspotPasswordValid(longPassword)).isFalse();
-        assertThat(WifiUtils.isHotspotPasswordValid("")).isTrue();
+        assertThat(WifiUtils.isHotspotPasswordValid("")).isFalse();
     }
 }

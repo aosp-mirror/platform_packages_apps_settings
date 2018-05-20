@@ -78,12 +78,17 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
     protected final LocalBluetoothProfileManager mProfileManager;
     protected int mSelectedIndex;
     protected Preference mPreference;
+    protected AudioSwitchCallback mAudioSwitchPreferenceCallback;
 
     private final AudioManagerAudioDeviceCallback mAudioManagerAudioDeviceCallback;
     private final LocalBluetoothManager mLocalBluetoothManager;
     private final MediaRouterCallback mMediaRouterCallback;
     private final WiredHeadsetBroadcastReceiver mReceiver;
     private final Handler mHandler;
+
+    public interface AudioSwitchCallback {
+        void onPreferenceDataChanged(ListPreference preference);
+    }
 
     public AudioSwitchPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -131,7 +136,7 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
             final BluetoothDevice btDevice = mConnectedDevices.get(connectedDeviceIndex);
             mSelectedIndex = connectedDeviceIndex;
             setActiveBluetoothDevice(btDevice);
-            listPreference.setSummary(btDevice.getName());
+            listPreference.setSummary(btDevice.getAliasName());
         }
         return true;
     }
@@ -205,6 +210,10 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
 
     @Override
     public void onDeviceBondStateChanged(CachedBluetoothDevice cachedDevice, int bondState) {
+    }
+
+    public void setCallback(AudioSwitchCallback callback) {
+        mAudioSwitchPreferenceCallback = callback;
     }
 
     protected boolean isStreamFromOutputDevice(int streamType, int device) {
@@ -319,7 +328,7 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
         mediaValues[mSelectedIndex] = mContext.getText(R.string.media_output_default_summary);
         for (int i = 0, size = mConnectedDevices.size(); i < size; i++) {
             final BluetoothDevice btDevice = mConnectedDevices.get(i);
-            mediaOutputs[i] = btDevice.getName();
+            mediaOutputs[i] = btDevice.getAliasName();
             mediaValues[i] = btDevice.getAddress();
             if (btDevice.equals(activeDevice)) {
                 // select the active connected device.
@@ -335,6 +344,7 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
         listPreference.setEntryValues(mediaValues);
         listPreference.setValueIndex(mSelectedIndex);
         listPreference.setSummary(mediaOutputs[mSelectedIndex]);
+        mAudioSwitchPreferenceCallback.onPreferenceDataChanged(listPreference);
     }
 
     private int getConnectedDeviceIndex(String hardwareAddress) {
