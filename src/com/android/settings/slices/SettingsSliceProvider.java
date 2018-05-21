@@ -211,6 +211,11 @@ public class SettingsSliceProvider extends SliceProvider {
                     .getSlicesFeatureProvider()
                     .getNewEnhanced4gLteSliceHelper(getContext())
                     .createEnhanced4gLteSlice(sliceUri);
+        } else if (WifiCallingSliceHelper.WIFI_CALLING_PREFERENCE_URI.equals(sliceUri)) {
+            return FeatureFactory.getFactory(getContext())
+                    .getSlicesFeatureProvider()
+                    .getNewWifiCallingSliceHelper(getContext())
+                    .createWifiCallingPreferenceSlice(sliceUri);
         }
 
             SliceData cachedSliceData = mSliceWeakDataCache.get(sliceUri);

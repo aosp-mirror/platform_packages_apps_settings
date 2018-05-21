@@ -25,6 +25,9 @@ import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_PLAT
 import static com.android.settings.wifi.calling.WifiCallingSliceHelper.ACTION_WIFI_CALLING_CHANGED;
 import static com.android.settings.wifi.WifiSliceBuilder.ACTION_WIFI_SLICE_CHANGED;
 import static com.android.settings.mobilenetwork.Enhanced4gLteSliceHelper.ACTION_ENHANCED_4G_LTE_CHANGED;
+import static com.android.settings.wifi.calling.WifiCallingSliceHelper.ACTION_WIFI_CALLING_PREFERENCE_WIFI_ONLY;
+import static com.android.settings.wifi.calling.WifiCallingSliceHelper.ACTION_WIFI_CALLING_PREFERENCE_WIFI_PREFERRED;
+import static com.android.settings.wifi.calling.WifiCallingSliceHelper.ACTION_WIFI_CALLING_PREFERENCE_CELLULAR_PREFERRED;
 
 import android.app.slice.Slice;
 import android.content.BroadcastReceiver;
@@ -90,6 +93,14 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
                         .getSlicesFeatureProvider()
                         .getNewEnhanced4gLteSliceHelper(context)
                         .handleEnhanced4gLteChanged(intent);
+                break;
+            case ACTION_WIFI_CALLING_PREFERENCE_WIFI_ONLY:
+            case ACTION_WIFI_CALLING_PREFERENCE_WIFI_PREFERRED:
+            case ACTION_WIFI_CALLING_PREFERENCE_CELLULAR_PREFERRED:
+                FeatureFactory.getFactory(context)
+                        .getSlicesFeatureProvider()
+                        .getNewWifiCallingSliceHelper(context)
+                        .handleWifiCallingPreferenceChanged(intent);
                 break;
             default:
                 final String uriString = intent.getStringExtra(SliceBroadcastRelay.EXTRA_URI);
