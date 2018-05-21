@@ -23,7 +23,6 @@
     android:paddingStart="@dimen/preference_no_icon_padding_start"
     android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
     android:orientation="vertical"
-    android:background="@drawable/selectable_card_grey"
     android:selectable="false"
     style="@style/EntityHeader">
 
@@ -31,7 +30,7 @@
         android:id="@+id/usage_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="?android:attr/colorAccent"
+        android:textColor="?android:attr/textColorPrimary"
         android:text="@string/data_usage_title" />
 
     <com.android.settings.datausage.MeasurableLinearLayout
