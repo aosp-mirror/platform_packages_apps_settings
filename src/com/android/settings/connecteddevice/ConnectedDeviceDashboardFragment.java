@@ -74,25 +74,17 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
 
         private final Context mContext;
         private final SummaryLoader mSummaryLoader;
-        private final NfcPreferenceController mNfcPreferenceController;
 
         public SummaryProvider(Context context, SummaryLoader summaryLoader) {
             mContext = context;
             mSummaryLoader = summaryLoader;
-            mNfcPreferenceController = new NfcPreferenceController(context);
         }
-
 
         @Override
         public void setListening(boolean listening) {
             if (listening) {
-                if (mNfcPreferenceController.isAvailable()) {
-                    mSummaryLoader.setSummary(this,
-                            mContext.getString(R.string.connected_devices_dashboard_summary));
-                } else {
-                    mSummaryLoader.setSummary(this, mContext.getString(
-                            R.string.connected_devices_dashboard_no_nfc_summary));
-                }
+                mSummaryLoader.setSummary(this, mContext.getText(AdvancedConnectedDeviceController.
+                        getConnectedDevicesSummaryResourceId(mContext)));
             }
         }
     }
