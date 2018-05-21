@@ -29,6 +29,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.service.settings.suggestions.Suggestion;
@@ -47,6 +48,7 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowCardView;
 import com.android.settingslib.suggestions.SuggestionControllerMixin;
 import com.android.settingslib.utils.IconCache;
+import com.android.settingslib.Utils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -282,13 +284,13 @@ public class SuggestionAdapterTest {
         when(cache.getIcon(icon)).thenReturn(drawable);
         ReflectionHelpers.setField(mSuggestionAdapter, "mCache", cache);
         TypedArray typedArray = mock(TypedArray.class);
-        final int colorAccent = 1234;
+        final ColorStateList colorAccentState = Utils.getColorAccent(mContext);
         when(mActivity.obtainStyledAttributes(any())).thenReturn(typedArray);
-        when(typedArray.getColor(anyInt(), anyInt())).thenReturn(colorAccent);
+        when(typedArray.getColorStateList(anyInt())).thenReturn(colorAccentState);
 
         mSuggestionAdapter.onBindViewHolder(mSuggestionHolder, 0);
 
-        verify(drawable).setTint(colorAccent);
+        verify(drawable).setTintList(colorAccentState);
     }
 
     @Test

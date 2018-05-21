@@ -406,7 +406,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mRssiSignalLevel = signalLevel;
         Drawable wifiIcon = mIconInjector.getIcon(mRssiSignalLevel);
 
-        wifiIcon.setTint(Utils.getColorAccent(mContext));
+        wifiIcon.setTintList(Utils.getColorAccent(mContext));
         mEntityHeaderController.setIcon(wifiIcon).done(mFragment.getActivity(), true /* rebind */);
 
         Drawable wifiIconDark = wifiIcon.getConstantState().newDrawable().mutate();

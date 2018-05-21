@@ -75,7 +75,7 @@ public class SliceTester {
 
         final SliceItem colorItem = SliceQuery.findSubtype(slice, FORMAT_INT, SUBTYPE_COLOR);
         final int color = colorItem.getInt();
-        assertThat(color).isEqualTo(Utils.getColorAccent(context));
+        assertThat(color).isEqualTo(Utils.getColorAccentDefaultColor(context));
 
         final List<SliceAction> toggles = metadata.getToggles();
         assertThat(toggles).isEmpty();
@@ -105,7 +105,7 @@ public class SliceTester {
 
         final SliceItem colorItem = SliceQuery.findSubtype(slice, FORMAT_INT, SUBTYPE_COLOR);
         final int color = colorItem.getInt();
-        assertThat(color).isEqualTo(Utils.getColorAccent(context));
+        assertThat(color).isEqualTo(Utils.getColorAccentDefaultColor(context));
 
         final List<SliceAction> toggles = metadata.getToggles();
         assertThat(toggles).hasSize(1);
@@ -148,7 +148,7 @@ public class SliceTester {
 
         final SliceItem colorItem = SliceQuery.findSubtype(slice, FORMAT_INT, SUBTYPE_COLOR);
         final int color = colorItem.getInt();
-        assertThat(color).isEqualTo(Utils.getColorAccent(context));
+        assertThat(color).isEqualTo(Utils.getColorAccentDefaultColor(context));
 
         final IconCompat expectedToggleIcon = IconCompat.createWithResource(context,
                 sliceData.getIconResource());
@@ -185,7 +185,7 @@ public class SliceTester {
 
         final SliceItem colorItem = SliceQuery.findSubtype(slice, FORMAT_INT, SUBTYPE_COLOR);
         final int color = colorItem.getInt();
-        assertThat(color).isEqualTo(Utils.getColorAccent(context));
+        assertThat(color).isEqualTo(Utils.getColorAccentDefaultColor(context));
 
         final List<SliceAction> toggles = metadata.getToggles();
         assertThat(toggles).isEmpty();

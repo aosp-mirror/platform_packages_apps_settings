@@ -363,7 +363,7 @@ public class BatteryHistoryChart extends View {
         mThinLineWidth = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 2, getResources().getDisplayMetrics());
 
-        int accentColor = Utils.getColorAccent(mContext);
+        int accentColor = Utils.getColorAccentDefaultColor(mContext);
         mBatteryBackgroundPaint.setColor(accentColor);
         mBatteryBackgroundPaint.setStyle(Paint.Style.FILL);
         mBatteryGoodPaint.setARGB(128, 0, 128, 0);

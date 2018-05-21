@@ -122,7 +122,7 @@ public class DonutView extends View {
                 : Paint.BIDI_RTL;
 
         mTextPaint = new TextPaint();
-        mTextPaint.setColor(Utils.getColorAccent(getContext()));
+        mTextPaint.setColor(Utils.getColorAccentDefaultColor(getContext()));
         mTextPaint.setAntiAlias(true);
         mTextPaint.setTextSize(
                 resources.getDimension(R.dimen.storage_donut_view_label_text_size));
@@ -130,7 +130,7 @@ public class DonutView extends View {
         mTextPaint.setBidiFlags(bidiFlags);
 
         mBigNumberPaint = new TextPaint();
-        mBigNumberPaint.setColor(Utils.getColorAccent(getContext()));
+        mBigNumberPaint.setColor(Utils.getColorAccentDefaultColor(getContext()));
         mBigNumberPaint.setAntiAlias(true);
         mBigNumberPaint.setTextSize(
                 resources.getDimension(R.dimen.storage_donut_view_percent_text_size));
