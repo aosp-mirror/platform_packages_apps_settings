@@ -129,6 +129,7 @@ public class BackgroundActivityPreferenceController extends AbstractPreferenceCo
     @VisibleForTesting
     void showDialog(boolean restricted) {
         final AppInfo appInfo = new AppInfo.Builder()
+                .setUid(mUid)
                 .setPackageName(mTargetPackage)
                 .build();
         BatteryTip tip = restricted
