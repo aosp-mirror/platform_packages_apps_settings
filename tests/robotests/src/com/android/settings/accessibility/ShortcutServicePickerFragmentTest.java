@@ -20,7 +20,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.UserManager;
 
-import android.test.mock.MockContentResolver;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.PackageManagerWrapper;
@@ -59,7 +58,6 @@ public class ShortcutServicePickerFragmentTest {
     private PackageManagerWrapper mPackageManager;
 
     private ShortcutServicePickerFragment mFragment;
-    private MockContentResolver mContentResolver;
 
     @Before
     public void setUp() {

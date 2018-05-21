@@ -28,16 +28,12 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.PersistableBundle;
 import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
-import android.telephony.CarrierConfigManager;
-import android.telephony.SubscriptionManager;
-import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -65,7 +61,6 @@ public class Status extends SettingsPreferenceFragment implements Indexable {
     private static final String KEY_WIMAX_MAC_ADDRESS = "wimax_mac_address";
     private static final String KEY_SIM_STATUS = "sim_status";
     private static final String KEY_IMEI_INFO = "imei_info";
-    private static final String KEY_IMS_REGISTRATION_STATE = "ims_reg_state";
 
     // Broadcasts to listen to for connectivity changes.
     private static final String[] CONNECTIVITY_INTENTS = {
@@ -95,7 +90,6 @@ public class Status extends SettingsPreferenceFragment implements Indexable {
     private Preference mIpAddress;
     private Preference mWifiMacAddress;
     private Preference mWimaxMacAddress;
-    private Preference mImsStatus;
 
     private Handler mHandler;
 
@@ -174,7 +168,6 @@ public class Status extends SettingsPreferenceFragment implements Indexable {
         mWifiMacAddress = findPreference(KEY_WIFI_MAC_ADDRESS);
         mWimaxMacAddress = findPreference(KEY_WIMAX_MAC_ADDRESS);
         mIpAddress = findPreference(KEY_IP_ADDRESS);
-        mImsStatus = findPreference(KEY_IMS_REGISTRATION_STATE);
 
         mRes = getResources();
         mUnavailable = mRes.getString(R.string.status_unavailable);
@@ -282,31 +275,11 @@ public class Status extends SettingsPreferenceFragment implements Indexable {
         }
     }
 
-    private void setImsRegistrationStatus() {
-        CarrierConfigManager configManager = (CarrierConfigManager)
-                getSystemService(Context.CARRIER_CONFIG_SERVICE);
-        int subId = SubscriptionManager.getDefaultDataSubscriptionId();
-        PersistableBundle config = null;
-        if (configManager != null) {
-            config = configManager.getConfigForSubId(subId);
-        }
-        if (config != null && config.getBoolean(
-                CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL)) {
-            TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-            mImsStatus.setSummary((tm != null && tm.isImsRegistered(subId)) ?
-                    R.string.ims_reg_status_registered : R.string.ims_reg_status_not_registered);
-        } else {
-            removePreferenceFromScreen(KEY_IMS_REGISTRATION_STATE);
-            mImsStatus = null;
-        }
-    }
-
     void updateConnectivity() {
         setWimaxStatus();
         setWifiStatus();
         setBtStatus();
         setIpAddressStatus();
-        setImsRegistrationStatus();
     }
 
     void updateTimes() {

@@ -17,6 +17,7 @@ package com.android.settings.accounts;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.os.UserHandle;
 
 import com.android.settings.Utils;
 
@@ -33,5 +34,11 @@ public class AutoSyncWorkDataPreferenceController extends AutoSyncPersonalDataPr
     @Override
     public String getPreferenceKey() {
         return KEY_AUTO_SYNC_WORK_ACCOUNT;
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return mUserHandle != null && !mUserManager.isManagedProfile() && !mUserManager.isLinkedUser()
+                && mUserManager.getProfiles(UserHandle.myUserId()).size() > 1;
     }
 }
