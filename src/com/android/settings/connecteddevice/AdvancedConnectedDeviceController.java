@@ -16,7 +16,9 @@
 package com.android.settings.connecteddevice;
 
 import android.content.Context;
+import android.provider.Settings;
 import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.nfc.NfcPreferenceController;
@@ -25,6 +27,9 @@ import com.android.settings.nfc.NfcPreferenceController;
  * Controller that used to show which component is available
  */
 public class AdvancedConnectedDeviceController extends BasePreferenceController {
+
+    private static final String DRIVING_MODE_SETTINGS_ENABLED =
+            "gearhead:driving_mode_settings_enabled";
 
     public AdvancedConnectedDeviceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -47,10 +52,15 @@ public class AdvancedConnectedDeviceController extends BasePreferenceController 
     public static int getConnectedDevicesSummaryResourceId(Context context) {
         final NfcPreferenceController nfcPreferenceController =
                 new NfcPreferenceController(context);
-        final boolean isDrivingModeAvailable = false;
 
         return getConnectedDevicesSummaryResourceId(nfcPreferenceController,
-                isDrivingModeAvailable);
+                isDrivingModeAvailable(context));
+    }
+
+    @VisibleForTesting
+    static boolean isDrivingModeAvailable(Context context) {
+        return Settings.System.
+                getInt(context.getContentResolver(), DRIVING_MODE_SETTINGS_ENABLED, 0) == 1;
     }
 
     @VisibleForTesting
