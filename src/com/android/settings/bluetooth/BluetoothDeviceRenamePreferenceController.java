@@ -67,8 +67,9 @@ public class BluetoothDeviceRenamePreferenceController extends
     }
 
     @Override
-    protected void updateDeviceName(final Preference preference) {
+    protected void updatePreferenceState(final Preference preference) {
         preference.setSummary(getSummary());
+        preference.setVisible(mLocalAdapter != null && mLocalAdapter.isEnabled());
     }
 
     @Override

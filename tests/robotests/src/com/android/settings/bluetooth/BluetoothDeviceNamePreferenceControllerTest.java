@@ -68,7 +68,7 @@ public class BluetoothDeviceNamePreferenceControllerTest {
 
     @Test
     public void testUpdateDeviceName_showSummaryWithDeviceName() {
-        mController.updateDeviceName(mPreference);
+        mController.updatePreferenceState(mPreference);
 
         final CharSequence summary = mPreference.getSummary();
 
