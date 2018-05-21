@@ -37,7 +37,7 @@ public class DataSaverPreference extends Preference implements DataSaverBackend.
     @Override
     public void onDetached() {
         super.onDetached();
-        mDataSaverBackend.addListener(this);
+        mDataSaverBackend.remListener(this);
     }
 
     @Override

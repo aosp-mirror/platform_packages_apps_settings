@@ -66,12 +66,12 @@ public class PhysicalKeyboardPreferenceController extends AbstractPreferenceCont
 
     @Override
     public void onPause() {
-        mIm.registerInputDeviceListener(this, null);
+        mIm.unregisterInputDeviceListener(this);
     }
 
     @Override
     public void onResume() {
-        mIm.unregisterInputDeviceListener(this);
+        mIm.registerInputDeviceListener(this, null);
     }
 
     @Override

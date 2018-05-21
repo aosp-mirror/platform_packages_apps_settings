@@ -249,7 +249,9 @@ public class ApnEditor extends SettingsPreferenceFragment
                     finish();
                     return;
                 }
-                mUri = getContentResolver().insert(uri, new ContentValues());
+                ContentValues contentValues = new ContentValues();
+                contentValues.put(Telephony.Carriers.EDITED, Telephony.Carriers.USER_EDITED);
+                mUri = getContentResolver().insert(uri, contentValues);
             } else {
                 mUri = ContentUris.withAppendedId(Telephony.Carriers.CONTENT_URI,
                         icicle.getInt(SAVED_POS));
@@ -464,7 +466,9 @@ public class ApnEditor extends SettingsPreferenceFragment
         if (mUri == null && mNewApn) {
             // The URI could have been deleted when activity is paused,
             // therefore, it needs to be restored.
-            mUri = getContentResolver().insert(getIntent().getData(), new ContentValues());
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(Telephony.Carriers.EDITED, Telephony.Carriers.USER_EDITED);
+            mUri = getContentResolver().insert(getIntent().getData(), contentValues);
             if (mUri == null) {
                 Log.w(TAG, "Failed to insert new telephony provider into "
                         + getIntent().getData());
@@ -1043,6 +1047,8 @@ public class ApnEditor extends SettingsPreferenceFragment
                 mCarrierEnabled.isChecked() ? 1 : 0,
                 callUpdate,
                 CARRIER_ENABLED_INDEX);
+
+        values.put(Telephony.Carriers.EDITED, Telephony.Carriers.USER_EDITED);
 
         if (callUpdate) {
             getContentResolver().update(mUri, values, null, null);

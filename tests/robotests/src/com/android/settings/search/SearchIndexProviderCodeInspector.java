@@ -16,6 +16,8 @@
 
 package com.android.settings.search;
 
+import static com.google.common.truth.Truth.assertWithMessage;
+
 import android.util.ArraySet;
 import android.util.Log;
 
@@ -27,8 +29,6 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
-import static com.google.common.truth.Truth.assertWithMessage;
 
 /**
  * {@link CodeInspector} to ensure fragments implement search components correctly.
@@ -144,15 +144,6 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
         assertWithMessage(notInProviderRegistryError)
                 .that(notInSearchProviderRegistry)
                 .isEmpty();
-        assertNoObsoleteInGrandfatherList("grandfather_not_implementing_indexable",
-                notImplementingIndexableGrandfatherList);
-        assertNoObsoleteInGrandfatherList("grandfather_not_implementing_index_provider",
-                notImplementingIndexProviderGrandfatherList);
-        assertNoObsoleteInGrandfatherList("grandfather_not_in_search_index_provider_registry",
-                notInSearchIndexableRegistryGrandfatherList);
-        assertNoObsoleteInGrandfatherList(
-                "grandfather_not_sharing_pref_controllers_with_search_provider",
-                notSharingPrefControllersGrandfatherList);
     }
 
     private boolean hasSearchIndexProvider(Class clazz) {

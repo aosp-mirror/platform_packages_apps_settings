@@ -69,6 +69,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class DeviceAdminAdd extends Activity {
     static final String TAG = "DeviceAdminAdd";
@@ -145,18 +146,14 @@ public class DeviceAdminAdd extends Activity {
                 DevicePolicyManager.EXTRA_DEVICE_ADMIN);
         if (who == null) {
             String packageName = getIntent().getStringExtra(EXTRA_DEVICE_ADMIN_PACKAGE_NAME);
-            for (ComponentName component : mDPM.getActiveAdmins()) {
-                if (component.getPackageName().equals(packageName)) {
-                    who = component;
-                    mUninstalling = true;
-                    break;
-                }
-            }
-            if (who == null) {
+            Optional<ComponentName> installedAdmin = findAdminWithPackageName(packageName);
+            if (!installedAdmin.isPresent()) {
                 Log.w(TAG, "No component specified in " + action);
                 finish();
                 return;
             }
+            who = installedAdmin.get();
+            mUninstalling = true;
         }
 
         if (action != null && action.equals(DevicePolicyManager.ACTION_SET_PROFILE_OWNER)) {
@@ -690,6 +687,18 @@ public class DeviceAdminAdd extends Activity {
         UserInfo info = um.getUserInfo(
                 UserHandle.getUserId(adminInfo.getActivityInfo().applicationInfo.uid));
         return info != null ? info.isManagedProfile() : false;
+    }
+
+    /**
+     * @return an {@link Optional} containing the admin with a given package name, if it exists,
+     *         or {@link Optional#empty()} otherwise.
+     */
+    private Optional<ComponentName> findAdminWithPackageName(String packageName) {
+        List<ComponentName> admins = mDPM.getActiveAdmins();
+        if (admins == null) {
+            return Optional.empty();
+        }
+        return admins.stream().filter(i -> i.getPackageName().equals(packageName)).findAny();
     }
 
     private boolean isAdminUninstallable() {

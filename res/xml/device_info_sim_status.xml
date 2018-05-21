@@ -66,6 +66,13 @@
         android:summary="@string/device_info_not_available"
         android:persistent="false" />
 
+    <Preference android:key="ims_reg_state"
+        android:enabled="false"
+        android:shouldDisableView="false"
+        android:title="@string/ims_reg_title"
+        android:summary="@string/device_info_not_available"
+        android:persistent="false" />
+
     <Preference android:key="number"
         android:enabled="false"
         android:shouldDisableView="false"

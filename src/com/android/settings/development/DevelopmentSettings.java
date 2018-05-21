@@ -210,18 +210,26 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             "persist.bluetooth.disableabsvol";
     private static final String BLUETOOTH_AVRCP_VERSION_PROPERTY =
                                     "persist.bluetooth.avrcpversion";
-    private static final String BLUETOOTH_ENABLE_INBAND_RINGING_PROPERTY =
-                                    "persist.bluetooth.enableinbandringing";
+    private static final String BLUETOOTH_DISABLE_INBAND_RINGING_PROPERTY =
+                                    "persist.bluetooth.disableinbandringing";
     private static final String BLUETOOTH_BTSNOOP_ENABLE_PROPERTY =
                                     "persist.bluetooth.btsnoopenable";
+    private static final String BLUETOOTH_DISABLE_AVDTP_DELAY_REPORTS_PROPERTY =
+            "persist.bluetooth.disabledelayreports";
 
-    private static final String BLUETOOTH_ENABLE_INBAND_RINGING_KEY = "bluetooth_enable_inband_ringing";
+    static final String BLUETOOTH_MAX_CONNECTED_AUDIO_DEVICES_PROPERTY =
+            "persist.bluetooth.maxconnectedaudiodevices";
+
+    private static final String BLUETOOTH_DISABLE_INBAND_RINGING_KEY = "bluetooth_disable_inband_ringing";
+    private static final String BLUETOOTH_DISABLE_AVDTP_DELAY_REPORT_KEY = "bluetooth_disable_avdtp_delay_reports";
     private static final String BLUETOOTH_SELECT_AVRCP_VERSION_KEY = "bluetooth_select_avrcp_version";
     private static final String BLUETOOTH_SELECT_A2DP_CODEC_KEY = "bluetooth_select_a2dp_codec";
     private static final String BLUETOOTH_SELECT_A2DP_SAMPLE_RATE_KEY = "bluetooth_select_a2dp_sample_rate";
     private static final String BLUETOOTH_SELECT_A2DP_BITS_PER_SAMPLE_KEY = "bluetooth_select_a2dp_bits_per_sample";
     private static final String BLUETOOTH_SELECT_A2DP_CHANNEL_MODE_KEY = "bluetooth_select_a2dp_channel_mode";
     private static final String BLUETOOTH_SELECT_A2DP_LDAC_PLAYBACK_QUALITY_KEY = "bluetooth_select_a2dp_ldac_playback_quality";
+    private static final String BLUETOOTH_MAX_CONNECTED_AUDIO_DEVICES_KEY =
+            "bluetooth_max_connected_audio_devices";
 
     private static final String PRIVATE_DNS_PREF_KEY = "select_private_dns_configuration";
 
@@ -291,7 +299,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private SwitchPreference mTetheringHardwareOffload;
     private SwitchPreference mBluetoothShowDevicesWithoutNames;
     private SwitchPreference mBluetoothDisableAbsVolume;
-    private SwitchPreference mBluetoothEnableInbandRinging;
+    private SwitchPreference mBluetoothDisableInbandRinging;
+    private SwitchPreference mBluetoothDisableAvdtpDelayReport;
 
     private BluetoothA2dp mBluetoothA2dp;
     private final Object mBluetoothA2dpLock = new Object();
@@ -301,6 +310,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private ListPreference mBluetoothSelectA2dpBitsPerSample;
     private ListPreference mBluetoothSelectA2dpChannelMode;
     private ListPreference mBluetoothSelectA2dpLdacPlaybackQuality;
+    private ListPreference mBluetoothSelectMaxConnectedAudioDevices;
 
     private SwitchPreference mOtaDisableAutomaticUpdate;
     private SwitchPreference mWifiAllowScansWithTraffic;
@@ -396,7 +406,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mBackupManager = IBackupManager.Stub.asInterface(
                 ServiceManager.getService(Context.BACKUP_SERVICE));
         mWebViewUpdateService = WebViewFactory.getUpdateService();
-        mOemLockManager = (OemLockManager) getSystemService(Context.OEM_LOCK_SERVICE);
+        if (showEnableOemUnlockPreference(getContext())) {
+            mOemLockManager = (OemLockManager) getSystemService(Context.OEM_LOCK_SERVICE);
+        }
         mTelephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 
         mUm = (UserManager) getSystemService(Context.USER_SERVICE);
@@ -513,11 +525,12 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mBluetoothShowDevicesWithoutNames =
                 findAndInitSwitchPref(BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_KEY);
         mBluetoothDisableAbsVolume = findAndInitSwitchPref(BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_KEY);
-        mBluetoothEnableInbandRinging = findAndInitSwitchPref(BLUETOOTH_ENABLE_INBAND_RINGING_KEY);
+        mBluetoothDisableInbandRinging = findAndInitSwitchPref(BLUETOOTH_DISABLE_INBAND_RINGING_KEY);
         if (!BluetoothHeadset.isInbandRingingSupported(getContext())) {
-            removePreference(mBluetoothEnableInbandRinging);
-            mBluetoothEnableInbandRinging = null;
+            removePreference(mBluetoothDisableInbandRinging);
+            mBluetoothDisableInbandRinging = null;
         }
+        mBluetoothDisableAvdtpDelayReport = findAndInitSwitchPref(BLUETOOTH_DISABLE_AVDTP_DELAY_REPORT_KEY);
 
         mBluetoothSelectAvrcpVersion = addListPreference(BLUETOOTH_SELECT_AVRCP_VERSION_KEY);
         mBluetoothSelectA2dpCodec = addListPreference(BLUETOOTH_SELECT_A2DP_CODEC_KEY);
@@ -525,6 +538,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mBluetoothSelectA2dpBitsPerSample = addListPreference(BLUETOOTH_SELECT_A2DP_BITS_PER_SAMPLE_KEY);
         mBluetoothSelectA2dpChannelMode = addListPreference(BLUETOOTH_SELECT_A2DP_CHANNEL_MODE_KEY);
         mBluetoothSelectA2dpLdacPlaybackQuality = addListPreference(BLUETOOTH_SELECT_A2DP_LDAC_PLAYBACK_QUALITY_KEY);
+        mBluetoothSelectMaxConnectedAudioDevices = addListPreference(BLUETOOTH_MAX_CONNECTED_AUDIO_DEVICES_KEY);
         initBluetoothConfigurationValues();
 
         updatePrivateDnsSummary();
@@ -858,7 +872,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         }
         updateBluetoothShowDevicesWithoutUserFriendlyNameOptions();
         updateBluetoothDisableAbsVolumeOptions();
-        updateBluetoothEnableInbandRingingOptions();
+        updateBluetoothDisableInbandRingingOptions();
+        updateBluetoothDisableAvdtpDelayReportOptions();
         updateBluetoothA2dpConfigurationValues();
         updatePrivateDnsSummary();
     }
@@ -871,10 +886,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 cb.setChecked(false);
                 onPreferenceTreeClick(cb);
             }
-        }
-        if (mBluetoothEnableInbandRinging != null) {
-            mBluetoothEnableInbandRinging.setChecked(true);
-            onPreferenceTreeClick(mBluetoothEnableInbandRinging);
         }
         mBugReportInPowerController.resetPreference();
         mEnableAdbController.resetPreference();
@@ -890,6 +901,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         }
         writeOverlayDisplayDevicesOptions(null);
         writeAppProcessLimitOptions(null);
+        writeBluetoothMaxConnectedAudioDevices("");
         mHaveDebugSettings = false;
         updateAllOptions();
         mDontPokeProperties = false;
@@ -1063,7 +1075,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     }
 
     private static boolean showEnableOemUnlockPreference(Context context) {
-        return context.getSystemService(Context.OEM_LOCK_SERVICE) != null;
+        return ServiceManager.getService(Context.OEM_LOCK_SERVICE) != null;
     }
 
     /**
@@ -1523,18 +1535,28 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 mBluetoothDisableAbsVolume.isChecked() ? "true" : "false");
     }
 
-    private void updateBluetoothEnableInbandRingingOptions() {
-        if (mBluetoothEnableInbandRinging != null) {
-            updateSwitchPreference(mBluetoothEnableInbandRinging,
-                SystemProperties.getBoolean(BLUETOOTH_ENABLE_INBAND_RINGING_PROPERTY, true));
+    private void updateBluetoothDisableInbandRingingOptions() {
+        if (mBluetoothDisableInbandRinging != null) {
+            updateSwitchPreference(mBluetoothDisableInbandRinging,
+                SystemProperties.getBoolean(BLUETOOTH_DISABLE_INBAND_RINGING_PROPERTY, false));
         }
     }
 
-    private void writeBluetoothEnableInbandRingingOptions() {
-        if (mBluetoothEnableInbandRinging != null) {
-            SystemProperties.set(BLUETOOTH_ENABLE_INBAND_RINGING_PROPERTY,
-                mBluetoothEnableInbandRinging.isChecked() ? "true" : "false");
+    private void writeBluetoothDisableInbandRingingOptions() {
+        if (mBluetoothDisableInbandRinging != null) {
+            SystemProperties.set(BLUETOOTH_DISABLE_INBAND_RINGING_PROPERTY,
+                mBluetoothDisableInbandRinging.isChecked() ? "true" : "false");
         }
+    }
+
+    private void updateBluetoothDisableAvdtpDelayReportOptions() {
+        updateSwitchPreference(mBluetoothDisableAvdtpDelayReport,
+                SystemProperties.getBoolean(BLUETOOTH_DISABLE_AVDTP_DELAY_REPORTS_PROPERTY, false));
+    }
+
+    private void writeBluetoothDisableAvdtpDelayReportOptions() {
+        SystemProperties.set(BLUETOOTH_DISABLE_AVDTP_DELAY_REPORTS_PROPERTY,
+                mBluetoothDisableAvdtpDelayReport.isChecked() ? "true" : "false");
     }
 
     private void updateMobileDataAlwaysOnOptions() {
@@ -1862,6 +1884,45 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         index = 3;
         mBluetoothSelectA2dpLdacPlaybackQuality.setValue(values[index]);
         mBluetoothSelectA2dpLdacPlaybackQuality.setSummary(summaries[index]);
+
+        // Init the maximum connected devices
+        initBluetoothMaxConnectedAudioDevicesPreference();
+        updateBluetoothMaxConnectedAudioDevicesPreference();
+    }
+
+    private void initBluetoothMaxConnectedAudioDevicesPreference() {
+        int defaultMaxConnectedAudioDevices = getResources().getInteger(
+                com.android.internal.R.integer.config_bluetooth_max_connected_audio_devices);
+        final CharSequence[] entries = mBluetoothSelectMaxConnectedAudioDevices.getEntries();
+        entries[0] = String.format(entries[0].toString(), defaultMaxConnectedAudioDevices);
+        mBluetoothSelectMaxConnectedAudioDevices.setEntries(entries);
+    }
+
+    private void updateBluetoothMaxConnectedAudioDevicesPreference() {
+        final CharSequence[] entries = mBluetoothSelectMaxConnectedAudioDevices.getEntries();
+        final String currentValue =
+                SystemProperties.get(BLUETOOTH_MAX_CONNECTED_AUDIO_DEVICES_PROPERTY);
+        int index = 0;
+        if (!currentValue.isEmpty()) {
+            index = mBluetoothSelectMaxConnectedAudioDevices.findIndexOfValue(currentValue);
+            if (index < 0) {
+                // Reset property value when value is illegal
+                SystemProperties.set(BLUETOOTH_MAX_CONNECTED_AUDIO_DEVICES_PROPERTY, "");
+                index = 0;
+            }
+        }
+        mBluetoothSelectMaxConnectedAudioDevices.setValueIndex(index);
+        mBluetoothSelectMaxConnectedAudioDevices.setSummary(entries[index]);
+    }
+
+    private void writeBluetoothMaxConnectedAudioDevices(Object newValue) {
+        String newValueString = newValue.toString();
+        if (mBluetoothSelectMaxConnectedAudioDevices.findIndexOfValue(newValueString) <= 0) {
+            // Reset property value when default is chosen or when value is illegal
+            newValueString = "";
+        }
+        SystemProperties.set(BLUETOOTH_MAX_CONNECTED_AUDIO_DEVICES_PROPERTY, newValueString);
+        updateBluetoothMaxConnectedAudioDevicesPreference();
     }
 
     private void writeBluetoothAvrcpVersion(Object newValue) {
@@ -1885,7 +1946,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
         synchronized (mBluetoothA2dpLock) {
             if (mBluetoothA2dp != null) {
-                codecStatus = mBluetoothA2dp.getCodecStatus();
+                codecStatus = mBluetoothA2dp.getCodecStatus(null);      // Use current active device
                 if (codecStatus != null) {
                     codecConfig = codecStatus.getCodecConfig();
                     codecsLocalCapabilities = codecStatus.getCodecsLocalCapabilities();
@@ -2104,14 +2165,14 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         case 6:
         synchronized (mBluetoothA2dpLock) {
             if (mBluetoothA2dp != null) {
-                mBluetoothA2dp.enableOptionalCodecs();
+                mBluetoothA2dp.enableOptionalCodecs(null); // Use current active device
             }
         }
         return;
         case 7:
         synchronized (mBluetoothA2dpLock) {
             if (mBluetoothA2dp != null) {
-                mBluetoothA2dp.disableOptionalCodecs();
+                mBluetoothA2dp.disableOptionalCodecs(null); // Use current active device
             }
         }
         return;
@@ -2234,7 +2295,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
         synchronized (mBluetoothA2dpLock) {
             if (mBluetoothA2dp != null) {
-                mBluetoothA2dp.setCodecConfigPreference(codecConfig);
+                // Use current active device
+                mBluetoothA2dp.setCodecConfigPreference(null, codecConfig);
             }
         }
     }
@@ -2592,8 +2654,10 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             writeBluetoothShowDevicesWithoutUserFriendlyNameOptions();
         } else if (preference == mBluetoothDisableAbsVolume) {
             writeBluetoothDisableAbsVolumeOptions();
-        } else if (preference == mBluetoothEnableInbandRinging) {
-            writeBluetoothEnableInbandRingingOptions();
+        } else if (preference == mBluetoothDisableInbandRinging) {
+            writeBluetoothDisableInbandRingingOptions();
+        } else if (preference == mBluetoothDisableAvdtpDelayReport) {
+            writeBluetoothDisableAvdtpDelayReportOptions();
         } else if (SHORTCUT_MANAGER_RESET_KEY.equals(preference.getKey())) {
             resetShortcutManagerThrottling();
         } else {
@@ -2624,6 +2688,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                    (preference == mBluetoothSelectA2dpChannelMode) ||
                    (preference == mBluetoothSelectA2dpLdacPlaybackQuality)) {
             writeBluetoothConfigurationOption(preference, newValue);
+            return true;
+        } else if (preference == mBluetoothSelectMaxConnectedAudioDevices) {
+            writeBluetoothMaxConnectedAudioDevices(newValue);
             return true;
         } else if (preference == mLogdSize) {
             writeLogdSizeOption(newValue);
