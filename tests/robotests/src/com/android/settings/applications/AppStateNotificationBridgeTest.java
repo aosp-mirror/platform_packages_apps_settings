@@ -36,17 +36,21 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.usage.IUsageStatsManager;
 import android.app.usage.UsageEvents;
 import android.app.usage.UsageEvents.Event;
-import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.os.Looper;
 import android.os.Parcel;
+import android.os.RemoteException;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.view.ViewGroup;
 import android.widget.Switch;
 
@@ -79,7 +83,9 @@ public class AppStateNotificationBridgeTest {
     @Mock
     private ApplicationsState mState;
     @Mock
-    private UsageStatsManager mUsageStats;
+    private IUsageStatsManager mUsageStats;
+    @Mock
+    private UserManager mUserManager;
     @Mock
     private NotificationBackend mBackend;
     private Context mContext;
@@ -92,10 +98,12 @@ public class AppStateNotificationBridgeTest {
         when(mState.getBackgroundLooper()).thenReturn(mock(Looper.class));
         when(mBackend.getNotificationsBanned(anyString(), anyInt())).thenReturn(true);
         when(mBackend.isSystemApp(any(), any())).thenReturn(true);
+        // most tests assume no work profile
+        when(mUserManager.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[]{});
         mContext = RuntimeEnvironment.application.getApplicationContext();
 
         mBridge = new AppStateNotificationBridge(mContext, mState,
-                mock(AppStateBaseBridge.Callback.class), mUsageStats, mBackend);
+                mock(AppStateBaseBridge.Callback.class), mUsageStats, mUserManager, mBackend);
     }
 
     private AppEntry getMockAppEntry(String pkg) {
@@ -115,14 +123,15 @@ public class AppStateNotificationBridgeTest {
     }
 
     @Test
-    public void testGetAggregatedUsageEvents_noEvents() {
-        when(mUsageStats.queryEvents(anyLong(), anyLong())).thenReturn(mock(UsageEvents.class));
+    public void testGetAggregatedUsageEvents_noEvents() throws Exception {
+        when(mUsageStats.queryEventsForUser(anyLong(), anyLong(), anyInt(), anyString()))
+                .thenReturn(mock(UsageEvents.class));
 
         assertThat(mBridge.getAggregatedUsageEvents()).isEmpty();
     }
 
     @Test
-    public void testGetAggregatedUsageEvents_onlyNotificationEvents() {
+    public void testGetAggregatedUsageEvents_onlyNotificationEvents() throws Exception {
         List<Event> events = new ArrayList<>();
         Event good = new Event();
         good.mEventType = Event.NOTIFICATION_INTERRUPTION;
@@ -136,14 +145,15 @@ public class AppStateNotificationBridgeTest {
         events.add(bad);
 
         UsageEvents usageEvents = getUsageEvents(events);
-        when(mUsageStats.queryEvents(anyLong(), anyLong())).thenReturn(usageEvents);
+        when(mUsageStats.queryEventsForUser(anyLong(), anyLong(), anyInt(), anyString()))
+                .thenReturn(usageEvents);
 
         Map<String, NotificationsSentState> map = mBridge.getAggregatedUsageEvents();
-        assertThat(map.get(PKG1).sentCount).isEqualTo(1);
+        assertThat(map.get(mBridge.getKey(0, PKG1)).sentCount).isEqualTo(1);
     }
 
     @Test
-    public void testGetAggregatedUsageEvents_multipleEventsAgg() {
+    public void testGetAggregatedUsageEvents_multipleEventsAgg() throws Exception {
         List<Event> events = new ArrayList<>();
         Event good = new Event();
         good.mEventType = Event.NOTIFICATION_INTERRUPTION;
@@ -157,15 +167,16 @@ public class AppStateNotificationBridgeTest {
         events.add(good1);
 
         UsageEvents usageEvents = getUsageEvents(events);
-        when(mUsageStats.queryEvents(anyLong(), anyLong())).thenReturn(usageEvents);
+        when(mUsageStats.queryEventsForUser(anyLong(), anyLong(), anyInt(), anyString()))
+                .thenReturn(usageEvents);
 
         Map<String, NotificationsSentState> map  = mBridge.getAggregatedUsageEvents();
-        assertThat(map.get(PKG1).sentCount).isEqualTo(2);
-        assertThat(map.get(PKG1).lastSent).isEqualTo(6);
+        assertThat(map.get(mBridge.getKey(0, PKG1)).sentCount).isEqualTo(2);
+        assertThat(map.get(mBridge.getKey(0, PKG1)).lastSent).isEqualTo(6);
     }
 
     @Test
-    public void testGetAggregatedUsageEvents_multiplePkgs() {
+    public void testGetAggregatedUsageEvents_multiplePkgs() throws Exception {
         List<Event> events = new ArrayList<>();
         Event good = new Event();
         good.mEventType = Event.NOTIFICATION_INTERRUPTION;
@@ -179,19 +190,21 @@ public class AppStateNotificationBridgeTest {
         events.add(good1);
 
         UsageEvents usageEvents = getUsageEvents(events);
-        when(mUsageStats.queryEvents(anyLong(), anyLong())).thenReturn(usageEvents);
+        when(mUsageStats.queryEventsForUser(anyLong(), anyLong(), anyInt(), anyString()))
+                .thenReturn(usageEvents);
 
         Map<String, NotificationsSentState> map
                 = mBridge.getAggregatedUsageEvents();
-        assertThat(map.get(PKG1).sentCount).isEqualTo(1);
-        assertThat(map.get(PKG2).sentCount).isEqualTo(1);
-        assertThat(map.get(PKG1).lastSent).isEqualTo(6);
-        assertThat(map.get(PKG2).lastSent).isEqualTo(1);
+        assertThat(map.get(mBridge.getKey(0, PKG1)).sentCount).isEqualTo(1);
+        assertThat(map.get(mBridge.getKey(0, PKG2)).sentCount).isEqualTo(1);
+        assertThat(map.get(mBridge.getKey(0, PKG1)).lastSent).isEqualTo(6);
+        assertThat(map.get(mBridge.getKey(0, PKG2)).lastSent).isEqualTo(1);
     }
 
     @Test
-    public void testLoadAllExtraInfo_noEvents() {
-        when(mUsageStats.queryEvents(anyLong(), anyLong())).thenReturn(mock(UsageEvents.class));
+    public void testLoadAllExtraInfo_noEvents() throws RemoteException {
+        when(mUsageStats.queryEventsForUser(anyLong(), anyLong(), anyInt(), anyString()))
+                .thenReturn(mock(UsageEvents.class));
         ArrayList<AppEntry> apps = new ArrayList<>();
         apps.add(getMockAppEntry(PKG1));
         when(mSession.getAllApps()).thenReturn(apps);
@@ -201,7 +214,7 @@ public class AppStateNotificationBridgeTest {
     }
 
     @Test
-    public void testLoadAllExtraInfo_multipleEventsAgg() {
+    public void testLoadAllExtraInfo_multipleEventsAgg() throws RemoteException {
         List<Event> events = new ArrayList<>();
         for (int i = 0; i < 7; i++) {
             Event good = new Event();
@@ -212,7 +225,8 @@ public class AppStateNotificationBridgeTest {
         }
 
         UsageEvents usageEvents = getUsageEvents(events);
-        when(mUsageStats.queryEvents(anyLong(), anyLong())).thenReturn(usageEvents);
+        when(mUsageStats.queryEventsForUser(anyLong(), anyLong(), anyInt(), anyString()))
+                .thenReturn(usageEvents);
 
         ArrayList<AppEntry> apps = new ArrayList<>();
         apps.add(getMockAppEntry(PKG1));
@@ -229,7 +243,7 @@ public class AppStateNotificationBridgeTest {
     }
 
     @Test
-    public void testLoadAllExtraInfo_multiplePkgs() {
+    public void testLoadAllExtraInfo_multiplePkgs() throws RemoteException {
         List<Event> events = new ArrayList<>();
         for (int i = 0; i < 8; i++) {
             Event good = new Event();
@@ -245,7 +259,8 @@ public class AppStateNotificationBridgeTest {
         events.add(good1);
 
         UsageEvents usageEvents = getUsageEvents(events);
-        when(mUsageStats.queryEvents(anyLong(), anyLong())).thenReturn(usageEvents);
+        when(mUsageStats.queryEventsForUser(anyLong(), anyLong(), anyInt(), anyString()))
+                .thenReturn(usageEvents);
 
         ArrayList<AppEntry> apps = new ArrayList<>();
         apps.add(getMockAppEntry(PKG1));
@@ -265,8 +280,66 @@ public class AppStateNotificationBridgeTest {
     }
 
     @Test
-    public void testUpdateExtraInfo_noEvents() {
-        when(mUsageStats.queryEvents(anyLong(), anyLong())).thenReturn(mock(UsageEvents.class));
+    public void testLoadAllExtraInfo_multipleUsers() throws RemoteException {
+        // has work profile
+        when(mUserManager.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[]{1});
+        mBridge = new AppStateNotificationBridge(mContext, mState,
+                mock(AppStateBaseBridge.Callback.class), mUsageStats, mUserManager, mBackend);
+
+        List<Event> eventsProfileOwner = new ArrayList<>();
+        for (int i = 0; i < 8; i++) {
+            Event good = new Event();
+            good.mEventType = Event.NOTIFICATION_INTERRUPTION;
+            good.mPackage = PKG1;
+            good.mTimeStamp = i;
+            eventsProfileOwner.add(good);
+        }
+
+        List<Event> eventsProfile = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            Event good = new Event();
+            good.mEventType = Event.NOTIFICATION_INTERRUPTION;
+            good.mPackage = PKG1;
+            good.mTimeStamp = i;
+            eventsProfile.add(good);
+        }
+
+        UsageEvents usageEventsOwner = getUsageEvents(eventsProfileOwner);
+        when(mUsageStats.queryEventsForUser(anyLong(), anyLong(), eq(0), anyString()))
+                .thenReturn(usageEventsOwner);
+
+        UsageEvents usageEventsProfile = getUsageEvents(eventsProfile);
+        when(mUsageStats.queryEventsForUser(anyLong(), anyLong(), eq(1), anyString()))
+                .thenReturn(usageEventsProfile);
+
+        ArrayList<AppEntry> apps = new ArrayList<>();
+        AppEntry owner = getMockAppEntry(PKG1);
+        owner.info.uid = 1;
+        apps.add(owner);
+
+        AppEntry profile = getMockAppEntry(PKG1);
+        profile.info.uid = UserHandle.PER_USER_RANGE + 1;
+        apps.add(profile);
+        when(mSession.getAllApps()).thenReturn(apps);
+
+        mBridge.loadAllExtraInfo();
+
+        assertThat(((NotificationsSentState) apps.get(0).extraInfo).sentCount).isEqualTo(8);
+        assertThat(((NotificationsSentState) apps.get(0).extraInfo).lastSent).isEqualTo(7);
+        assertThat(((NotificationsSentState) apps.get(0).extraInfo).avgSentWeekly).isEqualTo(0);
+        assertThat(((NotificationsSentState) apps.get(0).extraInfo).avgSentDaily).isEqualTo(1);
+
+        assertThat(((NotificationsSentState) apps.get(1).extraInfo).sentCount).isEqualTo(4);
+        assertThat(((NotificationsSentState) apps.get(1).extraInfo).lastSent).isEqualTo(3);
+        assertThat(((NotificationsSentState) apps.get(1).extraInfo).avgSentWeekly).isEqualTo(4);
+        assertThat(((NotificationsSentState) apps.get(1).extraInfo).avgSentDaily).isEqualTo(1);
+    }
+
+    @Test
+    public void testUpdateExtraInfo_noEvents() throws RemoteException {
+        when(mUsageStats.queryEventsForPackageForUser(
+                anyLong(), anyLong(), anyInt(), anyString(), anyString()))
+                .thenReturn(mock(UsageEvents.class));
         AppEntry entry = getMockAppEntry(PKG1);
 
         mBridge.updateExtraInfo(entry, "", 0);
@@ -274,7 +347,7 @@ public class AppStateNotificationBridgeTest {
     }
 
     @Test
-    public void testUpdateExtraInfo_multipleEventsAgg() {
+    public void testUpdateExtraInfo_multipleEventsAgg() throws RemoteException {
         List<Event> events = new ArrayList<>();
         for (int i = 0; i < 13; i++) {
             Event good = new Event();
@@ -285,7 +358,8 @@ public class AppStateNotificationBridgeTest {
         }
 
         UsageEvents usageEvents = getUsageEvents(events);
-        when(mUsageStats.queryEvents(anyLong(), anyLong())).thenReturn(usageEvents);
+        when(mUsageStats.queryEventsForPackageForUser(
+                anyLong(), anyLong(), anyInt(), anyString(), anyString())).thenReturn(usageEvents);
 
         AppEntry entry = getMockAppEntry(PKG1);
         mBridge.updateExtraInfo(entry, "", 0);
