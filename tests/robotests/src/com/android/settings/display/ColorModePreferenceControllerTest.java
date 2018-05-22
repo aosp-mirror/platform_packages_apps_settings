@@ -55,6 +55,16 @@ public class ColorModePreferenceControllerTest {
     }
 
     @Test
+    public void updateState_colorModeAutomatic_shouldSetSummaryToAutomatic() {
+        when(mColorDisplayController.getColorMode())
+            .thenReturn(ColorDisplayController.COLOR_MODE_AUTOMATIC);
+
+        mController.updateState(mPreference);
+
+        verify(mPreference).setSummary(mContext.getString(R.string.color_mode_option_automatic));
+    }
+
+    @Test
     public void updateState_colorModeSaturated_shouldSetSummaryToSaturated() {
         when(mColorDisplayController.getColorMode())
             .thenReturn(ColorDisplayController.COLOR_MODE_SATURATED);

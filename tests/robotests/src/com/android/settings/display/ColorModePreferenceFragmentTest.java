@@ -34,6 +34,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settingslib.widget.CandidateInfo;
 
 import org.junit.Before;
@@ -43,11 +44,13 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(shadows = SettingsShadowResources.class)
 public class ColorModePreferenceFragmentTest {
 
     private ColorModePreferenceFragment mFragment;
@@ -73,8 +76,64 @@ public class ColorModePreferenceFragmentTest {
     }
 
     @Test
-    public void getCandidates() {
+    public void getCandidates_all() {
         when(mFragment.getContext()).thenReturn(RuntimeEnvironment.application);
+        SettingsShadowResources.overrideResource(
+                com.android.internal.R.array.config_availableColorModes, new int[]{
+                    ColorDisplayController.COLOR_MODE_NATURAL,
+                    ColorDisplayController.COLOR_MODE_BOOSTED,
+                    ColorDisplayController.COLOR_MODE_SATURATED,
+                    ColorDisplayController.COLOR_MODE_AUTOMATIC
+                });
+        List<? extends CandidateInfo> candidates = mFragment.getCandidates();
+
+        assertThat(candidates.size()).isEqualTo(4);
+        assertThat(candidates.get(0).getKey())
+                .isEqualTo(ColorModePreferenceFragment.KEY_COLOR_MODE_NATURAL);
+        assertThat(candidates.get(1).getKey())
+                .isEqualTo(ColorModePreferenceFragment.KEY_COLOR_MODE_BOOSTED);
+        assertThat(candidates.get(2).getKey())
+                .isEqualTo(ColorModePreferenceFragment.KEY_COLOR_MODE_SATURATED);
+        assertThat(candidates.get(3).getKey())
+                .isEqualTo(ColorModePreferenceFragment.KEY_COLOR_MODE_AUTOMATIC);
+    }
+
+    @Test
+    public void getCandidates_none() {
+        when(mFragment.getContext()).thenReturn(RuntimeEnvironment.application);
+        SettingsShadowResources.overrideResource(
+                com.android.internal.R.array.config_availableColorModes, null);
+        List<? extends CandidateInfo> candidates = mFragment.getCandidates();
+
+        assertThat(candidates.size()).isEqualTo(0);
+    }
+
+    @Test
+    public void getCandidates_withAutomatic() {
+        when(mFragment.getContext()).thenReturn(RuntimeEnvironment.application);
+        SettingsShadowResources.overrideResource(
+                com.android.internal.R.array.config_availableColorModes, new int[]{
+                    ColorDisplayController.COLOR_MODE_NATURAL,
+                    ColorDisplayController.COLOR_MODE_AUTOMATIC
+                });
+        List<? extends CandidateInfo> candidates = mFragment.getCandidates();
+
+        assertThat(candidates.size()).isEqualTo(2);
+        assertThat(candidates.get(0).getKey())
+                .isEqualTo(ColorModePreferenceFragment.KEY_COLOR_MODE_NATURAL);
+        assertThat(candidates.get(1).getKey())
+                .isEqualTo(ColorModePreferenceFragment.KEY_COLOR_MODE_AUTOMATIC);
+    }
+
+    @Test
+    public void getCandidates_withoutAutomatic() {
+        when(mFragment.getContext()).thenReturn(RuntimeEnvironment.application);
+        SettingsShadowResources.overrideResource(
+                com.android.internal.R.array.config_availableColorModes, new int[]{
+                    ColorDisplayController.COLOR_MODE_NATURAL,
+                    ColorDisplayController.COLOR_MODE_BOOSTED,
+                    ColorDisplayController.COLOR_MODE_SATURATED,
+                });
         List<? extends CandidateInfo> candidates = mFragment.getCandidates();
 
         assertThat(candidates.size()).isEqualTo(3);
@@ -114,6 +173,15 @@ public class ColorModePreferenceFragmentTest {
     }
 
     @Test
+    public void getKey_automatic() {
+        when(mController.getColorMode())
+            .thenReturn(ColorDisplayController.COLOR_MODE_AUTOMATIC);
+
+        assertThat(mFragment.getDefaultKey())
+            .isEqualTo(ColorModePreferenceFragment.KEY_COLOR_MODE_AUTOMATIC);
+    }
+
+    @Test
     public void setKey_natural() {
         mFragment.setDefaultKey(ColorModePreferenceFragment.KEY_COLOR_MODE_NATURAL);
         verify(mController).setColorMode(ColorDisplayController.COLOR_MODE_NATURAL);
@@ -129,6 +197,12 @@ public class ColorModePreferenceFragmentTest {
     public void setKey_saturated() {
         mFragment.setDefaultKey(ColorModePreferenceFragment.KEY_COLOR_MODE_SATURATED);
         verify(mController).setColorMode(ColorDisplayController.COLOR_MODE_SATURATED);
+    }
+
+    @Test
+    public void setKey_automatic() {
+        mFragment.setDefaultKey(ColorModePreferenceFragment.KEY_COLOR_MODE_AUTOMATIC);
+        verify(mController).setColorMode(ColorDisplayController.COLOR_MODE_AUTOMATIC);
     }
 
     @Test
