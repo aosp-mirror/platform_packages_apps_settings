@@ -70,6 +70,11 @@ public class SlicesDatabaseAccessorTest {
         mAccessor = spy(new SlicesDatabaseAccessor(mContext));
         mDb = SlicesDatabaseHelper.getInstance(mContext).getWritableDatabase();
         SlicesDatabaseHelper.getInstance(mContext).setIndexedState();
+
+        // Register the fake a11y Service
+        ShadowAccessibilityManager shadowAccessibilityManager = Shadow.extract(
+                RuntimeEnvironment.application.getSystemService(AccessibilityManager.class));
+        shadowAccessibilityManager.setInstalledAccessibilityServiceList(new ArrayList<>());
     }
 
     @After
@@ -173,10 +178,6 @@ public class SlicesDatabaseAccessorTest {
     public void getSliceKeys_indexesDatabase() {
         // Force new indexing
         Locale.setDefault(new Locale("ca"));
-        // Register the fake a11y Service
-        ShadowAccessibilityManager shadowAccessibilityManager = Shadow.extract(
-                RuntimeEnvironment.application.getSystemService(AccessibilityManager.class));
-        shadowAccessibilityManager.setInstalledAccessibilityServiceList(new ArrayList<>());
         final SearchFeatureProvider provider = new SearchFeatureProviderImpl();
         final SlicesFeatureProvider sliceProvider = spy(new SlicesFeatureProviderImpl());
         final FakeFeatureFactory factory = FakeFeatureFactory.setupForTest();

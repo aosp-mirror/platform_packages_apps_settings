@@ -24,6 +24,8 @@ import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
 import android.provider.Settings;
+import android.text.TextUtils;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -61,6 +63,11 @@ public class VibrateWhenRingPreferenceController extends TogglePreferenceControl
     @AvailabilityStatus
     public int getAvailabilityStatus() {
         return Utils.isVoiceCapable(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public boolean isSliceable() {
+        return TextUtils.equals(getPreferenceKey(), "vibrate_when_ringing");
     }
 
     @Override

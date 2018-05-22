@@ -16,9 +16,12 @@
 
 package com.android.settings.display;
 
-import android.content.Context;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+
+import android.content.Context;
+import android.text.TextUtils;
+
 import com.android.internal.app.ColorDisplayController;
 import com.android.settings.core.SliderPreferenceController;
 import com.android.settings.widget.SeekBarPreference;
@@ -40,6 +43,11 @@ public class NightDisplayIntensityPreferenceController extends SliderPreferenceC
             return DISABLED_DEPENDENT_SETTING;
         }
         return AVAILABLE;
+    }
+
+    @Override
+    public boolean isSliceable() {
+        return TextUtils.equals(getPreferenceKey(), "night_display_temperature");
     }
 
     @Override

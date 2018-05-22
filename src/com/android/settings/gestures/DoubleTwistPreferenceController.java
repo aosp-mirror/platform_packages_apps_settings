@@ -72,6 +72,11 @@ public class DoubleTwistPreferenceController extends GesturePreferenceController
     }
 
     @Override
+    public boolean isSliceable() {
+        return TextUtils.equals(getPreferenceKey(), "gesture_double_twist");
+    }
+
+    @Override
     protected String getVideoPrefKey() {
         return PREF_KEY_VIDEO;
     }

@@ -170,4 +170,18 @@ public class PickupGesturePreferenceControllerTest {
 
         assertThat(availabilityStatus).isEqualTo(AVAILABLE);
     }
+
+    @Test
+    public void isSliceableCorrectKey_returnsTrue() {
+        final PickupGesturePreferenceController controller =
+                new PickupGesturePreferenceController(mContext,"gesture_pick_up");
+        assertThat(controller.isSliceable()).isTrue();
+    }
+
+    @Test
+    public void isSliceableIncorrectKey_returnsFalse() {
+        final PickupGesturePreferenceController controller =
+                new PickupGesturePreferenceController(mContext, "bad_key");
+        assertThat(controller.isSliceable()).isFalse();
+    }
 }

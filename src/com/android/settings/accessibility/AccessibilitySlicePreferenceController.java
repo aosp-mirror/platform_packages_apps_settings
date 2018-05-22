@@ -90,6 +90,11 @@ public class AccessibilitySlicePreferenceController extends TogglePreferenceCont
         return getAccessibilityServiceInfo() == null ? UNSUPPORTED_ON_DEVICE : AVAILABLE;
     }
 
+    @Override
+    public boolean isSliceable() {
+        return true;
+    }
+
     private AccessibilityServiceInfo getAccessibilityServiceInfo() {
         final AccessibilityManager accessibilityManager = mContext.getSystemService(
                 AccessibilityManager.class);

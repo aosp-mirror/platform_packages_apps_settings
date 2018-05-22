@@ -97,4 +97,11 @@ public class RingVolumePreferenceControllerTest {
     public void getAudioStream_shouldReturnRing() {
         assertThat(mController.getAudioStream()).isEqualTo(AudioManager.STREAM_RING);
     }
+
+    @Test
+    public void isSliceableCorrectKey_returnsTrue() {
+        final RingVolumePreferenceController controller =
+                new RingVolumePreferenceController(mContext);
+        assertThat(controller.isSliceable()).isTrue();
+    }
 }

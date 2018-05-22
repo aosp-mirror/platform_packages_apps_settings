@@ -168,4 +168,18 @@ public class SwipeToNotificationPreferenceControllerTest {
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT))
                 .thenReturn(enabled);
     }
+
+    @Test
+    public void isSliceableCorrectKey_returnsTrue() {
+        final SwipeToNotificationPreferenceController controller = new
+                SwipeToNotificationPreferenceController(mContext,"gesture_swipe_down_fingerprint");
+        assertThat(controller.isSliceable()).isTrue();
+    }
+
+    @Test
+    public void isSliceableIncorrectKey_returnsFalse() {
+        final SwipeToNotificationPreferenceController controller =
+                new SwipeToNotificationPreferenceController(mContext, "bad_key");
+        assertThat(controller.isSliceable()).isFalse();
+    }
 }

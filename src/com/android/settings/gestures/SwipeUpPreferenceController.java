@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.text.TextUtils;
 
 import com.android.internal.R;
 
@@ -58,6 +59,11 @@ public class SwipeUpPreferenceController extends GesturePreferenceController {
     @Override
     public int getAvailabilityStatus() {
         return isGestureAvailable(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public boolean isSliceable() {
+        return TextUtils.equals(getPreferenceKey(), "gesture_swipe_up");
     }
 
     @Override
