@@ -173,6 +173,11 @@
     <string name="bluetooth_pref_summary" product="tablet" msgid="3520035819421024105">"ਆਪਣੇ ਟੈਬਲੇੱਟ ਨੂੰ ਨਜ਼ਦੀਕੀ ਬਲੂਟੁੱਥ ਡੀਵਾਈਸਾਂ ਨਾਲ ਸੰਚਾਰ ਕਰਨ ਦਿਓ"</string>
     <string name="bluetooth_pref_summary" product="device" msgid="2205100629387332862">"ਆਪਣੇ ਡੀਵਾਈਸ ਨੂੰ ਨਜ਼ਦੀਕੀ ਬਲੂਟੁੱਥ ਡੀਵਾਈਸਾਂ ਨਾਲ ਸੰਚਾਰ ਕਰਨ ਦਿਓ"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="782032074675157079">"ਆਪਣੇ ਫ਼ੋਨ ਨੂੰ ਨਜ਼ਦੀਕੀ ਬਲੂਟੁੱਥ ਡੀਵਾਈਸਾਂ ਨਾਲ ਸੰਚਾਰ ਕਰਨ ਦਿਓ"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload" msgid="4936610906348223810">"ਬਲੂਟੁੱਥ A2DP ਹਾਰਡਵੇਅਰ ਆਫ਼ਲੋਡ ਬੰਦ ਕਰੋ"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_title" msgid="4340101417209145308">"ਡੀਵਾਈਸ ਮੁੜ-ਚਾਲੂ ਕਰੀਏ?"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_message" msgid="8827019472003234568">"ਤੁਹਾਨੂੰ ਇਹ ਸੈਟਿੰਗ ਬਦਲਣ ਲਈ ਡੀਵਾਈਸ ਨੂੰ ਮੁੜ-ਚਾਲੂ ਕਰਨ ਦੀ ਲੋੜ ਹੈ।"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_confirm" msgid="2053793518537051975">"ਮੁੜ-ਚਾਲੂ ਕਰੋ"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_cancel" msgid="2382443064737856652">"ਰੱਦ ਕਰੋ"</string>
     <string name="connected_device_available_media_title" msgid="2560067541413280645">"ਉਪਲਬਧ ਮੀਡੀਆ ਡੀਵਾਈਸ"</string>
     <string name="connected_device_available_call_title" msgid="697154660967595684">"ਉਪਲਬਧ ਕਾਲ ਡੀਵਾਈਸ"</string>
     <string name="connected_device_connected_title" msgid="5871712271201945606">"ਇਸ ਵੇਲੇ ਕਨੈਕਟ ਹੈ"</string>
@@ -3092,18 +3097,24 @@
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"ਦ੍ਰਿਸ਼ਟੀਗਤ ਸਿਗਨਲ ਦਿਖਣ ਦਿਓ"</string>
     <string name="zen_mode_settings_category" msgid="3982039687186952865">"ਪਰੇਸ਼ਾਨ ਨਾ ਕਰੋ ਦੇ ਚਾਲੂ ਹੋਣ \'ਤੇ"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"ਸੂਚਨਾਵਾਂ"</string>
-    <string name="zen_mode_restrict_notifications_mute" msgid="8649062661635246283">"ਸੂਚਨਾਵਾਂ ਚੁੱਪ-ਚਪੀਤੇ ਢੰਗ ਨਾਲ ਦਿਖਾਓ"</string>
-    <string name="zen_mode_restrict_notifications_mute_summary" msgid="8450964969807231275">"ਸੂਚਨਾਵਾਂ ਨੂੰ ਮਿਊਟ ਕੀਤਾ ਜਾਵੇਗਾ"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_mute (3690261619682396872) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_mute_summary (5810076116489877312) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="3465600930732602159">"ਸੂਚਨਾਵਾਂ ਆਉਣ \'ਤੇ ਤੁਹਾਡਾ ਫ਼ੋਨ ਕੋਈ ਧੁਨੀ ਨਹੀਂ ਵਜਾਵੇਗਾ ਜਾਂ ਥਰਥਰਾਹਟ ਨਹੀਂ ਕਰੇਗਾ।"</string>
-    <string name="zen_mode_restrict_notifications_hide" msgid="9070829387109283980">"ਸੂਚਨਾਵਾਂ ਲੁਕਾਓ"</string>
-    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3832808022882158781">"ਤੁਹਾਨੂੰ ਨਵੀਆਂ ਜਾਂ ਮੌਜੂਦਾ ਸੂਚਨਾਵਾਂ ਦਿਖਾਈ ਨਹੀਂ ਦੇਣਗੀਆਂ"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_hide (5305121630186687339) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_hide_summary (7555448406901864904) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_hide_footer" msgid="6559283246372102465">"ਤੁਹਾਡਾ ਫ਼ੋਨ ਨਵੀਆਂ ਅਤੇ ਮੌਜੂਦਾ ਸੂਚਨਾਵਾਂ ਨਹੀਂ ਦਿਖਾਵੇਗਾ ਅਤੇ ਨਾ ਕੋਈ ਧੁਨੀ ਵਜਾਵੇਗਾ ਜਾਂ ਥਰਥਰਾਹਟ ਕਰੇਗਾ। ਤੁਹਾਡੇ ਵੱਲੋਂ ਆਪਣੀ ਸਕ੍ਰੀਨ ਦੇ ਸਿਖਰ ਤੋਂ ਹੇਠਾਂ ਵੱਲ ਸਵਾਈਪ ਕਰਨ \'ਤੇ ਸੂਚਨਾਵਾਂ ਦਿਖਾਈ ਨਹੀਂ ਦੇਣਗੀਆਂ।\n\nਧਿਆਨ ਵਿੱਚ ਰੱਖੋ ਕਿ, ਫ਼ੋਨ ਸਰਗਰਮੀ ਅਤੇ ਸਥਿਤੀ ਦੀਆਂ ਗੰਭੀਰ ਸੂਚਨਾਵਾਂ ਹਾਲੇ ਵੀ ਦਿਖਾਈ ਦੇਣਗੀਆਂ।"</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"ਵਿਉਂਤਿਆ"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"ਵਿਉਂਤੀ ਸੈਟਿੰਗ ਚਾਲੂ ਕਰੋ"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"ਵਿਉਂਤੀ ਸੈਟਿੰਗ ਹਟਾਓ"</string>
-    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"ਦਿਖਾਈ ਦੇਵੇਗਾ"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_summary_muted (5450158135853888485) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"ਅਧੂਰੇ ਤੌਰ \'ਤੇ ਲੁਕਾਓ"</string>
-    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"ਲੁਕਾਇਆ ਹੋਇਆ"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_summary_hidden (3618285192806732504) -->
+    <skip />
     <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"ਵਿਉਂਤਬੱਧ ਪਾਬੰਦੀਆਂ"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"ਜਦੋਂ ਸਕ੍ਰੀਨ ਚਾਲੂ ਹੋਵੇ"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"ਜਦੋਂ ਸਕ੍ਰੀਨ ਬੰਦ ਹੋਵੇ"</string>
@@ -3164,7 +3175,8 @@
     <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"ਪਰੇਸ਼ਾਨ ਨਾ ਕਰੋ ਚਾਲੂ ਹੋਣ \'ਤੇ ਉਪਰੋਕਤ ਤੁਹਾਡੀ ਇਜਾਜ਼ਤ ਵਾਲੀਆਂ ਆਈਟਮਾਂ ਤੋਂ ਇਲਾਵਾ ਸੁਨੇਹੇ, ਯਾਦ-ਸੂਚਨਾਵਾਂ ਅਤੇ ਇਵੈਂਟ ਮਿਊਟ ਕੀਤੇ ਜਾਣਗੇ। ਤੁਸੀਂ ਆਪਣੇ ਦੋਸਤਾਂ, ਪਰਿਵਾਰਕ ਜਾਂ ਹੋਰ ਸੰਪਰਕਾਂ ਵੱਲੋਂ ਤੁਹਾਡੇ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦੇਣ ਲਈ ਸੁਨੇਹੇ ਸੈਟਿੰਗਾਂ ਨੂੰ ਵਿਵਸਥਿਤ ਕਰ ਸਕਦੇ ਹੋ।"</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"ਹੋ ਗਿਆ"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"ਸੈਟਿੰਗਾਂ"</string>
-    <string name="zen_onboarding_new_setting_title" msgid="3311718322273907394">"ਸੂਚਨਾਵਾਂ ਦੇ ਕੋਈ ਦ੍ਰਿਸ਼ਟੀਗਤ ਸੰਕੇਤ ਜਾਂ ਧੁਨੀਆਂ ਨਹੀਂ"</string>
+    <!-- no translation found for zen_onboarding_new_setting_title (1893095176110470711) -->
+    <skip />
     <string name="zen_onboarding_current_setting_title" msgid="776426065129609376">"ਸੂਚਨਾਵਾਂ ਦੀ ਕੋਈ ਧੁਨੀ ਨਹੀਂ"</string>
     <string name="zen_onboarding_new_setting_summary" msgid="6293026064871880706">"ਤੁਹਾਨੂੰ ਸੂਚਨਾਵਾਂ ਨਾ ਹੀ ਦਿਸਣਗੀਆਂ ਅਤੇ ਨਾ ਹੀ ਸੁਣਨਗੀਆਂ। ਤਾਰਾਬੱਧ ਸੰਪਰਕਾਂ ਅਤੇ ਵਾਰ-ਵਾਰ ਕਾਲਾਂ ਕਰਨ ਵਾਲੇ ਕਾਲਰਾਂ ਦੀਆਂ ਕਾਲਾਂ ਮਿਲਣਗੀਆਂ।"</string>
     <string name="zen_onboarding_current_setting_summary" msgid="1280614488924843713">"(ਮੌਜੂਦਾ ਸੈਟਿੰਗ)"</string>
@@ -4100,7 +4112,8 @@
     <string name="carrier_provisioning" msgid="4398683675591893169">"ਕੈਰੀਅਰ ਵਿਵਸਥਾਕਰਨ ਜਾਣਕਾਰੀ"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"ਕੈਰੀਅਰ ਵਿਵਸਥਾਕਰਨ ਨੂੰ ਤੂਲ ਦਿਓ"</string>
     <string name="zen_suggestion_title" msgid="798067603460192693">"\'ਪਰੇਸ਼ਾਨ ਨਾ ਕਰੋ\' ਨੂੰ ਅੱਪਡੇਟ ਕਰੋ"</string>
-    <string name="zen_suggestion_summary" msgid="4573237195296808909">"ਧਿਆਨ ਕੇਂਦਰਿਤ ਰੱਖਣ ਲਈ ਸੂਚਨਾਵਾਂ ਲੁਕਾਓ"</string>
+    <!-- no translation found for zen_suggestion_summary (5928686804697233014) -->
+    <skip />
     <string name="new_device_suggestion_title" msgid="698847081680980774">"ਕੀ ਕੁਝ ਨਵਾਂ ਅਤੇ ਦਿਲਚਸਪ ਹੈ?"</string>
     <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"Take a tour of your new phone"</string>
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"ਆਪਣਾ ਨਵਾਂ ਟੈਬਲੈੱਟ ਵਰਤਣ ਬਾਰੇ ਜਾਣਕਾਰੀ ਪ੍ਰਾਪਤ ਕਰੋ"</string>

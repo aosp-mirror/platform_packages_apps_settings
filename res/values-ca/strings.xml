@@ -173,6 +173,11 @@
     <string name="bluetooth_pref_summary" product="tablet" msgid="3520035819421024105">"Permet que la tauleta es comuniqui amb dispositius Bluetooth que estiguin a prop"</string>
     <string name="bluetooth_pref_summary" product="device" msgid="2205100629387332862">"Permet que el dispositiu es comuniqui amb dispositius Bluetooth que estiguin a prop"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="782032074675157079">"Permet que el telèfon es comuniqui amb dispositius Bluetooth que estiguin a prop"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload" msgid="4936610906348223810">"Desactiva baixada de maquinari (BT A2DP)"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_title" msgid="4340101417209145308">"Vols reiniciar-lo?"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_message" msgid="8827019472003234568">"Has de reiniciar el dispositiu per canviar aquesta opció."</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_confirm" msgid="2053793518537051975">"Reinicia"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_cancel" msgid="2382443064737856652">"Cancel·la"</string>
     <string name="connected_device_available_media_title" msgid="2560067541413280645">"Dispositius multimèdia disponibles"</string>
     <string name="connected_device_available_call_title" msgid="697154660967595684">"Dispositius de trucada disponibles"</string>
     <string name="connected_device_connected_title" msgid="5871712271201945606">"Connectats actualment"</string>
@@ -3092,18 +3097,24 @@
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"Permet senyals visuals"</string>
     <string name="zen_mode_settings_category" msgid="3982039687186952865">"Quan el mode No molestis estigui activat"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"Notificacions"</string>
-    <string name="zen_mode_restrict_notifications_mute" msgid="8649062661635246283">"Mostra les notificacions de manera silenciosa"</string>
-    <string name="zen_mode_restrict_notifications_mute_summary" msgid="8450964969807231275">"Les notificacions se silenciaran"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_mute (3690261619682396872) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_mute_summary (5810076116489877312) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="3465600930732602159">"Quan arribin notificacions, el telèfon no emetrà cap so ni vibrarà."</string>
-    <string name="zen_mode_restrict_notifications_hide" msgid="9070829387109283980">"Amaga les notificacions"</string>
-    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3832808022882158781">"No veuràs cap notificació nova ni anterior"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_hide (5305121630186687339) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_hide_summary (7555448406901864904) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_hide_footer" msgid="6559283246372102465">"El telèfon no et mostrarà les notificacions noves o anteriors ni tampoc vibrarà ni emetrà cap so. No veuràs les notificacions quan llisquis cap avall des de la part superior de la pantalla.\n\nTingues en compte que les notificacions importants relacionades amb l\'activitat i l\'estat del telèfon es continuaran mostrant."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"Personalitzat"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"Activa la configuració personalitzada"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"Suprimeix la configuració personalitzada"</string>
-    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"No ocultes"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_summary_muted (5450158135853888485) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"Parcialment ocultes"</string>
-    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"Ocultes"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_summary_hidden (3618285192806732504) -->
+    <skip />
     <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"Restriccions personalitzades"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"Quan la pantalla estigui activada"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"Quan la pantalla estigui desactivada"</string>
@@ -3164,7 +3175,8 @@
     <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"Quan actives el mode No molestis, els missatges, els recordatoris i els esdeveniments se silencien, excepte aquells elements que hagis permès més amunt. Pots ajustar la configuració dels missatges per permetre que amics, familiars i altres contactes puguin contactar amb tu."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"Fet"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Configuració"</string>
-    <string name="zen_onboarding_new_setting_title" msgid="3311718322273907394">"Notificacions sense so ni elements visuals"</string>
+    <!-- no translation found for zen_onboarding_new_setting_title (1893095176110470711) -->
+    <skip />
     <string name="zen_onboarding_current_setting_title" msgid="776426065129609376">"Notificacions sense so"</string>
     <string name="zen_onboarding_new_setting_summary" msgid="6293026064871880706">"No veuràs ni sentiràs notificacions. Estan permeses les trucades dels contactes destacats i les trucades repetides."</string>
     <string name="zen_onboarding_current_setting_summary" msgid="1280614488924843713">"(configuració actual)"</string>
@@ -4100,7 +4112,8 @@
     <string name="carrier_provisioning" msgid="4398683675591893169">"Informació de serveis de l\'operador de telefonia mòbil"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"Activa els serveis de l\'operador de telefonia mòbil"</string>
     <string name="zen_suggestion_title" msgid="798067603460192693">"Actualitza el mode No molestis"</string>
-    <string name="zen_suggestion_summary" msgid="4573237195296808909">"Amaga les notificacions per centrar l\'atenció"</string>
+    <!-- no translation found for zen_suggestion_summary (5928686804697233014) -->
+    <skip />
     <string name="new_device_suggestion_title" msgid="698847081680980774">"Quines són les novetats més importants?"</string>
     <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"Dona una ullada al teu telèfon nou"</string>
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Dona una ullada a la teva tauleta nova"</string>

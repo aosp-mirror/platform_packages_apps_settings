@@ -173,6 +173,11 @@
     <string name="bluetooth_pref_summary" product="tablet" msgid="3520035819421024105">"Permite que tu tablet se comunique con dispositivos Bluetooth cercanos"</string>
     <string name="bluetooth_pref_summary" product="device" msgid="2205100629387332862">"Permite que tu dispositivo se comunique con dispositivos Bluetooth cercanos"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="782032074675157079">"Permite que tu teléfono se comunique con dispositivos Bluetooth cercanos"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload" msgid="4936610906348223810">"Inhabilitar descarga hardware A2DP BT"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_title" msgid="4340101417209145308">"¿Reiniciar dispos.?"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_message" msgid="8827019472003234568">"Debes reiniciar el dispositivo para cambiar este ajuste."</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_confirm" msgid="2053793518537051975">"Reiniciar"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_cancel" msgid="2382443064737856652">"Cancelar"</string>
     <string name="connected_device_available_media_title" msgid="2560067541413280645">"Dispositivos multimedia disponibles"</string>
     <string name="connected_device_available_call_title" msgid="697154660967595684">"Dispositivos de llamada disponibles"</string>
     <string name="connected_device_connected_title" msgid="5871712271201945606">"Conectados actualmente"</string>
@@ -3092,18 +3097,24 @@
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"Permitir señales visuales"</string>
     <string name="zen_mode_settings_category" msgid="3982039687186952865">"Cuando el modo No molestar esté activado"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"Notificaciones"</string>
-    <string name="zen_mode_restrict_notifications_mute" msgid="8649062661635246283">"Mostrar notificaciones en silencio"</string>
-    <string name="zen_mode_restrict_notifications_mute_summary" msgid="8450964969807231275">"Las notificaciones se silenciarán"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_mute (3690261619682396872) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_mute_summary (5810076116489877312) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="3465600930732602159">"Cuando recibas notificaciones, tu teléfono no sonará ni vibrará."</string>
-    <string name="zen_mode_restrict_notifications_hide" msgid="9070829387109283980">"Ocultar notificaciones"</string>
-    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3832808022882158781">"No verás notificaciones nuevas ni anteriores"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_hide (5305121630186687339) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_hide_summary (7555448406901864904) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_hide_footer" msgid="6559283246372102465">"Tu teléfono no mostrará notificaciones nuevas ni anteriores y no sonará ni vibrará. Las notificaciones no aparecerán cuando deslices el dedo hacia abajo desde la parte superior de la pantalla.\n\nTen en cuenta que se seguirán mostrando las notificaciones importantes sobre el estado y la actividad del teléfono."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"Personalizado"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"Habilitar configuración personalizada"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"Quitar configuración personalizada"</string>
-    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"No ocultas"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_summary_muted (5450158135853888485) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"Parcialmente ocultas"</string>
-    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"Ocultas"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_summary_hidden (3618285192806732504) -->
+    <skip />
     <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"Restricciones personalizadas"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"Cuando la pantalla esté encendida"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"Cuando la pantalla esté apagada"</string>
@@ -3164,11 +3175,12 @@
     <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"Cuando el modo No molestar esté activado, los mensajes, recordatorios y eventos se silenciarán, excepto los que permitas más arriba. Ajusta la configuración de los mensajes para que tus amigos, familiares u otros puedan contactarte."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"Listo"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Ajustes"</string>
-    <string name="zen_onboarding_new_setting_title" msgid="3311718322273907394">"Notificaciones sin sonido ni elementos visuales"</string>
+    <!-- no translation found for zen_onboarding_new_setting_title (1893095176110470711) -->
+    <skip />
     <string name="zen_onboarding_current_setting_title" msgid="776426065129609376">"Notificaciones sin sonido"</string>
     <string name="zen_onboarding_new_setting_summary" msgid="6293026064871880706">"No verás ni escucharás notificaciones. Las llamadas de contactos destacados y de personas que insisten están permitidas."</string>
-    <string name="zen_onboarding_current_setting_summary" msgid="1280614488924843713">"(Ajuste actual)"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1352808651270918932">"¿Quieres cambiar los ajustes de notificaciones del modo No molestar?"</string>
+    <string name="zen_onboarding_current_setting_summary" msgid="1280614488924843713">"(Configuración actual)"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1352808651270918932">"¿Quieres cambiar los ajustes de las notificaciones del modo No molestar?"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Sonidos del perfil de trabajo"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Utilizar sonidos del perfil personal"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"Los sonidos de los perfiles personal y de trabajo son los mismos"</string>
@@ -4100,7 +4112,8 @@
     <string name="carrier_provisioning" msgid="4398683675591893169">"Información de servicios del operador"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"Activar servicios del operador"</string>
     <string name="zen_suggestion_title" msgid="798067603460192693">"Actualizar el modo No molestar"</string>
-    <string name="zen_suggestion_summary" msgid="4573237195296808909">"Oculta las notificaciones para concentrarte"</string>
+    <!-- no translation found for zen_suggestion_summary (5928686804697233014) -->
+    <skip />
     <string name="new_device_suggestion_title" msgid="698847081680980774">"¿Cuáles son las fascinantes novedades?"</string>
     <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"Descubre tu nuevo teléfono"</string>
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Descubre tu nuevo tablet"</string>
