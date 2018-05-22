@@ -26,6 +26,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.provider.Settings;
+import android.provider.SettingsSlicesContract;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 
@@ -69,12 +70,12 @@ public class AirplaneModePreferenceControllerTest {
         mResolver = RuntimeEnvironment.application.getContentResolver();
         doReturn(mPackageManager).when(mContext).getPackageManager();
         mController = new AirplaneModePreferenceController(mContext,
-                AirplaneModePreferenceController.KEY_TOGGLE_AIRPLANE);
+                SettingsSlicesContract.KEY_AIRPLANE_MODE);
 
         mPreferenceManager = new PreferenceManager(mContext);
         mScreen = mPreferenceManager.createPreferenceScreen(mContext);
         mPreference = new RestrictedSwitchPreference(mContext);
-        mPreference.setKey("toggle_airplane");
+        mPreference.setKey(SettingsSlicesContract.KEY_AIRPLANE_MODE);
         mScreen.addPreference(mPreference);
         mController.setFragment(null);
         mLifecycleOwner = () -> mLifecycle;
