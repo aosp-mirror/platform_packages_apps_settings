@@ -224,6 +224,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private Preference mDisplayDaltonizerPreferenceScreen;
     private Preference mVibrationPreferenceScreen;
     private SwitchPreference mToggleInversionPreference;
+    private ColorInversionPreferenceController mInversionPreferenceController;
 
     private int mLongPressTimeoutDefault;
 
@@ -304,9 +305,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         if (mSelectLongPressTimeoutPreference == preference) {
             handleLongPressTimeoutPreferenceChange((String) newValue);
             return true;
-        } else if (mToggleInversionPreference == preference) {
-            handleToggleInversionPreferenceChange((Boolean) newValue);
-            return true;
         }
         return false;
     }
@@ -316,11 +314,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 Settings.Secure.LONG_PRESS_TIMEOUT, Integer.parseInt(stringValue));
         mSelectLongPressTimeoutPreference.setSummary(
                 mLongPressTimeoutValueToTitleMap.get(stringValue));
-    }
-
-    private void handleToggleInversionPreferenceChange(boolean checked) {
-        Settings.Secure.putInt(getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED, (checked ? 1 : 0));
     }
 
     @Override
@@ -412,7 +405,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
         // Display inversion.
         mToggleInversionPreference = (SwitchPreference) findPreference(TOGGLE_INVERSION_PREFERENCE);
-        mToggleInversionPreference.setOnPreferenceChangeListener(this);
+        mInversionPreferenceController =
+                new ColorInversionPreferenceController(getContext(), TOGGLE_INVERSION_PREFERENCE);
+        mInversionPreferenceController.displayPreference(getPreferenceScreen());
 
         // Power button ends calls.
         mTogglePowerButtonEndsCallPreference =
@@ -652,8 +647,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                         Settings.Secure.ACCESSIBILITY_HIGH_TEXT_CONTRAST_ENABLED, 0) == 1);
 
         // If the quick setting is enabled, the preference MUST be enabled.
-        mToggleInversionPreference.setChecked(Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED, 0) == 1);
+        mInversionPreferenceController.updateState(mToggleInversionPreference);
 
         // Power button ends calls.
         if (KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_POWER)
