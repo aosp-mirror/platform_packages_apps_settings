@@ -75,7 +75,6 @@ public class BatterySaverSettings extends DashboardFragment {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new AutoBatterySaverPreferenceController(context));
         controllers.add(new AutoBatterySeekBarPreferenceController(context, lifecycle));
-        controllers.add(new BatterySaverButtonPreferenceController(context, lifecycle));
         return controllers;
     }
 
