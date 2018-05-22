@@ -250,8 +250,7 @@ public class BlockPreferenceControllerTest {
 
         verify(mBackend, times(2)).updateChannel(any(), anyInt(), any());
 
-        // 2 calls for onSwitchChanged + once when calling updateState originally
-        verify(mBackend, times(3)).setNotificationsEnabledForPackage(
+        verify(mBackend, times(2)).setNotificationsEnabledForPackage(
                 anyString(), anyInt(), anyBoolean());
     }
 
