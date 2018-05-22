@@ -42,6 +42,7 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(SettingsRobolectricTestRunner.class)
 public class UnrestrictAppActionTest {
 
+    private static final int UID_1 = 12345;
     private static final String PACKAGE_NAME_1 = "com.android.app1";
     private static final int METRICS_KEY = 1;
 
@@ -54,7 +55,10 @@ public class UnrestrictAppActionTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        final AppInfo appInfo = new AppInfo.Builder().setPackageName(PACKAGE_NAME_1).build();
+        final AppInfo appInfo = new AppInfo.Builder()
+                .setUid(UID_1)
+                .setPackageName(PACKAGE_NAME_1)
+                .build();
         mFeatureFactory = FakeFeatureFactory.setupForTest();
 
         mUnrestrictAppAction = new UnrestrictAppAction(RuntimeEnvironment.application,
@@ -72,7 +76,7 @@ public class UnrestrictAppActionTest {
         mUnrestrictAppAction.handlePositiveAction(METRICS_KEY);
 
         verify(mBatteryUtils)
-                .setForceAppStandby(anyInt(), eq(PACKAGE_NAME_1), eq(AppOpsManager.MODE_ALLOWED));
+                .setForceAppStandby(UID_1, PACKAGE_NAME_1, AppOpsManager.MODE_ALLOWED);
         verify(mFeatureFactory.metricsFeatureProvider).action(RuntimeEnvironment.application,
                 MetricsProto.MetricsEvent.ACTION_TIP_UNRESTRICT_APP, PACKAGE_NAME_1, Pair.create(
                         MetricsProto.MetricsEvent.FIELD_CONTEXT, METRICS_KEY));
