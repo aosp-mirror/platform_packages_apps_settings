@@ -46,6 +46,8 @@ import java.util.List;
 @RunWith(SettingsRobolectricTestRunner.class)
 public class RestrictAppActionTest {
 
+    private static final int UID_1 = 12345;
+    private static final int UID_2 = 23456;
     private static final String PACKAGE_NAME_1 = "com.android.app1";
     private static final String PACKAGE_NAME_2 = "com.android.app2";
     private static final int ANOMALY_WAKEUP = 0;
@@ -63,9 +65,11 @@ public class RestrictAppActionTest {
 
         final List<AppInfo> mAppInfos = new ArrayList<>();
         mAppInfos.add(new AppInfo.Builder()
+                .setUid(UID_1)
                 .setPackageName(PACKAGE_NAME_1)
                 .build());
         mAppInfos.add(new AppInfo.Builder()
+                .setUid(UID_2)
                 .setPackageName(PACKAGE_NAME_2)
                 .addAnomalyType(ANOMALY_BT)
                 .addAnomalyType(ANOMALY_WAKEUP)
@@ -87,9 +91,9 @@ public class RestrictAppActionTest {
         mRestrictAppAction.handlePositiveAction(METRICS_KEY);
 
         verify(mBatteryUtils)
-                .setForceAppStandby(anyInt(), eq(PACKAGE_NAME_1), eq(AppOpsManager.MODE_IGNORED));
+                .setForceAppStandby(UID_1, PACKAGE_NAME_1, AppOpsManager.MODE_IGNORED);
         verify(mBatteryUtils)
-                .setForceAppStandby(anyInt(), eq(PACKAGE_NAME_2), eq(AppOpsManager.MODE_IGNORED));
+                .setForceAppStandby(UID_2, PACKAGE_NAME_2, AppOpsManager.MODE_IGNORED);
         verify(mFeatureFactory.metricsFeatureProvider).action(RuntimeEnvironment.application,
                 MetricsProto.MetricsEvent.ACTION_TIP_RESTRICT_APP, PACKAGE_NAME_1, Pair.create(
                         MetricsProto.MetricsEvent.FIELD_CONTEXT, METRICS_KEY));
