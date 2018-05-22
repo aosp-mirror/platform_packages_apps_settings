@@ -174,6 +174,11 @@
     <string name="bluetooth_pref_summary" product="tablet" msgid="3520035819421024105">"Permiteți tabletei să comunice cu dispozitivele Bluetooth din apropiere"</string>
     <string name="bluetooth_pref_summary" product="device" msgid="2205100629387332862">"Permiteți dispozitivului să comunice cu dispozitivele Bluetooth din apropiere"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="782032074675157079">"Permiteți telefonului să comunice cu dispozitivele Bluetooth din apropiere"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload" msgid="4936610906348223810">"Dezactivați descărcarea prin hardware cu Bluetooth A2DP"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_title" msgid="4340101417209145308">"Reporniți dispoz.?"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_message" msgid="8827019472003234568">"Trebuie să reporniți dispozitivul pentru a modifica setarea."</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_confirm" msgid="2053793518537051975">"Reporniți"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_cancel" msgid="2382443064737856652">"Anulați"</string>
     <string name="connected_device_available_media_title" msgid="2560067541413280645">"Dispozitive media disponibile"</string>
     <string name="connected_device_available_call_title" msgid="697154660967595684">"Dispozitive de apel disponibile"</string>
     <string name="connected_device_connected_title" msgid="5871712271201945606">"Conectat în prezent"</string>
@@ -3127,18 +3132,24 @@
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"Permiteți semnale vizuale"</string>
     <string name="zen_mode_settings_category" msgid="3982039687186952865">"Când este activată setarea „Nu deranja”"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"Notificări"</string>
-    <string name="zen_mode_restrict_notifications_mute" msgid="8649062661635246283">"Afișați notificările cu sunet dezactivat"</string>
-    <string name="zen_mode_restrict_notifications_mute_summary" msgid="8450964969807231275">"Sunetul pentru notificări va fi dezactivat"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_mute (3690261619682396872) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_mute_summary (5810076116489877312) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="3465600930732602159">"Când sosesc notificările, telefonul nu va scoate niciun sunet și nu va vibra."</string>
-    <string name="zen_mode_restrict_notifications_hide" msgid="9070829387109283980">"Ascundeți notificările"</string>
-    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3832808022882158781">"Nu veți vedea notificări noi sau existente"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_hide (5305121630186687339) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_hide_summary (7555448406901864904) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_hide_footer" msgid="6559283246372102465">"Telefonul nu va afișa notificări noi sau existente, nu va emite niciun sunet și nu va vibra. Nu se vor afișa notificările când glisați în jos din partea de sus a ecranului.\n\nRețineți: se vor afișa totuși notificările foarte importante pentru activitatea și starea telefonului."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"Personalizat"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"Activați setarea personalizată"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"Eliminați setarea personalizată"</string>
-    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"Se afișează"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_summary_muted (5450158135853888485) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"Parțial ascunse"</string>
-    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"Ascunse"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_summary_hidden (3618285192806732504) -->
+    <skip />
     <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"Restricții personalizate"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"Când ecranul este activat"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"Când ecranul este dezactivat"</string>
@@ -3201,7 +3212,8 @@
     <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"Când este activată funcția Nu deranja, sunetele pentru mesaje, mementouri și evenimente vor fi dezactivate, cu excepția elementelor pe care le permiteți mai sus. Puteți să modificați setările pentru mesaje ca să le permiteți prietenilor, familiei sau altor persoane de contact să vă contacteze."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"Gata"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Setări"</string>
-    <string name="zen_onboarding_new_setting_title" msgid="3311718322273907394">"Fără imagini sau sunete provenite de la notificări"</string>
+    <!-- no translation found for zen_onboarding_new_setting_title (1893095176110470711) -->
+    <skip />
     <string name="zen_onboarding_current_setting_title" msgid="776426065129609376">"Fără sunet de la notificări"</string>
     <string name="zen_onboarding_new_setting_summary" msgid="6293026064871880706">"Nu veți vedea și nu veți auzi notificări. Sunt permise apelurile de la persoanele de contact marcate cu stea și de la apelanții care revin."</string>
     <string name="zen_onboarding_current_setting_summary" msgid="1280614488924843713">"(Setarea curentă)"</string>
@@ -4169,7 +4181,8 @@
     <string name="carrier_provisioning" msgid="4398683675591893169">"Informații despre provizionarea operatorului"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"Declanșați provizionarea operatorului"</string>
     <string name="zen_suggestion_title" msgid="798067603460192693">"Actualizați funcția Nu deranja"</string>
-    <string name="zen_suggestion_summary" msgid="4573237195296808909">"Ascundeți notificările pentru a vă păstra concentrarea"</string>
+    <!-- no translation found for zen_suggestion_summary (5928686804697233014) -->
+    <skip />
     <string name="new_device_suggestion_title" msgid="698847081680980774">"Ce este nou și interesant?"</string>
     <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"Faceți un tur al noului dvs. telefon"</string>
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Faceți un tur al noii dvs. tablete"</string>

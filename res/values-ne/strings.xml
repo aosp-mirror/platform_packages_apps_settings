@@ -173,6 +173,11 @@
     <string name="bluetooth_pref_summary" product="tablet" msgid="3520035819421024105">"आफ्नो ट्याब्लेटलाई वरपरका ब्लुटुथ यन्त्रहरूसँग सञ्चार गर्न दिनुहोस्"</string>
     <string name="bluetooth_pref_summary" product="device" msgid="2205100629387332862">"आफ्नो यन्त्रलाई वरपरका ब्लुटुथ यन्त्रहरूसँग सञ्चार गर्न दिनुहोस्"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="782032074675157079">"आफ्नो फोनलाई वरपरका ब्लुटुथ यन्त्रहरूसँग सञ्चार गर्न दिनुहोस्"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload" msgid="4936610906348223810">"ब्लुटुथ A2DP हार्डवेयरको अफलोड असक्षम पार्नुहोस्"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_title" msgid="4340101417209145308">"यन्त्र पुनः सुरु गर्ने हो?"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_message" msgid="8827019472003234568">"यो सेटिङ परिवर्तन गर्न तपाईंले आफ्नो यन्त्र पुनः सुरु गर्नु पर्छ।"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_confirm" msgid="2053793518537051975">"पुन: सुरु गर्नु…"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_cancel" msgid="2382443064737856652">"रद्द गर्नु…"</string>
     <string name="connected_device_available_media_title" msgid="2560067541413280645">"मिडियासम्बन्धी सुविधा भएका उपलब्ध यन्त्रहरू"</string>
     <string name="connected_device_available_call_title" msgid="697154660967595684">"कल गर्ने सुविधा भएका उपलब्ध यन्त्रहरू"</string>
     <string name="connected_device_connected_title" msgid="5871712271201945606">"हाल जडान अवस्थामा छ"</string>
@@ -2947,14 +2952,10 @@
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"डेटाको प्रयोग"</string>
     <string name="network_dashboard_summary_hotspot" msgid="8494210248613254574">"हटस्पट"</string>
     <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"जडान गरिएका यन्त्रहरू"</string>
-    <!-- no translation found for connected_devices_dashboard_summary (2665221896894251402) -->
-    <skip />
-    <!-- no translation found for connected_devices_dashboard_no_nfc_summary (3840842725283655533) -->
-    <skip />
-    <!-- no translation found for connected_devices_dashboard_no_driving_mode_summary (5018708106066758867) -->
-    <skip />
-    <!-- no translation found for connected_devices_dashboard_no_driving_mode_no_nfc_summary (5250078362483148199) -->
-    <skip />
+    <string name="connected_devices_dashboard_summary" msgid="2665221896894251402">"ब्लुटुथ, ड्राइभिङ मोड, NFC"</string>
+    <string name="connected_devices_dashboard_no_nfc_summary" msgid="3840842725283655533">"ब्लुटुथ, ड्राइभिङ मोड"</string>
+    <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="5018708106066758867">"ब्लुटुथ, NFC"</string>
+    <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="5250078362483148199">"ब्लुटुथ"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"अनुप्रयोग तथा सूचनाहरू"</string>
     <string name="app_and_notification_dashboard_summary" msgid="2363314178802548682">"अनुमतिहरू, पूर्वनिर्धारित अनुप्रयोगहरू"</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"खाताहरू"</string>
@@ -3096,18 +3097,24 @@
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"सङ्केतहरूलाई देखिन दिनुहोस्"</string>
     <string name="zen_mode_settings_category" msgid="3982039687186952865">"बाधा नपुर्‍याउनुहोस् मोड सक्रिय भएका बेला"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"सूचनाहरू"</string>
-    <string name="zen_mode_restrict_notifications_mute" msgid="8649062661635246283">"सूचनाहरूलाई मौन रूपमा देखाउनुहोस्"</string>
-    <string name="zen_mode_restrict_notifications_mute_summary" msgid="8450964969807231275">"सूचनाहरू म्युट गरिने छन्"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_mute (3690261619682396872) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_mute_summary (5810076116489877312) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="3465600930732602159">"सूचनाहरू आउँदा तपाईंको फोनले आवाज निकाल्ने वा कम्पन गर्ने छैन।"</string>
-    <string name="zen_mode_restrict_notifications_hide" msgid="9070829387109283980">"सूचनाहरू लुकाउनुहोस्"</string>
-    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3832808022882158781">"तपाईं नयाँ वा विद्यमान सूचनाहरू देख्नु हुने छैन"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_hide (5305121630186687339) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_hide_summary (7555448406901864904) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_hide_footer" msgid="6559283246372102465">"तपाईंको फोनले नयाँ वा विद्यमान सूचनाहरू देखाउने, आवाज निकाल्ने वा कम्पन गर्ने छैन। तपाईंले आफ्नो स्क्रिनको माथिल्लो भागबाट तल स्वाइप गर्दा सूचनाहरू देखिने छैनन्।\n\nयाद राख्नुहोस्, फोनको गतिविधि तथा स्थितिसम्बन्धी महत्त्वपूर्ण सूचनाहरू अझै पनि देखिने छन्।"</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"आफू अनुकूल"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"आफू अनुकूल सेटिङ सक्षम पार्नुहोस्‌"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"आफू अनुकूल सेटिङ हटाउनुहोस्‌"</string>
-    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"देखा पर्ने छ"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_summary_muted (5450158135853888485) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"आंशिक रूपमा लुकेको"</string>
-    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"लुकेको"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_summary_hidden (3618285192806732504) -->
+    <skip />
     <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"आफू अनुकूल बन्देजहरू"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"स्क्रिन सक्रिय रहेको अवस्थामा"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"स्क्रिन निष्क्रिय रहेको अवस्थामा"</string>
@@ -3166,19 +3173,14 @@
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"म्युट गरिएको छ, तर <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> र <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g> लाई अनुमति दिनुहोस्"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"सन्देश, कार्यक्रम तथा रिमाइन्डरहरू"</string>
     <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"बाधा नपुर्‍याउनुहोस् मोड सक्रिय भएका बेला तपाईंले माथि अनुमति दिनुभएका वस्तुहरूबाहेक सन्देश, रिमाइन्डर तथा कार्यक्रमहरूलाई म्युट गरिने छ। तपाईं आफ्ना साथीभाइ, परिवारजन वा अन्य सम्पर्कहरूलाई आफूसँग सम्पर्क राख्न दिने गरी सन्देशसम्बन्धी सेटिङहरू समायोजन गर्न सक्नुहुन्छ।"</string>
-    <!-- no translation found for zen_onboarding_ok (6131211000824433013) -->
-    <skip />
+    <string name="zen_onboarding_ok" msgid="6131211000824433013">"सम्पन्न भयो"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"सेटिङहरू"</string>
-    <!-- no translation found for zen_onboarding_new_setting_title (3311718322273907394) -->
+    <!-- no translation found for zen_onboarding_new_setting_title (1893095176110470711) -->
     <skip />
-    <!-- no translation found for zen_onboarding_current_setting_title (776426065129609376) -->
-    <skip />
-    <!-- no translation found for zen_onboarding_new_setting_summary (6293026064871880706) -->
-    <skip />
-    <!-- no translation found for zen_onboarding_current_setting_summary (1280614488924843713) -->
-    <skip />
-    <!-- no translation found for zen_onboarding_dnd_visual_disturbances_header (1352808651270918932) -->
-    <skip />
+    <string name="zen_onboarding_current_setting_title" msgid="776426065129609376">"सूचनाहरूको कुनै पनि ध्वनि छैन"</string>
+    <string name="zen_onboarding_new_setting_summary" msgid="6293026064871880706">"तपाईं सूचनाहरू देख्न वा सुन्न सक्नु हुने छैन। ताराङ्कित सम्पर्क ठेगाना तथा बारम्बार कल गर्ने व्यक्तिका कलहरू।"</string>
+    <string name="zen_onboarding_current_setting_summary" msgid="1280614488924843713">"(हालको सेटिङ)"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1352808651270918932">"बाधा नपुर्याउनुहोस् नामक मोडका सूचनासम्बन्धी सेटिङहरू बदल्ने हो?"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"कार्य प्रोफाइलका ध्वनिहरू"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"व्यक्तिगत प्रोफाइलका ध्वनिहरूको प्रयोग गर्नुहोस्"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"कार्य र व्यक्तिगत दुवै प्रोफाइलका लागि आवाज उही नै हो"</string>
@@ -4110,7 +4112,8 @@
     <string name="carrier_provisioning" msgid="4398683675591893169">"सेवा प्रदायकको प्रावधान सम्बन्धी जानकारी"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"सेवा प्रदायकको प्रावधानलाई ट्रिगर गर्नुहोस्"</string>
     <string name="zen_suggestion_title" msgid="798067603460192693">"बाधा नपुर्‍याउनुहोस्‌ नामक सेवालाई अद्यावधिक गर्नुहोस्‌"</string>
-    <string name="zen_suggestion_summary" msgid="4573237195296808909">"केन्द्रित रहन सूचनाहरू लुकाउनुहोस्"</string>
+    <!-- no translation found for zen_suggestion_summary (5928686804697233014) -->
+    <skip />
     <string name="new_device_suggestion_title" msgid="698847081680980774">"सेटिङहरूको गृहपृष्ठमा नयाँ र रोमाञ्चक के छ?"</string>
     <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"आफ्नो नयाँ फोनको बारेमा राम्रोसँग जान्नुहोस्‌"</string>
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"आफ्नो नयाँ ट्याब्लेटको बारेमा राम्रोसँग जान्नुहोस्‌"</string>
