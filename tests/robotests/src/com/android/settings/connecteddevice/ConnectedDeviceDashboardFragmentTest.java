@@ -30,8 +30,8 @@ import android.content.pm.PackageManager;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
-import com.android.settings.nfc.NfcPreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothPan;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
@@ -48,7 +48,7 @@ import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowBluetoothPan.class, ShadowUserManager.class,
-        ShadowConnectivityManager.class})
+        ShadowConnectivityManager.class, ShadowBluetoothAdapter.class})
 public class ConnectedDeviceDashboardFragmentTest {
     @Mock
     private PackageManager mPackageManager;

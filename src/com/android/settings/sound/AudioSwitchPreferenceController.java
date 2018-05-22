@@ -41,6 +41,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
+import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
@@ -59,6 +60,8 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 
 /**
  * Abstract class for audio switcher controller to notify subclass
@@ -70,21 +73,22 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
         implements Preference.OnPreferenceChangeListener, BluetoothCallback,
         LifecycleObserver, OnStart, OnStop {
 
+    private static final String TAG = "AudioSwitchPreferenceController";
     private static final int INVALID_INDEX = -1;
 
     protected final List<BluetoothDevice> mConnectedDevices;
     protected final AudioManager mAudioManager;
     protected final MediaRouter mMediaRouter;
-    protected final LocalBluetoothProfileManager mProfileManager;
     protected int mSelectedIndex;
     protected Preference mPreference;
+    protected LocalBluetoothProfileManager mProfileManager;
     protected AudioSwitchCallback mAudioSwitchPreferenceCallback;
 
     private final AudioManagerAudioDeviceCallback mAudioManagerAudioDeviceCallback;
-    private final LocalBluetoothManager mLocalBluetoothManager;
     private final MediaRouterCallback mMediaRouterCallback;
     private final WiredHeadsetBroadcastReceiver mReceiver;
     private final Handler mHandler;
+    private LocalBluetoothManager mLocalBluetoothManager;
 
     public interface AudioSwitchCallback {
         void onPreferenceDataChanged(ListPreference preference);
@@ -94,14 +98,23 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
         super(context, preferenceKey);
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         mMediaRouter = (MediaRouter) context.getSystemService(Context.MEDIA_ROUTER_SERVICE);
-        mLocalBluetoothManager = Utils.getLocalBtManager(mContext);
-        mLocalBluetoothManager.setForegroundActivity(context);
-        mProfileManager = mLocalBluetoothManager.getProfileManager();
         mHandler = new Handler(Looper.getMainLooper());
         mAudioManagerAudioDeviceCallback = new AudioManagerAudioDeviceCallback();
         mReceiver = new WiredHeadsetBroadcastReceiver();
         mMediaRouterCallback = new MediaRouterCallback();
         mConnectedDevices = new ArrayList<>();
+        final FutureTask<LocalBluetoothManager> localBtManagerFutureTask = new FutureTask<>(
+                // Avoid StrictMode ThreadPolicy violation
+                () -> Utils.getLocalBtManager(mContext));
+        try {
+            localBtManagerFutureTask.run();
+            mLocalBluetoothManager = localBtManagerFutureTask.get();
+        } catch (InterruptedException | ExecutionException e) {
+            Log.w(TAG, "Error getting LocalBluetoothManager.", e);
+            return;
+        }
+        mLocalBluetoothManager.setForegroundActivity(mContext);
+        mProfileManager = mLocalBluetoothManager.getProfileManager();
     }
 
     /**

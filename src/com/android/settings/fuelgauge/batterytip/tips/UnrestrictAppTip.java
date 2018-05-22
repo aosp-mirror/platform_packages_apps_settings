@@ -72,6 +72,10 @@ public class UnrestrictAppTip extends BatteryTip {
         // Do nothing
     }
 
+    public AppInfo getUnrestrictAppInfo() {
+        return mAppInfo;
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);

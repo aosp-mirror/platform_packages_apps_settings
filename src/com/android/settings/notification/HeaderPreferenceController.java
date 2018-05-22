@@ -18,6 +18,7 @@ package com.android.settings.notification;
 
 import static com.android.settings.widget.EntityHeaderController.PREF_KEY_APP_HEADER;
 
+import android.app.Activity;
 import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.content.Context;
@@ -26,6 +27,7 @@ import android.support.v7.preference.Preference;
 import android.text.BidiFormatter;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
+import android.util.Slog;
 import android.view.View;
 
 import com.android.settings.R;
@@ -33,15 +35,13 @@ import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.core.lifecycle.events.OnStart;
-
-import java.util.Objects;
 
 public class HeaderPreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver {
 
     private final PreferenceFragment mFragment;
     private EntityHeaderController mHeaderController;
+    private boolean mStarted = false;
 
     public HeaderPreferenceController(Context context, PreferenceFragment fragment) {
         super(context, null);
@@ -61,6 +61,13 @@ public class HeaderPreferenceController extends NotificationPreferenceController
     @Override
     public void updateState(Preference preference) {
         if (mAppRow != null && mFragment != null) {
+
+            Activity activity = null;
+            if (mStarted) {
+                // don't call done on an activity if it hasn't started yet
+                activity = mFragment.getActivity();
+            }
+
             LayoutPreference pref = (LayoutPreference) preference;
             mHeaderController = EntityHeaderController.newInstance(
                     mFragment.getActivity(), mFragment, pref.findViewById(R.id.entity_header));
@@ -72,7 +79,7 @@ public class HeaderPreferenceController extends NotificationPreferenceController
                     .setButtonActions(EntityHeaderController.ActionType.ACTION_NOTIF_PREFERENCE,
                             EntityHeaderController.ActionType.ACTION_NONE)
                     .setHasAppInfoLink(true)
-                    .done(null, mContext);
+                    .done(activity, mContext);
             pref.findViewById(R.id.entity_header).setVisibility(View.VISIBLE);
         }
     }
@@ -108,6 +115,7 @@ public class HeaderPreferenceController extends NotificationPreferenceController
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     public void onStart() {
+        mStarted = true;
         if (mHeaderController != null) {
             mHeaderController.styleActionBar(mFragment.getActivity());
         }

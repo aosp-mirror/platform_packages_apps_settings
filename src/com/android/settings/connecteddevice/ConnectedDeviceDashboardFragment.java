@@ -26,7 +26,10 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.nfc.NfcPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -60,11 +63,31 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
     }
 
     @Override
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        return buildPreferenceControllers(context, getLifecycle());
+    }
+
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
+            Lifecycle lifecycle) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        final DiscoverableFooterPreferenceController discoverableFooterPreferenceController =
+                new DiscoverableFooterPreferenceController(context);
+        controllers.add(discoverableFooterPreferenceController);
+
+        if (lifecycle != null) {
+            lifecycle.addObserver(discoverableFooterPreferenceController);
+        }
+
+        return controllers;
+    }
+
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         use(AvailableMediaDeviceGroupController.class).init(this);
         use(ConnectedDeviceGroupController.class).init(this);
         use(PreviouslyConnectedDevicePreferenceController.class).init(this);
+        use(DiscoverableFooterPreferenceController.class).init(this);
     }
 
     @VisibleForTesting
@@ -72,25 +95,17 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
 
         private final Context mContext;
         private final SummaryLoader mSummaryLoader;
-        private final NfcPreferenceController mNfcPreferenceController;
 
         public SummaryProvider(Context context, SummaryLoader summaryLoader) {
             mContext = context;
             mSummaryLoader = summaryLoader;
-            mNfcPreferenceController = new NfcPreferenceController(context);
         }
-
 
         @Override
         public void setListening(boolean listening) {
             if (listening) {
-                if (mNfcPreferenceController.isAvailable()) {
-                    mSummaryLoader.setSummary(this,
-                            mContext.getString(R.string.connected_devices_dashboard_summary));
-                } else {
-                    mSummaryLoader.setSummary(this, mContext.getString(
-                            R.string.connected_devices_dashboard_no_nfc_summary));
-                }
+                mSummaryLoader.setSummary(this, mContext.getText(AdvancedConnectedDeviceController.
+                        getConnectedDevicesSummaryResourceId(mContext)));
             }
         }
     }
@@ -115,6 +130,12 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.connected_devices;
                     return Arrays.asList(sir);
+                }
+
+                @Override
+                public List<AbstractPreferenceController> createPreferenceControllers(Context
+                        context) {
+                    return buildPreferenceControllers(context, null /* lifecycle */);
                 }
 
                 @Override
