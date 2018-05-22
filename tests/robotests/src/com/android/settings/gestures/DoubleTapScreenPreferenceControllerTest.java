@@ -179,4 +179,18 @@ public class DoubleTapScreenPreferenceControllerTest {
 
         assertThat(availabilityStatus).isEqualTo(AVAILABLE);
     }
+
+    @Test
+    public void isSliceableCorrectKey_returnsTrue() {
+        final DoubleTapScreenPreferenceController controller =
+                new DoubleTapScreenPreferenceController(mContext,"gesture_double_tap_screen");
+        assertThat(controller.isSliceable()).isTrue();
+    }
+
+    @Test
+    public void isSliceableIncorrectKey_returnsFalse() {
+        final DoubleTapScreenPreferenceController controller =
+                new DoubleTapScreenPreferenceController(mContext, "bad_key");
+        assertThat(controller.isSliceable()).isFalse();
+    }
 }

@@ -15,6 +15,7 @@ package com.android.settings.display;
 
 import android.content.Context;
 import android.support.v7.preference.Preference;
+import android.text.TextUtils;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.view.RotationPolicy;
@@ -71,7 +72,12 @@ public class AutoRotatePreferenceController extends TogglePreferenceController i
     @Override
     public int getAvailabilityStatus() {
         return RotationPolicy.isRotationLockToggleVisible(mContext)
-                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public boolean isSliceable() {
+        return TextUtils.equals(getPreferenceKey(), "auto_rotate");
     }
 
     @Override
