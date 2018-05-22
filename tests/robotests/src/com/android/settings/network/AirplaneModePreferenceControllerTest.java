@@ -21,13 +21,11 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
-import androidx.lifecycle.LifecycleOwner;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.provider.Settings;
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
+import android.provider.SettingsSlicesContract;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -42,6 +40,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import androidx.lifecycle.LifecycleOwner;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class AirplaneModePreferenceControllerTest {
@@ -69,12 +71,12 @@ public class AirplaneModePreferenceControllerTest {
         mResolver = RuntimeEnvironment.application.getContentResolver();
         doReturn(mPackageManager).when(mContext).getPackageManager();
         mController = new AirplaneModePreferenceController(mContext,
-                AirplaneModePreferenceController.KEY_TOGGLE_AIRPLANE);
+                SettingsSlicesContract.KEY_AIRPLANE_MODE);
 
         mPreferenceManager = new PreferenceManager(mContext);
         mScreen = mPreferenceManager.createPreferenceScreen(mContext);
         mPreference = new RestrictedSwitchPreference(mContext);
-        mPreference.setKey("toggle_airplane");
+        mPreference.setKey(SettingsSlicesContract.KEY_AIRPLANE_MODE);
         mScreen.addPreference(mPreference);
         mController.setFragment(null);
         mLifecycleOwner = () -> mLifecycle;
