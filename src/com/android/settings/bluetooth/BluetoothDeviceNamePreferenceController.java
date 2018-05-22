@@ -46,7 +46,7 @@ public class BluetoothDeviceNamePreferenceController extends BasePreferenceContr
     @VisibleForTesting
     Preference mPreference;
     private LocalBluetoothManager mLocalManager;
-    private LocalBluetoothAdapter mLocalAdapter;
+    protected LocalBluetoothAdapter mLocalAdapter;
 
     /**
      * Constructor exclusively used for Slice.
@@ -77,8 +77,10 @@ public class BluetoothDeviceNamePreferenceController extends BasePreferenceContr
 
     @Override
     public void onStart() {
-        mContext.registerReceiver(mReceiver,
-                new IntentFilter(BluetoothAdapter.ACTION_LOCAL_NAME_CHANGED));
+        final IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(BluetoothAdapter.ACTION_LOCAL_NAME_CHANGED);
+        intentFilter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
+        mContext.registerReceiver(mReceiver, intentFilter);
     }
 
     @Override
@@ -93,7 +95,7 @@ public class BluetoothDeviceNamePreferenceController extends BasePreferenceContr
 
     @Override
     public void updateState(Preference preference) {
-        updateDeviceName(preference);
+        updatePreferenceState(preference);
     }
 
     @Override
@@ -129,7 +131,7 @@ public class BluetoothDeviceNamePreferenceController extends BasePreferenceContr
      *
      * @param preference to set the summary for
      */
-    protected void updateDeviceName(final Preference preference) {
+    protected void updatePreferenceState(final Preference preference) {
         preference.setSelectable(false);
         preference.setSummary(getSummary());
     }
@@ -150,8 +152,10 @@ public class BluetoothDeviceNamePreferenceController extends BasePreferenceContr
 
             if (TextUtils.equals(action, BluetoothAdapter.ACTION_LOCAL_NAME_CHANGED)) {
                 if (mPreference != null && mLocalAdapter != null && mLocalAdapter.isEnabled()) {
-                    updateDeviceName(mPreference);
+                    updatePreferenceState(mPreference);
                 }
+            } else if (TextUtils.equals(action, BluetoothAdapter.ACTION_STATE_CHANGED)) {
+                updatePreferenceState(mPreference);
             }
         }
     };

@@ -71,11 +71,13 @@ public class BluetoothDeviceRenamePreferenceControllerTest {
                 PREF_KEY));
         mController.setFragment(mFragment);
         doReturn(DEVICE_NAME).when(mController).getDeviceName();
+        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
+        mController.displayPreference(mScreen);
     }
 
     @Test
     public void testUpdateDeviceName_showSummaryWithDeviceName() {
-        mController.updateDeviceName(mPreference);
+        mController.updatePreferenceState(mPreference);
 
         final CharSequence summary = mPreference.getSummary();
 
@@ -94,10 +96,24 @@ public class BluetoothDeviceRenamePreferenceControllerTest {
 
     @Test
     public void displayPreference_shouldFindPreferenceWithMatchingPrefKey() {
-        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
-
-        mController.displayPreference(mScreen);
-
         assertThat(mController.mPreference.getKey()).isEqualTo(mController.getPreferenceKey());
+    }
+
+    @Test
+    public void updatePreferenceState_whenBTisOnPreferenceShouldBeVisible() {
+        when(mLocalAdapter.isEnabled()).thenReturn(true);
+
+        mController.updatePreferenceState(mPreference);
+
+        assertThat(mPreference.isVisible()).isTrue();
+    }
+
+    @Test
+    public void updatePreferenceState_whenBTisOffPreferenceShouldBeHide() {
+        when(mLocalAdapter.isEnabled()).thenReturn(false);
+
+        mController.updatePreferenceState(mPreference);
+
+        assertThat(mPreference.isVisible()).isFalse();
     }
 }
