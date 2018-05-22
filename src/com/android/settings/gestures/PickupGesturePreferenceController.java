@@ -25,6 +25,7 @@ import android.content.SharedPreferences;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
+import android.text.TextUtils;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.R;
@@ -68,7 +69,18 @@ public class PickupGesturePreferenceController extends GesturePreferenceControll
         if (mAmbientConfig == null) {
             mAmbientConfig = new AmbientDisplayConfiguration(mContext);
         }
-        return mAmbientConfig.pulseOnPickupAvailable() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+
+        // No hardware support for Pickup Gesture
+        if (!mAmbientConfig.dozePulsePickupSensorAvailable()) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
+
+        // Can't change Pickup Gesture when AOD is enabled.
+        if (!mAmbientConfig.ambientDisplayAvailable()) {
+            return DISABLED_DEPENDENT_SETTING;
+        }
+
+        return AVAILABLE;
     }
 
     @Override
