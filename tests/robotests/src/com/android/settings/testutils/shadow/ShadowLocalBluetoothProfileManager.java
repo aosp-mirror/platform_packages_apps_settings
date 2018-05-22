@@ -12,45 +12,27 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
  */
 
 package com.android.settings.testutils.shadow;
 
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
+import android.content.Context;
 
-import org.robolectric.annotation.Implementation;
+import com.android.settingslib.bluetooth.BluetoothEventManager;
+import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
+import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
+import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
+
 import org.robolectric.annotation.Implements;
 
-@Implements(LocalBluetoothAdapter.class)
-public class ShadowLocalBluetoothAdapter {
+@Implements(LocalBluetoothProfileManager.class)
+public class ShadowLocalBluetoothProfileManager {
 
-    private static String sName;
+    public void __constructor__(Context context,
+            LocalBluetoothAdapter adapter,
+            CachedBluetoothDeviceManager deviceManager,
+            BluetoothEventManager eventManager) {
 
-    private boolean isBluetoothEnabled = true;
-
-    @Implementation
-    public String getName() {
-        return sName;
-    }
-
-    public static void setName(String name) {
-        sName = name;
-    }
-
-    @Implementation
-    public boolean isEnabled() {
-        return isBluetoothEnabled;
-    }
-
-    @Implementation
-    public boolean enable() {
-        isBluetoothEnabled = true;
-        return true;
-    }
-
-    @Implementation
-    public boolean disable() {
-        isBluetoothEnabled = false;
-        return true;
     }
 }
