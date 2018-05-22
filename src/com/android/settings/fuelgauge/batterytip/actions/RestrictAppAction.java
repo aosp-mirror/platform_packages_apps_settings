@@ -59,7 +59,7 @@ public class RestrictAppAction extends BatteryTipAction {
             final AppInfo appInfo = appInfos.get(i);
             final String packageName = appInfo.packageName;
             // Force app standby, then app can't run in the background
-            mBatteryUtils.setForceAppStandby(mBatteryUtils.getPackageUid(packageName), packageName,
+            mBatteryUtils.setForceAppStandby(appInfo.uid, packageName,
                     AppOpsManager.MODE_IGNORED);
             if (CollectionUtils.isEmpty(appInfo.anomalyTypes)) {
                 // Only log context if there is no anomaly type

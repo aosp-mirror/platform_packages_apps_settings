@@ -13,86 +13,87 @@
  * See the License for the specific language governing permissions and
  * limitations under the License
  */
-
-package com.android.settings.notification;
+package com.android.settings.bluetooth;
 
 import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 
 import android.annotation.ColorInt;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.bluetooth.BluetoothAdapter;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
-import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
-import com.android.settings.Utils;
+import com.android.settings.connecteddevice.BluetoothDashboardFragment;
 import com.android.settings.search.DatabaseIndexingUtils;
-import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settings.slices.SliceBroadcastReceiver;
+import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.SliceAction;
 
-public class ZenModeSliceBuilder {
+/**
+ * Utility class to build a Bluetooth Slice, and handle all associated actions.
+ */
+public class BluetoothSliceBuilder {
 
-    private static final String TAG = "ZenModeSliceBuilder";
-
-    private static final String ZEN_MODE_KEY = "zen_mode";
+    private static final String TAG = "BluetoothSliceBuilder";
 
     /**
-     * Backing Uri for the Zen Mode Slice.
+     * Backing Uri for the Bluetooth Slice.
      */
-    public static final Uri ZEN_MODE_URI = new Uri.Builder()
+    public static final Uri BLUETOOTH_URI = new Uri.Builder()
             .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .authority(SettingsSlicesContract.AUTHORITY)
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath(ZEN_MODE_KEY)
+            .appendPath(SettingsSlicesContract.KEY_BLUETOOTH)
             .build();
 
     /**
-     * Action notifying a change on the Zen Mode Slice.
+     * Action notifying a change on the BluetoothSlice.
      */
-    public static final String ACTION_ZEN_MODE_SLICE_CHANGED =
-            "com.android.settings.notification.ZEN_MODE_CHANGED";
+    public static final String ACTION_BLUETOOTH_SLICE_CHANGED =
+            "com.android.settings.bluetooth.action.BLUETOOTH_MODE_CHANGED";
 
     public static final IntentFilter INTENT_FILTER = new IntentFilter();
 
     static {
-        INTENT_FILTER.addAction(NotificationManager.ACTION_NOTIFICATION_POLICY_CHANGED);
-        INTENT_FILTER.addAction(NotificationManager.ACTION_INTERRUPTION_FILTER_CHANGED);
-        INTENT_FILTER.addAction(NotificationManager.ACTION_INTERRUPTION_FILTER_CHANGED_INTERNAL);
+        INTENT_FILTER.addAction(BluetoothAdapter.ACTION_CONNECTION_STATE_CHANGED);
+        INTENT_FILTER.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
     }
 
-    private ZenModeSliceBuilder() {
+    private BluetoothSliceBuilder() {
     }
 
     /**
-     * Return a ZenMode Slice bound to {@link #ZEN_MODE_URI}.
+     * Return a Bluetooth Slice bound to {@link #BLUETOOTH_URI}.
      * <p>
      * Note that you should register a listener for {@link #INTENT_FILTER} to get changes for
-     * ZenMode.
+     * Bluetooth.
      */
     public static Slice getSlice(Context context) {
-        final boolean isZenModeEnabled = isZenModeEnabled(context);
-        final CharSequence title = context.getText(R.string.zen_mode_settings_title);
-        @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
+        final boolean isBluetoothEnabled = isBluetoothEnabled(context);
+        final CharSequence title = context.getText(R.string.bluetooth_settings);
+        final IconCompat icon = IconCompat.createWithResource(context,
+                R.drawable.ic_settings_bluetooth);
+        @ColorInt final int color = com.android.settings.Utils.getColorAccent(
+                context).getDefaultColor();
         final PendingIntent toggleAction = getBroadcastIntent(context);
         final PendingIntent primaryAction = getPrimaryAction(context);
-        final SliceAction primarySliceAction = new SliceAction(primaryAction,
-                (IconCompat) null /* icon */, title);
+        final SliceAction primarySliceAction = new SliceAction(primaryAction, icon, title);
         final SliceAction toggleSliceAction = new SliceAction(toggleAction, null /* actionTitle */,
-                isZenModeEnabled);
+                isBluetoothEnabled);
 
-        return new ListBuilder(context, ZEN_MODE_URI, ListBuilder.INFINITY)
+        return new ListBuilder(context, BLUETOOTH_URI, ListBuilder.INFINITY)
                 .setAccentColor(color)
                 .addRow(b -> b
                         .setTitle(title)
@@ -102,44 +103,33 @@ public class ZenModeSliceBuilder {
     }
 
     /**
-     * Update the current ZenMode status to the boolean value keyed by
+     * Update the current Bluetooth status to the boolean value keyed by
      * {@link android.app.slice.Slice#EXTRA_TOGGLE_STATE} on {@param intent}.
      */
     public static void handleUriChange(Context context, Intent intent) {
-        final boolean zenModeOn = intent.getBooleanExtra(EXTRA_TOGGLE_STATE, false);
-        final int zenMode;
-        if (zenModeOn) {
-            zenMode = Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS;
-        } else {
-            zenMode = Settings.Global.ZEN_MODE_OFF;
-        }
-        NotificationManager.from(context).setZenMode(zenMode, null /* conditionId */, TAG);
+        final boolean newBluetoothState = intent.getBooleanExtra(EXTRA_TOGGLE_STATE, false);
+        final LocalBluetoothAdapter adapter = LocalBluetoothManager.getInstance(context,
+                null /* callback */).getBluetoothAdapter();
+
+        adapter.setBluetoothEnabled(newBluetoothState);
         // Do not notifyChange on Uri. The service takes longer to update the current value than it
         // does for the Slice to check the current value again. Let {@link SliceBroadcastRelay}
         // handle it.
     }
 
-    private static boolean isZenModeEnabled(Context context) {
-        final NotificationManager manager = context.getSystemService(NotificationManager.class);
-        final int zenMode = manager.getZenMode();
-
-        switch (zenMode) {
-            case Settings.Global.ZEN_MODE_ALARMS:
-            case Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS:
-            case Settings.Global.ZEN_MODE_NO_INTERRUPTIONS:
-                return true;
-            case Settings.Global.ZEN_MODE_OFF:
-            default:
-                return false;
-        }
+    private static boolean isBluetoothEnabled(Context context) {
+        final LocalBluetoothAdapter adapter = LocalBluetoothManager.getInstance(context,
+                null /* callback */).getBluetoothAdapter();
+        return adapter.isEnabled();
     }
 
     private static PendingIntent getPrimaryAction(Context context) {
-        final String screenTitle = context.getText(R.string.zen_mode_settings_title).toString();
-        final Uri contentUri = new Uri.Builder().appendPath(ZEN_MODE_KEY).build();
+        final String screenTitle = context.getText(R.string.bluetooth_settings_title).toString();
+        final Uri contentUri = new Uri.Builder().appendPath(
+                SettingsSlicesContract.KEY_BLUETOOTH).build();
         final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(context,
-                ZenModeSettings.class.getName(), ZEN_MODE_KEY, screenTitle,
-                MetricsEvent.NOTIFICATION_ZEN_MODE)
+                BluetoothDashboardFragment.class.getName(), null /* key */, screenTitle,
+                MetricsProto.MetricsEvent.SETTINGS_CONNECTED_DEVICE_CATEGORY)
                 .setClassName(context.getPackageName(), SubSettings.class.getName())
                 .setData(contentUri);
 
@@ -148,7 +138,7 @@ public class ZenModeSliceBuilder {
     }
 
     private static PendingIntent getBroadcastIntent(Context context) {
-        final Intent intent = new Intent(ACTION_ZEN_MODE_SLICE_CHANGED)
+        final Intent intent = new Intent(ACTION_BLUETOOTH_SLICE_CHANGED)
                 .setClass(context, SliceBroadcastReceiver.class);
         return PendingIntent.getBroadcast(context, 0 /* requestCode */, intent,
                 PendingIntent.FLAG_CANCEL_CURRENT);

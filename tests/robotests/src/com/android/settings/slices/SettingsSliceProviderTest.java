@@ -36,6 +36,7 @@ import android.os.StrictMode;
 import android.provider.SettingsSlicesContract;
 
 import com.android.settings.wifi.WifiSliceBuilder;
+import com.android.settings.bluetooth.BluetoothSliceBuilder;
 import com.android.settings.notification.ZenModeSliceBuilder;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.FakeToggleController;
@@ -79,7 +80,8 @@ public class SettingsSliceProviderTest {
     private SliceManager mManager;
 
     private static final List<Uri> SPECIAL_CASE_PLATFORM_URIS = Arrays.asList(
-            WifiSliceBuilder.WIFI_URI
+            WifiSliceBuilder.WIFI_URI,
+            BluetoothSliceBuilder.BLUETOOTH_URI
     );
 
     private static final List<Uri> SPECIAL_CASE_OEM_URIS = Arrays.asList(

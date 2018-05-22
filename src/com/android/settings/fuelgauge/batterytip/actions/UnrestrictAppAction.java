@@ -23,6 +23,7 @@ import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.fuelgauge.BatteryUtils;
+import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
 
 /**
@@ -44,12 +45,12 @@ public class UnrestrictAppAction extends BatteryTipAction {
      */
     @Override
     public void handlePositiveAction(int metricsKey) {
-        final String packageName = mUnRestrictAppTip.getPackageName();
+        final AppInfo appInfo = mUnRestrictAppTip.getUnrestrictAppInfo();
         // Clear force app standby, then app can run in the background
-        mBatteryUtils.setForceAppStandby(mBatteryUtils.getPackageUid(packageName), packageName,
+        mBatteryUtils.setForceAppStandby(appInfo.uid, appInfo.packageName,
                 AppOpsManager.MODE_ALLOWED);
         mMetricsFeatureProvider.action(mContext,
-                MetricsProto.MetricsEvent.ACTION_TIP_UNRESTRICT_APP, packageName, Pair.create(
-                        MetricsProto.MetricsEvent.FIELD_CONTEXT, metricsKey));
+                MetricsProto.MetricsEvent.ACTION_TIP_UNRESTRICT_APP, appInfo.packageName,
+                Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, metricsKey));
     }
 }
