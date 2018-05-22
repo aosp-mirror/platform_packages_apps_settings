@@ -50,8 +50,6 @@ public class SettingsShadowResourcesImpl extends ShadowResourcesImpl {
             id = R.drawable.ic_settings_wireless;
         } else if (id == R.drawable.app_filter_spinner_background) {
             id = R.drawable.ic_expand_more_inverse;
-        } else if (id == R.drawable.selectable_card_grey) {
-            id = R.drawable.ic_expand_more_inverse;
         } else if (id == R.drawable.color_bar_progress
                 || id == R.drawable.ring_progress) {
             // color_bar_progress and ring_progress use hidden resources, so just use the regular
