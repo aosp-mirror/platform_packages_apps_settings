@@ -283,18 +283,21 @@ public class SliceBuilderUtils {
         final PendingIntent contentIntent = getContentPendingIntent(context, sliceData);
         final IconCompat icon = IconCompat.createWithResource(context, sliceData.getIconResource());
         @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
+        final CharSequence subtitleText = getSubtitleText(context, controller, sliceData);
         final SliceAction primaryAction = new SliceAction(contentIntent, icon,
                 sliceData.getTitle());
         final List<String> keywords = buildSliceKeywords(sliceData);
 
         return new ListBuilder(context, sliceData.getUri(), ListBuilder.INFINITY)
                 .setAccentColor(color)
-                .addInputRange(builder -> builder
+                .setHeader(builder -> builder
                         .setTitle(sliceData.getTitle())
+                        .setSubtitle(subtitleText)
+                        .setPrimaryAction(primaryAction))
+                .addInputRange(builder -> builder
                         .setMax(sliderController.getMaxSteps())
                         .setValue(sliderController.getSliderPosition())
-                        .setInputAction(actionIntent)
-                        .setPrimaryAction(primaryAction))
+                        .setInputAction(actionIntent))
                 .setKeywords(keywords)
                 .build();
     }
