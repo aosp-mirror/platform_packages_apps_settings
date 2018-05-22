@@ -16,6 +16,7 @@
 
 package com.android.settings.slices;
 
+import static com.android.settings.bluetooth.BluetoothSliceBuilder.ACTION_BLUETOOTH_SLICE_CHANGED;
 import static com.android.settings.notification.ZenModeSliceBuilder.ACTION_ZEN_MODE_SLICE_CHANGED;
 import static com.android.settings.slices.SettingsSliceProvider.ACTION_SLIDER_CHANGED;
 import static com.android.settings.slices.SettingsSliceProvider.ACTION_TOGGLE_CHANGED;
@@ -35,6 +36,7 @@ import android.util.Log;
 import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.bluetooth.BluetoothSliceBuilder;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SliderPreferenceController;
 import com.android.settings.core.TogglePreferenceController;
@@ -65,6 +67,9 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
             case ACTION_SLIDER_CHANGED:
                 final int newPosition = intent.getIntExtra(Slice.EXTRA_RANGE_VALUE, -1);
                 handleSliderAction(context, key, newPosition, isPlatformSlice);
+                break;
+            case ACTION_BLUETOOTH_SLICE_CHANGED:
+                BluetoothSliceBuilder.handleUriChange(context, intent);
                 break;
             case ACTION_WIFI_SLICE_CHANGED:
                 WifiSliceBuilder.handleUriChange(context, intent);
