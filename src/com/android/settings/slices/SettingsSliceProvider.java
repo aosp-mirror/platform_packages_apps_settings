@@ -33,6 +33,7 @@ import android.util.KeyValueListParser;
 import android.util.Log;
 import android.util.Pair;
 
+import com.android.settings.location.LocationSliceBuilder;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.wifi.WifiSliceBuilder;
@@ -188,6 +189,8 @@ public class SettingsSliceProvider extends SliceProvider {
             return ZenModeSliceBuilder.getSlice(getContext());
         } else if (BluetoothSliceBuilder.BLUETOOTH_URI.equals(sliceUri)) {
             return BluetoothSliceBuilder.getSlice(getContext());
+        } else if (LocationSliceBuilder.LOCATION_URI.equals(sliceUri)) {
+            return LocationSliceBuilder.getSlice(getContext());
         }
 
         SliceData cachedSliceData = mSliceWeakDataCache.get(sliceUri);
@@ -289,10 +292,17 @@ public class SettingsSliceProvider extends SliceProvider {
     void loadSlice(Uri uri) {
         long startBuildTime = System.currentTimeMillis();
 
-        final SliceData sliceData = mSlicesDatabaseAccessor.getSliceDataFromUri(uri);
+        final SliceData sliceData;
+        try {
+            sliceData = mSlicesDatabaseAccessor.getSliceDataFromUri(uri);
+        } catch (IllegalStateException e) {
+            Log.e(TAG, "Could not get slice data for uri: " + uri, e);
+            return;
+        }
 
         final BasePreferenceController controller = SliceBuilderUtils.getPreferenceController(
                 getContext(), sliceData);
+
         final IntentFilter filter = controller.getIntentFilter();
         if (filter != null) {
             registerIntentToUri(filter, uri);
@@ -336,7 +346,8 @@ public class SettingsSliceProvider extends SliceProvider {
     private List<Uri> getSpecialCasePlatformUris() {
         return Arrays.asList(
                 WifiSliceBuilder.WIFI_URI,
-                BluetoothSliceBuilder.BLUETOOTH_URI
+                BluetoothSliceBuilder.BLUETOOTH_URI,
+                LocationSliceBuilder.LOCATION_URI
         );
     }
 
