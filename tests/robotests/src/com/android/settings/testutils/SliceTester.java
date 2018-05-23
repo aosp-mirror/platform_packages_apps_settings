@@ -191,20 +191,8 @@ public class SliceTester {
         assertThat(toggles).isEmpty();
 
         final PendingIntent primaryPendingIntent = metadata.getPrimaryAction().getAction();
-        final int availabilityStatus = SliceBuilderUtils.getPreferenceController(context,
-                sliceData).getAvailabilityStatus();
-        switch (availabilityStatus) {
-            case UNSUPPORTED_ON_DEVICE:
-            case CONDITIONALLY_UNAVAILABLE:
-                assertThat(primaryPendingIntent).isEqualTo(
-                        SliceBuilderUtils.getSettingsIntent(context));
-                break;
-            case DISABLED_FOR_USER:
-            case DISABLED_DEPENDENT_SETTING:
-                assertThat(primaryPendingIntent).isEqualTo(
-                        SliceBuilderUtils.getContentPendingIntent(context, sliceData));
-                break;
-        }
+        assertThat(primaryPendingIntent).isEqualTo(SliceBuilderUtils.getContentPendingIntent(
+                context, sliceData));
 
         final List<SliceItem> sliceItems = slice.getItems();
         assertTitle(sliceItems, sliceData.getTitle());
