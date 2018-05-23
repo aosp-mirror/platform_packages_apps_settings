@@ -23,6 +23,7 @@ import android.os.SystemProperties;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
+import android.text.TextUtils;
 
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.TelephonyProperties;
@@ -88,6 +89,11 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
     public static boolean isAvailable(Context context) {
         return context.getResources().getBoolean(R.bool.config_show_toggle_airplane)
                 && !context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_LEANBACK);
+    }
+
+    @Override
+    public boolean isSliceable() {
+        return TextUtils.equals(getPreferenceKey(), "toggle_airplane");
     }
 
     @Override
