@@ -176,6 +176,13 @@ public class SettingsSliceProvider extends SliceProvider {
 
     @Override
     public Slice onBindSlice(Uri sliceUri) {
+        final Set<String> blockedKeys = getBlockedKeys();
+        final String key = sliceUri.getLastPathSegment();
+        if (blockedKeys.contains(key)) {
+            Log.e(TAG, "Requested blocked slice with Uri: " + sliceUri);
+            return null;
+        }
+
         // If adding a new Slice, do not directly match Slice URIs.
         // Use {@link SlicesDatabaseAccessor}.
         if (WifiCallingSliceHelper.WIFI_CALLING_URI.equals(sliceUri)) {
