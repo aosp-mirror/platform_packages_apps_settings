@@ -27,6 +27,7 @@ import static com.android.settings.wifi.WifiSliceBuilder.ACTION_WIFI_SLICE_CHANG
 
 import android.app.slice.Slice;
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -151,6 +152,7 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
 
         sliderController.setSliderPosition(newPosition);
         logSliceValueChange(context, key, newPosition);
+        updateUri(context, key, isPlatformSlice);
     }
 
     /**
@@ -173,8 +175,15 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
     }
 
     private void updateUri(Context context, String key, boolean isPlatformDefined) {
-        final String path = SettingsSlicesContract.PATH_SETTING_ACTION + "/" + key;
-        final Uri uri = SliceBuilderUtils.getUri(path, isPlatformDefined);
+        final String authority = isPlatformDefined
+                ? SettingsSlicesContract.AUTHORITY
+                : SettingsSliceProvider.SLICE_AUTHORITY;
+        final Uri uri = new Uri.Builder()
+                .scheme(ContentResolver.SCHEME_CONTENT)
+                .authority(authority)
+                .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+                .appendPath(key)
+                .build();
         context.getContentResolver().notifyChange(uri, null /* observer */);
     }
 }
