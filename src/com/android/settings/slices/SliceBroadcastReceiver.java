@@ -106,7 +106,9 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
 
         if (!controller.isAvailable()) {
             Log.w(TAG, "Can't update " + key + " since the setting is unavailable");
-            updateUri(context, key, isPlatformSlice);
+            if (!controller.hasAsyncUpdate()) {
+                updateUri(context, key, isPlatformSlice);
+            }
             return;
         }
 
@@ -115,7 +117,9 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
         final TogglePreferenceController toggleController = (TogglePreferenceController) controller;
         toggleController.setChecked(isChecked);
         logSliceValueChange(context, key, isChecked ? 1 : 0);
-        updateUri(context, key, isPlatformSlice);
+        if (!controller.hasAsyncUpdate()) {
+            updateUri(context, key, isPlatformSlice);
+        }
     }
 
     private void handleSliderAction(Context context, String key, int newPosition,

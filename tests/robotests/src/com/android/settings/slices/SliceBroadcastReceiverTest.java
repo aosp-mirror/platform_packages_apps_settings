@@ -23,6 +23,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
@@ -123,6 +124,60 @@ public class SliceBroadcastReceiverTest {
         assertThat(valuePair.first)
                 .isEqualTo(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_INT_VALUE);
         assertThat(valuePair.second).isEqualTo(0);
+    }
+
+    @Test
+    public void toggleUpdate_synchronously_notifyChange_should_be_called() {
+        // Monitor the ContentResolver
+        final ContentResolver resolver = spy(mContext.getContentResolver());
+        doReturn(resolver).when(mContext).getContentResolver();
+
+        final String key = "key";
+        mSearchFeatureProvider.getSearchIndexableResources().getProviderValues().clear();
+        insertSpecialCase(key);
+
+        FakeToggleController fakeToggleController = new FakeToggleController(mContext, key);
+        fakeToggleController.setChecked(true);
+        // Set the toggle setting update synchronously.
+        fakeToggleController.setAsyncUpdate(false);
+        Intent intent = new Intent(SettingsSliceProvider.ACTION_TOGGLE_CHANGED);
+        intent.putExtra(SettingsSliceProvider.EXTRA_SLICE_KEY, key);
+
+        assertThat(fakeToggleController.isChecked()).isTrue();
+
+        // Toggle setting
+        mReceiver.onReceive(mContext, intent);
+
+        assertThat(fakeToggleController.isChecked()).isFalse();
+
+        final Uri expectedUri = SliceBuilderUtils.getUri(
+                SettingsSlicesContract.PATH_SETTING_ACTION + "/" + key, false);
+        verify(resolver).notifyChange(eq(expectedUri), eq(null));
+    }
+
+    @Test
+    public void toggleUpdate_asynchronously_notifyChange_should_not_be_called() {
+        // Monitor the ContentResolver
+        final ContentResolver resolver = spy(mContext.getContentResolver());
+        doReturn(resolver).when(mContext).getContentResolver();
+
+        final String key = "key";
+        mSearchFeatureProvider.getSearchIndexableResources().getProviderValues().clear();
+        insertSpecialCase(key);
+
+        FakeToggleController fakeToggleController = new FakeToggleController(mContext, key);
+        fakeToggleController.setChecked(true);
+        // Set the toggle setting update asynchronously.
+        fakeToggleController.setAsyncUpdate(true);
+        Intent intent = new Intent(SettingsSliceProvider.ACTION_TOGGLE_CHANGED);
+        intent.putExtra(SettingsSliceProvider.EXTRA_SLICE_KEY, key);
+
+        assertThat(fakeToggleController.isChecked()).isTrue();
+
+        // Toggle setting
+        mReceiver.onReceive(mContext, intent);
+
+        verify(resolver, never()).notifyChange(null, null);
     }
 
     @Test
