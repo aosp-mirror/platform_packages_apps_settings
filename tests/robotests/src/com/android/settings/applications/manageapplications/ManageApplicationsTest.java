@@ -40,6 +40,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Looper;
+import android.os.UserManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -272,6 +273,10 @@ public class ManageApplicationsTest {
     @Test
     public void applicationsAdapter_onBindViewHolder_updateSwitch_notifications() {
         ManageApplications manageApplications = mock(ManageApplications.class);
+        when(manageApplications.getActivity()).thenReturn(mock(Activity.class));
+        UserManager um = mock(UserManager.class);
+        when(um.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[]{});
+        ReflectionHelpers.setField(manageApplications, "mUserManager", um);
         manageApplications.mListType = LIST_TYPE_NOTIFICATION;
         ApplicationViewHolder holder = mock(ApplicationViewHolder.class);
         ReflectionHelpers.setField(holder, "itemView", mock(View.class));
@@ -293,6 +298,9 @@ public class ManageApplicationsTest {
         manageApplications.mListType = LIST_TYPE_MAIN;
         ApplicationViewHolder holder = mock(ApplicationViewHolder.class);
         ReflectionHelpers.setField(holder, "itemView", mock(View.class));
+        UserManager um = mock(UserManager.class);
+        when(um.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[]{});
+        ReflectionHelpers.setField(manageApplications, "mUserManager", um);
         ManageApplications.ApplicationsAdapter adapter =
                 new ManageApplications.ApplicationsAdapter(mState,
                         manageApplications, mock(AppFilterItem.class),
@@ -308,6 +316,10 @@ public class ManageApplicationsTest {
     @Test
     public void sortOrderSavedOnRebuild() {
         ManageApplications manageApplications = mock(ManageApplications.class);
+        when(manageApplications.getActivity()).thenReturn(mock(Activity.class));
+        UserManager um = mock(UserManager.class);
+        when(um.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[]{});
+        ReflectionHelpers.setField(manageApplications, "mUserManager", um);
         manageApplications.mListType = LIST_TYPE_NOTIFICATION;
         manageApplications.mSortOrder = -1;
         ManageApplications.ApplicationsAdapter adapter =

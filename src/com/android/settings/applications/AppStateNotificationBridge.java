@@ -15,9 +15,13 @@
  */
 package com.android.settings.applications;
 
+import android.app.usage.IUsageStatsManager;
 import android.app.usage.UsageEvents;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
+import android.os.RemoteException;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.text.format.DateUtils;
 import android.util.ArrayMap;
 import android.view.View;
@@ -25,6 +29,7 @@ import android.view.ViewGroup;
 import android.widget.Switch;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -33,6 +38,7 @@ import com.android.settingslib.utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -42,17 +48,24 @@ import java.util.Map;
 public class AppStateNotificationBridge extends AppStateBaseBridge {
 
     private final Context mContext;
-    private UsageStatsManager mUsageStatsManager;
+    private IUsageStatsManager mUsageStatsManager;
+    protected List<Integer> mUserIds;
     private NotificationBackend mBackend;
     private static final int DAYS_TO_CHECK = 7;
 
     public AppStateNotificationBridge(Context context, ApplicationsState appState,
-            Callback callback, UsageStatsManager usageStatsManager,
-            NotificationBackend backend) {
+            Callback callback, IUsageStatsManager usageStatsManager,
+            UserManager userManager, NotificationBackend backend) {
         super(appState, callback);
         mContext = context;
         mUsageStatsManager = usageStatsManager;
         mBackend = backend;
+        mUserIds = new ArrayList<>();
+        mUserIds.add(mContext.getUserId());
+        int workUserId = Utils.getManagedProfileId(userManager, mContext.getUserId());
+        if (workUserId != UserHandle.USER_NULL) {
+            mUserIds.add(workUserId);
+        }
     }
 
     @Override
@@ -62,7 +75,8 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
 
         final Map<String, NotificationsSentState> map = getAggregatedUsageEvents();
         for (AppEntry entry : apps) {
-            NotificationsSentState stats = map.get(entry.info.packageName);
+            NotificationsSentState stats =
+                    map.get(getKey(UserHandle.getUserId(entry.info.uid), entry.info.packageName));
             calculateAvgSentCounts(stats);
             addBlockStatus(entry, stats);
             entry.extraInfo = stats;
@@ -71,8 +85,8 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
 
     @Override
     protected void updateExtraInfo(AppEntry entry, String pkg, int uid) {
-        Map<String, NotificationsSentState> map = getAggregatedUsageEvents();
-        NotificationsSentState stats = map.get(entry.info.packageName);
+        NotificationsSentState stats = getAggregatedUsageEvents(
+                UserHandle.getUserId(entry.info.uid), entry.info.packageName);
         calculateAvgSentCounts(stats);
         addBlockStatus(entry, stats);
         entry.extraInfo = stats;
@@ -116,18 +130,59 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
 
         long now = System.currentTimeMillis();
         long startTime = now - (DateUtils.DAY_IN_MILLIS * DAYS_TO_CHECK);
-        UsageEvents events = mUsageStatsManager.queryEvents(startTime, now);
+        for (int userId : mUserIds) {
+            UsageEvents events = null;
+            try {
+                events = mUsageStatsManager.queryEventsForUser(
+                        startTime, now, userId, mContext.getPackageName());
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+            if (events != null) {
+                UsageEvents.Event event = new UsageEvents.Event();
+                while (events.hasNextEvent()) {
+                    events.getNextEvent(event);
+                    NotificationsSentState stats =
+                            aggregatedStats.get(getKey(userId, event.getPackageName()));
+                    if (stats == null) {
+                        stats = new NotificationsSentState();
+                        aggregatedStats.put(getKey(userId, event.getPackageName()), stats);
+                    }
+
+                    if (event.getEventType() == UsageEvents.Event.NOTIFICATION_INTERRUPTION) {
+                        if (event.getTimeStamp() > stats.lastSent) {
+                            stats.lastSent = event.getTimeStamp();
+                        }
+                        stats.sentCount++;
+                    }
+
+                }
+            }
+        }
+        return aggregatedStats;
+    }
+
+    protected NotificationsSentState getAggregatedUsageEvents(int userId, String pkg) {
+        NotificationsSentState stats = null;
+
+        long now = System.currentTimeMillis();
+        long startTime = now - (DateUtils.DAY_IN_MILLIS * DAYS_TO_CHECK);
+        UsageEvents events = null;
+        try {
+            events = mUsageStatsManager.queryEventsForPackageForUser(
+                    startTime, now, userId, pkg, mContext.getPackageName());
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
         if (events != null) {
             UsageEvents.Event event = new UsageEvents.Event();
             while (events.hasNextEvent()) {
                 events.getNextEvent(event);
-                NotificationsSentState stats = aggregatedStats.get(event.getPackageName());
-                if (stats == null) {
-                    stats = new NotificationsSentState();
-                    aggregatedStats.put(event.getPackageName(), stats);
-                }
 
                 if (event.getEventType() == UsageEvents.Event.NOTIFICATION_INTERRUPTION) {
+                    if (stats == null) {
+                        stats = new NotificationsSentState();
+                    }
                     if (event.getTimeStamp() > stats.lastSent) {
                         stats.lastSent = event.getTimeStamp();
                     }
@@ -136,7 +191,7 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
 
             }
         }
-        return aggregatedStats;
+        return stats;
     }
 
     private static NotificationsSentState getNotificationsSentState(AppEntry entry) {
@@ -147,6 +202,10 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
             return (NotificationsSentState) entry.extraInfo;
         }
         return null;
+    }
+
+    protected static String getKey(int userId, String pkg) {
+        return userId + "|" + pkg;
     }
 
     public View.OnClickListener getSwitchOnClickListener(final AppEntry entry) {
