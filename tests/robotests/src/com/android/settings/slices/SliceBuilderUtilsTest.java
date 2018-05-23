@@ -336,7 +336,7 @@ public class SliceBuilderUtilsTest {
 
         final Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
 
-        SliceTester.testSettingsUnavailableSlice(mContext, slice, data);
+        assertThat(slice).isNull();
     }
 
     @Test
@@ -349,7 +349,7 @@ public class SliceBuilderUtilsTest {
 
         final Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
 
-        SliceTester.testSettingsUnavailableSlice(mContext, slice, data);
+        assertThat(slice).isNull();
     }
 
     @Test
@@ -394,7 +394,7 @@ public class SliceBuilderUtilsTest {
                 .isEqualTo(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_NAME);
         assertThat(capturedLoggingPair.second)
                 .isEqualTo(data.getKey());
-        SliceTester.testSettingsUnavailableSlice(mContext, slice, data);
+        assertThat(slice).isNull();
     }
 
     @Test
@@ -406,16 +406,6 @@ public class SliceBuilderUtilsTest {
         final Uri intentData = intent.getData();
 
         assertThat(intentData).isEqualTo(expectedUri);
-    }
-
-    @Test
-    public void getSettingsIntent_createsIntentToSettings() {
-        final Intent intent = new Intent(Settings.ACTION_SETTINGS);
-        final PendingIntent expectedIntent = PendingIntent.getActivity(mContext, 0, intent, 0);
-
-        final PendingIntent settingsIntent = SliceBuilderUtils.getSettingsIntent(mContext);
-
-        assertThat(expectedIntent).isEqualTo(settingsIntent);
     }
 
     private SliceData getDummyData() {

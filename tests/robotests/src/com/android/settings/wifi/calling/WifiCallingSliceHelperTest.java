@@ -114,7 +114,7 @@ public class WifiCallingSliceHelperTest {
         final Slice slice = mWfcSliceHelper.createWifiCallingSlice(mWfcURI);
 
         testWifiCallingSettingsUnavailableSlice(slice, null,
-                SliceBuilderUtils.getSettingsIntent(mContext));
+                WifiCallingSliceHelper.getSettingsIntent(mContext));
     }
 
     @Test
@@ -125,7 +125,7 @@ public class WifiCallingSliceHelperTest {
 
         assertThat(mWfcSliceHelper.getDefaultVoiceSubId()).isEqualTo(1);
         testWifiCallingSettingsUnavailableSlice(slice, null,
-                SliceBuilderUtils.getSettingsIntent(mContext));
+                WifiCallingSliceHelper.getSettingsIntent(mContext));
     }
 
     @Test
