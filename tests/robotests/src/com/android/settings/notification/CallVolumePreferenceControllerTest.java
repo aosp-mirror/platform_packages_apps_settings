@@ -92,4 +92,18 @@ public class CallVolumePreferenceControllerTest {
 
         assertThat(mController.getAudioStream()).isEqualTo(AudioManager.STREAM_BLUETOOTH_SCO);
     }
+
+    @Test
+    public void isSliceableCorrectKey_returnsTrue() {
+        final CallVolumePreferenceController controller =
+        new CallVolumePreferenceController(mContext,"call_volume");
+        assertThat(controller.isSliceable()).isTrue();
+    }
+
+    @Test
+    public void isSliceableIncorrectKey_returnsFalse() {
+        final CallVolumePreferenceController controller =
+        new CallVolumePreferenceController(mContext, "bad_key");
+        assertThat(controller.isSliceable()).isFalse();
+    }
 }

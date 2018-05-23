@@ -33,6 +33,7 @@ import android.net.IConnectivityManager;
 import android.net.NetworkRequest;
 import android.os.IBinder;
 import android.os.UserHandle;
+import android.provider.SettingsSlicesContract;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
@@ -88,7 +89,7 @@ public class VpnPreferenceControllerTest {
         doReturn(true).when(mController).isAvailable();
         mController.displayPreference(mScreen);
 
-        verify(mPreference).setDependency(AirplaneModePreferenceController.KEY_TOGGLE_AIRPLANE);
+        verify(mPreference).setDependency(SettingsSlicesContract.KEY_AIRPLANE_MODE);
     }
 
     @Test

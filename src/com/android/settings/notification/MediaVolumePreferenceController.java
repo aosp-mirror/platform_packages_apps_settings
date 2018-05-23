@@ -18,6 +18,7 @@ package com.android.settings.notification;
 
 import android.content.Context;
 import android.media.AudioManager;
+import android.text.TextUtils;
 
 import com.android.settings.R;
 
@@ -35,6 +36,11 @@ public class MediaVolumePreferenceController extends
         return mContext.getResources().getBoolean(R.bool.config_show_media_volume)
                 ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public boolean isSliceable() {
+        return TextUtils.equals(getPreferenceKey(), KEY_MEDIA_VOLUME);
     }
 
     @Override

@@ -173,6 +173,11 @@
     <string name="bluetooth_pref_summary" product="tablet" msgid="3520035819421024105">"اپنے ٹیبلیٹ کو قریبی بلوٹوتھ آلات سے مواصلت کرنے کی اجازت دیں"</string>
     <string name="bluetooth_pref_summary" product="device" msgid="2205100629387332862">"اپنے آلہ کو قریبی بلوٹوتھ آلات سے مواصلت کرنے کی اجازت دیں"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="782032074675157079">"اپنے فون کو قریبی بلوٹوتھ آلات سے مواصلت کرنے کی اجازت دیں"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload" msgid="4936610906348223810">"‏Bluetooth A2DP ہارڈ ویئر آف لوڈ بند کریں"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_title" msgid="4340101417209145308">"آلہ ریسٹارٹ کریں؟"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_message" msgid="8827019472003234568">"یہ ترتیب تبدیل کرنے کیلئے آپ کو اپنا آلہ ریسٹارٹ کرنا ہوگا۔"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_confirm" msgid="2053793518537051975">"ریسٹارٹ کریں"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_cancel" msgid="2382443064737856652">"منسوخ کریں"</string>
     <string name="connected_device_available_media_title" msgid="2560067541413280645">"دستیاب میڈیا آلات"</string>
     <string name="connected_device_available_call_title" msgid="697154660967595684">"دستیاب کال آلات"</string>
     <string name="connected_device_connected_title" msgid="5871712271201945606">"فی الحال منسلک ہے"</string>
@@ -2945,14 +2950,10 @@
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"ڈیٹا کا استعمال"</string>
     <string name="network_dashboard_summary_hotspot" msgid="8494210248613254574">"ہاٹ اسپاٹ"</string>
     <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"منسلک آلات"</string>
-    <!-- no translation found for connected_devices_dashboard_summary (2665221896894251402) -->
-    <skip />
-    <!-- no translation found for connected_devices_dashboard_no_nfc_summary (3840842725283655533) -->
-    <skip />
-    <!-- no translation found for connected_devices_dashboard_no_driving_mode_summary (5018708106066758867) -->
-    <skip />
-    <!-- no translation found for connected_devices_dashboard_no_driving_mode_no_nfc_summary (5250078362483148199) -->
-    <skip />
+    <string name="connected_devices_dashboard_summary" msgid="2665221896894251402">"‏بلوٹوتھ، ڈرائیونگ موڈ، NFC"</string>
+    <string name="connected_devices_dashboard_no_nfc_summary" msgid="3840842725283655533">"بلوٹوتھ، ڈرائیونگ موڈ"</string>
+    <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="5018708106066758867">"‏بلوٹوتھ، NFC"</string>
+    <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="5250078362483148199">"بلوٹوتھ"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"ایپس اور اطلاعات"</string>
     <string name="app_and_notification_dashboard_summary" msgid="2363314178802548682">"اجازتیں، ڈیفالٹ ایپس"</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"اکاؤنٹس"</string>
@@ -3094,18 +3095,24 @@
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"بصری سگنلز کی اجازت دیں"</string>
     <string name="zen_mode_settings_category" msgid="3982039687186952865">"\'ڈسٹرب نہ کریں\' آن ہونے پر"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"اطلاعات"</string>
-    <string name="zen_mode_restrict_notifications_mute" msgid="8649062661635246283">"اطلاعات خاموشی سے دکھائیں"</string>
-    <string name="zen_mode_restrict_notifications_mute_summary" msgid="8450964969807231275">"اطلاعات خاموش کر دی جائیں گی"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_mute (3690261619682396872) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_mute_summary (5810076116489877312) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="3465600930732602159">"جب اطلاعات آپ تک پہنچیں گی، تو آپ کا فون آواز یا وائبریٹ نہیں کرے گا۔"</string>
-    <string name="zen_mode_restrict_notifications_hide" msgid="9070829387109283980">"اطلاعات چھپائیں"</string>
-    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3832808022882158781">"آپ کو نئی یا موجودہ اطلاعات دکھائی نہیں دیں گی"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_hide (5305121630186687339) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_hide_summary (7555448406901864904) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_hide_footer" msgid="6559283246372102465">"آپ کے فون پر نئی یا موجودہ اطلاعات دکھائی نہیں دیں گی اور یہ آواز یا وائبریٹ نہیں کرے گا۔ جب آپ اپنی اسکرین کے اوپری حصے سے نیچے کی طرف سوائپ کریں گے تو اطلاعات دکھائی نہیں دیں گی۔\n\nذہن نشین کر لیں کہ فون کی سرگرمی اور اسٹیٹس کی اہم اطلاعات اب بھی دکھائی دیں گی۔"</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"حسب ضرورت"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"حسب ضرورت ترتیب فعال کریں"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"حسب ضرورت ترتیب ہٹائیں"</string>
-    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"نظر آئیں گی"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_summary_muted (5450158135853888485) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"جزوی طور پر پوشیدہ"</string>
-    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"پوشیدہ"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_summary_hidden (3618285192806732504) -->
+    <skip />
     <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"حسب ضرورت پابندیاں"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"اسکرین کے آن ہونے پر"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"اسکرین کے آف ہونے پر"</string>
@@ -3164,19 +3171,14 @@
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"خاموش کردہ، لیکن <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>، <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> اور <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g> کو اجازت دیں"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"پیغامات، ایونٹس اور یاد دہانیاں"</string>
     <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"\'ڈسٹرب نہ کریں\' آن ہونے پر، پیغامات، یاد دہانیاں اور ایونٹس خاموش کر دئے جائیں گے، ماسوا ان آئٹمز کے جن کی آپ نے اوپر اجازت دی ہے۔ اپنے دوستوں، اہل خانہ اور دیگر رابطوں کو آپ تک پہنچنے کی اجازت دینے کیلئے، آپ پیغامات کی ترتیبات ایڈجسٹ کر سکتے ہیں۔"</string>
-    <!-- no translation found for zen_onboarding_ok (6131211000824433013) -->
-    <skip />
+    <string name="zen_onboarding_ok" msgid="6131211000824433013">"ہو گیا"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"ترتیبات"</string>
-    <!-- no translation found for zen_onboarding_new_setting_title (3311718322273907394) -->
+    <!-- no translation found for zen_onboarding_new_setting_title (1893095176110470711) -->
     <skip />
-    <!-- no translation found for zen_onboarding_current_setting_title (776426065129609376) -->
-    <skip />
-    <!-- no translation found for zen_onboarding_new_setting_summary (6293026064871880706) -->
-    <skip />
-    <!-- no translation found for zen_onboarding_current_setting_summary (1280614488924843713) -->
-    <skip />
-    <!-- no translation found for zen_onboarding_dnd_visual_disturbances_header (1352808651270918932) -->
-    <skip />
+    <string name="zen_onboarding_current_setting_title" msgid="776426065129609376">"اطلاعات کی کوئی آواز نہیں"</string>
+    <string name="zen_onboarding_new_setting_summary" msgid="6293026064871880706">"آپ کو ستارے کے نشان والے رابطوں اور بار بار کال کرنے والے مجاز لوگوں کی طرف سے اطلاعات، کالز نظر نہیں آئیں گی یا سنائی نہيں دیں گی۔"</string>
+    <string name="zen_onboarding_current_setting_summary" msgid="1280614488924843713">"(موجودہ ترتیب)"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1352808651270918932">"\'ڈسٹرب نہ کریں\' کی اطلاع کی ترتیبات کو تبدیل کریں؟"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"دفتری پروفائل کی آوازیں"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"ذاتی پروفائل کی آوازیں استعمال کریں"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"دفتری اور ذاتی پروفائلز کی آوازیں ایک ہی جیسی ہیں"</string>
@@ -4108,7 +4110,8 @@
     <string name="carrier_provisioning" msgid="4398683675591893169">"کیرئیر فراہمی معلومات"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"ٹرگر کیرئیر فراہمی"</string>
     <string name="zen_suggestion_title" msgid="798067603460192693">"\'ڈسٹرب نہ کریں\' کو اپ ڈیٹ کریں"</string>
-    <string name="zen_suggestion_summary" msgid="4573237195296808909">"متوجہ رہنے کے لیے اطلاعات چھپائیں"</string>
+    <!-- no translation found for zen_suggestion_summary (5928686804697233014) -->
+    <skip />
     <string name="new_device_suggestion_title" msgid="698847081680980774">"نیا اور دلچسپ کیا ہے؟"</string>
     <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"اپنے نئے فون کا ایک ٹؤر لیں"</string>
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"اپنے نئے ٹیبلیٹ کا ایک ٹؤر لیں"</string>

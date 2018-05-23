@@ -68,12 +68,13 @@
         settings:useAdminDisabledSummary="true" />
 
     <com.android.settingslib.RestrictedSwitchPreference
-        android:key="toggle_airplane"
+        android:key="airplane_mode"
         android:title="@string/airplane_mode"
         android:icon="@drawable/ic_airplanemode_active"
         android:disableDependentsState="true"
         android:order="5"
         settings:controller="com.android.settings.network.AirplaneModePreferenceController"
+        settings:platform_slice="true"
         settings:userRestriction="no_airplane_mode"/>
 
     <Preference

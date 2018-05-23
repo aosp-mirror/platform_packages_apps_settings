@@ -123,4 +123,18 @@ public class SwipeUpPreferenceControllerTest {
         mController.setChecked(false);
         assertThat(mController.isChecked()).isFalse();
     }
+
+    @Test
+    public void isSliceableCorrectKey_returnsTrue() {
+        final SwipeUpPreferenceController controller =
+                new SwipeUpPreferenceController(mContext,"gesture_swipe_up");
+        assertThat(controller.isSliceable()).isTrue();
+    }
+
+    @Test
+    public void isSliceableIncorrectKey_returnsFalse() {
+        final SwipeUpPreferenceController controller =
+                new SwipeUpPreferenceController(mContext, "bad_key");
+        assertThat(controller.isSliceable()).isFalse();
+    }
 }

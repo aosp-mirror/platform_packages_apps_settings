@@ -132,6 +132,14 @@ public class SettingsShadowResources extends ShadowResources {
                 || id == com.android.settings.R.array.batterymeter_plus_points) {
             return new int[2];
         }
+
+        final Object override;
+        synchronized (sResourceOverrides) {
+            override = sResourceOverrides.get(id);
+        }
+        if (override instanceof int[]) {
+            return (int[]) override;
+        }
         return directlyOn(realResources, Resources.class).getIntArray(id);
     }
 

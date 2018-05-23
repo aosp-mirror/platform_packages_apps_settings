@@ -183,4 +183,19 @@ public class BadgingNotificationPreferenceControllerTest {
 
         assertThat(updatedValue).isEqualTo(ON);
     }
+
+    @Test
+    public void isSliceableCorrectKey_returnsTrue() {
+        final BadgingNotificationPreferenceController controller =
+                new BadgingNotificationPreferenceController(mContext,
+                        "notification_badging");
+        assertThat(controller.isSliceable()).isTrue();
+    }
+
+    @Test
+    public void isSliceableIncorrectKey_returnsFalse() {
+        final BadgingNotificationPreferenceController controller =
+                new BadgingNotificationPreferenceController(mContext, "bad_key");
+        assertThat(controller.isSliceable()).isFalse();
+    }
 }

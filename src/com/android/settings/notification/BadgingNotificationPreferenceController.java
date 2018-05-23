@@ -27,6 +27,7 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.TwoStatePreference;
+import android.text.TextUtils;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.TogglePreferenceController;
@@ -85,6 +86,11 @@ public class BadgingNotificationPreferenceController extends TogglePreferenceCon
         return mContext.getResources()
                 .getBoolean(com.android.internal.R.bool.config_notificationBadging)
                 ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public boolean isSliceable() {
+        return TextUtils.equals(getPreferenceKey(), "notification_badging");
     }
 
     @Override

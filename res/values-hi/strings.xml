@@ -173,6 +173,11 @@
     <string name="bluetooth_pref_summary" product="tablet" msgid="3520035819421024105">"अपने टैबलेट को आस-पास के ब्लूटूथ डिवाइस से संपर्क करने की मंज़ूरी दें"</string>
     <string name="bluetooth_pref_summary" product="device" msgid="2205100629387332862">"अपने डिवाइस को आस-पास के ब्लूटूथ डिवाइस से संपर्क करने की मंज़ूरी दें"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="782032074675157079">"अपने फ़ोन को आस-पास के ब्लूटूथ डिवाइस से संपर्क करने की मंज़ूरी दें"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload" msgid="4936610906348223810">"ब्लूटूथ ए2डीपी हार्डवेयर ऑफ़लोड बंद करें"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_title" msgid="4340101417209145308">"डिवाइस रीस्टार्ट करें?"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_message" msgid="8827019472003234568">"यह सेटिंग बदलने के लिए डिवाइस रीस्टार्ट करना ज़रूरी है."</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_confirm" msgid="2053793518537051975">"रीस्टार्ट करें"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_cancel" msgid="2382443064737856652">"अभी नहीं"</string>
     <string name="connected_device_available_media_title" msgid="2560067541413280645">"मौजूद मीडिया डिवाइस"</string>
     <string name="connected_device_available_call_title" msgid="697154660967595684">"कॉल की सुविधा वाले उपलब्ध डिवाइस"</string>
     <string name="connected_device_connected_title" msgid="5871712271201945606">"इंटरनेट से जुड़े हुए डिवाइस"</string>
@@ -3092,18 +3097,24 @@
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"संकेत दिखाए जाने की अनुमति दें"</string>
     <string name="zen_mode_settings_category" msgid="3982039687186952865">"परेशान न करें सुविधा चालू होने पर"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"सूचनाएं"</string>
-    <string name="zen_mode_restrict_notifications_mute" msgid="8649062661635246283">"बिना आवाज़ के सूचनाएं दिखाएं"</string>
-    <string name="zen_mode_restrict_notifications_mute_summary" msgid="8450964969807231275">"सूचनाएं म्यूट कर दी जाएंगी"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_mute (3690261619682396872) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_mute_summary (5810076116489877312) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="3465600930732602159">"सूचनाएं मिलने पर आपका फ़ोन आवाज़ या वाइब्रेट नहीं करेगा."</string>
-    <string name="zen_mode_restrict_notifications_hide" msgid="9070829387109283980">"सूचनाएं छिपाएं"</string>
-    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3832808022882158781">"आप नई और पहले से मौजूद सूचनाएं नहीं देख पाएंगे"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_hide (5305121630186687339) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_hide_summary (7555448406901864904) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_hide_footer" msgid="6559283246372102465">"आपका फ़ोन नई या पहले से मौजूद कोई सूचना नहीं दिखाएगा और न ही आवाज़ या वाइब्रेट करेगा. अपने डिवाइस की स्क्रीन पर ऊपर से नीचे की ओर स्वाइप करने पर भी आपको सूचनाएं नहीं दिखाई देंगी. \n\nध्यान रहे कि फ़ोन की गतिविधि और स्थिति से जुड़ी ज़रूरी सूचनाएं आपको फिर भी दिखती रहेंगी."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"पसंद के मुताबिक बनाएं"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"पसंद के मुताबिक बनाई गई सेटिंग चालू करें"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"पसंद के मुताबिक बनाई गई सेटिंग हटाएं"</string>
-    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"सूचनाएं दिखाई देंगी"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_summary_muted (5450158135853888485) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"कुछ सूचनाएं दिखाई नहीं देंगी"</string>
-    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"सूचनाएं दिखाई नहीं देंगी"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_summary_hidden (3618285192806732504) -->
+    <skip />
     <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"अपनी पसंद के मुताबिक रोक लगाएं"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"स्क्रीन चालू होने पर"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"स्क्रीन बंद होने पर"</string>
@@ -3164,9 +3175,10 @@
     <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"\'परेशान न करें\' सुविधा चालू होने पर मैसेज, रिमाइंडर और इवेंट की सूचनाएं म्यूट कर दी जाएंगी. आपको सिर्फ़ उन ही सूचनाओं की आवाज़ सुनाई देगी या वाइब्रेशन महसूस होगा जिनके लिए आप मंज़ूरी देंगे. आप मैसेज सेटिंग में बदलाव कर अपने दोस्तों, परिवार के लोगों और अन्य संपर्कों के मैसेज की सूचना मिलने की मंज़ूरी दे सकते हैं."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"हो गया"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"सेटिंग"</string>
-    <string name="zen_onboarding_new_setting_title" msgid="3311718322273907394">"सूचनाएं आने पर न तो स्क्रीन पर कुछ दिखाई देगा और न ही आवाज़ आएगी"</string>
+    <!-- no translation found for zen_onboarding_new_setting_title (1893095176110470711) -->
+    <skip />
     <string name="zen_onboarding_current_setting_title" msgid="776426065129609376">"सूचना आने पर कोई आवाज़ न हो"</string>
-    <string name="zen_onboarding_new_setting_summary" msgid="6293026064871880706">"अगर आप यह सेटिंग चुनते हैं तो, सूचना आने पर न तो स्क्रीन पर कुछ दिखाया जाएगा और न ही कोई आवाज़ आएगी. तारे के निशान वाले संपर्कों और दोबारा कॉल करने वालों के कॉल (ऐसे कॉल करने वाले जो पहली बार कॉल रिसीव न किए जाने पर 15 मिनट के अंदर ही दोबारा कॉल करते हैं) आने दिए जाएंगे."</string>
+    <string name="zen_onboarding_new_setting_summary" msgid="6293026064871880706">"अगर आप यह सेटिंग चुनते हैं तो, सूचना आने पर न तो स्क्रीन पर कुछ दिखाया जाएगा और न ही कोई आवाज़ आएगी. पसंदीदा संपर्कों और दोबारा (पहली बार कॉल रिसीव न करने के 15 मिनट के अंदर ही दोबारा) कॉल करने वालों के कॉल आने दिए जाएंगे."</string>
     <string name="zen_onboarding_current_setting_summary" msgid="1280614488924843713">"(मौजूदा सेटिंग)"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1352808651270918932">"क्या आप \'परेशान न करें\' की सूचना सेटिंग में बदलाव करना चाहते हैं?"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"कार्य प्रोफ़ाइल की ध्वनियां"</string>
@@ -4100,7 +4112,8 @@
     <string name="carrier_provisioning" msgid="4398683675591893169">"मोबाइल और इंटरनेट सेवा देने वाली कंपनी की नेटवर्क से जुड़ी जानकारी"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"मोबाइल और इंटरनेट सेवा देने वाली कंपनी का नेटवर्क ट्रिगर करें"</string>
     <string name="zen_suggestion_title" msgid="798067603460192693">"\'परेशान न करें सुविधा\' अपडेट करें"</string>
-    <string name="zen_suggestion_summary" msgid="4573237195296808909">"ध्यान भटकने से रोकने के लिए डिवाइस की सूचनाएं छिपाएं"</string>
+    <!-- no translation found for zen_suggestion_summary (5928686804697233014) -->
+    <skip />
     <string name="new_device_suggestion_title" msgid="698847081680980774">"नया और रोमांचक क्या है?"</string>
     <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"अपने नए फ़ोन के बारे में अच्छी तरह जानें"</string>
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"अपने नए टैबलेट के बारे में अच्छी तरह जानें"</string>

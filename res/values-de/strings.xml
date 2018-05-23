@@ -172,6 +172,11 @@
     <string name="bluetooth_pref_summary" product="tablet" msgid="3520035819421024105">"Kommunikation zwischen deinem Tablet und Bluetooth-Geräten in der Nähe zulassen"</string>
     <string name="bluetooth_pref_summary" product="device" msgid="2205100629387332862">"Kommunikation zwischen deinem Gerät und Bluetooth-Geräten in der Nähe zulassen"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="782032074675157079">"Kommunikation zwischen deinem Smartphone und Bluetooth-Geräten in der Nähe zulassen"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload" msgid="4936610906348223810">"Entlastung von Bluetooth A2DP-Hardware deaktivieren"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_title" msgid="4340101417209145308">"Gerät neu starten?"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_message" msgid="8827019472003234568">"Du musst dein Gerät neu starten, um diese Einstellung zu ändern."</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_confirm" msgid="2053793518537051975">"Neu starten"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_cancel" msgid="2382443064737856652">"Abbrechen"</string>
     <string name="connected_device_available_media_title" msgid="2560067541413280645">"Verfügbare Mediengeräte"</string>
     <string name="connected_device_available_call_title" msgid="697154660967595684">"Verfügbare Anrufgeräte"</string>
     <string name="connected_device_connected_title" msgid="5871712271201945606">"Derzeit verbunden"</string>
@@ -1097,7 +1102,7 @@
     <string name="night_display_title" msgid="2626451512200357686">"Nachtlicht"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Beim Nachtlicht wird das Display gelb gefärbt. Dadurch kannst du den Bildschirm bei schwachem Licht leichter lesen und er wirkt beim Einschlafen nicht störend."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Zeitplan"</string>
-    <string name="night_display_auto_mode_never" msgid="2483761922928753400">"Keins"</string>
+    <string name="night_display_auto_mode_never" msgid="2483761922928753400">"Kein Zeitplan"</string>
     <string name="night_display_auto_mode_custom" msgid="2379394568898721765">"Zu benutzerdefinierter Zeit aktiv"</string>
     <string name="night_display_auto_mode_twilight" msgid="589042813708244059">"Nachts aktiv"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"Beginn"</string>
@@ -3092,18 +3097,24 @@
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"Visuelle Signale zulassen"</string>
     <string name="zen_mode_settings_category" msgid="3982039687186952865">"Wenn \"Bitte nicht stören\" aktiviert ist"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"Benachrichtigungen"</string>
-    <string name="zen_mode_restrict_notifications_mute" msgid="8649062661635246283">"Benachrichtigungen ohne Ton anzeigen lassen"</string>
-    <string name="zen_mode_restrict_notifications_mute_summary" msgid="8450964969807231275">"Benachrichtigungen werden stummgeschaltet"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_mute (3690261619682396872) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_mute_summary (5810076116489877312) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="3465600930732602159">"Wenn auf deinem Smartphone neue Benachrichtigungen eingehen, ist weder ein akustisches Signal zu hören noch eine Vibration zu spüren."</string>
-    <string name="zen_mode_restrict_notifications_hide" msgid="9070829387109283980">"Benachrichtigungen ausblenden"</string>
-    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3832808022882158781">"Du siehst keine neuen oder vorhandenen Benachrichtigungen"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_hide (5305121630186687339) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_hide_summary (7555448406901864904) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_hide_footer" msgid="6559283246372102465">"Auf deinem Smartphone werden keine neuen oder vorhandenen Benachrichtigungen angezeigt. Es ist weder ein akustisches Signal zu hören noch eine Vibration zu spüren. Es erscheinen auch keine Benachrichtigungen, wenn du vom oberen Bildschirmrand nach unten wischst.\n\nBenachrichtigungen für grundlegende Smartphone-Aktivitäten und den Smartphone-Status werden weiterhin angezeigt."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"Benutzerdefiniert"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"Benutzerdefinierte Einstellung aktivieren"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"Benutzerdefinierte Einstellung entfernen"</string>
-    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"Werden angezeigt"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_summary_muted (5450158135853888485) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"Teilweise ausgeblendet"</string>
-    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"Ausgeblendet"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_summary_hidden (3618285192806732504) -->
+    <skip />
     <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"Benutzerdefinierte Einschränkungen"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"Bei aktiviertem Display"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"Bei deaktiviertem Display"</string>
@@ -3164,7 +3175,8 @@
     <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"Wenn \"Bitte nicht stören\" aktiviert ist, werden alle Nachrichten, Erinnerungen und Termine stummgeschaltet, die du oben nicht ausdrücklich zulässt. Die Nachrichteneinstellungen lassen sich anpassen, damit dich Freunde, Familie oder andere Kontakte erreichen können."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"Fertig"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Einstellungen"</string>
-    <string name="zen_onboarding_new_setting_title" msgid="3311718322273907394">"Keine grafischen Elemente oder Töne bei Benachrichtigungen"</string>
+    <!-- no translation found for zen_onboarding_new_setting_title (1893095176110470711) -->
+    <skip />
     <string name="zen_onboarding_current_setting_title" msgid="776426065129609376">"Kein Ton bei Benachrichtigungen"</string>
     <string name="zen_onboarding_new_setting_summary" msgid="6293026064871880706">"Du siehst oder hörst keine Benachrichtigungen. Anrufe von markierten Kontakten und wiederholten Anrufern sind erlaubt."</string>
     <string name="zen_onboarding_current_setting_summary" msgid="1280614488924843713">"(Aktuelle Einstellung)"</string>
@@ -4100,7 +4112,8 @@
     <string name="carrier_provisioning" msgid="4398683675591893169">"Informationen zur Nutzerverwaltung durch den Anbieter"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"Nutzerverwaltung durch den Anbieter auslösen"</string>
     <string name="zen_suggestion_title" msgid="798067603460192693">"\"Bitte nicht stören\" aktualisieren"</string>
-    <string name="zen_suggestion_summary" msgid="4573237195296808909">"Benachrichtigungen zur besseren Konzentration ausblenden"</string>
+    <!-- no translation found for zen_suggestion_summary (5928686804697233014) -->
+    <skip />
     <string name="new_device_suggestion_title" msgid="698847081680980774">"Was gibt\'s Neues?"</string>
     <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"Lass dir zeigen, was dein neues Smartphone alles kann"</string>
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Lass dir zeigen, was dein neues Tablet alles kann"</string>

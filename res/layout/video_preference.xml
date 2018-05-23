@@ -23,7 +23,8 @@
     android:clipToPadding="false"
     android:gravity="center"
     android:minHeight="?android:attr/listPreferredItemHeightSmall"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:importantForAccessibility="noHideDescendants">
 
     <com.android.settings.widget.AspectRatioFrameLayout
         android:id="@+id/video_container"

@@ -95,4 +95,11 @@ public class NotificationVolumePreferenceControllerTest {
     public void getAudioStream_shouldReturnNotification() {
         assertThat(mController.getAudioStream()).isEqualTo(AudioManager.STREAM_NOTIFICATION);
     }
+
+    @Test
+    public void isSliceableCorrectKey_returnsTrue() {
+        final NotificationVolumePreferenceController controller =
+                new NotificationVolumePreferenceController(mContext);
+        assertThat(controller.isSliceable()).isTrue();
+    }
 }

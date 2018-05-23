@@ -15,14 +15,18 @@
  */
 package com.android.settings.network;
 
+import static android.provider.SettingsSlicesContract.KEY_AIRPLANE_MODE;
+
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.SystemProperties;
+import android.provider.SettingsSlicesContract;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
+import android.text.TextUtils;
 
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.TelephonyProperties;
@@ -41,15 +45,12 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
 
     public static final int REQUEST_CODE_EXIT_ECM = 1;
 
-    public static final String KEY_TOGGLE_AIRPLANE = "toggle_airplane";
-
     private static final String EXIT_ECM_RESULT = "exit_ecm_result";
 
     private Fragment mFragment;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private AirplaneModeEnabler mAirplaneModeEnabler;
     private SwitchPreference mAirplaneModePreference;
-
 
     public AirplaneModePreferenceController(Context context, String key) {
         super(context, key);
@@ -63,7 +64,7 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (KEY_TOGGLE_AIRPLANE.equals(preference.getKey()) && Boolean.parseBoolean(
+        if (KEY_AIRPLANE_MODE.equals(preference.getKey()) && Boolean.parseBoolean(
                 SystemProperties.get(TelephonyProperties.PROPERTY_INECM_MODE))) {
             // In ECM mode launch ECM app dialog
             if (mFragment != null) {
@@ -88,6 +89,11 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
     public static boolean isAvailable(Context context) {
         return context.getResources().getBoolean(R.bool.config_show_toggle_airplane)
                 && !context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_LEANBACK);
+    }
+
+    @Override
+    public boolean isSliceable() {
+        return TextUtils.equals(getPreferenceKey(), "toggle_airplane");
     }
 
     @Override

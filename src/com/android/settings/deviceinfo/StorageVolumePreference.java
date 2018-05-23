@@ -67,7 +67,7 @@ public class StorageVolumePreference extends Preference {
 
         Drawable icon;
         if (VolumeInfo.ID_PRIVATE_INTERNAL.equals(volume.getId())) {
-            icon = context.getDrawable(R.drawable.ic_settings_storage);
+            icon = context.getDrawable(R.drawable.ic_storage);
         } else {
             icon = context.getDrawable(R.drawable.ic_sim_sd);
         }

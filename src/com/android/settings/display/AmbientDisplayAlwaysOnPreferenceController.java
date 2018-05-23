@@ -19,6 +19,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.text.TextUtils;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.R;
@@ -51,6 +52,11 @@ public class AmbientDisplayAlwaysOnPreferenceController extends TogglePreference
             mConfig = new AmbientDisplayConfiguration(mContext);
         }
         return isAvailable(mConfig) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public boolean isSliceable() {
+        return TextUtils.equals(getPreferenceKey(), "ambient_display_always_on");
     }
 
     @Override
