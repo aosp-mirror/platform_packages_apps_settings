@@ -115,4 +115,11 @@ public class SmartBatteryPreferenceControllerTest {
         return Settings.Global.getInt(mContentResolver,
                 Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED, ON);
     }
+
+    @Test
+    public void isSliceableCorrectKey_returnsTrue() {
+        final SmartBatteryPreferenceController controller =
+                new SmartBatteryPreferenceController(mContext);
+        assertThat(controller.isSliceable()).isTrue();
+    }
 }

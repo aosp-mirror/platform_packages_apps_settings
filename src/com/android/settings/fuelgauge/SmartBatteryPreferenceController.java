@@ -19,6 +19,8 @@ package com.android.settings.fuelgauge;
 
 import android.content.Context;
 import android.provider.Settings;
+import android.text.TextUtils;
+
 import androidx.preference.SwitchPreference;
 import androidx.preference.Preference;
 
@@ -46,6 +48,11 @@ public class SmartBatteryPreferenceController extends BasePreferenceController i
         return mPowerUsageFeatureProvider.isSmartBatterySupported()
                 ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public boolean isSliceable() {
+        return TextUtils.equals(getPreferenceKey(), "smart_battery");
     }
 
     @Override

@@ -158,4 +158,19 @@ public class MagnificationNavbarPreferenceControllerTest {
             sIsApplicable = applicable;
         }
     }
+
+    @Test
+    public void isSliceableCorrectKey_returnsTrue() {
+        final MagnificationNavbarPreferenceController controller =
+                new MagnificationNavbarPreferenceController(mContext,
+                        "screen_magnification_navbar_preference_screen");
+        assertThat(controller.isSliceable()).isTrue();
+    }
+
+    @Test
+    public void isSliceableIncorrectKey_returnsFalse() {
+        final MagnificationNavbarPreferenceController controller =
+                new MagnificationNavbarPreferenceController(mContext, "bad_key");
+        assertThat(controller.isSliceable()).isFalse();
+    }
 }
