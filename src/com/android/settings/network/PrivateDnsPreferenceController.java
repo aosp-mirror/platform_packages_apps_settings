@@ -19,6 +19,9 @@ package com.android.settings.network;
 import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_OFF;
 import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_OPPORTUNISTIC;
 import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_PROVIDER_HOSTNAME;
+import static android.provider.Settings.Global.PRIVATE_DNS_DEFAULT_MODE;
+import static android.provider.Settings.Global.PRIVATE_DNS_MODE;
+import static android.provider.Settings.Global.PRIVATE_DNS_SPECIFIER;
 
 import android.content.Context;
 import android.content.ContentResolver;
@@ -51,8 +54,9 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
     private static final String KEY_PRIVATE_DNS_SETTINGS = "private_dns_settings";
 
     private static final Uri[] SETTINGS_URIS = new Uri[]{
-        Settings.Global.getUriFor(Settings.Global.PRIVATE_DNS_MODE),
-        Settings.Global.getUriFor(Settings.Global.PRIVATE_DNS_SPECIFIER),
+        Settings.Global.getUriFor(PRIVATE_DNS_MODE),
+        Settings.Global.getUriFor(PRIVATE_DNS_DEFAULT_MODE),
+        Settings.Global.getUriFor(PRIVATE_DNS_SPECIFIER),
     };
 
     private final Handler mHandler;

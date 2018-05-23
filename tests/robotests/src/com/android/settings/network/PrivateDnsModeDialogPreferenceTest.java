@@ -19,6 +19,7 @@ package com.android.settings.network;
 import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_OFF;
 import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_OPPORTUNISTIC;
 import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_PROVIDER_HOSTNAME;
+import static android.provider.Settings.Global.PRIVATE_DNS_MODE;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.doReturn;
@@ -158,24 +159,21 @@ public class PrivateDnsModeDialogPreferenceTest {
     public void testOnClick_positiveButtonClicked_saveData() {
         // Set the default settings to OFF
         final ContentResolver contentResolver = mContext.getContentResolver();
-        Settings.Global.putString(contentResolver, Settings.Global.PRIVATE_DNS_MODE,
-                ConnectivityManager.PRIVATE_DNS_MODE_OFF);
+        Settings.Global.putString(contentResolver, PRIVATE_DNS_MODE, PRIVATE_DNS_MODE_OFF);
 
         mPreference.mMode = ConnectivityManager.PRIVATE_DNS_MODE_OPPORTUNISTIC;
         mPreference.onClick(null, DialogInterface.BUTTON_POSITIVE);
 
         // Change to OPPORTUNISTIC
-        assertThat(Settings.Global.getString(contentResolver,
-                Settings.Global.PRIVATE_DNS_MODE)).isEqualTo(
-                ConnectivityManager.PRIVATE_DNS_MODE_OPPORTUNISTIC);
+        assertThat(Settings.Global.getString(contentResolver, PRIVATE_DNS_MODE)).isEqualTo(
+                PRIVATE_DNS_MODE_OPPORTUNISTIC);
     }
 
     @Test
     public void testOnClick_negativeButtonClicked_doNothing() {
         // Set the default settings to OFF
         final ContentResolver contentResolver = mContext.getContentResolver();
-        Settings.Global.putString(contentResolver, Settings.Global.PRIVATE_DNS_MODE,
-                ConnectivityManager.PRIVATE_DNS_MODE_OFF);
+        Settings.Global.putString(contentResolver, PRIVATE_DNS_MODE, PRIVATE_DNS_MODE_OFF);
 
         mPreference.mMode = ConnectivityManager.PRIVATE_DNS_MODE_OPPORTUNISTIC;
         mPreference.onClick(null, DialogInterface.BUTTON_NEGATIVE);
