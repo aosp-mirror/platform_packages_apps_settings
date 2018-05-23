@@ -31,4 +31,9 @@ public class DeviceIndexFeatureProviderImpl implements DeviceIndexFeatureProvide
             List<String> keywords) {
         // Not enabled by default.
     }
+
+    @Override
+    public void clearIndex(Context context) {
+        // Not enabled by default.
+    }
 }

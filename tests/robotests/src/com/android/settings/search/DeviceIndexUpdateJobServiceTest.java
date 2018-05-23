@@ -124,6 +124,7 @@ public class DeviceIndexUpdateJobServiceTest {
 
         DeviceIndexFeatureProvider indexFeatureProvider = FakeFeatureFactory.getFactory(mActivity)
                 .getDeviceIndexFeatureProvider();
+        verify(indexFeatureProvider).clearIndex(any());
         verify(indexFeatureProvider, times(1)).index(any(), any(), any(), any(), any());
     }
 
