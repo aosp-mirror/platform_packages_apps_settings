@@ -31,6 +31,7 @@ import com.android.settings.Utils;
 import com.android.settings.slices.SettingsSliceProvider;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public interface DeviceIndexFeatureProvider {
@@ -39,14 +40,20 @@ public interface DeviceIndexFeatureProvider {
     String TAG = "DeviceIndex";
 
     String INDEX_VERSION = "settings:index_version";
+    String INDEX_LANGUAGE = "settings:language";
 
     // Increment when new items are added to ensure they get pushed to the device index.
     String VERSION = Build.FINGERPRINT;
+
+    // When the device language changes, re-index so Slices trigger in device language.
+    Locale LANGUAGE = Locale.getDefault();
 
     boolean isIndexingEnabled();
 
     void index(Context context, CharSequence title, Uri sliceUri, Uri launchUri,
             List<String> keywords);
+
+    void clearIndex(Context context);
 
     default void updateIndex(Context context, boolean force) {
         if (!isIndexingEnabled()) {
@@ -59,11 +66,13 @@ public interface DeviceIndexFeatureProvider {
             return;
         }
 
-        if (!force && Objects.equals(
-                Settings.Secure.getString(context.getContentResolver(), INDEX_VERSION), VERSION)) {
+        if (!force && skipIndex(context)) {
             // No need to update.
             return;
         }
+
+        // Prevent scheduling multiple jobs
+        setIndexState(context);
 
         final ComponentName jobComponent = new ComponentName(context.getPackageName(),
                 DeviceIndexUpdateJobService.class.getName());
@@ -77,7 +86,6 @@ public interface DeviceIndexFeatureProvider {
                         .setOverrideDeadline(1)
                         .build());
 
-        Settings.Secure.putString(context.getContentResolver(), INDEX_VERSION, VERSION);
     }
 
     static Uri createDeepLink(String s) {
@@ -85,5 +93,19 @@ public interface DeviceIndexFeatureProvider {
                 .authority(SettingsSliceProvider.SLICE_AUTHORITY)
                 .appendQueryParameter(INTENT, s)
                 .build();
+    }
+
+    static boolean skipIndex(Context context) {
+        final boolean isSameVersion = Objects.equals(
+                Settings.Secure.getString(context.getContentResolver(), INDEX_VERSION), VERSION);
+        final boolean isSameLanguage = Objects.equals(
+                Settings.Secure.getString(context.getContentResolver(), INDEX_LANGUAGE), LANGUAGE);
+        return isSameLanguage && isSameVersion;
+    }
+
+    static void setIndexState(Context context) {
+        Settings.Secure.putString(context.getContentResolver(), INDEX_VERSION, VERSION);
+        Settings.Secure.putString(context.getContentResolver(), INDEX_LANGUAGE,
+                LANGUAGE.toString());
     }
 }

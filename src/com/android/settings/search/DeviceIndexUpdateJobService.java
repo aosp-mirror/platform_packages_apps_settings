@@ -25,6 +25,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.net.Uri.Builder;
+import android.provider.SettingsSlicesContract;
 import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
@@ -84,10 +85,18 @@ public class DeviceIndexUpdateJobService extends JobService {
                 .scheme(ContentResolver.SCHEME_CONTENT)
                 .authority(SettingsSliceProvider.SLICE_AUTHORITY)
                 .build();
+        final Uri platformBaseUri = new Builder()
+                .scheme(ContentResolver.SCHEME_CONTENT)
+                .authority(SettingsSlicesContract.AUTHORITY)
+                .build();
         final Collection<Uri> slices = manager.getSliceDescendants(baseUri);
+        slices.addAll(manager.getSliceDescendants(platformBaseUri));
+
         if (DEBUG) {
             Log.d(TAG, "Indexing " + slices.size() + " slices");
         }
+
+        indexProvider.clearIndex(this /* context */);
 
         for (Uri slice : slices) {
             if (!mRunningJob) {

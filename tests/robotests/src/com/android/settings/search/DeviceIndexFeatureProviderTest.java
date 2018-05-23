@@ -23,6 +23,7 @@ import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.app.job.JobScheduler;
+import android.os.Build;
 import android.provider.Settings;
 
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -75,5 +76,52 @@ public class DeviceIndexFeatureProviderTest {
 
         mProvider.updateIndex(mActivity, false);
         verify(jobScheduler).schedule(any());
+    }
+
+    @Test
+    public void updateIndex_enabled_provisioned_newBuild_shouldIndex() {
+        Settings.Global.putInt(mActivity.getContentResolver(),
+                Settings.Global.DEVICE_PROVISIONED, 1);
+        DeviceIndexFeatureProvider.setIndexState(mActivity);
+        Settings.Global.putString(mActivity.getContentResolver(),
+                DeviceIndexFeatureProvider.INDEX_VERSION, "new version");
+        Settings.Global.putString(mActivity.getContentResolver(),
+                DeviceIndexFeatureProvider.LANGUAGE.toString(),
+                DeviceIndexFeatureProvider.INDEX_LANGUAGE);
+        JobScheduler jobScheduler = mock(JobScheduler.class);
+        when(mProvider.isIndexingEnabled()).thenReturn(true);
+        when(mActivity.getSystemService(JobScheduler.class)).thenReturn(jobScheduler);
+
+        mProvider.updateIndex(mActivity, false);
+        verify(jobScheduler).schedule(any());
+    }
+
+    @Test
+    public void updateIndex_enabled_provisioned_newIndex_shouldIndex() {
+        Settings.Global.putInt(mActivity.getContentResolver(),
+                Settings.Global.DEVICE_PROVISIONED, 1);
+        DeviceIndexFeatureProvider.setIndexState(mActivity);
+        Settings.Global.putString(mActivity.getContentResolver(),
+                DeviceIndexFeatureProvider.INDEX_LANGUAGE, "new language");
+        JobScheduler jobScheduler = mock(JobScheduler.class);
+        when(mProvider.isIndexingEnabled()).thenReturn(true);
+        when(mActivity.getSystemService(JobScheduler.class)).thenReturn(jobScheduler);
+
+        mProvider.updateIndex(mActivity, false);
+        verify(jobScheduler).schedule(any());
+    }
+
+    @Test
+    public void updateIndex_enabled_provisioned_sameBuild_sameLang_shouldNotIndex() {
+        Settings.Global.putInt(mActivity.getContentResolver(),
+                Settings.Global.DEVICE_PROVISIONED, 1);
+        DeviceIndexFeatureProvider.setIndexState(mActivity);
+        JobScheduler jobScheduler = mock(JobScheduler.class);
+        when(mProvider.isIndexingEnabled()).thenReturn(true);
+        when(mActivity.getSystemService(JobScheduler.class)).thenReturn(jobScheduler);
+
+        mProvider.updateIndex(mActivity, false);
+
+        verify(mProvider, never()).index(any(), any(), any(), any(), any());
     }
 }
