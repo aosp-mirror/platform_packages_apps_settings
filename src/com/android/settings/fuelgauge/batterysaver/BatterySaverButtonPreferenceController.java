@@ -18,12 +18,12 @@ package com.android.settings.fuelgauge.batterysaver;
 
 import android.content.Context;
 import android.os.PowerManager;
-import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
 
+import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.fuelgauge.BatterySaverReceiver;
-import com.android.settings.widget.TwoStateButtonPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settings.widget.TwoStateButtonPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -33,21 +33,29 @@ import com.android.settingslib.fuelgauge.BatterySaverUtils;
  * Controller to update the battery saver button
  */
 public class BatterySaverButtonPreferenceController extends
-        TwoStateButtonPreferenceController implements
+        TogglePreferenceController implements
         LifecycleObserver, OnStart, OnStop, BatterySaverReceiver.BatterySaverListener {
-    private static final String KEY = "battery_saver_button_container";
-    private BatterySaverReceiver mBatterySaverReceiver;
-    @VisibleForTesting
-    PowerManager mPowerManager;
 
-    public BatterySaverButtonPreferenceController(Context context, Lifecycle lifecycle) {
-        super(context, KEY);
+    private final BatterySaverReceiver mBatterySaverReceiver;
+    private final PowerManager mPowerManager;
+
+    private TwoStateButtonPreference mPreference;
+
+    public BatterySaverButtonPreferenceController(Context context, String key) {
+        super(context, key);
         mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         mBatterySaverReceiver = new BatterySaverReceiver(context);
         mBatterySaverReceiver.setBatterySaverListener(this);
-        if (lifecycle != null) {
-            lifecycle.addObserver(this);
-        }
+    }
+
+    @Override
+    public int getAvailabilityStatus() {
+        return AVAILABLE;
+    }
+
+    @Override
+    public boolean isSliceable() {
+        return true;
     }
 
     @Override
@@ -61,29 +69,43 @@ public class BatterySaverButtonPreferenceController extends
     }
 
     @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = (TwoStateButtonPreference) screen.findPreference(getPreferenceKey());
+    }
+
+    @Override
+    public boolean isChecked() {
+        return mPowerManager.isPowerSaveMode();
+    }
+
+    @Override
+    public boolean setChecked(boolean stateOn) {
+        // This screen already shows a warning, so we don't need another warning.
+        return BatterySaverUtils.setPowerSaveMode(mContext, stateOn,
+                false /* needFirstTimeWarning */);
+    }
+
+    @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        setButtonVisibility(!mPowerManager.isPowerSaveMode());
-    }
-
-    @Override
-    public int getAvailabilityStatus() {
-        return AVAILABLE;
-    }
-
-    @Override
-    public void onButtonClicked(boolean stateOn) {
-        // This screen already shows a warning, so we don't need another warning.
-        BatterySaverUtils.setPowerSaveMode(mContext,  stateOn, /*needFirstTimeWarning*/ false);
+        if (mPreference != null) {
+            mPreference.setChecked(isChecked());
+        }
     }
 
     @Override
     public void onPowerSaveModeChanged() {
-        setButtonVisibility(!mPowerManager.isPowerSaveMode());
+        final boolean isChecked = isChecked();
+        if (mPreference != null && mPreference.isChecked() != isChecked) {
+            mPreference.setChecked(isChecked);
+        }
     }
 
     @Override
     public void onBatteryChanged(boolean pluggedIn) {
-        setButtonEnabled(!pluggedIn);
+        if (mPreference != null) {
+            mPreference.setButtonEnabled(!pluggedIn);
+        }
     }
 }
