@@ -28,6 +28,7 @@ import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.provider.SettingsSlicesContract;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
@@ -83,7 +84,7 @@ public class VpnPreferenceController extends AbstractPreferenceController
         // Manually set dependencies for Wifi when not toggleable.
         if (mToggleable == null || !mToggleable.contains(Settings.Global.RADIO_WIFI)) {
             if (mPreference != null) {
-                mPreference.setDependency(AirplaneModePreferenceController.KEY_TOGGLE_AIRPLANE);
+                mPreference.setDependency(SettingsSlicesContract.KEY_AIRPLANE_MODE);
             }
         }
     }
