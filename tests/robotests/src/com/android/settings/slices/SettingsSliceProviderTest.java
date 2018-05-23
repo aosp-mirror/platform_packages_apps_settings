@@ -22,6 +22,7 @@ import static android.content.ContentResolver.SCHEME_CONTENT;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -35,6 +36,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.StrictMode;
 import android.provider.SettingsSlicesContract;
+import android.util.ArraySet;
 
 import com.android.settings.location.LocationSliceBuilder;
 import com.android.settings.wifi.WifiSliceBuilder;
@@ -56,6 +58,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import androidx.slice.Slice;
 
@@ -190,6 +193,24 @@ public class SettingsSliceProviderTest {
         final StrictMode.ThreadPolicy newThreadPolicy = StrictMode.getThreadPolicy();
 
         assertThat(newThreadPolicy.toString()).isEqualTo(oldThreadPolicy.toString());
+    }
+
+    @Test
+    public void onBindSlice_requestsBlockedSlice_retunsNull() {
+        final String blockedKey = "blocked_key";
+        final Set<String> blockedSet = new ArraySet<>();
+        blockedSet.add(blockedKey);
+        doReturn(blockedSet).when(mProvider).getBlockedKeys();
+        final Uri blockedUri = new Uri.Builder()
+                .scheme(ContentResolver.SCHEME_CONTENT)
+                .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+                .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+                .appendPath(blockedKey)
+                .build();
+
+        final Slice slice = mProvider.onBindSlice(blockedUri);
+
+        assertThat(slice).isNull();
     }
 
     @Test
