@@ -55,6 +55,6 @@ public class MediaVolumePreferenceController extends
 
     @Override
     public int getMuteIcon() {
-        return com.android.internal.R.drawable.ic_audio_media_mute;
+        return R.drawable.ic_media_stream_off;
     }
 }
