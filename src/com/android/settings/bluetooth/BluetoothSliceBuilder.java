@@ -17,8 +17,6 @@ package com.android.settings.bluetooth;
 
 import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 
-import static androidx.slice.builders.ListBuilder.ICON_IMAGE;
-
 import android.annotation.ColorInt;
 import android.app.PendingIntent;
 import android.bluetooth.BluetoothAdapter;
@@ -28,6 +26,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.provider.SettingsSlicesContract;
+import android.support.v4.graphics.drawable.IconCompat;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -41,8 +40,6 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.SliceAction;
-
-import android.support.v4.graphics.drawable.IconCompat;
 
 public class BluetoothSliceBuilder {
 
@@ -71,7 +68,8 @@ public class BluetoothSliceBuilder {
         INTENT_FILTER.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
     }
 
-    private BluetoothSliceBuilder() {}
+    private BluetoothSliceBuilder() {
+    }
 
     /**
      * Return a Bluetooth Slice bound to {@link #BLUETOOTH_URI}.
@@ -80,7 +78,7 @@ public class BluetoothSliceBuilder {
      * Bluetooth.
      */
     public static Slice getSlice(Context context) {
-        final boolean isBluetoothEnabled = isBluetoothEnabled(context);
+        final boolean isBluetoothEnabled = isBluetoothEnabled();
         final CharSequence title = context.getText(R.string.bluetooth_settings);
         final IconCompat icon = IconCompat.createWithResource(context,
                 R.drawable.ic_settings_bluetooth);
@@ -115,9 +113,8 @@ public class BluetoothSliceBuilder {
         // handle it.
     }
 
-    private static boolean isBluetoothEnabled(Context context) {
-        final LocalBluetoothAdapter adapter = LocalBluetoothManager.getInstance(context,
-                null /* callback */).getBluetoothAdapter();
+    private static boolean isBluetoothEnabled() {
+        final BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
         return adapter.isEnabled();
     }
 
