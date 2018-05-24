@@ -18,7 +18,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
+
+import com.android.settings.bluetooth.BluetoothSliceBuilder;
+import com.android.settings.location.LocationSliceBuilder;
+import com.android.settings.notification.ZenModeSliceBuilder;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.wifi.WifiSliceBuilder;
+import com.android.settings.wifi.calling.WifiCallingSliceHelper;
 
 import java.net.URISyntaxException;
 
@@ -44,11 +52,26 @@ public class SliceDeepLinkSpringBoard extends Activity {
             if (ACTION_VIEW_SLICE.equals(intent.getAction())) {
                 // This shouldn't matter since the slice is shown instead of the device
                 // index caring about the launch uri.
-                Uri slice = Uri.parse(intent.getStringExtra(EXTRA_SLICE));
-                SlicesDatabaseAccessor slicesDatabaseAccessor = new SlicesDatabaseAccessor(this);
-                // Sadly have to block here because we don't know where to go.
-                final SliceData sliceData = slicesDatabaseAccessor.getSliceDataFromUri(slice);
-                Intent launchIntent = SliceBuilderUtils.getContentIntent(this, sliceData);
+                final Uri slice = Uri.parse(intent.getStringExtra(EXTRA_SLICE));
+                final Intent launchIntent;
+
+                // TODO (b/80263568) Avoid duplicating this list of Slice Uris.
+                if (WifiSliceBuilder.WIFI_URI.equals(slice)) {
+                    launchIntent = WifiSliceBuilder.getIntent(this /* context */);
+                } else if (ZenModeSliceBuilder.ZEN_MODE_URI.equals(slice)) {
+                    launchIntent = ZenModeSliceBuilder.getIntent(this /* context */);
+                } else if (BluetoothSliceBuilder.BLUETOOTH_URI.equals(slice)) {
+                    launchIntent = BluetoothSliceBuilder.getIntent(this /* context */);
+                } else if (LocationSliceBuilder.LOCATION_URI.equals(slice)) {
+                    launchIntent = LocationSliceBuilder.getIntent(this /* context */);
+                } else {
+                    final SlicesDatabaseAccessor slicesDatabaseAccessor =
+                            new SlicesDatabaseAccessor(this /* context */);
+                    // Sadly have to block here because we don't know where to go.
+                    final SliceData sliceData = slicesDatabaseAccessor.getSliceDataFromUri(slice);
+                    launchIntent = SliceBuilderUtils.getContentIntent(this, sliceData);
+                }
+
                 startActivity(launchIntent);
             } else {
                 startActivity(intent);
@@ -56,6 +79,10 @@ public class SliceDeepLinkSpringBoard extends Activity {
             finish();
         } catch (URISyntaxException e) {
             Log.e(TAG, "Error decoding uri", e);
+            finish();
+        } catch (IllegalStateException e) {
+            Log.w(TAG, "Couldn't launch Slice intent", e);
+            startActivity(new Intent(Settings.ACTION_SETTINGS));
             finish();
         }
     }

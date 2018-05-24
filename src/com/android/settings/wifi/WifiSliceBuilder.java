@@ -121,6 +121,18 @@ public class WifiSliceBuilder {
         // handle it.
     }
 
+    public static Intent getIntent(Context context) {
+        final String screenTitle = context.getText(R.string.wifi_settings).toString();
+        final Uri contentUri = new Uri.Builder().appendPath(KEY_WIFI).build();
+        final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(context,
+                WifiSettings.class.getName(), KEY_WIFI, screenTitle,
+                MetricsEvent.DIALOG_WIFI_AP_EDIT)
+                .setClassName(context.getPackageName(), SubSettings.class.getName())
+                .setData(contentUri);
+
+        return intent;
+    }
+
     private static boolean isWifiEnabled(Context context) {
         final WifiManager wifiManager = context.getSystemService(WifiManager.class);
 
@@ -159,14 +171,7 @@ public class WifiSliceBuilder {
     }
 
     private static PendingIntent getPrimaryAction(Context context) {
-        final String screenTitle = context.getText(R.string.wifi_settings).toString();
-        final Uri contentUri = new Uri.Builder().appendPath(KEY_WIFI).build();
-        final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(context,
-                WifiSettings.class.getName(), KEY_WIFI, screenTitle,
-                MetricsEvent.DIALOG_WIFI_AP_EDIT);
-        intent.setClassName(context.getPackageName(), SubSettings.class.getName());
-        intent.setData(contentUri);
-
+        final Intent intent = getIntent(context);
         return PendingIntent.getActivity(context, 0 /* requestCode */,
                 intent, 0 /* flags */);
     }
