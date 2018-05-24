@@ -41,6 +41,7 @@ import static com.android.settings.applications.manageapplications.AppFilterRegi
 import android.annotation.Nullable;
 import android.annotation.StringRes;
 import android.app.Activity;
+import android.app.usage.IUsageStatsManager;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
@@ -48,6 +49,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageItemInfo;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.PreferenceFrameLayout;
@@ -224,7 +226,8 @@ public class ManageApplications extends InstrumentedFragment
     private View mSpinnerHeader;
     private Spinner mFilterSpinner;
     private FilterSpinnerAdapter mFilterAdapter;
-    private UsageStatsManager mUsageStatsManager;
+    private IUsageStatsManager mUsageStatsManager;
+    private UserManager mUserManager;
     private NotificationBackend mNotificationBackend;
     private ResetAppsHelper mResetAppsHelper;
     private String mVolumeUuid;
@@ -293,8 +296,9 @@ public class ManageApplications extends InstrumentedFragment
             screenTitle = R.string.change_wifi_state_title;
         } else if (className.equals(Settings.NotificationAppListActivity.class.getName())) {
             mListType = LIST_TYPE_NOTIFICATION;
-            mUsageStatsManager =
-                    (UsageStatsManager) getContext().getSystemService(Context.USAGE_STATS_SERVICE);
+            mUsageStatsManager = IUsageStatsManager.Stub.asInterface(
+                    ServiceManager.getService(Context.USAGE_STATS_SERVICE));
+            mUserManager = UserManager.get(getContext());
             mNotificationBackend = new NotificationBackend();
             mSortOrder = R.id.sort_order_recent_notification;
             screenTitle = R.string.app_notifications_title;
@@ -875,6 +879,7 @@ public class ManageApplications extends InstrumentedFragment
             if (mManageApplications.mListType == LIST_TYPE_NOTIFICATION) {
                 mExtraInfoBridge = new AppStateNotificationBridge(mContext, mState, this,
                         manageApplications.mUsageStatsManager,
+                        manageApplications.mUserManager,
                         manageApplications.mNotificationBackend);
             } else if (mManageApplications.mListType == LIST_TYPE_USAGE_ACCESS) {
                 mExtraInfoBridge = new AppStateUsageBridge(mContext, mState, this);

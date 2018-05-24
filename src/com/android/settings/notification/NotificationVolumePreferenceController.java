@@ -56,7 +56,7 @@ public class NotificationVolumePreferenceController extends
 
     @Override
     public int getMuteIcon() {
-        return com.android.internal.R.drawable.ic_audio_ring_notif_mute;
+        return R.drawable.ic_notifications_off_24dp;
     }
 
 }
