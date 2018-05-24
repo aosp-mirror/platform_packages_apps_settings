@@ -18,9 +18,7 @@
 package com.android.settings.slices;
 
 import static android.content.ContentResolver.SCHEME_CONTENT;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -38,19 +36,24 @@ import android.os.StrictMode;
 import android.provider.SettingsSlicesContract;
 import android.util.ArraySet;
 
-import com.android.settings.location.LocationSliceBuilder;
-import com.android.settings.wifi.WifiSliceBuilder;
 import com.android.settings.bluetooth.BluetoothSliceBuilder;
+import com.android.settings.location.LocationSliceBuilder;
 import com.android.settings.notification.ZenModeSliceBuilder;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.FakeToggleController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowThreadUtils;
+import com.android.settings.wifi.WifiSliceBuilder;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
+import org.robolectric.annotation.Resetter;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -66,6 +69,7 @@ import androidx.slice.Slice;
  * TODO Investigate using ShadowContentResolver.registerProviderInternal(String, ContentProvider)
  */
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(shadows = ShadowThreadUtils.class)
 public class SettingsSliceProviderTest {
 
     private static final String KEY = "KEY";
@@ -98,6 +102,7 @@ public class SettingsSliceProviderTest {
     public void setUp() {
         mContext = spy(RuntimeEnvironment.application);
         mProvider = spy(new SettingsSliceProvider());
+        ShadowStrictMode.reset();
         mProvider.mSliceWeakDataCache = new HashMap<>();
         mProvider.mSliceDataCache = new HashMap<>();
         mProvider.mSlicesDatabaseAccessor = new SlicesDatabaseAccessor(mContext);
@@ -112,6 +117,7 @@ public class SettingsSliceProviderTest {
 
     @After
     public void cleanUp() {
+        ShadowThreadUtils.reset();
         DatabaseTestUtils.clearDb(mContext);
     }
 
@@ -184,7 +190,8 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
-    public void onBindSlice_shouldNotOverrideStrictMode() {
+    public void onBindSlice_mainThread_shouldNotOverrideStrictMode() {
+        ShadowThreadUtils.setIsMainThread(true);
         final StrictMode.ThreadPolicy oldThreadPolicy = StrictMode.getThreadPolicy();
         SliceData data = getDummyData();
         mProvider.mSliceWeakDataCache.put(data.getUri(), data);
@@ -196,7 +203,19 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
-    public void onBindSlice_requestsBlockedSlice_retunsNull() {
+    @Config(shadows = ShadowStrictMode.class)
+    public void onBindSlice_backgroundThread_shouldOverrideStrictMode() {
+        ShadowThreadUtils.setIsMainThread(false);
+
+        SliceData data = getDummyData();
+        mProvider.mSliceWeakDataCache.put(data.getUri(), data);
+        mProvider.onBindSlice(data.getUri());
+
+        assertThat(ShadowStrictMode.isThreadPolicyOverridden()).isTrue();
+    }
+
+    @Test
+    public void onBindSlice_requestsBlockedSlice_returnsNull() {
         final String blockedKey = "blocked_key";
         final Set<String> blockedSet = new ArraySet<>();
         blockedSet.add(blockedKey);
@@ -456,7 +475,7 @@ public class SettingsSliceProviderTest {
         mDb.replaceOrThrow(SlicesDatabaseHelper.Tables.TABLE_SLICES_INDEX, null, values);
     }
 
-    private SliceData getDummyData() {
+    private static SliceData getDummyData() {
         return new SliceData.Builder()
                 .setKey(KEY)
                 .setTitle(TITLE)
@@ -467,5 +486,25 @@ public class SettingsSliceProviderTest {
                 .setUri(URI)
                 .setPreferenceControllerClassName(PREF_CONTROLLER)
                 .build();
+    }
+
+    @Implements(value = StrictMode.class, inheritImplementationMethods = true)
+    public static class ShadowStrictMode {
+
+        private static int sSetThreadPolicyCount;
+
+        @Resetter
+        public static void reset() {
+            sSetThreadPolicyCount = 0;
+        }
+
+        @Implementation
+        public static void setThreadPolicy(final StrictMode.ThreadPolicy policy) {
+            sSetThreadPolicyCount++;
+        }
+
+        public static boolean isThreadPolicyOverridden() {
+            return sSetThreadPolicyCount != 0;
+        }
     }
 }

@@ -23,6 +23,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
+import android.os.StrictMode;
 import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
@@ -31,13 +32,13 @@ import android.util.KeyValueListParser;
 import android.util.Log;
 import android.util.Pair;
 
-import com.android.settings.location.LocationSliceBuilder;
-import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.bluetooth.BluetoothSliceBuilder;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.location.LocationSliceBuilder;
+import com.android.settings.notification.ZenModeSliceBuilder;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wifi.WifiSliceBuilder;
 import com.android.settings.wifi.calling.WifiCallingSliceHelper;
-import com.android.settings.bluetooth.BluetoothSliceBuilder;
-import com.android.settings.notification.ZenModeSliceBuilder;
 import com.android.settingslib.SliceBroadcastRelay;
 import com.android.settingslib.utils.ThreadUtils;
 
@@ -53,7 +54,6 @@ import java.util.WeakHashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.SliceProvider;
 
@@ -150,7 +150,7 @@ public class SettingsSliceProvider extends SliceProvider {
     @Override
     public void onSlicePinned(Uri sliceUri) {
         if (WifiSliceBuilder.WIFI_URI.equals(sliceUri)) {
-            registerIntentToUri(WifiSliceBuilder.INTENT_FILTER , sliceUri);
+            registerIntentToUri(WifiSliceBuilder.INTENT_FILTER, sliceUri);
             mRegisteredUris.add(sliceUri);
             return;
         } else if (ZenModeSliceBuilder.ZEN_MODE_URI.equals(sliceUri)) {
@@ -177,41 +177,51 @@ public class SettingsSliceProvider extends SliceProvider {
 
     @Override
     public Slice onBindSlice(Uri sliceUri) {
-        final Set<String> blockedKeys = getBlockedKeys();
-        final String key = sliceUri.getLastPathSegment();
-        if (blockedKeys.contains(key)) {
-            Log.e(TAG, "Requested blocked slice with Uri: " + sliceUri);
-            return null;
-        }
+        final StrictMode.ThreadPolicy oldPolicy = StrictMode.getThreadPolicy();
+        try {
+            if (!ThreadUtils.isMainThread()) {
+                StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+                        .permitAll()
+                        .build());
+            }
+            final Set<String> blockedKeys = getBlockedKeys();
+            final String key = sliceUri.getLastPathSegment();
+            if (blockedKeys.contains(key)) {
+                Log.e(TAG, "Requested blocked slice with Uri: " + sliceUri);
+                return null;
+            }
 
-        // If adding a new Slice, do not directly match Slice URIs.
-        // Use {@link SlicesDatabaseAccessor}.
-        if (WifiCallingSliceHelper.WIFI_CALLING_URI.equals(sliceUri)) {
-            return FeatureFactory.getFactory(getContext())
-                    .getSlicesFeatureProvider()
-                    .getNewWifiCallingSliceHelper(getContext())
-                    .createWifiCallingSlice(sliceUri);
-        } else if (WifiSliceBuilder.WIFI_URI.equals(sliceUri)) {
-            return WifiSliceBuilder.getSlice(getContext());
-        } else if (ZenModeSliceBuilder.ZEN_MODE_URI.equals(sliceUri)) {
-            return ZenModeSliceBuilder.getSlice(getContext());
-        } else if (BluetoothSliceBuilder.BLUETOOTH_URI.equals(sliceUri)) {
-            return BluetoothSliceBuilder.getSlice(getContext());
-        } else if (LocationSliceBuilder.LOCATION_URI.equals(sliceUri)) {
-            return LocationSliceBuilder.getSlice(getContext());
-        }
+            // If adding a new Slice, do not directly match Slice URIs.
+            // Use {@link SlicesDatabaseAccessor}.
+            if (WifiCallingSliceHelper.WIFI_CALLING_URI.equals(sliceUri)) {
+                return FeatureFactory.getFactory(getContext())
+                        .getSlicesFeatureProvider()
+                        .getNewWifiCallingSliceHelper(getContext())
+                        .createWifiCallingSlice(sliceUri);
+            } else if (WifiSliceBuilder.WIFI_URI.equals(sliceUri)) {
+                return WifiSliceBuilder.getSlice(getContext());
+            } else if (ZenModeSliceBuilder.ZEN_MODE_URI.equals(sliceUri)) {
+                return ZenModeSliceBuilder.getSlice(getContext());
+            } else if (BluetoothSliceBuilder.BLUETOOTH_URI.equals(sliceUri)) {
+                return BluetoothSliceBuilder.getSlice(getContext());
+            } else if (LocationSliceBuilder.LOCATION_URI.equals(sliceUri)) {
+                return LocationSliceBuilder.getSlice(getContext());
+            }
 
-        SliceData cachedSliceData = mSliceWeakDataCache.get(sliceUri);
-        if (cachedSliceData == null) {
-            loadSliceInBackground(sliceUri);
-            return getSliceStub(sliceUri);
-        }
+            SliceData cachedSliceData = mSliceWeakDataCache.get(sliceUri);
+            if (cachedSliceData == null) {
+                loadSliceInBackground(sliceUri);
+                return getSliceStub(sliceUri);
+            }
 
-        // Remove the SliceData from the cache after it has been used to prevent a memory-leak.
-        if (!mSliceDataCache.containsKey(sliceUri)) {
-            mSliceWeakDataCache.remove(sliceUri);
+            // Remove the SliceData from the cache after it has been used to prevent a memory-leak.
+            if (!mSliceDataCache.containsKey(sliceUri)) {
+                mSliceWeakDataCache.remove(sliceUri);
+            }
+            return SliceBuilderUtils.buildSlice(getContext(), cachedSliceData);
+        } finally {
+            StrictMode.setThreadPolicy(oldPolicy);
         }
-        return SliceBuilderUtils.buildSlice(getContext(), cachedSliceData);
     }
 
     /**
@@ -302,14 +312,14 @@ public class SettingsSliceProvider extends SliceProvider {
 
         final SliceData sliceData;
         try {
-             sliceData = mSlicesDatabaseAccessor.getSliceDataFromUri(uri);
+            sliceData = mSlicesDatabaseAccessor.getSliceDataFromUri(uri);
         } catch (IllegalStateException e) {
             Log.d(TAG, "Could not create slicedata for uri: " + uri);
             return;
         }
 
         final BasePreferenceController controller = SliceBuilderUtils.getPreferenceController(
-                    getContext(), sliceData);
+                getContext(), sliceData);
 
         final IntentFilter filter = controller.getIntentFilter();
         if (filter != null) {
