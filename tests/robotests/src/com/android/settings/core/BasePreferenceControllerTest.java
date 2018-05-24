@@ -135,6 +135,11 @@ public class BasePreferenceControllerTest {
     }
 
     @Test
+    public void hasAsyncUpdate_shouldReturnFalse() {
+        assertThat(mPreferenceController.hasAsyncUpdate()).isFalse();
+    }
+
+    @Test
     public void settingAvailable_disabledOnDisplayPreference_preferenceEnabled() {
         final PreferenceScreen screen = mock(PreferenceScreen.class);
         final Preference preference = new Preference(mContext);

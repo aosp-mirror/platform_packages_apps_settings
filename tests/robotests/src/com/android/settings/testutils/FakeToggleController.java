@@ -36,6 +36,8 @@ public class FakeToggleController extends TogglePreferenceController {
     private final int ON = 1;
     private final int OFF = 0;
 
+    private boolean mIsAsyncUpdate = false;
+
     public FakeToggleController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
@@ -66,5 +68,14 @@ public class FakeToggleController extends TogglePreferenceController {
     @Override
     public boolean isSliceable() {
         return true;
+    }
+
+    @Override
+    public boolean hasAsyncUpdate() {
+        return mIsAsyncUpdate;
+    }
+
+    public void setAsyncUpdate(boolean isAsyncUpdate) {
+        mIsAsyncUpdate = isAsyncUpdate;
     }
 }
