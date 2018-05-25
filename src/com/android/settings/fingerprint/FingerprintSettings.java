@@ -605,6 +605,10 @@ public class FingerprintSettings extends SubSettings {
             final Drawable highlight = getHighlightDrawable();
             if (highlight != null && fpref != null) {
                 final View view = fpref.getView();
+                if (view == null) {
+                    // FingerprintPreference is not bound to UI yet, so view is null.
+                    return;
+                }
                 final int centerX = view.getWidth() / 2;
                 final int centerY = view.getHeight() / 2;
                 highlight.setHotspot(centerX, centerY);

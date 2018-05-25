@@ -45,7 +45,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.slice.Slice;
-import androidx.slice.SliceManager;
+import androidx.slice.SliceViewManager;
 import androidx.slice.SliceMetadata;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -57,17 +57,17 @@ public class DeviceIndexUpdateJobServiceTest {
 
     private Activity mActivity;
     private DeviceIndexUpdateJobService mJob;
-    private SliceManager mSliceManager;
+    private SliceViewManager mSliceManager;
 
     @Before
     public void setup() {
         FakeFeatureFactory.setupForTest();
         mActivity = spy(Robolectric.buildActivity(Activity.class).create().visible().get());
         mJob = spy(new DeviceIndexUpdateJobService());
-        mSliceManager = mock(SliceManager.class);
+        mSliceManager = mock(SliceViewManager.class);
 
         doReturn(mActivity.getPackageName()).when(mJob).getPackageName();
-        doReturn(mSliceManager).when(mJob).getSliceManager();
+        doReturn(mSliceManager).when(mJob).getSliceViewManager();
         doNothing().when(mJob).jobFinished(null, false);
     }
 
@@ -124,6 +124,7 @@ public class DeviceIndexUpdateJobServiceTest {
 
         DeviceIndexFeatureProvider indexFeatureProvider = FakeFeatureFactory.getFactory(mActivity)
                 .getDeviceIndexFeatureProvider();
+        verify(indexFeatureProvider).clearIndex(any());
         verify(indexFeatureProvider, times(1)).index(any(), any(), any(), any(), any());
     }
 

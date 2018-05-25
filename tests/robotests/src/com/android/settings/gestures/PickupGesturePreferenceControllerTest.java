@@ -16,6 +16,10 @@
 
 package com.android.settings.gestures;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
+
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doReturn;
@@ -59,20 +63,6 @@ public class PickupGesturePreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mController = new PickupGesturePreferenceController(mContext, KEY_PICK_UP);
         mController.setConfig(mAmbientDisplayConfiguration);
-    }
-
-    @Test
-    public void isAvailable_configIsTrue_shouldReturnTrue() {
-        when(mAmbientDisplayConfiguration.pulseOnPickupAvailable()).thenReturn(true);
-
-        assertThat(mController.isAvailable()).isTrue();
-    }
-
-    @Test
-    public void isAvailable_configIsFalse_shouldReturnFalse() {
-        when(mAmbientDisplayConfiguration.pulseOnPickupAvailable()).thenReturn(false);
-
-        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
@@ -152,5 +142,46 @@ public class PickupGesturePreferenceControllerTest {
 
         assertThat(PickupGesturePreferenceController.isSuggestionComplete(mContext, prefs))
                 .isTrue();
+    }
+
+    @Test
+    public void getAvailabilityStatus_aodNotSupported_UNSUPPORTED_ON_DEVICE() {
+        when(mAmbientDisplayConfiguration.dozePulsePickupSensorAvailable()).thenReturn(false);
+        when(mAmbientDisplayConfiguration.ambientDisplayAvailable()).thenReturn(false);
+        final int availabilityStatus = mController.getAvailabilityStatus();
+
+        assertThat(availabilityStatus).isEqualTo(UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_aodOn_DISABLED_DEPENDENT_SETTING() {
+        when(mAmbientDisplayConfiguration.dozePulsePickupSensorAvailable()).thenReturn(true);
+        when(mAmbientDisplayConfiguration.ambientDisplayAvailable()).thenReturn(false);
+        final int availabilityStatus = mController.getAvailabilityStatus();
+
+        assertThat(availabilityStatus).isEqualTo(DISABLED_DEPENDENT_SETTING);
+    }
+
+    @Test
+    public void getAvailabilityStatus_aodSupported_aodOff_AVAILABLE() {
+        when(mAmbientDisplayConfiguration.dozePulsePickupSensorAvailable()).thenReturn(true);
+        when(mAmbientDisplayConfiguration.ambientDisplayAvailable()).thenReturn(true);
+        final int availabilityStatus = mController.getAvailabilityStatus();
+
+        assertThat(availabilityStatus).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void isSliceableCorrectKey_returnsTrue() {
+        final PickupGesturePreferenceController controller =
+                new PickupGesturePreferenceController(mContext,"gesture_pick_up");
+        assertThat(controller.isSliceable()).isTrue();
+    }
+
+    @Test
+    public void isSliceableIncorrectKey_returnsFalse() {
+        final PickupGesturePreferenceController controller =
+                new PickupGesturePreferenceController(mContext, "bad_key");
+        assertThat(controller.isSliceable()).isFalse();
     }
 }

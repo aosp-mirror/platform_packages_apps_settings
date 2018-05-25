@@ -35,4 +35,9 @@ public class FakePreferenceController extends BasePreferenceController {
     public int getSliceType() {
         return SliceData.SliceType.SLIDER;
     }
+
+    @Override
+    public boolean isSliceable() {
+        return true;
+    }
 }

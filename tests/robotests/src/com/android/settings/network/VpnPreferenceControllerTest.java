@@ -33,12 +33,14 @@ import android.net.IConnectivityManager;
 import android.net.NetworkRequest;
 import android.os.IBinder;
 import android.os.UserHandle;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
+import android.provider.SettingsSlicesContract;
 
 import com.android.internal.net.VpnConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -88,7 +90,7 @@ public class VpnPreferenceControllerTest {
         doReturn(true).when(mController).isAvailable();
         mController.displayPreference(mScreen);
 
-        verify(mPreference).setDependency(AirplaneModePreferenceController.KEY_TOGGLE_AIRPLANE);
+        verify(mPreference).setDependency(SettingsSlicesContract.KEY_AIRPLANE_MODE);
     }
 
     @Test

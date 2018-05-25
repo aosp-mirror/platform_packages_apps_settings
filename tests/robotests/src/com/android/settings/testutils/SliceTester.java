@@ -150,14 +150,17 @@ public class SliceTester {
         final int color = colorItem.getInt();
         assertThat(color).isEqualTo(Utils.getColorAccentDefaultColor(context));
 
-        final IconCompat expectedToggleIcon = IconCompat.createWithResource(context,
+        final SliceAction primaryAction = metadata.getPrimaryAction();
+
+        final IconCompat expectedIcon = IconCompat.createWithResource(context,
                 sliceData.getIconResource());
+        assertThat(expectedIcon.toString()).isEqualTo(primaryAction.getIcon().toString());
 
         final long sliceTTL = metadata.getExpiry();
         assertThat(sliceTTL).isEqualTo(ListBuilder.INFINITY);
 
         // Check primary intent
-        final PendingIntent primaryPendingIntent = metadata.getPrimaryAction().getAction();
+        final PendingIntent primaryPendingIntent = primaryAction.getAction();
         assertThat(primaryPendingIntent).isEqualTo(
                 SliceBuilderUtils.getContentPendingIntent(context, sliceData));
 
@@ -191,20 +194,8 @@ public class SliceTester {
         assertThat(toggles).isEmpty();
 
         final PendingIntent primaryPendingIntent = metadata.getPrimaryAction().getAction();
-        final int availabilityStatus = SliceBuilderUtils.getPreferenceController(context,
-                sliceData).getAvailabilityStatus();
-        switch (availabilityStatus) {
-            case UNSUPPORTED_ON_DEVICE:
-            case CONDITIONALLY_UNAVAILABLE:
-                assertThat(primaryPendingIntent).isEqualTo(
-                        SliceBuilderUtils.getSettingsIntent(context));
-                break;
-            case DISABLED_FOR_USER:
-            case DISABLED_DEPENDENT_SETTING:
-                assertThat(primaryPendingIntent).isEqualTo(
-                        SliceBuilderUtils.getContentPendingIntent(context, sliceData));
-                break;
-        }
+        assertThat(primaryPendingIntent).isEqualTo(SliceBuilderUtils.getContentPendingIntent(
+                context, sliceData));
 
         final List<SliceItem> sliceItems = slice.getItems();
         assertTitle(sliceItems, sliceData.getTitle());

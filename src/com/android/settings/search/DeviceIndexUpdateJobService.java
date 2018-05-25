@@ -25,6 +25,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.net.Uri.Builder;
+import android.provider.SettingsSlicesContract;
 import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
@@ -37,8 +38,8 @@ import java.util.concurrent.CountDownLatch;
 
 import androidx.slice.Slice;
 import androidx.slice.SliceItem;
-import androidx.slice.SliceManager;
-import androidx.slice.SliceManager.SliceCallback;
+import androidx.slice.SliceViewManager;
+import androidx.slice.SliceViewManager.SliceCallback;
 import androidx.slice.SliceMetadata;
 import androidx.slice.core.SliceQuery;
 import androidx.slice.widget.ListContent;
@@ -79,15 +80,23 @@ public class DeviceIndexUpdateJobService extends JobService {
         }
         final DeviceIndexFeatureProvider indexProvider = FeatureFactory.getFactory(this)
                 .getDeviceIndexFeatureProvider();
-        final SliceManager manager = getSliceManager();
+        final SliceViewManager manager = getSliceViewManager();
         final Uri baseUri = new Builder()
                 .scheme(ContentResolver.SCHEME_CONTENT)
                 .authority(SettingsSliceProvider.SLICE_AUTHORITY)
                 .build();
+        final Uri platformBaseUri = new Builder()
+                .scheme(ContentResolver.SCHEME_CONTENT)
+                .authority(SettingsSlicesContract.AUTHORITY)
+                .build();
         final Collection<Uri> slices = manager.getSliceDescendants(baseUri);
+        slices.addAll(manager.getSliceDescendants(platformBaseUri));
+
         if (DEBUG) {
             Log.d(TAG, "Indexing " + slices.size() + " slices");
         }
+
+        indexProvider.clearIndex(this /* context */);
 
         for (Uri slice : slices) {
             if (!mRunningJob) {
@@ -115,8 +124,8 @@ public class DeviceIndexUpdateJobService extends JobService {
         jobFinished(params, false);
     }
 
-    protected SliceManager getSliceManager() {
-        return SliceManager.getInstance(this);
+    protected SliceViewManager getSliceViewManager() {
+        return SliceViewManager.getInstance(this);
     }
 
     protected SliceMetadata getMetadata(Slice loadedSlice) {
@@ -149,7 +158,7 @@ public class DeviceIndexUpdateJobService extends JobService {
         return null;
     }
 
-    protected Slice bindSliceSynchronous(SliceManager manager, Uri slice) {
+    protected Slice bindSliceSynchronous(SliceViewManager manager, Uri slice) {
         final Slice[] returnSlice = new Slice[1];
         CountDownLatch latch = new CountDownLatch(1);
         SliceCallback callback = new SliceCallback() {

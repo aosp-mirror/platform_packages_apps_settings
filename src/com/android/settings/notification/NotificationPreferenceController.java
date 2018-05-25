@@ -83,28 +83,6 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
         return true;
     }
 
-    /**
-     * Displays or removes preference in this controller.
-     */
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        if (isAvailable()) {
-            final Preference preference = screen.findPreference(getPreferenceKey());
-            if (mPreference != null && preference == null) {
-                screen.addPreference(mPreference);
-            }
-            if (preference != null) {
-                mPreference = preference;
-            }
-            if (mPreference != null && this instanceof Preference.OnPreferenceChangeListener) {
-                mPreference.setOnPreferenceChangeListener(
-                        (Preference.OnPreferenceChangeListener) this);
-            }
-        } else {
-            findAndRemovePreference(screen, getPreferenceKey());
-        }
-    }
-
     // finds the preference recursively and removes it from its parent
     private void findAndRemovePreference(PreferenceGroup prefGroup, String key) {
         final int preferenceCount = prefGroup.getPreferenceCount();

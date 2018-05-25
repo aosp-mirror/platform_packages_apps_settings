@@ -18,6 +18,7 @@ package com.android.settings.notification;
 
 import android.content.Context;
 import android.media.AudioManager;
+import android.text.TextUtils;
 
 import com.android.settings.R;
 
@@ -38,6 +39,11 @@ public class MediaVolumePreferenceController extends
     }
 
     @Override
+    public boolean isSliceable() {
+        return TextUtils.equals(getPreferenceKey(), KEY_MEDIA_VOLUME);
+    }
+
+    @Override
     public String getPreferenceKey() {
         return KEY_MEDIA_VOLUME;
     }
@@ -49,6 +55,6 @@ public class MediaVolumePreferenceController extends
 
     @Override
     public int getMuteIcon() {
-        return com.android.internal.R.drawable.ic_audio_media_mute;
+        return R.drawable.ic_media_stream_off;
     }
 }

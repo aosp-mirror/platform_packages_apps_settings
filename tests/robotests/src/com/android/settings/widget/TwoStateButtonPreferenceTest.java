@@ -17,34 +17,27 @@
 package com.android.settings.widget;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 import android.content.Context;
-import androidx.preference.PreferenceScreen;
 import android.view.View;
 import android.widget.Button;
 
+import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-public class TwoStateButtonPreferenceControllerTest {
+public class TwoStateButtonPreferenceTest {
 
-    private static final String KEY = "pref_key";
-
-    @Mock
-    private PreferenceScreen mPreferenceScreen;
-    @Mock
     private TwoStateButtonPreference mPreference;
-    private TwoStateButtonPreferenceController mController;
     private Context mContext;
     private Button mButtonOn;
     private Button mButtonOff;
@@ -53,35 +46,34 @@ public class TwoStateButtonPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        doReturn(mPreference).when(mPreferenceScreen).findPreference(anyString());
+        mPreference = spy(new TwoStateButtonPreference(mContext, null /* AttributeSet */));
         mButtonOn = new Button(mContext);
-        doReturn(mButtonOn).when(mPreference).getStateOnButton();
+        mButtonOn.setId(R.id.state_on_button);
         mButtonOff = new Button(mContext);
-        doReturn(mButtonOff).when(mPreference).getStateOffButton();
-
-        mController = new TestButtonsPreferenceController(mContext, KEY);
-        mController.displayPreference(mPreferenceScreen);
+        mButtonOff.setId(R.id.state_off_button);
+        ReflectionHelpers.setField(mPreference, "mButtonOn", mButtonOn);
+        ReflectionHelpers.setField(mPreference, "mButtonOff", mButtonOff);
     }
 
     @Test
     public void testSetButtonVisibility_stateOn_onlyShowButtonOn() {
-        mController.setButtonVisibility(true /* stateOn */);
-
-        assertThat(mButtonOn.getVisibility()).isEqualTo(View.VISIBLE);
-        assertThat(mButtonOff.getVisibility()).isEqualTo(View.GONE);
-    }
-
-    @Test
-    public void testSetButtonVisibility_stateOff_onlyShowButtonOff() {
-        mController.setButtonVisibility(false /* stateOn */);
+        mPreference.setChecked(true /* stateOn */);
 
         assertThat(mButtonOn.getVisibility()).isEqualTo(View.GONE);
         assertThat(mButtonOff.getVisibility()).isEqualTo(View.VISIBLE);
     }
 
     @Test
+    public void testSetButtonVisibility_stateOff_onlyShowButtonOff() {
+        mPreference.setChecked(false /* stateOn */);
+
+        assertThat(mButtonOn.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(mButtonOff.getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
     public void testSetButtonEnabled_enabled_buttonEnabled() {
-        mController.setButtonEnabled(true /* enabled */);
+        mPreference.setButtonEnabled(true /* enabled */);
 
         assertThat(mButtonOn.isEnabled()).isTrue();
         assertThat(mButtonOff.isEnabled()).isTrue();
@@ -89,30 +81,18 @@ public class TwoStateButtonPreferenceControllerTest {
 
     @Test
     public void testSetButtonEnabled_disabled_buttonDisabled() {
-        mController.setButtonEnabled(false /* enabled */);
+        mPreference.setButtonEnabled(false /* enabled */);
 
         assertThat(mButtonOn.isEnabled()).isFalse();
         assertThat(mButtonOff.isEnabled()).isFalse();
     }
 
-    /**
-     * Controller to test methods in {@link TwoStateButtonPreferenceController}
-     */
-    public static class TestButtonsPreferenceController
-        extends TwoStateButtonPreferenceController {
+    @Test
+    public void onClick_shouldPropagateChangeToListener() {
+        mPreference.onClick(mButtonOn);
+        verify(mPreference).callChangeListener(true);
 
-        TestButtonsPreferenceController(Context context, String key) {
-            super(context, key);
-        }
-
-        @Override
-        public void onButtonClicked(boolean stateOn) {
-            //do nothing
-        }
-
-        @Override
-        public int getAvailabilityStatus() {
-            return AVAILABLE;
-        }
+        mPreference.onClick(mButtonOff);
+        verify(mPreference).callChangeListener(false);
     }
 }

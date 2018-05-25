@@ -17,6 +17,8 @@ package com.android.settings.bluetooth;
 
 import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 
+import static androidx.slice.builders.ListBuilder.ICON_IMAGE;
+
 import android.annotation.ColorInt;
 import android.app.PendingIntent;
 import android.bluetooth.BluetoothAdapter;

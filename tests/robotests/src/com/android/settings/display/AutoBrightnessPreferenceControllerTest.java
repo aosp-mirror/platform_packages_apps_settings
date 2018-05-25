@@ -93,4 +93,19 @@ public class AutoBrightnessPreferenceControllerTest {
 
         assertThat(newValue).isEqualTo(SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
     }
+
+    @Test
+    public void isSliceableCorrectKey_returnsTrue() {
+        final AutoBrightnessPreferenceController controller =
+                new AutoBrightnessPreferenceController(mContext,
+                        "auto_brightness");
+        assertThat(controller.isSliceable()).isTrue();
+    }
+
+    @Test
+    public void isSliceableIncorrectKey_returnsFalse() {
+        final AutoBrightnessPreferenceController controller =
+                new AutoBrightnessPreferenceController(mContext, "bad_key");
+        assertThat(controller.isSliceable()).isFalse();
+    }
 }

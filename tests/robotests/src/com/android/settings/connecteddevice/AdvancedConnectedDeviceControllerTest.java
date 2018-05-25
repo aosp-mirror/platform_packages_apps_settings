@@ -55,7 +55,8 @@ public class AdvancedConnectedDeviceControllerTest {
 
         mContext = spy(RuntimeEnvironment.application);
         mContentResolver = mContext.getContentResolver();
-        mNfcController = new NfcPreferenceController(mContext);
+        mNfcController = new NfcPreferenceController(mContext,
+                NfcPreferenceController.KEY_TOGGLE_NFC);
         mShadowNfcAdapter = shadowOf(ShadowNfcAdapter.getNfcAdapter(mContext));
     }
 

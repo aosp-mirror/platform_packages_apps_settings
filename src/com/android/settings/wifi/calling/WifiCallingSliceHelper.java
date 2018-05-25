@@ -25,13 +25,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.PersistableBundle;
-import androidx.core.graphics.drawable.IconCompat;
+import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.SliceAction;
@@ -121,7 +122,7 @@ public class WifiCallingSliceHelper {
             return getNonActionableWifiCallingSlice(
                     mContext.getString(R.string.wifi_calling_settings_title),
                     mContext.getString(R.string.wifi_calling_not_supported, carrierName),
-                    sliceUri, SliceBuilderUtils.getSettingsIntent(mContext));
+                    sliceUri, getSettingsIntent(mContext));
         }
 
         final ImsManager imsManager = getImsManager(subId);
@@ -132,7 +133,7 @@ public class WifiCallingSliceHelper {
             return getNonActionableWifiCallingSlice(
                     mContext.getString(R.string.wifi_calling_settings_title),
                     mContext.getString(R.string.wifi_calling_not_supported, carrierName),
-                    sliceUri, SliceBuilderUtils.getSettingsIntent(mContext));
+                    sliceUri, getSettingsIntent(mContext));
         }
 
         try {
@@ -336,6 +337,14 @@ public class WifiCallingSliceHelper {
         final Intent intent = new Intent();
         intent.setComponent(componentName);
         return intent;
+    }
+
+    /**
+     * @return {@link PendingIntent} to the Settings home page.
+     */
+    public static PendingIntent getSettingsIntent(Context context) {
+        final Intent intent = new Intent(Settings.ACTION_SETTINGS);
+        return PendingIntent.getActivity(context, 0 /* requestCode */, intent, 0 /* flags */);
     }
 
     private PendingIntent getBroadcastIntent(String action) {

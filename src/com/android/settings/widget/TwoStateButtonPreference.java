@@ -18,22 +18,34 @@ package com.android.settings.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import androidx.core.content.res.TypedArrayUtils;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.Button;
 
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.core.content.res.TypedArrayUtils;
+
 /**
  * Preference that presents a button with two states(On vs Off)
  */
-public class TwoStateButtonPreference extends LayoutPreference {
+public class TwoStateButtonPreference extends LayoutPreference implements
+        View.OnClickListener {
+
+    private boolean mIsChecked;
+    private final Button mButtonOn;
+    private final Button mButtonOff;
+
     public TwoStateButtonPreference(Context context, AttributeSet attrs) {
         super(context, attrs, TypedArrayUtils.getAttr(
                 context, R.attr.twoStateButtonPreferenceStyle, android.R.attr.preferenceStyle));
 
-        if (attrs != null) {
+        if (attrs == null) {
+            mButtonOn = null;
+            mButtonOff = null;
+        } else {
             final TypedArray styledAttrs = context.obtainStyledAttributes(attrs,
                     R.styleable.TwoStateButtonPreference);
             final int textOnId = styledAttrs.getResourceId(
@@ -44,19 +56,52 @@ public class TwoStateButtonPreference extends LayoutPreference {
                     R.string.summary_placeholder);
             styledAttrs.recycle();
 
-            final Button buttonOn = getStateOnButton();
-            buttonOn.setText(textOnId);
-            final Button buttonOff = getStateOffButton();
-            buttonOff.setText(textOffId);
+            mButtonOn = findViewById(R.id.state_on_button);
+            mButtonOn.setText(textOnId);
+            mButtonOn.setOnClickListener(this);
+            mButtonOff = findViewById(R.id.state_off_button);
+            mButtonOff.setText(textOffId);
+            mButtonOff.setOnClickListener(this);
+            setChecked(isChecked());
         }
     }
 
-    public Button getStateOnButton() {
-        return findViewById(R.id.state_on_button);
+    @Override
+    public void onClick(View v) {
+        final boolean stateOn = v.getId() == R.id.state_on_button;
+        setChecked(stateOn);
+        callChangeListener(stateOn);
     }
 
+    public void setChecked(boolean checked) {
+        // Update state
+        mIsChecked = checked;
+        // And update UI
+        if (checked) {
+            mButtonOn.setVisibility(View.GONE);
+            mButtonOff.setVisibility(View.VISIBLE);
+        } else {
+            mButtonOn.setVisibility(View.VISIBLE);
+            mButtonOff.setVisibility(View.GONE);
+        }
+    }
 
+    public boolean isChecked() {
+        return mIsChecked;
+    }
+
+    public void setButtonEnabled(boolean enabled) {
+        mButtonOn.setEnabled(enabled);
+        mButtonOff.setEnabled(enabled);
+    }
+
+    @VisibleForTesting
+    public Button getStateOnButton() {
+        return mButtonOn;
+    }
+
+    @VisibleForTesting
     public Button getStateOffButton() {
-        return findViewById(R.id.state_off_button);
+        return mButtonOff;
     }
 }

@@ -235,6 +235,33 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
     }
 
     /**
+     * Determines if the controller should be used as a Slice.
+     * <p>
+     *     Important criteria for a Slice are:
+     *     - Must be secure
+     *     - Must not be a privacy leak
+     *     - Must be understandable as a stand-alone Setting.
+     * <p>
+     *     This does not guarantee the setting is available. {@link #isAvailable()} should sill be
+     *     called.
+     *
+     * @return {@code true} if the controller should be used externally as a Slice.
+     */
+    public boolean isSliceable() {
+        return false;
+    }
+
+    /**
+     * @return {@code true} if the setting update asynchronously.
+     * <p>
+     * For example, a Wifi controller would return true, because it needs to update the radio
+     * and wait for it to turn on.
+     */
+    public boolean hasAsyncUpdate() {
+        return false;
+    }
+
+    /**
      * Updates non-indexable keys for search provider.
      *
      * Called by SearchIndexProvider#getNonIndexableKeys

@@ -29,6 +29,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.Vibrator;
+import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -90,6 +91,11 @@ public class RingVolumePreferenceController extends VolumeSeekBarPreferenceContr
     }
 
     @Override
+    public boolean isSliceable() {
+        return TextUtils.equals(getPreferenceKey(), KEY_RING_VOLUME);
+    }
+
+    @Override
     public int getAudioStream() {
         return AudioManager.STREAM_RING;
     }
@@ -121,12 +127,12 @@ public class RingVolumePreferenceController extends VolumeSeekBarPreferenceContr
         if (mPreference != null) {
             if (mRingerMode == AudioManager.RINGER_MODE_VIBRATE) {
                 mMuteIcon = R.drawable.ic_volume_ringer_vibrate;
-                mPreference.showIcon(com.android.internal.R.drawable.ic_audio_ring_notif_vibrate);
+                mPreference.showIcon(R.drawable.ic_volume_ringer_vibrate);
             } else if (mRingerMode == AudioManager.RINGER_MODE_SILENT) {
                 mMuteIcon = R.drawable.ic_notifications_off_24dp;
-                mPreference.showIcon(com.android.internal.R.drawable.ic_audio_ring_notif_mute);
+                mPreference.showIcon(R.drawable.ic_notifications_off_24dp);
             } else {
-                mPreference.showIcon(com.android.internal.R.drawable.ic_audio_ring_notif);
+                mPreference.showIcon(R.drawable.ic_notifications);
             }
         }
     }

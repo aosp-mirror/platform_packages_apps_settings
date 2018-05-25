@@ -86,8 +86,13 @@ public class SliceBuilderUtils {
         FeatureFactory.getFactory(context).getMetricsFeatureProvider()
                 .action(context, MetricsEvent.ACTION_SETTINGS_SLICE_REQUESTED, sliceNamePair);
 
-        if (controller.getAvailabilityStatus() != AVAILABLE) {
-            return buildUnavailableSlice(context, sliceData, controller);
+        if (!controller.isAvailable()) {
+            // Cannot guarantee setting page is accessible, let the presenter handle error case.
+            return null;
+        }
+
+        if (controller.getAvailabilityStatus() == DISABLED_DEPENDENT_SETTING) {
+            return buildUnavailableSlice(context, sliceData);
         }
 
         switch (sliceData.getSliceType()) {
@@ -173,14 +178,6 @@ public class SliceBuilderUtils {
      */
     public static PendingIntent getContentPendingIntent(Context context, SliceData sliceData) {
         final Intent intent = getContentIntent(context, sliceData);
-        return PendingIntent.getActivity(context, 0 /* requestCode */, intent, 0 /* flags */);
-    }
-
-    /**
-     * @return {@link PendingIntent} to the Settings home page.
-     */
-    public static PendingIntent getSettingsIntent(Context context) {
-        final Intent intent = new Intent(Settings.ACTION_SETTINGS);
         return PendingIntent.getActivity(context, 0 /* requestCode */, intent, 0 /* flags */);
     }
 
@@ -283,18 +280,21 @@ public class SliceBuilderUtils {
         final PendingIntent contentIntent = getContentPendingIntent(context, sliceData);
         final IconCompat icon = IconCompat.createWithResource(context, sliceData.getIconResource());
         @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
+        final CharSequence subtitleText = getSubtitleText(context, controller, sliceData);
         final SliceAction primaryAction = new SliceAction(contentIntent, icon,
                 sliceData.getTitle());
         final List<String> keywords = buildSliceKeywords(sliceData);
 
         return new ListBuilder(context, sliceData.getUri(), ListBuilder.INFINITY)
                 .setAccentColor(color)
-                .addInputRange(builder -> builder
+                .setHeader(builder -> builder
                         .setTitle(sliceData.getTitle())
+                        .setSubtitle(subtitleText)
+                        .setPrimaryAction(primaryAction))
+                .addInputRange(builder -> builder
                         .setMax(sliderController.getMaxSteps())
                         .setValue(sliderController.getSliderPosition())
-                        .setInputAction(actionIntent)
-                        .setPrimaryAction(primaryAction))
+                        .setInputAction(actionIntent))
                 .setKeywords(keywords)
                 .build();
     }
@@ -355,40 +355,20 @@ public class SliceBuilderUtils {
         return keywords;
     }
 
-    private static Slice buildUnavailableSlice(Context context, SliceData data,
-            BasePreferenceController controller) {
+    private static Slice buildUnavailableSlice(Context context, SliceData data) {
         final String title = data.getTitle();
         final List<String> keywords = buildSliceKeywords(data);
         @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
-        final String summary;
-        final SliceAction primaryAction;
+        final CharSequence summary = context.getText(R.string.disabled_dependent_setting_summary);
         final IconCompat icon = IconCompat.createWithResource(context, data.getIconResource());
-
-        switch (controller.getAvailabilityStatus()) {
-            case UNSUPPORTED_ON_DEVICE:
-                summary = context.getString(R.string.unsupported_setting_summary);
-                primaryAction = new SliceAction(getSettingsIntent(context), icon, title);
-                break;
-            case DISABLED_FOR_USER:
-                summary = context.getString(R.string.disabled_for_user_setting_summary);
-                primaryAction = new SliceAction(getContentPendingIntent(context, data), icon,
-                        title);
-                break;
-            case DISABLED_DEPENDENT_SETTING:
-                summary = context.getString(R.string.disabled_dependent_setting_summary);
-                primaryAction = new SliceAction(getContentPendingIntent(context, data), icon,
-                        title);
-                break;
-            case CONDITIONALLY_UNAVAILABLE:
-            default:
-                summary = context.getString(R.string.unknown_unavailability_setting_summary);
-                primaryAction = new SliceAction(getSettingsIntent(context), icon, title);
-        }
+        final SliceAction primaryAction = new SliceAction(getContentPendingIntent(context, data),
+                icon, title);
 
         return new ListBuilder(context, data.getUri(), ListBuilder.INFINITY)
                 .setAccentColor(color)
                 .addRow(builder -> builder
                         .setTitle(title)
+                        .setTitleItem(icon)
                         .setSubtitle(summary)
                         .setPrimaryAction(primaryAction))
                 .setKeywords(keywords)

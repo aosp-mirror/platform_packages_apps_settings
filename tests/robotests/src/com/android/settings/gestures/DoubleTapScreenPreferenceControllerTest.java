@@ -16,6 +16,10 @@
 
 package com.android.settings.gestures;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
+
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.when;
@@ -58,20 +62,6 @@ public class DoubleTapScreenPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mController = new DoubleTapScreenPreferenceController(mContext, KEY_DOUBLE_TAP_SCREEN);
         mController.setConfig(mAmbientDisplayConfiguration);
-    }
-
-    @Test
-    public void isAvailable_configIsTrue_shouldReturnTrue() {
-        when(mAmbientDisplayConfiguration.pulseOnDoubleTapAvailable()).thenReturn(true);
-
-        assertThat(mController.isAvailable()).isTrue();
-    }
-
-    @Test
-    public void isAvailable_configIsFalse_shouldReturnFalse() {
-        when(mAmbientDisplayConfiguration.pulseOnDoubleTapAvailable()).thenReturn(false);
-
-        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
@@ -161,5 +151,47 @@ public class DoubleTapScreenPreferenceControllerTest {
     public void canHandleClicks_trueWhenAlwaysOnDisabled() {
         when(mAmbientDisplayConfiguration.alwaysOnEnabled(anyInt())).thenReturn(false);
         assertThat(mController.canHandleClicks()).isTrue();
+    }
+
+    @Test
+    public void getAvailabilityStatus_aodNotSupported_UNSUPPORTED_ON_DEVICE() {
+        when(mAmbientDisplayConfiguration.doubleTapSensorAvailable()).thenReturn(false);
+        when(mAmbientDisplayConfiguration.ambientDisplayAvailable()).thenReturn(false);
+        final int availabilityStatus = mController.getAvailabilityStatus();
+
+        assertThat(availabilityStatus).isEqualTo(UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_aodOn_DISABLED_DEPENDENT_SETTING() {
+        when(mAmbientDisplayConfiguration.doubleTapSensorAvailable()).thenReturn(true);
+        when(mAmbientDisplayConfiguration.ambientDisplayAvailable()).thenReturn(false);
+        final int availabilityStatus = mController.getAvailabilityStatus();
+
+        assertThat(availabilityStatus).isEqualTo(DISABLED_DEPENDENT_SETTING);
+    }
+
+    @Test
+    public void getAvailabilityStatus_aodSupported_aodOff_AVAILABLE() {
+        when(mAmbientDisplayConfiguration.doubleTapSensorAvailable()).thenReturn(true);
+        when(mAmbientDisplayConfiguration.ambientDisplayAvailable()).thenReturn(true);
+        final int availabilityStatus = mController.getAvailabilityStatus();
+
+        assertThat(availabilityStatus).isEqualTo(AVAILABLE);
+
+    }
+
+    @Test
+    public void isSliceableCorrectKey_returnsTrue() {
+        final DoubleTapScreenPreferenceController controller =
+                new DoubleTapScreenPreferenceController(mContext,"gesture_double_tap_screen");
+        assertThat(controller.isSliceable()).isTrue();
+    }
+
+    @Test
+    public void isSliceableIncorrectKey_returnsFalse() {
+        final DoubleTapScreenPreferenceController controller =
+                new DoubleTapScreenPreferenceController(mContext, "bad_key");
+        assertThat(controller.isSliceable()).isFalse();
     }
 }

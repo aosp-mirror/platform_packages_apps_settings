@@ -155,4 +155,18 @@ public class DoubleTwistPreferenceControllerTest {
 
         assertThat(mController.isChecked()).isFalse();
     }
+
+    @Test
+    public void isSliceableCorrectKey_returnsTrue() {
+        final DoubleTwistPreferenceController controller =
+        new DoubleTwistPreferenceController(mContext,"gesture_double_twist");
+        assertThat(controller.isSliceable()).isTrue();
+    }
+
+    @Test
+    public void isSliceableIncorrectKey_returnsFalse() {
+        final DoubleTwistPreferenceController controller =
+        new DoubleTwistPreferenceController(mContext, "bad_key");
+        assertThat(controller.isSliceable()).isFalse();
+    }
 }

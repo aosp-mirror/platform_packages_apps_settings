@@ -18,6 +18,7 @@ package com.android.settings.notification;
 
 import android.content.Context;
 import android.media.AudioManager;
+import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -39,6 +40,11 @@ public class NotificationVolumePreferenceController extends
     }
 
     @Override
+    public boolean isSliceable() {
+        return TextUtils.equals(getPreferenceKey(), KEY_NOTIFICATION_VOLUME);
+    }
+
+    @Override
     public String getPreferenceKey() {
         return KEY_NOTIFICATION_VOLUME;
     }
@@ -50,7 +56,7 @@ public class NotificationVolumePreferenceController extends
 
     @Override
     public int getMuteIcon() {
-        return com.android.internal.R.drawable.ic_audio_ring_notif_mute;
+        return R.drawable.ic_notifications_off_24dp;
     }
 
 }
