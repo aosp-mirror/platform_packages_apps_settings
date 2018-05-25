@@ -38,8 +38,8 @@ import java.util.concurrent.CountDownLatch;
 
 import androidx.slice.Slice;
 import androidx.slice.SliceItem;
-import androidx.slice.SliceManager;
-import androidx.slice.SliceManager.SliceCallback;
+import androidx.slice.SliceViewManager;
+import androidx.slice.SliceViewManager.SliceCallback;
 import androidx.slice.SliceMetadata;
 import androidx.slice.core.SliceQuery;
 import androidx.slice.widget.ListContent;
@@ -80,7 +80,7 @@ public class DeviceIndexUpdateJobService extends JobService {
         }
         final DeviceIndexFeatureProvider indexProvider = FeatureFactory.getFactory(this)
                 .getDeviceIndexFeatureProvider();
-        final SliceManager manager = getSliceManager();
+        final SliceViewManager manager = getSliceViewManager();
         final Uri baseUri = new Builder()
                 .scheme(ContentResolver.SCHEME_CONTENT)
                 .authority(SettingsSliceProvider.SLICE_AUTHORITY)
@@ -124,8 +124,8 @@ public class DeviceIndexUpdateJobService extends JobService {
         jobFinished(params, false);
     }
 
-    protected SliceManager getSliceManager() {
-        return SliceManager.getInstance(this);
+    protected SliceViewManager getSliceViewManager() {
+        return SliceViewManager.getInstance(this);
     }
 
     protected SliceMetadata getMetadata(Slice loadedSlice) {
@@ -158,7 +158,7 @@ public class DeviceIndexUpdateJobService extends JobService {
         return null;
     }
 
-    protected Slice bindSliceSynchronous(SliceManager manager, Uri slice) {
+    protected Slice bindSliceSynchronous(SliceViewManager manager, Uri slice) {
         final Slice[] returnSlice = new Slice[1];
         CountDownLatch latch = new CountDownLatch(1);
         SliceCallback callback = new SliceCallback() {
