@@ -20,6 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
 import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -34,17 +35,23 @@ import android.os.UserManager;
 
 import com.android.settings.testutils.ApplicationTestUtils;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowDefaultDialerManager;
+import com.android.settings.testutils.shadow.ShadowSmsApplication;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Tests for {@link ApplicationFeatureProviderImpl}.
@@ -246,8 +253,18 @@ public final class ApplicationFeatureProviderImplTest {
     }
 
     @Test
-    public void getKeepEnabledPackages_shouldContainNothing() {
-        assertThat(mProvider.getKeepEnabledPackages()).isEmpty();
+    @Config(shadows = {ShadowSmsApplication.class, ShadowDefaultDialerManager.class})
+    public void getKeepEnabledPackages_shouldContainDefaultPhoneAndSms() {
+        final String testDialer = "com.android.test.defaultdialer";
+        final String testSms = "com.android.test.defaultsms";
+        ShadowSmsApplication.setDefaultSmsApplication(new ComponentName(testSms, "receiver"));
+        ShadowDefaultDialerManager.setDefaultDialerApplication(testDialer);
+        ReflectionHelpers.setField(mProvider, "mContext", RuntimeEnvironment.application);
+
+        final Set<String> keepEnabledPackages = mProvider.getKeepEnabledPackages();
+
+        final List<String> expectedPackages = Arrays.asList(testDialer, testSms);
+        assertThat(keepEnabledPackages).containsExactlyElementsIn(expectedPackages);
     }
 
     private void setUpUsersAndInstalledApps() {
