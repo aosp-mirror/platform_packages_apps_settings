@@ -57,14 +57,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class StorageDashboardFragment extends DashboardFragment
-        implements
+public class StorageDashboardFragment extends DashboardFragment implements
         LoaderManager.LoaderCallbacks<SparseArray<StorageAsyncLoader.AppsStorageResult>> {
     private static final String TAG = "StorageDashboardFrag";
     private static final int STORAGE_JOB_ID = 0;
     private static final int ICON_JOB_ID = 1;
     private static final int VOLUME_SIZE_JOB_ID = 2;
-    private static final int OPTIONS_MENU_MIGRATE_DATA = 100;
 
     private VolumeInfo mVolume;
     private PrivateStorageInfo mStorageInfo;
