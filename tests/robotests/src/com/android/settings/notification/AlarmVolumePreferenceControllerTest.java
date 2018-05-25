@@ -73,4 +73,9 @@ public class AlarmVolumePreferenceControllerTest {
     public void getAudioStream_shouldReturnAlarm() {
         assertThat(mController.getAudioStream()).isEqualTo(AudioManager.STREAM_ALARM);
     }
+
+    @Test
+    public void isSliceableCorrectKey_returnsTrue() {
+        assertThat(mController.isSliceable()).isTrue();
+    }
 }
