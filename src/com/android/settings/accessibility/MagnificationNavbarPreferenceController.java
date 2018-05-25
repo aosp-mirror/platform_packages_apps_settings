@@ -17,6 +17,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
+import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
@@ -66,6 +67,12 @@ public class MagnificationNavbarPreferenceController extends TogglePreferenceCon
         return MagnificationPreferenceFragment.isApplicable(mContext.getResources())
                 ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public boolean isSliceable() {
+        return TextUtils.equals(getPreferenceKey(),
+                "screen_magnification_navbar_preference_screen");
     }
 
     @Override

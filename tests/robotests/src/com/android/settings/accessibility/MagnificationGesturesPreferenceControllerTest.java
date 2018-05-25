@@ -114,4 +114,19 @@ public class MagnificationGesturesPreferenceControllerTest {
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, -1))
                 .isEqualTo(OFF);
     }
+
+    @Test
+    public void isSliceableCorrectKey_returnsTrue() {
+        final MagnificationGesturesPreferenceController controller =
+                new MagnificationGesturesPreferenceController(mContext,
+                        "screen_magnification_gestures_preference_screen");
+        assertThat(controller.isSliceable()).isTrue();
+    }
+
+    @Test
+    public void isSliceableIncorrectKey_returnsFalse() {
+        final MagnificationGesturesPreferenceController controller =
+                new MagnificationGesturesPreferenceController(mContext, "bad_key");
+        assertThat(controller.isSliceable()).isFalse();
+    }
 }

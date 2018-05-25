@@ -17,6 +17,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
+import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
@@ -59,6 +60,12 @@ public class MagnificationGesturesPreferenceController extends TogglePreferenceC
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;
+    }
+
+    @Override
+    public boolean isSliceable() {
+        return TextUtils.equals(getPreferenceKey(),
+                "screen_magnification_gestures_preference_screen");
     }
 
     @Override
