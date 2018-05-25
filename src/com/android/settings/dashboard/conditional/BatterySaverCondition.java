@@ -47,7 +47,7 @@ public class BatterySaverCondition extends Condition implements
 
     @Override
     public Drawable getIcon() {
-        return new BatterySaverDrawable(mManager.getContext(), 0);
+        return mManager.getContext().getDrawable(R.drawable.ic_battery_saver_accent_24dp);
     }
 
     @Override
