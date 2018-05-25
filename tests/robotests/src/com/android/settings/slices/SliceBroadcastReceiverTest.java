@@ -96,8 +96,16 @@ public class SliceBroadcastReceiverTest {
     @Test
     public void onReceive_toggleChanged() {
         final String key = "key";
+        final Uri uri = new Uri.Builder()
+                .scheme(ContentResolver.SCHEME_CONTENT)
+                .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+                .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+                .appendPath(key)
+                .build();
         mSearchFeatureProvider.getSearchIndexableResources().getProviderValues().clear();
         insertSpecialCase(key);
+        final ContentResolver resolver = mock(ContentResolver.class);
+        doReturn(resolver).when(mContext).getContentResolver();
         // Turn on toggle setting
         FakeToggleController fakeToggleController = new FakeToggleController(mContext, key);
         fakeToggleController.setChecked(true);
@@ -121,6 +129,7 @@ public class SliceBroadcastReceiverTest {
         assertThat(namePair.first).isEqualTo(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_NAME);
         assertThat(namePair.second).isEqualTo(fakeToggleController.getPreferenceKey());
 
+        verify(resolver).notifyChange(uri, null);
         assertThat(valuePair.first)
                 .isEqualTo(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_INT_VALUE);
         assertThat(valuePair.second).isEqualTo(0);
@@ -150,9 +159,13 @@ public class SliceBroadcastReceiverTest {
 
         assertThat(fakeToggleController.isChecked()).isFalse();
 
-        final Uri expectedUri = SliceBuilderUtils.getUri(
-                SettingsSlicesContract.PATH_SETTING_ACTION + "/" + key, false);
-        verify(resolver).notifyChange(eq(expectedUri), eq(null));
+        final Uri expectedUri = new Uri.Builder()
+                .scheme(ContentResolver.SCHEME_CONTENT)
+                .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+                .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+                .appendPath(key)
+                .build();
+        verify(resolver).notifyChange(expectedUri, null);
     }
 
     @Test
@@ -183,6 +196,14 @@ public class SliceBroadcastReceiverTest {
     @Test
     public void onReceive_sliderChanged() {
         final String key = "key";
+        final Uri uri = new Uri.Builder()
+                .scheme(ContentResolver.SCHEME_CONTENT)
+                .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+                .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+                .appendPath(key)
+                .build();
+        final ContentResolver resolver = mock(ContentResolver.class);
+        doReturn(resolver).when(mContext).getContentResolver();
         final int position = FakeSliderController.MAX_STEPS - 1;
         final int oldPosition = FakeSliderController.MAX_STEPS;
         mSearchFeatureProvider.getSearchIndexableResources().getProviderValues().clear();
@@ -213,6 +234,7 @@ public class SliceBroadcastReceiverTest {
         assertThat(namePair.first).isEqualTo(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_NAME);
         assertThat(namePair.second).isEqualTo(key);
 
+        verify(resolver).notifyChange(uri, null);
         assertThat(valuePair.first)
                 .isEqualTo(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_INT_VALUE);
         assertThat(valuePair.second).isEqualTo(position);
@@ -286,8 +308,12 @@ public class SliceBroadcastReceiverTest {
 
         // Check the value is the same and the Uri has been notified.
         assertThat(fakeToggleController.isChecked()).isTrue();
-        final Uri expectedUri = SliceBuilderUtils.getUri(
-                SettingsSlicesContract.PATH_SETTING_ACTION + "/" + key, false);
+        final Uri expectedUri = new Uri.Builder()
+                .scheme(ContentResolver.SCHEME_CONTENT)
+                .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+                .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+                .appendPath(key)
+                .build();
         verify(resolver).notifyChange(eq(expectedUri), eq(null));
     }
 
@@ -323,8 +349,12 @@ public class SliceBroadcastReceiverTest {
 
         // Check position is the same and the Uri has been notified.
         assertThat(fakeSliderController.getSliderPosition()).isEqualTo(oldPosition);
-        final Uri expectedUri = SliceBuilderUtils.getUri(
-                SettingsSlicesContract.PATH_SETTING_ACTION + "/" + key, false);
+        final Uri expectedUri = new Uri.Builder()
+                .scheme(ContentResolver.SCHEME_CONTENT)
+                .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+                .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+                .appendPath(key)
+                .build();
         verify(resolver).notifyChange(eq(expectedUri), eq(null));
     }
 
