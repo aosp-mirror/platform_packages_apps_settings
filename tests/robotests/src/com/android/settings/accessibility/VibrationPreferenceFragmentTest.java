@@ -20,16 +20,19 @@ import static com.android.settings.accessibility.VibrationPreferenceFragment.KEY
 import static com.android.settings.accessibility.VibrationPreferenceFragment.KEY_INTENSITY_LOW;
 import static com.android.settings.accessibility.VibrationPreferenceFragment.KEY_INTENSITY_MEDIUM;
 import static com.android.settings.accessibility.VibrationPreferenceFragment.KEY_INTENSITY_OFF;
+import static com.android.settings.accessibility.VibrationPreferenceFragment.KEY_INTENSITY_ON;
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.UserManager;
 import android.os.Vibrator;
 import android.provider.Settings;
 
+import com.android.settings.R;
 import com.android.settings.accessibility.VibrationPreferenceFragment.VibrationIntensityCandidateInfo;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -58,12 +61,11 @@ public class VibrationPreferenceFragmentTest {
         INTENSITY_TO_KEY.put(Vibrator.VIBRATION_INTENSITY_HIGH, KEY_INTENSITY_HIGH);
     }
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Activity mActivity;
     @Mock
     private UserManager mUserManager;
 
     private Context mContext;
+    private Resources mResources;
     private TestVibrationPreferenceFragment mFragment;
 
     @Before
@@ -71,16 +73,18 @@ public class VibrationPreferenceFragmentTest {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest();
 
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
+        mResources = spy(mContext.getResources());
+        when(mContext.getResources()).thenReturn(mResources);
 
         mFragment = spy(new TestVibrationPreferenceFragment());
-        doReturn(mUserManager).when(mActivity).getSystemService(Context.USER_SERVICE);
-        doReturn(mContext).when(mFragment).getContext();
-        mFragment.onAttach(mActivity);
+        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
     }
 
     @Test
     public void changeIntensitySetting_shouldResultInCorrespondingKey() {
+        setSupportsMultipleIntensities(true);
+        mFragment.onAttach(mContext);
         for (Map.Entry<Integer, String> entry : INTENSITY_TO_KEY.entrySet()) {
             Settings.System.putInt(mContext.getContentResolver(),
                     Settings.System.HAPTIC_FEEDBACK_INTENSITY, entry.getKey());
@@ -89,12 +93,37 @@ public class VibrationPreferenceFragmentTest {
     }
 
     @Test
+    public void changeIntensitySetting_WithoutMultipleIntensitySupport_shouldResultInOn() {
+        setSupportsMultipleIntensities(false);
+        mFragment.onAttach(mContext);
+        for (int intensity : INTENSITY_TO_KEY.keySet()) {
+            Settings.System.putInt(mContext.getContentResolver(),
+                    Settings.System.HAPTIC_FEEDBACK_INTENSITY, intensity);
+            final String expectedKey = intensity == Vibrator.VIBRATION_INTENSITY_OFF
+                    ? KEY_INTENSITY_OFF
+                    : KEY_INTENSITY_ON;
+            assertThat(mFragment.getDefaultKey()).isEqualTo(expectedKey);
+        }
+    }
+
+    @Test
     public void initialDefaultKey_shouldBeMedium() {
+        setSupportsMultipleIntensities(true);
+        mFragment.onAttach(mContext);
         assertThat(mFragment.getDefaultKey()).isEqualTo(KEY_INTENSITY_MEDIUM);
     }
 
     @Test
+    public void initialDefaultKey_WithoutMultipleIntensitySupport_shouldBeOn() {
+        setSupportsMultipleIntensities(false);
+        mFragment.onAttach(mContext);
+        assertThat(mFragment.getDefaultKey()).isEqualTo(KEY_INTENSITY_ON);
+    }
+
+    @Test
     public void candidates_shouldBeSortedByIntensity() {
+        setSupportsMultipleIntensities(true);
+        mFragment.onAttach(mContext);
         final List<? extends CandidateInfo> candidates = mFragment.getCandidates();
         assertThat(candidates.size()).isEqualTo(INTENSITY_TO_KEY.size());
         VibrationIntensityCandidateInfo prevCandidate =
@@ -104,6 +133,11 @@ public class VibrationPreferenceFragmentTest {
                     (VibrationIntensityCandidateInfo) candidates.get(i);
             assertThat(candidate.getIntensity()).isLessThan(prevCandidate.getIntensity());
         }
+    }
+
+    private void setSupportsMultipleIntensities(boolean hasSupport) {
+        when(mResources.getBoolean(R.bool.config_vibration_supports_multiple_intensities))
+            .thenReturn(hasSupport);
     }
 
     private class TestVibrationPreferenceFragment extends VibrationPreferenceFragment {
@@ -128,6 +162,11 @@ public class VibrationPreferenceFragmentTest {
         @Override
         protected int getDefaultVibrationIntensity() {
             return Vibrator.VIBRATION_INTENSITY_MEDIUM;
+        }
+
+        @Override
+        public Context getContext() {
+            return mContext;
         }
     }
 }
