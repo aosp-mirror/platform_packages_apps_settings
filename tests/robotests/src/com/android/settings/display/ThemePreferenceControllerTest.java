@@ -16,25 +16,26 @@
 
 package com.android.settings.display;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.om.IOverlayManager;
+import android.content.om.OverlayInfo;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import androidx.preference.ListPreference;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.wrapper.OverlayManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,6 +44,10 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+
+import java.util.Arrays;
+
+import androidx.preference.ListPreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ThemePreferenceControllerTest {
@@ -55,6 +60,8 @@ public class ThemePreferenceControllerTest {
     private ApplicationInfo mApplicationInfo;
     @Mock
     private ListPreference mPreference;
+    @Mock
+    private IOverlayManager mOverlayManager;
 
     private ThemePreferenceController mController;
 
@@ -67,8 +74,28 @@ public class ThemePreferenceControllerTest {
         when(mContext.getString(R.string.default_theme))
                 .thenReturn(RuntimeEnvironment.application.getString(R.string.default_theme));
 
-        mController =
-            spy(new ThemePreferenceController(mContext, mock(OverlayManagerWrapper.class)));
+        when(mContext.getSystemService(Context.OVERLAY_SERVICE)).thenReturn(mOverlayManager);
+        mController = spy(new ThemePreferenceController(mContext, mOverlayManager));
+    }
+
+    @Test
+    public void testAvailable_false() throws Exception {
+        when(mPackageManager.getPackageInfo(anyString(), anyInt())).thenReturn(
+                new PackageInfo());
+        when(mOverlayManager.getOverlayInfosForTarget(any(), anyInt()))
+                .thenReturn(Arrays.asList(new OverlayInfo("", "", "", "", 0, 0, 0, false)));
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void testAvailable_true() throws Exception {
+        when(mPackageManager.getPackageInfo(anyString(), anyInt())).thenReturn(
+                new PackageInfo());
+        when(mOverlayManager.getOverlayInfosForTarget(any(), anyInt()))
+                .thenReturn(Arrays.asList(
+                        new OverlayInfo("", "", OverlayInfo.CATEGORY_THEME, "", 0, 0, 0, true),
+                        new OverlayInfo("", "", OverlayInfo.CATEGORY_THEME, "", 0, 0, 0, true)));
+        assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
@@ -79,7 +106,7 @@ public class ThemePreferenceControllerTest {
         final String themeLabel2 = "Theme2";
         final String[] themes = {pkg1, pkg2};
         doReturn("pkg1.theme1").when(mController).getCurrentTheme();
-        doReturn(themes).when(mController).getAvailableThemes();
+        doReturn(themes).when(mController).getAvailableThemes(false /* currentThemeOnly */);
         when(mPackageManager.getApplicationInfo(anyString(), anyInt()).loadLabel(mPackageManager))
                 .thenReturn(themeLabel1)
                 .thenReturn(themeLabel2);
@@ -98,7 +125,7 @@ public class ThemePreferenceControllerTest {
         final String themeLabel2 = "Theme2";
         final String[] themes = {pkg1, pkg2};
         doReturn(null).when(mController).getCurrentTheme();
-        doReturn(themes).when(mController).getAvailableThemes();
+        doReturn(themes).when(mController).getAvailableThemes(false /* currentThemeOnly */);
         when(mPackageManager.getApplicationInfo(anyString(), anyInt()).loadLabel(mPackageManager))
                 .thenReturn(themeLabel1)
                 .thenReturn(themeLabel2);
@@ -108,5 +135,33 @@ public class ThemePreferenceControllerTest {
         verify(mPreference)
                 .setSummary(RuntimeEnvironment.application.getString(R.string.default_theme));
         verify(mPreference).setValue(null);
+    }
+
+    @Test
+    public void getCurrentTheme_withEnabledState() throws Exception {
+        OverlayInfo info1 = new OverlayInfo("com.android.Theme1", "android",
+                OverlayInfo.CATEGORY_THEME, "", OverlayInfo.STATE_ENABLED, 0, 0, true);
+        OverlayInfo info2 = new OverlayInfo("com.android.Theme2", "android",
+                OverlayInfo.CATEGORY_THEME, "", 0, 0, 0, true);
+        when(mOverlayManager.getOverlayInfosForTarget(any(), anyInt())).thenReturn(
+                Arrays.asList(info1, info2));
+        when(mPackageManager.getPackageInfo(anyString(), anyInt())).thenReturn(
+                new PackageInfo());
+
+        assertThat(mController.getCurrentTheme()).isEqualTo(info1.packageName);
+    }
+
+    @Test
+    public void testGetCurrentTheme_withoutEnabledState() throws Exception {
+        OverlayInfo info1 = new OverlayInfo("com.android.Theme1", "android",
+                OverlayInfo.CATEGORY_THEME, "", OverlayInfo.STATE_DISABLED, 0, 0, true);
+        OverlayInfo info2 = new OverlayInfo("com.android.Theme2", "android",
+                OverlayInfo.CATEGORY_THEME, "", 0, 0, 0, true);
+        when(mOverlayManager.getOverlayInfosForTarget(any(), anyInt())).thenReturn(
+                Arrays.asList(info1, info2));
+        when(mPackageManager.getPackageInfo(anyString(), anyInt())).thenReturn(
+                new PackageInfo());
+
+        assertThat(mController.getCurrentTheme()).isNull();
     }
 }

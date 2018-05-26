@@ -781,17 +781,27 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     }
 
     private String getVibrationSummary(Context context, @VibrationIntensity int intensity) {
-        switch (intensity) {
-            case Vibrator.VIBRATION_INTENSITY_OFF:
-                return context.getString(R.string.accessibility_vibration_summary_off);
-            case Vibrator.VIBRATION_INTENSITY_LOW:
-                return context.getString(R.string.accessibility_vibration_summary_low);
-            case Vibrator.VIBRATION_INTENSITY_MEDIUM:
-                return context.getString(R.string.accessibility_vibration_summary_medium);
-            case Vibrator.VIBRATION_INTENSITY_HIGH:
-                return context.getString(R.string.accessibility_vibration_summary_high);
-            default:
-                return "";
+        final boolean supportsMultipleIntensities = context.getResources().getBoolean(
+                R.bool.config_vibration_supports_multiple_intensities);
+        if (supportsMultipleIntensities) {
+            switch (intensity) {
+                case Vibrator.VIBRATION_INTENSITY_OFF:
+                    return context.getString(R.string.accessibility_vibration_summary_off);
+                case Vibrator.VIBRATION_INTENSITY_LOW:
+                    return context.getString(R.string.accessibility_vibration_summary_low);
+                case Vibrator.VIBRATION_INTENSITY_MEDIUM:
+                    return context.getString(R.string.accessibility_vibration_summary_medium);
+                case Vibrator.VIBRATION_INTENSITY_HIGH:
+                    return context.getString(R.string.accessibility_vibration_summary_high);
+                default:
+                    return "";
+            }
+        } else {
+            if (intensity == Vibrator.VIBRATION_INTENSITY_OFF) {
+                return context.getString(R.string.switch_on_text);
+            } else {
+                return context.getString(R.string.switch_off_text);
+            }
         }
     }
 

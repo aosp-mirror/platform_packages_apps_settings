@@ -18,10 +18,12 @@ package com.android.settings.accessibility;
 
 import static android.provider.Settings.System.NOTIFICATION_VIBRATION_INTENSITY;
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Vibrator;
 import android.provider.Settings;
 import androidx.preference.Preference;
@@ -48,6 +50,7 @@ public class NotificationVibrationIntensityPreferenceControllerTest {
     private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
     private Context mContext;
+    private Resources mResources;
     private NotificationVibrationIntensityPreferenceController mController;
     private Preference mPreference;
 
@@ -56,7 +59,11 @@ public class NotificationVibrationIntensityPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
+        mResources = spy(mContext.getResources());
+        when(mContext.getResources()).thenReturn(mResources);
+        when(mResources.getBoolean(R.bool.config_vibration_supports_multiple_intensities))
+            .thenReturn(true);
         mController = new NotificationVibrationIntensityPreferenceController(mContext) {
             @Override
             protected int getDefaultIntensity() {
@@ -68,7 +75,6 @@ public class NotificationVibrationIntensityPreferenceControllerTest {
         mPreference.setSummary("Test");
         when(mScreen.findPreference(mController.getPreferenceKey()))
                 .thenReturn(mPreference);
-        mController.displayPreference(mScreen);
     }
 
     @Test
@@ -80,7 +86,10 @@ public class NotificationVibrationIntensityPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_shouldRefreshSummary() {
+    public void updateState_withMultipleIntensitySuport_shouldRefreshSummary() {
+        setSupportsMultipleIntensities(true);
+        showPreference();
+
         Settings.System.putInt(mContext.getContentResolver(),
                 NOTIFICATION_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_LOW);
         mController.updateState(mPreference);
@@ -104,5 +113,44 @@ public class NotificationVibrationIntensityPreferenceControllerTest {
         mController.updateState(mPreference);
         assertThat(mPreference.getSummary())
                 .isEqualTo(mContext.getString(R.string.accessibility_vibration_intensity_off));
+    }
+
+    @Test
+    public void updateState_withoutMultipleIntensitySupport_shouldRefreshSummary() {
+        setSupportsMultipleIntensities(false);
+        showPreference();
+
+        Settings.System.putInt(mContext.getContentResolver(),
+                NOTIFICATION_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_LOW);
+        mController.updateState(mPreference);
+        assertThat(mPreference.getSummary())
+                .isEqualTo(mContext.getString(R.string.switch_on_text));
+
+        Settings.System.putInt(mContext.getContentResolver(),
+                NOTIFICATION_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_HIGH);
+        mController.updateState(mPreference);
+        assertThat(mPreference.getSummary())
+                .isEqualTo(mContext.getString(R.string.switch_on_text));
+
+        Settings.System.putInt(mContext.getContentResolver(),
+                NOTIFICATION_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_MEDIUM);
+        mController.updateState(mPreference);
+        assertThat(mPreference.getSummary())
+                .isEqualTo(mContext.getString(R.string.switch_on_text));
+
+        Settings.System.putInt(mContext.getContentResolver(),
+                NOTIFICATION_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_OFF);
+        mController.updateState(mPreference);
+        assertThat(mPreference.getSummary())
+                .isEqualTo(mContext.getString(R.string.switch_off_text));
+    }
+
+    private void setSupportsMultipleIntensities(boolean hasSupport) {
+        when(mResources.getBoolean(R.bool.config_vibration_supports_multiple_intensities))
+            .thenReturn(hasSupport);
+    }
+
+    private void showPreference() {
+        mController.displayPreference(mScreen);
     }
 }

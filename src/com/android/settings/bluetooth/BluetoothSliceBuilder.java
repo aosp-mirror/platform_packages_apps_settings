@@ -17,8 +17,6 @@ package com.android.settings.bluetooth;
 
 import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 
-import static androidx.slice.builders.ListBuilder.ICON_IMAGE;
-
 import android.annotation.ColorInt;
 import android.app.PendingIntent;
 import android.bluetooth.BluetoothAdapter;
@@ -83,7 +81,7 @@ public class BluetoothSliceBuilder {
      * Bluetooth.
      */
     public static Slice getSlice(Context context) {
-        final boolean isBluetoothEnabled = isBluetoothEnabled(context);
+        final boolean isBluetoothEnabled = isBluetoothEnabled();
         final CharSequence title = context.getText(R.string.bluetooth_settings);
         final IconCompat icon = IconCompat.createWithResource(context,
                 R.drawable.ic_settings_bluetooth);
@@ -119,9 +117,8 @@ public class BluetoothSliceBuilder {
         // handle it.
     }
 
-    private static boolean isBluetoothEnabled(Context context) {
-        final LocalBluetoothAdapter adapter = LocalBluetoothManager.getInstance(context,
-                null /* callback */).getBluetoothAdapter();
+    private static boolean isBluetoothEnabled() {
+        final BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
         return adapter.isEnabled();
     }
 
