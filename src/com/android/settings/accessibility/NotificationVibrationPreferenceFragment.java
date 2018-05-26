@@ -15,7 +15,9 @@
  */
 package com.android.settings.accessibility;
 
+import android.media.AudioAttributes;
 import android.os.Vibrator;
+import android.os.VibrationEffect;
 import android.provider.Settings;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -41,6 +43,11 @@ public class NotificationVibrationPreferenceFragment extends VibrationPreference
     @Override
     protected String getVibrationIntensitySetting() {
         return Settings.System.NOTIFICATION_VIBRATION_INTENSITY;
+    }
+
+    @Override
+    protected int getPreviewVibrationAudioAttributesUsage() {
+        return AudioAttributes.USAGE_NOTIFICATION;
     }
 
     @Override
