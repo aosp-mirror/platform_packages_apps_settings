@@ -20,9 +20,17 @@ import com.android.settingslib.utils.ThreadUtils;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.annotation.Resetter;
 
 @Implements(ThreadUtils.class)
 public class ShadowThreadUtils {
+
+    private static boolean sIsMainThread = true;
+
+    @Resetter
+    public static void reset() {
+        sIsMainThread = true;
+    }
 
     @Implementation
     public static void postOnBackgroundThread(Runnable runnable) {
@@ -33,4 +41,14 @@ public class ShadowThreadUtils {
     public static void postOnMainThread(Runnable runnable) {
         runnable.run();
     }
+
+    @Implementation
+    public static boolean isMainThread() {
+        return sIsMainThread;
+    }
+
+    public static void setIsMainThread(boolean isMainThread) {
+        sIsMainThread = isMainThread;
+    }
+
 }

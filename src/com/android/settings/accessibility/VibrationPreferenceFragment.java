@@ -21,8 +21,10 @@ import android.support.annotation.VisibleForTesting;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.graphics.drawable.Drawable;
+import android.media.AudioAttributes;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.provider.Settings;
 import android.util.ArrayMap;
@@ -53,28 +55,15 @@ public abstract class VibrationPreferenceFragment extends RadioButtonPickerFragm
     final static String KEY_INTENSITY_MEDIUM = "intensity_medium";
     @VisibleForTesting
     final static String KEY_INTENSITY_HIGH = "intensity_high";
+    // KEY_INTENSITY_ON is only used when the device doesn't support multiple intensity levels.
+    @VisibleForTesting
+    final static String KEY_INTENSITY_ON = "intensity_on";
 
     private final Map<String, VibrationIntensityCandidateInfo> mCandidates;
     private final SettingsObserver mSettingsObserver;
 
     public VibrationPreferenceFragment() {
         mCandidates = new ArrayMap<>();
-        mCandidates.put(KEY_INTENSITY_OFF,
-                new VibrationIntensityCandidateInfo(KEY_INTENSITY_OFF,
-                    R.string.accessibility_vibration_intensity_off,
-                    Vibrator.VIBRATION_INTENSITY_OFF));
-        mCandidates.put(KEY_INTENSITY_LOW,
-                new VibrationIntensityCandidateInfo(KEY_INTENSITY_LOW,
-                    R.string.accessibility_vibration_intensity_low,
-                    Vibrator.VIBRATION_INTENSITY_LOW));
-        mCandidates.put(KEY_INTENSITY_MEDIUM,
-                new VibrationIntensityCandidateInfo(KEY_INTENSITY_MEDIUM,
-                    R.string.accessibility_vibration_intensity_medium,
-                    Vibrator.VIBRATION_INTENSITY_MEDIUM));
-        mCandidates.put(KEY_INTENSITY_HIGH,
-                new VibrationIntensityCandidateInfo(KEY_INTENSITY_HIGH,
-                    R.string.accessibility_vibration_intensity_high,
-                    Vibrator.VIBRATION_INTENSITY_HIGH));
         mSettingsObserver = new SettingsObserver();
     }
 
@@ -82,6 +71,39 @@ public abstract class VibrationPreferenceFragment extends RadioButtonPickerFragm
     public void onAttach(Context context) {
         super.onAttach(context);
         mSettingsObserver.register();
+        if (mCandidates.isEmpty()) {
+            loadCandidates(context);
+        }
+    }
+
+    private void loadCandidates(Context context) {
+        final boolean supportsMultipleIntensities = context.getResources().getBoolean(
+                R.bool.config_vibration_supports_multiple_intensities);
+        if (supportsMultipleIntensities) {
+            mCandidates.put(KEY_INTENSITY_OFF,
+                    new VibrationIntensityCandidateInfo(KEY_INTENSITY_OFF,
+                        R.string.accessibility_vibration_intensity_off,
+                        Vibrator.VIBRATION_INTENSITY_OFF));
+            mCandidates.put(KEY_INTENSITY_LOW,
+                    new VibrationIntensityCandidateInfo(KEY_INTENSITY_LOW,
+                        R.string.accessibility_vibration_intensity_low,
+                        Vibrator.VIBRATION_INTENSITY_LOW));
+            mCandidates.put(KEY_INTENSITY_MEDIUM,
+                    new VibrationIntensityCandidateInfo(KEY_INTENSITY_MEDIUM,
+                        R.string.accessibility_vibration_intensity_medium,
+                        Vibrator.VIBRATION_INTENSITY_MEDIUM));
+            mCandidates.put(KEY_INTENSITY_HIGH,
+                    new VibrationIntensityCandidateInfo(KEY_INTENSITY_HIGH,
+                        R.string.accessibility_vibration_intensity_high,
+                        Vibrator.VIBRATION_INTENSITY_HIGH));
+        } else {
+            mCandidates.put(KEY_INTENSITY_OFF,
+                    new VibrationIntensityCandidateInfo(KEY_INTENSITY_OFF,
+                        R.string.switch_off_text, Vibrator.VIBRATION_INTENSITY_OFF));
+            mCandidates.put(KEY_INTENSITY_ON,
+                    new VibrationIntensityCandidateInfo(KEY_INTENSITY_ON,
+                        R.string.switch_on_text, getDefaultVibrationIntensity()));
+        }
     }
 
     @Override
@@ -105,6 +127,24 @@ public abstract class VibrationPreferenceFragment extends RadioButtonPickerFragm
      */
     protected void onVibrationIntensitySelected(int intensity) { }
 
+    /**
+     * Play a vibration effect with intensity just selected by user
+     */
+    protected void playVibrationPreview() {
+        Vibrator vibrator = getContext().getSystemService(Vibrator.class);
+        VibrationEffect effect = VibrationEffect.get(VibrationEffect.EFFECT_CLICK);
+        AudioAttributes.Builder builder = new AudioAttributes.Builder();
+        builder.setUsage(getPreviewVibrationAudioAttributesUsage());
+        vibrator.vibrate(effect, builder.build());
+    }
+
+    /**
+     * Get the AudioAttributes usage for vibration preview.
+     */
+    protected int getPreviewVibrationAudioAttributesUsage() {
+        return AudioAttributes.USAGE_UNKNOWN;
+    }
+
     @Override
     protected List<? extends CandidateInfo> getCandidates() {
         List<VibrationIntensityCandidateInfo> candidates = new ArrayList<>(mCandidates.values());
@@ -118,7 +158,10 @@ public abstract class VibrationPreferenceFragment extends RadioButtonPickerFragm
         final int vibrationIntensity = Settings.System.getInt(getContext().getContentResolver(),
                 getVibrationIntensitySetting(), getDefaultVibrationIntensity());
         for (VibrationIntensityCandidateInfo candidate : mCandidates.values()) {
-            if (candidate.getIntensity() == vibrationIntensity) {
+            final boolean matchesIntensity = candidate.getIntensity() == vibrationIntensity;
+            final boolean matchesOn = candidate.getKey().equals(KEY_INTENSITY_ON)
+                    && vibrationIntensity != Vibrator.VIBRATION_INTENSITY_OFF;
+            if (matchesIntensity || matchesOn) {
                 return candidate.getKey();
             }
         }
@@ -189,6 +232,7 @@ public abstract class VibrationPreferenceFragment extends RadioButtonPickerFragm
         @Override
         public void onChange(boolean selfChange, Uri uri) {
             updateCandidates();
+            playVibrationPreview();
         }
     }
 }

@@ -23,6 +23,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
@@ -95,8 +96,16 @@ public class SliceBroadcastReceiverTest {
     @Test
     public void onReceive_toggleChanged() {
         final String key = "key";
+        final Uri uri = new Uri.Builder()
+                .scheme(ContentResolver.SCHEME_CONTENT)
+                .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+                .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+                .appendPath(key)
+                .build();
         mSearchFeatureProvider.getSearchIndexableResources().getProviderValues().clear();
         insertSpecialCase(key);
+        final ContentResolver resolver = mock(ContentResolver.class);
+        doReturn(resolver).when(mContext).getContentResolver();
         // Turn on toggle setting
         FakeToggleController fakeToggleController = new FakeToggleController(mContext, key);
         fakeToggleController.setChecked(true);
@@ -120,14 +129,77 @@ public class SliceBroadcastReceiverTest {
         assertThat(namePair.first).isEqualTo(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_NAME);
         assertThat(namePair.second).isEqualTo(fakeToggleController.getPreferenceKey());
 
+        verify(resolver).notifyChange(uri, null);
         assertThat(valuePair.first)
                 .isEqualTo(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_INT_VALUE);
         assertThat(valuePair.second).isEqualTo(0);
     }
 
     @Test
+    public void toggleUpdate_synchronously_notifyChange_should_be_called() {
+        // Monitor the ContentResolver
+        final ContentResolver resolver = spy(mContext.getContentResolver());
+        doReturn(resolver).when(mContext).getContentResolver();
+
+        final String key = "key";
+        mSearchFeatureProvider.getSearchIndexableResources().getProviderValues().clear();
+        insertSpecialCase(key);
+
+        FakeToggleController fakeToggleController = new FakeToggleController(mContext, key);
+        fakeToggleController.setChecked(true);
+        // Set the toggle setting update synchronously.
+        fakeToggleController.setAsyncUpdate(false);
+        Intent intent = new Intent(SettingsSliceProvider.ACTION_TOGGLE_CHANGED);
+        intent.putExtra(SettingsSliceProvider.EXTRA_SLICE_KEY, key);
+
+        assertThat(fakeToggleController.isChecked()).isTrue();
+
+        // Toggle setting
+        mReceiver.onReceive(mContext, intent);
+
+        assertThat(fakeToggleController.isChecked()).isFalse();
+
+        final Uri expectedUri = SliceBuilderUtils.getUri(
+                SettingsSlicesContract.PATH_SETTING_ACTION + "/" + key, false);
+        verify(resolver).notifyChange(eq(expectedUri), eq(null));
+    }
+
+    @Test
+    public void toggleUpdate_asynchronously_notifyChange_should_not_be_called() {
+        // Monitor the ContentResolver
+        final ContentResolver resolver = spy(mContext.getContentResolver());
+        doReturn(resolver).when(mContext).getContentResolver();
+
+        final String key = "key";
+        mSearchFeatureProvider.getSearchIndexableResources().getProviderValues().clear();
+        insertSpecialCase(key);
+
+        FakeToggleController fakeToggleController = new FakeToggleController(mContext, key);
+        fakeToggleController.setChecked(true);
+        // Set the toggle setting update asynchronously.
+        fakeToggleController.setAsyncUpdate(true);
+        Intent intent = new Intent(SettingsSliceProvider.ACTION_TOGGLE_CHANGED);
+        intent.putExtra(SettingsSliceProvider.EXTRA_SLICE_KEY, key);
+
+        assertThat(fakeToggleController.isChecked()).isTrue();
+
+        // Toggle setting
+        mReceiver.onReceive(mContext, intent);
+
+        verify(resolver, never()).notifyChange(null, null);
+    }
+
+    @Test
     public void onReceive_sliderChanged() {
         final String key = "key";
+        final Uri uri = new Uri.Builder()
+                .scheme(ContentResolver.SCHEME_CONTENT)
+                .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+                .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+                .appendPath(key)
+                .build();
+        final ContentResolver resolver = mock(ContentResolver.class);
+        doReturn(resolver).when(mContext).getContentResolver();
         final int position = FakeSliderController.MAX_STEPS - 1;
         final int oldPosition = FakeSliderController.MAX_STEPS;
         mSearchFeatureProvider.getSearchIndexableResources().getProviderValues().clear();
@@ -158,6 +230,7 @@ public class SliceBroadcastReceiverTest {
         assertThat(namePair.first).isEqualTo(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_NAME);
         assertThat(namePair.second).isEqualTo(key);
 
+        verify(resolver).notifyChange(uri, null);
         assertThat(valuePair.first)
                 .isEqualTo(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_INT_VALUE);
         assertThat(valuePair.second).isEqualTo(position);
@@ -231,8 +304,12 @@ public class SliceBroadcastReceiverTest {
 
         // Check the value is the same and the Uri has been notified.
         assertThat(fakeToggleController.isChecked()).isTrue();
-        final Uri expectedUri = SliceBuilderUtils.getUri(
-                SettingsSlicesContract.PATH_SETTING_ACTION + "/" + key, false);
+        final Uri expectedUri = new Uri.Builder()
+                .scheme(ContentResolver.SCHEME_CONTENT)
+                .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+                .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+                .appendPath(key)
+                .build();
         verify(resolver).notifyChange(eq(expectedUri), eq(null));
     }
 
@@ -268,8 +345,12 @@ public class SliceBroadcastReceiverTest {
 
         // Check position is the same and the Uri has been notified.
         assertThat(fakeSliderController.getSliderPosition()).isEqualTo(oldPosition);
-        final Uri expectedUri = SliceBuilderUtils.getUri(
-                SettingsSlicesContract.PATH_SETTING_ACTION + "/" + key, false);
+        final Uri expectedUri = new Uri.Builder()
+                .scheme(ContentResolver.SCHEME_CONTENT)
+                .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+                .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+                .appendPath(key)
+                .build();
         verify(resolver).notifyChange(eq(expectedUri), eq(null));
     }
 

@@ -27,6 +27,7 @@ import static com.android.settings.wifi.WifiSliceBuilder.ACTION_WIFI_SLICE_CHANG
 
 import android.app.slice.Slice;
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -106,7 +107,9 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
 
         if (!controller.isAvailable()) {
             Log.w(TAG, "Can't update " + key + " since the setting is unavailable");
-            updateUri(context, key, isPlatformSlice);
+            if (!controller.hasAsyncUpdate()) {
+                updateUri(context, key, isPlatformSlice);
+            }
             return;
         }
 
@@ -115,7 +118,9 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
         final TogglePreferenceController toggleController = (TogglePreferenceController) controller;
         toggleController.setChecked(isChecked);
         logSliceValueChange(context, key, isChecked ? 1 : 0);
-        updateUri(context, key, isPlatformSlice);
+        if (!controller.hasAsyncUpdate()) {
+            updateUri(context, key, isPlatformSlice);
+        }
     }
 
     private void handleSliderAction(Context context, String key, int newPosition,
@@ -151,6 +156,7 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
 
         sliderController.setSliderPosition(newPosition);
         logSliceValueChange(context, key, newPosition);
+        updateUri(context, key, isPlatformSlice);
     }
 
     /**
@@ -173,8 +179,15 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
     }
 
     private void updateUri(Context context, String key, boolean isPlatformDefined) {
-        final String path = SettingsSlicesContract.PATH_SETTING_ACTION + "/" + key;
-        final Uri uri = SliceBuilderUtils.getUri(path, isPlatformDefined);
+        final String authority = isPlatformDefined
+                ? SettingsSlicesContract.AUTHORITY
+                : SettingsSliceProvider.SLICE_AUTHORITY;
+        final Uri uri = new Uri.Builder()
+                .scheme(ContentResolver.SCHEME_CONTENT)
+                .authority(authority)
+                .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+                .appendPath(key)
+                .build();
         context.getContentResolver().notifyChange(uri, null /* observer */);
     }
 }

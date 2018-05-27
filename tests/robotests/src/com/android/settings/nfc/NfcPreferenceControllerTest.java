@@ -19,6 +19,7 @@ package com.android.settings.nfc;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -26,8 +27,8 @@ import android.nfc.NfcAdapter;
 import android.nfc.NfcManager;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.PreferenceScreen;
+import android.support.v14.preference.SwitchPreference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -68,8 +69,10 @@ public class NfcPreferenceControllerTest {
         when(mContext.getSystemService(Context.NFC_SERVICE)).thenReturn(mManager);
         when(NfcAdapter.getDefaultAdapter(mContext)).thenReturn(mNfcAdapter);
 
-        mNfcController = new NfcPreferenceController(mContext);
+        mNfcController = new NfcPreferenceController(mContext,
+                NfcPreferenceController.KEY_TOGGLE_NFC);
         mNfcPreference = new SwitchPreference(RuntimeEnvironment.application);
+
         when(mScreen.findPreference(mNfcController.getPreferenceKey())).thenReturn(mNfcPreference);
 
         Settings.Global.putString(mContext.getContentResolver(),
@@ -83,15 +86,17 @@ public class NfcPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_hasNfc_shouldReturnTrue() {
+    public void getAvailabilityStatus_hasNfc_shouldReturnAvailable() {
         when(mNfcAdapter.isEnabled()).thenReturn(true);
-        assertThat(mNfcController.isAvailable()).isTrue();
+        assertThat(mNfcController.getAvailabilityStatus())
+                .isEqualTo(NfcPreferenceController.AVAILABLE);
     }
 
     @Test
-    public void isAvailable_noNfcAdapter_shouldReturnFalse() {
+    public void getAvailabilityStatus_noNfcAdapter_shouldReturnDisabledUnsupported() {
         ReflectionHelpers.setField(mNfcController, "mNfcAdapter", null);
-        assertThat(mNfcController.isAvailable()).isFalse();
+        assertThat(mNfcController.getAvailabilityStatus())
+                .isEqualTo(NfcPreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
@@ -156,5 +161,47 @@ public class NfcPreferenceControllerTest {
         mNfcController.updateNonIndexableKeys(keys);
 
         assertThat(keys).hasSize(1);
+    }
+    @Test
+    public void setChecked_True_nfcShouldEnable() {
+        mNfcController.setChecked(true);
+        mNfcController.onResume();
+
+        verify(mNfcAdapter).enable();
+    }
+
+    @Test
+    public void setChecked_False_nfcShouldDisable() {
+        mNfcController.setChecked(false);
+        mNfcController.onResume();
+
+        verify(mNfcAdapter).disable();
+    }
+
+    @Test
+    public void hasAsyncUpdate_shouldReturnTrue() {
+        assertThat(mNfcController.hasAsyncUpdate()).isTrue();
+    }
+
+    @Test
+    public void isToggleableInAirplaneMode_containNfc_shouldReturnTrue() {
+        Settings.Global.putString(mContext.getContentResolver(),
+                Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS,
+                Settings.Global.RADIO_NFC);
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.AIRPLANE_MODE_ON, 1);
+
+        assertThat(NfcPreferenceController.isToggleableInAirplaneMode(mContext)).isTrue();
+    }
+
+    @Test
+    public void isToggleableInAirplaneMode_withoutNfc_shouldReturnFalse() {
+        Settings.Global.putString(mContext.getContentResolver(),
+                Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS,
+                "null");
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.AIRPLANE_MODE_ON, 1);
+
+        assertThat(NfcPreferenceController.isToggleableInAirplaneMode(mContext)).isFalse();
     }
 }

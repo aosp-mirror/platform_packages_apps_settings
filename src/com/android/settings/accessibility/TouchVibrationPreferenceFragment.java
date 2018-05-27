@@ -16,7 +16,9 @@
 package com.android.settings.accessibility;
 
 import android.graphics.drawable.Drawable;
+import android.media.AudioAttributes;
 import android.os.Vibrator;
+import android.os.VibrationEffect;
 import android.provider.Settings;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -48,6 +50,11 @@ public class TouchVibrationPreferenceFragment extends VibrationPreferenceFragmen
     protected int getDefaultVibrationIntensity() {
         Vibrator vibrator = getContext().getSystemService(Vibrator.class);
         return vibrator.getDefaultHapticFeedbackIntensity();
+    }
+
+    @Override
+    protected int getPreviewVibrationAudioAttributesUsage() {
+        return AudioAttributes.USAGE_ASSISTANCE_SONIFICATION;
     }
 
     @Override
