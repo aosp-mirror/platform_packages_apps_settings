@@ -22,11 +22,15 @@ import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import androidx.annotation.VisibleForTesting;
+import android.util.Log;
 
 import com.android.settings.R;
 
+import androidx.annotation.VisibleForTesting;
+
 public class RoundedHomepageIcon extends LayerDrawable {
+
+    private static final String TAG = "RoundedHomepageIcon";
 
     @VisibleForTesting(otherwise = NONE)
     int mBackgroundColor = -1;
@@ -44,5 +48,6 @@ public class RoundedHomepageIcon extends LayerDrawable {
     public void setBackgroundColor(int color) {
         mBackgroundColor = color;
         getDrawable(0).setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+        Log.d(TAG, "Setting background color " + mBackgroundColor);
     }
 }
