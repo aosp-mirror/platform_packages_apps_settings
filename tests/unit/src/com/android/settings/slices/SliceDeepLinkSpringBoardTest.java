@@ -21,14 +21,22 @@ import static com.android.settings.search.DeviceIndexFeatureProvider.createDeepL
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.platform.test.annotations.Presubmit;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.filters.MediumTest;
 import android.support.test.runner.AndroidJUnit4;
+
+import com.android.settings.bluetooth.BluetoothSliceBuilder;
+import com.android.settings.location.LocationSliceBuilder;
+import com.android.settings.notification.ZenModeSliceBuilder;
+import com.android.settings.wifi.WifiSliceBuilder;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
+@MediumTest
 public class SliceDeepLinkSpringBoardTest {
     private Context mContext;
 
@@ -38,18 +46,57 @@ public class SliceDeepLinkSpringBoardTest {
     }
 
     @Test
-    public void launcheDeepLinkIntent_shouldNotCrash() {
-        final Uri springBoardIntentUri = createDeepLink(
-                new Intent(SliceDeepLinkSpringBoard.ACTION_VIEW_SLICE)
-                        .setPackage(mContext.getPackageName())
-                        .putExtra(SliceDeepLinkSpringBoard.EXTRA_SLICE,
-                                "content://com.android.settings.slices/action/test_slice")
-                        .toUri(Intent.URI_ANDROID_APP_SCHEME));
-
-        final Intent deepLinkIntent = new Intent(Intent.ACTION_VIEW)
-                .setData(springBoardIntentUri)
-                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    @Presubmit
+    public void launchesDeepLinkIntent_shouldNotCrash() {
+        final Intent deepLinkIntent = getSpringboardIntent(
+                "content://com.android.settings.slices/action/test_slice");
 
         mContext.startActivity(deepLinkIntent);
+    }
+
+    @Test
+    @Presubmit
+    public void launchesDeepLinkIntent_wifiSlice_shouldNotCrash() {
+        final Intent deepLinkIntent = getSpringboardIntent(WifiSliceBuilder.WIFI_URI.toString());
+
+        mContext.startActivity(deepLinkIntent);
+    }
+
+    @Test
+    @Presubmit
+    public void launchesDeepLinkIntent_bluetoothSlice_shouldNotCrash() {
+        final Intent deepLinkIntent = getSpringboardIntent(
+                BluetoothSliceBuilder.BLUETOOTH_URI.toString());
+
+        mContext.startActivity(deepLinkIntent);
+    }
+
+    @Test
+    @Presubmit
+    public void launchesDeepLinkIntent_dndSlice_shouldNotCrash() {
+        final Intent deepLinkIntent = getSpringboardIntent(
+                ZenModeSliceBuilder.ZEN_MODE_URI.toString());
+
+        mContext.startActivity(deepLinkIntent);
+    }
+
+    @Test
+    @Presubmit
+    public void launchesDeepLinkIntent_locationSlice_shouldNotCrash() {
+        final Intent deepLinkIntent = getSpringboardIntent(
+                LocationSliceBuilder.LOCATION_URI.toString());
+
+        mContext.startActivity(deepLinkIntent);
+    }
+
+    private Intent getSpringboardIntent(String uriString) {
+        final Uri uri = createDeepLink(new Intent(SliceDeepLinkSpringBoard.ACTION_VIEW_SLICE)
+                .setPackage(mContext.getPackageName())
+                .putExtra(SliceDeepLinkSpringBoard.EXTRA_SLICE, uriString)
+                .toUri(Intent.URI_ANDROID_APP_SCHEME));
+
+        return new Intent(Intent.ACTION_VIEW)
+                .setData(uri)
+                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
 }

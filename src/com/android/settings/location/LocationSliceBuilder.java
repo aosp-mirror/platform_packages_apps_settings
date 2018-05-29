@@ -78,15 +78,18 @@ public class LocationSliceBuilder {
                 .build();
     }
 
-    private static PendingIntent getPrimaryAction(Context context) {
+    public static Intent getIntent(Context context) {
         final String screenTitle = context.getText(R.string.location_settings_title).toString();
         final Uri contentUri = new Uri.Builder().appendPath(KEY_LOCATION).build();
-        final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(context,
+        return DatabaseIndexingUtils.buildSearchResultPageIntent(context,
                 LocationSettings.class.getName(), KEY_LOCATION, screenTitle,
                 MetricsEvent.LOCATION)
                 .setClassName(context.getPackageName(), SubSettings.class.getName())
                 .setData(contentUri);
+    }
 
+    private static PendingIntent getPrimaryAction(Context context) {
+        final Intent intent = getIntent(context);
         return PendingIntent.getActivity(context, 0 /* requestCode */,
                 intent, 0 /* flags */);
     }
