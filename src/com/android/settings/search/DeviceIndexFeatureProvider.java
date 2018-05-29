@@ -24,6 +24,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.settings.R;
@@ -32,7 +33,6 @@ import com.android.settings.slices.SettingsSliceProvider;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 
 public interface DeviceIndexFeatureProvider {
 
@@ -96,10 +96,11 @@ public interface DeviceIndexFeatureProvider {
     }
 
     static boolean skipIndex(Context context) {
-        final boolean isSameVersion = Objects.equals(
+        final boolean isSameVersion = TextUtils.equals(
                 Settings.Secure.getString(context.getContentResolver(), INDEX_VERSION), VERSION);
-        final boolean isSameLanguage = Objects.equals(
-                Settings.Secure.getString(context.getContentResolver(), INDEX_LANGUAGE), LANGUAGE);
+        final boolean isSameLanguage = TextUtils.equals(
+                Settings.Secure.getString(context.getContentResolver(), INDEX_LANGUAGE),
+                LANGUAGE.toString());
         return isSameLanguage && isSameVersion;
     }
 
