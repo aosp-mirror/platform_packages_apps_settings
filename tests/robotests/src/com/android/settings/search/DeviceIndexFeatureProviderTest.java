@@ -23,7 +23,6 @@ import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.app.job.JobScheduler;
-import android.os.Build;
 import android.provider.Settings;
 
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -113,15 +112,19 @@ public class DeviceIndexFeatureProviderTest {
 
     @Test
     public void updateIndex_enabled_provisioned_sameBuild_sameLang_shouldNotIndex() {
+        // Enabled
+        when(mProvider.isIndexingEnabled()).thenReturn(true);
+        // Provisioned
         Settings.Global.putInt(mActivity.getContentResolver(),
                 Settings.Global.DEVICE_PROVISIONED, 1);
+        // Same build and same language
         DeviceIndexFeatureProvider.setIndexState(mActivity);
-        JobScheduler jobScheduler = mock(JobScheduler.class);
-        when(mProvider.isIndexingEnabled()).thenReturn(true);
+
+        final JobScheduler jobScheduler = mock(JobScheduler.class);
         when(mActivity.getSystemService(JobScheduler.class)).thenReturn(jobScheduler);
 
         mProvider.updateIndex(mActivity, false);
 
-        verify(mProvider, never()).index(any(), any(), any(), any(), any());
+        verify(jobScheduler, never()).schedule(any());
     }
 }
