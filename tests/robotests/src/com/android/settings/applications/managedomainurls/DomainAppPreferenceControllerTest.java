@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications;
+package com.android.settings.applications.managedomainurls;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
@@ -26,7 +26,6 @@ import android.content.pm.ApplicationInfo;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ProgressBar;
-import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -39,8 +38,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 
+import androidx.preference.PreferenceViewHolder;
+
 @RunWith(SettingsRobolectricTestRunner.class)
-public class ManageDomainUrlsTest {
+public class DomainAppPreferenceControllerTest {
 
     @Mock
     private ApplicationsState.AppEntry mAppEntry;
@@ -56,8 +57,7 @@ public class ManageDomainUrlsTest {
     public void domainAppPreferenceShouldUseAppPreferenceLayout() {
         mAppEntry.info = new ApplicationInfo();
         mAppEntry.info.packageName = "com.android.settings.test";
-        final ManageDomainUrls.DomainAppPreference pref =
-                new ManageDomainUrls.DomainAppPreference(mContext, null, mAppEntry);
+        final DomainAppPreference pref = new DomainAppPreference(mContext, null, mAppEntry);
 
         assertThat(pref.getLayoutResource()).isEqualTo(R.layout.preference_app);
     }
@@ -67,8 +67,7 @@ public class ManageDomainUrlsTest {
         mAppEntry.info = new ApplicationInfo();
         mAppEntry.info.packageName = "com.android.settings.test";
         mAppEntry.icon = mock(Drawable.class);
-        final ManageDomainUrls.DomainAppPreference pref =
-            new ManageDomainUrls.DomainAppPreference(mContext, null, mAppEntry);
+        final DomainAppPreference pref = new DomainAppPreference(mContext, null, mAppEntry);
         final View holderView = mock(View.class);
         final View appendixView = mock(View.class);
         when(holderView.findViewById(R.id.summary_container)).thenReturn(mock(View.class));
