@@ -893,7 +893,7 @@ public class ManageApplications extends InstrumentedFragment
             } else if (mManageApplications.mListType == LIST_TYPE_USAGE_ACCESS) {
                 mExtraInfoBridge = new AppStateUsageBridge(mContext, mState, this);
             } else if (mManageApplications.mListType == LIST_TYPE_HIGH_POWER) {
-                mExtraInfoBridge = new AppStatePowerBridge(mState, this);
+                mExtraInfoBridge = new AppStatePowerBridge(mContext, mState, this);
             } else if (mManageApplications.mListType == LIST_TYPE_OVERLAY) {
                 mExtraInfoBridge = new AppStateOverlayBridge(mContext, mState, this);
             } else if (mManageApplications.mListType == LIST_TYPE_WRITE_SETTINGS) {
@@ -1285,7 +1285,8 @@ public class ManageApplications extends InstrumentedFragment
                 return true;
             }
             ApplicationsState.AppEntry entry = mEntries.get(position);
-            return !PowerWhitelistBackend.getInstance().isSysWhitelisted(entry.info.packageName);
+            return !PowerWhitelistBackend.getInstance(mContext)
+                    .isSysWhitelisted(entry.info.packageName);
         }
 
         @Override
