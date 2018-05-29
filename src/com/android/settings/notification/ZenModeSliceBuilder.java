@@ -123,6 +123,16 @@ public class ZenModeSliceBuilder {
         // handle it.
     }
 
+    public static Intent getIntent(Context context) {
+        final Uri contentUri = new Uri.Builder().appendPath(ZEN_MODE_KEY).build();
+        final String screenTitle = context.getText(R.string.zen_mode_settings_title).toString();
+        return DatabaseIndexingUtils.buildSearchResultPageIntent(context,
+                ZenModeSettings.class.getName(), ZEN_MODE_KEY, screenTitle,
+                MetricsEvent.NOTIFICATION_ZEN_MODE)
+                .setClassName(context.getPackageName(), SubSettings.class.getName())
+                .setData(contentUri);
+    }
+
     private static boolean isZenModeEnabled(Context context) {
         final NotificationManager manager = context.getSystemService(NotificationManager.class);
         final int zenMode = manager.getZenMode();
@@ -139,16 +149,8 @@ public class ZenModeSliceBuilder {
     }
 
     private static PendingIntent getPrimaryAction(Context context) {
-        final String screenTitle = context.getText(R.string.zen_mode_settings_title).toString();
-        final Uri contentUri = new Uri.Builder().appendPath(ZEN_MODE_KEY).build();
-        final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(context,
-                ZenModeSettings.class.getName(), ZEN_MODE_KEY, screenTitle,
-                MetricsEvent.NOTIFICATION_ZEN_MODE)
-                .setClassName(context.getPackageName(), SubSettings.class.getName())
-                .setData(contentUri);
-
-        return PendingIntent.getActivity(context, 0 /* requestCode */,
-                intent, 0 /* flags */);
+        final Intent intent = getIntent(context);
+        return PendingIntent.getActivity(context, 0 /* requestCode */, intent, 0 /* flags */);
     }
 
     private static PendingIntent getBroadcastIntent(Context context) {
