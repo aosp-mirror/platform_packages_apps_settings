@@ -60,7 +60,6 @@ import androidx.preference.Preference;
 public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
 
     private static final String TAG = "DashboardFeatureImpl";
-
     private static final String DASHBOARD_TILE_PREF_KEY_PREFIX = "dashboard_tile_pref_";
     private static final String META_DATA_KEY_INTENT_ACTION = "com.android.settings.intent.action";
     @VisibleForTesting
@@ -277,7 +276,8 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             return;
         }
         ProfileSelectDialog.updateUserHandlesIfNeeded(mContext, tile);
-        if (tile.userHandle == null) {
+
+        if (tile.userHandle == null || tile.isPrimaryProfileOnly()) {
             mMetricsFeatureProvider.logDashboardStartIntent(mContext, intent, sourceMetricCategory);
             activity.startActivityForResult(intent, 0);
         } else if (tile.userHandle.size() == 1) {
