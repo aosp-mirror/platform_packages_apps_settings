@@ -41,6 +41,8 @@ public class AdvancedConnectedDeviceDashboardFragment extends DashboardFragment 
 
     private static final String TAG = "AdvancedConnectedDeviceFrag";
 
+    static final String KEY_BLUETOOTH = "bluetooth_settings";
+
     @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.CONNECTION_DEVICE_ADVANCED;
@@ -114,6 +116,9 @@ public class AdvancedConnectedDeviceDashboardFragment extends DashboardFragment 
                     if (!pm.hasSystemFeature(PackageManager.FEATURE_NFC)) {
                         keys.add(AndroidBeamPreferenceController.KEY_ANDROID_BEAM_SETTINGS);
                     }
+
+                    // Parent duplicate
+                    keys.add(KEY_BLUETOOTH);
 
                     return keys;
                 }
