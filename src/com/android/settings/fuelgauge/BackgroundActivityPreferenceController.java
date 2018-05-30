@@ -56,7 +56,7 @@ public class BackgroundActivityPreferenceController extends AbstractPreferenceCo
 
     public BackgroundActivityPreferenceController(Context context,
             InstrumentedPreferenceFragment fragment, int uid, String packageName) {
-        this(context, fragment, uid, packageName, PowerWhitelistBackend.getInstance());
+        this(context, fragment, uid, packageName, PowerWhitelistBackend.getInstance(context));
     }
 
     @VisibleForTesting

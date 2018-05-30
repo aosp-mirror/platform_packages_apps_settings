@@ -48,7 +48,7 @@ public class BatteryOptimizationPreferenceController extends AbstractPreferenceC
         mFragment = fragment;
         mSettingsActivity = settingsActivity;
         mPackageName = packageName;
-        mBackend = PowerWhitelistBackend.getInstance();
+        mBackend = PowerWhitelistBackend.getInstance(mSettingsActivity);
     }
 
     @VisibleForTesting
