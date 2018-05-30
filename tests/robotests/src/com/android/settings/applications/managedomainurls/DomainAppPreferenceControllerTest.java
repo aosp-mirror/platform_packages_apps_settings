@@ -23,7 +23,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
-import android.graphics.drawable.Drawable;
+import android.util.IconDrawableFactory;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -34,40 +34,39 @@ import com.android.settingslib.applications.ApplicationsState;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+
+import java.util.UUID;
 
 import androidx.preference.PreferenceViewHolder;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DomainAppPreferenceControllerTest {
 
-    @Mock
     private ApplicationsState.AppEntry mAppEntry;
     private Context mContext;
+    private IconDrawableFactory mIconDrawableFactory;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
+        mIconDrawableFactory = IconDrawableFactory.newInstance(mContext);
+        mAppEntry = new ApplicationsState.AppEntry(
+                mContext, createApplicationInfo(mContext.getPackageName()), 0);
     }
 
     @Test
-    public void domainAppPreferenceShouldUseAppPreferenceLayout() {
-        mAppEntry.info = new ApplicationInfo();
-        mAppEntry.info.packageName = "com.android.settings.test";
-        final DomainAppPreference pref = new DomainAppPreference(mContext, null, mAppEntry);
+    public void getLayoutResource_shouldUseAppPreferenceLayout() {
+        final DomainAppPreference pref = new DomainAppPreference(
+                mContext, mIconDrawableFactory, mAppEntry);
 
         assertThat(pref.getLayoutResource()).isEqualTo(R.layout.preference_app);
     }
 
     @Test
     public void onBindViewHolder_shouldSetAppendixViewToGone() {
-        mAppEntry.info = new ApplicationInfo();
-        mAppEntry.info.packageName = "com.android.settings.test";
-        mAppEntry.icon = mock(Drawable.class);
-        final DomainAppPreference pref = new DomainAppPreference(mContext, null, mAppEntry);
+        final DomainAppPreference pref = new DomainAppPreference(
+                mContext, mIconDrawableFactory, mAppEntry);
         final View holderView = mock(View.class);
         final View appendixView = mock(View.class);
         when(holderView.findViewById(R.id.summary_container)).thenReturn(mock(View.class));
@@ -77,5 +76,14 @@ public class DomainAppPreferenceControllerTest {
         pref.onBindViewHolder(PreferenceViewHolder.createInstanceForTests(holderView));
 
         verify(appendixView).setVisibility(View.GONE);
+    }
+
+    private ApplicationInfo createApplicationInfo(String packageName) {
+        ApplicationInfo appInfo = new ApplicationInfo();
+        appInfo.sourceDir = "foo";
+        appInfo.flags |= ApplicationInfo.FLAG_INSTALLED;
+        appInfo.storageUuid = UUID.randomUUID();
+        appInfo.packageName = packageName;
+        return appInfo;
     }
 }

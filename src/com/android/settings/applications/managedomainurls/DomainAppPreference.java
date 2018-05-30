@@ -20,52 +20,35 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserHandle;
 import android.util.ArraySet;
+import android.util.IconDrawableFactory;
 import android.view.View;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.widget.AppPreference;
-import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceViewHolder;
 
-@VisibleForTesting
 public class DomainAppPreference extends AppPreference {
+
     private final AppEntry mEntry;
     private final PackageManager mPm;
-    private final ApplicationsState mApplicationsState;
+    private final IconDrawableFactory mIconDrawableFactory;
 
-    public DomainAppPreference(final Context context, ApplicationsState applicationsState,
+    public DomainAppPreference(final Context context, IconDrawableFactory iconFactory,
             AppEntry entry) {
         super(context);
-        mApplicationsState = applicationsState;
+        mIconDrawableFactory = iconFactory;
         mPm = context.getPackageManager();
         mEntry = entry;
         mEntry.ensureLabel(getContext());
+
         setState();
-        if (mEntry.icon != null) {
-            setIcon(mEntry.icon);
-        }
     }
 
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
-        if (mEntry.icon == null) {
-            holder.itemView.post(new Runnable() {
-                @Override
-                public void run() {
-                    // Ensure we have an icon before binding.
-                    if (mApplicationsState != null) {
-                        mApplicationsState.ensureIcon(mEntry);
-                    }
-                    // This might trigger us to bind again, but it gives an easy way to only
-                    // load the icon once its needed, so its probably worth it.
-                    setIcon(mEntry.icon);
-                }
-            });
-        }
         super.onBindViewHolder(holder);
         holder.itemView.findViewById(R.id.appendix).setVisibility(View.GONE);
     }
@@ -81,6 +64,7 @@ public class DomainAppPreference extends AppPreference {
 
     private void setState() {
         setTitle(mEntry.label);
+        setIcon(mIconDrawableFactory.getBadgedIcon(mEntry.info));
         setSummary(getDomainsSummary(mEntry.info.packageName));
     }
 
