@@ -115,6 +115,10 @@ public class BatteryOptimizationPreferenceControllerTest {
      */
     public static class TestPowerWhitelistBackend extends PowerWhitelistBackend {
 
+        public TestPowerWhitelistBackend(Context context) {
+            super(context);
+        }
+
         @Override
         public void refreshList() {
             // Do nothing so we could mock it without error

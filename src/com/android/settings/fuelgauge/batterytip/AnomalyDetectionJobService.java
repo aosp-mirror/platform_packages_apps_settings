@@ -30,12 +30,8 @@ import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Process;
 import android.os.StatsDimensionsValue;
-import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.support.annotation.GuardedBy;
@@ -44,7 +40,6 @@ import android.util.Log;
 import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.internal.os.BatteryStatsHelper;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.BatteryUtils;
@@ -101,7 +96,8 @@ public class AnomalyDetectionJobService extends JobService {
             final BatteryUtils batteryUtils = BatteryUtils.getInstance(this);
             final ContentResolver contentResolver = getContentResolver();
             final UserManager userManager = getSystemService(UserManager.class);
-            final PowerWhitelistBackend powerWhitelistBackend = PowerWhitelistBackend.getInstance();
+            final PowerWhitelistBackend powerWhitelistBackend =
+                    PowerWhitelistBackend.getInstance(context);
             final PowerUsageFeatureProvider powerUsageFeatureProvider = FeatureFactory
                     .getFactory(this).getPowerUsageFeatureProvider(this);
             final MetricsFeatureProvider metricsFeatureProvider = FeatureFactory

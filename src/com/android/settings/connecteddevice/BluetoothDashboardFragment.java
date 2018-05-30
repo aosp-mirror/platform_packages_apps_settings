@@ -109,17 +109,10 @@ public class BluetoothDashboardFragment extends DashboardFragment {
                     final List<SearchIndexableRaw> result = new ArrayList<>();
 
                     // Add the activity title
-                    SearchIndexableRaw data = new SearchIndexableRaw(context);
+                    final SearchIndexableRaw data = new SearchIndexableRaw(context);
                     data.title = context.getString(R.string.bluetooth_settings_title);
-                    data.screenTitle = context.getString(R.string.settings_label);
+                    data.screenTitle = context.getString(R.string.bluetooth_settings_title);
                     data.keywords = context.getString(R.string.keywords_bluetooth_settings);
-                    data.intentTargetPackage = context.getPackageName();
-                    data.intentTargetClass = BluetoothDashboardFragment.class.getName();
-                    data.intentAction = new SubSettingLauncher(context)
-                            .setDestination(ScanningSettings.class.getName())
-                            .setSourceMetricsCategory(MetricsProto.MetricsEvent.BLUETOOTH_FRAGMENT)
-                            .toIntent()
-                            .getAction();
                     data.key = KEY_BLUETOOTH_SCREEN;
                     result.add(data);
 
