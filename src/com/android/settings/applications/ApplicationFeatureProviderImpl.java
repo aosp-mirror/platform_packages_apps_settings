@@ -17,6 +17,7 @@
 package com.android.settings.applications;
 
 import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ComponentInfo;
@@ -26,8 +27,11 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.os.RemoteException;
 import android.os.UserManager;
+import android.telecom.DefaultDialerManager;
+import android.text.TextUtils;
 import android.util.ArraySet;
 
+import com.android.internal.telephony.SmsApplication;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
@@ -124,7 +128,18 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
 
     @Override
     public Set<String> getKeepEnabledPackages() {
-        return new ArraySet<>();
+        // Find current default phone/sms app. We should keep them enabled.
+        final Set<String> keepEnabledPackages = new ArraySet<>();
+        final String defaultDialer = DefaultDialerManager.getDefaultDialerApplication(mContext);
+        if (!TextUtils.isEmpty(defaultDialer)) {
+            keepEnabledPackages.add(defaultDialer);
+        }
+        final ComponentName defaultSms = SmsApplication.getDefaultSmsApplication(
+                mContext, true /* updateIfNeeded */);
+        if (defaultSms != null) {
+            keepEnabledPackages.add(defaultSms.getPackageName());
+        }
+        return keepEnabledPackages;
     }
 
     private static class CurrentUserAndManagedProfilePolicyInstalledAppCounter
