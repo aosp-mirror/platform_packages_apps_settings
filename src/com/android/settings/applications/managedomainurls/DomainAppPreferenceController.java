@@ -20,6 +20,7 @@ import android.app.Application;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.ArrayMap;
+import android.util.IconDrawableFactory;
 
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
@@ -154,12 +155,14 @@ public class DomainAppPreferenceController extends BasePreferenceController impl
     private void rebuildAppList(PreferenceGroup group, ArrayList<AppEntry> apps) {
         cacheAllPrefs(group);
         final int size = apps.size();
+        final Context context = group.getContext();
+        final IconDrawableFactory iconDrawableFactory = IconDrawableFactory.newInstance(context);
         for (int i = 0; i < size; i++) {
-            AppEntry entry = apps.get(i);
-            String key = entry.info.packageName + "|" + entry.info.uid;
+            final AppEntry entry = apps.get(i);
+            final String key = entry.info.packageName + "|" + entry.info.uid;
             DomainAppPreference preference = (DomainAppPreference) getCachedPreference(key);
             if (preference == null) {
-                preference = new DomainAppPreference(group.getContext(), mApplicationsState, entry);
+                preference = new DomainAppPreference(context, iconDrawableFactory, entry);
                 preference.setKey(key);
                 group.addPreference(preference);
             } else {
