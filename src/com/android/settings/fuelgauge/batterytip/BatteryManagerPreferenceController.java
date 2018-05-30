@@ -20,13 +20,14 @@ import android.app.AppOpsManager;
 import android.content.Context;
 import android.os.UserManager;
 import android.provider.Settings;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 /**
  * Preference controller to control the battery manager
@@ -48,7 +49,7 @@ public class BatteryManagerPreferenceController extends BasePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return AVAILABLE_UNSEARCHABLE;
     }
 
     @Override
