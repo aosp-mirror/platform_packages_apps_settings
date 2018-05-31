@@ -28,7 +28,7 @@ import androidx.preference.Preference;
  * preference. It will receive intent and update state to ensure preference show correct state.
  */
 public abstract class BaseNfcEnabler {
-    private final Context mContext;
+    protected final Context mContext;
     protected final NfcAdapter mNfcAdapter;
     private final IntentFilter mIntentFilter;
 
