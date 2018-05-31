@@ -43,6 +43,7 @@ import androidx.slice.SliceMetadata;
 import androidx.slice.builders.ListBuilder;
 import androidx.slice.core.SliceAction;
 import androidx.slice.core.SliceQuery;
+import androidx.slice.widget.EventInfo;
 
 import android.support.v4.graphics.drawable.IconCompat;
 
@@ -158,6 +159,9 @@ public class SliceTester {
 
         final long sliceTTL = metadata.getExpiry();
         assertThat(sliceTTL).isEqualTo(ListBuilder.INFINITY);
+
+        final int headerType = metadata.getHeaderType();
+        assertThat(headerType).isEqualTo(EventInfo.ROW_TYPE_SLIDER);
 
         // Check primary intent
         final PendingIntent primaryPendingIntent = primaryAction.getAction();
