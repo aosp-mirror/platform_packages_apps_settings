@@ -37,6 +37,7 @@ public class BatteryMeterView extends ImageView {
     ColorFilter mErrorColorFilter;
     @VisibleForTesting
     ColorFilter mAccentColorFilter;
+    private boolean mPowerSaveEnabled;
 
     public BatteryMeterView(Context context) {
         this(context, null, 0);
@@ -71,6 +72,15 @@ public class BatteryMeterView extends ImageView {
         } else {
             mDrawable.setBatteryColorFilter(mAccentColorFilter);
         }
+    }
+
+    public void setPowerSave(boolean powerSave) {
+        mDrawable.setPowerSave(powerSave);
+        mPowerSaveEnabled = powerSave;
+    }
+
+    public boolean getPowerSave() {
+        return mPowerSaveEnabled;
     }
 
     public int getBatteryLevel() {

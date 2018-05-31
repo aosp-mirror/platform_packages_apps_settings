@@ -26,6 +26,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
 import android.app.Activity;
 import androidx.lifecycle.LifecycleOwner;
@@ -33,6 +34,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.BatteryManager;
 import androidx.preference.PreferenceFragment;
+import android.os.PowerManager;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 import android.widget.TextView;
@@ -52,8 +54,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadows.ShadowPowerManager;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {
@@ -80,6 +83,7 @@ public class BatteryHeaderPreferenceControllerTest {
     private EntityHeaderController mEntityHeaderController;
     private BatteryHeaderPreferenceController mController;
     private Context mContext;
+    private PowerManager mPowerManager;
     private BatteryMeterView mBatteryMeterView;
     private TextView mBatteryPercentText;
     private TextView mSummary;
@@ -113,6 +117,8 @@ public class BatteryHeaderPreferenceControllerTest {
             .findPreference(BatteryHeaderPreferenceController.KEY_BATTERY_HEADER);
 
         mBatteryInfo.batteryLevel = BATTERY_LEVEL;
+
+        mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
 
         mController = new BatteryHeaderPreferenceController(
                 mContext, mActivity, mPreferenceFragment, mLifecycle);
@@ -186,5 +192,18 @@ public class BatteryHeaderPreferenceControllerTest {
         assertThat(mBatteryMeterView.getBatteryLevel()).isEqualTo(BATTERY_LEVEL);
         assertThat(mBatteryMeterView.getCharging()).isTrue();
         assertThat(mBatteryPercentText.getText()).isEqualTo("60%");
+    }
+
+    @Test
+    public void testQuickUpdateHeaderPreference_showPowerSave() {
+        boolean testValues[] = {false, true};
+
+        ShadowPowerManager shadowPowerManager = shadowOf(mPowerManager);
+        for (boolean value : testValues) {
+            shadowPowerManager.setIsPowerSaveMode(value);
+            mController.quickUpdateHeaderPreference();
+
+            assertThat(mBatteryMeterView.getPowerSave()).isEqualTo(value);
+        }
     }
 }
