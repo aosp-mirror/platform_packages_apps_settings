@@ -18,11 +18,16 @@
 package com.android.settings.nfc;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
+import android.os.UserHandle;
+import android.os.UserManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -45,22 +50,31 @@ public class PaymentSettingsTest {
 
     static final String PAYMENT_KEY = "nfc_payment";
     static final String FOREGROUND_KEY = "nfc_foreground";
+    static final String PAYMENT_SCREEN_KEY = "nfc_payment_settings_screen";
 
     private Context mContext;
 
     @Mock
-    private PackageManager mManager;
+    private PackageManager mPackageManager;
+
+    @Mock
+    private UserManager mUserManager;
+
+    @Mock
+    private UserInfo mUserInfo;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        when(mContext.getPackageManager()).thenReturn(mManager);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
+        when(mUserManager.getUserInfo(UserHandle.myUserId())).thenReturn(mUserInfo);
     }
 
     @Test
-    public void getNonIndexableKey_NoNFC_AllKeysAdded() {
-        when(mManager.hasSystemFeature(PackageManager.FEATURE_NFC)).thenReturn(false);
+    public void getNonIndexableKey_noNFC_allKeysAdded() {
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_NFC)).thenReturn(false);
 
         final List<String> niks =
                 PaymentSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
@@ -70,13 +84,34 @@ public class PaymentSettingsTest {
     }
 
     @Test
-    public void getNonIndexableKey_NFC_ForegroundKeyAdded() {
-        when(mManager.hasSystemFeature(PackageManager.FEATURE_NFC)).thenReturn(true);
+    public void getNonIndexableKey_NFC_foregroundKeyAdded() {
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_NFC)).thenReturn(true);
 
         final List<String> niks =
                 PaymentSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
 
         assertThat(niks).contains(FOREGROUND_KEY);
+    }
+
+    @Test
+    public void getNonIndexableKey_primaryUser_returnsTrue() {
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_NFC)).thenReturn(true);
+
+        final List<String> niks =
+                PaymentSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
+
+        assertThat(niks).containsExactly(FOREGROUND_KEY);
+    }
+
+    @Test
+    public void getNonIndexabkeKey_guestUser_returnsFalse() {
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_NFC)).thenReturn(true);
+        when(mUserInfo.isGuest()).thenReturn(true);
+
+        final List<String> niks =
+                PaymentSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
+
+        assertThat(niks).containsAllOf(FOREGROUND_KEY, PAYMENT_KEY, PAYMENT_SCREEN_KEY);
     }
 
     @Implements(PaymentBackend.class)
