@@ -287,11 +287,10 @@ public class SliceBuilderUtils {
 
         return new ListBuilder(context, sliceData.getUri(), ListBuilder.INFINITY)
                 .setAccentColor(color)
-                .setHeader(builder -> builder
+                .addInputRange(builder -> builder
                         .setTitle(sliceData.getTitle())
                         .setSubtitle(subtitleText)
-                        .setPrimaryAction(primaryAction))
-                .addInputRange(builder -> builder
+                        .setPrimaryAction(primaryAction)
                         .setMax(sliderController.getMaxSteps())
                         .setValue(sliderController.getSliderPosition())
                         .setInputAction(actionIntent))
