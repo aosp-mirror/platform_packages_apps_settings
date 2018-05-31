@@ -42,6 +42,7 @@ import static org.robolectric.Shadows.shadowOf;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
+import android.content.pm.PackageManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
@@ -72,7 +73,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowBluetoothDevice;
+import org.robolectric.shadows.ShadowPackageManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -122,6 +125,7 @@ public class AudioOutputSwitchPreferenceControllerTest {
     private List<BluetoothDevice> mProfileConnectedDevices;
     private List<BluetoothDevice> mHearingAidActiveDevices;
     private List<BluetoothDevice> mEmptyDevices;
+    private ShadowPackageManager mPackageManager;
 
     @Before
     public void setUp() {
@@ -139,6 +143,8 @@ public class AudioOutputSwitchPreferenceControllerTest {
         when(mLocalBluetoothProfileManager.getA2dpProfile()).thenReturn(mA2dpProfile);
         when(mLocalBluetoothProfileManager.getHearingAidProfile()).thenReturn(mHearingAidProfile);
         when(mLocalBluetoothProfileManager.getHeadsetProfile()).thenReturn(mHeadsetProfile);
+        mPackageManager = Shadow.extract(mContext.getPackageManager());
+        mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, true);
 
         mBluetoothManager = new BluetoothManager(mContext);
         mBluetoothAdapter = mBluetoothManager.getAdapter();
@@ -174,13 +180,46 @@ public class AudioOutputSwitchPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_byDefault_isAvailable() {
+    public void constructor_notSupportBluetooth_shouldReturnBeforeUsingLocalBluetoothManager() {
+        ShadowBluetoothUtils.reset();
+        mLocalBluetoothManager = ShadowBluetoothUtils.getLocalBtManager(mContext);
+
+        AudioSwitchPreferenceController controller = new AudioSwitchPreferenceControllerTestable(
+                mContext, TEST_KEY);
+
+        assertThat(mLocalBluetoothManager).isNull();
+    }
+
+    @Test
+    public void getAvailabilityStatus_disableFlagNoBluetoothFeature_returnUnavailable() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.AUDIO_SWITCHER_SETTINGS, false);
+        mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, false);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_disableFlagWithBluetoothFeature_returnUnavailable() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.AUDIO_SWITCHER_SETTINGS, false);
+        mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, true);
+
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_enableFlagWithBluetoothFeature_returnAvailable() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.AUDIO_SWITCHER_SETTINGS, true);
+        mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, true);
+
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
-    public void getAvailabilityStatus_whenNotVisible_isDisable() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.AUDIO_SWITCHER_SETTINGS, false);
+    public void getAvailabilityStatus_enableFlagNoBluetoothFeature_returnUnavailable() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.AUDIO_SWITCHER_SETTINGS, true);
+        mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, false);
+
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
