@@ -192,4 +192,13 @@ public class BluetoothPairingDetailTest {
         // Verify that clean up only happen once at initialization
         verify(mAvailableDevicesCategory, times(1)).removeAll();
     }
+
+    @Test
+    public void onBluetoothStateChanged_whenTurnedOnBTShowToast() {
+        doNothing().when(mFragment).updateContent(anyInt());
+
+        mFragment.onBluetoothStateChanged(BluetoothAdapter.STATE_ON);
+
+        verify(mFragment).showBluetoothTurnedOnToast();
+    }
 }
