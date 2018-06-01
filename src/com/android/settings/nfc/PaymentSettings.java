@@ -20,12 +20,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.content.pm.UserInfo;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -111,6 +114,11 @@ public class PaymentSettings extends DashboardFragment {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
+                    final UserManager userManager = context.getSystemService(UserManager.class);
+                    final UserInfo myUserInfo = userManager.getUserInfo(UserHandle.myUserId());
+                    if (myUserInfo.isGuest()) {
+                        return false;
+                    }
                     final PackageManager pm = context.getPackageManager();
                     return pm.hasSystemFeature(PackageManager.FEATURE_NFC);
                 }
