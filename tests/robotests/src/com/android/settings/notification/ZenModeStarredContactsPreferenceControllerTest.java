@@ -23,12 +23,25 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.doAnswer;
+import org.mockito.stubbing.Answer;
+import org.mockito.invocation.InvocationOnMock;
 
 import android.app.NotificationManager;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.database.CharArrayBuffer;
+import android.database.ContentObserver;
+import android.database.Cursor;
+import android.database.DataSetObserver;
+import android.net.Uri;
+import android.os.Bundle;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -42,6 +55,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ZenModeStarredContactsPreferenceControllerTest {
@@ -147,5 +162,32 @@ public class ZenModeStarredContactsPreferenceControllerTest {
                 .thenReturn(NotificationManager.Policy.PRIORITY_SENDERS_STARRED);
 
         assertThat(mMessagesController.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void updateSummary_nullCursorValues() {
+        Cursor testCursorWithNullValues = mock(Cursor.class);
+        when(testCursorWithNullValues.moveToFirst()).thenReturn(true);
+
+        doAnswer(new Answer<Boolean>() {
+            int count = 0;
+            @Override
+            public Boolean answer(InvocationOnMock invocation) throws Throwable {
+                if (count < 3) {
+                    count++;
+                    return true;
+                }
+                return false;
+            }
+
+        }).when(testCursorWithNullValues).moveToNext();
+
+        when(testCursorWithNullValues.getString(0)).thenReturn(null);
+
+        // expected - no null  values
+        List<String> contacts = mMessagesController.getStarredContacts(testCursorWithNullValues);
+        for (int i = 0 ; i < contacts.size(); i++) {
+            assertThat(contacts.get(i)).isNotNull();
+        }
     }
 }

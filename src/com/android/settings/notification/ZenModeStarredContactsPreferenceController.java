@@ -117,6 +117,7 @@ public class ZenModeStarredContactsPreferenceController extends
             }
         }
 
+        // values in displayContacts must not be null
         mPreference.setSummary(ListFormatter.getInstance().format(displayContacts));
     }
 
@@ -130,20 +131,30 @@ public class ZenModeStarredContactsPreferenceController extends
         return true;
     }
 
-    private List<String> getStarredContacts() {
+    @VisibleForTesting
+    List<String> getStarredContacts(Cursor cursor) {
         List<String> starredContacts = new ArrayList<>();
-
-        Cursor cursor = mContext.getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,
-                new String[]{ContactsContract.Contacts.DISPLAY_NAME_PRIMARY},
-                ContactsContract.Data.STARRED + "=1", null,
-                ContactsContract.Data.TIMES_CONTACTED);
 
         if (cursor.moveToFirst()) {
             do {
-                starredContacts.add(cursor.getString(0));
+                String contact = cursor.getString(0);
+                if (contact != null) {
+                    starredContacts.add(contact);
+                }
             } while (cursor.moveToNext());
         }
         return starredContacts;
+    }
+
+    private List<String> getStarredContacts() {
+        return getStarredContacts(queryData());
+    }
+
+    private Cursor queryData() {
+        return mContext.getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,
+                new String[]{ContactsContract.Contacts.DISPLAY_NAME_PRIMARY},
+                ContactsContract.Data.STARRED + "=1", null,
+                ContactsContract.Data.TIMES_CONTACTED);
     }
 
     private boolean isIntentValid() {
