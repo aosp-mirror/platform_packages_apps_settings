@@ -22,6 +22,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.Bundle;
+import android.widget.Toast;
 import androidx.annotation.VisibleForTesting;
 import android.util.Log;
 
@@ -166,6 +167,9 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
     public void onBluetoothStateChanged(int bluetoothState) {
         super.onBluetoothStateChanged(bluetoothState);
         updateContent(bluetoothState);
+        if (bluetoothState == BluetoothAdapter.STATE_ON) {
+            showBluetoothTurnedOnToast();
+        }
     }
 
     @Override
@@ -205,4 +209,9 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
         return KEY_AVAIL_DEVICES;
     }
 
+    @VisibleForTesting
+    void showBluetoothTurnedOnToast() {
+        Toast.makeText(getContext(), R.string.connected_device_bluetooth_turned_on_toast,
+                Toast.LENGTH_SHORT).show();
+    }
 }

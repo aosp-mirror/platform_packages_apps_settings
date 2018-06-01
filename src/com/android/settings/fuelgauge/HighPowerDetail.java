@@ -67,12 +67,13 @@ public class HighPowerDetail extends InstrumentedDialogFragment implements OnCli
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBatteryUtils = BatteryUtils.getInstance(getContext());
-        mBackend = PowerWhitelistBackend.getInstance();
+        final Context context = getContext();
+        mBatteryUtils = BatteryUtils.getInstance(context);
+        mBackend = PowerWhitelistBackend.getInstance(context);
 
         mPackageName = getArguments().getString(AppInfoBase.ARG_PACKAGE_NAME);
         mPackageUid = getArguments().getInt(AppInfoBase.ARG_PACKAGE_UID);
-        PackageManager pm = getContext().getPackageManager();
+        final PackageManager pm = context.getPackageManager();
         try {
             mLabel = pm.getApplicationInfo(mPackageName, 0).loadLabel(pm);
         } catch (NameNotFoundException e) {
@@ -171,10 +172,10 @@ public class HighPowerDetail extends InstrumentedDialogFragment implements OnCli
     }
 
     public static CharSequence getSummary(Context context, String pkg) {
-        PowerWhitelistBackend powerWhitelist = PowerWhitelistBackend.getInstance();
+        PowerWhitelistBackend powerWhitelist = PowerWhitelistBackend.getInstance(context);
         return context.getString(powerWhitelist.isSysWhitelisted(pkg) ? R.string.high_power_system
                 : powerWhitelist.isWhitelisted(pkg) ? R.string.high_power_on
-                : R.string.high_power_off);
+                        : R.string.high_power_off);
     }
 
     public static void show(Fragment caller, int uid, String packageName, int requestCode) {

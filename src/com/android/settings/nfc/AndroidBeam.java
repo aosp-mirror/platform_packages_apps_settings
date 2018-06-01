@@ -25,7 +25,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
@@ -75,7 +77,13 @@ public class AndroidBeam extends InstrumentedFragment
             mBeamDisallowedByOnlyAdmin = true;
             return new View(getContext());
         }
-        mView = inflater.inflate(R.layout.android_beam, container, false);
+        mView = inflater.inflate(R.layout.preference_footer, container, false);
+
+        ImageView iconInfo = mView.findViewById(android.R.id.icon);
+        iconInfo.setImageResource(R.drawable.ic_info_outline_24dp);
+        TextView textInfo = mView.findViewById(android.R.id.title);
+        textInfo.setText(R.string.android_beam_explained);
+
         return mView;
     }
 

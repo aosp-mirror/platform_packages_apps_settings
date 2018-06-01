@@ -431,6 +431,8 @@
     <string name="connected_device_previously_connected_title">Previously connected devices</string>
     <!-- Preference screen title for Bluetooth preference to open paired but no connection list [CHAR LIMIT=none]-->
     <string name="connected_device_previously_connected_screen_title">Previously connected</string>
+    <!-- Toast text for hint user bluetooth is turned on [CHAR LIMIT=none]-->
+    <string name="connected_device_bluetooth_turned_on_toast">Bluetooth turned on</string>
 
     <!-- Date & time settings screen title -->
     <string name="date_and_time">Date &amp; time</string>
@@ -2746,11 +2748,6 @@
     </plurals>
     <!-- Instructions telling the user that the operation to unlock the keyguard with SIM PIN failed. Displayed in one line in a large font.  [CHAR LIMIT=40] -->
     <string name="pin_failed">SIM PIN operation failed!</string>
-
-    <!-- Advanced (used for diagnostics) device info activity title [CHAR LIMIT=40] -->
-    <string name="device_info_settings" product="tablet">Tablet status</string>
-    <!-- Advanced (used for diagnostics) device info activity title [CHAR LIMIT=40] -->
-    <string name="device_info_settings" product="default">Phone status</string>
 
     <!-- About phone screen, list item title.  Takes the user to the screen for seeing and installing system updates. [CHAR LIMIT=40] -->
     <string name="system_update_settings_list_item_title">System updates</string>
@@ -6410,11 +6407,15 @@
         <item quantity="other">Check certificates</item>
     </plurals>
 
-    <!-- User settings -->
-    <skip/>
-
     <!-- User settings screen title [CHAR LIMIT=40] -->
     <string name="user_settings_title">Multiple users</string>
+    <!-- User settings screen footer text [CHAR LIMIT=NONE] -->
+    <string name="user_settings_footer_text" product="device">Share your device by adding new users. Each user has a personal space on your device for custom Home screens, accounts, apps, settings, and more.</string>
+    <!-- User settings screen footer text [CHAR LIMIT=NONE] -->
+    <string name="user_settings_footer_text" product="tablet">Share your tablet by adding new users. Each user has a personal space on your tablet for custom Home screens, accounts, apps, settings, and more.</string>
+    <!-- User settings screen footer text [CHAR LIMIT=NONE] -->
+    <string name="user_settings_footer_text" product="default">Share your phone by adding new users. Each user has a personal space on your phone for custom Home screens, accounts, apps, settings, and more.</string>
+
     <!-- User settings header for list of users and profiles [CHAR LIMIT=40] -->
     <string name="user_list_title">Users &amp; profiles</string>
     <!-- User settings add user or restricted profile menu [CHAR LIMIT=35] -->
@@ -6955,7 +6956,6 @@
     <string name="keywords_home">launcher, default, apps</string>
     <string name="keywords_display">screen, touchscreen</string>
     <string name="keywords_display_brightness_level">dim screen, touchscreen, battery, bright</string>
-    <string name="keywords_display_auto_brightness">dim screen, touchscreen, battery</string>
     <string name="keywords_display_night_display">dim screen, night, tint, night shift, brightness, screen color, colour, color</string>
     <string name="keywords_display_wallpaper">background, personalize, customize display</string>
     <string name="keywords_display_font_size">text size</string>
@@ -6996,10 +6996,17 @@
     <string name="keywords_sim_status">network, mobile network state, service state, signal strength, mobile network type, roaming, iccid</string>
     <string name="keywords_model_and_hardware">serial number, hardware version</string>
     <string name="keywords_android_version">android security patch level, baseband version, kernel version</string>
+
+    <!-- Search keyword for Send Device Feedback Setting [CHAR LIMIT=NONE] -->
+    <string name="keywords_device_feedback">bug</string>
+
     <!-- Search keyword for Ambient display settings screen. -->
     <string name="keywords_ambient_display_screen">Ambient display, Lock screen display</string>
     <!-- Search keyword for fingerprint settings. -->
     <string name="keywords_fingerprint_settings">fingerprint</string>
+
+    <!-- Search keywords for adaptive brightness setting [CHAR LIMIT=NONE]-->
+    <string name="keywords_display_auto_brightness">dim screen, touchscreen, battery, smart brightness, dynamic brightness</string>
 
     <!-- List of synonyms for the auto rotate (rotate the virtual display when the device rotates) setting, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_auto_rotate">rotate, flip, rotation, portrait, landscape, orientation, vertical, horizontal</string>
@@ -7953,8 +7960,8 @@
 
     <!-- Zen mode settings: Starred contacts summary [CHAR LIMIT=NONE] -->
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts">
-        <item quantity="one">and 1 other</item>
-        <item quantity="other">and <xliff:g id="num_people" example="3">%d</xliff:g> others</item>
+        <item quantity="one">1 other</item>
+        <item quantity="other"><xliff:g id="num_people" example="3">%d</xliff:g> others</item>
     </plurals>
 
     <!-- [CHAR LIMIT=20] Zen mode settings: Messages option -->

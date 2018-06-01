@@ -86,4 +86,11 @@ public class BatteryMeterViewTest {
 
         verify(mDrawable).setBatteryColorFilter(mAccentColorFilter);
     }
+
+    @Test
+    public void testSetBatteryInfo_powerSave_setCorrectly() {
+        mBatteryMeterView.setPowerSave(true);
+
+        assertThat(mBatteryMeterView.getPowerSave()).isEqualTo(true);
+    }
 }

@@ -102,6 +102,17 @@ public class BluetoothSliceBuilder {
                 .build();
     }
 
+    public static Intent getIntent(Context context) {
+        final String screenTitle = context.getText(R.string.bluetooth_settings_title).toString();
+        final Uri contentUri = new Uri.Builder().appendPath(
+                SettingsSlicesContract.KEY_BLUETOOTH).build();
+        return DatabaseIndexingUtils.buildSearchResultPageIntent(context,
+                BluetoothDashboardFragment.class.getName(), null /* key */, screenTitle,
+                MetricsProto.MetricsEvent.SETTINGS_CONNECTED_DEVICE_CATEGORY)
+                .setClassName(context.getPackageName(), SubSettings.class.getName())
+                .setData(contentUri);
+    }
+
     /**
      * Update the current Bluetooth status to the boolean value keyed by
      * {@link android.app.slice.Slice#EXTRA_TOGGLE_STATE} on {@param intent}.
@@ -123,15 +134,7 @@ public class BluetoothSliceBuilder {
     }
 
     private static PendingIntent getPrimaryAction(Context context) {
-        final String screenTitle = context.getText(R.string.bluetooth_settings_title).toString();
-        final Uri contentUri = new Uri.Builder().appendPath(
-                SettingsSlicesContract.KEY_BLUETOOTH).build();
-        final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(context,
-                BluetoothDashboardFragment.class.getName(), null /* key */, screenTitle,
-                MetricsProto.MetricsEvent.SETTINGS_CONNECTED_DEVICE_CATEGORY)
-                .setClassName(context.getPackageName(), SubSettings.class.getName())
-                .setData(contentUri);
-
+        final Intent intent = getIntent(context);
         return PendingIntent.getActivity(context, 0 /* requestCode */,
                 intent, 0 /* flags */);
     }

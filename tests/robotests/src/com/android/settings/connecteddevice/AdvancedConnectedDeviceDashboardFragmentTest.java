@@ -67,4 +67,13 @@ public class AdvancedConnectedDeviceDashboardFragmentTest {
     public void testGetCategoryKey_returnCategoryDevice() {
         assertThat(mFragment.getCategoryKey()).isEqualTo(CategoryKey.CATEGORY_DEVICE);
     }
+
+    @Test
+    public void testSearchIndexProvider_correctNonIndexables() {
+        final List<String> niks =
+                AdvancedConnectedDeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
+                        .getNonIndexableKeys(RuntimeEnvironment.application);
+
+        assertThat(niks).contains(AdvancedConnectedDeviceDashboardFragment.KEY_BLUETOOTH);
+    }
 }

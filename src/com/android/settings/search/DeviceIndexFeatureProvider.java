@@ -21,9 +21,13 @@ import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.content.pm.ServiceInfo;
 import android.net.Uri;
+import android.os.Binder;
 import android.os.Build;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.settings.R;
@@ -32,10 +36,8 @@ import com.android.settings.slices.SettingsSliceProvider;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 
 public interface DeviceIndexFeatureProvider {
-
 
     String TAG = "DeviceIndex";
 
@@ -57,7 +59,7 @@ public interface DeviceIndexFeatureProvider {
 
     default void updateIndex(Context context, boolean force) {
         if (!isIndexingEnabled()) {
-            Log.w(TAG, "Skipping: device index is not enabled");
+            Log.i(TAG, "Skipping: device index is not enabled");
             return;
         }
 
@@ -66,7 +68,29 @@ public interface DeviceIndexFeatureProvider {
             return;
         }
 
+        final ComponentName jobComponent = new ComponentName(context.getPackageName(),
+                DeviceIndexUpdateJobService.class.getName());
+
+        try {
+            final int callerUid = Binder.getCallingUid();
+            final ServiceInfo si = context.getPackageManager().getServiceInfo(jobComponent,
+                    PackageManager.MATCH_DIRECT_BOOT_AWARE
+                            | PackageManager.MATCH_DIRECT_BOOT_UNAWARE);
+            if (si == null) {
+                Log.w(TAG, "Skipping: No such service " + jobComponent);
+                return;
+            }
+            if (si.applicationInfo.uid != callerUid) {
+                Log.w(TAG, "Skipping: Uid cannot schedule DeviceIndexUpdate: " + callerUid);
+                return;
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.w(TAG, "Skipping: error finding DeviceIndexUpdateJobService from packageManager");
+            return;
+        }
+
         if (!force && skipIndex(context)) {
+            Log.i(TAG, "Skipping: already indexed.");
             // No need to update.
             return;
         }
@@ -74,8 +98,6 @@ public interface DeviceIndexFeatureProvider {
         // Prevent scheduling multiple jobs
         setIndexState(context);
 
-        final ComponentName jobComponent = new ComponentName(context.getPackageName(),
-                DeviceIndexUpdateJobService.class.getName());
         final int jobId = context.getResources().getInteger(R.integer.device_index_update);
         // Schedule a job so that we know it'll be able to complete, but try to run as
         // soon as possible.
@@ -96,10 +118,11 @@ public interface DeviceIndexFeatureProvider {
     }
 
     static boolean skipIndex(Context context) {
-        final boolean isSameVersion = Objects.equals(
+        final boolean isSameVersion = TextUtils.equals(
                 Settings.Secure.getString(context.getContentResolver(), INDEX_VERSION), VERSION);
-        final boolean isSameLanguage = Objects.equals(
-                Settings.Secure.getString(context.getContentResolver(), INDEX_LANGUAGE), LANGUAGE);
+        final boolean isSameLanguage = TextUtils.equals(
+                Settings.Secure.getString(context.getContentResolver(), INDEX_LANGUAGE),
+                LANGUAGE.toString());
         return isSameLanguage && isSameVersion;
     }
 

@@ -173,6 +173,11 @@
     <string name="bluetooth_pref_summary" product="tablet" msgid="3520035819421024105">"อนุญาตให้แท็บเล็ตสื่อสารกับอุปกรณ์บลูทูธใกล้เคียง"</string>
     <string name="bluetooth_pref_summary" product="device" msgid="2205100629387332862">"อนุญาตให้อุปกรณ์สื่อสารกับอุปกรณ์บลูทูธใกล้เคียง"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="782032074675157079">"อนุญาตให้โทรศัพท์สื่อสารกับอุปกรณ์บลูทูธใกล้เคียง"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload" msgid="4936610906348223810">"ปิดใช้การลดภาระฮาร์ดแวร์บลูทูธ A2DP"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_title" msgid="4340101417209145308">"รีสตาร์ทอุปกรณ์ใช่ไหม"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_message" msgid="8827019472003234568">"คุณต้องรีสตาร์ทอุปกรณ์เพื่อเปลี่ยนการตั้งค่านี้"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_confirm" msgid="2053793518537051975">"รีสตาร์ท"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload_dialog_cancel" msgid="2382443064737856652">"ยกเลิก"</string>
     <string name="connected_device_available_media_title" msgid="2560067541413280645">"อุปกรณ์สื่อที่ใช้ได้"</string>
     <string name="connected_device_available_call_title" msgid="697154660967595684">"อุปกรณ์สำหรับโทรที่ใช้ได้"</string>
     <string name="connected_device_connected_title" msgid="5871712271201945606">"เชื่อมต่ออยู่"</string>
@@ -182,6 +187,8 @@
     <string name="connected_device_connections_title" msgid="5988939345181466770">"ค่ากำหนดการเชื่อมต่อ"</string>
     <string name="connected_device_previously_connected_title" msgid="491765792822244604">"อุปกรณ์ที่เคยเชื่อมต่อ"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="6196066429488377795">"อุปกรณ์ที่เคยเชื่อมต่อ"</string>
+    <!-- no translation found for connected_device_bluetooth_turned_on_toast (5683648191381637533) -->
+    <skip />
     <string name="date_and_time" msgid="9062980487860757694">"วันที่และเวลา"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"เลือกเขตเวลา"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -207,11 +214,12 @@
     <string name="proxy_error_invalid_port" msgid="5988270202074492710">"พอร์ตที่คุณพิมพ์ไม่ถูกต้อง"</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"พร็อกซี HTTP มีการใช้งานโดยเบราว์เซอร์ แต่อาจไม่มีการใช้งานโดยแอปพลิเคชันอื่น"</string>
     <string name="proxy_url_title" msgid="7185282894936042359">"PAC URL: "</string>
+    <string name="radio_info_dl_kbps" msgid="6894556071523815984">"แบนด์วิดท์ดาวน์โหลด (kbps):"</string>
+    <string name="radio_info_ul_kbps" msgid="946464073571185678">"แบนด์วิดท์อัปโหลด (kbps):"</string>
     <string name="radio_info_signal_location_label" msgid="3242990404410530456">"ข้อมูลตำแหน่งของเครือข่ายมือถือ (เลิกใช้งานแล้ว):"</string>
-    <string name="radio_info_neighboring_location_label" msgid="5766020323342985397">"ข้อมูลมือถือใกล้เคียง (เลิกใช้งานแล้ว):"</string>
+    <string name="radio_info_phy_chan_config" msgid="7133247058801474028">"การกำหนดค่าแชนเนลทางกายภาพของ LTE:"</string>
     <string name="radio_info_cell_info_refresh_rate" msgid="7062777594049622128">"อัตราการรีเฟรชข้อมูลมือถือ:"</string>
     <string name="radio_info_cellinfo_label" msgid="6213223844927623098">"ข้อมูลการวัดเครือข่ายมือถือทั้งหมด:"</string>
-    <string name="radio_info_dcrtinfo_label" msgid="4062076024399431876">"รายละเอียดการเชื่อมต่ออินเทอร์เน็ตแบบเรียลไทม์:"</string>
     <string name="radio_info_gprs_service_label" msgid="4209624131644060517">"บริการข้อมูล:"</string>
     <string name="radio_info_roaming_label" msgid="6141505430275138647">"โรมมิ่ง:"</string>
     <string name="radio_info_imei_label" msgid="1220524224732944192">"IMEI:"</string>
@@ -1146,8 +1154,6 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"ปรับความสว่างอัตโนมัติ"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"ยกขึ้นเพื่อเวก"</string>
     <string name="ambient_display_screen_title" msgid="4252755516328775766">"หน้าจอแอมเบียนท์"</string>
-    <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"เปิดเสมอ/ใช้แบตเตอรี่เพิ่มขึ้น"</string>
-    <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"การแจ้งเตือนใหม่"</string>
     <string name="ambient_display_category_triggers" msgid="4359289754456268573">"แสดงเมื่อใด"</string>
     <string name="doze_title" msgid="2375510714460456687">"การแจ้งเตือนใหม่"</string>
     <string name="doze_summary" msgid="3846219936142814032">"เปิดหน้าจอเมื่อได้รับการแจ้งเตือน"</string>
@@ -1192,8 +1198,6 @@
       <item quantity="one">รหัส PIN ของซิมไม่ถูกต้อง คุณพยายามได้อีก <xliff:g id="NUMBER_0">%d</xliff:g> ครั้งก่อนที่จะต้องติดต่อผู้ให้บริการเพื่อปลดล็อกอุปกรณ์</item>
     </plurals>
     <string name="pin_failed" msgid="1848423634948587645">"การปลดล็อกด้วย PIN ของซิมล้มเหลว!"</string>
-    <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"สถานะแท็บเล็ต"</string>
-    <string name="device_info_settings" product="default" msgid="475872867864762157">"สถานะโทรศัพท์"</string>
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"การอัปเดตระบบ"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"เวอร์ชันของ Android"</string>
@@ -1440,7 +1444,7 @@
     <string name="menu_delete" msgid="6981294422841124659">"ลบ APN"</string>
     <string name="menu_new" msgid="3014205883303921729">"APN ใหม่"</string>
     <string name="menu_save" msgid="8109345640668285399">"บันทึก"</string>
-    <string name="menu_cancel" msgid="2194502410474697474">"ยกเลิก"</string>
+    <string name="menu_cancel" msgid="2194502410474697474">"ทิ้ง"</string>
     <string name="error_title" msgid="7631322303341024692"></string>
     <string name="error_name_empty" msgid="5508155943840201232">"ต้องใส่ข้อมูลในช่องชื่อ"</string>
     <string name="error_apn_empty" msgid="4932211013600863642">"ต้องใส่ข้อมูล APN"</string>
@@ -2114,8 +2118,7 @@
     <string name="background_activity_summary_whitelisted" msgid="1079899502347973947">"จำกัดการใช้งานในพื้นหลังไม่ได้"</string>
     <string name="background_activity_warning_dialog_title" msgid="2216249969149568871">"จำกัดกิจกรรมในพื้นหลังใช่ไหม"</string>
     <string name="background_activity_warning_dialog_text" msgid="7049624449246121981">"แอปอาจทำงานผิดพลาดหากคุณจำกัดกิจกรรมในพื้นหลัง"</string>
-    <!-- no translation found for background_activity_disabled_dialog_text (6133420589651880824) -->
-    <skip />
+    <string name="background_activity_disabled_dialog_text" msgid="6133420589651880824">"เนื่องจากแอปนี้ไม่ได้ตั้งค่าให้เพิ่มประสิทธิภาพแบตเตอรี่ คุณจึงจำกัดการใช้งานไม่ได้\n\nหากต้องการจำกัด ให้เปิดการเพิ่มประสิทธิภาพแบตเตอรี่ก่อน"</string>
     <string name="device_screen_usage" msgid="3386088035570409683">"การใช้งานหน้าจอตั้งแต่ชาร์จจนเต็ม"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"การใช้งานหน้าจอ"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"การสแกนเครือข่ายมือถือ"</string>
@@ -2435,6 +2438,8 @@
     <string name="emergency_tone_title" msgid="254495218194925271">"สัญญาณการโทรฉุกเฉิน"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"ตั้งค่าการทำงานเมื่อมีการโทรหาหมายเลขฉุกเฉิน"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"การสำรองข้อมูล"</string>
+    <string name="backup_summary_state_on" msgid="6407084627816231202">"เปิด"</string>
+    <string name="backup_summary_state_off" msgid="7388321532624105594">"ปิด"</string>
     <string name="backup_section_title" msgid="7952232291452882740">"การสำรองและคืนค่าข้อมูล"</string>
     <string name="personal_data_section_title" msgid="7815209034443782061">"ข้อมูลส่วนตัว"</string>
     <string name="backup_data_title" msgid="1239105919852668016">"สำรองข้อมูลของฉัน"</string>
@@ -2761,6 +2766,12 @@
       <item quantity="one">ตรวจสอบใบรับรอง</item>
     </plurals>
     <string name="user_settings_title" msgid="3493908927709169019">"ผู้ใช้หลายคน"</string>
+    <!-- no translation found for user_settings_footer_text (5947601460660791129) -->
+    <skip />
+    <!-- no translation found for user_settings_footer_text (2153761434649733502) -->
+    <skip />
+    <!-- no translation found for user_settings_footer_text (2844602828189838075) -->
+    <skip />
     <string name="user_list_title" msgid="7937158411137563543">"ผู้ใช้และโปรไฟล์"</string>
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"เพิ่มผู้ใช้หรือโปรไฟล์"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"เพิ่มผู้ใช้"</string>
@@ -2943,14 +2954,10 @@
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"ปริมาณการใช้อินเทอร์เน็ต"</string>
     <string name="network_dashboard_summary_hotspot" msgid="8494210248613254574">"ฮอตสปอต"</string>
     <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"อุปกรณ์ที่เชื่อมต่อ"</string>
-    <!-- no translation found for connected_devices_dashboard_summary (2665221896894251402) -->
-    <skip />
-    <!-- no translation found for connected_devices_dashboard_no_nfc_summary (3840842725283655533) -->
-    <skip />
-    <!-- no translation found for connected_devices_dashboard_no_driving_mode_summary (5018708106066758867) -->
-    <skip />
-    <!-- no translation found for connected_devices_dashboard_no_driving_mode_no_nfc_summary (5250078362483148199) -->
-    <skip />
+    <string name="connected_devices_dashboard_summary" msgid="2665221896894251402">"บลูทูธ, โหมดขับรถ, NFC"</string>
+    <string name="connected_devices_dashboard_no_nfc_summary" msgid="3840842725283655533">"บลูทูธ, โหมดขับรถ"</string>
+    <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="5018708106066758867">"บลูทูธ, NFC"</string>
+    <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="5250078362483148199">"บลูทูธ"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"แอปและการแจ้งเตือน"</string>
     <string name="app_and_notification_dashboard_summary" msgid="2363314178802548682">"สิทธิ์ แอปเริ่มต้น"</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"บัญชี"</string>
@@ -2967,7 +2974,6 @@
     <string name="keywords_home" msgid="294182527446892659">"launcher, ค่าเริ่มต้น, แอป"</string>
     <string name="keywords_display" msgid="8910345814565493016">"หน้าจอ, หน้าจอสัมผัส"</string>
     <string name="keywords_display_brightness_level" msgid="3138350812626210404">"หน้าจอสลัว, หน้าจอสัมผัส, แบตเตอรี่, ความสว่าง"</string>
-    <string name="keywords_display_auto_brightness" msgid="3325150824507953765">"หน้าจอสลัว, หน้าจอสัมผัส, แบตเตอรี่"</string>
     <string name="keywords_display_night_display" msgid="2534032823231355074">"หน้าจอสลัว, กลางคืน, สีอ่อน, ช่วงกลางคืน, ความสว่าง, สีของหน้าจอ, สี, สีสัน"</string>
     <string name="keywords_display_wallpaper" msgid="7362076351860131776">"พื้นหลัง, ปรับเปลี่ยนในแบบของคุณ, ปรับแต่งการแสดงผล"</string>
     <string name="keywords_display_font_size" msgid="3404655440064726124">"ขนาดข้อความ"</string>
@@ -3008,8 +3014,12 @@
     <string name="keywords_sim_status" msgid="1474422416860990564">"เครือข่าย, สถานะเครือข่ายมือถือ, สถานะบริการ, ความแรงของสัญญาณ, ประเภทเครือข่ายมือถือ, โรมมิ่ง, iccid"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"หมายเลขซีเรียล, เวอร์ชันฮาร์ดแวร์"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"ระดับแพตช์ความปลอดภัย android, เวอร์ชันเบสแบนด์, เวอร์ชันเคอร์เนล"</string>
+    <!-- no translation found for keywords_device_feedback (564493721125966719) -->
+    <skip />
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"หน้าจอแอมเบียนท์ หน้าจอล็อก"</string>
     <string name="keywords_fingerprint_settings" msgid="239222512315619538">"ลายนิ้วมือ"</string>
+    <!-- no translation found for keywords_display_auto_brightness (4130320471533951796) -->
+    <skip />
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"หมุน, พลิก, การหมุน, แนวตั้ง, แนวนอน, การวางแนว, ตั้ง, นอน"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"อัปเกรด, android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"dnd, ตั้งเวลา, การแจ้งเตือน, บล็อก, เงียบ, สั่น, สลีป, ทำงาน, โฟกัส, เสียง, ปิดเสียง, วัน, วันทำการ, วันหยุดสุดสัปดาห์, คืนวันทำการ, กิจกรรม"</string>
@@ -3092,18 +3102,18 @@
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"อนุญาตสัญญาณที่มองเห็น"</string>
     <string name="zen_mode_settings_category" msgid="3982039687186952865">"เมื่อเปิด \"ห้ามรบกวน\""</string>
     <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"การแจ้งเตือน"</string>
-    <string name="zen_mode_restrict_notifications_mute" msgid="8649062661635246283">"แสดงการแจ้งเตือนโดยไม่ส่งเสียง"</string>
-    <string name="zen_mode_restrict_notifications_mute_summary" msgid="8450964969807231275">"การแจ้งเตือนจะถูกปิดเสียง"</string>
+    <string name="zen_mode_restrict_notifications_mute" msgid="3690261619682396872">"ไม่มีเสียงจากการแจ้งเตือน"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="5810076116489877312">"คุณจะเห็นการแจ้งเตือนในหน้าจอ"</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="3465600930732602159">"เมื่อมีการแจ้งเตือนเข้ามา โทรศัพท์จะไม่ส่งเสียงหรือสั่น"</string>
-    <string name="zen_mode_restrict_notifications_hide" msgid="9070829387109283980">"ซ่อนการแจ้งเตือน"</string>
-    <string name="zen_mode_restrict_notifications_hide_summary" msgid="3832808022882158781">"คุณจะไม่เห็นการแจ้งเตือนใหม่หรือการแจ้งเตือนที่มีอยู่"</string>
+    <string name="zen_mode_restrict_notifications_hide" msgid="5305121630186687339">"ไม่มีภาพหรือเสียงจากการแจ้งเตือน"</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="7555448406901864904">"คุณจะไม่เห็นหรือได้ยินเสียงการแจ้งเตือน"</string>
     <string name="zen_mode_restrict_notifications_hide_footer" msgid="6559283246372102465">"โทรศัพท์จะไม่แสดงการแจ้งเตือนใหม่หรือการแจ้งเตือนที่มีอยู่รวมถึงไม่ส่งเสียงหรือสั่น การแจ้งเตือนจะไม่ปรากฏขึ้นเมื่อคุณเลื่อนลงจากด้านบนของหน้าจอ\n\nแต่การแจ้งเตือนที่สำคัญสำหรับกิจกรรมและสถานะของโทรศัพท์จะยังคงแสดงขึ้น"</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"กำหนดเอง"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"เปิดใช้การตั้งค่าที่กำหนดเอง"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"นำการตั้งค่าที่กำหนดเองออก"</string>
-    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4678779044896459009">"จะปรากฏขึ้นมา"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="5450158135853888485">"ไม่มีเสียงจากการแจ้งเตือน"</string>
     <string name="zen_mode_restrict_notifications_summary_custom" msgid="7416121534987213074">"ซ่อนบางส่วน"</string>
-    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="7805339105802282234">"ซ่อน"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="3618285192806732504">"ไม่มีภาพหรือเสียงจากการแจ้งเตือน"</string>
     <string name="zen_mode_what_to_block_title" msgid="5480903548365697159">"การจำกัดที่กำหนดเอง"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="4659484530849212827">"เมื่อหน้าจอเปิดอยู่"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"เมื่อหน้าจอปิดอยู่"</string>
@@ -3162,19 +3172,13 @@
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"ปิดเสียงแล้ว แต่อนุญาตให้ <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> และ <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"ข้อความ เหตุการณ์ และการช่วยเตือน"</string>
     <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"เมื่อเปิด \"ห้ามรบกวน\" ข้อความ การช่วยเตือน และเหตุการณ์ต่างๆ จะถูกปิดเสียงยกเว้นรายการที่คุณอนุญาตข้างต้น คุณปรับเปลี่ยนการตั้งค่าเพื่ออนุญาตให้เพื่อน ครอบครัว หรือรายชื่อติดต่อคนอื่นๆ ติดต่อคุณได้"</string>
-    <!-- no translation found for zen_onboarding_ok (6131211000824433013) -->
-    <skip />
+    <string name="zen_onboarding_ok" msgid="6131211000824433013">"เสร็จ"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"การตั้งค่า"</string>
-    <!-- no translation found for zen_onboarding_new_setting_title (3311718322273907394) -->
-    <skip />
-    <!-- no translation found for zen_onboarding_current_setting_title (776426065129609376) -->
-    <skip />
-    <!-- no translation found for zen_onboarding_new_setting_summary (6293026064871880706) -->
-    <skip />
-    <!-- no translation found for zen_onboarding_current_setting_summary (1280614488924843713) -->
-    <skip />
-    <!-- no translation found for zen_onboarding_dnd_visual_disturbances_header (1352808651270918932) -->
-    <skip />
+    <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"ไม่มีภาพหรือเสียงจากการแจ้งเตือน"</string>
+    <string name="zen_onboarding_current_setting_title" msgid="776426065129609376">"ไม่มีเสียงจากการแจ้งเตือน"</string>
+    <string name="zen_onboarding_new_setting_summary" msgid="6293026064871880706">"คุณจะไม่เห็นหรือยินเสียงการแจ้งเตือน อนุญาตการโทรจากรายชื่อติดต่อที่ติดดาวและผู้โทรซ้ำ"</string>
+    <string name="zen_onboarding_current_setting_summary" msgid="1280614488924843713">"(การตั้งค่าปัจจุบัน)"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1352808651270918932">"เปลี่ยนการตั้งค่าการแจ้งเตือนห้ามรบกวนไหม"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"เสียงในโปรไฟล์งาน"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"ใช้เสียงในโปรไฟล์ส่วนตัว"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"เสียงในโปรไฟล์งานและโปรไฟล์ส่วนตัวเหมือนกัน"</string>
@@ -3346,10 +3350,7 @@
     <string name="zen_mode_calls_title" msgid="623395033931747661">"อนุญาตการโทร"</string>
     <string name="zen_mode_calls_footer" msgid="3618700268458237781">"เมื่อเปิด \"ห้ามรบกวน\" สายเรียกเข้าจะถูกบล็อก คุณปรับเปลี่ยนการตั้งค่าเพื่ออนุญาตให้เพื่อน ครอบครัว หรือรายชื่อติดต่อคนอื่นๆ ติดต่อคุณได้"</string>
     <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"รายชื่อติดต่อที่ติดดาว"</string>
-    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="6748832187598909961">
-      <item quantity="other">และอีก <xliff:g id="NUM_PEOPLE">%d</xliff:g> รายการ</item>
-      <item quantity="one">และอีก 1 รายการ</item>
-    </plurals>
+    <!-- no translation found for zen_mode_starred_contacts_summary_additional_contacts (500105380255018671) -->
     <string name="zen_mode_messages" msgid="5886440273537510894">"ข้อความ"</string>
     <string name="zen_mode_messages_title" msgid="7729380010396411129">"อนุญาตข้อความ"</string>
     <string name="zen_mode_all_messages" msgid="8257021584561639816">"ข้อความ"</string>
@@ -3779,10 +3780,8 @@
     <string name="color_temperature" msgid="2070126836910615605">"อุณหภูมิสีเย็น"</string>
     <string name="color_temperature_desc" msgid="4793729830226404052">"ใช้สีแสดงผลที่เย็นกว่านี้"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"หากต้องการใช้การเปลี่ยนสี ให้ปิดหน้าจอ"</string>
-    <string name="connectivity_monitor_switch" msgid="9059759348648583421">"การตรวจสอบการเชื่อมต่อ"</string>
-    <string name="connectivity_monitor_switch_summary" msgid="2828658652378866401">"การตรวจสอบการเชื่อมต่อจะรวบรวมบันทึกเมื่อตรวจพบปัญหาด้านการเชื่อมต่อและแจ้งเตือนให้ผู้ใช้ส่งข้อบกพร่อง"</string>
-    <string name="connectivity_monitor_toast" msgid="5551859612881173028">"เริ่มต้นอุปกรณ์ใหม่เพื่อให้การเปลี่ยนแปลงการตรวจสอบการเชื่อมต่อมีผล"</string>
     <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"เซ็นเซอร์เลเซอร์ของกล้อง"</string>
+    <string name="logical_camera_default_switch" msgid="3310039627275112685">"Logical Camera เป็นค่าเริ่มต้น"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"การอัปเดตระบบอัตโนมัติ"</string>
     <string name="ota_disable_automatic_update_summary" msgid="940729694354373087">"ใช้การอัปเดตเมื่ออุปกรณ์รีสตาร์ท"</string>
     <string name="usage" msgid="2977875522080448986">"การใช้งาน"</string>
@@ -4092,8 +4091,12 @@
     <string name="autofill_app" msgid="7338387238377914374">"บริการป้อนอัตโนมัติ"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"ป้อน, อัตโนมัติ, ป้อนอัตโนมัติ"</string>
     <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;ตรวจดูว่าคุณเชื่อถือแอปนี้ได้&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google ป้อนอัตโนมัติ&gt;%1$s&lt;/xliff:g&gt; ใช้สิ่งที่อยู่บนหน้าจอเพื่อดูว่าจะป้อนข้อมูลใดโดยอัตโนมัติได้บ้าง"</string>
-    <string name="device_theme" msgid="4571803018917608588">"ธีมอุปกรณ์"</string>
+    <string name="color_theme" msgid="1535685696756738324">"ธีมสี"</string>
     <string name="default_theme" msgid="7085644992078579076">"ค่าเริ่มต้น"</string>
+    <string name="device_theme" msgid="4571803018917608588">"ธีมอุปกรณ์"</string>
+    <string name="systemui_theme_wallpaper" msgid="5658521610680281172">"อัตโนมัติ (ขึ้นอยู่กับวอลล์เปเปอร์)"</string>
+    <string name="systemui_theme_light" msgid="7519689709659152866">"สว่าง"</string>
+    <string name="systemui_theme_dark" msgid="8708733503912628456">"มืด"</string>
     <string name="show_operator_name_title" msgid="805135053530442951">"ชื่อเครือข่าย"</string>
     <string name="show_operator_name_summary" msgid="5962567590205757550">"แสดงชื่อเครือข่ายในแถบสถานะ"</string>
     <string name="storage_manager_indicator" msgid="1516810749625915020">"ตัวจัดการพื้นที่เก็บข้อมูล: <xliff:g id="STATUS">^1</xliff:g>"</string>
@@ -4105,7 +4108,7 @@
     <string name="carrier_provisioning" msgid="4398683675591893169">"ข้อมูลการจัดสรรผู้ให้บริการ"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"ทริกเกอร์การจัดสรรผู้ให้บริการ"</string>
     <string name="zen_suggestion_title" msgid="798067603460192693">"อัปเดตโหมดห้ามรบกวน"</string>
-    <string name="zen_suggestion_summary" msgid="4573237195296808909">"ซ่อนการแจ้งเตือนเพื่อไม่ให้มีสิ่งรบกวน"</string>
+    <string name="zen_suggestion_summary" msgid="5928686804697233014">"หยุดการแจ้งเตือนชั่วคราวเพื่อไม่ให้มีสิ่งรบกวน"</string>
     <string name="new_device_suggestion_title" msgid="698847081680980774">"มีอะไรใหม่และน่าสนใจบ้าง"</string>
     <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"ทัวร์ชมโทรศัพท์เครื่องใหม่"</string>
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"ทัวร์ชมแท็บเล็ตเครื่องใหม่"</string>

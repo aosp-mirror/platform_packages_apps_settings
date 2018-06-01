@@ -6,7 +6,8 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE := SettingsRoboTests
 
-LOCAL_SRC_FILES := $(call all-java-files-under, src)
+LOCAL_SRC_FILES := $(call all-java-files-under, src) \
+    $(call all-java-files-under, ../../../../../frameworks/base/packages/SettingsLib/tests/robotests/src/com/android/settingslib/testutils)
 
 LOCAL_JAVA_RESOURCE_DIRS := config
 

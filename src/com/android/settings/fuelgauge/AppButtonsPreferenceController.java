@@ -48,6 +48,7 @@ import com.android.settings.DeviceAdminAdd;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.ActionButtonPreference;
@@ -73,7 +74,7 @@ import java.util.List;
  * An easy way to handle them is to delegate them to {@link #handleDialogClick(int)} and
  * {@link #handleActivityResult(int, int, Intent)} in this controller.
  */
-//TODO(b/35810915): Make AppInfoDashboardFragment use this controller
+//TODO(80312809): Merge this class into {@link AppActionButtonPreferenceController}
 public class AppButtonsPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin, LifecycleObserver, OnResume, OnDestroy,
         ApplicationsState.Callbacks {
@@ -100,17 +101,18 @@ public class AppButtonsPreferenceController extends AbstractPreferenceController
 
     private final int mRequestUninstall;
     private final int mRequestRemoveDeviceAdmin;
+    private final DevicePolicyManager mDpm;
+    private final UserManager mUserManager;
+    private final PackageManager mPm;
+    private final SettingsActivity mActivity;
+    private final Fragment mFragment;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
+    private final ApplicationFeatureProvider mApplicationFeatureProvider;
+    private final int mUserId;
 
     private ApplicationsState.Session mSession;
-    private DevicePolicyManager mDpm;
-    private UserManager mUserManager;
-    private PackageManager mPm;
-    private SettingsActivity mActivity;
-    private Fragment mFragment;
     private RestrictedLockUtils.EnforcedAdmin mAppsControlDisallowedAdmin;
-    private MetricsFeatureProvider mMetricsFeatureProvider;
 
-    private int mUserId;
     private boolean mUpdatedSysApp = false;
     private boolean mListeningToPackageRemove = false;
     private boolean mFinishing = false;
@@ -127,8 +129,9 @@ public class AppButtonsPreferenceController extends AbstractPreferenceController
                     "Fragment should implement AppButtonsDialogListener");
         }
 
-        mMetricsFeatureProvider = FeatureFactory.getFactory(activity).getMetricsFeatureProvider();
-
+        final FeatureFactory factory = FeatureFactory.getFactory(activity);
+        mMetricsFeatureProvider = factory.getMetricsFeatureProvider();
+        mApplicationFeatureProvider = factory.getApplicationFeatureProvider(activity);
         mState = state;
         mDpm = dpm;
         mUserManager = userManager;
@@ -538,11 +541,11 @@ public class AppButtonsPreferenceController extends AbstractPreferenceController
             // Disable button for core system applications.
             mButtonsPref.setButton1Text(R.string.disable_text)
                     .setButton1Positive(false);
-
         } else if (mAppEntry.info.enabled && !isDisabledUntilUsed()) {
             mButtonsPref.setButton1Text(R.string.disable_text)
                     .setButton1Positive(false);
-            disableable = true;
+            disableable = !mApplicationFeatureProvider.getKeepEnabledPackages()
+                    .contains(mAppEntry.info.packageName);
         } else {
             mButtonsPref.setButton1Text(R.string.enable_text)
                     .setButton1Positive(true);

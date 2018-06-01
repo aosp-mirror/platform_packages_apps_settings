@@ -36,7 +36,6 @@ import com.android.settings.accounts.ManagedProfileSettings;
 import com.android.settings.applications.AppAndNotificationDashboardFragment;
 import com.android.settings.applications.DefaultAppSettings;
 import com.android.settings.applications.DirectoryAccessDetails;
-import com.android.settings.applications.ManageDomainUrls;
 import com.android.settings.applications.ProcessStatsSummary;
 import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.applications.UsageAccessDetails;
@@ -50,6 +49,7 @@ import com.android.settings.applications.appinfo.WriteSettingsDetails;
 import com.android.settings.applications.appops.BackgroundCheckSummary;
 import com.android.settings.applications.assist.ManageAssist;
 import com.android.settings.applications.manageapplications.ManageApplications;
+import com.android.settings.applications.managedomainurls.ManageDomainUrls;
 import com.android.settings.backup.PrivacySettings;
 import com.android.settings.backup.ToggleBackupSettingFragment;
 import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
@@ -62,7 +62,6 @@ import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.datausage.DataUsageSummaryLegacy;
 import com.android.settings.deletionhelper.AutomaticStorageManagerSettings;
 import com.android.settings.development.DevelopmentSettingsDashboardFragment;
-import com.android.settings.deviceinfo.DeviceInfoSettings;
 import com.android.settings.deviceinfo.PrivateVolumeForget;
 import com.android.settings.deviceinfo.PrivateVolumeSettings;
 import com.android.settings.deviceinfo.PublicVolumeSettings;
@@ -79,9 +78,9 @@ import com.android.settings.gestures.AssistGestureSettings;
 import com.android.settings.gestures.DoubleTapPowerSettings;
 import com.android.settings.gestures.DoubleTapScreenSettings;
 import com.android.settings.gestures.DoubleTwistGestureSettings;
-import com.android.settings.gestures.SwipeUpGestureSettings;
 import com.android.settings.gestures.PickupGestureSettings;
 import com.android.settings.gestures.SwipeToNotificationSettings;
+import com.android.settings.gestures.SwipeUpGestureSettings;
 import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
 import com.android.settings.inputmethod.KeyboardLayoutPickerFragment;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment;
@@ -106,10 +105,8 @@ import com.android.settings.notification.NotificationStation;
 import com.android.settings.notification.SoundSettings;
 import com.android.settings.notification.ZenAccessSettings;
 import com.android.settings.notification.ZenModeAutomationSettings;
-import com.android.settings.notification.ZenModeMsgEventReminderSettings;
 import com.android.settings.notification.ZenModeBlockedEffectsSettings;
 import com.android.settings.notification.ZenModeEventRuleSettings;
-import com.android.settings.notification.ZenModeRestrictNotificationsSettings;
 import com.android.settings.notification.ZenModeScheduleRuleSettings;
 import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.password.ChooseLockPassword;
@@ -161,7 +158,6 @@ public class SettingsGateway {
             UserDictionaryList.class.getName(),
             UserDictionarySettings.class.getName(),
             DisplaySettings.class.getName(),
-            DeviceInfoSettings.class.getName(),
             MyDeviceInfoFragment.class.getName(),
             ManageApplications.class.getName(),
             ManageAssist.class.getName(),
@@ -296,7 +292,6 @@ public class SettingsGateway {
             // Home page > System
             Settings.LanguageAndInputSettingsActivity.class.getName(),
             Settings.DateTimeSettingsActivity.class.getName(),
-            Settings.DeviceInfoSettingsActivity.class.getName(),
             Settings.EnterprisePrivacySettingsActivity.class.getName(),
             Settings.MyDeviceInfoActivity.class.getName(),
     };
