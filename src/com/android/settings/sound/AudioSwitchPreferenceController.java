@@ -29,6 +29,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.media.AudioDeviceCallback;
 import android.media.AudioDeviceInfo;
 import android.media.AudioManager;
@@ -113,6 +114,10 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
             Log.w(TAG, "Error getting LocalBluetoothManager.", e);
             return;
         }
+        if (mLocalBluetoothManager == null) {
+            Log.e(TAG, "Bluetooth is not supported on this device");
+            return;
+        }
         mLocalBluetoothManager.setForegroundActivity(mContext);
         mProfileManager = mLocalBluetoothManager.getProfileManager();
     }
@@ -123,7 +128,8 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
      */
     @Override
     public final int getAvailabilityStatus() {
-        return FeatureFlagUtils.isEnabled(mContext, FeatureFlags.AUDIO_SWITCHER_SETTINGS)
+        return FeatureFlagUtils.isEnabled(mContext, FeatureFlags.AUDIO_SWITCHER_SETTINGS) &&
+                mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)
                 ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
