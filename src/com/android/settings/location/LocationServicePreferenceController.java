@@ -25,6 +25,7 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import android.util.Log;
 
+import com.android.settings.Utils;
 import com.android.settings.widget.RestrictedAppPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -130,8 +131,11 @@ public class LocationServicePreferenceController extends LocationBasePreferenceC
     private List<Preference> getLocationServices() {
         // If location access is locked down by device policy then we only show injected settings
         // for the primary profile.
+        final int profileUserId = Utils.getManagedProfileId(mUserManager, UserHandle.myUserId());
+
         return mInjector.getInjectedSettings(mFragment.getPreferenceManager().getContext(),
-                mLocationEnabler.isManagedProfileRestrictedByBase()
+                (profileUserId != UserHandle.USER_NULL
+                        && mLocationEnabler.getShareLocationEnforcedAdmin(profileUserId) != null)
                         ? UserHandle.myUserId() : UserHandle.USER_CURRENT);
     }
 }
