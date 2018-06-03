@@ -3424,7 +3424,12 @@
     <string name="zen_mode_calls_title" msgid="623395033931747661">"Zezwól na połączenia"</string>
     <string name="zen_mode_calls_footer" msgid="3618700268458237781">"Gdy tryb Nie przeszkadzać jest włączony, połączenia przychodzące są zablokowane. Możesz dostosować ustawienia, by znajomi, rodzina i inne osoby z kontaktów mogli do Ciebie zadzwonić."</string>
     <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"Kontakty oznaczone gwiazdką"</string>
-    <!-- no translation found for zen_mode_starred_contacts_summary_additional_contacts (500105380255018671) -->
+    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="500105380255018671">
+      <item quantity="few"><xliff:g id="NUM_PEOPLE">%d</xliff:g> inne osoby</item>
+      <item quantity="many"><xliff:g id="NUM_PEOPLE">%d</xliff:g> innych osób</item>
+      <item quantity="other"><xliff:g id="NUM_PEOPLE">%d</xliff:g> innej osoby</item>
+      <item quantity="one">1 inna osoba.</item>
+    </plurals>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Wiadomości"</string>
     <string name="zen_mode_messages_title" msgid="7729380010396411129">"Zezwól na wiadomości"</string>
     <string name="zen_mode_all_messages" msgid="8257021584561639816">"Wiadomości"</string>
