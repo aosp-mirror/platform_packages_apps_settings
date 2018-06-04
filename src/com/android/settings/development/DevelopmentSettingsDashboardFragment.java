@@ -404,7 +404,6 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new LogdSizePreferenceController(context));
         controllers.add(new LogPersistPreferenceController(context, fragment, lifecycle));
         controllers.add(new CameraLaserSensorPreferenceController(context));
-        controllers.add(new LogicalCameraDefaultPreferenceController(context));
         controllers.add(new WifiDisplayCertificationPreferenceController(context));
         controllers.add(new WifiVerboseLoggingPreferenceController(context));
         controllers.add(new WifiConnectedMacRandomizationPreferenceController(context));
