@@ -490,8 +490,8 @@
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="8219375738445017266">"Krypteringen blev afbrudt og kan ikke fuldføres. Som følge heraf er dataene på din tablet ikke længere tilgængelige. \n\nHvis du vil genoptage brugen af din  tablet, skal du udføre en gendannelse af fabriksdata. Når du konfigurerer din tablet efter nulstillingen, har du mulighed for at gendanne data, der blev sikkerhedskopieret på din Google-konto."</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3270131542549577953">"Krypteringen blev afbrudt og kan ikke fuldføres. Som følge heraf er dataene på din telefon ikke længere tilgængelige. \n\nHvis du vil genoptage brugen af telefonen, skal du udføre en gendannelse af fabriksdata. Når du konfigurerer din telefon efter nulstillingen, har du mulighed for at gendanne data, der blev sikkerhedskopieret på din Google-konto."</string>
     <string name="crypt_keeper_data_corrupt_title" msgid="8759119849089795751">"Dekrypteringen mislykkedes"</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"Den indtastede adgangskode er korrekt, men desværre er dine data beskadigede. \n\nFør du kan bruge din tablet igen, skal du gendanne fabriksindstillingerne. Under den efterfølgende opsætning af tabletten får du mulighed for at gendanne eventuelle data, der er sikkerhedskopieret på din Google-konto."</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Den indtastede adgangskode er korrekt, men desværre er dine data beskadigede. \n\nFør du kan bruge din telefon igen, skal du gendanne fabriksindstillingerne. Under den efterfølgende opsætning af telefonen får du mulighed for at gendanne eventuelle data, der er sikkerhedskopieret på din Google-konto."</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"Den indtastede adgangskode er korrekt, men desværre er dine data beskadigede. \n\nFør du kan bruge din tablet igen, skal du gendanne fabriksindstillingerne. Under den efterfølgende konfiguration af tabletten får du mulighed for at gendanne eventuelle data, der er sikkerhedskopieret på din Google-konto."</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Den indtastede adgangskode er korrekt, men desværre er dine data beskadigede. \n\nFør du kan bruge din telefon igen, skal du gendanne fabriksindstillingerne. Under den efterfølgende konfiguration af telefonen får du mulighed for at gendanne eventuelle data, der er sikkerhedskopieret på din Google-konto."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Skift indtastningsmetode"</string>
     <string name="suggested_lock_settings_title" msgid="8498743819223200961">"Beskyt din telefon"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="2296800316150748710">"Konfigurer skærmlåsen for at beskytte din tablet"</string>
@@ -2505,7 +2505,7 @@
     <string name="wifi_setup_status_eap_not_supported" msgid="6796317704783144190">"EAP understøttes ikke."</string>
     <string name="wifi_setup_eap_not_supported" msgid="6812710317883658843">"Du kan ikke konfigurere en EAP-Wi-Fi-forbindelse under konfigurationen. Efter konfigurationen kan du gøre dette i Indstillinger &gt; Trådløst og netværk."</string>
     <string name="wifi_setup_description_connecting" msgid="2793554932006756795">"Oprettelsen kan tage et par minutter..."</string>
-    <string name="wifi_setup_description_connected" msgid="6649168170073219153">"Tryk på "<b>"Næste"</b>" for at fortsætte med opsætningen.\n\nTryk på "<b>"Tilbage"</b>" for at oprette forbindelse til et andet Wi-Fi-netværk."</string>
+    <string name="wifi_setup_description_connected" msgid="6649168170073219153">"Tryk på "<b>"Næste"</b>" for at fortsætte med konfigurationen.\n\nTryk på "<b>"Tilbage"</b>" for at oprette forbindelse til et andet Wi-Fi-netværk."</string>
     <string name="accessibility_sync_enabled" msgid="558480439730263116">"Synkronisering aktiveret"</string>
     <string name="accessibility_sync_disabled" msgid="1741194106479011384">"Sync deaktiveret"</string>
     <string name="accessibility_sync_in_progress" msgid="4501160520879902723">"Synkroniserer nu"</string>
@@ -3342,7 +3342,10 @@
     <string name="zen_mode_calls_title" msgid="623395033931747661">"Tillad opkald"</string>
     <string name="zen_mode_calls_footer" msgid="3618700268458237781">"Når Forstyr ikke er aktiveret, blokeres indgående opkald. Du kan ændre indstillingerne, så dine venner, dine familie eller andre kontaktpersoner kan få fat i dig."</string>
     <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"Stjernemarkerede kontaktpersoner"</string>
-    <!-- no translation found for zen_mode_starred_contacts_summary_additional_contacts (500105380255018671) -->
+    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="500105380255018671">
+      <item quantity="one"><xliff:g id="NUM_PEOPLE">%d</xliff:g> anden</item>
+      <item quantity="other"><xliff:g id="NUM_PEOPLE">%d</xliff:g> andre</item>
+    </plurals>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Beskeder"</string>
     <string name="zen_mode_messages_title" msgid="7729380010396411129">"Tillad beskeder"</string>
     <string name="zen_mode_all_messages" msgid="8257021584561639816">"Beskeder"</string>

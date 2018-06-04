@@ -3506,7 +3506,14 @@
     <string name="zen_mode_calls_title" msgid="623395033931747661">"السماح بالمكالمات"</string>
     <string name="zen_mode_calls_footer" msgid="3618700268458237781">"عند تفعيل الإعداد \"الرجاء عدم الإزعاج\"، يتم حظر المكالمات الواردة. يمكنك ضبط الإعدادات للسماح لأصدقائك أو أفراد عائلتك أو جهات الاتصال الأخرى بالتواصل معك."</string>
     <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"جهات الاتصال المميّزة بنجمة"</string>
-    <!-- no translation found for zen_mode_starred_contacts_summary_additional_contacts (500105380255018671) -->
+    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="500105380255018671">
+      <item quantity="zero"><xliff:g id="NUM_PEOPLE">%d</xliff:g> شخص آخر</item>
+      <item quantity="two">شخصان (<xliff:g id="NUM_PEOPLE">%d</xliff:g>) آخران</item>
+      <item quantity="few"><xliff:g id="NUM_PEOPLE">%d</xliff:g> أشخاص آخرين</item>
+      <item quantity="many"><xliff:g id="NUM_PEOPLE">%d</xliff:g> شخصًا آخر</item>
+      <item quantity="other"><xliff:g id="NUM_PEOPLE">%d</xliff:g> شخص آخر</item>
+      <item quantity="one">شخص واحد آخر</item>
+    </plurals>
     <string name="zen_mode_messages" msgid="5886440273537510894">"الرسائل"</string>
     <string name="zen_mode_messages_title" msgid="7729380010396411129">"السماح بالرسائل"</string>
     <string name="zen_mode_all_messages" msgid="8257021584561639816">"الرسائل"</string>
