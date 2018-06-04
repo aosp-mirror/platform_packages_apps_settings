@@ -17,7 +17,6 @@ package com.android.settings.accounts;
 
 import static android.provider.Settings.EXTRA_AUTHORITIES;
 
-import android.app.Activity;
 import android.content.Context;
 import android.icu.text.ListFormatter;
 import android.os.UserHandle;
@@ -27,6 +26,7 @@ import android.text.TextUtils;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -69,15 +69,23 @@ public class AccountDashboardFragment extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
         final String[] authorities = getIntent().getStringArrayExtra(EXTRA_AUTHORITIES);
+        return buildPreferenceControllers(context, this /* parent */, authorities);
+    }
+
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
+            SettingsPreferenceFragment parent, String[] authorities) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+
         final AccountPreferenceController accountPrefController =
-                new AccountPreferenceController(context, this, authorities);
-        getLifecycle().addObserver(accountPrefController);
+                new AccountPreferenceController(context, parent, authorities);
+        if (parent != null) {
+            parent.getLifecycle().addObserver(accountPrefController);
+        }
         controllers.add(accountPrefController);
-        controllers.add(new AutoSyncDataPreferenceController(context, this /*parent */));
-        controllers.add(new AutoSyncPersonalDataPreferenceController(context, this /*parent */));
-        controllers.add(new AutoSyncWorkDataPreferenceController(context, this /* parent */));
+        controllers.add(new AutoSyncDataPreferenceController(context, parent));
+        controllers.add(new AutoSyncPersonalDataPreferenceController(context, parent));
+        controllers.add(new AutoSyncWorkDataPreferenceController(context, parent));
         return controllers;
     }
 
@@ -122,13 +130,7 @@ public class AccountDashboardFragment extends DashboardFragment {
     }
 
     public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
-            = new SummaryLoader.SummaryProviderFactory() {
-        @Override
-        public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
-                SummaryLoader summaryLoader) {
-            return new SummaryProvider(activity, summaryLoader);
-        }
-    };
+            = (activity, summaryLoader) -> new SummaryProvider(activity, summaryLoader);
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
@@ -138,6 +140,13 @@ public class AccountDashboardFragment extends DashboardFragment {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.accounts_dashboard_settings;
                     return Arrays.asList(sir);
+                }
+
+                @Override
+                public List<AbstractPreferenceController> createPreferenceControllers(
+                        Context context) {
+                    return buildPreferenceControllers(
+                            context, null /* parent */, null /* authorities*/);
                 }
             };
 }
