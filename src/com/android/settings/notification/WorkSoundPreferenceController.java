@@ -32,11 +32,6 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.TwoStatePreference;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -50,6 +45,14 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+
+import java.util.List;
+
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.TwoStatePreference;
 
 public class WorkSoundPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, OnPreferenceChangeListener, LifecycleObserver,
@@ -96,10 +99,8 @@ public class WorkSoundPreferenceController extends AbstractPreferenceController
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
         mWorkPreferenceCategory = (PreferenceGroup) screen.findPreference(KEY_WORK_CATEGORY);
-        if (mWorkPreferenceCategory != null) {
-            mWorkPreferenceCategory.setVisible(isAvailable());
-        }
     }
 
     @Override
@@ -155,6 +156,18 @@ public class WorkSoundPreferenceController extends AbstractPreferenceController
 
         preference.setSummary(updateRingtoneName(getManagedProfileContext(), ringtoneType));
         return true;
+    }
+
+    @Override
+    public void updateNonIndexableKeys(List<String> keys) {
+        if (isAvailable()) {
+            return;
+        }
+        keys.add(KEY_WORK_CATEGORY);
+        keys.add(KEY_WORK_USE_PERSONAL_SOUNDS);
+        keys.add(KEY_WORK_NOTIFICATION_RINGTONE);
+        keys.add(KEY_WORK_PHONE_RINGTONE);
+        keys.add(KEY_WORK_ALARM_RINGTONE);
     }
 
     // === Phone & notification ringtone ===

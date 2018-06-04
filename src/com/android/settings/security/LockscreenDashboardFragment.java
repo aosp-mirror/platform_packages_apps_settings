@@ -159,6 +159,7 @@ public class LockscreenDashboardFragment extends DashboardFragment
                     final List<String> niks = super.getNonIndexableKeys(context);
                     niks.add(KEY_ADD_USER_FROM_LOCK_SCREEN);
                     niks.add(KEY_LOCK_SCREEN_NOTIFICATON_WORK_PROFILE);
+                    niks.add(KEY_LOCK_SCREEN_NOTIFICATON_WORK_PROFILE_HEADER);
                     return niks;
                 }
             };
