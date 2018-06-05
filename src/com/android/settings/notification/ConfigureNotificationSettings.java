@@ -24,8 +24,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -42,6 +40,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+
 @SearchIndexable
 public class ConfigureNotificationSettings extends DashboardFragment {
     private static final String TAG = "ConfigNotiSettings";
@@ -57,7 +58,6 @@ public class ConfigureNotificationSettings extends DashboardFragment {
     static final String KEY_SWIPE_DOWN = "gesture_swipe_down_fingerprint_notifications";
 
     private static final String KEY_NOTI_DEFAULT_RINGTONE = "notification_default_ringtone";
-    private static final String KEY_ZEN_MODE = "zen_mode_notifications";
 
     private RingtonePreference mRequestPreference;
     private static final int REQUEST_CODE = 200;
@@ -111,7 +111,6 @@ public class ConfigureNotificationSettings extends DashboardFragment {
             }
 
         });
-        controllers.add(new ZenModePreferenceController(context, lifecycle, KEY_ZEN_MODE));
         return controllers;
     }
 
@@ -220,7 +219,6 @@ public class ConfigureNotificationSettings extends DashboardFragment {
                     keys.add(KEY_LOCKSCREEN);
                     keys.add(KEY_LOCKSCREEN_WORK_PROFILE);
                     keys.add(KEY_LOCKSCREEN_WORK_PROFILE_HEADER);
-                    keys.add(KEY_ZEN_MODE);
                     return keys;
                 }
             };

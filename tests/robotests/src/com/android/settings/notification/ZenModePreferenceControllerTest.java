@@ -16,6 +16,7 @@
 
 package com.android.settings.notification;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
@@ -27,7 +28,6 @@ import static org.mockito.Mockito.when;
 import android.app.NotificationManager;
 import android.app.NotificationManager.Policy;
 import android.content.Context;
-import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -39,6 +39,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
+
+import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ZenModePreferenceControllerTest {
@@ -61,7 +63,7 @@ public class ZenModePreferenceControllerTest {
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
         mContext = shadowApplication.getApplicationContext();
-        mController = new ZenModePreferenceController(mContext, null, KEY_ZEN_MODE);
+        mController = new ZenModePreferenceController(mContext, KEY_ZEN_MODE);
         when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);
         mSummaryBuilder = spy(new ZenModeSettings.SummaryBuilder(mContext));
         ReflectionHelpers.setField(mController, "mSummaryBuilder", mSummaryBuilder);
@@ -69,8 +71,8 @@ public class ZenModePreferenceControllerTest {
     }
 
     @Test
-    public void isAlwaysAvailable() {
-        assertThat(mController.isAvailable()).isTrue();
+    public void isAvailable_unsearchable() {
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
     }
 
     @Test
