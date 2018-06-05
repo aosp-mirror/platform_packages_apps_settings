@@ -29,7 +29,6 @@ import com.android.settings.gestures.DoubleTapScreenPreferenceController;
 import com.android.settings.gestures.PickupGesturePreferenceController;
 import com.android.settings.notification.LockScreenNotificationPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.users.AddUserWhenLockedPreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
@@ -109,8 +108,6 @@ public class LockscreenDashboardFragment extends DashboardFragment
                         KEY_LOCK_SCREEN_NOTIFICATON_WORK_PROFILE);
         lifecycle.addObserver(notificationController);
         controllers.add(notificationController);
-        controllers.add(new AddUserWhenLockedPreferenceController(
-                context, KEY_ADD_USER_FROM_LOCK_SCREEN, lifecycle));
         mOwnerInfoPreferenceController =
                 new OwnerInfoPreferenceController(context, this, lifecycle);
         controllers.add(mOwnerInfoPreferenceController);
@@ -147,8 +144,6 @@ public class LockscreenDashboardFragment extends DashboardFragment
                         Context context) {
                     final List<AbstractPreferenceController> controllers = new ArrayList<>();
                     controllers.add(new LockScreenNotificationPreferenceController(context));
-                    controllers.add(new AddUserWhenLockedPreferenceController(context,
-                            KEY_ADD_USER_FROM_LOCK_SCREEN, null /* lifecycle */));
                     controllers.add(new OwnerInfoPreferenceController(
                             context, null /* fragment */, null /* lifecycle */));
                     return controllers;
