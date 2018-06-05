@@ -24,14 +24,8 @@ import static android.provider.Settings.Secure.VOLUME_HUSH_VIBRATE;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.VideoPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreate;
@@ -39,8 +33,13 @@ import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 
-public class PreventRingingPreferenceController extends BasePreferenceController
-        implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener,
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
+public class PreventRingingPreferenceController extends PreventRingingParentPreferenceController
+        implements Preference.OnPreferenceChangeListener,
         LifecycleObserver, OnResume, OnPause, OnCreate, OnSaveInstanceState {
 
     private static final String PREF_KEY_VIDEO = "gesture_prevent_ringing_video";
@@ -59,9 +58,11 @@ public class PreventRingingPreferenceController extends BasePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_volumeHushGestureEnabled)
-                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        final int status = super.getAvailabilityStatus();
+        if (status == AVAILABLE_UNSEARCHABLE) {
+            return AVAILABLE;
+        }
+        return status;
     }
 
     @Override

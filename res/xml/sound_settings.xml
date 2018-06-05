@@ -101,7 +101,7 @@
         android:title="@string/gesture_prevent_ringing_sound_title"
         android:order="-110"
         android:fragment="com.android.settings.gestures.PreventRingingGestureSettings"
-        settings:controller="com.android.settings.gestures.PreventRingingPreferenceController" />
+        settings:controller="com.android.settings.gestures.PreventRingingParentPreferenceController" />
 
     <!-- Phone ringtone -->
     <com.android.settings.DefaultRingtonePreference
