@@ -190,4 +190,13 @@ public class ZenModeStarredContactsPreferenceControllerTest {
             assertThat(contacts.get(i)).isNotNull();
         }
     }
+
+    @Test
+    public void nullPreference_displayPreference() {
+        when(mPreferenceScreen.findPreference(mMessagesController.getPreferenceKey()))
+                .thenReturn(null);
+
+        // should not throw a null pointer
+        mMessagesController.displayPreference(mPreferenceScreen);
+    }
 }
