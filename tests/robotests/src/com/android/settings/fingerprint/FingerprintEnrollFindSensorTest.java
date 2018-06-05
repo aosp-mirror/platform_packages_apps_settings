@@ -22,6 +22,7 @@ import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.verify;
 import static org.robolectric.RuntimeEnvironment.application;
 
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
@@ -150,5 +151,13 @@ public class FingerprintEnrollFindSensorTest {
                 callbackCaptor.capture());
 
         return callbackCaptor.getValue();
+    }
+
+    @Test
+    public void onActivityResult_withNullIntentShouldNotCrash() {
+        // this should not crash
+        mActivity.onActivityResult(FingerprintEnrollFindSensor.CONFIRM_REQUEST, Activity.RESULT_OK,
+            null);
+        assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(Activity.RESULT_CANCELED);
     }
 }
