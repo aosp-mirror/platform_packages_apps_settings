@@ -16,6 +16,8 @@
 
 package com.android.settings.applications.defaultapps;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
@@ -23,11 +25,20 @@ import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.ResolveInfo;
 import android.os.UserManager;
 
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -53,6 +64,7 @@ public class DefaultBrowserPickerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        FakeFeatureFactory.setupForTest();
         when(mActivity.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
 
         mPicker = new DefaultBrowserPicker();
@@ -71,5 +83,40 @@ public class DefaultBrowserPickerTest {
     public void getDefaultAppKey_shouldReturnDefaultBrowser() {
         mPicker.getDefaultKey();
         verify(mPackageManager).getDefaultBrowserPackageNameAsUser(anyInt());
+    }
+
+    @Test
+    public void getCandidates_shouldNotIncludeDuplicatePackageName() throws NameNotFoundException {
+        final List<ResolveInfo> resolveInfos = new ArrayList<>();
+        final String PACKAGE_ONE = "com.first.package";
+        final String PACKAGE_TWO = "com.second.package";
+        resolveInfos.add(createResolveInfo(PACKAGE_ONE));
+        resolveInfos.add(createResolveInfo(PACKAGE_TWO));
+        resolveInfos.add(createResolveInfo(PACKAGE_ONE));
+        resolveInfos.add(createResolveInfo(PACKAGE_TWO));
+        when(mPackageManager.queryIntentActivitiesAsUser(any(Intent.class), anyInt(), anyInt()))
+            .thenReturn(resolveInfos);
+        when(mPackageManager.getApplicationInfoAsUser(eq(PACKAGE_ONE), anyInt(), anyInt()))
+            .thenReturn(createApplicationInfo(PACKAGE_ONE));
+        when(mPackageManager.getApplicationInfoAsUser(eq(PACKAGE_TWO), anyInt(), anyInt()))
+            .thenReturn(createApplicationInfo(PACKAGE_TWO));
+
+        final List<DefaultAppInfo> defaultBrowserInfo = mPicker.getCandidates();
+
+        assertThat(defaultBrowserInfo.size()).isEqualTo(2);
+    }
+
+    private ResolveInfo createResolveInfo(String packageName) {
+        final ResolveInfo info = new ResolveInfo();
+        info.handleAllWebDataURI = true;
+        info.activityInfo = new ActivityInfo();
+        info.activityInfo.packageName = packageName;
+        return info;
+    }
+
+    private ApplicationInfo createApplicationInfo(String packageName) {
+        final ApplicationInfo info = new ApplicationInfo();
+        info.packageName = packageName;
+        return info;
     }
 }
