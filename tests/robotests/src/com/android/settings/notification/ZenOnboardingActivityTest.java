@@ -51,6 +51,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ZenOnboardingActivityTest {
@@ -68,6 +69,8 @@ public class ZenOnboardingActivityTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        ShadowApplication shadowApplication = ShadowApplication.getInstance();
+        shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNm);
 
         mActivity = Robolectric.buildActivity(ZenOnboardingActivity.class)
                 .create()
@@ -124,6 +127,9 @@ public class ZenOnboardingActivityTest {
 
     @Test
     public void isSuggestionComplete_zenUpdated() {
+        Policy policy = new Policy(0, 0, 0, 0);
+        when(mNm.getNotificationPolicy()).thenReturn(policy);
+
         setZenUpdated(true);
         setShowSettingsSuggestion(false);
         setWithinTimeThreshold(true);
@@ -132,6 +138,9 @@ public class ZenOnboardingActivityTest {
 
     @Test
     public void isSuggestionComplete_withinTimeThreshold() {
+        Policy policy = new Policy(0, 0, 0, 0);
+        when(mNm.getNotificationPolicy()).thenReturn(policy);
+
         setZenUpdated(false);
         setShowSettingsSuggestion(false);
         setWithinTimeThreshold(true);
@@ -140,6 +149,9 @@ public class ZenOnboardingActivityTest {
 
     @Test
     public void isSuggestionComplete_showSettingsSuggestionTrue() {
+        Policy policy = new Policy(0, 0, 0, 0);
+        when(mNm.getNotificationPolicy()).thenReturn(policy);
+
         setZenUpdated(false);
         setShowSettingsSuggestion(true);
         setWithinTimeThreshold(false);
@@ -148,17 +160,33 @@ public class ZenOnboardingActivityTest {
 
     @Test
     public void isSuggestionComplete_showSettingsSuggestionFalse_notWithinTimeThreshold() {
+        Policy policy = new Policy(0, 0, 0, 0);
+        when(mNm.getNotificationPolicy()).thenReturn(policy);
+
         setZenUpdated(false);
         setShowSettingsSuggestion(false);
         setWithinTimeThreshold(false);
         assertThat(isSuggestionComplete(mContext)).isTrue();
     }
 
+
+    @Test
+    public void isSuggestionComplete_visualEffectsUpdated() {
+        // all values suppressed
+        Policy policy = new Policy(0, 0, 0, 511);
+        when(mNm.getNotificationPolicy()).thenReturn(policy);
+
+        setZenUpdated(false);
+        setShowSettingsSuggestion(true);
+        setWithinTimeThreshold(true);
+        assertThat(isSuggestionComplete(mContext)).isTrue();
+        assertThat(Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.ZEN_SETTINGS_UPDATED, -1)).isEqualTo(1);
+    }
+
+
     private void setZenUpdated(boolean updated) {
-        int zenUpdated = 0;
-        if (updated) {
-            zenUpdated = 1;
-        }
+        int zenUpdated = updated ? 1 : 0;
 
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.ZEN_SETTINGS_UPDATED, zenUpdated);
