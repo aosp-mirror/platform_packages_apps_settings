@@ -3342,7 +3342,10 @@
     <string name="zen_mode_calls_title" msgid="623395033931747661">"통화 허용"</string>
     <string name="zen_mode_calls_footer" msgid="3618700268458237781">"알림 일시중지가 사용 설정되어 있으면 수신 전화가 차단됩니다. 설정을 조정하여 친구, 가족 또는 연락처에 등록된 다른 사용자가 나에게 연락하도록 허용할 수 있습니다."</string>
     <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"별표 표시한 연락처"</string>
-    <!-- no translation found for zen_mode_starred_contacts_summary_additional_contacts (500105380255018671) -->
+    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="500105380255018671">
+      <item quantity="other">외 <xliff:g id="NUM_PEOPLE">%d</xliff:g>명</item>
+      <item quantity="one">외 1명</item>
+    </plurals>
     <string name="zen_mode_messages" msgid="5886440273537510894">"메시지"</string>
     <string name="zen_mode_messages_title" msgid="7729380010396411129">"메시지 허용"</string>
     <string name="zen_mode_all_messages" msgid="8257021584561639816">"메시지"</string>
@@ -3772,7 +3775,6 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"더 차가운 디스플레이 색상 사용"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"색상 변경을 적용하려면 화면을 끄세요."</string>
     <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"카메라 레이저 센서"</string>
-    <string name="logical_camera_default_switch" msgid="3310039627275112685">"기본값으로 논리 카메라 전환"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"자동 시스템 업데이트"</string>
     <string name="ota_disable_automatic_update_summary" msgid="940729694354373087">"기기가 다시 시작되면 업데이트 적용"</string>
     <string name="usage" msgid="2977875522080448986">"사용량"</string>

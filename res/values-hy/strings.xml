@@ -3342,7 +3342,10 @@
     <string name="zen_mode_calls_title" msgid="623395033931747661">"Թույլատրել զանգերը"</string>
     <string name="zen_mode_calls_footer" msgid="3618700268458237781">"«Չանհանգստացնել» ռեժիմում մուտքային զանգերն արգելափակված են: Փոփոխեք կարգավորումները, որպեսզի ձեր մտերիմները և այլ կոնտակտներ կարողանան կապվել ձեզ հետ:"</string>
     <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"Աստղանշված կոնտակտներ"</string>
-    <!-- no translation found for zen_mode_starred_contacts_summary_additional_contacts (500105380255018671) -->
+    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="500105380255018671">
+      <item quantity="one">Եվս <xliff:g id="NUM_PEOPLE">%d</xliff:g> կոնտակտ</item>
+      <item quantity="other">Եվս <xliff:g id="NUM_PEOPLE">%d</xliff:g> կոնտակտ</item>
+    </plurals>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Հաղորդագրություններ"</string>
     <string name="zen_mode_messages_title" msgid="7729380010396411129">"Թույլատրել հաղորդագրությունները"</string>
     <string name="zen_mode_all_messages" msgid="8257021584561639816">"Հաղորդագրություններ"</string>
@@ -3389,7 +3392,7 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"Ակտիվացնել «Միայն զարթուցիչը» ռեժիմը մինչև <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>-ը"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Ակտիվացնել «Միշտ ընդհատել» ռեժիմը"</string>
     <string name="zen_mode_screen_on" msgid="8774571998575673502">"Երբ էկրանը միացված է"</string>
-    <string name="zen_mode_screen_on_summary" msgid="2208664848367443505">"Թույլատրել, «Չանհանգստացնել» ռեժիմում արգելված ծանուցումներին հայտնվել էկրանին և կարգավիճակի գոտում"</string>
+    <string name="zen_mode_screen_on_summary" msgid="2208664848367443505">"Թույլատրել «Չանհանգստացնել» ռեժիմում արգելված ծանուցումներին հայտնվել էկրանին և կարգավիճակի գոտում"</string>
     <string name="zen_mode_screen_off" msgid="3144446765110327937">"Երբ էկրանն անջատված է"</string>
     <string name="zen_mode_screen_off_summary" msgid="7430034620565812258">"«Չանհանգստացնել» գործառույթի միջոցով լռեցված ծանուցումներին թույլատրել միացնել էկրանն ու լուսաթարթել"</string>
     <string name="zen_mode_screen_off_summary_no_led" msgid="2826121465026642017">"«Չանհանգստացնել» գործառույթի միջոցով լռեցված ծանուցումներին թույլատրել միացնել էկրանը"</string>
@@ -3772,7 +3775,6 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"Օգտագործել էկրանի ավելի սառը գույներ"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Գույնի փոփոխությունը կիրառելու համար անջատեք էկրանը"</string>
     <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"Տեսախցիկի լազերային սենսոր"</string>
-    <string name="logical_camera_default_switch" msgid="3310039627275112685">"Տրամաբանական տեսախցիկ՝ որպես կանխադրված"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Ավտոմատ համակարգային թարմացումներ"</string>
     <string name="ota_disable_automatic_update_summary" msgid="940729694354373087">"Տեղադրել թարմացումները վերագործարկելիս"</string>
     <string name="usage" msgid="2977875522080448986">"Օգտագործում"</string>

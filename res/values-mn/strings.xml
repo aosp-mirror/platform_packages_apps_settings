@@ -3340,7 +3340,10 @@
     <string name="zen_mode_calls_title" msgid="623395033931747661">"Дуудлагыг зөвшөөрөх"</string>
     <string name="zen_mode_calls_footer" msgid="3618700268458237781">"Бүү саад бол горим асаалттай үед ирсэн дуудлагыг блоклох болно. Та найз нөхөд, гэр бүлийнхэн эсвэл бусад харилцагчдаа тантай холбоо барихыг зөвшөөрөхийн тулд тохиргоогоо өөрчлөх боломжтой."</string>
     <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"Одоор тэмдэглэсэн харилцагчид"</string>
-    <!-- no translation found for zen_mode_starred_contacts_summary_additional_contacts (500105380255018671) -->
+    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="500105380255018671">
+      <item quantity="other">бусад <xliff:g id="NUM_PEOPLE">%d</xliff:g></item>
+      <item quantity="one">бусад 1</item>
+    </plurals>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Зурвасууд"</string>
     <string name="zen_mode_messages_title" msgid="7729380010396411129">"Зурвасыг зөвшөөрөх"</string>
     <string name="zen_mode_all_messages" msgid="8257021584561639816">"Зурвас"</string>
@@ -3770,7 +3773,6 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"Илүү хүйтэн дэлгэцийн өнгө ашиглах"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Өнгөний өөрчлөлтийг оруулахын тулд дэлгэцийг унтраана уу"</string>
     <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"Камерын лазер мэдрэгч"</string>
-    <string name="logical_camera_default_switch" msgid="3310039627275112685">"Логик камерыг өгөгдмөл болгох"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Системийн автомат шинэчлэлтүүд"</string>
     <string name="ota_disable_automatic_update_summary" msgid="940729694354373087">"Төхөөрөмжийг дахин эхлүүлэх үед шинэчлэлтийг хэрэгжүүлэх"</string>
     <string name="usage" msgid="2977875522080448986">"Хэрэглээ"</string>
