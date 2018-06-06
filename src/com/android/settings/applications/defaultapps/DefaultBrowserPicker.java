@@ -17,9 +17,11 @@
 package com.android.settings.applications.defaultapps;
 
 import android.content.Context;
+import android.content.pm.ComponentInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 
+import android.util.ArraySet;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 
@@ -27,6 +29,7 @@ import com.android.settingslib.applications.DefaultAppInfo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Fragment for choosing default browser.
@@ -62,14 +65,20 @@ public class DefaultBrowserPicker extends DefaultAppPickerFragment {
                 DefaultBrowserPreferenceController.BROWSE_PROBE, PackageManager.MATCH_ALL, mUserId);
 
         final int count = list.size();
+        final Set<String> addedPackages = new ArraySet<>();
         for (int i = 0; i < count; i++) {
             ResolveInfo info = list.get(i);
             if (info.activityInfo == null || !info.handleAllWebDataURI) {
                 continue;
             }
+            final String packageName = info.activityInfo.packageName;
+            if (addedPackages.contains(packageName)) {
+                continue;
+            }
             try {
                 candidates.add(new DefaultAppInfo(context, mPm,
-                        mPm.getApplicationInfoAsUser(info.activityInfo.packageName, 0, mUserId)));
+                        mPm.getApplicationInfoAsUser(packageName, 0, mUserId)));
+                addedPackages.add(packageName);
             } catch (PackageManager.NameNotFoundException e) {
                 // Skip unknown packages.
             }
