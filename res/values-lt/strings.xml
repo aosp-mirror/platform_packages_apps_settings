@@ -3424,7 +3424,12 @@
     <string name="zen_mode_calls_title" msgid="623395033931747661">"Leisti skambučius"</string>
     <string name="zen_mode_calls_footer" msgid="3618700268458237781">"Kai įjungtas netrukdymo režimas, gaunamieji skambučiai blokuojami. Galite koreguoti nustatymus, kad jūsų šeimos nariai, draugai arba kiti kontaktai galėtų su jumis susisiekti."</string>
     <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"Žvaigždute pažymėti kontaktai"</string>
-    <!-- no translation found for zen_mode_starred_contacts_summary_additional_contacts (500105380255018671) -->
+    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="500105380255018671">
+      <item quantity="one">Dar <xliff:g id="NUM_PEOPLE">%d</xliff:g> kontaktas</item>
+      <item quantity="few">Dar <xliff:g id="NUM_PEOPLE">%d</xliff:g> kontaktai</item>
+      <item quantity="many">Dar <xliff:g id="NUM_PEOPLE">%d</xliff:g> kontakto</item>
+      <item quantity="other">Dar <xliff:g id="NUM_PEOPLE">%d</xliff:g> kontaktų</item>
+    </plurals>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Pranešimai"</string>
     <string name="zen_mode_messages_title" msgid="7729380010396411129">"Leisti pranešimus"</string>
     <string name="zen_mode_all_messages" msgid="8257021584561639816">"Pranešimai"</string>
@@ -3880,7 +3885,6 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"Naudoti šaltesnes ekrano spalvas"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Kad pritaikytumėte spalvos pakeitimą, išjunkite ekraną"</string>
     <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"Fotoaparato lazerio jutiklis"</string>
-    <string name="logical_camera_default_switch" msgid="3310039627275112685">"Loginis fotoaparatas kaip numatytasis"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Automatiniai sistemos naujiniai"</string>
     <string name="ota_disable_automatic_update_summary" msgid="940729694354373087">"Atnaujinimai pritaikomi, kai įrenginys paleidžiamas iš naujo"</string>
     <string name="usage" msgid="2977875522080448986">"Naudojimas"</string>
