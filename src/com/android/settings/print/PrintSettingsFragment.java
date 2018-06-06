@@ -56,6 +56,7 @@ import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.utils.ProfileSettingsPreferenceFragment;
+import com.android.settings.widget.AppPreference;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.text.DateFormat;
@@ -193,7 +194,7 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
             }
 
             for (PrintServiceInfo service : services) {
-                Preference preference = new Preference(context);
+                AppPreference preference = new AppPreference(context);
 
                 String title = service.getResolveInfo().loadLabel(pm).toString();
                 preference.setTitle(title);
