@@ -156,6 +156,12 @@ public class ZenOnboardingActivity extends Activity {
         // ZEN_SETTINGS_UPDATED is true for:
         // - fresh P+ device
         // - if zen visual effects values were changed by the user in Settings
+        NotificationManager nm = context.getSystemService(NotificationManager.class);
+        if (NotificationManager.Policy.areAllVisualEffectsSuppressed(
+                nm.getNotificationPolicy().suppressedVisualEffects)) {
+            Settings.Global.putInt(context.getContentResolver(),
+                    Settings.Global.ZEN_SETTINGS_UPDATED, 1);
+        }
         return Settings.Global.getInt(context.getContentResolver(),
                 Settings.Global.ZEN_SETTINGS_UPDATED, 0) != 0;
     }
