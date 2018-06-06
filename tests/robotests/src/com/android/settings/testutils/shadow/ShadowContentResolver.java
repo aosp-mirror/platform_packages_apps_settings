@@ -24,6 +24,7 @@ import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.net.Uri;
 import android.provider.SearchIndexablesContract;
+import android.text.TextUtils;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
@@ -64,6 +65,14 @@ public class ShadowContentResolver {
     public static boolean getSyncAutomaticallyAsUser(Account account, String authority,
             int userId) {
         return sSyncAutomatically.containsKey(authority) ? sSyncAutomatically.get(authority) : true;
+    }
+
+    @Implementation
+    public static void setSyncAutomaticallyAsUser(Account account, String authority, boolean sync,
+            int userId) {
+        if (TextUtils.isEmpty(authority)) {
+            throw new IllegalArgumentException("Authority must be non-empty");
+        }
     }
 
     @Implementation
