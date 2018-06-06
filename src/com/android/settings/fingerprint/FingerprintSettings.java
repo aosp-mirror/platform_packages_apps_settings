@@ -781,6 +781,7 @@ public class FingerprintSettings extends SubSettings {
                         if (mDeleteInProgress) {
                             mAlertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setEnabled(false);
                         }
+                        mDialogTextField.requestFocus();
                     }
                 });
                 if (mTextHadFocus == null || mTextHadFocus) {
