@@ -230,6 +230,7 @@ public class AudioOutputSwitchPreferenceControllerTest {
         verify(mLocalBluetoothManager.getEventManager()).registerCallback(
                 any(BluetoothCallback.class));
         verify(mContext).registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class));
+        verify(mLocalBluetoothManager).setForegroundActivity(mContext);
     }
 
     @Test
@@ -240,6 +241,7 @@ public class AudioOutputSwitchPreferenceControllerTest {
         verify(mLocalBluetoothManager.getEventManager()).unregisterCallback(
                 any(BluetoothCallback.class));
         verify(mContext).unregisterReceiver(any(BroadcastReceiver.class));
+        verify(mLocalBluetoothManager).setForegroundActivity(null);
     }
 
     @Test
