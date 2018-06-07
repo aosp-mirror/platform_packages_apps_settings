@@ -1983,15 +1983,6 @@
                 android:value="com.android.settings.print.PrintJobSettingsFragment" />
         </activity>
 
-        <!-- Keep compatibility with old shortcuts. -->
-        <activity-alias android:name="DevelopmentSettings"
-                  android:exported="true"
-                  android:label="@string/development_settings_title"
-                  android:targetActivity="Settings$DevelopmentSettingsActivity">
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.development.DevelopmentSettings" />
-        </activity-alias>
-
         <activity android:name=".development.AppPicker"
                   android:label="@string/select_application"
                   android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
