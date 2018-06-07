@@ -3424,7 +3424,12 @@
     <string name="zen_mode_calls_title" msgid="623395033931747661">"Dovoli klice"</string>
     <string name="zen_mode_calls_footer" msgid="3618700268458237781">"Pri vklopljenem načinu »ne moti« so dohodni klici blokirani. Nastavitve lahko prilagodite tako, da boste dosegljivi za prijatelje, družinske člane ali druge stike."</string>
     <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"Stiki z zvezdico"</string>
-    <!-- no translation found for zen_mode_starred_contacts_summary_additional_contacts (500105380255018671) -->
+    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="500105380255018671">
+      <item quantity="one">Še <xliff:g id="NUM_PEOPLE">%d</xliff:g> druga oseba</item>
+      <item quantity="two">Še <xliff:g id="NUM_PEOPLE">%d</xliff:g> drugi osebi</item>
+      <item quantity="few">Še <xliff:g id="NUM_PEOPLE">%d</xliff:g> druge osebe</item>
+      <item quantity="other">Še <xliff:g id="NUM_PEOPLE">%d</xliff:g> drugih oseb</item>
+    </plurals>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Sporočila"</string>
     <string name="zen_mode_messages_title" msgid="7729380010396411129">"Dovoli sporočila"</string>
     <string name="zen_mode_all_messages" msgid="8257021584561639816">"Sporočila"</string>
@@ -3880,7 +3885,6 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"Uporaba hladnejših barv zaslona"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Če želite uveljaviti spremembo barv, izklopite zaslon"</string>
     <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"Lasersko tipalo fotoaparata"</string>
-    <string name="logical_camera_default_switch" msgid="3310039627275112685">"Logični fotoaparat kot privzeta izbira"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Samodejne sistemske posodobitve"</string>
     <string name="ota_disable_automatic_update_summary" msgid="940729694354373087">"Namesti posodobitve ob vnovičnem zagonu naprave"</string>
     <string name="usage" msgid="2977875522080448986">"Poraba"</string>
