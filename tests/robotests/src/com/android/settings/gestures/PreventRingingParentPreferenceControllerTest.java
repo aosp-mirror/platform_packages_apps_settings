@@ -16,14 +16,25 @@
 
 package com.android.settings.gestures;
 
+import static android.provider.Settings.Secure.VOLUME_HUSH_GESTURE;
+import static android.provider.Settings.Secure.VOLUME_HUSH_MUTE;
+import static android.provider.Settings.Secure.VOLUME_HUSH_OFF;
+import static android.provider.Settings.Secure.VOLUME_HUSH_VIBRATE;
+
 import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
+
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.provider.Settings;
 
+import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -41,18 +52,20 @@ public class PreventRingingParentPreferenceControllerTest {
 
     private Context mContext;
     private PreventRingingParentPreferenceController mController;
+    private final String VIBRATE_SUMMARY = "On (vibrate)";
+    private final String MUTE_SUMMARY = "On (mute)";
+    private final String NONE_SUMMARY = "Off";
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
-        when(mContext.getResources()).thenReturn(mResources);
-
+        mContext = spy(RuntimeEnvironment.application.getApplicationContext());
         mController = new PreventRingingParentPreferenceController(mContext, "test_key");
     }
 
     @Test
     public void testIsAvailable_configIsTrue_shouldAvailableUnSearchable() {
+        when(mContext.getResources()).thenReturn(mResources);
         when(mResources.getBoolean(
                 com.android.internal.R.bool.config_volumeHushGestureEnabled)).thenReturn(true);
 
@@ -61,9 +74,28 @@ public class PreventRingingParentPreferenceControllerTest {
 
     @Test
     public void testIsAvailable_configIsFalse_shouldReturnFalse() {
+        when(mContext.getResources()).thenReturn(mResources);
         when(mResources.getBoolean(
                 com.android.internal.R.bool.config_volumeHushGestureEnabled)).thenReturn(false);
 
         assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void updateState_summaryUpdated() {
+        Settings.Secure.putInt(mContext.getContentResolver(), VOLUME_HUSH_GESTURE,
+                VOLUME_HUSH_MUTE);
+        assertThat(mController.getSummary()).isEqualTo(mContext.getResources().getText(
+                R.string.prevent_ringing_option_mute_summary));
+
+        Settings.Secure.putInt(mContext.getContentResolver(), VOLUME_HUSH_GESTURE,
+                VOLUME_HUSH_VIBRATE);
+        assertThat(mController.getSummary()).isEqualTo(mContext.getResources().getText(
+                R.string.prevent_ringing_option_vibrate_summary));
+
+        Settings.Secure.putInt(mContext.getContentResolver(), VOLUME_HUSH_GESTURE,
+                VOLUME_HUSH_OFF);
+        assertThat(mController.getSummary()).isEqualTo(mContext.getResources().getText(
+                R.string.prevent_ringing_option_none_summary));
     }
 }

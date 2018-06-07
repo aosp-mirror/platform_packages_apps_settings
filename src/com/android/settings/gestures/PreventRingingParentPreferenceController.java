@@ -16,11 +16,19 @@
 
 package com.android.settings.gestures;
 
-import android.content.Context;
+import static android.provider.Settings.Secure.VOLUME_HUSH_GESTURE;
+import static android.provider.Settings.Secure.VOLUME_HUSH_MUTE;
+import static android.provider.Settings.Secure.VOLUME_HUSH_VIBRATE;
 
+import android.content.Context;
+import android.provider.Settings;
+
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 public class PreventRingingParentPreferenceController extends BasePreferenceController {
+
+    final String SECURE_KEY = VOLUME_HUSH_GESTURE;
 
     public PreventRingingParentPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -33,4 +41,21 @@ public class PreventRingingParentPreferenceController extends BasePreferenceCont
                 ? AVAILABLE_UNSEARCHABLE : UNSUPPORTED_ON_DEVICE;
     }
 
+    @Override
+    public CharSequence getSummary() {
+        int value = Settings.Secure.getInt(
+                mContext.getContentResolver(), SECURE_KEY, VOLUME_HUSH_VIBRATE);
+        int summary;
+        switch (value) {
+            case VOLUME_HUSH_VIBRATE:
+                summary = R.string.prevent_ringing_option_vibrate_summary;
+                break;
+            case VOLUME_HUSH_MUTE:
+                summary = R.string.prevent_ringing_option_mute_summary;
+                break;
+            default:
+                summary = R.string.prevent_ringing_option_none_summary;
+        }
+        return mContext.getText(summary);
+    }
 }
