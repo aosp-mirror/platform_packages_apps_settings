@@ -262,6 +262,34 @@ public class NotificationPreferenceControllerTest {
     }
 
     @Test
+    public void testIsChannelBlockable_notConfigurable() {
+        String sameId = "apples";
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.systemApp = false;
+        appRow.lockedChannelId = sameId;
+        NotificationChannel channel = mock(NotificationChannel.class);
+        when(channel.getId()).thenReturn(sameId);
+        when(channel.getImportance()).thenReturn(IMPORTANCE_DEFAULT);
+
+        mController.onResume(appRow, channel, null, null);
+        assertFalse(mController.isChannelBlockable());
+    }
+
+    @Test
+    public void testIsChannelBlockable_notConfigurableButBlocked() {
+        String sameId = "apples";
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.systemApp = false;
+        appRow.lockedChannelId = sameId;
+        NotificationChannel channel = mock(NotificationChannel.class);
+        when(channel.getId()).thenReturn(sameId);
+        when(channel.getImportance()).thenReturn(IMPORTANCE_NONE);
+
+        mController.onResume(appRow, channel, null, null);
+        assertTrue(mController.isChannelBlockable());
+    }
+
+    @Test
     public void testIsChannelGroupBlockable_nonSystemBlockable() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.systemApp = false;
