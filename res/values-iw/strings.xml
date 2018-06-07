@@ -3426,7 +3426,12 @@
     <string name="zen_mode_calls_title" msgid="623395033931747661">"אני רוצה לאפשר שיחות"</string>
     <string name="zen_mode_calls_footer" msgid="3618700268458237781">"כשמצב \'נא לא להפריע\' פועל, השיחות הנכנסות חסומות. ניתן לשנות את ההגדרות כדי לאפשר לחברים, לבני משפחה או לאנשי קשר אחרים ליצור איתך קשר."</string>
     <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"אנשי קשר שמסומנים בכוכב"</string>
-    <!-- no translation found for zen_mode_starred_contacts_summary_additional_contacts (500105380255018671) -->
+    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="500105380255018671">
+      <item quantity="two"><xliff:g id="NUM_PEOPLE">%d</xliff:g> נוספים</item>
+      <item quantity="many"><xliff:g id="NUM_PEOPLE">%d</xliff:g> נוספים</item>
+      <item quantity="other"><xliff:g id="NUM_PEOPLE">%d</xliff:g> נוספים</item>
+      <item quantity="one">1 נוסף</item>
+    </plurals>
     <string name="zen_mode_messages" msgid="5886440273537510894">"הודעות"</string>
     <string name="zen_mode_messages_title" msgid="7729380010396411129">"אני רוצה לאפשר הודעות"</string>
     <string name="zen_mode_all_messages" msgid="8257021584561639816">"הודעות"</string>
@@ -3882,7 +3887,6 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"השתמש בצבעי תצוגה קרירים יותר"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"כבה את המסך כדי להחיל שינוי צבע"</string>
     <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"חיישן הלייזר של המצלמה"</string>
-    <string name="logical_camera_default_switch" msgid="3310039627275112685">"מצלמה לוגית כברירת מחדל"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"עדכוני מערכת אוטומטיים"</string>
     <string name="ota_disable_automatic_update_summary" msgid="940729694354373087">"החלת עדכונים כאשר המכשיר מופעל מחדש"</string>
     <string name="usage" msgid="2977875522080448986">"שימוש"</string>
