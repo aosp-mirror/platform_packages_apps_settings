@@ -38,7 +38,8 @@ public class VpnUtils {
     private static final String TAG = "VpnUtils";
 
     public static String getLockdownVpn() {
-        final byte[] value = KeyStore.getInstance().get(Credentials.LOCKDOWN_VPN);
+        final byte[] value = KeyStore.getInstance().get(
+            Credentials.LOCKDOWN_VPN, true /* suppressKeyNotFoundWarning */);
         return value == null ? null : new String(value);
     }
 
