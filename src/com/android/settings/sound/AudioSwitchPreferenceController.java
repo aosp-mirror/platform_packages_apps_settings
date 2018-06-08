@@ -118,7 +118,6 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
             Log.e(TAG, "Bluetooth is not supported on this device");
             return;
         }
-        mLocalBluetoothManager.setForegroundActivity(mContext);
         mProfileManager = mLocalBluetoothManager.getProfileManager();
     }
 
@@ -171,11 +170,13 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
 
     @Override
     public void onStart() {
+        mLocalBluetoothManager.setForegroundActivity(mContext);
         register();
     }
 
     @Override
     public void onStop() {
+        mLocalBluetoothManager.setForegroundActivity(null);
         unregister();
     }
 
