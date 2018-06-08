@@ -15,6 +15,8 @@ package com.android.settings.display;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.provider.SearchIndexableResource;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
@@ -23,13 +25,18 @@ import com.android.internal.logging.nano.MetricsProto;
 
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.R;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 import com.android.settings.widget.RadioButtonPickerFragment;
+import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.CandidateInfo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @SuppressWarnings("WeakerAccess")
+@SearchIndexable
 public class ColorModePreferenceFragment extends RadioButtonPickerFragment
         implements ColorDisplayController.Callback {
 
@@ -181,4 +188,15 @@ public class ColorModePreferenceFragment extends RadioButtonPickerFragment
             getActivity().onBackPressed();
         }
     }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.color_mode_settings;
+                    return Arrays.asList(sir);
+                }
+            };
 }
