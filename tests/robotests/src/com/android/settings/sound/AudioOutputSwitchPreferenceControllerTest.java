@@ -186,6 +186,8 @@ public class AudioOutputSwitchPreferenceControllerTest {
 
         AudioSwitchPreferenceController controller = new AudioSwitchPreferenceControllerTestable(
                 mContext, TEST_KEY);
+        controller.onStart();
+        controller.onStop();
 
         assertThat(mLocalBluetoothManager).isNull();
     }
