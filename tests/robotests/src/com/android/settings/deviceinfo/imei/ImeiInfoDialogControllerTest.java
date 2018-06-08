@@ -128,4 +128,19 @@ public class ImeiInfoDialogControllerTest {
         verify(mDialog).setText(eq(ID_IMEI_SV_VALUE), any());
         verify(mDialog).removeViewFromScreen(ID_CDMA_SETTINGS);
     }
+
+    @Test
+    public void populateImeiInfo_emptyImei_shouldSetMeid_imeiSetToEmptyString() {
+        doReturn(true).when(mController).isCdmaLteEnabled();
+        when(mTelephonyManager.getPhoneType()).thenReturn(TelephonyManager.PHONE_TYPE_CDMA);
+        when(mTelephonyManager.getImei(anyInt())).thenReturn(null);
+
+        mController.populateImeiInfo();
+
+        verify(mDialog).setText(ID_MEID_NUMBER_VALUE, MEID_NUMBER);
+        verify(mDialog).setText(ID_MIN_NUMBER_VALUE, MIN_NUMBER);
+        verify(mDialog).setText(ID_PRL_VERSION_VALUE, PRL_VERSION);
+        verify(mDialog).setText(eq(ID_IMEI_VALUE), eq(""));
+        verify(mDialog).setText(eq(ID_IMEI_SV_VALUE), any());
+    }
 }
