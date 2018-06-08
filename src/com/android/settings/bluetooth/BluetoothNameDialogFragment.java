@@ -31,6 +31,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -43,8 +44,6 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
  */
 abstract class BluetoothNameDialogFragment extends InstrumentedDialogFragment
         implements TextWatcher {
-    private static final int BLUETOOTH_NAME_MAX_LENGTH_BYTES = 248;
-
     private AlertDialog mAlertDialog;
     private Button mOkButton;
 
@@ -91,8 +90,15 @@ abstract class BluetoothNameDialogFragment extends InstrumentedDialogFragment
                 })
                 .setNegativeButton(android.R.string.cancel, null);
         mAlertDialog = builder.create();
-        mAlertDialog.getWindow().setSoftInputMode(
-                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        mAlertDialog.setOnShowListener(d -> {
+            if (mDeviceNameView != null && mDeviceNameView.requestFocus()) {
+                InputMethodManager imm = (InputMethodManager) getContext().getSystemService(
+                        Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.showSoftInput(mDeviceNameView, InputMethodManager.SHOW_IMPLICIT);
+                }
+            }
+        });
 
         return mAlertDialog;
     }
@@ -109,13 +115,14 @@ abstract class BluetoothNameDialogFragment extends InstrumentedDialogFragment
         View view = layoutInflater.inflate(R.layout.dialog_edittext, null);
         mDeviceNameView = (EditText) view.findViewById(R.id.edittext);
         mDeviceNameView.setFilters(new InputFilter[] {
-                new Utf8ByteLengthFilter(BLUETOOTH_NAME_MAX_LENGTH_BYTES)
+                new BluetoothLengthDeviceNameFilter()
         });
         mDeviceNameView.setText(deviceName);    // set initial value before adding listener
         if (!TextUtils.isEmpty(deviceName)) {
             mDeviceNameView.setSelection(deviceName.length());
         }
         mDeviceNameView.addTextChangedListener(this);
+        com.android.settings.Utils.setEditTextCursorPosition(mDeviceNameView);
         mDeviceNameView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {

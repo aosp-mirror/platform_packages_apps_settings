@@ -33,10 +33,8 @@ import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.support.annotation.VisibleForTesting;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
-import android.text.format.Formatter;
 import android.util.ArraySet;
 import android.util.IconDrawableFactory;
 import android.util.Log;
@@ -46,14 +44,16 @@ import android.widget.AdapterView;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
-import com.android.settings.applications.PackageManagerWrapper;
-import com.android.settings.applications.PackageManagerWrapperImpl;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.AppItem;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoader;
 import com.android.settingslib.net.UidDetail;
 import com.android.settingslib.net.UidDetailProvider;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 public class AppDataUsage extends DataUsageBase implements Preference.OnPreferenceChangeListener,
         DataSaverBackend.Listener {
@@ -81,7 +81,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
     private Preference mForegroundUsage;
     private Preference mBackgroundUsage;
     private Preference mAppSettings;
-    private SwitchPreference mRestrictBackground;
+    private RestrictedSwitchPreference mRestrictBackground;
     private PreferenceCategory mAppList;
 
     private Drawable mIcon;
@@ -98,13 +98,13 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
     private AppItem mAppItem;
     private Intent mAppSettingsIntent;
     private SpinnerPreference mCycle;
-    private SwitchPreference mUnrestrictedData;
+    private RestrictedSwitchPreference mUnrestrictedData;
     private DataSaverBackend mDataSaverBackend;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        mPackageManagerWrapper = new PackageManagerWrapperImpl(getPackageManager());
+        mPackageManagerWrapper = new PackageManagerWrapper(getPackageManager());
         final Bundle args = getArguments();
 
         try {
@@ -161,9 +161,11 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
                 removePreference(KEY_UNRESTRICTED_DATA);
                 removePreference(KEY_RESTRICT_BACKGROUND);
             } else {
-                mRestrictBackground = (SwitchPreference) findPreference(KEY_RESTRICT_BACKGROUND);
+                mRestrictBackground = (RestrictedSwitchPreference) findPreference(
+                        KEY_RESTRICT_BACKGROUND);
                 mRestrictBackground.setOnPreferenceChangeListener(this);
-                mUnrestrictedData = (SwitchPreference) findPreference(KEY_UNRESTRICTED_DATA);
+                mUnrestrictedData = (RestrictedSwitchPreference) findPreference(
+                        KEY_UNRESTRICTED_DATA);
                 mUnrestrictedData.setOnPreferenceChangeListener(this);
             }
             mDataSaverBackend = new DataSaverBackend(getContext());
@@ -262,8 +264,11 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
     }
 
     private void updatePrefs(boolean restrictBackground, boolean unrestrictData) {
+        final EnforcedAdmin admin = RestrictedLockUtils.checkIfMeteredDataRestricted(
+                getContext(), mPackageName, UserHandle.getUserId(mAppItem.key));
         if (mRestrictBackground != null) {
             mRestrictBackground.setChecked(!restrictBackground);
+            mRestrictBackground.setDisabledByAdmin(admin);
         }
         if (mUnrestrictedData != null) {
             if (restrictBackground) {
@@ -271,6 +276,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
             } else {
                 mUnrestrictedData.setVisible(true);
                 mUnrestrictedData.setChecked(unrestrictData);
+                mUnrestrictedData.setDisabledByAdmin(admin);
             }
         }
     }
@@ -301,9 +307,9 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
         final long totalBytes = backgroundBytes + foregroundBytes;
         final Context context = getContext();
 
-        mTotalUsage.setSummary(Formatter.formatFileSize(context, totalBytes));
-        mForegroundUsage.setSummary(Formatter.formatFileSize(context, foregroundBytes));
-        mBackgroundUsage.setSummary(Formatter.formatFileSize(context, backgroundBytes));
+        mTotalUsage.setSummary(DataUsageUtils.formatDataUsage(context, totalBytes));
+        mForegroundUsage.setSummary(DataUsageUtils.formatDataUsage(context, foregroundBytes));
+        mBackgroundUsage.setSummary(DataUsageUtils.formatDataUsage(context, backgroundBytes));
     }
 
     private boolean getAppRestrictBackground() {

@@ -33,6 +33,7 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -60,16 +61,6 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
     }
 
     @Override
-    protected String getZenModeDependency() {
-        return null;
-    }
-
-    @Override
-    protected int getEnabledToastText() {
-        return R.string.zen_event_rule_enabled_toast;
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
         if (isUiRestricted()) {
@@ -79,6 +70,22 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
             reloadCalendar();
         }
         mCreate = false;
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.zen_mode_event_rule_settings;
+    }
+
+    @Override
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        List<AbstractPreferenceController> controllers = new ArrayList<>();
+        mHeader = new ZenAutomaticRuleHeaderPreferenceController(context, this,
+                getLifecycle());
+        mSwitch = new ZenAutomaticRuleSwitchPreferenceController(context, this, getLifecycle());
+        controllers.add(mHeader);
+        controllers.add(mSwitch);
+        return controllers;
     }
 
     private void reloadCalendar() {
@@ -107,7 +114,6 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
     @Override
     protected void onCreateInternal() {
         mCreate = true;
-        addPreferencesFromResource(R.xml.zen_mode_event_rule_settings);
         final PreferenceScreen root = getPreferenceScreen();
 
         mCalendar = (DropDownPreference) root.findPreference(KEY_CALENDAR);
@@ -243,5 +249,4 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
         public String name;
         public int userId;
     }
-
 }

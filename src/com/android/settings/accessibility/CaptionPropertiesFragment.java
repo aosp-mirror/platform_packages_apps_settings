@@ -158,6 +158,8 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
         final boolean enabled = mCaptioningManager.isEnabled();
         SettingsActivity activity = (SettingsActivity) getActivity();
         mSwitchBar = activity.getSwitchBar();
+        mSwitchBar.setSwitchBarText(R.string.accessibility_caption_master_switch_title,
+                R.string.accessibility_caption_master_switch_title);
         mSwitchBar.setCheckedInternal(enabled);
         mToggleSwitch = mSwitchBar.getSwitch();
 

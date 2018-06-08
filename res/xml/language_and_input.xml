@@ -17,29 +17,33 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-    android:title="@string/language_settings" >
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="language_and_input_settings_screen"
+    android:title="@string/language_settings"
+    settings:initialExpandedChildrenCount="3">
 
     <Preference
         android:key="phone_language"
         android:title="@string/phone_language"
         android:icon="@drawable/ic_translate_24dp"
-        android:fragment="com.android.settings.localepicker.LocaleListEditor"/>
+        android:fragment="com.android.settings.localepicker.LocaleListEditor" />
 
     <PreferenceCategory
+        android:key="keyboards_category"
         android:title="@string/keyboard_and_input_methods_category">
         <Preference
             android:key="virtual_keyboard_pref"
             android:title="@string/virtual_keyboard_category"
-            android:fragment="com.android.settings.inputmethod.VirtualKeyboardFragment"/>
+            android:fragment="com.android.settings.inputmethod.VirtualKeyboardFragment" />
         <Preference
             android:key="physical_keyboard_pref"
             android:title="@string/physical_keyboard_title"
             android:summary="@string/summary_placeholder"
-            android:fragment="com.android.settings.inputmethod.PhysicalKeyboardFragment"/>
+            android:fragment="com.android.settings.inputmethod.PhysicalKeyboardFragment" />
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:key="input_assistance_category"
         android:title="@string/input_assistance">
         <!-- Spell checker preference title, summary and fragment will be set programmatically. -->
         <!-- Note: Mark this as persistent="false" to remove unnecessarily saved shared preference.
@@ -48,7 +52,7 @@
             android:key="spellcheckers_settings"
             android:title="@string/spellcheckers_settings_title"
             android:persistent="false"
-            android:fragment="com.android.settings.inputmethod.SpellCheckersSettings"/>
+            android:fragment="com.android.settings.inputmethod.SpellCheckersSettings" />
 
         <com.android.settings.widget.GearPreference
             android:key="default_autofill"
@@ -59,32 +63,29 @@
         <!-- User dictionary preference title and fragment will be set programmatically. -->
         <Preference
             android:key="key_user_dictionary_settings"
-            android:title="@string/user_dict_settings_title"/>
+            android:title="@string/user_dict_settings_title" />
     </PreferenceCategory>
 
-    <PreferenceCategory>
+    <PreferenceCategory
+        android:key="pointer_and_tts_category"
+        android:layout="@layout/preference_category_no_label">
 
         <com.android.settings.PointerSpeedPreference
             android:key="pointer_speed"
             android:title="@string/pointer_speed"
-            android:dialogTitle="@string/pointer_speed"/>
+            android:dialogTitle="@string/pointer_speed" />
 
         <Preference
             android:key="tts_settings_summary"
             android:title="@string/tts_settings_title"
-            android:fragment="com.android.settings.tts.TextToSpeechSettings"/>
+            android:fragment="com.android.settings.tts.TextToSpeechSettings" />
 
     </PreferenceCategory>
 
-    <PreferenceCategory
-        android:key="game_controller_settings_category"
-        android:title="@string/game_controller_settings_category">
-
-        <SwitchPreference
-            android:key="vibrate_input_devices"
-            android:title="@string/vibrate_input_devices"
-            android:summary="@string/vibrate_input_devices_summary" />
-
-    </PreferenceCategory>
+    <SwitchPreference
+        android:key="vibrate_input_devices"
+        android:title="@string/vibrate_input_devices"
+        android:summary="@string/vibrate_input_devices_summary"
+        settings:controller="com.android.settings.inputmethod.GameControllerPreferenceController" />
 
 </PreferenceScreen>

@@ -17,19 +17,12 @@
 package com.android.settings.system;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.os.UserManager;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settings.testutils.shadow.ShadowUserManager;
 
 import org.junit.After;
 import org.junit.Before;
@@ -41,11 +34,7 @@ import org.robolectric.annotation.Config;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = {
-                ShadowUserManager.class,
-                SettingsShadowResources.class,
-        })
+@Config(shadows = SettingsShadowResources.class)
 public class SystemDashboardFragmentTest {
 
     @Before
@@ -61,10 +50,7 @@ public class SystemDashboardFragmentTest {
 
     @Test
     public void testNonIndexableKeys_existInXmlLayout() {
-        final Context context = spy(RuntimeEnvironment.application);
-        UserManager manager = mock(UserManager.class);
-        when(manager.isAdminUser()).thenReturn(false);
-        doReturn(manager).when(context).getSystemService(Context.USER_SERVICE);
+        final Context context = RuntimeEnvironment.application;
         final List<String> niks = SystemDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
                 .getNonIndexableKeys(context);
         final int xmlId = (new SystemDashboardFragment()).getPreferenceScreenResId();

@@ -16,11 +16,11 @@
 
 package com.android.settings.inputmethod;
 
-
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -35,7 +35,6 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -49,7 +48,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class VirtualKeyboardPreferenceControllerTest {
 
     @Mock
@@ -75,8 +73,18 @@ public class VirtualKeyboardPreferenceControllerTest {
     }
 
     @Test
-    public void shouldAlwaysBeAvailable() {
+    public void testVirtualKeyboard_byDefault_shouldBeShown() {
+        final Context context = spy(RuntimeEnvironment.application);
+        mController = new VirtualKeyboardPreferenceController(context);
         assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void testVirtualKeyboard_ifDisabled_shouldNotBeShown() {
+        final Context context = spy(RuntimeEnvironment.application);
+        mController = new VirtualKeyboardPreferenceController(context);
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test

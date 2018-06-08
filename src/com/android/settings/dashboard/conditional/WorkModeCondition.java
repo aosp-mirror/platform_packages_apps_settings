@@ -19,9 +19,10 @@ package com.android.settings.dashboard.conditional;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
-import android.graphics.drawable.Icon;
+import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.os.UserManager;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Settings;
@@ -59,9 +60,8 @@ public class WorkModeCondition extends Condition {
     }
 
     @Override
-    public Icon getIcon() {
-        return Icon.createWithResource(mManager.getContext(),
-                R.drawable.ic_signal_workmode_enable);
+    public Drawable getIcon() {
+        return mManager.getContext().getDrawable(R.drawable.ic_signal_workmode_enable);
     }
 
     @Override
@@ -84,14 +84,15 @@ public class WorkModeCondition extends Condition {
     @Override
     public void onPrimaryClick() {
         mManager.getContext().startActivity(new Intent(mManager.getContext(),
-                Settings.UserAndAccountDashboardActivity.class));
+                Settings.AccountDashboardActivity.class)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 
     @Override
     public void onActionClick(int index) {
         if (index == 0) {
             if (mUserHandle != null) {
-                mUm.trySetQuietModeDisabled(mUserHandle.getIdentifier(), null);
+                mUm.requestQuietModeEnabled(false, mUserHandle);
             }
             setActive(false);
         } else {

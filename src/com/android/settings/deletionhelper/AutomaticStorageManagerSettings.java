@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -81,6 +81,8 @@ public class AutomaticStorageManagerSettings extends DashboardFragment
     private void initializeSwitchBar() {
         final SettingsActivity activity = (SettingsActivity) getActivity();
         mSwitchBar = activity.getSwitchBar();
+        mSwitchBar.setSwitchBarText(R.string.automatic_storage_manager_master_switch_title,
+                R.string.automatic_storage_manager_master_switch_title);
         mSwitchBar.show();
         mSwitchController =
                 new AutomaticStorageManagerSwitchBarController(
@@ -94,7 +96,7 @@ public class AutomaticStorageManagerSettings extends DashboardFragment
     @Override
     public void onResume() {
         super.onResume();
-        mDaysToRetain.setEnabled(isStorageManagerEnabled());
+        mDaysToRetain.setEnabled(Utils.isStorageManagerEnabled(getContext()));
     }
 
     @Override
@@ -108,7 +110,7 @@ public class AutomaticStorageManagerSettings extends DashboardFragment
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return buildPreferenceControllers(context);
     }
 
@@ -137,7 +139,7 @@ public class AutomaticStorageManagerSettings extends DashboardFragment
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_uri_storage;
     }
 
@@ -149,12 +151,6 @@ public class AutomaticStorageManagerSettings extends DashboardFragment
             }
         }
         return indices.length - 1;
-    }
-
-    private boolean isStorageManagerEnabled() {
-        return Settings.Secure.getInt(
-                        getContentResolver(), Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED, 0)
-                != 0;
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
@@ -172,7 +168,7 @@ public class AutomaticStorageManagerSettings extends DashboardFragment
                 }
 
                 @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(
+                public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     return buildPreferenceControllers(context);
                 }

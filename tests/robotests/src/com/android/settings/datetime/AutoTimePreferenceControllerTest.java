@@ -16,11 +16,13 @@
 
 package com.android.settings.datetime;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.verify;
+
 import android.content.Context;
 import android.provider.Settings;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Before;
@@ -28,14 +30,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.verify;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AutoTimePreferenceControllerTest {
 
     @Mock
@@ -48,7 +45,7 @@ public class AutoTimePreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = ShadowApplication.getInstance().getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mPreference = new RestrictedSwitchPreference(mContext);
         mController = new AutoTimePreferenceController(mContext, mCallback);
     }
@@ -56,13 +53,11 @@ public class AutoTimePreferenceControllerTest {
     @Test
     public void testIsEnabled_shouldReadFromSettingsProvider() {
         // Disabled
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.AUTO_TIME, 0);
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AUTO_TIME, 0);
         assertThat(mController.isEnabled()).isFalse();
 
         // Enabled
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.AUTO_TIME, 1);
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AUTO_TIME, 1);
         assertThat(mController.isEnabled()).isTrue();
     }
 

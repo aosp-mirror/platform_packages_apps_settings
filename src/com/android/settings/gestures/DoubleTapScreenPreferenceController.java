@@ -20,15 +20,17 @@ import android.annotation.UserIdInt;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
+import android.support.annotation.VisibleForTesting;
+import android.text.TextUtils;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.R;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.search.ResultPayload;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import static android.provider.Settings.Secure.DOZE_PULSE_ON_DOUBLE_TAP;
 
@@ -42,39 +44,60 @@ public class DoubleTapScreenPreferenceController extends GesturePreferenceContro
 
     private final String SECURE_KEY = DOZE_PULSE_ON_DOUBLE_TAP;
 
-    private final AmbientDisplayConfiguration mAmbientConfig;
+    private AmbientDisplayConfiguration mAmbientConfig;
     @UserIdInt
     private final int mUserId;
 
-    public DoubleTapScreenPreferenceController(Context context, Lifecycle lifecycle,
-            AmbientDisplayConfiguration config, @UserIdInt int userId, String key) {
-        super(context, lifecycle);
-        mAmbientConfig = config;
-        mUserId = userId;
+    public DoubleTapScreenPreferenceController(Context context, String key) {
+        super(context, key);
+        mUserId = UserHandle.myUserId();
         mDoubleTapScreenPrefKey = key;
     }
 
+    public DoubleTapScreenPreferenceController setConfig(AmbientDisplayConfiguration config) {
+        mAmbientConfig = config;
+        return this;
+    }
+
     public static boolean isSuggestionComplete(Context context, SharedPreferences prefs) {
-        AmbientDisplayConfiguration ambientConfig = new AmbientDisplayConfiguration(context);
-        return !ambientConfig.pulseOnDoubleTapAvailable()
+        return isSuggestionComplete(new AmbientDisplayConfiguration(context), prefs);
+    }
+
+    @VisibleForTesting
+    static boolean isSuggestionComplete(AmbientDisplayConfiguration config,
+            SharedPreferences prefs) {
+        return !config.pulseOnDoubleTapAvailable()
                 || prefs.getBoolean(DoubleTapScreenSettings.PREF_KEY_SUGGESTION_COMPLETE, false);
     }
 
     @Override
-    public boolean isAvailable() {
-        return mAmbientConfig.pulseOnDoubleTapAvailable();
+    public int getAvailabilityStatus() {
+        if (mAmbientConfig == null) {
+            mAmbientConfig = new AmbientDisplayConfiguration(mContext);
+        }
+
+        // No hardware support for Double Tap
+        if (!mAmbientConfig.doubleTapSensorAvailable()) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
+
+        // Can't change Double Tap when AOD is enabled.
+        if (!mAmbientConfig.ambientDisplayAvailable()) {
+            return DISABLED_DEPENDENT_SETTING;
+        }
+
+        return AVAILABLE;
     }
 
     @Override
-    public String getPreferenceKey() {
-        return mDoubleTapScreenPrefKey;
+    public boolean isSliceable() {
+        return TextUtils.equals(getPreferenceKey(), "gesture_double_tap_screen");
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final boolean enabled = (boolean) newValue;
-        Settings.Secure.putInt(mContext.getContentResolver(), SECURE_KEY, enabled ? ON : OFF);
-        return true;
+    public boolean setChecked(boolean isChecked) {
+        return Settings.Secure.putInt(mContext.getContentResolver(), SECURE_KEY,
+                isChecked ? ON : OFF);
     }
 
     @Override
@@ -83,17 +106,23 @@ public class DoubleTapScreenPreferenceController extends GesturePreferenceContro
     }
 
     @Override
-    protected boolean isSwitchPrefEnabled() {
+    public boolean isChecked() {
         return mAmbientConfig.pulseOnDoubleTapEnabled(mUserId);
     }
 
     @Override
+    //TODO (b/69808376): Remove result payload
     public ResultPayload getResultPayload() {
-        final Intent intent = DatabaseIndexingUtils.buildSubsettingIntent(mContext,
+        final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(mContext,
                 DoubleTapScreenSettings.class.getName(), mDoubleTapScreenPrefKey,
                 mContext.getString(R.string.display_settings));
 
         return new InlineSwitchPayload(SECURE_KEY, ResultPayload.SettingsSource.SECURE,
                 ON /* onValue */, intent, isAvailable(), ON /* defaultValue */);
+    }
+
+    @Override
+    protected boolean canHandleClicks() {
+        return !mAmbientConfig.alwaysOnEnabled(mUserId);
     }
 }

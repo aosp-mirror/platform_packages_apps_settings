@@ -16,6 +16,8 @@
 
 package com.android.settings.applications.defaultapps;
 
+import static com.android.settingslib.TwoTargetPreference.ICON_SIZE_MEDIUM;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -26,11 +28,13 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.settings.R;
-import com.android.settings.applications.PackageManagerWrapper;
-import com.android.settings.applications.PackageManagerWrapperImpl;
+import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.GearPreference;
+import com.android.settingslib.TwoTargetPreference;
+import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 public abstract class DefaultAppPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {
@@ -44,7 +48,7 @@ public abstract class DefaultAppPreferenceController extends AbstractPreferenceC
 
     public DefaultAppPreferenceController(Context context) {
         super(context);
-        mPackageManager = new PackageManagerWrapperImpl(context.getPackageManager());
+        mPackageManager = new PackageManagerWrapper(context.getPackageManager());
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mUserId = UserHandle.myUserId();
     }
@@ -53,9 +57,15 @@ public abstract class DefaultAppPreferenceController extends AbstractPreferenceC
     public void updateState(Preference preference) {
         final DefaultAppInfo app = getDefaultAppInfo();
         CharSequence defaultAppLabel = getDefaultAppLabel();
+        if (preference instanceof TwoTargetPreference) {
+            // For use small icon because we are displaying an app preference.
+            // We only need to do this for TwoTargetPreference because the other prefs are
+            // already using AppPreference so their icon is already normalized.
+            ((TwoTargetPreference) preference).setIconSize(ICON_SIZE_MEDIUM);
+        }
         if (!TextUtils.isEmpty(defaultAppLabel)) {
             preference.setSummary(defaultAppLabel);
-            preference.setIcon(getDefaultAppIcon());
+            Utils.setSafeIcon(preference, getDefaultAppIcon());
         } else {
             Log.d(TAG, "No default app");
             preference.setSummary(R.string.app_list_preference_none);

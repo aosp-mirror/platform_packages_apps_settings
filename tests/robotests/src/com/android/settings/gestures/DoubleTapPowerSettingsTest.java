@@ -16,23 +16,20 @@
 
 package com.android.settings.gestures;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.RuntimeEnvironment;
 
 import java.util.List;
 
-import static com.google.common.truth.Truth.assertThat;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DoubleTapPowerSettingsTest {
 
     private DoubleTapPowerSettings mSettings;
@@ -45,9 +42,8 @@ public class DoubleTapPowerSettingsTest {
     @Test
     public void testSearchIndexProvider_shouldIndexResource() {
         final List<SearchIndexableResource> indexRes =
-                DoubleTapPowerSettings.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(
-                        ShadowApplication.getInstance().getApplicationContext(),
-                        true /* enabled */);
+            DoubleTapPowerSettings.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(
+                RuntimeEnvironment.application, true /* enabled */);
 
         assertThat(indexRes).isNotNull();
         assertThat(indexRes.get(0).xmlResId).isEqualTo(mSettings.getPreferenceScreenResId());

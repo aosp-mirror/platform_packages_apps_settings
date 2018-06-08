@@ -16,7 +16,6 @@
 package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
@@ -30,8 +29,6 @@ import android.content.DialogInterface;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-import com.android.settings.testutils.shadow.ShadowEventLogWriter;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -39,16 +36,13 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowAlertDialog;
 import org.robolectric.shadows.ShadowDialog;
 import org.robolectric.util.FragmentTestUtil;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows = {
-        ShadowEventLogWriter.class
-})
 public class ButtonActionDialogFragmentTest {
+
     private static final int FORCE_STOP_ID = ButtonActionDialogFragment.DialogType.FORCE_STOP;
     private static final int DISABLE_ID = ButtonActionDialogFragment.DialogType.DISABLE;
     private static final int SPECIAL_DISABLE_ID =
@@ -82,6 +76,7 @@ public class ButtonActionDialogFragmentTest {
         FragmentTestUtil.startFragment(fragment);
 
         final AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
+        assertThat(dialog).isNotNull();
         ShadowAlertDialog shadowDialog = shadowOf(dialog);
 
         assertThat(shadowDialog.getMessage()).isEqualTo(
@@ -101,6 +96,7 @@ public class ButtonActionDialogFragmentTest {
         FragmentTestUtil.startFragment(fragment);
 
         final AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
+        assertThat(dialog).isNotNull();
         ShadowAlertDialog shadowDialog = shadowOf(dialog);
 
         assertThat(shadowDialog.getMessage()).isEqualTo(
@@ -113,12 +109,13 @@ public class ButtonActionDialogFragmentTest {
 
     @Test
     public void testOnCreateDialog_specialDisableDialog() {
-        ButtonActionDialogFragment fragment = ButtonActionDialogFragment.newInstance(
-                SPECIAL_DISABLE_ID);
+        ButtonActionDialogFragment fragment =
+            ButtonActionDialogFragment.newInstance(SPECIAL_DISABLE_ID);
 
         FragmentTestUtil.startFragment(fragment);
 
         final AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
+        assertThat(dialog).isNotNull();
         ShadowAlertDialog shadowDialog = shadowOf(dialog);
 
         assertThat(shadowDialog.getMessage()).isEqualTo(

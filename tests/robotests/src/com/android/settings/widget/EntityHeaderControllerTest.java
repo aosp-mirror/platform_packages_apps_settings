@@ -16,12 +16,22 @@
 
 package com.android.settings.widget;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.ColorDrawable;
@@ -30,14 +40,14 @@ import android.support.v7.preference.Preference;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.applications.LayoutPreference;
-import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.ShadowIconDrawableFactory;
+import com.android.settingslib.applications.ApplicationsState;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -48,17 +58,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class EntityHeaderControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -72,12 +72,10 @@ public class EntityHeaderControllerTest {
     private LayoutInflater mLayoutInflater;
     private PackageInfo mInfo;
     private EntityHeaderController mController;
-    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mFeatureFactory = FakeFeatureFactory.setupForTest(mContext);
         mShadowContext = RuntimeEnvironment.application;
         when(mActivity.getApplicationContext()).thenReturn(mShadowContext);
         when(mContext.getApplicationContext()).thenReturn(mContext);
@@ -115,79 +113,79 @@ public class EntityHeaderControllerTest {
     @Test
     public void bindViews_shouldBindAllData() {
         final String testString = "test";
-        final View header = mLayoutInflater.inflate(
-                R.layout.settings_entity_header, null /* root */);
+        final View header =
+                mLayoutInflater.inflate(R.layout.settings_entity_header, null /* root */);
         final TextView label = header.findViewById(R.id.entity_header_title);
-        final TextView version = header.findViewById(R.id.entity_header_summary);
+        final TextView summary = header.findViewById(R.id.entity_header_summary);
+        final TextView secondSummary = header.findViewById(R.id.entity_header_second_summary);
 
         mController = EntityHeaderController.newInstance(mActivity, mFragment, header);
         mController.setLabel(testString);
         mController.setSummary(testString);
+        mController.setSecondSummary(testString);
         mController.setIcon(mShadowContext.getDrawable(R.drawable.ic_add));
         mController.done(mActivity);
 
+        assertThat(label).isNotNull();
         assertThat(label.getText()).isEqualTo(testString);
-        assertThat(version.getText()).isEqualTo(testString);
+        assertThat(summary).isNotNull();
+        assertThat(summary.getText()).isEqualTo(testString);
+        assertThat(secondSummary).isNotNull();
+        assertThat(secondSummary.getText()).isEqualTo(testString);
     }
 
     @Test
-    public void bindButton_hasAppPref_shouldShowButton() {
+    public void bindButton_hasEditRuleNameClickListener_shouldShowButton() {
         final ResolveInfo info = new ResolveInfo();
         info.activityInfo = new ActivityInfo();
         info.activityInfo.packageName = "123";
         info.activityInfo.name = "321";
-        final View appLinks = mLayoutInflater
+        final View view = mLayoutInflater
                 .inflate(R.layout.settings_entity_header, null /* root */);
         when(mActivity.getApplicationContext()).thenReturn(mContext);
-        when(mContext.getPackageManager().resolveActivity(any(Intent.class), anyInt()))
-                .thenReturn(info);
 
-        mController = EntityHeaderController.newInstance(mActivity, mFragment, appLinks);
+        mController = EntityHeaderController.newInstance(mActivity, mFragment, view);
+        mController.setEditZenRuleNameListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // do nothing
+            }
+        });
         mController.setButtonActions(
-                EntityHeaderController.ActionType.ACTION_APP_PREFERENCE,
+                EntityHeaderController.ActionType.ACTION_DND_RULE_PREFERENCE,
                 EntityHeaderController.ActionType.ACTION_NONE);
         mController.done(mActivity);
 
-        final ImageButton button1 = appLinks.findViewById(android.R.id.button1);
+        final ImageButton button1 = view.findViewById(android.R.id.button1);
+        assertThat(button1).isNotNull();
         assertThat(button1.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(button1.getDrawable()).isNotNull();
-        assertThat(appLinks.findViewById(android.R.id.button2).getVisibility())
-                .isEqualTo(View.GONE);
-        try {
-            appLinks.findViewById(android.R.id.button1).performClick();
-        } catch (Exception e) {
-            // Ignore exception because the launching intent is fake.
-        }
-        verify(mFeatureFactory.metricsFeatureProvider).actionWithSource(mContext,
-                MetricsProto.MetricsEvent.VIEW_UNKNOWN,
-                MetricsProto.MetricsEvent.ACTION_OPEN_APP_SETTING);
-        verify(mFragment).startActivity(any(Intent.class));
+        assertThat(view.findViewById(android.R.id.button2).getVisibility()).isEqualTo(View.GONE);
     }
 
     @Test
-    public void bindButton_noAppPref_shouldNotShowButton() {
-        final View appLinks = mLayoutInflater
-                .inflate(R.layout.settings_entity_header, null /* root */);
-        when(mContext.getPackageManager().resolveActivity(any(Intent.class), anyInt()))
-                .thenReturn(null);
+    public void bindButton_noEditRuleNameClickListener_shouldNotShowButton() {
+        final ResolveInfo info = new ResolveInfo();
+        info.activityInfo = new ActivityInfo();
+        info.activityInfo.packageName = "123";
+        info.activityInfo.name = "321";
+        final View view = mLayoutInflater.inflate(R.layout.settings_entity_header, null /* root */);
+        when(mActivity.getApplicationContext()).thenReturn(mContext);
 
-        mController = EntityHeaderController.newInstance(mActivity, mFragment, appLinks);
+        mController = EntityHeaderController.newInstance(mActivity, mFragment, view);
         mController.setButtonActions(
-                EntityHeaderController.ActionType.ACTION_APP_PREFERENCE,
+                EntityHeaderController.ActionType.ACTION_DND_RULE_PREFERENCE,
                 EntityHeaderController.ActionType.ACTION_NONE);
         mController.done(mActivity);
 
-        final ImageButton button1 = appLinks.findViewById(android.R.id.button1);
-        assertThat(button1.getVisibility()).isEqualTo(View.GONE);
-        assertThat(button1.getDrawable()).isNull();
-        assertThat(appLinks.findViewById(android.R.id.button2).getVisibility())
-                .isEqualTo(View.GONE);
+        assertThat(view.findViewById(android.R.id.button1).getVisibility()).isEqualTo(View.GONE);
+        assertThat(view.findViewById(android.R.id.button2).getVisibility()).isEqualTo(View.GONE);
     }
+
 
     @Test
     public void bindButton_noAppInfo_shouldNotAttachClickListener() {
-        final View appLinks = mLayoutInflater
-                .inflate(R.layout.settings_entity_header, null /* root */);
+        final View appLinks =
+                mLayoutInflater.inflate(R.layout.settings_entity_header, null /* root */);
         final Activity activity = mock(Activity.class);
         when(mFragment.getActivity()).thenReturn(activity);
 
@@ -211,15 +209,15 @@ public class EntityHeaderControllerTest {
 
     @Test
     public void bindButton_hasAppInfo_shouldAttachClickListener() {
-        final View appLinks = mLayoutInflater
-                .inflate(R.layout.settings_entity_header, null /* root */);
+        final View appLinks =
+                mLayoutInflater.inflate(R.layout.settings_entity_header, null /* root */);
         final Activity activity = mock(Activity.class);
         when(mFragment.getActivity()).thenReturn(activity);
         when(mContext.getString(eq(R.string.application_info_label))).thenReturn("App Info");
 
         mController = EntityHeaderController.newInstance(mActivity, mFragment, appLinks);
         mController.setPackageName("123")
-                .setUid(UserHandle.USER_SYSTEM)
+                .setUid(123321)
                 .setHasAppInfoLink(true)
                 .setButtonActions(
                         EntityHeaderController.ActionType.ACTION_NOTIF_PREFERENCE,
@@ -227,14 +225,14 @@ public class EntityHeaderControllerTest {
         mController.done(mActivity);
 
         appLinks.findViewById(R.id.entity_header_content).performClick();
-        verify(activity).startActivityForResultAsUser(
-                any(Intent.class), anyInt(), any(UserHandle.class));
+        verify(activity)
+                .startActivityForResultAsUser(any(Intent.class), anyInt(), any(UserHandle.class));
     }
 
     @Test
     public void iconContentDescription_shouldWorkWithSetIcon() {
-        final View view = mLayoutInflater
-                .inflate(R.layout.settings_entity_header, null /* root */);
+        final View view =
+                mLayoutInflater.inflate(R.layout.settings_entity_header, null /* root */);
         when(mFragment.getActivity()).thenReturn(mock(Activity.class));
         mController = EntityHeaderController.newInstance(mActivity, mFragment, view);
         String description = "Fake Description";
@@ -256,6 +254,23 @@ public class EntityHeaderControllerTest {
         mController.done(mActivity);
         assertThat(view.findViewById(R.id.entity_header_icon).getContentDescription().toString())
                 .isEqualTo(description);
+    }
+
+    @Test
+    @Config(shadows = ShadowIconDrawableFactory.class)
+    public void setIcon_usingAppEntry_shouldLoadIconFromDrawableFactory() {
+        final View view = mLayoutInflater
+                .inflate(R.layout.settings_entity_header, null /* root */);
+        final ApplicationsState.AppEntry entry = mock(ApplicationsState.AppEntry.class);
+        entry.info = new ApplicationInfo();
+        mController = EntityHeaderController.newInstance(mActivity, mFragment, view);
+        mController.setIcon(entry).done(mActivity);
+        final ImageView iconView = view.findViewById(R.id.entity_header_icon);
+
+        // Icon is set
+        assertThat(iconView.getDrawable()).isNotNull();
+        // ... and entry.icon is still empty. This means the icon didn't come from cache.
+        assertThat(entry.icon).isNull();
     }
 
     @Test

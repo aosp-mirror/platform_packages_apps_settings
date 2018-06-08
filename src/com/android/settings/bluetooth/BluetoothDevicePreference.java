@@ -33,10 +33,10 @@ import android.widget.ImageView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.GearPreference;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
@@ -52,19 +52,20 @@ public final class BluetoothDevicePreference extends GearPreference implements
 
     private final CachedBluetoothDevice mCachedDevice;
     private final UserManager mUserManager;
+    private final boolean mShowDevicesWithoutNames;
 
     private AlertDialog mDisconnectDialog;
     private String contentDescription = null;
-    private DeviceListPreferenceFragment mDeviceListPreferenceFragment;
+    private boolean mHideSecondTarget = false;
     /* Talk-back descriptions for various BT icons */
     Resources mResources;
 
     public BluetoothDevicePreference(Context context, CachedBluetoothDevice cachedDevice,
-            DeviceListPreferenceFragment deviceListPreferenceFragment) {
+            boolean showDeviceWithoutNames) {
         super(context, null);
         mResources = getContext().getResources();
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        mDeviceListPreferenceFragment = deviceListPreferenceFragment;
+        mShowDevicesWithoutNames = showDeviceWithoutNames;
 
         if (sDimAlpha == Integer.MIN_VALUE) {
             TypedValue outValue = new TypedValue();
@@ -86,7 +87,8 @@ public final class BluetoothDevicePreference extends GearPreference implements
     protected boolean shouldHideSecondTarget() {
         return mCachedDevice == null
                 || mCachedDevice.getBondState() != BluetoothDevice.BOND_BONDED
-                || mUserManager.hasUserRestriction(DISALLOW_CONFIG_BLUETOOTH);
+                || mUserManager.hasUserRestriction(DISALLOW_CONFIG_BLUETOOTH)
+                || mHideSecondTarget;
     }
 
     @Override
@@ -112,6 +114,10 @@ public final class BluetoothDevicePreference extends GearPreference implements
         return mCachedDevice;
     }
 
+    public void hideSecondTarget(boolean hideSecondTarget) {
+        mHideSecondTarget = hideSecondTarget;
+    }
+
     public void onDeviceAttributesChanged() {
         /*
          * The preference framework takes care of making sure the value has
@@ -122,8 +128,8 @@ public final class BluetoothDevicePreference extends GearPreference implements
         // Null check is done at the framework
         setSummary(mCachedDevice.getConnectionSummary());
 
-        final Pair<Drawable, String> pair = Utils.getBtClassDrawableWithDescription(getContext(),
-                mCachedDevice);
+        final Pair<Drawable, String> pair = com.android.settingslib.bluetooth.Utils
+                .getBtClassDrawableWithDescription(getContext(), mCachedDevice);
         if (pair.first != null) {
             setIcon(pair.first);
             contentDescription = pair.second;
@@ -134,8 +140,7 @@ public final class BluetoothDevicePreference extends GearPreference implements
 
         // Device is only visible in the UI if it has a valid name besides MAC address or when user
         // allows showing devices without user-friendly name in developer settings
-        setVisible(mDeviceListPreferenceFragment.shouldShowDevicesWithoutNames()
-                || mCachedDevice.hasHumanReadableName());
+        setVisible(mShowDevicesWithoutNames || mCachedDevice.hasHumanReadableName());
 
         // This could affect ordering, so notify that
         notifyHierarchyChanged();

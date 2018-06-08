@@ -16,35 +16,45 @@
   -->
 
 <PreferenceScreen
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/ambient_display_screen_title">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="ambient_display_preference_screen"
+    settings:keywords="@string/keywords_ambient_display_screen"
+    android:title="@string/ambient_display_screen_title">
 
     <PreferenceCategory
-            android:title="@string/ambient_display_category_triggers">
+        android:key="ambient_display_category_when_to_show"
+        android:title="@string/ambient_display_category_triggers">
 
         <SwitchPreference
             android:key="ambient_display_always_on"
             android:title="@string/doze_always_on_title"
-            android:summary="@string/doze_always_on_summary" />
+            android:summary="@string/doze_always_on_summary"
+            settings:controller="com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController" />
 
         <Preference
             android:key="ambient_display_double_tap"
             android:title="@string/ambient_display_title"
-            android:fragment="com.android.settings.gestures.DoubleTapScreenSettings" />
+            android:fragment="com.android.settings.gestures.DoubleTapScreenSettings"
+            settings:controller="com.android.settings.gestures.DoubleTapScreenPreferenceController" />
 
         <Preference
             android:key="ambient_display_pick_up"
             android:title="@string/ambient_display_pickup_title"
-            android:fragment="com.android.settings.gestures.PickupGestureSettings" />
+            android:fragment="com.android.settings.gestures.PickupGestureSettings"
+            settings:controller="com.android.settings.gestures.PickupGesturePreferenceController" />
 
     </PreferenceCategory>
 
-    <PreferenceCategory>
+    <PreferenceCategory
+        android:key="ambient_display_category_notification"
+        android:layout="@layout/preference_category_no_label">
 
         <SwitchPreference
             android:key="ambient_display_notification"
             android:title="@string/doze_title"
-            android:summary="@string/doze_summary" />
+            android:summary="@string/doze_summary"
+            settings:controller="com.android.settings.display.AmbientDisplayNotificationsPreferenceController" />
 
     </PreferenceCategory>
 

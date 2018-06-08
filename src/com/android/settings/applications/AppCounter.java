@@ -22,6 +22,8 @@ import android.os.AsyncTask;
 import android.os.UserHandle;
 import android.os.UserManager;
 
+import com.android.settingslib.wrapper.PackageManagerWrapper;
+
 import java.util.List;
 
 public abstract class AppCounter extends AsyncTask<Void, Void, Integer> {

@@ -51,7 +51,7 @@ public class SpellCheckerPreferenceController extends AbstractPreferenceControll
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return mContext.getResources().getBoolean(R.bool.config_show_spellcheckers_settings);
     }
 
     @Override

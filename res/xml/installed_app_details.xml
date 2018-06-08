@@ -17,7 +17,9 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:key="installed_app_detail_settings_screen"
+    app:initialExpandedChildrenCount="6">
 
     <com.android.settings.applications.LayoutPreference
         android:key="header_view"
@@ -31,11 +33,9 @@
         android:selectable="false"
         android:order="-9999"/>
 
-    <com.android.settings.applications.LayoutPreference
-      android:key="action_buttons"
-      android:layout="@layout/app_action_buttons"
-      android:selectable="false"
-      android:order="-9998"/>
+    <com.android.settings.widget.ActionButtonPreference
+        android:key="action_buttons"
+        android:order="-9998" />
 
     <Preference
         android:key="notification_settings"

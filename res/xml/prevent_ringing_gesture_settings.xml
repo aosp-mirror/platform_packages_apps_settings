@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2018 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:key="gesture_prevent_ringing_screen"
+    android:title="@string/gesture_prevent_ringing_screen_title">
+
+    <com.android.settings.widget.VideoPreference
+        android:key="gesture_prevent_ringing_video"
+        app:animation="@raw/gesture_prevent_ringing"
+        app:preview="@drawable/gesture_prevent_ringing" />
+
+    <ListPreference
+        android:key="gesture_prevent_ringing"
+        android:title="@string/gesture_prevent_ringing_title"
+        android:entries="@array/gesture_prevent_ringing_entries"
+        android:entryValues="@array/gesture_prevent_ringing_values"
+        app:controller="com.android.settings.gestures.PreventRingingPreferenceController"
+        app:keywords="@string/keywords_gesture"
+        app:allowDividerAbove="true" />
+
+</PreferenceScreen>

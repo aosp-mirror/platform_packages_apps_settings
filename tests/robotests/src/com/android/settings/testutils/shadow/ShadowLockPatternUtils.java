@@ -27,6 +27,8 @@ import org.robolectric.annotation.Implements;
 public class ShadowLockPatternUtils {
 
     private int mPasswordQuality = 1;
+    private static boolean sDeviceEncryptionEnabled;
+
     @Implementation
     public boolean isSecure(int id) {
         return true;
@@ -40,6 +42,15 @@ public class ShadowLockPatternUtils {
     @Implementation
     public int getKeyguardStoredPasswordQuality(int userHandle) {
         return mPasswordQuality;
+    }
+
+    @Implementation
+    public static boolean isDeviceEncryptionEnabled() {
+        return sDeviceEncryptionEnabled;
+    }
+
+    public static void setDeviceEncryptionEnabled(boolean deviceEncryptionEnabled) {
+        sDeviceEncryptionEnabled = deviceEncryptionEnabled;
     }
 
     // Non-Android accessor.

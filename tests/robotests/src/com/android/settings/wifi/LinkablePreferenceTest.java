@@ -28,17 +28,14 @@ import android.widget.TextView;
 import com.android.settings.LinkifyUtils;
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class LinkablePreferenceTest {
 
     private static final String TITLE = "Title";
@@ -54,14 +51,13 @@ public class LinkablePreferenceTest {
         MockitoAnnotations.initMocks(this);
 
         mPreference = new LinkablePreference(mContext);
-        final CharSequence linkableDescription =
-                mContext.getResources().getText(R.string.wifi_scan_notify_text);
+        final CharSequence linkableDescription = mContext.getText(R.string.wifi_scan_notify_text);
         final LinkifyUtils.OnClickListener clickListener = () -> {/* Do nothing */ };
         mPreference.setText(TITLE, linkableDescription, clickListener);
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        mView = inflater.inflate(
-                mPreference.getLayoutResource(), new LinearLayout(mContext), false);
+        mView =
+            inflater.inflate(mPreference.getLayoutResource(), new LinearLayout(mContext), false);
         mHolder = PreferenceViewHolder.createInstanceForTests(mView);
 
         mPreference.onBindViewHolder(mHolder);
@@ -70,6 +66,7 @@ public class LinkablePreferenceTest {
     @Test
     public void prefWithLinkShouldHaveAccessibilityMovementMethodSet() {
         TextView textView = mView.findViewById(android.R.id.title);
+        assertThat(textView).isNotNull();
         assertThat(textView.getMovementMethod()).isNotNull();
     }
 }

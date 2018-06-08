@@ -24,7 +24,7 @@
     android:icon="@drawable/ic_lock"
     android:layout="@layout/suw_glif_blank_template"
     settings:suwFooter="@layout/choose_lock_pattern_common_footer"
-    settings:suwHeaderText="@string/lockpassword_choose_your_pattern_header">
+    settings:suwHeaderText="@string/lockpassword_choose_your_screen_lock_header">
 
     <com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient
         android:id="@+id/topLayout"
@@ -42,7 +42,7 @@
 
             <ImageView
                 android:id="@+id/suw_layout_icon"
-                style="@style/LockPatternIconStyle"
+                style="@style/SuwGlifIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_lock" />
@@ -50,6 +50,7 @@
             <TextView
                 android:id="@+id/suw_layout_title"
                 style="@style/SuwGlifHeaderTitle"
+                android:accessibilityLiveRegion="polite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -68,13 +69,21 @@
             android:paddingLeft="0dp"
             android:paddingRight="0dp">
 
+            <TextView
+                android:id="@+id/message"
+                style="@style/SuwDescription.Glif"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="?attr/suwMarginSides"
+                android:minLines="2" />
+
             <TextView android:id="@+id/headerText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minLines="2"
                 android:gravity="center"
                 android:paddingHorizontal="?attr/suwMarginSides"
-                android:textSize="18sp" />
+                android:textSize="12sp" />
 
             <com.android.setupwizardlib.view.FillContentLayout
                 style="@style/LockPatternContainerStyle"
@@ -99,6 +108,14 @@
             android:minHeight="50dip"
             android:textSize="14sp"
             android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/screen_lock_options"
+            style="@style/SuwGlifButton.Tertiary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/setup_lock_settings_options_button_label"
+            android:visibility="gone" />
 
     </com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient>
 

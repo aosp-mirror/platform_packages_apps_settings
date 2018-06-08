@@ -83,6 +83,9 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
     public void setStream(int stream) {
         mStream = stream;
         setMax(mAudioManager.getStreamMaxVolume(mStream));
+        // Use getStreamMinVolumeInt for non-public stream type
+        // eg: AudioManager.STREAM_BLUETOOTH_SCO
+        setMin(mAudioManager.getStreamMinVolumeInt(mStream));
         setProgress(mAudioManager.getStreamVolume(mStream));
     }
 
@@ -107,10 +110,6 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
         super.onBindViewHolder(view);
-        if (mStream == 0) {
-            Log.w(TAG, "No stream found, not binding volumizer");
-            return;
-        }
         mSeekBar = (SeekBar) view.findViewById(com.android.internal.R.id.seekbar);
         mIconView = (ImageView) view.findViewById(com.android.internal.R.id.icon);
         mSuppressionTextView = (TextView) view.findViewById(R.id.suppression_text);
@@ -147,20 +146,10 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
         mVolumizer.start();
         mVolumizer.setSeekBar(mSeekBar);
         updateIconView();
-        mCallback.onStreamValueChanged(mStream, mSeekBar.getProgress());
         updateSuppressionText();
         if (!isEnabled()) {
             mSeekBar.setEnabled(false);
             mVolumizer.stop();
-        }
-    }
-
-    // during initialization, this preference is the SeekBar listener
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromTouch) {
-        super.onProgressChanged(seekBar, progress, fromTouch);
-        if (mCallback != null) {
-            mCallback.onStreamValueChanged(mStream, progress);
         }
     }
 
@@ -205,8 +194,7 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
         if (mSuppressionTextView != null && mSeekBar != null) {
             mSuppressionTextView.setText(mSuppressionText);
             final boolean showSuppression = !TextUtils.isEmpty(mSuppressionText);
-            mSuppressionTextView.setVisibility(showSuppression ? View.VISIBLE : View.INVISIBLE);
-            mSeekBar.setVisibility(showSuppression ? View.INVISIBLE : View.VISIBLE);
+            mSuppressionTextView.setVisibility(showSuppression ? View.VISIBLE : View.GONE);
         }
     }
 

@@ -17,6 +17,8 @@
 package com.android.settings.notification;
 
 import android.app.Activity;
+import android.app.Application;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,11 +26,11 @@ import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
+import android.text.TextUtils;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.RingtonePreference;
-import com.android.settings.applications.NotificationApps;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.gestures.SwipeToNotificationPreferenceController;
@@ -55,6 +57,7 @@ public class ConfigureNotificationSettings extends DashboardFragment {
     static final String KEY_SWIPE_DOWN = "gesture_swipe_down_fingerprint_notifications";
 
     private static final String KEY_NOTI_DEFAULT_RINGTONE = "notification_default_ringtone";
+    private static final String KEY_ZEN_MODE = "zen_mode_notifications";
 
     private RingtonePreference mRequestPreference;
     private static final int REQUEST_CODE = 200;
@@ -76,15 +79,20 @@ public class ConfigureNotificationSettings extends DashboardFragment {
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle());
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        final Activity activity = getActivity();
+        final Application app;
+        if (activity != null) {
+            app = activity.getApplication();
+        } else {
+            app = null;
+        }
+        return buildPreferenceControllers(context, getLifecycle(), app, this);
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Lifecycle lifecycle) {
+            Lifecycle lifecycle, Application app, Fragment host) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        final BadgingNotificationPreferenceController badgeController =
-                new BadgingNotificationPreferenceController(context);
         final PulseNotificationPreferenceController pulseController =
                 new PulseNotificationPreferenceController(context);
         final LockScreenNotificationPreferenceController lockScreenNotificationController =
@@ -96,9 +104,8 @@ public class ConfigureNotificationSettings extends DashboardFragment {
             lifecycle.addObserver(pulseController);
             lifecycle.addObserver(lockScreenNotificationController);
         }
-        controllers.add(new SwipeToNotificationPreferenceController(context, lifecycle,
-                KEY_SWIPE_DOWN));
-        controllers.add(badgeController);
+        controllers.add(new RecentNotifyingAppsPreferenceController(
+                context, new NotificationBackend(), app, host));
         controllers.add(pulseController);
         controllers.add(lockScreenNotificationController);
         controllers.add(new NotificationRingtonePreferenceController(context) {
@@ -108,6 +115,7 @@ public class ConfigureNotificationSettings extends DashboardFragment {
             }
 
         });
+        controllers.add(new ZenModePreferenceController(context, lifecycle, KEY_ZEN_MODE));
         return controllers;
     }
 
@@ -142,14 +150,53 @@ public class ConfigureNotificationSettings extends DashboardFragment {
         }
     }
 
-    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
-        = new SummaryLoader.SummaryProviderFactory() {
-            @Override
-            public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
-                    SummaryLoader summaryLoader) {
-                return new NotificationApps.SummaryProvider(activity, summaryLoader);
+    /**
+     * For summary
+     */
+    static class SummaryProvider implements SummaryLoader.SummaryProvider {
+
+        private final Context mContext;
+        private final SummaryLoader mSummaryLoader;
+        private NotificationBackend mBackend;
+
+        public SummaryProvider(Context context, SummaryLoader summaryLoader) {
+            mContext = context;
+            mSummaryLoader = summaryLoader;
+            mBackend = new NotificationBackend();
+        }
+
+        @VisibleForTesting
+        protected void setBackend(NotificationBackend backend) {
+            mBackend = backend;
+        }
+
+        @Override
+        public void setListening(boolean listening) {
+            if (!listening) {
+                return;
             }
-    };
+            int blockedAppCount = mBackend.getBlockedAppCount();
+            if (blockedAppCount == 0) {
+                mSummaryLoader.setSummary(this,
+                        mContext.getText(R.string.app_notification_listing_summary_zero));
+            } else {
+                mSummaryLoader.setSummary(this,
+                        mContext.getResources().getQuantityString(
+                                R.plurals.app_notification_listing_summary_others,
+                                blockedAppCount, blockedAppCount));
+            }
+        }
+    }
+
+    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY =
+            new SummaryLoader.SummaryProviderFactory() {
+                @Override
+                public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
+                        SummaryLoader summaryLoader) {
+                    return new ConfigureNotificationSettings.SummaryProvider(
+                            activity, summaryLoader);
+                }
+            };
 
     /**
      * For Search.
@@ -165,9 +212,9 @@ public class ConfigureNotificationSettings extends DashboardFragment {
                 }
 
                 @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(
+                public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
-                    return buildPreferenceControllers(context, null);
+                    return buildPreferenceControllers(context, null, null, null);
                 }
 
                 @Override
@@ -177,6 +224,7 @@ public class ConfigureNotificationSettings extends DashboardFragment {
                     keys.add(KEY_LOCKSCREEN);
                     keys.add(KEY_LOCKSCREEN_WORK_PROFILE);
                     keys.add(KEY_LOCKSCREEN_WORK_PROFILE_HEADER);
+                    keys.add(KEY_ZEN_MODE);
                     return keys;
                 }
             };

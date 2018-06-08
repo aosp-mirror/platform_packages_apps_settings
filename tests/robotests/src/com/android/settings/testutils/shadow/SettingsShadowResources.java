@@ -1,10 +1,9 @@
 package com.android.settings.testutils.shadow;
 
 import static android.util.TypedValue.TYPE_REFERENCE;
-
 import static org.robolectric.RuntimeEnvironment.application;
 import static org.robolectric.Shadows.shadowOf;
-import static org.robolectric.internal.Shadow.directlyOn;
+import static org.robolectric.shadow.api.Shadow.directlyOn;
 
 import android.annotation.DimenRes;
 import android.content.res.ColorStateList;
@@ -25,13 +24,13 @@ import android.util.TypedValue;
 import com.android.settings.R;
 
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.android.XmlResourceParserImpl;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.RealObject;
-import org.robolectric.internal.Shadow;
 import org.robolectric.res.StyleData;
 import org.robolectric.res.StyleResolver;
-import org.robolectric.res.builder.XmlResourceParserImpl;
+import org.robolectric.res.ThemeStyleSet;
 import org.robolectric.shadows.ShadowAssetManager;
 import org.robolectric.shadows.ShadowResources;
 import org.robolectric.util.ReflectionHelpers;
@@ -45,7 +44,7 @@ import java.util.Map;
  * Shadow Resources and Theme classes to handle resource references that Robolectric shadows cannot
  * handle because they are too new or private.
  */
-@Implements(Resources.class)
+@Implements(value = Resources.class, inheritImplementationMethods = true)
 public class SettingsShadowResources extends ShadowResources {
 
     @RealObject
@@ -54,7 +53,9 @@ public class SettingsShadowResources extends ShadowResources {
     private static SparseArray<Object> sResourceOverrides = new SparseArray<>();
 
     public static void overrideResource(int id, Object value) {
-        sResourceOverrides.put(id, value);
+        synchronized (sResourceOverrides) {
+            sResourceOverrides.put(id, value);
+        }
     }
 
     public static void overrideResource(String name, Object value) {
@@ -67,7 +68,9 @@ public class SettingsShadowResources extends ShadowResources {
     }
 
     public static void reset() {
-        sResourceOverrides.clear();
+        synchronized (sResourceOverrides) {
+            sResourceOverrides.clear();
+        }
     }
 
     @Implementation
@@ -97,6 +100,13 @@ public class SettingsShadowResources extends ShadowResources {
         return directlyOn(realResources, Resources.class).getColorStateList(id, theme);
     }
 
+    /**
+     * Deprecated because SDK 24+ uses
+     * {@link SettingsShadowResourcesImpl#loadDrawable(Resources, TypedValue, int, int, Theme)}
+     *
+     * TODO: Delete when all tests have been migrated to sdk 26
+     */
+    @Deprecated
     @Implementation
     public Drawable loadDrawable(TypedValue value, int id, Theme theme)
             throws NotFoundException {
@@ -111,8 +121,6 @@ public class SettingsShadowResources extends ShadowResources {
             id = R.drawable.ic_settings_wireless;
         } else if (id == R.drawable.app_filter_spinner_background) {
             id = R.drawable.ic_expand_more_inverse;
-        } else if (id == R.drawable.selectable_card_grey) {
-            id = R.drawable.ic_expand_more_inverse;
         }
         return super.loadDrawable(value, id, theme);
     }
@@ -124,95 +132,126 @@ public class SettingsShadowResources extends ShadowResources {
                 || id == com.android.settings.R.array.batterymeter_plus_points) {
             return new int[2];
         }
+
+        final Object override;
+        synchronized (sResourceOverrides) {
+            override = sResourceOverrides.get(id);
+        }
+        if (override instanceof int[]) {
+            return (int[]) override;
+        }
         return directlyOn(realResources, Resources.class).getIntArray(id);
     }
 
     @Implementation
     public String getString(int id) {
-        final Object override = sResourceOverrides.get(id);
+        final Object override;
+        synchronized (sResourceOverrides) {
+            override = sResourceOverrides.get(id);
+        }
         if (override instanceof String) {
             return (String) override;
         }
-        return Shadow.directlyOn(
+        return directlyOn(
                 realResources, Resources.class, "getString", ClassParameter.from(int.class, id));
     }
 
     @Implementation
     public int getInteger(int id) {
-        final Object override = sResourceOverrides.get(id);
+        final Object override;
+        synchronized (sResourceOverrides) {
+            override = sResourceOverrides.get(id);
+        }
         if (override instanceof Integer) {
             return (Integer) override;
         }
-        return Shadow.directlyOn(
+        return directlyOn(
                 realResources, Resources.class, "getInteger", ClassParameter.from(int.class, id));
     }
 
     @Implementation
     public boolean getBoolean(int id) {
-        final Object override = sResourceOverrides.get(id);
+        final Object override;
+        synchronized (sResourceOverrides) {
+            override = sResourceOverrides.get(id);
+        }
         if (override instanceof Boolean) {
             return (boolean) override;
         }
-        return Shadow.directlyOn(realResources, Resources.class, "getBoolean",
+        return directlyOn(realResources, Resources.class, "getBoolean",
                 ClassParameter.from(int.class, id));
     }
 
-    @Implements(Theme.class)
+    @Implements(value = Theme.class, inheritImplementationMethods = true)
     public static class SettingsShadowTheme extends ShadowTheme {
 
         @RealObject
         Theme realTheme;
+
+        private ShadowAssetManager mAssetManager = shadowOf(
+                RuntimeEnvironment.application.getAssets());
 
         @Implementation
         public TypedArray obtainStyledAttributes(
                 AttributeSet set, int[] attrs, int defStyleAttr, int defStyleRes) {
             // Replace all private string references with a placeholder.
             if (set != null) {
-                for (int i = 0; i < set.getAttributeCount(); ++i) {
-                    String attributeValue = set.getAttributeValue(i);
-                    Node node = ReflectionHelpers.callInstanceMethod(
-                            XmlResourceParserImpl.class, set, "getAttributeAt",
-                            ReflectionHelpers.ClassParameter.from(int.class, i));
-                    if (attributeValue.contains("attr/fingerprint_layout_theme")) {
-                        // Workaround for https://github.com/robolectric/robolectric/issues/2641
-                        node.setNodeValue("@style/FingerprintLayoutTheme");
-                    } else if (attributeValue.startsWith("@*android:string")) {
-                        node.setNodeValue("PLACEHOLDER");
+                synchronized (set) {
+                    for (int i = 0; i < set.getAttributeCount(); ++i) {
+                        final String attributeValue = set.getAttributeValue(i);
+                        final Node node = ReflectionHelpers.callInstanceMethod(
+                                XmlResourceParserImpl.class, set, "getAttributeAt",
+                                ReflectionHelpers.ClassParameter.from(int.class, i));
+                        if (attributeValue.contains("attr/fingerprint_layout_theme")) {
+                            // Workaround for https://github.com/robolectric/robolectric/issues/2641
+                            node.setNodeValue("@style/FingerprintLayoutTheme");
+                        } else if (attributeValue.startsWith("@*android:string")) {
+                            node.setNodeValue("PLACEHOLDER");
+                        }
                     }
                 }
             }
 
             // Track down all styles and remove all inheritance from private styles.
-            ShadowAssetManager assetManager = shadowOf(RuntimeEnvironment.application.getAssets());
-            // The Object's below are actually ShadowAssetManager.OverlayedStyle. We can't use it
-            // here because it's package private.
-            Map<Long, List<Object>> appliedStylesList =
-                    ReflectionHelpers.getField(assetManager, "appliedStyles");
-            for (Long idx : appliedStylesList.keySet()) {
-                List<Object> appliedStyles = appliedStylesList.get(idx);
-                for (Object appliedStyle : appliedStyles) {
-                    StyleResolver styleResolver = ReflectionHelpers.getField(appliedStyle, "style");
-                    List<StyleData> styleDatas =
-                            ReflectionHelpers.getField(styleResolver, "styles");
-                    for (StyleData styleData : styleDatas) {
-                        if (styleData.getParent() != null &&
-                                styleData.getParent().startsWith("@*android:style")) {
-                            ReflectionHelpers.setField(StyleData.class, styleData, "parent", null);
+            final Map<Long, Object /* NativeTheme */> appliedStylesList =
+                    ReflectionHelpers.getField(mAssetManager, "nativeThemes");
+            synchronized (appliedStylesList) {
+                for (Long idx : appliedStylesList.keySet()) {
+                    final ThemeStyleSet appliedStyles = ReflectionHelpers.getField(
+                            appliedStylesList.get(idx), "themeStyleSet");
+                    // The Object's below are actually ShadowAssetManager.OverlayedStyle.
+                    // We can't use
+
+                    // it here because it's private.
+                    final List<Object /* OverlayedStyle */> overlayedStyles =
+                            ReflectionHelpers.getField(appliedStyles, "styles");
+                    for (Object appliedStyle : overlayedStyles) {
+                        final StyleResolver styleResolver = ReflectionHelpers.getField(appliedStyle,
+                                "style");
+                        final List<StyleData> styleDatas =
+                                ReflectionHelpers.getField(styleResolver, "styles");
+                        for (StyleData styleData : styleDatas) {
+                            if (styleData.getParent() != null &&
+                                    styleData.getParent().startsWith("@*android:style")) {
+                                ReflectionHelpers.setField(StyleData.class, styleData, "parent",
+                                        null);
+                            }
                         }
                     }
-                }
 
+                }
             }
             return super.obtainStyledAttributes(set, attrs, defStyleAttr, defStyleRes);
         }
 
         @Implementation
-        public boolean resolveAttribute(int resid, TypedValue outValue, boolean resolveRefs) {
+        public synchronized boolean resolveAttribute(int resid, TypedValue outValue,
+                boolean resolveRefs) {
             // The real Resources instance in Robolectric tests somehow fails to find the
             // preferenceTheme attribute in the layout. Let's do it ourselves.
             if (getResources().getResourceName(resid)
                     .equals("com.android.settings:attr/preferenceTheme")) {
-                int preferenceThemeResId =
+                final int preferenceThemeResId =
                         getResources().getIdentifier(
                                 "PreferenceTheme", "style", "com.android.settings");
                 outValue.type = TYPE_REFERENCE;
@@ -222,6 +261,10 @@ public class SettingsShadowResources extends ShadowResources {
             }
             return directlyOn(realTheme, Theme.class)
                     .resolveAttribute(resid, outValue, resolveRefs);
+        }
+
+        private Resources getResources() {
+            return ReflectionHelpers.callInstanceMethod(ShadowTheme.class, this, "getResources");
         }
     }
 }

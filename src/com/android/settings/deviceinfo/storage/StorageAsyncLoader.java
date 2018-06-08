@@ -26,14 +26,14 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.util.ArraySet;
 import android.util.Log;
 import android.util.SparseArray;
 
-import com.android.settings.applications.PackageManagerWrapper;
-import com.android.settings.applications.UserManagerWrapper;
-import com.android.settings.utils.AsyncLoader;
 import com.android.settingslib.applications.StorageStatsSource;
+import com.android.settingslib.utils.AsyncLoader;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -46,7 +46,7 @@ import java.util.List;
  */
 public class StorageAsyncLoader
         extends AsyncLoader<SparseArray<StorageAsyncLoader.AppsStorageResult>> {
-    private UserManagerWrapper mUserManager;
+    private UserManager mUserManager;
     private static final String TAG = "StorageAsyncLoader";
 
     private String mUuid;
@@ -54,7 +54,7 @@ public class StorageAsyncLoader
     private PackageManagerWrapper mPackageManager;
     private ArraySet<String> mSeenPackages;
 
-    public StorageAsyncLoader(Context context, UserManagerWrapper userManager,
+    public StorageAsyncLoader(Context context, UserManager userManager,
             String uuid, StorageStatsSource source, PackageManagerWrapper pm) {
         super(context);
         mUserManager = userManager;

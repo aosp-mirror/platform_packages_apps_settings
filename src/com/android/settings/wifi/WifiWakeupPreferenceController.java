@@ -16,12 +16,15 @@
 
 package com.android.settings.wifi;
 
-import android.content.ContentResolver;
+import static com.android.settings.wifi.ConfigureWifiSettings.WIFI_WAKEUP_REQUEST_CODE;
+
+import android.app.Fragment;
+import android.app.Service;
 import android.content.Context;
-import android.database.ContentObserver;
-import android.net.Uri;
-import android.os.Handler;
+import android.content.Intent;
+import android.location.LocationManager;
 import android.provider.Settings;
+import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
@@ -29,54 +32,42 @@ import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.network.NetworkScoreManagerWrapper;
+import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.utils.AnnotationSpan;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnPause;
-import com.android.settingslib.core.lifecycle.events.OnResume;
 
 /**
  * {@link PreferenceControllerMixin} that controls whether the Wi-Fi Wakeup feature should be
  * enabled.
  */
-public class WifiWakeupPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause {
+public class WifiWakeupPreferenceController extends AbstractPreferenceController {
 
+    private static final String TAG = "WifiWakeupPrefController";
     private static final String KEY_ENABLE_WIFI_WAKEUP = "enable_wifi_wakeup";
-    private SettingObserver mSettingObserver;
 
-    public WifiWakeupPreferenceController(Context context, Lifecycle lifecycle) {
+    private final Fragment mFragment;
+
+    @VisibleForTesting
+    SwitchPreference mPreference;
+    @VisibleForTesting
+    LocationManager mLocationManager;
+
+    public WifiWakeupPreferenceController(Context context, DashboardFragment fragment) {
         super(context);
-        lifecycle.addObserver(this);
+        mFragment = fragment;
+        mLocationManager = (LocationManager) context.getSystemService(Service.LOCATION_SERVICE);
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mSettingObserver = new SettingObserver(screen.findPreference(KEY_ENABLE_WIFI_WAKEUP));
-    }
-
-    @Override
-    public void onResume() {
-        if (mSettingObserver != null) {
-            mSettingObserver.register(mContext.getContentResolver(), true /* register */);
-        }
-    }
-
-    @Override
-    public void onPause() {
-        if (mSettingObserver != null) {
-            mSettingObserver.register(mContext.getContentResolver(), false /* register */);
-        }
+        mPreference = (SwitchPreference) screen.findPreference(KEY_ENABLE_WIFI_WAKEUP);
+        updateState(mPreference);
     }
 
     @Override
     public boolean isAvailable() {
-        final int defaultValue = mContext.getResources().getInteger(
-                com.android.internal.R.integer.config_wifi_wakeup_available);
-        return Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.WIFI_WAKEUP_AVAILABLE, defaultValue) == 1;
+      return true;
     }
 
     @Override
@@ -87,9 +78,19 @@ public class WifiWakeupPreferenceController extends AbstractPreferenceController
         if (!(preference instanceof SwitchPreference)) {
             return false;
         }
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.WIFI_WAKEUP_ENABLED,
-                ((SwitchPreference) preference).isChecked() ? 1 : 0);
+
+        if (!mLocationManager.isLocationEnabled()) {
+            final Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            mFragment.startActivity(intent);
+        } else if (getWifiWakeupEnabled()) {
+            setWifiWakeupEnabled(false);
+        } else if (!getWifiScanningEnabled()) {
+            showScanningDialog();
+        } else {
+            setWifiWakeupEnabled(true);
+        }
+
+        updateState(mPreference);
         return true;
     }
 
@@ -105,50 +106,51 @@ public class WifiWakeupPreferenceController extends AbstractPreferenceController
         }
         final SwitchPreference enableWifiWakeup = (SwitchPreference) preference;
 
-        enableWifiWakeup.setChecked(Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.WIFI_WAKEUP_ENABLED, 0) == 1);
-
-        boolean wifiScanningEnabled = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1;
-        boolean networkRecommendationsEnabled = Settings.Global.getInt(
-                mContext.getContentResolver(),
-                Settings.Global.NETWORK_RECOMMENDATIONS_ENABLED, 0) == 1;
-        enableWifiWakeup.setEnabled(networkRecommendationsEnabled && wifiScanningEnabled);
-
-        if (!networkRecommendationsEnabled) {
-            enableWifiWakeup.setSummary(R.string.wifi_wakeup_summary_scoring_disabled);
-        } else if (!wifiScanningEnabled) {
-            enableWifiWakeup.setSummary(R.string.wifi_wakeup_summary_scanning_disabled);
+        enableWifiWakeup.setChecked(getWifiWakeupEnabled()
+                        && getWifiScanningEnabled()
+                        && mLocationManager.isLocationEnabled());
+        if (!mLocationManager.isLocationEnabled()) {
+            preference.setSummary(getNoLocationSummary());
         } else {
-            enableWifiWakeup.setSummary(R.string.wifi_wakeup_summary);
+            preference.setSummary(R.string.wifi_wakeup_summary);
         }
     }
 
-    class SettingObserver extends ContentObserver {
-        private final Uri NETWORK_RECOMMENDATIONS_ENABLED_URI =
-                Settings.Global.getUriFor(Settings.Global.NETWORK_RECOMMENDATIONS_ENABLED);
+    @VisibleForTesting CharSequence getNoLocationSummary() {
+        AnnotationSpan.LinkInfo linkInfo = new AnnotationSpan.LinkInfo("link", null);
+        CharSequence locationText = mContext.getText(R.string.wifi_wakeup_summary_no_location);
+        return AnnotationSpan.linkify(locationText, linkInfo);
+    }
 
-        private final Preference mPreference;
-
-        public SettingObserver(Preference preference) {
-            super(new Handler());
-            mPreference = preference;
+    public void onActivityResult(int requestCode, int resultCode) {
+        if (requestCode != WIFI_WAKEUP_REQUEST_CODE) {
+            return;
         }
-
-        public void register(ContentResolver cr, boolean register) {
-            if (register) {
-                cr.registerContentObserver(NETWORK_RECOMMENDATIONS_ENABLED_URI, false, this);
-            } else {
-                cr.unregisterContentObserver(this);
-            }
+        if (mLocationManager.isLocationEnabled()) {
+            setWifiWakeupEnabled(true);
         }
+        updateState(mPreference);
+    }
 
-        @Override
-        public void onChange(boolean selfChange, Uri uri) {
-            super.onChange(selfChange, uri);
-            if (NETWORK_RECOMMENDATIONS_ENABLED_URI.equals(uri)) {
-                updateState(mPreference);
-            }
-        }
+    private boolean getWifiScanningEnabled() {
+        return Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1;
+    }
+
+    private void showScanningDialog() {
+        final WifiScanningRequiredFragment dialogFragment =
+                WifiScanningRequiredFragment.newInstance();
+        dialogFragment.setTargetFragment(mFragment, WIFI_WAKEUP_REQUEST_CODE /* requestCode */);
+        dialogFragment.show(mFragment.getFragmentManager(), TAG);
+    }
+
+    private boolean getWifiWakeupEnabled() {
+        return Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.WIFI_WAKEUP_ENABLED, 0) == 1;
+    }
+
+    private void setWifiWakeupEnabled(boolean enabled) {
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.WIFI_WAKEUP_ENABLED,
+                enabled ? 1 : 0);
     }
 }

@@ -18,81 +18,76 @@ package com.android.settings.accessibility;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
-import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settings.search.actionbar.SearchMenuController;
+import com.android.settings.support.actionbar.HelpResourceProvider;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
-public final class MagnificationPreferenceFragment extends SettingsPreferenceFragment implements
-        Indexable {
+public final class MagnificationPreferenceFragment extends DashboardFragment {
+    @VisibleForTesting
+    static final int ON = 1;
+    @VisibleForTesting
+    static final int OFF = 0;
+
+    private static final String TAG = "MagnificationPreferenceFragment";
 
     // Settings App preference keys
     private static final String PREFERENCE_TITLE_KEY = "magnification_preference_screen_title";
-    private static final String MAGNIFICATION_GESTURES_PREFERENCE_SCREEN_KEY =
-            "screen_magnification_gestures_preference_screen";
-    private static final String MAGNIFICATION_NAVBAR_PREFERENCE_SCREEN_KEY =
-            "screen_magnification_navbar_preference_screen";
 
     // Pseudo ComponentName used to represent navbar magnification in Settings.Secure.
     private static final String MAGNIFICATION_COMPONENT_ID =
             "com.android.server.accessibility.MagnificationController";
 
-    private Preference mMagnificationGesturesPreference;
-    private Preference mMagnificationNavbarPreference;
-
     private boolean mLaunchedFromSuw = false;
-
-    @Override
-    public void onCreatePreferences(Bundle bundle, String s) {
-        addPreferencesFromResource(R.xml.accessibility_magnification_settings);
-        mMagnificationGesturesPreference = findPreference(
-                MAGNIFICATION_GESTURES_PREFERENCE_SCREEN_KEY);
-        mMagnificationNavbarPreference = findPreference(MAGNIFICATION_NAVBAR_PREFERENCE_SCREEN_KEY);
-    }
-
-    @Override
-    protected int getHelpResource() {
-        return R.string.help_url_magnification;
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        final Bundle args = getArguments();
-        if ((args != null) && args.containsKey(AccessibilitySettings.EXTRA_LAUNCHED_FROM_SUW)) {
-            mLaunchedFromSuw = args.getBoolean(AccessibilitySettings.EXTRA_LAUNCHED_FROM_SUW);
-        }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        getActivity().setTitle(R.string.accessibility_screen_magnification_title);
-        updateFeatureSummary(Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED,
-                mMagnificationGesturesPreference);
-        updateFeatureSummary(Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED,
-                mMagnificationNavbarPreference);
-    }
 
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.ACCESSIBILITY_SCREEN_MAGNIFICATION_SETTINGS;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
+    }
+
+    @Override
+    public int getHelpResource() {
+        return R.string.help_url_magnification;
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.accessibility_magnification_settings;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        final Bundle args = getArguments();
+        if ((args != null) && args.containsKey(AccessibilitySettings.EXTRA_LAUNCHED_FROM_SUW)) {
+            mLaunchedFromSuw = args.getBoolean(AccessibilitySettings.EXTRA_LAUNCHED_FROM_SUW);
+        }
+        use(MagnificationGesturesPreferenceController.class)
+                .setIsFromSUW(mLaunchedFromSuw);
+        use(MagnificationNavbarPreferenceController.class)
+                .setIsFromSUW(mLaunchedFromSuw);
     }
 
     @Override
@@ -101,54 +96,12 @@ public final class MagnificationPreferenceFragment extends SettingsPreferenceFra
             // If invoked from SUW, redirect to fragment instrumented for Vision Settings metrics
             preference.setFragment(
                     ToggleScreenMagnificationPreferenceFragmentForSetupWizard.class.getName());
-        }
-        if (mMagnificationGesturesPreference == preference) {
-            handleMagnificationGesturesPreferenceScreenClick();
-            super.onPreferenceTreeClick(mMagnificationGesturesPreference);
-            return true;
-        } else if (mMagnificationNavbarPreference == preference) {
-            handleMagnificationNavbarPreferenceScreenClick();
-            super.onPreferenceTreeClick(mMagnificationNavbarPreference);
-            return true;
+            Bundle args = preference.getExtras();
+            // Copy from AccessibilitySettingsForSetupWizardActivity, hide search and help menu
+            args.putInt(HelpResourceProvider.HELP_URI_RESOURCE_KEY, 0);
+            args.putBoolean(SearchMenuController.NEED_SEARCH_ICON_IN_ACTION_BAR, false);
         }
         return super.onPreferenceTreeClick(preference);
-    }
-
-    private void updateFeatureSummary(String prefKey, Preference pref) {
-        if (!mLaunchedFromSuw) {
-            final boolean enabled = Settings.Secure.getInt(getContentResolver(), prefKey, 0) == 1;
-            pref.setSummary(enabled ? R.string.accessibility_feature_state_on
-                    : R.string.accessibility_feature_state_off);
-        } else {
-            if (Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED.equals(prefKey)) {
-                pref.setSummary(R.string.accessibility_screen_magnification_short_summary);
-            } else if (Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED.equals(
-                    prefKey)) {
-                pref.setSummary(R.string.accessibility_screen_magnification_navbar_short_summary);
-            }
-        }
-    }
-
-    private void handleMagnificationGesturesPreferenceScreenClick() {
-        Bundle extras = mMagnificationGesturesPreference.getExtras();
-        populateMagnificationGesturesPreferenceExtras(extras, getContext());
-        extras.putBoolean(AccessibilitySettings.EXTRA_LAUNCHED_FROM_SUW, mLaunchedFromSuw);
-    }
-
-    private void handleMagnificationNavbarPreferenceScreenClick() {
-        Bundle extras = mMagnificationNavbarPreference.getExtras();
-        extras.putString(AccessibilitySettings.EXTRA_PREFERENCE_KEY,
-                Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED);
-        extras.putString(AccessibilitySettings.EXTRA_TITLE, getString(
-                R.string.accessibility_screen_magnification_navbar_title));
-        extras.putCharSequence(AccessibilitySettings.EXTRA_SUMMARY,
-                getActivity().getResources().getText(
-                        R.string.accessibility_screen_magnification_navbar_summary));
-        extras.putBoolean(AccessibilitySettings.EXTRA_CHECKED,
-                Settings.Secure.getInt(getContentResolver(),
-                        Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED, 0)
-                        == 1);
-        extras.putBoolean(AccessibilitySettings.EXTRA_LAUNCHED_FROM_SUW, mLaunchedFromSuw);
     }
 
     static CharSequence getConfigurationWarningStringForSecureSettingsKey(String key,
@@ -185,18 +138,13 @@ public final class MagnificationPreferenceFragment extends SettingsPreferenceFra
         return null;
     }
 
-    static void populateMagnificationGesturesPreferenceExtras(Bundle extras, Context context) {
-        extras.putString(AccessibilitySettings.EXTRA_PREFERENCE_KEY,
-                Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED);
-        extras.putString(AccessibilitySettings.EXTRA_TITLE, context.getString(
-                R.string.accessibility_screen_magnification_gestures_title));
-        extras.putCharSequence(AccessibilitySettings.EXTRA_SUMMARY, context.getResources().getText(
-                R.string.accessibility_screen_magnification_summary));
-        extras.putBoolean(AccessibilitySettings.EXTRA_CHECKED,
-                Settings.Secure.getInt(context.getContentResolver(),
-                        Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, 0) == 1);
-        extras.putInt(AccessibilitySettings.EXTRA_VIDEO_RAW_RESOURCE_ID,
-                R.raw.accessibility_screen_magnification);
+    static boolean isChecked(ContentResolver contentResolver, String settingsKey) {
+        return Settings.Secure.getInt(contentResolver, settingsKey, OFF) == ON;
+    }
+
+    static boolean setChecked(ContentResolver contentResolver, String settingsKey,
+            boolean isChecked) {
+        return Settings.Secure.putInt(contentResolver, settingsKey, isChecked ? ON : OFF);
     }
 
     /**
@@ -212,13 +160,14 @@ public final class MagnificationPreferenceFragment extends SettingsPreferenceFra
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
                         boolean enabled) {
-                    if (isApplicable(context.getResources())) {
-                        final SearchIndexableResource sir = new SearchIndexableResource(context);
-                        sir.xmlResId = R.xml.accessibility_magnification_settings;
-                        return Arrays.asList(sir);
-                    } else {
-                        return Collections.emptyList();
-                    }
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.accessibility_magnification_settings;
+                    return Arrays.asList(sir);
+                }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return isApplicable(context.getResources());
                 }
 
                 @Override

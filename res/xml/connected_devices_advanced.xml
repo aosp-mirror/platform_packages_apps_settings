@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2017 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="connected_devices_advanced_screen"
+    android:title="@string/connected_device_connections_title">
+
+    <Preference
+        android:fragment="com.android.settings.connecteddevice.BluetoothDashboardFragment"
+        android:key="bluetooth_settings"
+        android:title="@string/bluetooth_settings_title"
+        android:icon="@drawable/ic_settings_bluetooth"
+        android:order="-9"/>
+
+    <SwitchPreference
+        android:key="toggle_nfc"
+        android:title="@string/nfc_quick_toggle_title"
+        android:icon="@drawable/ic_nfc"
+        android:summary="@string/nfc_quick_toggle_summary"
+        settings:controller="com.android.settings.nfc.NfcPreferenceController"
+        android:order="-7"/>
+
+    <com.android.settingslib.RestrictedPreference
+        android:fragment="com.android.settings.nfc.AndroidBeam"
+        android:key="android_beam_settings"
+        android:title="@string/android_beam_settings_title"
+        settings:controller="com.android.settings.nfc.AndroidBeamPreferenceController"
+        android:icon="@drawable/ic_android"
+        android:order="-6"/>
+
+    <SwitchPreference
+        android:key="bluetooth_on_while_driving"
+        android:title="@string/bluetooth_on_while_driving_pref"
+        android:icon="@drawable/ic_settings_bluetooth"
+        android:summary="@string/bluetooth_on_while_driving_summary"
+        settings:controller="com.android.settings.connecteddevice.BluetoothOnWhileDrivingPreferenceController"
+        android:order="-4"/>
+
+    <com.android.settingslib.RestrictedPreference
+        android:key="connected_device_printing"
+        android:title="@string/print_settings"
+        android:summary="@string/summary_placeholder"
+        android:icon="@drawable/ic_settings_print"
+        android:fragment="com.android.settings.print.PrintSettingsFragment"
+        android:order="-3"/>
+
+    <Preference
+        android:key="bt_received_files"
+        android:icon="@drawable/ic_folder_vd_theme_24"
+        android:title="@string/bluetooth_show_received_files"/>
+
+    <PreferenceCategory
+        android:key="dashboard_tile_placeholder"
+        android:order="-8"/>
+
+</PreferenceScreen>

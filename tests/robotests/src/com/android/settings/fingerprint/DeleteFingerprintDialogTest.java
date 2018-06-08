@@ -16,16 +16,17 @@
 
 package com.android.settings.fingerprint;
 
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 import android.app.Dialog;
 import android.hardware.fingerprint.Fingerprint;
 
-import com.android.settings.TestConfig;
 import com.android.settings.fingerprint.FingerprintSettings.FingerprintSettingsFragment;
-import com.android.settings.fingerprint.FingerprintSettings.FingerprintSettingsFragment
-        .DeleteFingerprintDialog;
+import com.android.settings.fingerprint.FingerprintSettings.FingerprintSettingsFragment.DeleteFingerprintDialog;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.ShadowEventLogWriter;
+import com.android.settings.testutils.shadow.ShadowFragment;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,27 +36,21 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.FragmentTestUtil;
 
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = {
-                ShadowEventLogWriter.class
-        })
+@Config(shadows = ShadowFragment.class)
 public class DeleteFingerprintDialogTest {
 
     @Mock
-    private FingerprintSettingsFragment mTarget;
-    @Mock
     private Fingerprint mFingerprint;
-    private DeleteFingerprintDialog mFragment;
+    @Mock
+    private FingerprintSettingsFragment mTarget;
 
+    private DeleteFingerprintDialog mFragment;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mFragment = DeleteFingerprintDialog.newInstance(mFingerprint, mTarget);
+        mFragment = spy(DeleteFingerprintDialog.newInstance(mFingerprint, mTarget));
     }
 
     @Test

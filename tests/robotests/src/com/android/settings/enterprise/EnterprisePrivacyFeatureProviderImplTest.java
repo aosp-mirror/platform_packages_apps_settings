@@ -16,12 +16,19 @@
 
 package com.android.settings.enterprise;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.when;
+
+import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
+import android.net.ConnectivityManager;
 import android.net.ProxyInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -30,34 +37,22 @@ import android.text.SpannableStringBuilder;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-import com.android.settings.applications.PackageManagerWrapper;
-import com.android.settings.vpn2.ConnectivityManagerWrapper;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.when;
-
-/**
- * Tests for {@link EnterprisePrivacyFeatureProviderImpl}.
- */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public final class EnterprisePrivacyFeatureProviderImplTest {
+public class EnterprisePrivacyFeatureProviderImplTest {
 
     private final ComponentName OWNER = new ComponentName("dummy", "component");
     private final ComponentName ADMIN_1 = new ComponentName("dummy", "admin1");
@@ -68,17 +63,16 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
     private final int MANAGED_PROFILE_USER_ID = MY_USER_ID + 1;
     private final String VPN_PACKAGE_ID = "com.example.vpn";
     private final String IME_PACKAGE_ID = "com.example.ime";
-    private final String OTHER_PACKAGE_ID = "com.example.other";
     private final String IME_PACKAGE_LABEL = "Test IME";
 
-    private List<UserInfo> mProfiles = new ArrayList();
+    private List<UserInfo> mProfiles = new ArrayList<>();
 
     private @Mock Context mContext;
-    private @Mock DevicePolicyManagerWrapper mDevicePolicyManager;
+    private @Mock DevicePolicyManager mDevicePolicyManager;
     private @Mock PackageManagerWrapper mPackageManagerWrapper;
     private @Mock PackageManager mPackageManager;
     private @Mock UserManager mUserManager;
-    private @Mock ConnectivityManagerWrapper mConnectivityManger;
+    private @Mock ConnectivityManager mConnectivityManger;
     private Resources mResources;
 
     private EnterprisePrivacyFeatureProvider mProvider;
@@ -91,7 +85,7 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
         resetAndInitializePackageManagerWrapper();
         when(mUserManager.getProfiles(MY_USER_ID)).thenReturn(mProfiles);
         mProfiles.add(new UserInfo(MY_USER_ID, "", "", 0 /* flags */));
-        mResources = ShadowApplication.getInstance().getApplicationContext().getResources();
+        mResources = RuntimeEnvironment.application.getResources();
 
         mProvider = new EnterprisePrivacyFeatureProviderImpl(mContext, mDevicePolicyManager,
                 mPackageManagerWrapper, mUserManager, mConnectivityManger, mResources);
@@ -132,7 +126,7 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
         SpannableStringBuilder disclosure = new SpannableStringBuilder();
         disclosure.append(mResources.getString(R.string.do_disclosure_generic));
         disclosure.append(mResources.getString(R.string.do_disclosure_learn_more_separator));
-        disclosure.append(mResources.getString(R.string.do_disclosure_learn_more),
+        disclosure.append(mResources.getString(R.string.learn_more),
                 new EnterprisePrivacyFeatureProviderImpl.EnterprisePrivacySpan(mContext), 0);
         when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(OWNER);
         when(mDevicePolicyManager.getDeviceOwnerOrganizationName()).thenReturn(null);
@@ -142,7 +136,7 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
         disclosure.append(mResources.getString(R.string.do_disclosure_with_name,
                 OWNER_ORGANIZATION));
         disclosure.append(mResources.getString(R.string.do_disclosure_learn_more_separator));
-        disclosure.append(mResources.getString(R.string.do_disclosure_learn_more),
+        disclosure.append(mResources.getString(R.string.learn_more),
                 new EnterprisePrivacyFeatureProviderImpl.EnterprisePrivacySpan(mContext), 0);
         when(mDevicePolicyManager.getDeviceOwnerOrganizationName()).thenReturn(OWNER_ORGANIZATION);
         assertThat(mProvider.getDeviceOwnerDisclosure()).isEqualTo(disclosure);
@@ -224,8 +218,8 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
         when(mConnectivityManger.getGlobalProxy()).thenReturn(null);
         assertThat(mProvider.isGlobalHttpProxySet()).isFalse();
 
-        when(mConnectivityManger.getGlobalProxy()).thenReturn(
-                ProxyInfo.buildDirectProxy("localhost", 123));
+        when(mConnectivityManger.getGlobalProxy())
+            .thenReturn(ProxyInfo.buildDirectProxy("localhost", 123));
         assertThat(mProvider.isGlobalHttpProxySet()).isTrue();
     }
 
@@ -291,11 +285,9 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
     public void testGetNumberOfOwnerInstalledCaCertsForCurrent() {
         final UserHandle userHandle = new UserHandle(UserHandle.USER_SYSTEM);
         final UserHandle managedProfileUserHandle = new UserHandle(MANAGED_PROFILE_USER_ID);
-        final UserInfo managedProfile =
-                new UserInfo(MANAGED_PROFILE_USER_ID, "", "", UserInfo.FLAG_MANAGED_PROFILE);
 
         when(mDevicePolicyManager.getOwnerInstalledCaCerts(managedProfileUserHandle))
-                .thenReturn(Arrays.asList(new String[] {"ca1", "ca2"}));
+                .thenReturn(Arrays.asList("ca1", "ca2"));
 
         when(mDevicePolicyManager.getOwnerInstalledCaCerts(userHandle))
                 .thenReturn(null);
@@ -306,7 +298,7 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
         assertThat(mProvider.getNumberOfOwnerInstalledCaCertsForCurrentUser())
                 .isEqualTo(0);
         when(mDevicePolicyManager.getOwnerInstalledCaCerts(userHandle))
-                .thenReturn(Arrays.asList(new String[] {"ca1", "ca2"}));
+                .thenReturn(Arrays.asList("ca1", "ca2"));
         assertThat(mProvider.getNumberOfOwnerInstalledCaCertsForCurrentUser())
                 .isEqualTo(2);
     }
@@ -320,7 +312,7 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
 
         // Without a profile
         when(mDevicePolicyManager.getOwnerInstalledCaCerts(managedProfileUserHandle))
-                .thenReturn(Arrays.asList(new String[] {"ca1", "ca2"}));
+                .thenReturn(Arrays.asList("ca1", "ca2"));
         assertThat(mProvider.getNumberOfOwnerInstalledCaCertsForManagedProfile())
                 .isEqualTo(0);
 
@@ -335,7 +327,7 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
         assertThat(mProvider.getNumberOfOwnerInstalledCaCertsForManagedProfile())
                 .isEqualTo(0);
         when(mDevicePolicyManager.getOwnerInstalledCaCerts(managedProfileUserHandle))
-                .thenReturn(Arrays.asList(new String[] {"ca1", "ca2"}));
+                .thenReturn(Arrays.asList("ca1", "ca2"));
         assertThat(mProvider.getNumberOfOwnerInstalledCaCertsForManagedProfile())
                 .isEqualTo(2);
     }
@@ -343,9 +335,9 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
     @Test
     public void testGetNumberOfActiveDeviceAdminsForCurrentUserAndManagedProfile() {
         when(mDevicePolicyManager.getActiveAdminsAsUser(MY_USER_ID))
-                .thenReturn(Arrays.asList(new ComponentName[] {ADMIN_1, ADMIN_2}));
+                .thenReturn(Arrays.asList(ADMIN_1, ADMIN_2));
         when(mDevicePolicyManager.getActiveAdminsAsUser(MANAGED_PROFILE_USER_ID))
-                .thenReturn(Arrays.asList(new ComponentName[] {ADMIN_1}));
+                .thenReturn(Arrays.asList(ADMIN_1));
 
         assertThat(mProvider.getNumberOfActiveDeviceAdminsForCurrentUserAndManagedProfile())
                 .isEqualTo(2);
@@ -353,6 +345,15 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
         mProfiles.add(new UserInfo(MANAGED_PROFILE_USER_ID, "", "", UserInfo.FLAG_MANAGED_PROFILE));
         assertThat(mProvider.getNumberOfActiveDeviceAdminsForCurrentUserAndManagedProfile())
                 .isEqualTo(3);
+    }
+
+    @Test
+    public void testAreBackupsMandatory() {
+        assertThat(mProvider.areBackupsMandatory()).isFalse();
+        ComponentName transportComponent = new ComponentName("test", "test");
+        when(mDevicePolicyManager.getMandatoryBackupTransport())
+                .thenReturn(transportComponent);
+        assertThat(mProvider.areBackupsMandatory()).isTrue();
     }
 
     private void resetAndInitializePackageManagerWrapper() {

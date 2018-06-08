@@ -14,11 +14,12 @@
 
 package com.android.settings.datausage;
 
+import static com.android.settingslib.RestrictedLockUtils.checkIfMeteredDataRestricted;
+
 import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.view.Menu;
@@ -31,9 +32,12 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.AppStateBaseBridge;
-import com.android.settings.applications.InstalledAppDetails;
+import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.datausage.AppStateDataUsageBridge.DataUsageState;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.widget.AppSwitchPreference;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedPreferenceHelper;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
@@ -59,12 +63,11 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setAnimationAllowed(true);
-        setPreferenceScreen(getPreferenceManager().createPreferenceScreen(getContext()));
         mApplicationsState = ApplicationsState.getInstance(
                 (Application) getContext().getApplicationContext());
         mDataSaverBackend = new DataSaverBackend(getContext());
         mDataUsageBridge = new AppStateDataUsageBridge(mApplicationsState, this, mDataSaverBackend);
-        mSession = mApplicationsState.newSession(this);
+        mSession = mApplicationsState.newSession(this, getLifecycle());
         mShowSystem = icicle != null && icicle.getBoolean(EXTRA_SHOW_SYSTEM);
         mFilter = mShowSystem ? ApplicationsState.FILTER_ALL_ENABLED
                 : ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER;
@@ -109,7 +112,6 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
-        mSession.resume();
         mDataUsageBridge.resume();
     }
 
@@ -117,13 +119,11 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
     public void onPause() {
         super.onPause();
         mDataUsageBridge.pause();
-        mSession.pause();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mSession.release();
         mDataUsageBridge.release();
     }
 
@@ -134,7 +134,7 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_url_unrestricted_data_access;
     }
 
@@ -173,6 +173,8 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
                 preference.setOnPreferenceChangeListener(this);
                 getPreferenceScreen().addPreference(preference);
             } else {
+                preference.setDisabledByAdmin(checkIfMeteredDataRestricted(getContext(),
+                        entry.info.packageName, UserHandle.getUserId(entry.info.uid)));
                 preference.reuse();
             }
             preference.setOrder(i);
@@ -212,6 +214,11 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
     }
 
     @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.unrestricted_data_access_settings;
+    }
+
+    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference instanceof AccessPreference) {
             AccessPreference accessPreference = (AccessPreference) preference;
@@ -238,15 +245,22 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
         return app != null && UserHandle.isApp(app.info.uid);
     }
 
-    private class AccessPreference extends SwitchPreference implements DataSaverBackend.Listener {
+    @VisibleForTesting
+    class AccessPreference extends AppSwitchPreference
+            implements DataSaverBackend.Listener {
         private final AppEntry mEntry;
         private final DataUsageState mState;
+        private final RestrictedPreferenceHelper mHelper;
 
         public AccessPreference(final Context context, AppEntry entry) {
             super(context);
+            setWidgetLayoutResource(R.layout.restricted_switch_widget);
+            mHelper = new RestrictedPreferenceHelper(context, this, null);
             mEntry = entry;
             mState = (DataUsageState) mEntry.extraInfo;
             mEntry.ensureLabel(getContext());
+            setDisabledByAdmin(checkIfMeteredDataRestricted(context, entry.info.packageName,
+                    UserHandle.getUserId(entry.info.uid)));
             setState();
             if (mEntry.icon != null) {
                 setIcon(mEntry.icon);
@@ -269,13 +283,21 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
         protected void onClick() {
             if (mState.isDataSaverBlacklisted) {
                 // app is blacklisted, launch App Data Usage screen
-                InstalledAppDetails.startAppInfoFragment(AppDataUsage.class,
-                        getContext().getString(R.string.app_data_usage),
-                        UnrestrictedDataAccess.this,
-                        mEntry);
+                AppInfoDashboardFragment.startAppInfoFragment(AppDataUsage.class,
+                    R.string.app_data_usage,
+                    null /* arguments */,
+                    UnrestrictedDataAccess.this,
+                    mEntry);
             } else {
                 // app is not blacklisted, let superclass handle toggle switch
                 super.onClick();
+            }
+        }
+
+        @Override
+        public void performClick() {
+            if (!mHelper.performClick()) {
+                super.performClick();
             }
         }
 
@@ -284,7 +306,9 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
             setTitle(mEntry.label);
             if (mState != null) {
                 setChecked(mState.isDataSaverWhitelisted);
-                if (mState.isDataSaverBlacklisted) {
+                if (isDisabledByAdmin()) {
+                    setSummary(R.string.disabled_by_admin);
+                } else if (mState.isDataSaverBlacklisted) {
                     setSummary(R.string.restrict_background_blacklisted);
                 } else {
                     setSummary("");
@@ -311,10 +335,21 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
                     }
                 });
             }
-            holder.findViewById(android.R.id.widget_frame)
-                    .setVisibility(mState != null && mState.isDataSaverBlacklisted
-                            ? View.INVISIBLE : View.VISIBLE);
+            final boolean disabledByAdmin = isDisabledByAdmin();
+            final View widgetFrame = holder.findViewById(android.R.id.widget_frame);
+            if (disabledByAdmin) {
+                widgetFrame.setVisibility(View.VISIBLE);
+            } else {
+                widgetFrame.setVisibility(mState != null && mState.isDataSaverBlacklisted
+                        ? View.INVISIBLE : View.VISIBLE);
+            }
             super.onBindViewHolder(holder);
+
+            mHelper.onBindViewHolder(holder);
+            holder.findViewById(R.id.restricted_icon).setVisibility(
+                    disabledByAdmin ? View.VISIBLE : View.GONE);
+            holder.findViewById(android.R.id.switch_widget).setVisibility(
+                    disabledByAdmin ? View.GONE : View.VISIBLE);
         }
 
         @Override
@@ -335,6 +370,19 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
                 mState.isDataSaverBlacklisted = isBlacklisted;
                 reuse();
             }
+        }
+
+        public void setDisabledByAdmin(EnforcedAdmin admin) {
+            mHelper.setDisabledByAdmin(admin);
+        }
+
+        public boolean isDisabledByAdmin() {
+            return mHelper.isDisabledByAdmin();
+        }
+
+        @VisibleForTesting
+        public AppEntry getEntryForTest() {
+            return mEntry;
         }
     }
 

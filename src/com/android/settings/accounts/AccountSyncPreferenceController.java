@@ -30,8 +30,8 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.accounts.AuthenticatorHelper;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -43,7 +43,6 @@ public class AccountSyncPreferenceController extends AbstractPreferenceControlle
 
     private Account mAccount;
     private UserHandle mUserHandle;
-    private AuthenticatorHelper mAuthenticatorHelper;
     private Preference mPreference;
 
     public AccountSyncPreferenceController(Context context) {
@@ -63,8 +62,12 @@ public class AccountSyncPreferenceController extends AbstractPreferenceControlle
         final Bundle args = new Bundle();
         args.putParcelable(AccountSyncSettings.ACCOUNT_KEY, mAccount);
         args.putParcelable(EXTRA_USER, mUserHandle);
-        Utils.startWithFragment(mContext, AccountSyncSettings.class.getName(), args, null, 0,
-                R.string.account_sync_title, null, MetricsProto.MetricsEvent.ACCOUNT);
+        new SubSettingLauncher(mContext)
+                .setDestination(AccountSyncSettings.class.getName())
+                .setArguments(args)
+                .setSourceMetricsCategory( MetricsProto.MetricsEvent.ACCOUNT)
+                .setTitle( R.string.account_sync_title)
+                .launch();
 
         return true;
     }
@@ -93,7 +96,6 @@ public class AccountSyncPreferenceController extends AbstractPreferenceControlle
     public void init(Account account, UserHandle userHandle) {
         mAccount = account;
         mUserHandle = userHandle;
-        mAuthenticatorHelper = new AuthenticatorHelper(mContext, mUserHandle, this);
     }
 
     @VisibleForTesting

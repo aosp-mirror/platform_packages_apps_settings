@@ -17,94 +17,81 @@
 package com.android.settings.search;
 
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_NON_INDEXABLE_KEYS_KEY_VALUE;
-import static com.android.settings.search.SearchIndexableResources.NO_DATA_RES_ID;
-
 import static com.google.common.truth.Truth.assertThat;
+import static junit.framework.Assert.fail;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
-import android.annotation.DrawableRes;
-import android.annotation.XmlRes;
 import android.database.Cursor;
-import android.provider.SearchIndexableResource;
-
 import android.text.TextUtils;
-import com.android.settings.R;
+
+import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.FakeIndexProvider;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.wifi.WifiSettings;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
-
-import java.util.HashMap;
-import java.util.Map;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SearchIndexableResourcesTest {
 
-    @XmlRes
-    private static final int XML_RES_ID = R.xml.physical_keyboard_settings;
-    @DrawableRes
-    private static final int ICON_RES_ID = R.drawable.ic_settings_language;
-
-    Map<String, SearchIndexableResource> sResMapCopy;
+    private SearchFeatureProviderImpl mSearchProvider;
+    private FakeFeatureFactory mFakeFeatureFactory;
 
     @Before
     public void setUp() {
-        sResMapCopy = new HashMap<>(SearchIndexableResources.sResMap);
+        mSearchProvider = new SearchFeatureProviderImpl();
+        mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
+        mFakeFeatureFactory.searchFeatureProvider = mSearchProvider;
     }
 
     @After
     public void cleanUp() {
-        SearchIndexableResources.sResMap.clear();
-        for (String key : sResMapCopy.keySet()) {
-            SearchIndexableResources.sResMap.put(key, sResMapCopy.get(key));
-        }
+        mFakeFeatureFactory.searchFeatureProvider = mock(SearchFeatureProvider.class);
     }
 
     @Test
     public void testAddIndex() {
         // Confirms that String.class isn't contained in SearchIndexableResources.
-        assertThat(SearchIndexableResources.getResourceByName("java.lang.String")).isNull();
-        final int beforeCount = SearchIndexableResources.values().size();
+        assertThat(mSearchProvider.getSearchIndexableResources().getProviderValues())
+                .doesNotContain(String.class);
+        final int beforeCount =
+                mSearchProvider.getSearchIndexableResources().getProviderValues().size();
 
-        SearchIndexableResources.addIndex(java.lang.String.class, XML_RES_ID, ICON_RES_ID);
-        final SearchIndexableResource index = SearchIndexableResources
-                .getResourceByName("java.lang.String");
+        ((SearchIndexableResourcesImpl) mSearchProvider.getSearchIndexableResources())
+                .addIndex(String.class);
 
-        assertThat(index).isNotNull();
-        assertThat(index.className).isEqualTo("java.lang.String");
-        assertThat(index.xmlResId).isEqualTo(XML_RES_ID);
-        assertThat(index.iconResId).isEqualTo(ICON_RES_ID);
-        final int afterCount = SearchIndexableResources.values().size();
+        assertThat(mSearchProvider.getSearchIndexableResources().getProviderValues())
+                .contains(String.class);
+        final int afterCount =
+                mSearchProvider.getSearchIndexableResources().getProviderValues().size();
         assertThat(afterCount).isEqualTo(beforeCount + 1);
     }
 
     @Test
     public void testIndexHasWifiSettings() {
-        final SearchIndexableResource index = SearchIndexableResources
-                .getResourceByName(WifiSettings.class.getName());
-
-        assertThat(index).isNotNull();
-        assertThat(index.className).isEqualTo(WifiSettings.class.getName());
-        assertThat(index.xmlResId).isEqualTo(NO_DATA_RES_ID);
-        assertThat(index.iconResId).isEqualTo(R.drawable.ic_settings_wireless);
+        assertThat(mSearchProvider.getSearchIndexableResources().getProviderValues())
+                .contains(WifiSettings.class);
     }
 
     @Test
     public void testNonIndexableKeys_GetsKeyFromProvider() {
-        SearchIndexableResources.sResMap.clear();
-        SearchIndexableResources.addIndex(FakeIndexProvider.class, 0, 0);
+        mSearchProvider.getSearchIndexableResources().getProviderValues().clear();
+        ((SearchIndexableResourcesImpl) mSearchProvider.getSearchIndexableResources())
+                .addIndex(FakeIndexProvider.class);
 
         SettingsSearchIndexablesProvider provider = spy(new SettingsSearchIndexablesProvider());
 
+        when(provider.getContext()).thenReturn(RuntimeEnvironment.application);
+
         Cursor cursor = provider.queryNonIndexableKeys(null);
         boolean hasTestKey = false;
-        while(cursor.moveToNext()) {
+        while (cursor.moveToNext()) {
             String key = cursor.getString(COLUMN_INDEX_NON_INDEXABLE_KEYS_KEY_VALUE);
             if (TextUtils.equals(key, FakeIndexProvider.KEY)) {
                 hasTestKey = true;
@@ -113,5 +100,14 @@ public class SearchIndexableResourcesTest {
         }
 
         assertThat(hasTestKey).isTrue();
+    }
+
+    @Test
+    public void testAllClassNamesHaveProviders() {
+        for (Class clazz : mSearchProvider.getSearchIndexableResources().getProviderValues()) {
+            if (DatabaseIndexingUtils.getSearchIndexProvider(clazz) == null) {
+                fail(clazz.getName() + "is not an index provider");
+            }
+        }
     }
 }

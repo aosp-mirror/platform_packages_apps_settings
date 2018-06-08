@@ -295,7 +295,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_url_icc_lock;
     }
 
@@ -487,9 +487,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
 
         if (attemptsRemaining == 0) {
             displayMessage = mRes.getString(R.string.wrong_pin_code_pukked);
-        } else if (attemptsRemaining == 1) {
-            displayMessage = mRes.getString(R.string.wrong_pin_code_one, attemptsRemaining);
-        } else if (attemptsRemaining > 1) {
+        } else if (attemptsRemaining > 0) {
             displayMessage = mRes
                     .getQuantityString(R.plurals.wrong_pin_code, attemptsRemaining,
                             attemptsRemaining);

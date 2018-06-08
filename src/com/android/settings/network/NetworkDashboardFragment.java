@@ -25,19 +25,18 @@ import android.app.Fragment;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 import android.support.annotation.VisibleForTesting;
+import android.text.BidiFormatter;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.network.MobilePlanPreferenceController.MobilePlanPreferenceHost;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.wifi.WifiMasterSwitchPreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
@@ -48,8 +47,6 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         MobilePlanPreferenceHost {
 
     private static final String TAG = "NetworkDashboardFrag";
-
-    private NetworkResetActionMenuController mNetworkResetController;
 
     @Override
     public int getMetricsCategory() {
@@ -69,22 +66,17 @@ public class NetworkDashboardFragment extends DashboardFragment implements
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mNetworkResetController = new NetworkResetActionMenuController(context);
+
+        use(AirplaneModePreferenceController.class).setFragment(this);
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_url_network_dashboard;
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        mNetworkResetController.buildMenuItem(menu);
-    }
-
-    @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return buildPreferenceControllers(context, getLifecycle(), mMetricsFeatureProvider, this
                 /* fragment */,
                 this /* mobilePlanHost */);
@@ -93,8 +85,6 @@ public class NetworkDashboardFragment extends DashboardFragment implements
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle, MetricsFeatureProvider metricsFeatureProvider, Fragment fragment,
             MobilePlanPreferenceHost mobilePlanHost) {
-        final AirplaneModePreferenceController airplaneModePreferenceController =
-                new AirplaneModePreferenceController(context, fragment);
         final MobilePlanPreferenceController mobilePlanPreferenceController =
                 new MobilePlanPreferenceController(context, mobilePlanHost);
         final WifiMasterSwitchPreferenceController wifiPreferenceController =
@@ -103,23 +93,25 @@ public class NetworkDashboardFragment extends DashboardFragment implements
                 new MobileNetworkPreferenceController(context);
         final VpnPreferenceController vpnPreferenceController =
                 new VpnPreferenceController(context);
+        final PrivateDnsPreferenceController privateDnsPreferenceController =
+                new PrivateDnsPreferenceController(context);
 
         if (lifecycle != null) {
-            lifecycle.addObserver(airplaneModePreferenceController);
             lifecycle.addObserver(mobilePlanPreferenceController);
             lifecycle.addObserver(wifiPreferenceController);
             lifecycle.addObserver(mobileNetworkPreferenceController);
             lifecycle.addObserver(vpnPreferenceController);
+            lifecycle.addObserver(privateDnsPreferenceController);
         }
 
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(airplaneModePreferenceController);
         controllers.add(mobileNetworkPreferenceController);
         controllers.add(new TetherPreferenceController(context, lifecycle));
         controllers.add(vpnPreferenceController);
         controllers.add(new ProxyPreferenceController(context));
         controllers.add(mobilePlanPreferenceController);
         controllers.add(wifiPreferenceController);
+        controllers.add(privateDnsPreferenceController);
         return controllers;
     }
 
@@ -134,7 +126,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         switch (dialogId) {
             case MANAGE_MOBILE_PLAN_DIALOG_ID:
                 final MobilePlanPreferenceController controller =
-                        getPreferenceController(MobilePlanPreferenceController.class);
+                        use(MobilePlanPreferenceController.class);
                 return new AlertDialog.Builder(getActivity())
                         .setMessage(controller.getMobilePlanDialogMessage())
                         .setCancelable(false)
@@ -181,7 +173,8 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         @Override
         public void setListening(boolean listening) {
             if (listening) {
-                String summary = mContext.getString(R.string.wifi_settings_title);
+                String summary = BidiFormatter.getInstance()
+                        .unicodeWrap(mContext.getString(R.string.wifi_settings_title));
                 if (mMobileNetworkPreferenceController.isAvailable()) {
                     final String mobileSettingSummary = mContext.getString(
                             R.string.network_dashboard_summary_mobile);
@@ -224,7 +217,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
                 }
 
                 @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(Context
+                public List<AbstractPreferenceController> createPreferenceControllers(Context
                         context) {
                     return buildPreferenceControllers(context, null /* lifecycle */,
                             null /* metricsFeatureProvider */, null /* fragment */,

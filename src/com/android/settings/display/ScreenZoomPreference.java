@@ -34,10 +34,6 @@ public class ScreenZoomPreference extends Preference {
                 android.support.v7.preference.R.attr.preferenceStyle,
                 android.R.attr.preferenceStyle));
 
-        if (TextUtils.isEmpty(getFragment())) {
-            setFragment("com.android.settings.display.ScreenZoomSettings");
-        }
-
         final DisplayDensityUtils density = new DisplayDensityUtils(context);
         final int defaultIndex = density.getCurrentIndex();
         if (defaultIndex < 0) {

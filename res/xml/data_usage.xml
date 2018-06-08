@@ -14,27 +14,18 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="data_usage_screen"
     android:title="@string/data_usage_summary_title">
 
-    <PreferenceCategory
-        android:title="@string/usage">
+    <com.android.settings.datausage.DataUsageSummaryPreference
+        android:key="status_header"
+        android:selectable="false" />
 
-        <com.android.settings.SummaryPreference
-            android:key="status_header"
-            android:selectable="false" />
-
-        <com.android.settings.DividerPreference
-            android:key="limit_summary"
-            android:selectable="false"
-            settings:allowDividerBelow="true" />
-
-        <com.android.settings.datausage.DataSaverPreference
-            android:key="restrict_background"
-            android:title="@string/data_saver_title"
-            android:fragment="com.android.settings.datausage.DataSaverSummary" />
-
-    </PreferenceCategory>
-
+    <com.android.settings.datausage.DataSaverPreference
+        android:key="restrict_background"
+        android:title="@string/data_saver_title"
+        android:fragment="com.android.settings.datausage.DataSaverSummary"/>
 </PreferenceScreen>

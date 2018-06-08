@@ -17,11 +17,8 @@
 package com.android.settings.deletionhelper;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -29,17 +26,15 @@ import static org.mockito.Mockito.verify;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.os.SystemProperties;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -48,11 +43,10 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AutomaticStorageManagerSwitchBarControllerTest {
+
     private Context mContext;
     private SwitchBar mSwitchBar;
     private MetricsFeatureProvider mMetricsFeatureProvider;
@@ -70,10 +64,7 @@ public class AutomaticStorageManagerSwitchBarControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         mSwitchBar = new SwitchBar(mContext);
 
-        Context fakeContextForFakeProvider = mock(Context.class, RETURNS_DEEP_STUBS);
-        FakeFeatureFactory.setupForTest(fakeContextForFakeProvider);
-        FeatureFactory featureFactory = FakeFeatureFactory.getFactory(fakeContextForFakeProvider);
-        mMetricsFeatureProvider = featureFactory.getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FakeFeatureFactory.setupForTest().getMetricsFeatureProvider();
         mPreference = new Preference(mContext);
 
         mController =
@@ -115,10 +106,9 @@ public class AutomaticStorageManagerSwitchBarControllerTest {
                 .add(any(Fragment.class), eq(ActivationWarningFragment.TAG));
     }
 
-    @Config(shadows = {SettingsShadowSystemProperties.class})
     @Test
     public void onSwitchChange_doNotShowWarningFragmentIfEnabledByDefault() {
-        SettingsShadowSystemProperties.set("ro.storage_manager.enabled", "true");
+        SystemProperties.set("ro.storage_manager.enabled", "true");
 
         mController.onSwitchChanged(null, true);
 

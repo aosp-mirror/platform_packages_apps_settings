@@ -57,6 +57,7 @@ class EditPinPreference extends CustomEditTextPreference {
         if (editText != null) {
             editText.setInputType(InputType.TYPE_CLASS_NUMBER |
                     InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+            editText.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
         }
     }
 

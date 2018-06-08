@@ -18,21 +18,29 @@ package com.android.settings.notification;
 
 import android.content.Context;
 import android.media.AudioManager;
-import com.android.settings.notification.VolumeSeekBarPreference.Callback;
-import com.android.settingslib.core.lifecycle.Lifecycle;
+import android.text.TextUtils;
+
+import com.android.settings.R;
 
 public class MediaVolumePreferenceController extends
     VolumeSeekBarPreferenceController {
 
     private static final String KEY_MEDIA_VOLUME = "media_volume";
 
-    public MediaVolumePreferenceController(Context context, Callback callback, Lifecycle lifecycle) {
-        super(context, callback, lifecycle);
+    public MediaVolumePreferenceController(Context context) {
+        super(context, KEY_MEDIA_VOLUME);
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
+    public int getAvailabilityStatus() {
+        return mContext.getResources().getBoolean(R.bool.config_show_media_volume)
+                ? AVAILABLE
+                : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public boolean isSliceable() {
+        return TextUtils.equals(getPreferenceKey(), KEY_MEDIA_VOLUME);
     }
 
     @Override
@@ -47,7 +55,6 @@ public class MediaVolumePreferenceController extends
 
     @Override
     public int getMuteIcon() {
-        return com.android.internal.R.drawable.ic_audio_media_mute;
+        return R.drawable.ic_media_stream_off;
     }
-
 }

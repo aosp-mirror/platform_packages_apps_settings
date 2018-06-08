@@ -16,74 +16,49 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="power_usage_summary_screen"
     android:title="@string/power_usage_summary_title"
     settings:keywords="@string/keywords_battery">
 
     <com.android.settings.applications.LayoutPreference
         android:key="battery_header"
-        android:selectable="true"
-        android:layout="@layout/battery_header"/>
+        android:selectable="false"
+        android:layout="@layout/battery_header" />
+
+    <PreferenceCategory
+        android:key="battery_tip"
+        android:layout="@layout/preference_category_no_title" />
 
     <Preference
-        android:key="high_usage"
-        android:icon="@drawable/ic_battery_alert_24dp"
-        android:title="@string/power_high_usage_title"/>
+        android:fragment="com.android.settings.fuelgauge.batterysaver.BatterySaverSettings"
+        android:key="battery_saver_summary"
+        android:title="@string/battery_saver"
+        settings:controller="com.android.settings.fuelgauge.BatterySaverController"
+        settings:platform_slice="true"
+        settings:allowDividerAbove="true" />
 
-    <PreferenceCategory
-        android:key="device_usage_list">
+    <Preference
+        android:fragment="com.android.settings.fuelgauge.SmartBatterySettings"
+        android:key="smart_battery_manager"
+        android:title="@string/smart_battery_manager_title"
+        settings:controller="com.android.settings.fuelgauge.batterytip.BatteryManagerPreferenceController" />
 
-        <com.android.settings.fuelgauge.PowerGaugePreference
-            android:key="last_full_charge"
-            android:title="@string/battery_last_full_charge"
-            android:selectable="false"/>
+    <SwitchPreference
+        android:key="battery_percentage"
+        android:title="@string/battery_percentage"
+        android:summary="@string/battery_percentage_description" />
 
-        <com.android.settings.fuelgauge.PowerGaugePreference
-            android:key="screen_usage"
-            android:title="@string/device_screen_usage"
-            android:selectable="false"/>
 
-    </PreferenceCategory>
+    <com.android.settings.fuelgauge.PowerGaugePreference
+        android:key="last_full_charge"
+        android:title="@string/battery_last_full_charge"
+        android:selectable="false"
+        settings:allowDividerAbove="true" />
 
-    <PreferenceCategory
-        android:key="power_management"
-        android:title="@string/battery_power_management">
-
-        <com.android.settings.widget.MasterSwitchPreference
-            android:fragment="com.android.settings.fuelgauge.BatterySaverSettings"
-            android:key="battery_saver_summary"
-            android:title="@string/battery_saver"/>
-
-        <SwitchPreference
-            android:key="battery_percentage"
-            android:title="@string/battery_percentage"
-            android:summary="@string/battery_percentage_description"/>
-
-        <!-- Cross-listed item, if you change this, also change it in display_settings.xml -->
-        <SwitchPreference
-            android:key="auto_brightness_battery"
-            android:title="@string/auto_brightness_title"
-            android:summary="@string/auto_brightness_summary"
-            settings:keywords="@string/keywords_display_auto_brightness"/>
-
-        <!-- Cross-listed item, if you change this, also change it in display_settings.xml -->
-        <com.android.settings.TimeoutListPreference
-            android:key="screen_timeout_battery"
-            android:title="@string/screen_timeout"
-            android:summary="@string/screen_timeout_summary"
-            android:entries="@array/screen_timeout_entries"
-            android:entryValues="@array/screen_timeout_values"/>
-
-        <!-- Cross-listed item, if you change this, also change it in display_settings.xml -->
-        <Preference
-            android:key="ambient_display_battery"
-            android:title="@string/ambient_display_screen_title"
-            android:fragment="com.android.settings.display.AmbientDisplaySettings" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:key="app_list"
-        android:title="@string/power_usage_list_summary"/>
+    <com.android.settings.fuelgauge.PowerGaugePreference
+        android:key="screen_usage"
+        android:title="@string/device_screen_usage"
+        android:selectable="false" />
 
 </PreferenceScreen>

@@ -30,8 +30,11 @@ import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.hardware.fingerprint.FingerprintManager;
+import android.media.AudioAttributes;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
@@ -74,6 +77,14 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
      */
     private static final int ICON_TOUCH_COUNT_SHOW_UNTIL_DIALOG_SHOWN = 3;
 
+    private static final VibrationEffect VIBRATE_EFFECT_ERROR =
+            VibrationEffect.createWaveform(new long[] {0, 5, 55, 60}, -1);
+    private static final AudioAttributes FINGERPRINT_ENROLLING_SONFICATION_ATTRIBUTES =
+            new AudioAttributes.Builder()
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                    .build();
+
     private ProgressBar mProgressBar;
     private ObjectAnimator mProgressAnim;
     private TextView mStartMessage;
@@ -86,10 +97,9 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
     private FingerprintEnrollSidecar mSidecar;
     private boolean mAnimationCancelled;
     private AnimatedVectorDrawable mIconAnimationDrawable;
-    private Drawable mIconBackgroundDrawable;
-    private int mIndicatorBackgroundRestingColor;
-    private int mIndicatorBackgroundActivatedColor;
+    private AnimatedVectorDrawable mIconBackgroundBlinksDrawable;
     private boolean mRestoring;
+    private Vibrator mVibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +110,7 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
         mRepeatMessage = (TextView) findViewById(R.id.repeat_message);
         mErrorText = (TextView) findViewById(R.id.error_text);
         mProgressBar = (ProgressBar) findViewById(R.id.fingerprint_progress_bar);
+        mVibrator = getSystemService(Vibrator.class);
 
         Button skipButton = findViewById(R.id.skip_button);
         skipButton.setOnClickListener(this);
@@ -107,7 +118,7 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
         final LayerDrawable fingerprintDrawable = (LayerDrawable) mProgressBar.getBackground();
         mIconAnimationDrawable = (AnimatedVectorDrawable)
                 fingerprintDrawable.findDrawableByLayerId(R.id.fingerprint_animation);
-        mIconBackgroundDrawable =
+        mIconBackgroundBlinksDrawable = (AnimatedVectorDrawable)
                 fingerprintDrawable.findDrawableByLayerId(R.id.fingerprint_background);
         mIconAnimationDrawable.registerAnimationCallback(mIconAnimationCallback);
         mFastOutSlowInInterpolator = AnimationUtils.loadInterpolator(
@@ -134,11 +145,6 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
                 return true;
             }
         });
-        mIndicatorBackgroundRestingColor
-                = getColor(R.color.fingerprint_indicator_background_resting);
-        mIndicatorBackgroundActivatedColor
-                = getColor(R.color.fingerprint_indicator_background_activated);
-        mIconBackgroundDrawable.setTint(mIndicatorBackgroundRestingColor);
         mRestoring = savedInstanceState != null;
     }
 
@@ -163,22 +169,6 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
         super.onEnterAnimationComplete();
         mAnimationCancelled = false;
         startIconAnimation();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (mSidecar != null) {
-            mSidecar.setListener(this);
-        }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (mSidecar != null) {
-            mSidecar.setListener(null);
-        }
     }
 
     private void startIconAnimation() {
@@ -243,30 +233,7 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
     }
 
     private void animateFlash() {
-        ValueAnimator anim = ValueAnimator.ofArgb(mIndicatorBackgroundRestingColor,
-                mIndicatorBackgroundActivatedColor);
-        final ValueAnimator.AnimatorUpdateListener listener =
-                new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                mIconBackgroundDrawable.setTint((Integer) animation.getAnimatedValue());
-            }
-        };
-        anim.addUpdateListener(listener);
-        anim.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                ValueAnimator anim = ValueAnimator.ofArgb(mIndicatorBackgroundActivatedColor,
-                        mIndicatorBackgroundRestingColor);
-                anim.addUpdateListener(listener);
-                anim.setDuration(300);
-                anim.setInterpolator(mLinearOutSlowInInterpolator);
-                anim.start();
-            }
-        });
-        anim.setInterpolator(mFastOutSlowInInterpolator);
-        anim.setDuration(300);
-        anim.start();
+        mIconBackgroundBlinksDrawable.start();
     }
 
     private void launchFinish(byte[] token) {
@@ -384,6 +351,9 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
             mErrorText.setAlpha(1f);
             mErrorText.setTranslationY(0f);
         }
+        if (isResumed()) {
+            mVibrator.vibrate(VIBRATE_EFFECT_ERROR, FINGERPRINT_ENROLLING_SONFICATION_ATTRIBUTES);
+        }
     }
 
     private void clearError() {
@@ -394,12 +364,7 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
                             R.dimen.fingerprint_error_text_disappear_distance))
                     .setDuration(100)
                     .setInterpolator(mFastOutLinearInInterpolator)
-                    .withEndAction(new Runnable() {
-                        @Override
-                        public void run() {
-                            mErrorText.setVisibility(View.INVISIBLE);
-                        }
-                    })
+                    .withEndAction(() -> mErrorText.setVisibility(View.INVISIBLE))
                     .start();
         }
     }

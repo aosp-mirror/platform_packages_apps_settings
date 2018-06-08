@@ -16,10 +16,14 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/bluetooth_settings">
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/bluetooth_pairing_pref_title">
 
     <Preference
-        android:key="device_name"/>
+        android:key="bt_pair_rename_devices"
+        android:title="@string/bluetooth_device_name"
+        android:summary="@string/summary_placeholder"
+        settings:controller="com.android.settings.bluetooth.BluetoothDeviceRenamePreferenceController"/>
 
     <com.android.settings.bluetooth.BluetoothProgressCategory
         android:key="available_devices"

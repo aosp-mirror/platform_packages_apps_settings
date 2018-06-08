@@ -15,6 +15,10 @@
  */
 package com.android.settings.widget;
 
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.view.LayoutInflater;
@@ -23,7 +27,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,14 +34,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class FixedLineSummaryPreferenceTest {
 
     @Mock
@@ -55,8 +52,8 @@ public class FixedLineSummaryPreferenceTest {
         mContext = RuntimeEnvironment.application;
         mPreference = new FixedLineSummaryPreference(mContext, null);
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        final View view = inflater.inflate(mPreference.getLayoutResource(),
-                new LinearLayout(mContext), false);
+        final View view =
+            inflater.inflate(mPreference.getLayoutResource(), new LinearLayout(mContext), false);
         mHolder = spy(PreferenceViewHolder.createInstanceForTests(view));
         when(mHolder.findViewById(android.R.id.summary)).thenReturn(mSummary);
     }

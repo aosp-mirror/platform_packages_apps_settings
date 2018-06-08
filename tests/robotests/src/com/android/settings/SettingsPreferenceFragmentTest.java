@@ -16,14 +16,25 @@
 
 package com.android.settings;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 import android.view.View;
+
+import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,23 +45,11 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
-
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SettingsPreferenceFragmentTest {
 
     private static final int ITEM_COUNT = 5;
 
-    @Mock
-    private PreferenceManager mPreferenceManager;
     @Mock
     private Activity mActivity;
     @Mock
@@ -64,6 +63,7 @@ public class SettingsPreferenceFragmentTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        FakeFeatureFactory.setupForTest();
         mContext = RuntimeEnvironment.application;
         mFragment = spy(new TestFragment());
         doReturn(mActivity).when(mFragment).getActivity();
@@ -142,6 +142,35 @@ public class SettingsPreferenceFragmentTest {
         assertThat(mEmptyView.getVisibility()).isEqualTo(View.GONE);
     }
 
+    @Test
+    @Config(shadows = SettingsShadowResources.SettingsShadowTheme.class)
+    public void onCreate_hasExtraFragmentKey_shouldExpandPreferences() {
+        doReturn(mContext.getTheme()).when(mActivity).getTheme();
+        doReturn(mContext.getResources()).when(mFragment).getResources();
+        doReturn(mPreferenceScreen).when(mFragment).getPreferenceScreen();
+        final Bundle bundle = new Bundle();
+        bundle.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, "test_key");
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.onCreate(null /* icicle */);
+
+        verify(mPreferenceScreen).setInitialExpandedChildrenCount(Integer.MAX_VALUE);
+    }
+
+    @Test
+    @Config(shadows = SettingsShadowResources.SettingsShadowTheme.class)
+    public void onCreate_noPreferenceScreen_shouldNotCrash() {
+        doReturn(mContext.getTheme()).when(mActivity).getTheme();
+        doReturn(mContext.getResources()).when(mFragment).getResources();
+        doReturn(null).when(mFragment).getPreferenceScreen();
+        final Bundle bundle = new Bundle();
+        bundle.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, "test_key");
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.onCreate(null /* icicle */);
+        // no crash
+    }
+
     public static class TestFragment extends SettingsPreferenceFragment {
 
         @Override
@@ -149,6 +178,4 @@ public class SettingsPreferenceFragmentTest {
             return 0;
         }
     }
-
-
 }

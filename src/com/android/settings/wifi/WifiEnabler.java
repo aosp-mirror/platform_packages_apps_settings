@@ -33,11 +33,11 @@ import android.widget.Toast;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.widget.SwitchWidgetController;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.WirelessUtils;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -45,7 +45,7 @@ public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListene
 
     private final SwitchWidgetController mSwitchWidget;
     private final WifiManager mWifiManager;
-    private final ConnectivityManagerWrapper mConnectivityManager;
+    private final ConnectivityManager mConnectivityManager;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     private Context mContext;
@@ -80,20 +80,20 @@ public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListene
 
     public WifiEnabler(Context context, SwitchWidgetController switchWidget,
         MetricsFeatureProvider metricsFeatureProvider) {
-        this(context, switchWidget, metricsFeatureProvider, new ConnectivityManagerWrapper(
-            (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)));
+        this(context, switchWidget, metricsFeatureProvider,
+            (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));
     }
 
     @VisibleForTesting
     WifiEnabler(Context context, SwitchWidgetController switchWidget,
             MetricsFeatureProvider metricsFeatureProvider,
-            ConnectivityManagerWrapper connectivityManagerWrapper) {
+            ConnectivityManager connectivityManager) {
         mContext = context;
         mSwitchWidget = switchWidget;
         mSwitchWidget.setListener(this);
         mMetricsFeatureProvider = metricsFeatureProvider;
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-        mConnectivityManager = connectivityManagerWrapper;
+        mConnectivityManager = connectivityManager;
 
         mIntentFilter = new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION);
         // The order matters! We really should not depend on this. :(
@@ -160,15 +160,14 @@ public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListene
                 setSwitchBarChecked(false);
                 mSwitchWidget.setEnabled(true);
         }
-        if (mayDisableTethering(!mSwitchWidget.isChecked())) {
-            if (RestrictedLockUtils.hasBaseUserRestriction(mContext,
-                    UserManager.DISALLOW_CONFIG_TETHERING, UserHandle.myUserId())) {
-                mSwitchWidget.setEnabled(false);
-            } else {
-                final EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(mContext,
-                    UserManager.DISALLOW_CONFIG_TETHERING, UserHandle.myUserId());
-                mSwitchWidget.setDisabledByAdmin(admin);
-            }
+
+        if (RestrictedLockUtils.hasBaseUserRestriction(mContext,
+                UserManager.DISALLOW_CONFIG_TETHERING, UserHandle.myUserId())) {
+            mSwitchWidget.setEnabled(false);
+        } else {
+            final EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(mContext,
+                UserManager.DISALLOW_CONFIG_TETHERING, UserHandle.myUserId());
+            mSwitchWidget.setDisabledByAdmin(admin);
         }
     }
 
@@ -203,15 +202,11 @@ public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListene
         // Show toast message if Wi-Fi is not allowed in airplane mode
         if (isChecked && !WirelessUtils.isRadioAllowed(mContext, Settings.Global.RADIO_WIFI)) {
             Toast.makeText(mContext, R.string.wifi_in_airplane_mode, Toast.LENGTH_SHORT).show();
-            // Reset switch to off. No infinite check/listenenr loop.
+            // Reset switch to off. No infinite check/listener loop.
             mSwitchWidget.setChecked(false);
             return false;
         }
 
-        // Disable tethering if enabling Wifi
-        if (mayDisableTethering(isChecked)) {
-            mConnectivityManager.stopTethering(ConnectivityManager.TETHERING_WIFI);
-        }
         if (isChecked) {
             mMetricsFeatureProvider.action(mContext, MetricsEvent.ACTION_WIFI_ON);
         } else {
@@ -225,11 +220,5 @@ public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListene
             Toast.makeText(mContext, R.string.wifi_error, Toast.LENGTH_SHORT).show();
         }
         return true;
-    }
-
-    private boolean mayDisableTethering(boolean isChecked) {
-        final int wifiApState = mWifiManager.getWifiApState();
-        return isChecked && ((wifiApState == WifiManager.WIFI_AP_STATE_ENABLING) ||
-            (wifiApState == WifiManager.WIFI_AP_STATE_ENABLED));
     }
 }

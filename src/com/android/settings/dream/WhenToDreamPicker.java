@@ -22,6 +22,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.dream.DreamBackend;
+import com.android.settingslib.widget.CandidateInfo;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +36,11 @@ public class WhenToDreamPicker extends RadioButtonPickerFragment {
         super.onAttach(context);
 
         mBackend = DreamBackend.getInstance(context);
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.when_to_dream_settings;
     }
 
     @Override

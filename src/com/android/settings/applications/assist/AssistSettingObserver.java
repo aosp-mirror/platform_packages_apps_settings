@@ -19,8 +19,10 @@ package com.android.settings.applications.assist;
 import android.content.ContentResolver;
 import android.database.ContentObserver;
 import android.net.Uri;
-import android.os.Handler;
 import android.provider.Settings;
+import android.support.annotation.MainThread;
+
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.List;
 
@@ -38,8 +40,9 @@ public abstract class AssistSettingObserver extends ContentObserver {
             cr.registerContentObserver(ASSIST_URI, false, this);
             final List<Uri> settingUri = getSettingUris();
             if (settingUri != null) {
-                for (Uri uri : settingUri)
-                cr.registerContentObserver(uri, false, this);
+                for (Uri uri : settingUri) {
+                    cr.registerContentObserver(uri, false, this);
+                }
             }
         } else {
             cr.unregisterContentObserver(this);
@@ -55,11 +58,15 @@ public abstract class AssistSettingObserver extends ContentObserver {
             shouldUpdatePreference = true;
         }
         if (shouldUpdatePreference) {
-            onSettingChange();
+            ThreadUtils.postOnMainThread(() -> {
+                onSettingChange();
+            });
+
         }
     }
 
     protected abstract List<Uri> getSettingUris();
 
+    @MainThread
     public abstract void onSettingChange();
 }

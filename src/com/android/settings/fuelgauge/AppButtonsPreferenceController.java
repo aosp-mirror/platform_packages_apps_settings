@@ -19,6 +19,7 @@ package com.android.settings.fuelgauge;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Fragment;
+import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -28,7 +29,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -37,31 +37,29 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 import android.view.View;
 import android.webkit.IWebViewUpdateService;
-import android.widget.Button;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.DeviceAdminAdd;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
-import com.android.settings.applications.LayoutPreference;
+import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
-import com.android.settings.enterprise.DevicePolicyManagerWrapper;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.widget.ActionButtonPreference;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnDestroy;
-import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.ArrayList;
@@ -76,10 +74,10 @@ import java.util.List;
  * An easy way to handle them is to delegate them to {@link #handleDialogClick(int)} and
  * {@link #handleActivityResult(int, int, Intent)} in this controller.
  */
-//TODO(b/35810915): Make InstalledAppDetails use this controller
+//TODO(80312809): Merge this class into {@link AppActionButtonPreferenceController}
 public class AppButtonsPreferenceController extends AbstractPreferenceController implements
-        PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause, OnDestroy,
-        View.OnClickListener, ApplicationsState.Callbacks {
+        PreferenceControllerMixin, LifecycleObserver, OnResume, OnDestroy,
+        ApplicationsState.Callbacks {
     public static final String APP_CHG = "chg";
 
     private static final String TAG = "AppButtonsPrefCtl";
@@ -95,28 +93,26 @@ public class AppButtonsPreferenceController extends AbstractPreferenceController
     @VisibleForTesting
     PackageInfo mPackageInfo;
     @VisibleForTesting
-    Button mForceStopButton;
-    @VisibleForTesting
-    Button mUninstallButton;
-    @VisibleForTesting
     String mPackageName;
     @VisibleForTesting
     boolean mDisableAfterUninstall = false;
+    @VisibleForTesting
+    ActionButtonPreference mButtonsPref;
 
     private final int mRequestUninstall;
     private final int mRequestRemoveDeviceAdmin;
+    private final DevicePolicyManager mDpm;
+    private final UserManager mUserManager;
+    private final PackageManager mPm;
+    private final SettingsActivity mActivity;
+    private final Fragment mFragment;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
+    private final ApplicationFeatureProvider mApplicationFeatureProvider;
+    private final int mUserId;
 
     private ApplicationsState.Session mSession;
-    private DevicePolicyManagerWrapper mDpm;
-    private UserManager mUserManager;
-    private PackageManager mPm;
-    private SettingsActivity mActivity;
-    private Fragment mFragment;
     private RestrictedLockUtils.EnforcedAdmin mAppsControlDisallowedAdmin;
-    private MetricsFeatureProvider mMetricsFeatureProvider;
 
-    private LayoutPreference mButtonsPref;
-    private int mUserId;
     private boolean mUpdatedSysApp = false;
     private boolean mListeningToPackageRemove = false;
     private boolean mFinishing = false;
@@ -124,7 +120,7 @@ public class AppButtonsPreferenceController extends AbstractPreferenceController
 
     public AppButtonsPreferenceController(SettingsActivity activity, Fragment fragment,
             Lifecycle lifecycle, String packageName, ApplicationsState state,
-            DevicePolicyManagerWrapper dpm, UserManager userManager,
+            DevicePolicyManager dpm, UserManager userManager,
             PackageManager packageManager, int requestUninstall, int requestRemoveDeviceAdmin) {
         super(activity);
 
@@ -133,8 +129,9 @@ public class AppButtonsPreferenceController extends AbstractPreferenceController
                     "Fragment should implement AppButtonsDialogListener");
         }
 
-        mMetricsFeatureProvider = FeatureFactory.getFactory(activity).getMetricsFeatureProvider();
-
+        final FeatureFactory factory = FeatureFactory.getFactory(activity);
+        mMetricsFeatureProvider = factory.getMetricsFeatureProvider();
+        mApplicationFeatureProvider = factory.getApplicationFeatureProvider(activity);
         mState = state;
         mDpm = dpm;
         mUserManager = userManager;
@@ -148,7 +145,7 @@ public class AppButtonsPreferenceController extends AbstractPreferenceController
 
         if (packageName != null) {
             mAppEntry = mState.getEntry(packageName, mUserId);
-            mSession = mState.newSession(this);
+            mSession = mState.newSession(this, lifecycle);
             lifecycle.addObserver(this);
         } else {
             mFinishing = true;
@@ -165,14 +162,14 @@ public class AppButtonsPreferenceController extends AbstractPreferenceController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         if (isAvailable()) {
-            mButtonsPref = (LayoutPreference) screen.findPreference(KEY_ACTION_BUTTONS);
-
-            mUninstallButton = (Button) mButtonsPref.findViewById(R.id.left_button);
-            mUninstallButton.setText(R.string.uninstall_text);
-
-            mForceStopButton = (Button) mButtonsPref.findViewById(R.id.right_button);
-            mForceStopButton.setText(R.string.force_stop);
-            mForceStopButton.setEnabled(false);
+            mButtonsPref = ((ActionButtonPreference) screen.findPreference(KEY_ACTION_BUTTONS))
+                    .setButton1Text(R.string.uninstall_text)
+                    .setButton2Text(R.string.force_stop)
+                    .setButton1OnClickListener(new UninstallAndDisableButtonListener())
+                    .setButton2OnClickListener(new ForceStopButtonListener())
+                    .setButton1Positive(false)
+                    .setButton2Positive(false)
+                    .setButton2Enabled(false);
         }
     }
 
@@ -183,7 +180,6 @@ public class AppButtonsPreferenceController extends AbstractPreferenceController
 
     @Override
     public void onResume() {
-        mSession.resume();
         if (isAvailable() && !mFinishing) {
             mAppsControlDisallowedBySystem = RestrictedLockUtils.hasBaseUserRestriction(mActivity,
                     UserManager.DISALLOW_APPS_CONTROL, mUserId);
@@ -197,21 +193,15 @@ public class AppButtonsPreferenceController extends AbstractPreferenceController
     }
 
     @Override
-    public void onPause() {
-        mSession.pause();
-    }
-
-    @Override
     public void onDestroy() {
         stopListeningToPackageRemove();
-        mSession.release();
     }
 
-    @Override
-    public void onClick(View v) {
-        final String packageName = mAppEntry.info.packageName;
-        final int id = v.getId();
-        if (id == R.id.left_button) {
+    private class UninstallAndDisableButtonListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            final String packageName = mAppEntry.info.packageName;
             // Uninstall
             if (mDpm.packageHasActiveAdmins(mPackageInfo.packageName)) {
                 stopListeningToPackageRemove();
@@ -254,7 +244,13 @@ public class AppButtonsPreferenceController extends AbstractPreferenceController
             } else {
                 uninstallPkg(packageName, false, false);
             }
-        } else if (id == R.id.right_button) {
+        }
+    }
+
+    private class ForceStopButtonListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
             // force stop
             if (mAppsControlDisallowedAdmin != null && !mAppsControlDisallowedBySystem) {
                 RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
@@ -304,7 +300,9 @@ public class AppButtonsPreferenceController extends AbstractPreferenceController
 
     @Override
     public void onPackageListChanged() {
-        refreshUi();
+        if (isAvailable()) {
+            refreshUi();
+        }
     }
 
     @Override
@@ -363,7 +361,7 @@ public class AppButtonsPreferenceController extends AbstractPreferenceController
         final boolean isBundled = (mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
         boolean enabled = true;
         if (isBundled) {
-            enabled = handleDisableable(mUninstallButton);
+            enabled = handleDisableable();
         } else {
             if ((mPackageInfo.applicationInfo.flags & ApplicationInfo.FLAG_INSTALLED) == 0
                     && mUserManager.getUsers().size() >= 2) {
@@ -428,11 +426,7 @@ public class AppButtonsPreferenceController extends AbstractPreferenceController
             enabled = false;
         }
 
-        mUninstallButton.setEnabled(enabled);
-        if (enabled) {
-            // Register listener
-            mUninstallButton.setOnClickListener(this);
-        }
+        mButtonsPref.setButton1Enabled(enabled);
     }
 
     /**
@@ -444,7 +438,7 @@ public class AppButtonsPreferenceController extends AbstractPreferenceController
         }
         Intent intent = new Intent();
         intent.putExtra(APP_CHG, appChanged);
-        mActivity.finishPreferencePanel(mFragment, Activity.RESULT_OK, intent);
+        mActivity.finishPreferencePanel(Activity.RESULT_OK, intent);
         mFinishing = true;
     }
 
@@ -477,16 +471,16 @@ public class AppButtonsPreferenceController extends AbstractPreferenceController
         if (mDpm.packageHasActiveAdmins(mPackageInfo.packageName)) {
             // User can't force stop device admin.
             Log.w(TAG, "User can't force stop device admin");
-            updateForceStopButtonInner(false);
+            updateForceStopButtonInner(false /* enabled */);
         } else if ((mAppEntry.info.flags & ApplicationInfo.FLAG_STOPPED) == 0) {
             // If the app isn't explicitly stopped, then always show the
             // force stop button.
             Log.w(TAG, "App is not explicitly stopped");
-            updateForceStopButtonInner(true);
+            updateForceStopButtonInner(true /* enabled */);
         } else {
             Intent intent = new Intent(Intent.ACTION_QUERY_PACKAGE_RESTART,
                     Uri.fromParts("package", mAppEntry.info.packageName, null));
-            intent.putExtra(Intent.EXTRA_PACKAGES, new String[]{mAppEntry.info.packageName});
+            intent.putExtra(Intent.EXTRA_PACKAGES, new String[] {mAppEntry.info.packageName});
             intent.putExtra(Intent.EXTRA_UID, mAppEntry.info.uid);
             intent.putExtra(Intent.EXTRA_USER_HANDLE, UserHandle.getUserId(mAppEntry.info.uid));
             Log.d(TAG, "Sending broadcast to query restart status for "
@@ -499,10 +493,9 @@ public class AppButtonsPreferenceController extends AbstractPreferenceController
     @VisibleForTesting
     void updateForceStopButtonInner(boolean enabled) {
         if (mAppsControlDisallowedBySystem) {
-            mForceStopButton.setEnabled(false);
+            mButtonsPref.setButton2Enabled(false);
         } else {
-            mForceStopButton.setEnabled(enabled);
-            mForceStopButton.setOnClickListener(this);
+            mButtonsPref.setButton2Enabled(enabled);
         }
     }
 
@@ -538,7 +531,7 @@ public class AppButtonsPreferenceController extends AbstractPreferenceController
     }
 
     @VisibleForTesting
-    boolean handleDisableable(Button button) {
+    boolean handleDisableable() {
         boolean disableable = false;
         // Try to prevent the user from bricking their phone
         // by not allowing disabling of apps signed with the
@@ -546,12 +539,16 @@ public class AppButtonsPreferenceController extends AbstractPreferenceController
         if (mHomePackages.contains(mAppEntry.info.packageName)
                 || isSystemPackage(mActivity.getResources(), mPm, mPackageInfo)) {
             // Disable button for core system applications.
-            button.setText(R.string.disable_text);
+            mButtonsPref.setButton1Text(R.string.disable_text)
+                    .setButton1Positive(false);
         } else if (mAppEntry.info.enabled && !isDisabledUntilUsed()) {
-            button.setText(R.string.disable_text);
-            disableable = true;
+            mButtonsPref.setButton1Text(R.string.disable_text)
+                    .setButton1Positive(false);
+            disableable = !mApplicationFeatureProvider.getKeepEnabledPackages()
+                    .contains(mAppEntry.info.packageName);
         } else {
-            button.setText(R.string.enable_text);
+            mButtonsPref.setButton1Text(R.string.enable_text)
+                    .setButton1Positive(true);
             disableable = true;
         }
 

@@ -16,6 +16,15 @@
 
 package com.android.settings.applications.assist;
 
+import static android.arch.lifecycle.Lifecycle.Event.ON_RESUME;
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
@@ -23,7 +32,6 @@ import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.TwoStatePreference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -32,18 +40,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AssistContextPreferenceControllerTest {
 
     @Mock
@@ -54,13 +53,15 @@ public class AssistContextPreferenceControllerTest {
     private AssistContextPreferenceController.SettingObserver mObserver;
     private Context mContext;
     private AssistContextPreferenceController mController;
+    private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
-        mLifecycle = new Lifecycle();
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         mContext = RuntimeEnvironment.application;
         mController = new AssistContextPreferenceController(mContext, mLifecycle);
         ReflectionHelpers.setField(mController, "mSettingObserver", mObserver);
@@ -88,7 +89,7 @@ public class AssistContextPreferenceControllerTest {
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.ASSIST_STRUCTURE_ENABLED, 1);
 
-        mLifecycle.onResume();
+        mLifecycle.handleLifecycleEvent(ON_RESUME);
         verify(mObserver).register(any(ContentResolver.class), eq(true));
         verify(mPreference).setChecked(true);
     }

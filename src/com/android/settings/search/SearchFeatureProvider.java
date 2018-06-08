@@ -16,138 +16,62 @@
  */
 package com.android.settings.search;
 
+import android.annotation.NonNull;
+import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
-import android.view.View;
+import android.content.Intent;
+import android.widget.Toolbar;
 
-import com.android.settings.dashboard.SiteMapManager;
-import com.android.settings.search.ranking.SearchResultsRankerCallback;
+import com.android.settings.overlay.FeatureFactory;
 
 /**
  * FeatureProvider for Settings Search
  */
 public interface SearchFeatureProvider {
 
-    /**
-     * @return true to use the new version of search
-     */
-    boolean isEnabled(Context context);
+    Intent SEARCH_UI_INTENT = new Intent("com.android.settings.action.SETTINGS_SEARCH");
 
     /**
-     * Returns a new loader to search in index database.
+     * Ensures the caller has necessary privilege to launch search result page.
+     *
+     * @throws IllegalArgumentException when caller is null
+     * @throws SecurityException        when caller is not allowed to launch search result page
      */
-    DatabaseResultLoader getDatabaseSearchLoader(Context context, String query);
-
-    /**
-     * Returns a new loader to search installed apps.
-     */
-    InstalledAppResultLoader getInstalledAppSearchLoader(Context context, String query);
-
-    /**
-     * Returns a new loader to search accessibility services.
-     */
-    AccessibilityServiceResultLoader getAccessibilityServiceResultLoader(Context context,
-            String query);
-
-    /**
-     * Returns a new loader to search input devices.
-     */
-    InputDeviceResultLoader getInputDeviceResultLoader(Context context, String query);
-
-    /**
-     * Returns a new loader to get all recently saved queries search terms.
-     */
-    SavedQueryLoader getSavedQueryLoader(Context context);
-
-    /**
-     * Returns the manager for indexing Settings data.
-     */
-    DatabaseIndexingManager getIndexingManager(Context context);
-
-    /**
-     * Returns the manager for looking up breadcrumbs.
-     */
-    SiteMapManager getSiteMapManager();
-
-    /**
-     * Updates the Settings indexes and calls {@link IndexingCallback#onIndexingFinished()} on
-     * {@param callback} when indexing is complete.
-     */
-    void updateIndexAsync(Context context, IndexingCallback callback);
+    void verifyLaunchSearchResultPageCaller(Context context, @NonNull ComponentName caller)
+            throws SecurityException, IllegalArgumentException;
 
     /**
      * Synchronously updates the Settings database.
      */
     void updateIndex(Context context);
 
-    /**
-     * @returns true when indexing is complete.
-     */
-    boolean isIndexingComplete(Context context);
+    DatabaseIndexingManager getIndexingManager(Context context);
 
     /**
-     * Initializes the feedback button in case it was dismissed.
+     * @return a {@link SearchIndexableResources} to be used for indexing search results.
      */
-    default void initFeedbackButton() {
+    SearchIndexableResources getSearchIndexableResources();
+
+    default String getSettingsIntelligencePkgName() {
+        return "com.android.settings.intelligence";
     }
 
     /**
-     * Show a button users can click to submit feedback on the quality of the search results.
+     * Initializes the search toolbar.
      */
-    default void showFeedbackButton(SearchFragment fragment, View view) {
-    }
+    default void initSearchToolbar(Activity activity, Toolbar toolbar) {
+        if (activity == null || toolbar == null) {
+            return;
+        }
+        toolbar.setOnClickListener(tb -> {
+            final Intent intent = SEARCH_UI_INTENT;
+            intent.setPackage(getSettingsIntelligencePkgName());
 
-    /**
-     * Hide the feedback button shown by
-     * {@link #showFeedbackButton(SearchFragment fragment, View view) showFeedbackButton}
-     */
-    default void hideFeedbackButton() {
+            FeatureFactory.getFactory(
+                    activity.getApplicationContext()).getSlicesFeatureProvider()
+                    .indexSliceDataAsync(activity.getApplicationContext());
+            activity.startActivityForResult(intent, 0 /* requestCode */);
+        });
     }
-
-    /**
-     * Query search results based on the input query.
-     *
-     * @param context                     application context
-     * @param query                       input user query
-     * @param searchResultsRankerCallback {@link SearchResultsRankerCallback}
-     */
-    default void querySearchResults(Context context, String query,
-            SearchResultsRankerCallback searchResultsRankerCallback) {
-    }
-
-    /**
-     * Cancel pending search query
-     */
-    default void cancelPendingSearchQuery(Context context) {
-    }
-
-    /**
-     * Notify that a search result is clicked.
-     *
-     * @param context      application context
-     * @param query        input user query
-     * @param searchResult clicked result
-     */
-    default void searchResultClicked(Context context, String query, SearchResult searchResult) {
-    }
-
-    /**
-     * @return true to enable search ranking.
-     */
-    default boolean isSmartSearchRankingEnabled(Context context) {
-        return false;
-    }
-
-    /**
-     * @return smart ranking timeout in milliseconds.
-     */
-    default long smartSearchRankingTimeoutMs(Context context) {
-        return 300L;
-    }
-
-    /**
-     * Prepare for search ranking predictions to avoid latency on the first prediction call.
-     */
-    default void searchRankingWarmup(Context context) {
-    }
-
 }

@@ -22,7 +22,8 @@ import android.os.BatteryStats;
 import android.os.SystemClock;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.utils.AsyncLoader;
+import com.android.settingslib.utils.PowerUtil;
+import com.android.settingslib.utils.AsyncLoader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +47,8 @@ public class DebugEstimatesLoader extends AsyncLoader<List<BatteryInfo>> {
                 FeatureFactory.getFactory(context).getPowerUsageFeatureProvider(context);
 
         // get stuff we'll need for both BatteryInfo
-        final long elapsedRealtimeUs = BatteryUtils.convertMsToUs(SystemClock.elapsedRealtime());
+        final long elapsedRealtimeUs = PowerUtil.convertMsToUs(
+                SystemClock.elapsedRealtime());
         Intent batteryBroadcast = getContext().registerReceiver(null,
                 new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         BatteryStats stats = mStatsHelper.getStats();
@@ -54,14 +56,16 @@ public class DebugEstimatesLoader extends AsyncLoader<List<BatteryInfo>> {
         BatteryInfo oldinfo = BatteryInfo.getBatteryInfoOld(getContext(), batteryBroadcast,
                 stats, elapsedRealtimeUs, false);
 
-        final long timeRemainingEnhanced = BatteryUtils.convertMsToUs(
-                powerUsageFeatureProvider.getEnhancedBatteryPrediction(getContext()));
-        BatteryInfo newinfo = BatteryInfo.getBatteryInfo(getContext(), batteryBroadcast, stats,
-                elapsedRealtimeUs, false, timeRemainingEnhanced, true);
+        Estimate estimate = powerUsageFeatureProvider.getEnhancedBatteryPrediction(context);
+        if (estimate == null) {
+            estimate = new Estimate(0, false, Estimate.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN);
+        }
+        BatteryInfo newInfo = BatteryInfo.getBatteryInfo(getContext(), batteryBroadcast, stats,
+                estimate, elapsedRealtimeUs, false);
 
         List<BatteryInfo> infos = new ArrayList<>();
         infos.add(oldinfo);
-        infos.add(newinfo);
+        infos.add(newInfo);
         return infos;
     }
 }

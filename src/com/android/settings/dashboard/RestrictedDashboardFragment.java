@@ -19,6 +19,7 @@ package com.android.settings.dashboard;
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -31,9 +32,9 @@ import android.os.UserManager;
 import android.view.View;
 import android.widget.TextView;
 
+import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
-import com.android.settings.ShowAdminSupportDetailsDialog;
 import com.android.settingslib.RestrictedLockUtils;
 
 /**
@@ -69,7 +70,6 @@ public abstract class RestrictedDashboardFragment extends DashboardFragment {
     private RestrictionsManager mRestrictionsManager;
 
     private final String mRestrictionKey;
-    private View mAdminSupportDetails;
     private EnforcedAdmin mEnforcedAdmin;
     private TextView mEmptyTextView;
 
@@ -86,6 +86,7 @@ public abstract class RestrictedDashboardFragment extends DashboardFragment {
             }
         }
     };
+    private AlertDialog mActionDisabledDialog;
 
     /**
      * @param restrictionKey The restriction key to check before pin protecting
@@ -118,7 +119,6 @@ public abstract class RestrictedDashboardFragment extends DashboardFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mAdminSupportDetails = initAdminSupportDetailsView();
         mEmptyTextView = initEmptyTextView();
     }
 
@@ -206,10 +206,6 @@ public abstract class RestrictedDashboardFragment extends DashboardFragment {
         return restricted && mRestrictionsManager.hasRestrictionsProvider();
     }
 
-    private View initAdminSupportDetailsView() {
-        return getActivity().findViewById(R.id.admin_support_details);
-    }
-
     protected TextView initEmptyTextView() {
         TextView emptyView = (TextView) getActivity().findViewById(android.R.id.empty);
         return emptyView;
@@ -231,11 +227,14 @@ public abstract class RestrictedDashboardFragment extends DashboardFragment {
     @Override
     protected void onDataSetChanged() {
         highlightPreferenceIfNeeded();
-        if (mAdminSupportDetails != null && isUiRestrictedByOnlyAdmin()) {
+        if (isUiRestrictedByOnlyAdmin()
+                && (mActionDisabledDialog == null || !mActionDisabledDialog.isShowing())) {
             final EnforcedAdmin admin = getRestrictionEnforcedAdmin();
-            ShowAdminSupportDetailsDialog.setAdminSupportDetails(getActivity(),
-                    mAdminSupportDetails, admin, false);
-            setEmptyView(mAdminSupportDetails);
+            mActionDisabledDialog = new ActionDisabledByAdminDialogHelper(getActivity())
+                    .prepareDialogBuilder(mRestrictionKey, admin)
+                    .setOnDismissListener(__ -> getActivity().finish())
+                    .show();
+            setEmptyView(new View(getContext()));
         } else if (mEmptyTextView != null) {
             setEmptyView(mEmptyTextView);
         }

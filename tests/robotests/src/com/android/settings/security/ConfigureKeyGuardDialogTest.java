@@ -16,29 +16,20 @@
 
 package com.android.settings.security;
 
-
-import android.content.DialogInterface;
-
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-import com.android.settings.testutils.shadow.ShadowEventLogWriter;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
-import org.robolectric.annotation.Config;
-import org.robolectric.util.FragmentController;
-
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
+import android.content.DialogInterface;
+
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
+import org.robolectric.android.controller.FragmentController;
+
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(
-    manifest = TestConfig.MANIFEST_PATH,
-    sdk = TestConfig.SDK_VERSION,
-    shadows = ShadowEventLogWriter.class
-)
 public class ConfigureKeyGuardDialogTest {
 
     @Test
@@ -47,7 +38,7 @@ public class ConfigureKeyGuardDialogTest {
                 Robolectric.buildFragment(ConfigureKeyGuardDialog.class);
         final ConfigureKeyGuardDialog fragment = spy(fragmentController.get());
         doNothing().when(fragment).startPasswordSetup();
-        fragmentController.attach().create().start().resume();
+        fragmentController.create().start().resume();
         fragment.onClick(null /* dialog */, DialogInterface.BUTTON_POSITIVE);
         fragment.onDismiss(null /* dialog */);
 

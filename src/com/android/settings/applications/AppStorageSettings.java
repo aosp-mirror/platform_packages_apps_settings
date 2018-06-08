@@ -16,19 +16,30 @@
 
 package com.android.settings.applications;
 
+import static android.content.pm.ApplicationInfo.FLAG_ALLOW_CLEAR_USER_DATA;
+import static android.content.pm.ApplicationInfo.FLAG_SYSTEM;
+import static android.os.storage.StorageVolume.ScopedAccessProviderContract.AUTHORITY;
+import static android.os.storage.StorageVolume.ScopedAccessProviderContract.COL_GRANTED;
+import static android.os.storage.StorageVolume.ScopedAccessProviderContract.TABLE_PERMISSIONS;
+
+import static com.android.settings.applications.AppStateDirectoryAccessBridge.DEBUG;
+
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.AppGlobals;
+import android.app.GrantedUriPermission;
 import android.app.LoaderManager;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
-import android.content.UriPermission;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageDataObserver;
 import android.content.pm.PackageManager;
 import android.content.pm.ProviderInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -36,6 +47,7 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.util.Log;
@@ -48,6 +60,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.deviceinfo.StorageWizardMoveConfirm;
+import com.android.settings.widget.ActionButtonPreference;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.applications.ApplicationsState.Callbacks;
 import com.android.settingslib.applications.StorageStatsSource;
@@ -58,9 +71,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
-
-import static android.content.pm.ApplicationInfo.FLAG_ALLOW_CLEAR_USER_DATA;
-import static android.content.pm.ApplicationInfo.FLAG_SYSTEM;
 
 public class AppStorageSettings extends AppInfoWithHeader
         implements OnClickListener, Callbacks, DialogInterface.OnClickListener,
@@ -102,9 +112,8 @@ public class AppStorageSettings extends AppInfoWithHeader
     private static final String KEY_DATA_CLEARED = "data_cleared";
 
     // Views related to cache info
-    private Preference mCacheSize;
-    private Button mClearDataButton;
-    private Button mClearCacheButton;
+    @VisibleForTesting
+    ActionButtonPreference mButtonsPref;
 
     private Preference mStorageUsed;
     private Button mChangeStorageButton;
@@ -118,7 +127,8 @@ public class AppStorageSettings extends AppInfoWithHeader
     private boolean mCacheCleared;
     private boolean mDataCleared;
 
-    private AppStorageSizesController mSizeController;
+    @VisibleForTesting
+    AppStorageSizesController mSizeController;
 
     private ClearCacheObserver mClearCacheObserver;
     private ClearUserDataObserver mClearDataObserver;
@@ -164,9 +174,9 @@ public class AppStorageSettings extends AppInfoWithHeader
                 .setComputingString(R.string.computing_size)
                 .setErrorString(R.string.invalid_size_value)
                 .build();
-
-        mClearDataButton = (Button) ((LayoutPreference) findPreference(KEY_HEADER_BUTTONS))
-                .findViewById(R.id.left_button);
+        mButtonsPref = ((ActionButtonPreference) findPreference(KEY_HEADER_BUTTONS))
+                .setButton1Positive(false)
+                .setButton2Positive(false);
 
         mStorageUsed = findPreference(KEY_STORAGE_USED);
         mChangeStorageButton = (Button) ((LayoutPreference) findPreference(KEY_CHANGE_STORAGE))
@@ -175,10 +185,7 @@ public class AppStorageSettings extends AppInfoWithHeader
         mChangeStorageButton.setOnClickListener(this);
 
         // Cache section
-        mCacheSize = findPreference(KEY_CACHE_SIZE);
-        mClearCacheButton = (Button) ((LayoutPreference) findPreference(KEY_HEADER_BUTTONS))
-                .findViewById(R.id.right_button);
-        mClearCacheButton.setText(R.string.clear_cache_btn_text);
+        mButtonsPref.setButton2Text(R.string.clear_cache_btn_text);
 
         // URI permissions section
         mUri = (PreferenceCategory) findPreference(KEY_URI_CATEGORY);
@@ -188,34 +195,40 @@ public class AppStorageSettings extends AppInfoWithHeader
         mClearUriButton.setOnClickListener(this);
     }
 
+    @VisibleForTesting
+    void handleClearCacheClick() {
+        if (mAppsControlDisallowedAdmin != null && !mAppsControlDisallowedBySystem) {
+            RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
+                    getActivity(), mAppsControlDisallowedAdmin);
+            return;
+        } else if (mClearCacheObserver == null) { // Lazy initialization of observer
+            mClearCacheObserver = new ClearCacheObserver();
+        }
+        mMetricsFeatureProvider.action(getContext(),
+                MetricsEvent.ACTION_SETTINGS_CLEAR_APP_CACHE);
+        mPm.deleteApplicationCacheFiles(mPackageName, mClearCacheObserver);
+    }
+
+    @VisibleForTesting
+    void handleClearDataClick() {
+        if (mAppsControlDisallowedAdmin != null && !mAppsControlDisallowedBySystem) {
+            RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
+                    getActivity(), mAppsControlDisallowedAdmin);
+        } else if (mAppEntry.info.manageSpaceActivityName != null) {
+            if (!Utils.isMonkeyRunning()) {
+                Intent intent = new Intent(Intent.ACTION_DEFAULT);
+                intent.setClassName(mAppEntry.info.packageName,
+                        mAppEntry.info.manageSpaceActivityName);
+                startActivityForResult(intent, REQUEST_MANAGE_SPACE);
+            }
+        } else {
+            showDialogInner(DLG_CLEAR_DATA, 0);
+        }
+    }
+
     @Override
     public void onClick(View v) {
-        if (v == mClearCacheButton) {
-            if (mAppsControlDisallowedAdmin != null && !mAppsControlDisallowedBySystem) {
-                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
-                        getActivity(), mAppsControlDisallowedAdmin);
-                return;
-            } else if (mClearCacheObserver == null) { // Lazy initialization of observer
-                mClearCacheObserver = new ClearCacheObserver();
-            }
-            mMetricsFeatureProvider.action(getContext(),
-                    MetricsEvent.ACTION_SETTINGS_CLEAR_APP_CACHE);
-            mPm.deleteApplicationCacheFiles(mPackageName, mClearCacheObserver);
-        } else if (v == mClearDataButton) {
-            if (mAppsControlDisallowedAdmin != null && !mAppsControlDisallowedBySystem) {
-                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
-                        getActivity(), mAppsControlDisallowedAdmin);
-            } else if (mAppEntry.info.manageSpaceActivityName != null) {
-                if (!Utils.isMonkeyRunning()) {
-                    Intent intent = new Intent(Intent.ACTION_DEFAULT);
-                    intent.setClassName(mAppEntry.info.packageName,
-                            mAppEntry.info.manageSpaceActivityName);
-                    startActivityForResult(intent, REQUEST_MANAGE_SPACE);
-                }
-            } else {
-                showDialogInner(DLG_CLEAR_DATA, 0);
-            }
-        } else if (v == mChangeStorageButton && mDialogBuilder != null && !isMoveInProgress()) {
+        if (v == mChangeStorageButton && mDialogBuilder != null && !isMoveInProgress()) {
             mDialogBuilder.show();
         } else if (v == mClearUriButton) {
             if (mAppsControlDisallowedAdmin != null && !mAppsControlDisallowedBySystem) {
@@ -296,20 +309,23 @@ public class AppStorageSettings extends AppInfoWithHeader
 
         if ((!appHasSpaceManagementUI && appRestrictsClearingData)
                 || !isManageSpaceActivityAvailable) {
-            mClearDataButton.setText(R.string.clear_user_data_text);
-            mClearDataButton.setEnabled(false);
+            mButtonsPref
+                    .setButton1Text(R.string.clear_user_data_text)
+                    .setButton1Enabled(false);
             mCanClearData = false;
         } else {
             if (appHasSpaceManagementUI) {
-                mClearDataButton.setText(R.string.manage_space_text);
+                mButtonsPref.setButton1Text(R.string.manage_space_text);
             } else {
-                mClearDataButton.setText(R.string.clear_user_data_text);
+                mButtonsPref.setButton1Text(R.string.clear_user_data_text);
             }
-            mClearDataButton.setOnClickListener(this);
+            mButtonsPref
+                    .setButton1Text(R.string.clear_user_data_text)
+                    .setButton1OnClickListener(v -> handleClearDataClick());
         }
 
         if (mAppsControlDisallowedBySystem) {
-            mClearDataButton.setEnabled(false);
+            mButtonsPref.setButton1Enabled(false);
         }
     }
 
@@ -349,7 +365,7 @@ public class AppStorageSettings extends AppInfoWithHeader
      */
     private void initiateClearUserData() {
         mMetricsFeatureProvider.action(getContext(), MetricsEvent.ACTION_SETTINGS_CLEAR_APP_DATA);
-        mClearDataButton.setEnabled(false);
+        mButtonsPref.setButton1Enabled(false);
         // Invoke uninstall or clear user data based on sysPackage
         String packageName = mAppEntry.info.packageName;
         Log.i(TAG, "Clearing user data for package : " + packageName);
@@ -361,10 +377,10 @@ public class AppStorageSettings extends AppInfoWithHeader
         boolean res = am.clearApplicationUserData(packageName, mClearDataObserver);
         if (!res) {
             // Clearing data failed for some obscure reason. Just log error for now
-            Log.i(TAG, "Couldnt clear application user data for package:"+packageName);
+            Log.i(TAG, "Couldn't clear application user data for package:" + packageName);
             showDialogInner(DLG_CANNOT_CLEAR_DATA, 0);
         } else {
-            mClearDataButton.setText(R.string.recompute_size);
+            mButtonsPref.setButton1Text(R.string.recompute_size);
         }
     }
 
@@ -375,12 +391,12 @@ public class AppStorageSettings extends AppInfoWithHeader
     private void processClearMsg(Message msg) {
         int result = msg.arg1;
         String packageName = mAppEntry.info.packageName;
-        mClearDataButton.setText(R.string.clear_user_data_text);
+        mButtonsPref.setButton1Text(R.string.clear_user_data_text);
         if (result == OP_SUCCESSFUL) {
-            Log.i(TAG, "Cleared user data for package : "+packageName);
+            Log.i(TAG, "Cleared user data for package : " + packageName);
             updateSize();
         } else {
-            mClearDataButton.setEnabled(true);
+            mButtonsPref.setButton1Enabled(true);
         }
     }
 
@@ -391,7 +407,7 @@ public class AppStorageSettings extends AppInfoWithHeader
         // Gets all URI permissions from am.
         ActivityManager am = (ActivityManager) getActivity().getSystemService(
                 Context.ACTIVITY_SERVICE);
-        List<UriPermission> perms =
+        List<GrantedUriPermission> perms =
                 am.getGrantedUriPermissions(mAppEntry.info.packageName).getList();
 
         if (perms.isEmpty()) {
@@ -403,8 +419,8 @@ public class AppStorageSettings extends AppInfoWithHeader
 
         // Group number of URIs by app.
         Map<CharSequence, MutableInt> uriCounters = new TreeMap<>();
-        for (UriPermission perm : perms) {
-            String authority = perm.getUri().getAuthority();
+        for (GrantedUriPermission perm : perms) {
+            String authority = perm.uri.getAuthority();
             ProviderInfo provider = pm.resolveContentProvider(authority, 0);
             CharSequence app = provider.applicationInfo.loadLabel(pm);
             MutableInt count = uriCounters.get(app);
@@ -441,10 +457,23 @@ public class AppStorageSettings extends AppInfoWithHeader
     }
 
     private void clearUriPermissions() {
+        final Context context = getActivity();
+        final String packageName = mAppEntry.info.packageName;
         // Synchronously revoke the permissions.
-        final ActivityManager am = (ActivityManager) getActivity().getSystemService(
+        final ActivityManager am = (ActivityManager) context.getSystemService(
                 Context.ACTIVITY_SERVICE);
-        am.clearGrantedUriPermissions(mAppEntry.info.packageName);
+        am.clearGrantedUriPermissions(packageName);
+
+
+        // Also update the Scoped Directory Access UI permissions
+        final Uri providerUri = new Uri.Builder().scheme(ContentResolver.SCHEME_CONTENT)
+                .authority(AUTHORITY).appendPath(TABLE_PERMISSIONS).appendPath("*")
+                .build();
+        Log.v(TAG, "Asking " + providerUri + " to delete permissions for " + packageName);
+        final int deleted = context.getContentResolver().delete(providerUri, null, new String[] {
+                packageName
+        });
+        Log.d(TAG, "Deleted " + deleted + " entries for package " + packageName);
 
         // Update UI
         refreshGrantedUriPermissions();
@@ -478,11 +507,11 @@ public class AppStorageSettings extends AppInfoWithHeader
                         .create();
             case DLG_CANNOT_CLEAR_DATA:
                 return new AlertDialog.Builder(getActivity())
-                        .setTitle(getActivity().getText(R.string.clear_failed_dlg_title))
+                        .setTitle(getActivity().getText(R.string.clear_user_data_text))
                         .setMessage(getActivity().getText(R.string.clear_failed_dlg_text))
                         .setNeutralButton(R.string.dlg_ok, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                mClearDataButton.setEnabled(false);
+                                mButtonsPref.setButton1Enabled(false);
                                 //force to recompute changed value
                                 setIntentAndFinish(false, false);
                             }
@@ -528,7 +557,8 @@ public class AppStorageSettings extends AppInfoWithHeader
         getLoaderManager().restartLoader(1, Bundle.EMPTY, this);
     }
 
-    private void updateUiWithSize(AppStorageStats result) {
+    @VisibleForTesting
+    void updateUiWithSize(AppStorageStats result) {
         if (mCacheCleared) {
             mSizeController.setCacheCleared(true);
         }
@@ -539,29 +569,26 @@ public class AppStorageSettings extends AppInfoWithHeader
         mSizeController.updateUi(getContext());
 
         if (result == null) {
-            mClearDataButton.setEnabled(false);
-            mClearCacheButton.setEnabled(false);
+            mButtonsPref.setButton1Enabled(false).setButton2Enabled(false);
         } else {
-            long codeSize = result.getCodeBytes();
             long cacheSize = result.getCacheBytes();
             long dataSize = result.getDataBytes() - cacheSize;
 
             if (dataSize <= 0 || !mCanClearData || mDataCleared) {
-                mClearDataButton.setEnabled(false);
+                mButtonsPref.setButton1Enabled(false);
             } else {
-                mClearDataButton.setEnabled(true);
-                mClearDataButton.setOnClickListener(this);
+                mButtonsPref.setButton1Enabled(true)
+                        .setButton1OnClickListener(v -> handleClearDataClick());
             }
             if (cacheSize <= 0 || mCacheCleared) {
-                mClearCacheButton.setEnabled(false);
+                mButtonsPref.setButton2Enabled(false);
             } else {
-                mClearCacheButton.setEnabled(true);
-                mClearCacheButton.setOnClickListener(this);
+                mButtonsPref.setButton2Enabled(true)
+                        .setButton2OnClickListener(v -> handleClearCacheClick());
             }
         }
         if (mAppsControlDisallowedBySystem) {
-            mClearCacheButton.setEnabled(false);
-            mClearDataButton.setEnabled(false);
+            mButtonsPref.setButton1Enabled(false).setButton2Enabled(false);
         }
     }
 
@@ -599,10 +626,10 @@ public class AppStorageSettings extends AppInfoWithHeader
     }
 
     class ClearUserDataObserver extends IPackageDataObserver.Stub {
-       public void onRemoveCompleted(final String packageName, final boolean succeeded) {
-           final Message msg = mHandler.obtainMessage(MSG_CLEAR_USER_DATA);
-           msg.arg1 = succeeded ? OP_SUCCESSFUL : OP_FAILED;
-           mHandler.sendMessage(msg);
+        public void onRemoveCompleted(final String packageName, final boolean succeeded) {
+            final Message msg = mHandler.obtainMessage(MSG_CLEAR_USER_DATA);
+            msg.arg1 = succeeded ? OP_SUCCESSFUL : OP_FAILED;
+            mHandler.sendMessage(msg);
         }
     }
 }

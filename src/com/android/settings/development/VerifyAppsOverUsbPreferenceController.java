@@ -18,32 +18,35 @@ package com.android.settings.development;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedSwitchPreference;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.development.DeveloperOptionsPreferenceController;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.List;
 
 /**
  * Controller to manage the state of "Verify apps over USB" toggle.
  */
-public class VerifyAppsOverUsbPreferenceController extends AbstractPreferenceController implements
+public class VerifyAppsOverUsbPreferenceController extends DeveloperOptionsPreferenceController
+        implements Preference.OnPreferenceChangeListener, AdbOnChangeListener,
         PreferenceControllerMixin {
     private static final String VERIFY_APPS_OVER_USB_KEY = "verify_apps_over_usb";
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
 
-    private RestrictedSwitchPreference mPreference;
+    @VisibleForTesting
+    static final int SETTING_VALUE_ON = 1;
+    @VisibleForTesting
+    static final int SETTING_VALUE_OFF = 0;
 
     /**
      * Class for indirection of RestrictedLockUtils for testing purposes. It would be nice to mock
@@ -56,27 +59,24 @@ public class VerifyAppsOverUsbPreferenceController extends AbstractPreferenceCon
             return RestrictedLockUtils.checkIfRestrictionEnforced(context, userRestriction, userId);
         }
     }
+
     // NB: This field is accessed using reflection in the test, please keep name in sync.
     private final RestrictedLockUtilsDelegate mRestrictedLockUtils =
             new RestrictedLockUtilsDelegate();
 
-    VerifyAppsOverUsbPreferenceController(Context context) {
-        super(context);
-    }
+    // This field is accessed using reflection in the test, please keep name in sync.
+    private final PackageManagerWrapper mPackageManager;
 
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        if (isAvailable()) {
-            mPreference = (RestrictedSwitchPreference)
-                    screen.findPreference(VERIFY_APPS_OVER_USB_KEY);
-        }
+    public VerifyAppsOverUsbPreferenceController(Context context) {
+        super(context);
+
+        mPackageManager = new PackageManagerWrapper(context.getPackageManager());
     }
 
     @Override
     public boolean isAvailable() {
         return Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.PACKAGE_VERIFIER_SETTING_VISIBLE, 1) > 0;
+                Settings.Global.PACKAGE_VERIFIER_SETTING_VISIBLE, 1 /* default */) > 0;
     }
 
     @Override
@@ -84,15 +84,52 @@ public class VerifyAppsOverUsbPreferenceController extends AbstractPreferenceCon
         return VERIFY_APPS_OVER_USB_KEY;
     }
 
-    /** Saves the settings value when it is toggled. */
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        if (VERIFY_APPS_OVER_USB_KEY.equals(preference.getKey())) {
-            Settings.Global.putInt(mContext.getContentResolver(),
-                    Settings.Global.PACKAGE_VERIFIER_INCLUDE_ADB, mPreference.isChecked() ? 1 : 0);
-            return true;
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        final boolean isEnabled = (Boolean) newValue;
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.PACKAGE_VERIFIER_INCLUDE_ADB,
+                isEnabled ? SETTING_VALUE_ON : SETTING_VALUE_OFF);
+        return true;
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        final RestrictedSwitchPreference restrictedPreference =
+            (RestrictedSwitchPreference) preference;
+        if (!shouldBeEnabled()) {
+            restrictedPreference.setChecked(false);
+            restrictedPreference.setDisabledByAdmin(null);
+            restrictedPreference.setEnabled(false);
+            return;
         }
-        return false;
+
+        final EnforcedAdmin enforcingAdmin = mRestrictedLockUtils.checkIfRestrictionEnforced(
+                mContext, UserManager.ENSURE_VERIFY_APPS, UserHandle.myUserId());
+        if (enforcingAdmin != null) {
+            restrictedPreference.setChecked(true);
+            restrictedPreference.setDisabledByAdmin(enforcingAdmin);
+            return;
+        }
+
+        restrictedPreference.setEnabled(true);
+        final boolean checked = Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.PACKAGE_VERIFIER_INCLUDE_ADB, SETTING_VALUE_ON)
+                != SETTING_VALUE_OFF;
+        restrictedPreference.setChecked(checked);
+    }
+
+    @Override
+    public void onAdbSettingChanged() {
+        if (isAvailable()) {
+            updateState(mPreference);
+        }
+    }
+
+    @Override
+    protected void onDeveloperOptionsSwitchEnabled() {
+        super.onDeveloperOptionsSwitchEnabled();
+        updateState(mPreference);
     }
 
     /**
@@ -102,50 +139,24 @@ public class VerifyAppsOverUsbPreferenceController extends AbstractPreferenceCon
      */
     private boolean shouldBeEnabled() {
         final ContentResolver cr = mContext.getContentResolver();
-        if (Settings.Global.getInt(cr, Settings.Global.ADB_ENABLED, 0) == 0) {
+        if (Settings.Global.getInt(cr, Settings.Global.ADB_ENABLED,
+                AdbPreferenceController.ADB_SETTING_OFF)
+                == AdbPreferenceController.ADB_SETTING_OFF) {
             return false;
         }
-        if (Settings.Global.getInt(cr, Settings.Global.PACKAGE_VERIFIER_ENABLE, 1) == 0) {
+        if (Settings.Global.getInt(cr, Settings.Global.PACKAGE_VERIFIER_ENABLE, SETTING_VALUE_ON)
+                == SETTING_VALUE_OFF) {
             return false;
         } else {
-            final PackageManager pm = mContext.getPackageManager();
             final Intent verification = new Intent(Intent.ACTION_PACKAGE_NEEDS_VERIFICATION);
             verification.setType(PACKAGE_MIME_TYPE);
             verification.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            final List<ResolveInfo> receivers = pm.queryBroadcastReceivers(verification, 0);
+            final List<ResolveInfo> receivers = mPackageManager.queryBroadcastReceivers(
+                    verification, 0 /* flags */);
             if (receivers.size() == 0) {
                 return false;
             }
         }
         return true;
-    }
-
-    /**
-     * Updates position, enabled status and maybe admin message.
-     */
-    public void updatePreference() {
-        if (!isAvailable()) {
-            return;
-        }
-
-        if (!shouldBeEnabled()) {
-            mPreference.setChecked(false);
-            mPreference.setDisabledByAdmin(null);
-            mPreference.setEnabled(false);
-            return;
-        }
-
-        final EnforcedAdmin enforcingAdmin = mRestrictedLockUtils.checkIfRestrictionEnforced(
-                        mContext, UserManager.ENSURE_VERIFY_APPS, UserHandle.myUserId());
-        if (enforcingAdmin != null) {
-            mPreference.setChecked(true);
-            mPreference.setDisabledByAdmin(enforcingAdmin);
-            return;
-        }
-
-        mPreference.setEnabled(true);
-        final boolean checked = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.PACKAGE_VERIFIER_INCLUDE_ADB, 1) != 0;
-        mPreference.setChecked(checked);
     }
 }

@@ -20,12 +20,12 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.net.Uri;
 import android.provider.UserDictionary;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -33,34 +33,31 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowContentResolver;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class UserDictionaryListTest {
 
     private FakeProvider mContentProvider;
-
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContentProvider = new FakeProvider();
-        ShadowContentResolver.registerProvider(UserDictionary.AUTHORITY, mContentProvider);
+        ShadowContentResolver.registerProviderInternal(UserDictionary.AUTHORITY, mContentProvider);
     }
 
     @Test
     public void getUserDictionaryLocalesSet_noLocale_shouldReturnEmptySet() {
         mContentProvider.hasDictionary = false;
 
-        assertThat(UserDictionaryList.getUserDictionaryLocalesSet(RuntimeEnvironment.application))
-                .isEmpty();
+        final Context context = RuntimeEnvironment.application;
+        assertThat(UserDictionaryList.getUserDictionaryLocalesSet(context)).isEmpty();
     }
 
     public static class FakeProvider extends ContentProvider {
 
-        public boolean hasDictionary = true;
+        private boolean hasDictionary = true;
 
         @Override
         public boolean onCreate() {

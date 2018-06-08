@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,101 +13,85 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.android.settings.display;
 
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
-import android.os.IBinder;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.PreferenceScreen;
+import android.support.v7.preference.Preference;
+
+import com.android.internal.app.ColorDisplayController;
+import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.util.ReflectionHelpers;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ColorModePreferenceControllerTest {
-    @Mock
-    private ColorModePreferenceController.ConfigurationWrapper mConfigWrapper;
-    @Mock
-    private SwitchPreference mPreference;
-    @Mock
-    private PreferenceScreen mScreen;
-    @Mock
-    private Context mContext;
-    @Mock
-    private IBinder mSurfaceFlinger;
 
+    @Mock
+    private Preference mPreference;
+    @Mock
+    private ColorDisplayController mColorDisplayController;
+
+    private Context mContext;
     private ColorModePreferenceController mController;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        SettingsShadowSystemProperties.clear();
-
-        mController = new ColorModePreferenceController(mContext);
-        ReflectionHelpers.setField(mController, "mSurfaceFlinger", mSurfaceFlinger);
-        ReflectionHelpers.setField(mController, "mConfigWrapper", mConfigWrapper);
-
-        when(mConfigWrapper.isScreenWideColorGamut()).thenReturn(true);
-
-        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
-        when(mPreference.getKey()).thenReturn(mController.getPreferenceKey());
+        mContext = RuntimeEnvironment.application;
+        mController = spy(new ColorModePreferenceController(mContext));
+        doReturn(mColorDisplayController).when(mController).getColorDisplayController();
     }
 
-    @Config(shadows = {SettingsShadowSystemProperties.class})
     @Test
-    public void shouldCheckPreference() {
-        SettingsShadowSystemProperties.set(
-                ColorModePreferenceController.PERSISTENT_PROPERTY_SATURATION,
-                Float.toString(ColorModePreferenceController.COLOR_SATURATION_VIVID));
+    public void updateState_colorModeAutomatic_shouldSetSummaryToAutomatic() {
+        when(mColorDisplayController.getColorMode())
+            .thenReturn(ColorDisplayController.COLOR_MODE_AUTOMATIC);
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setChecked(true);
+        verify(mPreference).setSummary(mContext.getString(R.string.color_mode_option_automatic));
     }
 
-    @Config(shadows = {SettingsShadowSystemProperties.class})
     @Test
-    public void shouldUncheckPreference() {
-        SettingsShadowSystemProperties.set(
-                ColorModePreferenceController.PERSISTENT_PROPERTY_SATURATION,
-                Float.toString(ColorModePreferenceController.COLOR_SATURATION_DEFAULT));
+    public void updateState_colorModeSaturated_shouldSetSummaryToSaturated() {
+        when(mColorDisplayController.getColorMode())
+            .thenReturn(ColorDisplayController.COLOR_MODE_SATURATED);
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setChecked(false);
+        verify(mPreference).setSummary(mContext.getString(R.string.color_mode_option_saturated));
     }
 
-    @Config(shadows = {SettingsShadowSystemProperties.class})
     @Test
-    public void shouldBoostSaturationOnCheck() {
-        mController.onPreferenceChange(mPreference, true);
+    public void updateState_colorModeBoosted_shouldSetSummaryToBoosted() {
+        when(mColorDisplayController.getColorMode())
+            .thenReturn(ColorDisplayController.COLOR_MODE_BOOSTED);
 
-        String saturation = SettingsShadowSystemProperties
-                .get(ColorModePreferenceController.PERSISTENT_PROPERTY_SATURATION);
-        assertThat(saturation)
-                .isEqualTo(Float.toString(ColorModePreferenceController.COLOR_SATURATION_VIVID));
+        mController.updateState(mPreference);
+
+        verify(mPreference).setSummary(mContext.getString(R.string.color_mode_option_boosted));
     }
 
-    @Config(shadows = {SettingsShadowSystemProperties.class})
     @Test
-    public void shouldResetSaturationOnUncheck() {
-        mController.onPreferenceChange(mPreference, false);
+    public void updateState_colorModeNatural_shouldSetSummaryToNatural() {
+        when(mColorDisplayController.getColorMode())
+            .thenReturn(ColorDisplayController.COLOR_MODE_NATURAL);
 
-        String saturation = SettingsShadowSystemProperties
-                .get(ColorModePreferenceController.PERSISTENT_PROPERTY_SATURATION);
-        assertThat(saturation)
-                .isEqualTo(Float.toString(ColorModePreferenceController.COLOR_SATURATION_DEFAULT));
+        mController.updateState(mPreference);
+
+        verify(mPreference).setSummary(mContext.getString(R.string.color_mode_option_natural));
     }
+
 }

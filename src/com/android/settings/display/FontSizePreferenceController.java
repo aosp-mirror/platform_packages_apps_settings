@@ -16,34 +16,24 @@ package com.android.settings.display;
 import android.content.Context;
 import android.content.res.Resources;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.ToggleFontSizePreferenceFragment;
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.core.BasePreferenceController;
 
-public class FontSizePreferenceController extends AbstractPreferenceController implements
-        PreferenceControllerMixin {
+public class FontSizePreferenceController extends BasePreferenceController {
 
-    private static final String KEY_FONT_SIZE = "font_size";
-
-    public FontSizePreferenceController(Context context) {
-        super(context);
+    public FontSizePreferenceController(Context context, String key) {
+        super(context, key);
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
+    public int getAvailabilityStatus() {
+        return AVAILABLE;
     }
 
     @Override
-    public String getPreferenceKey() {
-        return KEY_FONT_SIZE;
-    }
-
-    @Override
-    public void updateState(Preference preference) {
+    public CharSequence getSummary() {
         final float currentScale = Settings.System.getFloat(mContext.getContentResolver(),
                 Settings.System.FONT_SCALE, 1.0f);
         final Resources res = mContext.getResources();
@@ -51,6 +41,6 @@ public class FontSizePreferenceController extends AbstractPreferenceController i
         final String[] strEntryValues = res.getStringArray(R.array.entryvalues_font_size);
         final int index = ToggleFontSizePreferenceFragment.fontSizeValueToIndex(currentScale,
                 strEntryValues);
-        preference.setSummary(entries[index]);
+        return entries[index];
     }
 }

@@ -31,6 +31,7 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.startsWith;
 import static org.mockito.Mockito.atMost;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -50,6 +51,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.android.settings.Settings.WifiSettingsActivity;
+import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.TestAccessPointBuilder;
 import com.android.settingslib.wifi.WifiTracker;
@@ -59,6 +61,7 @@ import com.android.settingslib.wifi.WifiTrackerFactory;
 import com.google.common.collect.Lists;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -260,26 +263,6 @@ public class WifiSettingsUiTest {
     }
 
     @Test
-    public void resumingAp_shouldNotForceUpdateWhenExistingAPsAreListed() {
-        setWifiState(WifiManager.WIFI_STATE_ENABLED);
-        setupConnectedAccessPoint();
-        when(mWifiTracker.isConnected()).thenReturn(true);
-
-        launchActivity();
-
-        onView(withText(resourceString(WIFI_DISPLAY_STATUS_CONNECTED))).check(
-                matches(isDisplayed()));
-        verify(mWifiTracker).forceUpdate();
-
-        Activity activity = mActivityRule.getActivity();
-        activity.finish();
-        getInstrumentation().waitForIdleSync();
-
-        getInstrumentation().callActivityOnStart(activity);
-        verify(mWifiTracker, atMost(1)).forceUpdate();
-    }
-
-    @Test
     public void changingSecurityStateOnApShouldNotCauseMultipleListItems() {
         setWifiState(WifiManager.WIFI_STATE_ENABLED);
         TestAccessPointBuilder builder = new TestAccessPointBuilder(mContext)
@@ -304,10 +287,10 @@ public class WifiSettingsUiTest {
 
         onView(withText(TEST_SSID)).check(matches(isDisplayed()));
 
-        mWifiListener.onAccessPointsChanged();
+        ThreadUtils.postOnMainThread(() -> mWifiListener.onAccessPointsChanged());
         onView(withText(TEST_SSID)).check(matches(isDisplayed()));
 
-        mWifiListener.onAccessPointsChanged();
+        ThreadUtils.postOnMainThread(() -> mWifiListener.onAccessPointsChanged());
         onView(withText(TEST_SSID)).check(matches(isDisplayed()));
     }
 
@@ -358,5 +341,25 @@ public class WifiSettingsUiTest {
         onView(withText(resourceId(STRING, WIFI_SHOW_PASSWORD))).check(matches(isDisplayed()));
         onView(withId(resourceId(ID, PASSWORD_LAYOUT))).check(matches(isDisplayed()));
         onView(withId(resourceId(ID, PASSWORD))).check(matches(isDisplayed()));
+    }
+
+    @Ignore("b/73796195")
+    @Test
+    public void onConnectedChanged_shouldNotFetchAPs() {
+        setWifiState(WifiManager.WIFI_STATE_ENABLED);
+        when(mWifiTracker.isConnected()).thenReturn(true);
+
+        launchActivity();
+
+        verify(mWifiTracker, times(1)).getAccessPoints();
+        onView(withText(WIFI_DISPLAY_STATUS_CONNECTED)).check(matches(isDisplayed()));
+
+        // Invoke onConnectedChanged
+        when(mWifiTracker.isConnected()).thenReturn(false);
+        mWifiListener.onConnectedChanged();
+
+        // Verify no additional call to getAccessPoints
+        getInstrumentation().waitForIdleSync();
+        verify(mWifiTracker, times(1)).getAccessPoints();
     }
 }

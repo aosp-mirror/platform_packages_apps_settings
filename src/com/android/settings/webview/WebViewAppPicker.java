@@ -27,12 +27,13 @@ import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
+import android.webkit.UserPackage;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.applications.PackageManagerWrapper;
-import com.android.settings.applications.defaultapps.DefaultAppInfo;
 import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
+import com.android.settingslib.applications.DefaultAppInfo;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,14 +58,20 @@ public class WebViewAppPicker extends DefaultAppPickerFragment {
     }
 
     @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.webview_app_settings;
+    }
+
+    @Override
     protected List<DefaultAppInfo> getCandidates() {
         final List<DefaultAppInfo> packageInfoList = new ArrayList<DefaultAppInfo>();
-        List<ApplicationInfo> pkgs =
-                getWebViewUpdateServiceWrapper().getValidWebViewApplicationInfos(getContext());
+        final Context context = getContext();
+        final WebViewUpdateServiceWrapper webViewUpdateService = getWebViewUpdateServiceWrapper();
+        final List<ApplicationInfo> pkgs =
+                webViewUpdateService.getValidWebViewApplicationInfos(context);
         for (ApplicationInfo ai : pkgs) {
-            packageInfoList.add(createDefaultAppInfo(mPm, ai,
-                    getDisabledReason(getWebViewUpdateServiceWrapper(),
-                            getContext(), ai.packageName)));
+            packageInfoList.add(createDefaultAppInfo(context, mPm, ai,
+                    getDisabledReason(webViewUpdateService, context, ai.packageName)));
         }
         return packageInfoList;
     }
@@ -111,9 +118,9 @@ public class WebViewAppPicker extends DefaultAppPickerFragment {
     }
 
     private static class WebViewAppInfo extends DefaultAppInfo {
-        public WebViewAppInfo(PackageManagerWrapper pm, PackageItemInfo packageItemInfo,
-                String summary, boolean enabled) {
-            super(pm, packageItemInfo, summary, enabled);
+        public WebViewAppInfo(Context context, PackageManagerWrapper pm,
+                PackageItemInfo packageItemInfo, String summary, boolean enabled) {
+            super(context, pm, packageItemInfo, summary, enabled);
         }
 
         @Override
@@ -130,9 +137,9 @@ public class WebViewAppPicker extends DefaultAppPickerFragment {
 
 
     @VisibleForTesting
-    DefaultAppInfo createDefaultAppInfo(PackageManagerWrapper pm, PackageItemInfo packageItemInfo,
-            String disabledReason) {
-        return new WebViewAppInfo(pm, packageItemInfo, disabledReason,
+    DefaultAppInfo createDefaultAppInfo(Context context, PackageManagerWrapper pm,
+            PackageItemInfo packageItemInfo, String disabledReason) {
+        return new WebViewAppInfo(context, pm, packageItemInfo, disabledReason,
                 TextUtils.isEmpty(disabledReason) /* enabled */);
     }
 
@@ -143,9 +150,9 @@ public class WebViewAppPicker extends DefaultAppPickerFragment {
     @VisibleForTesting
     String getDisabledReason(WebViewUpdateServiceWrapper webviewUpdateServiceWrapper,
             Context context, String packageName) {
-        List<UserPackageWrapper> userPackages =
+        List<UserPackage> userPackages =
                 webviewUpdateServiceWrapper.getPackageInfosAllUsers(context, packageName);
-        for (UserPackageWrapper userPackage : userPackages) {
+        for (UserPackage userPackage : userPackages) {
             if (!userPackage.isInstalledPackage()) {
                 // Package uninstalled/hidden
                 return context.getString(

@@ -16,9 +16,12 @@
 
 package com.android.settings.applications;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.IPackageManager;
 import android.os.UserManager;
-import com.android.settings.enterprise.DevicePolicyManagerWrapper;
+
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 /**
  * Lists installed apps across all users that have been granted one or more specific permissions by
@@ -26,12 +29,12 @@ import com.android.settings.enterprise.DevicePolicyManagerWrapper;
  */
 public abstract class AppWithAdminGrantedPermissionsLister extends AppLister {
     private final String[] mPermissions;
-    private final IPackageManagerWrapper mPackageManagerService;
-    private final DevicePolicyManagerWrapper mDevicePolicyManager;
+    private final IPackageManager mPackageManagerService;
+    private final DevicePolicyManager mDevicePolicyManager;
 
     public AppWithAdminGrantedPermissionsLister(String[] permissions,
-            PackageManagerWrapper packageManager, IPackageManagerWrapper packageManagerService,
-            DevicePolicyManagerWrapper devicePolicyManager, UserManager userManager) {
+            PackageManagerWrapper packageManager, IPackageManager packageManagerService,
+            DevicePolicyManager devicePolicyManager, UserManager userManager) {
         super(packageManager, userManager);
         mPermissions = permissions;
         mPackageManagerService = packageManagerService;

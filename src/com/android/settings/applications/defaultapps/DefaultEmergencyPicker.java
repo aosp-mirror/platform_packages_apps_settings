@@ -17,6 +17,7 @@
 package com.android.settings.applications.defaultapps;
 
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -27,6 +28,8 @@ import android.text.TextUtils;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settingslib.applications.DefaultAppInfo;
+import com.android.settingslib.widget.CandidateInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,17 +42,23 @@ public class DefaultEmergencyPicker extends DefaultAppPickerFragment {
     }
 
     @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.default_emergency_settings;
+    }
+
+    @Override
     protected List<DefaultAppInfo> getCandidates() {
         final List<DefaultAppInfo> candidates = new ArrayList<>();
         final List<ResolveInfo> infos = mPm.getPackageManager().queryIntentActivities(
                 DefaultEmergencyPreferenceController.QUERY_INTENT, 0);
         PackageInfo bestMatch = null;
+        final Context context = getContext();
         for (ResolveInfo info : infos) {
             try {
                 final PackageInfo packageInfo =
                         mPm.getPackageManager().getPackageInfo(info.activityInfo.packageName, 0);
                 final ApplicationInfo appInfo = packageInfo.applicationInfo;
-                candidates.add(new DefaultAppInfo(mPm, appInfo));
+                candidates.add(new DefaultAppInfo(context, mPm, appInfo));
                 // Get earliest installed system app.
                 if (isSystemApp(appInfo) && (bestMatch == null ||
                         bestMatch.firstInstallTime > packageInfo.firstInstallTime)) {

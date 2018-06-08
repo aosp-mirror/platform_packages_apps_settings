@@ -14,8 +14,6 @@
 package com.android.settings.display;
 
 import android.content.Context;
-import android.content.om.IOverlayManager;
-import android.content.om.OverlayInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -29,14 +27,15 @@ import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.wrapper.OverlayManagerWrapper;
+import com.android.settings.wrapper.OverlayManagerWrapper.OverlayInfo;
 import com.android.settingslib.core.AbstractPreferenceController;
-
-import libcore.util.Objects;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION_THEME;
 
@@ -46,16 +45,16 @@ public class ThemePreferenceController extends AbstractPreferenceController impl
     private static final String KEY_THEME = "theme";
 
     private final MetricsFeatureProvider mMetricsFeatureProvider;
-    private final OverlayManager mOverlayService;
+    private final OverlayManagerWrapper mOverlayService;
     private final PackageManager mPackageManager;
 
     public ThemePreferenceController(Context context) {
         this(context, ServiceManager.getService(Context.OVERLAY_SERVICE) != null
-                ? new OverlayManager() : null);
+                ? new OverlayManagerWrapper() : null);
     }
 
     @VisibleForTesting
-    ThemePreferenceController(Context context, OverlayManager overlayManager) {
+    ThemePreferenceController(Context context, OverlayManagerWrapper overlayManager) {
         super(context);
         mOverlayService = overlayManager;
         mPackageManager = context.getPackageManager();
@@ -111,37 +110,32 @@ public class ThemePreferenceController extends AbstractPreferenceController impl
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         String current = getTheme();
-        if (Objects.equal(newValue, current)) {
+        if (Objects.equals(newValue, current)) {
             return true;
         }
-        try {
-            mOverlayService.setEnabledExclusive((String) newValue, true, UserHandle.myUserId());
-        } catch (RemoteException e) {
-            return false;
-        }
+        mOverlayService.setEnabledExclusiveInCategory((String) newValue, UserHandle.myUserId());
         return true;
     }
 
-    private boolean isChangeableOverlay(String packageName) {
+    private boolean isTheme(OverlayInfo oi) {
+        if (!OverlayInfo.CATEGORY_THEME.equals(oi.category)) {
+            return false;
+        }
         try {
-            PackageInfo pi = mPackageManager.getPackageInfo(packageName, 0);
-            return pi != null && !pi.isStaticOverlay;
+            PackageInfo pi = mPackageManager.getPackageInfo(oi.packageName, 0);
+            return pi != null && !pi.isStaticOverlayPackage();
         } catch (PackageManager.NameNotFoundException e) {
             return false;
         }
     }
 
     private String getTheme() {
-        try {
-            List<OverlayInfo> infos = mOverlayService.getOverlayInfosForTarget("android",
-                    UserHandle.myUserId());
-            for (int i = 0, size = infos.size(); i < size; i++) {
-                if (infos.get(i).isEnabled() &&
-                        isChangeableOverlay(infos.get(i).packageName)) {
-                    return infos.get(i).packageName;
-                }
+        List<OverlayInfo> infos = mOverlayService.getOverlayInfosForTarget("android",
+                UserHandle.myUserId());
+        for (int i = 0, size = infos.size(); i < size; i++) {
+            if (infos.get(i).isEnabled() && isTheme(infos.get(i))) {
+                return infos.get(i).packageName;
             }
-        } catch (RemoteException e) {
         }
         return null;
     }
@@ -161,37 +155,14 @@ public class ThemePreferenceController extends AbstractPreferenceController impl
 
     @VisibleForTesting
     String[] getAvailableThemes() {
-        try {
-            List<OverlayInfo> infos = mOverlayService.getOverlayInfosForTarget("android",
-                    UserHandle.myUserId());
-            List<String> pkgs = new ArrayList(infos.size());
-            for (int i = 0, size = infos.size(); i < size; i++) {
-                if (isChangeableOverlay(infos.get(i).packageName)) {
-                    pkgs.add(infos.get(i).packageName);
-                }
+        List<OverlayInfo> infos = mOverlayService.getOverlayInfosForTarget("android",
+                UserHandle.myUserId());
+        List<String> pkgs = new ArrayList<>(infos.size());
+        for (int i = 0, size = infos.size(); i < size; i++) {
+            if (isTheme(infos.get(i))) {
+                pkgs.add(infos.get(i).packageName);
             }
-            return pkgs.toArray(new String[pkgs.size()]);
-        } catch (RemoteException e) {
         }
-        return new String[0];
-    }
-
-    public static class OverlayManager {
-        private final IOverlayManager mService;
-
-        public OverlayManager() {
-            mService = IOverlayManager.Stub.asInterface(
-                    ServiceManager.getService(Context.OVERLAY_SERVICE));
-        }
-
-        public void setEnabledExclusive(String pkg, boolean enabled, int userId)
-                throws RemoteException {
-            mService.setEnabledExclusive(pkg, enabled, userId);
-        }
-
-        public List<OverlayInfo> getOverlayInfosForTarget(String target, int userId)
-                throws RemoteException {
-            return mService.getOverlayInfosForTarget(target, userId);
-        }
+        return pkgs.toArray(new String[pkgs.size()]);
     }
 }

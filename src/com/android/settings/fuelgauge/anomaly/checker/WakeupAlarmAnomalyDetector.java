@@ -21,6 +21,8 @@ import android.os.BatteryStats;
 import android.support.annotation.VisibleForTesting;
 import android.text.format.DateUtils;
 import android.util.ArrayMap;
+import android.util.ArraySet;
+import android.util.Log;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
@@ -31,6 +33,7 @@ import com.android.settings.fuelgauge.anomaly.AnomalyDetectionPolicy;
 import com.android.settings.fuelgauge.anomaly.AnomalyUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;

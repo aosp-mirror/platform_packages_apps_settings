@@ -16,26 +16,22 @@
 
 package com.android.settings.vpn2;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
-
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-/**
- * Tests for {@link VpnUtils}.
- */
+import android.net.ConnectivityManager;
+
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class VpnUtilsTest {
     @Test
     public void testIsAlwaysOnVpnSet() {
-        final ConnectivityManagerWrapper cm = mock(ConnectivityManagerWrapper.class);
+        final ConnectivityManager cm = mock(ConnectivityManager.class);
         when(cm.getAlwaysOnVpnPackageForUser(0)).thenReturn("com.example.vpn");
         assertThat(VpnUtils.isAlwaysOnVpnSet(cm, 0)).isTrue();
 

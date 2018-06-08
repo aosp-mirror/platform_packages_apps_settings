@@ -18,6 +18,7 @@ import android.content.Context;
 import android.net.NetworkPolicy;
 import android.net.NetworkStatsHistory;
 import android.net.TrafficStats;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.text.SpannableStringBuilder;
@@ -26,6 +27,7 @@ import android.text.format.Formatter;
 import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
 import android.util.SparseIntArray;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.graph.UsageView;
@@ -88,7 +90,8 @@ public class ChartDataUsagePreference extends Preference {
         return (int) (Math.max(totalData, policyMax) / RESOLUTION);
     }
 
-    private void calcPoints(UsageView chart) {
+    @VisibleForTesting
+    void calcPoints(UsageView chart) {
         SparseIntArray points = new SparseIntArray();
         NetworkStatsHistory.Entry entry = null;
 
@@ -108,6 +111,9 @@ public class ChartDataUsagePreference extends Preference {
             // increment by current bucket total
             totalData += entry.rxBytes + entry.txBytes;
 
+            if (i == 0) {
+                points.put(toInt(startTime - mStart) - 1, -1);
+            }
             points.put(toInt(startTime - mStart + 1), (int) (totalData / RESOLUTION));
             points.put(toInt(endTime - mStart), (int) (totalData / RESOLUTION));
         }
@@ -150,7 +156,7 @@ public class ChartDataUsagePreference extends Preference {
 
     private CharSequence getLabel(long bytes, int str, int mLimitColor) {
         Formatter.BytesResult result = Formatter.formatBytes(getContext().getResources(),
-                bytes, Formatter.FLAG_SHORTER);
+                bytes, Formatter.FLAG_SHORTER | Formatter.FLAG_IEC_UNITS);
         CharSequence label = TextUtils.expandTemplate(getContext().getText(str),
                 result.value, result.units);
         return new SpannableStringBuilder().append(label, new ForegroundColorSpan(mLimitColor), 0);

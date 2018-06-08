@@ -156,8 +156,8 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
             preference.setFragment(
                     ToggleScreenMagnificationPreferenceFragmentForSetupWizard.class.getName());
             final Bundle extras = preference.getExtras();
-            MagnificationPreferenceFragment.populateMagnificationGesturesPreferenceExtras(extras,
-                    context);
+            MagnificationGesturesPreferenceController
+                    .populateMagnificationGesturesPreferenceExtras(extras, context);
         }
     }
 }

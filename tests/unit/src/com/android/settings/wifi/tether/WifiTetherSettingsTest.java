@@ -16,12 +16,6 @@
 
 package com.android.settings.wifi.tether;
 
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static com.google.common.truth.Truth.assertThat;
-
 import android.app.Instrumentation;
 import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
@@ -38,6 +32,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 @RunWith(AndroidJUnit4.class)
 @SmallTest
@@ -65,22 +64,17 @@ public class WifiTetherSettingsTest {
     }
 
     @Test
-    public void verifyPageIsDisabledByDefault() {
-        assertThat(WifiTetherSettings.isTetherSettingPageEnabled()).isFalse();
-    }
-
-    @Test
     public void launchTetherSettings_shouldHaveAllFields() {
         launchWifiTetherActivity();
-        onView(withText("Network name")).check(matches(isDisplayed()));
-        onView(withText("Password")).check(matches(isDisplayed()));
-        onView(withText("Select AP Band")).check(matches(isDisplayed()));
+        onView(withText("Hotspot name")).check(matches(isDisplayed()));
+        onView(withText("Hotspot password")).check(matches(isDisplayed()));
+        onView(withText("AP Band")).check(matches(isDisplayed()));
     }
 
     private void launchWifiTetherActivity() {
         mInstrumentation.startActivitySync(mTetherActivityIntent);
-        onView(withText("Portable Wi‑Fi hotspot")).perform();
-        UiObject2 item = mDevice.wait(Until.findObject(By.text("Portable Wi‑Fi hotspot")), TIMEOUT);
+        onView(withText("Wi‑Fi hotspot")).perform();
+        UiObject2 item = mDevice.wait(Until.findObject(By.text("Wi‑Fi hotspot")), TIMEOUT);
         item.click();
     }
 }
