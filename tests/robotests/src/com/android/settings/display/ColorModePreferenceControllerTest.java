@@ -16,13 +16,12 @@
 
 package com.android.settings.display;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import androidx.preference.Preference;
 
 import com.android.internal.app.ColorDisplayController;
 import com.android.settings.R;
@@ -35,63 +34,69 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 
+import androidx.preference.Preference;
+
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ColorModePreferenceControllerTest {
 
     @Mock
-    private Preference mPreference;
-    @Mock
     private ColorDisplayController mColorDisplayController;
 
     private Context mContext;
+    private Preference mPreference;
     private ColorModePreferenceController mController;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = spy(new ColorModePreferenceController(mContext));
+        mController = spy(new ColorModePreferenceController(mContext, "test"));
+        mPreference = new Preference(mContext);
         doReturn(mColorDisplayController).when(mController).getColorDisplayController();
     }
 
     @Test
     public void updateState_colorModeAutomatic_shouldSetSummaryToAutomatic() {
         when(mColorDisplayController.getColorMode())
-            .thenReturn(ColorDisplayController.COLOR_MODE_AUTOMATIC);
+                .thenReturn(ColorDisplayController.COLOR_MODE_AUTOMATIC);
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary(mContext.getString(R.string.color_mode_option_automatic));
+        assertThat(mPreference.getSummary())
+                .isEqualTo(mContext.getText(R.string.color_mode_option_automatic));
     }
 
     @Test
     public void updateState_colorModeSaturated_shouldSetSummaryToSaturated() {
         when(mColorDisplayController.getColorMode())
-            .thenReturn(ColorDisplayController.COLOR_MODE_SATURATED);
+                .thenReturn(ColorDisplayController.COLOR_MODE_SATURATED);
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary(mContext.getString(R.string.color_mode_option_saturated));
+        assertThat(mPreference.getSummary())
+                .isEqualTo(mContext.getText(R.string.color_mode_option_saturated));
     }
 
     @Test
     public void updateState_colorModeBoosted_shouldSetSummaryToBoosted() {
         when(mColorDisplayController.getColorMode())
-            .thenReturn(ColorDisplayController.COLOR_MODE_BOOSTED);
+                .thenReturn(ColorDisplayController.COLOR_MODE_BOOSTED);
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary(mContext.getString(R.string.color_mode_option_boosted));
+        assertThat(mPreference.getSummary())
+                .isEqualTo(mContext.getText(R.string.color_mode_option_boosted));
     }
 
     @Test
     public void updateState_colorModeNatural_shouldSetSummaryToNatural() {
         when(mColorDisplayController.getColorMode())
-            .thenReturn(ColorDisplayController.COLOR_MODE_NATURAL);
+                .thenReturn(ColorDisplayController.COLOR_MODE_NATURAL);
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary(mContext.getString(R.string.color_mode_option_natural));
+        assertThat(mPreference.getSummary())
+                .isEqualTo(mContext.getText(R.string.color_mode_option_natural));
     }
 
 }

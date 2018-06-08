@@ -27,15 +27,14 @@ import com.android.settings.core.BasePreferenceController;
 
 public class ColorModePreferenceController extends BasePreferenceController {
     private static final String TAG = "ColorModePreference";
-    private static final String KEY_COLOR_MODE = "color_mode";
 
     private static final int SURFACE_FLINGER_TRANSACTION_QUERY_WIDE_COLOR = 1024;
 
     private final ConfigurationWrapper mConfigWrapper;
     private ColorDisplayController mColorDisplayController;
 
-    public ColorModePreferenceController(Context context) {
-        super(context, KEY_COLOR_MODE);
+    public ColorModePreferenceController(Context context, String key) {
+        super(context, key);
         mConfigWrapper = new ConfigurationWrapper();
     }
 
@@ -43,7 +42,7 @@ public class ColorModePreferenceController extends BasePreferenceController {
     public int getAvailabilityStatus() {
         return mConfigWrapper.isScreenWideColorGamut()
                 && !getColorDisplayController().getAccessibilityTransformActivated() ?
-                AVAILABLE : DISABLED_FOR_USER;
+                AVAILABLE_UNSEARCHABLE : DISABLED_FOR_USER;
     }
 
     @Override

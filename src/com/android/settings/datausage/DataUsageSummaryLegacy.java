@@ -22,10 +22,6 @@ import android.net.NetworkPolicyManager;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.os.UserManager;
-import android.provider.SearchIndexableResource;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.text.BidiFormatter;
@@ -43,20 +39,20 @@ import com.android.settings.R;
 import com.android.settings.SummaryPreference;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.SummaryLoader;
-import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.net.DataUsageController;
-import com.android.settingslib.search.SearchIndexable;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 /**
  * Legacy {@link DataUsageSummary} fragment.
  */
-@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class DataUsageSummaryLegacy extends DataUsageBaseFragment implements Indexable,
         DataUsageEditController {
 
@@ -143,7 +139,7 @@ public class DataUsageSummaryLegacy extends DataUsageBaseFragment implements Ind
         }
         mDataUsageTemplate = hasMobileData ? R.string.cell_data_template
                 : hasWifiRadio ? R.string.wifi_data_template
-                : R.string.ethernet_data_template;
+                        : R.string.ethernet_data_template;
 
         setHasOptionsMenu(true);
     }
@@ -204,7 +200,7 @@ public class DataUsageSummaryLegacy extends DataUsageBaseFragment implements Ind
         category.setTemplate(getNetworkTemplate(subId), subId, services);
         category.pushTemplates(services);
         if (subInfo != null && !TextUtils.isEmpty(subInfo.getDisplayName())) {
-            Preference title  = category.findPreference(KEY_MOBILE_USAGE_TITLE);
+            Preference title = category.findPreference(KEY_MOBILE_USAGE_TITLE);
             title.setTitle(subInfo.getDisplayName());
         }
     }
@@ -260,7 +256,7 @@ public class DataUsageSummaryLegacy extends DataUsageBaseFragment implements Ind
 
         final SpannableString amountTemplate = new SpannableString(
                 context.getString(com.android.internal.R.string.fileSizeSuffix)
-                .replace("%1$s", "^1").replace("%2$s", "^2"));
+                        .replace("%1$s", "^1").replace("%2$s", "^2"));
         final CharSequence formattedUsage = TextUtils.expandTemplate(amountTemplate,
                 enlargedValue, usedResult.units);
 
@@ -359,52 +355,5 @@ public class DataUsageSummaryLegacy extends DataUsageBaseFragment implements Ind
     }
 
     public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
-        = SummaryProvider::new;
-
-    /**
-     * For search
-     */
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-        new BaseSearchIndexProvider() {
-
-            @Override
-            public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                    boolean enabled) {
-                List<SearchIndexableResource> resources = new ArrayList<>();
-                SearchIndexableResource resource = new SearchIndexableResource(context);
-                resource.xmlResId = R.xml.data_usage_legacy;
-                resources.add(resource);
-
-                resource = new SearchIndexableResource(context);
-                resource.xmlResId = R.xml.data_usage_cellular;
-                resources.add(resource);
-
-                resource = new SearchIndexableResource(context);
-                resource.xmlResId = R.xml.data_usage_wifi;
-                resources.add(resource);
-
-                return resources;
-            }
-
-            @Override
-            public List<String> getNonIndexableKeys(Context context) {
-                List<String> keys = super.getNonIndexableKeys(context);
-
-                if (!DataUsageUtils.hasMobileData(context)) {
-                    keys.add(KEY_MOBILE_USAGE_TITLE);
-                    keys.add(KEY_MOBILE_DATA_USAGE_TOGGLE);
-                    keys.add(KEY_MOBILE_DATA_USAGE);
-                    keys.add(KEY_MOBILE_BILLING_CYCLE);
-                }
-
-                if (!DataUsageUtils.hasWifiRadio(context)) {
-                    keys.add(KEY_WIFI_DATA_USAGE);
-                }
-
-                // This title is named Wifi, and will confuse users.
-                keys.add(KEY_WIFI_USAGE_TITLE);
-
-                return keys;
-            }
-        };
+            = SummaryProvider::new;
 }
