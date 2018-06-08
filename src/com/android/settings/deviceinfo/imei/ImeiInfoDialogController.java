@@ -53,6 +53,9 @@ public class ImeiInfoDialogController {
     static final int ID_GSM_SETTINGS = R.id.gsm_settings;
 
     private static CharSequence getTextAsDigits(CharSequence text) {
+        if (TextUtils.isEmpty(text)) {
+            return "";
+        }
         if (TextUtils.isDigitsOnly(text)) {
             final Spannable spannable = new SpannableStringBuilder(text);
             final TtsSpan span = new TtsSpan.DigitsBuilder(text.toString()).build();
