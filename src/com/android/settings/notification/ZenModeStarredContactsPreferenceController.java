@@ -68,7 +68,10 @@ public class ZenModeStarredContactsPreferenceController extends
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(KEY);
-        mPreference.setOnPreferenceClickListener(this);
+
+        if (mPreference != null) {
+            mPreference.setOnPreferenceClickListener(this);
+        }
     }
 
     @Override

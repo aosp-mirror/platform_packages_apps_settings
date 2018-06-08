@@ -33,10 +33,12 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.StrictMode;
+import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
 import android.util.ArraySet;
 
 import com.android.settings.bluetooth.BluetoothSliceBuilder;
+import com.android.settings.flashlight.FlashlightSliceBuilder;
 import com.android.settings.location.LocationSliceBuilder;
 import com.android.settings.notification.ZenModeSliceBuilder;
 import com.android.settings.testutils.DatabaseTestUtils;
@@ -95,7 +97,8 @@ public class SettingsSliceProviderTest {
     );
 
     private static final List<Uri> SPECIAL_CASE_OEM_URIS = Arrays.asList(
-            ZenModeSliceBuilder.ZEN_MODE_URI
+            ZenModeSliceBuilder.ZEN_MODE_URI,
+            FlashlightSliceBuilder.FLASHLIGHT_URI
     );
 
     @Before
@@ -442,6 +445,16 @@ public class SettingsSliceProviderTest {
         final Slice wifiSlice = mProvider.onBindSlice(WifiSliceBuilder.WIFI_URI);
 
         assertThat(wifiSlice.getUri()).isEqualTo(WifiSliceBuilder.WIFI_URI);
+    }
+
+    @Test
+    public void bindSlice_flashlightSlice_returnsFlashlightSlice() {
+        Settings.Secure.putInt(
+                mContext.getContentResolver(), Settings.Secure.FLASHLIGHT_AVAILABLE, 1);
+
+        final Slice flashlightSlice = mProvider.onBindSlice(FlashlightSliceBuilder.FLASHLIGHT_URI);
+
+        assertThat(flashlightSlice.getUri()).isEqualTo(FlashlightSliceBuilder.FLASHLIGHT_URI);
     }
 
     @Test

@@ -42,13 +42,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.ContactsContract;
 import android.provider.SearchIndexableResource;
-import android.provider.Settings.Global;
-import androidx.annotation.VisibleForTesting;
-import androidx.annotation.WorkerThread;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceClickListener;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceScreen;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Menu;
@@ -82,6 +75,13 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.annotation.WorkerThread;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceClickListener;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
+
 /**
  * Screen that manages the list of users on the device.
  * Guest user is an always visible entry, even if the guest is not currently
@@ -109,6 +109,8 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private static final int MENU_REMOVE_USER = Menu.FIRST;
 
+    private static final IntentFilter USER_REMOVED_INTENT_FILTER;
+
     private static final int DIALOG_CONFIRM_REMOVE = 1;
     private static final int DIALOG_ADD_USER = 2;
     private static final int DIALOG_SETUP_USER = 3;
@@ -133,6 +135,11 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private static final String KEY_TITLE = "title";
     private static final String KEY_SUMMARY = "summary";
+
+    static {
+        USER_REMOVED_INTENT_FILTER = new IntentFilter(Intent.ACTION_USER_REMOVED);
+        USER_REMOVED_INTENT_FILTER.addAction(Intent.ACTION_USER_INFO_CHANGED);
+    }
 
     private PreferenceGroup mUserListCategory;
     private UserPreference mMePreference;
@@ -195,13 +202,14 @@ public class UserSettings extends SettingsPreferenceFragment
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         addPreferencesFromResource(R.xml.user_settings);
-        if (Global.getInt(getContext().getContentResolver(), Global.DEVICE_PROVISIONED, 0) == 0) {
-            getActivity().finish();
+        final Activity activity = getActivity();
+        if (!Utils.isDeviceProvisioned(getActivity())) {
+            activity.finish();
             return;
         }
-        final Context context = getActivity();
+
         mAddUserWhenLockedPreferenceController = new AddUserWhenLockedPreferenceController(
-                context, KEY_ADD_USER_WHEN_LOCKED, getLifecycle());
+                activity, KEY_ADD_USER_WHEN_LOCKED, getLifecycle());
         final PreferenceScreen screen = getPreferenceScreen();
         mAddUserWhenLockedPreferenceController.displayPreference(screen);
 
@@ -218,8 +226,8 @@ public class UserSettings extends SettingsPreferenceFragment
             mEditUserInfoController.onRestoreInstanceState(icicle);
         }
 
-        mUserCaps = UserCapabilities.create(context);
-        mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
+        mUserCaps = UserCapabilities.create(activity);
+        mUserManager = (UserManager) activity.getSystemService(Context.USER_SERVICE);
         if (!mUserCaps.mEnabled) {
             return;
         }
@@ -248,9 +256,10 @@ public class UserSettings extends SettingsPreferenceFragment
         } else {
             mAddUser.setVisible(false);
         }
-        final IntentFilter filter = new IntentFilter(Intent.ACTION_USER_REMOVED);
-        filter.addAction(Intent.ACTION_USER_INFO_CHANGED);
-        context.registerReceiverAsUser(mUserChangeReceiver, UserHandle.ALL, filter, null, mHandler);
+
+        activity.registerReceiverAsUser(
+                mUserChangeReceiver, UserHandle.ALL, USER_REMOVED_INTENT_FILTER, null, mHandler);
+
         loadProfile();
         updateUserList();
         mShouldUpdateUserList = false;
@@ -762,9 +771,11 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private void updateUserList() {
-        if (getActivity() == null) return;
-        List<UserInfo> users = mUserManager.getUsers(true);
         final Context context = getActivity();
+        if (context == null) {
+            return;
+        }
+        final List<UserInfo> users = mUserManager.getUsers(true);
 
         final boolean voiceCapable = Utils.isVoiceCapable(context);
         final ArrayList<Integer> missingIcons = new ArrayList<>();

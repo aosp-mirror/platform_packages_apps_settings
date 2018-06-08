@@ -24,6 +24,7 @@ import androidx.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -35,7 +36,8 @@ import com.android.settings.password.ChooseLockSettingsHelper;
  */
 public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
 
-    private static final int CONFIRM_REQUEST = 1;
+    @VisibleForTesting
+    static final int CONFIRM_REQUEST = 1;
     private static final int ENROLLING = 2;
     public static final String EXTRA_KEY_LAUNCHED_CONFIRM = "launched_confirm_lock";
 
@@ -170,7 +172,7 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CONFIRM_REQUEST) {
-            if (resultCode == RESULT_OK) {
+            if (resultCode == RESULT_OK && data != null) {
                 mToken = data.getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
                 overridePendingTransition(R.anim.suw_slide_next_in, R.anim.suw_slide_next_out);
                 getIntent().putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);

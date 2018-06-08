@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import static android.net.ConnectivityManager.NetworkCallback;
+import static android.provider.Settings.Global.PREFERRED_NETWORK_MODE;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -39,6 +40,7 @@ import android.os.AsyncResult;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.CellInfo;
 import android.telephony.CellInfoCdma;
@@ -1451,6 +1453,19 @@ public class RadioInfo extends Activity {
             if (mPreferredNetworkTypeResult != pos && pos >= 0
                     && pos <= mPreferredNetworkLabels.length - 2) {
                 mPreferredNetworkTypeResult = pos;
+
+                // TODO: Possibly migrate this to TelephonyManager.setPreferredNetworkType()
+                // which today still has some issues (mostly that the "set" is conditional
+                // on a successful modem call, which is not what we want). Instead we always
+                // want this setting to be set, so that if the radio hiccups and this setting
+                // is for some reason unsuccessful, future calls to the radio will reflect
+                // the users's preference which is set here.
+                final int subId = phone.getSubId();
+                if (SubscriptionManager.isUsableSubIdValue(subId)) {
+                    Settings.Global.putInt(phone.getContext().getContentResolver(),
+                            PREFERRED_NETWORK_MODE + subId, mPreferredNetworkTypeResult);
+                }
+                log("Calling setPreferredNetworkType(" + mPreferredNetworkTypeResult + ")");
                 Message msg = mHandler.obtainMessage(EVENT_SET_PREFERRED_TYPE_DONE);
                 phone.setPreferredNetworkType(mPreferredNetworkTypeResult, msg);
             }

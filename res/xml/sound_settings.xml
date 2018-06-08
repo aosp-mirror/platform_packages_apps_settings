@@ -94,14 +94,15 @@
         android:order="-120"
         settings:useAdminDisabledSummary="true"
         settings:keywords="@string/keywords_sounds_and_notifications_interruptions"
-        settings:allowDividerAbove="true"/>
+        settings:allowDividerAbove="true"
+        settings:controller="com.android.settings.notification.ZenModePreferenceController" />
 
     <Preference
         android:key="gesture_prevent_ringing_sound"
         android:title="@string/gesture_prevent_ringing_sound_title"
         android:order="-110"
         android:fragment="com.android.settings.gestures.PreventRingingGestureSettings"
-        settings:controller="com.android.settings.gestures.PreventRingingPreferenceController" />
+        settings:controller="com.android.settings.gestures.PreventRingingParentPreferenceController" />
 
     <!-- Phone ringtone -->
     <com.android.settings.DefaultRingtonePreference

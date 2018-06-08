@@ -20,6 +20,7 @@ import android.content.pm.PackageManager;
 import androidx.preference.Preference;
 
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
+import com.android.settings.connecteddevice.dock.DockUpdater;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -45,6 +46,8 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
     @Mock
     private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
     @Mock
+    private DockUpdater mDockUpdater;
+    @Mock
     private PackageManager mPackageManager;
 
     private Context mContext;
@@ -60,6 +63,7 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
         mPreConnectedDeviceController =
                 new PreviouslyConnectedDevicePreferenceController(mContext, KEY);
         mPreConnectedDeviceController.setBluetoothDeviceUpdater(mBluetoothDeviceUpdater);
+        mPreConnectedDeviceController.setSavedDockUpdater(mDockUpdater);
 
         mPreference = new Preference(mContext);
         mPreConnectedDeviceController.setPreference(mPreference);
@@ -70,10 +74,12 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
         // register the callback in onStart()
         mPreConnectedDeviceController.onStart();
         verify(mBluetoothDeviceUpdater).registerCallback();
+        verify(mDockUpdater).registerCallback();
 
         // unregister the callback in onStop()
         mPreConnectedDeviceController.onStop();
         verify(mBluetoothDeviceUpdater).unregisterCallback();
+        verify(mDockUpdater).unregisterCallback();
     }
 
     @Test

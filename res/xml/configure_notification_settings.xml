@@ -56,6 +56,7 @@
         android:title="@string/zen_mode_settings_title"
         settings:useAdminDisabledSummary="true"
         android:fragment="com.android.settings.notification.ZenModeSettings"
+        settings:controller="com.android.settings.notification.ZenModePreferenceController"
         settings:allowDividerAbove="false" />
 
     <!-- Empty category to draw divider -->

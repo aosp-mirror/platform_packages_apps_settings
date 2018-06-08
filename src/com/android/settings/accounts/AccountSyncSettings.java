@@ -247,10 +247,13 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         }
         if (preference instanceof SyncStateSwitchPreference) {
             SyncStateSwitchPreference syncPref = (SyncStateSwitchPreference) preference;
-            String authority = syncPref.getAuthority();
-            Account account = syncPref.getAccount();
+            final String authority = syncPref.getAuthority();
+            if (TextUtils.isEmpty(authority)) {
+                return false;
+            }
+            final Account account = syncPref.getAccount();
             final int userId = mUserHandle.getIdentifier();
-            String packageName = syncPref.getPackageName();
+            final String packageName = syncPref.getPackageName();
 
             boolean syncAutomatically = ContentResolver.getSyncAutomaticallyAsUser(account,
                     authority, userId);
