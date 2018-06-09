@@ -16,6 +16,7 @@
 package com.android.settings.location;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
@@ -25,23 +26,16 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.admin.DevicePolicyManager;
-import androidx.lifecycle.LifecycleOwner;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.widget.RestrictedAppPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -51,6 +45,14 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import androidx.lifecycle.LifecycleOwner;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(
@@ -133,6 +135,8 @@ public class LocationServicePreferenceControllerTest {
         doReturn(preferences)
             .when(mSettingsInjector).getInjectedSettings(any(Context.class), anyInt());
         when(mFragment.getPreferenceManager().getContext()).thenReturn(mContext);
+        ShadowUserManager.getShadow().setProfileIdsWithDisabled(new int[]{UserHandle.myUserId()});
+
         mController.displayPreference(mScreen);
 
         mController.updateState(mCategory);
@@ -140,6 +144,50 @@ public class LocationServicePreferenceControllerTest {
         verify(mCategory).removeAll();
         verify(mCategory).addPreference(pref1);
         verify(mCategory).addPreference(pref2);
+    }
+
+    @Test
+    public void workProfileDisallowShareLocationOn_getParentUserLocationServicesOnly() {
+        final int fakeWorkProfileId = 123;
+        ShadowUserManager.getShadow().setProfileIdsWithDisabled(
+                new int[]{UserHandle.myUserId(), fakeWorkProfileId});
+
+        // Mock RestrictedLockUtils.checkIfRestrictionEnforced and let it return non-null.
+        final List<UserManager.EnforcingUser> enforcingUsers = new ArrayList<>();
+        enforcingUsers.add(new UserManager.EnforcingUser(fakeWorkProfileId,
+                UserManager.RESTRICTION_SOURCE_DEVICE_OWNER));
+        final ComponentName componentName = new ComponentName("test", "test");
+        // Ensure that RestrictedLockUtils.checkIfRestrictionEnforced doesn't return null.
+        ShadowUserManager.getShadow().setUserRestrictionSources(
+                UserManager.DISALLOW_SHARE_LOCATION,
+                UserHandle.of(fakeWorkProfileId),
+                enforcingUsers);
+        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(componentName);
+
+        mController.displayPreference(mScreen);
+        mController.updateState(mCategory);
+        verify(mSettingsInjector).getInjectedSettings(
+                any(Context.class), eq(UserHandle.myUserId()));
+    }
+
+    @Test
+    public void workProfileDisallowShareLocationOff_getAllUserLocationServices() {
+        final int fakeWorkProfileId = 123;
+        ShadowUserManager.getShadow().setProfileIdsWithDisabled(
+                new int[]{UserHandle.myUserId(), fakeWorkProfileId});
+
+        // Mock RestrictedLockUtils.checkIfRestrictionEnforced and let it return null.
+        // Empty enforcing users.
+        final List<UserManager.EnforcingUser> enforcingUsers = new ArrayList<>();
+        ShadowUserManager.getShadow().setUserRestrictionSources(
+                UserManager.DISALLOW_SHARE_LOCATION,
+                UserHandle.of(fakeWorkProfileId),
+                enforcingUsers);
+
+        mController.displayPreference(mScreen);
+        mController.updateState(mCategory);
+        verify(mSettingsInjector).getInjectedSettings(
+                any(Context.class), eq(UserHandle.USER_CURRENT));
     }
 
     @Test
@@ -158,8 +206,9 @@ public class LocationServicePreferenceControllerTest {
         preferences.add(pref);
         doReturn(preferences).when(mSettingsInjector)
                 .getInjectedSettings(any(Context.class), anyInt());
+        ShadowUserManager.getShadow().setProfileIdsWithDisabled(new int[]{UserHandle.myUserId()});
 
-        int userId = UserHandle.myUserId();
+        final int userId = UserHandle.myUserId();
         List<UserManager.EnforcingUser> enforcingUsers = new ArrayList<>();
         enforcingUsers.add(new UserManager.EnforcingUser(userId,
                 UserManager.RESTRICTION_SOURCE_DEVICE_OWNER));
