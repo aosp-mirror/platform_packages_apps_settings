@@ -30,6 +30,7 @@ import org.robolectric.annotation.Resetter;
 import org.robolectric.shadow.api.Shadow;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -45,6 +46,7 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     private final List<UserInfo> mUserProfileInfos = new ArrayList<>();
     private final Set<Integer> mManagedProfiles = new HashSet<>();
     private boolean mIsQuietModeEnabled = false;
+    private int[] profileIdsForUser;
 
     @Resetter
     public void reset() {
@@ -96,7 +98,11 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     @Implementation
     public List<EnforcingUser> getUserRestrictionSources(
             String restrictionKey, UserHandle userHandle) {
-        return mRestrictionSources.get(restrictionKey + userHandle.getIdentifier());
+        // Return empty list when there is no enforcing user, otherwise might trigger
+        // NullPointer Exception in RestrictedLockUtils.checkIfRestrictionEnforced.
+        List<EnforcingUser> enforcingUsers =
+                mRestrictionSources.get(restrictionKey + userHandle.getIdentifier());
+        return enforcingUsers == null ? Collections.emptyList() : enforcingUsers;
     }
 
     public void setUserRestrictionSources(
@@ -120,5 +126,14 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
 
     public void setQuietModeEnabled(boolean enabled) {
         mIsQuietModeEnabled = enabled;
+    }
+
+    @Implementation
+    public int[] getProfileIdsWithDisabled(@UserIdInt int userId) {
+        return profileIdsForUser;
+    }
+
+    public void setProfileIdsWithDisabled(int[] profileIds) {
+        profileIdsForUser = profileIds;
     }
 }

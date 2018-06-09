@@ -37,9 +37,6 @@ import android.media.MediaRouter;
 import android.media.MediaRouter.Callback;
 import android.os.Handler;
 import android.os.Looper;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
@@ -64,6 +61,10 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 /**
  * Abstract class for audio switcher controller to notify subclass
  * updating the current status of switcher entry. Subclasses must overwrite
@@ -74,7 +75,7 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
         implements Preference.OnPreferenceChangeListener, BluetoothCallback,
         LifecycleObserver, OnStart, OnStop {
 
-    private static final String TAG = "AudioSwitchPreferenceController";
+    private static final String TAG = "AudioSwitchPrefCtrl";
     private static final int INVALID_INDEX = -1;
 
     protected final List<BluetoothDevice> mConnectedDevices;
@@ -170,12 +171,20 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
 
     @Override
     public void onStart() {
+        if (mLocalBluetoothManager == null) {
+            Log.e(TAG, "Bluetooth is not supported on this device");
+            return;
+        }
         mLocalBluetoothManager.setForegroundActivity(mContext);
         register();
     }
 
     @Override
     public void onStop() {
+        if (mLocalBluetoothManager == null) {
+            Log.e(TAG, "Bluetooth is not supported on this device");
+            return;
+        }
         mLocalBluetoothManager.setForegroundActivity(null);
         unregister();
     }

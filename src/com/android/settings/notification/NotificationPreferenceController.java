@@ -138,11 +138,11 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
 
     protected boolean isChannelBlockable() {
         if (mChannel != null && mAppRow != null) {
-            if (!mAppRow.systemApp) {
-                return true;
+            if (!isChannelConfigurable()) {
+                return mChannel.getImportance() == IMPORTANCE_NONE;
             }
 
-            return mChannel.isBlockableSystem()
+            return mChannel.isBlockableSystem() || !mAppRow.systemApp
                     || mChannel.getImportance() == IMPORTANCE_NONE;
         }
         return false;

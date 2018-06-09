@@ -138,6 +138,7 @@ public class BlockPreferenceControllerTest {
     public void testIsAvailable_nonSystemApp() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.systemApp = false;
+        appRow.lockedChannelId = "not this";
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
         mController.onResume(appRow, channel, null, null);
