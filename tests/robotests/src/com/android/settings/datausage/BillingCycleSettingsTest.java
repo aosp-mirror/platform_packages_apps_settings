@@ -31,12 +31,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceManager;
-import androidx.preference.SwitchPreference;
-import android.util.FeatureFlagUtils;
 
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.NetworkPolicyEditor;
 
@@ -46,6 +41,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceManager;
+import androidx.preference.SwitchPreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class BillingCycleSettingsTest {
@@ -108,13 +107,11 @@ public class BillingCycleSettingsTest {
     }
 
     @Test
-    public void testDataUsageSummary_shouldBeNullWithV2() {
+    public void testDataUsageSummary_shouldBeNull() {
         final BillingCycleSettings billingCycleSettings = spy(new BillingCycleSettings());
         when(billingCycleSettings.getContext()).thenReturn(mContext);
         billingCycleSettings.setUpForTest(mNetworkPolicyEditor, mBillingCycle,
                 mDataLimit, mDataWarning, mEnableDataLimit, mEnableDataWarning);
-
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.DATA_USAGE_SETTINGS_V2, true);
 
         doReturn("some-string").when(billingCycleSettings).getString(anyInt(), anyInt());
         when(mNetworkPolicyEditor.getPolicyCycleDay(anyObject())).thenReturn(CYCLE_NONE + 1);

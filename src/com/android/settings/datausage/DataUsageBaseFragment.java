@@ -14,27 +14,19 @@
 
 package com.android.settings.datausage;
 
-import static android.net.ConnectivityManager.TYPE_ETHERNET;
-
 import android.content.Context;
-import android.net.ConnectivityManager;
 import android.net.INetworkStatsService;
-import android.net.INetworkStatsSession;
 import android.net.NetworkPolicy;
 import android.net.NetworkPolicyManager;
-import android.net.NetworkTemplate;
-import android.net.TrafficStats;
 import android.os.Bundle;
 import android.os.INetworkManagementService;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.os.SystemProperties;
 import android.os.UserManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
-import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.NetworkPolicyEditor;
 
@@ -54,7 +46,7 @@ public abstract class DataUsageBaseFragment extends DashboardFragment {
                 ServiceManager.getService(Context.NETWORKMANAGEMENT_SERVICE));
         services.mStatsService = INetworkStatsService.Stub.asInterface(
                 ServiceManager.getService(Context.NETWORK_STATS_SERVICE));
-        services.mPolicyManager = (NetworkPolicyManager)context
+        services.mPolicyManager = (NetworkPolicyManager) context
                 .getSystemService(Context.NETWORK_POLICY_SERVICE);
 
         services.mPolicyEditor = new NetworkPolicyEditor(services.mPolicyManager);
@@ -97,36 +89,5 @@ public abstract class DataUsageBaseFragment extends DashboardFragment {
             Log.w(TAG, "problem talking with INetworkManagementService: ", e);
             return false;
         }
-    }
-
-    /**
-     * Test if device has an ethernet network connection.
-     * TODO(b/77590489): Remove this method when DataUsageSummaryLegacy is deprecated.
-     */
-    public boolean hasEthernet(Context context) {
-        if (DataUsageUtils.TEST_RADIOS) {
-            return SystemProperties.get(DataUsageUtils.TEST_RADIOS_PROP).contains(ETHERNET);
-        }
-
-        final ConnectivityManager conn = ConnectivityManager.from(context);
-        final boolean hasEthernet = conn.isNetworkSupported(TYPE_ETHERNET);
-
-        final long ethernetBytes;
-        try {
-            INetworkStatsSession statsSession = services.mStatsService.openSession();
-            if (statsSession != null) {
-                ethernetBytes = statsSession.getSummaryForNetwork(
-                        NetworkTemplate.buildTemplateEthernet(), Long.MIN_VALUE, Long.MAX_VALUE)
-                        .getTotalBytes();
-                TrafficStats.closeQuietly(statsSession);
-            } else {
-                ethernetBytes = 0;
-            }
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
-        }
-
-        // only show ethernet when both hardware present and traffic has occurred
-        return hasEthernet && ethernetBytes > 0;
     }
 }

@@ -76,7 +76,6 @@ public class Settings extends SettingsActivity {
     public static class CryptKeeperSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DeviceAdminSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DataUsageSummaryActivity extends SettingsActivity { /* empty */ }
-    public static class DataUsageSummaryLegacyActivity extends SettingsActivity { /* empty */ }
     public static class MobileDataUsageListActivity extends SettingsActivity { /* empty */ }
     public static class ConfigureWifiSettingsActivity extends SettingsActivity { /* empty */ }
     public static class SavedAccessPointsSettingsActivity extends SettingsActivity { /* empty */ }
