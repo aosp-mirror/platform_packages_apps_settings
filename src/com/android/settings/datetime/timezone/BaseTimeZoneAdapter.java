@@ -78,7 +78,7 @@ public class BaseTimeZoneAdapter<T extends BaseTimeZoneAdapter.AdapterItem>
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         switch(viewType) {
             case TYPE_HEADER: {
-                final View view = inflater.inflate(R.layout.preference_category_material_settings,
+                final View view = inflater.inflate(R.layout.preference_category_material,
                         parent, false);
                 return new HeaderViewHolder(view);
             }
