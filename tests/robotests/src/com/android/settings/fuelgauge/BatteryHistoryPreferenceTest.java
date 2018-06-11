@@ -23,15 +23,14 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import androidx.preference.PreferenceViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.graph.UsageView;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.widget.UsageView;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,6 +39,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import androidx.preference.PreferenceViewHolder;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResources.SettingsShadowTheme.class)
@@ -63,7 +64,7 @@ public class BatteryHistoryPreferenceTest {
         MockitoAnnotations.initMocks(this);
         final Context context = RuntimeEnvironment.application;
         final View itemView =
-            LayoutInflater.from(context).inflate(R.layout.battery_usage_graph, null);
+                LayoutInflater.from(context).inflate(R.layout.battery_usage_graph, null);
 
         mBatteryHistoryPreference = new BatteryHistoryPreference(context, null);
         mBatteryHistoryPreference.mBatteryInfo = mBatteryInfo;
