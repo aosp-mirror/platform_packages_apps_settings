@@ -17,58 +17,59 @@ package com.android.settings.users;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.content.pm.UserInfo;
-import android.os.UserManager;
 import android.provider.Settings.Global;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedSwitchPreference;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
+import androidx.preference.PreferenceScreen;
+
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(shadows = {ShadowUserManager.class})
 public class AddUserWhenLockedPreferenceControllerTest {
 
     @Mock(answer = RETURNS_DEEP_STUBS)
     private PreferenceScreen mScreen;
     @Mock(answer = RETURNS_DEEP_STUBS)
     private UserInfo mUserInfo;
-    @Mock(answer = RETURNS_DEEP_STUBS)
-    private UserManager mUserManager;
 
-    private LifecycleOwner mLifecycleOwner;
-    private Lifecycle mLifecycle;
     private Context mContext;
+    private ShadowUserManager mUserManager;
     private AddUserWhenLockedPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         ShadowApplication shadowContext = ShadowApplication.getInstance();
-        shadowContext.setSystemService(Context.USER_SERVICE, mUserManager);
+        mUserManager = ShadowUserManager.getShadow();
         mContext = shadowContext.getApplicationContext();
-        mLifecycleOwner = () -> mLifecycle;
-        mLifecycle = new Lifecycle(mLifecycleOwner);
-        mController = new AddUserWhenLockedPreferenceController(mContext, "fake_key", mLifecycle);
+        mController = new AddUserWhenLockedPreferenceController(mContext, "fake_key");
+    }
+
+    @After
+    public void tearDown() {
+        mUserManager.reset();
     }
 
     @Test
     public void displayPref_NotAdmin_shouldNotDisplay() {
-        when(mUserManager.getUserInfo(anyInt())).thenReturn(mUserInfo);
+        mUserManager.setUserInfo(0, mUserInfo);
         when(mUserInfo.isAdmin()).thenReturn(false);
         final RestrictedSwitchPreference preference = mock(RestrictedSwitchPreference.class);
         when(preference.getKey()).thenReturn(mController.getPreferenceKey());
