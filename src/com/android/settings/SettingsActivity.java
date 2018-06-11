@@ -664,17 +664,9 @@ public class SettingsActivity extends SettingsDrawerActivity
                         Settings.PowerUsageSummaryActivity.class.getName()),
                 mBatteryPresent, isAdmin) || somethingChanged;
 
-        final boolean isDataUsageSettingsV2Enabled =
-                FeatureFlagUtils.isEnabled(this, FeatureFlags.DATA_USAGE_SETTINGS_V2);
-        // Enable new data usage page if v2 enabled
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.DataUsageSummaryActivity.class.getName()),
-                Utils.isBandwidthControlEnabled() && isDataUsageSettingsV2Enabled, isAdmin)
-                || somethingChanged;
-        // Enable legacy data usage page if v2 disabled
-        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
-                        Settings.DataUsageSummaryLegacyActivity.class.getName()),
-                Utils.isBandwidthControlEnabled() && !isDataUsageSettingsV2Enabled, isAdmin)
+                Utils.isBandwidthControlEnabled(), isAdmin)
                 || somethingChanged;
 
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,

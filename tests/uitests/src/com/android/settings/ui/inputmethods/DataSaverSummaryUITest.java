@@ -44,7 +44,7 @@ public class DataSaverSummaryUITest {
         mInstrumentation = InstrumentationRegistry.getInstrumentation();
         mUiDevice = UiDevice.getInstance(mInstrumentation);
         mIntent = new Intent().setClassName("com.android.settings",
-                "com.android.settings.Settings$DataUsageSummaryLegacyActivity")
+                "com.android.settings.Settings$DataUsageSummaryActivity")
                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
 

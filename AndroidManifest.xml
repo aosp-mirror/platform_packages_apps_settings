@@ -2365,26 +2365,6 @@
             android:enabled="false"
             android:taskAffinity="com.android.settings"
             android:parentActivityName="Settings">
-            <!-- TODO(b/70950124): add shortcut intent-filter -->
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.DATA_USAGE_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter android:priority="10">
-                <action android:name="com.android.settings.action.SETTINGS" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.category"
-                android:value="com.android.settings.category.ia.wireless" />
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.datausage.DataUsageSummary" />
-        </activity>
-
-        <activity
-            android:name="Settings$DataUsageSummaryLegacyActivity"
-            android:label="@string/data_usage_summary_title"
-            android:icon="@drawable/ic_settings_data_usage"
-            android:taskAffinity="com.android.settings"
-            android:parentActivityName="Settings">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.DATA_USAGE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2398,11 +2378,10 @@
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.wireless" />
+                android:value="com.android.settings.category.ia.wireless" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.datausage.DataUsageSummaryLegacy" />
+                android:value="com.android.settings.datausage.DataUsageSummary" />
         </activity>
-
         <activity
             android:name="Settings$MobileDataUsageListActivity"
             android:label="@string/cellular_data_usage"

@@ -15,15 +15,10 @@
 package com.android.settings.datausage;
 
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.SubscriptionPlan;
@@ -33,7 +28,6 @@ import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.text.style.RelativeSizeSpan;
-import android.view.MenuItem;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -48,6 +42,10 @@ import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 /**
  * Settings preference fragment that displays data usage summary.
@@ -118,20 +116,6 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
             addEthernetSection();
         }
         setHasOptionsMenu(true);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.data_usage_menu_cellular_networks: {
-                final Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.setComponent(new ComponentName("com.android.phone",
-                        "com.android.phone.MobileNetworkSettings"));
-                startActivity(intent);
-                return true;
-            }
-        }
-        return false;
     }
 
     @Override

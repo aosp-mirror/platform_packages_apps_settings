@@ -14,23 +14,19 @@
 
 package com.android.settings.datausage;
 
-import static android.net.NetworkPolicy.CYCLE_NONE;
-
 import android.content.Context;
 import android.content.Intent;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.os.RemoteException;
-import androidx.preference.Preference;
 import android.util.AttributeSet;
-import android.util.FeatureFlagUtils;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.datausage.CellDataPreference.DataStateListener;
+
+import androidx.preference.Preference;
 
 public class BillingCyclePreference extends Preference implements TemplatePreference {
 
@@ -60,14 +56,8 @@ public class BillingCyclePreference extends Preference implements TemplatePrefer
         mTemplate = template;
         mSubId = subId;
         mServices = services;
-        final int cycleDay = services.mPolicyEditor.getPolicyCycleDay(mTemplate);
-        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.DATA_USAGE_SETTINGS_V2)) {
-            setSummary(null);
-        } else if (cycleDay != CYCLE_NONE) {
-            setSummary(getContext().getString(R.string.billing_cycle_fragment_summary, cycleDay));
-        } else {
-            setSummary(null);
-        }
+        setSummary(null);
+
         setIntent(getIntent());
     }
 
