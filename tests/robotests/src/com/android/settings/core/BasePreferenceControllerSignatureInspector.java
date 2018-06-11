@@ -67,7 +67,7 @@ public class BasePreferenceControllerSignatureInspector extends CodeInspector {
         }
 
         assertWithMessage("All BasePreferenceController (and subclasses) constructor must either"
-                + "only take Context, or (Context, String). No other types are allowed")
+                + " only take Context, or (Context, String). No other types are allowed")
                 .that(badClasses.toString())
                 .isEmpty();
 

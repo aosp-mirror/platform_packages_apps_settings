@@ -20,7 +20,6 @@ import android.annotation.UserIdInt;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.LoaderManager;
-import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
@@ -28,7 +27,6 @@ import android.content.pm.PackageManager;
 import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.os.UserManager;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import android.text.TextUtils;
@@ -43,6 +41,8 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.LayoutPreference;
+import com.android.settings.applications.appinfo.AppButtonsPreferenceController;
+import com.android.settings.applications.appinfo.ButtonActionDialogFragment;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
@@ -112,9 +112,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     private AppButtonsPreferenceController mAppButtonsPreferenceController;
     private BackgroundActivityPreferenceController mBackgroundActivityPreferenceController;
 
-    private DevicePolicyManager mDpm;
-    private UserManager mUserManager;
-    private PackageManager mPackageManager;
     private List<Anomaly> mAnomalies;
     private String mPackageName;
 
@@ -203,9 +200,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         super.onAttach(activity);
 
         mState = ApplicationsState.getInstance(getActivity().getApplication());
-        mDpm = (DevicePolicyManager) activity.getSystemService(Context.DEVICE_POLICY_SERVICE);
-        mUserManager = (UserManager) activity.getSystemService(Context.USER_SERVICE);
-        mPackageManager = activity.getPackageManager();
         mBatteryUtils = BatteryUtils.getInstance(getContext());
     }
 
@@ -332,8 +326,8 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         controllers.add(new BatteryOptimizationPreferenceController(
                 (SettingsActivity) getActivity(), this, packageName));
         mAppButtonsPreferenceController = new AppButtonsPreferenceController(
-                (SettingsActivity) getActivity(), this, getLifecycle(), packageName, mState, mDpm,
-                mUserManager, mPackageManager, REQUEST_UNINSTALL, REQUEST_REMOVE_DEVICE_ADMIN);
+                (SettingsActivity) getActivity(), this, getLifecycle(), packageName, mState,
+                REQUEST_UNINSTALL, REQUEST_REMOVE_DEVICE_ADMIN);
         controllers.add(mAppButtonsPreferenceController);
 
         return controllers;

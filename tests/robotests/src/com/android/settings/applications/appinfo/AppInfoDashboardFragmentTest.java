@@ -233,15 +233,6 @@ public final class AppInfoDashboardFragmentTest {
     }
 
     @Test
-    public void onActivityResult_packageUninstalled_shouldFinishAndRemoveTask() {
-        doReturn(false).when(mFragment).refreshUi();
-
-        mFragment.onActivityResult(mFragment.REQUEST_UNINSTALL, 0, mock(Intent.class));
-
-        verify(mActivity).finishAndRemoveTask();
-    }
-
-    @Test
     public void getPreferenceControllers_noPackageInfo_shouldReturnNull() {
         doNothing().when(mFragment).retrieveAppEntry();
 
