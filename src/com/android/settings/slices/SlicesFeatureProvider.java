@@ -28,6 +28,8 @@ public interface SlicesFeatureProvider {
      */
     void indexSliceData(Context context);
 
+    CustomSliceManager getCustomSliceManager(Context context);
+
     /**
      * Gets new WifiCallingSliceHelper object
      */
