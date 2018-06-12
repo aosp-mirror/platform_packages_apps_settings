@@ -16,20 +16,29 @@
 
 package com.android.settings.qstile;
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.provider.Settings;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
+import android.util.EventLog;
+import android.util.Log;
 import android.view.IWindowManager;
 import android.view.ThreadedRenderer;
 import android.view.View;
 import android.view.WindowManagerGlobal;
 
 import com.android.internal.app.LocalePicker;
+import com.android.internal.statusbar.IStatusBarService;
+import com.android.settings.development.DevelopmentSettingsEnabler;
 import com.android.settings.development.DevelopmentSettings;
 
 public abstract class DevelopmentTiles extends TileService {
+    private static final String TAG = "DevelopmentTiles";
 
     protected abstract boolean isEnabled();
 
@@ -42,7 +51,33 @@ public abstract class DevelopmentTiles extends TileService {
     }
 
     public void refresh() {
-        getQsTile().setState(isEnabled() ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
+        final int state;
+        if (!DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(this)) {
+            // Reset to disabled state if dev option is off.
+            if (isEnabled()) {
+                setIsEnabled(false);
+                new DevelopmentSettings.SystemPropPoker().execute();
+            }
+            final ComponentName cn = new ComponentName(getPackageName(), getClass().getName());
+            try {
+                getPackageManager().setComponentEnabledSetting(
+                        cn, PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                        PackageManager.DONT_KILL_APP);
+                final IStatusBarService statusBarService = IStatusBarService.Stub.asInterface(
+                        ServiceManager.checkService(Context.STATUS_BAR_SERVICE));
+                if (statusBarService != null) {
+                    EventLog.writeEvent(0x534e4554, "117770924");  // SaftyNet
+                    statusBarService.remTile(cn);
+                }
+            } catch (RemoteException e) {
+                Log.e(TAG, "Failed to modify QS tile for component " +
+                        cn.toString(), e);
+            }
+            state = Tile.STATE_UNAVAILABLE;
+        } else {
+            state = isEnabled() ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE;
+        }
+        getQsTile().setState(state);
         getQsTile().updateTile();
     }
 
