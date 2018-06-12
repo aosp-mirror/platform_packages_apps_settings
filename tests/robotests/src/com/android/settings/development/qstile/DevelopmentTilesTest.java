@@ -19,7 +19,10 @@ package com.android.settings.development.qstile;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
+import android.content.ComponentName;
+import android.content.pm.PackageManager;
 import android.service.quicksettings.Tile;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -37,6 +40,9 @@ public class DevelopmentTilesTest {
 
     @Mock
     private Tile mTile;
+    @Mock
+    private PackageManager mPackageManager;
+
     private DevelopmentTiles mService;
 
     @Before
@@ -48,11 +54,18 @@ public class DevelopmentTilesTest {
 
     @Test
     public void refresh_devOptionIsDisabled_shouldResetTileValue() {
+        final ComponentName cn = new ComponentName(
+                mService.getPackageName(), mService.getClass().getName());
+        doReturn(mPackageManager).when(mService).getPackageManager();
+
         DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(mService, false);
         mService.setIsEnabled(true);
 
         mService.refresh();
 
+        verify(mPackageManager).setComponentEnabledSetting(cn,
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                PackageManager.DONT_KILL_APP);
         assertThat(mService.isEnabled()).isFalse();
     }
 }
