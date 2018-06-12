@@ -21,8 +21,7 @@ import android.content.Context;
 import android.location.SettingInjectorService;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -41,6 +40,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
 
 /**
  * System location settings (Settings &gt; Location). The screen has three parts:
@@ -176,6 +178,13 @@ public class LocationSettings extends DashboardFragment {
                         context) {
                     return buildPreferenceControllers(context, null /* fragment */,
                             null /* lifecycle */);
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    final List<String> niks = super.getNonIndexableKeys(context);
+                    niks.add("recent_location_requests_see_all_button"); // 'See all' button
+                    return niks;
                 }
             };
 }
