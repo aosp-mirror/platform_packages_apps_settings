@@ -18,6 +18,8 @@ package com.android.settings.development;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
+import android.os.UserManager;
 import android.provider.Settings;
 
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -51,6 +53,17 @@ public class DevelopmentSettingsEnabler implements LifecycleObserver, OnResume {
                 .commit();
         return Settings.Global.putInt(context.getContentResolver(),
                 Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
+    }
+
+    public static boolean isDevelopmentSettingsEnabled(Context context) {
+        final UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
+        final boolean settingEnabled = Settings.Global.getInt(context.getContentResolver(),
+                Settings.Global.DEVELOPMENT_SETTINGS_ENABLED,
+                Build.TYPE.equals("eng") ? 1 : 0) != 0;
+        final boolean hasRestriction = um.hasUserRestriction(
+                UserManager.DISALLOW_DEBUGGING_FEATURES);
+        final boolean isAdminOrDemo = um.isAdminUser() || um.isDemoUser();
+        return isAdminOrDemo && !hasRestriction && settingEnabled;
     }
 
     private void updateEnabledState() {
