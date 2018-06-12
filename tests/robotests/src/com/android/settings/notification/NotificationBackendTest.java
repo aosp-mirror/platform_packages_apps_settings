@@ -142,29 +142,33 @@ public class NotificationBackendTest {
         good.mNotificationChannelId = "channel1";
         good.mTimeStamp = 2;
         events.add(good);
-        UsageEvents.Event good1 = new UsageEvents.Event();
-        good1.mEventType = UsageEvents.Event.NOTIFICATION_INTERRUPTION;
-        good1.mPackage = "pkg";
-        good1.mNotificationChannelId = "channel1";
-        good1.mTimeStamp = 6;
-        events.add(good1);
         UsageEvents.Event good2 = new UsageEvents.Event();
         good2.mEventType = UsageEvents.Event.NOTIFICATION_INTERRUPTION;
         good2.mPackage = "pkg";
         good2.mNotificationChannelId = "channel2";
         good2.mTimeStamp = 3;
         events.add(good2);
+        UsageEvents.Event good1 = new UsageEvents.Event();
+        good1.mEventType = UsageEvents.Event.NOTIFICATION_INTERRUPTION;
+        good1.mPackage = "pkg";
+        good1.mNotificationChannelId = "channel1";
+        good1.mTimeStamp = 6;
+        events.add(good1);
         NotificationBackend backend = new NotificationBackend();
 
-        Map<String, NotificationBackend.NotificationsSentState> stats =
-                backend.getAggregatedUsageEvents(getUsageEvents(events));
+        AppRow appRow = new AppRow();
+        appRow.pkg = "pkg";
+        backend.recordAggregatedUsageEvents(getUsageEvents(events), appRow);
 
-        assertThat(stats.get("channel1").sentCount).isEqualTo(2);
-        assertThat(stats.get("channel1").lastSent).isEqualTo(6);
-        assertThat(stats.get("channel1").avgSentWeekly).isEqualTo(2);
-        assertThat(stats.get("channel2").sentCount).isEqualTo(1);
-        assertThat(stats.get("channel2").lastSent).isEqualTo(3);
-        assertThat(stats.get("channel2").avgSentWeekly).isEqualTo(1);
+        assertThat(appRow.sentByChannel.get("channel1").sentCount).isEqualTo(2);
+        assertThat(appRow.sentByChannel.get("channel1").lastSent).isEqualTo(6);
+        assertThat(appRow.sentByChannel.get("channel1").avgSentWeekly).isEqualTo(2);
+        assertThat(appRow.sentByChannel.get("channel2").sentCount).isEqualTo(1);
+        assertThat(appRow.sentByChannel.get("channel2").lastSent).isEqualTo(3);
+        assertThat(appRow.sentByChannel.get("channel2").avgSentWeekly).isEqualTo(1);
+        assertThat(appRow.sentByApp.sentCount).isEqualTo(3);
+        assertThat(appRow.sentByApp.lastSent).isEqualTo(6);
+        assertThat(appRow.sentByApp.avgSentWeekly).isEqualTo(3);
     }
 
     private UsageEvents getUsageEvents(List<UsageEvents.Event> events) {

@@ -139,10 +139,12 @@ public class AppNotificationPreferenceControllerTest {
         appRow.banned = false;
         appRow.blockedChannelCount = 30;
         appRow.channelCount = 60;
+        appRow.sentByApp = new NotificationBackend.NotificationsSentState();
+        appRow.sentByApp.avgSentWeekly = 4;
         assertThat(mController.getNotificationSummary(
                 appRow, mContext).toString().contains("30")).isTrue();
-        assertThat(mController.getNotificationSummary(
-                appRow, mContext).toString().contains("On")).isTrue();
+        assertThat(mController.getNotificationSummary(appRow, mContext).toString().contains(
+                NotificationBackend.getSentSummary(mContext, appRow.sentByApp, false))).isTrue();
     }
 
     @Test
@@ -151,7 +153,10 @@ public class AppNotificationPreferenceControllerTest {
         appRow.banned = false;
         appRow.blockedChannelCount = 0;
         appRow.channelCount = 10;
-        assertThat(mController.getNotificationSummary(appRow, mContext).toString()).isEqualTo("On");
+        appRow.sentByApp = new NotificationBackend.NotificationsSentState();
+        appRow.sentByApp.avgSentDaily = 4;
+        assertThat(mController.getNotificationSummary(appRow, mContext).toString()).isEqualTo(
+                NotificationBackend.getSentSummary(mContext, appRow.sentByApp, false));
     }
 
     @Test
@@ -160,6 +165,9 @@ public class AppNotificationPreferenceControllerTest {
         appRow.banned = false;
         appRow.blockedChannelCount = 0;
         appRow.channelCount = 0;
-        assertThat(mController.getNotificationSummary(appRow, mContext).toString()).isEqualTo("On");
+        appRow.sentByApp = new NotificationBackend.NotificationsSentState();
+        appRow.sentByApp.avgSentDaily = 7;
+        assertThat(mController.getNotificationSummary(appRow, mContext).toString()).isEqualTo(
+                NotificationBackend.getSentSummary(mContext, appRow.sentByApp, false));
     }
 }
