@@ -21,6 +21,8 @@ import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
 import android.app.INotificationManager;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
+import android.app.usage.IUsageStatsManager;
+import android.app.usage.UsageEvents;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -28,21 +30,30 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ParceledListSlice;
 import android.graphics.drawable.Drawable;
+import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.service.notification.NotifyingApp;
+import android.text.format.DateUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.settingslib.R;
 import com.android.settingslib.Utils;
+import com.android.settingslib.utils.StringUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class NotificationBackend {
     private static final String TAG = "NotificationBackend";
 
+    static IUsageStatsManager sUsageStatsManager = IUsageStatsManager.Stub.asInterface(
+            ServiceManager.getService(Context.USAGE_STATS_SERVICE));
+    private static final int DAYS_TO_CHECK = 7;
     static INotificationManager sINM = INotificationManager.Stub.asInterface(
             ServiceManager.getService(Context.NOTIFICATION_SERVICE));
 
@@ -62,6 +73,7 @@ public class NotificationBackend {
         row.userId = UserHandle.getUserId(row.uid);
         row.blockedChannelCount = getBlockedChannelCount(row.pkg, row.uid);
         row.channelCount = getChannelCount(row.pkg, row.uid);
+        row.sentByChannel = getAggregatedUsageEvents(context, row.userId, row.pkg);
         return row;
     }
 
@@ -259,6 +271,87 @@ public class NotificationBackend {
         }
     }
 
+    protected Map<String, NotificationsSentState> getAggregatedUsageEvents(
+            Context context, int userId, String pkg) {
+        long now = System.currentTimeMillis();
+        long startTime = now - (DateUtils.DAY_IN_MILLIS * DAYS_TO_CHECK);
+        UsageEvents events = null;
+        try {
+            events = sUsageStatsManager.queryEventsForPackageForUser(
+                    startTime, now, userId, pkg, context.getPackageName());
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return getAggregatedUsageEvents(events);
+    }
+
+    protected Map<String, NotificationsSentState> getAggregatedUsageEvents(UsageEvents events) {
+        Map<String, NotificationsSentState> sentByChannel = new HashMap<>();
+        if (events != null) {
+            UsageEvents.Event event = new UsageEvents.Event();
+            while (events.hasNextEvent()) {
+                events.getNextEvent(event);
+
+                if (event.getEventType() == UsageEvents.Event.NOTIFICATION_INTERRUPTION) {
+                    String channelId = event.mNotificationChannelId;
+                    if (channelId != null) {
+                        NotificationsSentState stats = sentByChannel.get(channelId);
+                        if (stats == null) {
+                            stats = new NotificationsSentState();
+                            sentByChannel.put(channelId, stats);
+                        }
+                        if (event.getTimeStamp() > stats.lastSent) {
+                            stats.lastSent = event.getTimeStamp();
+                        }
+                        stats.sentCount++;
+                        calculateAvgSentCounts(stats);
+                    }
+                }
+
+            }
+        }
+        return sentByChannel;
+    }
+
+    public static CharSequence getSentSummary(Context context, NotificationsSentState state,
+            boolean sortByRecency) {
+        if (state == null) {
+            return null;
+        }
+        if (sortByRecency) {
+            if (state.lastSent == 0) {
+                return context.getString(R.string.notifications_sent_never);
+            }
+            return StringUtil.formatRelativeTime(
+                    context, System.currentTimeMillis() - state.lastSent, true);
+        } else {
+            if (state.avgSentWeekly > 0) {
+                return context.getString(R.string.notifications_sent_weekly, state.avgSentWeekly);
+            }
+            return context.getString(R.string.notifications_sent_daily, state.avgSentDaily);
+        }
+    }
+
+    private void calculateAvgSentCounts(NotificationsSentState stats) {
+        if (stats != null) {
+            stats.avgSentDaily = Math.round((float) stats.sentCount / DAYS_TO_CHECK);
+            if (stats.sentCount < DAYS_TO_CHECK) {
+                stats.avgSentWeekly = stats.sentCount;
+            }
+        }
+    }
+
+    /**
+     * NotificationsSentState contains how often an app sends notifications and how recently it sent
+     * one.
+     */
+    public static class NotificationsSentState {
+        public int avgSentDaily = 0;
+        public int avgSentWeekly = 0;
+        public long lastSent = 0;
+        public int sentCount = 0;
+    }
+
     static class Row {
         public String section;
     }
@@ -278,5 +371,6 @@ public class NotificationBackend {
         public int userId;
         public int blockedChannelCount;
         public int channelCount;
+        public Map<String, NotificationsSentState> sentByChannel;
     }
 }
