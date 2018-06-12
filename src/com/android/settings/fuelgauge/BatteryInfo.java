@@ -24,17 +24,18 @@ import android.os.BatteryStats;
 import android.os.BatteryStats.HistoryItem;
 import android.os.Bundle;
 import android.os.SystemClock;
-import androidx.annotation.WorkerThread;
 import android.text.format.Formatter;
 import android.util.SparseIntArray;
 
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.Utils;
-import com.android.settings.graph.UsageView;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.widget.UsageView;
 import com.android.settingslib.R;
 import com.android.settingslib.utils.PowerUtil;
 import com.android.settingslib.utils.StringUtil;
+
+import androidx.annotation.WorkerThread;
 
 public class BatteryInfo {
 
@@ -129,7 +130,7 @@ public class BatteryInfo {
             remaining = context.getString(R.string.remaining_length_format,
                     Formatter.formatShortElapsedTime(context, remainingTimeUs / 1000));
         }
-        view.setBottomLabels(new CharSequence[]{timeString, remaining});
+        view.setBottomLabels(new CharSequence[] {timeString, remaining});
     }
 
     public static void getBatteryInfo(final Context context, final Callback callback) {
@@ -173,7 +174,7 @@ public class BatteryInfo {
                 if (discharging && provider != null
                         && provider.isEnhancedBatteryPredictionEnabled(context)) {
                     Estimate estimate = provider.getEnhancedBatteryPrediction(context);
-                    if(estimate != null) {
+                    if (estimate != null) {
                         BatteryUtils
                                 .logRuntime(LOG_TAG, "time for enhanced BatteryInfo", startTime);
                         return BatteryInfo.getBatteryInfo(context, batteryBroadcast, stats,
