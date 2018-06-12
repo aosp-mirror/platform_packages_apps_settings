@@ -50,8 +50,6 @@ public class PreventRingingPreferenceController extends PreventRingingParentPref
     @VisibleForTesting
     boolean mVideoPaused;
 
-    private final String SECURE_KEY = VOLUME_HUSH_GESTURE;
-
     public PreventRingingPreferenceController(Context context, String key) {
         super(context, key);
     }
@@ -93,24 +91,6 @@ public class PreventRingingPreferenceController extends PreventRingingParentPref
                 }
             }
         }
-    }
-
-    @Override
-    public CharSequence getSummary() {
-        int value = Settings.Secure.getInt(
-                mContext.getContentResolver(), SECURE_KEY, VOLUME_HUSH_VIBRATE);
-        int summary;
-        switch (value) {
-            case VOLUME_HUSH_VIBRATE:
-                summary = R.string.prevent_ringing_option_vibrate_summary;
-                break;
-            case VOLUME_HUSH_MUTE:
-                summary = R.string.prevent_ringing_option_mute_summary;
-                break;
-            default:
-                summary = R.string.prevent_ringing_option_none_summary;
-        }
-        return mContext.getString(summary);
     }
 
     @Override

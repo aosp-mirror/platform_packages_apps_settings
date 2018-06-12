@@ -18,9 +18,6 @@ import android.content.Context;
 import android.net.NetworkPolicy;
 import android.net.NetworkStatsHistory;
 import android.net.TrafficStats;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.format.Formatter;
@@ -30,7 +27,11 @@ import android.util.SparseIntArray;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.graph.UsageView;
+import com.android.settings.widget.UsageView;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
 public class ChartDataUsagePreference extends Preference {
 

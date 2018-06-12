@@ -88,29 +88,6 @@ public class PreventRingingPreferenceControllerTest {
     }
 
     @Test
-    public void testGetSummary_mute() {
-        Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.VOLUME_HUSH_GESTURE,
-                Settings.Secure.VOLUME_HUSH_MUTE);
-        assertEquals(mContext.getString(R.string.prevent_ringing_option_mute_summary),
-                mController.getSummary());
-    }
-
-    @Test
-    public void testGetSummary_vibrate() {
-        Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.VOLUME_HUSH_GESTURE,
-                Settings.Secure.VOLUME_HUSH_VIBRATE);
-        assertEquals(mContext.getString(R.string.prevent_ringing_option_vibrate_summary),
-                mController.getSummary());
-    }
-    @Test
-    public void testGetSummary_other() {
-        Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.VOLUME_HUSH_GESTURE,
-                7);
-        assertEquals(mContext.getString(R.string.prevent_ringing_option_none_summary),
-                mController.getSummary());
-    }
-
-    @Test
     public void testUpdateState_mute() {
         ListPreference pref = mock(ListPreference.class);
         Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.VOLUME_HUSH_GESTURE,

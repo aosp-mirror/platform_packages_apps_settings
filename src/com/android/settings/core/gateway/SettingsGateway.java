@@ -59,7 +59,6 @@ import com.android.settings.connecteddevice.PreviouslyConnectedDeviceDashboardFr
 import com.android.settings.connecteddevice.usb.UsbDetailsFragment;
 import com.android.settings.datausage.DataUsageList;
 import com.android.settings.datausage.DataUsageSummary;
-import com.android.settings.datausage.DataUsageSummaryLegacy;
 import com.android.settings.deletionhelper.AutomaticStorageManagerSettings;
 import com.android.settings.development.DevelopmentSettingsDashboardFragment;
 import com.android.settings.deviceinfo.PrivateVolumeForget;
@@ -192,7 +191,6 @@ public class SettingsGateway {
             SwipeUpGestureSettings.class.getName(),
             CryptKeeperSettings.class.getName(),
             DataUsageSummary.class.getName(),
-            DataUsageSummaryLegacy.class.getName(),
             DreamSettings.class.getName(),
             UserSettings.class.getName(),
             NotificationAccessSettings.class.getName(),

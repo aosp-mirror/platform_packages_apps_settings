@@ -47,6 +47,8 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     private final Set<Integer> mManagedProfiles = new HashSet<>();
     private boolean mIsQuietModeEnabled = false;
     private int[] profileIdsForUser;
+    private boolean mUserSwitchEnabled;
+
 
     @Resetter
     public void reset() {
@@ -56,6 +58,7 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
         mRestrictionSources.clear();
         mManagedProfiles.clear();
         mIsQuietModeEnabled = false;
+        mUserSwitchEnabled = false;
     }
 
     public void setUserInfo(int userHandle, UserInfo userInfo) {
@@ -135,5 +138,14 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
 
     public void setProfileIdsWithDisabled(int[] profileIds) {
         profileIdsForUser = profileIds;
+    }
+
+    @Implementation
+    public boolean isUserSwitcherEnabled() {
+        return mUserSwitchEnabled;
+    }
+
+    public void setUserSwitcherEnabled(boolean userSwitchEnabled) {
+        mUserSwitchEnabled = userSwitchEnabled;
     }
 }

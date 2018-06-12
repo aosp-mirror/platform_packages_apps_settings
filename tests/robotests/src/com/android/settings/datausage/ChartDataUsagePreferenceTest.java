@@ -25,8 +25,10 @@ import android.content.Context;
 import android.net.NetworkStatsHistory;
 import android.net.NetworkStatsHistory.Entry;
 import android.util.SparseIntArray;
-import com.android.settings.graph.UsageView;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.widget.UsageView;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -65,7 +67,7 @@ public class ChartDataUsagePreferenceTest {
         when(mNetworkStatsHistory.getIndexAfter(end)).thenReturn(7);
         final UsageView usageView = mock(UsageView.class);
         final ArgumentCaptor<SparseIntArray> pointsCaptor =
-            ArgumentCaptor.forClass(SparseIntArray.class);
+                ArgumentCaptor.forClass(SparseIntArray.class);
 
         mPreference.calcPoints(usageView);
 
@@ -84,7 +86,7 @@ public class ChartDataUsagePreferenceTest {
         when(mNetworkStatsHistory.getIndexAfter(end)).thenReturn(5);
         final UsageView usageView = mock(UsageView.class);
         final ArgumentCaptor<SparseIntArray> pointsCaptor =
-            ArgumentCaptor.forClass(SparseIntArray.class);
+                ArgumentCaptor.forClass(SparseIntArray.class);
 
         mPreference.calcPoints(usageView);
 
@@ -113,9 +115,10 @@ public class ChartDataUsagePreferenceTest {
      * Create a network entry to be used to calculate the usage chart. In the calculation, we only
      * need bucketStart, total bytes (rx + tx), and bucketDuration (which is set when we create
      * the NetworkStatsHistory object). Other fields are ignored, so we don't initialize here.
+     *
      * @param start the timestamp when this entry begins
-     * @param rx the total number of received bytes
-     * @param tx the total number of transmitted bytes
+     * @param rx    the total number of received bytes
+     * @param tx    the total number of transmitted bytes
      * @return the network entry with the corresponding start time and data usage
      */
     private Entry createEntry(long start, long rx, long tx) {

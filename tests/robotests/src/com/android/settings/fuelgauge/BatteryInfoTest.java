@@ -36,12 +36,11 @@ import android.os.BatteryStats;
 import android.os.SystemClock;
 import android.util.SparseIntArray;
 
-import com.android.settings.graph.UsageView;
 import com.android.settings.testutils.BatteryTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.widget.UsageView;
 import com.android.settingslib.R;
-import com.android.settingslib.utils.PowerUtil;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -172,7 +171,8 @@ public class BatteryInfoTest {
     }
 
     @Test
-    public void testGetBatteryInfo_basedOnUsageTrueBetweenSevenAndFifteenMinutes_usesCorrectString() {
+    public void
+    testGetBatteryInfo_basedOnUsageTrueBetweenSevenAndFifteenMinutes_usesCorrectString() {
         Estimate estimate = new Estimate(Duration.ofMinutes(10).toMillis(),
                 true /* isBasedOnUsage */,
                 1000 /* averageDischargeTime */);

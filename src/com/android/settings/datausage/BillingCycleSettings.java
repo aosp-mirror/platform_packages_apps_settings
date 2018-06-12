@@ -14,7 +14,6 @@
 
 package com.android.settings.datausage;
 
-import static android.net.NetworkPolicy.CYCLE_NONE;
 import static android.net.NetworkPolicy.LIMIT_DISABLED;
 import static android.net.NetworkPolicy.WARNING_DISABLED;
 
@@ -27,10 +26,7 @@ import android.content.res.Resources;
 import android.net.NetworkPolicy;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
-import androidx.preference.SwitchPreference;
-import androidx.preference.Preference;
 import android.text.format.Time;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,10 +37,12 @@ import android.widget.Spinner;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.net.DataUsageController;
+
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
 
 public class BillingCycleSettings extends DataUsageBase implements
         Preference.OnPreferenceChangeListener, DataUsageEditController {
@@ -63,7 +61,8 @@ public class BillingCycleSettings extends DataUsageBase implements
     private static final String KEY_BILLING_CYCLE = "billing_cycle";
     private static final String KEY_SET_DATA_WARNING = "set_data_warning";
     private static final String KEY_DATA_WARNING = "data_warning";
-    @VisibleForTesting static final String KEY_SET_DATA_LIMIT = "set_data_limit";
+    @VisibleForTesting
+    static final String KEY_SET_DATA_LIMIT = "set_data_limit";
     private static final String KEY_DATA_LIMIT = "data_limit";
 
     private NetworkTemplate mNetworkTemplate;
@@ -76,11 +75,11 @@ public class BillingCycleSettings extends DataUsageBase implements
 
     @VisibleForTesting
     void setUpForTest(NetworkPolicyEditor policyEditor,
-                      Preference billingCycle,
-                      Preference dataLimit,
-                      Preference dataWarning,
-                      SwitchPreference enableLimit,
-                      SwitchPreference enableWarning) {
+            Preference billingCycle,
+            Preference dataLimit,
+            Preference dataWarning,
+            SwitchPreference enableLimit,
+            SwitchPreference enableWarning) {
         services.mPolicyEditor = policyEditor;
         mBillingCycle = billingCycle;
         mDataLimit = dataLimit;
@@ -118,14 +117,7 @@ public class BillingCycleSettings extends DataUsageBase implements
 
     @VisibleForTesting
     void updatePrefs() {
-        final int cycleDay = services.mPolicyEditor.getPolicyCycleDay(mNetworkTemplate);
-        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.DATA_USAGE_SETTINGS_V2)) {
-            mBillingCycle.setSummary(null);
-        } else if (cycleDay != CYCLE_NONE) {
-            mBillingCycle.setSummary(getString(R.string.billing_cycle_fragment_summary, cycleDay));
-        } else {
-            mBillingCycle.setSummary(null);
-        }
+        mBillingCycle.setSummary(null);
         final long warningBytes = services.mPolicyEditor.getPolicyWarningBytes(mNetworkTemplate);
         if (warningBytes != WARNING_DISABLED) {
             mDataWarning.setSummary(DataUsageUtils.formatDataUsage(getContext(), warningBytes));
@@ -402,7 +394,8 @@ public class BillingCycleSettings extends DataUsageBase implements
      */
     public static class ConfirmLimitFragment extends InstrumentedDialogFragment implements
             DialogInterface.OnClickListener {
-        @VisibleForTesting static final String EXTRA_LIMIT_BYTES = "limitBytes";
+        @VisibleForTesting
+        static final String EXTRA_LIMIT_BYTES = "limitBytes";
         public static final float FLOAT = 1.2f;
 
         public static void show(BillingCycleSettings parent) {

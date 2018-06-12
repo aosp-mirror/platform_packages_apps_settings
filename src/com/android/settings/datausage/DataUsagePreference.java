@@ -19,16 +19,15 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
-import androidx.core.content.res.TypedArrayUtils;
-import androidx.preference.Preference;
 import android.util.AttributeSet;
-import android.util.FeatureFlagUtils;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.net.DataUsageController;
+
+import androidx.core.content.res.TypedArrayUtils;
+import androidx.preference.Preference;
 
 public class DataUsagePreference extends Preference implements TemplatePreference {
 
@@ -54,20 +53,13 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
         mSubId = subId;
         DataUsageController controller = new DataUsageController(getContext());
         DataUsageController.DataUsageInfo usageInfo = controller.getDataUsageInfo(mTemplate);
-        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.DATA_USAGE_SETTINGS_V2)) {
-            if (mTemplate.isMatchRuleMobile()) {
-                setTitle(R.string.app_cellular_data_usage);
-            } else {
-                setTitle(mTitleRes);
-                setSummary(getContext().getString(R.string.data_usage_template,
-                        DataUsageUtils.formatDataUsage(getContext(), usageInfo.usageLevel),
-                                usageInfo.period));
-            }
+        if (mTemplate.isMatchRuleMobile()) {
+            setTitle(R.string.app_cellular_data_usage);
         } else {
             setTitle(mTitleRes);
             setSummary(getContext().getString(R.string.data_usage_template,
                     DataUsageUtils.formatDataUsage(getContext(), usageInfo.usageLevel),
-                            usageInfo.period));
+                    usageInfo.period));
         }
         setIntent(getIntent());
     }
@@ -81,18 +73,10 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
                 .setArguments(args)
                 .setDestination(DataUsageList.class.getName())
                 .setSourceMetricsCategory(MetricsProto.MetricsEvent.VIEW_UNKNOWN);
-        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.DATA_USAGE_SETTINGS_V2)) {
-            if (mTemplate.isMatchRuleMobile()) {
-                launcher.setTitleRes(R.string.app_cellular_data_usage);
-            } else {
-                launcher.setTitleRes(mTitleRes);
-            }
+        if (mTemplate.isMatchRuleMobile()) {
+            launcher.setTitleRes(R.string.app_cellular_data_usage);
         } else {
-            if (mTitleRes > 0) {
-                launcher.setTitleRes(mTitleRes);
-            } else {
-                launcher.setTitleText(getTitle());
-            }
+            launcher.setTitleRes(mTitleRes);
         }
         return launcher.toIntent();
     }
