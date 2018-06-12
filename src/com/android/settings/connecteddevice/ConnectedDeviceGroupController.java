@@ -76,9 +76,11 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
             mPreferenceGroup = (PreferenceGroup) screen.findPreference(KEY);
             mPreferenceGroup.setVisible(false);
 
-            mBluetoothDeviceUpdater.setPrefContext(screen.getContext());
+            final Context context = screen.getContext();
+            mBluetoothDeviceUpdater.setPrefContext(context);
             mBluetoothDeviceUpdater.forceUpdate();
-            mConnectedUsbDeviceUpdater.initUsbPreference(screen.getContext());
+            mConnectedUsbDeviceUpdater.initUsbPreference(context);
+            mConnectedDockUpdater.setPreferenceContext(context);
             mConnectedDockUpdater.forceUpdate();
         }
     }

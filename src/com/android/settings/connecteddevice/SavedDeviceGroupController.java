@@ -75,8 +75,11 @@ public class SavedDeviceGroupController extends BasePreferenceController
         if (isAvailable()) {
             mPreferenceGroup = (PreferenceGroup) screen.findPreference(KEY);
             mPreferenceGroup.setVisible(false);
-            mBluetoothDeviceUpdater.setPrefContext(screen.getContext());
+
+            final Context context = screen.getContext();
+            mBluetoothDeviceUpdater.setPrefContext(context);
             mBluetoothDeviceUpdater.forceUpdate();
+            mSavedDockUpdater.setPreferenceContext(context);
             mSavedDockUpdater.forceUpdate();
         }
     }
