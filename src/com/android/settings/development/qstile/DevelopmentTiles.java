@@ -16,7 +16,9 @@
 
 package com.android.settings.development.qstile;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.RemoteException;
@@ -25,7 +27,6 @@ import android.os.SystemProperties;
 import android.provider.Settings;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
-import androidx.annotation.VisibleForTesting;
 import android.util.Log;
 import android.view.IWindowManager;
 import android.view.ThreadedRenderer;
@@ -34,8 +35,11 @@ import android.view.WindowManagerGlobal;
 import android.widget.Toast;
 
 import com.android.internal.app.LocalePicker;
+import com.android.internal.statusbar.IStatusBarService;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.development.SystemPropPoker;
+
+import androidx.annotation.VisibleForTesting;
 
 public abstract class DevelopmentTiles extends TileService {
     private static final String TAG = "DevelopmentTiles";
@@ -57,6 +61,20 @@ public abstract class DevelopmentTiles extends TileService {
             if (isEnabled()) {
                 setIsEnabled(false);
                 SystemPropPoker.getInstance().poke();
+            }
+            final ComponentName cn = new ComponentName(getPackageName(), getClass().getName());
+            try {
+                getPackageManager().setComponentEnabledSetting(
+                        cn, PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                        PackageManager.DONT_KILL_APP);
+                final IStatusBarService statusBarService = IStatusBarService.Stub.asInterface(
+                        ServiceManager.checkService(Context.STATUS_BAR_SERVICE));
+                if (statusBarService != null) {
+                    statusBarService.remTile(cn);
+                }
+            } catch (RemoteException e) {
+                Log.e(TAG, "Failed to modify QS tile for component " +
+                        cn.toString(), e);
             }
             state = Tile.STATE_UNAVAILABLE;
         } else {
