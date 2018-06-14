@@ -39,6 +39,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
 import androidx.annotation.StringRes;
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
@@ -124,7 +125,8 @@ public class ChooseLockGeneric extends SettingsActivity {
          */
         public static final String EXTRA_CHOOSE_LOCK_GENERIC_EXTRAS = "choose_lock_generic_extras";
 
-        private static final int CONFIRM_EXISTING_REQUEST = 100;
+        @VisibleForTesting
+        static final int CONFIRM_EXISTING_REQUEST = 100;
         private static final int ENABLE_ENCRYPTION_REQUEST = 101;
         private static final int CHOOSE_LOCK_REQUEST = 102;
         private static final int CHOOSE_LOCK_BEFORE_FINGERPRINT_REQUEST = 103;
@@ -329,7 +331,9 @@ public class ChooseLockGeneric extends SettingsActivity {
             mWaitingForConfirmation = false;
             if (requestCode == CONFIRM_EXISTING_REQUEST && resultCode == Activity.RESULT_OK) {
                 mPasswordConfirmed = true;
-                mUserPassword = data.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
+                mUserPassword = data != null
+                    ? data.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD)
+                    : null;
                 updatePreferencesOrFinish(false /* isRecreatingActivity */);
                 if (mForChangeCredRequiredForBoot) {
                     if (!TextUtils.isEmpty(mUserPassword)) {
@@ -394,7 +398,8 @@ public class ChooseLockGeneric extends SettingsActivity {
             }
         }
 
-        private void updatePreferencesOrFinish(boolean isRecreatingActivity) {
+        @VisibleForTesting
+        void updatePreferencesOrFinish(boolean isRecreatingActivity) {
             Intent intent = getActivity().getIntent();
             int quality = intent.getIntExtra(LockPatternUtils.PASSWORD_TYPE_KEY, -1);
             if (quality == -1) {
