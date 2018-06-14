@@ -17,15 +17,21 @@
 package com.android.settings.applications.defaultapps;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.os.UserManager;
 import androidx.preference.Preference;
@@ -33,6 +39,8 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -73,8 +81,11 @@ public class DefaultBrowserPreferenceControllerTest {
 
     @Test
     public void isAvailable_hasBrowser_shouldReturnTrue() {
+        final ResolveInfo info = new ResolveInfo();
+        info.activityInfo = new ActivityInfo();
+        info.handleAllWebDataURI = true;
         when(mPackageManager.queryIntentActivitiesAsUser(any(Intent.class), anyInt(), anyInt()))
-            .thenReturn(Collections.singletonList(new ResolveInfo()));
+            .thenReturn(Collections.singletonList(info));
         assertThat(mController.isAvailable()).isTrue();
     }
 
@@ -86,6 +97,28 @@ public class DefaultBrowserPreferenceControllerTest {
 
         mController.updateState(pref);
         verify(pref).setSummary(R.string.app_list_preference_none);
+    }
+
+    @Test
+    public void getDefaultAppLabel_hasAppWithMultipleResolvedInfo_shouldReturnLabel()
+            throws NameNotFoundException {
+        DefaultBrowserPreferenceController spyController = spy(mController);
+        doReturn(null).when(spyController).getDefaultAppIcon();
+        final List<ResolveInfo> resolveInfos = new ArrayList<>();
+        final CharSequence PACKAGE_NAME = "com.test.package";
+        final ResolveInfo info1 = spy(createResolveInfo(PACKAGE_NAME.toString()));
+        when(info1.loadLabel(mPackageManager)).thenReturn(PACKAGE_NAME);
+        resolveInfos.add(info1);
+        resolveInfos.add(createResolveInfo(PACKAGE_NAME.toString()));
+        when(mPackageManager.getDefaultBrowserPackageNameAsUser(anyInt())).thenReturn(null);
+        when(mPackageManager.queryIntentActivitiesAsUser(any(Intent.class), anyInt(), anyInt()))
+            .thenReturn(resolveInfos);
+        when(mPackageManager.getApplicationInfoAsUser(
+            eq(PACKAGE_NAME.toString()), anyInt(), anyInt()))
+            .thenReturn(createApplicationInfo(PACKAGE_NAME.toString()));
+        final Preference pref = mock(Preference.class);
+
+        assertThat(spyController.getDefaultAppLabel()).isEqualTo(PACKAGE_NAME);
     }
 
     @Test
@@ -102,5 +135,41 @@ public class DefaultBrowserPreferenceControllerTest {
                 .thenReturn(Collections.singletonList(new ResolveInfo()));
 
         assertThat(mController.isBrowserDefault("pkg", 0)).isTrue();
+    }
+
+    @Test
+    public void getCandidates_shouldNotIncludeDuplicatePackageName() throws NameNotFoundException {
+        final List<ResolveInfo> resolveInfos = new ArrayList<>();
+        final String PACKAGE_ONE = "com.first.package";
+        final String PACKAGE_TWO = "com.second.package";
+        resolveInfos.add(createResolveInfo(PACKAGE_ONE));
+        resolveInfos.add(createResolveInfo(PACKAGE_TWO));
+        resolveInfos.add(createResolveInfo(PACKAGE_ONE));
+        resolveInfos.add(createResolveInfo(PACKAGE_TWO));
+        when(mPackageManager.queryIntentActivitiesAsUser(any(Intent.class), anyInt(), anyInt()))
+            .thenReturn(resolveInfos);
+        when(mPackageManager.getApplicationInfoAsUser(eq(PACKAGE_ONE), anyInt(), anyInt()))
+            .thenReturn(createApplicationInfo(PACKAGE_ONE));
+        when(mPackageManager.getApplicationInfoAsUser(eq(PACKAGE_TWO), anyInt(), anyInt()))
+            .thenReturn(createApplicationInfo(PACKAGE_TWO));
+
+        final List<ResolveInfo> defaultBrowserInfo =
+            mController.getCandidates(mPackageManager, 0 /* userId */);
+
+        assertThat(defaultBrowserInfo.size()).isEqualTo(2);
+    }
+
+    private ResolveInfo createResolveInfo(String packageName) {
+        final ResolveInfo info = new ResolveInfo();
+        info.handleAllWebDataURI = true;
+        info.activityInfo = new ActivityInfo();
+        info.activityInfo.packageName = packageName;
+        return info;
+    }
+
+    private ApplicationInfo createApplicationInfo(String packageName) {
+        final ApplicationInfo info = new ApplicationInfo();
+        info.packageName = packageName;
+        return info;
     }
 }
