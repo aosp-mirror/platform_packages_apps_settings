@@ -114,6 +114,11 @@
                 android:persistent="false"/>
 
         <Preference
+            android:key="hearing_aid_preference"
+            android:summary="@string/accessibility_hearingaid_not_connected_summary"
+            android:title="@string/accessibility_hearingaid_title"/>
+
+        <Preference
                 android:fragment="com.android.settings.accessibility.CaptionPropertiesFragment"
                 android:key="captioning_preference_screen"
                 android:title="@string/accessibility_captioning_title" />
