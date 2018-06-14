@@ -15,20 +15,17 @@
  */
 
 
-package com.android.settings.applications;
+package com.android.settings.applications.specialaccess;
 
 import android.content.Context;
-import androidx.annotation.VisibleForTesting;
 
-import com.android.settings.core.BasePreferenceController;
 import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 
 public class DataSaverController extends BasePreferenceController {
 
-    @VisibleForTesting static final String KEY_DATA_SAVER = "data_saver";
-
-    public DataSaverController(Context context) {
-        super(context, KEY_DATA_SAVER);
+    public DataSaverController(Context context, String key) {
+        super(context, key);
     }
 
     @AvailabilityStatus
