@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge.batterysaver;
 import static com.google.common.truth.Truth.assertThat;
 
 import androidx.lifecycle.LifecycleOwner;
+
 import android.content.Context;
 import android.provider.Settings;
 
@@ -39,6 +40,7 @@ public class AutoBatterySeekBarPreferenceControllerTest {
 
     private static final int TRIGGER_LEVEL = 20;
     private static final int DEFAULT_LEVEL = 15;
+    private static final int INTERVAL = 5;
 
     private AutoBatterySeekBarPreferenceController mController;
     private Context mContext;
@@ -85,15 +87,16 @@ public class AutoBatterySeekBarPreferenceControllerTest {
 
         assertThat(mPreference.isVisible()).isTrue();
         assertThat(mPreference.getTitle()).isEqualTo("At 20%");
-        assertThat(mPreference.getProgress()).isEqualTo(TRIGGER_LEVEL);
+        assertThat(mPreference.getProgress()).isEqualTo(TRIGGER_LEVEL / INTERVAL);
     }
+
 
     @Test
     public void testOnPreferenceChange_updateValue() {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
 
-        mController.onPreferenceChange(mPreference, TRIGGER_LEVEL);
+        mController.onPreferenceChange(mPreference, TRIGGER_LEVEL / INTERVAL);
 
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0)).isEqualTo(TRIGGER_LEVEL);
@@ -106,7 +109,7 @@ public class AutoBatterySeekBarPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        assertThat(mPreference.getMax()).isEqualTo(50);
+        assertThat(mPreference.getMax()).isEqualTo(50 / INTERVAL);
     }
 
     @Test
