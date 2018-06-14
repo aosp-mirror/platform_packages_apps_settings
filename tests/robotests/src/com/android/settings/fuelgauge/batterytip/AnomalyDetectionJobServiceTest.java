@@ -178,7 +178,7 @@ public class AnomalyDetectionJobServiceTest {
         verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
                 MetricsProto.MetricsEvent.ACTION_ANOMALY_IGNORED,
                 SYSTEM_PACKAGE,
-                Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, ANOMALY_TYPE),
+                Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_TYPE, ANOMALY_TYPE),
                 Pair.create(MetricsProto.MetricsEvent.FIELD_APP_VERSION_CODE, VERSION_CODE));
     }
 
