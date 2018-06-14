@@ -1382,7 +1382,7 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.DeviceAdminSettings" />
+                android:value="com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminSettings" />
         </activity>
 
         <!-- Keep compatibility with old shortcuts. -->
@@ -1391,10 +1391,10 @@
                 android:exported="true"
                 android:targetActivity="Settings$DeviceAdminSettingsActivity">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.DeviceAdminSettings" />
+                android:value="com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminSettings" />
         </activity-alias>
 
-        <activity android:name="DeviceAdminAdd"
+        <activity android:name=".applications.specialaccess.deviceadmin.DeviceAdminAdd"
                 android:label="@string/device_admin_add_title"
                 android:clearTaskOnLaunch="true">
             <intent-filter>
@@ -1405,7 +1405,7 @@
 
         <activity-alias android:name="SetProfileOwner"
                         android:label="@string/profile_owner_add_title"
-                        android:targetActivity="DeviceAdminAdd">
+                        android:targetActivity=".applications.specialaccess.deviceadmin.DeviceAdminAdd">
             <intent-filter android:priority="1000">
                 <action android:name="android.app.action.SET_PROFILE_OWNER" />
                 <category android:name="android.intent.category.DEFAULT" />
