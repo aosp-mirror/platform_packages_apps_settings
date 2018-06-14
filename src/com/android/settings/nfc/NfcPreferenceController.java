@@ -20,7 +20,7 @@ import android.content.IntentFilter;
 import android.nfc.NfcAdapter;
 import android.provider.Settings;
 
-import androidx.preference.Preference;
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
@@ -37,7 +37,8 @@ public class NfcPreferenceController extends TogglePreferenceController
     public static final String KEY_TOGGLE_NFC = "toggle_nfc";
     private final NfcAdapter mNfcAdapter;
     private NfcEnabler mNfcEnabler;
-    private NfcAirplaneModeObserver mAirplaneModeObserver;
+    @VisibleForTesting
+    NfcAirplaneModeObserver mAirplaneModeObserver;
 
     public NfcPreferenceController(Context context, String key) {
         super(context, key);
@@ -57,10 +58,10 @@ public class NfcPreferenceController extends TogglePreferenceController
 
         mNfcEnabler = new NfcEnabler(mContext, switchPreference);
 
-        // Manually set dependencies for NFC when not toggleable.
-        if (!isToggleableInAirplaneMode(mContext)) {
-            mAirplaneModeObserver = new NfcAirplaneModeObserver(mContext,
-                    mNfcAdapter, (Preference) switchPreference);
+        // Listen to airplane mode updates if NFC should be turned off when airplane mode is on
+        if (shouldTurnOffNFCInAirplaneMode(mContext) || isToggleableInAirplaneMode(mContext)) {
+            mAirplaneModeObserver =
+                    new NfcAirplaneModeObserver(mContext, mNfcAdapter, switchPreference);
         }
     }
 
@@ -123,6 +124,12 @@ public class NfcPreferenceController extends TogglePreferenceController
         if (mNfcEnabler != null) {
             mNfcEnabler.pause();
         }
+    }
+
+    public static boolean shouldTurnOffNFCInAirplaneMode(Context context) {
+        final String airplaneModeRadios = Settings.Global.getString(context.getContentResolver(),
+                Settings.Global.AIRPLANE_MODE_RADIOS);
+        return airplaneModeRadios != null && airplaneModeRadios.contains(Settings.Global.RADIO_NFC);
     }
 
     public static boolean isToggleableInAirplaneMode(Context context) {

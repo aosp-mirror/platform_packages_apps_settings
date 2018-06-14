@@ -70,12 +70,13 @@ public class NfcAirplaneModeObserver extends ContentObserver {
         }
 
         mAirplaneMode = airplaneMode;
-        boolean toggleable = mAirplaneMode != 1;
-        if (toggleable) {
-            mNfcAdapter.enable();
-        } else {
+        if (mAirplaneMode == 1) {
+            // airplane mode is on, need to turn off NFC, and check if user can toggle it
             mNfcAdapter.disable();
+            mPreference.setEnabled(NfcPreferenceController.isToggleableInAirplaneMode(mContext));
+        } else {
+            // airplane mode is off, no restriction
+            mPreference.setEnabled(true);
         }
-        mPreference.setEnabled(toggleable);
     }
 }

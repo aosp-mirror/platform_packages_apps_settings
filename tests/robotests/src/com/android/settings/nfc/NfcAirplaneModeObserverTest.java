@@ -18,11 +18,12 @@ package com.android.settings.nfc;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.nfc.NfcAdapter;
 import android.provider.Settings;
 
-import androidx.preference.Preference;
+import android.provider.Settings.Global;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -52,8 +53,8 @@ public class NfcAirplaneModeObserverTest {
 
         mNfcPreference = new SwitchPreference(RuntimeEnvironment.application);
 
-        mNfcAirplaneModeObserver = new NfcAirplaneModeObserver(mContext, mNfcAdapter,
-                (Preference) mNfcPreference);
+        mNfcAirplaneModeObserver =
+                new NfcAirplaneModeObserver(mContext, mNfcAdapter, mNfcPreference);
     }
 
     @Test
@@ -67,20 +68,51 @@ public class NfcAirplaneModeObserverTest {
                 NfcAirplaneModeObserver.AIRPLANE_MODE_URI);
 
         assertThat(mNfcAdapter.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void NfcAirplaneModeObserver_airplaneModeOnNfcToggleable_shouldEnablePreference() {
+        ReflectionHelpers.setField(mNfcAirplaneModeObserver, "mAirplaneMode", 0);
+        final ContentResolver contentResolver = mContext.getContentResolver();
+        Settings.Global.putInt(contentResolver, Settings.Global.AIRPLANE_MODE_ON, 1);
+        Settings.Global.putString(contentResolver,
+            Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS, Settings.Global.RADIO_NFC);
+
+        mNfcAirplaneModeObserver.onChange(false, NfcAirplaneModeObserver.AIRPLANE_MODE_URI);
+
+        assertThat(mNfcPreference.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void NfcAirplaneModeObserver_airplaneModeOnNfcNotToggleable_shouldDisablePreference() {
+        ReflectionHelpers.setField(mNfcAirplaneModeObserver, "mAirplaneMode", 0);
+        final ContentResolver contentResolver = mContext.getContentResolver();
+        Settings.Global.putInt(contentResolver, Settings.Global.AIRPLANE_MODE_ON, 1);
+        Settings.Global.putString(contentResolver,
+            Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS, Global.RADIO_WIFI);
+
+        mNfcAirplaneModeObserver.onChange(false, NfcAirplaneModeObserver.AIRPLANE_MODE_URI);
+
         assertThat(mNfcPreference.isEnabled()).isFalse();
     }
 
     @Test
-    public void NfcAirplaneModeObserver_airplaneOff_shouldEnableNfc() {
-        ReflectionHelpers.setField(mNfcAirplaneModeObserver,
-                "mAirplaneMode", 1);
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.AIRPLANE_MODE_ON, 0);
+    public void NfcAirplaneModeObserver_airplaneModeOff_shouldEnablePreference() {
+        ReflectionHelpers.setField(mNfcAirplaneModeObserver, "mAirplaneMode", 1);
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0);
 
-        mNfcAirplaneModeObserver.onChange(false,
-                NfcAirplaneModeObserver.AIRPLANE_MODE_URI);
+        mNfcAirplaneModeObserver.onChange(false, NfcAirplaneModeObserver.AIRPLANE_MODE_URI);
 
-        assertThat(mNfcAdapter.isEnabled()).isTrue();
         assertThat(mNfcPreference.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void NfcAirplaneModeObserver_airplaneModeOff_shouldNotEnableNfcAutomatically() {
+        ReflectionHelpers.setField(mNfcAirplaneModeObserver, "mAirplaneMode", 1);
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0);
+
+        mNfcAirplaneModeObserver.onChange(false, NfcAirplaneModeObserver.AIRPLANE_MODE_URI);
+
+        assertThat(mNfcAdapter.isEnabled()).isFalse();
     }
 }
