@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications;
+package com.android.settings.applications.specialaccess;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.spy;
 
 import android.content.Context;
 
@@ -26,31 +25,32 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowActivityManager;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-public class DataSaverControllerTest {
+public class ZenAccessControllerTest {
 
     private Context mContext;
-    private DataSaverController mController;
+    private ZenAccessController mController;
+    private ShadowActivityManager mActivityManager;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application.getApplicationContext());
-        mController = new DataSaverController(mContext);
+        mContext = RuntimeEnvironment.application;
+        mController = new ZenAccessController(mContext, "key");
+        mActivityManager = Shadow.extract(mContext.getSystemService(Context.ACTIVITY_SERVICE));
     }
 
     @Test
-    public void testDataSaver_byDefault_shouldBeShown() {
+    public void isAvailable_byDefault_true() {
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
-    @Config(qualifiers = "mcc999")
-    public void testDataSaver_ifDisabled_shouldNotBeShown() {
-        assertThat(mController.isAvailable()).isFalse();
+    public void isAvailable_lowMemory_false() {
+        mActivityManager.setIsLowRamDevice(true);
+        assertThat(mController.isAvailable()).isTrue();
     }
 }

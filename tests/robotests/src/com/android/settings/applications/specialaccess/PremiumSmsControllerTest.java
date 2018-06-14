@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications;
+package com.android.settings.applications.specialaccess;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.spy;
@@ -31,26 +31,26 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-public class EnabledVrListenersControllerTest {
+public class PremiumSmsControllerTest {
 
     private Context mContext;
-    private EnabledVrListenersController mController;
+    private PremiumSmsController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application.getApplicationContext());
-        mController = new EnabledVrListenersController(mContext);
+        mController = new PremiumSmsController(mContext, "key");
     }
 
     @Test
-    public void testEnabledVrListeners_byDefault_shouldBeShown() {
+    public void testPremiumSms_byDefault_shouldBeShown() {
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     @Config(qualifiers = "mcc999")
-    public void testEnabledVrListeners_ifDisabled_shouldNotBeShown() {
+    public void testPremiumSms_ifDisabled_shouldNotBeShown() {
         assertThat(mController.isAvailable()).isFalse();
     }
 }

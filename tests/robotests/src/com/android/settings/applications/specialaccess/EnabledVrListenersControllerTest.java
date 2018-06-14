@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications;
+package com.android.settings.applications.specialaccess;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.spy;
 
 import android.content.Context;
 
@@ -26,31 +25,39 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowActivityManager;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-public class DeviceAdministratorsControllerTest {
+public class EnabledVrListenersControllerTest {
 
     private Context mContext;
-    private DeviceAdministratorsController mController;
+    private EnabledVrListenersController mController;
+    private ShadowActivityManager mActivityManager;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application.getApplicationContext());
-        mController = new DeviceAdministratorsController(mContext);
+        mContext = RuntimeEnvironment.application;
+        mController = new EnabledVrListenersController(mContext, "key");
+        mActivityManager = Shadow.extract(mContext.getSystemService(Context.ACTIVITY_SERVICE));
     }
 
     @Test
-    public void testDeviceAdministrators_byDefault_shouldBeShown() {
+    public void isAvailable_byDefault_true() {
+        assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void isAvailable_lowMemory_false() {
+        mActivityManager.setIsLowRamDevice(true);
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     @Config(qualifiers = "mcc999")
-    public void testDeviceAdministrators_ifDisabled_shouldNotBeShown() {
+    public void isAvailable_disabled_false() {
         assertThat(mController.isAvailable()).isFalse();
     }
 }

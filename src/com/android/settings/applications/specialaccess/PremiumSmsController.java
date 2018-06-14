@@ -14,25 +14,22 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications;
+package com.android.settings.applications.specialaccess;
 
 import android.content.Context;
-import androidx.annotation.VisibleForTesting;
 
-import com.android.settings.core.BasePreferenceController;
 import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 
-public class HighPowerAppsController extends BasePreferenceController {
+public class PremiumSmsController extends BasePreferenceController {
 
-    @VisibleForTesting static final String KEY_HIGH_POWER_APPS = "high_power_apps";
-
-    public HighPowerAppsController(Context context) {
-        super(context, KEY_HIGH_POWER_APPS);
+    public PremiumSmsController(Context context, String key) {
+        super(context, key);
     }
 
     @AvailabilityStatus
     public int getAvailabilityStatus() {
-        return mContext.getResources().getBoolean(R.bool.config_show_high_power_apps)
+        return mContext.getResources().getBoolean(R.bool.config_show_premium_sms)
                 ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
     }
