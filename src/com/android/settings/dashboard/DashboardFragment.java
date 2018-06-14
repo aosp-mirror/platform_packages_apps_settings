@@ -27,13 +27,13 @@ import android.util.Log;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerListHelper;
+import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.drawer.DashboardCategory;
-import com.android.settingslib.drawer.SettingsDrawerActivity;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.drawer.TileUtils;
 
@@ -52,7 +52,7 @@ import androidx.preference.PreferenceScreen;
  * Base fragment for dashboard style UI containing a list of static and dynamic setting items.
  */
 public abstract class DashboardFragment extends SettingsPreferenceFragment
-        implements SettingsDrawerActivity.CategoryListener, Indexable,
+        implements SettingsBaseActivity.CategoryListener, Indexable,
         SummaryLoader.SummaryConsumer {
     private static final String TAG = "DashboardFragment";
 
@@ -145,9 +145,9 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             mSummaryLoader.setListening(true);
         }
         final Activity activity = getActivity();
-        if (activity instanceof SettingsDrawerActivity) {
+        if (activity instanceof SettingsBaseActivity) {
             mListeningToCategoryChange = true;
-            ((SettingsDrawerActivity) activity).addCategoryListener(this);
+            ((SettingsBaseActivity) activity).addCategoryListener(this);
         }
     }
 
@@ -197,8 +197,8 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         }
         if (mListeningToCategoryChange) {
             final Activity activity = getActivity();
-            if (activity instanceof SettingsDrawerActivity) {
-                ((SettingsDrawerActivity) activity).remCategoryListener(this);
+            if (activity instanceof SettingsBaseActivity) {
+                ((SettingsBaseActivity) activity).remCategoryListener(this);
             }
             mListeningToCategoryChange = false;
         }

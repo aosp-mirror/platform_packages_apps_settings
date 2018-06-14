@@ -52,6 +52,7 @@ import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.backup.BackupSettingsActivity;
+import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.gateway.SettingsGateway;
 import com.android.settings.dashboard.DashboardFeatureProvider;
@@ -64,7 +65,6 @@ import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.core.instrumentation.SharedPreferencesLogger;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.drawer.DashboardCategory;
-import com.android.settingslib.drawer.SettingsDrawerActivity;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
@@ -76,7 +76,8 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragment;
 import androidx.preference.PreferenceManager;
 
-public class SettingsActivity extends SettingsDrawerActivity
+
+public class SettingsActivity extends SettingsBaseActivity
         implements PreferenceManager.OnPreferenceTreeClickListener,
         PreferenceFragment.OnPreferenceStartFragmentCallback,
         ButtonBarHandler, FragmentManager.OnBackStackChangedListener {
@@ -606,7 +607,7 @@ public class SettingsActivity extends SettingsDrawerActivity
     private void updateTilesList() {
         // Generally the items that are will be changing from these updates will
         // not be in the top list of tiles, so run it in the background and the
-        // SettingsDrawerActivity will pick up on the updates automatically.
+        // SettingsBaseActivity will pick up on the updates automatically.
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
