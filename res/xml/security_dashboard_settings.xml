@@ -48,7 +48,7 @@
             android:key="fingerprint_settings"
             android:title="@string/security_settings_fingerprint_preference_title"
             android:summary="@string/summary_placeholder"
-            settings:keywords="@string/keywords_fingerprint_settings"/>
+            settings:keywords="@string/keywords_fingerprint_settings" />
 
     </PreferenceCategory>
 
@@ -75,7 +75,7 @@
             android:key="visiblepattern_profile"
             android:summary="@string/summary_placeholder"
             android:title="@string/lockpattern_settings_enable_visible_pattern_title_profile"
-            settings:controller="com.android.settings.security.VisiblePatternProfilePreferenceController"/>
+            settings:controller="com.android.settings.security.VisiblePatternProfilePreferenceController" />
 
         <Preference
             android:key="fingerprint_settings_profile"
@@ -100,7 +100,7 @@
             android:key="show_password"
             android:title="@string/show_password"
             android:summary="@string/show_password_summary"
-            settings:controller="com.android.settings.security.ShowPasswordPreferenceController"/>
+            settings:controller="com.android.settings.security.ShowPasswordPreferenceController" />
 
     </PreferenceCategory>
 
@@ -112,7 +112,8 @@
             android:key="manage_device_admin"
             android:title="@string/manage_device_admin"
             android:summary="@string/summary_placeholder"
-            android:fragment="com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminSettings" />
+            android:fragment="com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminSettings"
+            settings:controller="com.android.settings.enterprise.ManageDeviceAdminPreferenceController" />
 
         <Preference
             android:key="enterprise_privacy"

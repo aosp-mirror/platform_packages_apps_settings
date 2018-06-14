@@ -35,7 +35,8 @@
         android:key="device_administrators"
         android:title="@string/manage_device_admin"
         android:fragment="com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminSettings"
-        settings:controller="com.android.settings.applications.specialaccess.deviceadmin.DeviceAdministratorsController" />
+        android:summary="@string/summary_placeholder"
+        settings:controller="com.android.settings.enterprise.ManageDeviceAdminPreferenceController" />
 
     <Preference
         android:key="system_alert_window"
