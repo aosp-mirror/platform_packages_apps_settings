@@ -106,6 +106,13 @@ public class LowBatteryDetectorTest {
     }
 
     @Test
+    public void testDetect_timeEstimationZero_tipInvisible() {
+        mBatteryInfo.batteryLevel = 50;
+        mBatteryInfo.remainingTimeUs = 0;
+        assertThat(mLowBatteryDetector.detect().isVisible()).isFalse();
+    }
+
+    @Test
     public void testDetect_noEarlyWarning_tipInvisible() {
         mBatteryInfo.remainingTimeUs = TimeUnit.DAYS.toMicros(1);
         mBatteryInfo.batteryLevel = 100;
