@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.applications.specialaccess.deviceadmin;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -59,6 +59,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.EventLogTags;
+import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.users.UserDialogs;
 import com.android.settingslib.RestrictedLockUtils;
