@@ -19,9 +19,6 @@ package com.android.settings.applications.appinfo;
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -94,10 +91,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
     static final int LOADER_CHART_DATA = 2;
     static final int LOADER_STORAGE = 3;
     static final int LOADER_BATTERY = 4;
-
-    // Dialog identifiers used in showDialog
-    private static final int DLG_BASE = 0;
-    static final int DLG_CLEAR_INSTANT_APP = DLG_BASE + 1;
 
     public static final String ARG_PACKAGE_NAME = "package";
     public static final String ARG_PACKAGE_UID = "uid";
@@ -419,7 +412,9 @@ public class AppInfoDashboardFragment extends DashboardFragment
         for (Callback callback : mCallbacks) {
             callback.refreshUi();
         }
-        mAppButtonsPreferenceController.refreshUi();
+        if (mAppButtonsPreferenceController.isAvailable()) {
+            mAppButtonsPreferenceController.refreshUi();
+        }
 
         if (!mInitialized) {
             // First time init: are we displaying an uninstalled app?
@@ -445,11 +440,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
         }
 
         return true;
-    }
-
-    @VisibleForTesting
-    AlertDialog createDialog(int id, int errorCode) {
-        return mInstantAppButtonPreferenceController.createDialog(id);
     }
 
     private void uninstallPkg(String packageName, boolean allUsers, boolean andDisable) {
@@ -561,12 +551,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
         mFinishing = true;
     }
 
-    void showDialogInner(int id, int moveErrorCode) {
-        final DialogFragment newFragment = MyAlertDialogFragment.newInstance(id, moveErrorCode);
-        newFragment.setTargetFragment(this, 0);
-        newFragment.show(getFragmentManager(), "dialog " + id);
-    }
-
     @Override
     public void onRunningStateChanged(boolean running) {
         // No op.
@@ -601,37 +585,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
     public void onPackageListChanged() {
         if (!refreshUi()) {
             setIntentAndFinish(true, true);
-        }
-    }
-
-    public static class MyAlertDialogFragment extends InstrumentedDialogFragment {
-
-        private static final String ARG_ID = "id";
-
-        @Override
-        public int getMetricsCategory() {
-            return MetricsEvent.DIALOG_APP_INFO_ACTION;
-        }
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            final int id = getArguments().getInt(ARG_ID);
-            final int errorCode = getArguments().getInt("moveError");
-            final Dialog dialog =
-                    ((AppInfoDashboardFragment) getTargetFragment()).createDialog(id, errorCode);
-            if (dialog == null) {
-                throw new IllegalArgumentException("unknown id " + id);
-            }
-            return dialog;
-        }
-
-        public static MyAlertDialogFragment newInstance(int id, int errorCode) {
-            final MyAlertDialogFragment dialogFragment = new MyAlertDialogFragment();
-            final Bundle args = new Bundle();
-            args.putInt(ARG_ID, id);
-            args.putInt("moveError", errorCode);
-            dialogFragment.setArguments(args);
-            return dialogFragment;
         }
     }
 

@@ -27,9 +27,10 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
@@ -287,13 +288,16 @@ public class InstantAppButtonsPreferenceControllerTest {
     }
 
     @Test
-    public void onClick_shouldDeleteApp() {
-        PackageManager packageManager = mock(PackageManager.class);
-        ReflectionHelpers.setField(mController, "mPackageManager", packageManager);
+    public void clickClearAppButton_shouldLaunchInstantAppButtonDialogFragment() {
+        final FragmentManager fragmentManager = mock(FragmentManager.class);
+        final FragmentTransaction fragmentTransaction = mock(FragmentTransaction.class);
+        when(mFragment.getFragmentManager()).thenReturn(fragmentManager);
+        when(fragmentManager.beginTransaction()).thenReturn(fragmentTransaction);
+        mController.displayPreference(mScreen);
 
-        mController.onClick(mock(DialogInterface.class), DialogInterface.BUTTON_POSITIVE);
+        mClearAppButton.callOnClick();
 
-        verify(packageManager)
-            .deletePackageAsUser(eq(TEST_AIA_PACKAGE_NAME), any(), anyInt(),anyInt());
+        verify(fragmentTransaction).add(any(InstantAppButtonDialogFragment.class),
+            eq("instant_app_buttons"));
     }
 }
