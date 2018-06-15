@@ -141,7 +141,8 @@
         android:title="@string/device_theme"
         android:entries="@array/systemui_theme_entries"
         android:entryValues="@array/systemui_theme_values"
-        settings:controller="com.android.settings.display.SystemUiThemePreferenceController" />
+        settings:controller="com.android.settings.display.SystemUiThemePreferenceController"
+        settings:keywords="@string/keywords_systemui_theme" />
 
     <Preference
         android:key="vr_display_pref"

@@ -1,6 +1,5 @@
-package com.android.settings.fuelgauge;
+package com.android.settings.applications.appinfo;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -26,7 +25,7 @@ public class ButtonActionDialogFragment extends InstrumentedDialogFragment imple
     /**
      * Interface to handle the dialog click
      */
-    interface AppButtonsDialogListener {
+    public interface AppButtonsDialogListener {
         void handleDialogClick(int type);
     }
 

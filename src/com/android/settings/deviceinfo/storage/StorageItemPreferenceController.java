@@ -402,10 +402,14 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         try {
             final int userId = intent.getIntExtra(Intent.EXTRA_USER_ID, -1);
 
+            // b/33117269: Note that launchIntent may launch activity in different task which set
+            // different launchMode (e.g. Files), using startActivityForesult to set task as
+            // source task, and set requestCode as 0 means don't care about returnCode currently.
             if (userId == -1) {
-                mFragment.startActivity(intent);
+                mFragment.startActivityForResult(intent, 0 /* requestCode not used */);
             } else {
-                mFragment.getActivity().startActivityAsUser(intent, new UserHandle(userId));
+                mFragment.getActivity().startActivityForResultAsUser(intent,
+                        0 /* requestCode not used */, new UserHandle(userId));
             }
         } catch (ActivityNotFoundException e) {
             Log.w(TAG, "No activity found for " + intent);

@@ -18,8 +18,10 @@ package com.android.settings.nfc;
 
 import android.content.Context;
 import android.nfc.NfcAdapter;
-import androidx.preference.SwitchPreference;
+import android.provider.Settings;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.SwitchPreference;
 
 /**
  * NfcEnabler is a helper to manage the Nfc on/off checkbox preference. It turns on/off Nfc
@@ -38,7 +40,7 @@ public class NfcEnabler extends BaseNfcEnabler {
         switch (newState) {
             case NfcAdapter.STATE_OFF:
                 mPreference.setChecked(false);
-                mPreference.setEnabled(true);
+                mPreference.setEnabled(isToggleable());
                 break;
             case NfcAdapter.STATE_ON:
                 mPreference.setChecked(true);
@@ -53,5 +55,16 @@ public class NfcEnabler extends BaseNfcEnabler {
                 mPreference.setEnabled(false);
                 break;
         }
+    }
+
+    @VisibleForTesting
+    boolean isToggleable() {
+        if (NfcPreferenceController.isToggleableInAirplaneMode(mContext)
+                || !NfcPreferenceController.shouldTurnOffNFCInAirplaneMode(mContext)) {
+            return true;
+        }
+        final int airplaneMode = Settings.Global.getInt(
+                mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0);
+        return airplaneMode != 1;
     }
 }

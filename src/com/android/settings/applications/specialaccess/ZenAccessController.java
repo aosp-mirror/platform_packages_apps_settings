@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,25 +14,22 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications;
+package com.android.settings.applications.specialaccess;
 
+import android.app.ActivityManager;
 import android.content.Context;
-import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.R;
 
-public class EnabledVrListenersController extends BasePreferenceController {
+public class ZenAccessController extends BasePreferenceController {
 
-    @VisibleForTesting static final String KEY_ENABLED_VR_LISTENERS = "enabled_vr_listeners";
-
-    public EnabledVrListenersController(Context context) {
-        super(context, KEY_ENABLED_VR_LISTENERS);
+    public ZenAccessController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
     }
 
-    @AvailabilityStatus
+    @Override
     public int getAvailabilityStatus() {
-        return mContext.getResources().getBoolean(R.bool.config_show_enabled_vr_listeners)
+        return !ActivityManager.isLowRamDeviceStatic()
                 ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
     }

@@ -43,6 +43,7 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 public class AutoBatterySeekBarPreferenceController extends BasePreferenceController implements
         LifecycleObserver, OnStart, OnStop, SeekBarPreference.OnPreferenceChangeListener {
     private static final String TAG = "AutoBatterySeekBarPreferenceController";
+    private static final int INTERVAL = 5;
     @VisibleForTesting
     static final String KEY_AUTO_BATTERY_SEEK_BAR = "battery_saver_seek_bar";
     private SeekBarPreference mPreference;
@@ -92,7 +93,7 @@ public class AutoBatterySeekBarPreferenceController extends BasePreferenceContro
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final int progress = (int) newValue;
         Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, progress);
+                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, progress * INTERVAL);
         return true;
     }
 
@@ -102,7 +103,7 @@ public class AutoBatterySeekBarPreferenceController extends BasePreferenceContro
 
         // Override the max value with LOW_POWER_MODE_TRIGGER_LEVEL_MAX, if set.
         final int maxLevel = Settings.Global.getInt(contentResolver,
-                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL_MAX, 0);
+                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL_MAX, 0) / INTERVAL;
         if (maxLevel > 0) {
             if (!(preference instanceof SeekBarPreference)) {
                 Log.e(TAG, "Unexpected preference class: " + preference.getClass());
@@ -127,7 +128,7 @@ public class AutoBatterySeekBarPreferenceController extends BasePreferenceContro
             preference.setTitle(mContext.getString(R.string.battery_saver_seekbar_title,
                     Utils.formatPercentage(level)));
             SeekBarPreference seekBarPreference = (SeekBarPreference) preference;
-            seekBarPreference.setProgress(level);
+            seekBarPreference.setProgress(level / INTERVAL);
             seekBarPreference.setSeekBarContentDescription(
                     mContext.getString(R.string.battery_saver_turn_on_automatically_title));
         }

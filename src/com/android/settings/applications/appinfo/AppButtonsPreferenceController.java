@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.fuelgauge;
+package com.android.settings.applications.appinfo;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -49,13 +49,13 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.ApplicationFeatureProvider;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.ActionButtonPreference;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
-import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -74,8 +74,7 @@ import java.util.List;
  * An easy way to handle them is to delegate them to {@link #handleDialogClick(int)} and
  * {@link #handleActivityResult(int, int, Intent)} in this controller.
  */
-//TODO(80312809): Merge this class into {@link AppActionButtonPreferenceController}
-public class AppButtonsPreferenceController extends AbstractPreferenceController implements
+public class AppButtonsPreferenceController extends BasePreferenceController implements
         PreferenceControllerMixin, LifecycleObserver, OnResume, OnDestroy,
         ApplicationsState.Callbacks {
     public static final String APP_CHG = "chg";
@@ -120,9 +119,8 @@ public class AppButtonsPreferenceController extends AbstractPreferenceController
 
     public AppButtonsPreferenceController(SettingsActivity activity, Fragment fragment,
             Lifecycle lifecycle, String packageName, ApplicationsState state,
-            DevicePolicyManager dpm, UserManager userManager,
-            PackageManager packageManager, int requestUninstall, int requestRemoveDeviceAdmin) {
-        super(activity);
+            int requestUninstall, int requestRemoveDeviceAdmin) {
+        super(activity, KEY_ACTION_BUTTONS);
 
         if (!(fragment instanceof ButtonActionDialogFragment.AppButtonsDialogListener)) {
             throw new IllegalArgumentException(
@@ -133,9 +131,9 @@ public class AppButtonsPreferenceController extends AbstractPreferenceController
         mMetricsFeatureProvider = factory.getMetricsFeatureProvider();
         mApplicationFeatureProvider = factory.getApplicationFeatureProvider(activity);
         mState = state;
-        mDpm = dpm;
-        mUserManager = userManager;
-        mPm = packageManager;
+        mDpm = (DevicePolicyManager) activity.getSystemService(Context.DEVICE_POLICY_SERVICE);
+        mUserManager = (UserManager) activity.getSystemService(Context.USER_SERVICE);
+        mPm = activity.getPackageManager();
         mPackageName = packageName;
         mActivity = activity;
         mFragment = fragment;
@@ -153,9 +151,10 @@ public class AppButtonsPreferenceController extends AbstractPreferenceController
     }
 
     @Override
-    public boolean isAvailable() {
+    public int getAvailabilityStatus() {
         // TODO(b/37313605): Re-enable once this controller supports instant apps
-        return mAppEntry != null && !AppUtils.isInstant(mAppEntry.info);
+        return mAppEntry != null && !AppUtils.isInstant(mAppEntry.info)
+            ? AVAILABLE : DISABLED_FOR_USER ;
     }
 
     @Override

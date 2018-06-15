@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,25 +14,22 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications;
+package com.android.settings.applications.specialaccess;
 
+import android.app.ActivityManager;
 import android.content.Context;
-import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.R;
 
-public class PremiumSmsController extends BasePreferenceController {
+public class PictureInPictureController extends BasePreferenceController {
 
-    @VisibleForTesting static final String KEY_PREMIUM_SMS = "premium_sms";
-
-    public PremiumSmsController(Context context) {
-        super(context, KEY_PREMIUM_SMS);
+    public PictureInPictureController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
     }
 
-    @AvailabilityStatus
+    @Override
     public int getAvailabilityStatus() {
-        return mContext.getResources().getBoolean(R.bool.config_show_premium_sms)
+        return !ActivityManager.isLowRamDeviceStatic()
                 ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
     }

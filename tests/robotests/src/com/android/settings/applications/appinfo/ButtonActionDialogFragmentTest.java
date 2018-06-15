@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.fuelgauge;
+package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyInt;
@@ -128,7 +128,7 @@ public class ButtonActionDialogFragmentTest {
 
     /**
      * Test fragment that used as the target fragment, it must implement the
-     * {@link com.android.settings.fuelgauge.ButtonActionDialogFragment.AppButtonsDialogListener}
+     * {@link ButtonActionDialogFragment.AppButtonsDialogListener}
      */
     public static class TestFragment extends Fragment implements
             ButtonActionDialogFragment.AppButtonsDialogListener {

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.fuelgauge;
+package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
@@ -44,6 +44,8 @@ import android.os.UserManager;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.applications.appinfo.AppButtonsPreferenceController;
+import com.android.settings.applications.appinfo.ButtonActionDialogFragment;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.widget.ActionButtonPreference;
 import com.android.settings.widget.ActionButtonPreferenceTest;
@@ -107,6 +109,7 @@ public class AppButtonsPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
 
         FakeFeatureFactory.setupForTest();
+        doReturn(mDpm).when(mSettingsActivity).getSystemService(Context.DEVICE_POLICY_SERVICE);
         doReturn(mUserManager).when(mSettingsActivity).getSystemService(Context.USER_SERVICE);
         doReturn(mPackageManger).when(mSettingsActivity).getPackageManager();
         doReturn(mAm).when(mSettingsActivity).getSystemService(Context.ACTIVITY_SERVICE);
@@ -115,8 +118,7 @@ public class AppButtonsPreferenceControllerTest {
         when(mSettingsActivity.getResources().getString(anyInt())).thenReturn(RESOURCE_STRING);
 
         mController = spy(new AppButtonsPreferenceController(mSettingsActivity, mFragment,
-                mLifecycle, PACKAGE_NAME, mState, mDpm, mUserManager, mPackageManger,
-                REQUEST_UNINSTALL, REQUEST_REMOVE_DEVICE_ADMIN));
+                mLifecycle, PACKAGE_NAME, mState, REQUEST_UNINSTALL, REQUEST_REMOVE_DEVICE_ADMIN));
         doReturn(false).when(mController).isFallbackPackage(anyString());
 
         mAppEntry.info = mAppInfo;
@@ -335,6 +337,15 @@ public class AppButtonsPreferenceControllerTest {
     }
 
     @Test
+    public void handleActivityResult_packageUninstalled_shouldFinishPrefernecePanel() {
+        doReturn(false).when(mController).refreshUi();
+
+        mController.handleActivityResult(REQUEST_UNINSTALL, 0, mock(Intent.class));
+
+        verify(mSettingsActivity).finishPreferencePanel(anyInt(), any(Intent.class));
+    }
+
+    @Test
     public void refreshUi_packageNull_shouldNotCrash() {
         mController.mPackageName = null;
 
@@ -344,7 +355,7 @@ public class AppButtonsPreferenceControllerTest {
 
     @Test
     public void onPackageListChanged_available_shouldRefreshUi() {
-        doReturn(true).when(mController).isAvailable();
+        doReturn(mController.AVAILABLE).when(mController).getAvailabilityStatus();
         doReturn(true).when(mController).refreshUi();
 
         mController.onPackageListChanged();
@@ -354,7 +365,7 @@ public class AppButtonsPreferenceControllerTest {
 
     @Test
     public void onPackageListChanged_notAvailable_shouldNotRefreshUiAndNoCrash() {
-        doReturn(false).when(mController).isAvailable();
+        doReturn(mController.DISABLED_FOR_USER).when(mController).getAvailabilityStatus();
 
         mController.onPackageListChanged();
 

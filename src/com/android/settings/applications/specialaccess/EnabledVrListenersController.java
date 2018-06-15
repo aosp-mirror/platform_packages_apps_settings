@@ -14,25 +14,24 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications;
+package com.android.settings.applications.specialaccess;
 
+import android.app.ActivityManager;
 import android.content.Context;
-import androidx.annotation.VisibleForTesting;
 
-import com.android.settings.core.BasePreferenceController;
 import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 
-public class DeviceAdministratorsController extends BasePreferenceController {
+public class EnabledVrListenersController extends BasePreferenceController {
 
-    @VisibleForTesting static final String KEY_DEVICE_ADMIN = "device_administrators";
-
-    public DeviceAdministratorsController(Context context) {
-        super(context, KEY_DEVICE_ADMIN);
+    public EnabledVrListenersController(Context context, String key) {
+        super(context, key);
     }
 
     @AvailabilityStatus
     public int getAvailabilityStatus() {
-        return mContext.getResources().getBoolean(R.bool.config_show_device_administrators)
+        return mContext.getResources().getBoolean(R.bool.config_show_enabled_vr_listeners)
+                && !ActivityManager.isLowRamDeviceStatic()
                 ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
     }

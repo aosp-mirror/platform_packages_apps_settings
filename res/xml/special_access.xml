@@ -15,16 +15,17 @@
 -->
 
 <PreferenceScreen
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:settings="http://schemas.android.com/apk/res-auto"
-        android:key="special_app_access_screen"
-        android:title="@string/special_access">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="special_app_access_screen"
+    android:title="@string/special_access">
 
     <Preference
         android:key="high_power_apps"
         android:title="@string/high_power_apps"
         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
-        settings:keywords="@string/keywords_ignore_optimizations">
+        settings:keywords="@string/keywords_ignore_optimizations"
+        settings:controller="com.android.settings.applications.specialaccess.HighPowerAppsController">
         <extra
             android:name="classname"
             android:value="com.android.settings.Settings$HighPowerApplicationsActivity" />
@@ -33,7 +34,8 @@
     <Preference
         android:key="device_administrators"
         android:title="@string/manage_device_admin"
-        android:fragment="com.android.settings.DeviceAdminSettings" />
+        android:fragment="com.android.settings.DeviceAdminSettings"
+        settings:controller="com.android.settings.applications.specialaccess.DeviceAdministratorsController" />
 
     <Preference
         android:key="system_alert_window"
@@ -48,7 +50,8 @@
     <Preference
         android:key="zen_access"
         android:title="@string/manage_zen_access_title"
-        android:fragment="com.android.settings.notification.ZenAccessSettings" />
+        android:fragment="com.android.settings.notification.ZenAccessSettings"
+        settings:controller="com.android.settings.applications.specialaccess.ZenAccessController" />
 
     <Preference
         android:key="write_settings_apps"
@@ -63,23 +66,27 @@
     <Preference
         android:key="notification_access"
         android:title="@string/manage_notification_access_title"
-        android:fragment="com.android.settings.notification.NotificationAccessSettings" />
+        android:fragment="com.android.settings.notification.NotificationAccessSettings"
+        settings:controller="com.android.settings.applications.specialaccess.NotificationAccessController" />
 
     <Preference
         android:key="picture_in_picture"
         android:title="@string/picture_in_picture_title"
         android:fragment="com.android.settings.applications.appinfo.PictureInPictureSettings"
-        settings:keywords="@string/picture_in_picture_keywords" />
+        settings:keywords="@string/picture_in_picture_keywords"
+        settings:controller="com.android.settings.applications.specialaccess.PictureInPictureController" />
 
     <Preference
         android:key="premium_sms"
         android:title="@string/premium_sms_access"
-        android:fragment="com.android.settings.applications.PremiumSmsAccess" />
+        android:fragment="com.android.settings.applications.PremiumSmsAccess"
+        settings:controller="com.android.settings.applications.specialaccess.PremiumSmsController" />
 
     <Preference
         android:key="data_saver"
         android:title="@string/unrestricted_data_saver"
-        android:fragment="com.android.settings.datausage.UnrestrictedDataAccess" />
+        android:fragment="com.android.settings.datausage.UnrestrictedDataAccess"
+        settings:controller="com.android.settings.applications.specialaccess.DataSaverController" />
 
     <Preference
         android:key="manage_external_sources"
@@ -105,7 +112,8 @@
         android:key="enabled_vr_listeners"
         android:title="@string/vr_listeners_title"
         android:fragment="com.android.settings.applications.VrListenerSettings"
-        settings:keywords="@string/keywords_vr_listener">
+        settings:keywords="@string/keywords_vr_listener"
+        settings:controller="com.android.settings.applications.specialaccess.EnabledVrListenersController">
         <extra
             android:name="classname"
             android:value="com.android.settings.Settings$VrListenersSettingsActivity" />
