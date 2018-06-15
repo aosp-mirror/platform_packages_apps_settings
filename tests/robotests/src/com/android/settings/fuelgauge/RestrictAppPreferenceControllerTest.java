@@ -18,9 +18,7 @@ package com.android.settings.fuelgauge;
 
 import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT;
 import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
@@ -31,15 +29,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -51,8 +46,9 @@ import org.robolectric.RuntimeEnvironment;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.preference.Preference;
+
 @RunWith(RobolectricTestRunner.class)
-@Ignore
 public class RestrictAppPreferenceControllerTest {
     private static final int ALLOWED_UID = 111;
     private static final String ALLOWED_PACKAGE_NAME = "com.android.allowed.package";
@@ -63,15 +59,13 @@ public class RestrictAppPreferenceControllerTest {
     @Mock
     private AppOpsManager mAppOpsManager;
     @Mock
-    private AppOpsManager.PackageOps mRestrictedPackageOps;
-    @Mock
-    private AppOpsManager.PackageOps mAllowedPackageOps;
-    @Mock
-    private AppOpsManager.PackageOps mOtherUserPackageOps;
-    @Mock
     private InstrumentedPreferenceFragment mFragment;
     @Mock
     private UserManager mUserManager;
+
+    private AppOpsManager.PackageOps mRestrictedPackageOps;
+    private AppOpsManager.PackageOps mAllowedPackageOps;
+    private AppOpsManager.PackageOps mOtherUserPackageOps;
     private List<AppOpsManager.PackageOps> mPackageOpsList;
     private RestrictAppPreferenceController mRestrictAppPreferenceController;
     private Preference mPreference;
@@ -89,15 +83,12 @@ public class RestrictAppPreferenceControllerTest {
                 AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, AppOpsManager.MODE_IGNORED, 0, 0, 0, 0, "");
         final List<AppOpsManager.OpEntry> restrictedOps = new ArrayList<>();
         restrictedOps.add(restrictedOpEntry);
-        doReturn(ALLOWED_UID).when(mAllowedPackageOps).getUid();
-        doReturn(ALLOWED_PACKAGE_NAME).when(mAllowedPackageOps).getPackageName();
-        doReturn(allowOps).when(mAllowedPackageOps).getOps();
-        doReturn(RESTRICTED_UID).when(mRestrictedPackageOps).getUid();
-        doReturn(RESTRICTED_PACKAGE_NAME).when(mRestrictedPackageOps).getPackageName();
-        doReturn(restrictedOps).when(mRestrictedPackageOps).getOps();
-        doReturn(OTHER_USER_UID).when(mOtherUserPackageOps).getUid();
-        doReturn(RESTRICTED_PACKAGE_NAME).when(mOtherUserPackageOps).getPackageName();
-        doReturn(restrictedOps).when(mOtherUserPackageOps).getOps();
+        mAllowedPackageOps = new AppOpsManager.PackageOps(
+                ALLOWED_PACKAGE_NAME, ALLOWED_UID, allowOps);
+        mRestrictedPackageOps = new AppOpsManager.PackageOps(
+                RESTRICTED_PACKAGE_NAME, RESTRICTED_UID, restrictedOps);
+        mOtherUserPackageOps = new AppOpsManager.PackageOps(
+                RESTRICTED_PACKAGE_NAME, OTHER_USER_UID, restrictedOps);
 
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mAppOpsManager).when(mContext).getSystemService(Context.APP_OPS_SERVICE);
