@@ -39,6 +39,7 @@ import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -51,6 +52,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Ignore
 public class RestrictAppPreferenceControllerTest {
     private static final int ALLOWED_UID = 111;
     private static final String ALLOWED_PACKAGE_NAME = "com.android.allowed.package";

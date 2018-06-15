@@ -23,6 +23,7 @@ import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -33,6 +34,7 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.Collections;
 
 @RunWith(SettingsRobolectricTestRunner.class)
+@Ignore
 public class MockLocationAppPreferenceControllerTest {
 
     @Mock
