@@ -32,7 +32,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.android.settings.DeviceAdminAdd;
+import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminAdd;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.testutils.CustomActivity;

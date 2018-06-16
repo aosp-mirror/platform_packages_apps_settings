@@ -44,7 +44,7 @@ import android.view.View;
 import android.webkit.IWebViewUpdateService;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.DeviceAdminAdd;
+import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminAdd;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;

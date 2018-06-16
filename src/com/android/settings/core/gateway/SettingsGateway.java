@@ -17,7 +17,7 @@
 package com.android.settings.core.gateway;
 
 import com.android.settings.DateTimeSettings;
-import com.android.settings.DeviceAdminSettings;
+import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminSettings;
 import com.android.settings.DisplaySettings;
 import com.android.settings.IccLockSettings;
 import com.android.settings.MasterClear;

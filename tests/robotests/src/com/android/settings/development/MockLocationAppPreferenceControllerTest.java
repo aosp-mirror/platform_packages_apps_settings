@@ -1,6 +1,7 @@
 package com.android.settings.development;
 
-import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes.REQUEST_MOCK_LOCATION_APP;
+import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes
+        .REQUEST_MOCK_LOCATION_APP;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -16,8 +17,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -32,6 +31,9 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.Collections;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 @RunWith(SettingsRobolectricTestRunner.class)
 public class MockLocationAppPreferenceControllerTest {
 
@@ -45,10 +47,7 @@ public class MockLocationAppPreferenceControllerTest {
     private Preference mPreference;
     @Mock
     private PreferenceScreen mScreen;
-    @Mock
-    private AppOpsManager.PackageOps mPackageOps;
-    @Mock
-    private AppOpsManager.OpEntry mOpEntry;
+
     @Mock
     private ApplicationInfo mApplicationInfo;
 
@@ -69,11 +68,12 @@ public class MockLocationAppPreferenceControllerTest {
     @Test
     public void updateState_foobarAppSelected_shouldSetSummaryToFoobar() {
         final String appName = "foobar";
+
+        final AppOpsManager.PackageOps packageOps =
+                new AppOpsManager.PackageOps(appName, 0,
+                        Collections.singletonList(createOpEntry(AppOpsManager.MODE_ALLOWED)));
         when(mAppOpsManager.getPackagesForOps(any())).thenReturn(
-                Collections.singletonList(mPackageOps));
-        when(mPackageOps.getOps()).thenReturn(Collections.singletonList(mOpEntry));
-        when(mOpEntry.getMode()).thenReturn(AppOpsManager.MODE_ALLOWED);
-        when(mPackageOps.getPackageName()).thenReturn(appName);
+                Collections.singletonList(packageOps));
 
         mController.updateState(mPreference);
 
@@ -96,16 +96,16 @@ public class MockLocationAppPreferenceControllerTest {
         final String newAppName = "bar";
         final Intent intent = new Intent();
         intent.setAction(newAppName);
+        final AppOpsManager.PackageOps packageOps = new AppOpsManager.PackageOps(prevAppName, 0,
+                Collections.singletonList(createOpEntry(AppOpsManager.MODE_ALLOWED)));
+
         when(mAppOpsManager.getPackagesForOps(any()))
-            .thenReturn(Collections.singletonList(mPackageOps));
-        when(mPackageOps.getOps()).thenReturn(Collections.singletonList(mOpEntry));
-        when(mOpEntry.getMode()).thenReturn(AppOpsManager.MODE_ALLOWED);
-        when(mPackageOps.getPackageName()).thenReturn(prevAppName);
+                .thenReturn(Collections.singletonList(packageOps));
         when(mPackageManager.getApplicationInfo(anyString(),
                 eq(PackageManager.MATCH_DISABLED_COMPONENTS))).thenReturn(mApplicationInfo);
 
         final boolean handled =
-            mController.onActivityResult(REQUEST_MOCK_LOCATION_APP, Activity.RESULT_OK, intent);
+                mController.onActivityResult(REQUEST_MOCK_LOCATION_APP, Activity.RESULT_OK, intent);
 
         assertThat(handled).isTrue();
         verify(mAppOpsManager).setMode(anyInt(), anyInt(), eq(newAppName),
@@ -138,5 +138,10 @@ public class MockLocationAppPreferenceControllerTest {
         when(mPreference.getKey()).thenReturn("SomeRandomKey");
 
         assertThat(mController.handlePreferenceTreeClick(mPreference)).isFalse();
+    }
+
+    private AppOpsManager.OpEntry createOpEntry(int opMode) {
+        return new AppOpsManager.OpEntry(0, opMode, 0l /* time */, 0 /* rejectTime */,
+                0 /* duration */, 0 /* proxyUid */, null /* proxyPackage */);
     }
 }
