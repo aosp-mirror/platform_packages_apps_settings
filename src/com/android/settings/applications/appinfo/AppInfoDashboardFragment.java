@@ -331,8 +331,10 @@ public class AppInfoDashboardFragment extends DashboardFragment
         final MenuItem uninstallUpdatesItem = menu.findItem(UNINSTALL_UPDATES);
         final boolean uninstallUpdateDisabled = getContext().getResources().getBoolean(
                 R.bool.config_disable_uninstall_update);
-        uninstallUpdatesItem.setVisible(
-                mUpdatedSysApp && !mAppsControlDisallowedBySystem && !uninstallUpdateDisabled);
+        uninstallUpdatesItem.setVisible(mUserManager.isAdminUser()
+                && mUpdatedSysApp
+                && !mAppsControlDisallowedBySystem
+                && !uninstallUpdateDisabled);
         if (uninstallUpdatesItem.isVisible()) {
             RestrictedLockUtils.setMenuItemAsDisabledByAdmin(getActivity(),
                     uninstallUpdatesItem, mAppsControlDisallowedAdmin);
