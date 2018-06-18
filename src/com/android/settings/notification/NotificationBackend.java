@@ -73,7 +73,7 @@ public class NotificationBackend {
         row.userId = UserHandle.getUserId(row.uid);
         row.blockedChannelCount = getBlockedChannelCount(row.pkg, row.uid);
         row.channelCount = getChannelCount(row.pkg, row.uid);
-        row.sentByChannel = getAggregatedUsageEvents(context, row.userId, row.pkg);
+        recordAggregatedUsageEvents(context, row);
         return row;
     }
 
@@ -271,22 +271,22 @@ public class NotificationBackend {
         }
     }
 
-    protected Map<String, NotificationsSentState> getAggregatedUsageEvents(
-            Context context, int userId, String pkg) {
+    protected void recordAggregatedUsageEvents(Context context, AppRow appRow) {
         long now = System.currentTimeMillis();
         long startTime = now - (DateUtils.DAY_IN_MILLIS * DAYS_TO_CHECK);
         UsageEvents events = null;
         try {
             events = sUsageStatsManager.queryEventsForPackageForUser(
-                    startTime, now, userId, pkg, context.getPackageName());
+                    startTime, now, appRow.userId, appRow.pkg, context.getPackageName());
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-        return getAggregatedUsageEvents(events);
+        recordAggregatedUsageEvents(events, appRow);
     }
 
-    protected Map<String, NotificationsSentState> getAggregatedUsageEvents(UsageEvents events) {
-        Map<String, NotificationsSentState> sentByChannel = new HashMap<>();
+    protected void recordAggregatedUsageEvents(UsageEvents events, AppRow appRow) {
+        appRow.sentByChannel = new HashMap<>();
+        appRow.sentByApp = new NotificationsSentState();
         if (events != null) {
             UsageEvents.Event event = new UsageEvents.Event();
             while (events.hasNextEvent()) {
@@ -295,22 +295,24 @@ public class NotificationBackend {
                 if (event.getEventType() == UsageEvents.Event.NOTIFICATION_INTERRUPTION) {
                     String channelId = event.mNotificationChannelId;
                     if (channelId != null) {
-                        NotificationsSentState stats = sentByChannel.get(channelId);
+                        NotificationsSentState stats = appRow.sentByChannel.get(channelId);
                         if (stats == null) {
                             stats = new NotificationsSentState();
-                            sentByChannel.put(channelId, stats);
+                            appRow.sentByChannel.put(channelId, stats);
                         }
                         if (event.getTimeStamp() > stats.lastSent) {
                             stats.lastSent = event.getTimeStamp();
+                            appRow.sentByApp.lastSent = event.getTimeStamp();
                         }
                         stats.sentCount++;
+                        appRow.sentByApp.sentCount++;
                         calculateAvgSentCounts(stats);
                     }
                 }
 
             }
+            calculateAvgSentCounts(appRow.sentByApp);
         }
-        return sentByChannel;
     }
 
     public static CharSequence getSentSummary(Context context, NotificationsSentState state,
@@ -372,5 +374,6 @@ public class NotificationBackend {
         public int blockedChannelCount;
         public int channelCount;
         public Map<String, NotificationsSentState> sentByChannel;
+        public NotificationsSentState sentByApp;
     }
 }
