@@ -54,7 +54,7 @@
     <string name="radio_info_ims_feature_status_available" msgid="3687807290327566879">"可供使用"</string>
     <string name="radio_info_ims_feature_status_unavailable" msgid="4606182208970114368">"无法使用"</string>
     <string name="radio_info_ims_reg_status" msgid="7534612158445529715">"IMS 注册：<xliff:g id="STATUS">%1$s</xliff:g>\nLTE 语音通话：<xliff:g id="AVAILABILITY_0">%2$s</xliff:g>\nWLAN 语音通话：<xliff:g id="AVAILABILITY_1">%3$s</xliff:g>\n视频通话：<xliff:g id="AVAILABILITY_2">%4$s</xliff:g>\nUT 接口：<xliff:g id="AVAILABILITY_3">%5$s</xliff:g>"</string>
-    <string name="radioInfo_service_in" msgid="1697703164394784618">"在使用中"</string>
+    <string name="radioInfo_service_in" msgid="1697703164394784618">"服务中"</string>
     <string name="radioInfo_service_out" msgid="7999094221728929681">"不在服务区"</string>
     <string name="radioInfo_service_emergency" msgid="6274434235469661525">"只能拨打紧急呼救电话"</string>
     <string name="radioInfo_service_off" msgid="7536423790014501173">"无线装置已关闭"</string>
@@ -346,7 +346,7 @@
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"手机已加密"</string>
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"设备已加密"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"锁屏时的偏好设置"</string>
-    <string name="security_settings_summary" msgid="967393342537986570">"设置我的位置、屏幕解锁、SIM卡锁定和凭据存储锁定"</string>
+    <string name="security_settings_summary" msgid="967393342537986570">"设置我的位置、屏幕解锁、SIM 卡锁定和凭据存储锁定"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"设置我的位置、屏幕解锁和凭据存储锁定"</string>
     <string name="security_passwords_title" msgid="2881269890053568809">"隐私设置"</string>
     <string name="disabled_by_administrator_summary" msgid="1601828700318996341">"已被管理员停用"</string>
@@ -371,7 +371,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"取消"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"继续"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"跳过"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"下一屏幕"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"下一步"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="362050541117362034">"要跳过指纹设置？"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="958990414356204763">"指纹设置只需片刻时间。如果您跳过此设置，之后可以在设置中添加您的指纹。"</string>
     <string name="lock_screen_intro_skip_title" msgid="4988210105913705679">"要跳过屏幕锁定吗？"</string>
@@ -624,7 +624,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"要与以下设备配对：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;请确保其显示的配对密钥为：&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"来自：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;要与此设备配对吗？"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"要与 <xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> 设备配对，请在该设备上键入：<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>，然后按回车键。"</string>
-    <string name="bluetooth_pairing_shares_phonebook" msgid="2277931851483023208">"允许<xliff:g id="DEVICE_NAME">%1$s</xliff:g>访问您的通讯录和通话记录"</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="9082518313285787097">"允许访问您的通讯录和通话记录"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"无法连接到<xliff:g id="DEVICE_NAME">%1$s</xliff:g>。"</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"扫描设备"</string>
@@ -704,7 +704,7 @@
     <string name="nfc_disclaimer_title" msgid="4364003873202264039">"开启 NFC"</string>
     <string name="nfc_disclaimer_content" msgid="5566907911915158075">"NFC 可让此设备和附近的其他设备或目标（例如付款终端、门禁读卡器和互动式广告或标签）交换数据。"</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
-    <string name="android_beam_on_summary" msgid="3618057099355636830">"已准备好通过NFC传输应用内容"</string>
+    <string name="android_beam_on_summary" msgid="3618057099355636830">"已准备好通过 NFC 传输应用内容"</string>
     <string name="android_beam_off_summary" msgid="4663095428454779138">"关闭"</string>
     <string name="android_beam_disabled_summary" msgid="1737782116894793393">"无法使用，因为NFC已关闭"</string>
     <string name="android_beam_label" msgid="6257036050366775040">"Android Beam"</string>
@@ -750,8 +750,8 @@
     <string name="wifi_cellular_data_fallback_summary" msgid="6375399280719867214">"在 WLAN 网络无法连接到互联网时切换到移动数据网络（可能会消耗移动数据流量）。"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"添加网络"</string>
     <string name="wifi_configure_settings_preference_title" msgid="2913345003906899146">"WLAN 偏好设置"</string>
-    <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="646393113104367290">"WLAN 会自动重新开启"</string>
-    <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="2782566279864356713">"WLAN 不会自动重新开启"</string>
+    <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="646393113104367290">"自动重新开启 WLAN"</string>
+    <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="2782566279864356713">"不自动重新开启 WLAN"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"WLAN网络"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS 按钮"</string>
     <string name="wifi_menu_more_options" msgid="2448097861752719396">"更多选项"</string>
@@ -817,7 +817,7 @@
     <string name="wifi_do_not_validate_eap_server" msgid="4266754430576348471">"不验证"</string>
     <string name="wifi_do_not_validate_eap_server_warning" msgid="1787190245542586660">"未指定任何证书。您的网络连接将不是私密连接。"</string>
     <string name="wifi_ssid_too_long" msgid="3474753269579895244">"网络名称太长。"</string>
-    <string name="wifi_no_domain_warning" msgid="5223011964091727376">"必须指定网域。"</string>
+    <string name="wifi_no_domain_warning" msgid="5223011964091727376">"必须指定域名。"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"可使用 WPS"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" （可使用 WPS）"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"请输入您的网络密码"</string>
@@ -918,7 +918,7 @@
     <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"漫游偏好设置"</string>
   <string-array name="wifi_calling_mode_choices">
     <item msgid="2124257075906188844">"首选 WLAN"</item>
-    <item msgid="1335127656328817518">"移动数据网络优先"</item>
+    <item msgid="1335127656328817518">"首选移动数据网络"</item>
     <item msgid="3132912693346866895">"仅限 WLAN"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2">
@@ -932,8 +932,8 @@
     <item msgid="3194458950573886239">"0"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_without_wifi_only">
-    <item msgid="5782108782860004851">"首选 WLAN 网络"</item>
-    <item msgid="5074515506087318555">"移动数据网络优先"</item>
+    <item msgid="5782108782860004851">"首选 WLAN"</item>
+    <item msgid="5074515506087318555">"首选移动数据网络"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
     <item msgid="6132150507201243768">"WLAN"</item>
@@ -1083,29 +1083,29 @@
     <string name="doze_always_on_summary" msgid="6978257596231155345">"显示时间、通知图标及其他信息。耗电量更高。"</string>
     <string name="title_font_size" msgid="4405544325522105222">"字体大小"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"放大或缩小文字"</string>
-    <string name="sim_lock_settings" msgid="3392331196873564292">"SIM卡锁定设置"</string>
+    <string name="sim_lock_settings" msgid="3392331196873564292">"SIM 卡锁定设置"</string>
     <string name="sim_lock_settings_category" msgid="6242052161214271091">"SIM 卡锁定"</string>
     <string name="sim_lock_settings_summary_off" msgid="8028944267104896401">"关闭"</string>
     <string name="sim_lock_settings_summary_on" msgid="39103355956342985">"已锁定"</string>
-    <string name="sim_lock_settings_title" msgid="9018585580955414596">"SIM卡锁定方式"</string>
-    <string name="sim_pin_toggle" msgid="1742123478029451888">"锁定SIM卡"</string>
+    <string name="sim_lock_settings_title" msgid="9018585580955414596">"SIM 卡锁定方式"</string>
+    <string name="sim_pin_toggle" msgid="1742123478029451888">"锁定 SIM 卡"</string>
     <string name="sim_lock_on" product="tablet" msgid="5058355081270397764">"需要输入PIN码才能使用平板电脑"</string>
-    <string name="sim_lock_on" product="default" msgid="2503536505568814324">"需要输入PIN码才能使用手机"</string>
+    <string name="sim_lock_on" product="default" msgid="2503536505568814324">"需要输入 PIN 码才能使用手机"</string>
     <string name="sim_lock_off" product="tablet" msgid="2813800553917012356">"需要输入PIN码才能使用平板电脑"</string>
-    <string name="sim_lock_off" product="default" msgid="258981978215428916">"需要输入PIN码才能使用手机"</string>
-    <string name="sim_pin_change" msgid="6311414184279932368">"更改SIM卡PIN码"</string>
-    <string name="sim_enter_pin" msgid="6608715137008508432">"SIM卡PIN码"</string>
-    <string name="sim_enable_sim_lock" msgid="4517742794997166918">"锁定SIM卡"</string>
+    <string name="sim_lock_off" product="default" msgid="258981978215428916">"需要输入 PIN 码才能使用手机"</string>
+    <string name="sim_pin_change" msgid="6311414184279932368">"更改 SIM 卡 PIN 码"</string>
+    <string name="sim_enter_pin" msgid="6608715137008508432">"SIM 卡 PIN 码"</string>
+    <string name="sim_enable_sim_lock" msgid="4517742794997166918">"锁定 SIM 卡"</string>
     <string name="sim_disable_sim_lock" msgid="7664729528754784824">"解锁SIM卡"</string>
-    <string name="sim_enter_old" msgid="6074196344494634348">"旧SIM卡PIN码"</string>
-    <string name="sim_enter_new" msgid="8742727032729243562">"新SIM卡PIN码"</string>
+    <string name="sim_enter_old" msgid="6074196344494634348">"旧 SIM 卡 PIN 码"</string>
+    <string name="sim_enter_new" msgid="8742727032729243562">"新 SIM 卡 PIN 码"</string>
     <string name="sim_reenter_new" msgid="6523819386793546888">"重新输入新的PIN码"</string>
-    <string name="sim_change_pin" msgid="7328607264898359112">"SIM卡PIN码"</string>
-    <string name="sim_bad_pin" msgid="2345230873496357977">"PIN码不正确"</string>
+    <string name="sim_change_pin" msgid="7328607264898359112">"SIM 卡 PIN 码"</string>
+    <string name="sim_bad_pin" msgid="2345230873496357977">"PIN 码不正确"</string>
     <string name="sim_pins_dont_match" msgid="1695021563878890574">"PIN码不匹配"</string>
     <string name="sim_change_failed" msgid="3602072380172511475">"无法更改PIN码。\n输入的PIN码可能不正确。"</string>
-    <string name="sim_change_succeeded" msgid="8556135413096489627">"已成功更改SIM卡PIN码"</string>
-    <string name="sim_lock_failed" msgid="2489611099235575984">"无法更改SIM卡锁定状态。\nPIN码可能不正确。"</string>
+    <string name="sim_change_succeeded" msgid="8556135413096489627">"已成功更改 SIM 卡 PIN 码"</string>
+    <string name="sim_lock_failed" msgid="2489611099235575984">"无法更改 SIM 卡锁定状态。\nPIN 码可能不正确。"</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"确定"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"取消"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"找到多张SIM卡"</string>
@@ -1114,12 +1114,12 @@
     <string name="sim_change_data_message" msgid="5854582807996717811">"要将用于移动数据网络的 SIM 卡从“<xliff:g id="OLD_SIM">%2$s</xliff:g>”改为“<xliff:g id="NEW_SIM">%1$s</xliff:g>”吗？"</string>
     <string name="sim_preferred_title" msgid="5567909634636045268">"要更新首选 SIM 卡吗？"</string>
     <string name="sim_preferred_message" msgid="8466930554330635780">"“<xliff:g id="NEW_SIM">%1$s</xliff:g>”是此设备上唯一的 SIM 卡。您要将此 SIM 卡用于移动数据网络、通话和收发短信吗？"</string>
-    <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"SIM卡PIN码不正确，您现在必须联系运营商为您解锁设备。"</string>
+    <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"SIM 卡 PIN 码不正确，您现在必须联系运营商为您解锁设备。"</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
       <item quantity="other">SIM 卡 PIN 码不正确，您还可尝试 <xliff:g id="NUMBER_1">%d</xliff:g> 次。</item>
       <item quantity="one">SIM 卡 PIN 码不正确，您还可尝试 <xliff:g id="NUMBER_0">%d</xliff:g> 次。如果仍不正确，则需要联系运营商帮您解锁设备。</item>
     </plurals>
-    <string name="pin_failed" msgid="1848423634948587645">"SIM卡PIN码操作失败！"</string>
+    <string name="pin_failed" msgid="1848423634948587645">"SIM 卡 PIN 码操作失败！"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"平板电脑状态"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"手机状态"</string>
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"系统更新"</string>
@@ -1374,7 +1374,7 @@
     <string name="master_clear_progress_text" msgid="6559096229480527510">"请稍候…"</string>
     <string name="call_settings_title" msgid="5188713413939232801">"通话设置"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"设置语音信箱、来电转接、来电等待和本机号码显示"</string>
-    <string name="tether_settings_title_usb" msgid="6688416425801386511">"USB网络共享"</string>
+    <string name="tether_settings_title_usb" msgid="6688416425801386511">"USB 网络共享"</string>
     <string name="tether_settings_title_wifi" msgid="3277144155960302049">"便携式热点"</string>
     <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"蓝牙网络共享"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"网络共享"</string>
@@ -1384,7 +1384,7 @@
     <string name="tether_settings_summary_hotspot_off_tether_on" msgid="1618256180720077354">"网络共享"</string>
     <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"当流量节省程序开启时，无法使用网络共享功能或便携式热点"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
-    <string name="usb_tethering_button_text" msgid="585829947108007917">"USB网络共享"</string>
+    <string name="usb_tethering_button_text" msgid="585829947108007917">"USB 网络共享"</string>
     <string name="usb_tethering_subtext" product="default" msgid="5991482890033484794">"通过 USB 共享手机的互联网连接"</string>
     <string name="usb_tethering_subtext" product="tablet" msgid="5988796139573211318">"通过 USB 共享平板电脑的互联网连接"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"蓝牙网络共享"</string>
@@ -1911,18 +1911,18 @@
     <string name="color_cyan" msgid="7033027180641173211">"青色"</string>
     <string name="color_yellow" msgid="9112680561610873529">"黄色"</string>
     <string name="color_magenta" msgid="5059212823607815549">"紫红色"</string>
-    <string name="enable_service_title" msgid="3061307612673835592">"要启用<xliff:g id="SERVICE">%1$s</xliff:g>吗？"</string>
-    <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g>需要："</string>
+    <string name="enable_service_title" msgid="3061307612673835592">"要使用“<xliff:g id="SERVICE">%1$s</xliff:g>”吗？"</string>
+    <string name="capabilities_list_title" msgid="86713361724771971">"“<xliff:g id="SERVICE">%1$s</xliff:g>”需要："</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"由于某个应用遮挡了权限请求界面，因此“设置”应用无法验证您的回应。"</string>
-    <string name="enable_service_encryption_warning" msgid="3064686622453974606">"如果您开启<xliff:g id="SERVICE">%1$s</xliff:g>，您的设备将无法使用屏幕锁定来增强数据加密。"</string>
+    <string name="enable_service_encryption_warning" msgid="3064686622453974606">"如果您开启 <xliff:g id="SERVICE">%1$s</xliff:g>，您的设备将无法使用屏幕锁定来增强数据加密。"</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"由于您已开启无障碍服务，因此您的设备将无法使用屏幕锁定来增强数据加密。"</string>
-    <string name="enable_service_pattern_reason" msgid="777577618063306751">"由于开启<xliff:g id="SERVICE">%1$s</xliff:g>会影响数据加密，因此您需要确认您的解锁图案。"</string>
-    <string name="enable_service_pin_reason" msgid="7882035264853248228">"由于开启<xliff:g id="SERVICE">%1$s</xliff:g>会影响数据加密，因此您需要确认您的 PIN 码。"</string>
-    <string name="enable_service_password_reason" msgid="1224075277603097951">"由于开启<xliff:g id="SERVICE">%1$s</xliff:g>会影响数据加密，因此您需要确认您的密码。"</string>
+    <string name="enable_service_pattern_reason" msgid="777577618063306751">"由于开启 <xliff:g id="SERVICE">%1$s</xliff:g> 会影响数据加密，因此您需要确认您的解锁图案。"</string>
+    <string name="enable_service_pin_reason" msgid="7882035264853248228">"由于开启 <xliff:g id="SERVICE">%1$s</xliff:g> 会影响数据加密，因此您需要确认您的 PIN 码。"</string>
+    <string name="enable_service_password_reason" msgid="1224075277603097951">"由于开启 <xliff:g id="SERVICE">%1$s</xliff:g> 会影响数据加密，因此您需要确认您的密码。"</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"监测您的操作"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="6640333613848713883">"在您与应用互动时接收通知。"</string>
-    <string name="disable_service_title" msgid="3624005212728512896">"要停用<xliff:g id="SERVICE">%1$s</xliff:g>吗？"</string>
-    <string name="disable_service_message" msgid="2247101878627941561">"点按“确定”会让“<xliff:g id="SERVICE">%1$s</xliff:g>”停止运行。"</string>
+    <string name="disable_service_title" msgid="3624005212728512896">"要停用“<xliff:g id="SERVICE">%1$s</xliff:g>”吗？"</string>
+    <string name="disable_service_message" msgid="2247101878627941561">"点按“确定”将会停用“<xliff:g id="SERVICE">%1$s</xliff:g>”。"</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"未安装任何服务"</string>
     <string name="accessibility_no_service_selected" msgid="2840969718780083998">"未选择任何服务"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"没有提供说明。"</string>
@@ -1997,7 +1997,7 @@
     <string name="awake" msgid="387122265874485088">"设备唤醒时间"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"WLAN开启时间"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"WLAN开启时间"</string>
-    <string name="advanced_battery_title" msgid="2068039111517508622">"关于电池用量的高级信息"</string>
+    <string name="advanced_battery_title" msgid="2068039111517508622">"高级电池用量信息"</string>
     <string name="history_details_title" msgid="3608240585315506067">"详细电量使用记录"</string>
     <string name="battery_details_title" msgid="6101394441569858580">"电池用量"</string>
     <string name="details_subtitle" msgid="32593908269911734">"详细使用情况"</string>
@@ -2373,7 +2373,7 @@
     <string name="data_usage_app_info_label" msgid="3409931235687866706">"应用信息"</string>
     <string name="data_usage_cellular_data" msgid="9168928285122125137">"移动数据"</string>
     <string name="data_usage_data_limit" msgid="1193930999713192703">"设置流量上限"</string>
-    <string name="data_usage_cycle" msgid="5652529796195787949">"流量周期"</string>
+    <string name="data_usage_cycle" msgid="5652529796195787949">"流量消耗重置周期"</string>
     <string name="data_usage_app_items_header_text" msgid="5017850810459372828">"应用数据流量"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"移动数据网络漫游"</string>
     <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"限制后台流量"</string>
@@ -2392,16 +2392,16 @@
     <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"自动同步个人帐号数据"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="329565580969147026">"自动同步工作帐号数据"</string>
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"更改周期..."</string>
-    <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"流量周期设置："</string>
+    <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"每月流量消耗重计日期："</string>
     <string name="data_usage_empty" msgid="8621855507876539282">"没有任何应用在此期间产生过数据流量。"</string>
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"前台"</string>
     <string name="data_usage_label_background" msgid="3225844085975764519">"后台"</string>
     <string name="data_usage_app_restricted" msgid="3568465218866589705">"受限"</string>
     <string name="data_usage_disable_mobile" msgid="8656552431969276305">"要关闭移动数据网络吗？"</string>
-    <string name="data_usage_disable_mobile_limit" msgid="4644364396844393848">"设置移动数据流量限制"</string>
-    <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"设置 4G 数据流量限制"</string>
-    <string name="data_usage_disable_3g_limit" msgid="2558557840444266906">"设置 2G-3G 数据流量限制"</string>
-    <string name="data_usage_disable_wifi_limit" msgid="1394901415264660888">"设置WLAN数据流量上限"</string>
+    <string name="data_usage_disable_mobile_limit" msgid="4644364396844393848">"设置移动数据流量上限"</string>
+    <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"设置 4G 数据流量上限"</string>
+    <string name="data_usage_disable_3g_limit" msgid="2558557840444266906">"设置 2G-3G 数据流量上限"</string>
+    <string name="data_usage_disable_wifi_limit" msgid="1394901415264660888">"设置 WLAN 流量上限"</string>
     <string name="data_usage_tab_wifi" msgid="481146038146585749">"WLAN"</string>
     <string name="data_usage_tab_ethernet" msgid="7298064366282319911">"有线网络"</string>
     <string name="data_usage_tab_mobile" msgid="454140350007299045">"移动"</string>
@@ -2426,14 +2426,14 @@
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"您在网络上对自己的帐号进行的所有更改都会自动同步到您的手机。\n\n有些帐号还可以将您在手机上进行的所有更改自动同步到网络上。Google 帐号就支持此类双向同步。"</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"要关闭自动同步数据功能吗？"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4025938250775413864">"这样可以节省数据流量和电池电量，但您需要手动同步每个帐号才能获得最新信息，并且在有更新时不会收到通知。"</string>
-    <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"流量重置日期"</string>
+    <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"流量消耗重置日期"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"日期："</string>
-    <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"确定"</string>
+    <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"设置"</string>
     <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"设置流量用量警告"</string>
-    <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"设置流量限制"</string>
-    <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"限制流量使用"</string>
-    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="4983487893343645667">"当移动数据用量达到您设置的数据流量上限时，您的平板电脑将关闭移动数据网络。\n\n由于数据用量是由您的平板电脑自动计算的，而您的运营商对用量的计算方式可能有所不同，因此建议您设置一个保守的上限值。"</string>
-    <string name="data_usage_limit_dialog_mobile" product="default" msgid="3926320594049434225">"当移动数据用量达到您设置的数据流量上限时，您的手机将关闭移动数据网络。\n\n由于数据用量是由您的手机自动计算的，而您的运营商对用量的计算方式可能有所不同，因此建议您设置一个保守的上限值。"</string>
+    <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"设置流量使用上限"</string>
+    <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"限制流量用量"</string>
+    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="4983487893343645667">"当移动数据流量的使用量达到您设置的上限时，您的平板电脑将关闭移动数据网络。\n\n由于流量用量是由您的平板电脑计算的，而您的运营商对流量用量的计算方式可能有所不同，因此建议您设置一个保守的上限值。"</string>
+    <string name="data_usage_limit_dialog_mobile" product="default" msgid="3926320594049434225">"当移动数据流量的使用量达到您设置的上限时，您的手机将关闭移动数据网络。\n\n由于流量用量是由您的手机计算的，而您的运营商对流量用量的计算方式可能有所不同，因此建议您设置一个保守的上限值。"</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"要限制后台流量吗？"</string>
     <string name="data_usage_restrict_background" msgid="434093644726734586">"如果您限制后台移动数据流量，则只有在您连接到 WLAN 网络时，部分应用和服务才能正常运行。"</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7096707497743363380">"如果您限制后台移动数据流量，则只有在您连接到 WLAN 网络时，部分应用和服务才能正常运行。\n\n此设置会影响这部平板电脑上的所有用户。"</string>
@@ -2460,7 +2460,7 @@
     <string name="vpn_name" msgid="4689699885361002297">"名称"</string>
     <string name="vpn_type" msgid="5435733139514388070">"类型"</string>
     <string name="vpn_server" msgid="2123096727287421913">"服务器地址"</string>
-    <string name="vpn_mppe" msgid="6639001940500288972">"PPP加密(MPPE)"</string>
+    <string name="vpn_mppe" msgid="6639001940500288972">"PPP 加密 (MPPE)"</string>
     <string name="vpn_l2tp_secret" msgid="529359749677142076">"L2TP 密钥"</string>
     <string name="vpn_ipsec_identifier" msgid="4098175859460006296">"IPSec 标识符"</string>
     <string name="vpn_ipsec_secret" msgid="4526453255704888704">"IPSec 预共享密钥"</string>
@@ -2487,7 +2487,7 @@
     <string name="vpn_save" msgid="4233484051644764510">"保存"</string>
     <string name="vpn_connect" msgid="8469608541746132301">"连接"</string>
     <string name="vpn_replace" msgid="5442836256121957861">"替换"</string>
-    <string name="vpn_edit" msgid="8647191407179996943">"编辑VPN配置文件"</string>
+    <string name="vpn_edit" msgid="8647191407179996943">"编辑 VPN 配置文件"</string>
     <string name="vpn_forget" msgid="3684651372749415446">"取消保存"</string>
     <string name="vpn_connect_to" msgid="5965299358485793260">"连接到<xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="3743970132487505659">"要断开与此 VPN 的连接吗？"</string>
@@ -2587,7 +2587,7 @@
     <string name="user_add_user_item_title" msgid="8212199632466198969">"用户"</string>
     <string name="user_add_profile_item_title" msgid="8353515490730363621">"受限个人资料"</string>
     <string name="user_add_user_title" msgid="2108112641783146007">"要添加新用户吗？"</string>
-    <string name="user_add_user_message_long" msgid="8562152293752222985">"创建新用户之后，您将可以与其他人共享此设备。每位用户都会有自己的空间，可用来存储用户自己的应用、壁纸等内容。每位用户都可以调整 WLAN 等会影响到其他用户的设备设置。\n\n您添加新用户后，该用户需要设置自己的空间。\n\n任何用户均可为其他所有用户更新应用。"</string>
+    <string name="user_add_user_message_long" msgid="8562152293752222985">"创建新用户后，您就能够与其他人共用此设备。每位用户都有自己的专属空间，而且在自己的个人空间内还可以自行安装自己想要的应用，设置壁纸等。每位用户都可以调整 WLAN 等会影响到其他用户的设备设置。\n\n您添加新用户后，该用户需要设置自己的空间。\n\n任何用户均可为其他所有用户更新应用。"</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"您添加新用户后，该用户必须设置自己的空间。\n\n任何用户均可为其他所有用户更新应用。"</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"要现在设置该用户吗？"</string>
     <string name="user_setup_dialog_message" msgid="1004068621380867148">"请让相应用户操作设备并设置他们自己的空间。"</string>
@@ -2675,7 +2675,7 @@
     <string name="network_operators_settings" msgid="2583178259504630435">"网络运营商"</string>
     <string name="access_point_names" msgid="1381602020438634481">"接入点名称(APN)"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="5808043757309522392">"增强型4G LTE模式"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="1376589643017218924">"使用LTE数据网络提升语音和通信质量（推荐）"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1376589643017218924">"使用 LTE 数据网络提升语音和通信质量（推荐）"</string>
     <string name="preferred_network_type_title" msgid="3431041717309776341">"首选网络类型"</string>
     <string name="preferred_network_type_summary" msgid="6564884693884755019">"LTE（推荐）"</string>
     <string name="work_sim_title" msgid="4843322164662606891">"工作用SIM卡"</string>
@@ -2749,7 +2749,7 @@
     <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"移动网络"</string>
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"流量使用"</string>
     <string name="network_dashboard_summary_hotspot" msgid="8494210248613254574">"热点"</string>
-    <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"已关联的设备"</string>
+    <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"已连接的设备"</string>
     <string name="connected_devices_dashboard_summary" msgid="2390582103384791904">"蓝牙、投射、NFC"</string>
     <string name="connected_devices_dashboard_no_nfc_summary" msgid="9106040742715366495">"蓝牙、投射"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"应用和通知"</string>
@@ -2992,12 +2992,12 @@
     <string name="zen_mode_event_rule_calendar" msgid="8787906563769067418">"在以下日历活动期间："</string>
     <string name="zen_mode_event_rule_summary_calendar_template" msgid="5135844750232403975">"在<xliff:g id="CALENDAR">%1$s</xliff:g>的活动期间"</string>
     <string name="zen_mode_event_rule_summary_any_calendar" msgid="4936646399126636358">"所有日历"</string>
-    <string name="zen_mode_event_rule_summary_reply_template" msgid="6590671260829837157">"回复内容如下的活动：<xliff:g id="REPLY">%1$s</xliff:g>"</string>
+    <string name="zen_mode_event_rule_summary_reply_template" msgid="6590671260829837157">"回复为<xliff:g id="REPLY">%1$s</xliff:g>"</string>
     <string name="zen_mode_event_rule_calendar_any" msgid="6485568415998569885">"所有日历"</string>
-    <string name="zen_mode_event_rule_reply" msgid="5166322024212403739">"回复内容如下的活动："</string>
+    <string name="zen_mode_event_rule_reply" msgid="5166322024212403739">"回复为"</string>
     <string name="zen_mode_event_rule_reply_any_except_no" msgid="8868873496008825961">"“参加”、“可能参加”或“未回复”"</string>
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"“参加”或“可能参加”"</string>
-    <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"是"</string>
+    <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"参加"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"找不到规则。"</string>
     <string name="zen_mode_rule_summary_enabled_combination" msgid="976098744828219297">"开启/<xliff:g id="MODE">%1$s</xliff:g>"</string>
     <string name="zen_mode_rule_summary_provider_combination" msgid="2101201392041867409">"<xliff:g id="PACKAGE">%1$s</xliff:g>\n<xliff:g id="SUMMARY">%2$s</xliff:g>"</string>
@@ -3009,7 +3009,7 @@
     <string name="summary_divider_text" msgid="7228986578690919294">"， "</string>
     <string name="summary_range_symbol_combination" msgid="5695218513421897027">"<xliff:g id="START">%1$s</xliff:g> - <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"<xliff:g id="START">%1$s</xliff:g>到<xliff:g id="END">%2$s</xliff:g>"</string>
-    <string name="zen_mode_calls" msgid="7051492091133751208">"通话"</string>
+    <string name="zen_mode_calls" msgid="7051492091133751208">"来电"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"消息"</string>
     <string name="zen_mode_all_messages" msgid="6449223378976743208">"所有消息"</string>
     <string name="zen_mode_selected_messages" msgid="8245990149599142281">"已选消息"</string>
@@ -3031,7 +3031,7 @@
     <string name="zen_mode_when_weeknights" msgid="8354070633893273783">"周一至周五夜间"</string>
     <string name="zen_mode_start_time" msgid="8102602297273744441">"开始时间"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"结束时间"</string>
-    <string name="zen_mode_end_time_next_day_summary_format" msgid="4201521691238728701">"次日 <xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
+    <string name="zen_mode_end_time_next_day_summary_format" msgid="4201521691238728701">"次日<xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
     <string name="zen_mode_summary_alarms_only_indefinite" msgid="2061973221027570123">"更改为无限期仅限闹钟"</string>
     <plurals name="zen_mode_summary_alarms_only_by_minute" formatted="false" msgid="6122003583875424601">
       <item quantity="other">更改为仅限闹钟，持续 <xliff:g id="DURATION">%1$d</xliff:g> 分钟（到<xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>）</item>
@@ -3158,8 +3158,8 @@
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"无法识别"</string>
     <string name="default_apps_title" msgid="1660450272764331490">"默认应用"</string>
     <string name="default_for_work" msgid="9152194239366247932">"默认工作应用"</string>
-    <string name="assist_and_voice_input_title" msgid="1733165754793221197">"辅助应用和语音输入"</string>
-    <string name="default_assist_title" msgid="8868488975409247921">"辅助应用"</string>
+    <string name="assist_and_voice_input_title" msgid="1733165754793221197">"助手和语音输入"</string>
+    <string name="default_assist_title" msgid="8868488975409247921">"助手应用"</string>
     <string name="assistant_security_warning_title" msgid="8673079231955467177">"要将<xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g>设为您的辅助应用吗？"</string>
     <string name="assistant_security_warning" msgid="8498726261327239136">"辅助应用将可读取您系统中使用的应用的相关信息，其中包括您屏幕上显示的信息或应用中可使用的信息。"</string>
     <string name="assistant_security_warning_agree" msgid="7710290206928033908">"同意"</string>
@@ -3173,9 +3173,9 @@
     <string name="system_default_app" msgid="3091113402349739037">"（系统默认）"</string>
     <string name="apps_storage" msgid="4353308027210435513">"应用所占存储空间"</string>
     <string name="usage_access" msgid="5479504953931038165">"使用情况访问权限"</string>
-    <string name="permit_usage_access" msgid="4012876269445832300">"允许访问使用记录"</string>
+    <string name="permit_usage_access" msgid="4012876269445832300">"允许查看使用情况"</string>
     <string name="app_usage_preference" msgid="7065701732733134991">"应用使用偏好设置"</string>
-    <string name="usage_access_description" msgid="1352111094596416795">"使用记录访问权限允许应用跟踪您正在使用的其他应用和使用频率，以及您的运营商、语言设置及其他详细信息。"</string>
+    <string name="usage_access_description" msgid="1352111094596416795">"给应用授予“使用情况访问权限”后，该应用就能跟踪您正在使用的其他应用和使用频率，以及您的运营商、语言设置及其他详细信息。"</string>
     <string name="memory_settings_title" msgid="7490541005204254222">"内存"</string>
     <string name="memory_details_title" msgid="8542565326053693320">"内存详情"</string>
     <string name="always_running" msgid="6042448320077429656">"始终运行 (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
@@ -3190,7 +3190,7 @@
     <string name="high_power_apps" msgid="3459065925679828230">"电池优化"</string>
     <string name="additional_battery_info" msgid="4754099329165411970">"电池用量提醒"</string>
     <string name="show_all_apps" msgid="1512506948197818534">"显示完整的设备用电量"</string>
-    <string name="hide_extra_apps" msgid="5016497281322459633">"显示应用使用情况"</string>
+    <string name="hide_extra_apps" msgid="5016497281322459633">"显示应用的耗电情况"</string>
     <string name="power_high_usage_title" msgid="6027369425057347826">"耗电量高"</string>
     <plurals name="power_high_usage_summary" formatted="false" msgid="467347882627862744">
       <item quantity="other"><xliff:g id="NUMBER">%2$d</xliff:g> 个应用的行为异常</item>
@@ -3241,12 +3241,12 @@
     <string name="background_check_pref" msgid="7550258400138010979">"后台检查"</string>
     <string name="background_check_title" msgid="4534254315824525593">"完整的后台访问权限"</string>
     <string name="assist_access_context_title" msgid="2269032346698890257">"使用屏幕上的文字内容"</string>
-    <string name="assist_access_context_summary" msgid="1991421283142279560">"允许辅助应用使用屏幕上的文字内容"</string>
+    <string name="assist_access_context_summary" msgid="1991421283142279560">"允许助手应用使用屏幕上的文字内容"</string>
     <string name="assist_access_screenshot_title" msgid="4034721336291215819">"使用屏幕截图"</string>
-    <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"允许辅助应用使用屏幕截图"</string>
+    <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"允许助手应用使用屏幕截图"</string>
     <string name="assist_flash_title" msgid="506661221230034891">"闪烁屏幕"</string>
-    <string name="assist_flash_summary" msgid="9160668468824099262">"当辅助应用访问屏幕/屏幕截图上的文字时，让屏幕边缘闪烁"</string>
-    <string name="assist_footer" msgid="1982791172085896864">"辅助应用可根据您当前所查看屏幕上的内容来为您提供帮助。某些应用同时支持启动器和语音输入服务，可为您提供更全面的协助。"</string>
+    <string name="assist_flash_summary" msgid="9160668468824099262">"当助手应用访问屏幕/屏幕截图上的文字时，让屏幕边缘闪烁"</string>
+    <string name="assist_footer" msgid="1982791172085896864">"助手应用可根据您当前浏览的屏幕上的内容为您提供帮助。某些应用同时支持启动器和语音输入服务，可为您提供更全面的协助。"</string>
     <string name="average_memory_use" msgid="829566450150198512">"平均内存使用量"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"最高内存使用量"</string>
     <string name="memory_usage" msgid="1781358557214390033">"内存使用量"</string>
@@ -3279,7 +3279,7 @@
     <string name="ignore_optimizations_off_desc" msgid="5255731062045426544">"建议选择此项以延长电池续航时间"</string>
     <string name="ignore_optimizations_title" msgid="2829637961185027768">"要允许<xliff:g id="APP">%s</xliff:g>忽略电池优化吗？"</string>
     <string name="app_list_preference_none" msgid="108006867520327904">"无"</string>
-    <string name="work_profile_usage_access_warning" msgid="2918050775124911939">"即使关闭此应用的使用记录访问权限，也无法阻止您的管理员跟踪您工作资料中应用的数据用量"</string>
+    <string name="work_profile_usage_access_warning" msgid="2918050775124911939">"即使关闭此应用的使用情况访问权限，也无法阻止您的管理员跟踪您工作资料中应用的数据用量"</string>
     <string name="accessibility_lock_screen_progress" msgid="2408292742980383166">"已输入 <xliff:g id="COUNT_0">%1$d</xliff:g> 个字符（共可输入 <xliff:g id="COUNT_1">%2$d</xliff:g> 个）"</string>
     <string name="draw_overlay" msgid="6564116025404257047">"显示在其他应用的上层"</string>
     <string name="system_alert_window_settings" msgid="8466613169103527868">"显示在其他应用的上层"</string>
@@ -3400,23 +3400,21 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"使用较冷的显示颜色"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"要应用颜色更改，请关闭屏幕"</string>
     <string name="telephony_monitor_toast" msgid="7003764250271195384">"要应用电话监控器的变更内容，请重新启动设备"</string>
-    <string name="camera_hal_hdrplus_switch" msgid="8377365197105267466">"相机 HAL HDR+"</string>
-    <string name="camera_hal_hdrplus_toast" msgid="2063703797270055299">"要应用对“相机 HAL HDR+”设置所做的更改，请重新启动设备"</string>
     <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"相机激光传感器"</string>
-    <string name="ota_disable_automatic_update" msgid="2319639631655915050">"自动系统更新"</string>
+    <string name="ota_disable_automatic_update" msgid="2319639631655915050">"系统自动更新"</string>
     <string name="usage" msgid="2977875522080448986">"流量消耗"</string>
     <string name="cellular_data_usage" msgid="2155683719898158203">"移动数据用量"</string>
-    <string name="wifi_data_usage" msgid="686754111095324306">"WLAN 网络流量消耗"</string>
-    <string name="ethernet_data_usage" msgid="5108764537574354616">"以太网流量消耗"</string>
+    <string name="wifi_data_usage" msgid="686754111095324306">"WLAN 网络流量用量"</string>
+    <string name="ethernet_data_usage" msgid="5108764537574354616">"以太网流量用量"</string>
     <string name="wifi" msgid="1081550856200013637">"WLAN"</string>
     <string name="ethernet" msgid="6600095783781389720">"以太网"</string>
     <string name="cell_data_template" msgid="405684854174361041">"<xliff:g id="AMOUNT">^1</xliff:g>（移动数据流量）"</string>
     <string name="wifi_data_template" msgid="6265570748799357386">"<xliff:g id="AMOUNT">^1</xliff:g> WLAN 流量"</string>
     <string name="ethernet_data_template" msgid="5782476509881033590">"<xliff:g id="AMOUNT">^1</xliff:g> 以太网流量"</string>
-    <string name="cell_warning_only" msgid="763147658209027140">"流量警告：<xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="cell_warning_and_limit" msgid="2273413629267437470">"流量警告：<xliff:g id="ID_1">%1$s</xliff:g>/流量上限：<xliff:g id="ID_2">%2$s</xliff:g>"</string>
+    <string name="cell_warning_only" msgid="763147658209027140">"数据流量警告：<xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="cell_warning_and_limit" msgid="2273413629267437470">"数据流量警告：<xliff:g id="ID_1">%1$s</xliff:g>/数据流量上限：<xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"结算周期"</string>
-    <string name="billing_cycle_fragment_summary" msgid="8231066353654583106">"每月 <xliff:g id="ID_1">%1$s</xliff:g> 日"</string>
+    <string name="billing_cycle_fragment_summary" msgid="8231066353654583106">"每个月的 <xliff:g id="ID_1">%1$s</xliff:g> 号"</string>
     <string name="network_restrictions" msgid="8234695294536675380">"网络流量限制"</string>
     <plurals name="network_restrictions_summary" formatted="false" msgid="4301618027244595839">
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> 项限制</item>
@@ -3424,10 +3422,10 @@
     </plurals>
     <string name="operator_warning" msgid="1862988028996859195">"运营商的流量计算方式可能与您设备的计算方式不同"</string>
     <string name="data_used_template" msgid="3245919669966296505">"已使用 <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="set_data_warning" msgid="6115364758236594593">"设置数据流量消耗警告"</string>
-    <string name="data_warning" msgid="209133958008062117">"流量警告"</string>
-    <string name="set_data_limit" msgid="2901526323210516923">"设置流量上限"</string>
-    <string name="data_limit" msgid="1885406964934590552">"流量上限"</string>
+    <string name="set_data_warning" msgid="6115364758236594593">"设置数据流量警告"</string>
+    <string name="data_warning" msgid="209133958008062117">"数据流量警告"</string>
+    <string name="set_data_limit" msgid="2901526323210516923">"设置数据流量上限"</string>
+    <string name="data_limit" msgid="1885406964934590552">"数据流量上限"</string>
     <string name="data_usage_template" msgid="2923744765873163859">"<xliff:g id="ID_2">%2$s</xliff:g>期间已使用 <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="configure" msgid="1029654422228677273">"配置"</string>
     <string name="data_usage_other_apps" msgid="3272872663517382050">"其他消耗流量的应用"</string>
@@ -3440,7 +3438,7 @@
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"后台数据已关闭"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"开启"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"关闭"</string>
-    <string name="unrestricted_app_title" msgid="4465437191723332066">"不限制数据流量"</string>
+    <string name="unrestricted_app_title" msgid="4465437191723332066">"不限制数据流量用量"</string>
     <string name="unrestricted_app_summary" msgid="6458008993501723912">"允许在流量节省程序开启时无限量使用数据流量"</string>
     <string name="home_app" msgid="4066188520886810030">"主屏幕应用"</string>
     <string name="no_default_home" msgid="7184117487704520238">"没有默认主屏幕"</string>
@@ -3490,8 +3488,8 @@
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"排名对象不包含此键。"</string>
     <string name="special_access" msgid="3458780842491881155">"特殊应用权限"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> 个应用可以无限量使用数据</item>
-      <item quantity="one">1 个应用可以无限量使用数据</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> 个应用可以无限量使用流量</item>
+      <item quantity="one">1 个应用可以无限量使用流量</item>
     </plurals>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"您真的要清除用户数据并转换为文件加密吗？"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"清除并转换"</string>
@@ -3570,7 +3568,7 @@
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"通过简单手势控制平板电脑"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"通过简单手势控制设备"</string>
     <string name="double_tap_power_for_camera_title" msgid="64716226816032800">"快速打开相机"</string>
-    <string name="double_tap_power_for_camera_summary" msgid="242037150983277829">"要快速打开相机，请按两次电源按钮（适用于任何屏幕）。"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="242037150983277829">"不论当前显示的是何屏幕画面，只需按两次电源按钮，即可快速打开相机。"</string>
     <string name="double_tap_power_for_camera_suggestion_title" msgid="6500405261202883589">"快速打开相机"</string>
     <string name="double_tap_power_for_camera_suggestion_summary" msgid="7010153544554016996">"按电源按钮两次即可打开相机"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"切换相机模式"</string>
@@ -3641,8 +3639,8 @@
       <item quantity="one">至少 <xliff:g id="COUNT_0">%d</xliff:g> 个应用</item>
     </plurals>
     <string name="enterprise_privacy_location_access" msgid="4158197200885270634">"位置权限"</string>
-    <string name="enterprise_privacy_microphone_access" msgid="5717375623568864441">"麦克风权限"</string>
-    <string name="enterprise_privacy_camera_access" msgid="4858146118537519375">"相机权限"</string>
+    <string name="enterprise_privacy_microphone_access" msgid="5717375623568864441">"麦克风使用权限"</string>
+    <string name="enterprise_privacy_camera_access" msgid="4858146118537519375">"相机使用权"</string>
     <string name="enterprise_privacy_enterprise_set_default_apps" msgid="3288495615791128724">"默认应用"</string>
     <plurals name="enterprise_privacy_number_packages" formatted="false" msgid="2765037387436064893">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 个应用</item>
@@ -3696,7 +3694,7 @@
     <string name="storage_other_apps" msgid="5524321740031718083">"其他应用"</string>
     <string name="storage_files" msgid="8581083146777364063">"文件"</string>
     <string name="storage_size_large_alternate" msgid="3550744227788333060">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" <xliff:g id="UNIT">^2</xliff:g>"</small>""</string>
-    <string name="storage_volume_total" msgid="3499221850532701342">"（总共 <xliff:g id="TOTAL">%1$s</xliff:g>）"</string>
+    <string name="storage_volume_total" msgid="3499221850532701342">"已用空间（总共 <xliff:g id="TOTAL">%1$s</xliff:g>）"</string>
     <string name="storage_percent_full" msgid="6095012055875077036">"已使用"</string>
     <string name="clear_instant_app_data" msgid="2004222610585890909">"清除应用"</string>
     <string name="clear_instant_app_confirmation" msgid="7451671214898856857">"要移除这个免安装应用吗？"</string>
