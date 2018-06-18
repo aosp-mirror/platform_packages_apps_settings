@@ -391,7 +391,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Eyða"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="2068961812439460133">"Snertu lesarann"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Settu fingurinn á skynjarann og lyftu honum þegar þú finnur titring"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="2819679722403209778">"Lyftu fingrinum og settu hann niður aftur"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="2819679722403209778">"Snertu aftur með fingrinum"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"Lyftu fingrinum endurtekið til að bæta við mismunandi hlutum fingrafarsins"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="7567276170287972230">"Fingrafari bætt við"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="4796715961273420536">"Þegar þú sérð þetta tákn skaltu nota fingrafarið til að auðkenna þig eða samþykkja kaup."</string>
@@ -624,7 +624,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Til að para við:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Gakktu úr skugga um að þessi aðgangslykill birtist:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"Frá:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Para við þetta tæki?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Til að para við:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Sláðu inn:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g> og ýttu síðan á vendihnappinn eða Enter."</string>
-    <string name="bluetooth_pairing_shares_phonebook" msgid="2277931851483023208">"Veita <xliff:g id="DEVICE_NAME">%1$s</xliff:g> aðgang að tengiliðunum þínum og símtalaferli"</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="9082518313285787097">"Veita aðgang að tengiliðum þínum og símtalaferli"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"Ekki tókst að tengjast <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Leita að tækjum"</string>
@@ -2926,7 +2926,7 @@
     <string name="no_vr_listeners" msgid="2689382881717507390">"Engin uppsett forrit hafa óskað eftir að vera keyrð sem sýndarveruleikaþjónusta."</string>
     <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"Leyfa sýndarveruleikaaðgang fyrir <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"Hægt verður að keyra <xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> þegar þú notar forrit í sýndarveruleikastillingu."</string>
-    <string name="display_vr_pref_title" msgid="8104485269504335481">"Þegar tækið er í sýndarveruleikastillingu"</string>
+    <string name="display_vr_pref_title" msgid="8104485269504335481">"Þegar stillt er á sýndarveruleika"</string>
     <string name="display_vr_pref_low_persistence" msgid="5707494209944718537">"Draga úr óskýrleika (ráðlagt)"</string>
     <string name="display_vr_pref_off" msgid="2190091757123260989">"Minnka flökt"</string>
     <string name="picture_in_picture_title" msgid="5824849294270017113">"Mynd í mynd"</string>
@@ -3400,8 +3400,6 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"Nota svalari skjáliti"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Slökktu á skjánum til að virkja litbreytinguna"</string>
     <string name="telephony_monitor_toast" msgid="7003764250271195384">"Til að breyta fjarskiptaumsjón skaltu endurræsa tækið"</string>
-    <string name="camera_hal_hdrplus_switch" msgid="8377365197105267466">"Myndavél HAL HDR+"</string>
-    <string name="camera_hal_hdrplus_toast" msgid="2063703797270055299">"Endurræstu tækið til að virkja breytingu á myndavél HAL HDR+"</string>
     <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"Leysigeislaskynjari myndavélar"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Sjálfvirkar kerfisuppfærslur"</string>
     <string name="usage" msgid="2977875522080448986">"Notkun"</string>
@@ -3579,12 +3577,12 @@
     <string name="double_twist_for_camera_suggestion_summary" product="default" msgid="447403641027147153">"Snúðu símanum tvisvar til að opna sjálfsmyndastillingu"</string>
     <string name="double_twist_for_camera_suggestion_summary" product="tablet" msgid="1724660290703318739">"Snúðu spjaldtölvunni tvisvar til að opna sjálfsmyndastillingu"</string>
     <string name="double_twist_for_camera_suggestion_summary" product="device" msgid="5980398380988039489">"Snúðu tækinu tvisvar til að opna sjálfsmyndastillingu"</string>
-    <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Ýta tvisvar til að athuga síma"</string>
+    <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Ýta tvisvar til að skoða"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Ýta tvisvar til að athuga spjaldtölvu"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Ýta tvisvar til að athuga tæki"</string>
     <string name="ambient_display_summary" msgid="525662960806416373">"Til að sjá hvað klukkan er og sjá tilkynningatákn og aðrar upplýsingar skaltu pikka tvisvar á skjáinn."</string>
     <string name="ambient_display_suggestion_summary" msgid="5987443721392571847">"Skoða tilkynningar þegar slökkt er á skjánum"</string>
-    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Taka upp til að athuga síma"</string>
+    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Taka upp til að skoða"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"Taka upp til að athuga spjaldtölvu"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"Taka upp til að athuga tæki"</string>
     <string name="ambient_display_pickup_summary" product="default" msgid="4567020486787561873">"Til að sjá hvað klukkan er og sjá tilkynningatákn og aðrar upplýsingar skaltu taka símann upp."</string>
