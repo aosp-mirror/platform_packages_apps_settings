@@ -624,7 +624,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt; ilə birləşdirmək üçün, onun bu ana açarı göstərdiyinə əmin olun:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"Kimdən:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Cihazınız bu cihazla cütləşsin?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Bunlarla cütlənmək üçün:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Bunu yazın:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, sonra Geri və ya Giriş basın."</string>
-    <string name="bluetooth_pairing_shares_phonebook" msgid="2277931851483023208">"Əlaqə və zəng tarixçəsinə giriş üçün <xliff:g id="DEVICE_NAME">%1$s</xliff:g> cihazına icazə verin"</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="9082518313285787097">"Kontaktlar və zəng tarixçəsinə giriş icazəsi verin"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> cihazına qoşula bilmədi."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Cihaz axtarın"</string>
@@ -805,7 +805,7 @@
     <string name="wifi_password" msgid="5948219759936151048">"Parol"</string>
     <string name="wifi_show_password" msgid="6461249871236968884">"Parolu göstər"</string>
     <string name="wifi_ap_band_config" msgid="1611826705989117930">"AP Band Seçin"</string>
-    <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2.4 GHz Band"</string>
+    <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2.4 GHz Diapazon"</string>
     <string name="wifi_ap_choose_5G" msgid="8137061170937978040">"5 GHz Band"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP parametrləri"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Digər cihaz istifadəçiləri ilə paylaşın"</string>
@@ -895,7 +895,7 @@
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> aktiv edilir..."</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"Digər cihazlar <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> şəbəkəsinə qoşula bilər"</string>
     <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"Hotspot parolu"</string>
-    <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"AP Band"</string>
+    <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"AP Diapazonu"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"Digər cihazlara Wi‑Fi şəbəkəsi yaratmaq üçün hotspot istifadə edin. Hotspot mobil data bağlantısından istifadə edərərk İnternet təmin edir. Əlavə mobil data xərcləri tətbiq edilə bilər."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Tətbiq yaxınlıqdakı cihazlarla kontenti paylaşmaq üçün hotspot yarada bilər."</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Hotspot yandırılır..."</string>
@@ -1095,7 +1095,7 @@
     <string name="sim_lock_off" product="default" msgid="258981978215428916">"Telefonu istifadə etmək üçün PIN tələb edin"</string>
     <string name="sim_pin_change" msgid="6311414184279932368">"SIM PIN dəyişin"</string>
     <string name="sim_enter_pin" msgid="6608715137008508432">"SIM PIN"</string>
-    <string name="sim_enable_sim_lock" msgid="4517742794997166918">"SİM kartı kilidləyin"</string>
+    <string name="sim_enable_sim_lock" msgid="4517742794997166918">"SİM kart kilidlənməsi"</string>
     <string name="sim_disable_sim_lock" msgid="7664729528754784824">"SİM kart kilidi açın"</string>
     <string name="sim_enter_old" msgid="6074196344494634348">"Keçmiş SIM PIN kodu"</string>
     <string name="sim_enter_new" msgid="8742727032729243562">"Yeni SIM PIN"</string>
@@ -3400,8 +3400,6 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"Serinləşdirici ekran rənglərini istifadə edin"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Rəng dəyişikliyini tətbiq etmək üçün ekranı söndürün"</string>
     <string name="telephony_monitor_toast" msgid="7003764250271195384">"Telefoniya monitoruna dəyişikliyi tətbiq etmək üçün cihazı yenidən yükləyin"</string>
-    <string name="camera_hal_hdrplus_switch" msgid="8377365197105267466">"Kamera HAL HDR+"</string>
-    <string name="camera_hal_hdrplus_toast" msgid="2063703797270055299">"Kamera HAL HDR+ dəyişikliyi əlavə etmək üçün cihazı yenidən işə salın"</string>
     <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"Kamera Lazer Sensoru"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Avtomatik sistem güncəlləmələri"</string>
     <string name="usage" msgid="2977875522080448986">"İstifadə"</string>
