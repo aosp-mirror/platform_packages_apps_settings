@@ -25,6 +25,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
+import android.app.usage.IUsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -78,6 +79,8 @@ public class AppNotificationPreferenceControllerTest {
         final ApplicationsState.AppEntry appEntry = mock(ApplicationsState.AppEntry.class);
         appEntry.info = new ApplicationInfo();
         when(mFragment.getAppEntry()).thenReturn(appEntry);
+        NotificationBackend backend = new NotificationBackend();
+        ReflectionHelpers.setField(backend, "sUsageStatsManager", mock(IUsageStatsManager.class));
         ReflectionHelpers.setField(mController, "mBackend", new NotificationBackend());
         mController.displayPreference(mScreen);
 

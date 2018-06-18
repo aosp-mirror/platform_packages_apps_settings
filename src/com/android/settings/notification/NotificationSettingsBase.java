@@ -276,6 +276,8 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
                 && !groupBlocked);
         channelPref.setKey(channel.getId());
         channelPref.setTitle(channel.getName());
+        channelPref.setSummary(NotificationBackend.getSentSummary(
+                mContext, mAppRow.sentByChannel.get(channel.getId()), false));
         channelPref.setChecked(channel.getImportance() != IMPORTANCE_NONE);
         Bundle channelArgs = new Bundle();
         channelArgs.putInt(AppInfoBase.ARG_PACKAGE_UID, mUid);
