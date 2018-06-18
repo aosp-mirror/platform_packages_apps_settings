@@ -23,9 +23,6 @@ import android.content.pm.PackageInfo;
 import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.UserManager;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
@@ -44,6 +41,10 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 public class AppBatteryPreferenceController extends BasePreferenceController
         implements LoaderManager.LoaderCallbacks<BatteryStatsHelper>,

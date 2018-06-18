@@ -38,7 +38,6 @@ import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
-import androidx.annotation.VisibleForTesting;
 import android.telephony.euicc.EuiccManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -63,6 +62,8 @@ import com.android.settings.password.ConfirmLockPattern;
 import com.android.settingslib.RestrictedLockUtils;
 
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Confirm and execute a reset of the device to a clean "just out of the box"

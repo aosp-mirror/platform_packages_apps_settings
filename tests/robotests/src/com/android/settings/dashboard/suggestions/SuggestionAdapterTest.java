@@ -27,9 +27,9 @@ import static org.mockito.Mockito.when;
 
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.service.settings.suggestions.Suggestion;
@@ -46,9 +46,9 @@ import com.android.settings.dashboard.DashboardAdapter;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowCardView;
+import com.android.settingslib.Utils;
 import com.android.settingslib.suggestions.SuggestionControllerMixin;
 import com.android.settingslib.utils.IconCache;
-import com.android.settingslib.Utils;
 
 import org.junit.Before;
 import org.junit.Test;

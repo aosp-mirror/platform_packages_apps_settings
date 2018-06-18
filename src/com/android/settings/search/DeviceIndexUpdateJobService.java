@@ -38,9 +38,9 @@ import java.util.concurrent.CountDownLatch;
 
 import androidx.slice.Slice;
 import androidx.slice.SliceItem;
+import androidx.slice.SliceMetadata;
 import androidx.slice.SliceViewManager;
 import androidx.slice.SliceViewManager.SliceCallback;
-import androidx.slice.SliceMetadata;
 import androidx.slice.core.SliceQuery;
 import androidx.slice.widget.ListContent;
 

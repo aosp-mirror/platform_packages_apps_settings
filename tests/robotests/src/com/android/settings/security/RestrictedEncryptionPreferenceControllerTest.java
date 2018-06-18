@@ -18,7 +18,6 @@ package com.android.settings.security;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.os.UserManager;
 
@@ -32,6 +31,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import androidx.lifecycle.LifecycleOwner;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowUserManager.class)

@@ -17,8 +17,6 @@
 package com.android.settings.accessibility;
 
 import android.os.Bundle;
-import androidx.preference.PreferenceFragment;
-import androidx.preference.Preference;
 import android.view.Menu;
 import android.view.accessibility.AccessibilityEvent;
 
@@ -27,6 +25,9 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.search.actionbar.SearchMenuController;
 import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settingslib.core.instrumentation.Instrumentable;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragment;
 
 public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivity {
 

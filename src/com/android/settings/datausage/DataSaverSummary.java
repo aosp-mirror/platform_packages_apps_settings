@@ -16,7 +16,6 @@ package com.android.settings.datausage;
 
 import android.app.Application;
 import android.os.Bundle;
-import androidx.preference.Preference;
 import android.widget.Switch;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -33,6 +32,8 @@ import com.android.settingslib.applications.ApplicationsState.Callbacks;
 import com.android.settingslib.applications.ApplicationsState.Session;
 
 import java.util.ArrayList;
+
+import androidx.preference.Preference;
 
 public class DataSaverSummary extends SettingsPreferenceFragment
         implements OnSwitchChangeListener, Listener, Callback, Callbacks {

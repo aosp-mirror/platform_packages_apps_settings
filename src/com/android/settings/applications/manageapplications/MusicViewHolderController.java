@@ -21,7 +21,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
 import android.provider.DocumentsContract;
-import androidx.annotation.WorkerThread;
 import android.text.format.Formatter;
 import android.util.Log;
 
@@ -30,6 +29,8 @@ import com.android.settings.Utils;
 import com.android.settingslib.applications.StorageStatsSource;
 
 import java.io.IOException;
+
+import androidx.annotation.WorkerThread;
 
 /**
  * MusicViewHolderController controls an Audio/Music file view in the ManageApplications view.

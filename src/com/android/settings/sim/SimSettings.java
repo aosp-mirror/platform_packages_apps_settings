@@ -23,8 +23,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.provider.SearchIndexableResource;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.PhoneNumberUtils;
@@ -46,6 +44,9 @@ import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 @SearchIndexable
 public class SimSettings extends RestrictedSettingsFragment implements Indexable {

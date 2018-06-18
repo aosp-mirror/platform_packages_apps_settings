@@ -17,10 +17,11 @@
 package com.android.settings.widget;
 
 import android.content.Context;
-import androidx.preference.CheckBoxPreference;
 import android.util.AttributeSet;
 
 import com.android.settings.R;
+
+import androidx.preference.CheckBoxPreference;
 
 /**
  * {@link CheckBoxPreference} that used only to display app

@@ -18,8 +18,6 @@ package com.android.settings.notification;
 
 import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 
-import static androidx.slice.builders.ListBuilder.ICON_IMAGE;
-
 import android.annotation.ColorInt;
 import android.app.NotificationManager;
 import android.app.PendingIntent;

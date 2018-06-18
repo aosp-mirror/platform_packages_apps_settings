@@ -20,13 +20,14 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.service.settings.suggestions.Suggestion;
-import androidx.annotation.NonNull;
 import android.util.Pair;
 
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.suggestions.SuggestionControllerMixin;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 /** Interface should be implemented if you have added new suggestions */
 public interface SuggestionFeatureProvider {

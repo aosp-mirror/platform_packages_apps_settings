@@ -38,7 +38,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.ContactsContract.DisplayPhoto;
 import android.provider.MediaStore;
-import androidx.core.content.FileProvider;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -64,6 +63,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.core.content.FileProvider;
 
 public class EditUserPhotoController {
     private static final String TAG = "EditUserPhotoController";

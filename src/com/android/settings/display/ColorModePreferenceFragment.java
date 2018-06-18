@@ -17,14 +17,10 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.provider.SearchIndexableResource;
 
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.PreferenceScreen;
-
 import com.android.internal.app.ColorDisplayController;
 import com.android.internal.logging.nano.MetricsProto;
-
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.R;
+import com.android.settings.applications.LayoutPreference;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.widget.RadioButtonPickerFragment;
@@ -34,6 +30,9 @@ import com.android.settingslib.widget.CandidateInfo;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceScreen;
 
 @SuppressWarnings("WeakerAccess")
 @SearchIndexable

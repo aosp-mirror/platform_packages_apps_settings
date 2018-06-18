@@ -16,6 +16,8 @@
 
 package com.android.settings.applications;
 
+import static com.android.settings.widget.EntityHeaderController.ActionType;
+
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
@@ -33,8 +35,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Process;
 import android.os.UserHandle;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import android.text.format.Formatter;
 import android.util.ArrayMap;
 import android.util.IconDrawableFactory;
@@ -59,7 +59,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.android.settings.widget.EntityHeaderController.ActionType;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 
 public class ProcessStatsDetail extends SettingsPreferenceFragment {
 

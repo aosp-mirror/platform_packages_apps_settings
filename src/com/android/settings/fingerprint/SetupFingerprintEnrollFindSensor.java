@@ -24,7 +24,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
-import androidx.annotation.NonNull;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -32,6 +31,8 @@ import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
+
+import androidx.annotation.NonNull;
 
 public class SetupFingerprintEnrollFindSensor extends FingerprintEnrollFindSensor {
 

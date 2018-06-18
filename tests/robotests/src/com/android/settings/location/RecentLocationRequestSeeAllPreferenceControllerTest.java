@@ -24,11 +24,8 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.provider.Settings.Secure;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.AppPreference;
@@ -45,6 +42,10 @@ import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import androidx.lifecycle.LifecycleOwner;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
 
 /** Unit tests for {@link RecentLocationRequestSeeAllPreferenceController} */
 @RunWith(SettingsRobolectricTestRunner.class)

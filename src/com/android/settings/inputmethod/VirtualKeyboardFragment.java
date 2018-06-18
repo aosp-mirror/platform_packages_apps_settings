@@ -24,7 +24,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
-import androidx.preference.Preference;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 
@@ -42,6 +41,8 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import androidx.preference.Preference;
 
 @SearchIndexable
 public final class VirtualKeyboardFragment extends SettingsPreferenceFragment implements Indexable {

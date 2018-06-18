@@ -25,15 +25,15 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceScreen;
 import android.util.Log;
 
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.Objects;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
 
 /**
  * Parent class for preferences appearing on notification setting pages at the app,

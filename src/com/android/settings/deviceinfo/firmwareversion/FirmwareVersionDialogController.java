@@ -22,12 +22,13 @@ import android.os.Build;
 import android.os.SystemClock;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.annotation.VisibleForTesting;
 import android.util.Log;
 import android.view.View;
 
 import com.android.settings.R;
 import com.android.settingslib.RestrictedLockUtils;
+
+import androidx.annotation.VisibleForTesting;
 
 public class FirmwareVersionDialogController implements View.OnClickListener {
 

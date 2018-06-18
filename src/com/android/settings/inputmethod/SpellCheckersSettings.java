@@ -22,10 +22,6 @@ import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
 import android.provider.Settings;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.Preference.OnPreferenceClickListener;
-import androidx.preference.PreferenceScreen;
 import android.util.Log;
 import android.view.textservice.SpellCheckerInfo;
 import android.view.textservice.SpellCheckerSubtype;
@@ -38,6 +34,11 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.SwitchBar.OnSwitchChangeListener;
+
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.Preference.OnPreferenceClickListener;
+import androidx.preference.PreferenceScreen;
 
 public class SpellCheckersSettings extends SettingsPreferenceFragment
         implements OnSwitchChangeListener, OnPreferenceClickListener, OnPreferenceChangeListener {

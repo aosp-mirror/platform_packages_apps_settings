@@ -23,11 +23,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
 import android.provider.SearchIndexablesContract.SiteMapColumns;
-import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.Log;
 
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
 
 public class IndexDatabaseHelper extends SQLiteOpenHelper {
 

@@ -17,7 +17,6 @@
 package com.android.settings.development.featureflags;
 
 import android.content.Context;
-import androidx.preference.PreferenceScreen;
 import android.util.FeatureFlagUtils;
 
 import com.android.settings.core.PreferenceControllerMixin;
@@ -27,6 +26,8 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 
 import java.util.Map;
+
+import androidx.preference.PreferenceScreen;
 
 public class FeatureFlagsPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnStart {

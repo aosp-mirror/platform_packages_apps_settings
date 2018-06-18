@@ -17,10 +17,8 @@
 package com.android.settings.notification;
 
 import static android.provider.Settings.Secure.NOTIFICATION_BADGING;
-
 import static com.android.settings.notification.BadgingNotificationPreferenceController.OFF;
 import static com.android.settings.notification.BadgingNotificationPreferenceController.ON;
-
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -29,9 +27,6 @@ import static org.mockito.Mockito.when;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.TwoStatePreference;
 
 import com.android.settings.search.InlinePayload;
 import com.android.settings.search.InlineSwitchPayload;
@@ -46,6 +41,10 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.TwoStatePreference;
 
 @RunWith(RobolectricTestRunner.class)
 public class BadgingNotificationPreferenceControllerTest {

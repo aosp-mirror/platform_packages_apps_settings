@@ -17,7 +17,6 @@ package com.android.settings.applications.appinfo;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.UserManager;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -26,6 +25,8 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.applications.DefaultAppSettings;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SubSettingLauncher;
+
+import androidx.preference.Preference;
 
 /*
  * Abstract base controller for the default app shortcut preferences that launches the default app

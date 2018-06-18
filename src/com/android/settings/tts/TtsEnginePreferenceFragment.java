@@ -1,27 +1,29 @@
 package com.android.settings.tts;
 
-import android.speech.tts.TextToSpeech;
-import com.android.settings.R;
-import android.os.Bundle;
-import com.android.settings.SettingsPreferenceFragment;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import androidx.preference.PreferenceCategory;
-import android.speech.tts.TtsEngines;
-import android.speech.tts.TextToSpeech.EngineInfo;
-import com.android.settings.SettingsActivity;
-import com.android.settings.tts.TtsEnginePreference.RadioButtonGroupState;
-import android.widget.Checkable;
-import android.util.Log;
 import static android.provider.Settings.Secure.TTS_DEFAULT_SYNTH;
-import com.android.settings.search.Indexable;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.search.SearchIndexable;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.provider.SearchIndexableResource;
+import android.speech.tts.TextToSpeech;
+import android.speech.tts.TextToSpeech.EngineInfo;
+import android.speech.tts.TtsEngines;
+import android.util.Log;
+import android.widget.Checkable;
 
-import java.util.List;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.R;
+import com.android.settings.SettingsActivity;
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+import com.android.settings.tts.TtsEnginePreference.RadioButtonGroupState;
+import com.android.settingslib.search.SearchIndexable;
+
 import java.util.Arrays;
+import java.util.List;
+
+import androidx.preference.PreferenceCategory;
 
 @SearchIndexable
 public class TtsEnginePreferenceFragment extends SettingsPreferenceFragment //implements

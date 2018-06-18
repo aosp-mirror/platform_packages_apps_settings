@@ -25,7 +25,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
-import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.webkit.UserPackage;
 
@@ -36,6 +35,8 @@ import com.android.settingslib.applications.DefaultAppInfo;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
 
 public class WebViewAppPicker extends DefaultAppPickerFragment {
     private WebViewUpdateServiceWrapper mWebViewUpdateServiceWrapper;

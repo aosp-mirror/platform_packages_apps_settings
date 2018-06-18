@@ -16,7 +16,8 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.FileEncryptionPreferenceController.FILE_ENCRYPTION_PROPERTY_KEY;
+import static com.android.settings.development.FileEncryptionPreferenceController
+        .FILE_ENCRYPTION_PROPERTY_KEY;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -28,8 +29,6 @@ import android.content.Context;
 import android.os.RemoteException;
 import android.os.SystemProperties;
 import android.os.storage.IStorageManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -41,6 +40,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class FileEncryptionPreferenceControllerTest {

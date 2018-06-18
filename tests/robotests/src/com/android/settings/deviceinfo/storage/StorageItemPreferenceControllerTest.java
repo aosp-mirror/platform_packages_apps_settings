@@ -16,7 +16,8 @@
 package com.android.settings.deviceinfo.storage;
 
 import static com.android.settings.applications.manageapplications.ManageApplications.EXTRA_WORK_ID;
-import static com.android.settings.applications.manageapplications.ManageApplications.EXTRA_WORK_ONLY;
+import static com.android.settings.applications.manageapplications.ManageApplications
+        .EXTRA_WORK_ONLY;
 import static com.android.settings.utils.FileSizeFormatter.MEGABYTE_IN_BYTES;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -37,7 +38,6 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.os.storage.VolumeInfo;
-import androidx.preference.PreferenceScreen;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
@@ -64,6 +64,8 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class StorageItemPreferenceControllerTest {

@@ -17,13 +17,14 @@
 package com.android.settings.wifi;
 
 import android.content.Context;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
 import com.android.settings.R;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
 /**
  * A Preference to be used with the Wifi Network Detail Fragment that allows a summary text to be

@@ -22,11 +22,12 @@ import android.app.Dialog;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+
+import androidx.annotation.NonNull;
 
 public class SetupSkipDialog extends InstrumentedDialogFragment
         implements DialogInterface.OnClickListener {

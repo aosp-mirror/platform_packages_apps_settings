@@ -17,14 +17,10 @@
 package com.android.settings.gestures;
 
 import static android.provider.Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED;
-
 import static com.android.settings.gestures.DoubleTapPowerPreferenceController.OFF;
 import static com.android.settings.gestures.DoubleTapPowerPreferenceController.ON;
 import static com.android.settings.gestures.DoubleTapPowerPreferenceController.isSuggestionComplete;
-
 import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -32,7 +28,6 @@ import android.content.SharedPreferences;
 import android.provider.Settings;
 
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl;
-import com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController;
 import com.android.settings.search.InlinePayload;
 import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.search.ResultPayload;

@@ -40,9 +40,6 @@ import android.content.pm.ResolveInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.service.notification.NotifyingApp;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.settings.R;
@@ -64,6 +61,10 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class RecentNotifyingAppsPreferenceControllerTest {

@@ -22,9 +22,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
-import androidx.preference.PreferenceFragment;
-import androidx.preference.Preference;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +34,10 @@ import com.android.settings.SetupWizardUtils;
 import com.android.settings.fingerprint.SetupFingerprintEnrollFindSensor;
 import com.android.settings.utils.SettingsDividerItemDecoration;
 import com.android.setupwizardlib.GlifPreferenceLayout;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Setup Wizard's version of ChooseLockGeneric screen. It inherits the logic and basic structure

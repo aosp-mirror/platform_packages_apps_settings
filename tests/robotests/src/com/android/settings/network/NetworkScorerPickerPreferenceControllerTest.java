@@ -25,7 +25,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.net.NetworkScoreManager;
 import android.net.NetworkScorerAppData;
-import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -39,6 +38,8 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.Collections;
+
+import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class NetworkScorerPickerPreferenceControllerTest {

@@ -29,7 +29,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.provider.Settings;
-import androidx.annotation.VisibleForTesting;
 import android.system.Os;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -49,9 +48,10 @@ import com.android.settings.utils.AnnotationSpan;
 import com.android.settingslib.CustomDialogPreference;
 import com.android.settingslib.HelpUtils;
 
-import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.Map;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Dialog to set the Private DNS

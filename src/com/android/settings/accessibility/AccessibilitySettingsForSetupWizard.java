@@ -21,7 +21,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ServiceInfo;
 import android.os.Bundle;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.view.accessibility.AccessibilityManager;
 
@@ -30,6 +29,8 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
 import java.util.List;
+
+import androidx.preference.Preference;
 
 /**
  * Activity with the accessibility settings specific to Setup Wizard.

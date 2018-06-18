@@ -18,13 +18,14 @@ package com.android.settings.fuelgauge.batterytip;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.ArraySet;
 
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 
 import java.util.Objects;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Model class stores app info(e.g. package name, type..) that used in battery tip

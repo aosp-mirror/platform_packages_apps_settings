@@ -25,8 +25,6 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.os.SystemUpdateManager;
 import android.os.UserManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.telephony.CarrierConfigManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -37,6 +35,9 @@ import com.android.settings.core.BasePreferenceController;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 public class SystemUpdatePreferenceController extends BasePreferenceController {
 

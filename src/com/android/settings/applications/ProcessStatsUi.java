@@ -19,8 +19,6 @@ package com.android.settings.applications;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
 import android.util.Log;
 import android.util.TimeUtils;
 import android.view.Menu;
@@ -36,6 +34,9 @@ import com.android.settings.applications.ProcStatsData.MemInfo;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
 
 public class ProcessStatsUi extends ProcessStatsBase {
     static final String TAG = "ProcessStatsUi";

@@ -19,7 +19,6 @@ package com.android.settings.widget;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.os.Parcelable;
-import androidx.viewpager.widget.PagerAdapter;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +31,8 @@ import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.Locale;
+
+import androidx.viewpager.widget.PagerAdapter;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class RtlCompatibleViewPagerTest {

@@ -25,10 +25,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.VisibleForTesting;
 import android.util.Log;
 
 import com.android.settings.overlay.FeatureFactory;
+
+import androidx.annotation.VisibleForTesting;
 
 public class SuggestionStateProvider extends ContentProvider {
 

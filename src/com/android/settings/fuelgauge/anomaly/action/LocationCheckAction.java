@@ -19,11 +19,12 @@ package com.android.settings.fuelgauge.anomaly.action;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.permission.RuntimePermissionPresenter;
-import androidx.annotation.VisibleForTesting;
-import androidx.core.content.PermissionChecker;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.core.content.PermissionChecker;
 
 /**
  * Location action for anomaly app, which means to turn off location permission for this app

@@ -17,11 +17,13 @@
 package com.android.settings.display;
 
 import android.content.Context;
-import androidx.preference.Preference;
+
 import com.android.internal.app.ColorDisplayController;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.widget.FooterPreference;
+
+import androidx.preference.Preference;
 
 public class NightDisplayFooterPreferenceController extends BasePreferenceController {
 

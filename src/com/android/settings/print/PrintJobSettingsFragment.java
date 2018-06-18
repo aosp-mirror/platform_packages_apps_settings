@@ -25,7 +25,6 @@ import android.print.PrintJobId;
 import android.print.PrintJobInfo;
 import android.print.PrintManager;
 import android.print.PrintManager.PrintJobStateChangeListener;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -41,6 +40,8 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
 import java.text.DateFormat;
+
+import androidx.preference.Preference;
 
 /**
  * Fragment for management of a print job.

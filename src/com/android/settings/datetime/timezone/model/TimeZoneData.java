@@ -15,9 +15,6 @@
  */
 package com.android.settings.datetime.timezone.model;
 
-import androidx.annotation.VisibleForTesting;
-import androidx.collection.ArraySet;
-
 import libcore.util.CountryTimeZones;
 import libcore.util.CountryZonesFinder;
 import libcore.util.TimeZoneFinder;
@@ -28,6 +25,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.collection.ArraySet;
 
 /**
  * Wrapper of CountryZonesFinder to normalize the country code and only show the regions that are

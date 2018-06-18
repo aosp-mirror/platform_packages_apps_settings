@@ -24,7 +24,6 @@ import static org.mockito.Mockito.when;
 import android.app.backup.BackupManager;
 import android.content.Context;
 import android.os.UserManager;
-import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -38,6 +37,8 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+
+import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = BackupSettingsActivityPreferenceControllerTest.ShadowBackupManager.class)

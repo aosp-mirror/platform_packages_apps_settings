@@ -23,8 +23,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
-import androidx.annotation.IntDef;
-import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -42,6 +40,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import androidx.annotation.IntDef;
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Utility class to parse elements of XML preferences

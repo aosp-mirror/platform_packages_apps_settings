@@ -38,9 +38,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.preference.PreferenceFragment;
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
 import android.widget.Button;
 
 import com.android.settings.R;
@@ -62,6 +59,10 @@ import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.preference.PreferenceFragment;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {

@@ -16,13 +16,14 @@
 
 package com.android.settings.security;
 
-import static com.android.settings.security.EncryptionStatusPreferenceController.PREF_KEY_ENCRYPTION_DETAIL_PAGE;
-import static com.android.settings.security.EncryptionStatusPreferenceController.PREF_KEY_ENCRYPTION_SECURITY_PAGE;
+import static com.android.settings.security.EncryptionStatusPreferenceController
+        .PREF_KEY_ENCRYPTION_DETAIL_PAGE;
+import static com.android.settings.security.EncryptionStatusPreferenceController
+        .PREF_KEY_ENCRYPTION_SECURITY_PAGE;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.os.UserManager;
-import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -34,6 +35,8 @@ import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
+
+import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowLockPatternUtils.class)

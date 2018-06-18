@@ -29,7 +29,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.os.UserHandle;
 import android.provider.Settings;
-import androidx.preference.SwitchPreference;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.search.InlinePayload;
@@ -46,6 +45,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
+
+import androidx.preference.SwitchPreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowSecureSettings.class)

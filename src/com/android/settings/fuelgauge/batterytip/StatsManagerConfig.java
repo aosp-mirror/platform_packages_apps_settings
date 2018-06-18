@@ -16,13 +16,10 @@
 
 package com.android.settings.fuelgauge.batterytip;
 
-import androidx.annotation.IntDef;
-
-import com.google.common.hash.HashFunction;
-import com.google.common.hash.Hashing;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+
+import androidx.annotation.IntDef;
 
 /**
  * This class provides all the configs needed if we want to use {@link android.app.StatsManager}

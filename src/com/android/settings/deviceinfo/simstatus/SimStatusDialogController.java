@@ -30,8 +30,6 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.os.UserHandle;
-import androidx.annotation.NonNull;
-import androidx.annotation.VisibleForTesting;
 import android.telephony.CarrierConfigManager;
 import android.telephony.CellBroadcastMessage;
 import android.telephony.PhoneStateListener;
@@ -54,6 +52,9 @@ import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 
 public class SimStatusDialogController implements LifecycleObserver, OnResume, OnPause {
 

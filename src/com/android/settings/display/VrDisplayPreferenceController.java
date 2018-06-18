@@ -17,11 +17,12 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.provider.Settings;
-import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
+
+import androidx.preference.Preference;
 
 public class VrDisplayPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin {

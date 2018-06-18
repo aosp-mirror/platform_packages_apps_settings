@@ -23,9 +23,6 @@ import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.os.Parcel;
 import android.os.Parcelable;
-import androidx.annotation.ColorInt;
-import androidx.annotation.StringRes;
-import androidx.annotation.VisibleForTesting;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.style.TextAppearanceSpan;
@@ -46,6 +43,10 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.StringRes;
+import androidx.annotation.VisibleForTesting;
 
 public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedChangeListener {
 

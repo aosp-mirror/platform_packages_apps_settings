@@ -25,7 +25,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
-import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -34,6 +33,8 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.HelpUtils;
+
+import androidx.annotation.VisibleForTesting;
 
 public class WifiScanningRequiredFragment extends InstrumentedDialogFragment implements
         DialogInterface.OnClickListener {

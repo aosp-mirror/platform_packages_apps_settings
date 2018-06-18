@@ -16,7 +16,6 @@
 
 package com.android.settings.password;
 
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +23,8 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.password.PasswordRequirementAdapter.PasswordRequirementViewHolder;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Used in {@link ChooseLockPassword} to show password requirements.

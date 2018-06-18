@@ -19,14 +19,15 @@ package com.android.settings.notification;
 import android.app.AutomaticZenRule;
 import android.app.Fragment;
 import android.content.Context;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.widget.Switch;
 
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 public class ZenAutomaticRuleSwitchPreferenceController extends
         AbstractZenModeAutomaticRulePreferenceController implements

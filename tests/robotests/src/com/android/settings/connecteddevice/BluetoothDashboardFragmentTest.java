@@ -31,7 +31,6 @@ import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class BluetoothDashboardFragmentTest {

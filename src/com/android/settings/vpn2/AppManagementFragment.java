@@ -34,7 +34,6 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -50,6 +49,8 @@ import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import java.util.List;
+
+import androidx.preference.Preference;
 
 public class AppManagementFragment extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener,

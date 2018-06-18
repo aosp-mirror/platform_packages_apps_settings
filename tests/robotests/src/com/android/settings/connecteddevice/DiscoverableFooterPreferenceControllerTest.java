@@ -28,11 +28,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.text.BidiFormatter;
 import android.text.TextUtils;
-import androidx.preference.PreferenceScreen;
 
-import com.android.settings.core.BasePreferenceController;
-import com.android.settings.bluetooth.AlwaysDiscoverable;
 import com.android.settings.R;
+import com.android.settings.bluetooth.AlwaysDiscoverable;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothPan;
@@ -52,6 +51,8 @@ import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowBluetoothPan.class, ShadowBluetoothAdapter.class,

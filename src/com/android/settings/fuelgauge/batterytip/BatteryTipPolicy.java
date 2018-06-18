@@ -18,12 +18,12 @@ package com.android.settings.fuelgauge.batterytip;
 
 import android.content.Context;
 import android.provider.Settings;
-import androidx.annotation.VisibleForTesting;
 import android.util.KeyValueListParser;
 import android.util.Log;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Class to store the policy for battery tips, which comes from

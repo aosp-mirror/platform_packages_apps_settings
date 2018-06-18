@@ -23,8 +23,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.util.TimeZone;
 import android.os.Bundle;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.PreferenceCategory;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -45,6 +43,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceCategory;
 
 /**
  * The class displays a time zone picker either by regions or fixed offset time zones.

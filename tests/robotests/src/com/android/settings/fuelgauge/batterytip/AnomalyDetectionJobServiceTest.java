@@ -19,9 +19,7 @@ package com.android.settings.fuelgauge.batterytip;
 import static android.os.StatsDimensionsValue.FLOAT_VALUE_TYPE;
 import static android.os.StatsDimensionsValue.INT_VALUE_TYPE;
 import static android.os.StatsDimensionsValue.TUPLE_VALUE_TYPE;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyInt;
@@ -52,14 +50,13 @@ import android.os.UserManager;
 import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
-import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 import com.android.settings.testutils.shadow.ShadowPowerWhitelistBackend;
+import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 
 import org.junit.Before;
 import org.junit.Test;

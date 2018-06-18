@@ -28,7 +28,6 @@ import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.storage.StorageManager;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +41,8 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmLockPattern;
+
+import androidx.preference.Preference;
 
 public class CryptKeeperSettings extends InstrumentedPreferenceFragment {
     private static final String TAG = "CryptKeeper";

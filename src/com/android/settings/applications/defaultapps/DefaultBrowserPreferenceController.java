@@ -24,7 +24,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.IconDrawableFactory;
@@ -35,6 +34,8 @@ import com.android.settingslib.applications.DefaultAppInfo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+import androidx.preference.Preference;
 
 public class DefaultBrowserPreferenceController extends DefaultAppPreferenceController {
 

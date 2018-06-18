@@ -31,7 +31,6 @@ import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.UserManager;
-import androidx.preference.PreferenceFragment;
 import android.view.View;
 
 import com.android.settings.applications.LayoutPreference;
@@ -43,6 +42,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.shadows.ShadowApplication;
+
+import androidx.preference.PreferenceFragment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class HeaderPreferenceControllerTest {

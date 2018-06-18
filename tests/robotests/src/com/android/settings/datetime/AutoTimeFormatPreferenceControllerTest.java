@@ -21,7 +21,6 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
-import androidx.preference.SwitchPreference;
 import android.text.format.DateFormat;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -36,6 +35,8 @@ import org.robolectric.shadows.ShadowApplication;
 
 import java.util.List;
 import java.util.Locale;
+
+import androidx.preference.SwitchPreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class AutoTimeFormatPreferenceControllerTest {

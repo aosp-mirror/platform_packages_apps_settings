@@ -19,9 +19,10 @@ package com.android.settings.security;
 import android.content.Context;
 import android.os.UserManager;
 import android.security.KeyStore;
-import androidx.preference.Preference;
 
 import com.android.settings.R;
+
+import androidx.preference.Preference;
 
 public class CredentialStoragePreferenceController extends
         RestrictedEncryptionPreferenceController {

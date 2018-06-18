@@ -18,20 +18,18 @@
 package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.res.Resources;
+import android.net.wifi.WifiManager;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.SliceTester;
-
-import android.content.Intent;
-import android.content.res.Resources;
-import android.net.wifi.WifiManager;
 
 import org.junit.Before;
 import org.junit.Test;

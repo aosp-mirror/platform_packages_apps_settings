@@ -21,7 +21,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -30,8 +29,6 @@ import android.content.om.IOverlayManager;
 import android.content.om.OverlayInfo;
 import android.content.pm.PackageManager;
 import android.os.RemoteException;
-import androidx.preference.ListPreference;
-import androidx.preference.PreferenceScreen;
 import android.view.DisplayCutout;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -44,6 +41,9 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import androidx.preference.ListPreference;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class EmulateDisplayCutoutPreferenceControllerTest {

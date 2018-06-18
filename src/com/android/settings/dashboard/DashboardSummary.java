@@ -22,9 +22,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.service.settings.suggestions.Suggestion;
-import androidx.annotation.VisibleForTesting;
-import androidx.annotation.WorkerThread;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +46,10 @@ import com.android.settingslib.suggestions.SuggestionControllerMixin;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.annotation.WorkerThread;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 public class DashboardSummary extends InstrumentedFragment
         implements CategoryListener, ConditionListener,

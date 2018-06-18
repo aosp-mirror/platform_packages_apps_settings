@@ -19,10 +19,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.TwoStatePreference;
 import android.util.Log;
 
 import com.android.settings.R;
@@ -31,6 +27,11 @@ import com.android.settings.slices.SliceData;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.TwoStatePreference;
 
 public class WorkModePreferenceController extends BasePreferenceController implements
         Preference.OnPreferenceChangeListener, LifecycleObserver, OnStart, OnStop {

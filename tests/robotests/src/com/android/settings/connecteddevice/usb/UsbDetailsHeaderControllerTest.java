@@ -20,13 +20,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
-import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
-import androidx.preference.PreferenceFragment;
 import android.hardware.usb.UsbManager;
 import android.hardware.usb.UsbPort;
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
@@ -44,6 +40,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import androidx.lifecycle.LifecycleOwner;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowEntityHeaderController.class)

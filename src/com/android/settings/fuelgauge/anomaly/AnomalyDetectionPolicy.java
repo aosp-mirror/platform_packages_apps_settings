@@ -19,7 +19,6 @@ package com.android.settings.fuelgauge.anomaly;
 import android.content.Context;
 import android.net.Uri;
 import android.provider.Settings;
-import androidx.annotation.VisibleForTesting;
 import android.text.format.DateUtils;
 import android.util.KeyValueListParser;
 import android.util.Log;
@@ -27,6 +26,8 @@ import android.util.Log;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Class to store the policy for anomaly detection, which comes from

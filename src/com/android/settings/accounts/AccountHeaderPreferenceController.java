@@ -24,8 +24,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
-import androidx.preference.PreferenceFragment;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
@@ -36,6 +34,9 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+
+import androidx.preference.PreferenceFragment;
+import androidx.preference.PreferenceScreen;
 
 public class AccountHeaderPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnResume {

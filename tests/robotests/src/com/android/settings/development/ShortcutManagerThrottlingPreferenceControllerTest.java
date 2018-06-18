@@ -23,8 +23,6 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.pm.IShortcutService;
 import android.os.RemoteException;
-import androidx.preference.SwitchPreference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -35,6 +33,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
+
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ShortcutManagerThrottlingPreferenceControllerTest {

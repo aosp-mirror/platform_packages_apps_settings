@@ -35,7 +35,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.widget.TextView;
-import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -61,6 +60,8 @@ import com.android.settingslib.utils.StringUtil;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Displays a list of apps and subsystems that consume power, ordered by how much power was

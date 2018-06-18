@@ -22,7 +22,6 @@ import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.preference.Preference;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
@@ -31,6 +30,8 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 
 import java.util.List;
+
+import androidx.preference.Preference;
 
 public class FingerprintStatusPreferenceController extends BasePreferenceController {
 

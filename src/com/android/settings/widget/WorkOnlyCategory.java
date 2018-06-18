@@ -16,11 +16,12 @@ package com.android.settings.widget;
 
 import android.content.Context;
 import android.os.UserManager;
-import androidx.preference.PreferenceCategory;
 import android.util.AttributeSet;
 
 import com.android.settings.SelfAvailablePreference;
 import com.android.settings.Utils;
+
+import androidx.preference.PreferenceCategory;
 
 /**
  * A PreferenceCategory that is only visible when the device has a work profile.

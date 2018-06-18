@@ -30,7 +30,6 @@ import static org.mockito.Mockito.verify;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.res.Resources;
-import androidx.preference.PreferenceGroup;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -46,6 +45,8 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+
+import androidx.preference.PreferenceGroup;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class BluetoothPairingDetailTest {

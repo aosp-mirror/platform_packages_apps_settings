@@ -22,7 +22,6 @@ import android.os.PowerManager;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.fuelgauge.BatterySaverDrawable;
 import com.android.settings.fuelgauge.BatterySaverReceiver;
 import com.android.settings.fuelgauge.batterysaver.BatterySaverSettings;
 import com.android.settingslib.fuelgauge.BatterySaverUtils;

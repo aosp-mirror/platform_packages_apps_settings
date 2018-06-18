@@ -21,7 +21,6 @@ import android.hardware.display.DisplayManager;
 import android.hardware.display.DisplayManager.DisplayListener;
 import android.os.Handler;
 import android.os.Looper;
-import androidx.preference.SwitchPreference;
 import android.util.AttributeSet;
 import android.view.Display;
 
@@ -29,6 +28,8 @@ import com.android.settings.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.preference.SwitchPreference;
 
 public class ColorModePreference extends SwitchPreference implements DisplayListener {
 

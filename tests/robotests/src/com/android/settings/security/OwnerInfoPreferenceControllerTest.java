@@ -29,9 +29,6 @@ import static org.mockito.Mockito.when;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import androidx.preference.PreferenceFragment;
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -46,6 +43,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
+
+import androidx.preference.PreferenceFragment;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class OwnerInfoPreferenceControllerTest {

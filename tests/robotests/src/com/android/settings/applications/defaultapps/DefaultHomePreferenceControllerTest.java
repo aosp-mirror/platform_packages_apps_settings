@@ -32,7 +32,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.UserManager;
-import androidx.preference.Preference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -48,6 +47,8 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.Arrays;
 import java.util.Collections;
+
+import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DefaultHomePreferenceControllerTest {

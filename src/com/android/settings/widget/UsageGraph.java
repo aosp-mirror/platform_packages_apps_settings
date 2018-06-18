@@ -30,7 +30,6 @@ import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.Shader.TileMode;
 import android.graphics.drawable.Drawable;
-import androidx.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.util.SparseIntArray;
 import android.util.TypedValue;
@@ -38,6 +37,8 @@ import android.view.View;
 
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settingslib.R;
+
+import androidx.annotation.VisibleForTesting;
 
 public class UsageGraph extends View {
 

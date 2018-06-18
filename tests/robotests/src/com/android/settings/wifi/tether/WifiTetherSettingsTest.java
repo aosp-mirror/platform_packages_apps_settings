@@ -17,15 +17,14 @@
 package com.android.settings.wifi.tether;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.net.ConnectivityManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 

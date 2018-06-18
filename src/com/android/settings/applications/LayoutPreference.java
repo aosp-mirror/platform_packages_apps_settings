@@ -18,10 +18,6 @@ package com.android.settings.applications;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import androidx.annotation.VisibleForTesting;
-import androidx.core.content.res.TypedArrayUtils;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +26,11 @@ import android.widget.FrameLayout;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.core.content.res.TypedArrayUtils;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
 public class LayoutPreference extends Preference {
 

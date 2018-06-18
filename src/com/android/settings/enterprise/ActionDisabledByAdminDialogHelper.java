@@ -26,7 +26,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Process;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.annotation.VisibleForTesting;
 import android.util.IconDrawableFactory;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,14 +33,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminAdd;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.Utils;
+import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminAdd;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import java.util.Objects;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Helper class for {@link ActionDisabledByAdminDialog} which sets up the dialog.

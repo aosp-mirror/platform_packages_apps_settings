@@ -26,9 +26,6 @@ import static org.mockito.Mockito.when;
 
 import android.app.PendingIntent;
 import android.service.settings.suggestions.Suggestion;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.ListUpdateCallback;
 
 import com.android.settings.dashboard.conditional.AirplaneModeCondition;
 import com.android.settings.dashboard.conditional.Condition;
@@ -46,6 +43,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListUpdateCallback;
 
 @RunWith(RobolectricTestRunner.class)
 public class DashboardDataTest {

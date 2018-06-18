@@ -71,9 +71,6 @@ import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.RawContacts;
 import android.provider.Settings;
-import androidx.annotation.StringRes;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
 import android.telephony.TelephonyManager;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -99,6 +96,10 @@ import java.net.InetAddress;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+
+import androidx.annotation.StringRes;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
 
 public final class Utils extends com.android.settingslib.Utils {
 

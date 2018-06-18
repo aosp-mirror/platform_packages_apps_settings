@@ -23,7 +23,6 @@ import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import androidx.annotation.VisibleForTesting;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
@@ -47,6 +46,8 @@ import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.bluetooth.MapProfile;
 import com.android.settingslib.bluetooth.PanProfile;
 import com.android.settingslib.bluetooth.PbapServerProfile;
+
+import androidx.annotation.VisibleForTesting;
 
 public final class DeviceProfilesSettings extends InstrumentedDialogFragment implements
         CachedBluetoothDevice.Callback, DialogInterface.OnClickListener, OnClickListener {

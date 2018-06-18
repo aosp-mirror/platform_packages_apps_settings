@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge.batterytip.detectors;
 
 import android.content.Context;
-import androidx.annotation.VisibleForTesting;
 import android.text.format.DateUtils;
 
 import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
@@ -31,6 +30,8 @@ import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Detector whether to show summary tip. This detector should be executed as the last

@@ -27,14 +27,9 @@ import android.os.Message;
 import android.os.Process;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.ArrayMap;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.util.SparseArray;
 
@@ -44,7 +39,6 @@ import com.android.internal.os.BatteryStatsHelper;
 import com.android.internal.os.PowerProfile;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
@@ -57,6 +51,11 @@ import com.android.settingslib.utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
 
 /**
  * Controller that update the battery header view

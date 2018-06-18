@@ -15,7 +15,7 @@
  */
 package com.android.settings.fuelgauge;
 
-import static com.android.settings.fuelgauge.BatteryBroadcastReceiver.*;
+import static com.android.settings.fuelgauge.BatteryBroadcastReceiver.BatteryUpdateType;
 
 import android.app.Activity;
 import android.app.LoaderManager;
@@ -23,11 +23,12 @@ import android.content.Context;
 import android.content.Loader;
 import android.os.Bundle;
 import android.os.UserManager;
-import androidx.annotation.VisibleForTesting;
 import android.view.Menu;
 
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.dashboard.DashboardFragment;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Common base class for things that need to show the battery usage graph.

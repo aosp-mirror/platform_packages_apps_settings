@@ -40,8 +40,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.UserManager;
 import android.provider.Settings;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.util.AttributeSet;
 
 import com.android.settings.SettingsPreferenceFragment;
@@ -58,6 +56,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResources.class)

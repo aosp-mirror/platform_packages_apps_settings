@@ -37,8 +37,6 @@ import android.os.PersistableBundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Telephony;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -63,6 +61,9 @@ import com.android.settings.RestrictedSettingsFragment;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import java.util.ArrayList;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
 
 public class ApnSettings extends RestrictedSettingsFragment implements
         Preference.OnPreferenceChangeListener {

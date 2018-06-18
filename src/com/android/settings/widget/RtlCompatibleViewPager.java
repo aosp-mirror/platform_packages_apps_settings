@@ -17,14 +17,15 @@
 package com.android.settings.widget;
 
 import android.content.Context;
+import android.os.Parcel;
 import android.os.Parcelable;
-import androidx.viewpager.widget.ViewPager;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
-import android.os.Parcel;
 
 import java.util.Locale;
+
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * A {@link ViewPager} that's aware of RTL changes when used with FragmentPagerAdapter.

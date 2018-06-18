@@ -18,14 +18,15 @@ package com.android.settings.security.trustagent;
 
 import android.content.Context;
 import android.os.UserHandle;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.security.SecurityFeatureProvider;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 public class ManageTrustAgentsPreferenceController extends BasePreferenceController {
 

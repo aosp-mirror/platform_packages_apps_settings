@@ -17,8 +17,6 @@
 package com.android.settings.fuelgauge.anomaly;
 
 import android.content.Context;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -27,6 +25,9 @@ import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.PowerUsageAnomalyDetails;
 
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 /**
  * Manager that responsible for updating high usage preference and handling preference click.

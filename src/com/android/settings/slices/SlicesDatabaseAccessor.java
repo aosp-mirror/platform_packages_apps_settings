@@ -18,11 +18,10 @@ package com.android.settings.slices;
 
 import static com.android.settings.slices.SlicesDatabaseHelper.Tables.TABLE_SLICES_INDEX;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
-
-import android.content.Context;
 import android.os.Binder;
 import android.util.Pair;
 

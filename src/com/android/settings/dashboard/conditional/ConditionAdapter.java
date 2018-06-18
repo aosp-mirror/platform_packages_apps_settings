@@ -16,9 +16,6 @@
 package com.android.settings.dashboard.conditional;
 
 import android.content.Context;
-import androidx.annotation.VisibleForTesting;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +31,10 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.List;
 import java.util.Objects;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class ConditionAdapter extends RecyclerView.Adapter<DashboardItemHolder> {
     public static final String TAG = "ConditionAdapter";

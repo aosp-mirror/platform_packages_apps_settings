@@ -24,7 +24,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.UserHandle;
 import android.provider.Settings;
-import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
@@ -32,6 +31,8 @@ import com.android.settings.R;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.search.ResultPayload;
+
+import androidx.annotation.VisibleForTesting;
 
 public class PickupGesturePreferenceController extends GesturePreferenceController {
 

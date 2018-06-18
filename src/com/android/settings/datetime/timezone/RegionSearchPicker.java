@@ -21,7 +21,6 @@ import android.content.Intent;
 import android.icu.text.Collator;
 import android.icu.text.LocaleDisplayNames;
 import android.os.Bundle;
-import androidx.annotation.VisibleForTesting;
 import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -36,6 +35,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Render a list of regions into a list view.

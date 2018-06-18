@@ -19,7 +19,6 @@ import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 
-import androidx.preference.Preference;
 
 public class ManageDeviceAdminPreferenceController extends BasePreferenceController {
 

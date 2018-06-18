@@ -17,14 +17,14 @@
 package com.android.settings.slices;
 
 import android.content.Context;
-
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
-import androidx.annotation.VisibleForTesting;
 import android.util.Log;
 
 import java.util.Locale;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Defines the schema for the Slices database.

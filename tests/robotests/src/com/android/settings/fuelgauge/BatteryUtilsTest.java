@@ -54,7 +54,6 @@ import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.fuelgauge.batterytip.AnomalyInfo;
-import com.android.settings.fuelgauge.batterytip.StatsManagerConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.fuelgauge.PowerWhitelistBackend;

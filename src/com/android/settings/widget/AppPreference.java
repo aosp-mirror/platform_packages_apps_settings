@@ -16,14 +16,15 @@
 package com.android.settings.widget;
 
 import android.content.Context;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ProgressBar;
 
 import com.android.settings.R;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
 public class AppPreference extends Preference {
 

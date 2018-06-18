@@ -36,8 +36,6 @@ import android.net.Uri;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenModeConfig.ZenRule;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.util.ArrayMap;
 
 import com.android.settings.notification.AbstractZenModePreferenceController.ZenModeConfigWrapper;
@@ -52,6 +50,9 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ZenModeSettingsFooterPreferenceControllerTest {

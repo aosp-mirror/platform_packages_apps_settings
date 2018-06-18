@@ -19,19 +19,12 @@ import static android.view.WindowManager.LayoutParams.PRIVATE_FLAG_HIDE_NON_SYST
 
 import android.app.AlertDialog;
 import android.app.AppOpsManager;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
-import android.os.UserHandle;
 import android.provider.Settings;
-import androidx.preference.SwitchPreference;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.Preference.OnPreferenceClickListener;
-import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -44,6 +37,11 @@ import com.android.settings.applications.AppStateOverlayBridge;
 import com.android.settings.applications.AppStateOverlayBridge.OverlayState;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
+
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.Preference.OnPreferenceClickListener;
+import androidx.preference.SwitchPreference;
 
 public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenceChangeListener,
         OnPreferenceClickListener {
