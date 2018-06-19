@@ -23,4 +23,5 @@ public class FeatureFlags {
     public static final String BATTERY_DISPLAY_APP_LIST = "settings_battery_display_app_list";
     public static final String BLUETOOTH_WHILE_DRIVING = "settings_bluetooth_while_driving";
     public static final String AUDIO_SWITCHER_SETTINGS = "settings_audio_switcher";
+    public static final String DYNAMIC_HOMEPAGE = "settings_dynamic_homepage";
 }
