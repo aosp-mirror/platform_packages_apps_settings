@@ -18,13 +18,14 @@ package com.android.settings.network;
 import android.content.Context;
 import android.net.NetworkScoreManager;
 import android.net.NetworkScorerAppData;
-import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;
+
+import androidx.preference.Preference;
 
 /**
  * {@link AbstractPreferenceController} that shows the active network scorer and toggles the

@@ -26,8 +26,6 @@ import static org.mockito.Mockito.when;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -39,6 +37,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+
+import androidx.lifecycle.LifecycleOwner;
+import androidx.recyclerview.widget.RecyclerView;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ActionBarShadowControllerTest {

@@ -27,9 +27,11 @@ import android.app.KeyguardManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.AttributeSet;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedPreferenceHelper;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

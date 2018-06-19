@@ -23,10 +23,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceFrameLayout;
 import android.provider.Settings;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.PreferenceCategory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnLayoutChangeListener;
@@ -47,6 +43,11 @@ import com.android.settings.widget.ToggleSwitch.OnBeforeCheckedChangeListener;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 
 import java.util.Locale;
+
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.PreferenceCategory;
 
 /**
  * Settings fragment containing captioning properties.

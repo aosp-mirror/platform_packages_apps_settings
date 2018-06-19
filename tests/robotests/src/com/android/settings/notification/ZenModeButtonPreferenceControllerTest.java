@@ -30,8 +30,6 @@ import android.app.NotificationManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.view.View;
 import android.widget.Button;
 
@@ -46,6 +44,9 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ZenModeButtonPreferenceControllerTest {

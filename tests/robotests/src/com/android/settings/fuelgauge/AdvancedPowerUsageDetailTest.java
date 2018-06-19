@@ -41,8 +41,6 @@ import android.graphics.drawable.Drawable;
 import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.UserHandle;
-import androidx.preference.Preference;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
@@ -76,6 +74,9 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.preference.Preference;
+import androidx.recyclerview.widget.RecyclerView;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowEntityHeaderController.class, ShadowActivityManager.class})

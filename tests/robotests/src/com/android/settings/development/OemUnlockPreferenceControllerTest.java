@@ -16,7 +16,8 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes.REQUEST_CODE_ENABLE_OEM_UNLOCK;
+import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes
+        .REQUEST_CODE_ENABLE_OEM_UNLOCK;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -31,7 +32,6 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.os.UserManager;
 import android.service.oemlock.OemLockManager;
-import androidx.preference.PreferenceScreen;
 import android.telephony.TelephonyManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -43,6 +43,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class OemUnlockPreferenceControllerTest {

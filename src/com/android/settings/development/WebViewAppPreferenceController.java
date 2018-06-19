@@ -18,9 +18,6 @@ package com.android.settings.development;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-
 import android.content.pm.PackageManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -30,6 +27,9 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.webview.WebViewUpdateServiceWrapper;
 import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 public class WebViewAppPreferenceController extends DeveloperOptionsPreferenceController implements
         PreferenceControllerMixin {

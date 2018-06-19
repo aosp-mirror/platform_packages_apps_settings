@@ -21,8 +21,6 @@ import android.icu.text.Collator;
 import android.icu.text.LocaleDisplayNames;
 import android.icu.util.TimeZone;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.annotation.VisibleForTesting;
 import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -37,6 +35,9 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.TreeSet;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Given a region, render a list of time zone {@class TimeZoneInfo} into a list view.

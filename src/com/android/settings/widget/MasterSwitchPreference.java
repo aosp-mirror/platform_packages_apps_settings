@@ -17,7 +17,6 @@
 package com.android.settings.widget;
 
 import android.content.Context;
-import androidx.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,6 +25,8 @@ import android.widget.Switch;
 import com.android.settings.R;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.TwoTargetPreference;
+
+import androidx.preference.PreferenceViewHolder;
 
 /**
  * A custom preference that provides inline switch toggle. It has a mandatory field for title, and

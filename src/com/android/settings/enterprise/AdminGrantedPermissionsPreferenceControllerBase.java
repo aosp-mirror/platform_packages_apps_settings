@@ -16,13 +16,14 @@
 package com.android.settings.enterprise;
 
 import android.content.Context;
-import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
+
+import androidx.preference.Preference;
 
 public abstract class AdminGrantedPermissionsPreferenceControllerBase
         extends AbstractPreferenceController implements PreferenceControllerMixin {

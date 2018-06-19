@@ -16,6 +16,8 @@
 
 package com.android.settings;
 
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -36,8 +38,6 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settingslib.RestrictedLockUtils;
-
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * Confirm and execute a reset of the device to a clean "just out of the box"

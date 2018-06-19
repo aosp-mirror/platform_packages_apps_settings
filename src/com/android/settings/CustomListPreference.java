@@ -25,12 +25,13 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.preference.ListPreferenceDialogFragment;
-import androidx.preference.ListPreference;
 import android.util.AttributeSet;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+
+import androidx.preference.ListPreference;
+import androidx.preference.ListPreferenceDialogFragment;
 
 public class CustomListPreference extends ListPreference {
 

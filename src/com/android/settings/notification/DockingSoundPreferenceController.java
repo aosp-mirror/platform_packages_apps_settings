@@ -20,6 +20,7 @@ import static com.android.settings.notification.SettingPref.TYPE_GLOBAL;
 
 import android.content.Context;
 import android.provider.Settings.Global;
+
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.core.lifecycle.Lifecycle;

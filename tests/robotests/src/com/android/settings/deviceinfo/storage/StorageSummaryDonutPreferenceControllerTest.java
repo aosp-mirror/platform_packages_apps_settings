@@ -28,7 +28,6 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.storage.VolumeInfo;
-import androidx.preference.PreferenceViewHolder;
 import android.text.format.Formatter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +51,8 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.io.File;
+
+import androidx.preference.PreferenceViewHolder;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {

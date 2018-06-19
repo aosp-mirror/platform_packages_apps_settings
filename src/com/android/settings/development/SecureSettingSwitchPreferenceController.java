@@ -18,11 +18,12 @@ package com.android.settings.development;
 
 import android.content.Context;
 import android.provider.Settings;
-import androidx.preference.SwitchPreference;
-import androidx.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
+
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
 
 /**
  * Base controller for Switch preference that maps to a specific value in Settings.Secure.

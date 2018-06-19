@@ -24,10 +24,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.provider.Settings;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.SwitchPreference;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.settings.R;
@@ -35,6 +31,11 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.utils.AnnotationSpan;
 import com.android.settingslib.core.AbstractPreferenceController;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 /**
  * {@link PreferenceControllerMixin} that controls whether the Wi-Fi Wakeup feature should be

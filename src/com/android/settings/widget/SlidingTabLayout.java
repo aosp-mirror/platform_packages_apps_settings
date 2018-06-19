@@ -17,7 +17,6 @@
 package com.android.settings.widget;
 
 import android.content.Context;
-import androidx.viewpager.widget.PagerAdapter;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -27,6 +26,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.settings.R;
+
+import androidx.viewpager.widget.PagerAdapter;
 
 /**
  * To be used with ViewPager to provide a tab indicator component which give constant feedback as

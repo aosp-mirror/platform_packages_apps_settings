@@ -28,9 +28,6 @@ import android.net.ConnectivityManager;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 
-import androidx.preference.ListPreference;
-import androidx.preference.PreferenceScreen;
-
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -40,6 +37,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+
+import androidx.preference.ListPreference;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class WifiTetherApBandPreferenceControllerTest {

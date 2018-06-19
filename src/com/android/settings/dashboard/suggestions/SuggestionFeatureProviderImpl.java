@@ -21,9 +21,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.service.settings.suggestions.Suggestion;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.VisibleForTesting;
 import android.util.Log;
 import android.util.Pair;
 
@@ -45,6 +42,8 @@ import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.suggestions.SuggestionControllerMixin;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider {
 

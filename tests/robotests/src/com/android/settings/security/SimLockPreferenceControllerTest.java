@@ -25,8 +25,6 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.os.PersistableBundle;
 import android.os.UserManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -45,6 +43,9 @@ import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SimLockPreferenceControllerTest {

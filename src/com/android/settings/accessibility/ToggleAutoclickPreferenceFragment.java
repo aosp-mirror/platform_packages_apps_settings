@@ -19,7 +19,6 @@ package com.android.settings.accessibility;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.Settings;
-import androidx.preference.Preference;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Switch;
 
@@ -27,6 +26,8 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.widget.SeekBarPreference;
 import com.android.settings.widget.SwitchBar;
+
+import androidx.preference.Preference;
 
 /**
  * Fragment for preference screen for settings related to Automatically click after mouse stops

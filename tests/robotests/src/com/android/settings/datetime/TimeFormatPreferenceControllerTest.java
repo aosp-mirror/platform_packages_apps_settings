@@ -22,8 +22,6 @@ import static org.mockito.Answers.RETURNS_DEEP_STUBS;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
-import androidx.preference.SwitchPreference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -36,6 +34,9 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.List;
+
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class TimeFormatPreferenceControllerTest {

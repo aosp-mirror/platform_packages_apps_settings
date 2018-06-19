@@ -23,7 +23,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.service.voice.VoiceInteractionService;
 import android.service.voice.VoiceInteractionServiceInfo;
-import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.app.AssistUtils;
 import com.android.settings.R;
@@ -31,6 +30,8 @@ import com.android.settings.applications.defaultapps.DefaultAppPreferenceControl
 import com.android.settingslib.applications.DefaultAppInfo;
 
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
 
 public class DefaultAssistPreferenceController extends DefaultAppPreferenceController {
 

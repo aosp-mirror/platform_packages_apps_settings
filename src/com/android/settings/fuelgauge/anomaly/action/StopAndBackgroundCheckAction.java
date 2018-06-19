@@ -17,10 +17,11 @@
 package com.android.settings.fuelgauge.anomaly.action;
 
 import android.content.Context;
-import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Force stop and background check action for anomaly app, this action will

@@ -36,9 +36,6 @@ import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -54,6 +51,10 @@ import com.android.settingslib.RestrictedLockUtils;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
 
 abstract public class NotificationSettingsBase extends DashboardFragment {
     private static final String TAG = "NotifiSettingsBase";
@@ -276,6 +277,8 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
                 && !groupBlocked);
         channelPref.setKey(channel.getId());
         channelPref.setTitle(channel.getName());
+        channelPref.setSummary(NotificationBackend.getSentSummary(
+                mContext, mAppRow.sentByChannel.get(channel.getId()), false));
         channelPref.setChecked(channel.getImportance() != IMPORTANCE_NONE);
         Bundle channelArgs = new Bundle();
         channelArgs.putInt(AppInfoBase.ARG_PACKAGE_UID, mUid);

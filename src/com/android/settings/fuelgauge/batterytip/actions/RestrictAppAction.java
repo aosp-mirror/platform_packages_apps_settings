@@ -18,7 +18,6 @@ package com.android.settings.fuelgauge.batterytip.actions;
 
 import android.app.AppOpsManager;
 import android.content.Context;
-import androidx.annotation.VisibleForTesting;
 import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -30,6 +29,8 @@ import com.android.settings.fuelgauge.batterytip.BatteryDatabaseManager;
 import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
 
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Action to restrict the apps, then app is not allowed to run in the background.

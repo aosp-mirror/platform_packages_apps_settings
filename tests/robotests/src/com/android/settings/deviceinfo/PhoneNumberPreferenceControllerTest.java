@@ -25,8 +25,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.telephony.SubscriptionInfo;
 import android.telephony.TelephonyManager;
 
@@ -40,6 +38,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class PhoneNumberPreferenceControllerTest {

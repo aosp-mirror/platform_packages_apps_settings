@@ -20,10 +20,6 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.os.Bundle;
 import android.os.SystemProperties;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceGroup;
 import android.text.BidiFormatter;
 import android.util.Log;
 
@@ -37,6 +33,11 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import java.util.Collection;
 import java.util.WeakHashMap;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceGroup;
 
 /**
  * Parent class for settings fragments that contain a list of Bluetooth

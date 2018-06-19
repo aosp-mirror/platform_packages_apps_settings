@@ -25,9 +25,6 @@ import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
 
@@ -43,6 +40,10 @@ import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoader;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 public class AppDataUsagePreferenceController extends AppInfoPreferenceControllerBase
         implements LoaderManager.LoaderCallbacks<ChartData>, LifecycleObserver, OnResume, OnPause {

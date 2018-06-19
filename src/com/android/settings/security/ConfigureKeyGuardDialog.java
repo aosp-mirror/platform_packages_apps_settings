@@ -23,13 +23,14 @@ import android.app.admin.DevicePolicyManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.CredentialStorage;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.password.ChooseLockGeneric;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Prompt for key guard configuration confirmation.

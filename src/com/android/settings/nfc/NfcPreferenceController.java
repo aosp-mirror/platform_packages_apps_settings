@@ -20,16 +20,14 @@ import android.content.IntentFilter;
 import android.nfc.NfcAdapter;
 import android.provider.Settings;
 
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
-
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
-import java.util.List;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 public class NfcPreferenceController extends TogglePreferenceController
         implements LifecycleObserver, OnResume, OnPause {

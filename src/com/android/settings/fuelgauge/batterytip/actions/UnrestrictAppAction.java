@@ -18,13 +18,14 @@ package com.android.settings.fuelgauge.batterytip.actions;
 
 import android.app.AppOpsManager;
 import android.content.Context;
-import androidx.annotation.VisibleForTesting;
 import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Action to clear the restriction to the app

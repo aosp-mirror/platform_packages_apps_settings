@@ -18,9 +18,6 @@ package com.android.settings.accounts;
 
 import android.accounts.Account;
 import android.content.Context;
-import android.util.FeatureFlagUtils;
-
-import com.android.settings.core.FeatureFlags;
 
 public interface AccountFeatureProvider {
     String getAccountType();

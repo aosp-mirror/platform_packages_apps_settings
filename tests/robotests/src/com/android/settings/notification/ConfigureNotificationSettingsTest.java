@@ -24,9 +24,7 @@ import static com.android.settings.notification.ConfigureNotificationSettings
 import static com.android.settings.notification.ConfigureNotificationSettings.KEY_SWIPE_DOWN;
 import static com.android.settings.notification.ConfigureNotificationSettings
         .SUMMARY_PROVIDER_FACTORY;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;

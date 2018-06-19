@@ -22,8 +22,6 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -44,6 +42,9 @@ import com.android.settingslib.utils.StringUtil;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
 /**
  * Provides a summary of data usage.

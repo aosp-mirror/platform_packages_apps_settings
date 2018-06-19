@@ -30,8 +30,6 @@ import android.content.pm.ServiceInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.preference.SwitchPreference;
-import androidx.preference.PreferenceScreen;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.View;
@@ -45,6 +43,9 @@ import com.android.settings.widget.AppSwitchPreference;
 import com.android.settingslib.applications.ServiceListing;
 
 import java.util.List;
+
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 public abstract class ManagedServiceSettings extends EmptyTextSettings {
     private static final String TAG = "ManagedServiceSettings";

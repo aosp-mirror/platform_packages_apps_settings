@@ -20,7 +20,6 @@ import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.TimePickerDialog;
 import android.content.Context;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.widget.TimePicker;
@@ -30,6 +29,8 @@ import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.Calendar;
+
+import androidx.preference.Preference;
 
 public class TimePreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, TimePickerDialog.OnTimeSetListener {

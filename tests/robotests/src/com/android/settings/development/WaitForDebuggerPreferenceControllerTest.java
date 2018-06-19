@@ -16,8 +16,10 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes.REQUEST_CODE_DEBUG_APP;
-import static com.android.settings.development.WaitForDebuggerPreferenceController.SETTING_VALUE_OFF;
+import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes
+        .REQUEST_CODE_DEBUG_APP;
+import static com.android.settings.development.WaitForDebuggerPreferenceController
+        .SETTING_VALUE_OFF;
 import static com.android.settings.development.WaitForDebuggerPreferenceController.SETTING_VALUE_ON;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
@@ -32,8 +34,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.RemoteException;
 import android.provider.Settings;
-import androidx.preference.SwitchPreference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -43,6 +43,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class WaitForDebuggerPreferenceControllerTest {

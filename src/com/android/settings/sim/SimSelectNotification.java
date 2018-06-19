@@ -23,8 +23,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.provider.Settings;
-import androidx.core.app.NotificationCompat;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -36,6 +34,8 @@ import com.android.settings.Settings.SimSettingsActivity;
 import com.android.settings.Utils;
 
 import java.util.List;
+
+import androidx.core.app.NotificationCompat;
 
 public class SimSelectNotification extends BroadcastReceiver {
     private static final String TAG = "SimSelectNotification";

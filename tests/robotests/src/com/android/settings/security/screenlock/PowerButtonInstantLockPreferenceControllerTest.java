@@ -22,7 +22,6 @@ import static org.mockito.Mockito.when;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
-import androidx.preference.SwitchPreference;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
@@ -36,6 +35,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+
+import androidx.preference.SwitchPreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class PowerButtonInstantLockPreferenceControllerTest {

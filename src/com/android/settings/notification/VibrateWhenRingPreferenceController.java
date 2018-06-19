@@ -26,14 +26,14 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.text.TextUtils;
 
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
-
 import com.android.settings.Utils;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 public class VibrateWhenRingPreferenceController extends TogglePreferenceController
         implements LifecycleObserver, OnResume, OnPause {

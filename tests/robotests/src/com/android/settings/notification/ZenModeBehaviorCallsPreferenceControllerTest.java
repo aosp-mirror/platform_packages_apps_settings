@@ -24,7 +24,6 @@ import static org.mockito.Mockito.when;
 
 import android.app.NotificationManager;
 import android.content.Context;
-import androidx.preference.Preference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -37,6 +36,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
+
+import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public final class ZenModeBehaviorCallsPreferenceControllerTest {

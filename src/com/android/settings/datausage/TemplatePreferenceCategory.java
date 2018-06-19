@@ -16,9 +16,10 @@ package com.android.settings.datausage;
 
 import android.content.Context;
 import android.net.NetworkTemplate;
+import android.util.AttributeSet;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
-import android.util.AttributeSet;
 
 public class TemplatePreferenceCategory extends PreferenceCategory implements TemplatePreference {
 

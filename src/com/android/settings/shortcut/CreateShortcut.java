@@ -33,7 +33,6 @@ import android.graphics.drawable.Icon;
 import android.graphics.drawable.LayerDrawable;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
-import androidx.annotation.VisibleForTesting;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,6 +47,8 @@ import com.android.settings.overlay.FeatureFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
 
 public class CreateShortcut extends LauncherActivity {
 

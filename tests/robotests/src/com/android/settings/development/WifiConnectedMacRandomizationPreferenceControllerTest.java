@@ -16,15 +16,15 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.WifiConnectedMacRandomizationPreferenceController.SETTING_VALUE_OFF;
-import static com.android.settings.development.WifiConnectedMacRandomizationPreferenceController.SETTING_VALUE_ON;
+import static com.android.settings.development.WifiConnectedMacRandomizationPreferenceController
+        .SETTING_VALUE_OFF;
+import static com.android.settings.development.WifiConnectedMacRandomizationPreferenceController
+        .SETTING_VALUE_ON;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.provider.Settings;
-import androidx.preference.SwitchPreference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -35,6 +35,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class WifiConnectedMacRandomizationPreferenceControllerTest {

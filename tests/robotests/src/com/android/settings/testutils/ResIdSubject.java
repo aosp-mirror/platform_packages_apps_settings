@@ -17,14 +17,13 @@
 package com.android.settings.testutils;
 
 import static com.google.common.truth.Truth.assertAbout;
-
 import static org.robolectric.RuntimeEnvironment.application;
-
-import androidx.annotation.Nullable;
 
 import com.google.common.truth.ComparableSubject;
 import com.google.common.truth.FailureStrategy;
 import com.google.common.truth.SubjectFactory;
+
+import androidx.annotation.Nullable;
 
 /**
  * Custom subject for use with {@link com.google.common.truth.Truth}, to provide a more readable

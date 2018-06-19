@@ -18,8 +18,6 @@ package com.android.settings.applications;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceClickListener;
 import android.text.format.Formatter;
 import android.text.format.Formatter.BytesResult;
 
@@ -30,6 +28,9 @@ import com.android.settings.Utils;
 import com.android.settings.applications.ProcStatsData.MemInfo;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.SummaryLoader;
+
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceClickListener;
 
 public class ProcessStatsSummary extends ProcessStatsBase implements OnPreferenceClickListener {
 

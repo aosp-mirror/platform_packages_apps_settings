@@ -24,8 +24,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.service.notification.ZenModeConfig;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 import android.view.View;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -36,6 +34,9 @@ import com.android.settingslib.TwoTargetPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.Map;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
 public class ZenRulePreference extends TwoTargetPreference {
     private static final ManagedServiceSettings.Config CONFIG =

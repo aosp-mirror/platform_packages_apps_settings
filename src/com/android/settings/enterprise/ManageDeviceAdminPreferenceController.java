@@ -14,42 +14,37 @@
 package com.android.settings.enterprise;
 
 import android.content.Context;
-import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.core.AbstractPreferenceController;
 
-public class ManageDeviceAdminPreferenceController extends AbstractPreferenceController implements
-        PreferenceControllerMixin {
 
-    private static final String KEY_MANAGE_DEVICE_ADMIN = "manage_device_admin";
+public class ManageDeviceAdminPreferenceController extends BasePreferenceController {
+
     private final EnterprisePrivacyFeatureProvider mFeatureProvider;
 
-    public ManageDeviceAdminPreferenceController(Context context) {
-        super(context);
+    public ManageDeviceAdminPreferenceController(Context context, String key) {
+        super(context, key);
         mFeatureProvider = FeatureFactory.getFactory(context)
                 .getEnterprisePrivacyFeatureProvider(context);
     }
 
     @Override
-    public void updateState(Preference preference) {
+    public CharSequence getSummary() {
         final int activeAdmins
                 = mFeatureProvider.getNumberOfActiveDeviceAdminsForCurrentUserAndManagedProfile();
-        preference.setSummary(activeAdmins == 0
+        return activeAdmins == 0
                 ? mContext.getResources().getString(R.string.number_of_device_admins_none)
                 : mContext.getResources().getQuantityString(R.plurals.number_of_device_admins,
-                        activeAdmins, activeAdmins));
+                        activeAdmins, activeAdmins);
     }
 
     @Override
-    public boolean isAvailable() {
-        return mContext.getResources().getBoolean(R.bool.config_show_manage_device_admin);
+    public int getAvailabilityStatus() {
+        return mContext.getResources().getBoolean(R.bool.config_show_manage_device_admin)
+                ? AVAILABLE_UNSEARCHABLE
+                : UNSUPPORTED_ON_DEVICE;
     }
 
-    @Override
-    public String getPreferenceKey() {
-        return KEY_MANAGE_DEVICE_ADMIN;
-    }
 }

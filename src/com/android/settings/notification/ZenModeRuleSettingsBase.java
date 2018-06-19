@@ -23,13 +23,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.service.notification.ConditionProviderService;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
 

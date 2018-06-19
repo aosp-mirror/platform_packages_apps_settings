@@ -21,8 +21,10 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
 
 import android.app.Activity;
+
 import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

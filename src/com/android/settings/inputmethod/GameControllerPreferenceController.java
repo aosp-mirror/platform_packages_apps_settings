@@ -19,11 +19,6 @@ package com.android.settings.inputmethod;
 import android.content.Context;
 import android.hardware.input.InputManager;
 import android.provider.Settings;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.SwitchPreference;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
-import android.text.TextUtils;
 import android.view.InputDevice;
 
 import com.android.settings.R;
@@ -32,6 +27,9 @@ import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 public class GameControllerPreferenceController extends TogglePreferenceController
         implements PreferenceControllerMixin, InputManager.InputDeviceListener, LifecycleObserver,

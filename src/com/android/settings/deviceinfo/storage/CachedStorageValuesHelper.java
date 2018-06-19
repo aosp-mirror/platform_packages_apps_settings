@@ -19,13 +19,14 @@ package com.android.settings.deviceinfo.storage;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.provider.Settings;
-import androidx.annotation.VisibleForTesting;
 import android.util.SparseArray;
 
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 
 import java.util.concurrent.TimeUnit;
+
+import androidx.annotation.VisibleForTesting;
 
 public class CachedStorageValuesHelper {
 

@@ -16,7 +16,8 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.ClearAdbKeysPreferenceController.RO_ADB_SECURE_PROPERTY_KEY;
+import static com.android.settings.development.ClearAdbKeysPreferenceController
+        .RO_ADB_SECURE_PROPERTY_KEY;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
@@ -29,8 +30,6 @@ import android.content.Context;
 import android.hardware.usb.IUsbManager;
 import android.os.RemoteException;
 import android.os.SystemProperties;
-import androidx.preference.SwitchPreference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUtils;
@@ -46,6 +45,9 @@ import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.util.ReflectionHelpers;
+
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowUtils.class)

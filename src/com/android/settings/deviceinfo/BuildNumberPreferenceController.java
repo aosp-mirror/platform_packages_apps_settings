@@ -25,8 +25,6 @@ import android.content.pm.ResolveInfo;
 import android.os.Build;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.text.BidiFormatter;
 import android.text.TextUtils;
 import android.util.Pair;
@@ -45,6 +43,9 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 public class BuildNumberPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin, LifecycleObserver, OnResume {

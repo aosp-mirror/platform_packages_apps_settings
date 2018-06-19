@@ -30,7 +30,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
-import androidx.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.dashboard.DashboardFeatureProviderImpl;
@@ -44,6 +43,8 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
+
+import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class AccountDetailDashboardFragmentTest {

@@ -17,7 +17,6 @@
 package com.android.settings.applications;
 
 import static android.text.format.DateUtils.DAY_IN_MILLIS;
-
 import static com.android.settings.applications.AppStateNotificationBridge
         .FILTER_APP_NOTIFICATION_FREQUENCY;
 import static com.android.settings.applications.AppStateNotificationBridge
@@ -26,12 +25,9 @@ import static com.android.settings.applications.AppStateNotificationBridge
         .FREQUENCY_NOTIFICATION_COMPARATOR;
 import static com.android.settings.applications.AppStateNotificationBridge
         .RECENT_NOTIFICATION_COMPARATOR;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;

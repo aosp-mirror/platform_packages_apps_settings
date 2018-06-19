@@ -16,9 +16,10 @@
 
 package com.android.settings.bluetooth;
 
-import androidx.annotation.Keep;
 import android.text.InputFilter;
 import android.text.Spanned;
+
+import androidx.annotation.Keep;
 
 /**
  * This filter will constrain edits so that the text length is not

@@ -24,13 +24,14 @@ import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnInfoListener;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.net.Uri;
-import androidx.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 
 import com.android.settings.R;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * A view containing a VideoView for showing the user how to enroll a fingerprint

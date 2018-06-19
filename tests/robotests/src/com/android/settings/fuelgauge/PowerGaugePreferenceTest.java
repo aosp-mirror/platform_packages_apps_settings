@@ -20,7 +20,6 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
-import androidx.preference.PreferenceViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -34,6 +33,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+
+import androidx.preference.PreferenceViewHolder;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class PowerGaugePreferenceTest {

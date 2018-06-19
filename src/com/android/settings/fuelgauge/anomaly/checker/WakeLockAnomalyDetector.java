@@ -20,7 +20,6 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.BatteryStats;
 import android.os.SystemClock;
-import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
@@ -32,6 +31,8 @@ import com.android.settings.fuelgauge.anomaly.AnomalyUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Check whether apps holding wakelock too long

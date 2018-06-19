@@ -17,7 +17,6 @@
 package com.android.settings.widget;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.never;
@@ -25,7 +24,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import androidx.preference.PreferenceViewHolder;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
@@ -40,7 +38,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.util.ReflectionHelpers;
+
+import androidx.preference.PreferenceViewHolder;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ValidatedEditTextPreferenceTest {

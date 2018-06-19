@@ -39,8 +39,6 @@ import android.print.PrintServicesLoader;
 import android.printservice.PrintServiceInfo;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -62,6 +60,9 @@ import com.android.settingslib.search.SearchIndexable;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 
 /**
  * Fragment with the top level print settings.

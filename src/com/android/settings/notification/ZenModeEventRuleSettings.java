@@ -26,10 +26,6 @@ import android.provider.CalendarContract.Calendars;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenModeConfig.EventInfo;
-import androidx.preference.DropDownPreference;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -39,6 +35,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import androidx.preference.DropDownPreference;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.PreferenceScreen;
 
 public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
     private static final String KEY_CALENDAR = "calendar";

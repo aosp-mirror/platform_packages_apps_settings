@@ -26,14 +26,9 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.PersistableBundle;
-import androidx.core.graphics.drawable.IconCompat;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.util.Log;
-
-import androidx.slice.Slice;
-import androidx.slice.builders.ListBuilder;
-import androidx.slice.builders.SliceAction;
 
 import com.android.ims.ImsManager;
 import com.android.internal.annotations.VisibleForTesting;
@@ -50,6 +45,11 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+
+import androidx.core.graphics.drawable.IconCompat;
+import androidx.slice.Slice;
+import androidx.slice.builders.ListBuilder;
+import androidx.slice.builders.SliceAction;
 
 /**
  * Helper class to control slices for enhanced 4g LTE settings.

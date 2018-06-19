@@ -23,8 +23,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -44,6 +42,8 @@ import com.android.settingslib.core.lifecycle.events.OnOptionsItemSelected;
 import com.android.settingslib.core.lifecycle.events.OnPrepareOptionsMenu;
 
 import java.util.List;
+
+import androidx.preference.PreferenceScreen;
 
 public class InstantAppButtonsPreferenceController extends BasePreferenceController implements
         LifecycleObserver, OnCreateOptionsMenu, OnPrepareOptionsMenu, OnOptionsItemSelected {

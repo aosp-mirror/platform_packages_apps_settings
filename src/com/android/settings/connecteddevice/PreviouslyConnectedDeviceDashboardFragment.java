@@ -17,6 +17,7 @@ package com.android.settings.connecteddevice;
 
 import android.content.Context;
 import android.content.res.Resources;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;

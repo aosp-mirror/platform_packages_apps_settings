@@ -18,12 +18,13 @@ package com.android.settings.security;
 
 import android.content.Context;
 import android.os.UserManager;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+
+import androidx.preference.Preference;
 
 public class EncryptionStatusPreferenceController extends BasePreferenceController {
 

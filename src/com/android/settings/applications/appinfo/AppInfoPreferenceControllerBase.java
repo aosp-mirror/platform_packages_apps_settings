@@ -18,12 +18,13 @@ package com.android.settings.applications.appinfo;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.BasePreferenceController;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 /*
  * Abstract base controller for the app detail preferences that refresh the state when the app state

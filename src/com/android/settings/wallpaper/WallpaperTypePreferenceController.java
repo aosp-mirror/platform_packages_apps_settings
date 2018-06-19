@@ -22,8 +22,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.settings.core.BasePreferenceController;
@@ -32,6 +30,9 @@ import com.android.settingslib.core.lifecycle.events.OnStart;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 public class WallpaperTypePreferenceController extends BasePreferenceController
         implements LifecycleObserver, OnStart {

@@ -18,7 +18,6 @@ package com.android.settings.notification;
 
 import android.app.NotificationChannel;
 import android.content.Context;
-import androidx.preference.Preference;
 import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -28,6 +27,8 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import androidx.preference.Preference;
 
 public class ChannelGroupNotificationSettings extends NotificationSettingsBase {
     private static final String TAG = "ChannelGroupSettings";

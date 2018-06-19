@@ -21,8 +21,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -34,6 +32,9 @@ import com.android.settingslib.drawer.Tile;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceScreen;
 
 public class AccountDetailDashboardFragment extends DashboardFragment {
 

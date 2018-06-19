@@ -27,14 +27,11 @@ import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.app.Fragment;
-import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.os.Build;
 import android.os.Process;
 import android.os.UserManager;
 import android.provider.Settings;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.text.BidiFormatter;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -56,6 +53,10 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowUserManager;
+
+import androidx.lifecycle.LifecycleOwner;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowUtils.class)

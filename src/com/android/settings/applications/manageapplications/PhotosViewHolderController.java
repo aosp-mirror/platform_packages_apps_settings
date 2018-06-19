@@ -20,7 +20,6 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
-import androidx.annotation.WorkerThread;
 import android.text.format.Formatter;
 import android.util.Log;
 
@@ -29,6 +28,8 @@ import com.android.settings.Utils;
 import com.android.settingslib.applications.StorageStatsSource;
 
 import java.io.IOException;
+
+import androidx.annotation.WorkerThread;
 
 /** PhotosViewHolderController controls an Audio/Music file view in the ManageApplications view. */
 public class PhotosViewHolderController implements FileViewHolderController {

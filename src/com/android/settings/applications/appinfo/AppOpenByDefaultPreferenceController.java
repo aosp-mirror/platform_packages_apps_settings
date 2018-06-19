@@ -22,13 +22,14 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.hardware.usb.IUsbManager;
 import android.os.ServiceManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.AppLaunchSettings;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 public class AppOpenByDefaultPreferenceController extends AppInfoPreferenceControllerBase {
 

@@ -16,15 +16,15 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.AnimatorDurationScalePreferenceController.ANIMATOR_DURATION_SCALE_SELECTOR;
-import static com.android.settings.development.AnimatorDurationScalePreferenceController.DEFAULT_VALUE;
+import static com.android.settings.development.AnimatorDurationScalePreferenceController
+        .ANIMATOR_DURATION_SCALE_SELECTOR;
+import static com.android.settings.development.AnimatorDurationScalePreferenceController
+        .DEFAULT_VALUE;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.RemoteException;
-import androidx.preference.ListPreference;
-import androidx.preference.PreferenceScreen;
 import android.view.IWindowManager;
 
 import com.android.settings.R;
@@ -37,6 +37,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
+
+import androidx.preference.ListPreference;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class AnimatorDurationScalePreferenceControllerTest {

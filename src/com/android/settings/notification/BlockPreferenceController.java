@@ -16,20 +16,20 @@
 
 package com.android.settings.notification;
 
-import static android.app.NotificationChannel.DEFAULT_CHANNEL_ID;
 import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
 import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
 
 import android.app.NotificationManager;
 import android.content.Context;
-import androidx.preference.Preference;
 import android.widget.Switch;
 
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.SwitchBar;
+
+import androidx.preference.Preference;
 
 public class BlockPreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin, SwitchBar.OnSwitchChangeListener {

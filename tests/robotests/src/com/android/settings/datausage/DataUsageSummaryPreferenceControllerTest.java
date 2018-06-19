@@ -19,7 +19,6 @@ package com.android.settings.datausage;
 import static android.net.ConnectivityManager.TYPE_WIFI;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
-
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doReturn;
@@ -32,7 +31,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkTemplate;
-import androidx.recyclerview.widget.RecyclerView;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -52,14 +50,16 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.mockito.ArgumentCaptor;
 
 import java.util.concurrent.TimeUnit;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowEntityHeaderController.class)

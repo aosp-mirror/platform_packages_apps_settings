@@ -30,7 +30,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.ActivityManager;
-import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
@@ -57,6 +56,8 @@ import org.robolectric.annotation.Implements;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.lifecycle.LifecycleOwner;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {

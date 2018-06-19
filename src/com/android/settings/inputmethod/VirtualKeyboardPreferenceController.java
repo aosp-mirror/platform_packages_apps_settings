@@ -24,14 +24,14 @@ import android.text.BidiFormatter;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 
-import androidx.preference.Preference;
-
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.preference.Preference;
 
 public class VirtualKeyboardPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {

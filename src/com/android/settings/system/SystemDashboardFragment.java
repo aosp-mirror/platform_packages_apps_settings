@@ -18,9 +18,6 @@ package com.android.settings.system;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -32,6 +29,10 @@ import com.android.settingslib.search.SearchIndexable;
 
 import java.util.Arrays;
 import java.util.List;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
 
 @SearchIndexable
 public class SystemDashboardFragment extends DashboardFragment {

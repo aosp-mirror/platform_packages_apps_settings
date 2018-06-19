@@ -21,8 +21,6 @@ import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.storage.VolumeInfo;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.util.SparseArray;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -33,6 +31,9 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.deviceinfo.StorageItemPreference;
 import com.android.settings.deviceinfo.StorageProfileFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 /**
  * Defines a {@link AbstractPreferenceController} which handles a single profile of the primary

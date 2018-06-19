@@ -17,10 +17,11 @@
 package com.android.settings.notification;
 
 import android.content.Context;
-import androidx.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
+
+import androidx.preference.Preference;
 
 public class ZenModeAutomationPreferenceController extends
         AbstractPreferenceController implements PreferenceControllerMixin {

@@ -27,8 +27,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.util.SparseArray;
 
 import com.android.settings.SettingsActivity;
@@ -45,6 +43,9 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class UserProfileControllerTest {

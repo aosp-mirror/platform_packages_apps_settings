@@ -22,11 +22,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.preference.PreferenceManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.PreferenceControllerMixin;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 public class SoundPreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener,

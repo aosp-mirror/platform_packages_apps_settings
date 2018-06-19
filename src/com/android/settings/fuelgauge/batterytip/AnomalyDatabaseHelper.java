@@ -19,13 +19,14 @@ package com.android.settings.fuelgauge.batterytip;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import androidx.annotation.IntDef;
 import android.util.Log;
 
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+
+import androidx.annotation.IntDef;
 
 /**
  * Database controls the anomaly logging(e.g. packageName, anomalyType and time)

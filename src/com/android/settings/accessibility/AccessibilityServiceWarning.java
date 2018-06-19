@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import static android.view.WindowManager.LayoutParams.PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
+
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -38,8 +40,6 @@ import com.android.settings.R;
 
 import java.util.List;
 import java.util.Locale;
-
-import static android.view.WindowManager.LayoutParams.PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
 
 /**
  * Utility class for creating the dialog that asks users for explicit permission to grant

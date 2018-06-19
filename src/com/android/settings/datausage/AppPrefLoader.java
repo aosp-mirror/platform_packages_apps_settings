@@ -19,9 +19,11 @@ package com.android.settings.datausage;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import androidx.preference.Preference;
 import android.util.ArraySet;
+
 import com.android.settingslib.utils.AsyncLoader;
+
+import androidx.preference.Preference;
 
 public class AppPrefLoader extends AsyncLoader<ArraySet<Preference>> {
     private ArraySet<String> mPackages;

@@ -24,8 +24,6 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings.Global;
-import androidx.preference.DropDownPreference;
-import androidx.preference.PreferenceScreen;
 import android.telephony.TelephonyManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -36,6 +34,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+
+import androidx.preference.DropDownPreference;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class EmergencyTonePreferenceControllerTest {

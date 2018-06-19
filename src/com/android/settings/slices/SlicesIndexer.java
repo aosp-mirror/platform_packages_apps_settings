@@ -19,17 +19,17 @@ package com.android.settings.slices;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import androidx.annotation.VisibleForTesting;
 import android.util.Log;
 
-import com.android.settings.dashboard.DashboardFragment;
-
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.SlicesDatabaseHelper.IndexColumns;
 import com.android.settings.slices.SlicesDatabaseHelper.Tables;
 
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Manages the conversion of {@link DashboardFragment} and {@link BasePreferenceController} to

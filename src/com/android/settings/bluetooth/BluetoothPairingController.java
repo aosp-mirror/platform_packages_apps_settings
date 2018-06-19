@@ -23,10 +23,12 @@ import android.text.Editable;
 import android.util.Log;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+
 import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothPairingDialogFragment.BluetoothPairingDialogListener;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfile;
+
 import java.util.Locale;
 
 /**

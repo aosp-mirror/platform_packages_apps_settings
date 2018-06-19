@@ -25,9 +25,6 @@ import android.os.Looper;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.Settings.Global;
-import androidx.annotation.VisibleForTesting;
-import androidx.core.content.res.TypedArrayUtils;
-import androidx.preference.PreferenceViewHolder;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -43,6 +40,10 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.CustomDialogPreference;
 
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.core.content.res.TypedArrayUtils;
+import androidx.preference.PreferenceViewHolder;
 
 public class CellDataPreference extends CustomDialogPreference implements TemplatePreference {
 

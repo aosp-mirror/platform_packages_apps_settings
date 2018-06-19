@@ -24,7 +24,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.os.UserManager;
 import android.print.PrintJob;
@@ -48,6 +47,8 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.lifecycle.LifecycleOwner;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class PrintSettingsPreferenceControllerTest {

@@ -30,8 +30,8 @@ import android.provider.SettingsSlicesContract;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;

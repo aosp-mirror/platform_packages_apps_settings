@@ -16,9 +16,9 @@
 
 package com.android.settings.widget;
 
-import androidx.preference.Preference;
-import android.widget.Switch;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
+import androidx.preference.Preference;
 
 /*
  * The switch controller that is used to update the switch widget in the MasterSwitchPreference

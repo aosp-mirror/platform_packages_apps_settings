@@ -19,7 +19,6 @@ package com.android.settings.bluetooth;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
-import androidx.annotation.VisibleForTesting;
 import android.util.Log;
 
 import com.android.settings.R;
@@ -29,8 +28,9 @@ import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
-import java.util.Collection;
 import java.util.Set;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Helper class that listeners to bluetooth callback and notify client when there is update in

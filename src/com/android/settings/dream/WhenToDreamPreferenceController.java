@@ -17,10 +17,12 @@
 package com.android.settings.dream;
 
 import android.content.Context;
-import androidx.preference.Preference;
+
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.dream.DreamBackend;
+
+import androidx.preference.Preference;
 
 public class WhenToDreamPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin {

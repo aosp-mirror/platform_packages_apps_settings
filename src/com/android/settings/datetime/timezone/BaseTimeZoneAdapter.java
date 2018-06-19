@@ -17,11 +17,6 @@
 package com.android.settings.datetime.timezone;
 
 import android.icu.text.BreakIterator;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.VisibleForTesting;
-import androidx.annotation.WorkerThread;
-import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +30,12 @@ import com.android.settings.datetime.timezone.BaseTimeZonePicker.OnListItemClick
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
+import androidx.annotation.WorkerThread;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Used with {@class BaseTimeZonePicker}. It renders text in each item into list view. A list of

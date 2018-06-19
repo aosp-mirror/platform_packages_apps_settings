@@ -33,7 +33,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -46,7 +45,6 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.applications.AppUtils;
@@ -58,6 +56,8 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Dashboard fragment to display application information from Settings. This activity presents
@@ -331,8 +331,10 @@ public class AppInfoDashboardFragment extends DashboardFragment
         final MenuItem uninstallUpdatesItem = menu.findItem(UNINSTALL_UPDATES);
         final boolean uninstallUpdateDisabled = getContext().getResources().getBoolean(
                 R.bool.config_disable_uninstall_update);
-        uninstallUpdatesItem.setVisible(
-                mUpdatedSysApp && !mAppsControlDisallowedBySystem && !uninstallUpdateDisabled);
+        uninstallUpdatesItem.setVisible(mUserManager.isAdminUser()
+                && mUpdatedSysApp
+                && !mAppsControlDisallowedBySystem
+                && !uninstallUpdateDisabled);
         if (uninstallUpdatesItem.isVisible()) {
             RestrictedLockUtils.setMenuItemAsDisabledByAdmin(getActivity(),
                     uninstallUpdatesItem, mAppsControlDisallowedAdmin);

@@ -18,8 +18,6 @@ package com.android.settings.testutils.shadow;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
-import androidx.annotation.NonNull;
-import androidx.core.content.PermissionChecker;
 import android.text.TextUtils;
 
 import org.robolectric.annotation.Implementation;
@@ -28,6 +26,9 @@ import org.robolectric.annotation.Implements;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.PermissionChecker;
 
 /**
  * This class provides shadow for API that is not supported in current roboletric

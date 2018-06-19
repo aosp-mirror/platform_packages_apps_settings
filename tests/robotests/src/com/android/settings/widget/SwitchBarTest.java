@@ -25,8 +25,8 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

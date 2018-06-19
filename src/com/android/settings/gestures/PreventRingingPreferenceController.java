@@ -16,7 +16,6 @@
 
 package com.android.settings.gestures;
 
-import static android.provider.Settings.Secure.VOLUME_HUSH_GESTURE;
 import static android.provider.Settings.Secure.VOLUME_HUSH_MUTE;
 import static android.provider.Settings.Secure.VOLUME_HUSH_OFF;
 import static android.provider.Settings.Secure.VOLUME_HUSH_VIBRATE;
@@ -25,7 +24,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
 
-import com.android.settings.R;
 import com.android.settings.widget.VideoPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreate;

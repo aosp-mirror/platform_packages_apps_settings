@@ -36,14 +36,6 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.preference.MultiSelectListPreference;
-import androidx.preference.SwitchPreference;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.Preference.OnPreferenceClickListener;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceViewHolder;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -65,6 +57,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.StringTokenizer;
+
+import androidx.preference.ListPreference;
+import androidx.preference.MultiSelectListPreference;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.Preference.OnPreferenceClickListener;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceViewHolder;
+import androidx.preference.SwitchPreference;
 
 public class AppRestrictionsFragment extends SettingsPreferenceFragment implements
         OnPreferenceChangeListener, OnClickListener, OnPreferenceClickListener,

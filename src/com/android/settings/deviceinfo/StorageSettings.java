@@ -35,10 +35,6 @@ import android.os.storage.StorageEventListener;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.os.storage.VolumeRecord;
-import androidx.annotation.NonNull;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.text.format.Formatter.BytesResult;
@@ -63,6 +59,11 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 
 /**
  * Panel showing both internal storage (both built-in storage and private

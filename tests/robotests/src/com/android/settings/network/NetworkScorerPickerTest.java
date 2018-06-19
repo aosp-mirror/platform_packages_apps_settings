@@ -28,8 +28,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.net.NetworkScoreManager;
 import android.net.NetworkScorerAppData;
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -46,6 +44,9 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
+
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class NetworkScorerPickerTest {

@@ -19,10 +19,7 @@ package com.android.settings.applications;
 import static android.content.pm.ApplicationInfo.FLAG_ALLOW_CLEAR_USER_DATA;
 import static android.content.pm.ApplicationInfo.FLAG_SYSTEM;
 import static android.os.storage.StorageVolume.ScopedAccessProviderContract.AUTHORITY;
-import static android.os.storage.StorageVolume.ScopedAccessProviderContract.COL_GRANTED;
 import static android.os.storage.StorageVolume.ScopedAccessProviderContract.TABLE_PERMISSIONS;
-
-import static com.android.settings.applications.AppStateDirectoryAccessBridge.DEBUG;
 
 import android.app.ActivityManager;
 import android.app.AlertDialog;
@@ -30,7 +27,6 @@ import android.app.AppGlobals;
 import android.app.GrantedUriPermission;
 import android.app.LoaderManager;
 import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -47,9 +43,6 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import android.util.Log;
 import android.util.MutableInt;
 import android.view.View;
@@ -71,6 +64,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 
 public class AppStorageSettings extends AppInfoWithHeader
         implements OnClickListener, Callbacks, DialogInterface.OnClickListener,

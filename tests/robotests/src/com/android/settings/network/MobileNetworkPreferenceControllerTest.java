@@ -25,14 +25,11 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.robolectric.shadow.api.Shadow.extract;
 
-import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.provider.Settings.Global;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 
@@ -50,6 +47,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import androidx.lifecycle.LifecycleOwner;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {

@@ -32,9 +32,6 @@ import android.net.TrafficStats;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.UserHandle;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import android.util.ArraySet;
 import android.util.IconDrawableFactory;
 import android.util.Log;
@@ -53,6 +50,10 @@ import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoader;
 import com.android.settingslib.net.UidDetail;
 import com.android.settingslib.net.UidDetailProvider;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 
 public class AppDataUsage extends DataUsageBase implements Preference.OnPreferenceChangeListener,
         DataSaverBackend.Listener {

@@ -27,13 +27,14 @@ import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
-import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.datausage.DataSaverBackend;
 import com.android.settings.widget.SwitchWidgetController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
+
+import androidx.annotation.VisibleForTesting;
 
 public class WifiTetherSwitchBarController implements SwitchWidgetController.OnSwitchChangeListener,
         LifecycleObserver, OnStart, OnStop, DataSaverBackend.Listener {

@@ -29,7 +29,6 @@ import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.content.Context;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.android.settings.dashboard.conditional.ConditionManager;
 import com.android.settings.dashboard.conditional.FocusRecyclerView;
@@ -46,6 +45,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DashboardSummaryTest {

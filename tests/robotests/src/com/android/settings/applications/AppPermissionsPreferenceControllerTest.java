@@ -17,7 +17,6 @@
 package com.android.settings.applications;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
@@ -33,8 +32,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.PermissionGroupInfo;
 import android.content.pm.PermissionInfo;
 
-import androidx.preference.Preference;
-
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -46,6 +43,8 @@ import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class AppPermissionsPreferenceControllerTest {

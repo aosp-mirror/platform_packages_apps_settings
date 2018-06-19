@@ -25,8 +25,6 @@ import static org.mockito.Mockito.when;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
@@ -41,6 +39,9 @@ import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class AnomalySummaryPreferenceControllerTest {

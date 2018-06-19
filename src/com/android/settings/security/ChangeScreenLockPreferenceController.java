@@ -21,8 +21,6 @@ import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.internal.widget.LockPatternUtils;
@@ -37,6 +35,9 @@ import com.android.settings.widget.GearPreference;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 public class ChangeScreenLockPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin, GearPreference.OnGearClickListener {

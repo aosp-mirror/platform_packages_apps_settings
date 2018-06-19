@@ -28,8 +28,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemUpdateManager;
 import android.os.UserManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -48,6 +46,9 @@ import org.robolectric.shadows.ShadowUserManager;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SystemUpdatePreferenceControllerTest {

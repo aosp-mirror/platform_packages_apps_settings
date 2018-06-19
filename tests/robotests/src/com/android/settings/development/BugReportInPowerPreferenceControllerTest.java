@@ -16,8 +16,10 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.BugReportInPowerPreferenceController.SETTING_VALUE_OFF;
-import static com.android.settings.development.BugReportInPowerPreferenceController.SETTING_VALUE_ON;
+import static com.android.settings.development.BugReportInPowerPreferenceController
+        .SETTING_VALUE_OFF;
+import static com.android.settings.development.BugReportInPowerPreferenceController
+        .SETTING_VALUE_ON;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
@@ -27,8 +29,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.os.UserManager;
 import android.provider.Settings;
-import androidx.preference.SwitchPreference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -38,6 +38,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class BugReportInPowerPreferenceControllerTest {

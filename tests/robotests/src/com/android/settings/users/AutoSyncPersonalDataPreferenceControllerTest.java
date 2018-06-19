@@ -24,8 +24,6 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.UserInfo;
 import android.os.UserManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -38,6 +36,9 @@ import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class AutoSyncPersonalDataPreferenceControllerTest {

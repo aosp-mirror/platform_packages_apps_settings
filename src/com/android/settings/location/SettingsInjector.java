@@ -37,7 +37,6 @@ import android.os.Messenger;
 import android.os.SystemClock;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.IconDrawableFactory;
@@ -56,6 +55,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
+import androidx.preference.Preference;
 
 /**
  * Adds the preferences specified by the {@link InjectedSetting} objects to a preference group.

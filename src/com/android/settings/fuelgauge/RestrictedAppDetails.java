@@ -21,9 +21,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
-import androidx.preference.CheckBoxPreference;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
 import android.util.IconDrawableFactory;
 
 import com.android.internal.annotations.VisibleForTesting;
@@ -44,6 +41,10 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.widget.FooterPreferenceMixin;
 
 import java.util.List;
+
+import androidx.preference.CheckBoxPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
 
 /**
  * Fragment to show a list of anomaly apps, where user could handle these anomalies

@@ -21,7 +21,6 @@ import android.app.Dialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemProperties;
-import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +29,8 @@ import android.widget.TextView;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+
+import androidx.annotation.VisibleForTesting;
 
 public class HardwareInfoDialogFragment extends InstrumentedDialogFragment {
 

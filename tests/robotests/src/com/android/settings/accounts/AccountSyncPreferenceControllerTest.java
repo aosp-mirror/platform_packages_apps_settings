@@ -27,7 +27,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SyncAdapterType;
 import android.os.UserHandle;
-import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -42,9 +41,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
+
+import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})

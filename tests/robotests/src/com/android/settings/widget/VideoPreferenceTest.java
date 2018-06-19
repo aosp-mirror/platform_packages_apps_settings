@@ -17,12 +17,10 @@
 package com.android.settings.widget;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.media.MediaPlayer;
-import androidx.preference.PreferenceViewHolder;
 import android.view.LayoutInflater;
 
 import com.android.settings.R;
@@ -34,6 +32,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+
+import androidx.preference.PreferenceViewHolder;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class VideoPreferenceTest {

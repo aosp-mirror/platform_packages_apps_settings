@@ -21,8 +21,6 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
 import android.util.IconDrawableFactory;
 
 import com.android.internal.annotations.VisibleForTesting;
@@ -39,6 +37,9 @@ import com.android.settings.fuelgauge.anomaly.AnomalyPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
 
 /**
  * Fragment to show a list of anomaly apps, where user could handle these anomalies

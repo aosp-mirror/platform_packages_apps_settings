@@ -17,11 +17,8 @@ package com.android.settings.connecteddevice;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static junit.framework.Assert.assertTrue;
-
 import static org.mockito.Mockito.when;
 
 import android.bluetooth.BluetoothAdapter;
@@ -29,9 +26,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.settings.R;
@@ -48,6 +42,8 @@ import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplicationPackageManager;
 import org.robolectric.util.ReflectionHelpers;
+
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowApplicationPackageManager.class)

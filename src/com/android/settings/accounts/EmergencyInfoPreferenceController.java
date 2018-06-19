@@ -22,7 +22,6 @@ import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -30,6 +29,8 @@ import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;
+
+import androidx.preference.Preference;
 
 public class EmergencyInfoPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {

@@ -24,12 +24,13 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.SystemProperties;
-import androidx.preference.Preference;
 import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settingslib.bluetooth.BluetoothDiscoverableTimeoutReceiver;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
+
+import androidx.preference.Preference;
 
 /**
  * BluetoothDiscoverableEnabler is a helper to manage the "Discoverable"

@@ -19,7 +19,6 @@ package com.android.settings.widget;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
-import androidx.preference.PreferenceViewHolder;
 import android.view.View;
 
 import com.android.settings.R;
@@ -29,6 +28,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
+
+import androidx.preference.PreferenceViewHolder;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class AppSwitchPreferenceTest {

@@ -18,11 +18,6 @@ import android.annotation.Nullable;
 import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
-import androidx.preference.DropDownPreference;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.PreferenceViewHolder;
 import android.view.View;
 
 import com.android.internal.annotations.VisibleForTesting;
@@ -40,6 +35,12 @@ import com.android.settingslib.applications.ApplicationsState.Session;
 import com.android.settingslib.widget.FooterPreference;
 
 import java.util.ArrayList;
+
+import androidx.preference.DropDownPreference;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.PreferenceViewHolder;
 
 public class PremiumSmsAccess extends EmptyTextSettings implements Callback, Callbacks, OnPreferenceChangeListener {
 

@@ -16,16 +16,23 @@
 
 package com.android.settings.notification;
 
+import static com.google.common.truth.Truth.assertThat;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertTrue;
+
+import android.app.usage.UsageEvents;
+import android.os.Parcel;
 
 import com.android.settings.notification.NotificationBackend.AppRow;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class NotificationBackendTest {
@@ -117,5 +124,52 @@ public class NotificationBackendTest {
 
         assertTrue(appRow.lockedImportance);
         assertEquals("SpecificChannel", appRow.lockedChannelId);
+    }
+
+    @Test
+    public void testGetAggregatedUsageEvents_multipleEventsAgg() {
+        List<UsageEvents.Event> events = new ArrayList<>();
+        UsageEvents.Event good = new UsageEvents.Event();
+        good.mEventType = UsageEvents.Event.NOTIFICATION_INTERRUPTION;
+        good.mPackage = "pkg";
+        good.mNotificationChannelId = "channel1";
+        good.mTimeStamp = 2;
+        events.add(good);
+        UsageEvents.Event good2 = new UsageEvents.Event();
+        good2.mEventType = UsageEvents.Event.NOTIFICATION_INTERRUPTION;
+        good2.mPackage = "pkg";
+        good2.mNotificationChannelId = "channel2";
+        good2.mTimeStamp = 3;
+        events.add(good2);
+        UsageEvents.Event good1 = new UsageEvents.Event();
+        good1.mEventType = UsageEvents.Event.NOTIFICATION_INTERRUPTION;
+        good1.mPackage = "pkg";
+        good1.mNotificationChannelId = "channel1";
+        good1.mTimeStamp = 6;
+        events.add(good1);
+        NotificationBackend backend = new NotificationBackend();
+
+        AppRow appRow = new AppRow();
+        appRow.pkg = "pkg";
+        backend.recordAggregatedUsageEvents(getUsageEvents(events), appRow);
+
+        assertThat(appRow.sentByChannel.get("channel1").sentCount).isEqualTo(2);
+        assertThat(appRow.sentByChannel.get("channel1").lastSent).isEqualTo(6);
+        assertThat(appRow.sentByChannel.get("channel1").avgSentWeekly).isEqualTo(2);
+        assertThat(appRow.sentByChannel.get("channel2").sentCount).isEqualTo(1);
+        assertThat(appRow.sentByChannel.get("channel2").lastSent).isEqualTo(3);
+        assertThat(appRow.sentByChannel.get("channel2").avgSentWeekly).isEqualTo(1);
+        assertThat(appRow.sentByApp.sentCount).isEqualTo(3);
+        assertThat(appRow.sentByApp.lastSent).isEqualTo(6);
+        assertThat(appRow.sentByApp.avgSentWeekly).isEqualTo(3);
+    }
+
+    private UsageEvents getUsageEvents(List<UsageEvents.Event> events) {
+        UsageEvents usageEvents = new UsageEvents(events, new String[] {"pkg"});
+        Parcel parcel = Parcel.obtain();
+        parcel.setDataPosition(0);
+        usageEvents.writeToParcel(parcel, 0);
+        parcel.setDataPosition(0);
+        return UsageEvents.CREATOR.createFromParcel(parcel);
     }
 }

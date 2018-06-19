@@ -21,12 +21,13 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.fuelgauge.anomaly.action.AnomalyAction;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Dialog Fragment to show action dialog for each anomaly

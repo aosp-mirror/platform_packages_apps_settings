@@ -18,7 +18,6 @@
 package com.android.settings.location;
 
 import static android.provider.SettingsSlicesContract.KEY_LOCATION;
-
 import static androidx.slice.builders.ListBuilder.ICON_IMAGE;
 
 import android.annotation.ColorInt;

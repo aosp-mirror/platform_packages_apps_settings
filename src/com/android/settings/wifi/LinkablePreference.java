@@ -17,15 +17,17 @@
 package com.android.settings.wifi;
 
 import android.content.Context;
-import androidx.annotation.Nullable;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 import android.text.Spannable;
 import android.text.method.LinkMovementMethod;
 import android.text.style.TextAppearanceSpan;
 import android.util.AttributeSet;
 import android.widget.TextView;
+
 import com.android.settings.LinkifyUtils;
+
+import androidx.annotation.Nullable;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
 /**
  * A preference with a title that can have linkable content on click.

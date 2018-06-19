@@ -44,8 +44,6 @@ import android.os.UserManager;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.applications.appinfo.AppButtonsPreferenceController;
-import com.android.settings.applications.appinfo.ButtonActionDialogFragment;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.widget.ActionButtonPreference;
 import com.android.settings.widget.ActionButtonPreferenceTest;

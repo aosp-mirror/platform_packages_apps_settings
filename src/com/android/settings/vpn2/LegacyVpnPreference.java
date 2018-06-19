@@ -19,12 +19,13 @@ package com.android.settings.vpn2;
 import static com.android.internal.net.LegacyVpnInfo.STATE_CONNECTED;
 
 import android.content.Context;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.view.View;
 
 import com.android.internal.net.VpnProfile;
 import com.android.settings.R;
+
+import androidx.preference.Preference;
 
 /**
  * {@link androidx.preference.Preference} tracks the underlying legacy vpn profile and

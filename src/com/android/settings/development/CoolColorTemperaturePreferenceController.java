@@ -18,15 +18,16 @@ package com.android.settings.development;
 
 import android.content.Context;
 import android.os.SystemProperties;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.SwitchPreference;
-import androidx.preference.Preference;
 import android.widget.Toast;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 import com.android.settingslib.development.SystemPropPoker;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
 
 public class CoolColorTemperaturePreferenceController extends DeveloperOptionsPreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {

@@ -19,16 +19,17 @@ package com.android.settings.fuelgauge.batterytip.tips;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
-import androidx.annotation.IdRes;
-import androidx.annotation.IntDef;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 import android.util.SparseIntArray;
 
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+
+import androidx.annotation.IdRes;
+import androidx.annotation.IntDef;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 /**
  * Base model for a battery tip(e.g. suggest user to turn on battery saver)

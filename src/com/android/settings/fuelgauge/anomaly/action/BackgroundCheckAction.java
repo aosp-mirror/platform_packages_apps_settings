@@ -19,11 +19,12 @@ package com.android.settings.fuelgauge.anomaly.action;
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.os.Build;
-import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Background check action for anomaly app, which means to stop app running in the background

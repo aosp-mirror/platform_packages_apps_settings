@@ -24,12 +24,13 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WifiManager.ActionListener;
 import android.os.Bundle;
-import androidx.annotation.VisibleForTesting;
 import android.util.Log;
 
 import com.android.settings.SetupWizardUtils;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.setupwizardlib.util.WizardManagerHelper;
+
+import androidx.annotation.VisibleForTesting;
 
 public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialogListener,
         DialogInterface.OnDismissListener {

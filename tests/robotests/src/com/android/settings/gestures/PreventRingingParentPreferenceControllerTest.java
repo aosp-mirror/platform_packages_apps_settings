@@ -20,14 +20,9 @@ import static android.provider.Settings.Secure.VOLUME_HUSH_GESTURE;
 import static android.provider.Settings.Secure.VOLUME_HUSH_MUTE;
 import static android.provider.Settings.Secure.VOLUME_HUSH_OFF;
 import static android.provider.Settings.Secure.VOLUME_HUSH_VIBRATE;
-
 import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
-
 import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;

@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge.batterytip;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
@@ -34,7 +33,6 @@ import android.app.StatsManager;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.provider.Settings;
 
 import com.android.settings.R;

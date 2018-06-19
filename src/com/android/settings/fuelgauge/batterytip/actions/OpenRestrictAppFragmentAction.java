@@ -16,8 +16,6 @@
 
 package com.android.settings.fuelgauge.batterytip.actions;
 
-import androidx.annotation.VisibleForTesting;
-
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.RestrictedAppDetails;
@@ -28,6 +26,8 @@ import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Action to open the {@link com.android.settings.fuelgauge.RestrictedAppDetails}

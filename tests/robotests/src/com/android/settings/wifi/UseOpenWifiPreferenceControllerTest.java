@@ -35,8 +35,6 @@ import android.content.Intent;
 import android.net.NetworkScoreManager;
 import android.net.NetworkScorerAppData;
 import android.provider.Settings;
-import androidx.preference.SwitchPreference;
-import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -57,6 +55,9 @@ import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class UseOpenWifiPreferenceControllerTest {

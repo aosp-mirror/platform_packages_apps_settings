@@ -26,8 +26,6 @@ import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.os.Bundle;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.internal.app.ColorDisplayController;
 import com.android.internal.logging.nano.MetricsProto;
@@ -48,6 +46,9 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResources.class)

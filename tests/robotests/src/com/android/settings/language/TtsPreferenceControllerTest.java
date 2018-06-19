@@ -24,8 +24,6 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TtsEngines;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -39,6 +37,9 @@ import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class TtsPreferenceControllerTest {

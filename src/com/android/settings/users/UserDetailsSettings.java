@@ -23,8 +23,6 @@ import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.preference.SwitchPreference;
-import androidx.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -33,6 +31,9 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.RestrictedLockUtils;
 
 import java.util.List;
+
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
 
 /**
  * Settings screen for configuring a specific user. It can contain user restrictions

@@ -23,8 +23,10 @@ import android.accounts.Account;
 import android.app.Activity;
 import android.content.Context;
 import android.os.UserHandle;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowContentResolver;
+
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;

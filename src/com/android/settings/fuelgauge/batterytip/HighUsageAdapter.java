@@ -19,7 +19,6 @@ package com.android.settings.fuelgauge.batterytip;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserHandle;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.IconDrawableFactory;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,9 +28,11 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-
 import com.android.settingslib.utils.StringUtil;
+
 import java.util.List;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Adapter for the high usage app list

@@ -20,9 +20,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
-import androidx.preference.DropDownPreference;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +37,10 @@ import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.preference.DropDownPreference;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
 
 /**
  * AutomaticStorageManagerSettings is the Settings screen for configuration and management of the

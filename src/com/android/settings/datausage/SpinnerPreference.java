@@ -15,13 +15,15 @@
 package com.android.settings.datausage;
 
 import android.content.Context;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
+
 import com.android.settings.R;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
 public class SpinnerPreference extends Preference implements CycleAdapter.SpinnerInterface {
 

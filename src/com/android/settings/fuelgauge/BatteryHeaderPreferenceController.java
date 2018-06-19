@@ -23,9 +23,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
 import android.os.PowerManager;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.PreferenceFragment;
-import androidx.preference.PreferenceScreen;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -37,6 +34,10 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceFragment;
+import androidx.preference.PreferenceScreen;
 
 /**
  * Controller that update the battery header view

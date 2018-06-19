@@ -25,8 +25,6 @@ import android.content.Loader;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemProperties;
-import androidx.annotation.VisibleForTesting;
-import androidx.core.content.FileProvider;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -35,6 +33,9 @@ import com.android.settings.users.RestrictedProfileSettings;
 import com.android.settingslib.license.LicenseHtmlLoader;
 
 import java.io.File;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.core.content.FileProvider;
 
 /**
  * The "dialog" that shows from "License" in the Settings app.

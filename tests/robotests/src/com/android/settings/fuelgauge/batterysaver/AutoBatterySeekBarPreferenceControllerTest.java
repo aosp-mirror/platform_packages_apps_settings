@@ -17,8 +17,6 @@ package com.android.settings.fuelgauge.batterysaver;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import androidx.lifecycle.LifecycleOwner;
-
 import android.content.Context;
 import android.provider.Settings;
 
@@ -33,6 +31,8 @@ import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import androidx.lifecycle.LifecycleOwner;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResources.class)

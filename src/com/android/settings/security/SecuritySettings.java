@@ -29,7 +29,6 @@ import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.enterprise.EnterprisePrivacyPreferenceController;
-import com.android.settings.enterprise.ManageDeviceAdminPreferenceController;
 import com.android.settings.fingerprint.FingerprintProfileStatusPreferenceController;
 import com.android.settings.fingerprint.FingerprintStatusPreferenceController;
 import com.android.settings.location.LocationPreferenceController;
@@ -114,7 +113,6 @@ public class SecuritySettings extends DashboardFragment {
             Lifecycle lifecycle, SecuritySettings host) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new LocationPreferenceController(context, lifecycle));
-        controllers.add(new ManageDeviceAdminPreferenceController(context));
         controllers.add(new EnterprisePrivacyPreferenceController(context));
         controllers.add(new ManageTrustAgentsPreferenceController(context));
         controllers.add(new ScreenPinningPreferenceController(context));

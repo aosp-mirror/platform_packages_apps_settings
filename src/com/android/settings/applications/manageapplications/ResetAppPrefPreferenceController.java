@@ -18,7 +18,6 @@ package com.android.settings.applications.manageapplications;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 
 import com.android.settings.core.PreferenceControllerMixin;
@@ -27,6 +26,8 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreate;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
+
+import androidx.preference.Preference;
 
 public class ResetAppPrefPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnCreate, OnSaveInstanceState {

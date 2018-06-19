@@ -18,13 +18,14 @@ package com.android.settings.development;
 
 import android.content.Context;
 import android.os.SystemProperties;
-import androidx.preference.SwitchPreference;
-import androidx.preference.Preference;
 import android.view.View;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 import com.android.settingslib.development.SystemPropPoker;
+
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
 
 public class ShowLayoutBoundsPreferenceController extends DeveloperOptionsPreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {

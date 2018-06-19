@@ -16,15 +16,15 @@
 
 package com.android.settings.applications.manageapplications;
 
+import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING;
+import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry
         .FILTER_APPS_ALL;
 import static com.android.settings.applications.manageapplications.ManageApplications
         .LIST_TYPE_MAIN;
 import static com.android.settings.applications.manageapplications.ManageApplications
         .LIST_TYPE_NOTIFICATION;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
@@ -35,9 +35,6 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
-import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING;
-import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE;
 
 import android.app.Activity;
 import android.content.Context;

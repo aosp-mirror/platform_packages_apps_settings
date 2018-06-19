@@ -37,8 +37,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -59,6 +57,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
+
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class InstantAppButtonsPreferenceControllerTest {

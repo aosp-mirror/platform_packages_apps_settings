@@ -28,10 +28,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenModeConfig.ScheduleInfo;
-import androidx.preference.SwitchPreference;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceClickListener;
-import androidx.preference.PreferenceScreen;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.widget.TimePicker;
@@ -46,6 +42,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceClickListener;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
     private static final String KEY_DAYS = "days";

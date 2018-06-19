@@ -28,10 +28,6 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.TwoStatePreference;
 import android.telephony.TelephonyManager;
 
 import com.android.settings.DefaultRingtonePreference;
@@ -44,6 +40,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.TwoStatePreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class WorkSoundPreferenceControllerTest {

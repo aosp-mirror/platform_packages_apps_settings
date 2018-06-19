@@ -18,12 +18,13 @@ package com.android.settings.wifi.p2p;
 
 import android.content.Context;
 import android.net.wifi.p2p.WifiP2pDevice;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 public class P2pThisDevicePreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {

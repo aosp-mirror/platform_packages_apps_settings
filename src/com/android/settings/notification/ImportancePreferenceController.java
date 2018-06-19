@@ -26,11 +26,12 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.media.RingtoneManager;
-import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.RestrictedListPreference;
 import com.android.settings.core.PreferenceControllerMixin;
+
+import androidx.preference.Preference;
 
 public class ImportancePreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener  {

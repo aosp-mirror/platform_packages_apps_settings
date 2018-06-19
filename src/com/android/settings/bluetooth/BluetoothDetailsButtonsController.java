@@ -17,13 +17,14 @@
 package com.android.settings.bluetooth;
 
 import android.content.Context;
-import androidx.preference.PreferenceFragment;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.widget.ActionButtonPreference;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+
+import androidx.preference.PreferenceFragment;
+import androidx.preference.PreferenceScreen;
 
 /**
  * This class adds two buttons: one to connect/disconnect from a device (depending on the current

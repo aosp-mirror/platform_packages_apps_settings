@@ -18,12 +18,13 @@ package com.android.settings.notification;
 
 import android.app.FragmentManager;
 import android.content.Context;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 public class ZenModeDurationPreferenceController extends AbstractZenModePreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceClickListener {

@@ -27,7 +27,6 @@ import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
-import androidx.lifecycle.LifecycleObserver;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -58,6 +57,8 @@ import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.lifecycle.LifecycleObserver;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class LanguageAndInputSettingsTest {

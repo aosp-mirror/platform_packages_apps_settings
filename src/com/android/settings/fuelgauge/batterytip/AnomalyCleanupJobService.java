@@ -22,13 +22,14 @@ import android.app.job.JobScheduler;
 import android.app.job.JobService;
 import android.content.ComponentName;
 import android.content.Context;
-import androidx.annotation.VisibleForTesting;
 import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.concurrent.TimeUnit;
+
+import androidx.annotation.VisibleForTesting;
 
 /** A JobService to clean up obsolete data in anomaly database */
 public class AnomalyCleanupJobService extends JobService {

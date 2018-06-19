@@ -1,7 +1,9 @@
 package com.android.settings.testutils.shadow;
 
 import android.content.Context;
+
 import com.android.settings.network.MobileNetworkPreferenceController;
+
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 

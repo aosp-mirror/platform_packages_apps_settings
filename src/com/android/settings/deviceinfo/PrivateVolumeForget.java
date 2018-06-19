@@ -24,7 +24,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeRecord;
-import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +37,8 @@ import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.search.actionbar.SearchMenuController;
+
+import androidx.annotation.VisibleForTesting;
 
 public class PrivateVolumeForget extends InstrumentedFragment {
     @VisibleForTesting
