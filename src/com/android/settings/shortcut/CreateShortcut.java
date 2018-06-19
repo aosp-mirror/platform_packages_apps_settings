@@ -21,6 +21,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ShortcutInfo;
@@ -33,6 +34,7 @@ import android.graphics.drawable.Icon;
 import android.graphics.drawable.LayerDrawable;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +54,7 @@ import androidx.annotation.VisibleForTesting;
 
 public class CreateShortcut extends LauncherActivity {
 
+    private static final String TAG = "CreateShortcut";
     @VisibleForTesting
     static final String SHORTCUT_ID_PREFIX = "component-shortcut-";
 
@@ -76,11 +79,12 @@ public class CreateShortcut extends LauncherActivity {
         ShortcutManager sm = getSystemService(ShortcutManager.class);
         ActivityInfo activityInfo = resolveInfo.activityInfo;
 
-        Icon maskableIcon = activityInfo.icon != 0 ? Icon.createWithAdaptiveBitmap(
-                createIcon(activityInfo.icon,
+        Icon maskableIcon = activityInfo.icon != 0 && activityInfo.applicationInfo != null
+                ? Icon.createWithAdaptiveBitmap(
+                createIcon(activityInfo.applicationInfo, activityInfo.icon,
                         R.layout.shortcut_badge_maskable,
-                        getResources().getDimensionPixelSize(R.dimen.shortcut_size_maskable))) :
-                Icon.createWithResource(this, R.drawable.ic_launcher_settings);
+                        getResources().getDimensionPixelSize(R.dimen.shortcut_size_maskable)))
+                : Icon.createWithResource(this, R.drawable.ic_launcher_settings);
         String shortcutId = SHORTCUT_ID_PREFIX +
                 shortcutIntent.getComponent().flattenToShortString();
         ShortcutInfo info = new ShortcutInfo.Builder(this, shortcutId)
@@ -98,7 +102,9 @@ public class CreateShortcut extends LauncherActivity {
         intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, label);
 
         if (activityInfo.icon != 0) {
-            intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, createIcon(activityInfo.icon,
+            intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, createIcon(
+                    activityInfo.applicationInfo,
+                    activityInfo.icon,
                     R.layout.shortcut_badge,
                     getResources().getDimensionPixelSize(R.dimen.shortcut_size)));
         }
@@ -114,20 +120,29 @@ public class CreateShortcut extends LauncherActivity {
                 info.activityInfo.name);
     }
 
-    private Bitmap createIcon(int resource, int layoutRes, int size) {
-        Context context = new ContextThemeWrapper(this, android.R.style.Theme_Material);
-        View view = LayoutInflater.from(context).inflate(layoutRes, null);
-        Drawable iconDrawable = getDrawable(resource);
-        if (iconDrawable instanceof LayerDrawable) {
-            iconDrawable = ((LayerDrawable) iconDrawable).getDrawable(1);
-        }
-        ((ImageView) view.findViewById(android.R.id.icon)).setImageDrawable(iconDrawable);
-
-        int spec = MeasureSpec.makeMeasureSpec(size, MeasureSpec.EXACTLY);
+    private Bitmap createIcon(ApplicationInfo app, int resource, int layoutRes, int size) {
+        final Context context = new ContextThemeWrapper(this, android.R.style.Theme_Material);
+        final View view = LayoutInflater.from(context).inflate(layoutRes, null);
+        final int spec = MeasureSpec.makeMeasureSpec(size, MeasureSpec.EXACTLY);
         view.measure(spec, spec);
-        Bitmap bitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(),
+        final Bitmap bitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(),
                 Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
+        final Canvas canvas = new Canvas(bitmap);
+
+        Drawable iconDrawable = null;
+        try {
+            iconDrawable =
+                    getPackageManager().getResourcesForApplication(app).getDrawable(resource);
+            if (iconDrawable instanceof LayerDrawable) {
+                iconDrawable = ((LayerDrawable) iconDrawable).getDrawable(1);
+            }
+            ((ImageView) view.findViewById(android.R.id.icon)).setImageDrawable(iconDrawable);
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.w(TAG, "Cannot load icon from app " + app + ", returning a default icon");
+            Icon icon = Icon.createWithResource(this, R.drawable.ic_launcher_settings);
+            ((ImageView) view.findViewById(android.R.id.icon)).setImageIcon(icon);
+        }
+
         view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
         view.draw(canvas);
         return bitmap;
@@ -147,18 +162,25 @@ public class CreateShortcut extends LauncherActivity {
      * Perform query on package manager for list items.  The default
      * implementation queries for activities.
      */
+    @Override
     protected List<ResolveInfo> onQueryPackageManager(Intent queryIntent) {
         List<ResolveInfo> activities = getPackageManager().queryIntentActivities(queryIntent,
                 PackageManager.GET_META_DATA);
         final ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (activities == null) return null;
+        if (activities == null) {
+            return null;
+        }
         for (int i = activities.size() - 1; i >= 0; i--) {
             ResolveInfo info = activities.get(i);
             if (info.activityInfo.name.endsWith(TetherSettingsActivity.class.getSimpleName())) {
                 if (!cm.isTetheringSupported()) {
                     activities.remove(i);
                 }
+            }
+            if (!info.activityInfo.applicationInfo.isSystemApp()) {
+                Log.d(TAG, "Skipping non-system app: " + info.activityInfo);
+                activities.remove(i);
             }
         }
         return activities;
