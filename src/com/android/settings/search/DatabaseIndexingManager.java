@@ -55,11 +55,9 @@ import android.database.sqlite.SQLiteException;
 import android.os.Build;
 import android.provider.SearchIndexablesContract;
 import android.provider.SearchIndexablesContract.SiteMapColumns;
-import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.indexing.IndexData;
 import com.android.settings.search.indexing.IndexDataConverter;
 import com.android.settings.search.indexing.PreIndexData;
@@ -69,6 +67,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Consumes the SearchIndexableProvider content providers.

@@ -17,8 +17,6 @@
 package com.android.settings.development;
 
 import android.content.Context;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -26,6 +24,9 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceScreen;
 
 public class PictureColorModePreferenceController extends DeveloperOptionsPreferenceController
         implements LifecycleObserver, OnResume, OnPause, PreferenceControllerMixin {

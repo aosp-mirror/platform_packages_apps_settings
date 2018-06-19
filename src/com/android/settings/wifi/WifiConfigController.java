@@ -34,11 +34,9 @@ import android.net.wifi.WifiEnterpriseConfig;
 import android.net.wifi.WifiEnterpriseConfig.Eap;
 import android.net.wifi.WifiEnterpriseConfig.Phase2;
 import android.net.wifi.WifiInfo;
-import android.os.Handler;
 import android.os.UserManager;
 import android.security.Credentials;
 import android.security.KeyStore;
-import androidx.annotation.VisibleForTesting;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -70,6 +68,8 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * The class for allowing UIs like {@link WifiDialog} and {@link WifiConfigUiBase} to

@@ -17,7 +17,6 @@ package com.android.settings.accessibility;
 
 import static android.os.Vibrator.VibrationIntensity;
 
-import androidx.annotation.VisibleForTesting;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.graphics.drawable.Drawable;
@@ -30,8 +29,6 @@ import android.provider.Settings;
 import android.util.ArrayMap;
 import android.util.Log;
 
-import com.android.internal.accessibility.AccessibilityShortcutController;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.widget.CandidateInfo;
@@ -40,6 +37,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Fragment for changing vibration settings.

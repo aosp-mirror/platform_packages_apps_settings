@@ -28,8 +28,6 @@ import android.os.Handler;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -46,6 +44,9 @@ import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.ArrayList;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 public class LockScreenNotificationPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener,

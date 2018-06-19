@@ -18,8 +18,6 @@ package com.android.settings.dashboard;
 import android.annotation.IntDef;
 import android.graphics.drawable.Drawable;
 import android.service.settings.suggestions.Suggestion;
-import androidx.annotation.VisibleForTesting;
-import androidx.recyclerview.widget.DiffUtil;
 import android.text.TextUtils;
 
 import com.android.settings.R;
@@ -32,6 +30,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.recyclerview.widget.DiffUtil;
 
 /**
  * Description about data list used in the DashboardAdapter. In the data list each item can be

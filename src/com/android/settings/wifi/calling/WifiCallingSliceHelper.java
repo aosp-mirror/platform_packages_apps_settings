@@ -28,15 +28,8 @@ import android.os.PersistableBundle;
 import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
-import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
-
-import androidx.core.graphics.drawable.IconCompat;
-import androidx.slice.Slice;
-import androidx.slice.builders.ListBuilder;
-import androidx.slice.builders.ListBuilder.RowBuilder;
-import androidx.slice.builders.SliceAction;
 
 import com.android.ims.ImsConfig;
 import com.android.ims.ImsManager;
@@ -54,6 +47,12 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+
+import androidx.core.graphics.drawable.IconCompat;
+import androidx.slice.Slice;
+import androidx.slice.builders.ListBuilder;
+import androidx.slice.builders.ListBuilder.RowBuilder;
+import androidx.slice.builders.SliceAction;
 
 
 /**

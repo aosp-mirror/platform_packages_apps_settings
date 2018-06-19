@@ -19,12 +19,13 @@ package com.android.settings.security;
 import android.content.Context;
 import android.os.UserManager;
 import android.security.KeyStore;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+
+import androidx.preference.PreferenceScreen;
 
 public class ResetCredentialsPreferenceController extends RestrictedEncryptionPreferenceController
         implements LifecycleObserver, OnResume {

@@ -17,7 +17,6 @@
 package com.android.settings.language;
 
 import android.content.Context;
-import androidx.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -28,6 +27,8 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;
+
+import androidx.preference.Preference;
 
 public class PhoneLanguagePreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {

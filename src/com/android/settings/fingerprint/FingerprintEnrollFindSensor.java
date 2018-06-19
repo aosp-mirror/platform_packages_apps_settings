@@ -20,7 +20,6 @@ import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.os.UserHandle;
-import androidx.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 
@@ -30,6 +29,8 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.fingerprint.FingerprintEnrollSidecar.Listener;
 import com.android.settings.password.ChooseLockSettingsHelper;
+
+import androidx.annotation.Nullable;
 
 /**
  * Activity explaining the fingerprint sensor location for fingerprint enrollment.

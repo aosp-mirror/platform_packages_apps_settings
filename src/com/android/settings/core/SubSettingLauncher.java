@@ -22,12 +22,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
-import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
 import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
+
+import androidx.annotation.VisibleForTesting;
 
 public class SubSettingLauncher {
 

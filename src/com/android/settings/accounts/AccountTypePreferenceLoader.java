@@ -29,11 +29,6 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.content.res.Resources.Theme;
 import android.os.UserHandle;
-import androidx.preference.PreferenceFragment;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceClickListener;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -43,6 +38,12 @@ import com.android.settings.location.LocationSettings;
 import com.android.settings.utils.LocalClassLoaderContextThemeWrapper;
 import com.android.settingslib.accounts.AuthenticatorHelper;
 import com.android.settingslib.core.instrumentation.Instrumentable;
+
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceClickListener;
+import androidx.preference.PreferenceFragment;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
 
 /**
  * Class to load the preference screen to be added to the settings page for the specific account

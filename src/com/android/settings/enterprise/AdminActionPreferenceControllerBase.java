@@ -15,7 +15,6 @@
 package com.android.settings.enterprise;
 
 import android.content.Context;
-import androidx.preference.Preference;
 import android.text.format.DateUtils;
 
 import com.android.settings.R;
@@ -24,6 +23,8 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.Date;
+
+import androidx.preference.Preference;
 
 public abstract class AdminActionPreferenceControllerBase extends
         AbstractPreferenceController implements PreferenceControllerMixin {

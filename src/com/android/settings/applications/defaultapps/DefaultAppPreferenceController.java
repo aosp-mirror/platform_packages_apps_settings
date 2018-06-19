@@ -24,7 +24,6 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -35,6 +34,8 @@ import com.android.settings.widget.GearPreference;
 import com.android.settingslib.TwoTargetPreference;
 import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.core.AbstractPreferenceController;
+
+import androidx.preference.Preference;
 
 public abstract class DefaultAppPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {

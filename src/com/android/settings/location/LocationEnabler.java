@@ -13,8 +13,11 @@
  */
 package com.android.settings.location;
 
+import static com.android.settingslib.RestrictedLockUtils.checkIfRestrictionEnforced;
+import static com.android.settingslib.Utils.updateLocationEnabled;
+import static com.android.settingslib.Utils.updateLocationMode;
+
 import android.app.ActivityManager;
-import android.Manifest.permission;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -23,7 +26,6 @@ import android.location.LocationManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
-import androidx.annotation.VisibleForTesting;
 import android.util.Log;
 
 import com.android.settings.Utils;
@@ -33,9 +35,7 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
-import static com.android.settingslib.Utils.updateLocationMode;
-import static com.android.settingslib.Utils.updateLocationEnabled;
-import static com.android.settingslib.RestrictedLockUtils.checkIfRestrictionEnforced;
+import androidx.annotation.VisibleForTesting;
 
 
 /**

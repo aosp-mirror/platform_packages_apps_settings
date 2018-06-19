@@ -16,6 +16,8 @@
 
 package com.android.settings.core.instrumentation;
 
+import static com.google.common.truth.Truth.assertWithMessage;
+
 import android.app.Fragment;
 import android.util.ArraySet;
 
@@ -25,8 +27,6 @@ import com.android.settingslib.core.instrumentation.Instrumentable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
-import static com.google.common.truth.Truth.assertWithMessage;
 
 /**
  * {@link CodeInspector} that verifies all fragments implements Instrumentable.

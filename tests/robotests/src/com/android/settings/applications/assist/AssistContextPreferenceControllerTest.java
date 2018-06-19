@@ -24,12 +24,9 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import androidx.lifecycle.LifecycleOwner;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.TwoStatePreference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -41,6 +38,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
+
+import androidx.lifecycle.LifecycleOwner;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.TwoStatePreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class AssistContextPreferenceControllerTest {

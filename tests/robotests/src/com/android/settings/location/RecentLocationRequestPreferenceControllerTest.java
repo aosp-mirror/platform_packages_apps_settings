@@ -27,14 +27,11 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
+
 import com.android.settings.R;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -42,8 +39,7 @@ import com.android.settings.widget.AppPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.location.RecentLocationApps;
 import com.android.settingslib.location.RecentLocationApps.Request;
-import java.util.ArrayList;
-import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,6 +50,14 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import androidx.lifecycle.LifecycleOwner;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class RecentLocationRequestPreferenceControllerTest {

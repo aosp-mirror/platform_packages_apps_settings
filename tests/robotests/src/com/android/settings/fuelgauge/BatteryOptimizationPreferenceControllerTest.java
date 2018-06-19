@@ -25,8 +25,6 @@ import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.content.Intent;
-import androidx.preference.SwitchPreference;
-import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -40,6 +38,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
 
 @RunWith(RobolectricTestRunner.class)
 public class BatteryOptimizationPreferenceControllerTest {

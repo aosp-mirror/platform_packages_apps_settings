@@ -20,18 +20,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
-import com.android.settings.applications.AppInfoBase;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.preference.PreferenceScreen;
 
 public class ChannelNotificationSettings extends NotificationSettingsBase {
     private static final String TAG = "ChannelSettings";

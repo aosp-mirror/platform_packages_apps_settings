@@ -19,7 +19,6 @@ package com.android.settings.wifi.calling;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
-import androidx.legacy.app.FragmentPagerAdapter;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.util.Log;
@@ -38,6 +37,8 @@ import com.android.settings.widget.RtlCompatibleViewPager;
 import com.android.settings.widget.SlidingTabLayout;
 
 import java.util.List;
+
+import androidx.legacy.app.FragmentPagerAdapter;
 
 /**
  * "Wi-Fi Calling settings" screen. This is the container fragment which holds

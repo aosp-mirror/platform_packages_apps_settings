@@ -30,7 +30,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.service.autofill.AutofillService;
 import android.service.autofill.AutofillServiceInfo;
-import androidx.preference.Preference;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
@@ -44,6 +43,8 @@ import com.android.settingslib.widget.CandidateInfo;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.preference.Preference;
 
 public class DefaultAutofillPicker extends DefaultAppPickerFragment {
 

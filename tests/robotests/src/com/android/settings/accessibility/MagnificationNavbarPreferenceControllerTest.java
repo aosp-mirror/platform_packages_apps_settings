@@ -19,15 +19,12 @@ package com.android.settings.accessibility;
 import static com.android.settings.accessibility.MagnificationPreferenceFragment.OFF;
 import static com.android.settings.accessibility.MagnificationPreferenceFragment.ON;
 import static com.android.settings.search.ResultPayload.Availability.AVAILABLE;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
 import android.content.res.Resources;
 import android.provider.Settings;
-import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -42,6 +39,8 @@ import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
+
+import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class MagnificationNavbarPreferenceControllerTest {

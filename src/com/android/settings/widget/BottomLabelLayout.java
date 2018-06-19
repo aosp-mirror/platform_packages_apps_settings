@@ -18,13 +18,14 @@ package com.android.settings.widget;
 
 import android.annotation.Nullable;
 import android.content.Context;
-import androidx.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.android.settingslib.R;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * An extension of LinearLayout that automatically switches to vertical

@@ -17,12 +17,13 @@
 package com.android.settings.wifi.p2p;
 
 import android.content.Context;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
 
 public abstract class P2pCategoryPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {

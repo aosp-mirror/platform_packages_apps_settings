@@ -18,7 +18,6 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
@@ -37,14 +36,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowAccessibilityManager;
+import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.robolectric.shadow.api.Shadow;
-import org.robolectric.shadows.ShadowAccessibilityManager;
-import org.xmlpull.v1.XmlPullParserException;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class AccessibilitySlicePreferenceControllerTest {

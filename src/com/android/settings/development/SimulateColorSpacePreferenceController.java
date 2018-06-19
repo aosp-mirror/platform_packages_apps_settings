@@ -20,14 +20,15 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
 import android.provider.Settings;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
 import android.view.accessibility.AccessibilityManager;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
 
 public class SimulateColorSpacePreferenceController extends DeveloperOptionsPreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {

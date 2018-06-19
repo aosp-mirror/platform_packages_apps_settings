@@ -22,7 +22,6 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.os.UserHandle;
 import android.provider.Settings;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -34,6 +33,8 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.security.trustagent.TrustAgentManager;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
+
+import androidx.preference.Preference;
 
 public class LockAfterTimeoutPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {

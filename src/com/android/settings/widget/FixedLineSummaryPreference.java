@@ -16,12 +16,14 @@ package com.android.settings.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 import android.text.TextUtils.TruncateAt;
 import android.util.AttributeSet;
 import android.widget.TextView;
+
 import com.android.settings.R;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
 /**
  * A preference whose summary text will only span one single line.

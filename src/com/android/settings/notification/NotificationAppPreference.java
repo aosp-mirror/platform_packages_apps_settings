@@ -16,7 +16,6 @@
 package com.android.settings.notification;
 
 import android.content.Context;
-import androidx.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Switch;
@@ -24,6 +23,8 @@ import android.widget.Switch;
 import com.android.settings.R;
 import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settingslib.RestrictedLockUtils;
+
+import androidx.preference.PreferenceViewHolder;
 
 /**
  * Shows an app icon, title and summary. Has a second switch touch target.

@@ -19,14 +19,15 @@ package com.android.settings.notification;
 import android.app.AutomaticZenRule;
 import android.app.Fragment;
 import android.content.Context;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.Map;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
 
 public class ZenModeAutomaticRulesPreferenceController extends
         AbstractZenModeAutomaticRulePreferenceController {

@@ -17,11 +17,12 @@
 package com.android.settings.dashboard;
 
 import android.content.Context;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 /**
  * PreferenceController for a dashboard_tile_placeholder, a special preference marking where

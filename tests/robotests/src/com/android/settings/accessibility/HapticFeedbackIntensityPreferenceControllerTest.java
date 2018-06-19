@@ -18,7 +18,6 @@ package com.android.settings.accessibility;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
 
 import com.android.settings.core.BasePreferenceController;
@@ -30,6 +29,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+
+import androidx.lifecycle.LifecycleOwner;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class HapticFeedbackIntensityPreferenceControllerTest {

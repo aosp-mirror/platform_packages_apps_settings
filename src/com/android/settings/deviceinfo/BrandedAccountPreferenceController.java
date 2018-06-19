@@ -19,8 +19,6 @@ package com.android.settings.deviceinfo;
 import android.accounts.Account;
 import android.content.Context;
 import android.os.Bundle;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -29,6 +27,9 @@ import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.overlay.FeatureFactory;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 public class BrandedAccountPreferenceController extends BasePreferenceController {
     private static final String KEY_PREFERENCE_TITLE = "branded_account";

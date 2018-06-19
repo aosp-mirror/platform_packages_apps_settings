@@ -17,12 +17,14 @@ package com.android.settings.applications;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.util.AttributeSet;
+import android.view.ViewGroup.LayoutParams;
+
+import com.android.settings.R;
+
 import androidx.core.content.res.TypedArrayUtils;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
-import android.util.AttributeSet;
-import android.view.ViewGroup.LayoutParams;
-import com.android.settings.R;
 
 /**
  * A blank preference that has a specified height by android:layout_height.  It can be used

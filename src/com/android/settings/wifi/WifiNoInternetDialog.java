@@ -16,6 +16,10 @@
 
 package com.android.settings.wifi;
 
+import static android.net.ConnectivityManager.ACTION_PROMPT_LOST_VALIDATION;
+import static android.net.ConnectivityManager.ACTION_PROMPT_UNVALIDATED;
+import static android.net.NetworkCapabilities.NET_CAPABILITY_VALIDATED;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -36,10 +40,6 @@ import android.widget.CheckBox;
 import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
 import com.android.settings.R;
-
-import static android.net.ConnectivityManager.ACTION_PROMPT_LOST_VALIDATION;
-import static android.net.ConnectivityManager.ACTION_PROMPT_UNVALIDATED;
-import static android.net.NetworkCapabilities.NET_CAPABILITY_VALIDATED;
 
 public final class WifiNoInternetDialog extends AlertActivity implements
         DialogInterface.OnClickListener {

@@ -18,7 +18,6 @@ package com.android.settings.deviceinfo;
 
 import static android.os.storage.DiskInfo.EXTRA_DISK_ID;
 import static android.os.storage.VolumeInfo.EXTRA_VOLUME_ID;
-
 import static com.android.settings.deviceinfo.StorageSettings.TAG;
 
 import android.annotation.LayoutRes;

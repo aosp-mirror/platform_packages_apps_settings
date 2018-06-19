@@ -25,7 +25,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserManager;
-import androidx.annotation.VisibleForTesting;
 import android.view.Menu;
 import android.view.MenuInflater;
 
@@ -35,6 +34,8 @@ import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * BluetoothSettings is the Settings screen for Bluetooth configuration and

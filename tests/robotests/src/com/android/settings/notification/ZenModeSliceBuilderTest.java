@@ -17,9 +17,7 @@
 package com.android.settings.notification;
 
 import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
@@ -43,7 +41,6 @@ import org.robolectric.annotation.Config;
 
 import java.util.List;
 
-import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.SliceItem;
 import androidx.slice.SliceMetadata;

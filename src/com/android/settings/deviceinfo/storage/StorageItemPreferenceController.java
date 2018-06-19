@@ -26,9 +26,6 @@ import android.net.TrafficStats;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.storage.VolumeInfo;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.util.Log;
 import android.util.SparseArray;
 
@@ -49,6 +46,10 @@ import com.android.settingslib.deviceinfo.StorageVolumeProvider;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 /**
  * StorageItemPreferenceController handles the storage line items which summarize the storage

@@ -17,7 +17,6 @@
 package com.android.settings.core;
 
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEYWORDS;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;

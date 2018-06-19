@@ -23,9 +23,6 @@ import android.net.Uri;
 import android.os.BatteryManager;
 import android.os.Handler;
 import android.provider.Settings;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedLockUtils;
@@ -35,6 +32,10 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 
 public class StayAwakePreferenceController extends DeveloperOptionsPreferenceController

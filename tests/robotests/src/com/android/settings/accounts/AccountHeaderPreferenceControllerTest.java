@@ -24,11 +24,8 @@ import static org.mockito.Mockito.when;
 
 import android.accounts.Account;
 import android.app.Activity;
-import androidx.lifecycle.LifecycleOwner;
 import android.os.Bundle;
 import android.os.UserHandle;
-import androidx.preference.PreferenceFragment;
-import androidx.preference.PreferenceScreen;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -47,6 +44,10 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+
+import androidx.lifecycle.LifecycleOwner;
+import androidx.preference.PreferenceFragment;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = AccountHeaderPreferenceControllerTest.ShadowAuthenticatorHelper.class)

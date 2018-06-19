@@ -20,7 +20,6 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -31,6 +30,8 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
 
 import java.util.Comparator;
+
+import androidx.preference.PreferenceViewHolder;
 
 public class UserPreference extends RestrictedPreference {
     private static final int ALPHA_ENABLED = 255;

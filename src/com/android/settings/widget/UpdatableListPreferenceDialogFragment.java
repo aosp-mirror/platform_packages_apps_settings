@@ -19,12 +19,14 @@ import android.app.AlertDialog;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.ListPreference;
-import androidx.preference.PreferenceDialogFragment;
+
 import com.android.settingslib.core.instrumentation.Instrumentable;
 
 import java.util.ArrayList;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.ListPreference;
+import androidx.preference.PreferenceDialogFragment;
 
 /**
  * {@link PreferenceDialogFragment} that updates the available options

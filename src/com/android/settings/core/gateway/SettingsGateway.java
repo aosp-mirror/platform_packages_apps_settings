@@ -17,7 +17,6 @@
 package com.android.settings.core.gateway;
 
 import com.android.settings.DateTimeSettings;
-import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminSettings;
 import com.android.settings.DisplaySettings;
 import com.android.settings.IccLockSettings;
 import com.android.settings.MasterClear;
@@ -50,6 +49,7 @@ import com.android.settings.applications.appops.BackgroundCheckSummary;
 import com.android.settings.applications.assist.ManageAssist;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.applications.managedomainurls.ManageDomainUrls;
+import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminSettings;
 import com.android.settings.backup.PrivacySettings;
 import com.android.settings.backup.ToggleBackupSettingFragment;
 import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;

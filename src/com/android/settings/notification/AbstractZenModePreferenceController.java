@@ -29,8 +29,6 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.service.notification.ScheduleCalendar;
 import android.service.notification.ZenModeConfig;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -41,6 +39,9 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 abstract public class AbstractZenModePreferenceController extends
         AbstractPreferenceController implements PreferenceControllerMixin, LifecycleObserver,

@@ -21,7 +21,6 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.provider.Settings;
-import androidx.preference.Preference;
 import android.text.format.DateUtils;
 
 import com.android.settings.R;
@@ -35,6 +34,8 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
+
+import androidx.preference.Preference;
 
 /**
  * Common base for testing subclasses of {@link AdminActionPreferenceControllerBase}.

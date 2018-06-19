@@ -22,8 +22,6 @@ import static android.provider.Settings.Secure.ASSIST_GESTURE_SILENCE_ALERTS_ENA
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
@@ -31,6 +29,9 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.search.ResultPayload;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 public class AssistGestureSettingsPreferenceController extends GesturePreferenceController {
 

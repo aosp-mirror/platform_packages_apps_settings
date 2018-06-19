@@ -18,8 +18,6 @@ package com.android.settings.core;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.annotation.XmlRes;
-import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -29,6 +27,9 @@ import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settingslib.core.lifecycle.ObservablePreferenceFragment;
+
+import androidx.annotation.XmlRes;
+import androidx.preference.PreferenceScreen;
 
 /**
  * Instrumented fragment that logs visibility state.

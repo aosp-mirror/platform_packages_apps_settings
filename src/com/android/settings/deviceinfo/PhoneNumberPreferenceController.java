@@ -17,9 +17,6 @@
 package com.android.settings.deviceinfo;
 
 import android.content.Context;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -34,6 +31,10 @@ import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 public class PhoneNumberPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin {

@@ -26,7 +26,6 @@ import static org.mockito.Mockito.when;
 import android.app.Activity;
 import android.content.Context;
 import android.os.UserManager;
-import androidx.preference.PreferenceScreen;
 import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -45,6 +44,8 @@ import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DefaultAppPickerFragmentTest {

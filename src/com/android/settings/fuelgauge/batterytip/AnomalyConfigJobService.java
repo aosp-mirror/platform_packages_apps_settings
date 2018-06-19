@@ -25,7 +25,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.provider.Settings;
-import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
@@ -34,6 +33,8 @@ import com.android.settings.R;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.concurrent.TimeUnit;
+
+import androidx.annotation.VisibleForTesting;
 
 /** A JobService check whether to update the anomaly config periodically */
 public class AnomalyConfigJobService extends JobService {

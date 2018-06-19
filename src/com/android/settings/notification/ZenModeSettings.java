@@ -35,9 +35,6 @@ import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
 
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.CheckBoxPreference;
-
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -52,6 +49,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Predicate;
+
+import androidx.annotation.VisibleForTesting;
 
 @SearchIndexable
 public class ZenModeSettings extends ZenModeSettingsBase {

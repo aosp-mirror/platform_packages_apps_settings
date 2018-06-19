@@ -24,9 +24,6 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
-import androidx.core.content.res.TypedArrayUtils;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.BulletSpan;
@@ -39,6 +36,10 @@ import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
+
+import androidx.core.content.res.TypedArrayUtils;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
 public class ClearDefaultsPreference extends Preference {
 

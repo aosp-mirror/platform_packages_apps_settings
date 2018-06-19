@@ -25,7 +25,6 @@ import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
-import androidx.preference.Preference;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
@@ -34,6 +33,8 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedLockUtils;
 
 import java.util.ArrayList;
+
+import androidx.preference.Preference;
 
 public class VisibilityPreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {

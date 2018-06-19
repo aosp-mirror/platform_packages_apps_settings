@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge.batterytip;
 
 import static android.database.sqlite.SQLiteDatabase.CONFLICT_IGNORE;
-
 import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.AnomalyColumns
         .ANOMALY_STATE;
 import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.AnomalyColumns

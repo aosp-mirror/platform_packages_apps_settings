@@ -16,8 +16,10 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.SimulateColorSpacePreferenceController.SETTING_VALUE_OFF;
-import static com.android.settings.development.SimulateColorSpacePreferenceController.SETTING_VALUE_ON;
+import static com.android.settings.development.SimulateColorSpacePreferenceController
+        .SETTING_VALUE_OFF;
+import static com.android.settings.development.SimulateColorSpacePreferenceController
+        .SETTING_VALUE_ON;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
@@ -26,8 +28,6 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.res.Resources;
 import android.provider.Settings;
-import androidx.preference.ListPreference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -38,6 +38,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+
+import androidx.preference.ListPreference;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SimulateColorSpacePreferenceControllerTest {

@@ -22,11 +22,12 @@ import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
 
 import android.app.NotificationChannel;
 import android.content.Context;
-import androidx.preference.Preference;
 import android.util.Log;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedSwitchPreference;
+
+import androidx.preference.Preference;
 
 public class AllowSoundPreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {

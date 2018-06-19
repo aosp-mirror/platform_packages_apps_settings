@@ -23,7 +23,6 @@ import static org.robolectric.shadow.api.Shadow.extract;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.provider.Settings;
-import androidx.preference.Preference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
@@ -35,6 +34,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowConnectivityManager.class)

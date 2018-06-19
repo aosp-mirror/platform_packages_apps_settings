@@ -34,17 +34,15 @@ import android.provider.Settings.Secure;
 import android.provider.SettingsSlicesContract;
 import android.util.Log;
 
-import androidx.core.graphics.drawable.IconCompat;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settings.slices.SliceBroadcastReceiver;
 
+import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.SliceAction;
-
-import android.app.StatusBarManager;
 
 
 /**

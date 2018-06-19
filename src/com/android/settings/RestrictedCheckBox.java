@@ -22,8 +22,6 @@ import android.content.Context;
 import android.graphics.PorterDuff;
 import android.util.AttributeSet;
 import android.widget.CheckBox;
-import android.widget.RadioButton;
-import android.widget.TextView;
 
 import com.android.settingslib.RestrictedLockUtils;
 

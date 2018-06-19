@@ -21,7 +21,6 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.provider.Settings;
-import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -32,6 +31,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import androidx.preference.SwitchPreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ShowOperatorNamePreferenceControllerTest {

@@ -17,8 +17,6 @@
 package com.android.settings.notification;
 
 import android.app.NotificationManager;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -36,6 +34,8 @@ import com.android.settings.Utils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.Objects;
+
+import androidx.lifecycle.OnLifecycleEvent;
 
 public class RingVolumePreferenceController extends VolumeSeekBarPreferenceController {
 

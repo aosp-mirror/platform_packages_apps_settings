@@ -39,7 +39,6 @@ import android.security.KeyChain.KeyChainConnection;
 import android.security.KeyStore;
 import android.security.keymaster.KeyCharacteristics;
 import android.security.keymaster.KeymasterDefs;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -52,12 +51,15 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
 import java.security.UnrecoverableKeyException;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 public class UserCredentialsSettings extends SettingsPreferenceFragment
         implements View.OnClickListener {

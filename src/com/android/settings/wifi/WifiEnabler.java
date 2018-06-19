@@ -28,7 +28,6 @@ import android.net.wifi.WifiManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
-import androidx.annotation.VisibleForTesting;
 import android.widget.Toast;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -40,6 +39,8 @@ import com.android.settingslib.WirelessUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import androidx.annotation.VisibleForTesting;
 
 public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListener  {
 

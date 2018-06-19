@@ -29,8 +29,6 @@ import android.content.Context;
 import android.hardware.input.InputDeviceIdentifier;
 import android.hardware.input.InputManager;
 import android.hardware.input.KeyboardLayout;
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
 import android.view.InputDevice;
 
 import com.android.settings.core.BasePreferenceController;
@@ -46,6 +44,9 @@ import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
+
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class KeyboardLayoutPickerControllerTest {

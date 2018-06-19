@@ -21,8 +21,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.Telephony;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 import android.telephony.SubscriptionManager;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -33,6 +31,9 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 
 import com.android.settings.R;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
 public class ApnPreference extends Preference implements
         CompoundButton.OnCheckedChangeListener, OnClickListener {

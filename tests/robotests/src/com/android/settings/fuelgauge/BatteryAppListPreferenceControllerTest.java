@@ -22,7 +22,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import androidx.preference.PreferenceGroup;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.FeatureFlagUtils;
@@ -46,6 +45,8 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.List;
+
+import androidx.preference.PreferenceGroup;
 
 @RunWith(RobolectricTestRunner.class)
 public class BatteryAppListPreferenceControllerTest {

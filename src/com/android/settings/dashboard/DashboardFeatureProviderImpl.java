@@ -29,8 +29,6 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.provider.Settings;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
@@ -52,6 +50,9 @@ import com.android.settingslib.utils.ThreadUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 /**
  * Impl for {@code DashboardFeatureProvider}.

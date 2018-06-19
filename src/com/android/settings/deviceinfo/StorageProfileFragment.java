@@ -24,7 +24,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
-import androidx.annotation.VisibleForTesting;
 import android.util.SparseArray;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -40,6 +39,8 @@ import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * StorageProfileFragment is a fragment which shows the storage results for a profile of the

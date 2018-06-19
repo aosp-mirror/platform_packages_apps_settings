@@ -36,10 +36,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceClickListener;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceScreen;
 import android.text.BidiFormatter;
 import android.util.ArrayMap;
 import android.util.Log;
@@ -66,6 +62,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceClickListener;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
 
 public class AccountPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, AuthenticatorHelper.OnAccountsUpdateListener,

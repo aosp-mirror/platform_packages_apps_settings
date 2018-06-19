@@ -26,7 +26,6 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserManager;
 import android.provider.Settings;
-import androidx.preference.Preference;
 import android.view.autofill.AutofillManager;
 
 import com.android.settings.R;
@@ -40,6 +39,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
+
+import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DefaultAutofillPreferenceControllerTest {

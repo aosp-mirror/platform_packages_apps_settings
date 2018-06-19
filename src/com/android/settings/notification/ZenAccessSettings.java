@@ -37,10 +37,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.RemoteException;
 import android.provider.Settings.Secure;
-import androidx.preference.SwitchPreference;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Log;
@@ -56,6 +52,11 @@ import com.android.settings.widget.AppSwitchPreference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 public class ZenAccessSettings extends EmptyTextSettings {
     private final String TAG = "ZenAccessSettings";

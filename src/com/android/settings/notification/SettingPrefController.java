@@ -18,12 +18,9 @@ package com.android.settings.notification;
 
 import android.content.ContentResolver;
 import android.content.Context;
-
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.SettingsPreferenceFragment;
@@ -33,6 +30,9 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 public abstract class SettingPrefController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause {

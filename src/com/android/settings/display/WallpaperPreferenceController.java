@@ -13,13 +13,14 @@
  */
 package com.android.settings.display;
 
+import static android.os.UserManager.DISALLOW_SET_WALLPAPER;
+
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.UserHandle;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -29,9 +30,9 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 
-import static android.os.UserManager.DISALLOW_SET_WALLPAPER;
-
 import java.util.List;
+
+import androidx.preference.Preference;
 
 public class WallpaperPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin {

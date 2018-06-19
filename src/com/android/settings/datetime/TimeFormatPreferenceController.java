@@ -19,9 +19,6 @@ package com.android.settings.datetime;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
-import androidx.preference.SwitchPreference;
-import androidx.preference.Preference;
-import androidx.preference.TwoStatePreference;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 
@@ -30,6 +27,10 @@ import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.Calendar;
 import java.util.Date;
+
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 public class TimeFormatPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {

@@ -17,7 +17,6 @@
 package com.android.settings.deviceinfo;
 
 import static android.os.storage.DiskInfo.EXTRA_DISK_ID;
-
 import static com.android.settings.deviceinfo.StorageWizardBase.EXTRA_FORMAT_FORGET_UUID;
 import static com.android.settings.deviceinfo.StorageWizardBase.EXTRA_FORMAT_PRIVATE;
 

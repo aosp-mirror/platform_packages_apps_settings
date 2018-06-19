@@ -25,7 +25,6 @@ import android.app.Fragment;
 import android.content.Context;
 import android.icu.text.ListFormatter;
 import android.provider.SearchIndexableResource;
-import androidx.annotation.VisibleForTesting;
 import android.text.BidiFormatter;
 import android.util.Log;
 
@@ -44,6 +43,8 @@ import com.android.settingslib.search.SearchIndexable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
 
 @SearchIndexable
 public class NetworkDashboardFragment extends DashboardFragment implements

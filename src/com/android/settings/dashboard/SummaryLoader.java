@@ -25,7 +25,6 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.os.Process;
-import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
@@ -39,6 +38,8 @@ import com.android.settingslib.utils.ThreadUtils;
 
 import java.lang.reflect.Field;
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
 
 public class SummaryLoader {
     private static final boolean DEBUG = DashboardSummary.DEBUG;

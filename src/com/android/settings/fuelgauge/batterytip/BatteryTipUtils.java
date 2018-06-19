@@ -23,7 +23,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.annotation.NonNull;
 
 import com.android.internal.util.CollectionUtils;
 import com.android.settings.SettingsActivity;
@@ -41,6 +40,8 @@ import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 /**
  * Utility class for {@link BatteryTip}

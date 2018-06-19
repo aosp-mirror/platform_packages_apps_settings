@@ -17,13 +17,11 @@
 package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 
 import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
-import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -34,6 +32,8 @@ import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+
+import androidx.preference.SwitchPreference;
 
 @RunWith(RobolectricTestRunner.class)
 public class SmartBatteryPreferenceControllerTest {

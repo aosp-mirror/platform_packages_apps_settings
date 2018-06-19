@@ -17,11 +17,12 @@ package com.android.settings.connecteddevice;
 
 import android.content.Context;
 import android.provider.Settings;
-import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.nfc.NfcPreferenceController;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Controller that used to show which component is available

@@ -20,7 +20,6 @@ import android.content.Context;
 import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.os.UserManager;
-import android.util.Log;
 import android.util.SparseArray;
 
 import com.android.internal.util.Preconditions;

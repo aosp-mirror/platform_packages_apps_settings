@@ -25,7 +25,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import androidx.lifecycle.LifecycleOwner;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -37,8 +36,6 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.location.LocationManager;
 import android.os.Bundle;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -53,6 +50,10 @@ import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.lifecycle.LifecycleOwner;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class LocationFooterPreferenceControllerTest {

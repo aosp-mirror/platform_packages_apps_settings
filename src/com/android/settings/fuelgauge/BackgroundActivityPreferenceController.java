@@ -18,8 +18,6 @@ import android.app.AppOpsManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.os.UserManager;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -32,6 +30,9 @@ import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
 import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 /**
  * Controller to control whether an app can run in the background

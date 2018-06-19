@@ -23,7 +23,6 @@ import android.content.res.Resources;
 import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
-import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.datetime.timezone.model.TimeZoneData;
@@ -32,6 +31,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import androidx.annotation.Nullable;
 
 /**
  * Render a list of {@class TimeZoneInfo} into the list view in {@class BaseTimeZonePicker}

@@ -19,12 +19,6 @@ package com.android.settings.bluetooth;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.PreferenceFragment;
-import androidx.preference.SwitchPreference;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.settingslib.bluetooth.A2dpProfile;
@@ -38,6 +32,13 @@ import com.android.settingslib.bluetooth.PbapServerProfile;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceFragment;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 /**
  * This class adds switches for toggling the individual profiles that a Bluetooth device

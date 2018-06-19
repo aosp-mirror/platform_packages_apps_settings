@@ -22,13 +22,14 @@ import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
-import androidx.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settingslib.graph.BatteryMeterDrawableBase;
+
+import androidx.annotation.VisibleForTesting;
 
 public class BatteryMeterView extends ImageView {
     @VisibleForTesting

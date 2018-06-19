@@ -17,10 +17,11 @@
 package com.android.settings.notification;
 
 import android.content.Context;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 
 import com.android.settings.core.PreferenceControllerMixin;
+
+import androidx.preference.Preference;
 
 public class DescriptionPreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin {

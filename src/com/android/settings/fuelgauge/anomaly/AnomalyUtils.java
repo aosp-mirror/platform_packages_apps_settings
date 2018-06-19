@@ -18,7 +18,6 @@ package com.android.settings.fuelgauge.anomaly;
 
 import android.content.Context;
 import android.os.Build;
-import androidx.annotation.VisibleForTesting;
 import android.util.Pair;
 import android.util.SparseIntArray;
 
@@ -36,6 +35,8 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Utility class for anomaly detection

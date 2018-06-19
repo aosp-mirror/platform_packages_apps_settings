@@ -22,8 +22,6 @@ import android.content.Loader;
 import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 import android.text.format.Formatter;
 
 import com.android.settings.R;
@@ -34,6 +32,9 @@ import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 public class AppStoragePreferenceController extends AppInfoPreferenceControllerBase
         implements LoaderManager.LoaderCallbacks<StorageStatsSource.AppStorageStats>,

@@ -17,9 +17,6 @@
 package com.android.settings.gestures;
 
 import static com.google.common.truth.Truth.assertThat;
-
-import static junit.framework.Assert.assertEquals;
-
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
@@ -28,9 +25,6 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.TwoStatePreference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.VideoPreference;
@@ -42,6 +36,10 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.TwoStatePreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class GesturePreferenceControllerTest {

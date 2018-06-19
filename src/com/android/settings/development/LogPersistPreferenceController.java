@@ -17,12 +17,13 @@
 package com.android.settings.development;
 
 import android.content.Context;
-import androidx.annotation.Nullable;
-import androidx.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.development.AbstractLogpersistPreferenceController;
+
+import androidx.annotation.Nullable;
+import androidx.preference.Preference;
 
 public class LogPersistPreferenceController extends AbstractLogpersistPreferenceController
         implements PreferenceControllerMixin {

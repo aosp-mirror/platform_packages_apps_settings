@@ -12,7 +12,6 @@ import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.overlay.SurveyFeatureProvider;
@@ -30,6 +29,8 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SurveyMixinTest {

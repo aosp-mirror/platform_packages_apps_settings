@@ -18,8 +18,6 @@ package com.android.settings.widget;
 
 import android.content.Context;
 import android.os.UserHandle;
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceViewHolder;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
@@ -27,6 +25,9 @@ import android.view.View;
 import com.android.settings.R;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreferenceHelper;
+
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceViewHolder;
 
 /**
  * {@link AppPreference} that implements user restriction utilities using

@@ -20,9 +20,6 @@ import static android.telephony.TelephonyManager.PHONE_TYPE_CDMA;
 
 import android.app.Fragment;
 import android.content.Context;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.telephony.TelephonyManager;
 
 import com.android.settings.R;
@@ -31,6 +28,10 @@ import com.android.settingslib.deviceinfo.AbstractSimStatusImeiInfoPreferenceCon
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 /**
  * Controller that manages preference for single and multi sim devices.

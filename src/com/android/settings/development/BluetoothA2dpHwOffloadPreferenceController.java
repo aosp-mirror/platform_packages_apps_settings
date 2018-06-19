@@ -18,12 +18,12 @@ package com.android.settings.development;
 
 import android.content.Context;
 import android.os.SystemProperties;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.SwitchPreference;
-import androidx.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
+
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
 
 public class BluetoothA2dpHwOffloadPreferenceController extends DeveloperOptionsPreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {

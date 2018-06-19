@@ -15,8 +15,6 @@
 package com.android.settings.fuelgauge;
 
 import android.os.Bundle;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.Settings;
@@ -27,6 +25,9 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 /**
  * Controller that jumps to high power optimization fragment

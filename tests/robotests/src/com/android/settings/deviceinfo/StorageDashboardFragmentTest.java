@@ -27,7 +27,6 @@ import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.provider.SearchIndexableResource;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
 
@@ -44,6 +43,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.List;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class StorageDashboardFragmentTest {

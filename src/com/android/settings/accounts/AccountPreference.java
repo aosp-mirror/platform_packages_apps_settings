@@ -19,14 +19,15 @@ package com.android.settings.accounts;
 import android.accounts.Account;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 import android.util.Log;
 import android.widget.ImageView;
 
 import com.android.settings.R;
 
 import java.util.ArrayList;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
 /**
  * AccountPreference is used to display a username, status and provider icon for an account on

@@ -20,8 +20,6 @@ import android.annotation.XmlRes;
 import android.content.Context;
 import android.content.res.XmlResourceParser;
 import android.provider.SearchIndexableResource;
-import androidx.annotation.CallSuper;
-import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -39,6 +37,9 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.CallSuper;
+import androidx.annotation.VisibleForTesting;
 
 /**
  * A basic SearchIndexProvider that returns no data to index.

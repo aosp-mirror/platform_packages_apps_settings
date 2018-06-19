@@ -25,7 +25,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.SystemProperties;
-import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
@@ -33,6 +32,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Locale;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * {@link Activity} that displays regulatory information for the "Regulatory information"

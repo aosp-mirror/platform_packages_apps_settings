@@ -25,8 +25,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.service.notification.ZenModeConfig;
-import androidx.preference.PreferenceFragment;
-import androidx.preference.Preference;
 import android.util.Slog;
 import android.view.View;
 
@@ -36,6 +34,9 @@ import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragment;
 
 public class ZenAutomaticRuleHeaderPreferenceController extends AbstractZenModePreferenceController
         implements PreferenceControllerMixin {

@@ -24,8 +24,6 @@ import android.content.pm.PackageManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.speech.tts.TtsEngines;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -47,6 +45,9 @@ import com.android.settingslib.search.SearchIndexable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 @SearchIndexable
 public class LanguageAndInputSettings extends DashboardFragment {

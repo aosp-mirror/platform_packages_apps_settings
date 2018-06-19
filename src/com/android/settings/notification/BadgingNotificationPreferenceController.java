@@ -16,6 +16,8 @@
 
 package com.android.settings.notification;
 
+import static android.provider.Settings.Secure.NOTIFICATION_BADGING;
+
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -23,16 +25,11 @@ import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
 import android.provider.Settings;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.TwoStatePreference;
 import android.text.TextUtils;
 
+import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.TogglePreferenceController;
-import com.android.settings.R;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.search.ResultPayload;
@@ -40,7 +37,9 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
-import static android.provider.Settings.Secure.NOTIFICATION_BADGING;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 public class BadgingNotificationPreferenceController extends TogglePreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener,

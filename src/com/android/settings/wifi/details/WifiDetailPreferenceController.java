@@ -40,10 +40,6 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
-import androidx.core.text.BidiFormatter;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ImageView;
@@ -75,6 +71,11 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
+
+import androidx.core.text.BidiFormatter;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
 
 /**
  * Controller for logic pertaining to displaying Wifi information for the

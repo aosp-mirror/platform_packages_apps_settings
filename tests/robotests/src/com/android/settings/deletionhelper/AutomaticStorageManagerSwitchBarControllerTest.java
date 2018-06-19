@@ -28,7 +28,6 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.os.SystemProperties;
 import android.provider.Settings;
-import androidx.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -43,6 +42,8 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+
+import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class AutomaticStorageManagerSwitchBarControllerTest {

@@ -18,8 +18,6 @@ package com.android.settings.deviceinfo.imei;
 
 import android.content.Context;
 import android.content.res.Resources;
-import androidx.annotation.NonNull;
-import androidx.annotation.VisibleForTesting;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -33,6 +31,9 @@ import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.R;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 
 public class ImeiInfoDialogController {
 

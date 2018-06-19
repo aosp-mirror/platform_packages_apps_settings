@@ -19,14 +19,17 @@ package com.android.settings.datetime;
 import android.content.Context;
 import android.provider.Settings;
 import android.provider.Settings.System;
-import androidx.preference.SwitchPreference;
-import androidx.preference.Preference;
-import androidx.preference.TwoStatePreference;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
+
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
+
 import java.util.Locale;
+
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 public class AutoTimeFormatPreferenceController extends AbstractPreferenceController
           implements PreferenceControllerMixin {

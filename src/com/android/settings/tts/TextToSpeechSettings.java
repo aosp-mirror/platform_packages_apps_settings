@@ -31,8 +31,6 @@ import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.EngineInfo;
 import android.speech.tts.TtsEngines;
 import android.speech.tts.UtteranceProgressListener;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
@@ -58,6 +56,9 @@ import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.Objects;
 import java.util.Set;
+
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
 
 @SearchIndexable
 public class TextToSpeechSettings extends SettingsPreferenceFragment

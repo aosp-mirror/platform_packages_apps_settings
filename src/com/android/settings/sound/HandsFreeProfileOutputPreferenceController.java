@@ -20,15 +20,15 @@ import static android.bluetooth.IBluetoothHearingAid.HI_SYNC_ID_INVALID;
 import static android.media.AudioManager.STREAM_VOICE_CALL;
 import static android.media.AudioSystem.DEVICE_OUT_USB_HEADSET;
 
-import com.android.settingslib.Utils;
-
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
-import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settingslib.Utils;
 import com.android.settingslib.bluetooth.HeadsetProfile;
 import com.android.settingslib.bluetooth.HearingAidProfile;
+
+import androidx.preference.Preference;
 
 /**
  * This class allows switching between HFP-connected & HAP-connected BT devices

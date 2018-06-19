@@ -17,13 +17,14 @@
 package com.android.settings.notification;
 
 import android.content.Context;
-import androidx.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.RadioButton;
 
 import com.android.settings.R;
 import com.android.settingslib.TwoTargetPreference;
+
+import androidx.preference.PreferenceViewHolder;
 
 /**
  * A radio button preference with a divider and a settings icon that links to another screen.

@@ -25,7 +25,6 @@ import android.content.pm.PackageManager;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.annotation.VisibleForTesting;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.SparseArray;
@@ -38,6 +37,8 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import androidx.annotation.VisibleForTesting;
 
 /*
  * Connects app ops info to the ApplicationsState. Makes use of AppOpsManager to

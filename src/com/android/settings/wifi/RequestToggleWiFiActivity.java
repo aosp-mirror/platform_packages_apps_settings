@@ -27,12 +27,14 @@ import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
+
 import com.android.internal.app.AlertActivity;
 import com.android.settings.R;
+
+import androidx.annotation.NonNull;
 
 /**
  * This activity handles requests to toggle WiFi by collecting user

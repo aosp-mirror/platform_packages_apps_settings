@@ -25,8 +25,6 @@ import android.app.Fragment;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.provider.Settings;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -44,6 +42,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ZenModeAutomaticRulesPreferenceControllerTest {

@@ -21,13 +21,14 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.os.storage.IStorageManager;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 public class FileEncryptionPreferenceController extends DeveloperOptionsPreferenceController
         implements PreferenceControllerMixin {

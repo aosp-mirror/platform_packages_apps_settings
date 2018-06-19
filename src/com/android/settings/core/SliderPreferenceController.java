@@ -15,9 +15,10 @@
 package com.android.settings.core;
 
 import android.content.Context;
-import androidx.preference.Preference;
 
 import com.android.settings.slices.SliceData;
+
+import androidx.preference.Preference;
 
 public abstract class SliderPreferenceController extends BasePreferenceController implements
         Preference.OnPreferenceChangeListener {

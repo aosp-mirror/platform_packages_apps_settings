@@ -22,8 +22,6 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.SystemProperties;
-import androidx.preference.SwitchPreference;
-import androidx.preference.PreferenceScreen;
 import android.view.ThreadedRenderer;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -34,6 +32,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class GpuViewUpdatesPreferenceControllerTest {

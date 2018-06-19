@@ -24,12 +24,13 @@ import android.net.ConnectivityManager;
 import android.net.NetworkScoreManager;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.widget.SummaryUpdater;
 import com.android.settingslib.wifi.WifiStatusTracker;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Helper class that listeners to wifi callback and notify client when there is update in

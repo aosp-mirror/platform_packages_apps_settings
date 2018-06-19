@@ -24,9 +24,6 @@ import android.icu.text.Collator;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -42,6 +39,10 @@ import com.android.settingslib.wifi.WifiSavedConfigUtils;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 /**
  * UI to manage saved networks/access points.

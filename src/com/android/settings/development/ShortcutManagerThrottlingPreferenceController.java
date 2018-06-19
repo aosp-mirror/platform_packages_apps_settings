@@ -20,7 +20,6 @@ import android.content.Context;
 import android.content.pm.IShortcutService;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -28,6 +27,8 @@ import android.widget.Toast;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
+
+import androidx.preference.Preference;
 
 public class ShortcutManagerThrottlingPreferenceController extends
         DeveloperOptionsPreferenceController implements PreferenceControllerMixin {

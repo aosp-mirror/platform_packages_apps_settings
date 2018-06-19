@@ -25,12 +25,13 @@ import android.os.PersistableBundle;
 import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.service.notification.ZenModeConfig;
-import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.notification.ZenModeSettings;
+
+import androidx.annotation.VisibleForTesting;
 
 public class DndCondition extends Condition {
 

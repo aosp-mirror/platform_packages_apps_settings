@@ -17,12 +17,13 @@ package com.android.settings.dashboard;
 
 import android.app.Activity;
 import android.content.Context;
-import androidx.preference.Preference;
 
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 
 import java.util.List;
+
+import androidx.preference.Preference;
 
 /**
  * FeatureProvider for dashboard (aka settings homepage).

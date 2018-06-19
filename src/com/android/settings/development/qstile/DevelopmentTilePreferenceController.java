@@ -25,16 +25,17 @@ import android.content.pm.ServiceInfo;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.service.quicksettings.TileService;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.SwitchPreference;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.util.Log;
 
 import com.android.internal.statusbar.IStatusBarService;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 public class DevelopmentTilePreferenceController extends AbstractPreferenceController {
 

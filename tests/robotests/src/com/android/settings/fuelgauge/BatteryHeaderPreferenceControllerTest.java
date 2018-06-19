@@ -29,14 +29,10 @@ import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.app.Activity;
-import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.content.Intent;
 import android.os.BatteryManager;
-import androidx.preference.PreferenceFragment;
 import android.os.PowerManager;
-import androidx.preference.PreferenceScreen;
-import androidx.recyclerview.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -54,9 +50,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowPowerManager;
+
+import androidx.lifecycle.LifecycleOwner;
+import androidx.preference.PreferenceFragment;
+import androidx.preference.PreferenceScreen;
+import androidx.recyclerview.widget.RecyclerView;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {

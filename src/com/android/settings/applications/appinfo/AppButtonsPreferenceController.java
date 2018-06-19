@@ -37,18 +37,16 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.PreferenceScreen;
 import android.util.Log;
 import android.view.View;
 import android.webkit.IWebViewUpdateService;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminAdd;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.ApplicationFeatureProvider;
+import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminAdd;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
@@ -65,6 +63,9 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceScreen;
 
 /**
  * Controller to control the uninstall button and forcestop button. All fragments that use

@@ -17,9 +17,10 @@
 package com.android.settings.notification;
 
 import android.content.Context;
-import androidx.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
+
+import androidx.preference.Preference;
 
 /**
  * Controls link to reach more preference settings inside the app.

@@ -22,7 +22,6 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.provider.Settings;
-import androidx.preference.SwitchPreference;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -34,6 +33,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
+
+import androidx.preference.SwitchPreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class LockdownButtonPreferenceControllerTest {
