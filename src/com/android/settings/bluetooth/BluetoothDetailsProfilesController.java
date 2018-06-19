@@ -148,15 +148,12 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
      */
     private void disableProfile(LocalBluetoothProfile profile, BluetoothDevice device,
             SwitchPreference profilePref) {
-        if (profile instanceof PbapServerProfile) {
-            mCachedDevice.setPhonebookPermissionChoice(CachedBluetoothDevice.ACCESS_REJECTED);
-            // We don't need to do the additional steps below for this profile.
-            return;
-        }
         mCachedDevice.disconnect(profile);
         profile.setPreferred(device, false);
         if (profile instanceof MapProfile) {
             mCachedDevice.setMessagePermissionChoice(BluetoothDevice.ACCESS_REJECTED);
+        } else if (profile instanceof PbapServerProfile) {
+            mCachedDevice.setPhonebookPermissionChoice(CachedBluetoothDevice.ACCESS_REJECTED);
         }
     }
 
