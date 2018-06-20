@@ -20,17 +20,12 @@ import static android.provider.Settings.Secure.DOZE_PULSE_ON_PICK_UP;
 
 import android.annotation.UserIdInt;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
-import com.android.settings.R;
-import com.android.settings.search.DatabaseIndexingUtils;
-import com.android.settings.search.InlineSwitchPayload;
-import com.android.settings.search.ResultPayload;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -113,16 +108,6 @@ public class PickupGesturePreferenceController extends GesturePreferenceControll
     @Override
     public boolean canHandleClicks() {
         return pulseOnPickupCanBeModified();
-    }
-
-    @Override
-    public ResultPayload getResultPayload() {
-        final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(mContext,
-                PickupGestureSettings.class.getName(), mPickUpPrefKey,
-                mContext.getString(R.string.display_settings));
-
-        return new InlineSwitchPayload(SECURE_KEY, ResultPayload.SettingsSource.SECURE,
-                ON /* onValue */, intent, isAvailable(), ON /* defaultValue */);
     }
 
     @VisibleForTesting

@@ -29,15 +29,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.location.LocationManager;
-import android.provider.Settings;
 import android.provider.Settings.Secure;
 
 import com.android.settings.R;
-import com.android.settings.search.InlineListPayload;
-import com.android.settings.search.InlinePayload;
-import com.android.settings.search.ResultPayload;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -46,8 +41,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
@@ -151,42 +144,8 @@ public class LocationPreferenceControllerTest {
         mController.onResume();
 
         mController.mLocationProvidersChangedReceiver
-            .onReceive(mContext, new Intent(LocationManager.PROVIDERS_CHANGED_ACTION));
+                .onReceive(mContext, new Intent(LocationManager.PROVIDERS_CHANGED_ACTION));
 
         verify(mPreference).setSummary(any());
-    }
-
-    @Test
-    public void testPreferenceController_ProperResultPayloadType() {
-        final Context context = RuntimeEnvironment.application;
-        mController = new LocationPreferenceController(context, null /* lifecycle */);
-        ResultPayload payload = mController.getResultPayload();
-        assertThat(payload).isInstanceOf(InlineListPayload.class);
-    }
-
-    @Test
-    @Config(shadows = ShadowSecureSettings.class)
-    public void testSetValue_updatesCorrectly() {
-        final int newValue = Secure.LOCATION_MODE_BATTERY_SAVING;
-        ContentResolver resolver = mContext.getContentResolver();
-        Settings.Secure.putInt(resolver, Secure.LOCATION_MODE, Secure.LOCATION_MODE_OFF);
-
-        ((InlinePayload) mController.getResultPayload()).setValue(mContext, newValue);
-        final int updatedValue =
-            Settings.Secure.getInt(resolver, Secure.LOCATION_MODE, Secure.LOCATION_MODE_OFF);
-
-        assertThat(updatedValue).isEqualTo(newValue);
-    }
-
-    @Test
-    @Config(shadows = ShadowSecureSettings.class)
-    public void testGetValue_correctValueReturned() {
-        int expectedValue = Secure.LOCATION_MODE_BATTERY_SAVING;
-        ContentResolver resolver = mContext.getContentResolver();
-        Settings.Secure.putInt(resolver, Secure.LOCATION_MODE, expectedValue);
-
-        int newValue = ((InlinePayload) mController.getResultPayload()).getValue(mContext);
-
-        assertThat(newValue).isEqualTo(expectedValue);
     }
 }

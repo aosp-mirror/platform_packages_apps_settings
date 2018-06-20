@@ -17,19 +17,13 @@ import static android.provider.Settings.Secure.DOZE_ENABLED;
 import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION_AMBIENT_DISPLAY;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
-import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.search.DatabaseIndexingUtils;
-import com.android.settings.search.InlineSwitchPayload;
-import com.android.settings.search.ResultPayload;
-import com.android.settings.security.LockscreenDashboardFragment;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import androidx.annotation.VisibleForTesting;
@@ -94,17 +88,5 @@ public class AmbientDisplayNotificationsPreferenceController extends
     @Override
     public boolean isSliceable() {
         return TextUtils.equals(getPreferenceKey(), "ambient_display_notification");
-    }
-
-    @Override
-    //TODO (b/69808376): Remove result payload
-    public ResultPayload getResultPayload() {
-        final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(mContext,
-                LockscreenDashboardFragment.class.getName(), KEY_AMBIENT_DISPLAY_NOTIFICATIONS,
-                mContext.getString(R.string.ambient_display_screen_title));
-
-        return new InlineSwitchPayload(Settings.Secure.DOZE_ENABLED,
-                ResultPayload.SettingsSource.SECURE, ON /* onValue */, intent, isAvailable(),
-                ON /* defaultValue */);
     }
 }

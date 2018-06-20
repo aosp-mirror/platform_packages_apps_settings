@@ -31,8 +31,8 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.connecteddevice.BluetoothDashboardFragment;
-import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.slices.SliceBroadcastReceiver;
+import com.android.settings.slices.SliceBuilderUtils;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
@@ -106,7 +106,7 @@ public class BluetoothSliceBuilder {
         final String screenTitle = context.getText(R.string.bluetooth_settings_title).toString();
         final Uri contentUri = new Uri.Builder().appendPath(
                 SettingsSlicesContract.KEY_BLUETOOTH).build();
-        return DatabaseIndexingUtils.buildSearchResultPageIntent(context,
+        return SliceBuilderUtils.buildSearchResultPageIntent(context,
                 BluetoothDashboardFragment.class.getName(), null /* key */, screenTitle,
                 MetricsProto.MetricsEvent.SETTINGS_CONNECTED_DEVICE_CATEGORY)
                 .setClassName(context.getPackageName(), SubSettings.class.getName())

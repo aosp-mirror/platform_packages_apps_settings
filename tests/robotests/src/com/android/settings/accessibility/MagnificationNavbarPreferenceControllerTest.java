@@ -18,7 +18,7 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.MagnificationPreferenceFragment.OFF;
 import static com.android.settings.accessibility.MagnificationPreferenceFragment.ON;
-import static com.android.settings.search.ResultPayload.Availability.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.spy;
 

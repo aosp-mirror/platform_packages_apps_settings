@@ -31,8 +31,6 @@ import android.os.UserHandle;
 import android.provider.Settings;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
-import com.android.settings.search.InlinePayload;
-import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -99,7 +97,7 @@ public class AmbientDisplayNotificationsPreferenceControllerTest {
         mController.onPreferenceChange(mSwitchPreference, true);
 
         assertThat(Settings.Secure.getInt(mContentResolver, Settings.Secure.DOZE_ENABLED, -1))
-            .isEqualTo(1);
+                .isEqualTo(1);
     }
 
     @Test
@@ -107,7 +105,7 @@ public class AmbientDisplayNotificationsPreferenceControllerTest {
         mController.onPreferenceChange(mSwitchPreference, false);
 
         assertThat(Settings.Secure.getInt(mContentResolver, Settings.Secure.DOZE_ENABLED, -1))
-            .isEqualTo(0);
+                .isEqualTo(0);
     }
 
     @Test
@@ -155,33 +153,6 @@ public class AmbientDisplayNotificationsPreferenceControllerTest {
         mController.handlePreferenceTreeClick(mSwitchPreference);
 
         verifyNoMoreInteractions(mMetricsFeatureProvider);
-    }
-
-    @Test
-    public void testPreferenceController_ProperResultPayloadType() {
-        assertThat(mController.getResultPayload()).isInstanceOf(InlineSwitchPayload.class);
-    }
-
-    @Test
-    public void testSetValue_updatesCorrectly() {
-        int newValue = 1;
-        Settings.Secure.putInt(mContentResolver, Settings.Secure.DOZE_ENABLED, 0);
-
-        ((InlinePayload) mController.getResultPayload()).setValue(mContext, newValue);
-        int updatedValue =
-            Settings.Secure.getInt(mContentResolver, Settings.Secure.DOZE_ENABLED, 1);
-
-        assertThat(updatedValue).isEqualTo(newValue);
-    }
-
-    @Test
-    public void testGetValue_correctValueReturned() {
-        int currentValue = 1;
-        Settings.Secure.putInt(mContentResolver, Settings.Secure.DOZE_ENABLED, currentValue);
-
-        int newValue = ((InlinePayload) mController.getResultPayload()).getValue(mContext);
-
-        assertThat(newValue).isEqualTo(currentValue);
     }
 
     @Test

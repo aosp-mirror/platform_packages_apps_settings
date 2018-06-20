@@ -43,13 +43,6 @@ public interface SearchFeatureProvider {
             throws SecurityException, IllegalArgumentException;
 
     /**
-     * Synchronously updates the Settings database.
-     */
-    void updateIndex(Context context);
-
-    DatabaseIndexingManager getIndexingManager(Context context);
-
-    /**
      * @return a {@link SearchIndexableResources} to be used for indexing search results.
      */
     SearchIndexableResources getSearchIndexableResources();
