@@ -19,23 +19,36 @@ package com.android.settings.development.featureflags;
 import android.content.Context;
 import android.support.v14.preference.SwitchPreference;
 import android.util.FeatureFlagUtils;
+import android.util.Log;
 
 public class FeatureFlagPreference extends SwitchPreference {
 
     private final String mKey;
+    private final boolean mIsPersistent;
 
     public FeatureFlagPreference(Context context, String key) {
         super(context);
         mKey = key;
         setKey(key);
         setTitle(key);
-        setCheckedInternal(FeatureFlagUtils.isEnabled(context, mKey));
+        mIsPersistent = FeatureFlagPersistent.isPersistent(key);
+        boolean isFeatureEnabled;
+        if (mIsPersistent) {
+            isFeatureEnabled = FeatureFlagPersistent.isEnabled(context, key);
+        } else {
+            isFeatureEnabled = FeatureFlagUtils.isEnabled(context, key);
+        }
+        setCheckedInternal(isFeatureEnabled);
     }
 
     @Override
     public void setChecked(boolean isChecked) {
         setCheckedInternal(isChecked);
-        FeatureFlagUtils.setEnabled(getContext(), mKey, isChecked);
+        if (mIsPersistent) {
+            FeatureFlagPersistent.setEnabled(getContext(), mKey, isChecked);
+        } else {
+            FeatureFlagUtils.setEnabled(getContext(), mKey, isChecked);
+        }
     }
 
     private void setCheckedInternal(boolean isChecked) {
