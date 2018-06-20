@@ -682,7 +682,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                                         CharSequence errString) {
                                     Log.e(TAG, String.format(
                                             "Can't remove fingerprint %d in group %d. Reason: %s",
-                                            fp.getFingerId(), fp.getGroupId(), errString));
+                                            fp.getBiometricId(), fp.getGroupId(), errString));
                                     // TODO: need to proceed with the removal of managed profile
                                     // fingerprints and finish() gracefully.
                                 }

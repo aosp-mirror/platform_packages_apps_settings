@@ -121,7 +121,7 @@ public class FingerprintRemoveSidecar extends InstrumentedFragment {
     }
 
     final boolean isRemovingFingerprint(int fid) {
-        return inProgress() && mFingerprintRemoving.getFingerId() == fid;
+        return inProgress() && mFingerprintRemoving.getBiometricId() == fid;
     }
 
     final boolean inProgress() {
