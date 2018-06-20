@@ -38,6 +38,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.Utils;
+import com.android.settingslib.net.DataUsageController;
 import com.android.settingslib.utils.StringUtil;
 
 import java.util.Objects;
@@ -177,9 +178,14 @@ public class DataUsageSummaryPreference extends Preference {
             carrierInfo.setVisibility(View.GONE);
             limitInfo.setVisibility(View.GONE);
 
-            launchButton.setOnClickListener((view) -> {
-                launchWifiDataUsage(getContext());
-            });
+            final long usageLevel = getHistoriclUsageLevel();
+            if (usageLevel > 0L) {
+                launchButton.setOnClickListener((view) -> {
+                    launchWifiDataUsage(getContext());
+                });
+            } else {
+                launchButton.setEnabled(false);
+            }
             launchButton.setText(R.string.launch_wifi_text);
             launchButton.setVisibility(View.VISIBLE);
         } else {
@@ -331,4 +337,11 @@ public class DataUsageSummaryPreference extends Preference {
         carrierInfo.setTextColor(Utils.getColorAttr(getContext(), colorId));
         carrierInfo.setTypeface(typeface);
     }
+
+    @VisibleForTesting
+    long getHistoriclUsageLevel() {
+        final DataUsageController controller = new DataUsageController(getContext());
+        return controller.getHistoriclUsageLevel(NetworkTemplate.buildTemplateWifiWildcard());
+    }
+
 }
