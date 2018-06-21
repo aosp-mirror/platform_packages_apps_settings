@@ -23,6 +23,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.format.DateUtils;
 import android.util.ArrayMap;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Switch;
@@ -46,6 +47,8 @@ import java.util.Map;
  */
 public class AppStateNotificationBridge extends AppStateBaseBridge {
 
+    private final String TAG = "AppStateNotificationBridge";
+    private final boolean DEBUG = true;
     private final Context mContext;
     private IUsageStatsManager mUsageStatsManager;
     protected List<Integer> mUserIds;
@@ -70,7 +73,12 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
     @Override
     protected void loadAllExtraInfo() {
         ArrayList<AppEntry> apps = mAppSession.getAllApps();
-        if (apps == null) return;
+        if (apps == null) {
+            if (DEBUG) {
+                Log.d(TAG, "No apps.  No extra info loaded");
+            }
+            return;
+        }
 
         final Map<String, NotificationsSentState> map = getAggregatedUsageEvents();
         for (AppEntry entry : apps) {
