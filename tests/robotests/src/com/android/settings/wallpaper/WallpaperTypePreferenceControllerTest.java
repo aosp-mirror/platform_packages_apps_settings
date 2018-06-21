@@ -17,13 +17,7 @@
 package com.android.settings.wallpaper;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 
@@ -33,9 +27,7 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 
 import androidx.preference.Preference;
@@ -43,11 +35,7 @@ import androidx.preference.Preference;
 @RunWith(SettingsRobolectricTestRunner.class)
 public class WallpaperTypePreferenceControllerTest {
 
-    @Mock
-    private Fragment mFragment;
-
     private Context mContext;
-    private Activity mActivity;
     private WallpaperTypePreferenceController mController;
     private Preference mPreference;
     private Intent mIntent;
@@ -56,9 +44,7 @@ public class WallpaperTypePreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mActivity = spy(Robolectric.buildActivity(Activity.class).get());
         mController = new WallpaperTypePreferenceController(mContext, "pref_key");
-        mController.setParentFragment(mFragment);
         mIntent = new Intent();
         mPreference = new Preference(mContext);
     }
@@ -81,10 +67,6 @@ public class WallpaperTypePreferenceControllerTest {
     @Test
     public void testhandlePreferenceTreeClick_shouldLaunchIntent() {
         mPreference.setIntent(mIntent);
-        doNothing().when(mFragment).startActivity(any(Intent.class));
-        when(mFragment.getActivity()).thenReturn(mActivity);
-        doNothing().when(mActivity).finish();
-
         final boolean handled = mController.handlePreferenceTreeClick(mPreference);
 
         assertThat(handled).isTrue();

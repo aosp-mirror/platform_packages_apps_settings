@@ -55,12 +55,6 @@ public class WallpaperTypeSettings extends DashboardFragment {
         return R.xml.wallpaper_settings;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        use(WallpaperTypePreferenceController.class).setParentFragment(this);
-    }
-
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
         new BaseSearchIndexProvider() {
             @Override
