@@ -20,6 +20,7 @@ import static android.provider.Settings.System.SHOW_BATTERY_PERCENT;
 import android.content.Context;
 import android.provider.Settings;
 
+import com.android.internal.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -41,7 +42,8 @@ public class BatteryPercentagePreferenceController extends AbstractPreferenceCon
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return mContext.getResources()
+                .getBoolean(R.bool.config_battery_percentage_setting_available);
     }
 
     @Override
