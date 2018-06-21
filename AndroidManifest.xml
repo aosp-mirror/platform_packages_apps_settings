@@ -2574,7 +2574,6 @@
             android:name="Settings$ConfigureNotificationSettingsActivity"
             android:label="@string/configure_notification_settings"
             android:exported="true"
-            android:taskAffinity="com.android.settings"
             android:parentActivityName="Settings">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.NOTIFICATION_SETTINGS" />
@@ -2905,7 +2904,6 @@
         <activity
             android:name="Settings$AppDrawOverlaySettingsActivity"
             android:label="@string/draw_overlay"
-            android:taskAffinity="com.android.settings"
             android:parentActivityName="Settings">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.action.MANAGE_OVERLAY_PERMISSION" />
