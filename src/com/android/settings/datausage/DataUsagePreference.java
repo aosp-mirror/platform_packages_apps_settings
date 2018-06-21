@@ -21,6 +21,7 @@ import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.util.AttributeSet;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
@@ -51,17 +52,24 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
             NetworkServices services) {
         mTemplate = template;
         mSubId = subId;
-        DataUsageController controller = new DataUsageController(getContext());
-        DataUsageController.DataUsageInfo usageInfo = controller.getDataUsageInfo(mTemplate);
+        final DataUsageController controller = getDataUsageController();
         if (mTemplate.isMatchRuleMobile()) {
             setTitle(R.string.app_cellular_data_usage);
         } else {
+            final DataUsageController.DataUsageInfo usageInfo =
+                    controller.getDataUsageInfo(mTemplate);
             setTitle(mTitleRes);
             setSummary(getContext().getString(R.string.data_usage_template,
                     DataUsageUtils.formatDataUsage(getContext(), usageInfo.usageLevel),
                     usageInfo.period));
         }
-        setIntent(getIntent());
+        final long usageLevel = controller.getHistoriclUsageLevel(template);
+        if (usageLevel > 0L) {
+            setIntent(getIntent());
+        } else {
+            setIntent(null);
+            setEnabled(false);
+        }
     }
 
     @Override
@@ -79,5 +87,10 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
             launcher.setTitleRes(mTitleRes);
         }
         return launcher.toIntent();
+    }
+
+    @VisibleForTesting
+    DataUsageController getDataUsageController() {
+        return new DataUsageController(getContext());
     }
 }

@@ -486,11 +486,13 @@ public class DataUsageSummaryPreferenceTest {
         final long cycleEnd = System.currentTimeMillis() + TimeUnit.DAYS.toMillis(daysLeft)
                 + TimeUnit.HOURS.toMillis(1);
         final Activity activity = Robolectric.setupActivity(Activity.class);
+        mSummaryPreference = spy(mSummaryPreference);
         mSummaryPreference.setUsageInfo(cycleEnd, mUpdateTime, DUMMY_CARRIER, 0 /* numPlans */,
                 new Intent());
         mSummaryPreference.setUsageNumbers(1000000L, -1L, true);
         final String cycleText = "The quick fox";
         mSummaryPreference.setWifiMode(true, cycleText);
+        doReturn(200L).when(mSummaryPreference).getHistoriclUsageLevel();
 
         bindViewHolder();
         assertThat(mUsageTitle.getText().toString())
@@ -520,6 +522,17 @@ public class DataUsageSummaryPreferenceTest {
 
         assertThat(startedIntent.getIntExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, 0))
                 .isEqualTo(R.string.wifi_data_usage);
+    }
+
+    @Test
+    public void testSetWifiMode_noUsageInfo_shouldDisableLaunchButton() {
+        mSummaryPreference = spy(mSummaryPreference);
+        mSummaryPreference.setWifiMode(true, "Test cycle text");
+        doReturn(0L).when(mSummaryPreference).getHistoriclUsageLevel();
+
+        bindViewHolder();
+
+        assertThat(mLaunchButton.isEnabled()).isFalse();
     }
 
     private void bindViewHolder() {
