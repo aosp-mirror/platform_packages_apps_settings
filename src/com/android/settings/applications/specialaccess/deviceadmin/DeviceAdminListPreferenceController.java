@@ -173,8 +173,12 @@ public class DeviceAdminListPreferenceController extends BasePreferenceControlle
         final Context prefContext = mPreferenceGroup.getContext();
         final int childrenCount = mPreferenceGroup.getPreferenceCount();
         for (int i = 0; i < childrenCount; i++) {
-            SwitchPreference pref = (SwitchPreference) mPreferenceGroup.getPreference(i);
-            preferenceCache.put(pref.getKey(), pref);
+            final Preference pref = mPreferenceGroup.getPreference(i);
+            if (!(pref instanceof SwitchPreference)) {
+                continue;
+            }
+            final SwitchPreference appSwitch = (SwitchPreference) pref;
+            preferenceCache.put(appSwitch.getKey(), appSwitch);
         }
         for (DeviceAdminListItem item : mAdmins) {
             final String key = item.getKey();

@@ -19,11 +19,5 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/manage_device_admin"
-    android:key="device_admin_settings">
-
-    <PreferenceCategory
-        android:key="device_admin_list"
-        android:title="@string/summary_placeholder"
-        settings:controller="com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminListPreferenceController" />
-
-</PreferenceScreen>
+    android:key="device_admin_settings"
+    settings:controller="com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminListPreferenceController" />

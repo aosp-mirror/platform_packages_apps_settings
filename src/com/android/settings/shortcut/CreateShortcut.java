@@ -191,37 +191,4 @@ public class CreateShortcut extends LauncherActivity {
         return new Intent(Intent.ACTION_MAIN).addCategory("com.android.settings.SHORTCUT");
     }
 
-    public static class ShortcutsUpdateTask extends AsyncTask<Void, Void, Void> {
-
-        private final Context mContext;
-
-        public ShortcutsUpdateTask(Context context) {
-            mContext = context;
-        }
-
-        @Override
-        public Void doInBackground(Void... params) {
-            ShortcutManager sm = mContext.getSystemService(ShortcutManager.class);
-            PackageManager pm = mContext.getPackageManager();
-
-            List<ShortcutInfo> updates = new ArrayList<>();
-            for (ShortcutInfo info : sm.getPinnedShortcuts()) {
-                if (!info.getId().startsWith(SHORTCUT_ID_PREFIX)) {
-                    continue;
-                }
-                ComponentName cn = ComponentName.unflattenFromString(
-                        info.getId().substring(SHORTCUT_ID_PREFIX.length()));
-                ResolveInfo ri = pm.resolveActivity(getBaseIntent().setComponent(cn), 0);
-                if (ri == null) {
-                    continue;
-                }
-                updates.add(new ShortcutInfo.Builder(mContext, info.getId())
-                        .setShortLabel(ri.loadLabel(pm)).build());
-            }
-            if (!updates.isEmpty()) {
-                sm.updateShortcuts(updates);
-            }
-            return null;
-        }
-    }
 }

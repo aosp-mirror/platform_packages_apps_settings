@@ -16,22 +16,20 @@
 
 package com.android.settings.shortcut;
 
+import static com.android.settings.shortcut.CreateShortcut.SHORTCUT_ID_PREFIX;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
@@ -44,7 +42,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
@@ -63,16 +60,12 @@ import java.util.List;
 @Config(shadows = ShadowConnectivityManager.class)
 public class CreateShortcutTest {
 
-    private static final String SHORTCUT_ID_PREFIX = CreateShortcut.SHORTCUT_ID_PREFIX;
-
     private Context mContext;
     private ShadowConnectivityManager mShadowConnectivityManager;
     private ShadowPackageManager mPackageManager;
 
     @Mock
     private ShortcutManager mShortcutManager;
-    @Captor
-    private ArgumentCaptor<List<ShortcutInfo>> mListCaptor;
 
     @Before
     public void setup() {
@@ -108,40 +101,6 @@ public class CreateShortcutTest {
     }
 
     @Test
-    public void shortcutsUpdateTask() {
-        mContext = spy(RuntimeEnvironment.application);
-        doReturn(mShortcutManager).when(mContext).getSystemService(eq(Context.SHORTCUT_SERVICE));
-        final Intent shortcut1 = CreateShortcut.getBaseIntent().setComponent(
-                new ComponentName(mContext, Settings.ManageApplicationsActivity.class));
-        final ResolveInfo ri1 = mock(ResolveInfo.class);
-        final Intent shortcut2 = CreateShortcut.getBaseIntent().setComponent(
-                new ComponentName(mContext, Settings.SoundSettingsActivity.class));
-        final ResolveInfo ri2 = mock(ResolveInfo.class);
-        when(ri1.loadLabel(any(PackageManager.class))).thenReturn("label1");
-        when(ri2.loadLabel(any(PackageManager.class))).thenReturn("label2");
-        mPackageManager.addResolveInfoForIntent(shortcut1, ri1);
-        mPackageManager.addResolveInfoForIntent(shortcut2, ri2);
-
-        final List<ShortcutInfo> pinnedShortcuts = Arrays.asList(
-                makeShortcut("d1"),
-                makeShortcut("d2"),
-                makeShortcut(Settings.ManageApplicationsActivity.class),
-                makeShortcut("d3"),
-                makeShortcut(Settings.SoundSettingsActivity.class));
-        when(mShortcutManager.getPinnedShortcuts()).thenReturn(pinnedShortcuts);
-
-        new CreateShortcut.ShortcutsUpdateTask(mContext).doInBackground();
-
-        verify(mShortcutManager, times(1)).updateShortcuts(mListCaptor.capture());
-
-        final List<ShortcutInfo> updates = mListCaptor.getValue();
-
-        assertThat(updates).hasSize(2);
-        assertThat(pinnedShortcuts.get(2).getId()).isEqualTo(updates.get(0).getId());
-        assertThat(pinnedShortcuts.get(4).getId()).isEqualTo(updates.get(1).getId());
-    }
-
-    @Test
     public void queryActivities_shouldOnlyIncludeSystemApp() {
         final ResolveInfo ri1 = new ResolveInfo();
         ri1.activityInfo = new ActivityInfo();
@@ -165,14 +124,6 @@ public class CreateShortcutTest {
         assertThat(info.get(0)).isEqualTo(ri2);
     }
 
-    private ShortcutInfo makeShortcut(Class<?> className) {
-        ComponentName cn = new ComponentName(mContext, className);
-        return makeShortcut(SHORTCUT_ID_PREFIX + cn.flattenToShortString());
-    }
-
-    private ShortcutInfo makeShortcut(String id) {
-        return new ShortcutInfo.Builder(mContext, id).build();
-    }
 
     private static class TestClass extends CreateShortcut {
     }
