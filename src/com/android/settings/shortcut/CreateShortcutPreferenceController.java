@@ -45,10 +45,13 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
 
 /**
@@ -97,9 +100,26 @@ public class CreateShortcutPreferenceController extends BasePreferenceController
         group.removeAll();
         final List<ResolveInfo> shortcuts = queryShortcuts();
         final Context uiContext = preference.getContext();
+        if (shortcuts.isEmpty()) {
+            return;
+        }
+        PreferenceCategory category = new PreferenceCategory(uiContext);
+        group.addPreference(category);
+        int bucket = 0;
         for (ResolveInfo info : shortcuts) {
+            // Priority is not consecutive (aka, jumped), add a divider between prefs.
+            final int currentBucket = info.priority / 10;
+            boolean needDivider = currentBucket != bucket;
+            bucket = currentBucket;
+            if (needDivider) {
+                // add a new Category
+                category = new PreferenceCategory(uiContext);
+                group.addPreference(category);
+            }
+
             final Preference pref = new Preference(uiContext);
             pref.setTitle(info.loadLabel(mPackageManager));
+            pref.setKey(info.activityInfo.getComponentName().flattenToString());
             pref.setOnPreferenceClickListener(clickTarget -> {
                 if (mHost == null) {
                     return false;
@@ -112,7 +132,7 @@ public class CreateShortcutPreferenceController extends BasePreferenceController
                 mHost.finish();
                 return true;
             });
-            group.addPreference(pref);
+            category.addPreference(pref);
         }
     }
 
@@ -184,6 +204,7 @@ public class CreateShortcutPreferenceController extends BasePreferenceController
             }
             shortcuts.add(info);
         }
+        Collections.sort(shortcuts, SHORTCUT_COMPARATOR);
         return shortcuts;
     }
 
@@ -228,4 +249,13 @@ public class CreateShortcutPreferenceController extends BasePreferenceController
         view.draw(canvas);
         return bitmap;
     }
+
+    private static final Comparator<ResolveInfo> SHORTCUT_COMPARATOR =
+            new Comparator<ResolveInfo>() {
+
+                @Override
+                public int compare(ResolveInfo i1, ResolveInfo i2) {
+                    return i1.priority - i2.priority;
+                }
+            };
 }

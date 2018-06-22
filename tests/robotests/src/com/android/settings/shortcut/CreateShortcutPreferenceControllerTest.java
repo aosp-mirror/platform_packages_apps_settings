@@ -104,7 +104,7 @@ public class CreateShortcutPreferenceControllerTest {
     }
 
     @Test
-    public void queryActivities_shouldOnlyIncludeSystemApp() {
+    public void queryShortcuts_shouldOnlyIncludeSystemApp() {
         final ResolveInfo ri1 = new ResolveInfo();
         ri1.activityInfo = new ActivityInfo();
         ri1.activityInfo.name = "activity1";
@@ -123,5 +123,31 @@ public class CreateShortcutPreferenceControllerTest {
         final List<ResolveInfo> info = mController.queryShortcuts();
         assertThat(info).hasSize(1);
         assertThat(info.get(0)).isEqualTo(ri2);
+    }
+
+    @Test
+    public void queryShortcuts_shouldSortBasedOnPriority() {
+        final ResolveInfo ri1 = new ResolveInfo();
+        ri1.priority = 100;
+        ri1.activityInfo = new ActivityInfo();
+        ri1.activityInfo.name = "activity1";
+        ri1.activityInfo.applicationInfo = new ApplicationInfo();
+        ri1.activityInfo.applicationInfo.flags = ApplicationInfo.FLAG_SYSTEM;
+
+        final ResolveInfo ri2 = new ResolveInfo();
+        ri1.priority = 50;
+        ri2.activityInfo = new ActivityInfo();
+        ri2.activityInfo.name = "activity2";
+        ri2.activityInfo.applicationInfo = new ApplicationInfo();
+        ri2.activityInfo.applicationInfo.flags = ApplicationInfo.FLAG_SYSTEM;
+
+        mPackageManager.addResolveInfoForIntent(
+                new Intent(CreateShortcutPreferenceController.SHORTCUT_PROBE),
+                Arrays.asList(ri1, ri2));
+
+        final List<ResolveInfo> info = mController.queryShortcuts();
+        assertThat(info).hasSize(2);
+        assertThat(info.get(0)).isEqualTo(ri2);
+        assertThat(info.get(1)).isEqualTo(ri1);
     }
 }
