@@ -25,16 +25,11 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.provider.Settings;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl;
-import com.android.settings.search.InlinePayload;
-import com.android.settings.search.InlineSwitchPayload;
-import com.android.settings.search.ResultPayload;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -97,46 +92,12 @@ public class PickupGesturePreferenceControllerTest {
     }
 
     @Test
-    public void testPreferenceController_ProperResultPayloadType() {
-        final Context context = RuntimeEnvironment.application;
-        PickupGesturePreferenceController controller =
-                new PickupGesturePreferenceController(context, KEY_PICK_UP);
-        controller.setConfig(mAmbientDisplayConfiguration);
-        ResultPayload payload = controller.getResultPayload();
-        assertThat(payload).isInstanceOf(InlineSwitchPayload.class);
-    }
-
-    @Test
-    public void testSetValue_updatesCorrectly() {
-        int newValue = 1;
-        ContentResolver resolver = mContext.getContentResolver();
-        Settings.Secure.putInt(resolver, Settings.Secure.DOZE_PULSE_ON_PICK_UP, 0);
-
-        ((InlinePayload) mController.getResultPayload()).setValue(mContext, newValue);
-        int updatedValue = Settings.Secure.getInt(resolver,
-                Settings.Secure.DOZE_PULSE_ON_PICK_UP, -1);
-
-        assertThat(updatedValue).isEqualTo(newValue);
-    }
-
-    @Test
-    public void testGetValue_correctValueReturned() {
-        int currentValue = 1;
-        ContentResolver resolver = mContext.getContentResolver();
-        Settings.Secure.putInt(resolver, Settings.Secure.DOZE_PULSE_ON_PICK_UP, currentValue);
-
-        int newValue = ((InlinePayload) mController.getResultPayload()).getValue(mContext);
-
-        assertThat(newValue).isEqualTo(currentValue);
-    }
-
-    @Test
     public void isSuggestionCompleted_ambientDisplayPickup_trueWhenVisited() {
         when(mContext.getResources().getBoolean(anyInt())).thenReturn(true);
         when(mContext.getResources().getString(anyInt())).thenReturn("foo");
         final Context context = RuntimeEnvironment.application;
         final SharedPreferences prefs =
-            new SuggestionFeatureProviderImpl(context).getSharedPrefs(context);
+                new SuggestionFeatureProviderImpl(context).getSharedPrefs(context);
         prefs.edit().putBoolean(PickupGestureSettings.PREF_KEY_SUGGESTION_COMPLETE, true).commit();
 
         assertThat(PickupGesturePreferenceController.isSuggestionComplete(mContext, prefs))
@@ -173,7 +134,7 @@ public class PickupGesturePreferenceControllerTest {
     @Test
     public void isSliceableCorrectKey_returnsTrue() {
         final PickupGesturePreferenceController controller =
-                new PickupGesturePreferenceController(mContext,"gesture_pick_up");
+                new PickupGesturePreferenceController(mContext, "gesture_pick_up");
         assertThat(controller.isSliceable()).isTrue();
     }
 

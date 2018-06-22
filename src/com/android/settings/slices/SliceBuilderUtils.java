@@ -26,6 +26,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
 import android.util.Log;
@@ -34,13 +35,14 @@ import android.util.Pair;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SliderPreferenceController;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
@@ -212,10 +214,26 @@ public class SliceBuilderUtils {
                 .build();
     }
 
+    public static Intent  buildSearchResultPageIntent(Context context, String className, String key,
+            String screenTitle, int sourceMetricsCategory) {
+        final Bundle args = new Bundle();
+        args.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, key);
+        final Intent searchDestination = new SubSettingLauncher(context)
+                .setDestination(className)
+                .setArguments(args)
+                .setTitleText(screenTitle)
+                .setSourceMetricsCategory(sourceMetricsCategory)
+                .toIntent();
+        searchDestination.putExtra(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, key)
+                .setAction("com.android.settings.SEARCH_RESULT_TRAMPOLINE")
+                .setComponent(null);
+        return searchDestination;
+    }
+
     @VisibleForTesting
     static Intent getContentIntent(Context context, SliceData sliceData) {
         final Uri contentUri = new Uri.Builder().appendPath(sliceData.getKey()).build();
-        final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(context,
+        final Intent intent = buildSearchResultPageIntent(context,
                 sliceData.getFragmentClassName(), sliceData.getKey(),
                 sliceData.getScreenTitle().toString(), 0 /* TODO */);
         intent.setClassName(context.getPackageName(), SubSettings.class.getName());

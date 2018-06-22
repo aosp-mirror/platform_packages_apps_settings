@@ -11,7 +11,6 @@ import android.net.Uri;
 import android.provider.SearchIndexablesContract;
 
 import com.android.settings.R;
-import com.android.settings.search.indexing.FakeSettingsFragment;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 

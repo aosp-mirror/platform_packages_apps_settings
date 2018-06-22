@@ -19,15 +19,9 @@ package com.android.settings.gestures;
 import static android.provider.Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.provider.Settings;
 import android.text.TextUtils;
-
-import com.android.settings.R;
-import com.android.settings.search.DatabaseIndexingUtils;
-import com.android.settings.search.InlineSwitchPayload;
-import com.android.settings.search.ResultPayload;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -84,16 +78,5 @@ public class DoubleTapPowerPreferenceController extends GesturePreferenceControl
     public boolean setChecked(boolean isChecked) {
         return Settings.Secure.putInt(mContext.getContentResolver(), SECURE_KEY,
                 isChecked ? ON : OFF);
-    }
-
-    @Override
-    //TODO (b/69808376): Remove result payload
-    public ResultPayload getResultPayload() {
-        final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(mContext,
-                DoubleTapPowerSettings.class.getName(), mDoubleTapPowerKey,
-                mContext.getString(R.string.display_settings));
-
-        return new InlineSwitchPayload(SECURE_KEY, ResultPayload.SettingsSource.SECURE,
-                ON /* onValue */, intent, isAvailable(), ON /* defaultValue */);
     }
 }

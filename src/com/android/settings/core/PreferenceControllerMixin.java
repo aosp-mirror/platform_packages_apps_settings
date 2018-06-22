@@ -18,7 +18,6 @@ package com.android.settings.core;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.settings.search.ResultPayload;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -57,16 +56,5 @@ public interface PreferenceControllerMixin {
      * Called by SearchIndexProvider#getRawDataToIndex
      */
     default void updateRawDataToIndex(List<SearchIndexableRaw> rawData) {
-    }
-
-    /**
-     * @return the {@link ResultPayload} corresponding to the search result type for the preference.
-     *
-     * Do not rely on this method for intent-based or inline results. It will be removed in the
-     * unbundling effort.
-     */
-    @Deprecated
-    default ResultPayload getResultPayload() {
-        return null;
     }
 }

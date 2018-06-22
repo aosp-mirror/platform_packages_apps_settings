@@ -32,7 +32,7 @@ import android.widget.CompoundButton;
 import com.android.internal.app.LocalePicker;
 import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
-import com.android.settings.shortcut.CreateShortcut;
+import com.android.settings.shortcut.ShortcutsUpdateTask;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -294,7 +294,7 @@ class LocaleDragAndDropAdapter
 
                 LocalePicker.updateLocales(mLocalesToSetNext);
                 mLocalesSetLast = mLocalesToSetNext;
-                new CreateShortcut.ShortcutsUpdateTask(mContext).execute();
+                new ShortcutsUpdateTask(mContext).execute();
 
                 mLocalesToSetNext = null;
 

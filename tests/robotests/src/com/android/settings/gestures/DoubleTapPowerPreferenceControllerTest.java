@@ -28,12 +28,8 @@ import android.content.SharedPreferences;
 import android.provider.Settings;
 
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl;
-import com.android.settings.search.InlinePayload;
-import com.android.settings.search.InlineSwitchPayload;
-import com.android.settings.search.ResultPayload;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settings.testutils.shadow.ShadowSecureSettings;
 
 import org.junit.After;
 import org.junit.Before;
@@ -97,42 +93,6 @@ public class DoubleTapPowerPreferenceControllerTest {
         mController = new DoubleTapPowerPreferenceController(mContext, KEY_DOUBLE_TAP_POWER);
 
         assertThat(mController.isChecked()).isFalse();
-    }
-
-    @Test
-    public void testPreferenceController_ProperResultPayloadType() {
-        DoubleTapPowerPreferenceController controller =
-                new DoubleTapPowerPreferenceController(mContext, KEY_DOUBLE_TAP_POWER);
-        ResultPayload payload = controller.getResultPayload();
-        assertThat(payload).isInstanceOf(InlineSwitchPayload.class);
-    }
-
-    @Test
-    @Config(shadows = ShadowSecureSettings.class)
-    public void testSetValue_updatesCorrectly() {
-        int newValue = 1;
-        Settings.Secure.putInt(mContentResolver,
-                Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, 0);
-
-        InlinePayload payload = ((InlineSwitchPayload) mController.getResultPayload());
-        payload.setValue(mContext, newValue);
-        int updatedValue = Settings.Secure.getInt(mContentResolver,
-                Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, -1);
-        updatedValue = 1 - updatedValue; // DoubleTapPower is a non-standard switch
-
-        assertThat(updatedValue).isEqualTo(newValue);
-    }
-
-    @Test
-    @Config(shadows = ShadowSecureSettings.class)
-    public void testGetValue_correctValueReturned() {
-        int currentValue = 1;
-        Settings.Secure.putInt(mContentResolver,
-                Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, currentValue);
-
-        int newValue = ((InlinePayload) mController.getResultPayload()).getValue(mContext);
-        newValue = 1 - newValue; // DoubleTapPower is a non-standard switch
-        assertThat(newValue).isEqualTo(currentValue);
     }
 
     @Test

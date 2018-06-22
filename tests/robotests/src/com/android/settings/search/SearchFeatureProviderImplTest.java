@@ -86,12 +86,4 @@ public class SearchFeatureProviderImplTest {
         final ComponentName cn = new ComponentName(packageName, "class");
         mProvider.verifyLaunchSearchResultPageCaller(mActivity, cn);
     }
-
-    @Test
-    public void cleanQuery_trimsWhitespace() {
-        final String query = "  space ";
-        final String cleanQuery = "space";
-
-        assertThat(mProvider.cleanQuery(query)).isEqualTo(cleanQuery);
-    }
 }

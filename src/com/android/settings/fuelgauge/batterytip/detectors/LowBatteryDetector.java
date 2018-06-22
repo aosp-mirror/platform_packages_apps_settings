@@ -47,7 +47,7 @@ public class LowBatteryDetector implements BatteryTipDetector {
     public BatteryTip detect() {
         final boolean powerSaveModeOn = mPowerManager.isPowerSaveMode();
         final boolean lowBattery = mBatteryInfo.batteryLevel <= mWarningLevel
-                || (mBatteryInfo.discharging
+                || (mBatteryInfo.discharging && mBatteryInfo.remainingTimeUs != 0
                 && mBatteryInfo.remainingTimeUs < TimeUnit.HOURS.toMicros(mPolicy.lowBatteryHour));
 
         int state = BatteryTip.StateType.INVISIBLE;

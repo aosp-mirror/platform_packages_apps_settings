@@ -16,7 +16,6 @@
 
 package com.android.settings.wallpaper;
 
-import android.app.Fragment;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -36,17 +35,12 @@ import androidx.preference.PreferenceScreen;
 
 public class WallpaperTypePreferenceController extends BasePreferenceController
         implements LifecycleObserver, OnStart {
-    private Fragment mParentFragment;
+
     private PreferenceScreen mScreen;
 
     public WallpaperTypePreferenceController(Context context, String key) {
         super(context, key);
     }
-
-    public void setParentFragment(Fragment parentFragment) {
-        mParentFragment = parentFragment;
-    }
-
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
@@ -64,8 +58,7 @@ public class WallpaperTypePreferenceController extends BasePreferenceController
         if (preference.getIntent() == null) {
             return super.handlePreferenceTreeClick(preference);
         }
-        mParentFragment.startActivity(preference.getIntent());
-        mParentFragment.getActivity().finish();
+        mContext.startActivity(preference.getIntent());
         return true;
     }
 

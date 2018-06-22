@@ -22,6 +22,7 @@ import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.provider.Settings;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -40,6 +41,9 @@ import androidx.annotation.VisibleForTesting;
  * for creating dialogs.
  */
 public final class Utils {
+
+    private static final String TAG = "BluetoothUtils";
+
     static final boolean V = BluetoothUtils.V; // verbose logging
     static final boolean D =  BluetoothUtils.D;  // regular logging
 
@@ -107,11 +111,15 @@ public final class Utils {
         String message = context.getString(messageResId, name);
         Context activity = manager.getForegroundActivity();
         if (manager.isForegroundActivity()) {
-            new AlertDialog.Builder(activity)
-                .setTitle(R.string.bluetooth_error_title)
-                .setMessage(message)
-                .setPositiveButton(android.R.string.ok, null)
-                .show();
+            try {
+                new AlertDialog.Builder(activity)
+                        .setTitle(R.string.bluetooth_error_title)
+                        .setMessage(message)
+                        .setPositiveButton(android.R.string.ok, null)
+                        .show();
+            } catch (Exception e) {
+                Log.e(TAG, "Cannot show error dialog.", e);
+            }
         } else {
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
         }

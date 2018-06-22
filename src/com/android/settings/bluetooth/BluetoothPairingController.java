@@ -31,6 +31,8 @@ import com.android.settingslib.bluetooth.LocalBluetoothProfile;
 
 import java.util.Locale;
 
+import androidx.annotation.VisibleForTesting;
+
 /**
  * A controller used by {@link BluetoothPairingDialog} to manage connection state while we try to
  * pair with a bluetooth device. It includes methods that allow the
@@ -52,8 +54,10 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
 
     // Bluetooth dependencies for the connection we are trying to establish
     private LocalBluetoothManager mBluetoothManager;
-    private BluetoothDevice mDevice;
-    private int mType;
+    @VisibleForTesting
+    BluetoothDevice mDevice;
+    @VisibleForTesting
+    int mType;
     private String mUserInput;
     private String mPasskeyFormatted;
     private int mPasskey;
@@ -84,7 +88,6 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
         mDeviceName = mBluetoothManager.getCachedDeviceManager().getName(mDevice);
         mPbapClientProfile = mBluetoothManager.getProfileManager().getPbapClientProfile();
         mPasskeyFormatted = formatKey(mPasskey);
-
     }
 
     @Override
@@ -98,12 +101,13 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
 
     @Override
     public void onDialogPositiveClick(BluetoothPairingDialogFragment dialog) {
+        if (mPbapAllowed) {
+            mDevice.setPhonebookAccessPermission(BluetoothDevice.ACCESS_ALLOWED);
+        } else {
+            mDevice.setPhonebookAccessPermission(BluetoothDevice.ACCESS_REJECTED);
+        }
+
         if (getDialogType() == USER_ENTRY_DIALOG) {
-            if (mPbapAllowed) {
-                mDevice.setPhonebookAccessPermission(BluetoothDevice.ACCESS_ALLOWED);
-            } else {
-                mDevice.setPhonebookAccessPermission(BluetoothDevice.ACCESS_REJECTED);
-            }
             onPair(mUserInput);
         } else {
             onPair(null);

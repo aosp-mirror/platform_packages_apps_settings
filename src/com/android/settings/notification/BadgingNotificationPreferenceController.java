@@ -20,19 +20,14 @@ import static android.provider.Settings.Secure.NOTIFICATION_BADGING;
 
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
 import android.provider.Settings;
 import android.text.TextUtils;
 
-import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.TogglePreferenceController;
-import com.android.settings.search.DatabaseIndexingUtils;
-import com.android.settings.search.InlineSwitchPayload;
-import com.android.settings.search.ResultPayload;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
@@ -131,16 +126,5 @@ public class BadgingNotificationPreferenceController extends TogglePreferenceCon
                 updateState(mPreference);
             }
         }
-    }
-
-    @Override
-    public ResultPayload getResultPayload() {
-        final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(mContext,
-                ConfigureNotificationSettings.class.getName(), getPreferenceKey(),
-                mContext.getString(R.string.configure_notification_settings));
-
-        return new InlineSwitchPayload(Settings.Secure.NOTIFICATION_BADGING,
-                ResultPayload.SettingsSource.SECURE, ON /* onValue */, intent, isAvailable(),
-                ON /* defaultValue */);
     }
 }

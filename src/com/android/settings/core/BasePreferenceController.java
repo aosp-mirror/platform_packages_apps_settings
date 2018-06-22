@@ -19,7 +19,6 @@ import android.content.IntentFilter;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.settings.search.ResultPayload;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.slices.SliceData;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -285,15 +284,5 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
      * Called by SearchIndexProvider#getRawDataToIndex
      */
     public void updateRawDataToIndex(List<SearchIndexableRaw> rawData) {
-    }
-
-    /**
-     * @return the {@link ResultPayload} corresponding to the search result type for the preference.
-     * TODO (b/69808376) Remove this method.
-     * Do not extend this method. It will not launch with P.
-     */
-    @Deprecated
-    public ResultPayload getResultPayload() {
-        return null;
     }
 }

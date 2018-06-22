@@ -20,15 +20,11 @@ import static android.provider.Settings.Secure.ASSIST_GESTURE_ENABLED;
 import static android.provider.Settings.Secure.ASSIST_GESTURE_SILENCE_ALERTS_ENABLED;
 
 import android.content.Context;
-import android.content.Intent;
 import android.provider.Settings;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.search.DatabaseIndexingUtils;
-import com.android.settings.search.InlineSwitchPayload;
-import com.android.settings.search.ResultPayload;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -137,16 +133,5 @@ public class AssistGestureSettingsPreferenceController extends GesturePreference
     @Override
     public boolean isChecked() {
         return Settings.Secure.getInt(mContext.getContentResolver(), SECURE_KEY_ASSIST, OFF) == ON;
-    }
-
-    @Override
-    //TODO (b/69808376): Remove result payload
-    public ResultPayload getResultPayload() {
-        final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(mContext,
-                AssistGestureSettings.class.getName(), mAssistGesturePrefKey,
-                mContext.getString(R.string.display_settings));
-
-        return new InlineSwitchPayload(SECURE_KEY_ASSIST, ResultPayload.SettingsSource.SECURE,
-                ON /* onValue */, intent, isAvailable(), ON /* defaultValue */);
     }
 }

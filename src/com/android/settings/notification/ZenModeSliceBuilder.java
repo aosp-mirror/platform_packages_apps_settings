@@ -33,9 +33,9 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
-import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settings.slices.SliceBroadcastReceiver;
+import com.android.settings.slices.SliceBuilderUtils;
 
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
@@ -122,7 +122,7 @@ public class ZenModeSliceBuilder {
     public static Intent getIntent(Context context) {
         final Uri contentUri = new Uri.Builder().appendPath(ZEN_MODE_KEY).build();
         final String screenTitle = context.getText(R.string.zen_mode_settings_title).toString();
-        return DatabaseIndexingUtils.buildSearchResultPageIntent(context,
+        return SliceBuilderUtils.buildSearchResultPageIntent(context,
                 ZenModeSettings.class.getName(), ZEN_MODE_KEY, screenTitle,
                 MetricsEvent.NOTIFICATION_ZEN_MODE)
                 .setClassName(context.getPackageName(), SubSettings.class.getName())

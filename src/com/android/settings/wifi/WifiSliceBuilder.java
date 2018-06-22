@@ -36,8 +36,8 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
-import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.slices.SliceBroadcastReceiver;
+import com.android.settings.slices.SliceBuilderUtils;
 
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
@@ -120,7 +120,7 @@ public class WifiSliceBuilder {
     public static Intent getIntent(Context context) {
         final String screenTitle = context.getText(R.string.wifi_settings).toString();
         final Uri contentUri = new Uri.Builder().appendPath(KEY_WIFI).build();
-        final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(context,
+        final Intent intent = SliceBuilderUtils.buildSearchResultPageIntent(context,
                 WifiSettings.class.getName(), KEY_WIFI, screenTitle,
                 MetricsEvent.DIALOG_WIFI_AP_EDIT)
                 .setClassName(context.getPackageName(), SubSettings.class.getName())
