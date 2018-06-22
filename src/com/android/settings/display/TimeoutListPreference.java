@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.display;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
@@ -24,13 +24,17 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
+import com.android.settings.R;
+import com.android.settings.RestrictedListPreference;
 import com.android.settingslib.RestrictedLockUtils;
 
 import java.util.ArrayList;
 
 public class TimeoutListPreference extends RestrictedListPreference {
+    private static final String TAG = "TimeoutListPreference";
     private EnforcedAdmin mAdmin;
     private final CharSequence[] mInitialEntries;
     private final CharSequence[] mInitialValues;
@@ -115,9 +119,10 @@ public class TimeoutListPreference extends RestrictedListPreference {
                 // If the last one happens to be the same as the max timeout, select that
                 setValue(String.valueOf(maxTimeout));
             } else {
-                // There will be no highlighted selection since nothing in the list matches
-                // maxTimeout. The user can still select anything less than maxTimeout.
-                // TODO: maybe append maxTimeout to the list and mark selected.
+                // The selected time out value is longer than the max timeout allowed by the admin.
+                // Select the largest value from the list by default.
+                Log.w(TAG, "Default to longest timeout. Value disabled by admin:" + userPreference);
+                setValue(revisedValues.get(revisedValues.size() - 1).toString());
             }
         }
     }
