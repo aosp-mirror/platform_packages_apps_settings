@@ -148,12 +148,15 @@
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings" />
 
-        <activity android:name=".shortcut.CreateShortcut"
+        <activity android:name=".Settings$CreateShortcutActivity"
                   android:label="@string/settings_shortcut">
             <intent-filter>
-                <action android:name="android.intent.action.CREATE_SHORTCUT"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.intent.action.CREATE_SHORTCUT" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <meta-data
+                android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.shortcut.CreateShortcut" />
         </activity>
 
         <!-- Wireless Controls -->

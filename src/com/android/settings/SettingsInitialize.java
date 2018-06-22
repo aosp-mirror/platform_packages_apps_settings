@@ -34,7 +34,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
 
-import com.android.settings.shortcut.CreateShortcut;
+import com.android.settings.Settings.CreateShortcutActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,7 +101,8 @@ public class SettingsInitialize extends BroadcastReceiver {
         pm.setComponentEnabledSetting(settingsComponentName,
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
         // Disable shortcut picker.
-        ComponentName shortcutComponentName = new ComponentName(context, CreateShortcut.class);
+        ComponentName shortcutComponentName = new ComponentName(
+                context, CreateShortcutActivity.class);
         pm.setComponentEnabledSetting(shortcutComponentName,
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
     }
