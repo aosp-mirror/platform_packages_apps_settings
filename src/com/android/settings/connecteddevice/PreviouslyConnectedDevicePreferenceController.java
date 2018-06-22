@@ -59,7 +59,9 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
         super.displayPreference(screen);
         if (isAvailable()) {
             mPreference = screen.findPreference(getPreferenceKey());
-            mBluetoothDeviceUpdater.setPrefContext(screen.getContext());
+            final Context context = screen.getContext();
+            mBluetoothDeviceUpdater.setPrefContext(context);
+            mSavedDockUpdater.setPreferenceContext(context);
         }
     }
 
