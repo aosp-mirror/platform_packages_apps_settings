@@ -148,12 +148,15 @@
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings" />
 
-        <activity android:name=".shortcut.CreateShortcut"
+        <activity android:name=".Settings$CreateShortcutActivity"
                   android:label="@string/settings_shortcut">
             <intent-filter>
-                <action android:name="android.intent.action.CREATE_SHORTCUT"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.intent.action.CREATE_SHORTCUT" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <meta-data
+                android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.shortcut.CreateShortcut" />
         </activity>
 
         <!-- Wireless Controls -->
@@ -241,10 +244,8 @@
                 <action android:name="android.settings.WIFI_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
+            <intent-filter android:priority="1">
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -388,9 +389,8 @@
             android:label="@string/devices_title"
             android:targetActivity=".Settings$ConnectedDeviceDashboardActivity"
             android:exported="true">
-            <intent-filter>
+            <intent-filter android:priority="10">
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -467,9 +467,8 @@
                 <action android:name="com.android.settings.WIFI_TETHER_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
+            <intent-filter android:priority="4">
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -510,10 +509,8 @@
                 <action android:name="android.net.vpn.SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
+            <intent-filter android:priority="5">
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -726,9 +723,8 @@
                 <action android:name="android.settings.ZEN_MODE_PRIORITY_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
+            <intent-filter android:priority="41">
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -882,10 +878,8 @@
                 <action android:name="android.settings.DISPLAY_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
+            <intent-filter android:priority="30">
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <intent-filter android:priority="7">
@@ -901,15 +895,6 @@
                 android:resource="@string/display_dashboard_summary"/>
         </activity>
 
-        <!-- Keep compatibility with old shortcuts. -->
-        <activity-alias android:name="DisplaySettings"
-                android:label="@string/display_settings"
-                android:exported="true"
-                android:targetActivity="Settings$DisplaySettingsActivity">
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.DisplaySettings" />
-        </activity-alias>
-
         <activity
             android:name="Settings$NightDisplaySettingsActivity"
             android:label="@string/night_display_title"
@@ -917,9 +902,8 @@
             android:icon="@drawable/ic_settings_night_display"
             android:taskAffinity="com.android.settings"
             android:parentActivityName="Settings">
-            <intent-filter>
+            <intent-filter android:priority="32">
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <intent-filter android:priority="1">
@@ -962,10 +946,8 @@
                 <action android:name="android.settings.DEVICE_NAME" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
+            <intent-filter android:priority="71">
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <intent-filter android:priority="270">
@@ -1006,10 +988,8 @@
                 <action android:name="android.settings.MANAGE_ALL_APPLICATIONS_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
+            <intent-filter android:priority="20">
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -1194,9 +1174,8 @@
             android:label="@string/notification_log_title"
             android:taskAffinity="com.android.settings"
             android:parentActivityName="Settings">
-            <intent-filter>
+            <intent-filter android:priority="22">
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -1224,10 +1203,8 @@
                 <action android:name="android.settings.LOCATION_SOURCE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
+            <intent-filter android:priority="52">
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -1418,10 +1395,8 @@
                 <action android:name="android.settings.ACCESSIBILITY_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
+            <intent-filter android:priority="60">
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <intent-filter android:priority="2">
@@ -1749,11 +1724,9 @@
                 <action android:name="android.settings.MEMORY_CARD_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
+            <intent-filter android:priority="50">
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.android.settings.SHORTCUT" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
             <intent-filter android:priority="5">
                 <action android:name="com.android.settings.action.SETTINGS" />
@@ -2153,9 +2126,8 @@
                 <action android:name="android.intent.action.POWER_USAGE_SUMMARY" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
+            <intent-filter android:priority="51">
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <intent-filter android:priority="8">
@@ -2307,9 +2279,8 @@
                 <action android:name="android.settings.DATA_USAGE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
+            <intent-filter android:priority="3">
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <intent-filter android:priority="10">
@@ -2497,9 +2468,8 @@
                 <action android:name="android.settings.NOTIFICATION_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
+            <intent-filter android:priority="21">
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <intent-filter android:priority="160">
@@ -2515,7 +2485,6 @@
                 android:value="true" />
         </activity>
 
-        <!-- Keep compatibility with old shortcuts. -->
         <activity
             android:name="Settings$SoundSettingsActivity"
             android:label="@string/sound_settings"
@@ -2529,10 +2498,8 @@
                 <action android:name="android.settings.ACTION_OTHER_SOUND_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
+            <intent-filter android:priority="40">
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <intent-filter android:priority="6">
@@ -2983,7 +2950,7 @@
                 <action android:name="android.settings.SYNC_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
+            <intent-filter android:priority="53">
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
@@ -3004,7 +2971,7 @@
             <intent-filter android:priority="-1">
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
-            <intent-filter>
+            <intent-filter android:priority="70">
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>

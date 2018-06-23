@@ -16,7 +16,7 @@
 
 package com.android.settings.shortcut;
 
-import static com.android.settings.shortcut.CreateShortcut.SHORTCUT_ID_PREFIX;
+import static com.android.settings.shortcut.CreateShortcutPreferenceController.SHORTCUT_ID_PREFIX;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doReturn;
@@ -26,6 +26,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -44,7 +45,6 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
@@ -54,41 +54,44 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Tests for {@link CreateShortcutTest}
+ * Tests for {@link CreateShortcutPreferenceController}
  */
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowConnectivityManager.class)
-public class CreateShortcutTest {
+public class CreateShortcutPreferenceControllerTest {
+
+    @Mock
+    private ShortcutManager mShortcutManager;
+    @Mock
+    private Activity mHost;
 
     private Context mContext;
     private ShadowConnectivityManager mShadowConnectivityManager;
     private ShadowPackageManager mPackageManager;
-
-    @Mock
-    private ShortcutManager mShortcutManager;
+    private CreateShortcutPreferenceController mController;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
+        doReturn(mShortcutManager).when(mContext).getSystemService(eq(Context.SHORTCUT_SERVICE));
         mPackageManager = Shadow.extract(mContext.getPackageManager());
         mShadowConnectivityManager = ShadowConnectivityManager.getShadow();
         mShadowConnectivityManager.setTetheringSupported(true);
+
+        mController = new CreateShortcutPreferenceController(mContext, "key");
+        mController.setActivity(mHost);
     }
 
     @Test
     public void createResultIntent() {
-        CreateShortcut orgActivity = Robolectric.setupActivity(CreateShortcut.class);
-        CreateShortcut activity = spy(orgActivity);
-        doReturn(mShortcutManager).when(activity).getSystemService(eq(Context.SHORTCUT_SERVICE));
-
         when(mShortcutManager.createShortcutResultIntent(any(ShortcutInfo.class)))
                 .thenReturn(new Intent().putExtra("d1", "d2"));
 
-        final Intent intent = CreateShortcut.getBaseIntent()
-                .setClass(activity, Settings.ManageApplicationsActivity.class);
-        final ResolveInfo ri = activity.getPackageManager().resolveActivity(intent, 0);
-        final Intent result = activity.createResultIntent(intent, ri, "dummy");
+        final Intent intent = new Intent(CreateShortcutPreferenceController.SHORTCUT_PROBE)
+                .setClass(mContext, Settings.ManageApplicationsActivity.class);
+        final ResolveInfo ri = mContext.getPackageManager().resolveActivity(intent, 0);
+        final Intent result = mController.createResultIntent(intent, ri, "dummy");
 
         assertThat(result.getStringExtra("d1")).isEqualTo("d2");
         assertThat((Object) result.getParcelableExtra(Intent.EXTRA_SHORTCUT_INTENT)).isNotNull();
@@ -101,7 +104,7 @@ public class CreateShortcutTest {
     }
 
     @Test
-    public void queryActivities_shouldOnlyIncludeSystemApp() {
+    public void queryShortcuts_shouldOnlyIncludeSystemApp() {
         final ResolveInfo ri1 = new ResolveInfo();
         ri1.activityInfo = new ActivityInfo();
         ri1.activityInfo.name = "activity1";
@@ -113,18 +116,38 @@ public class CreateShortcutTest {
         ri2.activityInfo.applicationInfo = new ApplicationInfo();
         ri2.activityInfo.applicationInfo.flags = ApplicationInfo.FLAG_SYSTEM;
 
-        mPackageManager.addResolveInfoForIntent(CreateShortcut.getBaseIntent(),
+        mPackageManager.addResolveInfoForIntent(
+                new Intent(CreateShortcutPreferenceController.SHORTCUT_PROBE),
                 Arrays.asList(ri1, ri2));
 
-        TestClass orgActivity = Robolectric.setupActivity(TestClass.class);
-        TestClass activity = spy(orgActivity);
-
-        List<ResolveInfo> info = activity.onQueryPackageManager(CreateShortcut.getBaseIntent());
+        final List<ResolveInfo> info = mController.queryShortcuts();
         assertThat(info).hasSize(1);
         assertThat(info.get(0)).isEqualTo(ri2);
     }
 
+    @Test
+    public void queryShortcuts_shouldSortBasedOnPriority() {
+        final ResolveInfo ri1 = new ResolveInfo();
+        ri1.priority = 100;
+        ri1.activityInfo = new ActivityInfo();
+        ri1.activityInfo.name = "activity1";
+        ri1.activityInfo.applicationInfo = new ApplicationInfo();
+        ri1.activityInfo.applicationInfo.flags = ApplicationInfo.FLAG_SYSTEM;
 
-    private static class TestClass extends CreateShortcut {
+        final ResolveInfo ri2 = new ResolveInfo();
+        ri1.priority = 50;
+        ri2.activityInfo = new ActivityInfo();
+        ri2.activityInfo.name = "activity2";
+        ri2.activityInfo.applicationInfo = new ApplicationInfo();
+        ri2.activityInfo.applicationInfo.flags = ApplicationInfo.FLAG_SYSTEM;
+
+        mPackageManager.addResolveInfoForIntent(
+                new Intent(CreateShortcutPreferenceController.SHORTCUT_PROBE),
+                Arrays.asList(ri1, ri2));
+
+        final List<ResolveInfo> info = mController.queryShortcuts();
+        assertThat(info).hasSize(2);
+        assertThat(info.get(0)).isEqualTo(ri2);
+        assertThat(info.get(1)).isEqualTo(ri1);
     }
 }

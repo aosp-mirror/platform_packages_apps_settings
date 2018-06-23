@@ -16,7 +16,7 @@
 
 package com.android.settings.shortcut;
 
-import static com.android.settings.shortcut.CreateShortcut.SHORTCUT_ID_PREFIX;
+import static com.android.settings.shortcut.CreateShortcutPreferenceController.SHORTCUT_ID_PREFIX;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -63,7 +63,6 @@ public class ShortcutsUpdateTaskTest {
     @Captor
     private ArgumentCaptor<List<ShortcutInfo>> mListCaptor;
 
-
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
@@ -75,11 +74,13 @@ public class ShortcutsUpdateTaskTest {
     public void shortcutsUpdateTask() {
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mShortcutManager).when(mContext).getSystemService(eq(Context.SHORTCUT_SERVICE));
-        final Intent shortcut1 = CreateShortcut.getBaseIntent().setComponent(
-                new ComponentName(mContext, Settings.ManageApplicationsActivity.class));
+        final Intent shortcut1 = new Intent(CreateShortcutPreferenceController.SHORTCUT_PROBE)
+                .setComponent(new ComponentName(
+                        mContext, Settings.ManageApplicationsActivity.class));
         final ResolveInfo ri1 = mock(ResolveInfo.class);
-        final Intent shortcut2 = CreateShortcut.getBaseIntent().setComponent(
-                new ComponentName(mContext, Settings.SoundSettingsActivity.class));
+        final Intent shortcut2 = new Intent(CreateShortcutPreferenceController.SHORTCUT_PROBE)
+                .setComponent(new ComponentName(
+                        mContext, Settings.SoundSettingsActivity.class));
         final ResolveInfo ri2 = mock(ResolveInfo.class);
         when(ri1.loadLabel(any(PackageManager.class))).thenReturn("label1");
         when(ri2.loadLabel(any(PackageManager.class))).thenReturn("label2");

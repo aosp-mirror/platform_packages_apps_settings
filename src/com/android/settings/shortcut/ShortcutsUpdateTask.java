@@ -16,8 +16,12 @@
 
 package com.android.settings.shortcut;
 
+import static com.android.settings.shortcut.CreateShortcutPreferenceController.SHORTCUT_ID_PREFIX;
+import static com.android.settings.shortcut.CreateShortcutPreferenceController.SHORTCUT_PROBE;
+
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ShortcutInfo;
@@ -42,12 +46,12 @@ public class ShortcutsUpdateTask extends AsyncTask<Void, Void, Void> {
 
         List<ShortcutInfo> updates = new ArrayList<>();
         for (ShortcutInfo info : sm.getPinnedShortcuts()) {
-            if (!info.getId().startsWith(CreateShortcut.SHORTCUT_ID_PREFIX)) {
+            if (!info.getId().startsWith(SHORTCUT_ID_PREFIX)) {
                 continue;
             }
             ComponentName cn = ComponentName.unflattenFromString(
-                    info.getId().substring(CreateShortcut.SHORTCUT_ID_PREFIX.length()));
-            ResolveInfo ri = pm.resolveActivity(CreateShortcut.getBaseIntent().setComponent(cn), 0);
+                    info.getId().substring(SHORTCUT_ID_PREFIX.length()));
+            ResolveInfo ri = pm.resolveActivity(new Intent(SHORTCUT_PROBE).setComponent(cn), 0);
             if (ri == null) {
                 continue;
             }
