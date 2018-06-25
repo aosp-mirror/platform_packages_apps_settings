@@ -31,7 +31,7 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SetupEncryptionInterstitial;
 import com.android.settings.SetupWizardUtils;
-import com.android.settings.fingerprint.SetupFingerprintEnrollFindSensor;
+import com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollFindSensor;
 import com.android.settings.utils.SettingsDividerItemDecoration;
 import com.android.setupwizardlib.GlifPreferenceLayout;
 
