@@ -19,6 +19,7 @@ import static com.android.settingslib.Utils.isAudioModeOngoingCall;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.bluetooth.AvailableMediaBluetoothDeviceUpdater;
@@ -46,12 +47,14 @@ import androidx.preference.PreferenceScreen;
 public class AvailableMediaDeviceGroupController extends BasePreferenceController
         implements LifecycleObserver, OnStart, OnStop, DevicePreferenceCallback, BluetoothCallback {
 
+    private static final String TAG = "AvailableMediaDeviceGroupController";
     private static final String KEY = "available_device_list";
 
     @VisibleForTesting
     PreferenceGroup mPreferenceGroup;
+    @VisibleForTesting
+    LocalBluetoothManager mLocalBluetoothManager;
     private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
-    private final LocalBluetoothManager mLocalBluetoothManager;
 
     public AvailableMediaDeviceGroupController(Context context) {
         super(context, KEY);
@@ -60,12 +63,20 @@ public class AvailableMediaDeviceGroupController extends BasePreferenceControlle
 
     @Override
     public void onStart() {
+        if (mLocalBluetoothManager == null) {
+            Log.e(TAG, "onStart() Bluetooth is not supported on this device");
+            return;
+        }
         mBluetoothDeviceUpdater.registerCallback();
         mLocalBluetoothManager.getEventManager().registerCallback(this);
     }
 
     @Override
     public void onStop() {
+        if (mLocalBluetoothManager == null) {
+            Log.e(TAG, "onStop() Bluetooth is not supported on this device");
+            return;
+        }
         mBluetoothDeviceUpdater.unregisterCallback();
         mLocalBluetoothManager.getEventManager().unregisterCallback(this);
     }

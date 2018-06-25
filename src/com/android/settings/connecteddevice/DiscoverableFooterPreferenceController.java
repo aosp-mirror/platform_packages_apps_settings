@@ -50,9 +50,10 @@ public class DiscoverableFooterPreferenceController extends BasePreferenceContro
 
     @VisibleForTesting
     BroadcastReceiver mBluetoothChangedReceiver;
+    @VisibleForTesting
+    LocalBluetoothManager mLocalManager;
     private FooterPreferenceMixin mFooterPreferenceMixin;
     private FooterPreference mPreference;
-    private LocalBluetoothManager mLocalManager;
     private LocalBluetoothAdapter mLocalAdapter;
     private AlwaysDiscoverable mAlwaysDiscoverable;
 
@@ -113,6 +114,9 @@ public class DiscoverableFooterPreferenceController extends BasePreferenceContro
 
     @Override
     public void onResume() {
+        if (mLocalManager == null) {
+            return;
+        }
         mContext.registerReceiver(mBluetoothChangedReceiver,
                 new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
         mAlwaysDiscoverable.start();
@@ -121,6 +125,9 @@ public class DiscoverableFooterPreferenceController extends BasePreferenceContro
 
     @Override
     public void onPause() {
+        if (mLocalManager == null) {
+            return;
+        }
         mContext.unregisterReceiver(mBluetoothChangedReceiver);
         mAlwaysDiscoverable.stop();
     }
