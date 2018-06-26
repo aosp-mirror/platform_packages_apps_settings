@@ -88,6 +88,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
 
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     private ImsManager mImsManager;
+    private TelephonyManager mTelephonyManager;
 
     private final PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
         /*
@@ -237,6 +238,9 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         mImsManager = ImsManager.getInstance(
                 getActivity(), SubscriptionManager.getPhoneId(mSubId));
 
+        mTelephonyManager = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE))
+                .createForSubscriptionId(mSubId);
+
         mButtonWfcMode = (ListPreference) findPreference(BUTTON_WFC_MODE);
         mButtonWfcMode.setOnPreferenceChangeListener(this);
 
@@ -318,9 +322,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         updateBody();
 
         if (mImsManager.isWfcEnabledByPlatform()) {
-            TelephonyManager tm =
-                    (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-            tm.listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
+            mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
 
             mSwitchBar.addOnSwitchChangeListener(this);
 
