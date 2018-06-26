@@ -17,7 +17,6 @@
 package com.android.settings.core;
 
 import android.annotation.StringRes;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,6 +28,7 @@ import com.android.settings.SubSettings;
 import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
 
 public class SubSettingLauncher {
 

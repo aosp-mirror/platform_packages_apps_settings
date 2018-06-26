@@ -18,7 +18,6 @@ package com.android.settings.deviceinfo.imei;
 
 import static android.telephony.TelephonyManager.PHONE_TYPE_CDMA;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.telephony.TelephonyManager;
 
@@ -30,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

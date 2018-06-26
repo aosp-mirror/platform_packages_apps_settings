@@ -25,6 +25,7 @@ import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.Until;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

@@ -22,8 +22,6 @@ import android.provider.Settings;
 import com.android.settings.core.TogglePreferenceController;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 public class ColorInversionPreferenceController extends TogglePreferenceController {
     @VisibleForTesting

@@ -17,9 +17,8 @@
 
 package com.android.settings.deviceinfo;
 
-import android.content.Intent;
 import android.content.Context;
-
+import android.content.Intent;
 import android.os.storage.VolumeRecord;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.SmallTest;

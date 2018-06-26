@@ -2,7 +2,6 @@ package com.android.settings.testutils.shadow;
 
 import static android.util.TypedValue.TYPE_REFERENCE;
 import static org.robolectric.RuntimeEnvironment.application;
-import static org.robolectric.Shadows.shadowOf;
 import static org.robolectric.shadow.api.Shadow.directlyOn;
 
 import android.annotation.DimenRes;

@@ -24,7 +24,6 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.FooterPreferenceMixin;
 
-import androidx.preference.PreferenceFragment;
 import androidx.preference.PreferenceScreen;
 
 /**

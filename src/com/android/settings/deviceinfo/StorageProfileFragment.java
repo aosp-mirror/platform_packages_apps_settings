@@ -16,9 +16,7 @@
 
 package com.android.settings.deviceinfo;
 
-import android.app.LoaderManager;
 import android.content.Context;
-import android.content.Loader;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -41,6 +39,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 
 /**
  * StorageProfileFragment is a fragment which shows the storage results for a profile of the

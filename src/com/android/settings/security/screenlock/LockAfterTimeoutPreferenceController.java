@@ -27,8 +27,8 @@ import android.util.Log;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
-import com.android.settings.display.TimeoutListPreference;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.display.TimeoutListPreference;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.security.trustagent.TrustAgentManager;
 import com.android.settingslib.RestrictedLockUtils;

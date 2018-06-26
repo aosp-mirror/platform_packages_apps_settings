@@ -18,7 +18,6 @@ package com.android.settings.notification;
 
 import android.app.Activity;
 import android.app.Application;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -41,6 +40,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 
 @SearchIndexable

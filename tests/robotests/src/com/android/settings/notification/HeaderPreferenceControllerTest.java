@@ -43,8 +43,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.shadows.ShadowApplication;
 
-import androidx.preference.PreferenceFragment;
-
 @RunWith(SettingsRobolectricTestRunner.class)
 public class HeaderPreferenceControllerTest {
 

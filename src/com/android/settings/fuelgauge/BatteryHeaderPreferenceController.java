@@ -36,7 +36,6 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.PreferenceFragment;
 import androidx.preference.PreferenceScreen;
 
 /**

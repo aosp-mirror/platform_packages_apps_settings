@@ -30,6 +30,7 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+
 import com.android.settings.tests.unit.R;
 
 public class BluetoothRequestPermissionTest extends Activity {

@@ -17,7 +17,6 @@
 package com.android.settings.testutils.shadow;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.view.View;
 
 import com.android.settings.widget.EntityHeaderController;
@@ -25,6 +24,8 @@ import com.android.settings.widget.EntityHeaderController;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
+
+import androidx.fragment.app.Fragment;
 
 @Implements(value = EntityHeaderController.class, callThroughByDefault = false)
 public class ShadowEntityHeaderController {

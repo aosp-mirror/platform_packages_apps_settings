@@ -16,7 +16,6 @@
 
 package com.android.settings.password;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import android.app.Activity;

@@ -30,7 +30,6 @@ import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
-import androidx.preference.PreferenceFragment;
 import androidx.preference.PreferenceScreen;
 
 /**

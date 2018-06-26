@@ -20,7 +20,6 @@ import static org.mockito.Answers.RETURNS_DEEP_STUBS;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.when;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.UserInfo;
 import android.os.UserManager;
@@ -37,6 +36,7 @@ import org.robolectric.shadows.ShadowApplication;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

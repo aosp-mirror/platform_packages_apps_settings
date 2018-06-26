@@ -26,7 +26,6 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.robolectric.Shadows.shadowOf;
 
 import android.app.Activity;
 import android.content.Context;
@@ -55,7 +54,6 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowPowerManager;
 
 import androidx.lifecycle.LifecycleOwner;
-import androidx.preference.PreferenceFragment;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 

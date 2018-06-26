@@ -16,7 +16,6 @@
 
 package com.android.settings.security.screenlock;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
@@ -34,6 +33,8 @@ import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.fragment.app.Fragment;
 
 @SearchIndexable
 public class ScreenLockSettings extends DashboardFragment

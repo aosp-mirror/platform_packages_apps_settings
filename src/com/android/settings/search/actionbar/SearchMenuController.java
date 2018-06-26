@@ -17,7 +17,6 @@
 package com.android.settings.search.actionbar;
 
 import android.annotation.NonNull;
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -31,6 +30,8 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.ObservableFragment;
 import com.android.settingslib.core.lifecycle.ObservablePreferenceFragment;
 import com.android.settingslib.core.lifecycle.events.OnCreateOptionsMenu;
+
+import androidx.fragment.app.Fragment;
 
 public class SearchMenuController implements LifecycleObserver, OnCreateOptionsMenu {
 

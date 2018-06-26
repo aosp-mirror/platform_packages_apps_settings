@@ -24,7 +24,6 @@ import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
 import android.annotation.Nullable;
 import android.app.ActivityManager;
 import android.app.AppGlobals;
-import android.app.Fragment;
 import android.app.IActivityManager;
 import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
@@ -99,6 +98,7 @@ import java.util.List;
 import java.util.Locale;
 
 import androidx.annotation.StringRes;
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 

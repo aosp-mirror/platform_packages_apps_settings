@@ -17,7 +17,6 @@
 package com.android.settings.password;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -54,6 +53,8 @@ import com.google.android.collect.Lists;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import androidx.fragment.app.Fragment;
 
 /**
  * If the user has a lock pattern set already, makes them confirm the existing one.

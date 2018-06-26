@@ -26,8 +26,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toolbar;
 
-import androidx.annotation.NonNull;
-
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsHomepageActivity;
@@ -40,6 +38,8 @@ import com.android.settings.search.SearchFeatureProvider;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import androidx.annotation.NonNull;
 
 public class HomepageFragment extends InstrumentedFragment {
 

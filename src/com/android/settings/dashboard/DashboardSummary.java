@@ -17,7 +17,6 @@
 package com.android.settings.dashboard;
 
 import android.app.Activity;
-import android.app.LoaderManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -49,6 +48,7 @@ import java.util.List;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.annotation.WorkerThread;
+import androidx.loader.app.LoaderManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 public class DashboardSummary extends InstrumentedFragment

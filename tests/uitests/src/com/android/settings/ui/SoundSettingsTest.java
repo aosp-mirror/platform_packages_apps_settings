@@ -16,19 +16,15 @@
 
 package com.android.settings.ui;
 
-import android.app.NotificationManager;
 import android.content.ContentResolver;
-import android.content.Context;
-import android.os.Handler;
 import android.os.SystemClock;
 import android.provider.Settings;
-import android.service.notification.ZenModeConfig;
-import android.support.test.uiautomator.UiObject2;
-import android.system.helpers.SettingsHelper;
-import android.system.helpers.SettingsHelper.SettingsType;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiDevice;
+import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.Until;
+import android.system.helpers.SettingsHelper;
+import android.system.helpers.SettingsHelper.SettingsType;
 import android.test.InstrumentationTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.Suppress;

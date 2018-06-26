@@ -27,10 +27,10 @@ import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.Until;
 import android.system.helpers.ActivityHelper;
 import android.system.helpers.SettingsHelper;
-import android.widget.ListView;
 import android.test.InstrumentationTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.util.Log;
+import android.widget.ListView;
 
 /** Verifies that you can get to the notification app listing page from the apps & notifications
  * page */

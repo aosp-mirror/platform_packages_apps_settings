@@ -16,7 +16,6 @@
 
 package com.android.settings.deviceinfo.simstatus;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -30,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

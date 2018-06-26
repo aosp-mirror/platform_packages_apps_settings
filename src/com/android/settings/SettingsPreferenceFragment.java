@@ -18,8 +18,6 @@ package com.android.settings;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.Fragment;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -52,6 +50,8 @@ import java.util.UUID;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.annotation.XmlRes;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;

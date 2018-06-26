@@ -21,7 +21,6 @@ import static com.android.settings.network.MobilePlanPreferenceController
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Fragment;
 import android.content.Context;
 import android.icu.text.ListFormatter;
 import android.provider.SearchIndexableResource;
@@ -45,6 +44,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
 
 @SearchIndexable
 public class NetworkDashboardFragment extends DashboardFragment implements

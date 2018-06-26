@@ -16,7 +16,6 @@
 
 package com.android.settings.language;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -27,6 +26,7 @@ import com.android.settings.inputmethod.UserDictionarySettings;
 
 import java.util.TreeSet;
 
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 
 public class UserDictionaryPreferenceController extends BasePreferenceController {

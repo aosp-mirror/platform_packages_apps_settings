@@ -20,7 +20,6 @@ import static com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Fragment;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -47,6 +46,8 @@ import java.text.Collator;
 import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
+
+import androidx.fragment.app.Fragment;
 
 public class ZenRuleSelectionDialog extends InstrumentedDialogFragment {
     private static final String TAG = "ZenRuleSelectionDialog";

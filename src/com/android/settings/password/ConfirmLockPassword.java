@@ -16,7 +16,6 @@
 
 package com.android.settings.password;
 
-import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
@@ -50,6 +49,8 @@ import com.android.settingslib.animation.AppearAnimationUtils;
 import com.android.settingslib.animation.DisappearAnimationUtils;
 
 import java.util.ArrayList;
+
+import androidx.fragment.app.Fragment;
 
 public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 

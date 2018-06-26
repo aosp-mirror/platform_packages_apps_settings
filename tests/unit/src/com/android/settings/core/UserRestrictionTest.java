@@ -23,7 +23,6 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
 import android.os.UserManager;
-import android.platform.test.annotations.Presubmit;
 import android.provider.SearchIndexableResource;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.MediumTest;

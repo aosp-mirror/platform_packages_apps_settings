@@ -20,7 +20,6 @@ import static com.android.internal.logging.nano.MetricsProto.MetricsEvent
         .SETTINGS_APP_NOTIF_CATEGORY;
 
 import android.app.Application;
-import android.app.Fragment;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
@@ -52,6 +51,7 @@ import java.util.Map;
 import java.util.Set;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;

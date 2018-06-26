@@ -18,7 +18,6 @@ package com.android.settings.deviceinfo.firmwareversion;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Build;
 
@@ -37,6 +36,7 @@ import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
 
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;

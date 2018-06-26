@@ -16,8 +16,6 @@
 
 package com.android.settings.wifi.calling;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -38,6 +36,8 @@ import com.android.settings.widget.SlidingTabLayout;
 
 import java.util.List;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.legacy.app.FragmentPagerAdapter;
 
 /**

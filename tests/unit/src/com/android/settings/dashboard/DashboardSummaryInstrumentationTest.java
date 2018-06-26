@@ -19,7 +19,6 @@ package com.android.settings.dashboard;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
@@ -38,6 +37,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.List;
+
+import androidx.fragment.app.Fragment;
 
 @RunWith(AndroidJUnit4.class)
 @SmallTest

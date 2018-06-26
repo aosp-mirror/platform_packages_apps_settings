@@ -17,7 +17,6 @@
 package com.android.settings.password;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
@@ -32,6 +31,7 @@ import com.android.settings.SetupRedactionInterstitial;
 import com.android.settings.password.ChooseLockTypeDialogFragment.OnLockTypeSelectedListener;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 /**
  * Setup Wizard's version of ChooseLockPassword screen. It inherits the logic and basic structure

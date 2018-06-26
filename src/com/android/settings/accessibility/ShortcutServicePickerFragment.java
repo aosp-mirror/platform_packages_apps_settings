@@ -24,7 +24,6 @@ import static com.android.internal.accessibility.AccessibilityShortcutController
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.Fragment;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -54,6 +53,8 @@ import com.android.settingslib.widget.CandidateInfo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import androidx.fragment.app.Fragment;
 
 /**
  * Fragment for picking accessibility shortcut service

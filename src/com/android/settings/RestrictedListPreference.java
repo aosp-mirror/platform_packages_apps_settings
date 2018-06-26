@@ -41,7 +41,6 @@ import com.android.settingslib.RestrictedPreferenceHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.preference.ListPreferenceDialogFragment;
 import androidx.preference.PreferenceViewHolder;
 
 public class RestrictedListPreference extends CustomListPreference {

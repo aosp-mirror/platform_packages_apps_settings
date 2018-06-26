@@ -18,12 +18,9 @@ package com.android.settings.inputmethod;
 
 import android.annotation.Nullable;
 import android.app.ActionBar;
-import android.app.ListFragment;
-import android.app.LoaderManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.UserDictionary;
@@ -47,6 +44,10 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
+
+import androidx.fragment.app.ListFragment;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 
 public class UserDictionarySettings extends ListFragment implements Instrumentable,
         LoaderManager.LoaderCallbacks<Cursor> {

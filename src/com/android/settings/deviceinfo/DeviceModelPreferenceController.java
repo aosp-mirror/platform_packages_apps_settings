@@ -15,7 +15,6 @@
  */
 package com.android.settings.deviceinfo;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Build;
 import android.text.TextUtils;
@@ -29,6 +28,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

@@ -27,12 +27,7 @@ import android.support.test.uiautomator.Until;
 import android.system.helpers.ActivityHelper;
 import android.test.InstrumentationTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
-import android.text.TextUtils;
 import android.util.Log;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 
 /** Verifies basic functionality of the About Phone screen */
 public class AppsSettingsTests extends InstrumentationTestCase {

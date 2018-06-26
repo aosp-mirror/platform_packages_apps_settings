@@ -16,12 +16,13 @@
 
 package com.android.settings.datetime.timezone.model;
 
-import android.app.LoaderManager;
 import android.content.Context;
-import android.content.Loader;
 import android.os.Bundle;
 
 import com.android.settingslib.utils.AsyncLoader;
+
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 
 public class TimeZoneDataLoader extends AsyncLoader<TimeZoneData> {
 

@@ -16,7 +16,6 @@
 
 package com.android.settings.bluetooth;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.text.TextUtils;
 
@@ -26,6 +25,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 
 public class BluetoothDeviceRenamePreferenceController extends

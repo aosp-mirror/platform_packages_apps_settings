@@ -27,7 +27,6 @@ import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragment;
 
 public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivity {
 

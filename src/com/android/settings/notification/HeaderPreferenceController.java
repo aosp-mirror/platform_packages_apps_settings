@@ -34,7 +34,6 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragment;
 
 public class HeaderPreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver {

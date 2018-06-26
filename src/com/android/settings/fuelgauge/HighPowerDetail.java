@@ -19,7 +19,6 @@ package com.android.settings.fuelgauge;
 import android.app.AlertDialog;
 import android.app.AppOpsManager;
 import android.app.Dialog;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -38,6 +37,8 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
+
+import androidx.fragment.app.Fragment;
 
 public class HighPowerDetail extends InstrumentedDialogFragment implements OnClickListener,
         View.OnClickListener {

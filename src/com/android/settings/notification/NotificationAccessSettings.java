@@ -18,7 +18,6 @@ package com.android.settings.notification;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Fragment;
 import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -40,6 +39,8 @@ import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.fragment.app.Fragment;
 
 /**
  * Settings screen for managing notification listener permissions

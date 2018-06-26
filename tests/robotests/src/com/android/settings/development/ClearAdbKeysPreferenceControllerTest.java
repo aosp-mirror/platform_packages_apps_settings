@@ -25,7 +25,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.hardware.usb.IUsbManager;
 import android.os.RemoteException;
@@ -46,6 +45,7 @@ import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.util.ReflectionHelpers;
 
+import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 

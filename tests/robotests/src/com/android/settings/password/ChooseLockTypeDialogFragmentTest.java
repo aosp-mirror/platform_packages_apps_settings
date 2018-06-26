@@ -25,7 +25,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import android.app.AlertDialog;
-import android.app.Fragment;
 import android.content.Context;
 
 import com.android.settings.R;
@@ -43,6 +42,8 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowAlertDialog;
 import org.robolectric.shadows.ShadowDialog;
 import org.robolectric.util.FragmentTestUtil;
+
+import androidx.fragment.app.Fragment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowUserManager.class, ShadowUtils.class})

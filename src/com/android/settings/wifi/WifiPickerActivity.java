@@ -22,8 +22,6 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
 
-import androidx.preference.PreferenceFragment;
-
 public class WifiPickerActivity extends SettingsActivity implements ButtonBarHandler {
 
     @Override

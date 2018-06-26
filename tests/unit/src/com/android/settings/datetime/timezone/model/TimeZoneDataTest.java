@@ -17,7 +17,6 @@ package com.android.settings.datetime.timezone.model;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.SmallTest;
 import android.support.test.runner.AndroidJUnit4;
 

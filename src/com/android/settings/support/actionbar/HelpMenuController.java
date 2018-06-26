@@ -20,7 +20,6 @@ import static com.android.settings.support.actionbar.HelpResourceProvider.HELP_U
 
 import android.annotation.NonNull;
 import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,6 +29,8 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.ObservableFragment;
 import com.android.settingslib.core.lifecycle.ObservablePreferenceFragment;
 import com.android.settingslib.core.lifecycle.events.OnCreateOptionsMenu;
+
+import androidx.fragment.app.Fragment;
 
 /**
  * A controller that adds help menu to any Settings page.

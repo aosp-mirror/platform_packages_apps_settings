@@ -41,7 +41,6 @@ import com.android.settingslib.core.instrumentation.Instrumentable;
 
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceClickListener;
-import androidx.preference.PreferenceFragment;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 

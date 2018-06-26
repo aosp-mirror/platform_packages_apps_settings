@@ -19,7 +19,6 @@ package com.android.settings.password;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.app.Activity;
-import android.app.FragmentManager;
 
 import com.android.settings.password.ConfirmDeviceCredentialBaseFragment.LastTryDialog;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -29,6 +28,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
+
+import androidx.fragment.app.FragmentManager;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResources.SettingsShadowTheme.class)

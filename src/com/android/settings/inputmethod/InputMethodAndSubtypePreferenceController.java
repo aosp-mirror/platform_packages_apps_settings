@@ -24,7 +24,6 @@ import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 import com.android.settingslib.inputmethod.InputMethodAndSubtypeEnablerManager;
 
-import androidx.preference.PreferenceFragment;
 import androidx.preference.PreferenceScreen;
 
 public class InputMethodAndSubtypePreferenceController extends BasePreferenceController implements

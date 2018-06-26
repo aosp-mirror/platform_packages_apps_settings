@@ -24,7 +24,6 @@ import android.support.test.uiautomator.Until;
 import android.system.helpers.SettingsHelper;
 import android.test.InstrumentationTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
-import android.test.suitebuilder.annotation.Suppress;
 
 public class DataUsageSettingsTests extends InstrumentationTestCase {
 

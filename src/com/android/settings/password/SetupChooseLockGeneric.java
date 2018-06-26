@@ -36,7 +36,6 @@ import com.android.settings.utils.SettingsDividerItemDecoration;
 import com.android.setupwizardlib.GlifPreferenceLayout;
 
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**

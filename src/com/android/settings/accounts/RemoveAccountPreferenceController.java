@@ -24,7 +24,6 @@ import android.accounts.OperationCanceledException;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -46,6 +45,7 @@ import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.io.IOException;
 
+import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceScreen;
 
 public class RemoveAccountPreferenceController extends AbstractPreferenceController

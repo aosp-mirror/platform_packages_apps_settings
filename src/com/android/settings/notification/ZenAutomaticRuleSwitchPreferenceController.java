@@ -17,7 +17,6 @@
 package com.android.settings.notification;
 
 import android.app.AutomaticZenRule;
-import android.app.Fragment;
 import android.content.Context;
 import android.widget.Switch;
 
@@ -26,6 +25,7 @@ import com.android.settings.applications.LayoutPreference;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

@@ -46,7 +46,6 @@ import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
 import androidx.lifecycle.LifecycleOwner;
-import androidx.preference.PreferenceFragment;
 import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)

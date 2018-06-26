@@ -5,7 +5,6 @@ import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.ApplicationErrorReport;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
@@ -44,6 +43,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+
+import androidx.fragment.app.DialogFragment;
 
 public class RunningServiceDetails extends InstrumentedFragment
         implements RunningState.OnRefreshUiListener {

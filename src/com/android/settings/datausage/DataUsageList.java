@@ -21,10 +21,8 @@ import static android.net.TrafficStats.UID_TETHERING;
 import static android.telephony.TelephonyManager.SIM_STATE_READY;
 
 import android.app.ActivityManager;
-import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
 import android.content.Intent;
-import android.content.Loader;
 import android.content.pm.UserInfo;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
@@ -68,6 +66,8 @@ import java.util.Collections;
 import java.util.List;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.loader.app.LoaderManager.LoaderCallbacks;
+import androidx.loader.content.Loader;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 

@@ -16,13 +16,13 @@
 
 package com.android.settings.deviceinfo.firmwareversion;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Build;
 import android.text.TextUtils;
 
 import com.android.settings.core.BasePreferenceController;
 
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 
 public class FirmwareVersionPreferenceController extends BasePreferenceController {

@@ -18,7 +18,6 @@ package com.android.settings.applications.appinfo;
 
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -65,6 +64,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceScreen;
 
 /**

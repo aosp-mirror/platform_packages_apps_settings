@@ -24,7 +24,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.LoaderManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
@@ -41,6 +40,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 
+import androidx.loader.app.LoaderManager;
 import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
