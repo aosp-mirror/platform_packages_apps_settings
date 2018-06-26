@@ -97,7 +97,7 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // if lock was already present, do not return intent data since it must have been
         // reported in previous attempts
-        if (requestCode == FINGERPRINT_FIND_SENSOR_REQUEST && isKeyguardSecure()
+        if (requestCode == BIOMETRIC_FIND_SENSOR_REQUEST && isKeyguardSecure()
                 && !mAlreadyHadLockScreenSetup) {
             data = getMetricIntent(data);
         }

@@ -44,13 +44,14 @@ import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
 /**
  * Activity which handles the actual enrolling for fingerprint.
  */
-public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
+public class FingerprintEnrollEnrolling extends BiometricEnrollBase
         implements FingerprintEnrollSidecar.Listener {
 
     static final String TAG_SIDECAR = "sidecar";

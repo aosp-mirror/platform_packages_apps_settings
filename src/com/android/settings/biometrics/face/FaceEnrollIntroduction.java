@@ -14,14 +14,12 @@
  * limitations under the License
  */
 
-package com.android.settings.biometrics.fingerprint;
+package com.android.settings.biometrics.face;
 
 import android.app.admin.DevicePolicyManager;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.hardware.fingerprint.FingerprintManager;
+import android.hardware.face.FaceManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -30,41 +28,40 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollIntroduction;
 import com.android.settings.password.ChooseLockSettingsHelper;
-import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.setupwizardlib.span.LinkSpan;
 
-public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
+public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
-    private static final String TAG = "FingerprintIntro";
+    private static final String TAG = "FaceIntro";
 
-    private FingerprintManager mFingerprintManager;
+    private FaceManager mFaceManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mFingerprintManager = Utils.getFingerprintManagerOrNull(this);
+        mFaceManager = Utils.getFaceManagerOrNull(this);
     }
 
     @Override
     protected boolean isDisabledByAdmin() {
         return RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(
-                this, DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT, mUserId) != null;
+                this, DevicePolicyManager.KEYGUARD_DISABLE_FACE, mUserId) != null;
     }
 
     @Override
     protected int getLayoutResource() {
-        return R.layout.fingerprint_enroll_introduction;
+        return R.layout.face_enroll_introduction;
     }
 
     @Override
     protected int getHeaderResDisabledByAdmin() {
-        return R.string.security_settings_fingerprint_enroll_introduction_title_unlock_disabled;
+        return R.string.security_settings_face_enroll_introduction_title_unlock_disabled;
     }
 
     @Override
     protected int getHeaderResDefault() {
-        return R.string.security_settings_fingerprint_enroll_introduction_title;
+        return R.string.security_settings_face_enroll_introduction_title;
     }
 
     @Override
@@ -74,12 +71,12 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected Button getCancelButton() {
-        return findViewById(R.id.fingerprint_cancel_button);
+        return findViewById(R.id.face_cancel_button);
     }
 
     @Override
     protected Button getNextButton() {
-        return findViewById(R.id.fingerprint_next_button);
+        return findViewById(R.id.face_next_button);
     }
 
     @Override
@@ -89,59 +86,44 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected int checkMaxEnrolled() {
-        if (mFingerprintManager != null) {
+        if (mFaceManager != null) {
             final int max = getResources().getInteger(
-                    com.android.internal.R.integer.config_fingerprintMaxTemplatesPerUser);
-            final int numEnrolledFingerprints =
-                    mFingerprintManager.getEnrolledFingerprints(mUserId).size();
-            if (numEnrolledFingerprints >= max) {
-                return R.string.fingerprint_intro_error_max;
+                    com.android.internal.R.integer.config_faceMaxTemplatesPerUser);
+            final int numEnrolledFaces = mFaceManager.getEnrolledFaces(mUserId).size();
+            if (numEnrolledFaces >= max) {
+                return R.string.face_intro_error_max;
             }
         } else {
-            return R.string.fingerprint_intro_error_unknown;
+            return R.string.face_intro_error_unknown;
         }
         return 0;
     }
 
     @Override
     protected long getChallenge() {
-        if (mFingerprintManager == null) {
+        if (mFaceManager == null) {
             return 0;
         }
-        return mFingerprintManager.preEnroll();
+        return mFaceManager.preEnroll();
     }
 
     @Override
     protected String getExtraKeyForBiometric() {
-        return ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT;
+        return ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE;
     }
 
     @Override
     protected Intent getFindSensorIntent() {
-        return new Intent(this, FingerprintEnrollFindSensor.class);
+        return null; // TODO
     }
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.FINGERPRINT_ENROLL_INTRO;
+        return MetricsProto.MetricsEvent.FACE_ENROLL_INTRO;
     }
 
     @Override
     public void onClick(LinkSpan span) {
-        if ("url".equals(span.getId())) {
-            String url = getString(R.string.help_url_fingerprint);
-            Intent intent = HelpUtils.getHelpIntent(this, url, getClass().getName());
-            if (intent == null) {
-                Log.w(TAG, "Null help intent.");
-                return;
-            }
-            try {
-                // This needs to be startActivityForResult even though we do not care about the
-                // actual result because the help app needs to know about who invoked it.
-                startActivityForResult(intent, LEARN_MORE_REQUEST);
-            } catch (ActivityNotFoundException e) {
-                Log.w(TAG, "Activity was not found for intent, " + e);
-            }
-        }
+        // TODO(b/110906762)
     }
 }

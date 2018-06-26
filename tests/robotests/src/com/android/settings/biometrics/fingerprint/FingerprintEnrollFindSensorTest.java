@@ -31,6 +31,7 @@ import android.os.CancellationSignal;
 import android.widget.Button;
 
 import com.android.settings.R;
+import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -137,7 +138,7 @@ public class FingerprintEnrollFindSensorTest {
 
         ShadowActivity shadowActivity = Shadows.shadowOf(mActivity);
         assertThat(shadowActivity.getResultCode()).named("result code")
-                .isEqualTo(FingerprintEnrollBase.RESULT_SKIP);
+                .isEqualTo(BiometricEnrollBase.RESULT_SKIP);
     }
 
     private EnrollmentCallback verifyAndCaptureEnrollmentCallback() {

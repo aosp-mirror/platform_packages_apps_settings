@@ -877,6 +877,33 @@
     <string name="security_dashboard_summary">Screen lock, fingerprint</string>
     <!-- Summary for Security settings when fingerprint is not supported [CHAR LIMIT=NONE]-->
     <string name="security_dashboard_summary_no_fingerprint">Screen lock</string>
+
+    <!-- Face enrollment and settings --><skip />
+    <!-- Message shown in summary field when face authentication is set up. [CHAR LIMIT=22] -->
+    <string name="security_settings_face_preference_summary">Face added</string>
+    <!-- Message shown in summary field when face authentication is not set up. [CHAR LIMIT=40] -->
+    <string name="security_settings_face_preference_summary_none">Tap to set up face authentication</string>
+    <!-- Title shown for menu item that launches face settings or enrollment. [CHAR LIMIT=22] -->
+    <string name="security_settings_face_preference_title">Face authentication</string>
+    <!-- Button text to cancel enrollment from the introduction [CHAR LIMIT=22] -->
+    <string name="security_settings_face_enroll_introduction_cancel">Cancel</string>
+    <!-- Introduction title shown in face enrollment to introduce the face unlock feature [CHAR LIMIT=30] -->
+    <string name="security_settings_face_enroll_introduction_title">Unlock with your face</string>
+    <!-- Introduction title shown in face enrollment to introduce the face authentication feature, when face unlock is disabled by device admin [CHAR LIMIT=40] -->
+    <string name="security_settings_face_enroll_introduction_title_unlock_disabled">Use your face to authenticate</string>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Use your face to unlock your phone, authorize purchases, or sign in to apps.</string>
+    <!-- Introduction detail message shown in face enrollment dialog, when face unlock is disabled by device admin [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_message_unlock_disabled">Use you</string>
+    <!-- Introduction detail message shwon in face enrollment screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_message_setup">Use your face to unlock your phone, authorize purchases, or sign in to apps</string>
+    <!-- Text shown when "Add face" button is disabled -->
+    <string name="face_add_max">You can add up to <xliff:g id="count" example="5">%d</xliff:g> fingerprints</string>
+    <!-- Text shown when users has enrolled a maximum number of faces [CHAR LIMIT=NONE] -->
+    <string name="face_intro_error_max">You\u2019ve added the maximum number of faces</string>
+    <!-- Text shown when an unknown error caused the device to be unable to add faces [CHAR LIMIT=NONE] -->
+    <string name="face_intro_error_unknown">Can\u2019t add more faces</string>
+
     <!-- Fingerprint enrollment and settings --><skip />
     <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_preference_title">Fingerprint</string>
@@ -7005,6 +7032,10 @@
 
     <!-- Search keyword for Ambient display settings screen. -->
     <string name="keywords_ambient_display_screen">Ambient display, Lock screen display</string>
+
+    <!-- Search keyword for face settings. -->
+    <string name="keywords_face_settings">face</string>
+
     <!-- Search keyword for fingerprint settings. -->
     <string name="keywords_fingerprint_settings">fingerprint</string>
 

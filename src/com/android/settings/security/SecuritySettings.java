@@ -15,7 +15,8 @@
  */
 package com.android.settings.security;
 
-import static com.android.settings.security.EncryptionStatusPreferenceController.PREF_KEY_ENCRYPTION_SECURITY_PAGE;
+import static com.android.settings.security.EncryptionStatusPreferenceController
+        .PREF_KEY_ENCRYPTION_SECURITY_PAGE;
 
 import android.app.Activity;
 import android.content.Context;
@@ -26,11 +27,12 @@ import android.provider.SearchIndexableResource;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.biometrics.face.FaceStatusPreferenceController;
+import com.android.settings.biometrics.fingerprint.FingerprintProfileStatusPreferenceController;
+import com.android.settings.biometrics.fingerprint.FingerprintStatusPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.enterprise.EnterprisePrivacyPreferenceController;
-import com.android.settings.biometrics.fingerprint.FingerprintProfileStatusPreferenceController;
-import com.android.settings.biometrics.fingerprint.FingerprintStatusPreferenceController;
 import com.android.settings.location.LocationPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.security.trustagent.ManageTrustAgentsPreferenceController;
@@ -123,6 +125,7 @@ public class SecuritySettings extends DashboardFragment {
         controllers.add(new TrustAgentListPreferenceController(context, host, lifecycle));
 
         final List<AbstractPreferenceController> securityPreferenceControllers = new ArrayList<>();
+        securityPreferenceControllers.add(new FaceStatusPreferenceController(context));
         securityPreferenceControllers.add(new FingerprintStatusPreferenceController(context));
         securityPreferenceControllers.add(new ChangeScreenLockPreferenceController(context, host));
         controllers.add(new PreferenceCategoryController(context, SECURITY_CATEGORY)

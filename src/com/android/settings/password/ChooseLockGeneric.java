@@ -52,8 +52,8 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.biometrics.fingerprint.FingerprintEnrollBase;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollFindSensor;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -360,7 +360,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                     }
                 }
             } else if (requestCode == CHOOSE_LOCK_BEFORE_FINGERPRINT_REQUEST
-                    && resultCode == FingerprintEnrollBase.RESULT_FINISHED) {
+                    && resultCode == BiometricEnrollBase.RESULT_FINISHED) {
                 Intent intent = getFindSensorIntent(getActivity());
                 if (data != null) {
                     intent.putExtras(data.getExtras());

@@ -43,6 +43,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
+import com.android.settings.biometrics.BiometricSettings;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
@@ -66,33 +67,9 @@ import androidx.preference.PreferenceViewHolder;
 /**
  * Settings screen for fingerprints
  */
-public class FingerprintSettings extends SubSettings {
+public class FingerprintSettings extends BiometricSettings {
 
     private static final String TAG = "FingerprintSettings";
-
-    /**
-     * Used by the choose fingerprint wizard to indicate the wizard is
-     * finished, and each activity in the wizard should finish.
-     * <p>
-     * Previously, each activity in the wizard would finish itself after
-     * starting the next activity. However, this leads to broken 'Back'
-     * behavior. So, now an activity does not finish itself until it gets this
-     * result.
-     */
-    protected static final int RESULT_FINISHED = RESULT_FIRST_USER;
-
-    /**
-     * Used by the enrolling screen during setup wizard to skip over setting up fingerprint, which
-     * will be useful if the user accidentally entered this flow.
-     */
-    protected static final int RESULT_SKIP = RESULT_FIRST_USER + 1;
-
-    /**
-     * Like {@link #RESULT_FINISHED} except this one indicates enrollment failed because the
-     * device was left idle. This is used to clear the credential token to require the user to
-     * re-enter their pin/pattern/password before continuing.
-     */
-    protected static final int RESULT_TIMEOUT = RESULT_FIRST_USER + 2;
 
     private static final long LOCKOUT_DURATION = 30000; // time we have to wait for fp to reset, ms
 
