@@ -30,7 +30,7 @@ import android.os.UserManager;
 import android.provider.Settings;
 
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.TimeoutListPreference;
+import com.android.settings.display.TimeoutListPreference;
 import com.android.settings.security.trustagent.TrustAgentManager;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

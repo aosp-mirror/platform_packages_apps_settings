@@ -33,6 +33,7 @@ public class ShadowRestrictedLockUtils {
     private static boolean sIsRestricted;
     private static boolean sAdminSupportDetailsIntentLaunched;
     private static boolean sHasSystemFeature;
+    private static boolean sMaximumTimeToLockIsSet;
     private static String[] sRestrictedPkgs;
     private static DevicePolicyManager sDevicePolicyManager;
     private static String[] sDisabledTypes;
@@ -45,6 +46,7 @@ public class ShadowRestrictedLockUtils {
         sAdminSupportDetailsIntentLaunched = false;
         sKeyguardDisabledFeatures = 0;
         sDisabledTypes = new String[0];
+        sMaximumTimeToLockIsSet = false;
     }
 
     @Implementation
@@ -101,6 +103,11 @@ public class ShadowRestrictedLockUtils {
         return sIsRestricted ? new EnforcedAdmin() : null;
     }
 
+    @Implementation
+    public static EnforcedAdmin checkIfMaximumTimeToLockIsSet(Context context) {
+        return sMaximumTimeToLockIsSet ? new EnforcedAdmin() : null;
+    }
+
     public static boolean hasAdminSupportDetailsIntentLaunched() {
         return sAdminSupportDetailsIntentLaunched;
     }
@@ -136,4 +143,9 @@ public class ShadowRestrictedLockUtils {
     public static void setKeyguardDisabledFeatures(int features) {
         sKeyguardDisabledFeatures = features;
     }
+
+    public static void setMaximumTimeToLockIsSet(boolean isSet) {
+        sMaximumTimeToLockIsSet = isSet;
+    }
+
 }
