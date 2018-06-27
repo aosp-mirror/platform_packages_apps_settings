@@ -161,7 +161,7 @@ public class FingerprintSettings extends SubSettings {
                 @Override
                 public void onAuthenticationSucceeded(
                         FingerprintManager.AuthenticationResult result) {
-                    int fingerId = result.getFingerprint().getFingerId();
+                    int fingerId = result.getFingerprint().getBiometricId();
                     mHandler.obtainMessage(MSG_FINGER_AUTH_SUCCESS, fingerId, 0).sendToTarget();
                 }
 
@@ -187,7 +187,7 @@ public class FingerprintSettings extends SubSettings {
                 new FingerprintRemoveSidecar.Listener() {
             public void onRemovalSucceeded(Fingerprint fingerprint) {
                 mHandler.obtainMessage(MSG_REFRESH_FINGERPRINT_TEMPLATES,
-                        fingerprint.getFingerId(), 0).sendToTarget();
+                        fingerprint.getBiometricId(), 0).sendToTarget();
                 updateDialog();
             }
 
@@ -393,16 +393,16 @@ public class FingerprintSettings extends SubSettings {
                 final Fingerprint item = items.get(i);
                 FingerprintPreference pref = new FingerprintPreference(root.getContext(),
                         this /* onDeleteClickListener */);
-                pref.setKey(genKey(item.getFingerId()));
+                pref.setKey(genKey(item.getBiometricId()));
                 pref.setTitle(item.getName());
                 pref.setFingerprint(item);
                 pref.setPersistent(false);
                 pref.setIcon(R.drawable.ic_fingerprint_24dp);
-                if (mRemovalSidecar.isRemovingFingerprint(item.getFingerId())) {
+                if (mRemovalSidecar.isRemovingFingerprint(item.getBiometricId())) {
                     pref.setEnabled(false);
                 }
-                if (mFingerprintsRenaming.containsKey(item.getFingerId())) {
-                    pref.setTitle(mFingerprintsRenaming.get(item.getFingerId()));
+                if (mFingerprintsRenaming.containsKey(item.getBiometricId())) {
+                    pref.setTitle(mFingerprintsRenaming.get(item.getBiometricId()));
                 }
                 root.addPreference(pref);
                 pref.setOnPreferenceChangeListener(this);
@@ -522,9 +522,9 @@ public class FingerprintSettings extends SubSettings {
         private void showRenameDialog(final Fingerprint fp) {
             RenameDialog renameDialog = new RenameDialog();
             Bundle args = new Bundle();
-            if (mFingerprintsRenaming.containsKey(fp.getFingerId())) {
-                final Fingerprint f = new Fingerprint(mFingerprintsRenaming.get(fp.getFingerId()),
-                        fp.getGroupId(), fp.getFingerId(), fp.getDeviceId());
+            if (mFingerprintsRenaming.containsKey(fp.getBiometricId())) {
+                final Fingerprint f = new Fingerprint(mFingerprintsRenaming.get(fp.getBiometricId()),
+                        fp.getGroupId(), fp.getBiometricId(), fp.getDeviceId());
                 args.putParcelable("fingerprint", f);
             } else {
                 args.putParcelable("fingerprint", fp);
@@ -648,7 +648,7 @@ public class FingerprintSettings extends SubSettings {
         @VisibleForTesting
         void deleteFingerPrint(Fingerprint fingerPrint) {
             mRemovalSidecar.startRemove(fingerPrint, mUserId);
-            String name = genKey(fingerPrint.getFingerId());
+            String name = genKey(fingerPrint.getBiometricId());
             Preference prefToRemove = findPreference(name);
             prefToRemove.setEnabled(false);
             updateAddPreference();
@@ -711,7 +711,7 @@ public class FingerprintSettings extends SubSettings {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (which == DialogInterface.BUTTON_POSITIVE) {
-                    final int fingerprintId = mFp.getFingerId();
+                    final int fingerprintId = mFp.getBiometricId();
                     Log.v(TAG, "Removing fpId=" + fingerprintId);
                     mMetricsFeatureProvider.action(getContext(),
                             MetricsEvent.ACTION_FINGERPRINT_DELETE,
@@ -760,11 +760,11 @@ public class FingerprintSettings extends SubSettings {
                                             Log.d(TAG, "rename " + name + " to " + newName);
                                             mMetricsFeatureProvider.action(getContext(),
                                                     MetricsEvent.ACTION_FINGERPRINT_RENAME,
-                                                    mFp.getFingerId());
+                                                    mFp.getBiometricId());
                                             FingerprintSettingsFragment parent
                                                     = (FingerprintSettingsFragment)
                                                     getTargetFragment();
-                                            parent.renameFingerPrint(mFp.getFingerId(),
+                                            parent.renameFingerPrint(mFp.getBiometricId(),
                                                     newName);
                                         }
                                         dialog.dismiss();
