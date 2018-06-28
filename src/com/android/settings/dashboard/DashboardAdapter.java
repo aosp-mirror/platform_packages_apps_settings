@@ -45,7 +45,7 @@ import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.drawer.TileUtils;
-import com.android.settingslib.suggestions.SuggestionControllerMixin;
+import com.android.settingslib.suggestions.SuggestionControllerMixinCompat;
 import com.android.settingslib.utils.IconCache;
 
 import java.util.List;
@@ -84,7 +84,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     };
 
     public DashboardAdapter(Context context, Bundle savedInstanceState,
-            List<Condition> conditions, SuggestionControllerMixin suggestionControllerMixin,
+            List<Condition> conditions, SuggestionControllerMixinCompat suggestionControllerMixin,
             Lifecycle lifecycle) {
 
         DashboardCategory category = null;

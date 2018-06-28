@@ -216,7 +216,7 @@ public class UserSettings extends SettingsPreferenceFragment
         final SwitchBar switchBar = activity.getSwitchBar();
         mSwitchBarController = new MultiUserSwitchBarController(activity,
                 new SwitchBarController(switchBar), this /* listener */);
-        getLifecycle().addObserver(mSwitchBarController);
+        getSettingsLifecycle().addObserver(mSwitchBarController);
         switchBar.show();
     }
 

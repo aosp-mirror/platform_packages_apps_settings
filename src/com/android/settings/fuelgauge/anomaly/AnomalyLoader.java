@@ -24,7 +24,7 @@ import android.os.UserManager;
 import android.util.Log;
 
 import com.android.internal.os.BatteryStatsHelper;
-import com.android.settingslib.utils.AsyncLoader;
+import com.android.settingslib.utils.AsyncLoaderCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ import androidx.annotation.VisibleForTesting;
  * Loader to compute which apps are anomaly and return a anomaly list. It will return
  * an empty list if there is no anomaly.
  */
-public class AnomalyLoader extends AsyncLoader<List<Anomaly>> {
+public class AnomalyLoader extends AsyncLoaderCompat<List<Anomaly>> {
     private static final String TAG = "AnomalyLoader";
 
     private static final boolean USE_FAKE_DATA = false;

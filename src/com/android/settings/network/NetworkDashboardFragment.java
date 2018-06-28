@@ -81,9 +81,8 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle(), mMetricsFeatureProvider, this
-                /* fragment */,
-                this /* mobilePlanHost */);
+        return buildPreferenceControllers(context, getSettingsLifecycle(), mMetricsFeatureProvider,
+                this /* fragment */, this /* mobilePlanHost */);
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,

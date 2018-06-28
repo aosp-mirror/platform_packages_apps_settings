@@ -28,7 +28,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.print.PrintManager;
-import android.print.PrintServicesLoader;
 import android.print.PrinterDiscoverySession;
 import android.print.PrinterDiscoverySession.OnPrintersChangeListener;
 import android.print.PrinterId;

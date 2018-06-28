@@ -73,7 +73,8 @@ public abstract class BiometricsEnrollEnrolling extends BiometricEnrollBase
         if (shouldFinishOnStop() && !isChangingConfigurations()) {
             if (mSidecar != null) {
                 mSidecar.cancelEnrollment();
-                getFragmentManager().beginTransaction().remove(mSidecar).commitAllowingStateLoss();
+                getSupportFragmentManager()
+                        .beginTransaction().remove(mSidecar).commitAllowingStateLoss();
             }
             finish();
         }
@@ -84,7 +85,8 @@ public abstract class BiometricsEnrollEnrolling extends BiometricEnrollBase
         if (mSidecar != null) {
             mSidecar.setListener(null);
             mSidecar.cancelEnrollment();
-            getFragmentManager().beginTransaction().remove(mSidecar).commitAllowingStateLoss();
+            getSupportFragmentManager()
+                    .beginTransaction().remove(mSidecar).commitAllowingStateLoss();
             mSidecar = null;
         }
         super.onBackPressed();
@@ -103,10 +105,11 @@ public abstract class BiometricsEnrollEnrolling extends BiometricEnrollBase
     }
 
     public void startEnrollment() {
-        mSidecar = (BiometricEnrollSidecar) getFragmentManager().findFragmentByTag(TAG_SIDECAR);
+        mSidecar = (BiometricEnrollSidecar) getSupportFragmentManager()
+                .findFragmentByTag(TAG_SIDECAR);
         if (mSidecar == null) {
             mSidecar = getSidecar();
-            getFragmentManager().beginTransaction().add(mSidecar, TAG_SIDECAR).commit();
+            getSupportFragmentManager().beginTransaction().add(mSidecar, TAG_SIDECAR).commit();
         }
         mSidecar.setListener(this);
     }

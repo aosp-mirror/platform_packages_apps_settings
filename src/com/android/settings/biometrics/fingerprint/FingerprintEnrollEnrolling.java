@@ -303,12 +303,12 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     private void showErrorDialog(CharSequence msg, int msgId) {
         BiometricErrorDialog dlg = FingerprintErrorDialog.newInstance(msg, msgId);
-        dlg.show(getFragmentManager(), FingerprintErrorDialog.class.getName());
+        dlg.show(getSupportFragmentManager(), FingerprintErrorDialog.class.getName());
     }
 
     private void showIconTouchDialog() {
         mIconTouchCount = 0;
-        new IconTouchDialog().show(getFragmentManager(), null /* tag */);
+        new IconTouchDialog().show(getSupportFragmentManager(), null /* tag */);
     }
 
     private void showError(CharSequence error) {

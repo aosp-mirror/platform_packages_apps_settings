@@ -93,7 +93,7 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
         mApplicationFeatureProvider = FeatureFactory.getFactory(activity)
                 .getApplicationFeatureProvider(activity);
         mState = ApplicationsState.getInstance(activity.getApplication());
-        mSession = mState.newSession(this, getLifecycle());
+        mSession = mState.newSession(this, getSettingsLifecycle());
         mDpm = (DevicePolicyManager) activity.getSystemService(Context.DEVICE_POLICY_SERVICE);
         mUserManager = (UserManager) activity.getSystemService(Context.USER_SERVICE);
         mPm = activity.getPackageManager();

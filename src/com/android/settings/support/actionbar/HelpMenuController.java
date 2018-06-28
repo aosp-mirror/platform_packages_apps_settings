@@ -40,11 +40,11 @@ public class HelpMenuController implements LifecycleObserver, OnCreateOptionsMen
     private final Fragment mHost;
 
     public static void init(@NonNull ObservablePreferenceFragment host) {
-        host.getLifecycle().addObserver(new HelpMenuController(host));
+        host.getSettingsLifecycle().addObserver(new HelpMenuController(host));
     }
 
     public static void init(@NonNull ObservableFragment host) {
-        host.getLifecycle().addObserver(new HelpMenuController(host));
+        host.getSettingsLifecycle().addObserver(new HelpMenuController(host));
     }
 
     private HelpMenuController(@NonNull Fragment host) {

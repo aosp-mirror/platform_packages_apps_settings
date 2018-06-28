@@ -21,7 +21,7 @@ import android.content.Context;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.widget.FooterPreference;
-import com.android.settingslib.widget.FooterPreferenceMixin;
+import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -31,14 +31,15 @@ public class MultiUserFooterPreferenceController extends BasePreferenceControlle
     @VisibleForTesting
     final UserCapabilities mUserCaps;
 
-    private FooterPreferenceMixin mFooterMixin;
+    private FooterPreferenceMixinCompat mFooterMixin;
 
     public MultiUserFooterPreferenceController(Context context) {
         super(context, "dummy_key");
         mUserCaps = UserCapabilities.create(context);
     }
 
-    public MultiUserFooterPreferenceController setFooterMixin(FooterPreferenceMixin footerMixin) {
+    public MultiUserFooterPreferenceController setFooterMixin(
+            FooterPreferenceMixinCompat footerMixin) {
         mFooterMixin = footerMixin;
         return this;
     }

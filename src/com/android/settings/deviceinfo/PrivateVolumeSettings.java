@@ -203,7 +203,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         setTitle();
 
         // Valid options may have changed
-        getFragmentManager().invalidateOptionsMenu();
+        getActivity().invalidateOptionsMenu();
 
         final Context context = getActivity();
         final PreferenceScreen screen = getPreferenceScreen();

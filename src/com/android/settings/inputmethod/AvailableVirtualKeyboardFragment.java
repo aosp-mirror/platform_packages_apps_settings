@@ -38,7 +38,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.inputmethod.InputMethodAndSubtypeUtil;
+import com.android.settingslib.inputmethod.InputMethodAndSubtypeUtilCompat;
 import com.android.settingslib.inputmethod.InputMethodPreference;
 import com.android.settingslib.inputmethod.InputMethodSettingValuesWrapper;
 import com.android.settingslib.search.SearchIndexable;
@@ -79,7 +79,7 @@ public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFr
     public void onSaveInputMethodPreference(final InputMethodPreference pref) {
         final boolean hasHardwareKeyboard = getResources().getConfiguration().keyboard
                 == Configuration.KEYBOARD_QWERTY;
-        InputMethodAndSubtypeUtil.saveInputMethodSubtypeList(this, getContentResolver(),
+        InputMethodAndSubtypeUtilCompat.saveInputMethodSubtypeList(this, getContentResolver(),
                 mImm.getInputMethodList(), hasHardwareKeyboard);
         // Update input method settings and preference list.
         mInputMethodSettingValues.refreshAllInputMethodAndSubtypes();
@@ -164,7 +164,7 @@ public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFr
             final InputMethodPreference pref = mInputMethodPreferenceList.get(i);
             pref.setOrder(i);
             getPreferenceScreen().addPreference(pref);
-            InputMethodAndSubtypeUtil.removeUnnecessaryNonPersistentPreference(pref);
+            InputMethodAndSubtypeUtilCompat.removeUnnecessaryNonPersistentPreference(pref);
             pref.updatePreferenceViews();
         }
     }

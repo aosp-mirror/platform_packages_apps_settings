@@ -57,8 +57,8 @@ import com.android.settings.datausage.CycleAdapter.SpinnerInterface;
 import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.AppItem;
 import com.android.settingslib.net.ChartData;
-import com.android.settingslib.net.ChartDataLoader;
-import com.android.settingslib.net.SummaryForAllUidLoader;
+import com.android.settingslib.net.ChartDataLoaderCompat;
+import com.android.settingslib.net.SummaryForAllUidLoaderCompat;
 import com.android.settingslib.net.UidDetailProvider;
 
 import java.util.ArrayList;
@@ -262,7 +262,7 @@ public class DataUsageList extends DataUsageBase {
         // TODO: consider chaining two loaders together instead of reloading
         // network history when showing app detail.
         getLoaderManager().restartLoader(LOADER_CHART_DATA,
-                ChartDataLoader.buildArgs(mTemplate, null), mChartDataCallbacks);
+                ChartDataLoaderCompat.buildArgs(mTemplate, null), mChartDataCallbacks);
 
         // detail mode can change visible menus, invalidate
         getActivity().invalidateOptionsMenu();
@@ -326,7 +326,7 @@ public class DataUsageList extends DataUsageBase {
 
         // kick off loader for detailed stats
         getLoaderManager().restartLoader(LOADER_SUMMARY,
-                SummaryForAllUidLoader.buildArgs(mTemplate, start, end), mSummaryCallbacks);
+                SummaryForAllUidLoaderCompat.buildArgs(mTemplate, start, end), mSummaryCallbacks);
 
         final long totalBytes = entry != null ? entry.rxBytes + entry.txBytes : 0;
         final CharSequence totalPhrase = DataUsageUtils.formatDataUsage(context, totalBytes);
@@ -548,7 +548,7 @@ public class DataUsageList extends DataUsageBase {
             ChartData>() {
         @Override
         public Loader<ChartData> onCreateLoader(int id, Bundle args) {
-            return new ChartDataLoader(getActivity(), mStatsSession, args);
+            return new ChartDataLoaderCompat(getActivity(), mStatsSession, args);
         }
 
         @Override
@@ -572,7 +572,7 @@ public class DataUsageList extends DataUsageBase {
             NetworkStats>() {
         @Override
         public Loader<NetworkStats> onCreateLoader(int id, Bundle args) {
-            return new SummaryForAllUidLoader(getActivity(), mStatsSession, args);
+            return new SummaryForAllUidLoaderCompat(getActivity(), mStatsSession, args);
         }
 
         @Override

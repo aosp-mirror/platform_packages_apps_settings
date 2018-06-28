@@ -117,7 +117,7 @@ public class SoundSettings extends DashboardFragment {
         if (preference instanceof RingtonePreference) {
             mRequestPreference = (RingtonePreference) preference;
             mRequestPreference.onPrepareRingtonePickerIntent(mRequestPreference.getIntent());
-            startActivityForResultAsUser(
+            getActivity().startActivityForResultAsUser(
                     mRequestPreference.getIntent(),
                     REQUEST_CODE,
                     null,
@@ -156,7 +156,7 @@ public class SoundSettings extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, this, getLifecycle());
+        return buildPreferenceControllers(context, this, getSettingsLifecycle());
     }
 
     @Override
@@ -195,7 +195,7 @@ public class SoundSettings extends DashboardFragment {
 
         for (VolumeSeekBarPreferenceController controller : volumeControllers) {
             controller.setCallback(mVolumeCallback);
-            getLifecycle().addObserver(controller);
+            getSettingsLifecycle().addObserver(controller);
         }
     }
 

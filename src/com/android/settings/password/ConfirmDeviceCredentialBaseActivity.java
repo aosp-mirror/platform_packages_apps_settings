@@ -124,7 +124,7 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
     }
 
     private ConfirmDeviceCredentialBaseFragment getFragment() {
-        Fragment fragment = getFragmentManager().findFragmentById(R.id.main_content);
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.main_content);
         if (fragment != null && fragment instanceof ConfirmDeviceCredentialBaseFragment) {
             return (ConfirmDeviceCredentialBaseFragment) fragment;
         }

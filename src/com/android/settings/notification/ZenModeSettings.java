@@ -71,7 +71,7 @@ public class ZenModeSettings extends ZenModeSettingsBase {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle(), getFragmentManager());
+        return buildPreferenceControllers(context, getSettingsLifecycle(), getFragmentManager());
     }
 
     @Override

@@ -20,7 +20,6 @@ import static android.os.storage.DiskInfo.EXTRA_DISK_ID;
 import static com.android.settings.deviceinfo.StorageWizardBase.EXTRA_FORMAT_FORGET_UUID;
 import static com.android.settings.deviceinfo.StorageWizardBase.EXTRA_FORMAT_PRIVATE;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -34,22 +33,24 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
+import androidx.fragment.app.FragmentActivity;
+
 public class StorageWizardFormatConfirm extends InstrumentedDialogFragment {
     private static final String TAG_FORMAT_WARNING = "format_warning";
 
-    public static void showPublic(Activity activity, String diskId) {
+    public static void showPublic(FragmentActivity activity, String diskId) {
         show(activity, diskId, null, false);
     }
 
-    public static void showPublic(Activity activity, String diskId, String forgetUuid) {
+    public static void showPublic(FragmentActivity activity, String diskId, String forgetUuid) {
         show(activity, diskId, forgetUuid, false);
     }
 
-    public static void showPrivate(Activity activity, String diskId) {
+    public static void showPrivate(FragmentActivity activity, String diskId) {
         show(activity, diskId, null, true);
     }
 
-    private static void show(Activity activity, String diskId, String formatForgetUuid,
+    private static void show(FragmentActivity activity, String diskId, String formatForgetUuid,
             boolean formatPrivate) {
         final Bundle args = new Bundle();
         args.putString(EXTRA_DISK_ID, diskId);
@@ -58,7 +59,8 @@ public class StorageWizardFormatConfirm extends InstrumentedDialogFragment {
 
         final StorageWizardFormatConfirm fragment = new StorageWizardFormatConfirm();
         fragment.setArguments(args);
-        fragment.showAllowingStateLoss(activity.getFragmentManager(), TAG_FORMAT_WARNING);
+        // TODO (b/111150236) : Need to check it again.
+        fragment.show(activity.getSupportFragmentManager(), TAG_FORMAT_WARNING);
     }
 
     @Override

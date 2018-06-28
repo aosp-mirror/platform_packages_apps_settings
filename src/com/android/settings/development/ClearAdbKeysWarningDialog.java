@@ -34,7 +34,7 @@ public class ClearAdbKeysWarningDialog extends InstrumentedDialogFragment implem
     public static final String TAG = "ClearAdbKeysDlg";
 
     public static void show(Fragment host) {
-        final FragmentManager manager = host.getActivity().getFragmentManager();
+        final FragmentManager manager = host.getActivity().getSupportFragmentManager();
         if (manager.findFragmentByTag(TAG) == null) {
             final ClearAdbKeysWarningDialog dialog =
                     new ClearAdbKeysWarningDialog();

@@ -28,9 +28,11 @@ import android.util.AttributeSet;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
+import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.ListPreference;
+import androidx.preference.ListPreferenceDialogFragmentCompat;
 
 public class CustomListPreference extends ListPreference {
 
@@ -43,7 +45,7 @@ public class CustomListPreference extends ListPreference {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    protected void onPrepareDialogBuilder(AlertDialog.Builder builder,
+    protected void onPrepareDialogBuilder(Builder builder,
             DialogInterface.OnClickListener listener) {
     }
 
@@ -72,15 +74,17 @@ public class CustomListPreference extends ListPreference {
     protected void onDialogStateRestored(Dialog dialog, Bundle savedInstanceState) {
     }
 
-    public static class CustomListPreferenceDialogFragment extends ListPreferenceDialogFragment {
+    public static class CustomListPreferenceDialogFragment extends
+            ListPreferenceDialogFragmentCompat {
 
         private static final java.lang.String KEY_CLICKED_ENTRY_INDEX
                 = "settings.CustomListPrefDialog.KEY_CLICKED_ENTRY_INDEX";
 
         private int mClickedDialogEntryIndex;
 
-        public static ListPreferenceDialogFragment newInstance(String key) {
-            final ListPreferenceDialogFragment fragment = new CustomListPreferenceDialogFragment();
+        public static ListPreferenceDialogFragmentCompat newInstance(String key) {
+            final ListPreferenceDialogFragmentCompat fragment =
+                    new CustomListPreferenceDialogFragment();
             final Bundle b = new Bundle(1);
             b.putString(ARG_KEY, key);
             fragment.setArguments(b);
@@ -92,7 +96,7 @@ public class CustomListPreference extends ListPreference {
         }
 
         @Override
-        protected void onPrepareDialogBuilder(AlertDialog.Builder builder) {
+        protected void onPrepareDialogBuilder(Builder builder) {
             super.onPrepareDialogBuilder(builder);
             mClickedDialogEntryIndex = getCustomizablePreference()
                     .findIndexOfValue(getCustomizablePreference().getValue());

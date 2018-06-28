@@ -31,7 +31,7 @@ import com.android.settings.fuelgauge.batterytip.detectors.SummaryDetector;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.LowBatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.SummaryTip;
-import com.android.settingslib.utils.AsyncLoader;
+import com.android.settingslib.utils.AsyncLoaderCompat;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,7 +43,7 @@ import androidx.annotation.VisibleForTesting;
  * Loader to compute and return a battery tip list. It will always return a full length list even
  * though some tips may have state {@code BaseBatteryTip.StateType.INVISIBLE}.
  */
-public class BatteryTipLoader extends AsyncLoader<List<BatteryTip>> {
+public class BatteryTipLoader extends AsyncLoaderCompat<List<BatteryTip>> {
     private static final String TAG = "BatteryTipLoader";
 
     private static final boolean USE_FAKE_DATA = false;

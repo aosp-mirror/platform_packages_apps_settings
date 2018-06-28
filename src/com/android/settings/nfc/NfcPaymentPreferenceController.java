@@ -13,7 +13,6 @@
  */
 package com.android.settings.nfc;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -39,6 +38,7 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import java.util.List;
 
+import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
@@ -134,7 +134,7 @@ public class NfcPaymentPreferenceController extends BasePreferenceController imp
     }
 
     @Override
-    public void onPrepareDialogBuilder(AlertDialog.Builder builder,
+    public void onPrepareDialogBuilder(Builder builder,
             DialogInterface.OnClickListener listener) {
         builder.setSingleChoiceItems(mAdapter, 0, listener);
     }

@@ -238,7 +238,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
         }
         final String packageName = getPackageName();
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        final Lifecycle lifecycle = getLifecycle();
+        final Lifecycle lifecycle = getSettingsLifecycle();
 
         // The following are controllers for preferences that needs to refresh the preference state
         // when app state changes.
@@ -524,7 +524,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
         }
         if (mState == null) {
             mState = ApplicationsState.getInstance(activity.getApplication());
-            mSession = mState.newSession(this, getLifecycle());
+            mSession = mState.newSession(this, getSettingsLifecycle());
         }
         mUserId = UserHandle.myUserId();
         mAppEntry = mState.getEntry(getPackageName(), UserHandle.myUserId());

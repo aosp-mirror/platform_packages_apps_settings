@@ -27,7 +27,7 @@ import com.android.settings.Utils;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.widget.CandidateInfo;
 import com.android.settingslib.widget.FooterPreference;
-import com.android.settingslib.widget.FooterPreferenceMixin;
+import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
 import com.google.android.collect.Lists;
 
@@ -49,7 +49,8 @@ public class UsbDefaultFragment extends RadioButtonPickerFragment {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
-        FooterPreferenceMixin footer = new FooterPreferenceMixin(this, this.getLifecycle());
+        FooterPreferenceMixinCompat footer = new FooterPreferenceMixinCompat(this,
+                this.getSettingsLifecycle());
         FooterPreference pref = footer.createFooterPreference();
         pref.setTitle(R.string.usb_default_info);
     }

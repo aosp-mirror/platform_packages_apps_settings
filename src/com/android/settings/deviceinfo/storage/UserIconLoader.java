@@ -24,12 +24,12 @@ import android.util.SparseArray;
 
 import com.android.internal.util.Preconditions;
 import com.android.settings.Utils;
-import com.android.settingslib.utils.AsyncLoader;
+import com.android.settingslib.utils.AsyncLoaderCompat;
 
 /**
  * Fetches a user icon as a loader using a given icon loading lambda.
  */
-public class UserIconLoader extends AsyncLoader<SparseArray<Drawable>> {
+public class UserIconLoader extends AsyncLoaderCompat<SparseArray<Drawable>> {
     private FetchUserIconTask mTask;
 
     /**

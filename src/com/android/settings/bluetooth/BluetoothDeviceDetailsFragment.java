@@ -120,7 +120,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         ArrayList<AbstractPreferenceController> controllers = new ArrayList<>();
 
         if (mCachedDevice != null) {
-            Lifecycle lifecycle = getLifecycle();
+            Lifecycle lifecycle = getSettingsLifecycle();
             controllers.add(new BluetoothDetailsHeaderController(context, this, mCachedDevice,
                     lifecycle, mManager));
             controllers.add(new BluetoothDetailsButtonsController(context, this, mCachedDevice,

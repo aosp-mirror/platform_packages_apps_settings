@@ -36,6 +36,7 @@ import com.android.settings.utils.SettingsDividerItemDecoration;
 import com.android.setupwizardlib.GlifPreferenceLayout;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
@@ -55,7 +56,7 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
     }
 
     @Override
-    /* package */ Class<? extends PreferenceFragment> getFragmentClass() {
+    /* package */ Class<? extends PreferenceFragmentCompat> getFragmentClass() {
         return SetupChooseLockGenericFragment.class;
     }
 

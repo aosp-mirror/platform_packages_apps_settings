@@ -20,14 +20,14 @@ import android.content.Context;
 import android.os.UserManager;
 
 import com.android.internal.os.BatteryStatsHelper;
-import com.android.settingslib.utils.AsyncLoader;
+import com.android.settingslib.utils.AsyncLoaderCompat;
 
 import androidx.annotation.VisibleForTesting;
 
 /**
  * Loader to get new {@link BatteryStatsHelper} in the background
  */
-public class BatteryStatsHelperLoader extends AsyncLoader<BatteryStatsHelper> {
+public class BatteryStatsHelperLoader extends AsyncLoaderCompat<BatteryStatsHelper> {
     @VisibleForTesting
     UserManager mUserManager;
     @VisibleForTesting

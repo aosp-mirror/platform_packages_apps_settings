@@ -246,7 +246,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         final Bundle bundle = getArguments();
         EntityHeaderController controller = EntityHeaderController
                 .newInstance(context, this, appSnippet)
-                .setRecyclerView(getListView(), getLifecycle())
+                .setRecyclerView(getListView(), getSettingsLifecycle())
                 .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
                         EntityHeaderController.ActionType.ACTION_NONE);
 
@@ -327,7 +327,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         controllers.add(new BatteryOptimizationPreferenceController(
                 (SettingsActivity) getActivity(), this, packageName));
         mAppButtonsPreferenceController = new AppButtonsPreferenceController(
-                (SettingsActivity) getActivity(), this, getLifecycle(), packageName, mState,
+                (SettingsActivity) getActivity(), this, getSettingsLifecycle(), packageName, mState,
                 REQUEST_UNINSTALL, REQUEST_REMOVE_DEVICE_ADMIN);
         controllers.add(mAppButtonsPreferenceController);
 

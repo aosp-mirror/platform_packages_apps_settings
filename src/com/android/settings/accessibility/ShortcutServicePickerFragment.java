@@ -22,7 +22,6 @@ import static com.android.internal.accessibility.AccessibilityShortcutController
         .DALTONIZER_COMPONENT_NAME;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -55,6 +54,7 @@ import java.util.List;
 import java.util.Map;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 /**
  * Fragment for picking accessibility shortcut service
@@ -135,10 +135,11 @@ public class ShortcutServicePickerFragment extends RadioButtonPickerFragment {
                 // This is a framework feature. It doesn't need to be confirmed.
                 onRadioButtonConfirmed(selectedKey);
             } else {
-                final Activity activity = getActivity();
+                final FragmentActivity activity = getActivity();
                 if (activity != null) {
                     ConfirmationDialogFragment.newInstance(this, selectedKey)
-                            .show(activity.getFragmentManager(), ConfirmationDialogFragment.TAG);
+                            .show(activity.getSupportFragmentManager(),
+                                    ConfirmationDialogFragment.TAG);
                 }
             }
         }

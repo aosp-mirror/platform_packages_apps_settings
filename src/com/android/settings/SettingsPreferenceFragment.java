@@ -41,10 +41,10 @@ import com.android.settings.support.actionbar.HelpMenuController;
 import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settings.widget.HighlightablePreferenceGroupAdapter;
 import com.android.settings.widget.LoadingViewController;
-import com.android.settingslib.CustomDialogPreference;
-import com.android.settingslib.CustomEditTextPreference;
+import com.android.settingslib.CustomDialogPreferenceCompat;
+import com.android.settingslib.CustomEditTextPreferenceCompat;
 import com.android.settingslib.core.instrumentation.Instrumentable;
-import com.android.settingslib.widget.FooterPreferenceMixin;
+import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
 import java.util.UUID;
 
@@ -68,8 +68,8 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
 
     private static final String SAVE_HIGHLIGHTED_KEY = "android:preference_highlighted";
 
-    protected final FooterPreferenceMixin mFooterPreferenceMixin =
-            new FooterPreferenceMixin(this, getLifecycle());
+    protected final FooterPreferenceMixinCompat mFooterPreferenceMixin =
+            new FooterPreferenceMixinCompat(this, getSettingsLifecycle());
 
 
     private static final int ORDER_FIRST = -1;
@@ -517,11 +517,11 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         } else if (preference instanceof CustomListPreference) {
             f = CustomListPreference.CustomListPreferenceDialogFragment
                     .newInstance(preference.getKey());
-        } else if (preference instanceof CustomDialogPreference) {
-            f = CustomDialogPreference.CustomPreferenceDialogFragment
+        } else if (preference instanceof CustomDialogPreferenceCompat) {
+            f = CustomDialogPreferenceCompat.CustomPreferenceDialogFragment
                     .newInstance(preference.getKey());
-        } else if (preference instanceof CustomEditTextPreference) {
-            f = CustomEditTextPreference.CustomPreferenceDialogFragment
+        } else if (preference instanceof CustomEditTextPreferenceCompat) {
+            f = CustomEditTextPreferenceCompat.CustomPreferenceDialogFragment
                     .newInstance(preference.getKey());
         } else {
             super.onDisplayPreferenceDialog(preference);

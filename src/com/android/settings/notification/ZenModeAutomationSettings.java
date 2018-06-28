@@ -43,7 +43,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         ZenServiceListing serviceListing = new ZenServiceListing(getContext(), CONFIG);
         serviceListing.reloadApprovedServices();
-        return buildPreferenceControllers(context, this, serviceListing, getLifecycle());
+        return buildPreferenceControllers(context, this, serviceListing, getSettingsLifecycle());
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,

@@ -63,7 +63,7 @@ public class PremiumSmsAccess extends EmptyTextSettings
         super.onCreate(icicle);
         mApplicationsState = ApplicationsState.getInstance((Application)
                 getContext().getApplicationContext());
-        mSession = mApplicationsState.newSession(this, getLifecycle());
+        mSession = mApplicationsState.newSession(this, getSettingsLifecycle());
         mSmsBackend = new AppStateSmsPremBridge(getContext(), mApplicationsState, this);
     }
 

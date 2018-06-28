@@ -80,7 +80,7 @@ public class AccountDashboardFragment extends DashboardFragment {
         final AccountPreferenceController accountPrefController =
                 new AccountPreferenceController(context, parent, authorities);
         if (parent != null) {
-            parent.getLifecycle().addObserver(accountPrefController);
+            parent.getSettingsLifecycle().addObserver(accountPrefController);
         }
         controllers.add(accountPrefController);
         controllers.add(new AutoSyncDataPreferenceController(context, parent));

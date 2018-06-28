@@ -23,19 +23,19 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.EditText;
 
-import com.android.settingslib.CustomEditTextPreference;
+import com.android.settingslib.CustomEditTextPreferenceCompat;
 
 /**
  * TODO: Add a soft dialpad for PIN entry.
  */
-class EditPinPreference extends CustomEditTextPreference {
+class EditPinPreference extends CustomEditTextPreferenceCompat {
 
     interface OnPinEnteredListener {
         void onPinEntered(EditPinPreference preference, boolean positiveResult);
     }
-    
+
     private OnPinEnteredListener mPinListener;
-    
+
     public EditPinPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -43,7 +43,7 @@ class EditPinPreference extends CustomEditTextPreference {
     public EditPinPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
-    
+
     public void setOnPinEnteredListener(OnPinEnteredListener listener) {
         mPinListener = listener;
     }

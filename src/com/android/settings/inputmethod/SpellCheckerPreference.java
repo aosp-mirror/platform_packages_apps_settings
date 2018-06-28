@@ -16,7 +16,6 @@
 
 package com.android.settings.inputmethod;
 
-import android.app.AlertDialog.Builder;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -29,6 +28,7 @@ import android.view.textservice.SpellCheckerInfo;
 import com.android.settings.CustomListPreference;
 import com.android.settings.R;
 
+import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.preference.PreferenceViewHolder;
 
 /**

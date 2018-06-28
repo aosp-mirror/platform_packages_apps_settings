@@ -81,7 +81,7 @@ public class DomainAppPreferenceController extends BasePreferenceController impl
     public void setFragment(ManageDomainUrls fragment) {
         mFragment = fragment;
         mMetricsCategory = fragment.getMetricsCategory();
-        mSession = mApplicationsState.newSession(this, mFragment.getLifecycle());
+        mSession = mApplicationsState.newSession(this, mFragment.getSettingsLifecycle());
     }
 
     @Override

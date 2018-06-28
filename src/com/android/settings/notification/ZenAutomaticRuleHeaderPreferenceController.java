@@ -36,18 +36,19 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 
 public class ZenAutomaticRuleHeaderPreferenceController extends AbstractZenModePreferenceController
         implements PreferenceControllerMixin {
 
     private final String KEY = PREF_KEY_APP_HEADER;
-    private final PreferenceFragment mFragment;
+    private final PreferenceFragmentCompat mFragment;
     private AutomaticZenRule mRule;
     private String mId;
     private EntityHeaderController mController;
 
-    public ZenAutomaticRuleHeaderPreferenceController(Context context, PreferenceFragment fragment,
-            Lifecycle lifecycle) {
+    public ZenAutomaticRuleHeaderPreferenceController(Context context,
+            PreferenceFragmentCompat fragment, Lifecycle lifecycle) {
         super(context, PREF_KEY_APP_HEADER, lifecycle);
         mFragment = fragment;
     }

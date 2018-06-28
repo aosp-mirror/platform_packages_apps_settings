@@ -36,6 +36,8 @@ import com.android.settings.RestrictedListPreference;
 import com.android.settings.Utils;
 import com.android.settingslib.RestrictedLockUtils;
 
+import androidx.appcompat.app.AlertDialog.Builder;
+
 public class NotificationLockscreenPreference extends RestrictedListPreference {
 
     private boolean mAllowRemoteInput;
@@ -72,7 +74,7 @@ public class NotificationLockscreenPreference extends RestrictedListPreference {
     }
 
     @Override
-    protected void onPrepareDialogBuilder(AlertDialog.Builder builder,
+    protected void onPrepareDialogBuilder(Builder builder,
             DialogInterface.OnClickListener innerListener) {
 
         mListener = new Listener(innerListener);

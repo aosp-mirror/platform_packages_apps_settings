@@ -53,8 +53,8 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
         // Mixin that logs visibility change for activity.
         mVisibilityLoggerMixin = new VisibilityLoggerMixin(getMetricsCategory(),
                 mMetricsFeatureProvider);
-        getLifecycle().addObserver(mVisibilityLoggerMixin);
-        getLifecycle().addObserver(new SurveyMixin(this, getClass().getSimpleName()));
+        getSettingsLifecycle().addObserver(mVisibilityLoggerMixin);
+        getSettingsLifecycle().addObserver(new SurveyMixin(this, getClass().getSimpleName()));
         super.onAttach(context);
     }
 

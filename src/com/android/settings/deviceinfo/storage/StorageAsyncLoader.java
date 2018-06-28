@@ -33,7 +33,7 @@ import android.util.Log;
 import android.util.SparseArray;
 
 import com.android.settingslib.applications.StorageStatsSource;
-import com.android.settingslib.utils.AsyncLoader;
+import com.android.settingslib.utils.AsyncLoaderCompat;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -45,7 +45,7 @@ import java.util.List;
  * users
  */
 public class StorageAsyncLoader
-        extends AsyncLoader<SparseArray<StorageAsyncLoader.AppsStorageResult>> {
+        extends AsyncLoaderCompat<SparseArray<StorageAsyncLoader.AppsStorageResult>> {
     private UserManager mUserManager;
     private static final String TAG = "StorageAsyncLoader";
 

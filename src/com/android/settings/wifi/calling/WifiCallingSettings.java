@@ -38,7 +38,7 @@ import java.util.List;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.legacy.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentPagerAdapter;
 
 /**
  * "Wi-Fi Calling settings" screen. This is the container fragment which holds

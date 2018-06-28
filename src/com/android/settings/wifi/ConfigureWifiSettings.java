@@ -76,15 +76,18 @@ public class ConfigureWifiSettings extends DashboardFragment {
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         mWifiWakeupPreferenceController = new WifiWakeupPreferenceController(context, this);
         mUseOpenWifiPreferenceController = new UseOpenWifiPreferenceController(context, this,
-                getLifecycle());
+                getSettingsLifecycle());
         final WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(mWifiWakeupPreferenceController);
-        controllers.add(new NotifyOpenNetworksPreferenceController(context, getLifecycle()));
+        controllers.add(new NotifyOpenNetworksPreferenceController(context,
+                getSettingsLifecycle()));
         controllers.add(mUseOpenWifiPreferenceController);
-        controllers.add(new WifiInfoPreferenceController(context, getLifecycle(), wifiManager));
+        controllers.add(new WifiInfoPreferenceController(context, getSettingsLifecycle(),
+                wifiManager));
         controllers.add(new CellularFallbackPreferenceController(context));
-        controllers.add(new WifiP2pPreferenceController(context, getLifecycle(), wifiManager));
+        controllers.add(new WifiP2pPreferenceController(context, getSettingsLifecycle(),
+                wifiManager));
         return controllers;
     }
 

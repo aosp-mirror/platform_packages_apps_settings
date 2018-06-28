@@ -112,7 +112,7 @@ public class TetherSettings extends RestrictedSettingsFragment
     public void onAttach(Context context) {
         super.onAttach(context);
         mWifiTetherPreferenceController =
-                new WifiTetherPreferenceController(context, getLifecycle());
+                new WifiTetherPreferenceController(context, getSettingsLifecycle());
     }
 
     @Override

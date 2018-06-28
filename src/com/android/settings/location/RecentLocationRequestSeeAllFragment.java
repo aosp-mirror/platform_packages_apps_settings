@@ -59,7 +59,7 @@ public class RecentLocationRequestSeeAllFragment extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle(), this);
+        return buildPreferenceControllers(context, getSettingsLifecycle(), this);
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(

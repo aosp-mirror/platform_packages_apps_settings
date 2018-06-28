@@ -37,7 +37,7 @@ public class EnableDevelopmentSettingWarningDialog extends InstrumentedDialogFra
         final EnableDevelopmentSettingWarningDialog dialog =
                 new EnableDevelopmentSettingWarningDialog();
         dialog.setTargetFragment(host, 0 /* requestCode */);
-        final FragmentManager manager = host.getActivity().getFragmentManager();
+        final FragmentManager manager = host.getActivity().getSupportFragmentManager();
         if (manager.findFragmentByTag(TAG) == null) {
             dialog.show(manager, TAG);
         }

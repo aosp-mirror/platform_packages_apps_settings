@@ -85,7 +85,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        Fragment fragment = getFragmentManager().findFragmentById(R.id.main_content);
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.main_content);
         if (fragment != null && fragment instanceof ConfirmLockPasswordFragment) {
             ((ConfirmLockPasswordFragment)fragment).onWindowFocusChanged(hasFocus);
         }

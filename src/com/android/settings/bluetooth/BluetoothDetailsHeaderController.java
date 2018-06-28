@@ -30,6 +30,7 @@ import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 /**
@@ -42,7 +43,7 @@ public class BluetoothDetailsHeaderController extends BluetoothDetailsController
     private LocalBluetoothManager mLocalManager;
     private CachedBluetoothDeviceManager mDeviceManager;
 
-    public BluetoothDetailsHeaderController(Context context, PreferenceFragment fragment,
+    public BluetoothDetailsHeaderController(Context context, PreferenceFragmentCompat fragment,
             CachedBluetoothDevice device, Lifecycle lifecycle,
             LocalBluetoothManager bluetoothManager) {
         super(context, fragment, device, lifecycle);

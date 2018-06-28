@@ -38,7 +38,7 @@ public class DisableLogPersistWarningDialog extends InstrumentedDialogFragment i
             return;
         }
         final Fragment hostFragment = (Fragment) host;
-        final FragmentManager manager = hostFragment.getActivity().getFragmentManager();
+        final FragmentManager manager = hostFragment.getActivity().getSupportFragmentManager();
         if (manager.findFragmentByTag(TAG) == null) {
             final DisableLogPersistWarningDialog dialog =
                     new DisableLogPersistWarningDialog();

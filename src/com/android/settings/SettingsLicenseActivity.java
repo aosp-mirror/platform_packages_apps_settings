@@ -16,7 +16,6 @@
 
 package com.android.settings;
 
-import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -28,19 +27,20 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.android.settings.users.RestrictedProfileSettings;
-import com.android.settingslib.license.LicenseHtmlLoader;
+import com.android.settingslib.license.LicenseHtmlLoaderCompat;
 
 import java.io.File;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.core.content.FileProvider;
+import androidx.fragment.app.FragmentActivity;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 
 /**
  * The "dialog" that shows from "License" in the Settings app.
  */
-public class SettingsLicenseActivity extends Activity implements
+public class SettingsLicenseActivity extends FragmentActivity implements
             LoaderManager.LoaderCallbacks<File> {
     private static final String TAG = "SettingsLicenseActivity";
 
@@ -64,7 +64,7 @@ public class SettingsLicenseActivity extends Activity implements
 
     @Override
     public Loader<File> onCreateLoader(int id, Bundle args) {
-        return new LicenseHtmlLoader(this);
+        return new LicenseHtmlLoaderCompat(this);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class SettingsLicenseActivity extends Activity implements
     }
 
     private void showHtmlFromDefaultXmlFiles() {
-        getLoaderManager().initLoader(LOADER_ID_LICENSE_HTML_LOADER, Bundle.EMPTY, this);
+        getSupportLoaderManager().initLoader(LOADER_ID_LICENSE_HTML_LOADER, Bundle.EMPTY, this);
     }
 
     @VisibleForTesting

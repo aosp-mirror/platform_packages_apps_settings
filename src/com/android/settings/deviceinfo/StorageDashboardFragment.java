@@ -105,7 +105,7 @@ public class StorageDashboardFragment extends DashboardFragment
     void initializeOptionsMenu(Activity activity) {
         mOptionMenuController = new PrivateVolumeOptionMenuController(
                 activity, mVolume, activity.getPackageManager());
-        getLifecycle().addObserver(mOptionMenuController);
+        getSettingsLifecycle().addObserver(mOptionMenuController);
         setHasOptionsMenu(true);
         activity.invalidateOptionsMenu();
     }
@@ -119,7 +119,7 @@ public class StorageDashboardFragment extends DashboardFragment
         final Activity activity = getActivity();
         EntityHeaderController.newInstance(activity, this /*fragment*/,
                 null /* header view */)
-                .setRecyclerView(getListView(), getLifecycle())
+                .setRecyclerView(getListView(), getSettingsLifecycle())
                 .styleActionBar(activity);
 
     }

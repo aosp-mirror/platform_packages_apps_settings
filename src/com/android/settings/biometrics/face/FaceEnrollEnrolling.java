@@ -31,8 +31,8 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollSidecar;
-import com.android.settings.biometrics.BiometricsEnrollEnrolling;
 import com.android.settings.biometrics.BiometricErrorDialog;
+import com.android.settings.biometrics.BiometricsEnrollEnrolling;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
 
@@ -166,7 +166,7 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     private void showErrorDialog(CharSequence msg, int msgId) {
         BiometricErrorDialog dialog = FaceErrorDialog.newInstance(msg, msgId);
-        dialog.show(getFragmentManager(), FaceErrorDialog.class.getName());
+        dialog.show(getSupportFragmentManager(), FaceErrorDialog.class.getName());
     }
 
     private void showError(CharSequence error) {

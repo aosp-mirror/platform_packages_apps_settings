@@ -21,11 +21,11 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.util.ArraySet;
 
-import com.android.settingslib.utils.AsyncLoader;
+import com.android.settingslib.utils.AsyncLoaderCompat;
 
 import androidx.preference.Preference;
 
-public class AppPrefLoader extends AsyncLoader<ArraySet<Preference>> {
+public class AppPrefLoader extends AsyncLoaderCompat<ArraySet<Preference>> {
     private ArraySet<String> mPackages;
     private PackageManager mPackageManager;
     private Context mPrefContext;

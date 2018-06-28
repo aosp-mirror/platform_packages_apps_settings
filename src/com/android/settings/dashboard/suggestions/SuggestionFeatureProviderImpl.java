@@ -39,7 +39,7 @@ import com.android.settings.wallpaper.WallpaperSuggestionActivity;
 import com.android.settings.wifi.calling.WifiCallingSuggestionActivity;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.drawer.Tile;
-import com.android.settingslib.suggestions.SuggestionControllerMixin;
+import com.android.settingslib.suggestions.SuggestionControllerMixinCompat;
 
 import java.util.List;
 
@@ -119,7 +119,7 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
     }
 
     @Override
-    public void dismissSuggestion(Context context, SuggestionControllerMixin mixin,
+    public void dismissSuggestion(Context context, SuggestionControllerMixinCompat mixin,
             Suggestion suggestion) {
         if (mixin == null || suggestion == null || context == null) {
             return;

@@ -49,6 +49,7 @@ import com.android.settings.vpn2.VpnUtils;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
+import androidx.fragment.app.FragmentActivity;
 import sun.security.util.ObjectIdentifier;
 import sun.security.x509.AlgorithmId;
 
@@ -88,7 +89,7 @@ import sun.security.x509.AlgorithmId;
  * Action:   normal unlock/install
  * Notes:    this is the common case
  */
-public final class CredentialStorage extends Activity {
+public final class CredentialStorage extends FragmentActivity {
 
     private static final String TAG = "CredentialStorage";
 
@@ -160,7 +161,7 @@ public final class CredentialStorage extends Activity {
             case UNLOCKED: {
                 if (isActivePasswordQualityInsufficient()) {
                     final ConfigureKeyGuardDialog dialog = new ConfigureKeyGuardDialog();
-                    dialog.show(getFragmentManager(), ConfigureKeyGuardDialog.TAG);
+                    dialog.show(getSupportFragmentManager(), ConfigureKeyGuardDialog.TAG);
                     return;
                 }
                 installIfAvailable();
@@ -180,7 +181,7 @@ public final class CredentialStorage extends Activity {
         if (isActivePasswordQualityInsufficient()) {
             // key guard not setup, doing so will initialize keystore
             final ConfigureKeyGuardDialog dialog = new ConfigureKeyGuardDialog();
-            dialog.show(getFragmentManager(), ConfigureKeyGuardDialog.TAG);
+            dialog.show(getSupportFragmentManager(), ConfigureKeyGuardDialog.TAG);
             // will return to onResume after Activity
             return;
         }

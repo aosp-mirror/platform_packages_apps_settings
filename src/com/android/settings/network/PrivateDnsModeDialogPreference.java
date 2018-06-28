@@ -45,7 +45,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.utils.AnnotationSpan;
-import com.android.settingslib.CustomDialogPreference;
+import com.android.settingslib.CustomDialogPreferenceCompat;
 import com.android.settingslib.HelpUtils;
 
 import java.util.HashMap;
@@ -56,7 +56,7 @@ import androidx.annotation.VisibleForTesting;
 /**
  * Dialog to set the Private DNS
  */
-public class PrivateDnsModeDialogPreference extends CustomDialogPreference implements
+public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat implements
         DialogInterface.OnClickListener, RadioGroup.OnCheckedChangeListener, TextWatcher {
 
     public static final String ANNOTATION_URL = "url";

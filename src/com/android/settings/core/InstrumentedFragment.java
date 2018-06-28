@@ -37,8 +37,8 @@ public abstract class InstrumentedFragment extends ObservableFragment implements
         mVisibilityLoggerMixin = new VisibilityLoggerMixin(getMetricsCategory(),
                 mMetricsFeatureProvider);
         // Mixin that logs visibility change for activity.
-        getLifecycle().addObserver(mVisibilityLoggerMixin);
-        getLifecycle().addObserver(new SurveyMixin(this, getClass().getSimpleName()));
+        getSettingsLifecycle().addObserver(mVisibilityLoggerMixin);
+        getSettingsLifecycle().addObserver(new SurveyMixin(this, getClass().getSimpleName()));
         super.onAttach(context);
     }
 

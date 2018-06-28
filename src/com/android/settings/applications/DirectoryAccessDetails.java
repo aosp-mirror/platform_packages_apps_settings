@@ -99,7 +99,7 @@ public class DirectoryAccessDetails extends AppInfoBase {
         final Activity activity = getActivity();
         final Preference pref = EntityHeaderController
                 .newInstance(activity, this, /* header= */ null )
-                .setRecyclerView(getListView(), getLifecycle())
+                .setRecyclerView(getListView(), getSettingsLifecycle())
                 .setIcon(IconDrawableFactory.newInstance(getPrefContext())
                         .getBadgedIcon(mPackageInfo.applicationInfo))
                 .setLabel(mPackageInfo.applicationInfo.loadLabel(mPm))

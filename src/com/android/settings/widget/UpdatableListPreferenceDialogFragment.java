@@ -15,7 +15,6 @@
  */
 package com.android.settings.widget;
 
-import android.app.AlertDialog;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -25,14 +24,15 @@ import com.android.settingslib.core.instrumentation.Instrumentable;
 import java.util.ArrayList;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.preference.ListPreference;
-import androidx.preference.PreferenceDialogFragment;
+import androidx.preference.PreferenceDialogFragmentCompat;
 
 /**
- * {@link PreferenceDialogFragment} that updates the available options
+ * {@link PreferenceDialogFragmentCompat} that updates the available options
  * when {@code onListPreferenceUpdated} is called."
  */
-public class UpdatableListPreferenceDialogFragment extends PreferenceDialogFragment implements
+public class UpdatableListPreferenceDialogFragment extends PreferenceDialogFragmentCompat implements
         Instrumentable {
 
     private static final String SAVE_STATE_INDEX = "UpdatableListPreferenceDialogFragment.index";
@@ -115,7 +115,7 @@ public class UpdatableListPreferenceDialogFragment extends PreferenceDialogFragm
     }
 
     @Override
-    protected void onPrepareDialogBuilder(AlertDialog.Builder builder) {
+    protected void onPrepareDialogBuilder(Builder builder) {
         super.onPrepareDialogBuilder(builder);
         final TypedArray a = getContext().obtainStyledAttributes(
                 null,

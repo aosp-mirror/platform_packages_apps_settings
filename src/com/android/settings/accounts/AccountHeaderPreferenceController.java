@@ -35,6 +35,7 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 public class AccountHeaderPreferenceController extends AbstractPreferenceController
@@ -43,14 +44,14 @@ public class AccountHeaderPreferenceController extends AbstractPreferenceControl
     private static final String KEY_ACCOUNT_HEADER = "account_header";
 
     private final Activity mActivity;
-    private final PreferenceFragment mHost;
+    private final PreferenceFragmentCompat mHost;
     private final Account mAccount;
     private final UserHandle mUserHandle;
 
     private LayoutPreference mHeaderPreference;
 
     public AccountHeaderPreferenceController(Context context, Lifecycle lifecycle,
-            Activity activity, PreferenceFragment host, Bundle args) {
+            Activity activity, PreferenceFragmentCompat host, Bundle args) {
         super(context);
         mActivity = activity;
         mHost = host;

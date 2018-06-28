@@ -122,7 +122,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         final Activity activity = getActivity();
         final Preference pref = EntityHeaderController
                 .newInstance(activity, this, null /* header */)
-                .setRecyclerView(getListView(), getLifecycle())
+                .setRecyclerView(getListView(), getSettingsLifecycle())
                 .setIcon(getDrawableForType(mAccount.type))
                 .setLabel(mAccount.name)
                 .setSummary(getLabelForType(mAccount.type))

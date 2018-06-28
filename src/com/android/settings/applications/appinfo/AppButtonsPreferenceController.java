@@ -568,7 +568,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
     private void showDialogInner(@ButtonActionDialogFragment.DialogType int id) {
         ButtonActionDialogFragment newFragment = ButtonActionDialogFragment.newInstance(id);
         newFragment.setTargetFragment(mFragment, 0);
-        newFragment.show(mActivity.getFragmentManager(), "dialog " + id);
+        newFragment.show(mActivity.getSupportFragmentManager(), "dialog " + id);
     }
 
     /** Returns whether there is only one user on this device, not including the system-only user */

@@ -41,6 +41,7 @@ import com.android.settingslib.core.instrumentation.Instrumentable;
 
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceClickListener;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
@@ -60,9 +61,9 @@ public class AccountTypePreferenceLoader {
 
     private AuthenticatorHelper mAuthenticatorHelper;
     private UserHandle mUserHandle;
-    private PreferenceFragment mFragment;
+    private PreferenceFragmentCompat mFragment;
 
-    public AccountTypePreferenceLoader(PreferenceFragment fragment,
+    public AccountTypePreferenceLoader(PreferenceFragmentCompat fragment,
             AuthenticatorHelper authenticatorHelper, UserHandle userHandle) {
         mFragment = fragment;
         mAuthenticatorHelper = authenticatorHelper;

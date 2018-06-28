@@ -54,7 +54,7 @@ public class SetupFingerprintEnrollFindSensor extends FingerprintEnrollFindSenso
 
     @Override
     protected void onSkipButtonClick() {
-        new SkipFingerprintDialog().show(getFragmentManager());
+        new SkipFingerprintDialog().show(getSupportFragmentManager());
     }
 
     @Override

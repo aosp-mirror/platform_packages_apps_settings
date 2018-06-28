@@ -241,7 +241,7 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        final Lifecycle lifecycle = getLifecycle();
+        final Lifecycle lifecycle = getSettingsLifecycle();
         final SettingsActivity activity = (SettingsActivity) getActivity();
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         mBatteryHeaderPreferenceController = new BatteryHeaderPreferenceController(

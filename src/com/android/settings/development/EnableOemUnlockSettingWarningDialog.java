@@ -34,7 +34,7 @@ public class EnableOemUnlockSettingWarningDialog extends InstrumentedDialogFragm
     public static final String TAG = "EnableOemUnlockDlg";
 
     public static void show(Fragment host) {
-        final FragmentManager manager = host.getActivity().getFragmentManager();
+        final FragmentManager manager = host.getActivity().getSupportFragmentManager();
         if (manager.findFragmentByTag(TAG) == null) {
             final EnableOemUnlockSettingWarningDialog dialog =
                     new EnableOemUnlockSettingWarningDialog();

@@ -14,7 +14,6 @@
 
 package com.android.settings.datausage;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.ContentObserver;
@@ -37,15 +36,16 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.CustomDialogPreference;
+import com.android.settingslib.CustomDialogPreferenceCompat;
 
 import java.util.List;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.core.content.res.TypedArrayUtils;
 import androidx.preference.PreferenceViewHolder;
 
-public class CellDataPreference extends CustomDialogPreference implements TemplatePreference {
+public class CellDataPreference extends CustomDialogPreferenceCompat implements TemplatePreference {
 
     private static final String TAG = "CellDataPreference";
 
@@ -196,7 +196,7 @@ public class CellDataPreference extends CustomDialogPreference implements Templa
     }
 
     @Override
-    protected void onPrepareDialogBuilder(AlertDialog.Builder builder,
+    protected void onPrepareDialogBuilder(Builder builder,
             DialogInterface.OnClickListener listener) {
         if (mMultiSimDialog) {
             showMultiSimDialog(builder, listener);
@@ -205,7 +205,7 @@ public class CellDataPreference extends CustomDialogPreference implements Templa
         }
     }
 
-    private void showDisableDialog(AlertDialog.Builder builder,
+    private void showDisableDialog(Builder builder,
             DialogInterface.OnClickListener listener) {
         builder.setTitle(null)
                 .setMessage(R.string.data_usage_disable_mobile)
@@ -213,7 +213,7 @@ public class CellDataPreference extends CustomDialogPreference implements Templa
                 .setNegativeButton(android.R.string.cancel, null);
     }
 
-    private void showMultiSimDialog(AlertDialog.Builder builder,
+    private void showMultiSimDialog(Builder builder,
             DialogInterface.OnClickListener listener) {
         final SubscriptionInfo currentSir = mSubscriptionManager.getActiveSubscriptionInfo(mSubId);
         final SubscriptionInfo nextSir = mSubscriptionManager.getDefaultDataSubscriptionInfo();

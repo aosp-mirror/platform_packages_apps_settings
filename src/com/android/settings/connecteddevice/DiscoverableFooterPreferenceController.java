@@ -36,7 +36,7 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.widget.FooterPreference;
-import com.android.settingslib.widget.FooterPreferenceMixin;
+import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
@@ -52,7 +52,7 @@ public class DiscoverableFooterPreferenceController extends BasePreferenceContro
     BroadcastReceiver mBluetoothChangedReceiver;
     @VisibleForTesting
     LocalBluetoothManager mLocalManager;
-    private FooterPreferenceMixin mFooterPreferenceMixin;
+    private FooterPreferenceMixinCompat mFooterPreferenceMixin;
     private FooterPreference mPreference;
     private LocalBluetoothAdapter mLocalAdapter;
     private AlwaysDiscoverable mAlwaysDiscoverable;
@@ -82,11 +82,12 @@ public class DiscoverableFooterPreferenceController extends BasePreferenceContro
     }
 
     public void init(DashboardFragment fragment) {
-        mFooterPreferenceMixin = new FooterPreferenceMixin(fragment, fragment.getLifecycle());
+        mFooterPreferenceMixin = new FooterPreferenceMixinCompat(fragment,
+                fragment.getSettingsLifecycle());
     }
 
     @VisibleForTesting
-    void init(FooterPreferenceMixin footerPreferenceMixin, FooterPreference preference,
+    void init(FooterPreferenceMixinCompat footerPreferenceMixin, FooterPreference preference,
             AlwaysDiscoverable alwaysDiscoverable) {
         mFooterPreferenceMixin = footerPreferenceMixin;
         mPreference = preference;

@@ -23,13 +23,13 @@ import android.os.SystemClock;
 
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.utils.AsyncLoader;
+import com.android.settingslib.utils.AsyncLoaderCompat;
 import com.android.settingslib.utils.PowerUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DebugEstimatesLoader extends AsyncLoader<List<BatteryInfo>> {
+public class DebugEstimatesLoader extends AsyncLoaderCompat<List<BatteryInfo>> {
     private BatteryStatsHelper mStatsHelper;
 
     public DebugEstimatesLoader(Context context, BatteryStatsHelper statsHelper) {

@@ -110,7 +110,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         final SwitchBar switchBar = activity.getSwitchBar();
         mSwitchBarController = new WifiTetherSwitchBarController(activity,
                 new SwitchBarController(switchBar));
-        getLifecycle().addObserver(mSwitchBarController);
+        getSettingsLifecycle().addObserver(mSwitchBarController);
         switchBar.show();
     }
 

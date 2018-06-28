@@ -34,7 +34,7 @@ public class EnableAdbWarningDialog extends InstrumentedDialogFragment implement
     public static final String TAG = "EnableAdbDialog";
 
     public static void show(Fragment host) {
-        final FragmentManager manager = host.getActivity().getFragmentManager();
+        final FragmentManager manager = host.getActivity().getSupportFragmentManager();
         if (manager.findFragmentByTag(TAG) == null) {
             final EnableAdbWarningDialog dialog = new EnableAdbWarningDialog();
             dialog.setTargetFragment(host, 0 /* requestCode */);

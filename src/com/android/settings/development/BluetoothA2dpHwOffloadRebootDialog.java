@@ -35,7 +35,7 @@ public class BluetoothA2dpHwOffloadRebootDialog extends InstrumentedDialogFragme
 
     public static void show(DevelopmentSettingsDashboardFragment host,
             BluetoothA2dpHwOffloadPreferenceController controller) {
-        final FragmentManager manager = host.getActivity().getFragmentManager();
+        final FragmentManager manager = host.getActivity().getSupportFragmentManager();
         if (manager.findFragmentByTag(TAG) == null) {
             final BluetoothA2dpHwOffloadRebootDialog dialog =
                     new BluetoothA2dpHwOffloadRebootDialog();

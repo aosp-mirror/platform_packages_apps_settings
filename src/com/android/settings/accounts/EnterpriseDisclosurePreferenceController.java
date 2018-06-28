@@ -22,7 +22,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.widget.FooterPreference;
-import com.android.settingslib.widget.FooterPreferenceMixin;
+import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
@@ -30,7 +30,7 @@ import androidx.preference.PreferenceScreen;
 public class EnterpriseDisclosurePreferenceController extends BasePreferenceController {
 
     private final EnterprisePrivacyFeatureProvider mFeatureProvider;
-    private FooterPreferenceMixin mFooterPreferenceMixin;
+    private FooterPreferenceMixinCompat mFooterPreferenceMixin;
     private PreferenceScreen mScreen;
 
     public EnterpriseDisclosurePreferenceController(Context context) {
@@ -41,7 +41,7 @@ public class EnterpriseDisclosurePreferenceController extends BasePreferenceCont
                 .getEnterprisePrivacyFeatureProvider(mContext);
     }
 
-    public void setFooterPreferenceMixin(FooterPreferenceMixin footerPreferenceMixin) {
+    public void setFooterPreferenceMixin(FooterPreferenceMixinCompat footerPreferenceMixin) {
         mFooterPreferenceMixin = footerPreferenceMixin;
     }
 

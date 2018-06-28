@@ -85,7 +85,7 @@ public class UsbDetailsFragment extends DashboardFragment {
         mControllers = createControllerList(context, mUsbBackend, this);
         mUsbReceiver = new UsbConnectionBroadcastReceiver(context, mUsbConnectionListener,
                 mUsbBackend);
-        this.getLifecycle().addObserver(mUsbReceiver);
+        this.getSettingsLifecycle().addObserver(mUsbReceiver);
 
         return new ArrayList<>(mControllers);
     }

@@ -27,6 +27,7 @@ import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 
 public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivity {
 
@@ -70,7 +71,7 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
     }
 
     @Override
-    public boolean onPreferenceStartFragment(PreferenceFragment caller, Preference pref) {
+    public boolean onPreferenceStartFragment(PreferenceFragmentCompat caller, Preference pref) {
         Bundle args = pref.getExtras();
         if (args == null) {
             args = new Bundle();

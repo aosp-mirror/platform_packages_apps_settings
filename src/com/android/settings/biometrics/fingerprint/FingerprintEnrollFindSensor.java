@@ -78,11 +78,11 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase {
     }
 
     private void startLookingForFingerprint() {
-        mSidecar = (FingerprintEnrollSidecar) getFragmentManager().findFragmentByTag(
+        mSidecar = (FingerprintEnrollSidecar) getSupportFragmentManager().findFragmentByTag(
                 FingerprintEnrollEnrolling.TAG_SIDECAR);
         if (mSidecar == null) {
             mSidecar = new FingerprintEnrollSidecar();
-            getFragmentManager().beginTransaction()
+            getSupportFragmentManager().beginTransaction()
                     .add(mSidecar, FingerprintEnrollEnrolling.TAG_SIDECAR).commit();
         }
         mSidecar.setListener(new Listener() {
@@ -148,7 +148,8 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase {
                     return;
                 }
             }
-            getFragmentManager().beginTransaction().remove(mSidecar).commitAllowingStateLoss();
+            getSupportFragmentManager().beginTransaction().remove(mSidecar).
+                    commitAllowingStateLoss();
             mSidecar = null;
             startActivityForResult(getFingerprintEnrollingIntent(), ENROLLING);
         }

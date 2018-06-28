@@ -17,7 +17,6 @@
 package com.android.settings;
 
 import android.app.ActivityManager;
-import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.RemoteException;
@@ -29,9 +28,11 @@ import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.CustomDialogPreference;
+import com.android.settingslib.CustomDialogPreferenceCompat;
 
-public class BugreportPreference extends CustomDialogPreference {
+import androidx.appcompat.app.AlertDialog.Builder;
+
+public class BugreportPreference extends CustomDialogPreferenceCompat {
 
     private static final String TAG = "BugreportPreference";
 

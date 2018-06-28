@@ -40,11 +40,11 @@ public class SearchMenuController implements LifecycleObserver, OnCreateOptionsM
     private final Fragment mHost;
 
     public static void init(@NonNull ObservablePreferenceFragment host) {
-        host.getLifecycle().addObserver(new SearchMenuController(host));
+        host.getSettingsLifecycle().addObserver(new SearchMenuController(host));
     }
 
     public static void init(@NonNull ObservableFragment host) {
-        host.getLifecycle().addObserver(new SearchMenuController(host));
+        host.getSettingsLifecycle().addObserver(new SearchMenuController(host));
     }
 
     private SearchMenuController(@NonNull Fragment host) {

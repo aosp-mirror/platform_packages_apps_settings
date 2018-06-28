@@ -120,7 +120,7 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
         loadChannelGroup();
         collectConfigActivities();
 
-        getLifecycle().addObserver(use(HeaderPreferenceController.class));
+        getSettingsLifecycle().addObserver(use(HeaderPreferenceController.class));
 
         for (NotificationPreferenceController controller : mControllers) {
             controller.onResume(mAppRow, mChannel, mChannelGroup, mSuspendedAppsAdmin);

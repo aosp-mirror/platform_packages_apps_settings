@@ -157,7 +157,7 @@ public class KeyboardLayoutDialogFragment extends InstrumentedDialogFragment
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        show(getActivity().getFragmentManager(), "layout");
+        show(getActivity().getSupportFragmentManager(), "layout");
     }
 
     private void onKeyboardLayoutClicked(int which) {
