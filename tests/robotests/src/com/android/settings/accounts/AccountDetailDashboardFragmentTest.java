@@ -41,6 +41,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.util.ReflectionHelpers;
 
 import androidx.preference.Preference;
@@ -133,7 +134,7 @@ public class AccountDetailDashboardFragmentTest {
 
         preference.performClick();
 
-        final Intent intent = shadowOf(activity).getNextStartedActivityForResult().intent;
+        final Intent intent = Shadows.shadowOf(activity).getNextStartedActivityForResult().intent;
 
         assertThat(intent.getStringExtra("extra.accountName")).isEqualTo("name1@abc.com");
     }

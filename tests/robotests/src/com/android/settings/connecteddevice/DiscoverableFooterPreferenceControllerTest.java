@@ -37,7 +37,7 @@ import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothPan;
 import com.android.settings.testutils.shadow.ShadowLocalBluetoothAdapter;
 import com.android.settingslib.widget.FooterPreference;
-import com.android.settingslib.widget.FooterPreferenceMixin;
+import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -66,7 +66,7 @@ public class DiscoverableFooterPreferenceControllerTest {
     @Mock
     private PreferenceScreen mScreen;
     @Mock
-    private FooterPreferenceMixin mFooterPreferenceMixin;
+    private FooterPreferenceMixinCompat mFooterPreferenceMixin;
     @Mock
     private AlwaysDiscoverable mAlwaysDiscoverable;
 

@@ -290,7 +290,6 @@ public final class AppInfoDashboardFragmentTest {
         final Context context = mock(Context.class);
         doReturn(context).when(mFragment).getContext();
         ReflectionHelpers.setField(mFragment, "mLifecycle", mock(Lifecycle.class));
-        ReflectionHelpers.setField(mFragment, "mCheckedForLoaderManager", true);
         mFragment.startListeningToPackageRemove();
 
         mFragment.onDestroy();

@@ -31,7 +31,7 @@ import android.os.UserHandle;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.widget.FooterPreferenceMixin;
+import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,7 +46,7 @@ import androidx.lifecycle.LifecycleOwner;
 public class DeviceAdminListPreferenceControllerTest {
 
     @Mock
-    private FooterPreferenceMixin mFooterPreferenceMixin;
+    private FooterPreferenceMixinCompat mFooterPreferenceMixin;
     private Context mContext;
     private DeviceAdminListPreferenceController mController;
     private LifecycleOwner mLifecycleOwner;

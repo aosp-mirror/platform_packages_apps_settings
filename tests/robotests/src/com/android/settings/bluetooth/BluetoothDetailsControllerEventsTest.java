@@ -32,6 +32,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
 
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -61,7 +62,7 @@ public class BluetoothDetailsControllerEventsTest extends BluetoothDetailsContro
     }
 
     private static class TestController extends BluetoothDetailsController {
-        private TestController(Context context, PreferenceFragment fragment,
+        private TestController(Context context, PreferenceFragmentCompat fragment,
             CachedBluetoothDevice device, Lifecycle lifecycle) {
             super(context, fragment, device, lifecycle);
         }

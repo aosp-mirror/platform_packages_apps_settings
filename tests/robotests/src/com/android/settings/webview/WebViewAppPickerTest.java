@@ -30,7 +30,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -58,6 +57,8 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.Arrays;
 import java.util.Collections;
 
+import androidx.fragment.app.FragmentActivity;
+
 @RunWith(SettingsRobolectricTestRunner.class)
 public class WebViewAppPickerTest {
 
@@ -69,7 +70,7 @@ public class WebViewAppPickerTest {
     private UserInfo mSecondUser;
 
     @Mock
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     @Mock
     private UserManager mUserManager;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)

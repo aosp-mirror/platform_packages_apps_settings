@@ -64,6 +64,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowBluetoothDevice;
@@ -277,7 +278,7 @@ public class AudioOutputSwitchPreferenceControllerTest {
         ShadowBluetoothDevice shadowBluetoothDevice;
         BluetoothDevice secondBluetoothDevice;
         secondBluetoothDevice = mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS_2);
-        shadowBluetoothDevice = shadowOf(secondBluetoothDevice);
+        shadowBluetoothDevice = Shadows.shadowOf(secondBluetoothDevice);
         shadowBluetoothDevice.setName(TEST_DEVICE_NAME_2);
         mController.mConnectedDevices.clear();
         mController.mConnectedDevices.add(mBluetoothDevice);

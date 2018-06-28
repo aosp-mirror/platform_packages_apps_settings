@@ -145,7 +145,7 @@ public class WifiSettingsUiTest {
                 resourceString(WIFI_DISPLAY_STATUS_CONNECTED));
 
         when(mWifiTracker.getAccessPoints()).thenReturn(
-                Lists.asList(accessPoint, new AccessPoint[]{}));
+                Lists.asList(accessPoint, new AccessPoint[] {}));
     }
 
     /** Launch the activity via an Intent with a String extra. */
@@ -158,7 +158,8 @@ public class WifiSettingsUiTest {
 
         verify(mWifiTracker).getManager();
 
-        List<Fragment> fragments = mActivityRule.getActivity().getFragmentManager().getFragments();
+        List<Fragment> fragments =
+                mActivityRule.getActivity().getSupportFragmentManager().getFragments();
         assertThat(fragments.size()).isEqualTo(1);
         mWifiListener = (WifiSettings) fragments.get(0);
         assertThat(mWifiListener).isNotNull();

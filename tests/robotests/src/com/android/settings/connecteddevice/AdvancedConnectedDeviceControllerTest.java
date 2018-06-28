@@ -32,6 +32,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowNfcAdapter;
 import org.robolectric.util.ReflectionHelpers;
@@ -57,7 +58,7 @@ public class AdvancedConnectedDeviceControllerTest {
         mContentResolver = mContext.getContentResolver();
         mNfcController = new NfcPreferenceController(mContext,
                 NfcPreferenceController.KEY_TOGGLE_NFC);
-        mShadowNfcAdapter = shadowOf(ShadowNfcAdapter.getNfcAdapter(mContext));
+        mShadowNfcAdapter = Shadows.shadowOf(ShadowNfcAdapter.getNfcAdapter(mContext));
     }
 
     @Test

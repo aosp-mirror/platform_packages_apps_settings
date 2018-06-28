@@ -44,6 +44,7 @@ import org.robolectric.util.ReflectionHelpers;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
@@ -51,7 +52,7 @@ import androidx.preference.PreferenceScreen;
 public class OwnerInfoPreferenceControllerTest {
 
     @Mock
-    private PreferenceFragment mFragment;
+    private PreferenceFragmentCompat mFragment;
     @Mock
     private PreferenceScreen mScreen;
     @Mock

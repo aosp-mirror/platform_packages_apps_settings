@@ -23,7 +23,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.NetworkTemplate;
@@ -40,6 +39,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.util.ReflectionHelpers;
+
+import androidx.fragment.app.FragmentActivity;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DataUsageListTest {
@@ -91,7 +92,7 @@ public class DataUsageListTest {
 
     @Test
     public void processArgument_fromIntent_shouldGetTemplateFromIntent() {
-        final Activity activity = mock(Activity.class);
+        final FragmentActivity activity = mock(FragmentActivity.class);
         final Intent intent = new Intent();
         intent.putExtra(Settings.EXTRA_NETWORK_TEMPLATE, mock(NetworkTemplate.class));
         intent.putExtra(Settings.EXTRA_SUB_ID, 3);

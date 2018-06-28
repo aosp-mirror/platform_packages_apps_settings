@@ -39,7 +39,7 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import com.android.settingslib.drawer.Tile;
-import com.android.settingslib.suggestions.SuggestionControllerMixin;
+import com.android.settingslib.suggestions.SuggestionControllerMixinCompat;
 
 import org.junit.After;
 import org.junit.Before;
@@ -61,7 +61,7 @@ public class SuggestionFeatureProviderImplTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock
-    private SuggestionControllerMixin mSuggestionControllerMixin;
+    private SuggestionControllerMixinCompat mSuggestionControllerMixin;
     @Mock
     private Suggestion mSuggestion;
     @Mock

@@ -24,7 +24,6 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -38,6 +37,7 @@ import android.view.View;
 
 import com.android.settings.R;
 import com.android.settings.network.ApnEditor.ApnData;
+import com.android.settings.testutils.Robolectric;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -48,8 +48,8 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.Robolectric;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.EditTextPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;
@@ -96,13 +96,13 @@ public class ApnEditorTest {
     private ArgumentCaptor<Uri> mUriCaptor;
 
     private ApnEditor mApnEditorUT;
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     private Resources mResources;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mActivity = spy(Robolectric.setupActivity(Activity.class));
+        mActivity = spy(Robolectric.setupActivity(FragmentActivity.class));
         mResources = mActivity.getResources();
         mApnEditorUT = spy(new ApnEditor());
 

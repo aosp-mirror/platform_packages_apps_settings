@@ -79,7 +79,7 @@ public class RestrictedListPreferenceTest {
         // Make sure that the performClick method on the helper is never reached.
         verify(mMockHelper, never()).performClick();
         // Assert that a CONFIRM_DEVICE_CREDENTIAL intent has been started.
-        Intent started = shadowOf(application).getNextStartedActivity();
+        Intent started = Shadows.shadowOf(application).getNextStartedActivity();
         assertThat(started.getExtras().getInt(Intent.EXTRA_USER_ID)).isEqualTo(PROFILE_USER_ID);
         assertThat(started.getAction())
                 .isEqualTo(KeyguardManager.ACTION_CONFIRM_DEVICE_CREDENTIAL_WITH_USER);
@@ -94,7 +94,7 @@ public class RestrictedListPreferenceTest {
         // Make sure that the performClick method on the helper is never reached.
         verify(mMockHelper, never()).performClick();
         // Assert that a new intent for enabling the work profile is started.
-        Intent started = shadowOf(application).getNextStartedActivity();
+        Intent started = Shadows.shadowOf(application).getNextStartedActivity();
         Bundle extras = started.getExtras();
         int reason = extras.getInt(EXTRA_UNLAUNCHABLE_REASON);
         assertThat(reason).isEqualTo(UNLAUNCHABLE_REASON_QUIET_MODE);

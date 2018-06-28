@@ -34,6 +34,7 @@ import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.testutils.FragmentTestUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,7 +43,6 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.shadows.ShadowDialog;
-import org.robolectric.util.FragmentTestUtil;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class RemoteDeviceNameDialogFragmentTest {
@@ -71,7 +71,7 @@ public class RemoteDeviceNameDialogFragmentTest {
      */
     AlertDialog startDialog(String deviceName) {
         when(mCachedDevice.getName()).thenReturn(deviceName);
-        FragmentTestUtil.startFragment(mFragment);
+        FragmentTestUtils.startFragment(mFragment);
         return (AlertDialog) ShadowDialog.getLatestDialog();
     }
 

@@ -23,26 +23,27 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
-import android.app.Activity;
 import android.os.SystemProperties;
 import android.view.View;
 
 import com.android.settings.R;
+import com.android.settings.testutils.Robolectric;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
+
+import androidx.fragment.app.FragmentActivity;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class HardwareInfoDialogFragmentTest {
 
-    private Activity mActivity;
+    private FragmentActivity mActivity;
 
     @Before
     public void setUp() {
-        mActivity = Robolectric.setupActivity(Activity.class);
+        mActivity = Robolectric.setupActivity(FragmentActivity.class);
     }
 
     @Test
@@ -52,7 +53,7 @@ public class HardwareInfoDialogFragmentTest {
 
         final HardwareInfoDialogFragment fragment = spy(HardwareInfoDialogFragment.newInstance());
         doReturn("").when(fragment).getSerialNumber();
-        fragment.show(mActivity.getFragmentManager(), HardwareInfoDialogFragment.TAG);
+        fragment.show(mActivity.getSupportFragmentManager(), HardwareInfoDialogFragment.TAG);
 
         verify(fragment).setText(
                 any(View.class), eq(R.id.model_label), eq(R.id.model_value),

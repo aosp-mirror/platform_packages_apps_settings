@@ -33,6 +33,7 @@ import com.android.settings.fuelgauge.anomaly.action.AnomalyAction;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowRuntimePermissionPresenter;
+import com.android.settingslib.testutils.FragmentTestUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,10 +41,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowAlertDialog;
 import org.robolectric.shadows.ShadowDialog;
-import org.robolectric.util.FragmentTestUtil;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowRuntimePermissionPresenter.class)
@@ -104,7 +105,7 @@ public class AnomalyDialogFragmentTest {
     public void testOnCreateDialog_hasCorrectData() {
         mAnomalyDialogFragment =
             AnomalyDialogFragment.newInstance(mWakeLockAnomaly, 0 /* metricskey */);
-        FragmentTestUtil.startFragment(mAnomalyDialogFragment);
+        FragmentTestUtils.startFragment(mAnomalyDialogFragment);
 
         assertThat(mAnomalyDialogFragment.mAnomaly).isEqualTo(mWakeLockAnomaly);
     }
@@ -114,11 +115,11 @@ public class AnomalyDialogFragmentTest {
         mAnomalyDialogFragment =
             AnomalyDialogFragment.newInstance(mWakeLockAnomaly, 0 /* metricskey */);
 
-        FragmentTestUtil.startFragment(mAnomalyDialogFragment);
+        FragmentTestUtils.startFragment(mAnomalyDialogFragment);
 
         final AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
         assertThat(dialog).isNotNull();
-        ShadowAlertDialog shadowDialog = shadowOf(dialog);
+        ShadowAlertDialog shadowDialog = Shadows.shadowOf(dialog);
 
         assertThat(shadowDialog.getMessage()).isEqualTo(
                 mContext.getString(R.string.dialog_stop_message, mWakeLockAnomaly.displayName));
@@ -135,11 +136,11 @@ public class AnomalyDialogFragmentTest {
         mAnomalyDialogFragment =
             AnomalyDialogFragment.newInstance(mWakeupAlarmAnomaly, 0 /* metricskey */);
 
-        FragmentTestUtil.startFragment(mAnomalyDialogFragment);
+        FragmentTestUtils.startFragment(mAnomalyDialogFragment);
 
         final AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
         assertThat(dialog).isNotNull();
-        ShadowAlertDialog shadowDialog = shadowOf(dialog);
+        ShadowAlertDialog shadowDialog = Shadows.shadowOf(dialog);
 
         assertThat(shadowDialog.getMessage()).isEqualTo(
                 mContext.getString(R.string.dialog_background_check_message,
@@ -157,11 +158,11 @@ public class AnomalyDialogFragmentTest {
         mAnomalyDialogFragment =
             AnomalyDialogFragment.newInstance(mWakeupAlarmAnomaly2, 0 /* metricskey */);
 
-        FragmentTestUtil.startFragment(mAnomalyDialogFragment);
+        FragmentTestUtils.startFragment(mAnomalyDialogFragment);
 
         final AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
         assertThat(dialog).isNotNull();
-        ShadowAlertDialog shadowDialog = shadowOf(dialog);
+        ShadowAlertDialog shadowDialog = Shadows.shadowOf(dialog);
 
         assertThat(shadowDialog.getMessage()).isEqualTo(
                 mContext.getString(R.string.dialog_stop_message_wakeup_alarm,
@@ -183,11 +184,11 @@ public class AnomalyDialogFragmentTest {
         doNothing().when(mAnomalyDialogFragment).initAnomalyUtils();
         doReturn(Anomaly.AnomalyActionType.LOCATION_CHECK).when(mAnomalyAction).getActionType();
 
-        FragmentTestUtil.startFragment(mAnomalyDialogFragment);
+        FragmentTestUtils.startFragment(mAnomalyDialogFragment);
 
         final AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
         assertThat(dialog).isNotNull();
-        ShadowAlertDialog shadowDialog = shadowOf(dialog);
+        ShadowAlertDialog shadowDialog = Shadows.shadowOf(dialog);
 
         assertThat(shadowDialog.getMessage()).isEqualTo(
                 mContext.getString(R.string.dialog_location_message,

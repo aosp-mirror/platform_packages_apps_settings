@@ -41,6 +41,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
@@ -52,7 +53,7 @@ public class SettingsPreferenceFragmentTest {
     private static final int ITEM_COUNT = 5;
 
     @Mock
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     @Mock
     private View mListContainer;
     @Mock

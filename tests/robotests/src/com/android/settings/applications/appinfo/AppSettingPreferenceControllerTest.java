@@ -31,6 +31,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowPackageManager;
 
 import androidx.preference.Preference;
@@ -58,7 +59,7 @@ public class AppSettingPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mApplication = RuntimeEnvironment.application;
-        mPackageManager = shadowOf(mApplication.getPackageManager());
+        mPackageManager = Shadows.shadowOf(mApplication.getPackageManager());
         mController = new AppSettingPreferenceController(mApplication, "test_key");
         mController.setPackageName(TEST_PKG_NAME).setParentFragment(mParent);
         mPreference = new Preference(mApplication);
@@ -107,7 +108,7 @@ public class AppSettingPreferenceControllerTest {
         mPackageManager.addResolveInfoForIntent(RESOLVED_INTENT, info);
 
         assertThat(mController.handlePreferenceTreeClick(mPreference)).isTrue();
-        assertThat(shadowOf(mApplication).getNextStartedActivity().getComponent())
+        assertThat(Shadows.shadowOf(mApplication).getNextStartedActivity().getComponent())
                 .isEqualTo(TEST_INTENT.getComponent());
     }
 }

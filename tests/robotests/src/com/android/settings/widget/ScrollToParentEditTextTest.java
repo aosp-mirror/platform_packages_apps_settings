@@ -34,6 +34,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowView;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -66,7 +67,7 @@ public class ScrollToParentEditTextTest {
 
     @Test
     public void requestRectangleOnScreen_withParent_shouldScrollToParent() {
-        ShadowView shadowEditText = shadowOf(mEditText);
+        ShadowView shadowEditText = Shadows.shadowOf(mEditText);
         shadowEditText.setMyParent(mParent);
 
         assertThat(mEditText.requestRectangleOnScreen(

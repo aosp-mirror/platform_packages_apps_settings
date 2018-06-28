@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -47,6 +48,7 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
+import com.android.settings.testutils.Robolectric;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
@@ -56,9 +58,11 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.Robolectric;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
+
+import androidx.fragment.app.FragmentActivity;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowUtils.class)
@@ -81,22 +85,22 @@ public class MasterClearTest {
     private AccountManager mAccountManager;
 
     @Mock
-    private Activity mMockActivity;
+    private FragmentActivity mMockActivity;
 
     @Mock
     private Intent mMockIntent;
 
     private MasterClear mMasterClear;
     private ShadowActivity mShadowActivity;
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     private View mContentView;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mMasterClear = spy(new MasterClear());
-        mActivity = Robolectric.setupActivity(Activity.class);
-        mShadowActivity = shadowOf(mActivity);
+        mActivity = Robolectric.setupActivity(FragmentActivity.class);
+        mShadowActivity = Shadows.shadowOf(mActivity);
         mContentView = LayoutInflater.from(mActivity).inflate(R.layout.master_clear, null);
 
         // Make scrollView only have one child

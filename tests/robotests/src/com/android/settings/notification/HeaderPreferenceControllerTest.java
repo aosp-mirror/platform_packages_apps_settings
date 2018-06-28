@@ -25,7 +25,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
@@ -42,6 +41,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.shadows.ShadowApplication;
+
+import androidx.fragment.app.FragmentActivity;
+import androidx.preference.PreferenceFragmentCompat;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class HeaderPreferenceControllerTest {
@@ -65,9 +67,9 @@ public class HeaderPreferenceControllerTest {
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNm);
         shadowApplication.setSystemService(Context.USER_SERVICE, mUm);
         mContext = shadowApplication.getApplicationContext();
-        PreferenceFragment fragment = mock(PreferenceFragment.class);
+        PreferenceFragmentCompat fragment = mock(PreferenceFragmentCompat.class);
         when(fragment.getContext()).thenReturn(mContext);
-        Activity activity = mock(Activity.class);
+        FragmentActivity activity = mock(FragmentActivity.class);
         when(activity.getApplicationContext()).thenReturn(mContext);
         when(fragment.getActivity()).thenReturn(activity);
         mController = spy(new HeaderPreferenceController(mContext, fragment));

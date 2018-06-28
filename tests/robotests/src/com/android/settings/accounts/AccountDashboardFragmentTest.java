@@ -23,7 +23,6 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
@@ -31,6 +30,7 @@ import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.testutils.Robolectric;
 import com.android.settingslib.accounts.AuthenticatorHelper;
 import com.android.settingslib.drawer.CategoryKey;
 
@@ -38,7 +38,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
@@ -47,6 +46,8 @@ import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
 
 import java.util.List;
+
+import androidx.fragment.app.FragmentActivity;
 
 @RunWith(RobolectricTestRunner.class)
 public class AccountDashboardFragmentTest {
@@ -74,7 +75,8 @@ public class AccountDashboardFragmentTest {
     })
     public void updateSummary_hasAccount_shouldDisplayUpTo3AccountTypes() {
         final SummaryLoader loader = mock(SummaryLoader.class);
-        final Activity activity = Robolectric.buildActivity(Activity.class).setup().get();
+        final FragmentActivity activity = Robolectric.buildActivity(
+                FragmentActivity.class).setup().get();
 
         final SummaryLoader.SummaryProvider provider =
                 AccountDashboardFragment.SUMMARY_PROVIDER_FACTORY.createSummaryProvider(activity,
@@ -89,7 +91,7 @@ public class AccountDashboardFragmentTest {
     public void updateSummary_noAccount_shouldDisplayDefaultSummary() {
         ShadowAuthenticationHelper.setEnabledAccount(null);
         final SummaryLoader loader = mock(SummaryLoader.class);
-        final Activity activity = Robolectric.buildActivity(Activity.class).setup().get();
+        final FragmentActivity activity = Robolectric.buildActivity(FragmentActivity.class).setup().get();
 
         final SummaryLoader.SummaryProvider provider =
                 AccountDashboardFragment.SUMMARY_PROVIDER_FACTORY.createSummaryProvider(activity,
@@ -104,7 +106,7 @@ public class AccountDashboardFragmentTest {
     @Config(shadows = ShadowAuthenticationHelper.class)
     public void updateSummary_noAccountTypeLabel_shouldNotDisplayNullEntry() {
         final SummaryLoader loader = mock(SummaryLoader.class);
-        final Activity activity = Robolectric.buildActivity(Activity.class).setup().get();
+        final FragmentActivity activity = Robolectric.buildActivity(FragmentActivity.class).setup().get();
         final String[] enabledAccounts = {TYPES[0], "unlabeled_account_type", TYPES[1]};
         ShadowAuthenticationHelper.setEnabledAccount(enabledAccounts);
 

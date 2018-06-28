@@ -16,6 +16,7 @@
 
 package com.android.settings.bluetooth;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
@@ -23,7 +24,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -39,6 +39,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.shadows.ShadowDialog;
 
+import androidx.fragment.app.FragmentActivity;
+
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ForgetDeviceDialogFragmentTest {
 
@@ -46,7 +48,7 @@ public class ForgetDeviceDialogFragmentTest {
     private CachedBluetoothDevice mCachedDevice;
 
     private ForgetDeviceDialogFragment mFragment;
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     private AlertDialog mDialog;
 
     @Before
@@ -57,8 +59,8 @@ public class ForgetDeviceDialogFragmentTest {
         when(mCachedDevice.getAddress()).thenReturn(deviceAddress);
         mFragment = spy(ForgetDeviceDialogFragment.newInstance(deviceAddress));
         doReturn(mCachedDevice).when(mFragment).getDevice(any());
-        mActivity = Robolectric.setupActivity(Activity.class);
-        mActivity.getFragmentManager().beginTransaction().add(mFragment, null).commit();
+        mActivity = Robolectric.setupActivity(FragmentActivity.class);
+        mActivity.getSupportFragmentManager().beginTransaction().add(mFragment, null).commit();
         mDialog = (AlertDialog) ShadowDialog.getLatestDialog();
     }
 

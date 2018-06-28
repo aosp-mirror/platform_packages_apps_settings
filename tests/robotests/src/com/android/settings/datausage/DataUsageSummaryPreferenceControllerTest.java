@@ -59,6 +59,7 @@ import org.robolectric.annotation.Config;
 
 import java.util.concurrent.TimeUnit;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -97,7 +98,7 @@ public class DataUsageSummaryPreferenceControllerTest {
     private DataUsageInfoController mDataInfoController;
 
     private FakeFeatureFactory mFactory;
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     private Context mContext;
     private DataUsageSummaryPreferenceController mController;
 
@@ -115,7 +116,7 @@ public class DataUsageSummaryPreferenceControllerTest {
         ShadowEntityHeaderController.setUseMock(mHeaderController);
         mDataInfoController = new DataUsageInfoController();
 
-        mActivity = spy(Robolectric.buildActivity(Activity.class).get());
+        mActivity = spy(Robolectric.buildActivity(FragmentActivity.class).get());
         when(mActivity.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
         when(mActivity.getSystemService(ConnectivityManager.class))
                 .thenReturn(mConnectivityManager);

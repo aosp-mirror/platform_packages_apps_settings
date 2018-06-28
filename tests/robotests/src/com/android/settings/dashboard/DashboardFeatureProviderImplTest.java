@@ -66,6 +66,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowApplication;
@@ -368,7 +369,7 @@ public class DashboardFeatureProviderImplTest {
         mImpl.bindPreferenceToTile(activity, MetricsProto.MetricsEvent.SETTINGS_GESTURES,
                 preference, tile, "123", Preference.DEFAULT_ORDER);
         preference.performClick();
-        ShadowActivity shadowActivity = shadowOf(activity);
+        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
 
         final Intent launchIntent = shadowActivity.getNextStartedActivityForResult().intent;
         assertThat(launchIntent.getAction())
@@ -397,7 +398,7 @@ public class DashboardFeatureProviderImplTest {
         preference.performClick();
 
         final ShadowActivity.IntentForResult launchIntent =
-                shadowOf(activity).getNextStartedActivityForResult();
+                Shadows.shadowOf(activity).getNextStartedActivityForResult();
 
         assertThat(launchIntent).isNull();
     }

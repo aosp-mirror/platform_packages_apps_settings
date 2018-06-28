@@ -101,7 +101,7 @@ public class ChooseLockPatternTest {
     public void fingerprintExtraSet_shouldDisplayFingerprintIcon() {
         ChooseLockPattern activity = createActivity(true);
         ChooseLockPatternFragment fragment = (ChooseLockPatternFragment)
-                activity.getFragmentManager().findFragmentById(R.id.main_content);
+                activity.getSupportFragmentManager().findFragmentById(R.id.main_content);
 
         ShadowDrawable drawable = Shadows.shadowOf(((GlifLayout) fragment.getView()).getIcon());
         assertThat(drawable.getCreatedFromResId()).isEqualTo(R.drawable.ic_fingerprint_header);
@@ -112,7 +112,7 @@ public class ChooseLockPatternTest {
     public void smallScreens_shouldHideIcon() {
         ChooseLockPattern activity = createActivity(true);
         ChooseLockPatternFragment fragment = (ChooseLockPatternFragment)
-                activity.getFragmentManager().findFragmentById(R.id.main_content);
+                activity.getSupportFragmentManager().findFragmentById(R.id.main_content);
 
         View iconView = fragment.getView().findViewById(R.id.suw_layout_icon);
         assertThat(iconView.getVisibility()).isEqualTo(View.GONE);

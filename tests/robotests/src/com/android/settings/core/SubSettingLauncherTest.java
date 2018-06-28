@@ -25,7 +25,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
@@ -43,6 +42,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SubSettingLauncherTest {
@@ -50,7 +50,7 @@ public class SubSettingLauncherTest {
     @Mock
     private Fragment mFragment;
     @Mock
-    private Activity mActivity;
+    private FragmentActivity mActivity;
 
     private Context mContext;
 

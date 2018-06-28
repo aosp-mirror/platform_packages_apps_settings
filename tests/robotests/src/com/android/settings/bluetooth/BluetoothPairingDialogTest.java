@@ -38,6 +38,7 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.testutils.FragmentTestUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,7 +47,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowAlertDialog;
-import org.robolectric.util.FragmentTestUtil;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class BluetoothPairingDialogTest {
@@ -56,7 +56,6 @@ public class BluetoothPairingDialogTest {
 
     @Mock
     private BluetoothPairingController controller;
-
     @Mock
     private BluetoothPairingDialog dialogActivity;
 
@@ -186,7 +185,7 @@ public class BluetoothPairingDialogTest {
         BluetoothPairingDialogFragment frag = new BluetoothPairingDialogFragment();
 
         // this should throw an error
-        FragmentTestUtil.startFragment(frag);
+        FragmentTestUtils.startFragment(frag);
         fail("Starting the fragment with no controller set should have thrown an exception.");
     }
 
@@ -446,7 +445,7 @@ public class BluetoothPairingDialogTest {
         frag.setPairingController(controller);
         assertThat(frag.isPairingDialogActivitySet()).isFalse();
         frag.setPairingDialogActivity(dialogActivity);
-        FragmentTestUtil.startFragment(frag);
+        FragmentTestUtils.startFragment(frag);
         assertThat(frag.getmDialog()).isNotNull();
         assertThat(frag.isPairingControllerSet()).isTrue();
         assertThat(frag.isPairingDialogActivitySet()).isTrue();

@@ -29,7 +29,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -63,6 +62,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.PreferenceScreen;
@@ -77,7 +77,7 @@ public class StorageItemPreferenceControllerTest {
     @Mock
     private StorageVolumeProvider mSvp;
     @Mock
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     @Mock
     private FragmentManager mFragmentManager;
     @Mock

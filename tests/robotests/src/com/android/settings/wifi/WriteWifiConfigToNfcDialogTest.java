@@ -54,7 +54,6 @@ public class WriteWifiConfigToNfcDialogTest {
         when(mActivity.getApplicationContext()).thenReturn(mActivity);
         when(mActivity.getSystemService(Context.INPUT_METHOD_SERVICE))
                 .thenReturn(ReflectionHelpers.newInstance(InputMethodManager.class));
-
         mWriteWifiConfigToNfcDialog = new WriteWifiConfigToNfcDialog(RuntimeEnvironment.application,
                 0 /* security */);
         ReflectionHelpers.setField(mWriteWifiConfigToNfcDialog, "mWifiManager", mWifiManager);

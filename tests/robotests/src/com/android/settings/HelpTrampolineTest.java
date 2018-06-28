@@ -28,6 +28,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
 
@@ -55,8 +56,8 @@ public class HelpTrampolineTest {
         final Intent intent = new Intent().setClassName(
                 RuntimeEnvironment.application.getPackageName(), HelpTrampoline.class.getName())
                 .putExtra(Intent.EXTRA_TEXT, "help_url_upgrading");
-        final ShadowActivity shadow =
-            shadowOf(Robolectric.buildActivity(HelpTrampoline.class, intent).create().get());
+        final ShadowActivity shadow = Shadows.
+                shadowOf(Robolectric.buildActivity(HelpTrampoline.class, intent).create().get());
         final Intent launchedIntent = shadow.getNextStartedActivity();
 
         assertThat(ShadowHelpUtils.isGetHelpIntentCalled()).isTrue();

@@ -44,11 +44,13 @@ import org.mockito.Spy;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import androidx.fragment.app.FragmentActivity;
+
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DrawOverlayDetailsTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Activity mActivity;
+    private FragmentActivity mActivity;
 
     @Mock
     private Window mWindow;

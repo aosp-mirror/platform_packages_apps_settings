@@ -24,7 +24,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import com.android.internal.app.ColorDisplayController;
@@ -47,6 +46,7 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -60,7 +60,7 @@ public class ColorModePreferenceFragmentTest {
     private ColorDisplayController mController;
 
     @Mock
-    private Activity mActivity;
+    private FragmentActivity mActivity;
 
     @Before
     public void setup() {

@@ -26,9 +26,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.ObservableFragment;
 import com.android.settingslib.core.lifecycle.ObservablePreferenceFragment;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -57,7 +57,7 @@ public class SearchMenuControllerTest {
     @Test
     public void init_prefFragment_shouldAddMenu() {
         SearchMenuController.init(mPreferenceHost);
-        mPreferenceHost.getLifecycle().onCreateOptionsMenu(mMenu, null /* inflater */);
+        mPreferenceHost.getSettingsLifecycle().onCreateOptionsMenu(mMenu, null /* inflater */);
 
         verify(mMenu).add(Menu.NONE, Menu.NONE, 0 /* order */, R.string.search_menu);
     }
@@ -65,7 +65,7 @@ public class SearchMenuControllerTest {
     @Test
     public void init_observableFragment_shouldAddMenu() {
         SearchMenuController.init(mHost);
-        mHost.getLifecycle().onCreateOptionsMenu(mMenu, null /* inflater */);
+        mHost.getSettingsLifecycle().onCreateOptionsMenu(mMenu, null /* inflater */);
 
         verify(mMenu).add(Menu.NONE, Menu.NONE, 0 /* order */, R.string.search_menu);
     }
@@ -77,7 +77,7 @@ public class SearchMenuControllerTest {
         mHost.setArguments(args);
 
         SearchMenuController.init(mHost);
-        mHost.getLifecycle().onCreateOptionsMenu(mMenu, null /* inflater */);
+        mHost.getSettingsLifecycle().onCreateOptionsMenu(mMenu, null /* inflater */);
         verifyZeroInteractions(mMenu);
     }
 

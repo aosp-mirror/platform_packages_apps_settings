@@ -124,7 +124,7 @@ public class ChooseLockPasswordTest {
 
     private ChooseLockPasswordFragment getChooseLockPasswordFragment(ChooseLockPassword activity) {
         return (ChooseLockPasswordFragment)
-                activity.getFragmentManager().findFragmentById(R.id.main_content);
+                activity.getSupportFragmentManager().findFragmentById(R.id.main_content);
     }
 
     private ShadowDrawable setActivityAndGetIconDrawable(boolean addFingerprintExtra) {

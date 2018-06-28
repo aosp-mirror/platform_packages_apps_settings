@@ -108,7 +108,7 @@ public class BackupSettingsActivityTest {
 
         // Verify that the intent returned by BackupSettingsHelper.getIntentForBackupSettings()
         // was launched.
-        assertThat(shadowOf(mApplication).getNextStartedActivity()).isEqualTo(mIntent);
+        assertThat(Shadows.shadowOf(mApplication).getNextStartedActivity()).isEqualTo(mIntent);
     }
 
     @Test
@@ -123,7 +123,7 @@ public class BackupSettingsActivityTest {
 
         mActivityController.create();
 
-        assertThat(shadowOf(mApplication).getNextStartedActivity()).isNull();
+        assertThat(Shadows.shadowOf(mApplication).getNextStartedActivity()).isNull();
         verify(mFragmentTransaction).replace(anyInt(), isA(BackupSettingsFragment.class));
     }
 

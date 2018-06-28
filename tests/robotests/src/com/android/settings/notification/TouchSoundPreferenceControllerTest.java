@@ -37,6 +37,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
@@ -48,7 +49,7 @@ public class TouchSoundPreferenceControllerTest {
     @Mock
     private PreferenceScreen mScreen;
     @Mock
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     @Mock
     private ContentResolver mContentResolver;
     @Mock

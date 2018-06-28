@@ -56,7 +56,7 @@ public class SettingsActivityTest {
 
     @Test
     public void launchSettingFragment_nullExtraShowFragment_shouldNotCrash() {
-        when(mActivity.getFragmentManager()).thenReturn(mFragmentManager);
+        when(mActivity.getSupportFragmentManager()).thenReturn(mFragmentManager);
         when(mFragmentManager.beginTransaction()).thenReturn(mock(FragmentTransaction.class));
 
         doReturn(RuntimeEnvironment.application.getClassLoader()).when(mActivity).getClassLoader();
