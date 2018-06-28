@@ -59,6 +59,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.users.UserDialogs;
 import com.android.settingslib.RestrictedLockUtils;
@@ -425,6 +426,9 @@ public class DeviceAdminAdd extends Activity {
             mDPM.setActiveAdmin(mDeviceAdmin.getComponent(), mRefreshing);
             EventLog.writeEvent(EventLogTags.EXP_DET_DEVICE_ADMIN_ACTIVATED_BY_USER,
                 mDeviceAdmin.getActivityInfo().applicationInfo.uid);
+
+            unrestrictAppIfPossible(BatteryUtils.getInstance(this));
+
             setResult(Activity.RESULT_OK);
         } catch (RuntimeException e) {
             // Something bad happened...  could be that it was
@@ -444,6 +448,15 @@ public class DeviceAdminAdd extends Activity {
             }
         }
         finish();
+    }
+
+    void unrestrictAppIfPossible(BatteryUtils batteryUtils) {
+        // Unrestrict admin app if it is already been restricted
+        final String packageName = mDeviceAdmin.getComponent().getPackageName();
+        final int uid = batteryUtils.getPackageUid(packageName);
+        if (batteryUtils.isForceAppStandbyEnabled(uid, packageName)) {
+            batteryUtils.setForceAppStandby(uid, packageName, AppOpsManager.MODE_ALLOWED);
+        }
     }
 
     void continueRemoveAction(CharSequence msg) {
