@@ -19,6 +19,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.SystemProperties;
+import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
@@ -49,6 +50,7 @@ import androidx.preference.Preference;
 public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
         LocalBluetoothProfileManager.ServiceListener {
     private static final String TAG = "BluetoothDeviceUpdater";
+    private static final boolean DBG = true;
     private static final String BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY =
             "persist.bluetooth.showdeviceswithoutnames";
 
@@ -250,6 +252,10 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
             return false;
         }
         final BluetoothDevice device = cachedDevice.getDevice();
+        if (DBG) {
+            Log.d(TAG, "isDeviceConnected() device name : " + cachedDevice.getName() +
+                    ", is connected : " + device.isConnected());
+        }
         return device.getBondState() == BluetoothDevice.BOND_BONDED && device.isConnected();
     }
 }

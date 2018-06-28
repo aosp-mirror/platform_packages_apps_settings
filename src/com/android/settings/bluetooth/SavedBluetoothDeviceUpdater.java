@@ -19,6 +19,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 
+import android.util.Log;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -33,6 +34,7 @@ import androidx.preference.Preference;
 public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
         implements Preference.OnPreferenceClickListener {
     private static final String TAG = "SavedBluetoothDeviceUpdater";
+    private static final boolean DBG = true;
 
     public SavedBluetoothDeviceUpdater(Context context, DashboardFragment fragment,
             DevicePreferenceCallback devicePreferenceCallback) {
@@ -59,6 +61,10 @@ public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
     @Override
     public boolean isFilterMatched(CachedBluetoothDevice cachedDevice) {
         final BluetoothDevice device = cachedDevice.getDevice();
+        if (DBG) {
+            Log.d(TAG, "isFilterMatched() device name : " + cachedDevice.getName() +
+                    ", is connected : " + device.isConnected());
+        }
         return device.getBondState() == BluetoothDevice.BOND_BONDED && !device.isConnected();
     }
 
