@@ -56,6 +56,7 @@ public class StorageWizardInit extends StorageWizardBase {
 
         if (!mDisk.isAdoptable()) {
             // If not adoptable, we only have one choice
+            mInternal.setEnabled(false);
             onNavigateExternal(null);
         } else if (!mIsPermittedToAdopt) {
             // TODO: Show a message about why this is disabled for guest and
