@@ -102,9 +102,11 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     protected abstract String getExtraKeyForBiometric();
 
     /**
-     * @return the intent for proceeding to the next step of enrollment
+     * @return the intent for proceeding to the next step of enrollment. For Fingerprint, this
+     * should lead to the "Find Sensor" activity. For Face, this should lead to the "Enrolling"
+     * activity.
      */
-    protected abstract Intent getFindSensorIntent();
+    protected abstract Intent getEnrollingIntent();
 
     /**
      * @param span
@@ -179,7 +181,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     }
 
     private void launchFindSensor(byte[] token) {
-        Intent intent = getFindSensorIntent();
+        Intent intent = getEnrollingIntent();
         if (token != null) {
             intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
         }

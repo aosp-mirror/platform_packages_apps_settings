@@ -30,29 +30,33 @@ import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling;
-import com.android.settings.biometrics.fingerprint.FingerprintSettings;
 import com.android.settings.core.InstrumentedActivity;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.setupwizardlib.GlifLayout;
 
 /**
- * Base activity for all fingerprint enrollment steps.
+ * Base activity for all biometric enrollment steps.
  */
 public abstract class BiometricEnrollBase extends InstrumentedActivity
         implements View.OnClickListener {
     public static final int RESULT_FINISHED = BiometricSettings.RESULT_FINISHED;
     public static final int RESULT_SKIP = BiometricSettings.RESULT_SKIP;
     public static final int RESULT_TIMEOUT = BiometricSettings.RESULT_TIMEOUT;
+    public static final String EXTRA_KEY_LAUNCHED_CONFIRM = "launched_confirm_lock";
 
+    public static final int CONFIRM_REQUEST = 1;
+    public static final int ENROLLING = 2;
+
+    protected boolean mLaunchedConfirmLock;
     protected byte[] mToken;
     protected int mUserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mToken = getIntent().getByteArrayExtra(
-                ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
+        mToken = getIntent().getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
         if (savedInstanceState != null && mToken == null) {
+            mLaunchedConfirmLock = savedInstanceState.getBoolean(EXTRA_KEY_LAUNCHED_CONFIRM);
             mToken = savedInstanceState.getByteArray(
                     ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
         }
@@ -68,6 +72,7 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        outState.putBoolean(EXTRA_KEY_LAUNCHED_CONFIRM, mLaunchedConfirmLock);
         outState.putByteArray(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
     }
 
@@ -75,6 +80,10 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         initViews();
+    }
+
+    protected boolean shouldLaunchConfirmLock() {
+        return mToken == null && !mLaunchedConfirmLock;
     }
 
     protected void initViews() {
@@ -128,5 +137,26 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity
             intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
         }
         return intent;
+    }
+
+    protected void launchConfirmLock(int titleResId, long challenge) {
+        ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(this);
+        boolean launchedConfirmationActivity;
+        if (mUserId == UserHandle.USER_NULL) {
+            launchedConfirmationActivity = helper.launchConfirmationActivity(CONFIRM_REQUEST,
+                    getString(titleResId),
+                    null, null, challenge);
+        } else {
+            launchedConfirmationActivity = helper.launchConfirmationActivity(CONFIRM_REQUEST,
+                    getString(titleResId),
+                    null, null, challenge, mUserId);
+        }
+        if (!launchedConfirmationActivity) {
+            // This shouldn't happen, as we should only end up at this step if a lock thingy is
+            // already set.
+            finish();
+        } else {
+            mLaunchedConfirmLock = true;
+        }
     }
 }

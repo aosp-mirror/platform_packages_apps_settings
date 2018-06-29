@@ -897,12 +897,28 @@
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled">Use you</string>
     <!-- Introduction detail message shwon in face enrollment screen in setup wizard. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_introduction_message_setup">Use your face to unlock your phone, authorize purchases, or sign in to apps</string>
+    <!-- Title shown in face enrollment dialog [CHAR LIMIT=40] -->
+    <string name="security_settings_face_enroll_repeat_title">Center your face in the circle</string>
+    <!-- Button text to skip enrollment of face [CHAR LIMIT=40] -->
+    <string name="security_settings_face_enroll_enrolling_skip">Do it later</string>
     <!-- Text shown when "Add face" button is disabled -->
     <string name="face_add_max">You can add up to <xliff:g id="count" example="5">%d</xliff:g> fingerprints</string>
     <!-- Text shown when users has enrolled a maximum number of faces [CHAR LIMIT=NONE] -->
     <string name="face_intro_error_max">You\u2019ve added the maximum number of faces</string>
     <!-- Text shown when an unknown error caused the device to be unable to add faces [CHAR LIMIT=NONE] -->
     <string name="face_intro_error_unknown">Can\u2019t add more faces</string>
+    <!-- Dialog message for dialog which shows when face cannot be enrolled. [CHAR LIMIT=45] -->
+    <string name="security_settings_face_enroll_error_dialog_title">Enrollment was not completed</string>
+    <!-- Button text shown in face dialog shown when an error occurs during enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_face_enroll_dialog_ok">OK</string>
+    <!-- Dialog message for dialog which shows when face cannot be enrolled due to being idle too long. -->
+    <string name="security_settings_face_enroll_error_timeout_dialog_message">Face enrollment time limit reached. Try again.</string>
+    <!-- Dialog message for dialog which shows when face cannot be enrolled due to an internal error or face can't be read. -->
+    <string name="security_settings_face_enroll_error_generic_dialog_message">Face enrollment didn\'t work.</string>
+    <!-- Message shown in face enrollment dialog once enrollment is completed -->
+    <string name="security_settings_face_enroll_finish_title">All set. Looking good.</string>
+    <!-- Button text to exit face wizard after everything is done [CHAR LIMIT=15] -->
+    <string name="security_settings_face_enroll_done">Done</string>
 
     <!-- Fingerprint enrollment and settings --><skip />
     <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->

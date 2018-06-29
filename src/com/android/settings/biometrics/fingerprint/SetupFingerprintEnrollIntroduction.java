@@ -70,7 +70,7 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
     }
 
     @Override
-    protected Intent getFindSensorIntent() {
+    protected Intent getEnrollingIntent() {
         final Intent intent = new Intent(this, SetupFingerprintEnrollFindSensor.class);
         SetupWizardUtils.copySetupExtras(getIntent(), intent);
         return intent;
