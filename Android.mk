@@ -32,7 +32,6 @@ LOCAL_STATIC_ANDROID_LIBRARIES := \
     androidx.preference_preference \
     androidx.recyclerview_recyclerview \
     androidx.legacy_legacy-preference-v14 \
-    com.google.android.material_material \
 
 LOCAL_JAVA_LIBRARIES := \
     bouncycastle \
