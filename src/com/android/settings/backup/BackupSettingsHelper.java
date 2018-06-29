@@ -152,7 +152,6 @@ public class BackupSettingsHelper {
     }
 
     private Intent getIntentForDefaultBackupSettings() {
-        // Extra needed by {@link SettingsDrawerActivity} to show the back button navigation.
         return new Intent(mContext, PrivacySettingsActivity.class);
     }
 

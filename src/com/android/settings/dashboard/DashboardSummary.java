@@ -30,6 +30,8 @@ import android.view.ViewGroup;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.core.SettingsBaseActivity;
+import com.android.settings.core.SettingsBaseActivity.CategoryListener;
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.dashboard.conditional.ConditionManager;
 import com.android.settings.dashboard.conditional.ConditionManager.ConditionListener;
@@ -40,8 +42,6 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.ActionBarShadowController;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
-import com.android.settingslib.drawer.SettingsDrawerActivity;
-import com.android.settingslib.drawer.SettingsDrawerActivity.CategoryListener;
 import com.android.settingslib.suggestions.SuggestionControllerMixin;
 import com.android.settingslib.utils.ThreadUtils;
 
@@ -138,7 +138,7 @@ public class DashboardSummary extends InstrumentedFragment
         long startTime = System.currentTimeMillis();
         super.onResume();
 
-        ((SettingsDrawerActivity) getActivity()).addCategoryListener(this);
+        ((SettingsBaseActivity) getActivity()).addCategoryListener(this);
         mSummaryLoader.setListening(true);
         final int metricsCategory = getMetricsCategory();
         for (Condition c : mConditionManager.getConditions()) {
@@ -156,7 +156,7 @@ public class DashboardSummary extends InstrumentedFragment
     public void onPause() {
         super.onPause();
 
-        ((SettingsDrawerActivity) getActivity()).remCategoryListener(this);
+        ((SettingsBaseActivity) getActivity()).remCategoryListener(this);
         mSummaryLoader.setListening(false);
         for (Condition c : mConditionManager.getConditions()) {
             if (c.shouldShow()) {

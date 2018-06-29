@@ -61,7 +61,7 @@ public class PreferenceXmlParserUtilsTest {
     @Test
     public void testDataTitleValid_ReturnsPreferenceTitle() {
         XmlResourceParser parser = getChildByType(R.xml.display_settings,
-                "com.android.settings.TimeoutListPreference");
+                "com.android.settings.display.TimeoutListPreference");
         final AttributeSet attrs = Xml.asAttributeSet(parser);
         String title = PreferenceXmlParserUtils.getDataTitle(mContext, attrs);
         String expTitle = mContext.getString(R.string.screen_timeout);
@@ -80,7 +80,7 @@ public class PreferenceXmlParserUtilsTest {
     @Test
     public void testDataKeyValid_ReturnsPreferenceKey() {
         XmlResourceParser parser = getChildByType(R.xml.display_settings,
-                "com.android.settings.TimeoutListPreference");
+                "com.android.settings.display.TimeoutListPreference");
         final AttributeSet attrs = Xml.asAttributeSet(parser);
         String key = PreferenceXmlParserUtils.getDataKey(mContext, attrs);
         String expKey = "screen_timeout";
@@ -90,7 +90,7 @@ public class PreferenceXmlParserUtilsTest {
     @Test
     public void testDataSummaryValid_ReturnsPreferenceSummary() {
         XmlResourceParser parser = getChildByType(R.xml.display_settings,
-                "com.android.settings.TimeoutListPreference");
+                "com.android.settings.display.TimeoutListPreference");
         final AttributeSet attrs = Xml.asAttributeSet(parser);
         String summary = PreferenceXmlParserUtils.getDataSummary(mContext, attrs);
         String expSummary = mContext.getString(R.string.summary_placeholder);

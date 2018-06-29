@@ -53,7 +53,7 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedFragment;
-import com.android.settings.fingerprint.FingerprintUiHelper;
+import com.android.settings.biometrics.fingerprint.FingerprintUiHelper;
 
 /**
  * Base fragment to be shared for PIN/Pattern/Password confirmation fragments.

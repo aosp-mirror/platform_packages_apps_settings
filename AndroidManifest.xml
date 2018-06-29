@@ -1562,11 +1562,11 @@
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/GlifTheme.Light"/>
 
-        <activity android:name=".fingerprint.FingerprintSettings" android:exported="false"/>
-        <activity android:name=".fingerprint.FingerprintEnrollFindSensor" android:exported="false"/>
-        <activity android:name=".fingerprint.FingerprintEnrollEnrolling" android:exported="false"/>
-        <activity android:name=".fingerprint.FingerprintEnrollFinish" android:exported="false"/>
-        <activity android:name=".fingerprint.FingerprintEnrollIntroduction"
+        <activity android:name=".biometrics.fingerprint.FingerprintSettings" android:exported="false"/>
+        <activity android:name=".biometrics.fingerprint.FingerprintEnrollFindSensor" android:exported="false"/>
+        <activity android:name=".biometrics.fingerprint.FingerprintEnrollEnrolling" android:exported="false"/>
+        <activity android:name=".biometrics.fingerprint.FingerprintEnrollFinish" android:exported="false"/>
+        <activity android:name=".biometrics.fingerprint.FingerprintEnrollIntroduction"
             android:exported="true"
             android:theme="@style/GlifTheme.Light">
             <intent-filter>
@@ -1575,10 +1575,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".fingerprint.SetupFingerprintEnrollFindSensor" android:exported="false"/>
-        <activity android:name=".fingerprint.SetupFingerprintEnrollEnrolling" android:exported="false"/>
-        <activity android:name=".fingerprint.SetupFingerprintEnrollFinish" android:exported="false"/>
-        <activity android:name=".fingerprint.SetupFingerprintEnrollIntroduction"
+        <activity android:name=".biometrics.fingerprint.SetupFingerprintEnrollFindSensor" android:exported="false"/>
+        <activity android:name=".biometrics.fingerprint.SetupFingerprintEnrollEnrolling" android:exported="false"/>
+        <activity android:name=".biometrics.fingerprint.SetupFingerprintEnrollFinish" android:exported="false"/>
+        <activity android:name=".biometrics.fingerprint.SetupFingerprintEnrollIntroduction"
             android:exported="true"
             android:permission="android.permission.MANAGE_FINGERPRINT"
             android:theme="@style/GlifTheme.Light">
@@ -1588,7 +1588,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".fingerprint.FingerprintSuggestionActivity"
+        <activity android:name=".biometrics.fingerprint.FingerprintSuggestionActivity"
             android:exported="true"
             android:permission="android.permission.MANAGE_FINGERPRINT"
             android:icon="@drawable/ic_suggestion_fingerprint"
@@ -1663,7 +1663,7 @@
             <meta-data android:name="com.android.settings.icon_tintable" android:value="true" />
         </activity>
 
-        <activity android:name=".fingerprint.FingerprintEnrollSuggestionActivity"
+        <activity android:name=".biometrics.fingerprint.FingerprintEnrollSuggestionActivity"
             android:icon="@drawable/ic_suggestion_fingerprint">
             <intent-filter android:priority="2">
                 <action android:name="android.intent.action.MAIN" />

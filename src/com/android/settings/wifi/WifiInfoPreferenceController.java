@@ -102,11 +102,12 @@ public class WifiInfoPreferenceController extends AbstractPreferenceController
                     Settings.Global.WIFI_CONNECTED_MAC_RANDOMIZATION_ENABLED, 0);
             final String macAddress = wifiInfo == null ? null : wifiInfo.getMacAddress();
 
-            if (TextUtils.isEmpty(macAddress)) {
-                mWifiMacAddressPref.setSummary(R.string.status_unavailable);
-            } else if (macRandomizationMode == 1
+            if (macRandomizationMode == 1
                     && WifiInfo.DEFAULT_MAC_ADDRESS.equals(macAddress)) {
                 mWifiMacAddressPref.setSummary(R.string.wifi_status_mac_randomized);
+            } else if (TextUtils.isEmpty(macAddress)
+                    || WifiInfo.DEFAULT_MAC_ADDRESS.equals(macAddress)) {
+                mWifiMacAddressPref.setSummary(R.string.status_unavailable);
             } else {
                 mWifiMacAddressPref.setSummary(macAddress);
             }

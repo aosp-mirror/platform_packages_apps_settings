@@ -53,8 +53,8 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.fingerprint.FingerprintEnrollBase;
-import com.android.settings.fingerprint.FingerprintEnrollFindSensor;
+import com.android.settings.biometrics.fingerprint.FingerprintEnrollBase;
+import com.android.settings.biometrics.fingerprint.FingerprintEnrollFindSensor;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedPreference;
@@ -682,7 +682,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                                         CharSequence errString) {
                                     Log.e(TAG, String.format(
                                             "Can't remove fingerprint %d in group %d. Reason: %s",
-                                            fp.getFingerId(), fp.getGroupId(), errString));
+                                            fp.getBiometricId(), fp.getGroupId(), errString));
                                     // TODO: need to proceed with the removal of managed profile
                                     // fingerprints and finish() gracefully.
                                 }
