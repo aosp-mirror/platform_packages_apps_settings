@@ -48,10 +48,12 @@ public class VideoPreference extends Preference {
     MediaPlayer mMediaPlayer;
     @VisibleForTesting
     boolean mAnimationAvailable;
-    private boolean mVideoReady;
+    @VisibleForTesting
+    boolean mVideoReady;
     private boolean mVideoPaused;
     private float mAspectRadio = 1.0f;
     private int mPreviewResource;
+    private boolean mViewVisible;
 
     public VideoPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -144,6 +146,9 @@ public class VideoPreference extends Preference {
 
             @Override
             public void onSurfaceTextureUpdated(SurfaceTexture surfaceTexture) {
+                if (!mViewVisible) {
+                    return;
+                }
                 if (mVideoReady) {
                     if (imageView.getVisibility() == View.VISIBLE) {
                         imageView.setVisibility(View.GONE);
@@ -172,6 +177,7 @@ public class VideoPreference extends Preference {
     }
 
     public void onViewVisible(boolean videoPaused) {
+        mViewVisible = true;
         mVideoPaused = videoPaused;
         if (mVideoReady && mMediaPlayer != null && !mMediaPlayer.isPlaying()) {
             mMediaPlayer.seekTo(0);
@@ -179,6 +185,7 @@ public class VideoPreference extends Preference {
     }
 
     public void onViewInvisible() {
+        mViewVisible = false;
         if (mMediaPlayer != null && mMediaPlayer.isPlaying()) {
             mMediaPlayer.pause();
         }
