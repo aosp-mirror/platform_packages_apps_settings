@@ -62,8 +62,8 @@ public class ZenOnboardingActivity extends Activity {
         setMetricsLogger(new MetricsLogger());
 
         Context context = getApplicationContext();
-        Settings.Global.putInt(context.getContentResolver(),
-                Settings.Global.ZEN_SETTINGS_SUGGESTION_VIEWED, 1);
+        Settings.Secure.putInt(context.getContentResolver(),
+                Settings.Secure.ZEN_SETTINGS_SUGGESTION_VIEWED, 1);
 
         setupUI();
     }
@@ -135,8 +135,8 @@ public class ZenOnboardingActivity extends Activity {
             mMetrics.action(MetricsEvent.ACTION_ZEN_ONBOARDING_KEEP_CURRENT_SETTINGS);
         }
 
-        Settings.Global.putInt(getApplicationContext().getContentResolver(),
-                Settings.Global.ZEN_SETTINGS_UPDATED, 1);
+        Settings.Secure.putInt(getApplicationContext().getContentResolver(),
+                Settings.Secure.ZEN_SETTINGS_UPDATED, 1);
 
         finishAndRemoveTask();
     }
@@ -160,11 +160,11 @@ public class ZenOnboardingActivity extends Activity {
         NotificationManager nm = context.getSystemService(NotificationManager.class);
         if (NotificationManager.Policy.areAllVisualEffectsSuppressed(
                 nm.getNotificationPolicy().suppressedVisualEffects)) {
-            Settings.Global.putInt(context.getContentResolver(),
-                    Settings.Global.ZEN_SETTINGS_UPDATED, 1);
+            Settings.Secure.putInt(context.getContentResolver(),
+                    Settings.Secure.ZEN_SETTINGS_UPDATED, 1);
         }
-        return Settings.Global.getInt(context.getContentResolver(),
-                Settings.Global.ZEN_SETTINGS_UPDATED, 0) != 0;
+        return Settings.Secure.getInt(context.getContentResolver(),
+                Settings.Secure.ZEN_SETTINGS_UPDATED, 0) != 0;
     }
 
     private static boolean showSuggestion(Context context) {
@@ -173,8 +173,8 @@ public class ZenOnboardingActivity extends Activity {
 
         // SHOW_ZEN_SETTINGS_SUGGESTION is also true when:
         // - automatic rule has started DND and user has not seen the first use dialog
-        return Settings.Global.getInt(context.getContentResolver(),
-                Settings.Global.SHOW_ZEN_SETTINGS_SUGGESTION, 0) != 0;
+        return Settings.Secure.getInt(context.getContentResolver(),
+                Settings.Secure.SHOW_ZEN_SETTINGS_SUGGESTION, 0) != 0;
 
     }
 

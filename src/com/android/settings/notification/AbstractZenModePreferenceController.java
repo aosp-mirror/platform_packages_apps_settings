@@ -117,7 +117,7 @@ abstract public class AbstractZenModePreferenceController extends
     }
 
     protected int getZenDuration() {
-        return Settings.Global.getInt(mContext.getContentResolver(), Settings.Global.ZEN_DURATION,
+        return Settings.Secure.getInt(mContext.getContentResolver(), Settings.Secure.ZEN_DURATION,
                 0);
     }
 
@@ -125,8 +125,8 @@ abstract public class AbstractZenModePreferenceController extends
         private final Uri ZEN_MODE_URI = Settings.Global.getUriFor(Settings.Global.ZEN_MODE);
         private final Uri ZEN_MODE_CONFIG_ETAG_URI = Settings.Global.getUriFor(
                 Settings.Global.ZEN_MODE_CONFIG_ETAG);
-        private final Uri ZEN_MODE_DURATION_URI = Settings.Global.getUriFor(
-                Settings.Global.ZEN_DURATION);
+        private final Uri ZEN_MODE_DURATION_URI = Settings.Secure.getUriFor(
+                Settings.Secure.ZEN_DURATION);
 
         private final Preference mPreference;
 

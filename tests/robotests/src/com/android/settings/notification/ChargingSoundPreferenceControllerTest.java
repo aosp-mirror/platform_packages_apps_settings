@@ -17,13 +17,14 @@
 package com.android.settings.notification;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
 import android.content.Context;
-import android.provider.Settings.Global;
+import android.provider.Settings.Secure;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -80,7 +81,7 @@ public class ChargingSoundPreferenceControllerTest {
 
     @Test
     public void displayPreference_chargingSoundEnabled_shouldCheckedPreference() {
-        Global.putInt(mContentResolver, Global.CHARGING_SOUNDS_ENABLED, 1);
+        Secure.putInt(mContentResolver, Secure.CHARGING_SOUNDS_ENABLED, 1);
 
         mController.displayPreference(mScreen);
 
@@ -89,7 +90,7 @@ public class ChargingSoundPreferenceControllerTest {
 
     @Test
     public void displayPreference_chargingSoundDisabled_shouldUncheckedPreference() {
-        Global.putInt(mContentResolver, Global.CHARGING_SOUNDS_ENABLED, 0);
+        Secure.putInt(mContentResolver, Secure.CHARGING_SOUNDS_ENABLED, 0);
 
         mController.displayPreference(mScreen);
 
@@ -102,7 +103,7 @@ public class ChargingSoundPreferenceControllerTest {
 
         mPreference.getOnPreferenceChangeListener().onPreferenceChange(mPreference, true);
 
-        assertThat(Global.getInt(mContentResolver, Global.CHARGING_SOUNDS_ENABLED, 1))
+        assertThat(Secure.getInt(mContentResolver, Secure.CHARGING_SOUNDS_ENABLED, 1))
             .isEqualTo(1);
     }
 
@@ -112,7 +113,7 @@ public class ChargingSoundPreferenceControllerTest {
 
         mPreference.getOnPreferenceChangeListener().onPreferenceChange(mPreference, false);
 
-        assertThat(Global.getInt(mContentResolver, Global.CHARGING_SOUNDS_ENABLED, 1))
+        assertThat(Secure.getInt(mContentResolver, Secure.CHARGING_SOUNDS_ENABLED, 1))
             .isEqualTo(0);
     }
 }

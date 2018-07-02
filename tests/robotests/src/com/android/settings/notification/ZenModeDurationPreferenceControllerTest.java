@@ -78,8 +78,8 @@ public class ZenModeDurationPreferenceControllerTest {
 
     @Test
     public void updateState_DurationForever() {
-        Settings.Global.putInt(mContentResolver, Settings.Global.ZEN_DURATION,
-                Settings.Global.ZEN_DURATION_FOREVER);
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.ZEN_DURATION,
+                Settings.Secure.ZEN_DURATION_FOREVER);
         final Preference mockPref = mock(Preference.class);
         mController.updateState(mockPref);
 
@@ -88,8 +88,8 @@ public class ZenModeDurationPreferenceControllerTest {
 
     @Test
     public void updateState_DurationPrompt() {
-        Settings.Global.putInt(mContentResolver, Settings.Global.ZEN_DURATION,
-                Settings.Global.ZEN_DURATION_PROMPT);
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.ZEN_DURATION,
+                Settings.Secure.ZEN_DURATION_PROMPT);
         final Preference mockPref = mock(Preference.class);
         mController.updateState(mockPref);
 
@@ -100,7 +100,7 @@ public class ZenModeDurationPreferenceControllerTest {
     @Test
     public void updateState_DurationCustom() {
         int zenDuration = 45;
-        Settings.Global.putInt(mContentResolver, Settings.Global.ZEN_DURATION,
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.ZEN_DURATION,
                 zenDuration);
         final Preference mockPref = mock(Preference.class);
         mController.updateState(mockPref);
