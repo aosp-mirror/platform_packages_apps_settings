@@ -156,22 +156,7 @@ public class ZenModeStarredContactsPreferenceControllerTest {
 
     @Test
     public void updateSummary_nullCursorValues() {
-        Cursor testCursorWithNullValues = mock(Cursor.class);
-        when(testCursorWithNullValues.moveToFirst()).thenReturn(true);
-
-        doAnswer(new Answer<Boolean>() {
-            int count = 0;
-            @Override
-            public Boolean answer(InvocationOnMock invocation) throws Throwable {
-                if (count < 3) {
-                    count++;
-                    return true;
-                }
-                return false;
-            }
-
-        }).when(testCursorWithNullValues).moveToNext();
-
+        Cursor testCursorWithNullValues = createMockCursor(3);
         when(testCursorWithNullValues.getString(0)).thenReturn(null);
 
         // expected - no null  values
@@ -188,5 +173,25 @@ public class ZenModeStarredContactsPreferenceControllerTest {
 
         // should not throw a null pointer
         mMessagesController.displayPreference(mPreferenceScreen);
+    }
+
+    private Cursor createMockCursor(int size) {
+        Cursor mockCursor = mock(Cursor.class);
+        when(mockCursor.moveToFirst()).thenReturn(true);
+
+        doAnswer(new Answer<Boolean>() {
+            int count = 0;
+            @Override
+            public Boolean answer(InvocationOnMock invocation) throws Throwable {
+                if (count < size) {
+                    count++;
+                    return true;
+                }
+                return false;
+            }
+
+        }).when(mockCursor).moveToNext();
+
+        return mockCursor;
     }
 }
