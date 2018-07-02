@@ -54,11 +54,12 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
     private static final String BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY =
             "persist.bluetooth.showdeviceswithoutnames";
 
-    protected final LocalBluetoothManager mLocalManager;
     protected final DevicePreferenceCallback mDevicePreferenceCallback;
     protected final Map<BluetoothDevice, Preference> mPreferenceMap;
     protected Context mPrefContext;
     protected DashboardFragment mFragment;
+    @VisibleForTesting
+    protected LocalBluetoothManager mLocalManager;
 
     private final boolean mShowDeviceWithoutNames;
 
@@ -87,6 +88,10 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
      * Register the bluetooth event callback and update the list
      */
     public void registerCallback() {
+        if (mLocalManager == null) {
+            Log.e(TAG, "registerCallback() Bluetooth is not supported on this device");
+            return;
+        }
         mLocalManager.setForegroundActivity(mFragment.getContext());
         mLocalManager.getEventManager().registerCallback(this);
         mLocalManager.getProfileManager().addServiceListener(this);
@@ -97,6 +102,10 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
      * Unregister the bluetooth event callback
      */
     public void unregisterCallback() {
+        if (mLocalManager == null) {
+            Log.e(TAG, "unregisterCallback() Bluetooth is not supported on this device");
+            return;
+        }
         mLocalManager.setForegroundActivity(null);
         mLocalManager.getEventManager().unregisterCallback(this);
         mLocalManager.getProfileManager().removeServiceListener(this);
