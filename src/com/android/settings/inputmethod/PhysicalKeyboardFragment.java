@@ -58,7 +58,7 @@ import androidx.preference.SwitchPreference;
 @SearchIndexable
 public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         implements InputManager.InputDeviceListener,
-        KeyboardLayoutDialogFragment.OnSetupKeyboardLayoutsListener, Indexable {
+        KeyboardLayoutDialogFragment.OnSetupKeyboardLayoutsListener {
 
     private static final String KEYBOARD_ASSISTANCE_CATEGORY = "keyboard_assistance_category";
     private static final String SHOW_VIRTUAL_KEYBOARD_SWITCH = "show_virtual_keyboard_switch";

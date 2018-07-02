@@ -63,7 +63,7 @@ import androidx.preference.Preference;
 @SearchIndexable
 public class TextToSpeechSettings extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener,
-        GearPreference.OnGearClickListener, Indexable {
+        GearPreference.OnGearClickListener {
 
     private static final String STATE_KEY_LOCALE_ENTRIES = "locale_entries";
     private static final String STATE_KEY_LOCALE_ENTRY_VALUES = "locale_entry_values";
