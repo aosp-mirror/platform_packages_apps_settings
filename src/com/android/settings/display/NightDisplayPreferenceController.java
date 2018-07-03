@@ -15,6 +15,7 @@ package com.android.settings.display;
 
 import android.content.Context;
 
+import android.hardware.display.ColorDisplayManager;
 import com.android.internal.app.ColorDisplayController;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -42,7 +43,7 @@ public class NightDisplayPreferenceController extends AbstractPreferenceControll
 
     @Override
     public boolean isAvailable() {
-        return ColorDisplayController.isAvailable(mContext);
+        return ColorDisplayManager.isNightDisplayAvailable(mContext);
     }
 
     @Override

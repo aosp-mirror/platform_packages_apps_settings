@@ -17,6 +17,7 @@
 package com.android.settings.display;
 
 import android.content.Context;
+import android.hardware.display.ColorDisplayManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -53,7 +54,8 @@ public class NightDisplayActivationPreferenceController extends TogglePreference
 
     @Override
     public int getAvailabilityStatus() {
-        return ColorDisplayController.isAvailable(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return ColorDisplayManager.isNightDisplayAvailable(mContext) ? AVAILABLE
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
