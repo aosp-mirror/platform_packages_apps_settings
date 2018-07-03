@@ -32,9 +32,6 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -47,6 +44,12 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toolbar;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragment;
+import androidx.preference.PreferenceManager;
 
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
@@ -69,12 +72,6 @@ import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceFragment;
-import androidx.preference.PreferenceManager;
 
 
 public class SettingsActivity extends SettingsBaseActivity
@@ -506,8 +503,7 @@ public class SettingsActivity extends SettingsBaseActivity
 
     @Override
     public void setTaskDescription(ActivityManager.TaskDescription taskDescription) {
-        final Bitmap icon = getBitmapFromXmlResource(R.drawable.ic_launcher_settings);
-        taskDescription.setIcon(icon);
+        taskDescription.setIcon(R.drawable.ic_launcher_settings);
         super.setTaskDescription(taskDescription);
     }
 
@@ -771,18 +767,5 @@ public class SettingsActivity extends SettingsBaseActivity
 
     public Button getNextButton() {
         return mNextButton;
-    }
-
-    @VisibleForTesting
-    Bitmap getBitmapFromXmlResource(int drawableRes) {
-        Drawable drawable = getResources().getDrawable(drawableRes, getTheme());
-        Canvas canvas = new Canvas();
-        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
-                drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        canvas.setBitmap(bitmap);
-        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-        drawable.draw(canvas);
-
-        return bitmap;
     }
 }

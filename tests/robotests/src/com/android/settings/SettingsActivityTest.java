@@ -16,8 +16,7 @@
 
 package com.android.settings;
 
-import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Matchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -28,7 +27,6 @@ import android.app.ActivityManager;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.graphics.Bitmap;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -46,8 +44,6 @@ public class SettingsActivityTest {
     private FragmentManager mFragmentManager;
     @Mock
     private ActivityManager.TaskDescription mTaskDescription;
-    @Mock
-    private Bitmap mBitmap;
     private SettingsActivity mActivity;
 
     @Before
@@ -55,7 +51,6 @@ public class SettingsActivityTest {
         MockitoAnnotations.initMocks(this);
 
         mActivity = spy(new SettingsActivity());
-        doReturn(mBitmap).when(mActivity).getBitmapFromXmlResource(anyInt());
     }
 
     @Test
@@ -72,6 +67,6 @@ public class SettingsActivityTest {
     public void testSetTaskDescription_IconChanged() {
         mActivity.setTaskDescription(mTaskDescription);
 
-        verify(mTaskDescription).setIcon(nullable(Bitmap.class));
+        verify(mTaskDescription).setIcon(anyInt());
     }
 }
