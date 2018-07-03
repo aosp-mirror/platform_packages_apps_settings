@@ -35,7 +35,6 @@ public class DoubleTapScreenPreferenceController extends GesturePreferenceContro
     private final int OFF = 0;
 
     private static final String PREF_KEY_VIDEO = "gesture_double_tap_screen_video";
-    private final String mDoubleTapScreenPrefKey;
 
     private final String SECURE_KEY = DOZE_PULSE_ON_DOUBLE_TAP;
 
@@ -46,7 +45,6 @@ public class DoubleTapScreenPreferenceController extends GesturePreferenceContro
     public DoubleTapScreenPreferenceController(Context context, String key) {
         super(context, key);
         mUserId = UserHandle.myUserId();
-        mDoubleTapScreenPrefKey = key;
     }
 
     public DoubleTapScreenPreferenceController setConfig(AmbientDisplayConfiguration config) {
@@ -67,17 +65,13 @@ public class DoubleTapScreenPreferenceController extends GesturePreferenceContro
 
     @Override
     public int getAvailabilityStatus() {
-        if (mAmbientConfig == null) {
-            mAmbientConfig = new AmbientDisplayConfiguration(mContext);
-        }
-
         // No hardware support for Double Tap
-        if (!mAmbientConfig.doubleTapSensorAvailable()) {
+        if (!getAmbientConfig().doubleTapSensorAvailable()) {
             return UNSUPPORTED_ON_DEVICE;
         }
 
         // Can't change Double Tap when AOD is enabled.
-        if (!mAmbientConfig.ambientDisplayAvailable()) {
+        if (!getAmbientConfig().ambientDisplayAvailable()) {
             return DISABLED_DEPENDENT_SETTING;
         }
 
@@ -102,11 +96,18 @@ public class DoubleTapScreenPreferenceController extends GesturePreferenceContro
 
     @Override
     public boolean isChecked() {
-        return mAmbientConfig.pulseOnDoubleTapEnabled(mUserId);
+        return getAmbientConfig().pulseOnDoubleTapEnabled(mUserId);
     }
 
     @Override
     protected boolean canHandleClicks() {
-        return !mAmbientConfig.alwaysOnEnabled(mUserId);
+        return !getAmbientConfig().alwaysOnEnabled(mUserId);
+    }
+
+    private AmbientDisplayConfiguration getAmbientConfig() {
+        if (mAmbientConfig == null) {
+            mAmbientConfig = new AmbientDisplayConfiguration(mContext);
+        }
+        return mAmbientConfig;
     }
 }
