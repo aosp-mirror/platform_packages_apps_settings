@@ -110,8 +110,10 @@ public class EncryptionInterstitial extends SettingsActivity {
 
             mRequirePasswordToDecrypt = view.findViewById(R.id.encrypt_require_password);
             mDontRequirePasswordToDecrypt = view.findViewById(R.id.encrypt_dont_require_password);
-            boolean forFingerprint = getActivity().getIntent().getBooleanExtra(
+            final boolean forFingerprint = getActivity().getIntent().getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
+            final boolean forFace = getActivity().getIntent()
+                    .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, false);
             Intent intent = getActivity().getIntent();
             mRequestedPasswordQuality = intent.getIntExtra(EXTRA_PASSWORD_QUALITY, 0);
             mUnlockMethodIntent = intent.getParcelableExtra(EXTRA_UNLOCK_METHOD_INTENT);
@@ -120,17 +122,23 @@ public class EncryptionInterstitial extends SettingsActivity {
                 case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
                     msgId = forFingerprint ?
                             R.string.encryption_interstitial_message_pattern_for_fingerprint :
+                            forFace ?
+                            R.string.encryption_interstitial_message_pattern_for_face :
                             R.string.encryption_interstitial_message_pattern;
                     break;
                 case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
                 case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
                     msgId = forFingerprint ?
                             R.string.encryption_interstitial_message_pin_for_fingerprint :
+                            forFace ?
+                            R.string.encryption_interstitial_message_pin_for_face :
                             R.string.encryption_interstitial_message_pin;
                     break;
                 default:
                     msgId = forFingerprint ?
                             R.string.encryption_interstitial_message_password_for_fingerprint :
+                            forFace ?
+                            R.string.encryption_interstitial_message_password_for_face :
                             R.string.encryption_interstitial_message_password;
                     break;
             }

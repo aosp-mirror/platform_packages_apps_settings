@@ -18,6 +18,7 @@ package com.android.settings.password;
 
 import static android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PARENT_PROFILE_PASSWORD;
 import static android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PASSWORD;
+
 import static com.android.settings.password.ChooseLockPassword.ChooseLockPasswordFragment
         .RESULT_FINISHED;
 
@@ -31,6 +32,8 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
+import android.hardware.face.Face;
+import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintManager.RemovalCallback;
@@ -52,9 +55,9 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
-import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.biometrics.fingerprint.FingerprintEnrollBase;
+import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollFindSensor;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedPreference;
@@ -99,6 +102,7 @@ public class ChooseLockGeneric extends SettingsActivity {
 
         private static final String TAG = "ChooseLockGenericFragment";
         private static final String KEY_SKIP_FINGERPRINT = "unlock_skip_fingerprint";
+        private static final String KEY_SKIP_FACE = "unlock_skip_face";
         private static final String PASSWORD_CONFIRMED = "password_confirmed";
         private static final String WAITING_FOR_CONFIRMATION = "waiting_for_confirmation";
         public static final String MINIMUM_QUALITY_KEY = "minimum_quality";
@@ -143,6 +147,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         private String mUserPassword;
         private LockPatternUtils mLockPatternUtils;
         private FingerprintManager mFingerprintManager;
+        private FaceManager mFaceManager;
         private int mUserId;
         private boolean mHideDrawer = false;
         private ManagedLockPasswordProvider mManagedPasswordProvider;
@@ -151,6 +156,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         private ChooseLockGenericController mController;
 
         protected boolean mForFingerprint = false;
+        protected boolean mForFace = false;
 
         @Override
         public int getMetricsCategory() {
@@ -163,6 +169,7 @@ public class ChooseLockGeneric extends SettingsActivity {
 
             String chooseLockAction = getActivity().getIntent().getAction();
             mFingerprintManager = Utils.getFingerprintManagerOrNull(getActivity());
+            mFaceManager = Utils.getFaceManagerOrNull(getActivity());
             mDPM = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
             mChooseLockSettingsHelper = new ChooseLockSettingsHelper(this.getActivity());
             mLockPatternUtils = new LockPatternUtils(getActivity());
@@ -185,6 +192,8 @@ public class ChooseLockGeneric extends SettingsActivity {
                     ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0);
             mForFingerprint = getActivity().getIntent().getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
+            mForFace = getActivity().getIntent().getBooleanExtra(
+                    ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, false);
             mForChangeCredRequiredForBoot = getArguments() != null && getArguments().getBoolean(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_CHANGE_CRED_REQUIRED_FOR_BOOT);
             mUserManager = UserManager.get(getActivity());
@@ -248,6 +257,12 @@ public class ChooseLockGeneric extends SettingsActivity {
                     ((TextView) getHeaderView().findViewById(R.id.fingerprint_header_description))
                             .setText(R.string.fingerprint_unlock_title);
                 }
+            } else if (mForFace) {
+                setHeaderView(R.layout.choose_lock_generic_face_header);
+                if (mIsSetNewPassword) {
+                    ((TextView) getHeaderView().findViewById(R.id.face_header_description))
+                            .setText(R.string.face_unlock_title);
+                }
             }
         }
 
@@ -260,7 +275,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                 // unlock method to an insecure one
                 showFactoryResetProtectionWarningDialog(key);
                 return true;
-            } else if (KEY_SKIP_FINGERPRINT.equals(key)) {
+            } else if (KEY_SKIP_FINGERPRINT.equals(key) || KEY_SKIP_FACE.equals(key)) {
                 Intent chooseLockGenericIntent = new Intent(getActivity(),
                     ChooseLockGeneric.InternalActivity.class);
                 chooseLockGenericIntent.setAction(getIntent().getAction());
@@ -310,6 +325,8 @@ public class ChooseLockGeneric extends SettingsActivity {
                         unlockMethodIntent);
                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT,
                         mForFingerprint);
+                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE,
+                        mForFace);
                 intent.putExtra(EXTRA_HIDE_DRAWER, mHideDrawer);
                 startActivityForResult(
                         intent,
@@ -360,7 +377,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                     }
                 }
             } else if (requestCode == CHOOSE_LOCK_BEFORE_FINGERPRINT_REQUEST
-                    && resultCode == FingerprintEnrollBase.RESULT_FINISHED) {
+                    && resultCode == BiometricEnrollBase.RESULT_FINISHED) {
                 Intent intent = getFindSensorIntent(getActivity());
                 if (data != null) {
                     intent.putExtras(data.getExtras());
@@ -430,6 +447,7 @@ public class ChooseLockGeneric extends SettingsActivity {
             // Used for testing purposes
             findPreference(ScreenLockType.NONE.preferenceKey).setViewId(R.id.lock_none);
             findPreference(KEY_SKIP_FINGERPRINT).setViewId(R.id.lock_none);
+            findPreference(KEY_SKIP_FACE).setViewId(R.id.lock_none);
             findPreference(ScreenLockType.PIN.preferenceKey).setViewId(R.id.lock_pin);
             findPreference(ScreenLockType.PASSWORD.preferenceKey).setViewId(R.id.lock_password);
         }
@@ -441,6 +459,12 @@ public class ChooseLockGeneric extends SettingsActivity {
                 setPreferenceTitle(ScreenLockType.PIN, R.string.fingerprint_unlock_set_unlock_pin);
                 setPreferenceTitle(ScreenLockType.PASSWORD,
                         R.string.fingerprint_unlock_set_unlock_password);
+            } else if (mForFace) {
+                setPreferenceTitle(ScreenLockType.PATTERN,
+                        R.string.face_unlock_set_unlock_pattern);
+                setPreferenceTitle(ScreenLockType.PIN, R.string.face_unlock_set_unlock_pin);
+                setPreferenceTitle(ScreenLockType.PASSWORD,
+                        R.string.face_unlock_set_unlock_password);
             }
 
             if (mManagedPasswordProvider.isSettingManagedPasswordSupported()) {
@@ -452,6 +476,9 @@ public class ChooseLockGeneric extends SettingsActivity {
 
             if (!(mForFingerprint && mIsSetNewPassword)) {
                 removePreference(KEY_SKIP_FINGERPRINT);
+            }
+            if (!(mForFace && mIsSetNewPassword)) {
+                removePreference(KEY_SKIP_FACE);
             }
         }
 
@@ -581,6 +608,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                     new ChooseLockPassword.IntentBuilder(getContext())
                             .setPasswordQuality(quality)
                             .setForFingerprint(mForFingerprint)
+                            .setForFace(mForFace)
                             .setUserId(mUserId);
             if (mHasChallenge) {
                 builder.setChallenge(mChallenge);
@@ -595,6 +623,7 @@ public class ChooseLockGeneric extends SettingsActivity {
             ChooseLockPattern.IntentBuilder builder =
                     new ChooseLockPattern.IntentBuilder(getContext())
                             .setForFingerprint(mForFingerprint)
+                            .setForFace(mForFace)
                             .setUserId(mUserId);
             if (mHasChallenge) {
                 builder.setChallenge(mChallenge);
@@ -609,6 +638,30 @@ public class ChooseLockGeneric extends SettingsActivity {
                 boolean required, Intent unlockMethodIntent) {
             return EncryptionInterstitial.createStartIntent(context, quality, required,
                     unlockMethodIntent);
+        }
+
+        /**
+         * Keeps track of the biometric removal status. When all biometrics (including managed
+         * profiles) are removed, finishes the activity. Otherwise, it's possible the UI still
+         * shows enrolled biometrics due to the async remove.
+         */
+        private class RemovalTracker {
+            boolean mFingerprintDone;
+            boolean mFaceDone;
+
+            void onFingerprintDone() {
+                mFingerprintDone = true;
+                if (mFingerprintDone && mFaceDone) {
+                    finish();
+                }
+            }
+
+            void onFaceDone() {
+                mFaceDone = true;
+                if (mFingerprintDone && mFaceDone) {
+                    finish();
+                }
+            }
         }
 
         /**
@@ -647,10 +700,16 @@ public class ChooseLockGeneric extends SettingsActivity {
                 mChooseLockSettingsHelper.utils().clearLock(mUserPassword, mUserId);
                 mChooseLockSettingsHelper.utils().setLockScreenDisabled(disabled, mUserId);
                 getActivity().setResult(Activity.RESULT_OK);
-                removeAllFingerprintForUserAndFinish(mUserId);
+                removeAllBiometricsForUserAndFinish(mUserId);
             } else {
-                removeAllFingerprintForUserAndFinish(mUserId);
+                removeAllBiometricsForUserAndFinish(mUserId);
             }
+        }
+
+        private void removeAllBiometricsForUserAndFinish(final int userId) {
+            final RemovalTracker tracker = new RemovalTracker();
+            removeAllFingerprintForUserAndFinish(userId, tracker);
+            removeAllFaceForUserAndFinish(userId, tracker);
         }
 
         private Intent getIntentForUnlockMethod(int quality) {
@@ -668,7 +727,8 @@ public class ChooseLockGeneric extends SettingsActivity {
             return intent;
         }
 
-        private void removeAllFingerprintForUserAndFinish(final int userId) {
+        private void removeAllFingerprintForUserAndFinish(final int userId,
+                RemovalTracker tracker) {
             if (mFingerprintManager != null && mFingerprintManager.isHardwareDetected()) {
                 if (mFingerprintManager.hasEnrolledFingerprints(userId)) {
                     mFingerprintManager.setActiveUser(userId);
@@ -690,25 +750,27 @@ public class ChooseLockGeneric extends SettingsActivity {
                                 @Override
                                 public void onRemovalSucceeded(Fingerprint fp, int remaining) {
                                     if (remaining == 0) {
-                                        removeManagedProfileFingerprintsAndFinishIfNecessary(userId);
+                                        removeManagedProfileFingerprintsAndFinishIfNecessary(userId,
+                                                tracker);
                                     }
                                 }
                             });
                 } else {
                     // No fingerprints in this user, we may also want to delete managed profile
                     // fingerprints
-                    removeManagedProfileFingerprintsAndFinishIfNecessary(userId);
+                    removeManagedProfileFingerprintsAndFinishIfNecessary(userId, tracker);
                 }
             } else {
                 // The removal callback will call finish, once all fingerprints are removed.
                 // We need to wait for that to occur, otherwise, the UI will still show that
                 // fingerprints exist even though they are (about to) be removed depending on
                 // the race condition.
-                finish();
+                tracker.onFingerprintDone();
             }
         }
 
-        private void removeManagedProfileFingerprintsAndFinishIfNecessary(final int parentUserId) {
+        private void removeManagedProfileFingerprintsAndFinishIfNecessary(final int parentUserId,
+                RemovalTracker tracker) {
             if (mFingerprintManager != null && mFingerprintManager.isHardwareDetected()) {
                 mFingerprintManager.setActiveUser(UserHandle.myUserId());
             }
@@ -721,14 +783,69 @@ public class ChooseLockGeneric extends SettingsActivity {
                     final UserInfo userInfo = profiles.get(i);
                     if (userInfo.isManagedProfile() && !mLockPatternUtils
                             .isSeparateProfileChallengeEnabled(userInfo.id)) {
-                        removeAllFingerprintForUserAndFinish(userInfo.id);
+                        removeAllFingerprintForUserAndFinish(userInfo.id, tracker);
                         hasChildProfile = true;
                         break;
                     }
                 }
             }
             if (!hasChildProfile) {
-                finish();
+                tracker.onFingerprintDone();
+            }
+        }
+
+        // TODO: figure out how to eliminate duplicated code. It's a bit hard due to the async-ness
+        private void removeAllFaceForUserAndFinish(final int userId, RemovalTracker tracker) {
+            if (mFaceManager != null && mFaceManager.isHardwareDetected()) {
+                if (mFaceManager.hasEnrolledFaces(userId)) {
+                    mFaceManager.setActiveUser(userId);
+                    Face face = new Face(null, 0, 0);
+                    mFaceManager.remove(face, userId,
+                            new FaceManager.RemovalCallback() {
+                        @Override
+                        public void onRemovalError(Face face, int errMsgId, CharSequence err) {
+                            Log.e(TAG, String.format("Can't remove face %d. Reason: %s",
+                                    face.getBiometricId(), err));
+                        }
+                        @Override
+                        public void onRemovalSucceeded(Face face, int remaining) {
+                            if (remaining == 0) {
+                                removeManagedProfileFacesAndFinishIfNecessary(userId, tracker);
+                            }
+                        }
+                    });
+                } else {
+                    // No faces in this user, we may also want to delete managed profile faces
+                    removeManagedProfileFacesAndFinishIfNecessary(userId, tracker);
+                }
+            } else {
+                tracker.onFaceDone();
+            }
+        }
+
+        // TODO: figure out how to eliminate duplicated code. It's a bit hard due to the async-ness
+        private void removeManagedProfileFacesAndFinishIfNecessary(final int parentUserId,
+                RemovalTracker tracker) {
+            if (mFaceManager != null && mFaceManager.isHardwareDetected()) {
+                mFaceManager.setActiveUser(UserHandle.myUserId());
+            }
+            boolean hasChildProfile = false;
+            if (!mUserManager.getUserInfo(parentUserId).isManagedProfile()) {
+                // Current user is primary profile, remove work profile faces if necessary
+                final List<UserInfo> profiles = mUserManager.getProfiles(parentUserId);
+                final int profilesSize = profiles.size();
+                for (int i = 0; i < profilesSize; i++) {
+                    final UserInfo userInfo = profiles.get(i);
+                    if (userInfo.isManagedProfile() && !mLockPatternUtils
+                            .isSeparateProfileChallengeEnabled(userInfo.id)) {
+                        removeAllFaceForUserAndFinish(userInfo.id, tracker);
+                        hasChildProfile = true;
+                        break;
+                    }
+                }
+            }
+            if (!hasChildProfile) {
+                tracker.onFaceDone();
             }
         }
 

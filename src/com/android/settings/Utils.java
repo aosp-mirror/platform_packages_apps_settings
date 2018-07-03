@@ -49,6 +49,7 @@ import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
+import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.net.ConnectivityManager;
 import android.net.LinkProperties;
@@ -811,6 +812,19 @@ public final class Utils extends com.android.settingslib.Utils {
     public static boolean hasFingerprintHardware(Context context) {
         FingerprintManager fingerprintManager = getFingerprintManagerOrNull(context);
         return fingerprintManager != null && fingerprintManager.isHardwareDetected();
+    }
+
+    public static FaceManager getFaceManagerOrNull(Context context) {
+        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FACE)) {
+            return (FaceManager) context.getSystemService(Context.FACE_SERVICE);
+        } else {
+            return null;
+        }
+    }
+
+    public static boolean hasFaceHardware(Context context) {
+        FaceManager faceManager = getFaceManagerOrNull(context);
+        return faceManager != null && faceManager.isHardwareDetected();
     }
 
     /**

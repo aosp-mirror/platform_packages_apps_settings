@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.settings.biometrics.fingerprint;
+package com.android.settings.biometrics;
 
 import android.annotation.Nullable;
 import android.content.Intent;
@@ -29,6 +29,8 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
+import com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling;
+import com.android.settings.biometrics.fingerprint.FingerprintSettings;
 import com.android.settings.core.InstrumentedActivity;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.setupwizardlib.GlifLayout;
@@ -36,11 +38,11 @@ import com.android.setupwizardlib.GlifLayout;
 /**
  * Base activity for all fingerprint enrollment steps.
  */
-public abstract class FingerprintEnrollBase extends InstrumentedActivity
+public abstract class BiometricEnrollBase extends InstrumentedActivity
         implements View.OnClickListener {
-    public static final int RESULT_FINISHED = FingerprintSettings.RESULT_FINISHED;
-    static final int RESULT_SKIP = FingerprintSettings.RESULT_SKIP;
-    static final int RESULT_TIMEOUT = FingerprintSettings.RESULT_TIMEOUT;
+    public static final int RESULT_FINISHED = BiometricSettings.RESULT_FINISHED;
+    public static final int RESULT_SKIP = BiometricSettings.RESULT_SKIP;
+    public static final int RESULT_TIMEOUT = BiometricSettings.RESULT_TIMEOUT;
 
     protected byte[] mToken;
     protected int mUserId;
@@ -118,7 +120,7 @@ public abstract class FingerprintEnrollBase extends InstrumentedActivity
     protected void onNextButtonClick() {
     }
 
-    protected Intent getEnrollingIntent() {
+    protected Intent getFingerprintEnrollingIntent() {
         Intent intent = new Intent();
         intent.setClassName("com.android.settings", FingerprintEnrollEnrolling.class.getName());
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);

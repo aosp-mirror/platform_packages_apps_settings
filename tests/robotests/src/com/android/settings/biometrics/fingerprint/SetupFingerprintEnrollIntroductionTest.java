@@ -27,6 +27,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.android.settings.R;
+import com.android.settings.biometrics.BiometricEnrollBase;
+import com.android.settings.biometrics.BiometricEnrollIntroduction;
 import com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollIntroductionTest.ShadowStorageManagerWrapper;
 import com.android.settings.password.SetupChooseLockGeneric.SetupChooseLockGenericFragment;
 import com.android.settings.password.SetupSkipDialog;
@@ -118,7 +120,7 @@ public class SetupFingerprintEnrollIntroductionTest {
         ShadowActivity shadowActivity = Shadows.shadowOf(mController.get());
         assertThat(mController.get().isFinishing()).named("Is finishing").isTrue();
         assertThat(shadowActivity.getResultCode()).named("Result code")
-            .isEqualTo(FingerprintEnrollBase.RESULT_SKIP);
+            .isEqualTo(BiometricEnrollBase.RESULT_SKIP);
     }
 
     @Test
@@ -179,8 +181,8 @@ public class SetupFingerprintEnrollIntroductionTest {
     public void testOnResultFromFindSensor_shouldNotSetIntentDataIfLockScreenPresentBeforeLaunch() {
         getShadowKeyguardManager().setIsKeyguardSecure(true);
         SetupFingerprintEnrollIntroduction activity = mController.create().resume().get();
-        activity.onActivityResult(FingerprintEnrollIntroduction.FINGERPRINT_FIND_SENSOR_REQUEST,
-            FingerprintEnrollBase.RESULT_FINISHED, null);
+        activity.onActivityResult(BiometricEnrollIntroduction.BIOMETRIC_FIND_SENSOR_REQUEST,
+            BiometricEnrollBase.RESULT_FINISHED, null);
         assertThat(Shadows.shadowOf(activity).getResultIntent()).isNull();
     }
 
@@ -189,8 +191,8 @@ public class SetupFingerprintEnrollIntroductionTest {
         getShadowKeyguardManager().setIsKeyguardSecure(false);
         SetupFingerprintEnrollIntroduction activity = mController.create().resume().get();
         getShadowKeyguardManager().setIsKeyguardSecure(true);
-        activity.onActivityResult(FingerprintEnrollIntroduction.FINGERPRINT_FIND_SENSOR_REQUEST,
-            FingerprintEnrollBase.RESULT_FINISHED, null);
+        activity.onActivityResult(BiometricEnrollIntroduction.BIOMETRIC_FIND_SENSOR_REQUEST,
+            BiometricEnrollBase.RESULT_FINISHED, null);
         assertThat(Shadows.shadowOf(activity).getResultIntent()).isNotNull();
     }
 
@@ -198,8 +200,8 @@ public class SetupFingerprintEnrollIntroductionTest {
     public void testOnResultFromFindSensor_shouldNotSetIntentDataIfLockScreenNotAdded() {
         getShadowKeyguardManager().setIsKeyguardSecure(false);
         SetupFingerprintEnrollIntroduction activity = mController.create().resume().get();
-        activity.onActivityResult(FingerprintEnrollIntroduction.FINGERPRINT_FIND_SENSOR_REQUEST,
-            FingerprintEnrollBase.RESULT_FINISHED, null);
+        activity.onActivityResult(BiometricEnrollIntroduction.BIOMETRIC_FIND_SENSOR_REQUEST,
+            BiometricEnrollBase.RESULT_FINISHED, null);
         assertThat(Shadows.shadowOf(activity).getResultIntent()).isNull();
     }
 

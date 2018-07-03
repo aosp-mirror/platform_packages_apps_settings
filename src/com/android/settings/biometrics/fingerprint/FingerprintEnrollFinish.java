@@ -25,11 +25,12 @@ import android.widget.Button;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.biometrics.BiometricEnrollBase;
 
 /**
  * Activity which concludes fingerprint enrollment.
  */
-public class FingerprintEnrollFinish extends FingerprintEnrollBase {
+public class FingerprintEnrollFinish extends BiometricEnrollBase {
 
     private static final int REQUEST_ADD_ANOTHER = 1;
 
@@ -71,7 +72,7 @@ public class FingerprintEnrollFinish extends FingerprintEnrollBase {
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.add_another_button) {
-            startActivityForResult(getEnrollingIntent(), REQUEST_ADD_ANOTHER);
+            startActivityForResult(getFingerprintEnrollingIntent(), REQUEST_ADD_ANOTHER);
         }
         super.onClick(v);
     }

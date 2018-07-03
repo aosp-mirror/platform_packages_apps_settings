@@ -17,32 +17,17 @@
 package com.android.settings.biometrics.fingerprint;
 
 import android.content.Context;
-import android.content.Intent;
-import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
-import android.os.UserHandle;
-import android.os.UserManager;
 
-import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.core.BasePreferenceController;
-import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.biometrics.BiometricStatusPreferenceController;
 
-import java.util.List;
-
-import androidx.preference.Preference;
-
-public class FingerprintStatusPreferenceController extends BasePreferenceController {
+public class FingerprintStatusPreferenceController extends BiometricStatusPreferenceController {
 
     private static final String KEY_FINGERPRINT_SETTINGS = "fingerprint_settings";
 
     protected final FingerprintManager mFingerprintManager;
-    protected final UserManager mUm;
-    protected final LockPatternUtils mLockPatternUtils;
-
-    protected final int mUserId = UserHandle.myUserId();
-    protected final int mProfileChallengeUserId;
 
     public FingerprintStatusPreferenceController(Context context) {
         this(context, KEY_FINGERPRINT_SETTINGS);
@@ -51,69 +36,39 @@ public class FingerprintStatusPreferenceController extends BasePreferenceControl
     public FingerprintStatusPreferenceController(Context context, String key) {
         super(context, key);
         mFingerprintManager = Utils.getFingerprintManagerOrNull(context);
-        mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        mLockPatternUtils = FeatureFactory.getFactory(context)
-                .getSecurityFeatureProvider()
-                .getLockPatternUtils(context);
-        mProfileChallengeUserId = Utils.getManagedProfileId(mUm, mUserId);
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        if (mFingerprintManager == null || !mFingerprintManager.isHardwareDetected()) {
-            return UNSUPPORTED_ON_DEVICE;
-        }
-        if (isUserSupported()) {
-            return AVAILABLE;
-        } else {
-            return DISABLED_FOR_USER;
-        }
+    protected boolean isDeviceSupported() {
+        return mFingerprintManager != null && mFingerprintManager.isHardwareDetected();
     }
 
     @Override
-    public void updateState(Preference preference) {
-        if (!isAvailable()) {
-            if (preference != null) {
-                preference.setVisible(false);
-            }
-            return;
-        } else {
-            preference.setVisible(true);
-        }
-        final int userId = getUserId();
-        final List<Fingerprint> items = mFingerprintManager.getEnrolledFingerprints(userId);
-        final int fingerprintCount = items != null ? items.size() : 0;
-        final String clazz;
-        if (fingerprintCount > 0) {
-            preference.setSummary(mContext.getResources().getQuantityString(
-                    R.plurals.security_settings_fingerprint_preference_summary,
-                    fingerprintCount, fingerprintCount));
-            clazz = FingerprintSettings.class.getName();
-        } else {
-            preference.setSummary(
-                    R.string.security_settings_fingerprint_preference_summary_none);
-            clazz = FingerprintEnrollIntroduction.class.getName();
-        }
-        preference.setOnPreferenceClickListener(target -> {
-            final Context context = target.getContext();
-            final UserManager userManager = UserManager.get(context);
-            if (Utils.startQuietModeDialogIfNecessary(context, userManager,
-                    userId)) {
-                return false;
-            }
-            Intent intent = new Intent();
-            intent.setClassName("com.android.settings", clazz);
-            intent.putExtra(Intent.EXTRA_USER_ID, userId);
-            context.startActivity(intent);
-            return true;
-        });
+    protected boolean hasEnrolledBiometrics() {
+        return mFingerprintManager.hasEnrolledFingerprints(mUserId);
     }
 
-    protected int getUserId() {
-        return mUserId;
+    @Override
+    protected String getSummaryTextEnrolled() {
+        final int numEnrolled = mFingerprintManager.getEnrolledFingerprints(mUserId).size();
+        return mContext.getResources().getQuantityString(
+                R.plurals.security_settings_fingerprint_preference_summary,
+                numEnrolled, numEnrolled);
     }
 
-    protected boolean isUserSupported() {
-        return true;
+    @Override
+    protected String getSummaryTextNoneEnrolled() {
+        return mContext.getString(R.string.security_settings_fingerprint_preference_summary_none);
     }
+
+    @Override
+    protected String getSettingsClassName() {
+        return FingerprintSettings.class.getName();
+    }
+
+    @Override
+    protected String getEnrollClassName() {
+        return FingerprintEnrollIntroduction.class.getName();
+    }
+
 }

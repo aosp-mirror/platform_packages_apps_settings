@@ -877,6 +877,33 @@
     <string name="security_dashboard_summary">Screen lock, fingerprint</string>
     <!-- Summary for Security settings when fingerprint is not supported [CHAR LIMIT=NONE]-->
     <string name="security_dashboard_summary_no_fingerprint">Screen lock</string>
+
+    <!-- Face enrollment and settings --><skip />
+    <!-- Message shown in summary field when face authentication is set up. [CHAR LIMIT=22] -->
+    <string name="security_settings_face_preference_summary">Face added</string>
+    <!-- Message shown in summary field when face authentication is not set up. [CHAR LIMIT=40] -->
+    <string name="security_settings_face_preference_summary_none">Tap to set up face authentication</string>
+    <!-- Title shown for menu item that launches face settings or enrollment. [CHAR LIMIT=22] -->
+    <string name="security_settings_face_preference_title">Face authentication</string>
+    <!-- Button text to cancel enrollment from the introduction [CHAR LIMIT=22] -->
+    <string name="security_settings_face_enroll_introduction_cancel">Cancel</string>
+    <!-- Introduction title shown in face enrollment to introduce the face unlock feature [CHAR LIMIT=30] -->
+    <string name="security_settings_face_enroll_introduction_title">Unlock with your face</string>
+    <!-- Introduction title shown in face enrollment to introduce the face authentication feature, when face unlock is disabled by device admin [CHAR LIMIT=40] -->
+    <string name="security_settings_face_enroll_introduction_title_unlock_disabled">Use your face to authenticate</string>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message">Use your face to unlock your phone, authorize purchases, or sign in to apps.</string>
+    <!-- Introduction detail message shown in face enrollment dialog, when face unlock is disabled by device admin [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_message_unlock_disabled">Use you</string>
+    <!-- Introduction detail message shwon in face enrollment screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_message_setup">Use your face to unlock your phone, authorize purchases, or sign in to apps</string>
+    <!-- Text shown when "Add face" button is disabled -->
+    <string name="face_add_max">You can add up to <xliff:g id="count" example="5">%d</xliff:g> fingerprints</string>
+    <!-- Text shown when users has enrolled a maximum number of faces [CHAR LIMIT=NONE] -->
+    <string name="face_intro_error_max">You\u2019ve added the maximum number of faces</string>
+    <!-- Text shown when an unknown error caused the device to be unable to add faces [CHAR LIMIT=NONE] -->
+    <string name="face_intro_error_unknown">Can\u2019t add more faces</string>
+
     <!-- Fingerprint enrollment and settings --><skip />
     <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_preference_title">Fingerprint</string>
@@ -1193,7 +1220,7 @@
     <string name="setup_lock_settings_picker_title" product="default">Protect your phone</string>
 
     <!-- Message shown when setting up screen lock, prompting user to choose the their backup screen lock method [CHAR LIMIT=NONE] -->
-    <string name="lock_settings_picker_fingerprint_added_security_message">For added security, set a backup screen lock</string>
+    <string name="lock_settings_picker_biometrics_added_security_message">For added security, set a backup screen lock</string>
 
     <!-- Description text for screen in setup wizard asking user to set up screen lock, explaining to the user how setting up a screen lock protect them from losing data. (tablet) [CHAR LIMIT=NONE] -->
     <string name="setup_lock_settings_picker_message" product="tablet">Prevent others from using this tablet without your permission by activating device protection features. Choose the screen lock you want to use.</string>
@@ -1204,6 +1231,9 @@
 
     <!-- Message shown in screen lock picker while setting up the backup/fallback screen lock method for fingerprint. Users can choose to use this method to unlock the screen instead of fingerprint, or when fingerprint is not accepted. [CHAR LIMIT=80] [BACKUP_MESSAGE_ID=2799884038398627882] -->
     <string name="lock_settings_picker_fingerprint_message">Choose your backup screen lock method</string>
+
+    <!-- Message shown in screen lock picker while setting up the backup/fallbakc screen lock method for face authentication. Users can choose to use this method to unlock the screen instead of face authentication, or when face authentication is not accepted. [CHAR LIMIT=80] -->
+    <string name="lock_settings_picker_face_message">Choose your backup screen lock method</string>
 
     <!-- Label for button in screen lock settings, allowing users to choose other types of screen locks. [CHAR LIMIT=40] -->
     <string name="setup_lock_settings_options_button_label">Screen lock options</string>
@@ -1279,6 +1309,21 @@
 
     <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
     <string name="fingerprint_unlock_title">You can unlock your phone using your fingerprint. For security, this option requires a backup screen lock.</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for face authentication [CHAR LIMIT=45]-->
+    <string name="face_unlock_set_unlock_pattern">Face authentication + Pattern</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for face authentication [CHAR LIMIT=45]-->
+    <string name="face_unlock_set_unlock_pin">Face authentication + PIN</string>
+
+    <!-- Title for preference that guides the user through creating a backup unlock password for face authentication [CHAR LIMIT=45]-->
+    <string name="face_unlock_set_unlock_password">Face authentication + Password</string>
+
+    <!-- Title for preference that guides the user to skip face authentication setup [CHAR LIMIT=60]-->
+    <string name="face_unlock_skip_face">Continue without face authentication</string>
+
+    <!-- Message shown in screen lock picker while setting up the new screen lock with face authentication option. [CHAR LIMIT=NONE] -->
+    <string name="face_unlock_title">You can unlock your phone using your face. For security, this option requires a backup screen lock.</string>
 
     <!-- Summary for preference that has been disabled by because of the DevicePolicyAdmin, or because device encryption is enabled, or because there are credentials in the credential storage [CHAR LIMIT=50] -->
     <string name="unlock_set_unlock_disabled_summary">Disabled by admin, encryption policy, or
@@ -3696,6 +3741,12 @@
     <string name="lockpassword_pin_set_toast">PIN has been set</string>
     <!-- Toast shown if setting pattern was successful -->
     <string name="lockpassword_pattern_set_toast">Pattern has been set</string>
+    <!-- Header on first screen of choose password/PIN as backup for face authentication flow. If this string cannot be translated in under 40 characters, please translate "Set face authentication backup" [CHAR LIMIT=40] -->
+    <string name="lockpassword_choose_your_password_header_for_face">To use face authentication, set password</string>
+    <!-- Header on first screen of choose pattern as backup for face authentication flow. If this string cannot be translated in under 40 characters, please translate "Set face authentication backup" [CHAR LIMIT=40] -->
+    <string name="lockpassword_choose_your_pattern_header_for_face">To use face authentication, set pattern</string>
+    <!-- Header on first screen of choose password/PIN as backup for face authentication flow. If this string cannot be translated in under 40 characters, please translate "Set face authentication backup" [CHAR LIMIT=40] -->
+    <string name="lockpassword_choose_your_pin_header_for_face">To use face authentication, set PIN</string>
 
     <!-- Message to be used to explain the user that he needs to enter his pattern to continue a
          particular operation. [CHAR LIMIT=70]-->
@@ -7005,6 +7056,10 @@
 
     <!-- Search keyword for Ambient display settings screen. -->
     <string name="keywords_ambient_display_screen">Ambient display, Lock screen display</string>
+
+    <!-- Search keyword for face settings. -->
+    <string name="keywords_face_settings">face</string>
+
     <!-- Search keyword for fingerprint settings. -->
     <string name="keywords_fingerprint_settings">fingerprint</string>
 
@@ -8194,6 +8249,13 @@
     <string name="encryption_interstitial_message_pattern_for_fingerprint">In addition to using your fingerprint to unlock your device, you can further protect this device by requiring your pattern before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices. Require pattern to start your device?</string>
     <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a password to encrypt the device while setting up fingerprint unlock. [CHAR LIMIT=NONE] -->
     <string name="encryption_interstitial_message_password_for_fingerprint">In addition to using your fingerprint to unlock your device, you can further protect this device by requiring your password before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices. Require password to start your device?</string>
+
+    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a PIN to encrypt the device while setting up face unlock. [CHAR LIMIT=NONE] -->
+    <string name="encryption_interstitial_message_pin_for_face">In addition to using your face to unlock your device, you can further protect this device by requiring your PIN before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices. Require PIN to start your device?</string>
+    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a pattern to encrypt the device while setting up face unlock. [CHAR LIMIT=NONE] -->
+    <string name="encryption_interstitial_message_pattern_for_face">In addition to using your face to unlock your device, you can further protect this device by requiring your pattern before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices. Require pattern to start your device?</string>
+    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a password to encrypt the device while setting up face unlock. [CHAR LIMIT=NONE] -->
+    <string name="encryption_interstitial_message_password_for_face">In addition to using your face to unlock your device, you can further protect this device by requiring your password before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices. Require password to start your device?</string>
 
     <!-- Button label to say yes to the question of whether to require PIN/password/pattern to start your device. [CHAR LIMIT=20] -->
     <string name="encryption_interstitial_yes">Yes</string>
