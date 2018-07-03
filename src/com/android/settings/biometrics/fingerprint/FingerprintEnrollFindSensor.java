@@ -27,6 +27,7 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollSidecar.Listener;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
@@ -35,7 +36,7 @@ import androidx.annotation.Nullable;
 /**
  * Activity explaining the fingerprint sensor location for fingerprint enrollment.
  */
-public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
+public class FingerprintEnrollFindSensor extends BiometricEnrollBase {
 
     @VisibleForTesting
     static final int CONFIRM_REQUEST = 1;
@@ -166,7 +167,7 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
             }
             getFragmentManager().beginTransaction().remove(mSidecar).commitAllowingStateLoss();
             mSidecar = null;
-            startActivityForResult(getEnrollingIntent(), ENROLLING);
+            startActivityForResult(getFingerprintEnrollingIntent(), ENROLLING);
         }
     }
 

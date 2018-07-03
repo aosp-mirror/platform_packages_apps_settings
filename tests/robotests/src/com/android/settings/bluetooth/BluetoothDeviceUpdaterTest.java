@@ -167,4 +167,20 @@ public class BluetoothDeviceUpdaterTest {
 
         assertThat(mBluetoothDeviceUpdater.isDeviceConnected(mCachedBluetoothDevice)).isFalse();
     }
+
+    @Test
+    public void registerCallback_localBluetoothManagerNull_shouldNotCrash() {
+        mBluetoothDeviceUpdater.mLocalManager = null;
+
+        // Shouldn't crash
+        mBluetoothDeviceUpdater.registerCallback();
+    }
+
+    @Test
+    public void unregisterCallback_localBluetoothManagerNull_shouldNotCrash() {
+        mBluetoothDeviceUpdater.mLocalManager = null;
+
+        // Shouldn't crash
+        mBluetoothDeviceUpdater.unregisterCallback();
+    }
 }

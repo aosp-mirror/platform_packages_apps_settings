@@ -121,6 +121,8 @@ public class FingerprintStatusPreferenceControllerTest {
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         when(mFingerprintManager.getEnrolledFingerprints(anyInt()))
                 .thenReturn(Collections.singletonList(mock(Fingerprint.class)));
+        when(mFingerprintManager.hasEnrolledFingerprints(anyInt()))
+                .thenReturn(true);
 
         mController.updateState(mPreference);
 

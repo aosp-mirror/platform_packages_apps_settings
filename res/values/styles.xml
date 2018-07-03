@@ -364,6 +364,10 @@
         <item name="android:icon">@drawable/ic_fingerprint_header</item>
     </style>
 
+    <style name="FaceLayoutTheme">
+        <item name="android:icon">@drawable/ic_face_header</item>
+    </style>
+
     <style name="TextAppearance.ConfirmDeviceCredentialsErrorText"
         parent="android:TextAppearance.Material.Body1">
         <item name="android:textColor">?android:attr/colorError</item>
@@ -401,6 +405,12 @@
     </style>
 
     <style name="FingerprintHeaderStyle" parent="android:style/TextAppearance.Material.Subhead">
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:textColor">@color/primary_dark_material_light</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+    </style>
+
+    <style name="FaceHeaderStyle" parent="android:style/TextAppearance.Material.Subhead">
         <item name="android:paddingTop">16dp</item>
         <item name="android:textColor">@color/primary_dark_material_light</item>
         <item name="android:lineSpacingMultiplier">1.2</item>

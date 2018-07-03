@@ -54,11 +54,11 @@ public class LockScreenPreferenceController extends BasePreferenceController imp
     public int getAvailabilityStatus() {
         if (!mLockPatternUtils.isSecure(MY_USER_ID)) {
             return mLockPatternUtils.isLockScreenDisabled(MY_USER_ID)
-                    ? DISABLED_FOR_USER : AVAILABLE;
+                    ? DISABLED_FOR_USER : AVAILABLE_UNSEARCHABLE;
         } else {
             return mLockPatternUtils.getKeyguardStoredPasswordQuality(MY_USER_ID)
                     == PASSWORD_QUALITY_UNSPECIFIED
-                    ? DISABLED_FOR_USER : AVAILABLE;
+                    ? DISABLED_FOR_USER : AVAILABLE_UNSEARCHABLE;
         }
     }
 

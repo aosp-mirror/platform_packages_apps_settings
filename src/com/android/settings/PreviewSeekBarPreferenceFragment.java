@@ -97,9 +97,9 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
         final View root = super.onCreateView(inflater, container, savedInstanceState);
-        final ViewGroup listContainer = (ViewGroup) root.findViewById(android.R.id.list_container);
+        final ViewGroup listContainer = root.findViewById(android.R.id.list_container);
         listContainer.removeAllViews();
 
         final View content = inflater.inflate(mActivityLayoutResId, listContainer, false);

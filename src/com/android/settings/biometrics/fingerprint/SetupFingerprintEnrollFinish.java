@@ -28,7 +28,7 @@ import com.android.settings.password.ChooseLockSettingsHelper;
 public class SetupFingerprintEnrollFinish extends FingerprintEnrollFinish {
 
     @Override
-    protected Intent getEnrollingIntent() {
+    protected Intent getFingerprintEnrollingIntent() {
         Intent intent = new Intent(this, SetupFingerprintEnrollEnrolling.class);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
         if (mUserId != UserHandle.USER_NULL) {

@@ -102,8 +102,8 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
 
         @Override
         protected void addHeaderView() {
-            if (mForFingerprint) {
-                setHeaderView(R.layout.setup_choose_lock_generic_fingerprint_header);
+            if (mForFingerprint || mForFace) {
+                setHeaderView(R.layout.setup_choose_lock_generic_biometrics_header);
             } else {
                 setHeaderView(R.layout.setup_choose_lock_generic_header);
             }

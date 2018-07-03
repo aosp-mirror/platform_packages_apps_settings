@@ -26,8 +26,8 @@ import java.util.List;
 import androidx.preference.PreferenceCategory;
 
 @SearchIndexable
-public class TtsEnginePreferenceFragment extends SettingsPreferenceFragment //implements
-        implements RadioButtonGroupState, Indexable {
+public class TtsEnginePreferenceFragment extends SettingsPreferenceFragment
+        implements RadioButtonGroupState {
     private static final String TAG = "TtsEnginePrefFragment";
 
     private static final int VOICE_DATA_INTEGRITY_CHECK = 1977;

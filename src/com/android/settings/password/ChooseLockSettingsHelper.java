@@ -41,6 +41,7 @@ public final class ChooseLockSettingsHelper {
     public static final String EXTRA_KEY_CHALLENGE = "challenge";
     public static final String EXTRA_KEY_CHALLENGE_TOKEN = "hw_auth_token";
     public static final String EXTRA_KEY_FOR_FINGERPRINT = "for_fingerprint";
+    public static final String EXTRA_KEY_FOR_FACE = "for_face";
     public static final String EXTRA_KEY_FOR_CHANGE_CRED_REQUIRED_FOR_BOOT = "for_cred_req_boot";
 
     /**

@@ -46,10 +46,8 @@ public class ZenModeStarredContactsPreferenceController extends
     private final int mPriorityCategory;
     private final PackageManager mPackageManager;
 
-    @VisibleForTesting
-    Intent mStarredContactsIntent;
-    @VisibleForTesting
-    Intent mFallbackIntent;
+    private Intent mStarredContactsIntent;
+    private Intent mFallbackIntent;
 
     public ZenModeStarredContactsPreferenceController(Context context, Lifecycle lifecycle, int
             priorityCategory, String key) {
@@ -97,9 +95,7 @@ public class ZenModeStarredContactsPreferenceController extends
     }
 
     @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
-
+    public CharSequence getSummary() {
         List<String> starredContacts = getStarredContacts();
         int numStarredContacts = starredContacts.size();
 
@@ -122,7 +118,7 @@ public class ZenModeStarredContactsPreferenceController extends
         }
 
         // values in displayContacts must not be null
-        mPreference.setSummary(ListFormatter.getInstance().format(displayContacts));
+        return ListFormatter.getInstance().format(displayContacts);
     }
 
     @Override

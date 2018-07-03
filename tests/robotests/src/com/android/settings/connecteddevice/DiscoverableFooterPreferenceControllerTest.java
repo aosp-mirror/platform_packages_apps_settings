@@ -178,4 +178,22 @@ public class DiscoverableFooterPreferenceControllerTest {
         }
         return registeredBroadcastReceivers;
     }
+
+    @Test
+    public void onResume_localBluetoothManagerNull_shouldNotCrash() {
+        mDiscoverableFooterPreferenceController.mLocalManager = null;
+        mDiscoverableFooterPreferenceController.init(mFooterPreferenceMixin, mPreference, null);
+
+        // Shouldn't crash
+        mDiscoverableFooterPreferenceController.onResume();
+    }
+
+    @Test
+    public void onPause_localBluetoothManagerNull_shouldNotCrash() {
+        mDiscoverableFooterPreferenceController.mLocalManager = null;
+        mDiscoverableFooterPreferenceController.init(mFooterPreferenceMixin, mPreference, null);
+
+        // Shouldn't crash
+        mDiscoverableFooterPreferenceController.onPause();
+    }
 }

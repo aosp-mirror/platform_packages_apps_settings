@@ -197,4 +197,20 @@ public class AvailableMediaDeviceGroupControllerTest {
         assertThat(mPreferenceGroup.getTitle()).isEqualTo(
                 mContext.getText(R.string.connected_device_available_media_title));
     }
+
+    @Test
+    public void onStart_localBluetoothManagerNull_shouldNotCrash() {
+        mAvailableMediaDeviceGroupController.mLocalBluetoothManager = null;
+
+        // Shouldn't crash
+        mAvailableMediaDeviceGroupController.onStart();
+    }
+
+    @Test
+    public void onStop_localBluetoothManagerNull_shouldNotCrash() {
+        mAvailableMediaDeviceGroupController.mLocalBluetoothManager = null;
+
+        // Shouldn't crash
+        mAvailableMediaDeviceGroupController.onStop();
+    }
 }

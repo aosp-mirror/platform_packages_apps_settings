@@ -37,6 +37,7 @@ import android.widget.Button;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.search.Indexable;
 import com.android.settings.search.actionbar.SearchMenuController;
 import com.android.settings.support.actionbar.HelpMenuController;
 import com.android.settings.support.actionbar.HelpResourceProvider;
@@ -61,7 +62,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * Base class for Settings fragments, with some helper functions and dialog management.
  */
 public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceFragment
-        implements DialogCreatable, HelpResourceProvider {
+        implements DialogCreatable, HelpResourceProvider, Indexable {
 
     private static final String TAG = "SettingsPreference";
 
