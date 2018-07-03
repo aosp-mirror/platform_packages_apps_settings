@@ -14,11 +14,7 @@
 package com.android.settings.display;
 
 import android.content.Context;
-import android.os.IBinder;
-import android.os.Parcel;
-import android.os.RemoteException;
-import android.os.ServiceManager;
-import android.util.Log;
+import android.hardware.display.ColorDisplayManager;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -29,19 +25,16 @@ import com.android.settings.core.BasePreferenceController;
 public class ColorModePreferenceController extends BasePreferenceController {
     private static final String TAG = "ColorModePreference";
 
-    private static final int SURFACE_FLINGER_TRANSACTION_QUERY_COLOR_MANAGEMENT = 1030;
-
-    private final ConfigurationWrapper mConfigWrapper;
     private ColorDisplayController mColorDisplayController;
 
     public ColorModePreferenceController(Context context, String key) {
         super(context, key);
-        mConfigWrapper = new ConfigurationWrapper();
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return mConfigWrapper.isDeviceColorManaged()
+        return mContext.getSystemService(ColorDisplayManager.class)
+                .isDeviceColorManaged()
                 && !getColorDisplayController().getAccessibilityTransformActivated() ?
                 AVAILABLE_UNSEARCHABLE : DISABLED_FOR_USER;
     }
@@ -67,33 +60,5 @@ public class ColorModePreferenceController extends BasePreferenceController {
             mColorDisplayController = new ColorDisplayController(mContext);
         }
         return mColorDisplayController;
-    }
-
-    @VisibleForTesting
-    static class ConfigurationWrapper {
-        private final IBinder mSurfaceFlinger;
-
-        ConfigurationWrapper() {
-            mSurfaceFlinger = ServiceManager.getService("SurfaceFlinger");
-        }
-
-        boolean isDeviceColorManaged() {
-            if (mSurfaceFlinger != null) {
-                final Parcel data = Parcel.obtain();
-                final Parcel reply = Parcel.obtain();
-                data.writeInterfaceToken("android.ui.ISurfaceComposer");
-                try {
-                    mSurfaceFlinger.transact(SURFACE_FLINGER_TRANSACTION_QUERY_COLOR_MANAGEMENT,
-                            data, reply, 0);
-                    return reply.readBoolean();
-                } catch (RemoteException ex) {
-                    Log.e(TAG, "Failed to query color management support", ex);
-                } finally {
-                    data.recycle();
-                    reply.recycle();
-                }
-            }
-            return false;
-        }
     }
 }
