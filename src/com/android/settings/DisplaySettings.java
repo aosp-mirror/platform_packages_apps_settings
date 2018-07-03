@@ -49,7 +49,6 @@ public class DisplaySettings extends DashboardFragment {
     public static final String KEY_DISPLAY_SIZE = "display_settings_screen_zoom";
 
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
-    private static final String KEY_AMBIENT_DISPLAY = "ambient_display";
     private static final String KEY_AUTO_BRIGHTNESS = "auto_brightness_entry";
     private static final String KEY_NIGHT_DISPLAY = "night_display";
 

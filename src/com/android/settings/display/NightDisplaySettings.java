@@ -42,7 +42,7 @@ import androidx.preference.Preference;
  */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class NightDisplaySettings extends DashboardFragment
-        implements ColorDisplayController.Callback, Indexable {
+        implements ColorDisplayController.Callback {
 
     private static final String TAG = "NightDisplaySettings";
 

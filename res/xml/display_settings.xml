@@ -63,13 +63,13 @@
         android:summary="@string/summary_placeholder"
         android:entries="@array/screen_timeout_entries"
         android:entryValues="@array/screen_timeout_values"
-        settings:keywords="@string/keywords_screen_timeout"/>
+        settings:keywords="@string/keywords_screen_timeout" />
 
     <SwitchPreference
         android:key="auto_rotate"
         android:title="@string/accelerometer_title"
         settings:keywords="@string/keywords_auto_rotate"
-        settings:controller="com.android.settings.display.AutoRotatePreferenceController"/>
+        settings:controller="com.android.settings.display.AutoRotatePreferenceController" />
 
     <Preference
         android:key="color_mode"
@@ -82,8 +82,7 @@
         android:key="font_size"
         android:title="@string/title_font_size"
         android:fragment="com.android.settings.accessibility.ToggleFontSizePreferenceFragment"
-        settings:controller="com.android.settings.display.FontSizePreferenceController"
-        settings:keywords="@string/keywords_display_font_size" />
+        settings:controller="com.android.settings.display.FontSizePreferenceController" />
 
     <com.android.settings.display.ScreenZoomPreference
         android:key="display_settings_screen_zoom"
@@ -99,7 +98,8 @@
     <Preference
         android:key="screensaver"
         android:title="@string/screensaver_settings_title"
-        android:fragment="com.android.settings.dream.DreamSettings" />
+        android:fragment="com.android.settings.dream.DreamSettings"
+        settings:controller="com.android.settings.dream.DreamEntryPreferenceController" />
 
     <com.android.settingslib.RestrictedPreference
         android:key="lockscreen_from_display_settings"

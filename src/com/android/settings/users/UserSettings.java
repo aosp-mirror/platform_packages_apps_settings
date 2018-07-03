@@ -96,7 +96,7 @@ public class UserSettings extends SettingsPreferenceFragment
         implements Preference.OnPreferenceClickListener, View.OnClickListener,
         MultiUserSwitchBarController.OnMultiUserSwitchChangedListener,
         DialogInterface.OnDismissListener,
-        EditUserInfoController.OnContentChangedCallback, Indexable {
+        EditUserInfoController.OnContentChangedCallback {
 
     private static final String TAG = "UserSettings";
 

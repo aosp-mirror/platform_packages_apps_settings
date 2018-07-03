@@ -38,7 +38,6 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settingslib.inputmethod.InputMethodAndSubtypeUtil;
 import com.android.settingslib.inputmethod.InputMethodPreference;
 import com.android.settingslib.inputmethod.InputMethodSettingValuesWrapper;
@@ -50,7 +49,7 @@ import java.util.List;
 
 @SearchIndexable
 public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFragment
-        implements InputMethodPreference.OnSavePreferenceListener, Indexable {
+        implements InputMethodPreference.OnSavePreferenceListener {
 
     private final ArrayList<InputMethodPreference> mInputMethodPreferenceList = new ArrayList<>();
     private InputMethodSettingValuesWrapper mInputMethodSettingValues;

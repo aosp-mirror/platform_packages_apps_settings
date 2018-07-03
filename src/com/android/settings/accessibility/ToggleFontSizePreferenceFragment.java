@@ -18,6 +18,7 @@ package com.android.settings.accessibility;
 
 import android.annotation.Nullable;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -26,10 +27,18 @@ import android.provider.Settings;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.PreviewSeekBarPreferenceFragment;
 import com.android.settings.R;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.search.SearchIndexable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Preference fragment used to control font size.
  */
+@SearchIndexable
 public class ToggleFontSizePreferenceFragment extends PreviewSeekBarPreferenceFragment {
 
     private float[] mValues;
@@ -39,7 +48,7 @@ public class ToggleFontSizePreferenceFragment extends PreviewSeekBarPreferenceFr
         super.onCreate(savedInstanceState);
 
         mActivityLayoutResId = R.layout.font_size_activity;
-        mPreviewSampleResIds = new int[]{R.layout.font_size_preview};
+        mPreviewSampleResIds = new int[] {R.layout.font_size_preview};
 
         Resources res = getContext().getResources();
         final ContentResolver resolver = getContext().getContentResolver();
@@ -85,19 +94,35 @@ public class ToggleFontSizePreferenceFragment extends PreviewSeekBarPreferenceFr
     }
 
     /**
-     *  Utility function that returns the index in a string array with which the represented value is
-     *  the closest to a given float value.
+     * Utility function that returns the index in a string array with which the represented value is
+     * the closest to a given float value.
      */
     public static int fontSizeValueToIndex(float val, String[] indices) {
         float lastVal = Float.parseFloat(indices[0]);
-        for (int i=1; i<indices.length; i++) {
+        for (int i = 1; i < indices.length; i++) {
             float thisVal = Float.parseFloat(indices[i]);
-            if (val < (lastVal + (thisVal-lastVal)*.5f)) {
-                return i-1;
+            if (val < (lastVal + (thisVal - lastVal) * .5f)) {
+                return i - 1;
             }
             lastVal = thisVal;
         }
-        return indices.length-1;
+        return indices.length - 1;
     }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableRaw> getRawDataToIndex(Context context,
+                        boolean enabled) {
+                    final ArrayList<SearchIndexableRaw> result = new ArrayList<>();
+                    final SearchIndexableRaw data = new SearchIndexableRaw(context);
+                    data.title = context.getString(R.string.title_font_size);
+                    data.screenTitle = context.getString(R.string.title_font_size);
+                    data.key = "font_size_setting_screen";
+                    data.keywords = context.getString(R.string.keywords_display_font_size);
+                    result.add(data);
+                    return result;
+                }
+            };
 
 }

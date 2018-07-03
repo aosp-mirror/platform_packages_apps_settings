@@ -34,7 +34,6 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -51,7 +50,7 @@ import androidx.preference.SwitchPreference;
  */
 @SearchIndexable
 public class ScreenPinningSettings extends SettingsPreferenceFragment
-        implements SwitchBar.OnSwitchChangeListener, Indexable {
+        implements SwitchBar.OnSwitchChangeListener {
 
     private static final CharSequence KEY_USE_SCREEN_LOCK = "use_screen_lock";
     private static final int CHANGE_LOCK_METHOD_REQUEST = 43;

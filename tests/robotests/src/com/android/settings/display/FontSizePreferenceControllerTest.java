@@ -49,7 +49,7 @@ public class FontSizePreferenceControllerTest {
     @Test
     public void isAlwaysAvailable() {
         assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.AVAILABLE);
+                .isEqualTo(BasePreferenceController.AVAILABLE_UNSEARCHABLE);
     }
 
     @Test
