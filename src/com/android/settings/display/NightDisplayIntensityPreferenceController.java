@@ -22,6 +22,7 @@ import android.text.TextUtils;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.app.ColorDisplayController;
 import com.android.settings.core.SliderPreferenceController;
@@ -54,8 +55,7 @@ public class NightDisplayIntensityPreferenceController extends SliderPreferenceC
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        final SeekBarPreference preference = (SeekBarPreference) screen.findPreference(
-                getPreferenceKey());
+        final SeekBarPreference preference = screen.findPreference(getPreferenceKey());
         preference.setContinuousUpdates(true);
         preference.setMax(getMaxSteps());
     }
