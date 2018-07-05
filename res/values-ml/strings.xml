@@ -131,6 +131,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"ജോടിയാക്കൽ അഭ്യർത്ഥന"</string>
     <string name="bluetooth_notif_message" msgid="5057417127600942904">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> എന്ന ഉപകരണവുമായി ജോടിയാക്കാൻ ടാപ്പുചെയ്യുക."</string>
     <string name="bluetooth_show_received_files" msgid="3144149432555230410">"സ്വീകരിച്ച ഫയലുകള്‍"</string>
+    <string name="bluetooth_show_files_received_via_bluetooth" msgid="5445105773989432594">"Bluetooth വഴി ഫയലുകൾ സ്വീകരിച്ചു"</string>
     <string name="device_picker" msgid="4978696506172252813">"ബ്ലൂടൂത്തുപകരണം തിരഞ്ഞെടുക്കൂ"</string>
     <string name="bluetooth_ask_enablement" msgid="3387222809404177525">"Bluetooth ഓണാക്കാൻ <xliff:g id="APP_NAME">%1$s</xliff:g> താൽപ്പര്യപ്പെടുന്നു"</string>
     <string name="bluetooth_ask_disablement" msgid="5890386255790160573">"Bluetooth ഓഫാക്കാൻ <xliff:g id="APP_NAME">%1$s</xliff:g> താൽപ്പര്യപ്പെടുന്നു"</string>
@@ -187,8 +188,7 @@
     <string name="connected_device_connections_title" msgid="5988939345181466770">"കണക്ഷൻ മുൻഗണനകൾ"</string>
     <string name="connected_device_previously_connected_title" msgid="491765792822244604">"മുമ്പ് കണക്‌റ്റ് ചെയ്തിട്ടുള്ള ഉപകരണങ്ങൾ"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="6196066429488377795">"മുമ്പേ കണക്‌റ്റ് ചെയ്‌തവ"</string>
-    <!-- no translation found for connected_device_bluetooth_turned_on_toast (5683648191381637533) -->
-    <skip />
+    <string name="connected_device_bluetooth_turned_on_toast" msgid="5683648191381637533">"Bluetooth ഓണാക്കി"</string>
     <string name="date_and_time" msgid="9062980487860757694">"തീയതിയും സമയവും"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"സമയ മേഖല തിരഞ്ഞെടുക്കുക"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -304,7 +304,6 @@
     <string name="settings_label" msgid="1626402585530130914">"ക്രമീകരണം"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"ക്രമീകരണം"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"ക്രമീകരണങ്ങളിലേയ്ക്ക്"</string>
-    <string name="activity_list_empty" msgid="6428823323471264836">"പൊരുത്തമുള്ള പ്രവർത്തനങ്ങളൊന്നും കണ്ടെത്തിയില്ല."</string>
     <string name="airplane_mode" msgid="8837269988154128601">"ഫ്ലൈറ്റ് മോഡ്"</string>
     <string name="radio_controls_title" msgid="3447085191369779032">"കൂടുതൽ"</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"വയർലസ്സും നെറ്റ്‌വർക്കും"</string>
@@ -393,6 +392,30 @@
     <string name="security_status_title" msgid="5848766673665944640">"സുരക്ഷാ നില"</string>
     <string name="security_dashboard_summary" msgid="6757421634477554939">"സ്‌ക്രീൻ ലോക്കും ഫിംഗർപ്രിന്റും"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"സ്ക്രീൻ ലോക്ക്"</string>
+    <!-- no translation found for security_settings_face_preference_summary (1290187225482642821) -->
+    <skip />
+    <!-- no translation found for security_settings_face_preference_summary_none (5460349732790152186) -->
+    <skip />
+    <!-- no translation found for security_settings_face_preference_title (7074548721778680481) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_cancel (4277182322482408514) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_title (2694505011712885439) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_title_unlock_disabled (8180330567034286589) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_message (6150611993438981458) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_message_unlock_disabled (6300341727101929207) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_message_setup (5704661081718707858) -->
+    <skip />
+    <!-- no translation found for face_add_max (2342250989212694454) -->
+    <skip />
+    <!-- no translation found for face_intro_error_max (160022811747660581) -->
+    <skip />
+    <!-- no translation found for face_intro_error_unknown (6367721696446677261) -->
+    <skip />
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"വിരലടയാളം"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"വിരലടയാളങ്ങൾ നിയന്ത്രിക്കുക"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"ഇതിനായി വിരലടയാളം ഉപയോഗിക്കുക"</string>
@@ -504,11 +527,14 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"ടാബ്‌ലെറ്റ് പരിരക്ഷിക്കുക"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"ഉപകരണം പരിരക്ഷിക്കുക"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"ഫോൺ പരിരക്ഷിക്കുക"</string>
-    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5008939545428518367">"അധിക സുരക്ഷയ്ക്ക്, ബാക്കപ്പ് സ്‌ക്രീൻ ലോക്ക് സജ്ജീകരിക്കുക."</string>
+    <!-- no translation found for lock_settings_picker_biometrics_added_security_message (1507307757032207572) -->
+    <skip />
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"ഉപകരണ പരിരക്ഷാ ഫീച്ചറുകൾ സജീവമാക്കുന്നതിലൂടെ നിങ്ങളുടെ അനുമതിയില്ലാതെ മറ്റുള്ളവർ ഈ ടാബ്‌ലെറ്റ് ഉപയോഗിക്കുന്നത് തടയുക. നിങ്ങൾ ഉപയോഗിക്കാൻ ആഗ്രഹിക്കുന്ന സ്ക്രീൻ ലോക്ക് തിരഞ്ഞെടുക്കുക."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"ഉപകരണ പരിരക്ഷാ ഫീച്ചറുകൾ സജീവമാക്കുന്നതിലൂടെ നിങ്ങളുടെ അനുമതിയില്ലാതെ മറ്റുള്ളവർ ഈ ഉപകരണം ഉപയോഗിക്കുന്നത് തടയുക. നിങ്ങൾ ഉപയോഗിക്കാൻ ആഗ്രഹിക്കുന്ന സ്ക്രീൻ ലോക്ക് തിരഞ്ഞെടുക്കുക."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"ഉപകരണ പരിരക്ഷാ ഫീച്ചറുകൾ സജീവമാക്കുന്നതിലൂടെ നിങ്ങളുടെ അനുമതിയില്ലാതെ മറ്റുള്ളവർ ഈ ഫോൺ ഉപയോഗിക്കുന്നത് തടയുക. നിങ്ങൾ ഉപയോഗിക്കാൻ ആഗ്രഹിക്കുന്ന സ്ക്രീൻ ലോക്ക് തിരഞ്ഞെടുക്കുക."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"നിങ്ങളുടെ ബാക്കപ്പ് സ്ക്രീൻ ലോക്ക് രീതി തിരഞ്ഞെടുക്കുക"</string>
+    <!-- no translation found for lock_settings_picker_face_message (197106534637556054) -->
+    <skip />
     <string name="setup_lock_settings_options_button_label" msgid="8511153243629402929">"സ്‌ക്രീൻ ലോക്ക് ഓപ്ഷനുകള്‍"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="5058207955455973917">"സ്‌ക്രീൻ ലോക്ക് ഓപ്ഷനുകള്‍"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"സ്ക്രീൻ ലോക്ക്"</string>
@@ -535,6 +561,16 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"ഫിംഗർപ്രിന്റ് + പാസ്‌വേഡ്"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"വിരലടയാളം ഇല്ലാതെ തുടരുക"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"നിങ്ങളുടെ വിരലടയാളം ഉപയോഗിച്ച് ഫോൺ അൺലോക്കുചെയ്യാവുന്നതാണ്. സുരക്ഷയ്ക്കായി, ഈ ഓപ്‌ഷനൊരു ബാക്കപ്പ് സ്ക്രീൻ ലോക്ക് ആവശ്യമാണ്."</string>
+    <!-- no translation found for face_unlock_set_unlock_pattern (8792301636367000123) -->
+    <skip />
+    <!-- no translation found for face_unlock_set_unlock_pin (1196620299595657479) -->
+    <skip />
+    <!-- no translation found for face_unlock_set_unlock_password (223117276773907474) -->
+    <skip />
+    <!-- no translation found for face_unlock_skip_face (6362883392838482791) -->
+    <skip />
+    <!-- no translation found for face_unlock_title (9042382084472444316) -->
+    <skip />
     <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"അഡ്‌മിനോ എൻക്രിപ്‌ഷൻ നയമോ ക്രെഡൻഷ്യൽ സ്റ്റോറേജോ പ്രവർത്തനരഹിതമാക്കി"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"ഒന്നുമില്ല"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"സ്വൈപ്പുചെയ്യുക"</string>
@@ -866,6 +902,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"സ്വമേധയാ"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2.4 GHz ബാൻഡ്"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"5.0 GHz ബാൻഡ്"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"5.0 GHz ബാൻഡ് തിരഞ്ഞെടുത്തു"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2.4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5.0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"വൈഫൈ ഹോട്ട്‌സ്‌പോട്ടിനായി കുറഞ്ഞത് ഒരു ബാൻഡ് എങ്കിലും തിരഞ്ഞെടുക്കുക:"</string>
@@ -1077,7 +1114,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"സ്വാഭാവികം"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"ബൂസ്‌റ്റ് ചെയ്‌‌ത"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"സാച്ചുറേറ്റ് ചെയ്‌‌ത"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"സ്വമേധയാ"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"അനുയോജ്യമായത്"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"കൃത്യമായ നിറങ്ങൾ മാത്രം ഉപയോഗിക്കുക"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"വ്യത്യസ്‌തവും കൃത്യവുമായ നിറങ്ങൾക്കിടയിൽ ക്രമീകരിക്കുക"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"ടാബ്‌ലെറ്റ് തിരിക്കുമ്പോൾ ഒാറിയൻ്റേഷനിലേയ്ക്ക് സ്വയം മാറുക"</string>
@@ -1603,6 +1640,12 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"പാസ്‌വേഡ് സജ്ജീകരിച്ചു"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"പിൻ സജ്ജീകരിച്ചു"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"പാറ്റേൺ സജ്ജീകരിച്ചു"</string>
+    <!-- no translation found for lockpassword_choose_your_password_header_for_face (7876621019688907534) -->
+    <skip />
+    <!-- no translation found for lockpassword_choose_your_pattern_header_for_face (8070525076987585344) -->
+    <skip />
+    <!-- no translation found for lockpassword_choose_your_pin_header_for_face (7304398683609714816) -->
+    <skip />
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"തുടരാൻ നിങ്ങളുടെ ഉപകരണ പാറ്റേൺ ഉപയോഗിക്കുക"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"തുടരാൻ ഉപകരണ പിൻ നൽകുക"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"തുടരാൻ നിങ്ങളുടെ ഉപകരണ പാസ്‌വേഡ് നൽകുക"</string>
@@ -2586,7 +2629,6 @@
     <string name="data_usage_menu_metered" msgid="6235119991372755026">"നെറ്റ്‌വർക്ക് നിയന്ത്രണം"</string>
     <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"ഡാറ്റ സ്വയമേ സമന്വയിപ്പിക്കൂ"</string>
     <string name="data_usage_menu_sim_cards" msgid="6410498422797244073">"സിം കാർഡുകൾ"</string>
-    <string name="data_usage_menu_cellular_networks" msgid="8339835014751511300">"മൊബൈൽ നെറ്റ്‌വർക്കുകൾ"</string>
     <string name="data_usage_cellular_data_summary" msgid="8413357481361268285">"പരിധിയിൽ തൽക്കാലം നിർത്തി"</string>
     <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"ഡാറ്റ സ്വയമേ സമന്വയിപ്പിക്കൂ"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"വ്യക്തിഗത ഡാറ്റ സ്വയമേവ സമന്വയിപ്പിക്കുക"</string>
@@ -2766,12 +2808,9 @@
       <item quantity="one">സർട്ടിഫിക്കറ്റ് പരിശോധിക്കുക</item>
     </plurals>
     <string name="user_settings_title" msgid="3493908927709169019">"ഒന്നിലധികം ഉപയോക്താക്കൾ"</string>
-    <!-- no translation found for user_settings_footer_text (5947601460660791129) -->
-    <skip />
-    <!-- no translation found for user_settings_footer_text (2153761434649733502) -->
-    <skip />
-    <!-- no translation found for user_settings_footer_text (2844602828189838075) -->
-    <skip />
+    <string name="user_settings_footer_text" product="device" msgid="5947601460660791129">"പുതിയ ഉപയോക്താക്കളെ ചേർത്ത് നിങ്ങളുടെ ഉപകരണം പങ്കിടുക. ഇഷ്‌ടാനുസൃത ഹോം സ്‌ക്രീനുകൾ, അക്കൗണ്ടുകൾ, ആപ്പുകൾ, ക്രമീകരണം എന്നിവയ്ക്കായും മറ്റും ഓരോ ഉപയോക്താവിനും നിങ്ങളുടെ ഉപകരണത്തിൽ സ്വകാര്യ സ്‌പെയ്‌സുണ്ട്."</string>
+    <string name="user_settings_footer_text" product="tablet" msgid="2153761434649733502">"പുതിയ ഉപയോക്താക്കളെ ചേർത്ത് നിങ്ങളുടെ ടാബ്‌ലെറ്റ് പങ്കിടുക. ഇഷ്‌ടാനുസൃത ഹോം സ്‌ക്രീനുകൾ, അക്കൗണ്ടുകൾ, ആപ്പുകൾ, ക്രമീകരണം എന്നിവയ്ക്കായും മറ്റും ഓരോ ഉപയോക്താവിനും നിങ്ങളുടെ ടാബ്‌ലെറ്റിൽ സ്വകാര്യ സ്‌പെയ്‌സുണ്ട്."</string>
+    <string name="user_settings_footer_text" product="default" msgid="2844602828189838075">"പുതിയ ഉപയോക്താക്കളെ ചേർത്ത് നിങ്ങളുടെ ഫോൺ പങ്കിടുക. ഇഷ്‌ടാനുസൃത ഹോം സ്‌ക്രീനുകൾ, അക്കൗണ്ടുകൾ, ആപ്പുകൾ, ക്രമീകരണം എന്നിവയ്ക്കായും മറ്റും ഓരോ ഉപയോക്താവിനും നിങ്ങളുടെ ഫോണിൽ സ്വകാര്യ സ്‌പെയ്‌സുണ്ട്."</string>
     <string name="user_list_title" msgid="7937158411137563543">"ഉപയോക്താക്കളും പ്രൊഫൈലുകളും"</string>
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"ഉപയോക്താവിനെയോ പ്രൊഫൈലോ ചേർക്കുക"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"ഉപയോക്താവിനെ ചേര്‍ക്കുക"</string>
@@ -3014,12 +3053,13 @@
     <string name="keywords_sim_status" msgid="1474422416860990564">"നെറ്റ്‌വർക്ക്, മൊബൈൽ നെറ്റ്‌വർക്ക് നില, സേവന നില, സിഗ്നൽ ശക്തി, മൊബൈൽ നെറ്റ്‌വർക്ക് നില, റോമിംഗ്, iccid"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"സീരിയൽ നമ്പർ, ഹാർഡ്‌വെയർ പതിപ്പ്"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"android സുരക്ഷാ പാച്ച് നില, ബേസ്‌ബാൻഡ് പതിപ്പ്, കെർണൽ പതിപ്പ്"</string>
-    <!-- no translation found for keywords_device_feedback (564493721125966719) -->
-    <skip />
+    <string name="keywords_systemui_theme" msgid="9112852512550404882">"ഇരുണ്ട തീം"</string>
+    <string name="keywords_device_feedback" msgid="564493721125966719">"ബഗ്"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"പാതിമയക്ക ഡിസ്‌പ്ലേ, ലോക്ക് സ്‌ക്രീൻ ഡിസ്‌പ്ലേ"</string>
-    <string name="keywords_fingerprint_settings" msgid="239222512315619538">"ഫിംഗർപ്രിന്റ്"</string>
-    <!-- no translation found for keywords_display_auto_brightness (4130320471533951796) -->
+    <!-- no translation found for keywords_face_settings (7505388678116799329) -->
     <skip />
+    <string name="keywords_fingerprint_settings" msgid="239222512315619538">"ഫിംഗർപ്രിന്റ്"</string>
+    <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"സ്‌ക്രീൻ മങ്ങിക്കൽ, ടച്ച്‌സ്‌ക്രീൻ, ബാറ്ററി, സ്മാർട്ട് തെളിച്ചം, ചലനാത്മക തെളിച്ചം"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"തിരിക്കുക, ഫ്ലിപ്പ്, തിരിക്കൽ, പോർ‌ട്രെയ്റ്റ്, ലാൻഡ്‌സ്കേപ്പ്, ഓറിയന്റേഷൻ, ലംബം, സമാന്തരം"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"അപ്‌ഗ്രേഡ്, Android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"dnd, ഷെഡ്യൂൾ, അറിയിപ്പുകൾ, തടയുക, നിശബ്‌ദത, വൈബ്രേറ്റ്, സ്ലീപ്പ്, ജോലി, ഫോക്കസ്, ശബ്‌ദം, മ്യൂട്ട്, ദിവസം, പ്രവർത്തി ദിവസം, വാരാന്ത്യം, പ്രവർത്തിദിന രാവ്, ഇവന്റ്"</string>
@@ -3171,7 +3211,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"മ്യൂട്ട് ചെയ്തു, എന്നാൽ <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> എന്നിവ അനുവദിക്കുന്നു"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"മ്യൂട്ട് ചെയ്തു, എന്നാൽ <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>, <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g> എന്നിവ അനുവദിക്കുന്നു"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"സന്ദേശങ്ങളും റിമൈൻഡറുകളും ഇവന്റുകളും"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"ശല്യപ്പെടുത്തരുത് ഓണായിരിക്കുമ്പോൾ, നിങ്ങൾ മുകളിൽ അനുവദിച്ചിട്ടുള്ള ഇനങ്ങൾ ഒഴികെയുള്ള, സന്ദേശങ്ങളും റിമൈൻഡറുകളും ഇവന്റുകളും മ്യൂട്ട് ചെയ്യപ്പെടും. നിങ്ങളെ വിളിക്കുന്നതിന് സുഹൃത്തുക്കളെയോ കുടുംബാംഗങ്ങളെയോ മറ്റ് കോൺടാക്‌റ്റുകളെയോ അനുവദിക്കാൻ നിങ്ങൾക്ക് ക്രമീകരണം ക്രമപ്പെടുത്താവുന്നതാണ്."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"\'ശല്യപ്പെടുത്തരുത്\' ഓണായിരിക്കുമ്പോൾ, നിങ്ങൾ മുകളിൽ അനുവദിച്ചിട്ടുള്ള ഇനങ്ങൾ ഒഴികെയുള്ള, സന്ദേശങ്ങളും റിമൈൻഡറും ഇവന്റുകളും മ്യൂട്ട് ചെയ്യപ്പെടും. നിങ്ങളെ വിളിക്കുന്നതിന് സുഹൃത്തുക്കളെയോ കുടുംബാംഗങ്ങളെയോ മറ്റ് കോൺടാക്‌റ്റുകളെയോ അനുവദിക്കാൻ നിങ്ങൾക്ക് ക്രമീകരണം ക്രമപ്പെടുത്താവുന്നതാണ്."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"പൂർത്തിയാക്കി"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"ക്രമീകരണം"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"അറിയിപ്പുകളിൽ നിന്ന് വിഷ്വലുകളോ അല്ലെങ്കിൽ ശബ്‌ദമോ ഇല്ല"</string>
@@ -3350,11 +3390,16 @@
     <string name="zen_mode_calls_title" msgid="623395033931747661">"കോളുകൾ അനുവദിക്കുക"</string>
     <string name="zen_mode_calls_footer" msgid="3618700268458237781">"ശല്യപ്പെടുത്തരുത് ഓണായിരിക്കുമ്പോൾ, ഇൻകമിംഗ് കോളുകൾ ബ്ലോക്ക് ചെയ്യപ്പെടുന്നു. നിങ്ങളെ വിളിക്കുന്നതിന് സുഹൃത്തുക്കളെയോ കുടുംബാംഗങ്ങളെയോ മറ്റ് കോൺടാക്‌റ്റുകളെയോ അനുവദിക്കാൻ നിങ്ങൾക്ക് ക്രമീകരണം ക്രമപ്പെടുത്താവുന്നതാണ്."</string>
     <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"നക്ഷത്രചിഹ്നമിട്ട കോൺടാക്‌റ്റുകൾ"</string>
-    <!-- no translation found for zen_mode_starred_contacts_summary_additional_contacts (500105380255018671) -->
+    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="500105380255018671">
+      <item quantity="other">മറ്റ് <xliff:g id="NUM_PEOPLE">%d</xliff:g> പേർ</item>
+      <item quantity="one">മറ്റൊരാൾ</item>
+    </plurals>
     <string name="zen_mode_messages" msgid="5886440273537510894">"സന്ദേശങ്ങള്‍"</string>
     <string name="zen_mode_messages_title" msgid="7729380010396411129">"സന്ദേശങ്ങൾ അനുവദിക്കുക"</string>
     <string name="zen_mode_all_messages" msgid="8257021584561639816">"സന്ദേശങ്ങള്‍‌"</string>
+    <string name="zen_mode_all_messages_list" msgid="4223560721230967061">"സന്ദേശങ്ങള്‍"</string>
     <string name="zen_mode_selected_messages" msgid="1047355526202106114">"ചില സന്ദേശങ്ങൾ"</string>
+    <string name="zen_mode_selected_messages_list" msgid="5309288435815759102">"ചില സന്ദേശങ്ങൾ"</string>
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"ആരിൽ നിന്നും"</string>
     <string name="zen_mode_from_contacts" msgid="2232335406106711637">"കോൺടാക്റ്റുകളിൽ നിന്ന് മാത്രം"</string>
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"നക്ഷത്രമിട്ട കോൺടാക്‌റ്റിൽ നിന്നുമാത്രം"</string>
@@ -3363,16 +3408,22 @@
     <string name="zen_calls_summary_repeat_only" msgid="7105261473107715445">"ആവർത്തിച്ച് വിളിക്കുന്നവരിൽ നിന്ന് മാത്രം"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"ആരിൽ നിന്നും വേണ്ട"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"അലാറങ്ങൾ"</string>
+    <string name="zen_mode_alarms_list" msgid="1090332840207025714">"അലാറങ്ങൾ"</string>
     <string name="zen_mode_media" msgid="8808264142134422380">"മീഡിയ"</string>
+    <string name="zen_mode_media_list" msgid="5483540766397328038">"മീഡിയ"</string>
     <string name="zen_mode_system" msgid="2541380718411593581">"സ്‌പർശന ശബ്‌ദങ്ങൾ"</string>
+    <string name="zen_mode_system_list" msgid="6996104733185177115">"സ്‌പർശന ശബ്‌ദങ്ങൾ"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"റിമൈൻഡറുകൾ"</string>
+    <string name="zen_mode_reminders_list" msgid="2853975802240340190">"റിമൈൻഡർ"</string>
     <string name="zen_mode_reminders_title" msgid="2345044406347406902">"റിമൈൻഡറുകൾ അനുവദിക്കുക"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"ഇവന്റുകൾ"</string>
+    <string name="zen_mode_events_list" msgid="5571368229052715098">"ഇവന്റുകൾ"</string>
     <string name="zen_mode_events_title" msgid="5597241655883329085">"ഇവന്റുകൾ അനുവദിക്കുക"</string>
     <string name="zen_mode_all_callers" msgid="2378065871253871057">"ആര്‍ക്കും"</string>
     <string name="zen_mode_contacts_callers" msgid="5569804103920394175">"കോണ്‍‌ടാക്റ്റുകള്‍"</string>
     <string name="zen_mode_starred_callers" msgid="1023167821338514140">"നക്ഷത്രചിഹ്നമിട്ട കോൺടാക്‌റ്റുകൾ"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"ആവർത്തിച്ച് വിളിക്കുന്നവർ"</string>
+    <string name="zen_mode_repeat_callers_list" msgid="2529895519653237330">"ആവർത്തിച്ച് വിളിക്കുന്നവർ"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8553876328249671783">"ആവർത്തിച്ച് വിളിക്കുന്നവരെ അനുവദിക്കുക"</string>
     <string name="zen_mode_calls_summary_one" msgid="3972333792749874863">"<xliff:g id="CALLER_TYPE">%1$s</xliff:g> മുതൽ"</string>
     <string name="zen_mode_calls_summary_two" msgid="6592821501321201329">"<xliff:g id="CALLER_TYPE">%1$s</xliff:g>, <xliff:g id="CALLERT_TPYE">%2$s</xliff:g> എന്നീ വ്യക്തികളിൽ നിന്ന് മാത്രം"</string>
@@ -3424,6 +3475,12 @@
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"ഉപകരണം അൺലോക്കുചെയ്യാൻ വിരലടയാളം ഉപയോഗിക്കുന്നതിന് പുറമെ, ഉപകരണം ആരംഭിക്കുന്നതിന് ‌മുമ്പ്, പിൻ ആവശ്യപ്പെടുന്ന തരത്തിൽ സജ്ജീകരിച്ചുകൊണ്ട് നിങ്ങൾക്ക് ഉപകരണത്തിന് അധിക പരിരക്ഷ നൽകാവുന്നതാണ്. ഉപകരണം ആരംഭിക്കുന്നതുവരെ, അലാറങ്ങൾ ഉൾപ്പെടെ കോളുകളോ സന്ദേശങ്ങളോ അറിയിപ്പുകളോ ഇതിന് സ്വീകരിക്കാനാകില്ല.\n\nനഷ്‌‌ടപ്പെട്ടതോ മോഷ്‌ടിക്കപ്പെടുകയോ ചെയ്‌ത ഉപകരണങ്ങളിലെ വിവരങ്ങൾ പരിരക്ഷിക്കാൻ ഇത് സഹായിക്കുന്നു. നിങ്ങളുടെ ഉപകരണം ആരംഭിക്കുന്നതിന് പിൻ ആവശ്യമാക്കണോ?"</string>
     <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"ഉപകരണം അൺലോക്കുചെയ്യാൻ വിരലടയാളം ഉപയോഗിക്കുന്നതിന് പുറമെ, ഉപകരണം ആരംഭിക്കുന്നതിന് ‌മുമ്പ്, പാറ്റേൺ ആവശ്യപ്പെടുന്ന തരത്തിൽ സജ്ജീകരിച്ചുകൊണ്ട് നിങ്ങൾക്ക് ഉപകരണത്തിന് അധിക പരിരക്ഷ നൽകാവുന്നതാണ്. ഉപകരണം ആരംഭിക്കുന്നതുവരെ, അലാറങ്ങൾ ഉൾപ്പെടെ കോളുകളോ സന്ദേശങ്ങളോ അറിയിപ്പുകളോ ഇതിന് സ്വീകരിക്കാനാകില്ല.\n\nനഷ്‌‌ടപ്പെടുകയോ മോഷ്‌ടിക്കപ്പെടുകയോ ചെയ്‌ത ഉപകരണങ്ങളിലെ വിവരങ്ങൾ പരിരക്ഷിക്കാൻ ഇത് സഹായിക്കുന്നു. നിങ്ങളുടെ ഉപകരണം ആരംഭിക്കുന്നതിന് പാറ്റേൺ ആവശ്യമാക്കണോ?"</string>
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"ഉപകരണം അൺലോക്കുചെയ്യാൻ ഫിംഗർപ്രിന്റ് ഉപയോഗിക്കുന്നതിന് പുറമെ, ഉപകരണം ആരംഭിക്കുന്നതിന് ‌മുമ്പ്, പാറ്റേൺ ആവശ്യപ്പെടുന്ന തരത്തിൽ സജ്ജീകരിച്ചുകൊണ്ട് നിങ്ങൾക്ക് ഉപകരണത്തിന് അധിക പരിരക്ഷ നൽകാവുന്നതാണ്. ഉപകരണം ആരംഭിക്കുന്നതുവരെ, അലാറങ്ങൾ ഉൾപ്പെടെ കോളുകളോ സന്ദേശങ്ങളോ അറിയിപ്പുകളോ സ്വീകരിക്കാനാകില്ല.\n\nനഷ്‌‌ടപ്പെടുകയോ മോഷ്‌ടിക്കപ്പെടുകയോ ചെയ്‌ത ഉപകരണങ്ങളിലെ വിവരങ്ങൾ പരിരക്ഷിക്കാൻ ഇത് സഹായിക്കുന്നു. നിങ്ങളുടെ ഉപകരണം ആരംഭിക്കുന്നതിന് പാറ്റേൺ ആവശ്യമാക്കണോ?"</string>
+    <!-- no translation found for encryption_interstitial_message_pin_for_face (2017438765366716760) -->
+    <skip />
+    <!-- no translation found for encryption_interstitial_message_pattern_for_face (3551827507967661552) -->
+    <skip />
+    <!-- no translation found for encryption_interstitial_message_password_for_face (3452793542112093614) -->
+    <skip />
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"അതെ"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"ഇല്ല"</string>
     <string name="restricted_true_label" msgid="4761453839409220473">"നിയന്ത്രിതം"</string>
@@ -3454,7 +3511,7 @@
     <string name="change_storage" msgid="600475265207060436">"സംഭരണം മാറ്റുക"</string>
     <string name="notifications_label" msgid="2872668710589600731">"അറിയിപ്പുകൾ"</string>
     <string name="notifications_enabled" msgid="6983396130566021385">"ഓണാണ്"</string>
-    <string name="notifications_enabled_with_info" msgid="2446033696770133334">"<xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%1$s</xliff:g> / ഓണാക്കുക"</string>
+    <string name="notifications_enabled_with_info" msgid="5669544704839269901">"<xliff:g id="NOTIFICATIONS_SENT">%1$s</xliff:g> / <xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%2$s</xliff:g>"</string>
     <string name="notifications_disabled" msgid="1262114548434938079">"ഓഫ്"</string>
     <string name="notifications_partly_blocked" msgid="592071133950126656">"<xliff:g id="COUNT_1">%2$d</xliff:g>-ൽ <xliff:g id="COUNT_0">%1$d</xliff:g> വിഭാഗങ്ങൾ ഓഫാക്കി"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"നിശബ്ദമാക്കി"</string>
@@ -3781,7 +3838,6 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"കൂടുതൽ തണുത്ത ഡിസ്പ്ലേ വർണ്ണങ്ങൾ ഉപയോഗിക്കുക"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"വർണ്ണ മാറ്റം ബാധകമാക്കാൻ, സ്ക്രീൻ ഓഫാക്കുക"</string>
     <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"ക്യാമറ ലേസർ സെൻസർ"</string>
-    <string name="logical_camera_default_switch" msgid="3310039627275112685">"ഡിഫോൾട്ടായി ലോജിക്കൽ ക്യാമറ"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"സ്വമേധയായുള്ള സിസ്റ്റം അപ്ഡേറ്റുകൾ"</string>
     <string name="ota_disable_automatic_update_summary" msgid="940729694354373087">"ഉപകരണം റീസ്‌റ്റാർട്ട് ചെയ്യുമ്പോൾ അപ്‌ഡേറ്റുകൾ ബാധകമാക്കുക"</string>
     <string name="usage" msgid="2977875522080448986">"ഉപയോഗം"</string>
@@ -3794,8 +3850,6 @@
     <string name="cell_data_template" msgid="405684854174361041">"<xliff:g id="AMOUNT">^1</xliff:g> മൊബൈൽ ഡാറ്റ"</string>
     <string name="wifi_data_template" msgid="6265570748799357386">"<xliff:g id="AMOUNT">^1</xliff:g> വൈഫൈ ഡാറ്റ"</string>
     <string name="ethernet_data_template" msgid="5782476509881033590">"<xliff:g id="AMOUNT">^1</xliff:g> ഇതർനെറ്റ് ഡാറ്റ"</string>
-    <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> ഡാറ്റാ മുന്നറിയിപ്പ്"</string>
-    <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> ഡാറ്റാ മുന്നറിയിപ്പ് / <xliff:g id="ID_2">%2$s</xliff:g> ഡാറ്റാ പരിധി"</string>
     <string name="billing_cycle" msgid="6614597736285325497">"ഡാറ്റ മുന്നറിയിപ്പും പരിധിയും"</string>
     <string name="app_usage_cycle" msgid="8877223251648092131">"ആപ്പ് ഡാറ്റ ഉപയോഗ സൈക്കിൾ"</string>
     <string name="cell_data_warning" msgid="1985956818884847057">"<xliff:g id="ID_1">^1</xliff:g> ഡാറ്റാ മുന്നറിയിപ്പ്"</string>

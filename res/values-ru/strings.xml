@@ -129,10 +129,11 @@
     <string name="bluetooth_device" msgid="5291950341750186887">"Bluetooth-устройство без названия"</string>
     <string name="progress_scanning" msgid="192587958424295789">"Поиск"</string>
     <string name="bluetooth_no_devices_found" msgid="1085232930277181436">"Устройства Bluetooth не найдены."</string>
-    <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Запрос сопряжения Bluetooth"</string>
-    <string name="bluetooth_notif_title" msgid="2485175521845371514">"Запрос на сопряжение"</string>
+    <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Запрос подключения Bluetooth"</string>
+    <string name="bluetooth_notif_title" msgid="2485175521845371514">"Запрос подключения"</string>
     <string name="bluetooth_notif_message" msgid="5057417127600942904">"Нажмите, чтобы установить соединение с устройством \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"."</string>
     <string name="bluetooth_show_received_files" msgid="3144149432555230410">"Полученные файлы"</string>
+    <string name="bluetooth_show_files_received_via_bluetooth" msgid="5445105773989432594">"Файлы, полученные по Bluetooth"</string>
     <string name="device_picker" msgid="4978696506172252813">"Выбрать устройство Bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="3387222809404177525">"Приложению \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" требуется включить Bluetooth"</string>
     <string name="bluetooth_ask_disablement" msgid="5890386255790160573">"Приложению \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" требуется отключить Bluetooth"</string>
@@ -189,8 +190,7 @@
     <string name="connected_device_connections_title" msgid="5988939345181466770">"Настройки подключения"</string>
     <string name="connected_device_previously_connected_title" msgid="491765792822244604">"Ранее подключенные устройства"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="6196066429488377795">"Ранее подключенные устройства"</string>
-    <!-- no translation found for connected_device_bluetooth_turned_on_toast (5683648191381637533) -->
-    <skip />
+    <string name="connected_device_bluetooth_turned_on_toast" msgid="5683648191381637533">"Модуль Bluetooth включен"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Дата и время"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Выбрать часовой пояс"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -308,7 +308,6 @@
     <string name="settings_label" msgid="1626402585530130914">"Настройки"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Настройки"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Ярлык настроек"</string>
-    <string name="activity_list_empty" msgid="6428823323471264836">"Подходящих действий не найдено."</string>
     <string name="airplane_mode" msgid="8837269988154128601">"Режим полета"</string>
     <string name="radio_controls_title" msgid="3447085191369779032">"Ещё"</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"Беспроводные сети"</string>
@@ -397,6 +396,18 @@
     <string name="security_status_title" msgid="5848766673665944640">"Статус защиты"</string>
     <string name="security_dashboard_summary" msgid="6757421634477554939">"Блокировка экрана, цифровой отпечаток"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Блокировка экрана"</string>
+    <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Сканирование завершено"</string>
+    <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Нажмите, чтобы настроить распознавание лица"</string>
+    <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Распознавание лица"</string>
+    <string name="security_settings_face_enroll_introduction_cancel" msgid="4277182322482408514">"Отмена"</string>
+    <string name="security_settings_face_enroll_introduction_title" msgid="2694505011712885439">"Распознавание лица"</string>
+    <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="8180330567034286589">"Разблокируйте устройство при помощи распознавания лица"</string>
+    <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Используйте распознавание лица для разблокировки телефона, подтверждения покупок и входа в приложения."</string>
+    <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6300341727101929207">"Используйте"</string>
+    <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Используйте распознавание лица для разблокировки телефона, подтверждения покупок и входа в приложения."</string>
+    <string name="face_add_max" msgid="2342250989212694454">"Максимальное количество отпечатков пальца, которые можно добавить: <xliff:g id="COUNT">%d</xliff:g>"</string>
+    <string name="face_intro_error_max" msgid="160022811747660581">"Вы уже добавили максимальное количество лиц."</string>
+    <string name="face_intro_error_unknown" msgid="6367721696446677261">"Добавлено максимальное количество лиц."</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Отпечатки пальцев"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Управление отпечатками"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Для чего использовать"</string>
@@ -510,11 +521,12 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Защитите планшет"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Защитите устройство"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Защитите телефон"</string>
-    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5008939545428518367">"Для более надежной защиты настройте дополнительный способ блокировки экрана."</string>
+    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1507307757032207572">"Для более надежной защиты настройте дополнительный способ блокировки экрана."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Чтобы никто не мог пользоваться этим устройством без вашего разрешения, активируйте его защиту. Выберите подходящий для вас способ блокировки экрана."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Чтобы никто не мог пользоваться этим устройством без вашего разрешения, активируйте его защиту. Выберите подходящий для вас способ блокировки экрана."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Чтобы никто не мог пользоваться этим устройством без вашего разрешения, активируйте его защиту. Выберите подходящий для вас способ блокировки экрана."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Выберите дополнительный способ блокировки экрана"</string>
+    <string name="lock_settings_picker_face_message" msgid="197106534637556054">"Выберите дополнительный способ блокировки экрана"</string>
     <string name="setup_lock_settings_options_button_label" msgid="8511153243629402929">"Параметры блокировки экрана"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="5058207955455973917">"Параметры блокировки экрана"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Блокировка экрана"</string>
@@ -541,6 +553,11 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"Отпечатки пальцев и пароль"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"Продолжить без настройки отпечатка"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"Вы можете настроить разблокировку телефона с помощью отпечатка пальца. В целях безопасности вам нужно будет также установить дополнительный способ разблокировки."</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="8792301636367000123">"Распознавание лица + графический ключ"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="1196620299595657479">"Распознавание лица + PIN-код"</string>
+    <string name="face_unlock_set_unlock_password" msgid="223117276773907474">"Распознавание лица + пароль"</string>
+    <string name="face_unlock_skip_face" msgid="6362883392838482791">"Продолжить без распознавания лица"</string>
+    <string name="face_unlock_title" msgid="9042382084472444316">"Вы можете настроить разблокировку телефона с помощью распознавания лица. В целях безопасности вам нужно будет также установить дополнительный способ блокировки."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"Запрещено администратором или иными правилами"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Нет"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"Провести по экрану"</string>
@@ -702,7 +719,7 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Настройка подключений, видимости и имени устройства"</string>
     <string name="bluetooth_pairing_request" msgid="2605098826364694673">"Добавить <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
-    <string name="bluetooth_pairing_key_msg" msgid="418124944140102021">"Код сопряжения Bluetooth"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="418124944140102021">"Код подключения Bluetooth"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"Введите код подключения и нажмите клавишу ввода"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"PIN-код содержит буквы или символы"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Обычно 0000 или 1234"</string>
@@ -733,9 +750,9 @@
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"Нет доступных устройств"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Подключить"</string>
     <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"Отключить"</string>
-    <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"Выполнить сопряжение и подключить"</string>
-    <string name="bluetooth_device_context_unpair" msgid="662992425948536144">"Отменить сопряжение"</string>
-    <string name="bluetooth_device_context_disconnect_unpair" msgid="7644014238070043798">"Отключить и отменить сопряжение"</string>
+    <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"Установить соединение и подключить"</string>
+    <string name="bluetooth_device_context_unpair" msgid="662992425948536144">"Отключить"</string>
+    <string name="bluetooth_device_context_disconnect_unpair" msgid="7644014238070043798">"Отключить и отменить соединение"</string>
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Параметры..."</string>
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Дополнительно"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Расш. настройки Bluetooth"</string>
@@ -896,6 +913,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"Авто"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2,4 ГГц"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"5,0 ГГц"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"5,0 ГГц (рекомендуется)"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2,4 ГГц"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5,0 ГГц"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Выберите хотя бы один диапазон частот для точек доступа Wi-Fi."</string>
@@ -1109,7 +1127,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"Натуральные"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"Яркие"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"Насыщенные"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"Автоматически"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"Адаптивная регулировка"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"Только натуральные цвета"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"Среднее между насыщенными и натуральными цветами"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Автоматически изменять ориентацию экрана при повороте планшетного ПК"</string>
@@ -1637,6 +1655,9 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Пароль был установлен"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PIN-код был установлен"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Ключ был установлен"</string>
+    <string name="lockpassword_choose_your_password_header_for_face" msgid="7876621019688907534">"Чтобы включить распознавание лица, задайте пароль"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="8070525076987585344">"Чтобы включить распознавание лица, задайте графический ключ"</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" msgid="7304398683609714816">"Чтобы включить распознавание лица, задайте PIN-код"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"Чтобы продолжить, введите графический ключ устройства"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"Чтобы продолжить, введите PIN-код устройства"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"Чтобы продолжить, введите пароль устройства"</string>
@@ -2017,7 +2038,7 @@
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Нет подключенных слуховых аппаратов"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="6371077608778830020">"Добавить слуховой аппарат"</string>
     <string name="accessibility_hearingaid_pair_instructions_first_message" msgid="3912093691643131154">"Чтобы подключить слуховой аппарат, коснитесь его названия на следующем экране."</string>
-    <string name="accessibility_hearingaid_pair_instructions_second_message" msgid="5596683393607650243">"Убедитесь, что ваш слуховой аппарат находится в режиме сопряжения."</string>
+    <string name="accessibility_hearingaid_pair_instructions_second_message" msgid="5596683393607650243">"Убедитесь, что ваш слуховой аппарат находится в режиме установления соединения."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="1246354030808703545">"Слуховой аппарат \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" активен"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="3160782397139295486">
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> сохраненный слуховой аппарат</item>
@@ -2652,7 +2673,6 @@
     <string name="data_usage_menu_metered" msgid="6235119991372755026">"Ограничения трафика"</string>
     <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"Автосинхронизация данных"</string>
     <string name="data_usage_menu_sim_cards" msgid="6410498422797244073">"SIM-карты"</string>
-    <string name="data_usage_menu_cellular_networks" msgid="8339835014751511300">"Мобильные сети"</string>
     <string name="data_usage_cellular_data_summary" msgid="8413357481361268285">"Приостановлено (лимит)"</string>
     <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"Автосинхронизация данных"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"Автосинхронизация личных данных"</string>
@@ -2839,13 +2859,10 @@
       <item quantity="many">Проверить сертификаты</item>
       <item quantity="other">Проверить сертификаты</item>
     </plurals>
-    <string name="user_settings_title" msgid="3493908927709169019">"Несколько пользователей"</string>
-    <!-- no translation found for user_settings_footer_text (5947601460660791129) -->
-    <skip />
-    <!-- no translation found for user_settings_footer_text (2153761434649733502) -->
-    <skip />
-    <!-- no translation found for user_settings_footer_text (2844602828189838075) -->
-    <skip />
+    <string name="user_settings_title" msgid="3493908927709169019">"Пользователи"</string>
+    <string name="user_settings_footer_text" product="device" msgid="5947601460660791129">"Создайте профили для тех, кому вы хотите предоставить доступ к устройству. Каждый пользователь сможет задавать собственные настройки (например, менять главные экраны, добавлять аккаунты и приложения), которые будут действовать только в его профиле."</string>
+    <string name="user_settings_footer_text" product="tablet" msgid="2153761434649733502">"Создайте профили для тех, кому вы хотите предоставить доступ к планшету. Каждый пользователь сможет задавать собственные настройки (например, менять главные экраны, добавлять аккаунты и приложения), которые будут действовать только в его профиле."</string>
+    <string name="user_settings_footer_text" product="default" msgid="2844602828189838075">"Создайте профили для тех, кому вы хотите предоставить доступ к телефону. Каждый пользователь сможет задавать собственные настройки (например, менять главные экраны, добавлять аккаунты и приложения), которые будут действовать только в его профиле."</string>
     <string name="user_list_title" msgid="7937158411137563543">"Пользователи и профили"</string>
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"Добавить пользователя или профиль"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Добавить пользователя"</string>
@@ -3090,12 +3107,12 @@
     <string name="keywords_sim_status" msgid="1474422416860990564">"сеть, подключение к мобильной сети, доступность мобильной сети, уровень сигнала, тип мобильной сети, роуминг, iccid"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"серийный номер, версия аппаратного обеспечения"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"обновление системы безопасности, прошивка модуля связи, версия ядра"</string>
-    <!-- no translation found for keywords_device_feedback (564493721125966719) -->
-    <skip />
+    <string name="keywords_systemui_theme" msgid="9112852512550404882">"темная тема"</string>
+    <string name="keywords_device_feedback" msgid="564493721125966719">"ошибка"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Автоматическое включение экрана, заблокированный экран"</string>
+    <string name="keywords_face_settings" msgid="7505388678116799329">"лицо"</string>
     <string name="keywords_fingerprint_settings" msgid="239222512315619538">"отпечаток пальца"</string>
-    <!-- no translation found for keywords_display_auto_brightness (4130320471533951796) -->
-    <skip />
+    <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"снижение яркости, сенсорный экран, батарея, умная яркость, динамическая яркость"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"повернуть, перевернуть, поворот, вертикальная, горизонтальная, ориентация, портрет, пейзаж"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"обновить, Android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"не беспокоить, расписание, уведомления, заблокировать, беззвучный режим, вибрировать, сон, работа, концентрация, звук, отключить звук, день, рабочий день, выходной день, вечер рабочего дня, мероприятие"</string>
@@ -3253,7 +3270,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"Без звука, кроме: <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> и <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"Без звука, кроме: <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> и <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"Сообщения, напоминания и уведомления о мероприятиях"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"В режиме \"Не беспокоить\" сообщения, напоминания и уведомления о мероприятиях будут приходить без звука, за исключением тех, для которых вы задали разрешения выше. Вы можете изменить настройки, чтобы сообщения от друзей, членов семьи и других контактов приходили со звуком."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"В режиме \"Не беспокоить\" сообщения, напоминания и уведомления о мероприятиях будут приходить без звука (за исключением тех, для которых вы задали разрешения выше). Вы можете изменить настройки, чтобы сообщения от членов семьи, друзей и других контактов приходили со звуком."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"ОК"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Настройки"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"Полностью отключить уведомления"</string>
@@ -3440,11 +3457,18 @@
     <string name="zen_mode_calls_title" msgid="623395033931747661">"Звонки"</string>
     <string name="zen_mode_calls_footer" msgid="3618700268458237781">"В режиме \"Не беспокоить\" входящие вызовы заблокированы. Вы можете изменить настройки, чтобы принимать вызовы от друзей, членов семьи и других контактов."</string>
     <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"Помеченные контакты"</string>
-    <!-- no translation found for zen_mode_starred_contacts_summary_additional_contacts (500105380255018671) -->
+    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="500105380255018671">
+      <item quantity="one">ещё <xliff:g id="NUM_PEOPLE">%d</xliff:g> контакт</item>
+      <item quantity="few">ещё <xliff:g id="NUM_PEOPLE">%d</xliff:g> контакта</item>
+      <item quantity="many">ещё <xliff:g id="NUM_PEOPLE">%d</xliff:g> контактов</item>
+      <item quantity="other">ещё <xliff:g id="NUM_PEOPLE">%d</xliff:g> контакта</item>
+    </plurals>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Сообщения"</string>
     <string name="zen_mode_messages_title" msgid="7729380010396411129">"Сообщения"</string>
     <string name="zen_mode_all_messages" msgid="8257021584561639816">"Сообщения"</string>
+    <string name="zen_mode_all_messages_list" msgid="4223560721230967061">"сообщения"</string>
     <string name="zen_mode_selected_messages" msgid="1047355526202106114">"Некоторые сообщения"</string>
+    <string name="zen_mode_selected_messages_list" msgid="5309288435815759102">"некоторые сообщения"</string>
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"От кого угодно"</string>
     <string name="zen_mode_from_contacts" msgid="2232335406106711637">"Только от контактов"</string>
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Только от помеченных контактов"</string>
@@ -3453,16 +3477,22 @@
     <string name="zen_calls_summary_repeat_only" msgid="7105261473107715445">"Вызовы только от людей, звонящих повторно"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Ни от кого"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Будильник"</string>
+    <string name="zen_mode_alarms_list" msgid="1090332840207025714">"будильники"</string>
     <string name="zen_mode_media" msgid="8808264142134422380">"Мультимедиа"</string>
+    <string name="zen_mode_media_list" msgid="5483540766397328038">"мультимедиа"</string>
     <string name="zen_mode_system" msgid="2541380718411593581">"Звук нажатия на экран"</string>
+    <string name="zen_mode_system_list" msgid="6996104733185177115">"звук нажатия на экран"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Напоминания"</string>
+    <string name="zen_mode_reminders_list" msgid="2853975802240340190">"напоминания"</string>
     <string name="zen_mode_reminders_title" msgid="2345044406347406902">"Напоминания"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Мероприятия"</string>
+    <string name="zen_mode_events_list" msgid="5571368229052715098">"мероприятия"</string>
     <string name="zen_mode_events_title" msgid="5597241655883329085">"Мероприятия"</string>
     <string name="zen_mode_all_callers" msgid="2378065871253871057">"Все"</string>
     <string name="zen_mode_contacts_callers" msgid="5569804103920394175">"контакты"</string>
     <string name="zen_mode_starred_callers" msgid="1023167821338514140">"помеченные контакты"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"Повторные вызовы"</string>
+    <string name="zen_mode_repeat_callers_list" msgid="2529895519653237330">"повторные вызовы"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8553876328249671783">"Повторные вызовы"</string>
     <string name="zen_mode_calls_summary_one" msgid="3972333792749874863">"От кого: <xliff:g id="CALLER_TYPE">%1$s</xliff:g>"</string>
     <string name="zen_mode_calls_summary_two" msgid="6592821501321201329">"Вызовы только от этих пользователей: <xliff:g id="CALLER_TYPE">%1$s</xliff:g> и <xliff:g id="CALLERT_TPYE">%2$s</xliff:g>"</string>
@@ -3518,6 +3548,9 @@
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"Вы также можете задать PIN-код для разблокировки, чтобы обеспечить дополнительную защиту данных, например, в случае потери устройства. Пока телефон заблокирован, звонки, сообщения и уведомления (в том числе будильники) будут недоступны.\n\nЗадать PIN-код?"</string>
     <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"В дополнение к разблокировке с помощью отпечатка пальца вы также можете включить запрос графического ключа при запуске устройства. До запуска звонки, сообщения и уведомления (в том числе будильники) будут недоступны.\n\nЭто поможет защитить устройство в случае утери или кражи. Запрашивать графический ключ при запуске?"</string>
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Вы также можете задать пароль для запуска устройства. Это поможет ещё надежнее защитить ваши данные, если вы, например, потеряете телефон. Пока устройство заблокировано, звонки, сообщения и уведомления (в том числе будильники) будут недоступны.\n\nЗадать пароль?"</string>
+    <string name="encryption_interstitial_message_pin_for_face" msgid="2017438765366716760">"На случай потери или кражи устройство можно дополнительно защитить PIN-кодом. Пока оно не запущено, звонки, сообщения и уведомления (в том числе будильники) будут недоступны.\n\nЗапрашивать PIN-код при запуске?"</string>
+    <string name="encryption_interstitial_message_pattern_for_face" msgid="3551827507967661552">"На случай потери или кражи устройство можно дополнительно защитить графическим ключом. Пока оно не запущено, звонки, сообщения и уведомления (в том числе будильники) будут недоступны.\n\nЗапрашивать графический ключ при запуске?"</string>
+    <string name="encryption_interstitial_message_password_for_face" msgid="3452793542112093614">"На случай потери или кражи устройство можно дополнительно защитить паролем. Пока оно не запущено, звонки, сообщения и уведомления (в том числе будильники) будут недоступны.\n\nЗапрашивать пароль при запуске?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Да"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Нет"</string>
     <string name="restricted_true_label" msgid="4761453839409220473">"Ограничено"</string>
@@ -3548,7 +3581,7 @@
     <string name="change_storage" msgid="600475265207060436">"Что использовать"</string>
     <string name="notifications_label" msgid="2872668710589600731">"Уведомления"</string>
     <string name="notifications_enabled" msgid="6983396130566021385">"Включить"</string>
-    <string name="notifications_enabled_with_info" msgid="2446033696770133334">"Включено / <xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%1$s</xliff:g>"</string>
+    <string name="notifications_enabled_with_info" msgid="5669544704839269901">"<xliff:g id="NOTIFICATIONS_SENT">%1$s</xliff:g> / <xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%2$s</xliff:g>"</string>
     <string name="notifications_disabled" msgid="1262114548434938079">"Отключено"</string>
     <string name="notifications_partly_blocked" msgid="592071133950126656">"Отключено категорий: <xliff:g id="COUNT_0">%1$d</xliff:g> из <xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"Уведомления отключены"</string>
@@ -3701,7 +3734,7 @@
     <string name="usb_default_info" msgid="8864535445796200695">"Эти настройки будут применяться, когда ваш телефон разблокирован и к нему подключено другое устройство. Устанавливайте соединения только с надежными устройствами."</string>
     <string name="usb_pref" msgid="1400617804525116158">"USB"</string>
     <string name="usb_preference" msgid="7394265019817945275">"Настройки USB"</string>
-    <string name="usb_control_title" msgid="4404322722995917160">"Ведущее устройство USB"</string>
+    <string name="usb_control_title" msgid="4404322722995917160">"Устройство, управляющее USB"</string>
     <string name="usb_control_host" msgid="2276710819046647200">"Подключенное устройство"</string>
     <string name="usb_control_device" msgid="5821511964163469463">"Это устройство"</string>
     <string name="usb_switching" msgid="8995313698715545619">"Подождите…"</string>
@@ -3897,7 +3930,6 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"Использовать более холодные цвета на экране"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Для изменения цветовых настроек нужно отключить экран"</string>
     <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"Лазерный датчик камеры"</string>
-    <string name="logical_camera_default_switch" msgid="3310039627275112685">"Логическая камера по умолчанию"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Автоматические обновления системы"</string>
     <string name="ota_disable_automatic_update_summary" msgid="940729694354373087">"Устанавливать обновления при перезагрузке устройства"</string>
     <string name="usage" msgid="2977875522080448986">"Передача данных"</string>
@@ -3910,8 +3942,6 @@
     <string name="cell_data_template" msgid="405684854174361041">"<xliff:g id="AMOUNT">^1</xliff:g> мобильного трафика"</string>
     <string name="wifi_data_template" msgid="6265570748799357386">"<xliff:g id="AMOUNT">^1</xliff:g> (Wi-Fi)"</string>
     <string name="ethernet_data_template" msgid="5782476509881033590">"<xliff:g id="AMOUNT">^1</xliff:g> (Ethernet)"</string>
-    <string name="cell_warning_only" msgid="763147658209027140">"Предупреждение передачи данных: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="cell_warning_and_limit" msgid="2273413629267437470">"Предупреждения при передаче данных: <xliff:g id="ID_1">%1$s</xliff:g>/Лимит передачи данных: <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="billing_cycle" msgid="6614597736285325497">"Предупреждения и лимит"</string>
     <string name="app_usage_cycle" msgid="8877223251648092131">"Период статистики"</string>
     <string name="cell_data_warning" msgid="1985956818884847057">"Предупреждение о расходе трафика: <xliff:g id="ID_1">^1</xliff:g>"</string>

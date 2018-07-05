@@ -131,6 +131,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"पेअरींग विनंती"</string>
     <string name="bluetooth_notif_message" msgid="5057417127600942904">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> सह जोडण्यासाठी टॅप करा."</string>
     <string name="bluetooth_show_received_files" msgid="3144149432555230410">"मिळालेल्या फायली"</string>
+    <string name="bluetooth_show_files_received_via_bluetooth" msgid="5445105773989432594">"फायली ब्ल्यूटूथद्वारे मिळाल्या आहेत"</string>
     <string name="device_picker" msgid="4978696506172252813">"ब्लूटूथ डिव्हाइस निवडा"</string>
     <string name="bluetooth_ask_enablement" msgid="3387222809404177525">"<xliff:g id="APP_NAME">%1$s</xliff:g> ब्लूटूथ चालू करू इच्छितो"</string>
     <string name="bluetooth_ask_disablement" msgid="5890386255790160573">"<xliff:g id="APP_NAME">%1$s</xliff:g> ब्लूटूथ बंद करू इच्छितो"</string>
@@ -187,8 +188,7 @@
     <string name="connected_device_connections_title" msgid="5988939345181466770">"कनेक्शन प्राधान्ये"</string>
     <string name="connected_device_previously_connected_title" msgid="491765792822244604">"याआधी कनेक्ट केलेली डिव्हाइस"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="6196066429488377795">"याआधी कनेक्ट केलेले"</string>
-    <!-- no translation found for connected_device_bluetooth_turned_on_toast (5683648191381637533) -->
-    <skip />
+    <string name="connected_device_bluetooth_turned_on_toast" msgid="5683648191381637533">"ब्लूटूथ सुरू केले"</string>
     <string name="date_and_time" msgid="9062980487860757694">"तारीख आणि वेळ"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"टाइम झोन निवडा"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -304,7 +304,6 @@
     <string name="settings_label" msgid="1626402585530130914">"सेटिंग्ज"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"सेटिंग्ज"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"सेटिंग्ज शॉर्टकट"</string>
-    <string name="activity_list_empty" msgid="6428823323471264836">"कोणत्याही जुळणाऱ्या अॅक्टिव्हिटी आढळल्या नाहीत."</string>
     <string name="airplane_mode" msgid="8837269988154128601">"विमान मोड"</string>
     <string name="radio_controls_title" msgid="3447085191369779032">"अधिक"</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"वायरलेस आणि नेटवर्क"</string>
@@ -393,6 +392,30 @@
     <string name="security_status_title" msgid="5848766673665944640">"सुरक्षितता स्थिती"</string>
     <string name="security_dashboard_summary" msgid="6757421634477554939">"स्क्रीन लॉक, फिंगरप्रिंट"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"स्क्रीन लॉक"</string>
+    <!-- no translation found for security_settings_face_preference_summary (1290187225482642821) -->
+    <skip />
+    <!-- no translation found for security_settings_face_preference_summary_none (5460349732790152186) -->
+    <skip />
+    <!-- no translation found for security_settings_face_preference_title (7074548721778680481) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_cancel (4277182322482408514) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_title (2694505011712885439) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_title_unlock_disabled (8180330567034286589) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_message (6150611993438981458) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_message_unlock_disabled (6300341727101929207) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_message_setup (5704661081718707858) -->
+    <skip />
+    <!-- no translation found for face_add_max (2342250989212694454) -->
+    <skip />
+    <!-- no translation found for face_intro_error_max (160022811747660581) -->
+    <skip />
+    <!-- no translation found for face_intro_error_unknown (6367721696446677261) -->
+    <skip />
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"फिंगरप्रिंट"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"फिंगरप्रिंट व्यवस्‍थापित करा"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"फिंगरप्रिंट यासाठी वापरा"</string>
@@ -504,11 +527,14 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"तुमचा टॅबलेट संरक्षित करा"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"तुमचे डिव्हाइस संरक्षित करा"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"तुमचा फोन संरक्षित करा"</string>
-    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5008939545428518367">"अतिरिक्त सुरक्षिततेसाठी, बॅकअप स्क्रीन लॉक सेट करा"</string>
+    <!-- no translation found for lock_settings_picker_biometrics_added_security_message (1507307757032207572) -->
+    <skip />
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"डिव्हाइस संरक्षण वैशिष्ट्ये अॅक्टिव्हेट करून तुमच्या परवानगीशिवाय हा टॅब्लेट वापरण्यापासून इतरांना प्रतिबंधित करा. तुम्ही वापरू इच्छित असलेले स्क्रीन लॉक निवडा."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"डिव्हाइस संरक्षण वैशिष्ट्ये अॅक्टिव्हेट करून तुमच्या परवानगीशिवाय हे डिव्हाइस वापरण्यापासून इतरांना प्रतिबंधित करा. तुम्ही वापरू इच्छित असलेले स्क्रीन लॉक निवडा."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"डिव्हाइस संरक्षण वैशिष्ट्ये अॅक्टिव्हेट करून तुमच्या परवानगीशिवाय हा फोन वापरण्यापासून इतरांना प्रतिबंधित करा. तुम्ही वापरू इच्छित असलेले स्क्रीन लॉक निवडा."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"तुमची बॅक अप स्क्रीन लॉक पद्धत निवडा"</string>
+    <!-- no translation found for lock_settings_picker_face_message (197106534637556054) -->
+    <skip />
     <string name="setup_lock_settings_options_button_label" msgid="8511153243629402929">"स्क्रीन लॉक पर्याय"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="5058207955455973917">"स्क्रीन लॉक पर्याय"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"स्क्रीन लॉक"</string>
@@ -535,6 +561,16 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"फिंगरप्रिंट + पासवर्ड"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"फिंगरप्रिंट न वापरता सुरु ठेवा"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"तुम्ही आपल्या फिंगरप्रिंटचा वापर करून तुमचा फोन अनलॉक करू शकता. सुरक्षिततेसाठी, या पर्यायाकरिता एक बॅक अप स्क्रीन लॉक आवश्यक आहे."</string>
+    <!-- no translation found for face_unlock_set_unlock_pattern (8792301636367000123) -->
+    <skip />
+    <!-- no translation found for face_unlock_set_unlock_pin (1196620299595657479) -->
+    <skip />
+    <!-- no translation found for face_unlock_set_unlock_password (223117276773907474) -->
+    <skip />
+    <!-- no translation found for face_unlock_skip_face (6362883392838482791) -->
+    <skip />
+    <!-- no translation found for face_unlock_title (9042382084472444316) -->
+    <skip />
     <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"प्रशासक, कूटबद्धीकरण धोरण किंवा क्रेडेन्शियल संचयनाद्वारे अक्षम केलेले"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"काहीही नाही"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"स्‍वाइप करा"</string>
@@ -866,6 +902,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"आपोआप"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2.4 GHz बँड"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"५.० GHz बँड"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"५.० GHz बँडला प्राधान्य दिले"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"२.४ GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"५.० GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"वाय-फाय हॉटस्‍पॉटसाठी किमान एक बँड निवडा:"</string>
@@ -1077,7 +1114,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"नैसर्गिक"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"बूस्ट केलेला"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"संपृक्त"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"आपोआप"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"अॅडॅप्टिव्ह"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"फक्त अचूक रंग वापरा"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"उठावदार आणि अचूक रंगामध्ये अॅडजस्‍ट करा"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"टॅब्लेट फिरवताना ओरिएंटेशन आपोआप स्विच करा"</string>
@@ -1604,6 +1641,12 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"पासवर्ड सेट केला गेला आहे"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"पिन सेट केला आहे"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"पॅटर्न सेट केला गेला आहे"</string>
+    <!-- no translation found for lockpassword_choose_your_password_header_for_face (7876621019688907534) -->
+    <skip />
+    <!-- no translation found for lockpassword_choose_your_pattern_header_for_face (8070525076987585344) -->
+    <skip />
+    <!-- no translation found for lockpassword_choose_your_pin_header_for_face (7304398683609714816) -->
+    <skip />
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"सुरु ठेवण्यासाठी तुमच्या डिव्हाइस पॅटर्नचा वापर करा"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"सुरु ठेवण्यासाठी तुमचे डिव्हाइस पिन एंटर करा"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"सुरु ठेवण्यासाठी तुमचे डिव्हाइस पासवर्ड एंटर करा"</string>
@@ -2587,7 +2630,6 @@
     <string name="data_usage_menu_metered" msgid="6235119991372755026">"नेटवर्क प्रतिबंध"</string>
     <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"अॅप डेटा स्वयं-संकालित करा"</string>
     <string name="data_usage_menu_sim_cards" msgid="6410498422797244073">"सिम कार्ड"</string>
-    <string name="data_usage_menu_cellular_networks" msgid="8339835014751511300">"मोबाइल नेटवर्क"</string>
     <string name="data_usage_cellular_data_summary" msgid="8413357481361268285">"मर्यादेवर विराम दिला"</string>
     <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"डेटा स्‍वयं-संकालित करा"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"वैयक्तिक डेटा स्‍वयं-संकालित करा"</string>
@@ -2767,12 +2809,9 @@
       <item quantity="other">प्रमाणपत्रे तपासा</item>
     </plurals>
     <string name="user_settings_title" msgid="3493908927709169019">"एकाहून अधिक वापरकर्ते"</string>
-    <!-- no translation found for user_settings_footer_text (5947601460660791129) -->
-    <skip />
-    <!-- no translation found for user_settings_footer_text (2153761434649733502) -->
-    <skip />
-    <!-- no translation found for user_settings_footer_text (2844602828189838075) -->
-    <skip />
+    <string name="user_settings_footer_text" product="device" msgid="5947601460660791129">"नवीन वापरकर्त्यांना जोडून तुमचे डिव्हाइस शेअर करा. प्रत्येक वापरकर्त्याला कस्टम होम स्क्रीन, खाती, अ‍ॅप्स, सेटिंग्ज आणि बर्‍याच गोष्टीसाठी तुमच्या डिव्हाइसवर वैयक्तिक जागा आहे."</string>
+    <string name="user_settings_footer_text" product="tablet" msgid="2153761434649733502">"नवीन वापरकर्त्यांना जोडून तुमचा टॅबलेट शेअर करा. प्रत्येक वापरकर्त्याला कस्टम होम स्क्रीन, खाती अ‍ॅप्स, सेटिंग्ज आणि बर्‍याच गोष्टीसाठी तुमच्या टॅबलेटवर वैयक्तिक जागा आहे."</string>
+    <string name="user_settings_footer_text" product="default" msgid="2844602828189838075">"नवीन वापरकर्त्यांना जोडून तुमचा फोन शेअर करा. प्रत्येक वापरकर्त्याला कस्टम होम स्क्रीन, खाती अ‍ॅप्स, सेटिंग्ज आणि बर्‍याच गोष्टीसाठी तुमच्या फोनवर वैयक्तिक जागा आहे."</string>
     <string name="user_list_title" msgid="7937158411137563543">"वापरकर्ते आणि प्रोफाईल्स"</string>
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"वापरकर्ता किंवा प्रोफाइल जोडा"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"वापरकर्ता जोडा"</string>
@@ -3015,12 +3054,13 @@
     <string name="keywords_sim_status" msgid="1474422416860990564">"नेटवर्क, मोबाइल नेटवर्क स्थिती, सेवा स्थिती, सिग्नल तीव्रता, मोबाइल नेटवर्क प्रकार, रोमिंग, iccid"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"सीरीअल नंबर, हार्डवेअर आवृत्ती"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"Android सुरक्षितता पॅच पातळी, बेसबँड आवृत्ती, कर्नल आवृत्ती"</string>
-    <!-- no translation found for keywords_device_feedback (564493721125966719) -->
-    <skip />
+    <string name="keywords_systemui_theme" msgid="9112852512550404882">"गडद थीम"</string>
+    <string name="keywords_device_feedback" msgid="564493721125966719">"बग"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"अँबियन्ट डिस्‍प्‍ले, लॉक स्‍क्रीन डिस्‍प्‍ले"</string>
-    <string name="keywords_fingerprint_settings" msgid="239222512315619538">"फिंगरप्रिंट"</string>
-    <!-- no translation found for keywords_display_auto_brightness (4130320471533951796) -->
+    <!-- no translation found for keywords_face_settings (7505388678116799329) -->
     <skip />
+    <string name="keywords_fingerprint_settings" msgid="239222512315619538">"फिंगरप्रिंट"</string>
+    <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"मंद स्क्रीन, टचस्क्रीन, बॅटरी, स्मार्ट ब्राइटनेस, डायनॅमिक ब्राइटनेस"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"फिरवा, फ्लिप करा, रोटेशन, पोर्ट्रेट, लँडस्केप, ओरिएंटेशन, उभे, आडवे"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"अपग्रेड करा, Android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"डीएनडी, शेड्यूल, सूचना, ब्लॉक, शांतता, व्हायब्रेट, झोप, काम, फोकस, ध्वनी, म्यूट, दिवस, कार्य दिवस, शनिवार व रविवार, आठवड्याची शेवटची रात्र, इव्हेंट"</string>
@@ -3172,7 +3212,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"म्यूट केले आहे पण <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> आणि <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> ला अनुमती द्या"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"म्यूट केले आहे पण <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> आणि <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g> ला अनुमती द्या"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"मेसेज, इव्हेंट आणि रिमाइंडर"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"जेव्हा व्यत्यय आणू नका सुरू असते तेव्हा मेसेज, रिमाइंडर आणि इव्हेंट म्यूट असतील, तुम्ही वरती अनुमती दिलेल्या आयटम व्यतिरिक्त. तुम्ही सेटिंग्ज मध्ये बदल करून तुमच्या मित्रमैत्रिणींना, कुटुंबियांना आणि इतर संपर्कांना तुमच्यापर्यंत पोहोचण्याची अनुमती देऊ शकता."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"जेव्हा व्यत्यय आणू नका सुरू असते तेव्हा मेसेज, रिमाइंडर आणि इव्हेंट म्यूट असतील, तुम्ही वरती अनुमती दिलेल्या आयटम व्यतिरिक्त. तुम्ही सेटिंग्ज मध्ये बदल करून तुमच्या मित्रमैत्रिणींना, कुटुंबियांना आणि इतर संपर्कांना तुमच्यापर्यंत पोहोचण्याची अनुमती देऊ शकता."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"झाले"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"सेटिंग्ज"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"सूचना आल्यावर व्हिज्युअल किंवा आवाज नाही"</string>
@@ -3351,11 +3391,16 @@
     <string name="zen_mode_calls_title" msgid="623395033931747661">"कॉलची अनुमती द्या"</string>
     <string name="zen_mode_calls_footer" msgid="3618700268458237781">"ज्या वेळी व्यत्यय आणू नका सुरू असते, तेव्हा येणारे कॉल ब्लॉक होतात. तुम्ही सेटिंग्ज मध्ये बदल करून तुमच्या मित्रमैत्रिणींना, कुटुंबियांना आणि इतर संपर्कांना तुमच्यापर्यंत पोहोचण्याची अनुमती देऊ शकता."</string>
     <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"तारांकित संपर्क"</string>
-    <!-- no translation found for zen_mode_starred_contacts_summary_additional_contacts (500105380255018671) -->
+    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="500105380255018671">
+      <item quantity="one"><xliff:g id="NUM_PEOPLE">%d</xliff:g> अन्य</item>
+      <item quantity="other"><xliff:g id="NUM_PEOPLE">%d</xliff:g> अन्य</item>
+    </plurals>
     <string name="zen_mode_messages" msgid="5886440273537510894">"मेसेज"</string>
     <string name="zen_mode_messages_title" msgid="7729380010396411129">"मेसेजची अनुमती द्या"</string>
     <string name="zen_mode_all_messages" msgid="8257021584561639816">"मेसेज"</string>
+    <string name="zen_mode_all_messages_list" msgid="4223560721230967061">"मेसेज"</string>
     <string name="zen_mode_selected_messages" msgid="1047355526202106114">"काही मेसेज"</string>
+    <string name="zen_mode_selected_messages_list" msgid="5309288435815759102">"काही मेसेज"</string>
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"कोणाहीकडून"</string>
     <string name="zen_mode_from_contacts" msgid="2232335406106711637">"केवळ संपर्कांकडून"</string>
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"केवळ तारांकित संपर्कांकडून"</string>
@@ -3364,16 +3409,22 @@
     <string name="zen_calls_summary_repeat_only" msgid="7105261473107715445">"फक्त वारंवार कॉल करणाऱ्यांकडून"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"काहीही नाही"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"अलार्म"</string>
+    <string name="zen_mode_alarms_list" msgid="1090332840207025714">"अलार्म"</string>
     <string name="zen_mode_media" msgid="8808264142134422380">"मीडिया"</string>
+    <string name="zen_mode_media_list" msgid="5483540766397328038">"मीडिया"</string>
     <string name="zen_mode_system" msgid="2541380718411593581">"स्पर्श ध्वनी"</string>
+    <string name="zen_mode_system_list" msgid="6996104733185177115">"स्पर्श ध्वनी"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"स्मरणपत्रे"</string>
+    <string name="zen_mode_reminders_list" msgid="2853975802240340190">"रिमाइंडर्स"</string>
     <string name="zen_mode_reminders_title" msgid="2345044406347406902">"रिमाइंडरची अनुमती द्या"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"इव्हेंट"</string>
+    <string name="zen_mode_events_list" msgid="5571368229052715098">"इव्हेंट"</string>
     <string name="zen_mode_events_title" msgid="5597241655883329085">"इव्हेंटची अनुमती द्या"</string>
     <string name="zen_mode_all_callers" msgid="2378065871253871057">"कोणीही"</string>
     <string name="zen_mode_contacts_callers" msgid="5569804103920394175">"संपर्क"</string>
     <string name="zen_mode_starred_callers" msgid="1023167821338514140">"तारांकित केलेले संपर्क"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"नियमित कॉलर"</string>
+    <string name="zen_mode_repeat_callers_list" msgid="2529895519653237330">"नियमित कॉलर"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8553876328249671783">"पुन्हा कॉल करणाऱ्यांची अनुमती द्या"</string>
     <string name="zen_mode_calls_summary_one" msgid="3972333792749874863">"<xliff:g id="CALLER_TYPE">%1$s</xliff:g> कडून"</string>
     <string name="zen_mode_calls_summary_two" msgid="6592821501321201329">"<xliff:g id="CALLER_TYPE">%1$s</xliff:g> आणि <xliff:g id="CALLERT_TPYE">%2$s</xliff:g> कडून"</string>
@@ -3425,6 +3476,12 @@
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"तुमचे डिव्हाइस अनलॉक करण्यासाठी तुमचे फिंगरप्रिंट वापरण्याव्यतिरिक्त, सुरू होण्यापूर्वी तुमचा पिन आवश्यक करून तुम्ही हे डिव्हाइस अधिक संरक्षित करू शकता. डिव्हाइस सुरू होईपर्यंत, ते कॉल, मेसेज किंवा अलार्मसह सूचना प्राप्त करू शकत नाही.\n\nयामुळे हरवलेल्या किंवा चोरीला गेलेल्या डिव्हाइस वरील डेटाचे संरक्षण करण्यात मदत होते. तुमचे डिव्हाइस सुरू करण्यासाठी पिन हवा?"</string>
     <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"तुमचे डिव्हाइस अनलॉक करण्यासाठी तुमचे फिंगरप्रिंट वापरण्याव्यतिरिक्त, सुरू होण्यापूर्वी तुमचा पॅटर्न आवश्यक करून तुम्ही हे डिव्हाइस अधिक संरक्षित करू शकता. डिव्हाइस सुरू होईपर्यंत, ते कॉल, मेसेज किंवा अलार्मसह सूचना प्राप्त करू शकत नाही.\n\nयामुळे हरवलेल्या किंवा चोरीला गेलेल्या डिव्हाइस वरील डेटाचे संरक्षण करण्यात मदत होते. तुमचे डिव्हाइस सुरू करण्यासाठी पॅटर्न हवा?"</string>
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"तुमचे डिव्हाइस अनलॉक करण्‍यासाठी तुमचे फिंगरप्रिंट वापरण्‍याव्यतिरिक्त, ते सुरू होण्‍यापूर्वी तुम्ही तुमचा पासवर्ड आवश्‍यक करून हे डिव्हाइस अधिक सुरक्षित करू शकता. डिव्हाइस सुरू होईपर्यंत, तो कॉल, मेसेज किंवा अलार्मसह सूचना प्राप्त करू शकत नाही.\n\nहे हरवलेल्या किंवा चोरीला गेलेल्या डिव्हाइस वरील डेटाचे संरक्षण करण्यात मदत करते. तुमचे डिव्हाइस सुरू करण्यासाठी पासवर्ड आवश्‍यक आहे का?"</string>
+    <!-- no translation found for encryption_interstitial_message_pin_for_face (2017438765366716760) -->
+    <skip />
+    <!-- no translation found for encryption_interstitial_message_pattern_for_face (3551827507967661552) -->
+    <skip />
+    <!-- no translation found for encryption_interstitial_message_password_for_face (3452793542112093614) -->
+    <skip />
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"होय"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"नाही"</string>
     <string name="restricted_true_label" msgid="4761453839409220473">"प्रतिबंधित"</string>
@@ -3455,7 +3512,7 @@
     <string name="change_storage" msgid="600475265207060436">"संचयन बदला"</string>
     <string name="notifications_label" msgid="2872668710589600731">"सूचना"</string>
     <string name="notifications_enabled" msgid="6983396130566021385">"चालू"</string>
-    <string name="notifications_enabled_with_info" msgid="2446033696770133334">"सुरू/ <xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%1$s</xliff:g>"</string>
+    <string name="notifications_enabled_with_info" msgid="5669544704839269901">"<xliff:g id="NOTIFICATIONS_SENT">%1$s</xliff:g> / <xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%2$s</xliff:g>"</string>
     <string name="notifications_disabled" msgid="1262114548434938079">"बंद"</string>
     <string name="notifications_partly_blocked" msgid="592071133950126656">"<xliff:g id="COUNT_1">%2$d</xliff:g> पैकी <xliff:g id="COUNT_0">%1$d</xliff:g> वर्गवाऱ्या बंद"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"शांत केले"</string>
@@ -3782,7 +3839,6 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"आणखी छान डिस्प्ले रंग वापरा"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"रंग बदल लागू करण्यासाठी, स्क्रीन बंद करा"</string>
     <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"कॅमेरा लेझर सेंसर"</string>
-    <string name="logical_camera_default_switch" msgid="3310039627275112685">"डीफॉल्ट म्हणून लॉजिकल कॅमेरा"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"स्वयंचलित सिस्टम अपडेट"</string>
     <string name="ota_disable_automatic_update_summary" msgid="940729694354373087">"डिव्हाइस रीस्टार्ट झाल्यानंतर अपडेट लागू करा"</string>
     <string name="usage" msgid="2977875522080448986">"वापर"</string>
@@ -3795,8 +3851,6 @@
     <string name="cell_data_template" msgid="405684854174361041">"<xliff:g id="AMOUNT">^1</xliff:g> मोबाइल डेटा"</string>
     <string name="wifi_data_template" msgid="6265570748799357386">"<xliff:g id="AMOUNT">^1</xliff:g> वाय-फाय डेटा"</string>
     <string name="ethernet_data_template" msgid="5782476509881033590">"<xliff:g id="AMOUNT">^1</xliff:g> इथरनेट डेटा"</string>
-    <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> डेटा चेतावणी"</string>
-    <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> डेटा चेतावणी / <xliff:g id="ID_2">%2$s</xliff:g> डेटा मर्यादा"</string>
     <string name="billing_cycle" msgid="6614597736285325497">"डेटा चेतावणी आणि मर्यादा"</string>
     <string name="app_usage_cycle" msgid="8877223251648092131">"अॅप डेटा वापर सायकल"</string>
     <string name="cell_data_warning" msgid="1985956818884847057">"<xliff:g id="ID_1">^1</xliff:g> डेटा चेतावणी"</string>

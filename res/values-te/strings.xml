@@ -131,6 +131,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"జత చేయడానికి అభ్యర్థన"</string>
     <string name="bluetooth_notif_message" msgid="5057417127600942904">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>తో జత చేయడానికి నొక్కండి."</string>
     <string name="bluetooth_show_received_files" msgid="3144149432555230410">"స్వీకరించిన ఫైల్‌లు"</string>
+    <string name="bluetooth_show_files_received_via_bluetooth" msgid="5445105773989432594">"బ్లూటూత్ ద్వారా ఫైల్‌లు స్వీకరించబడ్డాయి"</string>
     <string name="device_picker" msgid="4978696506172252813">"బ్లూటూత్ పరికరాన్ని ఎంచుకోండి"</string>
     <string name="bluetooth_ask_enablement" msgid="3387222809404177525">"<xliff:g id="APP_NAME">%1$s</xliff:g> బ్లూటూత్‌ను ఆన్ చేయాలనుకుంటోంది"</string>
     <string name="bluetooth_ask_disablement" msgid="5890386255790160573">"<xliff:g id="APP_NAME">%1$s</xliff:g> బ్లూటూత్‌ను ఆఫ్ చేయాలనుకుంటోంది"</string>
@@ -187,8 +188,7 @@
     <string name="connected_device_connections_title" msgid="5988939345181466770">"కనెక్షన్ ప్రాధాన్యతలు"</string>
     <string name="connected_device_previously_connected_title" msgid="491765792822244604">"మునుపు కనెక్ట్ చేసిన పరికరాలు"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="6196066429488377795">"ఇంతకు మునుపు కనెక్ట్ చేయబడినవి"</string>
-    <!-- no translation found for connected_device_bluetooth_turned_on_toast (5683648191381637533) -->
-    <skip />
+    <string name="connected_device_bluetooth_turned_on_toast" msgid="5683648191381637533">"బ్లూటూత్ ఆన్ చేయబడింది"</string>
     <string name="date_and_time" msgid="9062980487860757694">"తేదీ &amp; సమయం"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"సమయ మండలిని ఎంచుకోండి"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -304,7 +304,6 @@
     <string name="settings_label" msgid="1626402585530130914">"సెట్టింగ్‌లు"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"సెట్టింగ్‌లు"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"సెట్టింగ్‌ల షార్ట్‌కట్"</string>
-    <string name="activity_list_empty" msgid="6428823323471264836">"సరిపోలే కార్యాచరణలు కనుగొనబడలేదు."</string>
     <string name="airplane_mode" msgid="8837269988154128601">"ఎయిర్‌ప్లేన్ మోడ్"</string>
     <string name="radio_controls_title" msgid="3447085191369779032">"మరిన్ని"</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"వైర్‌లెస్ &amp; నెట్‌వర్క్‌లు"</string>
@@ -393,6 +392,30 @@
     <string name="security_status_title" msgid="5848766673665944640">"భద్రత స్థితి"</string>
     <string name="security_dashboard_summary" msgid="6757421634477554939">"స్క్రీన్ లాక్, వేలిముద్ర"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"స్క్రీన్ లాక్"</string>
+    <!-- no translation found for security_settings_face_preference_summary (1290187225482642821) -->
+    <skip />
+    <!-- no translation found for security_settings_face_preference_summary_none (5460349732790152186) -->
+    <skip />
+    <!-- no translation found for security_settings_face_preference_title (7074548721778680481) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_cancel (4277182322482408514) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_title (2694505011712885439) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_title_unlock_disabled (8180330567034286589) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_message (6150611993438981458) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_message_unlock_disabled (6300341727101929207) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_message_setup (5704661081718707858) -->
+    <skip />
+    <!-- no translation found for face_add_max (2342250989212694454) -->
+    <skip />
+    <!-- no translation found for face_intro_error_max (160022811747660581) -->
+    <skip />
+    <!-- no translation found for face_intro_error_unknown (6367721696446677261) -->
+    <skip />
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"వేలిముద్ర"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"వేలిముద్రలు నిర్వహిం."</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"దీనికి వేలిముద్రను ఉప."</string>
@@ -504,11 +527,14 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"మీ టాబ్లెట్ రక్షించుకోండి"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"మీ పరికరం రక్షించుకోండి"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"మీ ఫోన్‌ను రక్షించుకోండి"</string>
-    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5008939545428518367">"అదనపు భద్రత కోసం బ్యాకప్ స్క్రీన్ లాక్‌ను సెట్ చేయండి"</string>
+    <!-- no translation found for lock_settings_picker_biometrics_added_security_message (1507307757032207572) -->
+    <skip />
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"పరికర సంరక్షణ లక్షణాలను సక్రియం చేయడం ద్వారా మీ అనుమతి లేకుండా ఈ టాబ్లెట్‌ను ఉపయోగించనీయకుండా ఇతరులను నిరోధించండి. మీరు ఉపయోగించాలనుకుంటున్న స్క్రీన్ లాక్‌ను ఎంచుకోండి."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"పరికర సంరక్షణ లక్షణాలను సక్రియం చేయడం ద్వారా మీ అనుమతి లేకుండా ఈ పరికరాన్ని ఉపయోగించనీయకుండా ఇతరులను నిరోధించండి. మీరు ఉపయోగించాలనుకుంటున్న స్క్రీన్ లాక్‌ను ఎంచుకోండి."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"పరికర సంరక్షణ లక్షణాలను సక్రియం చేయడం ద్వారా మీ అనుమతి లేకుండా ఈ ఫోన్‌ను ఉపయోగించనీయకుండా ఇతరులను నిరోధించండి. మీరు ఉపయోగించాలనుకుంటున్న స్క్రీన్ లాక్‌ను ఎంచుకోండి."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"మీ బ్యాకప్ స్క్రీన్ లాక్ పద్ధతిని ఎంచుకోండి"</string>
+    <!-- no translation found for lock_settings_picker_face_message (197106534637556054) -->
+    <skip />
     <string name="setup_lock_settings_options_button_label" msgid="8511153243629402929">"స్క్రీన్ లాక్ ఎంపికలు"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="5058207955455973917">"స్క్రీన్ లాక్ ఎంపికలు"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"స్క్రీన్ లాక్"</string>
@@ -535,6 +561,16 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"వేలిముద్ర + పాస్‌వర్డ్"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"వేలిముద్ర లేకుండా కొనసాగండి"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"మీరు మీ వేలిముద్రను ఉపయోగించి మీ ఫోన్‌ను అన్‌లాక్ చేయవచ్చు. భద్రత కోసం, ఈ ఎంపికకు బ్యాకప్ స్క్రీన్ లాక్ అవసరం."</string>
+    <!-- no translation found for face_unlock_set_unlock_pattern (8792301636367000123) -->
+    <skip />
+    <!-- no translation found for face_unlock_set_unlock_pin (1196620299595657479) -->
+    <skip />
+    <!-- no translation found for face_unlock_set_unlock_password (223117276773907474) -->
+    <skip />
+    <!-- no translation found for face_unlock_skip_face (6362883392838482791) -->
+    <skip />
+    <!-- no translation found for face_unlock_title (9042382084472444316) -->
+    <skip />
     <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"నిర్వాహకులు, ఎన్‌క్రిప్షన్ విధానం లేదా ఆధారాల నిల్వ ద్వారా నిలిపివేయబడింది"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"ఏదీ వద్దు"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"స్వైప్"</string>
@@ -866,6 +902,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"స్వీయ"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2.4 GHz బ్యాండ్"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"5.0 GHz బ్యాండ్"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"5.0 GHz బ్యాండ్‌కి ప్రాధాన్యత"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2.4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5.0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Wi-Fi హాట్‌స్పాట్ కోసం కనీసం ఒక బ్యాండ్‌ను ఎంచుకోండి:"</string>
@@ -1077,7 +1114,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"సహజం"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"అభివృద్ధిపరచబడింది"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"స్యాచురేటేడ్"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"ఆటోమేటిక్"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"అనుకూల"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"ఖచ్చితమైన రంగులను మాత్రమే ఎంచుకోండి"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"ప్రకాశవంతమైన మరియు ఖచ్చితమైన రంగులలో నచ్చినది ఎంచుకోండి"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"టాబ్లెట్ తిప్పుతున్నప్పుడు దృగ్విన్యాసాన్ని స్వయంచాలకంగా మార్చు"</string>
@@ -1603,6 +1640,12 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"పాస్‌వర్డ్ సెట్ చేయబడింది"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"పిన్‌ సెట్ చేయబడింది"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"ఆకృతి సెట్ చేయబడింది"</string>
+    <!-- no translation found for lockpassword_choose_your_password_header_for_face (7876621019688907534) -->
+    <skip />
+    <!-- no translation found for lockpassword_choose_your_pattern_header_for_face (8070525076987585344) -->
+    <skip />
+    <!-- no translation found for lockpassword_choose_your_pin_header_for_face (7304398683609714816) -->
+    <skip />
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"కొనసాగడానికి మీ పరికరం నమూనాను ఉపయోగించండి"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"కొనసాగడానికి మీ డివైజ్ పిన్‌ను నమోదు చేయండి"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"కొనసాగడానికి మీ పరికర పాస్‌వర్డ్‌ను నమోదు చేయండి"</string>
@@ -2586,7 +2629,6 @@
     <string name="data_usage_menu_metered" msgid="6235119991372755026">"నెట్‌వర్క్ పరిమితులు"</string>
     <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"డేటా స్వీయ-సమకాలీకరణ"</string>
     <string name="data_usage_menu_sim_cards" msgid="6410498422797244073">"సిమ్ కార్డులు"</string>
-    <string name="data_usage_menu_cellular_networks" msgid="8339835014751511300">"మొబైల్ నెట్‌వర్క్‌లు"</string>
     <string name="data_usage_cellular_data_summary" msgid="8413357481361268285">"పరిమితి చేరు. పాజ్ చేయబ."</string>
     <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"డేటా స్వీయ-సమకాలీకరణ"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"వ్యక్తిగత డేటాను స్వయంచాలకంగా సమకాలీకరించు"</string>
@@ -2766,12 +2808,9 @@
       <item quantity="one">ప్రమాణపత్రాన్ని తనిఖీ చేయి</item>
     </plurals>
     <string name="user_settings_title" msgid="3493908927709169019">"బహుళ వినియోగదారులు"</string>
-    <!-- no translation found for user_settings_footer_text (5947601460660791129) -->
-    <skip />
-    <!-- no translation found for user_settings_footer_text (2153761434649733502) -->
-    <skip />
-    <!-- no translation found for user_settings_footer_text (2844602828189838075) -->
-    <skip />
+    <string name="user_settings_footer_text" product="device" msgid="5947601460660791129">"కొత్త వినియోగదారులను జోడించడం ద్వారా మీ పరికరాన్ని షేర్ చేయండి. మీ పరికరంలోని అనుకూల హోమ్ స్క్రీన్‌లు, ఖాతాలు, యాప్‌ల సెట్టింగ్‌లు మరియు మరిన్నింటి కోసం ప్రతి వినియోగదారుకి వ్యక్తిగత స్థలం ఉంటుంది."</string>
+    <string name="user_settings_footer_text" product="tablet" msgid="2153761434649733502">"కొత్త వినియోగదారులను జోడించడం ద్వారా మీ టాబ్లెట్‌ని షేర్ చేయండి. మీ టాబ్లెట్‌లోని అనుకూల హోమ్ స్క్రీన్‌లు, ఖాతాలు, యాప్‌ల సెట్టింగ్‌లు మరియు మరిన్నింటి కోసం ప్రతి వినియోగదారుకి వ్యక్తిగత స్థలం ఉంటుంది."</string>
+    <string name="user_settings_footer_text" product="default" msgid="2844602828189838075">"కొత్త వినియోగదారులను జోడించడం ద్వారా మీ ఫోన్‌ని షేర్ చేయండి. మీ ఫోన్‌లో అనుకూల హోమ్ స్క్రీన్‌లు, ఖాతాలు, యాప్‌ల సెట్టింగ్‌లు మరియు మరిన్నింటి కోసం ప్రతి వినియోగదారుకి వ్యక్తిగత స్థలం ఉంటుంది."</string>
     <string name="user_list_title" msgid="7937158411137563543">"వినియోగదారులు &amp; ప్రొఫైల్‌లు"</string>
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"వినియోగదారు లేదా ప్రొఫైల్‌ను జోడించు"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"వినియోగదారును జోడించు"</string>
@@ -3014,12 +3053,13 @@
     <string name="keywords_sim_status" msgid="1474422416860990564">"నెట్‌వర్క్, మొబైల్ నెట్‌వర్క్ స్థితి, సేవ స్థితి, సిగ్నల్ సామర్థ్యం, మొబైల్ నెట్‌వర్క్ రకం, రోమింగ్, iccid"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"క్రమ సంఖ్య, హార్డ్‌వేర్ వెర్షన్"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"android భద్రతా అతికింపు స్థాయి, బేస్‌బ్యాండ్ వెర్షన్, కెర్నెల్ వెర్షన్"</string>
-    <!-- no translation found for keywords_device_feedback (564493721125966719) -->
-    <skip />
+    <string name="keywords_systemui_theme" msgid="9112852512550404882">"ముదురు రంగు థీమ్"</string>
+    <string name="keywords_device_feedback" msgid="564493721125966719">"బగ్"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"విస్తార ప్రదర్శన, లాక్ స్క్రీన్ ప్రదర్శన"</string>
-    <string name="keywords_fingerprint_settings" msgid="239222512315619538">"వేలిముద్ర"</string>
-    <!-- no translation found for keywords_display_auto_brightness (4130320471533951796) -->
+    <!-- no translation found for keywords_face_settings (7505388678116799329) -->
     <skip />
+    <string name="keywords_fingerprint_settings" msgid="239222512315619538">"వేలిముద్ర"</string>
+    <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"కాంతిహీన స్క్రీన్, టచ్‌స్క్రీన్, బ్యాటరీ, స్మార్ట్ ప్రకాశం, గతిశీల ప్రకాశం"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"తిప్పండి, తిప్పు, పరిభ్రమణం, పోర్ట్రెయిట్, ల్యాండ్‌స్కేప్, ఓరియంటేషన్, నిలువు, అడ్డం"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"అప్‌గ్రేడ్, android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"dnd, షెడ్యూల్, నోటిఫికేషన్‌లు, బ్లాక్ చేయి, నిశ్శబ్దం, వైబ్రేట్, స్లీప్, కార్యాలయం, దృష్టి సారించడం, ధ్వని, మ్యూట్, రోజు, వారంలో రోజు, వారాంతం, వారంలో రాత్రి, ఈవెంట్"</string>
@@ -3171,7 +3211,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"మ్యూట్ చేయబడింది, కాని <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> మరియు <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>ను అనుమతించు"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"మ్యూట్ చేయబడింది, కాని <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> మరియు <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>ను అనుమతించు"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"సందేశాలు, ఈవెంట్‌లు &amp; రిమైండర్‌లు"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"అంఅంతరాయం కలిగించవద్దు ఆన్‌లో ఉన్నప్పుడు, మీరు పైన అనుమతించే అంశాలు మినహా, సందేశాలు, రిమైండర్‌లు మరియు ఈవెంట్‌లు మ్యూట్ చేయబడతాయి. మీ స్నేహితులు, కుటుంబం లేదా ఇతర పరిచయాలు మిమ్మల్ని చేరుకోవడానికి అనుమతించడానికి సందేశాలు అమర్పులను మీరు సర్దుబాటు చేయవచ్చు."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"అంతరాయం కలిగించవద్దు మోడ్ ఆన్‌లో ఉన్నప్పుడు, మీరు పైన అనుమతించే అంశాలు మినహా, సందేశాలు, రిమైండర్‌లు మరియు ఈవెంట్‌లు మ్యూట్ చేయబడతాయి. మీ స్నేహితులు, కుటుంబ సభ్యులు లేదా ఇతర పరిచయస్తులు మిమ్మల్ని సంప్రదించడానికి అనుమతించేలా సందేశాల సెట్టింగ్‌లను మీరు సర్దుబాటు చేయవచ్చు."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"పూర్తయింది"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"సెట్టింగ్‌లు"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"నోటిఫికేషన్‌ల నుండి దృశ్య జాబితాలు లేదా శబ్దం లేవు"</string>
@@ -3350,11 +3390,16 @@
     <string name="zen_mode_calls_title" msgid="623395033931747661">"కాల్‌లను అనుమతించండి"</string>
     <string name="zen_mode_calls_footer" msgid="3618700268458237781">"అంఅంతరాయం కలిగించవద్దు ఆన్‌లో ఉన్నప్పుడు, ఇన్‌కమింగ్ కాల్‌లు బ్లాక్ చేయబడతాయి. మీ స్నేహితులు, కుటుంబం లేదా ఇతర పరిచయాలు మిమ్మల్ని చేరుకునేందుకు అనుమతించడానికి మీరు సెట్టింగ్‌లను సర్దుబాటు చేయవచ్చు."</string>
     <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"నక్షత్రం గుర్తు ఉన్న పరిచయాలు"</string>
-    <!-- no translation found for zen_mode_starred_contacts_summary_additional_contacts (500105380255018671) -->
+    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="500105380255018671">
+      <item quantity="other">మరో <xliff:g id="NUM_PEOPLE">%d</xliff:g> మంది</item>
+      <item quantity="one">మరో 1 వ్యక్తి</item>
+    </plurals>
     <string name="zen_mode_messages" msgid="5886440273537510894">"సందేశాలు"</string>
     <string name="zen_mode_messages_title" msgid="7729380010396411129">"సందేశాలను అనుమతించు"</string>
     <string name="zen_mode_all_messages" msgid="8257021584561639816">"సందేశాలు"</string>
+    <string name="zen_mode_all_messages_list" msgid="4223560721230967061">"సందేశాలు"</string>
     <string name="zen_mode_selected_messages" msgid="1047355526202106114">"కొన్ని సందేశాలు"</string>
+    <string name="zen_mode_selected_messages_list" msgid="5309288435815759102">"కొన్ని సందేశాలు"</string>
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"ఎవరి నుండైనా"</string>
     <string name="zen_mode_from_contacts" msgid="2232335406106711637">"పరిచయాల నుండి మాత్రమే"</string>
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"నక్షత్రం గల పరిచయాల నుండి మాత్రమే"</string>
@@ -3363,16 +3408,22 @@
     <string name="zen_calls_summary_repeat_only" msgid="7105261473107715445">"రిపీట్ కాలర్‌ల నుండి మాత్రమే"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"ఏవీ వద్దు"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"అలారాలు"</string>
+    <string name="zen_mode_alarms_list" msgid="1090332840207025714">"అలారాలు"</string>
     <string name="zen_mode_media" msgid="8808264142134422380">"మీడియా"</string>
+    <string name="zen_mode_media_list" msgid="5483540766397328038">"మీడియా"</string>
     <string name="zen_mode_system" msgid="2541380718411593581">"తాకినప్పుడు ధ్వనులు"</string>
+    <string name="zen_mode_system_list" msgid="6996104733185177115">"తాకినప్పుడు ధ్వనులు"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"రిమైండర్‌లు"</string>
+    <string name="zen_mode_reminders_list" msgid="2853975802240340190">"రిమైండర్‌లు"</string>
     <string name="zen_mode_reminders_title" msgid="2345044406347406902">"రిమైండర్‌లను అనుమతించు"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"ఈవెంట్‌లు"</string>
+    <string name="zen_mode_events_list" msgid="5571368229052715098">"ఈవెంట్‌లు"</string>
     <string name="zen_mode_events_title" msgid="5597241655883329085">"ఈవెంట్‌లను అనుమతించు"</string>
     <string name="zen_mode_all_callers" msgid="2378065871253871057">"ఎవరైనా"</string>
     <string name="zen_mode_contacts_callers" msgid="5569804103920394175">"పరిచయాలు"</string>
     <string name="zen_mode_starred_callers" msgid="1023167821338514140">"నక్షత్రం గుర్తు ఉన్న పరిచయాలు"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"పునరావృత కాలర్‌లను అనుమతించు"</string>
+    <string name="zen_mode_repeat_callers_list" msgid="2529895519653237330">"పునరావృత కాలర్‌లు"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8553876328249671783">"పునరావృత కాలర్‌లను అనుమతించు"</string>
     <string name="zen_mode_calls_summary_one" msgid="3972333792749874863">"<xliff:g id="CALLER_TYPE">%1$s</xliff:g> నుండి"</string>
     <string name="zen_mode_calls_summary_two" msgid="6592821501321201329">"<xliff:g id="CALLER_TYPE">%1$s</xliff:g> మరియు <xliff:g id="CALLERT_TPYE">%2$s</xliff:g> నుండి మాత్రమే"</string>
@@ -3425,6 +3476,12 @@
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"మీ డివైజ్‌ను అన్‌లాక్ చేయడానికి మీ వేలిముద్రను ఉపయోగించడంతో పాటు, దీనిని ప్రారంభించిన వెంటనే మీ పిన్‌ని అడిగే విధంగా సెట్ చేయడం ద్వారా మీరు దీనికి అదనపు రక్షణను అందించవచ్చు. డివైజ్‌ను ప్రారంభించే వరకు, అది అలారాలతో సహా కాల్‌లు, సందేశాలు లేదా నోటిఫికేషన్‌లను స్వీకరించదు. \n\nకోల్పోయిన లేదా దొంగిలించబడిన డివైజ్‌లలో ఉన్న డేటాని రక్షించడంలో ఇది సహాయపడుతుంది. మీ డివైజ్‌ను ప్రారంభించడం కోసం పిన్‌ని అడగాలా&amp;gt;"</string>
     <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"మీ పరికరాన్ని అన్‌లాక్ చేయడానికి మీ వేలిముద్రను ఉపయోగించడంతో పాటు, దీనిని ప్రారంభించిన వెంటనే మీ నమూనాని అడిగే విధంగా సెట్ చేయడం ద్వారా మీరు దీనికి అదనపు రక్షణను అందించవచ్చు. పరికరాన్ని ప్రారంభించే వరకు, అది అలారాలతో సహా కాల్‌లు, సందేశాలు లేదా నోటిఫికేషన్‌లను స్వీకరించదు. \n\nకోల్పోయిన లేదా దొంగిలించబడిన పరికరాలలో ఉన్న డేటాని రక్షించడంలో ఇది సహాయపడుతుంది. మీ పరికరాన్ని ప్రారంభించడం కోసం నమూనాని అడగాలా?"</string>
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"మీ పరికరాన్ని అన్‌లాక్ చేయడానికి మీ వేలిముద్రను ఉపయోగించడంతో పాటు, దీనిని ప్రారంభించిన వెంటనే మీ పాస్‌వర్డ్‌ని అడిగే విధంగా సెట్ చేయడం ద్వారా మీరు దీనికి అదనపు రక్షణను అందించవచ్చు. పరికరాన్ని ప్రారంభించే వరకు, అది అలారాలతో సహా కాల్‌లు, సందేశాలు లేదా నోటిఫికేషన్‌లను స్వీకరించదు. \n\nకోల్పోయిన లేదా దొంగిలించబడిన పరికరాలలో ఉన్న డేటాని రక్షించడంలో ఇది సహాయపడుతుంది. మీ పరికరాన్ని ప్రారంభించడం కోసం పాస్‌వర్డ్‌ని అడగాలా?"</string>
+    <!-- no translation found for encryption_interstitial_message_pin_for_face (2017438765366716760) -->
+    <skip />
+    <!-- no translation found for encryption_interstitial_message_pattern_for_face (3551827507967661552) -->
+    <skip />
+    <!-- no translation found for encryption_interstitial_message_password_for_face (3452793542112093614) -->
+    <skip />
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"అవును"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"వద్దు"</string>
     <string name="restricted_true_label" msgid="4761453839409220473">"నియంత్రించబడింది"</string>
@@ -3455,7 +3512,7 @@
     <string name="change_storage" msgid="600475265207060436">"నిల్వను మార్చండి"</string>
     <string name="notifications_label" msgid="2872668710589600731">"నోటిఫికేషన్‌లు"</string>
     <string name="notifications_enabled" msgid="6983396130566021385">"ఆన్‌లో ఉన్నాయి"</string>
-    <string name="notifications_enabled_with_info" msgid="2446033696770133334">"ఆన్ / <xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%1$s</xliff:g>"</string>
+    <string name="notifications_enabled_with_info" msgid="5669544704839269901">"<xliff:g id="NOTIFICATIONS_SENT">%1$s</xliff:g> / <xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%2$s</xliff:g>"</string>
     <string name="notifications_disabled" msgid="1262114548434938079">"ఆఫ్"</string>
     <string name="notifications_partly_blocked" msgid="592071133950126656">"<xliff:g id="COUNT_1">%2$d</xliff:g> వర్గాలలో <xliff:g id="COUNT_0">%1$d</xliff:g> ఆఫ్ చేయబడ్డాయి"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"నిశ్శబ్దం చేయబడింది"</string>
@@ -3782,7 +3839,6 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"ప్రశాంత భావనను కలిగించే ప్రదర్శన రంగులను ఉపయోగిస్తుంది"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"రంగు మార్పును వర్తింపజేయడానికి, స్క్రీన్‌ను ఆఫ్ చేయండి"</string>
     <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"కెమెరా లేజర్ సెన్సార్"</string>
-    <string name="logical_camera_default_switch" msgid="3310039627275112685">"డిఫాల్ట్‌గా లాజికల్ కెమెరా"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"ఆటోమేటిక్ సిస్టమ్ అప్‌డేట్‌లు"</string>
     <string name="ota_disable_automatic_update_summary" msgid="940729694354373087">"పరికరం పునఃప్రారంభమైనప్పుడు అప్‌డేట్‌లను వర్తింపజేయండి"</string>
     <string name="usage" msgid="2977875522080448986">"వినియోగం"</string>
@@ -3795,8 +3851,6 @@
     <string name="cell_data_template" msgid="405684854174361041">"<xliff:g id="AMOUNT">^1</xliff:g> మొబైల్ డేటా"</string>
     <string name="wifi_data_template" msgid="6265570748799357386">"<xliff:g id="AMOUNT">^1</xliff:g> Wi-Fi డేటా"</string>
     <string name="ethernet_data_template" msgid="5782476509881033590">"<xliff:g id="AMOUNT">^1</xliff:g> ఈథర్‌నెట్ డేటా"</string>
-    <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> డేటా హెచ్చరిక"</string>
-    <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> డేటా హెచ్చరిక / <xliff:g id="ID_2">%2$s</xliff:g> డేటా పరిమితి"</string>
     <string name="billing_cycle" msgid="6614597736285325497">"డేటా హెచ్చరిక &amp; పరిమితి"</string>
     <string name="app_usage_cycle" msgid="8877223251648092131">"యాప్ డేటా వినియోగ సైకిల్"</string>
     <string name="cell_data_warning" msgid="1985956818884847057">"<xliff:g id="ID_1">^1</xliff:g> డేటా హెచ్చరిక"</string>
