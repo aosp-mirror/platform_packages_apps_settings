@@ -19,7 +19,6 @@ package com.android.settings.sound;
 import static android.bluetooth.IBluetoothHearingAid.HI_SYNC_ID_INVALID;
 import static android.media.AudioManager.STREAM_MUSIC;
 import static android.media.AudioSystem.DEVICE_OUT_REMOTE_SUBMIX;
-import static android.media.AudioSystem.DEVICE_OUT_USB_HEADSET;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
@@ -91,12 +90,7 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
         CharSequence[] mediaValues = new CharSequence[numDevices + 1];
 
         // Setup devices entries, select active connected device
-        setupPreferenceEntries(mediaOutputs, mediaValues, findActiveDevice(STREAM_MUSIC));
-
-        if (isStreamFromOutputDevice(STREAM_MUSIC, DEVICE_OUT_USB_HEADSET)) {
-            // If wired headset is plugged in and active, select to default device.
-            mSelectedIndex = getDefaultDeviceIndex();
-        }
+        setupPreferenceEntries(mediaOutputs, mediaValues, findActiveDevice());
 
         // Display connected devices, default device and show the active device
         setPreference(mediaOutputs, mediaValues, preference);
@@ -120,5 +114,16 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
         if (a2dpProfile != null) {
             a2dpProfile.setActiveDevice(device);
         }
+    }
+
+    @Override
+    public BluetoothDevice findActiveDevice() {
+        BluetoothDevice activeDevice = findActiveHearingAidDevice();
+        final A2dpProfile a2dpProfile = mProfileManager.getA2dpProfile();
+
+        if (activeDevice == null && a2dpProfile != null) {
+            activeDevice = a2dpProfile.getActiveDevice();
+        }
+        return activeDevice;
     }
 }
