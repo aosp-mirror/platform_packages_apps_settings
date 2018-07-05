@@ -133,6 +133,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Susiejimo užklausa"</string>
     <string name="bluetooth_notif_message" msgid="5057417127600942904">"Palieskite, kad susietumėte su „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“."</string>
     <string name="bluetooth_show_received_files" msgid="3144149432555230410">"Gauti failai"</string>
+    <string name="bluetooth_show_files_received_via_bluetooth" msgid="5445105773989432594">"Failai gauti naud. „Bluetooth“"</string>
     <string name="device_picker" msgid="4978696506172252813">"Pasirinkti „Bluetooth“ įrenginį"</string>
     <string name="bluetooth_ask_enablement" msgid="3387222809404177525">"Programa „<xliff:g id="APP_NAME">%1$s</xliff:g>“ nori įjungti „Bluetooth“"</string>
     <string name="bluetooth_ask_disablement" msgid="5890386255790160573">"Programa „<xliff:g id="APP_NAME">%1$s</xliff:g>“ nori išjungti „Bluetooth“"</string>
@@ -189,8 +190,7 @@
     <string name="connected_device_connections_title" msgid="5988939345181466770">"Ryšio nuostatos"</string>
     <string name="connected_device_previously_connected_title" msgid="491765792822244604">"Anksčiau prijungti įrenginiai"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="6196066429488377795">"Anksčiau susieti"</string>
-    <!-- no translation found for connected_device_bluetooth_turned_on_toast (5683648191381637533) -->
-    <skip />
+    <string name="connected_device_bluetooth_turned_on_toast" msgid="5683648191381637533">"„Bluetooth“ įjungtas"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Data ir laikas"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Pasirinkite laiko juostą"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -308,7 +308,6 @@
     <string name="settings_label" msgid="1626402585530130914">"Nustatymai"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Nustatymai"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Spartusis nustatymų klavišas"</string>
-    <string name="activity_list_empty" msgid="6428823323471264836">"Nerasta jokios atitinkančios veiklos."</string>
     <string name="airplane_mode" msgid="8837269988154128601">"Lėktuvo režimas"</string>
     <string name="radio_controls_title" msgid="3447085191369779032">"Daugiau"</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"Belaidis ryšys ir tinklai"</string>
@@ -397,6 +396,18 @@
     <string name="security_status_title" msgid="5848766673665944640">"Saugos būsena"</string>
     <string name="security_dashboard_summary" msgid="6757421634477554939">"Ekrano užraktas, kontrolinis kodas"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Ekrano užraktas"</string>
+    <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Veidas pridėtas"</string>
+    <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Palieskite, kad nust. veido autentifik."</string>
+    <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Veido autentifikavimas"</string>
+    <string name="security_settings_face_enroll_introduction_cancel" msgid="4277182322482408514">"Atšaukti"</string>
+    <string name="security_settings_face_enroll_introduction_title" msgid="2694505011712885439">"Atrakinimas naudojant veidą"</string>
+    <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="8180330567034286589">"Autentifikavimas naudojant veidą"</string>
+    <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Naudokite veidą, norėdami atrakinti telefoną, įgalioti pirkimo veiksmus arba prisijungti prie programų."</string>
+    <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6300341727101929207">"Naudokite savo veidą"</string>
+    <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Naudokite veidą, norėdami atrakinti telefoną, įgalioti pirkimo veiksmus arba prisijungti prie programų"</string>
+    <string name="face_add_max" msgid="2342250989212694454">"Galite pridėti daugiausia tiek kontrolinių kodų: <xliff:g id="COUNT">%d</xliff:g>"</string>
+    <string name="face_intro_error_max" msgid="160022811747660581">"Pridėjote maksimalų skaičių veidų"</string>
+    <string name="face_intro_error_unknown" msgid="6367721696446677261">"Negalima pridėti daugiau veidų"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Kontr. kodo jutiklis"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Kontrolin. kodų tvark."</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Kontrolinių kodų naud."</string>
@@ -510,11 +521,12 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Apsaugok. planš. komp."</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Apsaugokite įrenginį"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Apsaugokite savo telefoną"</string>
-    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5008939545428518367">"Kad dar labiau apsaugotumėte įrenginį, nustatykite atsarginį ekrano užraktą"</string>
+    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1507307757032207572">"Kad dar labiau apsaugotumėte įrenginį, nustatykite atsarginį ekrano užraktą"</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Neleiskite kitiems asmenims naudoti šio planšetinio kompiuterio be leidimo, suaktyvinę įrenginio apsaugos funkcijas. Pasirinkite norimą naudoti užrakinimo ekraną."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Neleiskite kitiems asmenims naudoti šio įrenginio be jūsų leidimo, suaktyvinę įrenginio apsaugos funkcijas. Pasirinkite norimą naudoti užrakinimo ekraną."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Neleiskite kitiems asmenims naudoti šio telefono be jūsų leidimo, suaktyvinę įrenginio apsaugos funkcijas. Pasirinkite norimą naudoti užrakinimo ekraną."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Pasirinkite atsarginį ekrano užrakto metodą"</string>
+    <string name="lock_settings_picker_face_message" msgid="197106534637556054">"Pasirinkite atsarginį ekrano užrakto metodą"</string>
     <string name="setup_lock_settings_options_button_label" msgid="8511153243629402929">"Ekrano užrakto parinktys"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="5058207955455973917">"Ekrano užrakto parinktys"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Ekrano užraktas"</string>
@@ -541,6 +553,11 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"Kontrolinis kodas + slaptažodis"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"Tęsti be kontrolinio kodo"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"Telefoną galite atrakinti kontroliniu kodu. Saugos sumetimais, įgalinus šią parinktį, reikia naudoti atsarginį ekrano užraktą."</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="8792301636367000123">"Veido autentifikavimas ir atrakinimo piešinys"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="1196620299595657479">"Veido autentifikavimas ir PIN kodas"</string>
+    <string name="face_unlock_set_unlock_password" msgid="223117276773907474">"Veido autentifikavimas ir slaptažodis"</string>
+    <string name="face_unlock_skip_face" msgid="6362883392838482791">"Tęsti be veido autentifikavimo"</string>
+    <string name="face_unlock_title" msgid="9042382084472444316">"Telefoną galite atrakinti naudodami veidą. Saugos sumetimais, įgalinus šią parinktį, reikia naudoti atsarginį ekrano užraktą."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"Neleido: admin., šifr. polit. ar pr. duom. atmin."</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Nėra"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"Perbraukti"</string>
@@ -896,6 +913,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"Automatinė"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2,4 GHz dažnio juosta"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"5 GHz dažnio juosta"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"Pageidaujama 5,0 GHz dažnio juosta"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2,4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Pasirinkite bent vieną „Wi‑Fi“ viešosios interneto prieigos taško dažnio juostą:"</string>
@@ -1109,7 +1127,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"Natūrali"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"Suintensyvinta"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"Sodri"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"Automatinė"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"Prisitaikanti"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"Naudokite tik tikslias spalvas"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"Koreguokite tarp ryškių ir tikslių spalvų"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Sukant planšetinį kompiuterį automatiškai perjungti orientaciją"</string>
@@ -1637,6 +1655,9 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Slaptažodis nustatytas"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PIN kodas nustatytas"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Modelis nustatytas"</string>
+    <string name="lockpassword_choose_your_password_header_for_face" msgid="7876621019688907534">"Nor. naud. veido aut., nust. slaptažodį"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="8070525076987585344">"Nor. naud. veido aut., nust. atr. pieš."</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" msgid="7304398683609714816">"Nor. naud. veido aut., nust. PIN kodą"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"Jei norite tęsti, naudokite įrenginio atrakinimo piešinį"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"Jei norite tęsti, įveskite įrenginio PIN kodą"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"Jei norite tęsti, įveskite įrenginio slaptažodį"</string>
@@ -2652,7 +2673,6 @@
     <string name="data_usage_menu_metered" msgid="6235119991372755026">"Tinklo apribojimai"</string>
     <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"Automatinis duomenų sinchronizavimas"</string>
     <string name="data_usage_menu_sim_cards" msgid="6410498422797244073">"SIM kortelės"</string>
-    <string name="data_usage_menu_cellular_networks" msgid="8339835014751511300">"Mobiliojo ryšio tinklai"</string>
     <string name="data_usage_cellular_data_summary" msgid="8413357481361268285">"Pristabd. pasiekus aprib."</string>
     <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"Autom. duom. sinchronizavimas"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"Autom. asmen. duom. sinchron."</string>
@@ -2840,12 +2860,9 @@
       <item quantity="other">Tikrinti sertifikatus</item>
     </plurals>
     <string name="user_settings_title" msgid="3493908927709169019">"Keli naudotojai"</string>
-    <!-- no translation found for user_settings_footer_text (5947601460660791129) -->
-    <skip />
-    <!-- no translation found for user_settings_footer_text (2153761434649733502) -->
-    <skip />
-    <!-- no translation found for user_settings_footer_text (2844602828189838075) -->
-    <skip />
+    <string name="user_settings_footer_text" product="device" msgid="5947601460660791129">"Bendrai naudokite įrenginį pridėję naujų naudotojų. Kiekvienam naudotojui įrenginyje sukuriama asmeninė erdvė, kurioje rodomi tinkinti pagrindiniai ekranai, paskyros, programos, nustatymai ir daugiau."</string>
+    <string name="user_settings_footer_text" product="tablet" msgid="2153761434649733502">"Bendrai naudokite planšetinį kompiuterį pridėję naujų naudotojų. Kiekvienam naudotojui įrenginyje sukuriama asmeninė erdvė, kurioje rodomi tinkinti pagrindiniai ekranai, paskyros, programos, nustatymai ir daugiau."</string>
+    <string name="user_settings_footer_text" product="default" msgid="2844602828189838075">"Bendrai naudokite telefoną pridėję naujų naudotojų. Kiekvienam naudotojui įrenginyje sukuriama asmeninė erdvė, kurioje rodomi tinkinti pagrindiniai ekranai, paskyros, programos, nustatymai ir daugiau."</string>
     <string name="user_list_title" msgid="7937158411137563543">"Naudotojai ir profiliai"</string>
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"Pridėti naudotoją ar profilį"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Pridėti naudotoją"</string>
@@ -3090,12 +3107,12 @@
     <string name="keywords_sim_status" msgid="1474422416860990564">"tinklas, mobiliojo ryšio tinklo būsena, paslaugos būsena, signalo stiprumas, mobiliojo ryšio tinklo tipas, tarptinklinis ryšys, ICCID"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"serijos numeris, aparatinės įrangos versija"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"„Android“ saugos pataisos lygis, nemoduliuotų signalų įrangos versija, branduolio versija"</string>
-    <!-- no translation found for keywords_device_feedback (564493721125966719) -->
-    <skip />
+    <string name="keywords_systemui_theme" msgid="9112852512550404882">"Tamsi tema"</string>
+    <string name="keywords_device_feedback" msgid="564493721125966719">"riktas"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Aplinkos ekranas, užrakinimo ekranas"</string>
+    <string name="keywords_face_settings" msgid="7505388678116799329">"veidas"</string>
     <string name="keywords_fingerprint_settings" msgid="239222512315619538">"kontrolinis kodas"</string>
-    <!-- no translation found for keywords_display_auto_brightness (4130320471533951796) -->
-    <skip />
+    <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"pritemdyti ekraną, jutiklinis ekranas, akumuliatorius, išmanusis šviesumas, dinaminis šviesumas"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"pasukti, apversti, pasukimas, stačia, gulsčia, orientacija, vertikali, horizontali"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"atnaujinti, android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"dnd, tvarkaraštis, pranešimai, blokuoti, tyla, vibruoti, miego būsena, darbas, fokusavimas, garsas, nutildyti, diena, savaitės diena, savaitgalis, savaitės naktis, renginys"</string>
@@ -3253,7 +3270,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"Nutildyta, bet leisti <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> ir <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"Nutildyta, bet leisti <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> ir <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"Pranešimai, įvykiai ir priminimai"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"Įjungus netrukdymo režimą pranešimai, priminimai ir įvykiai bus nutildomi, išskyrus anksčiau nurodytus elementus, kuriuos leidžiate. Galite koreguoti nustatymus, kad jūsų šeimos nariai, draugai arba kiti kontaktai galėtų su jumis susisiekti."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"Įjungus netrukdymo režimą pranešimai, priminimai ir įvykiai bus nutildomi, išskyrus anksčiau nurodytus elementus, kuriuos leidžiate. Galite koreguoti nustatymus, kad jūsų šeimos nariai, draugai arba kiti kontaktai galėtų su jumis susisiekti."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"Atlikta"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Nustatymai"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"Nieko nerodyti arba neskambėti gavus pranešimų"</string>
@@ -3440,11 +3457,18 @@
     <string name="zen_mode_calls_title" msgid="623395033931747661">"Leisti skambučius"</string>
     <string name="zen_mode_calls_footer" msgid="3618700268458237781">"Kai įjungtas netrukdymo režimas, gaunamieji skambučiai blokuojami. Galite koreguoti nustatymus, kad jūsų šeimos nariai, draugai arba kiti kontaktai galėtų su jumis susisiekti."</string>
     <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"Žvaigždute pažymėti kontaktai"</string>
-    <!-- no translation found for zen_mode_starred_contacts_summary_additional_contacts (500105380255018671) -->
+    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="500105380255018671">
+      <item quantity="one">Dar <xliff:g id="NUM_PEOPLE">%d</xliff:g> kontaktas</item>
+      <item quantity="few">Dar <xliff:g id="NUM_PEOPLE">%d</xliff:g> kontaktai</item>
+      <item quantity="many">Dar <xliff:g id="NUM_PEOPLE">%d</xliff:g> kontakto</item>
+      <item quantity="other">Dar <xliff:g id="NUM_PEOPLE">%d</xliff:g> kontaktų</item>
+    </plurals>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Pranešimai"</string>
     <string name="zen_mode_messages_title" msgid="7729380010396411129">"Leisti pranešimus"</string>
     <string name="zen_mode_all_messages" msgid="8257021584561639816">"Pranešimai"</string>
+    <string name="zen_mode_all_messages_list" msgid="4223560721230967061">"pranešimai"</string>
     <string name="zen_mode_selected_messages" msgid="1047355526202106114">"Kai kurie pranešimai"</string>
+    <string name="zen_mode_selected_messages_list" msgid="5309288435815759102">"kai kurie pranešimai"</string>
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"Iš bet ko"</string>
     <string name="zen_mode_from_contacts" msgid="2232335406106711637">"Tik iš kontaktų"</string>
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Tik iš žvaigždutėmis pažymėtų kontaktų"</string>
@@ -3453,16 +3477,22 @@
     <string name="zen_calls_summary_repeat_only" msgid="7105261473107715445">"Tik iš pakartotinai skambinančiųjų"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Nėra"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Signalai"</string>
+    <string name="zen_mode_alarms_list" msgid="1090332840207025714">"signalai"</string>
     <string name="zen_mode_media" msgid="8808264142134422380">"Medija"</string>
+    <string name="zen_mode_media_list" msgid="5483540766397328038">"medija"</string>
     <string name="zen_mode_system" msgid="2541380718411593581">"Lietimo garsai"</string>
+    <string name="zen_mode_system_list" msgid="6996104733185177115">"lietimo garsai"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Priminimai"</string>
+    <string name="zen_mode_reminders_list" msgid="2853975802240340190">"priminimai"</string>
     <string name="zen_mode_reminders_title" msgid="2345044406347406902">"Leisti priminimus"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Įvykiai"</string>
+    <string name="zen_mode_events_list" msgid="5571368229052715098">"įvykiai"</string>
     <string name="zen_mode_events_title" msgid="5597241655883329085">"Leisti įvykius"</string>
     <string name="zen_mode_all_callers" msgid="2378065871253871057">"bet kas"</string>
     <string name="zen_mode_contacts_callers" msgid="5569804103920394175">"Kontaktai"</string>
     <string name="zen_mode_starred_callers" msgid="1023167821338514140">"žvaigždute pažymėti kontaktai"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"Pakartotinai skambinantys"</string>
+    <string name="zen_mode_repeat_callers_list" msgid="2529895519653237330">"pakartotinai skambinantys žmonės"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8553876328249671783">"Leisti pakartotinai skambinančius žm."</string>
     <string name="zen_mode_calls_summary_one" msgid="3972333792749874863">"Iš: <xliff:g id="CALLER_TYPE">%1$s</xliff:g>"</string>
     <string name="zen_mode_calls_summary_two" msgid="6592821501321201329">"Iš <xliff:g id="CALLER_TYPE">%1$s</xliff:g> ir <xliff:g id="CALLERT_TPYE">%2$s</xliff:g>"</string>
@@ -3518,6 +3548,9 @@
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"Be to, kad atrakinant įrenginį prašoma kontrolinio kodo, galite dar labiau apsaugoti šį įrenginį nustatę, kad jį paleidžiant būtų prašoma įvesti PIN kodą. Nepaleidus įrenginio juo nebus gaunami skambučiai ir pranešimai, įskaitant signalus.\n\nTaip bus apsaugoti pamestų ar pavogtų įrenginių duomenys. Reikalauti PIN kodo norint paleisti jūsų įrenginį?"</string>
     <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"Be to, kad atrakinant įrenginį prašoma kontrolinio kodo, galite dar labiau apsaugoti šį įrenginį nustatę, kad jį paleidžiant būtų prašoma nubrėžti atrakinimo piešinį. Nepaleidus įrenginio juo nebus gaunami skambučiai ir pranešimai, įskaitant signalus.\n\nTaip bus apsaugoti pamestų ar pavogtų įrenginių duomenys. Reikalauti atrakinimo piešinio norint paleisti jūsų įrenginį?"</string>
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Be kontrolinio kodo, kurį naudodami atrakinate įrenginį, galite dar geriau apsaugoti šį įrenginį reikalaudami įvesti slaptažodį prieš jį paleidžiant. Kol įrenginys nepaleidžiamas, juo negalima gauti skambučių ar pranešimų, įskaitant signalus.\n\nTai padeda apsaugoti duomenis prarastuose arba pavogtuose įrenginiuose. Reikalauti slaptažodžio paleidžiant įrenginį?"</string>
+    <string name="encryption_interstitial_message_pin_for_face" msgid="2017438765366716760">"Be veido, kurį naudodami atrakinate įrenginį, galite dar geriau apsaugoti šį įrenginį reikalaudami įvesti PIN kodą prieš jį paleidžiant. Kol įrenginys nepaleidžiamas, juo negalima gauti skambučių ar pranešimų, įskaitant signalus.\n\nTai padeda apsaugoti duomenis prarastuose arba pavogtuose įrenginiuose. Reikalauti PIN kodo paleidžiant įrenginį?"</string>
+    <string name="encryption_interstitial_message_pattern_for_face" msgid="3551827507967661552">"Be veido, kurį naudodami atrakinate įrenginį, galite dar geriau apsaugoti šį įrenginį reikalaudami nubrėžti atrakinimo piešinį prieš jį paleidžiant. Kol įrenginys nepaleidžiamas, juo negalima gauti skambučių ar pranešimų, įskaitant signalus.\n\nTai padeda apsaugoti duomenis prarastuose arba pavogtuose įrenginiuose. Reikalauti atrakinimo piešinio paleidžiant įrenginį?"</string>
+    <string name="encryption_interstitial_message_password_for_face" msgid="3452793542112093614">"Be veido, kurį naudodami atrakinate įrenginį, galite dar geriau apsaugoti šį įrenginį reikalaudami įvesti slaptažodį prieš jį paleidžiant. Kol įrenginys nepaleidžiamas, juo negalima gauti skambučių ar pranešimų, įskaitant signalus.\n\nTai padeda apsaugoti duomenis prarastuose arba pavogtuose įrenginiuose. Reikalauti slaptažodžio paleidžiant įrenginį?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Taip"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Ne"</string>
     <string name="restricted_true_label" msgid="4761453839409220473">"Apribota"</string>
@@ -3548,7 +3581,7 @@
     <string name="change_storage" msgid="600475265207060436">"Keisti saugyklą"</string>
     <string name="notifications_label" msgid="2872668710589600731">"Informaciniai pranešimai"</string>
     <string name="notifications_enabled" msgid="6983396130566021385">"Įjungta"</string>
-    <string name="notifications_enabled_with_info" msgid="2446033696770133334">"Įjungta / <xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%1$s</xliff:g>"</string>
+    <string name="notifications_enabled_with_info" msgid="5669544704839269901">"<xliff:g id="NOTIFICATIONS_SENT">%1$s</xliff:g> / <xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%2$s</xliff:g>"</string>
     <string name="notifications_disabled" msgid="1262114548434938079">"Išjungta"</string>
     <string name="notifications_partly_blocked" msgid="592071133950126656">"Išjungta kategorijų: <xliff:g id="COUNT_0">%1$d</xliff:g> iš <xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"Nutildyta"</string>
@@ -3897,7 +3930,6 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"Naudoti šaltesnes ekrano spalvas"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Kad pritaikytumėte spalvos pakeitimą, išjunkite ekraną"</string>
     <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"Fotoaparato lazerio jutiklis"</string>
-    <string name="logical_camera_default_switch" msgid="3310039627275112685">"Loginis fotoaparatas kaip numatytasis"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Automatiniai sistemos naujiniai"</string>
     <string name="ota_disable_automatic_update_summary" msgid="940729694354373087">"Atnaujinimai pritaikomi, kai įrenginys paleidžiamas iš naujo"</string>
     <string name="usage" msgid="2977875522080448986">"Naudojimas"</string>
@@ -3910,8 +3942,6 @@
     <string name="cell_data_template" msgid="405684854174361041">"<xliff:g id="AMOUNT">^1</xliff:g> mobiliojo ryšio duomenų"</string>
     <string name="wifi_data_template" msgid="6265570748799357386">"<xliff:g id="AMOUNT">^1</xliff:g> „Wi-Fi“ duomenų"</string>
     <string name="ethernet_data_template" msgid="5782476509881033590">"<xliff:g id="AMOUNT">^1</xliff:g> eterneto duomenų"</string>
-    <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> duomenų įspėjimas"</string>
-    <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> duomenų įspėjimas / <xliff:g id="ID_2">%2$s</xliff:g> duomenų apribojimas"</string>
     <string name="billing_cycle" msgid="6614597736285325497">"Įspėjimas dėl duomenų ir riba"</string>
     <string name="app_usage_cycle" msgid="8877223251648092131">"Duomenų naudojimo ciklas"</string>
     <string name="cell_data_warning" msgid="1985956818884847057">"<xliff:g id="ID_1">^1</xliff:g> duomenų įspėjimas"</string>
