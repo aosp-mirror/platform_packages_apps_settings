@@ -108,13 +108,6 @@
             <intent android:action="com.android.settings.action.DEMO_MODE" />
         </Preference>
 
-        <ListPreference
-            android:key="dark_ui_mode"
-            android:title="@string/dark_ui_mode"
-            android:dialogTitle="@string/dark_ui_mode_title"
-            android:entries="@array/dark_ui_mode_entries"
-            android:entryValues="@array/dark_ui_mode_values" />
-
         <Preference
             android:key="quick_settings_tiles"
             android:title="@string/quick_settings_developer_tiles"

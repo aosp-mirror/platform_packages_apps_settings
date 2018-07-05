@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.settings.development;
+package com.android.settings.display;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
@@ -23,11 +23,13 @@ import static org.mockito.Mockito.when;
 import android.app.UiModeManager;
 import android.content.Context;
 
+import com.android.settings.display.DarkUIPreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
@@ -51,7 +53,8 @@ public class DarkUIPreferenceControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = new DarkUIPreferenceController(mContext, mUiModeManager);
+        mController = new DarkUIPreferenceController(mContext, "dark_ui_mode");
+        mController.setUiModeManager(mUiModeManager);
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
             .thenReturn(mPreference);
         mController.displayPreference(mPreferenceScreen);

@@ -108,15 +108,6 @@
         settings:controller="com.android.settings.security.screenlock.LockScreenPreferenceController"
         settings:userRestriction="no_ambient_display" />
 
-    <!-- Hide night mode for now
-    <ListPreference
-        android:key="night_mode"
-        android:title="@string/night_mode_title"
-        settings:keywords="@string/keywords_display_night_mode"
-        android:summary="@string/night_mode_summary"
-        android:entries="@array/night_mode_entries"
-        android:entryValues="@array/night_mode_values" /> -->
-
     <SwitchPreference
         android:key="camera_gesture"
         android:title="@string/camera_gesture_title"
@@ -132,17 +123,17 @@
         android:summary="@string/tap_to_wake_summary" />
 
     <ListPreference
-        android:key="theme"
-        android:title="@string/color_theme"
-        android:summary="@string/summary_placeholder" />
+        android:key="dark_ui_mode"
+        android:title="@string/dark_ui_mode"
+        android:dialogTitle="@string/dark_ui_mode_title"
+        android:entries="@array/dark_ui_mode_entries"
+        android:entryValues="@array/dark_ui_mode_values"
+        settings:controller="com.android.settings.display.DarkUIPreferenceController" />
 
     <ListPreference
-        android:key="systemui_theme"
+        android:key="theme"
         android:title="@string/device_theme"
-        android:entries="@array/systemui_theme_entries"
-        android:entryValues="@array/systemui_theme_values"
-        settings:controller="com.android.settings.display.SystemUiThemePreferenceController"
-        settings:keywords="@string/keywords_systemui_theme" />
+        android:summary="@string/summary_placeholder" />
 
     <Preference
         android:key="vr_display_pref"
