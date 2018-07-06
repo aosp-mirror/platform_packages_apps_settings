@@ -131,6 +131,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Anmodning om parring"</string>
     <string name="bluetooth_notif_message" msgid="5057417127600942904">"Tryk for at parre med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="3144149432555230410">"Modtagne filer"</string>
+    <string name="bluetooth_show_files_received_via_bluetooth" msgid="5445105773989432594">"Filer modtaget via Bluetooth"</string>
     <string name="device_picker" msgid="4978696506172252813">"Vælg Bluetooth-enhed"</string>
     <string name="bluetooth_ask_enablement" msgid="3387222809404177525">"<xliff:g id="APP_NAME">%1$s</xliff:g> ønsker at aktivere Bluetooth"</string>
     <string name="bluetooth_ask_disablement" msgid="5890386255790160573">"<xliff:g id="APP_NAME">%1$s</xliff:g> ønsker at deaktivere Bluetooth"</string>
@@ -184,11 +185,10 @@
     <string name="connected_device_saved_title" msgid="688364359746674536">"Gemte enheder"</string>
     <string name="connected_device_add_device_title" msgid="7803521577708810621">"Tilføj enhed"</string>
     <string name="connected_device_add_device_summary" msgid="4041865900298680338">"Bluetooth aktiveres for at parre"</string>
-    <string name="connected_device_connections_title" msgid="5988939345181466770">"Præferencer for forbindelse"</string>
-    <string name="connected_device_previously_connected_title" msgid="491765792822244604">"Tidligere tilsluttede enheder"</string>
+    <string name="connected_device_connections_title" msgid="5988939345181466770">"Forbindelsesindstillinger"</string>
+    <string name="connected_device_previously_connected_title" msgid="491765792822244604">"Tidligere forbundne enheder"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="6196066429488377795">"Tidligere forbindelser"</string>
-    <!-- no translation found for connected_device_bluetooth_turned_on_toast (5683648191381637533) -->
-    <skip />
+    <string name="connected_device_bluetooth_turned_on_toast" msgid="5683648191381637533">"Bluetooth er aktiveret"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Dato og klokkeslæt"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Vælg tidszone"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -304,7 +304,6 @@
     <string name="settings_label" msgid="1626402585530130914">"Indstillinger"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Indstillinger"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Genvej til Indstillinger"</string>
-    <string name="activity_list_empty" msgid="6428823323471264836">"Der blev ikke fundet nogen matchende aktiviteter."</string>
     <string name="airplane_mode" msgid="8837269988154128601">"Flytilstand"</string>
     <string name="radio_controls_title" msgid="3447085191369779032">"Mere"</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"Trådløs og netværk"</string>
@@ -393,6 +392,18 @@
     <string name="security_status_title" msgid="5848766673665944640">"Sikkerhedsstatus"</string>
     <string name="security_dashboard_summary" msgid="6757421634477554939">"Skærmlås, fingeraftryk"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Skærmlås"</string>
+    <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Ansigtet blev tilføjet"</string>
+    <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Tryk for at konfigurere ansigtsgodk."</string>
+    <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Ansigtsgodkendelse"</string>
+    <string name="security_settings_face_enroll_introduction_cancel" msgid="4277182322482408514">"Annuller"</string>
+    <string name="security_settings_face_enroll_introduction_title" msgid="2694505011712885439">"Lås op med dit ansigt"</string>
+    <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="8180330567034286589">"Brug dit ansigt til godkendelse"</string>
+    <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Brug dit ansigt til at låse din telefon op, godkende køb og logge ind i apps."</string>
+    <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6300341727101929207">"Brug dit ansigt"</string>
+    <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Brug dit ansigt til at låse din telefon op, godkende køb og logge ind i apps"</string>
+    <string name="face_add_max" msgid="2342250989212694454">"Du kan tilføje op til <xliff:g id="COUNT">%d</xliff:g> ansigter"</string>
+    <string name="face_intro_error_max" msgid="160022811747660581">"Du har tilføjet det maksimale antal ansigter"</string>
+    <string name="face_intro_error_unknown" msgid="6367721696446677261">"Der kan ikke tilføjes flere ansigter"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Fingeraftryk"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Adm. fingeraftryk"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Brug fingeraftryk til"</string>
@@ -488,8 +499,8 @@
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="8219375738445017266">"Krypteringen blev afbrudt og kan ikke fuldføres. Som følge heraf er dataene på din tablet ikke længere tilgængelige. \n\nHvis du vil genoptage brugen af din  tablet, skal du udføre en gendannelse af fabriksdata. Når du konfigurerer din tablet efter nulstillingen, har du mulighed for at gendanne data, der blev sikkerhedskopieret på din Google-konto."</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3270131542549577953">"Krypteringen blev afbrudt og kan ikke fuldføres. Som følge heraf er dataene på din telefon ikke længere tilgængelige. \n\nHvis du vil genoptage brugen af telefonen, skal du udføre en gendannelse af fabriksdata. Når du konfigurerer din telefon efter nulstillingen, har du mulighed for at gendanne data, der blev sikkerhedskopieret på din Google-konto."</string>
     <string name="crypt_keeper_data_corrupt_title" msgid="8759119849089795751">"Dekrypteringen mislykkedes"</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"Den indtastede adgangskode er korrekt, men desværre er dine data beskadigede. \n\nFør du kan bruge din tablet igen, skal du gendanne fabriksindstillingerne. Under den efterfølgende opsætning af tabletten får du mulighed for at gendanne eventuelle data, der er sikkerhedskopieret på din Google-konto."</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Den indtastede adgangskode er korrekt, men desværre er dine data beskadigede. \n\nFør du kan bruge din telefon igen, skal du gendanne fabriksindstillingerne. Under den efterfølgende opsætning af telefonen får du mulighed for at gendanne eventuelle data, der er sikkerhedskopieret på din Google-konto."</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"Den indtastede adgangskode er korrekt, men desværre er dine data beskadigede. \n\nFør du kan bruge din tablet igen, skal du gendanne fabriksindstillingerne. Under den efterfølgende konfiguration af tabletten får du mulighed for at gendanne eventuelle data, der er sikkerhedskopieret på din Google-konto."</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Den indtastede adgangskode er korrekt, men desværre er dine data beskadigede. \n\nFør du kan bruge din telefon igen, skal du gendanne fabriksindstillingerne. Under den efterfølgende konfiguration af telefonen får du mulighed for at gendanne eventuelle data, der er sikkerhedskopieret på din Google-konto."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Skift indtastningsmetode"</string>
     <string name="suggested_lock_settings_title" msgid="8498743819223200961">"Beskyt din telefon"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="2296800316150748710">"Konfigurer skærmlåsen for at beskytte din tablet"</string>
@@ -504,11 +515,12 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Beskyt din tablet"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Beskyt din enhed"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Beskyt din telefon"</string>
-    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5008939545428518367">"Konfigurer en alternativ metode til skærmlåsning for at opnå større sikkerhed"</string>
+    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1507307757032207572">"Konfigurer en alternativ metode til skærmlåsning for at opnå større sikkerhed"</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Du kan forhindre andre i at bruge denne tablet uden din tilladelse ved at aktivere funktionerne til enhedsbeskyttelse. Vælg den skærmlås, du vil bruge."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Du kan forhindre andre i at bruge denne enhed uden din tilladelse ved at aktivere funktionerne til enhedsbeskyttelser. Vælg den skærmlås, du vil bruge."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Du kan forhindre andre i at bruge denne telefon uden din tilladelse ved at aktivere funktionerne til enhedsbeskyttelse. Vælg den skærmlås, du vil bruge."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Vælg din alternative metode til skærmlåsning"</string>
+    <string name="lock_settings_picker_face_message" msgid="197106534637556054">"Vælg din alternative metode til skærmlåsning"</string>
     <string name="setup_lock_settings_options_button_label" msgid="8511153243629402929">"Valgmuligheder for skærmlås"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="5058207955455973917">"Valgmuligheder for skærmlås"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Skærmlås"</string>
@@ -535,6 +547,11 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"Fingeraftryk og adgangskode"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"Fortsæt uden fingeraftryk"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"Du kan låse din telefonen op ved hjælp af dit fingeraftryk. Af hensyn til sikkerheden kræver denne mulighed en alternativ skærmlås."</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="8792301636367000123">"Ansigtsgodkendelse+mønster"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="1196620299595657479">"Ansigtsgodkendelse+pinkode"</string>
+    <string name="face_unlock_set_unlock_password" msgid="223117276773907474">"Ansigtsgodkendelse+adgangskode"</string>
+    <string name="face_unlock_skip_face" msgid="6362883392838482791">"Fortsæt uden ansigtsgodkendelse"</string>
+    <string name="face_unlock_title" msgid="9042382084472444316">"Du kan låse din telefonen op ved hjælp af dit ansigt. Af hensyn til sikkerheden kræver denne mulighed en alternativ skærmlås."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"Deaktiveret af administrator, krypteringspolitik eller Lager for loginoplysninger"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Ingen"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"Stryg"</string>
@@ -866,6 +883,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"Automatisk"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2,4 GHz-bånd"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"5,0 GHz-bånd"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"5,0 GHz-bånd foretrækkes"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2,4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5,0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Vælg mindst ét frekvensbånd til Wi‑Fi-hotspottet:"</string>
@@ -1077,7 +1095,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"Naturlig"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"Forstærket"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"Mættet"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"Automatisk"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"Selvjusterende"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"Anvend kun nøjagtige farver"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"Skift mellem levende og nøjagtige farver"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Skift automatisk retning, når tabletcomputeren drejes"</string>
@@ -1416,7 +1434,7 @@
     <string name="apn_edit" msgid="1354715499708424718">"Rediger adgangspunkt"</string>
     <string name="apn_not_set" msgid="4974192007399968164">"Ikke angivet"</string>
     <string name="apn_name" msgid="4115580098369824123">"Navn"</string>
-    <string name="apn_apn" msgid="2479425126733513353">"Adgangspunkt"</string>
+    <string name="apn_apn" msgid="2479425126733513353">"APN"</string>
     <string name="apn_http_proxy" msgid="1826885957243696354">"Proxy"</string>
     <string name="apn_http_port" msgid="3763259523984976226">"Port"</string>
     <string name="apn_user" msgid="455637547356117761">"Brugernavn"</string>
@@ -1432,28 +1450,28 @@
     <string name="apn_auth_type_pap" msgid="1666934536996033383">"PAP"</string>
     <string name="apn_auth_type_chap" msgid="3369626283789068360">"CHAP"</string>
     <string name="apn_auth_type_pap_chap" msgid="9102343063036134541">"PAP eller CHAP"</string>
-    <string name="apn_type" msgid="469613123902220544">"Adgangspunktstype"</string>
-    <string name="apn_protocol" msgid="3272222921649348640">"Adgangspunktets protokol"</string>
-    <string name="apn_roaming_protocol" msgid="3386954381510788422">"Adgangspunktets roamingprotokol"</string>
-    <string name="carrier_enabled" msgid="407655861175280806">"Aktivér/deaktiver adgangspunkt"</string>
-    <string name="carrier_enabled_summaryOn" msgid="6338915271908057531">"Adgangspunktet er aktiveret"</string>
-    <string name="carrier_enabled_summaryOff" msgid="4300790190221203756">"Adgangspunktet er deaktiveret"</string>
+    <string name="apn_type" msgid="469613123902220544">"APN-type"</string>
+    <string name="apn_protocol" msgid="3272222921649348640">"APN-protokol"</string>
+    <string name="apn_roaming_protocol" msgid="3386954381510788422">"APN-roamingprotokol"</string>
+    <string name="carrier_enabled" msgid="407655861175280806">"Aktivér/deaktiver APN"</string>
+    <string name="carrier_enabled_summaryOn" msgid="6338915271908057531">"APN er aktiveret"</string>
+    <string name="carrier_enabled_summaryOff" msgid="4300790190221203756">"APN er deaktiveret"</string>
     <string name="bearer" msgid="594270280031923558">"Bærer"</string>
     <string name="mvno_type" msgid="2543253857818336421">"MVNO-type"</string>
     <string name="mvno_match_data" msgid="4560671695220540466">"MVNO-værdi"</string>
-    <string name="menu_delete" msgid="6981294422841124659">"Slet adgangspunkt"</string>
-    <string name="menu_new" msgid="3014205883303921729">"Nyt adgangspunkt"</string>
+    <string name="menu_delete" msgid="6981294422841124659">"Slet APN"</string>
+    <string name="menu_new" msgid="3014205883303921729">"Ny APN"</string>
     <string name="menu_save" msgid="8109345640668285399">"Gem"</string>
     <string name="menu_cancel" msgid="2194502410474697474">"Kassér"</string>
     <string name="error_title" msgid="7631322303341024692"></string>
     <string name="error_name_empty" msgid="5508155943840201232">"Feltet Navn skal udfyldes."</string>
-    <string name="error_apn_empty" msgid="4932211013600863642">"Du skal angive et adgangspunkt."</string>
+    <string name="error_apn_empty" msgid="4932211013600863642">"Du skal angive et APN."</string>
     <string name="error_mcc_not3" msgid="4560171714156251661">"MCC-feltet skal indeholde 3 tal."</string>
     <string name="error_mnc_not23" msgid="8418177072458379439">"MNC-feltet skal indeholde 2 eller 3 tal."</string>
     <string name="error_adding_apn_type" msgid="4181334016628549645">"Mobilselskabet tillader ikke, at du tilføjer adgangspunkter af typen %s."</string>
-    <string name="restore_default_apn" msgid="8178010218751639581">"Gendannelse af standardindstillingerne for adgangspunktet."</string>
+    <string name="restore_default_apn" msgid="8178010218751639581">"Gendannelse af standardindstillingerne for APN."</string>
     <string name="menu_restore" msgid="8260067415075573273">"Nulstil til standard"</string>
-    <string name="restore_default_apn_completed" msgid="2824775307377604897">"Standardindstillingerne for adgangspunktet er nulstillet."</string>
+    <string name="restore_default_apn_completed" msgid="2824775307377604897">"Standardindstillingerne for APN er nulstillet."</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"Nulstil valg"</string>
     <string name="reset_dashboard_summary" msgid="4851012632493522755">"Netværk, apps eller enheden kan nulstilles"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"Nulstil Wi-Fi, mobil og Bluetooth"</string>
@@ -1603,6 +1621,9 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Adgangskoden er indstillet"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"Pinkoden er blevet indstillet"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Mønsteret er blevet indstillet"</string>
+    <string name="lockpassword_choose_your_password_header_for_face" msgid="7876621019688907534">"Angiv adgangskode for at bruge ansigt"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="8070525076987585344">"Angiv mønster for at bruge ansigtsgodk."</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" msgid="7304398683609714816">"Angiv pinkode for at bruge ansigtsgodk."</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"Brug mønsteret til din enhed for at fortsætte"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"Angiv pinkoden til din enhed for at fortsætte"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"Angiv adgangskoden til din enhed for at fortsætte"</string>
@@ -2163,7 +2184,7 @@
     <string name="battery_tip_smart_battery_title" product="tablet" msgid="6452567046912954866">"Forlæng din tablets batteritid"</string>
     <string name="battery_tip_smart_battery_title" product="device" msgid="4445149029390556382">"Forlæng enhedens batteritid"</string>
     <string name="battery_tip_smart_battery_summary" msgid="2326809294592208069">"Aktivér batteriadministration"</string>
-    <string name="battery_tip_early_heads_up_title" msgid="5788492366387119807">"Aktivér Batterisparefunktion"</string>
+    <string name="battery_tip_early_heads_up_title" msgid="5788492366387119807">"Aktivér batterisparefunktionen"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="1639271439914224547">"Enheden løber muligvis tør for batteri hurtigere end forventet"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="4294083319255926811">"Batterisparefunktion er aktiveret"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7054036010928794364">"Nogle funktioner kan være begrænsede"</string>
@@ -2333,7 +2354,7 @@
     <string name="battery_saver_auto_title" msgid="8368709389419695611">"Aktivér automatisk"</string>
     <string name="battery_saver_seekbar_title" msgid="4705356758573183963">"Ved <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_seekbar_title_placeholder" msgid="1138980155985636295">"Aktivér"</string>
-    <string name="battery_saver_master_switch_title" msgid="622539414546588436">"Brug Batterisparefunktion"</string>
+    <string name="battery_saver_master_switch_title" msgid="622539414546588436">"Brug batterisparefunktionen"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Slå automatisk til"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Aldrig"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="8665950426992057191">"ved batteriniveau på <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
@@ -2505,7 +2526,7 @@
     <string name="wifi_setup_status_eap_not_supported" msgid="6796317704783144190">"EAP understøttes ikke."</string>
     <string name="wifi_setup_eap_not_supported" msgid="6812710317883658843">"Du kan ikke konfigurere en EAP-Wi-Fi-forbindelse under konfigurationen. Efter konfigurationen kan du gøre dette i Indstillinger &gt; Trådløst og netværk."</string>
     <string name="wifi_setup_description_connecting" msgid="2793554932006756795">"Oprettelsen kan tage et par minutter..."</string>
-    <string name="wifi_setup_description_connected" msgid="6649168170073219153">"Tryk på "<b>"Næste"</b>" for at fortsætte med opsætningen.\n\nTryk på "<b>"Tilbage"</b>" for at oprette forbindelse til et andet Wi-Fi-netværk."</string>
+    <string name="wifi_setup_description_connected" msgid="6649168170073219153">"Tryk på "<b>"Næste"</b>" for at fortsætte med konfigurationen.\n\nTryk på "<b>"Tilbage"</b>" for at oprette forbindelse til et andet Wi-Fi-netværk."</string>
     <string name="accessibility_sync_enabled" msgid="558480439730263116">"Synkronisering aktiveret"</string>
     <string name="accessibility_sync_disabled" msgid="1741194106479011384">"Sync deaktiveret"</string>
     <string name="accessibility_sync_in_progress" msgid="4501160520879902723">"Synkroniserer nu"</string>
@@ -2586,7 +2607,6 @@
     <string name="data_usage_menu_metered" msgid="6235119991372755026">"Netværksbegrænsninger"</string>
     <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"Synkroniser data automatisk"</string>
     <string name="data_usage_menu_sim_cards" msgid="6410498422797244073">"SIM-kort"</string>
-    <string name="data_usage_menu_cellular_networks" msgid="8339835014751511300">"Mobilnetværk"</string>
     <string name="data_usage_cellular_data_summary" msgid="8413357481361268285">"Midlertidigt sat på pause"</string>
     <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"Synkroniser data automatisk"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"Automatisk synk. af persondata"</string>
@@ -2766,12 +2786,9 @@
       <item quantity="other">Tjek certifikater</item>
     </plurals>
     <string name="user_settings_title" msgid="3493908927709169019">"Flere brugere"</string>
-    <!-- no translation found for user_settings_footer_text (5947601460660791129) -->
-    <skip />
-    <!-- no translation found for user_settings_footer_text (2153761434649733502) -->
-    <skip />
-    <!-- no translation found for user_settings_footer_text (2844602828189838075) -->
-    <skip />
+    <string name="user_settings_footer_text" product="device" msgid="5947601460660791129">"Del din enhed ved at tilføje nye brugere. Hver bruger får sit eget rum på enheden til tilpassede startskærme, konti, apps, indstillinger og meget mere."</string>
+    <string name="user_settings_footer_text" product="tablet" msgid="2153761434649733502">"Del din tablet ved at tilføje nye brugere. Hver bruger får sit eget rum på din tablet til tilpassede startskærme, konti, apps, indstillinger og meget mere."</string>
+    <string name="user_settings_footer_text" product="default" msgid="2844602828189838075">"Del din telefon ved at tilføje nye brugere. Hver bruger får sit eget rum på telefonen til tilpassede startskærme, konti, apps, indstillinger og meget mere."</string>
     <string name="user_list_title" msgid="7937158411137563543">"Brugere og profiler"</string>
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"Tilføj en bruger eller en profil"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Tilføj bruger"</string>
@@ -3014,9 +3031,10 @@
     <string name="keywords_sim_status" msgid="1474422416860990564">"netværk, mobilnetværkstilstand, netværkstilstand, signalstyrke, type mobilnetværk, roaming, iccid"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"serienummer, hardwareversion"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"niveau for programrettelse i Android, basebandversion, kernesystem"</string>
-    <!-- no translation found for keywords_device_feedback (564493721125966719) -->
-    <skip />
+    <string name="keywords_systemui_theme" msgid="9112852512550404882">"mørkt tema"</string>
+    <string name="keywords_device_feedback" msgid="564493721125966719">"fejl"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Aktiv låseskærm, visning af låseskærm"</string>
+    <string name="keywords_face_settings" msgid="7505388678116799329">"ansigt"</string>
     <string name="keywords_fingerprint_settings" msgid="239222512315619538">"fingeraftryk"</string>
     <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"dæmp skærmlys, touchskærm, batteri, intelligent lysstyrke, dynamisk klarhed"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"rotere, vende, rotation, stående, liggende, retning, lodret, vandret"</string>
@@ -3170,7 +3188,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"Lyden er slået fra, men tillad <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> og <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"Lyden er slået fra, men tillad <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> og <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"Beskeder, begivenheder og påmindelser"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"Når Forstyr ikke er aktiveret, slås lyden fra for beskeder, påmindelser og begivenheder med undtagelse af de elementer, du tillader ovenfor. Du kan ændre beskedindstillingerne, så dine venner, din familie eller andre kontaktpersoner kan få fat i dig."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"Når Forstyr ikke er aktiveret, slås lyden fra for beskeder, påmindelser og begivenheder med undtagelse af de elementer, du tillader ovenfor. Du kan ændre beskedindstillingerne, så dine venner, din familie eller andre kontaktpersoner kan få fat i dig."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"Udfør"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Indstillinger"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"Ingen lyd eller visuelle signaler fra underretninger"</string>
@@ -3246,7 +3264,7 @@
     </plurals>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Ingen installerede apps har anmodet om adgang til underretninger."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Tillad adgang til underretninger for <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kan læse alle underretninger, herunder personlige oplysninger såsom navne på kontaktpersoner og teksten i de meddelelser, du modtager. Underretningslytteren kan også afvise underretninger eller aktivere handlingsknapper, de indeholder. \n\nDette gør det også muligt for appen at slå Forstyr ikke til eller fra og ændre relaterede indstillinger."</string>
+    <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kan læse alle underretninger, herunder personlige oplysninger såsom navne på kontaktpersoner og teksten i de meddelelser, du modtager. Den kan også afvise underretninger eller aktivere handlingsknapper, de indeholder. \n\nDette gør det også muligt for appen at slå Forstyr ikke til eller fra og ændre relaterede indstillinger."</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"Hvis du slår adgang til underretninger fra for <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, slås adgangen til Forstyr ikke muligvis også fra."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="8333442186428083057">"Slå fra"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8586417377104211584">"Annuller"</string>
@@ -3349,11 +3367,16 @@
     <string name="zen_mode_calls_title" msgid="623395033931747661">"Tillad opkald"</string>
     <string name="zen_mode_calls_footer" msgid="3618700268458237781">"Når Forstyr ikke er aktiveret, blokeres indgående opkald. Du kan ændre indstillingerne, så dine venner, dine familie eller andre kontaktpersoner kan få fat i dig."</string>
     <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"Stjernemarkerede kontaktpersoner"</string>
-    <!-- no translation found for zen_mode_starred_contacts_summary_additional_contacts (500105380255018671) -->
+    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="500105380255018671">
+      <item quantity="one"><xliff:g id="NUM_PEOPLE">%d</xliff:g> anden</item>
+      <item quantity="other"><xliff:g id="NUM_PEOPLE">%d</xliff:g> andre</item>
+    </plurals>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Beskeder"</string>
     <string name="zen_mode_messages_title" msgid="7729380010396411129">"Tillad beskeder"</string>
     <string name="zen_mode_all_messages" msgid="8257021584561639816">"Beskeder"</string>
+    <string name="zen_mode_all_messages_list" msgid="4223560721230967061">"beskeder"</string>
     <string name="zen_mode_selected_messages" msgid="1047355526202106114">"Nogle beskeder"</string>
+    <string name="zen_mode_selected_messages_list" msgid="5309288435815759102">"nogle beskeder"</string>
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"Fra hvem som helst"</string>
     <string name="zen_mode_from_contacts" msgid="2232335406106711637">"Kun fra kontaktpersoner"</string>
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Kun fra stjernemarkerede kontaktpersoner"</string>
@@ -3362,16 +3385,22 @@
     <string name="zen_calls_summary_repeat_only" msgid="7105261473107715445">"Kun ved gentagne opkald"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Ingen"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Alarmer"</string>
+    <string name="zen_mode_alarms_list" msgid="1090332840207025714">"alarmer"</string>
     <string name="zen_mode_media" msgid="8808264142134422380">"Medier"</string>
+    <string name="zen_mode_media_list" msgid="5483540766397328038">"medier"</string>
     <string name="zen_mode_system" msgid="2541380718411593581">"Lyd ved berøring"</string>
+    <string name="zen_mode_system_list" msgid="6996104733185177115">"lyd ved berøring"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Påmindelser"</string>
+    <string name="zen_mode_reminders_list" msgid="2853975802240340190">"påmindelser"</string>
     <string name="zen_mode_reminders_title" msgid="2345044406347406902">"Tillad påmindelser"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Begivenheder"</string>
+    <string name="zen_mode_events_list" msgid="5571368229052715098">"begivenheder"</string>
     <string name="zen_mode_events_title" msgid="5597241655883329085">"Tillad begivenheder"</string>
     <string name="zen_mode_all_callers" msgid="2378065871253871057">"alle"</string>
     <string name="zen_mode_contacts_callers" msgid="5569804103920394175">"kontaktpersoner"</string>
     <string name="zen_mode_starred_callers" msgid="1023167821338514140">"stjernemarkerede kontaktpersoner"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"Gentagne opkald"</string>
+    <string name="zen_mode_repeat_callers_list" msgid="2529895519653237330">"gentagne opkald"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8553876328249671783">"Tillad gentagne opkald"</string>
     <string name="zen_mode_calls_summary_one" msgid="3972333792749874863">"Fra <xliff:g id="CALLER_TYPE">%1$s</xliff:g>"</string>
     <string name="zen_mode_calls_summary_two" msgid="6592821501321201329">"Fra <xliff:g id="CALLER_TYPE">%1$s</xliff:g> og <xliff:g id="CALLERT_TPYE">%2$s</xliff:g>"</string>
@@ -3423,6 +3452,9 @@
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"Ud over at låse din enhed op ved hjælp af dit fingeraftryk kan du beskytte din enhed yderligere ved at kræve, at din pinkode skal angives, før enheden kan starte op. Før enheden er startet op, kan den ikke modtage opkald, beskeder eller underretninger, herunder alarmer.\n\nDette er med til at beskytte data på enheder, du har mistet, eller som er blevet stjålet. Vil du kræve, at der skal angives en pinkode, før din enhed kan starte op?"</string>
     <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"Ud over at låse din enhed op ved hjælp af dit fingeraftryk kan du beskytte din enhed yderligere ved at kræve, at dit mønster skal angives, før enheden kan starte op. Før enheden er startet op, kan den ikke modtage opkald, beskeder eller underretninger, herunder alarmer.\n\nDette er med til at beskytte data på enheder, du har mistet, eller som er blevet stjålet. Vil du kræve, at der skal angives et mønster, før din enhed kan starte op?"</string>
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Ud over at kræve fingeraftryk til oplåsning kan du beskytte din enhed yderligere ved at kræve, at din adgangskode angives før opstart. Enheden kan ikke modtage opkald, beskeder eller underretninger, herunder alarmer, før den er startet op.\n\nDette er med til at beskytte data på enheder, du har mistet, eller som er blevet stjålet. Vil du kræve, at der skal angives en adgangskode, før din enhed kan starte op?"</string>
+    <string name="encryption_interstitial_message_pin_for_face" msgid="2017438765366716760">"Ud over at låse din enhed op ved hjælp af dit ansigt kan du beskytte din enhed yderligere ved at kræve, at din pinkode skal angives, før enheden kan starte op. Enheden kan ikke modtage opkald, beskeder og underretninger, bl.a. alarmer, før den er startet op.\n\nDette er med til at beskytte data på enheder, du har mistet, eller som er blevet stjålet. Vil du kræve, at der skal angives en pinkode, før din enhed kan starte op?"</string>
+    <string name="encryption_interstitial_message_pattern_for_face" msgid="3551827507967661552">"Ud over at låse din enhed op ved hjælp af dit ansigt kan du beskytte din enhed yderligere ved at kræve, at dit mønster skal angives, før enheden kan starte op. Enheden kan ikke modtage opkald, beskeder og underretninger, bl.a. alarmer, før den er startet op.\n\nDette er med til at beskytte data på enheder, du har mistet, eller som er blevet stjålet. Vil du kræve, at der skal angives et mønster, før din enhed kan starte op?"</string>
+    <string name="encryption_interstitial_message_password_for_face" msgid="3452793542112093614">"Ud over at låse din enhed op ved hjælp af dit ansigt kan du beskytte din enhed yderligere ved at kræve, at din adgangskode skal angives, før enheden kan starte op. Enheden kan ikke modtage opkald, beskeder og underretninger, bl.a. alarmer, før den er startet op.\n\nDette er med til at beskytte data på enheder, du har mistet, eller som er blevet stjålet. Vil du kræve, at der skal angives en adgangskode, før din enhed kan starte op?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Ja"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Nej"</string>
     <string name="restricted_true_label" msgid="4761453839409220473">"Begrænset"</string>
@@ -3453,7 +3485,7 @@
     <string name="change_storage" msgid="600475265207060436">"Skift lager"</string>
     <string name="notifications_label" msgid="2872668710589600731">"Underretninger"</string>
     <string name="notifications_enabled" msgid="6983396130566021385">"Til"</string>
-    <string name="notifications_enabled_with_info" msgid="2446033696770133334">"Til/<xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%1$s</xliff:g>"</string>
+    <string name="notifications_enabled_with_info" msgid="5669544704839269901">"<xliff:g id="NOTIFICATIONS_SENT">%1$s</xliff:g>/<xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%2$s</xliff:g>"</string>
     <string name="notifications_disabled" msgid="1262114548434938079">"Fra"</string>
     <string name="notifications_partly_blocked" msgid="592071133950126656">"<xliff:g id="COUNT_0">%1$d</xliff:g> af <xliff:g id="COUNT_1">%2$d</xliff:g> kategorier er slået fra"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"Slået fra"</string>
@@ -3780,7 +3812,6 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"Brug køligere skærmfarver"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Du skal slå skærmen fra, før du kan anvende farveændringer"</string>
     <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"Kameraets lasersensor"</string>
-    <string name="logical_camera_default_switch" msgid="3310039627275112685">"Logisk kamera som standard"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Automatiske systemopdateringer"</string>
     <string name="ota_disable_automatic_update_summary" msgid="940729694354373087">"Anvend opdateringer, når enheden genstarter"</string>
     <string name="usage" msgid="2977875522080448986">"Forbrug"</string>
@@ -3793,8 +3824,6 @@
     <string name="cell_data_template" msgid="405684854174361041">"<xliff:g id="AMOUNT">^1</xliff:g> mobildata"</string>
     <string name="wifi_data_template" msgid="6265570748799357386">"<xliff:g id="AMOUNT">^1</xliff:g> Wi-Fi-data"</string>
     <string name="ethernet_data_template" msgid="5782476509881033590">"<xliff:g id="AMOUNT">^1</xliff:g> Ethernet-data"</string>
-    <string name="cell_warning_only" msgid="763147658209027140">"Dataadvarsel ved <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="cell_warning_and_limit" msgid="2273413629267437470">"Dataadvarsel ved <xliff:g id="ID_1">%1$s</xliff:g> / Datagrænse på <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="billing_cycle" msgid="6614597736285325497">"Dataadvarsel og -begrænsning"</string>
     <string name="app_usage_cycle" msgid="8877223251648092131">"Cyklus for appdataforbrug"</string>
     <string name="cell_data_warning" msgid="1985956818884847057">"Dataadvarsel ved <xliff:g id="ID_1">^1</xliff:g>"</string>

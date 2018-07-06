@@ -107,6 +107,7 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private static final String KEY_USER_LIST = "user_list";
     private static final String KEY_USER_ME = "user_me";
+    private static final String KEY_USER_GUEST = "user_guest";
     private static final String KEY_ADD_USER = "user_add";
     private static final String KEY_ADD_USER_WHEN_LOCKED = "user_settings_add_users_when_locked";
 
@@ -144,9 +145,12 @@ public class UserSettings extends SettingsPreferenceFragment
         USER_REMOVED_INTENT_FILTER.addAction(Intent.ACTION_USER_INFO_CHANGED);
     }
 
-    private PreferenceGroup mUserListCategory;
-    private UserPreference mMePreference;
-    private RestrictedPreference mAddUser;
+    @VisibleForTesting
+    PreferenceGroup mUserListCategory;
+    @VisibleForTesting
+    UserPreference mMePreference;
+    @VisibleForTesting
+    RestrictedPreference mAddUser;
     private int mRemovingUserId = -1;
     private int mAddedUserId = 0;
     private boolean mAddingUser;
@@ -800,7 +804,8 @@ public class UserSettings extends SettingsPreferenceFragment
         removeThisUser();
     }
 
-    private void updateUserList() {
+    @VisibleForTesting
+    void updateUserList() {
         final Context context = getActivity();
         if (context == null) {
             return;
@@ -863,7 +868,7 @@ public class UserSettings extends SettingsPreferenceFragment
                 // set.
                 if (!mUserCaps.mDisallowSwitchUser) {
                     pref.setOnPreferenceClickListener(this);
-                    pref.setSelectable(true);
+                    pref.setSelectable(mUserManager.canSwitchUsers());
                 }
             } else if (user.isRestricted()) {
                 pref.setSummary(R.string.user_summary_restricted_profile);
@@ -902,6 +907,7 @@ public class UserSettings extends SettingsPreferenceFragment
                     null /* delete icon handler */);
             pref.setTitle(R.string.user_guest);
             pref.setIcon(getEncircledDefaultIcon());
+            pref.setKey(KEY_USER_GUEST);
             userPreferences.add(pref);
             if (mUserCaps.mDisallowAddUser) {
                 pref.setDisabledByAdmin(mUserCaps.mEnforcedAdmin);
@@ -909,6 +915,9 @@ public class UserSettings extends SettingsPreferenceFragment
                 pref.setDisabledByAdmin(RestrictedLockUtils.getDeviceOwner(context));
             } else {
                 pref.setDisabledByAdmin(null);
+            }
+            if (!mUserManager.canSwitchUsers()) {
+                pref.setSelectable(false);
             }
             int finalGuestId = guestId;
             pref.setOnPreferenceClickListener(preference -> {
@@ -969,7 +978,7 @@ public class UserSettings extends SettingsPreferenceFragment
         if ((mUserCaps.mCanAddUser || mUserCaps.mDisallowAddUserSetByAdmin) &&
                 Utils.isDeviceProvisioned(context)) {
             boolean moreUsers = mUserManager.canAddMoreUsers();
-            mAddUser.setEnabled(moreUsers && !mAddingUser);
+            mAddUser.setEnabled(moreUsers && !mAddingUser && mUserManager.canSwitchUsers());
             if (!moreUsers) {
                 mAddUser.setSummary(getString(R.string.user_add_max_count, getMaxRealUsers()));
             } else {

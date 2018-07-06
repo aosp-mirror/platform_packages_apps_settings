@@ -20,7 +20,7 @@
     <string name="no" msgid="6731231425810196216">"Non"</string>
     <string name="create" msgid="3578857613172647409">"Créer"</string>
     <string name="allow" msgid="3349662621170855910">"Autoriser"</string>
-    <string name="deny" msgid="6947806159746484865">"Refusers"</string>
+    <string name="deny" msgid="6947806159746484865">"Refuser"</string>
     <string name="dlg_close" msgid="7471087791340790015">"Fermer"</string>
     <string name="dlg_switch" msgid="6243971420240639064">"Changer"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Inconnu"</string>
@@ -131,6 +131,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Demande d\'association"</string>
     <string name="bluetooth_notif_message" msgid="5057417127600942904">"Touchez pour associer à <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="3144149432555230410">"Fichiers reçus"</string>
+    <string name="bluetooth_show_files_received_via_bluetooth" msgid="5445105773989432594">"Fichiers reçus par Bluetooth"</string>
     <string name="device_picker" msgid="4978696506172252813">"Sélectionner un appareil Bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="3387222809404177525">"<xliff:g id="APP_NAME">%1$s</xliff:g> souhaite activer le Bluetooth"</string>
     <string name="bluetooth_ask_disablement" msgid="5890386255790160573">"<xliff:g id="APP_NAME">%1$s</xliff:g> souhaite désactiver le Bluetooth"</string>
@@ -187,8 +188,7 @@
     <string name="connected_device_connections_title" msgid="5988939345181466770">"Préférences de connexion"</string>
     <string name="connected_device_previously_connected_title" msgid="491765792822244604">"Appareils précédemment connectés"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="6196066429488377795">"Connecté précedemment"</string>
-    <!-- no translation found for connected_device_bluetooth_turned_on_toast (5683648191381637533) -->
-    <skip />
+    <string name="connected_device_bluetooth_turned_on_toast" msgid="5683648191381637533">"Bluetooth activé"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Date et heure"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Sélectionner le fuseau horaire"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -304,7 +304,6 @@
     <string name="settings_label" msgid="1626402585530130914">"Paramètres"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Paramètres"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Raccourci vers les paramètres"</string>
-    <string name="activity_list_empty" msgid="6428823323471264836">"Aucune activité correspondante trouvée."</string>
     <string name="airplane_mode" msgid="8837269988154128601">"Mode avion"</string>
     <string name="radio_controls_title" msgid="3447085191369779032">"Plus"</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"Sans fil et réseaux"</string>
@@ -393,6 +392,18 @@
     <string name="security_status_title" msgid="5848766673665944640">"État de la sécurité"</string>
     <string name="security_dashboard_summary" msgid="6757421634477554939">"Verrouillage de l\'écran, empreintes digitales"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Verrouillage de l\'écran"</string>
+    <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Visage ajouté"</string>
+    <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Touchez pour config. authentif. du visage"</string>
+    <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Authentif. du visage"</string>
+    <string name="security_settings_face_enroll_introduction_cancel" msgid="4277182322482408514">"Annuler"</string>
+    <string name="security_settings_face_enroll_introduction_title" msgid="2694505011712885439">"Déverrouiller avec votre visage"</string>
+    <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="8180330567034286589">"Utiliser son visage pour s\'authentifier"</string>
+    <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Utilisez votre visage pour déverrouiller votre téléphone, autoriser vos achats et vous connecter à des applications."</string>
+    <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6300341727101929207">"Utiliser vous"</string>
+    <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Utilisez votre visage pour déverrouiller votre téléphone, autoriser vos achats et vous connecter à des applications"</string>
+    <string name="face_add_max" msgid="2342250989212694454">"Vous pouvez ajouter jusqu\'à <xliff:g id="COUNT">%d</xliff:g> empreintes digitales"</string>
+    <string name="face_intro_error_max" msgid="160022811747660581">"Vous avez ajouté le nombre maximal de visages"</string>
+    <string name="face_intro_error_unknown" msgid="6367721696446677261">"Impossible d\'ajouter d\'autres visages"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Lecteur d\'empreintes digitales"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Gérer les empreintes digitales"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Util. empr. dig. pour"</string>
@@ -504,11 +515,12 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Protégez votre tablette"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Protégez votre appareil"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Protégez votre téléphone"</string>
-    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5008939545428518367">"Pour plus de sécurité, configurez une méthode secondaire pour verrouiller l\'écran"</string>
+    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1507307757032207572">"Pour plus de sécurité, configurez une méthode secondaire pour verrouiller l\'écran"</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Activez les fonctionnalités de protection de l\'appareil pour empêcher d\'autres personnes d\'utiliser cette tablette sans votre autorisation. Choisissez la méthode de verrouillage de l\'écran à utiliser."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Activez les fonctionnalités de protection de l\'appareil pour empêcher d\'autres personnes d\'utiliser cet appareil sans votre autorisation. Choisissez la méthode de verrouillage de l\'écran à utiliser."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Activez les fonctionnalités de protection de l\'appareil pour empêcher d\'autres personnes d\'utiliser ce téléphone sans votre autorisation. Choisissez la méthode de verrouillage de l\'écran à utiliser."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Choisissez votre méthode secondaire de verrouillage d\'écran"</string>
+    <string name="lock_settings_picker_face_message" msgid="197106534637556054">"Choisissez votre méthode secondaire de verrouillage d\'écran"</string>
     <string name="setup_lock_settings_options_button_label" msgid="8511153243629402929">"Options de verrouillage de l\'écran"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="5058207955455973917">"Options de verrouillage de l\'écran"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Verrouillage de l\'écran"</string>
@@ -535,6 +547,11 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"Empreinte digitale + mot de passe"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"Continuer sans empreintes digitales"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"Vous pouvez déverrouiller votre téléphone avec votre empreinte digitale. Pour plus de sécurité, cette option exige un verrouillage d\'écran secondaire."</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="8792301636367000123">"Authentification du visage + schéma"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="1196620299595657479">"Authentification du visage + NIP"</string>
+    <string name="face_unlock_set_unlock_password" msgid="223117276773907474">"Authentification du visage + mot de passe"</string>
+    <string name="face_unlock_skip_face" msgid="6362883392838482791">"Continuer sans l\'authentification du visage"</string>
+    <string name="face_unlock_title" msgid="9042382084472444316">"Vous pouvez déverrouiller votre téléphone avec votre visage. Pour plus de sécurité, cette option exige un verrouillage d\'écran secondaire."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"Désactivé par admin., politique cryptage, stock. authentifiants"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Aucun"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"Balayer l\'écran"</string>
@@ -866,6 +883,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"Auto"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"Bande de 2,4 GHz"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"Bande de 5 GHz"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"Préférer la bande de 5,0 GHz"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2,4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Choisissez au moins une bande pour le point d\'accès Wi-Fi :"</string>
@@ -1077,7 +1095,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"Naturelles"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"Intenses"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"Saturées"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"Automatique"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"Adaptatif"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"Utiliser uniquement les couleurs précises"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"Ajuster entre les couleurs vives et précises"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Changer automatiquement d\'orientation lors de la rotation de la tablette"</string>
@@ -1603,6 +1621,9 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Le mot de passe a été défini."</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"Le NIP a été défini."</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Le schéma a été défini."</string>
+    <string name="lockpassword_choose_your_password_header_for_face" msgid="7876621019688907534">"Pour utiliser reconn. visage, créez m.d.p."</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="8070525076987585344">"Pour utiliser reconn. visage, créez schéma"</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" msgid="7304398683609714816">"Pour utiliser reconn. visage, créez NIP"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"Entrez le schéma de l\'appareil pour continuer"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"Entrez le NIP de l\'appareil pour continuer."</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"Entrez le mot de passe de l\'appareil pour continuer."</string>
@@ -2586,7 +2607,6 @@
     <string name="data_usage_menu_metered" msgid="6235119991372755026">"Restrictions réseau"</string>
     <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"Synchronisation automatique des données"</string>
     <string name="data_usage_menu_sim_cards" msgid="6410498422797244073">"Cartes SIM"</string>
-    <string name="data_usage_menu_cellular_networks" msgid="8339835014751511300">"Réseaux cellulaires"</string>
     <string name="data_usage_cellular_data_summary" msgid="8413357481361268285">"Interrompues à la limite"</string>
     <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"Synchronisation auto données"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"Synchro auto des données perso"</string>
@@ -2766,12 +2786,9 @@
       <item quantity="other">Vérifier les certificats</item>
     </plurals>
     <string name="user_settings_title" msgid="3493908927709169019">"Plusieurs utilisateurs"</string>
-    <!-- no translation found for user_settings_footer_text (5947601460660791129) -->
-    <skip />
-    <!-- no translation found for user_settings_footer_text (2153761434649733502) -->
-    <skip />
-    <!-- no translation found for user_settings_footer_text (2844602828189838075) -->
-    <skip />
+    <string name="user_settings_footer_text" product="device" msgid="5947601460660791129">"Partagez votre appareil en ajoutant des utilisateurs. Chaque utilisateur dispose d\'un espace personnel sur votre appareil pour ses écrans d\'accueil personnalisés, ses comptes, ses applications, ses paramètres et plus encore."</string>
+    <string name="user_settings_footer_text" product="tablet" msgid="2153761434649733502">"Partagez votre tablette en ajoutant des utilisateurs. Chaque utilisateur dispose d\'un espace personnel sur votre tablette pour ses écrans d\'accueil personnalisés, ses comptes, ses applications, ses paramètres et plus encore."</string>
+    <string name="user_settings_footer_text" product="default" msgid="2844602828189838075">"Partagez votre téléphone en ajoutant des utilisateurs. Chaque utilisateur dispose d\'un espace personnel sur votre téléphone pour ses écrans d\'accueil personnalisés, ses comptes, ses applications, ses paramètres et plus encore."</string>
     <string name="user_list_title" msgid="7937158411137563543">"Utilisateurs et profils"</string>
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"Ajouter un utilisateur ou un profil"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Ajouter un utilisateur"</string>
@@ -3014,9 +3031,10 @@
     <string name="keywords_sim_status" msgid="1474422416860990564">"réseau, état du réseau cellulaire, état du service, puissance du signal, type de réseau cellulaire, itinérance, iccid"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"numéro de série, version matérielle"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"niveau du correctif de sécurité android, version de la bande de base, version du noyau"</string>
-    <!-- no translation found for keywords_device_feedback (564493721125966719) -->
-    <skip />
+    <string name="keywords_systemui_theme" msgid="9112852512550404882">"thème sombre"</string>
+    <string name="keywords_device_feedback" msgid="564493721125966719">"bogue"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Affichage en mode Veille, écran de verrouillage"</string>
+    <string name="keywords_face_settings" msgid="7505388678116799329">"visage"</string>
     <string name="keywords_fingerprint_settings" msgid="239222512315619538">"empreintes digitales"</string>
     <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"réduire la luminosité de l\'écran, écran tactile, pile, réglage intelligent de la luminosité, luminosité dynamique"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"faire pivoter, tourner, retourner, rotation, portrait, paysage, orientation, vertical, horizontal"</string>
@@ -3170,7 +3188,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"Désactivés, mais autoriser : <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> et <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"Désactivés, mais autoriser : <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> et <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"Messages, événements et rappels"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"Lorsque le mode Ne pas déranger est activé, le son des messages, des rappels et des événements est coupé, sauf pour les éléments autorisés ci-dessus. Vous pouvez régler les paramètres des messages pour que vos proches ou d\'autres contacts puissent quand même vous joindre."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"Lorsque le mode Ne pas déranger est activé, le son des messages, des rappels et des événements est coupé, sauf pour les éléments autorisés ci-dessus. Vous pouvez régler les paramètres des messages pour que vos proches ou d\'autres contacts puissent quand même vous joindre."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"OK"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Paramètres"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"Aucun élément visuel ni son provenant des notifications"</string>
@@ -3245,7 +3263,7 @@
       <item quantity="other">%d application peuvent lire les notifications</item>
     </plurals>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Aucune demande d\'accès aux notifications n\'a été envoyée pour les applications installées."</string>
-    <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Autoriser <xliff:g id="SERVICE">%1$s</xliff:g> à accéder aux notifications ?"</string>
+    <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Autoriser <xliff:g id="SERVICE">%1$s</xliff:g> à accéder aux notifications?"</string>
     <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> pourra lire toutes les notifications, y compris des données personnelles, telles que des noms de contacts et le texte des messages que vous recevez. Ce service pourra également masquer des notifications ou déclencher les boutons d\'action que celles-ci contiennent. \n\nCela permettra également à l\'application d\'activer et de désactiver la fonction Ne pas déranger et de modifier les paramètres connexes."</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"Si vous désactivez l\'accès aux notifications pour <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, l\'accès à la fonction Ne pas déranger peut également être désactivé."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="8333442186428083057">"Désactiver"</string>
@@ -3349,11 +3367,16 @@
     <string name="zen_mode_calls_title" msgid="623395033931747661">"Autoriser les appels"</string>
     <string name="zen_mode_calls_footer" msgid="3618700268458237781">"Lorsque le mode Ne pas déranger est activé, les appels entrants sont bloqués. Vous pouvez régler les paramètres pour permettre à vos amis, à votre famille ou à d\'autres contacts de vous joindre."</string>
     <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"Contacts marqués d\'une étoile"</string>
-    <!-- no translation found for zen_mode_starred_contacts_summary_additional_contacts (500105380255018671) -->
+    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="500105380255018671">
+      <item quantity="one"><xliff:g id="NUM_PEOPLE">%d</xliff:g> autre personne</item>
+      <item quantity="other"><xliff:g id="NUM_PEOPLE">%d</xliff:g> autres personnes</item>
+    </plurals>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Messages"</string>
     <string name="zen_mode_messages_title" msgid="7729380010396411129">"Autoriser les messages"</string>
     <string name="zen_mode_all_messages" msgid="8257021584561639816">"Messages"</string>
+    <string name="zen_mode_all_messages_list" msgid="4223560721230967061">"messages"</string>
     <string name="zen_mode_selected_messages" msgid="1047355526202106114">"Certains messages"</string>
+    <string name="zen_mode_selected_messages_list" msgid="5309288435815759102">"certains messages"</string>
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"De tout le monde"</string>
     <string name="zen_mode_from_contacts" msgid="2232335406106711637">"Des contacts seulement"</string>
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Des contacts favoris seulement"</string>
@@ -3362,16 +3385,22 @@
     <string name="zen_calls_summary_repeat_only" msgid="7105261473107715445">"Seulement des appels répétés"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Aucun"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Alarmes"</string>
+    <string name="zen_mode_alarms_list" msgid="1090332840207025714">"alarmes"</string>
     <string name="zen_mode_media" msgid="8808264142134422380">"Média"</string>
+    <string name="zen_mode_media_list" msgid="5483540766397328038">"média"</string>
     <string name="zen_mode_system" msgid="2541380718411593581">"Sons des touches"</string>
+    <string name="zen_mode_system_list" msgid="6996104733185177115">"sons des touches"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Rappels"</string>
+    <string name="zen_mode_reminders_list" msgid="2853975802240340190">"rappels"</string>
     <string name="zen_mode_reminders_title" msgid="2345044406347406902">"Autoriser les rappels"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Événements"</string>
+    <string name="zen_mode_events_list" msgid="5571368229052715098">"événements"</string>
     <string name="zen_mode_events_title" msgid="5597241655883329085">"Autoriser les événements"</string>
     <string name="zen_mode_all_callers" msgid="2378065871253871057">"n\'importe qui"</string>
     <string name="zen_mode_contacts_callers" msgid="5569804103920394175">"contacts"</string>
     <string name="zen_mode_starred_callers" msgid="1023167821338514140">"contacts marqués d\'une étoile"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"Appelants fréquents"</string>
+    <string name="zen_mode_repeat_callers_list" msgid="2529895519653237330">"appelants fréquents"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8553876328249671783">"Autoriser les appels répétés"</string>
     <string name="zen_mode_calls_summary_one" msgid="3972333792749874863">"De <xliff:g id="CALLER_TYPE">%1$s</xliff:g>"</string>
     <string name="zen_mode_calls_summary_two" msgid="6592821501321201329">"De : <xliff:g id="CALLER_TYPE">%1$s</xliff:g> et <xliff:g id="CALLERT_TPYE">%2$s</xliff:g>"</string>
@@ -3423,6 +3452,9 @@
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"Vous pouvez ajouter un niveau de protection pour le déverrouillage de cet appareil en exigeant votre NIP avant que l\'appareil ne démarre, en plus de la lecture de votre empreinte digitale. L\'appareil ne peut pas recevoir d\'appel, de message, de notification, ni d\'alarme tant qu\'il n\'a pas démarré.\n\nCela permet de protéger les données de vos appareils en cas de perte ou de vol. Exiger le NIP pour démarrer l\'appareil?"</string>
     <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"Vous pouvez ajouter un niveau de protection pour le déverrouillage de cet appareil en exigeant votre schéma avant que l\'appareil ne démarre, en plus de la lecture de votre empreinte digitale. L\'appareil ne peut pas recevoir d\'appel, de message, de notification, ni d\'alarme tant qu\'il n\'a pas démarré.\n\nCela permet de protéger les données de vos appareils en cas de perte ou de vol. Exiger le schéma pour démarrer l\'appareil?"</string>
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Vous pouvez ajouter un niveau de protection pour le déverrouillage de cet appareil en exigeant votre mot de passe avant que l\'appareil ne démarre, en plus de la lecture de votre empreinte digitale. L\'appareil ne peut pas recevoir d\'appel, de message, de notification, ni d\'alarme tant qu\'il n\'a pas démarré.\n\nCela permet de protéger les données de vos appareils en cas de perte ou de vol. Exiger un mot de passe pour démarrer l\'appareil?"</string>
+    <string name="encryption_interstitial_message_pin_for_face" msgid="2017438765366716760">"Vous pouvez ajouter un niveau de protection pour le déverrouillage de cet appareil en exigeant votre NIP avant que l\'appareil ne démarre, en plus de la reconnaissance du visage. L\'appareil ne peut pas recevoir d\'appel, de message, de notification, ni d\'alarme tant qu\'il n\'a pas démarré.\n\nCela permet de protéger les données de vos appareils en cas de perte ou de vol. Exiger le NIP pour démarrer l\'appareil?"</string>
+    <string name="encryption_interstitial_message_pattern_for_face" msgid="3551827507967661552">"Vous pouvez ajouter un niveau de protection pour le déverrouillage de cet appareil en exigeant votre schéma avant que l\'appareil ne démarre, en plus de la reconnaissance du visage. L\'appareil ne peut pas recevoir d\'appel, de message, de notification, ni d\'alarme tant qu\'il n\'a pas démarré.\n\nCela permet de protéger les données de vos appareils en cas de perte ou de vol. Exiger le schéma pour démarrer l\'appareil?"</string>
+    <string name="encryption_interstitial_message_password_for_face" msgid="3452793542112093614">"Vous pouvez ajouter un niveau de protection pour le déverrouillage de cet appareil en exigeant votre mot de passe avant que l\'appareil ne démarre, en plus de la reconnaissance du visage. L\'appareil ne peut pas recevoir d\'appel, de message, de notification, ni d\'alarme tant qu\'il n\'a pas démarré.\n\nCela permet de protéger les données de vos appareils en cas de perte ou de vol. Exiger un mot de passe pour démarrer l\'appareil?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Oui"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Non"</string>
     <string name="restricted_true_label" msgid="4761453839409220473">"Restreinte"</string>
@@ -3453,7 +3485,7 @@
     <string name="change_storage" msgid="600475265207060436">"Modifier type de stockage"</string>
     <string name="notifications_label" msgid="2872668710589600731">"Notifications"</string>
     <string name="notifications_enabled" msgid="6983396130566021385">"Activé"</string>
-    <string name="notifications_enabled_with_info" msgid="2446033696770133334">"Activé/<xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%1$s</xliff:g>"</string>
+    <string name="notifications_enabled_with_info" msgid="5669544704839269901">"<xliff:g id="NOTIFICATIONS_SENT">%1$s</xliff:g>/<xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%2$s</xliff:g>"</string>
     <string name="notifications_disabled" msgid="1262114548434938079">"Désactivé"</string>
     <string name="notifications_partly_blocked" msgid="592071133950126656">"<xliff:g id="COUNT_0">%1$d</xliff:g> catégories sur <xliff:g id="COUNT_1">%2$d</xliff:g> sont désactivées"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"Désactivées"</string>
@@ -3780,7 +3812,6 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"Utiliser des couleurs plus froides à l\'écran"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Pour appliquer la modification des couleurs, éteignez l\'écran"</string>
     <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"Capteur laser de l\'appareil photo"</string>
-    <string name="logical_camera_default_switch" msgid="3310039627275112685">"Utiliser l\'appareil photo logique par défaut"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Mises à jour automatiques du système"</string>
     <string name="ota_disable_automatic_update_summary" msgid="940729694354373087">"Appliquer les mises à jour au redémarrage de l\'appareil"</string>
     <string name="usage" msgid="2977875522080448986">"Utilisation"</string>
@@ -3793,8 +3824,6 @@
     <string name="cell_data_template" msgid="405684854174361041">"Données cellulaires utilisées : <xliff:g id="AMOUNT">^1</xliff:g>"</string>
     <string name="wifi_data_template" msgid="6265570748799357386">"Données Wi-Fi : <xliff:g id="AMOUNT">^1</xliff:g>"</string>
     <string name="ethernet_data_template" msgid="5782476509881033590">"Données Ethernet : <xliff:g id="AMOUNT">^1</xliff:g>"</string>
-    <string name="cell_warning_only" msgid="763147658209027140">"Seuil à partir duquel un avertissement relatif à la consommation des données est envoyé : <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="cell_warning_and_limit" msgid="2273413629267437470">"Seuil à partir duquel un avertissement relatif à la consommation des données est envoyé : <xliff:g id="ID_1">%1$s</xliff:g> / Limite de consommation des données : <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="billing_cycle" msgid="6614597736285325497">"Avertissement et limites données"</string>
     <string name="app_usage_cycle" msgid="8877223251648092131">"Cycle d\'util. données d\'appli."</string>
     <string name="cell_data_warning" msgid="1985956818884847057">"Seuil à partir duquel un avertissement relatif à la consommation des données est envoyé : <xliff:g id="ID_1">^1</xliff:g>"</string>

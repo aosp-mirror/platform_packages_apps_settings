@@ -131,6 +131,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Kahilingan sa pagpares"</string>
     <string name="bluetooth_notif_message" msgid="5057417127600942904">"I-tap upang makipagpares sa <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="3144149432555230410">"Mga natanggap na file"</string>
+    <string name="bluetooth_show_files_received_via_bluetooth" msgid="5445105773989432594">"Mga natanggap sa Bluetooth"</string>
     <string name="device_picker" msgid="4978696506172252813">"Pumili ng Bluetooth device"</string>
     <string name="bluetooth_ask_enablement" msgid="3387222809404177525">"Gustong i-on ng <xliff:g id="APP_NAME">%1$s</xliff:g> ang Bluetooth"</string>
     <string name="bluetooth_ask_disablement" msgid="5890386255790160573">"Gustong i-off ng <xliff:g id="APP_NAME">%1$s</xliff:g> ang Bluetooth"</string>
@@ -187,8 +188,7 @@
     <string name="connected_device_connections_title" msgid="5988939345181466770">"Mga kagustuhan sa koneksyon"</string>
     <string name="connected_device_previously_connected_title" msgid="491765792822244604">"Mga nakakonektang dating device"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="6196066429488377795">"Dating nakakonekta"</string>
-    <!-- no translation found for connected_device_bluetooth_turned_on_toast (5683648191381637533) -->
-    <skip />
+    <string name="connected_device_bluetooth_turned_on_toast" msgid="5683648191381637533">"Naka-on ang Bluetooth"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Petsa at oras"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Pumili ng time zone"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -304,7 +304,6 @@
     <string name="settings_label" msgid="1626402585530130914">"Mga Setting"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Mga Setting"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Shortcut ng Mga Setting"</string>
-    <string name="activity_list_empty" msgid="6428823323471264836">"Walang nahanap na tumutugmang aktibidad."</string>
     <string name="airplane_mode" msgid="8837269988154128601">"Airplane mode"</string>
     <string name="radio_controls_title" msgid="3447085191369779032">"Higit pa"</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"Wireless at mga network"</string>
@@ -393,6 +392,18 @@
     <string name="security_status_title" msgid="5848766673665944640">"Status ng seguridad"</string>
     <string name="security_dashboard_summary" msgid="6757421634477554939">"Lock ng screen, fingerprint"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Lock ng screen"</string>
+    <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Naidagdag ang mukha"</string>
+    <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Tap at set up, i-authenticate ang mukha"</string>
+    <string name="security_settings_face_preference_title" msgid="7074548721778680481">"I-authenticate, mukha"</string>
+    <string name="security_settings_face_enroll_introduction_cancel" msgid="4277182322482408514">"Kanselahin"</string>
+    <string name="security_settings_face_enroll_introduction_title" msgid="2694505011712885439">"Mag-unlock gamit ang mukha mo"</string>
+    <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="8180330567034286589">"Gamitin ang mukha mo sa pag-authenticate"</string>
+    <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Gamitin ang iyong mukha para i-unlock ang telepono mo, awtorisahan ang mga pagbili, o mag-sign in sa mga app."</string>
+    <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6300341727101929207">"Gamitin ang sarili"</string>
+    <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Gamitin ang iyong mukha para i-unlock ang telepono mo, awtorisahan ang mga pagbili, o mag-sign in sa mga app"</string>
+    <string name="face_add_max" msgid="2342250989212694454">"Maaari kang magdagdag ng hanggang <xliff:g id="COUNT">%d</xliff:g> (na) fingerprint"</string>
+    <string name="face_intro_error_max" msgid="160022811747660581">"Naidagdag mo na ang maximum na bilang ng mukha"</string>
+    <string name="face_intro_error_unknown" msgid="6367721696446677261">"Hindi na makapagdagdag ng higit pang mukha"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Fingerprint"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Pamahalaan fingerprint"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Gamit fingerprint para"</string>
@@ -504,11 +515,12 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Protektahan ang tablet mo"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Protektahan ang device"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Protektahan phone mo"</string>
-    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5008939545428518367">"Para sa karagdagang seguridad, magtakda ng backup na lock ng screen"</string>
+    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1507307757032207572">"Para sa pinaigting na seguridad, magtakda ng backup na lock ng screen"</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Pigilan ang ibang taong magamit ang tablet na ito sa pamamagitan ng pag-a-activate sa mga feature ng proteksyon ng device. Piliin ang screen lock na gusto mong gamitin."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Pigilan ang ibang taong magamit ang device na ito sa pamamagitan ng pag-a-activate sa mga feature ng proteksyon ng device. Piliin ang screen lock na gusto mong gamitin."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Pigilan ang ibang taong magamit ang teleponong ito sa pamamagitan ng pag-a-activate sa mga feature ng proteksyon ng device. Piliin ang screen lock na gusto mong gamitin."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Piliin ang iyong backup na paraan ng pag-screen lock"</string>
+    <string name="lock_settings_picker_face_message" msgid="197106534637556054">"Piliin ang iyong backup na paraan ng pag-lock ng screen"</string>
     <string name="setup_lock_settings_options_button_label" msgid="8511153243629402929">"Mga opsyon sa lock ng screen"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="5058207955455973917">"Mga opsyon sa lock ng screen"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Screen lock"</string>
@@ -535,6 +547,11 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"Fingerprint + Password"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"Magpatuloy nang walang fingerprint"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"Maa-unlock mo ang telepono mo gamit ang iyong fingerprint. Para sa seguridad, nangangailagan ang opsyong ito ng backup na lock ng screen."</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="8792301636367000123">"Pag-authenticate ng mukha + Pattern"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="1196620299595657479">"Pag-authenticate ng mukha + PIN"</string>
+    <string name="face_unlock_set_unlock_password" msgid="223117276773907474">"Pag-authenticate ng mukha + Password"</string>
+    <string name="face_unlock_skip_face" msgid="6362883392838482791">"Magpatuloy sa pag-authenticate ng mukha"</string>
+    <string name="face_unlock_title" msgid="9042382084472444316">"Maa-unlock mo ang iyong telepono gamit ang mukha mo. Para sa seguridad, nangangailangan ang opsyong ito ng backup na lock ng screen."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"Na-disable ng admin, patakaran sa pag-encrypt, o storage ng kredensyal"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Wala"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"Mag-swipe"</string>
@@ -866,6 +883,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"Awtomatiko"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2.4 GHz Band"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"5.0 GHz Band"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"Mas gusto ang 5.0 GHz Band"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2.4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5.0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Pumili ng kahit isang band para sa Wi‑Fi hotspot:"</string>
@@ -1077,7 +1095,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"Natural"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"Naka-boost"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"Saturated"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"Awtomatiko"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"Adaptive"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"Gumamit lang ng mga tumpak na kulay"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"I-adjust sa pagitan ng mga matingkad at tumpak na kulay"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Awtomatikong ilipat ang oryentasyon kapag iniikot ang tablet"</string>
@@ -1603,6 +1621,9 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Naitakda ang password"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"Naitakda ang PIN"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Itinakda ang pattern"</string>
+    <string name="lockpassword_choose_your_password_header_for_face" msgid="7876621019688907534">"I-authenticate: mukha, set ng password"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="8070525076987585344">"I-authenticate ang mukha, set ng pattern"</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" msgid="7304398683609714816">"Mag-authenticate ng mukha, i-set ang PIN"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"Gamitin ang iyong pattern sa device upang magpatuloy"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"Ilagay ang iyong PIN sa device upang magpatuloy"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"Ilagay ang iyong password sa device upang magpatuloy"</string>
@@ -2586,7 +2607,6 @@
     <string name="data_usage_menu_metered" msgid="6235119991372755026">"Mga paghihigpit sa network"</string>
     <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"I-auto sync ang data"</string>
     <string name="data_usage_menu_sim_cards" msgid="6410498422797244073">"Mga SIM card"</string>
-    <string name="data_usage_menu_cellular_networks" msgid="8339835014751511300">"Mga mobile network"</string>
     <string name="data_usage_cellular_data_summary" msgid="8413357481361268285">"Naka-pause sa limitasyon"</string>
     <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"I-auto sync ang data"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"I-auto sync ang personal data"</string>
@@ -2766,12 +2786,9 @@
       <item quantity="other">Tingnan ang mga certificate</item>
     </plurals>
     <string name="user_settings_title" msgid="3493908927709169019">"Maraming user"</string>
-    <!-- no translation found for user_settings_footer_text (5947601460660791129) -->
-    <skip />
-    <!-- no translation found for user_settings_footer_text (2153761434649733502) -->
-    <skip />
-    <!-- no translation found for user_settings_footer_text (2844602828189838075) -->
-    <skip />
+    <string name="user_settings_footer_text" product="device" msgid="5947601460660791129">"Ibahagi ang iyong device sa pamamagitan ng pagdaragdag ng mga bagong user. Ang bawat user ay may personal na espasyo sa iyong device para sa mga custom na Home screen, account, app, setting, at higit pa."</string>
+    <string name="user_settings_footer_text" product="tablet" msgid="2153761434649733502">"Ibahagi ang iyong tablet sa pamamagitan ng pagdaragdag ng mga bagong user. Ang bawat user ay may personal na espasyo sa iyong tablet para sa mga custom na Home screen, account, app, setting, at higit pa."</string>
+    <string name="user_settings_footer_text" product="default" msgid="2844602828189838075">"Ibahagi ang iyong telepono sa pamamagitan ng pagdaragdag ng mga bagong user. Ang bawat user ay may personal na espasyo sa iyong telepono para sa mga custom na Home screen, account, app, setting, at higit pa."</string>
     <string name="user_list_title" msgid="7937158411137563543">"Mga user at profile"</string>
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"Magdagdag ng user o profile"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Magdagdag ng user"</string>
@@ -3014,12 +3031,12 @@
     <string name="keywords_sim_status" msgid="1474422416860990564">"network, status ng mobile network, status ng serbisyo, lakas ng signal, uri ng mobile network, naka-roaming, iccid"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"serial number, bersyon ng hardware"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"antas ng patch ng seguridad ng android, bersyon ng baseband, kernel version"</string>
-    <!-- no translation found for keywords_device_feedback (564493721125966719) -->
-    <skip />
+    <string name="keywords_systemui_theme" msgid="9112852512550404882">"madilim na tema"</string>
+    <string name="keywords_device_feedback" msgid="564493721125966719">"bug"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Ambient na display, Display ng lock screen"</string>
+    <string name="keywords_face_settings" msgid="7505388678116799329">"mukha"</string>
     <string name="keywords_fingerprint_settings" msgid="239222512315619538">"fingerprint"</string>
-    <!-- no translation found for keywords_display_auto_brightness (4130320471533951796) -->
-    <skip />
+    <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"madilim na screen, touchscreen, baterya, smart brightness, dynamic na liwanag"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"i-rotate, i-flip, pag-rotate, portrait, landscape, oryentasyon, patayo, pahalang"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"i-upgrade, android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"dnd, iskedyul, mga notification, i-block, katahimikan, mag-vibrate, sleep, trabaho, i-focus, tunog, i-mute, araw, weekday, weekend, weeknight, event"</string>
@@ -3171,7 +3188,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"Naka-mute, pero payagan ang <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> at <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"Naka-mute, pero payagan ang <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>, at <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"Mga mensahe, event, at paalala"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"Kapag naka-on ang Huwag Istorbohin, mamu-mute ang mga mensahe, paalala, at event, maliban sa mga item na pinapayagan mo sa itaas. Maaari mong isaayos ang mga setting ng mensahe para payagan ang iyong mga kaibigan, pamilya, o iba pang contact na makipag-ugnayan sa iyo."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"Kapag naka-on ang Huwag Istorbohin, mamu-mute ang mga mensahe, paalala, at event, maliban sa mga item na pinapayagan mo sa itaas. Maaari mong isaayos ang mga setting ng mga mensahe para payagan ang iyong mga kaibigan, pamilya, o iba pang contact na makipag-ugnayan sa iyo."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"Tapos na"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Mga Setting"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"Walang visual o tunog mula sa mga notification"</string>
@@ -3350,11 +3367,16 @@
     <string name="zen_mode_calls_title" msgid="623395033931747661">"Payagan ang mga tawag"</string>
     <string name="zen_mode_calls_footer" msgid="3618700268458237781">"Kapag naka-on ang Huwag Istorbohin, bina-block ang mga papasok na tawag. Maaari mong isaayos ang mga setting para payagan ang iyong mga kaibigan, pamilya, o iba pang contact na makipag-ugnayan sa iyo."</string>
     <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"Mga naka-star na contact"</string>
-    <!-- no translation found for zen_mode_starred_contacts_summary_additional_contacts (500105380255018671) -->
+    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="500105380255018671">
+      <item quantity="one"><xliff:g id="NUM_PEOPLE">%d</xliff:g> iba pa</item>
+      <item quantity="other"><xliff:g id="NUM_PEOPLE">%d</xliff:g> na iba pa</item>
+    </plurals>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Mga Mensahe"</string>
     <string name="zen_mode_messages_title" msgid="7729380010396411129">"Payagan ang mga mensahe"</string>
     <string name="zen_mode_all_messages" msgid="8257021584561639816">"Mga Mensahe"</string>
+    <string name="zen_mode_all_messages_list" msgid="4223560721230967061">"mga mensahe"</string>
     <string name="zen_mode_selected_messages" msgid="1047355526202106114">"Ilang mensahe"</string>
+    <string name="zen_mode_selected_messages_list" msgid="5309288435815759102">"ilang mensahe"</string>
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"Mula sa sinuman"</string>
     <string name="zen_mode_from_contacts" msgid="2232335406106711637">"Mula sa mga contact lang"</string>
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Mula sa mga contact na may star lang"</string>
@@ -3363,16 +3385,22 @@
     <string name="zen_calls_summary_repeat_only" msgid="7105261473107715445">"Mula sa mga umuulit na tumatawag lang"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Wala"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Mga Alarm"</string>
+    <string name="zen_mode_alarms_list" msgid="1090332840207025714">"mga alarm"</string>
     <string name="zen_mode_media" msgid="8808264142134422380">"Media"</string>
+    <string name="zen_mode_media_list" msgid="5483540766397328038">"media"</string>
     <string name="zen_mode_system" msgid="2541380718411593581">"Mga tunog sa pagpindot"</string>
+    <string name="zen_mode_system_list" msgid="6996104733185177115">"mga tunog sa pagpindot"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Mga Paalala"</string>
+    <string name="zen_mode_reminders_list" msgid="2853975802240340190">"mga paalala"</string>
     <string name="zen_mode_reminders_title" msgid="2345044406347406902">"Payagan ang mga paalala"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Mga Event"</string>
+    <string name="zen_mode_events_list" msgid="5571368229052715098">"mga event"</string>
     <string name="zen_mode_events_title" msgid="5597241655883329085">"Payagan ang mga event"</string>
     <string name="zen_mode_all_callers" msgid="2378065871253871057">"kahit sino"</string>
     <string name="zen_mode_contacts_callers" msgid="5569804103920394175">"mga contact"</string>
     <string name="zen_mode_starred_callers" msgid="1023167821338514140">"mga naka-star na contact"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"Mga umulit na tumatawag"</string>
+    <string name="zen_mode_repeat_callers_list" msgid="2529895519653237330">"mga umuulit na tumatawag"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8553876328249671783">"Payagan ang mga umuulit na tumatawag"</string>
     <string name="zen_mode_calls_summary_one" msgid="3972333792749874863">"Mula kay <xliff:g id="CALLER_TYPE">%1$s</xliff:g>"</string>
     <string name="zen_mode_calls_summary_two" msgid="6592821501321201329">"Mula sa <xliff:g id="CALLER_TYPE">%1$s</xliff:g> at <xliff:g id="CALLERT_TPYE">%2$s</xliff:g>"</string>
@@ -3424,6 +3452,9 @@
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"Bukod sa paggamit ng iyong fingerprint upang i-unlock ang device mo, mas mapoprotektahan mo ang device na ito sa pamamagitan ng paghingi ng PIN mo bago ito magsimula. Hanggang magsimula ang device, hindi ito makakatanggap ng mga tawag, mensahe, o notification, kabilang ang mga alarm.\n\nNakakatulong ito na protektahan data ng mga nawawala o ninakaw na device. Humingi ng PIN upang simulan ang iyong device?"</string>
     <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"Bukod sa paggamit sa iyong fingerprint upang i-unlock ang device mo, mas mapoprotektahan mo ang device na ito sa pamamagitan ng paghingi ng pattern mo bago ito magsimula. Hanggang sa magsimula ang device, hindi ito makakatanggap ng mga tawag, mensahe, o notification, kabilang ang mga alarm.\n\nNakakatulong itong maprotektahan ang data sa mga nawawala o nanakaw na device. Humingi ng pattern upang simulan ang iyong device?"</string>
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Bukod pa sa paggamit ng iyong fingerprint sa pag-unlock ng device mo, maaari mong higit pang protektahan ang device na ito sa pamamagitan ng paghingi ng iyong password bago ito magsimula. Hangga\'t hindi nakakapagsimula ang device, hindi ito makakatanggap ng mga tawag, mensahe, o notification, kabilang ang mga alarm.\n\nNakakatulong ito sa pagprotekta ng data sa mga nawawala o nanakaw na device. Humingi ng password sa pagsisimula ng iyong device?"</string>
+    <string name="encryption_interstitial_message_pin_for_face" msgid="2017438765366716760">"Bukod pa sa paggamit ng iyong mukha sa pag-unlock ng device mo, maaari mong paigtingin ang proteksyon sa device na ito sa pamamagitan ng paghingi ng iyong PIN bago ito magbukas. Hangga\'t hindi nagbubukas ang device, hindi ito makakatanggap ng mga tawag, mensahe, o notification, kabilang ang mga alarm.\n\nNakakatulong ito sa pagprotekta ng data sa mga nawawala o nanakaw na device. Humingi ng PIN para buksan ang iyong device?"</string>
+    <string name="encryption_interstitial_message_pattern_for_face" msgid="3551827507967661552">"Bukod pa sa paggamit ng iyong mukha sa pag-unlock ng device mo, maaari mong paigtingin ang proteksyon sa device na ito sa pamamagitan ng paghingi ng iyong pattern bago ito magbukas. Hangga\'t hindi nagbubukas ang device, hindi ito makakatanggap ng mga tawag, mensahe, o notification, kabilang ang mga alarm.\n\nNakakatulong ito sa pagprotekta ng data sa mga nawawala o nanakaw na device. Humingi ng pattern para buksan ang iyong device?"</string>
+    <string name="encryption_interstitial_message_password_for_face" msgid="3452793542112093614">"Bukod pa sa paggamit ng iyong mukha sa pag-unlock ng device mo, maaari mong paigtingin ang proteksyon sa device na ito sa pamamagitan ng paghingi ng iyong password bago ito magbukas. Hangga\'t hindi nagbubukas ang device, hindi ito makakatanggap ng mga tawag, mensahe, o notification, kabilang ang mga alarm.\n\nNakakatulong ito sa pagprotekta ng data sa mga nawawala o nanakaw na device. Humingi ng password para buksan ang iyong device?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Oo"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Huwag"</string>
     <string name="restricted_true_label" msgid="4761453839409220473">"Pinaghihigpitan"</string>
@@ -3454,7 +3485,7 @@
     <string name="change_storage" msgid="600475265207060436">"Baguhin ang storage"</string>
     <string name="notifications_label" msgid="2872668710589600731">"Mga Notification"</string>
     <string name="notifications_enabled" msgid="6983396130566021385">"Naka-on"</string>
-    <string name="notifications_enabled_with_info" msgid="2446033696770133334">"Naka-on / <xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%1$s</xliff:g>"</string>
+    <string name="notifications_enabled_with_info" msgid="5669544704839269901">"<xliff:g id="NOTIFICATIONS_SENT">%1$s</xliff:g> / <xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%2$s</xliff:g>"</string>
     <string name="notifications_disabled" msgid="1262114548434938079">"Naka-off"</string>
     <string name="notifications_partly_blocked" msgid="592071133950126656">"Naka-off ang <xliff:g id="COUNT_0">%1$d</xliff:g> sa <xliff:g id="COUNT_1">%2$d</xliff:g> (na) kategorya"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"Pinatahimik"</string>
@@ -3781,7 +3812,6 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"Gumamit ng mas malalamig na kulay ng display"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Upang ilapat ang pagbabago sa kulay, i-off ang screen"</string>
     <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"Sensor ng Laser ng Camera"</string>
-    <string name="logical_camera_default_switch" msgid="3310039627275112685">"Logical na Camera Bilang Default"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Mga awtomatikong pag-update ng system"</string>
     <string name="ota_disable_automatic_update_summary" msgid="940729694354373087">"Ilapat ang mga update kapag nag-restart ang device"</string>
     <string name="usage" msgid="2977875522080448986">"Paggamit"</string>
@@ -3794,8 +3824,6 @@
     <string name="cell_data_template" msgid="405684854174361041">"<xliff:g id="AMOUNT">^1</xliff:g> na mobile data"</string>
     <string name="wifi_data_template" msgid="6265570748799357386">"<xliff:g id="AMOUNT">^1</xliff:g> na Wi-Fi data"</string>
     <string name="ethernet_data_template" msgid="5782476509881033590">"<xliff:g id="AMOUNT">^1</xliff:g> na ethernet data"</string>
-    <string name="cell_warning_only" msgid="763147658209027140">"Babala kapag umabot sa <xliff:g id="ID_1">%1$s</xliff:g> ang Data"</string>
-    <string name="cell_warning_and_limit" msgid="2273413629267437470">"Babala kapag umabot sa <xliff:g id="ID_1">%1$s</xliff:g> ang Data / Limitasyong <xliff:g id="ID_2">%2$s</xliff:g> na Data"</string>
     <string name="billing_cycle" msgid="6614597736285325497">"Babala at limitasyon sa data"</string>
     <string name="app_usage_cycle" msgid="8877223251648092131">"Cycle ng paggamit ng app data"</string>
     <string name="cell_data_warning" msgid="1985956818884847057">"Babala kapag umabot na sa <xliff:g id="ID_1">^1</xliff:g> ang data"</string>

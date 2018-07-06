@@ -14,56 +14,57 @@
  * limitations under the License
  */
 
-package com.android.settings.development;
+package com.android.settings.display;
 
 import android.app.UiModeManager;
 import android.content.Context;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.development.DeveloperOptionsPreferenceController;
+import com.android.settings.core.BasePreferenceController;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
-public class DarkUIPreferenceController extends DeveloperOptionsPreferenceController
-        implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
+public class DarkUIPreferenceController extends BasePreferenceController
+        implements Preference.OnPreferenceChangeListener {
 
-    private static final String DARK_UI_KEY = "dark_ui_mode";
-    private final UiModeManager mUiModeManager;
+    private UiModeManager mUiModeManager;
 
-    public DarkUIPreferenceController(Context context) {
-        this(context, context.getSystemService(UiModeManager.class));
+    public DarkUIPreferenceController(Context context, String key) {
+        super(context, key);
+        mUiModeManager = context.getSystemService(UiModeManager.class);
     }
 
     @VisibleForTesting
-    DarkUIPreferenceController(Context context, UiModeManager uiModeManager) {
-        super(context);
+    void setUiModeManager(UiModeManager uiModeManager) {
         mUiModeManager = uiModeManager;
     }
 
     @Override
-    public String getPreferenceKey() {
-        return DARK_UI_KEY;
+    public int getAvailabilityStatus() {
+        return AVAILABLE;
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        int value = mUiModeManager.getNightMode();
+        ListPreference preference = (ListPreference) screen.findPreference(getPreferenceKey());
+        preference.setValue(modeToString(value));
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         mUiModeManager.setNightMode(modeToInt((String) newValue));
-        updateSummary(preference);
+        refreshSummary(preference);
         return true;
     }
 
     @Override
-    public void updateState(Preference preference) {
-        updateSummary(preference);
-    }
-
-    private void updateSummary(Preference preference) {
-        int mode = mUiModeManager.getNightMode();
-        ((ListPreference) preference).setValue(modeToString(mode));
-        preference.setSummary(modeToDescription(mode));
+    public CharSequence getSummary() {
+        return modeToDescription(mUiModeManager.getNightMode());
     }
 
     private String modeToDescription(int mode) {
