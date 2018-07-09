@@ -18,12 +18,15 @@
 package com.android.settings.slices;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.app.slice.Slice;
 import android.content.ContentResolver;
@@ -82,6 +85,8 @@ public class SliceBroadcastReceiverTest {
         mSearchFeatureProvider = new SearchFeatureProviderImpl();
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mFakeFeatureFactory.searchFeatureProvider = mSearchFeatureProvider;
+        when(mFakeFeatureFactory.slicesFeatureProvider.getCustomSliceManager(any()))
+                .thenReturn(new CustomSliceManager(mContext));
         mLoggingNameArgumentCatpor = ArgumentCaptor.forClass(Pair.class);
         mLoggingValueArgumentCatpor = ArgumentCaptor.forClass(Pair.class);
     }

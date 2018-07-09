@@ -20,6 +20,8 @@ import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 import static android.app.slice.Slice.HINT_TITLE;
 import static android.app.slice.SliceItem.FORMAT_TEXT;
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
@@ -40,6 +42,7 @@ import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settings.slices.SliceBroadcastReceiver;
 import com.android.settings.slices.SliceData;
 import com.android.settings.slices.SlicesFeatureProvider;
+import com.android.settings.slices.CustomSliceManager;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -88,12 +91,15 @@ public class WifiCallingSliceHelperTest {
         //setup for SettingsSliceProvider tests
         mProvider = spy(new SettingsSliceProvider());
         doReturn(mContext).when(mProvider).getContext();
+        mProvider.onCreateSliceProvider();
 
         //setup for SliceBroadcastReceiver test
         mReceiver = spy(new SliceBroadcastReceiver());
 
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mSlicesFeatureProvider = mFeatureFactory.getSlicesFeatureProvider();
+        when(mSlicesFeatureProvider.getCustomSliceManager(any(Context.class)))
+                .thenReturn(new CustomSliceManager(mContext));
 
         // Prevent crash in SliceMetadata.
         Resources resources = spy(mContext.getResources());
