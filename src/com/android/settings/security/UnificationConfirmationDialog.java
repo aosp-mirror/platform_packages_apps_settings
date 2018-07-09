@@ -59,15 +59,8 @@ public class UnificationConfirmationDialog extends InstrumentedDialogFragment {
                 .setPositiveButton(
                         compliant ? R.string.lock_settings_profile_unification_dialog_confirm
                                 : R.string
-                                        .lock_settings_profile_unification_dialog_uncompliant_confirm,
-                        (dialog, whichButton) -> {
-                            if (compliant) {
-                                parentFragment.launchConfirmDeviceLockForUnification();
-                            } else {
-                                parentFragment.unifyUncompliantLocks();
-                            }
-                        }
-                )
+                                      .lock_settings_profile_unification_dialog_uncompliant_confirm,
+                        (dialog, whichButton) -> parentFragment.startUnification())
                 .setNegativeButton(R.string.cancel, null)
                 .create();
     }
