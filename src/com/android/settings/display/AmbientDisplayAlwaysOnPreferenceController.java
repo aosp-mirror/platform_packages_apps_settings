@@ -43,10 +43,7 @@ public class AmbientDisplayAlwaysOnPreferenceController extends TogglePreference
 
     @Override
     public int getAvailabilityStatus() {
-        if (mConfig == null) {
-            mConfig = new AmbientDisplayConfiguration(mContext);
-        }
-        return isAvailable(mConfig) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return isAvailable(getConfig()) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -56,7 +53,7 @@ public class AmbientDisplayAlwaysOnPreferenceController extends TogglePreference
 
     @Override
     public boolean isChecked() {
-        return mConfig.alwaysOnEnabled(MY_USER);
+        return getConfig().alwaysOnEnabled(MY_USER);
     }
 
     @Override
@@ -82,15 +79,14 @@ public class AmbientDisplayAlwaysOnPreferenceController extends TogglePreference
         return this;
     }
 
-    public static boolean isAlwaysOnEnabled(AmbientDisplayConfiguration config) {
-        return config.alwaysOnEnabled(MY_USER);
-    }
-
     public static boolean isAvailable(AmbientDisplayConfiguration config) {
         return config.alwaysOnAvailableForUser(MY_USER);
     }
 
-    public static boolean accessibilityInversionEnabled(AmbientDisplayConfiguration config) {
-        return config.accessibilityInversionEnabled(MY_USER);
+    private AmbientDisplayConfiguration getConfig() {
+        if (mConfig == null) {
+            mConfig = new AmbientDisplayConfiguration(mContext);
+        }
+        return mConfig;
     }
 }
