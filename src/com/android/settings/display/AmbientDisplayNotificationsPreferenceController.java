@@ -68,7 +68,7 @@ public class AmbientDisplayNotificationsPreferenceController extends
 
     @Override
     public boolean isChecked() {
-        return mConfig.pulseOnNotificationEnabled(MY_USER);
+        return getAmbientConfig().pulseOnNotificationEnabled(MY_USER);
     }
 
     @Override
@@ -79,14 +79,20 @@ public class AmbientDisplayNotificationsPreferenceController extends
 
     @Override
     public int getAvailabilityStatus() {
-        if (mConfig == null) {
-            mConfig = new AmbientDisplayConfiguration(mContext);
-        }
-        return mConfig.pulseOnNotificationAvailable() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return getAmbientConfig().pulseOnNotificationAvailable()
+                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
     public boolean isSliceable() {
         return TextUtils.equals(getPreferenceKey(), "ambient_display_notification");
+    }
+
+    private AmbientDisplayConfiguration getAmbientConfig() {
+        if (mConfig == null) {
+            mConfig = new AmbientDisplayConfiguration(mContext);
+        }
+
+        return mConfig;
     }
 }
