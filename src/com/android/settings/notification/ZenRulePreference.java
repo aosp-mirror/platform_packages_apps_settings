@@ -113,7 +113,7 @@ public class ZenRulePreference extends TwoTargetPreference {
 
     protected void setAttributes(AutomaticZenRule rule) {
         final boolean isSchedule = ZenModeConfig.isValidScheduleConditionId(
-                rule.getConditionId());
+                rule.getConditionId(), true);
         final boolean isEvent = ZenModeConfig.isValidEventConditionId(rule.getConditionId());
         final boolean isSystemRule = isSchedule || isEvent;
 
