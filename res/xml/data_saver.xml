@@ -14,13 +14,17 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/data_saver_title">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="data_saver_screen"
+    android:title="@string/data_saver_title">
 
     <Preference
         android:key="unrestricted_access"
         android:title="@string/unrestricted_data_saver"
         android:summary="@string/summary_two_lines_placeholder"
-        android:fragment="com.android.settings.datausage.UnrestrictedDataAccess" />
+        android:fragment="com.android.settings.datausage.UnrestrictedDataAccess"
+        settings:controller="com.android.settings.applications.specialaccess.DataSaverController" />
 
 </PreferenceScreen>

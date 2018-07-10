@@ -38,8 +38,8 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.notification.EmptyTextSettings;
 import com.android.settings.widget.AppSwitchPreference;
+import com.android.settings.widget.EmptyTextSettings;
 import com.android.settingslib.applications.ServiceListing;
 
 import java.util.List;

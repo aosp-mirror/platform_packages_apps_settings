@@ -51,8 +51,7 @@ import androidx.preference.PreferenceScreen;
  * Settings preference fragment that displays data usage summary.
  */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class DataUsageSummary extends DataUsageBaseFragment implements Indexable,
-        DataUsageEditController {
+public class DataUsageSummary extends DataUsageBaseFragment implements DataUsageEditController {
 
     private static final String TAG = "DataUsageSummary";
 
@@ -378,6 +377,9 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
 
                 // This title is named Wifi, and will confuse users.
                 keys.add(KEY_WIFI_USAGE_TITLE);
+
+                // Duplicate entry for "Data saver"
+                keys.add(KEY_RESTRICT_BACKGROUND);
 
                 return keys;
             }

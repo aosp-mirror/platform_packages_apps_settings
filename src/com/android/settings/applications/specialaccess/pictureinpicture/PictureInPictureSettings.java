@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.applications.appinfo;
+package com.android.settings.applications.specialaccess.pictureinpicture;
 
 import static android.content.pm.PackageManager.GET_ACTIVITIES;
 
@@ -27,6 +27,7 @@ import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.provider.SearchIndexableResource;
 import android.util.IconDrawableFactory;
 import android.util.Pair;
 import android.view.View;
@@ -35,8 +36,11 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
-import com.android.settings.notification.EmptyTextSettings;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 import com.android.settings.widget.AppPreference;
+import com.android.settings.widget.EmptyTextSettings;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.text.Collator;
 import java.util.ArrayList;
@@ -48,11 +52,12 @@ import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceClickListener;
 import androidx.preference.PreferenceScreen;
 
+@SearchIndexable
 public class PictureInPictureSettings extends EmptyTextSettings {
 
-    private static final String TAG = PictureInPictureSettings.class.getSimpleName();
     @VisibleForTesting
     static final List<String> IGNORE_PACKAGE_LIST = new ArrayList<>();
+
     static {
         IGNORE_PACKAGE_LIST.add("com.android.systemui");
     }
@@ -72,9 +77,9 @@ public class PictureInPictureSettings extends EmptyTextSettings {
 
         public final int compare(Pair<ApplicationInfo, Integer> a,
                 Pair<ApplicationInfo, Integer> b) {
-            CharSequence  sa = a.first.loadLabel(mPm);
+            CharSequence sa = a.first.loadLabel(mPm);
             if (sa == null) sa = a.first.name;
-            CharSequence  sb = b.first.loadLabel(mPm);
+            CharSequence sb = b.first.loadLabel(mPm);
             if (sb == null) sb = b.first.name;
             int nameCmp = mCollator.compare(sa.toString(), sb.toString());
             if (nameCmp != 0) {
@@ -92,7 +97,7 @@ public class PictureInPictureSettings extends EmptyTextSettings {
 
     /**
      * @return true if the package has any activities that declare that they support
-     *         picture-in-picture.
+     * picture-in-picture.
      */
 
     public static boolean checkPackageHasPictureInPictureActivities(String packageName,
@@ -192,7 +197,7 @@ public class PictureInPictureSettings extends EmptyTextSettings {
 
     /**
      * @return the list of applications for the given user and all their profiles that have
-     *         activities which support PiP.
+     * activities which support PiP.
      */
     ArrayList<Pair<ApplicationInfo, Integer>> collectPipApps(int userId) {
         final ArrayList<Pair<ApplicationInfo, Integer>> pipApps = new ArrayList<>();
@@ -213,4 +218,18 @@ public class PictureInPictureSettings extends EmptyTextSettings {
         }
         return pipApps;
     }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    final ArrayList<SearchIndexableResource> result = new ArrayList<>();
+
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.picture_in_picture_settings;
+                    result.add(sir);
+                    return result;
+                }
+            };
 }

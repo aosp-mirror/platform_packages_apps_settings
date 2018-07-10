@@ -73,15 +73,15 @@
     <Preference
         android:key="picture_in_picture"
         android:title="@string/picture_in_picture_title"
-        android:fragment="com.android.settings.applications.appinfo.PictureInPictureSettings"
+        android:fragment="com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureSettings"
         settings:keywords="@string/picture_in_picture_keywords"
-        settings:controller="com.android.settings.applications.specialaccess.PictureInPictureController" />
+        settings:controller="com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureController" />
 
     <Preference
         android:key="premium_sms"
         android:title="@string/premium_sms_access"
-        android:fragment="com.android.settings.applications.PremiumSmsAccess"
-        settings:controller="com.android.settings.applications.specialaccess.PremiumSmsController" />
+        android:fragment="com.android.settings.applications.specialaccess.premiumsms.PremiumSmsAccess"
+        settings:controller="com.android.settings.applications.specialaccess.premiumsms.PremiumSmsController" />
 
     <Preference
         android:key="data_saver"

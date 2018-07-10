@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications.specialaccess;
+package com.android.settings.applications.specialaccess.premiumsms;
 
 import android.content.Context;
 
@@ -30,7 +30,7 @@ public class PremiumSmsController extends BasePreferenceController {
     @AvailabilityStatus
     public int getAvailabilityStatus() {
         return mContext.getResources().getBoolean(R.bool.config_show_premium_sms)
-                ? AVAILABLE
+                ? AVAILABLE_UNSEARCHABLE
                 : UNSUPPORTED_ON_DEVICE;
     }
 }

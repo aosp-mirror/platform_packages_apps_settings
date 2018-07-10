@@ -11,10 +11,10 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License
+ * limitations under the License.
  */
 
-package com.android.settings.applications;
+package com.android.settings.applications.specialaccess.premiumsms;
 
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.eq;
@@ -24,6 +24,7 @@ import android.content.Context;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.telephony.SmsUsageMonitor;
+import com.android.settings.applications.specialaccess.premiumsms.PremiumSmsAccess;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 

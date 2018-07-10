@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications.specialaccess;
+package com.android.settings.applications.specialaccess.pictureinpicture;
 
 import android.app.ActivityManager;
 import android.content.Context;
 
 import com.android.settings.core.BasePreferenceController;
 
-public class ZenAccessController extends BasePreferenceController {
+public class PictureInPictureController extends BasePreferenceController {
 
-    public ZenAccessController(Context context, String preferenceKey) {
+    public PictureInPictureController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
