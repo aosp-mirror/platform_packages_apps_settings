@@ -62,17 +62,13 @@ public class PickupGesturePreferenceController extends GesturePreferenceControll
 
     @Override
     public int getAvailabilityStatus() {
-        if (mAmbientConfig == null) {
-            mAmbientConfig = new AmbientDisplayConfiguration(mContext);
-        }
-
         // No hardware support for Pickup Gesture
-        if (!mAmbientConfig.dozePulsePickupSensorAvailable()) {
+        if (!getAmbientConfig().dozePulsePickupSensorAvailable()) {
             return UNSUPPORTED_ON_DEVICE;
         }
 
         // Can't change Pickup Gesture when AOD is enabled.
-        if (!mAmbientConfig.ambientDisplayAvailable()) {
+        if (!getAmbientConfig().ambientDisplayAvailable()) {
             return DISABLED_DEPENDENT_SETTING;
         }
 
@@ -91,7 +87,7 @@ public class PickupGesturePreferenceController extends GesturePreferenceControll
 
     @Override
     public boolean isChecked() {
-        return mAmbientConfig.pulseOnPickupEnabled(mUserId);
+        return getAmbientConfig().pulseOnPickupEnabled(mUserId);
     }
 
     @Override
@@ -112,6 +108,14 @@ public class PickupGesturePreferenceController extends GesturePreferenceControll
 
     @VisibleForTesting
     boolean pulseOnPickupCanBeModified() {
-        return mAmbientConfig.pulseOnPickupCanBeModified(mUserId);
+        return getAmbientConfig().pulseOnPickupCanBeModified(mUserId);
+    }
+
+    private AmbientDisplayConfiguration getAmbientConfig() {
+        if (mAmbientConfig == null) {
+            mAmbientConfig = new AmbientDisplayConfiguration(mContext);
+        }
+
+        return mAmbientConfig;
     }
 }
