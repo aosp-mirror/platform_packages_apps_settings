@@ -25,6 +25,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
 
+import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -52,50 +53,68 @@ public class AutoBrightnessPreferenceControllerTest {
     }
 
     @Test
-    public void testOnPreferenceChange_TurnOnAuto_ReturnAuto() {
+    public void onPreferenceChange_TurnOnAuto_ReturnAuto() {
         mController.onPreferenceChange(null, true);
 
         final int mode = Settings.System.getInt(mContentResolver, SCREEN_BRIGHTNESS_MODE,
-            SCREEN_BRIGHTNESS_MODE_MANUAL);
+                SCREEN_BRIGHTNESS_MODE_MANUAL);
         assertThat(mode).isEqualTo(SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
     }
 
     @Test
-    public void testOnPreferenceChange_TurnOffAuto_ReturnManual() {
+    public void onPreferenceChange_TurnOffAuto_ReturnManual() {
         mController.onPreferenceChange(null, false);
 
         final int mode = Settings.System.getInt(mContentResolver, SCREEN_BRIGHTNESS_MODE,
-            SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
+                SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
         assertThat(mode).isEqualTo(SCREEN_BRIGHTNESS_MODE_MANUAL);
     }
 
     @Test
-    public void testSetValue_updatesCorrectly() {
-        boolean newValue = true;
-        Settings.System.putInt(mContentResolver, SCREEN_BRIGHTNESS_MODE,
-            SCREEN_BRIGHTNESS_MODE_MANUAL);
+    public void setChecked_updatesCorrectly() {
+        mController.setChecked(true);
 
-        mController.setChecked(newValue);
-        boolean updatedValue = Settings.System.getInt(mContentResolver, SCREEN_BRIGHTNESS_MODE, -1)
-                != SCREEN_BRIGHTNESS_MODE_MANUAL;
+        assertThat(mController.isChecked()).isTrue();
 
-        assertThat(updatedValue).isEqualTo(newValue);
+        mController.setChecked(false);
+
+        assertThat(mController.isChecked()).isFalse();
     }
 
     @Test
-    public void testGetValue_correctValueReturned() {
+    public void isChecked_no() {
         Settings.System.putInt(mContentResolver, SCREEN_BRIGHTNESS_MODE,
-            SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
+                SCREEN_BRIGHTNESS_MODE_MANUAL);
 
-        int newValue = mController.isChecked() ?
-                SCREEN_BRIGHTNESS_MODE_AUTOMATIC
-                : SCREEN_BRIGHTNESS_MODE_MANUAL;
-
-        assertThat(newValue).isEqualTo(SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
+        assertThat(mController.isChecked()).isFalse();
     }
 
     @Test
-    public void isSliceableCorrectKey_returnsTrue() {
+    public void isChecked_yes() {
+        Settings.System.putInt(mContentResolver, SCREEN_BRIGHTNESS_MODE,
+                SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
+
+        assertThat(mController.isChecked()).isTrue();
+    }
+
+    @Test
+    public void getSummary_settingOn_shouldReturnOnSummary() {
+        mController.setChecked(true);
+
+        assertThat(mController.getSummary())
+                .isEqualTo(mContext.getText(R.string.auto_brightness_summary_on));
+    }
+
+    @Test
+    public void getSummary_settingOff_shouldReturnOffSummary() {
+        mController.setChecked(false);
+
+        assertThat(mController.getSummary())
+                .isEqualTo(mContext.getText(R.string.auto_brightness_summary_off));
+    }
+
+    @Test
+    public void isSliceable_correctKey_returnsTrue() {
         final AutoBrightnessPreferenceController controller =
                 new AutoBrightnessPreferenceController(mContext,
                         "auto_brightness");
@@ -103,7 +122,7 @@ public class AutoBrightnessPreferenceControllerTest {
     }
 
     @Test
-    public void isSliceableIncorrectKey_returnsFalse() {
+    public void isSliceable_incorrectKey_returnsFalse() {
         final AutoBrightnessPreferenceController controller =
                 new AutoBrightnessPreferenceController(mContext, "bad_key");
         assertThat(controller.isSliceable()).isFalse();

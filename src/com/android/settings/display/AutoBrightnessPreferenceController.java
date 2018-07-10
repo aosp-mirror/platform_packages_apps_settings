@@ -21,6 +21,7 @@ import android.content.Context;
 import android.provider.Settings;
 import android.text.TextUtils;
 
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
 
@@ -58,5 +59,12 @@ public class AutoBrightnessPreferenceController extends TogglePreferenceControll
     @Override
     public boolean isSliceable() {
         return TextUtils.equals(getPreferenceKey(), "auto_brightness");
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        return mContext.getText(isChecked()
+                ? R.string.auto_brightness_summary_on
+                : R.string.auto_brightness_summary_off);
     }
 }
