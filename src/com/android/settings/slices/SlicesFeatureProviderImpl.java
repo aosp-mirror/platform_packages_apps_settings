@@ -13,21 +13,30 @@ public class SlicesFeatureProviderImpl implements SlicesFeatureProvider {
 
     private SlicesIndexer mSlicesIndexer;
     private SliceDataConverter mSliceDataConverter;
+    private CustomSliceManager mCustomSliceManager;
 
     @Override
     public SlicesIndexer getSliceIndexer(Context context) {
         if (mSlicesIndexer == null) {
-            mSlicesIndexer = new SlicesIndexer(context);
+            mSlicesIndexer = new SlicesIndexer(context.getApplicationContext());
         }
         return mSlicesIndexer;
     }
 
     @Override
     public SliceDataConverter getSliceDataConverter(Context context) {
-        if(mSliceDataConverter == null) {
+        if (mSliceDataConverter == null) {
             mSliceDataConverter = new SliceDataConverter(context.getApplicationContext());
         }
         return mSliceDataConverter;
+    }
+
+    @Override
+    public CustomSliceManager getCustomSliceManager(Context context) {
+        if (mCustomSliceManager == null) {
+            mCustomSliceManager = new CustomSliceManager(context.getApplicationContext());
+        }
+        return mCustomSliceManager;
     }
 
     @Override

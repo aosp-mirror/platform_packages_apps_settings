@@ -98,13 +98,8 @@ public class SecuritySettings extends DashboardFragment {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    void launchConfirmDeviceLockForUnification() {
-        use(LockUnificationPreferenceController.class)
-                .launchConfirmDeviceLockForUnification();
-    }
-
-    void unifyUncompliantLocks() {
-        use(LockUnificationPreferenceController.class).unifyUncompliantLocks();
+    void startUnification() {
+        use(LockUnificationPreferenceController.class).startUnification();
     }
 
     void updateUnificationPreference() {

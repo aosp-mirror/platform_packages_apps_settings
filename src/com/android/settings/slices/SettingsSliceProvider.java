@@ -32,15 +32,15 @@ import android.util.KeyValueListParser;
 import android.util.Log;
 import android.util.Pair;
 
-import com.android.settings.bluetooth.BluetoothSliceBuilder;
-import com.android.settings.core.BasePreferenceController;
 import com.android.settings.flashlight.FlashlightSliceBuilder;
 import com.android.settings.location.LocationSliceBuilder;
 import com.android.settings.mobilenetwork.Enhanced4gLteSliceHelper;
 import com.android.settings.notification.ZenModeSliceBuilder;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.wifi.WifiSliceBuilder;
 import com.android.settings.wifi.calling.WifiCallingSliceHelper;
+import com.android.settings.bluetooth.BluetoothSliceBuilder;
 import com.android.settingslib.SliceBroadcastRelay;
 import com.android.settingslib.utils.ThreadUtils;
 
@@ -114,10 +114,14 @@ public class SettingsSliceProvider extends SliceProvider {
             "com.android.settings.slice.extra.platform";
 
     @VisibleForTesting
+    CustomSliceManager mCustomSliceManager;
+
+    @VisibleForTesting
     SlicesDatabaseAccessor mSlicesDatabaseAccessor;
 
     @VisibleForTesting
     Map<Uri, SliceData> mSliceWeakDataCache;
+
     @VisibleForTesting
     Map<Uri, SliceData> mSliceDataCache;
 
@@ -135,6 +139,8 @@ public class SettingsSliceProvider extends SliceProvider {
         mSlicesDatabaseAccessor = new SlicesDatabaseAccessor(getContext());
         mSliceDataCache = new ConcurrentHashMap<>();
         mSliceWeakDataCache = new WeakHashMap<>();
+        mCustomSliceManager = FeatureFactory.getFactory(
+                getContext()).getSlicesFeatureProvider().getCustomSliceManager(getContext());
         return true;
     }
 
@@ -151,6 +157,15 @@ public class SettingsSliceProvider extends SliceProvider {
 
     @Override
     public void onSlicePinned(Uri sliceUri) {
+        if (mCustomSliceManager.isValidUri(sliceUri)) {
+            final CustomSliceable sliceable = mCustomSliceManager.getSliceableFromUri(sliceUri);
+            final IntentFilter filter = sliceable.getIntentFilter();
+            if (filter != null) {
+                registerIntentToUri(filter, sliceUri);
+            }
+            return;
+        }
+
         if (WifiSliceBuilder.WIFI_URI.equals(sliceUri)) {
             registerIntentToUri(WifiSliceBuilder.INTENT_FILTER, sliceUri);
             mRegisteredUris.add(sliceUri);
@@ -162,7 +177,7 @@ public class SettingsSliceProvider extends SliceProvider {
             registerIntentToUri(BluetoothSliceBuilder.INTENT_FILTER, sliceUri);
             return;
         } else if (FlashlightSliceBuilder.FLASHLIGHT_URI.equals(sliceUri)) {
-            registerIntentToUri(FlashlightSliceBuilder.INTENT_FILTER , sliceUri);
+            registerIntentToUri(FlashlightSliceBuilder.INTENT_FILTER, sliceUri);
             mRegisteredUris.add(sliceUri);
             return;
         }
@@ -197,8 +212,14 @@ public class SettingsSliceProvider extends SliceProvider {
                 return null;
             }
 
-            // If adding a new Slice, do not directly match Slice URIs.
-            // Use {@link SlicesDatabaseAccessor}.
+            // Before adding a slice to {@link CustomSliceManager}, please get approval
+            // from the Settings team.
+            if (mCustomSliceManager.isValidUri(sliceUri)) {
+                final CustomSliceable sliceable = mCustomSliceManager.getSliceableFromUri(
+                        sliceUri);
+                return sliceable.getSlice(getContext());
+            }
+
             if (WifiCallingSliceHelper.WIFI_CALLING_URI.equals(sliceUri)) {
                 return FeatureFactory.getFactory(getContext())
                         .getSlicesFeatureProvider()

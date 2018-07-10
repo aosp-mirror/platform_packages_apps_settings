@@ -71,6 +71,15 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
         final boolean isPlatformSlice = intent.getBooleanExtra(EXTRA_SLICE_PLATFORM_DEFINED,
                 false /* default */);
 
+        final CustomSliceManager mCustomSliceManager = FeatureFactory.getFactory(
+                context).getSlicesFeatureProvider().getCustomSliceManager(context);
+        if (mCustomSliceManager.isValidAction(action)) {
+            final CustomSliceable sliceable =
+                    mCustomSliceManager.getSliceableFromIntentAction(action);
+            sliceable.onNotifyChange(intent);
+            return;
+        }
+
         switch (action) {
             case ACTION_TOGGLE_CHANGED:
                 final boolean isChecked = intent.getBooleanExtra(Slice.EXTRA_TOGGLE_STATE, false);
