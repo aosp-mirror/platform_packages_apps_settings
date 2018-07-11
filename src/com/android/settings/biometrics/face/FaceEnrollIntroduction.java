@@ -113,8 +113,8 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     }
 
     @Override
-    protected Intent getFindSensorIntent() {
-        return null; // TODO
+    protected Intent getEnrollingIntent() {
+        return new Intent(this, FaceEnrollEnrolling.class);
     }
 
     @Override

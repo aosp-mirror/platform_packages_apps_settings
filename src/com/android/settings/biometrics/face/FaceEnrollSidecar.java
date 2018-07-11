@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,60 +14,60 @@
  * limitations under the License
  */
 
-package com.android.settings.biometrics.fingerprint;
+package com.android.settings.biometrics.face;
 
 import android.app.Activity;
-import android.hardware.fingerprint.FingerprintManager;
+import android.hardware.face.FaceManager;
 import android.os.UserHandle;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollSidecar;
 
 /**
- * Sidecar fragment to handle the state around fingerprint enrollment.
+ * Sidecar fragment to handle the state around face enrollment
  */
-public class FingerprintEnrollSidecar extends BiometricEnrollSidecar {
+public class FaceEnrollSidecar extends BiometricEnrollSidecar {
 
-    private FingerprintManager mFingerprintManager;
+    private FaceManager mFaceManager;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        mFingerprintManager = Utils.getFingerprintManagerOrNull(activity);
+        mFaceManager = Utils.getFaceManagerOrNull(activity);
     }
 
     @Override
-    protected void startEnrollment() {
+    public void startEnrollment() {
         super.startEnrollment();
         if (mUserId != UserHandle.USER_NULL) {
-            mFingerprintManager.setActiveUser(mUserId);
+            mFaceManager.setActiveUser(mUserId);
         }
-        mFingerprintManager.enroll(mToken, mEnrollmentCancel,
+        mFaceManager.enroll(mToken, mEnrollmentCancel,
                 0 /* flags */, mUserId, mEnrollmentCallback);
     }
 
-    private FingerprintManager.EnrollmentCallback mEnrollmentCallback
-            = new FingerprintManager.EnrollmentCallback() {
+    private FaceManager.EnrollmentCallback mEnrollmentCallback
+            = new FaceManager.EnrollmentCallback() {
 
         @Override
         public void onEnrollmentProgress(int remaining) {
-            FingerprintEnrollSidecar.super.onEnrollmentProgress(remaining);
+            FaceEnrollSidecar.super.onEnrollmentProgress(remaining);
         }
 
         @Override
         public void onEnrollmentHelp(int helpMsgId, CharSequence helpString) {
-            FingerprintEnrollSidecar.super.onEnrollmentHelp(helpMsgId, helpString);
+            FaceEnrollSidecar.super.onEnrollmentHelp(helpMsgId, helpString);
         }
 
         @Override
         public void onEnrollmentError(int errMsgId, CharSequence errString) {
-            FingerprintEnrollSidecar.super.onEnrollmentError(errMsgId, errString);
+            FaceEnrollSidecar.super.onEnrollmentError(errMsgId, errString);
         }
     };
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.FINGERPRINT_ENROLL_SIDECAR;
+        return MetricsProto.MetricsEvent.FACE_ENROLL_SIDECAR;
     }
 }
