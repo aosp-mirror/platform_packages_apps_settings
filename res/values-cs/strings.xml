@@ -123,8 +123,6 @@
     <string name="bluetooth_footer_mac_message" product="device" msgid="8413944740341742061">"Adresa Bluetooth zařízení: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Odpojit zařízení <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Vysílání"</string>
-    <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Deaktivovat profil?"</string>
-    <string name="bluetooth_disable_profile_message" msgid="2895844842011809904">"Toto nastavení vypne profil:&lt;br&gt;&lt;b&gt;<xliff:g id="PROFILE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Zařízení:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_unknown" msgid="644716244548801421"></string>
     <string name="bluetooth_device" msgid="5291950341750186887">"Nepojmenované zařízení Bluetooth"</string>
     <string name="progress_scanning" msgid="192587958424295789">"Hledání"</string>
@@ -737,7 +735,6 @@
     <string name="bluetooth_searching_for_devices" msgid="9203739709307871727">"Hledání…"</string>
     <string name="bluetooth_preference_device_settings" msgid="907776049862799122">"Nastavení zařízení"</string>
     <string name="bluetooth_preference_paired_dialog_title" msgid="8875124878198774180">"Spárované zařízení"</string>
-    <string name="bluetooth_preference_paired_dialog_name_label" msgid="8111146086595617285">"Název"</string>
     <string name="bluetooth_preference_paired_dialog_internet_option" msgid="7112953286863428412">"Připojení k internetu"</string>
     <string name="bluetooth_preference_paired_dialog_keyboard_option" msgid="2271954176947879628">"Klávesnice"</string>
     <string name="bluetooth_preference_paired_dialog_contacts_option" msgid="7747163316331917594">"Kontakty a historie volání"</string>
@@ -745,7 +742,6 @@
     <string name="bluetooth_pairing_dialog_sharing_phonebook_title" msgid="7664141669886358618">"Sdílet telefonní seznam?"</string>
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"Zařízení <xliff:g id="DEVICE_NAME">%1$s</xliff:g> žádá o přístup k vašim kontaktům a historii volání."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"Zařízení <xliff:g id="DEVICE_NAME">%1$s</xliff:g> žádá o spárování s Bluetooth. Po spojení bude mít přístup ke kontaktům a historii volání."</string>
-    <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Spárovaná zařízení"</string>
     <string name="bluetooth_preference_found_media_devices" msgid="1617401232446299411">"Dostupná zařízení"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"Nejsou dostupná žádná zařízení"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Připojit"</string>
@@ -1138,7 +1134,8 @@
     <string name="brightness_title" msgid="5746272622112982836">"Jas"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Nastavení jasu displeje"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Adaptivní jas"</string>
-    <string name="auto_brightness_summary" msgid="1799041158760605375">"Optimalizovat úroveň jasu podle okolního světla"</string>
+    <!-- no translation found for auto_brightness_summary_on (3519854265558828744) -->
+    <skip />
     <string name="auto_brightness_summary_off" msgid="2802336459335410626">"Vypnuto"</string>
     <string name="auto_brightness_summary_very_low" msgid="6483976609035853764">"Je preferován velmi nízký jas"</string>
     <string name="auto_brightness_summary_low" msgid="5609877905833960427">"Je preferován nízký jas"</string>
@@ -4265,12 +4262,8 @@
     <string name="autofill_app" msgid="7338387238377914374">"Služba automatického vyplňování"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"automatické vyplňování, vyplňování"</string>
     <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;Zkontrolujte, zda se jedná o důvěryhodnou aplikaci&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Automatické doplňování Google&gt;%1$s&lt;/xliff:g&gt; určuje na základě obsahu obrazovky, co lze automaticky vyplnit."</string>
-    <string name="color_theme" msgid="1535685696756738324">"Barevný motiv"</string>
-    <string name="default_theme" msgid="7085644992078579076">"Výchozí"</string>
     <string name="device_theme" msgid="4571803018917608588">"Motiv zařízení"</string>
-    <string name="systemui_theme_wallpaper" msgid="5658521610680281172">"Automatický (podle tapety)"</string>
-    <string name="systemui_theme_light" msgid="7519689709659152866">"Světlý"</string>
-    <string name="systemui_theme_dark" msgid="8708733503912628456">"Tmavý"</string>
+    <string name="default_theme" msgid="7085644992078579076">"Výchozí"</string>
     <string name="show_operator_name_title" msgid="805135053530442951">"Název sítě"</string>
     <string name="show_operator_name_summary" msgid="5962567590205757550">"Zobrazovat název sítě na stavovém řádku"</string>
     <string name="storage_manager_indicator" msgid="1516810749625915020">"Správce úložiště: <xliff:g id="STATUS">^1</xliff:g>"</string>

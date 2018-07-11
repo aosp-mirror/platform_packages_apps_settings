@@ -121,8 +121,6 @@
     <string name="bluetooth_footer_mac_message" product="device" msgid="8413944740341742061">"Bluetooth адрес на устройството: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Да се прекрати ли връзката с/ъс <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Излъчване"</string>
-    <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Да се деактивира ли потребит. профил?"</string>
-    <string name="bluetooth_disable_profile_message" msgid="2895844842011809904">"Това ще деактивира:&lt;br&gt;&lt;b&gt;<xliff:g id="PROFILE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;От:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_unknown" msgid="644716244548801421"></string>
     <string name="bluetooth_device" msgid="5291950341750186887">"Устройство с Bluetooth без име"</string>
     <string name="progress_scanning" msgid="192587958424295789">"Търси се"</string>
@@ -707,7 +705,6 @@
     <string name="bluetooth_searching_for_devices" msgid="9203739709307871727">"Търси се..."</string>
     <string name="bluetooth_preference_device_settings" msgid="907776049862799122">"Настройки на устройството"</string>
     <string name="bluetooth_preference_paired_dialog_title" msgid="8875124878198774180">"Сдвоено устройство"</string>
-    <string name="bluetooth_preference_paired_dialog_name_label" msgid="8111146086595617285">"Име"</string>
     <string name="bluetooth_preference_paired_dialog_internet_option" msgid="7112953286863428412">"Връзка с интернет"</string>
     <string name="bluetooth_preference_paired_dialog_keyboard_option" msgid="2271954176947879628">"Клавиатура"</string>
     <string name="bluetooth_preference_paired_dialog_contacts_option" msgid="7747163316331917594">"Контакти и история на обажданията"</string>
@@ -715,7 +712,6 @@
     <string name="bluetooth_pairing_dialog_sharing_phonebook_title" msgid="7664141669886358618">"Да се сподели ли телефонният указател?"</string>
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> иска достъп до контактите и историята на обажданията ви."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> иска да се сдвои с Bluetooth. При свързване ще има достъп до контактите и историята на обажданията."</string>
-    <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Сдвоени устройства"</string>
     <string name="bluetooth_preference_found_media_devices" msgid="1617401232446299411">"Налични устройства"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"Няма налични устройства"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Свързване"</string>
@@ -1106,7 +1102,8 @@
     <string name="brightness_title" msgid="5746272622112982836">"Яркост"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Наглася яркостта на екрана"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Адаптивна яркост"</string>
-    <string name="auto_brightness_summary" msgid="1799041158760605375">"Оптимизиране на нивото на яркостта спрямо наличната светлина"</string>
+    <!-- no translation found for auto_brightness_summary_on (3519854265558828744) -->
+    <skip />
     <string name="auto_brightness_summary_off" msgid="2802336459335410626">"Изключено"</string>
     <string name="auto_brightness_summary_very_low" msgid="6483976609035853764">"Предпочита се много ниска яркост"</string>
     <string name="auto_brightness_summary_low" msgid="5609877905833960427">"Предпочита се ниска яркост"</string>
@@ -4119,12 +4116,8 @@
     <string name="autofill_app" msgid="7338387238377914374">"Услуга за автоматично попълване"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"автомативно, попълване, автоматично попълване"</string>
     <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;Уверете се, че имате доверие на това приложение&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Функцията на Google за автоматично попълване&gt;%1$s&lt;/xliff:g&gt; използва това, което е на екрана ви, за да определи какво може да се попълни автоматично."</string>
-    <string name="color_theme" msgid="1535685696756738324">"Цветова тема"</string>
-    <string name="default_theme" msgid="7085644992078579076">"Стандартно"</string>
     <string name="device_theme" msgid="4571803018917608588">"Тема на устройството"</string>
-    <string name="systemui_theme_wallpaper" msgid="5658521610680281172">"Автоматична (въз основа на тапета)"</string>
-    <string name="systemui_theme_light" msgid="7519689709659152866">"Светла"</string>
-    <string name="systemui_theme_dark" msgid="8708733503912628456">"Тъмна"</string>
+    <string name="default_theme" msgid="7085644992078579076">"Стандартно"</string>
     <string name="show_operator_name_title" msgid="805135053530442951">"Име на мрежата"</string>
     <string name="show_operator_name_summary" msgid="5962567590205757550">"Показване на името на мрежата в лентата на състоянието"</string>
     <string name="storage_manager_indicator" msgid="1516810749625915020">"Мениджър на хранилището: <xliff:g id="STATUS">^1</xliff:g>"</string>
