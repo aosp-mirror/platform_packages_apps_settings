@@ -103,7 +103,7 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
         // 3: With Dual mode support we can't have AP_BAND_5GHZ - default to ANY
         if (!isDualMode && WifiConfiguration.AP_BAND_ANY == band) {
             return WifiConfiguration.AP_BAND_5GHZ;
-        } else if (!mWifiManager.is5GHzBandSupported() && WifiConfiguration.AP_BAND_5GHZ == band) {
+        } else if (!is5GhzBandSupported() && WifiConfiguration.AP_BAND_5GHZ == band) {
             return WifiConfiguration.AP_BAND_2GHZ;
         } else if (isDualMode && WifiConfiguration.AP_BAND_5GHZ == band) {
             return WifiConfiguration.AP_BAND_ANY;
