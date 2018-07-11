@@ -16,8 +16,8 @@
 
 package com.android.settings.biometrics;
 
-import static com.android.settings.biometrics.BiometricSettings.RESULT_FINISHED;
-import static com.android.settings.biometrics.BiometricSettings.RESULT_TIMEOUT;
+import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED;
+import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_TIMEOUT;
 
 import android.app.Activity;
 import android.app.Dialog;

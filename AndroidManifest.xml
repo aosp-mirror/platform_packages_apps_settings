@@ -425,6 +425,17 @@
                 android:value="com.android.settings.gestures.AssistGestureSettings" />
         </activity>
 
+        <activity android:name="Settings$FaceSettingsActivity"
+            android:label="@string/security_settings_face_preference_title"
+            android:icon="@drawable/ic_face_header">
+            <intent-filter>
+                <action android:name="android.settings.FACE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.biometrics.face.FaceSettings" />
+        </activity>
+
         <activity android:name=".bluetooth.DevicePickerActivity"
                 android:label="@string/device_picker"
                 android:configChanges="orientation|keyboardHidden|screenSize"
