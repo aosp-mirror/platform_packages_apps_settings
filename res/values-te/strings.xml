@@ -121,8 +121,6 @@
     <string name="bluetooth_footer_mac_message" product="device" msgid="8413944740341742061">"పరికరం యొక్క బ్లూటూత్ చిరునామా: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>ను డిస్‌కనెక్ట్ చేయాలా?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"ప్రసారం"</string>
-    <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"ప్రొఫైల్‌ను నిలిపివేయాలా?"</string>
-    <string name="bluetooth_disable_profile_message" msgid="2895844842011809904">"ఇందువల్ల ఇది నిలిపివేయబడుతుంది:&lt;br&gt;&lt;b&gt;<xliff:g id="PROFILE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;దీని నుండి:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_unknown" msgid="644716244548801421"></string>
     <string name="bluetooth_device" msgid="5291950341750186887">"పేరులేని బ్లూటూత్ పరికరం"</string>
     <string name="progress_scanning" msgid="192587958424295789">"శోధించడం"</string>
@@ -392,30 +390,18 @@
     <string name="security_status_title" msgid="5848766673665944640">"భద్రత స్థితి"</string>
     <string name="security_dashboard_summary" msgid="6757421634477554939">"స్క్రీన్ లాక్, వేలిముద్ర"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"స్క్రీన్ లాక్"</string>
-    <!-- no translation found for security_settings_face_preference_summary (1290187225482642821) -->
-    <skip />
-    <!-- no translation found for security_settings_face_preference_summary_none (5460349732790152186) -->
-    <skip />
-    <!-- no translation found for security_settings_face_preference_title (7074548721778680481) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_cancel (4277182322482408514) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_title (2694505011712885439) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_title_unlock_disabled (8180330567034286589) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_message (6150611993438981458) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_message_unlock_disabled (6300341727101929207) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_message_setup (5704661081718707858) -->
-    <skip />
-    <!-- no translation found for face_add_max (2342250989212694454) -->
-    <skip />
-    <!-- no translation found for face_intro_error_max (160022811747660581) -->
-    <skip />
-    <!-- no translation found for face_intro_error_unknown (6367721696446677261) -->
-    <skip />
+    <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"ముఖం జోడించబడింది"</string>
+    <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"ముఖ ప్రామాణీకరణ‌ను సెటప్ చేయడానికి నొక్కండి"</string>
+    <string name="security_settings_face_preference_title" msgid="7074548721778680481">"ముఖ ప్రామాణీకరణ"</string>
+    <string name="security_settings_face_enroll_introduction_cancel" msgid="4277182322482408514">"రద్దు చేయి"</string>
+    <string name="security_settings_face_enroll_introduction_title" msgid="2694505011712885439">"మీ ముఖంతో అన్‌లాక్ చేయండి"</string>
+    <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="8180330567034286589">"ప్రమాణీకరించడానికి మీ ముఖాన్ని ఉపయోగించండి"</string>
+    <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"మీ ఫోన్‌ను అన్‌లాక్ చేయడానికి, కొనుగోళ్లను ప్రమాణీకరించడానికి లేదా యాప్‌లలోకి సైన్-ఇన్ చేయడానికి మీ ముఖాన్ని ఉపయోగించండి."</string>
+    <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6300341727101929207">"మిమ్మల్ని ఉపయోగించుకోండి"</string>
+    <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"మీ ఫోన్‌ను అన్‌లాక్ చేయడానికి, కొనుగోళ్లను ప్రమాణీకరించడానికి లేదా యాప్‌లలోకి సైన్-ఇన్ చేయడానికి మీ ముఖాన్ని ఉపయోగించండి"</string>
+    <string name="face_add_max" msgid="2342250989212694454">"మీరు <xliff:g id="COUNT">%d</xliff:g> వరకు వేలిముద్రలను జోడించవచ్చు"</string>
+    <string name="face_intro_error_max" msgid="160022811747660581">"మీరు గరిష్ట సంఖ్యలో ముఖాలను జోడించారు"</string>
+    <string name="face_intro_error_unknown" msgid="6367721696446677261">"మరిన్ని ముఖాలను జోడించడం సాధ్యపడదు"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"వేలిముద్ర"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"వేలిముద్రలు నిర్వహిం."</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"దీనికి వేలిముద్రను ఉప."</string>
@@ -527,14 +513,12 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"మీ టాబ్లెట్ రక్షించుకోండి"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"మీ పరికరం రక్షించుకోండి"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"మీ ఫోన్‌ను రక్షించుకోండి"</string>
-    <!-- no translation found for lock_settings_picker_biometrics_added_security_message (1507307757032207572) -->
-    <skip />
+    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1507307757032207572">"అదనపు భద్రత కోసం, బ్యాకప్ స్క్రీన్ లాక్‌ను సెట్ చేయండి"</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"పరికర సంరక్షణ లక్షణాలను సక్రియం చేయడం ద్వారా మీ అనుమతి లేకుండా ఈ టాబ్లెట్‌ను ఉపయోగించనీయకుండా ఇతరులను నిరోధించండి. మీరు ఉపయోగించాలనుకుంటున్న స్క్రీన్ లాక్‌ను ఎంచుకోండి."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"పరికర సంరక్షణ లక్షణాలను సక్రియం చేయడం ద్వారా మీ అనుమతి లేకుండా ఈ పరికరాన్ని ఉపయోగించనీయకుండా ఇతరులను నిరోధించండి. మీరు ఉపయోగించాలనుకుంటున్న స్క్రీన్ లాక్‌ను ఎంచుకోండి."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"పరికర సంరక్షణ లక్షణాలను సక్రియం చేయడం ద్వారా మీ అనుమతి లేకుండా ఈ ఫోన్‌ను ఉపయోగించనీయకుండా ఇతరులను నిరోధించండి. మీరు ఉపయోగించాలనుకుంటున్న స్క్రీన్ లాక్‌ను ఎంచుకోండి."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"మీ బ్యాకప్ స్క్రీన్ లాక్ పద్ధతిని ఎంచుకోండి"</string>
-    <!-- no translation found for lock_settings_picker_face_message (197106534637556054) -->
-    <skip />
+    <string name="lock_settings_picker_face_message" msgid="197106534637556054">"మీ బ్యాకప్ స్క్రీన్ లాక్ పద్ధతిని ఎంచుకోండి"</string>
     <string name="setup_lock_settings_options_button_label" msgid="8511153243629402929">"స్క్రీన్ లాక్ ఎంపికలు"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="5058207955455973917">"స్క్రీన్ లాక్ ఎంపికలు"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"స్క్రీన్ లాక్"</string>
@@ -561,16 +545,11 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"వేలిముద్ర + పాస్‌వర్డ్"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"వేలిముద్ర లేకుండా కొనసాగండి"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"మీరు మీ వేలిముద్రను ఉపయోగించి మీ ఫోన్‌ను అన్‌లాక్ చేయవచ్చు. భద్రత కోసం, ఈ ఎంపికకు బ్యాకప్ స్క్రీన్ లాక్ అవసరం."</string>
-    <!-- no translation found for face_unlock_set_unlock_pattern (8792301636367000123) -->
-    <skip />
-    <!-- no translation found for face_unlock_set_unlock_pin (1196620299595657479) -->
-    <skip />
-    <!-- no translation found for face_unlock_set_unlock_password (223117276773907474) -->
-    <skip />
-    <!-- no translation found for face_unlock_skip_face (6362883392838482791) -->
-    <skip />
-    <!-- no translation found for face_unlock_title (9042382084472444316) -->
-    <skip />
+    <string name="face_unlock_set_unlock_pattern" msgid="8792301636367000123">"ముఖ ప్రామాణీకరణ + నమూనా"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="1196620299595657479">"ముఖ ప్రామాణీకరణ + పిన్"</string>
+    <string name="face_unlock_set_unlock_password" msgid="223117276773907474">"ముఖ ప్రామాణీకరణ + పాస్‌వర్డ్‌"</string>
+    <string name="face_unlock_skip_face" msgid="6362883392838482791">"ముఖ ప్రామాణీకరణ లేకుండా కొనసాగించండి"</string>
+    <string name="face_unlock_title" msgid="9042382084472444316">"మీరు మీ ముఖాన్ని ఉపయోగించి మీ ఫోన్‌ను అన్‌లాక్ చేయవచ్చు. భద్రత కోసం, ఈ ఎంపికకు బ్యాకప్ స్క్రీన్ లాక్ అవసరం."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"నిర్వాహకులు, ఎన్‌క్రిప్షన్ విధానం లేదా ఆధారాల నిల్వ ద్వారా నిలిపివేయబడింది"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"ఏదీ వద్దు"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"స్వైప్"</string>
@@ -726,7 +705,6 @@
     <string name="bluetooth_searching_for_devices" msgid="9203739709307871727">"శోధిస్తోంది..."</string>
     <string name="bluetooth_preference_device_settings" msgid="907776049862799122">"పరికర సెట్టింగ్‌లు"</string>
     <string name="bluetooth_preference_paired_dialog_title" msgid="8875124878198774180">"జత చేసిన పరికరం"</string>
-    <string name="bluetooth_preference_paired_dialog_name_label" msgid="8111146086595617285">"పేరు"</string>
     <string name="bluetooth_preference_paired_dialog_internet_option" msgid="7112953286863428412">"ఇంటర్నెట్ కనెక్షన్"</string>
     <string name="bluetooth_preference_paired_dialog_keyboard_option" msgid="2271954176947879628">"కీబోర్డ్"</string>
     <string name="bluetooth_preference_paired_dialog_contacts_option" msgid="7747163316331917594">"పరిచయాలు మరియు కాల్ చరిత్ర"</string>
@@ -734,7 +712,6 @@
     <string name="bluetooth_pairing_dialog_sharing_phonebook_title" msgid="7664141669886358618">"ఫోన్ పుస్తకాన్ని భాగస్వామ్యం చేయాలా?"</string>
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> మీ పరిచయాలను మరియు కాల్ చరిత్రను యాక్సెస్ చేయాలనుకుంటోంది."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> బ్లూటూత్‌తో జత చేయాలనుకుంటోంది. కనెక్ట్ చేసినప్పుడు, ఇది మీ పరిచయాలు మరియు కాల్ చరిత్రకి ప్రాప్యతని కలిగి ఉంటుంది."</string>
-    <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"జత చేసిన పరికరాలు"</string>
     <string name="bluetooth_preference_found_media_devices" msgid="1617401232446299411">"అందుబాటులో ఉన్న పరికరాలు"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"పరికరాలు ఏవీ అందుబాటులో లేవు"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"కనెక్ట్ చేయి"</string>
@@ -1125,7 +1102,8 @@
     <string name="brightness_title" msgid="5746272622112982836">"ప్రకాశం"</string>
     <string name="brightness_summary" msgid="838917350127550703">"స్క్రీన్ ప్రకాశాన్ని సర్దుబాటు చేయండి"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"అనుకూల ప్రకాశం"</string>
-    <string name="auto_brightness_summary" msgid="1799041158760605375">"అందుబాటులో ఉన్న కాంతికి ప్రకాశం స్థాయిని అనుకూలీకరించండి"</string>
+    <!-- no translation found for auto_brightness_summary_on (3519854265558828744) -->
+    <skip />
     <string name="auto_brightness_summary_off" msgid="2802336459335410626">"ఆఫ్"</string>
     <string name="auto_brightness_summary_very_low" msgid="6483976609035853764">"ప్రాధాన్య ప్రకాశం చాలా తక్కువకు ఉంచబడింది"</string>
     <string name="auto_brightness_summary_low" msgid="5609877905833960427">"ప్రాధాన్య ప్రకాశం తక్కువకు ఉంచబడింది"</string>
@@ -1640,12 +1618,9 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"పాస్‌వర్డ్ సెట్ చేయబడింది"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"పిన్‌ సెట్ చేయబడింది"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"ఆకృతి సెట్ చేయబడింది"</string>
-    <!-- no translation found for lockpassword_choose_your_password_header_for_face (7876621019688907534) -->
-    <skip />
-    <!-- no translation found for lockpassword_choose_your_pattern_header_for_face (8070525076987585344) -->
-    <skip />
-    <!-- no translation found for lockpassword_choose_your_pin_header_for_face (7304398683609714816) -->
-    <skip />
+    <string name="lockpassword_choose_your_password_header_for_face" msgid="7876621019688907534">"ముఖ ప్రామాణీకరణను ఉపయోగించడానికి, పాస్‌వర్డ్‌‌ను సెట్ చేయండి"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="8070525076987585344">"ముఖ ప్రామాణీకరణను ఉపయోగించడానికి, నమూనాను సెట్ చేయండి"</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" msgid="7304398683609714816">"ముఖ ప్రామాణీకరణను ఉపయోగించడానికి, పిన్‌ను సెట్ చేయండి"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"కొనసాగడానికి మీ పరికరం నమూనాను ఉపయోగించండి"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"కొనసాగడానికి మీ డివైజ్ పిన్‌ను నమోదు చేయండి"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"కొనసాగడానికి మీ పరికర పాస్‌వర్డ్‌ను నమోదు చేయండి"</string>
@@ -3056,8 +3031,7 @@
     <string name="keywords_systemui_theme" msgid="9112852512550404882">"ముదురు రంగు థీమ్"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"బగ్"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"విస్తార ప్రదర్శన, లాక్ స్క్రీన్ ప్రదర్శన"</string>
-    <!-- no translation found for keywords_face_settings (7505388678116799329) -->
-    <skip />
+    <string name="keywords_face_settings" msgid="7505388678116799329">"ముఖం"</string>
     <string name="keywords_fingerprint_settings" msgid="239222512315619538">"వేలిముద్ర"</string>
     <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"కాంతిహీన స్క్రీన్, టచ్‌స్క్రీన్, బ్యాటరీ, స్మార్ట్ ప్రకాశం, గతిశీల ప్రకాశం"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"తిప్పండి, తిప్పు, పరిభ్రమణం, పోర్ట్రెయిట్, ల్యాండ్‌స్కేప్, ఓరియంటేషన్, నిలువు, అడ్డం"</string>
@@ -3476,12 +3450,10 @@
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"మీ డివైజ్‌ను అన్‌లాక్ చేయడానికి మీ వేలిముద్రను ఉపయోగించడంతో పాటు, దీనిని ప్రారంభించిన వెంటనే మీ పిన్‌ని అడిగే విధంగా సెట్ చేయడం ద్వారా మీరు దీనికి అదనపు రక్షణను అందించవచ్చు. డివైజ్‌ను ప్రారంభించే వరకు, అది అలారాలతో సహా కాల్‌లు, సందేశాలు లేదా నోటిఫికేషన్‌లను స్వీకరించదు. \n\nకోల్పోయిన లేదా దొంగిలించబడిన డివైజ్‌లలో ఉన్న డేటాని రక్షించడంలో ఇది సహాయపడుతుంది. మీ డివైజ్‌ను ప్రారంభించడం కోసం పిన్‌ని అడగాలా&amp;gt;"</string>
     <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"మీ పరికరాన్ని అన్‌లాక్ చేయడానికి మీ వేలిముద్రను ఉపయోగించడంతో పాటు, దీనిని ప్రారంభించిన వెంటనే మీ నమూనాని అడిగే విధంగా సెట్ చేయడం ద్వారా మీరు దీనికి అదనపు రక్షణను అందించవచ్చు. పరికరాన్ని ప్రారంభించే వరకు, అది అలారాలతో సహా కాల్‌లు, సందేశాలు లేదా నోటిఫికేషన్‌లను స్వీకరించదు. \n\nకోల్పోయిన లేదా దొంగిలించబడిన పరికరాలలో ఉన్న డేటాని రక్షించడంలో ఇది సహాయపడుతుంది. మీ పరికరాన్ని ప్రారంభించడం కోసం నమూనాని అడగాలా?"</string>
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"మీ పరికరాన్ని అన్‌లాక్ చేయడానికి మీ వేలిముద్రను ఉపయోగించడంతో పాటు, దీనిని ప్రారంభించిన వెంటనే మీ పాస్‌వర్డ్‌ని అడిగే విధంగా సెట్ చేయడం ద్వారా మీరు దీనికి అదనపు రక్షణను అందించవచ్చు. పరికరాన్ని ప్రారంభించే వరకు, అది అలారాలతో సహా కాల్‌లు, సందేశాలు లేదా నోటిఫికేషన్‌లను స్వీకరించదు. \n\nకోల్పోయిన లేదా దొంగిలించబడిన పరికరాలలో ఉన్న డేటాని రక్షించడంలో ఇది సహాయపడుతుంది. మీ పరికరాన్ని ప్రారంభించడం కోసం పాస్‌వర్డ్‌ని అడగాలా?"</string>
-    <!-- no translation found for encryption_interstitial_message_pin_for_face (2017438765366716760) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_pattern_for_face (3551827507967661552) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_password_for_face (3452793542112093614) -->
-    <skip />
+    <!-- unknown quoting pattern: original -1, translation 1 -->
+    <string name="encryption_interstitial_message_pin_for_face" msgid="2017438765366716760">"మీ పరికరాన్ని అన్‌లాక్ చేయడానికి మీ ముఖాన్ని ఉపయోగించడంతో పాటు, మీరు ఈ పరికరం ప్రారంభం కావడానికి ముందే మీ పిన్‌ను అడిగేలా చేసి దాన్ని మరింత కాపాడుకోవచ్చు. పరికరాన్ని ప్రారంభించే వరకు, అలారాలతో సహా ,కాల్‌లు, సందేశాలు లేదా నోటిఫికేషన్‌లను స్వీకరించదు.\n\nఇది కోల్పోయిన లేదా దొంగలించబడిన పరికరాల డేటాను రక్షించడంలో సహాయపడుతుంది. మీ పరికరాన్ని ప్రారంభించడానికి పిన్ అవసరమా?&amp;gt;"</string>
+    <string name="encryption_interstitial_message_pattern_for_face" msgid="3551827507967661552">"మీ పరికరాన్ని అన్‌లాక్ చేయడానికి మీ ముఖాన్ని ఉపయోగించడంతో పాటు, మీరు ఈ పరికరం ప్రారంభం కావడానికి ముందే మీ నమూనాను అడిగేలా చేసి దాన్ని మరింత కాపాడుకోవచ్చు. పరికరాన్ని ప్రారంభించే వరకు, అలారాలతో సహా ,కాల్‌లు, సందేశాలు లేదా నోటిఫికేషన్‌లను స్వీకరించదు.\n\nఇది కోల్పోయిన లేదా దొంగలించబడిన పరికరాల డేటాను రక్షించడంలో సహాయపడుతుంది. మీ పరికరాన్ని ప్రారంభించడానికి నమూనా అవసరమా?"</string>
+    <string name="encryption_interstitial_message_password_for_face" msgid="3452793542112093614">"మీ పరికరాన్ని అన్‌లాక్ చేయడానికి మీ ముఖాన్ని ఉపయోగించడంతో పాటు, మీరు ఈ పరికరం ప్రారంభం కావడానికి ముందే మీ పాస్‌వర్డ్‌ను అడిగేలా చేసి దాన్ని మరింత కాపాడుకోవచ్చు. పరికరాన్ని ప్రారంభించే వరకు, అలారాలతో సహా ,కాల్‌లు, సందేశాలు లేదా నోటిఫికేషన్‌లను స్వీకరించదు.\n\nఇది కోల్పోయిన లేదా దొంగలించబడిన పరికరాల డేటాను రక్షించడంలో సహాయపడుతుంది. మీ పరికరాన్ని ప్రారంభించడానికి పాస్‌వర్డ్‌ అవసరమా?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"అవును"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"వద్దు"</string>
     <string name="restricted_true_label" msgid="4761453839409220473">"నియంత్రించబడింది"</string>
@@ -4146,12 +4118,8 @@
     <string name="autofill_app" msgid="7338387238377914374">"స్వీయ పూరింపు సేవ"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"స్వయంచాలకం, పూరించు, స్వీయ పూరింపు"</string>
     <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;ఈ యాప్‌ను మీరు విశ్వసిస్తున్నట్లు నిర్ధారించండి&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; మీ స్క్రీన్‌పై ఉన్నవాటిని పరిగణనలోకి తీసుకొని వేటిని ఆటోమేటిక్‌గా పూరించాలో నిశ్చయిస్తుంది."</string>
-    <string name="color_theme" msgid="1535685696756738324">"రంగు థీమ్"</string>
-    <string name="default_theme" msgid="7085644992078579076">"డిఫాల్ట్"</string>
     <string name="device_theme" msgid="4571803018917608588">"పరికర థీమ్"</string>
-    <string name="systemui_theme_wallpaper" msgid="5658521610680281172">"ఆటోమేటిక్ (వాల్‌పేపర్ ఆధారంగా)"</string>
-    <string name="systemui_theme_light" msgid="7519689709659152866">"లేత రంగు"</string>
-    <string name="systemui_theme_dark" msgid="8708733503912628456">"ముదురు రంగు"</string>
+    <string name="default_theme" msgid="7085644992078579076">"డిఫాల్ట్"</string>
     <string name="show_operator_name_title" msgid="805135053530442951">"నెట్‌వర్క్ పేరు"</string>
     <string name="show_operator_name_summary" msgid="5962567590205757550">"స్థితి పట్టీలో నెట్‌వర్క్ పేరును ప్రదర్శిస్తుంది"</string>
     <string name="storage_manager_indicator" msgid="1516810749625915020">"నిల్వ నిర్వాహికి: <xliff:g id="STATUS">^1</xliff:g>"</string>

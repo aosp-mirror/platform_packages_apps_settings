@@ -121,8 +121,6 @@
     <string name="bluetooth_footer_mac_message" product="device" msgid="8413944740341742061">"Enhetens Bluetooth-adress: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Vill du koppla från <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Bluetooth-sändning"</string>
-    <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Vill du inaktivera profilen?"</string>
-    <string name="bluetooth_disable_profile_message" msgid="2895844842011809904">"Följande kommer att inaktiveras:&lt;br&gt;&lt;b&gt;<xliff:g id="PROFILE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;från:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_unknown" msgid="644716244548801421"></string>
     <string name="bluetooth_device" msgid="5291950341750186887">"Namnlös Bluetooth-enhet"</string>
     <string name="progress_scanning" msgid="192587958424295789">"Söker"</string>
@@ -707,7 +705,6 @@
     <string name="bluetooth_searching_for_devices" msgid="9203739709307871727">"Söker…"</string>
     <string name="bluetooth_preference_device_settings" msgid="907776049862799122">"Enhetsinställningar"</string>
     <string name="bluetooth_preference_paired_dialog_title" msgid="8875124878198774180">"Kopplad enhet"</string>
-    <string name="bluetooth_preference_paired_dialog_name_label" msgid="8111146086595617285">"Namn"</string>
     <string name="bluetooth_preference_paired_dialog_internet_option" msgid="7112953286863428412">"Internetanslutning"</string>
     <string name="bluetooth_preference_paired_dialog_keyboard_option" msgid="2271954176947879628">"Tangentbord"</string>
     <string name="bluetooth_preference_paired_dialog_contacts_option" msgid="7747163316331917594">"Kontakter och samtalshistorik"</string>
@@ -715,7 +712,6 @@
     <string name="bluetooth_pairing_dialog_sharing_phonebook_title" msgid="7664141669886358618">"Vill du dela telefonboken?"</string>
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> vill komma åt dina kontakter och din samtalshistorik."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> vill parkoppla med Bluetooth. När den är ansluten får den åtkomst till kontakter och samtalshistorik."</string>
-    <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Parkopplade enheter"</string>
     <string name="bluetooth_preference_found_media_devices" msgid="1617401232446299411">"Tillgängliga enheter"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"Det finns inga enheter tillgängliga"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Anslut"</string>
@@ -1106,7 +1102,8 @@
     <string name="brightness_title" msgid="5746272622112982836">"Ljusstyrka"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Ändra skärmens ljusstyrka"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Anpassad ljusstyrka"</string>
-    <string name="auto_brightness_summary" msgid="1799041158760605375">"Optimera ljusstyrkan efter det tillgängliga ljuset"</string>
+    <!-- no translation found for auto_brightness_summary_on (3519854265558828744) -->
+    <skip />
     <string name="auto_brightness_summary_off" msgid="2802336459335410626">"Av"</string>
     <string name="auto_brightness_summary_very_low" msgid="6483976609035853764">"Önskad ljusstyrka är mycket låg ljusstyrka"</string>
     <string name="auto_brightness_summary_low" msgid="5609877905833960427">"Önskad ljusstyrka är låg ljusstyrka"</string>
@@ -4119,12 +4116,8 @@
     <string name="autofill_app" msgid="7338387238377914374">"Tjänsten Autofyll"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"auto, fyll, autofyll"</string>
     <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;Kontrollera att du litar på den här appen&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofyll&gt;%1$s&lt;/xliff:g&gt; identifierar vad som kan fyllas i automatiskt utifrån vad som visas på skärmen."</string>
-    <string name="color_theme" msgid="1535685696756738324">"Färgtema"</string>
-    <string name="default_theme" msgid="7085644992078579076">"Standard"</string>
     <string name="device_theme" msgid="4571803018917608588">"Enhetstema"</string>
-    <string name="systemui_theme_wallpaper" msgid="5658521610680281172">"Automatiskt (utifrån bakgrunden)"</string>
-    <string name="systemui_theme_light" msgid="7519689709659152866">"Ljust"</string>
-    <string name="systemui_theme_dark" msgid="8708733503912628456">"Mörkt"</string>
+    <string name="default_theme" msgid="7085644992078579076">"Standard"</string>
     <string name="show_operator_name_title" msgid="805135053530442951">"Nätverksnamn"</string>
     <string name="show_operator_name_summary" msgid="5962567590205757550">"Visa nätverksnamnet i statusfältet"</string>
     <string name="storage_manager_indicator" msgid="1516810749625915020">"Lagringshanteraren: <xliff:g id="STATUS">^1</xliff:g>"</string>

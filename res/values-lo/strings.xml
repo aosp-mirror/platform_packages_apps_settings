@@ -121,8 +121,6 @@
     <string name="bluetooth_footer_mac_message" product="device" msgid="8413944740341742061">"ທີ່ຢູ່ Bluetooth ຂອງອຸປະກອນ: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"​ຕັດ​ການ​ເຊື່ອມ​ຕ​ໍ່ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ບໍ່?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"ການກະ​ຈາຍ​ສັນຍານ"</string>
-    <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"ປິດການນຳໃຊ້ໂປຣໄຟລ໌?"</string>
-    <string name="bluetooth_disable_profile_message" msgid="2895844842011809904">"ນີ້ຈະເປັນການປິດການນຳໃຊ້:&lt;br&gt;&lt;b&gt;<xliff:g id="PROFILE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;ຈາກ:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_unknown" msgid="644716244548801421"></string>
     <string name="bluetooth_device" msgid="5291950341750186887">"ອຸປະກອນ Bluetooth ທີ່ບໍ່ມີຊື່"</string>
     <string name="progress_scanning" msgid="192587958424295789">"ກຳລັງຊອກຫາ..."</string>
@@ -707,7 +705,6 @@
     <string name="bluetooth_searching_for_devices" msgid="9203739709307871727">"ກຳລັງຊອກຫາ..."</string>
     <string name="bluetooth_preference_device_settings" msgid="907776049862799122">"ການຕັ້ງຄ່າອຸປະກອນ"</string>
     <string name="bluetooth_preference_paired_dialog_title" msgid="8875124878198774180">"​ອຸ​ປະ​ກອນ​ທີ່​ຈັບ​ຄູ່​ແລ້ວ"</string>
-    <string name="bluetooth_preference_paired_dialog_name_label" msgid="8111146086595617285">"ຊື່"</string>
     <string name="bluetooth_preference_paired_dialog_internet_option" msgid="7112953286863428412">"​ການ​ເຊື່ອມ​ຕໍ່​ອິນ​ເຕີ​ເນັດ"</string>
     <string name="bluetooth_preference_paired_dialog_keyboard_option" msgid="2271954176947879628">"​ແປ້ນ​ພິມ"</string>
     <string name="bluetooth_preference_paired_dialog_contacts_option" msgid="7747163316331917594">"ລາຍ​ຊື່​ຜູ່​ຕິດ​ຕໍ່ ແລະ​ປະ​ຫວັດ​ການ​ໂທ​"</string>
@@ -715,7 +712,6 @@
     <string name="bluetooth_pairing_dialog_sharing_phonebook_title" msgid="7664141669886358618">"ແບ່ງ​ປັນ​ສະ​ມຸດ​ໂທ​ລະ​ສັບ​ບໍ?"</string>
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ຕ້ອງ​ການ​ເຂົ້າ​ເຖິງ​ລາຍ​ຊື່​ຜູ່​ຕິດ​ຕໍ່​ ແລະ​ປະ​ຫວັດ​ການ​ໂທ​ຂອງ​ທ່ານ."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ຕ້ອງ​ການ​ຈັບ​ຄູ່​ກັບ Bluetooth. ເມື່ອ​ເຊື່ອມ​ຕໍ່​ແລ້ວ, ມັນ​ຈະ​ມີ​ສິດ​ເຂົ້າ​ເຖິງ​ລາຍ​ຊື່​ຜູ່​ຕິດ​ຕໍ່ ແລະ​ປະ​ຫວັດ​ການ​ໂທ​ຂອງ​ທ່ານ."</string>
-    <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"ອຸປະກອນທີ່ຈັບຄູ່ກັນແລ້ວ"</string>
     <string name="bluetooth_preference_found_media_devices" msgid="1617401232446299411">"ອຸປະກອນທີ່ສາມາດໃຊ້ໄດ້"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"ບໍ່​ມີ​ອຸ​ປະ​ກອນ​ທີ່​ສາ​ມາດ​ໃຊ້​ໄດ້"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"ເຊື່ອມຕໍ່"</string>
@@ -1106,7 +1102,8 @@
     <string name="brightness_title" msgid="5746272622112982836">"ຄວາມສະຫວ່າງ"</string>
     <string name="brightness_summary" msgid="838917350127550703">"ປັບແຕ່ງຄວາມແຈ້ງຂອງໜ້າຈໍ"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"ປັບ​ຄວາມ​ແຈ້ງ​ອັດຕະໂນມັດ"</string>
-    <string name="auto_brightness_summary" msgid="1799041158760605375">"ປັບແຕ່ງ​ລະດັບ​ຄວາມແຈ້ງ​ຂອງ​ໜ້າ​ຈໍ​ໃຫ້​ເໝາະ​ສົມ​ກັບ​ແສງໄຟ​ຈາກ​ພາຍ​ນອກ"</string>
+    <!-- no translation found for auto_brightness_summary_on (3519854265558828744) -->
+    <skip />
     <string name="auto_brightness_summary_off" msgid="2802336459335410626">"ປິດ"</string>
     <string name="auto_brightness_summary_very_low" msgid="6483976609035853764">"ຄວາມສະຫວ່າງທີ່ຕ້ອງການແມ່ນຕ່ຳຫຼາຍ"</string>
     <string name="auto_brightness_summary_low" msgid="5609877905833960427">"ຄວາມສະຫວ່າງທີ່ຕ້ອງການແມ່ນຕ່ຳ"</string>
@@ -4119,12 +4116,8 @@
     <string name="autofill_app" msgid="7338387238377914374">"ບໍລິການຕື່ມຂໍ້ມູນອັດຕະໂນມັດ"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"ອັດຕະໂນມັດ, ຕື່ມຂໍ້ມູນ, ຕື່ມຂໍ້ມູນອັດຕະໂນມັດ"</string>
     <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;ໃຫ້ກວດສອບວ່າທ່ານເຊື່ອແອັບນີ້&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; ຈະໃຊ້ສິ່ງທີ່ຢູ່ໃນໜ້າຈໍຂອງທ່ານເພື່ອກວດເບິ່ງວ່າຈະຕື່ມຂໍ້ມູນຫຍັງອັດຕະໂນມັດ."</string>
-    <string name="color_theme" msgid="1535685696756738324">"ສີສັນໜ້າຕາ"</string>
-    <string name="default_theme" msgid="7085644992078579076">"ຄ່າເລີ່ມຕົ້ນ"</string>
     <string name="device_theme" msgid="4571803018917608588">"ຮູບແບບສີສັນອຸປະກອນ"</string>
-    <string name="systemui_theme_wallpaper" msgid="5658521610680281172">"ອັດຕະໂນມັດ (ອີງໃສ່ຮູບພື້ນຫຼັງ)"</string>
-    <string name="systemui_theme_light" msgid="7519689709659152866">"ແຈ້ງ"</string>
-    <string name="systemui_theme_dark" msgid="8708733503912628456">"ມືດ"</string>
+    <string name="default_theme" msgid="7085644992078579076">"ຄ່າເລີ່ມຕົ້ນ"</string>
     <string name="show_operator_name_title" msgid="805135053530442951">"ຊື່ເຄືອຂ່າຍ"</string>
     <string name="show_operator_name_summary" msgid="5962567590205757550">"ສະແດງຊື່ເຄືອຂ່າຍຢູ່ແຖບສະຖານະ"</string>
     <string name="storage_manager_indicator" msgid="1516810749625915020">"Storage Manager: <xliff:g id="STATUS">^1</xliff:g>"</string>

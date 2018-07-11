@@ -121,8 +121,6 @@
     <string name="bluetooth_footer_mac_message" product="device" msgid="8413944740341742061">"ที่อยู่บลูทูธของอุปกรณ์: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"ยกเลิกการเชื่อมต่อ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ใช่ไหม"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"การแพร่สัญญาณ"</string>
-    <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"ปิดใช้งานโปรไฟล์หรือไม่"</string>
-    <string name="bluetooth_disable_profile_message" msgid="2895844842011809904">"การดำเนินการนี้จะปิดใช้งาน:&lt;br&gt;&lt;b&gt;<xliff:g id="PROFILE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;จาก:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_unknown" msgid="644716244548801421"></string>
     <string name="bluetooth_device" msgid="5291950341750186887">"อุปกรณ์บลูทูธที่ไม่มีชื่อ"</string>
     <string name="progress_scanning" msgid="192587958424295789">"กำลังค้นหา"</string>
@@ -707,7 +705,6 @@
     <string name="bluetooth_searching_for_devices" msgid="9203739709307871727">"กำลังค้นหา..."</string>
     <string name="bluetooth_preference_device_settings" msgid="907776049862799122">"การตั้งค่าอุปกรณ์"</string>
     <string name="bluetooth_preference_paired_dialog_title" msgid="8875124878198774180">"อุปกรณ์ที่จับคู่แล้ว"</string>
-    <string name="bluetooth_preference_paired_dialog_name_label" msgid="8111146086595617285">"ชื่อ"</string>
     <string name="bluetooth_preference_paired_dialog_internet_option" msgid="7112953286863428412">"การเชื่อมต่ออินเทอร์เน็ต"</string>
     <string name="bluetooth_preference_paired_dialog_keyboard_option" msgid="2271954176947879628">"แป้นพิมพ์"</string>
     <string name="bluetooth_preference_paired_dialog_contacts_option" msgid="7747163316331917594">"รายชื่อติดต่อและประวัติการโทร"</string>
@@ -715,7 +712,6 @@
     <string name="bluetooth_pairing_dialog_sharing_phonebook_title" msgid="7664141669886358618">"แชร์สมุดโทรศัพท์ใช่ไหม"</string>
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ต้องการเข้าถึงรายชื่อติดต่อและประวัติการโทร"</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ต้องการจับคู่ผ่านบลูทูธ เมื่อเชื่อมต่อแล้วจะสามารถเข้าถึงรายชื่อติดต่อและประวัติการโทรของคุณได้"</string>
-    <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"อุปกรณ์ที่จับคู่"</string>
     <string name="bluetooth_preference_found_media_devices" msgid="1617401232446299411">"อุปกรณ์ที่ใช้ได้"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"ไม่พบอุปกรณ์"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"เชื่อมต่อ"</string>
@@ -1106,7 +1102,8 @@
     <string name="brightness_title" msgid="5746272622112982836">"ความสว่าง"</string>
     <string name="brightness_summary" msgid="838917350127550703">"ปรับความสว่างหน้าจอ"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"ปรับความสว่างอัตโนมัติ"</string>
-    <string name="auto_brightness_summary" msgid="1799041158760605375">"ปรับระดับความสว่างให้เหมาะกับแสง"</string>
+    <!-- no translation found for auto_brightness_summary_on (3519854265558828744) -->
+    <skip />
     <string name="auto_brightness_summary_off" msgid="2802336459335410626">"ปิด"</string>
     <string name="auto_brightness_summary_very_low" msgid="6483976609035853764">"ต้องการความสว่างต่ำมาก"</string>
     <string name="auto_brightness_summary_low" msgid="5609877905833960427">"ต้องการความสว่างต่ำ"</string>
@@ -4119,12 +4116,8 @@
     <string name="autofill_app" msgid="7338387238377914374">"บริการป้อนอัตโนมัติ"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"ป้อน, อัตโนมัติ, ป้อนอัตโนมัติ"</string>
     <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;ตรวจดูว่าคุณเชื่อถือแอปนี้ได้&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google ป้อนอัตโนมัติ&gt;%1$s&lt;/xliff:g&gt; ใช้สิ่งที่อยู่บนหน้าจอเพื่อดูว่าจะป้อนข้อมูลใดโดยอัตโนมัติได้บ้าง"</string>
-    <string name="color_theme" msgid="1535685696756738324">"ธีมสี"</string>
-    <string name="default_theme" msgid="7085644992078579076">"ค่าเริ่มต้น"</string>
     <string name="device_theme" msgid="4571803018917608588">"ธีมอุปกรณ์"</string>
-    <string name="systemui_theme_wallpaper" msgid="5658521610680281172">"อัตโนมัติ (ขึ้นอยู่กับวอลล์เปเปอร์)"</string>
-    <string name="systemui_theme_light" msgid="7519689709659152866">"สว่าง"</string>
-    <string name="systemui_theme_dark" msgid="8708733503912628456">"มืด"</string>
+    <string name="default_theme" msgid="7085644992078579076">"ค่าเริ่มต้น"</string>
     <string name="show_operator_name_title" msgid="805135053530442951">"ชื่อเครือข่าย"</string>
     <string name="show_operator_name_summary" msgid="5962567590205757550">"แสดงชื่อเครือข่ายในแถบสถานะ"</string>
     <string name="storage_manager_indicator" msgid="1516810749625915020">"ตัวจัดการพื้นที่เก็บข้อมูล: <xliff:g id="STATUS">^1</xliff:g>"</string>

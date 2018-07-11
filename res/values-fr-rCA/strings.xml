@@ -121,8 +121,6 @@
     <string name="bluetooth_footer_mac_message" product="device" msgid="8413944740341742061">"Adresse Bluetooth de l\'appareil : <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Déconnecter <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Diffusion"</string>
-    <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Désactiver le profil?"</string>
-    <string name="bluetooth_disable_profile_message" msgid="2895844842011809904">"Le profil :&lt;br&gt;&lt;b&gt;<xliff:g id="PROFILE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;va être désactivé sur :&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_unknown" msgid="644716244548801421"></string>
     <string name="bluetooth_device" msgid="5291950341750186887">"Appareil Bluetooth sans nom"</string>
     <string name="progress_scanning" msgid="192587958424295789">"Recherche en cours…"</string>
@@ -399,7 +397,7 @@
     <string name="security_settings_face_enroll_introduction_title" msgid="2694505011712885439">"Déverrouiller avec votre visage"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="8180330567034286589">"Utiliser son visage pour s\'authentifier"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Utilisez votre visage pour déverrouiller votre téléphone, autoriser vos achats et vous connecter à des applications."</string>
-    <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6300341727101929207">"Utiliser vous"</string>
+    <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6300341727101929207">"Utiliser votre"</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Utilisez votre visage pour déverrouiller votre téléphone, autoriser vos achats et vous connecter à des applications"</string>
     <string name="face_add_max" msgid="2342250989212694454">"Vous pouvez ajouter jusqu\'à <xliff:g id="COUNT">%d</xliff:g> empreintes digitales"</string>
     <string name="face_intro_error_max" msgid="160022811747660581">"Vous avez ajouté le nombre maximal de visages"</string>
@@ -707,7 +705,6 @@
     <string name="bluetooth_searching_for_devices" msgid="9203739709307871727">"Recherche…"</string>
     <string name="bluetooth_preference_device_settings" msgid="907776049862799122">"Paramètres de l\'appareil"</string>
     <string name="bluetooth_preference_paired_dialog_title" msgid="8875124878198774180">"Appareil associé"</string>
-    <string name="bluetooth_preference_paired_dialog_name_label" msgid="8111146086595617285">"Nom"</string>
     <string name="bluetooth_preference_paired_dialog_internet_option" msgid="7112953286863428412">"Connexion Internet"</string>
     <string name="bluetooth_preference_paired_dialog_keyboard_option" msgid="2271954176947879628">"Clavier"</string>
     <string name="bluetooth_preference_paired_dialog_contacts_option" msgid="7747163316331917594">"Contacts et historique des appels"</string>
@@ -715,7 +712,6 @@
     <string name="bluetooth_pairing_dialog_sharing_phonebook_title" msgid="7664141669886358618">"Partager le répertoire de contacts?"</string>
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> veut accéder à vos contacts et à votre historique d\'appels."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> demande une association par Bluetooth. Il aura alors accès aux contacts et à l\'histor. des appels."</string>
-    <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Périphériques associés"</string>
     <string name="bluetooth_preference_found_media_devices" msgid="1617401232446299411">"Appareils détectés"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"Aucun appareil à proximité"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Connexion"</string>
@@ -1106,7 +1102,8 @@
     <string name="brightness_title" msgid="5746272622112982836">"Luminosité"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Régler la luminosité de l\'écran"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Luminosité adaptative"</string>
-    <string name="auto_brightness_summary" msgid="1799041158760605375">"Optimiser le niveau de luminosité en fonction de l\'éclairage ambiant"</string>
+    <!-- no translation found for auto_brightness_summary_on (3519854265558828744) -->
+    <skip />
     <string name="auto_brightness_summary_off" msgid="2802336459335410626">"Désactivée"</string>
     <string name="auto_brightness_summary_very_low" msgid="6483976609035853764">"La luminosité préférée est très faible"</string>
     <string name="auto_brightness_summary_low" msgid="5609877905833960427">"La luminosité préférée est faible"</string>
@@ -3454,7 +3451,7 @@
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Vous pouvez ajouter un niveau de protection pour le déverrouillage de cet appareil en exigeant votre mot de passe avant que l\'appareil ne démarre, en plus de la lecture de votre empreinte digitale. L\'appareil ne peut pas recevoir d\'appel, de message, de notification, ni d\'alarme tant qu\'il n\'a pas démarré.\n\nCela permet de protéger les données de vos appareils en cas de perte ou de vol. Exiger un mot de passe pour démarrer l\'appareil?"</string>
     <string name="encryption_interstitial_message_pin_for_face" msgid="2017438765366716760">"Vous pouvez ajouter un niveau de protection pour le déverrouillage de cet appareil en exigeant votre NIP avant que l\'appareil ne démarre, en plus de la reconnaissance du visage. L\'appareil ne peut pas recevoir d\'appel, de message, de notification, ni d\'alarme tant qu\'il n\'a pas démarré.\n\nCela permet de protéger les données de vos appareils en cas de perte ou de vol. Exiger le NIP pour démarrer l\'appareil?"</string>
     <string name="encryption_interstitial_message_pattern_for_face" msgid="3551827507967661552">"Vous pouvez ajouter un niveau de protection pour le déverrouillage de cet appareil en exigeant votre schéma avant que l\'appareil ne démarre, en plus de la reconnaissance du visage. L\'appareil ne peut pas recevoir d\'appel, de message, de notification, ni d\'alarme tant qu\'il n\'a pas démarré.\n\nCela permet de protéger les données de vos appareils en cas de perte ou de vol. Exiger le schéma pour démarrer l\'appareil?"</string>
-    <string name="encryption_interstitial_message_password_for_face" msgid="3452793542112093614">"Vous pouvez ajouter un niveau de protection pour le déverrouillage de cet appareil en exigeant votre mot de passe avant que l\'appareil ne démarre, en plus de la reconnaissance du visage. L\'appareil ne peut pas recevoir d\'appel, de message, de notification, ni d\'alarme tant qu\'il n\'a pas démarré.\n\nCela permet de protéger les données de vos appareils en cas de perte ou de vol. Exiger un mot de passe pour démarrer l\'appareil?"</string>
+    <string name="encryption_interstitial_message_password_for_face" msgid="3452793542112093614">"Vous pouvez ajouter un niveau de protection pour le déverrouillage de cet appareil en exigeant votre mot de passe avant que l\'appareil ne démarre, en plus de la reconnaissance du visage. L\'appareil ne peut pas recevoir d\'appel, de message, de notification, ni d\'alarme tant qu\'il n\'a pas démarré.\n\nCela permet de protéger les données de vos appareils en cas de perte ou de vol. Exiger le mot de passe pour démarrer l\'appareil?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Oui"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Non"</string>
     <string name="restricted_true_label" msgid="4761453839409220473">"Restreinte"</string>
@@ -4119,12 +4116,8 @@
     <string name="autofill_app" msgid="7338387238377914374">"Service de remplissage auto"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"automatique, remplir, remplissage automatique"</string>
     <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;Assurez-vous de faire confiance à cette application&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Remplissage automatique&gt;%1$s&lt;/xliff:g&gt; utilise les éléments affichés à l\'écran pour déterminer les champs qui peuvent bénéficier de l\'entrée automatique."</string>
-    <string name="color_theme" msgid="1535685696756738324">"Thème de couleurs"</string>
-    <string name="default_theme" msgid="7085644992078579076">"Par défaut"</string>
     <string name="device_theme" msgid="4571803018917608588">"Thème de l\'appareil"</string>
-    <string name="systemui_theme_wallpaper" msgid="5658521610680281172">"Automatique (selon l\'image de fond d\'écran)"</string>
-    <string name="systemui_theme_light" msgid="7519689709659152866">"Clair"</string>
-    <string name="systemui_theme_dark" msgid="8708733503912628456">"Sombre"</string>
+    <string name="default_theme" msgid="7085644992078579076">"Par défaut"</string>
     <string name="show_operator_name_title" msgid="805135053530442951">"Nom du réseau"</string>
     <string name="show_operator_name_summary" msgid="5962567590205757550">"Afficher le nom du réseau dans la barre d\'état"</string>
     <string name="storage_manager_indicator" msgid="1516810749625915020">"Gestionnaire de stockage : <xliff:g id="STATUS">^1</xliff:g>"</string>
