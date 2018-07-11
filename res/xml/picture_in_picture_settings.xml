@@ -17,4 +17,7 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/picture_in_picture_title" />
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="picture_in_picture_screen"
+    android:title="@string/picture_in_picture_title"
+    settings:controller="com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureScreenPreferenceController" />

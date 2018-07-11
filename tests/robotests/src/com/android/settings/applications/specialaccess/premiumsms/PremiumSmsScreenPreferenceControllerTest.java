@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications.specialaccess;
+package com.android.settings.applications.specialaccess.premiumsms;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.spy;
 
@@ -31,26 +32,26 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-public class PremiumSmsControllerTest {
+public class PremiumSmsScreenPreferenceControllerTest {
 
     private Context mContext;
-    private PremiumSmsController mController;
+    private PremiumSmsScreenPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application.getApplicationContext());
-        mController = new PremiumSmsController(mContext, "key");
+        mController = new PremiumSmsScreenPreferenceController(mContext, "key");
     }
 
     @Test
-    public void testPremiumSms_byDefault_shouldBeShown() {
-        assertThat(mController.isAvailable()).isTrue();
+    public void getAvailability_byDefault_shouldBeShown() {
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
     @Config(qualifiers = "mcc999")
-    public void testPremiumSms_ifDisabled_shouldNotBeShown() {
+    public void getAvailability_disabled_returnUnavailable() {
         assertThat(mController.isAvailable()).isFalse();
     }
 }

@@ -105,6 +105,7 @@ public class WifiTetherApBandPreferenceControllerTest {
 
     @Test
     public void display_5GhzNotSupported_shouldDisable() {
+        when(mWifiManager.getCountryCode()).thenReturn("US");
         when(mWifiManager.isDualBandSupported()).thenReturn(false);
 
         mController.displayPreference(mScreen);
@@ -116,7 +117,8 @@ public class WifiTetherApBandPreferenceControllerTest {
 
     @Test
     public void changePreference_noDualModeWith5G_shouldUpdateValue() {
-        when(mWifiManager.is5GHzBandSupported()).thenReturn(true);
+        when(mWifiManager.getCountryCode()).thenReturn("US");
+        when(mWifiManager.isDualBandSupported()).thenReturn(true);
 
         mController.displayPreference(mScreen);
 
@@ -142,7 +144,8 @@ public class WifiTetherApBandPreferenceControllerTest {
 
     @Test
     public void changePreference_dualModeWith5G_shouldUpdateValue() {
-        when(mWifiManager.is5GHzBandSupported()).thenReturn(true);
+        when(mWifiManager.getCountryCode()).thenReturn("US");
+        when(mWifiManager.isDualBandSupported()).thenReturn(true);
         when(mWifiManager.isDualModeSupported()).thenReturn(true);
 
         mController.displayPreference(mScreen);
@@ -168,14 +171,16 @@ public class WifiTetherApBandPreferenceControllerTest {
 
     @Test
     public void updateDisplay_shouldUpdateValue() {
+        when(mWifiManager.getCountryCode()).thenReturn("US");
+        when(mWifiManager.isDualBandSupported()).thenReturn(true);
+
         // Set controller band index to 1 and verify is set.
-        when(mWifiManager.is5GHzBandSupported()).thenReturn(true);
         mController.displayPreference(mScreen);
         mController.onPreferenceChange(mPreference, "1");
         assertThat(mController.getBandIndex()).isEqualTo(1);
 
         // Disable 5Ghz band
-        when(mWifiManager.is5GHzBandSupported()).thenReturn(false);
+        when(mWifiManager.isDualBandSupported()).thenReturn(false);
 
         // Call updateDisplay and verify it's changed.
         mController.updateDisplay();
