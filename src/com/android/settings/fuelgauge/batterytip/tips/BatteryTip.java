@@ -16,6 +16,7 @@
 
 package com.android.settings.fuelgauge.batterytip.tips;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -132,6 +133,14 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
      * @param tip used to update
      */
     public abstract void updateState(BatteryTip tip);
+
+    /**
+     * Check whether data is still make sense. If not, try recover.
+     * @param context used to do sanity check
+     */
+    public void sanityCheck(Context context) {
+        // do nothing
+    }
 
     /**
      * Log the battery tip

@@ -107,6 +107,7 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
         mPreferenceGroup.removeAll();
         for (int i = 0, size = batteryTips.size(); i < size; i++) {
             final BatteryTip batteryTip = mBatteryTips.get(i);
+            batteryTip.sanityCheck(mContext);
             if (batteryTip.getState() != BatteryTip.StateType.INVISIBLE) {
                 final Preference preference = batteryTip.buildPreference(mPrefContext);
                 mBatteryTipMap.put(preference.getKey(), batteryTip);
