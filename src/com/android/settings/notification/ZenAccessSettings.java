@@ -36,6 +36,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.RemoteException;
+import android.provider.SearchIndexableResource;
 import android.provider.Settings.Secure;
 import android.text.TextUtils;
 import android.util.ArraySet;
@@ -47,7 +48,11 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 import com.android.settings.widget.AppSwitchPreference;
+import com.android.settings.widget.EmptyTextSettings;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -58,6 +63,7 @@ import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
+@SearchIndexable
 public class ZenAccessSettings extends EmptyTextSettings {
     private final String TAG = "ZenAccessSettings";
 
@@ -336,4 +342,18 @@ public class ZenAccessSettings extends EmptyTextSettings {
                     .create();
         }
     }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    final ArrayList<SearchIndexableResource> result = new ArrayList<>();
+
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.zen_access_settings;
+                    result.add(sir);
+                    return result;
+                }
+            };
 }

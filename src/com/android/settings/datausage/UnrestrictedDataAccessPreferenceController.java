@@ -21,6 +21,7 @@ import android.os.UserHandle;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.R;
 import com.android.settings.applications.AppStateBaseBridge;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
@@ -83,7 +84,9 @@ public class UnrestrictedDataAccessPreferenceController extends BasePreferenceCo
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return mContext.getResources().getBoolean(R.bool.config_show_data_saver)
+                ? AVAILABLE_UNSEARCHABLE
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

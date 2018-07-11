@@ -44,6 +44,8 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.manageapplications.ManageApplications;
+import com.android.settings.applications.specialaccess.pictureinpicture
+        .PictureInPictureDetailPreferenceController;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.RestrictedLockUtils;
@@ -281,7 +283,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
         mAppEntry = appEntry;
     }
 
-    PackageInfo getPackageInfo() {
+    public PackageInfo getPackageInfo() {
         return mPackageInfo;
     }
 

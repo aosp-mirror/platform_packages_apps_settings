@@ -14,22 +14,22 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications.specialaccess;
+package com.android.settings.applications.specialaccess.premiumsms;
 
-import android.app.ActivityManager;
 import android.content.Context;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
-public class PictureInPictureController extends BasePreferenceController {
+public class PremiumSmsScreenPreferenceController extends BasePreferenceController {
 
-    public PictureInPictureController(Context context, String preferenceKey) {
+    public PremiumSmsScreenPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
-    @Override
+    @AvailabilityStatus
     public int getAvailabilityStatus() {
-        return !ActivityManager.isLowRamDeviceStatic()
+        return mContext.getResources().getBoolean(R.bool.config_show_premium_sms)
                 ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
     }

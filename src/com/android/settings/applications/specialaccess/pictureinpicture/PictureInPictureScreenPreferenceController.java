@@ -14,23 +14,24 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications.specialaccess;
+package com.android.settings.applications.specialaccess.pictureinpicture;
 
 import android.app.ActivityManager;
 import android.content.Context;
 
 import com.android.settings.core.BasePreferenceController;
 
-public class ZenAccessController extends BasePreferenceController {
+public class PictureInPictureScreenPreferenceController extends BasePreferenceController {
 
-    public ZenAccessController(Context context, String preferenceKey) {
+    public PictureInPictureScreenPreferenceController(Context context,
+            String preferenceKey) {
         super(context, preferenceKey);
     }
 
     @Override
     public int getAvailabilityStatus() {
         return !ActivityManager.isLowRamDeviceStatic()
-                ? AVAILABLE_UNSEARCHABLE
+                ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
     }
 }

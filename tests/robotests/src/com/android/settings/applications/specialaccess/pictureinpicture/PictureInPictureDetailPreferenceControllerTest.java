@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications.appinfo;
+package com.android.settings.applications.specialaccess.pictureinpicture;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
@@ -25,6 +25,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 
 import com.android.settings.R;
+import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 

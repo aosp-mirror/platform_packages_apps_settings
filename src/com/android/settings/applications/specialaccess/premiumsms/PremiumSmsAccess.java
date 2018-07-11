@@ -1,23 +1,26 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
- * except in compliance with the License. You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software distributed under the
- * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied. See the License for the specific language governing
- * permissions and limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
-package com.android.settings.applications;
+package com.android.settings.applications.specialaccess.premiumsms;
 
 import android.annotation.Nullable;
 import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.SearchIndexableResource;
 import android.view.View;
 
 import com.android.internal.annotations.VisibleForTesting;
@@ -25,16 +28,21 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.telephony.SmsUsageMonitor;
 import com.android.settings.R;
 import com.android.settings.applications.AppStateBaseBridge.Callback;
+import com.android.settings.applications.AppStateSmsPremBridge;
 import com.android.settings.applications.AppStateSmsPremBridge.SmsState;
-import com.android.settings.notification.EmptyTextSettings;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+import com.android.settings.widget.EmptyTextSettings;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.Callbacks;
 import com.android.settingslib.applications.ApplicationsState.Session;
+import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.FooterPreference;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.preference.DropDownPreference;
 import androidx.preference.Preference;
@@ -42,7 +50,9 @@ import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 
-public class PremiumSmsAccess extends EmptyTextSettings implements Callback, Callbacks, OnPreferenceChangeListener {
+@SearchIndexable
+public class PremiumSmsAccess extends EmptyTextSettings
+        implements Callback, Callbacks, OnPreferenceChangeListener {
 
     private ApplicationsState mApplicationsState;
     private AppStateSmsPremBridge mSmsBackend;
@@ -233,4 +243,18 @@ public class PremiumSmsAccess extends EmptyTextSettings implements Callback, Cal
             super.onBindViewHolder(holder);
         }
     }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    final ArrayList<SearchIndexableResource> result = new ArrayList<>();
+
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.premium_sms_settings;
+                    result.add(sir);
+                    return result;
+                }
+            };
 }
