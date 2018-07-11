@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications.specialaccess;
+package com.android.settings.applications.specialaccess.notificationaccess;
 
 import android.app.ActivityManager;
 import android.content.Context;
 
 import com.android.settings.core.BasePreferenceController;
 
-public class NotificationAccessController extends BasePreferenceController {
+public class NotificationAccessScreenPreferenceController extends BasePreferenceController {
 
-    public NotificationAccessController(Context context, String preferenceKey) {
+    public NotificationAccessScreenPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 

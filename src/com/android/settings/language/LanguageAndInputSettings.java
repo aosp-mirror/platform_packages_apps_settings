@@ -57,7 +57,6 @@ public class LanguageAndInputSettings extends DashboardFragment {
     private static final String KEY_KEYBOARDS_CATEGORY = "keyboards_category";
     private static final String KEY_TEXT_TO_SPEECH = "tts_settings_summary";
     private static final String KEY_POINTER_AND_TTS_CATEGORY = "pointer_and_tts_category";
-    private static final String KEY_GAME_CONTROLLER_CATEGORY = "game_controller_settings_category";
     private static final String KEY_PHYSICAL_KEYBOARD = "physical_keyboard_pref";
 
     @Override
@@ -124,7 +123,6 @@ public class LanguageAndInputSettings extends DashboardFragment {
         // Input Assistance
         controllers.add(new SpellCheckerPreferenceController(context));
         controllers.add(new DefaultAutofillPreferenceController(context));
-        controllers.add(new UserDictionaryPreferenceController(context));
 
         return controllers;
     }

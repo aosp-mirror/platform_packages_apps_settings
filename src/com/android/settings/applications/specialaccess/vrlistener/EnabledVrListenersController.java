@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,25 +14,27 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications.specialaccess;
+package com.android.settings.applications.specialaccess.vrlistener;
 
 import android.app.ActivityManager;
 import android.content.Context;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
-public class ZenAccessController extends BasePreferenceController {
+public class EnabledVrListenersController extends BasePreferenceController {
 
     private final ActivityManager mActivityManager;
 
-    public ZenAccessController(Context context, String preferenceKey) {
-        super(context, preferenceKey);
-        mActivityManager = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
+    public EnabledVrListenersController(Context context, String key) {
+        super(context, key);
+        mActivityManager = mContext.getSystemService(ActivityManager.class);
     }
 
-    @Override
+    @AvailabilityStatus
     public int getAvailabilityStatus() {
-        return !mActivityManager.isLowRamDevice()
+        return mContext.getResources().getBoolean(R.bool.config_show_enabled_vr_listeners)
+                && !mActivityManager.isLowRamDevice()
                 ? AVAILABLE_UNSEARCHABLE
                 : UNSUPPORTED_ON_DEVICE;
     }

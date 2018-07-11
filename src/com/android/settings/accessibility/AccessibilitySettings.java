@@ -119,11 +119,11 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private static final String TTS_SETTINGS_PREFERENCE =
             "tts_settings_preference";
     private static final String AUTOCLICK_PREFERENCE_SCREEN =
-            "autoclick_preference_screen";
+            "autoclick_preference";
     private static final String VIBRATION_PREFERENCE_SCREEN =
             "vibration_preference_screen";
     private static final String DISPLAY_DALTONIZER_PREFERENCE_SCREEN =
-            "daltonizer_preference_screen";
+            "daltonizer_preference";
 
     // Extras passed to sub-fragments.
     static final String EXTRA_PREFERENCE_KEY = "preference_key";
@@ -882,6 +882,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     // Duplicates in Language & Input
                     keys.add(TTS_SETTINGS_PREFERENCE);
 
+                    // Duplicates in child page
+                    keys.add(DISPLAY_DALTONIZER_PREFERENCE_SCREEN);
+                    keys.add(AUTOCLICK_PREFERENCE_SCREEN);
                     return keys;
                 }
             };

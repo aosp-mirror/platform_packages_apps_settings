@@ -17,4 +17,7 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/quick_settings_developer_tiles" />
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="development_tile_settings"
+    android:title="@string/quick_settings_developer_tiles"
+    settings:controller="com.android.settings.development.qstile.DevelopmentTilePreferenceController" />

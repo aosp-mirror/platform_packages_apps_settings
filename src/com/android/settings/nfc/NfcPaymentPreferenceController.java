@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.nfc.NfcAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,6 +81,9 @@ public class NfcPaymentPreferenceController extends BasePreferenceController imp
     public int getAvailabilityStatus() {
         final PackageManager pm = mContext.getPackageManager();
         if (!pm.hasSystemFeature(PackageManager.FEATURE_NFC)) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
+        if (NfcAdapter.getDefaultAdapter(mContext) == null) {
             return UNSUPPORTED_ON_DEVICE;
         }
         if (mPaymentBackend == null) {

@@ -13,9 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.applications;
+package com.android.settings.applications.specialaccess.vrlistener;
 
 import android.content.ComponentName;
+import android.content.Context;
+import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.service.vr.VrListenerService;
 
@@ -23,8 +25,15 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 import com.android.settings.utils.ManagedServiceSettings;
+import com.android.settingslib.search.SearchIndexable;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@SearchIndexable
 public class VrListenerSettings extends ManagedServiceSettings {
     private static final String TAG = VrListenerSettings.class.getSimpleName();
     private static final Config CONFIG = new Config.Builder()
@@ -66,4 +75,19 @@ public class VrListenerSettings extends ManagedServiceSettings {
         FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider().action(getContext(),
                 logCategory, packageName);
     }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    final List<SearchIndexableResource> result = new ArrayList<>();
+
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.vr_listeners_settings;
+                    result.add(sir);
+                    return result;
+                }
+            };
+
 }

@@ -28,7 +28,7 @@ import android.service.quicksettings.TileService;
 import android.util.Log;
 
 import com.android.internal.statusbar.IStatusBarService;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.core.BasePreferenceController;
 
 import java.util.List;
 
@@ -37,33 +37,28 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
-public class DevelopmentTilePreferenceController extends AbstractPreferenceController {
+public class DevelopmentTilePreferenceController extends BasePreferenceController {
 
     private static final String TAG = "DevTilePrefController";
     private final OnChangeHandler mOnChangeHandler;
     private final PackageManager mPackageManager;
 
-    public DevelopmentTilePreferenceController(Context context) {
-        super(context);
+    public DevelopmentTilePreferenceController(Context context, String key) {
+        super(context, key);
         mOnChangeHandler = new OnChangeHandler(context);
         mPackageManager = context.getPackageManager();
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return null;
+    public int getAvailabilityStatus() {
+        return AVAILABLE;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        Context context = screen.getContext();
-        Intent intent = new Intent(TileService.ACTION_QS_TILE)
+        final Context context = screen.getContext();
+        final Intent intent = new Intent(TileService.ACTION_QS_TILE)
                 .setPackage(context.getPackageName());
         final List<ResolveInfo> resolveInfos = mPackageManager.queryIntentServices(intent,
                 PackageManager.MATCH_DISABLED_COMPONENTS);
