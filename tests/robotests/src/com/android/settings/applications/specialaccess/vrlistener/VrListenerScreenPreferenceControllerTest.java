@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications.specialaccess;
+package com.android.settings.applications.specialaccess.vrlistener;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
@@ -26,31 +28,38 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowActivityManager;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-public class ZenAccessControllerTest {
+public class VrListenerScreenPreferenceControllerTest {
 
     private Context mContext;
-    private ZenAccessController mController;
+    private VrListenerScreenPreferenceController mController;
     private ShadowActivityManager mActivityManager;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        mController = new ZenAccessController(mContext, "key");
+        mController = new VrListenerScreenPreferenceController(mContext, "key");
         mActivityManager = Shadow.extract(mContext.getSystemService(Context.ACTIVITY_SERVICE));
     }
 
     @Test
-    public void isAvailable_byDefault_true() {
-        assertThat(mController.isAvailable()).isTrue();
+    public void getAvailability_byDefault_searchable() {
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
-    public void isAvailable_lowMemory_false() {
+    public void getAvailability_lowMemory_unavailable() {
         mActivityManager.setIsLowRamDevice(true);
-        assertThat(mController.isAvailable()).isFalse();
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void getAvailability_disabled_unavailable() {
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 }

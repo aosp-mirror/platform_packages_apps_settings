@@ -68,7 +68,7 @@
         android:key="notification_access"
         android:title="@string/manage_notification_access_title"
         android:fragment="com.android.settings.notification.NotificationAccessSettings"
-        settings:controller="com.android.settings.applications.specialaccess.NotificationAccessController" />
+        settings:controller="com.android.settings.applications.specialaccess.notificationaccess.NotificationAccessController" />
 
     <Preference
         android:key="picture_in_picture"
@@ -112,9 +112,9 @@
     <Preference
         android:key="enabled_vr_listeners"
         android:title="@string/vr_listeners_title"
-        android:fragment="com.android.settings.applications.VrListenerSettings"
+        android:fragment="com.android.settings.applications.specialaccess.vrlistener.VrListenerSettings"
         settings:keywords="@string/keywords_vr_listener"
-        settings:controller="com.android.settings.applications.specialaccess.EnabledVrListenersController">
+        settings:controller="com.android.settings.applications.specialaccess.vrlistener.EnabledVrListenersController">
         <extra
             android:name="classname"
             android:value="com.android.settings.Settings$VrListenersSettingsActivity" />

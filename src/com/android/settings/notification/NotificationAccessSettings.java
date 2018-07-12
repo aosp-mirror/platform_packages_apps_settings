@@ -24,6 +24,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
 
@@ -32,14 +33,21 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 import com.android.settings.utils.ManagedServiceSettings;
+import com.android.settingslib.search.SearchIndexable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Settings screen for managing notification listener permissions
  */
+@SearchIndexable
 public class NotificationAccessSettings extends ManagedServiceSettings {
-    private static final String TAG = NotificationAccessSettings.class.getSimpleName();
-    private static final Config CONFIG =  new Config.Builder()
+    private static final String TAG = "NotificationAccessSettings";
+    private static final Config CONFIG = new Config.Builder()
             .setTag(TAG)
             .setSetting(Settings.Secure.ENABLED_NOTIFICATION_LISTENERS)
             .setIntentAction(NotificationListenerService.SERVICE_INTERFACE)
@@ -166,4 +174,18 @@ public class NotificationAccessSettings extends ManagedServiceSettings {
                     .create();
         }
     }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    final List<SearchIndexableResource> result = new ArrayList<>();
+
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.notification_access_settings;
+                    result.add(sir);
+                    return result;
+                }
+            };
 }

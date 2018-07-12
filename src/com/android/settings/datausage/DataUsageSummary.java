@@ -368,7 +368,6 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
                     keys.add(KEY_MOBILE_USAGE_TITLE);
                     keys.add(KEY_MOBILE_DATA_USAGE_TOGGLE);
                     keys.add(KEY_MOBILE_DATA_USAGE);
-                    keys.add(KEY_MOBILE_BILLING_CYCLE);
                 }
 
                 if (!DataUsageUtils.hasWifiRadio(context)) {
@@ -380,6 +379,8 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
 
                 // Duplicate entry for "Data saver"
                 keys.add(KEY_RESTRICT_BACKGROUND);
+                // Duplicate entry for "Data warning & limit"
+                keys.add(KEY_MOBILE_BILLING_CYCLE);
 
                 return keys;
             }

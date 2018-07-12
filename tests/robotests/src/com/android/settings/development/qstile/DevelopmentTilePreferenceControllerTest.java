@@ -70,9 +70,7 @@ public class DevelopmentTilePreferenceControllerTest {
         mShadowPackageManager = Shadows.shadowOf(mContext.getPackageManager());
         when(mScreen.getContext()).thenReturn(mContext);
 
-        mController = new DevelopmentTilePreferenceController(mContext);
-        assertThat(mController.getPreferenceKey()).isNull();
-
+        mController = new DevelopmentTilePreferenceController(mContext, "testkey");
         mOnChangeHandler = spy(new DevelopmentTilePreferenceController.OnChangeHandler(mContext));
         ReflectionHelpers.setField(mOnChangeHandler, "mStatusBarService", mStatusBarService);
     }

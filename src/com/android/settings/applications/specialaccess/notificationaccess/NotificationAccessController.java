@@ -14,25 +14,22 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications.specialaccess;
+package com.android.settings.applications.specialaccess.notificationaccess;
 
 import android.app.ActivityManager;
 import android.content.Context;
 
 import com.android.settings.core.BasePreferenceController;
 
-public class ZenAccessController extends BasePreferenceController {
+public class NotificationAccessController extends BasePreferenceController {
 
-    private final ActivityManager mActivityManager;
-
-    public ZenAccessController(Context context, String preferenceKey) {
+    public NotificationAccessController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mActivityManager = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return !mActivityManager.isLowRamDevice()
+        return !ActivityManager.isLowRamDeviceStatic()
                 ? AVAILABLE_UNSEARCHABLE
                 : UNSUPPORTED_ON_DEVICE;
     }

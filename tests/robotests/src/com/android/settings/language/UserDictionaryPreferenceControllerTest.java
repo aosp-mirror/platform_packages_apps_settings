@@ -100,7 +100,7 @@ public class UserDictionaryPreferenceControllerTest {
         }
 
         private TestController(Context context) {
-            super(context);
+            super(context, "test_key");
         }
     }
 }

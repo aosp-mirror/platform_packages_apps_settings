@@ -16,7 +16,7 @@
 
 package com.android.settings.development.featureflags;
 
-import static androidx.lifecycle.Lifecycle.Event.ON_START;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.atLeastOnce;
@@ -26,7 +26,6 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,7 +34,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 
-import androidx.lifecycle.LifecycleOwner;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -43,33 +42,31 @@ public class FeatureFlagPreferenceControllerTest {
 
     @Mock
     private PreferenceScreen mScreen;
+    @Mock
+    private PreferenceCategory mCategory;
     private Context mContext;
-    private LifecycleOwner mLifecycleOwner;
-    private Lifecycle mLifecycle;
     private FeatureFlagsPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mLifecycleOwner = () -> mLifecycle;
-        mLifecycle = new Lifecycle(mLifecycleOwner);
-        mController = new FeatureFlagsPreferenceController(mContext, mLifecycle);
-        when(mScreen.getContext()).thenReturn(mContext);
+        mController = new FeatureFlagsPreferenceController(mContext, "test_key");
+        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mCategory);
+        when(mCategory.getContext()).thenReturn(mContext);
         mController.displayPreference(mScreen);
     }
 
     @Test
-    public void verifyConstants() {
-        assertThat(mController.isAvailable()).isTrue();
-        assertThat(mController.getPreferenceKey()).isNull();
+    public void getAvailability_available() {
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
     public void onStart_shouldRefreshFeatureFlags() {
-        mLifecycle.handleLifecycleEvent(ON_START);
+        mController.onStart();
 
-        verify(mScreen).removeAll();
-        verify(mScreen, atLeastOnce()).addPreference(any(FeatureFlagPreference.class));
+        verify(mCategory).removeAll();
+        verify(mCategory, atLeastOnce()).addPreference(any(FeatureFlagPreference.class));
     }
 }

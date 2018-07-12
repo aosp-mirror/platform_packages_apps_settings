@@ -63,7 +63,9 @@
         <!-- User dictionary preference title and fragment will be set programmatically. -->
         <Preference
             android:key="key_user_dictionary_settings"
-            android:title="@string/user_dict_settings_title" />
+            android:title="@string/user_dict_settings_title"
+            android:fragment="com.android.settings.inputmethod.UserDictionaryList"
+            settings:controller="com.android.settings.language.UserDictionaryPreferenceController" />
     </PreferenceCategory>
 
     <PreferenceCategory

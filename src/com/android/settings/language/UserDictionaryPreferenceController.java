@@ -20,33 +20,24 @@ import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 
-import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.inputmethod.UserDictionaryList;
 import com.android.settings.inputmethod.UserDictionaryListPreferenceController;
 import com.android.settings.inputmethod.UserDictionarySettings;
-import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.TreeSet;
 
 import androidx.preference.Preference;
 
-public class UserDictionaryPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin {
+public class UserDictionaryPreferenceController extends BasePreferenceController {
 
-    private static final String KEY_USER_DICTIONARY_SETTINGS = "key_user_dictionary_settings";
-
-    public UserDictionaryPreferenceController(Context context) {
-        super(context);
+    public UserDictionaryPreferenceController(Context context, String key) {
+        super(context, key);
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_USER_DICTIONARY_SETTINGS;
+    public int getAvailabilityStatus() {
+        return AVAILABLE_UNSEARCHABLE;
     }
 
     @Override
