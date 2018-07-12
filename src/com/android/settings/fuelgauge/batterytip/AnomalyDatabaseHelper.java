@@ -21,8 +21,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.android.settings.fuelgauge.anomaly.Anomaly;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -62,7 +60,7 @@ public class AnomalyDatabaseHelper extends SQLiteOpenHelper {
         String UID = "uid";
         /**
          * The type of the anomaly app
-         * @see Anomaly.AnomalyType
+         * @see StatsManagerConfig.AnomalyType
          */
         String ANOMALY_TYPE = "anomaly_type";
         /**

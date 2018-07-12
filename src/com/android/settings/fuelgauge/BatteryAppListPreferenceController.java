@@ -41,7 +41,6 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -79,7 +78,6 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
     private SettingsActivity mActivity;
     private InstrumentedPreferenceFragment mFragment;
     private Context mPrefContext;
-    SparseArray<List<Anomaly>> mAnomalySparseArray;
 
     private Handler mHandler = new Handler(Looper.getMainLooper()) {
         @Override
@@ -162,28 +160,11 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
         if (preference instanceof PowerGaugePreference) {
             PowerGaugePreference pgp = (PowerGaugePreference) preference;
             BatteryEntry entry = pgp.getInfo();
-            AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity,
-                    mFragment, mBatteryStatsHelper, STATS_TYPE, entry, pgp.getPercent(),
-                    mAnomalySparseArray != null ? mAnomalySparseArray.get(entry.sipper.getUid())
-                            : null);
+            AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mBatteryUtils,
+                    mFragment, mBatteryStatsHelper, STATS_TYPE, entry, pgp.getPercent());
             return true;
         }
         return false;
-    }
-
-    public void refreshAnomalyIcon(final SparseArray<List<Anomaly>> anomalySparseArray) {
-        if (!isAvailable()) {
-            return;
-        }
-        mAnomalySparseArray = anomalySparseArray;
-        for (int i = 0, size = anomalySparseArray.size(); i < size; i++) {
-            final String key = extractKeyFromUid(anomalySparseArray.keyAt(i));
-            final PowerGaugePreference pref = (PowerGaugePreference) mAppListGroup.findPreference(
-                    key);
-            if (pref != null) {
-                pref.shouldShowAnomalyIcon(true);
-            }
-        }
     }
 
     public void refreshAppListGroup(BatteryStatsHelper statsHelper, boolean showAllApps) {

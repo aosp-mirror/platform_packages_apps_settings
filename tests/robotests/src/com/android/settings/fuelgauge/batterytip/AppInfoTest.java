@@ -21,7 +21,6 @@ import static com.google.common.truth.Truth.assertThat;
 import android.os.Parcel;
 import android.text.format.DateUtils;
 
-import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -36,8 +35,10 @@ import java.util.List;
 public class AppInfoTest {
 
     private static final String PACKAGE_NAME = "com.android.app";
-    private static final int TYPE_WAKELOCK = Anomaly.AnomalyType.WAKE_LOCK;
-    private static final int TYPE_WAKEUP = Anomaly.AnomalyType.WAKEUP_ALARM;
+    private static final int TYPE_WAKELOCK =
+            StatsManagerConfig.AnomalyType.EXCESSIVE_WAKELOCK_ALL_SCREEN_OFF;
+    private static final int TYPE_WAKEUP =
+            StatsManagerConfig.AnomalyType.EXCESSIVE_WAKEUPS_IN_BACKGROUND;
     private static final long SCREEN_TIME_MS = DateUtils.HOUR_IN_MILLIS;
     private static final int UID = 3452;
 
