@@ -67,7 +67,7 @@ public class LocationServicePreferenceControllerTest {
     @Mock
     private PreferenceScreen mScreen;
     @Mock
-    private SettingsInjector mSettingsInjector;
+    private AppSettingsInjector mSettingsInjector;
     @Mock
     private DevicePolicyManager mDevicePolicyManager;
 

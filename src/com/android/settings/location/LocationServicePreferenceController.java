@@ -47,19 +47,19 @@ public class LocationServicePreferenceController extends LocationBasePreferenceC
 
     private PreferenceCategory mCategoryLocationServices;
     private final LocationSettings mFragment;
-    private final SettingsInjector mInjector;
+    private final AppSettingsInjector mInjector;
     /** Receives UPDATE_INTENT  */
     @VisibleForTesting
     BroadcastReceiver mInjectedSettingsReceiver;
 
     public LocationServicePreferenceController(Context context, LocationSettings fragment,
             Lifecycle lifecycle) {
-        this(context, fragment, lifecycle, new SettingsInjector(context));
+        this(context, fragment, lifecycle, new AppSettingsInjector(context));
     }
 
     @VisibleForTesting
     LocationServicePreferenceController(Context context, LocationSettings fragment,
-            Lifecycle lifecycle, SettingsInjector injector) {
+            Lifecycle lifecycle, AppSettingsInjector injector) {
         super(context, lifecycle);
         mFragment = fragment;
         mInjector = injector;
