@@ -34,7 +34,6 @@ import com.android.settings.notification.ZenOnboardingActivity;
 import com.android.settings.notification.ZenSuggestionActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ScreenLockSuggestionActivity;
-import com.android.settings.support.NewDeviceIntroSuggestionActivity;
 import com.android.settings.wallpaper.WallpaperSuggestionActivity;
 import com.android.settings.wifi.calling.WifiCallingSuggestionActivity;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -88,8 +87,6 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
             return WifiCallingSuggestionActivity.isSuggestionComplete(context);
         } else if (className.equals(NightDisplaySuggestionActivity.class.getName())) {
             return NightDisplayPreferenceController.isSuggestionComplete(context);
-        } else if (className.equals(NewDeviceIntroSuggestionActivity.class.getName())) {
-            return NewDeviceIntroSuggestionActivity.isSuggestionComplete(context);
         } else if (className.equals(ZenSuggestionActivity.class.getName())) {
             return ZenOnboardingActivity.isSuggestionComplete(context);
         }
