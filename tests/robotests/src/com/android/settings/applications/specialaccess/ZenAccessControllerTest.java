@@ -51,6 +51,6 @@ public class ZenAccessControllerTest {
     @Test
     public void isAvailable_lowMemory_false() {
         mActivityManager.setIsLowRamDevice(true);
-        assertThat(mController.isAvailable()).isTrue();
+        assertThat(mController.isAvailable()).isFalse();
     }
 }

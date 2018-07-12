@@ -19,16 +19,14 @@ package com.android.settings.biometrics.fingerprint;
 import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
-import android.os.UserHandle;
 import android.view.View;
 import android.widget.Button;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
-import com.android.settings.biometrics.fingerprint.FingerprintEnrollSidecar.Listener;
+import com.android.settings.biometrics.BiometricEnrollSidecar.Listener;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
 import androidx.annotation.Nullable;
@@ -38,14 +36,9 @@ import androidx.annotation.Nullable;
  */
 public class FingerprintEnrollFindSensor extends BiometricEnrollBase {
 
-    @VisibleForTesting
-    static final int CONFIRM_REQUEST = 1;
-    private static final int ENROLLING = 2;
-    public static final String EXTRA_KEY_LAUNCHED_CONFIRM = "launched_confirm_lock";
-
     @Nullable
     private FingerprintFindSensorAnimation mAnimation;
-    private boolean mLaunchedConfirmLock;
+
     private FingerprintEnrollSidecar mSidecar;
     private boolean mNextClicked;
 
@@ -57,13 +50,10 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase {
         skipButton.setOnClickListener(this);
 
         setHeaderText(R.string.security_settings_fingerprint_enroll_find_sensor_title);
-        if (savedInstanceState != null) {
-            mLaunchedConfirmLock = savedInstanceState.getBoolean(EXTRA_KEY_LAUNCHED_CONFIRM);
-            mToken = savedInstanceState.getByteArray(
-                    ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
-        }
-        if (mToken == null && !mLaunchedConfirmLock) {
-            launchConfirmLock();
+
+        if (shouldLaunchConfirmLock()) {
+            launchConfirmLock(R.string.security_settings_fingerprint_preference_title,
+                    Utils.getFingerprintManagerOrNull(this).preEnroll());
         } else if (mToken != null) {
             startLookingForFingerprint(); // already confirmed, so start looking for fingerprint
         }
@@ -133,13 +123,6 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putBoolean(EXTRA_KEY_LAUNCHED_CONFIRM, mLaunchedConfirmLock);
-        outState.putByteArray(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
-    }
-
-    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.skip_button:
@@ -206,28 +189,6 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase {
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
-        }
-    }
-
-    private void launchConfirmLock() {
-        long challenge = Utils.getFingerprintManagerOrNull(this).preEnroll();
-        ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(this);
-        boolean launchedConfirmationActivity = false;
-        if (mUserId == UserHandle.USER_NULL) {
-            launchedConfirmationActivity = helper.launchConfirmationActivity(CONFIRM_REQUEST,
-                getString(R.string.security_settings_fingerprint_preference_title),
-                null, null, challenge);
-        } else {
-            launchedConfirmationActivity = helper.launchConfirmationActivity(CONFIRM_REQUEST,
-                    getString(R.string.security_settings_fingerprint_preference_title),
-                    null, null, challenge, mUserId);
-        }
-        if (!launchedConfirmationActivity) {
-            // This shouldn't happen, as we should only end up at this step if a lock thingy is
-            // already set.
-            finish();
-        } else {
-            mLaunchedConfirmLock = true;
         }
     }
 

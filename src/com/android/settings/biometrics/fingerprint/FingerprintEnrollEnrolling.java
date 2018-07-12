@@ -18,7 +18,6 @@ package com.android.settings.biometrics.fingerprint;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -30,7 +29,6 @@ import android.graphics.drawable.LayerDrawable;
 import android.hardware.fingerprint.FingerprintManager;
 import android.media.AudioAttributes;
 import android.os.Bundle;
-import android.os.UserHandle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.text.TextUtils;
@@ -44,15 +42,15 @@ import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.biometrics.BiometricEnrollBase;
+import com.android.settings.biometrics.BiometricEnrollSidecar;
+import com.android.settings.biometrics.BiometricErrorDialog;
+import com.android.settings.biometrics.BiometricsEnrollEnrolling;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.password.ChooseLockSettingsHelper;
 
 /**
  * Activity which handles the actual enrolling for fingerprint.
  */
-public class FingerprintEnrollEnrolling extends BiometricEnrollBase
-        implements FingerprintEnrollSidecar.Listener {
+public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     static final String TAG_SIDECAR = "sidecar";
 
@@ -93,12 +91,37 @@ public class FingerprintEnrollEnrolling extends BiometricEnrollBase
     private Interpolator mLinearOutSlowInInterpolator;
     private Interpolator mFastOutLinearInInterpolator;
     private int mIconTouchCount;
-    private FingerprintEnrollSidecar mSidecar;
     private boolean mAnimationCancelled;
     private AnimatedVectorDrawable mIconAnimationDrawable;
     private AnimatedVectorDrawable mIconBackgroundBlinksDrawable;
     private boolean mRestoring;
     private Vibrator mVibrator;
+
+    public static class FingerprintErrorDialog extends BiometricErrorDialog {
+        static FingerprintErrorDialog newInstance(CharSequence msg, int msgId) {
+            FingerprintErrorDialog dialog = new FingerprintErrorDialog();
+            Bundle args = new Bundle();
+            args.putCharSequence(KEY_ERROR_MSG, msg);
+            args.putInt(KEY_ERROR_ID, msgId);
+            dialog.setArguments(args);
+            return dialog;
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_FINGERPINT_ERROR;
+        }
+
+        @Override
+        public int getTitleResId() {
+            return R.string.security_settings_fingerprint_enroll_error_dialog_title;
+        }
+
+        @Override
+        public int getOkButtonTextResId() {
+            return R.string.security_settings_fingerprint_enroll_dialog_ok;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,14 +171,18 @@ public class FingerprintEnrollEnrolling extends BiometricEnrollBase
     }
 
     @Override
+    protected BiometricEnrollSidecar getSidecar() {
+        return new FingerprintEnrollSidecar();
+    }
+
+    @Override
+    protected boolean shouldStartAutomatically() {
+        return true;
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
-        mSidecar = (FingerprintEnrollSidecar) getFragmentManager().findFragmentByTag(TAG_SIDECAR);
-        if (mSidecar == null) {
-            mSidecar = new FingerprintEnrollSidecar();
-            getFragmentManager().beginTransaction().add(mSidecar, TAG_SIDECAR).commit();
-        }
-        mSidecar.setListener(this);
         updateProgress(false /* animate */);
         updateDescription();
         if (mRestoring) {
@@ -182,40 +209,7 @@ public class FingerprintEnrollEnrolling extends BiometricEnrollBase
     @Override
     protected void onStop() {
         super.onStop();
-        if (mSidecar != null) {
-            mSidecar.setListener(null);
-        }
         stopIconAnimation();
-        if (!isChangingConfigurations()) {
-            if (mSidecar != null) {
-                mSidecar.cancelEnrollment();
-                getFragmentManager().beginTransaction().remove(mSidecar).commitAllowingStateLoss();
-            }
-            finish();
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (mSidecar != null) {
-            mSidecar.setListener(null);
-            mSidecar.cancelEnrollment();
-            getFragmentManager().beginTransaction().remove(mSidecar).commitAllowingStateLoss();
-            mSidecar = null;
-        }
-        super.onBackPressed();
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.skip_button:
-                setResult(RESULT_SKIP);
-                finish();
-                break;
-            default:
-                super.onClick(v);
-        }
     }
 
     private void animateProgress(int progress) {
@@ -235,20 +229,6 @@ public class FingerprintEnrollEnrolling extends BiometricEnrollBase
         mIconBackgroundBlinksDrawable.start();
     }
 
-    private void launchFinish(byte[] token) {
-        Intent intent = getFinishIntent();
-        intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT
-                | Intent.FLAG_ACTIVITY_CLEAR_TOP
-                | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
-        if (mUserId != UserHandle.USER_NULL) {
-            intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
-        }
-        startActivity(intent);
-        overridePendingTransition(R.anim.suw_slide_next_in, R.anim.suw_slide_next_out);
-        finish();
-    }
-
     protected Intent getFinishIntent() {
         return new Intent(this, FingerprintEnrollFinish.class);
     }
@@ -262,7 +242,6 @@ public class FingerprintEnrollEnrolling extends BiometricEnrollBase
             mRepeatMessage.setVisibility(View.VISIBLE);
         }
     }
-
 
     @Override
     public void onEnrollmentHelp(CharSequence helpString) {
@@ -323,8 +302,8 @@ public class FingerprintEnrollEnrolling extends BiometricEnrollBase
     }
 
     private void showErrorDialog(CharSequence msg, int msgId) {
-        ErrorDialog dlg = ErrorDialog.newInstance(msg, msgId);
-        dlg.show(getFragmentManager(), ErrorDialog.class.getName());
+        BiometricErrorDialog dlg = FingerprintErrorDialog.newInstance(msg, msgId);
+        dlg.show(getFragmentManager(), FingerprintErrorDialog.class.getName());
     }
 
     private void showIconTouchDialog() {
@@ -453,56 +432,6 @@ public class FingerprintEnrollEnrolling extends BiometricEnrollBase
         @Override
         public int getMetricsCategory() {
             return MetricsEvent.DIALOG_FINGERPRINT_ICON_TOUCH;
-        }
-    }
-
-    public static class ErrorDialog extends InstrumentedDialogFragment {
-
-        /**
-         * Create a new instance of ErrorDialog.
-         *
-         * @param msg the string to show for message text
-         * @param msgId the FingerprintManager error id so we know the cause
-         * @return a new ErrorDialog
-         */
-        static ErrorDialog newInstance(CharSequence msg, int msgId) {
-            ErrorDialog dlg = new ErrorDialog();
-            Bundle args = new Bundle();
-            args.putCharSequence("error_msg", msg);
-            args.putInt("error_id", msgId);
-            dlg.setArguments(args);
-            return dlg;
-        }
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            CharSequence errorString = getArguments().getCharSequence("error_msg");
-            final int errMsgId = getArguments().getInt("error_id");
-            builder.setTitle(R.string.security_settings_fingerprint_enroll_error_dialog_title)
-                    .setMessage(errorString)
-                    .setCancelable(false)
-                    .setPositiveButton(R.string.security_settings_fingerprint_enroll_dialog_ok,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                    boolean wasTimeout =
-                                        errMsgId == FingerprintManager.FINGERPRINT_ERROR_TIMEOUT;
-                                    Activity activity = getActivity();
-                                    activity.setResult(wasTimeout ?
-                                            RESULT_TIMEOUT : RESULT_FINISHED);
-                                    activity.finish();
-                                }
-                            });
-            AlertDialog dialog = builder.create();
-            dialog.setCanceledOnTouchOutside(false);
-            return dialog;
-        }
-
-        @Override
-        public int getMetricsCategory() {
-            return MetricsEvent.DIALOG_FINGERPINT_ERROR;
         }
     }
 }

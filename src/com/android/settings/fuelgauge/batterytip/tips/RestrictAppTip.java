@@ -107,6 +107,17 @@ public class RestrictAppTip extends BatteryTip {
     }
 
     @Override
+    public void sanityCheck(Context context) {
+        super.sanityCheck(context);
+
+        // Set it invisible if there is no valid app
+        mRestrictAppList.removeIf(new AppLabelPredicate(context));
+        if (mRestrictAppList.isEmpty()) {
+            mState = StateType.INVISIBLE;
+        }
+    }
+
+    @Override
     public void log(Context context, MetricsFeatureProvider metricsFeatureProvider) {
         metricsFeatureProvider.action(context, MetricsProto.MetricsEvent.ACTION_APP_RESTRICTION_TIP,
                 mState);

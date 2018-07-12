@@ -157,7 +157,7 @@ public class FingerprintEnrollFindSensorTest {
     @Test
     public void onActivityResult_withNullIntentShouldNotCrash() {
         // this should not crash
-        mActivity.onActivityResult(FingerprintEnrollFindSensor.CONFIRM_REQUEST, Activity.RESULT_OK,
+        mActivity.onActivityResult(BiometricEnrollBase.CONFIRM_REQUEST, Activity.RESULT_OK,
             null);
         assertThat(Shadows.shadowOf(mActivity).getResultCode()).isEqualTo(Activity.RESULT_CANCELED);
     }

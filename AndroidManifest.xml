@@ -1570,6 +1570,8 @@
             android:theme="@style/GlifTheme.Light"/>
 
         <activity android:name=".biometrics.face.FaceEnrollIntroduction" android:exported="false" />
+        <activity android:name=".biometrics.face.FaceEnrollEnrolling" android:exported="false" />
+        <activity android:name=".biometrics.face.FaceEnrollFinish" android:exported="false" />
 
         <activity android:name=".biometrics.fingerprint.FingerprintSettings" android:exported="false"/>
         <activity android:name=".biometrics.fingerprint.FingerprintEnrollFindSensor" android:exported="false"/>
@@ -2421,7 +2423,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.applications.VrListenerSettings" />
+                       android:value="com.android.settings.applications.specialaccess.vrlistener.VrListenerSettings" />
         </activity>
 
         <activity

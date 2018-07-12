@@ -121,8 +121,6 @@
     <string name="bluetooth_footer_mac_message" product="device" msgid="8413944740341742061">"기기 블루투스 주소: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>을(를) 연결 해제하시겠습니까?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"브로드캐스팅"</string>
-    <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"프로필을 사용 중지하시겠습니까?"</string>
-    <string name="bluetooth_disable_profile_message" msgid="2895844842011809904">"이렇게 하면 &lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;의 &lt;br&gt;&lt;b&gt;<xliff:g id="PROFILE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;이(가) 사용 중지됩니다."</string>
     <string name="bluetooth_unknown" msgid="644716244548801421"></string>
     <string name="bluetooth_device" msgid="5291950341750186887">"이름이 없는 블루투스 기기"</string>
     <string name="progress_scanning" msgid="192587958424295789">"검색 중"</string>
@@ -707,7 +705,6 @@
     <string name="bluetooth_searching_for_devices" msgid="9203739709307871727">"검색 중..."</string>
     <string name="bluetooth_preference_device_settings" msgid="907776049862799122">"기기 설정"</string>
     <string name="bluetooth_preference_paired_dialog_title" msgid="8875124878198774180">"페어링된 기기"</string>
-    <string name="bluetooth_preference_paired_dialog_name_label" msgid="8111146086595617285">"이름"</string>
     <string name="bluetooth_preference_paired_dialog_internet_option" msgid="7112953286863428412">"인터넷 연결"</string>
     <string name="bluetooth_preference_paired_dialog_keyboard_option" msgid="2271954176947879628">"키보드"</string>
     <string name="bluetooth_preference_paired_dialog_contacts_option" msgid="7747163316331917594">"주소록과 통화 기록"</string>
@@ -715,7 +712,6 @@
     <string name="bluetooth_pairing_dialog_sharing_phonebook_title" msgid="7664141669886358618">"전화번호부를 공유하시겠습니까?"</string>
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>에서 연락처와 통화 기록에 액세스하려고 합니다."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>이(가) 블루투스를 통해 페어링하려고 합니다. 연결하면 기기가 주소록과 통화 기록에 액세스할 수 있습니다."</string>
-    <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"페어링된 기기"</string>
     <string name="bluetooth_preference_found_media_devices" msgid="1617401232446299411">"사용할 수 있는 기기"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"사용 가능한 기기가 없습니다."</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"연결"</string>
@@ -1106,7 +1102,8 @@
     <string name="brightness_title" msgid="5746272622112982836">"밝기"</string>
     <string name="brightness_summary" msgid="838917350127550703">"화면 밝기 조정"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"밝기 자동 조절"</string>
-    <string name="auto_brightness_summary" msgid="1799041158760605375">"빛의 양에 따라 밝기 수준 최적화"</string>
+    <!-- no translation found for auto_brightness_summary_on (3519854265558828744) -->
+    <skip />
     <string name="auto_brightness_summary_off" msgid="2802336459335410626">"사용 안함"</string>
     <string name="auto_brightness_summary_very_low" msgid="6483976609035853764">"원하는 밝기 수준이 매우 낮음"</string>
     <string name="auto_brightness_summary_low" msgid="5609877905833960427">"원하는 밝기 수준이 낮음"</string>
@@ -4119,12 +4116,8 @@
     <string name="autofill_app" msgid="7338387238377914374">"자동완성 서비스"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"자동, 완성, 자동완성"</string>
     <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;이 앱을 신뢰할 수 있는지 확인하세요.&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt;에서는 자동완성할 수 있는 항목을 결정하기 위해 화면의 내용을 사용합니다."</string>
-    <string name="color_theme" msgid="1535685696756738324">"색상 테마"</string>
-    <string name="default_theme" msgid="7085644992078579076">"기본값"</string>
     <string name="device_theme" msgid="4571803018917608588">"기기 테마"</string>
-    <string name="systemui_theme_wallpaper" msgid="5658521610680281172">"자동(배경화면에 따라)"</string>
-    <string name="systemui_theme_light" msgid="7519689709659152866">"밝게"</string>
-    <string name="systemui_theme_dark" msgid="8708733503912628456">"어둡게"</string>
+    <string name="default_theme" msgid="7085644992078579076">"기본값"</string>
     <string name="show_operator_name_title" msgid="805135053530442951">"네트워크 이름"</string>
     <string name="show_operator_name_summary" msgid="5962567590205757550">"상태 표시줄에 네트워크 이름 표시"</string>
     <string name="storage_manager_indicator" msgid="1516810749625915020">"저장용량 관리자: <xliff:g id="STATUS">^1</xliff:g>"</string>

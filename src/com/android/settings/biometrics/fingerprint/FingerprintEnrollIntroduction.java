@@ -117,7 +117,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
     }
 
     @Override
-    protected Intent getFindSensorIntent() {
+    protected Intent getEnrollingIntent() {
         return new Intent(this, FingerprintEnrollFindSensor.class);
     }
 

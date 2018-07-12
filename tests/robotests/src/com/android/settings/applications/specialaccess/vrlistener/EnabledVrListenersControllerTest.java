@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications.specialaccess;
+package com.android.settings.applications.specialaccess.vrlistener;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
@@ -45,19 +47,19 @@ public class EnabledVrListenersControllerTest {
     }
 
     @Test
-    public void isAvailable_byDefault_true() {
-        assertThat(mController.isAvailable()).isTrue();
+    public void getAvailability_byDefault_unsearchable() {
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
     }
 
     @Test
-    public void isAvailable_lowMemory_false() {
+    public void getAvailability_lowMemory_unavailable() {
         mActivityManager.setIsLowRamDevice(true);
-        assertThat(mController.isAvailable()).isTrue();
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
     @Config(qualifiers = "mcc999")
-    public void isAvailable_disabled_false() {
-        assertThat(mController.isAvailable()).isFalse();
+    public void getAvailability_disabled_unavailable() {
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 }

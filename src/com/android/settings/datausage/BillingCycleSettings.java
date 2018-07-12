@@ -26,6 +26,7 @@ import android.content.res.Resources;
 import android.net.NetworkPolicy;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
+import android.provider.SearchIndexableResource;
 import android.text.format.Time;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,12 +39,19 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.net.DataUsageController;
+import com.android.settingslib.search.SearchIndexable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
+@SearchIndexable
 public class BillingCycleSettings extends DataUsageBase implements
         Preference.OnPreferenceChangeListener, DataUsageEditController {
 
@@ -450,4 +458,24 @@ public class BillingCycleSettings extends DataUsageBase implements
                     .putBoolean(KEY_SET_DATA_LIMIT, true).apply();
         }
     }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    final ArrayList<SearchIndexableResource> result = new ArrayList<>();
+
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.billing_cycle;
+                    result.add(sir);
+                    return result;
+                }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return DataUsageUtils.hasMobileData(context);
+                }
+            };
+
 }

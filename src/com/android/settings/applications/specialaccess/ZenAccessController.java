@@ -23,13 +23,16 @@ import com.android.settings.core.BasePreferenceController;
 
 public class ZenAccessController extends BasePreferenceController {
 
+    private final ActivityManager mActivityManager;
+
     public ZenAccessController(Context context, String preferenceKey) {
         super(context, preferenceKey);
+        mActivityManager = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return !ActivityManager.isLowRamDeviceStatic()
+        return !mActivityManager.isLowRamDevice()
                 ? AVAILABLE_UNSEARCHABLE
                 : UNSUPPORTED_ON_DEVICE;
     }
