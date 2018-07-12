@@ -18,9 +18,8 @@ package com.android.settings.dream;
 
 import android.content.Context;
 
-import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.widget.GearPreference;
-import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.dream.DreamBackend;
 import com.android.settingslib.dream.DreamBackend.DreamInfo;
 
@@ -28,40 +27,38 @@ import java.util.Optional;
 
 import androidx.preference.Preference;
 
-public class CurrentDreamPreferenceController extends AbstractPreferenceController implements
-        PreferenceControllerMixin {
-    private final DreamBackend mBackend;
-    private final static String TAG = "CurrentDreamPreferenceController";
-    private final static String CURRENT_SCREENSAVER = "current_screensaver";
+public class CurrentDreamPreferenceController extends BasePreferenceController {
 
-    public CurrentDreamPreferenceController(Context context) {
-        super(context);
+    private final DreamBackend mBackend;
+
+    public CurrentDreamPreferenceController(Context context, String key) {
+        super(context, key);
         mBackend = DreamBackend.getInstance(context);
     }
 
     @Override
-    public boolean isAvailable() {
-        return mBackend.getDreamInfos().size() > 0;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return CURRENT_SCREENSAVER;
+    public int getAvailabilityStatus() {
+        return mBackend.getDreamInfos().size() > 0 ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-
-        preference.setSummary(mBackend.getActiveDreamName());
         setGearClickListenerForPreference(preference);
     }
 
-    private void setGearClickListenerForPreference(Preference preference) {
-        if (!(preference instanceof GearPreference)) return;
+    @Override
+    public CharSequence getSummary() {
+        return mBackend.getActiveDreamName();
+    }
 
-        GearPreference gearPreference = (GearPreference)preference;
-        Optional<DreamInfo> info = getActiveDreamInfo();
+    private void setGearClickListenerForPreference(Preference preference) {
+        if (!(preference instanceof GearPreference)) {
+            return;
+        }
+
+        final GearPreference gearPreference = (GearPreference) preference;
+        final Optional<DreamInfo> info = getActiveDreamInfo();
         if (!info.isPresent() || info.get().settingsComponentName == null) {
             gearPreference.setOnGearClickListener(null);
             return;
@@ -70,9 +67,9 @@ public class CurrentDreamPreferenceController extends AbstractPreferenceControll
     }
 
     private void launchScreenSaverSettings() {
-        Optional<DreamInfo> info = getActiveDreamInfo();
+        final Optional<DreamInfo> info = getActiveDreamInfo();
         if (!info.isPresent()) return;
-        mBackend.launchSettings(info.get());
+        mBackend.launchSettings(mContext, info.get());
     }
 
     private Optional<DreamInfo> getActiveDreamInfo() {
