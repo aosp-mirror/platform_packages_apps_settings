@@ -19,7 +19,6 @@ package com.android.settings.password;
 import static com.google.common.truth.Truth.assertThat;
 import static org.robolectric.RuntimeEnvironment.application;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -37,7 +36,6 @@ import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Shadows;
@@ -45,18 +43,19 @@ import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadows.ShadowActivity;
-import org.robolectric.shadows.ShadowAlertDialog;
 import org.robolectric.shadows.ShadowDialog;
 
 import java.util.Collections;
 import java.util.List;
 
+import androidx.appcompat.app.AlertDialog;
+
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {
-    SettingsShadowResources.class,
-    SettingsShadowResourcesImpl.class,
-    SettingsShadowResources.SettingsShadowTheme.class,
-    ShadowUtils.class
+        SettingsShadowResources.class,
+        SettingsShadowResourcesImpl.class,
+        SettingsShadowResources.SettingsShadowTheme.class,
+        ShadowUtils.class
 })
 public class SetupChooseLockPasswordTest {
 
@@ -82,7 +81,6 @@ public class SetupChooseLockPasswordTest {
     }
 
     @Test
-    @Ignore("b/111194289")
     public void createActivity_withShowOptionsButtonExtra_shouldShowButton() {
         SetupChooseLockPassword activity = createSetupChooseLockPassword();
         Button optionsButton = activity.findViewById(R.id.screen_lock_options);
@@ -101,12 +99,11 @@ public class SetupChooseLockPasswordTest {
     }
 
     @Test
-    @Ignore("b/111194289")
     public void allSecurityOptions_shouldBeShown_When_OptionsButtonIsClicked() {
         SetupChooseLockPassword activity = createSetupChooseLockPassword();
         activity.findViewById(R.id.screen_lock_options).performClick();
-        AlertDialog latestAlertDialog = ShadowAlertDialog.getLatestAlertDialog();
-        int count = Shadows.shadowOf(latestAlertDialog).getAdapter().getCount();
+        AlertDialog latestAlertDialog = (AlertDialog) ShadowDialog.getLatestDialog();
+        int count = latestAlertDialog.getListView().getCount();
         assertThat(count).named("List items shown").isEqualTo(3);
     }
 

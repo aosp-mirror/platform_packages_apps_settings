@@ -42,7 +42,8 @@ public class SettingsShadowResourcesImpl extends ShadowResourcesImpl {
         // The drawable item in switchbar_background.xml refers to a very recent color attribute
         // that Robolectric isn't yet aware of.
         // TODO: Remove this once Robolectric is updated.
-        if (id == R.drawable.switchbar_background) {
+        if (id == R.drawable.switchbar_background
+                || id == R.color.ripple_material_light) {
             return new ColorDrawable();
         } else if (id == R.drawable.ic_launcher_settings) {
             // ic_launcher_settings uses adaptive-icon, which is not supported by robolectric,
@@ -56,6 +57,7 @@ public class SettingsShadowResourcesImpl extends ShadowResourcesImpl {
             // progress_horizontal drawable
             id = android.R.drawable.progress_horizontal;
         }
+
         return super.loadDrawable(wrapper, value, id, density, theme);
     }
 }
