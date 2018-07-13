@@ -34,6 +34,8 @@ import com.android.settings.fuelgauge.batterytip.actions.OpenRestrictAppFragment
 import com.android.settings.fuelgauge.batterytip.actions.RestrictAppAction;
 import com.android.settings.fuelgauge.batterytip.actions.SmartBatteryAction;
 import com.android.settings.fuelgauge.batterytip.actions.UnrestrictAppAction;
+import com.android.settings.fuelgauge.batterytip.tips.AppLabelPredicate;
+import com.android.settings.fuelgauge.batterytip.tips.AppRestrictionPredicate;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
 import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
@@ -125,5 +127,18 @@ public class BatteryTipUtils {
                 extraIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         statsManager.setBroadcastSubscriber(pendingIntent,
                 StatsManagerConfig.ANOMALY_CONFIG_KEY, StatsManagerConfig.SUBSCRIBER_ID);
+    }
+
+    /**
+     * Detect and return anomaly apps after {@code timeAfterMs}
+     */
+    public static List<AppInfo> detectAnomalies(Context context, long timeAfterMs) {
+        final List<AppInfo> highUsageApps = BatteryDatabaseManager.getInstance(context)
+                .queryAllAnomalies(timeAfterMs, AnomalyDatabaseHelper.State.NEW);
+        // Remove it if it doesn't have label or been restricted
+        highUsageApps.removeIf(
+                new AppLabelPredicate(context).or(new AppRestrictionPredicate(context)));
+
+        return highUsageApps;
     }
 }
