@@ -574,6 +574,12 @@
                 android:value="true" />
         </activity>
 
+        <activity android:name=".localepicker.LocalePickerWithRegionActivity"
+                  android:excludeFromRecents="true"
+                  android:configChanges="orientation|keyboardHidden|screenSize"
+                  android:exported="false">
+        </activity>
+
         <activity
             android:name=".Settings$LanguageAndInputSettingsActivity"
             android:label="@string/language_settings"
