@@ -44,7 +44,6 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -71,6 +70,7 @@ import java.net.UnknownHostException;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.core.text.BidiFormatter;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;

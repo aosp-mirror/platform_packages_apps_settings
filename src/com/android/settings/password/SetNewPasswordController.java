@@ -34,9 +34,10 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.UserManager;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.Utils;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Business logic for {@link SetNewPasswordActivity}.

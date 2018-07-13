@@ -20,7 +20,6 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -32,6 +31,8 @@ import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 import com.google.android.collect.Lists;
 
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Provides options for selecting the default USB mode.

@@ -30,7 +30,6 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.applications.ProcStatsData;
 import com.android.settings.fuelgauge.batterytip.AnomalyConfigJobService;
 import com.android.settingslib.net.DataUsageController;
@@ -42,6 +41,8 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
+
+import androidx.annotation.VisibleForTesting;
 
 public class SettingsDumpService extends Service {
     @VisibleForTesting

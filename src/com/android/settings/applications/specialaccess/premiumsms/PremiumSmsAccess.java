@@ -23,7 +23,6 @@ import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.view.View;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.telephony.SmsUsageMonitor;
 import com.android.settings.R;
@@ -44,6 +43,7 @@ import com.android.settingslib.widget.FooterPreference;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.DropDownPreference;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
