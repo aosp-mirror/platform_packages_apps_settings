@@ -56,7 +56,7 @@ public class CurrentDreamPreferenceControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
 
-        mController = new CurrentDreamPreferenceController(mContext);
+        mController = new CurrentDreamPreferenceController(mContext, "test");
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
     }
 
