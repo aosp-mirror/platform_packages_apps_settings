@@ -16,7 +16,6 @@
 
 package com.android.settings;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -41,7 +40,7 @@ public class CustomListPreference extends ListPreference {
     }
 
     public CustomListPreference(Context context, AttributeSet attrs, int defStyleAttr,
-                                int defStyleRes) {
+            int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
@@ -65,7 +64,7 @@ public class CustomListPreference extends ListPreference {
      *
      * @param value the value the user is about to choose
      * @return the message to show in a confirmation dialog, or {@code null} to
-     *         not request confirmation
+     * not request confirmation
      */
     protected CharSequence getConfirmationMessage(String value) {
         return null;
@@ -205,7 +204,7 @@ public class CustomListPreference extends ListPreference {
     public static class ConfirmDialogFragment extends InstrumentedDialogFragment {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            return new AlertDialog.Builder(getActivity())
+            return new Builder(getActivity())
                     .setMessage(getArguments().getCharSequence(Intent.EXTRA_TEXT))
                     .setPositiveButton(android.R.string.ok, new OnClickListener() {
                         @Override
