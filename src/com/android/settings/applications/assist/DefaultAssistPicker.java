@@ -16,6 +16,7 @@
 
 package com.android.settings.applications.assist;
 
+import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -38,6 +39,8 @@ import com.android.settingslib.widget.CandidateInfo;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.VisibleForTesting;
+
 public class DefaultAssistPicker extends DefaultAppPickerFragment {
 
     private static final String TAG = "DefaultAssistPicker";
@@ -45,9 +48,12 @@ public class DefaultAssistPicker extends DefaultAppPickerFragment {
             new Intent(VoiceInteractionService.SERVICE_INTERFACE);
     private static final Intent ASSIST_ACTIVITY_PROBE =
             new Intent(Intent.ACTION_ASSIST);
-    private final List<Info> mAvailableAssistants = new ArrayList<>();
+
+    @VisibleForTesting
+    final List<Info> mAvailableAssistants = new ArrayList<>();
 
     private AssistUtils mAssistUtils;
+    private ActivityManager mActivityManager;
 
     @Override
     public int getMetricsCategory() {
@@ -63,6 +69,7 @@ public class DefaultAssistPicker extends DefaultAppPickerFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         mAssistUtils = new AssistUtils(context);
+        mActivityManager = context.getSystemService(ActivityManager.class);
     }
 
     @Override
@@ -132,7 +139,11 @@ public class DefaultAssistPicker extends DefaultAppPickerFragment {
         return mAssistUtils.getAssistComponentForUser(mUserId);
     }
 
-    private void addAssistServices() {
+    @VisibleForTesting
+    void addAssistServices() {
+        if (mActivityManager.isLowRamDevice()) {
+            return;
+        }
         final List<ResolveInfo> services = mPm.queryIntentServices(
                 ASSIST_SERVICE_PROBE, PackageManager.GET_META_DATA);
         for (ResolveInfo resolveInfo : services) {
