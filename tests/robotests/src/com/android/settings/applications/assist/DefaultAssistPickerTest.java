@@ -20,6 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
+import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.provider.Settings;
@@ -31,6 +32,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowActivityManager;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
@@ -48,10 +51,12 @@ public class DefaultAssistPickerTest {
 
     private Context mContext;
     private DefaultAssistPicker mPicker;
+    private ShadowActivityManager mShadowActivityManager;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
+        mShadowActivityManager = Shadow.extract(mContext.getSystemService(ActivityManager.class));
         mPicker = spy(new DefaultAssistPicker());
         mPicker.onAttach(mContext);
         doReturn(mContext).when(mPicker).getContext();
@@ -71,7 +76,7 @@ public class DefaultAssistPickerTest {
     }
 
     @Test
-    public void setDefaultAppKey_noAvaialbleAssit_shouldClearDefaultAssist() {
+    public void setDefaultAppKey_noAvailableAssist_shouldClearDefaultAssist() {
         final List<DefaultAssistPicker.Info> assistants = new ArrayList<>();
         ReflectionHelpers.setField(mPicker, "mAvailableAssistants", assistants);
         mPicker.setDefaultKey(sTestAssist.flattenToString());
@@ -93,5 +98,13 @@ public class DefaultAssistPickerTest {
                 Settings.Secure.ASSISTANT))
                 .isEmpty();
         assertThat(mPicker.getDefaultKey()).isNull();
+    }
+
+    @Test
+    public void addAssistService_lowRamDevice_shouldDoNothing() {
+        mShadowActivityManager.setIsLowRamDevice(true);
+        mPicker.addAssistServices();
+
+        assertThat(mPicker.mAvailableAssistants).hasSize(0);
     }
 }
