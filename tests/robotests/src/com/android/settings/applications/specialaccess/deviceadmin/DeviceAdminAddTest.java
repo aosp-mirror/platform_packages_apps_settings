@@ -17,9 +17,13 @@
 package com.android.settings.applications.specialaccess.deviceadmin;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -39,6 +43,7 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DeviceAdminAddTest {
@@ -47,7 +52,6 @@ public class DeviceAdminAddTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private DeviceAdminInfo mDeviceAdmin;
-    @Mock
     private BatteryUtils mBatteryUtils;
     private FakeFeatureFactory mFeatureFactory;
     private DeviceAdminAdd mDeviceAdminAdd;
@@ -56,6 +60,8 @@ public class DeviceAdminAddTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
+        mBatteryUtils = spy(BatteryUtils.getInstance(RuntimeEnvironment.application));
+        doNothing().when(mBatteryUtils).setForceAppStandby(anyInt(), anyString(), anyInt());
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mDeviceAdminAdd = Robolectric.buildActivity(DeviceAdminAdd.class).get();
 

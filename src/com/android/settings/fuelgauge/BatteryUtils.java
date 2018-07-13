@@ -407,6 +407,16 @@ public class BatteryUtils {
                 packageName) == AppOpsManager.MODE_IGNORED;
     }
 
+    public boolean clearForceAppStandby(String packageName) {
+        final int uid = getPackageUid(packageName);
+        if (uid != UID_NULL && isForceAppStandbyEnabled(uid, packageName)) {
+            setForceAppStandby(uid, packageName, AppOpsManager.MODE_ALLOWED);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public void initBatteryStatsHelper(BatteryStatsHelper statsHelper, Bundle bundle,
             UserManager userManager) {
         statsHelper.create(bundle);

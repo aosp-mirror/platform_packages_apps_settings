@@ -16,6 +16,7 @@
 
 package com.android.settings.applications.defaultapps;
 
+import android.app.AppOpsManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -25,6 +26,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.telephony.SmsApplication;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.widget.CandidateInfo;
 
@@ -74,6 +76,7 @@ public class DefaultSmsPicker extends DefaultAppPickerFragment {
     protected boolean setDefaultKey(String key) {
         if (!TextUtils.isEmpty(key) && !TextUtils.equals(key, getDefaultKey())) {
             mDefaultKeyUpdater.setDefaultApplication(getContext(), key);
+            mBatteryUtils.clearForceAppStandby(key);
             return true;
         }
         return false;

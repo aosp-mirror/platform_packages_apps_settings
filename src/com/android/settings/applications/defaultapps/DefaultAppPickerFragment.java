@@ -28,6 +28,7 @@ import android.util.Pair;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settings.widget.RadioButtonPreference;
 import com.android.settingslib.applications.DefaultAppInfo;
@@ -43,11 +44,13 @@ import androidx.fragment.app.FragmentActivity;
 public abstract class DefaultAppPickerFragment extends RadioButtonPickerFragment {
 
     protected PackageManager mPm;
+    protected BatteryUtils mBatteryUtils;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mPm = context.getPackageManager();
+        mBatteryUtils = BatteryUtils.getInstance(context);
     }
 
     @Override

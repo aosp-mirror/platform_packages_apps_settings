@@ -28,6 +28,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserManager;
 
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -52,6 +53,8 @@ public class DefaultSmsPickerTest {
     private DefaultSmsPicker.DefaultKeyUpdater mDefaultKeyUpdater;
     @Mock
     private PackageManager mPackageManager;
+    @Mock
+    private BatteryUtils mBatteryUtils;
 
     private DefaultSmsPicker mPicker;
 
@@ -64,6 +67,7 @@ public class DefaultSmsPickerTest {
 
         ReflectionHelpers.setField(mPicker, "mPm", mPackageManager);
         ReflectionHelpers.setField(mPicker, "mDefaultKeyUpdater", mDefaultKeyUpdater);
+        ReflectionHelpers.setField(mPicker, "mBatteryUtils", mBatteryUtils);
         doReturn(RuntimeEnvironment.application).when(mPicker).getContext();
     }
 
@@ -79,5 +83,12 @@ public class DefaultSmsPickerTest {
         mPicker.getDefaultKey();
 
         verify(mDefaultKeyUpdater).getDefaultApplication(any(Context.class));
+    }
+
+    @Test
+    public void setDefaultKey_shouldUnrestrictApp() {
+        mPicker.setDefaultKey(TEST_APP_KEY);
+
+        verify(mBatteryUtils).clearForceAppStandby(TEST_APP_KEY);
     }
 }

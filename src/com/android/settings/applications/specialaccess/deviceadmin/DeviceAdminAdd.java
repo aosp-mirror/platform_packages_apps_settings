@@ -455,10 +455,7 @@ public class DeviceAdminAdd extends Activity {
     void unrestrictAppIfPossible(BatteryUtils batteryUtils) {
         // Unrestrict admin app if it is already been restricted
         final String packageName = mDeviceAdmin.getComponent().getPackageName();
-        final int uid = batteryUtils.getPackageUid(packageName);
-        if (batteryUtils.isForceAppStandbyEnabled(uid, packageName)) {
-            batteryUtils.setForceAppStandby(uid, packageName, AppOpsManager.MODE_ALLOWED);
-        }
+        batteryUtils.clearForceAppStandby(packageName);
     }
 
     void continueRemoveAction(CharSequence msg) {

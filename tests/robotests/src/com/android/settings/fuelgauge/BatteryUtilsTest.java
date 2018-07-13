@@ -653,4 +653,35 @@ public class BatteryUtilsTest {
         assertThat(mBatteryUtils.shouldHideAnomaly(mPowerWhitelistBackend, UID,
                 mAnomalyInfo)).isTrue();
     }
+
+    @Test
+    public void clearForceAppStandby_appRestricted_clearAndReturnTrue() {
+        when(mBatteryUtils.getPackageUid(HIGH_SDK_PACKAGE)).thenReturn(UID);
+        when(mAppOpsManager.checkOpNoThrow(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID,
+                HIGH_SDK_PACKAGE)).thenReturn(AppOpsManager.MODE_IGNORED);
+
+        assertThat(mBatteryUtils.clearForceAppStandby(HIGH_SDK_PACKAGE)).isTrue();
+        verify(mAppOpsManager).setMode(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID,
+                HIGH_SDK_PACKAGE, AppOpsManager.MODE_ALLOWED);
+    }
+
+    @Test
+    public void clearForceAppStandby_appInvalid_returnFalse() {
+        when(mBatteryUtils.getPackageUid(PACKAGE_NAME)).thenReturn(BatteryUtils.UID_NULL);
+
+        assertThat(mBatteryUtils.clearForceAppStandby(PACKAGE_NAME)).isFalse();
+        verify(mAppOpsManager, never()).setMode(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID,
+                PACKAGE_NAME, AppOpsManager.MODE_ALLOWED);
+    }
+
+    @Test
+    public void clearForceAppStandby_appUnrestricted_returnFalse() {
+        when(mBatteryUtils.getPackageUid(PACKAGE_NAME)).thenReturn(UID);
+        when(mAppOpsManager.checkOpNoThrow(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID,
+                PACKAGE_NAME)).thenReturn(AppOpsManager.MODE_ALLOWED);
+
+        assertThat(mBatteryUtils.clearForceAppStandby(PACKAGE_NAME)).isFalse();
+        verify(mAppOpsManager, never()).setMode(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID,
+                PACKAGE_NAME, AppOpsManager.MODE_ALLOWED);
+    }
 }
