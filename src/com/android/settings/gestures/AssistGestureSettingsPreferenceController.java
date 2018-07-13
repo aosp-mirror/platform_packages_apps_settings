@@ -22,10 +22,10 @@ import static android.provider.Settings.Secure.ASSIST_GESTURE_SILENCE_ALERTS_ENA
 import android.content.Context;
 import android.provider.Settings;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

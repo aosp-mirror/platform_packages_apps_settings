@@ -23,7 +23,7 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.util.IconDrawableFactory;
 
-import com.android.internal.annotations.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;

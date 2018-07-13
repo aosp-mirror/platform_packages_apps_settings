@@ -23,7 +23,6 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.util.IconDrawableFactory;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -42,6 +41,7 @@ import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
 import java.util.List;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;

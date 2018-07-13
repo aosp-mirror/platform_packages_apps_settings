@@ -22,12 +22,12 @@ import android.media.AudioManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.accounts.AccountRestrictionHelper;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SliderPreferenceController;
 import com.android.settingslib.RestrictedPreference;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 /**
