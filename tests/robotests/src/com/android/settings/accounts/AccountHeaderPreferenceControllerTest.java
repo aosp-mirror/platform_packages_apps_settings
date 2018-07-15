@@ -46,7 +46,7 @@ import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
 import androidx.lifecycle.LifecycleOwner;
-import androidx.preference.PreferenceFragment;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -56,7 +56,7 @@ public class AccountHeaderPreferenceControllerTest {
     @Mock
     private Activity mActivity;
     @Mock
-    private PreferenceFragment mFragment;
+    private PreferenceFragmentCompat mFragment;
     @Mock
     private PreferenceScreen mScreen;
 

@@ -16,7 +16,7 @@
 
 package com.android.settings.applications.manageapplications;
 
-import android.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 /**
  * FileViewHolderController handles adapting the AppViewHolder to work as a general purpose

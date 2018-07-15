@@ -27,7 +27,6 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
-import android.app.Activity;
 import android.content.Context;
 import android.net.NetworkPolicyManager;
 
@@ -48,6 +47,8 @@ import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
+import androidx.fragment.app.FragmentActivity;
+
 @Config(shadows = {
     SettingsShadowResourcesImpl.class,
     SettingsShadowResources.SettingsShadowTheme.class,
@@ -63,7 +64,7 @@ public class DataUsageSummaryTest {
     @Mock
     private NetworkPolicyManager mNetworkPolicyManager;
     private Context mContext;
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     private SummaryLoader.SummaryProvider mSummaryProvider;
 
     /**
@@ -78,7 +79,7 @@ public class DataUsageSummaryTest {
         shadowContext.setSystemService(Context.NETWORK_POLICY_SERVICE, mNetworkPolicyManager);
 
         mContext = shadowContext.getApplicationContext();
-        mActivity = spy(Robolectric.buildActivity(Activity.class).get());
+        mActivity = spy(Robolectric.buildActivity(FragmentActivity.class).get());
 
         mSummaryProvider = DataUsageSummary.SUMMARY_PROVIDER_FACTORY
                 .createSummaryProvider(mActivity, mSummaryLoader);

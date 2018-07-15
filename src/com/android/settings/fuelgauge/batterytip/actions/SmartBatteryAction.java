@@ -16,14 +16,14 @@
 
 package com.android.settings.fuelgauge.batterytip.actions;
 
-import android.app.Fragment;
-
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.fuelgauge.SmartBatterySettings;
 import com.android.settingslib.core.instrumentation.Instrumentable;
+
+import androidx.fragment.app.Fragment;
 
 public class SmartBatteryAction extends BatteryTipAction {
     private SettingsActivity mSettingsActivity;

@@ -20,7 +20,6 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
-import static org.robolectric.Shadows.shadowOf;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -39,6 +38,7 @@ import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
 import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.testutils.FragmentTestUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -47,9 +47,9 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowAlertDialog;
 import org.robolectric.shadows.ShadowDialog;
-import org.robolectric.util.FragmentTestUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -152,10 +152,10 @@ public class RestrictedAppDetailsTest {
         final BatteryTipDialogFragment dialogFragment = mRestrictedAppDetails.createDialogFragment(
                 mAppInfo, true);
 
-        FragmentTestUtil.startFragment(dialogFragment);
+        FragmentTestUtils.startFragment(dialogFragment);
 
         final AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
-        ShadowAlertDialog shadowDialog = shadowOf(dialog);
+        ShadowAlertDialog shadowDialog = Shadows.shadowOf(dialog);
         assertThat(shadowDialog.getTitle()).isEqualTo("Restrict app?");
     }
 
@@ -164,10 +164,10 @@ public class RestrictedAppDetailsTest {
         final BatteryTipDialogFragment dialogFragment = mRestrictedAppDetails.createDialogFragment(
                 mAppInfo, false);
 
-        FragmentTestUtil.startFragment(dialogFragment);
+        FragmentTestUtils.startFragment(dialogFragment);
 
         final AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
-        ShadowAlertDialog shadowDialog = shadowOf(dialog);
+        ShadowAlertDialog shadowDialog = Shadows.shadowOf(dialog);
         assertThat(shadowDialog.getTitle()).isEqualTo("Remove restriction?");
     }
 

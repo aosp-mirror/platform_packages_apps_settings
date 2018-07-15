@@ -22,7 +22,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
 
-import androidx.preference.PreferenceFragment;
+import androidx.preference.PreferenceFragmentCompat;
 
 public class WifiPickerActivity extends SettingsActivity implements ButtonBarHandler {
 
@@ -46,7 +46,7 @@ public class WifiPickerActivity extends SettingsActivity implements ButtonBarHan
         return false;
     }
 
-    /* package */ Class<? extends PreferenceFragment> getWifiSettingsClass() {
+    /* package */ Class<? extends PreferenceFragmentCompat> getWifiSettingsClass() {
         return WifiSettings.class;
     }
 }

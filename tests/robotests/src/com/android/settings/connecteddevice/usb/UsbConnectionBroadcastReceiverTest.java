@@ -16,7 +16,6 @@
 package com.android.settings.connecteddevice.usb;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;

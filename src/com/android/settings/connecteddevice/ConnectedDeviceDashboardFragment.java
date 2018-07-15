@@ -66,7 +66,7 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle());
+        return buildPreferenceControllers(context, getSettingsLifecycle());
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,

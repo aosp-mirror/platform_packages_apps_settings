@@ -16,9 +16,6 @@
 
 package com.android.settings;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,6 +24,10 @@ import android.util.FeatureFlagUtils;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.homepage.HomepageFragment;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 public class SettingsHomepageActivity extends SettingsBaseActivity {
 
@@ -51,10 +52,10 @@ public class SettingsHomepageActivity extends SettingsBaseActivity {
     /**
      * Switch to a specific Fragment
      */
-    public static void switchToFragment(Activity activity, int id, String fragmentName) {
+    public static void switchToFragment(FragmentActivity activity, int id, String fragmentName) {
         final Fragment f = Fragment.instantiate(activity, fragmentName, null /* args */);
 
-        FragmentManager manager = activity.getFragmentManager();
+        FragmentManager manager = activity.getSupportFragmentManager();
         manager.beginTransaction().replace(id, f).commitAllowingStateLoss();
         manager.executePendingTransactions();
     }

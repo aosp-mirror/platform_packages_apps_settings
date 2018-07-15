@@ -54,7 +54,7 @@ public class HelpMenuControllerTest {
 
         HelpMenuController.init(mHost);
 
-        mHost.getLifecycle().onCreateOptionsMenu(null /* menu */, null /* inflater */);
+        mHost.getSettingsLifecycle().onCreateOptionsMenu(null /* menu */, null /* inflater */);
 
         verify(mContext).getString(123);
     }
@@ -63,13 +63,12 @@ public class HelpMenuControllerTest {
     public void onCreateOptionsMenu_noArgumentOverride_shouldPrepareHelpUsingProvider() {
         HelpMenuController.init(mHost);
 
-        mHost.getLifecycle().onCreateOptionsMenu(null /* menu */, null /* inflater */);
+        mHost.getSettingsLifecycle().onCreateOptionsMenu(null /* menu */, null /* inflater */);
 
         verify(mContext).getString(mHost.getHelpResource());
     }
 
-    private static class TestFragment
-        extends ObservablePreferenceFragment
+    private static class TestFragment extends ObservablePreferenceFragment
         implements HelpResourceProvider {
 
         @Override

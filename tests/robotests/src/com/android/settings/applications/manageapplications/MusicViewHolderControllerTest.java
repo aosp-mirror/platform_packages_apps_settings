@@ -21,7 +21,6 @@ import static org.mockito.Matchers.nullable;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
@@ -42,6 +41,8 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+
+import androidx.fragment.app.Fragment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class MusicViewHolderControllerTest {

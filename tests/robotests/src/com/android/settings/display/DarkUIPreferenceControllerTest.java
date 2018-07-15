@@ -23,13 +23,11 @@ import static org.mockito.Mockito.when;
 import android.app.UiModeManager;
 import android.content.Context;
 
-import com.android.settings.display.DarkUIPreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;

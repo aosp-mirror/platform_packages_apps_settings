@@ -15,11 +15,12 @@
  */
 package com.android.settings.users;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.os.UserHandle;
 
 import com.android.settings.Utils;
+
+import androidx.fragment.app.Fragment;
 
 public class AutoSyncWorkDataPreferenceController extends AutoSyncPersonalDataPreferenceController {
 

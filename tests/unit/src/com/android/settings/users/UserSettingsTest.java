@@ -24,9 +24,9 @@ import android.support.test.filters.SmallTest;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject;
-import android.support.test.uiautomator.UiSelector;
-import android.support.test.uiautomator.UiScrollable;
 import android.support.test.uiautomator.UiObjectNotFoundException;
+import android.support.test.uiautomator.UiScrollable;
+import android.support.test.uiautomator.UiSelector;
 
 import org.junit.Before;
 import org.junit.Test;

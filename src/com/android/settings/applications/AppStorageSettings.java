@@ -25,12 +25,10 @@ import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.AppGlobals;
 import android.app.GrantedUriPermission;
-import android.app.LoaderManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.Loader;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageDataObserver;
 import android.content.pm.PackageManager;
@@ -66,6 +64,8 @@ import java.util.Objects;
 import java.util.TreeMap;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 

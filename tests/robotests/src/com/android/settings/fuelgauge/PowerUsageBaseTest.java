@@ -22,7 +22,6 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
-import android.app.LoaderManager;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -39,6 +38,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
 import java.util.List;
+
+import androidx.loader.app.LoaderManager;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowDashboardFragment.class)

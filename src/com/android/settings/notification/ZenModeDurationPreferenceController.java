@@ -16,13 +16,13 @@
 
 package com.android.settings.notification;
 
-import android.app.FragmentManager;
 import android.content.Context;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

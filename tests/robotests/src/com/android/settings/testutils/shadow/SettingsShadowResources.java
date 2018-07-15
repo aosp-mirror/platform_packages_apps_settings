@@ -2,7 +2,6 @@ package com.android.settings.testutils.shadow;
 
 import static android.util.TypedValue.TYPE_REFERENCE;
 import static org.robolectric.RuntimeEnvironment.application;
-import static org.robolectric.Shadows.shadowOf;
 import static org.robolectric.shadow.api.Shadow.directlyOn;
 
 import android.annotation.DimenRes;
@@ -21,6 +20,7 @@ import android.util.TypedValue;
 import com.android.settings.R;
 
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.android.XmlResourceParserImpl;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
@@ -189,7 +189,7 @@ public class SettingsShadowResources extends ShadowResources {
         @RealObject
         Theme realTheme;
 
-        private ShadowAssetManager mAssetManager = shadowOf(
+        private ShadowAssetManager mAssetManager = Shadows.shadowOf(
                 RuntimeEnvironment.application.getAssets());
 
         @Implementation

@@ -24,22 +24,16 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.pm.UserInfo;
 import android.content.SharedPreferences;
+import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.os.UserManager;
 import android.provider.Settings;
 
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
-
 import com.android.settings.R;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.testutils.Robolectric;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedPreference;
 
@@ -49,9 +43,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
+
+import androidx.fragment.app.FragmentActivity;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class UserSettingsTest {
@@ -70,7 +70,7 @@ public class UserSettingsTest {
     @Mock
     private SummaryLoader mSummaryLoader;
 
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     private Context mContext;
     private UserSettings mFragment;
     private UserCapabilities mUserCapabilities;
@@ -79,7 +79,7 @@ public class UserSettingsTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mActivity = spy(Robolectric.buildActivity(Activity.class).get());
+        mActivity = spy(Robolectric.buildActivity(FragmentActivity.class).get());
         mContext = spy(RuntimeEnvironment.application);
         mFragment = spy(new UserSettings());
         ReflectionHelpers.setField(mFragment, "mAddUserWhenLockedPreferenceController",

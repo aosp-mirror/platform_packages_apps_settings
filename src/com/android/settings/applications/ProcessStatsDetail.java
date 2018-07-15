@@ -129,7 +129,7 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment {
         final Activity activity = getActivity();
         final Preference pref = EntityHeaderController
                 .newInstance(activity, this, null /* appHeader */)
-                .setRecyclerView(getListView(), getLifecycle())
+                .setRecyclerView(getListView(), getSettingsLifecycle())
                 .setIcon(mApp.mUiTargetApp != null
                         ? IconDrawableFactory.newInstance(activity).getBadgedIcon(mApp.mUiTargetApp)
                         : new ColorDrawable(0))

@@ -166,7 +166,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // Set up master switch
         mSwitchBar = ((SettingsActivity) getActivity()).getSwitchBar();
         mSwitchBarController = new DevelopmentSwitchBarController(
-                this /* DevelopmentSettings */, mSwitchBar, mIsAvailable, getLifecycle());
+                this /* DevelopmentSettings */, mSwitchBar, mIsAvailable,
+                getSettingsLifecycle());
         mSwitchBar.show();
 
         // Restore UI state based on whether developer options is enabled
@@ -318,8 +319,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
             mPreferenceControllers = new ArrayList<>();
             return null;
         }
-        mPreferenceControllers = buildPreferenceControllers(context, getActivity(), getLifecycle(),
-                this /* devOptionsDashboardFragment */,
+        mPreferenceControllers = buildPreferenceControllers(context, getActivity(),
+                getSettingsLifecycle(), this /* devOptionsDashboardFragment */,
                 new BluetoothA2dpConfigStore());
         return mPreferenceControllers;
     }

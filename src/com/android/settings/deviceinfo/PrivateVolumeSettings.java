@@ -18,7 +18,6 @@ package com.android.settings.deviceinfo;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -66,6 +65,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
@@ -203,7 +203,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         setTitle();
 
         // Valid options may have changed
-        getFragmentManager().invalidateOptionsMenu();
+        getActivity().invalidateOptionsMenu();
 
         final Context context = getActivity();
         final PreferenceScreen screen = getPreferenceScreen();

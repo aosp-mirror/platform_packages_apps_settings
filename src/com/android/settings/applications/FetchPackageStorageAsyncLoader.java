@@ -26,14 +26,14 @@ import android.util.Log;
 import com.android.internal.util.Preconditions;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.applications.StorageStatsSource.AppStorageStats;
-import com.android.settingslib.utils.AsyncLoader;
+import com.android.settingslib.utils.AsyncLoaderCompat;
 
 import java.io.IOException;
 
 /**
  * Fetches the storage stats using the StorageStatsManager for a given package and user tuple.
  */
-public class FetchPackageStorageAsyncLoader extends AsyncLoader<AppStorageStats> {
+public class FetchPackageStorageAsyncLoader extends AsyncLoaderCompat<AppStorageStats> {
     private static final String TAG = "FetchPackageStorage";
     private final StorageStatsSource mSource;
     private final ApplicationInfo mInfo;

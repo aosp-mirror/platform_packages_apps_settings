@@ -23,13 +23,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 
-import com.android.settingslib.CustomDialogPreference;
+import com.android.settingslib.CustomDialogPreferenceCompat;
 
 /**
  * Based on frameworks/base/core/java/android/preference/SeekBarDialogPreference.java
  * except uses support lib preferences.
  */
-public class SeekBarDialogPreference extends CustomDialogPreference {
+public class SeekBarDialogPreference extends CustomDialogPreferenceCompat {
     private final Drawable mMyIcon;
 
     public SeekBarDialogPreference(Context context, AttributeSet attrs) {

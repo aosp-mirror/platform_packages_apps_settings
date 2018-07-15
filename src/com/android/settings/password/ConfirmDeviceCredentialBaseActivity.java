@@ -16,7 +16,6 @@
 
 package com.android.settings.password;
 
-import android.app.Fragment;
 import android.app.KeyguardManager;
 import android.os.Bundle;
 import android.os.UserManager;
@@ -28,6 +27,8 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
+
+import androidx.fragment.app.Fragment;
 
 public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivity {
 
@@ -123,7 +124,7 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
     }
 
     private ConfirmDeviceCredentialBaseFragment getFragment() {
-        Fragment fragment = getFragmentManager().findFragmentById(R.id.main_content);
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.main_content);
         if (fragment != null && fragment instanceof ConfirmDeviceCredentialBaseFragment) {
             return (ConfirmDeviceCredentialBaseFragment) fragment;
         }

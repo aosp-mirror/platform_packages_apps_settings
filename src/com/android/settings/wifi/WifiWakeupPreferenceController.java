@@ -18,7 +18,6 @@ package com.android.settings.wifi;
 
 import static com.android.settings.wifi.ConfigureWifiSettings.WIFI_WAKEUP_REQUEST_CODE;
 
-import android.app.Fragment;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -33,6 +32,7 @@ import com.android.settings.utils.AnnotationSpan;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;

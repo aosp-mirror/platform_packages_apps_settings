@@ -16,10 +16,8 @@
 
 package com.android.settings.wifi;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -32,10 +30,13 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
+
 /**
  * This activity requests users permission to allow scanning even when Wi-Fi is turned off
  */
-public class WifiScanModeActivity extends Activity {
+public class WifiScanModeActivity extends FragmentActivity {
     private DialogFragment mDialog;
     private String mApp;
 
@@ -66,7 +67,7 @@ public class WifiScanModeActivity extends Activity {
     private void createDialog() {
         if (mDialog == null) {
             mDialog = AlertDialogFragment.newInstance(mApp);
-            mDialog.show(getFragmentManager(), "dialog");
+            mDialog.show(getSupportFragmentManager(), "dialog");
         }
     }
 

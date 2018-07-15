@@ -20,7 +20,6 @@ import android.content.Context;
 import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
-import android.util.Log;
 
 import com.android.settings.core.FeatureFlags;
 

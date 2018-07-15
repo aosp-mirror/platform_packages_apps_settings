@@ -26,7 +26,6 @@ import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_REPEAT_CA
 import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_SYSTEM;
 
 import android.app.AutomaticZenRule;
-import android.app.FragmentManager;
 import android.app.NotificationManager;
 import android.app.NotificationManager.Policy;
 import android.content.Context;
@@ -51,6 +50,7 @@ import java.util.Map.Entry;
 import java.util.function.Predicate;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.FragmentManager;
 
 @SearchIndexable
 public class ZenModeSettings extends ZenModeSettingsBase {
@@ -71,7 +71,7 @@ public class ZenModeSettings extends ZenModeSettingsBase {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle(), getFragmentManager());
+        return buildPreferenceControllers(context, getSettingsLifecycle(), getFragmentManager());
     }
 
     @Override

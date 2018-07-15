@@ -71,7 +71,7 @@ public class DateTimeSettings extends DashboardFragment implements
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        getLifecycle().addObserver(new TimeChangeListenerMixin(context, this));
+        getSettingsLifecycle().addObserver(new TimeChangeListenerMixin(context, this));
     }
 
     @Override

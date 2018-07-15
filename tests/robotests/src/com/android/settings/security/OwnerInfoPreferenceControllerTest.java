@@ -26,8 +26,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 
 import com.android.internal.widget.LockPatternUtils;
@@ -44,7 +42,9 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
-import androidx.preference.PreferenceFragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
@@ -52,7 +52,7 @@ import androidx.preference.PreferenceScreen;
 public class OwnerInfoPreferenceControllerTest {
 
     @Mock
-    private PreferenceFragment mFragment;
+    private PreferenceFragmentCompat mFragment;
     @Mock
     private PreferenceScreen mScreen;
     @Mock

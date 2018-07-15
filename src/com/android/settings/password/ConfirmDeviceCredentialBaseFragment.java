@@ -22,8 +22,6 @@ import android.app.ActivityManager;
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.FragmentManager;
 import android.app.IActivityManager;
 import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
@@ -52,8 +50,11 @@ import android.widget.TextView;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.biometrics.fingerprint.FingerprintUiHelper;
+import com.android.settings.core.InstrumentedFragment;
+
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 
 /**
  * Base fragment to be shared for PIN/Pattern/Password confirmation fragments.

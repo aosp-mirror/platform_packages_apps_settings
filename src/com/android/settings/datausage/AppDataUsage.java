@@ -17,10 +17,8 @@ package com.android.settings.datausage;
 import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 
 import android.app.Activity;
-import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.Loader;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -47,11 +45,13 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.net.ChartData;
-import com.android.settingslib.net.ChartDataLoader;
+import com.android.settingslib.net.ChartDataLoaderCompat;
 import com.android.settingslib.net.UidDetail;
 import com.android.settingslib.net.UidDetailProvider;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
@@ -222,7 +222,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
         }
         mPolicy = services.mPolicyEditor.getPolicy(mTemplate);
         getLoaderManager().restartLoader(LOADER_CHART_DATA,
-                ChartDataLoader.buildArgs(mTemplate, mAppItem), mChartDataCallbacks);
+                ChartDataLoaderCompat.buildArgs(mTemplate, mAppItem), mChartDataCallbacks);
         updatePrefs();
     }
 
@@ -345,7 +345,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
         final Activity activity = getActivity();
         final Preference pref = EntityHeaderController
                 .newInstance(activity, this, null /* header */)
-                .setRecyclerView(getListView(), getLifecycle())
+                .setRecyclerView(getListView(), getSettingsLifecycle())
                 .setUid(uid)
                 .setHasAppInfoLink(showInfoButton)
                 .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
@@ -383,7 +383,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
             new LoaderManager.LoaderCallbacks<ChartData>() {
         @Override
         public Loader<ChartData> onCreateLoader(int id, Bundle args) {
-            return new ChartDataLoader(getActivity(), mStatsSession, args);
+            return new ChartDataLoaderCompat(getActivity(), mStatsSession, args);
         }
 
         @Override

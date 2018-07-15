@@ -26,7 +26,6 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.robolectric.Shadows.shadowOf;
 
 import android.app.Activity;
 import android.content.Context;
@@ -51,11 +50,12 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowPowerManager;
 
 import androidx.lifecycle.LifecycleOwner;
-import androidx.preference.PreferenceFragment;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -75,7 +75,7 @@ public class BatteryHeaderPreferenceControllerTest {
     @Mock
     private Activity mActivity;
     @Mock
-    private PreferenceFragment mPreferenceFragment;
+    private PreferenceFragmentCompat mPreferenceFragment;
     @Mock
     private PreferenceScreen mPreferenceScreen;
     @Mock
@@ -199,7 +199,7 @@ public class BatteryHeaderPreferenceControllerTest {
     public void testQuickUpdateHeaderPreference_showPowerSave() {
         boolean testValues[] = {false, true};
 
-        ShadowPowerManager shadowPowerManager = shadowOf(mPowerManager);
+        ShadowPowerManager shadowPowerManager = Shadows.shadowOf(mPowerManager);
         for (boolean value : testValues) {
             shadowPowerManager.setIsPowerSaveMode(value);
             mController.quickUpdateHeaderPreference();

@@ -47,7 +47,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowCardView;
 import com.android.settingslib.Utils;
-import com.android.settingslib.suggestions.SuggestionControllerMixin;
+import com.android.settingslib.suggestions.SuggestionControllerMixinCompat;
 import com.android.settingslib.utils.IconCache;
 
 import org.junit.Before;
@@ -70,7 +70,7 @@ public class SuggestionAdapterTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private SettingsActivity mActivity;
     @Mock
-    private SuggestionControllerMixin mSuggestionControllerMixin;
+    private SuggestionControllerMixinCompat mSuggestionControllerMixin;
     @Mock
     private Resources mResources;
     @Mock

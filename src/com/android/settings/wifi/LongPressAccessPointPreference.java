@@ -15,12 +15,12 @@
  */
 package com.android.settings.wifi;
 
-import android.app.Fragment;
 import android.content.Context;
 
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPointPreference;
 
+import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceViewHolder;
 
 public class LongPressAccessPointPreference extends AccessPointPreference {

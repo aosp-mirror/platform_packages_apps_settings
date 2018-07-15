@@ -17,7 +17,6 @@
 package com.android.settings.applications.appops;
 
 import android.annotation.Nullable;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.preference.PreferenceFrameLayout;
 import android.view.LayoutInflater;
@@ -27,6 +26,8 @@ import android.view.ViewGroup;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedPreferenceFragment;
+
+import androidx.fragment.app.FragmentTransaction;
 
 public class BackgroundCheckSummary extends InstrumentedPreferenceFragment {
     // layout inflater object used to inflate views

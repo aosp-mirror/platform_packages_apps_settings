@@ -23,7 +23,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.robolectric.RuntimeEnvironment.application;
 
-import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
@@ -42,12 +41,14 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.shadows.ShadowToast;
 
+import androidx.fragment.app.FragmentActivity;
+
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResources.SettingsShadowTheme.class)
 public class ZenModeScheduleRuleSettingsTest {
 
     @Mock
-    private Activity mActivity;
+    private FragmentActivity mActivity;
 
     @Mock
     private Intent mIntent;

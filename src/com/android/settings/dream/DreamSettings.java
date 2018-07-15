@@ -132,7 +132,6 @@ public class DreamSettings extends DashboardFragment {
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new CurrentDreamPreferenceController(context));
         controllers.add(new WhenToDreamPreferenceController(context));
         controllers.add(new StartNowPreferenceController(context));
         return controllers;

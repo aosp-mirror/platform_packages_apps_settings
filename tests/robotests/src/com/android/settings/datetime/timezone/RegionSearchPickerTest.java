@@ -21,8 +21,6 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.widget.Filter;
 import android.widget.LinearLayout;
 
@@ -30,13 +28,13 @@ import com.android.settings.datetime.timezone.BaseTimeZoneAdapter.AdapterItem;
 import com.android.settings.datetime.timezone.BaseTimeZoneAdapter.ItemViewHolder;
 import com.android.settings.datetime.timezone.RegionSearchPicker.RegionItem;
 import com.android.settings.datetime.timezone.model.TimeZoneData;
+import com.android.settings.testutils.Robolectric;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import libcore.util.CountryZonesFinder;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
@@ -46,6 +44,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {
@@ -141,10 +142,10 @@ public class RegionSearchPickerTest {
     @Implements(Fragment.class)
     public static class ShadowFragment {
 
-        private Activity mActivity = Robolectric.setupActivity(Activity.class);
+        private FragmentActivity mActivity = Robolectric.setupActivity(FragmentActivity.class);
 
         @Implementation
-        public final Activity getActivity() {
+        public final FragmentActivity getActivity() {
             return mActivity;
         }
     }

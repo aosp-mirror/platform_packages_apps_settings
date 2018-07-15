@@ -18,7 +18,6 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.ColorInversionPreferenceController.OFF;
 import static com.android.settings.accessibility.ColorInversionPreferenceController.ON;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;

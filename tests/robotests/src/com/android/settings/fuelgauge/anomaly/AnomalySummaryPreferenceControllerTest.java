@@ -22,8 +22,6 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 
 import com.android.settings.SettingsActivity;
@@ -40,6 +38,8 @@ import org.robolectric.RuntimeEnvironment;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

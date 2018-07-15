@@ -18,13 +18,14 @@ package com.android.settings.development;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+
+import androidx.fragment.app.FragmentManager;
 
 public class EnableDevelopmentSettingWarningDialog extends InstrumentedDialogFragment
         implements DialogInterface.OnClickListener {
@@ -36,7 +37,7 @@ public class EnableDevelopmentSettingWarningDialog extends InstrumentedDialogFra
         final EnableDevelopmentSettingWarningDialog dialog =
                 new EnableDevelopmentSettingWarningDialog();
         dialog.setTargetFragment(host, 0 /* requestCode */);
-        final FragmentManager manager = host.getActivity().getFragmentManager();
+        final FragmentManager manager = host.getActivity().getSupportFragmentManager();
         if (manager.findFragmentByTag(TAG) == null) {
             dialog.show(manager, TAG);
         }

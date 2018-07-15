@@ -26,8 +26,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.ActionBar;
-import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -57,6 +55,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -65,7 +65,7 @@ public class EntityHeaderControllerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     @Mock
     private Fragment mFragment;
 
@@ -187,7 +187,7 @@ public class EntityHeaderControllerTest {
     public void bindButton_noAppInfo_shouldNotAttachClickListener() {
         final View appLinks =
                 mLayoutInflater.inflate(R.layout.settings_entity_header, null /* root */);
-        final Activity activity = mock(Activity.class);
+        final FragmentActivity activity = mock(FragmentActivity.class);
         when(mFragment.getActivity()).thenReturn(activity);
 
         mController = EntityHeaderController.newInstance(mActivity, mFragment, appLinks);
@@ -212,7 +212,7 @@ public class EntityHeaderControllerTest {
     public void bindButton_hasAppInfo_shouldAttachClickListener() {
         final View appLinks =
                 mLayoutInflater.inflate(R.layout.settings_entity_header, null /* root */);
-        final Activity activity = mock(Activity.class);
+        final FragmentActivity activity = mock(FragmentActivity.class);
         when(mFragment.getActivity()).thenReturn(activity);
         when(mContext.getString(eq(R.string.application_info_label))).thenReturn("App Info");
 
@@ -234,7 +234,7 @@ public class EntityHeaderControllerTest {
     public void iconContentDescription_shouldWorkWithSetIcon() {
         final View view =
                 mLayoutInflater.inflate(R.layout.settings_entity_header, null /* root */);
-        when(mFragment.getActivity()).thenReturn(mock(Activity.class));
+        when(mFragment.getActivity()).thenReturn(mock(FragmentActivity.class));
         mController = EntityHeaderController.newInstance(mActivity, mFragment, view);
         String description = "Fake Description";
         mController.setIcon(mShadowContext.getDrawable(R.drawable.ic_add));
@@ -248,7 +248,7 @@ public class EntityHeaderControllerTest {
     public void iconContentDescription_shouldWorkWithoutSetIcon() {
         final View view = mLayoutInflater
                 .inflate(R.layout.settings_entity_header, null /* root */);
-        when(mFragment.getActivity()).thenReturn(mock(Activity.class));
+        when(mFragment.getActivity()).thenReturn(mock(FragmentActivity.class));
         mController = EntityHeaderController.newInstance(mActivity, mFragment, view);
         String description = "Fake Description";
         mController.setIconContentDescription(description);

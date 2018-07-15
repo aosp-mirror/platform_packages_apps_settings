@@ -17,7 +17,6 @@
 package com.android.settings.inputmethod;
 
 
-import android.app.Fragment;
 import android.content.Context;
 import android.hardware.input.InputDeviceIdentifier;
 import android.hardware.input.InputManager;
@@ -33,6 +32,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;

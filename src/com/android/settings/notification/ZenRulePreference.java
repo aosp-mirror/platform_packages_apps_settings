@@ -17,7 +17,6 @@
 package com.android.settings.notification;
 
 import android.app.AutomaticZenRule;
-import android.app.Fragment;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -35,6 +34,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.Map;
 
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 

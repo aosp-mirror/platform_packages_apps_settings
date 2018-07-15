@@ -19,7 +19,6 @@ package com.android.settings.connecteddevice.usb;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.content.Context;
 import android.hardware.usb.UsbManager;
 import android.hardware.usb.UsbPort;
@@ -41,6 +40,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -62,7 +62,7 @@ public class UsbDetailsHeaderControllerTest {
     @Mock
     private UsbDetailsFragment mFragment;
     @Mock
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private EntityHeaderController mHeaderController;
 

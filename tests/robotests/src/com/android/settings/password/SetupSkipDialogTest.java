@@ -19,10 +19,10 @@ package com.android.settings.password;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 
 import com.android.settings.R;
+import com.android.settings.testutils.Robolectric;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowUtils;
@@ -30,10 +30,11 @@ import com.android.settings.testutils.shadow.ShadowUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowAlertDialog;
+
+import androidx.fragment.app.FragmentActivity;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {
@@ -42,17 +43,17 @@ import org.robolectric.shadows.ShadowAlertDialog;
 })
 public class SetupSkipDialogTest {
 
-    private Activity mActivity;
+    private FragmentActivity mActivity;
 
     @Before
     public void setUp() {
-        mActivity = Robolectric.setupActivity(Activity.class);
+        mActivity = Robolectric.setupActivity(FragmentActivity.class);
     }
 
     @Test
     public void frpMessages_areShownCorrectly_whenNotSupported() {
         SetupSkipDialog setupSkipDialog = SetupSkipDialog.newInstance(false);
-        setupSkipDialog.show(mActivity.getFragmentManager());
+        setupSkipDialog.show(mActivity.getSupportFragmentManager());
 
         AlertDialog alertDialog = ShadowAlertDialog.getLatestAlertDialog();
         assertNotNull(alertDialog);
@@ -66,7 +67,7 @@ public class SetupSkipDialogTest {
     @Test
     public void frpMessages_areShownCorrectly_whenSupported() {
         SetupSkipDialog setupSkipDialog = SetupSkipDialog.newInstance(true);
-        setupSkipDialog.show(mActivity.getFragmentManager());
+        setupSkipDialog.show(mActivity.getSupportFragmentManager());
 
         AlertDialog alertDialog = ShadowAlertDialog.getLatestAlertDialog();
         assertNotNull(alertDialog);

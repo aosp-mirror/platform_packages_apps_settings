@@ -36,7 +36,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
-import com.android.settingslib.suggestions.SuggestionControllerMixin;
+import com.android.settingslib.suggestions.SuggestionControllerMixinCompat;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,6 +46,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -64,7 +65,7 @@ public class DashboardSummaryTest {
     @Mock
     private SummaryLoader mSummaryLoader;
     @Mock
-    private SuggestionControllerMixin mSuggestionControllerMixin;
+    private SuggestionControllerMixinCompat mSuggestionControllerMixin;
 
     private Context mContext;
     private DashboardSummary mSummary;
@@ -91,7 +92,7 @@ public class DashboardSummaryTest {
                 .thenReturn(false);
 
         mSummary.onAttach(mContext);
-        final SuggestionControllerMixin mixin = ReflectionHelpers
+        final SuggestionControllerMixinCompat mixin = ReflectionHelpers
                 .getField(mSummary, "mSuggestionControllerMixin");
         assertThat(mixin).isNull();
     }
@@ -102,7 +103,7 @@ public class DashboardSummaryTest {
                 .thenReturn(true);
 
         mSummary.onAttach(mContext);
-        final SuggestionControllerMixin mixin = ReflectionHelpers
+        final SuggestionControllerMixinCompat mixin = ReflectionHelpers
                 .getField(mSummary, "mSuggestionControllerMixin");
         assertThat(mixin).isNotNull();
     }
@@ -113,7 +114,7 @@ public class DashboardSummaryTest {
                 mSuggestionControllerMixin);
 
         when(mSuggestionControllerMixin.isSuggestionLoaded()).thenReturn(true);
-        doReturn(mock(Activity.class)).when(mSummary).getActivity();
+        doReturn(mock(FragmentActivity.class)).when(mSummary).getActivity();
         mSummary.onAttach(mContext);
         mSummary.updateCategory();
 
@@ -127,7 +128,7 @@ public class DashboardSummaryTest {
         when(mFeatureFactory.suggestionsFeatureProvider.isSuggestionEnabled(any(Context.class)))
                 .thenReturn(false);
 
-        doReturn(mock(Activity.class)).when(mSummary).getActivity();
+        doReturn(mock(FragmentActivity.class)).when(mSummary).getActivity();
         mSummary.onAttach(mContext);
         mSummary.updateCategory();
 
@@ -167,7 +168,7 @@ public class DashboardSummaryTest {
 
     @Test
     public void onCategoryChanged_noRebuildOnFirstCall() {
-        doReturn(mock(Activity.class)).when(mSummary).getActivity();
+        doReturn(mock(FragmentActivity.class)).when(mSummary).getActivity();
         doNothing().when(mSummary).rebuildUI();
         mSummary.onCategoriesChanged();
         verify(mSummary, never()).rebuildUI();
@@ -175,7 +176,7 @@ public class DashboardSummaryTest {
 
     @Test
     public void onCategoryChanged_rebuildOnSecondCall() {
-        doReturn(mock(Activity.class)).when(mSummary).getActivity();
+        doReturn(mock(FragmentActivity.class)).when(mSummary).getActivity();
         doNothing().when(mSummary).rebuildUI();
         mSummary.onCategoriesChanged();
         mSummary.onCategoriesChanged();

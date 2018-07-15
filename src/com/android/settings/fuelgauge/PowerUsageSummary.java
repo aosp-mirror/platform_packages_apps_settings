@@ -19,10 +19,7 @@ package com.android.settings.fuelgauge;
 import static com.android.settings.fuelgauge.BatteryBroadcastReceiver.BatteryUpdateType;
 
 import android.app.Activity;
-import android.app.LoaderManager;
-import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
-import android.content.Loader;
 import android.os.BatteryStats;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
@@ -62,6 +59,9 @@ import java.util.Collections;
 import java.util.List;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.app.LoaderManager.LoaderCallbacks;
+import androidx.loader.content.Loader;
 
 /**
  * Displays a list of apps and subsystems that consume power, ordered by how much power was
@@ -241,7 +241,7 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        final Lifecycle lifecycle = getLifecycle();
+        final Lifecycle lifecycle = getSettingsLifecycle();
         final SettingsActivity activity = (SettingsActivity) getActivity();
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         mBatteryHeaderPreferenceController = new BatteryHeaderPreferenceController(

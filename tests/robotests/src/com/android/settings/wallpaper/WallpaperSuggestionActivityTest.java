@@ -18,7 +18,6 @@ package com.android.settings.wallpaper;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
-import static org.robolectric.Shadows.shadowOf;
 
 import android.app.WallpaperManager;
 import android.content.Context;
@@ -36,6 +35,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
@@ -68,10 +68,10 @@ public class WallpaperSuggestionActivityTest {
     @Test
     public void launch_primarySuggestionActivityDoesNotExist_shouldFallback() {
         ShadowPackageManager packageManager =
-                shadowOf(RuntimeEnvironment.application.getPackageManager());
+                Shadows.shadowOf(RuntimeEnvironment.application.getPackageManager());
         packageManager.removePackage("com.android.settings");
 
-        ShadowActivity activity = shadowOf(mController.setup().get());
+        ShadowActivity activity = Shadows.shadowOf(mController.setup().get());
         final Intent intent = activity.getNextStartedActivity();
 
         assertThat(intent.getComponent().getClassName()).isEqualTo(SubSettings.class.getName());

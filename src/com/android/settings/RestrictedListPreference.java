@@ -41,7 +41,8 @@ import com.android.settingslib.RestrictedPreferenceHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.preference.ListPreferenceDialogFragment;
+import androidx.appcompat.app.AlertDialog.Builder;
+import androidx.preference.ListPreferenceDialogFragmentCompat;
 import androidx.preference.PreferenceViewHolder;
 
 public class RestrictedListPreference extends CustomListPreference {
@@ -169,7 +170,7 @@ public class RestrictedListPreference extends CustomListPreference {
     }
 
     @Override
-    protected void onPrepareDialogBuilder(AlertDialog.Builder builder,
+    protected void onPrepareDialogBuilder(Builder builder,
             DialogInterface.OnClickListener listener) {
         builder.setAdapter(createListAdapter(), listener);
     }
@@ -219,8 +220,8 @@ public class RestrictedListPreference extends CustomListPreference {
             CustomListPreference.CustomListPreferenceDialogFragment {
         private int mLastCheckedPosition = AdapterView.INVALID_POSITION;
 
-        public static ListPreferenceDialogFragment newInstance(String key) {
-            final ListPreferenceDialogFragment fragment
+        public static ListPreferenceDialogFragmentCompat newInstance(String key) {
+            final ListPreferenceDialogFragmentCompat fragment
                     = new RestrictedListPreferenceDialogFragment();
             final Bundle b = new Bundle(1);
             b.putString(ARG_KEY, key);

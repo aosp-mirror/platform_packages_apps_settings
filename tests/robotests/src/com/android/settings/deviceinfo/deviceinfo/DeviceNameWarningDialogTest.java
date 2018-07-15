@@ -9,12 +9,12 @@ import android.content.DialogInterface;
 
 import com.android.settings.deviceinfo.aboutphone.DeviceNameWarningDialog;
 import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment;
+import com.android.settings.testutils.FragmentController;
+import com.android.settings.testutils.Robolectric;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
-import org.robolectric.android.controller.FragmentController;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DeviceNameWarningDialogTest {

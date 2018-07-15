@@ -16,12 +16,12 @@
 
 package com.android.settings;
 
+import static com.android.settings.UserCredentialsSettings.Credential;
+
 import android.os.Parcel;
 import android.os.Process;
 import android.test.InstrumentationTestCase;
 import android.test.suitebuilder.annotation.SmallTest;
-
-import static com.android.settings.UserCredentialsSettings.Credential;
 
 /**
  * User credentials settings fragment tests

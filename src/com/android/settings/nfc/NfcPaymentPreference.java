@@ -15,23 +15,23 @@
  */
 package com.android.settings.nfc;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.util.AttributeSet;
 
-import com.android.settingslib.CustomDialogPreference;
+import com.android.settingslib.CustomDialogPreferenceCompat;
 
+import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.preference.PreferenceViewHolder;
 
-public class NfcPaymentPreference extends CustomDialogPreference {
+public class NfcPaymentPreference extends CustomDialogPreferenceCompat {
 
     private Listener mListener;
 
     interface Listener {
         void onBindViewHolder(PreferenceViewHolder view);
 
-        void onPrepareDialogBuilder(AlertDialog.Builder builder,
+        void onPrepareDialogBuilder(Builder builder,
                 DialogInterface.OnClickListener listener);
     }
 
@@ -62,7 +62,7 @@ public class NfcPaymentPreference extends CustomDialogPreference {
     }
 
     @Override
-    protected void onPrepareDialogBuilder(AlertDialog.Builder builder,
+    protected void onPrepareDialogBuilder(Builder builder,
             DialogInterface.OnClickListener listener) {
         super.onPrepareDialogBuilder(builder, listener);
 

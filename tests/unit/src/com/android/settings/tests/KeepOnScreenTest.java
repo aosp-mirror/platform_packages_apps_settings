@@ -16,24 +16,24 @@
 
 package com.android.settings.tests;
 
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static junit.framework.Assert.assertEquals;
+
 import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
 import android.os.BatteryManager;
 import android.provider.Settings;
 import android.support.test.InstrumentationRegistry;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.runner.RunWith;
 import android.support.test.filters.SmallTest;
 import android.support.test.runner.AndroidJUnit4;
-import org.junit.Test;
+
 import com.android.settings.R;
 
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.matcher.ViewMatchers.*;
-import static junit.framework.Assert.assertEquals;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
 @SmallTest

@@ -33,7 +33,6 @@ import android.util.Log;
 
 import com.android.ims.ImsConfig;
 import com.android.ims.ImsManager;
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.slices.SettingsSliceProvider;
@@ -48,6 +47,7 @@ import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;

@@ -26,7 +26,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.AppOpsManager;
-import android.app.LoaderManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -51,6 +50,7 @@ import org.robolectric.annotation.Config;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.loader.app.LoaderManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

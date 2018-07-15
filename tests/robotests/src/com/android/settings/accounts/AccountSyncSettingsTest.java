@@ -20,7 +20,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.accounts.Account;
-import android.app.Activity;
 import android.content.Context;
 import android.os.UserHandle;
 
@@ -33,6 +32,8 @@ import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
+
+import androidx.fragment.app.FragmentActivity;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowContentResolver.class})
@@ -47,7 +48,7 @@ public class AccountSyncSettingsTest {
     public void onPreferenceTreeClick_nullAuthority_shouldNotCrash() {
         final Context context = RuntimeEnvironment.application;
         final AccountSyncSettings settings = spy(new AccountSyncSettings());
-        when(settings.getActivity()).thenReturn(mock(Activity.class));
+        when(settings.getActivity()).thenReturn(mock(FragmentActivity.class));
         final SyncStateSwitchPreference preference = new SyncStateSwitchPreference(context,
                 new Account("acct1", "type1"), "" /* authority */, "testPackage", 1 /* uid */);
         preference.setOneTimeSyncMode(false);

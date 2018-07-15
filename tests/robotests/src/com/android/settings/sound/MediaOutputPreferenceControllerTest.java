@@ -16,11 +16,9 @@
 
 package com.android.settings.sound;
 
-
 import static android.media.AudioSystem.DEVICE_OUT_BLUETOOTH_A2DP;
 import static android.media.AudioSystem.DEVICE_OUT_HEARING_AID;
 import static android.media.AudioSystem.DEVICE_OUT_REMOTE_SUBMIX;
-import static android.media.AudioSystem.DEVICE_OUT_USB_HEADSET;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -336,12 +334,11 @@ public class MediaOutputPreferenceControllerTest {
     @Test
     public void updateState_a2dpDevicesAvailableWiredHeadsetIsActivated_shouldSetDefaultSummary() {
         mShadowAudioManager.setMode(AudioManager.MODE_NORMAL);
-        mShadowAudioManager.setOutputDevice(DEVICE_OUT_USB_HEADSET);
         mProfileConnectedDevices.clear();
         mProfileConnectedDevices.add(mBluetoothDevice);
+        when(mLocalBluetoothProfileManager.getHearingAidProfile()).thenReturn(null);
         when(mA2dpProfile.getConnectedDevices()).thenReturn(mProfileConnectedDevices);
-        when(mA2dpProfile.getActiveDevice()).thenReturn(
-                mBluetoothDevice); // BT device is still activated in this case
+        when(mA2dpProfile.getActiveDevice()).thenReturn(null);
 
         mController.updateState(mPreference);
 
@@ -515,5 +512,21 @@ public class MediaOutputPreferenceControllerTest {
         assertThat(mPreference.getSummary()).isEqualTo(mRightBluetoothHapDevice.getName());
         assertThat(mController.mConnectedDevices).containsExactly(mBluetoothDevice,
                 mLeftBluetoothHapDevice, mRightBluetoothHapDevice);
+    }
+
+    @Test
+    public void findActiveDevice_onlyA2dpDeviceActive_returnA2dpDevice() {
+        when(mLocalBluetoothProfileManager.getHearingAidProfile()).thenReturn(null);
+        when(mA2dpProfile.getActiveDevice()).thenReturn(mBluetoothDevice);
+
+        assertThat(mController.findActiveDevice()).isEqualTo(mBluetoothDevice);
+    }
+
+    @Test
+    public void findActiveDevice_allDevicesNotActive_returnNull() {
+        when(mLocalBluetoothProfileManager.getHearingAidProfile()).thenReturn(null);
+        when(mA2dpProfile.getActiveDevice()).thenReturn(null);
+
+        assertThat(mController.findActiveDevice()).isNull();
     }
 }

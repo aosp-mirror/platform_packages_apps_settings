@@ -16,11 +16,8 @@
 
 package com.android.settings.applications.defaultapps;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
@@ -35,6 +32,10 @@ import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settings.widget.RadioButtonPreference;
 import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.widget.CandidateInfo;
+
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 /**
  * A generic app picker fragment that shows a list of app as radio button group.
@@ -53,13 +54,13 @@ public abstract class DefaultAppPickerFragment extends RadioButtonPickerFragment
     public void onRadioButtonClicked(RadioButtonPreference selected) {
         final String selectedKey = selected.getKey();
         final CharSequence confirmationMessage = getConfirmationMessage(getCandidate(selectedKey));
-        final Activity activity = getActivity();
+        final FragmentActivity activity = getActivity();
         if (TextUtils.isEmpty(confirmationMessage)) {
             super.onRadioButtonClicked(selected);
         } else if (activity != null) {
             final DialogFragment fragment =
                     newConfirmationDialogFragment(selectedKey, confirmationMessage);
-            fragment.show(activity.getFragmentManager(), ConfirmationDialogFragment.TAG);
+            fragment.show(activity.getSupportFragmentManager(), ConfirmationDialogFragment.TAG);
         }
     }
 

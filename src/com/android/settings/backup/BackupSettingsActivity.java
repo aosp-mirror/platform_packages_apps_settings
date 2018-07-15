@@ -16,8 +16,6 @@
 
 package com.android.settings.backup;
 
-import android.app.Activity;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -35,6 +33,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 
 /**
@@ -42,7 +42,7 @@ import androidx.annotation.VisibleForTesting;
  * if the manufacturer provided their backup settings.
  */
 @SearchIndexable
-public class BackupSettingsActivity extends Activity implements Indexable {
+public class BackupSettingsActivity extends FragmentActivity implements Indexable {
     private static final String TAG = "BackupSettingsActivity";
     private FragmentManager mFragmentManager;
 
@@ -81,7 +81,7 @@ public class BackupSettingsActivity extends Activity implements Indexable {
             }
             // mFragmentManager can be set by {@link #setFragmentManager()} for testing
             if (mFragmentManager == null) {
-                mFragmentManager = getFragmentManager();
+                mFragmentManager = getSupportFragmentManager();
             }
             mFragmentManager.beginTransaction()
                     .replace(android.R.id.content, new BackupSettingsFragment())

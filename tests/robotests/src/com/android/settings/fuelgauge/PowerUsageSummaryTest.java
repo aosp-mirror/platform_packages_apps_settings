@@ -31,7 +31,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -71,6 +70,8 @@ import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.loader.app.LoaderManager;
 
 // TODO: Improve this test class so that it starts up the real activity and fragment.
 @RunWith(SettingsRobolectricTestRunner.class)

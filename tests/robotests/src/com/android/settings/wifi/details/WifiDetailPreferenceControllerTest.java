@@ -29,7 +29,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -89,6 +88,7 @@ import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
@@ -113,7 +113,7 @@ public class WifiDetailPreferenceControllerTest {
     @Mock
     private AccessPoint mockAccessPoint;
     @Mock
-    private Activity mockActivity;
+    private FragmentActivity mockActivity;
     @Mock
     private ConnectivityManager mockConnectivityManager;
     @Mock

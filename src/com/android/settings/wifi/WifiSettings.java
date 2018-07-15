@@ -243,7 +243,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         super.onActivityCreated(savedInstanceState);
 
         mWifiTracker = WifiTrackerFactory.create(
-                getActivity(), this, getLifecycle(), true, true);
+                getActivity(), this, getSettingsLifecycle(), true, true);
         mWifiManager = mWifiTracker.getManager();
 
         final Activity activity = getActivity();

@@ -16,7 +16,6 @@
 
 package com.android.settings.deletionhelper;
 
-import android.app.FragmentManager;
 import android.content.Context;
 import android.os.SystemProperties;
 import android.provider.Settings;
@@ -28,6 +27,7 @@ import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
 /** Handles the logic for flipping the storage management toggle on a {@link SwitchBar}. */

@@ -79,7 +79,7 @@ public class SecuritySettings extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle(), this /* host*/);
+        return buildPreferenceControllers(context, getSettingsLifecycle(), this /* host*/);
     }
 
     /**

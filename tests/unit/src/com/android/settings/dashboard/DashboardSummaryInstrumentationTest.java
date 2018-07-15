@@ -18,8 +18,6 @@ package com.android.settings.dashboard;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
@@ -38,6 +36,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.List;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 @RunWith(AndroidJUnit4.class)
 @SmallTest
@@ -61,7 +62,8 @@ public class DashboardSummaryInstrumentationTest {
     public void rotate_shouldSaveCategoriesChangedState() {
         final Intent intent = new Intent(Settings.ACTION_SETTINGS)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        final Activity activity = mInstrumentation.startActivitySync(intent);
+        final FragmentActivity activity =
+                (FragmentActivity) mInstrumentation.startActivitySync(intent);
 
         activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -70,7 +72,7 @@ public class DashboardSummaryInstrumentationTest {
                 .text("Network & internet")), TIMEOUT);
         assertThat(item).isNotNull();
 
-        final List<Fragment> fragments = activity.getFragmentManager().getFragments();
+        final List<Fragment> fragments = activity.getSupportFragmentManager().getFragments();
         final DashboardSummary fragment = (DashboardSummary) fragments.get(0);
 
         assertThat(fragment.mIsOnCategoriesChangedCalled).isTrue();

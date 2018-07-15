@@ -104,7 +104,7 @@ public class MyDeviceInfoFragment extends DashboardFragment
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return buildPreferenceControllers(context, getActivity(), this /* fragment */,
-                getLifecycle());
+                getSettingsLifecycle());
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(
@@ -156,7 +156,7 @@ public class MyDeviceInfoFragment extends DashboardFragment
         final Bundle bundle = getArguments();
         final EntityHeaderController controller = EntityHeaderController
                 .newInstance(context, this, appSnippet)
-                .setRecyclerView(getListView(), getLifecycle())
+                .setRecyclerView(getListView(), getSettingsLifecycle())
                 .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
                         EntityHeaderController.ActionType.ACTION_NONE);
 

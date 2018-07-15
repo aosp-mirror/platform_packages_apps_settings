@@ -62,7 +62,6 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.EventLogTags;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.BatteryUtils;
-
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.users.UserDialogs;
 import com.android.settingslib.RestrictedLockUtils;

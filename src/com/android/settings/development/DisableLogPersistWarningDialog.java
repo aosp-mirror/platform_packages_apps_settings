@@ -18,14 +18,15 @@ package com.android.settings.development;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 public class DisableLogPersistWarningDialog extends InstrumentedDialogFragment implements
         DialogInterface.OnClickListener, DialogInterface.OnDismissListener {
@@ -37,7 +38,7 @@ public class DisableLogPersistWarningDialog extends InstrumentedDialogFragment i
             return;
         }
         final Fragment hostFragment = (Fragment) host;
-        final FragmentManager manager = hostFragment.getActivity().getFragmentManager();
+        final FragmentManager manager = hostFragment.getActivity().getSupportFragmentManager();
         if (manager.findFragmentByTag(TAG) == null) {
             final DisableLogPersistWarningDialog dialog =
                     new DisableLogPersistWarningDialog();

@@ -24,12 +24,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+
+import androidx.annotation.VisibleForTesting;
 
 /** Implements an AlertDialog for confirming that a user wishes to unpair or "forget" a paired
  *  device*/

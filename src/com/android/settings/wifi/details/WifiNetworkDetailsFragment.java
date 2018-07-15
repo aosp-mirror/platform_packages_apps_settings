@@ -128,7 +128,7 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
                 context,
                 this,
                 new Handler(Looper.getMainLooper()),  // UI thread.
-                getLifecycle(),
+                getSettingsLifecycle(),
                 context.getSystemService(WifiManager.class),
                 mMetricsFeatureProvider);
 

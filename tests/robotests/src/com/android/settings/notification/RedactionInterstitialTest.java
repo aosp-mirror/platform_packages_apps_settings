@@ -131,7 +131,7 @@ public class RedactionInterstitialTest {
     private void setupActivity() {
         mActivity = buildActivity(RedactionInterstitial.class, new Intent()).setup().get();
         mFragment = (RedactionInterstitialFragment)
-                mActivity.getFragmentManager().findFragmentById(R.id.main_content);
+                mActivity.getSupportFragmentManager().findFragmentById(R.id.main_content);
         assertThat(mActivity).isNotNull();
         assertThat(mFragment).isNotNull();
     }

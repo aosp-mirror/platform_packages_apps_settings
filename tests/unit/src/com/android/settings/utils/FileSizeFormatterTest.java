@@ -18,7 +18,6 @@ package com.android.settings.utils;
 
 import static com.android.settings.utils.FileSizeFormatter.GIGABYTE_IN_BYTES;
 import static com.android.settings.utils.FileSizeFormatter.MEGABYTE_IN_BYTES;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;

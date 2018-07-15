@@ -30,8 +30,6 @@ import android.accounts.AccountManager;
 import android.accounts.AccountManagerCallback;
 import android.accounts.AuthenticatorDescription;
 import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.Bundle;
@@ -60,7 +58,10 @@ import org.robolectric.shadows.ShadowApplication;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.preference.PreferenceFragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
@@ -77,7 +78,7 @@ public class RemoveAccountPreferenceControllerTest {
     @Mock(answer = RETURNS_DEEP_STUBS)
     private AccountManager mAccountManager;
     @Mock
-    private PreferenceFragment mFragment;
+    private PreferenceFragmentCompat mFragment;
     @Mock
     private PreferenceManager mPreferenceManager;
     @Mock
@@ -158,7 +159,7 @@ public class RemoveAccountPreferenceControllerTest {
     @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
     public void confirmRemove_shouldRemoveAccount() {
         when(mFragment.isAdded()).thenReturn(true);
-        Activity activity = mock(Activity.class);
+        FragmentActivity activity = mock(FragmentActivity.class);
         when(activity.getSystemService(Context.ACCOUNT_SERVICE)).thenReturn(mAccountManager);
         when(mFragment.getActivity()).thenReturn(activity);
 

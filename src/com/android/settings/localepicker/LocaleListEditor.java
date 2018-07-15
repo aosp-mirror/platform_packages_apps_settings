@@ -19,7 +19,6 @@ package com.android.settings.localepicker;
 import static android.os.UserManager.DISALLOW_CONFIG_LOCALE;
 
 import android.app.AlertDialog;
-import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.LocaleList;
@@ -32,7 +31,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.internal.app.LocalePicker;
-import com.android.internal.app.LocalePickerWithRegion;
 import com.android.internal.app.LocaleStore;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -42,6 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**

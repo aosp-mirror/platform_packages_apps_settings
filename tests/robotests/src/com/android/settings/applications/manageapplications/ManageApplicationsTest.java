@@ -36,7 +36,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Looper;
@@ -63,6 +62,7 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -147,7 +147,7 @@ public class ManageApplicationsTest {
         final ManageApplications fragment = mock(ManageApplications.class);
         ReflectionHelpers.setField(fragment, "mLoadingContainer", mock(View.class));
         ReflectionHelpers.setField(fragment, "mListContainer", mock(View.class));
-        when(fragment.getActivity()).thenReturn(mock(Activity.class));
+        when(fragment.getActivity()).thenReturn(mock(FragmentActivity.class));
         final ManageApplications.ApplicationsAdapter adapter =
                 spy(new ManageApplications.ApplicationsAdapter(mState, fragment,
                         AppFilterRegistry.getInstance().get(FILTER_APPS_ALL), new Bundle()));
@@ -171,7 +171,7 @@ public class ManageApplicationsTest {
         final ManageApplications fragment = mock(ManageApplications.class);
         ReflectionHelpers.setField(fragment, "mLoadingContainer", mock(View.class));
         ReflectionHelpers.setField(fragment, "mListContainer", mock(View.class));
-        when(fragment.getActivity()).thenReturn(mock(Activity.class));
+        when(fragment.getActivity()).thenReturn(mock(FragmentActivity.class));
         final ManageApplications.ApplicationsAdapter adapter =
                 spy(new ManageApplications.ApplicationsAdapter(mState, fragment,
                         AppFilterRegistry.getInstance().get(FILTER_APPS_ALL), new Bundle()));
@@ -212,7 +212,7 @@ public class ManageApplicationsTest {
         when(listContainer.getContext()).thenReturn(context);
         ReflectionHelpers.setField(fragment, "mLoadingContainer", loadingContainer);
         ReflectionHelpers.setField(fragment, "mListContainer", listContainer);
-        when(fragment.getActivity()).thenReturn(mock(Activity.class));
+        when(fragment.getActivity()).thenReturn(mock(FragmentActivity.class));
         final ManageApplications.ApplicationsAdapter adapter =
                 spy(new ManageApplications.ApplicationsAdapter(mState, fragment,
                         AppFilterRegistry.getInstance().get(FILTER_APPS_ALL), new Bundle()));
@@ -274,7 +274,7 @@ public class ManageApplicationsTest {
     @Test
     public void applicationsAdapter_onBindViewHolder_updateSwitch_notifications() {
         ManageApplications manageApplications = mock(ManageApplications.class);
-        when(manageApplications.getActivity()).thenReturn(mock(Activity.class));
+        when(manageApplications.getActivity()).thenReturn(mock(FragmentActivity.class));
         UserManager um = mock(UserManager.class);
         when(um.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[]{});
         ReflectionHelpers.setField(manageApplications, "mUserManager", um);
@@ -317,7 +317,7 @@ public class ManageApplicationsTest {
     @Test
     public void sortOrderSavedOnRebuild() {
         ManageApplications manageApplications = mock(ManageApplications.class);
-        when(manageApplications.getActivity()).thenReturn(mock(Activity.class));
+        when(manageApplications.getActivity()).thenReturn(mock(FragmentActivity.class));
         UserManager um = mock(UserManager.class);
         when(um.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[]{});
         ReflectionHelpers.setField(manageApplications, "mUserManager", um);

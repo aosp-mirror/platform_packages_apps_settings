@@ -22,26 +22,26 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
-import com.android.settingslib.inputmethod.InputMethodAndSubtypeEnablerManager;
+import com.android.settingslib.inputmethod.InputMethodAndSubtypeEnablerManagerCompat;
 
-import androidx.preference.PreferenceFragment;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 public class InputMethodAndSubtypePreferenceController extends BasePreferenceController implements
         LifecycleObserver, OnStart, OnStop {
 
-    private PreferenceFragment mFragment;
-    private InputMethodAndSubtypeEnablerManager mManager;
+    private PreferenceFragmentCompat mFragment;
+    private InputMethodAndSubtypeEnablerManagerCompat mManager;
     private String mTargetImi;
 
     public InputMethodAndSubtypePreferenceController(Context context, String key) {
         super(context, key);
     }
 
-    public void initialize(PreferenceFragment fragment, String imi) {
+    public void initialize(PreferenceFragmentCompat fragment, String imi) {
         mFragment = fragment;
         mTargetImi = imi;
-        mManager = new InputMethodAndSubtypeEnablerManager(mFragment);
+        mManager = new InputMethodAndSubtypeEnablerManagerCompat(mFragment);
     }
 
     @Override

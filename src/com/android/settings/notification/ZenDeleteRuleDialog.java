@@ -18,7 +18,6 @@ package com.android.settings.notification;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
@@ -26,6 +25,8 @@ import android.view.View;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+
+import androidx.fragment.app.Fragment;
 
 public class ZenDeleteRuleDialog extends InstrumentedDialogFragment {
     protected static final String TAG = "ZenDeleteRuleDialog";

@@ -17,7 +17,6 @@
 package com.android.settings.inputmethod;
 
 import android.content.Context;
-import android.content.CursorLoader;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.provider.UserDictionary;
@@ -28,6 +27,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.loader.content.CursorLoader;
 
 public class UserDictionaryCursorLoader extends CursorLoader {
 

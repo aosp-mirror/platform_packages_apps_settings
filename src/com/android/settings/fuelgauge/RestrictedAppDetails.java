@@ -23,7 +23,6 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.util.IconDrawableFactory;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -38,10 +37,11 @@ import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
 import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
 import com.android.settings.widget.AppCheckBoxPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.widget.FooterPreferenceMixin;
+import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
 import java.util.List;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
@@ -68,8 +68,8 @@ public class RestrictedAppDetails extends DashboardFragment implements
     BatteryUtils mBatteryUtils;
     @VisibleForTesting
     PackageManager mPackageManager;
-    private final FooterPreferenceMixin mFooterPreferenceMixin =
-            new FooterPreferenceMixin(this, getLifecycle());
+    private final FooterPreferenceMixinCompat mFooterPreferenceMixin =
+            new FooterPreferenceMixinCompat(this, getSettingsLifecycle());
 
     public static void startRestrictedAppDetails(InstrumentedPreferenceFragment fragment,
             List<AppInfo> appInfos) {

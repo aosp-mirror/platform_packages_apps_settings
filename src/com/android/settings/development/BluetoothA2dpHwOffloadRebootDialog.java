@@ -18,7 +18,6 @@ package com.android.settings.development;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.PowerManager;
@@ -27,6 +26,8 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
+import androidx.fragment.app.FragmentManager;
+
 public class BluetoothA2dpHwOffloadRebootDialog extends InstrumentedDialogFragment
         implements DialogInterface.OnClickListener {
 
@@ -34,7 +35,7 @@ public class BluetoothA2dpHwOffloadRebootDialog extends InstrumentedDialogFragme
 
     public static void show(DevelopmentSettingsDashboardFragment host,
             BluetoothA2dpHwOffloadPreferenceController controller) {
-        final FragmentManager manager = host.getActivity().getFragmentManager();
+        final FragmentManager manager = host.getActivity().getSupportFragmentManager();
         if (manager.findFragmentByTag(TAG) == null) {
             final BluetoothA2dpHwOffloadRebootDialog dialog =
                     new BluetoothA2dpHwOffloadRebootDialog();

@@ -15,7 +15,6 @@
  */
 package com.android.settings.security;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.os.UserHandle;
 
@@ -31,6 +30,7 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceClickListener;
 import androidx.preference.PreferenceScreen;

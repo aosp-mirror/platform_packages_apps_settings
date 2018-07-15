@@ -27,12 +27,12 @@ import android.widget.EditText;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settingslib.CustomEditTextPreference;
+import com.android.settingslib.CustomEditTextPreferenceCompat;
 import com.android.settingslib.display.DisplayDensityUtils;
 
 import java.text.NumberFormat;
 
-public class DensityPreference extends CustomEditTextPreference {
+public class DensityPreference extends CustomEditTextPreferenceCompat {
     private static final String TAG = "DensityPreference";
 
     public DensityPreference(Context context, AttributeSet attrs) {

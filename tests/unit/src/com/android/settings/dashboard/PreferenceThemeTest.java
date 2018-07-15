@@ -16,6 +16,15 @@
 
 package com.android.settings.dashboard;
 
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static com.android.settings.dashboard.FirstIdViewMatcher.withFirstId;
+import static org.hamcrest.Matchers.allOf;
+
 import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
@@ -29,16 +38,6 @@ import com.android.settings.R;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static com.android.settings.dashboard.FirstIdViewMatcher.withFirstId;
-
-import static org.hamcrest.Matchers.allOf;
 
 @RunWith(AndroidJUnit4.class)
 @SmallTest

@@ -17,10 +17,8 @@
 package com.android.settings.deviceinfo;
 
 import android.app.Activity;
-import android.app.LoaderManager;
 import android.app.usage.StorageStatsManager;
 import android.content.Context;
-import android.content.Loader;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -57,6 +55,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 
 @SearchIndexable
 public class StorageDashboardFragment extends DashboardFragment
@@ -105,7 +105,7 @@ public class StorageDashboardFragment extends DashboardFragment
     void initializeOptionsMenu(Activity activity) {
         mOptionMenuController = new PrivateVolumeOptionMenuController(
                 activity, mVolume, activity.getPackageManager());
-        getLifecycle().addObserver(mOptionMenuController);
+        getSettingsLifecycle().addObserver(mOptionMenuController);
         setHasOptionsMenu(true);
         activity.invalidateOptionsMenu();
     }
@@ -119,7 +119,7 @@ public class StorageDashboardFragment extends DashboardFragment
         final Activity activity = getActivity();
         EntityHeaderController.newInstance(activity, this /*fragment*/,
                 null /* header view */)
-                .setRecyclerView(getListView(), getLifecycle())
+                .setRecyclerView(getListView(), getSettingsLifecycle())
                 .styleActionBar(activity);
 
     }

@@ -16,9 +16,7 @@
 
 package com.android.settings.applications.appinfo;
 
-import android.app.LoaderManager;
 import android.content.Context;
-import android.content.Loader;
 import android.net.INetworkStatsService;
 import android.net.INetworkStatsSession;
 import android.net.NetworkTemplate;
@@ -39,9 +37,11 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.net.ChartData;
-import com.android.settingslib.net.ChartDataLoader;
+import com.android.settingslib.net.ChartDataLoaderCompat;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -86,7 +86,7 @@ public class AppDataUsagePreferenceController extends AppInfoPreferenceControlle
             final AppItem app = new AppItem(uid);
             app.addUid(uid);
             mParent.getLoaderManager().restartLoader(mParent.LOADER_CHART_DATA,
-                    ChartDataLoader.buildArgs(getTemplate(mContext), app),
+                    ChartDataLoaderCompat.buildArgs(getTemplate(mContext), app),
                     this);
         }
     }
@@ -98,7 +98,7 @@ public class AppDataUsagePreferenceController extends AppInfoPreferenceControlle
 
     @Override
     public Loader<ChartData> onCreateLoader(int id, Bundle args) {
-        return new ChartDataLoader(mContext, mStatsSession, args);
+        return new ChartDataLoaderCompat(mContext, mStatsSession, args);
     }
 
     @Override

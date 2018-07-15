@@ -81,7 +81,8 @@ public class LocationSettings extends DashboardFragment {
         final SwitchBar switchBar = activity.getSwitchBar();
         switchBar.setSwitchBarText(R.string.location_settings_master_switch_title,
                 R.string.location_settings_master_switch_title);
-        mSwitchBarController = new LocationSwitchBarController(activity, switchBar, getLifecycle());
+        mSwitchBarController = new LocationSwitchBarController(activity, switchBar,
+                getSettingsLifecycle());
         switchBar.show();
     }
 
@@ -97,7 +98,7 @@ public class LocationSettings extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, this, getLifecycle());
+        return buildPreferenceControllers(context, this, getSettingsLifecycle());
     }
 
     static void addPreferencesSorted(List<Preference> prefs, PreferenceGroup container) {

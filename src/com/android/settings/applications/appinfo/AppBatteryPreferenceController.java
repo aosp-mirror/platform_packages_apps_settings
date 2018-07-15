@@ -16,9 +16,7 @@
 
 package com.android.settings.applications.appinfo;
 
-import android.app.LoaderManager;
 import android.content.Context;
-import android.content.Loader;
 import android.content.pm.PackageInfo;
 import android.os.BatteryStats;
 import android.os.Bundle;
@@ -43,6 +41,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

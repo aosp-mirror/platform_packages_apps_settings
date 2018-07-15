@@ -24,8 +24,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Context;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -39,6 +37,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

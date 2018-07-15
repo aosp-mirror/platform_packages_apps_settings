@@ -55,6 +55,7 @@ import org.robolectric.shadows.ShadowActivity;
 
 import java.util.concurrent.TimeUnit;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceViewHolder;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -417,7 +418,7 @@ public class DataUsageSummaryPreferenceTest {
 
     @Test
     public void testSetAppIntent_toMdpApp_intentCorrect() {
-        final Activity activity = Robolectric.setupActivity(Activity.class);
+        final FragmentActivity activity = Robolectric.setupActivity(FragmentActivity.class);
         final Intent intent = new Intent(SubscriptionManager.ACTION_MANAGE_SUBSCRIPTION_PLANS);
         intent.setPackage("test-owner.example.com");
         intent.putExtra(SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX, 42);
@@ -485,7 +486,7 @@ public class DataUsageSummaryPreferenceTest {
         final int daysLeft = 3;
         final long cycleEnd = System.currentTimeMillis() + TimeUnit.DAYS.toMillis(daysLeft)
                 + TimeUnit.HOURS.toMillis(1);
-        final Activity activity = Robolectric.setupActivity(Activity.class);
+        final FragmentActivity activity = Robolectric.setupActivity(FragmentActivity.class);
         mSummaryPreference = spy(mSummaryPreference);
         mSummaryPreference.setUsageInfo(cycleEnd, mUpdateTime, DUMMY_CARRIER, 0 /* numPlans */,
                 new Intent());

@@ -135,7 +135,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
 
         mBatteryAppListPreferenceController = new BatteryAppListPreferenceController(context,
-                KEY_APP_LIST, getLifecycle(), (SettingsActivity) getActivity(), this);
+                KEY_APP_LIST, getSettingsLifecycle(), (SettingsActivity) getActivity(), this);
         controllers.add(mBatteryAppListPreferenceController);
 
         return controllers;

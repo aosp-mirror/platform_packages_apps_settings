@@ -24,7 +24,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.app.usage.IUsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
@@ -43,6 +42,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -97,7 +97,7 @@ public class AppNotificationPreferenceControllerTest {
 
     @Test
     public void getArguments_containsChannelId() {
-        Activity activity = mock(Activity.class);
+        FragmentActivity activity = mock(FragmentActivity.class);
         Intent intent = new Intent();
         intent.putExtra(EXTRA_FRAGMENT_ARG_KEY, "test");
         when(mFragment.getActivity()).thenReturn(activity);

@@ -19,9 +19,10 @@ package com.android.settings.fuelgauge.batterytip.tips;
 import android.content.Context;
 import android.os.Parcel;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Tip to suggest user to remove app restriction. This is the empty tip and it is only used in

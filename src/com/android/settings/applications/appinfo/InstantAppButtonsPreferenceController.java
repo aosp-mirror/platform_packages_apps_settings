@@ -16,7 +16,6 @@
 
 package com.android.settings.applications.appinfo;
 
-import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -43,6 +42,7 @@ import com.android.settingslib.core.lifecycle.events.OnPrepareOptionsMenu;
 
 import java.util.List;
 
+import androidx.fragment.app.DialogFragment;
 import androidx.preference.PreferenceScreen;
 
 public class InstantAppButtonsPreferenceController extends BasePreferenceController implements

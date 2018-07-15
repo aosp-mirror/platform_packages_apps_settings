@@ -19,12 +19,9 @@ package com.android.settings.inputmethod;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.LoaderManager.LoaderCallbacks;
-import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.Loader;
 import android.hardware.input.InputDeviceIdentifier;
 import android.hardware.input.InputManager;
 import android.hardware.input.InputManager.InputDeviceListener;
@@ -45,6 +42,10 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import androidx.loader.app.LoaderManager.LoaderCallbacks;
+import androidx.loader.content.AsyncTaskLoader;
+import androidx.loader.content.Loader;
 
 public class KeyboardLayoutDialogFragment extends InstrumentedDialogFragment
         implements InputDeviceListener, LoaderCallbacks<KeyboardLayoutDialogFragment.Keyboards> {
@@ -156,7 +157,7 @@ public class KeyboardLayoutDialogFragment extends InstrumentedDialogFragment
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        show(getActivity().getFragmentManager(), "layout");
+        show(getActivity().getSupportFragmentManager(), "layout");
     }
 
     private void onKeyboardLayoutClicked(int which) {

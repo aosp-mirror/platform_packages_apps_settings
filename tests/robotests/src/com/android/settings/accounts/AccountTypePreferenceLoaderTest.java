@@ -45,7 +45,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragment;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -56,7 +56,7 @@ public class AccountTypePreferenceLoaderTest {
     @Mock(answer = RETURNS_DEEP_STUBS)
     private AccountManager mAccountManager;
     @Mock(answer = RETURNS_DEEP_STUBS)
-    private PreferenceFragment mPreferenceFragment;
+    private PreferenceFragmentCompat mPreferenceFragment;
     @Mock
     private PackageManager mPackageManager;
 

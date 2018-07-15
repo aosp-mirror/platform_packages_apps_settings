@@ -41,7 +41,7 @@ import org.robolectric.annotation.Config;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.preference.PreferenceFragment;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
@@ -50,7 +50,7 @@ import androidx.preference.PreferenceScreen;
 public class InputMethodAndSubtypePreferenceControllerTest {
 
     @Mock
-    private PreferenceFragment mFragment;
+    private PreferenceFragmentCompat mFragment;
     private Context mContext;
     private InputMethodAndSubtypePreferenceController mController;
     private PreferenceManager mPreferenceManager;

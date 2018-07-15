@@ -27,6 +27,7 @@ import com.android.settings.biometrics.fingerprint.FingerprintSettings.Fingerpri
 import com.android.settings.biometrics.fingerprint.FingerprintSettings.FingerprintSettingsFragment.DeleteFingerprintDialog;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowFragment;
+import com.android.settingslib.testutils.FragmentTestUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +35,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
-import org.robolectric.util.FragmentTestUtil;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowFragment.class)
@@ -55,7 +55,7 @@ public class DeleteFingerprintDialogTest {
 
     @Test
     public void launchDialog_clickPositive_shouldDeleteFingerprint() {
-        FragmentTestUtil.startFragment(mFragment);
+        FragmentTestUtils.startFragment(mFragment);
 
         mFragment.onClick(mFragment.getDialog(), Dialog.BUTTON_POSITIVE);
 
@@ -64,7 +64,7 @@ public class DeleteFingerprintDialogTest {
 
     @Test
     public void launchDialog_clickNegative_shouldDoNothing() {
-        FragmentTestUtil.startFragment(mFragment);
+        FragmentTestUtils.startFragment(mFragment);
 
         mFragment.onClick(mFragment.getDialog(), Dialog.BUTTON_NEGATIVE);
 

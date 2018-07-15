@@ -16,7 +16,6 @@
 package com.android.settings.bluetooth;
 
 import static android.bluetooth.BluetoothDevice.PAIRING_VARIANT_CONSENT;
-
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 

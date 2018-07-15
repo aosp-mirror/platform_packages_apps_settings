@@ -110,7 +110,7 @@ public class LanguageAndInputSettingsTest {
                 lifecycleObserverCount++;
             }
         }
-        verify(mFragment.getLifecycle(), times(lifecycleObserverCount))
+        verify(mFragment.getSettingsLifecycle(), times(lifecycleObserverCount))
                 .addObserver(any(LifecycleObserver.class));
     }
 
@@ -207,9 +207,9 @@ public class LanguageAndInputSettingsTest {
         }
 
         @Override
-        public Lifecycle getLifecycle() {
+        public Lifecycle getSettingsLifecycle() {
             if (mLifecycle == null) {
-                return super.getLifecycle();
+                return super.getSettingsLifecycle();
             }
             return mLifecycle;
         }

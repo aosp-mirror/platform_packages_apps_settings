@@ -23,8 +23,6 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.hardware.input.InputDeviceIdentifier;
 import android.hardware.input.InputManager;
@@ -45,6 +43,8 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
@@ -81,7 +81,7 @@ public class KeyboardLayoutPickerControllerTest {
 
     @Test
     public void testLifecycle_onStart_shouldRegisterInputManager() {
-        final Activity activity = Robolectric.setupActivity(Activity.class);
+        final FragmentActivity activity = Robolectric.setupActivity(FragmentActivity.class);
         when(mFragment.getActivity()).thenReturn(activity);
 
         mController.onStart();
@@ -93,7 +93,7 @@ public class KeyboardLayoutPickerControllerTest {
 
     @Test
     public void testLifecycle_onStart_NoInputDevice_shouldFinish() {
-        final Activity activity = Robolectric.setupActivity(Activity.class);
+        final FragmentActivity activity = Robolectric.setupActivity(FragmentActivity.class);
         when(mInputManager.getInputDeviceByDescriptor(anyString())).thenReturn(null);
         when(mFragment.getActivity()).thenReturn(activity);
 
@@ -137,7 +137,7 @@ public class KeyboardLayoutPickerControllerTest {
     @Config(shadows = ShadowInputDevice.class)
     public void testOnDeviceRemove_getSameDevice_shouldFinish() {
         final int TARGET_DEVICE_ID = 1;
-        final Activity activity = Robolectric.setupActivity(Activity.class);
+        final FragmentActivity activity = Robolectric.setupActivity(FragmentActivity.class);
         final String[] enableKeyboardLayouts = {"layout1"};
         final InputDevice device = ShadowInputDevice.makeInputDevicebyId(TARGET_DEVICE_ID);
 
@@ -157,7 +157,7 @@ public class KeyboardLayoutPickerControllerTest {
     public void testOnDeviceRemove_getDifferentDevice_shouldNotFinish() {
         final int TARGET_DEVICE_ID = 1;
         final int ANOTHER_DEVICE_ID = 2;
-        final Activity activity = Robolectric.setupActivity(Activity.class);
+        final FragmentActivity activity = Robolectric.setupActivity(FragmentActivity.class);
         final String[] enableKeyboardLayouts = {"layout1"};
         final InputDevice device = ShadowInputDevice.makeInputDevicebyId(TARGET_DEVICE_ID);
 

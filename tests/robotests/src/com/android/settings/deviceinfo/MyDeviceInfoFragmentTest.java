@@ -25,7 +25,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -54,6 +53,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -61,7 +61,7 @@ import androidx.preference.PreferenceScreen;
 public class MyDeviceInfoFragmentTest {
 
     @Mock
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     @Mock
     private PreferenceScreen mScreen;
     @Mock

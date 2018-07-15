@@ -1,7 +1,6 @@
 package com.android.settings.wifi;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -25,6 +24,7 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.List;
 
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;

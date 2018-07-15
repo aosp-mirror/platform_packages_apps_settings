@@ -24,7 +24,7 @@ import android.content.Context;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.widget.FooterPreferenceMixin;
+import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,7 +43,7 @@ public class EnterpriseDisclosurePreferenceControllerTest {
     private ChooseAccountFragment mFragment;
     private Context mContext;
     private EnterpriseDisclosurePreferenceController mController;
-    private FooterPreferenceMixin mFooterPreferenceMixin;
+    private FooterPreferenceMixinCompat mFooterPreferenceMixin;
     private PreferenceManager mPreferenceManager;
     private PreferenceScreen mPreferenceScreen;
 
@@ -54,7 +54,8 @@ public class EnterpriseDisclosurePreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mController = spy(new EnterpriseDisclosurePreferenceController(mContext));
         mFragment = spy(new ChooseAccountFragment());
-        mFooterPreferenceMixin = new FooterPreferenceMixin(mFragment, mFragment.getLifecycle());
+        mFooterPreferenceMixin = new FooterPreferenceMixinCompat(mFragment,
+                mFragment.getSettingsLifecycle());
         mPreferenceManager = new PreferenceManager(mContext);
         mPreferenceScreen = mPreferenceManager.createPreferenceScreen(mContext);
     }

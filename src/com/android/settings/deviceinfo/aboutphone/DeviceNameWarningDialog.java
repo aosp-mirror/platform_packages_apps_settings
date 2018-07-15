@@ -18,13 +18,14 @@ package com.android.settings.deviceinfo.aboutphone;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+
+import androidx.fragment.app.FragmentManager;
 
 /**
  * Warning dialog to let the user know where the device name will be shown before setting it.
@@ -35,7 +36,7 @@ public class DeviceNameWarningDialog extends InstrumentedDialogFragment
     public static final String TAG = "DeviceNameWarningDlg";
 
     public static void show(MyDeviceInfoFragment host) {
-        final FragmentManager manager = host.getActivity().getFragmentManager();
+        final FragmentManager manager = host.getActivity().getSupportFragmentManager();
         if (manager.findFragmentByTag(TAG) != null) {
             return;
         }

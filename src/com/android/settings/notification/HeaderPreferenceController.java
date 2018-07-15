@@ -34,16 +34,16 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragment;
+import androidx.preference.PreferenceFragmentCompat;
 
 public class HeaderPreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver {
 
-    private final PreferenceFragment mFragment;
+    private final PreferenceFragmentCompat mFragment;
     private EntityHeaderController mHeaderController;
     private boolean mStarted = false;
 
-    public HeaderPreferenceController(Context context, PreferenceFragment fragment) {
+    public HeaderPreferenceController(Context context, PreferenceFragmentCompat fragment) {
         super(context, null);
         mFragment = fragment;
     }

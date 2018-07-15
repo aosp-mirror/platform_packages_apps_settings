@@ -16,11 +16,9 @@
 package com.android.settings.display;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.mock;
 import static org.robolectric.RuntimeEnvironment.application;
 
-import android.text.TextUtils;
 import android.util.AttributeSet;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

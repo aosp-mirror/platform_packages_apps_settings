@@ -33,7 +33,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settingslib.inputmethod.InputMethodAndSubtypeUtil;
+import com.android.settingslib.inputmethod.InputMethodAndSubtypeUtilCompat;
 import com.android.settingslib.inputmethod.InputMethodPreference;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -113,7 +113,7 @@ public final class VirtualKeyboardFragment extends SettingsPreferenceFragment im
             final InputMethodPreference pref = mInputMethodPreferenceList.get(i);
             pref.setOrder(i);
             getPreferenceScreen().addPreference(pref);
-            InputMethodAndSubtypeUtil.removeUnnecessaryNonPersistentPreference(pref);
+            InputMethodAndSubtypeUtilCompat.removeUnnecessaryNonPersistentPreference(pref);
             pref.updatePreferenceViews();
         }
         mAddVirtualKeyboardScreen.setIcon(R.drawable.ic_add_24dp);

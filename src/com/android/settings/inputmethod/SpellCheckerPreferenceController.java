@@ -23,7 +23,7 @@ import android.view.textservice.TextServicesManager;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.inputmethod.InputMethodAndSubtypeUtil;
+import com.android.settingslib.inputmethod.InputMethodAndSubtypeUtilCompat;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -46,7 +46,7 @@ public class SpellCheckerPreferenceController extends AbstractPreferenceControll
         super.displayPreference(screen);
         final Preference preference = screen.findPreference(KEY_SPELL_CHECKERS);
         if (preference != null) {
-            InputMethodAndSubtypeUtil.removeUnnecessaryNonPersistentPreference(preference);
+            InputMethodAndSubtypeUtilCompat.removeUnnecessaryNonPersistentPreference(preference);
         }
     }
 

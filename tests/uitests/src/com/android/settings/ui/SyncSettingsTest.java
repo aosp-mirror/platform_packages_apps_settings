@@ -16,6 +16,8 @@
 
 package com.android.settings.ui;
 
+import static junit.framework.Assert.assertTrue;
+
 import android.os.RemoteException;
 import android.provider.Settings;
 import android.support.test.InstrumentationRegistry;
@@ -31,8 +33,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import static junit.framework.Assert.assertTrue;
 
 @MediumTest
 @RunWith(AndroidJUnit4.class)

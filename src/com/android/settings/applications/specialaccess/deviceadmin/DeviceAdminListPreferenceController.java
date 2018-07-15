@@ -45,7 +45,7 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 import com.android.settingslib.widget.FooterPreference;
-import com.android.settingslib.widget.FooterPreferenceMixin;
+import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -88,7 +88,7 @@ public class DeviceAdminListPreferenceController extends BasePreferenceControlle
     };
 
     private PreferenceGroup mPreferenceGroup;
-    private FooterPreferenceMixin mFooterPreferenceMixin;
+    private FooterPreferenceMixinCompat mFooterPreferenceMixin;
 
     static {
         FILTER.addAction(ACTION_DEVICE_POLICY_MANAGER_STATE_CHANGED);
@@ -103,7 +103,7 @@ public class DeviceAdminListPreferenceController extends BasePreferenceControlle
     }
 
     public DeviceAdminListPreferenceController setFooterPreferenceMixin(
-            FooterPreferenceMixin mixin) {
+            FooterPreferenceMixinCompat mixin) {
         mFooterPreferenceMixin = mixin;
         return this;
     }

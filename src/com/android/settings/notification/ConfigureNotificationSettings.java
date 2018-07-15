@@ -18,7 +18,6 @@ package com.android.settings.notification;
 
 import android.app.Activity;
 import android.app.Application;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -41,6 +40,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 
 @SearchIndexable
@@ -87,7 +87,7 @@ public class ConfigureNotificationSettings extends DashboardFragment {
         } else {
             app = null;
         }
-        return buildPreferenceControllers(context, getLifecycle(), app, this);
+        return buildPreferenceControllers(context, getSettingsLifecycle(), app, this);
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
@@ -119,7 +119,7 @@ public class ConfigureNotificationSettings extends DashboardFragment {
         if (preference instanceof RingtonePreference) {
             mRequestPreference = (RingtonePreference) preference;
             mRequestPreference.onPrepareRingtonePickerIntent(mRequestPreference.getIntent());
-            startActivityForResultAsUser(
+            getActivity().startActivityForResultAsUser(
                     mRequestPreference.getIntent(),
                     REQUEST_CODE,
                     null,

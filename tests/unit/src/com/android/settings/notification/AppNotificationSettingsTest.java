@@ -21,17 +21,13 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import android.support.test.espresso.intent.Intents;
-
 import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasExtra;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-
 import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT;
-
 import static org.hamcrest.Matchers.allOf;
 import static org.junit.Assert.fail;
 
@@ -43,6 +39,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.intent.Intents;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.filters.SmallTest;
 import android.support.test.runner.AndroidJUnit4;

@@ -18,13 +18,10 @@ package com.android.settings.print;
 
 import static com.android.settings.print.PrintSettingPreferenceController.shouldShowToUser;
 
-import android.app.LoaderManager.LoaderCallbacks;
 import android.content.ActivityNotFoundException;
-import android.content.AsyncTaskLoader;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
@@ -35,7 +32,6 @@ import android.print.PrintJobId;
 import android.print.PrintJobInfo;
 import android.print.PrintManager;
 import android.print.PrintManager.PrintJobStateChangeListener;
-import android.print.PrintServicesLoader;
 import android.printservice.PrintServiceInfo;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
@@ -61,6 +57,9 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.loader.app.LoaderManager.LoaderCallbacks;
+import androidx.loader.content.AsyncTaskLoader;
+import androidx.loader.content.Loader;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 

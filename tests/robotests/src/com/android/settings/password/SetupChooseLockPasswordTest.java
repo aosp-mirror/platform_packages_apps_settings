@@ -18,9 +18,7 @@ package com.android.settings.password;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.robolectric.RuntimeEnvironment.application;
-import static org.robolectric.Shadows.shadowOf;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -30,6 +28,7 @@ import com.android.settings.R;
 import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
 import com.android.settings.password.ChooseLockPassword.IntentBuilder;
 import com.android.settings.password.SetupChooseLockPassword.SetupChooseLockPasswordFragment;
+import com.android.settings.testutils.Robolectric;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
@@ -39,24 +38,24 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadows.ShadowActivity;
-import org.robolectric.shadows.ShadowAlertDialog;
 import org.robolectric.shadows.ShadowDialog;
 
 import java.util.Collections;
 import java.util.List;
 
+import androidx.appcompat.app.AlertDialog;
+
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {
-    SettingsShadowResources.class,
-    SettingsShadowResourcesImpl.class,
-    SettingsShadowResources.SettingsShadowTheme.class,
-    ShadowUtils.class
+        SettingsShadowResources.class,
+        SettingsShadowResourcesImpl.class,
+        SettingsShadowResources.SettingsShadowTheme.class,
+        ShadowUtils.class
 })
 public class SetupChooseLockPasswordTest {
 
@@ -103,8 +102,8 @@ public class SetupChooseLockPasswordTest {
     public void allSecurityOptions_shouldBeShown_When_OptionsButtonIsClicked() {
         SetupChooseLockPassword activity = createSetupChooseLockPassword();
         activity.findViewById(R.id.screen_lock_options).performClick();
-        AlertDialog latestAlertDialog = ShadowAlertDialog.getLatestAlertDialog();
-        int count = Shadows.shadowOf(latestAlertDialog).getAdapter().getCount();
+        AlertDialog latestAlertDialog = (AlertDialog) ShadowDialog.getLatestDialog();
+        int count = latestAlertDialog.getListView().getCount();
         assertThat(count).named("List items shown").isEqualTo(3);
     }
 
@@ -122,11 +121,11 @@ public class SetupChooseLockPasswordTest {
                 Robolectric.buildActivity(SetupChooseLockPassword.class, intent).setup().get();
 
         SetupChooseLockPasswordFragment fragment =
-                (SetupChooseLockPasswordFragment) activity.getFragmentManager()
+                (SetupChooseLockPasswordFragment) activity.getSupportFragmentManager()
                         .findFragmentById(R.id.main_content);
         fragment.onLockTypeSelected(ScreenLockType.PATTERN);
 
-        ShadowActivity shadowActivity = shadowOf(activity);
+        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
         final Intent nextStartedActivity = shadowActivity.getNextStartedActivity();
         assertThat(nextStartedActivity).isNotNull();
         assertThat(nextStartedActivity.getBooleanExtra(

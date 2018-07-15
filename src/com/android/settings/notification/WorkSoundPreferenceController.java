@@ -19,7 +19,6 @@ package com.android.settings.notification;
 import android.annotation.UserIdInt;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.FragmentManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -33,7 +32,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.DefaultRingtonePreference;
 import com.android.settings.R;
@@ -48,6 +46,8 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.List;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceGroup;

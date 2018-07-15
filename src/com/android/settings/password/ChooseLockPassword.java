@@ -23,7 +23,6 @@ import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_NUMERIC;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.PasswordMetrics;
 import android.content.Context;
@@ -70,6 +69,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.StringRes;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 

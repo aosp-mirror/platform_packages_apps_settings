@@ -25,7 +25,6 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Build;
 import android.os.Process;
@@ -52,6 +51,7 @@ import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowUserManager;
 
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;

@@ -16,6 +16,7 @@
 
 package com.android.settings.applications.manageapplications;
 
+import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry
         .FILTER_APPS_ALL;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry
@@ -36,8 +37,6 @@ import static com.android.settings.applications.manageapplications.AppFilterRegi
         .FILTER_APPS_RECENT;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry
         .FILTER_APPS_WORK;
-
-import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE;
 
 import android.annotation.Nullable;
 import android.annotation.StringRes;

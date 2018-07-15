@@ -82,8 +82,9 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
         mHeader = new ZenAutomaticRuleHeaderPreferenceController(context, this,
-                getLifecycle());
-        mSwitch = new ZenAutomaticRuleSwitchPreferenceController(context, this, getLifecycle());
+                getSettingsLifecycle());
+        mSwitch = new ZenAutomaticRuleSwitchPreferenceController(context, this,
+                getSettingsLifecycle());
         controllers.add(mHeader);
         controllers.add(mSwitch);
         return controllers;

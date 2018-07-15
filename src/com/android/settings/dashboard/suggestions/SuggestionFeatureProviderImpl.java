@@ -27,19 +27,18 @@ import android.util.Pair;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.Settings.NightDisplaySuggestionActivity;
-import com.android.settings.display.NightDisplayPreferenceController;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollSuggestionActivity;
 import com.android.settings.biometrics.fingerprint.FingerprintSuggestionActivity;
+import com.android.settings.display.NightDisplayPreferenceController;
 import com.android.settings.notification.ZenOnboardingActivity;
 import com.android.settings.notification.ZenSuggestionActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ScreenLockSuggestionActivity;
-import com.android.settings.support.NewDeviceIntroSuggestionActivity;
 import com.android.settings.wallpaper.WallpaperSuggestionActivity;
 import com.android.settings.wifi.calling.WifiCallingSuggestionActivity;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.drawer.Tile;
-import com.android.settingslib.suggestions.SuggestionControllerMixin;
+import com.android.settingslib.suggestions.SuggestionControllerMixinCompat;
 
 import java.util.List;
 
@@ -88,8 +87,6 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
             return WifiCallingSuggestionActivity.isSuggestionComplete(context);
         } else if (className.equals(NightDisplaySuggestionActivity.class.getName())) {
             return NightDisplayPreferenceController.isSuggestionComplete(context);
-        } else if (className.equals(NewDeviceIntroSuggestionActivity.class.getName())) {
-            return NewDeviceIntroSuggestionActivity.isSuggestionComplete(context);
         } else if (className.equals(ZenSuggestionActivity.class.getName())) {
             return ZenOnboardingActivity.isSuggestionComplete(context);
         }
@@ -119,7 +116,7 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
     }
 
     @Override
-    public void dismissSuggestion(Context context, SuggestionControllerMixin mixin,
+    public void dismissSuggestion(Context context, SuggestionControllerMixinCompat mixin,
             Suggestion suggestion) {
         if (mixin == null || suggestion == null || context == null) {
             return;

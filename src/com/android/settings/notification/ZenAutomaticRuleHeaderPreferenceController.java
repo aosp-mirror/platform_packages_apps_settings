@@ -19,7 +19,6 @@ package com.android.settings.notification;
 import static com.android.settings.widget.EntityHeaderController.PREF_KEY_APP_HEADER;
 
 import android.app.AutomaticZenRule;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -35,20 +34,21 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragment;
+import androidx.preference.PreferenceFragmentCompat;
 
 public class ZenAutomaticRuleHeaderPreferenceController extends AbstractZenModePreferenceController
         implements PreferenceControllerMixin {
 
     private final String KEY = PREF_KEY_APP_HEADER;
-    private final PreferenceFragment mFragment;
+    private final PreferenceFragmentCompat mFragment;
     private AutomaticZenRule mRule;
     private String mId;
     private EntityHeaderController mController;
 
-    public ZenAutomaticRuleHeaderPreferenceController(Context context, PreferenceFragment fragment,
-            Lifecycle lifecycle) {
+    public ZenAutomaticRuleHeaderPreferenceController(Context context,
+            PreferenceFragmentCompat fragment, Lifecycle lifecycle) {
         super(context, PREF_KEY_APP_HEADER, lifecycle);
         mFragment = fragment;
     }

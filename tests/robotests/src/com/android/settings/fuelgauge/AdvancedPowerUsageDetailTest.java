@@ -30,9 +30,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.app.AppOpsManager;
-import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -75,6 +73,8 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.fragment.app.FragmentActivity;
+import androidx.loader.app.LoaderManager;
 import androidx.preference.Preference;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -103,7 +103,7 @@ public class AdvancedPowerUsageDetailTest {
     private static final long PHONE_BACKGROUND_TIME_MS = 0;
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     @Mock
     private EntityHeaderController mEntityHeaderController;
     @Mock

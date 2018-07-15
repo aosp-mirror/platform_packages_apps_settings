@@ -21,12 +21,12 @@ import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.util.AttributeSet;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.net.DataUsageController;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.core.content.res.TypedArrayUtils;
 import androidx.preference.Preference;
 

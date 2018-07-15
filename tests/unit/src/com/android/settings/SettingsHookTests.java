@@ -16,8 +16,6 @@
 
 package com.android.settings;
 
-import com.android.settings.Settings;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;

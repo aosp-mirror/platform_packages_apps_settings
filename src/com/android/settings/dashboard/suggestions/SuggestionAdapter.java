@@ -41,7 +41,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
-import com.android.settingslib.suggestions.SuggestionControllerMixin;
+import com.android.settingslib.suggestions.SuggestionControllerMixinCompat;
 import com.android.settingslib.utils.IconCache;
 
 import java.util.ArrayList;
@@ -63,7 +63,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
     private final IconCache mCache;
     private final ArrayList<String> mSuggestionsShownLogged;
     private final SuggestionFeatureProvider mSuggestionFeatureProvider;
-    private final SuggestionControllerMixin mSuggestionControllerMixin;
+    private final SuggestionControllerMixinCompat mSuggestionControllerMixin;
     private final Callback mCallback;
     private final CardConfig mConfig;
 
@@ -76,8 +76,9 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
         void onSuggestionClosed(Suggestion suggestion);
     }
 
-    public SuggestionAdapter(Context context, SuggestionControllerMixin suggestionControllerMixin,
-        Bundle savedInstanceState, Callback callback, Lifecycle lifecycle) {
+    public SuggestionAdapter(Context context,
+            SuggestionControllerMixinCompat suggestionControllerMixin, Bundle savedInstanceState,
+            Callback callback, Lifecycle lifecycle) {
         mContext = context;
         mSuggestionControllerMixin = suggestionControllerMixin;
         mCache = new IconCache(context);

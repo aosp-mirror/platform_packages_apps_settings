@@ -27,7 +27,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.android.settingslib.CustomEditTextPreference;
+import com.android.settingslib.CustomEditTextPreferenceCompat;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceViewHolder;
@@ -35,7 +35,7 @@ import androidx.preference.PreferenceViewHolder;
 /**
  * {@code EditTextPreference} that supports input validation.
  */
-public class ValidatedEditTextPreference extends CustomEditTextPreference {
+public class ValidatedEditTextPreference extends CustomEditTextPreferenceCompat {
 
     public interface Validator {
         boolean isTextValid(String value);

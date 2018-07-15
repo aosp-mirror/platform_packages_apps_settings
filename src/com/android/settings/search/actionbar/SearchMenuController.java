@@ -17,7 +17,6 @@
 package com.android.settings.search.actionbar;
 
 import android.annotation.NonNull;
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -32,6 +31,8 @@ import com.android.settingslib.core.lifecycle.ObservableFragment;
 import com.android.settingslib.core.lifecycle.ObservablePreferenceFragment;
 import com.android.settingslib.core.lifecycle.events.OnCreateOptionsMenu;
 
+import androidx.fragment.app.Fragment;
+
 public class SearchMenuController implements LifecycleObserver, OnCreateOptionsMenu {
 
     public static final String NEED_SEARCH_ICON_IN_ACTION_BAR = "need_search_icon_in_action_bar";
@@ -39,11 +40,11 @@ public class SearchMenuController implements LifecycleObserver, OnCreateOptionsM
     private final Fragment mHost;
 
     public static void init(@NonNull ObservablePreferenceFragment host) {
-        host.getLifecycle().addObserver(new SearchMenuController(host));
+        host.getSettingsLifecycle().addObserver(new SearchMenuController(host));
     }
 
     public static void init(@NonNull ObservableFragment host) {
-        host.getLifecycle().addObserver(new SearchMenuController(host));
+        host.getSettingsLifecycle().addObserver(new SearchMenuController(host));
     }
 
     private SearchMenuController(@NonNull Fragment host) {

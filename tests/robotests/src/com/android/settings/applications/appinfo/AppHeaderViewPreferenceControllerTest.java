@@ -27,7 +27,6 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -50,6 +49,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
 
@@ -65,7 +65,7 @@ public class AppHeaderViewPreferenceControllerTest {
     private LayoutPreference mPreference;
 
     private Context mContext;
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
     private View mHeader;
@@ -75,7 +75,7 @@ public class AppHeaderViewPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mActivity = spy(Robolectric.buildActivity(Activity.class).get());
+        mActivity = spy(Robolectric.buildActivity(FragmentActivity.class).get());
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         mHeader = LayoutInflater.from(mContext).inflate(R.layout.settings_entity_header, null);

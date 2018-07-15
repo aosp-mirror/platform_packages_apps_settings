@@ -19,11 +19,6 @@
 <!-- Things unrelated to preference framework UI customization should go to other styles files -->
 <resources>
 
-    <!-- Fragment style -->
-    <style name="SettingsPreferenceFragmentStyle" parent="@style/PreferenceFragment.Material">
-        <item name="android:layout">@layout/preference_list_fragment</item>
-    </style>
-
     <style name="ApnPreference" parent="@style/Preference.Material">
         <item name="android:layout">@layout/apn_preference_layout</item>
     </style>

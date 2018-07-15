@@ -36,7 +36,7 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.PreferenceFragment;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 /**
@@ -57,14 +57,14 @@ public class BatteryHeaderPreferenceController extends AbstractPreferenceControl
     TextView mSummary2;
 
     private final Activity mActivity;
-    private final PreferenceFragment mHost;
+    private final PreferenceFragmentCompat mHost;
     private final Lifecycle mLifecycle;
     private final PowerManager mPowerManager;
 
     private LayoutPreference mBatteryLayoutPref;
 
     public BatteryHeaderPreferenceController(Context context, Activity activity,
-            PreferenceFragment host, Lifecycle lifecycle) {
+            PreferenceFragmentCompat host, Lifecycle lifecycle) {
         super(context);
         mActivity = activity;
         mHost = host;

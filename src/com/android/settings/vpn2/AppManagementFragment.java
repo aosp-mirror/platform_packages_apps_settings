@@ -21,7 +21,6 @@ import android.annotation.NonNull;
 import android.app.AlertDialog;
 import android.app.AppOpsManager;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -37,7 +36,6 @@ import android.os.UserManager;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.net.VpnConfig;
 import com.android.internal.util.ArrayUtils;
@@ -50,6 +48,8 @@ import com.android.settingslib.RestrictedSwitchPreference;
 
 import java.util.List;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.DialogFragment;
 import androidx.preference.Preference;
 
 public class AppManagementFragment extends SettingsPreferenceFragment

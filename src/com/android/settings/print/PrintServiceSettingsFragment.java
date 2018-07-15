@@ -17,12 +17,10 @@
 package com.android.settings.print;
 
 import android.app.Activity;
-import android.app.LoaderManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender.SendIntentException;
-import android.content.Loader;
 import android.content.pm.ResolveInfo;
 import android.database.DataSetObserver;
 import android.graphics.Color;
@@ -30,7 +28,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.print.PrintManager;
-import android.print.PrintServicesLoader;
 import android.print.PrinterDiscoverySession;
 import android.print.PrinterDiscoverySession.OnPrintersChangeListener;
 import android.print.PrinterId;
@@ -69,6 +66,9 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 
 /**
  * Fragment with print service settings.

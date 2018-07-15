@@ -21,7 +21,6 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings.Global;
@@ -36,6 +35,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
@@ -45,7 +45,7 @@ public class ChargingSoundPreferenceControllerTest {
     @Mock
     private PreferenceScreen mScreen;
     @Mock
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     @Mock
     private ContentResolver mContentResolver;
     @Mock

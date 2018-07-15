@@ -100,7 +100,7 @@ public class LockscreenDashboardFragment extends DashboardFragment
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        final Lifecycle lifecycle = getLifecycle();
+        final Lifecycle lifecycle = getSettingsLifecycle();
         final LockScreenNotificationPreferenceController notificationController =
                 new LockScreenNotificationPreferenceController(context,
                         KEY_LOCK_SCREEN_NOTIFICATON,

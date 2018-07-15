@@ -93,7 +93,7 @@ public class UnrestrictedDataAccess extends DashboardFragment {
         super.onAttach(context);
         mFilter = mShowSystem ? ApplicationsState.FILTER_ALL_ENABLED
                 : ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER;
-        use(UnrestrictedDataAccessPreferenceController.class).setSession(getLifecycle());
+        use(UnrestrictedDataAccessPreferenceController.class).setSession(getSettingsLifecycle());
         use(UnrestrictedDataAccessPreferenceController.class).setFilter(mFilter);
     }
 

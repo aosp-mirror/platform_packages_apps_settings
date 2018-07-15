@@ -17,7 +17,6 @@
 package com.android.settings.password;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.robolectric.Shadows.shadowOf;
 
 import android.content.ComponentName;
 import android.content.Intent;
@@ -32,6 +31,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowActivity;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -58,7 +58,7 @@ public class SetNewPasswordActivityTest {
         SetNewPasswordActivity activity =
                 Robolectric.buildActivity(SetNewPasswordActivity.class).get();
         activity.launchChooseLock(new Bundle());
-        ShadowActivity shadowActivity = shadowOf(activity);
+        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
         Intent intent = shadowActivity.getNextStartedActivityForResult().intent;
 
         assertThat(intent.getComponent())
@@ -72,7 +72,7 @@ public class SetNewPasswordActivityTest {
         SetNewPasswordActivity activity =
                 Robolectric.buildActivity(SetNewPasswordActivity.class).get();
         activity.launchChooseLock(new Bundle());
-        ShadowActivity shadowActivity = shadowOf(activity);
+        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
         Intent intent = shadowActivity.getNextStartedActivityForResult().intent;
 
         assertThat(intent.getComponent())

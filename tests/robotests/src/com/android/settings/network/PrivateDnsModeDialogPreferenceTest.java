@@ -39,7 +39,7 @@ import android.widget.LinearLayout;
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowOs;
-import com.android.settingslib.CustomDialogPreference.CustomPreferenceDialogFragment;
+import com.android.settingslib.CustomDialogPreferenceCompat.CustomPreferenceDialogFragment;
 
 import org.junit.Before;
 import org.junit.Test;

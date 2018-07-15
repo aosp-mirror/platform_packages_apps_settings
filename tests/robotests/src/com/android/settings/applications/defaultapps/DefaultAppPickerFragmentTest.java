@@ -45,13 +45,14 @@ import org.robolectric.RuntimeEnvironment;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DefaultAppPickerFragmentTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     @Mock
     private PreferenceScreen mScreen;
     @Mock

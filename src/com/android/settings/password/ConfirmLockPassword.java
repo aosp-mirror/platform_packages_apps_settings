@@ -16,7 +16,6 @@
 
 package com.android.settings.password;
 
-import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
@@ -51,6 +50,8 @@ import com.android.settingslib.animation.DisappearAnimationUtils;
 
 import java.util.ArrayList;
 
+import androidx.fragment.app.Fragment;
+
 public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
     // The index of the array is isStrongAuth << 2 + isProfile << 1 + isAlpha.
@@ -84,7 +85,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        Fragment fragment = getFragmentManager().findFragmentById(R.id.main_content);
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.main_content);
         if (fragment != null && fragment instanceof ConfirmLockPasswordFragment) {
             ((ConfirmLockPasswordFragment)fragment).onWindowFocusChanged(hasFocus);
         }

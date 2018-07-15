@@ -19,7 +19,6 @@ package com.android.settings.notification;
 import android.app.AlertDialog;
 import android.app.AutomaticZenRule;
 import android.app.Dialog;
-import android.app.FragmentManager;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -43,6 +42,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceClickListener;
 import androidx.preference.PreferenceScreen;
@@ -200,8 +200,9 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
         mHeader = new ZenAutomaticRuleHeaderPreferenceController(context, this,
-                getLifecycle());
-        mSwitch = new ZenAutomaticRuleSwitchPreferenceController(context, this, getLifecycle());
+                getSettingsLifecycle());
+        mSwitch = new ZenAutomaticRuleSwitchPreferenceController(context, this,
+                getSettingsLifecycle());
 
         controllers.add(mHeader);
         controllers.add(mSwitch);

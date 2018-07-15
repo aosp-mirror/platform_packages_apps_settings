@@ -20,9 +20,6 @@ import static android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO;
 
 import android.app.ActionBar;
 import android.app.ActivityManager;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -44,12 +41,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toolbar;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceFragment;
-import androidx.preference.PreferenceManager;
 
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
@@ -73,10 +64,19 @@ import com.android.settingslib.utils.ThreadUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
+
 
 public class SettingsActivity extends SettingsBaseActivity
         implements PreferenceManager.OnPreferenceTreeClickListener,
-        PreferenceFragment.OnPreferenceStartFragmentCallback,
+        PreferenceFragmentCompat.OnPreferenceStartFragmentCallback,
         ButtonBarHandler, FragmentManager.OnBackStackChangedListener {
 
     private static final String LOG_TAG = "SettingsActivity";
@@ -190,7 +190,7 @@ public class SettingsActivity extends SettingsBaseActivity
     }
 
     @Override
-    public boolean onPreferenceStartFragment(PreferenceFragment caller, Preference pref) {
+    public boolean onPreferenceStartFragment(PreferenceFragmentCompat caller, Preference pref) {
         new SubSettingLauncher(this)
                 .setDestination(pref.getFragment())
                 .setArguments(pref.getExtras())
@@ -270,7 +270,7 @@ public class SettingsActivity extends SettingsBaseActivity
 
         mContent = findViewById(R.id.main_content);
 
-        getFragmentManager().addOnBackStackChangedListener(this);
+        getSupportFragmentManager().addOnBackStackChangedListener(this);
 
         if (savedState != null) {
             // We are restarting from a previous saved state; used that to initialize, instead
@@ -430,7 +430,7 @@ public class SettingsActivity extends SettingsBaseActivity
     }
 
     private void setTitleFromBackStack() {
-        final int count = getFragmentManager().getBackStackEntryCount();
+        final int count = getSupportFragmentManager().getBackStackEntryCount();
 
         if (count == 0) {
             if (mInitialTitleResId > 0) {
@@ -441,7 +441,8 @@ public class SettingsActivity extends SettingsBaseActivity
             return;
         }
 
-        FragmentManager.BackStackEntry bse = getFragmentManager().getBackStackEntryAt(count - 1);
+        FragmentManager.BackStackEntry bse = getSupportFragmentManager().
+                getBackStackEntryAt(count - 1);
         setTitleFromBackStackEntry(bse);
     }
 
@@ -581,7 +582,7 @@ public class SettingsActivity extends SettingsBaseActivity
                     + fragmentName);
         }
         Fragment f = Fragment.instantiate(this, fragmentName, args);
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.main_content, f);
         if (withTransition) {
             TransitionManager.beginDelayedTransition(mContent);
@@ -595,7 +596,7 @@ public class SettingsActivity extends SettingsBaseActivity
             transaction.setBreadCrumbTitle(title);
         }
         transaction.commitAllowingStateLoss();
-        getFragmentManager().executePendingTransactions();
+        getSupportFragmentManager().executePendingTransactions();
         Log.d(LOG_TAG, "Executed frag manager pendingTransactions");
         return f;
     }

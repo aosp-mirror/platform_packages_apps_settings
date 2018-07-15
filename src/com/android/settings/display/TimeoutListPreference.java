@@ -18,7 +18,6 @@ package com.android.settings.display;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
@@ -33,6 +32,9 @@ import com.android.settingslib.RestrictedLockUtils;
 
 import java.util.ArrayList;
 
+import androidx.appcompat.app.AlertDialog.Builder;
+
+
 public class TimeoutListPreference extends RestrictedListPreference {
     private static final String TAG = "TimeoutListPreference";
     private EnforcedAdmin mAdmin;
@@ -46,7 +48,7 @@ public class TimeoutListPreference extends RestrictedListPreference {
     }
 
     @Override
-    protected void onPrepareDialogBuilder(AlertDialog.Builder builder,
+    protected void onPrepareDialogBuilder(Builder builder,
             DialogInterface.OnClickListener listener) {
         super.onPrepareDialogBuilder(builder, listener);
         if (mAdmin != null) {

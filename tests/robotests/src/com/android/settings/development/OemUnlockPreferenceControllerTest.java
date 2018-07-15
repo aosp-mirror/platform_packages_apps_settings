@@ -27,7 +27,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.UserManager;
@@ -44,6 +43,7 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)

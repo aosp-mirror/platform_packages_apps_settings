@@ -17,7 +17,6 @@
 package com.android.settings.notification;
 
 import android.app.AutomaticZenRule;
-import android.app.Fragment;
 import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -38,6 +37,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 
 abstract public class AbstractZenModeAutomaticRulePreferenceController extends

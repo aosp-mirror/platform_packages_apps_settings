@@ -36,7 +36,7 @@ import java.util.List;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceFragment;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
@@ -56,7 +56,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
     private CachedBluetoothDevice mCachedDevice;
     private PreferenceCategory mProfilesContainer;
 
-    public BluetoothDetailsProfilesController(Context context, PreferenceFragment fragment,
+    public BluetoothDetailsProfilesController(Context context, PreferenceFragmentCompat fragment,
             LocalBluetoothManager manager, CachedBluetoothDevice device, Lifecycle lifecycle) {
         super(context, fragment, device, lifecycle);
         mManager = manager;

@@ -41,7 +41,6 @@ import android.widget.Toast;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.SubSettings;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricSettings;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;

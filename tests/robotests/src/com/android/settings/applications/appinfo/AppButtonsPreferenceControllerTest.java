@@ -33,7 +33,6 @@ import static org.mockito.Mockito.when;
 
 import android.app.ActivityManager;
 import android.app.Application;
-import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
@@ -62,6 +61,8 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.stubbing.Answer;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.util.ReflectionHelpers;
+
+import androidx.fragment.app.Fragment;
 
 @RunWith(RobolectricTestRunner.class)
 public class AppButtonsPreferenceControllerTest {

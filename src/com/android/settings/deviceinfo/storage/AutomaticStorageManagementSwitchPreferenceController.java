@@ -17,7 +17,6 @@
 package com.android.settings.deviceinfo.storage;
 
 import android.app.ActivityManager;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.os.SystemProperties;
 import android.provider.Settings;
@@ -35,6 +34,7 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.PreferenceScreen;
 
 public class AutomaticStorageManagementSwitchPreferenceController extends

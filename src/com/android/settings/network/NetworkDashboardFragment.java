@@ -21,7 +21,6 @@ import static com.android.settings.network.MobilePlanPreferenceController
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Fragment;
 import android.content.Context;
 import android.icu.text.ListFormatter;
 import android.provider.SearchIndexableResource;
@@ -45,6 +44,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
 
 @SearchIndexable
 public class NetworkDashboardFragment extends DashboardFragment implements
@@ -81,9 +81,8 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle(), mMetricsFeatureProvider, this
-                /* fragment */,
-                this /* mobilePlanHost */);
+        return buildPreferenceControllers(context, getSettingsLifecycle(), mMetricsFeatureProvider,
+                this /* fragment */, this /* mobilePlanHost */);
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,

@@ -15,6 +15,12 @@
  */
 package com.android.settings.ui;
 
+import static com.android.settings.ui.testutils.SettingsTestUtils.SETTINGS_PACKAGE;
+import static com.android.settings.ui.testutils.SettingsTestUtils.TIMEOUT;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import android.os.RemoteException;
 import android.os.SystemProperties;
 import android.provider.Settings;
@@ -39,12 +45,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.TimeZone;
-
-import static com.android.settings.ui.testutils.SettingsTestUtils.SETTINGS_PACKAGE;
-import static com.android.settings.ui.testutils.SettingsTestUtils.TIMEOUT;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 @MediumTest
 @RunWith(AndroidJUnit4.class)

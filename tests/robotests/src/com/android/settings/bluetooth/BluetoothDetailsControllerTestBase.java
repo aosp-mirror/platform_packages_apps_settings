@@ -18,7 +18,6 @@ package com.android.settings.bluetooth;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
@@ -36,6 +35,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -58,7 +58,7 @@ public class BluetoothDetailsControllerTestBase {
     @Mock
     protected CachedBluetoothDevice mCachedDevice;
     @Mock
-    protected Activity mActivity;
+    protected FragmentActivity mActivity;
     @Mock
     protected BluetoothClass mBluetoothDeviceClass;
 

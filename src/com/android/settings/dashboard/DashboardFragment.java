@@ -89,7 +89,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         controllers.addAll(uniqueControllerFromXml);
 
         // And wire up with lifecycle.
-        final Lifecycle lifecycle = getLifecycle();
+        final Lifecycle lifecycle = getSettingsLifecycle();
         uniqueControllerFromXml
                 .stream()
                 .filter(controller -> controller instanceof LifecycleObserver)
