@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2018 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<!-- SUW related themes -->
+<resources>
+    <style name="GlifTheme" parent="SuwThemeGlif">
+        <!-- For all Alert Dialogs -->
+        <item name="android:alertDialogTheme">@style/ThemeOverlay.AlertDialog</item>
+        <item name="android:windowBackground">?android:attr/colorBackground</item>
+        <item name="*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
+        <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
+        <item name="face_layout_theme">@style/FaceLayoutTheme</item>
+        <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_material</item>
+        <item name="side_margin">0dip</item>
+        <item name="wifi_signal_color">@color/setup_wizard_wifi_color_dark</item>
+        <item name="wifi_signal">@drawable/wifi_signal</item>
+        <item name="wifi_friction">@drawable/wifi_friction</item>
+        <item name="preferenceBackgroundColor">?android:attr/colorBackground</item>
+        <item name="preferenceTheme">@style/PreferenceTheme.SetupWizard</item>
+
+        <!-- LockPatternView colors -->
+        <item name="*android:lockPatternStyle">@style/LockPatternStyle.Setup</item>
+    </style>
+
+    <style name="GlifTheme.Light" parent="SuwThemeGlif.Light">
+        <!-- For all Alert Dialogs -->
+        <item name="android:alertDialogTheme">@style/ThemeOverlay.AlertDialog</item>
+        <item name="android:windowBackground">?android:attr/colorBackground</item>
+        <item name="*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
+        <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
+        <item name="face_layout_theme">@style/FaceLayoutTheme</item>
+        <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_material</item>
+        <item name="side_margin">0dip</item>
+        <item name="wifi_signal_color">@color/setup_wizard_wifi_color_light</item>
+        <item name="wifi_signal">@drawable/wifi_signal</item>
+        <item name="wifi_friction">@drawable/wifi_friction</item>
+        <item name="preferenceBackgroundColor">?android:attr/colorBackground</item>
+        <item name="preferenceTheme">@style/PreferenceTheme.SetupWizard</item>
+
+        <item name="*android:lockPatternStyle">@style/LockPatternStyle.Setup</item>
+        <item name="*android:colorError">@color/glif_error_color</item>
+    </style>
+
+    <style name="GlifV2Theme" parent="SuwThemeGlifV2">
+        <!-- For all Alert Dialogs -->
+        <item name="android:alertDialogTheme">@style/GlifV2ThemeAlertDialog</item>
+        <item name="android:windowBackground">?android:attr/colorBackground</item>
+        <item name="*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
+        <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
+        <item name="face_layout_theme">@style/FaceLayoutTheme</item>
+        <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_material</item>
+        <item name="side_margin">0dip</item>
+        <item name="wifi_signal_color">@color/setup_wizard_wifi_color_dark</item>
+        <item name="wifi_signal">@drawable/wifi_signal</item>
+        <item name="wifi_friction">@drawable/wifi_friction</item>
+        <item name="preferenceBackgroundColor">?android:attr/colorBackground</item>
+        <item name="preferenceTheme">@style/PreferenceTheme.SetupWizard</item>
+
+        <!-- LockPatternView colors -->
+        <item name="*android:lockPatternStyle">@style/LockPatternStyle.Setup</item>
+    </style>
+
+    <style name="GlifV2Theme.Light" parent="SuwThemeGlifV2.Light">
+        <!-- For all Alert Dialogs -->
+        <item name="android:alertDialogTheme">@style/GlifV2ThemeAlertDialog.Light</item>
+        <item name="android:windowBackground">?android:attr/colorBackground</item>
+        <item name="*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
+        <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
+        <item name="face_layout_theme">@style/FaceLayoutTheme</item>
+        <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_material</item>
+        <item name="side_margin">0dip</item>
+        <item name="wifi_signal_color">@color/setup_wizard_wifi_color_light</item>
+        <item name="wifi_signal">@drawable/wifi_signal</item>
+        <item name="wifi_friction">@drawable/wifi_friction</item>
+        <item name="preferenceBackgroundColor">?android:attr/colorBackground</item>
+        <item name="preferenceTheme">@style/PreferenceTheme.SetupWizard</item>
+
+        <item name="*android:lockPatternStyle">@style/LockPatternStyle.Setup</item>
+        <item name="*android:colorError">@color/glif_error_color</item>
+    </style>
+
+    <style name="GlifV3Theme" parent="SuwThemeGlifV3">
+        <!-- For all Alert Dialogs -->
+        <item name="android:alertDialogTheme">@style/GlifV2ThemeAlertDialog</item>
+        <item name="android:windowBackground">?android:attr/colorBackground</item>
+        <item name="*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
+        <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
+        <item name="face_layout_theme">@style/FaceLayoutTheme</item>
+        <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_material</item>
+        <item name="side_margin">0dip</item>
+        <item name="wifi_signal_color">@color/setup_wizard_wifi_color_dark</item>
+        <item name="wifi_signal">@drawable/wifi_signal</item>
+        <item name="wifi_friction">@drawable/wifi_friction</item>
+        <item name="preferenceBackgroundColor">?android:attr/colorBackground</item>
+        <item name="preferenceTheme">@style/PreferenceTheme.SetupWizard</item>
+
+        <!-- LockPatternView colors -->
+        <item name="*android:lockPatternStyle">@style/LockPatternStyle.Setup</item>
+    </style>
+
+    <style name="GlifV3Theme.Light" parent="SuwThemeGlifV3.Light">
+        <!-- For all Alert Dialogs -->
+        <item name="android:alertDialogTheme">@style/GlifV2ThemeAlertDialog.Light</item>
+        <item name="android:windowBackground">?android:attr/colorBackground</item>
+        <item name="*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
+        <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
+        <item name="face_layout_theme">@style/FaceLayoutTheme</item>
+        <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_material</item>
+        <item name="side_margin">0dip</item>
+        <item name="wifi_signal_color">@color/setup_wizard_wifi_color_light</item>
+        <item name="wifi_signal">@drawable/wifi_signal</item>
+        <item name="wifi_friction">@drawable/wifi_friction</item>
+        <item name="preferenceBackgroundColor">?android:attr/colorBackground</item>
+        <item name="preferenceTheme">@style/PreferenceTheme.SetupWizard</item>
+
+        <item name="*android:lockPatternStyle">@style/LockPatternStyle.Setup</item>
+        <item name="*android:colorError">@color/glif_error_color</item>
+    </style>
+
+    <style name="GlifV2Theme.Transparent">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
+    <style name="GlifV2Theme.Light.Transparent">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
+    <style name="GlifV2ThemeAlertDialog" parent="SuwAlertDialogTheme">
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+
+    <style name="GlifV2ThemeAlertDialog.Light" parent="SuwAlertDialogTheme.Light">
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+
+    <style name="GlifV3Theme.Transparent">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
+    <style name="GlifV3Theme.Light.Transparent">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
+    <style name="SetupWizardTheme.Transparent" parent="GlifTheme">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
+    <style name="SetupWizardTheme.Light.Transparent" parent="GlifTheme.Light">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
+    <!-- Accessibility portion of Setup Wizard -->
+    <style name="SetupWizardAccessibilityTheme" parent="Theme.SettingsBase">
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:colorPrimary">@color/material_grey_100</item>
+        <item name="android:colorAccent">@color/material_blue_700</item>
+        <item name="android:titleTextColor">@color/material_blue_700</item>
+        <item name="preferenceTheme">@style/PreferenceTheme</item>
+        <item name="switchBarTheme">@style/ThemeOverlay.SwitchBar.Settings</item>
+    </style>
+</resources>
