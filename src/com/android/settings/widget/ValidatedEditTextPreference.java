@@ -16,7 +16,6 @@
 
 package com.android.settings.widget;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.text.Editable;
 import android.text.InputType;
@@ -30,6 +29,7 @@ import android.widget.TextView;
 import com.android.settingslib.CustomEditTextPreferenceCompat;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.PreferenceViewHolder;
 
 /**
