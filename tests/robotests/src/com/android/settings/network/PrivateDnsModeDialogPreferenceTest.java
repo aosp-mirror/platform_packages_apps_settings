@@ -25,7 +25,6 @@ import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -48,6 +47,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
+
+import androidx.appcompat.app.AlertDialog;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowOs.class)
@@ -132,9 +133,9 @@ public class PrivateDnsModeDialogPreferenceTest {
     @Test
     public void testOnCheckedChanged_switchMode_saveButtonHasCorrectState() {
         final String[] INVALID_HOST_NAMES = new String[] {
-            INVALID_HOST_NAME,
-            "2001:db8::53",  // IPv6 string literal
-            "192.168.1.1",   // IPv4 string literal
+                INVALID_HOST_NAME,
+                "2001:db8::53",  // IPv6 string literal
+                "192.168.1.1",   // IPv4 string literal
         };
 
         for (String invalid : INVALID_HOST_NAMES) {
