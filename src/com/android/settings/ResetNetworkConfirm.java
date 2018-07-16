@@ -150,7 +150,8 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
                 }
             }
 
-            ImsManager.factoryReset(context);
+            ImsManager.getInstance(context,
+                     SubscriptionManager.getPhoneId(mSubId)).factoryReset();
             restoreDefaultApn(context);
             esimFactoryReset(context, context.getPackageName());
             // There has been issues when Sms raw table somehow stores orphan
