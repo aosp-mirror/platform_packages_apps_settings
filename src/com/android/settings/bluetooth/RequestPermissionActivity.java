@@ -49,7 +49,7 @@ public class RequestPermissionActivity extends Activity implements
     // adb shell am start -a android.bluetooth.adapter.action.REQUEST_DISCOVERABLE
     // adb shell am start -a android.bluetooth.adapter.action.REQUEST_DISABLE
 
-    private static final String TAG = "RequestPermissionActivity";
+    private static final String TAG = "BtRequestPermission";
 
     private static final int MAX_DISCOVERABLE_TIMEOUT = 3600; // 1 hr
 
