@@ -31,6 +31,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.RingtonePreference;
+import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.sound.HandsFreeProfileOutputPreferenceController;
@@ -51,7 +52,7 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
 @SearchIndexable
-public class SoundSettings extends DashboardFragment {
+public class SoundSettings extends DashboardFragment implements OnActivityResultListener {
     private static final String TAG = "SoundSettings";
 
     private static final String SELECTED_PREFERENCE_KEY = "selected_preference";

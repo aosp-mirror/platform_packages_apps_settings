@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -26,6 +27,7 @@ import static org.mockito.Mockito.when;
 import android.app.ActivityManager;
 import android.content.Intent;
 
+import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -35,6 +37,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -65,9 +71,34 @@ public class SettingsActivityTest {
     }
 
     @Test
-    public void testSetTaskDescription_IconChanged() {
+    public void setTaskDescription_shouldUpdateIcon() {
         mActivity.setTaskDescription(mTaskDescription);
 
         verify(mTaskDescription).setIcon(anyInt());
+    }
+
+    @Test
+    public void onActivityResult_shouldDelegateToListener() {
+        final List<Fragment> fragments = new ArrayList<>();
+        fragments.add(new Fragment());
+        fragments.add(new ListenerFragment());
+
+        final FragmentManager manager = mock(FragmentManager.class);
+        when(mActivity.getSupportFragmentManager()).thenReturn(manager);
+        when(manager.getFragments()).thenReturn(fragments);
+
+        mActivity.onActivityResult(0, 0, new Intent());
+
+        assertThat(((ListenerFragment) fragments.get(1)).mOnActivityResultCalled).isTrue();
+    }
+
+    public static class ListenerFragment extends Fragment implements OnActivityResultListener {
+
+        public boolean mOnActivityResultCalled;
+
+        @Override
+        public void onActivityResult(int requestCode, int resultCode, Intent data) {
+            mOnActivityResultCalled = true;
+        }
     }
 }
