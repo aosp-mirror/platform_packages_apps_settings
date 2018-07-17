@@ -56,9 +56,7 @@
         <item name="android:layout_width">match_parent</item>
     </style>
 
-
-    <style name="TextAppearance" parent="android:TextAppearance.Material">
-    </style>
+    <style name="TextAppearance" parent="android:TextAppearance.Material"/>
 
     <style name="TextAppearance.info_label">
         <item name="android:textSize">14sp</item>
@@ -92,33 +90,6 @@
 
     <style name="TallTitleBarTheme" parent="android:Theme.NoTitleBar">
         <item name="android:windowContentOverlay">@null</item>
-    </style>
-
-    <style name="PreferenceHeaderPanelSinglePane">
-        <item name="android:layout_marginStart">0dp</item>
-        <item name="android:layout_marginEnd">0dp</item>
-        <item name="android:background">@null</item>
-    </style>
-
-    <style name="PreferencePanelSinglePane" parent="@*android:style/PreferencePanel">
-        <item name="android:layout_marginStart">0dp</item>
-        <item name="android:layout_marginEnd">0dp</item>
-        <item name="android:paddingStart">0dp</item>
-        <item name="android:paddingEnd">0dp</item>
-        <item name="android:background">@null</item>
-        <item name="android:scrollbarStyle">outsideOverlay</item>
-    </style>
-
-    <style name="PreferenceHeaderListSinglePane" parent="@*android:style/PreferenceHeaderList">
-        <item name="android:paddingStart">@dimen/settings_side_margin</item>
-        <item name="android:paddingEnd">@dimen/settings_side_margin</item>
-        <item name="android:paddingTop">0dp</item>
-        <item name="android:paddingBottom">0dp</item>
-        <item name="android:layout_marginStart">0dp</item>
-        <item name="android:layout_marginEnd">0dp</item>
-        <item name="android:layout_marginTop">0dp</item>
-        <item name="android:layout_marginBottom">0dp</item>
-        <item name="android:scrollbarStyle">outsideOverlay</item>
     </style>
 
     <style name="PreferenceFragmentListSinglePane" parent="@*android:style/PreferenceFragmentList">
@@ -286,13 +257,6 @@
 
     <style name="TextAppearance.PagerTabs" parent="@android:style/TextAppearance.Material.Widget.TabWidget" />
 
-    <style name="KeyguardAppWidgetItem">
-        <item name="android:textSize">18sp</item>
-    </style>
-
-    <!-- Scrollbar style OUTSIDE_OVERLAY -->
-    <integer name="preference_scrollbar_style">33554432</integer>
-
     <style name="TextAppearance.Medium" parent="@android:style/TextAppearance.Material.Medium" />
     <style name="TextAppearance.Small" parent="@android:style/TextAppearance.Material.Small" />
     <style name="TextAppearance.Switch" parent="@android:style/TextAppearance.Material.Title">
@@ -304,9 +268,6 @@
     </style>
 
     <style name="TextAppearance.TileTitle" parent="@android:style/TextAppearance.Material.Subhead" />
-    <style name="TextAppearance.TileSubTitle" parent="@android:style/TextAppearance.Material.Body1" />
-    <style name="TextAppearance.RecentsTitle" parent="TextAppearance.CategoryTitle" />
-    <style name="TextAppearance.ResultTitle" parent="TextAppearance.CategoryTitle" />
 
     <style name="TextAppearance.SuggestionHeader"
            parent="@android:style/TextAppearance.Material.Subhead">
@@ -452,8 +413,6 @@
     <style name="ActionPrimaryButton" parent="android:Widget.DeviceDefault.Button.Colored"/>
 
     <style name="ActionSecondaryButton" parent="android:Widget.DeviceDefault.Button"/>
-
-    <style name="DreamStartButton" parent="android:Widget.DeviceDefault.Button" />
 
     <style name="LockPatternContainerStyle">
         <item name="android:maxHeight">400dp</item>
