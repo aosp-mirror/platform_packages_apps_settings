@@ -93,6 +93,7 @@ public class RestrictAppDetectorTest {
                 AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UNRESTRICTED_UID,
                 UNRESTRICTED_PACKAGE_NAME);
 
+        BatteryDatabaseManager.setUpForTest(mBatteryDatabaseManager);
         doReturn(mPackageManager).when(mContext).getPackageManager();
         doReturn(mApplicationInfo).when(mPackageManager).getApplicationInfo(any(),
                 anyInt());

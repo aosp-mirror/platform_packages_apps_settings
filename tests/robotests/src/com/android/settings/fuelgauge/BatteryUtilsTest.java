@@ -51,8 +51,6 @@ import android.text.format.DateUtils;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
-import com.android.settings.R;
-import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.fuelgauge.batterytip.AnomalyInfo;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -426,16 +424,6 @@ public class BatteryUtilsTest {
 
         assertThat(mBatteryUtils.calculateLastFullChargeTime(
                 mBatteryStatsHelper, currentTimeMs)).isEqualTo(TIME_SINCE_LAST_FULL_CHARGE_MS);
-    }
-
-    @Test
-    public void testGetSummaryResIdFromAnomalyType() {
-        assertThat(mBatteryUtils.getSummaryResIdFromAnomalyType(Anomaly.AnomalyType.WAKE_LOCK))
-                .isEqualTo(R.string.battery_abnormal_wakelock_summary);
-        assertThat(mBatteryUtils.getSummaryResIdFromAnomalyType(Anomaly.AnomalyType.WAKEUP_ALARM))
-                .isEqualTo(R.string.battery_abnormal_wakeup_alarm_summary);
-        assertThat(mBatteryUtils.getSummaryResIdFromAnomalyType(Anomaly.AnomalyType.BLUETOOTH_SCAN))
-                .isEqualTo(R.string.battery_abnormal_location_summary);
     }
 
     @Test

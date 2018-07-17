@@ -23,6 +23,7 @@ import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryDatabaseManager;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
+import com.android.settings.fuelgauge.batterytip.BatteryTipUtils;
 import com.android.settings.fuelgauge.batterytip.tips.AppLabelPredicate;
 import com.android.settings.fuelgauge.batterytip.tips.AppRestrictionPredicate;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
@@ -62,12 +63,10 @@ public class RestrictAppDetector implements BatteryTipDetector {
             return getFakeData();
         }
         if (mPolicy.appRestrictionEnabled) {
-            // TODO(b/72385333): hook up the query timestamp to server side
+            // TODO(b/80192137): hook up the query timestamp to server side
             final long oneDayBeforeMs = System.currentTimeMillis() - DateUtils.DAY_IN_MILLIS;
-            final List<AppInfo> highUsageApps = mBatteryDatabaseManager.queryAllAnomalies(
-                    oneDayBeforeMs, AnomalyDatabaseHelper.State.NEW);
-            // Remove it if it doesn't have label or been restricted
-            highUsageApps.removeIf(mAppLabelPredicate.or(mAppRestrictionPredicate));
+            final List<AppInfo> highUsageApps = BatteryTipUtils.detectAnomalies(mContext,
+                    oneDayBeforeMs);
             if (!highUsageApps.isEmpty()) {
                 // If there are new anomalies, show them
                 return new RestrictAppTip(BatteryTip.StateType.NEW, highUsageApps);

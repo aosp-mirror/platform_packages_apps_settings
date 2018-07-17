@@ -17,6 +17,7 @@
 package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -24,16 +25,12 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
-import android.util.FeatureFlagUtils;
-import android.util.SparseArray;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsImpl;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.InstrumentedPreferenceFragment;
-import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
@@ -43,8 +40,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-
-import java.util.List;
 
 import androidx.preference.PreferenceGroup;
 
@@ -165,21 +160,6 @@ public class BatteryAppListPreferenceControllerTest {
         mPreferenceController.setUsageSummary(mPreference, mNormalBatterySipper);
 
         assertThat(mPreference.getSummary().toString()).isEqualTo("2 min");
-    }
-
-    @Test
-    public void testRefreshAnomalyIcon_containsAnomaly_showAnomalyIcon() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.BATTERY_DISPLAY_APP_LIST, true);
-        PowerGaugePreference preference = new PowerGaugePreference(mContext);
-        final String key = mPreferenceController.extractKeyFromUid(UID);
-        final SparseArray<List<Anomaly>> anomalySparseArray = new SparseArray<>();
-        anomalySparseArray.append(UID, null);
-        preference.setKey(key);
-        doReturn(preference).when(mAppListGroup).findPreference(key);
-
-        mPreferenceController.refreshAnomalyIcon(anomalySparseArray);
-
-        assertThat(preference.showAnomalyIcon()).isTrue();
     }
 
     @Test
