@@ -633,8 +633,14 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     mCategoryToPrefCategoryMap.get(CATEGORY_DISPLAY);
             experimentalCategory.removePreference(mToggleInversionPreference);
             experimentalCategory.removePreference(mDisplayDaltonizerPreferenceScreen);
-            mToggleInversionPreference.setOrder(mToggleLargePointerIconPreference.getOrder());
-            mDisplayDaltonizerPreferenceScreen.setOrder(mToggleInversionPreference.getOrder());
+            mDisplayDaltonizerPreferenceScreen.setOrder(
+                    mDisplayMagnificationPreferenceScreen.getOrder() + 1);
+            mToggleInversionPreference.setOrder(
+                    mDisplayDaltonizerPreferenceScreen.getOrder() + 1);
+            mToggleLargePointerIconPreference.setOrder(
+                    mToggleInversionPreference.getOrder() + 1);
+            mToggleDisableAnimationsPreference.setOrder(
+                    mToggleLargePointerIconPreference.getOrder() + 1);
             mToggleInversionPreference.setSummary(R.string.summary_empty);
             displayCategory.addPreference(mToggleInversionPreference);
             displayCategory.addPreference(mDisplayDaltonizerPreferenceScreen);
