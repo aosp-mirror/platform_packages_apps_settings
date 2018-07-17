@@ -17,7 +17,6 @@
 package com.android.settings;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
@@ -42,6 +41,8 @@ import android.widget.TextView;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.SettingsPreferenceFragment.SettingsDialogFragment;
 import com.android.settings.core.InstrumentedFragment;
+
+import androidx.appcompat.app.AlertDialog;
 
 public class ProxySelector extends InstrumentedFragment implements DialogCreatable {
     private static final String TAG = "ProxySelector";

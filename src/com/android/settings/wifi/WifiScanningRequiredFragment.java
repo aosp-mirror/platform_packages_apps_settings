@@ -16,7 +16,6 @@
 package com.android.settings.wifi;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
@@ -35,6 +34,7 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.HelpUtils;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
 
 public class WifiScanningRequiredFragment extends InstrumentedDialogFragment implements
         DialogInterface.OnClickListener {

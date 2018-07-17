@@ -17,7 +17,6 @@
 package com.android.settings.biometrics.fingerprint;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -32,6 +31,7 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
 
 public class SetupFingerprintEnrollFindSensor extends FingerprintEnrollFindSensor {

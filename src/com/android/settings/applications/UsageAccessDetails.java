@@ -15,7 +15,6 @@
  */
 package com.android.settings.applications;
 
-import android.app.AlertDialog;
 import android.app.AppOpsManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
@@ -32,6 +31,7 @@ import com.android.settings.applications.AppStateUsageBridge.UsageState;
 import com.android.settings.overlay.FeatureFactory;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.Preference.OnPreferenceClickListener;

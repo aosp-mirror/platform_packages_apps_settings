@@ -16,7 +16,6 @@
 
 package com.android.settings;
 
-import android.app.AlertDialog;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -32,6 +31,8 @@ import android.widget.CheckBox;
 
 import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
+
+import androidx.appcompat.app.AlertDialog;
 
 /**
  * This activity is displayed when an app launches the BIND_APPWIDGET intent. This allows apps

@@ -16,7 +16,6 @@
 
 package com.android.settings.tts;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -29,6 +28,7 @@ import android.widget.RadioButton;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 

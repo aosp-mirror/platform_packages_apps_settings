@@ -18,7 +18,6 @@ package com.android.settings.applications.appinfo;
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
-import android.app.AlertDialog;
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.os.Bundle;
@@ -34,6 +33,7 @@ import com.android.settings.applications.AppStateInstallAppsBridge.InstallAppsSt
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 

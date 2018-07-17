@@ -17,7 +17,6 @@
 package com.android.settings;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -34,6 +33,7 @@ import android.widget.TextView;
 import java.util.Locale;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
 
 /**
  * {@link Activity} that displays regulatory information for the "Regulatory information"

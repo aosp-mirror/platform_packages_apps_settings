@@ -18,7 +18,6 @@ package com.android.settings.utils;
 
 import android.annotation.Nullable;
 import android.app.ActivityManager;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
@@ -43,6 +42,7 @@ import com.android.settingslib.applications.ServiceListing;
 
 import java.util.List;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;

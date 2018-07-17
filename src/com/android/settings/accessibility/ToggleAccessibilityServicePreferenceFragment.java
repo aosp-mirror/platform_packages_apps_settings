@@ -18,7 +18,6 @@ package com.android.settings.accessibility;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
@@ -45,6 +44,8 @@ import com.android.settings.widget.ToggleSwitch.OnBeforeCheckedChangeListener;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 
 import java.util.List;
+
+import androidx.appcompat.app.AlertDialog;
 
 public class ToggleAccessibilityServicePreferenceFragment
         extends ToggleFeaturePreferenceFragment implements DialogInterface.OnClickListener {

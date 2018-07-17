@@ -17,7 +17,6 @@
 package com.android.settings;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -49,6 +48,7 @@ import com.android.settings.vpn2.VpnUtils;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 import sun.security.util.ObjectIdentifier;
 import sun.security.x509.AlgorithmId;

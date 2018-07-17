@@ -19,7 +19,6 @@ package com.android.settings.accounts;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -53,6 +52,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 
 public class AccountSyncSettings extends AccountPreferenceBase {

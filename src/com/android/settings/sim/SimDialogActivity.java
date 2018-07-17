@@ -17,7 +17,6 @@
 package com.android.settings.sim;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -44,6 +43,8 @@ import com.android.settings.R;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import androidx.appcompat.app.AlertDialog;
 
 public class SimDialogActivity extends Activity {
     private static String TAG = "SimDialogActivity";

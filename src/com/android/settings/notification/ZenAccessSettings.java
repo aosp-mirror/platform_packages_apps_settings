@@ -18,7 +18,6 @@ package com.android.settings.notification;
 
 import android.annotation.Nullable;
 import android.app.ActivityManager;
-import android.app.AlertDialog;
 import android.app.AppGlobals;
 import android.app.Dialog;
 import android.app.NotificationManager;
@@ -58,6 +57,7 @@ import java.util.Collections;
 import java.util.List;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceScreen;

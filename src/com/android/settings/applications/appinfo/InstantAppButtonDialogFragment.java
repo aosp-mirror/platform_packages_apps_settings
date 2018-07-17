@@ -15,7 +15,6 @@
  */
 package com.android.settings.applications.appinfo;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -27,6 +26,8 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.overlay.FeatureFactory;
+
+import androidx.appcompat.app.AlertDialog;
 
 /**
  * Fragment to show the dialog for clearing the instant app.

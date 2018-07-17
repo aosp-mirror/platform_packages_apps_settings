@@ -1,7 +1,6 @@
 package com.android.settings;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.AsyncResult;
 import android.os.Bundle;
@@ -18,6 +17,7 @@ import android.widget.ListView;
 import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneFactory;
 
+import androidx.appcompat.app.AlertDialog;
 
 /**
  * Radio Band Mode Selection Class

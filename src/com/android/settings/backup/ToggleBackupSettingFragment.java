@@ -1,6 +1,5 @@
 package com.android.settings.backup;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.backup.IBackupManager;
 import android.content.Context;
@@ -20,6 +19,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.ToggleSwitch;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;

@@ -16,7 +16,6 @@
 
 package com.android.settings.deviceinfo;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,6 +30,7 @@ import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
 
 public class HardwareInfoDialogFragment extends InstrumentedDialogFragment {
 

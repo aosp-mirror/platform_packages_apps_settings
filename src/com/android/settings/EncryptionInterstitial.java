@@ -18,7 +18,6 @@ package com.android.settings;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
@@ -41,6 +40,8 @@ import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.setupwizardlib.GlifLayout;
 
 import java.util.List;
+
+import androidx.appcompat.app.AlertDialog;
 
 public class EncryptionInterstitial extends SettingsActivity {
     private static final String TAG = EncryptionInterstitial.class.getSimpleName();

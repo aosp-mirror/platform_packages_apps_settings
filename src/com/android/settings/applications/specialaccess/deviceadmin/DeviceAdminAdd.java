@@ -18,7 +18,6 @@ package com.android.settings.applications.specialaccess.deviceadmin;
 
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.AlertDialog;
 import android.app.AppOpsManager;
 import android.app.Dialog;
 import android.app.admin.DeviceAdminInfo;
@@ -73,6 +72,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import androidx.appcompat.app.AlertDialog;
 
 public class DeviceAdminAdd extends Activity {
     static final String TAG = "DeviceAdminAdd";

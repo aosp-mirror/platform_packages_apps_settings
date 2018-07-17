@@ -2,7 +2,6 @@ package com.android.settings.applications;
 
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.AlertDialog;
 import android.app.ApplicationErrorReport;
 import android.app.Dialog;
 import android.app.PendingIntent;
@@ -44,6 +43,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
 public class RunningServiceDetails extends InstrumentedFragment

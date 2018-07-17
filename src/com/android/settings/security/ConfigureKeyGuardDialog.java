@@ -17,7 +17,6 @@
 package com.android.settings.security;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.DialogInterface;
@@ -31,6 +30,7 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.password.ChooseLockGeneric;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
 
 /**
  * Prompt for key guard configuration confirmation.

@@ -17,7 +17,6 @@
 package com.android.settings.users;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -41,6 +40,7 @@ import com.android.settingslib.drawable.CircleFramedDrawable;
 
 import java.io.File;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 /**

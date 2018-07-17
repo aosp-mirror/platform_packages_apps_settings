@@ -16,7 +16,6 @@
 
 package com.android.settings.vpn2;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -37,6 +36,8 @@ import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnProfile;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+
+import androidx.appcompat.app.AlertDialog;
 
 /**
  * Fragment wrapper around a {@link ConfigDialog}.

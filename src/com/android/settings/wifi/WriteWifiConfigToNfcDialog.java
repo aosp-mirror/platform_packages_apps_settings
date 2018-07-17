@@ -17,7 +17,6 @@
 package com.android.settings.wifi;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.wifi.WifiManager;
@@ -45,6 +44,8 @@ import com.android.settings.R;
 import com.android.settingslib.wifi.AccessPoint;
 
 import java.io.IOException;
+
+import androidx.appcompat.app.AlertDialog;
 
 class WriteWifiConfigToNfcDialog extends AlertDialog
         implements TextWatcher, View.OnClickListener, CompoundButton.OnCheckedChangeListener {
@@ -96,7 +97,6 @@ class WriteWifiConfigToNfcDialog extends AlertDialog
         mView = getLayoutInflater().inflate(R.layout.write_wifi_config_to_nfc, null);
 
         setView(mView);
-        setInverseBackgroundForced(true);
         setTitle(R.string.setup_wifi_nfc_tag);
         setCancelable(true);
         setButton(DialogInterface.BUTTON_NEUTRAL,

@@ -16,7 +16,6 @@
 
 package com.android.settings.notification;
 
-import android.app.AlertDialog;
 import android.app.AutomaticZenRule;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -42,6 +41,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceClickListener;

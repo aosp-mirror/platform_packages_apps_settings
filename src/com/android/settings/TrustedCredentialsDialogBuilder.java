@@ -17,7 +17,6 @@ package com.android.settings;
 
 import android.annotation.NonNull;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.DialogInterface;
 import android.content.pm.UserInfo;
@@ -40,6 +39,8 @@ import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.IntConsumer;
+
+import androidx.appcompat.app.AlertDialog;
 
 class TrustedCredentialsDialogBuilder extends AlertDialog.Builder {
     public interface DelegateInterface {

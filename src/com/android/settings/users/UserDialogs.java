@@ -16,7 +16,6 @@
 
 package com.android.settings.users;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -33,6 +32,8 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+
+import androidx.appcompat.app.AlertDialog;
 
 /**
  * Helper class for displaying dialogs related to user settings.

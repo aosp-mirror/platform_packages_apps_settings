@@ -16,7 +16,6 @@
 
 package com.android.settings.vpn2;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -38,6 +37,8 @@ import com.android.internal.net.VpnProfile;
 import com.android.settings.R;
 
 import java.net.InetAddress;
+
+import androidx.appcompat.app.AlertDialog;
 
 /**
  * Dialog showing information about a VPN configuration. The dialog

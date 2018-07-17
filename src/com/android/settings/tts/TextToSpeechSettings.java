@@ -20,7 +20,6 @@ import static android.provider.Settings.Secure.TTS_DEFAULT_PITCH;
 import static android.provider.Settings.Secure.TTS_DEFAULT_RATE;
 import static android.provider.Settings.Secure.TTS_DEFAULT_SYNTH;
 
-import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -57,6 +56,7 @@ import java.util.MissingResourceException;
 import java.util.Objects;
 import java.util.Set;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 

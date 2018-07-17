@@ -18,7 +18,6 @@ package com.android.settings.notification;
 
 import static com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -47,6 +46,7 @@ import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 public class ZenRuleSelectionDialog extends InstrumentedDialogFragment {

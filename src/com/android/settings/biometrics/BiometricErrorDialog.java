@@ -20,13 +20,14 @@ import static com.android.settings.biometrics.BiometricSettings.RESULT_FINISHED;
 import static com.android.settings.biometrics.BiometricSettings.RESULT_TIMEOUT;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.hardware.biometrics.BiometricConstants;
 import android.os.Bundle;
 
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+
+import androidx.appcompat.app.AlertDialog;
 
 /**
  * Abstract dialog, shown when an error occurs during biometric enrollment.

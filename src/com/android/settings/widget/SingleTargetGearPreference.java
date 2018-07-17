@@ -17,12 +17,12 @@
 package com.android.settings.widget;
 
 import android.content.Context;
-
-import androidx.core.content.res.TypedArrayUtils;
-import androidx.preference.Preference;
 import android.util.AttributeSet;
 
 import com.android.settings.R;
+
+import androidx.core.content.res.TypedArrayUtils;
+import androidx.preference.Preference;
 
 /**
  * A preference with single target and a gear icon on the side.

@@ -20,7 +20,6 @@ import static android.view.WindowManager.LayoutParams.PRIVATE_FLAG_HIDE_NON_SYST
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -40,6 +39,8 @@ import com.android.settings.R;
 
 import java.util.List;
 import java.util.Locale;
+
+import androidx.appcompat.app.AlertDialog;
 
 /**
  * Utility class for creating the dialog that asks users for explicit permission to grant
