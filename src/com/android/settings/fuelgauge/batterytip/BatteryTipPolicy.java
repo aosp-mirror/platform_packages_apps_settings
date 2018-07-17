@@ -40,6 +40,7 @@ public class BatteryTipPolicy {
     private static final String KEY_HIGH_USAGE_PERIOD_MS = "high_usage_period_ms";
     private static final String KEY_HIGH_USAGE_BATTERY_DRAINING = "high_usage_battery_draining";
     private static final String KEY_APP_RESTRICTION_ENABLED = "app_restriction_enabled";
+    private static final String KEY_APP_RESTRICTION_ACTIVE_HOUR = "app_restriction_active_hour";
     private static final String KEY_REDUCED_BATTERY_ENABLED = "reduced_battery_enabled";
     private static final String KEY_REDUCED_BATTERY_PERCENT = "reduced_battery_percent";
     private static final String KEY_LOW_BATTERY_ENABLED = "low_battery_enabled";
@@ -117,6 +118,15 @@ public class BatteryTipPolicy {
      * @see #KEY_APP_RESTRICTION_ENABLED
      */
     public final boolean appRestrictionEnabled;
+
+    /**
+     * Period(hour) to show anomaly apps. If it is 24 hours, it means only show anomaly apps
+     * happened in last 24 hours.
+     *
+     * @see Settings.Global#BATTERY_TIP_CONSTANTS
+     * @see #KEY_APP_RESTRICTION_ACTIVE_HOUR
+     */
+    public final int appRestrictionActiveHour;
 
     /**
      * {@code true} if reduced battery tip is enabled
@@ -228,6 +238,7 @@ public class BatteryTipPolicy {
                 Duration.ofHours(2).toMillis());
         highUsageBatteryDraining = mParser.getInt(KEY_HIGH_USAGE_BATTERY_DRAINING, 25);
         appRestrictionEnabled = mParser.getBoolean(KEY_APP_RESTRICTION_ENABLED, true);
+        appRestrictionActiveHour = mParser.getInt(KEY_APP_RESTRICTION_ACTIVE_HOUR, 24);
         reducedBatteryEnabled = mParser.getBoolean(KEY_REDUCED_BATTERY_ENABLED, false);
         reducedBatteryPercent = mParser.getInt(KEY_REDUCED_BATTERY_PERCENT, 50);
         lowBatteryEnabled = mParser.getBoolean(KEY_LOW_BATTERY_ENABLED, true);
