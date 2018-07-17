@@ -16,30 +16,30 @@
 
 package com.android.settings.password;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
-import android.app.AlertDialog;
+import static com.google.common.truth.Truth.assertThat;
 
 import com.android.settings.R;
 import com.android.settings.testutils.Robolectric;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
+import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowAlertDialog;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {
-    SettingsShadowResources.SettingsShadowTheme.class,
-    ShadowUtils.class
+        SettingsShadowResources.SettingsShadowTheme.class,
+        ShadowUtils.class,
+        ShadowAlertDialogCompat.class,
+        SettingsShadowResourcesImpl.class
 })
 public class SetupSkipDialogTest {
 
@@ -55,12 +55,12 @@ public class SetupSkipDialogTest {
         SetupSkipDialog setupSkipDialog = SetupSkipDialog.newInstance(false);
         setupSkipDialog.show(mActivity.getSupportFragmentManager());
 
-        AlertDialog alertDialog = ShadowAlertDialog.getLatestAlertDialog();
-        assertNotNull(alertDialog);
-        ShadowAlertDialog shadowAlertDialog = Shadows.shadowOf(alertDialog);
-        assertEquals(mActivity.getString(R.string.lock_screen_intro_skip_title),
+        AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(alertDialog).isNotNull();
+        ShadowAlertDialogCompat shadowAlertDialog = ShadowAlertDialogCompat.shadowOf(alertDialog);
+        assertThat(mActivity.getString(R.string.lock_screen_intro_skip_title)).isEqualTo(
                 shadowAlertDialog.getTitle());
-        assertEquals(mActivity.getString(R.string.lock_screen_intro_skip_dialog_text),
+        assertThat(mActivity.getString(R.string.lock_screen_intro_skip_dialog_text)).isEqualTo(
                 shadowAlertDialog.getMessage());
     }
 
@@ -69,12 +69,12 @@ public class SetupSkipDialogTest {
         SetupSkipDialog setupSkipDialog = SetupSkipDialog.newInstance(true);
         setupSkipDialog.show(mActivity.getSupportFragmentManager());
 
-        AlertDialog alertDialog = ShadowAlertDialog.getLatestAlertDialog();
-        assertNotNull(alertDialog);
-        ShadowAlertDialog shadowAlertDialog = Shadows.shadowOf(alertDialog);
-        assertEquals(mActivity.getString(R.string.lock_screen_intro_skip_title),
+        AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(alertDialog).isNotNull();
+        ShadowAlertDialogCompat shadowAlertDialog = ShadowAlertDialogCompat.shadowOf(alertDialog);
+        assertThat(mActivity.getString(R.string.lock_screen_intro_skip_title)).isEqualTo(
                 shadowAlertDialog.getTitle());
-        assertEquals(mActivity.getString(R.string.lock_screen_intro_skip_dialog_text_frp),
+        assertThat(mActivity.getString(R.string.lock_screen_intro_skip_dialog_text_frp)).isEqualTo(
                 shadowAlertDialog.getMessage());
     }
 }

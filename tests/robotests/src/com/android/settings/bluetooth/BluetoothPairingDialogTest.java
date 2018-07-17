@@ -26,7 +26,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.text.SpannableStringBuilder;
@@ -38,6 +37,8 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
+import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settingslib.testutils.FragmentTestUtils;
 
 import org.junit.Before;
@@ -46,9 +47,12 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.shadows.ShadowAlertDialog;
+import org.robolectric.annotation.Config;
+
+import androidx.appcompat.app.AlertDialog;
 
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(shadows = {ShadowAlertDialogCompat.class, SettingsShadowResourcesImpl.class})
 public class BluetoothPairingDialogTest {
 
     private static final String FILLER = "text that goes in a view";
@@ -434,7 +438,7 @@ public class BluetoothPairingDialogTest {
         BluetoothPairingDialogFragment fragment = spy(new BluetoothPairingDialogFragment());
         when(fragment.getPairingViewText()).thenReturn(existingText);
         setupFragment(fragment);
-        AlertDialog dialog = ShadowAlertDialog.getLatestAlertDialog();
+        AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNotNull();
         boolean expected = !TextUtils.isEmpty(existingText);
         assertThat(dialog.getButton(Dialog.BUTTON_POSITIVE).isEnabled()).isEqualTo(expected);

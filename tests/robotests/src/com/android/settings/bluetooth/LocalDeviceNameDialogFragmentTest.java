@@ -22,13 +22,14 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
+import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.testutils.FragmentTestUtils;
@@ -40,11 +41,15 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.shadows.ShadowAlertDialog;
+import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
+import androidx.appcompat.app.AlertDialog;
+
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(shadows = {ShadowAlertDialogCompat.class, SettingsShadowResourcesImpl.class})
 public class LocalDeviceNameDialogFragmentTest {
+
     @Mock
     private LocalBluetoothManager mManager;
     @Mock
@@ -75,7 +80,7 @@ public class LocalDeviceNameDialogFragmentTest {
     @Test
     public void diaglogTriggersShowSoftInput() {
         FragmentTestUtils.startFragment(mFragment);
-        AlertDialog dialog = ShadowAlertDialog.getLatestAlertDialog();
+        AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNotNull();
         View view = dialog.findViewById(R.id.edittext);
         verify(mInputMethodManager).showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
