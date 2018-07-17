@@ -17,6 +17,7 @@
 package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doReturn;
 
 import android.content.Intent;
@@ -25,6 +26,7 @@ import android.net.wifi.WifiConfiguration;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
+import com.android.settings.testutils.shadow.SettingsShadowTypedArray;
 import com.android.settings.testutils.shadow.ShadowWifiManager;
 
 import org.junit.Before;
@@ -39,9 +41,10 @@ import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {
-    SettingsShadowResources.SettingsShadowTheme.class,
-    ShadowConnectivityManager.class,
-    ShadowWifiManager.class
+        SettingsShadowResources.SettingsShadowTheme.class,
+        ShadowConnectivityManager.class,
+        SettingsShadowTypedArray.class,
+        ShadowWifiManager.class
 }
 )
 public class WifiDialogActivityTest {
@@ -78,7 +81,7 @@ public class WifiDialogActivityTest {
                 Robolectric.buildActivity(
                         WifiDialogActivity.class,
                         new Intent().putExtra(WifiDialogActivity.KEY_CONNECT_FOR_CALLER, false))
-                .setup().get();
+                        .setup().get();
         WifiDialog dialog = (WifiDialog) ShadowAlertDialog.getLatestAlertDialog();
         assertThat(dialog).isNotNull();
 
