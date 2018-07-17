@@ -1,5 +1,8 @@
 <resources>
-    <style name="Theme.Settings" parent="@android:style/Theme.DeviceDefault.Settings" />
+    <style name="Theme.Settings" parent="@android:style/Theme.DeviceDefault.Settings">
+        <!-- For AndroidX AlertDialogs -->
+        <item name="alertDialogTheme">@style/Theme.AppCompat.DayNight.Dialog.Alert</item>
+    </style>
 
     <!-- Override the main app's style for ActionPrimaryButton to get around lack of new style
          support in robolectric  -->
