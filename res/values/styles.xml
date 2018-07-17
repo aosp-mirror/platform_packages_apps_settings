@@ -16,6 +16,14 @@
 
 <resources>
 
+    <style name="Theme.ActionBar" parent="@android:style/Widget.DeviceDefault.Light.ActionBar.Solid">
+        <item name="android:contentInsetStart">@dimen/actionbar_contentInsetStart</item>
+    </style>
+
+    <style name="Theme.ActionBar.SubSettings" parent="Theme.ActionBar">
+        <item name="android:contentInsetStart">@dimen/actionbar_subsettings_contentInsetStart</item>
+    </style>
+
     <style name="info_label">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
@@ -54,42 +62,6 @@
     <style name="form_value">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
-    </style>
-
-    <style name="TextAppearance" parent="android:TextAppearance.Material"/>
-
-    <style name="TextAppearance.info_label">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="TextAppearance.info_small">
-        <item name="android:textSize">12sp</item>
-        <item name="android:textStyle">normal</item>
-    </style>
-
-    <style name="TextAppearance.info_value">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textStyle">normal</item>
-    </style>
-
-    <style name="TextAppearance.PasswordEntry" parent="android:TextAppearance.Material">
-        <item name="android:gravity">center</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
-        <item name="android:textSize">24sp</item>
-    </style>
-
-    <style name="TextAppearance.CryptKeeper_PasswordEntry" parent="android:TextAppearance.Material">
-        <item name="android:gravity">center_horizontal</item>
-        <item name="android:background">@null</item>
-        <item name="android:textCursorDrawable">@null</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:imeOptions">flagForceAscii|actionDone</item>
-    </style>
-
-    <style name="TallTitleBarTheme" parent="android:Theme.NoTitleBar">
-        <item name="android:windowContentOverlay">@null</item>
     </style>
 
     <style name="PreferenceFragmentListSinglePane" parent="@*android:style/PreferenceFragmentList">
@@ -195,13 +167,6 @@
         <item name="android:activityOpenExitAnimation">@anim/confirm_credential_open_exit</item>
     </style>
 
-    <style name="Transparent">
-        <item name="android:alertDialogTheme">@style/Theme.AlertDialog</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsFloating">true</item>
-    </style>
-
     <style name="CryptKeeperBlankTheme" parent="@android:style/Theme.Material.NoActionBar">
         <item name="android:background">#ff000000</item>
     </style>
@@ -255,7 +220,37 @@
         <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
     </style>
 
-    <style name="TextAppearance.PagerTabs" parent="@android:style/TextAppearance.Material.Widget.TabWidget" />
+    <style name="TextAppearance" parent="android:TextAppearance.Material"/>
+
+    <style name="TextAppearance.info_label">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.info_small">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="TextAppearance.info_value">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="TextAppearance.PasswordEntry" parent="android:TextAppearance.Material">
+        <item name="android:gravity">center</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="TextAppearance.CryptKeeper_PasswordEntry" parent="android:TextAppearance.Material">
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:background">@null</item>
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:imeOptions">flagForceAscii|actionDone</item>
+    </style>
 
     <style name="TextAppearance.Medium" parent="@android:style/TextAppearance.Material.Medium" />
     <style name="TextAppearance.Small" parent="@android:style/TextAppearance.Material.Small" />
@@ -269,10 +264,77 @@
 
     <style name="TextAppearance.TileTitle" parent="@android:style/TextAppearance.Material.Subhead" />
 
+    <style name="TextAppearance.SuggestionTitle"
+           parent="@android:style/TextAppearance.Material.Subhead">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAppearance.SuggestionSummary" parent="TextAppearance.Small">
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+    </style>
+
+    <style name="TextAppearance.FingerprintErrorText"
+           parent="android:TextAppearance.Material.Body1">
+        <item name="android:textColor">?android:attr/colorError</item>
+    </style>
+
+    <style name="TextAppearance.FaceErrorText"
+           parent="android:TextAppearance.Material.Body1">
+        <item name="android:textColor">?android:attr/colorError</item>
+    </style>
+
+    <style name="TextAppearance.ConfirmDeviceCredentialsErrorText"
+           parent="android:TextAppearance.Material.Body1">
+        <item name="android:textColor">?android:attr/colorError</item>
+    </style>
+
+    <style name="TextAppearance.Small.SwitchBar">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="TextAppearance.RemoveDialogContent" parent="@android:style/TextAppearance.Material">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
+    <style name="TextAppearance.SearchBar" parent="@android:style/TextAppearance.Material.Widget.Toolbar.Subtitle">
+        <item name="android:textSize">@dimen/search_bar_text_size</item>
+    </style>
+
     <style name="TextAppearance.SuggestionHeader"
            parent="@android:style/TextAppearance.Material.Subhead">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">?android:attr/colorAccent</item>
+    </style>
+
+    <style name="TextAppearance.EntityHeaderTitle"
+           parent="@android:style/TextAppearance.Material.Subhead">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAppearance.EntityHeaderSummary"
+           parent="@android:style/TextAppearance.Material.Body1">
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:gravity">start</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">marquee</item>
+    </style>
+
+    <style name="TextAppearance.ZenOnboardingButton">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">?android:attr/colorAccent</item>
+        <item name="android:background">@drawable/btn_borderless_rect</item>
+        <item name="android:gravity">center</item>
+        <item name="android:focusable">true</item>
+        <item name="android:padding">8dp</item>
+    </style>
+
+    <style name="SuggestionConditionStyle">
+        <item name="android:background">?android:attr/colorPrimary</item>
     </style>
 
     <style name="SuggestionCardText">
@@ -294,46 +356,12 @@
         <item name="android:layout_marginBottom">@dimen/suggestion_card_button_bottom_margin</item>
     </style>
 
-    <style name="TextAppearance.SuggestionTitle"
-           parent="@android:style/TextAppearance.Material.Subhead">
-        <item name="android:textSize">16sp</item>
-    </style>
-
-    <style name="TextAppearance.SuggestionSummary" parent="TextAppearance.Small">
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
-    </style>
-
-    <style name="TextAppearance.FingerprintErrorText"
-        parent="android:TextAppearance.Material.Body1">
-        <item name="android:textColor">?android:attr/colorError</item>
-    </style>
-
     <style name="FingerprintLayoutTheme">
         <item name="android:icon">@drawable/ic_fingerprint_header</item>
     </style>
 
-    <style name="TextAppearance.FaceErrorText"
-        parent="android:TextAppearance.Material.Body1">
-        <item name="android:textColor">?android:attr/colorError</item>
-    </style>
-
     <style name="FaceLayoutTheme">
         <item name="android:icon">@drawable/ic_face_header</item>
-    </style>
-
-    <style name="TextAppearance.ConfirmDeviceCredentialsErrorText"
-        parent="android:TextAppearance.Material.Body1">
-        <item name="android:textColor">?android:attr/colorError</item>
-    </style>
-
-    <style name="TextAppearance.Small.SwitchBar">
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
-        <item name="android:textStyle">normal</item>
-    </style>
-
-    <style name="TextAppearance.RemoveDialogContent" parent="@android:style/TextAppearance.Material">
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 
     <style name="PreviewPagerPageIndicator">
@@ -349,12 +377,6 @@
         <item name="android:minHeight">?android:attr/listPreferredItemHeight</item>
         <item name="android:textAppearance">?android:attr/textAppearanceListItem</item>
         <item name="android:gravity">center_vertical</item>
-    </style>
-
-    <style name="RedactionItemAndLabel">
-        <item name="android:layout_marginTop">@dimen/redaction_vertical_margins</item>
-        <item name="android:paddingStart">@dimen/redaction_padding_start</item>
-        <item name="android:textAppearance">@android:style/TextAppearance.Material.Subhead</item>
     </style>
 
     <style name="FingerprintHeaderStyle" parent="android:style/TextAppearance.Material.Subhead">
@@ -383,31 +405,6 @@
         <item name="android:paddingStart">16dp</item>
         <item name="android:paddingEnd">16dp</item>
         <item name="android:paddingBottom">8dp</item>
-    </style>
-
-    <style name="TextAppearance.EntityHeaderTitle"
-           parent="@android:style/TextAppearance.Material.Subhead">
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
-        <item name="android:textSize">16sp</item>
-    </style>
-
-    <style name="TextAppearance.EntityHeaderSummary"
-           parent="@android:style/TextAppearance.Material.Body1">
-        <item name="android:textAlignment">viewStart</item>
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
-        <item name="android:gravity">start</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:ellipsize">marquee</item>
-    </style>
-
-  <style name="TextAppearance.ZenOnboardingButton">
-        <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">?android:attr/colorAccent</item>
-        <item name="android:background">@drawable/btn_borderless_rect</item>
-        <item name="android:gravity">center</item>
-        <item name="android:focusable">true</item>
-        <item name="android:padding">8dp</item>
     </style>
 
     <style name="ActionPrimaryButton" parent="android:Widget.DeviceDefault.Button.Colored"/>
@@ -447,14 +444,6 @@
     <style name="LockPatternStyle.Setup">
         <item name="*android:regularColor">@color/setup_lock_pattern_view_regular_color_light</item>
         <item name="*android:successColor">@color/setup_lock_pattern_view_success_color_light</item>
-    </style>
-
-    <style name="SuggestionConditionStyle">
-        <item name="android:background">?android:attr/colorPrimary</item>
-    </style>
-
-    <style name="TextAppearance.SearchBar" parent="@android:style/TextAppearance.Material.Widget.Toolbar.Subtitle">
-        <item name="android:textSize">@dimen/search_bar_text_size</item>
     </style>
 
     <style name="device_info_dialog_label">

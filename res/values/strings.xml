@@ -27,10 +27,7 @@
 
     <!-- Strings for Dialog close button [CHAR LIMIT=20] -->
     <string name="dlg_close">Close</string>
-    <!-- Strings for Dialog switch button [CHAR LIMIT=20] -->
-    <string name="dlg_switch">Switch</string>
 
-    <!-- Device Info --> <skip />
     <!-- Device Info screen. Used for a status item's value when the proper value is not known -->
     <string name="device_info_default">Unknown</string>
     <!-- [CHAR LIMIT=NONE] Device Info screen. Countdown for user taps to enable development settings -->
@@ -49,14 +46,6 @@
     <!-- Category headings in left-pane header menu --> <skip />
     <!-- Settings main menu category heading. Wireless and networks (Wi-Fi, Bluetooth, data usage...). [CHAR LIMIT=40] -->
     <string name="header_category_wireless_networks">Wireless &amp; networks</string>
-    <!-- Settings main menu category heading. Wireless and networks (Wi-Fi, Bluetooth, data usage...). [CHAR LIMIT=40] -->
-    <string name="header_category_connections">Connections</string>
-    <!-- Settings main menu category heading. Device (Sound, display, battery, applications...). [CHAR LIMIT=40] -->
-    <string name="header_category_device">Device</string>
-    <!-- Settings main menu category heading. Personal (Accounts, security, language, backup...). [CHAR LIMIT=40] -->
-    <string name="header_category_personal">Personal</string>
-    <!-- Settings main menu category heading. Personal (Accounts, security, language, backup...). [CHAR LIMIT=40] -->
-    <string name="header_category_access">Access</string>
     <!-- Settings main menu category heading. System (Updates, data, accessibility, about phone). [CHAR LIMIT=40] -->
     <string name="header_category_system">System</string>
 
@@ -269,8 +258,6 @@
     <!-- Bluetooth broadcasting settings, option to enable/disable broadcasting -->
     <string name="bluetooth_broadcasting">Broadcasting</string>
 
-    <!-- Bluetooth settings.  Message when the device state is unknown -->
-    <string name="bluetooth_unknown" />
     <!--Bluetooth settings screen, summary text for Bluetooth device with no name -->
     <string name="bluetooth_device">Unnamed Bluetooth device</string>
     <!--Bluetooth settings screen, text that appears in heading bar when scanning for devices -->
@@ -347,9 +334,6 @@
     <!-- Strings for msg to display to user while bluetooth is turning off [CHAR LIMIT=60] -->
     <string name="bluetooth_turning_off">"Turning Bluetooth off\u2026"</string>
 
-    <!-- Strings for device profile auto connect setting -->
-    <string name="bluetooth_auto_connect">Auto-connect</string>
-
     <!-- Activity label of BluetoothPermissionActivity [CHAR LIMIT=none]-->
     <string name="bluetooth_connection_permission_request">"Bluetooth connection request"</string>
 
@@ -419,8 +403,6 @@
     <string name="connected_device_connected_title">Currently connected</string>
     <!-- Title for connected device group [CHAR LIMIT=none]-->
     <string name="connected_device_saved_title">Saved devices</string>
-    <!-- Title for preference to add a device [CHAR LIMIT=none] [BACKUP_MESSAGE_ID=7803521577708810621] -->
-    <string name="connected_device_add_device_title">Add device</string>
     <!-- Summary for preference to add a device [CHAR LIMIT=none]-->
     <string name="connected_device_add_device_summary">Bluetooth will turn on to pair</string>
     <!-- Title for other connection preferences [CHAR LIMIT=none]-->
@@ -662,10 +644,6 @@
     <!-- The title of the activity to adjust proxy settings -->
     <string name="proxy_settings_label">Proxy settings</string>
 
-    <!-- ======================================================================================= -->
-    <!-- NEW STUFF -->
-    <!-- ======================================================================================= -->
-
     <!-- Button label for generic cancel action [CHAR LIMIT=20] -->
     <string name="cancel">Cancel</string>
     <!-- Button label for generic OK action [CHAR LIMIT=20] -->
@@ -687,8 +665,6 @@
     <string name="settings_shortcut">Settings shortcut</string>
     <!-- Wireless controls settings screen, setting check box label -->
     <string name="airplane_mode">Airplane mode</string>
-    <!-- Main Settings screen settings title for things like airplane mode, tethering, NFC, VPN.  This will take you to another screen with those settings.  [CHAR LIMIT=30] -->
-    <string name="radio_controls_title">More</string>
     <!-- Wireless Settings screen title for things like Wi-Fi, bluetooth, airplane mode. -->
     <string name="wireless_networks_settings_title">Wireless &amp; networks</string>
     <!-- Main Settings screen settings summary text for the "Wireless controls" setting -->
@@ -727,7 +703,6 @@
     <!-- mobile network settings screen, setting option summary text -->
     <string name="sum_carrier_select">Choose a network operator</string>
 
-    <!-- Date and time settings --><skip />
     <!-- Main Settings screen setting option name to go into the date and time settings-->
     <string name="date_and_time_settings_title">Date &amp; time</string>
     <!-- Title for Date & Time settings screen in SetupWizard [CHAR LIMIT=40] -->
@@ -4089,12 +4064,6 @@
     <string name="no_applications">No apps.</string>
     <!-- [CHAR LIMIT=15] Manage applications, label for chart showing internal storage use. -->
     <string name="internal_storage">Internal storage</string>
-    <!-- [CHAR LIMIT=30] Title for internal device storage that is capitalized for placement as a phrase into another sentence -->
-    <string name="internal_storage_sentence">internal storage</string>
-    <!-- [CHAR LIMIT=15] Manage applications, label for chart showing SD card storage use. -->
-    <string name="sd_card_storage" product="nosdcard">USB storage</string>
-    <!-- [CHAR LIMIT=15] Manage applications, label for chart showing SD card storage use. -->
-    <string name="sd_card_storage" product="default">SD card storage</string>
     <!-- Manage app screen, shown when the activity is busy recomputing the size of each app -->
     <string name="recompute_size">Recomputing size\u2026</string>
     <!-- Manage applications, individual application screen, confirmation dialog title. Displays when user selects to "Clear data". -->
@@ -4117,8 +4086,6 @@
     <string name="join_two_unrelated_items"><xliff:g id="first_item">%1$s</xliff:g>, <xliff:g id="second_item">%2$s</xliff:g></string>
     <string name="computing_size">Computing\u2026</string>
     <string name="invalid_size_value">Couldn\u2019t compute package size.</string>
-    <!-- String displayed when list is empty -->
-    <string name="empty_list_msg">You don\u2019t have any third-party apps installed.</string>
     <!-- Manage applications, version string displayed in app snippet -->
     <string name="version_text">version <xliff:g id="version_num">%1$s</xliff:g></string>
     <!-- Manage applications, text for Move button -->
@@ -4131,9 +4098,6 @@
     <string name="move_app_to_sdcard" product="nosdcard">Move to USB storage</string>
     <!-- Manage applications, text for Move button  to move app to sdcard -->
     <string name="move_app_to_sdcard" product="default">Move to SD card</string>
-    <!-- Manage applications, title for dialog when killing persistent apps-->
-    <!-- Manage applications, text for Move button when move is in progress -->
-    <string name="moving">Moving</string>
 
     <!-- Text of pop up message if the request for a "migrate primary storage" operation
          (see storage_menu_migrate) is denied as another is already in progress. [CHAR LIMIT=75] -->
@@ -4151,16 +4115,10 @@
     <string name="force_stop_dlg_title">Force stop?</string>
     <!-- [CHAR LIMIT=200] Manage applications, text for dialog when killing persistent apps-->
     <string name="force_stop_dlg_text">If you force stop an app, it may misbehave.</string>
-    <!-- Manage applications, text for dialog when moving an app -->
-    <string name="move_app_failed_dlg_title"></string>
-    <!-- Manage applications, text for dialog moving an app -->
-    <string name="move_app_failed_dlg_text">Couldn\u2019t move app. <xliff:g id="reason">%1$s</xliff:g></string>
     <!-- Manage applications, application installation location title -->
     <string name="app_install_location_title">Preferred install location</string>
     <!-- Manage applications. application installation location summary -->
     <string name="app_install_location_summary">Change the preferred installation location for new apps</string>
-    <!-- [CHAR LIMIT=30] Manage applications, title for dialog when disabling apps -->
-    <string name="app_disable_dlg_title">Disable built-in app?</string>
     <!-- [CHAR LIMIT=30] Manage applications, label for option to disable app -->
     <string name="app_disable_dlg_positive">Disable app</string>
     <!-- [CHAR LIMIT=200] Manage applications, text for dialog when disabling apps -->
@@ -4171,11 +4129,6 @@
     <string name="app_special_disable_dlg_text">If you disable this app, Android and other apps may no longer function as intended.  Your data will also be deleted.</string>
     <!-- [CHAR LIMIT=30] Manage applications, title for dialog when disabling notifications for an app -->
     <string name="app_disable_notifications_dlg_title">Turn off notifications?</string>
-    <!-- [CHAR LIMIT=200] Manage applications, text for dialog when disabling notifications for an app -->
-    <string name="app_disable_notifications_dlg_text">
-        If you turn off notifications for this app, you may miss important alerts and updates.
-    </string>
-
     <!-- Manage applications, individual application info screen, section heading for information about the app installer [CHAR_LIMIT=25] -->
     <string name="app_install_details_group_title">Store</string>
     <!-- Manage applications, individual application info screen, title for the option which will trigger application info in it's installer [CHAR_LIMIT=25] -->
