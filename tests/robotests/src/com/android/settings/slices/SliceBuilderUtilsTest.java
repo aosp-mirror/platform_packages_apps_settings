@@ -48,8 +48,11 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.robolectric.RuntimeEnvironment;
 
+import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
+import androidx.slice.SliceMetadata;
 import androidx.slice.SliceProvider;
+import androidx.slice.core.SliceAction;
 import androidx.slice.widget.SliceLiveData;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -406,27 +409,92 @@ public class SliceBuilderUtilsTest {
         assertThat(intentData).isEqualTo(expectedUri);
     }
 
+    @Test
+    public void buildIntentSlice_noIconPassed_returnsSliceWithIcon() {
+        final int expectedIconResource = IconCompat.createWithResource(mContext,
+                R.drawable.ic_settings).toIcon().getResId();
+        final SliceData sliceData = getDummyData(CONTEXT_CONTROLLER, SliceData.SliceType.INTENT,
+                0x0);
+
+        final Slice slice = SliceBuilderUtils.buildSlice(mContext, sliceData);
+
+        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
+        final SliceAction primaryAction = metadata.getPrimaryAction();
+        final int actualIconResource = primaryAction.getIcon().toIcon().getResId();
+        assertThat(actualIconResource).isEqualTo(expectedIconResource);
+    }
+
+    @Test
+    public void buildToggleSlice_noIconPassed_returnsSliceWithIcon() {
+        final int expectedIconResource = IconCompat.createWithResource(mContext,
+                R.drawable.ic_settings).toIcon().getResId();
+        final SliceData dummyData = getDummyData(TOGGLE_CONTROLLER, SliceData.SliceType.SWITCH,
+                0x0);
+
+        final Slice slice = SliceBuilderUtils.buildSlice(mContext, dummyData);
+
+        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
+        final SliceAction primaryAction = metadata.getPrimaryAction();
+        final int actualIconResource = primaryAction.getIcon().toIcon().getResId();
+        assertThat(actualIconResource).isEqualTo(expectedIconResource);
+    }
+
+    @Test
+    public void buildSliderSlice_noIconPassed_returnsSliceWithIcon() {
+        final int expectedIconResource = IconCompat.createWithResource(mContext,
+                R.drawable.ic_settings).toIcon().getResId();
+        final SliceData data = getDummyData(SLIDER_CONTROLLER, SliceData.SliceType.SLIDER, 0x0);
+
+        final Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
+
+        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
+        final SliceAction primaryAction = metadata.getPrimaryAction();
+        final int actualIconResource = primaryAction.getIcon().toIcon().getResId();
+        assertThat(actualIconResource).isEqualTo(expectedIconResource);
+    }
+
+    @Test
+    public void getSafeIcon_replacesEmptyIconWithSettingsIcon() {
+        final int settingsIcon = R.drawable.ic_settings;
+        final int zeroIcon = 0x0;
+        final SliceData data = getDummyData(TOGGLE_CONTROLLER, SliceData.SliceType.SWITCH,
+                zeroIcon);
+
+        final IconCompat actualIcon = SliceBuilderUtils.getSafeIcon(mContext, data);
+
+        final int actualIconResource = actualIcon.toIcon().getResId();
+        assertThat(actualIconResource).isNotEqualTo(zeroIcon);
+        assertThat(actualIconResource).isEqualTo(settingsIcon);
+    }
+
     private SliceData getDummyData() {
-        return getDummyData(TOGGLE_CONTROLLER, SUMMARY, SliceData.SliceType.SWITCH, SCREEN_TITLE);
+        return getDummyData(TOGGLE_CONTROLLER, SUMMARY, SliceData.SliceType.SWITCH, SCREEN_TITLE,
+                ICON);
+    }
+
+    private SliceData getDummyData(Class prefController, int sliceType, int icon) {
+        return getDummyData(TOGGLE_CONTROLLER, SUMMARY, SliceData.SliceType.SWITCH, SCREEN_TITLE,
+                icon);
     }
 
     private SliceData getDummyData(String summary, String screenTitle) {
-        return getDummyData(TOGGLE_CONTROLLER, summary, SliceData.SliceType.SWITCH, screenTitle);
+        return getDummyData(TOGGLE_CONTROLLER, summary, SliceData.SliceType.SWITCH, screenTitle,
+                ICON);
     }
 
     private SliceData getDummyData(Class prefController, int sliceType) {
-        return getDummyData(prefController, SUMMARY, sliceType, SCREEN_TITLE);
+        return getDummyData(prefController, SUMMARY, sliceType, SCREEN_TITLE, ICON);
     }
 
     private SliceData getDummyData(Class prefController, String summary, int sliceType,
-            String screenTitle) {
+            String screenTitle, int icon) {
         return new SliceData.Builder()
                 .setKey(KEY)
                 .setTitle(TITLE)
                 .setSummary(summary)
                 .setScreenTitle(screenTitle)
                 .setKeywords(KEYWORDS)
-                .setIcon(ICON)
+                .setIcon(icon)
                 .setFragmentName(FRAGMENT_NAME)
                 .setUri(URI)
                 .setPreferenceControllerClassName(prefController.getName())

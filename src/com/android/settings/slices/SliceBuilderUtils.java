@@ -49,6 +49,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
@@ -242,7 +243,7 @@ public class SliceBuilderUtils {
     private static Slice buildToggleSlice(Context context, SliceData sliceData,
             BasePreferenceController controller) {
         final PendingIntent contentIntent = getContentPendingIntent(context, sliceData);
-        final IconCompat icon = IconCompat.createWithResource(context, sliceData.getIconResource());
+        final IconCompat icon = getSafeIcon(context, sliceData);
         final CharSequence subtitleText = getSubtitleText(context, controller, sliceData);
         @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
         final TogglePreferenceController toggleController =
@@ -266,7 +267,7 @@ public class SliceBuilderUtils {
     private static Slice buildIntentSlice(Context context, SliceData sliceData,
             BasePreferenceController controller) {
         final PendingIntent contentIntent = getContentPendingIntent(context, sliceData);
-        final IconCompat icon = IconCompat.createWithResource(context, sliceData.getIconResource());
+        final IconCompat icon = getSafeIcon(context, sliceData);
         final CharSequence subtitleText = getSubtitleText(context, controller, sliceData);
         @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
         final List<String> keywords = buildSliceKeywords(sliceData);
@@ -287,7 +288,7 @@ public class SliceBuilderUtils {
         final SliderPreferenceController sliderController = (SliderPreferenceController) controller;
         final PendingIntent actionIntent = getSliderAction(context, sliceData);
         final PendingIntent contentIntent = getContentPendingIntent(context, sliceData);
-        final IconCompat icon = IconCompat.createWithResource(context, sliceData.getIconResource());
+        final IconCompat icon = getSafeIcon(context, sliceData);
         @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
         final CharSequence subtitleText = getSubtitleText(context, controller, sliceData);
         final SliceAction primaryAction = new SliceAction(contentIntent, icon,
@@ -381,5 +382,15 @@ public class SliceBuilderUtils {
                         .setPrimaryAction(primaryAction))
                 .setKeywords(keywords)
                 .build();
+    }
+
+    @VisibleForTesting
+    static IconCompat getSafeIcon(Context context, SliceData data) {
+        int iconResource = data.getIconResource();
+
+        if (iconResource == 0) {
+            iconResource = R.drawable.ic_settings;
+        }
+        return IconCompat.createWithResource(context, iconResource);
     }
 }
