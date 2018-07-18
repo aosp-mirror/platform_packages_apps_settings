@@ -22,9 +22,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender.SendIntentException;
 import android.content.pm.ResolveInfo;
-import android.database.DataSetObserver;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.print.PrintManager;
@@ -44,13 +41,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -67,8 +61,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver;
 
 /**
  * Fragment with print service settings.
@@ -77,21 +74,16 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         implements SwitchBar.OnSwitchChangeListener,
         LoaderManager.LoaderCallbacks<List<PrintServiceInfo>> {
 
-    private static final String LOG_TAG = "PrintServiceSettingsFragment";
+    private static final String LOG_TAG = "PrintServiceSettings";
 
     private static final int LOADER_ID_PRINTERS_LOADER = 1;
     private static final int LOADER_ID_PRINT_SERVICE_LOADER = 2;
 
-    private final DataSetObserver mDataObserver = new DataSetObserver() {
+    private final AdapterDataObserver mDataObserver = new AdapterDataObserver() {
         @Override
         public void onChanged() {
             invalidateOptionsMenuIfNeeded();
             updateEmptyView();
-        }
-
-        @Override
-        public void onInvalidated() {
-            invalidateOptionsMenuIfNeeded();
         }
 
         private void invalidateOptionsMenuIfNeeded() {
@@ -173,8 +165,6 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         super.onViewCreated(view, savedInstanceState);
         initComponents();
         updateUiForArguments();
-        getListView().setVisibility(View.GONE);
-        getBackupListView().setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -189,15 +179,11 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
                 .setPrintServiceEnabled(mComponentName, enabled);
     }
 
-    private ListView getBackupListView() {
-        return (ListView) getView().findViewById(R.id.backup_list);
-    }
-
     private void updateEmptyView() {
         ViewGroup contentRoot = (ViewGroup) getListView().getParent();
-        View emptyView = getBackupListView().getEmptyView();
+        View emptyView = getEmptyView();
         if (!mToggleSwitch.isChecked()) {
-            if (emptyView != null && emptyView.getId() != R.id.empty_print_state) {
+            if (emptyView != null) {
                 contentRoot.removeView(emptyView);
                 emptyView = null;
             }
@@ -209,11 +195,10 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
                 TextView textView = (TextView) emptyView.findViewById(R.id.message);
                 textView.setText(R.string.print_service_disabled);
                 contentRoot.addView(emptyView);
-                getBackupListView().setEmptyView(emptyView);
+                setEmptyView(emptyView);
             }
         } else if (mPrintersAdapter.getUnfilteredCount() <= 0) {
-            if (emptyView != null
-                    && emptyView.getId() != R.id.empty_printers_list_service_enabled) {
+            if (emptyView != null) {
                 contentRoot.removeView(emptyView);
                 emptyView = null;
             }
@@ -221,10 +206,10 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
                 emptyView = getActivity().getLayoutInflater().inflate(
                         R.layout.empty_printers_list_service_enabled, contentRoot, false);
                 contentRoot.addView(emptyView);
-                getBackupListView().setEmptyView(emptyView);
+                setEmptyView(emptyView);
             }
-        } else if (mPrintersAdapter.getCount() <= 0) {
-            if (emptyView != null && emptyView.getId() != R.id.empty_print_state) {
+        } else if (mPrintersAdapter.getItemCount() <= 0) {
+            if (emptyView != null) {
                 contentRoot.removeView(emptyView);
                 emptyView = null;
             }
@@ -236,7 +221,11 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
                 TextView textView = (TextView) emptyView.findViewById(R.id.message);
                 textView.setText(R.string.print_no_printers_found);
                 contentRoot.addView(emptyView);
-                getBackupListView().setEmptyView(emptyView);
+                setEmptyView(emptyView);
+            }
+        } else if (mPrintersAdapter.getItemCount() > 0) {
+            if (emptyView != null) {
+                contentRoot.removeView(emptyView);
             }
         }
     }
@@ -254,7 +243,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
 
     private void initComponents() {
         mPrintersAdapter = new PrintersAdapter();
-        mPrintersAdapter.registerDataSetObserver(mDataObserver);
+        mPrintersAdapter.registerAdapterDataObserver(mDataObserver);
 
         final SettingsActivity activity = (SettingsActivity) getActivity();
 
@@ -263,31 +252,12 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         mSwitchBar.show();
 
         mToggleSwitch = mSwitchBar.getSwitch();
-        mToggleSwitch.setOnBeforeCheckedChangeListener(new ToggleSwitch.OnBeforeCheckedChangeListener() {
-            @Override
-            public boolean onBeforeCheckedChanged(ToggleSwitch toggleSwitch, boolean checked) {
-                onPreferenceToggled(mPreferenceKey, checked);
-                return false;
-            }
+        mToggleSwitch.setOnBeforeCheckedChangeListener((toggleSwitch, checked) -> {
+            onPreferenceToggled(mPreferenceKey, checked);
+            return false;
         });
 
-        getBackupListView().setSelector(new ColorDrawable(Color.TRANSPARENT));
-        getBackupListView().setAdapter(mPrintersAdapter);
-        getBackupListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                PrinterInfo printer = (PrinterInfo) mPrintersAdapter.getItem(position);
-
-                if (printer.getInfoIntent() != null) {
-                    try {
-                        getActivity().startIntentSender(printer.getInfoIntent().getIntentSender(),
-                                null, 0, 0, 0);
-                    } catch (SendIntentException e) {
-                        Log.e(LOG_TAG, "Could not execute info intent: %s", e);
-                    }
-                }
-            }
-        });
+        getListView().setAdapter(mPrintersAdapter);
     }
 
 
@@ -446,8 +416,17 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         }
     }
 
-    private final class PrintersAdapter extends BaseAdapter
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+        }
+    }
+
+
+    private final class PrintersAdapter extends RecyclerView.Adapter<ViewHolder>
             implements LoaderManager.LoaderCallbacks<List<PrinterInfo>>, Filterable {
+
         private final Object mLock = new Object();
 
         private final List<PrinterInfo> mPrinters = new ArrayList<PrinterInfo>();
@@ -509,19 +488,19 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
                         }
                     }
                     notifyDataSetChanged();
+
                 }
             };
         }
 
         @Override
-        public int getCount() {
+        public int getItemCount() {
             synchronized (mLock) {
                 return mFilteredPrinters.size();
             }
         }
 
-        @Override
-        public Object getItem(int position) {
+        private Object getItem(int position) {
             synchronized (mLock) {
                 return mFilteredPrinters.get(position);
             }
@@ -543,24 +522,27 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
             return printer.getStatus() != PrinterInfo.STATUS_UNAVAILABLE;
         }
 
+        @NonNull
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            if (convertView == null) {
-                convertView = getActivity().getLayoutInflater().inflate(
-                        R.layout.printer_dropdown_item, parent, false);
-            }
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            final View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.printer_dropdown_item, parent, false);
+            return new ViewHolder(view);
+        }
 
-            convertView.setEnabled(isActionable(position));
+        @Override
+        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+            holder.itemView.setEnabled(isActionable(position));
 
             final PrinterInfo printer = (PrinterInfo) getItem(position);
             CharSequence title = printer.getName();
             CharSequence subtitle = printer.getDescription();
             Drawable icon = printer.loadIcon(getActivity());
 
-            TextView titleView = (TextView) convertView.findViewById(R.id.title);
+            TextView titleView = holder.itemView.findViewById(R.id.title);
             titleView.setText(title);
 
-            TextView subtitleView = (TextView) convertView.findViewById(R.id.subtitle);
+            TextView subtitleView = holder.itemView.findViewById(R.id.subtitle);
             if (!TextUtils.isEmpty(subtitle)) {
                 subtitleView.setText(subtitle);
                 subtitleView.setVisibility(View.VISIBLE);
@@ -569,7 +551,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
                 subtitleView.setVisibility(View.GONE);
             }
 
-            LinearLayout moreInfoView = (LinearLayout) convertView.findViewById(R.id.more_info);
+            LinearLayout moreInfoView = holder.itemView.findViewById(R.id.more_info);
             if (printer.getInfoIntent() != null) {
                 moreInfoView.setVisibility(View.VISIBLE);
                 moreInfoView.setOnClickListener(new OnClickListener() {
@@ -587,7 +569,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
                 moreInfoView.setVisibility(View.GONE);
             }
 
-            ImageView iconView = (ImageView) convertView.findViewById(R.id.icon);
+            ImageView iconView = holder.itemView.findViewById(R.id.icon);
             if (icon != null) {
                 iconView.setVisibility(View.VISIBLE);
                 if (!isActionable(position)) {
@@ -603,7 +585,18 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
                 iconView.setVisibility(View.GONE);
             }
 
-            return convertView;
+            holder.itemView.setOnClickListener(v -> {
+                PrinterInfo pi = (PrinterInfo) getItem(position);
+
+                if (pi.getInfoIntent() != null) {
+                    try {
+                        getActivity().startIntentSender(pi.getInfoIntent().getIntentSender(),
+                                null, 0, 0, 0);
+                    } catch (SendIntentException e) {
+                        Log.e(LOG_TAG, "Could not execute info intent: %s", e);
+                    }
+                }
+            });
         }
 
         @Override
@@ -642,7 +635,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
                 mFilteredPrinters.clear();
                 mLastSearchString = null;
             }
-            notifyDataSetInvalidated();
+            notifyDataSetChanged();
         }
     }
 
