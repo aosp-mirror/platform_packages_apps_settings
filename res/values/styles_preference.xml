@@ -19,6 +19,17 @@
 <!-- Things unrelated to preference framework UI customization should go to other styles files -->
 <resources>
 
+    <style name="PreferenceTheme" parent="@style/PreferenceThemeOverlay.SettingsBase">
+        <item name="apnPreferenceStyle">@style/ApnPreference</item>
+        <item name="seekBarPreferenceStyle">@style/SettingsSeekBarPreference</item>
+        <item name="twoStateButtonPreferenceStyle">@style/TwoStateButtonPreference</item>
+    </style>
+
+    <style name="PreferenceTheme.SetupWizard">
+        <item name="preferenceFragmentCompatStyle">@style/SetupWizardPreferenceFragmentStyle</item>
+        <item name="preferenceStyle">@style/Preference.Material</item>
+    </style>
+
     <style name="ApnPreference" parent="@style/Preference.Material">
         <item name="android:layout">@layout/apn_preference_layout</item>
     </style>
@@ -38,6 +49,10 @@
     <style name="SettingsMultiSelectListPreference" parent="@style/Preference.Material">
         <item name="android:positiveButtonText">@android:string/ok</item>
         <item name="android:negativeButtonText">@android:string/cancel</item>
+    </style>
+
+    <style name="SetupWizardPreferenceFragmentStyle" parent="PreferenceFragment.Material">
+        <item name="android:layout">@layout/setup_preference</item>
     </style>
 
 </resources>

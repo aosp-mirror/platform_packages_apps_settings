@@ -1353,22 +1353,6 @@
         priority="4"
         summary="Using hardcoded color"
         explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="                android:textColor=&quot;@color/red&quot;"
-        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="res/layout/credentials_dialog.xml"
-            line="36"
-            column="17"/>
-    </issue>
-
-    <issue
-        id="HardCodedColor"
-        severity="Error"
-        message="Avoid using hardcoded color"
-        category="Correctness"
-        priority="4"
-        summary="Using hardcoded color"
-        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
         errorLine1="        android:textColor=&quot;#FFFFFF&quot;"
         errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -2121,102 +2105,6 @@
         priority="4"
         summary="Using hardcoded color"
         explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="                android:textColor=&quot;#ffffb060&quot;"
-        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="res/layout/permission_settings.xml"
-            line="46"
-            column="17"/>
-    </issue>
-
-    <issue
-        id="HardCodedColor"
-        severity="Error"
-        message="Avoid using hardcoded color"
-        category="Correctness"
-        priority="4"
-        summary="Using hardcoded color"
-        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="            android:background=&quot;#000000&quot; />"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="res/layout/radio_info.xml"
-            line="116"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="HardCodedColor"
-        severity="Error"
-        message="Avoid using hardcoded color"
-        category="Correctness"
-        priority="4"
-        summary="Using hardcoded color"
-        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="            android:background=&quot;#000000&quot; />"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="res/layout/radio_info.xml"
-            line="135"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="HardCodedColor"
-        severity="Error"
-        message="Avoid using hardcoded color"
-        category="Correctness"
-        priority="4"
-        summary="Using hardcoded color"
-        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="            android:background=&quot;#000000&quot; />"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="res/layout/radio_info.xml"
-            line="165"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="HardCodedColor"
-        severity="Error"
-        message="Avoid using hardcoded color"
-        category="Correctness"
-        priority="4"
-        summary="Using hardcoded color"
-        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="            android:background=&quot;#000000&quot; />"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="res/layout/radio_info.xml"
-            line="303"
-            column="13"/>
-    </issue>
-
-    <issue
-            id="HardCodedColor"
-            severity="Error"
-            message="Avoid using hardcoded color"
-            category="Correctness"
-            priority="4"
-            summary="Using hardcoded color"
-            explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-            errorLine1="            android:background=&quot;#000000&quot; />"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-                file="res/layout/radio_info.xml"
-                line="303"
-                column="13"/>
-    </issue>
-
-    <issue
-        id="HardCodedColor"
-        severity="Error"
-        message="Avoid using hardcoded color"
-        category="Correctness"
-        priority="4"
-        summary="Using hardcoded color"
-        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
         errorLine1="            android:src=&quot;@color/running_processes_system_ram&quot;"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -2445,7 +2333,7 @@
         errorLine2="                                                                                                                                                                       ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rXC/strings.xml"
-            line="2531"
+            line="2559"
             column="168"/>
     </issue>
 
@@ -2461,7 +2349,7 @@
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rAU/strings.xml"
-            line="2532"
+            line="2560"
             column="64"/>
     </issue>
 
@@ -2477,7 +2365,7 @@
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rCA/strings.xml"
-            line="2532"
+            line="2560"
             column="64"/>
     </issue>
 
@@ -2493,7 +2381,7 @@
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rGB/strings.xml"
-            line="2532"
+            line="2560"
             column="64"/>
     </issue>
 
@@ -2509,7 +2397,7 @@
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rIN/strings.xml"
-            line="2532"
+            line="2560"
             column="64"/>
     </issue>
 
@@ -2525,7 +2413,7 @@
         errorLine2="                                   ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/strings.xml"
-            line="5920"
+            line="5902"
             column="36"/>
     </issue>
 
@@ -2541,7 +2429,7 @@
         errorLine2="                                        ^">
         <location
             file="res/values/styles.xml"
-            line="248"
+            line="171"
             column="41"/>
     </issue>
 
@@ -2557,7 +2445,7 @@
         errorLine2="                                           ^">
         <location
             file="res/values/styles.xml"
-            line="465"
+            line="425"
             column="44"/>
     </issue>
 
@@ -2573,7 +2461,7 @@
         errorLine2="                                           ^">
         <location
             file="res/values/styles.xml"
-            line="471"
+            line="431"
             column="44"/>
     </issue>
 
@@ -2589,152 +2477,8 @@
         errorLine2="                                           ^">
         <location
             file="res/values/styles.xml"
-            line="472"
+            line="432"
             column="44"/>
-    </issue>
-
-    <issue
-        id="HardCodedColor"
-        severity="Error"
-        message="Avoid using hardcoded color"
-        category="Correctness"
-        priority="4"
-        summary="Using hardcoded color"
-        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="        &lt;item name=&quot;wifi_signal_color&quot;>@color/setup_wizard_wifi_color_dark&lt;/item>"
-        errorLine2="                                       ^">
-        <location
-            file="res/values/themes.xml"
-            line="31"
-            column="40"/>
-    </issue>
-
-    <issue
-        id="HardCodedColor"
-        severity="Error"
-        message="Avoid using hardcoded color"
-        category="Correctness"
-        priority="4"
-        summary="Using hardcoded color"
-        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="        &lt;item name=&quot;wifi_signal_color&quot;>@color/setup_wizard_wifi_color_light&lt;/item>"
-        errorLine2="                                       ^">
-        <location
-            file="res/values/themes.xml"
-            line="49"
-            column="40"/>
-    </issue>
-
-    <issue
-        id="HardCodedColor"
-        severity="Error"
-        message="Avoid using hardcoded color"
-        category="Correctness"
-        priority="4"
-        summary="Using hardcoded color"
-        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="        &lt;item name=&quot;wifi_signal_color&quot;>@color/setup_wizard_wifi_color_dark&lt;/item>"
-        errorLine2="                                       ^">
-        <location
-            file="res/values/themes.xml"
-            line="67"
-            column="40"/>
-    </issue>
-
-    <issue
-        id="HardCodedColor"
-        severity="Error"
-        message="Avoid using hardcoded color"
-        category="Correctness"
-        priority="4"
-        summary="Using hardcoded color"
-        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="        &lt;item name=&quot;wifi_signal_color&quot;>@color/setup_wizard_wifi_color_light&lt;/item>"
-        errorLine2="                                       ^">
-        <location
-            file="res/values/themes.xml"
-            line="85"
-            column="40"/>
-    </issue>
-
-    <issue
-        id="HardCodedColor"
-        severity="Error"
-        message="Avoid using hardcoded color"
-        category="Correctness"
-        priority="4"
-        summary="Using hardcoded color"
-        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="        &lt;item name=&quot;wifi_signal_color&quot;>@color/setup_wizard_wifi_color_dark&lt;/item>"
-        errorLine2="                                       ^">
-        <location
-            file="res/values/themes.xml"
-            line="103"
-            column="40"/>
-    </issue>
-
-    <issue
-        id="HardCodedColor"
-        severity="Error"
-        message="Avoid using hardcoded color"
-        category="Correctness"
-        priority="4"
-        summary="Using hardcoded color"
-        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="        &lt;item name=&quot;wifi_signal_color&quot;>@color/setup_wizard_wifi_color_light&lt;/item>"
-        errorLine2="                                       ^">
-        <location
-            file="res/values/themes.xml"
-            line="121"
-            column="40"/>
-    </issue>
-
-    <issue
-        id="HardCodedColor"
-        severity="Error"
-        message="Avoid using hardcoded color"
-        category="Correctness"
-        priority="4"
-        summary="Using hardcoded color"
-        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="        &lt;item name=&quot;android:colorPrimary&quot;>@color/material_grey_100&lt;/item>"
-        errorLine2="                                          ^">
-        <location
-            file="res/values/themes.xml"
-            line="197"
-            column="43"/>
-    </issue>
-
-    <issue
-        id="HardCodedColor"
-        severity="Error"
-        message="Avoid using hardcoded color"
-        category="Correctness"
-        priority="4"
-        summary="Using hardcoded color"
-        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="        &lt;item name=&quot;android:colorAccent&quot;>@color/material_blue_700&lt;/item>"
-        errorLine2="                                         ^">
-        <location
-            file="res/values/themes.xml"
-            line="198"
-            column="42"/>
-    </issue>
-
-    <issue
-        id="HardCodedColor"
-        severity="Error"
-        message="Avoid using hardcoded color"
-        category="Correctness"
-        priority="4"
-        summary="Using hardcoded color"
-        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="        &lt;item name=&quot;android:titleTextColor&quot;>@color/material_blue_700&lt;/item>"
-        errorLine2="                                            ^">
-        <location
-            file="res/values/themes.xml"
-            line="199"
-            column="45"/>
     </issue>
 
     <issue
@@ -2749,7 +2493,7 @@
         errorLine2="                                      ^">
         <location
             file="res/values/themes.xml"
-            line="240"
+            line="54"
             column="39"/>
     </issue>
 
@@ -2765,7 +2509,7 @@
         errorLine2="                                       ^">
         <location
             file="res/values/themes.xml"
-            line="241"
+            line="55"
             column="40"/>
     </issue>
 
@@ -2781,7 +2525,7 @@
         errorLine2="                                     ^">
         <location
             file="res/values/themes.xml"
-            line="242"
+            line="56"
             column="38"/>
     </issue>
 
@@ -2797,7 +2541,7 @@
         errorLine2="                                              ^">
         <location
             file="res/values/themes.xml"
-            line="280"
+            line="86"
             column="47"/>
     </issue>
 
@@ -2813,7 +2557,7 @@
         errorLine2="                                            ^">
         <location
             file="res/values/themes.xml"
-            line="349"
+            line="147"
             column="45"/>
     </issue>
 
@@ -2829,7 +2573,7 @@
         errorLine2="                                                ^">
         <location
             file="res/values/themes.xml"
-            line="350"
+            line="148"
             column="49"/>
     </issue>
 
@@ -2845,7 +2589,7 @@
         errorLine2="                                            ^">
         <location
             file="res/values/themes.xml"
-            line="358"
+            line="156"
             column="45"/>
     </issue>
 
@@ -2861,8 +2605,152 @@
         errorLine2="                                                ^">
         <location
             file="res/values/themes.xml"
-            line="359"
+            line="157"
             column="49"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        &lt;item name=&quot;wifi_signal_color&quot;>@color/setup_wizard_wifi_color_dark&lt;/item>"
+        errorLine2="                                       ^">
+        <location
+            file="res/values/themes_suw.xml"
+            line="29"
+            column="40"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        &lt;item name=&quot;wifi_signal_color&quot;>@color/setup_wizard_wifi_color_light&lt;/item>"
+        errorLine2="                                       ^">
+        <location
+            file="res/values/themes_suw.xml"
+            line="48"
+            column="40"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        &lt;item name=&quot;wifi_signal_color&quot;>@color/setup_wizard_wifi_color_dark&lt;/item>"
+        errorLine2="                                       ^">
+        <location
+            file="res/values/themes_suw.xml"
+            line="67"
+            column="40"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        &lt;item name=&quot;wifi_signal_color&quot;>@color/setup_wizard_wifi_color_light&lt;/item>"
+        errorLine2="                                       ^">
+        <location
+            file="res/values/themes_suw.xml"
+            line="86"
+            column="40"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        &lt;item name=&quot;wifi_signal_color&quot;>@color/setup_wizard_wifi_color_dark&lt;/item>"
+        errorLine2="                                       ^">
+        <location
+            file="res/values/themes_suw.xml"
+            line="105"
+            column="40"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        &lt;item name=&quot;wifi_signal_color&quot;>@color/setup_wizard_wifi_color_light&lt;/item>"
+        errorLine2="                                       ^">
+        <location
+            file="res/values/themes_suw.xml"
+            line="124"
+            column="40"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        &lt;item name=&quot;android:colorPrimary&quot;>@color/material_grey_100&lt;/item>"
+        errorLine2="                                          ^">
+        <location
+            file="res/values/themes_suw.xml"
+            line="187"
+            column="43"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        &lt;item name=&quot;android:colorAccent&quot;>@color/material_blue_700&lt;/item>"
+        errorLine2="                                         ^">
+        <location
+            file="res/values/themes_suw.xml"
+            line="188"
+            column="42"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        &lt;item name=&quot;android:titleTextColor&quot;>@color/material_blue_700&lt;/item>"
+        errorLine2="                                            ^">
+        <location
+            file="res/values/themes_suw.xml"
+            line="189"
+            column="45"/>
     </issue>
 
     <issue

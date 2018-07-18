@@ -99,13 +99,11 @@ public class AppBatteryPreferenceController extends BasePreferenceController
                     (UserManager) mContext.getSystemService(Context.USER_SERVICE);
             final BatteryEntry entry = new BatteryEntry(mContext, null, userManager, mSipper);
             entry.defaultPackageName = mPackageName;
-            AdvancedPowerUsageDetail.startBatteryDetailPage(
-                    (SettingsActivity) mParent.getActivity(), mParent, mBatteryHelper,
-                    BatteryStats.STATS_SINCE_CHARGED, entry, mBatteryPercent,
-                    null /* mAnomalies */);
+            AdvancedPowerUsageDetail.startBatteryDetailPage(mParent.getActivity(), mParent,
+                    mBatteryHelper, BatteryStats.STATS_SINCE_CHARGED, entry, mBatteryPercent);
         } else {
-            AdvancedPowerUsageDetail.startBatteryDetailPage(
-                    (SettingsActivity) mParent.getActivity(), mParent, mPackageName);
+            AdvancedPowerUsageDetail.startBatteryDetailPage(mParent.getActivity(), mParent,
+                    mPackageName);
         }
         return true;
     }

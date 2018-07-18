@@ -27,6 +27,7 @@ import android.provider.SearchIndexableResource;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.RingtonePreference;
+import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -44,7 +45,8 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 
 @SearchIndexable
-public class ConfigureNotificationSettings extends DashboardFragment {
+public class ConfigureNotificationSettings extends DashboardFragment implements
+        OnActivityResultListener {
     private static final String TAG = "ConfigNotiSettings";
 
     @VisibleForTesting

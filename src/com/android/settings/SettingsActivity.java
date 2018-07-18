@@ -46,6 +46,7 @@ import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.backup.BackupSettingsActivity;
+import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.gateway.SettingsGateway;
@@ -64,6 +65,7 @@ import com.android.settingslib.utils.ThreadUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -372,6 +374,19 @@ public class SettingsActivity extends SettingsBaseActivity
 
         if (DEBUG_TIMING) {
             Log.d(LOG_TAG, "onCreate took " + (System.currentTimeMillis() - startTime) + " ms");
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        final List<Fragment> fragments = getSupportFragmentManager().getFragments();
+        if (fragments != null) {
+            for (Fragment fragment : fragments) {
+                if (fragment instanceof OnActivityResultListener) {
+                    fragment.onActivityResult(requestCode, resultCode, data);
+                }
+            }
         }
     }
 

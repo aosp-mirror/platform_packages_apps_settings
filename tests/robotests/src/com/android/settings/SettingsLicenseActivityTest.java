@@ -18,7 +18,6 @@ package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
@@ -30,7 +29,6 @@ import android.os.SystemProperties;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -84,9 +82,7 @@ public class SettingsLicenseActivityTest {
     }
 
     @Test
-    @Ignore("b/111194177")
     public void testOnCreateWithGeneratedHtmlFile() {
-        doReturn(null).when(mActivity).onCreateLoader(anyInt(), any());
         doReturn(Uri.parse("content://com.android.settings.files/my_cache/generated_test.html"))
                 .when(mActivity).getUriFromGeneratedHtmlFile(any());
 

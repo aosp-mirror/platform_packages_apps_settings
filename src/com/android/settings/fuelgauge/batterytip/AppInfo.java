@@ -21,8 +21,6 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.ArraySet;
 
-import com.android.settings.fuelgauge.anomaly.Anomaly;
-
 import java.util.Objects;
 
 import androidx.annotation.VisibleForTesting;
@@ -34,7 +32,7 @@ public class AppInfo implements Comparable<AppInfo>, Parcelable {
     public final String packageName;
     /**
      * Anomaly type of the app
-     * @see Anomaly.AnomalyType
+     * @see StatsManagerConfig.AnomalyType
      */
     public final ArraySet<Integer> anomalyTypes;
     public final long screenOnTimeMs;

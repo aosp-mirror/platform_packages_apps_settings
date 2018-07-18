@@ -41,8 +41,6 @@ import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.display.BatteryPercentagePreferenceController;
-import com.android.settings.fuelgauge.anomaly.Anomaly;
-import com.android.settings.fuelgauge.anomaly.AnomalyDetectionPolicy;
 import com.android.settings.fuelgauge.batterytip.BatteryTipLoader;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
@@ -104,11 +102,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
     @VisibleForTesting
     BatteryInfo mBatteryInfo;
 
-    /**
-     * SparseArray that maps uid to {@link Anomaly}, so we could find {@link Anomaly} by uid
-     */
-    @VisibleForTesting
-    SparseArray<List<Anomaly>> mAnomalySparseArray;
     @VisibleForTesting
     BatteryHeaderPreferenceController mBatteryHeaderPreferenceController;
     @VisibleForTesting
@@ -217,7 +210,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
                 KEY_TIME_SINCE_LAST_FULL_CHARGE);
         mFooterPreferenceMixin.createFooterPreference().setTitle(R.string.battery_footer_summary);
         mBatteryUtils = BatteryUtils.getInstance(getContext());
-        mAnomalySparseArray = new SparseArray<>();
 
         restartBatteryInfoLoader();
         mBatteryTipPreferenceController.restoreInstanceState(icicle);
@@ -328,11 +320,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
     }
 
     @VisibleForTesting
-    AnomalyDetectionPolicy getAnomalyDetectionPolicy() {
-        return new AnomalyDetectionPolicy(getContext());
-    }
-
-    @VisibleForTesting
     void updateLastFullChargePreference() {
         if (mBatteryInfo != null && mBatteryInfo.averageTimeToDischarge
                 != Estimate.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN) {
@@ -366,17 +353,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
         final Context context = getContext();
         mPowerFeatureProvider = FeatureFactory.getFactory(context)
                 .getPowerUsageFeatureProvider(context);
-    }
-
-    @VisibleForTesting
-    void updateAnomalySparseArray(List<Anomaly> anomalies) {
-        mAnomalySparseArray.clear();
-        for (final Anomaly anomaly : anomalies) {
-            if (mAnomalySparseArray.get(anomaly.uid) == null) {
-                mAnomalySparseArray.append(anomaly.uid, new ArrayList<>());
-            }
-            mAnomalySparseArray.get(anomaly.uid).add(anomaly);
-        }
     }
 
     @VisibleForTesting
