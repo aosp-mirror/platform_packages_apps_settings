@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.wifi;
+package com.android.settings.wifi.savedaccesspoints;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -28,6 +28,8 @@ import android.net.wifi.WifiManager.ActionListener;
 import android.os.Handler;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.wifi.WifiConfigController;
+import com.android.settings.wifi.WifiDialog;
 import com.android.settingslib.wifi.AccessPoint;
 
 import org.junit.Before;
