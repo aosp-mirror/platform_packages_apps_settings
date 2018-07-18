@@ -29,6 +29,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserManager;
 
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -53,6 +54,8 @@ public class DefaultPhonePickerTest {
     private DefaultPhonePicker.DefaultKeyUpdater mDefaultKeyUpdater;
     @Mock
     private PackageManager mPackageManager;
+    @Mock
+    private BatteryUtils mBatteryUtils;
 
     private DefaultPhonePicker mPicker;
 
@@ -66,6 +69,7 @@ public class DefaultPhonePickerTest {
 
         ReflectionHelpers.setField(mPicker, "mPm", mPackageManager);
         ReflectionHelpers.setField(mPicker, "mDefaultKeyUpdater", mDefaultKeyUpdater);
+        ReflectionHelpers.setField(mPicker, "mBatteryUtils", mBatteryUtils);
         doReturn(RuntimeEnvironment.application).when(mPicker).getContext();
     }
 
@@ -87,6 +91,14 @@ public class DefaultPhonePickerTest {
     @Test
     public void getDefaultAppKey_shouldReturnDefault() {
         mPicker.getDefaultKey();
+
         verify(mDefaultKeyUpdater).getDefaultDialerApplication(any(Context.class), anyInt());
+    }
+
+    @Test
+    public void setDefaultKey_shouldUnrestrictApp() {
+        mPicker.setDefaultKey(TEST_APP_KEY);
+
+        verify(mBatteryUtils).clearForceAppStandby(TEST_APP_KEY);
     }
 }
