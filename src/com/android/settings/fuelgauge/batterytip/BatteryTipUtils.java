@@ -136,8 +136,8 @@ public class BatteryTipUtils {
         final List<AppInfo> highUsageApps = BatteryDatabaseManager.getInstance(context)
                 .queryAllAnomalies(timeAfterMs, AnomalyDatabaseHelper.State.NEW);
         // Remove it if it doesn't have label or been restricted
-        highUsageApps.removeIf(
-                new AppLabelPredicate(context).or(new AppRestrictionPredicate(context)));
+        highUsageApps.removeIf(AppLabelPredicate.getInstance(context)
+                .or(AppRestrictionPredicate.getInstance(context)));
 
         return highUsageApps;
     }

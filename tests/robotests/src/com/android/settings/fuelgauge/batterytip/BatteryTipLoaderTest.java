@@ -28,9 +28,13 @@ import android.os.PowerManager;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.fuelgauge.BatteryInfo;
 import com.android.settings.fuelgauge.BatteryUtils;
+import com.android.settings.fuelgauge.batterytip.tips.AppLabelPredicate;
+import com.android.settings.fuelgauge.batterytip.tips.AppRestrictionPredicate;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
+import com.android.settings.testutils.BatteryTestUtils;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -75,6 +79,12 @@ public class BatteryTipLoaderTest {
         doReturn(mBatteryInfo).when(mBatteryUtils).getBatteryInfo(any(), any());
         mBatteryTipLoader = new BatteryTipLoader(mContext, mBatteryStatsHelper);
         mBatteryTipLoader.mBatteryUtils = mBatteryUtils;
+    }
+
+    @After
+    public void tearDown() {
+        BatteryTestUtils.clearStaticInstance(AppLabelPredicate.class, "sInstance");
+        BatteryTestUtils.clearStaticInstance(AppRestrictionPredicate.class, "sInstance");
     }
 
     @Test

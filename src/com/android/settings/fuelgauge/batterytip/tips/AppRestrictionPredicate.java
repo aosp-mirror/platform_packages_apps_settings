@@ -27,9 +27,19 @@ import java.util.function.Predicate;
  * {@link Predicate} for {@link AppInfo} to check whether it is restricted.
  */
 public class AppRestrictionPredicate implements Predicate<AppInfo> {
+
+    private static AppRestrictionPredicate sInstance;
     private AppOpsManager mAppOpsManager;
 
-    public AppRestrictionPredicate(Context context) {
+    public static AppRestrictionPredicate getInstance(Context context) {
+        if (sInstance == null) {
+            sInstance = new AppRestrictionPredicate(context.getApplicationContext());
+        }
+
+        return sInstance;
+    }
+
+    private AppRestrictionPredicate(Context context) {
         mAppOpsManager = context.getSystemService(AppOpsManager.class);
     }
 

@@ -53,8 +53,8 @@ public class RestrictAppDetector implements BatteryTipDetector {
         mContext = context;
         mPolicy = policy;
         mBatteryDatabaseManager = BatteryDatabaseManager.getInstance(context);
-        mAppRestrictionPredicate = new AppRestrictionPredicate(context);
-        mAppLabelPredicate = new AppLabelPredicate(context);
+        mAppRestrictionPredicate = AppRestrictionPredicate.getInstance(context);
+        mAppLabelPredicate = AppLabelPredicate.getInstance(context);
     }
 
     @Override
