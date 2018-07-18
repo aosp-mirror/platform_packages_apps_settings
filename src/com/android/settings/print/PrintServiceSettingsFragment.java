@@ -286,7 +286,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
 
     @Override
     public Loader<List<PrintServiceInfo>> onCreateLoader(int id, Bundle args) {
-        return new PrintServicesLoader(
+        return new SettingsPrintServicesLoader(
                 (PrintManager) getContext().getSystemService(Context.PRINT_SERVICE), getContext(),
                 PrintManager.ALL_SERVICES);
     }
