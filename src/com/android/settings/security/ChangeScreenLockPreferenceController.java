@@ -84,8 +84,7 @@ public class ChangeScreenLockPreferenceController extends AbstractPreferenceCont
     @Override
     public void updateState(Preference preference) {
         if (mPreference != null && mPreference instanceof GearPreference) {
-            if (mLockPatternUtils.isSecure(mUserId)
-                    || !mLockPatternUtils.isLockScreenDisabled(mUserId)) {
+            if (mLockPatternUtils.isSecure(mUserId)) {
                 ((GearPreference) mPreference).setOnGearClickListener(this);
             } else {
                 ((GearPreference) mPreference).setOnGearClickListener(null);
