@@ -14,7 +14,15 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/wifi_saved_access_points_titlebar">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="saved_access_points"
+    android:title="@string/wifi_saved_access_points_label">
+
+    <PreferenceCategory
+        android:key="saved_access_points_category"
+        android:layout="@layout/preference_category_no_label"
+        settings:controller="com.android.settings.wifi.savedaccesspoints.SavedAccessPointsPreferenceController"/>
 
 </PreferenceScreen>

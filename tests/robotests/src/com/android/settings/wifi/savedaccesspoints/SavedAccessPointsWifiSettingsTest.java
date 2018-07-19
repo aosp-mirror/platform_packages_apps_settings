@@ -16,6 +16,8 @@
 
 package com.android.settings.wifi.savedaccesspoints;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
@@ -27,6 +29,8 @@ import android.net.wifi.WifiManager;
 import android.net.wifi.WifiManager.ActionListener;
 import android.os.Handler;
 
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.wifi.WifiConfigController;
 import com.android.settings.wifi.WifiDialog;
@@ -106,5 +110,12 @@ public class SavedAccessPointsWifiSettingsTest {
         mSettings.onForget(mockWifiDialog);
         verify(mockWifiManager)
                 .forget(eq(mockWifiConfiguration.networkId), any(ActionListener.class));
+    }
+
+    @Test
+    public void verifyConstants() {
+        assertThat(mSettings.getMetricsCategory()).isEqualTo(MetricsEvent.WIFI_SAVED_ACCESS_POINTS);
+        assertThat(mSettings.getPreferenceScreenResId())
+                .isEqualTo(R.xml.wifi_display_saved_access_points);
     }
 }

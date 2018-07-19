@@ -20,51 +20,38 @@ import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.icu.text.Collator;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.wifi.WifiConfigUiBase;
 import com.android.settings.wifi.WifiDialog;
 import com.android.settings.wifi.WifiSettings;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPointPreference;
 import com.android.settingslib.wifi.WifiSavedConfigUtils;
+
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
  * UI to manage saved networks/access points.
- * TODO(b/64806699): convert to {@link DashboardFragment} with {@link PreferenceController}s
  */
-public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
+public class SavedAccessPointsWifiSettings extends DashboardFragment
         implements WifiDialog.WifiDialogListener {
     private static final String TAG = "SavedAccessPoints";
     @VisibleForTesting
     static final int MSG_UPDATE_PREFERENCES = 1;
-    private static final Comparator<AccessPoint> SAVED_NETWORK_COMPARATOR =
-            new Comparator<AccessPoint>() {
-        final Collator mCollator = Collator.getInstance();
-        @Override
-        public int compare(AccessPoint ap1, AccessPoint ap2) {
-            return mCollator.compare(
-                    nullToEmpty(ap1.getConfigName()), nullToEmpty(ap2.getConfigName()));
-        }
-
-        private String nullToEmpty(String string) {
-            return (string == null) ? "" : string;
-        }
-    };
 
     @VisibleForTesting
     final WifiManager.ActionListener mForgetListener = new WifiManager.ActionListener() {
@@ -94,13 +81,14 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
         public void onSuccess() {
             postUpdatePreference();
         }
+
         @Override
         public void onFailure(int reason) {
             Activity activity = getActivity();
             if (activity != null) {
                 Toast.makeText(activity,
-                    R.string.wifi_failed_save_message,
-                    Toast.LENGTH_SHORT).show();
+                        R.string.wifi_failed_save_message,
+                        Toast.LENGTH_SHORT).show();
             }
         }
     };
@@ -122,9 +110,18 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.wifi_display_saved_access_points);
+    protected int getPreferenceScreenResId() {
+        return R.xml.wifi_display_saved_access_points;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
         mUserBadgeCache = new AccessPointPreference.UserBadgeCache(getPackageManager());
     }
 
@@ -143,7 +140,7 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
         if (savedInstanceState != null) {
             if (savedInstanceState.containsKey(SAVE_DIALOG_ACCESS_POINT_STATE)) {
                 mAccessPointSavedState =
-                    savedInstanceState.getBundle(SAVE_DIALOG_ACCESS_POINT_STATE);
+                        savedInstanceState.getBundle(SAVE_DIALOG_ACCESS_POINT_STATE);
             }
         }
     }
@@ -154,7 +151,7 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
 
         final List<AccessPoint> accessPoints =
                 WifiSavedConfigUtils.getAllConfigs(context, mWifiManager);
-        Collections.sort(accessPoints, SAVED_NETWORK_COMPARATOR);
+        Collections.sort(accessPoints, SavedNetworkComparator.INSTANCE);
         cacheRemoveAllPrefs(preferenceScreen);
 
         final int accessPointsSize = accessPoints.size();
@@ -174,7 +171,7 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
 
         removeCachedPrefs(preferenceScreen);
 
-        if(getPreferenceScreen().getPreferenceCount() < 1) {
+        if (getPreferenceScreen().getPreferenceCount() < 1) {
             Log.w(TAG, "Saved networks activity loaded, but there are no saved networks!");
         }
     }
