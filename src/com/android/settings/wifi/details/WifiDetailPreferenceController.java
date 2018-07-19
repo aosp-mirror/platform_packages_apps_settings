@@ -542,11 +542,6 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     }
 
     @Override
-    public void onForget(WifiDialog dialog) {
-        // can't forget network from a 'modify' dialog
-    }
-
-    @Override
     public void onSubmit(WifiDialog dialog) {
         if (dialog.getController() != null) {
             mWifiManager.save(dialog.getController().getConfig(), new WifiManager.ActionListener() {

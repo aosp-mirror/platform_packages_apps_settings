@@ -20,13 +20,17 @@ import static org.robolectric.RuntimeEnvironment.application;
 
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
+import android.net.wifi.hotspot2.PasspointConfiguration;
 
 import org.robolectric.annotation.HiddenApi;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadow.api.Shadow;
 
-@Implements(WifiManager.class)
+import java.util.Collections;
+import java.util.List;
+
+@Implements(value = WifiManager.class, inheritImplementationMethods = true)
 public class ShadowWifiManager extends org.robolectric.shadows.ShadowWifiManager {
 
     public WifiConfiguration savedWifiConfig;
@@ -41,6 +45,11 @@ public class ShadowWifiManager extends org.robolectric.shadows.ShadowWifiManager
     @Implementation
     public void save(WifiConfiguration config, WifiManager.ActionListener listener) {
         savedWifiConfig = config;
+    }
+
+    @Implementation
+    public List<PasspointConfiguration> getPasspointConfigurations() {
+        return Collections.emptyList();
     }
 
     public static ShadowWifiManager get() {
