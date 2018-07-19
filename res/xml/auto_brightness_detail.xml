@@ -23,8 +23,10 @@
 
     <com.android.settings.widget.VideoPreference
         android:key="auto_brightness_video"
+        android:title="@string/summary_placeholder"
         settings:animation="@raw/aab_brightness"
-        settings:preview="@drawable/aab_brightness"/>
+        settings:preview="@drawable/aab_brightness"
+        settings:controller="com.android.settings.widget.VideoPreferenceController"/>
 
     <!-- Cross-listed item, if you change this, also change it in power_usage_summary.xml -->
     <com.android.settingslib.RestrictedSwitchPreference
