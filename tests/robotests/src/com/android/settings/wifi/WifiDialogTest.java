@@ -25,15 +25,7 @@ public class WifiDialogTest {
 
     private Context mContext = RuntimeEnvironment.application;
 
-    private WifiDialogListener mListener = new WifiDialogListener() {
-        @Override
-        public void onForget(WifiDialog dialog) {
-        }
-
-        @Override
-        public void onSubmit(WifiDialog dialog) {
-        }
-    };
+    private WifiDialogListener mListener = new WifiDialogListener() {};
 
     @Before
     public void setUp() {
