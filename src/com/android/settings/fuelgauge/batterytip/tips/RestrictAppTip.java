@@ -112,7 +112,7 @@ public class RestrictAppTip extends BatteryTip {
         super.sanityCheck(context);
 
         // Set it invisible if there is no valid app
-        mRestrictAppList.removeIf(new AppLabelPredicate(context));
+        mRestrictAppList.removeIf(AppLabelPredicate.getInstance(context));
         if (mRestrictAppList.isEmpty()) {
             mState = StateType.INVISIBLE;
         }

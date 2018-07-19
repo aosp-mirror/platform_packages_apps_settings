@@ -34,9 +34,11 @@ import android.util.Pair;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
+import com.android.settings.testutils.BatteryTestUtils;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -74,6 +76,7 @@ public class RestrictAppTipTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
+        doReturn(mContext).when(mContext).getApplicationContext();
         doReturn(mPackageManager).when(mContext).getPackageManager();
         doReturn(mApplicationInfo).when(mPackageManager).getApplicationInfo(PACKAGE_NAME,
                 PackageManager.MATCH_DISABLED_COMPONENTS | PackageManager.MATCH_ANY_USER);
@@ -96,6 +99,12 @@ public class RestrictAppTipTest {
         mNewBatteryTip = new RestrictAppTip(BatteryTip.StateType.NEW, mUsageAppList);
         mHandledBatteryTip = new RestrictAppTip(BatteryTip.StateType.HANDLED, mUsageAppList);
         mInvisibleBatteryTip = new RestrictAppTip(BatteryTip.StateType.INVISIBLE, new ArrayList<>());
+    }
+
+    @After
+    public void tearDown() {
+        BatteryTestUtils.clearStaticInstance(AppLabelPredicate.class, "sInstance");
+        BatteryTestUtils.clearStaticInstance(AppRestrictionPredicate.class, "sInstance");
     }
 
     @Test

@@ -34,8 +34,11 @@ import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryDatabaseManager;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
+import com.android.settings.fuelgauge.batterytip.tips.AppLabelPredicate;
+import com.android.settings.fuelgauge.batterytip.tips.AppRestrictionPredicate;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
+import com.android.settings.testutils.BatteryTestUtils;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -86,6 +89,7 @@ public class RestrictAppDetectorTest {
         mContext = spy(RuntimeEnvironment.application);
         mPolicy = spy(new BatteryTipPolicy(mContext));
 
+        doReturn(mContext).when(mContext).getApplicationContext();
         doReturn(mAppOpsManager).when(mContext).getSystemService(AppOpsManager.class);
         doReturn(AppOpsManager.MODE_IGNORED).when(mAppOpsManager).checkOpNoThrow(
                 AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, RESTRICTED_UID, RESTRICTED_PACKAGE_NAME);
@@ -103,7 +107,12 @@ public class RestrictAppDetectorTest {
 
         mRestrictAppDetector = new RestrictAppDetector(mContext, mPolicy);
         mRestrictAppDetector.mBatteryDatabaseManager = mBatteryDatabaseManager;
+    }
 
+    @After
+    public void tearDown() {
+        BatteryTestUtils.clearStaticInstance(AppLabelPredicate.class, "sInstance");
+        BatteryTestUtils.clearStaticInstance(AppRestrictionPredicate.class, "sInstance");
     }
 
     @After
