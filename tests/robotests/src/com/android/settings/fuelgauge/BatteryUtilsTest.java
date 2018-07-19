@@ -51,9 +51,12 @@ import android.text.format.DateUtils;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
+import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
 import com.android.settings.fuelgauge.batterytip.AnomalyInfo;
+import com.android.settings.fuelgauge.batterytip.BatteryDatabaseManager;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowThreadUtils;
 import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 
 import org.junit.Before;
@@ -148,6 +151,8 @@ public class BatteryUtilsTest {
     private ApplicationInfo mLowApplicationInfo;
     @Mock
     private PowerWhitelistBackend mPowerWhitelistBackend;
+    @Mock
+    private BatteryDatabaseManager mBatteryDatabaseManager;
     private AnomalyInfo mAnomalyInfo;
     private BatteryUtils mBatteryUtils;
     private FakeFeatureFactory mFeatureFactory;
@@ -225,6 +230,8 @@ public class BatteryUtilsTest {
             .thenReturn(TOTAL_BATTERY_USAGE + BATTERY_SCREEN_USAGE);
         when(mBatteryStatsHelper.getStats().getDischargeAmount(anyInt()))
             .thenReturn(DISCHARGE_AMOUNT);
+        BatteryDatabaseManager.setUpForTest(mBatteryDatabaseManager);
+        ShadowThreadUtils.setIsMainThread(true);
     }
 
     @Test
@@ -567,6 +574,23 @@ public class BatteryUtilsTest {
         // Restrict OP_RUN_ANY_IN_BACKGROUND
         verify(mAppOpsManager).setMode(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID,
                 HIGH_SDK_PACKAGE, AppOpsManager.MODE_IGNORED);
+    }
+
+    @Test
+    public void testSetForceAppStandby_restrictApp_recordTime() {
+        mBatteryUtils.setForceAppStandby(UID, HIGH_SDK_PACKAGE, AppOpsManager.MODE_IGNORED);
+
+        verify(mBatteryDatabaseManager).insertAction(
+                eq(AnomalyDatabaseHelper.ActionType.RESTRICTION), eq(UID),
+                eq(HIGH_SDK_PACKAGE), anyLong());
+    }
+
+    @Test
+    public void testSetForceAppStandby_unrestrictApp_deleteTime() {
+        mBatteryUtils.setForceAppStandby(UID, HIGH_SDK_PACKAGE, AppOpsManager.MODE_ALLOWED);
+
+        verify(mBatteryDatabaseManager).deleteAction(AnomalyDatabaseHelper.ActionType.RESTRICTION,
+                UID, HIGH_SDK_PACKAGE);
     }
 
     @Test

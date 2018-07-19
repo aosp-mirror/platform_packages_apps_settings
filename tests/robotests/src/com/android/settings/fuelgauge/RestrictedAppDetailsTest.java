@@ -28,10 +28,13 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.util.IconDrawableFactory;
+import android.util.SparseLongArray;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
+import com.android.settings.fuelgauge.batterytip.BatteryDatabaseManager;
 import com.android.settings.fuelgauge.batterytip.BatteryTipDialogFragment;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
@@ -52,6 +55,7 @@ import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.CheckBoxPreference;
@@ -76,6 +80,8 @@ public class RestrictedAppDetailsTest {
     private IconDrawableFactory mIconDrawableFactory;
     @Mock
     private InstrumentedPreferenceFragment mFragment;
+    @Mock
+    private BatteryDatabaseManager mBatteryDatabaseManager;
     private PreferenceManager mPreferenceManager;
     private RestrictedAppDetails mRestrictedAppDetails;
     private Context mContext;
@@ -98,12 +104,14 @@ public class RestrictedAppDetailsTest {
 
         doReturn(mPreferenceManager).when(mRestrictedAppDetails).getPreferenceManager();
         doReturn(mContext).when(mFragment).getContext();
+        doReturn(mContext).when(mRestrictedAppDetails).getContext();
         mRestrictedAppDetails.mPackageManager = mPackageManager;
         mRestrictedAppDetails.mIconDrawableFactory = mIconDrawableFactory;
         mRestrictedAppDetails.mAppInfos = new ArrayList<>();
         mRestrictedAppDetails.mAppInfos.add(mAppInfo);
         mRestrictedAppDetails.mRestrictedAppListGroup = spy(new PreferenceCategory(mContext));
         mRestrictedAppDetails.mBatteryUtils = spy(new BatteryUtils(mContext));
+        mRestrictedAppDetails.mBatteryDatabaseManager = mBatteryDatabaseManager;
         doReturn(mPreferenceManager).when(
                 mRestrictedAppDetails.mRestrictedAppListGroup).getPreferenceManager();
 
@@ -118,6 +126,10 @@ public class RestrictedAppDetailsTest {
         doReturn(APP_NAME).when(mPackageManager).getApplicationLabel(mApplicationInfo);
         doReturn(true).when(mRestrictedAppDetails.mBatteryUtils).isForceAppStandbyEnabled(UID,
                 PACKAGE_NAME);
+        final SparseLongArray timestampArray = new SparseLongArray();
+        timestampArray.put(UID, System.currentTimeMillis() - TimeUnit.HOURS.toMillis(5));
+        doReturn(timestampArray).when(mBatteryDatabaseManager)
+                .queryActionTime(AnomalyDatabaseHelper.ActionType.RESTRICTION);
 
         mRestrictedAppDetails.refreshUi();
 
@@ -126,6 +138,7 @@ public class RestrictedAppDetailsTest {
                 (CheckBoxPreference) mRestrictedAppDetails.mRestrictedAppListGroup.getPreference(0);
         assertThat(preference.getTitle()).isEqualTo(APP_NAME);
         assertThat(preference.isChecked()).isTrue();
+        assertThat(preference.getSummary()).isEqualTo("Restricted 5 hours ago");
     }
 
     @Test
