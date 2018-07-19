@@ -80,6 +80,7 @@ public class DefaultPhonePicker extends DefaultAppPickerFragment {
     @Override
     protected boolean setDefaultKey(String key) {
         if (!TextUtils.isEmpty(key) && !TextUtils.equals(key, getDefaultKey())) {
+            mBatteryUtils.clearForceAppStandby(key);
             return mDefaultKeyUpdater.setDefaultDialerApplication(getContext(), key, mUserId);
         }
         return false;

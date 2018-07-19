@@ -231,7 +231,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
         Context prefContext = getPrefContext();
         mAddPreference = new Preference(prefContext);
-        mAddPreference.setIcon(R.drawable.ic_menu_add_inset);
+        mAddPreference.setIcon(R.drawable.ic_menu_add);
         mAddPreference.setTitle(R.string.wifi_add_network);
         mStatusMessagePreference = new LinkablePreference(prefContext);
 

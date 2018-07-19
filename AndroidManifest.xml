@@ -307,7 +307,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.wifi.SavedAccessPointsWifiSettings" />
+                android:value="com.android.settings.wifi.savedaccesspoints.SavedAccessPointsWifiSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -572,6 +572,12 @@
                 android:value="com.android.settings.localepicker.LocaleListEditor" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
+        </activity>
+
+        <activity android:name=".localepicker.LocalePickerWithRegionActivity"
+                  android:excludeFromRecents="true"
+                  android:configChanges="orientation|keyboardHidden|screenSize"
+                  android:exported="false">
         </activity>
 
         <activity

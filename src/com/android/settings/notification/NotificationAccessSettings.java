@@ -23,10 +23,12 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
 
+import android.widget.Toast;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -60,6 +62,18 @@ public class NotificationAccessSettings extends ManagedServiceSettings {
             .build();
 
     private NotificationManager mNm;
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        final Context ctx = getContext();
+        if (UserManager.get(ctx).isManagedProfile()) {
+            // Apps in the work profile do not support notification listeners.
+            Toast.makeText(ctx, R.string.notification_settings_work_profile, Toast.LENGTH_SHORT)
+                .show();
+            finish();
+        }
+    }
 
     @Override
     public int getMetricsCategory() {

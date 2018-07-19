@@ -28,12 +28,6 @@ public class LongPressAccessPointPreference extends AccessPointPreference {
     private final Fragment mFragment;
 
     public LongPressAccessPointPreference(AccessPoint accessPoint, Context context,
-            UserBadgeCache cache, boolean forSavedNetworks, Fragment fragment) {
-        super(accessPoint, context, cache, forSavedNetworks);
-        mFragment = fragment;
-    }
-
-    public LongPressAccessPointPreference(AccessPoint accessPoint, Context context,
             UserBadgeCache cache, boolean forSavedNetworks, int iconResId, Fragment fragment) {
         super(accessPoint, context, cache, iconResId, forSavedNetworks);
         mFragment = fragment;

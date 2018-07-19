@@ -43,7 +43,8 @@ public class SettingsShadowResourcesImpl extends ShadowResourcesImpl {
         // that Robolectric isn't yet aware of.
         // TODO: Remove this once Robolectric is updated.
         if (id == R.drawable.switchbar_background
-                || id == R.color.ripple_material_light) {
+                || id == R.color.ripple_material_light
+                || id == R.color.ripple_material_dark) {
             return new ColorDrawable();
         } else if (id == R.drawable.ic_launcher_settings) {
             // ic_launcher_settings uses adaptive-icon, which is not supported by robolectric,
