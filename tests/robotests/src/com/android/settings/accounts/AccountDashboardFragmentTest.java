@@ -31,6 +31,7 @@ import android.text.TextUtils;
 import com.android.settings.R;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.testutils.Robolectric;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.accounts.AuthenticatorHelper;
 import com.android.settingslib.drawer.CategoryKey;
 
@@ -38,7 +39,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
@@ -49,7 +49,7 @@ import java.util.List;
 
 import androidx.fragment.app.FragmentActivity;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(SettingsRobolectricTestRunner.class)
 public class AccountDashboardFragmentTest {
 
     private AccountDashboardFragment mFragment;

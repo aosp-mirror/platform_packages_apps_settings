@@ -35,6 +35,7 @@ import android.os.UserManager;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
@@ -45,13 +46,12 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import androidx.preference.Preference;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {SettingsShadowResources.SettingsShadowTheme.class, ShadowFragment.class})
 public class BackgroundActivityPreferenceControllerTest {
 

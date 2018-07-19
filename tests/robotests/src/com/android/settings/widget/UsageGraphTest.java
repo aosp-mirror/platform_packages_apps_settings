@@ -17,6 +17,7 @@
 package com.android.settings.widget;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -25,15 +26,15 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.util.SparseIntArray;
 
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.R;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(SettingsRobolectricTestRunner.class)
 public class UsageGraphTest {
 
     private UsageGraph mGraph;

@@ -18,6 +18,7 @@ package com.android.settings.notification;
 
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
+
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
@@ -31,18 +32,19 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.os.UserManager;
 
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadows.ShadowApplication;
 
 import androidx.preference.Preference;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(SettingsRobolectricTestRunner.class)
 public class DeletedChannelsPreferenceControllerTest {
 
     private Context mContext;
