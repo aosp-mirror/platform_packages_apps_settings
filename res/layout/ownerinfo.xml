@@ -29,7 +29,9 @@
         android:gravity="top"
         android:hint="@string/owner_info_settings_edit_text_hint"
         android:inputType="textMultiLine|textCapSentences"
-        />
+        android:maxLength="140">
+        <requestFocus />
+    </EditText>
 
 </LinearLayout>
 
