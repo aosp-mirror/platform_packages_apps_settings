@@ -85,8 +85,9 @@ public class SliceBroadcastReceiverTest {
         mSearchFeatureProvider = new SearchFeatureProviderImpl();
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mFakeFeatureFactory.searchFeatureProvider = mSearchFeatureProvider;
+        CustomSliceManager manager = new CustomSliceManager(mContext);
         when(mFakeFeatureFactory.slicesFeatureProvider.getCustomSliceManager(any()))
-                .thenReturn(new CustomSliceManager(mContext));
+                .thenReturn(manager);
         mLoggingNameArgumentCatpor = ArgumentCaptor.forClass(Pair.class);
         mLoggingValueArgumentCatpor = ArgumentCaptor.forClass(Pair.class);
     }

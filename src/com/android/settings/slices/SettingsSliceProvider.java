@@ -39,7 +39,8 @@ import com.android.settings.location.LocationSliceBuilder;
 import com.android.settings.mobilenetwork.Enhanced4gLteSliceHelper;
 import com.android.settings.notification.ZenModeSliceBuilder;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.wifi.WifiSliceBuilder;
+import com.android.settings.core.BasePreferenceController;
+import com.android.settings.wifi.WifiSlice;
 import com.android.settings.wifi.calling.WifiCallingSliceHelper;
 import com.android.settingslib.SliceBroadcastRelay;
 import com.android.settingslib.utils.ThreadUtils;
@@ -166,11 +167,7 @@ public class SettingsSliceProvider extends SliceProvider {
             return;
         }
 
-        if (WifiSliceBuilder.WIFI_URI.equals(sliceUri)) {
-            registerIntentToUri(WifiSliceBuilder.INTENT_FILTER, sliceUri);
-            mRegisteredUris.add(sliceUri);
-            return;
-        } else if (ZenModeSliceBuilder.ZEN_MODE_URI.equals(sliceUri)) {
+        if (ZenModeSliceBuilder.ZEN_MODE_URI.equals(sliceUri)) {
             registerIntentToUri(ZenModeSliceBuilder.INTENT_FILTER, sliceUri);
             return;
         } else if (BluetoothSliceBuilder.BLUETOOTH_URI.equals(sliceUri)) {
@@ -217,7 +214,7 @@ public class SettingsSliceProvider extends SliceProvider {
             if (mCustomSliceManager.isValidUri(sliceUri)) {
                 final CustomSliceable sliceable = mCustomSliceManager.getSliceableFromUri(
                         sliceUri);
-                return sliceable.getSlice(getContext());
+                return sliceable.getSlice();
             }
 
             if (WifiCallingSliceHelper.WIFI_CALLING_URI.equals(sliceUri)) {
@@ -225,8 +222,6 @@ public class SettingsSliceProvider extends SliceProvider {
                         .getSlicesFeatureProvider()
                         .getNewWifiCallingSliceHelper(getContext())
                         .createWifiCallingSlice(sliceUri);
-            } else if (WifiSliceBuilder.WIFI_URI.equals(sliceUri)) {
-                return WifiSliceBuilder.getSlice(getContext());
             } else if (ZenModeSliceBuilder.ZEN_MODE_URI.equals(sliceUri)) {
                 return ZenModeSliceBuilder.getSlice(getContext());
             } else if (BluetoothSliceBuilder.BLUETOOTH_URI.equals(sliceUri)) {
@@ -402,7 +397,7 @@ public class SettingsSliceProvider extends SliceProvider {
 
     private List<Uri> getSpecialCasePlatformUris() {
         return Arrays.asList(
-                WifiSliceBuilder.WIFI_URI,
+                WifiSlice.WIFI_URI,
                 BluetoothSliceBuilder.BLUETOOTH_URI,
                 LocationSliceBuilder.LOCATION_URI
         );

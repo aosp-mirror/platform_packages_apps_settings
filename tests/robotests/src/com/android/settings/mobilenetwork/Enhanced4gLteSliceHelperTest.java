@@ -84,8 +84,9 @@ public class Enhanced4gLteSliceHelperTest {
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mSlicesFeatureProvider = mFeatureFactory.getSlicesFeatureProvider();
 
+        CustomSliceManager manager = new CustomSliceManager(mContext);
         when(mSlicesFeatureProvider.getCustomSliceManager(any(Context.class)))
-                .thenReturn(new CustomSliceManager(mContext));
+                .thenReturn(manager);
 
         //setup for SettingsSliceProvider tests
         mProvider = spy(new SettingsSliceProvider());
