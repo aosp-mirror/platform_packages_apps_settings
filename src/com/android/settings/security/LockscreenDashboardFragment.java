@@ -19,6 +19,8 @@ package com.android.settings.security;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -29,6 +31,7 @@ import com.android.settings.gestures.DoubleTapScreenPreferenceController;
 import com.android.settings.gestures.PickupGesturePreferenceController;
 import com.android.settings.notification.LockScreenNotificationPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.security.screenlock.LockScreenPreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
@@ -36,8 +39,6 @@ import com.android.settingslib.search.SearchIndexable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
 
 /**
  * Settings screen for lock screen preference
@@ -156,6 +157,12 @@ public class LockscreenDashboardFragment extends DashboardFragment
                     niks.add(KEY_LOCK_SCREEN_NOTIFICATON_WORK_PROFILE);
                     niks.add(KEY_LOCK_SCREEN_NOTIFICATON_WORK_PROFILE_HEADER);
                     return niks;
+                }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return new LockScreenPreferenceController(context, "anykey")
+                            .isAvailable();
                 }
             };
 }

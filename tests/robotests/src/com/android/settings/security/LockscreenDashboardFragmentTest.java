@@ -17,17 +17,22 @@
 package com.android.settings.security;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController;
 import com.android.settings.display.AmbientDisplayNotificationsPreferenceController;
 import com.android.settings.gestures.DoubleTapScreenPreferenceController;
 import com.android.settings.gestures.PickupGesturePreferenceController;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
@@ -37,6 +42,7 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
@@ -49,12 +55,18 @@ import java.util.List;
 })
 public class LockscreenDashboardFragmentTest {
 
+    @Mock
+    private LockPatternUtils mLockPatternUtils;
+    private FakeFeatureFactory mFeatureFactory;
     private TestFragment mTestFragment;
     private Context mContext;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
+        when(mFeatureFactory.securityFeatureProvider.getLockPatternUtils(any(Context.class)))
+                .thenReturn(mLockPatternUtils);
         mContext = RuntimeEnvironment.application;
         mTestFragment = spy(new TestFragment());
     }
@@ -110,6 +122,16 @@ public class LockscreenDashboardFragmentTest {
 
         mTestFragment.onAttach(mContext);
         verify(controller).setConfig(any());
+    }
+
+    @Test
+    public void isPageSearchable_notLocked_shouldNotBeSearchable() {
+        when(mLockPatternUtils.isSecure(anyInt())).thenReturn(false);
+        when(mLockPatternUtils.isLockScreenDisabled(anyInt())).thenReturn(true);
+
+        assertThat(LockscreenDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
+                .getNonIndexableKeys(mContext))
+                .contains("security_lockscreen_settings_screen");
     }
 
     public static class TestFragment extends LockscreenDashboardFragment {
