@@ -20,6 +20,9 @@ import android.graphics.drawable.Drawable;
 import android.service.settings.suggestions.Suggestion;
 import android.text.TextUtils;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.recyclerview.widget.DiffUtil;
+
 import com.android.settings.R;
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settingslib.drawer.DashboardCategory;
@@ -30,9 +33,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.recyclerview.widget.DiffUtil;
 
 /**
  * Description about data list used in the DashboardAdapter. In the data list each item can be
@@ -411,16 +411,7 @@ public class DashboardData {
                         && TextUtils.equals(localTile.summary, targetTile.summary);
                 case TYPE_SUGGESTION_CONTAINER:
                 case TYPE_CONDITION_CONTAINER:
-                    // If entity is suggestion and contains remote view, force refresh
-                    final List entities = (List) entity;
-                    if (!entities.isEmpty()) {
-                        Object firstEntity = entities.get(0);
-                        if (firstEntity instanceof Tile
-                                && ((Tile) firstEntity).remoteViews != null) {
-                            return false;
-                        }
-                    }
-                    // Otherwise Fall through to default
+                    // Fall through to default
                 default:
                     return entity == null ? targetItem.entity == null
                             : entity.equals(targetItem.entity);
