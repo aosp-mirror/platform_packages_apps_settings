@@ -24,6 +24,7 @@ import android.content.Context;
 import android.icu.text.ListFormatter;
 import android.provider.SearchIndexableResource;
 import android.text.BidiFormatter;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -153,21 +154,25 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
         private final Context mContext;
         private final SummaryLoader mSummaryLoader;
+        private final WifiMasterSwitchPreferenceController mWifiPreferenceController;
         private final MobileNetworkPreferenceController mMobileNetworkPreferenceController;
         private final TetherPreferenceController mTetherPreferenceController;
 
         public SummaryProvider(Context context, SummaryLoader summaryLoader) {
             this(context, summaryLoader,
+                    new WifiMasterSwitchPreferenceController(context, null),
                     new MobileNetworkPreferenceController(context),
                     new TetherPreferenceController(context, null /* lifecycle */));
         }
 
         @VisibleForTesting(otherwise = VisibleForTesting.NONE)
         SummaryProvider(Context context, SummaryLoader summaryLoader,
+                WifiMasterSwitchPreferenceController wifiPreferenceController,
                 MobileNetworkPreferenceController mobileNetworkPreferenceController,
                 TetherPreferenceController tetherPreferenceController) {
             mContext = context;
             mSummaryLoader = summaryLoader;
+            mWifiPreferenceController = wifiPreferenceController;
             mMobileNetworkPreferenceController = mobileNetworkPreferenceController;
             mTetherPreferenceController = tetherPreferenceController;
         }
@@ -176,20 +181,27 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         @Override
         public void setListening(boolean listening) {
             if (listening) {
-                final List<String> summaries = new ArrayList<>();
+                final String wifiSummary = BidiFormatter.getInstance()
+                    .unicodeWrap(mContext.getString(R.string.wifi_settings_title));
+                final String mobileSummary = mContext.getString(
+                    R.string.network_dashboard_summary_mobile);
+                final String dataUsageSummary = mContext.getString(
+                    R.string.network_dashboard_summary_data_usage);
+                final String hotspotSummary = mContext.getString(
+                    R.string.network_dashboard_summary_hotspot);
 
-                summaries.add(BidiFormatter.getInstance()
-                        .unicodeWrap(mContext.getString(R.string.wifi_settings_title)));
-                if (mMobileNetworkPreferenceController.isAvailable()) {
-                    summaries.add(mContext.getString(
-                            R.string.network_dashboard_summary_mobile));
+                final List<String> summaries = new ArrayList<>();
+                if (mWifiPreferenceController.isAvailable() && !TextUtils.isEmpty(wifiSummary)) {
+                    summaries.add(wifiSummary);
                 }
-                final String dataUsageSettingSummary = mContext.getString(
-                        R.string.network_dashboard_summary_data_usage);
-                summaries.add(dataUsageSettingSummary);
-                if (mTetherPreferenceController.isAvailable()) {
-                    summaries.add(mContext.getString(
-                            R.string.network_dashboard_summary_hotspot));
+                if (mMobileNetworkPreferenceController.isAvailable() && !TextUtils.isEmpty(mobileSummary)) {
+                    summaries.add(mobileSummary);
+                }
+                if (!TextUtils.isEmpty(dataUsageSummary)) {
+                    summaries.add(dataUsageSummary);
+                }
+                if (mTetherPreferenceController.isAvailable() && !TextUtils.isEmpty(hotspotSummary)) {
+                    summaries.add(hotspotSummary);
                 }
                 mSummaryLoader.setSummary(this, ListFormatter.getInstance().format(summaries));
             }
