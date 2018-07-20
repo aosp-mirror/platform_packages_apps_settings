@@ -35,14 +35,13 @@ import android.view.Window;
 import android.view.WindowManager.LayoutParams;
 import android.widget.Toolbar;
 
+import androidx.fragment.app.FragmentActivity;
+
 import com.android.settings.R;
 import com.android.settingslib.drawer.CategoryManager;
-import com.android.settingslib.drawer.TileUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.fragment.app.FragmentActivity;
 
 public class SettingsBaseActivity extends FragmentActivity {
 
@@ -174,7 +173,7 @@ public class SettingsBaseActivity extends FragmentActivity {
     }
 
     public String getSettingPkg() {
-        return TileUtils.SETTING_PKG;
+        return CategoryManager.SETTING_PKG;
     }
 
     public interface CategoryListener {
