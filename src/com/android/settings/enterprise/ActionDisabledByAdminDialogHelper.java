@@ -17,7 +17,6 @@
 package com.android.settings.enterprise;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -43,6 +42,7 @@ import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import java.util.Objects;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
 
 /**
  * Helper class for {@link ActionDisabledByAdminDialog} which sets up the dialog.

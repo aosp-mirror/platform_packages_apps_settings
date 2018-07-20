@@ -17,7 +17,6 @@
 package com.android.settings.inputmethod;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -43,6 +42,7 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.loader.app.LoaderManager.LoaderCallbacks;
 import androidx.loader.content.AsyncTaskLoader;
 import androidx.loader.content.Loader;

@@ -19,7 +19,6 @@ package com.android.settings.password;
 import static com.google.common.truth.Truth.assertThat;
 import static org.robolectric.RuntimeEnvironment.application;
 
-import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.pm.PackageManager;
 import android.os.UserHandle;
@@ -37,28 +36,29 @@ import com.android.settings.testutils.Robolectric;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
+import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowAlertDialog;
 import org.robolectric.shadows.ShadowPackageManager;
 import org.robolectric.util.ReflectionHelpers;
 import org.robolectric.util.ReflectionHelpers.ClassParameter;
 
 import java.util.Arrays;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {
-    SettingsShadowResourcesImpl.class,
-    SettingsShadowResources.SettingsShadowTheme.class,
-    ShadowUtils.class
+        SettingsShadowResourcesImpl.class,
+        SettingsShadowResources.SettingsShadowTheme.class,
+        ShadowUtils.class,
+        ShadowAlertDialogCompat.class
 })
 public class SetupChooseLockPatternTest {
 
@@ -88,7 +88,7 @@ public class SetupChooseLockPatternTest {
         ShadowPackageManager spm = Shadows.shadowOf(application.getPackageManager());
         ComponentName cname = new ComponentName(application, SetupRedactionInterstitial.class);
         final int componentEnabled = spm.getComponentEnabledSettingFlags(cname)
-            & PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
+                & PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
         assertThat(componentEnabled).isEqualTo(PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
     }
 
@@ -111,22 +111,20 @@ public class SetupChooseLockPatternTest {
         assertThat(button.getVisibility()).isEqualTo(View.VISIBLE);
 
         button.performClick();
-        AlertDialog chooserDialog = ShadowAlertDialog.getLatestAlertDialog();
+        AlertDialog chooserDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(chooserDialog).isNotNull();
-        int count = Shadows.shadowOf(chooserDialog).getAdapter().getCount();
+        int count = chooserDialog.getListView().getCount();
         assertThat(count).named("List items shown").isEqualTo(3);
     }
 
     @Config(qualifiers = "sw400dp")
     @Test
-    @Ignore("b/111194289")
     public void sw400dp_shouldShowScreenLockOptions() {
         verifyScreenLockOptionsShown();
     }
 
     @Config(qualifiers = "sw400dp-land")
     @Test
-    @Ignore("b/111194289")
     public void sw400dpLandscape_shouldShowScreenLockOptions() {
         verifyScreenLockOptionsShown();
     }
@@ -156,7 +154,7 @@ public class SetupChooseLockPatternTest {
         assertThat(skipButton.getVisibility()).isEqualTo(View.VISIBLE);
 
         skipButton.performClick();
-        AlertDialog chooserDialog = ShadowAlertDialog.getLatestAlertDialog();
+        AlertDialog chooserDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(chooserDialog).isNotNull();
     }
 

@@ -17,7 +17,6 @@
 package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 
 import android.content.Intent;
@@ -25,8 +24,10 @@ import android.net.wifi.WifiConfiguration;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settings.testutils.shadow.ShadowConnectivityManager;
+import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.SettingsShadowTypedArray;
+import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
+import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settings.testutils.shadow.ShadowWifiManager;
 
 import org.junit.Before;
@@ -36,7 +37,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowAlertDialog;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -44,9 +44,10 @@ import org.robolectric.util.ReflectionHelpers;
         SettingsShadowResources.SettingsShadowTheme.class,
         ShadowConnectivityManager.class,
         SettingsShadowTypedArray.class,
-        ShadowWifiManager.class
-}
-)
+        ShadowWifiManager.class,
+        ShadowAlertDialogCompat.class,
+        SettingsShadowResourcesImpl.class
+})
 public class WifiDialogActivityTest {
 
     private static final String AP1_SSID = "\"ap1\"";
@@ -65,7 +66,7 @@ public class WifiDialogActivityTest {
     @Test
     public void onSubmit_shouldConnectToNetwork() {
         WifiDialogActivity activity = Robolectric.setupActivity(WifiDialogActivity.class);
-        WifiDialog dialog = (WifiDialog) ShadowAlertDialog.getLatestAlertDialog();
+        WifiDialog dialog = (WifiDialog) ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNotNull();
 
         ReflectionHelpers.setField(dialog, "mController", mController);
@@ -82,7 +83,8 @@ public class WifiDialogActivityTest {
                         WifiDialogActivity.class,
                         new Intent().putExtra(WifiDialogActivity.KEY_CONNECT_FOR_CALLER, false))
                         .setup().get();
-        WifiDialog dialog = (WifiDialog) ShadowAlertDialog.getLatestAlertDialog();
+        WifiDialog dialog = (WifiDialog) ShadowAlertDialogCompat.getLatestAlertDialog();
+
         assertThat(dialog).isNotNull();
 
         ReflectionHelpers.setField(dialog, "mController", mController);

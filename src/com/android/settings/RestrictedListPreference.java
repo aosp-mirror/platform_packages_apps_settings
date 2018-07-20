@@ -18,7 +18,6 @@ package com.android.settings;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
-import android.app.AlertDialog;
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -41,6 +40,7 @@ import com.android.settingslib.RestrictedPreferenceHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.preference.ListPreferenceDialogFragmentCompat;
 import androidx.preference.PreferenceViewHolder;

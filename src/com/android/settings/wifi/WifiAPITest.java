@@ -18,7 +18,6 @@ package com.android.settings.wifi;
 
 import static android.content.Context.WIFI_SERVICE;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -29,6 +28,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

@@ -16,7 +16,6 @@
 
 package com.android.settings.deviceinfo;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -65,6 +64,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;

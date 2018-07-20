@@ -16,11 +16,9 @@
 
 package com.android.settings.biometrics.fingerprint;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static com.google.common.truth.Truth.assertThat;
 import static org.robolectric.RuntimeEnvironment.application;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.widget.Button;
@@ -30,6 +28,8 @@ import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
+import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.After;
@@ -39,12 +39,17 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
-import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowAlertDialog;
+
+import androidx.appcompat.app.AlertDialog;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {SettingsShadowResources.SettingsShadowTheme.class, ShadowUtils.class})
+@Config(shadows = {
+        SettingsShadowResources.SettingsShadowTheme.class,
+        ShadowUtils.class,
+        ShadowAlertDialogCompat.class,
+        SettingsShadowResourcesImpl.class
+})
 public class SetupFingerprintEnrollFindSensorTest {
 
     @Mock
@@ -75,11 +80,12 @@ public class SetupFingerprintEnrollFindSensorTest {
         final Button skipButton = activity.findViewById(R.id.skip_button);
         skipButton.performClick();
 
-        final AlertDialog alertDialog = ShadowAlertDialog.getLatestAlertDialog();
-        assertNotNull(alertDialog);
+        final AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(alertDialog).isNotNull();
 
-        final ShadowAlertDialog shadowAlertDialog = Shadows.shadowOf(alertDialog);
+        final ShadowAlertDialogCompat shadowAlertDialog = ShadowAlertDialogCompat.shadowOf(
+                alertDialog);
         final int titleRes = R.string.setup_fingerprint_enroll_skip_title;
-        assertEquals(application.getString(titleRes), shadowAlertDialog.getTitle());
+        assertThat(application.getString(titleRes)).isEqualTo(shadowAlertDialog.getTitle());
     }
 }

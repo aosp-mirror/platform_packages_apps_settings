@@ -16,7 +16,6 @@
 
 package com.android.settings.deviceinfo.imei;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -30,6 +29,7 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 

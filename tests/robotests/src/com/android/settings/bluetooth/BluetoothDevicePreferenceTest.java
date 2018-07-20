@@ -27,11 +27,14 @@ import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.UserManager;
+import android.view.ContextThemeWrapper;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
+import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
@@ -41,9 +44,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(shadows = {SettingsShadowResourcesImpl.class, ShadowAlertDialogCompat.class})
 public class BluetoothDevicePreferenceTest {
     private static final boolean SHOW_DEVICES_WITHOUT_NAMES = true;
 
@@ -58,7 +63,8 @@ public class BluetoothDevicePreferenceTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application.getApplicationContext());
+        Context context = spy(RuntimeEnvironment.application.getApplicationContext());
+        mContext = new ContextThemeWrapper(context, R.style.Theme_Settings);
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mMetricsFeatureProvider = mFakeFeatureFactory.getMetricsFeatureProvider();
         mPreference = new BluetoothDevicePreference(mContext, mCachedBluetoothDevice,

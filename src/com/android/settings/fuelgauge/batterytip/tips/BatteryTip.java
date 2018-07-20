@@ -16,7 +16,6 @@
 
 package com.android.settings.fuelgauge.batterytip.tips;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;

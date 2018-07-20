@@ -16,7 +16,6 @@
 
 package com.android.settings.bluetooth;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -37,6 +36,8 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+
+import androidx.appcompat.app.AlertDialog;
 
 /**
  * Dialog fragment for renaming a Bluetooth device.

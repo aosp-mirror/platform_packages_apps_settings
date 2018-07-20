@@ -16,7 +16,6 @@
 
 package com.android.settings.wifi;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -26,6 +25,8 @@ import android.widget.Button;
 import com.android.settings.R;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.wifi.AccessPoint;
+
+import androidx.appcompat.app.AlertDialog;
 
 public class WifiDialog extends AlertDialog implements WifiConfigUiBase,
         DialogInterface.OnClickListener {
@@ -85,7 +86,6 @@ public class WifiDialog extends AlertDialog implements WifiConfigUiBase,
     protected void onCreate(Bundle savedInstanceState) {
         mView = getLayoutInflater().inflate(R.layout.wifi_dialog, null);
         setView(mView);
-        setInverseBackgroundForced(true);
         mController = new WifiConfigController(this, mView, mAccessPoint, mMode);
         super.onCreate(savedInstanceState);
 

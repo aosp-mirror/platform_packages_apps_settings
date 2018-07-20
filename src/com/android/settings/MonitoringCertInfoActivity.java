@@ -17,7 +17,6 @@
 package com.android.settings;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -28,6 +27,8 @@ import android.os.UserHandle;
 import android.provider.Settings;
 
 import com.android.settingslib.RestrictedLockUtils;
+
+import androidx.appcompat.app.AlertDialog;
 
 /**
  * Activity that shows a dialog explaining that a CA cert is allowing someone to monitor network

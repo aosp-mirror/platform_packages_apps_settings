@@ -18,7 +18,6 @@ package com.android.settings.bluetooth;
 
 import android.annotation.NonNull;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -37,6 +36,8 @@ import com.android.settings.R;
 import com.android.settingslib.bluetooth.BluetoothDiscoverableTimeoutReceiver;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+
+import androidx.appcompat.app.AlertDialog;
 
 /**
  * RequestPermissionActivity asks the user whether to enable discovery. This is

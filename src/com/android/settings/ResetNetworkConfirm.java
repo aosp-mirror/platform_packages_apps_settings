@@ -18,7 +18,6 @@ package com.android.settings;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
-import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
 import android.content.ContentResolver;
@@ -50,6 +49,7 @@ import com.android.settings.network.ApnSettings;
 import com.android.settingslib.RestrictedLockUtils;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
 
 /**
  * Confirm and execute a reset of the network settings to a clean "just out of the box"

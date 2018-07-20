@@ -32,15 +32,15 @@ import android.util.KeyValueListParser;
 import android.util.Log;
 import android.util.Pair;
 
+import com.android.settings.bluetooth.BluetoothSliceBuilder;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.flashlight.FlashlightSliceBuilder;
 import com.android.settings.location.LocationSliceBuilder;
 import com.android.settings.mobilenetwork.Enhanced4gLteSliceHelper;
 import com.android.settings.notification.ZenModeSliceBuilder;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.core.BasePreferenceController;
 import com.android.settings.wifi.WifiSliceBuilder;
 import com.android.settings.wifi.calling.WifiCallingSliceHelper;
-import com.android.settings.bluetooth.BluetoothSliceBuilder;
 import com.android.settingslib.SliceBroadcastRelay;
 import com.android.settingslib.utils.ThreadUtils;
 

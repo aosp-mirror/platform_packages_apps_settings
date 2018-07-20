@@ -18,7 +18,6 @@ package com.android.settings.deviceinfo;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -61,6 +60,7 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;

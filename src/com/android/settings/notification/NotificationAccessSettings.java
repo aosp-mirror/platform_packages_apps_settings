@@ -16,7 +16,6 @@
 
 package com.android.settings.notification;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.NotificationManager;
 import android.content.ComponentName;
@@ -42,6 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 /**

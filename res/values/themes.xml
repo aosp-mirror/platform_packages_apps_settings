@@ -17,7 +17,7 @@
 <resources>
 
     <style name="Transparent">
-        <item name="android:alertDialogTheme">@style/Theme.AlertDialog</item>
+        <item name="alertDialogTheme">@style/Theme.AlertDialog</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">true</item>
@@ -45,7 +45,7 @@
 
         <item name="preferenceBackgroundColor">@drawable/preference_background</item>
 
-        <!-- For all androidx version of AlertDialogs -->
+        <!-- For AndroidX AlertDialog -->
         <item name="alertDialogTheme">@style/Theme.AlertDialog</item>
 
         <item name="*android:lockPatternStyle">@style/LockPatternStyle.Setup</item>

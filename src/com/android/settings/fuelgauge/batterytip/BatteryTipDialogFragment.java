@@ -16,7 +16,6 @@
 
 package com.android.settings.fuelgauge.batterytip;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -39,6 +38,7 @@ import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
 import java.util.List;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 

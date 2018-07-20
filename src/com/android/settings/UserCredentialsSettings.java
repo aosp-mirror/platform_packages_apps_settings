@@ -18,7 +18,6 @@ package com.android.settings;
 
 import android.annotation.LayoutRes;
 import android.annotation.Nullable;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -57,6 +56,7 @@ import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;

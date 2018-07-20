@@ -25,24 +25,27 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.testutils.FragmentTestUtils;
+import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
+import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
-import org.robolectric.shadows.ShadowAlertDialog;
-import org.robolectric.shadows.ShadowDialog;
+import org.robolectric.annotation.Config;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
 
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(shadows = {ShadowAlertDialogCompat.class, SettingsShadowResourcesImpl.class})
 public class InstantAppButtonDialogFragmentTest {
 
     private static final String TEST_PACKAGE = "testPackage";
@@ -52,8 +55,10 @@ public class InstantAppButtonDialogFragmentTest {
 
     @Before
     public void setUp() {
+        final FragmentActivity activity = Robolectric.setupActivity(FragmentActivity.class);
         mContext = spy(RuntimeEnvironment.application);
         mFragment = spy(InstantAppButtonDialogFragment.newInstance(TEST_PACKAGE));
+        mFragment.show(activity.getSupportFragmentManager(), "InstantAppButtonDialogFragment");
         doReturn(mContext).when(mFragment).getContext();
     }
 
@@ -61,7 +66,6 @@ public class InstantAppButtonDialogFragmentTest {
     public void onClick_shouldDeleteApp() {
         final PackageManager packageManager = mock(PackageManager.class);
         when(mContext.getPackageManager()).thenReturn(packageManager);
-        FragmentTestUtils.startFragment(mFragment);
 
         mFragment.onClick(null /* dialog */, 0  /* which */);
 
@@ -71,11 +75,11 @@ public class InstantAppButtonDialogFragmentTest {
 
     @Test
     public void onCreateDialog_clearAppDialog_shouldShowClearAppDataConfirmation() {
-        FragmentTestUtils.startFragment(mFragment);
+        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
 
-        final AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
         assertThat(dialog).isNotNull();
-        final ShadowAlertDialog shadowDialog = Shadows.shadowOf(dialog);
+
+        final ShadowAlertDialogCompat shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog);
 
         assertThat(shadowDialog.getMessage()).isEqualTo(
                 mContext.getString(R.string.clear_instant_app_confirmation));

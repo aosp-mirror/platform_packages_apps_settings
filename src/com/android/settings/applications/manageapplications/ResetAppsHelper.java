@@ -19,7 +19,6 @@ import static android.net.NetworkPolicyManager.POLICY_NONE;
 import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 
 import android.app.ActivityManager;
-import android.app.AlertDialog;
 import android.app.AppOpsManager;
 import android.app.INotificationManager;
 import android.content.Context;
@@ -38,6 +37,8 @@ import android.webkit.IWebViewUpdateService;
 import com.android.settings.R;
 
 import java.util.List;
+
+import androidx.appcompat.app.AlertDialog;
 
 public class ResetAppsHelper implements DialogInterface.OnClickListener,
         DialogInterface.OnDismissListener {
