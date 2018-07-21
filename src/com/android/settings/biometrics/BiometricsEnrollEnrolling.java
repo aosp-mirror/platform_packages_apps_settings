@@ -109,7 +109,8 @@ public abstract class BiometricsEnrollEnrolling extends BiometricEnrollBase
                 .findFragmentByTag(TAG_SIDECAR);
         if (mSidecar == null) {
             mSidecar = getSidecar();
-            getSupportFragmentManager().beginTransaction().add(mSidecar, TAG_SIDECAR).commit();
+            getSupportFragmentManager().beginTransaction().add(mSidecar, TAG_SIDECAR)
+                    .commitAllowingStateLoss();
         }
         mSidecar.setListener(this);
     }
