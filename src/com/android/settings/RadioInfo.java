@@ -20,7 +20,6 @@ import static android.net.ConnectivityManager.NetworkCallback;
 import static android.provider.Settings.Global.PREFERRED_NETWORK_MODE;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.QueuedWork;
 import android.content.ComponentName;
 import android.content.Context;
@@ -90,6 +89,8 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
+
+import androidx.appcompat.app.AlertDialog;
 
 public class RadioInfo extends Activity {
     private static final String TAG = "RadioInfo";

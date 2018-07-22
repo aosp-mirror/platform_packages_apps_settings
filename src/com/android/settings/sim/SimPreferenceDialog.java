@@ -16,7 +16,6 @@
 package com.android.settings.sim;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
@@ -41,6 +40,8 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+
+import androidx.appcompat.app.AlertDialog;
 
 public class SimPreferenceDialog extends Activity {
 

@@ -17,7 +17,6 @@
 package com.android.settings.bluetooth;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
@@ -31,6 +30,7 @@ import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
 
 /** Implements an AlertDialog for confirming that a user wishes to unpair or "forget" a paired
  *  device*/

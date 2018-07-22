@@ -31,6 +31,7 @@ import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -53,8 +54,8 @@ public class RestrictAppDetector implements BatteryTipDetector {
         mContext = context;
         mPolicy = policy;
         mBatteryDatabaseManager = BatteryDatabaseManager.getInstance(context);
-        mAppRestrictionPredicate = new AppRestrictionPredicate(context);
-        mAppLabelPredicate = new AppLabelPredicate(context);
+        mAppRestrictionPredicate = AppRestrictionPredicate.getInstance(context);
+        mAppLabelPredicate = AppLabelPredicate.getInstance(context);
     }
 
     @Override
@@ -63,8 +64,8 @@ public class RestrictAppDetector implements BatteryTipDetector {
             return getFakeData();
         }
         if (mPolicy.appRestrictionEnabled) {
-            // TODO(b/80192137): hook up the query timestamp to server side
-            final long oneDayBeforeMs = System.currentTimeMillis() - DateUtils.DAY_IN_MILLIS;
+            final long oneDayBeforeMs = System.currentTimeMillis()
+                    - TimeUnit.HOURS.toMillis(mPolicy.appRestrictionActiveHour);
             final List<AppInfo> highUsageApps = BatteryTipUtils.detectAnomalies(mContext,
                     oneDayBeforeMs);
             if (!highUsageApps.isEmpty()) {

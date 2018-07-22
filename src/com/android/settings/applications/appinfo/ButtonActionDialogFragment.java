@@ -15,7 +15,6 @@
  */
 package com.android.settings.applications.appinfo;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -30,6 +29,7 @@ import java.lang.annotation.RetentionPolicy;
 
 import androidx.annotation.IntDef;
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
 
 /**
  * Fragment to show the dialog for uninstall or forcestop. This fragment uses function in

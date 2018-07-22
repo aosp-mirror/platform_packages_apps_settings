@@ -54,6 +54,7 @@ import android.os.UserManager;
 import android.preference.PreferenceFrameLayout;
 import android.text.TextUtils;
 import android.util.ArraySet;
+import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -862,6 +863,7 @@ public class ManageApplications extends InstrumentedFragment
         private final Context mContext;
         private final AppStateBaseBridge mExtraInfoBridge;
         private final LoadingViewController mLoadingViewController;
+        private final IconDrawableFactory mIconDrawableFactory;
 
         private AppFilterItem mAppFilter;
         private ArrayList<ApplicationsState.AppEntry> mEntries;
@@ -894,6 +896,7 @@ public class ManageApplications extends InstrumentedFragment
                     mManageApplications.mListContainer
             );
             mContext = manageApplications.getActivity();
+            mIconDrawableFactory = IconDrawableFactory.newInstance(mContext);
             mAppFilter = appFilter;
             if (mManageApplications.mListType == LIST_TYPE_NOTIFICATION) {
                 mExtraInfoBridge = new AppStateNotificationBridge(mContext, mState, this,
@@ -1318,8 +1321,7 @@ public class ManageApplications extends InstrumentedFragment
                 ApplicationsState.AppEntry entry = mEntries.get(position);
                 synchronized (entry) {
                     holder.setTitle(entry.label);
-                    mState.ensureIcon(entry);
-                    holder.setIcon(entry.icon);
+                    holder.setIcon(mIconDrawableFactory.getBadgedIcon(entry.info));
                     updateSummary(holder, entry);
                     updateSwitch(holder, entry);
                     holder.updateDisableView(entry.info);

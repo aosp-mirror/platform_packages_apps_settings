@@ -19,7 +19,6 @@ import static com.android.settings.network.MobilePlanPreferenceController
         .MANAGE_MOBILE_PLAN_DIALOG_ID;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.icu.text.ListFormatter;
@@ -44,6 +43,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 @SearchIndexable

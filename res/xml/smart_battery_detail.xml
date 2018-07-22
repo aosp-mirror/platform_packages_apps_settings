@@ -23,8 +23,10 @@
 
     <com.android.settings.widget.VideoPreference
         android:key="auto_awesome_battery"
+        android:title="@string/summary_placeholder"
         settings:animation="@raw/auto_awesome_battery"
-        settings:preview="@drawable/auto_awesome_battery"/>
+        settings:preview="@drawable/auto_awesome_battery"
+        settings:controller="com.android.settings.widget.VideoPreferenceController"/>
 
     <SwitchPreference
         android:key="smart_battery"

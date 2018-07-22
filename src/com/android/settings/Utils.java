@@ -389,9 +389,7 @@ public final class Utils extends com.android.settingslib.Utils {
      */
     public static UserHandle getManagedProfile(UserManager userManager) {
         List<UserHandle> userProfiles = userManager.getUserProfiles();
-        final int count = userProfiles.size();
-        for (int i = 0; i < count; i++) {
-            final UserHandle profile = userProfiles.get(i);
+        for (UserHandle profile : userProfiles) {
             if (profile.getIdentifier() == userManager.getUserHandle()) {
                 continue;
             }

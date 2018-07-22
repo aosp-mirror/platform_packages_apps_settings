@@ -18,7 +18,9 @@ package com.android.settings.fuelgauge;
 
 import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT;
 import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
@@ -33,6 +35,7 @@ import android.os.UserManager;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,7 +43,6 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
@@ -48,7 +50,7 @@ import java.util.List;
 
 import androidx.preference.Preference;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(SettingsRobolectricTestRunner.class)
 public class RestrictAppPreferenceControllerTest {
     private static final int ALLOWED_UID = 111;
     private static final String ALLOWED_PACKAGE_NAME = "com.android.allowed.package";

@@ -17,7 +17,6 @@
 package com.android.settings.security;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -42,6 +41,7 @@ import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmLockPattern;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 
 public class CryptKeeperSettings extends InstrumentedPreferenceFragment {

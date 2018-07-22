@@ -15,7 +15,6 @@
  */
 package com.android.settings.applications.appinfo;
 
-import android.app.AlertDialog;
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.Intent;
@@ -33,6 +32,7 @@ import com.android.settings.applications.AppStateWriteSettingsBridge.WriteSettin
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.Preference.OnPreferenceClickListener;

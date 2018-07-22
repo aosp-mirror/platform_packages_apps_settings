@@ -16,7 +16,6 @@
 
 package com.android.settings.bluetooth;
 
-import android.app.AlertDialog;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
@@ -34,6 +33,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager.BluetoothManagerCallback;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
 
 /**
  * Utils is a helper class that contains constants for various

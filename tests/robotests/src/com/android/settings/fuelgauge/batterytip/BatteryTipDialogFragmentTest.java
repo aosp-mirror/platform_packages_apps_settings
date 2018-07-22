@@ -20,7 +20,6 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.text.format.DateUtils;
 
@@ -33,6 +32,8 @@ import com.android.settings.fuelgauge.batterytip.tips.SummaryTip;
 import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
+import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.testutils.FragmentTestUtils;
 
@@ -42,16 +43,16 @@ import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowAlertDialog;
-import org.robolectric.shadows.ShadowDialog;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.appcompat.app.AlertDialog;
+
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = ShadowUtils.class)
+@Config(shadows = {ShadowUtils.class, ShadowAlertDialogCompat.class,
+        SettingsShadowResourcesImpl.class})
 public class BatteryTipDialogFragmentTest {
 
     private static final String PACKAGE_NAME = "com.android.app";
@@ -108,8 +109,8 @@ public class BatteryTipDialogFragmentTest {
 
         Robolectric.getForegroundThreadScheduler().advanceToLastPostedRunnable();
 
-        final AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
-        ShadowAlertDialog shadowDialog = Shadows.shadowOf(dialog);
+        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        ShadowAlertDialogCompat shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog);
 
         assertThat(shadowDialog.getMessage()).isEqualTo(
                 mContext.getString(R.string.battery_tip_dialog_message, 1));
@@ -121,8 +122,8 @@ public class BatteryTipDialogFragmentTest {
 
         FragmentTestUtils.startFragment(mDialogFragment);
 
-        final AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
-        ShadowAlertDialog shadowDialog = Shadows.shadowOf(dialog);
+        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        ShadowAlertDialogCompat shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog);
 
         assertThat(shadowDialog.getTitle()).isEqualTo("Restrict app?");
         assertThat(shadowDialog.getMessage())
@@ -142,8 +143,8 @@ public class BatteryTipDialogFragmentTest {
 
         Robolectric.getForegroundThreadScheduler().advanceToLastPostedRunnable();
 
-        final AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
-        ShadowAlertDialog shadowDialog = Shadows.shadowOf(dialog);
+        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        ShadowAlertDialogCompat shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog);
 
         assertThat(shadowDialog.getTitle()).isEqualTo("Restrict 2 apps?");
         assertThat(shadowDialog.getMessage())
@@ -171,8 +172,8 @@ public class BatteryTipDialogFragmentTest {
 
         Robolectric.getForegroundThreadScheduler().advanceToLastPostedRunnable();
 
-        final AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
-        ShadowAlertDialog shadowDialog = Shadows.shadowOf(dialog);
+        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        ShadowAlertDialogCompat shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog);
 
         assertThat(shadowDialog.getTitle()).isEqualTo("Restrict 6 apps?");
         assertThat(shadowDialog.getMessage())
@@ -189,8 +190,8 @@ public class BatteryTipDialogFragmentTest {
 
         FragmentTestUtils.startFragment(mDialogFragment);
 
-        final AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
-        ShadowAlertDialog shadowDialog = Shadows.shadowOf(dialog);
+        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        ShadowAlertDialogCompat shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog);
 
         assertThat(shadowDialog.getTitle()).isEqualTo("Remove restriction?");
         assertThat(shadowDialog.getMessage())
@@ -204,8 +205,8 @@ public class BatteryTipDialogFragmentTest {
 
         FragmentTestUtils.startFragment(mDialogFragment);
 
-        final AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
-        ShadowAlertDialog shadowDialog = Shadows.shadowOf(dialog);
+        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        ShadowAlertDialogCompat shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog);
 
         assertThat(shadowDialog.getMessage()).isEqualTo(
                 "Your apps are using a normal amount of battery. If apps use too much battery, "

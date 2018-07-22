@@ -19,7 +19,6 @@ package com.android.settings;
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -37,6 +36,7 @@ import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settingslib.RestrictedLockUtils;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
 
 /**
  * Base class for settings screens that should be pin protected when in restricted mode or

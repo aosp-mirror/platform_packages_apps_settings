@@ -18,7 +18,6 @@ package com.android.settings.deviceinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.storage.VolumeRecord;
@@ -28,6 +27,7 @@ import com.android.settings.R;
 import com.android.settings.deviceinfo.PrivateVolumeForget.ForgetConfirmFragment;
 import com.android.settings.testutils.Robolectric;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowStorageManager;
 
 import org.junit.After;
@@ -36,10 +36,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = ShadowStorageManager.class)
+@Config(shadows = {ShadowStorageManager.class, SettingsShadowResourcesImpl.class})
 public class PrivateVolumeForgetTest {
 
     private PrivateVolumeForget mFragment;

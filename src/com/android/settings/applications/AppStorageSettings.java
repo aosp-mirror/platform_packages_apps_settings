@@ -22,7 +22,6 @@ import static android.os.storage.StorageVolume.ScopedAccessProviderContract.AUTH
 import static android.os.storage.StorageVolume.ScopedAccessProviderContract.TABLE_PERMISSIONS;
 
 import android.app.ActivityManager;
-import android.app.AlertDialog;
 import android.app.AppGlobals;
 import android.app.GrantedUriPermission;
 import android.content.ContentResolver;
@@ -64,6 +63,7 @@ import java.util.Objects;
 import java.util.TreeMap;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.preference.Preference;

@@ -17,7 +17,6 @@ package com.android.settings.applications.appinfo;
 
 import static android.view.WindowManager.LayoutParams.PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
 
-import android.app.AlertDialog;
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.Intent;
@@ -38,6 +37,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.Preference.OnPreferenceClickListener;

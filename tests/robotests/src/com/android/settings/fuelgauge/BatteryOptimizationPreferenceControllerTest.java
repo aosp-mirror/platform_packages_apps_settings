@@ -17,6 +17,7 @@
 package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
@@ -29,6 +30,7 @@ import android.content.Intent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 
 import org.junit.Before;
@@ -36,13 +38,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(SettingsRobolectricTestRunner.class)
 public class BatteryOptimizationPreferenceControllerTest {
 
     private static final String PKG_IN_WHITELIST = "com.pkg.in.whitelist";

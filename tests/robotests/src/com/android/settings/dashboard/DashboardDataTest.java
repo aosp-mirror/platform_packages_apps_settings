@@ -20,7 +20,9 @@ import static com.android.settings.dashboard.DashboardData.STABLE_ID_CONDITION_C
 import static com.android.settings.dashboard.DashboardData.STABLE_ID_CONDITION_FOOTER;
 import static com.android.settings.dashboard.DashboardData.STABLE_ID_SUGGESTION_CONDITION_DIVIDER;
 import static com.android.settings.dashboard.DashboardData.STABLE_ID_SUGGESTION_CONTAINER;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -29,6 +31,7 @@ import android.service.settings.suggestions.Suggestion;
 
 import com.android.settings.dashboard.conditional.AirplaneModeCondition;
 import com.android.settings.dashboard.conditional.Condition;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 
@@ -37,7 +40,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -48,7 +50,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListUpdateCallback;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(SettingsRobolectricTestRunner.class)
 public class DashboardDataTest {
 
     private static final String TEST_SUGGESTION_TITLE = "Use fingerprint";

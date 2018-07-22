@@ -17,7 +17,7 @@
 <resources>
 
     <style name="Transparent">
-        <item name="android:alertDialogTheme">@style/Theme.AlertDialog</item>
+        <item name="alertDialogTheme">@style/Theme.AlertDialog</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">true</item>
@@ -45,8 +45,8 @@
 
         <item name="preferenceBackgroundColor">@drawable/preference_background</item>
 
-        <!-- For all androidx version of AlertDialogs -->
-        <item name="alertDialogTheme">@style/Theme.AppCompat.DayNight.Dialog.Alert</item>
+        <!-- For AndroidX AlertDialog -->
+        <item name="alertDialogTheme">@style/Theme.AlertDialog</item>
 
         <item name="*android:lockPatternStyle">@style/LockPatternStyle.Setup</item>
 
@@ -106,11 +106,15 @@
         <item name="android:windowSoftInputMode">adjustResize</item>
     </style>
 
-    <style name="Theme.AlertDialog" parent="@*android:style/Theme.DeviceDefault.Settings.Dialog.Alert">
+    <style name="Theme.AlertDialog" parent="@style/Theme.AppCompat.DayNight.Dialog.Alert">
         <item name="android:windowSoftInputMode">adjustResize</item>
 
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
+
+        <!-- copied from Theme.DeviceDefault.Light.Dialog.Alert -->
+        <item name="colorAccent">@*android:color/accent_device_default_light</item>
+        <item name="dialogCornerRadius">@*android:dimen/config_dialogCornerRadius</item>
     </style>
 
     <style name="Theme.ConfirmDeviceCredentials" parent="Theme.SubSettings">
@@ -166,6 +170,7 @@
         <item name="colorPrimary">@*android:color/primary_device_default_settings_light</item>
         <item name="colorPrimaryDark">@*android:color/primary_dark_device_default_settings_light</item>
         <item name="android:colorAccent">@*android:color/accent_device_default_light</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
 </resources>

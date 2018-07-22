@@ -18,7 +18,6 @@ package com.android.settings.network;
 
 import static android.content.Context.TELEPHONY_SERVICE;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
@@ -55,6 +54,7 @@ import java.util.List;
 import java.util.Set;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.EditTextPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;

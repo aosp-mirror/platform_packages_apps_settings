@@ -16,7 +16,6 @@
 
 package com.android.settings.inputmethod;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
@@ -35,6 +34,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.SwitchBar.OnSwitchChangeListener;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.Preference.OnPreferenceClickListener;

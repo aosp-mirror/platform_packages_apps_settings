@@ -23,7 +23,6 @@ import static com.android.settings.password.ChooseLockPassword.ChooseLockPasswor
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
@@ -63,6 +62,7 @@ import java.util.List;
 
 import androidx.annotation.StringRes;
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;

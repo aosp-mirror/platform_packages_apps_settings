@@ -16,7 +16,6 @@
 
 package com.android.settings.wifi;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -27,11 +26,17 @@ import com.android.settings.R;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.wifi.AccessPoint;
 
-public class WifiDialog extends AlertDialog implements WifiConfigUiBase, DialogInterface.OnClickListener {
+import androidx.appcompat.app.AlertDialog;
+
+public class WifiDialog extends AlertDialog implements WifiConfigUiBase,
+        DialogInterface.OnClickListener {
 
     public interface WifiDialogListener {
-        void onForget(WifiDialog dialog);
-        void onSubmit(WifiDialog dialog);
+        default void onForget(WifiDialog dialog) {
+        }
+
+        default void onSubmit(WifiDialog dialog) {
+        }
     }
 
     private static final int BUTTON_SUBMIT = DialogInterface.BUTTON_POSITIVE;
@@ -64,7 +69,7 @@ public class WifiDialog extends AlertDialog implements WifiConfigUiBase, DialogI
     }
 
     /* package */ WifiDialog(Context context, WifiDialogListener listener, AccessPoint accessPoint,
-        int mode, int style, boolean hideSubmitButton) {
+            int mode, int style, boolean hideSubmitButton) {
         super(context, style);
         mMode = mode;
         mListener = listener;
@@ -81,7 +86,6 @@ public class WifiDialog extends AlertDialog implements WifiConfigUiBase, DialogI
     protected void onCreate(Bundle savedInstanceState) {
         mView = getLayoutInflater().inflate(R.layout.wifi_dialog, null);
         setView(mView);
-        setInverseBackgroundForced(true);
         mController = new WifiConfigController(this, mView, mAccessPoint, mMode);
         super.onCreate(savedInstanceState);
 
@@ -99,8 +103,8 @@ public class WifiDialog extends AlertDialog implements WifiConfigUiBase, DialogI
     }
 
     public void onRestoreInstanceState(Bundle savedInstanceState) {
-            super.onRestoreInstanceState(savedInstanceState);
-            mController.updatePassword();
+        super.onRestoreInstanceState(savedInstanceState);
+        mController.updatePassword();
     }
 
     @Override

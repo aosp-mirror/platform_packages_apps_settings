@@ -18,7 +18,6 @@ package com.android.settings.vpn2;
 import static android.app.AppOpsManager.OP_ACTIVATE_VPN;
 
 import android.annotation.NonNull;
-import android.app.AlertDialog;
 import android.app.AppOpsManager;
 import android.app.Dialog;
 import android.content.Context;
@@ -49,6 +48,7 @@ import com.android.settingslib.RestrictedSwitchPreference;
 import java.util.List;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.preference.Preference;
 

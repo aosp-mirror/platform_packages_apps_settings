@@ -19,7 +19,6 @@ import static android.app.AppOpsManager.MODE_ALLOWED;
 import static android.app.AppOpsManager.MODE_ERRORED;
 import static android.app.AppOpsManager.OP_PICTURE_IN_PICTURE;
 
-import android.app.AlertDialog;
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.os.Bundle;
@@ -30,6 +29,7 @@ import com.android.settings.applications.AppInfoWithHeader;
 import com.android.settings.overlay.FeatureFactory;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.SwitchPreference;

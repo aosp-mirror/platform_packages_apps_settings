@@ -19,7 +19,6 @@ package com.android.settings.applications;
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
@@ -51,6 +50,7 @@ import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
 import java.util.ArrayList;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 

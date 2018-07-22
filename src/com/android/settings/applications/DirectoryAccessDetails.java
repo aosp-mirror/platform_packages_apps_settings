@@ -34,7 +34,6 @@ import static com.android.settings.applications.AppStateDirectoryAccessBridge.VE
 
 import android.annotation.Nullable;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -60,6 +59,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;

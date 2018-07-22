@@ -17,7 +17,6 @@ package com.android.settings.datausage;
 import static android.net.NetworkPolicy.LIMIT_DISABLED;
 import static android.net.NetworkPolicy.WARNING_DISABLED;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -47,6 +46,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;

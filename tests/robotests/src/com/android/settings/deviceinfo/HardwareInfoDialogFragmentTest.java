@@ -29,14 +29,17 @@ import android.view.View;
 import com.android.settings.R;
 import com.android.settings.testutils.Robolectric;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.annotation.Config;
 
 import androidx.fragment.app.FragmentActivity;
 
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(shadows = SettingsShadowResourcesImpl.class)
 public class HardwareInfoDialogFragmentTest {
 
     private FragmentActivity mActivity;

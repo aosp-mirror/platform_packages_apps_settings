@@ -20,11 +20,10 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
-import android.content.Context;
 import android.net.wifi.WifiManager;
-import android.view.inputmethod.InputMethodManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowNfcAdapter;
 
 import org.junit.After;
@@ -33,16 +32,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = ShadowNfcAdapter.class)
+@Config(shadows = {ShadowNfcAdapter.class, SettingsShadowResourcesImpl.class})
 public class WriteWifiConfigToNfcDialogTest {
 
-    @Mock
-    private Activity mActivity;
     @Mock
     private WifiManager mWifiManager;
 
@@ -51,13 +48,10 @@ public class WriteWifiConfigToNfcDialogTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        when(mActivity.getApplicationContext()).thenReturn(mActivity);
-        when(mActivity.getSystemService(Context.INPUT_METHOD_SERVICE))
-                .thenReturn(ReflectionHelpers.newInstance(InputMethodManager.class));
-        mWriteWifiConfigToNfcDialog = new WriteWifiConfigToNfcDialog(RuntimeEnvironment.application,
-                0 /* security */);
+        final Activity activity = Robolectric.setupActivity(Activity.class);
+        mWriteWifiConfigToNfcDialog = new WriteWifiConfigToNfcDialog(activity, 0 /* security */);
         ReflectionHelpers.setField(mWriteWifiConfigToNfcDialog, "mWifiManager", mWifiManager);
-        mWriteWifiConfigToNfcDialog.setOwnerActivity(mActivity);
+        mWriteWifiConfigToNfcDialog.setOwnerActivity(activity);
         mWriteWifiConfigToNfcDialog.onCreate(null /* savedInstanceState */);
     }
 
