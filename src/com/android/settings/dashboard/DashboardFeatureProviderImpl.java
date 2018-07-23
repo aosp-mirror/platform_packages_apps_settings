@@ -40,7 +40,6 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
-import com.android.settingslib.drawer.CategoryManager;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.ProfileSelectDialog;
 import com.android.settingslib.drawer.Tile;
