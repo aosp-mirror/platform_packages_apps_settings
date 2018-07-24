@@ -168,7 +168,7 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
             PrintManager printManager =
                     (PrintManager) getContext().getSystemService(Context.PRINT_SERVICE);
             if (printManager != null) {
-                return new PrintServicesLoader(printManager, getContext(),
+                return new SettingsPrintServicesLoader(printManager, getContext(),
                         PrintManager.ALL_SERVICES);
             } else {
                 return null;
