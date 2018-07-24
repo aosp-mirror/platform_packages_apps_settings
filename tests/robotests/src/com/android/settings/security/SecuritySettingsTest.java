@@ -22,6 +22,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
 
 import com.android.settings.R;
@@ -44,6 +45,8 @@ public class SecuritySettingsTest {
     private SummaryLoader mSummaryLoader;
     @Mock
     private FingerprintManager mFingerprintManager;
+    @Mock
+    private FaceManager mFaceManager;
     private SecuritySettings.SummaryProvider mSummaryProvider;
 
     @Before
@@ -51,7 +54,8 @@ public class SecuritySettingsTest {
         MockitoAnnotations.initMocks(this);
         when(mContext.getSystemService(Context.FINGERPRINT_SERVICE))
                 .thenReturn(mFingerprintManager);
-
+        when(mContext.getSystemService(Context.FACE_SERVICE))
+                .thenReturn(mFaceManager);
         mSummaryProvider = new SecuritySettings.SummaryProvider(mContext, mSummaryLoader);
     }
 
@@ -63,7 +67,20 @@ public class SecuritySettingsTest {
     }
 
     @Test
+    public void testSummaryProvider_hasFace_hasStaticSummary() {
+        when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FACE))
+                .thenReturn(true);
+        when(mFaceManager.isHardwareDetected()).thenReturn(true);
+
+        mSummaryProvider.setListening(true);
+
+        verify(mContext).getString(R.string.security_dashboard_summary_face);
+    }
+
+    @Test
     public void testSummaryProvider_hasFingerPrint_hasStaticSummary() {
+        when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FACE))
+                .thenReturn(false);
         when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT))
                 .thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
@@ -74,8 +91,10 @@ public class SecuritySettingsTest {
     }
 
     @Test
-    public void testSummaryProvider_noFpFeature_shouldSetSummaryWithNoFingerprint() {
+    public void testSummaryProvider_noFpFeature_shouldSetSummaryWithNoBiometrics() {
         when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT))
+                .thenReturn(false);
+        when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FACE))
                 .thenReturn(false);
 
         mSummaryProvider.setListening(true);
@@ -84,10 +103,37 @@ public class SecuritySettingsTest {
     }
 
     @Test
-    public void testSummaryProvider_noFpHardware_shouldSetSummaryWithNoFingerprint() {
+    public void testSummaryProvider_noFpHardware_shouldSetSummaryWithNoBiometrics() {
+        when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FACE))
+                .thenReturn(false);
         when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT))
                 .thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
+
+        mSummaryProvider.setListening(true);
+
+        verify(mContext).getString(R.string.security_dashboard_summary_no_fingerprint);
+    }
+
+    @Test
+    public void testSummaryProvider_noFaceFeature_shouldSetSummaryWithNoBiometrics() {
+        when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT))
+                .thenReturn(false);
+        when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FACE))
+                .thenReturn(false);
+
+        mSummaryProvider.setListening(true);
+
+        verify(mContext).getString(R.string.security_dashboard_summary_no_fingerprint);
+    }
+
+    @Test
+    public void testSummaryProvider_noFaceHardware_shouldSetSummaryWithNoBiometrics() {
+        when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FACE))
+                .thenReturn(true);
+        when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT))
+                .thenReturn(false);
+        when(mFaceManager.isHardwareDetected()).thenReturn(false);
 
         mSummaryProvider.setListening(true);
 
