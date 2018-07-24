@@ -21,6 +21,8 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
 import android.util.Pair;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -31,6 +33,7 @@ import com.android.settingslib.drawer.Tile;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.HashMap;
@@ -39,6 +42,7 @@ import java.util.Map;
 @RunWith(SettingsRobolectricTestRunner.class)
 public class CategoryManagerTest {
 
+    private ActivityInfo mActivityInfo;
     private Context mContext;
     private CategoryManager mCategoryManager;
     private Map<Pair<String, String>, Tile> mTileByComponentCache;
@@ -46,7 +50,9 @@ public class CategoryManagerTest {
 
     @Before
     public void setUp() {
-        mContext = ShadowApplication.getInstance().getApplicationContext();
+        mContext = RuntimeEnvironment.application;
+        mActivityInfo = new ActivityInfo();
+        mActivityInfo.applicationInfo = new ApplicationInfo();
         mTileByComponentCache = new HashMap<>();
         mCategoryByKeyMap = new HashMap<>();
         mCategoryManager = CategoryManager.get(mContext);
@@ -59,8 +65,8 @@ public class CategoryManagerTest {
 
     @Test
     public void backwardCompatCleanupForCategory_shouldNotChangeCategoryForNewKeys() {
-        final Tile tile1 = new Tile();
-        final Tile tile2 = new Tile();
+        final Tile tile1 = new Tile(mActivityInfo);
+        final Tile tile2 = new Tile(mActivityInfo);
         tile1.category = CategoryKey.CATEGORY_ACCOUNT;
         tile2.category = CategoryKey.CATEGORY_ACCOUNT;
         final DashboardCategory category = new DashboardCategory();
@@ -78,8 +84,8 @@ public class CategoryManagerTest {
 
     @Test
     public void backwardCompatCleanupForCategory_shouldNotChangeCategoryForMixedKeys() {
-        final Tile tile1 = new Tile();
-        final Tile tile2 = new Tile();
+        final Tile tile1 = new Tile(mActivityInfo);
+        final Tile tile2 = new Tile(mActivityInfo);
         final String oldCategory = "com.android.settings.category.wireless";
         tile1.category = CategoryKey.CATEGORY_ACCOUNT;
         tile2.category = oldCategory;
@@ -102,7 +108,7 @@ public class CategoryManagerTest {
 
     @Test
     public void backwardCompatCleanupForCategory_shouldChangeCategoryForOldKeys() {
-        final Tile tile1 = new Tile();
+        final Tile tile1 = new Tile(mActivityInfo);
         final String oldCategory = "com.android.settings.category.wireless";
         tile1.category = oldCategory;
         final DashboardCategory category1 = new DashboardCategory();
@@ -126,15 +132,15 @@ public class CategoryManagerTest {
         // Create some fake tiles that are not sorted.
         final String testPackage = "com.android.test";
         final DashboardCategory category = new DashboardCategory();
-        final Tile tile1 = new Tile();
+        final Tile tile1 = new Tile(mActivityInfo);
         tile1.intent =
                 new Intent().setComponent(new ComponentName(testPackage, "class1"));
         tile1.priority = 100;
-        final Tile tile2 = new Tile();
+        final Tile tile2 = new Tile(mActivityInfo);
         tile2.intent =
                 new Intent().setComponent(new ComponentName(testPackage, "class2"));
         tile2.priority = 50;
-        final Tile tile3 = new Tile();
+        final Tile tile3 = new Tile(mActivityInfo);
         tile3.intent =
                 new Intent().setComponent(new ComponentName(testPackage, "class3"));
         tile3.priority = 200;
@@ -159,15 +165,15 @@ public class CategoryManagerTest {
         final String testPackage1 = "com.android.test1";
         final String testPackage2 = "com.android.test2";
         final DashboardCategory category = new DashboardCategory();
-        final Tile tile1 = new Tile();
+        final Tile tile1 = new Tile(mActivityInfo);
         tile1.intent =
                 new Intent().setComponent(new ComponentName(testPackage2, "class1"));
         tile1.priority = 100;
-        final Tile tile2 = new Tile();
+        final Tile tile2 = new Tile(mActivityInfo);
         tile2.intent =
                 new Intent().setComponent(new ComponentName(testPackage1, "class2"));
         tile2.priority = 100;
-        final Tile tile3 = new Tile();
+        final Tile tile3 = new Tile(mActivityInfo);
         tile3.intent =
                 new Intent().setComponent(new ComponentName(testPackage1, "class3"));
         tile3.priority = 50;
@@ -177,8 +183,7 @@ public class CategoryManagerTest {
         mCategoryByKeyMap.put(CategoryKey.CATEGORY_HOMEPAGE, category);
 
         // Sort their priorities
-        mCategoryManager.sortCategories(ShadowApplication.getInstance().getApplicationContext(),
-                mCategoryByKeyMap);
+        mCategoryManager.sortCategories(mContext, mCategoryByKeyMap);
 
         // Verify they are now sorted.
         assertThat(category.getTile(0)).isSameAs(tile2);
@@ -189,18 +194,17 @@ public class CategoryManagerTest {
     @Test
     public void sortCategories_internalPackageTiles_shouldSkipTileForInternalPackage() {
         // Create some fake tiles that are not sorted.
-        final String testPackage =
-                ShadowApplication.getInstance().getApplicationContext().getPackageName();
+        final String testPackage = mContext.getPackageName();
         final DashboardCategory category = new DashboardCategory();
-        final Tile tile1 = new Tile();
+        final Tile tile1 = new Tile(mActivityInfo);
         tile1.intent =
                 new Intent().setComponent(new ComponentName(testPackage, "class1"));
         tile1.priority = 100;
-        final Tile tile2 = new Tile();
+        final Tile tile2 = new Tile(mActivityInfo);
         tile2.intent =
                 new Intent().setComponent(new ComponentName(testPackage, "class2"));
         tile2.priority = 100;
-        final Tile tile3 = new Tile();
+        final Tile tile3 = new Tile(mActivityInfo);
         tile3.intent =
                 new Intent().setComponent(new ComponentName(testPackage, "class3"));
         tile3.priority = 50;
@@ -210,8 +214,7 @@ public class CategoryManagerTest {
         mCategoryByKeyMap.put(CategoryKey.CATEGORY_HOMEPAGE, category);
 
         // Sort their priorities
-        mCategoryManager.sortCategories(ShadowApplication.getInstance().getApplicationContext(),
-                mCategoryByKeyMap);
+        mCategoryManager.sortCategories(mContext, mCategoryByKeyMap);
 
         // Verify the sorting order is not changed
         assertThat(category.getTile(0)).isSameAs(tile1);
@@ -222,20 +225,19 @@ public class CategoryManagerTest {
     @Test
     public void sortCategories_internalAndExternalPackageTiles_shouldRetainPriorityOrdering() {
         // Inject one external tile among internal tiles.
-        final String testPackage =
-                ShadowApplication.getInstance().getApplicationContext().getPackageName();
+        final String testPackage = mContext.getPackageName();
         final String testPackage2 = "com.google.test2";
         final DashboardCategory category = new DashboardCategory();
-        final Tile tile1 = new Tile();
+        final Tile tile1 = new Tile(mActivityInfo);
         tile1.intent = new Intent().setComponent(new ComponentName(testPackage, "class1"));
         tile1.priority = 2;
-        final Tile tile2 = new Tile();
+        final Tile tile2 = new Tile(mActivityInfo);
         tile2.intent = new Intent().setComponent(new ComponentName(testPackage, "class2"));
         tile2.priority = 1;
-        final Tile tile3 = new Tile();
+        final Tile tile3 = new Tile(mActivityInfo);
         tile3.intent = new Intent().setComponent(new ComponentName(testPackage2, "class0"));
         tile3.priority = 0;
-        final Tile tile4 = new Tile();
+        final Tile tile4 = new Tile(mActivityInfo);
         tile4.intent = new Intent().setComponent(new ComponentName(testPackage, "class3"));
         tile4.priority = -1;
         category.addTile(tile1);
@@ -245,8 +247,7 @@ public class CategoryManagerTest {
         mCategoryByKeyMap.put(CategoryKey.CATEGORY_HOMEPAGE, category);
 
         // Sort their priorities
-        mCategoryManager.sortCategories(ShadowApplication.getInstance().getApplicationContext(),
-                mCategoryByKeyMap);
+        mCategoryManager.sortCategories(mContext, mCategoryByKeyMap);
 
         // Verify the sorting order is not changed
         assertThat(category.getTile(0)).isSameAs(tile1);
@@ -258,18 +259,17 @@ public class CategoryManagerTest {
     @Test
     public void sortCategories_samePriority_internalPackageTileShouldTakePrecedence() {
         // Inject one external tile among internal tiles with same priority.
-        final String testPackage =
-                ShadowApplication.getInstance().getApplicationContext().getPackageName();
+        final String testPackage = mContext.getPackageName();
         final String testPackage2 = "com.google.test2";
         final String testPackage3 = "com.abcde.test3";
         final DashboardCategory category = new DashboardCategory();
-        final Tile tile1 = new Tile();
+        final Tile tile1 = new Tile(mActivityInfo);
         tile1.intent = new Intent().setComponent(new ComponentName(testPackage2, "class1"));
         tile1.priority = 1;
-        final Tile tile2 = new Tile();
+        final Tile tile2 = new Tile(mActivityInfo);
         tile2.intent = new Intent().setComponent(new ComponentName(testPackage, "class2"));
         tile2.priority = 1;
-        final Tile tile3 = new Tile();
+        final Tile tile3 = new Tile(mActivityInfo);
         tile3.intent = new Intent().setComponent(new ComponentName(testPackage3, "class3"));
         tile3.priority = 1;
         category.addTile(tile1);
@@ -278,8 +278,7 @@ public class CategoryManagerTest {
         mCategoryByKeyMap.put(CategoryKey.CATEGORY_HOMEPAGE, category);
 
         // Sort their priorities
-        mCategoryManager.sortCategories(ShadowApplication.getInstance().getApplicationContext(),
-                mCategoryByKeyMap);
+        mCategoryManager.sortCategories(mContext, mCategoryByKeyMap);
 
         // Verify the sorting order is internal first, follow by package name ordering
         assertThat(category.getTile(0)).isSameAs(tile2);
@@ -290,18 +289,17 @@ public class CategoryManagerTest {
     @Test
     public void filterTiles_noDuplicate_noChange() {
         // Create some unique tiles
-        final String testPackage =
-                ShadowApplication.getInstance().getApplicationContext().getPackageName();
+        final String testPackage = mContext.getPackageName();
         final DashboardCategory category = new DashboardCategory();
-        final Tile tile1 = new Tile();
+        final Tile tile1 = new Tile(mActivityInfo);
         tile1.intent =
                 new Intent().setComponent(new ComponentName(testPackage, "class1"));
         tile1.priority = 100;
-        final Tile tile2 = new Tile();
+        final Tile tile2 = new Tile(mActivityInfo);
         tile2.intent =
                 new Intent().setComponent(new ComponentName(testPackage, "class2"));
         tile2.priority = 100;
-        final Tile tile3 = new Tile();
+        final Tile tile3 = new Tile(mActivityInfo);
         tile3.intent =
                 new Intent().setComponent(new ComponentName(testPackage, "class3"));
         tile3.priority = 50;
@@ -318,18 +316,17 @@ public class CategoryManagerTest {
     @Test
     public void filterTiles_hasDuplicate_shouldOnlyKeepUniqueTiles() {
         // Create tiles pointing to same intent.
-        final String testPackage =
-                ShadowApplication.getInstance().getApplicationContext().getPackageName();
+        final String testPackage = mContext.getPackageName();
         final DashboardCategory category = new DashboardCategory();
-        final Tile tile1 = new Tile();
+        final Tile tile1 = new Tile(mActivityInfo);
         tile1.intent =
                 new Intent().setComponent(new ComponentName(testPackage, "class1"));
         tile1.priority = 100;
-        final Tile tile2 = new Tile();
+        final Tile tile2 = new Tile(mActivityInfo);
         tile2.intent =
                 new Intent().setComponent(new ComponentName(testPackage, "class1"));
         tile2.priority = 100;
-        final Tile tile3 = new Tile();
+        final Tile tile3 = new Tile(mActivityInfo);
         tile3.intent =
                 new Intent().setComponent(new ComponentName(testPackage, "class1"));
         tile3.priority = 50;
