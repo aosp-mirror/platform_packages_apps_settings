@@ -3148,6 +3148,12 @@
         <service android:name=".fuelgauge.batterytip.AnomalyDetectionJobService"
                  android:permission="android.permission.BIND_JOB_SERVICE" />
 
+        <provider
+            android:name=".homepage.CardContentProvider"
+            android:authorities="com.android.settings.homepage.CardContentProvider"
+            android:exported="true"
+            android:permission="android.permission.WRITE_SETTINGS_HOMEPAGE_DATA" />
+
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>
