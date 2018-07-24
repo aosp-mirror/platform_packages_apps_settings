@@ -21,8 +21,8 @@ import android.content.Context;
 import android.provider.Settings;
 
 import com.android.internal.R;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
 
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
@@ -31,24 +31,18 @@ import androidx.preference.SwitchPreference;
  * A controller to manage the switch for showing battery percentage in the status bar.
  */
 
-public class BatteryPercentagePreferenceController extends AbstractPreferenceController implements
+public class BatteryPercentagePreferenceController extends BasePreferenceController implements
         PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
 
-    private static final String KEY_BATTERY_PERCENTAGE = "battery_percentage";
-
-    public BatteryPercentagePreferenceController(Context context) {
-        super(context);
+    public BatteryPercentagePreferenceController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
     }
 
     @Override
-    public boolean isAvailable() {
-        return mContext.getResources()
-                .getBoolean(R.bool.config_battery_percentage_setting_available);
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_BATTERY_PERCENTAGE;
+    public int getAvailabilityStatus() {
+        return mContext.getResources().getBoolean(
+                R.bool.config_battery_percentage_setting_available) ? AVAILABLE
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

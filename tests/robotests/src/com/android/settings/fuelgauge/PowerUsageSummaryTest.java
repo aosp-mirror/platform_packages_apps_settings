@@ -223,21 +223,6 @@ public class PowerUsageSummaryTest {
     }
 
     @Test
-    public void preferenceControllers_getPreferenceKeys_existInPreferenceScreen() {
-        final Context context = RuntimeEnvironment.application;
-        final PowerUsageSummary fragment = new PowerUsageSummary();
-        final List<String> preferenceScreenKeys =
-            XmlTestUtils.getKeysFromPreferenceXml(context, fragment.getPreferenceScreenResId());
-        final List<String> preferenceKeys = new ArrayList<>();
-
-        for (AbstractPreferenceController controller : fragment.createPreferenceControllers(context)) {
-            preferenceKeys.add(controller.getPreferenceKey());
-        }
-
-        assertThat(preferenceScreenKeys).containsAllIn(preferenceKeys);
-    }
-
-    @Test
     public void restartBatteryTipLoader() {
         //TODO: add policy logic here when BatteryTipPolicy is implemented
         doReturn(mLoaderManager).when(mFragment).getLoaderManager();

@@ -32,13 +32,15 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(SettingsRobolectricTestRunner.class)
 public class BatteryPercentagePreferenceControllerTest {
 
+    private static final String PREF_KEY = "battery_percentage";
+
     private Context mContext;
     private BatteryPercentagePreferenceController mController;
 
     @Before
     public void setup() {
         mContext = RuntimeEnvironment.application;
-        mController = new BatteryPercentagePreferenceController(mContext);
+        mController = new BatteryPercentagePreferenceController(mContext, PREF_KEY);
     }
 
     private int getPercentageSetting() {

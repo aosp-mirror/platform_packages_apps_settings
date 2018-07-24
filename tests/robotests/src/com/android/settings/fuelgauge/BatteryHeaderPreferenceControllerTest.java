@@ -36,6 +36,7 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
@@ -68,6 +69,7 @@ import androidx.recyclerview.widget.RecyclerView;
         })
 public class BatteryHeaderPreferenceControllerTest {
 
+    private static final String PREF_KEY = "battery_header";
     private static final int BATTERY_LEVEL = 60;
     private static final String TIME_LEFT = "2h30min";
     private static final String BATTERY_STATUS = "Charging";
@@ -121,8 +123,11 @@ public class BatteryHeaderPreferenceControllerTest {
 
         mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
 
-        mController = new BatteryHeaderPreferenceController(
-                mContext, mActivity, mPreferenceFragment, mLifecycle);
+        mController = new BatteryHeaderPreferenceController(mContext, PREF_KEY);
+        mLifecycle.addObserver(mController);
+        mController.setActivity(mActivity);
+        mController.setFragment(mPreferenceFragment);
+        mController.setLifecycle(mLifecycle);
         mController.mBatteryMeterView = mBatteryMeterView;
         mController.mBatteryPercentText = mBatteryPercentText;
         mController.mSummary1 = mSummary;
@@ -206,5 +211,11 @@ public class BatteryHeaderPreferenceControllerTest {
 
             assertThat(mBatteryMeterView.getPowerSave()).isEqualTo(value);
         }
+    }
+
+    @Test
+    public void getAvailabilityStatus_returnAvailableUnsearchable() {
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.AVAILABLE_UNSEARCHABLE);
     }
 }

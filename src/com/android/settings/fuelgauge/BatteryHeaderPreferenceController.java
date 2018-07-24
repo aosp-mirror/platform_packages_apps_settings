@@ -27,6 +27,7 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.Utils;
@@ -42,7 +43,7 @@ import androidx.preference.PreferenceScreen;
 /**
  * Controller that update the battery header view
  */
-public class BatteryHeaderPreferenceController extends AbstractPreferenceController
+public class BatteryHeaderPreferenceController extends BasePreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnStart {
     @VisibleForTesting
     static final String KEY_BATTERY_HEADER = "battery_header";
@@ -56,30 +57,35 @@ public class BatteryHeaderPreferenceController extends AbstractPreferenceControl
     @VisibleForTesting
     TextView mSummary2;
 
-    private final Activity mActivity;
-    private final PreferenceFragmentCompat mHost;
-    private final Lifecycle mLifecycle;
+    private Activity mActivity;
+    private PreferenceFragmentCompat mHost;
+    private Lifecycle mLifecycle;
     private final PowerManager mPowerManager;
 
     private LayoutPreference mBatteryLayoutPref;
 
-    public BatteryHeaderPreferenceController(Context context, Activity activity,
-            PreferenceFragmentCompat host, Lifecycle lifecycle) {
-        super(context);
-        mActivity = activity;
-        mHost = host;
-        mLifecycle = lifecycle;
-        if (mLifecycle != null) {
-            mLifecycle.addObserver(this);
-        }
+    public BatteryHeaderPreferenceController(Context context, String key) {
+        super(context, key);
         mPowerManager = context.getSystemService(PowerManager.class);
+    }
+
+    public void setActivity(Activity activity) {
+        mActivity = activity;
+    }
+
+    public void setFragment(PreferenceFragmentCompat fragment) {
+        mHost = fragment;
+    }
+
+    public void setLifecycle(Lifecycle lifecycle) {
+        mLifecycle = lifecycle;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mBatteryLayoutPref = (LayoutPreference) screen.findPreference(KEY_BATTERY_HEADER);
-        mBatteryMeterView = (BatteryMeterView) mBatteryLayoutPref
+        mBatteryLayoutPref = (LayoutPreference) screen.findPreference(getPreferenceKey());
+        mBatteryMeterView = mBatteryLayoutPref
                 .findViewById(R.id.battery_header_icon);
         mBatteryPercentText = mBatteryLayoutPref.findViewById(R.id.battery_percent);
         mSummary1 = mBatteryLayoutPref.findViewById(R.id.summary1);
@@ -89,13 +95,8 @@ public class BatteryHeaderPreferenceController extends AbstractPreferenceControl
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_BATTERY_HEADER;
+    public int getAvailabilityStatus() {
+        return AVAILABLE_UNSEARCHABLE;
     }
 
     @Override
