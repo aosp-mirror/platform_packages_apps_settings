@@ -25,13 +25,10 @@ LOCAL_STATIC_ANDROID_LIBRARIES := \
     androidx.slice_slice-core \
     androidx.slice_slice-view \
     androidx.core_core \
-    androidx.legacy_legacy-support-v4 \
-    androidx.legacy_legacy-support-v13 \
     androidx.appcompat_appcompat \
     androidx.cardview_cardview \
     androidx.preference_preference \
     androidx.recyclerview_recyclerview \
-    androidx.legacy_legacy-preference-v14 \
     com.google.android.material_material \
 
 LOCAL_JAVA_LIBRARIES := \
