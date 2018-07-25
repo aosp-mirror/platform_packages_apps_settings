@@ -21,6 +21,7 @@ import static com.android.settings.security.EncryptionStatusPreferenceController
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.provider.SearchIndexableResource;
 
@@ -181,7 +182,12 @@ public class SecuritySettings extends DashboardFragment {
             if (listening) {
                 final FingerprintManager fpm =
                         Utils.getFingerprintManagerOrNull(mContext);
-                if (fpm != null && fpm.isHardwareDetected()) {
+                final FaceManager faceManager =
+                        Utils.getFaceManagerOrNull(mContext);
+                if (faceManager != null && faceManager.isHardwareDetected()) {
+                    mSummaryLoader.setSummary(this,
+                            mContext.getString(R.string.security_dashboard_summary_face));
+                } else if (fpm != null && fpm.isHardwareDetected()) {
                     mSummaryLoader.setSummary(this,
                             mContext.getString(R.string.security_dashboard_summary));
                 } else {

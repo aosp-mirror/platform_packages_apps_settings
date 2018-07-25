@@ -563,6 +563,45 @@ public class AccountPreferenceControllerTest {
         verify(preferenceGroup, times(1)).removePreference(argThat(titleMatches("Acct12")));
     }
 
+    @Test
+    public void onResume_userReEnabled_shouldAddOneAccountPreference() {
+        final List<UserInfo> infos = new ArrayList<>();
+        infos.add(new UserInfo(1, "user 1", UserInfo.FLAG_DISABLED));
+        when(mUserManager.isManagedProfile()).thenReturn(false);
+        when(mUserManager.isRestrictedProfile()).thenReturn(false);
+        when(mUserManager.getProfiles(anyInt())).thenReturn(infos);
+
+        Account[] accounts = {new Account("Acct1", "com.acct1")};
+        when(mAccountManager.getAccountsAsUser(1)).thenReturn(accounts);
+        when(mAccountManager.getAccountsByTypeAsUser(eq("com.acct1"), any(UserHandle.class)))
+            .thenReturn(accounts);
+
+        AuthenticatorDescription[] authDescs = {
+            new AuthenticatorDescription("com.acct1", "com.android.settings",
+                R.string.account_settings_title, 0 /* iconId */, 0 /* smallIconId */,
+                0 /* prefId */, false /* customTokens */)
+        };
+        when(mAccountManager.getAuthenticatorTypesAsUser(anyInt())).thenReturn(authDescs);
+
+        AccessiblePreferenceCategory preferenceGroup = mock(AccessiblePreferenceCategory.class);
+        when(preferenceGroup.getPreferenceManager()).thenReturn(mock(PreferenceManager.class));
+        when(mAccountHelper.createAccessiblePreferenceCategory(any(Context.class)))
+            .thenReturn(preferenceGroup);
+
+        // First time resume will build the UI with no account
+        mController.onResume();
+        verify(preferenceGroup, never()).addPreference(argThat(titleMatches("Acct1")));
+
+        // Enable the user
+        infos.remove(0 /* index */);
+        infos.add(new UserInfo(1, "user 1", 0 /* flags */));
+
+        // Resume should show the account for the user
+        mController.onResume();
+
+        verify(preferenceGroup).addPreference(argThat(titleMatches("Acct1")));
+    }
+
     private static ArgumentMatcher<Preference> titleMatches(String expected) {
         return preference -> TextUtils.equals(expected, preference.getTitle());
     }

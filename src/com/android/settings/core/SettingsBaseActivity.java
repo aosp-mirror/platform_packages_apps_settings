@@ -38,7 +38,7 @@ import android.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
-import com.android.settingslib.drawer.CategoryManager;
+import com.android.settings.dashboard.CategoryManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -172,10 +172,6 @@ public class SettingsBaseActivity extends FragmentActivity {
         new CategoriesUpdateTask().execute();
     }
 
-    public String getSettingPkg() {
-        return CategoryManager.SETTING_PKG;
-    }
-
     public interface CategoryListener {
         void onCategoriesChanged();
     }
@@ -190,7 +186,7 @@ public class SettingsBaseActivity extends FragmentActivity {
 
         @Override
         protected Void doInBackground(Void... params) {
-            mCategoryManager.reloadAllCategories(SettingsBaseActivity.this, getSettingPkg());
+            mCategoryManager.reloadAllCategories(SettingsBaseActivity.this);
             return null;
         }
 

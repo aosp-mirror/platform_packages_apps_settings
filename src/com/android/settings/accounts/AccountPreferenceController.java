@@ -192,12 +192,10 @@ public class AccountPreferenceController extends AbstractPreferenceController
                         data.screenTitle = screenTitle;
                         rawData.add(data);
                     }
-                    {
-                        SearchIndexableRaw data = new SearchIndexableRaw(mContext);
-                        data.title = res.getString(R.string.managed_profile_settings_title);
-                        data.screenTitle = screenTitle;
-                        rawData.add(data);
-                    }
+                    SearchIndexableRaw data = new SearchIndexableRaw(mContext);
+                    data.title = res.getString(R.string.managed_profile_settings_title);
+                    data.screenTitle = screenTitle;
+                    rawData.add(data);
                 }
             }
         }
@@ -300,6 +298,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
         final ProfileData data = mProfiles.get(userInfo.id);
         if (data != null) {
             data.pendingRemoval = false;
+            data.userInfo = userInfo;
             if (userInfo.isEnabled()) {
                 // recreate the authentication helper to refresh the list of enabled accounts
                 data.authenticatorHelper =
