@@ -16,6 +16,7 @@
 package com.android.settings.accounts;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
@@ -25,10 +26,13 @@ import android.accounts.Account;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
+
+import androidx.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.dashboard.DashboardFeatureProviderImpl;
@@ -43,8 +47,6 @@ import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.util.ReflectionHelpers;
-
-import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class AccountDetailDashboardFragmentTest {
@@ -72,12 +74,12 @@ public class AccountDetailDashboardFragmentTest {
     @Test
     public void testCategory_isAccountDetail() {
         assertThat(new AccountDetailDashboardFragment().getCategoryKey())
-            .isEqualTo(CategoryKey.CATEGORY_ACCOUNT_DETAIL);
+                .isEqualTo(CategoryKey.CATEGORY_ACCOUNT_DETAIL);
     }
 
     @Test
     public void refreshDashboardTiles_HasAccountType_shouldDisplay() {
-        final Tile tile = new Tile();
+        final Tile tile = new Tile(new ActivityInfo());
         final Bundle metaData = new Bundle();
         metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
         metaData.putString(METADATA_ACCOUNT_TYPE, "com.abc");
@@ -88,7 +90,7 @@ public class AccountDetailDashboardFragmentTest {
 
     @Test
     public void refreshDashboardTiles_NoAccountType_shouldNotDisplay() {
-        final Tile tile = new Tile();
+        final Tile tile = new Tile(new ActivityInfo());
         final Bundle metaData = new Bundle();
         metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
         tile.metaData = metaData;
@@ -98,7 +100,7 @@ public class AccountDetailDashboardFragmentTest {
 
     @Test
     public void refreshDashboardTiles_OtherAccountType_shouldNotDisplay() {
-        final Tile tile = new Tile();
+        final Tile tile = new Tile(new ActivityInfo());
         final Bundle metaData = new Bundle();
         metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
         metaData.putString(METADATA_ACCOUNT_TYPE, "com.other");
@@ -114,9 +116,9 @@ public class AccountDetailDashboardFragmentTest {
         final PackageManager packageManager = mock(PackageManager.class);
         ReflectionHelpers.setField(dashboardFeatureProvider, "mPackageManager", packageManager);
         when(packageManager.resolveActivity(any(Intent.class), anyInt()))
-            .thenReturn(mock(ResolveInfo.class));
+                .thenReturn(mock(ResolveInfo.class));
 
-        final Tile tile = new Tile();
+        final Tile tile = new Tile(new ActivityInfo());
         tile.key = "key";
         tile.metaData = new Bundle();
         tile.metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT);

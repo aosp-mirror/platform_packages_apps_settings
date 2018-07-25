@@ -16,7 +16,9 @@
 package com.android.settings.dashboard;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -27,8 +29,13 @@ import static org.mockito.Mockito.when;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -50,15 +57,12 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.preference.Preference;
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
-
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DashboardFragmentTest {
 
     @Mock
     private FakeFeatureFactory mFakeFeatureFactory;
+    private ActivityInfo mActivityInfo;
     private DashboardCategory mDashboardCategory;
     private Context mContext;
     private TestFragment mTestFragment;
@@ -67,9 +71,10 @@ public class DashboardFragmentTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+        mActivityInfo = new ActivityInfo();
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mDashboardCategory = new DashboardCategory();
-        mDashboardCategory.addTile(new Tile());
+        mDashboardCategory.addTile(new Tile(mActivityInfo));
         mTestFragment = new TestFragment(RuntimeEnvironment.application);
         when(mFakeFeatureFactory.dashboardFeatureProvider
                 .getTilesForCategory(nullable(String.class)))
@@ -177,8 +182,8 @@ public class DashboardFragmentTest {
 
     @Test
     public void tintTileIcon_hasMetadata_shouldReturnIconTintableMetadata() {
-        final Tile tile = new Tile();
-        tile.icon = mock(Icon.class);
+        final Tile tile = spy(new Tile(mActivityInfo));
+        doReturn(mock(Icon.class)).when(tile).getIcon();
         final Bundle metaData = new Bundle();
         tile.metaData = metaData;
 
@@ -191,7 +196,7 @@ public class DashboardFragmentTest {
 
     @Test
     public void tintTileIcon_noIcon_shouldReturnFalse() {
-        final Tile tile = new Tile();
+        final Tile tile = new Tile(mActivityInfo);
         tile.metaData = new Bundle();
 
         assertThat(mTestFragment.tintTileIcon(tile)).isFalse();
@@ -199,12 +204,12 @@ public class DashboardFragmentTest {
 
     @Test
     public void tintTileIcon_noMetadata_shouldReturnPackageNameCheck() {
-        final Tile tile = new Tile();
-        tile.icon = mock(Icon.class);
+        final Tile tile = spy(new Tile(mActivityInfo));
+        doReturn(mock(Icon.class)).when(tile).getIcon();
         final Intent intent = new Intent();
         tile.intent = intent;
         intent.setComponent(
-            new ComponentName(RuntimeEnvironment.application.getPackageName(), "TestClass"));
+                new ComponentName(RuntimeEnvironment.application.getPackageName(), "TestClass"));
         assertThat(mTestFragment.tintTileIcon(tile)).isFalse();
 
         intent.setComponent(new ComponentName("OtherPackage", "TestClass"));
