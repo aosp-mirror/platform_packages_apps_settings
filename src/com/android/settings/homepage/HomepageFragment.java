@@ -87,6 +87,8 @@ public class HomepageFragment extends InstrumentedFragment {
         final int screenWidthpx = getResources().getDisplayMetrics().widthPixels;
         final View searchbar = activity.findViewById(R.id.search_bar_container);
         final View bottombar = activity.findViewById(R.id.bar);
+        final Toolbar searchActionBar = (Toolbar) activity.findViewById(R.id.search_action_bar);
+        searchActionBar.setNavigationIcon(R.drawable.ic_search_floating_24dp);
 
 
         mBottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
