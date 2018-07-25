@@ -67,9 +67,4 @@ public interface SupportFeatureProvider {
      * @param activity Calling activity.
      */
     void startSupportV2(Activity activity);
-
-    /**
-     * Returns a url with information to introduce user to new device.
-     */
-    String getNewDeviceIntroUrl(Context context);
 }
