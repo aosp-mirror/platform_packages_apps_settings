@@ -506,4 +506,29 @@
             android:title="@string/reset_shortcut_manager_throttling" />
     </PreferenceCategory>
 
+    <com.android.settings.development.autofill.AutofillPreferenceCategory
+        android:key="debug_autofill_category"
+        android:title="@string/debug_autofill_category"
+        android:order="1100">
+
+        <ListPreference
+            android:key="autofill_logging_level"
+            android:title="@string/autofill_logging_level_title"
+            android:entries="@array/autofill_logging_level_entries"
+            android:entryValues="@array/autofill_logging_level_values" />
+
+        <com.android.settings.development.autofill.AutofillMaxPartitionsPreference
+            android:key="autofill_max_partitions"
+            android:title="@string/autofill_max_partitions" />
+
+        <com.android.settings.development.autofill.AutofillVisibleDatasetsPreference
+            android:key="autofill_visible_datasets"
+            android:title="@string/autofill_max_visible_datasets" />
+
+        <Preference
+            android:key="autofill_reset_developer_options"
+            android:title="@string/autofill_reset_developer_options" />
+
+    </com.android.settings.development.autofill.AutofillPreferenceCategory>
+
 </PreferenceScreen>

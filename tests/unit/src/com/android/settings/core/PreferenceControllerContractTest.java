@@ -19,6 +19,7 @@ package com.android.settings.core;
 import static junit.framework.Assert.fail;
 
 import android.content.Context;
+import android.os.Looper;
 import android.platform.test.annotations.Presubmit;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.MediumTest;
@@ -52,6 +53,7 @@ public class PreferenceControllerContractTest {
     @Test
     @Presubmit
     public void controllersInSearchShouldImplementPreferenceControllerMixin() {
+        Looper.prepare(); // Required by AutofillLoggingLevelPreferenceController
         final Set<String> errorClasses = new ArraySet<>();
 
         final SearchIndexableResources resources =
