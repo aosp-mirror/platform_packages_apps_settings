@@ -66,6 +66,7 @@ public final class WifiSummaryUpdater extends SummaryUpdater {
     @Override
     public void register(boolean register) {
         if (register) {
+            notifyChangeIfNeeded();
             mContext.registerReceiver(mReceiver, INTENT_FILTER);
         } else {
             mContext.unregisterReceiver(mReceiver);

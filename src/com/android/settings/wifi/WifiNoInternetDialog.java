@@ -25,6 +25,7 @@ import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.NetworkRequest;
+import android.net.wifi.WifiInfo;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -107,14 +108,15 @@ public final class WifiNoInternetDialog extends AlertActivity implements
         mCM.registerNetworkCallback(request, mNetworkCallback);
 
         final NetworkInfo ni = mCM.getNetworkInfo(mNetwork);
-        if (ni == null || !ni.isConnectedOrConnecting()) {
+        final NetworkCapabilities nc = mCM.getNetworkCapabilities(mNetwork);
+        if (ni == null || !ni.isConnectedOrConnecting() || nc == null) {
             Log.d(TAG, "Network " + mNetwork + " is not connected: " + ni);
             finish();
             return;
         }
-        mNetworkName = ni.getExtraInfo();
+        mNetworkName = nc.getSSID();
         if (mNetworkName != null) {
-            mNetworkName = mNetworkName.replaceAll("^\"|\"$", "");  // Remove double quotes
+            mNetworkName = WifiInfo.removeDoubleQuotes(mNetworkName);
         }
 
         createDialog();
