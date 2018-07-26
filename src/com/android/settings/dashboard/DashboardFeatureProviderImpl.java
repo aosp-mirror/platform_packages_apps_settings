@@ -238,8 +238,9 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
 
     @VisibleForTesting
     void bindIcon(Preference preference, Tile tile) {
-        if (tile.icon != null) {
-            preference.setIcon(tile.icon.loadDrawable(preference.getContext()));
+        final Icon tileIcon = tile.getIcon();
+        if (tileIcon != null) {
+            preference.setIcon(tileIcon.loadDrawable(preference.getContext()));
         } else if (tile.metaData != null
                 && tile.metaData.containsKey(META_DATA_PREFERENCE_ICON_URI)) {
             ThreadUtils.postOnBackgroundThread(() -> {

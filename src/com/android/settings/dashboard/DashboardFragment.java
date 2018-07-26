@@ -256,7 +256,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
 
     @VisibleForTesting
     boolean tintTileIcon(Tile tile) {
-        if (tile.icon == null) {
+        if (tile.getIcon() == null) {
             return false;
         }
         // First check if the tile has set the icon tintable metadata.
@@ -330,7 +330,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     /**
      * Refresh preference items backed by DashboardCategory.
      */
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     void refreshDashboardTiles(final String TAG) {
         final PreferenceScreen screen = getPreferenceScreen();
 
@@ -370,7 +370,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 continue;
             }
             if (tintTileIcon(tile)) {
-                tile.icon.setTint(tintColor);
+                tile.getIcon().setTint(tintColor);
             }
             if (mDashboardTilePrefKeys.contains(key)) {
                 // Have the key already, will rebind.

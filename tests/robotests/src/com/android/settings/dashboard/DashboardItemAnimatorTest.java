@@ -18,8 +18,11 @@ package com.android.settings.dashboard;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.content.pm.ActivityInfo;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.drawer.Tile;
@@ -28,8 +31,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DashboardItemAnimatorTest {
@@ -41,20 +42,20 @@ public class DashboardItemAnimatorTest {
     public void SetUp() {
         mDashboardItemAnimator = new DashboardItemAnimator();
         mViewHolder = new ViewHolder(new TextView(RuntimeEnvironment.application));
-        mViewHolder.itemView.setTag(new Tile());
+        mViewHolder.itemView.setTag(new Tile(new ActivityInfo()));
     }
 
     @Test
     public void testAnimateChange_NoPositionChange_NoPendingAnimation() {
         final boolean hasPendingAnimation =
-            mDashboardItemAnimator.animateChange(mViewHolder, mViewHolder, 0, 1, 0, 1);
+                mDashboardItemAnimator.animateChange(mViewHolder, mViewHolder, 0, 1, 0, 1);
         assertThat(hasPendingAnimation).isFalse();
     }
 
     @Test
     public void testAnimateChange_HasPositionChange_HasPendingAnimation() {
         final boolean hasPendingAnimation =
-            mDashboardItemAnimator.animateChange(mViewHolder, mViewHolder, 0, 0, 1, 1);
+                mDashboardItemAnimator.animateChange(mViewHolder, mViewHolder, 0, 0, 1, 1);
         assertThat(hasPendingAnimation).isTrue();
     }
 
@@ -64,7 +65,7 @@ public class DashboardItemAnimatorTest {
         mDashboardItemAnimator.animateMove(mViewHolder, 0, 0, 1, 1);
 
         final boolean hasPendingAnimation =
-            mDashboardItemAnimator.animateChange(mViewHolder, mViewHolder, 0, 1, 0, 1);
+                mDashboardItemAnimator.animateChange(mViewHolder, mViewHolder, 0, 1, 0, 1);
         assertThat(hasPendingAnimation).isFalse();
     }
 

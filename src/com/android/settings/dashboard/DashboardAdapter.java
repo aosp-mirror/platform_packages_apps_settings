@@ -19,6 +19,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.service.settings.suggestions.Suggestion;
 import android.text.TextUtils;
@@ -314,8 +315,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
     @VisibleForTesting
     void onBindTile(DashboardItemHolder holder, Tile tile) {
-        Drawable icon = mCache.getIcon(tile.icon);
-        if (!TextUtils.equals(tile.icon.getResPackage(), mContext.getPackageName())
+        Icon tileIcon = tile.getIcon();
+        Drawable icon = mCache.getIcon(tileIcon);
+        if (!TextUtils.equals(tileIcon.getResPackage(), mContext.getPackageName())
                 && !(icon instanceof RoundedHomepageIcon)) {
             icon = new RoundedHomepageIcon(mContext, icon);
             try {
@@ -324,7 +326,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                             TileUtils.META_DATA_PREFERENCE_ICON_BACKGROUND_HINT, 0 /* default */);
                     if (colorRes != 0) {
                         final int bgColor = mContext.getPackageManager()
-                                .getResourcesForApplication(tile.icon.getResPackage())
+                                .getResourcesForApplication(tileIcon.getResPackage())
                                 .getColor(colorRes, null /* theme */);
                         ((RoundedHomepageIcon) icon).setBackgroundColor(bgColor);
                     }
@@ -332,7 +334,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             } catch (PackageManager.NameNotFoundException e) {
                 Log.e(TAG, "Failed to set background color for " + tile.intent.getPackage());
             }
-            mCache.updateIcon(tile.icon, icon);
+            mCache.updateIcon(tileIcon, icon);
         }
         holder.icon.setImageDrawable(icon);
         holder.title.setText(tile.title);

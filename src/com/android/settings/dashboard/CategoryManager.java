@@ -39,8 +39,6 @@ import java.util.Set;
 
 public class CategoryManager {
 
-    public static final String SETTING_PKG = "com.android.settings";
-
     private static final String TAG = "CategoryManager";
 
     private static CategoryManager sInstance;
