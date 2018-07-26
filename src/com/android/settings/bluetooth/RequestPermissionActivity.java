@@ -34,8 +34,6 @@ import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settingslib.bluetooth.BluetoothDiscoverableTimeoutReceiver;
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -58,7 +56,7 @@ public class RequestPermissionActivity extends Activity implements
     static final int REQUEST_ENABLE_DISCOVERABLE = 2;
     static final int REQUEST_DISABLE = 3;
 
-    private LocalBluetoothAdapter mLocalAdapter;
+    private BluetoothAdapter mBluetoothAdapter;
 
     private int mTimeout = BluetoothDiscoverableEnabler.DEFAULT_DISCOVERABLE_TIMEOUT;
 
@@ -76,13 +74,13 @@ public class RequestPermissionActivity extends Activity implements
 
         setResult(Activity.RESULT_CANCELED);
 
-        // Note: initializes mLocalAdapter and returns true on error
+        // Note: initializes mBluetoothAdapter and returns true on error
         if (parseIntent()) {
             finish();
             return;
         }
 
-        int btState = mLocalAdapter.getState();
+        int btState = mBluetoothAdapter.getState();
 
         if (mRequest == REQUEST_DISABLE) {
             switch (btState) {
@@ -204,7 +202,7 @@ public class RequestPermissionActivity extends Activity implements
         switch (mRequest) {
             case REQUEST_ENABLE:
             case REQUEST_ENABLE_DISCOVERABLE: {
-                if (mLocalAdapter.getBluetoothState() == BluetoothAdapter.STATE_ON) {
+                if (mBluetoothAdapter.getState() == BluetoothAdapter.STATE_ON) {
                     proceedAndFinish();
                 } else {
                     // If BT is not up yet, show "Turning on Bluetooth..."
@@ -216,7 +214,7 @@ public class RequestPermissionActivity extends Activity implements
             } break;
 
             case REQUEST_DISABLE: {
-                if (mLocalAdapter.getBluetoothState() == BluetoothAdapter.STATE_OFF) {
+                if (mBluetoothAdapter.getState() == BluetoothAdapter.STATE_OFF) {
                     proceedAndFinish();
                 } else {
                     // If BT is not up yet, show "Turning off Bluetooth..."
@@ -252,7 +250,7 @@ public class RequestPermissionActivity extends Activity implements
         if (mRequest == REQUEST_ENABLE || mRequest == REQUEST_DISABLE) {
             // BT toggled. Done
             returnCode = RESULT_OK;
-        } else if (mLocalAdapter.setScanMode(
+        } else if (mBluetoothAdapter.setScanMode(
                 BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE, mTimeout)) {
             // If already in discoverable mode, this will extend the timeout.
             long endTime = System.currentTimeMillis() + (long) mTimeout * 1000;
@@ -284,7 +282,7 @@ public class RequestPermissionActivity extends Activity implements
     }
 
     /**
-     * Parse the received Intent and initialize mLocalBluetoothAdapter.
+     * Parse the received Intent and initialize mBluetoothAdapter.
      * @return true if an error occurred; false otherwise
      */
     private boolean parseIntent() {
@@ -314,13 +312,6 @@ public class RequestPermissionActivity extends Activity implements
             return true;
         }
 
-        LocalBluetoothManager manager = Utils.getLocalBtManager(this);
-        if (manager == null) {
-            Log.e(TAG, "Error: there's a problem starting Bluetooth");
-            setResult(RESULT_CANCELED);
-            return true;
-        }
-
         String packageName = getCallingPackage();
         if (TextUtils.isEmpty(packageName)) {
             packageName = getIntent().getStringExtra(Intent.EXTRA_PACKAGE_NAME);
@@ -340,7 +331,12 @@ public class RequestPermissionActivity extends Activity implements
             }
         }
 
-        mLocalAdapter = manager.getBluetoothAdapter();
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (mBluetoothAdapter == null) {
+            Log.e(TAG, "Error: there's a problem starting Bluetooth");
+            setResult(RESULT_CANCELED);
+            return true;
+        }
 
         return false;
     }

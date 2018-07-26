@@ -25,13 +25,11 @@ import android.os.Bundle;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 /** Provides a dialog for changing the advertised name of the local bluetooth adapter. */
 public class LocalDeviceNameDialogFragment extends BluetoothNameDialogFragment {
     public static final String TAG = "LocalAdapterName";
-    private LocalBluetoothAdapter mLocalAdapter;
+    private BluetoothAdapter mBluetoothAdapter;
 
     public static LocalDeviceNameDialogFragment newInstance() {
         return new LocalDeviceNameDialogFragment();
@@ -53,8 +51,7 @@ public class LocalDeviceNameDialogFragment extends BluetoothNameDialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LocalBluetoothManager localManager = Utils.getLocalBtManager(getActivity());
-        mLocalAdapter = localManager.getBluetoothAdapter();
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     }
 
     @Override
@@ -84,14 +81,14 @@ public class LocalDeviceNameDialogFragment extends BluetoothNameDialogFragment {
 
     @Override
     protected String getDeviceName() {
-        if (mLocalAdapter != null && mLocalAdapter.isEnabled()) {
-            return mLocalAdapter.getName();
+        if (mBluetoothAdapter != null && mBluetoothAdapter.isEnabled()) {
+            return mBluetoothAdapter.getName();
         }
         return null;
     }
 
     @Override
     protected void setDeviceName(String deviceName) {
-        mLocalAdapter.setName(deviceName);
+        mBluetoothAdapter.setName(deviceName);
     }
 }

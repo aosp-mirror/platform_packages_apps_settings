@@ -30,7 +30,6 @@ import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.testutils.FragmentTestUtils;
 
@@ -51,10 +50,6 @@ import androidx.appcompat.app.AlertDialog;
 public class LocalDeviceNameDialogFragmentTest {
 
     @Mock
-    private LocalBluetoothManager mManager;
-    @Mock
-    private LocalBluetoothAdapter mAdapter;
-    @Mock
     private InputMethodManager mInputMethodManager;
 
     private Context mContext;
@@ -65,8 +60,6 @@ public class LocalDeviceNameDialogFragmentTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mInputMethodManager).when(mContext).getSystemService(Context.INPUT_METHOD_SERVICE);
-        ReflectionHelpers.setStaticField(LocalBluetoothManager.class, "sInstance", mManager);
-        when(mManager.getBluetoothAdapter()).thenReturn(mAdapter);
 
         mFragment = spy(LocalDeviceNameDialogFragment.newInstance());
         when(mFragment.getContext()).thenReturn(mContext);

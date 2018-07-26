@@ -43,8 +43,6 @@ public class BluetoothSwitchPreferenceControllerTest {
 
     public static final String BLUETOOTH_INFO_STRING = "When Bluetooth is turned on, your device"
             + " can communicate with other nearby Bluetooth devices.";
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private LocalBluetoothManager mBluetoothManager;
     @Mock
     private RestrictionUtils mRestrictionUtils;
     @Mock
@@ -62,7 +60,7 @@ public class BluetoothSwitchPreferenceControllerTest {
         FakeFeatureFactory.setupForTest();
 
         mController =
-            new BluetoothSwitchPreferenceController(mContext, mBluetoothManager, mRestrictionUtils,
+            new BluetoothSwitchPreferenceController(mContext, mRestrictionUtils,
                     mSwitchController, mFooterPreference);
     }
 

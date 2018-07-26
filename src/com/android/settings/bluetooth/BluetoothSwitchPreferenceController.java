@@ -26,8 +26,6 @@ import com.android.settings.location.ScanningSettings;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.utils.AnnotationSpan;
 import com.android.settings.widget.SwitchWidgetController;
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -43,10 +41,6 @@ public class BluetoothSwitchPreferenceController
         implements LifecycleObserver, OnStart, OnStop,
         SwitchWidgetController.OnSwitchChangeListener, View.OnClickListener {
 
-    @VisibleForTesting
-    LocalBluetoothAdapter mBluetoothAdapter;
-
-    private LocalBluetoothManager mBluetoothManager;
     private BluetoothEnabler mBluetoothEnabler;
     private RestrictionUtils mRestrictionUtils;
     private SwitchWidgetController mSwitch;
@@ -56,15 +50,12 @@ public class BluetoothSwitchPreferenceController
     public BluetoothSwitchPreferenceController(Context context,
             SwitchWidgetController switchController,
             FooterPreference footerPreference) {
-        this(context, Utils.getLocalBtManager(context), new RestrictionUtils(), switchController,
-                footerPreference);
+        this(context, new RestrictionUtils(), switchController, footerPreference);
     }
 
     @VisibleForTesting
-    public BluetoothSwitchPreferenceController(Context context,
-            LocalBluetoothManager bluetoothManager, RestrictionUtils restrictionUtils,
+    public BluetoothSwitchPreferenceController(Context context, RestrictionUtils restrictionUtils,
             SwitchWidgetController switchController, FooterPreference footerPreference) {
-        mBluetoothManager = bluetoothManager;
         mRestrictionUtils = restrictionUtils;
         mSwitch = switchController;
         mContext = context;
@@ -73,12 +64,9 @@ public class BluetoothSwitchPreferenceController
         mSwitch.setupView();
         updateText(mSwitch.isChecked());
 
-        if (mBluetoothManager != null) {
-            mBluetoothAdapter = mBluetoothManager.getBluetoothAdapter();
-        }
         mBluetoothEnabler = new BluetoothEnabler(context,
                 switchController,
-                FeatureFactory.getFactory(context).getMetricsFeatureProvider(), mBluetoothManager,
+                FeatureFactory.getFactory(context).getMetricsFeatureProvider(),
                 MetricsEvent.ACTION_SETTINGS_MASTER_SWITCH_BLUETOOTH_TOGGLE,
                 mRestrictionUtils);
         mBluetoothEnabler.setToggleCallback(this);

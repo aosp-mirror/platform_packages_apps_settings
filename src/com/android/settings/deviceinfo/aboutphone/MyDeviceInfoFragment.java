@@ -16,8 +16,6 @@
 
 package com.android.settings.deviceinfo.aboutphone;
 
-import static com.android.settings.bluetooth.Utils.getLocalBtManager;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -116,7 +114,6 @@ public class MyDeviceInfoFragment extends DashboardFragment
         controllers.add(new BrandedAccountPreferenceController(context));
         DeviceNamePreferenceController deviceNamePreferenceController =
                 new DeviceNamePreferenceController(context);
-        deviceNamePreferenceController.setLocalBluetoothManager(getLocalBtManager(context));
         deviceNamePreferenceController.setHost(fragment);
         if (lifecycle != null) {
             lifecycle.addObserver(deviceNamePreferenceController);
