@@ -19,6 +19,8 @@ package com.android.settings.widget;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -28,23 +30,58 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 
+import androidx.preference.PreferenceViewHolder;
+
 @RunWith(SettingsRobolectricTestRunner.class)
 public class AppCheckBoxPreferenceTest {
+
+    private static final String SUMMARY = "summary info";
 
     private Context mContext;
     private AppCheckBoxPreference mPreference;
     private AppCheckBoxPreference mAttrPreference;
+    private PreferenceViewHolder mPreferenceViewHolder;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mPreference = new AppCheckBoxPreference(mContext);
         mAttrPreference = new AppCheckBoxPreference(mContext, null /* attrs */);
+        mPreferenceViewHolder = PreferenceViewHolder.createInstanceForTests(
+                LayoutInflater.from(mContext).inflate(R.layout.preference_app, null));
     }
 
     @Test
     public void testGetLayoutResource() {
         assertThat(mPreference.getLayoutResource()).isEqualTo(R.layout.preference_app);
         assertThat(mAttrPreference.getLayoutResource()).isEqualTo(R.layout.preference_app);
+    }
+
+    @Test
+    public void onBindViewHolder_noSummary_layoutGone() {
+        mPreference.setSummary("");
+
+        mPreference.onBindViewHolder(mPreferenceViewHolder);
+
+        assertThat(mPreferenceViewHolder.findViewById(R.id.summary_container).getVisibility())
+                .isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void onBindViewHolder_hasSummary_layoutVisible() {
+        mPreference.setSummary(SUMMARY);
+
+        mPreference.onBindViewHolder(mPreferenceViewHolder);
+
+        assertThat(mPreferenceViewHolder.findViewById(R.id.summary_container).getVisibility())
+                .isEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    public void onBindViewHolder_appendixGone() {
+        mPreference.onBindViewHolder(mPreferenceViewHolder);
+
+        assertThat(mPreferenceViewHolder.findViewById(R.id.appendix).getVisibility())
+                .isEqualTo(View.GONE);
     }
 }

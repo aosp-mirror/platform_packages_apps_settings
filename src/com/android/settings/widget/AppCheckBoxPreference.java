@@ -17,11 +17,16 @@
 package com.android.settings.widget;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.android.settings.R;
 
 import androidx.preference.CheckBoxPreference;
+import androidx.preference.PreferenceViewHolder;
 
 /**
  * {@link CheckBoxPreference} that used only to display app
@@ -35,5 +40,21 @@ public class AppCheckBoxPreference extends CheckBoxPreference {
     public AppCheckBoxPreference(Context context) {
         super(context);
         setLayoutResource(R.layout.preference_app);
+    }
+
+    @Override
+    public void onBindViewHolder(PreferenceViewHolder holder) {
+        super.onBindViewHolder(holder);
+
+        final TextView appendix = (TextView) holder.findViewById(R.id.appendix);
+        if (appendix != null) {
+            appendix.setVisibility(View.GONE);
+        }
+
+        final LinearLayout layout = (LinearLayout) holder.findViewById(R.id.summary_container);
+        if (layout != null) {
+            // If summary doesn't exist, make it gone
+            layout.setVisibility(TextUtils.isEmpty(getSummary()) ? View.GONE : View.VISIBLE);
+        }
     }
 }
