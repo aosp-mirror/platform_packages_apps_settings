@@ -50,12 +50,12 @@ public class WifiDialog extends AlertDialog implements WifiConfigUiBase,
     private WifiConfigController mController;
     private boolean mHideSubmitButton;
 
-
+    // TODO(b/111875856) WifiDialog should not mimic full screen UI.
     /** Creates a WifiDialog with fullscreen style. It displays in fullscreen mode. */
     public static WifiDialog createFullscreen(Context context, WifiDialogListener listener,
             AccessPoint accessPoint, int mode) {
         return new WifiDialog(context, listener, accessPoint, mode,
-                R.style.Theme_Settings_NoActionBar, false /* hideSubmitButton */);
+                R.style.Theme_Settings_WifiDialogFullScreen, false /* hideSubmitButton */);
     }
 
     /**
