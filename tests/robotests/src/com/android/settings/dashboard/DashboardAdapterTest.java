@@ -203,9 +203,9 @@ public class DashboardAdapterTest {
                 new DashboardAdapter.DashboardItemHolder(view);
         final Tile tile = spy(new Tile(mActivityInfo));
         doReturn(Icon.createWithResource(context, R.drawable.ic_settings))
-                .when(tile).getIcon();
+                .when(tile).getIcon(context);
         final IconCache iconCache = mock(IconCache.class);
-        when(iconCache.getIcon(tile.getIcon()))
+        when(iconCache.getIcon(tile.getIcon(context)))
                 .thenReturn(context.getDrawable(R.drawable.ic_settings));
 
         mDashboardAdapter = new DashboardAdapter(context, null /* savedInstanceState */,
@@ -224,7 +224,7 @@ public class DashboardAdapterTest {
                 new DashboardAdapter.DashboardItemHolder(view);
         final Tile tile = spy(new Tile(mActivityInfo));
         final Icon icon = Icon.createWithResource(context, R.drawable.ic_settings);
-        doReturn(icon).when(tile).getIcon();
+        doReturn(icon).when(tile).getIcon(context);
 
         final IconCache iconCache = new IconCache(context);
 
@@ -235,7 +235,8 @@ public class DashboardAdapterTest {
         doReturn("another.package").when(context).getPackageName();
         mDashboardAdapter.onBindTile(holder, tile);
 
-        assertThat(iconCache.getIcon(tile.getIcon())).isInstanceOf(RoundedHomepageIcon.class);
+        assertThat(iconCache.getIcon(tile.getIcon(context)))
+                .isInstanceOf(RoundedHomepageIcon.class);
     }
 
     @Test
@@ -249,7 +250,7 @@ public class DashboardAdapterTest {
         tile.metaData.putInt(TileUtils.META_DATA_PREFERENCE_ICON_BACKGROUND_HINT,
                 R.color.memory_critical);
         doReturn(Icon.createWithResource(context, R.drawable.ic_settings))
-                .when(tile).getIcon();
+                .when(tile).getIcon(context);
         final IconCache iconCache = new IconCache(context);
         mDashboardAdapter = new DashboardAdapter(context, null /* savedInstanceState */,
                 null /* conditions */, null /* suggestionControllerMixin */, null /* lifecycle */);
@@ -259,7 +260,7 @@ public class DashboardAdapterTest {
         mDashboardAdapter.onBindTile(holder, tile);
 
         final RoundedHomepageIcon homepageIcon = (RoundedHomepageIcon) iconCache.getIcon(
-                tile.getIcon());
+                tile.getIcon(context));
         assertThat(homepageIcon.mBackgroundColor)
                 .isEqualTo(RuntimeEnvironment.application.getColor(R.color.memory_critical));
     }
@@ -271,11 +272,11 @@ public class DashboardAdapterTest {
         final DashboardAdapter.DashboardItemHolder holder =
                 new DashboardAdapter.DashboardItemHolder(view);
         final Tile tile = spy(new Tile(mActivityInfo));
-        doReturn(mock(Icon.class)).when(tile).getIcon();
-        when(tile.getIcon().getResPackage()).thenReturn("another.package");
+        doReturn(mock(Icon.class)).when(tile).getIcon(context);
+        when(tile.getIcon(context).getResPackage()).thenReturn("another.package");
 
         final IconCache iconCache = mock(IconCache.class);
-        when(iconCache.getIcon(tile.getIcon())).thenReturn(mock(RoundedHomepageIcon.class));
+        when(iconCache.getIcon(tile.getIcon(context))).thenReturn(mock(RoundedHomepageIcon.class));
 
         mDashboardAdapter = new DashboardAdapter(context, null /* savedInstanceState */,
                 null /* conditions */, null /* suggestionControllerMixin */, null /* lifecycle */);
@@ -283,7 +284,8 @@ public class DashboardAdapterTest {
 
         mDashboardAdapter.onBindTile(holder, tile);
 
-        verify(iconCache, never()).updateIcon(eq(tile.getIcon()), any(RoundedHomepageIcon.class));
+        verify(iconCache, never()).updateIcon(eq(tile.getIcon(context)),
+                any(RoundedHomepageIcon.class));
     }
 
     private List<Suggestion> makeSuggestionsV2(String... pkgNames) {

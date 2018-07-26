@@ -315,7 +315,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
     @VisibleForTesting
     void onBindTile(DashboardItemHolder holder, Tile tile) {
-        Icon tileIcon = tile.getIcon();
+        Icon tileIcon = tile.getIcon(mContext);
         Drawable icon = mCache.getIcon(tileIcon);
         if (!TextUtils.equals(tileIcon.getResPackage(), mContext.getPackageName())
                 && !(icon instanceof RoundedHomepageIcon)) {

@@ -120,7 +120,7 @@ public class DashboardFeatureProviderImplTest {
         tile.title = "title";
         tile.summary = "summary";
         doReturn(Icon.createWithBitmap(Bitmap.createBitmap(1, 1, Bitmap.Config.RGB_565)))
-                .when(tile).getIcon();
+                .when(tile).getIcon(any(Context.class));
         tile.metaData = new Bundle();
         tile.metaData.putString(SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS, "HI");
         tile.priority = 10;
