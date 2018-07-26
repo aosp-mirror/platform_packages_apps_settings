@@ -24,6 +24,11 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerListHelper;
@@ -42,11 +47,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
 
 /**
  * Base fragment for dashboard style UI containing a list of static and dynamic setting items.
@@ -256,7 +256,8 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
 
     @VisibleForTesting
     boolean tintTileIcon(Tile tile) {
-        if (tile.getIcon() == null) {
+        final Context context = getContext();
+        if (tile.getIcon(context) == null) {
             return false;
         }
         // First check if the tile has set the icon tintable metadata.
@@ -265,7 +266,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 && metadata.containsKey(TileUtils.META_DATA_PREFERENCE_ICON_TINTABLE)) {
             return metadata.getBoolean(TileUtils.META_DATA_PREFERENCE_ICON_TINTABLE);
         }
-        final String pkgName = getContext().getPackageName();
+        final String pkgName = context.getPackageName();
         // If this drawable is coming from outside Settings, tint it to match the color.
         return pkgName != null && tile.intent != null
                 && !pkgName.equals(tile.intent.getComponent().getPackageName());
@@ -370,7 +371,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 continue;
             }
             if (tintTileIcon(tile)) {
-                tile.getIcon().setTint(tintColor);
+                tile.getIcon(context).setTint(tintColor);
             }
             if (mDashboardTilePrefKeys.contains(key)) {
                 // Have the key already, will rebind.

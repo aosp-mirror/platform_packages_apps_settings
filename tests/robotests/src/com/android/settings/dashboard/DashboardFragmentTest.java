@@ -17,6 +17,7 @@ package com.android.settings.dashboard;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -183,7 +184,7 @@ public class DashboardFragmentTest {
     @Test
     public void tintTileIcon_hasMetadata_shouldReturnIconTintableMetadata() {
         final Tile tile = spy(new Tile(mActivityInfo));
-        doReturn(mock(Icon.class)).when(tile).getIcon();
+        doReturn(mock(Icon.class)).when(tile).getIcon(any(Context.class));
         final Bundle metaData = new Bundle();
         tile.metaData = metaData;
 
@@ -205,7 +206,7 @@ public class DashboardFragmentTest {
     @Test
     public void tintTileIcon_noMetadata_shouldReturnPackageNameCheck() {
         final Tile tile = spy(new Tile(mActivityInfo));
-        doReturn(mock(Icon.class)).when(tile).getIcon();
+        doReturn(mock(Icon.class)).when(tile).getIcon(any(Context.class));
         final Intent intent = new Intent();
         tile.intent = intent;
         intent.setComponent(
