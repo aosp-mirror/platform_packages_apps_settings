@@ -16,6 +16,8 @@
 
 package com.android.settings.deviceinfo;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
@@ -41,6 +43,7 @@ import org.mockito.Answers;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import androidx.preference.PreferenceScreen;
@@ -77,6 +80,17 @@ public class DeviceNamePreferenceControllerTest {
 
         mController = new DeviceNamePreferenceController(mContext);
         mController.setLocalBluetoothManager(mBluetoothManager);
+    }
+
+    @Test
+    public void getAvailibilityStatus_availableByDefault() {
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void getAvailabilityStatus_unsupportedWhenSet() {
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
