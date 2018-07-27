@@ -18,8 +18,8 @@
 <!-- SUW related themes -->
 <resources>
     <style name="GlifTheme" parent="SuwThemeGlif">
-        <!-- For all Alert Dialogs -->
-        <item name="android:alertDialogTheme">@style/ThemeOverlay.AlertDialog</item>
+        <!-- For all AndroidX Alert Dialogs -->
+        <item name="alertDialogTheme">@style/ThemeOverlay.AlertDialog</item>
         <item name="android:windowBackground">?android:attr/colorBackground</item>
         <item name="*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
         <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
@@ -37,8 +37,8 @@
     </style>
 
     <style name="GlifTheme.Light" parent="SuwThemeGlif.Light">
-        <!-- For all Alert Dialogs -->
-        <item name="android:alertDialogTheme">@style/ThemeOverlay.AlertDialog</item>
+        <!-- For all AndroidX Alert Dialogs -->
+        <item name="alertDialogTheme">@style/ThemeOverlay.AlertDialog</item>
         <item name="android:windowBackground">?android:attr/colorBackground</item>
         <item name="*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
         <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
@@ -56,8 +56,8 @@
     </style>
 
     <style name="GlifV2Theme" parent="SuwThemeGlifV2">
-        <!-- For all Alert Dialogs -->
-        <item name="android:alertDialogTheme">@style/GlifV2ThemeAlertDialog</item>
+        <!-- For all AndroidX Alert Dialogs -->
+        <item name="alertDialogTheme">@style/GlifV2ThemeAlertDialog</item>
         <item name="android:windowBackground">?android:attr/colorBackground</item>
         <item name="*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
         <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
@@ -75,8 +75,8 @@
     </style>
 
     <style name="GlifV2Theme.Light" parent="SuwThemeGlifV2.Light">
-        <!-- For all Alert Dialogs -->
-        <item name="android:alertDialogTheme">@style/GlifV2ThemeAlertDialog.Light</item>
+        <!-- For all AndroidX Alert Dialogs -->
+        <item name="alertDialogTheme">@style/GlifV2ThemeAlertDialog.Light</item>
         <item name="android:windowBackground">?android:attr/colorBackground</item>
         <item name="*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
         <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
@@ -94,8 +94,8 @@
     </style>
 
     <style name="GlifV3Theme" parent="SuwThemeGlifV3">
-        <!-- For all Alert Dialogs -->
-        <item name="android:alertDialogTheme">@style/GlifV2ThemeAlertDialog</item>
+        <!-- For all AndroidX Alert Dialogs -->
+        <item name="alertDialogTheme">@style/GlifV2ThemeAlertDialog</item>
         <item name="android:windowBackground">?android:attr/colorBackground</item>
         <item name="*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
         <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
@@ -113,8 +113,8 @@
     </style>
 
     <style name="GlifV3Theme.Light" parent="SuwThemeGlifV3.Light">
-        <!-- For all Alert Dialogs -->
-        <item name="android:alertDialogTheme">@style/GlifV2ThemeAlertDialog.Light</item>
+        <!-- For all AndroidX Alert Dialogs -->
+        <item name="alertDialogTheme">@style/GlifV2ThemeAlertDialog.Light</item>
         <item name="android:windowBackground">?android:attr/colorBackground</item>
         <item name="*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
         <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
@@ -145,11 +145,11 @@
         <item name="android:windowAnimationStyle">@null</item>
     </style>
 
-    <style name="GlifV2ThemeAlertDialog" parent="SuwAlertDialogTheme">
+    <style name="GlifV2ThemeAlertDialog" parent="SuwAlertDialogThemeCompat">
         <item name="android:windowSoftInputMode">adjustResize</item>
     </style>
 
-    <style name="GlifV2ThemeAlertDialog.Light" parent="SuwAlertDialogTheme.Light">
+    <style name="GlifV2ThemeAlertDialog.Light" parent="SuwAlertDialogThemeCompat.Light">
         <item name="android:windowSoftInputMode">adjustResize</item>
     </style>
 
@@ -189,5 +189,17 @@
         <item name="android:titleTextColor">@color/material_blue_700</item>
         <item name="preferenceTheme">@style/PreferenceTheme</item>
         <item name="switchBarTheme">@style/ThemeOverlay.SwitchBar.Settings</item>
+    </style>
+
+    <style name="SuwAlertDialogThemeCompat" parent="@style/Theme.AppCompat.Dialog.Alert">
+        <!-- copied from Theme.DeviceDefault.Light.Dialog.Alert -->
+        <item name="colorAccent">@*android:color/accent_device_default_light</item>
+        <item name="dialogCornerRadius">@*android:dimen/config_dialogCornerRadius</item>
+    </style>
+
+    <style name="SuwAlertDialogThemeCompat.Light" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
+        <!-- copied from Theme.DeviceDefault.Light.Dialog.Alert -->
+        <item name="colorAccent">@*android:color/accent_device_default_light</item>
+        <item name="dialogCornerRadius">@*android:dimen/config_dialogCornerRadius</item>
     </style>
 </resources>
