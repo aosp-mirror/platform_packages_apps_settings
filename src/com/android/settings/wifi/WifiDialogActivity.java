@@ -52,6 +52,8 @@ public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialo
     @VisibleForTesting
     static final String KEY_CONNECT_FOR_CALLER = "connect_for_caller";
 
+    private WifiDialog mDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         final Intent intent = getIntent();
@@ -67,16 +69,25 @@ public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialo
             accessPoint = new AccessPoint(this, accessPointState);
         }
 
-        WifiDialog dialog = WifiDialog.createModal(
+        mDialog = WifiDialog.createModal(
                 this, this, accessPoint, WifiConfigUiBase.MODE_CONNECT);
-        dialog.show();
-        dialog.setOnDismissListener(this);
+        mDialog.show();
+        mDialog.setOnDismissListener(this);
     }
 
     @Override
     public void finish() {
         super.finish();
         overridePendingTransition(0, 0);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mDialog != null && mDialog.isShowing()) {
+            mDialog.dismiss();
+            mDialog = null;
+        }
     }
 
     @Override
@@ -147,6 +158,7 @@ public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialo
 
     @Override
     public void onDismiss(DialogInterface dialogInterface) {
+        mDialog = null;
         finish();
     }
 }
