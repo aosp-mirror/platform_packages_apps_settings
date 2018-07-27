@@ -17,6 +17,8 @@
 package com.android.settings.fuelgauge.batterytip;
 
 import static android.database.sqlite.SQLiteDatabase.CONFLICT_IGNORE;
+import static android.database.sqlite.SQLiteDatabase.CONFLICT_REPLACE;
+
 import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.AnomalyColumns
         .ANOMALY_STATE;
 import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.AnomalyColumns
@@ -26,6 +28,7 @@ import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.An
 import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.AnomalyColumns
         .TIME_STAMP_MS;
 import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.AnomalyColumns.UID;
+import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.Tables.TABLE_ACTION;
 import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.Tables.TABLE_ANOMALY;
 
 import android.content.ContentValues;
@@ -34,11 +37,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
 import android.util.ArrayMap;
+import android.util.SparseLongArray;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
+import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.ActionColumns;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -156,6 +162,67 @@ public class BatteryDatabaseManager {
                 db.update(TABLE_ANOMALY, values, PACKAGE_NAME + " IN (" + TextUtils.join(",",
                         Collections.nCopies(appInfos.size(), "?")) + ")", whereArgs);
             }
+        }
+    }
+
+    /**
+     * Query latest timestamps when an app has been performed action {@code type}
+     *
+     * @param type of action been performed
+     * @return {@link SparseLongArray} where key is uid and value is timestamp
+     */
+    public synchronized SparseLongArray queryActionTime(
+            @AnomalyDatabaseHelper.ActionType int type) {
+        final SparseLongArray timeStamps = new SparseLongArray();
+        try (SQLiteDatabase db = mDatabaseHelper.getReadableDatabase()) {
+            final String[] projection = {ActionColumns.UID, ActionColumns.TIME_STAMP_MS};
+            final String selection = ActionColumns.ACTION_TYPE + " = ? ";
+            final String[] selectionArgs = new String[]{String.valueOf(type)};
+
+            try (Cursor cursor = db.query(TABLE_ACTION, projection, selection, selectionArgs,
+                    null /* groupBy */, null /* having */, null /* orderBy */)) {
+                final int uidIndex = cursor.getColumnIndex(ActionColumns.UID);
+                final int timestampIndex = cursor.getColumnIndex(ActionColumns.TIME_STAMP_MS);
+
+                while (cursor.moveToNext()) {
+                    final int uid = cursor.getInt(uidIndex);
+                    final long timeStamp = cursor.getLong(timestampIndex);
+                    timeStamps.append(uid, timeStamp);
+                }
+            }
+        }
+
+        return timeStamps;
+    }
+
+    /**
+     * Insert an action, or update it if already existed
+     */
+    public synchronized boolean insertAction(@AnomalyDatabaseHelper.ActionType int type,
+            int uid, String packageName, long timestampMs) {
+        try (SQLiteDatabase db = mDatabaseHelper.getWritableDatabase()) {
+            final ContentValues values = new ContentValues();
+            values.put(ActionColumns.UID, uid);
+            values.put(ActionColumns.PACKAGE_NAME, packageName);
+            values.put(ActionColumns.ACTION_TYPE, type);
+            values.put(ActionColumns.TIME_STAMP_MS, timestampMs);
+            return db.insertWithOnConflict(TABLE_ACTION, null, values, CONFLICT_REPLACE) != -1;
+        }
+    }
+
+    /**
+     * Remove an action
+     */
+    public synchronized boolean deleteAction(@AnomalyDatabaseHelper.ActionType int type,
+            int uid, String packageName) {
+        try (SQLiteDatabase db = mDatabaseHelper.getWritableDatabase()) {
+            final String where =
+                    ActionColumns.ACTION_TYPE + " = ? AND " + ActionColumns.UID + " = ? AND "
+                            + ActionColumns.PACKAGE_NAME + " = ? ";
+            final String[] whereArgs = new String[]{String.valueOf(type), String.valueOf(uid),
+                    String.valueOf(packageName)};
+
+            return db.delete(TABLE_ACTION, where, whereArgs) != 0;
         }
     }
 }
