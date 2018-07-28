@@ -23,7 +23,6 @@ import android.content.Context;
 
 import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProvider;
-import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
@@ -62,7 +61,6 @@ public class FakeFeatureFactory extends FeatureFactory {
     public final SuggestionFeatureProvider suggestionsFeatureProvider;
     public final UserFeatureProvider userFeatureProvider;
     public final AssistGestureFeatureProvider assistGestureFeatureProvider;
-    public final BluetoothFeatureProvider bluetoothFeatureProvider;
     public final AccountFeatureProvider mAccountFeatureProvider;
     public final DeviceIndexFeatureProvider deviceIndexFeatureProvider;
 
@@ -104,7 +102,6 @@ public class FakeFeatureFactory extends FeatureFactory {
         suggestionsFeatureProvider = mock(SuggestionFeatureProvider.class);
         userFeatureProvider = mock(UserFeatureProvider.class);
         assistGestureFeatureProvider = mock(AssistGestureFeatureProvider.class);
-        bluetoothFeatureProvider = mock(BluetoothFeatureProvider.class);
         slicesFeatureProvider = mock(SlicesFeatureProvider.class);
         mAccountFeatureProvider = mock(AccountFeatureProvider.class);
         deviceIndexFeatureProvider = mock(DeviceIndexFeatureProvider.class);
@@ -173,11 +170,6 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public UserFeatureProvider getUserFeatureProvider(Context context) {
         return userFeatureProvider;
-    }
-
-    @Override
-    public BluetoothFeatureProvider getBluetoothFeatureProvider(Context context) {
-        return bluetoothFeatureProvider;
     }
 
     @Override
