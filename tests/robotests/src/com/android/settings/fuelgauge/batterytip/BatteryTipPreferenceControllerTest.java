@@ -31,6 +31,7 @@ import android.text.format.DateUtils;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.SummaryTip;
@@ -100,8 +101,7 @@ public class BatteryTipPreferenceControllerTest {
         mNewBatteryTips = new ArrayList<>();
         mNewBatteryTips.add(new SummaryTip(BatteryTip.StateType.INVISIBLE, AVERAGE_TIME_MS));
 
-        mBatteryTipPreferenceController = new BatteryTipPreferenceController(mContext, KEY_PREF,
-                mSettingsActivity, mFragment, mBatteryTipListener);
+        mBatteryTipPreferenceController = buildBatteryTipPreferenceController();
         mBatteryTipPreferenceController.mPreferenceGroup = mPreferenceGroup;
         mBatteryTipPreferenceController.mPrefContext = mContext;
     }
@@ -139,8 +139,7 @@ public class BatteryTipPreferenceControllerTest {
         final Bundle bundle = new Bundle();
         mBatteryTipPreferenceController.saveInstanceState(bundle);
 
-        final BatteryTipPreferenceController controller = new BatteryTipPreferenceController(
-                mContext, KEY_PREF, mSettingsActivity, mFragment, mBatteryTipListener);
+        final BatteryTipPreferenceController controller = buildBatteryTipPreferenceController();
         controller.mPreferenceGroup = mPreferenceGroup;
         controller.mPrefContext = mContext;
         controller.restoreInstanceState(bundle);
@@ -154,8 +153,7 @@ public class BatteryTipPreferenceControllerTest {
         // Battery tip list is null at this time
         mBatteryTipPreferenceController.saveInstanceState(bundle);
 
-        final BatteryTipPreferenceController controller = new BatteryTipPreferenceController(
-                mContext, KEY_PREF, mSettingsActivity, mFragment, mBatteryTipListener);
+        final BatteryTipPreferenceController controller = buildBatteryTipPreferenceController();
 
         // Should not crash
         controller.restoreInstanceState(bundle);
@@ -176,6 +174,12 @@ public class BatteryTipPreferenceControllerTest {
         verify(mBatteryTipListener).onBatteryTipHandled(mBatteryTip);
     }
 
+    @Test
+    public void getAvailabilityStatus_returnAvailableUnsearchable() {
+        assertThat(mBatteryTipPreferenceController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.AVAILABLE_UNSEARCHABLE);
+    }
+
     private void assertOnlyContainsSummaryTip(final PreferenceGroup preferenceGroup) {
         assertThat(preferenceGroup.getPreferenceCount()).isEqualTo(1);
 
@@ -184,5 +188,15 @@ public class BatteryTipPreferenceControllerTest {
                 mContext.getString(R.string.battery_tip_summary_title));
         assertThat(preference.getSummary()).isEqualTo(
                 mContext.getString(R.string.battery_tip_summary_summary));
+    }
+
+    private BatteryTipPreferenceController buildBatteryTipPreferenceController() {
+        final BatteryTipPreferenceController controller = new BatteryTipPreferenceController(
+                mContext, KEY_PREF);
+        controller.setActivity(mSettingsActivity);
+        controller.setFragment(mFragment);
+        controller.setBatteryTipListener(mBatteryTipListener);
+
+        return controller;
     }
 }

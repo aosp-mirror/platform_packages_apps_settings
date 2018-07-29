@@ -23,12 +23,16 @@
 
     <com.android.settings.applications.LayoutPreference
         android:key="battery_header"
+        android:title="@string/summary_placeholder"
         android:selectable="false"
-        android:layout="@layout/battery_header" />
+        android:layout="@layout/battery_header"
+        settings:controller="com.android.settings.fuelgauge.BatteryHeaderPreferenceController" />
 
     <PreferenceCategory
         android:key="battery_tip"
-        android:layout="@layout/preference_category_no_label" />
+        android:title="@string/summary_placeholder"
+        android:layout="@layout/preference_category_no_label"
+        settings:controller="com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController" />
 
     <Preference
         android:fragment="com.android.settings.fuelgauge.batterysaver.BatterySaverSettings"
@@ -47,7 +51,8 @@
     <SwitchPreference
         android:key="battery_percentage"
         android:title="@string/battery_percentage"
-        android:summary="@string/battery_percentage_description" />
+        android:summary="@string/battery_percentage_description"
+        settings:controller="com.android.settings.display.BatteryPercentagePreferenceController" />
 
 
     <com.android.settings.fuelgauge.PowerGaugePreference

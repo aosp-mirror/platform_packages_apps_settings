@@ -1119,4 +1119,18 @@
         <item>0</item>
     </string-array>
 
+    <!-- Titles for autofill logging level preference. [CHAR LIMIT=50] -->
+    <string-array name="autofill_logging_level_entries">
+        <item>Off</item>
+        <item>Debug</item>
+        <item>Verbose</item>
+    </string-array>
+
+    <!-- Values for autofill logging level preference. -->
+    <string-array name="autofill_logging_level_values" translatable="false" >
+        <item>0</item> <!-- AutofillManager.NO_LOGGING -->
+        <item>2</item> <!-- AutofillManager.FLAG_ADD_CLIENT_DEBUG -->
+        <item>4</item> <!-- AutofillManager.FLAG_ADD_CLIENT_VERBOSE -->
+    </string-array>
+
 </resources>

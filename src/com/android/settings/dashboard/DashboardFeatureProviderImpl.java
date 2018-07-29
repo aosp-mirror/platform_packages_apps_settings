@@ -34,6 +34,9 @@ import android.util.ArrayMap;
 import android.util.Log;
 import android.util.Pair;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -49,9 +52,6 @@ import com.android.settingslib.utils.ThreadUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 
 /**
  * Impl for {@code DashboardFeatureProvider}.
@@ -238,7 +238,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
 
     @VisibleForTesting
     void bindIcon(Preference preference, Tile tile) {
-        final Icon tileIcon = tile.getIcon();
+        final Icon tileIcon = tile.getIcon(mContext);
         if (tileIcon != null) {
             preference.setIcon(tileIcon.loadDrawable(preference.getContext()));
         } else if (tile.metaData != null

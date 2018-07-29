@@ -59,24 +59,27 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
     InstrumentedPreferenceFragment mFragment;
 
     public BatteryTipPreferenceController(Context context, String preferenceKey) {
-        this(context, preferenceKey, null, null, null);
-    }
-
-    public BatteryTipPreferenceController(Context context, String preferenceKey,
-            SettingsActivity settingsActivity, InstrumentedPreferenceFragment fragment,
-            BatteryTipListener batteryTipListener) {
         super(context, preferenceKey);
-        mBatteryTipListener = batteryTipListener;
         mBatteryTipMap = new HashMap<>();
-        mFragment = fragment;
-        mSettingsActivity = settingsActivity;
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
         mNeedUpdate = true;
     }
 
+    public void setActivity(SettingsActivity activity) {
+        mSettingsActivity = activity;
+    }
+
+    public void setFragment(InstrumentedPreferenceFragment fragment) {
+        mFragment = fragment;
+    }
+
+    public void setBatteryTipListener(BatteryTipListener lsn) {
+        mBatteryTipListener = lsn;
+    }
+
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return AVAILABLE_UNSEARCHABLE;
     }
 
     @Override

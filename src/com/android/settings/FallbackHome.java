@@ -19,6 +19,7 @@ package com.android.settings;
 import android.app.Activity;
 import android.app.WallpaperColors;
 import android.app.WallpaperManager;
+import android.app.WallpaperManager.OnColorsChangedListener;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -44,6 +45,7 @@ public class FallbackHome extends Activity {
     private static final int PROGRESS_TIMEOUT = 2000;
 
     private boolean mProvisioned;
+    private WallpaperManager mWallManager;
 
     private final Runnable mProgressTimeoutRunnable = () -> {
         View v = getLayoutInflater().inflate(
@@ -57,6 +59,18 @@ public class FallbackHome extends Activity {
                         this, android.R.interpolator.fast_out_slow_in))
                 .start();
         getWindow().addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
+    };
+
+    private final OnColorsChangedListener mColorsChangedListener = new OnColorsChangedListener() {
+        @Override
+        public void onColorsChanged(WallpaperColors colors, int which) {
+            if (colors != null) {
+                View decorView = getWindow().getDecorView();
+                decorView.setSystemUiVisibility(
+                        updateVisibilityFlagsFromColors(colors, decorView.getSystemUiVisibility()));
+                mWallManager.removeOnColorsChangedListener(this);
+            }
+        }
     };
 
     @Override
@@ -78,13 +92,17 @@ public class FallbackHome extends Activity {
         }
 
         // Set the system ui flags to light status bar if the wallpaper supports dark text to match
-        // current system ui color tints.
-        final WallpaperColors colors = getSystemService(WallpaperManager.class)
-                .getWallpaperColors(WallpaperManager.FLAG_SYSTEM);
-        if (colors != null
-                && (colors.getColorHints() & WallpaperColors.HINT_SUPPORTS_DARK_TEXT) != 0) {
-            flags |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-                    | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
+        // current system ui color tints. Use a listener to wait for colors if not ready yet.
+        mWallManager = getSystemService(WallpaperManager.class);
+        if (mWallManager == null) {
+            Log.w(TAG, "Wallpaper manager isn't ready, can't listen to color changes!");
+        } else {
+            WallpaperColors colors = mWallManager.getWallpaperColors(WallpaperManager.FLAG_SYSTEM);
+            if (colors == null) {
+                mWallManager.addOnColorsChangedListener(mColorsChangedListener, null /* handler */);
+            } else {
+                flags = updateVisibilityFlagsFromColors(colors, flags);
+            }
         }
         getWindow().getDecorView().setSystemUiVisibility(flags);
 
@@ -109,6 +127,9 @@ public class FallbackHome extends Activity {
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(mReceiver);
+        if (mWallManager != null) {
+            mWallManager.removeOnColorsChangedListener(mColorsChangedListener);
+        }
     }
 
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
@@ -139,6 +160,15 @@ public class FallbackHome extends Activity {
                 finish();
             }
         }
+    }
+
+    private int updateVisibilityFlagsFromColors(WallpaperColors colors, int flags) {
+        if ((colors.getColorHints() & WallpaperColors.HINT_SUPPORTS_DARK_TEXT) != 0) {
+            return flags | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                    | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
+        }
+        return flags & ~(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
+                & ~(View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
     }
 
     private Handler mHandler = new Handler() {

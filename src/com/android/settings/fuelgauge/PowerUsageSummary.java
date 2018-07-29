@@ -25,7 +25,6 @@ import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.text.BidiFormatter;
 import android.text.format.Formatter;
-import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -40,19 +39,15 @@ import com.android.settings.Utils;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.SummaryLoader;
-import com.android.settings.display.BatteryPercentagePreferenceController;
 import com.android.settings.fuelgauge.batterytip.BatteryTipLoader;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.utils.PowerUtil;
 import com.android.settingslib.utils.StringUtil;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -198,6 +193,22 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
             };
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        final SettingsActivity activity = (SettingsActivity) getActivity();
+
+        mBatteryHeaderPreferenceController = use(BatteryHeaderPreferenceController.class);
+        mBatteryHeaderPreferenceController.setActivity(activity);
+        mBatteryHeaderPreferenceController.setFragment(this);
+        mBatteryHeaderPreferenceController.setLifecycle(getSettingsLifecycle());
+
+        mBatteryTipPreferenceController = use(BatteryTipPreferenceController.class);
+        mBatteryTipPreferenceController.setActivity(activity);
+        mBatteryTipPreferenceController.setFragment(this);
+        mBatteryTipPreferenceController.setBatteryTipListener(this::onBatteryTipHandled);
+    }
+
+    @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setAnimationAllowed(true);
@@ -229,22 +240,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.power_usage_summary;
-    }
-
-    @Override
-    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        final Lifecycle lifecycle = getSettingsLifecycle();
-        final SettingsActivity activity = (SettingsActivity) getActivity();
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        mBatteryHeaderPreferenceController = new BatteryHeaderPreferenceController(
-                context, activity, this /* host */, lifecycle);
-        controllers.add(mBatteryHeaderPreferenceController);
-        mBatteryTipPreferenceController = new BatteryTipPreferenceController(context,
-                KEY_BATTERY_TIP, (SettingsActivity) getActivity(), this /* fragment */, this /*
-                BatteryTipListener */);
-        controllers.add(mBatteryTipPreferenceController);
-        controllers.add(new BatteryPercentagePreferenceController(context));
-        return controllers;
     }
 
     @Override

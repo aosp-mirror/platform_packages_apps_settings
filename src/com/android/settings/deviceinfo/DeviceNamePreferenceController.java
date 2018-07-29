@@ -27,6 +27,7 @@ import android.text.SpannedString;
 
 import com.android.settings.bluetooth.BluetoothLengthDeviceNameFilter;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.R;
 import com.android.settings.widget.ValidatedEditTextPreference;
 import com.android.settings.wifi.tether.WifiDeviceNameTextValidator;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
@@ -90,7 +91,9 @@ public class DeviceNamePreferenceController extends BasePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return mContext.getResources().getBoolean(R.bool.config_show_device_name)
+                ? AVAILABLE
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

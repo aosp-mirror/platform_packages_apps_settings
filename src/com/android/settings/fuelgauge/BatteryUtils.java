@@ -38,11 +38,14 @@ import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
+import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
 import com.android.settings.fuelgauge.batterytip.AnomalyInfo;
+import com.android.settings.fuelgauge.batterytip.BatteryDatabaseManager;
 import com.android.settings.fuelgauge.batterytip.StatsManagerConfig;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 import com.android.settingslib.utils.PowerUtil;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -101,8 +104,8 @@ public class BatteryUtils {
         mContext = context;
         mPackageManager = context.getPackageManager();
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
-        mPowerUsageFeatureProvider = FeatureFactory.getFactory(
-                context).getPowerUsageFeatureProvider(context);
+        mPowerUsageFeatureProvider = FeatureFactory.getFactory(context)
+                .getPowerUsageFeatureProvider(context);
     }
 
     public long getProcessTimeMs(@StatusType int type, @Nullable BatteryStats.Uid uid,
@@ -400,6 +403,18 @@ public class BatteryUtils {
         }
         // Control whether app could run jobs in the background
         mAppOpsManager.setMode(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, uid, packageName, mode);
+
+        ThreadUtils.postOnBackgroundThread(() -> {
+            final BatteryDatabaseManager batteryDatabaseManager = BatteryDatabaseManager
+                    .getInstance(mContext);
+            if (mode == AppOpsManager.MODE_IGNORED) {
+                batteryDatabaseManager.insertAction(AnomalyDatabaseHelper.ActionType.RESTRICTION,
+                        uid, packageName, System.currentTimeMillis());
+            } else if (mode == AppOpsManager.MODE_ALLOWED) {
+                batteryDatabaseManager.deleteAction(AnomalyDatabaseHelper.ActionType.RESTRICTION,
+                        uid, packageName);
+            }
+        });
     }
 
     public boolean isForceAppStandbyEnabled(int uid, String packageName) {
