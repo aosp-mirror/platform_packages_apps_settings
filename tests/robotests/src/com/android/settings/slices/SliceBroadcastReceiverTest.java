@@ -168,6 +168,7 @@ public class SliceBroadcastReceiverTest {
                 .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
                 .appendPath(key)
                 .build();
+
         verify(resolver).notifyChange(expectedUri, null);
     }
 
