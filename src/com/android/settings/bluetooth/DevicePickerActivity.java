@@ -16,16 +16,17 @@
 
 package com.android.settings.bluetooth;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import com.android.settings.R;
+
+import androidx.fragment.app.FragmentActivity;
 
 /**
  * Activity for Bluetooth device picker dialog. The device picker logic
  * is implemented in the {@link BluetoothPairingDetail} fragment.
  */
-public final class DevicePickerActivity extends Activity {
+public final class DevicePickerActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
