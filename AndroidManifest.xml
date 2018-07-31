@@ -1945,13 +1945,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".connecteddevice.usb.UsbModeChooserActivity"
-                  android:excludeFromRecents="true"
-                  android:exported="true"
-                  android:permission="android.permission.MANAGE_USB"
-                  android:theme="@*android:style/Theme.DeviceDefault.Settings.Dialog.NoActionBar">
-        </activity>
-
         <activity android:name=".Settings$UsbDetailsActivity"
                   android:excludeFromRecents="true"
                   android:permission="android.permission.MANAGE_USB"
