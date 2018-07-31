@@ -63,7 +63,7 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mInitialScanStarted = false;
-        mAlwaysDiscoverable = new AlwaysDiscoverable(getContext(), mLocalAdapter);
+        mAlwaysDiscoverable = new AlwaysDiscoverable(getContext());
     }
 
     @Override
@@ -74,7 +74,7 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
             return;
         }
         updateBluetooth();
-        mAvailableDevicesCategory.setProgress(mLocalAdapter.isDiscovering());
+        mAvailableDevicesCategory.setProgress(mBluetoothAdapter.isDiscovering());
     }
 
     @Override
@@ -85,11 +85,11 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
 
     @VisibleForTesting
     void updateBluetooth() {
-        if (mLocalAdapter.isEnabled()) {
-            updateContent(mLocalAdapter.getBluetoothState());
+        if (mBluetoothAdapter.isEnabled()) {
+            updateContent(mBluetoothAdapter.getState());
         } else {
             // Turn on bluetooth if it is disabled
-            mLocalAdapter.enable();
+            mBluetoothAdapter.enable();
         }
     }
 
@@ -148,7 +148,7 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
         switch (bluetoothState) {
             case BluetoothAdapter.STATE_ON:
                 mDevicePreferenceMap.clear();
-                mLocalAdapter.setBluetoothEnabled(true);
+                mBluetoothAdapter.enable();
 
                 addDeviceCategory(mAvailableDevicesCategory,
                         R.string.bluetooth_preference_found_media_devices,

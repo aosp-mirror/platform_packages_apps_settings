@@ -40,9 +40,6 @@ import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.android.settings.R;
-import com.android.settings.bluetooth.Utils;
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 /**
  * Provides control of power-related settings from a widget.
@@ -54,7 +51,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
             new ComponentName("com.android.settings",
                     "com.android.settings.widget.SettingsAppWidgetProvider");
 
-    private static LocalBluetoothAdapter sLocalBluetoothAdapter = null;
+    private static BluetoothAdapter sBluetoothAdapter = null;
 
     private static final int BUTTON_WIFI = 0;
     private static final int BUTTON_BRIGHTNESS = 1;
@@ -450,23 +447,19 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
 
         @Override
         public int getActualState(Context context) {
-            if (sLocalBluetoothAdapter == null) {
-                LocalBluetoothManager manager = Utils.getLocalBtManager(context);
-                if (manager == null) {
-                    return STATE_UNKNOWN;  // On emulator?
-                }
-                sLocalBluetoothAdapter = manager.getBluetoothAdapter();
-                if (sLocalBluetoothAdapter == null) {
+            if (sBluetoothAdapter == null) {
+                sBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+                if (sBluetoothAdapter == null) {
                     return STATE_UNKNOWN;  // On emulator?
                 }
             }
-            return bluetoothStateToFiveState(sLocalBluetoothAdapter.getBluetoothState());
+            return bluetoothStateToFiveState(sBluetoothAdapter.getState());
         }
 
         @Override
         protected void requestStateChange(Context context, final boolean desiredState) {
-            if (sLocalBluetoothAdapter == null) {
-                Log.d(TAG, "No LocalBluetoothManager");
+            if (sBluetoothAdapter == null) {
+                Log.d(TAG, "No BluetoothAdapter");
                 return;
             }
             // Actually request the Bluetooth change and persistent
@@ -476,7 +469,11 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
             new AsyncTask<Void, Void, Void>() {
                 @Override
                 protected Void doInBackground(Void... args) {
-                    sLocalBluetoothAdapter.setBluetoothEnabled(desiredState);
+                    if (desiredState) {
+                        sBluetoothAdapter.enable();
+                    } else {
+                        sBluetoothAdapter.disable();
+                    }
                     return null;
                 }
             }.execute();

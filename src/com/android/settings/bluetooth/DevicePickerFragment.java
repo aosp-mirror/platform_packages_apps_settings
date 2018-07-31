@@ -94,7 +94,7 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
         mSelectedDevice = null;
         if (mScanAllowed) {
             enableScanning();
-            mAvailableDevicesCategory.setProgress(mLocalAdapter.isDiscovering());
+            mAvailableDevicesCategory.setProgress(mBluetoothAdapter.isDiscovering());
         }
     }
 

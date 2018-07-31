@@ -28,7 +28,6 @@ import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import java.util.Collection;
@@ -64,7 +63,7 @@ public abstract class DeviceListPreferenceFragment extends
 
     BluetoothDevice mSelectedDevice;
 
-    LocalBluetoothAdapter mLocalAdapter;
+    BluetoothAdapter mBluetoothAdapter;
     LocalBluetoothManager mLocalManager;
 
     @VisibleForTesting
@@ -97,7 +96,7 @@ public abstract class DeviceListPreferenceFragment extends
             Log.e(TAG, "Bluetooth is not supported on this device");
             return;
         }
-        mLocalAdapter = mLocalManager.getBluetoothAdapter();
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         mShowDevicesWithoutNames = SystemProperties.getBoolean(
                 BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY, false);
 
@@ -146,7 +145,7 @@ public abstract class DeviceListPreferenceFragment extends
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         if (KEY_BT_SCAN.equals(preference.getKey())) {
-            mLocalAdapter.startScanning(true);
+            startScanning();
             return true;
         }
 
@@ -172,7 +171,7 @@ public abstract class DeviceListPreferenceFragment extends
         }
 
         // Prevent updates while the list shows one of the state messages
-        if (mLocalAdapter.getBluetoothState() != BluetoothAdapter.STATE_ON) return;
+        if (mBluetoothAdapter.getState() != BluetoothAdapter.STATE_ON) return;
 
         if (mFilter.matches(cachedDevice.getDevice())) {
             createDevicePreference(cachedDevice);
@@ -214,7 +213,7 @@ public abstract class DeviceListPreferenceFragment extends
 
         myDevicePreference.setTitle(getString(
                 R.string.bluetooth_footer_mac_message,
-                bidiFormatter.unicodeWrap(mLocalAdapter.getAddress())));
+                bidiFormatter.unicodeWrap(mBluetoothAdapter.getAddress())));
     }
 
     @Override
@@ -227,21 +226,21 @@ public abstract class DeviceListPreferenceFragment extends
 
     @VisibleForTesting
     void enableScanning() {
-        // LocalBluetoothAdapter already handles repeated scan requests
-        mLocalAdapter.startScanning(true);
+        // BluetoothAdapter already handles repeated scan requests
+        startScanning();
         mScanEnabled = true;
     }
 
     @VisibleForTesting
     void disableScanning() {
-        mLocalAdapter.stopScanning();
+        stopScanning();
         mScanEnabled = false;
     }
 
     @Override
     public void onScanningStateChanged(boolean started) {
         if (!started && mScanEnabled) {
-            mLocalAdapter.startScanning(true);
+            startScanning();
         }
     }
 
@@ -286,5 +285,17 @@ public abstract class DeviceListPreferenceFragment extends
 
     public boolean shouldShowDevicesWithoutNames() {
         return mShowDevicesWithoutNames;
+    }
+
+    void startScanning() {
+        if (!mBluetoothAdapter.isDiscovering()) {
+            mBluetoothAdapter.startDiscovery();
+        }
+    }
+
+    void stopScanning() {
+        if (mBluetoothAdapter.isDiscovering()) {
+            mBluetoothAdapter.cancelDiscovery();
+        }
     }
 }
