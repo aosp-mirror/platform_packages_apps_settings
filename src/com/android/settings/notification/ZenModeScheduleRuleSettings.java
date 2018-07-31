@@ -63,6 +63,7 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
     private TimePickerPreference mStart;
     private TimePickerPreference mEnd;
     private SwitchPreference mExitAtAlarm;
+    private AlertDialog mDayDialog;
 
     private ScheduleInfo mSchedule;
 
@@ -195,7 +196,6 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
         updateEndSummary();
     }
 
-
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
@@ -214,18 +214,27 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
         return MetricsEvent.NOTIFICATION_ZEN_MODE_SCHEDULE_RULE;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mDayDialog != null && mDayDialog.isShowing()) {
+            mDayDialog.dismiss();
+            mDayDialog = null;
+        }
+    }
+
     private void showDaysDialog() {
-        new AlertDialog.Builder(mContext)
+        mDayDialog = new AlertDialog.Builder(mContext)
                 .setTitle(R.string.zen_mode_schedule_rule_days)
                 .setView(new ZenModeScheduleDaysSelection(mContext, mSchedule.days) {
-                      @Override
-                      protected void onChanged(final int[] days) {
-                          if (mDisableListeners) return;
-                          if (Arrays.equals(days, mSchedule.days)) return;
-                          if (DEBUG) Log.d(TAG, "days.onChanged days=" + Arrays.asList(days));
-                          mSchedule.days = days;
-                          updateRule(ZenModeConfig.toScheduleConditionId(mSchedule));
-                      }
+                    @Override
+                    protected void onChanged(final int[] days) {
+                        if (mDisableListeners) return;
+                        if (Arrays.equals(days, mSchedule.days)) return;
+                        if (DEBUG) Log.d(TAG, "days.onChanged days=" + Arrays.asList(days));
+                        mSchedule.days = days;
+                        updateRule(ZenModeConfig.toScheduleConditionId(mSchedule));
+                    }
                 })
                 .setOnDismissListener(new OnDismissListener() {
                     @Override
@@ -249,7 +258,7 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
             super(context);
             mContext = context;
             setPersistent(false);
-            setOnPreferenceClickListener(new OnPreferenceClickListener(){
+            setOnPreferenceClickListener(new OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
                     final TimePickerFragment frag = new TimePickerFragment();
