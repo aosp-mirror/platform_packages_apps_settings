@@ -60,25 +60,6 @@ public class ConnectedBluetoothDeviceUpdater extends BluetoothDeviceUpdater {
     }
 
     @Override
-    public void onProfileConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state,
-            int bluetoothProfile) {
-        if (DBG) {
-            Log.d(TAG, "onProfileConnectionStateChanged() device: " +
-                    cachedDevice.getName() + ", state: " + state + ", bluetoothProfile: "
-                    + bluetoothProfile);
-        }
-        if (state == BluetoothProfile.STATE_CONNECTED) {
-            if (isFilterMatched(cachedDevice)) {
-                addPreference(cachedDevice);
-            } else {
-                removePreference(cachedDevice);
-            }
-        } else if (state == BluetoothProfile.STATE_DISCONNECTED) {
-            removePreference(cachedDevice);
-        }
-    }
-
-    @Override
     public boolean isFilterMatched(CachedBluetoothDevice cachedDevice) {
         final int audioMode = mAudioManager.getMode();
         final int currentAudioProfile;
