@@ -39,20 +39,23 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <com.android.setupwizardlib.view.FillContentLayout
+            <com.android.settings.biometrics.face.FaceSquareFrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1">
 
-                <!-- TODO: replace this with actual content-->
-                <ImageView
-                    style="@style/SuwContentIllustration"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:contentDescription="@null"
-                    android:src="@drawable/face_enroll_introduction" />
+                <com.android.settings.biometrics.face.FaceSquareTextureView
+                    android:id="@+id/texture_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@null" />
 
-            </com.android.setupwizardlib.view.FillContentLayout>
+                <ImageView
+                    android:id="@+id/circle_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </com.android.settings.biometrics.face.FaceSquareFrameLayout>
 
             <TextView
                 style="@style/TextAppearance.FaceErrorText"
