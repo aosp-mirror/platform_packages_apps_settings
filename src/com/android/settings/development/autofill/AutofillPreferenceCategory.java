@@ -19,6 +19,7 @@ import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.AttributeSet;
@@ -30,22 +31,23 @@ import androidx.preference.PreferenceCategory;
 public final class AutofillPreferenceCategory extends PreferenceCategory {
 
     private static final String TAG = "AutofillPreferenceCategory";
+    private static final long DELAYED_MESSAGE_TIME_MS = 2000;
 
     private final ContentResolver mContentResolver;
     private final ContentObserver mSettingsObserver;
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
 
     public AutofillPreferenceCategory(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        mSettingsObserver = new ContentObserver(new Handler()) {
+        mSettingsObserver = new ContentObserver(mHandler) {
             @Override
             public void onChange(boolean selfChange, Uri uri, int userId) {
-                Log.w(TAG, "Autofill Service changed, but UI cannot be refreshed");
-                // TODO(b/111838239): we cannot update the UI because AFM.isEnabled() will return
-                // the previous value. Once that's fixed, we'll need to call one of the 2 callbacks
-                // below:
-                // notifyChanged();
-                // notifyDependencyChange(shouldDisableDependents());
+                // We cannot apply the change yet because AutofillManager.isEnabled() state is
+                // updated by a ContentObserver as well and there's no guarantee of which observer
+                // is called first - hence, it's possible that the state didn't change here yet.
+                mHandler.postDelayed(() -> notifyDependencyChange(shouldDisableDependents()),
+                        DELAYED_MESSAGE_TIME_MS);
             }
         };
         mContentResolver = context.getContentResolver();

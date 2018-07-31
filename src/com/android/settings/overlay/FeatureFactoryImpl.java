@@ -22,12 +22,12 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.UserManager;
 
+import androidx.annotation.Keep;
+
 import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.accounts.AccountFeatureProviderImpl;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProviderImpl;
-import com.android.settings.bluetooth.BluetoothFeatureProvider;
-import com.android.settings.bluetooth.BluetoothFeatureProviderImpl;
 import com.android.settings.connecteddevice.dock.DockUpdaterFeatureProviderImpl;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProviderImpl;
@@ -53,8 +53,6 @@ import com.android.settings.users.UserFeatureProvider;
 import com.android.settings.users.UserFeatureProviderImpl;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
-import androidx.annotation.Keep;
-
 /**
  * {@link FeatureFactory} implementation for AOSP Settings.
  */
@@ -73,7 +71,6 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
     private AssistGestureFeatureProvider mAssistGestureFeatureProvider;
     private UserFeatureProvider mUserFeatureProvider;
-    private BluetoothFeatureProvider mBluetoothFeatureProvider;
     private SlicesFeatureProvider mSlicesFeatureProvider;
     private AccountFeatureProvider mAccountFeatureProvider;
     private DeviceIndexFeatureProviderImpl mDeviceIndexFeatureProvider;
@@ -189,14 +186,6 @@ public class FeatureFactoryImpl extends FeatureFactory {
             mUserFeatureProvider = new UserFeatureProviderImpl(context.getApplicationContext());
         }
         return mUserFeatureProvider;
-    }
-
-    @Override
-    public BluetoothFeatureProvider getBluetoothFeatureProvider(Context context) {
-        if (mBluetoothFeatureProvider == null) {
-            mBluetoothFeatureProvider = new BluetoothFeatureProviderImpl();
-        }
-        return mBluetoothFeatureProvider;
     }
 
     @Override

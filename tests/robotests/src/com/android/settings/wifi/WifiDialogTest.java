@@ -37,7 +37,7 @@ public class WifiDialogTest {
         WifiDialog fullscreen = WifiDialog.createFullscreen(mContext, mListener, mockAccessPoint,
                 WifiConfigUiBase.MODE_CONNECT);
         assertThat(fullscreen.getContext().getThemeResId())
-                .isEqualTo(R.style.Theme_Settings_NoActionBar);
+                .isEqualTo(R.style.Theme_Settings_WifiDialogFullScreen);
     }
 
     @Test

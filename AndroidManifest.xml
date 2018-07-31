@@ -1917,7 +1917,7 @@
         <activity android:name=".bluetooth.BluetoothPairingDialog"
                   android:excludeFromRecents="true"
                   android:windowSoftInputMode="stateVisible|adjustResize"
-                  android:theme="@*android:style/Theme.DeviceDefault.Settings.Dialog.NoActionBar">
+                  android:theme="@style/Theme.AlertDialog">
             <intent-filter android:priority="1">
                 <action android:name="android.bluetooth.device.action.PAIRING_REQUEST" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1964,7 +1964,7 @@
                   android:excludeFromRecents="true"
                   android:exported="true"
                   android:permission="android.permission.DUMP"
-                  android:theme="@*android:style/Theme.DeviceDefault.Settings.Dialog.NoActionBar">
+                  android:theme="@style/Theme.AlertDialog">
             <intent-filter>
                 <action android:name="android.settings.SHOW_REMOTE_BUGREPORT_DIALOG" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2660,7 +2660,7 @@
         </activity>
 
         <activity android:name=".sim.SimPreferenceDialog"
-            android:theme="@*android:style/Theme.DeviceDefault.Settings.Dialog.NoActionBar"
+            android:theme="@style/Theme.AlertDialog"
             android:excludeFromRecents="true" />
 
         <activity
@@ -2690,7 +2690,7 @@
         </activity>
 
         <activity android:name=".sim.SimDialogActivity"
-                android:theme="@*android:style/Theme.DeviceDefault.Settings.Dialog.NoActionBar"
+                android:theme="@style/Theme.AlertDialog"
                 android:label="@string/sim_settings_title"
                 android:excludeFromRecents="true">
             <intent-filter>
