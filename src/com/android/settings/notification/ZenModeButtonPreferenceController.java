@@ -97,14 +97,14 @@ public class ZenModeButtonPreferenceController extends AbstractZenModePreference
     private void updateZenButtonOnClickListener() {
         int zenDuration = getZenDuration();
         switch (zenDuration) {
-            case Settings.Global.ZEN_DURATION_PROMPT:
+            case Settings.Secure.ZEN_DURATION_PROMPT:
                 mZenButtonOn.setOnClickListener(v -> {
                     mMetricsFeatureProvider.action(mContext,
                             MetricsProto.MetricsEvent.ACTION_ZEN_TOGGLE_DND_BUTTON, false);
                     new SettingsEnableZenModeDialog().show(mFragment, TAG);
                 });
                 break;
-            case Settings.Global.ZEN_DURATION_FOREVER:
+            case Settings.Secure.ZEN_DURATION_FOREVER:
                 mZenButtonOn.setOnClickListener(v -> {
                     mMetricsFeatureProvider.action(mContext,
                             MetricsProto.MetricsEvent.ACTION_ZEN_TOGGLE_DND_BUTTON, false);

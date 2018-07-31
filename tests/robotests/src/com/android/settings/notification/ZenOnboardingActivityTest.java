@@ -177,16 +177,16 @@ public class ZenOnboardingActivityTest {
         setShowSettingsSuggestion(true);
         setWithinTimeThreshold(true);
         assertThat(isSuggestionComplete(mContext)).isTrue();
-        assertThat(Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.ZEN_SETTINGS_UPDATED, -1)).isEqualTo(1);
+        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.ZEN_SETTINGS_UPDATED, -1)).isEqualTo(1);
     }
 
 
     private void setZenUpdated(boolean updated) {
         int zenUpdated = updated ? 1 : 0;
 
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.ZEN_SETTINGS_UPDATED, zenUpdated);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ZEN_SETTINGS_UPDATED, zenUpdated);
     }
 
     private void setWithinTimeThreshold(boolean withinTime) {
@@ -208,8 +208,8 @@ public class ZenOnboardingActivityTest {
             showZenSuggestion = 1;
         }
 
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.SHOW_ZEN_SETTINGS_SUGGESTION, showZenSuggestion);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.SHOW_ZEN_SETTINGS_SUGGESTION, showZenSuggestion);
     }
 
     private SharedPreferences getSharedPreferences() {
