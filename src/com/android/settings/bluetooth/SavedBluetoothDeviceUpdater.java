@@ -49,16 +49,6 @@ public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
     }
 
     @Override
-    public void onProfileConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state,
-            int bluetoothProfile) {
-        if (state == BluetoothProfile.STATE_CONNECTED) {
-            removePreference(cachedDevice);
-        } else if (state == BluetoothProfile.STATE_DISCONNECTED) {
-            addPreference(cachedDevice);
-        }
-    }
-
-    @Override
     public boolean isFilterMatched(CachedBluetoothDevice cachedDevice) {
         final BluetoothDevice device = cachedDevice.getDevice();
         if (DBG) {
