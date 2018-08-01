@@ -290,8 +290,10 @@ public class SettingsActivity extends SettingsBaseActivity
             launchSettingFragment(initialFragmentName, isSubSettings, intent);
         }
 
+        final boolean deviceProvisioned = Utils.isDeviceProvisioned(this);
         if (mIsShowingDashboard) {
-            findViewById(R.id.search_bar).setVisibility(View.VISIBLE);
+            findViewById(R.id.search_bar).setVisibility(
+                    deviceProvisioned ? View.VISIBLE : View.INVISIBLE);
             findViewById(R.id.action_bar).setVisibility(View.GONE);
             final Toolbar toolbar = findViewById(R.id.search_action_bar);
             FeatureFactory.getFactory(this).getSearchFeatureProvider()
@@ -310,7 +312,6 @@ public class SettingsActivity extends SettingsBaseActivity
 
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
-            boolean deviceProvisioned = Utils.isDeviceProvisioned(this);
             actionBar.setDisplayHomeAsUpEnabled(deviceProvisioned);
             actionBar.setHomeButtonEnabled(deviceProvisioned);
             actionBar.setDisplayShowTitleEnabled(!mIsShowingDashboard);
