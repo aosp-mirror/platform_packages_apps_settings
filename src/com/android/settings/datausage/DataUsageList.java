@@ -48,6 +48,7 @@ import android.util.SparseArray;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -293,6 +294,7 @@ public class DataUsageList extends DataUsageBase {
         if (isNetworkPolicyModifiable(policy, mSubId) && isMobileDataAvailable(mSubId)) {
             mChart.setNetworkPolicy(policy);
             configureButton.setVisibility(View.VISIBLE);
+            ((ImageView) configureButton).setColorFilter(android.R.color.white);
         } else {
             // controls are disabled; don't bind warning/limit sweeps
             mChart.setNetworkPolicy(null);
