@@ -22,10 +22,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.service.settings.suggestions.Suggestion;
 import android.util.Log;
-import android.util.Pair;
+
+import androidx.annotation.NonNull;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.Settings.NightDisplaySuggestionActivity;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollSuggestionActivity;
 import com.android.settings.biometrics.fingerprint.FingerprintSuggestionActivity;
@@ -41,8 +41,6 @@ import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.suggestions.SuggestionControllerMixinCompat;
 
 import java.util.List;
-
-import androidx.annotation.NonNull;
 
 public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider {
 
@@ -65,11 +63,6 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
         return new ComponentName(
                 "com.android.settings.intelligence",
                 "com.android.settings.intelligence.suggestions.SuggestionService");
-    }
-
-    @Override
-    public boolean isSmartSuggestionEnabled(Context context) {
-        return false;
     }
 
     @Override
@@ -125,13 +118,5 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
                 context, MetricsProto.MetricsEvent.ACTION_SETTINGS_DISMISS_SUGGESTION,
                 suggestion.getId());
         mixin.dismissSuggestion(suggestion);
-    }
-
-    @Override
-    public Pair<Integer, Object>[] getLoggingTaggedData(Context context) {
-        final boolean isSmartSuggestionEnabled = isSmartSuggestionEnabled(context);
-        return new Pair[] {Pair.create(
-                MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED,
-                isSmartSuggestionEnabled ? 1 : 0)};
     }
 }
