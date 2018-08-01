@@ -16,6 +16,7 @@ package com.android.settings.applications.autofill;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.view.autofill.AutofillManager;
 
 import com.android.settings.applications.defaultapps.DefaultAutofillPicker;
@@ -36,7 +37,8 @@ public class AutofillPickerTrampolineActivity extends Activity {
         // First check if the current user's service already belongs to the app...
         final Intent intent = getIntent();
         final String packageName = intent.getData().getSchemeSpecificPart();
-        final String currentService = DefaultAutofillPicker.getDefaultKey(this);
+        final String currentService = DefaultAutofillPicker.getDefaultKey(
+                this, UserHandle.myUserId());
         if (currentService != null && currentService.startsWith(packageName)) {
             // ...and succeed right away if it does.
             setResult(RESULT_OK);
