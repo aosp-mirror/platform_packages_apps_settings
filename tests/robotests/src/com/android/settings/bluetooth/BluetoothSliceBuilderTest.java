@@ -22,6 +22,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -29,10 +30,7 @@ import android.content.res.Resources;
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.SliceTester;
-import com.android.settings.testutils.shadow.ShadowLocalBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowLocalBluetoothProfileManager;
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -52,7 +50,7 @@ import androidx.slice.core.SliceAction;
 import androidx.slice.widget.SliceLiveData;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {ShadowLocalBluetoothAdapter.class, ShadowLocalBluetoothProfileManager.class})
+@Config(shadows = {ShadowLocalBluetoothProfileManager.class})
 public class BluetoothSliceBuilderTest {
 
     private Context mContext;
@@ -90,11 +88,10 @@ public class BluetoothSliceBuilderTest {
 
     @Test
     public void handleUriChange_updatesBluetooth() {
-        final LocalBluetoothAdapter adapter = LocalBluetoothManager.getInstance(mContext,
-                null /* callback */).getBluetoothAdapter();
+        final BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
         final Intent intent = new Intent();
         intent.putExtra(android.app.slice.Slice.EXTRA_TOGGLE_STATE, true);
-        adapter.setBluetoothEnabled(false /* enabled */);
+        adapter.disable()/* enabled */;
 
         BluetoothSliceBuilder.handleUriChange(mContext, intent);
 

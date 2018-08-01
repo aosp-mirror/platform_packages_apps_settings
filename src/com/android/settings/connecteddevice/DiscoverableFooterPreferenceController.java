@@ -30,7 +30,6 @@ import com.android.settings.bluetooth.AlwaysDiscoverable;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
@@ -54,7 +53,7 @@ public class DiscoverableFooterPreferenceController extends BasePreferenceContro
     LocalBluetoothManager mLocalManager;
     private FooterPreferenceMixinCompat mFooterPreferenceMixin;
     private FooterPreference mPreference;
-    private LocalBluetoothAdapter mLocalAdapter;
+    private BluetoothAdapter mBluetoothAdapter;
     private AlwaysDiscoverable mAlwaysDiscoverable;
 
     public DiscoverableFooterPreferenceController(Context context) {
@@ -63,8 +62,8 @@ public class DiscoverableFooterPreferenceController extends BasePreferenceContro
         if (mLocalManager == null) {
             return;
         }
-        mLocalAdapter = mLocalManager.getBluetoothAdapter();
-        mAlwaysDiscoverable = new AlwaysDiscoverable(context, mLocalAdapter);
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        mAlwaysDiscoverable = new AlwaysDiscoverable(context);
         initReceiver();
     }
 
@@ -121,7 +120,7 @@ public class DiscoverableFooterPreferenceController extends BasePreferenceContro
         mContext.registerReceiver(mBluetoothChangedReceiver,
                 new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
         mAlwaysDiscoverable.start();
-        updateFooterPreferenceTitle(mLocalAdapter.getState());
+        updateFooterPreferenceTitle(mBluetoothAdapter.getState());
     }
 
     @Override
@@ -142,7 +141,7 @@ public class DiscoverableFooterPreferenceController extends BasePreferenceContro
     }
 
     private CharSequence getPreferenceTitle() {
-        final String deviceName = mLocalAdapter.getName();
+        final String deviceName = mBluetoothAdapter.getName();
         if (TextUtils.isEmpty(deviceName)) {
             return null;
         }

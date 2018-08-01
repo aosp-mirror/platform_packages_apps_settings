@@ -16,13 +16,13 @@
 
 package com.android.settings.bluetooth;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 /**
@@ -89,7 +89,7 @@ final class LocalBluetoothPreferences {
         }
 
         // If the device was discoverING recently
-        LocalBluetoothAdapter adapter = manager.getBluetoothAdapter();
+        BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
         if (adapter != null) {
             if (adapter.isDiscovering()) {
                 return true;

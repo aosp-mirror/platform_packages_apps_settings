@@ -25,7 +25,6 @@ import com.android.settings.R;
 import com.android.settings.widget.SummaryUpdater;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import java.util.Set;
@@ -39,15 +38,14 @@ import androidx.annotation.VisibleForTesting;
 public final class BluetoothSummaryUpdater extends SummaryUpdater implements BluetoothCallback {
     private static final String TAG = "BluetoothSummaryUpdater";
 
+    private final BluetoothAdapter mBluetoothAdapter;
     private final LocalBluetoothManager mBluetoothManager;
-    private final LocalBluetoothAdapter mBluetoothAdapter;
 
     public BluetoothSummaryUpdater(Context context, OnSummaryChangeListener listener,
             LocalBluetoothManager bluetoothManager) {
         super(context, listener);
         mBluetoothManager = bluetoothManager;
-        mBluetoothAdapter = mBluetoothManager != null
-                ? mBluetoothManager.getBluetoothAdapter() : null;
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     }
 
     @Override

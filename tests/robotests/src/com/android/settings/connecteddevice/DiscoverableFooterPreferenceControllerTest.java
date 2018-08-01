@@ -35,7 +35,6 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothPan;
-import com.android.settings.testutils.shadow.ShadowLocalBluetoothAdapter;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
@@ -47,6 +46,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
@@ -55,8 +55,7 @@ import java.util.List;
 import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {ShadowBluetoothPan.class, ShadowBluetoothAdapter.class,
-        ShadowLocalBluetoothAdapter.class})
+@Config(shadows = {ShadowBluetoothPan.class, ShadowBluetoothAdapter.class})
 public class DiscoverableFooterPreferenceControllerTest {
     private static final String DEVICE_NAME = "device name";
     private static final String KEY = "discoverable_footer_preference";
@@ -75,6 +74,7 @@ public class DiscoverableFooterPreferenceControllerTest {
     private DiscoverableFooterPreferenceController mDiscoverableFooterPreferenceController;
     private BroadcastReceiver mBluetoothChangedReceiver;
     private ShadowApplication mShadowApplication;
+    private ShadowBluetoothAdapter mShadowBluetoothAdapter;
 
     @Before
     public void setUp() {
@@ -90,6 +90,7 @@ public class DiscoverableFooterPreferenceControllerTest {
                 mAlwaysDiscoverable);
         mBluetoothChangedReceiver = mDiscoverableFooterPreferenceController
                 .mBluetoothChangedReceiver;
+        mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
     }
 
     @Test
@@ -135,7 +136,7 @@ public class DiscoverableFooterPreferenceControllerTest {
 
     @Test
     public void onBluetoothStateChanged_bluetoothOn_updateTitle() {
-        ShadowLocalBluetoothAdapter.setName(DEVICE_NAME);
+        mShadowBluetoothAdapter.setName(DEVICE_NAME);
         sendBluetoothStateChangedIntent(BluetoothAdapter.STATE_ON);
 
         assertThat(mPreference.getTitle()).isEqualTo(generateTitle(DEVICE_NAME));
@@ -143,7 +144,7 @@ public class DiscoverableFooterPreferenceControllerTest {
 
     @Test
     public void onBluetoothStateChanged_bluetoothOff_updateTitle(){
-        ShadowLocalBluetoothAdapter.setName(DEVICE_NAME);
+        mShadowBluetoothAdapter.setName(DEVICE_NAME);
         sendBluetoothStateChangedIntent(BluetoothAdapter.STATE_OFF);
 
         assertThat(mPreference.getTitle()).isEqualTo(generateTitle(null));

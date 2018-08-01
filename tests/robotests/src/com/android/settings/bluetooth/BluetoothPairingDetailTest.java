@@ -33,8 +33,8 @@ import android.content.res.Resources;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.widget.FooterPreference;
 
@@ -45,16 +45,17 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
 
 import androidx.preference.PreferenceGroup;
 
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(shadows = {ShadowBluetoothAdapter.class})
 public class BluetoothPairingDetailTest {
 
     @Mock
     private Resources mResource;
-    @Mock
-    private LocalBluetoothAdapter mLocalAdapter;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private LocalBluetoothManager mLocalManager;
     @Mock
@@ -63,6 +64,8 @@ public class BluetoothPairingDetailTest {
     private Context mContext;
     private BluetoothProgressCategory mAvailableDevicesCategory;
     private FooterPreference mFooterPreference;
+    private BluetoothAdapter mBluetoothAdapter;
+    private ShadowBluetoothAdapter mShadowBluetoothAdapter;
 
     @Before
     public void setUp() {
@@ -75,11 +78,13 @@ public class BluetoothPairingDetailTest {
 
         mAvailableDevicesCategory = spy(new BluetoothProgressCategory(mContext));
         mFooterPreference = new FooterPreference(mContext);
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
 
-        mFragment.mLocalAdapter = mLocalAdapter;
+        mFragment.mBluetoothAdapter = mBluetoothAdapter;
         mFragment.mLocalManager = mLocalManager;
         mFragment.mDeviceListGroup = mPreferenceGroup;
-        mFragment.mAlwaysDiscoverable = new AlwaysDiscoverable(mContext, mLocalAdapter);
+        mFragment.mAlwaysDiscoverable = new AlwaysDiscoverable(mContext);
     }
 
     @Test
@@ -102,7 +107,7 @@ public class BluetoothPairingDetailTest {
 
         mFragment.enableScanning();
 
-        verify(mLocalAdapter).startScanning(true);
+        verify(mFragment).startScanning();
         verify(mAvailableDevicesCategory).removeAll();
     }
 
@@ -117,7 +122,8 @@ public class BluetoothPairingDetailTest {
         verify(mFragment).addDeviceCategory(mAvailableDevicesCategory,
                 R.string.bluetooth_preference_found_media_devices,
                 BluetoothDeviceFilter.UNBONDED_DEVICE_FILTER, false);
-        verify(mLocalAdapter).setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE);
+        assertThat(mBluetoothAdapter.getScanMode())
+                .isEqualTo(BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE);
     }
 
     @Test
@@ -129,16 +135,16 @@ public class BluetoothPairingDetailTest {
 
     @Test
     public void testUpdateBluetooth_bluetoothOff_turnOnBluetooth() {
-        doReturn(false).when(mLocalAdapter).isEnabled();
+        mShadowBluetoothAdapter.setEnabled(false);
 
         mFragment.updateBluetooth();
 
-        verify(mLocalAdapter).enable();
+        assertThat(mBluetoothAdapter.isEnabled()).isTrue();
     }
 
     @Test
     public void testUpdateBluetooth_bluetoothOn_updateState() {
-        doReturn(true).when(mLocalAdapter).isEnabled();
+        mShadowBluetoothAdapter.setEnabled(true);
         doNothing().when(mFragment).updateContent(anyInt());
 
         mFragment.updateBluetooth();
@@ -157,27 +163,27 @@ public class BluetoothPairingDetailTest {
         mFragment.updateContent(BluetoothAdapter.STATE_ON);
         verify(mFragment).enableScanning();
         assertThat(mAvailableDevicesCategory.getPreferenceCount()).isEqualTo(0);
-        verify(mLocalAdapter).startScanning(true);
+        verify(mFragment).startScanning();
 
         // Subsequent scan started event will not trigger start/stop nor list clear
         mFragment.onScanningStateChanged(true);
-        verify(mLocalAdapter, times(1)).startScanning(anyBoolean());
+        verify(mFragment, times(1)).startScanning();
         verify(mAvailableDevicesCategory, times(1)).setProgress(true);
 
         // Subsequent scan finished event will trigger scan start without list clean
         mFragment.onScanningStateChanged(false);
-        verify(mLocalAdapter, times(2)).startScanning(true);
+        verify(mFragment, times(2)).startScanning();
         verify(mAvailableDevicesCategory, times(2)).setProgress(true);
 
         // Subsequent scan started event will not trigger any change
         mFragment.onScanningStateChanged(true);
-        verify(mLocalAdapter, times(2)).startScanning(anyBoolean());
+        verify(mFragment, times(2)).startScanning();
         verify(mAvailableDevicesCategory, times(3)).setProgress(true);
-        verify(mLocalAdapter, never()).stopScanning();
+        verify(mFragment, never()).stopScanning();
 
         // Disable scanning will trigger scan stop
         mFragment.disableScanning();
-        verify(mLocalAdapter, times(1)).stopScanning();
+        verify(mFragment, times(1)).stopScanning();
 
         // Subsequent scan start event will not trigger any change besides progress circle
         mFragment.onScanningStateChanged(true);
@@ -187,8 +193,8 @@ public class BluetoothPairingDetailTest {
         // progress circle from spinning
         mFragment.onScanningStateChanged(false);
         verify(mAvailableDevicesCategory, times(1)).setProgress(false);
-        verify(mLocalAdapter, times(2)).startScanning(anyBoolean());
-        verify(mLocalAdapter, times(1)).stopScanning();
+        verify(mFragment, times(2)).startScanning();
+        verify(mFragment, times(1)).stopScanning();
 
         // Verify that clean up only happen once at initialization
         verify(mAvailableDevicesCategory, times(1)).removeAll();

@@ -136,8 +136,8 @@ public class ZenModeBackend {
     }
 
     protected void saveVisualEffectsPolicy(int category, boolean suppress) {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.ZEN_SETTINGS_UPDATED, 1);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ZEN_SETTINGS_UPDATED, 1);
 
         int suppressedEffects = getNewSuppressedEffects(suppress, category);
         savePolicy(mPolicy.priorityCategories, mPolicy.priorityCallSenders,

@@ -110,6 +110,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             "select_long_press_timeout_preference";
     private static final String ACCESSIBILITY_SHORTCUT_PREFERENCE =
             "accessibility_shortcut_preference";
+    private static final String HEARING_AID_PREFERENCE =
+            "hearing_aid_preference";
     private static final String CAPTIONING_PREFERENCE_SCREEN =
             "captioning_preference_screen";
     private static final String DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN =
@@ -221,9 +223,11 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private Preference mAutoclickPreferenceScreen;
     private Preference mAccessibilityShortcutPreferenceScreen;
     private Preference mDisplayDaltonizerPreferenceScreen;
+    private Preference mHearingAidPreference;
     private Preference mVibrationPreferenceScreen;
     private SwitchPreference mToggleInversionPreference;
     private ColorInversionPreferenceController mInversionPreferenceController;
+    private AccessibilityHearingAidPreferenceController mHearingAidPreferenceController;
 
     private int mLongPressTimeoutDefault;
 
@@ -273,6 +277,15 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         initializeAllPreferences();
         mDpm = (DevicePolicyManager) (getActivity()
                 .getSystemService(Context.DEVICE_POLICY_SERVICE));
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mHearingAidPreferenceController = new AccessibilityHearingAidPreferenceController
+                (context, HEARING_AID_PREFERENCE);
+        mHearingAidPreferenceController.setFragmentManager(getFragmentManager());
+        getLifecycle().addObserver(mHearingAidPreferenceController);
     }
 
     @Override
@@ -334,6 +347,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             return true;
         } else if (mToggleMasterMonoPreference == preference) {
             handleToggleMasterMonoPreferenceClick();
+            return true;
+        } else if (mHearingAidPreferenceController.handlePreferenceTreeClick(preference)) {
             return true;
         }
         return super.onPreferenceTreeClick(preference);
@@ -451,6 +466,10 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 mLongPressTimeoutValueToTitleMap.put(timeoutValues[i], timeoutTitles[i]);
             }
         }
+
+        // Hearing Aid.
+        mHearingAidPreference = findPreference(HEARING_AID_PREFERENCE);
+        mHearingAidPreferenceController.displayPreference(getPreferenceScreen());
 
         // Captioning.
         mCaptioningPreferenceScreen = findPreference(CAPTIONING_PREFERENCE_SCREEN);
@@ -685,6 +704,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         mSelectLongPressTimeoutPreference.setSummary(mLongPressTimeoutValueToTitleMap.get(value));
 
         updateVibrationSummary(mVibrationPreferenceScreen);
+
+        mHearingAidPreferenceController.updateState(mHearingAidPreference);
 
         updateFeatureSummary(Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED,
                 mCaptioningPreferenceScreen);

@@ -16,12 +16,12 @@
 
 package com.android.settings.bluetooth;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.text.TextUtils;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import androidx.annotation.VisibleForTesting;
@@ -42,13 +42,6 @@ public class BluetoothDeviceRenamePreferenceController extends
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
-    @VisibleForTesting
-    BluetoothDeviceRenamePreferenceController(Context context, LocalBluetoothAdapter localAdapter,
-            String preferenceKey) {
-        super(context, localAdapter, preferenceKey);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
-    }
-
     /**
      * Set the {@link Fragment} that used to show {@link LocalDeviceNameDialogFragment}
      * in {@code handlePreferenceTreeClick}
@@ -61,7 +54,7 @@ public class BluetoothDeviceRenamePreferenceController extends
     @Override
     protected void updatePreferenceState(final Preference preference) {
         preference.setSummary(getSummary());
-        preference.setVisible(mLocalAdapter != null && mLocalAdapter.isEnabled());
+        preference.setVisible(mBluetoothAdapter != null && mBluetoothAdapter.isEnabled());
     }
 
     @Override
