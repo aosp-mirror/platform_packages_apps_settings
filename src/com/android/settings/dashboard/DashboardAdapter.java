@@ -31,6 +31,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.R.id;
@@ -50,11 +55,6 @@ import com.android.settingslib.suggestions.SuggestionControllerMixinCompat;
 import com.android.settingslib.utils.IconCache;
 
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.DashboardItemHolder>
         implements SummaryLoader.SummaryConsumer, SuggestionAdapter.Callback, LifecycleObserver,
