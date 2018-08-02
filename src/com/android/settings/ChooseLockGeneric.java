@@ -51,6 +51,7 @@ import android.widget.TextView;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.Utils;
 import com.android.settings.fingerprint.FingerprintEnrollBase;
 import com.android.settings.fingerprint.FingerprintEnrollFindSensor;
 import com.android.settingslib.RestrictedLockUtils;
@@ -140,6 +141,11 @@ public class ChooseLockGeneric extends SettingsActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+            final Activity activity = getActivity();
+            if (!Utils.isDeviceProvisioned(activity) && !canRunBeforeDeviceProvisioned()) {
+                activity.finish();
+                return;
+            }
 
             String chooseLockAction = getActivity().getIntent().getAction();
             mFingerprintManager =
@@ -215,6 +221,10 @@ public class ChooseLockGeneric extends SettingsActivity {
                 }
             }
             addHeaderView();
+        }
+
+        protected boolean canRunBeforeDeviceProvisioned() {
+            return false;
         }
 
         protected void addHeaderView() {
