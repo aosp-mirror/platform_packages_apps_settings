@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 
 import android.os.Bundle;
+import android.provider.Settings.Global;
 import android.view.Menu;
 import com.android.settings.testutils.FakeFeatureFactory;
 import org.junit.Before;
@@ -80,9 +81,37 @@ public class SettingsActivityTest {
         when(mActivity.getFragmentManager()).thenReturn(mFragmentManager);
         when(mFragmentManager.beginTransaction()).thenReturn(mock(FragmentTransaction.class));
 
-        doReturn(RuntimeEnvironment.application.getClassLoader()).when(mActivity).getClassLoader();
+        final Context context = RuntimeEnvironment.application;
+        doReturn(context.getClassLoader()).when(mActivity).getClassLoader();
+        doReturn(context.getContentResolver()).when(mActivity).getContentResolver();
 
         mActivity.launchSettingFragment(null, true, mock(Intent.class));
+    }
+
+    @Test
+    public void launchSettingFragment_deviceNotProvisioned_shouldNotShowSearch() {
+        final Context context = RuntimeEnvironment.application;
+        Global.putInt(context.getContentResolver(), Global.DEVICE_PROVISIONED, 0);
+        when(mActivity.getFragmentManager()).thenReturn(mFragmentManager);
+        when(mFragmentManager.beginTransaction()).thenReturn(mock(FragmentTransaction.class));
+        doReturn(context.getClassLoader()).when(mActivity).getClassLoader();
+        doReturn(context.getContentResolver()).when(mActivity).getContentResolver();
+
+        mActivity.launchSettingFragment(null, true, mock(Intent.class));
+
+        assertThat(mActivity.mDisplaySearch).isFalse();
+    }
+
+    @Test
+    public void setDisplaySearchMenu_deviceNotProvisioned_shouldNotUpdate() {
+        final Context context = RuntimeEnvironment.application;
+        Global.putInt(context.getContentResolver(), Global.DEVICE_PROVISIONED, 0);
+        doReturn(context.getContentResolver()).when(mActivity).getContentResolver();
+        mActivity.mDisplaySearch = false;
+
+        mActivity.setDisplaySearchMenu(true);
+
+        assertThat(mActivity.mDisplaySearch).isFalse();
     }
 
     @Test
