@@ -16,6 +16,8 @@
 
 package com.android.settings.biometrics;
 
+import static android.app.Activity.RESULT_FIRST_USER;
+
 import android.annotation.Nullable;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -39,10 +41,32 @@ import com.android.setupwizardlib.GlifLayout;
  */
 public abstract class BiometricEnrollBase extends InstrumentedActivity
         implements View.OnClickListener {
-    public static final int RESULT_FINISHED = BiometricSettings.RESULT_FINISHED;
-    public static final int RESULT_SKIP = BiometricSettings.RESULT_SKIP;
-    public static final int RESULT_TIMEOUT = BiometricSettings.RESULT_TIMEOUT;
     public static final String EXTRA_KEY_LAUNCHED_CONFIRM = "launched_confirm_lock";
+
+
+    /**
+     * Used by the choose fingerprint wizard to indicate the wizard is
+     * finished, and each activity in the wizard should finish.
+     * <p>
+     * Previously, each activity in the wizard would finish itself after
+     * starting the next activity. However, this leads to broken 'Back'
+     * behavior. So, now an activity does not finish itself until it gets this
+     * result.
+     */
+    public static final int RESULT_FINISHED = RESULT_FIRST_USER;
+
+    /**
+     * Used by the enrolling screen during setup wizard to skip over setting up fingerprint, which
+     * will be useful if the user accidentally entered this flow.
+     */
+    public static final int RESULT_SKIP = RESULT_FIRST_USER + 1;
+
+    /**
+     * Like {@link #RESULT_FINISHED} except this one indicates enrollment failed because the
+     * device was left idle. This is used to clear the credential token to require the user to
+     * re-enter their pin/pattern/password before continuing.
+     */
+    public static final int RESULT_TIMEOUT = RESULT_FIRST_USER + 2;
 
     public static final int CONFIRM_REQUEST = 1;
     public static final int ENROLLING = 2;
