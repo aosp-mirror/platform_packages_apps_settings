@@ -626,7 +626,7 @@ public class SettingsActivity extends SettingsDrawerActivity
                 // No UP affordance if we are displaying the main Dashboard
                 mDisplayHomeAsUpEnabled = false;
                 // Show Search affordance
-                mDisplaySearch = true;
+                mDisplaySearch = Utils.isDeviceProvisioned(this);
                 mInitialTitleResId = R.string.dashboard_title;
 
                 // add argument to indicate which settings tab should be initially selected
@@ -708,7 +708,7 @@ public class SettingsActivity extends SettingsDrawerActivity
     }
 
     public void setDisplaySearchMenu(boolean displaySearch) {
-        if (displaySearch != mDisplaySearch) {
+        if (Utils.isDeviceProvisioned(this) && displaySearch != mDisplaySearch) {
             mDisplaySearch = displaySearch;
             invalidateOptionsMenu();
         }
