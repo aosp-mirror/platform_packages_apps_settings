@@ -53,6 +53,8 @@ public class AndroidBeam extends InstrumentedFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mNfcAdapter = NfcAdapter.getDefaultAdapter(getActivity());
+        if (mNfcAdapter == null)
+            getActivity().finish();
         setHasOptionsMenu(true);
     }
 
@@ -90,7 +92,6 @@ public class AndroidBeam extends InstrumentedFragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         SettingsActivity activity = (SettingsActivity) getActivity();
 
         mOldActivityTitle = activity.getActionBar().getTitle();

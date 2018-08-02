@@ -25,8 +25,11 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
-
+import android.os.Bundle;
+import android.provider.Settings.Global;
+import android.view.View;
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -35,6 +38,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
@@ -52,12 +56,35 @@ public class SettingsActivityTest {
     @Mock
     private ActivityManager.TaskDescription mTaskDescription;
     private SettingsActivity mActivity;
+    private Context mContext;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
+        mContext = RuntimeEnvironment.application;
         mActivity = spy(new SettingsActivity());
+    }
+
+    @Test
+    public void onCreate_deviceNotProvisioned_shouldDisableSearch() {
+        Global.putInt(mContext.getContentResolver(), Global.DEVICE_PROVISIONED, 0);
+        final Intent intent = new Intent(mContext, Settings.class);
+        final SettingsActivity activity =
+            Robolectric.buildActivity(SettingsActivity.class, intent).create(Bundle.EMPTY).get();
+
+        assertThat(activity.findViewById(R.id.search_bar).getVisibility())
+            .isEqualTo(View.INVISIBLE);
+    }
+
+    @Test
+    public void onCreate_deviceProvisioned_shouldEnableSearch() {
+        Global.putInt(mContext.getContentResolver(), Global.DEVICE_PROVISIONED, 1);
+        final Intent intent = new Intent(mContext, Settings.class);
+        final SettingsActivity activity =
+            Robolectric.buildActivity(SettingsActivity.class, intent).create(Bundle.EMPTY).get();
+
+        assertThat(activity.findViewById(R.id.search_bar).getVisibility()).isEqualTo(View.VISIBLE);
     }
 
     @Test

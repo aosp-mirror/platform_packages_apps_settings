@@ -18,10 +18,8 @@ package com.android.settings.dashboard.suggestions;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
@@ -32,10 +30,8 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.service.settings.suggestions.Suggestion;
-import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
@@ -159,20 +155,5 @@ public class SuggestionFeatureProviderImplTest {
         mProvider.filterExclusiveSuggestions(suggestions);
 
         assertThat(suggestions).hasSize(3);
-    }
-
-    @Test
-    public void testGetSmartSuggestionEnabledTaggedData_disabled() {
-        assertThat(mProvider.getLoggingTaggedData(mContext)).asList().containsExactly(
-                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0));
-    }
-
-    @Test
-    public void testGetSmartSuggestionEnabledTaggedData_enabled() {
-        final SuggestionFeatureProvider provider = spy(mProvider);
-        when(provider.isSmartSuggestionEnabled(any(Context.class))).thenReturn(true);
-
-        assertThat(provider.getLoggingTaggedData(mContext)).asList().containsExactly(
-                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 1));
     }
 }

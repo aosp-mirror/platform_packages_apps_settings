@@ -18,18 +18,53 @@ package com.android.settings.password;
 
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.provider.Settings.Global;
 
 import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 
+import androidx.fragment.app.FragmentActivity;
+
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ChooseLockGenericTest {
+
+    @After
+    public void tearDown() {
+        Global.putInt(RuntimeEnvironment.application.getContentResolver(),
+            Global.DEVICE_PROVISIONED, 1);
+    }
+
+    @Test
+    @Config(shadows = SettingsShadowResources.SettingsShadowTheme.class)
+    public void onCreate_deviceNotProvisioned_shouldFinishActivity() {
+        final Context context = RuntimeEnvironment.application;
+        Global.putInt(context.getContentResolver(), Global.DEVICE_PROVISIONED, 0);
+        final FragmentActivity activity = mock(FragmentActivity.class);
+        when(activity.getContentResolver()).thenReturn(context.getContentResolver());
+        when(activity.getTheme()).thenReturn(context.getTheme());
+
+        final ChooseLockGenericFragment fragment = spy(new ChooseLockGenericFragment());
+        when(fragment.getActivity()).thenReturn(activity);
+        when(fragment.getArguments()).thenReturn(Bundle.EMPTY);
+
+        fragment.onCreate(Bundle.EMPTY);
+        verify(activity).finish();
+    }
 
     @Test
     public void onActivityResult_nullIntentData_shouldNotCrash() {
