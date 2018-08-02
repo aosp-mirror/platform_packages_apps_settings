@@ -84,9 +84,9 @@ public class SettingsRobolectricTestRunner extends RobolectricTestRunner {
             paths.add(new ResourcePath(null,
                 Fs.fromURL(new URL("file:frameworks/opt/setupwizard/library/recyclerview/res")), null));
             paths.add(new ResourcePath(null,
-                Fs.fromURL(new URL("file:frameworks/support/appcompat/res")), null));
+                Fs.fromURL(new URL("file:out/soong/.intermediates/prebuilts/sdk/current/androidx/androidx.appcompat_appcompat-nodeps/android_common/aar/res/")), null));
             paths.add(new ResourcePath(null,
-                Fs.fromURL(new URL("file:frameworks/support/cardview/res")), null));
+                Fs.fromURL(new URL("file:out/soong/.intermediates/prebuilts/sdk/current/androidx/androidx.cardview_cardview-nodeps/android_common/aar/res")), null));
         } catch (MalformedURLException e) {
             throw new RuntimeException("SettingsRobolectricTestRunner failure", e);
         }
