@@ -321,8 +321,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 && !(icon instanceof RoundedHomepageIcon)) {
             icon = new RoundedHomepageIcon(mContext, icon);
             try {
-                if (tile.metaData != null) {
-                    final int colorRes = tile.metaData.getInt(
+                final Bundle metaData = tile.getMetaData();
+                if (metaData != null) {
+                    final int colorRes = metaData.getInt(
                             TileUtils.META_DATA_PREFERENCE_ICON_BACKGROUND_HINT, 0 /* default */);
                     if (colorRes != 0) {
                         final int bgColor = mContext.getPackageManager()

@@ -36,6 +36,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
+import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.suggestions.SuggestionControllerMixinCompat;
 
@@ -144,13 +145,13 @@ public class SuggestionFeatureProviderImplTest {
     @Test
     public void filterExclusiveSuggestions_shouldOnlyKeepFirst3() {
         final List<Tile> suggestions = new ArrayList<>();
-        suggestions.add(new Tile(mActivityInfo));
-        suggestions.add(new Tile(mActivityInfo));
-        suggestions.add(new Tile(mActivityInfo));
-        suggestions.add(new Tile(mActivityInfo));
-        suggestions.add(new Tile(mActivityInfo));
-        suggestions.add(new Tile(mActivityInfo));
-        suggestions.add(new Tile(mActivityInfo));
+        suggestions.add(new Tile(mActivityInfo, CategoryKey.CATEGORY_APPS));
+        suggestions.add(new Tile(mActivityInfo, CategoryKey.CATEGORY_APPS));
+        suggestions.add(new Tile(mActivityInfo, CategoryKey.CATEGORY_APPS));
+        suggestions.add(new Tile(mActivityInfo, CategoryKey.CATEGORY_APPS));
+        suggestions.add(new Tile(mActivityInfo, CategoryKey.CATEGORY_APPS));
+        suggestions.add(new Tile(mActivityInfo, CategoryKey.CATEGORY_APPS));
+        suggestions.add(new Tile(mActivityInfo, CategoryKey.CATEGORY_APPS));
 
         mProvider.filterExclusiveSuggestions(suggestions);
 

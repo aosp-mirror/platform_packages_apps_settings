@@ -30,6 +30,8 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.SettingsActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.drawer.DashboardCategory;
@@ -38,8 +40,6 @@ import com.android.settingslib.utils.ThreadUtils;
 
 import java.lang.reflect.Field;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
 
 public class SummaryLoader {
     private static final boolean DEBUG = DashboardSummary.DEBUG;
@@ -160,7 +160,7 @@ public class SummaryLoader {
             // TODO: Load summary indirectly.
             return null;
         }
-        Bundle metaData = getMetaData(tile);
+        final Bundle metaData = tile.getMetaData();
         if (metaData == null) {
             if (DEBUG) Log.d(TAG, "No metadata specified for " + tile.intent.getComponent());
             return null;
@@ -185,10 +185,6 @@ public class SummaryLoader {
             if (DEBUG) Log.d(TAG, "Couldn't get " + SUMMARY_PROVIDER_FACTORY, e);
         }
         return null;
-    }
-
-    private Bundle getMetaData(Tile tile) {
-        return tile.metaData;
     }
 
     /**

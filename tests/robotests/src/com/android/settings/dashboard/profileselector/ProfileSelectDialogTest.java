@@ -31,6 +31,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.Tile;
 
 import org.junit.Before;
@@ -61,7 +62,7 @@ public class ProfileSelectDialogTest {
 
     @Test
     public void updateUserHandlesIfNeeded_Normal() {
-        final Tile tile = new Tile(new ActivityInfo());
+        final Tile tile = new Tile(new ActivityInfo(), CategoryKey.CATEGORY_HOMEPAGE);
         tile.intent = new Intent();
         tile.userHandle.add(NORMAL_USER);
 
@@ -74,7 +75,7 @@ public class ProfileSelectDialogTest {
 
     @Test
     public void updateUserHandlesIfNeeded_Remove() {
-        final Tile tile = new Tile(new ActivityInfo());
+        final Tile tile = new Tile(new ActivityInfo(), CategoryKey.CATEGORY_HOMEPAGE);
         tile.intent = new Intent();
         tile.userHandle.add(REMOVED_USER);
         tile.userHandle.add(NORMAL_USER);

@@ -50,6 +50,7 @@ import com.android.settings.dashboard.suggestions.SuggestionAdapter;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.drawer.TileUtils;
 import com.android.settingslib.utils.IconCache;
@@ -91,6 +92,7 @@ public class DashboardAdapterTest {
         MockitoAnnotations.initMocks(this);
         mFactory = FakeFeatureFactory.setupForTest();
         mActivityInfo = new ActivityInfo();
+        mActivityInfo.metaData = new Bundle();
         when(mFactory.dashboardFeatureProvider.shouldTintIcon()).thenReturn(true);
 
         when(mContext.getSystemService(Context.WINDOW_SERVICE)).thenReturn(mWindowManager);
@@ -201,7 +203,7 @@ public class DashboardAdapterTest {
         final View view = LayoutInflater.from(context).inflate(R.layout.dashboard_tile, null);
         final DashboardAdapter.DashboardItemHolder holder =
                 new DashboardAdapter.DashboardItemHolder(view);
-        final Tile tile = spy(new Tile(mActivityInfo));
+        final Tile tile = spy(new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE));
         doReturn(Icon.createWithResource(context, R.drawable.ic_settings))
                 .when(tile).getIcon(context);
         final IconCache iconCache = mock(IconCache.class);
@@ -222,7 +224,7 @@ public class DashboardAdapterTest {
         final View view = LayoutInflater.from(context).inflate(R.layout.dashboard_tile, null);
         final DashboardAdapter.DashboardItemHolder holder =
                 new DashboardAdapter.DashboardItemHolder(view);
-        final Tile tile = spy(new Tile(mActivityInfo));
+        final Tile tile = spy(new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE));
         final Icon icon = Icon.createWithResource(context, R.drawable.ic_settings);
         doReturn(icon).when(tile).getIcon(context);
 
@@ -245,9 +247,8 @@ public class DashboardAdapterTest {
         final View view = LayoutInflater.from(context).inflate(R.layout.dashboard_tile, null);
         final DashboardAdapter.DashboardItemHolder holder =
                 new DashboardAdapter.DashboardItemHolder(view);
-        final Tile tile = spy(new Tile(mActivityInfo));
-        tile.metaData = new Bundle();
-        tile.metaData.putInt(TileUtils.META_DATA_PREFERENCE_ICON_BACKGROUND_HINT,
+        final Tile tile = spy(new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE));
+        tile.getMetaData().putInt(TileUtils.META_DATA_PREFERENCE_ICON_BACKGROUND_HINT,
                 R.color.memory_critical);
         doReturn(Icon.createWithResource(context, R.drawable.ic_settings))
                 .when(tile).getIcon(context);
@@ -271,7 +272,7 @@ public class DashboardAdapterTest {
         final View view = LayoutInflater.from(context).inflate(R.layout.dashboard_tile, null);
         final DashboardAdapter.DashboardItemHolder holder =
                 new DashboardAdapter.DashboardItemHolder(view);
-        final Tile tile = spy(new Tile(mActivityInfo));
+        final Tile tile = spy(new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE));
         doReturn(mock(Icon.class)).when(tile).getIcon(context);
         when(tile.getIcon(context).getResPackage()).thenReturn("another.package");
 

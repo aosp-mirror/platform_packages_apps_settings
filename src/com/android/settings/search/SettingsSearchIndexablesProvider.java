@@ -167,8 +167,8 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
             // Build parent-child class pairs for all children listed under this key.
             for (Tile tile : category.getTiles()) {
                 String childClass = null;
-                if (tile.metaData != null) {
-                    childClass = tile.metaData.getString(
+                if (tile.getMetaData() != null) {
+                    childClass = tile.getMetaData().getString(
                             SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS);
                 }
                 if (childClass == null) {

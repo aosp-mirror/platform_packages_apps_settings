@@ -17,9 +17,7 @@ package com.android.settings.dashboard;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -27,11 +25,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.drawable.Icon;
 import android.os.Bundle;
 
 import androidx.preference.Preference;
@@ -45,7 +40,6 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
-import com.android.settingslib.drawer.TileUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -74,8 +68,8 @@ public class DashboardFragmentTest {
         mContext = spy(RuntimeEnvironment.application);
         mActivityInfo = new ActivityInfo();
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
-        mDashboardCategory = new DashboardCategory();
-        mDashboardCategory.addTile(new Tile(mActivityInfo));
+        mDashboardCategory = new DashboardCategory("key");
+        mDashboardCategory.addTile(new Tile(mActivityInfo, mDashboardCategory.key));
         mTestFragment = new TestFragment(RuntimeEnvironment.application);
         when(mFakeFeatureFactory.dashboardFeatureProvider
                 .getTilesForCategory(nullable(String.class)))
@@ -179,42 +173,6 @@ public class DashboardFragmentTest {
 
         verify(mockController1).getPreferenceKey();
         verify(mockController2).getPreferenceKey();
-    }
-
-    @Test
-    public void tintTileIcon_hasMetadata_shouldReturnIconTintableMetadata() {
-        final Tile tile = spy(new Tile(mActivityInfo));
-        doReturn(mock(Icon.class)).when(tile).getIcon(any(Context.class));
-        final Bundle metaData = new Bundle();
-        tile.metaData = metaData;
-
-        metaData.putBoolean(TileUtils.META_DATA_PREFERENCE_ICON_TINTABLE, false);
-        assertThat(mTestFragment.tintTileIcon(tile)).isFalse();
-
-        metaData.putBoolean(TileUtils.META_DATA_PREFERENCE_ICON_TINTABLE, true);
-        assertThat(mTestFragment.tintTileIcon(tile)).isTrue();
-    }
-
-    @Test
-    public void tintTileIcon_noIcon_shouldReturnFalse() {
-        final Tile tile = new Tile(mActivityInfo);
-        tile.metaData = new Bundle();
-
-        assertThat(mTestFragment.tintTileIcon(tile)).isFalse();
-    }
-
-    @Test
-    public void tintTileIcon_noMetadata_shouldReturnPackageNameCheck() {
-        final Tile tile = spy(new Tile(mActivityInfo));
-        doReturn(mock(Icon.class)).when(tile).getIcon(any(Context.class));
-        final Intent intent = new Intent();
-        tile.intent = intent;
-        intent.setComponent(
-                new ComponentName(RuntimeEnvironment.application.getPackageName(), "TestClass"));
-        assertThat(mTestFragment.tintTileIcon(tile)).isFalse();
-
-        intent.setComponent(new ComponentName("OtherPackage", "TestClass"));
-        assertThat(mTestFragment.tintTileIcon(tile)).isTrue();
     }
 
     public static class TestPreferenceController extends AbstractPreferenceController

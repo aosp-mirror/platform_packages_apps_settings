@@ -25,6 +25,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.Tile;
 
 import org.junit.Before;
@@ -42,7 +43,7 @@ public class DashboardItemAnimatorTest {
     public void SetUp() {
         mDashboardItemAnimator = new DashboardItemAnimator();
         mViewHolder = new ViewHolder(new TextView(RuntimeEnvironment.application));
-        mViewHolder.itemView.setTag(new Tile(new ActivityInfo()));
+        mViewHolder.itemView.setTag(new Tile(new ActivityInfo(), CategoryKey.CATEGORY_HOMEPAGE));
     }
 
     @Test

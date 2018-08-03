@@ -36,6 +36,7 @@ import androidx.recyclerview.widget.ListUpdateCallback;
 import com.android.settings.dashboard.conditional.AirplaneModeCondition;
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 
@@ -72,7 +73,7 @@ public class DashboardDataTest {
     public void SetUp() {
         MockitoAnnotations.initMocks(this);
 
-        mDashboardCategory = new DashboardCategory();
+        mDashboardCategory = new DashboardCategory(CategoryKey.CATEGORY_HOMEPAGE);
 
         // Build suggestions
         final List<Suggestion> suggestions = new ArrayList<>();
@@ -276,14 +277,16 @@ public class DashboardDataTest {
     /**
      * Test when using the
      * {@link com.android.settings.dashboard.DashboardData.ItemsDataDiffCallback}
-     * to transfer List from {@paramref baseDashboardData} to {@paramref diffDashboardData}, whether
+     * to transfer List from {@paramref baseDashboardData} to {@paramref diffDashboardData},
+     * whether
      * the transform data result is equals to {@paramref testResultData}
      * <p>
      * The steps are described below:
      * 1. Calculate a {@link androidx.recyclerview.widget.DiffUtil.DiffResult} from
      * {@paramref baseDashboardData} to {@paramref diffDashboardData}
      * <p>
-     * 2. Dispatch the {@link androidx.recyclerview.widget.DiffUtil.DiffResult} calculated from step 1
+     * 2. Dispatch the {@link androidx.recyclerview.widget.DiffUtil.DiffResult} calculated from step
+     * 1
      * into {@link ListUpdateResult}
      * <p>
      * 3. Get result data(a.k.a. baseResultData) from {@link ListUpdateResult} and compare it to
