@@ -23,7 +23,7 @@
     <string name="deny" msgid="6947806159746484865">"Refuzo"</string>
     <string name="dlg_close" msgid="7471087791340790015">"Mbyll"</string>
     <string name="dlg_switch" msgid="6243971420240639064">"Ndërro"</string>
-    <string name="device_info_default" msgid="7847265875578739287">"E panjohur"</string>
+    <string name="device_info_default" msgid="7847265875578739287">"I panjohur"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
       <item quantity="other">Tani je <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> hapa larg të qenët programues.</item>
       <item quantity="one">Tani je <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> hap larg të qenët programues.</item>
@@ -65,7 +65,7 @@
     <string name="radioInfo_phone_offhook" msgid="5873835692449118954">"Telefonatë në vazhdim"</string>
     <string name="radioInfo_data_disconnected" msgid="1959735267890719418">"I shkëputur"</string>
     <string name="radioInfo_data_connecting" msgid="8404571440697917823">"Po lidhet"</string>
-    <string name="radioInfo_data_connected" msgid="7074301157399238697">"U lidh"</string>
+    <string name="radioInfo_data_connected" msgid="7074301157399238697">"Lidhur"</string>
     <string name="radioInfo_data_suspended" msgid="5315325487890334196">"I pezulluar"</string>
     <string name="radioInfo_unknown" msgid="1476509178755955088">"E panjohur"</string>
     <string name="radioInfo_display_packets" msgid="8654359809877290639">"paketa"</string>
@@ -370,7 +370,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="6817326798834882531">"Përdor gjurmën e gishtit për të shkyçur telefonin ose për të miratuar blerjet.\n\nShënim. Gjurma e gishtit mund të jetë më pak e sigurt se sa një kod PIN ose motiv i fortë."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Anulo"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Vazhdo"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Kapërceje"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Kapërce"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"Përpara"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="362050541117362034">"Të kapërcehet gjurma e gishtit?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="958990414356204763">"Konfigurimi i gjurmëve të gishtave zgjat vetëm një ose dy minuta. Nëse e kapërcen këtë, mund të shtosh gjurmën tënde të gishtit më vonë te cilësimet."</string>
@@ -624,7 +624,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Për ta çiftuar me:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;sigurohu që të tregojë këtë kod:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"Nga:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Të çiftohet me këtë pajisje?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Për ta çiftuar me:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Shkruaj në të:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g> dhe më pas shtyp Kthehu ose Hyr."</string>
-    <string name="bluetooth_pairing_shares_phonebook" msgid="2277931851483023208">"Lejo që <xliff:g id="DEVICE_NAME">%1$s</xliff:g> të ketë qasje te kontaktet dhe historiku i telefonatave"</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="9082518313285787097">"Lejo qasjen te kontaktet dhe historiku i telefonatave"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"Nuk mundi të lidhej me <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Skano për pajisje"</string>
@@ -708,7 +708,7 @@
     <string name="android_beam_off_summary" msgid="4663095428454779138">"Çaktivizuar"</string>
     <string name="android_beam_disabled_summary" msgid="1737782116894793393">"Nuk ofrohet sepse NFC-ja është e çaktivizuar"</string>
     <string name="android_beam_label" msgid="6257036050366775040">"Dërgimi me rreze i Androidit"</string>
-    <string name="android_beam_explained" msgid="1810540319385192758">"Kur ky funksion është i aktivizuar, mund të transmetosh përmbajtjet e aplikacioneve te një pajisje tjetër me aftësinë e NFC-së duke i mbajtur pajisjet afër. Për shembull, mund të transmetosh faqet e uebit, videot në YouTube, kontaktet e më shumë.\n\nThjesht afroji pajisjet me njëra-tjetrën (zakonisht nga pjesa e pasme) dhe më pas trokit tek ekrani. Aplikacioni përcakton se çfarë do të transmetohet."</string>
+    <string name="android_beam_explained" msgid="1810540319385192758">"Kur ky funksion është i aktivizuar, mund t\'i transmetosh përmbajtjet e aplikacioneve te një pajisje tjetër me NFC duke i mbajtur pajisjet afër. Për shembull, mund të transmetosh faqet e uebit, videot në YouTube, kontaktet etj.\n\nThjesht, afroji pajisjet me njëra-tjetrën (zakonisht nga pjesa e pasme) dhe më pas trokit tek ekrani. Aplikacioni përcakton se çfarë do të transmetohet."</string>
     <string name="wifi_quick_toggle_title" msgid="8850161330437693895">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="2696547080481267642">"Aktivizo Wi-Fi"</string>
     <string name="wifi_settings" msgid="29722149822540994">"Wi‑Fi"</string>
@@ -724,7 +724,7 @@
     <string name="wifi_notify_open_networks" msgid="76298880708051981">"Hap njoftimin e rrjetit"</string>
     <string name="wifi_notify_open_networks_summary" msgid="2761326999921366960">"Njofto kur ofrohet një rrjet publik me cilësi të lartë"</string>
     <string name="wifi_wakeup" msgid="8815640989361538036">"Aktivizo automatikisht Wi‑Fi"</string>
-    <string name="wifi_wakeup_summary" msgid="2530814331062997163">"Wi-Fi do të aktivizohet përsëri në afërsi të rrjeteve të ruajtura me cilësi të lartë, si p.sh. në rrjetin e shtëpisë"</string>
+    <string name="wifi_wakeup_summary" msgid="2530814331062997163">"Wi-Fi do të aktivizohet përsëri në afërsi të rrjeteve të ruajtura me cilësi të lartë, si p.sh. rrjetin e shtëpisë"</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Nuk ofrohet sepse skanimi i Wi-Fi është çaktivizuar"</string>
     <string name="wifi_wakeup_summary_scoring_disabled" msgid="108339002136866897">"Për ta përdorur, zgjidh një ofrues të vlerësimit të rrjetit"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Shmang lidhjet e dobëta"</string>
@@ -756,7 +756,7 @@
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Butoni me shtypje WPS"</string>
     <string name="wifi_menu_more_options" msgid="2448097861752719396">"Opsione të tjera"</string>
     <string name="wifi_menu_wps_pin" msgid="6426448256268695933">"Futja e kodit PIN të WPS-së"</string>
-    <string name="wifi_menu_p2p" msgid="7619851399250896797">"Wi-Fi Direkt"</string>
+    <string name="wifi_menu_p2p" msgid="7619851399250896797">"Wi‑Fi Direct"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"Skano"</string>
     <string name="wifi_menu_advanced" msgid="7522252991919573664">"Të përparuara"</string>
     <string name="wifi_menu_configure" msgid="6150926852602171938">"Konfiguro"</string>
@@ -895,7 +895,7 @@
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> po aktivizohet..."</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"Pajisjet e tjera mund të lidhen me <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"Fjalëkalimi i zonës së qasjes për internet"</string>
-    <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"Brezi AP"</string>
+    <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"Banda AP"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"Përdor zonën e qasjes së internetit për të krijuar një rrjet Wi‑Fi për pajisjet e tua të tjera. Zona e qasjes e internetit ofron internet duke përdorur lidhjen e të dhënave celulare. Mund të zbatohen tarifa shtesë për të dhënat celulare."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Aplikacionet mund të krijojnë një zonë qasjeje të internetit për të ndarë përmbajtje me pajisjet në afërsi."</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Po aktivizon zonën e qasjes..."</string>
@@ -1005,7 +1005,7 @@
     <string name="accelerometer_title" msgid="7854608399547349157">"Ekran me rrotullim automatik"</string>
     <string name="color_mode_title" msgid="9186249332902370471">"Ngjyrat"</string>
     <string name="color_mode_option_natural" msgid="5013837483986772758">"Natyrale"</string>
-    <string name="color_mode_option_boosted" msgid="8588223970257287524">"E theksuar"</string>
+    <string name="color_mode_option_boosted" msgid="8588223970257287524">"Të theksuara"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"E gjallë"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Ndërro orientimin automatikisht kur rrotullon tabletin"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Ndrysho automatikisht orientimin kur rrotullon telefonin"</string>
@@ -1036,23 +1036,23 @@
     <string name="night_display_text" msgid="1837277457033025056">"Drita e natës e ngjyros ekranin në ngjyrë qelibari. Kjo e bën më të lehtë shikimin e ekranit ose leximin në dritë të zbehtë dhe mund të të ndihmojë të flesh gjumë më lehtë."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Planifikimi"</string>
     <string name="night_display_auto_mode_never" msgid="2483761922928753400">"Asnjë"</string>
-    <string name="night_display_auto_mode_custom" msgid="2379394568898721765">"Aktivizo në kohë të personalizuar"</string>
+    <string name="night_display_auto_mode_custom" msgid="2379394568898721765">"Aktivizohet në kohë të personalizuar"</string>
     <string name="night_display_auto_mode_twilight" msgid="589042813708244059">"Aktivizohet nga perëndimi deri në agim"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"Koha e nisjes"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"Koha e përfundimit"</string>
     <string name="night_display_status_title" msgid="1784041143360286267">"Statusi"</string>
     <string name="night_display_temperature_title" msgid="1435292789272017136">"Intensiteti"</string>
-    <string name="night_display_summary_off" msgid="1792750041697946539">"Fikur / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off" msgid="1792750041697946539">"Joaktiv / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_off_auto_mode_never" msgid="3583590137322963513">"Nuk do të aktivizohet asnjëherë automatikisht"</string>
     <string name="night_display_summary_off_auto_mode_custom" msgid="6365668239253173208">"Do të aktivizohet automatikisht në <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_off_auto_mode_twilight" msgid="3596291693781757392">"Do të aktivizohet automatikisht kur të perëndojë dielli"</string>
-    <string name="night_display_summary_on" msgid="1355713529996456744">"Ndezur / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on" msgid="1355713529996456744">"Aktiv / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_on_auto_mode_never" msgid="9117830821363119835">"Nuk do të çaktivizohet asnjëherë automatikisht"</string>
     <string name="night_display_summary_on_auto_mode_custom" msgid="5510753572245577263">"Do të çaktivizohet automatikisht në <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_on_auto_mode_twilight" msgid="852270120144683507">"Do të çaktivizohet automatikisht në agim"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Në gjendje gjumi"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Ekrani çaktivizohet"</string>
-    <string name="screen_timeout_summary" msgid="327761329263064327">"Kur, <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> pa aktivitet"</string>
+    <string name="screen_timeout_summary" msgid="327761329263064327">"Pas <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> pa aktivitet"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Imazhi i sfondit"</string>
     <string name="wallpaper_settings_summary_default" msgid="3395741565658711416">"I parazgjedhur"</string>
     <string name="wallpaper_settings_summary_custom" msgid="515035303981687172">"I personalizuar"</string>
@@ -1081,7 +1081,7 @@
     <string name="doze_summary" msgid="3846219936142814032">"Zgjoje ekranin kur të merren njoftime"</string>
     <string name="doze_always_on_title" msgid="1046222370442629646">"Gjithmonë aktiv"</string>
     <string name="doze_always_on_summary" msgid="6978257596231155345">"Shfaq orën, ikonat e njoftimeve dhe informacione të tjera. Përdorim i rritur i baterisë."</string>
-    <string name="title_font_size" msgid="4405544325522105222">"Madhësa e shkrimit"</string>
+    <string name="title_font_size" msgid="4405544325522105222">"Madhësia e shkrimit"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Bëje tekstin më të madh ose më të vogël"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Kyçja e kartës SIM"</string>
     <string name="sim_lock_settings_category" msgid="6242052161214271091">"Kyçja e kartës SIM"</string>
@@ -1427,7 +1427,7 @@
     <string name="location_mode_high_accuracy_description" msgid="3453010562265338113">"Përdor funksionin GPS, Wi‑Fi, Bluetooth ose rrjetet celulare për të përcaktuar vendndodhjen"</string>
     <string name="location_mode_battery_saving_description" msgid="2365298246603348985">"Përdor funksionin Wi‑Fi, Bluetooth ose rrjetet celulare për të përcaktuar vendndodhjen"</string>
     <string name="location_mode_sensors_only_description" msgid="7247994752324805202">"Përdor GPS-në dhe sensorët e pajisjes për të përcaktuar vendndodhjen"</string>
-    <string name="location_scanning_screen_title" msgid="4408076862929611554">"Po skanon"</string>
+    <string name="location_scanning_screen_title" msgid="4408076862929611554">"Skanimi"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"Skanimi i Wi-Fi"</string>
     <string name="location_scanning_wifi_always_scanning_description" msgid="8036382029606868081">"Përmirëso vendndodhjen duke lejuar aplikacionet dhe shërbimet e sistemit të zbulojnë rrjetet Wi-Fi në çdo kohë."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"Skanimi i Bluetooth-it"</string>
@@ -1780,7 +1780,7 @@
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"Redakto fjalën"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"Redakto"</string>
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Fshi"</string>
-    <string name="user_dict_settings_empty_text" msgid="1971969756133074922">"Nuk ke asnjë fjalë në fjalorin e përdoruesit. Për të shtuar një fjalë, trokit te butoni Shto (+)."</string>
+    <string name="user_dict_settings_empty_text" msgid="1971969756133074922">"Nuk ke asnjë fjalë në fjalorin e përdoruesit. Për të shtuar një fjalë, trokit te butoni \"Shto (+)\"."</string>
     <string name="user_dict_settings_all_languages" msgid="6742000040975959247">"Për të gjitha gjuhët"</string>
     <string name="user_dict_settings_more_languages" msgid="7316375944684977910">"Gjuhë të tjera…"</string>
     <string name="testing" msgid="6584352735303604146">"Testimi"</string>
@@ -1930,8 +1930,8 @@
     <string name="print_settings" msgid="4742428530112487843">"Printimi"</string>
     <string name="print_settings_summary_no_service" msgid="6354322414246865875">"Joaktive"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="6005468025646083029">
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> shërbime printimi aktive</item>
-      <item quantity="one">1 shërbim printimi aktiv</item>
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> shërbime printimi janë aktive</item>
+      <item quantity="one">1 shërbim printimi është aktiv</item>
     </plurals>
     <plurals name="print_jobs_summary" formatted="false" msgid="5810106725778525400">
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> punë printimi</item>
@@ -2250,12 +2250,12 @@
     <string name="fullbackup_erase_dialog_message" msgid="694766389396659626">"Ndalo rezervimin e të dhënave të pajisjes (si p.sh. fjalëkalimet e Wi-Fi dhe historikun e telefonatave) dhe të dhënave të aplikacioneve (si p.sh. cilësimet dhe skedarët e ruajtur nga aplikacionet) dhe spastro të gjitha kopjet në serverët në largësi?"</string>
     <string name="fullbackup_data_summary" msgid="960850365007767734">"Rezervo automatikisht në largësi të dhënat e pajisjes (si p.sh. fjalëkalimet e Wi-Fi dhe historikun e telefonatave) dhe të dhënat e aplikacioneve (si p.sh. cilësimet dhe skedarët e ruajtur nga aplikacionet).\n\nKur aktivizon rezervimin automatik, të dhënat e pajisjes dhe të aplikacioneve ruhen periodikisht në largësi. Të dhënat e aplikacioneve mund të jenë çdo e dhënë që ka ruajtur një aplikacion (bazuar në cilësimet e zhvilluesit), duke përfshirë të dhëna ndoshta delikate si kontaktet, mesazhet dhe fotografitë."</string>
     <string name="device_admin_settings_title" msgid="4960761799560705902">"Cilësimet e administratorit të pajisjes"</string>
-    <string name="active_device_admin_msg" msgid="578748451637360192">"Aplikacioni i administratorit të pajisjes"</string>
-    <string name="remove_device_admin" msgid="9207368982033308173">"Çaktivizo këtë aplikacion të administratorit të pajisjes"</string>
+    <string name="active_device_admin_msg" msgid="578748451637360192">"Apl. administrimi i pajisjes"</string>
+    <string name="remove_device_admin" msgid="9207368982033308173">"Çaktivizo këtë apl. administrimi të pajisjes"</string>
     <string name="uninstall_device_admin" msgid="271120195128542165">"Çinstalo aplikacionin"</string>
     <string name="remove_and_uninstall_device_admin" msgid="3837625952436169878">"Çaktivizo dhe çinstalo"</string>
     <string name="select_device_admin_msg" msgid="7347389359013278077">"Apl. e admin. të pajisjes"</string>
-    <string name="no_device_admins" msgid="4846602835339095768">"Nuk ka asnjë aplikacion të administratorit të pajisjes në dispozicion"</string>
+    <string name="no_device_admins" msgid="4846602835339095768">"Nuk ka asnjë aplikacion administrimi të pajisjes në dispozicion"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Personal"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Punë"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Nuk mundësohet asnjë agjent i besuar"</string>
@@ -2263,7 +2263,7 @@
     <string name="add_device_admin" msgid="4192055385312215731">"Aktivizo këtë aplikacion të administratorit të pajisjes"</string>
     <string name="device_admin_add_title" msgid="3140663753671809044">"Administratori i pajisjes"</string>
     <string name="device_admin_warning" msgid="7482834776510188134">"Aktivizimi i këtij aplikacioni të administratorit do të lejojë që aplikacioni <xliff:g id="APP_NAME">%1$s</xliff:g> të kryejë veprimet e mëposhtme:"</string>
-    <string name="device_admin_status" msgid="7234814785374977990">"Ky aplikacion administratori është aktiv dhe lejon aplikacionin <xliff:g id="APP_NAME">%1$s</xliff:g> të kryejë veprimet e mëposhtme:"</string>
+    <string name="device_admin_status" msgid="7234814785374977990">"Ky aplikacion administratori është aktiv dhe lejon apl. <xliff:g id="APP_NAME">%1$s</xliff:g> të kryejë veprimet e mëposhtme:"</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"Të aktivizohet menaxheri i profilit?"</string>
     <string name="adding_profile_owner_warning" msgid="1354474524852805802">"Duke vazhduar, profili yt si \"përdorues\" do të menaxhohet nga administratori yt, i cili mund të ruajë të dhënat e lidhura, përveç të dhënave të tua personale.\n\nAdministratori yt ka aftësinë që të monitorojë dhe të menaxhojë cilësimet, qasjen, aplikacionet dhe të dhënat e lidhura me këtë përdorues, duke përfshirë aktivitetin e rrjetit dhe informacionet e vendndodhjes së pajisjes tënde."</string>
     <string name="admin_disabled_other_options" msgid="7712694507069054530">"Opsionet e tjera janë çaktivizuar nga administratori yt"</string>
@@ -2278,7 +2278,7 @@
     <string name="wifi_setup_title_connecting_network" msgid="5572226790101017822">"Po lidhet me rrjetin Wi‑Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>…"</string>
     <string name="wifi_setup_title_connected_network" msgid="1608788657122010919">"U lidh me rrjetin Wi‑Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
     <string name="wifi_setup_title_add_network" msgid="6932651000151032301">"Shto një rrjet"</string>
-    <string name="wifi_setup_not_connected" msgid="6997432604664057052">"Nuk është e lidhur"</string>
+    <string name="wifi_setup_not_connected" msgid="6997432604664057052">"Nuk është i lidhur"</string>
     <string name="wifi_setup_add_network" msgid="5939624680150051807">"Shto një rrjet"</string>
     <string name="wifi_setup_refresh_list" msgid="3411615711486911064">"Rifresko listën"</string>
     <string name="wifi_setup_skip" msgid="6661541841684895522">"Kapërce"</string>
@@ -2477,7 +2477,7 @@
     <string name="vpn_not_used" msgid="9094191054524660891">"(nuk përdoret)"</string>
     <string name="vpn_no_ca_cert" msgid="8776029412793353361">"(mos e verifiko serverin)"</string>
     <string name="vpn_no_server_cert" msgid="2167487440231913330">"(marrë nga serveri)"</string>
-    <string name="vpn_always_on_invalid_reason_type" msgid="7574518311224455825">"Ky lloj i VPN-së nuk mund të qëndrojë i lidhur gjatë të gjithë kohës"</string>
+    <string name="vpn_always_on_invalid_reason_type" msgid="7574518311224455825">"Ky lloj i VPN-së nuk mund të qëndrojë i lidhur gjatë gjithë kohës"</string>
     <string name="vpn_always_on_invalid_reason_server" msgid="477304620899799383">"Rrjeti VPN gjithmonë aktiv mbështet adresat numerike të serverit"</string>
     <string name="vpn_always_on_invalid_reason_no_dns" msgid="2226648961940273294">"Duhet të specifikohet një server DNS për rrjetin VPN gjthmonë aktiv"</string>
     <string name="vpn_always_on_invalid_reason_dns" msgid="3551394495620249972">"Adresat e serverit të DNS-së duhet të jenë numerike për rrjetin VPN gjithmonë aktiv"</string>
@@ -2586,7 +2586,7 @@
     <string name="user_add_profile_item_summary" msgid="5931663986889138941">"Mund të kufizosh qasjen në aplikacione dhe përmbajtje nga llogaria jote"</string>
     <string name="user_add_user_item_title" msgid="8212199632466198969">"Përdoruesi"</string>
     <string name="user_add_profile_item_title" msgid="8353515490730363621">"Profil i kufizuar"</string>
-    <string name="user_add_user_title" msgid="2108112641783146007">"Të shtohet përdoruesi i ri?"</string>
+    <string name="user_add_user_title" msgid="2108112641783146007">"Të shtohet përdorues i ri?"</string>
     <string name="user_add_user_message_long" msgid="8562152293752222985">"Mund ta ndash këtë pajisje me persona të tjerë duke krijuar përdorues shtesë. Çdo përdorues ka hapësirën e vet, të cilën mund ta personalizojë me aplikacione, me imazhin e sfondit etj. Përdoruesit mund të rregullojnë po ashtu cilësimet e pajisjes, si Wi‑Fi, të cilat ndikojnë te të gjithë.\n\nKur shton një përdorues të ri, ai person duhet të konfigurojë hapësirën e vet.\n\nÇdo përdorues mund t\'i përditësojë aplikacionet për të gjithë përdoruesit e tjerë."</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"Kur shton një përdorues të ri, ai person duhet të konfigurojë hapësirën e vet.\n\nÇdo përdorues mund t\'i përditësojë aplikacionet për të gjithë përdoruesit e tjerë."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"Të konfig. përdoruesi tani?"</string>
@@ -2752,10 +2752,10 @@
     <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"Pajisje të lidhura"</string>
     <string name="connected_devices_dashboard_summary" msgid="2390582103384791904">"Bluetooth, Transmetimi, NFC"</string>
     <string name="connected_devices_dashboard_no_nfc_summary" msgid="9106040742715366495">"Bluetooth, Transmetimi"</string>
-    <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Aplikacionet dhe njoftimet"</string>
-    <string name="app_and_notification_dashboard_summary" msgid="2363314178802548682">"Lejet, aplikacionet e parazgjedhura"</string>
+    <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Apl. dhe njoftimet"</string>
+    <string name="app_and_notification_dashboard_summary" msgid="2363314178802548682">"Lejet, apl. e parazgjedhura"</string>
     <string name="account_dashboard_title" msgid="4936890821712178853">"Përdoruesit dhe llogaritë"</string>
-    <string name="app_default_dashboard_title" msgid="7342549305933047317">"Aplikacionet e parazgjedhura"</string>
+    <string name="app_default_dashboard_title" msgid="7342549305933047317">"Apl. e parazgjedhura"</string>
     <string name="system_dashboard_summary" msgid="5797743225249766685">"Gjuhët, koha, rezervimi, përditësimet"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Cilësimet"</string>
     <string name="search_menu" msgid="6283419262313758339">"Kërko \"Cilësimet\""</string>
@@ -2871,7 +2871,7 @@
     <string name="ringtones_install_custom_sound_content" msgid="2195581481608512786">"Ky skedar do të kopjohet te dosja <xliff:g id="FOLDER_NAME">%s</xliff:g>"</string>
     <string name="ringtones_category_preference_title" msgid="5675912303120102366">"Zilet"</string>
     <string name="other_sound_category_preference_title" msgid="2521096636124314015">"Tinguj dhe dridhje të tjera"</string>
-    <string name="configure_notification_settings" msgid="7616737397127242615">"Njoftime"</string>
+    <string name="configure_notification_settings" msgid="7616737397127242615">"Njoftimet"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Të përparuara"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Njoftimet e punës"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Lejo pikat e njoftimeve"</string>
@@ -2962,7 +2962,7 @@
     <string name="notification_badge_title" msgid="6370122441168519809">"Lejo pikën e njoftimeve"</string>
     <string name="notification_channel_badge_title" msgid="2240827899882847087">"Shfaq pikën e njoftimeve"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Anulo \"Mos shqetëso\""</string>
-    <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Lejo që këto njoftime të vazhdojnë të ndërpresin kur \"Mos shqetëso\" është vendosur në \"Vetëm prioritare\""</string>
+    <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Lejo shfaqjen e njoftimeve edhe kur modaliteti \"Mos shqetëso\" vendoset në \"Vetëm prioritare\""</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"Në ekranin e kyçjes"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"I bllokuar"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Me prioritet"</string>
@@ -3004,7 +3004,7 @@
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"Ditët"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"Asnjë"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"Çdo ditë"</string>
-    <string name="zen_mode_schedule_alarm_title" msgid="767054141267122030">"Alarmi mund të anulojë kohën e mbarimit"</string>
+    <string name="zen_mode_schedule_alarm_title" msgid="767054141267122030">"Alarmi mund të anulojë kohën e përfundimit"</string>
     <string name="zen_mode_schedule_alarm_summary" msgid="4597050434723180422">"Ndalo në momentin e përfundimit ose kur të vijë alarmi tjetër, cilado prej tyre të ndodhë e para"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
     <string name="summary_range_symbol_combination" msgid="5695218513421897027">"<xliff:g id="START">%1$s</xliff:g> - <xliff:g id="END">%2$s</xliff:g>"</string>
@@ -3140,7 +3140,7 @@
     <string name="configure_apps" msgid="6685680790825882528">"Konfiguro aplikacionet"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Aplikacion i panjohur"</string>
     <string name="app_permissions" msgid="4148222031991883874">"Lejet e aplikacionit"</string>
-    <string name="app_permissions_summary" msgid="5163974162150406324">"Aplikacionet që përdorin <xliff:g id="APPS">%1$s</xliff:g>"</string>
+    <string name="app_permissions_summary" msgid="5163974162150406324">"Apl. që marrin të dhëna nga <xliff:g id="APPS">%1$s</xliff:g>"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Trokit për ta zgjuar"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Trokit dy herë diku në ekran për ta zgjuar pajisjen."</string>
     <string name="domain_urls_title" msgid="3132983644568821250">"Lidhjet po hapen"</string>
@@ -3218,7 +3218,7 @@
     <string name="share_remote_bugreport_dialog_message_finished" msgid="4973886976504823801">"Administratori i teknologjisë së informacionit kërkoi një raport të defekteve në kod për të ndihmuar me zgjidhjen e problemeve. Aplikacioni dhe të dhënat mund të ndahen."</string>
     <string name="share_remote_bugreport_dialog_message" msgid="3495929560689435496">"Administratori i teknologjisë së informacionit kërkoi një raport të defekteve në kod për të ndihmuar me zgjidhjen e problemeve. Aplikacioni dhe të dhënat mund të ndahen dhe kjo mund të ngadalësojë përkohësisht pajisjen tënde."</string>
     <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"Ky raport i defektit në kod po ndahet me administratorin tënd të IT-së. Kontaktoje atë për më shumë detaje."</string>
-    <string name="share_remote_bugreport_action" msgid="532226159318779397">"Shpërnda"</string>
+    <string name="share_remote_bugreport_action" msgid="532226159318779397">"Shpërndaj"</string>
     <string name="decline_remote_bugreport_action" msgid="518720235407565134">"Refuzo"</string>
     <string name="usb_use_charging_only" msgid="2180443097365214467">"Karikuar këtë pajisje"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Vetëm karikoje këtë pajisje"</string>
@@ -3245,7 +3245,7 @@
     <string name="assist_access_screenshot_title" msgid="4034721336291215819">"Përdor pamjen e ekranit"</string>
     <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"Lejo që aplikacioni i asistentit të qaset te një imazh i ekranit"</string>
     <string name="assist_flash_title" msgid="506661221230034891">"Pulso ekranin"</string>
-    <string name="assist_flash_summary" msgid="9160668468824099262">"Pulso këndet e ekranit kur aplikacioni ndihmës qaset në tekstin nga ekran apo pamja e ekranit"</string>
+    <string name="assist_flash_summary" msgid="9160668468824099262">"Pulso këndet e ekranit kur aplikacioni ndihmës qaset në tekstin nga ekrani apo pamja e ekranit"</string>
     <string name="assist_footer" msgid="1982791172085896864">"Aplikacionet e asistentit të ndihmojnë bazuar në informacionet nga ekrani ku je duke e shikuar. Disa aplikacione mbështesin shërbimet e nisësit dhe të hyrjes me zë për të të siguruar një ndihmë të integruar."</string>
     <string name="average_memory_use" msgid="829566450150198512">"Memoria mesatare në përdorim"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"Përdorimi maksimal i memories"</string>
@@ -3330,7 +3330,7 @@
     <string name="screen_zoom_conversation_timestamp_2" msgid="7107225702890747588">"E martë 18:01"</string>
     <string name="screen_zoom_conversation_timestamp_3" msgid="3785674344762707688">"E martë 18:02"</string>
     <string name="screen_zoom_conversation_timestamp_4" msgid="2511469395448561259">"E martë 18:03"</string>
-    <string name="disconnected" msgid="4836600637485526329">"Nuk është e lidhur"</string>
+    <string name="disconnected" msgid="4836600637485526329">"Nuk është i lidhur"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> nga të dhënat janë përdorur"</string>
     <plurals name="notification_summary" formatted="false" msgid="3941492005316143599">
       <item quantity="other">Joaktive për <xliff:g id="COUNT">%d</xliff:g> aplikacione</item>
@@ -3400,8 +3400,6 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"Përdor ngjyra të ftohta të ekranit"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Për të zbatuar ndryshimin e ngjyrës, çaktivizoje ekranin"</string>
     <string name="telephony_monitor_toast" msgid="7003764250271195384">"Për të zbatuar ndryshimin e monitorit të telefonisë, rindizni pajisjen"</string>
-    <string name="camera_hal_hdrplus_switch" msgid="8377365197105267466">"HAL HDR+ i kamerës"</string>
-    <string name="camera_hal_hdrplus_toast" msgid="2063703797270055299">"Për të zbatuar ndryshimin e HAL HDR+ të kamerës, rindiz pajisjen"</string>
     <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"Sensori me laser i kamerës"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Përditësimet automatike të sistemit"</string>
     <string name="usage" msgid="2977875522080448986">"Përdorimi"</string>
@@ -3450,7 +3448,7 @@
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"Kërko fjalëkalim për të nisur pajisjen. Ndërsa është e fikur, kjo pajisje nuk mund të marrë telefonata, mesazhe, njoftime apo alarme."</string>
     <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"Shto një gjurmë tjetër gishti"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="5471253233176471245">"Shkyçe me një gisht tjetër"</string>
-    <string name="battery_saver_on_summary" msgid="9072203872401530722">"Ndezur / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="battery_saver_on_summary" msgid="9072203872401530722">"Aktiv / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="8309471955051162327">"Fikur / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"Asnjëherë mos e aktivizo automatikisht"</string>
     <string name="battery_saver_desc_turn_on_auto_pct" msgid="7472323223085636533">"Aktivizoje automatikisht kur ka %1$s bateri"</string>
@@ -3488,7 +3486,7 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"asnjë"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Objekti i renditjes mungon."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Objekti i renditjes nuk e përmban këtë çelës."</string>
-    <string name="special_access" msgid="3458780842491881155">"Qasja e veçantë e aplikacionit"</string>
+    <string name="special_access" msgid="3458780842491881155">"Qasja e veçantë e apl."</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplikacione mund të përdorin të dhëna të pakufizuara</item>
       <item quantity="one">1 aplikacion mund të përdorë të dhëna të pakufizuara</item>
@@ -3573,7 +3571,7 @@
     <string name="double_tap_power_for_camera_summary" msgid="242037150983277829">"Për të hapur me shpejtësi kamerën, shtyp dy herë te butoni i energjisë. Funksionon nga çdo ekran."</string>
     <string name="double_tap_power_for_camera_suggestion_title" msgid="6500405261202883589">"Hap kamerën me shpejtësi"</string>
     <string name="double_tap_power_for_camera_suggestion_summary" msgid="7010153544554016996">"Shtyp dy herë butonin e energjisë për të hapur kamerën"</string>
-    <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Rrotulloje kamerën"</string>
+    <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Rrotullo kamerën"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"Bëj selfi më shpejt"</string>
     <string name="double_twist_for_camera_suggestion_summary" product="default" msgid="447403641027147153">"Rrotullo dy herë telefonin për modalitetin për selfi"</string>
@@ -3591,7 +3589,7 @@
     <string name="ambient_display_pickup_summary" product="tablet" msgid="5435283849947236648">"Për të kontrolluar orën, ikonat e njoftimeve dhe informacione të tjera, merre në duar tabletin tënd."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="8256669101643381568">"Për të kontrolluar orën, ikonat e njoftimeve dhe informacione të tjera, merre në duar pajisjen tënde."</string>
     <string name="ambient_display_pickup_suggestion_summary" msgid="7014700589991761035">"Kontrollo njoftimet kur ekrani është joaktiv"</string>
-    <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Rrëshqit shpejt gjurmën e gishtit për njoftimet"</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Rrëshqit gjurmën e gishtit për njoftimet"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Për të kontrolluar njoftimet, rrëshqit poshtë në sensorin e gjurmës së gishtit në pjesën e pasme të telefonit."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Për të kontrolluar njoftimet, rrëshqit poshtë në sensorin e gjurmës së gishtit në pjesën e pasme të tabletit."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Për të kontrolluar njoftimet, rrëshqit poshtë në sensorin e gjurmës së gishtit në pjesën e pasme të pajisjes."</string>
@@ -3615,9 +3613,9 @@
     <string name="auto_sync_account_title" msgid="898796354710116383">"Sinkronizo automatikisht të dhënat"</string>
     <string name="auto_sync_personal_account_title" msgid="8496263182646100610">"Sinkronizo automatikisht të dhënat personale"</string>
     <string name="auto_sync_work_account_title" msgid="4489172450037434152">"Sinkronizo automatikisht të dhënat e punës"</string>
-    <string name="auto_sync_account_summary" msgid="692499211629185107">"Lejo që aplikacionet të rifreskojnë automatikisht të dhënat"</string>
+    <string name="auto_sync_account_summary" msgid="692499211629185107">"Lejo që aplikacionet t\'i rifreskojnë automatikisht të dhënat"</string>
     <string name="account_sync_title" msgid="7214747784136106491">"Sinkronizimi i llogarisë"</string>
-    <string name="account_sync_summary_some_on" msgid="3375930757891381175">"Sinkronizimi aktiv për <xliff:g id="ID_1">%1$d</xliff:g> nga <xliff:g id="ID_2">%2$d</xliff:g> artikuj"</string>
+    <string name="account_sync_summary_some_on" msgid="3375930757891381175">"Sinkronizimi është aktiv për <xliff:g id="ID_1">%1$d</xliff:g> nga <xliff:g id="ID_2">%2$d</xliff:g> artikuj"</string>
     <string name="account_sync_summary_all_on" msgid="570431636622254156">"Sinkronizimi aktiv për të gjithë artikujt"</string>
     <string name="account_sync_summary_all_off" msgid="8782409931761182734">"Sinkronizimi joaktiv për të gjithë artikujt"</string>
     <string name="enterprise_privacy_settings" msgid="1177106810374146496">"Informacioni i pajisjes së menaxhuar"</string>
@@ -3643,7 +3641,7 @@
     <string name="enterprise_privacy_location_access" msgid="4158197200885270634">"Lejet e vendndodhjes"</string>
     <string name="enterprise_privacy_microphone_access" msgid="5717375623568864441">"Lejet e mikrofonit"</string>
     <string name="enterprise_privacy_camera_access" msgid="4858146118537519375">"Lejet e kamerës"</string>
-    <string name="enterprise_privacy_enterprise_set_default_apps" msgid="3288495615791128724">"Aplikacionet e parazgjedhura"</string>
+    <string name="enterprise_privacy_enterprise_set_default_apps" msgid="3288495615791128724">"Apl. e parazgjedhura"</string>
     <plurals name="enterprise_privacy_number_packages" formatted="false" msgid="2765037387436064893">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> aplikacione</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> aplikacion</item>
@@ -3715,7 +3713,7 @@
     <string name="storage_manager_indicator_on" msgid="8625551710194584733">"Aktiv"</string>
     <string name="install_type_instant" msgid="3174425974536078647">"Aplikacioni i çastit"</string>
     <string name="automatic_storage_manager_deactivation_warning" msgid="5605210730828410482">"Të çaktivizohet menaxheri i hapësirës ruajtëse?"</string>
-    <string name="storage_movies_tv" msgid="5498394447562086890">"Aplikacionet e filmave dhe shfaqjeve televizive"</string>
+    <string name="storage_movies_tv" msgid="5498394447562086890">"Apl. e filmave dhe shfaqjeve televizive"</string>
     <string name="carrier_provisioning" msgid="4398683675591893169">"Informacionet e përgatitjes së operatorit celular"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"Aktivizo përgatitjen e operatorit celular"</string>
     <string name="new_device_suggestion_title" msgid="698847081680980774">"Çfarë ka të reja dhe emocionuese?"</string>

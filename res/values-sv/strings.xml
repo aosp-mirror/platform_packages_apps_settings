@@ -306,7 +306,7 @@
     <string name="date_and_time_settings_title" msgid="3350640463596716780">"Datum och tid"</string>
     <string name="date_and_time_settings_title_setup_wizard" msgid="2391530758339384324">"Ange datum och tid"</string>
     <string name="date_and_time_settings_summary" msgid="7095318986757583584">"Ange datum, tidszon och format"</string>
-    <string name="date_time_auto" msgid="7076906458515908345">"Automatiskt datum och tid"</string>
+    <string name="date_time_auto" msgid="7076906458515908345">"Automatisk datum och tid"</string>
     <string name="date_time_auto_summaryOn" msgid="4609619490075140381">"Använd nätverkets tid"</string>
     <string name="date_time_auto_summaryOff" msgid="8698762649061882791">"Använd nätverkets tid"</string>
     <string name="zone_auto" msgid="334783869352026648">"Automatisk tidszon"</string>
@@ -624,7 +624,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Om du vill koppla med:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt; måste lösenordet &lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt; visas i den"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"Från:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Vill du koppla den till enheten?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Koppla till:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Skriv:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g> och tryck sedan på Retur."</string>
-    <string name="bluetooth_pairing_shares_phonebook" msgid="2277931851483023208">"Tillåt att <xliff:g id="DEVICE_NAME">%1$s</xliff:g> får åtkomst till dina kontakter och din samtalshistorik"</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="9082518313285787097">"Tillåt åtkomst till kontakter och sökhistorik"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"Det gick inte att ansluta till <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Sök efter enheter"</string>
@@ -1338,7 +1338,7 @@
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Återställning av standardinställningar för APN har slutförts."</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"Återställningsalternativ"</string>
     <string name="reset_dashboard_summary" msgid="4851012632493522755">"Nätverk, appar och enheter kan återställas"</string>
-    <string name="reset_network_title" msgid="6166025966016873843">"Återställ inställningarna för Wi-Fi, mobildata och Bluetooth"</string>
+    <string name="reset_network_title" msgid="6166025966016873843">"Återställ Wi-Fi, mobildata och Bluetooth"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"Alla nätverksinställningar återställs, till exempel \n\n"<li>"Wi‑Fi"</li>\n<li>"Mobildata"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Återställ inställningar"</string>
     <string name="reset_network_final_desc" msgid="6388371121099245116">"Vill du återställa alla nätverksinställningar? Det går inte att ångra den här åtgärden."</string>
@@ -3285,7 +3285,7 @@
     <string name="system_alert_window_settings" msgid="8466613169103527868">"Visa ovanpå andra appar"</string>
     <string name="system_alert_window_apps_title" msgid="7005760279028569491">"Appar"</string>
     <string name="system_alert_window_access_title" msgid="6297115362542361241">"Visa ovanpå andra appar"</string>
-    <string name="permit_draw_overlay" msgid="7456536798718633432">"Tillåt visning över andra appar"</string>
+    <string name="permit_draw_overlay" msgid="7456536798718633432">"Tillåt visning ovanpå andra appar"</string>
     <string name="app_overlay_permission_preference" msgid="9039432222453006038">"Appen kan visas ovanpå andra appar"</string>
     <string name="allow_overlay_description" msgid="8961670023925421358">"Tillåt att den här appen visas ovanpå andra appar. Detta kan inverka på ett störande sätt på användningen av de andra apparna eller göra så att de verkar se ut eller fungera annorlunda."</string>
     <string name="keywords_vr_listener" msgid="7441221822576384680">"vr virtuell verklighet lyssnare stereo hjälptjänst"</string>
@@ -3400,8 +3400,6 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"Använd svalare färger på skärmen"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Stäng av skärmen om du vill tillämpa färgändringen"</string>
     <string name="telephony_monitor_toast" msgid="7003764250271195384">"Starta om enheten om du vill tillämpa ändringen för Telephony Monitor"</string>
-    <string name="camera_hal_hdrplus_switch" msgid="8377365197105267466">"HAL HDR+ för kamera"</string>
-    <string name="camera_hal_hdrplus_toast" msgid="2063703797270055299">"Starta om enheten om du vill tillämpa ändringen HAL HDR+ för kamera"</string>
     <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"Lasersensor för kamera"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Automatiska systemuppdateringar"</string>
     <string name="usage" msgid="2977875522080448986">"Användning"</string>
@@ -3436,7 +3434,7 @@
       <item quantity="one">1 app har obegränsad dataåtkomst när Databesparing är aktiverat</item>
     </plurals>
     <string name="data_saver_title" msgid="398458827917495765">"Databesparing"</string>
-    <string name="unrestricted_data_saver" msgid="952796077540228711">"Obegränsad dataåtkomst"</string>
+    <string name="unrestricted_data_saver" msgid="952796077540228711">"Obegränsad data"</string>
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"Bakgrundsdata har inaktiverats"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"Aktiverat"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"Inaktiverat"</string>
@@ -3607,7 +3605,7 @@
     <string name="web_action_enable_title" msgid="4051513950976670853">"Snabbappar"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"Öppna länkar i appar, även om de inte har installerats"</string>
     <string name="web_action_section_title" msgid="7364647086538399136">"Snabbappar"</string>
-    <string name="instant_apps_settings" msgid="8827777916518348213">"Inställningar för Instant Apps"</string>
+    <string name="instant_apps_settings" msgid="8827777916518348213">"Snabbapp-inställningar"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"Installerade appar"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"Ditt lagringsutrymme hanteras nu av lagringshanteraren"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"Konton som tillhör <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
