@@ -29,6 +29,10 @@ import static org.mockito.Mockito.when;
 import android.app.PendingIntent;
 import android.service.settings.suggestions.Suggestion;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListUpdateCallback;
+
 import com.android.settings.dashboard.conditional.AirplaneModeCondition;
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -45,10 +49,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.ListUpdateCallback;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DashboardDataTest {
@@ -95,7 +95,6 @@ public class DashboardDataTest {
 
         // Build category
         mTestCategoryTile.title = TEST_CATEGORY_TILE_TITLE;
-        mDashboardCategory.title = "test";
 
         mDashboardCategory.addTile(mTestCategoryTile);
 

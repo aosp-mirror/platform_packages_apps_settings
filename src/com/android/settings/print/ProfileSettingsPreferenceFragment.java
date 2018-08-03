@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.utils;
+package com.android.settings.print;
 
 import android.content.Context;
 import android.content.Intent;
@@ -27,7 +27,7 @@ import android.widget.Spinner;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settingslib.drawer.UserAdapter;
+import com.android.settings.dashboard.profileselector.UserAdapter;
 
 /**
  * Base fragment class for per profile settings.
@@ -46,8 +46,8 @@ public abstract class ProfileSettingsPreferenceFragment extends SettingsPreferen
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position,
-                                           long id) {
-                    UserHandle selectedUser = profileSpinnerAdapter.getUserHandle(position);
+                        long id) {
+                    final UserHandle selectedUser = profileSpinnerAdapter.getUserHandle(position);
                     if (selectedUser.getIdentifier() != UserHandle.myUserId()) {
                         Intent intent = new Intent(getIntentActionString());
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

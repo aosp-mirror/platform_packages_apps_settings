@@ -40,11 +40,11 @@ import androidx.preference.Preference;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.dashboard.profileselector.ProfileSelectDialog;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settingslib.drawer.DashboardCategory;
-import com.android.settingslib.drawer.ProfileSelectDialog;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.drawer.TileUtils;
 import com.android.settingslib.utils.ThreadUtils;
@@ -92,7 +92,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         }
         final List<Tile> tiles = category.getTiles();
         if (tiles == null || tiles.isEmpty()) {
-            Log.d(TAG, "tile list is empty, skipping category " + category.title);
+            Log.d(TAG, "tile list is empty, skipping category " + category.key);
             return null;
         }
         final List<Preference> preferences = new ArrayList<>();

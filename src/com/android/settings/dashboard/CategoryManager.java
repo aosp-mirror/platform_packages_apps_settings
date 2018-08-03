@@ -216,15 +216,4 @@ public class CategoryManager {
             }
         }
     }
-
-    /**
-     * Sort priority value for tiles within a single {@code DashboardCategory}.
-     *
-     * @see #sortCategories(Context, Map)
-     */
-    private synchronized void sortCategoriesForExternalTiles(Context context,
-            DashboardCategory dashboardCategory) {
-        dashboardCategory.sortTiles(context.getPackageName());
-
-    }
 }
