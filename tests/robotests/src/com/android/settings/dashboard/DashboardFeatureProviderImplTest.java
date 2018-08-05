@@ -101,6 +101,7 @@ public class DashboardFeatureProviderImplTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         mActivityInfo = new ActivityInfo();
+        mActivityInfo.metaData = new Bundle();
         doReturn(mPackageManager).when(mContext).getPackageManager();
         when(mPackageManager.resolveActivity(any(Intent.class), anyInt()))
                 .thenReturn(new ResolveInfo());
@@ -116,13 +117,12 @@ public class DashboardFeatureProviderImplTest {
     @Test
     public void bindPreference_shouldBindAllData() {
         final Preference preference = new Preference(RuntimeEnvironment.application);
-        final Tile tile = spy(new Tile(mActivityInfo));
+        final Tile tile = spy(new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE));
         tile.title = "title";
         tile.summary = "summary";
         doReturn(Icon.createWithBitmap(Bitmap.createBitmap(1, 1, Bitmap.Config.RGB_565)))
                 .when(tile).getIcon(any(Context.class));
-        tile.metaData = new Bundle();
-        tile.metaData.putString(SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS, "HI");
+        mActivityInfo.metaData.putString(SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS, "HI");
         tile.priority = 10;
         mImpl.bindPreferenceToTile(mActivity, MetricsProto.MetricsEvent.SETTINGS_GESTURES,
                 preference, tile, "123", Preference.DEFAULT_ORDER);
@@ -130,16 +130,15 @@ public class DashboardFeatureProviderImplTest {
         assertThat(preference.getTitle()).isEqualTo(tile.title);
         assertThat(preference.getSummary()).isEqualTo(tile.summary);
         assertThat(preference.getIcon()).isNotNull();
-        assertThat(preference.getFragment())
-                .isEqualTo(tile.metaData.getString(SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS));
+        assertThat(preference.getFragment()).isEqualTo(
+                mActivityInfo.metaData.getString(SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS));
         assertThat(preference.getOrder()).isEqualTo(-tile.priority);
     }
 
     @Test
     public void bindPreference_noFragmentMetadata_shouldBindIntent() {
         final Preference preference = new Preference(RuntimeEnvironment.application);
-        final Tile tile = new Tile(mActivityInfo);
-        tile.metaData = new Bundle();
+        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         tile.priority = 10;
         tile.intent = new Intent();
         tile.intent.setComponent(new ComponentName("pkg", "class"));
@@ -155,8 +154,7 @@ public class DashboardFeatureProviderImplTest {
     @Test
     public void bindPreference_noFragmentMetadata_shouldBindToProfileSelector() {
         final Preference preference = new Preference(RuntimeEnvironment.application);
-        final Tile tile = new Tile(mActivityInfo);
-        tile.metaData = new Bundle();
+        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         tile.userHandle = new ArrayList<>();
         tile.userHandle.add(mock(UserHandle.class));
         tile.userHandle.add(mock(UserHandle.class));
@@ -176,8 +174,7 @@ public class DashboardFeatureProviderImplTest {
     @Test
     public void bindPreference_noFragmentMetadataSingleUser_shouldBindToDirectLaunchIntent() {
         final Preference preference = new Preference(RuntimeEnvironment.application);
-        final Tile tile = new Tile(mActivityInfo);
-        tile.metaData = new Bundle();
+        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         tile.userHandle = new ArrayList<>();
         tile.userHandle.add(mock(UserHandle.class));
         tile.intent = new Intent();
@@ -201,8 +198,7 @@ public class DashboardFeatureProviderImplTest {
     @Test
     public void bindPreference_toInternalSettingActivity_shouldBindToDirectLaunchIntentAndNotLog() {
         final Preference preference = new Preference(RuntimeEnvironment.application);
-        final Tile tile = new Tile(mActivityInfo);
-        tile.metaData = new Bundle();
+        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         tile.userHandle = new ArrayList<>();
         tile.userHandle.add(mock(UserHandle.class));
         tile.intent = new Intent();
@@ -237,7 +233,7 @@ public class DashboardFeatureProviderImplTest {
     @Test
     public void bindPreference_withNullKeyNullPriority_shouldGenerateKeyAndPriority() {
         final Preference preference = new Preference(RuntimeEnvironment.application);
-        final Tile tile = new Tile(mActivityInfo);
+        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         tile.intent = new Intent();
         tile.intent.setComponent(new ComponentName("pkg", "class"));
         mImpl.bindPreferenceToTile(mActivity, MetricsProto.MetricsEvent.VIEW_UNKNOWN,
@@ -250,7 +246,7 @@ public class DashboardFeatureProviderImplTest {
     @Test
     public void bindPreference_noSummary_shouldSetSummaryToPlaceholder() {
         final Preference preference = new Preference(RuntimeEnvironment.application);
-        final Tile tile = new Tile(mActivityInfo);
+        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         tile.intent = new Intent();
         tile.intent.setComponent(new ComponentName("pkg", "class"));
         mImpl.bindPreferenceToTile(mActivity, MetricsProto.MetricsEvent.VIEW_UNKNOWN,
@@ -263,7 +259,7 @@ public class DashboardFeatureProviderImplTest {
     @Test
     public void bindPreference_hasSummary_shouldSetSummary() {
         final Preference preference = new Preference(RuntimeEnvironment.application);
-        final Tile tile = new Tile(mActivityInfo);
+        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         tile.summary = "test";
         tile.intent = new Intent();
         tile.intent.setComponent(new ComponentName("pkg", "class"));
@@ -277,11 +273,10 @@ public class DashboardFeatureProviderImplTest {
     @Config(shadows = {ShadowTileUtils.class, ShadowThreadUtils.class})
     public void bindPreference_hasSummaryUri_shouldLoadSummaryFromContentProvider() {
         final Preference preference = new Preference(RuntimeEnvironment.application);
-        final Tile tile = new Tile(mActivityInfo);
+        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         tile.intent = new Intent();
         tile.intent.setComponent(new ComponentName("pkg", "class"));
-        tile.metaData = new Bundle();
-        tile.metaData.putString(TileUtils.META_DATA_PREFERENCE_SUMMARY_URI,
+        mActivityInfo.metaData.putString(TileUtils.META_DATA_PREFERENCE_SUMMARY_URI,
                 "content://com.android.settings/tile_summary");
 
         mImpl.bindPreferenceToTile(mActivity, MetricsProto.MetricsEvent.VIEW_UNKNOWN,
@@ -293,7 +288,7 @@ public class DashboardFeatureProviderImplTest {
     @Test
     public void bindPreference_withNullKeyTileKey_shouldUseTileKey() {
         final Preference preference = new Preference(RuntimeEnvironment.application);
-        final Tile tile = new Tile(mActivityInfo);
+        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         tile.key = "key";
         tile.intent = new Intent();
         tile.intent.setComponent(new ComponentName("pkg", "class"));
@@ -307,13 +302,12 @@ public class DashboardFeatureProviderImplTest {
     @Config(shadows = {ShadowTileUtils.class, ShadowThreadUtils.class})
     public void bindPreference_withIconUri_shouldLoadIconFromContentProvider() {
         final Preference preference = new Preference(RuntimeEnvironment.application);
-        final Tile tile = new Tile(mActivityInfo);
+        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         tile.key = "key";
         tile.intent = new Intent();
         tile.intent.setComponent(
                 new ComponentName(RuntimeEnvironment.application.getPackageName(), "class"));
-        tile.metaData = new Bundle();
-        tile.metaData.putString(TileUtils.META_DATA_PREFERENCE_ICON_URI,
+        mActivityInfo.metaData.putString(TileUtils.META_DATA_PREFERENCE_ICON_URI,
                 "content://com.android.settings/tile_icon");
         mImpl.bindIcon(preference, tile);
 
@@ -324,8 +318,7 @@ public class DashboardFeatureProviderImplTest {
     public void bindPreference_withBaseOrder_shouldOffsetPriority() {
         final int baseOrder = 100;
         final Preference preference = new Preference(RuntimeEnvironment.application);
-        final Tile tile = new Tile(mActivityInfo);
-        tile.metaData = new Bundle();
+        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         tile.priority = 10;
         mImpl.bindPreferenceToTile(mActivity, MetricsProto.MetricsEvent.VIEW_UNKNOWN,
                 preference, tile, "123", baseOrder);
@@ -337,9 +330,8 @@ public class DashboardFeatureProviderImplTest {
     public void bindPreference_withOrderMetadata_shouldUseOrderInMetadata() {
         final Preference preference = new Preference(RuntimeEnvironment.application);
         final int testOrder = -30;
-        final Tile tile = new Tile(mActivityInfo);
-        tile.metaData = new Bundle();
-        tile.metaData.putInt(mImpl.META_DATA_KEY_ORDER, testOrder);
+        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
+        mActivityInfo.metaData.putInt(mImpl.META_DATA_KEY_ORDER, testOrder);
         tile.priority = 10;
         mImpl.bindPreferenceToTile(mActivity, MetricsProto.MetricsEvent.VIEW_UNKNOWN,
                 preference, tile, "123", Preference.DEFAULT_ORDER);
@@ -350,9 +342,8 @@ public class DashboardFeatureProviderImplTest {
     @Test
     public void bindPreference_invalidOrderMetadata_shouldIgnore() {
         final Preference preference = new Preference(RuntimeEnvironment.application);
-        final Tile tile = new Tile(mActivityInfo);
-        tile.metaData = new Bundle();
-        tile.metaData.putString(mImpl.META_DATA_KEY_ORDER, "hello");
+        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
+        mActivityInfo.metaData.putString(mImpl.META_DATA_KEY_ORDER, "hello");
         tile.priority = 10;
         mImpl.bindPreferenceToTile(mActivity, MetricsProto.MetricsEvent.VIEW_UNKNOWN,
                 preference, tile, "123", Preference.DEFAULT_ORDER);
@@ -364,12 +355,11 @@ public class DashboardFeatureProviderImplTest {
     public void bindPreference_withIntentActionMetadata_shouldSetLaunchAction() {
         Activity activity = Robolectric.buildActivity(Activity.class).get();
         final Preference preference = new Preference(RuntimeEnvironment.application);
-        final Tile tile = new Tile(mActivityInfo);
+        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         tile.key = "key";
         tile.intent = new Intent();
         tile.intent.setComponent(new ComponentName("pkg", "class"));
-        tile.metaData = new Bundle();
-        tile.metaData.putString("com.android.settings.intent.action", "TestAction");
+        mActivityInfo.metaData.putString("com.android.settings.intent.action", "TestAction");
         tile.userHandle = null;
         mImpl.bindPreferenceToTile(activity, MetricsProto.MetricsEvent.SETTINGS_GESTURES,
                 preference, tile, "123", Preference.DEFAULT_ORDER);
@@ -390,12 +380,11 @@ public class DashboardFeatureProviderImplTest {
         Activity activity = Robolectric.buildActivity(Activity.class).get();
         final ShadowApplication application = ShadowApplication.getInstance();
         final Preference preference = new Preference(application.getApplicationContext());
-        final Tile tile = new Tile(mActivityInfo);
+        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         tile.key = "key";
         tile.intent = new Intent();
         tile.intent.setComponent(new ComponentName("pkg", "class"));
-        tile.metaData = new Bundle();
-        tile.metaData.putString("com.android.settings.intent.action", "TestAction");
+        mActivityInfo.metaData.putString("com.android.settings.intent.action", "TestAction");
         tile.userHandle = null;
 
         mImpl.bindPreferenceToTile(activity, MetricsProto.MetricsEvent.SETTINGS_GESTURES,
@@ -425,7 +414,7 @@ public class DashboardFeatureProviderImplTest {
         mImpl = new DashboardFeatureProviderImpl(mActivity);
         ReflectionHelpers.setField(mImpl, "mCategoryManager", mCategoryManager);
         when(mCategoryManager.getTilesByCategory(mActivity, CategoryKey.CATEGORY_HOMEPAGE))
-                .thenReturn(new DashboardCategory());
+                .thenReturn(new DashboardCategory(CategoryKey.CATEGORY_HOMEPAGE));
 
         assertThat(mImpl.getPreferencesForCategory(null, null,
                 MetricsProto.MetricsEvent.SETTINGS_GESTURES, CategoryKey.CATEGORY_HOMEPAGE))
@@ -436,8 +425,8 @@ public class DashboardFeatureProviderImplTest {
     public void getPreferences_hasTileForCategory_shouldReturnPrefList() {
         mImpl = new DashboardFeatureProviderImpl(mActivity);
         ReflectionHelpers.setField(mImpl, "mCategoryManager", mCategoryManager);
-        final DashboardCategory category = new DashboardCategory();
-        category.addTile(new Tile(mActivityInfo));
+        final DashboardCategory category = new DashboardCategory(CategoryKey.CATEGORY_HOMEPAGE);
+        category.addTile(new Tile(mActivityInfo, category.key));
         when(mCategoryManager
                 .getTilesByCategory(any(Context.class), eq(CategoryKey.CATEGORY_HOMEPAGE)))
                 .thenReturn(category);
@@ -467,8 +456,7 @@ public class DashboardFeatureProviderImplTest {
 
     @Test
     public void openTileIntent_profileSelectionDialog_shouldShow() {
-        final Tile tile = new Tile(mActivityInfo);
-        tile.metaData = new Bundle();
+        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         tile.intent = new Intent();
         tile.intent.setComponent(new ComponentName("pkg", "class"));
         final ArrayList<UserHandle> handles = new ArrayList<>();
@@ -484,9 +472,8 @@ public class DashboardFeatureProviderImplTest {
 
     @Test
     public void openTileIntent_profileSelectionDialog_explicitMetadataShouldShow() {
-        final Tile tile = new Tile(mActivityInfo);
-        tile.metaData = new Bundle();
-        tile.metaData.putString(META_DATA_KEY_PROFILE, PROFILE_ALL);
+        mActivityInfo.metaData.putString(META_DATA_KEY_PROFILE, PROFILE_ALL);
+        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         tile.intent = new Intent();
         tile.intent.setComponent(new ComponentName("pkg", "class"));
         final ArrayList<UserHandle> handles = new ArrayList<>();
@@ -502,9 +489,8 @@ public class DashboardFeatureProviderImplTest {
 
     @Test
     public void openTileIntent_profileSelectionDialog_shouldNotShow() {
-        final Tile tile = new Tile(mActivityInfo);
-        tile.metaData = new Bundle();
-        tile.metaData.putString(META_DATA_KEY_PROFILE, PROFILE_PRIMARY);
+        mActivityInfo.metaData.putString(META_DATA_KEY_PROFILE, PROFILE_PRIMARY);
+        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         tile.intent = new Intent();
         tile.intent.setComponent(new ComponentName("pkg", "class"));
         final ArrayList<UserHandle> handles = new ArrayList<>();

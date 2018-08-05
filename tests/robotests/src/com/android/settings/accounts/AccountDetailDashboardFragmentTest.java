@@ -57,10 +57,13 @@ public class AccountDetailDashboardFragmentTest {
 
     private AccountDetailDashboardFragment mFragment;
     private Context mContext;
+    private ActivityInfo mActivityInfo;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
+        mActivityInfo = new ActivityInfo();
+        mActivityInfo.metaData = new Bundle();
 
         final Bundle args = new Bundle();
         args.putParcelable(METADATA_USER_HANDLE, UserHandle.CURRENT);
@@ -79,32 +82,26 @@ public class AccountDetailDashboardFragmentTest {
 
     @Test
     public void refreshDashboardTiles_HasAccountType_shouldDisplay() {
-        final Tile tile = new Tile(new ActivityInfo());
-        final Bundle metaData = new Bundle();
-        metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
-        metaData.putString(METADATA_ACCOUNT_TYPE, "com.abc");
-        tile.metaData = metaData;
+        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
+        mActivityInfo.metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
+        mActivityInfo.metaData.putString(METADATA_ACCOUNT_TYPE, "com.abc");
 
         assertThat(mFragment.displayTile(tile)).isTrue();
     }
 
     @Test
     public void refreshDashboardTiles_NoAccountType_shouldNotDisplay() {
-        final Tile tile = new Tile(new ActivityInfo());
-        final Bundle metaData = new Bundle();
-        metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
-        tile.metaData = metaData;
+        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
+        mActivityInfo.metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
 
         assertThat(mFragment.displayTile(tile)).isFalse();
     }
 
     @Test
     public void refreshDashboardTiles_OtherAccountType_shouldNotDisplay() {
-        final Tile tile = new Tile(new ActivityInfo());
-        final Bundle metaData = new Bundle();
-        metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
-        metaData.putString(METADATA_ACCOUNT_TYPE, "com.other");
-        tile.metaData = metaData;
+        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
+        mActivityInfo.metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
+        mActivityInfo.metaData.putString(METADATA_ACCOUNT_TYPE, "com.other");
 
         assertThat(mFragment.displayTile(tile)).isFalse();
     }
@@ -118,12 +115,12 @@ public class AccountDetailDashboardFragmentTest {
         when(packageManager.resolveActivity(any(Intent.class), anyInt()))
                 .thenReturn(mock(ResolveInfo.class));
 
-        final Tile tile = new Tile(new ActivityInfo());
+        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
         tile.key = "key";
-        tile.metaData = new Bundle();
-        tile.metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT);
-        tile.metaData.putString(METADATA_ACCOUNT_TYPE, "com.abc");
-        tile.metaData.putString("com.android.settings.intent.action", Intent.ACTION_ASSIST);
+        mActivityInfo.metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT);
+        mActivityInfo.metaData.putString(METADATA_ACCOUNT_TYPE, "com.abc");
+        mActivityInfo.metaData.putString("com.android.settings.intent.action",
+                Intent.ACTION_ASSIST);
         tile.intent = new Intent();
         tile.userHandle = null;
         mFragment.displayTile(tile);

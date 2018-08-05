@@ -126,7 +126,7 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
         if (mAccountType == null) {
             return false;
         }
-        final Bundle metadata = tile.metaData;
+        final Bundle metadata = tile.getMetaData();
         if (metadata == null) {
             return false;
         }

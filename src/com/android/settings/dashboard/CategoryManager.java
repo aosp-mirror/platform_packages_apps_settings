@@ -153,7 +153,7 @@ public class CategoryManager {
             boolean useNewKey = false;
             boolean useOldKey = false;
             for (Tile tile : tiles) {
-                if (CategoryKey.KEY_COMPAT_MAP.containsKey(tile.category)) {
+                if (CategoryKey.KEY_COMPAT_MAP.containsKey(tile.getCategory())) {
                     useOldKey = true;
                 } else {
                     useNewKey = true;
@@ -163,12 +163,13 @@ public class CategoryManager {
             // Uses only old key, map them to new keys one by one.
             if (useOldKey && !useNewKey) {
                 for (Tile tile : tiles) {
-                    final String newCategoryKey = CategoryKey.KEY_COMPAT_MAP.get(tile.category);
-                    tile.category = newCategoryKey;
+                    final String newCategoryKey =
+                            CategoryKey.KEY_COMPAT_MAP.get(tile.getCategory());
+                    tile.setCategory(newCategoryKey);
                     // move tile to new category.
                     DashboardCategory newCategory = categoryByKeyMap.get(newCategoryKey);
                     if (newCategory == null) {
-                        newCategory = new DashboardCategory();
+                        newCategory = new DashboardCategory(newCategoryKey);
                         categoryByKeyMap.put(newCategoryKey, newCategory);
                     }
                     newCategory.addTile(tile);
@@ -215,16 +216,5 @@ public class CategoryManager {
                 }
             }
         }
-    }
-
-    /**
-     * Sort priority value for tiles within a single {@code DashboardCategory}.
-     *
-     * @see #sortCategories(Context, Map)
-     */
-    private synchronized void sortCategoriesForExternalTiles(Context context,
-            DashboardCategory dashboardCategory) {
-        dashboardCategory.sortTiles(context.getPackageName());
-
     }
 }

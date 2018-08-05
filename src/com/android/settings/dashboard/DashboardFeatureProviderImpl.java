@@ -40,11 +40,11 @@ import androidx.preference.Preference;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.dashboard.profileselector.ProfileSelectDialog;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settingslib.drawer.DashboardCategory;
-import com.android.settingslib.drawer.ProfileSelectDialog;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.drawer.TileUtils;
 import com.android.settingslib.utils.ThreadUtils;
@@ -92,7 +92,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         }
         final List<Tile> tiles = category.getTiles();
         if (tiles == null || tiles.isEmpty()) {
-            Log.d(TAG, "tile list is empty, skipping category " + category.title);
+            Log.d(TAG, "tile list is empty, skipping category " + category.key);
             return null;
         }
         final List<Preference> preferences = new ArrayList<>();
@@ -143,7 +143,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         }
         bindSummary(pref, tile);
         bindIcon(pref, tile);
-        final Bundle metadata = tile.metaData;
+        final Bundle metadata = tile.getMetaData();
         String clsName = null;
         String action = null;
         Integer order = null;
@@ -218,15 +218,15 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     private void bindSummary(Preference preference, Tile tile) {
         if (tile.summary != null) {
             preference.setSummary(tile.summary);
-        } else if (tile.metaData != null
-                && tile.metaData.containsKey(META_DATA_PREFERENCE_SUMMARY_URI)) {
+        } else if (tile.getMetaData() != null
+                && tile.getMetaData().containsKey(META_DATA_PREFERENCE_SUMMARY_URI)) {
             // Set a placeholder summary before  starting to fetch real summary, this is necessary
             // to avoid preference height change.
             preference.setSummary(R.string.summary_placeholder);
 
             ThreadUtils.postOnBackgroundThread(() -> {
                 final Map<String, IContentProvider> providerMap = new ArrayMap<>();
-                final String uri = tile.metaData.getString(META_DATA_PREFERENCE_SUMMARY_URI);
+                final String uri = tile.getMetaData().getString(META_DATA_PREFERENCE_SUMMARY_URI);
                 final String summary = TileUtils.getTextFromUri(
                         mContext, uri, providerMap, META_DATA_PREFERENCE_SUMMARY);
                 ThreadUtils.postOnMainThread(() -> preference.setSummary(summary));
@@ -241,8 +241,8 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         final Icon tileIcon = tile.getIcon(mContext);
         if (tileIcon != null) {
             preference.setIcon(tileIcon.loadDrawable(preference.getContext()));
-        } else if (tile.metaData != null
-                && tile.metaData.containsKey(META_DATA_PREFERENCE_ICON_URI)) {
+        } else if (tile.getMetaData() != null
+                && tile.getMetaData().containsKey(META_DATA_PREFERENCE_ICON_URI)) {
             ThreadUtils.postOnBackgroundThread(() -> {
                 String packageName = null;
                 if (tile.intent != null) {
@@ -254,7 +254,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                     }
                 }
                 final Map<String, IContentProvider> providerMap = new ArrayMap<>();
-                final String uri = tile.metaData.getString(META_DATA_PREFERENCE_ICON_URI);
+                final String uri = tile.getMetaData().getString(META_DATA_PREFERENCE_ICON_URI);
                 final Pair<String, Integer> iconInfo = TileUtils.getIconFromUri(
                         mContext, packageName, uri, providerMap);
                 if (iconInfo == null) {

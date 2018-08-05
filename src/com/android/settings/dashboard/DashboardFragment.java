@@ -18,6 +18,7 @@ package com.android.settings.dashboard;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.ArrayMap;
@@ -40,7 +41,6 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
-import com.android.settingslib.drawer.TileUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -254,24 +254,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         return true;
     }
 
-    @VisibleForTesting
-    boolean tintTileIcon(Tile tile) {
-        final Context context = getContext();
-        if (tile.getIcon(context) == null) {
-            return false;
-        }
-        // First check if the tile has set the icon tintable metadata.
-        final Bundle metadata = tile.metaData;
-        if (metadata != null
-                && metadata.containsKey(TileUtils.META_DATA_PREFERENCE_ICON_TINTABLE)) {
-            return metadata.getBoolean(TileUtils.META_DATA_PREFERENCE_ICON_TINTABLE);
-        }
-        final String pkgName = context.getPackageName();
-        // If this drawable is coming from outside Settings, tint it to match the color.
-        return pkgName != null && tile.intent != null
-                && !pkgName.equals(tile.intent.getComponent().getPackageName());
-    }
-
     /**
      * Displays resource based tiles.
      */
@@ -343,7 +325,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         }
         final List<Tile> tiles = category.getTiles();
         if (tiles == null) {
-            Log.d(TAG, "tile list is empty, skipping category " + category.title);
+            Log.d(TAG, "tile list is empty, skipping category " + category.key);
             return;
         }
         // Create a list to track which tiles are to be removed.
@@ -356,7 +338,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         final Context context = getContext();
         mSummaryLoader = new SummaryLoader(getActivity(), getCategoryKey());
         mSummaryLoader.setSummaryConsumer(this);
-        final TypedArray a = context.obtainStyledAttributes(new int[] {
+        final TypedArray a = context.obtainStyledAttributes(new int[]{
                 android.R.attr.colorControlNormal});
         final int tintColor = a.getColor(0, context.getColor(android.R.color.white));
         a.recycle();
@@ -370,8 +352,11 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             if (!displayTile(tile)) {
                 continue;
             }
-            if (tintTileIcon(tile)) {
-                tile.getIcon(context).setTint(tintColor);
+            if (tile.isIconTintable(context)) {
+                final Icon icon = tile.getIcon(context);
+                if (icon != null) {
+                    icon.setTint(tintColor);
+                }
             }
             if (mDashboardTilePrefKeys.contains(key)) {
                 // Have the key already, will rebind.

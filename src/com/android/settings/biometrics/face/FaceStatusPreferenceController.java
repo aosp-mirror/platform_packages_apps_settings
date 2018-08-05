@@ -20,6 +20,7 @@ import android.content.Context;
 import android.hardware.face.FaceManager;
 
 import com.android.settings.R;
+import com.android.settings.Settings;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricStatusPreferenceController;
 
@@ -62,7 +63,7 @@ public class FaceStatusPreferenceController extends BiometricStatusPreferenceCon
 
     @Override
     protected String getSettingsClassName() {
-        return null;
+        return Settings.FaceSettingsActivity.class.getName();
     }
 
     @Override

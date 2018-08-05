@@ -31,6 +31,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.R.id;
@@ -50,11 +55,6 @@ import com.android.settingslib.suggestions.SuggestionControllerMixinCompat;
 import com.android.settingslib.utils.IconCache;
 
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.DashboardItemHolder>
         implements SummaryLoader.SummaryConsumer, SuggestionAdapter.Callback, LifecycleObserver,
@@ -321,8 +321,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 && !(icon instanceof RoundedHomepageIcon)) {
             icon = new RoundedHomepageIcon(mContext, icon);
             try {
-                if (tile.metaData != null) {
-                    final int colorRes = tile.metaData.getInt(
+                final Bundle metaData = tile.getMetaData();
+                if (metaData != null) {
+                    final int colorRes = metaData.getInt(
                             TileUtils.META_DATA_PREFERENCE_ICON_BACKGROUND_HINT, 0 /* default */);
                     if (colorRes != 0) {
                         final int bgColor = mContext.getPackageManager()

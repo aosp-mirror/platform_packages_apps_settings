@@ -53,7 +53,7 @@ public class SummaryLoaderTest {
         MockitoAnnotations.initMocks(this);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
 
-        mTile = new Tile(new ActivityInfo());
+        mTile = new Tile(new ActivityInfo(), CategoryKey.CATEGORY_HOMEPAGE);
         mTile.summary = SUMMARY_1;
         mCallbackInvoked = false;
 
@@ -85,8 +85,8 @@ public class SummaryLoaderTest {
     @Test
     public void testUpdateSummaryToCache_hasCache_shouldUpdate() {
         final String testSummary = "test_summary";
-        final DashboardCategory category = new DashboardCategory();
-        final Tile tile = new Tile(new ActivityInfo());
+        final DashboardCategory category = new DashboardCategory(CategoryKey.CATEGORY_HOMEPAGE);
+        final Tile tile = new Tile(new ActivityInfo(), category.key);
         tile.key = "123";
         tile.intent = new Intent();
         category.addTile(tile);

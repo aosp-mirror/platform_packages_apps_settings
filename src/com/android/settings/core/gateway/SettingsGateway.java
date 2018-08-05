@@ -52,6 +52,7 @@ import com.android.settings.applications.specialaccess.pictureinpicture.PictureI
 import com.android.settings.applications.specialaccess.vrlistener.VrListenerSettings;
 import com.android.settings.backup.PrivacySettings;
 import com.android.settings.backup.ToggleBackupSettingFragment;
+import com.android.settings.biometrics.face.FaceSettings;
 import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
@@ -187,6 +188,7 @@ public class SettingsGateway {
             PowerUsageSummary.class.getName(),
             AccountSyncSettings.class.getName(),
             AssistGestureSettings.class.getName(),
+            FaceSettings.class.getName(),
             SwipeToNotificationSettings.class.getName(),
             DoubleTapPowerSettings.class.getName(),
             DoubleTapScreenSettings.class.getName(),

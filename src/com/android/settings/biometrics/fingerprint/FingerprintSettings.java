@@ -40,8 +40,9 @@ import android.widget.Toast;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.SubSettings;
 import com.android.settings.Utils;
-import com.android.settings.biometrics.BiometricSettings;
+import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
@@ -66,7 +67,7 @@ import androidx.preference.PreferenceViewHolder;
 /**
  * Settings screen for fingerprints
  */
-public class FingerprintSettings extends BiometricSettings {
+public class FingerprintSettings extends SubSettings {
 
     private static final String TAG = "FingerprintSettings";
 
@@ -74,6 +75,10 @@ public class FingerprintSettings extends BiometricSettings {
 
     public static final String ANNOTATION_URL = "url";
     public static final String ANNOTATION_ADMIN_DETAILS = "admin_details";
+
+    private static final int RESULT_FINISHED = BiometricEnrollBase.RESULT_FINISHED;
+    private static final int RESULT_SKIP = BiometricEnrollBase.RESULT_SKIP;
+    private static final int RESULT_TIMEOUT = BiometricEnrollBase.RESULT_TIMEOUT;
 
     @Override
     public Intent getIntent() {

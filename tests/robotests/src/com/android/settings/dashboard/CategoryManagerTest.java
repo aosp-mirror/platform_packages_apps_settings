@@ -16,6 +16,8 @@
 
 package com.android.settings.dashboard;
 
+import static com.android.settingslib.drawer.CategoryKey.CATEGORY_HOMEPAGE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.ComponentName;
@@ -65,11 +67,9 @@ public class CategoryManagerTest {
 
     @Test
     public void backwardCompatCleanupForCategory_shouldNotChangeCategoryForNewKeys() {
-        final Tile tile1 = new Tile(mActivityInfo);
-        final Tile tile2 = new Tile(mActivityInfo);
-        tile1.category = CategoryKey.CATEGORY_ACCOUNT;
-        tile2.category = CategoryKey.CATEGORY_ACCOUNT;
-        final DashboardCategory category = new DashboardCategory();
+        final Tile tile1 = new Tile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT);
+        final Tile tile2 = new Tile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT);
+        final DashboardCategory category = new DashboardCategory(CategoryKey.CATEGORY_ACCOUNT);
         category.addTile(tile1);
         category.addTile(tile2);
         mCategoryByKeyMap.put(CategoryKey.CATEGORY_ACCOUNT, category);
@@ -84,14 +84,12 @@ public class CategoryManagerTest {
 
     @Test
     public void backwardCompatCleanupForCategory_shouldNotChangeCategoryForMixedKeys() {
-        final Tile tile1 = new Tile(mActivityInfo);
-        final Tile tile2 = new Tile(mActivityInfo);
+        final Tile tile1 = new Tile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT);
         final String oldCategory = "com.android.settings.category.wireless";
-        tile1.category = CategoryKey.CATEGORY_ACCOUNT;
-        tile2.category = oldCategory;
-        final DashboardCategory category1 = new DashboardCategory();
+        final Tile tile2 = new Tile(mActivityInfo, oldCategory);
+        final DashboardCategory category1 = new DashboardCategory(CategoryKey.CATEGORY_ACCOUNT);
         category1.addTile(tile1);
-        final DashboardCategory category2 = new DashboardCategory();
+        final DashboardCategory category2 = new DashboardCategory(oldCategory);
         category2.addTile(tile2);
         mCategoryByKeyMap.put(CategoryKey.CATEGORY_ACCOUNT, category1);
         mCategoryByKeyMap.put(oldCategory, category2);
@@ -108,10 +106,10 @@ public class CategoryManagerTest {
 
     @Test
     public void backwardCompatCleanupForCategory_shouldChangeCategoryForOldKeys() {
-        final Tile tile1 = new Tile(mActivityInfo);
         final String oldCategory = "com.android.settings.category.wireless";
-        tile1.category = oldCategory;
-        final DashboardCategory category1 = new DashboardCategory();
+        final Tile tile1 = new Tile(mActivityInfo, oldCategory);
+        tile1.setCategory(oldCategory);
+        final DashboardCategory category1 = new DashboardCategory(oldCategory);
         category1.addTile(tile1);
         mCategoryByKeyMap.put(oldCategory, category1);
         mTileByComponentCache.put(new Pair<>("PACKAGE", "CLASS1"), tile1);
@@ -131,23 +129,23 @@ public class CategoryManagerTest {
     public void sortCategories_singlePackage_shouldReorderBasedOnPriority() {
         // Create some fake tiles that are not sorted.
         final String testPackage = "com.android.test";
-        final DashboardCategory category = new DashboardCategory();
-        final Tile tile1 = new Tile(mActivityInfo);
+        final DashboardCategory category = new DashboardCategory(CATEGORY_HOMEPAGE);
+        final Tile tile1 = new Tile(mActivityInfo, category.key);
         tile1.intent =
                 new Intent().setComponent(new ComponentName(testPackage, "class1"));
         tile1.priority = 100;
-        final Tile tile2 = new Tile(mActivityInfo);
+        final Tile tile2 = new Tile(mActivityInfo, category.key);
         tile2.intent =
                 new Intent().setComponent(new ComponentName(testPackage, "class2"));
         tile2.priority = 50;
-        final Tile tile3 = new Tile(mActivityInfo);
+        final Tile tile3 = new Tile(mActivityInfo, category.key);
         tile3.intent =
                 new Intent().setComponent(new ComponentName(testPackage, "class3"));
         tile3.priority = 200;
         category.addTile(tile1);
         category.addTile(tile2);
         category.addTile(tile3);
-        mCategoryByKeyMap.put(CategoryKey.CATEGORY_HOMEPAGE, category);
+        mCategoryByKeyMap.put(CATEGORY_HOMEPAGE, category);
 
         // Sort their priorities
         mCategoryManager.sortCategories(ShadowApplication.getInstance().getApplicationContext(),
@@ -164,23 +162,23 @@ public class CategoryManagerTest {
         // Create some fake tiles that are not sorted.
         final String testPackage1 = "com.android.test1";
         final String testPackage2 = "com.android.test2";
-        final DashboardCategory category = new DashboardCategory();
-        final Tile tile1 = new Tile(mActivityInfo);
+        final DashboardCategory category = new DashboardCategory(CATEGORY_HOMEPAGE);
+        final Tile tile1 = new Tile(mActivityInfo, category.key);
         tile1.intent =
                 new Intent().setComponent(new ComponentName(testPackage2, "class1"));
         tile1.priority = 100;
-        final Tile tile2 = new Tile(mActivityInfo);
+        final Tile tile2 = new Tile(mActivityInfo, category.key);
         tile2.intent =
                 new Intent().setComponent(new ComponentName(testPackage1, "class2"));
         tile2.priority = 100;
-        final Tile tile3 = new Tile(mActivityInfo);
+        final Tile tile3 = new Tile(mActivityInfo, category.key);
         tile3.intent =
                 new Intent().setComponent(new ComponentName(testPackage1, "class3"));
         tile3.priority = 50;
         category.addTile(tile1);
         category.addTile(tile2);
         category.addTile(tile3);
-        mCategoryByKeyMap.put(CategoryKey.CATEGORY_HOMEPAGE, category);
+        mCategoryByKeyMap.put(CATEGORY_HOMEPAGE, category);
 
         // Sort their priorities
         mCategoryManager.sortCategories(mContext, mCategoryByKeyMap);
@@ -195,23 +193,23 @@ public class CategoryManagerTest {
     public void sortCategories_internalPackageTiles_shouldSkipTileForInternalPackage() {
         // Create some fake tiles that are not sorted.
         final String testPackage = mContext.getPackageName();
-        final DashboardCategory category = new DashboardCategory();
-        final Tile tile1 = new Tile(mActivityInfo);
+        final DashboardCategory category = new DashboardCategory(CATEGORY_HOMEPAGE);
+        final Tile tile1 = new Tile(mActivityInfo, category.key);
         tile1.intent =
                 new Intent().setComponent(new ComponentName(testPackage, "class1"));
         tile1.priority = 100;
-        final Tile tile2 = new Tile(mActivityInfo);
+        final Tile tile2 = new Tile(mActivityInfo, category.key);
         tile2.intent =
                 new Intent().setComponent(new ComponentName(testPackage, "class2"));
         tile2.priority = 100;
-        final Tile tile3 = new Tile(mActivityInfo);
+        final Tile tile3 = new Tile(mActivityInfo, category.key);
         tile3.intent =
                 new Intent().setComponent(new ComponentName(testPackage, "class3"));
         tile3.priority = 50;
         category.addTile(tile1);
         category.addTile(tile2);
         category.addTile(tile3);
-        mCategoryByKeyMap.put(CategoryKey.CATEGORY_HOMEPAGE, category);
+        mCategoryByKeyMap.put(CATEGORY_HOMEPAGE, category);
 
         // Sort their priorities
         mCategoryManager.sortCategories(mContext, mCategoryByKeyMap);
@@ -227,24 +225,24 @@ public class CategoryManagerTest {
         // Inject one external tile among internal tiles.
         final String testPackage = mContext.getPackageName();
         final String testPackage2 = "com.google.test2";
-        final DashboardCategory category = new DashboardCategory();
-        final Tile tile1 = new Tile(mActivityInfo);
+        final DashboardCategory category = new DashboardCategory(CATEGORY_HOMEPAGE);
+        final Tile tile1 = new Tile(mActivityInfo, category.key);
         tile1.intent = new Intent().setComponent(new ComponentName(testPackage, "class1"));
         tile1.priority = 2;
-        final Tile tile2 = new Tile(mActivityInfo);
+        final Tile tile2 = new Tile(mActivityInfo, category.key);
         tile2.intent = new Intent().setComponent(new ComponentName(testPackage, "class2"));
         tile2.priority = 1;
-        final Tile tile3 = new Tile(mActivityInfo);
+        final Tile tile3 = new Tile(mActivityInfo, category.key);
         tile3.intent = new Intent().setComponent(new ComponentName(testPackage2, "class0"));
         tile3.priority = 0;
-        final Tile tile4 = new Tile(mActivityInfo);
+        final Tile tile4 = new Tile(mActivityInfo, category.key);
         tile4.intent = new Intent().setComponent(new ComponentName(testPackage, "class3"));
         tile4.priority = -1;
         category.addTile(tile1);
         category.addTile(tile2);
         category.addTile(tile3);
         category.addTile(tile4);
-        mCategoryByKeyMap.put(CategoryKey.CATEGORY_HOMEPAGE, category);
+        mCategoryByKeyMap.put(CATEGORY_HOMEPAGE, category);
 
         // Sort their priorities
         mCategoryManager.sortCategories(mContext, mCategoryByKeyMap);
@@ -262,20 +260,20 @@ public class CategoryManagerTest {
         final String testPackage = mContext.getPackageName();
         final String testPackage2 = "com.google.test2";
         final String testPackage3 = "com.abcde.test3";
-        final DashboardCategory category = new DashboardCategory();
-        final Tile tile1 = new Tile(mActivityInfo);
+        final DashboardCategory category = new DashboardCategory(CATEGORY_HOMEPAGE);
+        final Tile tile1 = new Tile(mActivityInfo, category.key);
         tile1.intent = new Intent().setComponent(new ComponentName(testPackage2, "class1"));
         tile1.priority = 1;
-        final Tile tile2 = new Tile(mActivityInfo);
+        final Tile tile2 = new Tile(mActivityInfo, category.key);
         tile2.intent = new Intent().setComponent(new ComponentName(testPackage, "class2"));
         tile2.priority = 1;
-        final Tile tile3 = new Tile(mActivityInfo);
+        final Tile tile3 = new Tile(mActivityInfo, category.key);
         tile3.intent = new Intent().setComponent(new ComponentName(testPackage3, "class3"));
         tile3.priority = 1;
         category.addTile(tile1);
         category.addTile(tile2);
         category.addTile(tile3);
-        mCategoryByKeyMap.put(CategoryKey.CATEGORY_HOMEPAGE, category);
+        mCategoryByKeyMap.put(CATEGORY_HOMEPAGE, category);
 
         // Sort their priorities
         mCategoryManager.sortCategories(mContext, mCategoryByKeyMap);
@@ -290,23 +288,23 @@ public class CategoryManagerTest {
     public void filterTiles_noDuplicate_noChange() {
         // Create some unique tiles
         final String testPackage = mContext.getPackageName();
-        final DashboardCategory category = new DashboardCategory();
-        final Tile tile1 = new Tile(mActivityInfo);
+        final DashboardCategory category = new DashboardCategory(CATEGORY_HOMEPAGE);
+        final Tile tile1 = new Tile(mActivityInfo, category.key);
         tile1.intent =
                 new Intent().setComponent(new ComponentName(testPackage, "class1"));
         tile1.priority = 100;
-        final Tile tile2 = new Tile(mActivityInfo);
+        final Tile tile2 = new Tile(mActivityInfo, category.key);
         tile2.intent =
                 new Intent().setComponent(new ComponentName(testPackage, "class2"));
         tile2.priority = 100;
-        final Tile tile3 = new Tile(mActivityInfo);
+        final Tile tile3 = new Tile(mActivityInfo, category.key);
         tile3.intent =
                 new Intent().setComponent(new ComponentName(testPackage, "class3"));
         tile3.priority = 50;
         category.addTile(tile1);
         category.addTile(tile2);
         category.addTile(tile3);
-        mCategoryByKeyMap.put(CategoryKey.CATEGORY_HOMEPAGE, category);
+        mCategoryByKeyMap.put(CATEGORY_HOMEPAGE, category);
 
         mCategoryManager.filterDuplicateTiles(mCategoryByKeyMap);
 
@@ -317,23 +315,23 @@ public class CategoryManagerTest {
     public void filterTiles_hasDuplicate_shouldOnlyKeepUniqueTiles() {
         // Create tiles pointing to same intent.
         final String testPackage = mContext.getPackageName();
-        final DashboardCategory category = new DashboardCategory();
-        final Tile tile1 = new Tile(mActivityInfo);
+        final DashboardCategory category = new DashboardCategory(CATEGORY_HOMEPAGE);
+        final Tile tile1 = new Tile(mActivityInfo, category.key);
         tile1.intent =
                 new Intent().setComponent(new ComponentName(testPackage, "class1"));
         tile1.priority = 100;
-        final Tile tile2 = new Tile(mActivityInfo);
+        final Tile tile2 = new Tile(mActivityInfo, category.key);
         tile2.intent =
                 new Intent().setComponent(new ComponentName(testPackage, "class1"));
         tile2.priority = 100;
-        final Tile tile3 = new Tile(mActivityInfo);
+        final Tile tile3 = new Tile(mActivityInfo, category.key);
         tile3.intent =
                 new Intent().setComponent(new ComponentName(testPackage, "class1"));
         tile3.priority = 50;
         category.addTile(tile1);
         category.addTile(tile2);
         category.addTile(tile3);
-        mCategoryByKeyMap.put(CategoryKey.CATEGORY_HOMEPAGE, category);
+        mCategoryByKeyMap.put(CATEGORY_HOMEPAGE, category);
 
         mCategoryManager.filterDuplicateTiles(mCategoryByKeyMap);
 
