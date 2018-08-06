@@ -33,7 +33,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -45,6 +44,7 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -82,7 +82,7 @@ import java.util.ArrayList;
 public class DashboardFeatureProviderImplTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private UserManager mUserManager;
     @Mock
@@ -165,7 +165,7 @@ public class DashboardFeatureProviderImplTest {
                 preference, tile, "123", Preference.DEFAULT_ORDER);
         preference.getOnPreferenceClickListener().onPreferenceClick(null);
 
-        verify(mActivity).getFragmentManager();
+        verify(mActivity).getSupportFragmentManager();
     }
 
     @Test
@@ -334,7 +334,7 @@ public class DashboardFeatureProviderImplTest {
 
     @Test
     public void bindPreference_withIntentActionMetadata_shouldSetLaunchAction() {
-        Activity activity = Robolectric.buildActivity(Activity.class).get();
+        FragmentActivity activity = Robolectric.buildActivity(FragmentActivity.class).get();
         final Preference preference = new Preference(RuntimeEnvironment.application);
         final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         tile.key = "key";
@@ -356,7 +356,7 @@ public class DashboardFeatureProviderImplTest {
     public void clickPreference_withUnresolvableIntent_shouldNotLaunchAnything() {
         ReflectionHelpers.setField(
                 mImpl, "mPackageManager", RuntimeEnvironment.application.getPackageManager());
-        Activity activity = Robolectric.buildActivity(Activity.class).get();
+        FragmentActivity activity = Robolectric.buildActivity(FragmentActivity.class).get();
         final ShadowApplication application = ShadowApplication.getInstance();
         final Preference preference = new Preference(application.getApplicationContext());
         final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
@@ -442,7 +442,7 @@ public class DashboardFeatureProviderImplTest {
 
         verify(mActivity, never())
                 .startActivityForResult(any(Intent.class), eq(0));
-        verify(mActivity).getFragmentManager();
+        verify(mActivity).getSupportFragmentManager();
     }
 
     @Test
@@ -457,7 +457,7 @@ public class DashboardFeatureProviderImplTest {
 
         verify(mActivity, never())
                 .startActivityForResult(any(Intent.class), eq(0));
-        verify(mActivity).getFragmentManager();
+        verify(mActivity).getSupportFragmentManager();
     }
 
     @Test
@@ -472,6 +472,6 @@ public class DashboardFeatureProviderImplTest {
 
         verify(mActivity)
                 .startActivityForResult(any(Intent.class), eq(0));
-        verify(mActivity, never()).getFragmentManager();
+        verify(mActivity, never()).getSupportFragmentManager();
     }
 }

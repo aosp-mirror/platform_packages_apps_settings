@@ -20,7 +20,6 @@ import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_ICON
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_SUMMARY;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_SUMMARY_URI;
 
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.IContentProvider;
@@ -35,6 +34,7 @@ import android.util.Log;
 import android.util.Pair;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -83,7 +83,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     }
 
     @Override
-    public List<Preference> getPreferencesForCategory(Activity activity, Context context,
+    public List<Preference> getPreferencesForCategory(FragmentActivity activity, Context context,
             int sourceMetricsCategory, String key) {
         final DashboardCategory category = getTilesForCategory(key);
         if (category == null) {
@@ -130,8 +130,8 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     }
 
     @Override
-    public void bindPreferenceToTile(Activity activity, int sourceMetricsCategory, Preference pref,
-            Tile tile, String key, int baseOrder) {
+    public void bindPreferenceToTile(FragmentActivity activity, int sourceMetricsCategory,
+            Preference pref, Tile tile, String key, int baseOrder) {
         if (pref == null) {
             return;
         }
@@ -194,7 +194,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     }
 
     @Override
-    public void openTileIntent(Activity activity, Tile tile) {
+    public void openTileIntent(FragmentActivity activity, Tile tile) {
         if (tile == null) {
             Intent intent = new Intent(Settings.ACTION_SETTINGS).addFlags(
                     Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -260,7 +260,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         }
     }
 
-    private void launchIntentOrSelectProfile(Activity activity, Tile tile, Intent intent,
+    private void launchIntentOrSelectProfile(FragmentActivity activity, Tile tile, Intent intent,
             int sourceMetricCategory) {
         if (!isIntentResolvable(intent)) {
             Log.w(TAG, "Cannot resolve intent, skipping. " + intent);
@@ -275,7 +275,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             mMetricsFeatureProvider.logDashboardStartIntent(mContext, intent, sourceMetricCategory);
             activity.startActivityForResultAsUser(intent, 0, tile.userHandle.get(0));
         } else {
-            ProfileSelectDialog.show(activity.getFragmentManager(), tile);
+            ProfileSelectDialog.show(activity.getSupportFragmentManager(), tile);
         }
     }
 
