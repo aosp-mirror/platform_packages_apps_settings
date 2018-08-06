@@ -244,9 +244,6 @@ public abstract class DeviceListPreferenceFragment extends
         }
     }
 
-    @Override
-    public void onBluetoothStateChanged(int bluetoothState) {}
-
     /**
      * Add bluetooth device preferences to {@code preferenceGroup} which satisfy the {@code filter}
      *
@@ -269,14 +266,6 @@ public abstract class DeviceListPreferenceFragment extends
         preferenceGroup.setEnabled(true);
         removeCachedPrefs(preferenceGroup);
     }
-
-    public void onConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state) { }
-
-    @Override
-    public void onActiveDeviceChanged(CachedBluetoothDevice activeDevice, int bluetoothProfile) { }
-
-    @Override
-    public void onAudioModeChanged() { }
 
     /**
      * Return the key of the {@link PreferenceGroup} that contains the bluetooth devices

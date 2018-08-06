@@ -59,30 +59,6 @@ public final class BluetoothSummaryUpdater extends SummaryUpdater implements Blu
     }
 
     @Override
-    public void onScanningStateChanged(boolean started) {
-    }
-
-    @Override
-    public void onDeviceAdded(CachedBluetoothDevice cachedDevice) {
-    }
-
-    @Override
-    public void onDeviceDeleted(CachedBluetoothDevice cachedDevice) {
-    }
-
-    @Override
-    public void onDeviceBondStateChanged(CachedBluetoothDevice cachedDevice, int bondState) {
-    }
-
-    @Override
-    public void onActiveDeviceChanged(CachedBluetoothDevice activeDevice, int bluetoothProfile) {
-    }
-
-    @Override
-    public void onAudioModeChanged() {
-    }
-
-    @Override
     public void register(boolean listening) {
         if (mBluetoothAdapter == null) {
             return;
