@@ -17,19 +17,18 @@
 package com.android.settings.password;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.robolectric.RuntimeEnvironment.application;
 
 import android.content.Intent;
 import android.os.UserHandle;
+import android.view.View;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.password.ChooseLockPattern.ChooseLockPatternFragment;
 import com.android.settings.password.ChooseLockPattern.IntentBuilder;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settings.testutils.shadow.ShadowEventLogWriter;
+import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.setupwizardlib.GlifLayout;
 
@@ -41,15 +40,12 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowDrawable;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(
-        manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = {
-                SettingsShadowResources.class,
-                SettingsShadowResources.SettingsShadowTheme.class,
-                ShadowEventLogWriter.class,
-                ShadowUtils.class
-        })
+@Config(shadows = {
+    SettingsShadowResources.class,
+    SettingsShadowResourcesImpl.class,
+    SettingsShadowResources.SettingsShadowTheme.class,
+    ShadowUtils.class
+})
 public class ChooseLockPatternTest {
 
     @Test
@@ -100,13 +96,26 @@ public class ChooseLockPatternTest {
                 .isEqualTo(123);
     }
 
+    @Config(qualifiers = "sw400dp")
     @Test
-    public void assertThat_chooseLockIconChanged_WhenFingerprintExtraSet() {
+    public void fingerprintExtraSet_shouldDisplayFingerprintIcon() {
         ChooseLockPattern activity = createActivity(true);
         ChooseLockPatternFragment fragment = (ChooseLockPatternFragment)
                 activity.getFragmentManager().findFragmentById(R.id.main_content);
+
         ShadowDrawable drawable = Shadows.shadowOf(((GlifLayout) fragment.getView()).getIcon());
         assertThat(drawable.getCreatedFromResId()).isEqualTo(R.drawable.ic_fingerprint_header);
+    }
+
+    @Config(qualifiers = "sw300dp")
+    @Test
+    public void smallScreens_shouldHideIcon() {
+        ChooseLockPattern activity = createActivity(true);
+        ChooseLockPatternFragment fragment = (ChooseLockPatternFragment)
+                activity.getFragmentManager().findFragmentById(R.id.main_content);
+
+        View iconView = fragment.getView().findViewById(R.id.suw_layout_icon);
+        assertThat(iconView.getVisibility()).isEqualTo(View.GONE);
     }
 
     private ChooseLockPattern createActivity(boolean addFingerprintExtra) {

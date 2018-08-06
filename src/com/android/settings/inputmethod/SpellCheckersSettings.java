@@ -92,7 +92,10 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
-        mSwitchBar = ((SettingsActivity)getActivity()).getSwitchBar();
+        mSwitchBar = ((SettingsActivity) getActivity()).getSwitchBar();
+        mSwitchBar.setSwitchBarText(
+                R.string.spell_checker_master_switch_title,
+                R.string.spell_checker_master_switch_title);
         mSwitchBar.show();
         mSwitchBar.addOnSwitchChangeListener(this);
         updatePreferenceScreen();
@@ -131,7 +134,7 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
             final Preference preference = screen.getPreference(index);
             preference.setEnabled(isSpellCheckerEnabled);
             if (preference instanceof SpellCheckerPreference) {
-                final SpellCheckerPreference pref = (SpellCheckerPreference)preference;
+                final SpellCheckerPreference pref = (SpellCheckerPreference) preference;
                 pref.setSelected(mCurrentSci);
             }
         }
@@ -173,8 +176,13 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
         }
     }
 
-    private static int convertSubtypeIndexToDialogItemId(final int index) { return index + 1; }
-    private static int convertDialogItemIdToSubtypeIndex(final int item) { return item - 1; }
+    private static int convertSubtypeIndexToDialogItemId(final int index) {
+        return index + 1;
+    }
+
+    private static int convertDialogItemIdToSubtypeIndex(final int item) {
+        return item - 1;
+    }
 
     private void showChooseLanguageDialog() {
         if (mDialog != null && mDialog.isShowing()) {
@@ -191,7 +199,7 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.phone_language);
         final int subtypeCount = currentSci.getSubtypeCount();
-        final CharSequence[] items = new CharSequence[subtypeCount + 1 /* default */ ];
+        final CharSequence[] items = new CharSequence[subtypeCount + 1 /* default */];
         items[ITEM_ID_USE_SYSTEM_LANGUAGE] = getSpellCheckerSubtypeLabel(currentSci, null);
         int checkedItemId = ITEM_ID_USE_SYSTEM_LANGUAGE;
         for (int index = 0; index < subtypeCount; ++index) {

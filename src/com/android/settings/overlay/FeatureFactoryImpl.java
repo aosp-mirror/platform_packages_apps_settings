@@ -23,22 +23,17 @@ import android.net.ConnectivityManager;
 import android.os.UserManager;
 import android.support.annotation.Keep;
 
+import com.android.settings.accounts.AccountFeatureProvider;
+import com.android.settings.accounts.AccountFeatureProviderImpl;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProviderImpl;
-import com.android.settings.applications.IPackageManagerWrapperImpl;
-import com.android.settings.applications.PackageManagerWrapperImpl;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProviderImpl;
-import com.android.settings.connecteddevice.SmsMirroringFeatureProvider;
-import com.android.settings.connecteddevice.SmsMirroringFeatureProviderImpl;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.connecteddevice.dock.DockUpdaterFeatureProviderImpl;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProviderImpl;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl;
-import com.android.settings.datausage.DataPlanFeatureProvider;
-import com.android.settings.datausage.DataPlanFeatureProviderImpl;
-import com.android.settings.enterprise.DevicePolicyManagerWrapperImpl;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProviderImpl;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
@@ -47,13 +42,18 @@ import com.android.settings.gestures.AssistGestureFeatureProvider;
 import com.android.settings.gestures.AssistGestureFeatureProviderImpl;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProviderImpl;
+import com.android.settings.search.DeviceIndexFeatureProvider;
+import com.android.settings.search.DeviceIndexFeatureProviderImpl;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.search.SearchFeatureProviderImpl;
 import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.security.SecurityFeatureProviderImpl;
+import com.android.settings.slices.SlicesFeatureProvider;
+import com.android.settings.slices.SlicesFeatureProviderImpl;
 import com.android.settings.users.UserFeatureProvider;
 import com.android.settings.users.UserFeatureProviderImpl;
-import com.android.settings.vpn2.ConnectivityManagerWrapperImpl;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 /**
  * {@link FeatureFactory} implementation for AOSP Settings.
@@ -64,6 +64,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private ApplicationFeatureProvider mApplicationFeatureProvider;
     private MetricsFeatureProvider mMetricsFeatureProvider;
     private DashboardFeatureProviderImpl mDashboardFeatureProvider;
+    private DockUpdaterFeatureProvider mDockUpdaterFeatureProvider;
     private LocaleFeatureProvider mLocaleFeatureProvider;
     private EnterprisePrivacyFeatureProvider mEnterprisePrivacyFeatureProvider;
     private SearchFeatureProvider mSearchFeatureProvider;
@@ -73,8 +74,9 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private AssistGestureFeatureProvider mAssistGestureFeatureProvider;
     private UserFeatureProvider mUserFeatureProvider;
     private BluetoothFeatureProvider mBluetoothFeatureProvider;
-    private DataPlanFeatureProvider mDataPlanFeatureProvider;
-    private SmsMirroringFeatureProvider mSmsMirroringFeatureProvider;
+    private SlicesFeatureProvider mSlicesFeatureProvider;
+    private AccountFeatureProvider mAccountFeatureProvider;
+    private DeviceIndexFeatureProviderImpl mDeviceIndexFeatureProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -106,13 +108,21 @@ public class FeatureFactoryImpl extends FeatureFactory {
     }
 
     @Override
+    public DockUpdaterFeatureProvider getDockUpdaterFeatureProvider() {
+        if (mDockUpdaterFeatureProvider == null) {
+            mDockUpdaterFeatureProvider = new DockUpdaterFeatureProviderImpl();
+        }
+        return mDockUpdaterFeatureProvider;
+    }
+
+    @Override
     public ApplicationFeatureProvider getApplicationFeatureProvider(Context context) {
         if (mApplicationFeatureProvider == null) {
             mApplicationFeatureProvider = new ApplicationFeatureProviderImpl(context,
-                    new PackageManagerWrapperImpl(context.getPackageManager()),
-                    new IPackageManagerWrapperImpl(AppGlobals.getPackageManager()),
-                    new DevicePolicyManagerWrapperImpl((DevicePolicyManager) context
-                            .getSystemService(Context.DEVICE_POLICY_SERVICE)));
+                    new PackageManagerWrapper(context.getPackageManager()),
+                    AppGlobals.getPackageManager(),
+                    (DevicePolicyManager) context
+                            .getSystemService(Context.DEVICE_POLICY_SERVICE));
         }
         return mApplicationFeatureProvider;
     }
@@ -129,12 +139,10 @@ public class FeatureFactoryImpl extends FeatureFactory {
     public EnterprisePrivacyFeatureProvider getEnterprisePrivacyFeatureProvider(Context context) {
         if (mEnterprisePrivacyFeatureProvider == null) {
             mEnterprisePrivacyFeatureProvider = new EnterprisePrivacyFeatureProviderImpl(context,
-                    new DevicePolicyManagerWrapperImpl((DevicePolicyManager) context
-                            .getSystemService(Context.DEVICE_POLICY_SERVICE)),
-                    new PackageManagerWrapperImpl(context.getPackageManager()),
+                    (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE),
+                    new PackageManagerWrapper(context.getPackageManager()),
                     UserManager.get(context),
-                    new ConnectivityManagerWrapperImpl((ConnectivityManager) context
-                            .getSystemService(Context.CONNECTIVITY_SERVICE)),
+                    (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE),
                     context.getResources());
         }
         return mEnterprisePrivacyFeatureProvider;
@@ -186,14 +194,6 @@ public class FeatureFactoryImpl extends FeatureFactory {
     }
 
     @Override
-    public DataPlanFeatureProvider getDataPlanFeatureProvider() {
-        if (mDataPlanFeatureProvider == null) {
-            mDataPlanFeatureProvider = new DataPlanFeatureProviderImpl();
-        }
-        return mDataPlanFeatureProvider;
-    }
-
-    @Override
     public AssistGestureFeatureProvider getAssistGestureFeatureProvider() {
         if (mAssistGestureFeatureProvider == null) {
             mAssistGestureFeatureProvider = new AssistGestureFeatureProviderImpl();
@@ -202,10 +202,26 @@ public class FeatureFactoryImpl extends FeatureFactory {
     }
 
     @Override
-    public SmsMirroringFeatureProvider getSmsMirroringFeatureProvider() {
-        if (mSmsMirroringFeatureProvider == null) {
-            mSmsMirroringFeatureProvider = new SmsMirroringFeatureProviderImpl();
+    public SlicesFeatureProvider getSlicesFeatureProvider() {
+        if (mSlicesFeatureProvider == null) {
+            mSlicesFeatureProvider = new SlicesFeatureProviderImpl();
         }
-        return mSmsMirroringFeatureProvider;
+        return mSlicesFeatureProvider;
+    }
+
+    @Override
+    public AccountFeatureProvider getAccountFeatureProvider() {
+        if (mAccountFeatureProvider == null) {
+            mAccountFeatureProvider = new AccountFeatureProviderImpl();
+        }
+        return mAccountFeatureProvider;
+    }
+
+    @Override
+    public DeviceIndexFeatureProvider getDeviceIndexFeatureProvider() {
+        if (mDeviceIndexFeatureProvider == null) {
+            mDeviceIndexFeatureProvider = new DeviceIndexFeatureProviderImpl();
+        }
+        return mDeviceIndexFeatureProvider;
     }
 }

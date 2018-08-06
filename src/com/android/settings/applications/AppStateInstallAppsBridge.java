@@ -90,7 +90,7 @@ public class AppStateInstallAppsBridge extends AppStateBaseBridge {
         return mAppOpsManager.checkOpNoThrow(appOpCode, uid, packageName);
     }
 
-    InstallAppsState createInstallAppsStateFor(String packageName, int uid) {
+    public InstallAppsState createInstallAppsStateFor(String packageName, int uid) {
         final InstallAppsState appState = new InstallAppsState();
         appState.permissionRequested = hasRequestedAppOpPermission(
                 Manifest.permission.REQUEST_INSTALL_PACKAGES, packageName);
@@ -135,7 +135,7 @@ public class AppStateInstallAppsBridge extends AppStateBaseBridge {
         }
     }
 
-    static final AppFilter FILTER_APP_SOURCES = new AppFilter() {
+    public static final AppFilter FILTER_APP_SOURCES = new AppFilter() {
 
         @Override
         public void init() {

@@ -34,19 +34,18 @@ import android.content.pm.PermissionInfo;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-import java.util.ArrayList;
-import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AppPermissionsPreferenceControllerTest {
 
     private static final String PERM_LOCATION = "android.permission-group.LOCATION";
@@ -178,33 +177,33 @@ public class AppPermissionsPreferenceControllerTest {
         permissions[2] = mPermCamera;
         permissions[3] = mPermSms;
         mController.updateState(mPreference);
-        verify(mPreference).setSummary("Apps using Location, Microphone, Camera");
+        verify(mPreference).setSummary("Apps using location, microphone, camera");
 
         permissions[0] = mPermPhone;
         permissions[1] = mPermMic;
         permissions[2] = mPermCamera;
         permissions[3] = mPermSms;
         mController.updateState(mPreference);
-        verify(mPreference).setSummary("Apps using Microphone, Camera, Sms");
+        verify(mPreference).setSummary("Apps using microphone, camera, sms");
 
         permissions[0] = mPermPhone;
         permissions[1] = mPermMic;
         permissions[2] = mPermContacts;
         permissions[3] = mPermSms;
         mController.updateState(mPreference);
-        verify(mPreference).setSummary("Apps using Microphone, Sms, Contacts");
+        verify(mPreference).setSummary("Apps using microphone, sms, contacts");
 
         permissions = new PermissionInfo[2];
         info.permissions = permissions;
         permissions[0] = mPermLocation;
         permissions[1] = mPermCamera;
         mController.updateState(mPreference);
-        verify(mPreference).setSummary("Apps using Location, Camera");
+        verify(mPreference).setSummary("Apps using location, camera");
 
         permissions = new PermissionInfo[1];
         info.permissions = permissions;
         permissions[0] = mPermCamera;
         mController.updateState(mPreference);
-        verify(mPreference).setSummary("Apps using Camera");
+        verify(mPreference).setSummary("Apps using camera");
     }
 }

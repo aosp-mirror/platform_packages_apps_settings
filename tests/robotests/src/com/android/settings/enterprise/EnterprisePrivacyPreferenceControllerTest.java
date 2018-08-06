@@ -16,14 +16,15 @@
 
 package com.android.settings.enterprise;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-import com.android.settings.core.PreferenceAvailabilityObserver;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,18 +32,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-/**
- * Tests for {@link EnterprisePrivacyPreferenceController}.
- */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public final class EnterprisePrivacyPreferenceControllerTest {
+public class EnterprisePrivacyPreferenceControllerTest {
 
     private static final String MANAGED_GENERIC = "managed by organization";
     private static final String MANAGED_WITH_NAME = "managed by Foo, Inc.";
@@ -52,22 +44,14 @@ public final class EnterprisePrivacyPreferenceControllerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     private FakeFeatureFactory mFeatureFactory;
-    @Mock private PreferenceAvailabilityObserver mObserver;
 
     private EnterprisePrivacyPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-        mController = new EnterprisePrivacyPreferenceController(mContext, null /* lifecycle */);
-        mController.setAvailabilityObserver(mObserver);
-    }
-
-    @Test
-    public void testGetAvailabilityObserver() {
-        assertThat(mController.getAvailabilityObserver()).isEqualTo(mObserver);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
+        mController = new EnterprisePrivacyPreferenceController(mContext);
     }
 
     @Test
@@ -88,17 +72,15 @@ public final class EnterprisePrivacyPreferenceControllerTest {
                 .thenReturn(MANAGING_ORGANIZATION);
         mController.updateState(preference);
         assertThat(preference.getSummary()).isEqualTo(MANAGED_WITH_NAME);
-      }
+    }
 
     @Test
     public void testIsAvailable() {
         when(mFeatureFactory.enterprisePrivacyFeatureProvider.hasDeviceOwner()).thenReturn(false);
         assertThat(mController.isAvailable()).isFalse();
-        verify(mObserver).onPreferenceAvailabilityUpdated(KEY_ENTERPRISE_PRIVACY, false);
 
         when(mFeatureFactory.enterprisePrivacyFeatureProvider.hasDeviceOwner()).thenReturn(true);
         assertThat(mController.isAvailable()).isTrue();
-        verify(mObserver).onPreferenceAvailabilityUpdated(KEY_ENTERPRISE_PRIVACY, true);
     }
 
     @Test

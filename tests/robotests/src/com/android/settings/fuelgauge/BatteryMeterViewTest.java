@@ -16,14 +16,13 @@
 package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.graphics.ColorFilter;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.SettingsShadowResources.SettingsShadowTheme;
@@ -37,17 +36,13 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-// TODO: Consider making the shadow class set global using a robolectric.properties file.
-@Config(manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = {
-                SettingsShadowResources.class,
-                SettingsShadowTheme.class,
-        })
+@Config(shadows = {SettingsShadowResources.class, SettingsShadowTheme.class})
 public class BatteryMeterViewTest {
+
     private static final int BATTERY_LEVEL = 100;
     private static final int BATTERY_CRITICAL_LEVEL = 15;
     private static final int BATTERY_LOW_LEVEL = 3;
+
     @Mock
     private ColorFilter mErrorColorFilter;
     @Mock
@@ -68,7 +63,7 @@ public class BatteryMeterViewTest {
         mBatteryMeterView.mAccentColorFilter = mAccentColorFilter;
         mBatteryMeterView.mErrorColorFilter = mErrorColorFilter;
 
-        doReturn(BATTERY_CRITICAL_LEVEL).when(mDrawable).getCriticalLevel();
+        when(mDrawable.getCriticalLevel()).thenReturn(BATTERY_CRITICAL_LEVEL);
     }
 
     @Test

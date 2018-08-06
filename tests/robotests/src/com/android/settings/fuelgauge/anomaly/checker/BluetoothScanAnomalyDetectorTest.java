@@ -17,22 +17,20 @@
 package com.android.settings.fuelgauge.anomaly.checker;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
 import android.os.BatteryStats;
 import android.text.format.DateUtils;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
-import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.fuelgauge.anomaly.AnomalyDetectionPolicy;
@@ -46,15 +44,14 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BluetoothScanAnomalyDetectorTest {
+
     private static final String TARGET_PACKAGE_NAME = "com.android.app";
     private static final int ANOMALY_UID = 111;
     private static final int NORMAL_UID = 222;
@@ -108,7 +105,7 @@ public class BluetoothScanAnomalyDetectorTest {
         mUsageList.add(mAnomalySipper);
         mUsageList.add(mNormalSipper);
         mUsageList.add(mTargetSipper);
-        doReturn(mUsageList).when(mBatteryStatsHelper).getUsageList();
+        when(mBatteryStatsHelper.getUsageList()).thenReturn(mUsageList);
 
         mBluetoothScanAnomalyDetector = spy(new BluetoothScanAnomalyDetector(mContext, mPolicy,
                 mAnomalyUtils));
@@ -133,8 +130,8 @@ public class BluetoothScanAnomalyDetectorTest {
         final Anomaly anomaly = createBluetoothAnomaly(ANOMALY_UID);
         final Anomaly targetAnomaly = createBluetoothAnomaly(TARGET_UID);
 
-        List<Anomaly> mAnomalies = mBluetoothScanAnomalyDetector.detectAnomalies(
-                mBatteryStatsHelper);
+        List<Anomaly> mAnomalies =
+            mBluetoothScanAnomalyDetector.detectAnomalies(mBatteryStatsHelper);
 
         assertThat(mAnomalies).containsExactly(anomaly, targetAnomaly);
     }
@@ -144,11 +141,10 @@ public class BluetoothScanAnomalyDetectorTest {
         doReturn(TARGET_UID).when(mBatteryUtils).getPackageUid(TARGET_PACKAGE_NAME);
         final Anomaly targetAnomaly = createBluetoothAnomaly(TARGET_UID);
 
-        List<Anomaly> mAnomalies = mBluetoothScanAnomalyDetector.detectAnomalies(
-                mBatteryStatsHelper, TARGET_PACKAGE_NAME);
+        List<Anomaly> mAnomalies =
+            mBluetoothScanAnomalyDetector.detectAnomalies(mBatteryStatsHelper, TARGET_PACKAGE_NAME);
 
         assertThat(mAnomalies).containsExactly(targetAnomaly);
-
     }
 
     private Anomaly createBluetoothAnomaly(int uid) {
@@ -158,5 +154,4 @@ public class BluetoothScanAnomalyDetectorTest {
                 .setBluetoothScanningTimeMs(ANOMALY_BLUETOOTH_SCANNING_TIME)
                 .build();
     }
-
 }

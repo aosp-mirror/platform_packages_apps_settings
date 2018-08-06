@@ -16,6 +16,17 @@
 
 package com.android.settings.applications.assist;
 
+import static android.arch.lifecycle.Lifecycle.Event.ON_RESUME;
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -24,7 +35,6 @@ import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.TwoStatePreference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -38,17 +48,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AssistFlashScreenPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -61,13 +61,15 @@ public class AssistFlashScreenPreferenceControllerTest {
     private AssistFlashScreenPreferenceController.SettingObserver mObserver;
     private Context mContext;
     private AssistFlashScreenPreferenceController mController;
+    private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
-        mLifecycle = new Lifecycle();
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         mContext = RuntimeEnvironment.application;
         mController = spy(new AssistFlashScreenPreferenceController(mContext, mLifecycle));
         mLifecycle.addObserver(mController);
@@ -116,7 +118,7 @@ public class AssistFlashScreenPreferenceControllerTest {
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.ASSIST_DISCLOSURE_ENABLED, 1);
 
-        mLifecycle.onResume();
+        mLifecycle.handleLifecycleEvent(ON_RESUME);
 
         verify(mObserver).register(any(ContentResolver.class), eq(true));
         verify(mPreference).setChecked(true);

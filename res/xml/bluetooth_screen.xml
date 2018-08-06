@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2018 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="bluetooth_switchbar_screen"
+    android:title="@string/bluetooth_settings_title">
+
+    <Preference
+        android:key="bluetooth_screen_bt_pair_rename_devices"
+        android:title="@string/bluetooth_device_name"
+        android:summary="@string/summary_placeholder"
+        settings:controller="com.android.settings.bluetooth.BluetoothDeviceRenamePreferenceController"/>
+
+    <com.android.settingslib.RestrictedPreference
+        android:key="bluetooth_screen_add_bt_devices"
+        android:title="@string/bluetooth_pairing_pref_title"
+        android:icon="@drawable/ic_menu_add"
+        android:summary="@string/connected_device_add_device_summary"
+        android:fragment="com.android.settings.bluetooth.BluetoothPairingDetail"
+        settings:allowDividerAbove="true"
+        settings:userRestriction="no_config_bluetooth"
+        settings:useAdminDisabledSummary="true"
+        settings:controller="com.android.settings.connecteddevice.AddDevicePreferenceController"/>
+
+</PreferenceScreen>

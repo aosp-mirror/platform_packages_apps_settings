@@ -20,30 +20,39 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.provider.Settings;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.PhoneStateIntentReceiver;
 import com.android.internal.telephony.TelephonyProperties;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.WirelessUtils;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
-public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListener {
+public class AirplaneModeEnabler {
 
     private static final int EVENT_SERVICE_STATE_CHANGED = 3;
 
     private final Context mContext;
-    private final SwitchPreference mSwitchPref;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     private PhoneStateIntentReceiver mPhoneStateReceiver;
 
-    private Handler mHandler = new Handler() {
+    private OnAirplaneModeChangedListener mOnAirplaneModeChangedListener;
+
+    public interface OnAirplaneModeChangedListener {
+        /**
+         * Called when airplane mode status is changed.
+         *
+         * @param isAirplaneModeOn the airplane mode is on
+         */
+        void onAirplaneModeChanged(boolean isAirplaneModeOn);
+    }
+
+    private Handler mHandler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -54,32 +63,27 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
         }
     };
 
-    private ContentObserver mAirplaneModeObserver = new ContentObserver(new Handler()) {
+    private ContentObserver mAirplaneModeObserver = new ContentObserver(
+            new Handler(Looper.getMainLooper())) {
         @Override
         public void onChange(boolean selfChange) {
             onAirplaneModeChanged();
         }
     };
 
-    public AirplaneModeEnabler(Context context, SwitchPreference airplaneModeSwitchPreference,
-            MetricsFeatureProvider metricsFeatureProvider) {
+    public AirplaneModeEnabler(Context context, MetricsFeatureProvider metricsFeatureProvider,
+            OnAirplaneModeChangedListener listener) {
 
         mContext = context;
-        mSwitchPref = airplaneModeSwitchPreference;
         mMetricsFeatureProvider = metricsFeatureProvider;
-
-        airplaneModeSwitchPreference.setPersistent(false);
+        mOnAirplaneModeChangedListener = listener;
 
         mPhoneStateReceiver = new PhoneStateIntentReceiver(mContext, mHandler);
         mPhoneStateReceiver.notifyServiceState(EVENT_SERVICE_STATE_CHANGED);
     }
 
     public void resume() {
-
-        mSwitchPref.setChecked(WirelessUtils.isAirplaneModeOn(mContext));
-
         mPhoneStateReceiver.registerIntent();
-        mSwitchPref.setOnPreferenceChangeListener(this);
         mContext.getContentResolver().registerContentObserver(
                 Settings.Global.getUriFor(Settings.Global.AIRPLANE_MODE_ON), true,
                 mAirplaneModeObserver);
@@ -87,7 +91,6 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
 
     public void pause() {
         mPhoneStateReceiver.unregisterIntent();
-        mSwitchPref.setOnPreferenceChangeListener(null);
         mContext.getContentResolver().unregisterContentObserver(mAirplaneModeObserver);
     }
 
@@ -95,8 +98,11 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
         // Change the system setting
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON,
                 enabling ? 1 : 0);
-        // Update the UI to reflect system setting
-        mSwitchPref.setChecked(enabling);
+
+        // Notify listener the system setting is changed.
+        if (mOnAirplaneModeChangedListener != null) {
+            mOnAirplaneModeChangedListener.onAirplaneModeChanged(enabling);
+        }
 
         // Post the intent
         Intent intent = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);
@@ -113,22 +119,20 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
      * - mobile does not send failure notification, fail on timeout.
      */
     private void onAirplaneModeChanged() {
-        mSwitchPref.setChecked(WirelessUtils.isAirplaneModeOn(mContext));
+        if (mOnAirplaneModeChangedListener != null) {
+            mOnAirplaneModeChangedListener.onAirplaneModeChanged(isAirplaneModeOn());
+        }
     }
 
-    /**
-     * Called when someone clicks on the checkbox preference.
-     */
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
+    public void setAirplaneMode(boolean isAirplaneModeOn) {
         if (Boolean.parseBoolean(
                 SystemProperties.get(TelephonyProperties.PROPERTY_INECM_MODE))) {
             // In ECM mode, do not update database at this point
         } else {
-            Boolean value = (Boolean) newValue;
-            mMetricsFeatureProvider.action(mContext, MetricsEvent.ACTION_AIRPLANE_TOGGLE, value);
-            setAirplaneModeOn(value);
+            mMetricsFeatureProvider.action(mContext, MetricsEvent.ACTION_AIRPLANE_TOGGLE,
+                    isAirplaneModeOn);
+            setAirplaneModeOn(isAirplaneModeOn);
         }
-        return true;
     }
 
     public void setAirplaneModeInECM(boolean isECMExit, boolean isAirplaneModeOn) {
@@ -141,4 +145,7 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
         }
     }
 
+    public boolean isAirplaneModeOn() {
+        return WirelessUtils.isAirplaneModeOn(mContext);
+    }
 }

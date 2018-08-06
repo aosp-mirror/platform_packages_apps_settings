@@ -17,105 +17,52 @@
 
 package com.android.settings.search;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import android.provider.SearchIndexablesContract;
-import android.test.AndroidTestCase;
-import android.test.suitebuilder.annotation.SmallTest;
+import android.support.test.filters.SmallTest;
+import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-public class SearchIndexablesContractTest extends AndroidTestCase {
-        @SmallTest
-        public void testRawColumns_IncludesRank() {
-            assertEquals(SearchIndexablesContract.RawData.COLUMN_RANK,
-                    SearchIndexablesContract.INDEXABLES_RAW_COLUMNS[0]);
-        }
+@SmallTest
+@RunWith(AndroidJUnit4.class)
+public class SearchIndexablesContractTest {
 
-        @SmallTest
-        public void testRawColumns_IncludesTitle() {
-            assertEquals(SearchIndexablesContract.RawData.COLUMN_TITLE,
-                    SearchIndexablesContract.INDEXABLES_RAW_COLUMNS[1]);
-        }
-
-        @SmallTest
-        public void testRawColumns_IncludesSummaryOn() {
-            assertEquals(SearchIndexablesContract.RawData.COLUMN_SUMMARY_ON,
-                    SearchIndexablesContract.INDEXABLES_RAW_COLUMNS[2]);
-        }
-
-        @SmallTest
-        public void testRawColumns_IncludesSummaryOff() {
-            assertEquals(SearchIndexablesContract.RawData.COLUMN_SUMMARY_OFF,
-                    SearchIndexablesContract.INDEXABLES_RAW_COLUMNS[3]);
-        }
-
-        @SmallTest
-        public void testRawColumns_IncludesEntries() {
-            assertEquals(SearchIndexablesContract.RawData.COLUMN_ENTRIES,
-                    SearchIndexablesContract.INDEXABLES_RAW_COLUMNS[4]);
-        }
-
-        @SmallTest
-        public void testRawColumns_IncludesKeywords() {
-            assertEquals(SearchIndexablesContract.RawData.COLUMN_KEYWORDS,
-                    SearchIndexablesContract.INDEXABLES_RAW_COLUMNS[5]);
-        }
-
-        @SmallTest
-        public void testRawColumns_IncludesScreenTitle() {
-            assertEquals(SearchIndexablesContract.RawData.COLUMN_SCREEN_TITLE,
-                    SearchIndexablesContract.INDEXABLES_RAW_COLUMNS[6]);
-        }
-
-        @SmallTest
-        public void testRawColumns_IncludesClassName() {
-            assertEquals(SearchIndexablesContract.RawData.COLUMN_CLASS_NAME,
-                    SearchIndexablesContract.INDEXABLES_RAW_COLUMNS[7]);
-        }
-
-        @SmallTest
-        public void testRawColumns_IncludesIcon() {
-            assertEquals(SearchIndexablesContract.RawData.COLUMN_ICON_RESID,
-                    SearchIndexablesContract.INDEXABLES_RAW_COLUMNS[8]);
-        }
-
-        @SmallTest
-        public void testRawColumns_IncludesIntentAction() {
-            assertEquals(SearchIndexablesContract.RawData.COLUMN_INTENT_ACTION,
-                    SearchIndexablesContract.INDEXABLES_RAW_COLUMNS[9]);
-        }
-
-        @SmallTest
-        public void testRawColumns_IncludesIntentTargetPackage() {
-            assertEquals(SearchIndexablesContract.RawData.COLUMN_INTENT_TARGET_PACKAGE,
-                    SearchIndexablesContract.INDEXABLES_RAW_COLUMNS[10]);
-        }
-
-        @SmallTest
-        public void testRawColumns_IncludesTargetClass() {
-            assertEquals(SearchIndexablesContract.RawData.COLUMN_INTENT_TARGET_CLASS,
-                    SearchIndexablesContract.INDEXABLES_RAW_COLUMNS[11]);
-        }
-
-        @SmallTest
-        public void testRawColumns_IncludesKey() {
-            assertEquals(SearchIndexablesContract.RawData.COLUMN_KEY,
-                    SearchIndexablesContract.INDEXABLES_RAW_COLUMNS[12]);
-        }
-
-        @SmallTest
-        public void testRawColumns_IncludesUserId() {
-            assertEquals(SearchIndexablesContract.RawData.COLUMN_USER_ID,
-                    SearchIndexablesContract.INDEXABLES_RAW_COLUMNS[13]);
-        }
-
-        @SmallTest
-        public void testRawColumns_IncludesPayloadType() {
-            assertEquals(SearchIndexablesContract.RawData.PAYLOAD_TYPE,
-                    SearchIndexablesContract.INDEXABLES_RAW_COLUMNS[14]);
-        }
-
-        @SmallTest
-        public void testRawColumns_IncludesPayload() {
-            assertEquals(SearchIndexablesContract.RawData.PAYLOAD,
-                    SearchIndexablesContract.INDEXABLES_RAW_COLUMNS[15]);
-        }
+    @Test
+    public void testRawColumns_matchContractIndexing() {
+        assertThat(SearchIndexablesContract.RawData.COLUMN_RANK)
+                .isEqualTo(SearchIndexablesContract.INDEXABLES_RAW_COLUMNS[0]);
+        assertThat(SearchIndexablesContract.RawData.COLUMN_TITLE)
+                .isEqualTo(SearchIndexablesContract.INDEXABLES_RAW_COLUMNS[1]);
+        assertThat(SearchIndexablesContract.RawData.COLUMN_SUMMARY_ON)
+                .isEqualTo(SearchIndexablesContract.INDEXABLES_RAW_COLUMNS[2]);
+        assertThat(SearchIndexablesContract.RawData.COLUMN_SUMMARY_OFF)
+                .isEqualTo(SearchIndexablesContract.INDEXABLES_RAW_COLUMNS[3]);
+        assertThat(SearchIndexablesContract.RawData.COLUMN_ENTRIES)
+                .isEqualTo(SearchIndexablesContract.INDEXABLES_RAW_COLUMNS[4]);
+        assertThat(SearchIndexablesContract.RawData.COLUMN_KEYWORDS)
+                .isEqualTo(SearchIndexablesContract.INDEXABLES_RAW_COLUMNS[5]);
+        assertThat(SearchIndexablesContract.RawData.COLUMN_SCREEN_TITLE)
+                .isEqualTo(SearchIndexablesContract.INDEXABLES_RAW_COLUMNS[6]);
+        assertThat(SearchIndexablesContract.RawData.COLUMN_CLASS_NAME)
+                .isEqualTo(SearchIndexablesContract.INDEXABLES_RAW_COLUMNS[7]);
+        assertThat(SearchIndexablesContract.RawData.COLUMN_ICON_RESID)
+                .isEqualTo(SearchIndexablesContract.INDEXABLES_RAW_COLUMNS[8]);
+        assertThat(SearchIndexablesContract.RawData.COLUMN_INTENT_ACTION)
+                .isEqualTo(SearchIndexablesContract.INDEXABLES_RAW_COLUMNS[9]);
+        assertThat(SearchIndexablesContract.RawData.COLUMN_INTENT_TARGET_PACKAGE)
+                .isEqualTo(SearchIndexablesContract.INDEXABLES_RAW_COLUMNS[10]);
+        assertThat(SearchIndexablesContract.RawData.COLUMN_INTENT_TARGET_CLASS)
+                .isEqualTo(SearchIndexablesContract.INDEXABLES_RAW_COLUMNS[11]);
+        assertThat(SearchIndexablesContract.RawData.COLUMN_KEY)
+                .isEqualTo(SearchIndexablesContract.INDEXABLES_RAW_COLUMNS[12]);
+        assertThat(SearchIndexablesContract.RawData.COLUMN_USER_ID)
+                .isEqualTo(SearchIndexablesContract.INDEXABLES_RAW_COLUMNS[13]);
+        assertThat(SearchIndexablesContract.RawData.PAYLOAD_TYPE)
+                .isEqualTo(SearchIndexablesContract.INDEXABLES_RAW_COLUMNS[14]);
+        assertThat(SearchIndexablesContract.RawData.PAYLOAD)
+                .isEqualTo(SearchIndexablesContract.INDEXABLES_RAW_COLUMNS[15]);
+    }
 }

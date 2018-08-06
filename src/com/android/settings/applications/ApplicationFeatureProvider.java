@@ -17,23 +17,12 @@
 package com.android.settings.applications;
 
 import android.annotation.UserIdInt;
-import android.app.Fragment;
 import android.content.Intent;
-import android.view.View;
-
-import com.android.settings.applications.instantapps.InstantAppButtonsController;
 
 import java.util.List;
 import java.util.Set;
 
 public interface ApplicationFeatureProvider {
-
-    /**
-     * Returns a new {@link InstantAppButtonsController} instance for showing buttons
-     * only relevant to instant apps.
-     */
-    InstantAppButtonsController newInstantAppButtonsController(Fragment fragment,
-            View view, InstantAppButtonsController.ShowDialogDelegate showDialogDelegate);
 
     /**
      * Calculates the total number of apps installed on the device via policy in the current user

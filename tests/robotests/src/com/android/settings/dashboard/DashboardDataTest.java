@@ -17,18 +17,19 @@
 package com.android.settings.dashboard;
 
 import static com.android.settings.dashboard.DashboardData.STABLE_ID_CONDITION_CONTAINER;
-import static com.android.settings.dashboard.DashboardData.STABLE_ID_SUGGESTION_CONDITION_FOOTER;
+import static com.android.settings.dashboard.DashboardData.STABLE_ID_CONDITION_FOOTER;
+import static com.android.settings.dashboard.DashboardData.STABLE_ID_SUGGESTION_CONDITION_DIVIDER;
 import static com.android.settings.dashboard.DashboardData.STABLE_ID_SUGGESTION_CONTAINER;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import android.app.PendingIntent;
+import android.service.settings.suggestions.Suggestion;
 import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.util.ListUpdateCallback;
-import android.widget.RemoteViews;
 
-import com.android.settings.TestConfig;
 import com.android.settings.dashboard.conditional.AirplaneModeCondition;
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settingslib.drawer.DashboardCategory;
@@ -40,41 +41,42 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DashboardDataTest {
+
     private static final String TEST_SUGGESTION_TITLE = "Use fingerprint";
     private static final String TEST_CATEGORY_TILE_TITLE = "Display";
 
     private DashboardData mDashboardDataWithOneConditions;
     private DashboardData mDashboardDataWithTwoConditions;
     private DashboardData mDashboardDataWithNoItems;
+    private DashboardCategory mDashboardCategory;
     @Mock
     private Tile mTestCategoryTile;
-    @Mock
-    private Tile mTestSuggestion;
-    @Mock
-    private DashboardCategory mDashboardCategory;
     @Mock
     private Condition mTestCondition;
     @Mock
     private Condition mSecondCondition; // condition used to test insert in DiffUtil
+    private Suggestion mTestSuggestion;
 
     @Before
     public void SetUp() {
         MockitoAnnotations.initMocks(this);
 
+        mDashboardCategory = new DashboardCategory();
+
         // Build suggestions
-        final List<Tile> suggestions = new ArrayList<>();
-        mTestSuggestion.title = TEST_SUGGESTION_TITLE;
+        final List<Suggestion> suggestions = new ArrayList<>();
+        mTestSuggestion = new Suggestion.Builder("pkg")
+                .setTitle(TEST_SUGGESTION_TITLE)
+                .setPendingIntent(mock(PendingIntent.class))
+                .build();
         suggestions.add(mTestSuggestion);
 
         // Build oneItemConditions
@@ -91,22 +93,22 @@ public class DashboardDataTest {
         // Build category
         mTestCategoryTile.title = TEST_CATEGORY_TILE_TITLE;
         mDashboardCategory.title = "test";
-        mDashboardCategory.tiles = new ArrayList<>();
-        mDashboardCategory.tiles.add(mTestCategoryTile);
+
+        mDashboardCategory.addTile(mTestCategoryTile);
 
         // Build DashboardData
         mDashboardDataWithOneConditions = new DashboardData.Builder()
                 .setConditions(oneItemConditions)
                 .setCategory(mDashboardCategory)
                 .setSuggestions(suggestions)
-                .setSuggestionConditionMode(DashboardData.HEADER_MODE_FULLY_EXPANDED)
+                .setConditionExpanded(true)
                 .build();
 
         mDashboardDataWithTwoConditions = new DashboardData.Builder()
                 .setConditions(twoItemsConditions)
                 .setCategory(mDashboardCategory)
                 .setSuggestions(suggestions)
-                .setSuggestionConditionMode(DashboardData.HEADER_MODE_FULLY_EXPANDED)
+                .setConditionExpanded(true)
                 .build();
 
         mDashboardDataWithNoItems = new DashboardData.Builder()
@@ -120,21 +122,23 @@ public class DashboardDataTest {
     public void testBuildItemsData_shouldSetstableId() {
         final List<DashboardData.Item> items = mDashboardDataWithOneConditions.getItemList();
 
-        // Header, suggestion, condition, footer, 1 tile
-        assertThat(items).hasSize(4);
+        // suggestion, separator, condition, footer, 1 tile
+        assertThat(items).hasSize(5);
 
         assertThat(items.get(0).id).isEqualTo(STABLE_ID_SUGGESTION_CONTAINER);
-        assertThat(items.get(1).id).isEqualTo(STABLE_ID_CONDITION_CONTAINER);
-        assertThat(items.get(2).id).isEqualTo(STABLE_ID_SUGGESTION_CONDITION_FOOTER);
-        assertThat(items.get(3).id).isEqualTo(Objects.hash(mTestCategoryTile.title));
+        assertThat(items.get(1).id).isEqualTo(STABLE_ID_SUGGESTION_CONDITION_DIVIDER);
+        assertThat(items.get(2).id).isEqualTo(STABLE_ID_CONDITION_CONTAINER);
+        assertThat(items.get(3).id).isEqualTo(STABLE_ID_CONDITION_FOOTER);
+        assertThat(items.get(4).id).isEqualTo(Objects.hash(mTestCategoryTile.title));
     }
 
     @Test
     public void testBuildItemsData_containsAllData() {
         final Object[] expectedObjects = {
                 mDashboardDataWithOneConditions.getSuggestions(),
+                null /* divider */,
                 mDashboardDataWithOneConditions.getConditions(),
-                null, mTestCategoryTile};
+                null /* footer */, mTestCategoryTile};
         final int expectedSize = expectedObjects.length;
 
         assertThat(mDashboardDataWithOneConditions.getItemList()).hasSize(expectedSize);
@@ -143,14 +147,12 @@ public class DashboardDataTest {
             final Object item = mDashboardDataWithOneConditions.getItemEntityByPosition(i);
             if (item instanceof List) {
                 assertThat(item).isEqualTo(expectedObjects[i]);
-            } else if (item instanceof DashboardData.SuggestionConditionHeaderData) {
-                DashboardData.SuggestionConditionHeaderData i1 =
-                        (DashboardData.SuggestionConditionHeaderData) item;
-                DashboardData.SuggestionConditionHeaderData i2 =
-                        (DashboardData.SuggestionConditionHeaderData) expectedObjects[i];
+            } else if (item instanceof DashboardData.ConditionHeaderData) {
+                DashboardData.ConditionHeaderData i1 = (DashboardData.ConditionHeaderData) item;
+                DashboardData.ConditionHeaderData i2 =
+                        (DashboardData.ConditionHeaderData) expectedObjects[i];
                 assertThat(i1.title).isEqualTo(i2.title);
                 assertThat(i1.conditionCount).isEqualTo(i2.conditionCount);
-                assertThat(i1.hiddenSuggestionCount).isEqualTo(i2.hiddenSuggestionCount);
             } else {
                 assertThat(item).isSameAs(expectedObjects[i]);
             }
@@ -173,8 +175,7 @@ public class DashboardDataTest {
 
     @Test
     public void testGetPositionByTile_selfInstance_returnPositionFound() {
-        final int position = mDashboardDataWithOneConditions
-                .getPositionByTile(mTestCategoryTile);
+        final int position = mDashboardDataWithOneConditions.getPositionByTile(mTestCategoryTile);
         assertThat(position).isNotEqualTo(DashboardData.POSITION_NOT_FOUND);
     }
 
@@ -203,12 +204,11 @@ public class DashboardDataTest {
 
     @Test
     public void testDiffUtil_InsertOneCondition_ResultDataOneChanged() {
-        //Build testResultData
         final List<ListUpdateResult.ResultData> testResultData = new ArrayList<>();
-        // Item in position 2 is the condition container containing the list of conditions, which
+        // Item in position 3 is the condition container containing the list of conditions, which
         // gets 1 more item
         testResultData.add(new ListUpdateResult.ResultData(
-                ListUpdateResult.ResultData.TYPE_OPERATION_CHANGE, 1, 1));
+                ListUpdateResult.ResultData.TYPE_OPERATION_CHANGE, 2, 1));
 
         testDiffUtil(mDashboardDataWithOneConditions,
                 mDashboardDataWithTwoConditions, testResultData);
@@ -216,31 +216,30 @@ public class DashboardDataTest {
 
     @Test
     public void testDiffUtil_RemoveOneSuggestion_causeItemRemoveAndChange() {
-        //Build testResultData
         final List<ListUpdateResult.ResultData> testResultData = new ArrayList<>();
+        // removed suggestion and the divider
         testResultData.add(new ListUpdateResult.ResultData(
-                ListUpdateResult.ResultData.TYPE_OPERATION_REMOVE, 0, 1));
+                ListUpdateResult.ResultData.TYPE_OPERATION_REMOVE, 0, 2));
         testResultData.add(new ListUpdateResult.ResultData(
-                ListUpdateResult.ResultData.TYPE_OPERATION_CHANGE, 1, 1));
+                ListUpdateResult.ResultData.TYPE_OPERATION_CHANGE, 2, 1));
         // Build DashboardData
         final List<Condition> oneItemConditions = new ArrayList<>();
         when(mTestCondition.shouldShow()).thenReturn(true);
         oneItemConditions.add(mTestCondition);
-        final List<Tile> suggestions = new ArrayList<>();
-        mTestSuggestion.title = TEST_SUGGESTION_TITLE;
+        final List<Suggestion> suggestions = new ArrayList<>();
         suggestions.add(mTestSuggestion);
 
         final DashboardData oldData = new DashboardData.Builder()
                 .setConditions(oneItemConditions)
                 .setCategory(mDashboardCategory)
                 .setSuggestions(suggestions)
-                .setSuggestionConditionMode(DashboardData.HEADER_MODE_DEFAULT)
+                .setConditionExpanded(false)
                 .build();
         final DashboardData newData = new DashboardData.Builder()
                 .setConditions(oneItemConditions)
                 .setSuggestions(null)
                 .setCategory(mDashboardCategory)
-                .setSuggestionConditionMode(DashboardData.HEADER_MODE_DEFAULT)
+                .setConditionExpanded(false)
                 .build();
 
         testDiffUtil(oldData, newData, testResultData);
@@ -248,32 +247,26 @@ public class DashboardDataTest {
 
     @Test
     public void testDiffUtil_DeleteAllData_ResultDataOneDeleted() {
-        //Build testResultData
         final List<ListUpdateResult.ResultData> testResultData = new ArrayList<>();
         testResultData.add(new ListUpdateResult.ResultData(
-                ListUpdateResult.ResultData.TYPE_OPERATION_REMOVE, 0, 4));
+                ListUpdateResult.ResultData.TYPE_OPERATION_REMOVE, 0, 5));
 
         testDiffUtil(mDashboardDataWithOneConditions, mDashboardDataWithNoItems, testResultData);
     }
 
     @Test
     public void testDiffUtil_typeSuggestedContainer_ResultDataNothingChanged() {
-        //Build testResultData
         final List<ListUpdateResult.ResultData> testResultData = new ArrayList<>();
-        testResultData.add(new ListUpdateResult.ResultData(
-                ListUpdateResult.ResultData.TYPE_OPERATION_CHANGE, 0, 1));
-        Tile tile = new Tile();
-        tile.remoteViews = mock(RemoteViews.class);
 
         DashboardData prevData = new DashboardData.Builder()
                 .setConditions(null)
                 .setCategory(null)
-                .setSuggestions(Arrays.asList(tile))
+                .setSuggestions(Collections.singletonList(mTestSuggestion))
                 .build();
         DashboardData currentData = new DashboardData.Builder()
                 .setConditions(null)
                 .setCategory(null)
-                .setSuggestions(Arrays.asList(tile))
+                .setSuggestions(Collections.singletonList(mTestSuggestion))
                 .build();
         testDiffUtil(prevData, currentData, testResultData);
     }
@@ -331,7 +324,7 @@ public class DashboardDataTest {
             mResultData = new ArrayList<>();
         }
 
-        public List<ResultData> getResultData() {
+        private List<ResultData> getResultData() {
             return mResultData;
         }
 
@@ -366,16 +359,17 @@ public class DashboardDataTest {
          * or "The data is moved(operation) from position1(arg1) to position2(arg2)"
          */
         private static class ResultData implements Comparable<ResultData> {
-            public static final int TYPE_OPERATION_INSERT = 0;
-            public static final int TYPE_OPERATION_REMOVE = 1;
-            public static final int TYPE_OPERATION_MOVE = 2;
-            public static final int TYPE_OPERATION_CHANGE = 3;
 
-            public final int operation;
-            public final int arg1;
-            public final int arg2;
+            private static final int TYPE_OPERATION_INSERT = 0;
+            private static final int TYPE_OPERATION_REMOVE = 1;
+            private static final int TYPE_OPERATION_MOVE = 2;
+            private static final int TYPE_OPERATION_CHANGE = 3;
 
-            public ResultData(int operation, int arg1, int arg2) {
+            private final int operation;
+            private final int arg1;
+            private final int arg2;
+
+            private ResultData(int operation, int arg1, int arg2) {
                 this.operation = operation;
                 this.arg1 = arg1;
                 this.arg2 = arg2;

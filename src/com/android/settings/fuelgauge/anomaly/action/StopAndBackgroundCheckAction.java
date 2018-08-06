@@ -19,6 +19,7 @@ package com.android.settings.fuelgauge.anomaly.action;
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 
 /**
@@ -34,6 +35,7 @@ public class StopAndBackgroundCheckAction extends AnomalyAction {
 
     public StopAndBackgroundCheckAction(Context context) {
         this(context, new ForceStopAction(context), new BackgroundCheckAction(context));
+        mActionMetricKey = MetricsProto.MetricsEvent.ACTION_APP_STOP_AND_BACKGROUND_CHECK;
     }
 
     @VisibleForTesting
@@ -46,6 +48,7 @@ public class StopAndBackgroundCheckAction extends AnomalyAction {
 
     @Override
     public void handlePositiveAction(Anomaly anomaly, int metricsKey) {
+        super.handlePositiveAction(anomaly, metricsKey);
         mForceStopAction.handlePositiveAction(anomaly, metricsKey);
         mBackgroundCheckAction.handlePositiveAction(anomaly, metricsKey);
     }

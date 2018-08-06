@@ -19,11 +19,9 @@ package com.android.settings.bluetooth;
 import android.content.Context;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.PreferenceScreen;
-import android.text.TextUtils;
-import android.widget.Button;
 
 import com.android.settings.R;
-import com.android.settings.applications.LayoutPreference;
+import com.android.settings.widget.ActionButtonPreference;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -35,7 +33,8 @@ public class BluetoothDetailsButtonsController extends BluetoothDetailsControlle
     private static final String KEY_ACTION_BUTTONS = "action_buttons";
     private boolean mIsConnected;
 
-    private LayoutPreference mActionButtons;
+    private boolean mConnectButtonInitialized;
+    private ActionButtonPreference mActionButtons;
 
     public BluetoothDetailsButtonsController(Context context, PreferenceFragment fragment,
             CachedBluetoothDevice device, Lifecycle lifecycle) {
@@ -51,35 +50,35 @@ public class BluetoothDetailsButtonsController extends BluetoothDetailsControlle
 
     @Override
     protected void init(PreferenceScreen screen) {
-        mActionButtons = (LayoutPreference) screen.findPreference(getPreferenceKey());
-        Button rightButton = (Button) mActionButtons.findViewById(R.id.right_button);
-        rightButton.setText(R.string.forget);
-        rightButton.setOnClickListener((view) -> {
-            onForgetButtonPressed();
-        });
+        mActionButtons = ((ActionButtonPreference) screen.findPreference(getPreferenceKey()))
+                .setButton1Text(R.string.forget)
+                .setButton1OnClickListener((view) -> onForgetButtonPressed())
+                .setButton1Positive(false)
+                .setButton1Enabled(true);
     }
 
     @Override
     protected void refresh() {
-        Button leftButton = (Button) mActionButtons.findViewById(R.id.left_button);
-        leftButton.setEnabled(!mCachedDevice.isBusy());
-        boolean notInitialized = TextUtils.isEmpty(leftButton.getText());
+        mActionButtons.setButton2Enabled(!mCachedDevice.isBusy());
 
         boolean previouslyConnected = mIsConnected;
         mIsConnected = mCachedDevice.isConnected();
         if (mIsConnected) {
-            if (notInitialized || !previouslyConnected) {
-                leftButton.setText(R.string.bluetooth_device_context_disconnect);
-                leftButton.setOnClickListener((view) -> {
-                    mCachedDevice.disconnect();
-                });
+            if (!mConnectButtonInitialized || !previouslyConnected) {
+                mActionButtons
+                        .setButton2Text(R.string.bluetooth_device_context_disconnect)
+                        .setButton2OnClickListener(view -> mCachedDevice.disconnect())
+                        .setButton2Positive(false);
+                mConnectButtonInitialized = true;
             }
         } else {
-            if (notInitialized || previouslyConnected) {
-                leftButton.setText(R.string.bluetooth_device_context_connect);
-                leftButton.setOnClickListener((view) -> {
-                    mCachedDevice.connect(true);
-                });
+            if (!mConnectButtonInitialized || previouslyConnected) {
+                mActionButtons
+                        .setButton2Text(R.string.bluetooth_device_context_connect)
+                        .setButton2OnClickListener(
+                                view -> mCachedDevice.connect(true /* connectAllProfiles */))
+                        .setButton2Positive(true);
+                mConnectButtonInitialized = true;
             }
         }
     }
@@ -88,4 +87,5 @@ public class BluetoothDetailsButtonsController extends BluetoothDetailsControlle
     public String getPreferenceKey() {
         return KEY_ACTION_BUTTONS;
     }
+
 }

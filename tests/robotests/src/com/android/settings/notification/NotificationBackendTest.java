@@ -16,30 +16,18 @@
 
 package com.android.settings.notification;
 
-import android.app.NotificationManager;
-import android.app.NotificationManager.Policy;
-import android.content.Context;
-import android.support.v7.preference.Preference;
-
-import com.android.settings.R;
-import com.android.settings.notification.NotificationBackend.AppRow;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-import org.robolectric.annotation.Config;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-
 import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNull;
+import static junit.framework.Assert.assertTrue;
 
+import com.android.settings.notification.NotificationBackend.AppRow;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class NotificationBackendTest {
 
     @Test
@@ -116,7 +104,6 @@ public class NotificationBackendTest {
 
         assertEquals(channelName, appRow.lockedChannelId);
     }
-
 
     @Test
     public void testMarkAppRow_blocklistWithNullEntries() {

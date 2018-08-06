@@ -52,14 +52,18 @@ public class PaymentSettings extends SettingsPreferenceFragment implements Index
     }
 
     @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.nfc_payment_settings;
+    }
+
+    @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
         mPaymentBackend = new PaymentBackend(getActivity());
         setHasOptionsMenu(true);
 
-        PreferenceManager manager = getPreferenceManager();
-        PreferenceScreen screen = manager.createPreferenceScreen(getActivity());
+        final PreferenceScreen screen = getPreferenceScreen();
 
         List<PaymentBackend.PaymentAppInfo> appInfos = mPaymentBackend.getPaymentAppInfos();
         if (appInfos != null && appInfos.size() > 0) {
@@ -71,7 +75,6 @@ public class PaymentSettings extends SettingsPreferenceFragment implements Index
                     mPaymentBackend);
             screen.addPreference(foreground);
         }
-        setPreferenceScreen(screen);
     }
 
     @Override

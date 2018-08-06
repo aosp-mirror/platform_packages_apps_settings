@@ -16,6 +16,7 @@
 
 package com.android.settings.password;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
@@ -24,6 +25,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -33,8 +35,11 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
+import com.android.setupwizardlib.util.WizardManagerHelper;
 
 import java.util.List;
 
@@ -60,7 +65,37 @@ public class ChooseLockTypeDialogFragment extends InstrumentedDialogFragment
 
     public interface OnLockTypeSelectedListener {
         void onLockTypeSelected(ScreenLockType lock);
+
+        default void startChooseLockActivity(ScreenLockType selectedLockType, Activity activity) {
+            Intent activityIntent = activity.getIntent();
+            Intent intent = new Intent(activity, SetupChooseLockGeneric.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+
+            // Copy the original extras into the new intent
+            copyBooleanExtra(activityIntent, intent,
+                    ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
+            copyBooleanExtra(activityIntent, intent,
+                    ChooseLockGenericFragment.EXTRA_SHOW_OPTIONS_BUTTON, false);
+            if (activityIntent.hasExtra(
+                    ChooseLockGenericFragment.EXTRA_CHOOSE_LOCK_GENERIC_EXTRAS)) {
+                intent.putExtras(activityIntent.getBundleExtra(
+                        ChooseLockGenericFragment.EXTRA_CHOOSE_LOCK_GENERIC_EXTRAS));
+            }
+            intent.putExtra(LockPatternUtils.PASSWORD_TYPE_KEY, selectedLockType.defaultQuality);
+            intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE,
+                    activityIntent.getLongExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0));
+            WizardManagerHelper.copyWizardManagerExtras(activityIntent, intent);
+            activity.startActivity(intent);
+            activity.finish();
+        }
+
     }
+
+    private static void copyBooleanExtra(Intent from, Intent to, String name,
+            boolean defaultValue) {
+        to.putExtra(name, from.getBooleanExtra(name, defaultValue));
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

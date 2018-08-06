@@ -28,7 +28,6 @@ import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.Ndef;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.PowerManager;
 import android.text.Editable;
 import android.text.InputType;
@@ -63,36 +62,33 @@ class WriteWifiConfigToNfcDialog extends AlertDialog
     private View mView;
     private Button mSubmitButton;
     private Button mCancelButton;
-    private Handler mOnTextChangedHandler;
     private TextView mPasswordView;
     private TextView mLabelView;
     private CheckBox mPasswordCheckBox;
     private ProgressBar mProgressBar;
-    private WifiManagerWrapper mWifiManager;
+    private WifiManager mWifiManager;
     private String mWpsNfcConfigurationToken;
     private Context mContext;
     private int mSecurity;
 
-    WriteWifiConfigToNfcDialog(Context context, int security, WifiManagerWrapper wifiManager) {
+    WriteWifiConfigToNfcDialog(Context context, int security) {
         super(context);
 
         mContext = context;
         mWakeLock = ((PowerManager) context.getSystemService(Context.POWER_SERVICE))
                 .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "WriteWifiConfigToNfcDialog:wakeLock");
-        mOnTextChangedHandler = new Handler();
         mSecurity = security;
-        mWifiManager = wifiManager;
+        mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
     }
 
-    WriteWifiConfigToNfcDialog(Context context, Bundle savedState, WifiManagerWrapper wifiManager) {
+    WriteWifiConfigToNfcDialog(Context context, Bundle savedState) {
         super(context);
 
         mContext = context;
         mWakeLock = ((PowerManager) context.getSystemService(Context.POWER_SERVICE))
                 .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "WriteWifiConfigToNfcDialog:wakeLock");
-        mOnTextChangedHandler = new Handler();
         mSecurity = savedState.getInt(SECURITY);
-        mWifiManager = wifiManager;
+        mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
     }
 
     @Override
@@ -226,12 +222,7 @@ class WriteWifiConfigToNfcDialog extends AlertDialog
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-        mOnTextChangedHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                enableSubmitIfAppropriate();
-            }
-        });
+        enableSubmitIfAppropriate();
     }
 
     private void enableSubmitIfAppropriate() {

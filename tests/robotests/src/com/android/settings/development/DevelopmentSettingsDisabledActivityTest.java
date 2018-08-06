@@ -16,29 +16,28 @@
 
 package com.android.settings.development;
 
+import static com.google.common.truth.Truth.assertThat;
+
+import android.content.Context;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowToast;
 
-import static com.google.common.truth.Truth.assertThat;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DevelopmentSettingsDisabledActivityTest {
 
     @Test
     public void launchActivity_shouldShowToast() {
         Robolectric.setupActivity(DevelopmentSettingsDisabledActivity.class);
 
-        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
-                RuntimeEnvironment.application.getString(R.string.dev_settings_disabled_warning));
+        final Context context = RuntimeEnvironment.application;
+        assertThat(ShadowToast.getTextOfLatestToast())
+            .isEqualTo(context.getString(R.string.dev_settings_disabled_warning));
     }
 }

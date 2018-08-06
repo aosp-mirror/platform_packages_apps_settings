@@ -16,31 +16,28 @@
 
 package com.android.settings.notification;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Answers.RETURNS_DEEP_STUBS;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.when;
+
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.provider.Settings.Global;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.PreferenceScreen;
-import android.provider.Settings.Global;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Answers.RETURNS_DEEP_STUBS;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.when;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DockingSoundPreferenceControllerTest {
 
     @Mock
@@ -62,7 +59,7 @@ public class DockingSoundPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         when(mSetting.getActivity()).thenReturn(mActivity);
         when(mActivity.getContentResolver()).thenReturn(mContentResolver);
-        mPreference = new SwitchPreference(ShadowApplication.getInstance().getApplicationContext());
+        mPreference = new SwitchPreference(RuntimeEnvironment.application);
         when(mActivity.getResources().getBoolean(com.android.settings.R.bool.has_dock_settings))
             .thenReturn(true);
         mController = new DockingSoundPreferenceController(mContext, mSetting, null);

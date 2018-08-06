@@ -18,35 +18,37 @@ package com.android.settings.core;
 
 import android.content.Context;
 
-import com.android.settings.core.instrumentation.Instrumentable;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
-import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.survey.SurveyMixin;
+import com.android.settingslib.core.instrumentation.Instrumentable;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settingslib.core.lifecycle.ObservableFragment;
 
 public abstract class InstrumentedFragment extends ObservableFragment implements Instrumentable {
 
     protected MetricsFeatureProvider mMetricsFeatureProvider;
 
-    private final VisibilityLoggerMixin mVisibilityLoggerMixin;
-
-    public InstrumentedFragment() {
-        // Mixin that logs visibility change for activity.
-        mVisibilityLoggerMixin = new VisibilityLoggerMixin(getMetricsCategory());
-        getLifecycle().addObserver(mVisibilityLoggerMixin);
-        getLifecycle().addObserver(new SurveyMixin(this, getClass().getSimpleName()));
-    }
+    private VisibilityLoggerMixin mVisibilityLoggerMixin;
 
     @Override
     public void onAttach(Context context) {
-        super.onAttach(context);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mVisibilityLoggerMixin = new VisibilityLoggerMixin(getMetricsCategory(),
+                mMetricsFeatureProvider);
+        // Mixin that logs visibility change for activity.
+        getLifecycle().addObserver(mVisibilityLoggerMixin);
+        getLifecycle().addObserver(new SurveyMixin(this, getClass().getSimpleName()));
+        super.onAttach(context);
     }
 
     @Override
     public void onResume() {
         mVisibilityLoggerMixin.setSourceMetricsCategory(getActivity());
         super.onResume();
+    }
+
+    protected final VisibilityLoggerMixin getVisibilityLogger() {
+        return mVisibilityLoggerMixin;
     }
 }

@@ -19,29 +19,21 @@ package com.android.settings.enterprise;
 import android.Manifest;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
 
-/**
- * Tests for {@link AdminGrantedLocationPermissionsPreferenceController}.
- */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public final class AdminGrantedLocationPermissionsPreferenceControllerTest extends
-        AdminGrantedPermissionsPreferenceControllerTestBase {
+public class AdminGrantedLocationPermissionsPreferenceControllerTest
+    extends AdminGrantedPermissionsPreferenceControllerTestBase {
 
     public AdminGrantedLocationPermissionsPreferenceControllerTest() {
         super("enterprise_privacy_number_location_access_packages",
                 new String[] {Manifest.permission.ACCESS_COARSE_LOCATION,
-                        Manifest.permission.ACCESS_FINE_LOCATION},
-                Manifest.permission_group.LOCATION);
+                        Manifest.permission.ACCESS_FINE_LOCATION});
     }
 
     @Override
     protected AdminGrantedPermissionsPreferenceControllerBase createController(boolean async) {
-        return new AdminGrantedLocationPermissionsPreferenceController(mContext,
-                null /* lifecycle */, async);
+        return new AdminGrantedLocationPermissionsPreferenceController(mContext, async);
     }
 }

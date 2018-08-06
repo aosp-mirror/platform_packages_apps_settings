@@ -21,6 +21,7 @@ import android.content.Context;
 import android.telephony.TelephonyManager;
 
 import com.android.internal.telephony.SmsApplication;
+import com.android.settingslib.applications.DefaultAppInfo;
 
 import java.util.Collection;
 
@@ -47,7 +48,7 @@ public class DefaultSmsPreferenceController extends DefaultAppPreferenceControll
     protected DefaultAppInfo getDefaultAppInfo() {
         final ComponentName app = SmsApplication.getDefaultSmsApplication(mContext, true);
         if (app != null) {
-            return new DefaultAppInfo(mPackageManager, mUserId, app);
+            return new DefaultAppInfo(mContext, mPackageManager, mUserId, app);
         }
         return null;
     }

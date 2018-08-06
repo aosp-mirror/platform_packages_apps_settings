@@ -16,31 +16,29 @@
 
 package com.android.settings.users;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class UserFeatureProviderImplTest {
-    public static final int FIRST_USER_ID = 0;
-    public static final int SECOND_USER_ID = 4;
+
+    private static final int FIRST_USER_ID = 0;
+    private static final int SECOND_USER_ID = 4;
 
     @Mock
     private Context mContext;

@@ -16,22 +16,31 @@
 
 package com.android.settings.deviceinfo;
 
+import static com.android.settings.deviceinfo.StorageSettings.TAG;
+
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.os.storage.DiskInfo;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
+import android.text.TextUtils;
 import android.util.Log;
-
+import android.view.View;
 import android.widget.Toast;
+
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.password.ChooseLockSettingsHelper;
 
 import java.util.Objects;
 
-import static com.android.settings.deviceinfo.StorageSettings.TAG;
-
 public class StorageWizardMigrateConfirm extends StorageWizardBase {
+    private static final int REQUEST_CREDENTIAL = 100;
+
     private MigrateEstimateTask mEstimate;
 
     @Override
@@ -51,33 +60,54 @@ public class StorageWizardMigrateConfirm extends StorageWizardBase {
             return;
         }
 
-        final String sourceDescrip = mStorage.getBestVolumeDescription(sourceVol);
-        final String targetDescrip = mStorage.getBestVolumeDescription(mVolume);
-
-        setIllustrationType(ILLUSTRATION_INTERNAL);
-        setHeaderText(R.string.storage_wizard_migrate_confirm_title, targetDescrip);
+        setIcon(R.drawable.ic_swap_horiz);
+        setHeaderText(R.string.storage_wizard_migrate_v2_title, getDiskShortDescription());
         setBodyText(R.string.memory_calculating_size);
-        setSecondaryBodyText(R.string.storage_wizard_migrate_details, targetDescrip);
+        setAuxChecklist();
 
         mEstimate = new MigrateEstimateTask(this) {
             @Override
             public void onPostExecute(String size, String time) {
-                setBodyText(R.string.storage_wizard_migrate_confirm_body, time, size,
-                        sourceDescrip);
+                setBodyText(R.string.storage_wizard_migrate_v2_body,
+                        getDiskDescription(), size, time);
             }
         };
 
         mEstimate.copyFrom(getIntent());
         mEstimate.execute();
 
-        getNextButton().setText(R.string.storage_wizard_migrate_confirm_next);
+        setBackButtonText(R.string.storage_wizard_migrate_v2_later);
+        setNextButtonText(R.string.storage_wizard_migrate_v2_now);
     }
 
     @Override
-    public void onNavigateNext() {
-        int moveId;
+    public void onNavigateBack(View view) {
+        FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(this,
+                MetricsEvent.ACTION_STORAGE_MIGRATE_LATER);
+
+        final Intent intent = new Intent(this, StorageWizardReady.class);
+        intent.putExtra(EXTRA_MIGRATE_SKIP, true);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onNavigateNext(View view) {
+        // Ensure that all users are unlocked so that we can move their data
+        if (StorageManager.isFileEncryptedNativeOrEmulated()) {
+            for (UserInfo user : getSystemService(UserManager.class).getUsers()) {
+                if (!StorageManager.isUserKeyUnlocked(user.id)) {
+                    Log.d(TAG, "User " + user.id + " is currently locked; requesting unlock");
+                    final CharSequence description = TextUtils.expandTemplate(
+                            getText(R.string.storage_wizard_move_unlock), user.name);
+                    new ChooseLockSettingsHelper(this).launchConfirmationActivityForAnyUser(
+                            REQUEST_CREDENTIAL, null, null, description, user.id);
+                    return;
+                }
+            }
+        }
 
         // We only expect exceptions from StorageManagerService#setPrimaryStorageUuid
+        int moveId;
         try {
             moveId = getPackageManager().movePrimaryStorage(mVolume);
         } catch (IllegalArgumentException e) {
@@ -102,10 +132,31 @@ public class StorageWizardMigrateConfirm extends StorageWizardBase {
             return;
         }
 
+        FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(this,
+                MetricsEvent.ACTION_STORAGE_MIGRATE_NOW);
+
         final Intent intent = new Intent(this, StorageWizardMigrateProgress.class);
         intent.putExtra(VolumeInfo.EXTRA_VOLUME_ID, mVolume.getId());
         intent.putExtra(PackageManager.EXTRA_MOVE_ID, moveId);
         startActivity(intent);
         finishAffinity();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CREDENTIAL) {
+            if (resultCode == RESULT_OK) {
+                // Credentials confirmed, so storage should be unlocked; let's
+                // go look for the next locked user.
+                onNavigateNext(null);
+            } else {
+                // User wasn't able to confirm credentials, so we're okay
+                // landing back at the wizard page again, where they read
+                // instructions again and tap "Next" to try again.
+                Log.w(TAG, "Failed to confirm credentials");
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }

@@ -16,12 +16,13 @@
 
 package com.android.settings.enterprise;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
-import android.content.res.Resources;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceAvailabilityObserver;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
@@ -30,39 +31,27 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 /**
  * Common base for testing subclasses of {@link FailedPasswordWipePreferenceControllerBase}.
  */
 public abstract class FailedPasswordWipePreferenceControllerTestBase {
 
-    protected final String mKey;
+    private final String mKey;
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     protected Context mContext;
     protected FakeFeatureFactory mFeatureFactory;
-    @Mock private PreferenceAvailabilityObserver mObserver;
 
     protected FailedPasswordWipePreferenceControllerBase mController;
 
-    public FailedPasswordWipePreferenceControllerTestBase(String key) {
+    FailedPasswordWipePreferenceControllerTestBase(String key) {
         mKey = key;
     }
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-    }
-
-    @Test
-    public void testGetAvailabilityObserver() {
-        mController.setAvailabilityObserver(mObserver);
-        assertThat(mController.getAvailabilityObserver()).isEqualTo(mObserver);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
     }
 
     public abstract void setMaximumFailedPasswordsBeforeWipe(int maximum);
@@ -81,15 +70,11 @@ public abstract class FailedPasswordWipePreferenceControllerTestBase {
 
     @Test
     public void testIsAvailable() {
-        mController.setAvailabilityObserver(mObserver);
-
         setMaximumFailedPasswordsBeforeWipe(0);
         assertThat(mController.isAvailable()).isFalse();
-        verify(mObserver).onPreferenceAvailabilityUpdated(mKey, false);
 
         setMaximumFailedPasswordsBeforeWipe(10);
         assertThat(mController.isAvailable()).isTrue();
-        verify(mObserver).onPreferenceAvailabilityUpdated(mKey, true);
     }
 
     @Test

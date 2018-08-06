@@ -22,11 +22,14 @@ import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.Pair;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 /**
  * This class adds a header with device name and status (connected/disconnected, etc.).
@@ -35,10 +38,15 @@ public class BluetoothDetailsHeaderController extends BluetoothDetailsController
     private static final String KEY_DEVICE_HEADER = "bluetooth_device_header";
 
     private EntityHeaderController mHeaderController;
+    private LocalBluetoothManager mLocalManager;
+    private CachedBluetoothDeviceManager mDeviceManager;
 
     public BluetoothDetailsHeaderController(Context context, PreferenceFragment fragment,
-            CachedBluetoothDevice device, Lifecycle lifecycle) {
+            CachedBluetoothDevice device, Lifecycle lifecycle,
+            LocalBluetoothManager bluetoothManager) {
         super(context, fragment, device, lifecycle);
+        mLocalManager = bluetoothManager;
+        mDeviceManager = mLocalManager.getCachedDeviceManager();
     }
 
     @Override
@@ -51,10 +59,16 @@ public class BluetoothDetailsHeaderController extends BluetoothDetailsController
     }
 
     protected void setHeaderProperties() {
-        final Pair<Drawable, String> pair = Utils.getBtClassDrawableWithDescription(
-                mContext, mCachedDevice,
+        final Pair<Drawable, String> pair = com.android.settingslib.bluetooth.Utils
+                .getBtClassDrawableWithDescription(mContext, mCachedDevice,
                 mContext.getResources().getFraction(R.fraction.bt_battery_scale_fraction, 1, 1));
         String summaryText = mCachedDevice.getConnectionSummary();
+        // If both the hearing aids are connected, two battery status should be shown.
+        final String pairDeviceSummary = mDeviceManager
+            .getHearingAidPairDeviceSummary(mCachedDevice);
+        if (pairDeviceSummary != null) {
+            mHeaderController.setSecondSummary(pairDeviceSummary);
+        }
         mHeaderController.setLabel(mCachedDevice.getName());
         mHeaderController.setIcon(pair.first);
         mHeaderController.setIconContentDescription(pair.second);

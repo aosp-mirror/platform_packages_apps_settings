@@ -15,6 +15,8 @@
  */
 package com.android.settings.fuelgauge;
 
+import static com.android.settings.fuelgauge.BatteryBroadcastReceiver.*;
+
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.Context;
@@ -26,18 +28,17 @@ import android.view.Menu;
 
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.utils.AsyncLoader;
 
 /**
  * Common base class for things that need to show the battery usage graph.
  */
-public abstract class PowerUsageBase extends DashboardFragment
-        implements LoaderManager.LoaderCallbacks<BatteryStatsHelper> {
+public abstract class PowerUsageBase extends DashboardFragment {
 
     // +1 to allow ordering for PowerUsageSummary.
     @VisibleForTesting
     static final int MENU_STATS_REFRESH = Menu.FIRST + 1;
     private static final String TAG = "PowerUsageBase";
+    private static final String KEY_REFRESH_TYPE = "refresh_type";
 
     protected BatteryStatsHelper mStatsHelper;
     protected UserManager mUm;
@@ -57,11 +58,9 @@ public abstract class PowerUsageBase extends DashboardFragment
         setHasOptionsMenu(true);
 
         mBatteryBroadcastReceiver = new BatteryBroadcastReceiver(getContext());
-        mBatteryBroadcastReceiver.setBatteryChangedListener(() -> {
-            restartBatteryStatsLoader();
+        mBatteryBroadcastReceiver.setBatteryChangedListener(type -> {
+            restartBatteryStatsLoader(type);
         });
-
-        getLoaderManager().initLoader(0, icicle, this);
     }
 
     @Override
@@ -83,11 +82,14 @@ public abstract class PowerUsageBase extends DashboardFragment
         mBatteryBroadcastReceiver.unRegister();
     }
 
-    protected void restartBatteryStatsLoader() {
-        getLoaderManager().restartLoader(0, Bundle.EMPTY, this);
+    protected void restartBatteryStatsLoader(int refreshType) {
+        final Bundle bundle = new Bundle();
+        bundle.putInt(KEY_REFRESH_TYPE, refreshType);
+
+        getLoaderManager().restartLoader(0, bundle, new PowerLoaderCallback());
     }
 
-    protected abstract void refreshUi();
+    protected abstract void refreshUi(@BatteryUpdateType int refreshType);
 
     protected void updatePreference(BatteryHistoryPreference historyPref) {
         final long startTime = System.currentTimeMillis();
@@ -95,21 +97,30 @@ public abstract class PowerUsageBase extends DashboardFragment
         BatteryUtils.logRuntime(TAG, "updatePreference", startTime);
     }
 
-    @Override
-    public Loader<BatteryStatsHelper> onCreateLoader(int id,
-            Bundle args) {
-        return new BatteryStatsHelperLoader(getContext());
-    }
+    /**
+     * {@link android.app.LoaderManager.LoaderCallbacks} for {@link PowerUsageBase} to load
+     * the {@link BatteryStatsHelper}
+     */
+    public class PowerLoaderCallback implements LoaderManager.LoaderCallbacks<BatteryStatsHelper> {
+        private int mRefreshType;
 
-    @Override
-    public void onLoadFinished(Loader<BatteryStatsHelper> loader,
-            BatteryStatsHelper statsHelper) {
-        mStatsHelper = statsHelper;
-        refreshUi();
-    }
+        @Override
+        public Loader<BatteryStatsHelper> onCreateLoader(int id,
+                Bundle args) {
+            mRefreshType = args.getInt(KEY_REFRESH_TYPE);
+            return new BatteryStatsHelperLoader(getContext());
+        }
 
-    @Override
-    public void onLoaderReset(Loader<BatteryStatsHelper> loader) {
+        @Override
+        public void onLoadFinished(Loader<BatteryStatsHelper> loader,
+                BatteryStatsHelper statsHelper) {
+            mStatsHelper = statsHelper;
+            refreshUi(mRefreshType);
+        }
 
+        @Override
+        public void onLoaderReset(Loader<BatteryStatsHelper> loader) {
+
+        }
     }
 }

@@ -58,9 +58,17 @@ public class BackupSettingsActivity extends Activity implements Indexable {
                         "No manufacturer settings found, launching the backup settings directly");
             }
             Intent intent = backupHelper.getIntentForBackupSettings();
-            // enable the activity before launching it
-            getPackageManager().setComponentEnabledSetting(intent.getComponent(),
-                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
+            try {
+                // enable the activity before launching it
+                getPackageManager().setComponentEnabledSetting(
+                        intent.getComponent(),
+                        PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                        PackageManager.DONT_KILL_APP);
+            } catch (SecurityException e) {
+                Log.w(TAG, "Trying to enable activity " + intent.getComponent() + " but couldn't: "
+                        + e.getMessage());
+                // the activity may already be enabled
+            }
 
             // use startActivityForResult to let the activity check the caller signature
             startActivityForResult(intent, 1);

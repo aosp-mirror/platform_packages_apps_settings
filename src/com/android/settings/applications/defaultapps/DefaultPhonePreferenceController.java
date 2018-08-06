@@ -23,6 +23,8 @@ import android.os.UserManager;
 import android.telecom.DefaultDialerManager;
 import android.telephony.TelephonyManager;
 
+import com.android.settingslib.applications.DefaultAppInfo;
+
 import java.util.List;
 
 public class DefaultPhonePreferenceController extends DefaultAppPreferenceController {
@@ -57,7 +59,7 @@ public class DefaultPhonePreferenceController extends DefaultAppPreferenceContro
     @Override
     protected DefaultAppInfo getDefaultAppInfo() {
         try {
-            return new DefaultAppInfo(mPackageManager,
+            return new DefaultAppInfo(mContext, mPackageManager,
                     mPackageManager.getPackageManager().getApplicationInfo(
                             DefaultDialerManager.getDefaultDialerApplication(mContext, mUserId),
                             0));

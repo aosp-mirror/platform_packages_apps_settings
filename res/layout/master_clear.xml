@@ -4,9 +4,9 @@
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
      You may obtain a copy of the License at
-  
+
           http://www.apache.org/licenses/LICENSE-2.0
-  
+
      Unless required by applicable law or agreed to in writing, software
      distributed under the License is distributed on an "AS IS" BASIS,
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,24 +14,24 @@
      limitations under the License.
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <ScrollView
             android:id="@+id/master_clear_scrollview"
             android:layout_width="match_parent"
             android:layout_height="0dip"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="@dimen/preference_no_icon_padding_start"
             android:layout_marginEnd="12dp"
             android:layout_marginTop="12dp"
             android:layout_weight="1">
-        <LinearLayout android:id="@+id/master_clear_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/master_clear_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -93,7 +93,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:paddingEnd="8dp"
+                        android:paddingEnd="@dimen/reset_checkbox_padding_end"
                         android:focusable="false"
                         android:clickable="false"
                         android:duplicateParentState="true" />
@@ -104,17 +104,22 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingTop="12dp"
-                        android:textSize="18sp"
+                        android:paddingTop="@dimen/reset_checkbox_title_padding_top"
+                        android:textSize="@dimen/reset_checkbox_title_text_size"
                         android:text="@string/erase_external_storage" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingTop="4sp"
-                        android:textSize="14sp"
+                        android:paddingTop="@dimen/reset_checkbox_summary_padding_top"
+                        android:textSize="@dimen/reset_checkbox_summary_text_size"
                         android:text="@string/erase_external_storage_description" />
                 </LinearLayout>
             </LinearLayout>
+            <include layout="@layout/reset_esim_checkbox"
+                 android:layout_marginTop="40dp"
+                 android:id="@+id/erase_esim_container"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
     <Button

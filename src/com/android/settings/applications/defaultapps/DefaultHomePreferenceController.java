@@ -24,7 +24,9 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 
-import com.android.settings.applications.PackageManagerWrapper;
+import com.android.settings.R;
+import com.android.settingslib.applications.DefaultAppInfo;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +55,7 @@ public class DefaultHomePreferenceController extends DefaultAppPreferenceControl
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return mContext.getResources().getBoolean(R.bool.config_show_default_home);
     }
 
     @Override
@@ -61,17 +63,17 @@ public class DefaultHomePreferenceController extends DefaultAppPreferenceControl
         final ArrayList<ResolveInfo> homeActivities = new ArrayList<>();
         final ComponentName currentDefaultHome = mPackageManager.getHomeActivities(homeActivities);
         if (currentDefaultHome != null) {
-            return new DefaultAppInfo(mPackageManager, mUserId, currentDefaultHome);
+            return new DefaultAppInfo(mContext, mPackageManager, mUserId, currentDefaultHome);
         }
-        final ActivityInfo onlyAppInfo = getOnlyAppInfo();
+        final ActivityInfo onlyAppInfo = getOnlyAppInfo(homeActivities);
         if (onlyAppInfo != null) {
-            return new DefaultAppInfo(mPackageManager, mUserId, onlyAppInfo.getComponentName());
+            return new DefaultAppInfo(mContext, mPackageManager, mUserId,
+                    onlyAppInfo.getComponentName());
         }
         return null;
     }
 
-    private ActivityInfo getOnlyAppInfo() {
-        final List<ResolveInfo> homeActivities = new ArrayList<>();
+    private ActivityInfo getOnlyAppInfo(List<ResolveInfo> homeActivities) {
         final List<ActivityInfo> appLabels = new ArrayList<>();
 
         mPackageManager.getHomeActivities(homeActivities);
@@ -85,6 +87,26 @@ public class DefaultHomePreferenceController extends DefaultAppPreferenceControl
         return appLabels.size() == 1
                 ? appLabels.get(0)
                 : null;
+    }
+
+    @Override
+    protected Intent getSettingIntent(DefaultAppInfo info) {
+        if (info == null) {
+            return null;
+        }
+        final String packageName;
+        if (info.componentName != null) {
+            packageName = info.componentName.getPackageName();
+        } else if (info.packageItemInfo != null) {
+            packageName = info.packageItemInfo.packageName;
+        } else {
+            return null;
+        }
+
+        Intent intent = new Intent(Intent.ACTION_APPLICATION_PREFERENCES)
+                .setPackage(packageName)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        return mPackageManager.queryIntentActivities(intent, 0).size() == 1 ? intent : null;
     }
 
     public static boolean hasHomePreference(String pkg, Context context) {

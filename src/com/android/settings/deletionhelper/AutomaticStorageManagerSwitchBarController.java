@@ -23,10 +23,11 @@ import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.widget.Switch;
 
-import com.android.internal.util.Preconditions;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
-import com.android.settings.widget.SwitchBar;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.util.Preconditions;
+import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.Utils;
 
 /** Handles the logic for flipping the storage management toggle on a {@link SwitchBar}. */
 public class AutomaticStorageManagerSwitchBarController
@@ -56,13 +57,7 @@ public class AutomaticStorageManagerSwitchBarController
     }
 
     private void initializeCheckedStatus() {
-        boolean isStorageManagerChecked =
-                Settings.Secure.getInt(
-                                mContext.getContentResolver(),
-                                Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED,
-                                0)
-                        != 0;
-        mSwitchBar.setChecked(isStorageManagerChecked);
+        mSwitchBar.setChecked(Utils.isStorageManagerEnabled(mContext));
         mSwitchBar.addOnSwitchChangeListener(this);
     }
 

@@ -16,6 +16,9 @@
 
 package com.android.settings;
 
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
+import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
 import android.content.ContentResolver;
@@ -24,11 +27,16 @@ import android.net.ConnectivityManager;
 import android.net.NetworkPolicyManager;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.RecoverySystem;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.provider.Telephony;
+import android.support.annotation.VisibleForTesting;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,9 +46,10 @@ import android.widget.Toast;
 import com.android.ims.ImsManager;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.PhoneConstants;
+import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
+import com.android.settings.network.ApnSettings;
 import com.android.settingslib.RestrictedLockUtils;
-
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * Confirm and execute a reset of the network settings to a clean "just out of the box"
@@ -52,10 +61,45 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
  *
  * This is the confirmation screen.
  */
-public class ResetNetworkConfirm extends OptionsMenuFragment {
+public class ResetNetworkConfirm extends InstrumentedFragment {
 
     private View mContentView;
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+    @VisibleForTesting boolean mEraseEsim;
+    @VisibleForTesting EraseEsimAsyncTask mEraseEsimTask;
+
+    /**
+     * Async task used to erase all the eSIM profiles from the phone. If error happens during
+     * erasing eSIM profiles or timeout, an error msg is shown.
+     */
+    private static class EraseEsimAsyncTask extends AsyncTask<Void, Void, Boolean> {
+        private final Context mContext;
+        private final String mPackageName;
+
+        EraseEsimAsyncTask(Context context, String packageName) {
+            mContext = context;
+            mPackageName = packageName;
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            return RecoverySystem.wipeEuiccData(mContext, mPackageName);
+        }
+
+        @Override
+        protected void onPostExecute(Boolean succeeded) {
+            if (succeeded) {
+                Toast.makeText(mContext, R.string.reset_network_complete_toast, Toast.LENGTH_SHORT)
+                        .show();
+            } else {
+                new AlertDialog.Builder(mContext)
+                        .setTitle(R.string.reset_esim_error_title)
+                        .setMessage(R.string.reset_esim_error_msg)
+                        .setPositiveButton(android.R.string.ok, null /* listener */)
+                        .show();
+            }
+        }
+    }
 
     /**
      * The user has gone through the multiple confirmation, so now we go ahead
@@ -68,7 +112,8 @@ public class ResetNetworkConfirm extends OptionsMenuFragment {
             if (Utils.isMonkeyRunning()) {
                 return;
             }
-            // TODO maybe show a progress dialog if this ends up taking a while
+            // TODO maybe show a progress screen if this ends up taking a while and won't let user
+            // go back until the tasks finished.
             Context context = getActivity();
 
             ConnectivityManager connectivityManager = (ConnectivityManager)
@@ -108,11 +153,31 @@ public class ResetNetworkConfirm extends OptionsMenuFragment {
             ImsManager.getInstance(context,
                      SubscriptionManager.getPhoneId(mSubId)).factoryReset();
             restoreDefaultApn(context);
+            esimFactoryReset(context, context.getPackageName());
+            // There has been issues when Sms raw table somehow stores orphan
+            // fragments. They lead to garbled message when new fragments come
+            // in and combied with those stale ones. In case this happens again,
+            // user can reset all network settings which will clean up this table.
+            cleanUpSmsRawTable(context);
+        }
+    };
 
+    private void cleanUpSmsRawTable(Context context) {
+        ContentResolver resolver = context.getContentResolver();
+        Uri uri = Uri.withAppendedPath(Telephony.Sms.CONTENT_URI, "raw/permanentDelete");
+        resolver.delete(uri, null, null);
+    }
+
+    @VisibleForTesting
+    void esimFactoryReset(Context context, String packageName) {
+        if (mEraseEsim) {
+            mEraseEsimTask = new EraseEsimAsyncTask(context, packageName);
+            mEraseEsimTask.execute();
+        } else {
             Toast.makeText(context, R.string.reset_network_complete_toast, Toast.LENGTH_SHORT)
                     .show();
         }
-    };
+    }
 
     /**
      * Restore APN settings to default.
@@ -145,10 +210,11 @@ public class ResetNetworkConfirm extends OptionsMenuFragment {
                 UserManager.DISALLOW_NETWORK_RESET, UserHandle.myUserId())) {
             return inflater.inflate(R.layout.network_reset_disallowed_screen, null);
         } else if (admin != null) {
-            View view = inflater.inflate(R.layout.admin_support_details_empty_view, null);
-            ShowAdminSupportDetailsDialog.setAdminSupportDetails(getActivity(), view, admin, false);
-            view.setVisibility(View.VISIBLE);
-            return view;
+            new ActionDisabledByAdminDialogHelper(getActivity())
+                    .prepareDialogBuilder(UserManager.DISALLOW_NETWORK_RESET, admin)
+                    .setOnDismissListener(__ -> getActivity().finish())
+                    .show();
+            return new View(getContext());
         }
         mContentView = inflater.inflate(R.layout.reset_network_confirm, null);
         establishFinalConfirmationState();
@@ -163,7 +229,17 @@ public class ResetNetworkConfirm extends OptionsMenuFragment {
         if (args != null) {
             mSubId = args.getInt(PhoneConstants.SUBSCRIPTION_KEY,
                     SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+            mEraseEsim = args.getBoolean(MasterClear.ERASE_ESIMS_EXTRA);
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        if (mEraseEsimTask != null) {
+            mEraseEsimTask.cancel(true /* mayInterruptIfRunning */);
+            mEraseEsimTask = null;
+        }
+        super.onDestroy();
     }
 
     @Override

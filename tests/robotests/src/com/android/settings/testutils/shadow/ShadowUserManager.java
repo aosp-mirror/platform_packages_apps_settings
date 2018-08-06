@@ -17,26 +17,44 @@
 package com.android.settings.testutils.shadow;
 
 import android.annotation.UserIdInt;
-import android.content.Context;
 import android.content.pm.UserInfo;
+import android.os.UserHandle;
 import android.os.UserManager;
+import android.os.UserManager.EnforcingUser;
 import android.util.SparseArray;
 
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
-import org.robolectric.internal.ShadowExtractor;
+import org.robolectric.annotation.Resetter;
+import org.robolectric.shadow.api.Shadow;
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-/**
- * This class provides the API 24 implementation of UserManager.get(Context).
- */
-@Implements(UserManager.class)
+@Implements(value = UserManager.class, inheritImplementationMethods = true)
 public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager {
 
     private SparseArray<UserInfo> mUserInfos = new SparseArray<>();
+    private final List<String> mRestrictions = new ArrayList<>();
+    private final Map<String, List<EnforcingUser>> mRestrictionSources = new HashMap<>();
+    private final List<UserInfo> mUserProfileInfos = new ArrayList<>();
+    private final Set<Integer> mManagedProfiles = new HashSet<>();
+    private boolean mIsQuietModeEnabled = false;
+
+    @Resetter
+    public void reset() {
+        mUserInfos.clear();
+        mRestrictions.clear();
+        mUserProfileInfos.clear();
+        mRestrictionSources.clear();
+        mManagedProfiles.clear();
+        mIsQuietModeEnabled = false;
+    }
 
     public void setUserInfo(int userHandle, UserInfo userInfo) {
         mUserInfos.put(userHandle, userInfo);
@@ -47,9 +65,13 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
         return mUserInfos.get(userHandle);
     }
 
+    public void addProfile(UserInfo userInfo) {
+        mUserProfileInfos.add(userInfo);
+    }
+
     @Implementation
     public List<UserInfo> getProfiles(@UserIdInt int userHandle) {
-        return Collections.emptyList();
+        return mUserProfileInfos;
     }
 
     @Implementation
@@ -58,12 +80,45 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     }
 
     @Implementation
-    public static UserManager get(Context context) {
-        return (UserManager) context.getSystemService(Context.USER_SERVICE);
+    public boolean hasBaseUserRestriction(String restrictionKey, UserHandle userHandle) {
+        return mRestrictions.contains(restrictionKey);
+    }
+
+    public void addBaseUserRestriction(String restriction) {
+        mRestrictions.add(restriction);
     }
 
     public static ShadowUserManager getShadow() {
-        return (ShadowUserManager) ShadowExtractor.extract(
+        return (ShadowUserManager) Shadow.extract(
                 RuntimeEnvironment.application.getSystemService(UserManager.class));
+    }
+
+    @Implementation
+    public List<EnforcingUser> getUserRestrictionSources(
+            String restrictionKey, UserHandle userHandle) {
+        return mRestrictionSources.get(restrictionKey + userHandle.getIdentifier());
+    }
+
+    public void setUserRestrictionSources(
+            String restrictionKey, UserHandle userHandle, List<EnforcingUser> enforcers) {
+        mRestrictionSources.put(restrictionKey + userHandle.getIdentifier(), enforcers);
+    }
+
+    @Implementation
+    public boolean isManagedProfile(@UserIdInt int userId) {
+        return mManagedProfiles.contains(userId);
+    }
+
+    public void addManagedProfile(int userId) {
+        mManagedProfiles.add(userId);
+    }
+
+    @Implementation
+    public boolean isQuietModeEnabled(UserHandle userHandle) {
+        return mIsQuietModeEnabled;
+    }
+
+    public void setQuietModeEnabled(boolean enabled) {
+        mIsQuietModeEnabled = enabled;
     }
 }

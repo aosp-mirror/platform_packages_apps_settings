@@ -38,6 +38,7 @@ import com.android.settingslib.Utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 
 /**
  * Wraps the power usage data of a BatterySipper with information about package name
@@ -54,6 +55,8 @@ public class BatteryEntry {
 
     static final ArrayList<BatteryEntry> mRequestQueue = new ArrayList<BatteryEntry>();
     static Handler sHandler;
+
+    static Locale sCurrentLocale = null;
 
     static private class NameAndIconLoader extends Thread {
         private boolean mAbort = false;
@@ -206,6 +209,10 @@ public class BatteryEntry {
                 name = context.getResources().getString(R.string.power_camera);
                 iconId = R.drawable.ic_settings_camera;
                 break;
+            case AMBIENT_DISPLAY:
+                name = context.getResources().getString(R.string.ambient_display_screen_title);
+                iconId = R.drawable.ic_settings_aod;
+                break;
         }
         if (iconId > 0) {
             icon = context.getDrawable(iconId);
@@ -227,6 +234,13 @@ public class BatteryEntry {
     }
 
     void getQuickNameIconForUid(final int uid) {
+        // Locale sync to system config in Settings
+        final Locale locale = Locale.getDefault();
+        if (sCurrentLocale != locale) {
+            clearUidCache();
+            sCurrentLocale = locale;
+        }
+
         final String uidString = Integer.toString(uid);
         if (sUidCache.containsKey(uidString)) {
             UidToDetail utd = sUidCache.get(uidString);

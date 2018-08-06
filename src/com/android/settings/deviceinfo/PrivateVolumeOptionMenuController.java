@@ -24,12 +24,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.android.settings.R;
-import com.android.settings.applications.PackageManagerWrapper;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreateOptionsMenu;
 import com.android.settingslib.core.lifecycle.events.OnOptionsItemSelected;
 import com.android.settingslib.core.lifecycle.events.OnPrepareOptionsMenu;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.Objects;
 

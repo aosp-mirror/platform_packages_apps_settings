@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.StatusBarManager;
 import android.content.Context;
@@ -35,11 +36,11 @@ import android.widget.Button;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.core.InstrumentedFragment;
 
 import java.util.Locale;
 
-public class CryptKeeperConfirm extends InstrumentedPreferenceFragment {
+public class CryptKeeperConfirm extends InstrumentedFragment {
 
     private static final String TAG = "CryptKeeperConfirm";
 
@@ -151,6 +152,12 @@ public class CryptKeeperConfirm extends InstrumentedPreferenceFragment {
     private void establishFinalConfirmationState() {
         mFinalButton = (Button) mContentView.findViewById(R.id.execute_encrypt);
         mFinalButton.setOnClickListener(mFinalClickListener);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getActivity().setTitle(R.string.crypt_keeper_confirm_title);
     }
 
     @Override

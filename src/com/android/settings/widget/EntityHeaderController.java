@@ -16,6 +16,9 @@
 
 package com.android.settings.widget;
 
+import static com.android.internal.logging.nano.MetricsProto.MetricsEvent
+        .ACTION_OPEN_APP_NOTIFICATION_SETTING;
+
 import android.annotation.IdRes;
 import android.annotation.UserIdInt;
 import android.app.ActionBar;
@@ -24,14 +27,15 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
-import android.content.pm.ResolveInfo;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.os.UserHandle;
 import android.support.annotation.IntDef;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,8 +46,8 @@ import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
-import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.applications.LayoutPreference;
+import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -51,20 +55,16 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import static com.android.internal.logging.nano.MetricsProto.MetricsEvent
-        .ACTION_OPEN_APP_NOTIFICATION_SETTING;
-import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION_OPEN_APP_SETTING;
-
 public class EntityHeaderController {
 
     @IntDef({ActionType.ACTION_NONE,
-            ActionType.ACTION_APP_PREFERENCE,
-            ActionType.ACTION_NOTIF_PREFERENCE})
+            ActionType.ACTION_NOTIF_PREFERENCE,
+            ActionType.ACTION_DND_RULE_PREFERENCE,})
     @Retention(RetentionPolicy.SOURCE)
     public @interface ActionType {
         int ACTION_NONE = 0;
-        int ACTION_APP_PREFERENCE = 1;
-        int ACTION_NOTIF_PREFERENCE = 2;
+        int ACTION_NOTIF_PREFERENCE = 1;
+        int ACTION_DND_RULE_PREFERENCE = 2;
     }
 
     public static final String PREF_KEY_APP_HEADER = "pref_app_header";
@@ -82,6 +82,8 @@ public class EntityHeaderController {
     private String mIconContentDescription;
     private CharSequence mLabel;
     private CharSequence mSummary;
+    // Required for hearing aid devices.
+    private CharSequence mSecondSummary;
     private String mPackageName;
     private Intent mAppNotifPrefIntent;
     @UserIdInt
@@ -94,6 +96,8 @@ public class EntityHeaderController {
     private boolean mHasAppInfoLink;
 
     private boolean mIsInstantApp;
+
+    private View.OnClickListener mEditRuleNameOnClickListener;
 
     /**
      * Creates a new instance of the controller.
@@ -143,9 +147,7 @@ public class EntityHeaderController {
      * accessibility purposes.
      */
     public EntityHeaderController setIcon(ApplicationsState.AppEntry appEntry) {
-        if (appEntry.icon != null) {
-            mIcon = appEntry.icon.getConstantState().newDrawable(mAppContext.getResources());
-        }
+        mIcon = IconDrawableFactory.newInstance(mAppContext).getBadgedIcon(appEntry.info);
         return this;
     }
 
@@ -170,6 +172,18 @@ public class EntityHeaderController {
     }
 
     public EntityHeaderController setSummary(PackageInfo packageInfo) {
+        if (packageInfo != null) {
+            mSummary = packageInfo.versionName;
+        }
+        return this;
+    }
+
+    public EntityHeaderController setSecondSummary(CharSequence summary) {
+        mSecondSummary = summary;
+        return this;
+    }
+
+    public EntityHeaderController setSecondSummary(PackageInfo packageInfo) {
         if (packageInfo != null) {
             mSummary = packageInfo.versionName;
         }
@@ -208,6 +222,11 @@ public class EntityHeaderController {
         return this;
     }
 
+    public EntityHeaderController setEditZenRuleNameListener(View.OnClickListener listener) {
+        this.mEditRuleNameOnClickListener = listener;
+        return this;
+    }
+
     /**
      * Done mutating entity header, rebinds everything and return a new {@link LayoutPreference}.
      */
@@ -232,6 +251,7 @@ public class EntityHeaderController {
         }
         setText(R.id.entity_header_title, mLabel);
         setText(R.id.entity_header_summary, mSummary);
+        setText(R.id.entity_header_second_summary, mSecondSummary);
         if (mIsInstantApp) {
             setText(R.id.install_type,
                     mHeader.getResources().getString(R.string.install_type_instant));
@@ -273,15 +293,19 @@ public class EntityHeaderController {
             @Override
             public void onClick(View v) {
                 AppInfoBase.startAppInfoFragment(
-                        InstalledAppDetails.class, R.string.application_info_label,
+                        AppInfoDashboardFragment.class, R.string.application_info_label,
                         mPackageName, mUid, mFragment, 0 /* request */,
                         mMetricsCategory);
-
             }
         });
         return;
     }
 
+    /**
+     * Styles the action bar (elevation, scrolling behaviors, color, etc).
+     * <p/>
+     * This method must be called after {@link Fragment#onCreate(Bundle)}.
+     */
     public EntityHeaderController styleActionBar(Activity activity) {
         if (activity == null) {
             Log.w(TAG, "No activity, cannot style actionbar.");
@@ -293,7 +317,7 @@ public class EntityHeaderController {
             return this;
         }
         actionBar.setBackgroundDrawable(
-                new ColorDrawable(Utils.getColorAttr(activity, android.R.attr.colorSecondary)));
+                new ColorDrawable(Utils.getColorAttr(activity, android.R.attr.colorPrimary)));
         actionBar.setElevation(0);
         if (mRecyclerView != null && mLifecycle != null) {
             ActionBarShadowController.attachToRecyclerView(mActivity, mLifecycle, mRecyclerView);
@@ -315,6 +339,16 @@ public class EntityHeaderController {
             return;
         }
         switch (action) {
+            case ActionType.ACTION_DND_RULE_PREFERENCE: {
+                if (mEditRuleNameOnClickListener == null) {
+                    button.setVisibility(View.GONE);
+                } else {
+                    button.setImageResource(R.drawable.ic_mode_edit);
+                    button.setVisibility(View.VISIBLE);
+                    button.setOnClickListener(mEditRuleNameOnClickListener);
+                }
+                return;
+            }
             case ActionType.ACTION_NOTIF_PREFERENCE: {
                 if (mAppNotifPrefIntent == null) {
                     button.setVisibility(View.GONE);
@@ -332,27 +366,6 @@ public class EntityHeaderController {
                 }
                 return;
             }
-            case ActionType.ACTION_APP_PREFERENCE: {
-                final Intent intent = resolveIntent(
-                        new Intent(Intent.ACTION_APPLICATION_PREFERENCES).setPackage(mPackageName));
-                if (intent == null) {
-                    button.setImageDrawable(null);
-                    button.setVisibility(View.GONE);
-                    return;
-                }
-                button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        FeatureFactory.getFactory(mAppContext).getMetricsFeatureProvider()
-                                .actionWithSource(mAppContext, mMetricsCategory,
-                                        ACTION_OPEN_APP_SETTING);
-                        mFragment.startActivity(intent);
-                    }
-                });
-                button.setImageResource(R.drawable.ic_settings_24dp);
-                button.setVisibility(View.VISIBLE);
-                return;
-            }
             case ActionType.ACTION_NONE: {
                 button.setVisibility(View.GONE);
                 return;
@@ -360,14 +373,6 @@ public class EntityHeaderController {
         }
     }
 
-    private Intent resolveIntent(Intent i) {
-        ResolveInfo result = mAppContext.getPackageManager().resolveActivity(i, 0);
-        if (result != null) {
-            return new Intent(i.getAction())
-                    .setClassName(result.activityInfo.packageName, result.activityInfo.name);
-        }
-        return null;
-    }
 
     private void setText(@IdRes int id, CharSequence text) {
         TextView textView = mHeader.findViewById(id);

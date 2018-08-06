@@ -16,24 +16,36 @@
 
 package com.android.settings;
 
+import android.annotation.Nullable;
 import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.provider.Settings;
+import android.provider.Settings.Global;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.telephony.euicc.EuiccManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.PhoneConstants;
+import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmLockPattern;
 import com.android.settingslib.RestrictedLockUtils;
@@ -51,7 +63,7 @@ import java.util.List;
  *
  * This is the initial screen.
  */
-public class ResetNetwork extends OptionsMenuFragment {
+public class ResetNetwork extends InstrumentedFragment {
     private static final String TAG = "ResetNetwork";
 
     // Arbitrary to avoid conficts
@@ -62,6 +74,14 @@ public class ResetNetwork extends OptionsMenuFragment {
     private View mContentView;
     private Spinner mSubscriptionSpinner;
     private Button mInitiateButton;
+    private View mEsimContainer;
+    private CheckBox mEsimCheckbox;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getActivity().setTitle(R.string.reset_network_title);
+    }
 
     /**
      * Keyguard validation is run using the standard {@link ConfirmLockPattern}
@@ -99,9 +119,13 @@ public class ResetNetwork extends OptionsMenuFragment {
             SubscriptionInfo subscription = mSubscriptions.get(selectedIndex);
             args.putInt(PhoneConstants.SUBSCRIPTION_KEY, subscription.getSubscriptionId());
         }
-        ((SettingsActivity) getActivity()).startPreferencePanel(
-                this, ResetNetworkConfirm.class.getName(),
-                args, R.string.reset_network_confirm_title, null, null, 0);
+        args.putBoolean(MasterClear.ERASE_ESIMS_EXTRA, mEsimCheckbox.isChecked());
+        new SubSettingLauncher(getContext())
+                .setDestination(ResetNetworkConfirm.class.getName())
+                .setArguments(args)
+                .setTitle(R.string.reset_network_confirm_title)
+                .setSourceMetricsCategory(getMetricsCategory())
+                .launch();
     }
 
     /**
@@ -133,6 +157,8 @@ public class ResetNetwork extends OptionsMenuFragment {
      */
     private void establishInitialState() {
         mSubscriptionSpinner = (Spinner) mContentView.findViewById(R.id.reset_network_subscription);
+        mEsimContainer = mContentView.findViewById(R.id.erase_esim_container);
+        mEsimCheckbox = mContentView.findViewById(R.id.erase_esim);
 
         mSubscriptions = SubscriptionManager.from(getActivity()).getActiveSubscriptionInfoList();
         if (mSubscriptions != null && mSubscriptions.size() > 0) {
@@ -184,6 +210,30 @@ public class ResetNetwork extends OptionsMenuFragment {
         }
         mInitiateButton = (Button) mContentView.findViewById(R.id.initiate_reset_network);
         mInitiateButton.setOnClickListener(mInitiateListener);
+        if (showEuiccSettings(getContext())) {
+            mEsimContainer.setVisibility(View.VISIBLE);
+            TextView title = mContentView.findViewById(R.id.erase_esim_title);
+            title.setText(R.string.reset_esim_title);
+            mEsimContainer.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mEsimCheckbox.toggle();
+                }
+            });
+        } else {
+            mEsimCheckbox.setChecked(false /* checked */);
+        }
+    }
+
+    private boolean showEuiccSettings(Context context) {
+        EuiccManager euiccManager =
+                (EuiccManager) context.getSystemService(Context.EUICC_SERVICE);
+        if (!euiccManager.isEnabled()) {
+            return false;
+        }
+        ContentResolver resolver = context.getContentResolver();
+        return Settings.Global.getInt(resolver, Global.EUICC_PROVISIONED, 0) != 0
+                || Settings.Global.getInt(resolver, Global.DEVELOPMENT_SETTINGS_ENABLED, 0) != 0;
     }
 
     @Override
@@ -196,10 +246,11 @@ public class ResetNetwork extends OptionsMenuFragment {
                 UserManager.DISALLOW_NETWORK_RESET, UserHandle.myUserId())) {
             return inflater.inflate(R.layout.network_reset_disallowed_screen, null);
         } else if (admin != null) {
-            View view = inflater.inflate(R.layout.admin_support_details_empty_view, null);
-            ShowAdminSupportDetailsDialog.setAdminSupportDetails(getActivity(), view, admin, false);
-            view.setVisibility(View.VISIBLE);
-            return view;
+            new ActionDisabledByAdminDialogHelper(getActivity())
+                    .prepareDialogBuilder(UserManager.DISALLOW_NETWORK_RESET, admin)
+                    .setOnDismissListener(__ -> getActivity().finish())
+                    .show();
+            return new View(getContext());
         }
 
         mContentView = inflater.inflate(R.layout.reset_network, null);

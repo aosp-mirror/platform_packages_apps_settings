@@ -17,21 +17,32 @@
 package com.android.settings.testutils.shadow;
 
 import android.net.ConnectivityManager;
+import android.util.SparseBooleanArray;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
-@Implements(ConnectivityManager.class)
+@Implements(value = ConnectivityManager.class, inheritImplementationMethods = true)
 public class ShadowConnectivityManager extends org.robolectric.shadows.ShadowConnectivityManager {
 
-    private static boolean mIsNetworkSupported;
+    private final SparseBooleanArray mSupportedNetworkTypes = new SparseBooleanArray();
+    private boolean mTetheringSupported = false;
+
+    public void setNetworkSupported(int networkType, boolean supported) {
+        mSupportedNetworkTypes.put(networkType, supported);
+    }
 
     @Implementation
     public boolean isNetworkSupported(int networkType) {
-        return mIsNetworkSupported;
+        return mSupportedNetworkTypes.get(networkType);
     }
 
-    public static void setIsNetworkSupported(boolean isNetworkSupported) {
-        mIsNetworkSupported = isNetworkSupported;
+    public void setTetheringSupported(boolean supported) {
+        mTetheringSupported = supported;
+    }
+
+    @Implementation
+    public boolean isTetheringSupported() {
+        return mTetheringSupported;
     }
 }

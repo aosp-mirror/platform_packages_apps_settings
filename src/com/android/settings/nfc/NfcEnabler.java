@@ -16,133 +16,41 @@
 
 package com.android.settings.nfc;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.nfc.NfcAdapter;
-import android.os.UserHandle;
-import android.os.UserManager;
 import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
-
-import com.android.settings.R;
-import com.android.settingslib.RestrictedLockUtils;
-import com.android.settingslib.RestrictedPreference;
 
 /**
- * NfcEnabler is a helper to manage the Nfc on/off checkbox preference. It is
- * turns on/off Nfc and ensures the summary of the preference reflects the
- * current state.
+ * NfcEnabler is a helper to manage the Nfc on/off checkbox preference. It turns on/off Nfc
+ * and ensures the summary of the preference reflects the current state.
  */
-public class NfcEnabler implements Preference.OnPreferenceChangeListener {
-    private final Context mContext;
-    private final SwitchPreference mSwitch;
-    private final RestrictedPreference mAndroidBeam;
-    private final NfcAdapter mNfcAdapter;
-    private final IntentFilter mIntentFilter;
-    private boolean mBeamDisallowedBySystem;
+public class NfcEnabler extends BaseNfcEnabler {
+    private final SwitchPreference mPreference;
 
-    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (NfcAdapter.ACTION_ADAPTER_STATE_CHANGED.equals(action)) {
-                handleNfcStateChanged(intent.getIntExtra(NfcAdapter.EXTRA_ADAPTER_STATE,
-                        NfcAdapter.STATE_OFF));
-            }
-        }
-    };
-
-    public NfcEnabler(Context context, SwitchPreference switchPreference,
-            RestrictedPreference androidBeam) {
-        mContext = context;
-        mSwitch = switchPreference;
-        mAndroidBeam = androidBeam;
-        mNfcAdapter = NfcAdapter.getDefaultAdapter(context);
-        mBeamDisallowedBySystem = RestrictedLockUtils.hasBaseUserRestriction(context,
-                UserManager.DISALLOW_OUTGOING_BEAM, UserHandle.myUserId());
-
-        if (mNfcAdapter == null) {
-            // NFC is not supported
-            mSwitch.setEnabled(false);
-            mAndroidBeam.setEnabled(false);
-            mIntentFilter = null;
-            return;
-        }
-        if (mBeamDisallowedBySystem) {
-            mAndroidBeam.setEnabled(false);
-        }
-        mIntentFilter = new IntentFilter(NfcAdapter.ACTION_ADAPTER_STATE_CHANGED);
+    public NfcEnabler(Context context, SwitchPreference preference) {
+        super(context);
+        mPreference = preference;
     }
 
-    public void resume() {
-        if (mNfcAdapter == null) {
-            return;
-        }
-        handleNfcStateChanged(mNfcAdapter.getAdapterState());
-        mContext.registerReceiver(mReceiver, mIntentFilter);
-        mSwitch.setOnPreferenceChangeListener(this);
-    }
-
-    public void pause() {
-        if (mNfcAdapter == null) {
-            return;
-        }
-        mContext.unregisterReceiver(mReceiver);
-        mSwitch.setOnPreferenceChangeListener(null);
-    }
-
-    public boolean onPreferenceChange(Preference preference, Object value) {
-        // Turn NFC on/off
-
-        final boolean desiredState = (Boolean) value;
-        mSwitch.setChecked(desiredState);
-        mSwitch.setEnabled(false);
-
-        if (desiredState) {
-            mNfcAdapter.enable();
-        } else {
-            mNfcAdapter.disable();
-        }
-
-        return false;
-    }
-
-    private void handleNfcStateChanged(int newState) {
+    @Override
+    protected void handleNfcStateChanged(int newState) {
         switch (newState) {
-        case NfcAdapter.STATE_OFF:
-            mSwitch.setChecked(false);
-            mSwitch.setEnabled(true);
-            mAndroidBeam.setEnabled(false);
-            mAndroidBeam.setSummary(R.string.android_beam_disabled_summary);
-            break;
-        case NfcAdapter.STATE_ON:
-            mSwitch.setChecked(true);
-            mSwitch.setEnabled(true);
-            if (mBeamDisallowedBySystem) {
-                mAndroidBeam.setDisabledByAdmin(null);
-                mAndroidBeam.setEnabled(false);
-            } else {
-                mAndroidBeam.checkRestrictionAndSetDisabled(UserManager.DISALLOW_OUTGOING_BEAM);
-            }
-            if (mNfcAdapter.isNdefPushEnabled() && mAndroidBeam.isEnabled()) {
-                mAndroidBeam.setSummary(R.string.android_beam_on_summary);
-            } else {
-                mAndroidBeam.setSummary(R.string.android_beam_off_summary);
-            }
-            break;
-        case NfcAdapter.STATE_TURNING_ON:
-            mSwitch.setChecked(true);
-            mSwitch.setEnabled(false);
-            mAndroidBeam.setEnabled(false);
-            break;
-        case NfcAdapter.STATE_TURNING_OFF:
-            mSwitch.setChecked(false);
-            mSwitch.setEnabled(false);
-            mAndroidBeam.setEnabled(false);
-            break;
+            case NfcAdapter.STATE_OFF:
+                mPreference.setChecked(false);
+                mPreference.setEnabled(true);
+                break;
+            case NfcAdapter.STATE_ON:
+                mPreference.setChecked(true);
+                mPreference.setEnabled(true);
+                break;
+            case NfcAdapter.STATE_TURNING_ON:
+                mPreference.setChecked(true);
+                mPreference.setEnabled(false);
+                break;
+            case NfcAdapter.STATE_TURNING_OFF:
+                mPreference.setChecked(false);
+                mPreference.setEnabled(false);
+                break;
         }
     }
 }

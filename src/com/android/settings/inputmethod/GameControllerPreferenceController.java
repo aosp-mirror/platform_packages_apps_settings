@@ -19,37 +19,27 @@ package com.android.settings.inputmethod;
 import android.content.Context;
 import android.hardware.input.InputManager;
 import android.provider.Settings;
-import android.support.annotation.VisibleForTesting;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
-import android.text.TextUtils;
 import android.view.InputDevice;
 
+import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
-import java.util.List;
-
-public class GameControllerPreferenceController extends AbstractPreferenceController
+public class GameControllerPreferenceController extends TogglePreferenceController
         implements PreferenceControllerMixin, InputManager.InputDeviceListener, LifecycleObserver,
         OnResume, OnPause {
 
-    @VisibleForTesting
-    static final String PREF_KEY = "vibrate_input_devices";
-    private static final String CATEGORY_KEY = "game_controller_settings_category";
-
     private final InputManager mIm;
 
-    private PreferenceScreen mScreen;
-    private Preference mCategory;
     private Preference mPreference;
 
-    public GameControllerPreferenceController(Context context) {
-        super(context);
+    public GameControllerPreferenceController(Context context, String key) {
+        super(context, key);
         mIm = (InputManager) context.getSystemService(Context.INPUT_SERVICE);
     }
 
@@ -66,80 +56,61 @@ public class GameControllerPreferenceController extends AbstractPreferenceContro
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mScreen = screen;
-        mCategory = screen.findPreference(CATEGORY_KEY);
-        mPreference = screen.findPreference(PREF_KEY);
+        mPreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override
-    public boolean isAvailable() {
+    @AvailabilityStatus
+    public int getAvailabilityStatus() {
+        // If device explicitly wants to hide this, return early.
+        if (!mContext.getResources().getBoolean(R.bool.config_show_vibrate_input_devices)) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
+
         final int[] devices = mIm.getInputDeviceIds();
         for (int deviceId : devices) {
             InputDevice device = mIm.getInputDevice(deviceId);
             if (device != null && !device.isVirtual() && device.getVibrator().hasVibrator()) {
-                return true;
+                return AVAILABLE;
             }
         }
-        return false;
-    }
-
-    @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        if (TextUtils.equals(PREF_KEY, preference.getKey())) {
-            Settings.System.putInt(mContext.getContentResolver(),
-                    Settings.System.VIBRATE_INPUT_DEVICES,
-                    ((SwitchPreference) preference).isChecked() ? 1 : 0);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return CATEGORY_KEY;
+        return CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
     public void updateState(Preference preference) {
+        super.updateState(preference);
         if (preference == null) {
             return;
         }
-        ((SwitchPreference) preference).setChecked(Settings.System.getInt(
-                mContext.getContentResolver(),
-                Settings.System.VIBRATE_INPUT_DEVICES, 1) > 0);
+        mPreference.setVisible(isAvailable());
     }
 
     @Override
-    public void updateNonIndexableKeys(List<String> keys) {
-        if (!isAvailable()) {
-            keys.add(CATEGORY_KEY);
-            keys.add(PREF_KEY);
-        }
+    public boolean isChecked() {
+        return Settings.System.getInt(
+                mContext.getContentResolver(),
+                Settings.System.VIBRATE_INPUT_DEVICES, 1) > 0;
+    }
+
+    @Override
+    public boolean setChecked(boolean isChecked) {
+        return Settings.System.putInt(mContext.getContentResolver(),
+                Settings.System.VIBRATE_INPUT_DEVICES, isChecked ? 1 : 0);
     }
 
     @Override
     public void onInputDeviceAdded(int deviceId) {
-        updateGameControllers();
+        updateState(mPreference);
     }
 
     @Override
     public void onInputDeviceRemoved(int deviceId) {
-        updateGameControllers();
+        updateState(mPreference);
     }
 
     @Override
     public void onInputDeviceChanged(int deviceId) {
-        updateGameControllers();
-    }
-
-    private void updateGameControllers() {
-        if (isAvailable()) {
-            mScreen.addPreference(mCategory);
-            updateState(mPreference);
-        } else {
-            if (mCategory != null) {
-                mScreen.removePreference(mCategory);
-            }
-        }
+        updateState(mPreference);
     }
 }

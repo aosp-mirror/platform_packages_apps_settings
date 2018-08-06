@@ -16,40 +16,38 @@
 
 package com.android.settings.datetime;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
-import android.support.v7.preference.Preference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
+import com.android.settingslib.RestrictedPreference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class TimeZonePreferenceControllerTest {
 
     @Mock
     private AutoTimeZonePreferenceController mAutoTimeZonePreferenceController;
+
     private Context mContext;
     private TimeZonePreferenceController mController;
-    private Preference mPreference;
+    private RestrictedPreference mPreference;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = ShadowApplication.getInstance().getApplicationContext();
-        mPreference = new Preference(mContext);
+        mContext = RuntimeEnvironment.application;
+        mPreference = new RestrictedPreference(mContext);
         mController = spy(new TimeZonePreferenceController(mContext,
                 mAutoTimeZonePreferenceController));
     }
@@ -61,6 +59,9 @@ public class TimeZonePreferenceControllerTest {
 
     @Test
     public void updateState_autoTimeZoneEnabled_shouldDisablePref() {
+        // Make sure not disabled by admin.
+        mPreference.setDisabledByAdmin(null);
+
         doReturn("test timezone").when(mController).getTimeZoneOffsetAndName();
         when(mAutoTimeZonePreferenceController.isEnabled()).thenReturn(true);
         mController.updateState(mPreference);
@@ -70,6 +71,9 @@ public class TimeZonePreferenceControllerTest {
 
     @Test
     public void updateState_autoTimeZoneDisabled_shouldEnablePref() {
+        // Make sure not disabled by admin.
+        mPreference.setDisabledByAdmin(null);
+
         doReturn("test timezone").when(mController).getTimeZoneOffsetAndName();
         when(mAutoTimeZonePreferenceController.isEnabled()).thenReturn(false);
         mController.updateState(mPreference);

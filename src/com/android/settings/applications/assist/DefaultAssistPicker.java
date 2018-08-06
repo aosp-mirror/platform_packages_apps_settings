@@ -31,8 +31,10 @@ import android.util.Log;
 import com.android.internal.app.AssistUtils;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.applications.defaultapps.DefaultAppInfo;
 import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
+
+import com.android.settingslib.applications.DefaultAppInfo;
+import com.android.settingslib.widget.CandidateInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +67,11 @@ public class DefaultAssistPicker extends DefaultAppPickerFragment {
     }
 
     @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.default_assist_settings;
+    }
+
+    @Override
     protected List<DefaultAppInfo> getCandidates() {
         mAvailableAssistants.clear();
         addAssistServices();
@@ -79,7 +86,7 @@ public class DefaultAssistPicker extends DefaultAppPickerFragment {
                 continue;
             }
             packages.add(packageName);
-            candidates.add(new DefaultAppInfo(mPm, mUserId, info.component));
+            candidates.add(new DefaultAppInfo(getContext(), mPm, mUserId, info.component));
         }
         return candidates;
     }
@@ -88,7 +95,7 @@ public class DefaultAssistPicker extends DefaultAppPickerFragment {
     protected String getDefaultKey() {
         final ComponentName cn = getCurrentAssist();
         if (cn != null) {
-            return new DefaultAppInfo(mPm, mUserId, cn).getKey();
+            return new DefaultAppInfo(getContext(), mPm, mUserId, cn).getKey();
         }
         return null;
     }

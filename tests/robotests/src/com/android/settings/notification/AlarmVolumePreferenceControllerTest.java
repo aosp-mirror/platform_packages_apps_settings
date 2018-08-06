@@ -16,37 +16,43 @@
 
 package com.android.settings.notification;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.media.AudioManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AlarmVolumePreferenceControllerTest {
 
     @Mock
-    private Context mContext;
-    @Mock
     private AudioHelper mHelper;
 
+    private Context mContext;
     private AlarmVolumePreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mController = new AlarmVolumePreferenceController(mContext, null, null, mHelper);
+        mContext = RuntimeEnvironment.application;
+        mController = new AlarmVolumePreferenceController(mContext);
+        mController.setAudioHelper(mHelper);
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void isAvailable_whenNotVisible_isFalse() {
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
@@ -68,4 +74,8 @@ public class AlarmVolumePreferenceControllerTest {
         assertThat(mController.getAudioStream()).isEqualTo(AudioManager.STREAM_ALARM);
     }
 
+    @Test
+    public void isSliceableCorrectKey_returnsTrue() {
+        assertThat(mController.isSliceable()).isTrue();
+    }
 }

@@ -24,6 +24,7 @@ import android.text.TextUtils;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.widget.RadioButtonPickerFragment;
+import com.android.settingslib.widget.CandidateInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,11 @@ import java.util.List;
 public class VrDisplayPreferencePicker extends RadioButtonPickerFragment {
 
     static final String PREF_KEY_PREFIX = "vr_display_pref_";
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.vr_display_settings;
+    }
 
     @Override
     public int getMetricsCategory() {

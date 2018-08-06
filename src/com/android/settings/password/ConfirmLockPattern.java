@@ -105,17 +105,12 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         }
 
         @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-        }
-
-        @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             ConfirmLockPattern activity = (ConfirmLockPattern) getActivity();
             View view = inflater.inflate(
-                    activity.getConfirmCredentialTheme() == ConfirmCredentialTheme.INTERNAL
-                            ? R.layout.confirm_lock_pattern_internal
+                    activity.getConfirmCredentialTheme() == ConfirmCredentialTheme.NORMAL
+                            ? R.layout.confirm_lock_pattern_normal
                             : R.layout.confirm_lock_pattern,
                     container,
                     false);

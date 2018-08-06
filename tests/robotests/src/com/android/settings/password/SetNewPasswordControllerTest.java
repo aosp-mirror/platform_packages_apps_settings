@@ -17,7 +17,6 @@
 package com.android.settings.password;
 
 import static android.content.pm.PackageManager.FEATURE_FINGERPRINT;
-
 import static com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment
         .HIDE_DISABLED_PREFS;
 import static com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment
@@ -25,9 +24,7 @@ import static com.android.settings.password.ChooseLockGeneric.ChooseLockGenericF
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
@@ -39,10 +36,10 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -50,27 +47,26 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
-
-/**
- * Tests for {@link SetNewPasswordController}.
- */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class SetNewPasswordControllerTest {
+
     private static final int CURRENT_USER_ID = 101;
     private static final long FINGERPRINT_CHALLENGE = -9876512313131L;
 
-    @Mock PackageManager mPackageManager;
-    @Mock IFingerprintManager mFingerprintManager;
-    @Mock DevicePolicyManager mDevicePolicyManager;
+    @Mock
+    private PackageManager mPackageManager;
+    @Mock
+    private FingerprintManager mFingerprintManager;
+    @Mock
+    private DevicePolicyManager mDevicePolicyManager;
+    @Mock
+    private SetNewPasswordController.Ui mUi;
 
-    @Mock private SetNewPasswordController.Ui mUi;
     private SetNewPasswordController mSetNewPasswordController;
 
     @Before
-    public void setUp()  {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
         mSetNewPasswordController = new SetNewPasswordController(
                 CURRENT_USER_ID, mPackageManager, mFingerprintManager, mDevicePolicyManager, mUi);

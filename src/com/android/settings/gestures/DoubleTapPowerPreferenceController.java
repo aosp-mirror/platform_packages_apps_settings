@@ -16,32 +16,34 @@
 
 package com.android.settings.gestures;
 
+import static android.provider.Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
+import android.support.annotation.VisibleForTesting;
+import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.search.ResultPayload;
-import com.android.settingslib.core.lifecycle.Lifecycle;
-
-import static android.provider.Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED;
 
 public class DoubleTapPowerPreferenceController extends GesturePreferenceController {
 
-    private final int ON = 0;
-    private final int OFF = 1;
+    @VisibleForTesting
+    static final int ON = 0;
+    @VisibleForTesting
+    static final int OFF = 1;
 
     private static final String PREF_KEY_VIDEO = "gesture_double_tap_power_video";
     private final String mDoubleTapPowerKey;
 
     private final String SECURE_KEY = CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED;
 
-    public DoubleTapPowerPreferenceController(Context context, Lifecycle lifecycle, String key) {
-        super(context, lifecycle);
+    public DoubleTapPowerPreferenceController(Context context, String key) {
+        super(context, key);
         mDoubleTapPowerKey = key;
     }
 
@@ -56,8 +58,13 @@ public class DoubleTapPowerPreferenceController extends GesturePreferenceControl
     }
 
     @Override
-    public boolean isAvailable() {
-        return isGestureAvailable(mContext);
+    public int getAvailabilityStatus() {
+        return isGestureAvailable(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public boolean isSliceable() {
+        return TextUtils.equals(getPreferenceKey(), "gesture_double_tap_power");
     }
 
     @Override
@@ -66,27 +73,22 @@ public class DoubleTapPowerPreferenceController extends GesturePreferenceControl
     }
 
     @Override
-    public String getPreferenceKey() {
-        return mDoubleTapPowerKey;
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        boolean enabled = (boolean) newValue;
-        Settings.Secure.putInt(mContext.getContentResolver(), SECURE_KEY, enabled ? ON : OFF);
-        return true;
-    }
-
-    @Override
-    protected boolean isSwitchPrefEnabled() {
+    public boolean isChecked() {
         final int cameraDisabled = Settings.Secure.getInt(mContext.getContentResolver(),
                 SECURE_KEY, ON);
-        return cameraDisabled == 0;
+        return cameraDisabled == ON;
     }
 
     @Override
+    public boolean setChecked(boolean isChecked) {
+        return Settings.Secure.putInt(mContext.getContentResolver(), SECURE_KEY,
+                isChecked ? ON : OFF);
+    }
+
+    @Override
+    //TODO (b/69808376): Remove result payload
     public ResultPayload getResultPayload() {
-        final Intent intent = DatabaseIndexingUtils.buildSubsettingIntent(mContext,
+        final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(mContext,
                 DoubleTapPowerSettings.class.getName(), mDoubleTapPowerKey,
                 mContext.getString(R.string.display_settings));
 

@@ -16,6 +16,12 @@
 
 package com.android.settings.applications.defaultapps;
 
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.content.Context;
@@ -24,10 +30,10 @@ import android.support.v7.preference.PreferenceScreen;
 import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.RadioButtonPreference;
+import com.android.settingslib.applications.DefaultAppInfo;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,20 +42,11 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DefaultAppPickerFragmentTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -65,7 +62,7 @@ public class DefaultAppPickerFragmentTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mFeatureFactory = FakeFeatureFactory.setupForTest(mActivity);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mFragment = spy(new TestFragment());
 
         when(mActivity.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
@@ -103,6 +100,11 @@ public class DefaultAppPickerFragmentTest {
 
         @Override
         public int getMetricsCategory() {
+            return 0;
+        }
+
+        @Override
+        protected int getPreferenceScreenResId() {
             return 0;
         }
 

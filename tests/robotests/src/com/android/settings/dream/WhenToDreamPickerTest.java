@@ -16,29 +16,29 @@
 
 package com.android.settings.dream;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.UserManager;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
+
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.dream.DreamBackend;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class WhenToDreamPickerTest {
+
     private WhenToDreamPicker mPicker;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private DreamBackend mBackend;
@@ -51,10 +51,10 @@ public class WhenToDreamPickerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         when(mActivity.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
-        FakeFeatureFactory.setupForTest(mActivity);
+        FakeFeatureFactory.setupForTest();
 
         mPicker = new WhenToDreamPicker();
-        mPicker.onAttach((Context)mActivity);
+        mPicker.onAttach((Context) mActivity);
 
         ReflectionHelpers.setField(mPicker, "mBackend", mBackend);
     }
@@ -80,28 +80,28 @@ public class WhenToDreamPickerTest {
 
     @Test
     public void setDreamWhileCharging() {
-        String key = DreamSettings.getKeyFromSetting(DreamBackend.WHILE_CHARGING);
+        final String key = DreamSettings.getKeyFromSetting(DreamBackend.WHILE_CHARGING);
         mPicker.setDefaultKey(key);
         verify(mBackend).setWhenToDream(DreamBackend.WHILE_CHARGING);
     }
 
     @Test
     public void setDreamWhileDocked() {
-        String key = DreamSettings.getKeyFromSetting(DreamBackend.WHILE_DOCKED);
+        final String key = DreamSettings.getKeyFromSetting(DreamBackend.WHILE_DOCKED);
         mPicker.setDefaultKey(key);
         verify(mBackend).setWhenToDream(DreamBackend.WHILE_DOCKED);
     }
 
     @Test
     public void setDreamWhileChargingOrDocked() {
-        String key = DreamSettings.getKeyFromSetting(DreamBackend.EITHER);
+        final String key = DreamSettings.getKeyFromSetting(DreamBackend.EITHER);
         mPicker.setDefaultKey(key);
         verify(mBackend).setWhenToDream(DreamBackend.EITHER);
     }
 
     @Test
     public void setDreamNever() {
-        String key = DreamSettings.getKeyFromSetting(DreamBackend.NEVER);
+        final String key = DreamSettings.getKeyFromSetting(DreamBackend.NEVER);
         mPicker.setDefaultKey(key);
         verify(mBackend).setWhenToDream(DreamBackend.NEVER);
     }

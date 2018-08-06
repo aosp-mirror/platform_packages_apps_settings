@@ -23,6 +23,7 @@ import com.android.settings.Utils;
 
 public class DefaultWorkPhonePreferenceController extends DefaultPhonePreferenceController {
 
+    public static final String KEY = "work_default_phone_app";
     private final UserHandle mUserHandle;
 
     public DefaultWorkPhonePreferenceController(Context context) {
@@ -43,6 +44,6 @@ public class DefaultWorkPhonePreferenceController extends DefaultPhonePreference
 
     @Override
     public String getPreferenceKey() {
-        return "work_default_phone_app";
+        return KEY;
     }
 }

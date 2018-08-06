@@ -16,22 +16,23 @@
 
 package com.android.settings.dashboard.conditional;
 
-import android.graphics.drawable.Icon;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 
-import com.android.internal.app.NightDisplayController;
+import com.android.internal.app.ColorDisplayController;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.Utils;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.display.NightDisplaySettings;
 
 public final class NightDisplayCondition extends Condition
-        implements NightDisplayController.Callback {
+        implements ColorDisplayController.Callback {
 
-    private NightDisplayController mController;
+    private ColorDisplayController mController;
 
     NightDisplayCondition(ConditionManager manager) {
         super(manager);
-        mController = new NightDisplayController(manager.getContext());
+        mController = new ColorDisplayController(manager.getContext());
         mController.setListener(this);
     }
 
@@ -41,8 +42,8 @@ public final class NightDisplayCondition extends Condition
     }
 
     @Override
-    public Icon getIcon() {
-        return Icon.createWithResource(mManager.getContext(), R.drawable.ic_settings_night_display);
+    public Drawable getIcon() {
+        return mManager.getContext().getDrawable(R.drawable.ic_settings_night_display);
     }
 
     @Override
@@ -57,13 +58,17 @@ public final class NightDisplayCondition extends Condition
 
     @Override
     public CharSequence[] getActions() {
-        return new CharSequence[] { mManager.getContext().getString(R.string.condition_turn_off) };
+        return new CharSequence[] {mManager.getContext().getString(R.string.condition_turn_off)};
     }
 
     @Override
     public void onPrimaryClick() {
-        Utils.startWithFragment(mManager.getContext(), NightDisplaySettings.class.getName(), null,
-                null, 0, R.string.night_display_title, null, MetricsEvent.DASHBOARD_SUMMARY);
+        new SubSettingLauncher(mManager.getContext())
+                .setDestination(NightDisplaySettings.class.getName())
+                .setSourceMetricsCategory(MetricsEvent.DASHBOARD_SUMMARY)
+                .setTitle(R.string.night_display_title)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                .launch();
     }
 
     @Override

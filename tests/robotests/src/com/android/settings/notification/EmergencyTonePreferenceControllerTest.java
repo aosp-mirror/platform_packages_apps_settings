@@ -16,31 +16,28 @@
 
 package com.android.settings.notification;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.when;
+
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.provider.Settings.Global;
 import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.PreferenceScreen;
-import android.provider.Settings.Global;
 import android.telephony.TelephonyManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.when;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class EmergencyTonePreferenceControllerTest {
 
     @Mock
@@ -62,7 +59,7 @@ public class EmergencyTonePreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        final Context appContext = ShadowApplication.getInstance().getApplicationContext();
+        final Context appContext = RuntimeEnvironment.application;
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
         when(mTelephonyManager.getCurrentPhoneType()).thenReturn(TelephonyManager.PHONE_TYPE_CDMA);
         when(mSetting.getActivity()).thenReturn(mActivity);

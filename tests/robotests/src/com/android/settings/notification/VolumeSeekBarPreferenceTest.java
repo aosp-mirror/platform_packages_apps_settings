@@ -24,7 +24,6 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.media.AudioManager;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -32,10 +31,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class VolumeSeekBarPreferenceTest {
 
     @Mock
@@ -53,18 +50,20 @@ public class VolumeSeekBarPreferenceTest {
     }
 
     @Test
-    public void setStream_shouldSetMaxAndProgress() {
+    public void setStream_shouldSetMinMaxAndProgress() {
         final int stream = 5;
         final int max = 17;
+        final int min = 1;
         final int progress = 4;
         when(mAudioManager.getStreamMaxVolume(stream)).thenReturn(max);
+        when(mAudioManager.getStreamMinVolumeInt(stream)).thenReturn(min);
         when(mAudioManager.getStreamVolume(stream)).thenReturn(progress);
         doCallRealMethod().when(mPreference).setStream(anyInt());
 
         mPreference.setStream(stream);
 
         verify(mPreference).setMax(max);
+        verify(mPreference).setMin(min);
         verify(mPreference).setProgress(progress);
     }
-
 }

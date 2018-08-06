@@ -1,26 +1,27 @@
 package com.android.settings.datausage;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import android.net.NetworkPolicy;
 import android.net.NetworkTemplate;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settingslib.net.DataUsageController.DataUsageInfo;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DataUsageInfoControllerTest {
-    private DataUsageInfoController mInfoController;
-    private DataUsageInfo info;
+
     private static final int NEGATIVE = -1;
     private static final int ZERO = 0;
     private static final int POSITIVE_SMALL = 1;
     private static final int POSITIVE_LARGE = 5;
+
+    private DataUsageInfoController mInfoController;
+    private DataUsageInfo info;
 
     @Before
     public void setUp()  {
@@ -77,13 +78,13 @@ public class DataUsageInfoControllerTest {
     }
 
     private NetworkPolicy getDefaultNetworkPolicy() {
-        NetworkTemplate template = new NetworkTemplate(NetworkTemplate.MATCH_WIFI_WILDCARD,
-                null, null);
+        NetworkTemplate template =
+            new NetworkTemplate(NetworkTemplate.MATCH_WIFI_WILDCARD, null, null);
         int cycleDay  = -1;
         String cycleTimezone = "UTC";
         long warningBytes = -1;
         long limitBytes = -1;
-        return new NetworkPolicy(template,cycleDay, cycleTimezone, warningBytes, limitBytes, true);
+        return new NetworkPolicy(template, cycleDay, cycleTimezone, warningBytes, limitBytes, true);
     }
 
     @Test

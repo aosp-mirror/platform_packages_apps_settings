@@ -78,6 +78,9 @@ public class NotificationAccessConfirmationActivity extends Activity
         AlertController
                 .create(this, this, getWindow())
                 .installContent(p);
+        // Consistent with the permission dialog
+        // Used instead of p.mCancelable as that is only honored for AlertDialog
+        getWindow().setCloseOnTouchOutside(false); 
     }
 
     @Override
@@ -116,6 +119,12 @@ public class NotificationAccessConfirmationActivity extends Activity
     @Override
     public boolean dispatchPopulateAccessibilityEvent(AccessibilityEvent event) {
         return AlertActivity.dispatchPopulateAccessibilityEvent(this, event);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Suppress finishing the activity on back button press,
+        // consistently with the permission dialog behavior
     }
 
     @Override

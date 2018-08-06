@@ -20,24 +20,22 @@ import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.applications.ApplicationFeatureProvider;
-import com.android.settings.core.DynamicAvailabilityPreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 public abstract class AdminGrantedPermissionsPreferenceControllerBase
-        extends DynamicAvailabilityPreferenceController {
+        extends AbstractPreferenceController implements PreferenceControllerMixin {
 
     private final String[] mPermissions;
-    private final String mPermissionGroup;
     private final ApplicationFeatureProvider mFeatureProvider;
     private final boolean mAsync;
     private boolean mHasApps;
 
-    public AdminGrantedPermissionsPreferenceControllerBase(Context context, Lifecycle lifecycle,
-            boolean async, String[] permissions, String permissionGroup) {
-        super(context, lifecycle);
+    public AdminGrantedPermissionsPreferenceControllerBase(Context context, boolean async,
+            String[] permissions) {
+        super(context);
         mPermissions = permissions;
-        mPermissionGroup = permissionGroup;
         mFeatureProvider = FeatureFactory.getFactory(context)
                 .getApplicationFeatureProvider(context);
         mAsync = async;
@@ -58,7 +56,6 @@ public abstract class AdminGrantedPermissionsPreferenceControllerBase
                         mHasApps = true;
                     }
                     preference.setVisible(mHasApps);
-                    notifyOnAvailabilityUpdate(mHasApps);
                 });
     }
 
@@ -80,7 +77,6 @@ public abstract class AdminGrantedPermissionsPreferenceControllerBase
         mFeatureProvider.calculateNumberOfAppsWithAdminGrantedPermissions(mPermissions,
                 false /* async */, (num) -> haveAppsWithAdminGrantedPermissions[0] = num > 0);
         mHasApps = haveAppsWithAdminGrantedPermissions[0];
-        notifyOnAvailabilityUpdate(mHasApps);
         return mHasApps;
     }
 

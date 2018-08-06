@@ -18,35 +18,30 @@ package com.android.settings.dashboard.suggestions;
 
 import android.app.ActivityManager;
 import android.content.ComponentName;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.provider.Settings.Secure;
+import android.service.settings.suggestions.Suggestion;
 import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 import android.util.Pair;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.Settings.AmbientDisplayPickupSuggestionActivity;
-import com.android.settings.Settings.AmbientDisplaySuggestionActivity;
-import com.android.settings.Settings.DoubleTapPowerSuggestionActivity;
-import com.android.settings.Settings.DoubleTwistSuggestionActivity;
 import com.android.settings.Settings.NightDisplaySuggestionActivity;
-import com.android.settings.Settings.SwipeToNotificationSuggestionActivity;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
-import com.android.settings.gestures.DoubleTapPowerPreferenceController;
-import com.android.settings.gestures.DoubleTapScreenPreferenceController;
-import com.android.settings.gestures.DoubleTwistPreferenceController;
-import com.android.settings.gestures.PickupGesturePreferenceController;
-import com.android.settings.gestures.SwipeToNotificationPreferenceController;
+import com.android.settings.display.NightDisplayPreferenceController;
+import com.android.settings.fingerprint.FingerprintEnrollSuggestionActivity;
+import com.android.settings.fingerprint.FingerprintSuggestionActivity;
+import com.android.settings.notification.ZenOnboardingActivity;
+import com.android.settings.notification.ZenSuggestionActivity;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.password.ScreenLockSuggestionActivity;
 import com.android.settings.support.NewDeviceIntroSuggestionActivity;
+import com.android.settings.wallpaper.WallpaperSuggestionActivity;
+import com.android.settings.wifi.calling.WifiCallingSuggestionActivity;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.drawer.Tile;
-import com.android.settingslib.suggestions.SuggestionParser;
+import com.android.settingslib.suggestions.SuggestionControllerMixin;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider {
@@ -56,7 +51,6 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
 
     private static final String SHARED_PREF_FILENAME = "suggestions";
 
-    private final SuggestionRanker mSuggestionRanker;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     @Override
@@ -67,33 +61,36 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
     }
 
     @Override
+    public ComponentName getSuggestionServiceComponent() {
+        return new ComponentName(
+                "com.android.settings.intelligence",
+                "com.android.settings.intelligence.suggestions.SuggestionService");
+    }
+
+    @Override
     public boolean isSmartSuggestionEnabled(Context context) {
         return false;
     }
 
     @Override
-    public boolean isSuggestionCompleted(Context context, @NonNull ComponentName component) {
+    public boolean isSuggestionComplete(Context context, @NonNull ComponentName component) {
         final String className = component.getClassName();
-        if (className.equals(NightDisplaySuggestionActivity.class.getName())) {
-            return hasUsedNightDisplay(context);
-        }
-        if (className.equals(NewDeviceIntroSuggestionActivity.class.getName())) {
+        if (className.equals(WallpaperSuggestionActivity.class.getName())) {
+            return WallpaperSuggestionActivity.isSuggestionComplete(context);
+        } else if (className.equals(FingerprintSuggestionActivity.class.getName())) {
+            return FingerprintSuggestionActivity.isSuggestionComplete(context);
+        } else if (className.equals(FingerprintEnrollSuggestionActivity.class.getName())) {
+            return FingerprintEnrollSuggestionActivity.isSuggestionComplete(context);
+        } else if (className.equals(ScreenLockSuggestionActivity.class.getName())) {
+            return ScreenLockSuggestionActivity.isSuggestionComplete(context);
+        } else if (className.equals(WifiCallingSuggestionActivity.class.getName())) {
+            return WifiCallingSuggestionActivity.isSuggestionComplete(context);
+        } else if (className.equals(NightDisplaySuggestionActivity.class.getName())) {
+            return NightDisplayPreferenceController.isSuggestionComplete(context);
+        } else if (className.equals(NewDeviceIntroSuggestionActivity.class.getName())) {
             return NewDeviceIntroSuggestionActivity.isSuggestionComplete(context);
-        } else if (className.equals(DoubleTapPowerSuggestionActivity.class.getName())) {
-            return DoubleTapPowerPreferenceController
-                    .isSuggestionComplete(context, getSharedPrefs(context));
-        } else if (className.equals(DoubleTwistSuggestionActivity.class.getName())) {
-            return DoubleTwistPreferenceController
-                    .isSuggestionComplete(context, getSharedPrefs(context));
-        } else if (className.equals(AmbientDisplaySuggestionActivity.class.getName())) {
-            return DoubleTapScreenPreferenceController
-                    .isSuggestionComplete(context, getSharedPrefs(context));
-        } else if (className.equals(AmbientDisplayPickupSuggestionActivity.class.getName())) {
-            return PickupGesturePreferenceController
-                    .isSuggestionComplete(context, getSharedPrefs(context));
-        } else if (className.equals(SwipeToNotificationSuggestionActivity.class.getName())) {
-            return SwipeToNotificationPreferenceController
-                    .isSuggestionComplete(context, getSharedPrefs(context));
+        } else if (className.equals(ZenSuggestionActivity.class.getName())) {
+            return ZenOnboardingActivity.isSuggestionComplete(context);
         }
         return false;
     }
@@ -105,15 +102,8 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
 
     public SuggestionFeatureProviderImpl(Context context) {
         final Context appContext = context.getApplicationContext();
-        mSuggestionRanker = new SuggestionRanker(
-                new SuggestionFeaturizer(new EventStore(appContext)));
         mMetricsFeatureProvider = FeatureFactory.getFactory(appContext)
                 .getMetricsFeatureProvider();
-    }
-
-    @Override
-    public void rankSuggestions(final List<Tile> suggestions, List<String> suggestionIds) {
-        mSuggestionRanker.rankSuggestions(suggestions, suggestionIds);
     }
 
     @Override
@@ -128,45 +118,22 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
     }
 
     @Override
-    public void dismissSuggestion(Context context, SuggestionParser parser, Tile suggestion) {
-        if (parser == null || suggestion == null || context == null) {
+    public void dismissSuggestion(Context context, SuggestionControllerMixin mixin,
+            Suggestion suggestion) {
+        if (mixin == null || suggestion == null || context == null) {
             return;
         }
-        final Pair<Integer, Object>[] taggedData =
-                SuggestionLogHelper.getSuggestionTaggedData(isSmartSuggestionEnabled(context));
-
         mMetricsFeatureProvider.action(
-                context, MetricsEvent.ACTION_SETTINGS_DISMISS_SUGGESTION,
-                getSuggestionIdentifier(context, suggestion),
-                taggedData);
-        if (!parser.dismissSuggestion(suggestion)) {
-            return;
-        }
-        context.getPackageManager().setComponentEnabledSetting(
-                suggestion.intent.getComponent(),
-                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                PackageManager.DONT_KILL_APP);
+                context, MetricsProto.MetricsEvent.ACTION_SETTINGS_DISMISS_SUGGESTION,
+                suggestion.getId());
+        mixin.dismissSuggestion(suggestion);
     }
 
     @Override
-    public String getSuggestionIdentifier(Context context, Tile suggestion) {
-        if (suggestion.intent == null || suggestion.intent.getComponent() == null
-                || context == null) {
-            return "unknown_suggestion";
-        }
-        String packageName = suggestion.intent.getComponent().getPackageName();
-        if (packageName.equals(context.getPackageName())) {
-            // Since Settings provides several suggestions, fill in the class instead of the
-            // package for these.
-            packageName = suggestion.intent.getComponent().getClassName();
-        }
-        return packageName;
-    }
-
-    @VisibleForTesting
-    boolean hasUsedNightDisplay(Context context) {
-        final ContentResolver cr = context.getContentResolver();
-        return Secure.getInt(cr, Secure.NIGHT_DISPLAY_AUTO_MODE, 0) != 0
-                || Secure.getString(cr, Secure.NIGHT_DISPLAY_LAST_ACTIVATED_TIME) != null;
+    public Pair<Integer, Object>[] getLoggingTaggedData(Context context) {
+        final boolean isSmartSuggestionEnabled = isSmartSuggestionEnabled(context);
+        return new Pair[] {Pair.create(
+                MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED,
+                isSmartSuggestionEnabled ? 1 : 0)};
     }
 }

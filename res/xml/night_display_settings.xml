@@ -15,28 +15,44 @@
 -->
 
 <PreferenceScreen
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/night_display_title">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/night_display_title"
+    android:key="night_display_title"
+    settings:keywords="@string/keywords_display_night_display">
 
     <DropDownPreference
-            android:key="night_display_auto_mode"
-            android:title="@string/night_display_auto_mode_title"
-            android:summary="%s" />
+        android:key="night_display_auto_mode"
+        android:title="@string/night_display_auto_mode_title"
+        android:summary="%s"
+        settings:controller="com.android.settings.display.NightDisplayAutoModePreferenceController" />
 
     <Preference
-            android:key="night_display_start_time"
-            android:title="@string/night_display_start_time_title" />
+        android:key="night_display_start_time"
+        android:title="@string/night_display_start_time_title"
+        settings:controller="com.android.settings.display.NightDisplayCustomStartTimePreferenceController" />
 
     <Preference
-            android:key="night_display_end_time"
-            android:title="@string/night_display_end_time_title" />
-
-    <com.android.settings.display.NightDisplayPreference
-            android:key="night_display_activated"
-            android:title="@string/night_display_status_title" />
+        android:key="night_display_end_time"
+        android:title="@string/night_display_end_time_title"
+        settings:controller="com.android.settings.display.NightDisplayCustomEndTimePreferenceController" />
 
     <com.android.settings.widget.SeekBarPreference
-            android:key="night_display_temperature"
-            android:title="@string/night_display_temperature_title"/>
+        android:key="night_display_temperature"
+        android:title="@string/night_display_temperature_title"
+        settings:keywords="@string/keywords_display_night_display"
+        settings:controller="com.android.settings.display.NightDisplayIntensityPreferenceController" />
+
+    <com.android.settings.applications.LayoutPreference
+        android:key="night_display_activated"
+        android:title="@string/night_display_title"
+        android:selectable="false"
+        android:layout="@layout/night_display_activation_button"
+        settings:keywords="@string/keywords_display_night_display"
+        settings:controller="com.android.settings.display.NightDisplayActivationPreferenceController" />
+
+    <PreferenceCategory android:key="night_display_footer_category">
+        <com.android.settingslib.widget.FooterPreference />
+    </PreferenceCategory>
 
 </PreferenceScreen>

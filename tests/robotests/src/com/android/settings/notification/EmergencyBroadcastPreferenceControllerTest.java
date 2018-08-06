@@ -16,13 +16,19 @@
 
 package com.android.settings.notification;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.anyInt;
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserManager;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.accounts.AccountRestrictionHelper;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedPreference;
 
 import org.junit.Before;
@@ -31,17 +37,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.anyInt;
-import static org.mockito.Mockito.anyString;
-import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class EmergencyBroadcastPreferenceControllerTest {
 
     private static final String PREF_TEST_KEY = "test_key";
@@ -64,8 +61,8 @@ public class EmergencyBroadcastPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
-        mController = new EmergencyBroadcastPreferenceController(mContext, mAccountHelper,
-                PREF_TEST_KEY);
+        mController =
+            new EmergencyBroadcastPreferenceController(mContext, mAccountHelper, PREF_TEST_KEY);
     }
 
     @Test
@@ -128,5 +125,4 @@ public class EmergencyBroadcastPreferenceControllerTest {
 
         assertThat(mController.isAvailable()).isFalse();
     }
-
 }

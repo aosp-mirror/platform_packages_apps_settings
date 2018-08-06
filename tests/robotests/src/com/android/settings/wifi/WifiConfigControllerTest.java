@@ -16,7 +16,18 @@
 
 package com.android.settings.wifi;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyBoolean;
+import static org.mockito.Mockito.anyInt;
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
+import android.os.ServiceSpecificException;
+import android.security.KeyStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +36,6 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settingslib.wifi.AccessPoint;
 
@@ -37,12 +47,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.*;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = ShadowConnectivityManager.class)
+@Config(shadows = ShadowConnectivityManager.class)
 public class WifiConfigControllerTest {
 
     @Mock
@@ -53,6 +59,9 @@ public class WifiConfigControllerTest {
     private View mView;
     @Mock
     private AccessPoint mAccessPoint;
+    @Mock
+    private KeyStore mKeyStore;
+    private Spinner mHiddenSettingsSpinner;
 
     public WifiConfigController mController;
     private static final String HEX_PSK = "01234567012345670123456701234567012345670123456701234567"
@@ -74,6 +83,7 @@ public class WifiConfigControllerTest {
         when(mAccessPoint.getSecurity()).thenReturn(AccessPoint.SECURITY_PSK);
         mView = LayoutInflater.from(mContext).inflate(R.layout.wifi_dialog, null);
         final Spinner ipSettingsSpinner = mView.findViewById(R.id.ip_settings);
+        mHiddenSettingsSpinner = mView.findViewById(R.id.hidden_settings);
         ipSettingsSpinner.setSelection(DHCP);
 
         mController = new TestWifiConfigController(mConfigUiBase, mView, mAccessPoint,
@@ -85,6 +95,7 @@ public class WifiConfigControllerTest {
         mController = new TestWifiConfigController(mConfigUiBase, mView, null /* accessPoint */,
                 WifiConfigUiBase.MODE_CONNECT);
         final TextView ssid = mView.findViewById(R.id.ssid);
+        assertThat(ssid).isNotNull();
         ssid.setText("☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎");
         mController.showWarningMessagesIfAppropriate();
 
@@ -98,6 +109,7 @@ public class WifiConfigControllerTest {
                 WifiConfigUiBase.MODE_CONNECT);
 
         final TextView ssid = mView.findViewById(R.id.ssid);
+        assertThat(ssid).isNotNull();
         ssid.setText("123456789012345678901234567890");
         mController.showWarningMessagesIfAppropriate();
 
@@ -114,6 +126,7 @@ public class WifiConfigControllerTest {
     @Test
     public void isSubmittable_noSSID_shouldReturnFalse() {
         final TextView ssid = mView.findViewById(R.id.ssid);
+        assertThat(ssid).isNotNull();
         ssid.setText("");
         assertThat(mController.isSubmittable()).isFalse();
     }
@@ -121,6 +134,7 @@ public class WifiConfigControllerTest {
     @Test
     public void isSubmittable_longPsk_shouldReturnFalse() {
         final TextView password = mView.findViewById(R.id.password);
+        assertThat(password).isNotNull();
         password.setText(LONG_PSK);
         assertThat(mController.isSubmittable()).isFalse();
 
@@ -129,6 +143,7 @@ public class WifiConfigControllerTest {
     @Test
     public void isSubmittable_shortPsk_shouldReturnFalse() {
         final TextView password = mView.findViewById(R.id.password);
+        assertThat(password).isNotNull();
         password.setText(SHORT_PSK);
         assertThat(mController.isSubmittable()).isFalse();
     }
@@ -136,6 +151,7 @@ public class WifiConfigControllerTest {
     @Test
     public void isSubmittable_goodPsk_shouldReturnTrue() {
         final TextView password = mView.findViewById(R.id.password);
+        assertThat(password).isNotNull();
         password.setText(GOOD_PSK);
         assertThat(mController.isSubmittable()).isTrue();
 
@@ -144,6 +160,7 @@ public class WifiConfigControllerTest {
     @Test
     public void isSubmittable_hexPsk_shouldReturnTrue() {
         final TextView password = mView.findViewById(R.id.password);
+        assertThat(password).isNotNull();
         password.setText(HEX_PSK);
         assertThat(mController.isSubmittable()).isTrue();
 
@@ -152,6 +169,7 @@ public class WifiConfigControllerTest {
     @Test
     public void isSubmittable_savedConfigZeroLengthPassword_shouldReturnTrue() {
         final TextView password = mView.findViewById(R.id.password);
+        assertThat(password).isNotNull();
         password.setText("");
         when(mAccessPoint.isSaved()).thenReturn(true);
         assertThat(mController.isSubmittable()).isTrue();
@@ -159,8 +177,8 @@ public class WifiConfigControllerTest {
 
     @Test
     public void isSubmittable_nullAccessPoint_noException() {
-        mController = new TestWifiConfigController(mConfigUiBase, mView, null,
-                WifiConfigUiBase.MODE_CONNECT);
+        mController =
+            new TestWifiConfigController(mConfigUiBase, mView, null, WifiConfigUiBase.MODE_CONNECT);
         mController.isSubmittable();
     }
 
@@ -199,10 +217,61 @@ public class WifiConfigControllerTest {
         assertThat(mView.findViewById(R.id.eap).getVisibility()).isEqualTo(View.GONE);
     }
 
+    @Test
+    public void loadCertificates_keyStoreListFail_shouldNotCrash() {
+        // Set up
+        when(mAccessPoint.getSecurity()).thenReturn(AccessPoint.SECURITY_EAP);
+        when(mKeyStore.list(anyString()))
+            .thenThrow(new ServiceSpecificException(-1, "permission error"));
+
+        mController = new TestWifiConfigController(mConfigUiBase, mView, mAccessPoint,
+              WifiConfigUiBase.MODE_CONNECT);
+
+        // Verify that the EAP method menu is visible.
+        assertThat(mView.findViewById(R.id.eap).getVisibility()).isEqualTo(View.VISIBLE);
+        // No Crash
+    }
+
+    @Test
+    public void ssidGetFocus_addNewNetwork_shouldReturnTrue() {
+        mController = new TestWifiConfigController(mConfigUiBase, mView, null /* accessPoint */,
+                WifiConfigUiBase.MODE_CONNECT);
+        final TextView ssid = mView.findViewById(R.id.ssid);
+        // Verify ssid text get focus when add new network (accesspoint is null)
+        assertThat(ssid.isFocused()).isTrue();
+    }
+
+    @Test
+    public void passwordGetFocus_connectSecureWifi_shouldReturnTrue() {
+        final TextView password = mView.findViewById(R.id.password);
+        // Verify password get focus when connect to secure wifi without eap type
+        assertThat(password.isFocused()).isTrue();
+    }
+
+    @Test
+    public void hiddenWarning_warningVisibilityProperlyUpdated() {
+        View warningView = mView.findViewById(R.id.hidden_settings_warning);
+        mController.onItemSelected(mHiddenSettingsSpinner, null, mController.HIDDEN_NETWORK, 0);
+        assertThat(warningView.getVisibility()).isEqualTo(View.VISIBLE);
+
+        mController.onItemSelected(mHiddenSettingsSpinner, null, mController.NOT_HIDDEN_NETWORK, 0);
+        assertThat(warningView.getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void hiddenField_visibilityUpdatesCorrectly() {
+        View hiddenField = mView.findViewById(R.id.hidden_settings_field);
+        assertThat(hiddenField.getVisibility()).isEqualTo(View.GONE);
+
+        mController = new TestWifiConfigController(mConfigUiBase, mView, null /* accessPoint */,
+                WifiConfigUiBase.MODE_CONNECT);
+        assertThat(hiddenField.getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
     public class TestWifiConfigController extends WifiConfigController {
 
-        public TestWifiConfigController(WifiConfigUiBase parent, View view,
-                AccessPoint accessPoint, int mode) {
+        private TestWifiConfigController(
+            WifiConfigUiBase parent, View view, AccessPoint accessPoint, int mode) {
             super(parent, view, accessPoint, mode);
         }
 
@@ -210,5 +279,8 @@ public class WifiConfigControllerTest {
         boolean isSplitSystemUser() {
             return false;
         }
+
+        @Override
+        KeyStore getKeyStore() { return mKeyStore; }
     }
 }

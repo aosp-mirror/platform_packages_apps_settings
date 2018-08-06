@@ -19,58 +19,54 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
 import android.provider.Settings;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.Preference;
+import android.text.TextUtils;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.R;
-import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.search.ResultPayload;
-import com.android.settingslib.core.AbstractPreferenceController;
 
-public class AmbientDisplayAlwaysOnPreferenceController extends
-        AbstractPreferenceController implements PreferenceControllerMixin,
-        Preference.OnPreferenceChangeListener {
+public class AmbientDisplayAlwaysOnPreferenceController extends TogglePreferenceController {
 
     private final int ON = 1;
     private final int OFF = 0;
 
-    public static final String KEY_ALWAYS_ON = "ambient_display_always_on";
     private static final int MY_USER = UserHandle.myUserId();
 
-    private final AmbientDisplayConfiguration mConfig;
-    private final OnPreferenceChangedCallback mCallback;
+    private AmbientDisplayConfiguration mConfig;
+    private OnPreferenceChangedCallback mCallback;
 
     public interface OnPreferenceChangedCallback {
         void onPreferenceChanged();
     }
 
-    public AmbientDisplayAlwaysOnPreferenceController(Context context,
-            AmbientDisplayConfiguration config, OnPreferenceChangedCallback callback) {
-        super(context);
-        mConfig = config;
-        mCallback = callback;
+    public AmbientDisplayAlwaysOnPreferenceController(Context context, String key) {
+        super(context, key);
     }
 
     @Override
-    public String getPreferenceKey() {
-        return KEY_ALWAYS_ON;
+    public int getAvailabilityStatus() {
+        if (mConfig == null) {
+            mConfig = new AmbientDisplayConfiguration(mContext);
+        }
+        return isAvailable(mConfig) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
-    public void updateState(Preference preference) {
-        ((SwitchPreference) preference).setChecked(isAlwaysOnEnabled(mConfig));
-    }
-
-    public static boolean isAlwaysOnEnabled(AmbientDisplayConfiguration config) {
-        return config.alwaysOnEnabled(MY_USER);
+    public boolean isSliceable() {
+        return TextUtils.equals(getPreferenceKey(), "ambient_display_always_on");
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        int enabled = (boolean) newValue ? ON : OFF;
+    public boolean isChecked() {
+        return mConfig.alwaysOnEnabled(MY_USER);
+    }
+
+    @Override
+    public boolean setChecked(boolean isChecked) {
+        int enabled = isChecked ? ON : OFF;
         Settings.Secure.putInt(
                 mContext.getContentResolver(), Settings.Secure.DOZE_ALWAYS_ON, enabled);
         if (mCallback != null) {
@@ -79,9 +75,20 @@ public class AmbientDisplayAlwaysOnPreferenceController extends
         return true;
     }
 
-    @Override
-    public boolean isAvailable() {
-        return isAvailable(mConfig);
+    public AmbientDisplayAlwaysOnPreferenceController setConfig(
+            AmbientDisplayConfiguration config) {
+        mConfig = config;
+        return this;
+    }
+
+    public AmbientDisplayAlwaysOnPreferenceController setCallback(
+            OnPreferenceChangedCallback callback) {
+        mCallback = callback;
+        return this;
+    }
+
+    public static boolean isAlwaysOnEnabled(AmbientDisplayConfiguration config) {
+        return config.alwaysOnEnabled(MY_USER);
     }
 
     public static boolean isAvailable(AmbientDisplayConfiguration config) {
@@ -94,8 +101,8 @@ public class AmbientDisplayAlwaysOnPreferenceController extends
 
     @Override
     public ResultPayload getResultPayload() {
-        final Intent intent = DatabaseIndexingUtils.buildSubsettingIntent(mContext,
-                AmbientDisplaySettings.class.getName(), KEY_ALWAYS_ON,
+        final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(mContext,
+                AmbientDisplaySettings.class.getName(), getPreferenceKey(),
                 mContext.getString(R.string.ambient_display_screen_title));
 
         return new InlineSwitchPayload(Settings.Secure.DOZE_ALWAYS_ON,

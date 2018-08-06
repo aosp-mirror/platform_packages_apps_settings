@@ -18,9 +18,7 @@ package com.android.settings.applications.defaultapps;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.ComponentName;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -29,8 +27,6 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.provider.Settings;
 import android.service.autofill.AutofillService;
 import android.service.autofill.AutofillServiceInfo;
@@ -42,6 +38,9 @@ import android.util.Log;
 import com.android.internal.content.PackageMonitor;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settingslib.applications.DefaultAppInfo;
+import com.android.settingslib.utils.ThreadUtils;
+import com.android.settingslib.widget.CandidateInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +61,6 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
      * Set when the fragment is implementing ACTION_REQUEST_SET_AUTOFILL_SERVICE.
      */
     private DialogInterface.OnClickListener mCancelListener;
-    private final Handler mHandler = new Handler();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -106,6 +104,11 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
     }
 
     @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.default_autofill_settings;
+    }
+
+    @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.DEFAULT_AUTOFILL_PICKER;
     }
@@ -121,17 +124,17 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
     private final PackageMonitor mSettingsPackageMonitor = new PackageMonitor() {
         @Override
         public void onPackageAdded(String packageName, int uid) {
-            mHandler.post(() -> update());
+            ThreadUtils.postOnMainThread(() -> update());
         }
 
         @Override
         public void onPackageModified(String packageName) {
-            mHandler.post(() -> update());
+            ThreadUtils.postOnMainThread(() -> update());
         }
 
         @Override
         public void onPackageRemoved(String packageName, int uid) {
-            mHandler.post(() -> update());
+            ThreadUtils.postOnMainThread(() -> update());
         }
     };
 
@@ -185,14 +188,21 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
     @Override
     protected List<DefaultAppInfo> getCandidates() {
         final List<DefaultAppInfo> candidates = new ArrayList<>();
-        final List<ResolveInfo> resolveInfos = mPm.getPackageManager()
-                .queryIntentServices(AUTOFILL_PROBE, PackageManager.GET_META_DATA);
+        final List<ResolveInfo> resolveInfos = mPm.queryIntentServices(
+                AUTOFILL_PROBE, PackageManager.GET_META_DATA);
+        final Context context = getContext();
         for (ResolveInfo info : resolveInfos) {
             final String permission = info.serviceInfo.permission;
-            // TODO(b/37563972): remove BIND_AUTOFILL once clients use BIND_AUTOFILL_SERVICE
-            if (Manifest.permission.BIND_AUTOFILL_SERVICE.equals(permission)
-                    || Manifest.permission.BIND_AUTOFILL.equals(permission)) {
-                candidates.add(new DefaultAppInfo(mPm, mUserId, new ComponentName(
+            if (Manifest.permission.BIND_AUTOFILL_SERVICE.equals(permission)) {
+                candidates.add(new DefaultAppInfo(context, mPm, mUserId, new ComponentName(
+                        info.serviceInfo.packageName, info.serviceInfo.name)));
+            }
+            if (Manifest.permission.BIND_AUTOFILL.equals(permission)) {
+                // Let it go for now...
+                Log.w(TAG, "AutofillService from '" + info.serviceInfo.packageName
+                        + "' uses unsupported permission " + Manifest.permission.BIND_AUTOFILL
+                        + ". It works for now, but might not be supported on future releases");
+                candidates.add(new DefaultAppInfo(context, mPm, mUserId, new ComponentName(
                         info.serviceInfo.packageName, info.serviceInfo.name)));
             }
         }
@@ -251,16 +261,16 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
     static final class AutofillSettingIntentProvider implements SettingIntentProvider {
 
         private final String mSelectedKey;
-        private final PackageManager mPackageManager;
+        private final Context mContext;
 
-        public AutofillSettingIntentProvider(PackageManager packageManager, String key) {
+        public AutofillSettingIntentProvider(Context context, String key) {
             mSelectedKey = key;
-            mPackageManager = packageManager;
+            mContext = context;
         }
 
         @Override
         public Intent getIntent() {
-            final List<ResolveInfo> resolveInfos = mPackageManager.queryIntentServices(
+            final List<ResolveInfo> resolveInfos = mContext.getPackageManager().queryIntentServices(
                     AUTOFILL_PROBE, PackageManager.GET_META_DATA);
 
             for (ResolveInfo resolveInfo : resolveInfos) {
@@ -270,7 +280,7 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
                 if (TextUtils.equals(mSelectedKey, flattenKey)) {
                     final String settingsActivity;
                     try {
-                        settingsActivity = new AutofillServiceInfo(mPackageManager, serviceInfo)
+                        settingsActivity = new AutofillServiceInfo(mContext, serviceInfo)
                                 .getSettingsActivity();
                     } catch (SecurityException e) {
                         // Service does not declare the proper permission, ignore it.

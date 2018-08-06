@@ -15,11 +15,13 @@
  */
 package com.android.settings.applications;
 
-import com.android.settings.fuelgauge.PowerWhitelistBackend;
+import android.content.Context;
+
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
 import com.android.settingslib.applications.ApplicationsState.CompoundFilter;
+import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 
 import java.util.ArrayList;
 
@@ -28,10 +30,11 @@ import java.util.ArrayList;
  */
 public class AppStatePowerBridge extends AppStateBaseBridge {
 
-    private final PowerWhitelistBackend mBackend = PowerWhitelistBackend.getInstance();
+    private final PowerWhitelistBackend mBackend;
 
-    public AppStatePowerBridge(ApplicationsState appState, Callback callback) {
+    public AppStatePowerBridge(Context context, ApplicationsState appState, Callback callback) {
         super(appState, callback);
+        mBackend = PowerWhitelistBackend.getInstance(context);
     }
 
     @Override
@@ -48,11 +51,6 @@ public class AppStatePowerBridge extends AppStateBaseBridge {
     @Override
     protected void updateExtraInfo(AppEntry app, String pkg, int uid) {
         app.extraInfo = mBackend.isWhitelisted(pkg) ? Boolean.TRUE : Boolean.FALSE;
-    }
-
-    public static class HighPowerState {
-        public boolean isHighPower;
-        public boolean isSystemHighPower;
     }
 
     public static final AppFilter FILTER_POWER_WHITELISTED = new CompoundFilter(

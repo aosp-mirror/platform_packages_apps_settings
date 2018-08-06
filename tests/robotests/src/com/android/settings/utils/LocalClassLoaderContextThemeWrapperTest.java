@@ -16,40 +16,27 @@
 
 package com.android.settings.utils;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import android.content.Context;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class LocalClassLoaderContextThemeWrapperTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mBaseContext;
     private LocalClassLoaderContextThemeWrapper mContextThemeWrapper;
-
-    @Before
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
-    }
 
     @Test
     public void getClassLoader_shouldUseLocalClassLoader() {
-        mContextThemeWrapper = new LocalClassLoaderContextThemeWrapper(
-                LocalClassLoaderContextThemeWrapperTest.class, mBaseContext, 0);
+        final Context context = RuntimeEnvironment.application;
+        final Class clazz = LocalClassLoaderContextThemeWrapperTest.class;
+        mContextThemeWrapper = new LocalClassLoaderContextThemeWrapper(clazz, context, 0);
 
-        assertThat(mContextThemeWrapper.getClassLoader()).isSameAs(
-                LocalClassLoaderContextThemeWrapperTest.class.getClassLoader());
+        assertThat(mContextThemeWrapper.getClassLoader()).isSameAs(clazz.getClassLoader());
     }
 }

@@ -19,35 +19,30 @@ package com.android.settings.graph;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.content.Context;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Space;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BottomLabelLayoutTest {
+
     private BottomLabelLayout mBottomLabelLayout;
-    private Context mContext;
     private Space mSpace;
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
-        mBottomLabelLayout = new BottomLabelLayout(mContext, null);
+        mBottomLabelLayout = new BottomLabelLayout(RuntimeEnvironment.application, null);
         mBottomLabelLayout.setOrientation(LinearLayout.HORIZONTAL);
 
-        mSpace = new Space(mContext);
+        mSpace = new Space(RuntimeEnvironment.application);
         mSpace.setId(R.id.spacer);
         mBottomLabelLayout.addView(mSpace);
     }

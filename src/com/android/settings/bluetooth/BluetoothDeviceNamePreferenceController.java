@@ -29,11 +29,9 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
-import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -41,20 +39,20 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 /**
  * Controller that shows and updates the bluetooth device name
  */
-public class BluetoothDeviceNamePreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, LifecycleObserver, OnStart, OnStop {
+public class BluetoothDeviceNamePreferenceController extends BasePreferenceController implements
+        LifecycleObserver, OnStart, OnStop {
     private static final String TAG = "BluetoothNamePrefCtrl";
-
-    public static final String KEY_DEVICE_NAME = "device_name";
-
 
     @VisibleForTesting
     Preference mPreference;
     private LocalBluetoothManager mLocalManager;
-    private LocalBluetoothAdapter mLocalAdapter;
+    protected LocalBluetoothAdapter mLocalAdapter;
 
-    public BluetoothDeviceNamePreferenceController(Context context, Lifecycle lifecycle) {
-        this(context, (LocalBluetoothAdapter) null);
+    /**
+     * Constructor exclusively used for Slice.
+     */
+    public BluetoothDeviceNamePreferenceController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
 
         mLocalManager = Utils.getLocalBtManager(context);
         if (mLocalManager == null) {
@@ -62,12 +60,12 @@ public class BluetoothDeviceNamePreferenceController extends AbstractPreferenceC
             return;
         }
         mLocalAdapter = mLocalManager.getBluetoothAdapter();
-        lifecycle.addObserver(this);
     }
 
     @VisibleForTesting
-    BluetoothDeviceNamePreferenceController(Context context, LocalBluetoothAdapter localAdapter) {
-        super(context);
+    BluetoothDeviceNamePreferenceController(Context context, LocalBluetoothAdapter localAdapter,
+            String preferenceKey) {
+        super(context, preferenceKey);
         mLocalAdapter = localAdapter;
     }
 
@@ -79,8 +77,10 @@ public class BluetoothDeviceNamePreferenceController extends AbstractPreferenceC
 
     @Override
     public void onStart() {
-        mContext.registerReceiver(mReceiver,
-                new IntentFilter(BluetoothAdapter.ACTION_LOCAL_NAME_CHANGED));
+        final IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(BluetoothAdapter.ACTION_LOCAL_NAME_CHANGED);
+        intentFilter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
+        mContext.registerReceiver(mReceiver, intentFilter);
     }
 
     @Override
@@ -89,18 +89,25 @@ public class BluetoothDeviceNamePreferenceController extends AbstractPreferenceC
     }
 
     @Override
-    public boolean isAvailable() {
-        return mLocalAdapter != null;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_DEVICE_NAME;
+    public int getAvailabilityStatus() {
+        return mLocalAdapter != null ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
     public void updateState(Preference preference) {
-        updateDeviceName(preference, mLocalAdapter.getName());
+        updatePreferenceState(preference);
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        String deviceName = getDeviceName();
+        if (TextUtils.isEmpty(deviceName)) {
+            return super.getSummary();
+        }
+
+        return TextUtils.expandTemplate(
+                mContext.getText(R.string.bluetooth_device_name_summary),
+                BidiFormatter.getInstance().unicodeWrap(deviceName)).toString();
     }
 
     /**
@@ -113,7 +120,7 @@ public class BluetoothDeviceNamePreferenceController extends AbstractPreferenceC
     public Preference createBluetoothDeviceNamePreference(PreferenceScreen screen, int order) {
         mPreference = new Preference(screen.getContext());
         mPreference.setOrder(order);
-        mPreference.setKey(KEY_DEVICE_NAME);
+        mPreference.setKey(getPreferenceKey());
         screen.addPreference(mPreference);
 
         return mPreference;
@@ -123,18 +130,14 @@ public class BluetoothDeviceNamePreferenceController extends AbstractPreferenceC
      * Update device summary with {@code deviceName}, where {@code deviceName} has accent color
      *
      * @param preference to set the summary for
-     * @param deviceName bluetooth device name to show in the summary
      */
-    protected void updateDeviceName(final Preference preference, final String deviceName) {
-        if (deviceName == null) {
-            // TODO: show error message in preference subtitle
-            return;
-        }
-        final CharSequence summary = TextUtils.expandTemplate(
-                mContext.getText(R.string.bluetooth_device_name_summary),
-                BidiFormatter.getInstance().unicodeWrap(deviceName));
+    protected void updatePreferenceState(final Preference preference) {
         preference.setSelectable(false);
-        preference.setSummary(summary);
+        preference.setSummary(getSummary());
+    }
+
+    protected String getDeviceName() {
+        return mLocalAdapter.getName();
     }
 
     /**
@@ -149,8 +152,10 @@ public class BluetoothDeviceNamePreferenceController extends AbstractPreferenceC
 
             if (TextUtils.equals(action, BluetoothAdapter.ACTION_LOCAL_NAME_CHANGED)) {
                 if (mPreference != null && mLocalAdapter != null && mLocalAdapter.isEnabled()) {
-                    updateDeviceName(mPreference, mLocalAdapter.getName());
+                    updatePreferenceState(mPreference);
                 }
+            } else if (TextUtils.equals(action, BluetoothAdapter.ACTION_STATE_CHANGED)) {
+                updatePreferenceState(mPreference);
             }
         }
     };

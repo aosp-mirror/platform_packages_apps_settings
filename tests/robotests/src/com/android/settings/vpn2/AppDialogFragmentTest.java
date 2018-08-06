@@ -23,17 +23,14 @@ import android.app.Fragment;
 import android.content.pm.PackageInfo;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AppDialogFragmentTest {
 
     @Mock
@@ -49,16 +46,16 @@ public class AppDialogFragmentTest {
 
     @Test
     public void notManagingOrConnected_shouldNotShow() {
-        AppDialogFragment.show(mParent, mPackageInfo, "label", false /* manage */,
-                false /* connected */);
+        AppDialogFragment
+            .show(mParent, mPackageInfo, "label", false /* manage */, false /* connected */);
 
         verify(mParent, never()).isAdded();
     }
 
     @Test
     public void notManagingAndConnected_showShow() {
-        AppDialogFragment.show(mParent, mPackageInfo, "label", false /* manage */,
-                true /* connected */);
+        AppDialogFragment
+            .show(mParent, mPackageInfo, "label", false /* manage */, true /* connected */);
 
         verify(mParent).isAdded();
     }

@@ -16,9 +16,13 @@
 
 package com.android.settings.fingerprint;
 
+import android.app.admin.DevicePolicyManager;
+import android.content.Context;
+import android.hardware.fingerprint.FingerprintManager;
 import android.widget.Button;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 
 public class FingerprintSuggestionActivity extends SetupFingerprintEnrollIntroduction {
 
@@ -35,5 +39,24 @@ public class FingerprintSuggestionActivity extends SetupFingerprintEnrollIntrodu
         // Always use RESULT_CANCELED because this action can be done multiple times
         setResult(RESULT_CANCELED);
         super.finish();
+    }
+
+    public static boolean isSuggestionComplete(Context context) {
+        return !Utils.hasFingerprintHardware(context)
+                || !isFingerprintEnabled(context)
+                || isNotSingleFingerprintEnrolled(context);
+    }
+
+    private static boolean isNotSingleFingerprintEnrolled(Context context) {
+        final FingerprintManager manager = Utils.getFingerprintManagerOrNull(context);
+        return manager == null || manager.getEnrolledFingerprints().size() != 1;
+    }
+
+    static boolean isFingerprintEnabled(Context context) {
+        final DevicePolicyManager dpManager =
+                (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
+        final int dpmFlags = dpManager.getKeyguardDisabledFeatures(null, /* admin */
+                context.getUserId());
+        return (dpmFlags & DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT) == 0;
     }
 }

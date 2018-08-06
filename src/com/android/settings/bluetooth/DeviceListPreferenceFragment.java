@@ -27,8 +27,8 @@ import android.support.v7.preference.PreferenceGroup;
 import android.text.BidiFormatter;
 import android.util.Log;
 
-import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.R;
+import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -42,7 +42,6 @@ import java.util.WeakHashMap;
  * Parent class for settings fragments that contain a list of Bluetooth
  * devices.
  *
- * @see BluetoothSettings
  * @see DevicePickerFragment
  */
 // TODO: Refactor this fragment
@@ -53,7 +52,7 @@ public abstract class DeviceListPreferenceFragment extends
 
     private static final String KEY_BT_SCAN = "bt_scan";
 
-    // Copied from DevelopmentSettings.java
+    // Copied from BluetoothDeviceNoNamePreferenceController.java
     private static final String BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY =
             "persist.bluetooth.showdeviceswithoutnames";
 
@@ -98,6 +97,8 @@ public abstract class DeviceListPreferenceFragment extends
             return;
         }
         mLocalAdapter = mLocalManager.getBluetoothAdapter();
+        mShowDevicesWithoutNames = SystemProperties.getBoolean(
+                BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY, false);
 
         initPreferencesFromPreferenceScreen();
 
@@ -110,8 +111,6 @@ public abstract class DeviceListPreferenceFragment extends
     @Override
     public void onStart() {
         super.onStart();
-        mShowDevicesWithoutNames = SystemProperties.getBoolean(
-                BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY, false);
         if (mLocalManager == null || isUiRestricted()) return;
 
         mLocalManager.setForegroundActivity(getActivity());
@@ -190,7 +189,8 @@ public abstract class DeviceListPreferenceFragment extends
         BluetoothDevicePreference preference = (BluetoothDevicePreference) getCachedPreference(key);
 
         if (preference == null) {
-            preference = new BluetoothDevicePreference(getPrefContext(), cachedDevice, this);
+            preference = new BluetoothDevicePreference(getPrefContext(), cachedDevice,
+                    mShowDevicesWithoutNames);
             preference.setKey(key);
             mDeviceListGroup.addPreference(preference);
         } else {
@@ -203,10 +203,6 @@ public abstract class DeviceListPreferenceFragment extends
         mDevicePreferenceMap.put(cachedDevice, preference);
     }
 
-    /**
-     * Overridden in {@link BluetoothSettings} to add a listener.
-     * @param preference the newly added preference
-     */
     void initDevicePreference(BluetoothDevicePreference preference) {
         // Does nothing by default
     }
@@ -278,6 +274,9 @@ public abstract class DeviceListPreferenceFragment extends
 
     @Override
     public void onActiveDeviceChanged(CachedBluetoothDevice activeDevice, int bluetoothProfile) { }
+
+    @Override
+    public void onAudioModeChanged() { }
 
     /**
      * Return the key of the {@link PreferenceGroup} that contains the bluetooth devices

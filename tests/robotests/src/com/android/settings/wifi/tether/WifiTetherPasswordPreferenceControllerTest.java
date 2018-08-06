@@ -28,7 +28,6 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.ValidatedEditTextPreference;
 
@@ -39,13 +38,12 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class WifiTetherPasswordPreferenceControllerTest {
 
+    private static final String VALID_PASS = "12345678";
+    private static final String VALID_PASS2 = "23456789";
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock
@@ -91,12 +89,52 @@ public class WifiTetherPasswordPreferenceControllerTest {
     @Test
     public void changePreference_shouldUpdateValue() {
         mController.displayPreference(mScreen);
-        mController.onPreferenceChange(mPreference, "1");
-        assertThat(mController.getPassword()).isEqualTo("1");
+        mController.onPreferenceChange(mPreference, VALID_PASS);
+        assertThat(mController.getPasswordValidated(WifiConfiguration.KeyMgmt.WPA2_PSK))
+                .isEqualTo(VALID_PASS);
 
-        mController.onPreferenceChange(mPreference, "0");
-        assertThat(mController.getPassword()).isEqualTo("0");
+        mController.onPreferenceChange(mPreference, VALID_PASS2);
+        assertThat(mController.getPasswordValidated(WifiConfiguration.KeyMgmt.WPA2_PSK))
+                .isEqualTo(VALID_PASS2);
 
         verify(mListener, times(2)).onTetherConfigUpdated();
+    }
+
+    @Test
+    public void updateDisplay_shouldUpdateValue() {
+        // Set controller password to anything and verify is set.
+        mController.displayPreference(mScreen);
+        mController.onPreferenceChange(mPreference, VALID_PASS);
+        assertThat(mController.getPasswordValidated(WifiConfiguration.KeyMgmt.WPA2_PSK))
+                .isEqualTo(VALID_PASS);
+
+        // Create a new config using different password
+        final WifiConfiguration config = new WifiConfiguration();
+        config.preSharedKey = VALID_PASS2;
+        when(mWifiManager.getWifiApConfiguration()).thenReturn(config);
+
+        // Call updateDisplay and verify it's changed.
+        mController.updateDisplay();
+        assertThat(mController.getPasswordValidated(WifiConfiguration.KeyMgmt.WPA2_PSK))
+                .isEqualTo(config.preSharedKey);
+        assertThat(mPreference.getSummary()).isEqualTo(config.preSharedKey);
+    }
+
+    @Test
+    public void updateDisplay_shouldSetInputType() {
+        // Set controller password to anything and verify is set.
+        mController.displayPreference(mScreen);
+        mController.onPreferenceChange(mPreference, VALID_PASS);
+        assertThat(mController.getPasswordValidated(WifiConfiguration.KeyMgmt.WPA2_PSK))
+                .isEqualTo(VALID_PASS);
+
+        // Create a new config using different password
+        final WifiConfiguration config = new WifiConfiguration();
+        config.preSharedKey = VALID_PASS2;
+        when(mWifiManager.getWifiApConfiguration()).thenReturn(config);
+
+        // Call updateDisplay and verify it's changed.
+        mController.updateDisplay();
+        assertThat(mPreference.isPassword()).isTrue();
     }
 }
