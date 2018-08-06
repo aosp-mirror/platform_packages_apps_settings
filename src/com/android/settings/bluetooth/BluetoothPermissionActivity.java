@@ -208,7 +208,6 @@ public class BluetoothPermissionActivity extends AlertActivity implements
             CachedBluetoothDevice cachedDevice = cachedDeviceManager.findDevice(mDevice);
             if (cachedDevice == null) {
                 cachedDevice = cachedDeviceManager.addDevice(bluetoothManager.getBluetoothAdapter(),
-                                                             bluetoothManager.getProfileManager(),
                                                              mDevice);
             }
             always = cachedDevice.checkAndIncreaseMessageRejectionCount();

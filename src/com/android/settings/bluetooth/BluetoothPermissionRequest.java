@@ -232,7 +232,7 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
         CachedBluetoothDevice cachedDevice = cachedDeviceManager.findDevice(mDevice);
         if (cachedDevice == null) {
             cachedDevice = cachedDeviceManager.addDevice(bluetoothManager.getBluetoothAdapter(),
-                bluetoothManager.getProfileManager(), mDevice);
+                mDevice);
         }
 
         String intentName = BluetoothDevice.ACTION_CONNECTION_ACCESS_REPLY;
