@@ -64,7 +64,7 @@ public class SliceBuilderUtilsTest {
     private final String SCREEN_TITLE = "screen title";
     private final String KEYWORDS = "a, b, c";
     private final String FRAGMENT_NAME = "fragment name";
-    private final int ICON = 1234; // I declare a thumb war
+    private final int ICON = R.drawable.ic_settings;
     private final Uri URI = Uri.parse("content://com.android.settings.slices/test");
     private final Class TOGGLE_CONTROLLER = FakeToggleController.class;
     private final Class SLIDER_CONTROLLER = FakeSliderController.class;

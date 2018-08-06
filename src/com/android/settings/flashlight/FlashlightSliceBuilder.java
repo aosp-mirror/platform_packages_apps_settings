@@ -42,6 +42,7 @@ import com.android.settings.slices.SliceBroadcastReceiver;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
+import androidx.slice.builders.ListBuilder.RowBuilder;
 import androidx.slice.builders.SliceAction;
 
 
@@ -93,7 +94,7 @@ public class FlashlightSliceBuilder {
                 IconCompat.createWithResource(context, R.drawable.ic_signal_flashlight);
         return new ListBuilder(context, FLASHLIGHT_URI, ListBuilder.INFINITY)
             .setAccentColor(color)
-            .addRow(b -> b
+            .addRow(new RowBuilder()
                 .setTitle(context.getText(R.string.power_flashlight))
                 .setTitleItem(icon, ICON_IMAGE)
                 .setPrimaryAction(

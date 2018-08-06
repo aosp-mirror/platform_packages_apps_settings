@@ -209,7 +209,7 @@ public class WifiCallingSliceHelper {
 
         return new ListBuilder(mContext, sliceUri, ListBuilder.INFINITY)
                 .setAccentColor(Utils.getColorAccentDefaultColor(mContext))
-                .addRow(b -> b
+                .addRow(new RowBuilder()
                         .setTitle(mContext.getText(R.string.wifi_calling_settings_title))
                         .addEndItem(
                                 new SliceAction(
@@ -298,7 +298,7 @@ public class WifiCallingSliceHelper {
         // Top row shows information on current preference state
         ListBuilder listBuilder = new ListBuilder(mContext, sliceUri, ListBuilder.INFINITY)
                 .setAccentColor(Utils.getColorAccentDefaultColor(mContext));
-        listBuilder.setHeader(new ListBuilder.HeaderBuilder(listBuilder)
+        listBuilder.setHeader(new ListBuilder.HeaderBuilder()
                         .setTitle(mContext.getText(R.string.wifi_calling_mode_title))
                         .setSubtitle(getWifiCallingPreferenceSummary(currentWfcPref))
                         .setPrimaryAction(new SliceAction(
@@ -338,7 +338,7 @@ public class WifiCallingSliceHelper {
             int preferenceTitleResId, String action, boolean checked) {
         final IconCompat icon =
                 IconCompat.createWithResource(mContext, R.drawable.radio_button_check);
-        return new RowBuilder(listBuilder)
+        return new RowBuilder()
                 .setTitle(mContext.getText(preferenceTitleResId))
                 .setTitleItem(new SliceAction(getBroadcastIntent(action),
                         icon, mContext.getText(preferenceTitleResId), checked));
@@ -488,7 +488,7 @@ public class WifiCallingSliceHelper {
         final IconCompat icon = IconCompat.createWithResource(mContext, R.drawable.wifi_signal);
         return new ListBuilder(mContext, sliceUri, ListBuilder.INFINITY)
                 .setAccentColor(Utils.getColorAccentDefaultColor(mContext))
-                .addRow(b -> b
+                .addRow(new RowBuilder()
                         .setTitle(title)
                         .setSubtitle(subtitle)
                         .setPrimaryAction(new SliceAction(
