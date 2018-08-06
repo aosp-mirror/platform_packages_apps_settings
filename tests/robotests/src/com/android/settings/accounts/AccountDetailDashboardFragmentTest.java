@@ -15,6 +15,8 @@
  */
 package com.android.settings.accounts;
 
+import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_KEYHINT;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Matchers.any;
@@ -118,7 +120,7 @@ public class AccountDetailDashboardFragmentTest {
                 .thenReturn(mock(ResolveInfo.class));
 
         final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
-        tile.key = "key";
+        mActivityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "key");
         mActivityInfo.metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT);
         mActivityInfo.metaData.putString(METADATA_ACCOUNT_TYPE, "com.abc");
         mActivityInfo.metaData.putString("com.android.settings.intent.action",
@@ -129,9 +131,10 @@ public class AccountDetailDashboardFragmentTest {
         final FragmentActivity activity = Robolectric.setupActivity(FragmentActivity.class);
         final Preference preference = new Preference(mContext);
         dashboardFeatureProvider.bindPreferenceToTile(activity,
-                MetricsProto.MetricsEvent.DASHBOARD_SUMMARY, preference, tile, "key",
+                MetricsProto.MetricsEvent.DASHBOARD_SUMMARY, preference, tile, null /* key */,
                 Preference.DEFAULT_ORDER);
 
+        assertThat(preference.getKey()).isEqualTo(tile.getKey(mContext));
         preference.performClick();
 
         final Intent intent = Shadows.shadowOf(activity).getNextStartedActivityForResult().intent;

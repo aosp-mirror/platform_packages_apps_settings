@@ -17,14 +17,14 @@
 package com.android.settings.dashboard;
 
 import static com.android.settingslib.drawer.CategoryKey.CATEGORY_HOMEPAGE;
+import static com.android.settingslib.drawer.TileUtils.META_DATA_KEY_ORDER;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
+import android.os.Bundle;
 import android.util.Pair;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -132,20 +132,24 @@ public class CategoryManagerTest {
         // Create some fake tiles that are not sorted.
         final String testPackage = "com.android.test";
         final DashboardCategory category = new DashboardCategory(CATEGORY_HOMEPAGE);
-        mActivityInfo.packageName = testPackage;
-        mActivityInfo.name = "class1";
-        final Tile tile1 = new Tile(mActivityInfo, category.key);
-        tile1.priority = 100;
-
-        mActivityInfo.packageName = testPackage;
-        mActivityInfo.name = "class2";
-        final Tile tile2 = new Tile(mActivityInfo, category.key);
-        tile2.priority = 50;
-
-        mActivityInfo.packageName = testPackage;
-        mActivityInfo.name = "class3";
-        final Tile tile3 = new Tile(mActivityInfo, category.key);
-        tile3.priority = 200;
+        final ActivityInfo activityInfo1 = new ActivityInfo();
+        activityInfo1.metaData = new Bundle();
+        activityInfo1.metaData.putInt(META_DATA_KEY_ORDER, 100);
+        activityInfo1.packageName = testPackage;
+        activityInfo1.name = "class1";
+        final ActivityInfo activityInfo2 = new ActivityInfo();
+        activityInfo2.metaData = new Bundle();
+        activityInfo2.metaData.putInt(META_DATA_KEY_ORDER, 50);
+        activityInfo2.packageName = testPackage;
+        activityInfo2.name = "class2";
+        final ActivityInfo activityInfo3 = new ActivityInfo();
+        activityInfo3.metaData = new Bundle();
+        activityInfo3.metaData.putInt(META_DATA_KEY_ORDER, 200);
+        activityInfo3.packageName = testPackage;
+        activityInfo3.name = "class3";
+        final Tile tile1 = new Tile(activityInfo1, category.key);
+        final Tile tile2 = new Tile(activityInfo2, category.key);
+        final Tile tile3 = new Tile(activityInfo3, category.key);
 
         category.addTile(tile1);
         category.addTile(tile2);
@@ -168,22 +172,25 @@ public class CategoryManagerTest {
         final String testPackage1 = "com.android.test1";
         final String testPackage2 = "com.android.test2";
         final DashboardCategory category = new DashboardCategory(CATEGORY_HOMEPAGE);
+        final ActivityInfo activityInfo1 = new ActivityInfo();
+        activityInfo1.metaData = new Bundle();
+        activityInfo1.metaData.putInt(META_DATA_KEY_ORDER, 100);
+        activityInfo1.packageName = testPackage2;
+        activityInfo1.name = "class1";
+        final ActivityInfo activityInfo2 = new ActivityInfo();
+        activityInfo2.metaData = new Bundle();
+        activityInfo2.metaData.putInt(META_DATA_KEY_ORDER, 100);
+        activityInfo2.packageName = testPackage1;
+        activityInfo2.name = "class2";
+        final ActivityInfo activityInfo3 = new ActivityInfo();
+        activityInfo3.metaData = new Bundle();
+        activityInfo3.metaData.putInt(META_DATA_KEY_ORDER, 50);
+        activityInfo3.packageName = testPackage1;
+        activityInfo3.name = "class3";
 
-        mActivityInfo.packageName = testPackage2;
-        mActivityInfo.name = "class1";
-        final Tile tile1 = new Tile(mActivityInfo, category.key);
-        tile1.priority = 100;
-
-        mActivityInfo.packageName = testPackage1;
-        mActivityInfo.name = "class2";
-        final Tile tile2 = new Tile(mActivityInfo, category.key);
-        tile2.priority = 100;
-
-        mActivityInfo.packageName = testPackage1;
-        mActivityInfo.name = "class3";
-        final Tile tile3 = new Tile(mActivityInfo, category.key);
-        tile3.priority = 50;
-
+        final Tile tile1 = new Tile(activityInfo1, category.key);
+        final Tile tile2 = new Tile(activityInfo2, category.key);
+        final Tile tile3 = new Tile(activityInfo3, category.key);
         category.addTile(tile1);
         category.addTile(tile2);
         category.addTile(tile3);
@@ -203,22 +210,24 @@ public class CategoryManagerTest {
         // Create some fake tiles that are not sorted.
         final String testPackage = mContext.getPackageName();
         final DashboardCategory category = new DashboardCategory(CATEGORY_HOMEPAGE);
-
-        mActivityInfo.packageName = testPackage;
-        mActivityInfo.name = "class1";
-        final Tile tile1 = new Tile(mActivityInfo, category.key);
-        tile1.priority = 100;
-
-        mActivityInfo.packageName = testPackage;
-        mActivityInfo.name = "class2";
-        final Tile tile2 = new Tile(mActivityInfo, category.key);
-        tile2.priority = 100;
-
-        mActivityInfo.packageName = testPackage;
-        mActivityInfo.name = "class3";
-        final Tile tile3 = new Tile(mActivityInfo, category.key);
-        tile3.priority = 50;
-
+        final ActivityInfo activityInfo1 = new ActivityInfo();
+        activityInfo1.packageName = testPackage;
+        activityInfo1.name = "class1";
+        activityInfo1.metaData = new Bundle();
+        activityInfo1.metaData.putInt(META_DATA_KEY_ORDER, 100);
+        final ActivityInfo activityInfo2 = new ActivityInfo();
+        activityInfo2.packageName = testPackage;
+        activityInfo2.name = "class2";
+        activityInfo2.metaData = new Bundle();
+        activityInfo2.metaData.putInt(META_DATA_KEY_ORDER, 100);
+        final ActivityInfo activityInfo3 = new ActivityInfo();
+        activityInfo3.packageName = testPackage;
+        activityInfo3.name = "class3";
+        activityInfo3.metaData = new Bundle();
+        activityInfo3.metaData.putInt(META_DATA_KEY_ORDER, 50);
+        final Tile tile1 = new Tile(activityInfo1, category.key);
+        final Tile tile2 = new Tile(activityInfo2, category.key);
+        final Tile tile3 = new Tile(activityInfo3, category.key);
         category.addTile(tile1);
         category.addTile(tile2);
         category.addTile(tile3);
@@ -239,22 +248,32 @@ public class CategoryManagerTest {
         final String testPackage = mContext.getPackageName();
         final String testPackage2 = "com.google.test2";
         final DashboardCategory category = new DashboardCategory(CATEGORY_HOMEPAGE);
-        mActivityInfo.packageName = testPackage;
-        mActivityInfo.name = "class1";
-        final Tile tile1 = new Tile(mActivityInfo, category.key);
-        tile1.priority = 2;
-        mActivityInfo.packageName = testPackage;
-        mActivityInfo.name = "class2";
-        final Tile tile2 = new Tile(mActivityInfo, category.key);
-        tile2.priority = 1;
-        mActivityInfo.packageName = testPackage2;
-        mActivityInfo.name = "class0";
-        final Tile tile3 = new Tile(mActivityInfo, category.key);
-        tile3.priority = 0;
-        mActivityInfo.packageName = testPackage;
-        mActivityInfo.name = "class3";
-        final Tile tile4 = new Tile(mActivityInfo, category.key);
-        tile4.priority = -1;
+
+        final ActivityInfo activityInfo1 = new ActivityInfo();
+        activityInfo1.packageName = testPackage;
+        activityInfo1.name = "class1";
+        activityInfo1.metaData = new Bundle();
+        activityInfo1.metaData.putInt(META_DATA_KEY_ORDER, 2);
+        final ActivityInfo activityInfo2 = new ActivityInfo();
+        activityInfo2.packageName = testPackage;
+        activityInfo2.name = "class2";
+        activityInfo2.metaData = new Bundle();
+        activityInfo2.metaData.putInt(META_DATA_KEY_ORDER, 1);
+        final ActivityInfo activityInfo3 = new ActivityInfo();
+        activityInfo3.packageName = testPackage2;
+        activityInfo3.name = "class0";
+        activityInfo3.metaData = new Bundle();
+        activityInfo3.metaData.putInt(META_DATA_KEY_ORDER, 0);
+        final ActivityInfo activityInfo4 = new ActivityInfo();
+        activityInfo4.packageName = testPackage;
+        activityInfo4.name = "class3";
+        activityInfo4.metaData = new Bundle();
+        activityInfo4.metaData.putInt(META_DATA_KEY_ORDER, -1);
+
+        final Tile tile1 = new Tile(activityInfo1, category.key);
+        final Tile tile2 = new Tile(activityInfo2, category.key);
+        final Tile tile4 = new Tile(activityInfo4, category.key);
+        final Tile tile3 = new Tile(activityInfo3, category.key);
         category.addTile(tile1);
         category.addTile(tile2);
         category.addTile(tile3);
@@ -278,21 +297,24 @@ public class CategoryManagerTest {
         final String testPackage2 = "com.google.test2";
         final String testPackage3 = "com.abcde.test3";
         final DashboardCategory category = new DashboardCategory(CATEGORY_HOMEPAGE);
-        mActivityInfo.packageName = testPackage2;
-        mActivityInfo.name = "class1";
-        final Tile tile1 = new Tile(mActivityInfo, category.key);
-        tile1.priority = 1;
-
-        mActivityInfo.packageName = testPackage;
-        mActivityInfo.name = "class2";
-        final Tile tile2 = new Tile(mActivityInfo, category.key);
-        tile2.priority = 1;
-
-        mActivityInfo.packageName = testPackage3;
-        mActivityInfo.name = "class3";
-        final Tile tile3 = new Tile(mActivityInfo, category.key);
-        tile3.priority = 1;
-
+        final ActivityInfo activityInfo1 = new ActivityInfo();
+        activityInfo1.packageName = testPackage2;
+        activityInfo1.name = "class1";
+        activityInfo1.metaData = new Bundle();
+        activityInfo1.metaData.putInt(META_DATA_KEY_ORDER, 1);
+        final ActivityInfo activityInfo2 = new ActivityInfo();
+        activityInfo2.packageName = testPackage;
+        activityInfo2.name = "class2";
+        activityInfo2.metaData = new Bundle();
+        activityInfo2.metaData.putInt(META_DATA_KEY_ORDER, 1);
+        final ActivityInfo activityInfo3 = new ActivityInfo();
+        activityInfo3.packageName = testPackage3;
+        activityInfo3.name = "class3";
+        activityInfo3.metaData = new Bundle();
+        activityInfo3.metaData.putInt(META_DATA_KEY_ORDER, 1);
+        final Tile tile1 = new Tile(activityInfo1, category.key);
+        final Tile tile2 = new Tile(activityInfo2, category.key);
+        final Tile tile3 = new Tile(activityInfo3, category.key);
         category.addTile(tile1);
         category.addTile(tile2);
         category.addTile(tile3);
@@ -312,21 +334,24 @@ public class CategoryManagerTest {
         // Create some unique tiles
         final String testPackage = mContext.getPackageName();
         final DashboardCategory category = new DashboardCategory(CATEGORY_HOMEPAGE);
-        mActivityInfo.packageName = testPackage;
-        mActivityInfo.name = "class1";
-        final Tile tile1 = new Tile(mActivityInfo, category.key);
-        tile1.priority = 100;
-
-        mActivityInfo.packageName = testPackage;
-        mActivityInfo.name = "class2";
-        final Tile tile2 = new Tile(mActivityInfo, category.key);
-        tile2.priority = 100;
-
-        mActivityInfo.packageName = testPackage;
-        mActivityInfo.name = "class3";
-        final Tile tile3 = new Tile(mActivityInfo, category.key);
-        tile3.priority = 50;
-
+        final ActivityInfo activityInfo1 = new ActivityInfo();
+        activityInfo1.packageName = testPackage;
+        activityInfo1.name = "class1";
+        activityInfo1.metaData = new Bundle();
+        activityInfo1.metaData.putInt(META_DATA_KEY_ORDER, 100);
+        final ActivityInfo activityInfo2 = new ActivityInfo();
+        activityInfo2.packageName = testPackage;
+        activityInfo2.name = "class2";
+        activityInfo2.metaData = new Bundle();
+        activityInfo2.metaData.putInt(META_DATA_KEY_ORDER, 100);
+        final ActivityInfo activityInfo3 = new ActivityInfo();
+        activityInfo3.packageName = testPackage;
+        activityInfo3.name = "class3";
+        activityInfo3.metaData = new Bundle();
+        activityInfo3.metaData.putInt(META_DATA_KEY_ORDER, 50);
+        final Tile tile1 = new Tile(activityInfo1, category.key);
+        final Tile tile2 = new Tile(activityInfo2, category.key);
+        final Tile tile3 = new Tile(activityInfo3, category.key);
         category.addTile(tile1);
         category.addTile(tile2);
         category.addTile(tile3);
@@ -342,14 +367,25 @@ public class CategoryManagerTest {
         // Create tiles pointing to same intent.
         final String testPackage = mContext.getPackageName();
         final DashboardCategory category = new DashboardCategory(CATEGORY_HOMEPAGE);
-        mActivityInfo.packageName = testPackage;
-        mActivityInfo.name = "class1";
-        final Tile tile1 = new Tile(mActivityInfo, category.key);
-        tile1.priority = 100;
-        final Tile tile2 = new Tile(mActivityInfo, category.key);
-        tile2.priority = 100;
-        final Tile tile3 = new Tile(mActivityInfo, category.key);
-        tile3.priority = 50;
+        final ActivityInfo activityInfo1 = new ActivityInfo();
+        activityInfo1.packageName = testPackage;
+        activityInfo1.name = "class1";
+        activityInfo1.metaData = new Bundle();
+        activityInfo1.metaData.putInt(META_DATA_KEY_ORDER, 100);
+        final ActivityInfo activityInfo2 = new ActivityInfo();
+        activityInfo2.packageName = testPackage;
+        activityInfo2.name = "class1";
+        activityInfo2.metaData = new Bundle();
+        activityInfo2.metaData.putInt(META_DATA_KEY_ORDER, 100);
+        final ActivityInfo activityInfo3 = new ActivityInfo();
+        activityInfo3.packageName = testPackage;
+        activityInfo3.name = "class1";
+        activityInfo3.metaData = new Bundle();
+        activityInfo3.metaData.putInt(META_DATA_KEY_ORDER, 50);
+
+        final Tile tile1 = new Tile(activityInfo1, category.key);
+        final Tile tile2 = new Tile(activityInfo2, category.key);
+        final Tile tile3 = new Tile(activityInfo3, category.key);
         category.addTile(tile1);
         category.addTile(tile2);
         category.addTile(tile3);

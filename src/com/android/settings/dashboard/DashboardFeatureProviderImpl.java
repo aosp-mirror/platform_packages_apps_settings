@@ -61,8 +61,6 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     private static final String TAG = "DashboardFeatureImpl";
     private static final String DASHBOARD_TILE_PREF_KEY_PREFIX = "dashboard_tile_pref_";
     private static final String META_DATA_KEY_INTENT_ACTION = "com.android.settings.intent.action";
-    @VisibleForTesting
-    static final String META_DATA_KEY_ORDER = "com.android.settings.order";
 
     protected final Context mContext;
 
@@ -120,8 +118,8 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         if (tile == null) {
             return null;
         }
-        if (!TextUtils.isEmpty(tile.key)) {
-            return tile.key;
+        if (tile.hasKey()) {
+            return tile.getKey(mContext);
         }
         final StringBuilder sb = new StringBuilder(DASHBOARD_TILE_PREF_KEY_PREFIX);
         final ComponentName component = tile.getIntent().getComponent();
@@ -146,14 +144,10 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         final Bundle metadata = tile.getMetaData();
         String clsName = null;
         String action = null;
-        Integer order = null;
+
         if (metadata != null) {
             clsName = metadata.getString(SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS);
             action = metadata.getString(META_DATA_KEY_INTENT_ACTION);
-            if (metadata.containsKey(META_DATA_KEY_ORDER)
-                    && metadata.get(META_DATA_KEY_ORDER) instanceof Integer) {
-                order = metadata.getInt(META_DATA_KEY_ORDER);
-            }
         }
         if (!TextUtils.isEmpty(clsName)) {
             pref.setFragment(clsName);
@@ -170,14 +164,10 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             });
         }
         final String skipOffsetPackageName = activity.getPackageName();
-        // If order is set in the meta data, use that order. Otherwise, check the intent priority.
-        if (order == null && tile.priority != 0) {
-            // Use negated priority for order, because tile priority is based on intent-filter
-            // (larger value has higher priority). However pref order defines smaller value has
-            // higher priority.
-            order = -tile.priority;
-        }
-        if (order != null) {
+
+
+        if (tile.hasOrder()) {
+            final int order = tile.getOrder();
             boolean shouldSkipBaseOrderOffset = TextUtils.equals(
                     skipOffsetPackageName, tile.getIntent().getComponent().getPackageName());
             if (shouldSkipBaseOrderOffset || baseOrder == Preference.DEFAULT_ORDER) {
