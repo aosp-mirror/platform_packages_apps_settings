@@ -34,9 +34,7 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowAudioManager;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
-import com.android.settingslib.bluetooth.HeadsetProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
-import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -63,16 +61,10 @@ public class ConnectedBluetoothDeviceUpdaterTest {
     @Mock
     private LocalBluetoothManager mLocalManager;
     @Mock
-    private LocalBluetoothProfileManager mLocalBluetoothProfileManager;
-    @Mock
-    private HeadsetProfile mHeadsetProfile;
+    private CachedBluetoothDeviceManager mCachedDeviceManager;
 
     private Context mContext;
     private ConnectedBluetoothDeviceUpdater mBluetoothDeviceUpdater;
-
-    @Mock
-    private CachedBluetoothDeviceManager mCachedDeviceManager;
-
     private Collection<CachedBluetoothDevice> cachedDevices;
     private ShadowAudioManager mShadowAudioManager;
 
@@ -87,8 +79,6 @@ public class ConnectedBluetoothDeviceUpdaterTest {
                 new ArrayList<CachedBluetoothDevice>(new ArrayList<CachedBluetoothDevice>());
 
         when(mCachedBluetoothDevice.getDevice()).thenReturn(mBluetoothDevice);
-        when(mLocalManager.getProfileManager()).thenReturn(mLocalBluetoothProfileManager);
-        when(mLocalBluetoothProfileManager.getHeadsetProfile()).thenReturn(mHeadsetProfile);
         when(mLocalManager.getCachedDeviceManager()).thenReturn(mCachedDeviceManager);
         when(mCachedDeviceManager.getCachedDevicesCopy()).thenReturn(cachedDevices);
 
