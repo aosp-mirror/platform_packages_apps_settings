@@ -106,6 +106,7 @@ public class FingerprintEnrollEnrollingTest {
                 anyInt(),
                 nullable(String.class),
                 any(VibrationEffect.class),
+                nullable(String.class),
                 nullable(AudioAttributes.class));
     }
 
