@@ -17,10 +17,13 @@
 package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -38,6 +41,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowFragment;
+import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 
 import org.junit.Before;
@@ -48,8 +52,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-
-import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {SettingsShadowResources.SettingsShadowTheme.class, ShadowFragment.class})
@@ -80,7 +82,7 @@ public class BackgroundActivityPreferenceControllerTest {
     @Mock
     private PowerWhitelistBackend mPowerWhitelistBackend;
     private BackgroundActivityPreferenceController mController;
-    private Preference mPreference;
+    private RestrictedPreference mPreference;
     private Context mShadowContext;
     private BatteryUtils mBatteryUtils;
 
@@ -109,7 +111,7 @@ public class BackgroundActivityPreferenceControllerTest {
         mBatteryUtils = spy(new BatteryUtils(mShadowContext));
         doNothing().when(mBatteryUtils).setForceAppStandby(anyInt(), anyString(), anyInt());
 
-        mPreference = new Preference(mShadowContext);
+        mPreference = spy(new RestrictedPreference(mShadowContext, null /* attrs */));
         mPreference.setKey(BackgroundActivityPreferenceController.KEY_BACKGROUND_ACTIVITY);
         mController = spy(new BackgroundActivityPreferenceController(
                 mContext, mFragment, UID_LOW_SDK, LOW_SDK_PACKAGE, mPowerWhitelistBackend));
@@ -118,7 +120,7 @@ public class BackgroundActivityPreferenceControllerTest {
     }
 
     @Test
-    public void testHandlePreferenceTreeClick_restrictApp_showDialog() {
+    public void handlePreferenceTreeClick_restrictApp_showDialog() {
         doReturn(AppOpsManager.MODE_ALLOWED).when(mAppOpsManager)
                 .checkOpNoThrow(anyInt(), anyInt(), anyString());
 
@@ -128,7 +130,7 @@ public class BackgroundActivityPreferenceControllerTest {
     }
 
     @Test
-    public void testHandlePreferenceTreeClick_unRestrictApp_showDialog() {
+    public void handlePreferenceTreeClick_unRestrictApp_showDialog() {
         doReturn(AppOpsManager.MODE_IGNORED).when(mAppOpsManager)
                 .checkOpNoThrow(anyInt(), anyInt(), anyString());
 
@@ -138,7 +140,7 @@ public class BackgroundActivityPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_noError_setEnabled() {
+    public void updateState_noError_setEnabled() {
         when(mAppOpsManager.checkOpNoThrow(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID_LOW_SDK,
                 LOW_SDK_PACKAGE)).thenReturn(AppOpsManager.MODE_ALLOWED);
 
@@ -149,7 +151,7 @@ public class BackgroundActivityPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_whitelisted() {
+    public void updateState_whitelisted() {
         when(mPowerWhitelistBackend.isWhitelisted(LOW_SDK_PACKAGE)).thenReturn(true);
         mController.updateState(mPreference);
         assertThat(mPreference.isEnabled()).isFalse();
@@ -158,7 +160,16 @@ public class BackgroundActivityPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateSummary_modeError_showSummaryDisabled() {
+    public void updateState_disabledByAdmin_doNothing() {
+        doReturn(true).when(mPreference).isDisabledByAdmin();
+
+        mController.updateState(mPreference);
+
+        verify(mPreference, never()).setEnabled(anyBoolean());
+    }
+
+    @Test
+    public void updateSummary_modeError_showSummaryDisabled() {
         when(mAppOpsManager.checkOpNoThrow(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID_LOW_SDK,
                 LOW_SDK_PACKAGE)).thenReturn(AppOpsManager.MODE_ERRORED);
         final CharSequence expectedSummary = mShadowContext.getText(
@@ -169,7 +180,7 @@ public class BackgroundActivityPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateSummary_modeDefault_showNotRestricted() {
+    public void updateSummary_modeDefault_showNotRestricted() {
         when(mAppOpsManager.checkOpNoThrow(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID_LOW_SDK,
                 LOW_SDK_PACKAGE)).thenReturn(AppOpsManager.MODE_DEFAULT);
 
@@ -179,7 +190,7 @@ public class BackgroundActivityPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateSummary_modeIgnored_showRestricted() {
+    public void updateSummary_modeIgnored_showRestricted() {
         when(mAppOpsManager.checkOpNoThrow(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID_LOW_SDK,
                 LOW_SDK_PACKAGE)).thenReturn(AppOpsManager.MODE_IGNORED);
 
@@ -189,7 +200,7 @@ public class BackgroundActivityPreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable_ReturnTrue() {
+    public void isAvailable_ReturnTrue() {
         assertThat(mController.isAvailable()).isTrue();
     }
 }
