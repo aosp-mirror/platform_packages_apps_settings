@@ -43,7 +43,10 @@ public class DashboardItemAnimatorTest {
     public void SetUp() {
         mDashboardItemAnimator = new DashboardItemAnimator();
         mViewHolder = new ViewHolder(new TextView(RuntimeEnvironment.application));
-        mViewHolder.itemView.setTag(new Tile(new ActivityInfo(), CategoryKey.CATEGORY_HOMEPAGE));
+        final ActivityInfo activityInfo = new ActivityInfo();
+        activityInfo.packageName = "pkg";
+        activityInfo.name = "class";
+        mViewHolder.itemView.setTag(new Tile(activityInfo, CategoryKey.CATEGORY_HOMEPAGE));
     }
 
     @Test

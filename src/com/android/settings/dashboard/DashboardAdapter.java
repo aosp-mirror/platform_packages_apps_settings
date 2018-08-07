@@ -333,7 +333,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                     }
                 }
             } catch (PackageManager.NameNotFoundException e) {
-                Log.e(TAG, "Failed to set background color for " + tile.intent.getPackage());
+                Log.e(TAG, "Failed to set background color for " + tile.getPackageName());
             }
             mCache.updateIcon(tileIcon, icon);
         }

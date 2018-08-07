@@ -92,6 +92,8 @@ public class DashboardAdapterTest {
         MockitoAnnotations.initMocks(this);
         mFactory = FakeFeatureFactory.setupForTest();
         mActivityInfo = new ActivityInfo();
+        mActivityInfo.packageName = "pkg";
+        mActivityInfo.name = "class";
         mActivityInfo.metaData = new Bundle();
         when(mFactory.dashboardFeatureProvider.shouldTintIcon()).thenReturn(true);
 
