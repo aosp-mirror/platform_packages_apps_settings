@@ -86,8 +86,7 @@ public class ZenModeSettings extends ZenModeSettingsBase {
         controllers.add(new ZenModeBehaviorSoundPreferenceController(context, lifecycle));
         controllers.add(new ZenModeBehaviorCallsPreferenceController(context, lifecycle));
         controllers.add(new ZenModeBlockedEffectsPreferenceController(context, lifecycle));
-        controllers.add(new ZenModeDurationPreferenceController(context, lifecycle,
-                fragmentManager));
+        controllers.add(new ZenModeDurationPreferenceController(context, lifecycle));
         controllers.add(new ZenModeAutomationPreferenceController(context));
         controllers.add(new ZenModeButtonPreferenceController(context, lifecycle, fragmentManager));
         controllers.add(new ZenModeSettingsFooterPreferenceController(context, lifecycle));
