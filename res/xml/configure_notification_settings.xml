@@ -15,15 +15,12 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:settings="http://schemas.android.com/apk/res-auto"
                   android:title="@string/configure_notification_settings"
                   android:key="configure_notification_settings">
 
-    <PreferenceCategory
-        android:key="dashboard_tile_placeholder"
-        android:order="1"/>
-
     <!-- When device is locked -->
-    <com.android.settings.notification.RestrictedDropDownPreference
+    <com.android.settings.RestrictedListPreference
         android:key="lock_screen_notifications"
         android:title="@string/lock_screen_notifications_title"
         android:summary="@string/summary_placeholder"/>
@@ -31,7 +28,8 @@
     <!-- Notification badging -->
     <SwitchPreference
         android:key="notification_badging"
-        android:title="@string/notification_badging_title"/>
+        android:title="@string/notification_badging_title"
+        settings:controller="com.android.settings.notification.BadgingNotificationPreferenceController"/>
 
     <!-- Pulse notification light -->
     <SwitchPreference
@@ -49,16 +47,52 @@
     <Preference
         android:key="gesture_swipe_down_fingerprint_notifications"
         android:title="@string/fingerprint_swipe_for_notifications_title"
-        android:fragment="com.android.settings.gestures.SwipeToNotificationSettings" />
+        android:fragment="com.android.settings.gestures.SwipeToNotificationSettings"
+        settings:controller="com.android.settings.gestures.SwipeToNotificationPreferenceController" />
+
+    <com.android.settingslib.RestrictedPreference
+        android:key="zen_mode_notifications"
+        android:title="@string/zen_mode_settings_title"
+        settings:useAdminDisabledSummary="true"
+        android:fragment="com.android.settings.notification.ZenModeSettings"
+        settings:allowDividerAbove="false" />
+
+    <!-- Empty category to draw divider -->
+    <PreferenceCategory
+        android:key="all_notifications_divider"
+        android:order="20"/>
 
     <PreferenceCategory
-        android:key="lock_screen_notifications_profile_header"
-        android:title="@string/profile_section_header">
+        android:key="recent_notifications_category"
+        android:title="@string/recent_notifications"
+        settings:allowDividerAbove="false"
+        android:order="21">
+        <!-- Placeholder for a list of recent apps -->
 
-        <com.android.settings.notification.RestrictedDropDownPreference
-            android:key="lock_screen_notifications_profile"
-            android:title="@string/lock_screen_notifications_title"
-            android:summary="@string/summary_placeholder"/>
-
+        <!-- See all apps button -->
+        <Preference
+            android:key="all_notifications"
+            android:title="@string/notifications_title"
+            android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
+            android:order="22">
+            <extra
+                android:name="classname"
+                android:value="com.android.settings.Settings$NotificationAppListActivity" />
+        </Preference>
     </PreferenceCategory>
+
+    <!-- Place work profile section at the bottom to avoid users thinking that any of the
+         above settings are specific to the work profile -->
+    <PreferenceCategory
+        android:key="lock_screen_notifications_profile_header"
+        android:title="@string/profile_section_header"
+        android:order="23">
+
+        <com.android.settings.RestrictedListPreference
+            android:key="lock_screen_notifications_profile"
+            android:title="@string/locked_work_profile_notification_title"
+            android:summary="@string/summary_placeholder"
+            android:order="24"/>
+    </PreferenceCategory>
+
 </PreferenceScreen>

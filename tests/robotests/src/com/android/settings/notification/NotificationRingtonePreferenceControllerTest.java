@@ -16,38 +16,43 @@
 
 package com.android.settings.notification;
 
-import android.content.Context;
+import static com.google.common.truth.Truth.assertThat;
+
 import android.media.RingtoneManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import static com.google.common.truth.Truth.assertThat;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class NotificationRingtonePreferenceControllerTest {
 
-    @Mock
-    private Context mContext;
     private NotificationRingtonePreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mController = new NotificationRingtonePreferenceController(mContext);
+        mController = new NotificationRingtonePreferenceController(RuntimeEnvironment.application);
+    }
+
+    @Test
+    public void isAvailable_byDefault_isTrue() {
+        assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void isAvailable_whenNotVisible_isFalse() {
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
     public void getRingtoneType_shouldReturnNotification() {
         assertThat(mController.getRingtoneType()).isEqualTo(RingtoneManager.TYPE_NOTIFICATION);
     }
-
 }

@@ -16,27 +16,21 @@
 
 package com.android.settings.applications.assist;
 
-
 import android.net.Uri;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
 
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AssistSettingObserverTest {
-
-    private AssistSettingObserver mObserver;
 
     @Test
     public void callConstructor_shouldNotCrash() {
-        mObserver = new AssistSettingObserver() {
+        new AssistSettingObserver() {
             @Override
             protected List<Uri> getSettingUris() {
                 return null;
@@ -48,5 +42,4 @@ public class AssistSettingObserverTest {
             }
         };
     }
-
 }

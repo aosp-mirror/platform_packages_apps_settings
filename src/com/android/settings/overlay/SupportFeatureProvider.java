@@ -46,30 +46,9 @@ public interface SupportFeatureProvider {
     }
 
     /**
-     * Returns a intent that will open help & feedback.
-     */
-    Intent getHelpIntent(Context context);
-
-    /**
-     * Whether or not a support type is enabled.
-     */
-    boolean isSupportTypeEnabled(Context context, @SupportType int type);
-
-    /**
      * Refreshes all operation rules.
      */
     void refreshOperationRules();
-
-    /**
-     * Whether or not a support type is in operation 24/7. If country is null, use
-     * current country.
-     */
-    boolean isAlwaysOperating(@SupportType int type, String countryCode);
-
-    /**
-     * Whether or not a support type is operating now.
-     */
-    boolean isOperatingNow(@SupportType int type);
 
     /**
      * Returns the current country code if it has a operation config, otherwise returns null.
@@ -77,41 +56,9 @@ public interface SupportFeatureProvider {
     String getCurrentCountryCodeIfHasConfig(@SupportType int type);
 
     /**
-     * Returns localized string for operation hours in specified country. If country is null, use
-     * current country to figure out operation hours.
-     */
-    CharSequence getOperationHours(Context context, @SupportType int type, String countryCode,
-            boolean hasInternet);
-
-    /**
-     * Returns a localized string indicating estimated wait time for a support time.
-     */
-    String getEstimatedWaitTime(Context context, @SupportType int type);
-
-    /**
-     * Returns a list of country codes that have phone support.
-     */
-    List<String> getPhoneSupportCountryCodes();
-
-    /**
-     * Returns a list of countries that have phone support.
-     */
-    List<String> getPhoneSupportCountries();
-
-    /**
      * Returns a support phone for specified country.
      */
     SupportPhone getSupportPhones(String countryCode, boolean isTollfree);
-
-    /**
-     * Whether or not a disclaimer dialog should be displayed.
-     */
-    boolean shouldShowDisclaimerDialog(Context context);
-
-    /**
-     * Sets whether or not a disclaimer dialog should be displayed.
-     */
-    void setShouldShowDisclaimerDialog(Context context, boolean shouldShow);
 
     /**
      * Returns array of {@link Account} that's eligible for support options.
@@ -120,53 +67,11 @@ public interface SupportFeatureProvider {
     Account[] getSupportEligibleAccounts(Context context);
 
     /**
-     * Starts support activity of specified type
-     *
-     * @param activity Calling activity
-     * @param account  A account that selected by user
-     * @param type     The type of support account needs.
-     */
-    void startSupport(Activity activity, Account account, @SupportType int type);
-
-    /**
      * Starts support v2, invokes the support home page. Will no-op if support v2 is not enabled.
      *
      * @param activity Calling activity.
      */
     void startSupportV2(Activity activity);
-
-    /**
-     * Checks if support v2 is enabled for this device.
-     *
-     * @return a boolean indicating if support v2 is enabled.
-     */
-    boolean isSupportV2Enabled();
-
-    /**
-     * Returns an {@link Intent} that opens help and allow user get help on sign in.
-     */
-    Intent getSignInHelpIntent(Context context);
-
-    /**
-     * Returns an intent that will start the add account UI.
-     */
-    Intent getAccountLoginIntent();
-
-    /**
-     * Returns an intent that will launch the tips and tricks UI.
-     */
-    Intent getTipsAndTricksIntent(Context context);
-
-    /**
-     * Returns the string for the disclaimer in the Support dialog.
-     */
-    @StringRes
-    int getDisclaimerStringResId();
-
-    /**
-     * launches the fragment that displays the system information being sent to support agents.
-     */
-    void launchSystemInfoFragment(Bundle args, FragmentManager manager);
 
     /**
      * Returns a url with information to introduce user to new device.

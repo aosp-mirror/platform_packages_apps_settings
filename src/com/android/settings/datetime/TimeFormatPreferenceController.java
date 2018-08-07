@@ -63,6 +63,8 @@ public class TimeFormatPreferenceController extends AbstractPreferenceController
         if (!(preference instanceof TwoStatePreference)) {
             return;
         }
+        preference.setEnabled(
+            !AutoTimeFormatPreferenceController.isAutoTimeFormatSelection(mContext));
         ((TwoStatePreference) preference).setChecked(is24Hour());
         final Calendar now = Calendar.getInstance();
         mDummyDate.setTimeZone(now.getTimeZone());
@@ -80,8 +82,7 @@ public class TimeFormatPreferenceController extends AbstractPreferenceController
             return false;
         }
         final boolean is24Hour = ((SwitchPreference) preference).isChecked();
-        set24Hour(is24Hour);
-        timeUpdated(is24Hour);
+        update24HourFormat(mContext, is24Hour);
         mUpdateTimeAndDateCallback.updateTimeAndDateDisplay(mContext);
         return true;
     }
@@ -95,18 +96,29 @@ public class TimeFormatPreferenceController extends AbstractPreferenceController
         return DateFormat.is24HourFormat(mContext);
     }
 
-    private void timeUpdated(boolean is24Hour) {
-        Intent timeChanged = new Intent(Intent.ACTION_TIME_CHANGED);
-        int timeFormatPreference =
-                is24Hour ? Intent.EXTRA_TIME_PREF_VALUE_USE_24_HOUR
-                        : Intent.EXTRA_TIME_PREF_VALUE_USE_12_HOUR;
-        timeChanged.putExtra(Intent.EXTRA_TIME_PREF_24_HOUR_FORMAT, timeFormatPreference);
-        mContext.sendBroadcast(timeChanged);
+    static void update24HourFormat(Context context, Boolean is24Hour) {
+        set24Hour(context, is24Hour);
+        timeUpdated(context, is24Hour);
     }
 
-    private void set24Hour(boolean is24Hour) {
-        Settings.System.putString(mContext.getContentResolver(),
-                Settings.System.TIME_12_24,
-                is24Hour ? HOURS_24 : HOURS_12);
+    static void timeUpdated(Context context, Boolean is24Hour) {
+        Intent timeChanged = new Intent(Intent.ACTION_TIME_CHANGED);
+        timeChanged.addFlags(Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
+        int timeFormatPreference;
+        if (is24Hour == null) {
+            timeFormatPreference = Intent.EXTRA_TIME_PREF_VALUE_USE_LOCALE_DEFAULT;
+        } else {
+            timeFormatPreference = is24Hour ? Intent.EXTRA_TIME_PREF_VALUE_USE_24_HOUR
+                : Intent.EXTRA_TIME_PREF_VALUE_USE_12_HOUR;
+        }
+        timeChanged.putExtra(Intent.EXTRA_TIME_PREF_24_HOUR_FORMAT, timeFormatPreference);
+        context.sendBroadcast(timeChanged);
+    }
+
+    static void set24Hour(Context context, Boolean is24Hour) {
+        String value = is24Hour == null ? null :
+            is24Hour ? HOURS_24 : HOURS_12;
+        Settings.System.putString(context.getContentResolver(),
+                Settings.System.TIME_12_24, value);
     }
 }

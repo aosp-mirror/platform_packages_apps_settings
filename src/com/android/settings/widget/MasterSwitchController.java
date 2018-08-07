@@ -74,9 +74,4 @@ public class MasterSwitchController extends SwitchWidgetController implements
     public void setDisabledByAdmin(EnforcedAdmin admin) {
         mPreference.setDisabledByAdmin(admin);
     }
-
-    @Override
-    public Switch getSwitch() {
-        return mPreference.getSwitch();
-    }
 }

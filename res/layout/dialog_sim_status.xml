@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2017 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/sim_content_padding">
+
+        <TextView
+            style="@style/device_info_dialog_label"
+            android:id="@+id/operator_name_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/status_operator"/>
+        <TextView
+            style="@style/device_info_dialog_value"
+            android:id="@+id/operator_name_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/device_info_not_available"/>
+
+        <TextView
+            style="@style/device_info_dialog_label"
+            android:id="@+id/number_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/status_number_sim_status"/>
+        <TextView
+            style="@style/device_info_dialog_value"
+            android:id="@+id/number_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/device_info_not_available"/>
+
+        <TextView
+            style="@style/device_info_dialog_label"
+            android:id="@+id/data_state_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/status_data_state"/>
+        <TextView
+            style="@style/device_info_dialog_value"
+            android:id="@+id/data_state_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/device_info_not_available"/>
+
+        <TextView
+            style="@style/device_info_dialog_label"
+            android:id="@+id/latest_area_info_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/status_latest_area_info"/>
+        <TextView
+            style="@style/device_info_dialog_value"
+            android:id="@+id/latest_area_info_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/device_info_not_available"/>
+
+        <TextView
+            style="@style/device_info_dialog_label"
+            android:id="@+id/service_state_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/status_service_state"/>
+        <TextView
+            style="@style/device_info_dialog_value"
+            android:id="@+id/service_state_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/device_info_not_available"/>
+
+        <TextView
+            style="@style/device_info_dialog_label"
+            android:id="@+id/signal_strength_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/status_signal_strength"/>
+        <TextView
+            style="@style/device_info_dialog_value"
+            android:id="@+id/signal_strength_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/device_info_not_available"/>
+
+        <TextView
+            style="@style/device_info_dialog_label"
+            android:id="@+id/voice_network_type_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/status_voice_network_type"/>
+        <TextView
+            style="@style/device_info_dialog_value"
+            android:id="@+id/voice_network_type_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/device_info_not_available"/>
+
+        <TextView
+            style="@style/device_info_dialog_label"
+            android:id="@+id/data_network_type_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/status_data_network_type"/>
+        <TextView
+            style="@style/device_info_dialog_value"
+            android:id="@+id/data_network_type_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/device_info_not_available"/>
+
+        <TextView
+            style="@style/device_info_dialog_label"
+            android:id="@+id/roaming_state_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/status_roaming"/>
+        <TextView
+            style="@style/device_info_dialog_value"
+            android:id="@+id/roaming_state_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/device_info_not_available"/>
+
+        <TextView
+            style="@style/device_info_dialog_label"
+            android:id="@+id/icc_id_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/status_icc_id"/>
+        <TextView
+            style="@style/device_info_dialog_value"
+            android:id="@+id/icc_id_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/device_info_not_available"/>
+
+        <TextView
+            style="@style/device_info_dialog_label"
+            android:id="@+id/esim_id_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/status_esim_id"/>
+        <TextView
+            style="@style/device_info_dialog_value"
+            android:id="@+id/esim_id_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/device_info_not_available"/>
+
+        <TextView
+            style="@style/device_info_dialog_label"
+            android:id="@+id/ims_reg_state_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ims_reg_title"/>
+        <TextView
+            style="@style/device_info_dialog_value"
+            android:id="@+id/ims_reg_state_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/device_info_not_available"/>
+    </LinearLayout>
+</ScrollView>

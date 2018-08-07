@@ -16,6 +16,9 @@
 
 package com.android.settings.fingerprint;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.verify;
+
 import android.content.Context;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.view.LayoutInflater;
@@ -23,7 +26,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.fingerprint.FingerprintSettings.FingerprintPreference;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -33,13 +35,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.verify;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class FingerprintPreferenceTest {
 
     @Mock
@@ -63,12 +60,13 @@ public class FingerprintPreferenceTest {
     @Test
     public void bindAndClickDeleteButton_shouldInvokeOnDeleteListener() {
         final FrameLayout layout = new FrameLayout(mContext);
-        final View deleteButton = LayoutInflater.from(mContext)
-                .inflate(mPreference.getSecondTargetResId(), layout, true);
+        LayoutInflater.from(mContext).inflate(mPreference.getSecondTargetResId(), layout, true);
         final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(layout);
         mPreference.onBindViewHolder(holder);
 
-        layout.findViewById(R.id.delete_button).performClick();
+        final View view = layout.findViewById(R.id.delete_button);
+        assertThat(view).isNotNull();
+        view.performClick();
 
         verify(mOnDeleteClickListener).onDeleteClick(mPreference);
     }

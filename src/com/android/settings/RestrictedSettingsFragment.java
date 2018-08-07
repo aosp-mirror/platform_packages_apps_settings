@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -26,10 +27,12 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.support.annotation.VisibleForTesting;
 import android.view.View;
 import android.widget.TextView;
 
 import com.android.settings.dashboard.RestrictedDashboardFragment;
+import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settingslib.RestrictedLockUtils;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -54,7 +57,7 @@ public abstract class RestrictedSettingsFragment extends SettingsPreferenceFragm
     protected static final String RESTRICT_IF_OVERRIDABLE = "restrict_if_overridable";
 
     // No RestrictedSettingsFragment screens should use this number in startActivityForResult.
-    private static final int REQUEST_PIN_CHALLENGE = 12309;
+    @VisibleForTesting static final int REQUEST_PIN_CHALLENGE = 12309;
 
     private static final String KEY_CHALLENGE_SUCCEEDED = "chsc";
     private static final String KEY_CHALLENGE_REQUESTED = "chrq";
@@ -67,7 +70,6 @@ public abstract class RestrictedSettingsFragment extends SettingsPreferenceFragm
     private RestrictionsManager mRestrictionsManager;
 
     private final String mRestrictionKey;
-    private View mAdminSupportDetails;
     private EnforcedAdmin mEnforcedAdmin;
     private TextView mEmptyTextView;
 
@@ -84,6 +86,9 @@ public abstract class RestrictedSettingsFragment extends SettingsPreferenceFragm
             }
         }
     };
+
+    @VisibleForTesting
+    AlertDialog mActionDisabledDialog;
 
     /**
      * @param restrictionKey The restriction key to check before pin protecting
@@ -116,7 +121,6 @@ public abstract class RestrictedSettingsFragment extends SettingsPreferenceFragm
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mAdminSupportDetails = initAdminSupportDetailsView();
         mEmptyTextView = initEmptyTextView();
     }
 
@@ -151,6 +155,10 @@ public abstract class RestrictedSettingsFragment extends SettingsPreferenceFragm
             if (resultCode == Activity.RESULT_OK) {
                 mChallengeSucceeded = true;
                 mChallengeRequested = false;
+                if (mActionDisabledDialog != null && mActionDisabledDialog.isShowing()) {
+                    mActionDisabledDialog.setOnDismissListener(null);
+                    mActionDisabledDialog.dismiss();
+                }
             } else {
                 mChallengeSucceeded = false;
             }
@@ -204,10 +212,6 @@ public abstract class RestrictedSettingsFragment extends SettingsPreferenceFragm
         return restricted && mRestrictionsManager.hasRestrictionsProvider();
     }
 
-    private View initAdminSupportDetailsView() {
-        return getActivity().findViewById(R.id.admin_support_details);
-    }
-
     protected TextView initEmptyTextView() {
         TextView emptyView = (TextView) getActivity().findViewById(android.R.id.empty);
         return emptyView;
@@ -229,11 +233,14 @@ public abstract class RestrictedSettingsFragment extends SettingsPreferenceFragm
     @Override
     protected void onDataSetChanged() {
         highlightPreferenceIfNeeded();
-        if (mAdminSupportDetails != null && isUiRestrictedByOnlyAdmin()) {
+        if (isUiRestrictedByOnlyAdmin()
+                && (mActionDisabledDialog == null || !mActionDisabledDialog.isShowing())) {
             final EnforcedAdmin admin = getRestrictionEnforcedAdmin();
-            ShowAdminSupportDetailsDialog.setAdminSupportDetails(getActivity(),
-                    mAdminSupportDetails, admin, false);
-            setEmptyView(mAdminSupportDetails);
+            mActionDisabledDialog = new ActionDisabledByAdminDialogHelper(getActivity())
+                    .prepareDialogBuilder(mRestrictionKey, admin)
+                    .setOnDismissListener(__ -> getActivity().finish())
+                    .show();
+            setEmptyView(new View(getContext()));
         } else if (mEmptyTextView != null) {
             setEmptyView(mEmptyTextView);
         }

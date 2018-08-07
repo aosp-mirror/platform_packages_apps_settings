@@ -16,6 +16,8 @@
 
 package com.android.settings.notification;
 
+import static android.provider.Settings.System.VIBRATE_WHEN_RINGING;
+
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
@@ -24,26 +26,47 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
-import android.support.v7.preference.TwoStatePreference;
+import android.text.TextUtils;
 
 import com.android.settings.Utils;
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
-import static android.provider.Settings.System.VIBRATE_WHEN_RINGING;
-
-public class VibrateWhenRingPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener,
-        LifecycleObserver, OnResume, OnPause {
+public class VibrateWhenRingPreferenceController extends TogglePreferenceController
+        implements LifecycleObserver, OnResume, OnPause {
 
     private static final String KEY_VIBRATE_WHEN_RINGING = "vibrate_when_ringing";
+    private final int DEFAULT_VALUE = 0;
+    private final int NOTIFICATION_VIBRATE_WHEN_RINGING = 1;
     private SettingObserver mSettingObserver;
 
-    public VibrateWhenRingPreferenceController(Context context) {
-        super(context);
+    public VibrateWhenRingPreferenceController(Context context, String key) {
+        super(context, key);
+    }
+
+    @Override
+    public boolean isChecked() {
+        return Settings.System.getInt(mContext.getContentResolver(),
+                VIBRATE_WHEN_RINGING, DEFAULT_VALUE) != DEFAULT_VALUE;
+    }
+
+    @Override
+    public boolean setChecked(boolean isChecked) {
+        return Settings.System.putInt(mContext.getContentResolver(), VIBRATE_WHEN_RINGING,
+                isChecked ? NOTIFICATION_VIBRATE_WHEN_RINGING : DEFAULT_VALUE);
+    }
+
+    @Override
+    @AvailabilityStatus
+    public int getAvailabilityStatus() {
+        return Utils.isVoiceCapable(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public boolean isSliceable() {
+        return TextUtils.equals(getPreferenceKey(), "vibrate_when_ringing");
     }
 
     @Override
@@ -70,38 +93,10 @@ public class VibrateWhenRingPreferenceController extends AbstractPreferenceContr
         }
     }
 
-    @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_VIBRATE_WHEN_RINGING;
-    }
-
-    @Override
-    public boolean isAvailable() {
-        return Utils.isVoiceCapable(mContext);
-    }
-
-    @Override
-    public void updateState(Preference preference) {
-        ((TwoStatePreference) preference).setChecked(
-            Settings.System.getInt(mContext.getContentResolver(), VIBRATE_WHEN_RINGING, 0) != 0);
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final boolean val = (Boolean) newValue;
-        return Settings.System.putInt(mContext.getContentResolver(),
-            VIBRATE_WHEN_RINGING, val ? 1 : 0);
-    }
-
     private final class SettingObserver extends ContentObserver {
 
         private final Uri VIBRATE_WHEN_RINGING_URI =
-            Settings.System.getUriFor(VIBRATE_WHEN_RINGING);
+                Settings.System.getUriFor(VIBRATE_WHEN_RINGING);
 
         private final Preference mPreference;
 
@@ -127,5 +122,4 @@ public class VibrateWhenRingPreferenceController extends AbstractPreferenceContr
             }
         }
     }
-
 }

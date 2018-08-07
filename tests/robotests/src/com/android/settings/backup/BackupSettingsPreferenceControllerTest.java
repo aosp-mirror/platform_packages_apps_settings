@@ -16,8 +16,17 @@
 
 package com.android.settings.backup;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import android.content.Context;
+import android.content.Intent;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -29,28 +38,25 @@ import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
-import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import android.content.Context;
-import android.content.Intent;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = {BackupSettingsPreferenceControllerTest.ShadowBackupSettingsHelper.class})
+@Config(shadows = BackupSettingsPreferenceControllerTest.ShadowBackupSettingsHelper.class)
 public class BackupSettingsPreferenceControllerTest {
+
     private static final String BACKUP_SETTINGS = "backup_settings";
     private static final String MANUFACTURER_SETTINGS = "manufacturer_backup";
 
-    private Context mContext;
+    private static final String sBackupLabel = "Test Backup Label";
+    private static final String sBackupSummary = "Test Backup Summary";
+    private static final String sManufacturerLabel = "Test Manufacturer Label";
 
     @Mock
-    private BackupSettingsHelper mBackupHelper;
+    private static Intent sBackupIntent;
+
+    @Mock
+    private static Intent sManufacturerIntent;
+
+    private Context mContext;
+
     @Mock
     private PreferenceScreen mScreen;
     @Mock
@@ -58,22 +64,12 @@ public class BackupSettingsPreferenceControllerTest {
     @Mock
     private Preference mManufacturerPreference;
 
-    @Mock
-    private static Intent mBackupIntent;
-
-    private static String mBackupLabel = "Test Backup Label";
-    private static String mBackupSummary = "Test Backup Summary";
-    private static String mManufacturerLabel = "Test Manufacturer Label";
-
-    @Mock
-    private static Intent mManufacturerIntent;
-
     private BackupSettingsPreferenceController mController;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application.getApplicationContext());
+        mContext = spy(RuntimeEnvironment.application);
         mController = new BackupSettingsPreferenceController(mContext);
     }
 
@@ -84,11 +80,11 @@ public class BackupSettingsPreferenceControllerTest {
 
         mController.displayPreference(mScreen);
 
-        verify(mBackupPreference).setIntent(mBackupIntent);
-        verify(mBackupPreference).setTitle(mBackupLabel);
-        verify(mBackupPreference).setSummary(mBackupSummary);
-        verify(mManufacturerPreference).setIntent(mManufacturerIntent);
-        verify(mManufacturerPreference).setTitle(mManufacturerLabel);
+        verify(mBackupPreference).setIntent(sBackupIntent);
+        verify(mBackupPreference).setTitle(sBackupLabel);
+        verify(mBackupPreference).setSummary(sBackupSummary);
+        verify(mManufacturerPreference).setIntent(sManufacturerIntent);
+        verify(mManufacturerPreference).setTitle(sManufacturerLabel);
     }
 
     @Test
@@ -106,27 +102,27 @@ public class BackupSettingsPreferenceControllerTest {
 
         @Implementation
         public Intent getIntentForBackupSettings() {
-            return mBackupIntent;
+            return sBackupIntent;
         }
 
         @Implementation
         public String getLabelForBackupSettings() {
-            return mBackupLabel;
+            return sBackupLabel;
         }
 
         @Implementation
         public String getSummaryForBackupSettings() {
-            return mBackupSummary;
+            return sBackupSummary;
         }
 
         @Implementation
         public Intent getIntentProvidedByManufacturer() {
-            return mManufacturerIntent;
+            return sManufacturerIntent;
         }
 
         @Implementation
         public String getLabelProvidedByManufacturer() {
-            return mManufacturerLabel;
+            return sManufacturerLabel;
         }
     }
 }

@@ -26,14 +26,17 @@ import static org.mockito.Mockito.when;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.net.NetworkScoreManager;
 import android.net.NetworkScorerAppData;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.widget.RadioButtonPreference;
+
 import com.google.android.collect.Lists;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,13 +44,10 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class NetworkScorerPickerTest {
 
     private static final String TEST_SCORER_PACKAGE_1 = "Test Package 1";
@@ -57,7 +57,7 @@ public class NetworkScorerPickerTest {
 
     private Context mContext;
     @Mock
-    private NetworkScoreManagerWrapper mNetworkScoreManager;
+    private NetworkScoreManager mNetworkScoreManager;
     @Mock
     private PreferenceScreen mPreferenceScreen;
 
@@ -111,8 +111,8 @@ public class NetworkScorerPickerTest {
         mFragment.updateCandidates();
 
         verify(mPreferenceScreen).addPreference(arg.capture());
-        assertThat(arg.getValue().getTitle()).isEqualTo(
-                mContext.getString(R.string.network_scorer_picker_none_preference));
+        assertThat(arg.getValue().getTitle())
+                .isEqualTo(mContext.getString(R.string.network_scorer_picker_none_preference));
         assertThat(arg.getValue().isChecked()).isTrue();
     }
 
@@ -170,13 +170,13 @@ public class NetworkScorerPickerTest {
         private final Context mContext;
         private final PreferenceScreen mScreen;
         private final PreferenceManager mPrefManager;
-        private final NetworkScoreManagerWrapper mNetworkScoreManagerWrapper;
+        private final NetworkScoreManager mNetworkScoreManager;
 
         public TestFragment(Context context, PreferenceScreen preferenceScreen,
-                NetworkScoreManagerWrapper networkScoreManagerWrapper) {
+                NetworkScoreManager networkScoreManager) {
             mContext = context;
             mScreen = preferenceScreen;
-            mNetworkScoreManagerWrapper = networkScoreManagerWrapper;
+            mNetworkScoreManager = networkScoreManager;
             mPrefManager = mock(PreferenceManager.class);
             when(mPrefManager.getContext()).thenReturn(context);
         }
@@ -197,8 +197,8 @@ public class NetworkScorerPickerTest {
         }
 
         @Override
-        NetworkScoreManagerWrapper createNetworkScorerManagerWrapper(Context context) {
-            return mNetworkScoreManagerWrapper;
+        NetworkScoreManager createNetworkScorerManager(Context context) {
+            return mNetworkScoreManager;
         }
     }
 }

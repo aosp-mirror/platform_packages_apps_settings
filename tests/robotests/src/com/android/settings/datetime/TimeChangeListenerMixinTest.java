@@ -16,11 +16,15 @@
 
 package com.android.settings.datetime;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
 import android.content.Context;
 import android.content.Intent;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
@@ -30,16 +34,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class TimeChangeListenerMixinTest {
 
     @Mock
@@ -51,7 +48,7 @@ public class TimeChangeListenerMixinTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = ShadowApplication.getInstance().getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mMixin = new TimeChangeListenerMixin(mContext, mCallback);
     }
 
@@ -66,7 +63,8 @@ public class TimeChangeListenerMixinTest {
     public void onResume_shouldRegisterIntentFilter() {
         mMixin.onResume();
         mContext.sendBroadcast(new Intent(Intent.ACTION_TIME_TICK));
-        mContext.sendBroadcast(new Intent(Intent.ACTION_TIME_CHANGED));
+        mContext.sendBroadcast(new Intent(Intent.ACTION_TIME_CHANGED)
+                .addFlags(Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND));
         mContext.sendBroadcast(new Intent(Intent.ACTION_TIMEZONE_CHANGED));
 
         verify(mCallback, times(3)).updateTimeAndDateDisplay(mContext);
@@ -77,7 +75,8 @@ public class TimeChangeListenerMixinTest {
         mMixin.onResume();
         mMixin.onPause();
         mContext.sendBroadcast(new Intent(Intent.ACTION_TIME_TICK));
-        mContext.sendBroadcast(new Intent(Intent.ACTION_TIME_CHANGED));
+        mContext.sendBroadcast(new Intent(Intent.ACTION_TIME_CHANGED)
+                .addFlags(Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND));
         mContext.sendBroadcast(new Intent(Intent.ACTION_TIMEZONE_CHANGED));
 
         verify(mCallback, never()).updateTimeAndDateDisplay(mContext);

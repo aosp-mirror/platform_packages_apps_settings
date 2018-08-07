@@ -33,7 +33,6 @@ import android.os.UserManager;
 import android.telephony.TelephonyManager;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.applications.defaultapps.DefaultBrowserPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultPhonePreferenceController;
 import com.android.settings.applications.defaultapps.DefaultSmsPreferenceController;
@@ -46,13 +45,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DefaultAppSettingsTest {
 
     private Context mContext;
@@ -69,8 +66,7 @@ public class DefaultAppSettingsTest {
 
     @Test
     public void getPreferenceScreenResId_shouldUseAppDefaultSettingPrefLayout() {
-        assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(
-                R.xml.app_default_settings);
+        assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(R.xml.app_default_settings);
     }
 
     @Test
@@ -95,7 +91,7 @@ public class DefaultAppSettingsTest {
         when(defaultBrowser.getDefaultAppLabel()).thenReturn("Browser1");
         when(defaultPhone.getDefaultAppLabel()).thenReturn("Phone1");
         summaryProvider.setListening(true);
-        verify(summaryLoader).setSummary(summaryProvider, "Sms1, Browser1, Phone1");
+        verify(summaryLoader).setSummary(summaryProvider, "Browser1, Phone1, Sms1");
 
         // 2 available
         when(defaultSms.getDefaultAppLabel()).thenReturn(null);
@@ -108,13 +104,13 @@ public class DefaultAppSettingsTest {
         when(defaultBrowser.getDefaultAppLabel()).thenReturn(null);
         when(defaultPhone.getDefaultAppLabel()).thenReturn("Phone1");
         summaryProvider.setListening(true);
-        verify(summaryLoader).setSummary(summaryProvider, "Sms1, Phone1");
+        verify(summaryLoader).setSummary(summaryProvider, "Phone1, Sms1");
 
         when(defaultSms.getDefaultAppLabel()).thenReturn("Sms1");
         when(defaultBrowser.getDefaultAppLabel()).thenReturn("Browser1");
         when(defaultPhone.getDefaultAppLabel()).thenReturn(null);
         summaryProvider.setListening(true);
-        verify(summaryLoader).setSummary(summaryProvider, "Sms1, Browser1");
+        verify(summaryLoader).setSummary(summaryProvider, "Phone1, Sms1");
 
         // 1 available
         when(defaultSms.getDefaultAppLabel()).thenReturn(null);
@@ -147,20 +143,19 @@ public class DefaultAppSettingsTest {
     @Test
     public void testNonIndexableKeys_existInXmlLayout() {
         final Context context = spy(RuntimeEnvironment.application);
-        final Context mockContext = mock(Context.class);
-        when(mockContext.getApplicationContext()).thenReturn(mockContext);
+        when(context.getApplicationContext()).thenReturn(context);
         final UserManager userManager = mock(UserManager.class, RETURNS_DEEP_STUBS);
 
-        when(mockContext.getSystemService(Context.USER_SERVICE))
+        when(context.getSystemService(Context.USER_SERVICE))
                 .thenReturn(userManager);
         when(userManager.getUserInfo(anyInt()).isRestricted()).thenReturn(true);
 
-        when(mockContext.getSystemService(Context.TELEPHONY_SERVICE))
+        when(context.getSystemService(Context.TELEPHONY_SERVICE))
                 .thenReturn(mock(TelephonyManager.class));
-        when(mockContext.getPackageManager())
+        when(context.getPackageManager())
                 .thenReturn(mock(PackageManager.class));
         final List<String> niks = DefaultAppSettings.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(mockContext);
+                .getNonIndexableKeys(context);
 
         final int xmlId = (new DefaultAppSettings()).getPreferenceScreenResId();
 

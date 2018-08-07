@@ -16,6 +16,10 @@
 
 package com.android.settings.widget;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
 import android.content.Context;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceViewHolder;
@@ -26,21 +30,14 @@ import android.widget.Switch;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class MasterSwitchPreferenceTest {
 
     private Context mContext;
@@ -110,6 +107,8 @@ public class MasterSwitchPreferenceTest {
         final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
                 inflater.inflate(R.layout.preference_two_target, null));
         final LinearLayout widgetView = holder.itemView.findViewById(android.R.id.widget_frame);
+        assertThat(widgetView).isNotNull();
+
         inflater.inflate(R.layout.preference_widget_master_switch, widgetView, true);
         final Switch toggle = (Switch) holder.findViewById(R.id.switchWidget);
         preference.onBindViewHolder(holder);
@@ -128,6 +127,8 @@ public class MasterSwitchPreferenceTest {
         final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
                 inflater.inflate(R.layout.preference_two_target, null));
         final LinearLayout widgetView = holder.itemView.findViewById(android.R.id.widget_frame);
+        assertThat(widgetView).isNotNull();
+
         inflater.inflate(R.layout.preference_widget_master_switch, widgetView, true);
         final Switch toggle = (Switch) holder.findViewById(R.id.switchWidget);
         preference.onBindViewHolder(holder);

@@ -16,8 +16,12 @@
 
 package com.android.settings.inputmethod;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -25,7 +29,6 @@ import android.content.Context;
 import android.hardware.input.InputManager;
 import android.view.InputDevice;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -34,30 +37,26 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class GameControllerPreferenceControllerTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
     @Mock
     private InputManager mInputManager;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private InputDevice mInputDevice;
 
+    private Context mContext;
     private GameControllerPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(Context.INPUT_SERVICE)).thenReturn(mInputManager);
-        mController = new GameControllerPreferenceController(mContext);
+        mController = new GameControllerPreferenceController(mContext, "test_key");
     }
 
     @Test
@@ -75,52 +74,59 @@ public class GameControllerPreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable_hasDeviceWithVibrator_shouldReturnTrue() {
-        when(mInputManager.getInputDeviceIds()).thenReturn(new int[]{1});
+    public void getAvailabilityStatus_hasDeviceWithVibrator_shouldReturnAvailable() {
+        when(mInputManager.getInputDeviceIds()).thenReturn(new int[] {1});
         when(mInputManager.getInputDevice(1)).thenReturn(mInputDevice);
         when(mInputDevice.isVirtual()).thenReturn(false);
         when(mInputDevice.getVibrator().hasVibrator()).thenReturn(true);
 
-        assertThat(mController.isAvailable()).isTrue();
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
-    public void testIsAvailable_hasNoVibratingDevice_shouldReturnFalse() {
-        when(mInputManager.getInputDeviceIds()).thenReturn(new int[]{1});
+    public void getAvailabilityStatus_hasNoVibratingDevice_shouldReturnDisabled() {
+        when(mInputManager.getInputDeviceIds()).thenReturn(new int[] {1});
         when(mInputManager.getInputDevice(1)).thenReturn(mInputDevice);
         when(mInputDevice.isVirtual()).thenReturn(false);
         when(mInputDevice.getVibrator().hasVibrator()).thenReturn(false);
 
-        assertThat(mController.isAvailable()).isFalse();
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
-    public void testIsAvailable_hasNoPhysicalDevice_shouldReturnFalse() {
-        when(mInputManager.getInputDeviceIds()).thenReturn(new int[]{1});
+    public void getAvailabilityStatus_hasNoPhysicalDevice_shouldReturnDisabled() {
+        when(mInputManager.getInputDeviceIds()).thenReturn(new int[] {1});
         when(mInputManager.getInputDevice(1)).thenReturn(mInputDevice);
         when(mInputDevice.isVirtual()).thenReturn(true);
 
-        assertThat(mController.isAvailable()).isFalse();
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
-    public void testIsAvailable_hasNoDevice_shouldReturnFalse() {
-        when(mInputManager.getInputDeviceIds()).thenReturn(new int[]{});
+    public void getAvailabilityStatus_hasNoDevice_shouldReturnDisabled() {
+        when(mInputManager.getInputDeviceIds()).thenReturn(new int[] {});
 
-        assertThat(mController.isAvailable()).isFalse();
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
-    public void updateNonIndexableKeys_shouldIncludeCategoryAndPrefKeys() {
-        when(mInputManager.getInputDeviceIds()).thenReturn(new int[]{});
+    @Config(qualifiers = "mcc999")
+    public void getAvailabilityStatus_ifDisabled_shouldReturnDisabled() {
+        mController = new GameControllerPreferenceController(mContext, "testkey");
 
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
+    }
 
-        final List<String> nonIndexables = new ArrayList<>();
-        mController.updateNonIndexableKeys(nonIndexables);
+    @Test
+    public void setChecked_toEnabled_shouldSetToSettingsProvider() {
+        mController.setChecked(true);
+        assertThat(mController.isChecked()).isTrue();
+    }
 
-        assertThat(mController.isAvailable()).isFalse();
-        assertThat(nonIndexables).containsExactlyElementsIn(Arrays.asList(
-                GameControllerPreferenceController.PREF_KEY,
-                mController.getPreferenceKey()));
+    @Test
+    public void setChecked_toDisabled_shouldSetToSettingsProvider() {
+        mController.setChecked(true);
+        mController.setChecked(false);
+        assertThat(mController.isChecked()).isFalse();
     }
 }

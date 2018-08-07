@@ -22,7 +22,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Switch;
-import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -90,7 +89,7 @@ public class MasterSwitchPreference extends TwoTargetPreference {
     }
 
     public boolean isChecked() {
-        return mSwitch != null && mSwitch.isEnabled() && mChecked;
+        return mSwitch != null && mChecked;
     }
 
     public void setChecked(boolean checked) {

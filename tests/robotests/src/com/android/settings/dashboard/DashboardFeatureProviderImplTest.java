@@ -16,11 +16,24 @@
 
 package com.android.settings.dashboard;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
+
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
@@ -31,14 +44,17 @@ import android.support.v7.preference.Preference;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowThreadUtils;
+import com.android.settings.testutils.shadow.ShadowTileUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
+import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.CategoryManager;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
+import com.android.settingslib.drawer.TileUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -55,19 +71,8 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.robolectric.Shadows.shadowOf;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = ShadowUserManager.class)
+@Config(shadows = ShadowUserManager.class)
 public class DashboardFeatureProviderImplTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -76,27 +81,32 @@ public class DashboardFeatureProviderImplTest {
     private UserManager mUserManager;
     @Mock
     private CategoryManager mCategoryManager;
+    @Mock
+    private PackageManager mPackageManager;
     private FakeFeatureFactory mFeatureFactory;
 
+    private Context mContext;
     private DashboardFeatureProviderImpl mImpl;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mActivity);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mActivity);
-        mImpl = new DashboardFeatureProviderImpl(mActivity);
+        mContext = spy(RuntimeEnvironment.application);
+        doReturn(mPackageManager).when(mContext).getPackageManager();
+        when(mPackageManager.resolveActivity(any(Intent.class), anyInt()))
+            .thenReturn(new ResolveInfo());
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
+        mImpl = new DashboardFeatureProviderImpl(mContext);
     }
 
     @Test
     public void shouldHoldAppContext() {
-        assertThat(mImpl.mContext).isEqualTo(mActivity.getApplicationContext());
+        assertThat(mImpl.mContext).isEqualTo(mContext.getApplicationContext());
     }
 
     @Test
     public void bindPreference_shouldBindAllData() {
-        final Preference preference = new Preference(
-                ShadowApplication.getInstance().getApplicationContext());
+        final Preference preference = new Preference(RuntimeEnvironment.application);
         final Tile tile = new Tile();
         tile.title = "title";
         tile.summary = "summary";
@@ -117,8 +127,7 @@ public class DashboardFeatureProviderImplTest {
 
     @Test
     public void bindPreference_noFragmentMetadata_shouldBindIntent() {
-        final Preference preference = new Preference(
-                ShadowApplication.getInstance().getApplicationContext());
+        final Preference preference = new Preference(RuntimeEnvironment.application);
         final Tile tile = new Tile();
         tile.metaData = new Bundle();
         tile.priority = 10;
@@ -207,6 +216,15 @@ public class DashboardFeatureProviderImplTest {
     }
 
     @Test
+    public void bindPreference_nullPreference_shouldIgnore() {
+        final Tile tile = mock(Tile.class);
+        mImpl.bindPreferenceToTile(mActivity, MetricsProto.MetricsEvent.VIEW_UNKNOWN,
+                null, tile, "123", Preference.DEFAULT_ORDER);
+
+        verifyZeroInteractions(tile);
+    }
+
+    @Test
     public void bindPreference_withNullKeyNullPriority_shouldGenerateKeyAndPriority() {
         final Preference preference = new Preference(RuntimeEnvironment.application);
         final Tile tile = new Tile();
@@ -246,6 +264,23 @@ public class DashboardFeatureProviderImplTest {
     }
 
     @Test
+    @Config(shadows = {ShadowTileUtils.class, ShadowThreadUtils.class})
+    public void bindPreference_hasSummaryUri_shouldLoadSummaryFromContentProvider() {
+        final Preference preference = new Preference(RuntimeEnvironment.application);
+        final Tile tile = new Tile();
+        tile.intent = new Intent();
+        tile.intent.setComponent(new ComponentName("pkg", "class"));
+        tile.metaData = new Bundle();
+        tile.metaData.putString(TileUtils.META_DATA_PREFERENCE_SUMMARY_URI,
+                "content://com.android.settings/tile_summary");
+
+        mImpl.bindPreferenceToTile(mActivity, MetricsProto.MetricsEvent.VIEW_UNKNOWN,
+                preference, tile, null /*key */, Preference.DEFAULT_ORDER);
+
+        assertThat(preference.getSummary()).isEqualTo(ShadowTileUtils.MOCK_SUMMARY);
+    }
+
+    @Test
     public void bindPreference_withNullKeyTileKey_shouldUseTileKey() {
         final Preference preference = new Preference(RuntimeEnvironment.application);
         final Tile tile = new Tile();
@@ -256,6 +291,23 @@ public class DashboardFeatureProviderImplTest {
                 preference, tile, null /* key */, Preference.DEFAULT_ORDER);
 
         assertThat(preference.getKey()).isEqualTo(tile.key);
+    }
+
+    @Test
+    @Config(shadows = {ShadowTileUtils.class, ShadowThreadUtils.class})
+    public void bindPreference_withIconUri_shouldLoadIconFromContentProvider() {
+        final Preference preference = new Preference(RuntimeEnvironment.application);
+        final Tile tile = new Tile();
+        tile.key = "key";
+        tile.intent = new Intent();
+        tile.intent.setComponent(
+                new ComponentName(RuntimeEnvironment.application.getPackageName(), "class"));
+        tile.metaData = new Bundle();
+        tile.metaData.putString(TileUtils.META_DATA_PREFERENCE_ICON_URI,
+                "content://com.android.settings/tile_icon");
+        mImpl.bindIcon(preference, tile);
+
+        assertThat(preference.getIcon()).isNotNull();
     }
 
     @Test
@@ -272,10 +324,36 @@ public class DashboardFeatureProviderImplTest {
     }
 
     @Test
-    public void bindPreference_withIntentActionMetatdata_shouldSetLaunchAction() {
+    public void bindPreference_withOrderMetadata_shouldUseOrderInMetadata() {
+        final Preference preference = new Preference(RuntimeEnvironment.application);
+        final int testOrder = -30;
+        final Tile tile = new Tile();
+        tile.metaData = new Bundle();
+        tile.metaData.putInt(mImpl.META_DATA_KEY_ORDER, testOrder);
+        tile.priority = 10;
+        mImpl.bindPreferenceToTile(mActivity, MetricsProto.MetricsEvent.VIEW_UNKNOWN,
+                preference, tile, "123", Preference.DEFAULT_ORDER);
+
+        assertThat(preference.getOrder()).isEqualTo(testOrder);
+    }
+
+    @Test
+    public void bindPreference_invalidOrderMetadata_shouldIgnore() {
+        final Preference preference = new Preference(RuntimeEnvironment.application);
+        final Tile tile = new Tile();
+        tile.metaData = new Bundle();
+        tile.metaData.putString(mImpl.META_DATA_KEY_ORDER, "hello");
+        tile.priority = 10;
+        mImpl.bindPreferenceToTile(mActivity, MetricsProto.MetricsEvent.VIEW_UNKNOWN,
+                preference, tile, "123", Preference.DEFAULT_ORDER);
+
+        assertThat(preference.getOrder()).isEqualTo(-tile.priority);
+    }
+
+    @Test
+    public void bindPreference_withIntentActionMetadata_shouldSetLaunchAction() {
         Activity activity = Robolectric.buildActivity(Activity.class).get();
-        final ShadowApplication application = ShadowApplication.getInstance();
-        final Preference preference = new Preference(application.getApplicationContext());
+        final Preference preference = new Preference(RuntimeEnvironment.application);
         final Tile tile = new Tile();
         tile.key = "key";
         tile.intent = new Intent();
@@ -291,14 +369,14 @@ public class DashboardFeatureProviderImplTest {
         final Intent launchIntent = shadowActivity.getNextStartedActivityForResult().intent;
         assertThat(launchIntent.getAction())
                 .isEqualTo("TestAction");
-        assertThat(launchIntent.getIntExtra(SettingsActivity.EXTRA_SOURCE_METRICS_CATEGORY, 0))
+        assertThat(launchIntent.getIntExtra(VisibilityLoggerMixin.EXTRA_SOURCE_METRICS_CATEGORY, 0))
                 .isEqualTo(MetricsProto.MetricsEvent.SETTINGS_GESTURES);
     }
 
     @Test
     public void clickPreference_withUnresolvableIntent_shouldNotLaunchAnything() {
         ReflectionHelpers.setField(
-                mImpl, "mPackageManager", RuntimeEnvironment.getPackageManager());
+                mImpl, "mPackageManager", RuntimeEnvironment.application.getPackageManager());
         Activity activity = Robolectric.buildActivity(Activity.class).get();
         final ShadowApplication application = ShadowApplication.getInstance();
         final Preference preference = new Preference(application.getApplicationContext());
@@ -349,7 +427,7 @@ public class DashboardFeatureProviderImplTest {
         mImpl = new DashboardFeatureProviderImpl(mActivity);
         ReflectionHelpers.setField(mImpl, "mCategoryManager", mCategoryManager);
         final DashboardCategory category = new DashboardCategory();
-        category.tiles.add(new Tile());
+        category.addTile(new Tile());
         when(mCategoryManager
                 .getTilesByCategory(any(Context.class), eq(CategoryKey.CATEGORY_HOMEPAGE)))
                 .thenReturn(category);
@@ -367,14 +445,13 @@ public class DashboardFeatureProviderImplTest {
     }
 
     @Test
-    public void testShouldTintIcon_shouldReturnValueFromResource() {
-        final Resources res = mActivity.getApplicationContext().getResources();
-        when(res.getBoolean(R.bool.config_tintSettingIcon))
-                .thenReturn(false);
-        assertThat(mImpl.shouldTintIcon()).isFalse();
-
-        when(res.getBoolean(R.bool.config_tintSettingIcon))
-                .thenReturn(true);
+    public void testShouldTintIcon_enabledInResources_shouldBeTrue() {
         assertThat(mImpl.shouldTintIcon()).isTrue();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void testShouldTintIcon_disabledInResources_shouldBeFalse() {
+        assertThat(mImpl.shouldTintIcon()).isFalse();
     }
 }

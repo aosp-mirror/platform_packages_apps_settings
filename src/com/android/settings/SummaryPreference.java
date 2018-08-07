@@ -20,8 +20,8 @@ import android.support.v7.preference.PreferenceViewHolder;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-import com.android.settings.applications.LinearColorBar;
 
 /**
  * Provides a summary of a setting page in a preference.  Such as memory or data usage.
@@ -32,8 +32,6 @@ public class SummaryPreference extends Preference {
     private String mAmount;
     private String mUnits;
 
-    private int mLeft, mMiddle, mRight;
-    private boolean mColorsSet = false;
     private boolean mChartEnabled = true;
     private float mLeftRatio, mMiddleRatio, mRightRatio;
     private String mStartLabel;
@@ -80,26 +78,17 @@ public class SummaryPreference extends Preference {
         notifyChanged();
     }
 
-    public void setColors(int left, int middle, int right) {
-        mLeft = left;
-        mMiddle = middle;
-        mRight = right;
-        mColorsSet = true;
-        notifyChanged();
-    }
-
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
 
-        LinearColorBar colorBar = (LinearColorBar) holder.itemView.findViewById(R.id.color_bar);
+        final ProgressBar colorBar = holder.itemView.findViewById(R.id.color_bar);
 
         if (mChartEnabled) {
             colorBar.setVisibility(View.VISIBLE);
-            colorBar.setRatios(mLeftRatio, mMiddleRatio, mRightRatio);
-            if (mColorsSet) {
-                colorBar.setColors(mLeft, mMiddle, mRight);
-            }
+            int progress = (int) (mLeftRatio * 100);
+            colorBar.setProgress(progress);
+            colorBar.setSecondaryProgress(progress + (int) (mMiddleRatio * 100));
         } else {
             colorBar.setVisibility(View.GONE);
         }

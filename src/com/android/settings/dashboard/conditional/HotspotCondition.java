@@ -19,7 +19,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.drawable.Icon;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
@@ -29,7 +29,7 @@ import android.os.UserManager;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.TetherSettings;
-import com.android.settings.Utils;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
@@ -39,7 +39,7 @@ public class HotspotCondition extends Condition {
     private final Receiver mReceiver;
 
     private static final IntentFilter WIFI_AP_STATE_FILTER =
-        new IntentFilter(WifiManager.WIFI_AP_STATE_CHANGED_ACTION);
+            new IntentFilter(WifiManager.WIFI_AP_STATE_CHANGED_ACTION);
 
     public HotspotCondition(ConditionManager manager) {
         super(manager);
@@ -64,8 +64,8 @@ public class HotspotCondition extends Condition {
     }
 
     @Override
-    public Icon getIcon() {
-        return Icon.createWithResource(mManager.getContext(), R.drawable.ic_hotspot);
+    public Drawable getIcon() {
+        return mManager.getContext().getDrawable(R.drawable.ic_hotspot);
     }
 
     private String getSsid() {
@@ -95,13 +95,17 @@ public class HotspotCondition extends Condition {
                 UserManager.DISALLOW_CONFIG_TETHERING, UserHandle.myUserId())) {
             return new CharSequence[0];
         }
-        return new CharSequence[] { context.getString(R.string.condition_turn_off) };
+        return new CharSequence[] {context.getString(R.string.condition_turn_off)};
     }
 
     @Override
     public void onPrimaryClick() {
-        Utils.startWithFragment(mManager.getContext(), TetherSettings.class.getName(), null, null,
-                0, R.string.tether_settings_title_all, null, MetricsEvent.DASHBOARD_SUMMARY);
+        new SubSettingLauncher(mManager.getContext())
+                .setDestination(TetherSettings.class.getName())
+                .setSourceMetricsCategory(MetricsEvent.DASHBOARD_SUMMARY)
+                .setTitle(R.string.tether_settings_title_all)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                .launch();
     }
 
     @Override

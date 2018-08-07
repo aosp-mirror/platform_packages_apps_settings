@@ -16,6 +16,16 @@
 
 package com.android.settings.gestures;
 
+import static com.google.common.truth.Truth.assertThat;
+
+import static junit.framework.Assert.assertEquals;
+
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
@@ -23,9 +33,7 @@ import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.TwoStatePreference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.widget.VideoPreference;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -33,34 +41,27 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class GesturePreferenceControllerTest {
-
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceScreen mScreen;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Lifecycle mLifecycle;
+
     private TestPrefController mController;
+    private Preference mPreference;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mController = new TestPrefController(mContext, mLifecycle);
+        mController = new TestPrefController(mContext, "testKey");
+        mPreference = new Preference(RuntimeEnvironment.application);
+        mPreference.setKey(mController.getPreferenceKey());
+        when(mScreen.findPreference(mPreference.getKey())).thenReturn(mPreference);
     }
 
     @Test
@@ -70,20 +71,16 @@ public class GesturePreferenceControllerTest {
 
         mController.displayPreference(mScreen);
 
-        verify(mScreen, never()).removePreference(any(Preference.class));
+        assertThat(mPreference.isVisible()).isTrue();
     }
 
     @Test
     public void display_configIsFalse_shouldNotDisplay() {
         mController.mIsPrefAvailable = false;
-        final Preference preference = mock(Preference.class);
-        when(mScreen.getPreferenceCount()).thenReturn(1);
-        when(mScreen.getPreference(0)).thenReturn(preference);
-        when(preference.getKey()).thenReturn(mController.getPreferenceKey());
 
         mController.displayPreference(mScreen);
 
-        verify(mScreen).removePreference(any(Preference.class));
+        assertThat(mPreference.isVisible()).isFalse();
     }
 
     @Test
@@ -100,13 +97,13 @@ public class GesturePreferenceControllerTest {
         verify(videoPreference).onViewVisible(false);
 
         reset(videoPreference);
-        savedState.putBoolean(mController.KEY_VIDEO_PAUSED, true);
+        savedState.putBoolean(GesturePreferenceController.KEY_VIDEO_PAUSED, true);
         mController.onCreate(savedState);
         mController.onResume();
         verify(videoPreference).onViewVisible(true);
 
         reset(videoPreference);
-        savedState.putBoolean(mController.KEY_VIDEO_PAUSED, false);
+        savedState.putBoolean(GesturePreferenceController.KEY_VIDEO_PAUSED, false);
         mController.onCreate(savedState);
         mController.onResume();
         verify(videoPreference).onViewVisible(false);
@@ -146,11 +143,11 @@ public class GesturePreferenceControllerTest {
 
         mController.mVideoPaused = true;
         mController.onSaveInstanceState(outState);
-        verify(outState).putBoolean(mController.KEY_VIDEO_PAUSED, true);
+        verify(outState).putBoolean(GesturePreferenceController.KEY_VIDEO_PAUSED, true);
 
         mController.mVideoPaused = false;
         mController.onSaveInstanceState(outState);
-        verify(outState).putBoolean(mController.KEY_VIDEO_PAUSED, false);
+        verify(outState).putBoolean(GesturePreferenceController.KEY_VIDEO_PAUSED, false);
     }
 
     @Test
@@ -191,7 +188,8 @@ public class GesturePreferenceControllerTest {
         mController.updateState(preference);
 
         // Verify summary is set to off (as setting is disabled).
-        verify(preference).setSummary(com.android.settings.R.string.gesture_setting_off);
+        assertThat(preference.getSummary()).isEqualTo(
+                mContext.getString(com.android.settings.R.string.gesture_setting_off));
     }
 
     private class TestPrefController extends GesturePreferenceController {
@@ -199,19 +197,14 @@ public class GesturePreferenceControllerTest {
         boolean mIsPrefAvailable;
         boolean mIsPrefEnabled;
 
-        public TestPrefController(Context context,
-                Lifecycle lifecycle) {
-            super(context, lifecycle);
+        private TestPrefController(Context context,
+                String key) {
+            super(context, key);
         }
 
         @Override
-        public boolean isAvailable() {
-            return mIsPrefAvailable;
-        }
-
-        @Override
-        public String getPreferenceKey() {
-            return "testKey";
+        public int getAvailabilityStatus() {
+            return mIsPrefAvailable ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
         }
 
         @Override
@@ -220,12 +213,12 @@ public class GesturePreferenceControllerTest {
         }
 
         @Override
-        protected boolean isSwitchPrefEnabled() {
+        public boolean isChecked() {
             return mIsPrefEnabled;
         }
 
         @Override
-        public boolean onPreferenceChange(Preference preference, Object newValue) {
+        public boolean setChecked(boolean isChecked) {
             return false;
         }
     }

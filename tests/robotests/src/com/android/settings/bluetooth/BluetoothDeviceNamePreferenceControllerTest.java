@@ -22,12 +22,12 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 
@@ -37,13 +37,13 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BluetoothDeviceNamePreferenceControllerTest {
+
     private static final String DEVICE_NAME = "Nightshade";
     private static final int ORDER = 1;
+    private static final String KEY_DEVICE_NAME = "test_key_name";
 
     private Context mContext;
     @Mock
@@ -60,16 +60,17 @@ public class BluetoothDeviceNamePreferenceControllerTest {
 
         mContext = spy(RuntimeEnvironment.application);
 
-        doReturn(mContext).when(mPreferenceScreen).getContext();
+        when(mPreferenceScreen.getContext()).thenReturn(mContext);
         mPreference = new Preference(mContext);
-        mPreference.setKey(BluetoothDeviceNamePreferenceController.KEY_DEVICE_NAME);
-        mController = new BluetoothDeviceNamePreferenceController(
-                mContext, mLocalAdapter);
+        mPreference.setKey(KEY_DEVICE_NAME);
+        mController = spy(new BluetoothDeviceNamePreferenceController(mContext, mLocalAdapter,
+                KEY_DEVICE_NAME));
+        doReturn(DEVICE_NAME).when(mController).getDeviceName();
     }
 
     @Test
     public void testUpdateDeviceName_showSummaryWithDeviceName() {
-        mController.updateDeviceName(mPreference, DEVICE_NAME);
+        mController.updatePreferenceState(mPreference);
 
         final CharSequence summary = mPreference.getSummary();
 
@@ -80,10 +81,10 @@ public class BluetoothDeviceNamePreferenceControllerTest {
 
     @Test
     public void testCreateBluetoothDeviceNamePreference() {
-        Preference preference = mController.createBluetoothDeviceNamePreference(mPreferenceScreen,
-                ORDER);
+        Preference preference =
+            mController.createBluetoothDeviceNamePreference(mPreferenceScreen, ORDER);
 
-        assertThat(preference.getKey()).isEqualTo(mController.KEY_DEVICE_NAME);
+        assertThat(preference.getKey()).isEqualTo(mController.getPreferenceKey());
         assertThat(preference.getOrder()).isEqualTo(ORDER);
         verify(mPreferenceScreen).addPreference(preference);
     }

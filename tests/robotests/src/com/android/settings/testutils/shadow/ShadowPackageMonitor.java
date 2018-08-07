@@ -28,8 +28,7 @@ import com.android.internal.os.BackgroundThread;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.RealObject;
-import org.robolectric.internal.Shadow;
-import org.robolectric.internal.ShadowExtractor;
+import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.shadows.ShadowMessageQueue;
 
@@ -56,8 +55,8 @@ public class ShadowPackageMonitor {
     }
 
     private static void setupBackgroundThreadScheduler() {
-        ShadowMessageQueue shadowMessageQueue = ((ShadowMessageQueue) ShadowExtractor.extract(
-                BackgroundThread.getHandler().getLooper().getQueue()));
+        ShadowMessageQueue shadowMessageQueue = Shadow.extract(
+                BackgroundThread.getHandler().getLooper().getQueue());
         shadowMessageQueue.setScheduler(
                 ShadowApplication.getInstance().getBackgroundThreadScheduler());
     }

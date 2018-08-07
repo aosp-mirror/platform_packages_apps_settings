@@ -21,6 +21,7 @@ import static com.android.settings.notification.SettingPref.TYPE_SYSTEM;
 import android.content.Context;
 
 import android.provider.Settings.System;
+import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -35,4 +36,8 @@ public class ScreenLockSoundPreferenceController extends SettingPrefController {
             TYPE_SYSTEM, KEY_SCREEN_LOCKING_SOUNDS, System.LOCKSCREEN_SOUNDS_ENABLED, DEFAULT_ON);
     }
 
+    @Override
+    public boolean isAvailable() {
+        return mContext.getResources().getBoolean(R.bool.config_show_screen_locking_sounds);
+    }
 }

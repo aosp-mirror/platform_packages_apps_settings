@@ -13,6 +13,8 @@
  */
 package com.android.settings.display;
 
+import static android.content.Context.UI_MODE_SERVICE;
+
 import android.app.UiModeManager;
 import android.content.Context;
 import android.support.v7.preference.ListPreference;
@@ -22,8 +24,6 @@ import android.util.Log;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
-
-import static android.content.Context.UI_MODE_SERVICE;
 
 public class NightModePreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
@@ -48,7 +48,7 @@ public class NightModePreferenceController extends AbstractPreferenceController 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         if (!isAvailable()) {
-            removePreference(screen, KEY_NIGHT_MODE);
+            setVisible(screen, KEY_NIGHT_MODE, false /* visible */);
             return;
         }
         ListPreference mNightModePreference = (ListPreference) screen.findPreference(

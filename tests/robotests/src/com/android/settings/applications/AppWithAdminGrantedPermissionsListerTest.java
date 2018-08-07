@@ -16,29 +16,6 @@
 
 package com.android.settings.applications;
 
-import android.app.admin.DevicePolicyManager;
-import android.content.pm.PackageManager;
-import android.content.pm.UserInfo;
-import android.os.Build;
-import android.os.UserHandle;
-import android.os.UserManager;
-
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-import com.android.settings.enterprise.DevicePolicyManagerWrapper;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import static com.android.settings.testutils.ApplicationTestUtils.buildInfo;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyInt;
@@ -49,11 +26,29 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-/**
- * Tests for {@link AppWithAdminGrantedPermissionsLister}.
- */
+import android.app.admin.DevicePolicyManager;
+import android.content.pm.IPackageManager;
+import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
+import android.os.Build;
+import android.os.UserHandle;
+import android.os.UserManager;
+
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.robolectric.shadows.ShadowApplication;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class AppWithAdminGrantedPermissionsListerTest {
 
     private final String APP_1 = "app1";
@@ -78,10 +73,14 @@ public final class AppWithAdminGrantedPermissionsListerTest {
     private final String PERMISSION_2 = "some.permission.2";
     private final String[] PERMISSIONS = {PERMISSION_1, PERMISSION_2};
 
-    @Mock private UserManager mUserManager;
-    @Mock private PackageManagerWrapper mPackageManager;
-    @Mock private IPackageManagerWrapper mPackageManagerService;
-    @Mock private DevicePolicyManagerWrapper mDevicePolicyManager;
+    @Mock
+    private UserManager mUserManager;
+    @Mock
+    private PackageManagerWrapper mPackageManager;
+    @Mock
+    private IPackageManager mPackageManagerService;
+    @Mock
+    private DevicePolicyManager mDevicePolicyManager;
 
     private List<UserAppInfo> mAppList = Collections.emptyList();
 
@@ -109,14 +108,14 @@ public final class AppWithAdminGrantedPermissionsListerTest {
         // * app5 uses install-time permissions. It was installed by the admin but did not request
         //        any of the permissions. It should not be listed.
         when(mPackageManager.getInstalledApplicationsAsUser(PackageManager.GET_DISABLED_COMPONENTS
-                | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS
-                | PackageManager.MATCH_ANY_USER,
+                        | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS
+                        | PackageManager.MATCH_ANY_USER,
                 MAIN_USER_ID)).thenReturn(Arrays.asList(
-                        buildInfo(APP_1_UID, APP_1, 0 /* flags */, Build.VERSION_CODES.M),
-                        buildInfo(APP_2_UID, APP_2, 0 /* flags */, Build.VERSION_CODES.M),
-                        buildInfo(APP_3_UID, APP_3, 0 /* flags */, Build.VERSION_CODES.LOLLIPOP),
-                        buildInfo(APP_4_UID, APP_4, 0 /* flags */, Build.VERSION_CODES.LOLLIPOP),
-                        buildInfo(APP_5_UID, APP_5, 0 /* flags */, Build.VERSION_CODES.LOLLIPOP)));
+                buildInfo(APP_1_UID, APP_1, 0 /* flags */, Build.VERSION_CODES.M),
+                buildInfo(APP_2_UID, APP_2, 0 /* flags */, Build.VERSION_CODES.M),
+                buildInfo(APP_3_UID, APP_3, 0 /* flags */, Build.VERSION_CODES.LOLLIPOP),
+                buildInfo(APP_4_UID, APP_4, 0 /* flags */, Build.VERSION_CODES.LOLLIPOP),
+                buildInfo(APP_5_UID, APP_5, 0 /* flags */, Build.VERSION_CODES.LOLLIPOP)));
 
         // Grant run-time permissions as appropriate.
         when(mDevicePolicyManager.getPermissionGrantState(null, APP_1, PERMISSION_1))
@@ -164,9 +163,9 @@ public final class AppWithAdminGrantedPermissionsListerTest {
         // The second user has one app installed. This app uses run-time permissions. It has been
         // granted both permissions by the admin. It should be listed.
         when(mPackageManager.getInstalledApplicationsAsUser(PackageManager.GET_DISABLED_COMPONENTS
-                | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS,
+                        | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS,
                 MANAGED_PROFILE_ID)).thenReturn(Arrays.asList(
-                        buildInfo(APP_6_UID, APP_6, 0 /* flags */, Build.VERSION_CODES.M)));
+                buildInfo(APP_6_UID, APP_6, 0 /* flags */, Build.VERSION_CODES.M)));
 
         // Grant run-time permissions as appropriate.
         when(mDevicePolicyManager.getPermissionGrantState(eq(null), eq(APP_6), anyObject()))
@@ -210,7 +209,7 @@ public final class AppWithAdminGrantedPermissionsListerTest {
     private class AppWithAdminGrantedPermissionsListerTestable extends
             AppWithAdminGrantedPermissionsLister {
 
-        public AppWithAdminGrantedPermissionsListerTestable(String[] permissions) {
+        private AppWithAdminGrantedPermissionsListerTestable(String[] permissions) {
             super(permissions, mPackageManager, mPackageManagerService,
                     mDevicePolicyManager, mUserManager);
         }

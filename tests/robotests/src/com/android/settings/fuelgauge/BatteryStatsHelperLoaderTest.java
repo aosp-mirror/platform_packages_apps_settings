@@ -20,11 +20,11 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -33,10 +33,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BatteryStatsHelperLoaderTest {
     @Mock
     private BatteryUtils mBatteryUtils;
@@ -59,10 +57,9 @@ public class BatteryStatsHelperLoaderTest {
 
     @Test
     public void testLoadInBackground_loadWithoutBundle() {
-        doReturn(mContext).when(mBatteryStatsHelperLoader).getContext();
+        when(mBatteryStatsHelperLoader.getContext()).thenReturn(mContext);
         mBatteryStatsHelperLoader.loadInBackground();
 
         verify(mBatteryUtils).initBatteryStatsHelper(any(), eq(null), any());
     }
-
 }

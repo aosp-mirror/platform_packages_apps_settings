@@ -16,42 +16,65 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="date_time_settings_screen"
     android:title="@string/date_and_time"
     settings:keywords="@string/keywords_date_and_time">
 
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="auto_time"
-        android:title="@string/date_time_auto"
-        android:summaryOn="@string/date_time_auto_summaryOn"
-        android:summaryOff="@string/date_time_auto_summaryOff"
-        settings:useAdditionalSummary="true"
-        settings:restrictedSwitchSummary="@string/enabled_by_admin" />
+    <PreferenceCategory
+        android:key="date_time_preference_category"
+        android:layout="@layout/preference_category_no_label">
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="auto_time"
+            android:title="@string/date_time_auto"
+            android:summaryOn="@string/date_time_auto_summaryOn"
+            android:summaryOff="@string/date_time_auto_summaryOff"
+            settings:useAdditionalSummary="true"
+            settings:userRestriction="no_config_date_time" />
 
-    <SwitchPreference
-        android:key="auto_zone"
-        android:title="@string/zone_auto"
-        android:summaryOn="@string/zone_auto_summaryOn"
-        android:summaryOff="@string/zone_auto_summaryOff" />
+        <com.android.settingslib.RestrictedPreference
+            android:key="date"
+            android:title="@string/date_time_set_date"
+            android:summary="@string/summary_placeholder"
+            settings:userRestriction="no_config_date_time" />
 
-    <Preference
-        android:key="date"
-        android:title="@string/date_time_set_date"
-        android:summary="@string/summary_placeholder" />
+        <com.android.settingslib.RestrictedPreference
+            android:key="time"
+            android:title="@string/date_time_set_time"
+            android:summary="@string/summary_placeholder"
+            settings:userRestriction="no_config_date_time" />
+    </PreferenceCategory>
 
-    <Preference
-        android:key="time"
-        android:title="@string/date_time_set_time"
-        android:summary="@string/summary_placeholder" />
+    <PreferenceCategory
+        android:key="time_zone_preference_category"
+        android:layout="@layout/preference_category_no_label">
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="auto_zone"
+            android:title="@string/zone_auto"
+            android:summaryOn="@string/zone_auto_summaryOn"
+            android:summaryOff="@string/zone_auto_summaryOff"
+            settings:userRestriction="no_config_date_time" />
 
-    <Preference
-        android:fragment="com.android.settings.datetime.ZonePicker"
-        android:key="timezone"
-        android:title="@string/date_time_set_timezone"
-        android:summary="GMT-8:00" />
+        <com.android.settingslib.RestrictedPreference
+            android:fragment="com.android.settings.datetime.ZonePicker"
+            android:key="timezone"
+            android:title="@string/date_time_set_timezone"
+            android:summary="@string/summary_placeholder"
+            settings:userRestriction="no_config_date_time" />
+    </PreferenceCategory>
 
-    <SwitchPreference
-        android:key="24 hour"
-        android:title="@string/date_time_24hour" />
+    <PreferenceCategory
+        android:key="time_format_preference_category"
+        android:layout="@layout/preference_category_no_label">
+        <SwitchPreference
+            android:key="auto_24hour"
+            android:title="@string/date_time_24hour_auto"
+            android:summaryOn="@string/date_time_24hour_auto_summary"
+            android:summaryOff="@string/date_time_24hour_auto_summary" />
+
+        <SwitchPreference
+            android:key="24 hour"
+            android:title="@string/date_time_24hour" />
+    </PreferenceCategory>
 
 </PreferenceScreen>

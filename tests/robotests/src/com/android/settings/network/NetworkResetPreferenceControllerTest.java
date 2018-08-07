@@ -16,11 +16,12 @@
 
 package com.android.settings.network;
 
-
-import android.content.Context;
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,28 +29,19 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class NetworkResetPreferenceControllerTest {
 
     @Mock
     private NetworkResetRestrictionChecker mRestrictionChecker;
-    private Context mContext;
     private NetworkResetPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
-        mController = new NetworkResetPreferenceController(mContext);
+        mController = new NetworkResetPreferenceController(RuntimeEnvironment.application);
         ReflectionHelpers.setField(mController, "mRestrictionChecker", mRestrictionChecker);
     }
 

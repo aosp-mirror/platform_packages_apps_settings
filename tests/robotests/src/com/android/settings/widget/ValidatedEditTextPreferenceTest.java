@@ -16,13 +16,22 @@
 
 package com.android.settings.widget;
 
+import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import android.support.v7.preference.PreferenceViewHolder;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -31,18 +40,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ValidatedEditTextPreferenceTest {
 
     @Mock
@@ -50,11 +50,15 @@ public class ValidatedEditTextPreferenceTest {
     @Mock
     private ValidatedEditTextPreference.Validator mValidator;
 
+    private PreferenceViewHolder mViewHolder;
     private ValidatedEditTextPreference mPreference;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+
+        mViewHolder = spy(PreferenceViewHolder.createInstanceForTests(
+                new View(RuntimeEnvironment.application)));
         mPreference = new ValidatedEditTextPreference(RuntimeEnvironment.application);
     }
 
@@ -112,6 +116,19 @@ public class ValidatedEditTextPreferenceTest {
         mPreference.onBindDialogView(mView);
 
         assertThat(editText.getInputType()
+                & (InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD | InputType.TYPE_CLASS_TEXT))
+                .isNotEqualTo(0);
+    }
+
+    @Test
+    public void bindViewHolder_isPassword_shouldSetInputType() {
+        final TextView textView = spy(new TextView(RuntimeEnvironment.application));
+        when(mViewHolder.findViewById(android.R.id.summary)).thenReturn(textView);
+
+        mPreference.setIsSummaryPassword(true);
+        mPreference.onBindViewHolder(mViewHolder);
+
+        assertThat(textView.getInputType()
                 & (InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_CLASS_TEXT))
                 .isNotEqualTo(0);
     }

@@ -21,13 +21,17 @@ LOCAL_USE_AAPT2 := true
 LOCAL_SRC_FILES := $(call all-java-files-under, src)
 
 LOCAL_STATIC_ANDROID_LIBRARIES := \
+    android-slices-builders \
+    android-slices-core \
+    android-slices-view \
+    android-support-compat \
     android-support-v4 \
     android-support-v13 \
     android-support-v7-appcompat \
     android-support-v7-cardview \
     android-support-v7-preference \
     android-support-v7-recyclerview \
-    android-support-v14-preference
+    android-support-v14-preference \
 
 LOCAL_JAVA_LIBRARIES := \
     bouncycastle \
@@ -35,8 +39,11 @@ LOCAL_JAVA_LIBRARIES := \
     ims-common
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
+    android-arch-lifecycle-runtime \
+    android-arch-lifecycle-extensions \
+    guava \
     jsr305 \
-    settings-logtags
+    settings-logtags \
 
 LOCAL_PROGUARD_FLAG_FILES := proguard.flags
 

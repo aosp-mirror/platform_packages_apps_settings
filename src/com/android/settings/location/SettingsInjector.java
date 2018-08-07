@@ -20,6 +20,7 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
@@ -30,17 +31,21 @@ import android.graphics.drawable.Drawable;
 import android.location.SettingInjectorService;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.SystemClock;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
+import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.util.Xml;
 
-import com.android.settings.DimmableIconPreference;
+import com.android.settings.widget.AppPreference;
+import com.android.settings.widget.RestrictedAppPreference;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -214,12 +219,21 @@ class SettingsInjector {
                     sa.getResourceId(android.R.styleable.SettingInjectorService_icon, 0);
             final String settingsActivity =
                     sa.getString(android.R.styleable.SettingInjectorService_settingsActivity);
+            final String userRestriction = sa.getString(
+                    android.R.styleable.SettingInjectorService_userRestriction);
             if (Log.isLoggable(TAG, Log.DEBUG)) {
                 Log.d(TAG, "parsed title: " + title + ", iconId: " + iconId
                         + ", settingsActivity: " + settingsActivity);
             }
-            return InjectedSetting.newInstance(packageName, className,
-                    title, iconId, userHandle, settingsActivity);
+            return new InjectedSetting.Builder()
+                    .setPackageName(packageName)
+                    .setClassName(className)
+                    .setTitle(title)
+                    .setIconId(iconId)
+                    .setUserHandle(userHandle)
+                    .setSettingsActivity(settingsActivity)
+                    .setUserRestriction(userRestriction)
+                    .build();
         } finally {
             sa.recycle();
         }
@@ -253,6 +267,28 @@ class SettingsInjector {
     }
 
     /**
+     * Checks wheteher there is any preference that other apps have injected.
+     *
+     * @param profileId Identifier of the user/profile to obtain the injected settings for or
+     *                  UserHandle.USER_CURRENT for all profiles associated with current user.
+     */
+    public boolean hasInjectedSettings(final int profileId) {
+        final UserManager um = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
+        final List<UserHandle> profiles = um.getUserProfiles();
+        final int profileCount = profiles.size();
+        for (int i = 0; i < profileCount; ++i) {
+            final UserHandle userHandle = profiles.get(i);
+            if (profileId == UserHandle.USER_CURRENT || profileId == userHandle.getIdentifier()) {
+                Iterable<InjectedSetting> settings = getSettings(userHandle);
+                for (InjectedSetting setting : settings) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
      * Reloads the status messages for all the preference items.
      */
     public void reloadStatusMessages() {
@@ -267,21 +303,26 @@ class SettingsInjector {
      */
     private Preference addServiceSetting(Context prefContext, List<Preference> prefs,
             InjectedSetting info) {
-        PackageManager pm = mContext.getPackageManager();
-        Drawable appIcon = pm.getDrawable(info.packageName, info.iconId, null);
-        Drawable icon = pm.getUserBadgedIcon(appIcon, info.mUserHandle);
-        CharSequence badgedAppLabel = pm.getUserBadgedLabel(info.title, info.mUserHandle);
-        if (info.title.contentEquals(badgedAppLabel)) {
-            // If badged label is not different from original then no need for it as
-            // a separate content description.
-            badgedAppLabel = null;
+        final PackageManager pm = mContext.getPackageManager();
+        Drawable appIcon = null;
+        try {
+            final PackageItemInfo itemInfo = new PackageItemInfo();
+            itemInfo.icon = info.iconId;
+            itemInfo.packageName = info.packageName;
+            final ApplicationInfo appInfo = pm.getApplicationInfo(info.packageName,
+                PackageManager.GET_META_DATA);
+            appIcon = IconDrawableFactory.newInstance(mContext)
+                .getBadgedIcon(itemInfo, appInfo, info.mUserHandle.getIdentifier());
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "Can't get ApplicationInfo for " + info.packageName, e);
         }
-        Preference pref = new DimmableIconPreference(prefContext, badgedAppLabel);
+        Preference pref = TextUtils.isEmpty(info.userRestriction)
+                ? new AppPreference(prefContext)
+                : new RestrictedAppPreference(prefContext, info.userRestriction);
         pref.setTitle(info.title);
         pref.setSummary(null);
-        pref.setIcon(icon);
+        pref.setIcon(appIcon);
         pref.setOnPreferenceClickListener(new ServiceSettingClickedListener(info));
-
         prefs.add(pref);
         return pref;
     }
@@ -344,6 +385,9 @@ class SettingsInjector {
 
         private boolean mReloadRequested;
 
+        private StatusLoadingHandler() {
+            super(Looper.getMainLooper());
+        }
         @Override
         public void handleMessage(Message msg) {
             if (Log.isLoggable(TAG, Log.DEBUG)) {

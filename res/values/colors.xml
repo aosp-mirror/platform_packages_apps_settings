@@ -30,8 +30,6 @@
 
     <color name="divider_color">#20ffffff</color>
     <color name="title_color">@android:color/holo_blue_light</color>
-    <color name="setup_divider_color_dark">#33ffffff</color>
-    <color name="setup_divider_color_light">#33000000</color>
     <color name="setup_lock_pattern_view_regular_color_dark">#ffbdbdbd</color>
     <color name="setup_lock_pattern_view_regular_color_light">@color/lock_pattern_view_regular_color</color>
     <color name="setup_lock_pattern_view_success_color_dark">#ff84ffff</color>
@@ -50,18 +48,15 @@
     <color name="fingerprint_title_area_bg">?android:attr/colorAccent</color>
     <color name="fingerprint_title_color">#ffffffff</color>
     <color name="fingerprint_message_color">#de000000</color>
-    <color name="fingerprint_indicator_background_resting">#12000000</color>
 
     <color name="running_processes_system_ram">#ff384248</color>
     <color name="running_processes_free_ram">#ffced7db</color>
 
     <color name="wifi_divider">#ffe0e0e0</color>
-    <color name="sim_noitification">@*android:color/material_deep_teal_500</color>
+    <color name="sim_noitification">@*android:color/accent_device_default_light</color>
 
     <color name="confirm_device_credential_transparent_black">#60000000</color>
     <color name="voice_interaction_highlight">#33b5e5</color>
-
-    <drawable name="fp_enrollment_header_landscape">#009688</drawable>
 
     <color name="memory_normal">#ff009587</color>
     <color name="memory_moderate">#ffF3B300</color>
@@ -81,6 +76,8 @@
     <color name="material_blue_700">#3367D6</color>
     <color name="material_grey_100">#f5f5f5</color>
     <color name="material_grey_200">#ffffff</color>
+    <color name="switch_bar_background">#ff80868B</color>
+
 
     <color name="message_text_incoming">#ffffffff</color>
     <color name="message_text_outgoing">#ff323232</color>
@@ -94,13 +91,10 @@
     <color name="message_icon_background_outgoing">#4285f4</color>
     <color name="message_icon_text_outgoing">#ffffffff</color>
 
-    <color name="importance_disabled_slider_color">@*android:color/material_grey_300</color>
-    <color name="importance_secondary_slider_color">#858383</color>
-
     <color name="usage_graph_dots">#B0BEC5</color>
 
     <!-- Gestures settings -->
-    <color name="gestures_setting_background_color">#f4f4f4</color>
+    <color name="gestures_setting_background_color">#ffffff</color>
 
     <color name="status_bar_color">#3c3c3c</color>
 
@@ -116,4 +110,31 @@
     <!-- Suggestion/condition colors -->
     <color name="suggestion_condition_background">#f2f2f2</color>
     <color name="condition_card_background">#f8f8f8</color>
+
+    <!-- Dashboard/homepage icon background colors -->
+    <color name="homepage_network_background">#2196F3</color>
+    <color name="homepage_connected_device_background">#71A234</color>
+    <color name="homepage_app_and_notification_background">#FF7E0F</color>
+    <color name="homepage_battery_background">#258982</color>
+    <color name="homepage_display_background">#FFB600</color>
+    <color name="homepage_sound_background">#01B1AF</color>
+    <color name="homepage_storage_background">#C14CE6</color>
+    <color name="homepage_security_background">#0F9D58</color>
+    <color name="homepage_accounts_background">#F15B8D</color>
+    <color name="homepage_accessibility_background">#5011C1</color>
+    <color name="homepage_system_background">#757575</color>
+    <color name="homepage_support_background">#26459C</color>
+    <color name="homepage_generic_icon_background">#1A73E8</color>
+    <!-- End of dashboard/homepage icon background colors -->
+
+    <color name="glif_error_color">@*android:color/material_red_A700</color>
+
+    <color name="battery_good_color_light">#43a047</color> <!-- Material Green 600 -->
+    <color name="battery_maybe_color_light">#ef6c00</color> <!-- Material Orange 800 -->
+    <color name="battery_bad_color_light">#f44336</color> <!-- Material Red 500 -->
+    <color name="battery_good_color_dark">#4caf50</color> <!-- Material Green 500 -->
+    <color name="battery_maybe_color_dark">#fdd835</color> <!-- Material Yellow 600 -->
+    <color name="battery_bad_color_dark">#f44336</color> <!-- Material Red 500 -->
+
 </resources>
+

@@ -16,20 +16,19 @@
 
 package com.android.settings.gestures;
 
-import android.content.ContentResolver;
+import static android.provider.Settings.Secure.SYSTEM_NAVIGATION_KEYS_ENABLED;
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.hardware.fingerprint.FingerprintManager;
 import android.provider.Settings;
 
-import com.android.settings.search.InlinePayload;
-import com.android.settings.search.InlineSwitchPayload;
-import com.android.settings.search.ResultPayload;
+import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
-import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,19 +36,8 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
-
-import static android.provider.Settings.Secure.SYSTEM_NAVIGATION_KEYS_ENABLED;
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SwipeToNotificationPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -65,10 +53,9 @@ public class SwipeToNotificationPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mController = new SwipeToNotificationPreferenceController(mContext, null, KEY_SWIPE_DOWN);
+        mController = new SwipeToNotificationPreferenceController(mContext, KEY_SWIPE_DOWN);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
-        // Explicit casting to object due to MockitoCast bug
-        when((Object) mContext.getSystemService(FingerprintManager.class))
+        when(mContext.getSystemService(Context.FINGERPRINT_SERVICE))
                 .thenReturn(mFingerprintManager);
     }
 
@@ -106,31 +93,93 @@ public class SwipeToNotificationPreferenceControllerTest {
     }
 
     @Test
-    public void testSwitchEnabled_configIsSet_shouldReturnTrue() {
+    public void testIsChecked_configIsSet_shouldReturnTrue() {
         stubFingerprintSupported(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         // Set the setting to be enabled.
-        final Context context = ShadowApplication.getInstance().getApplicationContext();
+        final Context context = RuntimeEnvironment.application;
         Settings.System.putInt(context.getContentResolver(), SYSTEM_NAVIGATION_KEYS_ENABLED, 1);
-        mController = new SwipeToNotificationPreferenceController(context, null, KEY_SWIPE_DOWN);
+        mController = new SwipeToNotificationPreferenceController(context, KEY_SWIPE_DOWN);
 
-        assertThat(mController.isSwitchPrefEnabled()).isTrue();
+        assertThat(mController.isChecked()).isTrue();
     }
 
     @Test
-    public void testSwitchEnabled_configIsNotSet_shouldReturnFalse() {
+    public void testIsChecked_configIsNotSet_shouldReturnFalse() {
         stubFingerprintSupported(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         // Set the setting to be disabled.
-        final Context context = ShadowApplication.getInstance().getApplicationContext();
+        final Context context = RuntimeEnvironment.application;
         Settings.System.putInt(context.getContentResolver(), SYSTEM_NAVIGATION_KEYS_ENABLED, 0);
-        mController = new SwipeToNotificationPreferenceController(context, null, KEY_SWIPE_DOWN);
+        mController = new SwipeToNotificationPreferenceController(context, KEY_SWIPE_DOWN);
 
-        assertThat(mController.isSwitchPrefEnabled()).isFalse();
+        assertThat(mController.isChecked()).isFalse();
+    }
+
+    @Test
+    public void isSuggestionCompleted_configDisabled_shouldReturnTrue() {
+        stubFingerprintSupported(true);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        when(mContext.getResources().
+                getBoolean(com.android.internal.R.bool.config_supportSystemNavigationKeys))
+                .thenReturn(false);
+
+        assertThat(SwipeToNotificationPreferenceController.isSuggestionComplete(
+                mContext, null /* prefs */))
+                .isTrue();
+    }
+
+    @Test
+    public void isSuggestionCompleted_notVisited_shouldReturnFalse() {
+        stubFingerprintSupported(true);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        when(mContext.getResources().
+                getBoolean(com.android.internal.R.bool.config_supportSystemNavigationKeys))
+                .thenReturn(true);
+        // No stored value in shared preferences if not visited yet.
+        final Context context = RuntimeEnvironment.application;
+        final SharedPreferences prefs = new SuggestionFeatureProviderImpl(context)
+                .getSharedPrefs(context);
+
+        assertThat(SwipeToNotificationPreferenceController.isSuggestionComplete(mContext, prefs))
+                .isFalse();
+    }
+
+    @Test
+    public void isSuggestionCompleted_visited_shouldReturnTrue() {
+        stubFingerprintSupported(true);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        when(mContext.getResources().
+                getBoolean(com.android.internal.R.bool.config_supportSystemNavigationKeys))
+                .thenReturn(true);
+        // No stored value in shared preferences if not visited yet.
+        final Context context = RuntimeEnvironment.application;
+        final SharedPreferences prefs = new SuggestionFeatureProviderImpl(context)
+                .getSharedPrefs(context);
+        prefs.edit()
+                .putBoolean(SwipeToNotificationSettings.PREF_KEY_SUGGESTION_COMPLETE, true)
+                .commit();
+
+        assertThat(SwipeToNotificationPreferenceController.isSuggestionComplete(mContext, prefs))
+                .isTrue();
     }
 
     private void stubFingerprintSupported(boolean enabled) {
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT))
                 .thenReturn(enabled);
+    }
+
+    @Test
+    public void isSliceableCorrectKey_returnsTrue() {
+        final SwipeToNotificationPreferenceController controller = new
+                SwipeToNotificationPreferenceController(mContext,"gesture_swipe_down_fingerprint");
+        assertThat(controller.isSliceable()).isTrue();
+    }
+
+    @Test
+    public void isSliceableIncorrectKey_returnsFalse() {
+        final SwipeToNotificationPreferenceController controller =
+                new SwipeToNotificationPreferenceController(mContext, "bad_key");
+        assertThat(controller.isSliceable()).isFalse();
     }
 }

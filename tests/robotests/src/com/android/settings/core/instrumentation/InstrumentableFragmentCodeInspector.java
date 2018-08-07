@@ -16,16 +16,17 @@
 
 package com.android.settings.core.instrumentation;
 
-import static com.google.common.truth.Truth.assertWithMessage;
-
 import android.app.Fragment;
 import android.util.ArraySet;
 
 import com.android.settings.core.codeinspection.CodeInspector;
+import com.android.settingslib.core.instrumentation.Instrumentable;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+import static com.google.common.truth.Truth.assertWithMessage;
 
 /**
  * {@link CodeInspector} that verifies all fragments implements Instrumentable.
@@ -60,12 +61,12 @@ public class InstrumentableFragmentCodeInspector extends CodeInspector {
             }
         }
         final StringBuilder sb = new StringBuilder(
-                "All fragment should implement Instrumentable, but the following are not:\n");
+                "All fragments should implement Instrumentable, but the following are not:\n");
         for (String c : broken) {
             sb.append(c).append("\n");
         }
-        assertWithMessage(sb.toString())
-                .that(broken.isEmpty())
-                .isTrue();
+        assertWithMessage(sb.toString()).that(broken.isEmpty()).isTrue();
+        assertNoObsoleteInGrandfatherList("grandfather_not_implementing_instrumentable",
+                grandfather_notImplementingInstrumentable);
     }
 }

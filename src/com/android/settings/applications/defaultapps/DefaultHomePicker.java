@@ -30,6 +30,7 @@ import android.text.TextUtils;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settingslib.applications.DefaultAppInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,11 @@ public class DefaultHomePicker extends DefaultAppPickerFragment {
     }
 
     @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.default_home_settings;
+    }
+
+    @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.DEFAULT_HOME_PICKER;
     }
@@ -54,6 +60,7 @@ public class DefaultHomePicker extends DefaultAppPickerFragment {
         final boolean mustSupportManagedProfile = hasManagedProfile();
         final List<DefaultAppInfo> candidates = new ArrayList<>();
         final List<ResolveInfo> homeActivities = new ArrayList<>();
+        final Context context = getContext();
         mPm.getHomeActivities(homeActivities);
 
         for (ResolveInfo resolveInfo : homeActivities) {
@@ -72,7 +79,7 @@ public class DefaultHomePicker extends DefaultAppPickerFragment {
                 summary = null;
             }
             final DefaultAppInfo candidate =
-                    new DefaultAppInfo(mPm, mUserId, activityName, summary, enabled);
+                    new DefaultAppInfo(context, mPm, mUserId, activityName, summary, enabled);
             candidates.add(candidate);
         }
         return candidates;

@@ -35,8 +35,7 @@ public abstract class InlinePayload extends ResultPayload {
     /**
      * Defines the key to access and store the Setting the inline result represents.
      */
-    @VisibleForTesting
-    final String mSettingKey;
+    private final String mSettingKey;
 
     /**
      * Defines where the Setting is stored.
@@ -153,5 +152,9 @@ public abstract class InlinePayload extends ResultPayload {
         }
 
         return false;
+    }
+
+    public String getKey() {
+        return mSettingKey;
     }
 }

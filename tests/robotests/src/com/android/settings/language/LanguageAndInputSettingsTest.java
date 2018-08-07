@@ -17,7 +17,6 @@
 package com.android.settings.language;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -28,6 +27,7 @@ import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
+import android.arch.lifecycle.LifecycleObserver;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -42,14 +42,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.view.textservice.TextServicesManager;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
-import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -58,13 +55,11 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class LanguageAndInputSettingsTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -107,7 +102,7 @@ public class LanguageAndInputSettingsTest {
     @Test
     public void testGetPreferenceControllers_shouldRegisterLifecycleObservers() {
         final List<AbstractPreferenceController> controllers =
-                mFragment.getPreferenceControllers(mActivity);
+                mFragment.createPreferenceControllers(mActivity);
         int lifecycleObserverCount = 0;
         for (AbstractPreferenceController controller : controllers) {
             if (controller instanceof LifecycleObserver) {
@@ -121,15 +116,12 @@ public class LanguageAndInputSettingsTest {
     @Test
     public void testGetPreferenceControllers_shouldAllBeCreated() {
         final List<AbstractPreferenceController> controllers =
-                mFragment.getPreferenceControllers(mActivity);
+                mFragment.createPreferenceControllers(mActivity);
 
         assertThat(controllers.isEmpty()).isFalse();
     }
 
     @Test
-    @Config(shadows = {
-            ShadowSecureSettings.class,
-    })
     public void testSummary_shouldSetToCurrentImeName() {
         final Activity activity = mock(Activity.class);
         final SummaryLoader loader = mock(SummaryLoader.class);
@@ -145,7 +137,7 @@ public class LanguageAndInputSettingsTest {
         when(imis.get(0).getPackageName()).thenReturn(componentName.getPackageName());
         when(mInputMethodManager.getInputMethodList()).thenReturn(imis);
 
-        SummaryLoader.SummaryProvider provider = mFragment.SUMMARY_PROVIDER_FACTORY
+        SummaryLoader.SummaryProvider provider = LanguageAndInputSettings.SUMMARY_PROVIDER_FACTORY
                 .createSummaryProvider(activity, loader);
 
         provider.setListening(true);
@@ -158,16 +150,19 @@ public class LanguageAndInputSettingsTest {
     public void testNonIndexableKeys_existInXmlLayout() {
         final Context context = spy(RuntimeEnvironment.application);
         final Resources res = spy(RuntimeEnvironment.application.getResources());
-        //(InputManager) context.getSystemService(Context.INPUT_SERVICE);
-        InputManager manager = mock(InputManager.class);
-        when(manager.getInputDeviceIds()).thenReturn(new int[]{});
-        doReturn(manager).when(context).getSystemService(Context.INPUT_SERVICE);
+        final InputManager inputManager = mock(InputManager.class);
+        final TextServicesManager textServicesManager = mock(TextServicesManager.class);
+        when(inputManager.getInputDeviceIds()).thenReturn(new int[0]);
+        doReturn(inputManager).when(context).getSystemService(Context.INPUT_SERVICE);
+        doReturn(textServicesManager).when(context)
+            .getSystemService(Context.TEXT_SERVICES_MANAGER_SERVICE);
         doReturn(res).when(context).getResources();
         doReturn(false).when(res)
-            .getBoolean(com.android.internal.R.bool.config_supportSystemNavigationKeys);
-        final List<String> niks = LanguageAndInputSettings.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(context);
-        final int xmlId = (new LanguageAndInputSettings()).getPreferenceScreenResId();
+                .getBoolean(com.android.internal.R.bool.config_supportSystemNavigationKeys);
+        final List<String> niks =
+            LanguageAndInputSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(context);
+        LanguageAndInputSettings settings = new LanguageAndInputSettings();
+        final int xmlId = settings.getPreferenceScreenResId();
 
         final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context, xmlId);
 
@@ -176,13 +171,16 @@ public class LanguageAndInputSettingsTest {
 
     @Test
     public void testPreferenceControllers_getPreferenceKeys_existInPreferenceScreen() {
-        final Context context = RuntimeEnvironment.application;
+        final Context context = spy(RuntimeEnvironment.application);
+        final TextServicesManager textServicesManager = mock(TextServicesManager.class);
+        doReturn(textServicesManager).when(context)
+            .getSystemService(Context.TEXT_SERVICES_MANAGER_SERVICE);
         final LanguageAndInputSettings fragment = new LanguageAndInputSettings();
-        final List<String> preferenceScreenKeys = XmlTestUtils.getKeysFromPreferenceXml(context,
-                fragment.getPreferenceScreenResId());
+        final List<String> preferenceScreenKeys =
+            XmlTestUtils.getKeysFromPreferenceXml(context, fragment.getPreferenceScreenResId());
         final List<String> preferenceKeys = new ArrayList<>();
 
-        for (AbstractPreferenceController controller : fragment.getPreferenceControllers(context)) {
+        for (AbstractPreferenceController controller : fragment.createPreferenceControllers(context)) {
             preferenceKeys.add(controller.getPreferenceKey());
         }
 
@@ -208,7 +206,7 @@ public class LanguageAndInputSettingsTest {
         }
 
         @Override
-        protected Lifecycle getLifecycle() {
+        public Lifecycle getLifecycle() {
             if (mLifecycle == null) {
                 return super.getLifecycle();
             }

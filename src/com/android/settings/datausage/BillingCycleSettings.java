@@ -24,19 +24,16 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
-import android.icu.text.MeasureFormat;
-import android.icu.util.MeasureUnit;
 import android.net.NetworkPolicy;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.text.format.Formatter;
 import android.text.format.Time;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
@@ -44,6 +41,7 @@ import android.widget.Spinner;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.net.DataUsageController;
@@ -53,11 +51,10 @@ public class BillingCycleSettings extends DataUsageBase implements
 
     private static final String TAG = "BillingCycleSettings";
     private static final boolean LOGD = false;
-    public static final long KB_IN_BYTES = 1000;
-    public static final long MB_IN_BYTES = KB_IN_BYTES * 1000;
-    public static final long GB_IN_BYTES = MB_IN_BYTES * 1000;
+    public static final long MIB_IN_BYTES = 1024 * 1024;
+    public static final long GIB_IN_BYTES = MIB_IN_BYTES * 1024;
 
-    private static final long MAX_DATA_LIMIT_BYTES = 50000 * GB_IN_BYTES;
+    private static final long MAX_DATA_LIMIT_BYTES = 50000 * GIB_IN_BYTES;
 
     private static final String TAG_CONFIRM_LIMIT = "confirmLimit";
     private static final String TAG_CYCLE_EDITOR = "cycleEditor";
@@ -77,6 +74,21 @@ public class BillingCycleSettings extends DataUsageBase implements
     private Preference mDataLimit;
     private DataUsageController mDataUsageController;
 
+    @VisibleForTesting
+    void setUpForTest(NetworkPolicyEditor policyEditor,
+                      Preference billingCycle,
+                      Preference dataLimit,
+                      Preference dataWarning,
+                      SwitchPreference enableLimit,
+                      SwitchPreference enableWarning) {
+        services.mPolicyEditor = policyEditor;
+        mBillingCycle = billingCycle;
+        mDataLimit = dataLimit;
+        mDataWarning = dataWarning;
+        mEnableDataLimit = enableLimit;
+        mEnableDataWarning = enableWarning;
+    }
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -94,6 +106,8 @@ public class BillingCycleSettings extends DataUsageBase implements
         mEnableDataLimit = (SwitchPreference) findPreference(KEY_SET_DATA_LIMIT);
         mEnableDataLimit.setOnPreferenceChangeListener(this);
         mDataLimit = findPreference(KEY_DATA_LIMIT);
+
+        mFooterPreferenceMixin.createFooterPreference().setTitle(R.string.data_warning_footnote);
     }
 
     @Override
@@ -102,16 +116,19 @@ public class BillingCycleSettings extends DataUsageBase implements
         updatePrefs();
     }
 
-    private void updatePrefs() {
+    @VisibleForTesting
+    void updatePrefs() {
         final int cycleDay = services.mPolicyEditor.getPolicyCycleDay(mNetworkTemplate);
-        if (cycleDay != CYCLE_NONE) {
+        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.DATA_USAGE_SETTINGS_V2)) {
+            mBillingCycle.setSummary(null);
+        } else if (cycleDay != CYCLE_NONE) {
             mBillingCycle.setSummary(getString(R.string.billing_cycle_fragment_summary, cycleDay));
         } else {
             mBillingCycle.setSummary(null);
         }
         final long warningBytes = services.mPolicyEditor.getPolicyWarningBytes(mNetworkTemplate);
         if (warningBytes != WARNING_DISABLED) {
-            mDataWarning.setSummary(Formatter.formatFileSize(getContext(), warningBytes));
+            mDataWarning.setSummary(DataUsageUtils.formatDataUsage(getContext(), warningBytes));
             mDataWarning.setEnabled(true);
             mEnableDataWarning.setChecked(true);
         } else {
@@ -121,7 +138,7 @@ public class BillingCycleSettings extends DataUsageBase implements
         }
         final long limitBytes = services.mPolicyEditor.getPolicyLimitBytes(mNetworkTemplate);
         if (limitBytes != LIMIT_DISABLED) {
-            mDataLimit.setSummary(Formatter.formatFileSize(getContext(), limitBytes));
+            mDataLimit.setSummary(DataUsageUtils.formatDataUsage(getContext(), limitBytes));
             mDataLimit.setEnabled(true);
             mEnableDataLimit.setChecked(true);
         } else {
@@ -256,25 +273,14 @@ public class BillingCycleSettings extends DataUsageBase implements
                     : editor.getPolicyWarningBytes(template);
             final long limitDisabled = isLimit ? LIMIT_DISABLED : WARNING_DISABLED;
 
-            final MeasureFormat formatter = MeasureFormat.getInstance(
-                    getContext().getResources().getConfiguration().locale,
-                    MeasureFormat.FormatWidth.SHORT);
-            final String[] unitNames = new String[] {
-                formatter.getUnitDisplayName(MeasureUnit.MEGABYTE),
-                formatter.getUnitDisplayName(MeasureUnit.GIGABYTE)
-            };
-            final ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                    getContext(), R.layout.data_usage_spinner_item, unitNames);
-            type.setAdapter(adapter);
-
-            if (bytes > 1.5f * GB_IN_BYTES) {
-                final String bytesText = formatText(bytes / (float) GB_IN_BYTES);
+            if (bytes > 1.5f * GIB_IN_BYTES) {
+                final String bytesText = formatText(bytes / (float) GIB_IN_BYTES);
                 bytesPicker.setText(bytesText);
                 bytesPicker.setSelection(0, bytesText.length());
 
                 type.setSelection(1);
             } else {
-                final String bytesText = formatText(bytes / (float) MB_IN_BYTES);
+                final String bytesText = formatText(bytes / (float) MIB_IN_BYTES);
                 bytesPicker.setText(bytesText);
                 bytesPicker.setSelection(0, bytesText.length());
 
@@ -305,7 +311,7 @@ public class BillingCycleSettings extends DataUsageBase implements
                 bytesString = "0";
             }
             final long bytes = (long) (Float.valueOf(bytesString)
-                        * (spinner.getSelectedItemPosition() == 0 ? MB_IN_BYTES : GB_IN_BYTES));
+                    * (spinner.getSelectedItemPosition() == 0 ? MIB_IN_BYTES : GIB_IN_BYTES));
 
             // to fix the overflow problem
             final long correctedBytes = Math.min(MAX_DATA_LIMIT_BYTES, bytes);
@@ -396,7 +402,6 @@ public class BillingCycleSettings extends DataUsageBase implements
      */
     public static class ConfirmLimitFragment extends InstrumentedDialogFragment implements
             DialogInterface.OnClickListener {
-        private static final String EXTRA_MESSAGE = "message";
         @VisibleForTesting static final String EXTRA_LIMIT_BYTES = "limitBytes";
         public static final float FLOAT = 1.2f;
 
@@ -408,16 +413,13 @@ public class BillingCycleSettings extends DataUsageBase implements
             if (policy == null) return;
 
             final Resources res = parent.getResources();
-            final CharSequence message;
             final long minLimitBytes = (long) (policy.warningBytes * FLOAT);
             final long limitBytes;
 
             // TODO: customize default limits based on network template
-            message = res.getString(R.string.data_usage_limit_dialog_mobile);
-            limitBytes = Math.max(5 * GB_IN_BYTES, minLimitBytes);
+            limitBytes = Math.max(5 * GIB_IN_BYTES, minLimitBytes);
 
             final Bundle args = new Bundle();
-            args.putCharSequence(EXTRA_MESSAGE, message);
             args.putLong(EXTRA_LIMIT_BYTES, limitBytes);
 
             final ConfirmLimitFragment dialog = new ConfirmLimitFragment();
@@ -435,11 +437,9 @@ public class BillingCycleSettings extends DataUsageBase implements
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             final Context context = getActivity();
 
-            final CharSequence message = getArguments().getCharSequence(EXTRA_MESSAGE);
-
             return new AlertDialog.Builder(context)
                     .setTitle(R.string.data_usage_limit_dialog_title)
-                    .setMessage(message)
+                    .setMessage(R.string.data_usage_limit_dialog_mobile)
                     .setPositiveButton(android.R.string.ok, this)
                     .setNegativeButton(android.R.string.cancel, null)
                     .create();

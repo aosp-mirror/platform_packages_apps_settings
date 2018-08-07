@@ -20,7 +20,6 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
-import android.os.Handler;
 import android.os.UserHandle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
@@ -36,6 +35,7 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.users.UserFeatureProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -100,7 +100,7 @@ public class EnterpriseSetDefaultAppsListPreferenceController extends
                 userMap.put(typeOfDefault, applicationInfos);
             }
         }
-        new Handler(mContext.getMainLooper()).post(() -> { updateUi(); });
+        ThreadUtils.postOnMainThread(() -> updateUi());
     }
 
     @Override

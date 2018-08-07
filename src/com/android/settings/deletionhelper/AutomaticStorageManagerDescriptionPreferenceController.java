@@ -23,6 +23,7 @@ import android.text.format.Formatter;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 /**
@@ -57,7 +58,7 @@ public class AutomaticStorageManagerDescriptionPreferenceController
                         cr, Settings.Secure.AUTOMATIC_STORAGE_MANAGER_BYTES_CLEARED, 0);
         long lastRunMillis =
                 Settings.Secure.getLong(cr, Settings.Secure.AUTOMATIC_STORAGE_MANAGER_LAST_RUN, 0);
-        if (freedBytes == 0 || lastRunMillis == 0 || !isStorageManagerEnabled(cr)) {
+        if (freedBytes == 0 || lastRunMillis == 0 || !Utils.isStorageManagerEnabled(context)) {
             preference.setSummary(R.string.automatic_storage_manager_text);
         } else {
             preference.setSummary(
@@ -67,10 +68,5 @@ public class AutomaticStorageManagerDescriptionPreferenceController
                             DateUtils.formatDateTime(
                                     context, lastRunMillis, DateUtils.FORMAT_SHOW_DATE)));
         }
-    }
-
-    private boolean isStorageManagerEnabled(ContentResolver cr) {
-        return Settings.Secure.getInt(cr, Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED, 0)
-                != 0;
     }
 }

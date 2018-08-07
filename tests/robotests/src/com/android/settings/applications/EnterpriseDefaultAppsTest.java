@@ -16,18 +16,15 @@
 
 package com.android.settings.applications;
 
+import static junit.framework.Assert.assertTrue;
+
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
-
-import static junit.framework.Assert.assertTrue;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class EnterpriseDefaultAppsTest {
     @Test
     public void testNumberOfIntentsCorrelateWithUI() throws Exception {

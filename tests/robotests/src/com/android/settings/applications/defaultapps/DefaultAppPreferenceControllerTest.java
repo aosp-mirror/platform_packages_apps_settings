@@ -17,6 +17,7 @@
 package com.android.settings.applications.defaultapps;
 
 
+import static com.android.settingslib.TwoTargetPreference.ICON_SIZE_MEDIUM;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -27,7 +28,8 @@ import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
+import com.android.settingslib.TwoTargetPreference;
+import com.android.settingslib.applications.DefaultAppInfo;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,10 +37,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DefaultAppPreferenceControllerTest {
 
     private static final String TEST_APP_NAME = "test";
@@ -62,8 +62,7 @@ public class DefaultAppPreferenceControllerTest {
     public void updateState_hasDefaultApp_shouldUpdateAppName() {
         mController = new TestPreferenceController(mContext);
 
-        when(mController.mAppInfo.loadLabel())
-                .thenReturn(TEST_APP_NAME);
+        when(mController.mAppInfo.loadLabel()).thenReturn(TEST_APP_NAME);
 
         mController.updateState(mPreference);
 
@@ -79,11 +78,21 @@ public class DefaultAppPreferenceControllerTest {
         verify(mPreference).setSummary(R.string.app_list_preference_none);
     }
 
+    @Test
+    public void updateState_twoTargetPref_shouldUseMediumIcon() {
+        final TwoTargetPreference pref = mock(TwoTargetPreference.class);
+        mController = new TestPreferenceController(mContext);
+
+        mController.updateState(pref);
+
+        verify(pref).setIconSize(ICON_SIZE_MEDIUM);
+    }
+
     private static class TestPreferenceController extends DefaultAppPreferenceController {
 
         private DefaultAppInfo mAppInfo;
 
-        public TestPreferenceController(Context context) {
+        private TestPreferenceController(Context context) {
             super(context);
             mAppInfo = mock(DefaultAppInfo.class);
         }

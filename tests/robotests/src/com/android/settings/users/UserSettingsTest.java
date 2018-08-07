@@ -16,34 +16,34 @@
 
 package com.android.settings.users;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.Activity;
 import android.content.pm.UserInfo;
 import android.os.UserManager;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 import org.robolectric.Robolectric;
 
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class UserSettingsTest {
 
-    @Mock private UserManager mUserManager;
-    @Mock private SummaryLoader mSummaryLoader;
+    @Mock
+    private UserManager mUserManager;
+    @Mock
+    private SummaryLoader mSummaryLoader;
     private Activity mActivity;
     private SummaryLoader.SummaryProvider mSummaryProvider;
 
@@ -53,8 +53,8 @@ public class UserSettingsTest {
         mActivity = spy(Robolectric.buildActivity(Activity.class).get());
         when((Object) mActivity.getSystemService(UserManager.class)).thenReturn(mUserManager);
 
-        mSummaryProvider = UserSettings.SUMMARY_PROVIDER_FACTORY.createSummaryProvider(
-            mActivity, mSummaryLoader);
+        mSummaryProvider =
+            UserSettings.SUMMARY_PROVIDER_FACTORY.createSummaryProvider(mActivity, mSummaryLoader);
     }
 
     @Test
@@ -66,8 +66,13 @@ public class UserSettingsTest {
 
         mSummaryProvider.setListening(true);
 
-        verify(mSummaryLoader).setSummary(mSummaryProvider,
-            mActivity.getString(R.string.users_summary, name));
+        verify(mSummaryLoader)
+            .setSummary(mSummaryProvider, mActivity.getString(R.string.users_summary, name));
     }
 
+    @Test
+    public void testAssignDefaultPhoto_ContextNull_ReturnFalseAndNotCrash() {
+        // Should not crash here
+        assertThat(UserSettings.assignDefaultPhoto(null, 0)).isFalse();
+    }
 }

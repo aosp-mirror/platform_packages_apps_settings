@@ -17,10 +17,10 @@
 package com.android.settings.widget;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
@@ -33,6 +33,7 @@ import android.view.ViewGroup;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settingslib.widget.CandidateInfo;
 
 import java.util.List;
 import java.util.Map;
@@ -67,7 +68,6 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
-        addPreferencesFromResource(R.xml.placeholder_prefs);
         updateCandidates();
     }
 
@@ -78,6 +78,9 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
         setHasOptionsMenu(true);
         return view;
     }
+
+    @Override
+    protected abstract int getPreferenceScreenResId();
 
     @Override
     public void onRadioButtonClicked(RadioButtonPreference selected) {
@@ -96,6 +99,13 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
      */
     protected boolean shouldShowItemNone() {
         return false;
+    }
+
+    /**
+     * Populate any static preferences, independent of the radio buttons.
+     * These might be used to provide extra information about the choices.
+     **/
+    protected void addStaticPreferences(PreferenceScreen screen) {
     }
 
     protected CandidateInfo getCandidate(String key) {
@@ -131,8 +141,14 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
         final String systemDefaultKey = getSystemDefaultKey();
         final PreferenceScreen screen = getPreferenceScreen();
         screen.removeAll();
+        addStaticPreferences(screen);
+
+        final int customLayoutResId = getRadioButtonPreferenceCustomLayoutResId();
         if (shouldShowItemNone()) {
             final RadioButtonPreference nonePref = new RadioButtonPreference(getPrefContext());
+            if (customLayoutResId > 0) {
+                nonePref.setLayoutResource(customLayoutResId);
+            }
             nonePref.setIcon(R.drawable.ic_remove_circle);
             nonePref.setTitle(R.string.app_list_preference_none);
             nonePref.setChecked(TextUtils.isEmpty(defaultKey));
@@ -142,6 +158,9 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
         if (candidateList != null) {
             for (CandidateInfo info : candidateList) {
                 RadioButtonPreference pref = new RadioButtonPreference(getPrefContext());
+                if (customLayoutResId > 0) {
+                    pref.setLayoutResource(customLayoutResId);
+                }
                 bindPreference(pref, info.getKey(), info, defaultKey);
                 bindPreferenceExtra(pref, info.getKey(), info, defaultKey, systemDefaultKey);
                 screen.addPreference(pref);
@@ -154,7 +173,7 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
     public RadioButtonPreference bindPreference(RadioButtonPreference pref,
             String key, CandidateInfo info, String defaultKey) {
         pref.setTitle(info.loadLabel());
-        pref.setIcon(info.loadIcon());
+        Utils.setSafeIcon(pref, info.loadIcon());
         pref.setKey(key);
         if (TextUtils.equals(defaultKey, key)) {
             pref.setChecked(true);
@@ -204,19 +223,12 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
         return null;
     }
 
-    public static abstract class CandidateInfo {
-
-        public final boolean enabled;
-
-        public CandidateInfo(boolean enabled) {
-            this.enabled = enabled;
-        }
-
-        public abstract CharSequence loadLabel();
-
-        public abstract Drawable loadIcon();
-
-        public abstract String getKey();
+    /**
+     * Provides a custom layout for each candidate row.
+     */
+    @LayoutRes
+    protected int getRadioButtonPreferenceCustomLayoutResId() {
+        return 0;
     }
 
 }

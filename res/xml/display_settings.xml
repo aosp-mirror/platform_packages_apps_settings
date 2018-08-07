@@ -16,16 +16,20 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="display_settings_screen"
     android:title="@string/display_settings"
-    settings:keywords="@string/keywords_display">
+    settings:keywords="@string/keywords_display"
+    settings:initialExpandedChildrenCount="4">
 
-    <Preference
+    <com.android.settingslib.RestrictedPreference
         android:key="brightness"
         android:title="@string/brightness"
-        settings:keywords="@string/keywords_display_brightness_level">
+        settings:keywords="@string/keywords_display_brightness_level"
+        settings:useAdminDisabledSummary="true"
+        settings:userRestriction="no_config_brightness">
         <intent android:action="com.android.intent.action.SHOW_BRIGHTNESS_DIALOG" />
-    </Preference>
+    </com.android.settingslib.RestrictedPreference>
 
     <com.android.settings.display.NightDisplayPreference
         android:key="night_display"
@@ -35,12 +39,12 @@
         settings:widgetLayout="@null"
         settings:keywords="@string/keywords_display_night_display" />
 
-    <!-- Cross-listed item, if you change this, also change it in power_usage_summary.xml -->
-    <SwitchPreference
-        android:key="auto_brightness"
+    <Preference
+        android:key="auto_brightness_entry"
         android:title="@string/auto_brightness_title"
-        settings:keywords="@string/keywords_display_auto_brightness"
-        android:summary="@string/auto_brightness_summary" />
+        android:summary="@string/auto_brightness_summary"
+        android:fragment="com.android.settings.display.AutoBrightnessSettings"
+        settings:controller="com.android.settings.display.AutoBrightnessPreferenceController" />
 
     <com.android.settingslib.RestrictedPreference
         android:key="wallpaper"
@@ -58,37 +62,49 @@
         android:title="@string/screen_timeout"
         android:summary="@string/summary_placeholder"
         android:entries="@array/screen_timeout_entries"
-        android:entryValues="@array/screen_timeout_values" />
+        android:entryValues="@array/screen_timeout_values"
+        settings:keywords="@string/keywords_screen_timeout"/>
 
     <SwitchPreference
         android:key="auto_rotate"
-        android:title="@string/accelerometer_title" />
+        android:title="@string/accelerometer_title"
+        settings:keywords="@string/keywords_auto_rotate"
+        settings:controller="com.android.settings.display.AutoRotatePreferenceController"/>
 
-    <SwitchPreference
+    <Preference
         android:key="color_mode"
-        android:title="@string/color_mode_title" />
+        android:title="@string/color_mode_title"
+        android:fragment="com.android.settings.display.ColorModePreferenceFragment"
+        settings:keywords="@string/keywords_color_mode" />
 
     <Preference
         android:key="font_size"
         android:title="@string/title_font_size"
         android:fragment="com.android.settings.accessibility.ToggleFontSizePreferenceFragment"
+        settings:controller="com.android.settings.display.FontSizePreferenceController"
         settings:keywords="@string/keywords_display_font_size" />
 
     <com.android.settings.display.ScreenZoomPreference
-        android:key="screen_zoom"
+        android:key="display_settings_screen_zoom"
         android:title="@string/screen_zoom_title"
+        android:fragment="com.android.settings.display.ScreenZoomSettings"
         settings:keywords="@string/screen_zoom_keywords" />
+
+    <SwitchPreference
+        android:key="show_operator_name"
+        android:title="@string/show_operator_name_title"
+        android:summary="@string/show_operator_name_summary" />
 
     <Preference
         android:key="screensaver"
         android:title="@string/screensaver_settings_title"
         android:fragment="com.android.settings.dream.DreamSettings" />
 
-    <!-- Cross-listed item, if you change this, also change it in power_usage_summary.xml -->
-    <Preference
+    <com.android.settingslib.RestrictedPreference
         android:key="ambient_display"
         android:title="@string/ambient_display_screen_title"
-        android:fragment="com.android.settings.display.AmbientDisplaySettings" />
+        android:fragment="com.android.settings.display.AmbientDisplaySettings"
+        settings:userRestriction="no_ambient_display" />
 
     <!-- Hide night mode for now
     <ListPreference
@@ -115,8 +131,15 @@
 
     <ListPreference
         android:key="theme"
-        android:title="@string/device_theme"
+        android:title="@string/color_theme"
         android:summary="@string/summary_placeholder" />
+
+    <ListPreference
+        android:key="systemui_theme"
+        android:title="@string/device_theme"
+        android:entries="@array/systemui_theme_entries"
+        android:entryValues="@array/systemui_theme_values"
+        settings:controller="com.android.settings.display.SystemUiThemePreferenceController" />
 
     <Preference
         android:key="vr_display_pref"

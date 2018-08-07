@@ -30,8 +30,6 @@ import android.util.SparseArray;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.applications.PackageManagerWrapperImpl;
-import com.android.settings.applications.UserManagerWrapperImpl;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.deviceinfo.storage.StorageAsyncLoader;
 import com.android.settings.deviceinfo.storage.StorageAsyncLoader.AppsStorageResult;
@@ -39,6 +37,7 @@ import com.android.settings.deviceinfo.storage.StorageItemPreferenceController;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,7 +97,7 @@ public class StorageProfileFragment extends DashboardFragment
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         final StorageManager sm = context.getSystemService(StorageManager.class);
         mPreferenceController =
@@ -114,12 +113,12 @@ public class StorageProfileFragment extends DashboardFragment
 
     @Override
     public Loader<SparseArray<AppsStorageResult>> onCreateLoader(int id, Bundle args) {
-        Context context = getContext();
+        final Context context = getContext();
         return new StorageAsyncLoader(context,
-                new UserManagerWrapperImpl(context.getSystemService(UserManager.class)),
+                context.getSystemService(UserManager.class),
                 mVolume.fsUuid,
                 new StorageStatsSource(context),
-                new PackageManagerWrapperImpl(context.getPackageManager()));
+                new PackageManagerWrapper(context.getPackageManager()));
     }
 
     @Override

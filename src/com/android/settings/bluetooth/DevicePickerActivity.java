@@ -23,7 +23,7 @@ import com.android.settings.R;
 
 /**
  * Activity for Bluetooth device picker dialog. The device picker logic
- * is implemented in the {@link BluetoothSettings} fragment.
+ * is implemented in the {@link BluetoothPairingDetail} fragment.
  */
 public final class DevicePickerActivity extends Activity {
 

@@ -16,34 +16,41 @@
 
 package com.android.settings.tts;
 
-import android.support.v7.preference.ListPreference;
+import static android.provider.Settings.Secure.TTS_DEFAULT_PITCH;
+import static android.provider.Settings.Secure.TTS_DEFAULT_RATE;
+import static android.provider.Settings.Secure.TTS_DEFAULT_SYNTH;
+
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.SearchIndexableResource;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.EngineInfo;
 import android.speech.tts.TtsEngines;
 import android.speech.tts.UtteranceProgressListener;
+import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
-import android.view.View;
-import java.util.Comparator;
-import java.util.Collections;
-import com.android.settings.applications.LayoutPreference;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.widget.SeekBarPreference;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+import com.android.settings.widget.ActionButtonPreference;
 import com.android.settings.widget.GearPreference;
-import android.widget.Button;
+import com.android.settings.widget.SeekBarPreference;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -51,14 +58,9 @@ import java.util.MissingResourceException;
 import java.util.Objects;
 import java.util.Set;
 
-import static android.provider.Settings.Secure.TTS_DEFAULT_PITCH;
-import static android.provider.Settings.Secure.TTS_DEFAULT_RATE;
-import static android.provider.Settings.Secure.TTS_DEFAULT_SYNTH;
-
 public class TextToSpeechSettings extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener,
-                View.OnClickListener,
-                GearPreference.OnGearClickListener {
+        GearPreference.OnGearClickListener, Indexable {
 
     private static final String STATE_KEY_LOCALE_ENTRIES = "locale_entries";
     private static final String STATE_KEY_LOCALE_ENTRY_VALUES = "locale_entry_values";
@@ -108,9 +110,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
 
     private SeekBarPreference mDefaultPitchPref;
     private SeekBarPreference mDefaultRatePref;
-    private Button mResetButton;
-    private Button mPlayButton;
-    private LayoutPreference mActionButtons;
+    private ActionButtonPreference mActionButtons;
 
     private int mDefaultPitch = TextToSpeech.Engine.DEFAULT_PITCH;
     private int mDefaultRate = TextToSpeech.Engine.DEFAULT_RATE;
@@ -126,7 +126,6 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
     private String mSampleText = null;
 
     private ListPreference mLocalePreference;
-    private Preference mInstallVoicesPreference;
 
     /**
      * Default locale used by selected TTS engine, null if not connected to any engine.
@@ -172,12 +171,15 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
         mDefaultPitchPref = (SeekBarPreference) findPreference(KEY_DEFAULT_PITCH);
         mDefaultRatePref = (SeekBarPreference) findPreference(KEY_DEFAULT_RATE);
 
-        mActionButtons = (LayoutPreference) findPreference(KEY_ACTION_BUTTONS);
-        mPlayButton = (Button) mActionButtons.findViewById(R.id.tts_play_button);
-        mPlayButton.setOnClickListener(this);
-        mPlayButton.setEnabled(false);
-        mResetButton = (Button) mActionButtons.findViewById(R.id.tts_reset_button);
-        mResetButton.setOnClickListener(this);
+        mActionButtons = ((ActionButtonPreference) findPreference(KEY_ACTION_BUTTONS))
+                .setButton1Text(R.string.tts_play)
+                .setButton1Positive(true)
+                .setButton1OnClickListener(v -> speakSampleText())
+                .setButton1Enabled(false)
+                .setButton2Text(R.string.tts_reset)
+                .setButton2Positive(false)
+                .setButton2OnClickListener(v -> resetTts())
+                .setButton1Enabled(true);
 
         if (savedInstanceState == null) {
             mLocalePreference.setEnabled(false);
@@ -228,7 +230,8 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
             // Do set pitch correctly after it may have changed, and unlike speed, it doesn't change
             // immediately.
             final ContentResolver resolver = getContentResolver();
-            mTts.setPitch(android.provider.Settings.Secure.getInt(resolver, TTS_DEFAULT_PITCH, TextToSpeech.Engine.DEFAULT_PITCH)/100.0f);
+            mTts.setPitch(android.provider.Settings.Secure.getInt(resolver, TTS_DEFAULT_PITCH,
+                    TextToSpeech.Engine.DEFAULT_PITCH) / 100.0f);
         }
 
         Locale ttsDefaultLocale = mTts.getDefaultLanguage();
@@ -244,10 +247,12 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
         }
         mTts.setOnUtteranceProgressListener(new UtteranceProgressListener() {
             @Override
-            public void onStart(String utteranceId) {}
+            public void onStart(String utteranceId) {
+            }
 
             @Override
-            public void onDone(String utteranceId) {}
+            public void onDone(String utteranceId) {
+            }
 
             @Override
             public void onError(String utteranceId) {
@@ -316,7 +321,6 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
             EngineInfo info = mEnginesHelper.getEngineInfo(mCurrentEngine);
 
 
-
             Preference mEnginePreference = findPreference(KEY_TTS_ENGINE_PREFERENCE);
             ((GearPreference) mEnginePreference).setOnGearClickListener(this);
             mEnginePreference.setSummary(info.label);
@@ -367,7 +371,10 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
                                 }
                             });
         } else {
-            if (DBG) Log.d(TAG, "TTS engine for settings screen failed to initialize successfully.");
+            if (DBG) {
+                Log.d(TAG,
+                        "TTS engine for settings screen failed to initialize successfully.");
+            }
             updateWidgetState(false);
         }
     }
@@ -414,8 +421,8 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
 
             for (String loc : mAvailableStrLocals) {
                 if (loc.equalsIgnoreCase(defaultLocaleStr)) {
-                  notInAvailableLangauges = false;
-                  break;
+                    notInAvailableLangauges = false;
+                    break;
                 }
             }
         } catch (MissingResourceException e) {
@@ -575,7 +582,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
     private boolean isNetworkRequiredForSynthesis() {
         Set<String> features = mTts.getFeatures(mCurrentDefaultLocale);
         if (features == null) {
-          return false;
+            return false;
         }
         return features.contains(TextToSpeech.Engine.KEY_FEATURE_NETWORK_SYNTHESIS) &&
                 !features.contains(TextToSpeech.Engine.KEY_FEATURE_EMBEDDED_SYNTHESIS);
@@ -656,32 +663,18 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
         mTts.setLanguage((locale != null) ? locale : Locale.getDefault());
     }
 
-    /** Called when mPlayButton, mResetButton is clicked. */
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tts_play_button:
-                // Play button.
-                // Get the sample text from the TTS engine; onActivityResult will do
-                // the actual speaking
-                speakSampleText();
-                break;
-            case R.id.tts_reset_button:
-                // Reset button.
-                int speechRateSeekbarProgress =
-                        getSeekBarProgressFromValue(
-                                KEY_DEFAULT_RATE, TextToSpeech.Engine.DEFAULT_RATE);
-                mDefaultRatePref.setProgress(speechRateSeekbarProgress);
-                updateSpeechRate(speechRateSeekbarProgress);
-                int pitchSeekbarProgress =
-                        getSeekBarProgressFromValue(
-                                KEY_DEFAULT_PITCH, TextToSpeech.Engine.DEFAULT_PITCH);
-                mDefaultPitchPref.setProgress(pitchSeekbarProgress);
-                updateSpeechPitchValue(pitchSeekbarProgress);
-                break;
-            default:
-                break;
-        }
+    private void resetTts() {
+        // Reset button.
+        int speechRateSeekbarProgress =
+                getSeekBarProgressFromValue(
+                        KEY_DEFAULT_RATE, TextToSpeech.Engine.DEFAULT_RATE);
+        mDefaultRatePref.setProgress(speechRateSeekbarProgress);
+        updateSpeechRate(speechRateSeekbarProgress);
+        int pitchSeekbarProgress =
+                getSeekBarProgressFromValue(
+                        KEY_DEFAULT_PITCH, TextToSpeech.Engine.DEFAULT_PITCH);
+        mDefaultPitchPref.setProgress(pitchSeekbarProgress);
+        updateSpeechPitchValue(pitchSeekbarProgress);
     }
 
     private void updateSpeechRate(int speechRateSeekBarProgress) {
@@ -715,7 +708,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
     }
 
     private void updateWidgetState(boolean enable) {
-        mPlayButton.setEnabled(enable);
+        mActionButtons.setButton1Enabled(enable);
         mDefaultRatePref.setEnabled(enable);
         mDefaultPitchPref.setEnabled(enable);
     }
@@ -752,7 +745,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
             return;
         }
 
-        if (data == null){
+        if (data == null) {
             Log.e(TAG, "Engine failed voice data integrity check (null return)" +
                     mTts.getCurrentEngine());
             return;
@@ -761,7 +754,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
         android.provider.Settings.Secure.putString(getContentResolver(), TTS_DEFAULT_SYNTH, engine);
 
         mAvailableStrLocals = data.getStringArrayListExtra(
-            TextToSpeech.Engine.EXTRA_AVAILABLE_VOICES);
+                TextToSpeech.Engine.EXTRA_AVAILABLE_VOICES);
         if (mAvailableStrLocals == null) {
             Log.e(TAG, "Voice data check complete, but no available voices found");
             // Set mAvailableStrLocals to empty list
@@ -784,5 +777,23 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
             }
         }
     }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.tts_settings;
+                    return Arrays.asList(sir);
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    final List<String> keys = super.getNonIndexableKeys(context);
+                    keys.add("tts_engine_preference");
+                    return keys;
+                }
+            };
 
 }

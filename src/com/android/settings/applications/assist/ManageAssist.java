@@ -51,13 +51,19 @@ public class ManageAssist extends DashboardFragment {
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return buildPreferenceControllers(context, getLifecycle());
     }
 
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.APPLICATIONS_MANAGE_ASSIST;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        use(AssistGestureSettingsPreferenceController.class).setAssistOnly(true);
     }
 
     @Override
@@ -73,8 +79,6 @@ public class ManageAssist extends DashboardFragment {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new DefaultAssistPreferenceController(context, "default_assist",
                 true /* showSetting */));
-        controllers.add(new AssistGestureSettingsPreferenceController(context, lifecycle,
-                KEY_ASSIST, true /* assistOnly */));
         controllers.add(new AssistContextPreferenceController(context, lifecycle));
         controllers.add(new AssistScreenshotPreferenceController(context, lifecycle));
         controllers.add(new AssistFlashScreenPreferenceController(context, lifecycle));
@@ -93,7 +97,7 @@ public class ManageAssist extends DashboardFragment {
                 }
 
                 @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(
+                public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     return buildPreferenceControllers(context, null /* lifecycle */);
                 }

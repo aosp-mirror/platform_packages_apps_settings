@@ -43,7 +43,7 @@ public class WallpaperTypeSettings extends SettingsPreferenceFragment implements
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_uri_wallpaper;
     }
 
@@ -67,7 +67,7 @@ public class WallpaperTypeSettings extends SettingsPreferenceFragment implements
         // Add Preference items for each of the matching activities
         for (ResolveInfo info : rList) {
             Preference pref = new Preference(getPrefContext());
-            Intent prefIntent = new Intent(intent);
+            Intent prefIntent = new Intent(intent).addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
             prefIntent.setComponent(new ComponentName(
                     info.activityInfo.packageName, info.activityInfo.name));
             pref.setIntent(prefIntent);
@@ -77,6 +77,16 @@ public class WallpaperTypeSettings extends SettingsPreferenceFragment implements
             pref.setIcon(info.loadIcon(pm));
             parent.addPreference(pref);
         }
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(Preference preference) {
+        if (preference.getIntent() == null) {
+            return super.onPreferenceTreeClick(preference);
+        }
+        startActivity(preference.getIntent());
+        finish();
+        return true;
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
@@ -102,11 +112,13 @@ public class WallpaperTypeSettings extends SettingsPreferenceFragment implements
 
                     SearchIndexableRaw data = new SearchIndexableRaw(context);
                     data.title = label.toString();
+                    data.key = "wallpaper_type_settings";
                     data.screenTitle = context.getResources().getString(
                             R.string.wallpaper_settings_fragment_title);
                     data.intentAction = Intent.ACTION_SET_WALLPAPER;
                     data.intentTargetPackage = info.activityInfo.packageName;
                     data.intentTargetClass = info.activityInfo.name;
+                    data.keywords = context.getString(R.string.keywords_wallpaper);
                     result.add(data);
                 }
 

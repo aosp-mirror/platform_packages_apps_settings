@@ -38,10 +38,14 @@ import android.util.IconDrawableFactory;
 import android.util.Log;
 
 import com.android.settings.R;
-import com.android.settings.Utils;
+import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.widget.AppPreference;
+import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.utils.StringUtil;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -143,7 +147,7 @@ public class RecentAppsPreferenceController extends AbstractPreferenceController
         refreshUi(mCategory.getContext());
         // Show total number of installed apps as See all's summary.
         new InstalledAppCounter(mContext, InstalledAppCounter.IGNORE_INSTALL_REASON,
-                new PackageManagerWrapperImpl(mContext.getPackageManager())) {
+                new PackageManagerWrapper(mContext.getPackageManager())) {
             @Override
             protected void onCountComplete(int num) {
                 if (mHasRecentApps) {
@@ -229,21 +233,19 @@ public class RecentAppsPreferenceController extends AbstractPreferenceController
             boolean rebindPref = true;
             Preference pref = appPreferences.remove(pkgName);
             if (pref == null) {
-                pref = new Preference(prefContext);
+                pref = new AppPreference(prefContext);
                 rebindPref = false;
             }
             pref.setKey(pkgName);
             pref.setTitle(appEntry.label);
             pref.setIcon(mIconDrawableFactory.getBadgedIcon(appEntry.info));
-            pref.setSummary(TextUtils.expandTemplate(
-                mContext.getResources().getText(R.string.recent_app_summary),
-                Utils.formatElapsedTime(mContext,
-                    System.currentTimeMillis() - stat.getLastTimeUsed(), false)));
+            pref.setSummary(StringUtil.formatRelativeTime(mContext,
+                    System.currentTimeMillis() - stat.getLastTimeUsed(), false));
             pref.setOrder(i);
             pref.setOnPreferenceClickListener(preference -> {
-                AppInfoBase.startAppInfoFragment(InstalledAppDetails.class,
-                        R.string.application_info_label, pkgName, appEntry.info.uid, mHost,
-                        1001 /*RequestCode*/, SETTINGS_APP_NOTIF_CATEGORY);
+                AppInfoBase.startAppInfoFragment(AppInfoDashboardFragment.class,
+                    R.string.application_info_label, pkgName, appEntry.info.uid, mHost,
+                    1001 /*RequestCode*/, SETTINGS_APP_NOTIF_CATEGORY);
                 return true;
             });
             if (!rebindPref) {
@@ -311,9 +313,13 @@ public class RecentAppsPreferenceController extends AbstractPreferenceController
                 .setPackage(pkgName);
 
         if (mPm.resolveActivity(launchIntent, 0) == null) {
-            // Not visible on launcher -> likely not a user visible app, skip
-            Log.d(TAG, "Not a user visible app, skipping " + pkgName);
-            return false;
+            // Not visible on launcher -> likely not a user visible app, skip if non-instant.
+            final ApplicationsState.AppEntry appEntry =
+                    mApplicationsState.getEntry(pkgName, mUserId);
+            if (appEntry == null || appEntry.info == null || !AppUtils.isInstant(appEntry.info)) {
+                Log.d(TAG, "Not a user visible or instant app, skipping " + pkgName);
+                return false;
+            }
         }
         return true;
     }

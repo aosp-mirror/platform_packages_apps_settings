@@ -16,20 +16,17 @@
 
 package com.android.settings.applications.assist;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ManageAssistTest {
 
     private ManageAssist mSettings;
@@ -52,8 +49,6 @@ public class ManageAssistTest {
 
     @Test
     public void testGetPreferenceScreenResId() {
-        assertThat(mSettings.getPreferenceScreenResId())
-                .isEqualTo(R.xml.manage_assist);
+        assertThat(mSettings.getPreferenceScreenResId()).isEqualTo(R.xml.manage_assist);
     }
-
 }

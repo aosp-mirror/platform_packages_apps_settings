@@ -52,6 +52,7 @@ public class ToggleFontSizePreferenceFragment extends PreviewSeekBarPreferenceFr
         for (int i = 0; i < strEntryValues.length; ++i) {
             mValues[i] = Float.parseFloat(strEntryValues[i]);
         }
+        getActivity().setTitle(R.string.title_font_size);
     }
 
     @Override

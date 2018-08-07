@@ -15,14 +15,12 @@
  */
 package com.android.settings.dashboard.conditional;
 
-import android.app.ActivityManager;
 import android.app.NotificationManager;
-import android.app.StatusBarManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.drawable.Icon;
+import android.graphics.drawable.Drawable;
 import android.os.PersistableBundle;
 import android.provider.Settings;
 import android.provider.Settings.Global;
@@ -31,6 +29,8 @@ import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.notification.ZenModeSettings;
 
 public class DndCondition extends Condition {
 
@@ -42,9 +42,10 @@ public class DndCondition extends Condition {
     @VisibleForTesting
     static final IntentFilter DND_FILTER =
         new IntentFilter(NotificationManager.ACTION_INTERRUPTION_FILTER_CHANGED_INTERNAL);
+    @VisibleForTesting
+    protected ZenModeConfig mConfig;
 
     private int mZen;
-    private ZenModeConfig mConfig;
     private final Receiver mReceiver;
 
     public DndCondition(ConditionManager manager) {
@@ -80,37 +81,20 @@ public class DndCondition extends Condition {
         mZen = bundle.getInt(KEY_STATE, Global.ZEN_MODE_OFF);
     }
 
-    private CharSequence getZenState() {
-        switch (mZen) {
-            case Settings.Global.ZEN_MODE_ALARMS:
-                return mManager.getContext().getString(R.string.zen_mode_option_alarms);
-            case Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS:
-                return mManager.getContext().getString(
-                        R.string.zen_mode_option_important_interruptions);
-            case Settings.Global.ZEN_MODE_NO_INTERRUPTIONS:
-                return mManager.getContext().getString(R.string.zen_mode_option_no_interruptions);
-        }
-        return null;
-    }
-
     @Override
-    public Icon getIcon() {
-        return Icon.createWithResource(mManager.getContext(), R.drawable.ic_zen);
+    public Drawable getIcon() {
+        return mManager.getContext().getDrawable(R.drawable.ic_do_not_disturb_on_24dp);
     }
 
     @Override
     public CharSequence getTitle() {
-        return mManager.getContext().getString(R.string.condition_zen_title, getZenState());
+        return mManager.getContext().getString(R.string.condition_zen_title);
     }
 
     @Override
     public CharSequence getSummary() {
-        final boolean isForever = mConfig != null && mConfig.manualRule != null
-                && mConfig.manualRule.conditionId == null;
-        return isForever ? mManager.getContext().getString(com.android.internal.R.string.zen_mode_forever_dnd)
-                : ZenModeConfig.getConditionSummary(mManager.getContext(), mConfig,
-                ActivityManager.getCurrentUser(),
-                false);
+        return ZenModeConfig.getDescription(mManager.getContext(), mZen != Global.ZEN_MODE_OFF,
+                mConfig, true);
     }
 
     @Override
@@ -120,8 +104,12 @@ public class DndCondition extends Condition {
 
     @Override
     public void onPrimaryClick() {
-        StatusBarManager statusBar = mManager.getContext().getSystemService(StatusBarManager.class);
-        statusBar.expandSettingsPanel("dnd");
+        new SubSettingLauncher(mManager.getContext())
+                .setDestination(ZenModeSettings.class.getName())
+                .setSourceMetricsCategory(MetricsEvent.DASHBOARD_SUMMARY)
+                .setTitle(R.string.zen_mode_settings_title)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                .launch();
     }
 
     @Override
@@ -165,7 +153,9 @@ public class DndCondition extends Condition {
 
     @Override
     public void onPause() {
-        mManager.getContext().unregisterReceiver(mReceiver);
-        mRegistered = false;
+        if (mRegistered) {
+            mManager.getContext().unregisterReceiver(mReceiver);
+            mRegistered = false;
+        }
     }
 }

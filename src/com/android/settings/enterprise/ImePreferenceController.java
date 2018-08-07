@@ -15,21 +15,21 @@
 package com.android.settings.enterprise;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.core.DynamicAvailabilityPreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-public class ImePreferenceController extends DynamicAvailabilityPreferenceController {
+public class ImePreferenceController extends AbstractPreferenceController implements
+        PreferenceControllerMixin {
 
     private static final String KEY_INPUT_METHOD = "input_method";
     private final EnterprisePrivacyFeatureProvider mFeatureProvider;
 
-    public ImePreferenceController(Context context, Lifecycle lifecycle) {
-        super(context, lifecycle);
+    public ImePreferenceController(Context context) {
+        super(context);
         mFeatureProvider = FeatureFactory.getFactory(context)
                 .getEnterprisePrivacyFeatureProvider(context);
     }
@@ -37,15 +37,13 @@ public class ImePreferenceController extends DynamicAvailabilityPreferenceContro
     @Override
     public void updateState(Preference preference) {
         preference.setSummary(mContext.getResources().getString(
-            R.string.enterprise_privacy_input_method_name,
-            mFeatureProvider.getImeLabelIfOwnerSet()));
+                R.string.enterprise_privacy_input_method_name,
+                mFeatureProvider.getImeLabelIfOwnerSet()));
     }
 
     @Override
     public boolean isAvailable() {
-        final boolean available = mFeatureProvider.getImeLabelIfOwnerSet() != null;
-        notifyOnAvailabilityUpdate(available);
-        return available;
+        return mFeatureProvider.getImeLabelIfOwnerSet() != null;
     }
 
     @Override

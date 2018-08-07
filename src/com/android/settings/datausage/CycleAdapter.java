@@ -26,10 +26,9 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settingslib.net.ChartData;
 
-import libcore.util.Objects;
-
 import java.time.ZonedDateTime;
 import java.util.Iterator;
+import java.util.Objects;
 
 public class CycleAdapter extends ArrayAdapter<CycleAdapter.CycleItem> {
 
@@ -142,7 +141,7 @@ public class CycleAdapter extends ArrayAdapter<CycleAdapter.CycleItem> {
             // only force-update cycle when changed; skipping preserves any
             // user-defined inspection region.
             final CycleAdapter.CycleItem selectedItem = getItem(position);
-            if (!Objects.equal(selectedItem, previousItem)) {
+            if (!Objects.equals(selectedItem, previousItem)) {
                 mListener.onItemSelected(null, null, position, 0);
                 return false;
             }

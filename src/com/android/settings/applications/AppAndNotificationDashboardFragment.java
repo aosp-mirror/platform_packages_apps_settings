@@ -48,13 +48,7 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mProgressiveDisclosureMixin.setTileLimit(4);
-    }
-
-    @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_url_apps_and_notifications;
     }
 
@@ -64,7 +58,7 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment {
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final Activity activity = getActivity();
         final Application app;
         if (activity != null) {
@@ -81,7 +75,6 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment {
         controllers.add(new EmergencyBroadcastPreferenceController(context,
                 "app_and_notif_cell_broadcast_settings"));
         controllers.add(new SpecialAppAccessPreferenceController(context));
-        controllers.add(new AppPermissionsPreferenceController(context));
         controllers.add(new RecentAppsPreferenceController(context, app, host));
         return controllers;
     }
@@ -97,7 +90,7 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment {
                 }
 
                 @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(
+                public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     return buildPreferenceControllers(context, null, null /* host */);
                 }

@@ -20,91 +20,40 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.preference.DropDownPreference;
+import android.provider.SearchIndexableResource;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.TwoStatePreference;
-import android.widget.TimePicker;
 
-import com.android.internal.app.NightDisplayController;
+import com.android.internal.app.ColorDisplayController;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.widget.SeekBarPreference;
-import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-import java.text.DateFormat;
 import java.time.LocalTime;
-import java.util.Calendar;
-import java.util.TimeZone;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Settings screen for Night display.
  */
-public class NightDisplaySettings extends SettingsPreferenceFragment
-        implements NightDisplayController.Callback, Preference.OnPreferenceChangeListener {
+public class NightDisplaySettings extends DashboardFragment
+        implements ColorDisplayController.Callback, Indexable {
 
-    private static final String KEY_NIGHT_DISPLAY_AUTO_MODE = "night_display_auto_mode";
-    private static final String KEY_NIGHT_DISPLAY_START_TIME = "night_display_start_time";
-    private static final String KEY_NIGHT_DISPLAY_END_TIME = "night_display_end_time";
-    private static final String KEY_NIGHT_DISPLAY_ACTIVATED = "night_display_activated";
-    private static final String KEY_NIGHT_DISPLAY_TEMPERATURE = "night_display_temperature";
+    private static final String TAG = "NightDisplaySettings";
 
     private static final int DIALOG_START_TIME = 0;
     private static final int DIALOG_END_TIME = 1;
 
-    private NightDisplayController mController;
-    private DateFormat mTimeFormatter;
-
-    private DropDownPreference mAutoModePreference;
-    private Preference mStartTimePreference;
-    private Preference mEndTimePreference;
-    private TwoStatePreference mActivatedPreference;
-    private SeekBarPreference mTemperaturePreference;
+    private ColorDisplayController mController;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         final Context context = getContext();
-        mController = new NightDisplayController(context);
-
-        mTimeFormatter = android.text.format.DateFormat.getTimeFormat(context);
-        mTimeFormatter.setTimeZone(TimeZone.getTimeZone("UTC"));
-
-        mTemperaturePreference.setMax(convertTemperature(mController.getMinimumColorTemperature()));
-        mTemperaturePreference.setContinuousUpdates(true);
-    }
-
-    @Override
-    protected int getHelpResource() {
-        return R.string.help_url_night_display;
-    }
-
-    @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        super.onCreatePreferences(savedInstanceState, rootKey);
-
-        // Load the preferences from xml.
-        addPreferencesFromResource(R.xml.night_display_settings);
-        mFooterPreferenceMixin.createFooterPreference().setTitle(R.string.night_display_text);
-        mAutoModePreference = (DropDownPreference) findPreference(KEY_NIGHT_DISPLAY_AUTO_MODE);
-        mStartTimePreference = findPreference(KEY_NIGHT_DISPLAY_START_TIME);
-        mEndTimePreference = findPreference(KEY_NIGHT_DISPLAY_END_TIME);
-        mActivatedPreference = (TwoStatePreference) findPreference(KEY_NIGHT_DISPLAY_ACTIVATED);
-        mTemperaturePreference = (SeekBarPreference) findPreference(KEY_NIGHT_DISPLAY_TEMPERATURE);
-
-        mAutoModePreference.setEntries(new CharSequence[] {
-                getString(R.string.night_display_auto_mode_never),
-                getString(R.string.night_display_auto_mode_custom),
-                getString(R.string.night_display_auto_mode_twilight)
-        });
-        mAutoModePreference.setEntryValues(new CharSequence[] {
-                String.valueOf(NightDisplayController.AUTO_MODE_DISABLED),
-                String.valueOf(NightDisplayController.AUTO_MODE_CUSTOM),
-                String.valueOf(NightDisplayController.AUTO_MODE_TWILIGHT)
-        });
-        mAutoModePreference.setOnPreferenceChangeListener(this);
-        mActivatedPreference.setOnPreferenceChangeListener(this);
-        mTemperaturePreference.setOnPreferenceChangeListener(this);
+        mController = new ColorDisplayController(context);
     }
 
     @Override
@@ -113,13 +62,6 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
 
         // Listen for changes only while visible.
         mController.setListener(this);
-
-        // Update the current state since it have changed while not visible.
-        onActivated(mController.isActivated());
-        onAutoModeChanged(mController.getAutoMode());
-        onCustomStartTimeChanged(mController.getCustomStartTime());
-        onCustomEndTimeChanged(mController.getCustomEndTime());
-        onColorTemperatureChanged(mController.getColorTemperature());
     }
 
     @Override
@@ -132,11 +74,11 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
-        if (preference == mStartTimePreference) {
-            showDialog(DIALOG_START_TIME);
-            return true;
-        } else if (preference == mEndTimePreference) {
+        if ("night_display_end_time".equals(preference.getKey())) {
             showDialog(DIALOG_END_TIME);
+            return true;
+        } else if ("night_display_start_time".equals(preference.getKey())) {
+            showDialog(DIALOG_START_TIME);
             return true;
         }
         return super.onPreferenceTreeClick(preference);
@@ -154,15 +96,12 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
 
             final Context context = getContext();
             final boolean use24HourFormat = android.text.format.DateFormat.is24HourFormat(context);
-            return new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
-                @Override
-                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    final LocalTime time = LocalTime.of(hourOfDay, minute);
-                    if (dialogId == DIALOG_START_TIME) {
-                        mController.setCustomStartTime(time);
-                    } else {
-                        mController.setCustomEndTime(time);
-                    }
+            return new TimePickerDialog(context, (view, hourOfDay, minute) -> {
+                final LocalTime time = LocalTime.of(hourOfDay, minute);
+                if (dialogId == DIALOG_START_TIME) {
+                    mController.setCustomStartTime(time);
+                } else {
+                    mController.setCustomEndTime(time);
                 }
             }, initialTime.getHour(), initialTime.getMinute(), use24HourFormat);
         }
@@ -183,67 +122,86 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
 
     @Override
     public void onActivated(boolean activated) {
-        mActivatedPreference.setChecked(activated);
-        mTemperaturePreference.setEnabled(activated);
+        // Update activated and temperature preferences.
+        updatePreferenceStates();
     }
 
     @Override
     public void onAutoModeChanged(int autoMode) {
-        mAutoModePreference.setValue(String.valueOf(autoMode));
-
-        final boolean showCustomSchedule = autoMode == NightDisplayController.AUTO_MODE_CUSTOM;
-        mStartTimePreference.setVisible(showCustomSchedule);
-        mEndTimePreference.setVisible(showCustomSchedule);
+        // Update auto mode, start time, and end time preferences.
+        updatePreferenceStates();
     }
 
     @Override
     public void onColorTemperatureChanged(int colorTemperature) {
-        mTemperaturePreference.setProgress(convertTemperature(colorTemperature));
-    }
-
-    private String getFormattedTimeString(LocalTime localTime) {
-        final Calendar c = Calendar.getInstance();
-        c.setTimeZone(mTimeFormatter.getTimeZone());
-        c.set(Calendar.HOUR_OF_DAY, localTime.getHour());
-        c.set(Calendar.MINUTE, localTime.getMinute());
-        c.set(Calendar.SECOND, 0);
-        c.set(Calendar.MILLISECOND, 0);
-        return mTimeFormatter.format(c.getTime());
-    }
-
-    /**
-     * Inverts and range-adjusts a raw value from the SeekBar (i.e. [0, maxTemp-minTemp]), or
-     * converts an inverted and range-adjusted value to the raw SeekBar value, depending on the
-     * adjustment status of the input.
-     */
-    private int convertTemperature(int temperature) {
-        return mController.getMaximumColorTemperature() - temperature;
+        // Update temperature preference.
+        updatePreferenceStates();
     }
 
     @Override
     public void onCustomStartTimeChanged(LocalTime startTime) {
-        mStartTimePreference.setSummary(getFormattedTimeString(startTime));
+        // Update start time preference.
+        updatePreferenceStates();
     }
 
     @Override
     public void onCustomEndTimeChanged(LocalTime endTime) {
-        mEndTimePreference.setSummary(getFormattedTimeString(endTime));
+        // Update end time preference.
+        updatePreferenceStates();
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mAutoModePreference) {
-            return mController.setAutoMode(Integer.parseInt((String) newValue));
-        } else if (preference == mActivatedPreference) {
-            return mController.setActivated((Boolean) newValue);
-        } else if (preference == mTemperaturePreference) {
-            return mController.setColorTemperature(convertTemperature((Integer) newValue));
-        }
-        return false;
+    protected int getPreferenceScreenResId() {
+        return R.xml.night_display_settings;
     }
 
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.NIGHT_DISPLAY_SETTINGS;
     }
+
+    @Override
+    public int getHelpResource() {
+        return R.string.help_url_night_display;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
+    }
+
+    @Override
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        return buildPreferenceControllers(context);
+    }
+
+    private static List <AbstractPreferenceController> buildPreferenceControllers(Context context) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>(1);
+        controllers.add(new NightDisplayFooterPreferenceController(context));
+        return controllers;
+    }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    final ArrayList<SearchIndexableResource> result = new ArrayList<>();
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.night_display_settings;
+                    result.add(sir);
+                    return result;
+                }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return ColorDisplayController.isAvailable(context);
+                }
+
+                @Override
+                public List<AbstractPreferenceController> createPreferenceControllers(
+                    Context context) {
+                    return buildPreferenceControllers(context);
+                }
+            };
 }

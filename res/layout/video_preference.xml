@@ -23,13 +23,13 @@
     android:clipToPadding="false"
     android:gravity="center"
     android:minHeight="?android:attr/listPreferredItemHeightSmall"
-    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:importantForAccessibility="noHideDescendants">
 
     <com.android.settings.widget.AspectRatioFrameLayout
-        android:layout_width="240dp"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/gesture_animation_padding">
+        android:id="@+id/video_container"
+        android:layout_width="wrap_content"
+        android:layout_height="240dp">
 
         <TextureView
             android:id="@+id/video_texture_view"

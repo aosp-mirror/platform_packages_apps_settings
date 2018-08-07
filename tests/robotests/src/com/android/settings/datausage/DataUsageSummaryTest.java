@@ -18,39 +18,53 @@ package com.android.settings.datausage;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.endsWith;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
+import android.app.Activity;
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.wifi.WifiConfiguration;
-import android.net.wifi.WifiManager;
-import com.android.settings.R;
-import com.android.settings.TestConfig;
+import android.net.NetworkPolicyManager;
+
+import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.XmlTestUtils;
-import com.android.settings.testutils.shadow.ShadowConnectivityManager;
-import com.android.settingslib.NetworkPolicyEditor;
-import java.util.ArrayList;
-import java.util.List;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
+import com.android.settings.testutils.shadow.ShadowDashboardFragment;
+import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
+import com.android.settings.testutils.shadow.ShadowUtils;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
-import org.robolectric.util.ReflectionHelpers;
 
+@Config(shadows = {
+    SettingsShadowResourcesImpl.class,
+    SettingsShadowResources.SettingsShadowTheme.class,
+    ShadowUtils.class,
+    ShadowDataUsageUtils.class,
+    ShadowDashboardFragment.class
+})
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DataUsageSummaryTest {
-    @Mock private ConnectivityManager mManager;
+
+    @Mock
+    private SummaryLoader mSummaryLoader;
+    @Mock
+    private NetworkPolicyManager mNetworkPolicyManager;
     private Context mContext;
+    private Activity mActivity;
+    private SummaryLoader.SummaryProvider mSummaryProvider;
 
     /**
      * This set up is contrived to get a passing test so that the build doesn't block without tests.
@@ -61,25 +75,95 @@ public class DataUsageSummaryTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         ShadowApplication shadowContext = ShadowApplication.getInstance();
-        shadowContext.setSystemService(Context.CONNECTIVITY_SERVICE, mManager);
+        shadowContext.setSystemService(Context.NETWORK_POLICY_SERVICE, mNetworkPolicyManager);
+
         mContext = shadowContext.getApplicationContext();
-        when(mManager.isNetworkSupported(anyInt())).thenReturn(true);
+        mActivity = spy(Robolectric.buildActivity(Activity.class).get());
+
+        mSummaryProvider = DataUsageSummary.SUMMARY_PROVIDER_FACTORY
+                .createSummaryProvider(mActivity, mSummaryLoader);
     }
 
     @Test
-    public void testUpdateNetworkRestrictionSummary_shouldSetSummary() {
+    public void formatUsage_shouldLookLikeFormatFileSize() {
+        SettingsShadowResources.overrideResource(com.android.internal.R.string.fileSizeSuffix,
+                "%1$s %2$s");
+        final long usage = 2147483648L; // 2GB
+        final String formattedUsage =
+                DataUsageSummary.formatUsage(mContext, "^1", usage).toString();
+        final CharSequence formattedInIECUnit = DataUsageUtils.formatDataUsage(mContext, usage);
+        assertThat(formattedUsage).isEqualTo(formattedInIECUnit);
+    }
+
+    @Test
+    public void setListening_shouldBlankSummaryWithNoSim() {
+        ShadowDataUsageUtils.HAS_SIM = false;
+        mSummaryProvider.setListening(true);
+        verify(mSummaryLoader).setSummary(mSummaryProvider, null);
+    }
+
+    @Test
+    public void setListening_shouldSetSummaryWithSim() {
+        ShadowDataUsageUtils.HAS_SIM = true;
+        mSummaryProvider.setListening(true);
+        verify(mSummaryLoader).setSummary(anyObject(), endsWith(" of data used"));
+    }
+
+    @Test
+    public void configuration_withSim_shouldShowMobileAndWifi() {
+        ShadowDataUsageUtils.IS_MOBILE_DATA_SUPPORTED = true;
+        ShadowDataUsageUtils.IS_WIFI_SUPPORTED = true;
+        ShadowDataUsageUtils.DEFAULT_SUBSCRIPTION_ID = 1;
+        ShadowDataUsageUtils.HAS_SIM = true;
+
         final DataUsageSummary dataUsageSummary = spy(new DataUsageSummary());
-        final NetworkRestrictionsPreference preference = mock(NetworkRestrictionsPreference.class);
-        final NetworkPolicyEditor policyEditor = mock(NetworkPolicyEditor.class);
-        final WifiManager wifiManager = mock(WifiManager.class);
-        ReflectionHelpers.setField(dataUsageSummary, "mPolicyEditor", policyEditor);
-        ReflectionHelpers.setField(dataUsageSummary, "mWifiManager", wifiManager);
-        when(wifiManager.getConfiguredNetworks()).thenReturn(new ArrayList<WifiConfiguration>());
-        doReturn(mContext.getResources()).when(dataUsageSummary).getResources();
+        doReturn(mContext).when(dataUsageSummary).getContext();
 
-        dataUsageSummary.updateNetworkRestrictionSummary(preference);
+        doReturn(true).when(dataUsageSummary).removePreference(anyString());
+        doNothing().when(dataUsageSummary).addWifiSection();
+        doNothing().when(dataUsageSummary).addMobileSection(1);
 
-        verify(preference).setSummary(mContext.getResources().getQuantityString(
-            R.plurals.network_restrictions_summary, 0, 0));
+        dataUsageSummary.onCreate(null);
+
+        verify(dataUsageSummary).addWifiSection();
+        verify(dataUsageSummary).addMobileSection(anyInt());
+    }
+
+    @Test
+    public void configuration_withoutSim_shouldShowWifiSectionOnly() {
+        ShadowDataUsageUtils.IS_MOBILE_DATA_SUPPORTED = true;
+        ShadowDataUsageUtils.IS_WIFI_SUPPORTED = true;
+        ShadowDataUsageUtils.HAS_SIM = false;
+
+        final DataUsageSummary dataUsageSummary = spy(new DataUsageSummary());
+        doReturn(mContext).when(dataUsageSummary).getContext();
+
+        doReturn(true).when(dataUsageSummary).removePreference(anyString());
+        doNothing().when(dataUsageSummary).addWifiSection();
+        doNothing().when(dataUsageSummary).addMobileSection(1);
+
+        dataUsageSummary.onCreate(null);
+
+        verify(dataUsageSummary).addWifiSection();
+        verify(dataUsageSummary, never()).addMobileSection(anyInt());
+    }
+
+    @Test
+    public void configuration_withoutMobile_shouldShowWifiSectionOnly() {
+        ShadowDataUsageUtils.IS_MOBILE_DATA_SUPPORTED = false;
+        ShadowDataUsageUtils.IS_WIFI_SUPPORTED = true;
+        ShadowDataUsageUtils.HAS_SIM = false;
+
+        final DataUsageSummary dataUsageSummary = spy(new DataUsageSummary());
+        doReturn(mContext).when(dataUsageSummary).getContext();
+
+        doReturn(true).when(dataUsageSummary).removePreference(anyString());
+        doNothing().when(dataUsageSummary).addWifiSection();
+        doNothing().when(dataUsageSummary).addMobileSection(1);
+
+        dataUsageSummary.onCreate(null);
+
+        verify(dataUsageSummary).addWifiSection();
+        verify(dataUsageSummary, never()).addMobileSection(anyInt());
     }
 }

@@ -235,11 +235,20 @@
         <item>@string/wifi_security_psk_generic</item>
     </string-array>
 
-   <!-- Wi-Fi AP settings.  The type of security a Wi-Fi AP supports. -->
-   <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
-    <string-array name="wifi_ap_security">
-        <item>@string/wifi_security_none</item>
+    <!-- Security types for wireless tether -->
+    <string-array name="wifi_tether_security">
+        <!-- Do not translate. -->
         <item>@string/wifi_security_wpa2</item>
+        <!-- Do not translate. -->
+        <item>@string/wifi_security_none</item>
+    </string-array>
+
+    <!-- Values for security type for wireless tether -->
+    <string-array name="wifi_tether_security_values">
+        <!-- Do not translate. -->
+        <item>4</item>
+        <!-- Do not translate. -->
+        <item>0</item>
     </string-array>
 
     <!-- Match this with the constants in WifiDialog. --> <skip />
@@ -273,14 +282,20 @@
         <item>PWD</item>
     </string-array>
 
-   <!-- Wi-Fi AP band settings.  Either 2.4GHz or 5GHz. -->
+   <!-- Wi-Fi AP band settings.  Either Auto, 2.4GHz or 5GHz. -->
    <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
     <string-array name="wifi_ap_band_config_full">
         <item>@string/wifi_ap_choose_2G</item>
         <item>@string/wifi_ap_choose_5G</item>
     </string-array>
 
+    <string-array name="wifi_ap_band_summary_full">
+        <item>@string/wifi_ap_2G</item>
+        <item>@string/wifi_ap_5G</item>
+    </string-array>
+
     <string-array name="wifi_ap_band_config_2G_only">
+        <item>@string/wifi_ap_choose_auto</item>
         <item>@string/wifi_ap_choose_2G</item>
     </string-array>
 
@@ -992,6 +1007,8 @@
         <item>0</item>
         <item>5</item>
         <item>15</item>
+        <item>50</item>
+        <item>100</item>
     </integer-array>
 
     <!-- Process stats memory use details: labels for memory states -->
@@ -1056,6 +1073,78 @@
         <item>while_docked_only</item>
         <item>either_charging_or_docked</item>
         <item>never</item>
+    </string-array>
+
+    <string-array name="zen_mode_contacts_entries" translatable="false">
+        <item>@string/zen_mode_from_anyone</item>
+        <item>@string/zen_mode_from_contacts</item>
+        <item>@string/zen_mode_from_starred</item>
+        <item>@string/zen_mode_from_none</item>
+    </string-array>
+
+    <string-array name="zen_mode_contacts_values" translatable="false">
+        <item>zen_mode_from_anyone</item>
+        <item>zen_mode_from_contacts</item>
+        <item>zen_mode_from_starred</item>
+        <item>zen_mode_from_none</item>
+    </string-array>
+
+    <string-array name="wifi_metered_entries">
+        <item>Detect automatically</item>
+        <item>Treat as metered</item>
+        <item>Treat as unmetered</item>
+    </string-array>
+
+    <string-array name="wifi_hidden_entries">
+        <item>No</item>
+        <item>Yes</item>
+    </string-array>
+
+    <string-array name="wifi_metered_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- Titles for ui dark mode preference. -->
+    <string-array name="dark_ui_mode_entries" >
+        <item>Automatic (based on time of day)</item>
+        <item>Always on</item>
+        <item>Always off</item>
+    </string-array>
+
+    <!-- Values for ui dark mode preference. -->
+    <string-array name="dark_ui_mode_values" translatable="false" >
+        <item>auto</item>
+        <item>yes</item>
+        <item>no</item>
+    </string-array>
+
+    <!-- Titles for SystemUI theme preference. -->
+    <string-array name="systemui_theme_entries" >
+        <item>@string/systemui_theme_wallpaper</item>
+        <item>@string/systemui_theme_light</item>
+        <item>@string/systemui_theme_dark</item>
+    </string-array>
+
+    <!-- Values for SystemUI theme preference. -->
+    <string-array name="systemui_theme_values" translatable="false" >
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="gesture_prevent_ringing_entries" translatable="false">
+        <item>@string/prevent_ringing_option_vibrate</item>
+        <item>@string/prevent_ringing_option_mute</item>
+        <item>@string/prevent_ringing_option_none</item>
+    </string-array>
+
+    <!-- Keep in sync with Settings.Secure.VOLUME_HUSH_* -->
+    <string-array name="gesture_prevent_ringing_values" translatable="false">
+        <item>1</item>
+        <item>2</item>
+        <item>0</item>
     </string-array>
 
 </resources>

@@ -16,14 +16,15 @@
 
 package com.android.settings.enterprise;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
-import com.android.settings.R;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-import com.android.settings.core.PreferenceAvailabilityObserver;
+import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,17 +32,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-/**
- * Tests for {@link AlwaysOnVpnCurrentUserPreferenceController}.
- */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class AlwaysOnVpnCurrentUserPreferenceControllerTest {
 
     private static final String VPN_SET_DEVICE = "VPN set";
@@ -51,27 +43,18 @@ public final class AlwaysOnVpnCurrentUserPreferenceControllerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     private FakeFeatureFactory mFeatureFactory;
-    @Mock private PreferenceAvailabilityObserver mObserver;
 
     private AlwaysOnVpnCurrentUserPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-        mController = new AlwaysOnVpnCurrentUserPreferenceController(mContext,
-                null /* lifecycle */);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
+        mController = new AlwaysOnVpnCurrentUserPreferenceController(mContext);
         when(mContext.getString(R.string.enterprise_privacy_always_on_vpn_device))
                 .thenReturn(VPN_SET_DEVICE);
         when(mContext.getString(R.string.enterprise_privacy_always_on_vpn_personal))
                 .thenReturn(VPN_SET_PERSONAL);
-        mController.setAvailabilityObserver(mObserver);
-    }
-
-    @Test
-    public void testGetAvailabilityObserver() {
-        assertThat(mController.getAvailabilityObserver()).isEqualTo(mObserver);
     }
 
     @Test
@@ -95,12 +78,10 @@ public final class AlwaysOnVpnCurrentUserPreferenceControllerTest {
         when(mFeatureFactory.enterprisePrivacyFeatureProvider.isAlwaysOnVpnSetInCurrentUser())
                 .thenReturn(false);
         assertThat(mController.isAvailable()).isFalse();
-        verify(mObserver).onPreferenceAvailabilityUpdated(KEY_ALWAYS_ON_VPN_PRIMARY_USER, false);
 
         when(mFeatureFactory.enterprisePrivacyFeatureProvider.isAlwaysOnVpnSetInCurrentUser())
                 .thenReturn(true);
         assertThat(mController.isAvailable()).isTrue();
-        verify(mObserver).onPreferenceAvailabilityUpdated(KEY_ALWAYS_ON_VPN_PRIMARY_USER, true);
     }
 
     @Test

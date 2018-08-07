@@ -14,33 +14,29 @@
      limitations under the License.
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
->
-
+    android:paddingStart="@dimen/preference_no_icon_padding_start"
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+    android:orientation="vertical">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dip"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
-        android:layout_weight="1"
-    >
+        android:layout_weight="1">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-        >
+            android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dip"
                 android:layout_marginBottom="16dip"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/crypt_keeper_desc"
-            />
+                android:text="@string/crypt_keeper_desc" />
             <TextView
                 android:id="@+id/warning_low_charge"
                 android:layout_width="match_parent"
@@ -49,8 +45,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textStyle="bold"
                 android:text="@string/crypt_keeper_low_charge_text"
-                android:visibility="gone"
-            />
+                android:visibility="gone" />
             <TextView
                 android:id="@+id/warning_unplugged"
                 android:layout_width="match_parent"
@@ -59,20 +54,14 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textStyle="bold"
                 android:text="@string/crypt_keeper_unplugged_text"
-                android:visibility="gone"
-            />
+                android:visibility="gone" />
         </LinearLayout>
-
     </ScrollView>
     <Button
         android:id="@+id/initiate_encrypt"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dip"
-        android:layout_marginBottom="16dip"
+        style="@style/ActionPrimaryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/crypt_keeper_button_text"
-        android:gravity="center" 
-    />
-
+        android:layout_gravity="end"
+        android:text="@string/crypt_keeper_button_text" />
 </LinearLayout>

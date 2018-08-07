@@ -36,6 +36,10 @@ import android.util.Log;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.NetworkPolicyEditor;
 
+/**
+ * @deprecated please use {@link DataUsageBaseFragment} instead.
+ */
+@Deprecated
 public abstract class DataUsageBase extends SettingsPreferenceFragment {
     private static final String TAG = "DataUsageBase";
     private static final String ETHERNET = "ethernet";

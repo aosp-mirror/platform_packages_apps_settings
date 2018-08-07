@@ -16,6 +16,7 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="device_status_screen"
     android:title="@string/device_status_activity_title">
 
     <Preference
@@ -83,10 +84,9 @@
         android:summary="@string/summary_placeholder"
         android:persistent="false" />
     <Preference
-        android:key="wimax_mac_address"
+        android:key="ims_reg_state"
         android:enabled="false"
         android:shouldDisableView="false"
-        android:title="@string/status_wimax_mac_address"
-        android:summary="@string/summary_placeholder"
+        android:title="@string/ims_reg_title"
         android:persistent="false" />
 </PreferenceScreen>

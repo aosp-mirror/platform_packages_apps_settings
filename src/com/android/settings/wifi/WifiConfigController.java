@@ -55,12 +55,14 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.settings.ProxySelector;
 import com.android.settings.R;
-import com.android.settings.Utils;
+import com.android.settingslib.Utils;
+import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.wifi.AccessPoint;
 
 import java.net.Inet4Address;
@@ -87,6 +89,10 @@ public class WifiConfigController implements TextWatcher,
     /* This value comes from "wifi_ip_settings" resource array */
     private static final int DHCP = 0;
     private static final int STATIC_IP = 1;
+
+    /* Constants used for referring to the hidden state of a network. */
+    public static final int HIDDEN_NETWORK = 1;
+    public static final int NOT_HIDDEN_NETWORK = 0;
 
     /* These values come from "wifi_proxy_settings" resource array */
     public static final int PROXY_NONE = 0;
@@ -116,8 +122,6 @@ public class WifiConfigController implements TextWatcher,
     /* Full list of phase2 methods */
     private final ArrayAdapter<String> mPhase2FullAdapter;
 
-    private final Handler mTextViewChangedHandler;
-
     // e.g. AccessPoint.SECURITY_NONE
     private int mAccessPointSecurity;
     private TextView mPasswordView;
@@ -128,6 +132,7 @@ public class WifiConfigController implements TextWatcher,
     private String mDoNotProvideEapUserCertString;
     private String mDoNotValidateEapServerString;
 
+    private ScrollView mDialogContainer;
     private Spinner mSecuritySpinner;
     private Spinner mEapMethodSpinner;
     private Spinner mEapCaCertSpinner;
@@ -147,11 +152,13 @@ public class WifiConfigController implements TextWatcher,
     private TextView mDns2View;
 
     private Spinner mProxySettingsSpinner;
+    private Spinner mMeteredSettingsSpinner;
+    private Spinner mHiddenSettingsSpinner;
+    private TextView mHiddenWarningView;
     private TextView mProxyHostView;
     private TextView mProxyPortView;
     private TextView mProxyExclusionListView;
     private TextView mProxyPacView;
-
     private CheckBox mSharedCheckBox;
 
     private IpAssignment mIpAssignment = IpAssignment.UNASSIGNED;
@@ -175,7 +182,6 @@ public class WifiConfigController implements TextWatcher,
                 accessPoint.getSecurity();
         mMode = mode;
 
-        mTextViewChangedHandler = new Handler();
         mContext = mConfigUi.getContext();
         final Resources res = mContext.getResources();
 
@@ -205,11 +211,20 @@ public class WifiConfigController implements TextWatcher,
         mDoNotValidateEapServerString =
             mContext.getString(R.string.wifi_do_not_validate_eap_server);
 
+        mDialogContainer = mView.findViewById(R.id.dialog_scrollview);
         mIpSettingsSpinner = (Spinner) mView.findViewById(R.id.ip_settings);
         mIpSettingsSpinner.setOnItemSelectedListener(this);
         mProxySettingsSpinner = (Spinner) mView.findViewById(R.id.proxy_settings);
         mProxySettingsSpinner.setOnItemSelectedListener(this);
         mSharedCheckBox = (CheckBox) mView.findViewById(R.id.shared);
+        mMeteredSettingsSpinner = mView.findViewById(R.id.metered_settings);
+        mHiddenSettingsSpinner = mView.findViewById(R.id.hidden_settings);
+        mHiddenSettingsSpinner.setOnItemSelectedListener(this);
+        mHiddenWarningView = mView.findViewById(R.id.hidden_settings_warning);
+        mHiddenWarningView.setVisibility(
+                mHiddenSettingsSpinner.getSelectedItemPosition() == NOT_HIDDEN_NETWORK
+                        ? View.GONE
+                        : View.VISIBLE);
 
         if (mAccessPoint == null) { // new network
             mConfigUi.setTitle(R.string.wifi_add_network);
@@ -223,6 +238,8 @@ public class WifiConfigController implements TextWatcher,
             showIpConfigFields();
             showProxyFields();
             mView.findViewById(R.id.wifi_advanced_toggle).setVisibility(View.VISIBLE);
+            // Hidden option can be changed only when the user adds a network manually.
+            mView.findViewById(R.id.hidden_settings_field).setVisibility(View.VISIBLE);
             ((CheckBox) mView.findViewById(R.id.wifi_advanced_togglebox))
                     .setOnCheckedChangeListener(this);
 
@@ -239,6 +256,10 @@ public class WifiConfigController implements TextWatcher,
             boolean showAdvancedFields = false;
             if (mAccessPoint.isSaved()) {
                 WifiConfiguration config = mAccessPoint.getConfig();
+                mMeteredSettingsSpinner.setSelection(config.meteredOverride);
+                mHiddenSettingsSpinner.setSelection(config.hiddenSSID
+                        ? HIDDEN_NETWORK
+                        : NOT_HIDDEN_NETWORK);
                 if (config.getIpAssignment() == IpAssignment.STATIC) {
                     mIpSettingsSpinner.setSelection(STATIC_IP);
                     showAdvancedFields = true;
@@ -363,6 +384,9 @@ public class WifiConfigController implements TextWatcher,
         if (mConfigUi.getSubmitButton() != null) {
             enableSubmitIfAppropriate();
         }
+
+        // After done view show and hide, request focus from parent view
+        mView.findViewById(R.id.l_wifidialog).requestFocus();
     }
 
     @VisibleForTesting
@@ -500,7 +524,7 @@ public class WifiConfigController implements TextWatcher,
         }
     }
 
-    /* package */ WifiConfiguration getConfig() {
+    public WifiConfiguration getConfig() {
         if (mMode == WifiConfigUiBase.MODE_VIEW) {
             return null;
         }
@@ -511,7 +535,7 @@ public class WifiConfigController implements TextWatcher,
             config.SSID = AccessPoint.convertToQuotedString(
                     mSsidView.getText().toString());
             // If the user adds a network manually, assume that it is hidden.
-            config.hiddenSSID = true;
+            config.hiddenSSID = mHiddenSettingsSpinner.getSelectedItemPosition() == HIDDEN_NETWORK;
         } else if (!mAccessPoint.isSaved()) {
             config.SSID = AccessPoint.convertToQuotedString(
                     mAccessPoint.getSsidStr());
@@ -674,6 +698,9 @@ public class WifiConfigController implements TextWatcher,
         config.setIpConfiguration(
                 new IpConfiguration(mIpAssignment, mProxySettings,
                                     mStaticIpConfiguration, mHttpProxy));
+        if (mMeteredSettingsSpinner != null) {
+            config.meteredOverride = mMeteredSettingsSpinner.getSelectedItemPosition();
+        }
 
         return config;
     }
@@ -1031,7 +1058,7 @@ public class WifiConfigController implements TextWatcher,
                 setUserCertInvisible();
                 setPasswordInvisible();
                 setIdentityInvisible();
-                if (mAccessPoint.isCarrierAp()) {
+                if (mAccessPoint != null && mAccessPoint.isCarrierAp()) {
                     setEapMethodInvisible();
                 }
                 break;
@@ -1213,6 +1240,11 @@ public class WifiConfigController implements TextWatcher,
         }
     }
 
+    @VisibleForTesting
+    KeyStore getKeyStore() {
+        return KeyStore.getInstance();
+    }
+
     private void loadCertificates(
             Spinner spinner,
             String prefix,
@@ -1229,8 +1261,12 @@ public class WifiConfigController implements TextWatcher,
         if (showUsePreinstalledCertOption) {
             certs.add(mUseSystemCertsString);
         }
-        certs.addAll(
-                Arrays.asList(KeyStore.getInstance().list(prefix, android.os.Process.WIFI_UID)));
+        try {
+            certs.addAll(
+                Arrays.asList(getKeyStore().list(prefix, android.os.Process.WIFI_UID)));
+        } catch (Exception e) {
+            Log.e(TAG, "can't get the certificate list from KeyStore");
+        }
         certs.add(noCertificateString);
 
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(
@@ -1259,12 +1295,10 @@ public class WifiConfigController implements TextWatcher,
 
     @Override
     public void afterTextChanged(Editable s) {
-        mTextViewChangedHandler.post(new Runnable() {
-                public void run() {
-                    showWarningMessagesIfAppropriate();
-                    enableSubmitIfAppropriate();
-                }
-            });
+        ThreadUtils.postOnMainThread(() -> {
+            showWarningMessagesIfAppropriate();
+            enableSubmitIfAppropriate();
+        });
     }
 
     @Override
@@ -1337,6 +1371,16 @@ public class WifiConfigController implements TextWatcher,
             showPeapFields();
         } else if (parent == mProxySettingsSpinner) {
             showProxyFields();
+        } else if (parent == mHiddenSettingsSpinner) {
+            mHiddenWarningView.setVisibility(
+                    position == NOT_HIDDEN_NETWORK
+                            ? View.GONE
+                            : View.VISIBLE);
+            if (position == HIDDEN_NETWORK) {
+                mDialogContainer.post(() -> {
+                  mDialogContainer.fullScroll(View.FOCUS_DOWN);
+                });
+            }
         } else {
             showIpConfigFields();
         }

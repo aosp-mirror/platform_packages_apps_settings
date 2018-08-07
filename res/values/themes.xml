@@ -17,8 +17,6 @@
 <resources>
     <attr name="fingerprint_layout_theme" format="reference" />
     <attr name="ic_menu_moreoverflow" format="reference" />
-    <attr name="ic_wps" format="reference" />
-    <attr name="setup_divider_color" format="reference" />
     <attr name="side_margin" format="reference|dimension" />
     <attr name="wifi_signal_color" format="reference" />
 
@@ -29,8 +27,6 @@
         <item name="*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
         <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
         <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_material</item>
-        <item name="ic_wps">@drawable/ic_wps_dark</item>
-        <item name="setup_divider_color">@color/setup_divider_color_dark</item>
         <item name="side_margin">0dip</item>
         <item name="wifi_signal_color">@color/setup_wizard_wifi_color_dark</item>
         <item name="wifi_signal">@drawable/wifi_signal</item>
@@ -49,8 +45,6 @@
         <item name="*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
         <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
         <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_material</item>
-        <item name="ic_wps">@drawable/ic_wps_light</item>
-        <item name="setup_divider_color">@color/setup_divider_color_light</item>
         <item name="side_margin">0dip</item>
         <item name="wifi_signal_color">@color/setup_wizard_wifi_color_light</item>
         <item name="wifi_signal">@drawable/wifi_signal</item>
@@ -59,17 +53,16 @@
         <item name="preferenceTheme">@style/PreferenceTheme.SetupWizard</item>
 
         <item name="*android:lockPatternStyle">@style/LockPatternStyle.Setup</item>
+        <item name="*android:colorError">@color/glif_error_color</item>
     </style>
 
     <style name="GlifV2Theme" parent="SuwThemeGlifV2">
         <!-- For all Alert Dialogs -->
-        <item name="android:alertDialogTheme">@style/ThemeOverlay.AlertDialog</item>
+        <item name="android:alertDialogTheme">@style/GlifV2ThemeAlertDialog</item>
         <item name="android:windowBackground">?android:attr/colorBackground</item>
         <item name="*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
         <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
         <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_material</item>
-        <item name="ic_wps">@drawable/ic_wps_dark</item>
-        <item name="setup_divider_color">@color/setup_divider_color_dark</item>
         <item name="side_margin">0dip</item>
         <item name="wifi_signal_color">@color/setup_wizard_wifi_color_dark</item>
         <item name="wifi_signal">@drawable/wifi_signal</item>
@@ -83,13 +76,11 @@
 
     <style name="GlifV2Theme.Light" parent="SuwThemeGlifV2.Light">
         <!-- For all Alert Dialogs -->
-        <item name="android:alertDialogTheme">@style/ThemeOverlay.AlertDialog</item>
+        <item name="android:alertDialogTheme">@style/GlifV2ThemeAlertDialog.Light</item>
         <item name="android:windowBackground">?android:attr/colorBackground</item>
         <item name="*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
         <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
         <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_material</item>
-        <item name="ic_wps">@drawable/ic_wps_light</item>
-        <item name="setup_divider_color">@color/setup_divider_color_light</item>
         <item name="side_margin">0dip</item>
         <item name="wifi_signal_color">@color/setup_wizard_wifi_color_light</item>
         <item name="wifi_signal">@drawable/wifi_signal</item>
@@ -98,6 +89,43 @@
         <item name="preferenceTheme">@style/PreferenceTheme.SetupWizard</item>
 
         <item name="*android:lockPatternStyle">@style/LockPatternStyle.Setup</item>
+        <item name="*android:colorError">@color/glif_error_color</item>
+    </style>
+
+    <style name="GlifV3Theme" parent="SuwThemeGlifV3">
+        <!-- For all Alert Dialogs -->
+        <item name="android:alertDialogTheme">@style/GlifV2ThemeAlertDialog</item>
+        <item name="android:windowBackground">?android:attr/colorBackground</item>
+        <item name="*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
+        <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
+        <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_material</item>
+        <item name="side_margin">0dip</item>
+        <item name="wifi_signal_color">@color/setup_wizard_wifi_color_dark</item>
+        <item name="wifi_signal">@drawable/wifi_signal</item>
+        <item name="wifi_friction">@drawable/wifi_friction</item>
+        <item name="preferenceBackgroundColor">?android:attr/colorBackground</item>
+        <item name="preferenceTheme">@style/PreferenceTheme.SetupWizard</item>
+
+        <!-- LockPatternView colors -->
+        <item name="*android:lockPatternStyle">@style/LockPatternStyle.Setup</item>
+    </style>
+
+    <style name="GlifV3Theme.Light" parent="SuwThemeGlifV3.Light">
+        <!-- For all Alert Dialogs -->
+        <item name="android:alertDialogTheme">@style/GlifV2ThemeAlertDialog.Light</item>
+        <item name="android:windowBackground">?android:attr/colorBackground</item>
+        <item name="*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
+        <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
+        <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_material</item>
+        <item name="side_margin">0dip</item>
+        <item name="wifi_signal_color">@color/setup_wizard_wifi_color_light</item>
+        <item name="wifi_signal">@drawable/wifi_signal</item>
+        <item name="wifi_friction">@drawable/wifi_friction</item>
+        <item name="preferenceBackgroundColor">?android:attr/colorBackground</item>
+        <item name="preferenceTheme">@style/PreferenceTheme.SetupWizard</item>
+
+        <item name="*android:lockPatternStyle">@style/LockPatternStyle.Setup</item>
+        <item name="*android:colorError">@color/glif_error_color</item>
     </style>
 
     <style name="SetupWizardTheme.Transparent" parent="GlifTheme">
@@ -114,6 +142,35 @@
         <item name="android:windowAnimationStyle">@null</item>
     </style>
 
+    <style name="GlifV2Theme.Transparent">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
+    <style name="GlifV2Theme.Light.Transparent">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
+    <style name="GlifV3Theme.Transparent">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
+    <style name="GlifV3Theme.Light.Transparent">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
+
     <style name="SuwSuggestionThemeGlif.Light" parent="SuwThemeGlif.Light">
         <item name="android:windowAnimationStyle">@android:style/Animation.Activity</item>
     </style>
@@ -122,6 +179,7 @@
         <item name="preferenceFragmentStyle">@style/SettingsPreferenceFragmentStyle</item>
         <item name="apnPreferenceStyle">@style/ApnPreference</item>
         <item name="seekBarPreferenceStyle">@style/SettingsSeekBarPreference</item>
+        <item name="twoStateButtonPreferenceStyle">@style/TwoStateButtonPreference</item>
     </style>
 
     <style name="PreferenceTheme.SetupWizard" parent="PreferenceTheme">
@@ -140,13 +198,7 @@
         <item name="android:colorAccent">@color/material_blue_700</item>
         <item name="android:titleTextColor">@color/material_blue_700</item>
         <item name="preferenceTheme">@style/PreferenceTheme</item>
-        <item name="switchBarTheme">@style/SetupWizardAccessibilitySwitchBarTheme</item>
-    </style>
-
-    <style name="SetupWizardAccessibilitySwitchBarTheme" parent="ThemeOverlay.SwitchBar.Settings">
-        <item name="switchBarBackgroundColor">@color/material_grey_200</item>
-        <item name="android:colorControlActivated">@color/material_blue_500</item>
-        <item name="android:textColorPrimary">@android:color/black</item>
+        <item name="switchBarTheme">@style/ThemeOverlay.SwitchBar.Settings</item>
     </style>
 
     <!-- Theme with no local references, used by AccountPreferenceBase where we have to inflate
@@ -166,7 +218,6 @@
 
         <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
         <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_holo_dark</item>
-        <item name="ic_wps">@drawable/ic_wps_light</item>
         <item name="wifi_signal">@drawable/wifi_signal</item>
         <item name="wifi_signal_color">?android:attr/colorAccent</item>
         <item name="wifi_friction">@drawable/wifi_friction</item>
@@ -184,13 +235,18 @@
         <item name="android:alertDialogTheme">@style/Theme.AlertDialog</item>
 
         <item name="*android:lockPatternStyle">@style/LockPatternStyle.Setup</item>
+
+        <!-- For battery status icons in -->
+        <item name="batteryGoodColor">@color/battery_good_color_light</item>
+        <item name="batteryMaybeColor">@color/battery_maybe_color_light</item>
+        <item name="batteryBadColor">@color/battery_bad_color_light</item>
     </style>
 
     <style name="Theme.SubSettings" parent="Theme.Settings">
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Theme.ActionBar.SubSettings</item>
 
-        <item name="switchBarTheme">@style/ThemeOverlay.SwitchBar.SubSettings</item>
+        <item name="switchBarTheme">@style/ThemeOverlay.SwitchBar.Settings</item>
     </style>
 
     <!-- Variant of the settings theme with no action bar. -->
@@ -209,7 +265,7 @@
         <item name="android:backgroundDimEnabled">false</item>
     </style>
 
-    <style name="Theme.ActionBar" parent="@android:style/Widget.Material.ActionBar.Solid">
+    <style name="Theme.ActionBar" parent="@android:style/Widget.DeviceDefault.Light.ActionBar.Solid">
         <item name="android:contentInsetStart">@dimen/actionbar_contentInsetStart</item>
     </style>
 
@@ -218,15 +274,17 @@
     </style>
 
     <style name="ThemeOverlay.SwitchBar.Settings" parent="@android:style/ThemeOverlay.Material.ActionBar">
+        <item name="android:textColorPrimary">@android:color/white</item>
         <item name="switchBarMarginStart">@dimen/switchbar_subsettings_margin_start</item>
         <item name="switchBarMarginEnd">@dimen/switchbar_subsettings_margin_end</item>
-        <item name="switchBarBackgroundColor">?android:attr/colorSecondary</item>
+        <item name="switchBarBackgroundColor">@color/switch_bar_background</item>
+        <item name="switchBarBackgroundActivatedColor">?android:attr/colorAccent</item>
     </style>
 
-    <style name="ThemeOverlay.SwitchBar.SubSettings" parent="@android:style/ThemeOverlay.Material.ActionBar">
-        <item name="switchBarMarginStart">@dimen/switchbar_subsettings_margin_start</item>
-        <item name="switchBarMarginEnd">@dimen/switchbar_subsettings_margin_end</item>
-        <item name="switchBarBackgroundColor">?android:attr/colorSecondary</item>
+    <style name="Widget.SwitchBar.Switch" parent="@android:style/Widget.Material.CompoundButton.Switch">
+        <item name="android:trackTint">@color/switchbar_switch_track_tint</item>
+        <item name="android:thumbTint">@color/switchbar_switch_thumb_tint</item>
+        <item name="android:minHeight">@dimen/min_tap_target_size</item>
     </style>
 
     <style name="Theme.CryptKeeper" parent="@android:style/Theme.Material.NoActionBar">
@@ -242,19 +300,19 @@
         <item name="android:windowSoftInputMode">adjustResize</item>
     </style>
 
+    <style name="GlifV2ThemeAlertDialog" parent="SuwAlertDialogTheme">
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+
+    <style name="GlifV2ThemeAlertDialog.Light" parent="SuwAlertDialogTheme.Light">
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+
     <style name="Theme.AlertDialog" parent="@*android:style/Theme.DeviceDefault.Settings.Dialog.Alert">
         <item name="android:windowSoftInputMode">adjustResize</item>
 
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
-    </style>
-
-    <style name="Theme.NotificationStation" parent="@style/Theme.Settings">
-        <!-- Redefine the ActionBar style for contentInsetStart -->
-        <item name="android:actionBarStyle">@style/Theme.ActionBar.SubSettings</item>
-        <item name="*android:actionBarSize">@dimen/actionbar_size</item>
-
-        <item name="preferenceBackgroundColor">@android:color/transparent</item>
     </style>
 
     <style name="Theme.ConfirmDeviceCredentials" parent="Theme.SubSettings">
@@ -278,13 +336,6 @@
     <style name="Theme.ConfirmDeviceCredentialsWork" parent="Theme.ConfirmDeviceCredentialsDark">
         <item name="*android:lockPatternStyle">@style/LockPatternStyle.Dark.Work</item>
         <item name="android:colorAccent">@*android:color/white</item>
-    </style>
-
-    <style name="Theme.FingerprintEnroll" parent="SuwThemeGlif.Light">
-        <item name="android:textAppearanceListItemSmall">@android:style/TextAppearance.Material.Body1</item>
-
-        <item name="suwDividerCondition">both</item>
-        <item name="suwListItemIconColor">?android:attr/colorAccent</item>
     </style>
 
     <style name="FallbackHome" parent="@android:style/Theme.DeviceDefault.NoActionBar">

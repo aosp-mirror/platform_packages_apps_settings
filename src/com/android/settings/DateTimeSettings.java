@@ -26,6 +26,7 @@ import android.provider.SearchIndexableResource;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.datetime.AutoTimeFormatPreferenceController;
 import com.android.settings.datetime.AutoTimePreferenceController;
 import com.android.settings.datetime.AutoTimeZonePreferenceController;
 import com.android.settings.datetime.DatePreferenceController;
@@ -72,7 +73,7 @@ public class DateTimeSettings extends DashboardFragment implements
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         final Activity activity = getActivity();
         final Intent intent = activity.getIntent();
@@ -84,8 +85,12 @@ public class DateTimeSettings extends DashboardFragment implements
         final AutoTimePreferenceController autoTimePreferenceController =
                 new AutoTimePreferenceController(
                         activity, this /* UpdateTimeAndDateCallback */);
+        final AutoTimeFormatPreferenceController autoTimeFormatPreferenceController =
+                new AutoTimeFormatPreferenceController(
+                        activity, this /* UpdateTimeAndDateCallback */);
         controllers.add(autoTimeZonePreferenceController);
         controllers.add(autoTimePreferenceController);
+        controllers.add(autoTimeFormatPreferenceController);
 
         controllers.add(new TimeFormatPreferenceController(
                 activity, this /* UpdateTimeAndDateCallback */, isFromSUW));
@@ -107,10 +112,10 @@ public class DateTimeSettings extends DashboardFragment implements
     public Dialog onCreateDialog(int id) {
         switch (id) {
             case DatePreferenceController.DIALOG_DATEPICKER:
-                return getPreferenceController(DatePreferenceController.class)
+                return use(DatePreferenceController.class)
                         .buildDatePicker(getActivity());
             case TimePreferenceController.DIALOG_TIMEPICKER:
-                return getPreferenceController(TimePreferenceController.class)
+                return use(TimePreferenceController.class)
                         .buildTimePicker(getActivity());
             default:
                 throw new IllegalArgumentException();

@@ -16,178 +16,137 @@
 
 package com.android.settings.development;
 
-import android.content.ComponentName;
+import static com.android.settings.development.BugReportInPowerPreferenceController.SETTING_VALUE_OFF;
+import static com.android.settings.development.BugReportInPowerPreferenceController.SETTING_VALUE_ON;
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import android.content.ContentResolver;
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.provider.Settings;
 import android.os.UserManager;
+import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Answers.RETURNS_DEEP_STUBS;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BugReportInPowerPreferenceControllerTest {
 
-    @Mock(answer = RETURNS_DEEP_STUBS)
+    @Mock
     private PreferenceScreen mScreen;
     @Mock
     private UserManager mUserManager;
     @Mock
-    private PackageManager mPackageManager;
-
     private Context mContext;
+    @Mock
     private SwitchPreference mPreference;
+
+    private ContentResolver mContentResolver;
     private BugReportInPowerPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        ShadowApplication shadowContext = ShadowApplication.getInstance();
-        shadowContext.setSystemService(Context.USER_SERVICE, mUserManager);
-        mContext = spy(shadowContext.getApplicationContext());
-        when(mContext.getPackageManager()).thenReturn(mPackageManager);
-        mPreference = new SwitchPreference(mContext);
-        when(mScreen.findPreference(anyString())).thenReturn(mPreference);
+        mContentResolver = RuntimeEnvironment.application.getContentResolver();
+        when(mContext.getContentResolver()).thenReturn(mContentResolver);
+        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         mController = new BugReportInPowerPreferenceController(mContext);
-        mPreference.setKey(mController.getPreferenceKey());
+        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
     }
 
     @Test
-    public void displayPreference_hasDebugRestriction_shouldRemovePreference() {
+    public void isAvailable_hasDebugRestriction_shouldReturnFalse() {
         when(mUserManager.hasUserRestriction(anyString())).thenReturn(true);
-        when(mScreen.getPreferenceCount()).thenReturn(1);
-        when(mScreen.getPreference(0)).thenReturn(mPreference);
 
-        mController.displayPreference(mScreen);
-
-        verify(mScreen).removePreference(any(Preference.class));
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
-    public void displayPreference_noDebugRestriction_shouldNotRemovePreference() {
+    public void isAvailable_noDebugRestriction_shouldReturnTrue() {
         when(mUserManager.hasUserRestriction(anyString())).thenReturn(false);
 
-        mController.displayPreference(mScreen);
-
-        verify(mScreen, never()).removePreference(any(Preference.class));
+        assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
-    public void enablePreference_hasDebugRestriction_shouldNotEnable() {
-        when(mUserManager.hasUserRestriction(anyString())).thenReturn(true);
-        mController.displayPreference(mScreen);
-        mPreference.setEnabled(false);
-
-        mController.enablePreference(true);
-
-        assertThat(mPreference.isEnabled()).isFalse();
-    }
-
-    @Test
-    public void enablePreference_noDebugRestriction_shouldEnable() {
+    public void onDeveloperOptionsSwitchDisabled_preferenceShouldNotBeChecked() {
         when(mUserManager.hasUserRestriction(anyString())).thenReturn(false);
         mController.displayPreference(mScreen);
-        mPreference.setEnabled(false);
 
-        mController.enablePreference(true);
+        mController.onDeveloperOptionsSwitchDisabled();
 
-        assertThat(mPreference.isEnabled()).isTrue();
+        verify(mPreference).setChecked(false);
     }
 
     @Test
-    public void resetPreference_shouldUncheck() {
+    public void onPreferenceChanged_settingDisabled_shouldDisableBugReportInPowerSetting() {
         when(mUserManager.hasUserRestriction(anyString())).thenReturn(false);
         mController.displayPreference(mScreen);
-        mPreference.setChecked(true);
 
-        mController.resetPreference();
+        mController.onPreferenceChange(mPreference, false /* new value */);
+        int mode = Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Global.BUGREPORT_IN_POWER_MENU, -1 /* default */);
 
-        assertThat(mPreference.isChecked()).isFalse();
+        assertThat(mode).isEqualTo(SETTING_VALUE_OFF);
     }
 
     @Test
-    public void handlePreferenceTreeClick_shouldUpdateSettings() {
+    public void onPreferenceChanged_settingEnabled_shouldEnableBugReportInPowerSetting() {
+        when(mUserManager.hasUserRestriction(anyString())).thenReturn(false);
+        mController.displayPreference(mScreen);
+
+        mController.onPreferenceChange(mPreference, true /* new value */);
+        int mode = Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Global.BUGREPORT_IN_POWER_MENU, -1 /* default */);
+
+        assertThat(mode).isEqualTo(SETTING_VALUE_ON);
+    }
+
+
+    @Test
+    public void updateState_settingsOn_preferenceShouldBeChecked() {
         when(mUserManager.hasUserRestriction(anyString())).thenReturn(false);
         Settings.Secure.putInt(mContext.getContentResolver(),
-            Settings.Global.BUGREPORT_IN_POWER_MENU, 0);
-        mPreference.setChecked(true);
-        mController.displayPreference(mScreen);
-
-        mController.handlePreferenceTreeClick(mPreference);
-
-        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
-            Settings.Global.BUGREPORT_IN_POWER_MENU, 0)).isEqualTo(1);
-    }
-
-    @Test
-    public void updateState_settingsOn_shouldCheck() {
-        when(mUserManager.hasUserRestriction(anyString())).thenReturn(false);
-        Settings.Secure.putInt(mContext.getContentResolver(),
-            Settings.Global.BUGREPORT_IN_POWER_MENU, 1);
-        mPreference.setChecked(false);
+                Settings.Global.BUGREPORT_IN_POWER_MENU, SETTING_VALUE_ON);
         mController.displayPreference(mScreen);
 
         mController.updateState(mPreference);
 
-        assertThat(mPreference.isChecked()).isTrue();
+        verify(mPreference).setChecked(true);
     }
 
     @Test
-    public void updateState_settingsOff_shouldUncheck() {
+    public void updateState_settingsOff_preferenceShouldNotBeChecked() {
         when(mUserManager.hasUserRestriction(anyString())).thenReturn(false);
         Settings.Secure.putInt(mContext.getContentResolver(),
-            Settings.Global.BUGREPORT_IN_POWER_MENU, 0);
-        mPreference.setChecked(true);
+                Settings.Global.BUGREPORT_IN_POWER_MENU, SETTING_VALUE_OFF);
         mController.displayPreference(mScreen);
 
         mController.updateState(mPreference);
 
-        assertThat(mPreference.isChecked()).isFalse();
+        verify(mPreference).setChecked(false);
     }
 
     @Test
-    public void updateBugreportOptions_shouldEnable() {
-        when(mUserManager.hasUserRestriction(anyString())).thenReturn(false);
-        mPreference.setEnabled(false);
-        mController.displayPreference(mScreen);
-
-        mController.updateBugreportOptions();
-
-        assertThat(mPreference.isEnabled()).isTrue();
-    }
-
-    @Test
-    public void updateBugreportOptions_shouldEnableBugReportStorage() {
-        final ComponentName componentName = new ComponentName("com.android.shell",
-            "com.android.shell.BugreportStorageProvider");
+    public void onDeveloperOptionsSwitchDisabled_shouldTurnOffPreference() {
         when(mUserManager.hasUserRestriction(anyString())).thenReturn(false);
         mController.displayPreference(mScreen);
 
-        mController.updateBugreportOptions();
+        mController.onDeveloperOptionsSwitchDisabled();
+        int mode = Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Global.BUGREPORT_IN_POWER_MENU, -1 /* default */);
 
-        verify(mPackageManager).setComponentEnabledSetting(eq(componentName), anyInt(), anyInt());
+        assertThat(mode).isEqualTo(SETTING_VALUE_OFF);
+        verify(mPreference).setChecked(false);
     }
 }

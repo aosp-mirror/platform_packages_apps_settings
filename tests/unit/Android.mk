@@ -5,16 +5,23 @@ include $(CLEAR_VARS)
 LOCAL_MODULE_TAGS := tests
 LOCAL_CERTIFICATE := platform
 
-LOCAL_JAVA_LIBRARIES := android.test.runner
+LOCAL_JAVA_LIBRARIES := \
+    android.test.runner \
+    telephony-common \
+    ims-common \
+    android.test.base \
+    android.test.mock \
+
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
     android-support-test \
     espresso-core \
-    legacy-android-test \
+    espresso-contrib-nodep \
+    espresso-intents-nodep \
     mockito-target-minus-junit4 \
+    platform-test-annotations \
     truth-prebuilt \
-    ub-uiautomator \
-
+    ub-uiautomator
 
 # Include all test java files.
 LOCAL_SRC_FILES := $(call all-java-files-under, src)

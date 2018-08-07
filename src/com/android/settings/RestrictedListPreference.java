@@ -16,10 +16,16 @@
 
 package com.android.settings;
 
+import android.app.ActivityManager;
 import android.app.AlertDialog;
+import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.RemoteException;
+import android.os.UserManager;
+import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.ListPreferenceDialogFragment;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
@@ -32,6 +38,7 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import com.android.settings.Utils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreferenceHelper;
 
@@ -43,6 +50,8 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 public class RestrictedListPreference extends CustomListPreference {
     private final RestrictedPreferenceHelper mHelper;
     private final List<RestrictedItem> mRestrictedItems = new ArrayList<>();
+    private boolean mRequiresActiveUnlockedProfile = false;
+    private int mProfileUserId;
 
     public RestrictedListPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -68,6 +77,24 @@ public class RestrictedListPreference extends CustomListPreference {
 
     @Override
     public void performClick() {
+        if (mRequiresActiveUnlockedProfile) {
+            // Check if the profile is started, first.
+            if (Utils.startQuietModeDialogIfNecessary(getContext(), UserManager.get(getContext()),
+                    mProfileUserId)) {
+                return;
+            }
+
+            // Next, check if the profile is unlocked.
+            KeyguardManager manager =
+                    (KeyguardManager) getContext().getSystemService(Context.KEYGUARD_SERVICE);
+            if (manager.isDeviceLocked(mProfileUserId)) {
+                Intent intent = manager.createConfirmDeviceCredentialIntent(
+                        null, null, mProfileUserId);
+                getContext().startActivity(intent);
+                return;
+            }
+        }
+
         if (!mHelper.performClick()) {
             super.performClick();
         }
@@ -90,6 +117,14 @@ public class RestrictedListPreference extends CustomListPreference {
 
     public boolean isDisabledByAdmin() {
         return mHelper.isDisabledByAdmin();
+    }
+
+    public void setRequiresActiveUnlockedProfile(boolean reqState) {
+        mRequiresActiveUnlockedProfile = reqState;
+    }
+
+    public void setProfileUserId(int profileUserId) {
+        mProfileUserId = profileUserId;
     }
 
     public boolean isRestrictedForEntry(CharSequence entry) {

@@ -16,51 +16,72 @@
 
 package com.android.settings.fuelgauge;
 
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import android.app.AppOpsManager;
 import android.content.Context;
+import android.content.DialogInterface;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.verify;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class HighPowerDetailTest {
-
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
+    private static final int TEST_UID = 12000;
+    private static final String TEST_PACKAGE = "com.test.package";
 
     private FakeFeatureFactory mFeatureFactory;
+    private HighPowerDetail mFragment;
+
+    @Mock
+    private PowerWhitelistBackend mPowerWhitelistBackend;
+    @Mock
+    private BatteryUtils mBatteryUtils;
 
     @Before
     public void setUp() {
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
+
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFragment = spy(new HighPowerDetail());
+        mFragment.mBackend = mPowerWhitelistBackend;
+        mFragment.mBatteryUtils = mBatteryUtils;
+        mFragment.mPackageUid = TEST_UID;
+        mFragment.mPackageName = TEST_PACKAGE;
     }
 
     @Test
     public void logSpecialPermissionChange() {
         // Deny means app is whitelisted to opt out of power save restrictions
-        HighPowerDetail.logSpecialPermissionChange(true, "app", mContext);
+        HighPowerDetail.logSpecialPermissionChange(true, "app", RuntimeEnvironment.application);
         verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
                 eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_BATTERY_DENY), eq("app"));
 
         // Allow means app is NOT whitelisted to opt out of power save restrictions
-        HighPowerDetail.logSpecialPermissionChange(false, "app", mContext);
+        HighPowerDetail.logSpecialPermissionChange(false, "app", RuntimeEnvironment.application);
         verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
                 eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_BATTERY_ALLOW), eq("app"));
+    }
+
+    @Test
+    public void onClick_appAddedToDozeWhitelist_getsUnrestricted() {
+        mFragment.mIsEnabled = true;
+        when(mPowerWhitelistBackend.isWhitelisted(TEST_PACKAGE)).thenReturn(false);
+        mFragment.onClick(null, DialogInterface.BUTTON_POSITIVE);
+        verify(mBatteryUtils).setForceAppStandby(TEST_UID, TEST_PACKAGE,
+                AppOpsManager.MODE_ALLOWED);
     }
 }

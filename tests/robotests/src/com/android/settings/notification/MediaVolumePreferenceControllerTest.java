@@ -16,39 +16,41 @@
 
 package com.android.settings.notification;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import android.content.Context;
 import android.media.AudioManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import static com.google.common.truth.Truth.assertThat;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class MediaVolumePreferenceControllerTest {
-
-    @Mock
-    private Context mContext;
 
     private MediaVolumePreferenceController mController;
 
+    private Context mContext;
+
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        mController = new MediaVolumePreferenceController(mContext, null, null);
+        mContext = RuntimeEnvironment.application;
+        mController = new MediaVolumePreferenceController(mContext);
     }
 
     @Test
-    public void isAlwaysAvailable() {
+    public void isAvailable_byDefault_isTrue() {
         assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void isAvailable_whenNotVisible_isFalse() {
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
@@ -56,4 +58,10 @@ public class MediaVolumePreferenceControllerTest {
         assertThat(mController.getAudioStream()).isEqualTo(AudioManager.STREAM_MUSIC);
     }
 
+    @Test
+    public void isSliceableCorrectKey_returnsTrue() {
+        final MediaVolumePreferenceController controller = new MediaVolumePreferenceController(
+                mContext);
+        assertThat(controller.isSliceable()).isTrue();
+    }
 }

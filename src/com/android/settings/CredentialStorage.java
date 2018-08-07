@@ -275,6 +275,16 @@ public final class CredentialStorage extends Activity {
                 Log.e(TAG, "Failed to install " + key + " as uid " + uid);
                 return;
             }
+            // The key was prepended USER_PRIVATE_KEY by the CredentialHelper. However,
+            // KeyChain internally uses the raw alias name and only prepends USER_PRIVATE_KEY
+            // to the key name when interfacing with KeyStore.
+            // This is generally a symptom of CredentialStorage and CredentialHelper relying
+            // on internal implementation details of KeyChain and imitating its functionality
+            // rather than delegating to KeyChain for the certificate installation.
+            if (uid == Process.SYSTEM_UID || uid == KeyStore.UID_SELF) {
+                new MarkKeyAsUserSelectable(
+                        key.replaceFirst("^" + Credentials.USER_PRIVATE_KEY, "")).execute();
+            }
         }
 
         int flags = KeyStore.FLAG_NONE;
@@ -387,6 +397,33 @@ public final class CredentialStorage extends Activity {
         if (isDone) {
             Toast.makeText(CredentialStorage.this, R.string.vpn_disconnected,
                     Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * Background task to mark a given key alias as user-selectable, so that
+     * it can be selected by users from the Certificate Selection prompt.
+     */
+    private class MarkKeyAsUserSelectable extends AsyncTask<Void, Void, Boolean> {
+        final String mAlias;
+
+        public MarkKeyAsUserSelectable(String alias) {
+            mAlias = alias;
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... unused) {
+            try (KeyChainConnection keyChainConnection = KeyChain.bind(CredentialStorage.this)) {
+                keyChainConnection.getService().setUserSelectable(mAlias, true);
+                return true;
+            } catch (RemoteException e) {
+                Log.w(TAG, "Failed to mark key " + mAlias + " as user-selectable.");
+                return false;
+            } catch (InterruptedException e) {
+                Log.w(TAG, "Failed to mark key " + mAlias + " as user-selectable.");
+                Thread.currentThread().interrupt();
+                return false;
+            }
         }
     }
 
