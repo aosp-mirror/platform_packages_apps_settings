@@ -242,6 +242,30 @@ public class DashboardAdapterTest {
     }
 
     @Test
+    public void onBindTile_externalTileWithBackgroundColorRawValue_shouldUpdateIcon() {
+        final Context context = spy(RuntimeEnvironment.application);
+        final View view = LayoutInflater.from(context).inflate(R.layout.dashboard_tile, null);
+        final DashboardAdapter.DashboardItemHolder holder =
+                new DashboardAdapter.DashboardItemHolder(view);
+        final Tile tile = spy(new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE));
+        tile.getMetaData().putInt(DashboardAdapter.META_DATA_PREFERENCE_ICON_BACKGROUND_ARGB,
+                0xff0000);
+        doReturn(Icon.createWithResource(context, R.drawable.ic_settings))
+                .when(tile).getIcon(context);
+        final IconCache iconCache = new IconCache(context);
+        mDashboardAdapter = new DashboardAdapter(context, null /* savedInstanceState */,
+                null /* conditions */, null /* suggestionControllerMixin */, null /* lifecycle */);
+        ReflectionHelpers.setField(mDashboardAdapter, "mCache", iconCache);
+
+        doReturn("another.package").when(context).getPackageName();
+        mDashboardAdapter.onBindTile(holder, tile);
+
+        final RoundedHomepageIcon homepageIcon = (RoundedHomepageIcon) iconCache.getIcon(
+                tile.getIcon(context));
+        assertThat(homepageIcon.mBackgroundColor).isEqualTo(0xff0000);
+    }
+
+    @Test
     public void onBindTile_externalTileWithBackgroundColorHint_shouldUpdateIcon() {
         final Context context = spy(RuntimeEnvironment.application);
         final View view = LayoutInflater.from(context).inflate(R.layout.dashboard_tile, null);
