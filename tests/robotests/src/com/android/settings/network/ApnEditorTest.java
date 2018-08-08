@@ -440,6 +440,8 @@ public class ApnEditorTest {
     @Test
     public void formatInteger_shouldParseString() {
         assertThat(ApnEditor.formatInteger("42")).isEqualTo("42");
+        assertThat(ApnEditor.formatInteger("01")).isEqualTo("01");
+        assertThat(ApnEditor.formatInteger("001")).isEqualTo("001");
     }
 
     @Test
