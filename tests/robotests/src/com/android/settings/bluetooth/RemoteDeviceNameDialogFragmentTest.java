@@ -17,6 +17,7 @@
 package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
@@ -29,15 +30,17 @@ import android.content.DialogInterface;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
+import com.android.settings.testutils.shadow.ShadowDynamicLayout;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.testutils.FragmentTestUtils;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -46,10 +49,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowDialog;
 
-import androidx.appcompat.app.AlertDialog;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = SettingsShadowResourcesImpl.class)
+@Config(shadows = {SettingsShadowResourcesImpl.class, ShadowDynamicLayout.class})
 public class RemoteDeviceNameDialogFragmentTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -81,7 +82,6 @@ public class RemoteDeviceNameDialogFragmentTest {
     }
 
     @Test
-    @Ignore
     public void deviceNameDisplayIsCorrect() {
         String deviceName = "ABC Corp Headphones";
         AlertDialog dialog = startDialog(deviceName);
@@ -97,7 +97,6 @@ public class RemoteDeviceNameDialogFragmentTest {
     }
 
     @Test
-    @Ignore
     public void deviceNameEditSucceeds() {
         String deviceNameInitial = "ABC Corp Headphones";
         String deviceNameModified = "My Headphones";
@@ -120,7 +119,6 @@ public class RemoteDeviceNameDialogFragmentTest {
     }
 
     @Test
-    @Ignore
     public void deviceNameEditThenCancelDoesntRename() {
         String deviceNameInitial = "ABC Corp Headphones";
         String deviceNameModified = "My Headphones";
