@@ -54,6 +54,8 @@ public class CategoryManagerTest {
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mActivityInfo = new ActivityInfo();
+        mActivityInfo.packageName = "pkg";
+        mActivityInfo.name = "class";
         mActivityInfo.applicationInfo = new ApplicationInfo();
         mTileByComponentCache = new HashMap<>();
         mCategoryByKeyMap = new HashMap<>();
@@ -130,18 +132,21 @@ public class CategoryManagerTest {
         // Create some fake tiles that are not sorted.
         final String testPackage = "com.android.test";
         final DashboardCategory category = new DashboardCategory(CATEGORY_HOMEPAGE);
+        mActivityInfo.packageName = testPackage;
+        mActivityInfo.name = "class1";
         final Tile tile1 = new Tile(mActivityInfo, category.key);
-        tile1.intent =
-                new Intent().setComponent(new ComponentName(testPackage, "class1"));
         tile1.priority = 100;
+
+        mActivityInfo.packageName = testPackage;
+        mActivityInfo.name = "class2";
         final Tile tile2 = new Tile(mActivityInfo, category.key);
-        tile2.intent =
-                new Intent().setComponent(new ComponentName(testPackage, "class2"));
         tile2.priority = 50;
+
+        mActivityInfo.packageName = testPackage;
+        mActivityInfo.name = "class3";
         final Tile tile3 = new Tile(mActivityInfo, category.key);
-        tile3.intent =
-                new Intent().setComponent(new ComponentName(testPackage, "class3"));
         tile3.priority = 200;
+
         category.addTile(tile1);
         category.addTile(tile2);
         category.addTile(tile3);
@@ -163,18 +168,22 @@ public class CategoryManagerTest {
         final String testPackage1 = "com.android.test1";
         final String testPackage2 = "com.android.test2";
         final DashboardCategory category = new DashboardCategory(CATEGORY_HOMEPAGE);
+
+        mActivityInfo.packageName = testPackage2;
+        mActivityInfo.name = "class1";
         final Tile tile1 = new Tile(mActivityInfo, category.key);
-        tile1.intent =
-                new Intent().setComponent(new ComponentName(testPackage2, "class1"));
         tile1.priority = 100;
+
+        mActivityInfo.packageName = testPackage1;
+        mActivityInfo.name = "class2";
         final Tile tile2 = new Tile(mActivityInfo, category.key);
-        tile2.intent =
-                new Intent().setComponent(new ComponentName(testPackage1, "class2"));
         tile2.priority = 100;
+
+        mActivityInfo.packageName = testPackage1;
+        mActivityInfo.name = "class3";
         final Tile tile3 = new Tile(mActivityInfo, category.key);
-        tile3.intent =
-                new Intent().setComponent(new ComponentName(testPackage1, "class3"));
         tile3.priority = 50;
+
         category.addTile(tile1);
         category.addTile(tile2);
         category.addTile(tile3);
@@ -194,18 +203,22 @@ public class CategoryManagerTest {
         // Create some fake tiles that are not sorted.
         final String testPackage = mContext.getPackageName();
         final DashboardCategory category = new DashboardCategory(CATEGORY_HOMEPAGE);
+
+        mActivityInfo.packageName = testPackage;
+        mActivityInfo.name = "class1";
         final Tile tile1 = new Tile(mActivityInfo, category.key);
-        tile1.intent =
-                new Intent().setComponent(new ComponentName(testPackage, "class1"));
         tile1.priority = 100;
+
+        mActivityInfo.packageName = testPackage;
+        mActivityInfo.name = "class2";
         final Tile tile2 = new Tile(mActivityInfo, category.key);
-        tile2.intent =
-                new Intent().setComponent(new ComponentName(testPackage, "class2"));
         tile2.priority = 100;
+
+        mActivityInfo.packageName = testPackage;
+        mActivityInfo.name = "class3";
         final Tile tile3 = new Tile(mActivityInfo, category.key);
-        tile3.intent =
-                new Intent().setComponent(new ComponentName(testPackage, "class3"));
         tile3.priority = 50;
+
         category.addTile(tile1);
         category.addTile(tile2);
         category.addTile(tile3);
@@ -226,17 +239,21 @@ public class CategoryManagerTest {
         final String testPackage = mContext.getPackageName();
         final String testPackage2 = "com.google.test2";
         final DashboardCategory category = new DashboardCategory(CATEGORY_HOMEPAGE);
+        mActivityInfo.packageName = testPackage;
+        mActivityInfo.name = "class1";
         final Tile tile1 = new Tile(mActivityInfo, category.key);
-        tile1.intent = new Intent().setComponent(new ComponentName(testPackage, "class1"));
         tile1.priority = 2;
+        mActivityInfo.packageName = testPackage;
+        mActivityInfo.name = "class2";
         final Tile tile2 = new Tile(mActivityInfo, category.key);
-        tile2.intent = new Intent().setComponent(new ComponentName(testPackage, "class2"));
         tile2.priority = 1;
+        mActivityInfo.packageName = testPackage2;
+        mActivityInfo.name = "class0";
         final Tile tile3 = new Tile(mActivityInfo, category.key);
-        tile3.intent = new Intent().setComponent(new ComponentName(testPackage2, "class0"));
         tile3.priority = 0;
+        mActivityInfo.packageName = testPackage;
+        mActivityInfo.name = "class3";
         final Tile tile4 = new Tile(mActivityInfo, category.key);
-        tile4.intent = new Intent().setComponent(new ComponentName(testPackage, "class3"));
         tile4.priority = -1;
         category.addTile(tile1);
         category.addTile(tile2);
@@ -261,15 +278,21 @@ public class CategoryManagerTest {
         final String testPackage2 = "com.google.test2";
         final String testPackage3 = "com.abcde.test3";
         final DashboardCategory category = new DashboardCategory(CATEGORY_HOMEPAGE);
+        mActivityInfo.packageName = testPackage2;
+        mActivityInfo.name = "class1";
         final Tile tile1 = new Tile(mActivityInfo, category.key);
-        tile1.intent = new Intent().setComponent(new ComponentName(testPackage2, "class1"));
         tile1.priority = 1;
+
+        mActivityInfo.packageName = testPackage;
+        mActivityInfo.name = "class2";
         final Tile tile2 = new Tile(mActivityInfo, category.key);
-        tile2.intent = new Intent().setComponent(new ComponentName(testPackage, "class2"));
         tile2.priority = 1;
+
+        mActivityInfo.packageName = testPackage3;
+        mActivityInfo.name = "class3";
         final Tile tile3 = new Tile(mActivityInfo, category.key);
-        tile3.intent = new Intent().setComponent(new ComponentName(testPackage3, "class3"));
         tile3.priority = 1;
+
         category.addTile(tile1);
         category.addTile(tile2);
         category.addTile(tile3);
@@ -289,18 +312,21 @@ public class CategoryManagerTest {
         // Create some unique tiles
         final String testPackage = mContext.getPackageName();
         final DashboardCategory category = new DashboardCategory(CATEGORY_HOMEPAGE);
+        mActivityInfo.packageName = testPackage;
+        mActivityInfo.name = "class1";
         final Tile tile1 = new Tile(mActivityInfo, category.key);
-        tile1.intent =
-                new Intent().setComponent(new ComponentName(testPackage, "class1"));
         tile1.priority = 100;
+
+        mActivityInfo.packageName = testPackage;
+        mActivityInfo.name = "class2";
         final Tile tile2 = new Tile(mActivityInfo, category.key);
-        tile2.intent =
-                new Intent().setComponent(new ComponentName(testPackage, "class2"));
         tile2.priority = 100;
+
+        mActivityInfo.packageName = testPackage;
+        mActivityInfo.name = "class3";
         final Tile tile3 = new Tile(mActivityInfo, category.key);
-        tile3.intent =
-                new Intent().setComponent(new ComponentName(testPackage, "class3"));
         tile3.priority = 50;
+
         category.addTile(tile1);
         category.addTile(tile2);
         category.addTile(tile3);
@@ -316,17 +342,13 @@ public class CategoryManagerTest {
         // Create tiles pointing to same intent.
         final String testPackage = mContext.getPackageName();
         final DashboardCategory category = new DashboardCategory(CATEGORY_HOMEPAGE);
+        mActivityInfo.packageName = testPackage;
+        mActivityInfo.name = "class1";
         final Tile tile1 = new Tile(mActivityInfo, category.key);
-        tile1.intent =
-                new Intent().setComponent(new ComponentName(testPackage, "class1"));
         tile1.priority = 100;
         final Tile tile2 = new Tile(mActivityInfo, category.key);
-        tile2.intent =
-                new Intent().setComponent(new ComponentName(testPackage, "class1"));
         tile2.priority = 100;
         final Tile tile3 = new Tile(mActivityInfo, category.key);
-        tile3.intent =
-                new Intent().setComponent(new ComponentName(testPackage, "class1"));
         tile3.priority = 50;
         category.addTile(tile1);
         category.addTile(tile2);

@@ -723,7 +723,8 @@ public class SettingsActivity extends SettingsBaseActivity
                 for (DashboardCategory category : categories) {
                     final int tileCount = category.getTilesCount();
                     for (int i = 0; i < tileCount; i++) {
-                        final ComponentName component = category.getTile(i).intent.getComponent();
+                        final ComponentName component = category.getTile(i)
+                                .getIntent().getComponent();
                         final String name = component.getClassName();
                         final boolean isEnabledForRestricted = ArrayUtils.contains(
                                 SettingsGateway.SETTINGS_FOR_RESTRICTED, name);

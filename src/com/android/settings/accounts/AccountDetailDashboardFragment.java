@@ -22,6 +22,9 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceScreen;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -32,9 +35,6 @@ import com.android.settingslib.drawer.Tile;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.PreferenceScreen;
 
 public class AccountDetailDashboardFragment extends DashboardFragment {
 
@@ -131,8 +131,8 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
             return false;
         }
         final boolean display = mAccountType.equals(metadata.getString(METADATA_IA_ACCOUNT));
-        if (display && tile.intent != null) {
-            tile.intent.putExtra(EXTRA_ACCOUNT_NAME, mAccount.name);
+        if (display) {
+            tile.getIntent().putExtra(EXTRA_ACCOUNT_NAME, mAccount.name);
         }
         return display;
     }

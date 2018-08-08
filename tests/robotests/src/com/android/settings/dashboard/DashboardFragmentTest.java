@@ -67,6 +67,8 @@ public class DashboardFragmentTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         mActivityInfo = new ActivityInfo();
+        mActivityInfo.packageName = "pkg";
+        mActivityInfo.name = "class";
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mDashboardCategory = new DashboardCategory("key");
         mDashboardCategory.addTile(new Tile(mActivityInfo, mDashboardCategory.key));

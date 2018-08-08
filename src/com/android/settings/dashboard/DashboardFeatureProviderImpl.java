@@ -117,14 +117,14 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
 
     @Override
     public String getDashboardKeyForTile(Tile tile) {
-        if (tile == null || tile.intent == null) {
+        if (tile == null) {
             return null;
         }
         if (!TextUtils.isEmpty(tile.key)) {
             return tile.key;
         }
         final StringBuilder sb = new StringBuilder(DASHBOARD_TILE_PREF_KEY_PREFIX);
-        final ComponentName component = tile.intent.getComponent();
+        final ComponentName component = tile.getIntent().getComponent();
         sb.append(component.getClassName());
         return sb.toString();
     }
@@ -157,8 +157,8 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         }
         if (!TextUtils.isEmpty(clsName)) {
             pref.setFragment(clsName);
-        } else if (tile.intent != null) {
-            final Intent intent = new Intent(tile.intent);
+        } else {
+            final Intent intent = new Intent(tile.getIntent());
             intent.putExtra(VisibilityLoggerMixin.EXTRA_SOURCE_METRICS_CATEGORY,
                     sourceMetricsCategory);
             if (action != null) {
@@ -178,11 +178,8 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             order = -tile.priority;
         }
         if (order != null) {
-            boolean shouldSkipBaseOrderOffset = false;
-            if (tile.intent != null) {
-                shouldSkipBaseOrderOffset = TextUtils.equals(
-                        skipOffsetPackageName, tile.intent.getComponent().getPackageName());
-            }
+            boolean shouldSkipBaseOrderOffset = TextUtils.equals(
+                    skipOffsetPackageName, tile.getIntent().getComponent().getPackageName());
             if (shouldSkipBaseOrderOffset || baseOrder == Preference.DEFAULT_ORDER) {
                 pref.setOrder(order);
             } else {
@@ -204,11 +201,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             mContext.startActivity(intent);
             return;
         }
-
-        if (tile.intent == null) {
-            return;
-        }
-        final Intent intent = new Intent(tile.intent)
+        final Intent intent = new Intent(tile.getIntent())
                 .putExtra(VisibilityLoggerMixin.EXTRA_SOURCE_METRICS_CATEGORY,
                         MetricsEvent.DASHBOARD_SUMMARY)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -244,14 +237,12 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         } else if (tile.getMetaData() != null
                 && tile.getMetaData().containsKey(META_DATA_PREFERENCE_ICON_URI)) {
             ThreadUtils.postOnBackgroundThread(() -> {
+                final Intent intent = tile.getIntent();
                 String packageName = null;
-                if (tile.intent != null) {
-                    Intent intent = tile.intent;
-                    if (!TextUtils.isEmpty(intent.getPackage())) {
-                        packageName = intent.getPackage();
-                    } else if (intent.getComponent() != null) {
-                        packageName = intent.getComponent().getPackageName();
-                    }
+                if (!TextUtils.isEmpty(intent.getPackage())) {
+                    packageName = intent.getPackage();
+                } else if (intent.getComponent() != null) {
+                    packageName = intent.getComponent().getPackageName();
                 }
                 final Map<String, IContentProvider> providerMap = new ArrayMap<>();
                 final String uri = tile.getMetaData().getString(META_DATA_PREFERENCE_ICON_URI);

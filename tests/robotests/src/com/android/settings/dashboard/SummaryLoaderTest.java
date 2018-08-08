@@ -22,7 +22,6 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -52,8 +51,10 @@ public class SummaryLoaderTest {
     public void SetUp() {
         MockitoAnnotations.initMocks(this);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
-
-        mTile = new Tile(new ActivityInfo(), CategoryKey.CATEGORY_HOMEPAGE);
+        final ActivityInfo activityInfo = new ActivityInfo();
+        activityInfo.packageName = "pkg";
+        activityInfo.name = "class";
+        mTile = new Tile(activityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         mTile.summary = SUMMARY_1;
         mCallbackInvoked = false;
 
@@ -86,9 +87,11 @@ public class SummaryLoaderTest {
     public void testUpdateSummaryToCache_hasCache_shouldUpdate() {
         final String testSummary = "test_summary";
         final DashboardCategory category = new DashboardCategory(CategoryKey.CATEGORY_HOMEPAGE);
-        final Tile tile = new Tile(new ActivityInfo(), category.key);
+        final ActivityInfo activityInfo = new ActivityInfo();
+        activityInfo.packageName = "pkg";
+        activityInfo.name = "cls";
+        final Tile tile = new Tile(activityInfo, category.key);
         tile.key = "123";
-        tile.intent = new Intent();
         category.addTile(tile);
         when(mFeatureFactory.dashboardFeatureProvider.getDashboardKeyForTile(tile))
                 .thenReturn(tile.key);

@@ -63,6 +63,8 @@ public class AccountDetailDashboardFragmentTest {
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mActivityInfo = new ActivityInfo();
+        mActivityInfo.packageName = "pkg";
+        mActivityInfo.name = "clazz";
         mActivityInfo.metaData = new Bundle();
 
         final Bundle args = new Bundle();
@@ -121,7 +123,6 @@ public class AccountDetailDashboardFragmentTest {
         mActivityInfo.metaData.putString(METADATA_ACCOUNT_TYPE, "com.abc");
         mActivityInfo.metaData.putString("com.android.settings.intent.action",
                 Intent.ACTION_ASSIST);
-        tile.intent = new Intent();
         tile.userHandle = null;
         mFragment.displayTile(tile);
 

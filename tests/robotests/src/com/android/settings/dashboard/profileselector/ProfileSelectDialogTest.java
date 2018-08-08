@@ -24,7 +24,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
@@ -51,6 +50,8 @@ public class ProfileSelectDialogTest {
     @Mock
     private UserManager mUserManager;
 
+    private ActivityInfo mActivityInfo;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -58,12 +59,15 @@ public class ProfileSelectDialogTest {
         final UserInfo userInfo = new UserInfo(
                 NORMAL_USER.getIdentifier(), "test_user", UserInfo.FLAG_RESTRICTED);
         when(mUserManager.getUserInfo(NORMAL_USER.getIdentifier())).thenReturn(userInfo);
+        mActivityInfo = new ActivityInfo();
+        mActivityInfo.packageName = "pkg";
+        mActivityInfo.name = "cls";
+
     }
 
     @Test
     public void updateUserHandlesIfNeeded_Normal() {
-        final Tile tile = new Tile(new ActivityInfo(), CategoryKey.CATEGORY_HOMEPAGE);
-        tile.intent = new Intent();
+        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         tile.userHandle.add(NORMAL_USER);
 
         ProfileSelectDialog.updateUserHandlesIfNeeded(mContext, tile);
@@ -75,8 +79,7 @@ public class ProfileSelectDialogTest {
 
     @Test
     public void updateUserHandlesIfNeeded_Remove() {
-        final Tile tile = new Tile(new ActivityInfo(), CategoryKey.CATEGORY_HOMEPAGE);
-        tile.intent = new Intent();
+        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         tile.userHandle.add(REMOVED_USER);
         tile.userHandle.add(NORMAL_USER);
         tile.userHandle.add(REMOVED_USER);
