@@ -23,7 +23,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import android.accounts.Account;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -32,6 +31,7 @@ import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -126,7 +126,7 @@ public class AccountDetailDashboardFragmentTest {
         tile.userHandle = null;
         mFragment.displayTile(tile);
 
-        final Activity activity = Robolectric.setupActivity(Activity.class);
+        final FragmentActivity activity = Robolectric.setupActivity(FragmentActivity.class);
         final Preference preference = new Preference(mContext);
         dashboardFeatureProvider.bindPreferenceToTile(activity,
                 MetricsProto.MetricsEvent.DASHBOARD_SUMMARY, preference, tile, "key",
