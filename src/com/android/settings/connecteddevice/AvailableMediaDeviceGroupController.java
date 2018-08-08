@@ -28,7 +28,6 @@ import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.bluetooth.BluetoothCallback;
-import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
@@ -129,41 +128,6 @@ public class AvailableMediaDeviceGroupController extends BasePreferenceControlle
     @VisibleForTesting
     public void setBluetoothDeviceUpdater(BluetoothDeviceUpdater bluetoothDeviceUpdater) {
         mBluetoothDeviceUpdater  = bluetoothDeviceUpdater;
-    }
-
-    @Override
-    public void onBluetoothStateChanged(int bluetoothState) {
-        // do nothing
-    }
-
-    @Override
-    public void onScanningStateChanged(boolean started) {
-        // do nothing
-    }
-
-    @Override
-    public void onDeviceAdded(CachedBluetoothDevice cachedDevice) {
-        // do nothing
-    }
-
-    @Override
-    public void onDeviceDeleted(CachedBluetoothDevice cachedDevice) {
-        // do nothing
-    }
-
-    @Override
-    public void onDeviceBondStateChanged(CachedBluetoothDevice cachedDevice, int bondState) {
-        // do nothing
-    }
-
-    @Override
-    public void onConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state) {
-        // do nothing
-    }
-
-    @Override
-    public void onActiveDeviceChanged(CachedBluetoothDevice activeDevice, int bluetoothProfile) {
-        // do nothing
     }
 
     @Override

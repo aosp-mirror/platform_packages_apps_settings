@@ -128,9 +128,6 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
     }
 
     @Override
-    public void onScanningStateChanged(boolean started) {}
-
-    @Override
     public void onDeviceAdded(CachedBluetoothDevice cachedDevice) {
         update(cachedDevice);
     }
@@ -146,17 +143,6 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
     @Override
     public void onDeviceBondStateChanged(CachedBluetoothDevice cachedDevice, int bondState) {
         update(cachedDevice);
-    }
-
-    @Override
-    public void onConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state) {}
-
-    @Override
-    public void onActiveDeviceChanged(CachedBluetoothDevice activeDevice, int bluetoothProfile) {
-    }
-
-    @Override
-    public void onAudioModeChanged() {
     }
 
     @Override
