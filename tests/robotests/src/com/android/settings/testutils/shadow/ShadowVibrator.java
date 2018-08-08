@@ -50,7 +50,8 @@ public class ShadowVibrator {
     public final Vibrator delegate = mock(Vibrator.class);
 
     @Implementation
-    public void vibrate(int uid, String opPkg, VibrationEffect vibe, AudioAttributes attributes) {
-        delegate.vibrate(uid, opPkg, vibe, attributes);
+    public void vibrate(int uid, String opPkg, VibrationEffect vibe, String reason,
+            AudioAttributes attributes) {
+        delegate.vibrate(uid, opPkg, vibe, reason, attributes);
     }
 }

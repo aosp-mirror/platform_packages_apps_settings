@@ -64,7 +64,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
     @VisibleForTesting
     static final String STATE_CONDITION_EXPANDED = "condition_expanded";
-
+    static final String META_DATA_PREFERENCE_ICON_BACKGROUND_ARGB = "com.android.settings.bg.argb";
     private final IconCache mCache;
     private final Context mContext;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
@@ -320,15 +320,25 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         if (!TextUtils.equals(tileIcon.getResPackage(), mContext.getPackageName())
                 && !(icon instanceof RoundedHomepageIcon)) {
             icon = new RoundedHomepageIcon(mContext, icon);
+            final Bundle metaData = tile.getMetaData();
             try {
-                final Bundle metaData = tile.getMetaData();
                 if (metaData != null) {
-                    final int colorRes = metaData.getInt(
-                            TileUtils.META_DATA_PREFERENCE_ICON_BACKGROUND_HINT, 0 /* default */);
-                    if (colorRes != 0) {
-                        final int bgColor = mContext.getPackageManager()
-                                .getResourcesForApplication(tileIcon.getResPackage())
-                                .getColor(colorRes, null /* theme */);
+                    // Load from bg.argb first
+                    int bgColor = metaData.getInt(META_DATA_PREFERENCE_ICON_BACKGROUND_ARGB,
+                            0 /* default */);
+                    // Not found, load from bg.hint
+                    if (bgColor == 0) {
+                        final int colorRes = metaData.getInt(
+                                TileUtils.META_DATA_PREFERENCE_ICON_BACKGROUND_HINT,
+                                0 /* default */);
+                        if (colorRes != 0) {
+                            bgColor = mContext.getPackageManager()
+                                    .getResourcesForApplication(tileIcon.getResPackage())
+                                    .getColor(colorRes, null /* theme */);
+                        }
+                    }
+                    // If found anything, use it.
+                    if (bgColor != 0) {
                         ((RoundedHomepageIcon) icon).setBackgroundColor(bgColor);
                     }
                 }

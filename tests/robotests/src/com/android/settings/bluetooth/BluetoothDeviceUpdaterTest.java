@@ -30,11 +30,8 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import com.android.settingslib.bluetooth.HeadsetProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
-import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -61,12 +58,6 @@ public class BluetoothDeviceUpdaterTest {
     private SettingsActivity mSettingsActivity;
     @Mock
     private LocalBluetoothManager mLocalManager;
-    @Mock
-    private LocalBluetoothProfileManager mLocalBluetoothProfileManager;
-    @Mock
-    private HeadsetProfile mHeadsetProfile;
-    @Mock
-    private A2dpProfile mA2dpProfile;
 
     private Context mContext;
     private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
@@ -79,9 +70,6 @@ public class BluetoothDeviceUpdaterTest {
         mContext = RuntimeEnvironment.application;
         doReturn(mContext).when(mDashboardFragment).getContext();
         when(mCachedBluetoothDevice.getDevice()).thenReturn(mBluetoothDevice);
-        when(mLocalManager.getProfileManager()).thenReturn(mLocalBluetoothProfileManager);
-        when(mLocalBluetoothProfileManager.getHeadsetProfile()).thenReturn(mHeadsetProfile);
-        when(mLocalBluetoothProfileManager.getA2dpProfile()).thenReturn(mA2dpProfile);
 
         mPreference = new BluetoothDevicePreference(mContext, mCachedBluetoothDevice, false);
         mBluetoothDeviceUpdater =

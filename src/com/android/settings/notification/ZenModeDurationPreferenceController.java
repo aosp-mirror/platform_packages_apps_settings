@@ -22,21 +22,13 @@ import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
-import androidx.fragment.app.FragmentManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
-
 public class ZenModeDurationPreferenceController extends AbstractZenModePreferenceController
-        implements PreferenceControllerMixin, Preference.OnPreferenceClickListener {
+        implements PreferenceControllerMixin {
 
-    private static final String TAG = "ZenModeDurationDialog";
     protected static final String KEY = "zen_mode_duration_settings";
-    private FragmentManager mFragment;
 
-    public ZenModeDurationPreferenceController(Context context, Lifecycle lifecycle, FragmentManager
-            fragment) {
+    public ZenModeDurationPreferenceController(Context context, Lifecycle lifecycle) {
         super(context, KEY, lifecycle);
-        mFragment = fragment;
     }
 
     @Override
@@ -50,16 +42,8 @@ public class ZenModeDurationPreferenceController extends AbstractZenModePreferen
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        screen.findPreference(KEY).setOnPreferenceClickListener(this);
-    }
-
-    @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
-
-        String summary = "";
+    public CharSequence getSummary() {
+        String summary;
         int zenDuration = getZenDuration();
         if (zenDuration < 0) {
             summary = mContext.getString(R.string.zen_mode_duration_summary_always_prompt);
@@ -76,12 +60,6 @@ public class ZenModeDurationPreferenceController extends AbstractZenModePreferen
             }
         }
 
-        preference.setSummary(summary);
-    }
-
-    @Override
-    public boolean onPreferenceClick(Preference preference) {
-        new SettingsZenDurationDialog().show(mFragment, TAG);
-        return true;
+        return summary;
     }
 }
