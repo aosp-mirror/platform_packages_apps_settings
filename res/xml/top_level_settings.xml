@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2018 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="top_level_settings"
+    android:title="@string/settings_label_launcher">
+
+    <Preference
+        android:key="top_level_network"
+        android:title="@string/network_dashboard_title"
+        android:summary="@string/summary_placeholder"
+        android:icon="@drawable/ic_homepage_network"
+        android:fragment="com.android.settings.network.NetworkDashboardFragment"
+        settings:controller="com.android.settings.network.TopLevelNetworkEntryPreferenceController"/>
+
+    <Preference
+        android:key="top_level_connected_devices"
+        android:title="@string/connected_devices_dashboard_title"
+        android:summary="@string/summary_placeholder"
+        android:icon="@drawable/ic_homepage_connected_device"
+        android:fragment="com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment"/>
+
+    <Preference
+        android:key="top_level_apps_and_notifs"
+        android:title="@string/app_and_notification_dashboard_title"
+        android:summary="@string/summary_placeholder"
+        android:icon="@drawable/ic_homepage_apps"
+        android:fragment="com.android.settings.applications.AppAndNotificationDashboardFragment"/>
+
+    <Preference
+        android:key="top_level_battery"
+        android:title="@string/power_usage_summary_title"
+        android:summary="@string/summary_placeholder"
+        android:icon="@drawable/ic_homepage_battery"
+        android:fragment="com.android.settings.fuelgauge.PowerUsageSummary"/>
+
+    <Preference
+        android:key="top_level_display"
+        android:title="@string/display_settings"
+        android:summary="@string/summary_placeholder"
+        android:icon="@drawable/ic_homepage_display"
+        android:fragment="com.android.settings.DisplaySettings"/>
+
+    <Preference
+        android:key="top_level_sound"
+        android:title="@string/sound_settings"
+        android:summary="@string/summary_placeholder"
+        android:icon="@drawable/ic_homepage_sound"
+        android:fragment="com.android.settings.notification.SoundSettings"/>
+
+    <Preference
+        android:key="top_level_storage"
+        android:title="@string/storage_settings"
+        android:summary="@string/summary_placeholder"
+        android:icon="@drawable/ic_homepage_storage"
+        android:fragment="com.android.settings.deviceinfo.StorageSettings"/>
+
+    <Preference
+        android:key="top_level_security"
+        android:title="@string/security_settings_title"
+        android:summary="@string/summary_placeholder"
+        android:icon="@drawable/ic_homepage_security"
+        android:fragment="com.android.settings.security.SecuritySettings"/>
+
+    <Preference
+        android:key="top_level_accounts"
+        android:title="@string/account_dashboard_title"
+        android:summary="@string/summary_placeholder"
+        android:icon="@drawable/ic_homepage_accounts"
+        android:fragment="com.android.settings.accounts.AccountDashboardFragment"/>
+
+    <Preference
+        android:key="top_level_accessibility"
+        android:title="@string/accessibility_settings"
+        android:summary="@string/summary_placeholder"
+        android:icon="@drawable/ic_homepage_accessibility"
+        android:fragment="com.android.settings.accessibility.AccessibilitySettings"/>
+
+    <Preference
+        android:key="top_level_system"
+        android:title="@string/header_category_system"
+        android:summary="@string/summary_placeholder"
+        android:icon="@drawable/ic_homepage_system_dashboard"
+        android:fragment="com.android.settings.system.SystemDashboardFragment"/>
+
+    <Preference
+        android:key="top_level_support"
+        android:summary="@string/support_summary"
+        android:title="@string/page_tab_title_support"
+        android:icon="@drawable/ic_homepage_support"/>
+
+</PreferenceScreen>
