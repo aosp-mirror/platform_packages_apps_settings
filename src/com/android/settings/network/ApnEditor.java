@@ -313,11 +313,21 @@ public class ApnEditor extends SettingsPreferenceFragment
     static String formatInteger(String value) {
         try {
             final int intValue = Integer.parseInt(value);
-            return String.format("%d", intValue);
+            return String.format(getCorrectDigitsFormat(value), intValue);
         } catch (NumberFormatException e) {
             return value;
         }
     }
+
+    /**
+     * Get the digits format so we preserve leading 0's.
+     * MCCs are 3 digits and MNCs are either 2 or 3.
+     */
+    static String getCorrectDigitsFormat(String value) {
+        if (value.length() == 2) return "%02d";
+        else return "%03d";
+    }
+
 
     /**
      * Check if passed in array of APN types indicates all APN types
