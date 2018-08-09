@@ -17,13 +17,13 @@
 package com.android.settings.fuelgauge;
 
 import static com.android.settings.fuelgauge.BatteryBroadcastReceiver.BatteryUpdateType;
+import static com.android.settings.fuelgauge.TopLevelBatteryPreferenceController.getDashboardLabel;
 
 import android.app.Activity;
 import android.content.Context;
 import android.os.BatteryStats;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
-import android.text.BidiFormatter;
 import android.text.format.Formatter;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,6 +31,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.widget.TextView;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.app.LoaderManager.LoaderCallbacks;
+import androidx.loader.content.Loader;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -50,11 +55,6 @@ import com.android.settingslib.utils.StringUtil;
 
 import java.util.Collections;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.app.LoaderManager.LoaderCallbacks;
-import androidx.loader.content.Loader;
 
 /**
  * Displays a list of apps and subsystems that consume power, ordered by how much power was
@@ -147,9 +147,9 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
 
     protected void updateViews(List<BatteryInfo> batteryInfos) {
         final BatteryMeterView batteryView = mBatteryLayoutPref
-            .findViewById(R.id.battery_header_icon);
+                .findViewById(R.id.battery_header_icon);
         final TextView percentRemaining =
-            mBatteryLayoutPref.findViewById(R.id.battery_percent);
+                mBatteryLayoutPref.findViewById(R.id.battery_percent);
         final TextView summary1 = mBatteryLayoutPref.findViewById(R.id.summary1);
         final TextView summary2 = mBatteryLayoutPref.findViewById(R.id.summary2);
         BatteryInfo oldInfo = batteryInfos.get(0);
@@ -160,13 +160,13 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
         // can sometimes say 0 time remaining because battery stats requires the phone
         // be unplugged for a period of time before being willing ot make an estimate.
         summary1.setText(mPowerFeatureProvider.getOldEstimateDebugString(
-            Formatter.formatShortElapsedTime(getContext(),
-                PowerUtil.convertUsToMs(oldInfo.remainingTimeUs))));
+                Formatter.formatShortElapsedTime(getContext(),
+                        PowerUtil.convertUsToMs(oldInfo.remainingTimeUs))));
 
         // for this one we can just set the string directly
         summary2.setText(mPowerFeatureProvider.getEnhancedEstimateDebugString(
-            Formatter.formatShortElapsedTime(getContext(),
-                PowerUtil.convertUsToMs(newInfo.remainingTimeUs))));
+                Formatter.formatShortElapsedTime(getContext(),
+                        PowerUtil.convertUsToMs(newInfo.remainingTimeUs))));
 
         batteryView.setBatteryLevel(oldInfo.batteryLevel);
         batteryView.setCharging(!oldInfo.discharging);
@@ -419,19 +419,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
         }
     }
 
-    @VisibleForTesting
-    static CharSequence getDashboardLabel(Context context, BatteryInfo info) {
-        CharSequence label;
-        final BidiFormatter formatter = BidiFormatter.getInstance();
-        if (info.remainingLabel == null) {
-            label = info.batteryPercentString;
-        } else {
-            label = context.getString(R.string.power_remaining_settings_home_page,
-                    formatter.unicodeWrap(info.batteryPercentString),
-                    formatter.unicodeWrap(info.remainingLabel));
-        }
-        return label;
-    }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
