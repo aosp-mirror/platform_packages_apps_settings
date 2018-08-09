@@ -32,17 +32,17 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.settings.R;
 import com.android.settingslib.bluetooth.BluetoothDiscoverableTimeoutReceiver;
-
-import androidx.appcompat.app.AlertDialog;
 
 /**
  * RequestPermissionActivity asks the user whether to enable discovery. This is
  * usually started by an application wanted to start bluetooth and or discovery
  */
 public class RequestPermissionActivity extends Activity implements
-        DialogInterface.OnClickListener {
+        DialogInterface.OnClickListener, DialogInterface.OnDismissListener {
     // Command line to test this
     // adb shell am start -a android.bluetooth.adapter.action.REQUEST_ENABLE
     // adb shell am start -a android.bluetooth.adapter.action.REQUEST_DISCOVERABLE
@@ -188,6 +188,7 @@ public class RequestPermissionActivity extends Activity implements
             builder.setNegativeButton(getString(R.string.deny), this);
         }
 
+        builder.setOnDismissListener(this);
         mDialog = builder.create();
         mDialog.show();
     }
@@ -238,10 +239,14 @@ public class RequestPermissionActivity extends Activity implements
                 break;
 
             case DialogInterface.BUTTON_NEGATIVE:
-                setResult(RESULT_CANCELED);
-                finish();
+                cancelAndFinish();
                 break;
         }
+    }
+
+    @Override
+    public void onDismiss(final DialogInterface dialog) {
+        cancelAndFinish();
     }
 
     private void proceedAndFinish() {
