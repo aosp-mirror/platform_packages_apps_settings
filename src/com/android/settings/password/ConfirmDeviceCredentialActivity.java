@@ -23,6 +23,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
 
@@ -70,7 +71,7 @@ public class ConfirmDeviceCredentialActivity extends Activity {
                 KeyguardManager.EXTRA_ALTERNATE_BUTTON_LABEL);
         boolean frp = KeyguardManager.ACTION_CONFIRM_FRP_CREDENTIAL.equals(intent.getAction());
 
-        int userId = Utils.getCredentialOwnerUserId(this);
+        int userId = UserHandle.myUserId();
         if (isInternalActivity()) {
             try {
                 userId = Utils.getUserIdFromBundle(this, intent.getExtras());

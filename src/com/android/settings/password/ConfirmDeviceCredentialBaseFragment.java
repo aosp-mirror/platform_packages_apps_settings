@@ -125,8 +125,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
         mCancelButton = (Button) view.findViewById(R.id.cancelButton);
         mFingerprintIcon = (ImageView) view.findViewById(R.id.fingerprintIcon);
         mFingerprintHelper = new FingerprintUiHelper(
-                mFingerprintIcon,
-                (TextView) view.findViewById(R.id.errorText), this, mEffectiveUserId);
+                mFingerprintIcon, view.findViewById(R.id.errorText), this, mUserId);
         boolean showCancelButton = getActivity().getIntent().getBooleanExtra(
                 SHOW_CANCEL_BUTTON, false);
         boolean hasAlternateButton = mFrp && !TextUtils.isEmpty(mFrpAlternateButtonText);
