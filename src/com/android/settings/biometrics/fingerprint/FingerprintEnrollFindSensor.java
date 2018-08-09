@@ -94,7 +94,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase {
             }
 
             @Override
-            public void onEnrollmentHelp(CharSequence helpString) {
+            public void onEnrollmentHelp(int helpMsgId, CharSequence helpString) {
             }
 
             @Override

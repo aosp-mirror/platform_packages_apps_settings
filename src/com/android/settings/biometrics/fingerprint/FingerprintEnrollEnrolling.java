@@ -245,7 +245,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     }
 
     @Override
-    public void onEnrollmentHelp(CharSequence helpString) {
+    public void onEnrollmentHelp(int helpMsgId, CharSequence helpString) {
         if (!TextUtils.isEmpty(helpString)) {
             mErrorText.removeCallbacks(mTouchAgainRunnable);
             showError(helpString);
