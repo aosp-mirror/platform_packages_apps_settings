@@ -35,12 +35,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.view.Menu;
+import android.provider.Settings.Global;
+import android.view.View;
 
 import com.android.settings.search.SearchActivity;
-import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -56,23 +55,44 @@ import org.robolectric.util.ReflectionHelpers;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SettingsActivityTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
-
     @Mock
     private FragmentManager mFragmentManager;
     @Mock
     private ActivityManager.TaskDescription mTaskDescription;
     @Mock
     private Bitmap mBitmap;
+    @Mock
+    private View mSearchBar;
     private SettingsActivity mActivity;
+    private Context mContext;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
+        mContext = RuntimeEnvironment.application;
         mActivity = spy(new SettingsActivity());
         doReturn(mBitmap).when(mActivity).getBitmapFromXmlResource(anyInt());
+        doReturn(mContext.getContentResolver()).when(mActivity).getContentResolver();
+        doReturn(mSearchBar).when(mActivity).findViewById(R.id.search_bar);
+    }
+
+    @Test
+    public void setSearchBarVisibility_deviceNotProvisioned_shouldDisableSearch() {
+        Global.putInt(mContext.getContentResolver(), Global.DEVICE_PROVISIONED, 0);
+
+        mActivity.setSearchBarVisibility();
+
+        verify(mSearchBar).setVisibility(View.INVISIBLE);
+    }
+
+    @Test
+    public void setSearchBarVisibility_deviceProvisioned_shouldEnableSearch() {
+        Global.putInt(mContext.getContentResolver(), Global.DEVICE_PROVISIONED, 1);
+
+        mActivity.setSearchBarVisibility();
+
+        verify(mSearchBar).setVisibility(View.VISIBLE);
     }
 
     @Test
