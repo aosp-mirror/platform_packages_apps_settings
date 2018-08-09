@@ -78,6 +78,8 @@ public class SuggestionFeatureProviderImplTest {
         MockitoAnnotations.initMocks(this);
         mFactory = FakeFeatureFactory.setupForTest();
         mActivityInfo = new ActivityInfo();
+        mActivityInfo.packageName = "pkg";
+        mActivityInfo.name = "class";
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         // Explicit casting to object due to MockitoCast bug
         when((Object) mContext.getSystemService(FingerprintManager.class))

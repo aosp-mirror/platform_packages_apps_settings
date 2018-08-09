@@ -15,7 +15,6 @@
  */
 package com.android.settings.dashboard;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -32,6 +31,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -80,7 +80,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         @Override
         public void onClick(View v) {
             //TODO: get rid of setTag/getTag
-            mDashboardFeatureProvider.openTileIntent((Activity) mContext, (Tile) v.getTag());
+            mDashboardFeatureProvider.openTileIntent((FragmentActivity) mContext,
+                    (Tile) v.getTag());
         }
     };
 
@@ -343,7 +344,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                     }
                 }
             } catch (PackageManager.NameNotFoundException e) {
-                Log.e(TAG, "Failed to set background color for " + tile.intent.getPackage());
+                Log.e(TAG, "Failed to set background color for " + tile.getPackageName());
             }
             mCache.updateIcon(tileIcon, icon);
         }

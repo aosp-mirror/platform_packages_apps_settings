@@ -183,9 +183,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
-            <intent-filter android:priority="11">
+            <intent-filter>
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
+            <meta-data android:name="com.android.settings.order" android:value="11"/>
             <meta-data android:name="com.android.settings.category"
                 android:value="com.android.settings.category.ia.homepage"/>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -208,9 +209,10 @@
                 <action android:name="android.settings.BLUETOOTH_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter android:priority="10">
+            <intent-filter>
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
+            <meta-data android:name="com.android.settings.order" android:value="10"/>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment"/>
             <meta-data android:name="com.android.settings.category"
@@ -553,11 +555,12 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter android:priority="240">
+            <intent-filter>
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
                 android:value="com.android.settings.category.ia.system" />
+            <meta-data android:name="com.android.settings.order" android:value="-240"/>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.DateTimeSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
@@ -602,9 +605,10 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter android:priority="260">
+            <intent-filter>
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
+            <meta-data android:name="com.android.settings.order" android:value="-260"/>
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.system"/>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -889,9 +893,10 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-            <intent-filter android:priority="7">
+            <intent-filter>
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.order" android:value="7"/>
             <meta-data android:name="com.android.settings.category"
                 android:value="com.android.settings.category.ia.homepage" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -956,9 +961,10 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-            <intent-filter android:priority="270">
+            <intent-filter>
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.order" android:value="-270"/>
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.system" />
             <meta-data android:name="com.android.settings.title"
@@ -1252,9 +1258,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
-            <intent-filter android:priority="4">
+            <intent-filter>
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.order" android:value="4"/>
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.homepage" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -1405,9 +1412,10 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-            <intent-filter android:priority="2">
+            <intent-filter>
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.order" android:value="2"/>
             <meta-data android:name="com.android.settings.category"
                 android:value="com.android.settings.category.ia.homepage" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -1738,9 +1746,10 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-            <intent-filter android:priority="5">
+            <intent-filter>
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.order" android:value="5"/>
             <meta-data android:name="com.android.settings.category"
                 android:value="com.android.settings.category.ia.homepage" />
             <meta-data android:name="com.android.settings.title"
@@ -1859,9 +1868,10 @@
                 <action android:name="com.android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter android:priority="40">
+            <intent-filter>
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.order" android:value="-40"/>
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.system" />
             <meta-data android:name="com.android.settings.summary"
@@ -2046,9 +2056,10 @@
                 <action android:name="android.settings.CAST_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter android:priority="6">
+            <intent-filter>
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
+            <meta-data android:name="com.android.settings.order" android:value="-6"/>
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.device" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -2133,9 +2144,10 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-            <intent-filter android:priority="8">
+            <intent-filter>
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.order" android:value="8"/>
             <meta-data android:name="com.android.settings.category"
                 android:value="com.android.settings.category.ia.homepage" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -2286,9 +2298,10 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-            <intent-filter android:priority="10">
+            <intent-filter>
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.order" android:value="-6"/>
             <meta-data android:name="com.android.settings.category"
                 android:value="com.android.settings.category.ia.wireless" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -2333,9 +2346,10 @@
                 <action android:name="android.settings.USER_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter  android:priority="45">
+            <intent-filter>
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.order" android:value="-45"/>
             <meta-data android:name="com.android.settings.category"
                 android:value="com.android.settings.category.ia.system" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -2474,9 +2488,10 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-            <intent-filter android:priority="160">
+            <intent-filter>
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
+            <meta-data android:name="com.android.settings.order" android:value="-160"/>
             <meta-data android:name="com.android.settings.category"
                 android:value="com.android.settings.category.ia.apps"/>
             <meta-data android:name="com.android.settings.summary"
@@ -2504,9 +2519,10 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-            <intent-filter android:priority="6">
+            <intent-filter>
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.order" android:value="6"/>
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.homepage" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -2651,9 +2667,10 @@
                 <action android:name="com.android.settings.sim.SIM_SUB_INFO_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter android:priority="2">
+            <intent-filter>
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.order" android:value="-2"/>
             <meta-data android:name="com.android.settings.category"
                 android:value="com.android.settings.category.ia.wireless" />
             <meta-data android:name="com.android.settings.summary"
@@ -2855,9 +2872,10 @@
                 <action android:name="android.settings.HOME_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter android:priority="120">
+            <intent-filter>
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
+            <meta-data android:name="com.android.settings.order" android:value="-120"/>
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.apps"/>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -2925,9 +2943,10 @@
             android:icon="@drawable/ic_homepage_apps"
             android:taskAffinity="com.android.settings"
             android:parentActivityName="Settings">
-            <intent-filter android:priority="9">
+            <intent-filter>
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
+            <meta-data android:name="com.android.settings.order" android:value="9"/>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.AppAndNotificationDashboardFragment"/>
             <meta-data android:name="com.android.settings.category"
@@ -2942,7 +2961,7 @@
             android:icon="@drawable/ic_homepage_accounts"
             android:taskAffinity="com.android.settings"
             android:parentActivityName="Settings">
-            <intent-filter android:priority="3">
+            <intent-filter>
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
             <intent-filter android:priority="1">
@@ -2953,6 +2972,7 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.order" android:value="3"/>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.accounts.AccountDashboardFragment"/>
             <meta-data android:name="com.android.settings.category"
@@ -2967,13 +2987,14 @@
             android:icon="@drawable/ic_homepage_system_dashboard"
             android:taskAffinity="com.android.settings"
             android:parentActivityName="Settings">
-            <intent-filter android:priority="-1">
+            <intent-filter>
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
             <intent-filter android:priority="70">
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.order" android:value="-1"/>
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.homepage"/>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -2987,13 +3008,14 @@
                   android:icon="@drawable/ic_homepage_support"
                   android:theme="@android:style/Theme.DeviceDefault.Light.Panel"
                   android:enabled="@bool/config_support_enabled">
-            <intent-filter android:priority="-2">
+            <intent-filter>
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
             <intent-filter>
                 <action android:name="com.android.settings.action.SUPPORT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.order" android:value="-2"/>
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.homepage"/>
             <meta-data android:name="com.android.settings.summary"

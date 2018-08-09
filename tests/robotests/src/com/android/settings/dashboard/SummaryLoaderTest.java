@@ -16,14 +16,16 @@
 
 package com.android.settings.dashboard;
 
+import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_KEYHINT;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.Bundle;
 
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -36,6 +38,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SummaryLoaderTest {
@@ -52,8 +55,10 @@ public class SummaryLoaderTest {
     public void SetUp() {
         MockitoAnnotations.initMocks(this);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
-
-        mTile = new Tile(new ActivityInfo(), CategoryKey.CATEGORY_HOMEPAGE);
+        final ActivityInfo activityInfo = new ActivityInfo();
+        activityInfo.packageName = "pkg";
+        activityInfo.name = "class";
+        mTile = new Tile(activityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         mTile.summary = SUMMARY_1;
         mCallbackInvoked = false;
 
@@ -86,12 +91,16 @@ public class SummaryLoaderTest {
     public void testUpdateSummaryToCache_hasCache_shouldUpdate() {
         final String testSummary = "test_summary";
         final DashboardCategory category = new DashboardCategory(CategoryKey.CATEGORY_HOMEPAGE);
-        final Tile tile = new Tile(new ActivityInfo(), category.key);
-        tile.key = "123";
-        tile.intent = new Intent();
+        final ActivityInfo activityInfo = new ActivityInfo();
+        activityInfo.packageName = "pkg";
+        activityInfo.name = "cls";
+        activityInfo.metaData = new Bundle();
+        activityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "123");
+        final Tile tile = new Tile(activityInfo, category.key);
+
         category.addTile(tile);
         when(mFeatureFactory.dashboardFeatureProvider.getDashboardKeyForTile(tile))
-                .thenReturn(tile.key);
+                .thenReturn(tile.getKey(RuntimeEnvironment.application));
 
         mSummaryLoader.updateSummaryIfNeeded(tile, testSummary);
         tile.summary = null;

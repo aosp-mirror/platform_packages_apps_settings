@@ -20,7 +20,6 @@ import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_ICON
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_SUMMARY;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_SUMMARY_URI;
 
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.IContentProvider;
@@ -35,6 +34,7 @@ import android.util.Log;
 import android.util.Pair;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -61,8 +61,6 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     private static final String TAG = "DashboardFeatureImpl";
     private static final String DASHBOARD_TILE_PREF_KEY_PREFIX = "dashboard_tile_pref_";
     private static final String META_DATA_KEY_INTENT_ACTION = "com.android.settings.intent.action";
-    @VisibleForTesting
-    static final String META_DATA_KEY_ORDER = "com.android.settings.order";
 
     protected final Context mContext;
 
@@ -83,7 +81,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     }
 
     @Override
-    public List<Preference> getPreferencesForCategory(Activity activity, Context context,
+    public List<Preference> getPreferencesForCategory(FragmentActivity activity, Context context,
             int sourceMetricsCategory, String key) {
         final DashboardCategory category = getTilesForCategory(key);
         if (category == null) {
@@ -117,21 +115,21 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
 
     @Override
     public String getDashboardKeyForTile(Tile tile) {
-        if (tile == null || tile.intent == null) {
+        if (tile == null) {
             return null;
         }
-        if (!TextUtils.isEmpty(tile.key)) {
-            return tile.key;
+        if (tile.hasKey()) {
+            return tile.getKey(mContext);
         }
         final StringBuilder sb = new StringBuilder(DASHBOARD_TILE_PREF_KEY_PREFIX);
-        final ComponentName component = tile.intent.getComponent();
+        final ComponentName component = tile.getIntent().getComponent();
         sb.append(component.getClassName());
         return sb.toString();
     }
 
     @Override
-    public void bindPreferenceToTile(Activity activity, int sourceMetricsCategory, Preference pref,
-            Tile tile, String key, int baseOrder) {
+    public void bindPreferenceToTile(FragmentActivity activity, int sourceMetricsCategory,
+            Preference pref, Tile tile, String key, int baseOrder) {
         if (pref == null) {
             return;
         }
@@ -146,19 +144,15 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         final Bundle metadata = tile.getMetaData();
         String clsName = null;
         String action = null;
-        Integer order = null;
+
         if (metadata != null) {
             clsName = metadata.getString(SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS);
             action = metadata.getString(META_DATA_KEY_INTENT_ACTION);
-            if (metadata.containsKey(META_DATA_KEY_ORDER)
-                    && metadata.get(META_DATA_KEY_ORDER) instanceof Integer) {
-                order = metadata.getInt(META_DATA_KEY_ORDER);
-            }
         }
         if (!TextUtils.isEmpty(clsName)) {
             pref.setFragment(clsName);
-        } else if (tile.intent != null) {
-            final Intent intent = new Intent(tile.intent);
+        } else {
+            final Intent intent = new Intent(tile.getIntent());
             intent.putExtra(VisibilityLoggerMixin.EXTRA_SOURCE_METRICS_CATEGORY,
                     sourceMetricsCategory);
             if (action != null) {
@@ -170,19 +164,12 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             });
         }
         final String skipOffsetPackageName = activity.getPackageName();
-        // If order is set in the meta data, use that order. Otherwise, check the intent priority.
-        if (order == null && tile.priority != 0) {
-            // Use negated priority for order, because tile priority is based on intent-filter
-            // (larger value has higher priority). However pref order defines smaller value has
-            // higher priority.
-            order = -tile.priority;
-        }
-        if (order != null) {
-            boolean shouldSkipBaseOrderOffset = false;
-            if (tile.intent != null) {
-                shouldSkipBaseOrderOffset = TextUtils.equals(
-                        skipOffsetPackageName, tile.intent.getComponent().getPackageName());
-            }
+
+
+        if (tile.hasOrder()) {
+            final int order = tile.getOrder();
+            boolean shouldSkipBaseOrderOffset = TextUtils.equals(
+                    skipOffsetPackageName, tile.getIntent().getComponent().getPackageName());
             if (shouldSkipBaseOrderOffset || baseOrder == Preference.DEFAULT_ORDER) {
                 pref.setOrder(order);
             } else {
@@ -197,18 +184,14 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     }
 
     @Override
-    public void openTileIntent(Activity activity, Tile tile) {
+    public void openTileIntent(FragmentActivity activity, Tile tile) {
         if (tile == null) {
             Intent intent = new Intent(Settings.ACTION_SETTINGS).addFlags(
                     Intent.FLAG_ACTIVITY_CLEAR_TASK);
             mContext.startActivity(intent);
             return;
         }
-
-        if (tile.intent == null) {
-            return;
-        }
-        final Intent intent = new Intent(tile.intent)
+        final Intent intent = new Intent(tile.getIntent())
                 .putExtra(VisibilityLoggerMixin.EXTRA_SOURCE_METRICS_CATEGORY,
                         MetricsEvent.DASHBOARD_SUMMARY)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -244,14 +227,12 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         } else if (tile.getMetaData() != null
                 && tile.getMetaData().containsKey(META_DATA_PREFERENCE_ICON_URI)) {
             ThreadUtils.postOnBackgroundThread(() -> {
+                final Intent intent = tile.getIntent();
                 String packageName = null;
-                if (tile.intent != null) {
-                    Intent intent = tile.intent;
-                    if (!TextUtils.isEmpty(intent.getPackage())) {
-                        packageName = intent.getPackage();
-                    } else if (intent.getComponent() != null) {
-                        packageName = intent.getComponent().getPackageName();
-                    }
+                if (!TextUtils.isEmpty(intent.getPackage())) {
+                    packageName = intent.getPackage();
+                } else if (intent.getComponent() != null) {
+                    packageName = intent.getComponent().getPackageName();
                 }
                 final Map<String, IContentProvider> providerMap = new ArrayMap<>();
                 final String uri = tile.getMetaData().getString(META_DATA_PREFERENCE_ICON_URI);
@@ -269,7 +250,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         }
     }
 
-    private void launchIntentOrSelectProfile(Activity activity, Tile tile, Intent intent,
+    private void launchIntentOrSelectProfile(FragmentActivity activity, Tile tile, Intent intent,
             int sourceMetricCategory) {
         if (!isIntentResolvable(intent)) {
             Log.w(TAG, "Cannot resolve intent, skipping. " + intent);
@@ -284,7 +265,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             mMetricsFeatureProvider.logDashboardStartIntent(mContext, intent, sourceMetricCategory);
             activity.startActivityForResultAsUser(intent, 0, tile.userHandle.get(0));
         } else {
-            ProfileSelectDialog.show(activity.getFragmentManager(), tile);
+            ProfileSelectDialog.show(activity.getSupportFragmentManager(), tile);
         }
     }
 

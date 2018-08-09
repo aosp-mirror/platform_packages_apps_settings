@@ -184,14 +184,6 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
         unregister();
     }
 
-    /**
-     * Only concerned about whether the local adapter is connected to any profile of any device and
-     * are not really concerned about which profile.
-     */
-    @Override
-    public void onConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state) {
-    }
-
     @Override
     public void onActiveDeviceChanged(CachedBluetoothDevice activeDevice, int bluetoothProfile) {
         updateState(mPreference);
@@ -208,17 +200,6 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
         updateState(mPreference);
     }
 
-    @Override
-    public void onBluetoothStateChanged(int bluetoothState) {
-    }
-
-    /**
-     * The local Bluetooth adapter has started the remote device discovery process.
-     */
-    @Override
-    public void onScanningStateChanged(boolean started) {
-    }
-
     /**
      * Indicates a change in the bond state of a remote
      * device. For example, if a device is bonded (paired).
@@ -226,14 +207,6 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
     @Override
     public void onDeviceAdded(CachedBluetoothDevice cachedDevice) {
         updateState(mPreference);
-    }
-
-    @Override
-    public void onDeviceDeleted(CachedBluetoothDevice cachedDevice) {
-    }
-
-    @Override
-    public void onDeviceBondStateChanged(CachedBluetoothDevice cachedDevice, int bondState) {
     }
 
     public void setCallback(AudioSwitchCallback callback) {

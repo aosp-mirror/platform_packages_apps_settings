@@ -98,7 +98,7 @@ public class CategoryManager {
             DashboardCategory category = mCategories.get(i);
             for (int j = 0; j < category.getTilesCount(); j++) {
                 Tile tile = category.getTile(j);
-                if (tileBlacklist.contains(tile.intent.getComponent())) {
+                if (tileBlacklist.contains(tile.getIntent().getComponent())) {
                     category.removeTile(j--);
                 }
             }
@@ -205,10 +205,7 @@ public class CategoryManager {
             final Set<ComponentName> components = new ArraySet<>();
             for (int i = count - 1; i >= 0; i--) {
                 final Tile tile = category.getTile(i);
-                if (tile.intent == null) {
-                    continue;
-                }
-                final ComponentName tileComponent = tile.intent.getComponent();
+                final ComponentName tileComponent = tile.getIntent().getComponent();
                 if (components.contains(tileComponent)) {
                     category.removeTile(i);
                 } else {

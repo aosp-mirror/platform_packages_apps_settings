@@ -15,15 +15,15 @@
  */
 package com.android.settings.dashboard;
 
-import android.app.Activity;
 import android.content.Context;
+
+import androidx.fragment.app.FragmentActivity;
+import androidx.preference.Preference;
 
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 
 import java.util.List;
-
-import androidx.preference.Preference;
 
 /**
  * FeatureProvider for dashboard (aka settings homepage).
@@ -47,7 +47,7 @@ public interface DashboardFeatureProvider {
      * of auto-ordering, progressive disclosure, auto-refreshing summary text etc.
      */
     @Deprecated
-    List<Preference> getPreferencesForCategory(Activity activity, Context context,
+    List<Preference> getPreferencesForCategory(FragmentActivity activity, Context context,
             int sourceMetricsCategory, String key);
 
     /**
@@ -57,6 +57,7 @@ public interface DashboardFeatureProvider {
 
     /**
      * Whether or not we should tint icons in setting pages.
+     *
      * @deprecated in favor of color icons in homepage
      */
     @Deprecated
@@ -78,7 +79,7 @@ public interface DashboardFeatureProvider {
      * @param baseOrder The order offset value. When binding, pref's order is determined by
      * both this value and tile's own priority.
      */
-    void bindPreferenceToTile(Activity activity, int sourceMetricsCategory, Preference pref,
+    void bindPreferenceToTile(FragmentActivity activity, int sourceMetricsCategory, Preference pref,
             Tile tile, String key, int baseOrder);
 
     /**
@@ -89,6 +90,6 @@ public interface DashboardFeatureProvider {
     /**
      * Opens a tile to its destination intent.
      */
-    void openTileIntent(Activity activity, Tile tile);
+    void openTileIntent(FragmentActivity activity, Tile tile);
 
 }

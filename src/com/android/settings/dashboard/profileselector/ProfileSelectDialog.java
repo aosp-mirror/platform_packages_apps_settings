@@ -16,10 +16,7 @@
 
 package com.android.settings.dashboard.profileselector;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -28,6 +25,10 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.android.settingslib.drawer.Tile;
 
@@ -71,8 +72,9 @@ public class ProfileSelectDialog extends DialogFragment implements OnClickListen
     public void onClick(DialogInterface dialog, int which) {
         UserHandle user = mSelectedTile.userHandle.get(which);
         // Show menu on top level items.
-        mSelectedTile.intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        getActivity().startActivityAsUser(mSelectedTile.intent, user);
+        final Intent intent = mSelectedTile.getIntent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        getActivity().startActivityAsUser(intent, user);
     }
 
     public static void updateUserHandlesIfNeeded(Context context, Tile tile) {

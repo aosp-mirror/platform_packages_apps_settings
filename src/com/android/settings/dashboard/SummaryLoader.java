@@ -18,6 +18,7 @@ package com.android.settings.dashboard;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
@@ -155,19 +156,20 @@ public class SummaryLoader {
     }
 
     private SummaryProvider getSummaryProvider(Tile tile) {
-        if (!mActivity.getPackageName().equals(tile.intent.getComponent().getPackageName())) {
+        if (!mActivity.getPackageName().equals(tile.getPackageName())) {
             // Not within Settings, can't load Summary directly.
             // TODO: Load summary indirectly.
             return null;
         }
         final Bundle metaData = tile.getMetaData();
+        final Intent intent = tile.getIntent();
         if (metaData == null) {
-            if (DEBUG) Log.d(TAG, "No metadata specified for " + tile.intent.getComponent());
+            Log.d(TAG, "No metadata specified for " + intent.getComponent());
             return null;
         }
-        String clsName = metaData.getString(SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS);
+        final String clsName = metaData.getString(SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS);
         if (clsName == null) {
-            if (DEBUG) Log.d(TAG, "No fragment specified for " + tile.intent.getComponent());
+            Log.d(TAG, "No fragment specified for " + intent.getComponent());
             return null;
         }
         try {
@@ -193,15 +195,12 @@ public class SummaryLoader {
      * operations are asynchronous.
      */
     public void registerReceiver(final BroadcastReceiver receiver, final IntentFilter filter) {
-        mActivity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (!mListening) {
-                    return;
-                }
-                mReceivers.add(receiver);
-                mActivity.registerReceiver(receiver, filter);
+        mActivity.runOnUiThread(() -> {
+            if (!mListening) {
+                return;
             }
+            mReceivers.add(receiver);
+            mActivity.registerReceiver(receiver, filter);
         });
     }
 
@@ -242,7 +241,7 @@ public class SummaryLoader {
         SummaryProvider provider = getSummaryProvider(tile);
         if (provider != null) {
             if (DEBUG) Log.d(TAG, "Creating " + tile);
-            mSummaryProviderMap.put(provider, tile.intent.getComponent());
+            mSummaryProviderMap.put(provider, tile.getIntent().getComponent());
         }
     }
 
@@ -254,7 +253,7 @@ public class SummaryLoader {
         final int tileCount = tiles.size();
         for (int j = 0; j < tileCount; j++) {
             final Tile tile = tiles.get(j);
-            if (component.equals(tile.intent.getComponent())) {
+            if (component.equals(tile.getIntent().getComponent())) {
                 return tile;
             }
         }
