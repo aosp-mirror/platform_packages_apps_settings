@@ -99,7 +99,7 @@ public class EnterprisePrivacySettingsTest {
 
     private void verifyPreferenceControllers(List<AbstractPreferenceController> controllers) {
         assertThat(controllers).isNotNull();
-        assertThat(controllers.size()).isEqualTo(18);
+        assertThat(controllers.size()).isEqualTo(17);
         int position = 0;
         assertThat(controllers.get(position++)).isInstanceOf(NetworkLogsPreferenceController.class);
         assertThat(controllers.get(position++)).isInstanceOf(BugReportsPreferenceController.class);
@@ -126,8 +126,6 @@ public class EnterprisePrivacySettingsTest {
                 CaCertsCurrentUserPreferenceController.class);
         assertThat(controllers.get(position++)).isInstanceOf(
                 CaCertsManagedProfilePreferenceController.class);
-        assertThat(controllers.get(position++)).isInstanceOf(
-                BackupsEnabledPreferenceController.class);
         assertThat(controllers.get(position++)).isInstanceOf(
                 PreferenceCategoryController.class);
         assertThat(controllers.get(position++)).isInstanceOf(

@@ -346,15 +346,6 @@ public class EnterprisePrivacyFeatureProviderImplTest {
                 .isEqualTo(3);
     }
 
-    @Test
-    public void testAreBackupsMandatory() {
-        assertThat(mProvider.areBackupsMandatory()).isFalse();
-        ComponentName transportComponent = new ComponentName("test", "test");
-        when(mDevicePolicyManager.getMandatoryBackupTransport())
-                .thenReturn(transportComponent);
-        assertThat(mProvider.areBackupsMandatory()).isTrue();
-    }
-
     private void resetAndInitializePackageManager() {
         reset(mPackageManager);
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_DEVICE_ADMIN))
