@@ -30,13 +30,19 @@ public class ShadowBluetoothAdapter extends org.robolectric.shadows.ShadowBlueto
     private String mName;
     private int mScanMode;
     private int mState;
+    private List<Integer> mSupportedProfiles = new ArrayList<Integer>();
 
-    /**
-     * Do nothing, implement it to avoid null pointer error inside BluetoothAdapter
-     */
     @Implementation
     public List<Integer> getSupportedProfiles() {
-        return new ArrayList<Integer>();
+        return mSupportedProfiles;
+    }
+
+    public void addSupportedProfiles(int profile) {
+        mSupportedProfiles.add(profile);
+    }
+
+    public void clearSupportedProfiles() {
+        mSupportedProfiles.clear();
     }
 
     public void setName(String name) {

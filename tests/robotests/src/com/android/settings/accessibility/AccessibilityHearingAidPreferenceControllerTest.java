@@ -40,10 +40,10 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
+import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.HearingAidProfile;
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 
@@ -55,31 +55,30 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {ShadowBluetoothUtils.class})
+@Config(shadows = {ShadowBluetoothAdapter.class, ShadowBluetoothUtils.class})
 public class AccessibilityHearingAidPreferenceControllerTest {
     private static final String TEST_DEVICE_ADDRESS = "00:A1:A1:A1:A1:A1";
     private static final String TEST_DEVICE_NAME = "TEST_HEARING_AID_BT_DEVICE_NAME";
     private static final String HEARING_AID_PREFERENCE = "hearing_aid_preference";
 
     private BluetoothAdapter mBluetoothAdapter;
+    private ShadowBluetoothAdapter mShadowBluetoothAdapter;
     private BluetoothManager mBluetoothManager;
     private BluetoothDevice mBluetoothDevice;
     private Context mContext;
     private Preference mHearingAidPreference;
-    private List<Integer> mProfileSupportedList;
     private AccessibilityHearingAidPreferenceController mPreferenceController;
 
     @Mock
     private CachedBluetoothDevice mCachedBluetoothDevice;
     @Mock
     private CachedBluetoothDeviceManager mCachedDeviceManager;
-    @Mock
-    private LocalBluetoothAdapter mLocalBluetoothAdapter;
     @Mock
     private LocalBluetoothManager mLocalBluetoothManager;
     @Mock
@@ -161,7 +160,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
     @Test
     public void onNotSupportHearingAidProfile_doNotDoReceiverOperation() {
         //clear bluetooth supported profile
-        mProfileSupportedList.clear();
+        mShadowBluetoothAdapter.clearSupportedProfiles();
         mPreferenceController = new AccessibilityHearingAidPreferenceController(mContext, HEARING_AID_PREFERENCE);
         mPreferenceController.setPreference(mHearingAidPreference);
         //not call registerReceiver()
@@ -178,18 +177,17 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         mLocalBluetoothManager = ShadowBluetoothUtils.getLocalBtManager(mContext);
         mBluetoothManager = new BluetoothManager(mContext);
         mBluetoothAdapter = mBluetoothManager.getAdapter();
-        when(mLocalBluetoothManager.getBluetoothAdapter()).thenReturn(mLocalBluetoothAdapter);
-        when(mLocalBluetoothAdapter.isEnabled()).thenReturn(true);
         when(mLocalBluetoothManager.getCachedDeviceManager()).thenReturn(mCachedDeviceManager);
         when(mLocalBluetoothManager.getProfileManager()).thenReturn(mLocalBluetoothProfileManager);
         when(mLocalBluetoothProfileManager.getHearingAidProfile()).thenReturn(mHearingAidProfile);
     }
 
     private void setupHearingAidEnvironment() {
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
         mBluetoothDevice = mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS);
-        mProfileSupportedList = new ArrayList<Integer>();
-        mProfileSupportedList.add(BluetoothProfile.HEARING_AID);
-        when(mLocalBluetoothAdapter.getSupportedProfiles()).thenReturn(mProfileSupportedList);
+        mShadowBluetoothAdapter.enable();
+        mShadowBluetoothAdapter.addSupportedProfiles(BluetoothProfile.HEARING_AID);
         when(mCachedDeviceManager.findDevice(mBluetoothDevice)).thenReturn(mCachedBluetoothDevice);
         when(mCachedBluetoothDevice.getName()).thenReturn(TEST_DEVICE_NAME);
         when(mCachedBluetoothDevice.isConnectedHearingAidDevice()).thenReturn(true);
