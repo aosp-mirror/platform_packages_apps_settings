@@ -4,7 +4,6 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 
-import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.wifi.WifiDialog.WifiDialogListener;
@@ -30,14 +29,6 @@ public class WifiDialogTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-    }
-
-    @Test
-    public void createFullscreen_setsFullscreenTheme() {
-        WifiDialog fullscreen = WifiDialog.createFullscreen(mContext, mListener, mockAccessPoint,
-                WifiConfigUiBase.MODE_CONNECT);
-        assertThat(fullscreen.getContext().getThemeResId())
-                .isEqualTo(R.style.Theme_Settings_WifiDialogFullScreen);
     }
 
     @Test
