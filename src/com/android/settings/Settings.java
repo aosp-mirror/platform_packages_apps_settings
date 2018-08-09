@@ -121,7 +121,6 @@ public class Settings extends SettingsActivity {
     }
     public static class DirectoryAccessSettingsActivity extends SettingsActivity { /* empty */ }
 
-    public static class TopLevelSettings extends SettingsActivity { /* empty */ }
     public static class ApnSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiCallingSettingsActivity extends SettingsActivity { /* empty */ }
     public static class MemorySettingsActivity extends SettingsActivity { /* empty */ }

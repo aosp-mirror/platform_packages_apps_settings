@@ -34,12 +34,13 @@
         android:title="@string/connected_devices_dashboard_title"
         android:summary="@string/summary_placeholder"
         android:icon="@drawable/ic_homepage_connected_device"
-        android:fragment="com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment"/>
+        android:fragment="com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment"
+        settings:controller="com.android.settings.connecteddevice.TopLevelConnectedDevicesPreferenceController"/>
 
     <Preference
         android:key="top_level_apps_and_notifs"
         android:title="@string/app_and_notification_dashboard_title"
-        android:summary="@string/summary_placeholder"
+        android:summary="@string/app_and_notification_dashboard_summary"
         android:icon="@drawable/ic_homepage_apps"
         android:fragment="com.android.settings.applications.AppAndNotificationDashboardFragment"/>
 
@@ -48,19 +49,20 @@
         android:title="@string/power_usage_summary_title"
         android:summary="@string/summary_placeholder"
         android:icon="@drawable/ic_homepage_battery"
-        android:fragment="com.android.settings.fuelgauge.PowerUsageSummary"/>
+        android:fragment="com.android.settings.fuelgauge.PowerUsageSummary"
+        settings:controller="com.android.settings.fuelgauge.TopLevelBatteryPreferenceController"/>
 
     <Preference
         android:key="top_level_display"
         android:title="@string/display_settings"
-        android:summary="@string/summary_placeholder"
+        android:summary="@string/display_dashboard_summary"
         android:icon="@drawable/ic_homepage_display"
         android:fragment="com.android.settings.DisplaySettings"/>
 
     <Preference
         android:key="top_level_sound"
         android:title="@string/sound_settings"
-        android:summary="@string/summary_placeholder"
+        android:summary="@string/sound_dashboard_summary"
         android:icon="@drawable/ic_homepage_sound"
         android:fragment="com.android.settings.notification.SoundSettings"/>
 
@@ -69,33 +71,36 @@
         android:title="@string/storage_settings"
         android:summary="@string/summary_placeholder"
         android:icon="@drawable/ic_homepage_storage"
-        android:fragment="com.android.settings.deviceinfo.StorageSettings"/>
+        android:fragment="com.android.settings.deviceinfo.StorageSettings"
+        settings:controller="com.android.settings.deviceinfo.TopLevelStoragePreferenceController"/>
 
     <Preference
         android:key="top_level_security"
         android:title="@string/security_settings_title"
         android:summary="@string/summary_placeholder"
         android:icon="@drawable/ic_homepage_security"
-        android:fragment="com.android.settings.security.SecuritySettings"/>
+        android:fragment="com.android.settings.security.SecuritySettings"
+        settings:controller="com.android.settings.security.TopLevelSecurityEntryPreferenceController"/>
 
     <Preference
         android:key="top_level_accounts"
         android:title="@string/account_dashboard_title"
         android:summary="@string/summary_placeholder"
         android:icon="@drawable/ic_homepage_accounts"
-        android:fragment="com.android.settings.accounts.AccountDashboardFragment"/>
+        android:fragment="com.android.settings.accounts.AccountDashboardFragment"
+        settings:controller="com.android.settings.accounts.TopLevelAccountEntryPreferenceController"/>
 
     <Preference
         android:key="top_level_accessibility"
         android:title="@string/accessibility_settings"
-        android:summary="@string/summary_placeholder"
+        android:summary="@string/accessibility_settings_summary"
         android:icon="@drawable/ic_homepage_accessibility"
         android:fragment="com.android.settings.accessibility.AccessibilitySettings"/>
 
     <Preference
         android:key="top_level_system"
         android:title="@string/header_category_system"
-        android:summary="@string/summary_placeholder"
+        android:summary="@string/system_dashboard_summary"
         android:icon="@drawable/ic_homepage_system_dashboard"
         android:fragment="com.android.settings.system.SystemDashboardFragment"/>
 

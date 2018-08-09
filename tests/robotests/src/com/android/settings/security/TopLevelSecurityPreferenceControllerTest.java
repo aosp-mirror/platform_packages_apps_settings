@@ -17,7 +17,6 @@
 package com.android.settings.security;
 
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -26,7 +25,6 @@ import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
 
 import com.android.settings.R;
-import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -37,17 +35,15 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-public class SecuritySettingsTest {
+public class TopLevelSecurityPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock
-    private SummaryLoader mSummaryLoader;
-    @Mock
     private FingerprintManager mFingerprintManager;
     @Mock
     private FaceManager mFaceManager;
-    private SecuritySettings.SummaryProvider mSummaryProvider;
+    private TopLevelSecurityEntryPreferenceController mController;
 
     @Before
     public void setUp() {
@@ -56,87 +52,80 @@ public class SecuritySettingsTest {
                 .thenReturn(mFingerprintManager);
         when(mContext.getSystemService(Context.FACE_SERVICE))
                 .thenReturn(mFaceManager);
-        mSummaryProvider = new SecuritySettings.SummaryProvider(mContext, mSummaryLoader);
+        mController = new TopLevelSecurityEntryPreferenceController(mContext, "test_key");
     }
 
     @Test
-    public void testSummaryProvider_notListening() {
-        mSummaryProvider.setListening(false);
-
-        verifyNoMoreInteractions(mSummaryLoader);
-    }
-
-    @Test
-    public void testSummaryProvider_hasFace_hasStaticSummary() {
+    public void geSummary_hasFace_hasStaticSummary() {
         when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FACE))
                 .thenReturn(true);
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
 
-        mSummaryProvider.setListening(true);
+        mController.getSummary();
 
-        verify(mContext).getString(R.string.security_dashboard_summary_face);
+        verify(mContext).getText(R.string.security_dashboard_summary_face);
     }
 
     @Test
-    public void testSummaryProvider_hasFingerPrint_hasStaticSummary() {
+    public void geSummary_hasFingerPrint_hasStaticSummary() {
         when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FACE))
                 .thenReturn(false);
         when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT))
                 .thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
 
-        mSummaryProvider.setListening(true);
+        mController.getSummary();
 
-        verify(mContext).getString(R.string.security_dashboard_summary);
+        verify(mContext).getText(R.string.security_dashboard_summary);
     }
 
     @Test
-    public void testSummaryProvider_noFpFeature_shouldSetSummaryWithNoBiometrics() {
+    public void geSummary_noFpFeature_shouldSetSummaryWithNoBiometrics() {
         when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT))
                 .thenReturn(false);
         when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FACE))
                 .thenReturn(false);
 
-        mSummaryProvider.setListening(true);
+        mController.getSummary();
 
-        verify(mContext).getString(R.string.security_dashboard_summary_no_fingerprint);
+        verify(mContext).getText(R.string.security_dashboard_summary_no_fingerprint);
     }
 
     @Test
-    public void testSummaryProvider_noFpHardware_shouldSetSummaryWithNoBiometrics() {
+    public void geSummary_noFpHardware_shouldSetSummaryWithNoBiometrics() {
         when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FACE))
                 .thenReturn(false);
         when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT))
                 .thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
 
-        mSummaryProvider.setListening(true);
+        mController.getSummary();
 
-        verify(mContext).getString(R.string.security_dashboard_summary_no_fingerprint);
+        verify(mContext).getText(R.string.security_dashboard_summary_no_fingerprint);
     }
 
     @Test
-    public void testSummaryProvider_noFaceFeature_shouldSetSummaryWithNoBiometrics() {
+    public void geSummary_noFaceFeature_shouldSetSummaryWithNoBiometrics() {
         when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT))
                 .thenReturn(false);
         when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FACE))
                 .thenReturn(false);
 
-        mSummaryProvider.setListening(true);
+        mController.getSummary();
 
-        verify(mContext).getString(R.string.security_dashboard_summary_no_fingerprint);
+        verify(mContext).getText(R.string.security_dashboard_summary_no_fingerprint);
     }
 
     @Test
-    public void testSummaryProvider_noFaceHardware_shouldSetSummaryWithNoBiometrics() {
+    public void geSummary_noFaceHardware_shouldSetSummaryWithNoBiometrics() {
         when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FACE))
                 .thenReturn(true);
         when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT))
                 .thenReturn(false);
         when(mFaceManager.isHardwareDetected()).thenReturn(false);
 
-        mSummaryProvider.setListening(true);
+        mController.getSummary();
 
-        verify(mContext).getString(R.string.security_dashboard_summary_no_fingerprint);
+        verify(mContext).getText(R.string.security_dashboard_summary_no_fingerprint);
     }
 }

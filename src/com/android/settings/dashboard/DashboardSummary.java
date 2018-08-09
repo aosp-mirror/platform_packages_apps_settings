@@ -26,6 +26,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.annotation.WorkerThread;
+import androidx.loader.app.LoaderManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
@@ -46,11 +51,12 @@ import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.List;
 
-import androidx.annotation.VisibleForTesting;
-import androidx.annotation.WorkerThread;
-import androidx.loader.app.LoaderManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
+/**
+ * Deprecated in favor of {@link com.android.settings.homepage.TopLevelSettings}
+ *
+ * @deprecated
+ */
+@Deprecated
 public class DashboardSummary extends InstrumentedFragment
         implements CategoryListener, ConditionListener,
         FocusListener, SuggestionControllerMixinCompat.SuggestionControllerHost {
