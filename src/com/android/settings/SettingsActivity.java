@@ -708,7 +708,7 @@ public class SettingsActivity extends SettingsDrawerActivity
     }
 
     public void setDisplaySearchMenu(boolean displaySearch) {
-        if (displaySearch != mDisplaySearch) {
+        if (Utils.isDeviceProvisioned(this) && displaySearch != mDisplaySearch) {
             mDisplaySearch = displaySearch;
             invalidateOptionsMenu();
         }
