@@ -16,7 +16,7 @@
 
 package com.android.settings.gestures;
 
-import static android.provider.Settings.Secure.DOZE_PULSE_ON_PICK_UP;
+import static android.provider.Settings.Secure.DOZE_PICK_UP_GESTURE;
 
 import android.annotation.UserIdInt;
 import android.content.Context;
@@ -37,7 +37,7 @@ public class PickupGesturePreferenceController extends GesturePreferenceControll
     private static final String PREF_KEY_VIDEO = "gesture_pick_up_video";
     private final String mPickUpPrefKey;
 
-    private final String SECURE_KEY = DOZE_PULSE_ON_PICK_UP;
+    private final String SECURE_KEY = DOZE_PICK_UP_GESTURE;
 
     private AmbientDisplayConfiguration mAmbientConfig;
     @UserIdInt
@@ -57,19 +57,14 @@ public class PickupGesturePreferenceController extends GesturePreferenceControll
     public static boolean isSuggestionComplete(Context context, SharedPreferences prefs) {
         AmbientDisplayConfiguration ambientConfig = new AmbientDisplayConfiguration(context);
         return prefs.getBoolean(PickupGestureSettings.PREF_KEY_SUGGESTION_COMPLETE, false)
-                || !ambientConfig.pulseOnPickupAvailable();
+                || !ambientConfig.dozePickupSensorAvailable();
     }
 
     @Override
     public int getAvailabilityStatus() {
         // No hardware support for Pickup Gesture
-        if (!getAmbientConfig().dozePulsePickupSensorAvailable()) {
+        if (!getAmbientConfig().dozePickupSensorAvailable()) {
             return UNSUPPORTED_ON_DEVICE;
-        }
-
-        // Can't change Pickup Gesture when AOD is enabled.
-        if (!getAmbientConfig().ambientDisplayAvailable()) {
-            return DISABLED_DEPENDENT_SETTING;
         }
 
         return AVAILABLE;
@@ -87,7 +82,7 @@ public class PickupGesturePreferenceController extends GesturePreferenceControll
 
     @Override
     public boolean isChecked() {
-        return getAmbientConfig().pulseOnPickupEnabled(mUserId);
+        return getAmbientConfig().pickupGestureEnabled(mUserId);
     }
 
     @Override
@@ -99,16 +94,6 @@ public class PickupGesturePreferenceController extends GesturePreferenceControll
     public boolean setChecked(boolean isChecked) {
         return Settings.Secure.putInt(mContext.getContentResolver(), SECURE_KEY,
                 isChecked ? ON : OFF);
-    }
-
-    @Override
-    public boolean canHandleClicks() {
-        return pulseOnPickupCanBeModified();
-    }
-
-    @VisibleForTesting
-    boolean pulseOnPickupCanBeModified() {
-        return getAmbientConfig().pulseOnPickupCanBeModified(mUserId);
     }
 
     private AmbientDisplayConfiguration getAmbientConfig() {
