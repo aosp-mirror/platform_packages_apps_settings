@@ -22,6 +22,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
@@ -31,6 +32,7 @@ import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowAudioManager;
+import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.HeadsetProfile;
@@ -44,12 +46,13 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {ShadowAudioManager.class})
+@Config(shadows = {ShadowAudioManager.class, ShadowBluetoothAdapter.class})
 public class AvailableMediaBluetoothDeviceUpdaterTest {
     @Mock
     private DashboardFragment mDashboardFragment;
@@ -73,12 +76,15 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
     private Collection<CachedBluetoothDevice> cachedDevices;
     private ShadowAudioManager mShadowAudioManager;
     private BluetoothDevicePreference mPreference;
+    private ShadowBluetoothAdapter mShadowBluetoothAdapter;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
         mShadowAudioManager = ShadowAudioManager.getShadow();
+        mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
+        mShadowBluetoothAdapter.setEnabled(true);
         mContext = RuntimeEnvironment.application;
         doReturn(mContext).when(mDashboardFragment).getContext();
         cachedDevices =
