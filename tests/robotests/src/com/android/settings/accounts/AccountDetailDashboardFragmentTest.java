@@ -130,7 +130,7 @@ public class AccountDetailDashboardFragmentTest {
 
         final FragmentActivity activity = Robolectric.setupActivity(FragmentActivity.class);
         final Preference preference = new Preference(mContext);
-        dashboardFeatureProvider.bindPreferenceToTile(activity,
+        dashboardFeatureProvider.bindPreferenceToTile(activity, false /* forceRoundedIcon */,
                 MetricsProto.MetricsEvent.DASHBOARD_SUMMARY, preference, tile, null /* key */,
                 Preference.DEFAULT_ORDER);
 

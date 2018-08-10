@@ -42,12 +42,6 @@ import com.android.settingslib.utils.ThreadUtils;
 import java.lang.reflect.Field;
 import java.util.List;
 
-/**
- * TODO(b/110405144): Remove this when all top level settings are converted to PreferenceControllers
- *
- * @deprecated
- */
-@Deprecated
 public class SummaryLoader {
     private static final boolean DEBUG = DashboardSummary.DEBUG;
     private static final String TAG = "SummaryLoader";

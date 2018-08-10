@@ -91,6 +91,12 @@ public class TopLevelSettings extends DashboardFragment implements
         return true;
     }
 
+    @Override
+    protected boolean shouldForceRoundedIcon() {
+        return getContext().getResources()
+                .getBoolean(R.bool.config_force_rounded_icon_TopLevelSettings);
+    }
+
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override

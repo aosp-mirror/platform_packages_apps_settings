@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package com.android.settings.dashboard;
+package com.android.settings.widget;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;

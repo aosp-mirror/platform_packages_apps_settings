@@ -50,6 +50,7 @@ import com.android.settings.dashboard.suggestions.SuggestionAdapter;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.widget.RoundedHomepageIcon;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.drawer.TileUtils;
@@ -95,7 +96,6 @@ public class DashboardAdapterTest {
         mActivityInfo.packageName = "pkg";
         mActivityInfo.name = "class";
         mActivityInfo.metaData = new Bundle();
-        when(mFactory.dashboardFeatureProvider.shouldTintIcon()).thenReturn(true);
 
         when(mContext.getSystemService(Context.WINDOW_SERVICE)).thenReturn(mWindowManager);
         when(mContext.getResources()).thenReturn(mResources);

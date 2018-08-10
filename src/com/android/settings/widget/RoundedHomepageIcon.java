@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.dashboard;
+package com.android.settings.widget;
 
 import static androidx.annotation.VisibleForTesting.NONE;
 
@@ -33,7 +33,7 @@ public class RoundedHomepageIcon extends LayerDrawable {
     private static final String TAG = "RoundedHomepageIcon";
 
     @VisibleForTesting(otherwise = NONE)
-    int mBackgroundColor = -1;
+    public int mBackgroundColor = -1;
 
     public RoundedHomepageIcon(Context context, Drawable foreground) {
         super(new Drawable[] {

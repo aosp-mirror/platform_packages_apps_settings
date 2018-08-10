@@ -44,6 +44,7 @@ import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.dashboard.conditional.ConditionAdapter;
 import com.android.settings.dashboard.suggestions.SuggestionAdapter;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.widget.RoundedHomepageIcon;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;

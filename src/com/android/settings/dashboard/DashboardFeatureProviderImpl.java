@@ -81,36 +81,8 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     }
 
     @Override
-    public List<Preference> getPreferencesForCategory(FragmentActivity activity, Context context,
-            int sourceMetricsCategory, String key) {
-        final DashboardCategory category = getTilesForCategory(key);
-        if (category == null) {
-            Log.d(TAG, "NO dashboard tiles for " + TAG);
-            return null;
-        }
-        final List<Tile> tiles = category.getTiles();
-        if (tiles == null || tiles.isEmpty()) {
-            Log.d(TAG, "tile list is empty, skipping category " + category.key);
-            return null;
-        }
-        final List<Preference> preferences = new ArrayList<>();
-        for (Tile tile : tiles) {
-            final Preference pref = new Preference(context);
-            bindPreferenceToTile(activity, sourceMetricsCategory, pref, tile, null /* key */,
-                    Preference.DEFAULT_ORDER /* baseOrder */);
-            preferences.add(pref);
-        }
-        return preferences;
-    }
-
-    @Override
     public List<DashboardCategory> getAllCategories() {
         return mCategoryManager.getCategories(mContext);
-    }
-
-    @Override
-    public boolean shouldTintIcon() {
-        return mContext.getResources().getBoolean(R.bool.config_tintSettingIcon);
     }
 
     @Override
@@ -128,8 +100,8 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     }
 
     @Override
-    public void bindPreferenceToTile(FragmentActivity activity, int sourceMetricsCategory,
-            Preference pref, Tile tile, String key, int baseOrder) {
+    public void bindPreferenceToTile(FragmentActivity activity, boolean forceRoundedIcon,
+            int sourceMetricsCategory, Preference pref, Tile tile, String key, int baseOrder) {
         if (pref == null) {
             return;
         }
