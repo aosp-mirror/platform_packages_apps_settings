@@ -624,7 +624,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"To pair with:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Make sure that it is showing this passkey:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"From:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Pair with this device?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"To pair with:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Type on it:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, then press Return or Enter."</string>
-    <string name="bluetooth_pairing_shares_phonebook" msgid="2277931851483023208">"Allow <xliff:g id="DEVICE_NAME">%1$s</xliff:g> to access your contacts and call history"</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="9082518313285787097">"Allow access to your contacts and call history"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"Couldn\'t connect to <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Scan for devices"</string>
@@ -1744,7 +1744,7 @@
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"This spell checker may be able to collect all the text that you type, including personal data like passwords and credit card numbers. It comes from the app <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Use this spell checker?"</string>
     <string name="spellchecker_quick_settings" msgid="246728645150092058">"Settings"</string>
     <string name="spellchecker_language" msgid="6041050114690541437">"Language"</string>
-    <string name="keyboard_and_input_methods_category" msgid="6035224122054465137">"Keyboard &amp; inputs"</string>
+    <string name="keyboard_and_input_methods_category" msgid="6035224122054465137">"Keyboard &amp; input methods"</string>
     <string name="virtual_keyboard_category" msgid="1012830752318677119">"Virtual keyboard"</string>
     <string name="available_virtual_keyboard_category" msgid="7645766574969139819">"Available virtual keyboard"</string>
     <string name="add_virtual_keyboard" msgid="3302152381456516928">"Manage keyboards"</string>
@@ -2263,7 +2263,7 @@
     <string name="add_device_admin" msgid="4192055385312215731">"Activate this device admin app"</string>
     <string name="device_admin_add_title" msgid="3140663753671809044">"Device admin"</string>
     <string name="device_admin_warning" msgid="7482834776510188134">"Activating this admin app will allow the app <xliff:g id="APP_NAME">%1$s</xliff:g> to perform the following operations:"</string>
-    <string name="device_admin_status" msgid="7234814785374977990">"This admin app is active and allows the app <xliff:g id="APP_NAME">%1$s</xliff:g> to perform the following operations:"</string>
+    <string name="device_admin_status" msgid="7234814785374977990">"This admin app is active and allows the <xliff:g id="APP_NAME">%1$s</xliff:g> app to perform the following operations:"</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"Activate Profile Manager?"</string>
     <string name="adding_profile_owner_warning" msgid="1354474524852805802">"By proceeding, your user will be managed by your admin, which may also be able to store associated data, in addition to your personal data.\n\nYour admin has the ability to monitor and manage settings, access, apps and data associated with this user, including network activity and your device\'s location information."</string>
     <string name="admin_disabled_other_options" msgid="7712694507069054530">"Other options are disabled by your admin"</string>
@@ -2433,7 +2433,7 @@
     <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"Set data usage limit"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"Limiting data usage"</string>
     <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="4983487893343645667">"Your tablet will turn off mobile data once it reaches the limit you set.\n\nSince data usage is measured by your tablet, and your operator may account for usage differently, consider setting a conservative limit."</string>
-    <string name="data_usage_limit_dialog_mobile" product="default" msgid="3926320594049434225">"Your phone will turn off mobile data once it reaches the limit you set.\n\nSince data usage is measured by your phone, and your operator may account for usage differently, consider setting a conservative limit."</string>
+    <string name="data_usage_limit_dialog_mobile" product="default" msgid="3926320594049434225">"Your phone will turn off mobile data once it reaches the limit that you set.\n\nSince data usage is measured by your phone, and your operator may account for usage differently, consider setting a conservative limit."</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"Restrict background data?"</string>
     <string name="data_usage_restrict_background" msgid="434093644726734586">"If you restrict background mobile data, some apps and services won’t work unless you’re connected to Wi‑Fi."</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7096707497743363380">"If you restrict background mobile data, some apps and services won’t work unless you’re connected to Wi‑Fi.\n\nThis setting affects all users on this tablet."</string>
@@ -2590,7 +2590,7 @@
     <string name="user_add_user_message_long" msgid="8562152293752222985">"You can share this device with other people by creating additional users. Each user has their own space, which they can customise with apps, wallpaper and so on. Users can also adjust device settings like Wi‑Fi that affect everyone.\n\nWhen you add a new user, that person needs to set up their space.\n\nAny user can update apps for all other users."</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"When you add a new user, that person needs to set up their space.\n\nAny user can update apps for all other users."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"Set up user now?"</string>
-    <string name="user_setup_dialog_message" msgid="1004068621380867148">"Make sure that the person is available to take the device and set up their space"</string>
+    <string name="user_setup_dialog_message" msgid="1004068621380867148">"Make sure that the person is available to take the device and set up their space."</string>
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"Set up profile now?"</string>
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Set up now"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Not now"</string>
@@ -2747,7 +2747,7 @@
     </plurals>
     <string name="network_dashboard_title" msgid="4771589228992391573">"Network &amp; Internet"</string>
     <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"Mobile"</string>
-    <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"Data Usage"</string>
+    <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"Data usage"</string>
     <string name="network_dashboard_summary_hotspot" msgid="8494210248613254574">"Hotspot"</string>
     <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"Connected devices"</string>
     <string name="connected_devices_dashboard_summary" msgid="2390582103384791904">"Bluetooth, cast, NFC"</string>
@@ -2758,8 +2758,8 @@
     <string name="app_default_dashboard_title" msgid="7342549305933047317">"Default apps"</string>
     <string name="system_dashboard_summary" msgid="5797743225249766685">"Languages, time, backup, updates"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Settings"</string>
-    <string name="search_menu" msgid="6283419262313758339">"Search Settings"</string>
-    <string name="query_hint_text" msgid="3350700807437473939">"Search settings"</string>
+    <string name="search_menu" msgid="6283419262313758339">"Search in Settings"</string>
+    <string name="query_hint_text" msgid="3350700807437473939">"Search in Settings"</string>
     <string name="keywords_wifi" msgid="1395786161993828719">"wi-fi, Wi-Fi, network connection"</string>
     <string name="keywords_more_default_sms_app" msgid="2265154063220360784">"text message, texting, messages, messaging"</string>
     <string name="keywords_more_mobile_networks" msgid="8995946622054642367">"mobile, mobile operator, wireless, data, 4g,3g, 2g, lte"</string>
@@ -3127,7 +3127,7 @@
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7655100570513818534">"No permissions requested"</string>
     <string name="filter_all_apps" msgid="1988403195820688644">"All apps"</string>
     <string name="filter_enabled_apps" msgid="5395727306799456250">"Installed apps"</string>
-    <string name="filter_instant_apps" msgid="574277769963965565">"Instant apps"</string>
+    <string name="filter_instant_apps" msgid="574277769963965565">"Instant Apps"</string>
     <string name="filter_personal_apps" msgid="3277727374174355971">"Personal"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"Work"</string>
     <string name="filter_notif_all_apps" msgid="2299049859443680242">"Apps: All"</string>
@@ -3175,7 +3175,7 @@
     <string name="usage_access" msgid="5479504953931038165">"Usage access"</string>
     <string name="permit_usage_access" msgid="4012876269445832300">"Permit usage access"</string>
     <string name="app_usage_preference" msgid="7065701732733134991">"App usage preferences"</string>
-    <string name="usage_access_description" msgid="1352111094596416795">"Usage access allows an app to track what other apps that you\'re using and how often, as well as your operator, language settings and other details."</string>
+    <string name="usage_access_description" msgid="1352111094596416795">"Usage access allows an app to track which other apps that you\'re using and how often, as well as your operator, language settings and other details."</string>
     <string name="memory_settings_title" msgid="7490541005204254222">"Memory"</string>
     <string name="memory_details_title" msgid="8542565326053693320">"Memory details"</string>
     <string name="always_running" msgid="6042448320077429656">"Always running (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
@@ -3400,9 +3400,7 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"Use cooler display colours"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"To apply colour change, turn off screen"</string>
     <string name="telephony_monitor_toast" msgid="7003764250271195384">"To apply telephony monitor change, reboot device"</string>
-    <string name="camera_hal_hdrplus_switch" msgid="8377365197105267466">"Camera HAL HDR+"</string>
-    <string name="camera_hal_hdrplus_toast" msgid="2063703797270055299">"To apply Camera HAL HDR+ change, reboot device"</string>
-    <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"Camera Laser Sensor"</string>
+    <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"Camera laser sensor"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Automatic system updates"</string>
     <string name="usage" msgid="2977875522080448986">"Usage"</string>
     <string name="cellular_data_usage" msgid="2155683719898158203">"Mobile data usage"</string>
@@ -3604,9 +3602,9 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"Connect to the Internet or contact your carrier"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"Unavailable on mobile-locked devices"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"<xliff:g id="SIZE">%1$s</xliff:g> total made available\n\nLast ran on <xliff:g id="DATE">%2$s</xliff:g>"</string>
-    <string name="web_action_enable_title" msgid="4051513950976670853">"Instant apps"</string>
+    <string name="web_action_enable_title" msgid="4051513950976670853">"Instant Apps"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"Open links in apps, even if they’re not installed"</string>
-    <string name="web_action_section_title" msgid="7364647086538399136">"Instant apps"</string>
+    <string name="web_action_section_title" msgid="7364647086538399136">"Instant Apps"</string>
     <string name="instant_apps_settings" msgid="8827777916518348213">"Instant Apps preferences"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"Installed apps"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"Your storage is now being managed by the storage manager"</string>

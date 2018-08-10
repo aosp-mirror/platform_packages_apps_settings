@@ -180,7 +180,7 @@
     <string name="intent_sender_startactivity_text" msgid="5080516029580421895">"Rozpocznij <xliff:g id="ACTIVITY">activity</xliff:g>"</string>
     <string name="intent_sender_resource_label" msgid="6963659726895482829">"<xliff:g id="RESOURCE">Resource</xliff:g>:"</string>
     <string name="intent_sender_account_label" msgid="465210404475603404">"Konto:"</string>
-    <string name="proxy_settings_title" msgid="9049437837600320881">"Sewer proxy"</string>
+    <string name="proxy_settings_title" msgid="9049437837600320881">"Serwer proxy"</string>
     <string name="proxy_clear_text" msgid="5555400754952012657">"Wyczyść"</string>
     <string name="proxy_port_label" msgid="5655276502233453400">"Numer portu serwera proxy"</string>
     <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"Pomiń proxy dla"</string>
@@ -423,7 +423,7 @@
     <string name="fingerprint_delete_title" msgid="1368196182612202898">"Usuń odcisk palca „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>”"</string>
     <string name="fingerprint_delete_message" msgid="8597787803567398131">"Czy chcesz usunąć ten odcisk palca?"</string>
     <string name="fingerprint_last_delete_message" msgid="7852321001254275878">"Odcisków palców nie będzie można używać do odblokowywania telefonu, autoryzowania zakupów ani logowania się w aplikacjach"</string>
-    <string name="fingerprint_last_delete_message_profile_challenge" msgid="6521520787746771912">"Nie będziesz mieć możliwości używania odcisków palców, by odblokować profil do pracy, autoryzować zakupy czy logować się w aplikacjach używanych do pracy"</string>
+    <string name="fingerprint_last_delete_message_profile_challenge" msgid="6521520787746771912">"Nie będziesz mieć możliwości używania odcisków palców, by odblokować profil służbowy, autoryzować zakupy czy logować się w aplikacjach używanych do pracy"</string>
     <string name="fingerprint_last_delete_confirm" msgid="2634726361059274289">"Tak, usuń"</string>
     <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"Użyj odcisku palca, by kontynuować."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Szyfrowanie"</string>
@@ -551,12 +551,12 @@
     <string name="lock_last_pattern_attempt_before_wipe_user" msgid="7851504071368235547">"Jeśli następnym razem podasz nieprawidłowy wzór, użytkownik zostanie usunięty"</string>
     <string name="lock_last_pin_attempt_before_wipe_user" msgid="4049024921333961715">"Jeśli następnym razem podasz nieprawidłowy kod PIN, użytkownik zostanie usunięty"</string>
     <string name="lock_last_password_attempt_before_wipe_user" msgid="4660886542496781672">"Jeśli następnym razem podasz nieprawidłowe hasło, użytkownik zostanie usunięty"</string>
-    <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2437716252059050291">"Jeśli następnym razem podasz nieprawidłowy wzór, profil do pracy oraz powiązane z nim dane zostaną usunięte"</string>
-    <string name="lock_last_pin_attempt_before_wipe_profile" msgid="5799931839127476913">"Jeśli następnym razem podasz nieprawidłowy kod PIN, profil do pracy oraz powiązane z nim dane zostaną usunięte"</string>
-    <string name="lock_last_password_attempt_before_wipe_profile" msgid="6786586046975042158">"Jeśli następnym razem podasz nieprawidłowe hasło, profil do pracy oraz powiązane z nim dane zostaną usunięte"</string>
+    <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2437716252059050291">"Jeśli następnym razem podasz nieprawidłowy wzór, profil służbowy oraz powiązane z nim dane zostaną usunięte"</string>
+    <string name="lock_last_pin_attempt_before_wipe_profile" msgid="5799931839127476913">"Jeśli następnym razem podasz nieprawidłowy kod PIN, profil służbowy oraz powiązane z nim dane zostaną usunięte"</string>
+    <string name="lock_last_password_attempt_before_wipe_profile" msgid="6786586046975042158">"Jeśli następnym razem podasz nieprawidłowe hasło, profil służbowy oraz powiązane z nim dane zostaną usunięte"</string>
     <string name="lock_failed_attempts_now_wiping_device" msgid="5047439819181833824">"Zbyt wiele nieudanych prób. Dane na urządzeniu zostaną usunięte."</string>
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Zbyt wiele nieudanych prób. Użytkownik zostanie usunięty."</string>
-    <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Zbyt wiele nieudanych prób. Profil do pracy i powiązane z nim dane zostaną usunięte."</string>
+    <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Zbyt wiele nieudanych prób. Profil służbowy i powiązane z nim dane zostaną usunięte."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Zamknij"</string>
     <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Minimalna liczba znaków to <xliff:g id="COUNT">%d</xliff:g>"</string>
     <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"Minimalna liczba cyfr w kodzie PIN to <xliff:g id="COUNT">%d</xliff:g>"</string>
@@ -646,7 +646,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Aby sparować z urządzeniem:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Upewnij się, że jest na nim wyświetlony następujący klucz:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"Od:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Sparować z tym urządzeniem?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Aby sparować z urządzeniem <xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>, wpisz na nim klucz <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, a następnie naciśnij klawisz zatwierdzania."</string>
-    <string name="bluetooth_pairing_shares_phonebook" msgid="2277931851483023208">"Zezwól urządzeniu <xliff:g id="DEVICE_NAME">%1$s</xliff:g> na dostęp do Twoich kontaktów i historii połączeń"</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="9082518313285787097">"Zezwól na dostęp do kontaktów i historii połączeń"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"Nie udało się nawiązać połączenia z <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Wyszukaj urządzenia"</string>
@@ -1452,7 +1452,7 @@
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Tryb lokalizacji"</string>
     <string name="location_mode_high_accuracy_description" msgid="3453010562265338113">"Ustalaj lokalizację przez GPS, Wi‑Fi, Bluetooth lub sieci komórkowe"</string>
     <string name="location_mode_battery_saving_description" msgid="2365298246603348985">"Ustalaj lokalizację przez Wi‑Fi, Bluetooth lub sieci komórkowe"</string>
-    <string name="location_mode_sensors_only_description" msgid="7247994752324805202">"Określaj lokalizację, używając GPS-u i czujników urządzenia"</string>
+    <string name="location_mode_sensors_only_description" msgid="7247994752324805202">"Określaj lokalizację, używając GPS-a i czujników urządzenia"</string>
     <string name="location_scanning_screen_title" msgid="4408076862929611554">"Skanowanie"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"Skanowanie Wi‑Fi"</string>
     <string name="location_scanning_wifi_always_scanning_description" msgid="8036382029606868081">"Popraw dokładność lokalizacji, zezwalając aplikacjom i usługom systemowym na ciągłe wykrywanie sieci Wi-Fi."</string>
@@ -1515,9 +1515,9 @@
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"Podaj wzór używany na urządzeniu, by kontynuować"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"Podaj kod PIN używany na urządzeniu, by kontynuować"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"Podaj hasło używane na urządzeniu, by kontynuować"</string>
-    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4435638308193361861">"Podaj wzór używany w profilu do pracy, by kontynuować"</string>
-    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3730141667547002246">"Podaj kod PIN używany w profilu do pracy, by kontynuować"</string>
-    <string name="lockpassword_confirm_your_password_generic_profile" msgid="4250642723467019894">"Podaj hasło używane w profilu do pracy, by kontynuować"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4435638308193361861">"Podaj wzór używany w profilu służbowym, by kontynuować"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3730141667547002246">"Podaj kod PIN używany w profilu służbowym, by kontynuować"</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="4250642723467019894">"Podaj hasło używane w profilu służbowym, by kontynuować"</string>
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="530802132223800623">"Ze względów bezpieczeństwa podaj wzór używany na urządzeniu"</string>
     <string name="lockpassword_strong_auth_required_device_pin" msgid="7829294830078036417">"Ze względów bezpieczeństwa podaj kod PIN urządzenia"</string>
     <string name="lockpassword_strong_auth_required_device_password" msgid="3552644641574796973">"Ze względów bezpieczeństwa podaj hasło do urządzenia"</string>
@@ -1561,7 +1561,7 @@
     <string name="lockpattern_too_many_failed_confirmation_attempts" msgid="6909161623701848863">"Zbyt wiele nieudanych prób. Spróbuj ponownie za <xliff:g id="NUMBER">%d</xliff:g> s."</string>
     <string name="activity_not_found" msgid="5551664692991605325">"Aplikacja nie jest zainstalowana na telefonie."</string>
     <string name="lock_settings_profile_title" msgid="2121876391814535295">"Bezpieczeństwo profilu do pracy"</string>
-    <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Blokada ekranu w profilu do pracy"</string>
+    <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Blokada ekranu w profilu służbowym"</string>
     <string name="lock_settings_profile_unification_title" msgid="4973102698492659123">"Używaj jednej blokady"</string>
     <string name="lock_settings_profile_unification_summary" msgid="7178299172998641303">"Używaj jednej blokady dla profilu do pracy i ekranu urządzenia"</string>
     <string name="lock_settings_profile_unification_dialog_title" msgid="4824620230229285301">"Używać jednej blokady?"</string>
@@ -1864,8 +1864,8 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Kliknij trzy razy, by powiększyć"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Kliknij przycisk, by powiększyć"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"Aby powiększyć"</b>", szybko kliknij ekran trzy raz.\n"<ul><li>"Przeciągnij co najmniej dwoma palcami, by przewijać ekran."</li>\n<li>"Ściągnij do siebie co najmniej dwa palce, by dostosować powiększenie."</li></ul>\n\n<b>"Aby tymczasowo powiększyć widok"</b>", szybko kliknij ekran trzy razy i przytrzymaj palec po trzecim kliknięciu.\n"<ul><li>"Przeciągaj palcem, by poruszać się po ekranie."</li>\n<li>"Unieś palec, by wyłączyć powiększenie."</li></ul>\n\n"Nie można powiększyć klawiatury ani paska nawigacji."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="1996584694050087161">"Gdy powiększenie jest włączone, użyj przycisku ułatwień dostępu u dołu ekranu, by szybko powiększyć widok.\n\n"<b>"Aby powiększyć"</b>", kliknij przycisk ułatwień dostępu, a potem dowolne miejsce na ekranie.\n"<ul><li>"Przeciągnij co najmniej dwoma palcami, by przewijać."</li>\n<li>"Ściągnij do siebie co najmniej dwa palce, by dostosować powiększenie."</li></ul>\n\n<b>"Aby powiększyć tymczasowo"</b>", dotknij przycisku ułatwień dostępu, a następnie dotknij i przytrzymaj dowolne miejsce na ekranie.\n"<ul><li>"Przeciągaj palcem, by poruszać się po ekranie "</li>\n<li>"Unieś palec, by wyłączyć powiększenie."</li></ul>\n\n"Nie można powiększyć klawiatury ani paska nawigacji."</string>
-    <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Przycisk ułatwień dostępu włącza: <xliff:g id="SERVICE">%1$s</xliff:g>. Aby użyć powiększenia, dotknij i przytrzymaj przycisk ułatwień dostępu, a następnie wybierz powiększenie."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="1996584694050087161">"Gdy powiększenie jest włączone, użyj przycisku ułatwień dostępu u dołu ekranu, by szybko powiększyć widok.\n\n"<b>"Aby powiększyć"</b>", kliknij przycisk ułatwień dostępu, a potem dowolne miejsce na ekranie.\n"<ul><li>"Przeciągnij co najmniej dwoma palcami, by przewijać."</li>\n<li>"Ściągnij do siebie co najmniej dwa palce, by dostosować powiększenie."</li></ul>\n\n<b>"Aby powiększyć tymczasowo"</b>", dotknij przycisku ułatwień dostępu, a następnie naciśnij i przytrzymaj dowolne miejsce na ekranie.\n"<ul><li>"Przeciągaj palcem, by poruszać się po ekranie "</li>\n<li>"Unieś palec, by wyłączyć powiększenie."</li></ul>\n\n"Nie można powiększyć klawiatury ani paska nawigacji."</string>
+    <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Przycisk ułatwień dostępu włącza: <xliff:g id="SERVICE">%1$s</xliff:g>. Aby użyć powiększenia, naciśnij i przytrzymaj przycisk ułatwień dostępu, a następnie wybierz powiększenie."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Skrót z klawiszami głośności"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Usługa skrótu"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"Pozwól na ekranie blokady"</string>
@@ -2352,10 +2352,10 @@
     <string name="account_sync_settings_title" msgid="5131314922423053588">"Synchronizacja"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"W tej chwili występują problemy z synchronizacją. Synchronizacja będzie możliwa wkrótce."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Dodaj konto"</string>
-    <string name="managed_profile_not_available_label" msgid="852263300911325904">"Profil do pracy nie jest jeszcze dostępny"</string>
+    <string name="managed_profile_not_available_label" msgid="852263300911325904">"Profil służbowy nie jest jeszcze dostępny"</string>
     <string name="work_mode_label" msgid="5794470908668593961">"Tryb pracy"</string>
-    <string name="work_mode_summary" msgid="1620246003886940776">"Włącz profil do pracy, w tym aplikacje, synchronizację w tle i inne funkcje"</string>
-    <string name="remove_managed_profile_label" msgid="3856519337797285325">"Usuń profil do pracy"</string>
+    <string name="work_mode_summary" msgid="1620246003886940776">"Włącz profil służbowy, w tym aplikacje, synchronizację w tle i inne funkcje"</string>
+    <string name="remove_managed_profile_label" msgid="3856519337797285325">"Usuń profil służbowy"</string>
     <string name="background_data" msgid="5779592891375473817">"Dane w tle"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"Aplikacje zawsze mogą synchronizować, wysyłać i odbierać dane."</string>
     <string name="background_data_dialog_title" msgid="6059217698124786537">"Wyłączyć dane w tle?"</string>
@@ -2519,7 +2519,7 @@
     <string name="vpn_not_used" msgid="9094191054524660891">"(nieużywane)"</string>
     <string name="vpn_no_ca_cert" msgid="8776029412793353361">"(nie weryfikuj serwera)"</string>
     <string name="vpn_no_server_cert" msgid="2167487440231913330">"(odebrany z serwera)"</string>
-    <string name="vpn_always_on_invalid_reason_type" msgid="7574518311224455825">"Ten tym sieci VPN nie może być stale połączony"</string>
+    <string name="vpn_always_on_invalid_reason_type" msgid="7574518311224455825">"Ten typ sieci VPN nie może być stale połączony"</string>
     <string name="vpn_always_on_invalid_reason_server" msgid="477304620899799383">"Stała sieć VPN obsługuje tylko liczbowe adresy serwerów"</string>
     <string name="vpn_always_on_invalid_reason_no_dns" msgid="2226648961940273294">"Należy podać serwer DNS dla stałej sieci VPN."</string>
     <string name="vpn_always_on_invalid_reason_dns" msgid="3551394495620249972">"Adresy serwerów DNS muszą mieć postać liczbową w przypadku stałych sieci VPN."</string>
@@ -2626,7 +2626,7 @@
     <string name="user_set_lock_button" msgid="8311219392856626841">"Ustaw blokadę"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Nieskonfigurowany"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1628116001964325544">"Nieskonfigurowany profil ograniczony"</string>
-    <string name="user_summary_managed_profile_not_set_up" msgid="1659125858619760573">"Nieskonfigurowany – profil do pracy"</string>
+    <string name="user_summary_managed_profile_not_set_up" msgid="1659125858619760573">"Nieskonfigurowany – profil służbowy"</string>
     <string name="user_admin" msgid="993402590002400782">"Administrator"</string>
     <string name="user_you" msgid="1639158809315025986">"Ty (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_nickname" msgid="5148818000228994488">"Pseudonim"</string>
@@ -2655,7 +2655,7 @@
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Chcesz usunąć siebie?"</string>
     <string name="user_confirm_remove_title" msgid="1163721647646152032">"Usunąć tego użytkownika?"</string>
     <string name="user_profile_confirm_remove_title" msgid="5573161550669867342">"Usunąć ten profil?"</string>
-    <string name="work_profile_confirm_remove_title" msgid="2017323555783522213">"Usunąć profil do pracy?"</string>
+    <string name="work_profile_confirm_remove_title" msgid="2017323555783522213">"Usunąć profil służbowy?"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="2391372805233812410">"Utracisz swój obszar i dane na tym tablecie. Tej czynności nie można cofnąć."</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="7943645442479360048">"Utracisz swój obszar i dane na tym telefonie. Tej czynności nie można cofnąć."</string>
     <string name="user_confirm_remove_message" msgid="1020629390993095037">"Wszystkie aplikacje i dane zostaną usunięte."</string>
@@ -2852,7 +2852,7 @@
     <string name="keywords_color_temperature" msgid="2688947724153266364">"temperatura kolorów D65 D73 biały żółty niebieski ciepły zimny"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"przesuń, by odblokować, hasło, wzór, kod PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"zadanie służbowe, praca, profil"</string>
-    <string name="keywords_unification" msgid="1922900767659821025">"profil do pracy, profil zarządzany, ujednolicić, ujednolicenie, praca, profil"</string>
+    <string name="keywords_unification" msgid="1922900767659821025">"profil służbowy, profil zarządzany, ujednolicić, ujednolicenie, praca, profil"</string>
     <string name="keywords_gesture" msgid="3526905012224714078">"gesty"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"płacenie, klikanie, płatności"</string>
     <string name="keywords_backup" msgid="470070289135403022">"kopia zapasowa, tworzenie kopii zapasowej"</string>
@@ -2915,8 +2915,8 @@
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Użyj dźwięków z profilu osobistego"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"Dźwięki są takie same w profilu osobistym i do pracy"</string>
     <string name="work_ringtone_title" msgid="5806657896300235315">"Dzwonek w profilu do pracy"</string>
-    <string name="work_notification_ringtone_title" msgid="6081247402404510004">"Domyślny dźwięk powiadomienia w profilu do pracy"</string>
-    <string name="work_alarm_ringtone_title" msgid="1441926676833738891">"Domyślny dźwięk alarmu w profilu do pracy"</string>
+    <string name="work_notification_ringtone_title" msgid="6081247402404510004">"Domyślny dźwięk powiadomienia w profilu służbowym"</string>
+    <string name="work_alarm_ringtone_title" msgid="1441926676833738891">"Domyślny dźwięk alarmu w profilu służbowym"</string>
     <string name="work_sound_same_as_personal" msgid="3123383644475266478">"Taki sam jak w profilu osobistym"</string>
     <string name="work_sync_dialog_title" msgid="7123973297187354813">"Zastąpić dźwięki?"</string>
     <string name="work_sync_dialog_yes" msgid="7243884940551635717">"Zastąp"</string>
@@ -3245,9 +3245,9 @@
     <string name="system_default_app" msgid="3091113402349739037">"(Domyślna aplikacja systemu)"</string>
     <string name="apps_storage" msgid="4353308027210435513">"Magazyn aplikacji"</string>
     <string name="usage_access" msgid="5479504953931038165">"Dostęp do danych o użyciu"</string>
-    <string name="permit_usage_access" msgid="4012876269445832300">"Zezwól na dostęp do użytkowania"</string>
+    <string name="permit_usage_access" msgid="4012876269445832300">"Zezwól na dostęp do danych o użyciu"</string>
     <string name="app_usage_preference" msgid="7065701732733134991">"Ustawienia użycia aplikacji"</string>
-    <string name="usage_access_description" msgid="1352111094596416795">"Dostęp do użytkowania umożliwia aplikacji śledzenie tego, jakich innych aplikacji i jak często używasz, oraz odczytywanie m.in. informacji o operatorze i ustawień językowych."</string>
+    <string name="usage_access_description" msgid="1352111094596416795">"Dostęp do danych o użyciu umożliwia aplikacji śledzenie tego, jakich innych aplikacji używasz i jak często, oraz odczytywanie m.in. informacji o operatorze i ustawień językowych."</string>
     <string name="memory_settings_title" msgid="7490541005204254222">"Pamięć RAM"</string>
     <string name="memory_details_title" msgid="8542565326053693320">"Informacje dotyczące pamięci"</string>
     <string name="always_running" msgid="6042448320077429656">"Zawsze aktywna (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
@@ -3281,8 +3281,8 @@
     <string name="high_power_off" msgid="3393904131961263278">"Ma włączoną optymalizację baterii"</string>
     <string name="high_power_system" msgid="7362862974428225301">"Optymalizacja baterii niedostępna"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"Nie stosuj optymalizacji baterii. Może powodować szybsze wyczerpywanie się baterii."</string>
-    <string name="high_power_prompt_title" msgid="6358673688590282655">"Pozwolić aplikacji cały czas działać w tle?"</string>
-    <string name="high_power_prompt_body" msgid="1031422980602565049">"Zezwolenie aplikacji <xliff:g id="APP_NAME">%1$s</xliff:g> na ciągłe działanie w tle może skrócić czas pracy na baterii. \n\nMożesz zmienić to ustawienie później, wybierając Ustawienia &gt; Aplikacje i powiadomienia."</string>
+    <string name="high_power_prompt_title" msgid="6358673688590282655">"Pozwolić aplikacji cały czas działać w tle?"</string>
+    <string name="high_power_prompt_body" msgid="1031422980602565049">"Zezwolenie aplikacji <xliff:g id="APP_NAME">%1$s</xliff:g> na ciągłe działanie w tle może skrócić czas pracy na baterii. \n\nMożesz zmienić to ustawienie później, wybierając Ustawienia &gt; Aplikacje i powiadomienia."</string>
     <string name="battery_summary" msgid="8044042095190688654">"Użycie od ostatniego pełnego naładowania: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_power_management" msgid="5571519699679107523">"Zarządzanie zasilaniem"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"Brak użycia baterii od ostatniego pełnego naładowania"</string>
@@ -3393,7 +3393,7 @@
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Szybko uruchom aparat bez odblokowywania ekranu"</string>
     <string name="screen_zoom_title" msgid="5233515303733473927">"Rozmiar interfejsu"</string>
     <string name="screen_zoom_short_summary" msgid="7291960817349834688">"Powiększ lub pomniejsz elementy na ekranie"</string>
-    <string name="screen_zoom_keywords" msgid="9176477565403352552">"wyświetlacz, gęstość, powiększenie ekranu, skala, skalowanie"</string>
+    <string name="screen_zoom_keywords" msgid="9176477565403352552">"układ interfejsu, powiększenie ekranu, skala, skalowanie"</string>
     <string name="screen_zoom_summary" msgid="6445488991799015407">"Powiększ lub pomniejsz elementy na ekranie. Niektóre aplikacje na ekranie głównym mogą przesunąć się w inne miejsce."</string>
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Podgląd"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Pomniejsz"</string>
@@ -3458,7 +3458,7 @@
     <string name="condition_cellular_summary" msgid="1818046558419658463">"Internet jest dostępny tylko przez Wi-Fi"</string>
     <string name="condition_bg_data_title" msgid="2483860304802846542">"Oszczędzanie danych jest włączone"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Przesyłanie danych w tle działa tylko wtedy, gdy masz połączenie z Wi-Fi. Może to mieć wpływ na niektóre aplikacje i usługi, gdy sieć Wi-Fi jest niedostępna."</string>
-    <string name="condition_work_title" msgid="7293722361184366648">"Profil do pracy jest wyłączony"</string>
+    <string name="condition_work_title" msgid="7293722361184366648">"Profil służbowy jest wyłączony"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"Aplikacje, synchronizacja w tle i inne funkcje związane z profilem do pracy są wyłączone."</string>
     <string name="night_display_suggestion_title" msgid="6602129097059325291">"Ustal harmonogram Podświetlenia nocnego"</string>
     <string name="night_display_suggestion_summary" msgid="1747638280833631187">"Ociepla barwy, by ułatwić Ci zaśnięcie"</string>
@@ -3484,8 +3484,6 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"Używaj chłodniejszych kolorów na ekranie"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Aby zastosować zmianę kolorów, wyłącz ekran"</string>
     <string name="telephony_monitor_toast" msgid="7003764250271195384">"Aby zmiana ustawienia monitorowania telefonii zaczęła obowiązywać, zrestartuj urządzenie"</string>
-    <string name="camera_hal_hdrplus_switch" msgid="8377365197105267466">"HAL HDR+ aparatu"</string>
-    <string name="camera_hal_hdrplus_toast" msgid="2063703797270055299">"Aby zmiana HAL HDR+ aparatu zaczęła obowiązywać, zrestartuj urządzenie"</string>
     <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"Czujnik lasera aparatu"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Automatyczne aktualizacje systemu"</string>
     <string name="usage" msgid="2977875522080448986">"Wykorzystanie danych"</string>
@@ -3807,7 +3805,7 @@
     <string name="storage_files" msgid="8581083146777364063">"Pliki"</string>
     <string name="storage_size_large_alternate" msgid="3550744227788333060">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" <xliff:g id="UNIT">^2</xliff:g>"</small>""</string>
     <string name="storage_volume_total" msgid="3499221850532701342">"wykorzystane z <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
-    <string name="storage_percent_full" msgid="6095012055875077036">"miejsca"</string>
+    <string name="storage_percent_full" msgid="6095012055875077036">"zajęte"</string>
     <string name="clear_instant_app_data" msgid="2004222610585890909">"Wyczyść dane aplikacji"</string>
     <string name="clear_instant_app_confirmation" msgid="7451671214898856857">"Czy chcesz usunąć tę aplikację błyskawiczną?"</string>
     <string name="game_storage_settings" msgid="3410689937046696557">"Gry"</string>
