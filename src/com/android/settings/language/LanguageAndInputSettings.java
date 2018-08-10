@@ -27,10 +27,10 @@ import android.speech.tts.TtsEngines;
 import android.text.TextUtils;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.applications.defaultapps.DefaultAutofillPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.inputmethod.PhysicalKeyboardPreferenceController;
@@ -41,13 +41,9 @@ import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 @SearchIndexable
 public class LanguageAndInputSettings extends DashboardFragment {
@@ -122,7 +118,6 @@ public class LanguageAndInputSettings extends DashboardFragment {
 
         // Input Assistance
         controllers.add(new SpellCheckerPreferenceController(context));
-        controllers.add(new DefaultAutofillPreferenceController(context));
 
         return controllers;
     }

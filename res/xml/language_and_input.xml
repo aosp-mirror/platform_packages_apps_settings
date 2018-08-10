@@ -54,10 +54,10 @@
             android:persistent="false"
             android:fragment="com.android.settings.inputmethod.SpellCheckersSettings" />
 
-        <com.android.settings.widget.GearPreference
+        <Preference
             android:key="default_autofill"
             android:title="@string/autofill_app"
-            android:fragment="com.android.settings.applications.defaultapps.DefaultAutofillPicker"
+            android:fragment="com.android.settings.applications.defaultapps.AutofillPicker"
             settings:keywords="@string/autofill_keywords" />
 
         <!-- User dictionary preference title and fragment will be set programmatically. -->
