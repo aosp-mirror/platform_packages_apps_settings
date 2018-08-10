@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.dashboard.conditional;
+package com.android.settings.homepage.conditional;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -44,7 +44,7 @@ public class ConditionManager implements LifecycleObserver, OnResume, OnPause {
 
     private static final boolean DEBUG = false;
 
-    private static final String PKG = "com.android.settings.dashboard.conditional.";
+    private static final String PKG = "com.android.settings.homepage.conditional.";
 
     private static final String FILE_NAME = "condition_state.xml";
     private static final String TAG_CONDITIONS = "cs";

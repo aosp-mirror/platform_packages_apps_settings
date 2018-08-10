@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.dashboard.conditional;
+package com.android.settings.homepage.conditional;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.dashboard.conditional;
+package com.android.settings.homepage.conditional;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;

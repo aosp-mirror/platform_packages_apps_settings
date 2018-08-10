@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.dashboard.conditional;
+package com.android.settings.homepage.conditional;
 
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
@@ -26,12 +26,12 @@ import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.service.notification.ZenModeConfig;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.notification.ZenModeSettings;
-
-import androidx.annotation.VisibleForTesting;
 
 public class DndCondition extends Condition {
 

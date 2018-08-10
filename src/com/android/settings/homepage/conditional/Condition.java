@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.dashboard.conditional;
+package com.android.settings.homepage.conditional;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -22,11 +22,11 @@ import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.os.PersistableBundle;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-
-import androidx.annotation.VisibleForTesting;
 
 public abstract class Condition {
 

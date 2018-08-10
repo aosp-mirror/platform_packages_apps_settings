@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-package com.android.settings.dashboard.conditional;
+package com.android.settings.homepage.conditional;
 
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.when;
 
 import android.content.Context;

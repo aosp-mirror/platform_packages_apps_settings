@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.dashboard.conditional;
+package com.android.settings.homepage.conditional;
 
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
