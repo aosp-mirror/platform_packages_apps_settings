@@ -15,35 +15,6 @@
 -->
 
 <resources>
-    <declare-styleable name="BatteryHistoryChart">
-        <!-- Base text color, typeface, size, and style. -->
-        <attr name="android:textAppearance" />
-        <!-- Text color. -->
-        <attr name="android:textColor" />
-        <!-- Size of the text. Recommended dimension type for text is "sp" for scaled-pixels (example: 15sp). -->
-        <attr name="android:textSize" />
-        <!-- Typeface (normal, sans, serif, monospace) for the text. -->
-        <attr name="android:typeface" />
-        <!-- Style (bold, italic, bolditalic) for the text. -->
-        <attr name="android:textStyle" />
-        <!-- Place a shadow of the specified color behind the text. -->
-        <attr name="android:shadowColor" />
-        <!-- Horizontal offset of the shadow. -->
-        <attr name="android:shadowDx" />
-        <!-- Vertical offset of the shadow. -->
-        <attr name="android:shadowDy" />
-        <!-- Radius of the shadow. -->
-        <attr name="android:shadowRadius" />
-        <!-- Text color, typeface, size, and style of header. -->
-        <attr name="headerAppearance" format="reference" />
-        <!-- Primary color of chart. -->
-        <attr name="barPrimaryColor" format="color|reference" />
-        <!-- Color of predicted future use part of chart. -->
-        <attr name="barPredictionColor" format="color|reference" />
-        <!-- Minimum height of the chart itself. -->
-        <attr name="chartMinHeight" format="dimension|reference" />
-    </declare-styleable>
-
     <declare-styleable name="PercentageBarChart">
         <!-- Background color -->
         <attr name="emptyColor" format="color" />
