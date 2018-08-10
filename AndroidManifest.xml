@@ -94,6 +94,7 @@
     <uses-permission android:name="android.permission.TEST_BLACKLISTED_PASSWORD" />
     <uses-permission android:name="android.permission.USE_RESERVED_DISK" />
     <uses-permission android:name="android.permission.MANAGE_SCOPED_ACCESS_DIRECTORY_PERMISSIONS" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application android:label="@string/settings_label"
             android:icon="@drawable/ic_launcher_settings"
@@ -1571,9 +1572,17 @@
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/GlifTheme.Light"/>
 
-        <activity android:name=".biometrics.face.FaceEnrollIntroduction" android:exported="false" />
-        <activity android:name=".biometrics.face.FaceEnrollEnrolling" android:exported="false" />
-        <activity android:name=".biometrics.face.FaceEnrollFinish" android:exported="false" />
+        <activity android:name=".biometrics.face.FaceEnrollIntroduction"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".biometrics.face.FaceEnrollEnrolling"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".biometrics.face.FaceEnrollFinish"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".biometrics.fingerprint.FingerprintSettings" android:exported="false"/>
         <activity android:name=".biometrics.fingerprint.FingerprintEnrollFindSensor" android:exported="false"/>
