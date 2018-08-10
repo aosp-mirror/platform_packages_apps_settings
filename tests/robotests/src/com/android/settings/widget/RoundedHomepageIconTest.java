@@ -16,21 +16,30 @@
 
 package com.android.settings.widget;
 
+import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_ICON_BACKGROUND_ARGB;
+import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_ICON_BACKGROUND_HINT;
+
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Icon;
 import android.graphics.drawable.ShapeDrawable;
+import android.os.Bundle;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.drawer.CategoryKey;
+import com.android.settingslib.drawer.Tile;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -41,10 +50,15 @@ import org.robolectric.RuntimeEnvironment;
 public class RoundedHomepageIconTest {
 
     private Context mContext;
+    private ActivityInfo mActivityInfo;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
+        mActivityInfo = new ActivityInfo();
+        mActivityInfo.packageName = mContext.getPackageName();
+        mActivityInfo.name = "class";
+        mActivityInfo.metaData = new Bundle();
     }
 
     @Test
@@ -68,4 +82,34 @@ public class RoundedHomepageIconTest {
 
         verify(background).setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_ATOP);
     }
+
+    @Test
+    public void setBackgroundColor_externalTileWithBackgroundColorRawValue_shouldUpdateIcon() {
+        final Tile tile = spy(new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE));
+        mActivityInfo.metaData.putInt(META_DATA_PREFERENCE_ICON_BACKGROUND_ARGB, 0xff0000);
+        doReturn(Icon.createWithResource(mContext, R.drawable.ic_settings))
+                .when(tile).getIcon(mContext);
+        final RoundedHomepageIcon icon =
+                new RoundedHomepageIcon(mContext, new ColorDrawable(Color.BLACK));
+
+        icon.setBackgroundColor(mContext, tile);
+        assertThat(icon.mBackgroundColor).isEqualTo(0xff0000);
+    }
+
+    @Test
+    public void onBindTile_externalTileWithBackgroundColorHint_shouldUpdateIcon() {
+        final Tile tile = spy(new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE));
+        mActivityInfo.metaData.putInt(META_DATA_PREFERENCE_ICON_BACKGROUND_HINT,
+                R.color.memory_critical);
+        doReturn(Icon.createWithResource(mContext, R.drawable.ic_settings))
+                .when(tile).getIcon(mContext);
+
+        final RoundedHomepageIcon icon =
+                new RoundedHomepageIcon(mContext, new ColorDrawable(Color.BLACK));
+        icon.setBackgroundColor(mContext, tile);
+
+        assertThat(icon.mBackgroundColor)
+                .isEqualTo(mContext.getColor(R.color.memory_critical));
+    }
+
 }

@@ -25,6 +25,7 @@ import android.content.Context;
 import android.content.IContentProvider;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -42,6 +43,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.profileselector.ProfileSelectDialog;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.widget.RoundedHomepageIcon;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settingslib.drawer.DashboardCategory;
@@ -49,7 +51,6 @@ import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.drawer.TileUtils;
 import com.android.settingslib.utils.ThreadUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -112,7 +113,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             pref.setKey(getDashboardKeyForTile(tile));
         }
         bindSummary(pref, tile);
-        bindIcon(pref, tile);
+        bindIcon(pref, tile, forceRoundedIcon);
         final Bundle metadata = tile.getMetaData();
         String clsName = null;
         String action = null;
@@ -192,10 +193,16 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     }
 
     @VisibleForTesting
-    void bindIcon(Preference preference, Tile tile) {
+    void bindIcon(Preference preference, Tile tile, boolean forceRoundedIcon) {
         final Icon tileIcon = tile.getIcon(mContext);
         if (tileIcon != null) {
-            preference.setIcon(tileIcon.loadDrawable(preference.getContext()));
+            Drawable iconDrawable = tileIcon.loadDrawable(preference.getContext());
+            if (forceRoundedIcon
+                    && !TextUtils.equals(mContext.getPackageName(), tile.getPackageName())) {
+                iconDrawable = new RoundedHomepageIcon(mContext, iconDrawable);
+                ((RoundedHomepageIcon) iconDrawable).setBackgroundColor(mContext, tile);
+            }
+            preference.setIcon(iconDrawable);
         } else if (tile.getMetaData() != null
                 && tile.getMetaData().containsKey(META_DATA_PREFERENCE_ICON_URI)) {
             ThreadUtils.postOnBackgroundThread(() -> {

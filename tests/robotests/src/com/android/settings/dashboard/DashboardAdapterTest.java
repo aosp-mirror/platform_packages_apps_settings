@@ -53,7 +53,6 @@ import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.widget.RoundedHomepageIcon;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.Tile;
-import com.android.settingslib.drawer.TileUtils;
 import com.android.settingslib.utils.IconCache;
 
 import org.junit.Before;
@@ -115,7 +114,7 @@ public class DashboardAdapterTest {
                 spy(new DashboardAdapter(mContext, null /* savedInstanceState */,
                         null /* conditions */, null /* suggestionControllerMixin */,
                         null /* lifecycle */));
-        final List<Suggestion> suggestions = makeSuggestionsV2("pkg1", "pkg2", "pkg3");
+        final List<Suggestion> suggestions = makeSuggestions("pkg1", "pkg2", "pkg3");
         adapter.setSuggestions(suggestions);
 
         final RecyclerView data = mock(RecyclerView.class);
@@ -147,7 +146,7 @@ public class DashboardAdapterTest {
                 spy(new DashboardAdapter(mContext, null /* savedInstanceState */,
                         null /* conditions */, null /* suggestionControllerMixin */,
                         null /* lifecycle */));
-        final List<Suggestion> suggestions = makeSuggestionsV2("pkg1");
+        final List<Suggestion> suggestions = makeSuggestions("pkg1");
         adapter.setSuggestions(suggestions);
         final DashboardData dashboardData = adapter.mDashboardData;
         reset(adapter); // clear interactions tracking
@@ -164,7 +163,7 @@ public class DashboardAdapterTest {
                 spy(new DashboardAdapter(mContext, null /* savedInstanceState */,
                         null /* conditions */, null /* suggestionControllerMixin */,
                         null /* lifecycle */));
-        final List<Suggestion> suggestions = makeSuggestionsV2("pkg1");
+        final List<Suggestion> suggestions = makeSuggestions("pkg1");
         adapter.setSuggestions(suggestions);
 
         reset(adapter); // clear interactions tracking
@@ -178,7 +177,7 @@ public class DashboardAdapterTest {
     public void onBindSuggestion_shouldSetSuggestionAdapterAndNoCrash() {
         mDashboardAdapter = new DashboardAdapter(mContext, null /* savedInstanceState */,
                 null /* conditions */, null /* suggestionControllerMixin */, null /* lifecycle */);
-        final List<Suggestion> suggestions = makeSuggestionsV2("pkg1");
+        final List<Suggestion> suggestions = makeSuggestions("pkg1");
 
         mDashboardAdapter.setSuggestions(suggestions);
 
@@ -244,55 +243,6 @@ public class DashboardAdapterTest {
     }
 
     @Test
-    public void onBindTile_externalTileWithBackgroundColorRawValue_shouldUpdateIcon() {
-        final Context context = spy(RuntimeEnvironment.application);
-        final View view = LayoutInflater.from(context).inflate(R.layout.dashboard_tile, null);
-        final DashboardAdapter.DashboardItemHolder holder =
-                new DashboardAdapter.DashboardItemHolder(view);
-        final Tile tile = spy(new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE));
-        tile.getMetaData().putInt(DashboardAdapter.META_DATA_PREFERENCE_ICON_BACKGROUND_ARGB,
-                0xff0000);
-        doReturn(Icon.createWithResource(context, R.drawable.ic_settings))
-                .when(tile).getIcon(context);
-        final IconCache iconCache = new IconCache(context);
-        mDashboardAdapter = new DashboardAdapter(context, null /* savedInstanceState */,
-                null /* conditions */, null /* suggestionControllerMixin */, null /* lifecycle */);
-        ReflectionHelpers.setField(mDashboardAdapter, "mCache", iconCache);
-
-        doReturn("another.package").when(context).getPackageName();
-        mDashboardAdapter.onBindTile(holder, tile);
-
-        final RoundedHomepageIcon homepageIcon = (RoundedHomepageIcon) iconCache.getIcon(
-                tile.getIcon(context));
-        assertThat(homepageIcon.mBackgroundColor).isEqualTo(0xff0000);
-    }
-
-    @Test
-    public void onBindTile_externalTileWithBackgroundColorHint_shouldUpdateIcon() {
-        final Context context = spy(RuntimeEnvironment.application);
-        final View view = LayoutInflater.from(context).inflate(R.layout.dashboard_tile, null);
-        final DashboardAdapter.DashboardItemHolder holder =
-                new DashboardAdapter.DashboardItemHolder(view);
-        final Tile tile = spy(new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE));
-        tile.getMetaData().putInt(TileUtils.META_DATA_PREFERENCE_ICON_BACKGROUND_HINT,
-                R.color.memory_critical);
-        doReturn(Icon.createWithResource(context, R.drawable.ic_settings))
-                .when(tile).getIcon(context);
-        final IconCache iconCache = new IconCache(context);
-        mDashboardAdapter = new DashboardAdapter(context, null /* savedInstanceState */,
-                null /* conditions */, null /* suggestionControllerMixin */, null /* lifecycle */);
-        ReflectionHelpers.setField(mDashboardAdapter, "mCache", iconCache);
-
-        doReturn("another.package").when(context).getPackageName();
-        mDashboardAdapter.onBindTile(holder, tile);
-
-        final RoundedHomepageIcon homepageIcon = (RoundedHomepageIcon) iconCache.getIcon(
-                tile.getIcon(context));
-        assertThat(homepageIcon.mBackgroundColor)
-                .isEqualTo(RuntimeEnvironment.application.getColor(R.color.memory_critical));
-    }
-
-    @Test
     public void onBindTile_externalTile_usingRoundedHomepageIcon_shouldNotUpdateIcon() {
         final Context context = RuntimeEnvironment.application;
         final View view = LayoutInflater.from(context).inflate(R.layout.dashboard_tile, null);
@@ -315,7 +265,7 @@ public class DashboardAdapterTest {
                 any(RoundedHomepageIcon.class));
     }
 
-    private List<Suggestion> makeSuggestionsV2(String... pkgNames) {
+    private List<Suggestion> makeSuggestions(String... pkgNames) {
         final List<Suggestion> suggestions = new ArrayList<>();
         for (String pkgName : pkgNames) {
             final Suggestion suggestion = new Suggestion.Builder(pkgName)
