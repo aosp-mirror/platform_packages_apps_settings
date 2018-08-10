@@ -37,6 +37,7 @@ import com.android.settings.slices.SliceBuilderUtils;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
+import androidx.slice.builders.ListBuilder.RowBuilder;
 import androidx.slice.builders.SliceAction;
 
 /**
@@ -70,7 +71,7 @@ public class LocationSliceBuilder {
 
         return new ListBuilder(context, LOCATION_URI, ListBuilder.INFINITY)
                 .setAccentColor(color)
-                .addRow(b -> b
+                .addRow(new RowBuilder()
                         .setTitle(title)
                         .setTitleItem(icon, ICON_IMAGE)
                         .setPrimaryAction(primarySliceAction))

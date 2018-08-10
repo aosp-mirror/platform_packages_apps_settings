@@ -49,6 +49,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
+import androidx.slice.builders.ListBuilder.RowBuilder;
 import androidx.slice.builders.SliceAction;
 
 /**
@@ -183,7 +184,7 @@ public class Enhanced4gLteSliceHelper {
 
         return new ListBuilder(mContext, sliceUri, ListBuilder.INFINITY)
                 .setAccentColor(Utils.getColorAccentDefaultColor(mContext))
-                .addRow(b -> b
+                .addRow(new RowBuilder()
                         .setTitle(getEnhanced4glteModeTitle(subId))
                         .addEndItem(
                                 new SliceAction(

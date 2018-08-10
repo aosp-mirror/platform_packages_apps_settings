@@ -42,6 +42,7 @@ import com.android.settings.slices.SliceBuilderUtils;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
+import androidx.slice.builders.ListBuilder.RowBuilder;
 import androidx.slice.builders.SliceAction;
 
 /**
@@ -95,7 +96,7 @@ public class WifiSliceBuilder {
 
         return new ListBuilder(context, WIFI_URI, ListBuilder.INFINITY)
                 .setAccentColor(color)
-                .addRow(b -> b
+                .addRow(new RowBuilder()
                         .setTitle(title)
                         .setSubtitle(summary)
                         .addEndItem(toggleSliceAction)

@@ -66,6 +66,9 @@ import java.util.List;
 import java.util.Set;
 
 import androidx.slice.Slice;
+import androidx.slice.SliceProvider;
+import androidx.slice.widget.SliceLiveData;
+import com.android.settings.R;
 
 /**
  * TODO Investigate using ShadowContentResolver.registerProviderInternal(String, ContentProvider)
@@ -81,7 +84,7 @@ public class SettingsSliceProviderTest {
     private static final String SUMMARY = "summary";
     private static final String SCREEN_TITLE = "screen title";
     private static final String FRAGMENT_NAME = "fragment name";
-    private static final int ICON = 1234; // I declare a thumb war
+    private static final int ICON = R.drawable.ic_settings;
     private static final Uri URI = Uri.parse("content://com.android.settings.slices/test");
     private static final String PREF_CONTROLLER = FakeToggleController.class.getName();
 
@@ -117,6 +120,8 @@ public class SettingsSliceProviderTest {
         mManager = mock(SliceManager.class);
         when(mContext.getSystemService(SliceManager.class)).thenReturn(mManager);
         when(mManager.getPinnedSlices()).thenReturn(Collections.emptyList());
+
+        SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
     }
 
     @After
@@ -480,7 +485,7 @@ public class SettingsSliceProviderTest {
         values.put(SlicesDatabaseHelper.IndexColumns.TITLE, TITLE);
         values.put(SlicesDatabaseHelper.IndexColumns.SUMMARY, "s");
         values.put(SlicesDatabaseHelper.IndexColumns.SCREENTITLE, "s");
-        values.put(SlicesDatabaseHelper.IndexColumns.ICON_RESOURCE, 1234);
+        values.put(SlicesDatabaseHelper.IndexColumns.ICON_RESOURCE, R.drawable.ic_settings);
         values.put(SlicesDatabaseHelper.IndexColumns.FRAGMENT, "test");
         values.put(SlicesDatabaseHelper.IndexColumns.CONTROLLER, PREF_CONTROLLER);
         values.put(SlicesDatabaseHelper.IndexColumns.PLATFORM_SLICE, isPlatformSlice);
