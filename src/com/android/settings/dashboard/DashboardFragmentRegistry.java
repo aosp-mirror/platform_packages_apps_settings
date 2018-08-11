@@ -62,8 +62,9 @@ public class DashboardFragmentRegistry {
 
     static {
         PARENT_TO_CATEGORY_KEY_MAP = new ArrayMap<>();
-        PARENT_TO_CATEGORY_KEY_MAP.put(TopLevelSettings.class.getName(),
-                CategoryKey.CATEGORY_HOMEPAGE);
+        // TODO(b/110405144): Add the mapping when IA.homepage intent-filter is  is removed.
+        //        PARENT_TO_CATEGORY_KEY_MAP.put(TopLevelSettings.class.getName(),
+        //                CategoryKey.CATEGORY_HOMEPAGE);
         PARENT_TO_CATEGORY_KEY_MAP.put(
                 NetworkDashboardFragment.class.getName(), CategoryKey.CATEGORY_NETWORK);
         PARENT_TO_CATEGORY_KEY_MAP.put(ConnectedDeviceDashboardFragment.class.getName(),

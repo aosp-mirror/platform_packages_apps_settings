@@ -291,7 +291,7 @@ public class DashboardFeatureProviderImplTest {
         mActivityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "key");
         mActivityInfo.metaData.putString(TileUtils.META_DATA_PREFERENCE_ICON_URI,
                 "content://com.android.settings/tile_icon");
-        mImpl.bindIcon(preference, tile);
+        mImpl.bindIcon(preference, tile, false /* forceRoundedIcon */);
 
         assertThat(preference.getIcon()).isNotNull();
     }
