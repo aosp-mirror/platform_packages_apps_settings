@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.dashboard.conditional;
+package com.android.settings.homepage.conditional;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 

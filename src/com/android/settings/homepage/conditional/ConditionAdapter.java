@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.dashboard.conditional;
+package com.android.settings.homepage.conditional;
 
 import android.content.Context;
 import android.util.Log;
@@ -21,6 +21,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -31,10 +35,6 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.List;
 import java.util.Objects;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class ConditionAdapter extends RecyclerView.Adapter<DashboardItemHolder> {
     public static final String TAG = "ConditionAdapter";

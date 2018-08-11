@@ -22,18 +22,15 @@ import android.os.Looper;
 import android.os.PowerManager;
 import android.provider.Settings;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.dashboard.conditional.BatterySaverCondition;
-import com.android.settings.dashboard.conditional.ConditionManager;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 public class BatterySaverController extends BasePreferenceController
         implements LifecycleObserver, OnStart, OnStop, BatterySaverReceiver.BatterySaverListener {
@@ -80,11 +77,6 @@ public class BatterySaverController extends BasePreferenceController
     public void onStop() {
         mContext.getContentResolver().unregisterContentObserver(mObserver);
         mBatteryStateChangeReceiver.setListening(false);
-    }
-
-    @VisibleForTesting
-    void refreshConditionManager() {
-        ConditionManager.get(mContext).getCondition(BatterySaverCondition.class).refreshState();
     }
 
     @Override

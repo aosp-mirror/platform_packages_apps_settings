@@ -24,7 +24,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.recyclerview.widget.DiffUtil;
 
 import com.android.settings.R;
-import com.android.settings.dashboard.conditional.Condition;
+import com.android.settings.homepage.conditional.Condition;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 
