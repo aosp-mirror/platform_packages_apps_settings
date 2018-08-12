@@ -44,7 +44,7 @@ public class DefaultAutofillPreferenceController extends DefaultAppPreferenceCon
 
     @Override
     public String getPreferenceKey() {
-        return "default_autofill";
+        return "default_autofill_main";
     }
 
     @Override
@@ -54,7 +54,7 @@ public class DefaultAutofillPreferenceController extends DefaultAppPreferenceCon
         }
         final DefaultAutofillPicker.AutofillSettingIntentProvider intentProvider =
                 new DefaultAutofillPicker.AutofillSettingIntentProvider(
-                        mContext, info.getKey());
+                        mContext, mUserId, info.getKey());
         return intentProvider.getIntent();
     }
 

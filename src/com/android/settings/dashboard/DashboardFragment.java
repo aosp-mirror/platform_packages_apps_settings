@@ -207,6 +207,10 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     @Override
     protected abstract int getPreferenceScreenResId();
 
+    protected boolean shouldForceRoundedIcon() {
+        return false;
+    }
+
     protected <T extends AbstractPreferenceController> T use(Class<T> clazz) {
         List<AbstractPreferenceController> controllerList = mPreferenceControllers.get(clazz);
         if (controllerList != null) {
@@ -343,6 +347,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         final int tintColor = a.getColor(0, context.getColor(android.R.color.white));
         a.recycle();
         // Install dashboard tiles.
+        final boolean forceRoundedIcons = shouldForceRoundedIcon();
         for (Tile tile : tiles) {
             final String key = mDashboardFeatureProvider.getDashboardKeyForTile(tile);
             if (TextUtils.isEmpty(key)) {
@@ -361,13 +366,15 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             if (mDashboardTilePrefKeys.contains(key)) {
                 // Have the key already, will rebind.
                 final Preference preference = screen.findPreference(key);
-                mDashboardFeatureProvider.bindPreferenceToTile(getActivity(), getMetricsCategory(),
-                        preference, tile, key, mPlaceholderPreferenceController.getOrder());
+                mDashboardFeatureProvider.bindPreferenceToTile(getActivity(), forceRoundedIcons,
+                        getMetricsCategory(), preference, tile, key,
+                        mPlaceholderPreferenceController.getOrder());
             } else {
                 // Don't have this key, add it.
                 final Preference pref = new Preference(getPrefContext());
-                mDashboardFeatureProvider.bindPreferenceToTile(getActivity(), getMetricsCategory(),
-                        pref, tile, key, mPlaceholderPreferenceController.getOrder());
+                mDashboardFeatureProvider.bindPreferenceToTile(getActivity(), forceRoundedIcons,
+                        getMetricsCategory(), pref, tile, key,
+                        mPlaceholderPreferenceController.getOrder());
                 screen.addPreference(pref);
                 mDashboardTilePrefKeys.add(key);
             }

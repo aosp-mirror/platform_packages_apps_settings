@@ -106,9 +106,6 @@
         -->
     </string-array>
 
-    <!-- Whether or not we should tint the icon color on setting pages. -->
-    <bool name="config_tintSettingIcon">true</bool>
-
     <!-- Whether or not App & Notification screen should display recently used apps -->
     <bool name="config_display_recent_apps">true</bool>
 
@@ -133,4 +130,7 @@
          devices will be able to vary their amplitude but do not possess enough dynamic range to
          have distinct intensity levels -->
     <bool name="config_vibration_supports_multiple_intensities">false</bool>
+
+    <!-- Whether or not TopLevelSettings should force rounded icon for injected tiles -->
+    <bool name="config_force_rounded_icon_TopLevelSettings">true</bool>
 </resources>

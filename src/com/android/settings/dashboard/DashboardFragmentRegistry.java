@@ -30,6 +30,7 @@ import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.display.NightDisplaySettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.gestures.GestureSettings;
+import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.language.LanguageAndInputSettings;
 import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.notification.ConfigureNotificationSettings;
@@ -61,6 +62,9 @@ public class DashboardFragmentRegistry {
 
     static {
         PARENT_TO_CATEGORY_KEY_MAP = new ArrayMap<>();
+        // TODO(b/110405144): Add the mapping when IA.homepage intent-filter is  is removed.
+        //        PARENT_TO_CATEGORY_KEY_MAP.put(TopLevelSettings.class.getName(),
+        //                CategoryKey.CATEGORY_HOMEPAGE);
         PARENT_TO_CATEGORY_KEY_MAP.put(
                 NetworkDashboardFragment.class.getName(), CategoryKey.CATEGORY_NETWORK);
         PARENT_TO_CATEGORY_KEY_MAP.put(ConnectedDeviceDashboardFragment.class.getName(),
@@ -98,9 +102,9 @@ public class DashboardFragmentRegistry {
         PARENT_TO_CATEGORY_KEY_MAP.put(ZenModeSettings.class.getName(),
                 CategoryKey.CATEGORY_DO_NOT_DISTURB);
         PARENT_TO_CATEGORY_KEY_MAP.put(GestureSettings.class.getName(),
-            CategoryKey.CATEGORY_GESTURES);
+                CategoryKey.CATEGORY_GESTURES);
         PARENT_TO_CATEGORY_KEY_MAP.put(NightDisplaySettings.class.getName(),
-            CategoryKey.CATEGORY_NIGHT_DISPLAY);
+                CategoryKey.CATEGORY_NIGHT_DISPLAY);
 
         CATEGORY_KEY_TO_PARENT_MAP = new ArrayMap<>(PARENT_TO_CATEGORY_KEY_MAP.size());
 

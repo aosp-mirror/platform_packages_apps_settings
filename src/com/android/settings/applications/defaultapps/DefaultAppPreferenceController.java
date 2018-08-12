@@ -82,10 +82,14 @@ public abstract class DefaultAppPreferenceController extends AbstractPreferenceC
         final Intent settingIntent = getSettingIntent(app);
         if (settingIntent != null) {
             ((GearPreference) preference).setOnGearClickListener(
-                    p -> mContext.startActivity(settingIntent));
+                    p -> startActivity(settingIntent));
         } else {
             ((GearPreference) preference).setOnGearClickListener(null);
         }
+    }
+
+    protected void startActivity(Intent intent) {
+        mContext.startActivity(intent);
     }
 
     protected abstract DefaultAppInfo getDefaultAppInfo();

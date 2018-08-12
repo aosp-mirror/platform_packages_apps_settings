@@ -16,7 +16,6 @@
 package com.android.settings.dashboard;
 
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
@@ -40,17 +39,17 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.R.id;
 import com.android.settings.dashboard.DashboardData.ConditionHeaderData;
-import com.android.settings.dashboard.conditional.Condition;
-import com.android.settings.dashboard.conditional.ConditionAdapter;
 import com.android.settings.dashboard.suggestions.SuggestionAdapter;
+import com.android.settings.homepage.conditional.Condition;
+import com.android.settings.homepage.conditional.ConditionAdapter;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.widget.RoundedHomepageIcon;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
-import com.android.settingslib.drawer.TileUtils;
 import com.android.settingslib.suggestions.SuggestionControllerMixinCompat;
 import com.android.settingslib.utils.IconCache;
 
@@ -64,7 +63,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
     @VisibleForTesting
     static final String STATE_CONDITION_EXPANDED = "condition_expanded";
-    static final String META_DATA_PREFERENCE_ICON_BACKGROUND_ARGB = "com.android.settings.bg.argb";
+
     private final IconCache mCache;
     private final Context mContext;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
@@ -247,10 +246,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         return mDashboardData.getItemEntityById(itemId);
     }
 
-    public Suggestion getSuggestion(int position) {
-        return mSuggestionAdapter.getSuggestion(position);
-    }
-
     @VisibleForTesting
     void notifyDashboardDataChanged(DashboardData prevData) {
         if (mFirstFrameDrawn && prevData != null) {
@@ -321,31 +316,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         if (!TextUtils.equals(tileIcon.getResPackage(), mContext.getPackageName())
                 && !(icon instanceof RoundedHomepageIcon)) {
             icon = new RoundedHomepageIcon(mContext, icon);
-            final Bundle metaData = tile.getMetaData();
-            try {
-                if (metaData != null) {
-                    // Load from bg.argb first
-                    int bgColor = metaData.getInt(META_DATA_PREFERENCE_ICON_BACKGROUND_ARGB,
-                            0 /* default */);
-                    // Not found, load from bg.hint
-                    if (bgColor == 0) {
-                        final int colorRes = metaData.getInt(
-                                TileUtils.META_DATA_PREFERENCE_ICON_BACKGROUND_HINT,
-                                0 /* default */);
-                        if (colorRes != 0) {
-                            bgColor = mContext.getPackageManager()
-                                    .getResourcesForApplication(tileIcon.getResPackage())
-                                    .getColor(colorRes, null /* theme */);
-                        }
-                    }
-                    // If found anything, use it.
-                    if (bgColor != 0) {
-                        ((RoundedHomepageIcon) icon).setBackgroundColor(bgColor);
-                    }
-                }
-            } catch (PackageManager.NameNotFoundException e) {
-                Log.e(TAG, "Failed to set background color for " + tile.getPackageName());
-            }
+            ((RoundedHomepageIcon) icon).setBackgroundColor(mContext, tile);
             mCache.updateIcon(tileIcon, icon);
         }
         holder.icon.setImageDrawable(icon);

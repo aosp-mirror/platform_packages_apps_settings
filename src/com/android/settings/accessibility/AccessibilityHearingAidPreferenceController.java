@@ -39,7 +39,6 @@ import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
@@ -82,6 +81,7 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
     };
 
     private final LocalBluetoothManager mLocalBluetoothManager;
+    private final BluetoothAdapter mBluetoothAdapter;
     //cache value of supporting hearing aid or not
     private boolean mHearingAidProfileSupported;
     private FragmentManager mFragmentManager;
@@ -89,6 +89,7 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
     public AccessibilityHearingAidPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mLocalBluetoothManager = getLocalBluetoothManager();
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         mHearingAidProfileSupported = isHearingAidProfileSupported();
     }
 
@@ -151,8 +152,7 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
         if (!mHearingAidProfileSupported) {
             return null;
         }
-        final LocalBluetoothAdapter localAdapter = mLocalBluetoothManager.getBluetoothAdapter();
-        if (!localAdapter.isEnabled()) {
+        if (!mBluetoothAdapter.isEnabled()) {
             return null;
         }
         final List<BluetoothDevice> deviceList = mLocalBluetoothManager.getProfileManager()
@@ -166,8 +166,7 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
     }
 
     private boolean isHearingAidProfileSupported() {
-        final LocalBluetoothAdapter localAdapter = mLocalBluetoothManager.getBluetoothAdapter();
-        final List<Integer> supportedList = localAdapter.getSupportedProfiles();
+        final List<Integer> supportedList = mBluetoothAdapter.getSupportedProfiles();
         if (supportedList.contains(BluetoothProfile.HEARING_AID)) {
             return true;
         }

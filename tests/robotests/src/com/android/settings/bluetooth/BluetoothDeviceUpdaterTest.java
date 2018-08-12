@@ -22,15 +22,19 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
+import androidx.preference.Preference;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import org.junit.Before;
@@ -40,10 +44,14 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
 
-import androidx.preference.Preference;
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(shadows = {ShadowBluetoothAdapter.class})
 public class BluetoothDeviceUpdaterTest {
 
     @Mock
@@ -58,18 +66,26 @@ public class BluetoothDeviceUpdaterTest {
     private SettingsActivity mSettingsActivity;
     @Mock
     private LocalBluetoothManager mLocalManager;
+    @Mock
+    private CachedBluetoothDeviceManager mCachedDeviceManager;
 
     private Context mContext;
     private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
     private BluetoothDevicePreference mPreference;
+    private ShadowBluetoothAdapter mShadowBluetoothAdapter;
+    private List<CachedBluetoothDevice> mCachedDevices = new ArrayList<CachedBluetoothDevice>();
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
         mContext = RuntimeEnvironment.application;
+        mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
+        mCachedDevices.add(mCachedBluetoothDevice);
         doReturn(mContext).when(mDashboardFragment).getContext();
         when(mCachedBluetoothDevice.getDevice()).thenReturn(mBluetoothDevice);
+        when(mLocalManager.getCachedDeviceManager()).thenReturn(mCachedDeviceManager);
+        when(mCachedDeviceManager.getCachedDevicesCopy()).thenReturn(mCachedDevices);
 
         mPreference = new BluetoothDevicePreference(mContext, mCachedBluetoothDevice, false);
         mBluetoothDeviceUpdater =
@@ -170,5 +186,39 @@ public class BluetoothDeviceUpdaterTest {
 
         // Shouldn't crash
         mBluetoothDeviceUpdater.unregisterCallback();
+    }
+
+    @Test
+    public void forceUpdate_bluetoothDisabled_doNothing() {
+        mShadowBluetoothAdapter.setEnabled(false);
+        mBluetoothDeviceUpdater.forceUpdate();
+
+        verify(mDevicePreferenceCallback, never()).onDeviceAdded(any(Preference.class));
+    }
+
+    @Test
+    public void forceUpdate_bluetoothEnabled_addPreference() {
+        mShadowBluetoothAdapter.setEnabled(true);
+        mBluetoothDeviceUpdater.forceUpdate();
+
+        verify(mDevicePreferenceCallback).onDeviceAdded(any(Preference.class));
+    }
+
+    @Test
+    public void onBluetoothStateChanged_bluetoothStateIsOn_forceUpdate() {
+        mShadowBluetoothAdapter.setEnabled(true);
+        mBluetoothDeviceUpdater.onBluetoothStateChanged(BluetoothAdapter.STATE_ON);
+
+        verify(mDevicePreferenceCallback).onDeviceAdded(any(Preference.class));
+    }
+
+    @Test
+    public void onBluetoothStateChanged_bluetoothStateIsOff_removeAllDevicesFromPreference() {
+        mBluetoothDeviceUpdater.mPreferenceMap.put(mBluetoothDevice, mPreference);
+
+        mBluetoothDeviceUpdater.onBluetoothStateChanged(BluetoothAdapter.STATE_OFF);
+
+        verify(mDevicePreferenceCallback).onDeviceRemoved(mPreference);
+        assertThat(mBluetoothDeviceUpdater.mPreferenceMap.containsKey(mBluetoothDevice)).isFalse();
     }
 }

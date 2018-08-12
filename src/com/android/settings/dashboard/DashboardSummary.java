@@ -26,17 +26,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.annotation.WorkerThread;
+import androidx.loader.app.LoaderManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.SettingsBaseActivity.CategoryListener;
-import com.android.settings.dashboard.conditional.Condition;
-import com.android.settings.dashboard.conditional.ConditionManager;
-import com.android.settings.dashboard.conditional.ConditionManager.ConditionListener;
-import com.android.settings.dashboard.conditional.FocusRecyclerView;
-import com.android.settings.dashboard.conditional.FocusRecyclerView.FocusListener;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
+import com.android.settings.homepage.conditional.Condition;
+import com.android.settings.homepage.conditional.ConditionManager;
+import com.android.settings.homepage.conditional.ConditionManager.ConditionListener;
+import com.android.settings.homepage.conditional.FocusRecyclerView;
+import com.android.settings.homepage.conditional.FocusRecyclerView.FocusListener;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.ActionBarShadowController;
 import com.android.settingslib.drawer.CategoryKey;
@@ -46,11 +51,12 @@ import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.List;
 
-import androidx.annotation.VisibleForTesting;
-import androidx.annotation.WorkerThread;
-import androidx.loader.app.LoaderManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
+/**
+ * Deprecated in favor of {@link com.android.settings.homepage.TopLevelSettings}
+ *
+ * @deprecated
+ */
+@Deprecated
 public class DashboardSummary extends InstrumentedFragment
         implements CategoryListener, ConditionListener,
         FocusListener, SuggestionControllerMixinCompat.SuggestionControllerHost {

@@ -29,6 +29,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
+import android.util.ArraySet;
 import android.util.Log;
 import android.util.Pair;
 
@@ -47,12 +48,15 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
+import androidx.slice.builders.ListBuilder.InputRangeBuilder;
+import androidx.slice.builders.ListBuilder.RowBuilder;
 import androidx.slice.builders.SliceAction;
 
 
@@ -250,11 +254,11 @@ public class SliceBuilderUtils {
                 (TogglePreferenceController) controller;
         final SliceAction sliceAction = getToggleAction(context, sliceData,
                 toggleController.isChecked());
-        final List<String> keywords = buildSliceKeywords(sliceData);
+        final Set<String> keywords = buildSliceKeywords(sliceData);
 
         return new ListBuilder(context, sliceData.getUri(), ListBuilder.INFINITY)
                 .setAccentColor(color)
-                .addRow(rowBuilder -> rowBuilder
+                .addRow(new RowBuilder()
                         .setTitle(sliceData.getTitle())
                         .setSubtitle(subtitleText)
                         .setPrimaryAction(
@@ -270,11 +274,11 @@ public class SliceBuilderUtils {
         final IconCompat icon = getSafeIcon(context, sliceData);
         final CharSequence subtitleText = getSubtitleText(context, controller, sliceData);
         @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
-        final List<String> keywords = buildSliceKeywords(sliceData);
+        final Set<String> keywords = buildSliceKeywords(sliceData);
 
         return new ListBuilder(context, sliceData.getUri(), ListBuilder.INFINITY)
                 .setAccentColor(color)
-                .addRow(rowBuilder -> rowBuilder
+                .addRow(new RowBuilder()
                         .setTitle(sliceData.getTitle())
                         .setSubtitle(subtitleText)
                         .setPrimaryAction(
@@ -293,11 +297,11 @@ public class SliceBuilderUtils {
         final CharSequence subtitleText = getSubtitleText(context, controller, sliceData);
         final SliceAction primaryAction = new SliceAction(contentIntent, icon,
                 sliceData.getTitle());
-        final List<String> keywords = buildSliceKeywords(sliceData);
+        final Set<String> keywords = buildSliceKeywords(sliceData);
 
         return new ListBuilder(context, sliceData.getUri(), ListBuilder.INFINITY)
                 .setAccentColor(color)
-                .addInputRange(builder -> builder
+                .addInputRange(new InputRangeBuilder()
                         .setTitle(sliceData.getTitle())
                         .setSubtitle(subtitleText)
                         .setPrimaryAction(primaryAction)
@@ -343,8 +347,8 @@ public class SliceBuilderUtils {
                 || TextUtils.equals(summary, doublePlaceHolder));
     }
 
-    private static List<String> buildSliceKeywords(SliceData data) {
-        final List<String> keywords = new ArrayList<>();
+    private static Set<String> buildSliceKeywords(SliceData data) {
+        final Set<String> keywords = new ArraySet<>();
 
         keywords.add(data.getTitle());
 
@@ -366,7 +370,7 @@ public class SliceBuilderUtils {
 
     private static Slice buildUnavailableSlice(Context context, SliceData data) {
         final String title = data.getTitle();
-        final List<String> keywords = buildSliceKeywords(data);
+        final Set<String> keywords = buildSliceKeywords(data);
         @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
         final CharSequence summary = context.getText(R.string.disabled_dependent_setting_summary);
         final IconCompat icon = IconCompat.createWithResource(context, data.getIconResource());
@@ -375,9 +379,9 @@ public class SliceBuilderUtils {
 
         return new ListBuilder(context, data.getUri(), ListBuilder.INFINITY)
                 .setAccentColor(color)
-                .addRow(builder -> builder
+                .addRow(new RowBuilder()
                         .setTitle(title)
-                        .setTitleItem(icon)
+                        .setTitleItem(icon, ListBuilder.SMALL_IMAGE)
                         .setSubtitle(summary)
                         .setPrimaryAction(primaryAction))
                 .setKeywords(keywords)

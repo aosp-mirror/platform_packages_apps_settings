@@ -149,6 +149,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         return 0;
     }
 
+    // TODO(b/110405144): Remove SummaryProvider
     @VisibleForTesting
     static class SummaryProvider implements SummaryLoader.SummaryProvider {
 

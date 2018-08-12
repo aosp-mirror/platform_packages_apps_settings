@@ -40,10 +40,12 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     private static final String TAG = "FaceEnrollEnrolling";
     private static final boolean DEBUG = true;
+    private static final String TAG_FACE_PREVIEW = "tag_preview";
 
     private TextView mErrorText;
     private Interpolator mLinearOutSlowInInterpolator;
     private boolean mShouldFinishOnStop = true;
+    private FaceEnrollPreviewFragment mFaceCameraPreview;
 
     public static class FaceErrorDialog extends BiometricErrorDialog {
         static FaceErrorDialog newInstance(CharSequence msg, int msgId) {
@@ -89,6 +91,18 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
             mShouldFinishOnStop = false;
         } else {
             startEnrollment();
+        }
+    }
+
+    @Override
+    public void startEnrollment() {
+        super.startEnrollment();
+        mFaceCameraPreview = (FaceEnrollPreviewFragment) getSupportFragmentManager()
+                .findFragmentByTag(TAG_FACE_PREVIEW);
+        if (mFaceCameraPreview == null) {
+            mFaceCameraPreview = new FaceEnrollPreviewFragment();
+            getSupportFragmentManager().beginTransaction().add(mFaceCameraPreview, TAG_FACE_PREVIEW)
+                    .commitAllowingStateLoss();
         }
     }
 

@@ -16,7 +16,9 @@
 package com.android.settings.fuelgauge;
 
 import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_ADVANCED_BATTERY;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyLong;
@@ -40,6 +42,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.loader.app.LoaderManager;
+
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
@@ -50,7 +54,6 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -68,8 +71,6 @@ import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.loader.app.LoaderManager;
 
 // TODO: Improve this test class so that it starts up the real activity and fragment.
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -341,18 +342,6 @@ public class PowerUsageSummaryTest {
         mFragment.refreshUi(BatteryBroadcastReceiver.BatteryUpdateType.MANUAL);
 
         verify(mFragment).restartBatteryTipLoader();
-    }
-
-    @Test
-    public void getDashboardLabel_returnsCorrectLabel() {
-        BatteryInfo info = new BatteryInfo();
-        info.batteryPercentString = "3%";
-        assertThat(PowerUsageSummary.getDashboardLabel(mRealContext, info))
-                .isEqualTo(info.batteryPercentString);
-
-        info.remainingLabel = "Phone will shut down soon";
-        assertThat(PowerUsageSummary.getDashboardLabel(mRealContext, info))
-                .isEqualTo("3% - Phone will shut down soon");
     }
 
     public static class TestFragment extends PowerUsageSummary {

@@ -33,8 +33,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListUpdateCallback;
 
-import com.android.settings.dashboard.conditional.AirplaneModeCondition;
-import com.android.settings.dashboard.conditional.Condition;
+import com.android.settings.homepage.conditional.AirplaneModeCondition;
+import com.android.settings.homepage.conditional.Condition;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;

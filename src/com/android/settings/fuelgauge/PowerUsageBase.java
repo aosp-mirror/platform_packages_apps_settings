@@ -72,8 +72,6 @@ public abstract class PowerUsageBase extends DashboardFragment {
     @Override
     public void onResume() {
         super.onResume();
-
-        BatteryStatsHelper.dropFile(getActivity(), BatteryHistoryDetail.BATTERY_HISTORY_FILE);
         mBatteryBroadcastReceiver.register();
     }
 

@@ -26,6 +26,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toolbar;
 
+import androidx.annotation.NonNull;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsHomepageActivity;
@@ -38,8 +40,6 @@ import com.android.settings.search.SearchFeatureProvider;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import androidx.annotation.NonNull;
 
 public class HomepageFragment extends InstrumentedFragment {
 
@@ -70,7 +70,7 @@ public class HomepageFragment extends InstrumentedFragment {
 
     private void setupBottomBar() {
         final Activity activity = getActivity();
-        mSearchButton = (FloatingActionButton) activity.findViewById(R.id.search_fab);
+        mSearchButton = activity.findViewById(R.id.search_fab);
 
         mSearchButton.setOnClickListener(v -> {
             final Intent intent = SearchFeatureProvider.SEARCH_UI_INTENT;
@@ -79,7 +79,7 @@ public class HomepageFragment extends InstrumentedFragment {
             startActivityForResult(intent, 0 /* requestCode */);
         });
         mBottomSheetBehavior = BottomSheetBehavior.from(activity.findViewById(R.id.bottom_sheet));
-        final BottomAppBar bottomBar = (BottomAppBar) activity.findViewById(R.id.bar);
+        final BottomAppBar bottomBar = activity.findViewById(R.id.bar);
         bottomBar.setOnClickListener(v -> {
             mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
         });
@@ -87,7 +87,7 @@ public class HomepageFragment extends InstrumentedFragment {
         final int screenWidthpx = getResources().getDisplayMetrics().widthPixels;
         final View searchbar = activity.findViewById(R.id.search_bar_container);
         final View bottombar = activity.findViewById(R.id.bar);
-        final Toolbar searchActionBar = (Toolbar) activity.findViewById(R.id.search_action_bar);
+        final Toolbar searchActionBar = activity.findViewById(R.id.search_action_bar);
         searchActionBar.setNavigationIcon(R.drawable.ic_search_floating_24dp);
 
 
@@ -95,6 +95,7 @@ public class HomepageFragment extends InstrumentedFragment {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 if (!mBottomFragmentLoaded) {
+                    // TODO(b/110405144): Switch to {@link TopLevelSettings} when it's ready.
                     SettingsHomepageActivity.switchToFragment(getActivity(),
                             R.id.bottom_sheet_fragment, DashboardSummary.class.getName());
                     mBottomFragmentLoaded = true;

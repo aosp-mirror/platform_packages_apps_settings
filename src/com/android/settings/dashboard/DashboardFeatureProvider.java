@@ -15,8 +15,6 @@
  */
 package com.android.settings.dashboard;
 
-import android.content.Context;
-
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 
@@ -36,32 +34,9 @@ public interface DashboardFeatureProvider {
     DashboardCategory getTilesForCategory(String key);
 
     /**
-     * Get tiles (wrapped as a list of Preference) for key defined in CategoryKey.
-     *
-     * @param activity Activity hosting the preference
-     * @param context UI context to inflate preference
-     * @param sourceMetricsCategory The context (source) from which an action is performed
-     * @param key Value from CategoryKey
-     * @deprecated Pages implementing {@code DashboardFragment} should use
-     * {@link #getTilesForCategory(String)} instead. Using this method will not get the benefit
-     * of auto-ordering, progressive disclosure, auto-refreshing summary text etc.
-     */
-    @Deprecated
-    List<Preference> getPreferencesForCategory(FragmentActivity activity, Context context,
-            int sourceMetricsCategory, String key);
-
-    /**
      * Get all tiles, grouped by category.
      */
     List<DashboardCategory> getAllCategories();
-
-    /**
-     * Whether or not we should tint icons in setting pages.
-     *
-     * @deprecated in favor of color icons in homepage
-     */
-    @Deprecated
-    boolean shouldTintIcon();
 
     /**
      * Returns an unique string key for the tile.
@@ -72,6 +47,7 @@ public interface DashboardFeatureProvider {
      * Binds preference to data provided by tile.
      *
      * @param activity If tile contains intent to launch, it will be launched from this activity
+     * @param forceRoundedIcon Whether or not injected tiles from other packages should be forced to rounded icon.
      * @param sourceMetricsCategory The context (source) from which an action is performed
      * @param pref The preference to bind data
      * @param tile The binding data
@@ -79,8 +55,8 @@ public interface DashboardFeatureProvider {
      * @param baseOrder The order offset value. When binding, pref's order is determined by
      * both this value and tile's own priority.
      */
-    void bindPreferenceToTile(FragmentActivity activity, int sourceMetricsCategory, Preference pref,
-            Tile tile, String key, int baseOrder);
+    void bindPreferenceToTile(FragmentActivity activity, boolean forceRoundedIcon,
+            int sourceMetricsCategory, Preference pref, Tile tile, String key, int baseOrder);
 
     /**
      * Returns additional intent filter action for dashboard tiles
