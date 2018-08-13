@@ -17,7 +17,6 @@
 package com.android.settings.gestures;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyInt;
@@ -62,7 +61,7 @@ public class PickupGesturePreferenceControllerTest {
     @Test
     public void testIsChecked_configIsSet_shouldReturnTrue() {
         // Set the setting to be enabled.
-        when(mAmbientDisplayConfiguration.pulseOnPickupEnabled(anyInt())).thenReturn(true);
+        when(mAmbientDisplayConfiguration.pickupGestureEnabled(anyInt())).thenReturn(true);
 
         assertThat(mController.isChecked()).isTrue();
     }
@@ -70,25 +69,9 @@ public class PickupGesturePreferenceControllerTest {
     @Test
     public void testIsChecked_configIsNotSet_shouldReturnFalse() {
         // Set the setting to be disabled.
-        when(mAmbientDisplayConfiguration.pulseOnPickupEnabled(anyInt())).thenReturn(false);
+        when(mAmbientDisplayConfiguration.pickupGestureEnabled(anyInt())).thenReturn(false);
 
         assertThat(mController.isChecked()).isFalse();
-    }
-
-    @Test
-    public void testCanHandleClicks_configIsSet_shouldReturnTrue() {
-        mController = spy(mController);
-        doReturn(true).when(mController).pulseOnPickupCanBeModified();
-
-        assertThat(mController.canHandleClicks()).isTrue();
-    }
-
-    @Test
-    public void testCanHandleClicks_configIsNotSet_shouldReturnFalse() {
-        mController = spy(mController);
-        doReturn(false).when(mController).pulseOnPickupCanBeModified();
-
-        assertThat(mController.canHandleClicks()).isFalse();
     }
 
     @Test
@@ -106,7 +89,7 @@ public class PickupGesturePreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_aodNotSupported_UNSUPPORTED_ON_DEVICE() {
-        when(mAmbientDisplayConfiguration.dozePulsePickupSensorAvailable()).thenReturn(false);
+        when(mAmbientDisplayConfiguration.dozePickupSensorAvailable()).thenReturn(false);
         when(mAmbientDisplayConfiguration.ambientDisplayAvailable()).thenReturn(false);
         final int availabilityStatus = mController.getAvailabilityStatus();
 
@@ -114,17 +97,8 @@ public class PickupGesturePreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_aodOn_DISABLED_DEPENDENT_SETTING() {
-        when(mAmbientDisplayConfiguration.dozePulsePickupSensorAvailable()).thenReturn(true);
-        when(mAmbientDisplayConfiguration.ambientDisplayAvailable()).thenReturn(false);
-        final int availabilityStatus = mController.getAvailabilityStatus();
-
-        assertThat(availabilityStatus).isEqualTo(DISABLED_DEPENDENT_SETTING);
-    }
-
-    @Test
     public void getAvailabilityStatus_aodSupported_aodOff_AVAILABLE() {
-        when(mAmbientDisplayConfiguration.dozePulsePickupSensorAvailable()).thenReturn(true);
+        when(mAmbientDisplayConfiguration.dozePickupSensorAvailable()).thenReturn(true);
         when(mAmbientDisplayConfiguration.ambientDisplayAvailable()).thenReturn(true);
         final int availabilityStatus = mController.getAvailabilityStatus();
 
