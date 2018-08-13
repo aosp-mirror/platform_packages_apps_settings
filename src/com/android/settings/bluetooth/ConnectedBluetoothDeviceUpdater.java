@@ -24,9 +24,7 @@ import android.util.Log;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 /**
@@ -43,15 +41,6 @@ public class ConnectedBluetoothDeviceUpdater extends BluetoothDeviceUpdater {
             DevicePreferenceCallback devicePreferenceCallback) {
         super(context, fragment, devicePreferenceCallback);
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-    }
-
-    @VisibleForTesting
-    ConnectedBluetoothDeviceUpdater(DashboardFragment fragment,
-            DevicePreferenceCallback devicePreferenceCallback,
-            LocalBluetoothManager localBluetoothManager) {
-        super(fragment, devicePreferenceCallback, localBluetoothManager);
-        mAudioManager = (AudioManager) fragment.getContext().
-                getSystemService(Context.AUDIO_SERVICE);
     }
 
     @Override
