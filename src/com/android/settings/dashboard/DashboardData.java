@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.DiffUtil;
 
 import com.android.settings.R;
 import com.android.settings.homepage.conditional.Condition;
+import com.android.settings.homepage.conditional.v2.ConditionalCard;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 
@@ -58,12 +59,14 @@ public class DashboardData {
     private final List<Item> mItems;
     private final DashboardCategory mCategory;
     private final List<Condition> mConditions;
+    private final List<ConditionalCard> mConditionsV2;
     private final List<Suggestion> mSuggestions;
     private final boolean mConditionExpanded;
 
     private DashboardData(Builder builder) {
         mCategory = builder.mCategory;
         mConditions = builder.mConditions;
+        mConditionsV2 = builder.mConditionsV2;
         mSuggestions = builder.mSuggestions;
         mConditionExpanded = builder.mConditionExpanded;
         mItems = new ArrayList<>();
@@ -182,8 +185,11 @@ public class DashboardData {
      * and mIsShowingAll, mConditionExpanded flag.
      */
     private void buildItemsData() {
-        final List<Condition> conditions = getConditionsToShow(mConditions);
-        final boolean hasConditions = sizeOf(conditions) > 0;
+        final List<Condition> conditionsV1 = getConditionsToShow(mConditions);
+        final boolean hasConditionsV1 = sizeOf(conditionsV1) > 0;
+        final List<ConditionalCard> conditionsV2 = mConditionsV2;
+        final boolean hasConditionsV2 = sizeOf(conditionsV2) > 0;
+        final boolean hasConditions = hasConditionsV1 || hasConditionsV2;
 
         final List<Suggestion> suggestions = getSuggestionsToShow(mSuggestions);
         final boolean hasSuggestions = sizeOf(suggestions) > 0;
@@ -191,25 +197,31 @@ public class DashboardData {
         /* Suggestion container. This is the card view that contains the list of suggestions.
          * This will be added whenever the suggestion list is not empty */
         addToItemList(suggestions, R.layout.suggestion_container,
-            STABLE_ID_SUGGESTION_CONTAINER, hasSuggestions);
+                STABLE_ID_SUGGESTION_CONTAINER, hasSuggestions);
 
         /* Divider between suggestion and conditions if both are present. */
         addToItemList(null /* item */, R.layout.horizontal_divider,
-            STABLE_ID_SUGGESTION_CONDITION_DIVIDER, hasSuggestions && hasConditions);
+                STABLE_ID_SUGGESTION_CONDITION_DIVIDER, hasSuggestions && hasConditions);
 
         /* Condition header. This will be present when there is condition and it is collapsed */
-        addToItemList(new ConditionHeaderData(conditions),
-            R.layout.condition_header,
-            STABLE_ID_CONDITION_HEADER, hasConditions && !mConditionExpanded);
+        addToItemList(new ConditionHeaderData(conditionsV1, conditionsV2),
+                R.layout.condition_header,
+                STABLE_ID_CONDITION_HEADER, hasConditions && !mConditionExpanded);
 
         /* Condition container. This is the card view that contains the list of conditions.
          * This will be added whenever the condition list is not empty and expanded */
-        addToItemList(conditions, R.layout.condition_container,
-            STABLE_ID_CONDITION_CONTAINER, hasConditions && mConditionExpanded);
+        if (hasConditionsV1) {
+            addToItemList(conditionsV1, R.layout.condition_container,
+                    STABLE_ID_CONDITION_CONTAINER, hasConditionsV1 && mConditionExpanded);
+        }
+        if (hasConditionsV2) {
+            addToItemList(conditionsV2, R.layout.condition_container,
+                    STABLE_ID_CONDITION_CONTAINER, hasConditionsV2 && mConditionExpanded);
+        }
 
         /* Condition footer. This will be present when there is condition and it is expanded */
         addToItemList(null /* item */, R.layout.condition_footer,
-            STABLE_ID_CONDITION_FOOTER, hasConditions && mConditionExpanded);
+                STABLE_ID_CONDITION_FOOTER, hasConditions && mConditionExpanded);
 
         if (mCategory != null) {
             final List<Tile> tiles = mCategory.getTiles();
@@ -260,6 +272,7 @@ public class DashboardData {
     public static class Builder {
         private DashboardCategory mCategory;
         private List<Condition> mConditions;
+        private List<ConditionalCard> mConditionsV2;
         private List<Suggestion> mSuggestions;
         private boolean mConditionExpanded;
 
@@ -269,6 +282,7 @@ public class DashboardData {
         public Builder(DashboardData dashboardData) {
             mCategory = dashboardData.mCategory;
             mConditions = dashboardData.mConditions;
+            mConditionsV2 = dashboardData.mConditionsV2;
             mSuggestions = dashboardData.mSuggestions;
             mConditionExpanded = dashboardData.mConditionExpanded;
         }
@@ -280,6 +294,11 @@ public class DashboardData {
 
         public Builder setConditions(List<Condition> conditions) {
             this.mConditions = conditions;
+            return this;
+        }
+
+        public Builder setConditionsV2(List<ConditionalCard> conditions) {
+            this.mConditionsV2 = conditions;
             return this;
         }
 
@@ -340,17 +359,17 @@ public class DashboardData {
         // valid types in field type
         private static final int TYPE_DASHBOARD_TILE = R.layout.dashboard_tile;
         private static final int TYPE_SUGGESTION_CONTAINER =
-            R.layout.suggestion_container;
+                R.layout.suggestion_container;
         private static final int TYPE_CONDITION_CONTAINER =
-            R.layout.condition_container;
+                R.layout.condition_container;
         private static final int TYPE_CONDITION_HEADER =
-            R.layout.condition_header;
+                R.layout.condition_header;
         private static final int TYPE_CONDITION_FOOTER =
-            R.layout.condition_footer;
+                R.layout.condition_footer;
         private static final int TYPE_SUGGESTION_CONDITION_DIVIDER = R.layout.horizontal_divider;
 
         @IntDef({TYPE_DASHBOARD_TILE, TYPE_SUGGESTION_CONTAINER, TYPE_CONDITION_CONTAINER,
-            TYPE_CONDITION_HEADER, TYPE_CONDITION_FOOTER, TYPE_SUGGESTION_CONDITION_DIVIDER})
+                TYPE_CONDITION_HEADER, TYPE_CONDITION_FOOTER, TYPE_SUGGESTION_CONDITION_DIVIDER})
         @Retention(RetentionPolicy.SOURCE)
         public @interface ItemTypes {
         }
@@ -408,7 +427,7 @@ public class DashboardData {
 
                     // Only check title and summary for dashboard tile
                     return TextUtils.equals(localTile.title, targetTile.title)
-                        && TextUtils.equals(localTile.summary, targetTile.summary);
+                            && TextUtils.equals(localTile.summary, targetTile.summary);
                 case TYPE_SUGGESTION_CONTAINER:
                 case TYPE_CONDITION_CONTAINER:
                     // Fall through to default
@@ -428,13 +447,22 @@ public class DashboardData {
         public final CharSequence title;
         public final int conditionCount;
 
-        public ConditionHeaderData(List<Condition> conditions) {
-            conditionCount = sizeOf(conditions);
-            title = conditionCount > 0 ? conditions.get(0).getTitle() : null;
-            conditionIcons = new ArrayList<>();
-            for (int i = 0; conditions != null && i < conditions.size(); i++) {
-                final Condition condition = conditions.get(i);
-                conditionIcons.add(condition.getIcon());
+        public ConditionHeaderData(List<Condition> conditions, List<ConditionalCard> conditionsV2) {
+            if (conditionsV2 == null) {
+                conditionCount = sizeOf(conditions);
+                title = conditionCount > 0 ? conditions.get(0).getTitle() : null;
+                conditionIcons = new ArrayList<>();
+                for (int i = 0; conditions != null && i < conditions.size(); i++) {
+                    final Condition condition = conditions.get(i);
+                    conditionIcons.add(condition.getIcon());
+                }
+            } else {
+                conditionCount = sizeOf(conditionsV2);
+                title = conditionCount > 0 ? conditionsV2.get(0).getTitle() : null;
+                conditionIcons = new ArrayList<>();
+                for (ConditionalCard card : conditionsV2) {
+                    conditionIcons.add(card.getIcon());
+                }
             }
         }
     }
