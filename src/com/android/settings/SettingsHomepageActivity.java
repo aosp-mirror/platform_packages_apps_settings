@@ -40,9 +40,12 @@ public class SettingsHomepageActivity extends SettingsBaseActivity {
             settings.setAction("android.settings.SETTINGS");
             startActivity(settings);
             finish();
+            return;
         }
         setContentView(R.layout.settings_homepage);
-        switchToFragment(this, R.id.main_content, HomepageFragment.class.getName());
+        if (savedInstanceState == null) {
+            switchToFragment(this, R.id.main_content, HomepageFragment.class.getName());
+        }
     }
 
     public static boolean isDynamicHomepageEnabled(Context context) {
