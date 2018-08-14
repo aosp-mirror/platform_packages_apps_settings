@@ -274,6 +274,10 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
                 Log.w(TAG, "Skipping updateNonIndexableKeys due to empty key " + toString());
                 return;
             }
+            if (keys.contains(key)) {
+                Log.w(TAG, "Skipping updateNonIndexableKeys, key already in list. " + toString());
+                return;
+            }
             keys.add(key);
         }
     }

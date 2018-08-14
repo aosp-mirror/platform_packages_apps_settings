@@ -21,6 +21,7 @@ import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.UserHandle;
 import android.provider.Settings;
 
@@ -30,7 +31,7 @@ final class AutofillDeveloperSettingsObserver extends ContentObserver {
     private final ContentResolver mResolver;
 
     public AutofillDeveloperSettingsObserver(Context context, Runnable changeCallback) {
-        super(new Handler());
+        super(new Handler(Looper.getMainLooper()));
 
         mResolver = context.getContentResolver();
         mChangeCallback = changeCallback;

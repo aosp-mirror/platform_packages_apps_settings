@@ -165,7 +165,7 @@ public class DefaultAppSettingsTest {
         final List<String> niks = DefaultAppSettings.SEARCH_INDEX_DATA_PROVIDER
                 .getNonIndexableKeys(context);
 
-        final int xmlId = (new DefaultAppSettings()).getPreferenceScreenResId();
+        final int xmlId = new DefaultAppSettings().getPreferenceScreenResId();
 
         final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context, xmlId);
 

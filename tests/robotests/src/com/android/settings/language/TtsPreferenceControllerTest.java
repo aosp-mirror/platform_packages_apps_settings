@@ -17,6 +17,7 @@
 package com.android.settings.language;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -24,6 +25,9 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TtsEngines;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -37,9 +41,6 @@ import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class TtsPreferenceControllerTest {
@@ -58,7 +59,8 @@ public class TtsPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
 
-        mController = new TtsPreferenceController(mContext, mTtsEngines);
+        mController = new TtsPreferenceController(mContext, "test_key");
+        mController.mTtsEngines = mTtsEngines;
         mPreference = new Preference(RuntimeEnvironment.application);
         mPreference.setKey(mController.getPreferenceKey());
         when(mScreen.findPreference(mPreference.getKey())).thenReturn(mPreference);

@@ -29,6 +29,9 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.util.Xml;
 
+import androidx.annotation.IntDef;
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -41,9 +44,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import androidx.annotation.IntDef;
-import androidx.annotation.VisibleForTesting;
-
 /**
  * Utility class to parse elements of XML preferences
  */
@@ -53,7 +53,8 @@ public class PreferenceXmlParserUtils {
     @VisibleForTesting
     static final String PREF_SCREEN_TAG = "PreferenceScreen";
     private static final List<String> SUPPORTED_PREF_TYPES = Arrays.asList(
-            "Preference", "PreferenceCategory", "PreferenceScreen");
+            "Preference", "PreferenceCategory", "PreferenceScreen",
+            "com.android.settings.widget.WorkOnlyCategory");
 
     /**
      * Flag definition to indicate which metadata should be extracted when
@@ -67,7 +68,8 @@ public class PreferenceXmlParserUtils {
             MetadataFlag.FLAG_NEED_PREF_CONTROLLER,
             MetadataFlag.FLAG_NEED_PREF_TITLE,
             MetadataFlag.FLAG_NEED_PREF_SUMMARY,
-            MetadataFlag.FLAG_NEED_PREF_ICON})
+            MetadataFlag.FLAG_NEED_PREF_ICON,
+            MetadataFlag.FLAG_NEED_SEARCHABLE})
     @Retention(RetentionPolicy.SOURCE)
     public @interface MetadataFlag {
         int FLAG_INCLUDE_PREF_SCREEN = 1;
@@ -79,6 +81,7 @@ public class PreferenceXmlParserUtils {
         int FLAG_NEED_PREF_ICON = 1 << 6;
         int FLAG_NEED_PLATFORM_SLICE_FLAG = 1 << 7;
         int FLAG_NEED_KEYWORDS = 1 << 8;
+        int FLAG_NEED_SEARCHABLE = 1 << 9;
     }
 
     public static final String METADATA_PREF_TYPE = "type";
@@ -89,6 +92,7 @@ public class PreferenceXmlParserUtils {
     public static final String METADATA_ICON = "icon";
     public static final String METADATA_PLATFORM_SLICE_FLAG = "platform_slice";
     public static final String METADATA_KEYWORDS = "keywords";
+    public static final String METADATA_SEARCHABLE = "searchable";
 
     private static final String ENTRIES_SEPARATOR = "|";
 
@@ -152,18 +156,6 @@ public class PreferenceXmlParserUtils {
     public static String getController(Context context, AttributeSet attrs) {
         return getStringData(context, attrs, R.styleable.Preference,
                 R.styleable.Preference_controller);
-    }
-
-    /**
-     * Call {@link #extractMetadata(Context, int, int)} with {@link #METADATA_ICON} instead.
-     */
-    @Deprecated
-    public static int getDataIcon(Context context, AttributeSet attrs) {
-        final TypedArray ta = context.obtainStyledAttributes(attrs,
-                com.android.internal.R.styleable.Preference);
-        final int dataIcon = ta.getResourceId(com.android.internal.R.styleable.Icon_icon, 0);
-        ta.recycle();
-        return dataIcon;
     }
 
     /**
@@ -231,6 +223,10 @@ public class PreferenceXmlParserUtils {
             }
             if (hasFlag(flags, MetadataFlag.FLAG_NEED_KEYWORDS)) {
                 preferenceMetadata.putString(METADATA_KEYWORDS, getKeywords(preferenceAttributes));
+            }
+            if (hasFlag(flags, MetadataFlag.FLAG_NEED_SEARCHABLE)) {
+                preferenceMetadata.putBoolean(METADATA_SEARCHABLE,
+                        isSearchable(preferenceAttributes));
             }
             metadata.add(preferenceMetadata);
 
@@ -310,6 +306,10 @@ public class PreferenceXmlParserUtils {
 
     private static boolean getPlatformSlice(TypedArray styledAttributes) {
         return styledAttributes.getBoolean(R.styleable.Preference_platform_slice, false /* def */);
+    }
+
+    private static boolean isSearchable(TypedArray styledAttributes) {
+        return styledAttributes.getBoolean(R.styleable.Preference_searchable, true /* default */);
     }
 
     private static String getKeywords(TypedArray styleAttributes) {
