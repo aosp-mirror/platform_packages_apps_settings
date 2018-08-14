@@ -134,31 +134,32 @@ public class BatteryInfo {
     }
 
     public static void getBatteryInfo(final Context context, final Callback callback) {
-        BatteryInfo.getBatteryInfo(context, callback, false /* shortString */);
+        BatteryInfo.getBatteryInfo(context, callback, null /* statsHelper */,
+                false /* shortString */);
     }
 
     public static void getBatteryInfo(final Context context, final Callback callback,
             boolean shortString) {
-        final long startTime = System.currentTimeMillis();
-        BatteryStatsHelper statsHelper = new BatteryStatsHelper(context, true);
-        statsHelper.create((Bundle) null);
-        BatteryUtils.logRuntime(LOG_TAG, "time to make batteryStatsHelper", startTime);
-        BatteryInfo.getBatteryInfo(context, callback, statsHelper, shortString);
+        BatteryInfo.getBatteryInfo(context, callback, null /* statsHelper */, shortString);
     }
 
     public static void getBatteryInfo(final Context context, final Callback callback,
-            BatteryStatsHelper statsHelper, boolean shortString) {
-        final long startTime = System.currentTimeMillis();
-        BatteryStats stats = statsHelper.getStats();
-        BatteryUtils.logRuntime(LOG_TAG, "time for getStats", startTime);
-        getBatteryInfo(context, callback, stats, shortString);
-    }
-
-    public static void getBatteryInfo(final Context context, final Callback callback,
-            BatteryStats stats, boolean shortString) {
+            final BatteryStatsHelper statsHelper, boolean shortString) {
         new AsyncTask<Void, Void, BatteryInfo>() {
             @Override
             protected BatteryInfo doInBackground(Void... params) {
+                final BatteryStats stats;
+                final long batteryStatsTime = System.currentTimeMillis();
+                if (statsHelper == null) {
+                    final BatteryStatsHelper localStatsHelper = new BatteryStatsHelper(context,
+                            true);
+                    localStatsHelper.create((Bundle) null);
+                    stats = localStatsHelper.getStats();
+                } else {
+                    stats = statsHelper.getStats();
+                }
+                BatteryUtils.logRuntime(LOG_TAG, "time for getStats", batteryStatsTime);
+
                 final long startTime = System.currentTimeMillis();
                 PowerUsageFeatureProvider provider =
                         FeatureFactory.getFactory(context).getPowerUsageFeatureProvider(context);
