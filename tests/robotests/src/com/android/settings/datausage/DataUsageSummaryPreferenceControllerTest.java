@@ -324,7 +324,7 @@ public class DataUsageSummaryPreferenceControllerTest {
                 mActivity, null, null, null);
 
         final SubscriptionInfo subInfo = new SubscriptionInfo(0, "123456", 0, "name", "carrier",
-                0, 0, "number", 0, null, "123", "456", "ZX");
+                0, 0, "number", 0, null, "123", "456", "ZX", false, null, null);
         when(mSubscriptionManager.getDefaultDataSubscriptionInfo()).thenReturn(subInfo);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
