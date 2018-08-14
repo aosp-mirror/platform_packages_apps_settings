@@ -26,6 +26,10 @@ import com.android.settings.fuelgauge.BatterySaverReceiver;
 import com.android.settings.fuelgauge.batterysaver.BatterySaverSettings;
 import com.android.settingslib.fuelgauge.BatterySaverUtils;
 
+/**
+ * @deprecated in favor of {@link BatterySaverConditionCard}
+ */
+@Deprecated
 public class BatterySaverCondition extends Condition implements
         BatterySaverReceiver.BatterySaverListener {
 

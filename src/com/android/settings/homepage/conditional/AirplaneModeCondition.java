@@ -28,6 +28,10 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settingslib.WirelessUtils;
 
+/**
+ * @deprecated in favor of {@link AirplaneModeConditionCard}.
+ */
+@Deprecated
 public class AirplaneModeCondition extends Condition {
     public static String TAG = "APM_Condition";
 

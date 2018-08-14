@@ -33,6 +33,10 @@ import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.notification.ZenModeSettings;
 
+/**
+ * @deprecated in favor of {@link com.android.settings.homepage.conditional.v2.DndConditionCard}
+ */
+@Deprecated
 public class DndCondition extends Condition {
 
     private static final String TAG = "DndCondition";

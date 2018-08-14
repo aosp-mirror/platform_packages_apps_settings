@@ -23,6 +23,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Settings;
 
+@Deprecated
 public class BackgroundDataCondition extends Condition {
 
     public BackgroundDataCondition(ConditionManager manager) {

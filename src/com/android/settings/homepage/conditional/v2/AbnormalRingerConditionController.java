@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.homepage.conditional;
+package com.android.settings.homepage.conditional.v2;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -23,61 +23,53 @@ import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.provider.Settings;
 
-import com.android.settings.R;
+import java.util.Objects;
 
-@Deprecated
-public abstract class AbnormalRingerConditionBase extends Condition {
+public abstract class AbnormalRingerConditionController implements ConditionalCardController {
 
-    private final IntentFilter mFilter;
+    private static final IntentFilter FILTER =
+            new IntentFilter(AudioManager.INTERNAL_RINGER_MODE_CHANGED_ACTION);
 
     protected final AudioManager mAudioManager;
-
+    private final Context mAppContext;
+    private final ConditionManager mConditionManager;
     private final RingerModeChangeReceiver mReceiver;
 
-    AbnormalRingerConditionBase(ConditionManager manager) {
-        super(manager);
-        mAudioManager =
-                (AudioManager) mManager.getContext().getSystemService(Context.AUDIO_SERVICE);
-        mReceiver = new RingerModeChangeReceiver(this);
-
-        mFilter = new IntentFilter(AudioManager.INTERNAL_RINGER_MODE_CHANGED_ACTION);
-        manager.getContext().registerReceiver(mReceiver, mFilter);
+    public AbnormalRingerConditionController(Context appContext, ConditionManager manager) {
+        mAppContext = appContext;
+        mConditionManager = manager;
+        mAudioManager = (AudioManager) appContext.getSystemService(Context.AUDIO_SERVICE);
+        mReceiver = new RingerModeChangeReceiver();
     }
 
     @Override
-    public CharSequence[] getActions() {
-        return new CharSequence[]{
-                mManager.getContext().getText(R.string.condition_device_muted_action_turn_on_sound)
-        };
+    public void onPrimaryClick(Context context) {
+        context.startActivity(new Intent(Settings.ACTION_SOUND_SETTINGS));
     }
 
     @Override
-    public void onPrimaryClick() {
-        mManager.getContext().startActivity(
-                new Intent(Settings.ACTION_SOUND_SETTINGS)
-                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-    }
-
-    @Override
-    public void onActionClick(int index) {
+    public void onActionClick() {
         mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_NORMAL);
         mAudioManager.setStreamVolume(AudioManager.STREAM_RING, 1, 0 /* flags */);
-        refreshState();
     }
 
-    static class RingerModeChangeReceiver extends BroadcastReceiver {
+    @Override
+    public void startMonitoringStateChange() {
+        mAppContext.registerReceiver(mReceiver, FILTER);
+    }
 
-        private final AbnormalRingerConditionBase mCondition;
+    @Override
+    public void stopMonitoringStateChange() {
+        mAppContext.unregisterReceiver(mReceiver);
+    }
 
-        public RingerModeChangeReceiver(AbnormalRingerConditionBase condition) {
-            mCondition = condition;
-        }
+    class RingerModeChangeReceiver extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
             if (AudioManager.INTERNAL_RINGER_MODE_CHANGED_ACTION.equals(action)) {
-                mCondition.refreshState();
+                mConditionManager.onConditionChanged();
             }
         }
     }

@@ -14,43 +14,50 @@
  * limitations under the License.
  */
 
-package com.android.settings.homepage.conditional;
+package com.android.settings.homepage.conditional.v2;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.media.AudioManager;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 
-@Deprecated
-public class RingerVibrateCondition extends AbnormalRingerConditionBase {
+public class WorkModeConditionCard implements ConditionalCard {
 
-    RingerVibrateCondition(ConditionManager manager) {
-        super(manager);
+    private final Context mAppContext;
+
+    public WorkModeConditionCard(Context appContext) {
+        mAppContext = appContext;
     }
 
     @Override
-    public void refreshState() {
-        setActive(mAudioManager.getRingerModeInternal() == AudioManager.RINGER_MODE_VIBRATE);
+    public long getId() {
+        return WorkModeConditionController.ID;
+    }
+
+    @Override
+    public CharSequence getActionText() {
+        return mAppContext.getText(R.string.condition_turn_on);
     }
 
     @Override
     public int getMetricsConstant() {
-        return MetricsProto.MetricsEvent.SETTINGS_CONDITION_DEVICE_VIBRATE;
+        return MetricsProto.MetricsEvent.SETTINGS_CONDITION_WORK_MODE;
     }
 
     @Override
     public Drawable getIcon() {
-        return mManager.getContext().getDrawable(R.drawable.ic_volume_ringer_vibrate);
+        return mAppContext.getDrawable(R.drawable.ic_signal_workmode_enable);
     }
 
     @Override
     public CharSequence getTitle() {
-        return mManager.getContext().getText(R.string.condition_device_vibrate_title);
+        return mAppContext.getText(R.string.condition_work_title);
     }
 
     @Override
     public CharSequence getSummary() {
-        return mManager.getContext().getText(R.string.condition_device_vibrate_summary);
+        return mAppContext.getText(R.string.condition_work_summary);
     }
+
 }
