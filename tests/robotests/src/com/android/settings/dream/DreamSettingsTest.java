@@ -16,25 +16,26 @@
 
 package com.android.settings.dream;
 
-import android.content.Context;
-import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-import com.android.settingslib.dream.DreamBackend;
-import com.android.settingslib.dream.DreamBackend.WhenToDream;
-import java.util.Arrays;
-import java.util.List;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
-
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import android.content.Context;
+
+import com.android.settings.R;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.dream.DreamBackend;
+import com.android.settingslib.dream.DreamBackend.WhenToDream;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import java.util.Arrays;
+import java.util.List;
+
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DreamSettingsTest {
+
     private static final List<String> KEYS = Arrays.asList(
             DreamSettings.WHILE_CHARGING_ONLY,
             DreamSettings.WHILE_DOCKED_ONLY,
@@ -59,8 +60,7 @@ public class DreamSettingsTest {
     @Test
     public void getSettingFromPrefKey() {
         for (int i = 0; i < KEYS.size(); i++) {
-            assertThat(DreamSettings.getSettingFromPrefKey(KEYS.get(i)))
-                    .isEqualTo(SETTINGS[i]);
+            assertThat(DreamSettings.getSettingFromPrefKey(KEYS.get(i))).isEqualTo(SETTINGS[i]);
         }
         // Default case
         assertThat(DreamSettings.getSettingFromPrefKey("garbage value"))
@@ -70,8 +70,7 @@ public class DreamSettingsTest {
     @Test
     public void getKeyFromSetting() {
         for (int i = 0; i < SETTINGS.length; i++) {
-            assertThat(DreamSettings.getKeyFromSetting(SETTINGS[i]))
-                    .isEqualTo(KEYS.get(i));
+            assertThat(DreamSettings.getKeyFromSetting(SETTINGS[i])).isEqualTo(KEYS.get(i));
         }
         // Default
         assertThat(DreamSettings.getKeyFromSetting(-1))

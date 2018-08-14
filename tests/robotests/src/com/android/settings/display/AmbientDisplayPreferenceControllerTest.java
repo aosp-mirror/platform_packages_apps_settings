@@ -17,7 +17,6 @@
 package com.android.settings.display;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -28,7 +27,6 @@ import android.support.v7.preference.Preference;
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 
 import org.junit.Before;
@@ -39,36 +37,38 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = {ShadowSecureSettings.class})
+@Config(shadows = ShadowSecureSettings.class)
 public class AmbientDisplayPreferenceControllerTest {
 
-    @Mock Context mContext;
-    @Mock AmbientDisplayConfiguration mConfig;
-    @Mock Preference mPreference;
+    @Mock
+    private Context mContext;
+    @Mock
+    private AmbientDisplayConfiguration mConfig;
+    @Mock
+    private Preference mPreference;
 
-    AmbientDisplayPreferenceController mController;
+    private AmbientDisplayPreferenceController mController;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
         mController = new AmbientDisplayPreferenceController(mContext, mConfig, "key");
     }
 
     @Test
-    public void isAvailable_available() throws Exception {
+    public void isAvailable_available() {
         when(mConfig.available()).thenReturn(true);
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
-    public void isAvailable_unavailable() throws Exception {
+    public void isAvailable_unavailable() {
         when(mConfig.available()).thenReturn(false);
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
-    public void updateState_alwaysOn() throws Exception {
+    public void updateState_alwaysOn() {
         when(mConfig.alwaysOnEnabled(anyInt())).thenReturn(true);
 
         mController.updateState(mPreference);
@@ -77,7 +77,7 @@ public class AmbientDisplayPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_notifications() throws Exception {
+    public void updateState_notifications() {
         when(mConfig.alwaysOnEnabled(anyInt())).thenReturn(false);
         when(mConfig.pulseOnNotificationEnabled(anyInt())).thenReturn(true);
 
@@ -87,7 +87,7 @@ public class AmbientDisplayPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_gestures() throws Exception {
+    public void updateState_gestures() {
         when(mConfig.alwaysOnEnabled(anyInt())).thenReturn(false);
         when(mConfig.pulseOnNotificationEnabled(anyInt())).thenReturn(false);
         when(mConfig.enabled(anyInt())).thenReturn(true);
@@ -98,7 +98,7 @@ public class AmbientDisplayPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_off() throws Exception {
+    public void updateState_off() {
         when(mConfig.alwaysOnEnabled(anyInt())).thenReturn(false);
         when(mConfig.pulseOnNotificationEnabled(anyInt())).thenReturn(false);
         when(mConfig.pulseOnDoubleTapEnabled(anyInt())).thenReturn(false);
@@ -110,8 +110,7 @@ public class AmbientDisplayPreferenceControllerTest {
     }
 
     @Test
-    public void getPreferenceKey() throws Exception {
+    public void getPreferenceKey() {
         assertThat(mController.getPreferenceKey()).isEqualTo("key");
     }
-
 }

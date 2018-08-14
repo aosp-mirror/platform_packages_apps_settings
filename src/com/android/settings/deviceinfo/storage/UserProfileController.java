@@ -17,9 +17,7 @@
 package com.android.settings.deviceinfo.storage;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.UserInfo;
-import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.storage.VolumeInfo;
@@ -30,30 +28,28 @@ import android.util.SparseArray;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.util.Preconditions;
 import com.android.settings.Utils;
-import com.android.settings.applications.UserManagerWrapper;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.deviceinfo.StorageItemPreference;
 import com.android.settings.deviceinfo.StorageProfileFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.drawer.SettingsDrawerActivity;
 
-/** Defines a {@link AbstractPreferenceController} which handles a single profile of the primary
- *  user. */
+/**
+ * Defines a {@link AbstractPreferenceController} which handles a single profile of the primary
+ * user.
+ */
 public class UserProfileController extends AbstractPreferenceController implements
         PreferenceControllerMixin, StorageAsyncLoader.ResultHandler,
         UserIconLoader.UserIconHandler {
     private static final String PREFERENCE_KEY_BASE = "pref_profile_";
     private StorageItemPreference mStoragePreference;
-    private UserManagerWrapper mUserManager;
     private UserInfo mUser;
     private long mTotalSizeBytes;
     private final int mPreferenceOrder;
 
-    public UserProfileController(
-            Context context, UserInfo info, UserManagerWrapper userManager, int preferenceOrder) {
+    public UserProfileController(Context context, UserInfo info, int preferenceOrder) {
         super(context);
         mUser = Preconditions.checkNotNull(info);
-        mUserManager = userManager;
         mPreferenceOrder = preferenceOrder;
     }
 
@@ -79,14 +75,16 @@ public class UserProfileController extends AbstractPreferenceController implemen
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (preference != null && mStoragePreference == preference) {
-            Bundle args = new Bundle(2);
+            final Bundle args = new Bundle();
             args.putInt(StorageProfileFragment.USER_ID_EXTRA, mUser.id);
             args.putString(VolumeInfo.EXTRA_VOLUME_ID, VolumeInfo.ID_PRIVATE_INTERNAL);
-            Intent intent = Utils.onBuildStartFragmentIntent(mContext,
-                    StorageProfileFragment.class.getName(), args, null, 0,
-                    mUser.name, false, MetricsProto.MetricsEvent.DEVICEINFO_STORAGE);
-            intent.putExtra(SettingsDrawerActivity.EXTRA_SHOW_MENU, true);
-            mContext.startActivity(intent);
+
+            new SubSettingLauncher(mContext)
+                    .setDestination(StorageProfileFragment.class.getName())
+                    .setArguments(args)
+                    .setTitle(mUser.name)
+                    .setSourceMetricsCategory(MetricsProto.MetricsEvent.DEVICEINFO_STORAGE)
+                    .launch();
             return true;
         }
 
@@ -100,8 +98,7 @@ public class UserProfileController extends AbstractPreferenceController implemen
         int userId = mUser.id;
         StorageAsyncLoader.AppsStorageResult result = stats.get(userId);
         if (result != null) {
-            setSize(
-                    result.externalStats.totalBytes
+            setSize(result.externalStats.totalBytes
                             + result.otherAppsSize
                             + result.videoAppsSize
                             + result.musicAppsSize

@@ -17,7 +17,6 @@
 package com.android.settings.gestures;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
@@ -25,7 +24,6 @@ import android.content.Context;
 import android.provider.Settings;
 import android.provider.Settings.Secure;
 
-import com.android.settings.TestConfig;
 import com.android.settings.search.InlinePayload;
 import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.search.ResultPayload;
@@ -43,27 +41,22 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(
-    manifest = TestConfig.MANIFEST_PATH,
-    sdk = TestConfig.SDK_VERSION,
-    shadows = ShadowSecureSettings.class
-)
+@Config(shadows = ShadowSecureSettings.class)
 public class AssistGestureSettingsPreferenceControllerTest {
+
+    private static final String KEY_ASSIST = "gesture_assist";
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     private FakeFeatureFactory mFactory;
     private AssistGestureSettingsPreferenceController mController;
 
-    private static final String KEY_ASSIST = "gesture_assist";
-
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-        mController = new AssistGestureSettingsPreferenceController(mContext, null, KEY_ASSIST,
-                false);
+        mFactory = FakeFeatureFactory.setupForTest();
+        mController = new AssistGestureSettingsPreferenceController(mContext, KEY_ASSIST);
+        mController.setAssistOnly(false);
     }
 
     @Test
@@ -83,8 +76,8 @@ public class AssistGestureSettingsPreferenceControllerTest {
     public void testPreferenceController_ProperResultPayloadType() {
         final Context context = RuntimeEnvironment.application;
         AssistGestureSettingsPreferenceController controller =
-                new AssistGestureSettingsPreferenceController(context, null /* lifecycle */,
-                        KEY_ASSIST, false /* assistOnly */);
+                new AssistGestureSettingsPreferenceController(context, KEY_ASSIST);
+        controller.setAssistOnly(false);
         ResultPayload payload = controller.getResultPayload();
         assertThat(payload).isInstanceOf(InlineSwitchPayload.class);
     }

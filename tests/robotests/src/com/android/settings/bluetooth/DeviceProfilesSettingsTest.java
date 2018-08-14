@@ -16,7 +16,12 @@
 
 package com.android.settings.bluetooth;
 
-import android.app.Activity;
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
@@ -24,8 +29,6 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-import com.android.settings.testutils.shadow.ShadowEventLogWriter;
 import com.android.settingslib.R;
 import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -40,47 +43,39 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.FragmentTestUtil;
 import org.robolectric.util.ReflectionHelpers;
-import org.robolectric.RuntimeEnvironment;
-
-import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
-
+import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows = {
-        ShadowEventLogWriter.class
-})
 public class DeviceProfilesSettingsTest {
-    Context mContext;
-    @Mock Activity mActivity;
-    @Mock LocalBluetoothManager mManager;
-    @Mock LocalBluetoothAdapter mAdapter;
-    @Mock LocalBluetoothProfileManager mProfileManager;
-    @Mock CachedBluetoothDeviceManager mDeviceManager;
-    @Mock CachedBluetoothDevice mCachedDevice;
-    @Mock A2dpProfile mProfile;
 
-    ArrayList<LocalBluetoothProfile> mProfiles;
-    DeviceProfilesSettings mFragment;
+    @Mock
+    private LocalBluetoothManager mManager;
+    @Mock
+    private LocalBluetoothAdapter mAdapter;
+    @Mock
+    private LocalBluetoothProfileManager mProfileManager;
+    @Mock
+    private CachedBluetoothDeviceManager mDeviceManager;
+    @Mock
+    private CachedBluetoothDevice mCachedDevice;
+    @Mock
+    private A2dpProfile mProfile;
+
+    private DeviceProfilesSettings mFragment;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
 
         when(mProfile.getNameResource(any())).thenReturn(R.string.bluetooth_profile_a2dp);
-        mProfiles = new ArrayList<>();
-        mProfiles.add(mProfile);
-        when(mCachedDevice.getConnectableProfiles()).thenReturn(mProfiles);
+        List<LocalBluetoothProfile> profiles = new ArrayList<>();
+        profiles.add(mProfile);
+        when(mCachedDevice.getConnectableProfiles()).thenReturn(profiles);
 
         mFragment = new DeviceProfilesSettings();
         mFragment.setArguments(new Bundle());
@@ -101,8 +96,8 @@ public class DeviceProfilesSettingsTest {
         FragmentTestUtil.startFragment(mFragment);
 
         ViewGroup profilesGroup = mFragment.getDialog().findViewById(R.id.profiles_section);
-        CheckBox box = (CheckBox) profilesGroup.findViewWithTag(
-                DeviceProfilesSettings.HIGH_QUALITY_AUDIO_PREF_TAG);
+        CheckBox box =
+            profilesGroup.findViewWithTag(DeviceProfilesSettings.HIGH_QUALITY_AUDIO_PREF_TAG);
         assertThat(box).isNotNull();
         assertThat(box.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(box.isEnabled()).isTrue();
@@ -125,8 +120,8 @@ public class DeviceProfilesSettingsTest {
         // Make sure that the high quality audio option is present but disabled when the device
         // is busy.
         ViewGroup profilesGroup = mFragment.getDialog().findViewById(R.id.profiles_section);
-        CheckBox box = (CheckBox) profilesGroup.findViewWithTag(
-                DeviceProfilesSettings.HIGH_QUALITY_AUDIO_PREF_TAG);
+        CheckBox box =
+            profilesGroup.findViewWithTag(DeviceProfilesSettings.HIGH_QUALITY_AUDIO_PREF_TAG);
         assertThat(box).isNotNull();
         assertThat(box.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(box.isEnabled()).isFalse();
@@ -141,8 +136,8 @@ public class DeviceProfilesSettingsTest {
 
         ViewGroup profilesGroup = mFragment.getDialog().findViewById(R.id.profiles_section);
         CheckBox audioBox = profilesGroup.findViewWithTag(mProfile.toString());
-        CheckBox highQualityAudioBox = profilesGroup.findViewWithTag(
-                DeviceProfilesSettings.HIGH_QUALITY_AUDIO_PREF_TAG);
+        CheckBox highQualityAudioBox =
+            profilesGroup.findViewWithTag(DeviceProfilesSettings.HIGH_QUALITY_AUDIO_PREF_TAG);
         assertThat(audioBox).isNotNull();
         assertThat(audioBox.isChecked()).isTrue();
         assertThat(highQualityAudioBox).isNotNull();
@@ -152,8 +147,8 @@ public class DeviceProfilesSettingsTest {
         when(mProfile.isPreferred(any())).thenReturn(false);
         mFragment.onDeviceAttributesChanged();
         audioBox = profilesGroup.findViewWithTag(mProfile.toString());
-        highQualityAudioBox = profilesGroup.findViewWithTag(
-                DeviceProfilesSettings.HIGH_QUALITY_AUDIO_PREF_TAG);
+        highQualityAudioBox =
+            profilesGroup.findViewWithTag(DeviceProfilesSettings.HIGH_QUALITY_AUDIO_PREF_TAG);
         assertThat(audioBox).isNotNull();
         assertThat(audioBox.isChecked()).isFalse();
         assertThat(highQualityAudioBox).isNotNull();
@@ -163,8 +158,8 @@ public class DeviceProfilesSettingsTest {
         when(mProfile.isPreferred(any())).thenReturn(true);
         mFragment.onDeviceAttributesChanged();
         audioBox = profilesGroup.findViewWithTag(mProfile.toString());
-        highQualityAudioBox = profilesGroup.findViewWithTag(
-                DeviceProfilesSettings.HIGH_QUALITY_AUDIO_PREF_TAG);
+        highQualityAudioBox =
+            profilesGroup.findViewWithTag(DeviceProfilesSettings.HIGH_QUALITY_AUDIO_PREF_TAG);
         assertThat(audioBox).isNotNull();
         assertThat(audioBox.isChecked()).isTrue();
         assertThat(highQualityAudioBox).isNotNull();
@@ -180,8 +175,8 @@ public class DeviceProfilesSettingsTest {
         FragmentTestUtil.startFragment(mFragment);
         ViewGroup profilesGroup = mFragment.getDialog().findViewById(R.id.profiles_section);
         CheckBox audioBox = profilesGroup.findViewWithTag(mProfile.toString());
-        CheckBox highQualityAudioBox = profilesGroup.findViewWithTag(
-                DeviceProfilesSettings.HIGH_QUALITY_AUDIO_PREF_TAG);
+        CheckBox highQualityAudioBox =
+            profilesGroup.findViewWithTag(DeviceProfilesSettings.HIGH_QUALITY_AUDIO_PREF_TAG);
 
         assertThat(audioBox).isNotNull();
         assertThat(audioBox.isChecked()).isFalse();
@@ -198,9 +193,8 @@ public class DeviceProfilesSettingsTest {
         // A device that doesn't support high quality audio shouldn't have the checkbox for
         // high quality audio support.
         ViewGroup profilesGroup = mFragment.getDialog().findViewById(R.id.profiles_section);
-        CheckBox box = (CheckBox) profilesGroup.findViewWithTag(
-                DeviceProfilesSettings.HIGH_QUALITY_AUDIO_PREF_TAG);
+        CheckBox box =
+            profilesGroup.findViewWithTag(DeviceProfilesSettings.HIGH_QUALITY_AUDIO_PREF_TAG);
         assertThat(box).isNull();
     }
-
 }

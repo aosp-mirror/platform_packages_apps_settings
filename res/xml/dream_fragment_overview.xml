@@ -16,7 +16,7 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:key="dream_overview_screen"
     android:title="@string/screensaver_settings_title" >
 
     <com.android.settings.widget.GearPreference
@@ -31,7 +31,8 @@
 
 
     <!-- Layout preference doesn't obey allowDividerAbove, so put it in a PreferenceCategory -->
-    <PreferenceCategory>
+    <PreferenceCategory
+        android:key="dream_start_now_category">
         <com.android.settings.applications.LayoutPreference
             android:key="dream_start_now_button_container"
             android:selectable="false"

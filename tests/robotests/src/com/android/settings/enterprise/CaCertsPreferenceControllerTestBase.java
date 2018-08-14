@@ -17,15 +17,12 @@
 package com.android.settings.enterprise;
 
 import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceAvailabilityObserver;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
@@ -43,21 +40,12 @@ public abstract class CaCertsPreferenceControllerTestBase {
     protected Context mContext;
     protected FakeFeatureFactory mFeatureFactory;
     protected CaCertsPreferenceControllerBase mController;
-    @Mock
-    private PreferenceAvailabilityObserver mObserver;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mController = createController();
-        mController.setAvailabilityObserver(mObserver);
-    }
-
-    @Test
-    public void testGetAvailabilityObserver() {
-        assertThat(mController.getAvailabilityObserver()).isEqualTo(mObserver);
     }
 
     @Test
@@ -75,11 +63,9 @@ public abstract class CaCertsPreferenceControllerTestBase {
     public void testIsAvailable() {
         mockGetNumberOfCaCerts(0);
         assertThat(mController.isAvailable()).isFalse();
-        verify(mObserver).onPreferenceAvailabilityUpdated(getPreferenceKey(), false);
 
         mockGetNumberOfCaCerts(10);
         assertThat(mController.isAvailable()).isTrue();
-        verify(mObserver).onPreferenceAvailabilityUpdated(getPreferenceKey(), true);
     }
 
     @Test
@@ -98,5 +84,4 @@ public abstract class CaCertsPreferenceControllerTestBase {
     abstract String getPreferenceKey();
 
     abstract CaCertsPreferenceControllerBase createController();
-
 }

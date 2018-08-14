@@ -64,7 +64,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
-import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.notification.RedactionInterstitial;
 import com.android.settings.widget.ImeAwareEditText;
 import com.android.setupwizardlib.GlifLayout;
@@ -168,7 +168,7 @@ public class ChooseLockPassword extends SettingsActivity {
         layout.setFitsSystemWindows(false);
     }
 
-    public static class ChooseLockPasswordFragment extends InstrumentedPreferenceFragment
+    public static class ChooseLockPasswordFragment extends InstrumentedFragment
             implements OnClickListener, OnEditorActionListener, TextWatcher,
             SaveAndFinishWorker.Listener {
         private static final String KEY_FIRST_PIN = "first_pin";
@@ -193,6 +193,7 @@ public class ChooseLockPassword extends SettingsActivity {
         private int mPasswordMinLengthToFulfillAllPolicies = 0;
         protected int mUserId;
         private boolean mHideDrawer = false;
+        private byte[] mPasswordHistoryHashFactor;
         /**
          * Password requirements that we need to verify.
          */
@@ -210,7 +211,7 @@ public class ChooseLockPassword extends SettingsActivity {
         private String mFirstPin;
         private RecyclerView mPasswordRestrictionView;
         protected boolean mIsAlphaMode;
-        protected Button mCancelButton;
+        protected Button mSkipButton;
         private Button mClearButton;
         private Button mNextButton;
         private TextView mMessage;
@@ -228,19 +229,19 @@ public class ChooseLockPassword extends SettingsActivity {
         private static final int MIN_NON_LETTER_IN_PASSWORD = 5;
 
         // Error code returned from {@link #validatePassword(String)}.
-        private static final int NO_ERROR = 0;
-        private static final int CONTAIN_INVALID_CHARACTERS = 1 << 0;
-        private static final int TOO_SHORT = 1 << 1;
-        private static final int TOO_LONG = 1 << 2;
-        private static final int CONTAIN_NON_DIGITS = 1 << 3;
-        private static final int CONTAIN_SEQUENTIAL_DIGITS = 1 << 4;
-        private static final int RECENTLY_USED = 1 << 5;
-        private static final int NOT_ENOUGH_LETTER = 1 << 6;
-        private static final int NOT_ENOUGH_UPPER_CASE = 1 << 7;
-        private static final int NOT_ENOUGH_LOWER_CASE = 1 << 8;
-        private static final int NOT_ENOUGH_DIGITS = 1 << 9;
-        private static final int NOT_ENOUGH_SYMBOLS = 1 << 10;
-        private static final int NOT_ENOUGH_NON_LETTER = 1 << 11;
+        static final int NO_ERROR = 0;
+        static final int CONTAIN_INVALID_CHARACTERS = 1 << 0;
+        static final int TOO_SHORT = 1 << 1;
+        static final int TOO_LONG = 1 << 2;
+        static final int CONTAIN_NON_DIGITS = 1 << 3;
+        static final int CONTAIN_SEQUENTIAL_DIGITS = 1 << 4;
+        static final int RECENTLY_USED = 1 << 5;
+        static final int NOT_ENOUGH_LETTER = 1 << 6;
+        static final int NOT_ENOUGH_UPPER_CASE = 1 << 7;
+        static final int NOT_ENOUGH_LOWER_CASE = 1 << 8;
+        static final int NOT_ENOUGH_DIGITS = 1 << 9;
+        static final int NOT_ENOUGH_SYMBOLS = 1 << 10;
+        static final int NOT_ENOUGH_NON_LETTER = 1 << 11;
 
         /**
          * Keep track internally of where the user is in choosing a pattern.
@@ -267,7 +268,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     0,
                     0,
                     0,
-                    R.string.lockpassword_ok_label),
+                    R.string.lockpassword_confirm_label),
 
             ConfirmWrong(
                     R.string.lockpassword_confirm_passwords_dont_match,
@@ -278,7 +279,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     0,
                     0,
                     0,
-                    R.string.next_label);
+                    R.string.lockpassword_confirm_label);
 
             Stage(int hintInAlpha, int hintInAlphaForFingerprint,
                     int hintInNumeric, int hintInNumericForFingerprint,
@@ -376,8 +377,8 @@ public class ChooseLockPassword extends SettingsActivity {
             ViewGroup container = view.findViewById(R.id.password_container);
             container.setOpticalInsets(Insets.NONE);
 
-            mCancelButton = (Button) view.findViewById(R.id.cancel_button);
-            mCancelButton.setOnClickListener(this);
+            mSkipButton = (Button) view.findViewById(R.id.skip_button);
+            mSkipButton.setOnClickListener(this);
             mNextButton = (Button) view.findViewById(R.id.next_button);
             mNextButton.setOnClickListener(this);
             mClearButton = view.findViewById(R.id.clear_button);
@@ -635,13 +636,15 @@ public class ChooseLockPassword extends SettingsActivity {
         }
 
         /**
-         * Validates PIN and returns the validation result.
+         * Validates PIN/Password and returns the validation result.
          *
          * @param password the raw password the user typed in
          * @return the validation result.
          */
         private int validatePassword(String password) {
             int errorCode = NO_ERROR;
+            final PasswordMetrics metrics = PasswordMetrics.computeForPassword(password);
+
 
             if (password.length() < mPasswordMinLength) {
                 if (mPasswordMinLength > mPasswordMinLengthToFulfillAllPolicies) {
@@ -651,15 +654,22 @@ public class ChooseLockPassword extends SettingsActivity {
                 errorCode |= TOO_LONG;
             } else {
                 // The length requirements are fulfilled.
-                if (mRequestedQuality == PASSWORD_QUALITY_NUMERIC_COMPLEX) {
+                final int dpmQuality = mLockPatternUtils.getRequestedPasswordQuality(mUserId);
+                if (dpmQuality == PASSWORD_QUALITY_NUMERIC_COMPLEX &&
+                        metrics.numeric == password.length()) {
                     // Check for repeated characters or sequences (e.g. '1234', '0000', '2468')
+                    // if DevicePolicyManager requires a complex numeric password. There can be
+                    // two cases in the UI: 1. User chooses to enroll a PIN, 2. User chooses to
+                    // enroll a password but enters a numeric-only pin. We should carry out the
+                    // sequence check in both cases.
                     final int sequence = PasswordMetrics.maxLengthSequence(password);
                     if (sequence > PasswordMetrics.MAX_ALLOWED_SEQUENCE) {
                         errorCode |= CONTAIN_SEQUENTIAL_DIGITS;
                     }
                 }
                 // Is the password recently used?
-                if (mLockPatternUtils.checkPasswordHistory(password, mUserId)) {
+                if (mLockPatternUtils.checkPasswordHistory(password, getPasswordHistoryHashFactor(),
+                        mUserId)) {
                     errorCode |= RECENTLY_USED;
                 }
             }
@@ -672,8 +682,6 @@ public class ChooseLockPassword extends SettingsActivity {
                     break;
                 }
             }
-
-            final PasswordMetrics metrics = PasswordMetrics.computeForPassword(password);
 
             // Ensure no non-digits if we are requesting numbers. This shouldn't be possible unless
             // user finds some way to bring up soft keyboard.
@@ -720,7 +728,20 @@ public class ChooseLockPassword extends SettingsActivity {
                         break;
                 }
             }
+
             return errorCode;
+        }
+
+        /**
+         * Lazily compute and return the history hash factor of the current user (mUserId), used for
+         * password history check.
+         */
+        private byte[] getPasswordHistoryHashFactor() {
+            if (mPasswordHistoryHashFactor == null) {
+                mPasswordHistoryHashFactor = mLockPatternUtils.getPasswordHistoryHashFactor(
+                        mCurrentPassword, mUserId);
+            }
+            return mPasswordHistoryHashFactor;
         }
 
         public void handleNext() {
@@ -762,10 +783,6 @@ public class ChooseLockPassword extends SettingsActivity {
                     handleNext();
                     break;
 
-                case R.id.cancel_button:
-                    getActivity().finish();
-                    break;
-
                 case R.id.clear_button:
                     mPasswordEntry.setText("");
                     break;
@@ -787,7 +804,7 @@ public class ChooseLockPassword extends SettingsActivity {
          * @param errorCode error code returned from {@link #validatePassword(String)}.
          * @return an array of messages describing the error, important messages come first.
          */
-        private String[] convertErrorCodeToMessages(int errorCode) {
+        String[] convertErrorCodeToMessages(int errorCode) {
             List<String> messages = new ArrayList<>();
             if ((errorCode & CONTAIN_INVALID_CHARACTERS) > 0) {
                 messages.add(getString(R.string.lockpassword_illegal_character));
@@ -872,7 +889,7 @@ public class ChooseLockPassword extends SettingsActivity {
                 // Hide password requirement view when we are just asking user to confirm the pw.
                 mPasswordRestrictionView.setVisibility(View.GONE);
                 setHeaderText(getString(mUiStage.getHint(mIsAlphaMode, mForFingerprint)));
-                setNextEnabled(canInput && length > 0);
+                setNextEnabled(canInput && length >= mPasswordMinLength);
                 mClearButton.setEnabled(canInput && length > 0);
             }
             int message = mUiStage.getMessage(mIsAlphaMode, mForFingerprint);
@@ -884,7 +901,6 @@ public class ChooseLockPassword extends SettingsActivity {
             }
 
             mClearButton.setVisibility(toVisibility(mUiStage != Stage.Introduction));
-            mCancelButton.setVisibility(toVisibility(mUiStage == Stage.Introduction));
 
             setNextText(mUiStage.buttonText);
             mPasswordEntryInputDisabler.setInputEnabled(canInput);

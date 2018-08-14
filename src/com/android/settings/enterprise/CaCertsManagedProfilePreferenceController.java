@@ -17,16 +17,13 @@ package com.android.settings.enterprise;
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 
-import com.android.settingslib.core.lifecycle.Lifecycle;
-
 public class CaCertsManagedProfilePreferenceController extends CaCertsPreferenceControllerBase {
 
     @VisibleForTesting
     static final String CA_CERTS_MANAGED_PROFILE = "ca_certs_managed_profile";
 
-    public CaCertsManagedProfilePreferenceController(Context context,
-            Lifecycle lifecycle) {
-        super(context, lifecycle);
+    public CaCertsManagedProfilePreferenceController(Context context) {
+        super(context);
     }
 
     @Override

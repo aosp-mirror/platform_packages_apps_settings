@@ -20,7 +20,6 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
-import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Switch;
 
@@ -28,7 +27,6 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.widget.SeekBarPreference;
 import com.android.settings.widget.SwitchBar;
-
 
 /**
  * Fragment for preference screen for settings related to Automatically click after mouse stops
@@ -105,15 +103,18 @@ public class ToggleAutoclickPreferenceFragment extends ToggleFeaturePreferenceFr
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_url_autoclick;
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.accessibility_autoclick_settings;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        addPreferencesFromResource(R.xml.accessibility_autoclick_settings);
 
         int delay = Settings.Secure.getInt(
                 getContentResolver(), Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY,
@@ -125,6 +126,8 @@ public class ToggleAutoclickPreferenceFragment extends ToggleFeaturePreferenceFr
         mDelay.setMax(delayToSeekBarProgress(MAX_AUTOCLICK_DELAY));
         mDelay.setProgress(delayToSeekBarProgress(delay));
         mDelay.setOnPreferenceChangeListener(this);
+        mFooterPreferenceMixin.createFooterPreference()
+                .setTitle(R.string.accessibility_autoclick_description);
     }
 
     @Override
@@ -147,13 +150,6 @@ public class ToggleAutoclickPreferenceFragment extends ToggleFeaturePreferenceFr
     @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
         onPreferenceToggled(Settings.Secure.ACCESSIBILITY_AUTOCLICK_ENABLED, isChecked);
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        setTitle(getString(R.string.accessibility_autoclick_preference_title));
     }
 
     @Override

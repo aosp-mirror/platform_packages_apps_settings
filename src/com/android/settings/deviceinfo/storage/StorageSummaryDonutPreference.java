@@ -71,6 +71,8 @@ public class StorageSummaryDonutPreference extends Preference implements View.On
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
         super.onBindViewHolder(view);
+        view.itemView.setClickable(false);
+
         final DonutView donut = (DonutView) view.findViewById(R.id.donut);
         if (donut != null) {
             donut.setPercentage(mPercent);

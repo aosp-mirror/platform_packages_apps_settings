@@ -18,17 +18,15 @@ package com.android.settings.display;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.verify;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
-import android.support.v14.preference.SwitchPreference;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
-import com.android.settings.TestConfig;
 import com.android.settings.search.InlinePayload;
 import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -39,113 +37,132 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = {ShadowSecureSettings.class})
+@Config(shadows = ShadowSecureSettings.class)
 public class AmbientDisplayAlwaysOnPreferenceControllerTest {
 
-    @Mock Context mContext;
-    @Mock AmbientDisplayConfiguration mConfig;
-    @Mock SwitchPreference mSwitchPreference;
+    @Mock
+    private AmbientDisplayConfiguration mConfig;
 
-    AmbientDisplayAlwaysOnPreferenceController mController;
-    boolean mCallbackInvoked;
+    private Context mContext;
+
+    private ContentResolver mContentResolver;
+
+    private AmbientDisplayAlwaysOnPreferenceController mController;
+    private boolean mCallbackInvoked;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        mController = new AmbientDisplayAlwaysOnPreferenceController(mContext, mConfig,
-                () -> { mCallbackInvoked = true; });
+        mContext = RuntimeEnvironment.application;
+        mContentResolver = mContext.getContentResolver();
+        mController = new AmbientDisplayAlwaysOnPreferenceController(mContext, "key");
+        mController.setConfig(mConfig);
+        mController.setCallback(() -> mCallbackInvoked = true);
     }
 
     @Test
-    public void updateState_enabled() throws Exception {
-        when(mConfig.alwaysOnEnabled(anyInt()))
-                .thenReturn(true);
+    public void getAvailabilityStatus_available() {
+        when(mConfig.alwaysOnAvailableForUser(anyInt())).thenReturn(true);
 
-        mController.updateState(mSwitchPreference);
-
-        verify(mSwitchPreference).setChecked(true);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                AmbientDisplayAlwaysOnPreferenceController.AVAILABLE);
     }
 
     @Test
-    public void updateState_disabled() throws Exception {
-        when(mConfig.alwaysOnEnabled(anyInt()))
-                .thenReturn(false);
+    public void getAvailabilityStatus_disabled_unsupported() {
+        when(mConfig.alwaysOnAvailableForUser(anyInt())).thenReturn(false);
 
-        mController.updateState(mSwitchPreference);
-
-        verify(mSwitchPreference).setChecked(false);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                AmbientDisplayAlwaysOnPreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
-    public void onPreferenceChange_callback() throws Exception {
+    public void isChecked_enabled() {
+        when(mConfig.alwaysOnEnabled(anyInt())).thenReturn(true);
+
+        assertThat(mController.isChecked()).isTrue();
+    }
+
+    @Test
+    public void isChecked_disabled() {
+        when(mConfig.alwaysOnEnabled(anyInt())).thenReturn(false);
+
+        assertThat(mController.isChecked()).isFalse();
+    }
+
+    @Test
+    public void setChecked_enabled() {
+        mController.setChecked(true);
+
+        assertThat(Settings.Secure.getInt(mContentResolver, Settings.Secure.DOZE_ALWAYS_ON, -1))
+                .isEqualTo(1);
+    }
+
+    @Test
+    public void setChecked_disabled() {
+        mController.setChecked(false);
+
+        assertThat(Settings.Secure.getInt(mContentResolver, Settings.Secure.DOZE_ALWAYS_ON, -1))
+                .isEqualTo(0);
+    }
+
+    @Test
+    public void onPreferenceChange_callback() {
         assertThat(mCallbackInvoked).isFalse();
-        mController.onPreferenceChange(mSwitchPreference, true);
+        mController.setChecked(true);
         assertThat(mCallbackInvoked).isTrue();
     }
 
     @Test
-    public void onPreferenceChange_enable() throws Exception {
-        mController.onPreferenceChange(mSwitchPreference, true);
-
-        assertThat(Settings.Secure.getInt(null, Settings.Secure.DOZE_ALWAYS_ON, -1))
-            .isEqualTo(1);
-    }
-
-    @Test
-    public void onPreferenceChange_disable() throws Exception {
-        mController.onPreferenceChange(mSwitchPreference, false);
-
-        assertThat(Settings.Secure.getInt(null, Settings.Secure.DOZE_ALWAYS_ON, -1))
-            .isEqualTo(0);
-    }
-
-    @Test
-    public void isAvailable_available() throws Exception {
-        when(mConfig.alwaysOnAvailableForUser(anyInt()))
-                .thenReturn(true);
-
-        assertThat(mController.isAvailable()).isTrue();
-    }
-
-    @Test
-    public void isAvailable_unavailable() throws Exception {
-        when(mConfig.alwaysOnAvailableForUser(anyInt()))
-                .thenReturn(false);
-
-        assertThat(mController.isAvailable()).isFalse();
-    }
-
-    @Test
     public void testPreferenceController_ProperResultPayloadType() {
+        when(mConfig.alwaysOnAvailableForUser(anyInt())).thenReturn(false);
+        mController = spy(mController);
+
         assertThat(mController.getResultPayload()).isInstanceOf(InlineSwitchPayload.class);
     }
 
     @Test
-    @Config(shadows = ShadowSecureSettings.class)
     public void testSetValue_updatesCorrectly() {
-        int newValue = 1;
-        ContentResolver resolver = mContext.getContentResolver();
-        Settings.Secure.putInt(resolver, Settings.Secure.DOZE_ALWAYS_ON, 0);
+        when(mConfig.alwaysOnAvailableForUser(anyInt())).thenReturn(false);
+        mController = spy(mController);
+        final int newValue = 1;
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.DOZE_ALWAYS_ON, 0 /* value */);
 
         ((InlinePayload) mController.getResultPayload()).setValue(mContext, newValue);
-        int updatedValue = Settings.Secure.getInt(resolver, Settings.Secure.DOZE_ALWAYS_ON, 1);
+        final int updatedValue = Settings.Secure.
+                getInt(mContentResolver, Settings.Secure.DOZE_ALWAYS_ON, 1 /* default */);
 
         assertThat(updatedValue).isEqualTo(newValue);
     }
 
     @Test
-    @Config(shadows = ShadowSecureSettings.class)
     public void testGetValue_correctValueReturned() {
-        int currentValue = 1;
-        ContentResolver resolver = mContext.getContentResolver();
-        Settings.Secure.putInt(resolver, Settings.Secure.DOZE_ALWAYS_ON, currentValue);
+        when(mConfig.alwaysOnAvailableForUser(anyInt())).thenReturn(false);
+        mController = spy(mController);
+        final int currentValue = 1;
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.DOZE_ALWAYS_ON, currentValue);
 
-        int newValue = ((InlinePayload) mController.getResultPayload()).getValue(mContext);
+        final int newValue = ((InlinePayload) mController.getResultPayload()).getValue(mContext);
 
         assertThat(newValue).isEqualTo(currentValue);
+    }
+
+    @Test
+    public void isSliceableCorrectKey_returnsTrue() {
+        final AmbientDisplayAlwaysOnPreferenceController controller =
+                new AmbientDisplayAlwaysOnPreferenceController(mContext,
+                        "ambient_display_always_on");
+        assertThat(controller.isSliceable()).isTrue();
+    }
+
+    @Test
+    public void isSliceableIncorrectKey_returnsFalse() {
+        final AmbientDisplayAlwaysOnPreferenceController controller =
+                new AmbientDisplayAlwaysOnPreferenceController(mContext, "bad_key");
+        assertThat(controller.isSliceable()).isFalse();
     }
 }

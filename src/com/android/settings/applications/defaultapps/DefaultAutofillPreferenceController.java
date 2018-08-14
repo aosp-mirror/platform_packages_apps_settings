@@ -23,22 +23,22 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.autofill.AutofillManager;
 
-import com.android.settings.applications.AutofillManagerWrapper;
-import com.android.settings.applications.AutofillManagerWrapperImpl;
+import com.android.settingslib.applications.DefaultAppInfo;
 
 public class DefaultAutofillPreferenceController extends DefaultAppPreferenceController {
-    private AutofillManagerWrapper mAutofillManager;
+
+    private final AutofillManager mAutofillManager;
 
     public DefaultAutofillPreferenceController(Context context) {
         super(context);
 
-        mAutofillManager = new AutofillManagerWrapperImpl(
-                mContext.getSystemService(AutofillManager.class));
+        mAutofillManager = mContext.getSystemService(AutofillManager.class);
     }
 
     @Override
     public boolean isAvailable() {
-        return mAutofillManager.hasAutofillFeature()
+        return mAutofillManager != null
+                && mAutofillManager.hasAutofillFeature()
                 && mAutofillManager.isAutofillSupported();
     }
 
@@ -54,7 +54,7 @@ public class DefaultAutofillPreferenceController extends DefaultAppPreferenceCon
         }
         final DefaultAutofillPicker.AutofillSettingIntentProvider intentProvider =
                 new DefaultAutofillPicker.AutofillSettingIntentProvider(
-                        mPackageManager.getPackageManager(), info.getKey());
+                        mContext, info.getKey());
         return intentProvider.getIntent();
     }
 
@@ -63,7 +63,7 @@ public class DefaultAutofillPreferenceController extends DefaultAppPreferenceCon
         final String flattenComponent = Settings.Secure.getString(mContext.getContentResolver(),
                 DefaultAutofillPicker.SETTING);
         if (!TextUtils.isEmpty(flattenComponent)) {
-            DefaultAppInfo appInfo = new DefaultAppInfo(mPackageManager,
+            DefaultAppInfo appInfo = new DefaultAppInfo(mContext, mPackageManager,
                     mUserId, ComponentName.unflattenFromString(flattenComponent));
             return appInfo;
         }

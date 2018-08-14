@@ -17,7 +17,6 @@
 package com.android.settings.widget;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.eq;
@@ -31,17 +30,14 @@ import android.graphics.Rect;
 import android.widget.FrameLayout;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowView;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ScrollToParentEditTextTest {
 
     private static final int EDIT_TEXT_SIZE = 20;
@@ -53,9 +49,8 @@ public class ScrollToParentEditTextTest {
 
     @Before
     public void setUp() {
-        mEditText = new ScrollToParentEditText(
-                application,
-                Robolectric.buildAttributeSet().build());
+        mEditText =
+            new ScrollToParentEditText(application, Robolectric.buildAttributeSet().build());
         mEditText.layout(0, 0, EDIT_TEXT_SIZE, EDIT_TEXT_SIZE);
 
         mParent = spy(new FrameLayout(application));

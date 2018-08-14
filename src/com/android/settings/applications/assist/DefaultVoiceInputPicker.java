@@ -24,9 +24,10 @@ import android.text.TextUtils;
 
 import com.android.internal.app.AssistUtils;
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.applications.PackageManagerWrapper;
-import com.android.settings.applications.defaultapps.DefaultAppInfo;
+import com.android.settings.R;
 import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
+import com.android.settingslib.applications.DefaultAppInfo;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,19 +56,25 @@ public class DefaultVoiceInputPicker extends DefaultAppPickerFragment {
     }
 
     @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.default_voice_settings;
+    }
+
+    @Override
     protected List<VoiceInputDefaultAppInfo> getCandidates() {
         final List<VoiceInputDefaultAppInfo> candidates = new ArrayList<>();
+        final Context context = getContext();
         boolean hasEnabled = true;
         for (VoiceInputHelper.InteractionInfo info : mHelper.mAvailableInteractionInfos) {
             final boolean enabled = TextUtils.equals(info.key, mAssistRestrict);
             hasEnabled |= enabled;
-            candidates.add(new VoiceInputDefaultAppInfo(mPm, mUserId, info, enabled));
+            candidates.add(new VoiceInputDefaultAppInfo(context, mPm, mUserId, info, enabled));
         }
 
         final boolean assistIsService = !hasEnabled;
         for (VoiceInputHelper.RecognizerInfo info : mHelper.mAvailableRecognizerInfos) {
             final boolean enabled = !assistIsService;
-            candidates.add(new VoiceInputDefaultAppInfo(mPm, mUserId, info, enabled));
+            candidates.add(new VoiceInputDefaultAppInfo(context, mPm, mUserId, info, enabled));
         }
         return candidates;
     }
@@ -132,9 +139,9 @@ public class DefaultVoiceInputPicker extends DefaultAppPickerFragment {
 
         public VoiceInputHelper.BaseInfo mInfo;
 
-        public VoiceInputDefaultAppInfo(PackageManagerWrapper pm, int userId,
+        public VoiceInputDefaultAppInfo(Context context, PackageManagerWrapper pm, int userId,
                 VoiceInputHelper.BaseInfo info, boolean enabled) {
-            super(pm, userId, info.componentName, null /* summary */, enabled);
+            super(context, pm, userId, info.componentName, null /* summary */, enabled);
             mInfo = info;
         }
 

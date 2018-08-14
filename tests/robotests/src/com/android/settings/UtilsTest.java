@@ -1,16 +1,37 @@
+/*
+ * Copyright (C) 2018 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
-
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.net.ConnectivityManager;
 import android.net.LinkAddress;
@@ -22,11 +43,10 @@ import android.os.UserManager;
 import android.os.storage.DiskInfo;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
-import android.text.SpannableStringBuilder;
-import android.text.format.DateUtils;
-import android.text.style.TtsSpan;
+import android.util.IconDrawableFactory;
+import android.widget.EditText;
+import android.widget.TextView;
 
-import com.android.settings.enterprise.DevicePolicyManagerWrapper;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -35,19 +55,17 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class UtilsTest {
 
-    private static final String TIME_DESCRIPTION = "1 day 20 hours 30 minutes";
     private static final String PACKAGE_NAME = "com.android.app";
-    private Context mContext;
+    private static final int USER_ID = 1;
+
     @Mock
     private WifiManager wifiManager;
     @Mock
@@ -55,9 +73,16 @@ public class UtilsTest {
     @Mock
     private ConnectivityManager connectivityManager;
     @Mock
-    private DevicePolicyManagerWrapper mDevicePolicyManager;
+    private DevicePolicyManager mDevicePolicyManager;
     @Mock
     private UserManager mUserManager;
+    @Mock
+    private PackageManager mPackageManager;
+    @Mock
+    private IconDrawableFactory mIconDrawableFactory;
+    @Mock
+    private ApplicationInfo mApplicationInfo;
+    private Context mContext;
 
     @Before
     public void setUp() {
@@ -98,82 +123,6 @@ public class UtilsTest {
     }
 
     @Test
-    public void testAssignDefaultPhoto_ContextNull_ReturnFalseAndNotCrash() {
-        // Should not crash here
-        assertThat(Utils.assignDefaultPhoto(null, 0)).isFalse();
-    }
-
-    @Test
-    public void testFormatElapsedTime_WithSeconds_ShowSeconds() {
-        final double testMillis = 5 * DateUtils.MINUTE_IN_MILLIS + 30 * DateUtils.SECOND_IN_MILLIS;
-        final String expectedTime = "5m 30s";
-
-        assertThat(Utils.formatElapsedTime(mContext, testMillis, true).toString()).isEqualTo(
-                expectedTime);
-    }
-
-    @Test
-    public void testFormatElapsedTime_NoSeconds_DoNotShowSeconds() {
-        final double testMillis = 5 * DateUtils.MINUTE_IN_MILLIS + 30 * DateUtils.SECOND_IN_MILLIS;
-        final String expectedTime = "6m";
-
-        assertThat(Utils.formatElapsedTime(mContext, testMillis, false).toString()).isEqualTo(
-                expectedTime);
-    }
-
-    @Test
-    public void testFormatElapsedTime_TimeMoreThanOneDay_ShowCorrectly() {
-        final double testMillis = 2 * DateUtils.DAY_IN_MILLIS
-                + 4 * DateUtils.HOUR_IN_MILLIS + 15 * DateUtils.MINUTE_IN_MILLIS;
-        final String expectedTime = "2d 4h 15m";
-
-        assertThat(Utils.formatElapsedTime(mContext, testMillis, false).toString()).isEqualTo(
-                expectedTime);
-    }
-
-    @Test
-    public void testFormatElapsedTime_ZeroFieldsInTheMiddleDontShow() {
-        final double testMillis = 2 * DateUtils.DAY_IN_MILLIS + 15 * DateUtils.MINUTE_IN_MILLIS;
-        final String expectedTime = "2d 15m";
-
-        assertThat(Utils.formatElapsedTime(mContext, testMillis, false).toString()).isEqualTo(
-                expectedTime);
-    }
-
-    @Test
-    public void testFormatElapsedTime_FormatZero_WithSeconds() {
-        final double testMillis = 0;
-        final String expectedTime = "0s";
-
-        assertThat(Utils.formatElapsedTime(mContext, testMillis, true).toString()).isEqualTo(
-                expectedTime);
-    }
-
-    @Test
-    public void testFormatElapsedTime_FormatZero_NoSeconds() {
-        final double testMillis = 0;
-        final String expectedTime = "0m";
-
-        assertThat(Utils.formatElapsedTime(mContext, testMillis, false).toString()).isEqualTo(
-                expectedTime);
-    }
-
-    @Test
-    public void testFormatElapsedTime_onlyContainsMinute_hasTtsSpan() {
-        final double testMillis = 15 * DateUtils.MINUTE_IN_MILLIS;
-
-        final CharSequence charSequence = Utils.formatElapsedTime(mContext, testMillis, false);
-        assertThat(charSequence).isInstanceOf(SpannableStringBuilder.class);
-
-        final SpannableStringBuilder expectedString = (SpannableStringBuilder) charSequence;
-        final TtsSpan[] ttsSpans = expectedString.getSpans(0, expectedString.length(),
-                TtsSpan.class);
-
-        assertThat(ttsSpans).asList().hasSize(1);
-        assertThat(ttsSpans[0].getType()).isEqualTo(TtsSpan.TYPE_MEASURE);
-    }
-
-    @Test
     public void testInitializeVolumeDoesntBreakOnNullVolume() {
         VolumeInfo info = new VolumeInfo("id", 0, new DiskInfo("id", 0), "");
         StorageManager storageManager = mock(StorageManager.class, RETURNS_DEEP_STUBS);
@@ -210,8 +159,8 @@ public class UtilsTest {
     public void testIsProfileOrDeviceOwner_deviceOwnerApp_returnTrue() {
         when(mDevicePolicyManager.isDeviceOwnerAppOnAnyUser(PACKAGE_NAME)).thenReturn(true);
 
-        assertThat(Utils.isProfileOrDeviceOwner(mUserManager, mDevicePolicyManager,
-                PACKAGE_NAME)).isTrue();
+        assertThat(Utils.isProfileOrDeviceOwner(mUserManager, mDevicePolicyManager, PACKAGE_NAME))
+            .isTrue();
     }
 
     @Test
@@ -220,10 +169,34 @@ public class UtilsTest {
         userInfos.add(new UserInfo());
 
         when(mUserManager.getUsers()).thenReturn(userInfos);
-        when(mDevicePolicyManager.getProfileOwnerAsUser(userInfos.get(0).id)).thenReturn(
-                new ComponentName(PACKAGE_NAME, ""));
+        when(mDevicePolicyManager.getProfileOwnerAsUser(userInfos.get(0).id))
+            .thenReturn(new ComponentName(PACKAGE_NAME, ""));
 
-        assertThat(Utils.isProfileOrDeviceOwner(mUserManager, mDevicePolicyManager,
-                PACKAGE_NAME)).isTrue();
+        assertThat(Utils.isProfileOrDeviceOwner(mUserManager, mDevicePolicyManager, PACKAGE_NAME))
+            .isTrue();
+    }
+
+    @Test
+    public void testSetEditTextCursorPosition_shouldGetExpectedEditTextLenght() {
+        final EditText editText = new EditText(mContext);
+        final CharSequence text = "test";
+        editText.setText(text, TextView.BufferType.EDITABLE);
+        final int length = editText.getText().length();
+        Utils.setEditTextCursorPosition(editText);
+
+        assertThat(editText.getSelectionEnd()).isEqualTo(length);
+    }
+
+    @Test
+    public void testGetBadgedIcon_usePackageNameAndUserId()
+        throws PackageManager.NameNotFoundException {
+        doReturn(mApplicationInfo).when(mPackageManager).getApplicationInfoAsUser(
+                PACKAGE_NAME, PackageManager.GET_META_DATA, USER_ID);
+
+        Utils.getBadgedIcon(mIconDrawableFactory, mPackageManager, PACKAGE_NAME, USER_ID);
+
+        // Verify that it uses the correct user id
+        verify(mPackageManager).getApplicationInfoAsUser(eq(PACKAGE_NAME), anyInt(), eq(USER_ID));
+        verify(mIconDrawableFactory).getBadgedIcon(mApplicationInfo, USER_ID);
     }
 }

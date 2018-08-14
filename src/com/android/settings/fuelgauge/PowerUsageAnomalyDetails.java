@@ -17,12 +17,10 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.util.IconDrawableFactory;
@@ -31,6 +29,9 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
+import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.fuelgauge.anomaly.AnomalyDialogFragment;
@@ -63,13 +64,16 @@ public class PowerUsageAnomalyDetails extends DashboardFragment implements
     IconDrawableFactory mIconDrawableFactory;
 
     public static void startBatteryAbnormalPage(SettingsActivity caller,
-            PreferenceFragment fragment, List<Anomaly> anomalies) {
+            InstrumentedPreferenceFragment fragment, List<Anomaly> anomalies) {
         Bundle args = new Bundle();
         args.putParcelableList(EXTRA_ANOMALY_LIST, anomalies);
 
-        caller.startPreferencePanelAsUser(fragment, PowerUsageAnomalyDetails.class.getName(), args,
-                R.string.battery_abnormal_details_title, null,
-                new UserHandle(UserHandle.myUserId()));
+        new SubSettingLauncher(caller)
+                .setDestination(PowerUsageAnomalyDetails.class.getName())
+                .setTitle(R.string.battery_abnormal_details_title)
+                .setArguments(args)
+                .setSourceMetricsCategory(fragment.getMetricsCategory())
+                .launch();
     }
 
     @Override
@@ -119,14 +123,13 @@ public class PowerUsageAnomalyDetails extends DashboardFragment implements
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return null;
     }
 
     @Override
     public int getMetricsCategory() {
-        //TODO(b/37681923): add correct metrics category
-        return 0;
+        return MetricsProto.MetricsEvent.FUELGAUGE_ANOMALY_DETAIL;
     }
 
     void refreshUi() {
@@ -152,12 +155,6 @@ public class PowerUsageAnomalyDetails extends DashboardFragment implements
 
     @VisibleForTesting
     Drawable getBadgedIcon(String packageName, int userId) {
-        try {
-            final ApplicationInfo appInfo = mPackageManager.getApplicationInfo(packageName,
-                    PackageManager.GET_META_DATA);
-            return mIconDrawableFactory.getBadgedIcon(appInfo, userId);
-        } catch (PackageManager.NameNotFoundException e) {
-            return mPackageManager.getDefaultActivityIcon();
-        }
+        return Utils.getBadgedIcon(mIconDrawableFactory, mPackageManager, packageName, userId);
     }
 }

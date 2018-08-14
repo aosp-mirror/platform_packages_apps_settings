@@ -236,7 +236,8 @@ public class ChooseLockGeneric extends SettingsActivity {
                 boolean managedProfileWithUnifiedLock =
                         UserManager.get(getActivity()).isManagedProfile(mUserId)
                         && !mLockPatternUtils.isSeparateProfileChallengeEnabled(mUserId);
-                if (managedProfileWithUnifiedLock
+                boolean skipConfirmation = managedProfileWithUnifiedLock && !mIsSetNewPassword;
+                if (skipConfirmation
                         || !helper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST,
                         getString(R.string.unlock_set_unlock_launch_picker_title), true, mUserId)) {
                     mPasswordConfirmed = true; // no password set, so no need to confirm
@@ -653,7 +654,6 @@ public class ChooseLockGeneric extends SettingsActivity {
             }
 
             if (quality == DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED) {
-                mLockPatternUtils.setSeparateProfileChallengeEnabled(mUserId, true, mUserPassword);
                 mChooseLockSettingsHelper.utils().clearLock(mUserPassword, mUserId);
                 mChooseLockSettingsHelper.utils().setLockScreenDisabled(disabled, mUserId);
                 getActivity().setResult(Activity.RESULT_OK);
@@ -753,7 +753,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         }
 
         @Override
-        protected int getHelpResource() {
+        public int getHelpResource() {
             return R.string.help_url_choose_lockscreen;
         }
 

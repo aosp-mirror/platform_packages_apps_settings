@@ -17,6 +17,7 @@
 
 package com.android.settings.fuelgauge;
 
+import static android.arch.lifecycle.Lifecycle.Event.ON_START;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.any;
@@ -27,6 +28,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.content.Intent;
 import android.os.BatteryManager;
@@ -36,10 +38,10 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -54,14 +56,14 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = {
+@Config(shadows = {
                 SettingsShadowResources.class,
+                SettingsShadowResourcesImpl.class,
                 SettingsShadowResources.SettingsShadowTheme.class,
                 ShadowEntityHeaderController.class
         })
 public class BatteryHeaderPreferenceControllerTest {
+
     private static final int BATTERY_LEVEL = 60;
     private static final String TIME_LEFT = "2h30min";
     private static final String BATTERY_STATUS = "Charging";
@@ -84,13 +86,15 @@ public class BatteryHeaderPreferenceControllerTest {
     private TextView mSummary2;
     private LayoutPreference mBatteryLayoutPref;
     private Intent mBatteryIntent;
+    private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mLifecycle = new Lifecycle();
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         mContext = spy(RuntimeEnvironment.application);
         mBatteryMeterView = new BatteryMeterView(mContext);
         mBatteryPercentText = new TextView(mContext);
@@ -105,8 +109,8 @@ public class BatteryHeaderPreferenceControllerTest {
         doReturn(mBatteryIntent).when(mContext).registerReceiver(any(), any());
 
         mBatteryLayoutPref = new LayoutPreference(mContext, R.layout.battery_header);
-        doReturn(mBatteryLayoutPref).when(mPreferenceScreen).findPreference(
-                BatteryHeaderPreferenceController.KEY_BATTERY_HEADER);
+        doReturn(mBatteryLayoutPref).when(mPreferenceScreen)
+            .findPreference(BatteryHeaderPreferenceController.KEY_BATTERY_HEADER);
 
         mBatteryInfo.batteryLevel = BATTERY_LEVEL;
 
@@ -129,8 +133,8 @@ public class BatteryHeaderPreferenceControllerTest {
 
         assertThat(((BatteryMeterView) mBatteryLayoutPref.findViewById(
                 R.id.battery_header_icon)).getBatteryLevel()).isEqualTo(BATTERY_LEVEL);
-        assertThat(((TextView) mBatteryLayoutPref.findViewById(
-                R.id.battery_percent)).getText()).isEqualTo("60%");
+        assertThat(((TextView) mBatteryLayoutPref.findViewById(R.id.battery_percent)).getText())
+            .isEqualTo("60%");
     }
 
     @Test
@@ -170,7 +174,7 @@ public class BatteryHeaderPreferenceControllerTest {
                 .thenReturn(mEntityHeaderController);
 
         mController.displayPreference(mPreferenceScreen);
-        mLifecycle.onStart();
+        mLifecycle.handleLifecycleEvent(ON_START);
 
         verify(mEntityHeaderController).styleActionBar(mActivity);
     }

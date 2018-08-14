@@ -16,14 +16,17 @@
 
 package com.android.settings.accessibility;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.UserManager;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-import com.android.settings.applications.PackageManagerWrapper;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -32,37 +35,23 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
-
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ShortcutServicePickerFragmentTest {
 
     private static final String TEST_SERVICE_KEY_1 = "abc/123";
-    private static final String TEST_SERVICE_KEY_2 = "abcd/1234";
-
-    private static final String SUMMARY_1 = "summary1";
-    private static final String SUMMARY_2 = "summary2";
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Activity mActivity;
     @Mock
     private UserManager mUserManager;
-    @Mock
-    private PackageManagerWrapper mPackageManager;
 
     private ShortcutServicePickerFragment mFragment;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mActivity);
+        FakeFeatureFactory.setupForTest();
         when(mActivity.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
 
         mFragment = spy(new ShortcutServicePickerFragment());

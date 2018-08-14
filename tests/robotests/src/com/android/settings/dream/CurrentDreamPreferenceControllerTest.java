@@ -16,15 +16,19 @@
 
 package com.android.settings.dream;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.ComponentName;
 import android.content.Context;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.widget.GearPreference;
 import com.android.settingslib.dream.DreamBackend;
 import com.android.settingslib.dream.DreamBackend.DreamInfo;
-import java.util.ArrayList;
-import java.util.Arrays;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,18 +36,13 @@ import org.mockito.Answers;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import java.util.ArrayList;
+import java.util.Collections;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class CurrentDreamPreferenceControllerTest {
-    private static String TAG = "CurrentDreamPreferenceControllerTest";
 
     private CurrentDreamPreferenceController mController;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -70,7 +69,7 @@ public class CurrentDreamPreferenceControllerTest {
 
     @Test
     public void isEnabledIfDreamsAvailable() {
-        when(mBackend.getDreamInfos()).thenReturn(new ArrayList<>(Arrays.asList(mDreamInfo)));
+        when(mBackend.getDreamInfos()).thenReturn(Collections.singletonList(mDreamInfo));
 
         assertThat(mController.isAvailable()).isTrue();
     }
@@ -80,7 +79,7 @@ public class CurrentDreamPreferenceControllerTest {
         mDreamInfo.settingsComponentName = mock(ComponentName.class);
         mDreamInfo.isActive = true;
 
-        when(mBackend.getDreamInfos()).thenReturn(new ArrayList<>(Arrays.asList(mDreamInfo)));
+        when(mBackend.getDreamInfos()).thenReturn(Collections.singletonList(mDreamInfo));
 
         GearPreference mockPref = mock(GearPreference.class);
         ArgumentCaptor<GearPreference.OnGearClickListener> captor =
@@ -97,7 +96,7 @@ public class CurrentDreamPreferenceControllerTest {
         mDreamInfo.settingsComponentName = null;
         mDreamInfo.isActive = true;
 
-        when(mBackend.getDreamInfos()).thenReturn(new ArrayList<>(Arrays.asList(mDreamInfo)));
+        when(mBackend.getDreamInfos()).thenReturn(Collections.singletonList(mDreamInfo));
 
         GearPreference mockPref = mock(GearPreference.class);
         ArgumentCaptor<GearPreference.OnGearClickListener> captor =

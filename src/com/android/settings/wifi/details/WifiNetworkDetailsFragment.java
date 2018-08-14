@@ -15,20 +15,30 @@
  */
 package com.android.settings.wifi.details;
 
+import static com.android.settings.wifi.WifiSettings.WIFI_DIALOG_ID;
+
+import android.app.Dialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.vpn2.ConnectivityManagerWrapperImpl;
+import com.android.settings.wifi.WifiConfigUiBase;
+import com.android.settings.wifi.WifiDialog;
+import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.wifi.AccessPoint;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -43,13 +53,9 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
 
     private AccessPoint mAccessPoint;
     private WifiDetailPreferenceController mWifiDetailPreferenceController;
-    private WifiDetailActionBarObserver mWifiDetailActionBarObserver;
 
     @Override
     public void onAttach(Context context) {
-        mWifiDetailActionBarObserver = new WifiDetailActionBarObserver(context, this);
-        getLifecycle().addObserver(mWifiDetailActionBarObserver);
-
         mAccessPoint = new AccessPoint(context, getArguments());
         super.onAttach(context);
     }
@@ -70,11 +76,55 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
-        ConnectivityManager cm = context.getSystemService(ConnectivityManager.class);
-        mWifiDetailPreferenceController = new WifiDetailPreferenceController(
+    public int getDialogMetricsCategory(int dialogId) {
+        if (dialogId == WIFI_DIALOG_ID) {
+            return MetricsEvent.DIALOG_WIFI_AP_EDIT;
+        }
+        return 0;
+    }
+
+    @Override
+    public Dialog onCreateDialog(int dialogId) {
+        if (getActivity() == null || mWifiDetailPreferenceController == null
+                || mAccessPoint == null) {
+            return null;
+        }
+        return WifiDialog.createModal(getActivity(), mWifiDetailPreferenceController, mAccessPoint,
+                WifiConfigUiBase.MODE_MODIFY);
+    }
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        MenuItem item = menu.add(0, Menu.FIRST, 0, R.string.wifi_modify);
+        item.setIcon(R.drawable.ic_mode_edit);
+        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case Menu.FIRST:
+                if (!mWifiDetailPreferenceController.canModifyNetwork()) {
+                    RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(),
+                            RestrictedLockUtils.getDeviceOwner(getContext()));
+                } else {
+                    showDialog(WIFI_DIALOG_ID);
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(menuItem);
+        }
+    }
+
+    @Override
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        final ConnectivityManager cm = context.getSystemService(ConnectivityManager.class);
+        mWifiDetailPreferenceController = WifiDetailPreferenceController.newInstance(
                 mAccessPoint,
-                new ConnectivityManagerWrapperImpl(cm),
+                cm,
                 context,
                 this,
                 new Handler(Looper.getMainLooper()),  // UI thread.
@@ -82,6 +132,9 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
                 context.getSystemService(WifiManager.class),
                 mMetricsFeatureProvider);
 
-        return new ArrayList<>(Collections.singletonList(mWifiDetailPreferenceController));
+        controllers.add(mWifiDetailPreferenceController);
+        controllers.add(new WifiMeteredPreferenceController(context, mAccessPoint.getConfig()));
+
+        return controllers;
     }
 }

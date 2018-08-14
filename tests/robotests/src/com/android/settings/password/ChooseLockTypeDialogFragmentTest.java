@@ -29,10 +29,8 @@ import android.app.Fragment;
 import android.content.Context;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.password.ChooseLockTypeDialogFragment.OnLockTypeSelectedListener;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.ShadowEventLogWriter;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
@@ -47,15 +45,9 @@ import org.robolectric.shadows.ShadowDialog;
 import org.robolectric.util.FragmentTestUtil;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(
-        manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = {
-                ShadowEventLogWriter.class,
-                ShadowUserManager.class,
-                ShadowUtils.class
-        })
+@Config(shadows = {ShadowUserManager.class, ShadowUtils.class})
 public class ChooseLockTypeDialogFragmentTest {
+
     private Context mContext;
     private TestFragment mFragment;
 
@@ -101,10 +93,10 @@ public class ChooseLockTypeDialogFragmentTest {
         return ShadowAlertDialog.getLatestAlertDialog();
     }
 
+    public static class TestFragment extends Fragment implements OnLockTypeSelectedListener {
 
-    public static class TestFragment extends Fragment
-            implements OnLockTypeSelectedListener{
-        OnLockTypeSelectedListener mDelegate;
+        private OnLockTypeSelectedListener mDelegate;
+
         @Override
         public void onLockTypeSelected(ScreenLockType lock) {
             if (mDelegate != null) {

@@ -19,19 +19,19 @@ package com.android.settings.applications;
 import android.content.Intent;
 
 import com.android.settings.SettingsActivity;
+import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 
 public class InstalledAppDetailsTop extends SettingsActivity {
 
     @Override
     public Intent getIntent() {
         Intent modIntent = new Intent(super.getIntent());
-        modIntent.putExtra(EXTRA_SHOW_FRAGMENT, InstalledAppDetails.class.getName());
+        modIntent.putExtra(EXTRA_SHOW_FRAGMENT, AppInfoDashboardFragment.class.getName());
         return modIntent;
     }
 
     @Override
     protected boolean isValidFragment(String fragmentName) {
-        if (InstalledAppDetails.class.getName().equals(fragmentName)) return true;
-        return false;
+        return AppInfoDashboardFragment.class.getName().equals(fragmentName);
     }
 }

@@ -34,6 +34,10 @@ public class SetupWizardUtils {
         }
         if (theme != null) {
             switch (theme) {
+                case WizardManagerHelper.THEME_GLIF_V3_LIGHT:
+                    return R.style.GlifV3Theme_Light;
+                case WizardManagerHelper.THEME_GLIF_V3:
+                    return R.style.GlifV3Theme;
                 case WizardManagerHelper.THEME_GLIF_V2_LIGHT:
                     return R.style.GlifV2Theme_Light;
                 case WizardManagerHelper.THEME_GLIF_V2:
@@ -48,11 +52,20 @@ public class SetupWizardUtils {
     }
 
     public static int getTransparentTheme(Intent intent) {
-        if (WizardManagerHelper.isLightTheme(intent, true)) {
-            return R.style.SetupWizardTheme_Light_Transparent;
-        } else {
-            return R.style.SetupWizardTheme_Transparent;
+        final int suwTheme = getTheme(intent);
+        int wifiDialogTheme = R.style.GlifV2Theme_Light_Transparent;
+        if (suwTheme == R.style.GlifV3Theme) {
+            wifiDialogTheme = R.style.GlifV3Theme_Transparent;
+        } else if (suwTheme == R.style.GlifV3Theme_Light) {
+            wifiDialogTheme = R.style.GlifV3Theme_Light_Transparent;
+        } else if (suwTheme == R.style.GlifV2Theme) {
+            wifiDialogTheme = R.style.GlifV2Theme_Transparent;
+        } else if (suwTheme == R.style.GlifTheme_Light) {
+            wifiDialogTheme = R.style.SetupWizardTheme_Light_Transparent;
+        } else if (suwTheme == R.style.GlifTheme) {
+            wifiDialogTheme = R.style.SetupWizardTheme_Transparent;
         }
+        return wifiDialogTheme;
     }
 
     public static void copySetupExtras(Intent fromIntent, Intent toIntent) {

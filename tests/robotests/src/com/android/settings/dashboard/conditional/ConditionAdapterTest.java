@@ -15,6 +15,10 @@
  */
 package com.android.settings.dashboard.conditional;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,13 +26,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.dashboard.DashboardAdapter;
-import com.android.settings.dashboard.DashboardData;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,15 +35,13 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ConditionAdapterTest {
+
     @Mock
     private Condition mCondition1;
     @Mock
@@ -70,63 +67,51 @@ public class ConditionAdapterTest {
     }
 
     @Test
-    public void getItemCount_notFullyExpanded_shouldReturn0() {
-        mConditionAdapter = new ConditionAdapter(
-            mContext, mOneCondition, DashboardData.HEADER_MODE_DEFAULT);
-        assertThat(mConditionAdapter.getItemCount()).isEqualTo(0);
-
-        mConditionAdapter = new ConditionAdapter(
-            mContext, mOneCondition, DashboardData.HEADER_MODE_SUGGESTION_EXPANDED);
-        assertThat(mConditionAdapter.getItemCount()).isEqualTo(0);
-
-        mConditionAdapter = new ConditionAdapter(
-            mContext, mOneCondition, DashboardData.HEADER_MODE_COLLAPSED);
+    public void getItemCount_notExpanded_shouldReturn0() {
+        mConditionAdapter = new ConditionAdapter(mContext, mOneCondition, false);
         assertThat(mConditionAdapter.getItemCount()).isEqualTo(0);
     }
 
     @Test
-    public void getItemCount_fullyExpanded_shouldReturnListSize() {
-        mConditionAdapter = new ConditionAdapter(
-            mContext, mOneCondition, DashboardData.HEADER_MODE_FULLY_EXPANDED);
+    public void getItemCount_expanded_shouldReturnListSize() {
+        mConditionAdapter = new ConditionAdapter(mContext, mOneCondition, true);
         assertThat(mConditionAdapter.getItemCount()).isEqualTo(1);
 
-        mConditionAdapter = new ConditionAdapter(
-            mContext, mTwoConditions, DashboardData.HEADER_MODE_FULLY_EXPANDED);
+        mConditionAdapter = new ConditionAdapter(mContext, mTwoConditions, true);
         assertThat(mConditionAdapter.getItemCount()).isEqualTo(2);
     }
 
     @Test
     public void getItemViewType_shouldReturnConditionTile() {
-        mConditionAdapter = new ConditionAdapter(
-            mContext, mTwoConditions, DashboardData.HEADER_MODE_FULLY_EXPANDED);
+        mConditionAdapter = new ConditionAdapter(mContext, mTwoConditions, true);
         assertThat(mConditionAdapter.getItemViewType(0)).isEqualTo(R.layout.condition_tile);
     }
 
     @Test
     public void onBindViewHolder_shouldSetListener() {
-        final View view = LayoutInflater.from(mContext).inflate(
-            R.layout.condition_tile, new LinearLayout(mContext), true);
+        final View view = LayoutInflater.from(mContext)
+            .inflate(R.layout.condition_tile, new LinearLayout(mContext), true);
         final DashboardAdapter.DashboardItemHolder viewHolder =
             new DashboardAdapter.DashboardItemHolder(view);
-        mConditionAdapter = new ConditionAdapter(
-            mContext, mOneCondition, DashboardData.HEADER_MODE_SUGGESTION_EXPANDED);
+        mConditionAdapter = new ConditionAdapter(mContext, mOneCondition, true);
 
         mConditionAdapter.onBindViewHolder(viewHolder, 0);
         final View card = view.findViewById(R.id.content);
+        assertThat(card).isNotNull();
         assertThat(card.hasOnClickListeners()).isTrue();
     }
 
     @Test
     public void viewClick_shouldInvokeConditionPrimaryClick() {
-        final View view = LayoutInflater.from(mContext).inflate(
-            R.layout.condition_tile, new LinearLayout(mContext), true);
+        final View view = LayoutInflater.from(mContext)
+            .inflate(R.layout.condition_tile, new LinearLayout(mContext), true);
         final DashboardAdapter.DashboardItemHolder viewHolder =
             new DashboardAdapter.DashboardItemHolder(view);
-        mConditionAdapter = new ConditionAdapter(
-            mContext, mOneCondition, DashboardData.HEADER_MODE_SUGGESTION_EXPANDED);
+        mConditionAdapter = new ConditionAdapter(mContext, mOneCondition, true);
 
         mConditionAdapter.onBindViewHolder(viewHolder, 0);
         final View card = view.findViewById(R.id.content);
+        assertThat(card).isNotNull();
         card.performClick();
         verify(mCondition1).onPrimaryClick();
     }
@@ -137,14 +122,12 @@ public class ConditionAdapterTest {
         final View view = LayoutInflater.from(mContext).inflate(
                 R.layout.condition_tile, new LinearLayout(mContext), true);
         final DashboardAdapter.DashboardItemHolder viewHolder =
-                new DashboardAdapter.DashboardItemHolder(view);
-        mConditionAdapter = new ConditionAdapter(
-                mContext, mOneCondition, DashboardData.HEADER_MODE_SUGGESTION_EXPANDED);
+            new DashboardAdapter.DashboardItemHolder(view);
+        mConditionAdapter = new ConditionAdapter(mContext, mOneCondition, true);
         mConditionAdapter.addDismissHandling(recyclerView);
 
         // do not bind viewholder to simulate the null condition scenario
         mConditionAdapter.mSwipeCallback.onSwiped(viewHolder, 0);
         // no crash
     }
-
 }

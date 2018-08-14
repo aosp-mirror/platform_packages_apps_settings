@@ -16,84 +16,49 @@
 
 package com.android.settings.notification;
 
-import android.app.AlertDialog;
+import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_ALARMS;
+import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_CALLS;
+import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_EVENTS;
+import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_MEDIA;
+import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES;
+import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_REMINDERS;
+import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_REPEAT_CALLERS;
+import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_SYSTEM;
+
 import android.app.AutomaticZenRule;
+import android.app.FragmentManager;
 import android.app.NotificationManager;
 import android.app.NotificationManager.Policy;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.ServiceInfo;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
-import android.os.Bundle;
+import android.icu.text.ListFormatter;
+import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import android.service.notification.ConditionProviderService;
 import android.service.notification.ZenModeConfig;
-import com.android.settings.utils.ManagedServiceSettings;
-import com.android.settings.utils.ZenServiceListing;
 import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceCategory;
-import android.support.v7.preference.PreferenceScreen;
-import android.support.v7.preference.PreferenceViewHolder;
-import android.view.View;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settingslib.TwoTargetPreference;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
-import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 
 public class ZenModeSettings extends ZenModeSettingsBase {
-
-    public static final String KEY_VISUAL_SETTINGS = "visual_interruptions_settings";
-
-    private static final String KEY_PRIORITY_SETTINGS = "priority_settings";
-    private static final String KEY_AUTOMATIC_RULES = "automatic_rules";
-
-    static final ManagedServiceSettings.Config CONFIG = getConditionProviderConfig();
-
-    private PreferenceCategory mAutomaticRules;
-    private Preference mPrioritySettings;
-    private Preference mVisualSettings;
-    private Policy mPolicy;
-    private SummaryBuilder mSummaryBuilder;
-    private PackageManager mPm;
-    private ZenServiceListing mServiceListing;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        addPreferencesFromResource(R.xml.zen_mode_settings);
-        final PreferenceScreen root = getPreferenceScreen();
-
-        mAutomaticRules = (PreferenceCategory) root.findPreference(KEY_AUTOMATIC_RULES);
-        mPrioritySettings = root.findPreference(KEY_PRIORITY_SETTINGS);
-        mVisualSettings = root.findPreference(KEY_VISUAL_SETTINGS);
-        mPolicy = NotificationManager.from(mContext).getNotificationPolicy();
-        mSummaryBuilder = new SummaryBuilder(getContext());
-        mPm = mContext.getPackageManager();
-        mServiceListing = new ZenServiceListing(mContext, CONFIG);
-        mServiceListing.reloadApprovedServices();
-    }
-
     @Override
     public void onResume() {
         super.onResume();
-        if (isUiRestricted()) {
-            return;
-        }
-        updateControls();
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.zen_mode_settings;
     }
 
     @Override
@@ -102,246 +67,28 @@ public class ZenModeSettings extends ZenModeSettingsBase {
     }
 
     @Override
-    protected void onZenModeChanged() {
-        updateControls();
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        return buildPreferenceControllers(context, getLifecycle(), getFragmentManager());
     }
 
     @Override
-    protected void onZenModeConfigChanged() {
-        mPolicy = NotificationManager.from(mContext).getNotificationPolicy();
-        updateControls();
-    }
-
-    private void updateControls() {
-        updatePrioritySettingsSummary();
-        updateVisualSettingsSummary();
-        updateAutomaticRules();
-    }
-
-    private void updatePrioritySettingsSummary() {
-        mPrioritySettings.setSummary(mSummaryBuilder.getPrioritySettingSummary(mPolicy));
-    }
-
-    private void updateVisualSettingsSummary() {
-        mVisualSettings.setSummary(mSummaryBuilder.getVisualSettingSummary(mPolicy));
-    }
-
-    private void updateAutomaticRules() {
-        mAutomaticRules.removeAll();
-        final Map.Entry<String,AutomaticZenRule>[] sortedRules = sortedRules();
-        for (Map.Entry<String,AutomaticZenRule> sortedRule : sortedRules) {
-            ZenRulePreference pref = new ZenRulePreference(getPrefContext(), sortedRule);
-            if (pref.appExists) {
-                mAutomaticRules.addPreference(pref);
-            }
-        }
-        final Preference p = new Preference(getPrefContext());
-        p.setIcon(R.drawable.ic_menu_add);
-        p.setTitle(R.string.zen_mode_add_rule);
-        p.setPersistent(false);
-        p.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                mMetricsFeatureProvider.action(mContext, MetricsEvent.ACTION_ZEN_ADD_RULE);
-                showAddRuleDialog();
-                return true;
-            }
-        });
-        mAutomaticRules.addPreference(p);
-    }
-
-    private void showAddRuleDialog() {
-        new ZenRuleSelectionDialog(mContext, mServiceListing) {
-            @Override
-            public void onSystemRuleSelected(ZenRuleInfo ri) {
-                showNameRuleDialog(ri);
-            }
-
-            @Override
-            public void onExternalRuleSelected(ZenRuleInfo ri) {
-                Intent intent = new Intent().setComponent(ri.configurationActivity);
-                startActivity(intent);
-            }
-        }.show();
-    }
-
-    private String computeRuleSummary(AutomaticZenRule rule, boolean isSystemRule,
-            CharSequence providerLabel) {
-        final String mode = computeZenModeCaption(getResources(), rule.getInterruptionFilter());
-        final String ruleState = (rule == null || !rule.isEnabled())
-                ? getString(R.string.switch_off_text)
-                : getString(R.string.zen_mode_rule_summary_enabled_combination, mode);
-
-        return ruleState;
-    }
-
-    private static ManagedServiceSettings.Config getConditionProviderConfig() {
-        final ManagedServiceSettings.Config c = new ManagedServiceSettings.Config();
-        c.tag = TAG;
-        c.intentAction = ConditionProviderService.SERVICE_INTERFACE;
-        c.permission = android.Manifest.permission.BIND_CONDITION_PROVIDER_SERVICE;
-        c.noun = "condition provider";
-        return c;
-    }
-
-    private static String computeZenModeCaption(Resources res, int zenMode) {
-        switch (zenMode) {
-            case NotificationManager.INTERRUPTION_FILTER_ALARMS:
-                return res.getString(R.string.zen_mode_option_alarms);
-            case NotificationManager.INTERRUPTION_FILTER_PRIORITY:
-                return res.getString(R.string.zen_mode_option_important_interruptions);
-            case NotificationManager.INTERRUPTION_FILTER_NONE:
-                return res.getString(R.string.zen_mode_option_no_interruptions);
-            default:
-                return null;
-        }
-    }
-
-    public static ZenRuleInfo getRuleInfo(PackageManager pm, ServiceInfo si) {
-        if (si == null || si.metaData == null) return null;
-        final String ruleType = si.metaData.getString(ConditionProviderService.META_DATA_RULE_TYPE);
-        final ComponentName configurationActivity = getSettingsActivity(si);
-        if (ruleType != null && !ruleType.trim().isEmpty() && configurationActivity != null) {
-            final ZenRuleInfo ri = new ZenRuleInfo();
-            ri.serviceComponent = new ComponentName(si.packageName, si.name);
-            ri.settingsAction = Settings.ACTION_ZEN_MODE_EXTERNAL_RULE_SETTINGS;
-            ri.title = ruleType;
-            ri.packageName = si.packageName;
-            ri.configurationActivity = getSettingsActivity(si);
-            ri.packageLabel = si.applicationInfo.loadLabel(pm);
-            ri.ruleInstanceLimit =
-                    si.metaData.getInt(ConditionProviderService.META_DATA_RULE_INSTANCE_LIMIT, -1);
-            return ri;
-        }
-        return null;
-    }
-
-    private static ComponentName getSettingsActivity(ServiceInfo si) {
-        if (si == null || si.metaData == null) return null;
-        final String configurationActivity =
-                si.metaData.getString(ConditionProviderService.META_DATA_CONFIGURATION_ACTIVITY);
-        if (configurationActivity != null) {
-            return ComponentName.unflattenFromString(configurationActivity);
-        }
-        return null;
-    }
-
-    private void showNameRuleDialog(final ZenRuleInfo ri) {
-        new ZenRuleNameDialog(mContext, null) {
-            @Override
-            public void onOk(String ruleName) {
-                mMetricsFeatureProvider.action(mContext, MetricsEvent.ACTION_ZEN_ADD_RULE_OK);
-                AutomaticZenRule rule = new AutomaticZenRule(ruleName, ri.serviceComponent,
-                        ri.defaultConditionId, NotificationManager.INTERRUPTION_FILTER_PRIORITY,
-                        true);
-                String savedRuleId = addZenRule(rule);
-                if (savedRuleId != null) {
-                    startActivity(getRuleIntent(ri.settingsAction, null, savedRuleId));
-                }
-            }
-        }.show();
-    }
-
-    private void showDeleteRuleDialog(final String ruleId, final CharSequence ruleName) {
-        new AlertDialog.Builder(mContext)
-                .setMessage(getString(R.string.zen_mode_delete_rule_confirmation, ruleName))
-                .setNegativeButton(R.string.cancel, null)
-                .setPositiveButton(R.string.zen_mode_delete_rule_button,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                mMetricsFeatureProvider.action(mContext,
-                                        MetricsEvent.ACTION_ZEN_DELETE_RULE_OK);
-                                removeZenRule(ruleId);
-                            }
-                        })
-                .show();
-    }
-
-    private Intent getRuleIntent(String settingsAction, ComponentName configurationActivity,
-            String ruleId) {
-        Intent intent = new Intent()
-                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                .putExtra(ConditionProviderService.EXTRA_RULE_ID, ruleId);
-        if (configurationActivity != null) {
-            intent.setComponent(configurationActivity);
-        } else {
-            intent.setAction(settingsAction);
-        }
-        return intent;
-    }
-
-    private Map.Entry<String,AutomaticZenRule>[] sortedRules() {
-        final Map.Entry<String,AutomaticZenRule>[] rt =
-                mRules.toArray(new Map.Entry[mRules.size()]);
-        Arrays.sort(rt, RULE_COMPARATOR);
-        return rt;
-    }
-
-    @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_uri_interruptions;
     }
 
-    private class ZenRulePreference extends TwoTargetPreference {
-        final CharSequence mName;
-        final String mId;
-        final boolean appExists;
-
-        public ZenRulePreference(Context context,
-                final Map.Entry<String, AutomaticZenRule> ruleEntry) {
-            super(context);
-
-            final AutomaticZenRule rule = ruleEntry.getValue();
-            mName = rule.getName();
-            mId = ruleEntry.getKey();
-
-            final boolean isSchedule = ZenModeConfig.isValidScheduleConditionId(
-                    rule.getConditionId());
-            final boolean isEvent = ZenModeConfig.isValidEventConditionId(rule.getConditionId());
-            final boolean isSystemRule = isSchedule || isEvent;
-
-            try {
-                ApplicationInfo info = mPm.getApplicationInfo(rule.getOwner().getPackageName(), 0);
-                setSummary(computeRuleSummary(rule, isSystemRule, info.loadLabel(mPm)));
-            } catch (PackageManager.NameNotFoundException e) {
-                appExists = false;
-                return;
-            }
-
-            appExists = true;
-            setTitle(rule.getName());
-            setPersistent(false);
-
-            final String action = isSchedule ? ZenModeScheduleRuleSettings.ACTION
-                    : isEvent ? ZenModeEventRuleSettings.ACTION : "";
-            ServiceInfo si = mServiceListing.findService(rule.getOwner());
-            ComponentName settingsActivity = getSettingsActivity(si);
-            setIntent(getRuleIntent(action, settingsActivity, mId));
-            setSelectable(settingsActivity != null || isSystemRule);
-        }
-
-        @Override
-        protected int getSecondTargetResId() {
-            return R.layout.zen_rule_widget;
-        }
-
-        @Override
-        public void onBindViewHolder(PreferenceViewHolder view) {
-            super.onBindViewHolder(view);
-
-            View v = view.findViewById(R.id.delete_zen_rule);
-            if (v != null) {
-                v.setOnClickListener(mDeleteListener);
-            }
-        }
-
-        private final View.OnClickListener mDeleteListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDeleteRuleDialog(mId, mName);
-            }
-        };
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
+            Lifecycle lifecycle, FragmentManager fragmentManager) {
+        List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new ZenModeBehaviorMsgEventReminderPreferenceController(context, lifecycle));
+        controllers.add(new ZenModeBehaviorSoundPreferenceController(context, lifecycle));
+        controllers.add(new ZenModeBehaviorCallsPreferenceController(context, lifecycle));
+        controllers.add(new ZenModeBlockedEffectsPreferenceController(context, lifecycle));
+        controllers.add(new ZenModeDurationPreferenceController(context, lifecycle,
+                fragmentManager));
+        controllers.add(new ZenModeAutomationPreferenceController(context));
+        controllers.add(new ZenModeButtonPreferenceController(context, lifecycle, fragmentManager));
+        controllers.add(new ZenModeSettingsFooterPreferenceController(context, lifecycle));
+        return controllers;
     }
 
     public static class SummaryBuilder {
@@ -352,42 +99,128 @@ public class ZenModeSettings extends ZenModeSettingsBase {
             mContext = context;
         }
 
-        String getPrioritySettingSummary(Policy policy) {
-            String s = mContext.getString(R.string.zen_mode_alarms);
-            s = prepend(s, isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_EVENTS),
-                    R.string.zen_mode_events);
-            s = prepend(s, isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_REMINDERS),
-                R.string.zen_mode_reminders);
-            if (isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_MESSAGES)) {
-                if (policy.priorityMessageSenders == Policy.PRIORITY_SENDERS_ANY) {
-                    s = append(s, true, R.string.zen_mode_all_messages);
-                } else {
-                    s = append(s, true, R.string.zen_mode_selected_messages);
-                }
+        // these should match NotificationManager.Policy#ALL_PRIORITY_CATEGORIES
+        private static final int[] ALL_PRIORITY_CATEGORIES = {
+                PRIORITY_CATEGORY_ALARMS,
+                PRIORITY_CATEGORY_MEDIA,
+                PRIORITY_CATEGORY_SYSTEM,
+                PRIORITY_CATEGORY_MESSAGES,
+                PRIORITY_CATEGORY_EVENTS,
+                PRIORITY_CATEGORY_REMINDERS,
+                PRIORITY_CATEGORY_CALLS,
+                PRIORITY_CATEGORY_REPEAT_CALLERS,
+        };
+
+        String getSoundSettingSummary(Policy policy) {
+            List<String> enabledCategories = getEnabledCategories(policy,
+                    category -> PRIORITY_CATEGORY_ALARMS == category
+                            || PRIORITY_CATEGORY_MEDIA == category
+                            || PRIORITY_CATEGORY_SYSTEM == category);
+            int numCategories = enabledCategories.size();
+            if (numCategories == 0) {
+                return mContext.getString(R.string.zen_sound_all_muted);
+            } else if (numCategories == 1) {
+                return mContext.getString(R.string.zen_sound_one_allowed,
+                        enabledCategories.get(0).toLowerCase());
+            } else if (numCategories == 2) {
+                return mContext.getString(R.string.zen_sound_two_allowed,
+                        enabledCategories.get(0).toLowerCase(),
+                        enabledCategories.get(1).toLowerCase());
+            } else if (numCategories == 3) {
+                return mContext.getString(R.string.zen_sound_three_allowed,
+                        enabledCategories.get(0).toLowerCase(),
+                        enabledCategories.get(1).toLowerCase(),
+                        enabledCategories.get(2).toLowerCase());
+            } else {
+                return mContext.getString(R.string.zen_sound_none_muted);
             }
-            if (isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_CALLS)) {
-                if (policy.priorityCallSenders == Policy.PRIORITY_SENDERS_ANY) {
-                    s = append(s, true, R.string.zen_mode_all_callers);
-                } else {
-                    s = append(s, true, R.string.zen_mode_selected_callers);
-                }
-            } else if (isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_REPEAT_CALLERS)) {
-                s = append(s, true, R.string.zen_mode_repeat_callers);
-            }
-            return s;
         }
 
-        String getVisualSettingSummary(Policy policy) {
-            String s = mContext.getString(R.string.zen_mode_all_visual_interruptions);
-            if (isEffectSuppressed(policy, Policy.SUPPRESSED_EFFECT_SCREEN_ON)
-                && isEffectSuppressed(policy, Policy.SUPPRESSED_EFFECT_SCREEN_OFF)) {
-                s = mContext.getString(R.string.zen_mode_no_visual_interruptions);
-            } else if (isEffectSuppressed(policy, Policy.SUPPRESSED_EFFECT_SCREEN_ON)) {
-                s = mContext.getString(R.string.zen_mode_screen_on_visual_interruptions);
-            } else if (isEffectSuppressed(policy, Policy.SUPPRESSED_EFFECT_SCREEN_OFF)) {
-                s = mContext.getString(R.string.zen_mode_screen_off_visual_interruptions);
+        String getCallsSettingSummary(Policy policy) {
+            List<String> enabledCategories = getEnabledCategories(policy,
+                    category -> PRIORITY_CATEGORY_CALLS == category
+                            || PRIORITY_CATEGORY_REPEAT_CALLERS == category);
+            int numCategories = enabledCategories.size();
+            if (numCategories == 0) {
+                return mContext.getString(R.string.zen_mode_no_exceptions);
+            } else if (numCategories == 1) {
+                return mContext.getString(R.string.zen_mode_calls_summary_one,
+                        enabledCategories.get(0).toLowerCase());
+            } else {
+                return mContext.getString(R.string.zen_mode_calls_summary_two,
+                        enabledCategories.get(0).toLowerCase(),
+                        enabledCategories.get(1).toLowerCase());
             }
-            return s;
+        }
+
+        String getMsgEventReminderSettingSummary(Policy policy) {
+            List<String> enabledCategories = getEnabledCategories(policy,
+                    category -> PRIORITY_CATEGORY_EVENTS == category
+                            || PRIORITY_CATEGORY_REMINDERS == category
+                            || PRIORITY_CATEGORY_MESSAGES == category);
+            int numCategories = enabledCategories.size();
+            if (numCategories == 0) {
+                return mContext.getString(R.string.zen_mode_no_exceptions);
+            } else if (numCategories == 1) {
+                return enabledCategories.get(0);
+            } else if (numCategories == 2) {
+                return mContext.getString(R.string.join_two_items, enabledCategories.get(0),
+                        enabledCategories.get(1).toLowerCase());
+            } else if (numCategories == 3){
+                final List<String> summaries = new ArrayList<>();
+                summaries.add(enabledCategories.get(0));
+                summaries.add(enabledCategories.get(1).toLowerCase());
+                summaries.add(enabledCategories.get(2).toLowerCase());
+
+                return ListFormatter.getInstance().format(summaries);
+            } else {
+                final List<String> summaries = new ArrayList<>();
+                summaries.add(enabledCategories.get(0));
+                summaries.add(enabledCategories.get(1).toLowerCase());
+                summaries.add(enabledCategories.get(2).toLowerCase());
+                summaries.add(mContext.getString(R.string.zen_mode_other_options));
+
+                return ListFormatter.getInstance().format(summaries);
+            }
+        }
+
+        String getSoundSummary() {
+            int zenMode = NotificationManager.from(mContext).getZenMode();
+
+            if (zenMode != Settings.Global.ZEN_MODE_OFF) {
+                ZenModeConfig config = NotificationManager.from(mContext).getZenModeConfig();
+                String description = ZenModeConfig.getDescription(mContext, true, config, false);
+
+                if (description == null) {
+                    return mContext.getString(R.string.zen_mode_sound_summary_on);
+                } else {
+                    return mContext.getString(R.string.zen_mode_sound_summary_on_with_info,
+                            description);
+                }
+            } else {
+                final int count = getEnabledAutomaticRulesCount();
+                if (count > 0) {
+                    return mContext.getString(R.string.zen_mode_sound_summary_off_with_info,
+                            mContext.getResources().getQuantityString(
+                                    R.plurals.zen_mode_sound_summary_summary_off_info,
+                                    count, count));
+                }
+
+                return mContext.getString(R.string.zen_mode_sound_summary_off);
+            }
+        }
+
+        String getBlockedEffectsSummary(Policy policy) {
+            if (policy.suppressedVisualEffects == 0) {
+                return mContext.getResources().getString(
+                        R.string.zen_mode_restrict_notifications_summary_muted);
+            } else if (Policy.areAllVisualEffectsSuppressed(policy.suppressedVisualEffects)) {
+                return mContext.getResources().getString(
+                        R.string.zen_mode_restrict_notifications_summary_hidden);
+            } else {
+                return mContext.getResources().getString(
+                        R.string.zen_mode_restrict_notifications_summary_custom);
+            }
         }
 
         String getAutomaticRulesSummary() {
@@ -413,54 +246,85 @@ public class ZenModeSettings extends ZenModeSettingsBase {
             return count;
         }
 
-        @VisibleForTesting
-        String append(String s, boolean condition, int resId) {
-            if (condition) {
-                return mContext.getString(
-                    R.string.join_many_items_middle, s, mContext.getString(resId));
+        private List<String> getEnabledCategories(Policy policy,
+                Predicate<Integer> filteredCategories) {
+            List<String> enabledCategories = new ArrayList<>();
+            for (int category : ALL_PRIORITY_CATEGORIES) {
+                if (filteredCategories.test(category) && isCategoryEnabled(policy, category)) {
+                    if (category == PRIORITY_CATEGORY_ALARMS) {
+                        enabledCategories.add(mContext.getString(R.string.zen_mode_alarms));
+                    } else if (category == PRIORITY_CATEGORY_MEDIA) {
+                        enabledCategories.add(mContext.getString(
+                                R.string.zen_mode_media));
+                    } else if (category == PRIORITY_CATEGORY_SYSTEM) {
+                        enabledCategories.add(mContext.getString(
+                                R.string.zen_mode_system));
+                    } else if (category == Policy.PRIORITY_CATEGORY_MESSAGES) {
+                        if (policy.priorityMessageSenders == Policy.PRIORITY_SENDERS_ANY) {
+                            enabledCategories.add(mContext.getString(
+                                    R.string.zen_mode_all_messages));
+                        } else {
+                            enabledCategories.add(mContext.getString(
+                                    R.string.zen_mode_selected_messages));
+                        }
+                    } else if (category == Policy.PRIORITY_CATEGORY_EVENTS) {
+                        enabledCategories.add(mContext.getString(R.string.zen_mode_events));
+                    } else if (category == Policy.PRIORITY_CATEGORY_REMINDERS) {
+                        enabledCategories.add(mContext.getString(R.string.zen_mode_reminders));
+                    } else if (category == Policy.PRIORITY_CATEGORY_CALLS) {
+                        if (policy.priorityCallSenders == Policy.PRIORITY_SENDERS_ANY) {
+                            enabledCategories.add(mContext.getString(
+                                    R.string.zen_mode_all_callers));
+                        } else if (policy.priorityCallSenders == Policy.PRIORITY_SENDERS_CONTACTS){
+                            enabledCategories.add(mContext.getString(
+                                    R.string.zen_mode_contacts_callers));
+                        } else {
+                            enabledCategories.add(mContext.getString(
+                                    R.string.zen_mode_starred_callers));
+                        }
+                    } else if (category == Policy.PRIORITY_CATEGORY_REPEAT_CALLERS) {
+                        if (!enabledCategories.contains(mContext.getString(
+                                R.string.zen_mode_all_callers))) {
+                            enabledCategories.add(mContext.getString(
+                                    R.string.zen_mode_repeat_callers));
+                        }
+                    }
+                }
             }
-            return s;
-        }
-
-        @VisibleForTesting
-        String prepend(String s, boolean condition, int resId) {
-            if (condition) {
-                return mContext.getString(
-                        R.string.join_many_items_middle, mContext.getString(resId), s);
-            }
-            return s;
+            return enabledCategories;
         }
 
         private boolean isCategoryEnabled(Policy policy, int categoryType) {
             return (policy.priorityCategories & categoryType) != 0;
         }
-
-        private boolean isEffectSuppressed(Policy policy, int effect) {
-            return (policy.suppressedVisualEffects & effect) != 0;
-        }
     }
 
-    private static final Comparator<Map.Entry<String,AutomaticZenRule>> RULE_COMPARATOR =
-            new Comparator<Map.Entry<String,AutomaticZenRule>>() {
+    /**
+     * For Search.
+     */
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+
                 @Override
-                public int compare(Map.Entry<String,AutomaticZenRule> lhs,
-                        Map.Entry<String,AutomaticZenRule> rhs) {
-                    int byDate = Long.compare(lhs.getValue().getCreationTime(),
-                            rhs.getValue().getCreationTime());
-                    if (byDate != 0) {
-                        return byDate;
-                    } else {
-                        return key(lhs.getValue()).compareTo(key(rhs.getValue()));
-                    }
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.zen_mode_settings;
+                    return Arrays.asList(sir);
                 }
 
-                private String key(AutomaticZenRule rule) {
-                    final int type = ZenModeConfig.isValidScheduleConditionId(rule.getConditionId())
-                            ? 1
-                            : ZenModeConfig.isValidEventConditionId(rule.getConditionId())
-                                    ? 2
-                                    : 3;
-                    return type + rule.getName().toString();
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    List<String> keys = super.getNonIndexableKeys(context);
+                    keys.add(ZenModeDurationPreferenceController.KEY);
+                    keys.add(ZenModeButtonPreferenceController.KEY);
+                    return keys;
+                }
+
+                @Override
+                public List<AbstractPreferenceController> createPreferenceControllers(Context
+                        context) {
+                    return buildPreferenceControllers(context, null, null);
                 }
             };
 }

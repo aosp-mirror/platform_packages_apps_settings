@@ -51,7 +51,7 @@ public class ConfigureKeyGuardDialog extends InstrumentedDialogFragment
         return new AlertDialog.Builder(getActivity())
                 .setTitle(android.R.string.dialog_alert_title)
                 .setMessage(R.string.credentials_configure_lock_screen_hint)
-                .setPositiveButton(android.R.string.ok, this)
+                .setPositiveButton(R.string.credentials_configure_lock_screen_button, this)
                 .setNegativeButton(android.R.string.cancel, this)
                 .create();
     }

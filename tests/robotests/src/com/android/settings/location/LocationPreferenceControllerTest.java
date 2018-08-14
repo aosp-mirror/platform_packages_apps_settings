@@ -15,14 +15,15 @@
  */
 package com.android.settings.location;
 
-import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE;
+import static android.arch.lifecycle.Lifecycle.Event.ON_PAUSE;
+import static android.arch.lifecycle.Lifecycle.Event.ON_RESUME;
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -35,13 +36,10 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.display.AutoBrightnessPreferenceController;
 import com.android.settings.search.InlineListPayload;
 import com.android.settings.search.InlinePayload;
-import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.search.ResultPayload;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -53,16 +51,15 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class LocationPreferenceControllerTest {
     @Mock
     private Preference mPreference;
     @Mock
     private PreferenceScreen mScreen;
 
+    private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
     private LocationPreferenceController mController;
 
@@ -72,7 +69,8 @@ public class LocationPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mLifecycle = new Lifecycle();
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         mController = new LocationPreferenceController(mContext, mLifecycle);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
     }
@@ -99,64 +97,50 @@ public class LocationPreferenceControllerTest {
 
     @Test
     public void getLocationSummary_locationOff_shouldSetSummaryOff() {
-        Secure.putInt(mContext.getContentResolver(),
-                Secure.LOCATION_MODE, Secure.LOCATION_MODE_OFF);
+        final ContentResolver contentResolver = mContext.getContentResolver();
+        Secure.putInt(contentResolver, Secure.LOCATION_MODE, Secure.LOCATION_MODE_OFF);
 
-        assertThat(mController.getLocationSummary(mContext)).isEqualTo(
-                mContext.getString(R.string.location_off_summary));
+        final String locationSummary = mController.getLocationSummary(mContext);
+        assertThat(locationSummary).isEqualTo(mContext.getString(R.string.location_off_summary));
     }
 
     @Test
-    public void getLocationSummary_sensorsOnly_shouldSetSummarySensorsOnly() {
-        Secure.putInt(mContext.getContentResolver(),
-                Secure.LOCATION_MODE, Secure.LOCATION_MODE_SENSORS_ONLY);
+    public void getLocationSummary_sensorsOnly_shouldSetSummaryOn() {
+        final ContentResolver contentResolver = mContext.getContentResolver();
+        Secure.putInt(contentResolver, Secure.LOCATION_MODE, Secure.LOCATION_MODE_SENSORS_ONLY);
 
-        assertThat(mController.getLocationSummary(mContext)).isEqualTo(
-                mContext.getString(R.string.location_on_summary,
-                        mContext.getString(R.string.location_mode_sensors_only_title)));
+        final String locationSummary = mController.getLocationSummary(mContext);
+        assertThat(locationSummary).isEqualTo(mContext.getString(R.string.location_on_summary));
     }
 
     @Test
-    public void getLocationSummary_highAccuracy_shouldSetSummarHighAccuracy() {
-        Secure.putInt(mContext.getContentResolver(),
-                Secure.LOCATION_MODE, Secure.LOCATION_MODE_HIGH_ACCURACY);
+    public void getLocationSummary_highAccuracy_shouldSetSummaryOn() {
+        final ContentResolver contentResolver = mContext.getContentResolver();
+        Secure.putInt(contentResolver, Secure.LOCATION_MODE, Secure.LOCATION_MODE_HIGH_ACCURACY);
 
-        assertThat(mController.getLocationSummary(mContext)).isEqualTo(
-                mContext.getString(R.string.location_on_summary,
-                        mContext.getString(R.string.location_mode_high_accuracy_title)));
+        final String locationSummary = mController.getLocationSummary(mContext);
+        assertThat(locationSummary).isEqualTo(mContext.getString(R.string.location_on_summary));
     }
 
     @Test
-    public void getLocationSummary_batterySaving_shouldSetSummaryBatterySaving() {
-        Secure.putInt(mContext.getContentResolver(),
-                Secure.LOCATION_MODE, Secure.LOCATION_MODE_BATTERY_SAVING);
+    public void getLocationSummary_batterySaving_shouldSetSummaryOn() {
+        final ContentResolver contentResolver = mContext.getContentResolver();
+        Secure.putInt(contentResolver, Secure.LOCATION_MODE, Secure.LOCATION_MODE_BATTERY_SAVING);
 
-        assertThat(mController.getLocationSummary(mContext)).isEqualTo(
-                mContext.getString(R.string.location_on_summary,
-                        mContext.getString(R.string.location_mode_battery_saving_title)));
-    }
-
-    @Test
-    public void getLocationString_shouldCorrectString() {
-        assertThat(mController.getLocationString(Secure.LOCATION_MODE_OFF)).isEqualTo(
-                R.string.location_mode_location_off_title);
-        assertThat(mController.getLocationString(Secure.LOCATION_MODE_SENSORS_ONLY)).isEqualTo(
-                R.string.location_mode_sensors_only_title);
-        assertThat(mController.getLocationString(Secure.LOCATION_MODE_BATTERY_SAVING)).isEqualTo(
-                R.string.location_mode_battery_saving_title);
-        assertThat(mController.getLocationString(Secure.LOCATION_MODE_HIGH_ACCURACY)).isEqualTo(
-                R.string.location_mode_high_accuracy_title);
+        final String locationSummary = mController.getLocationSummary(mContext);
+        assertThat(locationSummary).isEqualTo(mContext.getString(R.string.location_on_summary));
     }
 
     @Test
     public void onResume_shouldRegisterObserver() {
-        mLifecycle.onResume();
+        mLifecycle.handleLifecycleEvent(ON_RESUME);
         verify(mContext).registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class));
     }
 
     @Test
     public void onPause_shouldUnregisterObserver() {
-        mLifecycle.onPause();
+        mLifecycle.handleLifecycleEvent(ON_RESUME);
+        mLifecycle.handleLifecycleEvent(ON_PAUSE);
         verify(mContext).unregisterReceiver(any(BroadcastReceiver.class));
     }
 
@@ -165,9 +149,8 @@ public class LocationPreferenceControllerTest {
         mController.displayPreference(mScreen);
         mController.onResume();
 
-        mController.mLocationProvidersChangedReceiver.onReceive(
-                mContext,
-                new Intent().setAction(LocationManager.PROVIDERS_CHANGED_ACTION));
+        mController.mLocationProvidersChangedReceiver
+            .onReceive(mContext, new Intent(LocationManager.PROVIDERS_CHANGED_ACTION));
 
         verify(mPreference).setSummary(any());
     }
@@ -183,13 +166,13 @@ public class LocationPreferenceControllerTest {
     @Test
     @Config(shadows = ShadowSecureSettings.class)
     public void testSetValue_updatesCorrectly() {
-        int newValue = Secure.LOCATION_MODE_BATTERY_SAVING;
+        final int newValue = Secure.LOCATION_MODE_BATTERY_SAVING;
         ContentResolver resolver = mContext.getContentResolver();
         Settings.Secure.putInt(resolver, Secure.LOCATION_MODE, Secure.LOCATION_MODE_OFF);
 
         ((InlinePayload) mController.getResultPayload()).setValue(mContext, newValue);
-        int updatedValue = Settings.Secure.getInt(resolver, Secure.LOCATION_MODE,
-                Secure.LOCATION_MODE_OFF);
+        final int updatedValue =
+            Settings.Secure.getInt(resolver, Secure.LOCATION_MODE, Secure.LOCATION_MODE_OFF);
 
         assertThat(updatedValue).isEqualTo(newValue);
     }

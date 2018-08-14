@@ -15,14 +15,20 @@
  */
 package com.android.settings.deviceinfo;
 
+import static com.android.settings.deviceinfo.DeviceModelPreferenceController.getDeviceModel;
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.app.Fragment;
 import android.content.Context;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,54 +36,53 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DeviceModelPreferenceControllerTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Fragment mFragment;
     @Mock
     private Preference mPreference;
     @Mock
     private PreferenceScreen mPreferenceScreen;
+
+    private Context mContext;
     private DeviceModelPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = RuntimeEnvironment.application;
         mController = new DeviceModelPreferenceController(mContext, mFragment);
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
-                .thenReturn(mPreference);
+            .thenReturn(mPreference);
         when(mPreference.getKey()).thenReturn(mController.getPreferenceKey());
     }
 
     @Test
-    public void isAlwaysAvailable() {
+    public void isAvailable_returnTrueIfVisible() {
         assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void isAvailable_returnFalseIfNotVisible() {
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
     public void displayPref_shouldSetSummary() {
         mController.displayPreference(mPreferenceScreen);
 
-        verify(mPreference).setSummary(anyString());
+        verify(mPreference).setSummary(mContext.getString(R.string.model_summary, getDeviceModel()));
     }
 
     @Test
     public void clickPreference_shouldLaunchHardwareInfoDialog() {
-        assertThat(mController.handlePreferenceTreeClick(mPreference))
-                .isTrue();
+        assertThat(mController.handlePreferenceTreeClick(mPreference)).isTrue();
         verify(mFragment).getFragmentManager();
         verify(mFragment.getFragmentManager().beginTransaction())
                 .add(any(HardwareInfoDialogFragment.class), eq(HardwareInfoDialogFragment.TAG));

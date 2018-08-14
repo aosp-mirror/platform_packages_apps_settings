@@ -16,44 +16,30 @@
 
 package com.android.settings.notification;
 
-import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
-import android.app.NotificationManager;
-import android.content.Intent;
-import android.net.Uri;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.Settings;
+import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
+import android.support.v7.preference.PreferenceGroup;
+import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
-import android.util.ArrayMap;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Switch;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
-import com.android.settings.Utils;
-import com.android.settings.applications.AppInfoBase;
-import com.android.settings.applications.LayoutPreference;
-import com.android.settings.notification.NotificationBackend.AppRow;
-import com.android.settings.widget.EntityHeaderController;
-import com.android.settings.widget.MasterSwitchPreference;
-import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.MasterCheckBoxPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
-import com.android.settingslib.widget.FooterPreference;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import static android.app.NotificationManager.IMPORTANCE_LOW;
-import static android.app.NotificationManager.IMPORTANCE_NONE;
-import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
 
 /** These settings are per app, so should not be returned in global search results. */
 public class AppNotificationSettings extends NotificationSettingsBase {
@@ -61,15 +47,34 @@ public class AppNotificationSettings extends NotificationSettingsBase {
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     private static String KEY_GENERAL_CATEGORY = "categories";
-    private static String KEY_DELETED = "deleted";
+    private static String KEY_ADVANCED_CATEGORY = "app_advanced";
+    private static String KEY_BADGE = "badge";
+    private static String KEY_APP_LINK = "app_link";
 
     private List<NotificationChannelGroup> mChannelGroupList;
-    private List<PreferenceCategory> mChannelGroups = new ArrayList();
-    private FooterPreference mDeletedChannels;
 
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.NOTIFICATION_APP_NOTIFICATION;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        final PreferenceScreen screen = getPreferenceScreen();
+        if (mShowLegacyChannelConfig && screen != null) {
+            // if showing legacy settings, pull advanced settings out of the advanced category
+            Preference badge = findPreference(KEY_BADGE);
+            Preference appLink = findPreference(KEY_APP_LINK);
+            removePreference(KEY_ADVANCED_CATEGORY);
+            if (badge != null) {
+                screen.addPreference(badge);
+
+            }
+            if (appLink != null) {
+                screen.addPreference(appLink);
+            }
+        }
     }
 
     @Override
@@ -82,31 +87,12 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             return;
         }
 
-        if (getPreferenceScreen() != null) {
-            getPreferenceScreen().removeAll();
-            mChannelGroups.clear();
-            mDeletedChannels = null;
-            mShowLegacyChannelConfig = false;
-        }
-
-        addPreferencesFromResource(R.xml.notification_settings);
-        getPreferenceScreen().setOrderingAsAdded(true);
-        setupBlock();
-        addHeaderPref();
-
-        mShowLegacyChannelConfig = mBackend.onlyHasDefaultChannel(mAppRow.pkg, mAppRow.uid);
-        if (mShowLegacyChannelConfig) {
-            mChannel = mBackend.getChannel(
-                    mAppRow.pkg, mAppRow.uid, NotificationChannel.DEFAULT_CHANNEL_ID);
-            populateDefaultChannelPrefs();
-        } else {
-            addPreferencesFromResource(R.xml.upgraded_app_notification_settings);
-            setupBadge();
+        if (!mShowLegacyChannelConfig) {
             // Load channel settings
             new AsyncTask<Void, Void, Void>() {
                 @Override
                 protected Void doInBackground(Void... unused) {
-                    mChannelGroupList = mBackend.getChannelGroups(mPkg, mUid).getList();
+                    mChannelGroupList = mBackend.getGroups(mPkg, mUid).getList();
                     Collections.sort(mChannelGroupList, mChannelGroupComparator);
                     return null;
                 }
@@ -116,260 +102,122 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                     if (getHost() == null) {
                         return;
                     }
-                    populateChannelList();
-                    addAppLinkPref();
+                    populateList();
                 }
             }.execute();
         }
 
-        updateDependents(mAppRow.banned);
+        for (NotificationPreferenceController controller : mControllers) {
+            controller.onResume(mAppRow, mChannel, mChannelGroup, mSuspendedAppsAdmin);
+            controller.displayPreference(getPreferenceScreen());
+        }
+        updatePreferenceStates();
     }
 
-    private void addHeaderPref() {
-        ArrayMap<String, AppRow> rows = new ArrayMap<>();
-        rows.put(mAppRow.pkg, mAppRow);
-        collectConfigActivities(rows);
-        final Activity activity = getActivity();
-        final Preference pref = EntityHeaderController
-                .newInstance(activity, this /* fragment */, null /* header */)
-                .setRecyclerView(getListView(), getLifecycle())
-                .setIcon(mAppRow.icon)
-                .setLabel(mAppRow.label)
-                .setPackageName(mAppRow.pkg)
-                .setUid(mAppRow.uid)
-                .setHasAppInfoLink(true)
-                .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
-                        EntityHeaderController.ActionType.ACTION_NOTIF_PREFERENCE)
-                .done(activity, getPrefContext());
-        pref.setKey(KEY_HEADER);
-        getPreferenceScreen().addPreference(pref);
+    @Override
+    protected String getLogTag() {
+        return TAG;
     }
 
-    private void populateChannelList() {
-        if (!mChannelGroups.isEmpty()) {
-            // If there's anything in mChannelGroups, we've called populateChannelList twice.
-            // Clear out existing channels and log.
-            Log.w(TAG, "Notification channel group posted twice to settings - old size " +
-                    mChannelGroups.size() + ", new size " + mChannelGroupList.size());
-            for (Preference p : mChannelGroups) {
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.app_notification_settings;
+    }
+
+    @Override
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        mControllers = new ArrayList<>();
+        mControllers.add(new HeaderPreferenceController(context, this));
+        mControllers.add(new BlockPreferenceController(context, mImportanceListener, mBackend));
+        mControllers.add(new BadgePreferenceController(context, mBackend));
+        mControllers.add(new AllowSoundPreferenceController(
+                context, mImportanceListener, mBackend));
+        mControllers.add(new ImportancePreferenceController(
+                context, mImportanceListener, mBackend));
+        mControllers.add(new SoundPreferenceController(context, this,
+                mImportanceListener, mBackend));
+        mControllers.add(new LightsPreferenceController(context, mBackend));
+        mControllers.add(new VibrationPreferenceController(context, mBackend));
+        mControllers.add(new VisibilityPreferenceController(context, new LockPatternUtils(context),
+                mBackend));
+        mControllers.add(new DndPreferenceController(context, mBackend));
+        mControllers.add(new AppLinkPreferenceController(context));
+        mControllers.add(new DescriptionPreferenceController(context));
+        mControllers.add(new NotificationsOffPreferenceController(context));
+        mControllers.add(new DeletedChannelsPreferenceController(context, mBackend));
+        return new ArrayList<>(mControllers);
+    }
+
+    private void populateList() {
+        if (!mDynamicPreferences.isEmpty()) {
+            for (Preference p : mDynamicPreferences) {
                 getPreferenceScreen().removePreference(p);
             }
+            mDynamicPreferences.clear();
         }
         if (mChannelGroupList.isEmpty()) {
             PreferenceCategory groupCategory = new PreferenceCategory(getPrefContext());
             groupCategory.setTitle(R.string.notification_channels);
             groupCategory.setKey(KEY_GENERAL_CATEGORY);
             getPreferenceScreen().addPreference(groupCategory);
-            mChannelGroups.add(groupCategory);
+            mDynamicPreferences.add(groupCategory);
 
             Preference empty = new Preference(getPrefContext());
             empty.setTitle(R.string.no_channels);
             empty.setEnabled(false);
             groupCategory.addPreference(empty);
         } else {
-            for (NotificationChannelGroup group : mChannelGroupList) {
-                PreferenceCategory groupCategory = new PreferenceCategory(getPrefContext());
-                if (group.getId() == null) {
-                    groupCategory.setTitle(mChannelGroupList.size() > 1
-                            ? R.string.notification_channels_other
-                            : R.string.notification_channels);
-                    groupCategory.setKey(KEY_GENERAL_CATEGORY);
-                } else {
-                    groupCategory.setTitle(group.getName());
-                    groupCategory.setKey(group.getId());
-                }
-                groupCategory.setOrderingAsAdded(true);
-                getPreferenceScreen().addPreference(groupCategory);
-                mChannelGroups.add(groupCategory);
+            populateGroupList();
+            mImportanceListener.onImportanceChanged();
+        }
+    }
 
+    private void populateGroupList() {
+        for (NotificationChannelGroup group : mChannelGroupList) {
+            PreferenceCategory groupCategory = new PreferenceCategory(getPrefContext());
+            groupCategory.setOrderingAsAdded(true);
+            getPreferenceScreen().addPreference(groupCategory);
+            mDynamicPreferences.add(groupCategory);
+            if (group.getId() == null) {
+                if (mChannelGroupList.size() > 1) {
+                    groupCategory.setTitle(R.string.notification_channels_other);
+                }
+                groupCategory.setKey(KEY_GENERAL_CATEGORY);
+            } else {
+                groupCategory.setTitle(group.getName());
+                groupCategory.setKey(group.getId());
+                populateGroupToggle(groupCategory, group);
+            }
+            if (!group.isBlocked()) {
                 final List<NotificationChannel> channels = group.getChannels();
                 Collections.sort(channels, mChannelComparator);
                 int N = channels.size();
                 for (int i = 0; i < N; i++) {
                     final NotificationChannel channel = channels.get(i);
-                    populateSingleChannelPrefs(groupCategory, channel);
+                    populateSingleChannelPrefs(groupCategory, channel, group.isBlocked());
                 }
-            }
-
-            int deletedChannelCount = mBackend.getDeletedChannelCount(mAppRow.pkg, mAppRow.uid);
-            if (deletedChannelCount > 0 &&
-                    getPreferenceScreen().findPreference(KEY_DELETED) == null) {
-                mDeletedChannels = new FooterPreference(getPrefContext());
-                mDeletedChannels.setSelectable(false);
-                mDeletedChannels.setTitle(getResources().getQuantityString(
-                        R.plurals.deleted_channels, deletedChannelCount, deletedChannelCount));
-                mDeletedChannels.setEnabled(false);
-                mDeletedChannels.setKey(KEY_DELETED);
-                mDeletedChannels.setOrder(ORDER_LAST);
-                getPreferenceScreen().addPreference(mDeletedChannels);
             }
         }
-
-        updateDependents(mAppRow.banned);
     }
 
-    private void populateSingleChannelPrefs(PreferenceCategory groupCategory,
-            final NotificationChannel channel) {
-        MasterSwitchPreference channelPref = new MasterSwitchPreference(
-                getPrefContext());
-        channelPref.setSwitchEnabled(mSuspendedAppsAdmin == null
-                && isChannelBlockable(mAppRow.systemApp, channel)
-                && isChannelConfigurable(channel));
-        channelPref.setKey(channel.getId());
-        channelPref.setTitle(channel.getName());
-        channelPref.setChecked(channel.getImportance() != IMPORTANCE_NONE);
-        channelPref.setSummary(getImportanceSummary(channel));
-        Bundle channelArgs = new Bundle();
-        channelArgs.putInt(AppInfoBase.ARG_PACKAGE_UID, mUid);
-        channelArgs.putString(AppInfoBase.ARG_PACKAGE_NAME, mPkg);
-        channelArgs.putString(Settings.EXTRA_CHANNEL_ID, channel.getId());
-        Intent channelIntent = Utils.onBuildStartFragmentIntent(getActivity(),
-                ChannelNotificationSettings.class.getName(),
-                channelArgs, null, R.string.notification_channel_title, null, false,
-                getMetricsCategory());
-        channelPref.setIntent(channelIntent);
+    protected void populateGroupToggle(final PreferenceGroup parent,
+            NotificationChannelGroup group) {
+        RestrictedSwitchPreference preference = new RestrictedSwitchPreference(getPrefContext());
+        preference.setTitle(R.string.notification_switch_label);
+        preference.setEnabled(mSuspendedAppsAdmin == null
+                && isChannelGroupBlockable(group));
+        preference.setChecked(!group.isBlocked());
+        preference.setOnPreferenceClickListener(preference1 -> {
+            final boolean allowGroup = ((SwitchPreference) preference1).isChecked();
+            group.setBlocked(!allowGroup);
+            mBackend.updateChannelGroup(mAppRow.pkg, mAppRow.uid, group);
 
-        channelPref.setOnPreferenceChangeListener(
-                new Preference.OnPreferenceChangeListener() {
-                    @Override
-                    public boolean onPreferenceChange(Preference preference,
-                            Object o) {
-                        boolean value = (Boolean) o;
-                        int importance = value ?  IMPORTANCE_LOW : IMPORTANCE_NONE;
-                        channel.setImportance(importance);
-                        channel.lockFields(
-                                NotificationChannel.USER_LOCKED_IMPORTANCE);
-                        channelPref.setSummary(getImportanceSummary(channel));
-                        mBackend.updateChannel(mPkg, mUid, channel);
-
-                        return true;
-                    }
-                });
-        groupCategory.addPreference(channelPref);
-    }
-
-    void setupBadge() {
-        mBadge = (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_BADGE);
-        mBadge.setDisabledByAdmin(mSuspendedAppsAdmin);
-        if (mChannel == null) {
-            mBadge.setChecked(mAppRow.showBadge);
-        } else {
-            mBadge.setChecked(mChannel.canShowBadge());
-        }
-        mBadge.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                final boolean value = (Boolean) newValue;
-                if (mChannel == null) {
-                    mBackend.setShowBadge(mPkg, mUid, value);
-                } else {
-                    mChannel.setShowBadge(value);
-                    mChannel.lockFields(NotificationChannel.USER_LOCKED_SHOW_BADGE);
-                    mBackend.updateChannel(mPkg, mUid, mChannel);
-                }
-                return true;
-            }
-        });
-    }
-
-    protected void setupBlock() {
-        View switchBarContainer = LayoutInflater.from(
-                getPrefContext()).inflate(R.layout.styled_switch_bar, null);
-        mSwitchBar = switchBarContainer.findViewById(R.id.switch_bar);
-        mSwitchBar.show();
-        mSwitchBar.setDisabledByAdmin(mSuspendedAppsAdmin);
-        mSwitchBar.setChecked(!mAppRow.banned);
-        mSwitchBar.addOnSwitchChangeListener(new SwitchBar.OnSwitchChangeListener() {
-            @Override
-            public void onSwitchChanged(Switch switchView, boolean isChecked) {
-                if (mShowLegacyChannelConfig && mChannel != null) {
-                    final int importance = isChecked ? IMPORTANCE_UNSPECIFIED : IMPORTANCE_NONE;
-                    mImportanceToggle.setChecked(importance == IMPORTANCE_UNSPECIFIED);
-                    mChannel.setImportance(importance);
-                    mChannel.lockFields(NotificationChannel.USER_LOCKED_IMPORTANCE);
-                    mBackend.updateChannel(mPkg, mUid, mChannel);
-                }
-                mBackend.setNotificationsEnabledForPackage(mPkgInfo.packageName, mUid, isChecked);
-                mAppRow.banned = true;
-                updateDependents(!isChecked);
-            }
+            onGroupBlockStateChanged(group);
+            return true;
         });
 
-        mBlockBar = new LayoutPreference(getPrefContext(), switchBarContainer);
-        mBlockBar.setOrder(ORDER_FIRST);
-        mBlockBar.setKey(KEY_BLOCK);
-        getPreferenceScreen().addPreference(mBlockBar);
-
-        if (mAppRow.systemApp && !mAppRow.banned) {
-            setVisible(mBlockBar, false);
-        }
-
-        setupBlockDesc(R.string.app_notifications_off_desc);
+        parent.addPreference(preference);
     }
-
-    protected void updateDependents(boolean banned) {
-        for (PreferenceCategory category : mChannelGroups) {
-            setVisible(category, !banned);
-        }
-        if (mDeletedChannels != null) {
-            setVisible(mDeletedChannels, !banned);
-        }
-        setVisible(mBlockedDesc, banned);
-        setVisible(mBadge, !banned);
-        if (mShowLegacyChannelConfig) {
-            setVisible(mImportanceToggle, !banned);
-            setVisible(mPriority, checkCanBeVisible(NotificationManager.IMPORTANCE_DEFAULT)
-                    || (checkCanBeVisible(NotificationManager.IMPORTANCE_LOW)
-                    && mDndVisualEffectsSuppressed));
-            setVisible(mVisibilityOverride, !banned &&
-                    checkCanBeVisible(NotificationManager.IMPORTANCE_LOW) && isLockScreenSecure());
-        }
-        if (mAppLink != null) {
-            setVisible(mAppLink, !banned);
-        }
-        if (mAppRow.systemApp && !mAppRow.banned) {
-            setVisible(mBlockBar, false);
-        }
-    }
-
-    private String getImportanceSummary(NotificationChannel channel) {
-        switch (channel.getImportance()) {
-            case NotificationManager.IMPORTANCE_UNSPECIFIED:
-                return getContext().getString(R.string.notification_importance_unspecified);
-            case NotificationManager.IMPORTANCE_NONE:
-                return getContext().getString(R.string.notification_toggle_off);
-            case NotificationManager.IMPORTANCE_MIN:
-                return getContext().getString(R.string.notification_importance_min);
-            case NotificationManager.IMPORTANCE_LOW:
-                return getContext().getString(R.string.notification_importance_low);
-            case NotificationManager.IMPORTANCE_DEFAULT:
-                if (hasValidSound(channel)) {
-                    return getContext().getString(R.string.notification_importance_default);
-                } else { // Silent
-                    return getContext().getString(R.string.notification_importance_low);
-                }
-            case NotificationManager.IMPORTANCE_HIGH:
-            case NotificationManager.IMPORTANCE_MAX:
-            default:
-                if (hasValidSound(channel)) {
-                    return getContext().getString(R.string.notification_importance_high);
-                } else { // Silent
-                    return getContext().getString(R.string.notification_importance_high_silent);
-                }
-        }
-    }
-
-    private Comparator<NotificationChannel> mChannelComparator =
-            new Comparator<NotificationChannel>() {
-
-        @Override
-        public int compare(NotificationChannel left, NotificationChannel right) {
-            if (left.isDeleted() != right.isDeleted()) {
-                return Boolean.compare(left.isDeleted(), right.isDeleted());
-            }
-            return left.getId().compareTo(right.getId());
-        }
-    };
 
     private Comparator<NotificationChannelGroup> mChannelGroupComparator =
             new Comparator<NotificationChannelGroup>() {
@@ -385,4 +233,37 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                     return left.getId().compareTo(right.getId());
                 }
             };
+
+    protected void onGroupBlockStateChanged(NotificationChannelGroup group) {
+        if (group == null) {
+            return;
+        }
+        PreferenceGroup groupGroup = (
+                PreferenceGroup) getPreferenceScreen().findPreference(group.getId());
+
+        if (groupGroup != null) {
+            if (group.isBlocked()) {
+                List<Preference> toRemove = new ArrayList<>();
+                int childCount = groupGroup.getPreferenceCount();
+                for (int i = 0; i < childCount; i++) {
+                    Preference pref = groupGroup.getPreference(i);
+                    if (pref instanceof MasterCheckBoxPreference) {
+                        toRemove.add(pref);
+                    }
+                }
+                for (Preference pref : toRemove) {
+                    groupGroup.removePreference(pref);
+                }
+            } else {
+                final List<NotificationChannel> channels = group.getChannels();
+                Collections.sort(channels, mChannelComparator);
+                int N = channels.size();
+                for (int i = 0; i < N; i++) {
+                    final NotificationChannel channel = channels.get(i);
+                    populateSingleChannelPrefs(groupGroup, channel, group.isBlocked());
+                }
+            }
+        }
+    }
+
 }

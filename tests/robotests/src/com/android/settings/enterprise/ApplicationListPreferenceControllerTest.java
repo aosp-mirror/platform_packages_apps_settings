@@ -16,17 +16,29 @@
 
 package com.android.settings.enterprise;
 
+import static com.android.settings.testutils.ApplicationTestUtils.buildInfo;
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Answers.RETURNS_DEEP_STUBS;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
+import android.os.UserManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.UserAppInfo;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,8 +46,7 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,18 +54,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static com.android.settings.testutils.ApplicationTestUtils.buildInfo;
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Answers.RETURNS_DEEP_STUBS;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ApplicationListPreferenceControllerTest {
 
     private static final int MAIN_USER_ID = 0;
@@ -74,6 +74,8 @@ public class ApplicationListPreferenceControllerTest {
     private PackageManager mPackageManager;
     @Mock(answer = RETURNS_DEEP_STUBS)
     private SettingsPreferenceFragment mFragment;
+    @Mock
+    private UserManager mUserManager;
 
     private Context mContext;
     private ApplicationListPreferenceController mController;
@@ -81,8 +83,8 @@ public class ApplicationListPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        final ShadowApplication shadowContext = ShadowApplication.getInstance();
-        mContext = shadowContext.getApplicationContext();
+        mContext = spy(RuntimeEnvironment.application);
+        doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
         when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
         when(mFragment.getPreferenceManager().getContext()).thenReturn(mContext);
         when(mPackageManager.getText(eq(APP_1), anyInt(), any())).thenReturn(APP_1);
@@ -120,7 +122,7 @@ public class ApplicationListPreferenceControllerTest {
             implements ApplicationListPreferenceController.ApplicationListBuilder {
         @Override
         public void buildApplicationList(Context context,
-                                         ApplicationFeatureProvider.ListOfAppsCallback callback) {
+                ApplicationFeatureProvider.ListOfAppsCallback callback) {
             final List<UserAppInfo> apps = new ArrayList<>();
             final UserInfo user = new UserInfo(MAIN_USER_ID, "main", UserInfo.FLAG_ADMIN);
             apps.add(new UserAppInfo(user, buildInfo(MAIN_USER_APP_UID, APP_1, 0, 0)));

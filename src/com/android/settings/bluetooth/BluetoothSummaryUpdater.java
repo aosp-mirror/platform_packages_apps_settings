@@ -81,6 +81,10 @@ public final class BluetoothSummaryUpdater extends SummaryUpdater implements Blu
     }
 
     @Override
+    public void onAudioModeChanged() {
+    }
+
+    @Override
     public void register(boolean listening) {
         if (mBluetoothAdapter == null) {
             return;

@@ -168,7 +168,12 @@ public class WifiP2pSettings extends DashboardFragment
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    public int getHelpResource() {
+        return R.string.help_url_wifi_p2p;
+    }
+
+    @Override
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         mPersistentCategoryController =
                 new P2pPersistentCategoryPreferenceController(context);

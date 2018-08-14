@@ -23,6 +23,8 @@ import android.telecom.TelecomManager;
 import android.text.TextUtils;
 
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.R;
+import com.android.settingslib.applications.DefaultAppInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,13 +46,19 @@ public class DefaultPhonePicker extends DefaultAppPickerFragment {
     }
 
     @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.default_phone_settings;
+    }
+
+    @Override
     protected List<DefaultAppInfo> getCandidates() {
         final List<DefaultAppInfo> candidates = new ArrayList<>();
         final List<String> dialerPackages =
                 DefaultDialerManager.getInstalledDialerApplications(getContext(), mUserId);
+        final Context context = getContext();
         for (String packageName : dialerPackages) {
             try {
-                candidates.add(new DefaultAppInfo(mPm,
+                candidates.add(new DefaultAppInfo(context, mPm,
                         mPm.getApplicationInfoAsUser(packageName, 0, mUserId)));
             } catch (PackageManager.NameNotFoundException e) {
                 // Skip unknown packages.

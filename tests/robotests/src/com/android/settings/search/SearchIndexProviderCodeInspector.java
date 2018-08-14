@@ -18,12 +18,15 @@ package com.android.settings.search;
 
 import static com.google.common.truth.Truth.assertWithMessage;
 
+import android.provider.SearchIndexableResource;
 import android.util.ArraySet;
 import android.util.Log;
 
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.codeinspection.CodeInspector;
 import com.android.settings.dashboard.DashboardFragmentSearchIndexProviderInspector;
+
+import org.robolectric.RuntimeEnvironment;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -40,15 +43,18 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
             "SettingsPreferenceFragment should implement Indexable, but these do not:\n";
     private static final String NOT_CONTAINING_PROVIDER_OBJECT_ERROR =
             "Indexable should have public field "
-                    + DatabaseIndexingManager.FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER
+                    + DatabaseIndexingUtils.FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER
                     + " but these are not:\n";
     private static final String NOT_SHARING_PREF_CONTROLLERS_BETWEEN_FRAG_AND_PROVIDER =
             "DashboardFragment should share pref controllers with its SearchIndexProvider, but "
                     + " these are not: \n";
     private static final String NOT_IN_INDEXABLE_PROVIDER_REGISTRY =
-            "Class containing " + DatabaseIndexingManager.FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER
+            "Class containing " + DatabaseIndexingUtils.FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER
                     + " must be added to " + SearchIndexableResources.class.getName()
                     + " but these are not: \n";
+    private static final String NOT_PROVIDING_VALID_RESOURCE_ERROR =
+            "SearchIndexableProvider must either provide no resource to index, or valid ones. "
+            + "But the followings contain resource with xml id = 0\n";
 
     private final List<String> notImplementingIndexableGrandfatherList;
     private final List<String> notImplementingIndexProviderGrandfatherList;
@@ -77,6 +83,7 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
         final Set<String> notImplementingIndexProvider = new ArraySet<>();
         final Set<String> notInSearchProviderRegistry = new ArraySet<>();
         final Set<String> notSharingPreferenceControllers = new ArraySet<>();
+        final Set<String> notProvidingValidResource = new ArraySet<>();
 
         for (Class clazz : mClasses) {
             if (!isConcreteSettingsClass(clazz)) {
@@ -114,11 +121,15 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
                 continue;
             }
             // Must be in SearchProviderRegistry
-            if (SearchIndexableResources.getResourceByName(className) == null) {
+            SearchFeatureProvider provider = new SearchFeatureProviderImpl();
+            if (!provider.getSearchIndexableResources().getProviderValues().contains(clazz)) {
                 if (!notInSearchIndexableRegistryGrandfatherList.remove(className)) {
                     notInSearchProviderRegistry.add(className);
                 }
-                continue;
+            }
+            // Search provider must either don't provider resource xml, or provide valid ones.
+            if (!hasValidResourceFromProvider(clazz)) {
+                notProvidingValidResource.add(className);
             }
         }
 
@@ -132,6 +143,8 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
                 notSharingPreferenceControllers);
         final String notInProviderRegistryError =
                 buildErrorMessage(NOT_IN_INDEXABLE_PROVIDER_REGISTRY, notInSearchProviderRegistry);
+        final String notProvidingValidResourceError = buildErrorMessage(
+                NOT_PROVIDING_VALID_RESOURCE_ERROR, notProvidingValidResource);
         assertWithMessage(indexableError)
                 .that(notImplementingIndexable)
                 .isEmpty();
@@ -144,12 +157,24 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
         assertWithMessage(notInProviderRegistryError)
                 .that(notInSearchProviderRegistry)
                 .isEmpty();
+        assertWithMessage(notProvidingValidResourceError)
+                .that(notProvidingValidResource)
+                .isEmpty();
+        assertNoObsoleteInGrandfatherList("grandfather_not_implementing_indexable",
+                notImplementingIndexableGrandfatherList);
+        assertNoObsoleteInGrandfatherList("grandfather_not_implementing_index_provider",
+                notImplementingIndexProviderGrandfatherList);
+        assertNoObsoleteInGrandfatherList("grandfather_not_in_search_index_provider_registry",
+                notInSearchIndexableRegistryGrandfatherList);
+        assertNoObsoleteInGrandfatherList(
+                "grandfather_not_sharing_pref_controllers_with_search_provider",
+                notSharingPrefControllersGrandfatherList);
     }
 
     private boolean hasSearchIndexProvider(Class clazz) {
         try {
             final Field f = clazz.getField(
-                    DatabaseIndexingManager.FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER);
+                    DatabaseIndexingUtils.FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER);
             return f != null;
         } catch (NoClassDefFoundError e) {
             // Cannot find class def, ignore
@@ -158,6 +183,28 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
             Log.e(TAG, "error fetching search provider from class " + clazz.getName());
             return false;
         }
+    }
+
+    private boolean hasValidResourceFromProvider(Class clazz) {
+        try {
+            final Indexable.SearchIndexProvider provider =
+                    DatabaseIndexingUtils.getSearchIndexProvider(clazz);
+            final List<SearchIndexableResource> resources = provider.getXmlResourcesToIndex(
+                    RuntimeEnvironment.application, true /* enabled */);
+            if (resources == null) {
+                // No resource, that's fine.
+                return true;
+            }
+            for (SearchIndexableResource res : resources) {
+                if (res.xmlResId == 0) {
+                    // Invalid resource
+                    return false;
+                }
+            }
+        } catch (Exception e) {
+            // Ignore.
+        }
+        return true;
     }
 
     private String buildErrorMessage(String errorSummary, Set<String> errorClasses) {

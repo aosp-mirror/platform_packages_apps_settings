@@ -18,6 +18,7 @@ package com.android.settings.deviceinfo;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.support.annotation.VisibleForTesting;
@@ -54,6 +55,10 @@ public class HardwareInfoDialogFragment extends InstrumentedDialogFragment {
         // Model
         setText(content, R.id.model_label, R.id.model_value,
                 DeviceModelPreferenceController.getDeviceModel());
+
+        // Serial number
+        setText(content, R.id.serial_number_label, R.id.serial_number_value, getSerialNumber());
+
         // Hardware rev
         setText(content, R.id.hardware_rev_label, R.id.hardware_rev_value,
                 SystemProperties.get("ro.boot.hardware.revision"));
@@ -61,7 +66,7 @@ public class HardwareInfoDialogFragment extends InstrumentedDialogFragment {
         return builder.setView(content).create();
     }
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     void setText(View content, int labelViewId, int valueViewId, String value) {
         if (content == null) {
             return;
@@ -76,5 +81,10 @@ public class HardwareInfoDialogFragment extends InstrumentedDialogFragment {
             labelView.setVisibility(View.GONE);
             valueView.setVisibility(View.GONE);
         }
+    }
+
+    @VisibleForTesting
+    String getSerialNumber() {
+        return Build.getSerial();
     }
 }

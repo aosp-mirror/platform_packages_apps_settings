@@ -39,16 +39,16 @@ import android.content.pm.ServiceInfo;
 import android.provider.Settings;
 
 import com.android.internal.app.AssistUtils;
-import com.android.settings.TestConfig;
-import com.android.settings.applications.defaultapps.DefaultAppInfo;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
+import com.android.settingslib.applications.DefaultAppInfo;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
@@ -56,42 +56,48 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DefaultAssistPreferenceControllerTest {
 
     private static final String TEST_KEY = "test_pref_key";
 
     @Mock
-    private Context mContext;
-    @Mock
     private SearchManager mSearchManager;
     @Mock
     private PackageManager mPackageManager;
+
+    private Context mContext;
     private DefaultAssistPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = spy(RuntimeEnvironment.application);
         mController = new DefaultAssistPreferenceController(mContext, TEST_KEY,
                 true /* showSetting */);
     }
 
     @Test
-    public void isAlwaysAvailable() {
+    public void testAssistAndVoiceInput_byDefault_shouldBeShown() {
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
+    @Config(qualifiers = "mcc999")
+    public void testAssistAndVoiceInput_ifDisabled_shouldNotBeShown() {
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
     public void getPrefKey_shouldReturnKey() {
-        assertThat(mController.getPreferenceKey())
-                .isEqualTo(TEST_KEY);
+        assertThat(mController.getPreferenceKey()).isEqualTo(TEST_KEY);
     }
 
     @Test
     @Config(shadows = {ShadowSecureSettings.class})
     public void getDefaultAppInfo_hasDefaultAssist_shouldReturnKey() {
         final String flattenKey = "com.android.settings/assist";
-        Settings.Secure.putString(null, Settings.Secure.ASSISTANT, flattenKey);
+        Settings.Secure.putString(mContext.getContentResolver(), Settings.Secure.ASSISTANT,
+                flattenKey);
         DefaultAppInfo appInfo = mController.getDefaultAppInfo();
 
         assertThat(appInfo.getKey()).isEqualTo(flattenKey);

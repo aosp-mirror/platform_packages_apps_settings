@@ -136,13 +136,13 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         ArrayList<AbstractPreferenceController> controllers = new ArrayList<>();
 
         if (mCachedDevice != null) {
             Lifecycle lifecycle = getLifecycle();
             controllers.add(new BluetoothDetailsHeaderController(context, this, mCachedDevice,
-                    lifecycle));
+                    lifecycle, mManager));
             controllers.add(new BluetoothDetailsButtonsController(context, this, mCachedDevice,
                     lifecycle));
             controllers.add(new BluetoothDetailsProfilesController(context, this, mManager,

@@ -26,6 +26,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
@@ -40,6 +41,7 @@ public class SeekBarPreference extends RestrictedPreference
 
     private int mProgress;
     private int mMax;
+    private int mMin;
     private boolean mTrackingTouch;
 
     private boolean mContinuousUpdates;
@@ -47,6 +49,8 @@ public class SeekBarPreference extends RestrictedPreference
 
     private SeekBar mSeekBar;
     private boolean mShouldBlink;
+    private int mAccessibilityRangeInfoType = AccessibilityNodeInfo.RangeInfo.RANGE_TYPE_INT;
+    private CharSequence mSeekBarContentDescription;
 
     public SeekBarPreference(
             Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -55,6 +59,7 @@ public class SeekBarPreference extends RestrictedPreference
         TypedArray a = context.obtainStyledAttributes(
                 attrs, com.android.internal.R.styleable.ProgressBar, defStyleAttr, defStyleRes);
         setMax(a.getInt(com.android.internal.R.styleable.ProgressBar_max, mMax));
+        setMin(a.getInt(com.android.internal.R.styleable.ProgressBar_min, mMin));
         a.recycle();
 
         a = context.obtainStyledAttributes(attrs,
@@ -94,10 +99,13 @@ public class SeekBarPreference extends RestrictedPreference
                 com.android.internal.R.id.seekbar);
         mSeekBar.setOnSeekBarChangeListener(this);
         mSeekBar.setMax(mMax);
+        mSeekBar.setMin(mMin);
         mSeekBar.setProgress(mProgress);
         mSeekBar.setEnabled(isEnabled());
         final CharSequence title = getTitle();
-        if (!TextUtils.isEmpty(title)) {
+        if (!TextUtils.isEmpty(mSeekBarContentDescription)) {
+            mSeekBar.setContentDescription(mSeekBarContentDescription);
+        } else if (!TextUtils.isEmpty(title)) {
             mSeekBar.setContentDescription(title);
         }
         if (mSeekBar instanceof DefaultIndicatorSeekBar) {
@@ -116,6 +124,19 @@ public class SeekBarPreference extends RestrictedPreference
                 mShouldBlink = false;
             });
         }
+        mSeekBar.setAccessibilityDelegate(new View.AccessibilityDelegate() {
+            @Override
+            public void onInitializeAccessibilityNodeInfo(View view, AccessibilityNodeInfo info) {
+                super.onInitializeAccessibilityNodeInfo(view, info);
+                // Update the range info with the correct type
+                AccessibilityNodeInfo.RangeInfo rangeInfo = info.getRangeInfo();
+                if (rangeInfo != null) {
+                    info.setRangeInfo(AccessibilityNodeInfo.RangeInfo.obtain(
+                                    mAccessibilityRangeInfoType, rangeInfo.getMin(),
+                                    rangeInfo.getMax(), rangeInfo.getCurrent()));
+                }
+            }
+        });
     }
 
     @Override
@@ -154,8 +175,19 @@ public class SeekBarPreference extends RestrictedPreference
         }
     }
 
+    public void setMin(int min) {
+        if (min != mMin) {
+            mMin = min;
+            notifyChanged();
+        }
+    }
+
     public int getMax() {
         return mMax;
+    }
+
+    public int getMin() {
+        return mMin;
     }
 
     public void setProgress(int progress) {
@@ -187,8 +219,8 @@ public class SeekBarPreference extends RestrictedPreference
         if (progress > mMax) {
             progress = mMax;
         }
-        if (progress < 0) {
-            progress = 0;
+        if (progress < mMin) {
+            progress = mMin;
         }
         if (progress != mProgress) {
             mProgress = progress;
@@ -219,8 +251,7 @@ public class SeekBarPreference extends RestrictedPreference
     }
 
     @Override
-    public void onProgressChanged(
-            SeekBar seekBar, int progress, boolean fromUser) {
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         if (fromUser && (mContinuousUpdates || !mTrackingTouch)) {
             syncProgress(seekBar);
         }
@@ -236,6 +267,24 @@ public class SeekBarPreference extends RestrictedPreference
         mTrackingTouch = false;
         if (seekBar.getProgress() != mProgress) {
             syncProgress(seekBar);
+        }
+    }
+
+    /**
+     * Specify the type of range this seek bar represents.
+     *
+     * @param rangeInfoType The type of range to be shared with accessibility
+     *
+     * @see android.view.accessibility.AccessibilityNodeInfo.RangeInfo
+     */
+    public void setAccessibilityRangeInfoType(int rangeInfoType) {
+        mAccessibilityRangeInfoType = rangeInfoType;
+    }
+
+    public void setSeekBarContentDescription(CharSequence contentDescription) {
+        mSeekBarContentDescription = contentDescription;
+        if (mSeekBar != null) {
+            mSeekBar.setContentDescription(contentDescription);
         }
     }
 
@@ -257,6 +306,7 @@ public class SeekBarPreference extends RestrictedPreference
         final SavedState myState = new SavedState(superState);
         myState.progress = mProgress;
         myState.max = mMax;
+        myState.min = mMin;
         return myState;
     }
 
@@ -273,6 +323,7 @@ public class SeekBarPreference extends RestrictedPreference
         super.onRestoreInstanceState(myState.getSuperState());
         mProgress = myState.progress;
         mMax = myState.max;
+        mMin = myState.min;
         notifyChanged();
     }
 
@@ -285,6 +336,7 @@ public class SeekBarPreference extends RestrictedPreference
     private static class SavedState extends BaseSavedState {
         int progress;
         int max;
+        int min;
 
         public SavedState(Parcel source) {
             super(source);
@@ -292,6 +344,7 @@ public class SeekBarPreference extends RestrictedPreference
             // Restore the click counter
             progress = source.readInt();
             max = source.readInt();
+            min = source.readInt();
         }
 
         @Override
@@ -301,6 +354,7 @@ public class SeekBarPreference extends RestrictedPreference
             // Save the click counter
             dest.writeInt(progress);
             dest.writeInt(max);
+            dest.writeInt(min);
         }
 
         public SavedState(Parcelable superState) {

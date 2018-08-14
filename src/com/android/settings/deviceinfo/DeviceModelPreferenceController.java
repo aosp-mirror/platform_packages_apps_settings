@@ -22,6 +22,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 
+import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.DeviceInfoUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -40,7 +41,7 @@ public class DeviceModelPreferenceController extends AbstractPreferenceControlle
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return mContext.getResources().getBoolean(R.bool.config_show_device_model);
     }
 
     @Override
@@ -48,7 +49,8 @@ public class DeviceModelPreferenceController extends AbstractPreferenceControlle
         super.displayPreference(screen);
         final Preference pref = screen.findPreference(KEY_DEVICE_MODEL);
         if (pref != null) {
-            pref.setSummary(getDeviceModel());
+            pref.setSummary(mContext.getResources().getString(R.string.model_summary,
+                    getDeviceModel()));
         }
     }
 

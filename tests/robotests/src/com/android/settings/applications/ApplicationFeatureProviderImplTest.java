@@ -16,11 +16,16 @@
 
 package com.android.settings.applications;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.when;
+
 import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.IPackageManager;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
@@ -28,33 +33,31 @@ import android.os.Build;
 import android.os.UserHandle;
 import android.os.UserManager;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-import com.android.settings.enterprise.DevicePolicyManagerWrapper;
 import com.android.settings.testutils.ApplicationTestUtils;
-import com.android.settings.testutils.shadow.ShadowUserManager;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowDefaultDialerManager;
+import com.android.settings.testutils.shadow.ShadowSmsApplication;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.when;
+import java.util.Set;
 
 /**
  * Tests for {@link ApplicationFeatureProviderImpl}.
  */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = {ShadowUserManager.class})
 public final class ApplicationFeatureProviderImplTest {
 
     private final int MAIN_USER_ID = 0;
@@ -69,11 +72,16 @@ public final class ApplicationFeatureProviderImplTest {
 
     private final String PERMISSION = "some.permission";
 
-    private @Mock UserManager mUserManager;
-    private @Mock Context mContext;
-    private @Mock PackageManagerWrapper mPackageManager;
-    @Mock private IPackageManagerWrapper mPackageManagerService;
-    @Mock private DevicePolicyManagerWrapper mDevicePolicyManager;
+    @Mock
+    private UserManager mUserManager;
+    @Mock
+    private Context mContext;
+    @Mock
+    private PackageManagerWrapper mPackageManager;
+    @Mock
+    private IPackageManager mPackageManagerService;
+    @Mock
+    private DevicePolicyManager mDevicePolicyManager;
 
     private ApplicationFeatureProvider mProvider;
 
@@ -246,9 +254,18 @@ public final class ApplicationFeatureProviderImplTest {
     }
 
     @Test
-    public void getKeepEnabledPackages_shouldContainNothing() {
-        assertThat(mProvider.getKeepEnabledPackages())
-                .isEmpty();
+    @Config(shadows = {ShadowSmsApplication.class, ShadowDefaultDialerManager.class})
+    public void getKeepEnabledPackages_shouldContainDefaultPhoneAndSms() {
+        final String testDialer = "com.android.test.defaultdialer";
+        final String testSms = "com.android.test.defaultsms";
+        ShadowSmsApplication.setDefaultSmsApplication(new ComponentName(testSms, "receiver"));
+        ShadowDefaultDialerManager.setDefaultDialerApplication(testDialer);
+        ReflectionHelpers.setField(mProvider, "mContext", RuntimeEnvironment.application);
+
+        final Set<String> keepEnabledPackages = mProvider.getKeepEnabledPackages();
+
+        final List<String> expectedPackages = Arrays.asList(testDialer, testSms);
+        assertThat(keepEnabledPackages).containsExactlyElementsIn(expectedPackages);
     }
 
     private void setUpUsersAndInstalledApps() {
@@ -257,16 +274,16 @@ public final class ApplicationFeatureProviderImplTest {
                 new UserInfo(MANAGED_PROFILE_ID, "managed profile", 0)));
 
         when(mPackageManager.getInstalledApplicationsAsUser(PackageManager.GET_DISABLED_COMPONENTS
-                | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS
-                | PackageManager.MATCH_ANY_USER,
+                        | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS
+                        | PackageManager.MATCH_ANY_USER,
                 MAIN_USER_ID)).thenReturn(Arrays.asList(
-                        ApplicationTestUtils.buildInfo(APP_1_UID, APP_1, 0 /* flags */,
-                                Build.VERSION_CODES.M)));
+                ApplicationTestUtils.buildInfo(APP_1_UID, APP_1, 0 /* flags */,
+                        Build.VERSION_CODES.M)));
         when(mPackageManager.getInstalledApplicationsAsUser(PackageManager.GET_DISABLED_COMPONENTS
-                | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS,
+                        | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS,
                 MANAGED_PROFILE_ID)).thenReturn(Arrays.asList(
-                        ApplicationTestUtils.buildInfo(APP_2_UID, APP_2, 0 /* flags */,
-                                Build.VERSION_CODES.LOLLIPOP)));
+                ApplicationTestUtils.buildInfo(APP_2_UID, APP_2, 0 /* flags */,
+                        Build.VERSION_CODES.LOLLIPOP)));
     }
 
     private ResolveInfo createResolveInfo(String packageName) {

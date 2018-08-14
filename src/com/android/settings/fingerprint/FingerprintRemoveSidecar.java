@@ -21,7 +21,7 @@ import android.content.Context;
 import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
-import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.core.InstrumentedFragment;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import android.os.UserHandle;
 import java.util.Queue;
@@ -31,7 +31,7 @@ import android.util.Log;
 /**
  * Sidecar fragment to handle the state around fingerprint removal.
  */
-public class FingerprintRemoveSidecar extends InstrumentedPreferenceFragment {
+public class FingerprintRemoveSidecar extends InstrumentedFragment {
 
     private static final String TAG = "FingerprintRemoveSidecar";
     private Listener mListener;
@@ -97,20 +97,6 @@ public class FingerprintRemoveSidecar extends InstrumentedPreferenceFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
     }
 
     public void setListener(Listener listener) {

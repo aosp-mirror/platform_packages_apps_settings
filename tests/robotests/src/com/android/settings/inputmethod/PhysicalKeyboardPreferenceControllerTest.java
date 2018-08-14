@@ -18,6 +18,7 @@ package com.android.settings.inputmethod;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -28,7 +29,6 @@ import android.view.InputDevice;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.shadow.ShadowInputDevice;
 
 import org.junit.After;
@@ -37,10 +37,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class PhysicalKeyboardPreferenceControllerTest {
 
     @Mock
@@ -55,7 +55,7 @@ public class PhysicalKeyboardPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        when(mContext.getSystemService(Context.INPUT_SERVICE)).thenReturn(mIm);
+        when(mContext.getSystemService(InputManager.class)).thenReturn(mIm);
         mController = new PhysicalKeyboardPreferenceController(mContext, null /* lifecycle */);
     }
 
@@ -65,16 +65,26 @@ public class PhysicalKeyboardPreferenceControllerTest {
     }
 
     @Test
-    public void shouldAlwaysBeAvailable() {
+    public void testPhysicalKeyboard_byDefault_shouldBeShown() {
+        final Context context = spy(RuntimeEnvironment.application.getApplicationContext());
+        mController = new PhysicalKeyboardPreferenceController(context, null);
+
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
-    @Config(shadows = {
-            ShadowInputDevice.class,
-    })
+    @Config(qualifiers = "mcc999")
+    public void testPhysicalKeyboard_ifDisabled_shouldNotBeShown() {
+        final Context context = spy(RuntimeEnvironment.application.getApplicationContext());
+        mController = new PhysicalKeyboardPreferenceController(context, null);
+
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    @Config(shadows = ShadowInputDevice.class)
     public void updateState_noKeyboard_setDisconnectedSummary() {
-        ShadowInputDevice.sDeviceIds = new int[]{};
+        ShadowInputDevice.sDeviceIds = new int[0];
         mController.updateState(mPreference);
 
         verify(mPreference).setSummary(R.string.disconnected);
@@ -94,5 +104,4 @@ public class PhysicalKeyboardPreferenceControllerTest {
 
         verify(mPreference).setSummary(device.getName());
     }
-
 }

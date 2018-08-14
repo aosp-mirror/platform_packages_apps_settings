@@ -17,23 +17,21 @@
 package com.android.settings.notification;
 
 import android.app.NotificationManager;
+import android.arch.lifecycle.OnLifecycleEvent;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
-import android.content.pm.ServiceInfo;
 import android.media.AudioManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.Vibrator;
-import android.util.Log;
+import android.text.TextUtils;
 
-import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.notification.VolumeSeekBarPreference.Callback;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.Objects;
@@ -43,24 +41,20 @@ public class RingVolumePreferenceController extends VolumeSeekBarPreferenceContr
     private static final String TAG = "RingVolumeController";
     private static final String KEY_RING_VOLUME = "ring_volume";
 
-    private AudioManager mAudioManager;
     private Vibrator mVibrator;
     private int mRingerMode = -1;
     private ComponentName mSuppressor;
     private final RingReceiver mReceiver = new RingReceiver();
     private final H mHandler = new H();
-    private AudioHelper mHelper;
 
-    public RingVolumePreferenceController(Context context, Callback callback, Lifecycle lifecycle) {
-        this(context, callback, lifecycle, new AudioHelper(context));
+    private int mMuteIcon;
+
+    public RingVolumePreferenceController(Context context) {
+        this(context, KEY_RING_VOLUME);
     }
 
-    @VisibleForTesting
-    RingVolumePreferenceController(Context context, Callback callback, Lifecycle lifecycle,
-        AudioHelper helper) {
-        super(context, callback, lifecycle);
-        mHelper = helper;
-        mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
+    public RingVolumePreferenceController(Context context, String key) {
+        super(context, key);
         mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
         if (mVibrator != null && !mVibrator.hasVibrator()) {
             mVibrator = null;
@@ -68,6 +62,7 @@ public class RingVolumePreferenceController extends VolumeSeekBarPreferenceContr
         updateRingerMode();
     }
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     @Override
     public void onResume() {
         super.onResume();
@@ -76,6 +71,7 @@ public class RingVolumePreferenceController extends VolumeSeekBarPreferenceContr
         updatePreferenceIcon();
     }
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     @Override
     public void onPause() {
         super.onPause();
@@ -88,8 +84,14 @@ public class RingVolumePreferenceController extends VolumeSeekBarPreferenceContr
     }
 
     @Override
-    public boolean isAvailable() {
-        return Utils.isVoiceCapable(mContext) && !mHelper.isSingleVolume();
+    public int getAvailabilityStatus() {
+        return Utils.isVoiceCapable(mContext) && !mHelper.isSingleVolume()
+                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public boolean isSliceable() {
+        return TextUtils.equals(getPreferenceKey(), KEY_RING_VOLUME);
     }
 
     @Override
@@ -99,19 +101,14 @@ public class RingVolumePreferenceController extends VolumeSeekBarPreferenceContr
 
     @Override
     public int getMuteIcon() {
-        return com.android.internal.R.drawable.ic_audio_ring_notif_mute;
+        return mMuteIcon;
     }
 
     private void updateRingerMode() {
-        final int ringerMode = mAudioManager.getRingerModeInternal();
+        final int ringerMode = mHelper.getRingerModeInternal();
         if (mRingerMode == ringerMode) return;
         mRingerMode = ringerMode;
         updatePreferenceIcon();
-    }
-
-    private boolean wasRingerModeVibrate() {
-        return mVibrator != null && mRingerMode == AudioManager.RINGER_MODE_SILENT
-            && mAudioManager.getLastAudibleStreamVolume(AudioManager.STREAM_RING) == 0;
     }
 
     private void updateEffectsSuppressor() {
@@ -127,11 +124,15 @@ public class RingVolumePreferenceController extends VolumeSeekBarPreferenceContr
 
     private void updatePreferenceIcon() {
         if (mPreference != null) {
-            mPreference.showIcon(mSuppressor != null
-                ? com.android.internal.R.drawable.ic_audio_ring_notif_mute
-                : mRingerMode == AudioManager.RINGER_MODE_VIBRATE || wasRingerModeVibrate()
-                    ? com.android.internal.R.drawable.ic_audio_ring_notif_vibrate
-                    : com.android.internal.R.drawable.ic_audio_ring_notif);
+            if (mRingerMode == AudioManager.RINGER_MODE_VIBRATE) {
+                mMuteIcon = R.drawable.ic_volume_ringer_vibrate;
+                mPreference.showIcon(R.drawable.ic_volume_ringer_vibrate);
+            } else if (mRingerMode == AudioManager.RINGER_MODE_SILENT) {
+                mMuteIcon = R.drawable.ic_notifications_off_24dp;
+                mPreference.showIcon(R.drawable.ic_notifications_off_24dp);
+            } else {
+                mPreference.showIcon(R.drawable.ic_notifications);
+            }
         }
     }
 

@@ -16,6 +16,11 @@
 
 package com.android.settings.display;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.when;
+
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -23,11 +28,12 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
+import com.android.internal.view.RotationPolicy;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowRotationPolicy;
 import com.android.settings.testutils.shadow.ShadowSystemSettings;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.After;
 import org.junit.Before;
@@ -39,24 +45,14 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(
-    manifest = TestConfig.MANIFEST_PATH,
-    sdk = TestConfig.SDK_VERSION,
-    shadows = ShadowSystemSettings.class
-)
+@Config(shadows = ShadowSystemSettings.class)
 public class AutoRotatePreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock
     private PackageManager mPackageManager;
-    private Lifecycle mLifecycle;
     private SwitchPreference mPreference;
     private ContentResolver mContentResolver;
     private AutoRotatePreferenceController mController;
@@ -64,14 +60,13 @@ public class AutoRotatePreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
+        FakeFeatureFactory.setupForTest();
         mContentResolver = RuntimeEnvironment.application.getContentResolver();
-        mLifecycle = new Lifecycle();
         mPreference = new SwitchPreference(RuntimeEnvironment.application);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mContext.getContentResolver()).thenReturn(mContentResolver);
 
-        mController = new AutoRotatePreferenceController(mContext, mLifecycle);
+        mController = new AutoRotatePreferenceController(mContext, "auto_rotate");
     }
 
     @After
@@ -83,18 +78,14 @@ public class AutoRotatePreferenceControllerTest {
     public void isAvailableWhenPolicyAllows() {
         assertThat(mController.isAvailable()).isFalse();
 
-        when(mPackageManager.hasSystemFeature(anyString())).thenReturn(true);
-        when(mContext.getResources().getBoolean(anyInt())).thenReturn(true);
-        Settings.System.putInt(mContentResolver,
-                Settings.System.HIDE_ROTATION_LOCK_TOGGLE_FOR_ACCESSIBILITY, 0);
+        enableAutoRotationPreference();
 
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     public void updatePreference_settingsIsOff_shouldTurnOffToggle() {
-        Settings.System.putIntForUser(mContentResolver,
-                Settings.System.ACCELEROMETER_ROTATION, 0, UserHandle.USER_CURRENT);
+        disableAutoRotation();
 
         mController.updateState(mPreference);
 
@@ -103,11 +94,91 @@ public class AutoRotatePreferenceControllerTest {
 
     @Test
     public void updatePreference_settingsIsOn_shouldTurnOnToggle() {
-        Settings.System.putIntForUser(mContentResolver,
-                Settings.System.ACCELEROMETER_ROTATION, 1, UserHandle.USER_CURRENT);
+        enableAutoRotation();
 
         mController.updateState(mPreference);
 
         assertThat(mPreference.isChecked()).isTrue();
+    }
+
+    @Test
+    public void testGetAvailabilityStatus() {
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(BasePreferenceController
+                .UNSUPPORTED_ON_DEVICE);
+
+        enableAutoRotationPreference();
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(BasePreferenceController
+                .AVAILABLE);
+
+        disableAutoRotationPreference();
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(BasePreferenceController
+                .UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    public void testIsCheck() {
+        assertThat(mController.isChecked()).isFalse();
+
+        enableAutoRotation();
+
+        assertThat(mController.isChecked()).isTrue();
+
+        disableAutoRotation();
+
+        assertThat(mController.isChecked()).isFalse();
+    }
+
+    @Test
+    @Config(shadows = {ShadowRotationPolicy.class})
+    public void testSetCheck() {
+        ShadowRotationPolicy.setRotationSupported(true);
+
+        mController.setChecked(false);
+        assertThat(mController.isChecked()).isFalse();
+        assertThat(RotationPolicy.isRotationLocked(mContext)).isTrue();
+
+        mController.setChecked(true);
+        assertThat(mController.isChecked()).isTrue();
+        assertThat(RotationPolicy.isRotationLocked(mContext)).isFalse();
+    }
+
+    @Test
+    public void isSliceableCorrectKey_returnsTrue() {
+        final AutoRotatePreferenceController controller =
+                new AutoRotatePreferenceController(mContext, "auto_rotate");
+        assertThat(controller.isSliceable()).isTrue();
+    }
+
+    @Test
+    public void isSliceableIncorrectKey_returnsFalse() {
+        final AutoRotatePreferenceController controller =
+                new AutoRotatePreferenceController(mContext, "bad_key");
+        assertThat(controller.isSliceable()).isFalse();
+    }
+
+    private void enableAutoRotationPreference() {
+        when(mPackageManager.hasSystemFeature(anyString())).thenReturn(true);
+        when(mContext.getResources().getBoolean(anyInt())).thenReturn(true);
+        Settings.System.putInt(mContentResolver,
+                Settings.System.HIDE_ROTATION_LOCK_TOGGLE_FOR_ACCESSIBILITY, 0);
+    }
+
+    private void disableAutoRotationPreference() {
+        when(mPackageManager.hasSystemFeature(anyString())).thenReturn(true);
+        when(mContext.getResources().getBoolean(anyInt())).thenReturn(true);
+        Settings.System.putInt(mContentResolver,
+                Settings.System.HIDE_ROTATION_LOCK_TOGGLE_FOR_ACCESSIBILITY, 1);
+    }
+
+    private void enableAutoRotation() {
+        Settings.System.putIntForUser(mContentResolver,
+                Settings.System.ACCELEROMETER_ROTATION, 1, UserHandle.USER_CURRENT);
+    }
+
+    private void disableAutoRotation() {
+        Settings.System.putIntForUser(mContentResolver,
+                Settings.System.ACCELEROMETER_ROTATION, 0, UserHandle.USER_CURRENT);
     }
 }

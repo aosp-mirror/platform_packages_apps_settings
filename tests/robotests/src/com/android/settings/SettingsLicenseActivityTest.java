@@ -17,21 +17,18 @@
 package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.app.Application;
-import android.os.SystemProperties;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.SystemProperties;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
-import java.io.File;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -39,12 +36,13 @@ import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-import org.robolectric.util.ActivityController;
+import org.robolectric.android.controller.ActivityController;
+
+import java.io.File;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SettingsLicenseActivityTest {
+
     private ActivityController<SettingsLicenseActivity> mActivityController;
     private SettingsLicenseActivity mActivity;
     private Application mApplication;
@@ -58,7 +56,7 @@ public class SettingsLicenseActivityTest {
         mActivity = spy(mActivityController.get());
     }
 
-    void assertEqualIntents(Intent actual, Intent expected) {
+    private void assertEqualIntents(Intent actual, Intent expected) {
         assertThat(actual.getAction()).isEqualTo(expected.getAction());
         assertThat(actual.getDataString()).isEqualTo(expected.getDataString());
         assertThat(actual.getType()).isEqualTo(expected.getType());

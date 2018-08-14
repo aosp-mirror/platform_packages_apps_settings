@@ -22,22 +22,22 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.support.v7.preference.Preference;
+
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.datausage.DataSaverBackend;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SpecialAppAccessPreferenceControllerTest {
+
     private Context mContext;
     @Mock
     private DataSaverBackend mBackend;
@@ -65,14 +65,14 @@ public class SpecialAppAccessPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary(mContext.getResources().getQuantityString(
-            R.plurals.special_access_summary, 0, 0));
+        verify(mPreference).setSummary(mContext.getResources()
+            .getQuantityString(R.plurals.special_access_summary, 0, 0));
 
         when(mBackend.getWhitelistedCount()).thenReturn(1);
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary(mContext.getResources().getQuantityString(
-            R.plurals.special_access_summary, 1, 1));
+        verify(mPreference).setSummary(mContext.getResources()
+            .getQuantityString(R.plurals.special_access_summary, 1, 1));
     }
 }

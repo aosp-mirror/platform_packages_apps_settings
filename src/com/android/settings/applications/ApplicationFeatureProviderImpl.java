@@ -16,20 +16,23 @@
 
 package com.android.settings.applications;
 
-import android.app.Fragment;
+import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ComponentInfo;
+import android.content.pm.IPackageManager;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.os.RemoteException;
 import android.os.UserManager;
+import android.telecom.DefaultDialerManager;
+import android.text.TextUtils;
 import android.util.ArraySet;
-import android.view.View;
 
-import com.android.settings.applications.instantapps.InstantAppButtonsController;
-import com.android.settings.enterprise.DevicePolicyManagerWrapper;
+import com.android.internal.telephony.SmsApplication;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,23 +42,17 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
 
     private final Context mContext;
     private final PackageManagerWrapper mPm;
-    private final IPackageManagerWrapper mPms;
-    private final DevicePolicyManagerWrapper mDpm;
+    private final IPackageManager mPms;
+    private final DevicePolicyManager mDpm;
     private final UserManager mUm;
 
     public ApplicationFeatureProviderImpl(Context context, PackageManagerWrapper pm,
-            IPackageManagerWrapper pms, DevicePolicyManagerWrapper dpm) {
+            IPackageManager pms, DevicePolicyManager dpm) {
         mContext = context.getApplicationContext();
         mPm = pm;
         mPms = pms;
         mDpm = dpm;
         mUm = UserManager.get(mContext);
-    }
-
-    @Override
-    public InstantAppButtonsController newInstantAppButtonsController(Fragment fragment,
-            View view, InstantAppButtonsController.ShowDialogDelegate showDialogDelegate) {
-        return new InstantAppButtonsController(mContext, fragment, view, showDialogDelegate);
     }
 
     @Override
@@ -131,7 +128,18 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
 
     @Override
     public Set<String> getKeepEnabledPackages() {
-        return new ArraySet<>();
+        // Find current default phone/sms app. We should keep them enabled.
+        final Set<String> keepEnabledPackages = new ArraySet<>();
+        final String defaultDialer = DefaultDialerManager.getDefaultDialerApplication(mContext);
+        if (!TextUtils.isEmpty(defaultDialer)) {
+            keepEnabledPackages.add(defaultDialer);
+        }
+        final ComponentName defaultSms = SmsApplication.getDefaultSmsApplication(
+                mContext, true /* updateIfNeeded */);
+        if (defaultSms != null) {
+            keepEnabledPackages.add(defaultSms.getPackageName());
+        }
+        return keepEnabledPackages;
     }
 
     private static class CurrentUserAndManagedProfilePolicyInstalledAppCounter
@@ -156,8 +164,8 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
 
         CurrentUserAndManagedProfileAppWithAdminGrantedPermissionsCounter(Context context,
                 String[] permissions, PackageManagerWrapper packageManager,
-                IPackageManagerWrapper packageManagerService,
-                DevicePolicyManagerWrapper devicePolicyManager, NumberOfAppsCallback callback) {
+                IPackageManager packageManagerService,
+                DevicePolicyManager devicePolicyManager, NumberOfAppsCallback callback) {
             super(context, permissions, packageManager, packageManagerService, devicePolicyManager);
             mCallback = callback;
         }
@@ -188,8 +196,8 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
         private ListOfAppsCallback mCallback;
 
         CurrentUserAppWithAdminGrantedPermissionsLister(String[] permissions,
-                PackageManagerWrapper packageManager, IPackageManagerWrapper packageManagerService,
-                DevicePolicyManagerWrapper devicePolicyManager, UserManager userManager,
+                PackageManagerWrapper packageManager, IPackageManager packageManagerService,
+                DevicePolicyManager devicePolicyManager, UserManager userManager,
                 ListOfAppsCallback callback) {
             super(permissions, packageManager, packageManagerService, devicePolicyManager,
                     userManager);

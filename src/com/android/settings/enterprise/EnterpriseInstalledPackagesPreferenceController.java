@@ -18,21 +18,20 @@ import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.applications.ApplicationFeatureProvider;
-import com.android.settings.core.DynamicAvailabilityPreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 public class EnterpriseInstalledPackagesPreferenceController
-        extends DynamicAvailabilityPreferenceController {
+        extends AbstractPreferenceController implements PreferenceControllerMixin {
 
     private static final String KEY_NUMBER_ENTERPRISE_INSTALLED_PACKAGES
             = "number_enterprise_installed_packages";
     private final ApplicationFeatureProvider mFeatureProvider;
     private final boolean mAsync;
 
-    public EnterpriseInstalledPackagesPreferenceController(Context context, Lifecycle lifecycle,
-            boolean async) {
-        super(context, lifecycle);
+    public EnterpriseInstalledPackagesPreferenceController(Context context, boolean async) {
+        super(context);
         mFeatureProvider = FeatureFactory.getFactory(context)
                 .getApplicationFeatureProvider(context);
         mAsync = async;
@@ -53,7 +52,6 @@ public class EnterpriseInstalledPackagesPreferenceController
 
                     }
                     preference.setVisible(available);
-                    notifyOnAvailabilityUpdate(available);
                 });
     }
 
@@ -72,9 +70,8 @@ public class EnterpriseInstalledPackagesPreferenceController
         final Boolean[] haveEnterpriseInstalledPackages = { null };
         mFeatureProvider.calculateNumberOfPolicyInstalledApps(false /* async */,
                 (num) -> haveEnterpriseInstalledPackages[0] = num > 0);
-        final boolean available = haveEnterpriseInstalledPackages[0];
-        notifyOnAvailabilityUpdate(available);
-        return available;
+        return haveEnterpriseInstalledPackages[0];
+
     }
 
     @Override

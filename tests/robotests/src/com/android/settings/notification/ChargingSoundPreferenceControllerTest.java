@@ -16,30 +16,29 @@
 
 package com.android.settings.notification;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.provider.Settings.Global;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.PreferenceScreen;
-import android.provider.Settings.Global;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ChargingSoundPreferenceControllerTest {
 
     @Mock
@@ -50,26 +49,32 @@ public class ChargingSoundPreferenceControllerTest {
     private ContentResolver mContentResolver;
     @Mock
     private SoundSettings mSetting;
-    @Mock
-    private Context mContext;
 
+    private Context mContext;
     private ChargingSoundPreferenceController mController;
     private SwitchPreference mPreference;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = spy(RuntimeEnvironment.application);
         when(mSetting.getActivity()).thenReturn(mActivity);
         when(mActivity.getContentResolver()).thenReturn(mContentResolver);
-        mPreference = new SwitchPreference(ShadowApplication.getInstance().getApplicationContext());
+        mPreference = new SwitchPreference(RuntimeEnvironment.application);
         mController = new ChargingSoundPreferenceController(mContext, mSetting, null);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         doReturn(mScreen).when(mSetting).getPreferenceScreen();
     }
 
     @Test
-    public void isAvailable_isAlwaysTrue() {
+    public void isAvailable_byDefault_isTrue() {
         assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void isAvailable_whenNotVisible_isFalse() {
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test

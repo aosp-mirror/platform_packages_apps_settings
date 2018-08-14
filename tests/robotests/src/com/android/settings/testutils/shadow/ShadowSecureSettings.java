@@ -18,12 +18,15 @@ package com.android.settings.testutils.shadow;
 
 import android.content.ContentResolver;
 import android.provider.Settings;
+
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
-import java.util.Map;
-import java.util.WeakHashMap;
+
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+
+import java.util.Map;
+import java.util.WeakHashMap;
 
 @Implements(Settings.Secure.class)
 public class ShadowSecureSettings {
@@ -33,7 +36,7 @@ public class ShadowSecureSettings {
 
     @Implementation
     public static boolean putStringForUser(ContentResolver resolver, String name, String value,
-        int userHandle) {
+        String tag, boolean makeDefault, int userHandle) {
         final Table<Integer, String, Object> userTable = getUserTable(resolver);
         synchronized (userTable) {
             if (value != null) {

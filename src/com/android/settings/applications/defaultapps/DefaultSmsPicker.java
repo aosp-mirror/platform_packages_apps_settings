@@ -25,6 +25,8 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.telephony.SmsApplication;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settingslib.applications.DefaultAppInfo;
+import com.android.settingslib.widget.CandidateInfo;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -40,14 +42,20 @@ public class DefaultSmsPicker extends DefaultAppPickerFragment {
     }
 
     @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.default_sms_settings;
+    }
+
+    @Override
     protected List<DefaultAppInfo> getCandidates() {
+        final Context context = getContext();
         final Collection<SmsApplication.SmsApplicationData> smsApplications =
-                SmsApplication.getApplicationCollection(getContext());
+                SmsApplication.getApplicationCollection(context);
         final List<DefaultAppInfo> candidates = new ArrayList<>(smsApplications.size());
 
         for (SmsApplication.SmsApplicationData smsApplicationData : smsApplications) {
             try {
-                candidates.add(new DefaultAppInfo(mPm,
+                candidates.add(new DefaultAppInfo(context, mPm,
                         mPm.getApplicationInfoAsUser(smsApplicationData.mPackageName, 0, mUserId)));
             } catch (PackageManager.NameNotFoundException e) {
                 // Skip unknown packages.

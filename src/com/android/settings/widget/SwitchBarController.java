@@ -43,7 +43,7 @@ public class SwitchBarController extends SwitchWidgetController implements
 
     @Override
     public void updateTitle(boolean isChecked) {
-        mSwitchBar.setTextViewLabel(isChecked);
+        mSwitchBar.setTextViewLabelAndBackground(isChecked);
     }
 
     @Override
@@ -82,10 +82,4 @@ public class SwitchBarController extends SwitchWidgetController implements
     public void setDisabledByAdmin(EnforcedAdmin admin) {
         mSwitchBar.setDisabledByAdmin(admin);
     }
-
-    @Override
-    public Switch getSwitch() {
-        return mSwitchBar.getSwitch();
-    }
-
 }

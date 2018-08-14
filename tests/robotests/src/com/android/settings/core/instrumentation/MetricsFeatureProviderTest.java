@@ -15,51 +15,29 @@
  */
 package com.android.settings.core.instrumentation;
 
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.util.Pair;
+import static com.google.common.truth.Truth.assertThat;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
+import android.content.Context;
+
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-import org.robolectric.util.ReflectionHelpers;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class MetricsFeatureProviderTest {
 
-    @Mock
-    private LogWriter mLogWriter;
     private Context mContext;
-    private MetricsFeatureProvider mProvider;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mProvider = new MetricsFeatureProvider();
-        List<LogWriter> writers = new ArrayList<>();
-        writers.add(mLogWriter);
-        ReflectionHelpers.setField(mProvider, "mLoggerWriters", writers);
     }
 
     @Test
@@ -69,40 +47,6 @@ public class MetricsFeatureProviderTest {
         MetricsFeatureProvider feature2 =
                 FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
 
-        assertThat(feature1 == feature2).isTrue();
-    }
-
-    @Test
-    public void logDashboardStartIntent_intentEmpty_shouldNotLog() {
-        mProvider.logDashboardStartIntent(mContext, null /* intent */,
-                MetricsEvent.SETTINGS_GESTURES);
-
-        verifyNoMoreInteractions(mLogWriter);
-    }
-
-    @Test
-    public void logDashboardStartIntent_intentHasNoComponent_shouldLog() {
-        final Intent intent = new Intent(Intent.ACTION_ASSIST);
-
-        mProvider.logDashboardStartIntent(mContext, intent, MetricsEvent.SETTINGS_GESTURES);
-
-        verify(mLogWriter).action(
-                eq(mContext),
-                eq(MetricsEvent.ACTION_SETTINGS_TILE_CLICK),
-                anyString(),
-                eq(Pair.create(MetricsEvent.FIELD_CONTEXT, MetricsEvent.SETTINGS_GESTURES)));
-    }
-
-    @Test
-    public void logDashboardStartIntent_intentIsExternal_shouldLog() {
-        final Intent intent = new Intent().setComponent(new ComponentName("pkg", "cls"));
-
-        mProvider.logDashboardStartIntent(mContext, intent, MetricsEvent.SETTINGS_GESTURES);
-
-        verify(mLogWriter).action(
-                eq(mContext),
-                eq(MetricsEvent.ACTION_SETTINGS_TILE_CLICK),
-                anyString(),
-                eq(Pair.create(MetricsEvent.FIELD_CONTEXT, MetricsEvent.SETTINGS_GESTURES)));
+        assertThat(feature1).isSameAs(feature2);
     }
 }

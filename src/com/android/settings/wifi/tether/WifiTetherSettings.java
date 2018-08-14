@@ -26,7 +26,6 @@ import android.content.IntentFilter;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.os.SystemProperties;
 import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
 import android.util.Log;
@@ -45,16 +44,15 @@ import java.util.List;
 public class WifiTetherSettings extends RestrictedDashboardFragment
         implements WifiTetherBasePreferenceController.OnTetherConfigUpdateListener {
 
-    public static boolean isTetherSettingPageEnabled() {
-        return SystemProperties.getBoolean("settings.ui.wifi.tether.enabled", false);
-    }
-
+    private static final String TAG = "WifiTetherSettings";
     private static final IntentFilter TETHER_STATE_CHANGE_FILTER;
+    private static final String KEY_WIFI_TETHER_AUTO_OFF = "wifi_tether_auto_turn_off";
 
     private WifiTetherSwitchBarController mSwitchBarController;
     private WifiTetherSSIDPreferenceController mSSIDPreferenceController;
     private WifiTetherPasswordPreferenceController mPasswordPreferenceController;
     private WifiTetherApBandPreferenceController mApBandPreferenceController;
+    private WifiTetherSecurityPreferenceController mSecurityPreferenceController;
 
     private WifiManager mWifiManager;
     private boolean mRestartWifiApAfterConfigChange;
@@ -126,21 +124,27 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         mSSIDPreferenceController = new WifiTetherSSIDPreferenceController(context, this);
+        mSecurityPreferenceController = new WifiTetherSecurityPreferenceController(context, this);
         mPasswordPreferenceController = new WifiTetherPasswordPreferenceController(context, this);
         mApBandPreferenceController = new WifiTetherApBandPreferenceController(context, this);
 
         controllers.add(mSSIDPreferenceController);
+        controllers.add(mSecurityPreferenceController);
         controllers.add(mPasswordPreferenceController);
         controllers.add(mApBandPreferenceController);
+        controllers.add(
+                new WifiTetherAutoOffPreferenceController(context, KEY_WIFI_TETHER_AUTO_OFF));
         return controllers;
     }
 
     @Override
     public void onTetherConfigUpdated() {
         final WifiConfiguration config = buildNewConfig();
+        mPasswordPreferenceController.updateVisibility(config.getAuthType());
+
         /**
          * if soft AP is stopped, bring up
          * else restart with new config
@@ -157,36 +161,49 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
 
     private WifiConfiguration buildNewConfig() {
         final WifiConfiguration config = new WifiConfiguration();
+        final int securityType = mSecurityPreferenceController.getSecurityType();
 
         config.SSID = mSSIDPreferenceController.getSSID();
-        config.preSharedKey = mPasswordPreferenceController.getPassword();
-        config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA2_PSK);
+        config.allowedKeyManagement.set(securityType);
+        config.preSharedKey = mPasswordPreferenceController.getPasswordValidated(securityType);
         config.allowedAuthAlgorithms.set(WifiConfiguration.AuthAlgorithm.OPEN);
         config.apBand = mApBandPreferenceController.getBandIndex();
         return config;
     }
 
+    private void startTether() {
+        mRestartWifiApAfterConfigChange = false;
+        mSwitchBarController.startTether();
+    }
+
+    private void updateDisplayWithNewConfig() {
+        use(WifiTetherSSIDPreferenceController.class)
+                .updateDisplay();
+        use(WifiTetherSecurityPreferenceController.class)
+                .updateDisplay();
+        use(WifiTetherPasswordPreferenceController.class)
+                .updateDisplay();
+        use(WifiTetherApBandPreferenceController.class)
+                .updateDisplay();
+    }
+
     @VisibleForTesting
     class TetherChangeReceiver extends BroadcastReceiver {
-        private static final String TAG = "TetherChangeReceiver";
-
         @Override
         public void onReceive(Context content, Intent intent) {
             String action = intent.getAction();
+            Log.d(TAG, "updating display config due to receiving broadcast action " + action);
+            updateDisplayWithNewConfig();
             if (action.equals(ACTION_TETHER_STATE_CHANGED)) {
                 if (mWifiManager.getWifiApState() == WifiManager.WIFI_AP_STATE_DISABLED
                         && mRestartWifiApAfterConfigChange) {
-                    mRestartWifiApAfterConfigChange = false;
-                    Log.d(TAG, "Restarting WifiAp due to prior config change.");
-                    mSwitchBarController.startTether();
+                    startTether();
                 }
             } else if (action.equals(WIFI_AP_STATE_CHANGED_ACTION)) {
                 int state = intent.getIntExtra(WifiManager.EXTRA_WIFI_AP_STATE, 0);
                 if (state == WifiManager.WIFI_AP_STATE_DISABLED
                         && mRestartWifiApAfterConfigChange) {
-                    mRestartWifiApAfterConfigChange = false;
-                    Log.d(TAG, "Restarting WifiAp due to prior config change.");
-                    mSwitchBarController.startTether();
+                    startTether();
                 }
             }
         }

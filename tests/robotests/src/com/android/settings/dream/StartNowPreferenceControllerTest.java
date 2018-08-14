@@ -16,15 +16,20 @@
 
 package com.android.settings.dream;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.support.v7.preference.PreferenceScreen;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.applications.LayoutPreference;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.dream.DreamBackend;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,16 +37,11 @@ import org.mockito.Answers;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class StartNowPreferenceControllerTest {
+
     private StartNowPreferenceController mController;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
@@ -53,7 +53,6 @@ public class StartNowPreferenceControllerTest {
     private Button mButton;
     @Mock
     private DreamBackend mBackend;
-
 
     @Before
     public void setup() {

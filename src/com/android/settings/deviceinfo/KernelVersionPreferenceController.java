@@ -39,7 +39,7 @@ public class KernelVersionPreferenceController extends AbstractPreferenceControl
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        preference.setSummary(DeviceInfoUtils.getFormattedKernelVersion());
+        preference.setSummary(DeviceInfoUtils.getFormattedKernelVersion(mContext));
     }
 
     @Override

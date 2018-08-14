@@ -55,25 +55,22 @@
 
         <TextView
             android:id="@+id/install_type"
+            style="@style/TextAppearance.EntityHeaderSummary"
             android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:singleLine="true"
-            android:ellipsize="marquee"
-            android:textAppearance="@android:style/TextAppearance.Material.Body1"
-            android:textColor="?android:attr/textColorSecondary" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/entity_header_summary"
+            style="@style/TextAppearance.EntityHeaderSummary"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:singleLine="true"
-            android:ellipsize="marquee"
-            android:textAlignment="viewStart"
-            android:textAppearance="@android:style/TextAppearance.Material.Body1"
-            android:textColor="?android:attr/textColorSecondary" />
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/entity_header_second_summary"
+            style="@style/TextAppearance.EntityHeaderSummary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

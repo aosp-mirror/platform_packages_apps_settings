@@ -17,13 +17,15 @@
 
 package com.android.settings.search;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
 
-import com.android.settings.applications.PackageManagerWrapperImpl;
-import com.android.settings.dashboard.SiteMapManager;
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.search.indexing.IndexData;
+
+import java.util.Locale;
 
 /**
  * FeatureProvider for the refactored search code.
@@ -33,71 +35,33 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
     private static final String TAG = "SearchFeatureProvider";
 
     private static final String METRICS_ACTION_SETTINGS_INDEX = "search_synchronous_indexing";
-
     private DatabaseIndexingManager mDatabaseIndexingManager;
-    private SiteMapManager mSiteMapManager;
+    private SearchIndexableResources mSearchIndexableResources;
 
     @Override
-    public boolean isEnabled(Context context) {
-        return true;
-    }
-
-    @Override
-    public DatabaseResultLoader getDatabaseSearchLoader(Context context, String query) {
-        return new DatabaseResultLoader(context, cleanQuery(query), getSiteMapManager());
-    }
-
-    @Override
-    public InstalledAppResultLoader getInstalledAppSearchLoader(Context context, String query) {
-        return new InstalledAppResultLoader(
-                context, new PackageManagerWrapperImpl(context.getPackageManager()),
-                cleanQuery(query), getSiteMapManager());
-    }
-
-    @Override
-    public AccessibilityServiceResultLoader getAccessibilityServiceResultLoader(Context context,
-            String query) {
-        return new AccessibilityServiceResultLoader(context, cleanQuery(query),
-                getSiteMapManager());
-    }
-
-    @Override
-    public InputDeviceResultLoader getInputDeviceResultLoader(Context context, String query) {
-        return new InputDeviceResultLoader(context, cleanQuery(query), getSiteMapManager());
-    }
-
-    @Override
-    public SavedQueryLoader getSavedQueryLoader(Context context) {
-        return new SavedQueryLoader(context);
+    public void verifyLaunchSearchResultPageCaller(Context context, ComponentName caller) {
+        if (caller == null) {
+            throw new IllegalArgumentException("ExternalSettingsTrampoline intents "
+                    + "must be called with startActivityForResult");
+        }
+        final String packageName = caller.getPackageName();
+        final boolean isSettingsPackage = TextUtils.equals(packageName, context.getPackageName())
+                || TextUtils.equals(getSettingsIntelligencePkgName(), packageName);
+        final boolean isWhitelistedPackage =
+                isSignatureWhitelisted(context, caller.getPackageName());
+        if (isSettingsPackage || isWhitelistedPackage) {
+            return;
+        }
+        throw new SecurityException("Search result intents must be called with from a "
+                + "whitelisted package.");
     }
 
     @Override
     public DatabaseIndexingManager getIndexingManager(Context context) {
         if (mDatabaseIndexingManager == null) {
-            mDatabaseIndexingManager = new DatabaseIndexingManager(context.getApplicationContext(),
-                    context.getPackageName());
+            mDatabaseIndexingManager = new DatabaseIndexingManager(context.getApplicationContext());
         }
         return mDatabaseIndexingManager;
-    }
-
-    @Override
-    public boolean isIndexingComplete(Context context) {
-        return getIndexingManager(context).isIndexingComplete();
-    }
-
-    public SiteMapManager getSiteMapManager() {
-        if (mSiteMapManager == null) {
-            mSiteMapManager = new SiteMapManager();
-        }
-        return mSiteMapManager;
-    }
-
-    @Override
-    public void updateIndexAsync(Context context, IndexingCallback callback) {
-        if (SettingsSearchIndexablesProvider.DEBUG) {
-            Log.d(TAG, "updating index async");
-        }
-        getIndexingManager(context).indexDatabase(callback);
     }
 
     @Override
@@ -109,14 +73,30 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
                 .histogram(context, METRICS_ACTION_SETTINGS_INDEX, indexingTime);
     }
 
+    @Override
+    public SearchIndexableResources getSearchIndexableResources() {
+        if (mSearchIndexableResources == null) {
+            mSearchIndexableResources = new SearchIndexableResourcesImpl();
+        }
+        return mSearchIndexableResources;
+    }
+
+    protected boolean isSignatureWhitelisted(Context context, String callerPackage) {
+        return false;
+    }
+
     /**
      * A generic method to make the query suitable for searching the database.
      *
      * @return the cleaned query string
      */
-    private String cleanQuery(String query) {
+    @VisibleForTesting
+    String cleanQuery(String query) {
         if (TextUtils.isEmpty(query)) {
             return null;
+        }
+        if (Locale.getDefault().equals(Locale.JAPAN)) {
+            query = IndexData.normalizeJapaneseString(query);
         }
         return query.trim();
     }

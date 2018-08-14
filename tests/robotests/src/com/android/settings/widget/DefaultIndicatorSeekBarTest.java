@@ -16,20 +16,17 @@
 
 package com.android.settings.widget;
 
+import static junit.framework.Assert.assertEquals;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-
-import static junit.framework.Assert.assertEquals;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DefaultIndicatorSeekBarTest {
 
     private DefaultIndicatorSeekBar mDefaultIndicatorSeekBar;
@@ -50,5 +47,4 @@ public class DefaultIndicatorSeekBarTest {
         mDefaultIndicatorSeekBar.setDefaultProgress(40);
         assertEquals(40, mDefaultIndicatorSeekBar.getDefaultProgress());
     }
-
 }

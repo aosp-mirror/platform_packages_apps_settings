@@ -100,8 +100,12 @@
     <!-- no translation found for wifi_security_no_eap:0 (2084555984818107151) -->
     <!-- no translation found for wifi_security_no_eap:1 (397579322683471524) -->
     <!-- no translation found for wifi_security_no_eap:2 (1968820975358150484) -->
-    <!-- no translation found for wifi_ap_security:0 (5251664683198623324) -->
-    <!-- no translation found for wifi_ap_security:1 (7989073072260294673) -->
+    <!-- no translation found for wifi_tether_security:0 (1748357338693290598) -->
+    <!-- no translation found for wifi_tether_security:1 (4760482622566629462) -->
+  <string-array name="wifi_tether_security_values">
+    <item msgid="2252927183588236198">"4"</item>
+    <item msgid="5900372418924184351">"0"</item>
+  </string-array>
   <string-array name="wifi_eap_method">
     <item msgid="1160193392455075561">"PEAP"</item>
     <item msgid="7981731051382306293">"TLS"</item>
@@ -119,7 +123,10 @@
   </string-array>
     <!-- no translation found for wifi_ap_band_config_full:0 (1085243288162893079) -->
     <!-- no translation found for wifi_ap_band_config_full:1 (5531376834915607202) -->
+    <!-- no translation found for wifi_ap_band_summary_full:0 (7176872102094020362) -->
+    <!-- no translation found for wifi_ap_band_summary_full:1 (311895158827229479) -->
     <!-- no translation found for wifi_ap_band_config_2G_only:0 (7006771583217001015) -->
+    <!-- no translation found for wifi_ap_band_config_2G_only:1 (8904289885593822837) -->
   <string-array name="wifi_p2p_wps_setup">
     <item msgid="5085064298144493867">"Knop indrukken"</item>
     <item msgid="1624323946324499595">"Pincode van peerapparaat"</item>
@@ -137,6 +144,14 @@
     <item msgid="8675215713017289017">"5 minuten"</item>
     <item msgid="477015974247590543">"1 uur"</item>
     <item msgid="5198271470953124739">"Geen time-out"</item>
+  </string-array>
+  <string-array name="bluetooth_max_connected_audio_devices">
+    <item msgid="834764606877643762">"Systeemstandaard gebruiken: <xliff:g id="DEFAULT_BLUETOOTH_MAX_CONNECTED_AUDIO_DEVICES">%1$d</xliff:g>"</item>
+    <item msgid="4428462068012149533">"1"</item>
+    <item msgid="2620881722754455257">"2"</item>
+    <item msgid="402831176731135702">"3"</item>
+    <item msgid="4923580285404888038">"4"</item>
+    <item msgid="3643103044864989283">"5"</item>
   </string-array>
   <string-array name="wifi_signal">
     <item msgid="2245412278046491293">"Slecht"</item>
@@ -291,7 +306,7 @@
     <item msgid="8582699692765917557">"telefoonstatus lezen"</item>
     <item msgid="1474039653814954902">"voicemail toevoegen"</item>
     <item msgid="7222837656938871633">"SIP gebruiken"</item>
-    <item msgid="6108267038969274380">"uitgaande oproep verwerken"</item>
+    <item msgid="6108267038969274380">"uitgaand gesprek verwerken"</item>
     <item msgid="4823402479973873358">"vingerafdruk"</item>
     <item msgid="5895843015407713543">"lichaamssensoren"</item>
     <item msgid="1436446526955010826">"cell broadcasts lezen"</item>
@@ -358,7 +373,7 @@
     <item msgid="8571369610363539266">"Telefoonstatus lezen"</item>
     <item msgid="4542463358215230845">"Voicemail toevoegen"</item>
     <item msgid="864565065016166003">"SIP gebruiken"</item>
-    <item msgid="1958009349883195116">"Uitgaande oproep verwerken"</item>
+    <item msgid="1958009349883195116">"Uitgaand gesprek verwerken"</item>
     <item msgid="8526563410140613458">"Vingerafdruk"</item>
     <item msgid="7864822459293570891">"Lichaamssensoren"</item>
     <item msgid="6798698496904810960">"Cell broadcasts lezen"</item>
@@ -478,4 +493,21 @@
     <item msgid="2900554746706302178">"Meer dan 60 dagen oud"</item>
     <item msgid="5692284879054004388">"Meer dan 90 dagen oud"</item>
   </string-array>
+  <string-array name="wifi_metered_entries">
+    <item msgid="5200910605264415911">"Automatisch detecteren"</item>
+    <item msgid="8745603368609022803">"Behandelen als gemeten"</item>
+    <item msgid="2266114985518865625">"Behandelen als niet-gemeten"</item>
+  </string-array>
+  <string-array name="wifi_hidden_entries">
+    <item msgid="234221371123852300">"Nee"</item>
+    <item msgid="3863157480502955888">"Ja"</item>
+  </string-array>
+  <string-array name="dark_ui_mode_entries">
+    <item msgid="146804192658443142">"Automatisch (gebaseerd op tijdstip van de dag)"</item>
+    <item msgid="6620560879508595181">"Altijd aan"</item>
+    <item msgid="6385301106124765323">"Altijd uit"</item>
+  </string-array>
+    <!-- no translation found for systemui_theme_entries:0 (2470122177508109711) -->
+    <!-- no translation found for systemui_theme_entries:1 (5595198131199979987) -->
+    <!-- no translation found for systemui_theme_entries:2 (883155044873038544) -->
 </resources>

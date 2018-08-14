@@ -24,6 +24,7 @@ import android.util.Xml;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
@@ -153,6 +154,8 @@ public class ConditionManager implements LifecycleObserver, OnResume, OnPause {
         addIfMissing(BackgroundDataCondition.class, conditions);
         addIfMissing(WorkModeCondition.class, conditions);
         addIfMissing(NightDisplayCondition.class, conditions);
+        addIfMissing(RingerMutedCondition.class, conditions);
+        addIfMissing(RingerVibrateCondition.class, conditions);
         Collections.sort(conditions, CONDITION_COMPARATOR);
     }
 
@@ -183,6 +186,10 @@ public class ConditionManager implements LifecycleObserver, OnResume, OnPause {
             return new WorkModeCondition(this);
         } else if (NightDisplayCondition.class == clz) {
             return new NightDisplayCondition(this);
+        } else if (RingerMutedCondition.class == clz) {
+            return new RingerMutedCondition(this);
+        } else if (RingerVibrateCondition.class == clz) {
+            return new RingerVibrateCondition(this);
         }
         Log.e(TAG, "unknown condition class: " + clz.getSimpleName());
         return null;

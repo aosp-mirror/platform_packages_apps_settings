@@ -16,7 +16,8 @@
 
 package com.android.settings.widget;
 
-
+import static android.arch.lifecycle.Lifecycle.Event.ON_START;
+import static android.arch.lifecycle.Lifecycle.Event.ON_STOP;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
@@ -25,13 +26,12 @@ import static org.mockito.Mockito.when;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.arch.lifecycle.LifecycleOwner;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -39,13 +39,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-import org.robolectric.util.ReflectionHelpers;
-
-import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ActionBarShadowControllerTest {
 
     @Mock
@@ -55,6 +50,7 @@ public class ActionBarShadowControllerTest {
     @Mock
     private ActionBar mActionBar;
     private Lifecycle mLifecycle;
+    private LifecycleOwner mLifecycleOwner;
     private View mView;
 
     @Before
@@ -62,7 +58,8 @@ public class ActionBarShadowControllerTest {
         MockitoAnnotations.initMocks(this);
         when(mActivity.getActionBar()).thenReturn(mActionBar);
         mView = new View(RuntimeEnvironment.application);
-        mLifecycle = new Lifecycle();
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
     }
 
     @Test
@@ -93,14 +90,13 @@ public class ActionBarShadowControllerTest {
     public void attachToRecyclerView_lifecycleChange_shouldAttachDetach() {
         ActionBarShadowController.attachToRecyclerView(mActivity, mLifecycle, mRecyclerView);
 
-        List<LifecycleObserver> observers = ReflectionHelpers.getField(mLifecycle, "mObservers");
-        assertThat(observers).hasSize(1);
         verify(mRecyclerView).addOnScrollListener(any());
 
-        mLifecycle.onStop();
+        mLifecycle.handleLifecycleEvent(ON_START);
+        mLifecycle.handleLifecycleEvent(ON_STOP);
         verify(mRecyclerView).removeOnScrollListener(any());
 
-        mLifecycle.onStart();
+        mLifecycle.handleLifecycleEvent(ON_START);
         verify(mRecyclerView, times(2)).addOnScrollListener(any());
     }
 
@@ -114,5 +110,4 @@ public class ActionBarShadowControllerTest {
         controller.mScrollChangeWatcher.onScrolled(mRecyclerView, 10 /* dx */, 10 /* dy */);
         // no crash
     }
-
 }

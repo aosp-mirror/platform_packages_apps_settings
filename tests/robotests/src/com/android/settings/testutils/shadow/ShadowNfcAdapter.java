@@ -33,6 +33,7 @@ import org.robolectric.util.ReflectionHelpers.ClassParameter;
 @Implements(NfcAdapter.class)
 public class ShadowNfcAdapter {
     private static boolean sReaderModeEnabled;
+    private boolean mIsNfcEnabled = false;
 
     @Implementation
     public void enableReaderMode(Activity activity, NfcAdapter.ReaderCallback callback, int flags,
@@ -44,6 +45,23 @@ public class ShadowNfcAdapter {
     public static NfcAdapter getDefaultAdapter(Context context) {
         return ReflectionHelpers.callConstructor(
                 NfcAdapter.class, ClassParameter.from(Context.class, context));
+    }
+
+    @Implementation
+    public boolean isEnabled() {
+        return mIsNfcEnabled;
+    }
+
+    @Implementation
+    public boolean enable() {
+        mIsNfcEnabled = true;
+        return true;
+    }
+
+    @Implementation
+    public boolean disable() {
+        mIsNfcEnabled = false;
+        return true;
     }
 
     public static boolean isReaderModeEnabled() {

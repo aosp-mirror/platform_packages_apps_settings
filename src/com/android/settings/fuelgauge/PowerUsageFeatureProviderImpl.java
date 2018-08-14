@@ -19,8 +19,6 @@ package com.android.settings.fuelgauge;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Process;
 import android.util.SparseIntArray;
 
@@ -36,9 +34,11 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
             PACKAGE_CALENDAR_PROVIDER, PACKAGE_SYSTEMUI};
 
     protected PackageManager mPackageManager;
+    protected Context mContext;
 
     public PowerUsageFeatureProviderImpl(Context context) {
         mPackageManager = context.getPackageManager();
+        mContext = context.getApplicationContext();
     }
 
     @Override
@@ -90,8 +90,8 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
-    public long getEnhancedBatteryPrediction(Context context) {
-        return -1;
+    public Estimate getEnhancedBatteryPrediction(Context context) {
+        return null;
     }
 
     @Override
@@ -102,16 +102,6 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     @Override
     public boolean isEnhancedBatteryPredictionEnabled(Context context) {
         return false;
-    }
-
-    @Override
-    public Uri getEnhancedBatteryPredictionUri() {
-        return null;
-    }
-
-    @Override
-    public long getTimeRemainingEstimate(Cursor cursor) {
-        return 0;
     }
 
     @Override
@@ -132,5 +122,16 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     @Override
     public String getAdvancedUsageScreenInfoString() {
         return null;
+    }
+
+    @Override
+    public boolean getEarlyWarningSignal(Context context, String id) {
+        return false;
+    }
+
+    @Override
+    public boolean isSmartBatterySupported() {
+        return mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_smart_battery_available);
     }
 }

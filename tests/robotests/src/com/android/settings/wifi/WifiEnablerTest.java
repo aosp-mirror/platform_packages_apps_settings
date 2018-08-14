@@ -16,14 +16,20 @@
 
 package com.android.settings.wifi;
 
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.testutils.shadow.ShadowRestrictedLockUtils;
 import com.android.settings.widget.SwitchWidgetController;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -32,12 +38,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(shadows = ShadowRestrictedLockUtils.class)
 public class WifiEnablerTest {
 
     @Mock
@@ -45,7 +47,7 @@ public class WifiEnablerTest {
     @Mock
     private WifiManager mWifiManager;
     @Mock
-    private ConnectivityManagerWrapper mConnectivityManager;
+    private ConnectivityManager mConnectivityManager;
 
     private WifiEnabler mEnabler;
 
@@ -54,7 +56,7 @@ public class WifiEnablerTest {
         MockitoAnnotations.initMocks(this);
         when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
         mEnabler = new WifiEnabler(mContext, mock(SwitchWidgetController.class),
-            mock(MetricsFeatureProvider.class), mConnectivityManager);
+                mock(MetricsFeatureProvider.class), mConnectivityManager);
     }
 
     @Test
@@ -62,9 +64,6 @@ public class WifiEnablerTest {
         when(mWifiManager.setWifiEnabled(true)).thenReturn(true);
         when(mWifiManager.getWifiApState()).thenReturn(WifiManager.WIFI_AP_STATE_ENABLED);
 
-        mEnabler.onSwitchToggled(true);
-
-        verify(mConnectivityManager).stopTethering(ConnectivityManager.TETHERING_WIFI);
+        assertThat(mEnabler.onSwitchToggled(true)).isTrue();
     }
-
 }

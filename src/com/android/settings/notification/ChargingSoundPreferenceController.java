@@ -21,6 +21,7 @@ import static com.android.settings.notification.SettingPref.TYPE_GLOBAL;
 import android.content.Context;
 
 import android.provider.Settings.Global;
+import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -33,7 +34,10 @@ public class ChargingSoundPreferenceController extends SettingPrefController {
         super(context, parent, lifecycle);
         mPreference = new SettingPref(
             TYPE_GLOBAL, KEY_CHARGING_SOUNDS, Global.CHARGING_SOUNDS_ENABLED, DEFAULT_ON);
-
     }
 
+    @Override
+    public boolean isAvailable() {
+        return mContext.getResources().getBoolean(R.bool.config_show_charging_sounds);
+    }
 }

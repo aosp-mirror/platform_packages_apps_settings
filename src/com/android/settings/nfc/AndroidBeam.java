@@ -28,17 +28,17 @@ import android.view.ViewGroup;
 import android.widget.Switch;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settingslib.HelpUtils;
-import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.ShowAdminSupportDetailsDialog;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.RestrictedLockUtils;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
-public class AndroidBeam extends InstrumentedPreferenceFragment
+public class AndroidBeam extends InstrumentedFragment
         implements SwitchBar.OnSwitchChangeListener {
     private View mView;
     private NfcAdapter mNfcAdapter;
@@ -70,11 +70,10 @@ public class AndroidBeam extends InstrumentedPreferenceFragment
         mBeamDisallowedByBase = RestrictedLockUtils.hasBaseUserRestriction(getActivity(),
                 UserManager.DISALLOW_OUTGOING_BEAM, UserHandle.myUserId());
         if (!mBeamDisallowedByBase && admin != null) {
-            View view = inflater.inflate(R.layout.admin_support_details_empty_view, null);
-            ShowAdminSupportDetailsDialog.setAdminSupportDetails(getActivity(), view, admin, false);
-            view.setVisibility(View.VISIBLE);
+            new ActionDisabledByAdminDialogHelper(getActivity())
+                    .prepareDialogBuilder(UserManager.DISALLOW_OUTGOING_BEAM, admin).show();
             mBeamDisallowedByOnlyAdmin = true;
-            return view;
+            return new View(getContext());
         }
         mView = inflater.inflate(R.layout.android_beam, container, false);
         return mView;
@@ -97,6 +96,8 @@ public class AndroidBeam extends InstrumentedPreferenceFragment
             mSwitchBar.setEnabled(!mBeamDisallowedByBase);
             mSwitchBar.show();
         }
+
+        activity.setTitle(R.string.android_beam_settings_title);
     }
 
     @Override

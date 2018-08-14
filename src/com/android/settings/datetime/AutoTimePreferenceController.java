@@ -46,8 +46,10 @@ public class AutoTimePreferenceController extends AbstractPreferenceController
         if (!(preference instanceof RestrictedSwitchPreference)) {
             return;
         }
-        ((RestrictedSwitchPreference) preference).setDisabledByAdmin(
-                getEnforcedAdminProperty());
+        if (!((RestrictedSwitchPreference) preference).isDisabledByAdmin()) {
+            ((RestrictedSwitchPreference) preference).setDisabledByAdmin(
+                    getEnforcedAdminProperty());
+        }
         ((RestrictedSwitchPreference) preference).setChecked(isEnabled());
     }
 

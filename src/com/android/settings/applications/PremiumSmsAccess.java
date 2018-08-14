@@ -28,17 +28,16 @@ import android.view.View;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.telephony.SmsUsageMonitor;
-import com.android.settings.DividerPreference;
 import com.android.settings.R;
 import com.android.settings.applications.AppStateBaseBridge.Callback;
 import com.android.settings.applications.AppStateSmsPremBridge.SmsState;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.notification.EmptyTextSettings;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.Callbacks;
 import com.android.settingslib.applications.ApplicationsState.Session;
+import com.android.settingslib.widget.FooterPreference;
 
 import java.util.ArrayList;
 
@@ -53,7 +52,7 @@ public class PremiumSmsAccess extends EmptyTextSettings implements Callback, Cal
         super.onCreate(icicle);
         mApplicationsState = ApplicationsState.getInstance((Application)
                 getContext().getApplicationContext());
-        mSession = mApplicationsState.newSession(this);
+        mSession = mApplicationsState.newSession(this, getLifecycle());
         mSmsBackend = new AppStateSmsPremBridge(getContext(), mApplicationsState, this);
     }
 
@@ -66,22 +65,24 @@ public class PremiumSmsAccess extends EmptyTextSettings implements Callback, Cal
     @Override
     public void onResume() {
         super.onResume();
-        mSession.resume();
         mSmsBackend.resume();
     }
 
     @Override
     public void onPause() {
         mSmsBackend.pause();
-        mSession.pause();
         super.onPause();
     }
 
     @Override
     public void onDestroy() {
         mSmsBackend.release();
-        mSession.release();
         super.onDestroy();
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.premium_sms_settings;
     }
 
     @Override
@@ -123,8 +124,8 @@ public class PremiumSmsAccess extends EmptyTextSettings implements Callback, Cal
         if (apps == null) return;
         setEmptyText(R.string.premium_sms_none);
         setLoading(false, true);
-        final PreferenceScreen screen = getPreferenceManager().createPreferenceScreen(
-                getPrefContext());
+        final PreferenceScreen screen = getPreferenceScreen();
+        screen.removeAll();
         screen.setOrderingAsAdded(true);
 
         for (int i = 0; i < apps.size(); i++) {
@@ -134,14 +135,10 @@ public class PremiumSmsAccess extends EmptyTextSettings implements Callback, Cal
             screen.addPreference(smsPreference);
         }
         if (apps.size() != 0) {
-            DividerPreference summary = new DividerPreference(getPrefContext());
-            summary.setSelectable(false);
-            summary.setSummary(R.string.premium_sms_warning);
-            summary.setDividerAllowedAbove(true);
-            screen.addPreference(summary);
+            FooterPreference footer = new FooterPreference(getPrefContext());
+            footer.setTitle(R.string.premium_sms_warning);
+            screen.addPreference(footer);
         }
-
-        setPreferenceScreen(screen);
     }
 
     private void update() {
