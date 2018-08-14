@@ -103,6 +103,7 @@ public class ApnSettings extends RestrictedSettingsFragment implements
     private RestoreApnProcessHandler mRestoreApnProcessHandler;
     private HandlerThread mRestoreDefaultApnThread;
     private SubscriptionInfo mSubscriptionInfo;
+    private int mSubId;
     private UiccController mUiccController;
     private String mMvnoType;
     private String mMvnoMatchData;
@@ -135,6 +136,18 @@ public class ApnSettings extends RestrictedSettingsFragment implements
                     }
                     break;
                 }
+            } else if(intent.getAction().equals(
+                    TelephonyManager.ACTION_SUBSCRIPTION_CARRIER_IDENTITY_CHANGED)) {
+                if (!mRestoreDefaultApnMode) {
+                    int extraSubId = intent.getIntExtra(TelephonyManager.EXTRA_SUBSCRIPTION_ID,
+                            SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+                    if (extraSubId != mSubId) {
+                        // subscription has changed
+                        mSubId = extraSubId;
+                        mSubscriptionInfo = getSubscriptionInfo(mSubId);
+                    }
+                    fillList();
+                }
             }
         }
     };
@@ -157,7 +170,7 @@ public class ApnSettings extends RestrictedSettingsFragment implements
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         final Activity activity = getActivity();
-        final int subId = activity.getIntent().getIntExtra(SUB_ID,
+        mSubId = activity.getIntent().getIntExtra(SUB_ID,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
 
         mMobileStateFilter = new IntentFilter(
@@ -165,7 +178,7 @@ public class ApnSettings extends RestrictedSettingsFragment implements
 
         setIfOnlyAvailableForAdmins(true);
 
-        mSubscriptionInfo = SubscriptionManager.from(activity).getActiveSubscriptionInfo(subId);
+        mSubscriptionInfo = getSubscriptionInfo(mSubId);
         mUiccController = UiccController.getInstance();
 
         CarrierConfigManager configManager = (CarrierConfigManager)
@@ -244,6 +257,10 @@ public class ApnSettings extends RestrictedSettingsFragment implements
             return EnforcedAdmin.MULTIPLE_ENFORCED_ADMIN;
         }
         return null;
+    }
+
+    private SubscriptionInfo getSubscriptionInfo(int subId) {
+        return SubscriptionManager.from(getActivity()).getActiveSubscriptionInfo(subId);
     }
 
     private void fillList() {
