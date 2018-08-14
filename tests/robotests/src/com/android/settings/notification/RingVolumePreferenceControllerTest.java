@@ -16,6 +16,9 @@
 
 package com.android.settings.notification;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.when;
+
 import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -24,21 +27,16 @@ import android.os.Vibrator;
 import android.telephony.TelephonyManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class RingVolumePreferenceControllerTest {
 
     @Mock
@@ -65,9 +63,10 @@ public class RingVolumePreferenceControllerTest {
         shadowContext.setSystemService(Context.AUDIO_SERVICE, mAudioManager);
         shadowContext.setSystemService(Context.VIBRATOR_SERVICE, mVibrator);
         shadowContext.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
-        mContext = shadowContext.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         when(mNotificationManager.getEffectsSuppressor()).thenReturn(mSuppressor);
-        mController = new RingVolumePreferenceController(mContext, null, null, mHelper);
+        mController = new RingVolumePreferenceController(mContext);
+        mController.setAudioHelper(mHelper);
     }
 
     @Test
@@ -99,4 +98,10 @@ public class RingVolumePreferenceControllerTest {
         assertThat(mController.getAudioStream()).isEqualTo(AudioManager.STREAM_RING);
     }
 
+    @Test
+    public void isSliceableCorrectKey_returnsTrue() {
+        final RingVolumePreferenceController controller =
+                new RingVolumePreferenceController(mContext);
+        assertThat(controller.isSliceable()).isTrue();
+    }
 }

@@ -15,6 +15,9 @@
  */
 package com.android.settings.notification;
 
+import static android.app.NotificationManager.IMPORTANCE_NONE;
+import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
+
 import android.app.INotificationManager;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
@@ -27,11 +30,15 @@ import android.content.pm.ParceledListSlice;
 import android.graphics.drawable.Drawable;
 import android.os.ServiceManager;
 import android.os.UserHandle;
+import android.service.notification.NotifyingApp;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settingslib.Utils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NotificationBackend {
     private static final String TAG = "NotificationBackend";
@@ -53,16 +60,22 @@ public class NotificationBackend {
         row.banned = getNotificationsBanned(row.pkg, row.uid);
         row.showBadge = canShowBadge(row.pkg, row.uid);
         row.userId = UserHandle.getUserId(row.uid);
+        row.blockedChannelCount = getBlockedChannelCount(row.pkg, row.uid);
+        row.channelCount = getChannelCount(row.pkg, row.uid);
         return row;
     }
 
     public AppRow loadAppRow(Context context, PackageManager pm, PackageInfo app) {
         final AppRow row = loadAppRow(context, pm, app.applicationInfo);
+        recordCanBeBlocked(context, pm, app, row);
+        return row;
+    }
+
+    void recordCanBeBlocked(Context context, PackageManager pm, PackageInfo app, AppRow row) {
         row.systemApp = Utils.isSystemPackage(context.getResources(), pm, app);
         final String[] nonBlockablePkgs = context.getResources().getStringArray(
-                    com.android.internal.R.array.config_nonBlockableNotificationPackages);
+                com.android.internal.R.array.config_nonBlockableNotificationPackages);
         markAppRowWithBlockables(nonBlockablePkgs, row, app.packageName);
-        return row;
     }
 
     @VisibleForTesting static void markAppRowWithBlockables(String[] nonBlockablePkgs, AppRow row,
@@ -85,6 +98,19 @@ public class NotificationBackend {
         }
     }
 
+    public boolean isSystemApp(Context context, ApplicationInfo app) {
+        try {
+            PackageInfo info = context.getPackageManager().getPackageInfo(
+                    app.packageName, PackageManager.GET_SIGNATURES);
+            final AppRow row = new AppRow();
+            recordCanBeBlocked(context,  context.getPackageManager(), info, row);
+            return row.systemApp;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public boolean getNotificationsBanned(String pkg, int uid) {
         try {
             final boolean enabled = sINM.areNotificationsEnabledForPackage(pkg, uid);
@@ -97,6 +123,12 @@ public class NotificationBackend {
 
     public boolean setNotificationsEnabledForPackage(String pkg, int uid, boolean enabled) {
         try {
+            if (onlyHasDefaultChannel(pkg, uid)) {
+                NotificationChannel defaultChannel =
+                        getChannel(pkg, uid, NotificationChannel.DEFAULT_CHANNEL_ID);
+                defaultChannel.setImportance(enabled ? IMPORTANCE_UNSPECIFIED : IMPORTANCE_NONE);
+                updateChannel(pkg, uid, defaultChannel);
+            }
             sINM.setNotificationsEnabledForPackage(pkg, uid, enabled);
             return true;
         } catch (Exception e) {
@@ -136,8 +168,7 @@ public class NotificationBackend {
         }
     }
 
-
-    public NotificationChannelGroup getGroup(String groupId, String pkg, int uid) {
+    public NotificationChannelGroup getGroup(String pkg, int uid, String groupId) {
         if (groupId == null) {
             return null;
         }
@@ -149,7 +180,7 @@ public class NotificationBackend {
         }
     }
 
-    public ParceledListSlice<NotificationChannelGroup> getChannelGroups(String pkg, int uid) {
+    public ParceledListSlice<NotificationChannelGroup> getGroups(String pkg, int uid) {
         try {
             return sINM.getNotificationChannelGroupsForPackage(pkg, uid, false);
         } catch (Exception e) {
@@ -166,9 +197,26 @@ public class NotificationBackend {
         }
     }
 
+    public void updateChannelGroup(String pkg, int uid, NotificationChannelGroup group) {
+        try {
+            sINM.updateNotificationChannelGroupForPackage(pkg, uid, group);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
+    }
+
     public int getDeletedChannelCount(String pkg, int uid) {
         try {
             return sINM.getDeletedChannelCount(pkg, uid);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return 0;
+        }
+    }
+
+    public int getBlockedChannelCount(String pkg, int uid) {
+        try {
+            return sINM.getBlockedChannelCount(pkg, uid);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
             return 0;
@@ -181,6 +229,33 @@ public class NotificationBackend {
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
             return false;
+        }
+    }
+
+    public int getChannelCount(String pkg, int uid) {
+        try {
+            return sINM.getNumNotificationChannelsForPackage(pkg, uid, false);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return 0;
+        }
+    }
+
+    public List<NotifyingApp> getRecentApps() {
+        try {
+            return sINM.getRecentNotifyingAppsForUser(UserHandle.myUserId()).getList();
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return new ArrayList<>();
+        }
+    }
+
+    public int getBlockedAppCount() {
+        try {
+            return sINM.getBlockedAppCount(UserHandle.myUserId());
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return 0;
         }
     }
 
@@ -201,5 +276,7 @@ public class NotificationBackend {
         public String lockedChannelId;
         public boolean showBadge;
         public int userId;
+        public int blockedChannelCount;
+        public int channelCount;
     }
 }

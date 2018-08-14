@@ -18,7 +18,6 @@ package com.android.settings.bluetooth;
 import static com.google.common.truth.Truth.assertThat;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.shadow.SettingsShadowBluetoothDevice;
 import com.android.settingslib.widget.FooterPreference;
 
@@ -27,24 +26,24 @@ import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows=SettingsShadowBluetoothDevice.class)
+@Config(shadows = SettingsShadowBluetoothDevice.class)
 public class BluetoothDetailsMacAddressControllerTest extends BluetoothDetailsControllerTestBase {
-    private BluetoothDetailsMacAddressController mController;
 
-    @Override
-    public void setUp() {
-        super.setUp();
-        mController = new BluetoothDetailsMacAddressController(mContext, mFragment, mCachedDevice,
-                mLifecycle);
-        setupDevice(mDeviceConfig);
-    }
+  private BluetoothDetailsMacAddressController mController;
 
-    @Test
-    public void macAddress() {
-        showScreen(mController);
-        FooterPreference footer = (FooterPreference) mScreen.findPreference(
-                mController.getPreferenceKey());
-        assertThat(footer.getTitle().toString()).endsWith(mDeviceConfig.getAddress());
-    }
+  @Override
+  public void setUp() {
+    super.setUp();
+    mController =
+        new BluetoothDetailsMacAddressController(mContext, mFragment, mCachedDevice, mLifecycle);
+    setupDevice(mDeviceConfig);
+  }
+
+  @Test
+  public void macAddress() {
+    showScreen(mController);
+    FooterPreference footer =
+        (FooterPreference) mScreen.findPreference(mController.getPreferenceKey());
+    assertThat(footer.getTitle().toString()).endsWith(mDeviceConfig.getAddress());
+  }
 }

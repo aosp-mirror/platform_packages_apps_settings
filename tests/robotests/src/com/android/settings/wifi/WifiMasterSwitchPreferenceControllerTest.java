@@ -16,59 +16,64 @@
 
 package com.android.settings.wifi;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.IntentFilter;
-import android.net.wifi.WifiManager;
-import android.support.v7.preference.Preference.OnPreferenceChangeListener;
-import android.support.v7.preference.PreferenceScreen;
-
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
-import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.widget.MasterSwitchPreference;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Answers;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkRequest;
+import android.net.NetworkScoreManager;
+import android.net.wifi.WifiManager;
+import android.os.Handler;
+import android.support.v7.preference.Preference.OnPreferenceChangeListener;
+import android.support.v7.preference.PreferenceScreen;
+
+import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowRestrictedLockUtils;
+import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(shadows = ShadowRestrictedLockUtils.class)
 public class WifiMasterSwitchPreferenceControllerTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    Context mMockContext;
     @Mock
     private WifiManager mWifiManager;
     @Mock
     private PreferenceScreen mScreen;
     @Mock
     private MasterSwitchPreference mPreference;
+    @Mock
+    private ConnectivityManager mConnectivityManager;
+    @Mock
+    private NetworkScoreManager mNetworkScoreManager;
 
     private Context mContext;
     private WifiMasterSwitchPreferenceController mController;
-    private FakeFeatureFactory mFakeFeatureFactory;
     private MetricsFeatureProvider mMetricsFeatureProvider;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mMockContext);
-        mFakeFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mMockContext);
-        mMetricsFeatureProvider = mFakeFeatureFactory.getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FakeFeatureFactory.setupForTest().getMetricsFeatureProvider();
         mContext = spy(RuntimeEnvironment.application.getApplicationContext());
+        when(mContext.getSystemService(ConnectivityManager.class)).thenReturn(mConnectivityManager);
+        when(mContext.getSystemService(NetworkScoreManager.class)).thenReturn(mNetworkScoreManager);
         mController = new WifiMasterSwitchPreferenceController(mContext, mMetricsFeatureProvider);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
@@ -76,15 +81,26 @@ public class WifiMasterSwitchPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_shouldAlwaysReturnTrue() {
+    public void testWifiMasterSwitch_byDefault_shouldBeShown() {
         assertThat(mController.isAvailable()).isTrue();
     }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void testWifiMasterSwitch_ifDisabled_shouldNotBeShown() {
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
 
     @Test
     public void onResume_shouldRegisterCallback() {
         mController.onResume();
 
         verify(mContext).registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class));
+        verify(mConnectivityManager).registerNetworkCallback(
+                any(NetworkRequest.class),
+                any(ConnectivityManager.NetworkCallback.class),
+                any(Handler.class));
     }
 
     @Test
@@ -93,6 +109,8 @@ public class WifiMasterSwitchPreferenceControllerTest {
         mController.onPause();
 
         verify(mContext).unregisterReceiver(any(BroadcastReceiver.class));
+        verify(mConnectivityManager).unregisterNetworkCallback(
+                any(ConnectivityManager.NetworkCallback.class));
     }
 
     @Test

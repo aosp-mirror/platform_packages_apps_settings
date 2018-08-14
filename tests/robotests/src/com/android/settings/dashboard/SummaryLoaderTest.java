@@ -16,40 +16,31 @@
 
 package com.android.settings.dashboard;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.when;
+
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
-import org.robolectric.annotation.Config;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SummaryLoaderTest {
 
     private static final String SUMMARY_1 = "summary1";
     private static final String SUMMARY_2 = "summary2";
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
     private SummaryLoader mSummaryLoader;
     private boolean mCallbackInvoked;
     private Tile mTile;
@@ -58,21 +49,21 @@ public class SummaryLoaderTest {
     @Before
     public void SetUp() {
         MockitoAnnotations.initMocks(this);
-        mFeatureFactory = FakeFeatureFactory.setupForTest(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
 
         mTile = new Tile();
         mTile.summary = SUMMARY_1;
         mCallbackInvoked = false;
 
         final Activity activity = Robolectric.buildActivity(Activity.class).get();
-        final List<DashboardCategory> categories = new ArrayList<>();
-        mSummaryLoader = new SummaryLoader(activity, categories);
-        mSummaryLoader.setSummaryConsumer(new SummaryLoader.SummaryConsumer() {
-            @Override
-            public void notifySummaryChanged(Tile tile) {
-                mCallbackInvoked = true;
-            }
-        });
+
+        mSummaryLoader = new SummaryLoader(activity, CategoryKey.CATEGORY_HOMEPAGE);
+        mSummaryLoader.setSummaryConsumer(tile -> mCallbackInvoked = true);
+    }
+
+    @Test
+    public void newInstance_shouldNotLoadCategory() {
+        verifyZeroInteractions(mFeatureFactory.dashboardFeatureProvider);
     }
 
     @Test
@@ -91,7 +82,6 @@ public class SummaryLoaderTest {
 
     @Test
     public void testUpdateSummaryToCache_hasCache_shouldUpdate() {
-
         final String testSummary = "test_summary";
         final DashboardCategory category = new DashboardCategory();
         final Tile tile = new Tile();

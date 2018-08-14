@@ -16,26 +16,24 @@
 
 package com.android.settings.notification;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.media.RingtoneManager;
 import android.telephony.TelephonyManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class PhoneRingtonePreferenceControllerTest {
 
     @Mock
@@ -49,7 +47,7 @@ public class PhoneRingtonePreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         ShadowApplication shadowContext = ShadowApplication.getInstance();
         shadowContext.setSystemService(Context.TELEPHONY_SERVICE, mTelephonyManager);
-        mContext = shadowContext.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mController = new PhoneRingtonePreferenceController(mContext);
     }
 
@@ -71,5 +69,4 @@ public class PhoneRingtonePreferenceControllerTest {
     public void getRingtoneType_shouldReturnRingtone() {
         assertThat(mController.getRingtoneType()).isEqualTo(RingtoneManager.TYPE_RINGTONE);
     }
-
 }

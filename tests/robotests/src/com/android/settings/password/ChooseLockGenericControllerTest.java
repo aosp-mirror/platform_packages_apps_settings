@@ -17,9 +17,7 @@
 package com.android.settings.password;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doReturn;
@@ -30,7 +28,6 @@ import android.content.ComponentName;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 
 import org.junit.After;
@@ -45,12 +42,7 @@ import java.util.Arrays;
 import java.util.regex.Pattern;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(
-        manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = {
-                SettingsShadowResources.class
-        })
+@Config(shadows = SettingsShadowResources.class)
 public class ChooseLockGenericControllerTest {
 
     private ChooseLockGenericController mController;
@@ -213,8 +205,8 @@ public class ChooseLockGenericControllerTest {
                 .when(mDevicePolicyManager)
                 .getPasswordQuality(nullable(ComponentName.class), anyInt());
 
-        int upgradedQuality = mController.upgradeQuality(
-                DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC);
+        final int upgradedQuality =
+            mController.upgradeQuality(DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC);
         assertThat(upgradedQuality).named("upgradedQuality")
                 .isEqualTo(DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC);
     }
@@ -225,8 +217,8 @@ public class ChooseLockGenericControllerTest {
                 .when(mDevicePolicyManager)
                 .getPasswordQuality(nullable(ComponentName.class), anyInt());
 
-        int upgradedQuality = mController.upgradeQuality(
-                DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
+        final int upgradedQuality =
+            mController.upgradeQuality(DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
         assertThat(upgradedQuality).named("upgradedQuality")
                 .isEqualTo(DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC);
     }

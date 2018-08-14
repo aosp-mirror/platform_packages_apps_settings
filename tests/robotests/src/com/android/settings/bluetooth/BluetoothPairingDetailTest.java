@@ -17,7 +17,6 @@
 package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyInt;
@@ -31,12 +30,10 @@ import static org.mockito.Mockito.verify;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.res.Resources;
-import android.os.UserManager;
 import android.support.v7.preference.PreferenceGroup;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -49,14 +46,10 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BluetoothPairingDetailTest {
 
-    @Mock
-    private UserManager mUserManager;
     @Mock
     private Resources mResource;
     @Mock
@@ -90,10 +83,10 @@ public class BluetoothPairingDetailTest {
 
     @Test
     public void testInitPreferencesFromPreferenceScreen_findPreferences() {
-        doReturn(mAvailableDevicesCategory).when(mFragment).findPreference(
-                BluetoothPairingDetail.KEY_AVAIL_DEVICES);
-        doReturn(mFooterPreference).when(mFragment).findPreference(
-                BluetoothPairingDetail.KEY_FOOTER_PREF);
+        doReturn(mAvailableDevicesCategory).when(mFragment)
+            .findPreference(BluetoothPairingDetail.KEY_AVAIL_DEVICES);
+        doReturn(mFooterPreference).when(mFragment)
+            .findPreference(BluetoothPairingDetail.KEY_FOOTER_PREF);
 
         mFragment.initPreferencesFromPreferenceScreen();
 
@@ -121,7 +114,7 @@ public class BluetoothPairingDetailTest {
         mFragment.updateContent(BluetoothAdapter.STATE_ON);
 
         verify(mFragment).addDeviceCategory(mAvailableDevicesCategory,
-                R.string.bluetooth_preference_found_devices,
+                R.string.bluetooth_preference_found_media_devices,
                 BluetoothDeviceFilter.UNBONDED_DEVICE_FILTER, false);
         verify(mLocalAdapter).setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE);
     }
@@ -131,6 +124,25 @@ public class BluetoothPairingDetailTest {
         mFragment.updateContent(BluetoothAdapter.STATE_OFF);
 
         verify(mFragment).finish();
+    }
+
+    @Test
+    public void testUpdateBluetooth_bluetoothOff_turnOnBluetooth() {
+        doReturn(false).when(mLocalAdapter).isEnabled();
+
+        mFragment.updateBluetooth();
+
+        verify(mLocalAdapter).enable();
+    }
+
+    @Test
+    public void testUpdateBluetooth_bluetoothOn_updateState() {
+        doReturn(true).when(mLocalAdapter).isEnabled();
+        doNothing().when(mFragment).updateContent(anyInt());
+
+        mFragment.updateBluetooth();
+
+        verify(mFragment).updateContent(anyInt());
     }
 
     @Test
@@ -180,7 +192,4 @@ public class BluetoothPairingDetailTest {
         // Verify that clean up only happen once at initialization
         verify(mAvailableDevicesCategory, times(1)).removeAll();
     }
-
-
-
 }

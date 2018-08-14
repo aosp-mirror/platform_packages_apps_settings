@@ -55,26 +55,6 @@ public class ManagedLockPasswordProvider {
     CharSequence getPickerOptionTitle(boolean forFingerprint) { return ""; }
 
     /**
-     * Gets resource id of the lock screen preference that should be displayed in security settings
-     * if the current password quality is set to
-     * {@link android.app.admin.DevicePolicyManager#PASSWORD_QUALITY_MANAGED}.
-     * @param forProfile Whether the settings are shown for a user profile rather than a user.
-     */
-    public int getResIdForLockUnlockScreen(boolean forProfile) {
-        return forProfile ? R.xml.security_settings_password_profile
-                : R.xml.security_settings_password;
-    }
-
-    /**
-     * Gets resource id of the subscreen that should be shown after clicking gear icon for lock
-     * screen preference in security settings if the current password quality is set to
-     * {@link android.app.admin.DevicePolicyManager#PASSWORD_QUALITY_MANAGED}.
-     */
-    public int getResIdForLockUnlockSubScreen() {
-        return R.xml.security_settings_password_sub;
-    }
-
-    /**
      * Creates intent that should be launched when user chooses managed password in the lock
      * settings picker.
      * @param requirePasswordToDecrypt Whether a password is needed to decrypt the user.

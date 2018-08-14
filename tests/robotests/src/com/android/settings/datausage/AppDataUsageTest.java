@@ -16,7 +16,6 @@
 
 package com.android.settings.datausage;
 
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyInt;
@@ -29,22 +28,23 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.Context;
 import android.content.pm.PackageManager;
+import android.net.NetworkPolicyManager;
 import android.os.Bundle;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.ArraySet;
 import android.view.View;
 
-import com.android.settings.TestConfig;
-import com.android.settings.applications.PackageManagerWrapper;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
+import com.android.settings.testutils.shadow.ShadowRestrictedLockUtils;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.AppItem;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.After;
 import org.junit.Before;
@@ -58,12 +58,9 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = ShadowEntityHeaderController.class)
+@Config(shadows = {ShadowEntityHeaderController.class, ShadowRestrictedLockUtils.class})
 public class AppDataUsageTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private EntityHeaderController mHeaderController;
     @Mock
@@ -74,7 +71,7 @@ public class AppDataUsageTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
+        FakeFeatureFactory.setupForTest();
     }
 
     @After
@@ -90,9 +87,8 @@ public class AppDataUsageTest {
 
         mFragment = spy(new AppDataUsage());
 
-        doReturn(mock(PreferenceManager.class, RETURNS_DEEP_STUBS))
-                .when(mFragment)
-                .getPreferenceManager();
+        when(mFragment.getPreferenceManager())
+            .thenReturn(mock(PreferenceManager.class, RETURNS_DEEP_STUBS));
         doReturn(mock(PreferenceScreen.class)).when(mFragment).getPreferenceScreen();
         ReflectionHelpers.setField(mFragment, "mAppItem", mock(AppItem.class));
 
@@ -123,9 +119,8 @@ public class AppDataUsageTest {
         when(mHeaderController.setUid(fakeUserId)).thenReturn(mHeaderController);
         when(mHeaderController.setHasAppInfoLink(anyBoolean())).thenReturn(mHeaderController);
 
-        doReturn(mock(PreferenceManager.class, RETURNS_DEEP_STUBS))
-                .when(mFragment)
-                .getPreferenceManager();
+        when(mFragment.getPreferenceManager())
+            .thenReturn(mock(PreferenceManager.class, RETURNS_DEEP_STUBS));
         doReturn(mock(PreferenceScreen.class)).when(mFragment).getPreferenceScreen();
 
         mFragment.onViewCreated(new View(RuntimeEnvironment.application), new Bundle());
@@ -138,7 +133,7 @@ public class AppDataUsageTest {
     public void changePreference_backgroundData_shouldUpdateUI() {
         mFragment = spy(new AppDataUsage());
         final AppItem appItem = new AppItem(123456789);
-        final SwitchPreference pref = mock(SwitchPreference.class);
+        final RestrictedSwitchPreference pref = mock(RestrictedSwitchPreference.class);
         final DataSaverBackend dataSaverBackend = mock(DataSaverBackend.class);
         ReflectionHelpers.setField(mFragment, "mAppItem", appItem);
         ReflectionHelpers.setField(mFragment, "mRestrictBackground", pref);
@@ -149,5 +144,32 @@ public class AppDataUsageTest {
         mFragment.onPreferenceChange(pref, true /* value */);
 
         verify(mFragment).updatePrefs();
+    }
+
+    @Test
+    public void updatePrefs_restrictedByAdmin_shouldDisablePreference() {
+        mFragment = spy(new AppDataUsage());
+        final int testUid = 123123;
+        final AppItem appItem = new AppItem(testUid);
+        final RestrictedSwitchPreference restrictBackgroundPref
+                = mock(RestrictedSwitchPreference.class);
+        final RestrictedSwitchPreference unrestrictedDataPref
+                = mock(RestrictedSwitchPreference.class);
+        final DataSaverBackend dataSaverBackend = mock(DataSaverBackend.class);
+        final NetworkPolicyManager networkPolicyManager = mock(NetworkPolicyManager.class);
+        ReflectionHelpers.setField(mFragment, "mAppItem", appItem);
+        ReflectionHelpers.setField(mFragment, "mRestrictBackground", restrictBackgroundPref);
+        ReflectionHelpers.setField(mFragment, "mUnrestrictedData", unrestrictedDataPref);
+        ReflectionHelpers.setField(mFragment, "mDataSaverBackend", dataSaverBackend);
+        ReflectionHelpers.setField(mFragment.services, "mPolicyManager", networkPolicyManager);
+
+        ShadowRestrictedLockUtils.setRestricted(true);
+        doReturn(NetworkPolicyManager.POLICY_NONE).when(networkPolicyManager)
+                .getUidPolicy(testUid);
+
+        mFragment.updatePrefs();
+
+        verify(restrictBackgroundPref).setDisabledByAdmin(any(EnforcedAdmin.class));
+        verify(unrestrictedDataPref).setDisabledByAdmin(any(EnforcedAdmin.class));
     }
 }

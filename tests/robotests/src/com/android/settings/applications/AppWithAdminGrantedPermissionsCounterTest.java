@@ -16,30 +16,6 @@
 
 package com.android.settings.applications;
 
-import android.app.admin.DevicePolicyManager;
-import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.UserInfo;
-import android.os.Build;
-import android.os.RemoteException;
-import android.os.UserHandle;
-import android.os.UserManager;
-
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-import com.android.settings.enterprise.DevicePolicyManagerWrapper;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
-
-import java.util.Arrays;
-
 import static com.android.settings.testutils.ApplicationTestUtils.buildInfo;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyInt;
@@ -50,11 +26,30 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-/**
- * Tests for {@link InstalledAppCounter}.
- */
+import android.app.admin.DevicePolicyManager;
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.IPackageManager;
+import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
+import android.os.Build;
+import android.os.RemoteException;
+import android.os.UserHandle;
+import android.os.UserManager;
+
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.robolectric.shadows.ShadowApplication;
+
+import java.util.Arrays;
+
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class AppWithAdminGrantedPermissionsCounterTest {
 
     private final String APP_1 = "app1";
@@ -79,11 +74,16 @@ public final class AppWithAdminGrantedPermissionsCounterTest {
     private final String PERMISSION_2 = "some.permission.2";
     private final String[] PERMISSIONS = {PERMISSION_1, PERMISSION_2};
 
-    @Mock private UserManager mUserManager;
-    @Mock private Context mContext;
-    @Mock private PackageManagerWrapper mPackageManager;
-    @Mock private IPackageManagerWrapper mPackageManagerService;
-    @Mock private DevicePolicyManagerWrapper mDevicePolicyManager;
+    @Mock
+    private UserManager mUserManager;
+    @Mock
+    private Context mContext;
+    @Mock
+    private PackageManagerWrapper mPackageManager;
+    @Mock
+    private IPackageManager mPackageManagerService;
+    @Mock
+    private DevicePolicyManager mDevicePolicyManager;
 
     private int mAppCount = -1;
     private ApplicationInfo mApp1;
@@ -213,13 +213,13 @@ public final class AppWithAdminGrantedPermissionsCounterTest {
         // * app5 uses install-time permissions. It was installed by the admin but did not request
         //        any of the permissions. It should not be counted.
         when(mPackageManager.getInstalledApplicationsAsUser(PackageManager.GET_DISABLED_COMPONENTS
-                | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS
-                | PackageManager.MATCH_ANY_USER,
+                        | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS
+                        | PackageManager.MATCH_ANY_USER,
                 MAIN_USER_ID)).thenReturn(Arrays.asList(mApp1, mApp2, mApp3, mApp4, mApp5));
         // The second user has one app installed. This app uses run-time permissions. It has been
         // granted both permissions by the admin. It should be counted.
         when(mPackageManager.getInstalledApplicationsAsUser(PackageManager.GET_DISABLED_COMPONENTS
-                | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS,
+                        | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS,
                 MANAGED_PROFILE_ID)).thenReturn(Arrays.asList(mApp6));
 
         // app3 and app5 were installed by enterprise policy.
@@ -248,9 +248,9 @@ public final class AppWithAdminGrantedPermissionsCounterTest {
                 new UserInfo(MANAGED_PROFILE_ID, "managed profile", 0)));
     }
 
-    private class AppWithAdminGrantedPermissionsCounterTestable extends
-            AppWithAdminGrantedPermissionsCounter {
-        public AppWithAdminGrantedPermissionsCounterTestable(String[] permissions) {
+    private class AppWithAdminGrantedPermissionsCounterTestable
+            extends AppWithAdminGrantedPermissionsCounter {
+        private AppWithAdminGrantedPermissionsCounterTestable(String[] permissions) {
             super(mContext, permissions, mPackageManager, mPackageManagerService,
                     mDevicePolicyManager);
         }

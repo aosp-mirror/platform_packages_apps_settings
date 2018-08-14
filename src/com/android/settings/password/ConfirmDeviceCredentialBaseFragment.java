@@ -50,15 +50,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.OptionsMenuFragment;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.fingerprint.FingerprintUiHelper;
 
 /**
  * Base fragment to be shared for PIN/Pattern/Password confirmation fragments.
  */
-public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFragment
+public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFragment
         implements FingerprintUiHelper.Callback {
 
     public static final String PACKAGE = "com.android.settings";
@@ -94,6 +94,11 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
     protected boolean mFrp;
     private CharSequence mFrpAlternateButtonText;
 
+    private boolean isInternalActivity() {
+        return (getActivity() instanceof ConfirmLockPassword.InternalActivity)
+                || (getActivity() instanceof ConfirmLockPattern.InternalActivity);
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,7 +108,8 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
                 ChooseLockSettingsHelper.EXTRA_KEY_RETURN_CREDENTIALS, false);
         // Only take this argument into account if it belongs to the current profile.
         Intent intent = getActivity().getIntent();
-        mUserId = Utils.getUserIdFromBundle(getActivity(), intent.getExtras());
+        mUserId = Utils.getUserIdFromBundle(getActivity(), intent.getExtras(),
+                isInternalActivity());
         mFrp = (mUserId == LockPatternUtils.USER_FRP);
         mUserManager = UserManager.get(getActivity());
         mEffectiveUserId = mUserManager.getCredentialOwnerProfile(mUserId);
@@ -141,7 +147,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
                 getActivity(),
                 Utils.getUserIdFromBundle(
                         getActivity(),
-                        getActivity().getIntent().getExtras()));
+                        getActivity().getIntent().getExtras(), isInternalActivity()));
         if (mUserManager.isManagedProfile(credentialOwnerUserId)) {
             setWorkChallengeBackground(view, credentialOwnerUserId);
         }
@@ -243,7 +249,6 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
             try {
                 IActivityManager activityManager = ActivityManager.getService();
                 final ActivityOptions options = ActivityOptions.makeBasic();
-                options.setLaunchStackId(ActivityManager.StackId.INVALID_STACK_ID);
                 activityManager.startActivityFromRecents(taskId, options.toBundle());
                 return;
             } catch (RemoteException e) {

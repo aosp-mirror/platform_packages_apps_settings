@@ -17,25 +17,24 @@
 
 package com.android.settings.search;
 
+import static com.google.common.truth.Truth.assertThat;
+import static junit.framework.Assert.fail;
+
 import android.content.Intent;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
-import static junit.framework.Assert.fail;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ResultPayloadUtilsTest {
-    private ResultPayload payload;
 
-    private final String EXTRA_KEY = "key";
-    private final String EXTRA_VALUE = "value";
+    private static final String EXTRA_KEY = "key";
+    private static final String EXTRA_VALUE = "value";
+
+    private ResultPayload payload;
 
     @Before
     public void setUp() {
@@ -50,7 +49,7 @@ public class ResultPayloadUtilsTest {
         try {
             ResultPayloadUtils.unmarshall(badData, ResultPayload.CREATOR);
             fail("unmarshall should throw exception");
-        } catch ( RuntimeException e) {
+        } catch (RuntimeException e) {
             assertThat(e).isNotNull();
         }
     }
@@ -65,12 +64,11 @@ public class ResultPayloadUtilsTest {
     @Test
     public void testUnmarshall_PreservedData() {
         byte[] marshalledPayload = ResultPayloadUtils.marshall(payload);
-        ResultPayload newPayload = ResultPayloadUtils.unmarshall(marshalledPayload,
-                ResultPayload.CREATOR);
+        ResultPayload newPayload =
+            ResultPayloadUtils.unmarshall(marshalledPayload, ResultPayload.CREATOR);
 
         String originalIntentExtra = payload.getIntent().getStringExtra(EXTRA_KEY);
         String copiedIntentExtra = newPayload.getIntent().getStringExtra(EXTRA_KEY);
         assertThat(originalIntentExtra).isEqualTo(copiedIntentExtra);
     }
-
 }

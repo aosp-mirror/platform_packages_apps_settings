@@ -16,27 +16,24 @@
 
 package com.android.settings.network;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import android.content.Context;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
-
-import static com.google.common.truth.Truth.assertThat;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class MobilePlanPreferenceControllerTest {
 
     @Test
     public void testNoProvisionStringFormattedCorrectly() {
         final String operator = "test_operator";
-        final Context context = ShadowApplication.getInstance().getApplicationContext();
+        final Context context = RuntimeEnvironment.application;
         assertThat(context.getString(R.string.mobile_no_provisioning_url, operator, operator))
                 .contains(operator);
     }

@@ -19,12 +19,19 @@ package com.android.settings.notification;
 import android.content.Context;
 import android.media.RingtoneManager;
 
+import com.android.settings.R;
+
 public class NotificationRingtonePreferenceController extends RingtonePreferenceControllerBase {
 
     private static final String KEY_NOTIFICATION_RINGTONE = "notification_ringtone";
 
     public NotificationRingtonePreferenceController(Context context) {
         super(context);
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return mContext.getResources().getBoolean(R.bool.config_show_notification_ringtone);
     }
 
     @Override

@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge.anomaly.action;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
@@ -26,10 +25,9 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,11 +35,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ForceStopActionTest {
+
     private static final String PACKAGE_NAME = "com.android.app";
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -59,15 +56,13 @@ public class ForceStopActionTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        FakeFeatureFactory.setupForTest(mContext);
+        FakeFeatureFactory.setupForTest();
         doReturn(mActivityManager).when(mContext).getSystemService(Context.ACTIVITY_SERVICE);
         doReturn(mPackageManager).when(mContext).getPackageManager();
-        doReturn(mApplicationInfo).when(mPackageManager).getApplicationInfo(PACKAGE_NAME,
-                PackageManager.GET_META_DATA);
+        doReturn(mApplicationInfo).when(mPackageManager)
+            .getApplicationInfo(PACKAGE_NAME, PackageManager.GET_META_DATA);
 
-        mAnomaly = new Anomaly.Builder()
-                .setPackageName(PACKAGE_NAME)
-                .build();
+        mAnomaly = new Anomaly.Builder().setPackageName(PACKAGE_NAME).build();
         mForceStopAction = new ForceStopAction(mContext);
     }
 

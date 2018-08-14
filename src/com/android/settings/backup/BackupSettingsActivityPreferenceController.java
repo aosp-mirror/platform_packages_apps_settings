@@ -19,42 +19,37 @@ package com.android.settings.backup;
 import android.app.backup.BackupManager;
 import android.content.Context;
 import android.os.UserManager;
-import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.core.BasePreferenceController;
 
-public class BackupSettingsActivityPreferenceController extends
-        AbstractPreferenceController implements PreferenceControllerMixin {
+public class BackupSettingsActivityPreferenceController extends BasePreferenceController {
+    private static final String TAG = "BackupSettingActivityPC";
+
     private static final String KEY_BACKUP_SETTINGS = "backup_settings";
-    private static final String TAG = "BackupSettingActivityPC" ;
 
     private final UserManager mUm;
     private final BackupManager mBackupManager;
 
     public BackupSettingsActivityPreferenceController(Context context) {
-        super(context);
+        super(context, KEY_BACKUP_SETTINGS);
         mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mBackupManager = new BackupManager(context);
     }
 
     @Override
-    public boolean isAvailable() {
-        return mUm.isAdminUser();
+    public int getAvailabilityStatus() {
+        return mUm.isAdminUser()
+                ? AVAILABLE
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
-    public String getPreferenceKey() {
-        return KEY_BACKUP_SETTINGS;
-    }
-
-    @Override
-    public void updateState(Preference preference) {
+    public CharSequence getSummary() {
         final boolean backupEnabled = mBackupManager.isBackupEnabled();
 
-        preference.setSummary(backupEnabled
-                ? R.string.accessibility_feature_state_on
-                : R.string.accessibility_feature_state_off);
+        return backupEnabled
+                ? mContext.getText(R.string.accessibility_feature_state_on)
+                : mContext.getText(R.string.accessibility_feature_state_off);
     }
 }

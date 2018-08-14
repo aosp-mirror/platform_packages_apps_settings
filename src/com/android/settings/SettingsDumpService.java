@@ -15,7 +15,9 @@
 package com.android.settings;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.ConnectivityManager;
@@ -27,9 +29,12 @@ import android.os.storage.VolumeInfo;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.applications.ProcStatsData;
+import com.android.settings.fuelgauge.batterytip.AnomalyConfigJobService;
 import com.android.settingslib.net.DataUsageController;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,12 +44,20 @@ import java.io.FileDescriptor;
 import java.io.PrintWriter;
 
 public class SettingsDumpService extends Service {
-    @VisibleForTesting static final String KEY_SERVICE = "service";
-    @VisibleForTesting static final String KEY_STORAGE = "storage";
-    @VisibleForTesting static final String KEY_DATAUSAGE = "datausage";
-    @VisibleForTesting static final String KEY_MEMORY = "memory";
-    @VisibleForTesting static final String KEY_DEFAULT_BROWSER_APP = "default_browser_app";
-    @VisibleForTesting static final Intent BROWSER_INTENT =
+    @VisibleForTesting
+    static final String KEY_SERVICE = "service";
+    @VisibleForTesting
+    static final String KEY_STORAGE = "storage";
+    @VisibleForTesting
+    static final String KEY_DATAUSAGE = "datausage";
+    @VisibleForTesting
+    static final String KEY_MEMORY = "memory";
+    @VisibleForTesting
+    static final String KEY_DEFAULT_BROWSER_APP = "default_browser_app";
+    @VisibleForTesting
+    static final String KEY_ANOMALY_DETECTION = "anomaly_detection";
+    @VisibleForTesting
+    static final Intent BROWSER_INTENT =
             new Intent("android.intent.action.VIEW", Uri.parse("http://"));
 
     @Override
@@ -62,6 +75,7 @@ public class SettingsDumpService extends Service {
             dump.put(KEY_DATAUSAGE, dumpDataUsage());
             dump.put(KEY_MEMORY, dumpMemory());
             dump.put(KEY_DEFAULT_BROWSER_APP, dumpDefaultBrowser());
+            dump.put(KEY_ANOMALY_DETECTION, dumpAnomalyDetection());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -150,5 +164,19 @@ public class SettingsDumpService extends Service {
         } else {
             return resolveInfo.activityInfo.packageName;
         }
+    }
+
+    @VisibleForTesting
+    JSONObject dumpAnomalyDetection() throws JSONException {
+        final JSONObject obj = new JSONObject();
+        final SharedPreferences sharedPreferences = getSharedPreferences(
+                AnomalyConfigJobService.PREF_DB,
+                Context.MODE_PRIVATE);
+        final int currentVersion = sharedPreferences.getInt(
+                AnomalyConfigJobService.KEY_ANOMALY_CONFIG_VERSION,
+                0 /* defValue */);
+        obj.put("anomaly_config_version", String.valueOf(currentVersion));
+
+        return obj;
     }
 }

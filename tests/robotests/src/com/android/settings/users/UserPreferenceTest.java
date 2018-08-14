@@ -25,7 +25,6 @@ import android.os.UserHandle;
 import android.view.View;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settingslib.RestrictedPreferenceHelper;
 
 import org.junit.Before;
@@ -34,11 +33,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class UserPreferenceTest {
 
     @Mock

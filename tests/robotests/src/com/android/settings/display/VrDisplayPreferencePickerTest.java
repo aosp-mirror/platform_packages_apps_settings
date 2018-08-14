@@ -26,7 +26,6 @@ import android.provider.Settings;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 
 import org.junit.Before;
@@ -39,7 +38,6 @@ import org.robolectric.annotation.Config;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class VrDisplayPreferencePickerTest {
 
     private VrDisplayPreferencePicker mPicker;

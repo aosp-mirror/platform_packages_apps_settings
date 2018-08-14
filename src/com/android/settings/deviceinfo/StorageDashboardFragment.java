@@ -35,9 +35,6 @@ import android.view.View;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.applications.PackageManagerWrapperImpl;
-import com.android.settings.applications.UserManagerWrapper;
-import com.android.settings.applications.UserManagerWrapperImpl;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.deviceinfo.storage.AutomaticStorageManagementSwitchPreferenceController;
 import com.android.settings.deviceinfo.storage.CachedStorageValuesHelper;
@@ -49,22 +46,23 @@ import com.android.settings.deviceinfo.storage.UserIconLoader;
 import com.android.settings.deviceinfo.storage.VolumeSizesLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class StorageDashboardFragment extends DashboardFragment
-    implements LoaderManager.LoaderCallbacks<SparseArray<StorageAsyncLoader.AppsStorageResult>> {
+public class StorageDashboardFragment extends DashboardFragment implements
+        LoaderManager.LoaderCallbacks<SparseArray<StorageAsyncLoader.AppsStorageResult>> {
     private static final String TAG = "StorageDashboardFrag";
     private static final int STORAGE_JOB_ID = 0;
     private static final int ICON_JOB_ID = 1;
     private static final int VOLUME_SIZE_JOB_ID = 2;
-    private static final int OPTIONS_MENU_MIGRATE_DATA = 100;
 
     private VolumeInfo mVolume;
     private PrivateStorageInfo mStorageInfo;
@@ -95,7 +93,7 @@ public class StorageDashboardFragment extends DashboardFragment
     @VisibleForTesting
     void initializeOptionsMenu(Activity activity) {
         mOptionMenuController = new PrivateVolumeOptionMenuController(
-                activity, mVolume, new PackageManagerWrapperImpl(activity.getPackageManager()));
+                activity, mVolume, new PackageManagerWrapper(activity.getPackageManager()));
         getLifecycle().addObserver(mOptionMenuController);
         setHasOptionsMenu(true);
         activity.invalidateOptionsMenu();
@@ -106,6 +104,13 @@ public class StorageDashboardFragment extends DashboardFragment
         super.onViewCreated(v, savedInstanceState);
         initializeCacheProvider();
         maybeSetLoading(isQuotaSupported());
+
+        final Activity activity = getActivity();
+        EntityHeaderController.newInstance(activity, this /*fragment*/,
+                null /* header view */)
+                .setRecyclerView(getListView(), getLifecycle())
+                .styleActionBar(activity);
+
     }
 
     @Override
@@ -118,7 +123,7 @@ public class StorageDashboardFragment extends DashboardFragment
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_url_storage_dashboard;
     }
 
@@ -167,7 +172,7 @@ public class StorageDashboardFragment extends DashboardFragment
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         mSummaryController = new StorageSummaryDonutPreferenceController(context);
         controllers.add(mSummaryController);
@@ -177,8 +182,7 @@ public class StorageDashboardFragment extends DashboardFragment
                 mVolume, new StorageManagerVolumeProvider(sm));
         controllers.add(mPreferenceController);
 
-        UserManagerWrapper userManager =
-                new UserManagerWrapperImpl(context.getSystemService(UserManager.class));
+        final UserManager userManager = context.getSystemService(UserManager.class);
         mSecondaryUsers = SecondaryUserController.getSecondaryUserControllers(context, userManager);
         controllers.addAll(mSecondaryUsers);
 
@@ -224,10 +228,10 @@ public class StorageDashboardFragment extends DashboardFragment
                 }
 
                 @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+                public List<AbstractPreferenceController> createPreferenceControllers(
+                        Context context) {
                     final StorageManager sm = context.getSystemService(StorageManager.class);
-                    final UserManagerWrapper userManager =
-                            new UserManagerWrapperImpl(context.getSystemService(UserManager.class));
+                    final UserManager userManager = context.getSystemService(UserManager.class);
                     final List<AbstractPreferenceController> controllers = new ArrayList<>();
                     controllers.add(new StorageSummaryDonutPreferenceController(context));
                     controllers.add(new StorageItemPreferenceController(context, null /* host */,
@@ -242,12 +246,11 @@ public class StorageDashboardFragment extends DashboardFragment
     @Override
     public Loader<SparseArray<StorageAsyncLoader.AppsStorageResult>> onCreateLoader(int id,
             Bundle args) {
-        Context context = getContext();
-        return new StorageAsyncLoader(context,
-                new UserManagerWrapperImpl(context.getSystemService(UserManager.class)),
+        final Context context = getContext();
+        return new StorageAsyncLoader(context, context.getSystemService(UserManager.class),
                 mVolume.fsUuid,
                 new StorageStatsSource(context),
-                new PackageManagerWrapperImpl(context.getPackageManager()));
+                new PackageManagerWrapper(context.getPackageManager()));
     }
 
     @Override
@@ -355,7 +358,8 @@ public class StorageDashboardFragment extends DashboardFragment
         }
 
         @Override
-        public void onLoaderReset(Loader<SparseArray<Drawable>> loader) {}
+        public void onLoaderReset(Loader<SparseArray<Drawable>> loader) {
+        }
     }
 
     public final class VolumeSizeCallbacks
@@ -370,7 +374,8 @@ public class StorageDashboardFragment extends DashboardFragment
         }
 
         @Override
-        public void onLoaderReset(Loader<PrivateStorageInfo> loader) {}
+        public void onLoaderReset(Loader<PrivateStorageInfo> loader) {
+        }
 
         @Override
         public void onLoadFinished(

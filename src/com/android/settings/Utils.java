@@ -23,10 +23,7 @@ import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
 
 import android.annotation.Nullable;
 import android.app.ActivityManager;
-import android.app.AlertDialog;
 import android.app.AppGlobals;
-import android.app.AppOpsManager;
-import android.app.Dialog;
 import android.app.Fragment;
 import android.app.IActivityManager;
 import android.app.KeyguardManager;
@@ -35,7 +32,6 @@ import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
@@ -49,21 +45,19 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.VectorDrawable;
 import android.hardware.fingerprint.FingerprintManager;
-import android.icu.text.MeasureFormat;
-import android.icu.util.Measure;
-import android.icu.util.MeasureUnit;
 import android.net.ConnectivityManager;
 import android.net.LinkProperties;
 import android.net.Network;
-import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.INetworkManagementService;
-import android.os.Looper;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
@@ -80,41 +74,28 @@ import android.provider.Settings;
 import android.support.annotation.StringRes;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
-import android.support.v7.preference.PreferenceManager;
-import android.support.v7.preference.PreferenceScreen;
 import android.telephony.TelephonyManager;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.text.style.TtsSpan;
 import android.util.ArraySet;
+import android.util.IconDrawableFactory;
 import android.util.Log;
-import android.util.SparseArray;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.Animation.AnimationListener;
-import android.view.animation.AnimationUtils;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TabWidget;
 
 import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.internal.util.ArrayUtils;
-import com.android.internal.util.UserIcons;
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.enterprise.DevicePolicyManagerWrapper;
-import com.android.settings.password.FingerprintManagerWrapper;
-import com.android.settings.password.IFingerprintManager;
+import com.android.settings.password.ChooseLockSettingsHelper;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.InetAddress;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -129,11 +110,6 @@ public final class Utils extends com.android.settingslib.Utils {
     public static final int UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY = 1;
 
     /**
-     * The opacity level of a disabled icon.
-     */
-    public static final float DISABLED_ALPHA = 0.4f;
-
-    /**
      * Color spectrum to use to indicate badness.  0 is completely transparent (no data),
      * 1 is most bad (red), the last value is least bad (green).
      */
@@ -144,13 +120,7 @@ public final class Utils extends com.android.settingslib.Utils {
 
     private static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
 
-    private static final int SECONDS_PER_MINUTE = 60;
-    private static final int SECONDS_PER_HOUR = 60 * 60;
-    private static final int SECONDS_PER_DAY = 24 * 60 * 60;
-
     public static final String OS_PKG = "os";
-
-    private static SparseArray<Bitmap> sDarkDefaultUserBitmapCache = new SparseArray<Bitmap>();
 
     /**
      * Finds a matching activity for a preference's intent. If a matching
@@ -236,12 +206,6 @@ public final class Utils extends com.android.settingslib.Utils {
         return telephony != null && telephony.isVoiceCapable();
     }
 
-    public static boolean isWifiOnly(Context context) {
-        ConnectivityManager cm = (ConnectivityManager)context.getSystemService(
-                Context.CONNECTIVITY_SERVICE);
-        return (cm.isNetworkSupported(ConnectivityManager.TYPE_MOBILE) == false);
-    }
-
     /**
      * Returns the WIFI IP Addresses, if any, taking into account IPv4 and IPv6 style addresses.
      * @param context the application context
@@ -257,16 +221,6 @@ public final class Utils extends com.android.settingslib.Utils {
             return formatIpAddresses(prop);
         }
         return null;
-    }
-
-    /**
-     * Returns the default link's IP addresses, if any, taking into account IPv4 and IPv6 style
-     * addresses.
-     * @return the formatted and newline-separated IP addresses, or null if none.
-     */
-    public static String getDefaultIpAddresses(ConnectivityManager cm) {
-        LinkProperties prop = cm.getActiveLinkProperties();
-        return formatIpAddresses(prop);
     }
 
     private static String formatIpAddresses(LinkProperties prop) {
@@ -348,46 +302,6 @@ public final class Utils extends com.android.settingslib.Utils {
         view.setPaddingRelative(paddingStart, 0, paddingEnd, paddingBottom);
     }
 
-    /* Used by UserSettings as well. Call this on a non-ui thread. */
-    public static void copyMeProfilePhoto(Context context, UserInfo user) {
-        Uri contactUri = Profile.CONTENT_URI;
-
-        int userId = user != null ? user.id : UserHandle.myUserId();
-
-        InputStream avatarDataStream = Contacts.openContactPhotoInputStream(
-                    context.getContentResolver(),
-                    contactUri, true);
-        // If there's no profile photo, assign a default avatar
-        if (avatarDataStream == null) {
-            assignDefaultPhoto(context, userId);
-            return;
-        }
-
-        UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        Bitmap icon = BitmapFactory.decodeStream(avatarDataStream);
-        um.setUserIcon(userId, icon);
-        try {
-            avatarDataStream.close();
-        } catch (IOException ioe) { }
-    }
-
-    /**
-     * Assign the default photo to user with {@paramref userId}
-     * @param context used to get the {@link UserManager}
-     * @param userId  used to get the icon bitmap
-     * @return true if assign photo successfully, false if failed
-     */
-    public static boolean assignDefaultPhoto(Context context, int userId) {
-        if (context == null) {
-            return false;
-        }
-        UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        Bitmap bitmap = getDefaultUserIconAsBitmap(userId);
-        um.setUserIcon(userId, bitmap);
-
-        return true;
-    }
-
     public static String getMeProfileName(Context context, boolean full) {
         if (full) {
             return getProfileDisplayName(context);
@@ -462,148 +376,9 @@ public final class Utils extends com.android.settingslib.Utils {
         }
     }
 
-    /** Not global warming, it's global change warning. */
-    public static Dialog buildGlobalChangeWarningDialog(final Context context, int titleResId,
-            final Runnable positiveAction) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle(titleResId);
-        builder.setMessage(R.string.global_change_warning);
-        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                positiveAction.run();
-            }
-        });
-        builder.setNegativeButton(android.R.string.cancel, null);
-
-        return builder.create();
-    }
-
     public static boolean hasMultipleUsers(Context context) {
         return ((UserManager) context.getSystemService(Context.USER_SERVICE))
                 .getUsers().size() > 1;
-    }
-
-    /**
-     * Start a new instance of the activity, showing only the given fragment.
-     * When launched in this mode, the given preference fragment will be instantiated and fill the
-     * entire activity.
-     *
-     * @param context The context.
-     * @param fragmentName The name of the fragment to display.
-     * @param args Optional arguments to supply to the fragment.
-     * @param resultTo Option fragment that should receive the result of the activity launch.
-     * @param resultRequestCode If resultTo is non-null, this is the request code in which
-     *                          to report the result.
-     * @param titleResId resource id for the String to display for the title of this set
-     *                   of preferences.
-     * @param title String to display for the title of this set of preferences.
-     * @param metricsCategory The current metricsCategory for logging source when fragment starts
-     */
-    public static void startWithFragment(Context context, String fragmentName, Bundle args,
-            Fragment resultTo, int resultRequestCode, int titleResId,
-            CharSequence title, int metricsCategory) {
-        startWithFragment(context, fragmentName, args, resultTo, resultRequestCode,
-                null /* titleResPackageName */, titleResId, title, false /* not a shortcut */,
-                metricsCategory);
-    }
-
-    /**
-     * Start a new instance of the activity, showing only the given fragment.
-     * When launched in this mode, the given preference fragment will be instantiated and fill the
-     * entire activity.
-     *
-     * @param context The context.
-     * @param fragmentName The name of the fragment to display.
-     * @param args Optional arguments to supply to the fragment.
-     * @param resultTo Option fragment that should receive the result of the activity launch.
-     * @param resultRequestCode If resultTo is non-null, this is the request code in which
-     *                          to report the result.
-     * @param titleResPackageName Optional package name for the resource id of the title.
-     * @param titleResId resource id for the String to display for the title of this set
-     *                   of preferences.
-     * @param title String to display for the title of this set of preferences.
-     * @param metricsCategory The current metricsCategory for logging source when fragment starts
-     */
-    public static void startWithFragment(Context context, String fragmentName, Bundle args,
-            Fragment resultTo, int resultRequestCode, String titleResPackageName, int titleResId,
-            CharSequence title, int metricsCategory) {
-        startWithFragment(context, fragmentName, args, resultTo, resultRequestCode,
-                titleResPackageName, titleResId, title, false /* not a shortcut */,
-                metricsCategory);
-    }
-
-    public static void startWithFragment(Context context, String fragmentName, Bundle args,
-            Fragment resultTo, int resultRequestCode, int titleResId,
-            CharSequence title, boolean isShortcut, int metricsCategory) {
-        Intent intent = onBuildStartFragmentIntent(context, fragmentName, args,
-                null /* titleResPackageName */, titleResId, title, isShortcut, metricsCategory);
-        if (resultTo == null) {
-            context.startActivity(intent);
-        } else {
-            resultTo.getActivity().startActivityForResult(intent, resultRequestCode);
-        }
-    }
-
-    public static void startWithFragment(Context context, String fragmentName, Bundle args,
-            Fragment resultTo, int resultRequestCode, String titleResPackageName, int titleResId,
-            CharSequence title, boolean isShortcut, int metricsCategory) {
-        Intent intent = onBuildStartFragmentIntent(context, fragmentName, args, titleResPackageName,
-                titleResId, title, isShortcut, metricsCategory);
-        if (resultTo == null) {
-            context.startActivity(intent);
-        } else {
-            resultTo.startActivityForResult(intent, resultRequestCode);
-        }
-    }
-
-    public static void startWithFragmentAsUser(Context context, String fragmentName, Bundle args,
-            int titleResId, CharSequence title, boolean isShortcut, int metricsCategory,
-            UserHandle userHandle) {
-        // workaround to avoid crash in b/17523189
-        if (userHandle.getIdentifier() == UserHandle.myUserId()) {
-            startWithFragment(context, fragmentName, args, null, 0, titleResId, title, isShortcut,
-                    metricsCategory);
-        } else {
-            Intent intent = onBuildStartFragmentIntent(context, fragmentName, args,
-                    null /* titleResPackageName */, titleResId, title, isShortcut, metricsCategory);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            context.startActivityAsUser(intent, userHandle);
-        }
-    }
-
-    /**
-     * Build an Intent to launch a new activity showing the selected fragment.
-     * The implementation constructs an Intent that re-launches the current activity with the
-     * appropriate arguments to display the fragment.
-     *
-     *
-     * @param context The Context.
-     * @param fragmentName The name of the fragment to display.
-     * @param args Optional arguments to supply to the fragment.
-     * @param titleResPackageName Optional package name for the resource id of the title.
-     * @param titleResId Optional title resource id to show for this item.
-     * @param title Optional title to show for this item.
-     * @param isShortcut  tell if this is a Launcher Shortcut or not
-     * @param sourceMetricsCategory The context (source) from which an action is performed
-     * @return Returns an Intent that can be launched to display the given
-     * fragment.
-     */
-    public static Intent onBuildStartFragmentIntent(Context context, String fragmentName,
-            Bundle args, String titleResPackageName, int titleResId, CharSequence title,
-            boolean isShortcut, int sourceMetricsCategory) {
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.setClass(context, SubSettings.class);
-        intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT, fragmentName);
-        intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS, args);
-        intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RES_PACKAGE_NAME,
-                titleResPackageName);
-        intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, titleResId);
-        intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE, title);
-        intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_AS_SHORTCUT, isShortcut);
-        intent.putExtra(SettingsActivity.EXTRA_SOURCE_METRICS_CATEGORY, sourceMetricsCategory);
-        return intent;
     }
 
     /**
@@ -735,45 +510,6 @@ public final class Utils extends com.android.settingslib.Utils {
         return null;
     }
 
-    /**
-     * Returns the target user for a Settings activity.
-     *
-     * The target user can be either the current user, the user that launched this activity or
-     * the user contained as an extra in the arguments or intent extras.
-     *
-     * You should use {@link #getSecureTargetUser(IBinder, UserManager, Bundle, Bundle)} if
-     * possible.
-     *
-     * @see #getInsecureTargetUser(IBinder, Bundle, Bundle)
-     */
-   public static UserHandle getInsecureTargetUser(IBinder activityToken, @Nullable Bundle arguments,
-           @Nullable Bundle intentExtras) {
-       UserHandle currentUser = new UserHandle(UserHandle.myUserId());
-       IActivityManager am = ActivityManager.getService();
-       try {
-           UserHandle launchedFromUser = new UserHandle(UserHandle.getUserId(
-                   am.getLaunchedFromUid(activityToken)));
-           if (launchedFromUser != null && !launchedFromUser.equals(currentUser)) {
-               return launchedFromUser;
-           }
-           UserHandle extrasUser = intentExtras != null
-                   ? (UserHandle) intentExtras.getParcelable(EXTRA_USER) : null;
-           if (extrasUser != null && !extrasUser.equals(currentUser)) {
-               return extrasUser;
-           }
-           UserHandle argumentsUser = arguments != null
-                   ? (UserHandle) arguments.getParcelable(EXTRA_USER) : null;
-           if (argumentsUser != null && !argumentsUser.equals(currentUser)) {
-               return argumentsUser;
-           }
-       } catch (RemoteException e) {
-           // Should not happen
-           Log.v(TAG, "Could not talk to activity manager.", e);
-           return null;
-       }
-       return currentUser;
-   }
-
    /**
     * Returns true if the user provided is in the same profiles group as the current user.
     */
@@ -793,71 +529,6 @@ public final class Utils extends com.android.settingslib.Utils {
                 (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
 
         return tm.getSimCount() > 1;
-    }
-
-    /**
-     * Returns elapsed time for the given millis, in the following format:
-     * 2d 5h 40m 29s
-     * @param context the application context
-     * @param millis the elapsed time in milli seconds
-     * @param withSeconds include seconds?
-     * @return the formatted elapsed time
-     */
-    public static CharSequence formatElapsedTime(Context context, double millis,
-            boolean withSeconds) {
-        SpannableStringBuilder sb = new SpannableStringBuilder();
-        int seconds = (int) Math.floor(millis / 1000);
-        if (!withSeconds) {
-            // Round up.
-            seconds += 30;
-        }
-
-        int days = 0, hours = 0, minutes = 0;
-        if (seconds >= SECONDS_PER_DAY) {
-            days = seconds / SECONDS_PER_DAY;
-            seconds -= days * SECONDS_PER_DAY;
-        }
-        if (seconds >= SECONDS_PER_HOUR) {
-            hours = seconds / SECONDS_PER_HOUR;
-            seconds -= hours * SECONDS_PER_HOUR;
-        }
-        if (seconds >= SECONDS_PER_MINUTE) {
-            minutes = seconds / SECONDS_PER_MINUTE;
-            seconds -= minutes * SECONDS_PER_MINUTE;
-        }
-
-        final ArrayList<Measure> measureList = new ArrayList(4);
-        if (days > 0) {
-            measureList.add(new Measure(days, MeasureUnit.DAY));
-        }
-        if (hours > 0) {
-            measureList.add(new Measure(hours, MeasureUnit.HOUR));
-        }
-        if (minutes > 0) {
-            measureList.add(new Measure(minutes, MeasureUnit.MINUTE));
-        }
-        if (withSeconds && seconds > 0) {
-            measureList.add(new Measure(seconds, MeasureUnit.SECOND));
-        }
-        if (measureList.size() == 0) {
-            // Everything addable was zero, so nothing was added. We add a zero.
-            measureList.add(new Measure(0, withSeconds ? MeasureUnit.SECOND : MeasureUnit.MINUTE));
-        }
-        final Measure[] measureArray = measureList.toArray(new Measure[measureList.size()]);
-
-        final Locale locale = context.getResources().getConfiguration().locale;
-        final MeasureFormat measureFormat = MeasureFormat.getInstance(
-                locale, MeasureFormat.FormatWidth.NARROW);
-        sb.append(measureFormat.formatMeasures(measureArray));
-
-        if (measureArray.length == 1 && MeasureUnit.MINUTE.equals(measureArray[0].getUnit())) {
-            // Add ttsSpan if it only have minute value, because it will be read as "meters"
-            final TtsSpan ttsSpan = new TtsSpan.MeasureBuilder().setNumber(minutes)
-                    .setUnit("minute").build();
-            sb.setSpan(ttsSpan, 0, sb.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        }
-
-        return sb;
     }
 
     /**
@@ -887,51 +558,12 @@ public final class Utils extends com.android.settingslib.Utils {
         return inflater.inflate(resId, parent, false);
     }
 
-    /**
-     * Return if we are running low on storage space or not.
-     *
-     * @param context The context
-     * @return true if we are running low on storage space
-     */
-    public static boolean isLowStorage(Context context) {
-        final StorageManager sm = StorageManager.from(context);
-        return (sm.getStorageBytesUntilLow(context.getFilesDir()) < 0);
-    }
-
-    /**
-     * Returns a default user icon (as a {@link Bitmap}) for the given user.
-     *
-     * Note that for guest users, you should pass in {@code UserHandle.USER_NULL}.
-     * @param userId the user id or {@code UserHandle.USER_NULL} for a non-user specific icon
-     */
-    public static Bitmap getDefaultUserIconAsBitmap(int userId) {
-        Bitmap bitmap = null;
-        // Try finding the corresponding bitmap in the dark bitmap cache
-        bitmap = sDarkDefaultUserBitmapCache.get(userId);
-        if (bitmap == null) {
-            bitmap = UserIcons.convertToBitmap(UserIcons.getDefaultUserIcon(userId, false));
-            // Save it to cache
-            sDarkDefaultUserBitmapCache.put(userId, bitmap);
-        }
-        return bitmap;
-    }
-
-    public static boolean hasPreferredActivities(PackageManager pm, String packageName) {
-        // Get list of preferred activities
-        List<ComponentName> prefActList = new ArrayList<>();
-        // Intent list cannot be null. so pass empty list
-        List<IntentFilter> intentList = new ArrayList<>();
-        pm.getPreferredActivities(intentList, prefActList, packageName);
-        Log.d(TAG, "Have " + prefActList.size() + " number of activities in preferred list");
-        return prefActList.size() > 0;
-    }
-
     public static ArraySet<String> getHandledDomains(PackageManager pm, String packageName) {
         List<IntentFilterVerificationInfo> iviList = pm.getIntentFilterVerifications(packageName);
         List<IntentFilter> filters = pm.getAllIntentFilters(packageName);
 
         ArraySet<String> result = new ArraySet<>();
-        if (iviList.size() > 0) {
+        if (iviList != null && iviList.size() > 0) {
             for (IntentFilterVerificationInfo ivi : iviList) {
                 for (String host : ivi.getDomains()) {
                     result.add(host);
@@ -998,20 +630,37 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     /**
-     * Returns the user id present in the bundle with {@link Intent#EXTRA_USER_ID} if it
-     * belongs to the current user.
+     * Returns the user id present in the bundle with
+     * {@link Intent#EXTRA_USER_ID} if it belongs to the current user.
      *
-     * @throws SecurityException if the given userId does not belong to the current user group.
+     * @throws SecurityException if the given userId does not belong to the
+     *             current user group.
      */
     public static int getUserIdFromBundle(Context context, Bundle bundle) {
+        return getUserIdFromBundle(context, bundle, false);
+    }
+
+    /**
+     * Returns the user id present in the bundle with
+     * {@link Intent#EXTRA_USER_ID} if it belongs to the current user.
+     *
+     * @param isInternal indicating if the caller is "internal" to the system,
+     *            meaning we're willing to trust extras like
+     *            {@link ChooseLockSettingsHelper#EXTRA_ALLOW_ANY_USER}.
+     * @throws SecurityException if the given userId does not belong to the
+     *             current user group.
+     */
+    public static int getUserIdFromBundle(Context context, Bundle bundle, boolean isInternal) {
         if (bundle == null) {
             return getCredentialOwnerUserId(context);
         }
+        final boolean allowAnyUser = isInternal
+                && bundle.getBoolean(ChooseLockSettingsHelper.EXTRA_ALLOW_ANY_USER, false);
         int userId = bundle.getInt(Intent.EXTRA_USER_ID, UserHandle.myUserId());
         if (userId == LockPatternUtils.USER_FRP) {
-            return enforceSystemUser(context, userId);
+            return allowAnyUser ? userId : enforceSystemUser(context, userId);
         } else {
-            return enforceSameOwner(context, userId);
+            return allowAnyUser ? userId : enforceSameOwner(context, userId);
         }
     }
 
@@ -1058,12 +707,6 @@ public final class Utils extends com.android.settingslib.Utils {
         return um.getCredentialOwnerProfile(userId);
     }
 
-    public static int resolveResource(Context context, int attr) {
-        TypedValue value = new TypedValue();
-        context.getTheme().resolveAttribute(attr, value, true);
-        return value.resourceId;
-    }
-
     private static final StringBuilder sBuilder = new StringBuilder(50);
     private static final java.util.Formatter sFormatter = new java.util.Formatter(
             sBuilder, Locale.getDefault());
@@ -1075,47 +718,6 @@ public final class Utils extends com.android.settingslib.Utils {
             sBuilder.setLength(0);
             return DateUtils.formatDateRange(context, sFormatter, start, end, flags, null)
                     .toString();
-        }
-    }
-
-    public static List<String> getNonIndexable(int xml, Context context) {
-        if (Looper.myLooper() == null) {
-            // Hack to make sure Preferences can initialize.  Prefs expect a looper, but
-            // don't actually use it for the basic stuff here.
-            Looper.prepare();
-        }
-        final List<String> ret = new ArrayList<>();
-        PreferenceManager manager = new PreferenceManager(context);
-        PreferenceScreen screen = manager.inflateFromResource(context, xml, null);
-        checkPrefs(screen, ret);
-
-        return ret;
-    }
-
-    private static void checkPrefs(PreferenceGroup group, List<String> ret) {
-        if (group == null) return;
-        for (int i = 0; i < group.getPreferenceCount(); i++) {
-            Preference pref = group.getPreference(i);
-            if (pref instanceof SelfAvailablePreference
-                    && !((SelfAvailablePreference) pref).isAvailable(group.getContext())) {
-                ret.add(pref.getKey());
-                if (pref instanceof PreferenceGroup) {
-                    addAll((PreferenceGroup) pref, ret);
-                }
-            } else if (pref instanceof PreferenceGroup) {
-                checkPrefs((PreferenceGroup) pref, ret);
-            }
-        }
-    }
-
-    private static void addAll(PreferenceGroup group, List<String> ret) {
-        if (group == null) return;
-        for (int i = 0; i < group.getPreferenceCount(); i++) {
-            Preference pref = group.getPreference(i);
-            ret.add(pref.getKey());
-            if (pref instanceof PreferenceGroup) {
-                addAll((PreferenceGroup) pref, ret);
-            }
         }
     }
 
@@ -1144,14 +746,6 @@ public final class Utils extends com.android.settingslib.Utils {
             return false;
         }
         if (!(new LockPatternUtils(context)).isSecure(userId)) {
-            return false;
-        }
-        return confirmWorkProfileCredentials(context, userId);
-    }
-
-    public static boolean confirmWorkProfileCredentialsIfNecessary(Context context, int userId) {
-        KeyguardManager km = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
-        if (!km.isDeviceLocked(userId)) {
             return false;
         }
         return confirmWorkProfileCredentials(context, userId);
@@ -1207,16 +801,7 @@ public final class Utils extends com.android.settingslib.Utils {
 
     public static FingerprintManager getFingerprintManagerOrNull(Context context) {
         if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)) {
-            return context.getSystemService(FingerprintManager.class);
-        } else {
-            return null;
-        }
-    }
-
-    public static IFingerprintManager getFingerprintManagerWrapperOrNull(Context context) {
-        FingerprintManager fingerprintManager = getFingerprintManagerOrNull(context);
-        if (fingerprintManager != null) {
-            return new FingerprintManagerWrapper(fingerprintManager);
+            return (FingerprintManager) context.getSystemService(Context.FINGERPRINT_SERVICE);
         } else {
             return null;
         }
@@ -1288,7 +873,7 @@ public final class Utils extends com.android.settingslib.Utils {
      * @param packageName package to check about
      */
     public static boolean isProfileOrDeviceOwner(UserManager userManager,
-            DevicePolicyManagerWrapper devicePolicyManager, String packageName) {
+            DevicePolicyManager devicePolicyManager, String packageName) {
         List<UserInfo> userInfos = userManager.getUsers();
         if (devicePolicyManager.isDeviceOwnerAppOnAnyUser(packageName)) {
             return true;
@@ -1318,4 +903,67 @@ public final class Utils extends com.android.settingslib.Utils {
                 && volume.isMountedReadable();
     }
 
+    public static void setEditTextCursorPosition(EditText editText) {
+        editText.setSelection(editText.getText().length());
+    }
+
+    /**
+     * Sets the preference icon with a drawable that is scaled down to to avoid crashing Settings if
+     * it's too big.
+     */
+    public static void setSafeIcon(Preference pref, Drawable icon) {
+        Drawable safeIcon = icon;
+        if ((icon != null) && !(icon instanceof VectorDrawable)) {
+            safeIcon = getSafeDrawable(icon, 500, 500);
+        }
+        pref.setIcon(safeIcon);
+    }
+
+    /**
+     * Gets a drawable with a limited size to avoid crashing Settings if it's too big.
+     *
+     * @param original original drawable, typically an app icon.
+     * @param maxWidth maximum width, in pixels.
+     * @param maxHeight maximum height, in pixels.
+     */
+    public static Drawable getSafeDrawable(Drawable original, int maxWidth, int maxHeight) {
+        final int actualWidth = original.getMinimumWidth();
+        final int actualHeight = original.getMinimumHeight();
+
+        if (actualWidth <= maxWidth && actualHeight <= maxHeight) {
+            return original;
+        }
+
+        float scaleWidth = ((float) maxWidth) / actualWidth;
+        float scaleHeight = ((float) maxHeight) / actualHeight;
+        float scale = Math.min(scaleWidth, scaleHeight);
+        final int width = (int) (actualWidth * scale);
+        final int height = (int) (actualHeight * scale);
+
+        final Bitmap bitmap;
+        if (original instanceof BitmapDrawable) {
+            bitmap = Bitmap.createScaledBitmap(((BitmapDrawable) original).getBitmap(), width,
+                    height, false);
+        } else {
+            bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+            final Canvas canvas = new Canvas(bitmap);
+            original.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+            original.draw(canvas);
+        }
+        return new BitmapDrawable(null, bitmap);
+    }
+
+    /**
+     * Get the {@link Drawable} that represents the app icon
+     */
+    public static Drawable getBadgedIcon(IconDrawableFactory iconDrawableFactory,
+            PackageManager packageManager, String packageName, int userId) {
+        try {
+            final ApplicationInfo appInfo = packageManager.getApplicationInfoAsUser(
+                    packageName, PackageManager.GET_META_DATA, userId);
+            return iconDrawableFactory.getBadgedIcon(appInfo, userId);
+        } catch (PackageManager.NameNotFoundException e) {
+            return packageManager.getDefaultActivityIcon();
+        }
+    }
 }

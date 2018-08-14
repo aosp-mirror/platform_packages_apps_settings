@@ -19,6 +19,7 @@ package com.android.settings.bluetooth;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -29,7 +30,6 @@ import android.content.Context;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 
@@ -40,13 +40,12 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BluetoothDeviceRenamePreferenceControllerTest {
 
     private static final String DEVICE_NAME = "Nightshade";
+    private static final String PREF_KEY = "bt_rename_devices";
 
     @Mock
     private LocalBluetoothAdapter mLocalAdapter;
@@ -66,15 +65,19 @@ public class BluetoothDeviceRenamePreferenceControllerTest {
 
         mContext = spy(RuntimeEnvironment.application);
         mPreference = new Preference(mContext);
-        mPreference.setKey(BluetoothDeviceRenamePreferenceController.PREF_KEY);
+        mPreference.setKey(PREF_KEY);
 
-        mController = new BluetoothDeviceRenamePreferenceController(
-                mContext, mFragment, mLocalAdapter);
+        mController = spy(new BluetoothDeviceRenamePreferenceController(mContext, mLocalAdapter,
+                PREF_KEY));
+        mController.setFragment(mFragment);
+        doReturn(DEVICE_NAME).when(mController).getDeviceName();
+        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
+        mController.displayPreference(mScreen);
     }
 
     @Test
     public void testUpdateDeviceName_showSummaryWithDeviceName() {
-        mController.updateDeviceName(mPreference, DEVICE_NAME);
+        mController.updatePreferenceState(mPreference);
 
         final CharSequence summary = mPreference.getSummary();
 
@@ -93,10 +96,24 @@ public class BluetoothDeviceRenamePreferenceControllerTest {
 
     @Test
     public void displayPreference_shouldFindPreferenceWithMatchingPrefKey() {
-        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
-
-        mController.displayPreference(mScreen);
-
         assertThat(mController.mPreference.getKey()).isEqualTo(mController.getPreferenceKey());
+    }
+
+    @Test
+    public void updatePreferenceState_whenBTisOnPreferenceShouldBeVisible() {
+        when(mLocalAdapter.isEnabled()).thenReturn(true);
+
+        mController.updatePreferenceState(mPreference);
+
+        assertThat(mPreference.isVisible()).isTrue();
+    }
+
+    @Test
+    public void updatePreferenceState_whenBTisOffPreferenceShouldBeHide() {
+        when(mLocalAdapter.isEnabled()).thenReturn(false);
+
+        mController.updatePreferenceState(mPreference);
+
+        assertThat(mPreference.isVisible()).isFalse();
     }
 }

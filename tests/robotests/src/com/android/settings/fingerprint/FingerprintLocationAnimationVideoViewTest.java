@@ -17,37 +17,34 @@
 
 package com.android.settings.fingerprint;
 
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.graphics.SurfaceTexture;
 import android.net.Uri;
 import android.view.TextureView.SurfaceTextureListener;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
-
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class FingerprintLocationAnimationVideoViewTest {
 
-    private Context mContext;
     private FingerprintLocationAnimationVideoView mView;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = ShadowApplication.getInstance().getApplicationContext();
-        mView = spy(new FingerprintLocationAnimationVideoView(mContext, null));
+        final Context context = RuntimeEnvironment.application;
+        mView = spy(new FingerprintLocationAnimationVideoView(context, null));
     }
 
     @Test

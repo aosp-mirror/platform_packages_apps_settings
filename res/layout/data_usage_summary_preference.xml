@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2018 The Android Open Source Project
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at"+
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="22dp"
+    android:paddingBottom="32dp"
+    android:paddingStart="@dimen/preference_no_icon_padding_start"
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+    android:orientation="vertical"
+    android:selectable="false"
+    style="@style/EntityHeader">
+
+    <TextView
+        android:id="@+id/usage_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="?android:attr/textColorPrimary"
+        android:text="@string/data_usage_title" />
+
+    <com.android.settings.datausage.MeasurableLinearLayout
+        android:id="@+id/usage_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="12dp"
+        android:orientation="horizontal">
+
+        <TextView android:id="@+id/data_usage_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@*android:string/config_headlineFontFamily"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="16sp"
+            android:textColor="?android:attr/colorAccent" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView android:id="@+id/data_remaining_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@*android:string/config_headlineFontFamily"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="16sp" />
+
+    </com.android.settings.datausage.MeasurableLinearLayout>
+
+    <android.widget.ProgressBar
+        android:id="@+id/determinateBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:progressDrawable="@drawable/color_bar_progress"/>
+
+    <LinearLayout
+        android:id="@+id/label_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="4dp"
+        android:orientation="horizontal">
+
+        <TextView android:id="@android:id/text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+            android:textColor="?android:attr/textColorSecondary" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView android:id="@android:id/text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+            android:textColor="?android:attr/textColorSecondary" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="12dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/data_limits"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="?android:attr/textColorSecondary" />
+
+        <TextView
+            android:id="@+id/cycle_left_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/carrier_and_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/launch_mdp_app_button"
+        android:layout_marginTop="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:text="@string/launch_mdp_app_text"
+        style="@style/ActionPrimaryButton" />
+
+</LinearLayout>
+

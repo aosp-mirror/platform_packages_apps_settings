@@ -17,8 +17,11 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-    android:title="@string/app_and_notification_dashboard_title">
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="apps_and_notification_screen"
+    android:title="@string/app_and_notification_dashboard_title"
+    settings:initialExpandedChildrenCount="8">
+    <!-- the initial count should include the dynamic tiles -->
 
     <PreferenceCategory
         android:key="recent_apps_category"
@@ -30,32 +33,28 @@
         <Preference
             android:title="@string/applications_settings"
             android:key="all_app_info"
-            android:order="20">
-            <intent
-                android:action="android.intent.action.MAIN"
-                android:targetPackage="com.android.settings"
-                android:targetClass="com.android.settings.Settings$ManageApplicationsActivity">
-                <extra android:name="show_drawer_menu" android:value="true" />
-            </intent>
-        </Preference>
+            android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
+            android:order="20" />
     </PreferenceCategory>
 
     <!-- Empty category to draw divider -->
     <PreferenceCategory
         android:key="all_app_info_divider"
-        android:order="-190"/>
+        android:order="-190" />
+
+    <!-- Notifications (appears before manage_perms), default apps (appears after) -->
+    <PreferenceCategory
+        android:key="dashboard_tile_placeholder"
+        android:order="10" />
 
     <Preference
         android:key="manage_perms"
         android:title="@string/app_permissions"
-        android:order="-130"
-        settings:keywords="@string/keywords_app_permissions">
+        android:order="12"
+        settings:keywords="@string/keywords_app_permissions"
+        settings:controller="com.android.settings.applications.AppPermissionsPreferenceController">
         <intent android:action="android.intent.action.MANAGE_PERMISSIONS" />
     </Preference>
-
-    <PreferenceCategory
-        android:key="dashboard_tile_placeholder"
-        android:order="10" />
 
     <com.android.settingslib.RestrictedPreference
         android:key="app_and_notif_cell_broadcast_settings"
@@ -70,12 +69,8 @@
 
     <Preference
         android:key="special_access"
+        android:fragment="com.android.settings.applications.SpecialAccessSettings"
         android:title="@string/special_access"
-        android:order="20" >
-        <intent
-            android:action="android.intent.action.MAIN"
-            android:targetPackage="com.android.settings"
-            android:targetClass="com.android.settings.Settings$SpecialAccessSettingsActivity" />
-    </Preference>
+        android:order="20" />
 
 </PreferenceScreen>

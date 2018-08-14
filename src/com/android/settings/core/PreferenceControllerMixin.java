@@ -15,6 +15,9 @@
  */
 package com.android.settings.core;
 
+import android.text.TextUtils;
+import android.util.Log;
+
 import com.android.settings.search.ResultPayload;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -23,8 +26,11 @@ import java.util.List;
 
 /**
  * A controller mixin that adds mobile settings specific functionality
+ * TODO (b/69808530) Replace with BasePreferenceController.
  */
 public interface PreferenceControllerMixin {
+
+    String TAG = "PrefControllerMixin";
 
     /**
      * Updates non-indexable keys for search provider.
@@ -34,7 +40,13 @@ public interface PreferenceControllerMixin {
     default void updateNonIndexableKeys(List<String> keys) {
         if (this instanceof AbstractPreferenceController) {
             if (!((AbstractPreferenceController) this).isAvailable()) {
-                keys.add(((AbstractPreferenceController) this).getPreferenceKey());
+                final String key = ((AbstractPreferenceController) this).getPreferenceKey();
+                if (TextUtils.isEmpty(key)) {
+                    Log.w(TAG,
+                            "Skipping updateNonIndexableKeys due to empty key " + this.toString());
+                    return;
+                }
+                keys.add(key);
             }
         }
     }
@@ -49,7 +61,11 @@ public interface PreferenceControllerMixin {
 
     /**
      * @return the {@link ResultPayload} corresponding to the search result type for the preference.
+     *
+     * Do not rely on this method for intent-based or inline results. It will be removed in the
+     * unbundling effort.
      */
+    @Deprecated
     default ResultPayload getResultPayload() {
         return null;
     }

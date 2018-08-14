@@ -16,6 +16,8 @@
 
 package com.android.settings;
 
+import static android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO;
+
 import android.app.ActionBar;
 import android.app.ActivityManager;
 import android.app.Fragment;
@@ -39,46 +41,51 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.PreferenceFragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.transition.TransitionManager;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toolbar;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
+import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.backup.BackupSettingsActivity;
+import com.android.settings.core.FeatureFlags;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.gateway.SettingsGateway;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
-import com.android.settings.core.instrumentation.SharedPreferencesLogger;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardSummary;
-import com.android.settings.development.DevelopmentSettings;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.search.SearchActivity;
+import com.android.settings.search.DeviceIndexFeatureProvider;
 import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.core.instrumentation.Instrumentable;
+import com.android.settingslib.core.instrumentation.SharedPreferencesLogger;
+import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
+import com.android.settingslib.utils.ThreadUtils;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class SettingsActivity extends SettingsDrawerActivity
         implements PreferenceManager.OnPreferenceTreeClickListener,
         PreferenceFragment.OnPreferenceStartFragmentCallback,
-        ButtonBarHandler, FragmentManager.OnBackStackChangedListener, OnClickListener {
+        ButtonBarHandler, FragmentManager.OnBackStackChangedListener {
 
-    private static final String LOG_TAG = "Settings";
+    private static final String LOG_TAG = "SettingsActivity";
 
     // Constants for state save/restore
     private static final String SAVE_KEY_CATEGORIES = ":settings:categories";
-    @VisibleForTesting
-    static final String SAVE_KEY_SHOW_HOME_AS_UP = ":settings:show_home_as_up";
 
     /**
      * When starting this activity, the invoking Intent can contain this extra
@@ -88,11 +95,6 @@ public class SettingsActivity extends SettingsDrawerActivity
      * activity.
      */
     public static final String EXTRA_SHOW_FRAGMENT = ":settings:show_fragment";
-
-    /**
-     * The metrics category constant for logging source when a setting fragment is opened.
-     */
-    public static final String EXTRA_SOURCE_METRICS_CATEGORY = ":settings:source_metrics";
 
     /**
      * When starting this activity and using {@link #EXTRA_SHOW_FRAGMENT},
@@ -146,23 +148,16 @@ public class SettingsActivity extends SettingsDrawerActivity
     public static final String EXTRA_HIDE_DRAWER = ":settings:hide_drawer";
 
     public static final String META_DATA_KEY_FRAGMENT_CLASS =
-        "com.android.settings.FRAGMENT_CLASS";
+            "com.android.settings.FRAGMENT_CLASS";
 
     private static final String EXTRA_UI_OPTIONS = "settings:ui_options";
-
-    private static final int REQUEST_SUGGESTION = 42;
 
     private String mFragmentClass;
 
     private CharSequence mInitialTitle;
     private int mInitialTitleResId;
 
-    private static final String[] LIKE_SHORTCUT_INTENT_ACTION_ARRAY = {
-            "android.settings.APPLICATION_DETAILS_SETTINGS"
-    };
-
-    private SharedPreferences mDevelopmentPreferences;
-    private SharedPreferences.OnSharedPreferenceChangeListener mDevelopmentPreferencesListener;
+    private BroadcastReceiver mDevelopmentSettingsListener;
 
     private boolean mBatteryPresent = true;
     private BroadcastReceiver mBatteryInfoReceiver = new BroadcastReceiver() {
@@ -184,21 +179,14 @@ public class SettingsActivity extends SettingsDrawerActivity
 
     private Button mNextButton;
 
-    @VisibleForTesting
-    boolean mDisplayHomeAsUpEnabled;
-
     private boolean mIsShowingDashboard;
-    private boolean mIsShortcut;
 
     private ViewGroup mContent;
-
-    private MetricsFeatureProvider mMetricsFeatureProvider;
 
     // Categories
     private ArrayList<DashboardCategory> mCategories = new ArrayList<>();
 
     private DashboardFeatureProvider mDashboardFeatureProvider;
-    private ComponentName mCurrentSuggestion;
 
     public SwitchBar getSwitchBar() {
         return mSwitchBar;
@@ -206,8 +194,14 @@ public class SettingsActivity extends SettingsDrawerActivity
 
     @Override
     public boolean onPreferenceStartFragment(PreferenceFragment caller, Preference pref) {
-        startPreferencePanel(caller, pref.getFragment(), pref.getExtras(), -1, pref.getTitle(),
-                null, 0);
+        new SubSettingLauncher(this)
+                .setDestination(pref.getFragment())
+                .setArguments(pref.getExtras())
+                .setSourceMetricsCategory(caller instanceof Instrumentable
+                        ? ((Instrumentable) caller).getMetricsCategory()
+                        : Instrumentable.METRICS_CATEGORY_UNKNOWN)
+                .setTitle(-1)
+                .launch();
         return true;
     }
 
@@ -219,7 +213,8 @@ public class SettingsActivity extends SettingsDrawerActivity
     @Override
     public SharedPreferences getSharedPreferences(String name, int mode) {
         if (name.equals(getPackageName() + "_preferences")) {
-            return new SharedPreferencesLogger(this, getMetricsTag());
+            return new SharedPreferencesLogger(this, getMetricsTag(),
+                    FeatureFactory.getFactory(this).getMetricsFeatureProvider());
         }
         return super.getSharedPreferences(name, mode);
     }
@@ -235,31 +230,15 @@ public class SettingsActivity extends SettingsDrawerActivity
         return tag;
     }
 
-    private static boolean isShortCutIntent(final Intent intent) {
-        Set<String> categories = intent.getCategories();
-        return (categories != null) && categories.contains("com.android.settings.SHORTCUT");
-    }
-
-    private static boolean isLikeShortCutIntent(final Intent intent) {
-        String action = intent.getAction();
-        if (action == null) {
-            return false;
-        }
-        for (int i = 0; i < LIKE_SHORTCUT_INTENT_ACTION_ARRAY.length; i++) {
-            if (LIKE_SHORTCUT_INTENT_ACTION_ARRAY[i].equals(action)) return true;
-        }
-        return false;
-    }
-
     @Override
     protected void onCreate(Bundle savedState) {
         super.onCreate(savedState);
+        Log.d(LOG_TAG, "Starting onCreate");
         long startTime = System.currentTimeMillis();
 
         final FeatureFactory factory = FeatureFactory.getFactory(this);
 
         mDashboardFeatureProvider = factory.getDashboardFeatureProvider(this);
-        mMetricsFeatureProvider = factory.getMetricsFeatureProvider();
 
         // Should happen before any call to getIntent()
         getMetaData();
@@ -269,14 +248,8 @@ public class SettingsActivity extends SettingsDrawerActivity
             getWindow().setUiOptions(intent.getIntExtra(EXTRA_UI_OPTIONS, 0));
         }
 
-        mDevelopmentPreferences = getSharedPreferences(DevelopmentSettings.PREF_FILE,
-                Context.MODE_PRIVATE);
-
         // Getting Intent properties can only be done after the super.onCreate(...)
         final String initialFragmentName = intent.getStringExtra(EXTRA_SHOW_FRAGMENT);
-
-        mIsShortcut = isShortCutIntent(intent) || isLikeShortCutIntent(intent) ||
-                intent.getBooleanExtra(EXTRA_SHOW_FRAGMENT_AS_SHORTCUT, false);
 
         final ComponentName cn = intent.getComponent();
         final String className = cn.getClassName();
@@ -314,9 +287,6 @@ public class SettingsActivity extends SettingsDrawerActivity
                 mCategories.addAll(categories);
                 setTitleFromBackStack();
             }
-
-            mDisplayHomeAsUpEnabled = savedState.getBoolean(SAVE_KEY_SHOW_HOME_AS_UP);
-
         } else {
             launchSettingFragment(initialFragmentName, isSubSettings, intent);
         }
@@ -324,8 +294,9 @@ public class SettingsActivity extends SettingsDrawerActivity
         if (mIsShowingDashboard) {
             findViewById(R.id.search_bar).setVisibility(View.VISIBLE);
             findViewById(R.id.action_bar).setVisibility(View.GONE);
-            Toolbar toolbar = findViewById(R.id.search_action_bar);
-            toolbar.setOnClickListener(this);
+            final Toolbar toolbar = findViewById(R.id.search_action_bar);
+            FeatureFactory.getFactory(this).getSearchFeatureProvider()
+                    .initSearchToolbar(this, toolbar);
             setActionBar(toolbar);
 
             // Please forgive me for what I am about to do.
@@ -334,13 +305,16 @@ public class SettingsActivity extends SettingsDrawerActivity
             // and goes to the search UI. Also set the background to null so there's no ripple.
             View navView = toolbar.getNavigationView();
             navView.setClickable(false);
+            navView.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
             navView.setBackground(null);
         }
 
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(mDisplayHomeAsUpEnabled);
-            actionBar.setHomeButtonEnabled(mDisplayHomeAsUpEnabled);
+            boolean deviceProvisioned = Utils.isDeviceProvisioned(this);
+            actionBar.setDisplayHomeAsUpEnabled(deviceProvisioned);
+            actionBar.setHomeButtonEnabled(deviceProvisioned);
+            actionBar.setDisplayShowTitleEnabled(!mIsShowingDashboard);
         }
         mSwitchBar = findViewById(R.id.switch_bar);
         if (mSwitchBar != null) {
@@ -354,21 +328,21 @@ public class SettingsActivity extends SettingsDrawerActivity
             if (buttonBar != null) {
                 buttonBar.setVisibility(View.VISIBLE);
 
-                Button backButton = (Button)findViewById(R.id.back_button);
+                Button backButton = (Button) findViewById(R.id.back_button);
                 backButton.setOnClickListener(new OnClickListener() {
                     public void onClick(View v) {
                         setResult(RESULT_CANCELED, null);
                         finish();
                     }
                 });
-                Button skipButton = (Button)findViewById(R.id.skip_button);
+                Button skipButton = (Button) findViewById(R.id.skip_button);
                 skipButton.setOnClickListener(new OnClickListener() {
                     public void onClick(View v) {
                         setResult(RESULT_OK, null);
                         finish();
                     }
                 });
-                mNextButton = (Button)findViewById(R.id.next_button);
+                mNextButton = (Button) findViewById(R.id.next_button);
                 mNextButton.setOnClickListener(new OnClickListener() {
                     public void onClick(View v) {
                         setResult(RESULT_OK, null);
@@ -381,8 +355,7 @@ public class SettingsActivity extends SettingsDrawerActivity
                     String buttonText = intent.getStringExtra(EXTRA_PREFS_SET_NEXT_TEXT);
                     if (TextUtils.isEmpty(buttonText)) {
                         mNextButton.setVisibility(View.GONE);
-                    }
-                    else {
+                    } else {
                         mNextButton.setText(buttonText);
                     }
                 }
@@ -390,8 +363,7 @@ public class SettingsActivity extends SettingsDrawerActivity
                     String buttonText = intent.getStringExtra(EXTRA_PREFS_SET_BACK_TEXT);
                     if (TextUtils.isEmpty(buttonText)) {
                         backButton.setVisibility(View.GONE);
-                    }
-                    else {
+                    } else {
                         backButton.setText(buttonText);
                     }
                 }
@@ -409,30 +381,22 @@ public class SettingsActivity extends SettingsDrawerActivity
     @VisibleForTesting
     void launchSettingFragment(String initialFragmentName, boolean isSubSettings, Intent intent) {
         if (!mIsShowingDashboard && initialFragmentName != null) {
-            // UP will be shown only if it is a sub settings
-            if (mIsShortcut) {
-                mDisplayHomeAsUpEnabled = isSubSettings;
-            } else if (isSubSettings) {
-                mDisplayHomeAsUpEnabled = true;
-            } else {
-                mDisplayHomeAsUpEnabled = false;
-            }
             setTitleFromIntent(intent);
 
             Bundle initialArguments = intent.getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
             switchToFragment(initialFragmentName, initialArguments, true, false,
-                mInitialTitleResId, mInitialTitle, false);
+                    mInitialTitleResId, mInitialTitle, false);
         } else {
             // Show search icon as up affordance if we are displaying the main Dashboard
-            mDisplayHomeAsUpEnabled = true;
             mInitialTitleResId = R.string.dashboard_title;
 
             switchToFragment(DashboardSummary.class.getName(), null /* args */, false, false,
-                mInitialTitleResId, mInitialTitle, false);
+                    mInitialTitleResId, mInitialTitle, false);
         }
     }
 
     private void setTitleFromIntent(Intent intent) {
+        Log.d(LOG_TAG, "Starting to set activity title");
         final int initialTitleResId = intent.getIntExtra(EXTRA_SHOW_FRAGMENT_TITLE_RESID, -1);
         if (initialTitleResId > 0) {
             mInitialTitle = null;
@@ -460,6 +424,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             mInitialTitle = (initialTitle != null) ? initialTitle : getTitle();
             setTitle(mInitialTitle);
         }
+        Log.d(LOG_TAG, "Done setting title");
     }
 
     @Override
@@ -510,36 +475,32 @@ public class SettingsActivity extends SettingsDrawerActivity
         if (mCategories.size() > 0) {
             outState.putParcelableArrayList(SAVE_KEY_CATEGORIES, mCategories);
         }
-
-        outState.putBoolean(SAVE_KEY_SHOW_HOME_AS_UP, mDisplayHomeAsUpEnabled);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-
-        mDisplayHomeAsUpEnabled = savedInstanceState.getBoolean(SAVE_KEY_SHOW_HOME_AS_UP);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        mDevelopmentPreferencesListener = (sharedPreferences, key) -> updateTilesList();
-        mDevelopmentPreferences.registerOnSharedPreferenceChangeListener(
-                mDevelopmentPreferencesListener);
+        mDevelopmentSettingsListener = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                updateTilesList();
+            }
+        };
+        LocalBroadcastManager.getInstance(this).registerReceiver(mDevelopmentSettingsListener,
+                new IntentFilter(DevelopmentSettingsEnabler.DEVELOPMENT_SETTINGS_CHANGED_ACTION));
 
         registerReceiver(mBatteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
         updateTilesList();
+        updateDeviceIndex();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mDevelopmentPreferences.unregisterOnSharedPreferenceChangeListener(
-                mDevelopmentPreferencesListener);
-        mDevelopmentPreferencesListener = null;
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mDevelopmentSettingsListener);
+        mDevelopmentSettingsListener = null;
         unregisterReceiver(mBatteryInfoReceiver);
     }
 
@@ -568,7 +529,7 @@ public class SettingsActivity extends SettingsDrawerActivity
         if (startingFragment != null) {
             Intent modIntent = new Intent(superIntent);
             modIntent.putExtra(EXTRA_SHOW_FRAGMENT, startingFragment);
-            Bundle args = superIntent.getExtras();
+            Bundle args = superIntent.getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
             if (args != null) {
                 args = new Bundle(args);
             } else {
@@ -591,122 +552,26 @@ public class SettingsActivity extends SettingsDrawerActivity
         String intentClass = intent.getComponent().getClassName();
         if (intentClass.equals(getClass().getName())) return null;
 
-        if ("com.android.settings.ManageApplications".equals(intentClass)
-                || "com.android.settings.RunningServices".equals(intentClass)
+        if ("com.android.settings.RunningServices".equals(intentClass)
                 || "com.android.settings.applications.StorageUse".equals(intentClass)) {
             // Old names of manage apps.
-            intentClass = com.android.settings.applications.ManageApplications.class.getName();
+            intentClass = ManageApplications.class.getName();
         }
 
         return intentClass;
     }
 
     /**
-     * Start a new fragment containing a preference panel.  If the preferences
-     * are being displayed in multi-pane mode, the given fragment class will
-     * be instantiated and placed in the appropriate pane.  If running in
-     * single-pane mode, a new activity will be launched in which to show the
-     * fragment.
-     *
-     * @param fragmentClass Full name of the class implementing the fragment.
-     * @param args Any desired arguments to supply to the fragment.
-     * @param titleRes Optional resource identifier of the title of this
-     * fragment.
-     * @param titleText Optional text of the title of this fragment.
-     * @param resultTo Optional fragment that result data should be sent to.
-     * If non-null, resultTo.onActivityResult() will be called when this
-     * preference panel is done.  The launched panel must use
-     * {@link #finishPreferencePanel(Fragment, int, Intent)} when done.
-     * @param resultRequestCode If resultTo is non-null, this is the caller's
-     * request code to be received with the result.
-     */
-    public void startPreferencePanel(Fragment caller, String fragmentClass, Bundle args,
-            int titleRes, CharSequence titleText, Fragment resultTo, int resultRequestCode) {
-        String title = null;
-        if (titleRes < 0) {
-            if (titleText != null) {
-                title = titleText.toString();
-            } else {
-                // There not much we can do in that case
-                title = "";
-            }
-        }
-        Utils.startWithFragment(this, fragmentClass, args, resultTo, resultRequestCode,
-                titleRes, title, mIsShortcut, mMetricsFeatureProvider.getMetricsCategory(caller));
-    }
-
-    /**
-     * Start a new fragment in a new activity containing a preference panel for a given user. If the
-     * preferences are being displayed in multi-pane mode, the given fragment class will be
-     * instantiated and placed in the appropriate pane. If running in single-pane mode, a new
-     * activity will be launched in which to show the fragment.
-     *
-     * @param fragmentClass Full name of the class implementing the fragment.
-     * @param args Any desired arguments to supply to the fragment.
-     * @param titleRes Optional resource identifier of the title of this fragment.
-     * @param titleText Optional text of the title of this fragment.
-     * @param userHandle The user for which the panel has to be started.
-     */
-    public void startPreferencePanelAsUser(Fragment caller, String fragmentClass,
-            Bundle args, int titleRes, CharSequence titleText, UserHandle userHandle) {
-        // This is a workaround.
-        //
-        // Calling startWithFragmentAsUser() without specifying FLAG_ACTIVITY_NEW_TASK to the intent
-        // starting the fragment could cause a native stack corruption. See b/17523189. However,
-        // adding that flag and start the preference panel with the same UserHandler will make it
-        // impossible to use back button to return to the previous screen. See b/20042570.
-        //
-        // We work around this issue by adding FLAG_ACTIVITY_NEW_TASK to the intent, while doing
-        // another check here to call startPreferencePanel() instead of startWithFragmentAsUser()
-        // when we're calling it as the same user.
-        if (userHandle.getIdentifier() == UserHandle.myUserId()) {
-            startPreferencePanel(caller, fragmentClass, args, titleRes, titleText, null, 0);
-        } else {
-            String title = null;
-            if (titleRes < 0) {
-                if (titleText != null) {
-                    title = titleText.toString();
-                } else {
-                    // There not much we can do in that case
-                    title = "";
-                }
-            }
-            Utils.startWithFragmentAsUser(this, fragmentClass, args, titleRes, title,
-                    mIsShortcut, mMetricsFeatureProvider.getMetricsCategory(caller), userHandle);
-        }
-    }
-
-    /**
      * Called by a preference panel fragment to finish itself.
      *
-     * @param caller The fragment that is asking to be finished.
      * @param resultCode Optional result code to send back to the original
-     * launching fragment.
+     *                   launching fragment.
      * @param resultData Optional result data to send back to the original
-     * launching fragment.
+     *                   launching fragment.
      */
-    public void finishPreferencePanel(Fragment caller, int resultCode, Intent resultData) {
+    public void finishPreferencePanel(int resultCode, Intent resultData) {
         setResult(resultCode, resultData);
         finish();
-    }
-
-    /**
-     * Start a new fragment.
-     *
-     * @param fragment The fragment to start
-     * @param push If true, the current fragment will be pushed onto the back stack.  If false,
-     * the current fragment will be replaced.
-     */
-    public void startPreferenceFragment(Fragment fragment, boolean push) {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.main_content, fragment);
-        if (push) {
-            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-            transaction.addToBackStack(BACK_STACK_PREFS);
-        } else {
-            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        }
-        transaction.commitAllowingStateLoss();
     }
 
     /**
@@ -714,6 +579,7 @@ public class SettingsActivity extends SettingsDrawerActivity
      */
     private Fragment switchToFragment(String fragmentName, Bundle args, boolean validate,
             boolean addToBackStack, int titleResId, CharSequence title, boolean withTransition) {
+        Log.d(LOG_TAG, "Switching to fragment " + fragmentName);
         if (validate && !isValidFragment(fragmentName)) {
             throw new IllegalArgumentException("Invalid fragment for this activity: "
                     + fragmentName);
@@ -734,6 +600,7 @@ public class SettingsActivity extends SettingsDrawerActivity
         }
         transaction.commitAllowingStateLoss();
         getFragmentManager().executePendingTransactions();
+        Log.d(LOG_TAG, "Executed frag manager pendingTransactions");
         return f;
     }
 
@@ -749,100 +616,112 @@ public class SettingsActivity extends SettingsDrawerActivity
         });
     }
 
+    private void updateDeviceIndex() {
+        DeviceIndexFeatureProvider indexProvider = FeatureFactory.getFactory(
+                this).getDeviceIndexFeatureProvider();
+
+        ThreadUtils.postOnBackgroundThread(
+                () -> indexProvider.updateIndex(SettingsActivity.this, false /* force */));
+    }
+
     private void doUpdateTilesList() {
         PackageManager pm = getPackageManager();
         final UserManager um = UserManager.get(this);
         final boolean isAdmin = um.isAdminUser();
+        final FeatureFactory featureFactory = FeatureFactory.getFactory(this);
         boolean somethingChanged = false;
-        String packageName = getPackageName();
-        somethingChanged = setTileEnabled(
+        final String packageName = getPackageName();
+        final StringBuilder changedList = new StringBuilder();
+        somethingChanged = setTileEnabled(changedList,
                 new ComponentName(packageName, WifiSettingsActivity.class.getName()),
                 pm.hasSystemFeature(PackageManager.FEATURE_WIFI), isAdmin) || somethingChanged;
 
-        somethingChanged = setTileEnabled(new ComponentName(packageName,
+        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.BluetoothSettingsActivity.class.getName()),
                 pm.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH), isAdmin)
                 || somethingChanged;
 
-        boolean isDataPlanFeatureEnabled = FeatureFactory.getFactory(this)
-                .getDataPlanFeatureProvider()
-                .isEnabled();
-
-        // When the data plan feature flag is turned on we disable DataUsageSummaryActivity
-        // and enable DataPlanUsageSummaryActivity. When the feature flag is turned off we do the
-        // reverse.
-
-        // Disable DataUsageSummaryActivity if the data plan feature flag is turned on otherwise
-        // disable DataPlanUsageSummaryActivity.
-        somethingChanged = setTileEnabled(
-                new ComponentName(packageName,
-                        isDataPlanFeatureEnabled
-                                ? Settings.DataUsageSummaryActivity.class.getName()
-                                : Settings.DataPlanUsageSummaryActivity.class.getName()),
-                false /* enabled */,
-                isAdmin) || somethingChanged;
 
         // Enable DataUsageSummaryActivity if the data plan feature flag is turned on otherwise
         // enable DataPlanUsageSummaryActivity.
-        somethingChanged = setTileEnabled(
-                new ComponentName(packageName,
-                        isDataPlanFeatureEnabled
-                                ? Settings.DataPlanUsageSummaryActivity.class.getName()
-                                : Settings.DataUsageSummaryActivity.class.getName()),
+        somethingChanged = setTileEnabled(changedList,
+                new ComponentName(packageName, Settings.DataUsageSummaryActivity.class.getName()),
                 Utils.isBandwidthControlEnabled() /* enabled */,
                 isAdmin) || somethingChanged;
 
-        somethingChanged = setTileEnabled(new ComponentName(packageName,
+        somethingChanged = setTileEnabled(changedList,
+                new ComponentName(packageName,
+                        Settings.ConnectedDeviceDashboardActivity.class.getName()),
+                !UserManager.isDeviceInDemoMode(this) /* enabled */,
+                isAdmin) || somethingChanged;
+
+        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.SimSettingsActivity.class.getName()),
                 Utils.showSimCardTile(this), isAdmin)
                 || somethingChanged;
 
-        somethingChanged = setTileEnabled(new ComponentName(packageName,
+        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.PowerUsageSummaryActivity.class.getName()),
                 mBatteryPresent, isAdmin) || somethingChanged;
 
-        somethingChanged = setTileEnabled(new ComponentName(packageName,
+        final boolean isDataUsageSettingsV2Enabled =
+                FeatureFlagUtils.isEnabled(this, FeatureFlags.DATA_USAGE_SETTINGS_V2);
+        // Enable new data usage page if v2 enabled
+        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
+                        Settings.DataUsageSummaryActivity.class.getName()),
+                Utils.isBandwidthControlEnabled() && isDataUsageSettingsV2Enabled, isAdmin)
+                || somethingChanged;
+        // Enable legacy data usage page if v2 disabled
+        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
+                        Settings.DataUsageSummaryLegacyActivity.class.getName()),
+                Utils.isBandwidthControlEnabled() && !isDataUsageSettingsV2Enabled, isAdmin)
+                || somethingChanged;
+
+        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.UserSettingsActivity.class.getName()),
                 UserHandle.MU_ENABLED && UserManager.supportsMultipleUsers()
                         && !Utils.isMonkeyRunning(), isAdmin)
                 || somethingChanged;
 
-        somethingChanged = setTileEnabled(new ComponentName(packageName,
+        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.NetworkDashboardActivity.class.getName()),
                 !UserManager.isDeviceInDemoMode(this), isAdmin)
                 || somethingChanged;
 
-        somethingChanged = setTileEnabled(new ComponentName(packageName,
-                        Settings.ConnectedDeviceDashboardActivity.class.getName()),
-                !UserManager.isDeviceInDemoMode(this), isAdmin)
-                || somethingChanged;
-
-        somethingChanged = setTileEnabled(new ComponentName(packageName,
+        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.DateTimeSettingsActivity.class.getName()),
                 !UserManager.isDeviceInDemoMode(this), isAdmin)
                 || somethingChanged;
 
-        somethingChanged = setTileEnabled(new ComponentName(packageName,
-                        Settings.PrintSettingsActivity.class.getName()),
-                pm.hasSystemFeature(PackageManager.FEATURE_PRINTING), isAdmin)
-                || somethingChanged;
-
-        final boolean showDev = mDevelopmentPreferences.getBoolean(
-                DevelopmentSettings.PREF_SHOW, android.os.Build.TYPE.equals("eng"))
-                && !um.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES);
-        somethingChanged = setTileEnabled(new ComponentName(packageName,
-                        Settings.DevelopmentSettingsActivity.class.getName()),
-                showDev, isAdmin)
+        final boolean showDev = DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(this)
+                && !Utils.isMonkeyRunning();
+        final boolean isAdminOrDemo = um.isAdminUser() || um.isDemoUser();
+        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
+                        Settings.DevelopmentSettingsDashboardActivity.class.getName()),
+                showDev, isAdminOrDemo)
                 || somethingChanged;
 
         // Enable/disable backup settings depending on whether the user is admin.
-        somethingChanged = setTileEnabled(new ComponentName(packageName,
+        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                 BackupSettingsActivity.class.getName()), true, isAdmin)
                 || somethingChanged;
 
-        somethingChanged = setTileEnabled(new ComponentName(packageName,
+        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.WifiDisplaySettingsActivity.class.getName()),
                 WifiDisplaySettings.isAvailable(this), isAdmin)
+                || somethingChanged;
+
+        // Enable/disable the Me Card page.
+        final boolean aboutPhoneV2Enabled = featureFactory
+                .getAccountFeatureProvider()
+                .isAboutPhoneV2Enabled(this);
+        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
+                        Settings.MyDeviceInfoActivity.class.getName()),
+                aboutPhoneV2Enabled, isAdmin)
+                || somethingChanged;
+        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
+                        Settings.DeviceInfoSettingsActivity.class.getName()),
+                !aboutPhoneV2Enabled, isAdmin)
                 || somethingChanged;
 
         if (UserHandle.MU_ENABLED && !isAdmin) {
@@ -854,14 +733,16 @@ public class SettingsActivity extends SettingsDrawerActivity
                     final int tileCount = category.getTilesCount();
                     for (int i = 0; i < tileCount; i++) {
                         final ComponentName component = category.getTile(i).intent.getComponent();
-
                         final String name = component.getClassName();
                         final boolean isEnabledForRestricted = ArrayUtils.contains(
-                                SettingsGateway.SETTINGS_FOR_RESTRICTED, name);
+                                SettingsGateway.SETTINGS_FOR_RESTRICTED, name) || (isAdminOrDemo
+                                && Settings.DevelopmentSettingsDashboardActivity.class.getName()
+                                .equals(name));
                         if (packageName.equals(component.getPackageName())
                                 && !isEnabledForRestricted) {
-                            somethingChanged = setTileEnabled(component, false, isAdmin)
-                                    || somethingChanged;
+                            somethingChanged =
+                                    setTileEnabled(changedList, component, false, isAdmin)
+                                            || somethingChanged;
                         }
                     }
                 }
@@ -870,7 +751,8 @@ public class SettingsActivity extends SettingsDrawerActivity
 
         // Final step, refresh categories.
         if (somethingChanged) {
-            Log.d(LOG_TAG, "Enabled state changed for some tiles, reloading all categories");
+            Log.d(LOG_TAG, "Enabled state changed for some tiles, reloading all categories "
+                    + changedList.toString());
             updateCategories();
         } else {
             Log.d(LOG_TAG, "No enabled state changed, skipping updateCategory call");
@@ -880,13 +762,18 @@ public class SettingsActivity extends SettingsDrawerActivity
     /**
      * @return whether or not the enabled state actually changed.
      */
-    private boolean setTileEnabled(ComponentName component, boolean enabled, boolean isAdmin) {
+    private boolean setTileEnabled(StringBuilder changedList, ComponentName component,
+            boolean enabled, boolean isAdmin) {
         if (UserHandle.MU_ENABLED && !isAdmin && getPackageName().equals(component.getPackageName())
                 && !ArrayUtils.contains(SettingsGateway.SETTINGS_FOR_RESTRICTED,
                 component.getClassName())) {
             enabled = false;
         }
-        return setTileEnabled(component, enabled);
+        boolean changed = setTileEnabled(component, enabled);
+        if (changed) {
+            changedList.append(component.toShortString()).append(",");
+        }
+        return changed;
     }
 
     private void getMetaData() {
@@ -910,29 +797,6 @@ public class SettingsActivity extends SettingsDrawerActivity
         return mNextButton;
     }
 
-    @Override
-    public boolean shouldUpRecreateTask(Intent targetIntent) {
-        return super.shouldUpRecreateTask(new Intent(this, SettingsActivity.class));
-    }
-
-    public void startSuggestion(Intent intent) {
-        if (intent == null || ActivityManager.isUserAMonkey()) {
-            return;
-        }
-        mCurrentSuggestion = intent.getComponent();
-        startActivityForResult(intent, REQUEST_SUGGESTION);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_SUGGESTION && mCurrentSuggestion != null
-                && resultCode != RESULT_CANCELED) {
-            getPackageManager().setComponentEnabledSetting(mCurrentSuggestion,
-                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
     @VisibleForTesting
     Bitmap getBitmapFromXmlResource(int drawableRes) {
         Drawable drawable = getResources().getDrawable(drawableRes, getTheme());
@@ -944,11 +808,5 @@ public class SettingsActivity extends SettingsDrawerActivity
         drawable.draw(canvas);
 
         return bitmap;
-    }
-
-    @Override
-    public void onClick(View v) {
-        Intent intent = new Intent(this, SearchActivity.class);
-        startActivity(intent);
     }
 }

@@ -16,6 +16,12 @@
 
 package com.android.settings.applications;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -24,11 +30,11 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.UserHandle;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
@@ -46,21 +52,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = ShadowEntityHeaderController.class)
+@Config(shadows = ShadowEntityHeaderController.class)
 public class AppInfoWithHeaderTest {
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
+
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private EntityHeaderController mHeaderController;
 
@@ -70,9 +67,7 @@ public class AppInfoWithHeaderTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-
-        mFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFactory = FakeFeatureFactory.setupForTest();
         when(mFactory.metricsFeatureProvider.getMetricsCategory(any(Object.class)))
                 .thenReturn(MetricsProto.MetricsEvent.SETTINGS_APP_NOTIF_CATEGORY);
         mAppInfoWithHeader = new TestFragment();
@@ -120,12 +115,65 @@ public class AppInfoWithHeaderTest {
         assertThat(mAppInfoWithHeader.mPackageRemovedCalled).isTrue();
     }
 
+    @Test
+    public void noExtraUserHandleInIntent_retrieveAppEntryWithMyUserId()
+            throws PackageManager.NameNotFoundException {
+        final String packageName = "com.android.settings";
+
+        mAppInfoWithHeader.mIntent.setData(Uri.fromParts("package", packageName, null));
+        final ApplicationsState.AppEntry entry = mock(ApplicationsState.AppEntry.class);
+        entry.info = new ApplicationInfo();
+        entry.info.packageName = packageName;
+
+        when(mAppInfoWithHeader.mState.getEntry(packageName,
+                UserHandle.myUserId())).thenReturn(entry);
+        when(mAppInfoWithHeader.mPm.getPackageInfoAsUser(entry.info.packageName,
+                PackageManager.MATCH_DISABLED_COMPONENTS |
+                        PackageManager.GET_SIGNING_CERTIFICATES |
+                        PackageManager.GET_PERMISSIONS, UserHandle.myUserId())).thenReturn(
+                mAppInfoWithHeader.mPackageInfo);
+
+        mAppInfoWithHeader.retrieveAppEntry();
+
+        assertThat(mAppInfoWithHeader.mUserId).isEqualTo(UserHandle.myUserId());
+        assertThat(mAppInfoWithHeader.mPackageInfo).isNotNull();
+        assertThat(mAppInfoWithHeader.mAppEntry).isNotNull();
+    }
+
+    @Test
+    public void extraUserHandleInIntent_retrieveAppEntryWithMyUserId()
+            throws PackageManager.NameNotFoundException {
+        final int USER_ID = 1002;
+        final String packageName = "com.android.settings";
+
+        mAppInfoWithHeader.mIntent.putExtra(Intent.EXTRA_USER_HANDLE, new UserHandle(USER_ID));
+        mAppInfoWithHeader.mIntent.setData(Uri.fromParts("package",
+                packageName, null));
+        final ApplicationsState.AppEntry entry = mock(ApplicationsState.AppEntry.class);
+        entry.info = new ApplicationInfo();
+        entry.info.packageName = packageName;
+
+        when(mAppInfoWithHeader.mState.getEntry(packageName, USER_ID)).thenReturn(entry);
+        when(mAppInfoWithHeader.mPm.getPackageInfoAsUser(entry.info.packageName,
+                PackageManager.MATCH_DISABLED_COMPONENTS |
+                        PackageManager.GET_SIGNING_CERTIFICATES |
+                        PackageManager.GET_PERMISSIONS, USER_ID)).thenReturn(
+                mAppInfoWithHeader.mPackageInfo);
+
+        mAppInfoWithHeader.retrieveAppEntry();
+
+        assertThat(mAppInfoWithHeader.mUserId).isEqualTo(USER_ID);
+        assertThat(mAppInfoWithHeader.mPackageInfo).isNotNull();
+        assertThat(mAppInfoWithHeader.mAppEntry).isNotNull();
+    }
+
     public static class TestFragment extends AppInfoWithHeader {
 
         PreferenceManager mManager;
         PreferenceScreen mScreen;
         Context mShadowContext;
         boolean mPackageRemovedCalled;
+        Intent mIntent;
 
         public TestFragment() {
             mPm = mock(PackageManager.class);
@@ -133,7 +181,9 @@ public class AppInfoWithHeaderTest {
             mScreen = mock(PreferenceScreen.class);
             mPackageInfo = new PackageInfo();
             mPackageInfo.applicationInfo = new ApplicationInfo();
-            mShadowContext = ShadowApplication.getInstance().getApplicationContext();
+            mState = mock(ApplicationsState.class);
+            mIntent = new Intent();
+            mShadowContext = RuntimeEnvironment.application;
             ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
                     (InstantAppDataProvider) (info -> false));
             when(mManager.getContext()).thenReturn(mShadowContext);
@@ -173,6 +223,8 @@ public class AppInfoWithHeaderTest {
         protected void onPackageRemoved() {
             mPackageRemovedCalled = true;
         }
-    }
 
+        @Override
+        protected Intent getIntent() { return mIntent; }
+    }
 }

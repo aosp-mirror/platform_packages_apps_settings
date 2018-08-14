@@ -21,16 +21,14 @@ import static com.google.common.truth.Truth.assertThat;
 import android.os.Build;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AnomalyTest {
+
     private static int TYPE = Anomaly.AnomalyType.WAKE_LOCK;
     private static int UID = 111;
     private static int SDK_VERSION = Build.VERSION_CODES.L;

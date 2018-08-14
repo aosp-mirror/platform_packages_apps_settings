@@ -15,6 +15,7 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        android:key="accessibility_settings_screen"
         android:title="@string/accessibility_settings"
         android:persistent="true">
 
@@ -43,13 +44,14 @@
             android:title="@string/display_category_title">
 
         <Preference
-                android:fragment="com.android.settings.accessibility.ToggleFontSizePreferenceFragment"
-                android:key="font_size_preference_screen"
-                android:title="@string/title_font_size"/>
+            android:fragment="com.android.settings.accessibility.ToggleFontSizePreferenceFragment"
+            android:key="font_size_preference_screen"
+            android:title="@string/title_font_size" />
 
         <com.android.settings.display.ScreenZoomPreference
-                android:key="screen_zoom"
-                android:title="@string/screen_zoom_title"/>
+            android:key="accessibility_settings_screen_zoom"
+            android:fragment="com.android.settings.display.ScreenZoomSettings"
+            android:title="@string/screen_zoom_title" />
 
         <Preference
             android:fragment="com.android.settings.accessibility.MagnificationPreferenceFragment"
@@ -60,6 +62,10 @@
         <SwitchPreference
                 android:key="toggle_large_pointer_icon"
                 android:title="@string/accessibility_toggle_large_pointer_icon_title" />
+
+        <SwitchPreference
+            android:key="toggle_disable_animations"
+            android:title="@string/accessibility_disable_animations" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -87,6 +93,12 @@
                 android:entries="@array/long_press_timeout_selector_titles"
                 android:entryValues="@array/long_press_timeout_selector_values"
                 android:persistent="false"/>
+
+        <Preference
+            android:fragment="com.android.settings.accessibility.VibrationSettings"
+            android:key="vibration_preference_screen"
+            android:title="@string/accessibility_vibration_settings_title" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -116,12 +128,14 @@
         <Preference
                 android:fragment="com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment"
                 android:key="daltonizer_preference_screen"
-                android:title="@string/accessibility_display_daltonizer_preference_title" />
+                android:title="@string/accessibility_display_daltonizer_preference_title"
+                android:icon="@drawable/ic_daltonizer"/>
 
         <SwitchPreference
                 android:key="toggle_inversion_preference"
                 android:title="@string/accessibility_display_inversion_preference_title"
                 android:summary="@string/accessibility_display_inversion_preference_subtitle"
-                android:persistent="false" />
+                android:persistent="false"
+                android:icon="@drawable/ic_color_inversion"/>
     </PreferenceCategory>
 </PreferenceScreen>

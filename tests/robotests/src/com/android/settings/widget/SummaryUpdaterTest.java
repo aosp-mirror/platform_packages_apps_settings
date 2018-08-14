@@ -16,10 +16,12 @@
 
 package com.android.settings.widget;
 
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
 import android.content.Context;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -27,14 +29,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SummaryUpdaterTest {
 
     private Context mContext;

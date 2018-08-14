@@ -16,12 +16,21 @@
 
 package com.android.settings.fuelgauge;
 
+import static android.app.usage.UsageStatsManager.STANDBY_BUCKET_ACTIVE;
+import static android.app.usage.UsageStatsManager.STANDBY_BUCKET_EXEMPTED;
+import static android.app.usage.UsageStatsManager.STANDBY_BUCKET_FREQUENT;
+import static android.app.usage.UsageStatsManager.STANDBY_BUCKET_NEVER;
+import static android.app.usage.UsageStatsManager.STANDBY_BUCKET_RARE;
+import static android.app.usage.UsageStatsManager.STANDBY_BUCKET_WORKING_SET;
+
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceGroup;
@@ -29,10 +38,22 @@ import android.support.v7.preference.PreferenceGroup;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.widget.RadioButtonPreference;
 
 import java.util.List;
 
-public class InactiveApps extends SettingsPreferenceFragment implements OnPreferenceClickListener {
+public class InactiveApps extends SettingsPreferenceFragment
+        implements Preference.OnPreferenceChangeListener {
+
+    private static final CharSequence[] SETTABLE_BUCKETS_NAMES =
+            {"ACTIVE", "WORKING_SET", "FREQUENT", "RARE"};
+
+    private static final CharSequence[] SETTABLE_BUCKETS_VALUES = {
+            Integer.toString(STANDBY_BUCKET_ACTIVE),
+            Integer.toString(STANDBY_BUCKET_WORKING_SET),
+            Integer.toString(STANDBY_BUCKET_FREQUENT),
+            Integer.toString(STANDBY_BUCKET_RARE)
+    };
 
     private UsageStatsManager mUsageStats;
 
@@ -68,29 +89,51 @@ public class InactiveApps extends SettingsPreferenceFragment implements OnPrefer
         List<ResolveInfo> apps = pm.queryIntentActivities(launcherIntent, 0);
         for (ResolveInfo app : apps) {
             String packageName = app.activityInfo.applicationInfo.packageName;
-            Preference p = new Preference(getPrefContext());
+            ListPreference p = new ListPreference(getPrefContext());
             p.setTitle(app.loadLabel(pm));
             p.setIcon(app.loadIcon(pm));
             p.setKey(packageName);
+            p.setEntries(SETTABLE_BUCKETS_NAMES);
+            p.setEntryValues(SETTABLE_BUCKETS_VALUES);
             updateSummary(p);
-            p.setOnPreferenceClickListener(this);
+            p.setOnPreferenceChangeListener(this);
 
             screen.addPreference(p);
         }
     }
 
-    private void updateSummary(Preference p) {
-        boolean inactive = mUsageStats.isAppInactive(p.getKey());
-        p.setSummary(inactive
-                ? R.string.inactive_app_inactive_summary
-                : R.string.inactive_app_active_summary);
+    static String bucketToName(int bucket) {
+        switch (bucket) {
+            case STANDBY_BUCKET_EXEMPTED: return "EXEMPTED";
+            case STANDBY_BUCKET_ACTIVE: return "ACTIVE";
+            case STANDBY_BUCKET_WORKING_SET: return "WORKING_SET";
+            case STANDBY_BUCKET_FREQUENT: return "FREQUENT";
+            case STANDBY_BUCKET_RARE: return "RARE";
+            case STANDBY_BUCKET_NEVER: return "NEVER";
+        }
+        return "";
+    }
+
+    private void updateSummary(ListPreference p) {
+        final Resources res = getActivity().getResources();
+        final int appBucket = mUsageStats.getAppStandbyBucket(p.getKey());
+        final String bucketName = bucketToName(appBucket);
+        p.setSummary(res.getString(R.string.standby_bucket_summary, bucketName));
+        // Buckets outside of the range of the dynamic ones are only used for special
+        // purposes and can either not be changed out of, or might have undesirable
+        // side-effects in combination with other assumptions.
+        final boolean changeable = appBucket >= STANDBY_BUCKET_ACTIVE
+                && appBucket <= STANDBY_BUCKET_RARE;
+        if (changeable) {
+            p.setValue(Integer.toString(appBucket));
+        }
+        p.setEnabled(changeable);
     }
 
     @Override
-    public boolean onPreferenceClick(Preference preference) {
-        String packageName = preference.getKey();
-        mUsageStats.setAppInactive(packageName, !mUsageStats.isAppInactive(packageName));
-        updateSummary(preference);
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        mUsageStats.setAppStandbyBucket(preference.getKey(), Integer.parseInt((String) newValue));
+        updateSummary((ListPreference) preference);
         return false;
     }
 }

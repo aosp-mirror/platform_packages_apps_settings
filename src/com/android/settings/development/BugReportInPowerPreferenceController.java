@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,55 +16,32 @@
 
 package com.android.settings.development;
 
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
-public class BugReportInPowerPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin {
+public class BugReportInPowerPreferenceController extends
+        DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener,
+        PreferenceControllerMixin {
 
     private static final String KEY_BUGREPORT_IN_POWER = "bugreport_in_power";
 
-    private UserManager mUserManager;
-    private SwitchPreference mPreference;
+    @VisibleForTesting
+    static int SETTING_VALUE_ON = 1;
+    @VisibleForTesting
+    static int SETTING_VALUE_OFF = 0;
+
+    private final UserManager mUserManager;
 
     public BugReportInPowerPreferenceController(Context context) {
         super(context);
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
-    }
-
-    @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        if (KEY_BUGREPORT_IN_POWER.equals(preference.getKey())) {
-            final SwitchPreference switchPreference = (SwitchPreference) preference;
-            Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Global.BUGREPORT_IN_POWER_MENU,
-                switchPreference.isChecked() ? 1 : 0);
-            setBugreportStorageProviderStatus();
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        if (isAvailable()) {
-            mPreference = (SwitchPreference) screen.findPreference(KEY_BUGREPORT_IN_POWER);
-        }
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_BUGREPORT_IN_POWER;
     }
 
     @Override
@@ -73,49 +50,31 @@ public class BugReportInPowerPreferenceController extends AbstractPreferenceCont
     }
 
     @Override
+    public String getPreferenceKey() {
+        return KEY_BUGREPORT_IN_POWER;
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        final boolean isEnabled = (Boolean) newValue;
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Global.BUGREPORT_IN_POWER_MENU,
+                isEnabled ? SETTING_VALUE_ON : SETTING_VALUE_OFF);
+        return true;
+    }
+
+    @Override
     public void updateState(Preference preference) {
-        updatePreference();
+        final int mode = Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Global.BUGREPORT_IN_POWER_MENU, SETTING_VALUE_OFF);
+        ((SwitchPreference) mPreference).setChecked(mode != SETTING_VALUE_OFF);
     }
 
-    public void enablePreference(boolean enabled) {
-        if (isAvailable()) {
-            mPreference.setEnabled(enabled);
-        }
+    @Override
+    protected void onDeveloperOptionsSwitchDisabled() {
+        super.onDeveloperOptionsSwitchDisabled();
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Global.BUGREPORT_IN_POWER_MENU, SETTING_VALUE_OFF);
+        ((SwitchPreference) mPreference).setChecked(false);
     }
-
-    public void resetPreference() {
-        if (mPreference.isChecked()) {
-            mPreference.setChecked(false);
-            handlePreferenceTreeClick(mPreference);
-        }
-    }
-
-    public boolean updatePreference() {
-        if (!isAvailable()) {
-            return false;
-        }
-        final boolean enabled = Settings.Secure.getInt(
-            mContext.getContentResolver(), Settings.Global.BUGREPORT_IN_POWER_MENU, 0) != 0;
-        mPreference.setChecked(enabled);
-        return enabled;
-    }
-
-    public void updateBugreportOptions() {
-        if (!isAvailable()) {
-            return;
-        }
-        mPreference.setEnabled(true);
-        setBugreportStorageProviderStatus();
-    }
-
-    private void setBugreportStorageProviderStatus() {
-        final ComponentName componentName = new ComponentName("com.android.shell",
-            "com.android.shell.BugreportStorageProvider");
-        final boolean enabled = mPreference.isChecked();
-        mContext.getPackageManager().setComponentEnabledSetting(componentName,
-            enabled ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
-                : PackageManager.COMPONENT_ENABLED_STATE_DEFAULT,
-            0);
-    }
-
 }

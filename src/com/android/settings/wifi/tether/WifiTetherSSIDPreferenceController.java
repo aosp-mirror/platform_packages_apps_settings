@@ -21,7 +21,7 @@ import android.net.wifi.WifiConfiguration;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.EditTextPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
+import android.util.Log;
 
 import com.android.settings.widget.ValidatedEditTextPreference;
 import com.android.settings.wifi.WifiUtils;
@@ -29,15 +29,18 @@ import com.android.settings.wifi.WifiUtils;
 public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreferenceController
         implements ValidatedEditTextPreference.Validator {
 
+    private static final String TAG = "WifiTetherSsidPref";
     private static final String PREF_KEY = "wifi_tether_network_name";
     @VisibleForTesting
     static final String DEFAULT_SSID = "AndroidAP";
 
     private String mSSID;
+    private WifiDeviceNameTextValidator mWifiDeviceNameTextValidator;
 
     public WifiTetherSSIDPreferenceController(Context context,
             OnTetherConfigUpdateListener listener) {
         super(context, listener);
+        mWifiDeviceNameTextValidator = new WifiDeviceNameTextValidator();
     }
 
     @Override
@@ -46,13 +49,14 @@ public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreference
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
+    public void updateDisplay() {
         final WifiConfiguration config = mWifiManager.getWifiApConfiguration();
         if (config != null) {
             mSSID = config.SSID;
+            Log.d(TAG, "Updating SSID in Preference, " + mSSID);
         } else {
             mSSID = DEFAULT_SSID;
+            Log.d(TAG, "Updating to default SSID in Preference, " + mSSID);
         }
         ((ValidatedEditTextPreference) mPreference).setValidator(this);
         updateSsidDisplay((EditTextPreference) mPreference);
@@ -68,7 +72,7 @@ public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreference
 
     @Override
     public boolean isTextValid(String value) {
-        return !WifiUtils.isSSIDTooLong(value) && !WifiUtils.isSSIDTooShort(value);
+        return mWifiDeviceNameTextValidator.isTextValid(value);
     }
 
     public String getSSID() {

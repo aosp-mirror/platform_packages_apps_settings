@@ -15,13 +15,24 @@
  */
 package com.android.settings.fuelgauge;
 
+import static com.android.settings.fuelgauge.BatteryBroadcastReceiver.BatteryUpdateType;
+
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.BatteryManager;
+import android.os.PowerManager;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.Utils;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -29,20 +40,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BatteryBroadcastReceiverTest {
+
     private static final String BATTERY_INIT_LEVEL = "100%";
     private static final String BATTERY_INIT_STATUS = "Not charging";
     private static final int BATTERY_INTENT_LEVEL = 80;
@@ -67,26 +68,34 @@ public class BatteryBroadcastReceiverTest {
         mChargingIntent = new Intent(Intent.ACTION_BATTERY_CHANGED);
         mChargingIntent.putExtra(BatteryManager.EXTRA_LEVEL, BATTERY_INTENT_LEVEL);
         mChargingIntent.putExtra(BatteryManager.EXTRA_SCALE, BATTERY_INTENT_SCALE);
-        mChargingIntent.putExtra(BatteryManager.EXTRA_STATUS,
-                BatteryManager.BATTERY_STATUS_CHARGING);
+        mChargingIntent
+            .putExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_CHARGING);
     }
 
     @Test
-    public void testOnReceive_batteryDataChanged_dataUpdated() {
+    public void testOnReceive_batteryLevelChanged_dataUpdated() {
         mBatteryBroadcastReceiver.onReceive(mContext, mChargingIntent);
 
-        assertThat(mBatteryBroadcastReceiver.mBatteryLevel).isEqualTo(
-                Utils.getBatteryPercentage(mChargingIntent));
-        assertThat(mBatteryBroadcastReceiver.mBatteryStatus).isEqualTo(
-                Utils.getBatteryStatus(mContext.getResources(), mChargingIntent));
-        verify(mBatteryListener).onBatteryChanged();
+        assertThat(mBatteryBroadcastReceiver.mBatteryLevel)
+            .isEqualTo(Utils.getBatteryPercentage(mChargingIntent));
+        assertThat(mBatteryBroadcastReceiver.mBatteryStatus)
+            .isEqualTo(Utils.getBatteryStatus(mContext.getResources(), mChargingIntent));
+        verify(mBatteryListener).onBatteryChanged(BatteryUpdateType.BATTERY_LEVEL);
+    }
+
+    @Test
+    public void testOnReceive_powerSaveModeChanged_listenerInvoked() {
+        mBatteryBroadcastReceiver.onReceive(mContext,
+                new Intent(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
+
+        verify(mBatteryListener).onBatteryChanged(BatteryUpdateType.BATTERY_SAVER);
     }
 
     @Test
     public void testOnReceive_batteryDataNotChanged_listenerNotInvoked() {
         final String batteryLevel = Utils.getBatteryPercentage(mChargingIntent);
-        final String batteryStatus = Utils.getBatteryStatus(mContext.getResources(),
-                mChargingIntent);
+        final String batteryStatus =
+            Utils.getBatteryStatus(mContext.getResources(), mChargingIntent);
         mBatteryBroadcastReceiver.mBatteryLevel = batteryLevel;
         mBatteryBroadcastReceiver.mBatteryStatus = batteryStatus;
 
@@ -94,7 +103,7 @@ public class BatteryBroadcastReceiverTest {
 
         assertThat(mBatteryBroadcastReceiver.mBatteryLevel).isEqualTo(batteryLevel);
         assertThat(mBatteryBroadcastReceiver.mBatteryStatus).isEqualTo(batteryStatus);
-        verify(mBatteryListener, never()).onBatteryChanged();
+        verify(mBatteryListener, never()).onBatteryChanged(anyInt());
     }
 
     @Test
@@ -104,12 +113,11 @@ public class BatteryBroadcastReceiverTest {
         mBatteryBroadcastReceiver.register();
         mBatteryBroadcastReceiver.register();
 
-        assertThat(mBatteryBroadcastReceiver.mBatteryLevel).isEqualTo(
-                Utils.getBatteryPercentage(mChargingIntent));
-        assertThat(mBatteryBroadcastReceiver.mBatteryStatus).isEqualTo(
-                Utils.getBatteryStatus(mContext.getResources(), mChargingIntent));
+        assertThat(mBatteryBroadcastReceiver.mBatteryLevel)
+            .isEqualTo(Utils.getBatteryPercentage(mChargingIntent));
+        assertThat(mBatteryBroadcastReceiver.mBatteryStatus)
+            .isEqualTo(Utils.getBatteryStatus(mContext.getResources(), mChargingIntent));
         // 2 times because register will force update the battery
-        verify(mBatteryListener, times(2)).onBatteryChanged();
+        verify(mBatteryListener, times(2)).onBatteryChanged(BatteryUpdateType.MANUAL);
     }
-
 }

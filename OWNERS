@@ -1,3 +1,7 @@
+# Use this reviewer by default.
+pixel-sw-exp-reviews+gerrit@google.com
+
+# People who can approve changes for submission
 asapperstein@google.com
 asargent@google.com
 dehboxturtle@google.com
@@ -9,3 +13,6 @@ zhfan@google.com
 
 # Emergency approvers in case the above are not available
 miket@google.com
+
+# Exempt resource files (because they are in a flat directory and too hard to manage via OWNERS)
+per-file *.xml=*

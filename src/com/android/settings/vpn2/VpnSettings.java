@@ -401,7 +401,7 @@ public class VpnSettings extends RestrictedSettingsFragment implements
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_url_vpn;
     }
 

@@ -17,6 +17,8 @@
 package com.android.settings.wallpaper;
 
 import android.app.Activity;
+import android.app.WallpaperManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -24,7 +26,7 @@ import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.Utils;
+import com.android.settings.core.SubSettingLauncher;
 
 public class WallpaperSuggestionActivity extends Activity {
 
@@ -48,9 +50,26 @@ public class WallpaperSuggestionActivity extends Activity {
     @VisibleForTesting
     void startFallbackSuggestion() {
         // fall back to default wallpaper picker
-        Utils.startWithFragment(this, WallpaperTypeSettings.class.getName(), null, null, 0,
-                R.string.wallpaper_suggestion_title, null,
-                MetricsProto.MetricsEvent.DASHBOARD_SUMMARY);
+        new SubSettingLauncher(this)
+                .setDestination(WallpaperTypeSettings.class.getName())
+                .setTitle(R.string.wallpaper_suggestion_title)
+                .setSourceMetricsCategory(MetricsProto.MetricsEvent.DASHBOARD_SUMMARY)
+                .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
+                .launch();
     }
 
+    @VisibleForTesting
+    public static boolean isSuggestionComplete(Context context) {
+        if (!isWallpaperServiceEnabled(context)) {
+            return true;
+        }
+        final WallpaperManager manager = (WallpaperManager) context.getSystemService(
+                WALLPAPER_SERVICE);
+        return manager.getWallpaperId(WallpaperManager.FLAG_SYSTEM) > 0;
+    }
+
+    private static boolean isWallpaperServiceEnabled(Context context) {
+        return context.getResources().getBoolean(
+                com.android.internal.R.bool.config_enableWallpaperService);
+    }
 }

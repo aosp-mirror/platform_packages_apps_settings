@@ -16,18 +16,21 @@
 
 package com.android.settings.notification;
 
+import static com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.Fragment;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnDismissListener;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.service.notification.ZenModeConfig;
-import android.util.ArraySet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,36 +39,57 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.utils.ServiceListing;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.utils.ZenServiceListing;
 
 import java.lang.ref.WeakReference;
 import java.text.Collator;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-public abstract class ZenRuleSelectionDialog {
+public class ZenRuleSelectionDialog extends InstrumentedDialogFragment {
     private static final String TAG = "ZenRuleSelectionDialog";
     private static final boolean DEBUG = ZenModeSettings.DEBUG;
 
-    private final Context mContext;
-    private final PackageManager mPm;
-    private NotificationManager mNm;
-    private final AlertDialog mDialog;
-    private final LinearLayout mRuleContainer;
-    private final ZenServiceListing mServiceListing;
+    private static ZenServiceListing mServiceListing;
+    protected static PositiveClickListener mPositiveClickListener;
 
-    public ZenRuleSelectionDialog(Context context, ZenServiceListing serviceListing) {
+    private static Context mContext;
+    private static PackageManager mPm;
+    private static NotificationManager mNm;
+    private LinearLayout mRuleContainer;
+
+    /**
+     * The interface we expect a listener to implement.
+     */
+    public interface PositiveClickListener {
+        void onSystemRuleSelected(ZenRuleInfo ruleInfo, Fragment parent);
+        void onExternalRuleSelected(ZenRuleInfo ruleInfo, Fragment parent);
+    }
+
+    @Override
+    public int getMetricsCategory() {
+        return MetricsEvent.NOTIFICATION_ZEN_MODE_RULE_SELECTION_DIALOG;
+    }
+
+    public static void show(Context context, Fragment parent, PositiveClickListener
+            listener, ZenServiceListing serviceListing) {
+        mPositiveClickListener = listener;
         mContext = context;
-        mPm = context.getPackageManager();
-        mNm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        mPm = mContext.getPackageManager();
+        mNm = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         mServiceListing = serviceListing;
-        final View v =
-                LayoutInflater.from(context).inflate(R.layout.zen_rule_type_selection, null, false);
+
+        ZenRuleSelectionDialog dialog = new ZenRuleSelectionDialog();
+        dialog.setTargetFragment(parent, 0);
+        dialog.show(parent.getFragmentManager(), TAG);
+    }
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        final View v = LayoutInflater.from(getContext()).inflate(R.layout.zen_rule_type_selection,
+                null, false);
 
         mRuleContainer = (LinearLayout) v.findViewById(R.id.rule_container);
         if (mServiceListing != null) {
@@ -74,27 +98,20 @@ public abstract class ZenRuleSelectionDialog {
             mServiceListing.addZenCallback(mServiceListingCallback);
             mServiceListing.reloadApprovedServices();
         }
-        mDialog = new AlertDialog.Builder(context)
+        return new AlertDialog.Builder(getContext())
                 .setTitle(R.string.zen_mode_choose_rule_type)
                 .setView(v)
-                .setOnDismissListener(new OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-                        if (mServiceListing != null) {
-                            mServiceListing.removeZenCallback(mServiceListingCallback);
-                        }
-                    }
-                })
                 .setNegativeButton(R.string.cancel, null)
                 .create();
     }
 
-    public void show() {
-        mDialog.show();
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+        if (mServiceListing != null) {
+            mServiceListing.removeZenCallback(mServiceListingCallback);
+        }
     }
-
-    abstract public void onSystemRuleSelected(ZenRuleInfo ruleInfo);
-    abstract public void onExternalRuleSelected(ZenRuleInfo ruleInfo);
 
     private void bindType(final ZenRuleInfo ri) {
         try {
@@ -102,22 +119,30 @@ public abstract class ZenRuleSelectionDialog {
             final LinearLayout v = (LinearLayout) LayoutInflater.from(mContext).inflate(
                     R.layout.zen_rule_type, null, false);
 
-            LoadIconTask task = new LoadIconTask((ImageView) v.findViewById(R.id.icon));
-            task.execute(info);
+            ImageView iconView = v.findViewById(R.id.icon);
             ((TextView) v.findViewById(R.id.title)).setText(ri.title);
             if (!ri.isSystem) {
+                LoadIconTask task = new LoadIconTask(iconView);
+                task.execute(info);
+
                 TextView subtitle = (TextView) v.findViewById(R.id.subtitle);
                 subtitle.setText(info.loadLabel(mPm));
                 subtitle.setVisibility(View.VISIBLE);
+            } else {
+                if (ZenModeConfig.isValidScheduleConditionId(ri.defaultConditionId)) {
+                    iconView.setImageDrawable(mContext.getDrawable(R.drawable.ic_timelapse));
+                } else if (ZenModeConfig.isValidEventConditionId(ri.defaultConditionId)) {
+                    iconView.setImageDrawable(mContext.getDrawable(R.drawable.ic_event));
+                }
             }
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mDialog.dismiss();
+                    dismiss();
                     if (ri.isSystem) {
-                        onSystemRuleSelected(ri);
+                        mPositiveClickListener.onSystemRuleSelected(ri, getTargetFragment());
                     } else {
-                        onExternalRuleSelected(ri);
+                        mPositiveClickListener.onExternalRuleSelected(ri, getTargetFragment());
                     }
                 }
             });
@@ -169,7 +194,8 @@ public abstract class ZenRuleSelectionDialog {
             if (DEBUG) Log.d(TAG, "Services reloaded: count=" + services.size());
             Set<ZenRuleInfo> externalRuleTypes = new TreeSet<>(RULE_TYPE_COMPARATOR);
             for (ServiceInfo serviceInfo : services) {
-                final ZenRuleInfo ri = ZenModeSettings.getRuleInfo(mPm, serviceInfo);
+                final ZenRuleInfo ri = AbstractZenModeAutomaticRulePreferenceController.
+                        getRuleInfo(mPm, serviceInfo);
                 if (ri != null && ri.configurationActivity != null
                         && mNm.isNotificationPolicyAccessGrantedForPackage(ri.packageName)
                         && (ri.ruleInstanceLimit <= 0 || ri.ruleInstanceLimit

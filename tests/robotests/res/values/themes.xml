@@ -1,3 +1,7 @@
 <resources>
-    <style name="Theme.Settings" parent="@android:style/Theme.DeviceDefault.Settings"/>
+    <style name="Theme.Settings" parent="@android:style/Theme.DeviceDefault.Settings" />
+
+    <!-- Override the main app's style for ActionPrimaryButton to get around lack of new style
+         support in robolectric  -->
+    <style name="ActionPrimaryButton" parent="android:Widget.DeviceDefault.Button" />
 </resources>

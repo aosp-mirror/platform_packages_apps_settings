@@ -25,7 +25,7 @@ import android.util.SparseArray;
 
 import com.android.internal.util.Preconditions;
 import com.android.settings.Utils;
-import com.android.settings.utils.AsyncLoader;
+import com.android.settingslib.utils.AsyncLoader;
 
 /**
  * Fetches a user icon as a loader using a given icon loading lambda.

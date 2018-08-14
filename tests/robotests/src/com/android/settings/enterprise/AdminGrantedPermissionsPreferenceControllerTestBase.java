@@ -16,12 +16,17 @@
 
 package com.android.settings.enterprise;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.applications.ApplicationFeatureProvider;
-import com.android.settings.core.PreferenceAvailabilityObserver;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
@@ -32,49 +37,30 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.anyBoolean;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 /**
  * Common base for testing subclasses of {@link AdminGrantedPermissionsPreferenceControllerBase}.
  */
 public abstract class AdminGrantedPermissionsPreferenceControllerTestBase {
-    protected final String mKey;
-    protected final String[] mPermissions;
-    protected final String mPermissionGroup;
+
+    private final String mKey;
+    final String[] mPermissions;
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     protected Context mContext;
     private FakeFeatureFactory mFeatureFactory;
-    @Mock private PreferenceAvailabilityObserver mObserver;
 
     protected AdminGrantedPermissionsPreferenceControllerBase mController;
 
-    public AdminGrantedPermissionsPreferenceControllerTestBase(String key, String[] permissions,
-            String permissionGroup) {
+    AdminGrantedPermissionsPreferenceControllerTestBase(String key, String[] permissions) {
         mKey = key;
         mPermissions = permissions;
-        mPermissionGroup = permissionGroup;
     }
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mController = createController(true /* async */);
-        mController.setAvailabilityObserver(mObserver);
-    }
-
-    @Test
-    public void testGetAvailabilityObserver() {
-        assertThat(mController.getAvailabilityObserver()).isEqualTo(mObserver);
     }
 
     private void setNumberOfPackagesWithAdminGrantedPermissions(int number, boolean async) {
@@ -83,9 +69,10 @@ public abstract class AdminGrantedPermissionsPreferenceControllerTestBase {
                 ((ApplicationFeatureProvider.NumberOfAppsCallback)
                         invocation.getArguments()[2]).onNumberOfAppsResult(number);
                 return null;
-            }}).when(mFeatureFactory.applicationFeatureProvider)
-                    .calculateNumberOfAppsWithAdminGrantedPermissions(eq(mPermissions),
-                            eq(async), anyObject());
+            }
+        }).when(mFeatureFactory.applicationFeatureProvider)
+                .calculateNumberOfAppsWithAdminGrantedPermissions(eq(mPermissions),
+                        eq(async), anyObject());
     }
 
     @Test
@@ -96,7 +83,6 @@ public abstract class AdminGrantedPermissionsPreferenceControllerTestBase {
         setNumberOfPackagesWithAdminGrantedPermissions(0, true /* async */);
         mController.updateState(preference);
         assertThat(preference.isVisible()).isFalse();
-        verify(mObserver).onPreferenceAvailabilityUpdated(mKey, false);
 
         setNumberOfPackagesWithAdminGrantedPermissions(20, true /* async */);
         when(mContext.getResources().getQuantityString(
@@ -105,33 +91,27 @@ public abstract class AdminGrantedPermissionsPreferenceControllerTestBase {
         mController.updateState(preference);
         assertThat(preference.getSummary()).isEqualTo("minimum 20 apps");
         assertThat(preference.isVisible()).isTrue();
-        verify(mObserver).onPreferenceAvailabilityUpdated(mKey, true);
     }
 
     @Test
     public void testIsAvailableSync() {
         final AdminGrantedPermissionsPreferenceControllerBase controller
                 = createController(false /* async */);
-        controller.setAvailabilityObserver(mObserver);
 
         setNumberOfPackagesWithAdminGrantedPermissions(0, false /* async */);
         assertThat(controller.isAvailable()).isFalse();
-        verify(mObserver).onPreferenceAvailabilityUpdated(mKey, false);
 
         setNumberOfPackagesWithAdminGrantedPermissions(20, false /* async */);
         assertThat(controller.isAvailable()).isTrue();
-        verify(mObserver).onPreferenceAvailabilityUpdated(mKey, true);
     }
 
     @Test
     public void testIsAvailableAsync() {
         setNumberOfPackagesWithAdminGrantedPermissions(0, true /* async */);
         assertThat(mController.isAvailable()).isTrue();
-        verify(mObserver, never()).onPreferenceAvailabilityUpdated(eq(mKey), anyBoolean());
 
         setNumberOfPackagesWithAdminGrantedPermissions(20, true /* async */);
         assertThat(mController.isAvailable()).isTrue();
-        verify(mObserver, never()).onPreferenceAvailabilityUpdated(eq(mKey), anyBoolean());
     }
 
     @Test

@@ -16,6 +16,13 @@
 
 package com.android.settings.notification;
 
+import static com.android.settings.notification.SettingPref.TYPE_GLOBAL;
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -24,30 +31,19 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.RuntimeEnvironment;
 
-import static com.android.settings.notification.SettingPref.TYPE_GLOBAL;
-import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SettingPrefControllerTest {
 
     @Mock
@@ -66,7 +62,7 @@ public class SettingPrefControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(ShadowApplication.getInstance().getApplicationContext());
+        mContext = spy(RuntimeEnvironment.application);
         when(mContext.getContentResolver()).thenReturn(mContentResolver);
         when(mSetting.getActivity()).thenReturn(mActivity);
         doReturn(mScreen).when(mSetting).getPreferenceScreen();
@@ -90,7 +86,7 @@ public class SettingPrefControllerTest {
 
     @Test
     public void getPreferenceKey_shouldReturnPrefKey() {
-        assertThat(mController.getPreferenceKey()).isEqualTo(mController.KEY_TEST);
+        assertThat(mController.getPreferenceKey()).isEqualTo(PreferenceControllerTestable.KEY_TEST);
     }
 
     @Test
@@ -150,7 +146,7 @@ public class SettingPrefControllerTest {
         private static final String KEY_TEST = "key1";
         private boolean mApplicable = true;
 
-        public PreferenceControllerTestable(Context context, SettingsPreferenceFragment parent,
+        private PreferenceControllerTestable(Context context, SettingsPreferenceFragment parent,
             Lifecycle lifecycle) {
             super(context, parent, lifecycle);
             mPreference = spy(new SettingPref(
@@ -173,7 +169,5 @@ public class SettingPrefControllerTest {
         void setApplicable(boolean applicable) {
             mApplicable = applicable;
         }
-
     }
-
 }

@@ -16,15 +16,15 @@
 
 package com.android.settings.core.codeinspection;
 
-import org.robolectric.shadows.ShadowApplication;
+import static com.google.common.truth.Truth.assertWithMessage;
+
+import org.robolectric.RuntimeEnvironment;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Modifier;
 import java.util.List;
-
-import static com.google.common.truth.Truth.assertWithMessage;
 
 /**
  * Inspector takes a list of class objects and perform static code analysis in its {@link #run()}
@@ -34,7 +34,7 @@ public abstract class CodeInspector {
 
     protected static final String PACKAGE_NAME = "com.android.settings";
 
-    protected static final String TEST_CLASS_SUFFIX = "Test";
+    private static final String TEST_CLASS_SUFFIX = "Test";
     private static final String TEST_INNER_CLASS_SIGNATURE = "Test$";
 
     protected final List<Class<?>> mClasses;
@@ -49,14 +49,12 @@ public abstract class CodeInspector {
     public abstract void run();
 
     protected void assertNoObsoleteInGrandfatherList(String listName, List<String> list) {
-        final StringBuilder obsoleteGrandfatherItems = new StringBuilder(
-                listName + " contains item that should not be grandfathered.\n");
+        final StringBuilder obsoleteGrandfatherItems = new StringBuilder(listName)
+            .append(" contains item that should not be grandfathered.\n");
         for (String c : list) {
             obsoleteGrandfatherItems.append(c).append("\n");
         }
-        assertWithMessage(obsoleteGrandfatherItems.toString())
-                .that(list)
-                .isEmpty();
+        assertWithMessage(obsoleteGrandfatherItems.toString()).that(list).isEmpty();
     }
 
     protected boolean isConcreteSettingsClass(Class clazz) {
@@ -82,9 +80,7 @@ public abstract class CodeInspector {
 
     public static void initializeGrandfatherList(List<String> grandfather, String filename) {
         try {
-            final InputStream in = ShadowApplication.getInstance().getApplicationContext()
-                    .getAssets()
-                    .open(filename);
+            final InputStream in = RuntimeEnvironment.application.getAssets().open(filename);
             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
             String line;
             while ((line = reader.readLine()) != null) {
@@ -93,6 +89,5 @@ public abstract class CodeInspector {
         } catch (Exception e) {
             throw new IllegalArgumentException("Error initializing grandfather " + filename, e);
         }
-
     }
 }

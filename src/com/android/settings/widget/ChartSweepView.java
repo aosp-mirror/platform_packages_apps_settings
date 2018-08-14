@@ -265,8 +265,11 @@ public class ChartSweepView extends View {
             paint.setColor(mLabelColor);
 
             mLabelTemplate = new SpannableStringBuilder(template);
-            mLabelLayout = new DynamicLayout(
-                    mLabelTemplate, paint, LARGE_WIDTH, Alignment.ALIGN_RIGHT, 1f, 0f, false);
+            mLabelLayout = DynamicLayout.Builder.obtain(mLabelTemplate, paint, LARGE_WIDTH)
+                    .setAlignment(Alignment.ALIGN_RIGHT)
+                    .setIncludePad(false)
+                    .setUseLineSpacingFromFallbacks(true)
+                    .build();
             invalidateLabel();
 
         } else {

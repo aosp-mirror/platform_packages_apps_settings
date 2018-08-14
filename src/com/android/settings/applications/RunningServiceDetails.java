@@ -21,7 +21,6 @@ import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Debug;
-import android.os.Handler;
 import android.os.SystemClock;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -35,8 +34,9 @@ import android.widget.TextView;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -45,7 +45,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class RunningServiceDetails extends InstrumentedPreferenceFragment
+public class RunningServiceDetails extends InstrumentedFragment
         implements RunningState.OnRefreshUiListener {
     static final String TAG = "RunningServicesDetails";
 
@@ -481,15 +481,12 @@ public class RunningServiceDetails extends InstrumentedPreferenceFragment
             addDetailViews();
         }
     }
-    
+
     private void finish() {
-        (new Handler()).post(new Runnable() {
-            @Override
-            public void run() {
-                Activity a = getActivity();
-                if (a != null) {
-                    a.onBackPressed();
-                }
+        ThreadUtils.postOnMainThread(() -> {
+            final Activity a = getActivity();
+            if (a != null) {
+                a.onBackPressed();
             }
         });
     }

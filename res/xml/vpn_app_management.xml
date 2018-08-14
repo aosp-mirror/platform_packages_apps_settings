@@ -15,8 +15,7 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-        android:title="@string/vpn_title">
+        xmlns:settings="http://schemas.android.com/apk/res-auto">
 
         <Preference
                 android:key="version"
@@ -41,10 +40,10 @@
                 settings:useAdditionalSummary="true"
                 settings:restrictedSwitchSummary="@string/disabled_by_admin_summary_text" />
 
-        <com.android.settings.DimmableIconPreference
+        <com.android.settingslib.RestrictedPreference
                 android:key="forget_vpn"
                 android:title="@string/vpn_forget_long"
-                android:icon="@drawable/ic_menu_delete"
+                android:icon="@drawable/ic_delete"
                 settings:userRestriction="no_config_vpn"
                 settings:useAdminDisabledSummary="true" />
 </PreferenceScreen>

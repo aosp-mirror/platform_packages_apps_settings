@@ -17,17 +17,11 @@
 package com.android.settings.accessibility;
 
 import android.content.Intent;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
-import android.support.v7.preference.PreferenceViewHolder;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.accessibility.AccessibilityEvent;
-import android.view.accessibility.AccessibilityManager;
-import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -35,8 +29,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.ToggleSwitch;
 
-public abstract class ToggleFeaturePreferenceFragment
-        extends SettingsPreferenceFragment {
+public abstract class ToggleFeaturePreferenceFragment extends SettingsPreferenceFragment {
 
     protected SwitchBar mSwitchBar;
     protected ToggleSwitch mToggleSwitch;
@@ -49,9 +42,12 @@ public abstract class ToggleFeaturePreferenceFragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        PreferenceScreen preferenceScreen = getPreferenceManager().createPreferenceScreen(
-                getActivity());
-        setPreferenceScreen(preferenceScreen);
+        final int resId = getPreferenceScreenResId();
+        if (resId <= 0) {
+            PreferenceScreen preferenceScreen = getPreferenceManager().createPreferenceScreen(
+                    getActivity());
+            setPreferenceScreen(preferenceScreen);
+        }
     }
 
     @Override
@@ -60,6 +56,7 @@ public abstract class ToggleFeaturePreferenceFragment
 
         SettingsActivity activity = (SettingsActivity) getActivity();
         mSwitchBar = activity.getSwitchBar();
+        updateSwitchBarText(mSwitchBar);
         mToggleSwitch = mSwitchBar.getSwitch();
 
         onProcessArguments(getArguments());
@@ -86,6 +83,12 @@ public abstract class ToggleFeaturePreferenceFragment
         super.onDestroyView();
 
         removeActionBarToggleSwitch();
+    }
+
+    protected void updateSwitchBarText(SwitchBar switchBar) {
+        // Implement this to provide meaningful text in switch bar
+        switchBar.setSwitchBarText(R.string.accessibility_service_master_switch_title,
+                R.string.accessibility_service_master_switch_title);
     }
 
     protected abstract void onPreferenceToggled(String preferenceKey, boolean enabled);
@@ -124,12 +127,18 @@ public abstract class ToggleFeaturePreferenceFragment
         }
 
         // Title.
-        if (arguments.containsKey(AccessibilitySettings.EXTRA_TITLE)) {
+        if (arguments.containsKey(AccessibilitySettings.EXTRA_RESOLVE_INFO)) {
+            ResolveInfo info = arguments.getParcelable(AccessibilitySettings.EXTRA_RESOLVE_INFO);
+            getActivity().setTitle(info.loadLabel(getPackageManager()).toString());
+        } else if (arguments.containsKey(AccessibilitySettings.EXTRA_TITLE)) {
             setTitle(arguments.getString(AccessibilitySettings.EXTRA_TITLE));
         }
 
         // Summary.
-        if (arguments.containsKey(AccessibilitySettings.EXTRA_SUMMARY)) {
+        if (arguments.containsKey(AccessibilitySettings.EXTRA_SUMMARY_RES)) {
+            final int summary = arguments.getInt(AccessibilitySettings.EXTRA_SUMMARY_RES);
+            mFooterPreferenceMixin.createFooterPreference().setTitle(summary);
+        } else if (arguments.containsKey(AccessibilitySettings.EXTRA_SUMMARY)) {
             final CharSequence summary = arguments.getCharSequence(
                     AccessibilitySettings.EXTRA_SUMMARY);
             mFooterPreferenceMixin.createFooterPreference().setTitle(summary);

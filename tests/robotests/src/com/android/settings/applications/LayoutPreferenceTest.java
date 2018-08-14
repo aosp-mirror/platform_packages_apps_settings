@@ -24,32 +24,26 @@ import android.content.Context;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.view.LayoutInflater;
-import android.view.View;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class LayoutPreferenceTest {
 
     private Context mContext;
     private LayoutPreference mPreference;
-    private View mRootView;
     private PreferenceViewHolder mHolder;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        mPreference = new LayoutPreference(mContext, R.layout.app_action_buttons);
-        mRootView = mPreference.mRootView;
+        mPreference = new LayoutPreference(mContext, R.layout.two_action_buttons);
         mHolder = PreferenceViewHolder.createInstanceForTests(LayoutInflater.from(mContext)
                 .inflate(R.layout.layout_preference_frame, null, false));
     }
@@ -79,12 +73,12 @@ public class LayoutPreferenceTest {
 
     @Test
     public void disableSomeView_shouldMaintainStateAfterBind() {
-        mPreference.findViewById(R.id.left_button).setEnabled(false);
-        mPreference.findViewById(R.id.right_button).setEnabled(true);
+        mPreference.findViewById(R.id.button1_positive).setEnabled(false);
+        mPreference.findViewById(R.id.button2_positive).setEnabled(true);
 
         mPreference.onBindViewHolder(mHolder);
 
-        assertThat(mPreference.findViewById(R.id.left_button).isEnabled()).isFalse();
-        assertThat(mPreference.findViewById(R.id.right_button).isEnabled()).isTrue();
+        assertThat(mPreference.findViewById(R.id.button1_positive).isEnabled()).isFalse();
+        assertThat(mPreference.findViewById(R.id.button2_positive).isEnabled()).isTrue();
     }
 }

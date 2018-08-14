@@ -43,14 +43,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.core.instrumentation.Instrumentable;
-import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.Instrumentable;
+import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -63,8 +64,7 @@ import java.util.List;
 public class DeviceAdminSettings extends ListFragment implements Instrumentable {
     static final String TAG = "DeviceAdminSettings";
 
-    private final VisibilityLoggerMixin mVisibilityLoggerMixin =
-            new VisibilityLoggerMixin(getMetricsCategory());
+    private VisibilityLoggerMixin mVisibilityLoggerMixin;
     private DevicePolicyManager mDPM;
     private UserManager mUm;
 
@@ -83,12 +83,6 @@ public class DeviceAdminSettings extends ListFragment implements Instrumentable 
             }
             return this.name.compareTo(other.name);
         }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mVisibilityLoggerMixin.onAttach(context);
     }
 
     /**
@@ -121,6 +115,8 @@ public class DeviceAdminSettings extends ListFragment implements Instrumentable 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        mVisibilityLoggerMixin = new VisibilityLoggerMixin(getMetricsCategory(),
+                FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider());
     }
 
     @Override
@@ -136,6 +132,7 @@ public class DeviceAdminSettings extends ListFragment implements Instrumentable 
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
         Utils.forceCustomPadding(getListView(), true /* additive padding */);
+        getActivity().setTitle(R.string.manage_device_admin);
     }
 
     @Override
@@ -201,7 +198,7 @@ public class DeviceAdminSettings extends ListFragment implements Instrumentable 
     static class ViewHolder {
         ImageView icon;
         TextView name;
-        CheckBox checkbox;
+        Switch checkbox;
         TextView description;
     }
 
@@ -287,10 +284,10 @@ public class DeviceAdminSettings extends ListFragment implements Instrumentable 
         private View newDeviceAdminView(ViewGroup parent) {
             View v = mInflater.inflate(R.layout.device_admin_item, parent, false);
             ViewHolder h = new ViewHolder();
-            h.icon = (ImageView) v.findViewById(R.id.icon);
-            h.name = (TextView) v.findViewById(R.id.name);
-            h.checkbox = (CheckBox) v.findViewById(R.id.checkbox);
-            h.description = (TextView) v.findViewById(R.id.description);
+            h.icon = v.findViewById(R.id.icon);
+            h.name = v.findViewById(R.id.name);
+            h.checkbox =  v.findViewById(R.id.checkbox);
+            h.description = v.findViewById(R.id.description);
             v.setTag(h);
             return v;
         }

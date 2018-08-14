@@ -17,18 +17,27 @@ package com.android.settings.nfc;
 
 import android.content.Context;
 import android.support.v7.preference.DropDownPreference;
+import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 
 public class NfcForegroundPreference extends DropDownPreference implements
-        PaymentBackend.Callback {
+        PaymentBackend.Callback, Preference.OnPreferenceChangeListener {
 
     private final PaymentBackend mPaymentBackend;
     public NfcForegroundPreference(Context context, PaymentBackend backend) {
         super(context);
         mPaymentBackend = backend;
         mPaymentBackend.registerCallback(this);
+
+        setTitle(getContext().getString(R.string.nfc_payment_use_default));
+        setEntries(new CharSequence[] {
+                getContext().getString(R.string.nfc_payment_favor_open),
+                getContext().getString(R.string.nfc_payment_favor_default)
+        });
+        setEntryValues(new CharSequence[] { "1", "0" });
         refresh();
+        setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -37,27 +46,20 @@ public class NfcForegroundPreference extends DropDownPreference implements
     }
 
     void refresh() {
-        PaymentBackend.PaymentAppInfo defaultApp = mPaymentBackend.getDefaultApp();
         boolean foregroundMode = mPaymentBackend.isForegroundMode();
-        setPersistent(false);
-        setTitle(getContext().getString(R.string.nfc_payment_use_default));
-        CharSequence favorOpen;
-        CharSequence favorDefault;
-        setEntries(new CharSequence[] {
-                getContext().getString(R.string.nfc_payment_favor_open),
-                getContext().getString(R.string.nfc_payment_favor_default)
-        });
-        setEntryValues(new CharSequence[] { "1", "0" });
         if (foregroundMode) {
             setValue("1");
         } else {
             setValue("0");
         }
+        setSummary(getEntry());
     }
 
     @Override
-    protected boolean persistString(String value) {
-        mPaymentBackend.setForegroundMode(Integer.parseInt(value) != 0);
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        String newValueString = (String) newValue;
+        setSummary(getEntries()[findIndexOfValue(newValueString)]);
+        mPaymentBackend.setForegroundMode(Integer.parseInt(newValueString) != 0);
         return true;
     }
 }

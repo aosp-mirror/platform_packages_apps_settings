@@ -34,7 +34,7 @@ import android.widget.CompoundButton;
 import com.android.internal.app.LocalePicker;
 import com.android.internal.app.LocaleStore;
 
-import com.android.settings.CreateShortcut;
+import com.android.settings.shortcut.CreateShortcut;
 import com.android.settings.R;
 
 import java.text.NumberFormat;
@@ -82,14 +82,13 @@ class LocaleDragAndDropAdapter
     }
 
     public LocaleDragAndDropAdapter(Context context, List<LocaleStore.LocaleInfo> feedItemList) {
-        this.mFeedItemList = feedItemList;
-
-        this.mContext = context;
+        mFeedItemList = feedItemList;
+        mContext = context;
 
         final float dragElevation = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8,
                 context.getResources().getDisplayMetrics());
 
-        this.mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(
+        mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(
                 ItemTouchHelper.UP | ItemTouchHelper.DOWN, 0 /* no swipe */) {
 
             @Override
@@ -246,15 +245,6 @@ class LocaleDragAndDropAdapter
             }
         }
         return result;
-    }
-
-    LocaleStore.LocaleInfo getFirstChecked() {
-        for (LocaleStore.LocaleInfo li : mFeedItemList) {
-            if (li.getChecked()) {
-                return li;
-            }
-        }
-        return null;
     }
 
     void addLocale(LocaleStore.LocaleInfo li) {

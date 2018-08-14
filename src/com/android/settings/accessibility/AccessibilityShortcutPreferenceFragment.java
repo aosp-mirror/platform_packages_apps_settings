@@ -16,18 +16,21 @@
 package com.android.settings.accessibility;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
+import android.annotation.Nullable;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.database.ContentObserver;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.text.TextUtils;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Switch;
 
+import com.android.internal.accessibility.AccessibilityShortcutController;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -45,6 +48,12 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
 
     private Preference mServicePreference;
     private SwitchPreference mOnLockScreenSwitchPreference;
+    private final ContentObserver mContentObserver = new ContentObserver(new Handler()) {
+        @Override
+        public void onChange(boolean selfChange) {
+            updatePreferences();
+        }
+    };
 
     @Override
     public int getMetricsCategory() {
@@ -52,7 +61,7 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_url_accessibility_shortcut;
     }
 
@@ -60,7 +69,6 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.accessibility_shortcut_settings);
         mServicePreference = findPreference(SHORTCUT_SERVICE_KEY);
         mOnLockScreenSwitchPreference = (SwitchPreference) findPreference(ON_LOCK_SCREEN_KEY);
         mOnLockScreenSwitchPreference.setOnPreferenceChangeListener((Preference p, Object o) -> {
@@ -77,6 +85,20 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
     public void onResume() {
         super.onResume();
         updatePreferences();
+        getContentResolver().registerContentObserver(
+                Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_SHORTCUT_DIALOG_SHOWN),
+                false, mContentObserver);
+    }
+
+    @Override
+    public void onPause() {
+        getContentResolver().unregisterContentObserver(mContentObserver);
+        super.onPause();
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.accessibility_shortcut_settings;
     }
 
     @Override
@@ -84,7 +106,7 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
         super.onInstallSwitchBarToggleSwitch();
         mSwitchBar.addOnSwitchChangeListener((Switch switchView, boolean enabled) -> {
             Context context = getContext();
-            if (enabled && (getServiceInfo(context) == null)) {
+            if (enabled && !shortcutFeatureAvailable(context)) {
                 // If no service is configured, we'll disable the shortcut shortly. Give the
                 // user a chance to select a service. We'll update the preferences when we resume.
                 Settings.Secure.putInt(
@@ -107,7 +129,7 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
         ContentResolver cr = getContentResolver();
         Context context = getContext();
         mServicePreference.setSummary(getServiceName(context));
-        if (getServiceInfo(context) == null) {
+        if (!shortcutFeatureAvailable(context)) {
             // If no service is configured, make sure the overall shortcut is turned off
             Settings.Secure.putInt(
                     getContentResolver(), Settings.Secure.ACCESSIBILITY_SHORTCUT_ENABLED, 0);
@@ -115,8 +137,13 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
         boolean isEnabled = Settings.Secure
                 .getInt(cr, Settings.Secure.ACCESSIBILITY_SHORTCUT_ENABLED, 1) == 1;
         mSwitchBar.setChecked(isEnabled);
-        mOnLockScreenSwitchPreference.setChecked(Settings.Secure.getInt(
-                cr, Settings.Secure.ACCESSIBILITY_SHORTCUT_ON_LOCK_SCREEN, 0) == 1);
+        // The shortcut is enabled by default on the lock screen as long as the user has
+        // enabled the shortcut with the warning dialog
+        final int dialogShown = Settings.Secure.getInt(
+                cr, Settings.Secure.ACCESSIBILITY_SHORTCUT_DIALOG_SHOWN, 0);
+        final boolean enabledFromLockScreen = Settings.Secure.getInt(
+                cr, Settings.Secure.ACCESSIBILITY_SHORTCUT_ON_LOCK_SCREEN, dialogShown) == 1;
+        mOnLockScreenSwitchPreference.setChecked(enabledFromLockScreen);
         // Only enable changing the service and lock screen behavior if the shortcut is on
         mServicePreference.setEnabled(mToggleSwitch.isChecked());
         mOnLockScreenSwitchPreference.setEnabled(mToggleSwitch.isChecked());
@@ -129,19 +156,38 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
      * @return The name of the service or a string saying that none is selected.
      */
     public static CharSequence getServiceName(Context context) {
+        if (!shortcutFeatureAvailable(context)) {
+            return context.getString(R.string.accessibility_no_service_selected);
+        }
         AccessibilityServiceInfo shortcutServiceInfo = getServiceInfo(context);
         if (shortcutServiceInfo != null) {
             return shortcutServiceInfo.getResolveInfo().loadLabel(context.getPackageManager());
         }
-        return context.getString(R.string.accessibility_no_service_selected);
+        return AccessibilityShortcutController.getFrameworkShortcutFeaturesMap()
+                .get(getShortcutComponent(context)).getLabel(context);
     }
 
     private static AccessibilityServiceInfo getServiceInfo(Context context) {
-        ComponentName shortcutServiceName = ComponentName.unflattenFromString(
-                AccessibilityUtils.getShortcutTargetServiceComponentNameString(
-                        context, UserHandle.myUserId()));
         return AccessibilityManager.getInstance(context)
-                .getInstalledServiceInfoWithComponentName(shortcutServiceName);
+                .getInstalledServiceInfoWithComponentName(getShortcutComponent(context));
+    }
+
+    private static boolean shortcutFeatureAvailable(Context context) {
+        ComponentName shortcutFeature = getShortcutComponent(context);
+        if (shortcutFeature == null) return false;
+
+        if (AccessibilityShortcutController.getFrameworkShortcutFeaturesMap()
+                .containsKey(shortcutFeature)) {
+            return true;
+        }
+        return getServiceInfo(context) != null;
+    }
+
+    private static @Nullable ComponentName getShortcutComponent(Context context) {
+        String componentNameString = AccessibilityUtils.getShortcutTargetServiceComponentNameString(
+                context, UserHandle.myUserId());
+        if (componentNameString == null) return null;
+        return ComponentName.unflattenFromString(componentNameString);
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

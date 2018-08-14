@@ -17,25 +17,21 @@
 
 package com.android.settings.search;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import android.content.Intent;
 import android.os.Parcel;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ResultPayloadTest {
-    private ResultPayload mPayload;
 
-    private final String EXTRA_KEY = "key";
-    private final String EXTRA_VALUE = "value";
+    private static final String EXTRA_KEY = "key";
+    private static final String EXTRA_VALUE = "value";
 
     @Test
     public void testParcelOrdering_StaysValid() {
@@ -43,13 +39,13 @@ public class ResultPayloadTest {
         intent.putExtra(EXTRA_KEY, EXTRA_VALUE);
         Parcel parcel = Parcel.obtain();
 
-        mPayload = new ResultPayload(intent);
-        mPayload.writeToParcel(parcel, 0);
+        final ResultPayload payload = new ResultPayload(intent);
+        payload.writeToParcel(parcel, 0);
         // Reset parcel for reading
         parcel.setDataPosition(0);
         ResultPayload newPayload = ResultPayload.CREATOR.createFromParcel(parcel);
 
-        String originalIntentExtra = mPayload.getIntent().getStringExtra(EXTRA_KEY);
+        String originalIntentExtra = payload.getIntent().getStringExtra(EXTRA_KEY);
         String copiedIntentExtra = newPayload.getIntent().getStringExtra(EXTRA_KEY);
         assertThat(originalIntentExtra).isEqualTo(copiedIntentExtra);
     }

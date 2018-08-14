@@ -16,23 +16,35 @@ package com.android.settings.datausage;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
+import android.support.v4.content.res.TypedArrayUtils;
 import android.support.v7.preference.Preference;
-import android.text.format.Formatter;
 import android.util.AttributeSet;
+import android.util.FeatureFlagUtils;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.Utils;
+import com.android.settings.core.FeatureFlags;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.net.DataUsageController;
 
 public class DataUsagePreference extends Preference implements TemplatePreference {
 
     private NetworkTemplate mTemplate;
     private int mSubId;
+    private int mTitleRes;
 
     public DataUsagePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+        final TypedArray a = context.obtainStyledAttributes(
+                attrs, new int[] {com.android.internal.R.attr.title},
+                TypedArrayUtils.getAttr(
+                        context, android.support.v7.preference.R.attr.preferenceStyle,
+                        android.R.attr.preferenceStyle), 0);
+        mTitleRes = a.getResourceId(0, 0);
+        a.recycle();
     }
 
     @Override
@@ -42,18 +54,46 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
         mSubId = subId;
         DataUsageController controller = new DataUsageController(getContext());
         DataUsageController.DataUsageInfo usageInfo = controller.getDataUsageInfo(mTemplate);
-        setSummary(getContext().getString(R.string.data_usage_template,
-                Formatter.formatFileSize(getContext(), usageInfo.usageLevel), usageInfo.period));
+        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.DATA_USAGE_SETTINGS_V2)) {
+            if (mTemplate.isMatchRuleMobile()) {
+                setTitle(R.string.app_cellular_data_usage);
+            } else {
+                setTitle(mTitleRes);
+                setSummary(getContext().getString(R.string.data_usage_template,
+                        DataUsageUtils.formatDataUsage(getContext(), usageInfo.usageLevel),
+                                usageInfo.period));
+            }
+        } else {
+            setTitle(mTitleRes);
+            setSummary(getContext().getString(R.string.data_usage_template,
+                    DataUsageUtils.formatDataUsage(getContext(), usageInfo.usageLevel),
+                            usageInfo.period));
+        }
         setIntent(getIntent());
     }
 
     @Override
     public Intent getIntent() {
-        Bundle args = new Bundle();
+        final Bundle args = new Bundle();
         args.putParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE, mTemplate);
         args.putInt(DataUsageList.EXTRA_SUB_ID, mSubId);
-        return Utils.onBuildStartFragmentIntent(getContext(), DataUsageList.class.getName(), args,
-                getContext().getPackageName(), 0, getTitle(), false,
-                MetricsProto.MetricsEvent.VIEW_UNKNOWN);
+        final SubSettingLauncher launcher = new SubSettingLauncher(getContext())
+                .setArguments(args)
+                .setDestination(DataUsageList.class.getName())
+                .setSourceMetricsCategory(MetricsProto.MetricsEvent.VIEW_UNKNOWN);
+        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.DATA_USAGE_SETTINGS_V2)) {
+            if (mTemplate.isMatchRuleMobile()) {
+                launcher.setTitle(R.string.app_cellular_data_usage);
+            } else {
+                launcher.setTitle(mTitleRes);
+            }
+        } else {
+            if (mTitleRes > 0) {
+                launcher.setTitle(mTitleRes);
+            } else {
+                launcher.setTitle(getTitle());
+            }
+        }
+        return launcher.toIntent();
     }
 }

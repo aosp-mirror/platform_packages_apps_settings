@@ -16,115 +16,51 @@
 
 package com.android.settings.core.codeinspection;
 
-import java.io.File;
+import com.google.common.reflect.ClassPath;
+
 import java.io.IOException;
-import java.net.JarURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLDecoder;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Scans and builds all classes in current classloader.
  */
 public class ClassScanner {
 
-    private static final String CLASS_SUFFIX = ".class";
-
-    public List<Class<?>> getClassesForPackage(String packageName)
-            throws ClassNotFoundException {
+    public List<Class<?>> getClassesForPackage(String packageName) throws ClassNotFoundException {
         final List<Class<?>> classes = new ArrayList<>();
 
         try {
-            final Enumeration<URL> resources = Thread.currentThread().getContextClassLoader()
-                    .getResources(packageName.replace('.', '/'));
-            if (!resources.hasMoreElements()) {
-                return classes;
-            }
-            URL url = resources.nextElement();
-            while (url != null) {
-                final URLConnection connection = url.openConnection();
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+            ClassPath classPath = ClassPath.from(classLoader);
 
-                if (connection instanceof JarURLConnection) {
-                    loadClassFromJar((JarURLConnection) connection, packageName,
-                            classes);
-                } else {
-                    loadClassFromDirectory(new File(URLDecoder.decode(url.getPath(), "UTF-8")),
-                            packageName, classes);
-                }
-                if (resources.hasMoreElements()) {
-                    url = resources.nextElement();
-                } else {
-                    break;
+            // Some anonymous classes don't return true when calling isAnonymousClass(), but they
+            // always seem to be nested anonymous classes like com.android.settings.Foo$1$2. In
+            // general we don't want any anonymous classes so we just filter these out by searching
+            // for $[0-9] in the name.
+            Pattern anonymousClassPattern = Pattern.compile(".*\\$\\d+.*");
+            Matcher anonymousClassMatcher = anonymousClassPattern.matcher("");
+
+            for (ClassPath.ClassInfo info : classPath.getAllClasses()) {
+                if (info.getPackageName().startsWith(packageName)) {
+                    try {
+                        Class clazz = classLoader.loadClass(info.getName());
+                        if (clazz.isAnonymousClass() || anonymousClassMatcher.reset(
+                                clazz.getName()).matches()) {
+                            continue;
+                        }
+                        classes.add(clazz);
+                    } catch (NoClassDefFoundError e) {
+                        // do nothing. this class hasn't been found by the
+                        // loader, and we don't care.
+                    }
                 }
             }
         } catch (final IOException e) {
             throw new ClassNotFoundException("Error when parsing " + packageName, e);
         }
         return classes;
-    }
-
-    private void loadClassFromDirectory(File directory, String packageName, List<Class<?>> classes)
-            throws ClassNotFoundException {
-        if (directory.exists() && directory.isDirectory()) {
-            final String[] files = directory.list();
-
-            for (final String file : files) {
-                if (file.endsWith(CLASS_SUFFIX)) {
-                    try {
-                        classes.add(Class.forName(
-                                packageName + '.' + file.substring(0, file.length() - 6),
-                                false /* init */,
-                                Thread.currentThread().getContextClassLoader()));
-                    } catch (NoClassDefFoundError e) {
-                        // do nothing. this class hasn't been found by the
-                        // loader, and we don't care.
-                    }
-                } else {
-                    final File tmpDirectory = new File(directory, file);
-                    if (tmpDirectory.isDirectory()) {
-                        loadClassFromDirectory(tmpDirectory, packageName + "." + file, classes);
-                    }
-                }
-            }
-        }
-    }
-
-    private void loadClassFromJar(JarURLConnection connection, String packageName,
-            List<Class<?>> classes) throws ClassNotFoundException, IOException {
-        final JarFile jarFile = connection.getJarFile();
-        final Enumeration<JarEntry> entries = jarFile.entries();
-        String name;
-        if (!entries.hasMoreElements()) {
-            return;
-        }
-        JarEntry jarEntry = entries.nextElement();
-        while (jarEntry != null) {
-            name = jarEntry.getName();
-
-            if (name.contains(CLASS_SUFFIX)) {
-                name = name.substring(0, name.length() - CLASS_SUFFIX.length()).replace('/', '.');
-
-                if (name.startsWith(packageName)) {
-                    try {
-                        classes.add(Class.forName(name,
-                                false /* init */,
-                                Thread.currentThread().getContextClassLoader()));
-                    } catch (NoClassDefFoundError e) {
-                        // do nothing. this class hasn't been found by the
-                        // loader, and we don't care.
-                    }
-                }
-            }
-            if (entries.hasMoreElements()) {
-                jarEntry = entries.nextElement();
-            } else {
-                break;
-            }
-        }
     }
 }

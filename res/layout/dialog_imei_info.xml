@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2017 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/sim_content_padding">
+
+        <!-- These items are only for CDMA phones -->
+        <LinearLayout
+            android:id="@+id/cdma_settings"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                style="@style/device_info_dialog_label"
+                android:id="@+id/min_number_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/status_min_number"/>
+            <TextView
+                style="@style/device_info_dialog_value"
+                android:id="@+id/min_number_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                style="@style/device_info_dialog_label"
+                android:id="@+id/prl_version_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/status_prl_version"/>
+            <TextView
+                style="@style/device_info_dialog_value"
+                android:id="@+id/prl_version_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                style="@style/device_info_dialog_label"
+                android:id="@+id/meid_number_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/status_meid_number"/>
+            <TextView
+                style="@style/device_info_dialog_value"
+                android:id="@+id/meid_number_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <!-- These items are for GSM and LTE enabled CDMA phones -->
+        <LinearLayout
+            android:id="@+id/gsm_settings"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                style="@style/device_info_dialog_label"
+                android:id="@+id/imei_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/status_imei"/>
+            <TextView
+                style="@style/device_info_dialog_value"
+                android:id="@+id/imei_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                style="@style/device_info_dialog_label"
+                android:id="@+id/imei_sv_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/status_imei_sv"/>
+            <TextView
+                style="@style/device_info_dialog_value"
+                android:id="@+id/imei_sv_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

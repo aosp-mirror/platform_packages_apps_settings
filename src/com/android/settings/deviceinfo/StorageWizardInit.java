@@ -22,15 +22,16 @@ import android.os.Bundle;
 import android.os.UserManager;
 import android.os.storage.DiskInfo;
 import android.os.storage.VolumeInfo;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.RadioButton;
+import android.view.View;
+import android.widget.Button;
 
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.overlay.FeatureFactory;
 
 public class StorageWizardInit extends StorageWizardBase {
-    private RadioButton mRadioExternal;
-    private RadioButton mRadioInternal;
+    private Button mExternal;
+    private Button mInternal;
 
     private boolean mIsPermittedToAdopt;
 
@@ -46,79 +47,58 @@ public class StorageWizardInit extends StorageWizardBase {
         mIsPermittedToAdopt = UserManager.get(this).isAdminUser()
                 && !ActivityManager.isUserAMonkey();
 
-        setIllustrationType(ILLUSTRATION_SETUP);
-        setHeaderText(R.string.storage_wizard_init_title, mDisk.getDescription());
+        setHeaderText(R.string.storage_wizard_init_v2_title, getDiskShortDescription());
 
-        mRadioExternal = (RadioButton) findViewById(R.id.storage_wizard_init_external_title);
-        mRadioInternal = (RadioButton) findViewById(R.id.storage_wizard_init_internal_title);
+        mExternal = requireViewById(R.id.storage_wizard_init_external);
+        mInternal = requireViewById(R.id.storage_wizard_init_internal);
 
-        mRadioExternal.setOnCheckedChangeListener(mRadioListener);
-        mRadioInternal.setOnCheckedChangeListener(mRadioListener);
-
-        findViewById(R.id.storage_wizard_init_external_summary).setPadding(
-                mRadioExternal.getCompoundPaddingLeft(), 0,
-                mRadioExternal.getCompoundPaddingRight(), 0);
-        findViewById(R.id.storage_wizard_init_internal_summary).setPadding(
-                mRadioExternal.getCompoundPaddingLeft(), 0,
-                mRadioExternal.getCompoundPaddingRight(), 0);
-
-        getNextButton().setEnabled(false);
+        setBackButtonText(R.string.storage_wizard_init_v2_later);
 
         if (!mDisk.isAdoptable()) {
             // If not adoptable, we only have one choice
-            mRadioExternal.setChecked(true);
-            onNavigateNext();
-            finish();
-        }
-
-        // TODO: Show a message about why this is disabled for guest and that only an admin user
-        // can adopt an sd card.
-        if (!mIsPermittedToAdopt) {
-            mRadioInternal.setEnabled(false);
+            onNavigateExternal(null);
+        } else if (!mIsPermittedToAdopt) {
+            // TODO: Show a message about why this is disabled for guest and
+            // that only an admin user can adopt an sd card.
+            mInternal.setEnabled(false);
         }
     }
 
-    private final OnCheckedChangeListener mRadioListener = new OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            if (isChecked) {
-                if (buttonView == mRadioExternal) {
-                    mRadioInternal.setChecked(false);
-                    setIllustrationType(ILLUSTRATION_PORTABLE);
-                } else if (buttonView == mRadioInternal) {
-                    mRadioExternal.setChecked(false);
-                    setIllustrationType(ILLUSTRATION_INTERNAL);
-                }
-                getNextButton().setEnabled(true);
-            }
-        }
-    };
-
     @Override
-    public void onNavigateNext() {
-        if (mRadioExternal.isChecked()) {
-            if (mVolume != null && mVolume.getType() == VolumeInfo.TYPE_PUBLIC
-                    && mVolume.getState() != VolumeInfo.STATE_UNMOUNTABLE) {
-                // Remember that user made decision
-                mStorage.setVolumeInited(mVolume.getFsUuid(), true);
+    public void onNavigateBack(View view) {
+        finish();
+    }
 
-                final Intent intent = new Intent(this, StorageWizardReady.class);
-                intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
-                startActivity(intent);
-
-            } else {
-                // Gotta format to get there
-                final Intent intent = new Intent(this, StorageWizardFormatConfirm.class);
-                intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
-                intent.putExtra(StorageWizardFormatConfirm.EXTRA_FORMAT_PRIVATE, false);
-                startActivity(intent);
-            }
-
-        } else if (mRadioInternal.isChecked()) {
-            final Intent intent = new Intent(this, StorageWizardFormatConfirm.class);
-            intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
-            intent.putExtra(StorageWizardFormatConfirm.EXTRA_FORMAT_PRIVATE, true);
-            startActivity(intent);
+    public void onNavigateExternal(View view) {
+        if (view != null) {
+            // User made an explicit choice for external
+            FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(this,
+                    MetricsEvent.ACTION_STORAGE_INIT_EXTERNAL);
         }
+
+        if (mVolume != null && mVolume.getType() == VolumeInfo.TYPE_PUBLIC
+                && mVolume.getState() != VolumeInfo.STATE_UNMOUNTABLE) {
+            // Remember that user made decision
+            mStorage.setVolumeInited(mVolume.getFsUuid(), true);
+
+            final Intent intent = new Intent(this, StorageWizardReady.class);
+            intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
+            startActivity(intent);
+            finish();
+
+        } else {
+            // Gotta format to get there
+            StorageWizardFormatConfirm.showPublic(this, mDisk.getId());
+        }
+    }
+
+    public void onNavigateInternal(View view) {
+        if (view != null) {
+            // User made an explicit choice for internal
+            FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(this,
+                    MetricsEvent.ACTION_STORAGE_INIT_INTERNAL);
+        }
+
+        StorageWizardFormatConfirm.showPrivate(this, mDisk.getId());
     }
 }

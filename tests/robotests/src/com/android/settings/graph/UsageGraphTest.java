@@ -18,15 +18,14 @@
 package com.android.settings.graph;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.res.Resources;
 import android.util.SparseIntArray;
 
-import com.android.settings.TestConfig;
 import com.android.settingslib.R;
 
 import org.junit.Before;
@@ -34,11 +33,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class UsageGraphTest {
+
     private UsageGraph mGraph;
 
     @Before
@@ -53,15 +51,15 @@ public class UsageGraphTest {
         doReturn(1).when(resources).getDimensionPixelSize(R.dimen.usage_graph_dot_interval);
         doReturn(1).when(resources).getDimensionPixelSize(R.dimen.usage_graph_divider_size);
         mGraph = spy(new UsageGraph(context, null));
-        doReturn(1000).when(mGraph).getWidth();
-        doReturn(200).when(mGraph).getHeight();
+        when(mGraph.getWidth()).thenReturn(1000);
+        when(mGraph.getHeight()).thenReturn(200);
 
         // Set the conceptual size of the graph to 500ms x 100%.
         mGraph.setMax(500, 100);
     }
 
     @Test
-    public void testCalculateLocalPaths_singlePath() {
+    public void calculateLocalPaths_singlePath() {
         SparseIntArray paths = new SparseIntArray();
         paths.append(0, 100);
         paths.append(500, 50);
@@ -80,7 +78,7 @@ public class UsageGraphTest {
     }
 
     @Test
-    public void testCalculateLocalPaths_multiplePaths() {
+    public void calculateLocalPaths_multiplePaths() {
         SparseIntArray paths = new SparseIntArray();
         paths.append(0, 100);
         paths.append(200, 75);
@@ -111,7 +109,7 @@ public class UsageGraphTest {
     }
 
     @Test
-    public void testCalculateLocalPaths_similarPointMiddle() {
+    public void calculateLocalPaths_similarPointMiddle() {
         SparseIntArray paths = new SparseIntArray();
         paths.append(0, 100);
         paths.append(1, 99); // This point should be omitted.
@@ -131,7 +129,7 @@ public class UsageGraphTest {
     }
 
     @Test
-    public void testCalculateLocalPaths_similarPointEnd() {
+    public void calculateLocalPaths_similarPointEnd() {
         SparseIntArray paths = new SparseIntArray();
         paths.append(0, 100);
         paths.append(499, 51);
@@ -150,5 +148,33 @@ public class UsageGraphTest {
         assertThat(localPaths.valueAt(2)).isEqualTo(100);
         assertThat(localPaths.keyAt(3)).isEqualTo(1001);
         assertThat(localPaths.valueAt(3)).isEqualTo(-1);
+    }
+
+    @Test
+    public void calculateLocalPaths_unavailableData_shouldInsertFlatPoint() {
+        SparseIntArray paths = new SparseIntArray();
+        paths.append(0, 0);
+        paths.append(199, -1);
+        paths.append(200, 25);
+        paths.append(300, 50);
+        paths.append(500, 75);
+        paths.append(501, -1);
+
+        SparseIntArray localPaths = new SparseIntArray();
+        mGraph.calculateLocalPaths(paths, localPaths);
+
+        assertThat(localPaths.size()).isEqualTo(6);
+        assertThat(localPaths.keyAt(0)).isEqualTo(0);
+        assertThat(localPaths.valueAt(0)).isEqualTo(200);
+        assertThat(localPaths.keyAt(1)).isEqualTo(399);
+        assertThat(localPaths.valueAt(1)).isEqualTo(200);
+        assertThat(localPaths.keyAt(2)).isEqualTo(400);
+        assertThat(localPaths.valueAt(2)).isEqualTo(150);
+        assertThat(localPaths.keyAt(3)).isEqualTo(600);
+        assertThat(localPaths.valueAt(3)).isEqualTo(100);
+        assertThat(localPaths.keyAt(4)).isEqualTo(1000);
+        assertThat(localPaths.valueAt(4)).isEqualTo(50);
+        assertThat(localPaths.keyAt(5)).isEqualTo(1001);
+        assertThat(localPaths.valueAt(5)).isEqualTo(-1);
     }
 }

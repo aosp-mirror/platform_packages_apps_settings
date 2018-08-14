@@ -16,7 +16,6 @@
 package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
@@ -29,7 +28,6 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 
@@ -38,11 +36,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AlwaysDiscoverableTest {
+
     @Mock
     private LocalBluetoothAdapter mLocalAdapter;
 
@@ -100,14 +97,14 @@ public class AlwaysDiscoverableTest {
     @Test
     public void resetsToDiscoverableModeWhenScanModeChanges() {
         mAlwaysDiscoverable.start();
-        verify(mLocalAdapter, times(1)).setScanMode(
-                BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE);
+        verify(mLocalAdapter, times(1))
+            .setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE);
 
         sendScanModeChangedIntent(BluetoothAdapter.SCAN_MODE_CONNECTABLE,
                 BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE);
 
-        verify(mLocalAdapter, times(2)).setScanMode(
-                BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE);
+        verify(mLocalAdapter, times(2))
+            .setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE);
     }
 
     private void sendScanModeChangedIntent(int newMode, int previousMode) {

@@ -4,7 +4,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE_TAGS := tests
 LOCAL_CERTIFICATE := platform
 
-LOCAL_JAVA_LIBRARIES := android.test.runner bouncycastle
+LOCAL_JAVA_LIBRARIES := android.test.runner
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
     android-support-test \

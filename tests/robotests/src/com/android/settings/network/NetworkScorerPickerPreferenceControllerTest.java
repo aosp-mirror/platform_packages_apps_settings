@@ -17,19 +17,18 @@
 package com.android.settings.network;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.net.NetworkScoreManager;
 import android.net.NetworkScorerAppData;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,12 +36,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.Collections;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class NetworkScorerPickerPreferenceControllerTest {
 
     private static final String TEST_SCORER_PACKAGE = "Test Package";
@@ -51,14 +49,15 @@ public class NetworkScorerPickerPreferenceControllerTest {
 
     private Context mContext;
     @Mock
-    private NetworkScoreManagerWrapper mNetworkScorer;
+    private NetworkScoreManager mNetworkScorer;
     private NetworkScorerPickerPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = new NetworkScorerPickerPreferenceController(mContext, mNetworkScorer);
+        mController = new NetworkScorerPickerPreferenceController(mContext, "test_key");
+        ReflectionHelpers.setField(mController, "mNetworkScoreManager", mNetworkScorer);
     }
 
     @Test

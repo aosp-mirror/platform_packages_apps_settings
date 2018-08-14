@@ -33,6 +33,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settingslib.RestrictedLockUtils;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -47,7 +49,7 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
  *
  * This is the confirmation screen.
  */
-public class MasterClearConfirm extends OptionsMenuFragment {
+public class MasterClearConfirm extends InstrumentedFragment {
 
     private View mContentView;
     private boolean mEraseSdCard;
@@ -150,10 +152,11 @@ public class MasterClearConfirm extends OptionsMenuFragment {
                 UserManager.DISALLOW_FACTORY_RESET, UserHandle.myUserId())) {
             return inflater.inflate(R.layout.master_clear_disallowed_screen, null);
         } else if (admin != null) {
-            View view = inflater.inflate(R.layout.admin_support_details_empty_view, null);
-            ShowAdminSupportDetailsDialog.setAdminSupportDetails(getActivity(), view, admin, false);
-            view.setVisibility(View.VISIBLE);
-            return view;
+            new ActionDisabledByAdminDialogHelper(getActivity())
+                    .prepareDialogBuilder(UserManager.DISALLOW_FACTORY_RESET, admin)
+                    .setOnDismissListener(__ -> getActivity().finish())
+                    .show();
+            return new View(getActivity());
         }
         mContentView = inflater.inflate(R.layout.master_clear_confirm, null);
         establishFinalConfirmationState();
@@ -166,9 +169,9 @@ public class MasterClearConfirm extends OptionsMenuFragment {
         TextView confirmationMessage =
                 (TextView) mContentView.findViewById(R.id.master_clear_confirm);
         if (confirmationMessage != null) {
-            String accessibileText = new StringBuilder(currentTitle).append(",").append(
+            String accessibleText = new StringBuilder(currentTitle).append(",").append(
                     confirmationMessage.getText()).toString();
-            getActivity().setTitle(Utils.createAccessibleSequence(currentTitle, accessibileText));
+            getActivity().setTitle(Utils.createAccessibleSequence(currentTitle, accessibleText));
         }
     }
 

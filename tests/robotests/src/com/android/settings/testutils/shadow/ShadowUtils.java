@@ -18,22 +18,26 @@ package com.android.settings.testutils.shadow;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.hardware.fingerprint.FingerprintManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 
 import com.android.settings.Utils;
-import com.android.settings.password.IFingerprintManager;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Implements(Utils.class)
 public class ShadowUtils {
 
-    private static IFingerprintManager sFingerprintManager = null;
+    private static FingerprintManager sFingerprintManager = null;
     private static boolean sIsUserAMonkey;
     private static boolean sIsDemoUser;
     private static ComponentName sDeviceOwnerComponentName;
+    private static Map<String, String> sAppNameMap;
 
     @Implementation
     public static int enforceSameOwner(Context context, int userId) {
@@ -41,11 +45,11 @@ public class ShadowUtils {
     }
 
     @Implementation
-    public static IFingerprintManager getFingerprintManagerWrapperOrNull(Context context) {
+    public static FingerprintManager getFingerprintManagerOrNull(Context context) {
         return sFingerprintManager;
     }
 
-    public static void setFingerprintManager(IFingerprintManager fingerprintManager) {
+    public static void setFingerprintManager(FingerprintManager fingerprintManager) {
         sFingerprintManager = fingerprintManager;
     }
 
@@ -53,11 +57,6 @@ public class ShadowUtils {
         sFingerprintManager = null;
         sIsUserAMonkey = false;
         sIsDemoUser = false;
-    }
-
-    @Implementation
-    public static boolean isWifiOnly(Context context) {
-        return true;
     }
 
     public static void setIsDemoUser(boolean isDemoUser) {
@@ -93,5 +92,20 @@ public class ShadowUtils {
     @Implementation
     public static int getManagedProfileId(UserManager um, int parentUserId) {
         return UserHandle.USER_NULL;
+    }
+
+    @Implementation
+    public static CharSequence getApplicationLabel(Context context, String packageName) {
+        if (sAppNameMap != null) {
+            return sAppNameMap.get(packageName);
+        }
+        return null;
+    }
+
+    public static void setApplicationLabel(String packageName, String appLabel) {
+        if (sAppNameMap == null) {
+            sAppNameMap = new HashMap<>();
+        }
+        sAppNameMap.put(packageName, appLabel);
     }
 }

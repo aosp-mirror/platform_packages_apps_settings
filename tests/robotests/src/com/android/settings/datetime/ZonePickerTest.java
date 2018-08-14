@@ -27,9 +27,8 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settings.testutils.shadow.ShadowZoneGetter;
+import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -39,7 +38,6 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ZonePickerTest {
 
     private Activity mActivity;
@@ -57,10 +55,7 @@ public class ZonePickerTest {
     @Config(shadows = ShadowZoneGetter.class)
     public void testLaunch() {
         // Shouldn't crash
-        mActivity.getFragmentManager()
-                .beginTransaction()
-                .add(mZonePicker, "test_tag")
-                .commit();
+        mActivity.getFragmentManager().beginTransaction().add(mZonePicker, "test_tag").commit();
 
         // Should render
         verify(mZonePicker).onCreateView(

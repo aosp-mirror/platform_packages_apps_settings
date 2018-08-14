@@ -17,19 +17,19 @@
 package com.android.settings.security;
 
 import android.content.Context;
-import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.trustagent.TrustAgentManager;
-import com.android.settingslib.drawer.DashboardCategory;
+import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.security.trustagent.TrustAgentManager;
 
 
 /** FeatureProvider for security. */
 public interface SecurityFeatureProvider {
 
-    /** Update preferences with data from associated tiles. */
-    void updatePreferences(Context context, PreferenceScreen preferenceScreen,
-            DashboardCategory dashboardCategory);
-
     /** Returns the {@link TrustAgentManager} bound to this {@link SecurityFeatureProvider}. */
     TrustAgentManager getTrustAgentManager();
+
+    /**
+     * Returns a {@link LockPatternUtils} instance bound to application context.
+     */
+    LockPatternUtils getLockPatternUtils(Context context);
 }

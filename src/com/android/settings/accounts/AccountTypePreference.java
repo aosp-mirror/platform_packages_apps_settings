@@ -16,6 +16,8 @@
 
 package com.android.settings.accounts;
 
+import static android.content.Intent.EXTRA_USER;
+
 import android.accounts.Account;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -25,14 +27,14 @@ import android.os.UserManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 
-import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.widget.AppPreference;
 
-import static android.content.Intent.EXTRA_USER;
-
-public class AccountTypePreference extends Preference implements OnPreferenceClickListener {
+public class AccountTypePreference extends AppPreference implements OnPreferenceClickListener {
     /**
      * Title of the tile that is shown to the user.
+     *
      * @attr ref android.R.styleable#PreferenceHeader_title
      */
     private final CharSequence mTitle;
@@ -56,6 +58,7 @@ public class AccountTypePreference extends Preference implements OnPreferenceCli
     /**
      * Full class name of the fragment to display when this tile is
      * selected.
+     *
      * @attr ref android.R.styleable#PreferenceHeader_fragment
      */
     private final String mFragment;
@@ -92,18 +95,21 @@ public class AccountTypePreference extends Preference implements OnPreferenceCli
     public boolean onPreferenceClick(Preference preference) {
         if (mFragment != null) {
             UserManager userManager =
-                (UserManager) getContext().getSystemService(Context.USER_SERVICE);
+                    (UserManager) getContext().getSystemService(Context.USER_SERVICE);
             UserHandle user = mFragmentArguments.getParcelable(EXTRA_USER);
             if (user != null && Utils.startQuietModeDialogIfNecessary(getContext(), userManager,
-                user.getIdentifier())) {
+                    user.getIdentifier())) {
                 return true;
             } else if (user != null && Utils.unlockWorkProfileIfNecessary(getContext(),
-                user.getIdentifier())) {
+                    user.getIdentifier())) {
                 return true;
             }
-            Utils.startWithFragment(getContext(), mFragment, mFragmentArguments,
-                null /* resultTo */, 0 /* resultRequestCode */, mTitleResPackageName,
-                mTitleResId, null /* title */, mMetricsCategory);
+            new SubSettingLauncher(getContext())
+                    .setDestination(mFragment)
+                    .setArguments(mFragmentArguments)
+                    .setTitle(mTitleResPackageName, mTitleResId)
+                    .setSourceMetricsCategory(mMetricsCategory)
+                    .launch();
             return true;
         }
         return false;

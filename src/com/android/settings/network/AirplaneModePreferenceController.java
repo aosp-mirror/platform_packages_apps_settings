@@ -15,50 +15,56 @@
  */
 package com.android.settings.network;
 
+import static android.provider.SettingsSlicesContract.KEY_AIRPLANE_MODE;
+
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.SystemProperties;
+import android.provider.SettingsSlicesContract;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
+import android.text.TextUtils;
 
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.TelephonyProperties;
 import com.android.settings.AirplaneModeEnabler;
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.R;
+import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
-public class AirplaneModePreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause {
+public class AirplaneModePreferenceController extends TogglePreferenceController
+        implements LifecycleObserver, OnResume, OnPause,
+        AirplaneModeEnabler.OnAirplaneModeChangedListener {
 
     public static final int REQUEST_CODE_EXIT_ECM = 1;
 
-    public static final String KEY_TOGGLE_AIRPLANE = "toggle_airplane";
-
     private static final String EXIT_ECM_RESULT = "exit_ecm_result";
 
-    private final Fragment mFragment;
+    private Fragment mFragment;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private AirplaneModeEnabler mAirplaneModeEnabler;
     private SwitchPreference mAirplaneModePreference;
 
-
-    public AirplaneModePreferenceController(Context context, Fragment hostFragment) {
-        super(context);
-        mFragment = hostFragment;
+    public AirplaneModePreferenceController(Context context, String key) {
+        super(context, key);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mAirplaneModeEnabler = new AirplaneModeEnabler(mContext, mMetricsFeatureProvider, this);
+    }
+
+    public void setFragment(Fragment hostFragment) {
+        mFragment = hostFragment;
     }
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (KEY_TOGGLE_AIRPLANE.equals(preference.getKey()) && Boolean.parseBoolean(
+        if (KEY_AIRPLANE_MODE.equals(preference.getKey()) && Boolean.parseBoolean(
                 SystemProperties.get(TelephonyProperties.PROPERTY_INECM_MODE))) {
             // In ECM mode launch ECM app dialog
             if (mFragment != null) {
@@ -74,38 +80,40 @@ public class AirplaneModePreferenceController extends AbstractPreferenceControll
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
         if (isAvailable()) {
             mAirplaneModePreference = (SwitchPreference) screen.findPreference(getPreferenceKey());
-            if (mAirplaneModePreference != null) {
-                mAirplaneModeEnabler = new AirplaneModeEnabler(mContext, mAirplaneModePreference,
-                        mMetricsFeatureProvider);
-            }
-        } else {
-            removePreference(screen, getPreferenceKey());
+        }
+    }
+
+    public static boolean isAvailable(Context context) {
+        return context.getResources().getBoolean(R.bool.config_show_toggle_airplane)
+                && !context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_LEANBACK);
+    }
+
+    @Override
+    public boolean isSliceable() {
+        return TextUtils.equals(getPreferenceKey(), "toggle_airplane");
+    }
+
+    @Override
+    @AvailabilityStatus
+    public int getAvailabilityStatus() {
+        return isAvailable(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public void onResume() {
+        if (isAvailable()) {
+            mAirplaneModeEnabler.resume();
         }
     }
 
     @Override
-    public boolean isAvailable() {
-        return isAvailable(mContext);
-    }
-
-    public static boolean isAvailable(Context context) {
-        return !context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEVISION);
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_TOGGLE_AIRPLANE;
-    }
-
-    public void onResume() {
-        mAirplaneModeEnabler.resume();
-    }
-
-    @Override
     public void onPause() {
-        mAirplaneModeEnabler.pause();
+        if (isAvailable()) {
+            mAirplaneModeEnabler.pause();
+        }
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -114,6 +122,27 @@ public class AirplaneModePreferenceController extends AbstractPreferenceControll
             // Set Airplane mode based on the return value and checkbox state
             mAirplaneModeEnabler.setAirplaneModeInECM(isChoiceYes,
                     mAirplaneModePreference.isChecked());
+        }
+    }
+
+    @Override
+    public boolean isChecked() {
+        return mAirplaneModeEnabler.isAirplaneModeOn();
+    }
+
+    @Override
+    public boolean setChecked(boolean isChecked) {
+        if (isChecked() == isChecked) {
+            return false;
+        }
+        mAirplaneModeEnabler.setAirplaneMode(isChecked);
+        return true;
+    }
+
+    @Override
+    public void onAirplaneModeChanged(boolean isAirplaneModeOn) {
+        if (mAirplaneModePreference != null) {
+            mAirplaneModePreference.setChecked(isAirplaneModeOn);
         }
     }
 }

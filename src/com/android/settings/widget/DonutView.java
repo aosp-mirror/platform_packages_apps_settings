@@ -24,12 +24,20 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Typeface;
+import android.icu.text.DecimalFormatSymbols;
 import android.support.annotation.ColorRes;
+import android.text.Layout;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.text.TextUtils;
+import android.text.style.RelativeSizeSpan;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
 
@@ -124,7 +132,6 @@ public class DonutView extends View {
         mBigNumberPaint.setAntiAlias(true);
         mBigNumberPaint.setTextSize(
                 resources.getDimension(R.dimen.storage_donut_view_percent_text_size));
-        mBigNumberPaint.setTextAlign(Paint.Align.CENTER);
         mBigNumberPaint.setTypeface(Typeface.create(
                 context.getString(com.android.internal.R.string.config_headlineFontFamily),
                 Typeface.NORMAL));
@@ -167,11 +174,19 @@ public class DonutView extends View {
         final float centerY = getHeight() / 2;
         final float totalHeight = getTextHeight(mTextPaint) + getTextHeight(mBigNumberPaint);
         final float startY = centerY + totalHeight / 2;
+        // Support from Android P
+        final String localizedPercentSign = new DecimalFormatSymbols().getPercentString();
 
-        // The first line is the height of the bottom text + its descender above the bottom line.
-        canvas.drawText(mPercentString, centerX,
-                startY - getTextHeight(mTextPaint) - mBigNumberPaint.descent(),
-                mBigNumberPaint);
+        // The first line y-coordinates start at (total height - all TextPaint height) / 2
+        canvas.save();
+        final Spannable percentStringSpan =
+                getPercentageStringSpannable(getResources(), mPercentString, localizedPercentSign);
+        final StaticLayout percentStringLayout = new StaticLayout(percentStringSpan,
+                mBigNumberPaint, getWidth(), Layout.Alignment.ALIGN_CENTER, 1, 0, false);
+        canvas.translate(0, (getHeight() - totalHeight) / 2);
+        percentStringLayout.draw(canvas);
+        canvas.restore();
+
         // The second line starts at the bottom + room for the descender.
         canvas.drawText(mFullString, centerX, startY - mTextPaint.descent(), mTextPaint);
     }
@@ -190,6 +205,8 @@ public class DonutView extends View {
                             .getDimension(
                                     R.dimen.storage_donut_view_shrunken_label_text_size));
         }
+        setContentDescription(getContext().getString(
+                R.string.join_many_items_middle, mPercentString, mFullString));
         invalidate();
     }
 
@@ -213,6 +230,30 @@ public class DonutView extends View {
         mMeterConsumedColor = meterConsumedColor;
         mFilledArc.setColor(meterConsumedColor);
         invalidate();
+    }
+
+    @VisibleForTesting
+    static Spannable getPercentageStringSpannable(
+            Resources resources, String percentString, String percentageSignString) {
+        final float fontProportion =
+                resources.getDimension(R.dimen.storage_donut_view_percent_sign_size)
+                        / resources.getDimension(R.dimen.storage_donut_view_percent_text_size);
+        final Spannable percentStringSpan = new SpannableString(percentString);
+        int startIndex = percentString.indexOf(percentageSignString);
+        int endIndex = startIndex + percentageSignString.length();
+
+        // Fallback to no small string if we can't find the percentage sign.
+        if (startIndex < 0) {
+            startIndex = 0;
+            endIndex = percentString.length();
+        }
+
+        percentStringSpan.setSpan(
+                new RelativeSizeSpan(fontProportion),
+                startIndex,
+                endIndex,
+                Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+        return percentStringSpan;
     }
 
     private float getTextHeight(TextPaint paint) {

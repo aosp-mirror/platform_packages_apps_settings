@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2017 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<!--
+    WARNING: This resource file is used to test Settings Search indexing.
+    If you change something in here, please run the settings robotests and
+    make sure they still pass.
+ -->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="page_title"
+    settings:keywords="keywords">
+
+    <Preference
+        android:key="pref_key_1"
+        android:title="pref_title_1"
+        android:summary="summary_1"
+        settings:keywords="keywords1, keywords2, keywords3" />
+
+    <SwitchPreference
+        android:key="pref_key_2"
+        android:title="pref_title_2"
+        android:summary="summary_2"
+        settings:keywords="keywords1, keywords2, keywords3" />
+
+    <Preference
+        android:key="pref_key_3"
+        android:title="pref_title_3"
+        android:summary="summary_3"
+        android:icon="@drawable/ic_android"
+        settings:keywords="keywords1, keywords2, keywords3" />
+
+    <ListPreference
+        android:key="pref_key_4"
+        android:title="pref_title_4"
+        android:summary="summary_4"
+        android:entries="@array/app_install_location_entries"
+        android:entryValues="@array/app_install_location_values"
+        settings:keywords="keywords1, keywords2, keywords3" />
+
+    <CheckBoxPreference
+            android:key="pref_key_5"
+            android:title="pref_title_5"
+            android:summaryOn="summary_on"
+            android:summaryOff="summary_off"
+            settings:keywords="keywords1, keywords2, keywords3" />
+</PreferenceScreen>

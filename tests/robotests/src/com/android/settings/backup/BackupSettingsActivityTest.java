@@ -16,11 +16,13 @@
 
 package com.android.settings.backup;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.app.Application;
@@ -32,9 +34,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.UserHandle;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -44,27 +45,24 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
+import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
-import org.robolectric.res.builder.RobolectricPackageManager;
-import org.robolectric.util.ActivityController;
-
-import static com.google.common.truth.Truth.assertThat;
+import org.robolectric.shadows.ShadowPackageManager;
 
 import java.util.List;
 
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = {BackupSettingsActivityTest.ShadowBackupSettingsHelper.class,
+@Config(shadows = {BackupSettingsActivityTest.ShadowBackupSettingsHelper.class,
                 BackupSettingsActivityTest.ShadowUserHandle.class})
 public class BackupSettingsActivityTest {
     private ActivityController<BackupSettingsActivity> mActivityController;
     private BackupSettingsActivity mActivity;
     private Application mApplication;
-    private RobolectricPackageManager mPackageManager;
+    private ShadowPackageManager mPackageManager;
     private static boolean mIsBackupProvidedByOEM;
 
     @Mock
@@ -84,8 +82,13 @@ public class BackupSettingsActivityTest {
         mApplication = RuntimeEnvironment.application;
         mActivityController = Robolectric.buildActivity(BackupSettingsActivity.class);
         mActivity = mActivityController.get();
-        mPackageManager = (RobolectricPackageManager) mApplication.getPackageManager();
-        doReturn(mComponent).when(mIntent).getComponent();
+        mPackageManager = Shadows.shadowOf(mApplication.getPackageManager());
+        when(mIntent.getComponent()).thenReturn(mComponent);
+    }
+
+    @After
+    public void resetShadows() {
+        ShadowUserHandle.reset();
     }
 
     @Test
@@ -93,14 +96,15 @@ public class BackupSettingsActivityTest {
         mIsBackupProvidedByOEM = false;
 
         // Testing the scenario when the activity is disabled
-        mPackageManager.setComponentEnabledSetting(mComponent,
+        mApplication.getPackageManager().setComponentEnabledSetting(mComponent,
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED, 0);
 
         mActivityController.create();
 
         // Verify that the component to launch was enabled.
-        assertThat(mPackageManager.getComponentState(mComponent).newState)
-                .isEqualTo(PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
+        final int flags = mPackageManager.getComponentEnabledSettingFlags(mComponent);
+        assertThat(flags & PackageManager.COMPONENT_ENABLED_STATE_ENABLED)
+            .isEqualTo(PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
 
         // Verify that the intent returned by BackupSettingsHelper.getIntentForBackupSettings()
         // was launched.
@@ -121,21 +125,14 @@ public class BackupSettingsActivityTest {
 
         assertThat(shadowOf(mApplication).getNextStartedActivity()).isNull();
         verify(mFragmentTransaction).replace(anyInt(), isA(BackupSettingsFragment.class));
-
     }
 
     @Test
     public void getNonIndexableKeys_SystemUser() {
-        final List<SearchIndexableRaw> indexableRaws =
-                BackupSettingsActivity.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(
-                        mApplication.getApplicationContext(), true);
-        final List<String> nonIndexableKeys =
-                BackupSettingsActivity.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
-                        mApplication.getApplicationContext());
-
-        assertThat(indexableRaws).isNotNull();
-        assertThat(indexableRaws).isNotEmpty();
-        assertThat(nonIndexableKeys).isEmpty();
+        assertThat(BackupSettingsActivity.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(
+                mApplication, true)).isNotEmpty();
+        assertThat(BackupSettingsActivity.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
+                mApplication)).isEmpty();
     }
 
     @Test
@@ -144,19 +141,14 @@ public class BackupSettingsActivityTest {
 
         final List<SearchIndexableRaw> indexableRaws =
                 BackupSettingsActivity.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(
-                        mApplication.getApplicationContext(), true);
+                        mApplication, true);
         final List<String> nonIndexableKeys =
                 BackupSettingsActivity.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
-                        mApplication.getApplicationContext());
+                        mApplication);
 
         assertThat(indexableRaws).isNotNull();
         assertThat(indexableRaws).isNotEmpty();
         assertThat(nonIndexableKeys).isNotEmpty();
-    }
-
-    @After
-    public void resetShadows() {
-        ShadowUserHandle.reset();
     }
 
     @Implements(BackupSettingsHelper.class)

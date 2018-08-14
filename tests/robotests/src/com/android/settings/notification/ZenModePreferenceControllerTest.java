@@ -16,24 +16,6 @@
 
 package com.android.settings.notification;
 
-import android.app.NotificationManager;
-import android.app.NotificationManager.Policy;
-import android.content.Context;
-import android.support.v7.preference.Preference;
-
-import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
-import org.robolectric.util.ReflectionHelpers;
-
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
@@ -42,8 +24,23 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.NotificationManager;
+import android.app.NotificationManager.Policy;
+import android.content.Context;
+import android.support.v7.preference.Preference;
+
+import com.android.settings.R;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.util.ReflectionHelpers;
+
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ZenModePreferenceControllerTest {
 
     @Mock
@@ -56,6 +53,7 @@ public class ZenModePreferenceControllerTest {
     private Context mContext;
     private ZenModePreferenceController mController;
     private ZenModeSettings.SummaryBuilder mSummaryBuilder;
+    private static final String KEY_ZEN_MODE = "zen_mode";
 
     @Before
     public void setUp() {
@@ -63,7 +61,7 @@ public class ZenModePreferenceControllerTest {
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
         mContext = shadowApplication.getApplicationContext();
-        mController = new ZenModePreferenceController(mContext);
+        mController = new ZenModePreferenceController(mContext, null, KEY_ZEN_MODE);
         when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);
         mSummaryBuilder = spy(new ZenModeSettings.SummaryBuilder(mContext));
         ReflectionHelpers.setField(mController, "mSummaryBuilder", mSummaryBuilder);
@@ -76,16 +74,15 @@ public class ZenModePreferenceControllerTest {
     }
 
     @Test
-    public void updateState_preferenceEnabled_shouldSetSummary() {
+    public void updateState_automaticRuleEnabled_shouldSetSummary() {
         when(mPreference.isEnabled()).thenReturn(true);
 
         mController.updateState(mPreference);
-        verify(mPreference).setSummary(mContext.getString(R.string.zen_mode_settings_summary_off));
+        verify(mPreference).setSummary(mContext.getString(R.string.zen_mode_sound_summary_off));
 
         doReturn(1).when(mSummaryBuilder).getEnabledAutomaticRulesCount();
         mController.updateState(mPreference);
-        verify(mPreference).setSummary(mContext.getResources().getQuantityString(
-            R.plurals.zen_mode_settings_summary_on, 1, 1));
+        verify(mPreference).setSummary(mSummaryBuilder.getSoundSummary());
     }
 
     @Test
@@ -96,5 +93,4 @@ public class ZenModePreferenceControllerTest {
 
         verify(mPreference, never()).setSummary(anyString());
     }
-
 }

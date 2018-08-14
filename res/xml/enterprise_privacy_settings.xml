@@ -15,7 +15,7 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+                  xmlns:settings="http://schemas.android.com/apk/res-auto"
                   android:key="enterprise_privacy_settings"
                   android:title="@string/enterprise_privacy_settings">
 
@@ -82,6 +82,9 @@
                     android:selectable="false"/>
         <Preference android:key="ca_certs_managed_profile"
                     android:title="@string/enterprise_privacy_ca_certs_work"
+                    android:selectable="false"/>
+        <Preference android:key="backups_enabled"
+                    android:title="@string/enterprise_privacy_backups_enabled"
                     android:selectable="false"/>
     </PreferenceCategory>
 

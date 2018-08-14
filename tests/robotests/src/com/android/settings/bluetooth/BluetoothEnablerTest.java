@@ -15,6 +15,16 @@
  */
 package com.android.settings.bluetooth;
 
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyBoolean;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -28,16 +38,18 @@ import android.widget.Switch;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settings.widget.MasterSwitchController;
-import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.SwitchBarController;
+import com.android.settings.widget.SwitchWidgetController;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -46,24 +58,18 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyBoolean;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows = {
-        SettingsShadowResources.class, SettingsShadowResources.SettingsShadowTheme.class
-})
+@Config(shadows = SettingsShadowResources.SettingsShadowTheme.class)
 public class BluetoothEnablerTest {
 
-    private static final EnforcedAdmin FAKE_ENFORCED_ADMIN =
-            new EnforcedAdmin(new ComponentName("test.package", "test.Class"), 10);
+    private static EnforcedAdmin sFakeEnforcedAdmin;
+    private PreferenceViewHolder mHolder;
+    private RestrictedSwitchPreference mRestrictedSwitchPreference;
+
+    @BeforeClass
+    public static void beforeClass() {
+        sFakeEnforcedAdmin = new EnforcedAdmin(new ComponentName("test.package", "test.Class"), 10);
+    }
 
     @Mock
     private MetricsFeatureProvider mMetricsFeatureProvider;
@@ -73,11 +79,11 @@ public class BluetoothEnablerTest {
     private LocalBluetoothManager mBluetoothManager;
     @Mock
     private LocalBluetoothAdapter mBluetoothAdapter;
+    @Mock
+    private SwitchWidgetController.OnSwitchChangeListener mCallback;
 
     private Context mContext;
-    Switch mSwitch;
-    private MasterSwitchPreference mMasterSwitchPreference;
-    private MasterSwitchController mMasterSwitchController;
+    private SwitchWidgetController mSwitchController;
     private BluetoothEnabler mBluetoothEnabler;
 
     @Before
@@ -86,19 +92,18 @@ public class BluetoothEnablerTest {
         mContext = spy(RuntimeEnvironment.application);
         when(mBluetoothManager.getBluetoothAdapter()).thenReturn(mBluetoothAdapter);
 
-        mSwitch = new Switch(mContext);
-        mMasterSwitchPreference = new MasterSwitchPreference(mContext);
-        mMasterSwitchController = spy(new MasterSwitchController(mMasterSwitchPreference));
+        mRestrictedSwitchPreference = new RestrictedSwitchPreference(mContext);
+        mSwitchController = spy(new SwitchBarController(new SwitchBar(mContext)));
         mBluetoothEnabler = new BluetoothEnabler(
                 mContext,
-                mMasterSwitchController,
+                mSwitchController,
                 mMetricsFeatureProvider,
                 mBluetoothManager,
                 123,
                 mRestrictionUtils);
-        PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(mock(View.class));
-        when(holder.findViewById(R.id.switchWidget)).thenReturn(mSwitch);
-        mMasterSwitchPreference.onBindViewHolder(holder);
+        mHolder = PreferenceViewHolder.createInstanceForTests(mock(View.class));
+        mRestrictedSwitchPreference.onBindViewHolder(mHolder);
+        mBluetoothEnabler.setToggleCallback(mCallback);
     }
 
     @Test
@@ -108,6 +113,15 @@ public class BluetoothEnablerTest {
 
         // THEN the corresponding metrics action is logged.
         verify(mMetricsFeatureProvider).action(mContext, 123, false);
+    }
+
+    @Test
+    public void onSwitchToggled_shouldTriggerCallback() {
+        // WHEN the switch is toggled...
+        mBluetoothEnabler.onSwitchToggled(false);
+
+        // THEN the callback is triggered
+        verify(mCallback).onSwitchToggled(false);
     }
 
     @Test
@@ -121,16 +135,16 @@ public class BluetoothEnablerTest {
         assertThat(mBluetoothEnabler.maybeEnforceRestrictions()).isFalse();
 
         // THEN a null EnfoceAdmin is set.
-        verify(mMasterSwitchController).setDisabledByAdmin(null);
+        verify(mSwitchController).setDisabledByAdmin(null);
         // THEN the state of the switch isn't changed.
-        verify(mMasterSwitchController, never()).setChecked(anyBoolean());
+        verify(mSwitchController, never()).setChecked(anyBoolean());
     }
 
     @Test
     public void maybeEnforceRestrictions_disallowBluetoothRestrictionSet() {
         // GIVEN Bluetooth has been disallowed...
         when(mRestrictionUtils.checkIfRestrictionEnforced(
-                mContext, UserManager.DISALLOW_BLUETOOTH)).thenReturn(FAKE_ENFORCED_ADMIN);
+                mContext, UserManager.DISALLOW_BLUETOOTH)).thenReturn(sFakeEnforcedAdmin);
         when(mRestrictionUtils.checkIfRestrictionEnforced(
                 mContext, UserManager.DISALLOW_CONFIG_BLUETOOTH)).thenReturn(null);
 
@@ -139,10 +153,10 @@ public class BluetoothEnablerTest {
         assertThat(mBluetoothEnabler.maybeEnforceRestrictions()).isTrue();
 
         // THEN the expected EnfoceAdmin is set.
-        verify(mMasterSwitchController).setDisabledByAdmin(FAKE_ENFORCED_ADMIN);
+        verify(mSwitchController).setDisabledByAdmin(sFakeEnforcedAdmin);
 
         // THEN the switch is unchecked.
-        verify(mMasterSwitchController).setChecked(false);
+        verify(mSwitchController).setChecked(false);
     }
 
     @Test
@@ -151,60 +165,59 @@ public class BluetoothEnablerTest {
         when(mRestrictionUtils.checkIfRestrictionEnforced(
                 mContext, UserManager.DISALLOW_BLUETOOTH)).thenReturn(null);
         when(mRestrictionUtils.checkIfRestrictionEnforced(
-                mContext, UserManager.DISALLOW_CONFIG_BLUETOOTH)).thenReturn(FAKE_ENFORCED_ADMIN);
+                mContext, UserManager.DISALLOW_CONFIG_BLUETOOTH)).thenReturn(sFakeEnforcedAdmin);
 
         // WHEN the maybeEnforceRestrictions is called...
         // THEN true is returned to indicate there was a restriction to enforce.
         assertThat(mBluetoothEnabler.maybeEnforceRestrictions()).isTrue();
 
         // THEN the expected EnfoceAdmin is set.
-        verify(mMasterSwitchController).setDisabledByAdmin(FAKE_ENFORCED_ADMIN);
+        verify(mSwitchController).setDisabledByAdmin(sFakeEnforcedAdmin);
 
         // THEN the switch is unchecked.
-        verify(mMasterSwitchController).setChecked(false);
+        verify(mSwitchController).setChecked(false);
     }
 
     @Test
     public void maybeEnforceRestrictions_disallowBluetoothNotOverriden() {
         // GIVEN Bluetooth has been disallowed...
         when(mRestrictionUtils.checkIfRestrictionEnforced(
-                mContext, UserManager.DISALLOW_BLUETOOTH)).thenReturn(FAKE_ENFORCED_ADMIN);
+                mContext, UserManager.DISALLOW_BLUETOOTH)).thenReturn(sFakeEnforcedAdmin);
         when(mRestrictionUtils.checkIfRestrictionEnforced(
                 mContext, UserManager.DISALLOW_CONFIG_BLUETOOTH)).thenReturn(null);
 
         mBluetoothEnabler.resume(mContext);
 
-        verify(mMasterSwitchController, never()).setEnabled(true);
+        verify(mSwitchController, never()).setEnabled(true);
     }
 
     @Test
     public void startWithBluetoothOff_switchIsOff() {
         when(mBluetoothAdapter.getBluetoothState()).thenReturn(BluetoothAdapter.STATE_OFF);
-        verify(mMasterSwitchController, never()).setChecked(anyBoolean());
+        verify(mSwitchController, never()).setChecked(anyBoolean());
         mBluetoothEnabler.resume(mContext);
-        verify(mMasterSwitchController, never()).setChecked(true);
+        verify(mSwitchController, never()).setChecked(true);
     }
 
     @Test
     public void startWithBluetoothOn_switchIsOn() {
         when(mBluetoothAdapter.getBluetoothState()).thenReturn(BluetoothAdapter.STATE_ON);
-        verify(mMasterSwitchController, never()).setChecked(anyBoolean());
+        verify(mSwitchController, never()).setChecked(anyBoolean());
         mBluetoothEnabler.resume(mContext);
-        verify(mMasterSwitchController, never()).setChecked(false);
-        verify(mMasterSwitchController).setChecked(true);
+        verify(mSwitchController, never()).setChecked(false);
+        verify(mSwitchController).setChecked(true);
     }
 
     @Test
     public void bluetoothTurnsOff_switchTurnsOff() {
         // Start up with bluetooth turned on. The switch should get turned on.
-        assertThat(mSwitch.isChecked()).isFalse();
         ArgumentCaptor<BroadcastReceiver> captor = ArgumentCaptor.forClass(BroadcastReceiver.class);
         when(mContext.registerReceiver(captor.capture(), any(IntentFilter.class))).thenReturn(null);
         when(mBluetoothAdapter.getBluetoothState()).thenReturn(BluetoothAdapter.STATE_ON);
-        verify(mMasterSwitchController, never()).setChecked(anyBoolean());
+        verify(mSwitchController, never()).setChecked(anyBoolean());
         mBluetoothEnabler.resume(mContext);
-        verify(mMasterSwitchController, never()).setChecked(false);
-        verify(mMasterSwitchController).setChecked(true);
+        verify(mSwitchController, never()).setChecked(false);
+        verify(mSwitchController).setChecked(true);
 
         // Now simulate bluetooth being turned off via an event.
         BroadcastReceiver receiver = captor.getValue();
@@ -216,20 +229,18 @@ public class BluetoothEnablerTest {
         receiver.onReceive(mContext, off);
 
         // Make sure the switch was turned off.
-        verify(mMasterSwitchController).setChecked(false);
-        assertThat(mSwitch.isChecked()).isFalse();
+        verify(mSwitchController).setChecked(false);
     }
 
     @Test
     public void bluetoothTurnsOn_switchTurnsOn() {
         // Start up with bluetooth turned on. The switch should be left off.
-        assertThat(mSwitch.isChecked()).isFalse();
         ArgumentCaptor<BroadcastReceiver> captor = ArgumentCaptor.forClass(BroadcastReceiver.class);
         when(mContext.registerReceiver(captor.capture(), any(IntentFilter.class))).thenReturn(null);
         when(mBluetoothAdapter.getBluetoothState()).thenReturn(BluetoothAdapter.STATE_OFF);
-        verify(mMasterSwitchController, never()).setChecked(anyBoolean());
+        verify(mSwitchController, never()).setChecked(anyBoolean());
         mBluetoothEnabler.resume(mContext);
-        verify(mMasterSwitchController, never()).setChecked(anyBoolean());
+        verify(mSwitchController, never()).setChecked(anyBoolean());
 
         // Now simulate bluetooth being turned on via an event.
         BroadcastReceiver receiver = captor.getValue();
@@ -241,7 +252,6 @@ public class BluetoothEnablerTest {
         receiver.onReceive(mContext, on);
 
         // Make sure the switch was turned on.
-        verify(mMasterSwitchController).setChecked(true);
-        assertThat(mSwitch.isChecked()).isTrue();
+        verify(mSwitchController).setChecked(true);
     }
 }

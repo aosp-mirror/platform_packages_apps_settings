@@ -23,13 +23,14 @@ import android.provider.SearchIndexableResource;
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.gestures.DoubleTapScreenPreferenceController;
 import com.android.settings.gestures.PickupGesturePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
@@ -40,30 +41,22 @@ import java.util.List;
  */
 public class AmbientDisplaySettings extends DashboardFragment {
 
+    public static final String KEY_AMBIENT_DISPLAY_ALWAYS_ON = "ambient_display_always_on";
+
     private static final String TAG = "AmbientDisplaySettings";
-    private static final int MY_USER_ID = UserHandle.myUserId();
 
-    private static final String KEY_AMBIENT_DISPLAY_ALWAYS_ON = "ambient_display_always_on";
-    private static final String KEY_AMBIENT_DISPLAY_DOUBLE_TAP = "ambient_display_double_tap";
-    private static final String KEY_AMBIENT_DISPLAY_PICK_UP = "ambient_display_pick_up";
-    private static final String KEY_AMBIENT_DISPLAY_NOTIFICATION = "ambient_display_notification";
+    private AmbientDisplayConfiguration mConfig;
 
-    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Lifecycle lifecycle, AmbientDisplayConfiguration config,
-            MetricsFeatureProvider metricsFeatureProvider,
-            AmbientDisplayAlwaysOnPreferenceController.OnPreferenceChangedCallback aodCallback) {
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new AmbientDisplayNotificationsPreferenceController(context, config,
-                metricsFeatureProvider));
-        controllers.add(new AmbientDisplayAlwaysOnPreferenceController(context, config,
-                aodCallback));
-        controllers.add(new DoubleTapScreenPreferenceController(context, lifecycle, config,
-                MY_USER_ID, KEY_AMBIENT_DISPLAY_DOUBLE_TAP));
-        controllers.add(new PickupGesturePreferenceController(context, lifecycle, config,
-                MY_USER_ID, KEY_AMBIENT_DISPLAY_PICK_UP));
-        return controllers;
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        use(AmbientDisplayAlwaysOnPreferenceController.class)
+            .setConfig(getConfig(context))
+            .setCallback(this::updatePreferenceStates);
+        use(AmbientDisplayNotificationsPreferenceController.class).setConfig(getConfig(context));
+        use(DoubleTapScreenPreferenceController.class).setConfig(getConfig(context));
+        use(PickupGesturePreferenceController.class).setConfig(getConfig(context));
     }
-
 
     @Override
     protected String getLogTag() {
@@ -73,13 +66,6 @@ public class AmbientDisplaySettings extends DashboardFragment {
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.ambient_display_settings;
-    }
-
-    @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle(),
-                new AmbientDisplayConfiguration(context), mMetricsFeatureProvider,
-                () -> { updatePreferenceStates(); });
     }
 
     @Override
@@ -99,11 +85,12 @@ public class AmbientDisplaySettings extends DashboardFragment {
                     result.add(sir);
                     return result;
                 }
-
-                @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
-                    return buildPreferenceControllers(context, null,
-                            new AmbientDisplayConfiguration(context), null, null);
-                }
             };
+
+    private AmbientDisplayConfiguration getConfig(Context context) {
+        if (mConfig == null) {
+            mConfig = new AmbientDisplayConfiguration(context);
+        }
+        return mConfig;
+    }
 }
