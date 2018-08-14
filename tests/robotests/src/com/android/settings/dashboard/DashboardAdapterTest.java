@@ -104,7 +104,8 @@ public class DashboardAdapterTest {
         mConditionList.add(mCondition);
         when(mCondition.shouldShow()).thenReturn(true);
         mDashboardAdapter = new DashboardAdapter(mContext, null /* savedInstanceState */,
-                mConditionList, null /* suggestionControllerMixin */, null /* lifecycle */);
+                mConditionList, null /* conditionManager */,
+                null /* suggestionControllerMixin */, null /* lifecycle */);
         when(mView.getTag()).thenReturn(mCondition);
     }
 
@@ -112,7 +113,8 @@ public class DashboardAdapterTest {
     public void onSuggestionClosed_notOnlySuggestion_updateSuggestionOnly() {
         final DashboardAdapter adapter =
                 spy(new DashboardAdapter(mContext, null /* savedInstanceState */,
-                        null /* conditions */, null /* suggestionControllerMixin */,
+                        null /* conditions */, null /* conditionManager */,
+                        null /* suggestionControllerMixin */,
                         null /* lifecycle */));
         final List<Suggestion> suggestions = makeSuggestions("pkg1", "pkg2", "pkg3");
         adapter.setSuggestions(suggestions);
@@ -144,8 +146,8 @@ public class DashboardAdapterTest {
     public void onSuggestionClosed_onlySuggestion_updateDashboardData() {
         final DashboardAdapter adapter =
                 spy(new DashboardAdapter(mContext, null /* savedInstanceState */,
-                        null /* conditions */, null /* suggestionControllerMixin */,
-                        null /* lifecycle */));
+                        null /* conditions */, null /* conditionManager */,
+                        null /* suggestionControllerMixin */, null /* lifecycle */));
         final List<Suggestion> suggestions = makeSuggestions("pkg1");
         adapter.setSuggestions(suggestions);
         final DashboardData dashboardData = adapter.mDashboardData;
@@ -161,8 +163,8 @@ public class DashboardAdapterTest {
     public void onSuggestionClosed_notInSuggestionList_shouldNotUpdateSuggestionList() {
         final DashboardAdapter adapter =
                 spy(new DashboardAdapter(mContext, null /* savedInstanceState */,
-                        null /* conditions */, null /* suggestionControllerMixin */,
-                        null /* lifecycle */));
+                        null /* conditions */, null /* conditionManager */,
+                        null /* suggestionControllerMixin */, null /* lifecycle */));
         final List<Suggestion> suggestions = makeSuggestions("pkg1");
         adapter.setSuggestions(suggestions);
 
@@ -176,7 +178,8 @@ public class DashboardAdapterTest {
     @Test
     public void onBindSuggestion_shouldSetSuggestionAdapterAndNoCrash() {
         mDashboardAdapter = new DashboardAdapter(mContext, null /* savedInstanceState */,
-                null /* conditions */, null /* suggestionControllerMixin */, null /* lifecycle */);
+                null /* conditions */, null /* conditionManager */,
+                null /* suggestionControllerMixin */, null /* lifecycle */);
         final List<Suggestion> suggestions = makeSuggestions("pkg1");
 
         mDashboardAdapter.setSuggestions(suggestions);
@@ -212,7 +215,8 @@ public class DashboardAdapterTest {
                 .thenReturn(context.getDrawable(R.drawable.ic_settings));
 
         mDashboardAdapter = new DashboardAdapter(context, null /* savedInstanceState */,
-                null /* conditions */, null /* suggestionControllerMixin */, null /* lifecycle */);
+                null /* conditions */, null /* conditionManager */,
+                null /* suggestionControllerMixin */, null /* lifecycle */);
         ReflectionHelpers.setField(mDashboardAdapter, "mCache", iconCache);
         mDashboardAdapter.onBindTile(holder, tile);
 
@@ -232,7 +236,8 @@ public class DashboardAdapterTest {
         final IconCache iconCache = new IconCache(context);
 
         mDashboardAdapter = new DashboardAdapter(context, null /* savedInstanceState */,
-                null /* conditions */, null /* suggestionControllerMixin */, null /* lifecycle */);
+                null /* conditions */, null /* conditionManager */,
+                null /* suggestionControllerMixin */, null /* lifecycle */);
         ReflectionHelpers.setField(mDashboardAdapter, "mCache", iconCache);
 
         doReturn("another.package").when(context).getPackageName();
@@ -256,7 +261,8 @@ public class DashboardAdapterTest {
         when(iconCache.getIcon(tile.getIcon(context))).thenReturn(mock(RoundedHomepageIcon.class));
 
         mDashboardAdapter = new DashboardAdapter(context, null /* savedInstanceState */,
-                null /* conditions */, null /* suggestionControllerMixin */, null /* lifecycle */);
+                null /* conditions */, null /* conditionManager */,
+                null /* suggestionControllerMixin */, null /* lifecycle */);
         ReflectionHelpers.setField(mDashboardAdapter, "mCache", iconCache);
 
         mDashboardAdapter.onBindTile(holder, tile);
