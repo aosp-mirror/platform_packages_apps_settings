@@ -16,7 +16,7 @@
 
 package com.android.settings.gestures;
 
-import static android.provider.Settings.Secure.DOZE_PULSE_ON_DOUBLE_TAP;
+import static android.provider.Settings.Secure.DOZE_DOUBLE_TAP_GESTURE;
 
 import android.annotation.UserIdInt;
 import android.content.Context;
@@ -36,7 +36,7 @@ public class DoubleTapScreenPreferenceController extends GesturePreferenceContro
 
     private static final String PREF_KEY_VIDEO = "gesture_double_tap_screen_video";
 
-    private final String SECURE_KEY = DOZE_PULSE_ON_DOUBLE_TAP;
+    private final String SECURE_KEY = DOZE_DOUBLE_TAP_GESTURE;
 
     private AmbientDisplayConfiguration mAmbientConfig;
     @UserIdInt
@@ -59,7 +59,7 @@ public class DoubleTapScreenPreferenceController extends GesturePreferenceContro
     @VisibleForTesting
     static boolean isSuggestionComplete(AmbientDisplayConfiguration config,
             SharedPreferences prefs) {
-        return !config.pulseOnDoubleTapAvailable()
+        return !config.doubleTapSensorAvailable()
                 || prefs.getBoolean(DoubleTapScreenSettings.PREF_KEY_SUGGESTION_COMPLETE, false);
     }
 
@@ -68,11 +68,6 @@ public class DoubleTapScreenPreferenceController extends GesturePreferenceContro
         // No hardware support for Double Tap
         if (!getAmbientConfig().doubleTapSensorAvailable()) {
             return UNSUPPORTED_ON_DEVICE;
-        }
-
-        // Can't change Double Tap when AOD is enabled.
-        if (!getAmbientConfig().ambientDisplayAvailable()) {
-            return DISABLED_DEPENDENT_SETTING;
         }
 
         return AVAILABLE;
@@ -96,12 +91,7 @@ public class DoubleTapScreenPreferenceController extends GesturePreferenceContro
 
     @Override
     public boolean isChecked() {
-        return getAmbientConfig().pulseOnDoubleTapEnabled(mUserId);
-    }
-
-    @Override
-    protected boolean canHandleClicks() {
-        return !getAmbientConfig().alwaysOnEnabled(mUserId);
+        return getAmbientConfig().doubleTapGestureEnabled(mUserId);
     }
 
     private AmbientDisplayConfiguration getAmbientConfig() {

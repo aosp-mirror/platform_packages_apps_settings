@@ -217,17 +217,6 @@ public class ConditionManager implements LifecycleObserver, OnResume, OnPause {
         return mConditions;
     }
 
-    public List<Condition> getVisibleConditions() {
-        List<Condition> conditions = new ArrayList<>();
-        final int N = mConditions.size();
-        for (int i = 0; i < N; i++) {
-            if (mConditions.get(i).shouldShow()) {
-                conditions.add(mConditions.get(i));
-            }
-        }
-        return conditions;
-    }
-
     public void notifyChanged(Condition condition) {
         saveToXml();
         Collections.sort(mConditions, CONDITION_COMPARATOR);
@@ -291,10 +280,6 @@ public class ConditionManager implements LifecycleObserver, OnResume, OnPause {
             sInstance = new ConditionManager(context.getApplicationContext(), loadConditionsNow);
         }
         return sInstance;
-    }
-
-    public interface ConditionListener {
-        void onConditionsChanged();
     }
 
     private static final Comparator<Condition> CONDITION_COMPARATOR = new Comparator<Condition>() {

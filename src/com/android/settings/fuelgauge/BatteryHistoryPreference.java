@@ -54,7 +54,7 @@ public class BatteryHistoryPreference extends Preference {
         BatteryInfo.getBatteryInfo(getContext(), info -> {
             mBatteryInfo = info;
             notifyChanged();
-        }, batteryStats.getStats(), false);
+        }, batteryStats, false);
     }
 
     public void setBottomSummary(CharSequence text) {

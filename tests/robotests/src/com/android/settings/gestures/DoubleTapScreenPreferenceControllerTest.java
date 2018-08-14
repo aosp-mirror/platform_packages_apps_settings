@@ -17,7 +17,6 @@
 package com.android.settings.gestures;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyInt;
@@ -59,21 +58,21 @@ public class DoubleTapScreenPreferenceControllerTest {
     @Test
     public void testIsChecked_configIsSet_shouldReturnTrue() {
         // Set the setting to be enabled.
-        when(mAmbientDisplayConfiguration.pulseOnDoubleTapEnabled(anyInt())).thenReturn(true);
+        when(mAmbientDisplayConfiguration.doubleTapGestureEnabled(anyInt())).thenReturn(true);
 
         assertThat(mController.isChecked()).isTrue();
     }
 
     @Test
     public void testIsChecked_configIsNotSet_shouldReturnFalse() {
-        when(mAmbientDisplayConfiguration.pulseOnDoubleTapEnabled(anyInt())).thenReturn(false);
+        when(mAmbientDisplayConfiguration.doubleTapGestureEnabled(anyInt())).thenReturn(false);
 
         assertThat(mController.isChecked()).isFalse();
     }
 
     @Test
     public void isSuggestionCompleted_ambientDisplay_falseWhenNotVisited() {
-        when(mAmbientDisplayConfiguration.pulseOnDoubleTapAvailable()).thenReturn(true);
+        when(mAmbientDisplayConfiguration.doubleTapSensorAvailable()).thenReturn(true);
         // No stored value in shared preferences if not visited yet.
         final Context context = RuntimeEnvironment.application;
         final SharedPreferences prefs =
@@ -85,7 +84,7 @@ public class DoubleTapScreenPreferenceControllerTest {
 
     @Test
     public void isSuggestionCompleted_ambientDisplay_trueWhenVisited() {
-        when(mAmbientDisplayConfiguration.pulseOnDoubleTapAvailable()).thenReturn(false);
+        when(mAmbientDisplayConfiguration.doubleTapSensorAvailable()).thenReturn(false);
         final Context context = RuntimeEnvironment.application;
         final SharedPreferences prefs =
                 new SuggestionFeatureProviderImpl(context).getSharedPrefs(context);
@@ -98,33 +97,12 @@ public class DoubleTapScreenPreferenceControllerTest {
     }
 
     @Test
-    public void canHandleClicks_falseWhenAlwaysOnEnabled() {
-        when(mAmbientDisplayConfiguration.alwaysOnEnabled(anyInt())).thenReturn(true);
-        assertThat(mController.canHandleClicks()).isFalse();
-    }
-
-    @Test
-    public void canHandleClicks_trueWhenAlwaysOnDisabled() {
-        when(mAmbientDisplayConfiguration.alwaysOnEnabled(anyInt())).thenReturn(false);
-        assertThat(mController.canHandleClicks()).isTrue();
-    }
-
-    @Test
     public void getAvailabilityStatus_aodNotSupported_UNSUPPORTED_ON_DEVICE() {
         when(mAmbientDisplayConfiguration.doubleTapSensorAvailable()).thenReturn(false);
         when(mAmbientDisplayConfiguration.ambientDisplayAvailable()).thenReturn(false);
         final int availabilityStatus = mController.getAvailabilityStatus();
 
         assertThat(availabilityStatus).isEqualTo(UNSUPPORTED_ON_DEVICE);
-    }
-
-    @Test
-    public void getAvailabilityStatus_aodOn_DISABLED_DEPENDENT_SETTING() {
-        when(mAmbientDisplayConfiguration.doubleTapSensorAvailable()).thenReturn(true);
-        when(mAmbientDisplayConfiguration.ambientDisplayAvailable()).thenReturn(false);
-        final int availabilityStatus = mController.getAvailabilityStatus();
-
-        assertThat(availabilityStatus).isEqualTo(DISABLED_DEPENDENT_SETTING);
     }
 
     @Test
