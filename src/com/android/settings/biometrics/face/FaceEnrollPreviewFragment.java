@@ -236,6 +236,7 @@ public class FaceEnrollPreviewFragment extends InstrumentedPreferenceFragment {
                         CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
                 mPreviewSize = chooseOptimalSize(map.getOutputSizes(SurfaceTexture.class),
                         width, height, MAX_PREVIEW_WIDTH, MAX_PREVIEW_HEIGHT);
+                break;
             }
         } catch (CameraAccessException e) {
             Log.e(TAG, "Unable to access camera", e);
