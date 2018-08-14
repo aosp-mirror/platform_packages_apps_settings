@@ -39,7 +39,7 @@ import com.android.settings.core.SettingsBaseActivity.CategoryListener;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.homepage.conditional.Condition;
 import com.android.settings.homepage.conditional.ConditionManager;
-import com.android.settings.homepage.conditional.ConditionManager.ConditionListener;
+import com.android.settings.homepage.conditional.ConditionListener;
 import com.android.settings.homepage.conditional.FocusRecyclerView;
 import com.android.settings.homepage.conditional.FocusRecyclerView.FocusListener;
 import com.android.settings.overlay.FeatureFactory;
