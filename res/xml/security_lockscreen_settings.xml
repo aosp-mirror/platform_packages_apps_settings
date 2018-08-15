@@ -83,12 +83,14 @@
     <PreferenceCategory
         android:key="security_setting_lock_screen_notif_work_header"
         android:title="@string/profile_section_header"
-        android:order="1001">
+        android:order="1001"
+        settings:searchable="false">
 
         <com.android.settings.RestrictedListPreference
             android:key="security_setting_lock_screen_notif_work"
             android:title="@string/locked_work_profile_notification_title"
-            android:summary="@string/summary_placeholder" />
+            android:summary="@string/summary_placeholder"
+            settings:searchable="false"/>
 
     </PreferenceCategory>
 

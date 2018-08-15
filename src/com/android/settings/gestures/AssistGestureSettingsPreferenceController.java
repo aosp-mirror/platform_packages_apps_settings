@@ -22,12 +22,12 @@ import static android.provider.Settings.Secure.ASSIST_GESTURE_SILENCE_ALERTS_ENA
 import android.content.Context;
 import android.provider.Settings;
 
-import com.android.settings.R;
-import com.android.settings.overlay.FeatureFactory;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+
+import com.android.settings.R;
+import com.android.settings.overlay.FeatureFactory;
 
 public class AssistGestureSettingsPreferenceController extends GesturePreferenceController {
 
@@ -38,7 +38,6 @@ public class AssistGestureSettingsPreferenceController extends GesturePreference
     private static final int ON = 1;
     private static final int OFF = 0;
 
-    private final String mAssistGesturePrefKey;
     private final AssistGestureFeatureProvider mFeatureProvider;
     private boolean mWasAvailable;
 
@@ -48,12 +47,10 @@ public class AssistGestureSettingsPreferenceController extends GesturePreference
     @VisibleForTesting
     boolean mAssistOnly;
 
-    public AssistGestureSettingsPreferenceController(Context context,
-            String key) {
+    public AssistGestureSettingsPreferenceController(Context context, String key) {
         super(context, key);
         mFeatureProvider = FeatureFactory.getFactory(context).getAssistGestureFeatureProvider();
         mWasAvailable = isAvailable();
-        mAssistGesturePrefKey = key;
     }
 
     @Override

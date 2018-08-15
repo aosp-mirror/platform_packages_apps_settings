@@ -17,6 +17,7 @@
 package com.android.settings.backup;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -24,6 +25,8 @@ import static org.mockito.Mockito.when;
 import android.app.backup.BackupManager;
 import android.content.Context;
 import android.os.UserManager;
+
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -37,8 +40,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
-
-import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = BackupSettingsActivityPreferenceControllerTest.ShadowBackupManager.class)
@@ -63,7 +64,7 @@ public class BackupSettingsActivityPreferenceControllerTest {
         mContext = spy(RuntimeEnvironment.application.getApplicationContext());
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
 
-        mController = new BackupSettingsActivityPreferenceController(mContext);
+        mController = new BackupSettingsActivityPreferenceController(mContext, KEY_BACKUP_SETTINGS);
     }
 
     @Test

@@ -82,14 +82,9 @@ public class ZenModeCallsSettings extends ZenModeSettingsBase implements Indexab
                 }
 
                 @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    final List<String> keys = super.getNonIndexableKeys(context);
-                    return keys;
+                public List<AbstractPreferenceController> createPreferenceControllers(
+                        Context context) {
+                    return buildPreferenceControllers(context, null);
                 }
-
-            @Override
-            public List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-                return buildPreferenceControllers(context, null);
-            }
-        };
+            };
 }

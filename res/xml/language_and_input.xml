@@ -39,7 +39,8 @@
             android:key="physical_keyboard_pref"
             android:title="@string/physical_keyboard_title"
             android:summary="@string/summary_placeholder"
-            android:fragment="com.android.settings.inputmethod.PhysicalKeyboardFragment" />
+            android:fragment="com.android.settings.inputmethod.PhysicalKeyboardFragment"
+            settings:searchable="false"/>
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -80,7 +81,8 @@
         <Preference
             android:key="tts_settings_summary"
             android:title="@string/tts_settings_title"
-            android:fragment="com.android.settings.tts.TextToSpeechSettings" />
+            android:fragment="com.android.settings.tts.TextToSpeechSettings"
+            settings:searchable="false"/>
 
     </PreferenceCategory>
 

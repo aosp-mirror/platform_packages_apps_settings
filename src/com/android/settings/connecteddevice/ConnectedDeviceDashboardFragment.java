@@ -19,6 +19,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -31,8 +33,6 @@ import com.android.settingslib.search.SearchIndexable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class ConnectedDeviceDashboardFragment extends DashboardFragment {
@@ -138,15 +138,6 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
                 public List<AbstractPreferenceController> createPreferenceControllers(Context
                         context) {
                     return buildPreferenceControllers(context, null /* lifecycle */);
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    List<String> keys = super.getNonIndexableKeys(context);
-                    // Disable because they show dynamic data
-                    keys.add(KEY_AVAILABLE_DEVICES);
-                    keys.add(KEY_CONNECTED_DEVICES);
-                    return keys;
                 }
             };
 }

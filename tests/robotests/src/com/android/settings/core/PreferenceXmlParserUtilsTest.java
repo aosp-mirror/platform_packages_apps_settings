@@ -263,9 +263,10 @@ public class PreferenceXmlParserUtilsTest {
     }
 
     @Test
+    @Config(qualifiers = "mcc998")
     public void extractMetadata_requestSearchable_shouldDefaultToTrue() throws Exception {
         final List<Bundle> metadata = PreferenceXmlParserUtils.extractMetadata(mContext,
-                R.xml.display_settings, MetadataFlag.FLAG_NEED_SEARCHABLE);
+                R.xml.location_settings, MetadataFlag.FLAG_NEED_SEARCHABLE);
         for (Bundle bundle : metadata) {
             assertThat(bundle.getBoolean(METADATA_SEARCHABLE)).isTrue();
         }

@@ -20,6 +20,8 @@ import android.content.Context;
 import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 
+import androidx.fragment.app.Fragment;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
@@ -34,15 +36,11 @@ import com.android.settingslib.search.SearchIndexable;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.fragment.app.Fragment;
-
 @SearchIndexable
 public class ScreenLockSettings extends DashboardFragment
         implements OwnerInfoPreferenceController.OwnerInfoCallback {
 
     private static final String TAG = "ScreenLockSettings";
-
-    private static final String KEY_LOCK_SCREEN_TITLE = "security_settings_password_sub_screen";
 
     private static final int MY_USER_ID = UserHandle.myUserId();
     private LockPatternUtils mLockPatternUtils;
@@ -106,13 +104,6 @@ public class ScreenLockSettings extends DashboardFragment
                         Context context) {
                     return buildPreferenceControllers(context, null /* parent */,
                             null /* lifecycle */, new LockPatternUtils(context));
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    final List<String> keys = super.getNonIndexableKeys(context);
-                    keys.add(KEY_LOCK_SCREEN_TITLE);
-                    return keys;
                 }
             };
 }

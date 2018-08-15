@@ -46,11 +46,7 @@ import java.util.List;
 public class DisplaySettings extends DashboardFragment {
     private static final String TAG = "DisplaySettings";
 
-    public static final String KEY_DISPLAY_SIZE = "display_settings_screen_zoom";
-
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
-    private static final String KEY_AUTO_BRIGHTNESS = "auto_brightness_entry";
-    private static final String KEY_NIGHT_DISPLAY = "night_display";
 
     @Override
     public int getMetricsCategory() {
@@ -106,16 +102,6 @@ public class DisplaySettings extends DashboardFragment {
                     sir.xmlResId = R.xml.display_settings;
                     result.add(sir);
                     return result;
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    List<String> keys = super.getNonIndexableKeys(context);
-                    keys.add(KEY_DISPLAY_SIZE);
-                    keys.add(WallpaperPreferenceController.KEY_WALLPAPER);
-                    keys.add(KEY_NIGHT_DISPLAY);
-                    keys.add(KEY_AUTO_BRIGHTNESS);
-                    return keys;
                 }
 
                 @Override

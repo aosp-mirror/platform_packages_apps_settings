@@ -218,9 +218,6 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
                 public List<String> getNonIndexableKeys(Context context) {
                     final List<String> keys = super.getNonIndexableKeys(context);
                     keys.add(KEY_SWIPE_DOWN);
-                    keys.add(KEY_LOCKSCREEN);
-                    keys.add(KEY_LOCKSCREEN_WORK_PROFILE);
-                    keys.add(KEY_LOCKSCREEN_WORK_PROFILE_HEADER);
                     return keys;
                 }
             };
