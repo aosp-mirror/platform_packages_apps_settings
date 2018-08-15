@@ -13,16 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.homepage.conditional;
 
-import static com.google.common.truth.Truth.assertThat;
+package com.android.settings.homepage.conditional.v2;
 
+import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
+import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 
 import com.android.settings.Settings;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -30,35 +29,29 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-public class BackgroundDataConditionTest {
-    @Mock
-    private ConditionManager mConditionManager;
+public class WorkModeConditionControllerTest {
 
     private Context mContext;
+    private WorkModeConditionController mController;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        when(mConditionManager.getContext()).thenReturn(mContext);
+        mController = new WorkModeConditionController(mContext);
     }
 
     @Test
-    public void onPrimaryClick_shouldReturn2SummaryActivity() {
-        final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
-        BackgroundDataCondition backgroundDataCondition
-                = new BackgroundDataCondition(mConditionManager);
-        backgroundDataCondition.onPrimaryClick();
-        verify(mContext).startActivity(argumentCaptor.capture());
-        Intent intent = argumentCaptor.getValue();
+    public void onPrimaryClick_shouldLaunchAccountsSetting() {
+        final ComponentName componentName =
+                new ComponentName(mContext, Settings.AccountDashboardActivity.class);
 
-        assertThat(intent.getComponent().getClassName()).isEqualTo(
-                Settings.DataUsageSummaryActivity.class.getName());
+        mController.onPrimaryClick(mContext);
+
+        verify(mContext).startActivity(
+                argThat(intent -> intent.getComponent().equals(componentName)));
     }
+
 }

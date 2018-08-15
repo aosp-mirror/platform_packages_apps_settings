@@ -123,7 +123,6 @@ public class DashboardSummary extends InstrumentedFragment
 
         mSummaryLoader = new SummaryLoader(activity, CategoryKey.CATEGORY_HOMEPAGE);
 
-        mConditionManager = ConditionManager.get(activity, false);
         if (com.android.settings.homepage.conditional.v2.ConditionManager.isEnabled(activity)) {
             mConditionManager = null;
             mConditionManager2 =

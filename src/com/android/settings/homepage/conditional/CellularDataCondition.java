@@ -23,6 +23,7 @@ import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.R;
 import com.android.settings.Settings;
 
+@Deprecated
 public class CellularDataCondition extends Condition {
 
     private final Receiver mReceiver;

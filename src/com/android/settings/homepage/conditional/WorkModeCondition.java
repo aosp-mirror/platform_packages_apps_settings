@@ -29,6 +29,7 @@ import com.android.settings.Settings;
 
 import java.util.List;
 
+@Deprecated
 public class WorkModeCondition extends Condition {
 
     private UserManager mUm;
