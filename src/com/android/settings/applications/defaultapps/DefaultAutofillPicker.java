@@ -35,6 +35,7 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceClickListener;
 import com.android.internal.content.PackageMonitor;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -168,11 +169,15 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
         }
 
         final Intent addNewServiceIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(searchUri));
-        Preference preference = new Preference(getPrefContext());
+        final Context context = getPrefContext();
+        final Preference preference = new Preference(context);
+        preference.setOnPreferenceClickListener(p -> {
+                    context.startActivityAsUser(addNewServiceIntent, UserHandle.of(mUserId));
+                    return true;
+                });
         preference.setTitle(R.string.print_menu_item_add_service);
         preference.setIcon(R.drawable.ic_menu_add);
         preference.setOrder(Integer.MAX_VALUE -1);
-        preference.setIntent(addNewServiceIntent);
         preference.setPersistent(false);
         return preference;
     }
