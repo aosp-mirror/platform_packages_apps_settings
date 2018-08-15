@@ -17,6 +17,7 @@
 package com.android.settings.wifi.tether;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -27,6 +28,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowWifiManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,12 +36,15 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(shadows = {ShadowWifiManager.class})
 public class WifiTetherSettingsTest {
+    private static final String[] WIFI_REGEXS = {"wifi_regexs"};
 
     private Context mContext;
 
@@ -55,12 +60,12 @@ public class WifiTetherSettingsTest {
         MockitoAnnotations.initMocks(this);
         doReturn(mConnectivityManager)
                 .when(mContext).getSystemService(Context.CONNECTIVITY_SERVICE);
-        doReturn(mUserManager)
-                .when(mContext).getSystemService(Context.USER_SERVICE);
+        doReturn(WIFI_REGEXS).when(mConnectivityManager).getTetherableWifiRegexs();
+        doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
     }
 
     @Test
-    public void testWifiTetherNonIndexableKeys_tetherAvailable_keysNotReturned() {
+    public void wifiTetherNonIndexableKeys_tetherAvailable_keysNotReturned() {
         // To let TetherUtil.isTetherAvailable return true, select one of the combinations
         setupIsTetherAvailable(true);
 
@@ -74,7 +79,7 @@ public class WifiTetherSettingsTest {
     }
 
     @Test
-    public void testWifiTetherNonIndexableKeys_tetherNotAvailable_keysReturned() {
+    public void wifiTetherNonIndexableKeys_tetherNotAvailable_keysReturned() {
         // To let TetherUtil.isTetherAvailable return false, select one of the combinations
         setupIsTetherAvailable(false);
 
@@ -85,6 +90,12 @@ public class WifiTetherSettingsTest {
         assertThat(niks).contains(WifiTetherSettings.KEY_WIFI_TETHER_NETWORK_PASSWORD);
         assertThat(niks).contains(WifiTetherSettings.KEY_WIFI_TETHER_AUTO_OFF);
         assertThat(niks).contains(WifiTetherSettings.KEY_WIFI_TETHER_NETWORK_AP_BAND);
+    }
+
+    @Test
+    public void createPreferenceControllers_notEmpty() {
+        assertThat(WifiTetherSettings.SEARCH_INDEX_DATA_PROVIDER.getPreferenceControllers(mContext))
+                .isNotEmpty();
     }
 
     private void setupIsTetherAvailable(boolean returnValue) {

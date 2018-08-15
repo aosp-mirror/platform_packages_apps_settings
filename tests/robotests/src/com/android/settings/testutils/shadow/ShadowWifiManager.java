@@ -52,6 +52,11 @@ public class ShadowWifiManager extends org.robolectric.shadows.ShadowWifiManager
         return Collections.emptyList();
     }
 
+    @Implementation
+    public boolean isDualModeSupported() {
+        return false;
+    }
+
     public static ShadowWifiManager get() {
         return Shadow.extract(application.getSystemService(WifiManager.class));
     }
