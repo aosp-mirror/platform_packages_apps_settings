@@ -45,7 +45,14 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
     private TextView mErrorText;
     private Interpolator mLinearOutSlowInInterpolator;
     private boolean mShouldFinishOnStop = true;
-    private FaceEnrollPreviewFragment mFaceCameraPreview;
+    private FaceEnrollPreviewFragment mPreviewFragment;
+
+    private ParticleCollection.Listener mListener = new ParticleCollection.Listener() {
+        @Override
+        public void onEnrolled() {
+            FaceEnrollEnrolling.this.launchFinish(mToken);
+        }
+    };
 
     public static class FaceErrorDialog extends BiometricErrorDialog {
         static FaceErrorDialog newInstance(CharSequence msg, int msgId) {
@@ -87,7 +94,7 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
 
         if (shouldLaunchConfirmLock()) {
             launchConfirmLock(R.string.security_settings_face_preference_title,
-                    Utils.getFaceManagerOrNull(this).preEnroll());
+                    Utils.getFingerprintManagerOrNull(this).preEnroll());
             mShouldFinishOnStop = false;
         } else {
             startEnrollment();
@@ -97,13 +104,14 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
     @Override
     public void startEnrollment() {
         super.startEnrollment();
-        mFaceCameraPreview = (FaceEnrollPreviewFragment) getSupportFragmentManager()
+        mPreviewFragment = (FaceEnrollPreviewFragment) getSupportFragmentManager()
                 .findFragmentByTag(TAG_FACE_PREVIEW);
-        if (mFaceCameraPreview == null) {
-            mFaceCameraPreview = new FaceEnrollPreviewFragment();
-            getSupportFragmentManager().beginTransaction().add(mFaceCameraPreview, TAG_FACE_PREVIEW)
+        if (mPreviewFragment == null) {
+            mPreviewFragment = new FaceEnrollPreviewFragment();
+            getSupportFragmentManager().beginTransaction().add(mPreviewFragment, TAG_FACE_PREVIEW)
                     .commitAllowingStateLoss();
         }
+        mPreviewFragment.setListener(mListener);
     }
 
     @Override
@@ -132,10 +140,11 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
     }
 
     @Override
-    public void onEnrollmentHelp(CharSequence helpString) {
+    public void onEnrollmentHelp(int helpMsgId, CharSequence helpString) {
         if (!TextUtils.isEmpty(helpString)) {
             showError(helpString);
         }
+        mPreviewFragment.onEnrollmentHelp(helpMsgId, helpString);
     }
 
     @Override
@@ -149,6 +158,7 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
                 msgId = R.string.security_settings_face_enroll_error_generic_dialog_message;
                 break;
         }
+        mPreviewFragment.onEnrollmentError(errMsgId, errString);
         showErrorDialog(getText(msgId), errMsgId);
     }
 
@@ -157,6 +167,8 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
         if (DEBUG) {
             Log.v(TAG, "Steps: " + steps + " Remaining: " + remaining);
         }
+        mPreviewFragment.onEnrollmentProgressChange(steps, remaining);
+
         // TODO: Update the actual animation
         showError("Steps: " + steps + " Remaining: " + remaining);
     }

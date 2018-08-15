@@ -38,6 +38,7 @@ import android.widget.ImageView;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.biometrics.BiometricEnrollSidecar;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 
 import java.util.ArrayList;
@@ -50,7 +51,8 @@ import java.util.List;
  * Fragment that contains the logic for showing and controlling the camera preview, circular
  * overlay, as well as the enrollment animations.
  */
-public class FaceEnrollPreviewFragment extends InstrumentedPreferenceFragment {
+public class FaceEnrollPreviewFragment extends InstrumentedPreferenceFragment
+        implements BiometricEnrollSidecar.Listener {
 
     private static final String TAG = "FaceEnrollPreviewFragment";
 
@@ -65,6 +67,7 @@ public class FaceEnrollPreviewFragment extends InstrumentedPreferenceFragment {
     private CameraCaptureSession mCaptureSession;
     private CaptureRequest mPreviewRequest;
     private Size mPreviewSize;
+    private ParticleCollection.Listener mListener;
 
     // View used to contain the circular cutout and enrollment animation drawable
     private ImageView mCircleView;
@@ -74,6 +77,15 @@ public class FaceEnrollPreviewFragment extends InstrumentedPreferenceFragment {
 
     // Texture used for showing the camera preview
     private FaceSquareTextureView mTextureView;
+
+    // Listener sent to the animation drawable
+    private final ParticleCollection.Listener mAnimationListener
+            = new ParticleCollection.Listener() {
+        @Override
+        public void onEnrolled() {
+            mListener.onEnrolled();
+        }
+    };
 
     private final TextureView.SurfaceTextureListener mSurfaceTextureListener =
             new TextureView.SurfaceTextureListener() {
@@ -185,7 +197,7 @@ public class FaceEnrollPreviewFragment extends InstrumentedPreferenceFragment {
         // Must disable hardware acceleration for this view, otherwise transparency breaks
         mCircleView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 
-        mAnimationDrawable = new FaceEnrollAnimationDrawable();
+        mAnimationDrawable = new FaceEnrollAnimationDrawable(getContext(), mAnimationListener);
         mCircleView.setImageDrawable(mAnimationDrawable);
 
         mCameraManager = (CameraManager) getContext().getSystemService(Context.CAMERA_SERVICE);
@@ -210,6 +222,25 @@ public class FaceEnrollPreviewFragment extends InstrumentedPreferenceFragment {
     public void onPause() {
         super.onPause();
         closeCamera();
+    }
+
+    @Override
+    public void onEnrollmentError(int errMsgId, CharSequence errString) {
+        mAnimationDrawable.onEnrollmentError(errMsgId, errString);
+    }
+
+    @Override
+    public void onEnrollmentHelp(int helpMsgId, CharSequence helpString) {
+        mAnimationDrawable.onEnrollmentHelp(helpMsgId, helpString);
+    }
+
+    @Override
+    public void onEnrollmentProgressChange(int steps, int remaining) {
+        mAnimationDrawable.onEnrollmentProgressChange(steps, remaining);
+    }
+
+    public void setListener(ParticleCollection.Listener listener) {
+        mListener = listener;
     }
 
     /**
