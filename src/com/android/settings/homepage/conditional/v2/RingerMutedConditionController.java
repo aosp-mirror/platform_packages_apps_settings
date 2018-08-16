@@ -14,31 +14,35 @@
  * limitations under the License.
  */
 
-package com.android.settings.homepage.conditional;
+package com.android.settings.homepage.conditional.v2;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 
 import android.app.NotificationManager;
-import android.graphics.drawable.Drawable;
+import android.content.Context;
 import android.media.AudioManager;
 import android.provider.Settings;
 
-import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.R;
+import java.util.Objects;
 
-@Deprecated
-public class RingerMutedCondition extends AbnormalRingerConditionBase {
+public class RingerMutedConditionController extends AbnormalRingerConditionController {
+    static final int ID = Objects.hash("RingerMutedConditionController");
 
     private final NotificationManager mNotificationManager;
 
-    RingerMutedCondition(ConditionManager manager) {
-        super(manager);
+    public RingerMutedConditionController(Context appContext, ConditionManager conditionManager) {
+        super(appContext, conditionManager);
         mNotificationManager =
-                (NotificationManager) mManager.getContext().getSystemService(NOTIFICATION_SERVICE);
+                (NotificationManager) appContext.getSystemService(NOTIFICATION_SERVICE);
     }
 
     @Override
-    public void refreshState() {
+    public long getId() {
+        return ID;
+    }
+
+    @Override
+    public boolean isDisplayable() {
         int zen = Settings.Global.ZEN_MODE_OFF;
         if (mNotificationManager != null) {
             zen = mNotificationManager.getZenMode();
@@ -46,26 +50,6 @@ public class RingerMutedCondition extends AbnormalRingerConditionBase {
         final boolean zenModeEnabled = zen != Settings.Global.ZEN_MODE_OFF;
         final boolean isSilent =
                 mAudioManager.getRingerModeInternal() == AudioManager.RINGER_MODE_SILENT;
-        setActive(isSilent && !zenModeEnabled);
-    }
-
-    @Override
-    public int getMetricsConstant() {
-        return MetricsProto.MetricsEvent.SETTINGS_CONDITION_DEVICE_MUTED;
-    }
-
-    @Override
-    public Drawable getIcon() {
-        return mManager.getContext().getDrawable(R.drawable.ic_notifications_off_24dp);
-    }
-
-    @Override
-    public CharSequence getTitle() {
-        return mManager.getContext().getText(R.string.condition_device_muted_title);
-    }
-
-    @Override
-    public CharSequence getSummary() {
-        return mManager.getContext().getText(R.string.condition_device_muted_summary);
+        return isSilent && !zenModeEnabled;
     }
 }

@@ -25,6 +25,10 @@ import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.display.NightDisplaySettings;
 
+/**
+ * @deprecated in favor of {@link NightDisplayConditionController}
+ */
+@Deprecated
 public final class NightDisplayCondition extends Condition
         implements ColorDisplayController.Callback {
 

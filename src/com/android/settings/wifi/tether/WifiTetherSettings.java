@@ -99,6 +99,11 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         super.onAttach(context);
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         mTetherChangeReceiver = new TetherChangeReceiver();
+
+        mSSIDPreferenceController = use(WifiTetherSSIDPreferenceController.class);
+        mSecurityPreferenceController = use(WifiTetherSecurityPreferenceController.class);
+        mPasswordPreferenceController = use(WifiTetherPasswordPreferenceController.class);
+        mApBandPreferenceController = use(WifiTetherApBandPreferenceController.class);
     }
 
     @Override
@@ -140,18 +145,17 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        mSSIDPreferenceController = new WifiTetherSSIDPreferenceController(context, this);
-        mSecurityPreferenceController = new WifiTetherSecurityPreferenceController(context, this);
-        mPasswordPreferenceController = new WifiTetherPasswordPreferenceController(context, this);
-        mApBandPreferenceController = new WifiTetherApBandPreferenceController(context, this);
+        return buildPreferenceControllers(context, this::onTetherConfigUpdated);
+    }
 
-        controllers.add(mSSIDPreferenceController);
-        controllers.add(mSecurityPreferenceController);
-        controllers.add(mPasswordPreferenceController);
-        controllers.add(mApBandPreferenceController);
-        controllers.add(
-                new WifiTetherAutoOffPreferenceController(context, KEY_WIFI_TETHER_AUTO_OFF));
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
+            WifiTetherBasePreferenceController.OnTetherConfigUpdateListener listener) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new WifiTetherSSIDPreferenceController(context, listener));
+        controllers.add(new WifiTetherSecurityPreferenceController(context, listener));
+        controllers.add(new WifiTetherPasswordPreferenceController(context, listener));
+        controllers.add(new WifiTetherApBandPreferenceController(context, listener));
+
         return controllers;
     }
 
@@ -226,6 +230,12 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                     // Remove duplicate
                     keys.add(KEY_WIFI_TETHER_SCREEN);
                     return keys;
+                }
+
+                @Override
+                public List<AbstractPreferenceController> createPreferenceControllers(
+                        Context context) {
+                    return buildPreferenceControllers(context, null /* listener */);
                 }
             };
 

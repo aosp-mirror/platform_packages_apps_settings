@@ -37,7 +37,7 @@ import java.util.ArrayList;
 public abstract class BiometricEnrollSidecar extends InstrumentedFragment {
 
     public interface Listener {
-        void onEnrollmentHelp(CharSequence helpString);
+        void onEnrollmentHelp(int helpMsgId, CharSequence helpString);
         void onEnrollmentError(int errMsgId, CharSequence errString);
         void onEnrollmentProgressChange(int steps, int remaining);
     }
@@ -82,7 +82,7 @@ public abstract class BiometricEnrollSidecar extends InstrumentedFragment {
 
         @Override
         public void send(Listener listener) {
-            listener.onEnrollmentHelp(helpString);
+            listener.onEnrollmentHelp(helpMsgId, helpString);
         }
     }
 
@@ -174,7 +174,7 @@ public abstract class BiometricEnrollSidecar extends InstrumentedFragment {
 
     protected void onEnrollmentHelp(int helpMsgId, CharSequence helpString) {
         if (mListener != null) {
-            mListener.onEnrollmentHelp(helpString);
+            mListener.onEnrollmentHelp(helpMsgId, helpString);
         } else {
             mQueuedEvents.add(new QueuedEnrollmentHelp(helpMsgId, helpString));
         }

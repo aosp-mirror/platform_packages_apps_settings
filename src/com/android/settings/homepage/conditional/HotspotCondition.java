@@ -33,6 +33,7 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
+@Deprecated
 public class HotspotCondition extends Condition {
 
     private final WifiManager mWifiManager;
@@ -95,7 +96,7 @@ public class HotspotCondition extends Condition {
                 UserManager.DISALLOW_CONFIG_TETHERING, UserHandle.myUserId())) {
             return new CharSequence[0];
         }
-        return new CharSequence[] {context.getString(R.string.condition_turn_off)};
+        return new CharSequence[]{context.getString(R.string.condition_turn_off)};
     }
 
     @Override

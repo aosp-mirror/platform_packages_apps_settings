@@ -14,15 +14,13 @@
  * limitations under the License.
  */
 
-package com.android.settings.homepage.conditional;
+package com.android.settings.homepage.conditional.v2;
 
-import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -35,7 +33,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-public class AbnormalRingerConditionBaseTest {
+public class AbnormalRingerConditionControllerBaseTest {
 
     @Mock
     private ConditionManager mConditionManager;
@@ -47,53 +45,39 @@ public class AbnormalRingerConditionBaseTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        when(mConditionManager.getContext()).thenReturn(mContext);
-        mCondition = new TestCondition(mConditionManager);
+
+        mCondition = new TestCondition(mContext, mConditionManager);
     }
 
     @Test
-    public void newInstance_shouldMonitorRingerStateChangeBroadcast() {
+    public void startMonitor_shouldMonitorRingerStateChangeBroadcast() {
         final Intent broadcast1 = new Intent("foo.bar.action");
         final Intent broadcast2 = new Intent(AudioManager.INTERNAL_RINGER_MODE_CHANGED_ACTION);
 
+        mCondition.startMonitoringStateChange();
+
         mContext.sendBroadcast(broadcast1);
-        assertThat(mCondition.mRefreshCalled).isFalse();
+        verify(mConditionManager, never()).onConditionChanged();
 
         mContext.sendBroadcast(broadcast2);
-        assertThat(mCondition.mRefreshCalled).isTrue();
+        verify(mConditionManager).onConditionChanged();
     }
 
-    private static class TestCondition extends AbnormalRingerConditionBase {
-        private boolean mRefreshCalled;
+    private static class TestCondition extends AbnormalRingerConditionController {
 
-        TestCondition(ConditionManager manager) {
-            super(manager);
+        public TestCondition(Context appContext, ConditionManager conditionManager) {
+            super(appContext, conditionManager);
         }
 
-        @Override
-        public void refreshState() {
-            mRefreshCalled = true;
-        }
 
         @Override
-        public int getMetricsConstant() {
+        public long getId() {
             return 0;
         }
 
         @Override
-        public Drawable getIcon() {
-            return null;
+        public boolean isDisplayable() {
+            return false;
         }
-
-        @Override
-        public CharSequence getTitle() {
-            return null;
-        }
-
-        @Override
-        public CharSequence getSummary() {
-            return null;
-        }
-
     }
 }

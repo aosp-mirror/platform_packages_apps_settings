@@ -15,7 +15,9 @@
   limitations under the License.
   -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto">
 
     <com.android.settings.applications.LayoutPreference
         android:key="header_view"
@@ -30,10 +32,11 @@
     <PreferenceCategory
         android:title="@string/battery_detail_manage_title">
 
-        <Preference
+        <com.android.settingslib.RestrictedPreference
             android:key="background_activity"
             android:title="@string/background_activity_title"
-            android:selectable="true"/>
+            android:selectable="true"
+            settings:userRestriction="no_control_apps"/>
 
         <Preference
             android:key="battery_optimization"

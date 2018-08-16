@@ -78,7 +78,7 @@ public class DndConditionCardController implements ConditionalCardController {
     public void onPrimaryClick(Context context) {
         new SubSettingLauncher(context)
                 .setDestination(ZenModeSettings.class.getName())
-                .setSourceMetricsCategory(MetricsProto.MetricsEvent.DASHBOARD_SUMMARY)
+                .setSourceMetricsCategory(MetricsProto.MetricsEvent.SETTINGS_HOMEPAGE)
                 .setTitleRes(R.string.zen_mode_settings_title)
                 .launch();
     }

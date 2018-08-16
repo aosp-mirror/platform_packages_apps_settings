@@ -141,9 +141,28 @@ public class ConditionManager {
 
     private void initCandidates() {
         // Initialize controllers first.
+        mCardControllers.add(new AirplaneModeConditionController(mAppContext, this /* manager */));
+        mCardControllers.add(new BackgroundDataConditionController(mAppContext));
+        mCardControllers.add(new BatterySaverConditionController(mAppContext, this /* manager */));
+        mCardControllers.add(new CellularDataConditionController(mAppContext, this /* manager */));
         mCardControllers.add(new DndConditionCardController(mAppContext, this /* manager */));
+        mCardControllers.add(new HotspotConditionController(mAppContext, this /* manager */));
+        mCardControllers.add(new NightDisplayConditionController(mAppContext));
+        mCardControllers.add(new RingerVibrateConditionController(mAppContext, this /* manager */));
+        mCardControllers.add(new RingerMutedConditionController(mAppContext, this /* manager */));
+        mCardControllers.add(new WorkModeConditionController(mAppContext));
 
         // Initialize ui model later. UI model depends on controller.
+        mCandidates.add(new AirplaneModeConditionCard(mAppContext));
+        mCandidates.add(new BackgroundDataConditionCard(mAppContext));
+        mCandidates.add(new BatterySaverConditionCard(mAppContext));
+        mCandidates.add(new CellularDataConditionCard(mAppContext));
         mCandidates.add(new DndConditionCard(mAppContext, this /* manager */));
+        mCandidates.add(new HotspotConditionCard(mAppContext, this /* manager */));
+        mCandidates.add(new NightDisplayConditionCard(mAppContext));
+        mCandidates.add(new RingerMutedConditionCard(mAppContext));
+        mCandidates.add(new RingerVibrateConditionCard(mAppContext));
+        mCandidates.add(new WorkModeConditionCard(mAppContext));
+
     }
 }
