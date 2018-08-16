@@ -44,7 +44,6 @@ import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.notification.ZenModeSliceBuilder;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wifi.WifiSliceBuilder;
-import com.android.settingslib.SliceBroadcastRelay;
 
 /**
  * Responds to actions performed on slices and notifies slices of updates in state changes.
@@ -84,12 +83,6 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
             case ACTION_ZEN_MODE_SLICE_CHANGED:
                 ZenModeSliceBuilder.handleUriChange(context, intent);
                 break;
-            default:
-                final String uriString = intent.getStringExtra(SliceBroadcastRelay.EXTRA_URI);
-                if (!TextUtils.isEmpty(uriString)) {
-                    final Uri uri = Uri.parse(uriString);
-                    context.getContentResolver().notifyChange(uri, null /* observer */);
-                }
         }
     }
 

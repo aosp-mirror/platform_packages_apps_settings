@@ -159,8 +159,12 @@ public class SliceBroadcastReceiverTest {
 
         assertThat(fakeToggleController.isChecked()).isFalse();
 
-        final Uri expectedUri = SliceBuilderUtils.getUri(
-                SettingsSlicesContract.PATH_SETTING_ACTION + "/" + key, false);
+        final Uri expectedUri = new Uri.Builder()
+                .scheme(ContentResolver.SCHEME_CONTENT)
+                .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+                .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+                .appendPath(key)
+                .build();
         verify(resolver).notifyChange(eq(expectedUri), eq(null));
     }
 
