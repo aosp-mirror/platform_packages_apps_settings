@@ -29,6 +29,8 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settingslib.utils.ThreadUtils;
+
 /**
  * Provider stores and manages user interaction feedback for homepage contextual cards.
  */
@@ -61,9 +63,7 @@ public class CardContentProvider extends ContentProvider {
     public Uri insert(Uri uri, ContentValues values) {
         final StrictMode.ThreadPolicy oldPolicy = StrictMode.getThreadPolicy();
         try {
-            if (Build.IS_DEBUGGABLE) {
-                enableStrictMode(true);
-            }
+            maybeEnableStrictMode();
 
             final SQLiteDatabase database = mDBHelper.getWritableDatabase();
             final String table = getTableFromMatch(uri);
@@ -84,10 +84,7 @@ public class CardContentProvider extends ContentProvider {
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         final StrictMode.ThreadPolicy oldPolicy = StrictMode.getThreadPolicy();
         try {
-            if (Build.IS_DEBUGGABLE) {
-                enableStrictMode(true);
-            }
-
+            maybeEnableStrictMode();
             final SQLiteDatabase database = mDBHelper.getWritableDatabase();
             final String table = getTableFromMatch(uri);
             final int rowsDeleted = database.delete(table, selection, selectionArgs);
@@ -108,9 +105,7 @@ public class CardContentProvider extends ContentProvider {
             String[] selectionArgs, String sortOrder) {
         final StrictMode.ThreadPolicy oldPolicy = StrictMode.getThreadPolicy();
         try {
-            if (Build.IS_DEBUGGABLE) {
-                enableStrictMode(true);
-            }
+            maybeEnableStrictMode();
 
             final SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
             final String table = getTableFromMatch(uri);
@@ -130,9 +125,7 @@ public class CardContentProvider extends ContentProvider {
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         final StrictMode.ThreadPolicy oldPolicy = StrictMode.getThreadPolicy();
         try {
-            if (Build.IS_DEBUGGABLE) {
-                enableStrictMode(true);
-            }
+            maybeEnableStrictMode();
 
             final SQLiteDatabase database = mDBHelper.getWritableDatabase();
             final String table = getTableFromMatch(uri);
@@ -144,10 +137,16 @@ public class CardContentProvider extends ContentProvider {
         }
     }
 
-    private void enableStrictMode(boolean enabled) {
-        StrictMode.setThreadPolicy(enabled
-                ? new StrictMode.ThreadPolicy.Builder().detectAll().build()
-                : StrictMode.ThreadPolicy.LAX);
+    @VisibleForTesting
+    void maybeEnableStrictMode() {
+        if (Build.IS_DEBUGGABLE && ThreadUtils.isMainThread()) {
+            enableStrictMode();
+        }
+    }
+
+    @VisibleForTesting
+    void enableStrictMode() {
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().build());
     }
 
     @VisibleForTesting
