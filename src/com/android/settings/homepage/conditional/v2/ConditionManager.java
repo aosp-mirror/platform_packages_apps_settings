@@ -28,6 +28,13 @@ import com.android.settings.homepage.conditional.ConditionListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 public class ConditionManager {
     private static final String TAG = "ConditionManager";
@@ -37,6 +44,9 @@ public class ConditionManager {
     @VisibleForTesting
     final List<ConditionalCardController> mCardControllers;
 
+    private static final long DISPLAYABLE_CHECKER_TIMEOUT_MS = 20;
+
+    private final ExecutorService mExecutorService;
     private final Context mAppContext;
     private final ConditionListener mListener;
 
@@ -51,6 +61,7 @@ public class ConditionManager {
 
     public ConditionManager(Context context, ConditionListener listener) {
         mAppContext = context.getApplicationContext();
+        mExecutorService = Executors.newCachedThreadPool();
         mCandidates = new ArrayList<>();
         mCardControllers = new ArrayList<>();
         mListener = listener;
@@ -62,9 +73,23 @@ public class ConditionManager {
      */
     public List<ConditionalCard> getDisplayableCards() {
         final List<ConditionalCard> cards = new ArrayList<>();
+        final List<Future<ConditionalCard>> displayableCards = new ArrayList<>();
+        // Check displayable future
         for (ConditionalCard card : mCandidates) {
-            if (getController(card.getId()).isDisplayable()) {
-                cards.add(card);
+            final DisplayableChecker future = new DisplayableChecker(
+                    card, getController(card.getId()));
+            displayableCards.add(mExecutorService.submit(future));
+        }
+        // Collect future and add displayable cards
+        for (Future<ConditionalCard> cardFuture : displayableCards) {
+            try {
+                final ConditionalCard card = cardFuture.get(DISPLAYABLE_CHECKER_TIMEOUT_MS,
+                        TimeUnit.MILLISECONDS);
+                if (card != null) {
+                    cards.add(card);
+                }
+            } catch (InterruptedException | ExecutionException | TimeoutException e) {
+                Log.w(TAG, "Failed to get displayable state for card, likely timeout. Skipping", e);
             }
         }
         return cards;
@@ -88,7 +113,6 @@ public class ConditionManager {
         getController(id).onActionClick();
         onConditionChanged();
     }
-
 
     /**
      * Start monitoring state change for all conditions
@@ -163,6 +187,24 @@ public class ConditionManager {
         mCandidates.add(new RingerMutedConditionCard(mAppContext));
         mCandidates.add(new RingerVibrateConditionCard(mAppContext));
         mCandidates.add(new WorkModeConditionCard(mAppContext));
+    }
 
+    /**
+     * Returns card if controller says it's displayable. Otherwise returns null.
+     */
+    public static class DisplayableChecker implements Callable<ConditionalCard> {
+
+        private final ConditionalCard mCard;
+        private final ConditionalCardController mController;
+
+        private DisplayableChecker(ConditionalCard card, ConditionalCardController controller) {
+            mCard = card;
+            mController = controller;
+        }
+
+        @Override
+        public ConditionalCard call() throws Exception {
+            return mController.isDisplayable() ? mCard : null;
+        }
     }
 }
