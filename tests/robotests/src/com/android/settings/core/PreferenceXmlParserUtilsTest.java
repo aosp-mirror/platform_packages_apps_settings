@@ -16,7 +16,10 @@
 
 package com.android.settings.core;
 
+import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEY;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEYWORDS;
+import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_SEARCHABLE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
@@ -247,8 +250,7 @@ public class PreferenceXmlParserUtilsTest {
 
     @Test
     @Config(qualifiers = "mcc999")
-    public void extractMetadata_requestIncludesKeywords_shouldContainKeywords()
-            throws IOException, XmlPullParserException {
+    public void extractMetadata_requestIncludesKeywords_shouldContainKeywords() throws Exception {
         final String expectedKeywords = "a, b, c";
         final List<Bundle> metadata = PreferenceXmlParserUtils.extractMetadata(mContext,
                 R.xml.location_settings,
@@ -258,6 +260,32 @@ public class PreferenceXmlParserUtilsTest {
         final String keywords = bundle.getString(METADATA_KEYWORDS);
 
         assertThat(keywords).isEqualTo(expectedKeywords);
+    }
+
+    @Test
+    public void extractMetadata_requestSearchable_shouldDefaultToTrue() throws Exception {
+        final List<Bundle> metadata = PreferenceXmlParserUtils.extractMetadata(mContext,
+                R.xml.display_settings, MetadataFlag.FLAG_NEED_SEARCHABLE);
+        for (Bundle bundle : metadata) {
+            assertThat(bundle.getBoolean(METADATA_SEARCHABLE)).isTrue();
+        }
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void extractMetadata_requestSearchable_shouldReturnAttributeValue() throws Exception {
+        final List<Bundle> metadata = PreferenceXmlParserUtils.extractMetadata(mContext,
+                R.xml.display_settings,
+                MetadataFlag.FLAG_NEED_KEY | MetadataFlag.FLAG_NEED_SEARCHABLE);
+        boolean foundKey = false;
+        for (Bundle bundle : metadata) {
+            if (TextUtils.equals(bundle.getString(METADATA_KEY), "pref_key_5")) {
+                assertThat(bundle.getBoolean(METADATA_SEARCHABLE)).isFalse();
+                foundKey = true;
+                break;
+            }
+        }
+        assertThat(foundKey).isTrue();
     }
 
     /**

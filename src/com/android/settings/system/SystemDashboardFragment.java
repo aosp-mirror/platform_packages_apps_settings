@@ -101,8 +101,6 @@ public class SystemDashboardFragment extends DashboardFragment {
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
-                    keys.add((new BackupSettingsActivityPreferenceController(
-                            context).getPreferenceKey()));
                     keys.add(KEY_RESET);
                     return keys;
                 }

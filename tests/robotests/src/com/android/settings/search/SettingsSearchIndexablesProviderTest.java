@@ -1,6 +1,7 @@
 package com.android.settings.search;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 
@@ -20,6 +21,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SettingsSearchIndexablesProviderTest {
@@ -96,16 +100,19 @@ public class SettingsSearchIndexablesProviderTest {
     @Test
     @Config(qualifiers = "mcc999")
     public void testNonIndexablesColumnFetched() {
-        Uri rawUri = Uri.parse("content://" + BASE_AUTHORITY + "/" +
+        final Uri rawUri = Uri.parse("content://" + BASE_AUTHORITY + "/" +
                 SearchIndexablesContract.NON_INDEXABLES_KEYS_PATH);
 
-        final Cursor cursor = mProvider.query(rawUri,
-                SearchIndexablesContract.NON_INDEXABLES_KEYS_COLUMNS, null, null, null);
+        final List<String> keys = new ArrayList<>();
 
-        cursor.moveToFirst();
-        assertThat(cursor.getCount()).isEqualTo(2);
-        assertThat(cursor.getString(0)).isEqualTo("pref_key_1");
-        cursor.moveToNext();
-        assertThat(cursor.getString(0)).isEqualTo("pref_key_3");
+        try (Cursor cursor = mProvider.query(rawUri,
+                SearchIndexablesContract.NON_INDEXABLES_KEYS_COLUMNS, null, null, null)) {
+            while (cursor.moveToNext()) {
+                keys.add(cursor.getString(0));
+            }
+        }
+
+        assertThat(keys).hasSize(3);
+        assertThat(keys).containsAllOf("pref_key_1", "pref_key_3", "pref_key_5");
     }
 }

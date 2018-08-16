@@ -108,7 +108,7 @@ public class LanguageAndInputSettings extends DashboardFragment {
 
         // Pointer and Tts
         final TtsPreferenceController ttsPreferenceController =
-                new TtsPreferenceController(context, new TtsEngines(context));
+                new TtsPreferenceController(context, KEY_TEXT_TO_SPEECH);
         controllers.add(ttsPreferenceController);
         final PointerSpeedController pointerController = new PointerSpeedController(context);
         controllers.add(pointerController);
@@ -180,7 +180,6 @@ public class LanguageAndInputSettings extends DashboardFragment {
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
                     // Duplicates in summary and details pages.
-                    keys.add(KEY_TEXT_TO_SPEECH);
                     keys.add(KEY_PHYSICAL_KEYBOARD);
                     return keys;
                 }

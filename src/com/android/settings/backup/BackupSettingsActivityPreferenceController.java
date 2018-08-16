@@ -40,7 +40,7 @@ public class BackupSettingsActivityPreferenceController extends BasePreferenceCo
     @Override
     public int getAvailabilityStatus() {
         return mUm.isAdminUser()
-                ? AVAILABLE
+                ? AVAILABLE_UNSEARCHABLE
                 : UNSUPPORTED_ON_DEVICE;
     }
 

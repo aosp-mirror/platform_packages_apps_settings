@@ -25,7 +25,7 @@
         android:key="assist_and_voice_input"
         android:title="@string/assist_and_voice_input_title"
         android:fragment="com.android.settings.applications.assist.ManageAssist"
-        settings:keywords="@string/keywords_assist_input"/>
+        settings:searchable="false"/>
 
     <com.android.settings.widget.AppPreference
         android:key="default_browser"
@@ -86,7 +86,8 @@
         <com.android.settings.widget.AppPreference
             android:key="work_default_browser"
             android:title="@string/default_browser_title"
-            android:fragment="com.android.settings.applications.defaultapps.DefaultBrowserPicker">
+            android:fragment="com.android.settings.applications.defaultapps.DefaultBrowserPicker"
+            settings:searchable="false">
             <extra android:name="for_work" android:value="true" />
         </com.android.settings.widget.AppPreference>
 
@@ -94,7 +95,7 @@
             android:key="work_default_phone_app"
             android:title="@string/default_phone_title"
             android:fragment="com.android.settings.applications.defaultapps.DefaultPhonePicker"
-            settings:keywords="@string/keywords_default_phone_app">
+            settings:searchable="false">
             <extra android:name="for_work" android:value="true" />
         </com.android.settings.widget.AppPreference>
 

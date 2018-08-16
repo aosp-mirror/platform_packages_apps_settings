@@ -47,6 +47,9 @@ public class SwipeUpPreferenceController extends GesturePreferenceController {
 
         final ComponentName recentsComponentName = ComponentName.unflattenFromString(
                 context.getString(R.string.config_recentsComponentName));
+        if (recentsComponentName == null) {
+            return false;
+        }
         final Intent quickStepIntent = new Intent(ACTION_QUICKSTEP)
                 .setPackage(recentsComponentName.getPackageName());
         if (context.getPackageManager().resolveService(quickStepIntent,
