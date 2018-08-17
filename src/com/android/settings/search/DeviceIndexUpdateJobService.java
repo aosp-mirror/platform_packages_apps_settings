@@ -43,6 +43,7 @@ import androidx.slice.SliceViewManager;
 import androidx.slice.SliceViewManager.SliceCallback;
 import androidx.slice.core.SliceQuery;
 import androidx.slice.widget.ListContent;
+import androidx.slice.widget.SliceContent;
 
 public class DeviceIndexUpdateJobService extends JobService {
 
@@ -134,7 +135,7 @@ public class DeviceIndexUpdateJobService extends JobService {
 
     protected CharSequence findTitle(Slice loadedSlice, SliceMetadata metaData) {
         ListContent content = new ListContent(null, loadedSlice);
-        SliceItem headerItem = content.getHeaderItem();
+        SliceContent headerItem = content.getHeader();
         if (headerItem == null) {
             if (content.getRowItems().size() != 0) {
                 headerItem = content.getRowItems().get(0);
@@ -143,15 +144,15 @@ public class DeviceIndexUpdateJobService extends JobService {
             }
         }
         // Look for a title, then large text, then any text at all.
-        SliceItem title = SliceQuery.find(headerItem, FORMAT_TEXT, HINT_TITLE, null);
+        SliceItem title = SliceQuery.find(headerItem.getSliceItem(), FORMAT_TEXT, HINT_TITLE, null);
         if (title != null) {
             return title.getText();
         }
-        title = SliceQuery.find(headerItem, FORMAT_TEXT, HINT_LARGE, null);
+        title = SliceQuery.find(headerItem.getSliceItem(), FORMAT_TEXT, HINT_LARGE, null);
         if (title != null) {
             return title.getText();
         }
-        title = SliceQuery.find(headerItem, FORMAT_TEXT);
+        title = SliceQuery.find(headerItem.getSliceItem(), FORMAT_TEXT);
         if (title != null) {
             return title.getText();
         }
