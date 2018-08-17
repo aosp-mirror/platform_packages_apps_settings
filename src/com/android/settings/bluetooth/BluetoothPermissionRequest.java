@@ -231,8 +231,7 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
             bluetoothManager.getCachedDeviceManager();
         CachedBluetoothDevice cachedDevice = cachedDeviceManager.findDevice(mDevice);
         if (cachedDevice == null) {
-            cachedDevice = cachedDeviceManager.addDevice(bluetoothManager.getBluetoothAdapter(),
-                mDevice);
+            cachedDevice = cachedDeviceManager.addDevice(mDevice);
         }
 
         String intentName = BluetoothDevice.ACTION_CONNECTION_ACCESS_REPLY;
