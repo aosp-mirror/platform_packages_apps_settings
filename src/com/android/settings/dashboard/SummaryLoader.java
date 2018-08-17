@@ -96,7 +96,7 @@ public class SummaryLoader {
                 return;
             }
             if (DEBUG) {
-                Log.d(TAG, "setSummary " + tile.title + " - " + summary);
+                Log.d(TAG, "setSummary " + tile.getDescription() + " - " + summary);
             }
 
             updateSummaryIfNeeded(tile, summary);
@@ -107,7 +107,8 @@ public class SummaryLoader {
     void updateSummaryIfNeeded(Tile tile, CharSequence summary) {
         if (TextUtils.equals(tile.summary, summary)) {
             if (DEBUG) {
-                Log.d(TAG, "Summary doesn't change, skipping summary update for " + tile.title);
+                Log.d(TAG, "Summary doesn't change, skipping summary update for "
+                        + tile.getDescription());
             }
             return;
         }
@@ -118,7 +119,7 @@ public class SummaryLoader {
         } else {
             if (DEBUG) {
                 Log.d(TAG, "SummaryConsumer is null, skipping summary update for "
-                        + tile.title);
+                        + tile.getDescription());
             }
         }
     }

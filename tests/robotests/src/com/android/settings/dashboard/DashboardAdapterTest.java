@@ -15,6 +15,8 @@
  */
 package com.android.settings.dashboard;
 
+import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_TITLE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -95,6 +97,7 @@ public class DashboardAdapterTest {
         mActivityInfo.packageName = "pkg";
         mActivityInfo.name = "class";
         mActivityInfo.metaData = new Bundle();
+        mActivityInfo.metaData.putString(META_DATA_PREFERENCE_TITLE, "test-title");
 
         when(mContext.getSystemService(Context.WINDOW_SERVICE)).thenReturn(mWindowManager);
         when(mContext.getResources()).thenReturn(mResources);

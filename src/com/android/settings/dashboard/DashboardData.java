@@ -33,7 +33,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Description about data list used in the DashboardAdapter. In the data list each item can be
@@ -147,7 +146,7 @@ public class DashboardData {
      * Find the position of the Tile object.
      * <p>
      * First, try to find the exact identical instance of the tile object, if not found,
-     * then try to find a tile has the same title.
+     * then try to find a tile has the same id.
      *
      * @param tile tile that need to be found
      * @return position of the object, return INDEX_NOT_FOUND if object isn't in the list
@@ -158,7 +157,7 @@ public class DashboardData {
             final Object entity = mItems.get(i).entity;
             if (entity == tile) {
                 return i;
-            } else if (entity instanceof Tile && tile.title.equals(((Tile) entity).title)) {
+            } else if (entity instanceof Tile && tile.getId() == ((Tile) entity).getId()) {
                 return i;
             }
         }
@@ -227,7 +226,7 @@ public class DashboardData {
             final List<Tile> tiles = mCategory.getTiles();
             for (int i = 0; i < tiles.size(); i++) {
                 final Tile tile = tiles.get(i);
-                addToItemList(tile, R.layout.dashboard_tile, Objects.hash(tile.title),
+                addToItemList(tile, R.layout.dashboard_tile, tile.getId(),
                         true /* add */);
             }
         }
@@ -425,8 +424,8 @@ public class DashboardData {
                     final Tile localTile = (Tile) entity;
                     final Tile targetTile = (Tile) targetItem.entity;
 
-                    // Only check title and summary for dashboard tile
-                    return TextUtils.equals(localTile.title, targetTile.title)
+                    // Only check id and summary for dashboard tile
+                    return localTile.getId() == targetTile.getId()
                             && TextUtils.equals(localTile.summary, targetTile.summary);
                 case TYPE_SUGGESTION_CONTAINER:
                 case TYPE_CONDITION_CONTAINER:

@@ -106,7 +106,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         if (pref == null) {
             return;
         }
-        pref.setTitle(tile.title);
+        pref.setTitle(tile.getTitle(activity.getApplicationContext()));
         if (!TextUtils.isEmpty(key)) {
             pref.setKey(key);
         } else {
