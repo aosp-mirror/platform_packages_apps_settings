@@ -443,7 +443,7 @@ public class WifiSettings extends RestrictedSettingsFragment
             }
         }
 
-        if (mWifiToNfcDialog != null && mWifiToNfcDialog.isShowing()) {
+        if (mWifiToNfcDialog != null) {
             Bundle savedState = new Bundle();
             mWifiToNfcDialog.saveState(savedState);
             outState.putBundle(SAVED_WIFI_NFC_DIALOG_STATE, savedState);
@@ -617,7 +617,6 @@ public class WifiSettings extends RestrictedSettingsFragment
                     mWifiToNfcDialog = new WriteWifiConfigToNfcDialog(getActivity(),
                             mWifiNfcDialogSavedState);
                 }
-
                 return mWifiToNfcDialog;
         }
         return super.onCreateDialog(dialogId);
@@ -633,6 +632,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     public void onDismiss(DialogInterface dialog) {
         // We don't keep any dialog object when dialog was dismissed.
         mDialog = null;
+        mWifiToNfcDialog = null;
     }
 
     @Override
