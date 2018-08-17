@@ -24,6 +24,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
@@ -87,7 +88,7 @@ import java.util.List;
 @SearchIndexable
 public class WifiSettings extends RestrictedSettingsFragment
         implements Indexable, WifiTracker.WifiListener, AccessPointListener,
-        WifiDialog.WifiDialogListener {
+        WifiDialog.WifiDialogListener, DialogInterface.OnDismissListener {
 
     private static final String TAG = "WifiSettings";
 
@@ -432,9 +433,8 @@ public class WifiSettings extends RestrictedSettingsFragment
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-
-        // If the dialog is showing, save its state.
-        if (mDialog != null && mDialog.isShowing()) {
+        // If dialog has been shown, save its state.
+        if (mDialog != null) {
             outState.putInt(SAVE_DIALOG_MODE, mDialogMode);
             if (mDlgAccessPoint != null) {
                 mAccessPointSavedState = new Bundle();
@@ -443,7 +443,7 @@ public class WifiSettings extends RestrictedSettingsFragment
             }
         }
 
-        if (mWifiToNfcDialog != null && mWifiToNfcDialog.isShowing()) {
+        if (mWifiToNfcDialog != null) {
             Bundle savedState = new Bundle();
             mWifiToNfcDialog.saveState(savedState);
             outState.putBundle(SAVED_WIFI_NFC_DIALOG_STATE, savedState);
@@ -617,10 +617,22 @@ public class WifiSettings extends RestrictedSettingsFragment
                     mWifiToNfcDialog = new WriteWifiConfigToNfcDialog(getActivity(),
                             mWifiNfcDialogSavedState);
                 }
-
                 return mWifiToNfcDialog;
         }
         return super.onCreateDialog(dialogId);
+    }
+
+    @Override
+    public void onDialogShowing() {
+        super.onDialogShowing();
+        setOnDismissListener(this);
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        // We don't keep any dialog object when dialog was dismissed.
+        mDialog = null;
+        mWifiToNfcDialog = null;
     }
 
     @Override
