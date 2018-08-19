@@ -94,7 +94,8 @@ public class FeatureFactoryImpl extends FeatureFactory {
     @Override
     public PowerUsageFeatureProvider getPowerUsageFeatureProvider(Context context) {
         if (mPowerUsageFeatureProvider == null) {
-            mPowerUsageFeatureProvider = new PowerUsageFeatureProviderImpl(context);
+            mPowerUsageFeatureProvider = new PowerUsageFeatureProviderImpl(
+                    context.getApplicationContext());
         }
         return mPowerUsageFeatureProvider;
     }
@@ -102,7 +103,8 @@ public class FeatureFactoryImpl extends FeatureFactory {
     @Override
     public DashboardFeatureProvider getDashboardFeatureProvider(Context context) {
         if (mDashboardFeatureProvider == null) {
-            mDashboardFeatureProvider = new DashboardFeatureProviderImpl(context);
+            mDashboardFeatureProvider = new DashboardFeatureProviderImpl(
+                    context.getApplicationContext());
         }
         return mDashboardFeatureProvider;
     }
@@ -118,10 +120,11 @@ public class FeatureFactoryImpl extends FeatureFactory {
     @Override
     public ApplicationFeatureProvider getApplicationFeatureProvider(Context context) {
         if (mApplicationFeatureProvider == null) {
-            mApplicationFeatureProvider = new ApplicationFeatureProviderImpl(context,
-                    new PackageManagerWrapper(context.getPackageManager()),
+            final Context appContext = context.getApplicationContext();
+            mApplicationFeatureProvider = new ApplicationFeatureProviderImpl(appContext,
+                    new PackageManagerWrapper(appContext.getPackageManager()),
                     AppGlobals.getPackageManager(),
-                    (DevicePolicyManager) context
+                    (DevicePolicyManager) appContext
                             .getSystemService(Context.DEVICE_POLICY_SERVICE));
         }
         return mApplicationFeatureProvider;
@@ -138,12 +141,14 @@ public class FeatureFactoryImpl extends FeatureFactory {
     @Override
     public EnterprisePrivacyFeatureProvider getEnterprisePrivacyFeatureProvider(Context context) {
         if (mEnterprisePrivacyFeatureProvider == null) {
-            mEnterprisePrivacyFeatureProvider = new EnterprisePrivacyFeatureProviderImpl(context,
-                    (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE),
-                    new PackageManagerWrapper(context.getPackageManager()),
-                    UserManager.get(context),
-                    (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE),
-                    context.getResources());
+            final Context appContext = context.getApplicationContext();
+            mEnterprisePrivacyFeatureProvider = new EnterprisePrivacyFeatureProviderImpl(appContext,
+                    (DevicePolicyManager) appContext
+                            .getSystemService(Context.DEVICE_POLICY_SERVICE),
+                    new PackageManagerWrapper(appContext.getPackageManager()),
+                    UserManager.get(appContext),
+                    (ConnectivityManager) appContext.getSystemService(Context.CONNECTIVITY_SERVICE),
+                    appContext.getResources());
         }
         return mEnterprisePrivacyFeatureProvider;
     }
@@ -172,7 +177,8 @@ public class FeatureFactoryImpl extends FeatureFactory {
     @Override
     public SuggestionFeatureProvider getSuggestionFeatureProvider(Context context) {
         if (mSuggestionFeatureProvider == null) {
-            mSuggestionFeatureProvider = new SuggestionFeatureProviderImpl(context);
+            mSuggestionFeatureProvider = new SuggestionFeatureProviderImpl(
+                    context.getApplicationContext());
         }
         return mSuggestionFeatureProvider;
     }
@@ -180,7 +186,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
     @Override
     public UserFeatureProvider getUserFeatureProvider(Context context) {
         if (mUserFeatureProvider == null) {
-            mUserFeatureProvider = new UserFeatureProviderImpl(context);
+            mUserFeatureProvider = new UserFeatureProviderImpl(context.getApplicationContext());
         }
         return mUserFeatureProvider;
     }
