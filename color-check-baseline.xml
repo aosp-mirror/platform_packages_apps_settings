@@ -2,6 +2,18 @@
 <issues format="4">
 
     <issue
+        id="LintError"
+        severity="Error"
+        message="No `.class` files were found in project &quot;.&quot;, so none of the classfile based checks could be run. Does the project need to be built first?"
+        category="Lint"
+        priority="10"
+        summary="Lint Failure"
+        explanation="This issue type represents a problem running lint itself. Examples include failure to find bytecode for source files (which means certain detectors could not be run), parsing errors in lint configuration files, etc.&#xA;These errors are not errors in your own code, but they are shown to make it clear that some checks were not completed.">
+        <location
+            file="."/>
+    </issue>
+
+    <issue
         id="HardCodedColor"
         severity="Error"
         message="Avoid using hardcoded color"
@@ -1321,6 +1333,86 @@
         priority="4"
         summary="Using hardcoded color"
         explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="    &lt;color name=&quot;face_anim_particle_color_1&quot;>#ff00bcd4&lt;/color> &lt;!-- Material Cyan 500 -->"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/values/colors.xml"
+            line="140"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="    &lt;color name=&quot;face_anim_particle_color_2&quot;>#ffef6c00&lt;/color> &lt;!-- Material Orange 800 -->"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/values/colors.xml"
+            line="141"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="    &lt;color name=&quot;face_anim_particle_color_3&quot;>#ff4caf50&lt;/color> &lt;!-- Material Green 500 -->"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/values/colors.xml"
+            line="142"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="    &lt;color name=&quot;face_anim_particle_color_4&quot;>#fffdd835&lt;/color> &lt;!-- Material Yellow 600 -->"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/values/colors.xml"
+            line="143"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="    &lt;color name=&quot;face_anim_particle_error&quot;>#ff9e9e9e&lt;/color> &lt;!-- Material Gray 500 -->"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/values/colors.xml"
+            line="144"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
         errorLine1="                android:background=&quot;@color/lock_pattern_background&quot; />"
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -2413,7 +2505,7 @@
         errorLine2="                                   ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/strings.xml"
-            line="5902"
+            line="5898"
             column="36"/>
     </issue>
 
@@ -2557,7 +2649,7 @@
         errorLine2="                                            ^">
         <location
             file="res/values/themes.xml"
-            line="147"
+            line="151"
             column="45"/>
     </issue>
 
@@ -2573,7 +2665,7 @@
         errorLine2="                                                ^">
         <location
             file="res/values/themes.xml"
-            line="148"
+            line="152"
             column="49"/>
     </issue>
 
@@ -2589,7 +2681,7 @@
         errorLine2="                                            ^">
         <location
             file="res/values/themes.xml"
-            line="156"
+            line="160"
             column="45"/>
     </issue>
 
@@ -2605,7 +2697,7 @@
         errorLine2="                                                ^">
         <location
             file="res/values/themes.xml"
-            line="157"
+            line="161"
             column="49"/>
     </issue>
 

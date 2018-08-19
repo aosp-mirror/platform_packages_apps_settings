@@ -49,6 +49,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.SimpleAdapter;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.annotation.WorkerThread;
+import androidx.appcompat.app.AlertDialog;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.util.UserIcons;
 import com.android.internal.widget.LockPatternUtils;
@@ -75,13 +82,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.annotation.WorkerThread;
-import androidx.appcompat.app.AlertDialog;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceScreen;
 
 /**
  * Screen that manages the list of users on the device.
@@ -635,8 +635,8 @@ public class UserSettings extends SettingsPreferenceFragment
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 SimpleAdapter adapter = new SimpleAdapter(builder.getContext(),
                         data, R.layout.two_line_list_item,
-                        new String[] {KEY_TITLE, KEY_SUMMARY},
-                        new int[] {R.id.title, R.id.summary});
+                        new String[]{KEY_TITLE, KEY_SUMMARY},
+                        new int[]{R.id.title, R.id.summary});
                 builder.setTitle(R.string.user_add_user_type_title);
                 builder.setAdapter(adapter,
                         new DialogInterface.OnClickListener() {
@@ -1238,8 +1238,10 @@ public class UserSettings extends SettingsPreferenceFragment
                 }
 
                 @Override
-                public List<String> getNonIndexableKeysFromXml(Context context, int xmlResId) {
-                    final List<String> niks = super.getNonIndexableKeysFromXml(context, xmlResId);
+                public List<String> getNonIndexableKeysFromXml(Context context, int xmlResId,
+                        boolean suppressAllPage) {
+                    final List<String> niks = super.getNonIndexableKeysFromXml(context, xmlResId,
+                            suppressAllPage);
                     new AddUserWhenLockedPreferenceController(context, KEY_ADD_USER_WHEN_LOCKED)
                             .updateNonIndexableKeys(niks);
                     new AutoSyncDataPreferenceController(context, null /* parent */)

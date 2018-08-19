@@ -33,10 +33,9 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowAudioManager;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
+import com.android.settings.testutils.shadow.ShadowCachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.HeadsetProfile;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 
 import org.junit.Before;
@@ -52,7 +51,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {ShadowAudioManager.class, ShadowBluetoothAdapter.class})
+@Config(shadows = {ShadowAudioManager.class, ShadowBluetoothAdapter.class,
+        ShadowCachedBluetoothDeviceManager.class})
 public class AvailableMediaBluetoothDeviceUpdaterTest {
     @Mock
     private DashboardFragment mDashboardFragment;
@@ -62,21 +62,14 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
     private CachedBluetoothDevice mCachedBluetoothDevice;
     @Mock
     private BluetoothDevice mBluetoothDevice;
-    @Mock
-    private LocalBluetoothManager mLocalManager;
-    @Mock
-    private LocalBluetoothProfileManager mLocalBluetoothProfileManager;
-    @Mock
-    private HeadsetProfile mHeadsetProfile;
-    @Mock
-    private CachedBluetoothDeviceManager mCachedDeviceManager;
 
     private Context mContext;
     private AvailableMediaBluetoothDeviceUpdater mBluetoothDeviceUpdater;
-    private Collection<CachedBluetoothDevice> cachedDevices;
+    private Collection<CachedBluetoothDevice> mCachedDevices;
     private ShadowAudioManager mShadowAudioManager;
     private BluetoothDevicePreference mPreference;
     private ShadowBluetoothAdapter mShadowBluetoothAdapter;
+    private ShadowCachedBluetoothDeviceManager mShadowCachedBluetoothDeviceManager;
 
     @Before
     public void setUp() {
@@ -86,18 +79,17 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
         mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
         mShadowBluetoothAdapter.setEnabled(true);
         mContext = RuntimeEnvironment.application;
-        doReturn(mContext).when(mDashboardFragment).getContext();
-        cachedDevices =
+        mShadowCachedBluetoothDeviceManager = Shadow.extract(
+                Utils.getLocalBtManager(mContext).getCachedDeviceManager());
+        mCachedDevices =
                 new ArrayList<CachedBluetoothDevice>(new ArrayList<CachedBluetoothDevice>());
+        mShadowCachedBluetoothDeviceManager.setCachedDevicesCopy(mCachedDevices);
 
+        doReturn(mContext).when(mDashboardFragment).getContext();
         when(mCachedBluetoothDevice.getDevice()).thenReturn(mBluetoothDevice);
-        when(mLocalManager.getProfileManager()).thenReturn(mLocalBluetoothProfileManager);
-        when(mLocalBluetoothProfileManager.getHeadsetProfile()).thenReturn(mHeadsetProfile);
-        when(mLocalManager.getCachedDeviceManager()).thenReturn(mCachedDeviceManager);
-        when(mCachedDeviceManager.getCachedDevicesCopy()).thenReturn(cachedDevices);
 
-        mBluetoothDeviceUpdater = spy(new AvailableMediaBluetoothDeviceUpdater(mDashboardFragment,
-                mDevicePreferenceCallback, mLocalManager));
+        mBluetoothDeviceUpdater = spy(new AvailableMediaBluetoothDeviceUpdater(mContext,
+                mDashboardFragment, mDevicePreferenceCallback));
         mBluetoothDeviceUpdater.setPrefContext(mContext);
         mPreference = new BluetoothDevicePreference(mContext, mCachedBluetoothDevice, false);
         doNothing().when(mBluetoothDeviceUpdater).addPreference(any());
@@ -110,7 +102,7 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
         when(mBluetoothDeviceUpdater.
                 isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
         when(mCachedBluetoothDevice.isHfpDevice()).thenReturn(true);
-        cachedDevices.add(mCachedBluetoothDevice);
+        mCachedDevices.add(mCachedBluetoothDevice);
 
         mBluetoothDeviceUpdater.onAudioModeChanged();
 
@@ -123,7 +115,7 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
         when(mBluetoothDeviceUpdater.
                 isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
         when(mCachedBluetoothDevice.isHfpDevice()).thenReturn(true);
-        cachedDevices.add(mCachedBluetoothDevice);
+        mCachedDevices.add(mCachedBluetoothDevice);
 
         mBluetoothDeviceUpdater.onAudioModeChanged();
 
@@ -136,7 +128,7 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
         when(mBluetoothDeviceUpdater.
                 isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
         when(mCachedBluetoothDevice.isA2dpDevice()).thenReturn(true);
-        cachedDevices.add(mCachedBluetoothDevice);
+        mCachedDevices.add(mCachedBluetoothDevice);
 
         mBluetoothDeviceUpdater.onAudioModeChanged();
 
@@ -149,7 +141,7 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
         when(mBluetoothDeviceUpdater.
                 isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
         when(mCachedBluetoothDevice.isA2dpDevice()).thenReturn(true);
-        cachedDevices.add(mCachedBluetoothDevice);
+        mCachedDevices.add(mCachedBluetoothDevice);
 
         mBluetoothDeviceUpdater.onAudioModeChanged();
 

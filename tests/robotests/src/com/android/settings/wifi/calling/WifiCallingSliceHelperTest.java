@@ -64,6 +64,7 @@ import androidx.slice.SliceProvider;
 import androidx.slice.core.SliceAction;
 import androidx.slice.core.SliceQuery;
 import androidx.slice.widget.ListContent;
+import androidx.slice.widget.SliceContent;
 import androidx.slice.widget.RowContent;
 import androidx.slice.widget.SliceLiveData;
 
@@ -367,31 +368,27 @@ public class WifiCallingSliceHelperTest {
 
         // Get all the rows
         final ListContent listContent = new ListContent(mContext, slice);
-        final ArrayList<SliceItem> rowItems = listContent.getRowItems();
+        final ArrayList<SliceContent> rowItems = listContent.getRowItems();
 
         assertThat(rowItems.size()).isEqualTo(4 /* 4 items including header */);
 
         // First row is HEADER
-        SliceItem rowSliceItem = rowItems.get(0);
-        RowContent rowContent =  new RowContent(mContext, rowSliceItem, true);
+        RowContent rowContent = (RowContent) rowItems.get(0);
         assertThat(rowContent.getTitleItem().getText()).isEqualTo(mContext.getText(
                 R.string.wifi_calling_mode_title));
 
         // next is WIFI_ONLY
-        rowSliceItem = rowItems.get(1);
-        rowContent =  new RowContent(mContext, rowSliceItem, false);
+        rowContent =  (RowContent) rowItems.get(1);
         assertThat(rowContent.getTitleItem().getText()).isEqualTo(mContext.getText(
                 com.android.internal.R.string.wfc_mode_wifi_only_summary));
 
         // next is WIFI_PREFERRED
-        rowSliceItem = rowItems.get(2);
-        rowContent =  new RowContent(mContext, rowSliceItem, false);
+        rowContent =  (RowContent) rowItems.get(2);
         assertThat(rowContent.getTitleItem().getText()).isEqualTo(mContext.getText(
                 com.android.internal.R.string.wfc_mode_wifi_preferred_summary));
 
         // next is CELLULAR_PREFERRED
-        rowSliceItem = rowItems.get(3);
-        rowContent =  new RowContent(mContext, rowSliceItem, false);
+        rowContent =  (RowContent) rowItems.get(3);
         assertThat(rowContent.getTitleItem().getText()).isEqualTo(mContext.getText(
                 com.android.internal.R.string.wfc_mode_cellular_preferred_summary));
 

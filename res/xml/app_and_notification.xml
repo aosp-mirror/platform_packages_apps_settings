@@ -71,6 +71,7 @@
         android:key="special_access"
         android:fragment="com.android.settings.applications.specialaccess.SpecialAccessSettings"
         android:title="@string/special_access"
-        android:order="20" />
+        android:order="20"
+        settings:searchable="false"/>
 
 </PreferenceScreen>

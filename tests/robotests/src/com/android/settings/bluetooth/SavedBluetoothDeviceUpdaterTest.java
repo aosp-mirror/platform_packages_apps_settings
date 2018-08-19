@@ -29,9 +29,8 @@ import android.content.Context;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
-import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -39,8 +38,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(shadows = {ShadowBluetoothAdapter.class})
 public class SavedBluetoothDeviceUpdaterTest {
 
     @Mock
@@ -51,10 +52,6 @@ public class SavedBluetoothDeviceUpdaterTest {
     private CachedBluetoothDevice mCachedBluetoothDevice;
     @Mock
     private BluetoothDevice mBluetoothDevice;
-    @Mock
-    private LocalBluetoothManager mLocalManager;
-    @Mock
-    private LocalBluetoothProfileManager mLocalBluetoothProfileManager;
 
     private Context mContext;
     private SavedBluetoothDeviceUpdater mBluetoothDeviceUpdater;
@@ -67,11 +64,10 @@ public class SavedBluetoothDeviceUpdaterTest {
         mContext = RuntimeEnvironment.application;
         doReturn(mContext).when(mDashboardFragment).getContext();
         when(mCachedBluetoothDevice.getDevice()).thenReturn(mBluetoothDevice);
-        when(mLocalManager.getProfileManager()).thenReturn(mLocalBluetoothProfileManager);
         when(mBluetoothDevice.getBondState()).thenReturn(BluetoothDevice.BOND_BONDED);
 
-        mBluetoothDeviceUpdater = spy(new SavedBluetoothDeviceUpdater(mDashboardFragment,
-                mDevicePreferenceCallback, mLocalManager));
+        mBluetoothDeviceUpdater = spy(new SavedBluetoothDeviceUpdater(mContext, mDashboardFragment,
+                mDevicePreferenceCallback));
         mBluetoothDeviceUpdater.setPrefContext(mContext);
         mPreference = new BluetoothDevicePreference(mContext, mCachedBluetoothDevice, false);
         doNothing().when(mBluetoothDeviceUpdater).addPreference(any());

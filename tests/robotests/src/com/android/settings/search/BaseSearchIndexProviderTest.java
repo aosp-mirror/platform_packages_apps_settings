@@ -169,4 +169,24 @@ public class BaseSearchIndexProviderTest {
 
         assertThat(nonIndexableKeys).contains("status_header");
     }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void getNonIndexableKeys_hasSearchableAttributeInXml_shouldSuppressUnsearchable() {
+        final BaseSearchIndexProvider provider = new BaseSearchIndexProvider() {
+            @Override
+            public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                    boolean enabled) {
+                final SearchIndexableResource sir = new SearchIndexableResource(context);
+                sir.xmlResId = R.xml.display_settings;
+                return Collections.singletonList(sir);
+            }
+
+        };
+
+        final List<String> nonIndexableKeys =
+                provider.getNonIndexableKeys(RuntimeEnvironment.application);
+
+        assertThat(nonIndexableKeys).contains("pref_key_5");
+    }
 }

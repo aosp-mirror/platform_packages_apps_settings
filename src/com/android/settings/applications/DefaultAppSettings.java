@@ -102,16 +102,6 @@ public class DefaultAppSettings extends DashboardFragment {
                 }
 
                 @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    List<String> keys = super.getNonIndexableKeys(context);
-                    keys.add(KEY_ASSIST_VOICE_INPUT);
-                    // TODO (b/38230148) Remove these keys when we can differentiate work results
-                    keys.add(DefaultWorkPhonePreferenceController.KEY);
-                    keys.add(DefaultWorkBrowserPreferenceController.KEY);
-                    return keys;
-                }
-
-                @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     return buildPreferenceControllers(context);

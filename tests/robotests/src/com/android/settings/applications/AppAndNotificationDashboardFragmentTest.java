@@ -17,6 +17,7 @@
 package com.android.settings.applications;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -26,7 +27,6 @@ import android.os.UserManager;
 
 import com.android.settings.notification.EmergencyBroadcastPreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.XmlTestUtils;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,19 +42,16 @@ public class AppAndNotificationDashboardFragmentTest {
 
     @Test
     @Config(shadows = {ShadowEmergencyBroadcastPreferenceController.class})
-    public void testNonIndexableKeys_existInXmlLayout() {
+    public void getNonIndexableKeys_shouldIncludeSpecialAppAccess() {
         final Context context = spy(RuntimeEnvironment.application);
         UserManager manager = mock(UserManager.class);
         when(manager.isAdminUser()).thenReturn(true);
         when(context.getSystemService(Context.USER_SERVICE)).thenReturn(manager);
         final List<String> niks = AppAndNotificationDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
                 .getNonIndexableKeys(context);
-        AppAndNotificationDashboardFragment fragment = new AppAndNotificationDashboardFragment();
-        final int xmlId = fragment.getPreferenceScreenResId();
 
-        final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context, xmlId);
-
-        assertThat(keys).containsAllIn(niks);
+        assertThat(niks).contains(
+                new SpecialAppAccessPreferenceController(context).getPreferenceKey());
     }
 
     @Implements(EmergencyBroadcastPreferenceController.class)

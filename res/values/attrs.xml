@@ -69,6 +69,8 @@
     <declare-styleable name="Preference">
         <!-- Synonyms for search results -->
         <attr name="keywords" format="string" />
+        <!-- Whether or not the preference is searchable, by default it's true. -->
+        <attr name="searchable" format="boolean" />
         <!-- Classname of a PreferenceController corresponding to the preference -->
         <attr name="controller" format="string" />
         <!-- {@code true} when the controller declared represents a slice from {@link android.app.SettingsSliceContract} -->

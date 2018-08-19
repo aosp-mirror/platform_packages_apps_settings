@@ -73,7 +73,7 @@ public class EncryptionAndCredentialTest {
         final List<String> expectedKeys = new ArrayList<>();
         for (SearchIndexableResource res : index) {
             expectedKeys.addAll(((BaseSearchIndexProvider) SEARCH_INDEX_DATA_PROVIDER)
-                    .getNonIndexableKeysFromXml(mContext, res.xmlResId));
+                    .getNonIndexableKeysFromXml(mContext, res.xmlResId, true /* suppressAll */));
         }
         final List<String> keys = SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
 

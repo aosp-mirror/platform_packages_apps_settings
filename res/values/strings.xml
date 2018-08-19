@@ -3167,7 +3167,7 @@
     <!-- In-progress title. This string lets the user know the SD card is being formatted. The user won't be able to proceed with setup until this step is finished. The placeholder is for the name of the device (e.g. brand name of the SD card). [CHAR LIMIT=32] -->
     <string name="storage_wizard_format_progress_title">Formatting <xliff:g id="name" example="SD card">^1</xliff:g>\u2026</string>
     <!-- Subtext for a full-screen title. This string lets the user know that the SD card can't be removed during this process. The user won't be able to proceed with setup until this step is finished. The placeholder is for the specific device (e.g. SD card, USB drive, etc.). [CHAR LIMIT=NONE] -->
-    <string name="storage_wizard_format_progress_body">Don\u2019t remove the <xliff:g id="name" example="SD card">^1</xliff:g> while it\u2019s being formatting.</string>
+    <string name="storage_wizard_format_progress_body">Don\u2019t remove the <xliff:g id="name" example="SD card">^1</xliff:g> while it\u2019s being formatted.</string>
 
     <!-- Title of wizard step prompting user to migrate data to new storage [CHAR LIMIT=32] -->
     <string name="storage_wizard_migrate_title">Move data to new storage</string>
@@ -9583,6 +9583,20 @@
     <string name="ambient_display_pickup_summary" product="tablet">To check time, notifications, and other info, pick up your tablet.</string>
     <!-- Summary text for ambient display (device) [CHAR LIMIT=NONE]-->
     <string name="ambient_display_pickup_summary" product="device">To check time, notifications, and other info, pick up your device.</string>
+
+    <!-- Preference and settings suggestion title text for reach gesture (phone) [CHAR LIMIT=60]-->
+    <string name="ambient_display_reach_title" product="default">Reach to check phone</string>
+    <!-- Preference and settings suggestion title text for reach gesture (tablet) [CHAR LIMIT=60]-->
+    <string name="ambient_display_reach_title" product="tablet">Reach to check tablet</string>
+    <!-- Preference and settings suggestion title text for reach gesture (device) [CHAR LIMIT=60]-->
+    <string name="ambient_display_reach_title" product="device">Reach to check device</string>
+
+    <!-- Summary text for ambient display (phone) [CHAR LIMIT=NONE]-->
+    <string name="ambient_display_reach_summary" product="default">To check time, notifications, and other info, reach for your phone.</string>
+    <!-- Summary text for ambient display (tablet) [CHAR LIMIT=NONE]-->
+    <string name="ambient_display_reach_summary" product="tablet">To check time, notifications, and other info, reach for your tablet.</string>
+    <!-- Summary text for ambient display (device) [CHAR LIMIT=NONE]-->
+    <string name="ambient_display_reach_summary" product="device">To check time, notifications, and other info, reach for your device.</string>
 
     <!-- Title text for swiping downwards on fingerprint sensor for notifications [CHAR LIMIT=80]-->
     <string name="fingerprint_swipe_for_notifications_title">Swipe fingerprint for notifications</string>
