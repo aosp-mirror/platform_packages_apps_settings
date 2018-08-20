@@ -85,7 +85,7 @@ public class ConnectedBluetoothDeviceUpdater extends BluetoothDeviceUpdater {
                     isFilterMatched = !cachedDevice.isA2dpDevice();
                     break;
                 case BluetoothProfile.HEADSET:
-                    isFilterMatched = !cachedDevice.isHfpDevice();
+                    isFilterMatched = !cachedDevice.isConnectedHfpDevice();
                     break;
             }
             if (DBG) {
