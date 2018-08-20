@@ -366,11 +366,6 @@ public class DashboardFeatureProviderImplTest {
     }
 
     @Test
-    public void testGetExtraIntentAction_shouldReturnNull() {
-        assertThat(mImpl.getExtraIntentAction()).isNull();
-    }
-
-    @Test
     public void openTileIntent_profileSelectionDialog_shouldShow() {
         final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         final ArrayList<UserHandle> handles = new ArrayList<>();
