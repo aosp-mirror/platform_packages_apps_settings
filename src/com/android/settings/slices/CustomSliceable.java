@@ -16,6 +16,7 @@
 
 package com.android.settings.slices;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -56,31 +57,51 @@ public interface CustomSliceable {
     /**
      * @return an complete instance of the {@link Slice}.
      */
-    Slice getSlice(Context context);
+    Slice getSlice();
 
     /**
      * @return a {@link android.content.ContentResolver#SCHEME_CONTENT content} {@link Uri} which
-     * backs the {@link Slice} returned by {@link #getSlice(Context)}.
+     * backs the {@link Slice} returned by {@link #getSlice()}.
      */
     Uri getUri();
 
     /**
      * Handles the actions sent by the {@link Intent intents} bound to the {@link Slice} returned by
-     * {@link #getSlice(Context)}.
+     * {@link #getSlice()}.
      *
      * @param intent which has the action taken on a {@link Slice}.
      */
     void onNotifyChange(Intent intent);
 
     /**
+     * @return an {@link Intent} to the source of the Slice data.
+     */
+    Intent getIntent();
+
+    /**
      * Settings Slices which can represent components that are updatable by the framework should
      * listen to changes matched to the {@link IntentFilter} returned here.
      *
      * @return an {@link IntentFilter} for updates related to the {@link Slice} returned by
-     * {@link #getSlice(Context)}.
+     * {@link #getSlice()}.
      */
     default IntentFilter getIntentFilter() {
         return null;
+    }
+
+    /**
+     * Standardize the intents returned to indicate actions by the Slice.
+     * <p>
+     *     The {@link PendingIntent} is linked to {@link SliceBroadcastReceiver} where the Intent
+     *     Action is found by {@code getUri().toString()}.
+     *
+     * @return a {@link PendingIntent} linked to {@link SliceBroadcastReceiver}.
+     */
+    default PendingIntent getBroadcastIntent(Context context) {
+        final Intent intent = new Intent(getUri().toString());
+        intent.setClass(context, SliceBroadcastReceiver.class);
+        return PendingIntent.getBroadcast(context, 0 /* requestCode */, intent,
+                PendingIntent.FLAG_CANCEL_CURRENT);
     }
 
     /**

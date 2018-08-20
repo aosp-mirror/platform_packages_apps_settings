@@ -45,7 +45,7 @@ import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.FakeToggleController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowThreadUtils;
-import com.android.settings.wifi.WifiSliceBuilder;
+import com.android.settings.wifi.WifiSlice;
 
 import org.junit.After;
 import org.junit.Before;
@@ -94,7 +94,7 @@ public class SettingsSliceProviderTest {
     private SliceManager mManager;
 
     private static final List<Uri> SPECIAL_CASE_PLATFORM_URIS = Arrays.asList(
-            WifiSliceBuilder.WIFI_URI,
+            WifiSlice.WIFI_URI,
             BluetoothSliceBuilder.BLUETOOTH_URI,
             LocationSliceBuilder.LOCATION_URI
     );
@@ -448,9 +448,9 @@ public class SettingsSliceProviderTest {
 
     @Test
     public void bindSlice_wifiSlice_returnsWifiSlice() {
-        final Slice wifiSlice = mProvider.onBindSlice(WifiSliceBuilder.WIFI_URI);
+        final Slice wifiSlice = mProvider.onBindSlice(WifiSlice.WIFI_URI);
 
-        assertThat(wifiSlice.getUri()).isEqualTo(WifiSliceBuilder.WIFI_URI);
+        assertThat(wifiSlice.getUri()).isEqualTo(WifiSlice.WIFI_URI);
     }
 
     @Test

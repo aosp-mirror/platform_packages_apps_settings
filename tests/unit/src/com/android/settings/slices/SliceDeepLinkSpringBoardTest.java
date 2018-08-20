@@ -29,7 +29,7 @@ import android.support.test.runner.AndroidJUnit4;
 import com.android.settings.bluetooth.BluetoothSliceBuilder;
 import com.android.settings.location.LocationSliceBuilder;
 import com.android.settings.notification.ZenModeSliceBuilder;
-import com.android.settings.wifi.WifiSliceBuilder;
+import com.android.settings.wifi.WifiSlice;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -57,7 +57,7 @@ public class SliceDeepLinkSpringBoardTest {
     @Test
     @Presubmit
     public void launchesDeepLinkIntent_wifiSlice_shouldNotCrash() {
-        final Intent deepLinkIntent = getSpringboardIntent(WifiSliceBuilder.WIFI_URI.toString());
+        final Intent deepLinkIntent = getSpringboardIntent(WifiSlice.WIFI_URI.toString());
 
         mContext.startActivity(deepLinkIntent);
     }

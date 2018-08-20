@@ -20,6 +20,8 @@ import android.content.Context;
 import android.net.Uri;
 import android.util.ArrayMap;
 
+import com.android.settings.wifi.WifiSlice;
+
 import java.util.Map;
 
 /**
@@ -36,7 +38,7 @@ public class CustomSliceManager {
     private final Context mContext;
 
     public CustomSliceManager(Context context) {
-        mContext = context;
+        mContext = context.getApplicationContext();
         mUriMap = new ArrayMap<>();
         addSlices();
     }
@@ -84,5 +86,6 @@ public class CustomSliceManager {
     }
 
     private void addSlices() {
+        mUriMap.put(WifiSlice.WIFI_URI, WifiSlice.class);
     }
 }
