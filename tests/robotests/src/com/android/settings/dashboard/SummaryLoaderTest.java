@@ -24,6 +24,7 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
@@ -46,6 +47,7 @@ public class SummaryLoaderTest {
     private static final String SUMMARY_1 = "summary1";
     private static final String SUMMARY_2 = "summary2";
 
+    private Context mContext;
     private SummaryLoader mSummaryLoader;
     private boolean mCallbackInvoked;
     private Tile mTile;
@@ -54,12 +56,13 @@ public class SummaryLoaderTest {
     @Before
     public void SetUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = RuntimeEnvironment.application;
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         final ActivityInfo activityInfo = new ActivityInfo();
         activityInfo.packageName = "pkg";
         activityInfo.name = "class";
         mTile = new Tile(activityInfo, CategoryKey.CATEGORY_HOMEPAGE);
-        mTile.summary = SUMMARY_1;
+        mTile.overrideSummary(SUMMARY_1);
         mCallbackInvoked = false;
 
         final Activity activity = Robolectric.buildActivity(Activity.class).get();
@@ -75,14 +78,14 @@ public class SummaryLoaderTest {
 
     @Test
     public void testUpdateSummaryIfNeeded_SummaryIdentical_NoCallback() {
-        mSummaryLoader.updateSummaryIfNeeded(mTile, SUMMARY_1);
+        mSummaryLoader.updateSummaryIfNeeded(mContext, mTile, SUMMARY_1);
 
         assertThat(mCallbackInvoked).isFalse();
     }
 
     @Test
     public void testUpdateSummaryIfNeeded_SummaryChanged_HasCallback() {
-        mSummaryLoader.updateSummaryIfNeeded(mTile, SUMMARY_2);
+        mSummaryLoader.updateSummaryIfNeeded(mContext, mTile, SUMMARY_2);
 
         assertThat(mCallbackInvoked).isTrue();
     }
@@ -102,10 +105,10 @@ public class SummaryLoaderTest {
         when(mFeatureFactory.dashboardFeatureProvider.getDashboardKeyForTile(tile))
                 .thenReturn(tile.getKey(RuntimeEnvironment.application));
 
-        mSummaryLoader.updateSummaryIfNeeded(tile, testSummary);
-        tile.summary = null;
+        mSummaryLoader.updateSummaryIfNeeded(mContext, tile, testSummary);
+        tile.overrideSummary(null);
         mSummaryLoader.updateSummaryToCache(category);
 
-        assertThat(tile.summary).isEqualTo(testSummary);
+        assertThat(tile.getSummary(mContext)).isEqualTo(testSummary);
     }
 }

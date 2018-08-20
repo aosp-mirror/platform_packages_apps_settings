@@ -18,6 +18,7 @@ package com.android.settings.dashboard;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
@@ -99,13 +100,13 @@ public class SummaryLoader {
                 Log.d(TAG, "setSummary " + tile.getDescription() + " - " + summary);
             }
 
-            updateSummaryIfNeeded(tile, summary);
+            updateSummaryIfNeeded(mActivity.getApplicationContext(), tile, summary);
         });
     }
 
     @VisibleForTesting
-    void updateSummaryIfNeeded(Tile tile, CharSequence summary) {
-        if (TextUtils.equals(tile.summary, summary)) {
+    void updateSummaryIfNeeded(Context context, Tile tile, CharSequence summary) {
+        if (TextUtils.equals(tile.getSummary(context), summary)) {
             if (DEBUG) {
                 Log.d(TAG, "Summary doesn't change, skipping summary update for "
                         + tile.getDescription());
@@ -113,7 +114,7 @@ public class SummaryLoader {
             return;
         }
         mSummaryTextMap.put(mDashboardFeatureProvider.getDashboardKeyForTile(tile), summary);
-        tile.summary = summary;
+        tile.overrideSummary(summary);
         if (mSummaryConsumer != null) {
             mSummaryConsumer.notifySummaryChanged(tile);
         } else {
@@ -216,7 +217,7 @@ public class SummaryLoader {
         for (Tile tile : category.getTiles()) {
             final String key = mDashboardFeatureProvider.getDashboardKeyForTile(tile);
             if (mSummaryTextMap.containsKey(key)) {
-                tile.summary = mSummaryTextMap.get(key);
+                tile.overrideSummary(mSummaryTextMap.get(key));
             }
         }
     }

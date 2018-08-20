@@ -356,8 +356,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         }
         holder.icon.setImageDrawable(icon);
         holder.title.setText(tile.getTitle(mContext));
-        if (!TextUtils.isEmpty(tile.summary)) {
-            holder.summary.setText(tile.summary);
+        final CharSequence summary = tile.getSummary(mContext);
+        if (!TextUtils.isEmpty(summary)) {
+            holder.summary.setText(summary);
             holder.summary.setVisibility(View.VISIBLE);
         } else {
             holder.summary.setVisibility(View.GONE);

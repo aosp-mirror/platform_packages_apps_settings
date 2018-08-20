@@ -426,7 +426,9 @@ public class DashboardData {
 
                     // Only check id and summary for dashboard tile
                     return localTile.getId() == targetTile.getId()
-                            && TextUtils.equals(localTile.summary, targetTile.summary);
+                            && TextUtils.equals(
+                            localTile.getSummaryReference(),
+                            targetTile.getSummaryReference());
                 case TYPE_SUGGESTION_CONTAINER:
                 case TYPE_CONDITION_CONTAINER:
                     // Fall through to default
