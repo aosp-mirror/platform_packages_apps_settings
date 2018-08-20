@@ -354,11 +354,9 @@ public class WifiP2pSettings extends DashboardFragment
         int textId = mWifiP2pSearching ? R.string.wifi_p2p_menu_searching :
                 R.string.wifi_p2p_menu_search;
         menu.add(Menu.NONE, MENU_ID_SEARCH, 0, textId)
-            .setEnabled(mWifiP2pEnabled)
-            .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+            .setEnabled(mWifiP2pEnabled);
         menu.add(Menu.NONE, MENU_ID_RENAME, 0, R.string.wifi_p2p_menu_rename)
-            .setEnabled(mWifiP2pEnabled)
-            .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+            .setEnabled(mWifiP2pEnabled);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
