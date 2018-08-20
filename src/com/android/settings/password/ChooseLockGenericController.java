@@ -72,13 +72,14 @@ public class ChooseLockGenericController {
      * Whether the given screen lock type should be visible in the given context.
      */
     public boolean isScreenLockVisible(ScreenLockType type) {
+        final boolean managedProfile = mUserId != UserHandle.myUserId();
         switch (type) {
             case NONE:
-                return !mContext.getResources().getBoolean(R.bool.config_hide_none_security_option);
+                return !mContext.getResources().getBoolean(R.bool.config_hide_none_security_option)
+                    && !managedProfile; // Profiles should use unified challenge instead.
             case SWIPE:
                 return !mContext.getResources().getBoolean(R.bool.config_hide_swipe_security_option)
-                    // Swipe doesn't make sense for profiles.
-                    && mUserId == UserHandle.myUserId();
+                    && !managedProfile; // Swipe doesn't make sense for profiles.
             case MANAGED:
                 return mManagedPasswordProvider.isManagedPasswordChoosable();
         }

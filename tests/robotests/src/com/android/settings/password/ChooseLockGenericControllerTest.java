@@ -88,9 +88,11 @@ public class ChooseLockGenericControllerTest {
     }
 
     @Test
-    public void isScreenLockVisible_notCurrentUser_shouldHideSwipe() {
+    public void isScreenLockVisible_notCurrentUser_shouldHideInsecure() {
         mController = new ChooseLockGenericController(application, 1 /* userId */);
         assertThat(mController.isScreenLockVisible(ScreenLockType.SWIPE)).named("SWIPE visible")
+                .isFalse();
+        assertThat(mController.isScreenLockVisible(ScreenLockType.NONE)).named("NONE visible")
                 .isFalse();
     }
 
