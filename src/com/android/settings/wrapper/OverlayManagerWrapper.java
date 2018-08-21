@@ -81,18 +81,21 @@ public class OverlayManagerWrapper {
         public static final String CATEGORY_THEME = android.content.om.OverlayInfo.CATEGORY_THEME;
         public final String packageName;
         public final String category;
+        public final int priority;
         private final boolean mEnabled;
 
-        public OverlayInfo(String packageName, String category, boolean enabled) {
+        public OverlayInfo(String packageName, String category, boolean enabled, int priority) {
             this.packageName = packageName;
             this.category = category;
             mEnabled = enabled;
+            this.priority = priority;
         }
 
         public OverlayInfo(android.content.om.OverlayInfo info) {
             mEnabled = info.isEnabled();
             category = info.category;
             packageName = info.packageName;
+            priority = info.priority;
         }
 
         public boolean isEnabled() {
