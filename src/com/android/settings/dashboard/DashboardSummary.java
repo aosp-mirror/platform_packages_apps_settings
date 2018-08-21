@@ -37,11 +37,10 @@ import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.SettingsBaseActivity.CategoryListener;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
-import com.android.settings.homepage.conditional.Condition;
 import com.android.settings.homepage.conditional.ConditionListener;
-import com.android.settings.homepage.conditional.ConditionManager;
 import com.android.settings.homepage.conditional.FocusRecyclerView;
 import com.android.settings.homepage.conditional.FocusRecyclerView.FocusListener;
+import com.android.settings.homepage.conditional.ConditionManager;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.ActionBarShadowController;
 import com.android.settingslib.drawer.CategoryKey;
@@ -74,7 +73,6 @@ public class DashboardSummary extends InstrumentedFragment
     private DashboardAdapter mAdapter;
     private SummaryLoader mSummaryLoader;
     private ConditionManager mConditionManager;
-    private com.android.settings.homepage.conditional.v2.ConditionManager mConditionManager2;
     private LinearLayoutManager mLayoutManager;
     private SuggestionControllerMixinCompat mSuggestionControllerMixin;
     private DashboardFeatureProvider mDashboardFeatureProvider;
@@ -123,18 +121,9 @@ public class DashboardSummary extends InstrumentedFragment
 
         mSummaryLoader = new SummaryLoader(activity, CategoryKey.CATEGORY_HOMEPAGE);
 
-        if (com.android.settings.homepage.conditional.v2.ConditionManager.isEnabled(activity)) {
-            mConditionManager = null;
-            mConditionManager2 =
-                    new com.android.settings.homepage.conditional.v2.ConditionManager(
-                            activity, this /* listener */);
-        } else {
-            mConditionManager = ConditionManager.get(activity, false);
-            mConditionManager2 = null;
-        }
-        if (mConditionManager2 == null) {
-            getSettingsLifecycle().addObserver(mConditionManager);
-        }
+        mConditionManager =
+                new ConditionManager(
+                        activity, this /* listener */);
         if (savedInstanceState != null) {
             mIsOnCategoriesChangedCalled =
                     savedInstanceState.getBoolean(STATE_CATEGORIES_CHANGE_CALLED);
@@ -157,17 +146,7 @@ public class DashboardSummary extends InstrumentedFragment
 
         ((SettingsBaseActivity) getActivity()).addCategoryListener(this);
         mSummaryLoader.setListening(true);
-        final int metricsCategory = getMetricsCategory();
-        if (mConditionManager2 == null) {
-            for (Condition c : mConditionManager.getConditions()) {
-                if (c.shouldShow()) {
-                    mMetricsFeatureProvider.visible(getContext(), metricsCategory,
-                            c.getMetricsConstant());
-                }
-            }
-        } else {
-            mConditionManager2.startMonitoringStateChange();
-        }
+        mConditionManager.startMonitoringStateChange();
         if (DEBUG_TIMING) {
             Log.d(TAG, "onResume took " + (System.currentTimeMillis() - startTime) + " ms");
         }
@@ -179,42 +158,16 @@ public class DashboardSummary extends InstrumentedFragment
 
         ((SettingsBaseActivity) getActivity()).remCategoryListener(this);
         mSummaryLoader.setListening(false);
-        if (mConditionManager2 == null) {
-            for (Condition c : mConditionManager.getConditions()) {
-                if (c.shouldShow()) {
-                    mMetricsFeatureProvider.hidden(getContext(), c.getMetricsConstant());
-                }
-            }
-        }
-        // Unregister condition listeners.
-        if (mConditionManager != null) {
-            mConditionManager.remListener(this);
-        }
-        if (mConditionManager2 != null) {
-            mConditionManager2.stopMonitoringStateChange();
-        }
+        mConditionManager.stopMonitoringStateChange();
     }
 
     @Override
     public void onWindowFocusChanged(boolean hasWindowFocus) {
         long startTime = System.currentTimeMillis();
-        if (mConditionManager2 == null) {
-            if (hasWindowFocus) {
-                Log.d(TAG, "Listening for condition changes");
-                mConditionManager.addListener(this);
-                Log.d(TAG, "conditions refreshed");
-                mConditionManager.refreshAll();
-            } else {
-                Log.d(TAG, "Stopped listening for condition changes");
-                mConditionManager.remListener(this);
-            }
+        if (hasWindowFocus) {
+            mConditionManager.startMonitoringStateChange();
         } else {
-            // TODO(b/112485407): Register monitoring for condition manager v2.
-            if (hasWindowFocus) {
-                mConditionManager2.startMonitoringStateChange();
-            } else {
-                mConditionManager2.stopMonitoringStateChange();
-            }
+            mConditionManager.stopMonitoringStateChange();
         }
         if (DEBUG_TIMING) {
             Log.d(TAG, "onWindowFocusChanged took "
@@ -248,8 +201,7 @@ public class DashboardSummary extends InstrumentedFragment
         mDashboard.setListener(this);
         mDashboard.setItemAnimator(new DashboardItemAnimator());
         mAdapter = new DashboardAdapter(getContext(), bundle,
-                mConditionManager == null ? null : mConditionManager.getConditions(),
-                mConditionManager2,
+                mConditionManager,
                 mSuggestionControllerMixin,
                 getSettingsLifecycle());
         mDashboard.setAdapter(mAdapter);
@@ -290,14 +242,10 @@ public class DashboardSummary extends InstrumentedFragment
         // constructor when we create the view, the first handling is not necessary.
         // But, on the subsequent calls we need to handle it because there might be real changes to
         // conditions.
-        if (mOnConditionsChangedCalled || mConditionManager2 != null) {
+        if (mOnConditionsChangedCalled) {
             final boolean scrollToTop =
                     mLayoutManager.findFirstCompletelyVisibleItemPosition() <= 1;
-            if (mConditionManager2 == null) {
-                mAdapter.setConditions(mConditionManager.getConditions());
-            } else {
-                mAdapter.setConditionsV2(mConditionManager2.getDisplayableCards());
-            }
+            mAdapter.setConditions(mConditionManager.getDisplayableCards());
 
             if (scrollToTop) {
                 mDashboard.scrollToPosition(0);

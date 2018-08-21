@@ -40,10 +40,9 @@ import com.android.settings.R;
 import com.android.settings.R.id;
 import com.android.settings.dashboard.DashboardData.ConditionHeaderData;
 import com.android.settings.dashboard.suggestions.SuggestionAdapter;
-import com.android.settings.homepage.conditional.Condition;
 import com.android.settings.homepage.conditional.ConditionAdapter;
-import com.android.settings.homepage.conditional.v2.ConditionManager;
-import com.android.settings.homepage.conditional.v2.ConditionalCard;
+import com.android.settings.homepage.conditional.ConditionManager;
+import com.android.settings.homepage.conditional.ConditionalCard;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.RoundedHomepageIcon;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -88,7 +87,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     };
 
     public DashboardAdapter(Context context, Bundle savedInstanceState,
-            List<Condition> conditions, ConditionManager conditionManager,
+            ConditionManager conditionManager,
             SuggestionControllerMixinCompat suggestionControllerMixin, Lifecycle lifecycle) {
 
         DashboardCategory category = null;
@@ -116,8 +115,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         }
 
         mDashboardData = new DashboardData.Builder()
-                .setConditions(conditions)
-                .setConditionsV2(
+                .setConditions(
                         conditionManager == null ? null : conditionManager.getDisplayableCards())
                 .setSuggestions(mSuggestionAdapter.getSuggestions())
                 .setCategory(category)
@@ -142,20 +140,11 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         notifyDashboardDataChanged(prevData);
     }
 
-    public void setConditions(List<Condition> conditions) {
+    public void setConditions(List<ConditionalCard> conditions) {
         final DashboardData prevData = mDashboardData;
         Log.d(TAG, "adapter setConditions called");
         mDashboardData = new DashboardData.Builder(prevData)
                 .setConditions(conditions)
-                .build();
-        notifyDashboardDataChanged(prevData);
-    }
-
-    public void setConditionsV2(List<ConditionalCard> conditions) {
-        final DashboardData prevData = mDashboardData;
-        Log.d(TAG, "adapter setConditions called");
-        mDashboardData = new DashboardData.Builder(prevData)
-                .setConditionsV2(conditions)
                 .build();
         notifyDashboardDataChanged(prevData);
     }
@@ -301,31 +290,12 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
     @VisibleForTesting
     void onBindCondition(final ConditionContainerHolder holder, int position) {
-        final List conditions = (List) mDashboardData.getItemEntityByPosition(position);
-        final List<Condition> conditionsV1;
-        final List<ConditionalCard> conditionsV2;
-        if (conditions == null || conditions.isEmpty()) {
-            conditionsV1 = null;
-            conditionsV2 = null;
-        } else if (conditions.get(0) instanceof Condition) {
-            conditionsV1 = conditions;
-            conditionsV2 = null;
-        } else {
-            conditionsV1 = null;
-            conditionsV2 = conditions;
-        }
-        if (conditionsV2 == null) {
-            final ConditionAdapter adapter = new ConditionAdapter(mContext,
-                    conditionsV1, mDashboardData.isConditionExpanded());
-            adapter.addDismissHandling(holder.data);
-            holder.data.setAdapter(adapter);
-        } else {
-            final com.android.settings.homepage.conditional.v2.ConditionAdapter adapter =
-                    new com.android.settings.homepage.conditional.v2.ConditionAdapter(
-                            mContext, mConditionManager, conditionsV2,
-                            mDashboardData.isConditionExpanded());
-            holder.data.setAdapter(adapter);
-        }
+        final List<ConditionalCard> conditions =
+                (List) mDashboardData.getItemEntityByPosition(position);
+        final ConditionAdapter adapter = new ConditionAdapter(
+                mContext, mConditionManager, conditions,
+                mDashboardData.isConditionExpanded());
+        holder.data.setAdapter(adapter);
         holder.data.setLayoutManager(new LinearLayoutManager(mContext));
     }
 

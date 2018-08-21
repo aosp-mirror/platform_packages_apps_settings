@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,279 +13,187 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.android.settings.homepage.conditional;
 
 import android.content.Context;
-import android.os.AsyncTask;
-import android.os.PersistableBundle;
 import android.util.Log;
-import android.util.Xml;
 
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnPause;
-import com.android.settingslib.core.lifecycle.events.OnResume;
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlSerializer;
-
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
-public class ConditionManager implements LifecycleObserver, OnResume, OnPause {
-
+public class ConditionManager {
     private static final String TAG = "ConditionManager";
 
-    private static final boolean DEBUG = false;
+    @VisibleForTesting
+    final List<ConditionalCard> mCandidates;
+    @VisibleForTesting
+    final List<ConditionalCardController> mCardControllers;
 
-    private static final String PKG = "com.android.settings.homepage.conditional.";
+    private static final long DISPLAYABLE_CHECKER_TIMEOUT_MS = 20;
 
-    private static final String FILE_NAME = "condition_state.xml";
-    private static final String TAG_CONDITIONS = "cs";
-    private static final String TAG_CONDITION = "c";
-    private static final String ATTR_CLASS = "cls";
+    private final ExecutorService mExecutorService;
+    private final Context mAppContext;
+    private final ConditionListener mListener;
 
-    private static ConditionManager sInstance;
+    private boolean mIsListeningToStateChange;
 
-    private final Context mContext;
-    private final ArrayList<Condition> mConditions;
-    private File mXmlFile;
-
-    private final ArrayList<ConditionListener> mListeners = new ArrayList<>();
-
-    private ConditionManager(Context context, boolean loadConditionsNow) {
-        mContext = context;
-        mConditions = new ArrayList<>();
-        if (loadConditionsNow) {
-            Log.d(TAG, "conditions loading synchronously");
-            ConditionLoader loader = new ConditionLoader();
-            loader.onPostExecute(loader.doInBackground());
-        } else {
-            Log.d(TAG, "conditions loading asychronously");
-            new ConditionLoader().execute();
-        }
+    public ConditionManager(Context context, ConditionListener listener) {
+        mAppContext = context.getApplicationContext();
+        mExecutorService = Executors.newCachedThreadPool();
+        mCandidates = new ArrayList<>();
+        mCardControllers = new ArrayList<>();
+        mListener = listener;
+        initCandidates();
     }
 
-    public void refreshAll() {
-        final int N = mConditions.size();
-        for (int i = 0; i < N; i++) {
-            mConditions.get(i).refreshState();
+    /**
+     * Returns a list of {@link ConditionalCard}s eligible for display.
+     */
+    public List<ConditionalCard> getDisplayableCards() {
+        final List<ConditionalCard> cards = new ArrayList<>();
+        final List<Future<ConditionalCard>> displayableCards = new ArrayList<>();
+        // Check displayable future
+        for (ConditionalCard card : mCandidates) {
+            final DisplayableChecker future = new DisplayableChecker(
+                    card, getController(card.getId()));
+            displayableCards.add(mExecutorService.submit(future));
         }
-    }
-
-    private void readFromXml(File xmlFile, ArrayList<Condition> conditions) {
-        if (DEBUG) Log.d(TAG, "Reading from " + xmlFile.toString());
-        try {
-            XmlPullParser parser = Xml.newPullParser();
-            FileReader in = new FileReader(xmlFile);
-            parser.setInput(in);
-            int state = parser.getEventType();
-
-            while (state != XmlPullParser.END_DOCUMENT) {
-                if (TAG_CONDITION.equals(parser.getName())) {
-                    int depth = parser.getDepth();
-                    String clz = parser.getAttributeValue("", ATTR_CLASS);
-                    if (!clz.startsWith(PKG)) {
-                        clz = PKG + clz;
-                    }
-                    Condition condition = createCondition(Class.forName(clz));
-                    PersistableBundle bundle = PersistableBundle.restoreFromXml(parser);
-                    if (DEBUG) Log.d(TAG, "Reading " + clz + " -- " + bundle);
-                    if (condition != null) {
-                        condition.restoreState(bundle);
-                        conditions.add(condition);
-                    } else {
-                        Log.e(TAG, "failed to add condition: " + clz);
-                    }
-                    while (parser.getDepth() > depth) {
-                        parser.next();
-                    }
+        // Collect future and add displayable cards
+        for (Future<ConditionalCard> cardFuture : displayableCards) {
+            try {
+                final ConditionalCard card = cardFuture.get(DISPLAYABLE_CHECKER_TIMEOUT_MS,
+                        TimeUnit.MILLISECONDS);
+                if (card != null) {
+                    cards.add(card);
                 }
-                state = parser.next();
-            }
-            in.close();
-        } catch (XmlPullParserException | IOException | ClassNotFoundException e) {
-            Log.w(TAG, "Problem reading " + FILE_NAME, e);
-        }
-    }
-
-    private void saveToXml() {
-        if (DEBUG) Log.d(TAG, "Writing to " + mXmlFile.toString());
-        try {
-            XmlSerializer serializer = Xml.newSerializer();
-            FileWriter writer = new FileWriter(mXmlFile);
-            serializer.setOutput(writer);
-
-            serializer.startDocument("UTF-8", true);
-            serializer.startTag("", TAG_CONDITIONS);
-
-            final int N = mConditions.size();
-            for (int i = 0; i < N; i++) {
-                PersistableBundle bundle = new PersistableBundle();
-                if (mConditions.get(i).saveState(bundle)) {
-                    serializer.startTag("", TAG_CONDITION);
-                    final String clz = mConditions.get(i).getClass().getSimpleName();
-                    serializer.attribute("", ATTR_CLASS, clz);
-                    bundle.saveToXml(serializer);
-                    serializer.endTag("", TAG_CONDITION);
-                }
-            }
-
-            serializer.endTag("", TAG_CONDITIONS);
-            serializer.flush();
-            writer.close();
-        } catch (XmlPullParserException | IOException e) {
-            Log.w(TAG, "Problem writing " + FILE_NAME, e);
-        }
-    }
-
-    private void addMissingConditions(ArrayList<Condition> conditions) {
-        addIfMissing(AirplaneModeCondition.class, conditions);
-        addIfMissing(HotspotCondition.class, conditions);
-        addIfMissing(DndCondition.class, conditions);
-        addIfMissing(BatterySaverCondition.class, conditions);
-        addIfMissing(CellularDataCondition.class, conditions);
-        addIfMissing(BackgroundDataCondition.class, conditions);
-        addIfMissing(WorkModeCondition.class, conditions);
-        addIfMissing(NightDisplayCondition.class, conditions);
-        addIfMissing(RingerMutedCondition.class, conditions);
-        addIfMissing(RingerVibrateCondition.class, conditions);
-        Collections.sort(conditions, CONDITION_COMPARATOR);
-    }
-
-    private void addIfMissing(Class<? extends Condition> clz, ArrayList<Condition> conditions) {
-        if (getCondition(clz, conditions) == null) {
-            if (DEBUG) Log.d(TAG, "Adding missing " + clz.getName());
-            Condition condition = createCondition(clz);
-            if (condition != null) {
-                conditions.add(condition);
+            } catch (InterruptedException | ExecutionException | TimeoutException e) {
+                Log.w(TAG, "Failed to get displayable state for card, likely timeout. Skipping", e);
             }
         }
+        return cards;
     }
 
-    private Condition createCondition(Class<?> clz) {
-        if (AirplaneModeCondition.class == clz) {
-            return new AirplaneModeCondition(this);
-        } else if (HotspotCondition.class == clz) {
-            return new HotspotCondition(this);
-        } else if (DndCondition.class == clz) {
-            return new DndCondition(this);
-        } else if (BatterySaverCondition.class == clz) {
-            return new BatterySaverCondition(this);
-        } else if (CellularDataCondition.class == clz) {
-            return new CellularDataCondition(this);
-        } else if (BackgroundDataCondition.class == clz) {
-            return new BackgroundDataCondition(this);
-        } else if (WorkModeCondition.class == clz) {
-            return new WorkModeCondition(this);
-        } else if (NightDisplayCondition.class == clz) {
-            return new NightDisplayCondition(this);
-        } else if (RingerMutedCondition.class == clz) {
-            return new RingerMutedCondition(this);
-        } else if (RingerVibrateCondition.class == clz) {
-            return new RingerVibrateCondition(this);
+    /**
+     * Handler when the card is clicked.
+     *
+     * @see {@link ConditionalCardController#onPrimaryClick(Context)}
+     */
+    public void onPrimaryClick(Context context, long id) {
+        getController(id).onPrimaryClick(context);
+    }
+
+    /**
+     * Handler when the card action is clicked.
+     *
+     * @see {@link ConditionalCardController#onActionClick()}
+     */
+    public void onActionClick(long id) {
+        getController(id).onActionClick();
+        onConditionChanged();
+    }
+
+    /**
+     * Start monitoring state change for all conditions
+     */
+    public void startMonitoringStateChange() {
+        if (mIsListeningToStateChange) {
+            Log.d(TAG, "Already listening to condition state changes, skipping");
+            return;
         }
-        Log.e(TAG, "unknown condition class: " + clz.getSimpleName());
-        return null;
+        mIsListeningToStateChange = true;
+        for (ConditionalCardController controller : mCardControllers) {
+            controller.startMonitoringStateChange();
+        }
+        // Force a refresh on listener
+        onConditionChanged();
     }
 
-    Context getContext() {
-        return mContext;
+    /**
+     * Stop monitoring state change for all conditions
+     */
+    public void stopMonitoringStateChange() {
+        if (!mIsListeningToStateChange) {
+            Log.d(TAG, "Not listening to condition state changes, skipping");
+            return;
+        }
+        for (ConditionalCardController controller : mCardControllers) {
+            controller.stopMonitoringStateChange();
+        }
+        mIsListeningToStateChange = false;
     }
 
-    public <T extends Condition> T getCondition(Class<T> clz) {
-        return getCondition(clz, mConditions);
+    /**
+     * Called when some conditional card's state has changed
+     */
+    void onConditionChanged() {
+        if (mListener != null) {
+            mListener.onConditionsChanged();
+        }
     }
 
-    private <T extends Condition> T getCondition(Class<T> clz, List<Condition> conditions) {
-        final int N = conditions.size();
-        for (int i = 0; i < N; i++) {
-            if (clz.equals(conditions.get(i).getClass())) {
-                return (T) conditions.get(i);
+    @NonNull
+    <T extends ConditionalCardController> T getController(long id) {
+        for (ConditionalCardController controller : mCardControllers) {
+            if (controller.getId() == id) {
+                return (T) controller;
             }
         }
-        return null;
+        throw new IllegalStateException("Cannot find controller for " + id);
     }
 
-    public List<Condition> getConditions() {
-        return mConditions;
+    private void initCandidates() {
+        // Initialize controllers first.
+        mCardControllers.add(new AirplaneModeConditionController(mAppContext, this /* manager */));
+        mCardControllers.add(new BackgroundDataConditionController(mAppContext));
+        mCardControllers.add(new BatterySaverConditionController(mAppContext, this /* manager */));
+        mCardControllers.add(new CellularDataConditionController(mAppContext, this /* manager */));
+        mCardControllers.add(new DndConditionCardController(mAppContext, this /* manager */));
+        mCardControllers.add(new HotspotConditionController(mAppContext, this /* manager */));
+        mCardControllers.add(new NightDisplayConditionController(mAppContext));
+        mCardControllers.add(new RingerVibrateConditionController(mAppContext, this /* manager */));
+        mCardControllers.add(new RingerMutedConditionController(mAppContext, this /* manager */));
+        mCardControllers.add(new WorkModeConditionController(mAppContext));
+
+        // Initialize ui model later. UI model depends on controller.
+        mCandidates.add(new AirplaneModeConditionCard(mAppContext));
+        mCandidates.add(new BackgroundDataConditionCard(mAppContext));
+        mCandidates.add(new BatterySaverConditionCard(mAppContext));
+        mCandidates.add(new CellularDataConditionCard(mAppContext));
+        mCandidates.add(new DndConditionCard(mAppContext, this /* manager */));
+        mCandidates.add(new HotspotConditionCard(mAppContext, this /* manager */));
+        mCandidates.add(new NightDisplayConditionCard(mAppContext));
+        mCandidates.add(new RingerMutedConditionCard(mAppContext));
+        mCandidates.add(new RingerVibrateConditionCard(mAppContext));
+        mCandidates.add(new WorkModeConditionCard(mAppContext));
     }
 
-    public void notifyChanged(Condition condition) {
-        saveToXml();
-        Collections.sort(mConditions, CONDITION_COMPARATOR);
-        final int N = mListeners.size();
-        for (int i = 0; i < N; i++) {
-            mListeners.get(i).onConditionsChanged();
-        }
-    }
+    /**
+     * Returns card if controller says it's displayable. Otherwise returns null.
+     */
+    public static class DisplayableChecker implements Callable<ConditionalCard> {
 
-    public void addListener(ConditionListener listener) {
-        mListeners.add(listener);
-        listener.onConditionsChanged();
-    }
+        private final ConditionalCard mCard;
+        private final ConditionalCardController mController;
 
-    public void remListener(ConditionListener listener) {
-        mListeners.remove(listener);
-    }
-
-    @Override
-    public void onResume() {
-        for (int i = 0, size = mConditions.size(); i < size; i++) {
-            mConditions.get(i).onResume();
-        }
-    }
-
-    @Override
-    public void onPause() {
-        for (int i = 0, size = mConditions.size(); i < size; i++) {
-            mConditions.get(i).onPause();
-        }
-    }
-
-    private class ConditionLoader extends AsyncTask<Void, Void, ArrayList<Condition>> {
-        @Override
-        protected ArrayList<Condition> doInBackground(Void... params) {
-            Log.d(TAG, "loading conditions from xml");
-            ArrayList<Condition> conditions = new ArrayList<>();
-            mXmlFile = new File(mContext.getFilesDir(), FILE_NAME);
-            if (mXmlFile.exists()) {
-                readFromXml(mXmlFile, conditions);
-            }
-            addMissingConditions(conditions);
-            return conditions;
+        private DisplayableChecker(ConditionalCard card, ConditionalCardController controller) {
+            mCard = card;
+            mController = controller;
         }
 
         @Override
-        protected void onPostExecute(ArrayList<Condition> conditions) {
-            Log.d(TAG, "conditions loaded from xml, refreshing conditions");
-            mConditions.clear();
-            mConditions.addAll(conditions);
-            refreshAll();
+        public ConditionalCard call() throws Exception {
+            return mController.isDisplayable() ? mCard : null;
         }
     }
-
-    public static ConditionManager get(Context context) {
-        return get(context, true);
-    }
-
-    public static ConditionManager get(Context context, boolean loadConditionsNow) {
-        if (sInstance == null) {
-            sInstance = new ConditionManager(context.getApplicationContext(), loadConditionsNow);
-        }
-        return sInstance;
-    }
-
-    private static final Comparator<Condition> CONDITION_COMPARATOR = new Comparator<Condition>() {
-        @Override
-        public int compare(Condition lhs, Condition rhs) {
-            return Long.compare(lhs.getLastChange(), rhs.getLastChange());
-        }
-    };
 }
