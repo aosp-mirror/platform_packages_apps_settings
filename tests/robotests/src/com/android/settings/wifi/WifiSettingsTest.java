@@ -16,9 +16,17 @@
 package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.spy;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -59,5 +67,16 @@ public class WifiSettingsTest {
             WifiSettings.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext, true /* enabled */);
 
         assertThat(indexRes).isEmpty();
+    }
+
+    @Test
+    public void addNetworkFragmentSendResult_onActivityResult_shouldHandleEvent() {
+        final WifiSettings wifiSettings = spy(new WifiSettings());
+        final Intent intent = new Intent();
+        doNothing().when(wifiSettings).handleAddNetworkRequest(anyInt(), any(Intent.class));
+
+        wifiSettings.onActivityResult(WifiSettings.ADD_NETWORK_REQUEST, Activity.RESULT_OK, intent);
+
+        verify(wifiSettings).handleAddNetworkRequest(anyInt(), any(Intent.class));
     }
 }
