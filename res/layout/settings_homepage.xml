@@ -21,10 +21,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
-        android:id="@id/main_content"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/card_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <RelativeLayout
         android:id="@+id/bottom_sheet"
         android:layout_width="match_parent"
@@ -45,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_search_floating_24dp"
                 app:backgroundTint="@android:color/white"
-                app:layout_anchor="@id/bar" />
+                app:layout_anchor="@id/bar"/>
 
             <com.google.android.material.bottomappbar.BottomAppBar
                 android:id="@+id/bar"
@@ -58,17 +59,17 @@
                 app:fabAlignmentMode="end"
                 app:fabCradleDiameter="@dimen/homepage_bottombar_fab_cradle"
                 app:navigationIcon="@drawable/ic_list_24dp"
-                style="@style/Widget.MaterialComponents.BottomAppBar" />
+                style="@style/Widget.MaterialComponents.BottomAppBar"/>
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <include layout="@layout/search_bar"
-                 android:visibility="invisible" />
+                 android:visibility="invisible"/>
 
         <FrameLayout
             android:id="@+id/bottom_sheet_fragment"
             android:layout_below="@id/bottom_area"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"/>
 
     </RelativeLayout>
 
