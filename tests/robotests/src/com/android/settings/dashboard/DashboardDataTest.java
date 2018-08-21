@@ -33,8 +33,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListUpdateCallback;
 
-import com.android.settings.homepage.conditional.AirplaneModeCondition;
-import com.android.settings.homepage.conditional.Condition;
+import com.android.settings.homepage.conditional.AirplaneModeConditionCard;
+import com.android.settings.homepage.conditional.ConditionalCard;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
@@ -63,9 +63,9 @@ public class DashboardDataTest {
     @Mock
     private Tile mTestCategoryTile;
     @Mock
-    private Condition mTestCondition;
+    private ConditionalCard mTestCondition;
     @Mock
-    private Condition mSecondCondition; // condition used to test insert in DiffUtil
+    private ConditionalCard mSecondCondition; // condition used to test insert in DiffUtil
     private Suggestion mTestSuggestion;
 
     @Before
@@ -83,13 +83,11 @@ public class DashboardDataTest {
         suggestions.add(mTestSuggestion);
 
         // Build oneItemConditions
-        final List<Condition> oneItemConditions = new ArrayList<>();
-        when(mTestCondition.shouldShow()).thenReturn(true);
+        final List<ConditionalCard> oneItemConditions = new ArrayList<>();
         oneItemConditions.add(mTestCondition);
 
         // Build twoItemConditions
-        final List<Condition> twoItemsConditions = new ArrayList<>();
-        when(mSecondCondition.shouldShow()).thenReturn(true);
+        final List<ConditionalCard> twoItemsConditions = new ArrayList<>();
         twoItemsConditions.add(mTestCondition);
         twoItemsConditions.add(mSecondCondition);
 
@@ -170,7 +168,7 @@ public class DashboardDataTest {
 
     @Test
     public void testGetPositionByEntity_notExisted_returnNotFound() {
-        final Condition condition = mock(AirplaneModeCondition.class);
+        final ConditionalCard condition = mock(AirplaneModeConditionCard.class);
         final int position = mDashboardDataWithOneConditions.getPositionByEntity(condition);
         assertThat(position).isEqualTo(DashboardData.POSITION_NOT_FOUND);
     }
@@ -227,8 +225,8 @@ public class DashboardDataTest {
         testResultData.add(new ListUpdateResult.ResultData(
                 ListUpdateResult.ResultData.TYPE_OPERATION_CHANGE, 2, 1));
         // Build DashboardData
-        final List<Condition> oneItemConditions = new ArrayList<>();
-        when(mTestCondition.shouldShow()).thenReturn(true);
+        final List<ConditionalCard> oneItemConditions = new ArrayList<>();
+
         oneItemConditions.add(mTestCondition);
         final List<Suggestion> suggestions = new ArrayList<>();
         suggestions.add(mTestSuggestion);

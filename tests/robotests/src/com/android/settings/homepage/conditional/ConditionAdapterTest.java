@@ -17,6 +17,8 @@ package com.android.settings.homepage.conditional;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -24,8 +26,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardAdapter;
@@ -45,22 +45,23 @@ import java.util.List;
 public class ConditionAdapterTest {
 
     @Mock
-    private Condition mCondition1;
+    private ConditionalCard mCondition1;
     @Mock
-    private Condition mCondition2;
+    private ConditionalCard mCondition2;
+    @Mock
+    private ConditionManager mConditionManager;
 
     private Context mContext;
     private ConditionAdapter mConditionAdapter;
-    private List<Condition> mOneCondition;
-    private List<Condition> mTwoConditions;
+    private List<ConditionalCard> mOneCondition;
+    private List<ConditionalCard> mTwoConditions;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        final CharSequence[] actions = new CharSequence[2];
-        when(mCondition1.getActions()).thenReturn(actions);
-        when(mCondition1.shouldShow()).thenReturn(true);
+        final CharSequence action = "action";
+        when(mCondition1.getActionText()).thenReturn(action);
         mOneCondition = new ArrayList<>();
         mOneCondition.add(mCondition1);
         mTwoConditions = new ArrayList<>();
@@ -70,32 +71,32 @@ public class ConditionAdapterTest {
 
     @Test
     public void getItemCount_notExpanded_shouldReturn0() {
-        mConditionAdapter = new ConditionAdapter(mContext, mOneCondition, false);
+        mConditionAdapter = new ConditionAdapter(mContext, mConditionManager, mOneCondition, false);
         assertThat(mConditionAdapter.getItemCount()).isEqualTo(0);
     }
 
     @Test
     public void getItemCount_expanded_shouldReturnListSize() {
-        mConditionAdapter = new ConditionAdapter(mContext, mOneCondition, true);
+        mConditionAdapter = new ConditionAdapter(mContext, mConditionManager, mOneCondition, true);
         assertThat(mConditionAdapter.getItemCount()).isEqualTo(1);
 
-        mConditionAdapter = new ConditionAdapter(mContext, mTwoConditions, true);
+        mConditionAdapter = new ConditionAdapter(mContext, mConditionManager, mTwoConditions, true);
         assertThat(mConditionAdapter.getItemCount()).isEqualTo(2);
     }
 
     @Test
     public void getItemViewType_shouldReturnConditionTile() {
-        mConditionAdapter = new ConditionAdapter(mContext, mTwoConditions, true);
+        mConditionAdapter = new ConditionAdapter(mContext, mConditionManager, mTwoConditions, true);
         assertThat(mConditionAdapter.getItemViewType(0)).isEqualTo(R.layout.condition_tile);
     }
 
     @Test
     public void onBindViewHolder_shouldSetListener() {
         final View view = LayoutInflater.from(mContext)
-            .inflate(R.layout.condition_tile, new LinearLayout(mContext), true);
+                .inflate(R.layout.condition_tile, new LinearLayout(mContext), true);
         final DashboardAdapter.DashboardItemHolder viewHolder =
-            new DashboardAdapter.DashboardItemHolder(view);
-        mConditionAdapter = new ConditionAdapter(mContext, mOneCondition, true);
+                new DashboardAdapter.DashboardItemHolder(view);
+        mConditionAdapter = new ConditionAdapter(mContext, mConditionManager, mOneCondition, true);
 
         mConditionAdapter.onBindViewHolder(viewHolder, 0);
         final View card = view.findViewById(R.id.content);
@@ -106,30 +107,15 @@ public class ConditionAdapterTest {
     @Test
     public void viewClick_shouldInvokeConditionPrimaryClick() {
         final View view = LayoutInflater.from(mContext)
-            .inflate(R.layout.condition_tile, new LinearLayout(mContext), true);
+                .inflate(R.layout.condition_tile, new LinearLayout(mContext), true);
         final DashboardAdapter.DashboardItemHolder viewHolder =
-            new DashboardAdapter.DashboardItemHolder(view);
-        mConditionAdapter = new ConditionAdapter(mContext, mOneCondition, true);
+                new DashboardAdapter.DashboardItemHolder(view);
+        mConditionAdapter = new ConditionAdapter(mContext, mConditionManager, mOneCondition, true);
 
         mConditionAdapter.onBindViewHolder(viewHolder, 0);
         final View card = view.findViewById(R.id.content);
         assertThat(card).isNotNull();
         card.performClick();
-        verify(mCondition1).onPrimaryClick();
-    }
-
-    @Test
-    public void onSwiped_nullCondition_shouldNotCrash() {
-        final RecyclerView recyclerView = new RecyclerView(mContext);
-        final View view = LayoutInflater.from(mContext).inflate(
-                R.layout.condition_tile, new LinearLayout(mContext), true);
-        final DashboardAdapter.DashboardItemHolder viewHolder =
-            new DashboardAdapter.DashboardItemHolder(view);
-        mConditionAdapter = new ConditionAdapter(mContext, mOneCondition, true);
-        mConditionAdapter.addDismissHandling(recyclerView);
-
-        // do not bind viewholder to simulate the null condition scenario
-        mConditionAdapter.mSwipeCallback.onSwiped(viewHolder, 0);
-        // no crash
+        verify(mConditionManager).onPrimaryClick(any(Context.class), anyLong());
     }
 }
