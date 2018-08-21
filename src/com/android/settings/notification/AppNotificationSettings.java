@@ -67,12 +67,18 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             // if showing legacy settings, pull advanced settings out of the advanced category
             Preference badge = findPreference(KEY_BADGE);
             Preference appLink = findPreference(KEY_APP_LINK);
+            PreferenceGroup advanced = (PreferenceGroup) findPreference(KEY_ADVANCED_CATEGORY);
             removePreference(KEY_ADVANCED_CATEGORY);
             if (badge != null) {
+                if (advanced != null) {
+                    advanced.removePreference(badge);
+                }
                 screen.addPreference(badge);
-
             }
             if (appLink != null) {
+                if (advanced != null) {
+                    advanced.removePreference(appLink);
+                }
                 screen.addPreference(appLink);
             }
         }
