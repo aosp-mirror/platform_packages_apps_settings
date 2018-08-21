@@ -21,13 +21,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.FeatureFlagUtils;
 
-import com.android.settings.core.FeatureFlags;
-import com.android.settings.core.SettingsBaseActivity;
-import com.android.settings.homepage.HomepageFragment;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+
+import com.android.settings.core.FeatureFlags;
+import com.android.settings.core.SettingsBaseActivity;
+import com.android.settings.homepage.HomepageFragment;
 
 public class SettingsHomepageActivity extends SettingsBaseActivity {
 
@@ -42,7 +42,7 @@ public class SettingsHomepageActivity extends SettingsBaseActivity {
             finish();
             return;
         }
-        setContentView(R.layout.settings_homepage);
+        setContentView(R.layout.settings_homepage_container);
         if (savedInstanceState == null) {
             switchToFragment(this, R.id.main_content, HomepageFragment.class.getName());
         }

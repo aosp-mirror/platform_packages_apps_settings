@@ -82,10 +82,10 @@ public class ConnectedBluetoothDeviceUpdater extends BluetoothDeviceUpdater {
             // show the bluetooth device that doesn't have headset profile.
             switch (currentAudioProfile) {
                 case BluetoothProfile.A2DP:
-                    isFilterMatched = !cachedDevice.isA2dpDevice();
+                    isFilterMatched = !cachedDevice.isConnectedA2dpDevice();
                     break;
                 case BluetoothProfile.HEADSET:
-                    isFilterMatched = !cachedDevice.isHfpDevice();
+                    isFilterMatched = !cachedDevice.isConnectedHfpDevice();
                     break;
             }
             if (DBG) {

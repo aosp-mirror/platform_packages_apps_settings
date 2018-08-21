@@ -26,6 +26,8 @@ import android.view.ViewGroup;
 import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -45,6 +47,9 @@ public class HomepageFragment extends InstrumentedFragment {
     private static final String SAVE_BOTTOMBAR_STATE = "bottombar_state";
     private static final String SAVE_BOTTOM_FRAGMENT_LOADED = "bottom_fragment_loaded";
 
+    private RecyclerView mCardsContainer;
+    private LinearLayoutManager mLayoutManager;
+
     private FloatingActionButton mSearchButton;
     private BottomSheetBehavior mBottomSheetBehavior;
     private View mBottomBar;
@@ -54,7 +59,13 @@ public class HomepageFragment extends InstrumentedFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.dashboard, container, false);
+        final View rootView = inflater.inflate(R.layout.settings_homepage,
+                container, false);
+        mCardsContainer = (RecyclerView) rootView.findViewById(R.id.card_container);
+        //TODO(b/111822407): May have to swap to GridLayoutManager
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mCardsContainer.setLayoutManager(mLayoutManager);
+
         return rootView;
     }
 

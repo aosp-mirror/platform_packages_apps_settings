@@ -47,9 +47,11 @@ import androidx.slice.core.SliceAction;
 import androidx.slice.widget.SliceLiveData;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-public class WifiSliceBuilderTest {
+public class WifiSliceTest {
 
     private Context mContext;
+
+    private WifiSlice mWifiSlice;
 
     @Before
     public void setUp() {
@@ -62,11 +64,13 @@ public class WifiSliceBuilderTest {
 
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
+
+        mWifiSlice = new WifiSlice(mContext);
     }
 
     @Test
     public void getWifiSlice_correctSliceContent() {
-        final Slice wifiSlice = WifiSliceBuilder.getSlice(mContext);
+        final Slice wifiSlice = mWifiSlice.getSlice();
         final SliceMetadata metadata = SliceMetadata.from(mContext, wifiSlice);
 
         final List<SliceAction> toggles = metadata.getToggles();
@@ -83,11 +87,11 @@ public class WifiSliceBuilderTest {
 
     @Test
     public void handleUriChange_updatesWifi() {
-        final Intent intent = new Intent(WifiSliceBuilder.ACTION_WIFI_SLICE_CHANGED);
+        final Intent intent = mWifiSlice.getIntent();
         intent.putExtra(android.app.slice.Slice.EXTRA_TOGGLE_STATE, true);
         final WifiManager wifiManager = mContext.getSystemService(WifiManager.class);
 
-        WifiSliceBuilder.handleUriChange(mContext, intent);
+        mWifiSlice.onNotifyChange(intent);
 
         assertThat(wifiManager.getWifiState()).isEqualTo(WifiManager.WIFI_STATE_ENABLED);
     }

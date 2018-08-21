@@ -112,10 +112,14 @@ public class SpecialCaseSliceManagerTest {
 
         static boolean backingData = false;
 
-        public FakeSliceable(Context context) {}
+        final Context mContext;
+
+        public FakeSliceable(Context context) {
+            mContext = context;
+        }
 
         @Override
-        public Slice getSlice(Context context) {
+        public Slice getSlice() {
             return SLICE;
         }
 
@@ -132,6 +136,11 @@ public class SpecialCaseSliceManagerTest {
         @Override
         public IntentFilter getIntentFilter() {
             return new IntentFilter();
+        }
+
+        @Override
+        public Intent getIntent() {
+            return null;
         }
     }
 }

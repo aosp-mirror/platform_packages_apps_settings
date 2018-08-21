@@ -100,6 +100,9 @@ public class WifiSettings extends RestrictedSettingsFragment
     public static final int WIFI_DIALOG_ID = 1;
     private static final int WRITE_NFC_DIALOG_ID = 6;
 
+    @VisibleForTesting
+    static final int ADD_NETWORK_REQUEST = 2;
+
     // Instance state keys
     private static final String SAVE_DIALOG_MODE = "dialog_mode";
     private static final String SAVE_DIALOG_ACCESS_POINT_STATE = "wifi_ap_state";
@@ -416,6 +419,12 @@ public class WifiSettings extends RestrictedSettingsFragment
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        // Only handle request comes from AddNetworkFragment
+        if (requestCode == ADD_NETWORK_REQUEST) {
+            handleAddNetworkRequest(resultCode, data);
+            return;
+        }
+
         final boolean formerlyRestricted = mIsRestricted;
         mIsRestricted = isUiRestricted();
         if (formerlyRestricted && !mIsRestricted
@@ -590,22 +599,15 @@ public class WifiSettings extends RestrictedSettingsFragment
     public Dialog onCreateDialog(int dialogId) {
         switch (dialogId) {
             case WIFI_DIALOG_ID:
-                if (mDlgAccessPoint == null && mAccessPointSavedState == null) {
-                    // add new network
-                    mDialog = WifiDialog
-                            .createFullscreen(getActivity(), this, mDlgAccessPoint, mDialogMode);
-                } else {
-                    // modify network
-                    if (mDlgAccessPoint == null) {
-                        // restore AP from save state
-                        mDlgAccessPoint = new AccessPoint(getActivity(), mAccessPointSavedState);
-                        // Reset the saved access point data
-                        mAccessPointSavedState = null;
-                    }
-                    mDialog = WifiDialog
-                            .createModal(getActivity(), this, mDlgAccessPoint, mDialogMode);
+                // modify network
+                if (mDlgAccessPoint == null && mAccessPointSavedState != null) {
+                    // restore AP from save state
+                    mDlgAccessPoint = new AccessPoint(getActivity(), mAccessPointSavedState);
+                    // Reset the saved access point data
+                    mAccessPointSavedState = null;
                 }
-
+                mDialog = WifiDialog
+                        .createModal(getActivity(), this, mDlgAccessPoint, mDialogMode);
                 mSelectedAccessPoint = mDlgAccessPoint;
                 return mDialog;
             case WRITE_NFC_DIALOG_ID:
@@ -928,6 +930,15 @@ public class WifiSettings extends RestrictedSettingsFragment
         }
     }
 
+    private void launchAddNetworkFragment() {
+        new SubSettingLauncher(getContext())
+                .setTitleRes(R.string.wifi_add_network)
+                .setDestination(AddNetworkFragment.class.getName())
+                .setSourceMetricsCategory(getMetricsCategory())
+                .setResultListener(this, ADD_NETWORK_REQUEST)
+                .launch();
+    }
+
     private void launchNetworkDetailsFragment(ConnectedAccessPointPreference pref) {
         new SubSettingLauncher(getContext())
                 .setTitleRes(R.string.pref_title_network_details)
@@ -1096,14 +1107,29 @@ public class WifiSettings extends RestrictedSettingsFragment
         mWifiManager.connect(networkId, mConnectListener);
     }
 
+    @VisibleForTesting
+    void handleAddNetworkRequest(int result, Intent data) {
+        if(result == Activity.RESULT_OK) {
+            handleAddNetworkSubmitEvent(data);
+        }
+        mWifiTracker.resumeScanning();
+    }
+
+    private void handleAddNetworkSubmitEvent(Intent data) {
+        final WifiConfiguration wifiConfiguration = data.getParcelableExtra(
+                AddNetworkFragment.WIFI_CONFIG_KEY);
+        if (wifiConfiguration != null) {
+            mWifiManager.save(wifiConfiguration, mSaveListener);
+        }
+    }
+
     /**
      * Called when "add network" button is pressed.
      */
-    /* package */ void onAddNetworkPressed() {
-        mMetricsFeatureProvider.action(getActivity(), MetricsEvent.ACTION_WIFI_ADD_NETWORK);
+    private void onAddNetworkPressed() {
         // No exact access point is selected.
         mSelectedAccessPoint = null;
-        showDialog(null, WifiConfigUiBase.MODE_CONNECT);
+        launchAddNetworkFragment();
     }
 
     @Override

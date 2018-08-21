@@ -99,8 +99,9 @@ public class WifiCallingSliceHelperTest {
 
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mSlicesFeatureProvider = mFeatureFactory.getSlicesFeatureProvider();
+        CustomSliceManager manager = new CustomSliceManager(mContext);
         when(mSlicesFeatureProvider.getCustomSliceManager(any(Context.class)))
-                .thenReturn(new CustomSliceManager(mContext));
+                .thenReturn(manager);
 
         // Prevent crash in SliceMetadata.
         Resources resources = spy(mContext.getResources());

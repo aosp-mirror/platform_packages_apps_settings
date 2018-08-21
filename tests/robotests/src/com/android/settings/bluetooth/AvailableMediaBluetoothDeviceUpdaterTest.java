@@ -35,8 +35,6 @@ import com.android.settings.testutils.shadow.ShadowAudioManager;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowCachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import com.android.settingslib.bluetooth.HeadsetProfile;
-import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -101,7 +99,7 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
         mShadowAudioManager.setMode(AudioManager.MODE_IN_CALL);
         when(mBluetoothDeviceUpdater.
                 isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
-        when(mCachedBluetoothDevice.isHfpDevice()).thenReturn(true);
+        when(mCachedBluetoothDevice.isConnectedHfpDevice()).thenReturn(true);
         mCachedDevices.add(mCachedBluetoothDevice);
 
         mBluetoothDeviceUpdater.onAudioModeChanged();
@@ -114,7 +112,7 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
         mShadowAudioManager.setMode(AudioManager.MODE_NORMAL);
         when(mBluetoothDeviceUpdater.
                 isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
-        when(mCachedBluetoothDevice.isHfpDevice()).thenReturn(true);
+        when(mCachedBluetoothDevice.isConnectedHfpDevice()).thenReturn(true);
         mCachedDevices.add(mCachedBluetoothDevice);
 
         mBluetoothDeviceUpdater.onAudioModeChanged();
@@ -127,7 +125,7 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
         mShadowAudioManager.setMode(AudioManager.MODE_IN_CALL);
         when(mBluetoothDeviceUpdater.
                 isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
-        when(mCachedBluetoothDevice.isA2dpDevice()).thenReturn(true);
+        when(mCachedBluetoothDevice.isConnectedA2dpDevice()).thenReturn(true);
         mCachedDevices.add(mCachedBluetoothDevice);
 
         mBluetoothDeviceUpdater.onAudioModeChanged();
@@ -140,7 +138,7 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
         mShadowAudioManager.setMode(AudioManager.MODE_NORMAL);
         when(mBluetoothDeviceUpdater.
                 isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
-        when(mCachedBluetoothDevice.isA2dpDevice()).thenReturn(true);
+        when(mCachedBluetoothDevice.isConnectedA2dpDevice()).thenReturn(true);
         mCachedDevices.add(mCachedBluetoothDevice);
 
         mBluetoothDeviceUpdater.onAudioModeChanged();
@@ -153,7 +151,7 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
         mShadowAudioManager.setMode(AudioManager.MODE_NORMAL);
         when(mBluetoothDeviceUpdater.
                 isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
-        when(mCachedBluetoothDevice.isA2dpDevice()).thenReturn(true);
+        when(mCachedBluetoothDevice.isConnectedA2dpDevice()).thenReturn(true);
 
         mBluetoothDeviceUpdater.onProfileConnectionStateChanged(mCachedBluetoothDevice,
                 BluetoothProfile.STATE_CONNECTED, BluetoothProfile.A2DP);
@@ -166,7 +164,7 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
         mShadowAudioManager.setMode(AudioManager.MODE_IN_CALL);
         when(mBluetoothDeviceUpdater.
                 isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
-        when(mCachedBluetoothDevice.isA2dpDevice()).thenReturn(true);
+        when(mCachedBluetoothDevice.isConnectedA2dpDevice()).thenReturn(true);
 
         mBluetoothDeviceUpdater.onProfileConnectionStateChanged(mCachedBluetoothDevice,
                 BluetoothProfile.STATE_CONNECTED, BluetoothProfile.A2DP);
@@ -179,7 +177,7 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
         mShadowAudioManager.setMode(AudioManager.MODE_NORMAL);
         when(mBluetoothDeviceUpdater.
                 isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
-        when(mCachedBluetoothDevice.isHfpDevice()).thenReturn(true);
+        when(mCachedBluetoothDevice.isConnectedHfpDevice()).thenReturn(true);
 
         mBluetoothDeviceUpdater.onProfileConnectionStateChanged(mCachedBluetoothDevice,
                 BluetoothProfile.STATE_CONNECTED, BluetoothProfile.A2DP);
@@ -192,7 +190,7 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
         mShadowAudioManager.setMode(AudioManager.MODE_IN_CALL);
         when(mBluetoothDeviceUpdater.
                 isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
-        when(mCachedBluetoothDevice.isHfpDevice()).thenReturn(true);
+        when(mCachedBluetoothDevice.isConnectedHfpDevice()).thenReturn(true);
 
         mBluetoothDeviceUpdater.onProfileConnectionStateChanged(mCachedBluetoothDevice,
                 BluetoothProfile.STATE_CONNECTED, BluetoothProfile.A2DP);

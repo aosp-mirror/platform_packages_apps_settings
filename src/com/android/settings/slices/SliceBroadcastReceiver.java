@@ -26,7 +26,6 @@ import static com.android.settings.slices.SettingsSliceProvider.ACTION_SLIDER_CH
 import static com.android.settings.slices.SettingsSliceProvider.ACTION_TOGGLE_CHANGED;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_KEY;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_PLATFORM_DEFINED;
-import static com.android.settings.wifi.WifiSliceBuilder.ACTION_WIFI_SLICE_CHANGED;
 import static com.android.settings.wifi.calling.WifiCallingSliceHelper.ACTION_WIFI_CALLING_CHANGED;
 import static com.android.settings.wifi.calling.WifiCallingSliceHelper
         .ACTION_WIFI_CALLING_PREFERENCE_CELLULAR_PREFERRED;
@@ -54,7 +53,6 @@ import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.flashlight.FlashlightSliceBuilder;
 import com.android.settings.notification.ZenModeSliceBuilder;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.wifi.WifiSliceBuilder;
 
 /**
  * Responds to actions performed on slices and notifies slices of updates in state changes.
@@ -90,9 +88,6 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
                 break;
             case ACTION_BLUETOOTH_SLICE_CHANGED:
                 BluetoothSliceBuilder.handleUriChange(context, intent);
-                break;
-            case ACTION_WIFI_SLICE_CHANGED:
-                WifiSliceBuilder.handleUriChange(context, intent);
                 break;
             case ACTION_WIFI_CALLING_CHANGED:
                 FeatureFactory.getFactory(context)
