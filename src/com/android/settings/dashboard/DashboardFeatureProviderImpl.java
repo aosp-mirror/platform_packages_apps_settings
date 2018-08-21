@@ -71,7 +71,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
 
     public DashboardFeatureProviderImpl(Context context) {
         mContext = context.getApplicationContext();
-        mCategoryManager = CategoryManager.get(context, getExtraIntentAction());
+        mCategoryManager = CategoryManager.get(context);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
         mPackageManager = context.getPackageManager();
     }
@@ -149,11 +149,6 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                 pref.setOrder(order + baseOrder);
             }
         }
-    }
-
-    @Override
-    public String getExtraIntentAction() {
-        return null;
     }
 
     @Override
