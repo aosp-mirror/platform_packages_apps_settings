@@ -106,7 +106,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         if (pref == null) {
             return;
         }
-        pref.setTitle(tile.title);
+        pref.setTitle(tile.getTitle(activity.getApplicationContext()));
         if (!TextUtils.isEmpty(key)) {
             pref.setKey(key);
         } else {
@@ -172,8 +172,9 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     }
 
     private void bindSummary(Preference preference, Tile tile) {
-        if (tile.summary != null) {
-            preference.setSummary(tile.summary);
+        final CharSequence summary = tile.getSummary(mContext);
+        if (summary != null) {
+            preference.setSummary(summary);
         } else if (tile.getMetaData() != null
                 && tile.getMetaData().containsKey(META_DATA_PREFERENCE_SUMMARY_URI)) {
             // Set a placeholder summary before  starting to fetch real summary, this is necessary
@@ -183,9 +184,9 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             ThreadUtils.postOnBackgroundThread(() -> {
                 final Map<String, IContentProvider> providerMap = new ArrayMap<>();
                 final String uri = tile.getMetaData().getString(META_DATA_PREFERENCE_SUMMARY_URI);
-                final String summary = TileUtils.getTextFromUri(
+                final String summaryFromUri = TileUtils.getTextFromUri(
                         mContext, uri, providerMap, META_DATA_PREFERENCE_SUMMARY);
-                ThreadUtils.postOnMainThread(() -> preference.setSummary(summary));
+                ThreadUtils.postOnMainThread(() -> preference.setSummary(summaryFromUri));
             });
         } else {
             preference.setSummary(R.string.summary_placeholder);

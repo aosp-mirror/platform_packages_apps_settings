@@ -19,6 +19,8 @@ package com.android.settings.dashboard;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_KEY_ORDER;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_KEY_PROFILE;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_KEYHINT;
+import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_SUMMARY;
+import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_TITLE;
 import static com.android.settingslib.drawer.TileUtils.PROFILE_ALL;
 import static com.android.settingslib.drawer.TileUtils.PROFILE_PRIMARY;
 
@@ -99,11 +101,15 @@ public class DashboardFeatureProviderImplTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+        doReturn(RuntimeEnvironment.application).when(mActivity).getApplicationContext();
         mForceRoundedIcon = false;
         mActivityInfo = new ActivityInfo();
-        mActivityInfo.packageName = "pkg";
+        mActivityInfo.packageName = mContext.getPackageName();
         mActivityInfo.name = "class";
         mActivityInfo.metaData = new Bundle();
+        mActivityInfo.metaData.putInt(META_DATA_PREFERENCE_TITLE, R.string.settings_label);
+        mActivityInfo.metaData.putInt(META_DATA_PREFERENCE_SUMMARY,
+                R.string.about_settings_summary);
         doReturn(mPackageManager).when(mContext).getPackageManager();
         when(mPackageManager.resolveActivity(any(Intent.class), anyInt()))
                 .thenReturn(new ResolveInfo());
@@ -121,16 +127,15 @@ public class DashboardFeatureProviderImplTest {
         final Preference preference = new Preference(RuntimeEnvironment.application);
         final Tile tile = spy(new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE));
         mActivityInfo.metaData.putInt(META_DATA_KEY_ORDER, 10);
-        tile.title = "title";
-        tile.summary = "summary";
         doReturn(Icon.createWithBitmap(Bitmap.createBitmap(1, 1, Bitmap.Config.RGB_565)))
                 .when(tile).getIcon(any(Context.class));
         mActivityInfo.metaData.putString(SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS, "HI");
         mImpl.bindPreferenceToTile(mActivity, mForceRoundedIcon, MetricsEvent.SETTINGS_GESTURES,
                 preference, tile, "123", Preference.DEFAULT_ORDER);
 
-        assertThat(preference.getTitle()).isEqualTo(tile.title);
-        assertThat(preference.getSummary()).isEqualTo(tile.summary);
+        assertThat(preference.getTitle()).isEqualTo(mContext.getText(R.string.settings_label));
+        assertThat(preference.getSummary())
+                .isEqualTo(mContext.getText(R.string.about_settings_summary));
         assertThat(preference.getIcon()).isNotNull();
         assertThat(preference.getFragment()).isEqualTo(
                 mActivityInfo.metaData.getString(SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS));
@@ -158,9 +163,6 @@ public class DashboardFeatureProviderImplTest {
         tile.userHandle = new ArrayList<>();
         tile.userHandle.add(mock(UserHandle.class));
         tile.userHandle.add(mock(UserHandle.class));
-
-        when(mActivity.getApplicationContext().getSystemService(Context.USER_SERVICE))
-                .thenReturn(mUserManager);
 
         mImpl.bindPreferenceToTile(mActivity, mForceRoundedIcon, MetricsEvent.SETTINGS_GESTURES,
                 preference, tile, "123", Preference.DEFAULT_ORDER);
@@ -199,11 +201,6 @@ public class DashboardFeatureProviderImplTest {
         tile.userHandle = new ArrayList<>();
         tile.userHandle.add(mock(UserHandle.class));
 
-        when(mActivity.getSystemService(Context.USER_SERVICE))
-                .thenReturn(mUserManager);
-        when(mActivity.getApplicationContext().getPackageName())
-                .thenReturn(RuntimeEnvironment.application.getPackageName());
-
         mImpl.bindPreferenceToTile(mActivity, mForceRoundedIcon, MetricsEvent.SETTINGS_GESTURES,
                 preference, tile, "123", Preference.DEFAULT_ORDER);
         preference.getOnPreferenceClickListener().onPreferenceClick(null);
@@ -238,23 +235,15 @@ public class DashboardFeatureProviderImplTest {
     @Test
     public void bindPreference_noSummary_shouldSetSummaryToPlaceholder() {
         final Preference preference = new Preference(RuntimeEnvironment.application);
+        mActivityInfo.metaData.remove(META_DATA_PREFERENCE_SUMMARY);
+
         final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
+
         mImpl.bindPreferenceToTile(mActivity, mForceRoundedIcon, MetricsEvent.VIEW_UNKNOWN,
                 preference, tile, null /*key */, Preference.DEFAULT_ORDER);
 
         assertThat(preference.getSummary())
                 .isEqualTo(RuntimeEnvironment.application.getString(R.string.summary_placeholder));
-    }
-
-    @Test
-    public void bindPreference_hasSummary_shouldSetSummary() {
-        final Preference preference = new Preference(RuntimeEnvironment.application);
-        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
-        tile.summary = "test";
-        mImpl.bindPreferenceToTile(mActivity, mForceRoundedIcon, MetricsEvent.VIEW_UNKNOWN,
-                preference, tile, null /*key */, Preference.DEFAULT_ORDER);
-
-        assertThat(preference.getSummary()).isEqualTo(tile.summary);
     }
 
     @Test

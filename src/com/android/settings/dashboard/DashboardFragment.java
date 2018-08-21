@@ -156,12 +156,12 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         final String key = mDashboardFeatureProvider.getDashboardKeyForTile(tile);
         final Preference pref = getPreferenceScreen().findPreference(key);
         if (pref == null) {
-            Log.d(getLogTag(),
-                    String.format("Can't find pref by key %s, skipping update summary %s/%s",
-                            key, tile.title, tile.summary));
+            Log.d(getLogTag(), String.format(
+                    "Can't find pref by key %s, skipping update summary %s",
+                    key, tile.getDescription()));
             return;
         }
-        pref.setSummary(tile.summary);
+        pref.setSummary(tile.getSummary(pref.getContext()));
     }
 
     @Override
