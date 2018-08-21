@@ -27,6 +27,8 @@ import android.provider.SearchIndexableResource;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 
+import androidx.preference.Preference;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
@@ -41,8 +43,6 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import androidx.preference.Preference;
 
 @SearchIndexable
 public final class VirtualKeyboardFragment extends SettingsPreferenceFragment implements Indexable {
@@ -129,13 +129,6 @@ public final class VirtualKeyboardFragment extends SettingsPreferenceFragment im
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.virtual_keyboard_settings;
                     return Arrays.asList(sir);
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    final List<String> keys = super.getNonIndexableKeys(context);
-                    keys.add("add_virtual_keyboard_screen");
-                    return keys;
                 }
             };
 }

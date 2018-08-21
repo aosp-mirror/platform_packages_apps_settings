@@ -114,11 +114,6 @@ public class UsbDetailsFragment extends DashboardFragment {
                 }
 
                 @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    return super.getNonIndexableKeys(context);
-                }
-
-                @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     return new ArrayList<>(

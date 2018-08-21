@@ -118,8 +118,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             "magnification_preference_screen";
     private static final String FONT_SIZE_PREFERENCE_SCREEN =
             "font_size_preference_screen";
-    private static final String TTS_SETTINGS_PREFERENCE =
-            "tts_settings_preference";
     private static final String AUTOCLICK_PREFERENCE_SCREEN =
             "autoclick_preference";
     private static final String VIBRATION_PREFERENCE_SCREEN =
@@ -887,8 +885,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
 
-                public static final String KEY_DISPLAY_SIZE = "accessibility_settings_screen_zoom";
-
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
                         boolean enabled) {
@@ -897,22 +893,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     indexable.xmlResId = R.xml.accessibility_settings;
                     indexables.add(indexable);
                     return indexables;
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    List<String> keys = super.getNonIndexableKeys(context);
-                    // Duplicates in Display
-                    keys.add(FONT_SIZE_PREFERENCE_SCREEN);
-                    keys.add(KEY_DISPLAY_SIZE);
-
-                    // Duplicates in Language & Input
-                    keys.add(TTS_SETTINGS_PREFERENCE);
-
-                    // Duplicates in child page
-                    keys.add(DISPLAY_DALTONIZER_PREFERENCE_SCREEN);
-                    keys.add(AUTOCLICK_PREFERENCE_SCREEN);
-                    return keys;
                 }
             };
 }

@@ -13,10 +13,12 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:settings="http://schemas.android.com/apk/res-auto"
-                  android:key="magnification_preference_screen_title"
-                  android:title="@string/accessibility_screen_magnification_title">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="magnification_preference_screen_title"
+    android:title="@string/accessibility_screen_magnification_title"
+    settings:searchable="false">
     <Preference
         android:fragment="com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragment"
         android:key="screen_magnification_gestures_preference_screen"

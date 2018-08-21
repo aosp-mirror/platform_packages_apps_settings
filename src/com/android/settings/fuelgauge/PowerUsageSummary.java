@@ -68,7 +68,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
 
     private static final boolean DEBUG = false;
     private static final String KEY_BATTERY_HEADER = "battery_header";
-    private static final String KEY_BATTERY_TIP = "battery_tip";
 
     private static final String KEY_SCREEN_USAGE = "screen_usage";
     private static final String KEY_TIME_SINCE_LAST_FULL_CHARGE = "last_full_charge";
@@ -428,13 +427,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.power_usage_summary;
                     return Collections.singletonList(sir);
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    List<String> niks = super.getNonIndexableKeys(context);
-                    niks.add(KEY_BATTERY_SAVER_SUMMARY);
-                    return niks;
                 }
             };
 

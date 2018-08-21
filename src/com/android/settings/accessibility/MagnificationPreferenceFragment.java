@@ -27,6 +27,9 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.accessibility.AccessibilityManager;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -38,9 +41,6 @@ import com.android.settingslib.search.SearchIndexable;
 
 import java.util.Arrays;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 
 @SearchIndexable
 public final class MagnificationPreferenceFragment extends DashboardFragment {
@@ -171,13 +171,6 @@ public final class MagnificationPreferenceFragment extends DashboardFragment {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     return isApplicable(context.getResources());
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    List<String> keys = super.getNonIndexableKeys(context);
-                    keys.add(PREFERENCE_TITLE_KEY);
-                    return keys;
                 }
             };
 }

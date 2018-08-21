@@ -37,20 +37,22 @@
         android:fragment="com.android.settings.display.NightDisplaySettings"
         android:widgetLayout="@null"
         settings:widgetLayout="@null"
-        settings:keywords="@string/keywords_display_night_display" />
+        settings:searchable="false" />
 
     <Preference
         android:key="auto_brightness_entry"
         android:title="@string/auto_brightness_title"
         android:summary="@string/summary_placeholder"
         android:fragment="com.android.settings.display.AutoBrightnessSettings"
+        settings:searchable="false"
         settings:controller="com.android.settings.display.AutoBrightnessPreferenceController" />
 
     <com.android.settingslib.RestrictedPreference
         android:key="wallpaper"
         android:title="@string/wallpaper_settings_title"
         settings:keywords="@string/keywords_display_wallpaper"
-        settings:useAdminDisabledSummary="true">
+        settings:useAdminDisabledSummary="true"
+        settings:searchable="false">
         <intent
             android:targetPackage="@string/config_wallpaper_picker_package"
             android:targetClass="@string/config_wallpaper_picker_class" />
@@ -88,7 +90,7 @@
         android:key="display_settings_screen_zoom"
         android:title="@string/screen_zoom_title"
         android:fragment="com.android.settings.display.ScreenZoomSettings"
-        settings:keywords="@string/screen_zoom_keywords" />
+        settings:searchable="false"/>
 
     <SwitchPreference
         android:key="show_operator_name"
@@ -99,7 +101,7 @@
         android:key="screensaver"
         android:title="@string/screensaver_settings_title"
         android:fragment="com.android.settings.dream.DreamSettings"
-        settings:controller="com.android.settings.dream.DreamEntryPreferenceController" />
+        settings:searchable="false" />
 
     <com.android.settingslib.RestrictedPreference
         android:key="lockscreen_from_display_settings"
