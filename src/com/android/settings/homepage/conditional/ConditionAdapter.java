@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,77 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.android.settings.homepage.conditional;
 
 import android.content.Context;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import androidx.annotation.VisibleForTesting;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.dashboard.DashboardAdapter.DashboardItemHolder;
+import com.android.settings.dashboard.DashboardAdapter;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.WirelessUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.List;
-import java.util.Objects;
 
-public class ConditionAdapter extends RecyclerView.Adapter<DashboardItemHolder> {
-    public static final String TAG = "ConditionAdapter";
+public class ConditionAdapter extends RecyclerView.Adapter<DashboardAdapter.DashboardItemHolder> {
 
     private final Context mContext;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
-    private List<Condition> mConditions;
-    private boolean mExpanded;
+    private final ConditionManager mConditionManager;
+    private final List<ConditionalCard> mConditions;
+    private final boolean mExpanded;
 
-    private View.OnClickListener mConditionClickListener = new View.OnClickListener() {
-
-        @Override
-        public void onClick(View v) {
-            //TODO: get rid of setTag/getTag
-            Condition condition = (Condition) v.getTag();
-            mMetricsFeatureProvider.action(mContext,
-                    MetricsEvent.ACTION_SETTINGS_CONDITION_CLICK,
-                    condition.getMetricsConstant());
-            condition.onPrimaryClick();
-        }
-    };
-
-    @VisibleForTesting
-    ItemTouchHelper.SimpleCallback mSwipeCallback = new ItemTouchHelper.SimpleCallback(0,
-            ItemTouchHelper.START | ItemTouchHelper.END) {
-        @Override
-        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
-                RecyclerView.ViewHolder target) {
-            return true;
-        }
-
-        @Override
-        public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-            return viewHolder.getItemViewType() == R.layout.condition_tile
-                    ? super.getSwipeDirs(recyclerView, viewHolder) : 0;
-        }
-
-        @Override
-        public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-            Object item = getItem(viewHolder.getItemId());
-            // item can become null when running monkey
-            if (item != null) {
-                ((Condition) item).silence();
-            }
-        }
-    };
-
-    public ConditionAdapter(Context context, List<Condition> conditions, boolean expanded) {
+    public ConditionAdapter(Context context, ConditionManager conditionManager,
+            List<ConditionalCard> conditions, boolean expanded) {
         mContext = context;
+        mConditionManager = conditionManager;
         mConditions = conditions;
         mExpanded = expanded;
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
@@ -91,30 +52,22 @@ public class ConditionAdapter extends RecyclerView.Adapter<DashboardItemHolder> 
         setHasStableIds(true);
     }
 
-    public Object getItem(long itemId) {
-        for (Condition condition : mConditions) {
-            if (Objects.hash(condition.getTitle()) == itemId) {
-                return condition;
-            }
-        }
-        return null;
+    @Override
+    public DashboardAdapter.DashboardItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new DashboardAdapter.DashboardItemHolder(LayoutInflater.from(parent.getContext())
+                .inflate(viewType, parent, false));
     }
 
     @Override
-    public DashboardItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new DashboardItemHolder(LayoutInflater.from(parent.getContext()).inflate(
-                viewType, parent, false));
-    }
-
-    @Override
-    public void onBindViewHolder(DashboardItemHolder holder, int position) {
-        bindViews(mConditions.get(position), holder,
-                position == mConditions.size() - 1, mConditionClickListener);
+    public void onBindViewHolder(DashboardAdapter.DashboardItemHolder holder, int position) {
+        final ConditionalCard condition = mConditions.get(position);
+        final boolean isLastItem = position == mConditions.size() - 1;
+        bindViews(condition, holder, isLastItem);
     }
 
     @Override
     public long getItemId(int position) {
-        return Objects.hash(mConditions.get(position).getTitle());
+        return mConditions.get(position).getId();
     }
 
     @Override
@@ -130,52 +83,42 @@ public class ConditionAdapter extends RecyclerView.Adapter<DashboardItemHolder> 
         return 0;
     }
 
-    public void addDismissHandling(final RecyclerView recyclerView) {
-        final ItemTouchHelper itemTouchHelper = new ItemTouchHelper(mSwipeCallback);
-        itemTouchHelper.attachToRecyclerView(recyclerView);
-    }
-
-    private void bindViews(final Condition condition,
-            DashboardItemHolder view, boolean isLastItem,
-            View.OnClickListener onClickListener) {
-        if (condition instanceof AirplaneModeCondition) {
-            Log.d(TAG, "Airplane mode condition has been bound with "
-                    + "isActive=" + condition.isActive() + ". Airplane mode is currently " +
-                    WirelessUtils.isAirplaneModeOn(condition.mManager.getContext()));
-        }
-        View card = view.itemView.findViewById(R.id.content);
-        card.setTag(condition);
-        card.setOnClickListener(onClickListener);
+    private void bindViews(final ConditionalCard condition,
+            DashboardAdapter.DashboardItemHolder view, boolean isLastItem) {
+        mMetricsFeatureProvider.visible(mContext, MetricsProto.MetricsEvent.DASHBOARD_SUMMARY,
+                condition.getMetricsConstant());
+        view.itemView.findViewById(R.id.content).setOnClickListener(
+                v -> {
+                    mMetricsFeatureProvider.action(mContext,
+                            MetricsProto.MetricsEvent.ACTION_SETTINGS_CONDITION_CLICK,
+                            condition.getMetricsConstant());
+                    mConditionManager.onPrimaryClick(mContext, condition.getId());
+                });
         view.icon.setImageDrawable(condition.getIcon());
         view.title.setText(condition.getTitle());
+        view.summary.setText(condition.getSummary());
 
-        CharSequence[] actions = condition.getActions();
-        final boolean hasButtons = actions.length > 0;
+        setViewVisibility(view.itemView, R.id.divider, !isLastItem);
+
+        final CharSequence action = condition.getActionText();
+        final boolean hasButtons = !TextUtils.isEmpty(action);
         setViewVisibility(view.itemView, R.id.buttonBar, hasButtons);
 
-        view.summary.setText(condition.getSummary());
-        for (int i = 0; i < 2; i++) {
-            Button button = (Button) view.itemView.findViewById(i == 0
-                    ? R.id.first_action : R.id.second_action);
-            if (actions.length > i) {
-                button.setVisibility(View.VISIBLE);
-                button.setText(actions[i]);
-                final int index = i;
-                button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Context context = v.getContext();
-                        FeatureFactory.getFactory(context).getMetricsFeatureProvider()
-                                .action(context, MetricsEvent.ACTION_SETTINGS_CONDITION_BUTTON,
-                                        condition.getMetricsConstant());
-                        condition.onActionClick(index);
-                    }
-                });
-            } else {
-                button.setVisibility(View.GONE);
-            }
+        final Button button = view.itemView.findViewById(R.id.first_action);
+        if (hasButtons) {
+            button.setVisibility(View.VISIBLE);
+            button.setText(action);
+            button.setOnClickListener(v -> {
+                final Context context = v.getContext();
+                mMetricsFeatureProvider.action(
+                        context, MetricsProto.MetricsEvent.ACTION_SETTINGS_CONDITION_BUTTON,
+                        condition.getMetricsConstant());
+                mConditionManager.onActionClick(condition.getId());
+            });
+        } else {
+            button.setVisibility(View.GONE);
         }
-        setViewVisibility(view.itemView, R.id.divider, !isLastItem);
+
     }
 
     private void setViewVisibility(View containerView, int viewId, boolean visible) {

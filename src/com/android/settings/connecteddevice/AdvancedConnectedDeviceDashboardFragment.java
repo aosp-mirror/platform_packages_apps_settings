@@ -108,9 +108,6 @@ public class AdvancedConnectedDeviceDashboardFragment extends DashboardFragment 
                         keys.add(AndroidBeamPreferenceController.KEY_ANDROID_BEAM_SETTINGS);
                     }
 
-                    // Parent duplicate
-                    keys.add(KEY_BLUETOOTH);
-
                     return keys;
                 }
 

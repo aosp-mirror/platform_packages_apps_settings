@@ -16,6 +16,7 @@
 package com.android.settings.accounts;
 
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_KEYHINT;
+import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_TITLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -65,7 +66,7 @@ public class AccountDetailDashboardFragmentTest {
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mActivityInfo = new ActivityInfo();
-        mActivityInfo.packageName = "pkg";
+        mActivityInfo.packageName = mContext.getPackageName();
         mActivityInfo.name = "clazz";
         mActivityInfo.metaData = new Bundle();
 
@@ -123,6 +124,7 @@ public class AccountDetailDashboardFragmentTest {
         mActivityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "key");
         mActivityInfo.metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT);
         mActivityInfo.metaData.putString(METADATA_ACCOUNT_TYPE, "com.abc");
+        mActivityInfo.metaData.putString(META_DATA_PREFERENCE_TITLE, "summary");
         mActivityInfo.metaData.putString("com.android.settings.intent.action",
                 Intent.ACTION_ASSIST);
         tile.userHandle = null;

@@ -59,11 +59,6 @@ public interface DashboardFeatureProvider {
             int sourceMetricsCategory, Preference pref, Tile tile, String key, int baseOrder);
 
     /**
-     * Returns additional intent filter action for dashboard tiles
-     */
-    String getExtraIntentAction();
-
-    /**
      * Opens a tile to its destination intent.
      */
     void openTileIntent(FragmentActivity activity, Tile tile);

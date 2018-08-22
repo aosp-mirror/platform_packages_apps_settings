@@ -29,7 +29,8 @@
             android:title="@string/location_recent_location_requests_see_all"
             android:icon="@drawable/ic_chevron_right_24dp"
             android:selectable="true"
-            android:fragment="com.android.settings.location.RecentLocationRequestSeeAllFragment"/>
+            android:fragment="com.android.settings.location.RecentLocationRequestSeeAllFragment"
+            settings:searchable="false"/>
 
         <PreferenceCategory
             android:key="location_advanced_settings"

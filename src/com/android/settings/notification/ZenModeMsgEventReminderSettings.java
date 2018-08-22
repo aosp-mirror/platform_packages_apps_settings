@@ -80,12 +80,6 @@ public class ZenModeMsgEventReminderSettings extends ZenModeSettingsBase impleme
                     return result;
                 }
 
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    final List<String> keys = super.getNonIndexableKeys(context);
-                    return keys;
-                }
-
             @Override
             public List<AbstractPreferenceController> createPreferenceControllers(Context context) {
                 return buildPreferenceControllers(context, null);

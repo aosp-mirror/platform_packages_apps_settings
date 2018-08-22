@@ -25,7 +25,8 @@
         android:key="bluetooth_settings"
         android:title="@string/bluetooth_settings_title"
         android:icon="@drawable/ic_settings_bluetooth"
-        android:order="-9"/>
+        android:order="-9"
+        settings:searchable="false"/>
 
     <SwitchPreference
         android:key="toggle_nfc"
@@ -57,7 +58,8 @@
         android:summary="@string/summary_placeholder"
         android:icon="@drawable/ic_settings_print"
         android:fragment="com.android.settings.print.PrintSettingsFragment"
-        android:order="-3"/>
+        android:order="-3"
+        settings:searchable="false"/>
 
     <Preference
         android:key="bt_received_files"

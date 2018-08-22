@@ -24,8 +24,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.recyclerview.widget.DiffUtil;
 
 import com.android.settings.R;
-import com.android.settings.homepage.conditional.Condition;
-import com.android.settings.homepage.conditional.v2.ConditionalCard;
+import com.android.settings.homepage.conditional.ConditionalCard;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 
@@ -33,7 +32,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Description about data list used in the DashboardAdapter. In the data list each item can be
@@ -58,15 +56,13 @@ public class DashboardData {
 
     private final List<Item> mItems;
     private final DashboardCategory mCategory;
-    private final List<Condition> mConditions;
-    private final List<ConditionalCard> mConditionsV2;
+    private final List<ConditionalCard> mConditions;
     private final List<Suggestion> mSuggestions;
     private final boolean mConditionExpanded;
 
     private DashboardData(Builder builder) {
         mCategory = builder.mCategory;
         mConditions = builder.mConditions;
-        mConditionsV2 = builder.mConditionsV2;
         mSuggestions = builder.mSuggestions;
         mConditionExpanded = builder.mConditionExpanded;
         mItems = new ArrayList<>();
@@ -107,7 +103,7 @@ public class DashboardData {
         return mCategory;
     }
 
-    public List<Condition> getConditions() {
+    public List<ConditionalCard> getConditions() {
         return mConditions;
     }
 
@@ -147,7 +143,7 @@ public class DashboardData {
      * Find the position of the Tile object.
      * <p>
      * First, try to find the exact identical instance of the tile object, if not found,
-     * then try to find a tile has the same title.
+     * then try to find a tile has the same id.
      *
      * @param tile tile that need to be found
      * @return position of the object, return INDEX_NOT_FOUND if object isn't in the list
@@ -158,7 +154,7 @@ public class DashboardData {
             final Object entity = mItems.get(i).entity;
             if (entity == tile) {
                 return i;
-            } else if (entity instanceof Tile && tile.title.equals(((Tile) entity).title)) {
+            } else if (entity instanceof Tile && tile.getId() == ((Tile) entity).getId()) {
                 return i;
             }
         }
@@ -169,7 +165,8 @@ public class DashboardData {
     /**
      * Add item into list when {@paramref add} is true.
      *
-     * @param item     maybe {@link Condition}, {@link Tile}, {@link DashboardCategory} or null
+     * @param item     maybe {@link ConditionalCard}, {@link Tile}, {@link DashboardCategory}
+     *                 or null
      * @param type     type of the item, and value is the layout id
      * @param stableId The stable id for this item
      * @param add      flag about whether to add item into list
@@ -185,11 +182,8 @@ public class DashboardData {
      * and mIsShowingAll, mConditionExpanded flag.
      */
     private void buildItemsData() {
-        final List<Condition> conditionsV1 = getConditionsToShow(mConditions);
-        final boolean hasConditionsV1 = sizeOf(conditionsV1) > 0;
-        final List<ConditionalCard> conditionsV2 = mConditionsV2;
-        final boolean hasConditionsV2 = sizeOf(conditionsV2) > 0;
-        final boolean hasConditions = hasConditionsV1 || hasConditionsV2;
+        final List<ConditionalCard> conditions = mConditions;
+        final boolean hasConditions = sizeOf(conditions) > 0;
 
         final List<Suggestion> suggestions = getSuggestionsToShow(mSuggestions);
         final boolean hasSuggestions = sizeOf(suggestions) > 0;
@@ -204,20 +198,14 @@ public class DashboardData {
                 STABLE_ID_SUGGESTION_CONDITION_DIVIDER, hasSuggestions && hasConditions);
 
         /* Condition header. This will be present when there is condition and it is collapsed */
-        addToItemList(new ConditionHeaderData(conditionsV1, conditionsV2),
+        addToItemList(new ConditionHeaderData(conditions),
                 R.layout.condition_header,
                 STABLE_ID_CONDITION_HEADER, hasConditions && !mConditionExpanded);
 
         /* Condition container. This is the card view that contains the list of conditions.
          * This will be added whenever the condition list is not empty and expanded */
-        if (hasConditionsV1) {
-            addToItemList(conditionsV1, R.layout.condition_container,
-                    STABLE_ID_CONDITION_CONTAINER, hasConditionsV1 && mConditionExpanded);
-        }
-        if (hasConditionsV2) {
-            addToItemList(conditionsV2, R.layout.condition_container,
-                    STABLE_ID_CONDITION_CONTAINER, hasConditionsV2 && mConditionExpanded);
-        }
+        addToItemList(conditions, R.layout.condition_container,
+                STABLE_ID_CONDITION_CONTAINER, hasConditions && mConditionExpanded);
 
         /* Condition footer. This will be present when there is condition and it is expanded */
         addToItemList(null /* item */, R.layout.condition_footer,
@@ -227,7 +215,7 @@ public class DashboardData {
             final List<Tile> tiles = mCategory.getTiles();
             for (int i = 0; i < tiles.size(); i++) {
                 final Tile tile = tiles.get(i);
-                addToItemList(tile, R.layout.dashboard_tile, Objects.hash(tile.title),
+                addToItemList(tile, R.layout.dashboard_tile, tile.getId(),
                         true /* add */);
             }
         }
@@ -235,21 +223,6 @@ public class DashboardData {
 
     private static int sizeOf(List<?> list) {
         return list == null ? 0 : list.size();
-    }
-
-    private List<Condition> getConditionsToShow(List<Condition> conditions) {
-        if (conditions == null) {
-            return null;
-        }
-        List<Condition> result = new ArrayList<>();
-        final int size = conditions == null ? 0 : conditions.size();
-        for (int i = 0; i < size; i++) {
-            final Condition condition = conditions.get(i);
-            if (condition.shouldShow()) {
-                result.add(condition);
-            }
-        }
-        return result;
     }
 
     private List<Suggestion> getSuggestionsToShow(List<Suggestion> suggestions) {
@@ -271,8 +244,7 @@ public class DashboardData {
      */
     public static class Builder {
         private DashboardCategory mCategory;
-        private List<Condition> mConditions;
-        private List<ConditionalCard> mConditionsV2;
+        private List<ConditionalCard> mConditions;
         private List<Suggestion> mSuggestions;
         private boolean mConditionExpanded;
 
@@ -282,7 +254,6 @@ public class DashboardData {
         public Builder(DashboardData dashboardData) {
             mCategory = dashboardData.mCategory;
             mConditions = dashboardData.mConditions;
-            mConditionsV2 = dashboardData.mConditionsV2;
             mSuggestions = dashboardData.mSuggestions;
             mConditionExpanded = dashboardData.mConditionExpanded;
         }
@@ -292,13 +263,8 @@ public class DashboardData {
             return this;
         }
 
-        public Builder setConditions(List<Condition> conditions) {
+        public Builder setConditions(List<ConditionalCard> conditions) {
             this.mConditions = conditions;
-            return this;
-        }
-
-        public Builder setConditionsV2(List<ConditionalCard> conditions) {
-            this.mConditionsV2 = conditions;
             return this;
         }
 
@@ -375,7 +341,7 @@ public class DashboardData {
         }
 
         /**
-         * The main data object in item, usually is a {@link Tile}, {@link Condition}
+         * The main data object in item, usually is a {@link Tile}, {@link ConditionalCard}
          * object. This object can also be null when the
          * item is an divider line. Please refer to {@link #buildItemsData()} for
          * detail usage of the Item.
@@ -425,9 +391,11 @@ public class DashboardData {
                     final Tile localTile = (Tile) entity;
                     final Tile targetTile = (Tile) targetItem.entity;
 
-                    // Only check title and summary for dashboard tile
-                    return TextUtils.equals(localTile.title, targetTile.title)
-                            && TextUtils.equals(localTile.summary, targetTile.summary);
+                    // Only check id and summary for dashboard tile
+                    return localTile.getId() == targetTile.getId()
+                            && TextUtils.equals(
+                            localTile.getSummaryReference(),
+                            targetTile.getSummaryReference());
                 case TYPE_SUGGESTION_CONTAINER:
                 case TYPE_CONDITION_CONTAINER:
                     // Fall through to default
@@ -447,22 +415,15 @@ public class DashboardData {
         public final CharSequence title;
         public final int conditionCount;
 
-        public ConditionHeaderData(List<Condition> conditions, List<ConditionalCard> conditionsV2) {
-            if (conditionsV2 == null) {
-                conditionCount = sizeOf(conditions);
-                title = conditionCount > 0 ? conditions.get(0).getTitle() : null;
-                conditionIcons = new ArrayList<>();
-                for (int i = 0; conditions != null && i < conditions.size(); i++) {
-                    final Condition condition = conditions.get(i);
-                    conditionIcons.add(condition.getIcon());
-                }
-            } else {
-                conditionCount = sizeOf(conditionsV2);
-                title = conditionCount > 0 ? conditionsV2.get(0).getTitle() : null;
-                conditionIcons = new ArrayList<>();
-                for (ConditionalCard card : conditionsV2) {
-                    conditionIcons.add(card.getIcon());
-                }
+        public ConditionHeaderData(List<ConditionalCard> conditions) {
+            conditionCount = sizeOf(conditions);
+            title = conditionCount > 0 ? conditions.get(0).getTitle() : null;
+            conditionIcons = new ArrayList<>();
+            if (conditions == null) {
+                return;
+            }
+            for (ConditionalCard card : conditions) {
+                conditionIcons.add(card.getIcon());
             }
         }
     }

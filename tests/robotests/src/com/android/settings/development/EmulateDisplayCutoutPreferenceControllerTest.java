@@ -17,6 +17,8 @@
 package com.android.settings.development;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.AdditionalMatchers.aryEq;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
@@ -36,6 +38,7 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.AdditionalMatchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -48,10 +51,10 @@ import androidx.preference.PreferenceScreen;
 @RunWith(SettingsRobolectricTestRunner.class)
 public class EmulateDisplayCutoutPreferenceControllerTest {
 
-    private static final OverlayInfo ONE_DISABLED = createFakeOverlay("emulation.one", false);
-    private static final OverlayInfo ONE_ENABLED = createFakeOverlay("emulation.one", true);
-    private static final OverlayInfo TWO_DISABLED = createFakeOverlay("emulation.two", false);
-    private static final OverlayInfo TWO_ENABLED = createFakeOverlay("emulation.two", true);
+    private static final OverlayInfo ONE_DISABLED = createFakeOverlay("emulation.one", false, 1);
+    private static final OverlayInfo ONE_ENABLED = createFakeOverlay("emulation.one", true, 1);
+    private static final OverlayInfo TWO_DISABLED = createFakeOverlay("emulation.two", false, 2);
+    private static final OverlayInfo TWO_ENABLED = createFakeOverlay("emulation.two", true, 2);
 
     @Mock
     private Context mContext;
@@ -135,6 +138,16 @@ public class EmulateDisplayCutoutPreferenceControllerTest {
     }
 
     @Test
+    public void ordered_by_priority() throws Exception {
+        mockCurrentOverlays(TWO_DISABLED, ONE_DISABLED);
+
+        mController.updateState(null);
+
+        verify(mPreference).setEntryValues(
+                aryEq(new String[]{"", ONE_DISABLED.packageName, TWO_DISABLED.packageName}));
+    }
+
+    @Test
     public void onDeveloperOptionsSwitchDisabled() throws Exception {
         mockCurrentOverlays(ONE_ENABLED, TWO_DISABLED);
         final PreferenceScreen screen = mock(PreferenceScreen.class);
@@ -152,16 +165,16 @@ public class EmulateDisplayCutoutPreferenceControllerTest {
                 mOverlayManager);
     }
 
-    private static OverlayInfo createFakeOverlay(String pkg, boolean enabled) {
+    private static OverlayInfo createFakeOverlay(String pkg, boolean enabled, int priority) {
         final int state = (enabled) ? OverlayInfo.STATE_ENABLED : OverlayInfo.STATE_DISABLED;
 
         return new OverlayInfo(pkg /* packageName */,
-                pkg + ".target" /* targetPackageName */,
+                "android" /* targetPackageName */,
                 DisplayCutout.EMULATION_OVERLAY_CATEGORY /* category */,
                 pkg + ".baseCodePath" /* baseCodePath */,
                 state /* state */,
                 0 /* userId */,
-                0 /* priority */,
+                priority,
                 true /* isStatic */);
     }
 }

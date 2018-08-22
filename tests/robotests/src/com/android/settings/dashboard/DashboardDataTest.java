@@ -33,8 +33,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListUpdateCallback;
 
-import com.android.settings.homepage.conditional.AirplaneModeCondition;
-import com.android.settings.homepage.conditional.Condition;
+import com.android.settings.homepage.conditional.AirplaneModeConditionCard;
+import com.android.settings.homepage.conditional.ConditionalCard;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
@@ -49,13 +49,12 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DashboardDataTest {
 
     private static final String TEST_SUGGESTION_TITLE = "Use fingerprint";
-    private static final String TEST_CATEGORY_TILE_TITLE = "Display";
+    private static final int TEST_TILE_ID = 12345;
 
     private DashboardData mDashboardDataWithOneConditions;
     private DashboardData mDashboardDataWithTwoConditions;
@@ -64,9 +63,9 @@ public class DashboardDataTest {
     @Mock
     private Tile mTestCategoryTile;
     @Mock
-    private Condition mTestCondition;
+    private ConditionalCard mTestCondition;
     @Mock
-    private Condition mSecondCondition; // condition used to test insert in DiffUtil
+    private ConditionalCard mSecondCondition; // condition used to test insert in DiffUtil
     private Suggestion mTestSuggestion;
 
     @Before
@@ -84,18 +83,16 @@ public class DashboardDataTest {
         suggestions.add(mTestSuggestion);
 
         // Build oneItemConditions
-        final List<Condition> oneItemConditions = new ArrayList<>();
-        when(mTestCondition.shouldShow()).thenReturn(true);
+        final List<ConditionalCard> oneItemConditions = new ArrayList<>();
         oneItemConditions.add(mTestCondition);
 
         // Build twoItemConditions
-        final List<Condition> twoItemsConditions = new ArrayList<>();
-        when(mSecondCondition.shouldShow()).thenReturn(true);
+        final List<ConditionalCard> twoItemsConditions = new ArrayList<>();
         twoItemsConditions.add(mTestCondition);
         twoItemsConditions.add(mSecondCondition);
 
         // Build category
-        mTestCategoryTile.title = TEST_CATEGORY_TILE_TITLE;
+        when(mTestCategoryTile.getId()).thenReturn(TEST_TILE_ID);
 
         mDashboardCategory.addTile(mTestCategoryTile);
 
@@ -132,7 +129,7 @@ public class DashboardDataTest {
         assertThat(items.get(1).id).isEqualTo(STABLE_ID_SUGGESTION_CONDITION_DIVIDER);
         assertThat(items.get(2).id).isEqualTo(STABLE_ID_CONDITION_CONTAINER);
         assertThat(items.get(3).id).isEqualTo(STABLE_ID_CONDITION_FOOTER);
-        assertThat(items.get(4).id).isEqualTo(Objects.hash(mTestCategoryTile.title));
+        assertThat(items.get(4).id).isEqualTo(TEST_TILE_ID);
     }
 
     @Test
@@ -171,7 +168,7 @@ public class DashboardDataTest {
 
     @Test
     public void testGetPositionByEntity_notExisted_returnNotFound() {
-        final Condition condition = mock(AirplaneModeCondition.class);
+        final ConditionalCard condition = mock(AirplaneModeConditionCard.class);
         final int position = mDashboardDataWithOneConditions.getPositionByEntity(condition);
         assertThat(position).isEqualTo(DashboardData.POSITION_NOT_FOUND);
     }
@@ -185,15 +182,17 @@ public class DashboardDataTest {
     @Test
     public void testGetPositionByTile_equalTitle_returnPositionFound() {
         final Tile tile = mock(Tile.class);
-        tile.title = TEST_CATEGORY_TILE_TITLE;
+        when(tile.getId()).thenReturn(TEST_TILE_ID);
+
         final int position = mDashboardDataWithOneConditions.getPositionByTile(tile);
+
         assertThat(position).isNotEqualTo(DashboardData.POSITION_NOT_FOUND);
     }
 
     @Test
     public void testGetPositionByTile_notExisted_returnNotFound() {
         final Tile tile = mock(Tile.class);
-        tile.title = "";
+        when(tile.getId()).thenReturn(123);
         final int position = mDashboardDataWithOneConditions.getPositionByTile(tile);
         assertThat(position).isEqualTo(DashboardData.POSITION_NOT_FOUND);
     }
@@ -226,8 +225,8 @@ public class DashboardDataTest {
         testResultData.add(new ListUpdateResult.ResultData(
                 ListUpdateResult.ResultData.TYPE_OPERATION_CHANGE, 2, 1));
         // Build DashboardData
-        final List<Condition> oneItemConditions = new ArrayList<>();
-        when(mTestCondition.shouldShow()).thenReturn(true);
+        final List<ConditionalCard> oneItemConditions = new ArrayList<>();
+
         oneItemConditions.add(mTestCondition);
         final List<Suggestion> suggestions = new ArrayList<>();
         suggestions.add(mTestSuggestion);

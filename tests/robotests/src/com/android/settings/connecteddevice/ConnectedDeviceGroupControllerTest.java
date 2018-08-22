@@ -15,9 +15,11 @@
  */
 package com.android.settings.connecteddevice;
 
-import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
@@ -26,6 +28,11 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.bluetooth.ConnectedBluetoothDeviceUpdater;
 import com.android.settings.connecteddevice.dock.DockUpdater;
@@ -43,11 +50,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplicationPackageManager;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowApplicationPackageManager.class)
@@ -94,7 +96,7 @@ public class ConnectedDeviceGroupControllerTest {
     }
 
     @Test
-    public void testOnDeviceAdded_firstAdd_becomeVisibleAndPreferenceAdded() {
+    public void onDeviceAdded_firstAdd_becomeVisibleAndPreferenceAdded() {
         mConnectedDeviceGroupController.onDeviceAdded(mPreference);
 
         assertThat(mPreferenceGroup.isVisible()).isTrue();
@@ -102,7 +104,7 @@ public class ConnectedDeviceGroupControllerTest {
     }
 
     @Test
-    public void testOnDeviceRemoved_lastRemove_becomeInvisibleAndPreferenceRemoved() {
+    public void onDeviceRemoved_lastRemove_becomeInvisibleAndPreferenceRemoved() {
         mPreferenceGroup.addPreference(mPreference);
 
         mConnectedDeviceGroupController.onDeviceRemoved(mPreference);
@@ -112,7 +114,7 @@ public class ConnectedDeviceGroupControllerTest {
     }
 
     @Test
-    public void testOnDeviceRemoved_notLastRemove_stillVisible() {
+    public void onDeviceRemoved_notLastRemove_stillVisible() {
         mPreferenceGroup.setVisible(true);
         mPreferenceGroup.addPreference(mPreference);
         mPreferenceGroup.addPreference(new Preference(mContext));
@@ -123,7 +125,7 @@ public class ConnectedDeviceGroupControllerTest {
     }
 
     @Test
-    public void testDisplayPreference_becomeInvisible() {
+    public void displayPreference_becomeInvisible() {
         doReturn(mPreferenceGroup).when(mPreferenceScreen).findPreference(anyString());
 
         mConnectedDeviceGroupController.displayPreference(mPreferenceScreen);
@@ -132,7 +134,7 @@ public class ConnectedDeviceGroupControllerTest {
     }
 
     @Test
-    public void testRegister() {
+    public void onStart_shouldRegisterUpdaters() {
         // register the callback in onStart()
         mConnectedDeviceGroupController.onStart();
         verify(mConnectedBluetoothDeviceUpdater).registerCallback();
@@ -141,7 +143,7 @@ public class ConnectedDeviceGroupControllerTest {
     }
 
     @Test
-    public void testUnregister() {
+    public void onStop_shouldUnregisterUpdaters() {
         // unregister the callback in onStop()
         mConnectedDeviceGroupController.onStop();
         verify(mConnectedBluetoothDeviceUpdater).unregisterCallback();
@@ -150,7 +152,7 @@ public class ConnectedDeviceGroupControllerTest {
     }
 
     @Test
-    public void testGetAvailabilityStatus_noBluetoothFeature_returnUnSupported() {
+    public void getAvailabilityStatus_noBluetoothFeature_returnUnSupported() {
         mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, false);
 
         assertThat(mConnectedDeviceGroupController.getAvailabilityStatus()).isEqualTo(
@@ -158,10 +160,10 @@ public class ConnectedDeviceGroupControllerTest {
     }
 
     @Test
-    public void testGetAvailabilityStatus_BluetoothFeature_returnSupported() {
+    public void getAvailabilityStatus_BluetoothFeature_returnSupported() {
         mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, true);
 
         assertThat(mConnectedDeviceGroupController.getAvailabilityStatus()).isEqualTo(
-                AVAILABLE);
+                AVAILABLE_UNSEARCHABLE);
     }
 }

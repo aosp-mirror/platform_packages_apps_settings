@@ -38,7 +38,8 @@
         <Preference
                 android:key="tts_settings_preference"
                 android:fragment="com.android.settings.tts.TextToSpeechSettings"
-                android:title="@string/tts_settings_title"/>
+                android:title="@string/tts_settings_title"
+                settings:searchable="false"/>
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -48,12 +49,14 @@
         <Preference
             android:fragment="com.android.settings.accessibility.ToggleFontSizePreferenceFragment"
             android:key="font_size_preference_screen"
-            android:title="@string/title_font_size" />
+            android:title="@string/title_font_size"
+            settings:searchable="false"/>
 
         <com.android.settings.display.ScreenZoomPreference
             android:key="accessibility_settings_screen_zoom"
             android:fragment="com.android.settings.display.ScreenZoomSettings"
-            android:title="@string/screen_zoom_title" />
+            android:title="@string/screen_zoom_title"
+            settings:searchable="false"/>
 
         <Preference
             android:fragment="com.android.settings.accessibility.MagnificationPreferenceFragment"
@@ -77,7 +80,8 @@
         <Preference
                 android:fragment="com.android.settings.accessibility.ToggleAutoclickPreferenceFragment"
                 android:key="autoclick_preference"
-                android:title="@string/accessibility_autoclick_preference_title"/>
+                android:title="@string/accessibility_autoclick_preference_title"
+                settings:searchable="false"/>
 
         <SwitchPreference
                 android:key="toggle_power_button_ends_call_preference"
@@ -136,7 +140,8 @@
                 android:fragment="com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment"
                 android:key="daltonizer_preference"
                 android:title="@string/accessibility_display_daltonizer_preference_title"
-                android:icon="@drawable/ic_daltonizer"/>
+                android:icon="@drawable/ic_daltonizer"
+                settings:searchable="false"/>
 
         <SwitchPreference
                 android:key="toggle_inversion_preference"

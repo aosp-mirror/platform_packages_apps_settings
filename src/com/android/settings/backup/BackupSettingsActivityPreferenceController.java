@@ -26,13 +26,12 @@ import com.android.settings.core.BasePreferenceController;
 public class BackupSettingsActivityPreferenceController extends BasePreferenceController {
     private static final String TAG = "BackupSettingActivityPC";
 
-    private static final String KEY_BACKUP_SETTINGS = "backup_settings";
 
     private final UserManager mUm;
     private final BackupManager mBackupManager;
 
-    public BackupSettingsActivityPreferenceController(Context context) {
-        super(context, KEY_BACKUP_SETTINGS);
+    public BackupSettingsActivityPreferenceController(Context context, String key) {
+        super(context, key);
         mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mBackupManager = new BackupManager(context);
     }
