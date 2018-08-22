@@ -135,9 +135,5 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
         mBatteryMeterView.setCharging(!discharging);
         mBatteryMeterView.setPowerSave(mPowerManager.isPowerSaveMode());
         mBatteryPercentText.setText(Utils.formatPercentage(batteryLevel));
-
-        // clear all the summaries
-        mSummary1.setText("");
-        mSummary2.setText("");
     }
 }
