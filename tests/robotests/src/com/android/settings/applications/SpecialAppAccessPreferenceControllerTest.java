@@ -16,15 +16,25 @@
 
 package com.android.settings.applications;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
+
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.verify;
+
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.datausage.DataSaverBackend;
+import com.android.settings.datausage.AppStateDataUsageBridge;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowApplicationsState;
+import com.android.settings.testutils.shadow.ShadowUserManager;
+import com.android.settingslib.applications.ApplicationsState;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -32,48 +42,56 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.util.ReflectionHelpers;
+import org.robolectric.annotation.Config;
 
-import androidx.preference.Preference;
+import java.util.ArrayList;
 
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(shadows = {ShadowUserManager.class, ShadowApplicationsState.class})
 public class SpecialAppAccessPreferenceControllerTest {
 
     private Context mContext;
     @Mock
-    private DataSaverBackend mBackend;
+    private ApplicationsState.Session mSession;
     @Mock
-    private Preference mPreference;
+    private PreferenceScreen mScreen;
 
     private SpecialAppAccessPreferenceController mController;
+    private Preference mPreference;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = new SpecialAppAccessPreferenceController(mContext);
-        ReflectionHelpers.setField(mController, "mDataSaverBackend", mBackend);
+        ShadowUserManager.getShadow().setProfileIdsWithDisabled(new int[]{0});
+        mController = new SpecialAppAccessPreferenceController(mContext, "test_key");
+        mPreference = new Preference(mContext);
+        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
+
+        mController.mSession = mSession;
     }
 
     @Test
-    public void isAvailable_shouldAlwaysReturnTrue() {
-        assertThat(mController.isAvailable()).isTrue();
+    public void getAvailabilityState_unsearchable() {
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
     }
 
     @Test
     public void updateState_shouldSetSummary() {
-        when(mBackend.getWhitelistedCount()).thenReturn(0);
+        final ArrayList<ApplicationsState.AppEntry> apps = new ArrayList<>();
+        final ApplicationsState.AppEntry entry = mock(ApplicationsState.AppEntry.class);
+        entry.hasLauncherEntry = true;
+        entry.info = new ApplicationInfo();
+        entry.extraInfo = new AppStateDataUsageBridge.DataUsageState(
+                true /* whitelisted */, false /* blacklisted */);
+        apps.add(entry);
+        when(mSession.getAllApps()).thenReturn(apps);
 
-        mController.updateState(mPreference);
+        mController.displayPreference(mScreen);
+        mController.onExtraInfoUpdated();
 
-        verify(mPreference).setSummary(mContext.getResources()
-            .getQuantityString(R.plurals.special_access_summary, 0, 0));
-
-        when(mBackend.getWhitelistedCount()).thenReturn(1);
-
-        mController.updateState(mPreference);
-
-        verify(mPreference).setSummary(mContext.getResources()
-            .getQuantityString(R.plurals.special_access_summary, 1, 1));
+        assertThat(mPreference.getSummary())
+                .isEqualTo(mContext.getResources().getQuantityString(
+                        R.plurals.special_access_summary, 1, 1));
     }
 }

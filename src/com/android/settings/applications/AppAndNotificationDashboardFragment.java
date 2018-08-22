@@ -21,6 +21,8 @@ import android.app.Application;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
+import androidx.fragment.app.Fragment;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -32,8 +34,6 @@ import com.android.settingslib.search.SearchIndexable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import androidx.fragment.app.Fragment;
 
 @SearchIndexable
 public class AppAndNotificationDashboardFragment extends DashboardFragment {
@@ -61,6 +61,12 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        use(SpecialAppAccessPreferenceController.class).setSession(getSettingsLifecycle());
+    }
+
+    @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final Activity activity = getActivity();
         final Application app;
@@ -77,7 +83,6 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new EmergencyBroadcastPreferenceController(context,
                 "app_and_notif_cell_broadcast_settings"));
-        controllers.add(new SpecialAppAccessPreferenceController(context));
         controllers.add(new RecentAppsPreferenceController(context, app, host));
         return controllers;
     }
