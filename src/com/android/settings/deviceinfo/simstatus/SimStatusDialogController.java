@@ -50,6 +50,7 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.Utils;
 
 import java.util.List;
 
@@ -253,8 +254,8 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     }
 
     private void updateServiceState(ServiceState serviceState) {
-        final int state = serviceState.getState();
-        if (state == ServiceState.STATE_OUT_OF_SERVICE || state == ServiceState.STATE_POWER_OFF) {
+        final int state = Utils.getCombinedServiceState(serviceState);
+        if (!Utils.isInService(serviceState)) {
             resetSignalStrength();
         }
 
@@ -297,10 +298,8 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
             return;
         }
 
-        final int state = getCurrentServiceState().getState();
-
-        if ((ServiceState.STATE_OUT_OF_SERVICE == state) ||
-                (ServiceState.STATE_POWER_OFF == state)) {
+        ServiceState serviceState = getCurrentServiceState();
+        if (serviceState == null || !Utils.isInService(serviceState)) {
             return;
         }
 
