@@ -19,6 +19,7 @@ import static android.os.UserHandle.myUserId;
 import static android.os.UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS;
 
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -27,7 +28,9 @@ import android.provider.Settings;
 import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
 import android.telephony.TelephonyManager;
+import android.util.FeatureFlagUtils;
 
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
@@ -44,7 +47,12 @@ import androidx.preference.PreferenceScreen;
 public class MobileNetworkPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnStart, OnStop {
 
-    private static final String KEY_MOBILE_NETWORK_SETTINGS = "mobile_network_settings";
+    @VisibleForTesting
+    static final String KEY_MOBILE_NETWORK_SETTINGS = "mobile_network_settings";
+    @VisibleForTesting
+    static final String MOBILE_NETWORK_PACKAGE = "com.android.phone";
+    @VisibleForTesting
+    static final String MOBILE_NETWORK_CLASS = "com.android.phone.MobileNetworkSettings";
 
     private final boolean mIsSecondaryUser;
     private final TelephonyManager mTelephonyManager;
@@ -132,6 +140,22 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
         }
         preference.setEnabled(Settings.Global.getInt(
             mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0) == 0);
+    }
+
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        if (KEY_MOBILE_NETWORK_SETTINGS.equals(preference.getKey())) {
+            if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.MOBILE_NETWORK_V2)) {
+                //TODO(b/110260193): go to the mobile network page existed in settings
+            } else {
+                final Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.setComponent(
+                        new ComponentName(MOBILE_NETWORK_PACKAGE, MOBILE_NETWORK_CLASS));
+                mContext.startActivity(intent);
+            }
+            return true;
+        }
+        return false;
     }
 
     @Override
