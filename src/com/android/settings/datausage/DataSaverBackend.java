@@ -95,19 +95,10 @@ public class DataSaverBackend {
         return mUidPolicies.get(uid, POLICY_NONE) == POLICY_ALLOW_METERED_BACKGROUND;
     }
 
-    public int getWhitelistedCount() {
-        int count = 0;
-        loadWhitelist();
-        for (int i = 0; i < mUidPolicies.size(); i++) {
-            if (mUidPolicies.valueAt(i) == POLICY_ALLOW_METERED_BACKGROUND) {
-                count++;
-            }
-        }
-        return count;
-    }
-
     private void loadWhitelist() {
-        if (mWhitelistInitialized) return;
+        if (mWhitelistInitialized) {
+            return;
+        }
 
         for (int uid : mPolicyManager.getUidsWithPolicy(POLICY_ALLOW_METERED_BACKGROUND)) {
             mUidPolicies.put(uid, POLICY_ALLOW_METERED_BACKGROUND);
@@ -135,7 +126,9 @@ public class DataSaverBackend {
     }
 
     private void loadBlacklist() {
-        if (mBlacklistInitialized) return;
+        if (mBlacklistInitialized) {
+            return;
+        }
         for (int uid : mPolicyManager.getUidsWithPolicy(POLICY_REJECT_METERED_BACKGROUND)) {
             mUidPolicies.put(uid, POLICY_REJECT_METERED_BACKGROUND);
         }
@@ -212,7 +205,9 @@ public class DataSaverBackend {
 
     public interface Listener {
         void onDataSaverChanged(boolean isDataSaving);
+
         void onWhitelistStatusChanged(int uid, boolean isWhitelisted);
+
         void onBlacklistStatusChanged(int uid, boolean isBlacklisted);
     }
 }
