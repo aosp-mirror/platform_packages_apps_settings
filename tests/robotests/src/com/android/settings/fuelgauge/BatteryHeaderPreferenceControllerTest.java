@@ -140,7 +140,7 @@ public class BatteryHeaderPreferenceControllerTest {
     }
 
     @Test
-    public void testDisplayPreference_displayBatteryLevel() {
+    public void displayPreference_displayBatteryLevel() {
         mController.displayPreference(mPreferenceScreen);
 
         assertThat(((BatteryMeterView) mBatteryLayoutPref.findViewById(
@@ -150,7 +150,7 @@ public class BatteryHeaderPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdatePreference_hasRemainingTime_showRemainingLabel() {
+    public void updatePreference_hasRemainingTime_showRemainingLabel() {
         mBatteryInfo.remainingLabel = TIME_LEFT;
 
         mController.updateHeaderPreference(mBatteryInfo);
@@ -159,7 +159,7 @@ public class BatteryHeaderPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdatePreference_updateBatteryInfo() {
+    public void updatePreference_updateBatteryInfo() {
         mBatteryInfo.remainingLabel = TIME_LEFT;
         mBatteryInfo.batteryLevel = BATTERY_LEVEL;
         mBatteryInfo.discharging = true;
@@ -171,7 +171,7 @@ public class BatteryHeaderPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdatePreference_noRemainingTime_showStatusLabel() {
+    public void updatePreference_noRemainingTime_showStatusLabel() {
         mBatteryInfo.remainingLabel = null;
         mBatteryInfo.statusLabel = BATTERY_STATUS;
 
@@ -181,7 +181,7 @@ public class BatteryHeaderPreferenceControllerTest {
     }
 
     @Test
-    public void testOnStart_shouldStyleActionBar() {
+    public void onStart_shouldStyleActionBar() {
         when(mEntityHeaderController.setRecyclerView(nullable(RecyclerView.class), eq(mLifecycle)))
                 .thenReturn(mEntityHeaderController);
 
@@ -192,16 +192,21 @@ public class BatteryHeaderPreferenceControllerTest {
     }
 
     @Test
-    public void testQuickUpdateHeaderPreference_showBatteryLevelAndChargingState() {
+    public void quickUpdateHeaderPreference_onlyUpdateBatteryLevelAndChargingState() {
+        mSummary.setText(BATTERY_STATUS);
+        mSummary2.setText(BATTERY_STATUS);
+
         mController.quickUpdateHeaderPreference();
 
         assertThat(mBatteryMeterView.getBatteryLevel()).isEqualTo(BATTERY_LEVEL);
         assertThat(mBatteryMeterView.getCharging()).isTrue();
         assertThat(mBatteryPercentText.getText()).isEqualTo("60%");
+        assertThat(mSummary.getText()).isEqualTo(BATTERY_STATUS);
+        assertThat(mSummary2.getText()).isEqualTo(BATTERY_STATUS);
     }
 
     @Test
-    public void testQuickUpdateHeaderPreference_showPowerSave() {
+    public void quickUpdateHeaderPreference_showPowerSave() {
         boolean testValues[] = {false, true};
 
         ShadowPowerManager shadowPowerManager = Shadows.shadowOf(mPowerManager);

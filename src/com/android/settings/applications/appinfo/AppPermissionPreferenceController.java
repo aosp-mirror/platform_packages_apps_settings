@@ -46,11 +46,8 @@ public class AppPermissionPreferenceController extends AppInfoPreferenceControll
         public void onPermissionSummaryResult(int standardGrantedPermissionCount,
                 int requestedPermissionCount, int additionalGrantedPermissionCount,
                 List<CharSequence> grantedGroupLabels) {
-            if (mParent.getActivity() == null) {
-                return;
-            }
             final Resources res = mContext.getResources();
-            CharSequence summary = null;
+            CharSequence summary;
 
             if (requestedPermissionCount == 0) {
                 summary = res.getString(
