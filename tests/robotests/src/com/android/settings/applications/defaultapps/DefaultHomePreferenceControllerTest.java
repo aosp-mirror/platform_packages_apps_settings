@@ -17,8 +17,8 @@
 package com.android.settings.applications.defaultapps;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyList;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
@@ -29,6 +29,8 @@ import static org.mockito.Mockito.when;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.UserManager;
@@ -45,13 +47,13 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-import java.util.Arrays;
-import java.util.Collections;
-
 import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DefaultHomePreferenceControllerTest {
+
+    private static final String TEST_PACKAGE = "test.pkg";
+    private static final String TEST_CLASS = "class";
 
     @Mock
     private UserManager mUserManager;
@@ -107,14 +109,14 @@ public class DefaultHomePreferenceControllerTest {
     @Test
     public void testIsHomeDefault_noDefaultSet_shouldReturnTrue() {
         when(mPackageManager.getHomeActivities(anyList())).thenReturn(null);
-        assertThat(DefaultHomePreferenceController.isHomeDefault("test.pkg", mPackageManager))
+        assertThat(DefaultHomePreferenceController.isHomeDefault(TEST_PACKAGE, mPackageManager))
                 .isTrue();
     }
 
     @Test
     public void testIsHomeDefault_defaultSetToPkg_shouldReturnTrue() {
-        final String pkgName = "test.pkg";
-        final ComponentName defaultHome = new ComponentName(pkgName, "class");
+        final String pkgName = TEST_PACKAGE;
+        final ComponentName defaultHome = new ComponentName(pkgName, TEST_CLASS);
 
         when(mPackageManager.getHomeActivities(anyList())).thenReturn(defaultHome);
 
@@ -124,8 +126,8 @@ public class DefaultHomePreferenceControllerTest {
 
     @Test
     public void testIsHomeDefault_defaultSetToOtherPkg_shouldReturnFalse() {
-        final String pkgName = "test.pkg";
-        final ComponentName defaultHome = new ComponentName("not" + pkgName, "class");
+        final String pkgName = TEST_PACKAGE;
+        final ComponentName defaultHome = new ComponentName("not" + pkgName, TEST_CLASS);
 
         when(mPackageManager.getHomeActivities(anyList())).thenReturn(defaultHome);
 
@@ -136,29 +138,28 @@ public class DefaultHomePreferenceControllerTest {
     @Test
     public void testGetSettingIntent_homeHasNoSetting_shouldNotReturnSettingIntent() {
         when(mPackageManager.getHomeActivities(anyList()))
-            .thenReturn(new ComponentName("test.pkg", "class"));
+            .thenReturn(new ComponentName(TEST_PACKAGE, TEST_CLASS));
+        when(mPackageManager.resolveActivity(any(Intent.class), anyInt()))
+            .thenReturn(null);
+
         assertThat(mController.getSettingIntent(mController.getDefaultAppInfo())).isNull();
     }
 
     @Test
     public void testGetSettingIntent_homeHasOneSetting_shouldReturnSettingIntent() {
         when(mPackageManager.getHomeActivities(anyList()))
-            .thenReturn(new ComponentName("test.pkg", "class"));
-        when(mPackageManager.queryIntentActivities(any(), eq(0)))
-            .thenReturn(Collections.singletonList(mock(ResolveInfo.class)));
+            .thenReturn(new ComponentName(TEST_PACKAGE, TEST_CLASS));
+        final ResolveInfo info = mock(ResolveInfo.class);
+        info.activityInfo = mock(ActivityInfo.class);
+        info.activityInfo.name = TEST_CLASS;
+        info.activityInfo.applicationInfo = mock(ApplicationInfo.class);
+        info.activityInfo.applicationInfo.packageName = TEST_PACKAGE;
+        when(mPackageManager.resolveActivity(any(Intent.class), anyInt()))
+            .thenReturn(info);
 
         Intent intent = mController.getSettingIntent(mController.getDefaultAppInfo());
         assertThat(intent).isNotNull();
-        assertThat(intent.getPackage()).isEqualTo("test.pkg");
-    }
-
-    @Test
-    public void testGetSettingIntent_homeHasMultipleSettings_shouldNotReturnSettingIntent() {
-        when(mPackageManager.getHomeActivities(anyList()))
-            .thenReturn(new ComponentName("test.pkg", "class"));
-        when(mPackageManager.queryIntentActivities(any(), eq(0)))
-            .thenReturn(Arrays.asList(mock(ResolveInfo.class), mock(ResolveInfo.class)));
-        assertThat(mController.getSettingIntent(mController.getDefaultAppInfo())).isNull();
+        assertThat(intent.getPackage()).isEqualTo(TEST_PACKAGE);
     }
 
     @Test
