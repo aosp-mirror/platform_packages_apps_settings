@@ -17,6 +17,7 @@
 package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.argThat;
@@ -27,6 +28,9 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -41,9 +45,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class AppPermissionPreferenceControllerTest {
@@ -83,8 +84,7 @@ public class AppPermissionPreferenceControllerTest {
     public void onPermissionSummaryResult_noRequestedPermission_shouldDisablePreference() {
         mController.displayPreference(mScreen);
 
-        mController.mPermissionCallback.onPermissionSummaryResult(
-                1, 0, 1, new ArrayList<CharSequence>());
+        mController.mPermissionCallback.onPermissionSummaryResult(1, 0, 1, new ArrayList<>());
 
         verify(mPreference).setEnabled(false);
         verify(mPreference).setSummary(mContext.getString(
@@ -95,8 +95,7 @@ public class AppPermissionPreferenceControllerTest {
     public void onPermissionSummaryResult_noGrantedPermission_shouldSetNoPermissionSummary() {
         mController.displayPreference(mScreen);
 
-        mController.mPermissionCallback.onPermissionSummaryResult(
-                1, 5, 0, new ArrayList<CharSequence>());
+        mController.mPermissionCallback.onPermissionSummaryResult(1, 5, 0, new ArrayList<>());
 
         verify(mPreference).setEnabled(true);
         verify(mPreference).setSummary(mContext.getString(
