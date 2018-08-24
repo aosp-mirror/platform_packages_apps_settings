@@ -22,28 +22,37 @@ import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.NetworkPolicyManager;
 
 import com.android.settings.Settings;
-import com.android.settings.homepage.conditional.BackgroundDataConditionController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class BackgroundDataConditionControllerTest {
+
+    @Mock
+    private ConditionManager mConditionManager;
+    @Mock
+    private NetworkPolicyManager mNetworkPolicyManager;
     private Context mContext;
     private BackgroundDataConditionController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        ShadowApplication.getInstance().setSystemService(Context.NETWORK_POLICY_SERVICE,
+                mNetworkPolicyManager);
         mContext = spy(RuntimeEnvironment.application);
-        mController = new BackgroundDataConditionController(mContext);
+        mController = new BackgroundDataConditionController(mContext, mConditionManager);
     }
 
     @Test
@@ -55,5 +64,11 @@ public class BackgroundDataConditionControllerTest {
 
         assertThat(intent.getComponent().getClassName()).isEqualTo(
                 Settings.DataUsageSummaryActivity.class.getName());
+    }
+
+    @Test
+    public void onActionClick_shouldRefreshCondition() {
+        mController.onActionClick();
+        verify(mConditionManager).onConditionChanged();
     }
 }

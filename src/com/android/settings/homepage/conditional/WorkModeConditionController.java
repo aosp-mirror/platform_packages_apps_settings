@@ -16,11 +16,14 @@
 
 package com.android.settings.homepage.conditional;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.text.TextUtils;
 
 import com.android.settings.Settings;
 
@@ -31,13 +34,25 @@ public class WorkModeConditionController implements ConditionalCardController {
 
     static final int ID = Objects.hash("WorkModeConditionController");
 
+    private static final IntentFilter FILTER = new IntentFilter();
+
+    static {
+        FILTER.addAction(Intent.ACTION_MANAGED_PROFILE_AVAILABLE);
+        FILTER.addAction(Intent.ACTION_MANAGED_PROFILE_UNAVAILABLE);
+    }
+
     private final Context mAppContext;
     private final UserManager mUm;
+    private final ConditionManager mConditionManager;
+    private final Receiver mReceiver;
+
     private UserHandle mUserHandle;
 
-    public WorkModeConditionController(Context appContext) {
+    public WorkModeConditionController(Context appContext, ConditionManager manager) {
         mAppContext = appContext;
         mUm = mAppContext.getSystemService(UserManager.class);
+        mConditionManager = manager;
+        mReceiver = new Receiver();
     }
 
     @Override
@@ -66,12 +81,12 @@ public class WorkModeConditionController implements ConditionalCardController {
 
     @Override
     public void startMonitoringStateChange() {
-
+        mAppContext.registerReceiver(mReceiver, FILTER);
     }
 
     @Override
     public void stopMonitoringStateChange() {
-
+        mAppContext.unregisterReceiver(mReceiver);
     }
 
     private void updateUserHandle() {
@@ -84,6 +99,17 @@ public class WorkModeConditionController implements ConditionalCardController {
                 // We assume there's only one managed profile, otherwise UI needs to change.
                 mUserHandle = userInfo.getUserHandle();
                 break;
+            }
+        }
+    }
+
+    public class Receiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            final String action = intent.getAction();
+            if (TextUtils.equals(action, Intent.ACTION_MANAGED_PROFILE_AVAILABLE)
+                    || TextUtils.equals(action, Intent.ACTION_MANAGED_PROFILE_UNAVAILABLE)) {
+                mConditionManager.onConditionChanged();
             }
         }
     }
