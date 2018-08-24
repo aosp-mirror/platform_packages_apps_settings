@@ -19,6 +19,7 @@ package com.android.settings.development.autofill;
 import android.content.Context;
 import android.content.res.Resources;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.autofill.AutofillManager;
 
 import com.android.settings.R;
@@ -32,6 +33,7 @@ public final class AutofillLoggingLevelPreferenceController
         extends DeveloperOptionsPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
 
+    private static final String TAG = "AutofillLoggingLevelPreferenceController";
     private static final String AUTOFILL_LOGGING_LEVEL_KEY = "autofill_logging_level";
 
     private final String[] mListValues;
@@ -73,6 +75,12 @@ public final class AutofillLoggingLevelPreferenceController
     }
 
     private void updateOptions() {
+        if (mPreference == null) {
+            // TODO: there should be a hook on AbstractPreferenceController where we could
+            // unregister mObserver and avoid this check
+            Log.v(TAG, "ignoring Settings update because UI is gone");
+            return;
+        }
         final int level = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.AUTOFILL_LOGGING_LEVEL, AutofillManager.DEFAULT_LOGGING_LEVEL);
 
