@@ -30,10 +30,12 @@ public class NightDisplayConditionController implements ConditionalCardControlle
         ColorDisplayController.Callback {
     static final int ID = Objects.hash("NightDisplayConditionController");
 
+    private final ConditionManager mConditionManager;
     private final ColorDisplayController mController;
 
-    public NightDisplayConditionController(Context appContext) {
+    public NightDisplayConditionController(Context appContext, ConditionManager manager) {
         mController = new ColorDisplayController(appContext);
+        mConditionManager = manager;
     }
 
     @Override
@@ -68,5 +70,10 @@ public class NightDisplayConditionController implements ConditionalCardControlle
     @Override
     public void stopMonitoringStateChange() {
         mController.setListener(null);
+    }
+
+    @Override
+    public void onActivated(boolean activated) {
+        mConditionManager.onConditionChanged();
     }
 }

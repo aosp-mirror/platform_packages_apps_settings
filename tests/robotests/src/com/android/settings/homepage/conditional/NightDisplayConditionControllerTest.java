@@ -16,14 +16,10 @@
 
 package com.android.settings.homepage.conditional;
 
-import static org.mockito.ArgumentMatchers.argThat;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
-import android.content.ComponentName;
 import android.content.Context;
 
-import com.android.settings.Settings;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -34,29 +30,25 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-public class WorkModeConditionControllerTest {
+public class NightDisplayConditionControllerTest {
 
     @Mock
     private ConditionManager mConditionManager;
+
     private Context mContext;
-    private WorkModeConditionController mController;
+    private NightDisplayConditionController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
-        mController = new WorkModeConditionController(mContext, mConditionManager);
+        mContext = RuntimeEnvironment.application;
+        mController = new NightDisplayConditionController(mContext, mConditionManager);
     }
 
     @Test
-    public void onPrimaryClick_shouldLaunchAccountsSetting() {
-        final ComponentName componentName =
-                new ComponentName(mContext, Settings.AccountDashboardActivity.class);
+    public void onActivated_shouldUpdateCondition() {
+        mController.onActivated(true);
 
-        mController.onPrimaryClick(mContext);
-
-        verify(mContext).startActivity(
-                argThat(intent -> intent.getComponent().equals(componentName)));
+        verify(mConditionManager).onConditionChanged();
     }
-
 }
