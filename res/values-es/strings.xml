@@ -222,7 +222,7 @@
     <string name="radio_info_gprs_service_label" msgid="4209624131644060517">"Servicio de datos:"</string>
     <string name="radio_info_roaming_label" msgid="6141505430275138647">"Itinerancia:"</string>
     <string name="radio_info_imei_label" msgid="1220524224732944192">"IMEI:"</string>
-    <string name="radio_info_call_redirect_label" msgid="2743797189722106231">"Desvío de llamada:"</string>
+    <string name="radio_info_call_redirect_label" msgid="2743797189722106231">"Desvío de llamadas:"</string>
     <string name="radio_info_ppp_resets_label" msgid="3587319503902576102">"Número de PPP restablecido desde el inicio:"</string>
     <string name="radio_info_current_network_label" msgid="9151285540639134945">"Red actual:"</string>
     <string name="radio_info_ppp_received_label" msgid="363579470428151850">"Datos recibidos:"</string>
@@ -975,8 +975,8 @@
     <skip />
     <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"Preferencia de itinerancia"</string>
   <string-array name="wifi_calling_mode_choices">
-    <item msgid="2124257075906188844">"Preferir Wi-Fi"</item>
-    <item msgid="1335127656328817518">"Preferir datos móviles"</item>
+    <item msgid="2124257075906188844">"Dar preferencia a Wi-Fi"</item>
+    <item msgid="1335127656328817518">"Dar prioridad a datos móviles"</item>
     <item msgid="3132912693346866895">"Solo conexión Wi-Fi"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2">
@@ -990,8 +990,8 @@
     <item msgid="3194458950573886239">"0"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_without_wifi_only">
-    <item msgid="5782108782860004851">"Preferir Wi-Fi"</item>
-    <item msgid="5074515506087318555">"Preferir datos móviles"</item>
+    <item msgid="5782108782860004851">"Dar preferencia a Wi-Fi"</item>
+    <item msgid="5074515506087318555">"Dar prioridad a datos móviles"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
     <item msgid="6132150507201243768">"Wi-Fi"</item>
@@ -2652,8 +2652,8 @@
     <string name="data_usage_metered_title" msgid="7383175371006596441">"Restricciones de red"</string>
     <string name="data_usage_metered_body" msgid="7655851702771342507">"Las redes sin uso medido se tratan como redes móviles cuando se restringe el uso de datos en segundo plano. Las aplicaciones pueden mostrar una advertencia antes de usar estas redes para descargar archivos grandes."</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"Redes móviles"</string>
-    <string name="data_usage_metered_wifi" msgid="1761738002328299714">"Redes Wi-Fi sin uso medido"</string>
-    <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"Para seleccionar redes sin uso medido, activa el Wi‑Fi."</string>
+    <string name="data_usage_metered_wifi" msgid="1761738002328299714">"Redes Wi-Fi de uso medido"</string>
+    <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"Para seleccionar redes de uso medido, activa el Wi-Fi."</string>
     <string name="data_usage_metered_auto" msgid="1262028400911918865">"Automática"</string>
     <string name="data_usage_metered_yes" msgid="9217539611385225894">"De uso medido"</string>
     <string name="data_usage_metered_no" msgid="4025232961929071789">"Con uso medido"</string>
@@ -3399,7 +3399,7 @@
     <string name="zen_mode_screen_off_summary_no_led" msgid="2826121465026642017">"Permitir que las notificaciones silenciadas por el modo No molestar activen la pantalla"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Ajustes de notificaciones"</string>
     <string name="suggestion_button_text" msgid="3275010948381252006">"Aceptar"</string>
-    <string name="device_feedback" msgid="3238056036766293294">"Enviar sugerencias sobre el dispositivo"</string>
+    <string name="device_feedback" msgid="3238056036766293294">"Enviar comentarios sobre el dispositivo"</string>
     <string name="restr_pin_enter_admin_pin" msgid="1085834515677448072">"Introducir el PIN del administrador"</string>
     <string name="switch_on_text" msgid="1124106706920572386">"Activado"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Desactivado"</string>
@@ -3889,9 +3889,9 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"ninguno"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Falta un objeto de la clasificación."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"El objeto de la clasificación no incluye esta tecla."</string>
-    <string name="display_cutout_emulation" msgid="6306593933746393170">"Simular una pantalla con un recorte"</string>
+    <string name="display_cutout_emulation" msgid="7466869822418376317">"Recorte de la pantalla"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"recorte de la pantalla, corte"</string>
-    <string name="display_cutout_emulation_none" msgid="5144174674654097316">"Ninguna"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Opción predeterminada del dispositivo"</string>
     <string name="special_access" msgid="3458780842491881155">"Acceso especial de aplicaciones"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplicaciones pueden utilizar datos sin restricción</item>
@@ -4152,5 +4152,4 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Detalles de la red"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Las aplicaciones de tu teléfono pueden ver el nombre de tu dispositivo. También es posible que lo vean otros usuarios si lo conectas con dispositivos Bluetooth o configuras un punto de acceso Wi‑Fi."</string>
     <string name="devices_title" msgid="7701726109334110391">"Dispositivos"</string>
-    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Predeterminado"</string>
 </resources>

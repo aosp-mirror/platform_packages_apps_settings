@@ -976,7 +976,7 @@
     <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"Preferenze durante il roaming"</string>
   <string-array name="wifi_calling_mode_choices">
     <item msgid="2124257075906188844">"Reta preferita: Wi-Fi"</item>
-    <item msgid="1335127656328817518">"Modalità preferita: rete mobile"</item>
+    <item msgid="1335127656328817518">"Modalità preferita: dati mobili"</item>
     <item msgid="3132912693346866895">"Solo Wi-Fi"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2">
@@ -991,7 +991,7 @@
   </string-array>
   <string-array name="wifi_calling_mode_choices_without_wifi_only">
     <item msgid="5782108782860004851">"Rete preferita: Wi-Fi"</item>
-    <item msgid="5074515506087318555">"Modalità preferita: rete mobile"</item>
+    <item msgid="5074515506087318555">"Modalità preferita: dati mobili"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
     <item msgid="6132150507201243768">"Wi-Fi"</item>
@@ -1677,7 +1677,7 @@
     <string name="screen_compatibility_label" msgid="663250687205465394">"Compatibilità schermo"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Autorizzazioni"</string>
     <string name="cache_header_label" msgid="1877197634162461830">"Cache"</string>
-    <string name="clear_cache_btn_text" msgid="5756314834291116325">"Cancella cache"</string>
+    <string name="clear_cache_btn_text" msgid="5756314834291116325">"Svuota cache"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"Cache"</string>
     <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
       <item quantity="other">%d elementi</item>
@@ -1927,7 +1927,7 @@
     <string name="accessibility_settings" msgid="3975902491934816215">"Accessibilità"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Impostazioni di accessibilità"</string>
     <string name="accessibility_settings_summary" msgid="981260486011624939">"Screen reader, display, controlli di interazione"</string>
-    <string name="vision_settings_title" msgid="4204111425716868288">"Impostazioni vista"</string>
+    <string name="vision_settings_title" msgid="4204111425716868288">"Impostazioni visive"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"Puoi personalizzare questo dispositivo in base alle tue esigenze. Queste funzioni di accessibilità possono essere modificate in un secondo momento nelle Impostazioni."</string>
     <string name="vision_settings_suggestion_title" msgid="8058794060304707004">"Cambia dimensioni carattere"</string>
     <string name="screen_reader_category_title" msgid="7739154903913400641">"Screen reader"</string>
@@ -2842,7 +2842,7 @@
     <string name="nfc_payment_favor_open" msgid="1923314062109977944">"Tranne quando è aperta un\'altra app per il pagamento"</string>
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"Se è disponibile un terminale Tocca e paga, paga con:"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"Pagamento al terminale"</string>
-    <string name="nfc_how_it_works_content" msgid="4749007806393224934">"Configura un\'app per il pagamento e appoggia il retro del telefono su qualsiasi terminale con il simbolo del pagamento senza contatto."</string>
+    <string name="nfc_how_it_works_content" msgid="4749007806393224934">"Configura un\'app per il pagamento e appoggia il retro del telefono su qualsiasi terminale con il simbolo del pagamento contactless."</string>
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"OK"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"Altro..."</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Impostare come preferenza?"</string>
@@ -3889,9 +3889,9 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"nessuno"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Oggetto di ranking mancante."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"L\'oggetto di ranking non contiene questa chiave."</string>
-    <string name="display_cutout_emulation" msgid="6306593933746393170">"Simula un display con ritaglio"</string>
+    <string name="display_cutout_emulation" msgid="7466869822418376317">"Ritaglio display"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"ritaglio display, tacca"</string>
-    <string name="display_cutout_emulation_none" msgid="5144174674654097316">"Nessuno"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Predefinita dispositivo"</string>
     <string name="special_access" msgid="3458780842491881155">"Accesso speciale alle app"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> app possono usare dati senza limitazioni</item>
@@ -4152,5 +4152,4 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Dettagli rete"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Il nome del tuo dispositivo è visibile alle app installate sul telefono. Potrebbe essere visibile anche ad altre persone se ti connetti a dispositivi Bluetooth o configuri un hotspot Wi-Fi."</string>
     <string name="devices_title" msgid="7701726109334110391">"Dispositivi"</string>
-    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Valore predefinito"</string>
 </resources>

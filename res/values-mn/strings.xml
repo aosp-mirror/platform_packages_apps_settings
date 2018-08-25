@@ -45,7 +45,7 @@
     <string name="eab_provisioned_switch_string" msgid="3482272907448592975">"EAB/Presence-г бэлтгэсэн"</string>
     <string name="radio_info_radio_power" msgid="7187666084867419643">"Мобайл радио цахилгаан"</string>
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"SIM хаягийн лавлахыг харах"</string>
-    <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Тогтвортой залгах дугаарыг харах"</string>
+    <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Тогтсон залгах дугааруудыг харах"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"Үйлчилгээний Залгах Дугаарыг харах"</string>
     <string name="radioInfo_menu_getIMS" msgid="185171476413967831">"IMS үйлчилгээний төлөв"</string>
     <string name="radio_info_ims_reg_status_title" msgid="16971785902696970">"IMS төлөв"</string>
@@ -975,8 +975,8 @@
     <skip />
     <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"Роуминг тохиргоо"</string>
   <string-array name="wifi_calling_mode_choices">
-    <item msgid="2124257075906188844">"Wi-Fi илүү эрхэмлэдэг"</item>
-    <item msgid="1335127656328817518">"Давуу эрхтэй мобайл"</item>
+    <item msgid="2124257075906188844">"Wi-Fi давуу эрхтэй"</item>
+    <item msgid="1335127656328817518">"Мобайл давуу эрхтэй"</item>
     <item msgid="3132912693346866895">"Зөвхөн Wi-Fi"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2">
@@ -990,8 +990,8 @@
     <item msgid="3194458950573886239">"0"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_without_wifi_only">
-    <item msgid="5782108782860004851">"Wi-Fi-г эрхэмлэдэг"</item>
-    <item msgid="5074515506087318555">"Давуу эрхтэй мобайл"</item>
+    <item msgid="5782108782860004851">"Wi-Fi давуу эрхтэй"</item>
+    <item msgid="5074515506087318555">"Мобайл давуу эрхтэй"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
     <item msgid="6132150507201243768">"Wi-Fi"</item>
@@ -3041,10 +3041,10 @@
     <string name="sound_settings_summary_vibrate" msgid="1869282574422220096">"Хонхыг чичиргээтэй болгож тохируулсан"</string>
     <string name="sound_settings_summary_silent" msgid="5074529767435584948">"Хонхыг чимээгүй болгож тохируулсан"</string>
     <string name="sound_settings_example_summary" msgid="2404914514266523165">"Хонх дуугаргах түвшин 80%-д"</string>
-    <string name="media_volume_option_title" msgid="2811531786073003825">"Медиа дууны хэмжээ"</string>
+    <string name="media_volume_option_title" msgid="2811531786073003825">"Медиа дууны түвшин"</string>
     <string name="call_volume_option_title" msgid="1265865226974255384">"Дуудлагын дууны түвшин"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Сэрүүлгийн дууны түвшин"</string>
-    <string name="ring_volume_option_title" msgid="6767101703671248309">"Хонхны дууны хэмжээ"</string>
+    <string name="ring_volume_option_title" msgid="6767101703671248309">"Хонхны дууны түвшин"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Мэдэгдлийн дууны хэмжээ"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Утасны хонхны ая"</string>
     <string name="notification_ringtone_title" msgid="4468722874617061231">"Мэдэгдлийн өгөгдмөл ая"</string>
@@ -3887,9 +3887,9 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"байхгүй"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Зэрэглэх объект байхгүй байна."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Зэрэглэх объектод энэ түлхүүр байхгүй."</string>
-    <string name="display_cutout_emulation" msgid="6306593933746393170">"Дэлгэцийн хэсгийг тасдаж хуулах"</string>
+    <string name="display_cutout_emulation" msgid="7466869822418376317">"Дэлгэцийг таслах"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"дэлгэцийн хайчилбар, хэрчлээс"</string>
-    <string name="display_cutout_emulation_none" msgid="5144174674654097316">"Байхгүй"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Төхөөрөмжийн өгөгдмөл"</string>
     <string name="special_access" msgid="3458780842491881155">"Тусгай аппын хандалт"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="other">Хязгааргүй датаг <xliff:g id="COUNT">%d</xliff:g> апп ашиглах боломжтой</item>
@@ -4150,5 +4150,4 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Сүлжээний мэдээлэл"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Таны төхөөрөмжийн нэр таны утасны аппуудад харагдана. Та Bluetooth төхөөрөмжүүдэд холбогдох эсвэл Wi-Fi сүлжээний цэгийг тохируулах үед энэ нь бусад хүмүүст харагдаж болзошгүй."</string>
     <string name="devices_title" msgid="7701726109334110391">"Төхөөрөмжүүд"</string>
-    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Өгөгдмөл"</string>
 </resources>
