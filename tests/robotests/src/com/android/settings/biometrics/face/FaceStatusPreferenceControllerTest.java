@@ -119,7 +119,7 @@ public class FaceStatusPreferenceControllerTest {
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
         when(mFaceManager.getEnrolledFaces(anyInt()))
                 .thenReturn(Collections.singletonList(mock(Face.class)));
-        when(mFaceManager.hasEnrolledFaces(anyInt()))
+        when(mFaceManager.hasEnrolledTemplates(anyInt()))
                 .thenReturn(true);
 
         mController.updateState(mPreference);

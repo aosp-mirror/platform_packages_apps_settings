@@ -46,7 +46,7 @@ public class FaceStatusPreferenceController extends BiometricStatusPreferenceCon
 
     @Override
     protected boolean hasEnrolledBiometrics() {
-        return mFaceManager.hasEnrolledFaces(mUserId);
+        return mFaceManager.hasEnrolledTemplates(mUserId);
     }
 
     @Override

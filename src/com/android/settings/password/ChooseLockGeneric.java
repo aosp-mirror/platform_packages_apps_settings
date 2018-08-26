@@ -805,7 +805,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         // TODO: figure out how to eliminate duplicated code. It's a bit hard due to the async-ness
         private void removeAllFaceForUserAndFinish(final int userId, RemovalTracker tracker) {
             if (mFaceManager != null && mFaceManager.isHardwareDetected()) {
-                if (mFaceManager.hasEnrolledFaces(userId)) {
+                if (mFaceManager.hasEnrolledTemplates(userId)) {
                     mFaceManager.setActiveUser(userId);
                     Face face = new Face(null, 0, 0);
                     mFaceManager.remove(face, userId,
