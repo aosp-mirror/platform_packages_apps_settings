@@ -28,9 +28,14 @@ public class BackgroundDataConditionController implements ConditionalCardControl
     static final int ID = Objects.hash("BackgroundDataConditionController");
 
     private final Context mAppContext;
+    private final ConditionManager mConditionManager;
+    private final NetworkPolicyManager mNetworkPolicyManager;
 
-    public BackgroundDataConditionController(Context appContext) {
+    public BackgroundDataConditionController(Context appContext, ConditionManager manager) {
         mAppContext = appContext;
+        mConditionManager = manager;
+        mNetworkPolicyManager =
+                (NetworkPolicyManager) appContext.getSystemService(Context.NETWORK_POLICY_SERVICE);
     }
 
     @Override
@@ -40,7 +45,7 @@ public class BackgroundDataConditionController implements ConditionalCardControl
 
     @Override
     public boolean isDisplayable() {
-        return NetworkPolicyManager.from(mAppContext).getRestrictBackground();
+        return mNetworkPolicyManager.getRestrictBackground();
     }
 
     @Override
@@ -50,7 +55,8 @@ public class BackgroundDataConditionController implements ConditionalCardControl
 
     @Override
     public void onActionClick() {
-        NetworkPolicyManager.from(mAppContext).setRestrictBackground(false);
+        mNetworkPolicyManager.setRestrictBackground(false);
+        mConditionManager.onConditionChanged();
     }
 
     @Override

@@ -98,11 +98,11 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         BluetoothDevice device = mCachedDevice.getDevice();
         profilePref.setEnabled(!mCachedDevice.isBusy());
         if (profile instanceof MapProfile) {
-            profilePref.setChecked(mCachedDevice.getMessagePermissionChoice()
-                    == CachedBluetoothDevice.ACCESS_ALLOWED);
+            profilePref.setChecked(device.getMessageAccessPermission()
+                    == BluetoothDevice.ACCESS_ALLOWED);
         } else if (profile instanceof PbapServerProfile) {
-            profilePref.setChecked(mCachedDevice.getPhonebookPermissionChoice()
-                    == CachedBluetoothDevice.ACCESS_ALLOWED);
+            profilePref.setChecked(device.getPhonebookAccessPermission()
+                    == BluetoothDevice.ACCESS_ALLOWED);
         } else if (profile instanceof PanProfile) {
             profilePref.setChecked(profile.getConnectionStatus(device) ==
                     BluetoothProfile.STATE_CONNECTED);
@@ -130,31 +130,31 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
     /**
      * Helper method to enable a profile for a device.
      */
-    private void enableProfile(LocalBluetoothProfile profile, BluetoothDevice device,
-            SwitchPreference profilePref) {
+    private void enableProfile(LocalBluetoothProfile profile) {
+        final BluetoothDevice bluetoothDevice = mCachedDevice.getDevice();
         if (profile instanceof PbapServerProfile) {
-            mCachedDevice.setPhonebookPermissionChoice(CachedBluetoothDevice.ACCESS_ALLOWED);
+            bluetoothDevice.setPhonebookAccessPermission(BluetoothDevice.ACCESS_ALLOWED);
             // We don't need to do the additional steps below for this profile.
             return;
         }
         if (profile instanceof MapProfile) {
-            mCachedDevice.setMessagePermissionChoice(BluetoothDevice.ACCESS_ALLOWED);
+            bluetoothDevice.setMessageAccessPermission(BluetoothDevice.ACCESS_ALLOWED);
         }
-        profile.setPreferred(device, true);
+        profile.setPreferred(bluetoothDevice, true);
         mCachedDevice.connectProfile(profile);
     }
 
     /**
      * Helper method to disable a profile for a device
      */
-    private void disableProfile(LocalBluetoothProfile profile, BluetoothDevice device,
-            SwitchPreference profilePref) {
+    private void disableProfile(LocalBluetoothProfile profile) {
+        final BluetoothDevice bluetoothDevice = mCachedDevice.getDevice();
         mCachedDevice.disconnect(profile);
-        profile.setPreferred(device, false);
+        profile.setPreferred(bluetoothDevice, false);
         if (profile instanceof MapProfile) {
-            mCachedDevice.setMessagePermissionChoice(BluetoothDevice.ACCESS_REJECTED);
+            bluetoothDevice.setMessageAccessPermission(BluetoothDevice.ACCESS_REJECTED);
         } else if (profile instanceof PbapServerProfile) {
-            mCachedDevice.setPhonebookPermissionChoice(CachedBluetoothDevice.ACCESS_REJECTED);
+            bluetoothDevice.setPhonebookAccessPermission(BluetoothDevice.ACCESS_REJECTED);
         }
     }
 
@@ -175,11 +175,10 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             }
         }
         SwitchPreference profilePref = (SwitchPreference) preference;
-        BluetoothDevice device = mCachedDevice.getDevice();
         if (profilePref.isChecked()) {
-            enableProfile(profile, device, profilePref);
+            enableProfile(profile);
         } else {
-            disableProfile(profile, device, profilePref);
+            disableProfile(profile);
         }
         refreshProfilePreference(profilePref, profile);
         return true;
@@ -191,17 +190,18 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
      */
     private List<LocalBluetoothProfile> getProfiles() {
         List<LocalBluetoothProfile> result = mCachedDevice.getConnectableProfiles();
+        final BluetoothDevice device = mCachedDevice.getDevice();
 
-        final int pbapPermission = mCachedDevice.getPhonebookPermissionChoice();
+        final int pbapPermission = device.getPhonebookAccessPermission();
         // Only provide PBAP cabability if the client device has requested PBAP.
-        if (pbapPermission != CachedBluetoothDevice.ACCESS_UNKNOWN) {
+        if (pbapPermission != BluetoothDevice.ACCESS_UNKNOWN) {
             final PbapServerProfile psp = mManager.getProfileManager().getPbapProfile();
             result.add(psp);
         }
 
         final MapProfile mapProfile = mManager.getProfileManager().getMapProfile();
-        final int mapPermission = mCachedDevice.getMessagePermissionChoice();
-        if (mapPermission != CachedBluetoothDevice.ACCESS_UNKNOWN) {
+        final int mapPermission = device.getMessageAccessPermission();
+        if (mapPermission != BluetoothDevice.ACCESS_UNKNOWN) {
             result.add(mapProfile);
         }
 

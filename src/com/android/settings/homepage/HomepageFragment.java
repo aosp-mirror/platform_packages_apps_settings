@@ -48,6 +48,7 @@ public class HomepageFragment extends InstrumentedFragment {
     private static final String SAVE_BOTTOM_FRAGMENT_LOADED = "bottom_fragment_loaded";
 
     private RecyclerView mCardsContainer;
+    private HomepageAdapter mHomepageAdapter;
     private LinearLayoutManager mLayoutManager;
 
     private FloatingActionButton mSearchButton;
@@ -55,6 +56,14 @@ public class HomepageFragment extends InstrumentedFragment {
     private View mBottomBar;
     private View mSearchBar;
     private boolean mBottomFragmentLoaded;
+    private HomepageManager mHomepageManager;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mHomepageManager = new HomepageManager(getContext(), getSettingsLifecycle());
+        mHomepageManager.startCardContentLoading();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,6 +74,9 @@ public class HomepageFragment extends InstrumentedFragment {
         //TODO(b/111822407): May have to swap to GridLayoutManager
         mLayoutManager = new LinearLayoutManager(getActivity());
         mCardsContainer.setLayoutManager(mLayoutManager);
+        mHomepageAdapter = new HomepageAdapter(getContext(), mHomepageManager);
+        mCardsContainer.setAdapter(mHomepageAdapter);
+        mHomepageManager.setListener(mHomepageAdapter);
 
         return rootView;
     }

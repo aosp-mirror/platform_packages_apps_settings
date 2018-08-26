@@ -131,4 +131,16 @@ public class ValidatedEditTextPreferenceTest {
                 & (InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_CLASS_TEXT))
                 .isNotEqualTo(0);
     }
+
+    @Test
+    public void bindViewHolder_isNotPassword_shouldNotAutoCorrectText() {
+        final TextView textView = spy(new TextView(RuntimeEnvironment.application));
+        when(mViewHolder.findViewById(android.R.id.summary)).thenReturn(textView);
+
+        mPreference.setIsSummaryPassword(false);
+        mPreference.onBindViewHolder(mViewHolder);
+
+        assertThat(textView.getInputType()).isEqualTo(
+                InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_CLASS_TEXT);
+    }
 }

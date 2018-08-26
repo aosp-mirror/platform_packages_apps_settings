@@ -100,7 +100,6 @@ public class ConditionManager {
      */
     public void onActionClick(long id) {
         getController(id).onActionClick();
-        onConditionChanged();
     }
 
     /**
@@ -155,15 +154,16 @@ public class ConditionManager {
     private void initCandidates() {
         // Initialize controllers first.
         mCardControllers.add(new AirplaneModeConditionController(mAppContext, this /* manager */));
-        mCardControllers.add(new BackgroundDataConditionController(mAppContext));
+        mCardControllers.add(
+                new BackgroundDataConditionController(mAppContext, this /* manager */));
         mCardControllers.add(new BatterySaverConditionController(mAppContext, this /* manager */));
         mCardControllers.add(new CellularDataConditionController(mAppContext, this /* manager */));
         mCardControllers.add(new DndConditionCardController(mAppContext, this /* manager */));
         mCardControllers.add(new HotspotConditionController(mAppContext, this /* manager */));
-        mCardControllers.add(new NightDisplayConditionController(mAppContext));
+        mCardControllers.add(new NightDisplayConditionController(mAppContext, this /* manager */));
         mCardControllers.add(new RingerVibrateConditionController(mAppContext, this /* manager */));
         mCardControllers.add(new RingerMutedConditionController(mAppContext, this /* manager */));
-        mCardControllers.add(new WorkModeConditionController(mAppContext));
+        mCardControllers.add(new WorkModeConditionController(mAppContext, this /* manager */));
 
         // Initialize ui model later. UI model depends on controller.
         mCandidates.add(new AirplaneModeConditionCard(mAppContext));

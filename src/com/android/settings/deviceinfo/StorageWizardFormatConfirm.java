@@ -59,7 +59,6 @@ public class StorageWizardFormatConfirm extends InstrumentedDialogFragment {
 
         final StorageWizardFormatConfirm fragment = new StorageWizardFormatConfirm();
         fragment.setArguments(args);
-        // TODO (b/111150236) : Need to check it again.
         fragment.show(activity.getSupportFragmentManager(), TAG_FORMAT_WARNING);
     }
 
