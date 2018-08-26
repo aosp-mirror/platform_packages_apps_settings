@@ -1354,11 +1354,11 @@
     <string name="storage_wizard_format_progress_title" msgid="6487352396450582292">"<xliff:g id="NAME">^1</xliff:g> formateatzen…"</string>
     <string name="storage_wizard_format_progress_body" msgid="5255269692453900303">"Formateatzen ari den bitartean, ez kendu <xliff:g id="NAME">^1</xliff:g>."</string>
     <string name="storage_wizard_migrate_title" msgid="1363078147938160407">"Eraman datuak memoria berrira"</string>
-    <string name="storage_wizard_migrate_body" msgid="890751699549542345">"Argazkiak, fitxategiak eta zenbait aplikazio ekar ditzakezu <xliff:g id="NAME">^1</xliff:g> memoria-unitate berrira. \n\nTransferentzia-prozesuak <xliff:g id="TIME">^2</xliff:g> irauten du gutxi gorabehera, eta <xliff:g id="SIZE">^3</xliff:g> askatuko ditu barneko memoriatik. Aplikazio batzuek ez dute funtzionatuko transferentzia egiten ari den bitartean."</string>
+    <string name="storage_wizard_migrate_body" msgid="890751699549542345">"Argazkiak, fitxategiak eta zenbait aplikazio ekar ditzakezu <xliff:g id="NAME">^1</xliff:g> memoria-unitate berrira. \n\nTransferentzia-prozesuak <xliff:g id="TIME">^2</xliff:g> irauten du gutxi gorabehera, eta barneko memorian <xliff:g id="SIZE">^3</xliff:g> utziko dira libre. Aplikazio batzuek ez dute funtzionatuko transferentzia egiten ari den bitartean."</string>
     <string name="storage_wizard_migrate_now" msgid="4523444323744239143">"Mugitu orain"</string>
     <string name="storage_wizard_migrate_later" msgid="3173482328116026253">"Mugitu geroago"</string>
     <string name="storage_wizard_migrate_confirm_title" msgid="8564833529613286965">"Mugitu datuak"</string>
-    <string name="storage_wizard_migrate_confirm_body" msgid="4212060581792135962"><b>"<xliff:g id="TIME">^1</xliff:g> inguru beharko dira datuak migratzeko. <xliff:g id="SIZE">^2</xliff:g> askatuko ditu <xliff:g id="NAME">^3</xliff:g> gailutik."</b></string>
+    <string name="storage_wizard_migrate_confirm_body" msgid="4212060581792135962"><b>"<xliff:g id="TIME">^1</xliff:g> inguru beharko dira datuak migratzeko. <xliff:g id="NAME">^3</xliff:g> gailuan <xliff:g id="SIZE">^2</xliff:g> utziko dira libre."</b></string>
     <string name="storage_wizard_migrate_confirm_next" msgid="5509475628423823202">"Mugitu"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="1665479429044202868">"Datuak mugitzen…"</string>
     <string name="storage_wizard_migrate_details" msgid="3709728824651136227">"Transferentzia egiten den bitartean: \n• Ez kendu <xliff:g id="NAME">^1</xliff:g> memoria. \n• Aplikazio batzuek ez dute ongi funtzionatuko. \n• Gailuak kargatuta egon behar du."</string>
@@ -2475,7 +2475,7 @@
     <string name="adding_profile_owner_warning" msgid="1354474524852805802">"Aurrera eginez gero, administratzaileak kudeatuko dizu erabiltzaile-kontua, eta erlazionatutako datuak gorde ahal izango ditu zure datu pertsonalez gain.\n\nEra berean, erabiltzaile-kontu honekin erlazionatutako ezarpenak, sarbidea, aplikazioak eta datuak gainbegiratu eta kudeatu ahal izango ditu (esaterako, sareko jarduerak), baita gailuaren kokapen-informazioa ere."</string>
     <string name="admin_disabled_other_options" msgid="7712694507069054530">"Gainerako aukerak desgaitu egin ditu administratzaileak"</string>
     <string name="admin_more_details" msgid="7901420667346456102">"Xehetasun gehiago"</string>
-    <string name="sound_category_sound_title" msgid="1488759370067953996">"Orokorra"</string>
+    <string name="sound_category_sound_title" msgid="1488759370067953996">"Orokorrak"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"Jakinarazpenen erregistroa"</string>
     <string name="sound_category_call_ringtone_vibrate_title" msgid="1543777228646645163">"Tonua eta dardara"</string>
     <string name="sound_category_system_title" msgid="1480844520622721141">"Sistema"</string>
@@ -3889,9 +3889,9 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"bat ere ez"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Sailkapen-objektua falta da."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Sailkapen-objektuak ez du gako hau."</string>
-    <string name="display_cutout_emulation" msgid="6306593933746393170">"Simulatu mozketa bat duen pantaila bat"</string>
+    <string name="display_cutout_emulation" msgid="7466869822418376317">"Pantailaren mozketa"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"pantailaren mozketa, koska"</string>
-    <string name="display_cutout_emulation_none" msgid="5144174674654097316">"Bat ere ez"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Gailuaren balio lehenetsia"</string>
     <string name="special_access" msgid="3458780842491881155">"Aplikazio-baimen bereziak"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplikaziok dute datuak mugarik gabe erabiltzeko aukera</item>
@@ -4152,5 +4152,4 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Sarearen xehetasunak"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Mugikorreko aplikazioek gailuaren izena ikus dezakete. Halaber, jendeak ere ikus dezake Bluetooth gailuetara konektatzean edo Wi-Fi sare publiko bat konfiguratzean."</string>
     <string name="devices_title" msgid="7701726109334110391">"Gailuak"</string>
-    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Lehenetsia"</string>
 </resources>
