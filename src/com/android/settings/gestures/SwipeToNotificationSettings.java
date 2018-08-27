@@ -70,5 +70,10 @@ public class SwipeToNotificationSettings extends DashboardFragment {
                     sir.xmlResId = R.xml.swipe_to_notification_settings;
                     return Arrays.asList(sir);
                 }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return SwipeToNotificationPreferenceController.isAvailable(context);
+                }
             };
 }

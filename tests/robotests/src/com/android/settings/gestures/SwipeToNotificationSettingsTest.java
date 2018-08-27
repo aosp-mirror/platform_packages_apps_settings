@@ -23,28 +23,33 @@ import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.testutils.shadow.ShadowUtils;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SwipeToNotificationSettingsTest {
 
-    @Mock
     private Context mContext;
     private SwipeToNotificationSettings mFragment;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
+        mContext = RuntimeEnvironment.application;
         mFragment = new SwipeToNotificationSettings();
+        ShadowUtils.reset();
+    }
+
+    @After
+    public void tearDown() {
+        ShadowUtils.reset();
     }
 
     @Test
@@ -56,10 +61,22 @@ public class SwipeToNotificationSettingsTest {
     @Test
     public void testSearchIndexProvider_shouldIndexResource() {
         final List<SearchIndexableResource> indexRes =
-            SwipeToNotificationSettings.SEARCH_INDEX_DATA_PROVIDER
-                .getXmlResourcesToIndex(RuntimeEnvironment.application, true /* enabled */);
+                SwipeToNotificationSettings.SEARCH_INDEX_DATA_PROVIDER
+                        .getXmlResourcesToIndex(mContext, true /* enabled */);
 
         assertThat(indexRes).isNotNull();
         assertThat(indexRes.get(0).xmlResId).isEqualTo(mFragment.getPreferenceScreenResId());
     }
+
+    @Test
+    @Config(shadows = ShadowUtils.class)
+    public void getNonIndexableKeys_noFingerprintHardware_shouldSuppressPage() {
+        ShadowUtils.setFingerprintManager(null);
+
+        final List<String> niks = SwipeToNotificationSettings.SEARCH_INDEX_DATA_PROVIDER
+                .getNonIndexableKeys(mContext);
+
+        assertThat(niks).isNotEmpty();
+    }
+
 }
