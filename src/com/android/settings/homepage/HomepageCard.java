@@ -56,7 +56,7 @@ public class HomepageCard {
     private final String mSummaryText;
     private final String mIconResName;
     private final int mIconResId;
-    private final String mCardAction;
+    private final int mCardAction;
     private final long mExpireTimeMS;
     private final Drawable mDrawable;
     private final boolean mSupportHalfWidth;
@@ -121,7 +121,7 @@ public class HomepageCard {
         return mIconResId;
     }
 
-    String getCardAction() {
+    int getCardAction() {
         return mCardAction;
     }
 
@@ -194,7 +194,7 @@ public class HomepageCard {
         private String mSummaryText;
         private String mIconResName;
         private int mIconResId;
-        private String mCardAction;
+        private int mCardAction;
         private long mExpireTimeMS;
         private Drawable mDrawable;
         private boolean mSupportHalfWidth;
@@ -269,7 +269,7 @@ public class HomepageCard {
             return this;
         }
 
-        public Builder setCardAction(String cardAction) {
+        public Builder setCardAction(int cardAction) {
             mCardAction = cardAction;
             return this;
         }
