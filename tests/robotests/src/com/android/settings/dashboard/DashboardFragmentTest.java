@@ -33,10 +33,12 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
@@ -177,6 +179,17 @@ public class DashboardFragmentTest {
         verify(mockController2).getPreferenceKey();
     }
 
+    @Test
+    public void onExpandButtonClick_shouldLogAdvancedButtonExpand() {
+        final MetricsFeatureProvider metricsFeatureProvider
+                = mFakeFeatureFactory.getMetricsFeatureProvider();
+        mTestFragment.onExpandButtonClick();
+
+        verify(metricsFeatureProvider).actionWithSource(
+                RuntimeEnvironment.application, MetricsEvent.DASHBOARD_CONTAINER,
+                MetricsEvent.ACTION_SETTINGS_ADVANCED_BUTTON_EXPAND);
+    }
+
     public static class TestPreferenceController extends AbstractPreferenceController
             implements PreferenceControllerMixin {
 
@@ -230,7 +243,7 @@ public class DashboardFragmentTest {
 
         @Override
         public int getMetricsCategory() {
-            return 0;
+            return MetricsEvent.DASHBOARD_CONTAINER;
         }
 
         @Override
