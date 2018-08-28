@@ -192,6 +192,8 @@ public abstract class DeviceListPreferenceFragment extends
             preference = new BluetoothDevicePreference(getPrefContext(), cachedDevice,
                     mShowDevicesWithoutNames);
             preference.setKey(key);
+            //Set hideSecondTarget is true if it's bonded device.
+            preference.hideSecondTarget(true);
             mDeviceListGroup.addPreference(preference);
         } else {
             // Tell the preference it is being re-used in case there is new info in the

@@ -28,6 +28,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.res.Resources;
 
@@ -35,6 +36,7 @@ import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.widget.FooterPreference;
 
@@ -53,6 +55,7 @@ import androidx.preference.PreferenceGroup;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowBluetoothAdapter.class})
 public class BluetoothPairingDetailTest {
+    private static final String TEST_DEVICE_ADDRESS = "00:A1:A1:A1:A1:A1";
 
     @Mock
     private Resources mResource;
@@ -60,12 +63,15 @@ public class BluetoothPairingDetailTest {
     private LocalBluetoothManager mLocalManager;
     @Mock
     private PreferenceGroup mPreferenceGroup;
+    @Mock
+    private CachedBluetoothDevice mCachedBluetoothDevice;
     private BluetoothPairingDetail mFragment;
     private Context mContext;
     private BluetoothProgressCategory mAvailableDevicesCategory;
     private FooterPreference mFooterPreference;
     private BluetoothAdapter mBluetoothAdapter;
     private ShadowBluetoothAdapter mShadowBluetoothAdapter;
+    private BluetoothDevice mBluetoothDevice;
 
     @Before
     public void setUp() {
@@ -80,6 +86,7 @@ public class BluetoothPairingDetailTest {
         mFooterPreference = new FooterPreference(mContext);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
+        mBluetoothDevice = mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS);
 
         mFragment.mBluetoothAdapter = mBluetoothAdapter;
         mFragment.mLocalManager = mLocalManager;
@@ -88,7 +95,7 @@ public class BluetoothPairingDetailTest {
     }
 
     @Test
-    public void testInitPreferencesFromPreferenceScreen_findPreferences() {
+    public void initPreferencesFromPreferenceScreen_findPreferences() {
         doReturn(mAvailableDevicesCategory).when(mFragment)
             .findPreference(BluetoothPairingDetail.KEY_AVAIL_DEVICES);
         doReturn(mFooterPreference).when(mFragment)
@@ -101,7 +108,7 @@ public class BluetoothPairingDetailTest {
     }
 
     @Test
-    public void testStartScanning_startScanAndRemoveDevices() {
+    public void startScanning_startScanAndRemoveDevices() {
         mFragment.mAvailableDevicesCategory = mAvailableDevicesCategory;
         mFragment.mDeviceListGroup = mAvailableDevicesCategory;
 
@@ -112,7 +119,7 @@ public class BluetoothPairingDetailTest {
     }
 
     @Test
-    public void testUpdateContent_stateOn_addDevices() {
+    public void updateContent_stateOn_addDevices() {
         mFragment.mAvailableDevicesCategory = mAvailableDevicesCategory;
         mFragment.mFooterPreference = mFooterPreference;
         doNothing().when(mFragment).addDeviceCategory(any(), anyInt(), any(), anyBoolean());
@@ -121,20 +128,20 @@ public class BluetoothPairingDetailTest {
 
         verify(mFragment).addDeviceCategory(mAvailableDevicesCategory,
                 R.string.bluetooth_preference_found_media_devices,
-                BluetoothDeviceFilter.UNBONDED_DEVICE_FILTER, false);
+                BluetoothDeviceFilter.ALL_FILTER, false);
         assertThat(mBluetoothAdapter.getScanMode())
                 .isEqualTo(BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE);
     }
 
     @Test
-    public void testUpdateContent_stateOff_finish() {
+    public void updateContent_stateOff_finish() {
         mFragment.updateContent(BluetoothAdapter.STATE_OFF);
 
         verify(mFragment).finish();
     }
 
     @Test
-    public void testUpdateBluetooth_bluetoothOff_turnOnBluetooth() {
+    public void updateBluetooth_bluetoothOff_turnOnBluetooth() {
         mShadowBluetoothAdapter.setEnabled(false);
 
         mFragment.updateBluetooth();
@@ -143,7 +150,7 @@ public class BluetoothPairingDetailTest {
     }
 
     @Test
-    public void testUpdateBluetooth_bluetoothOn_updateState() {
+    public void updateBluetooth_bluetoothOn_updateState() {
         mShadowBluetoothAdapter.setEnabled(true);
         doNothing().when(mFragment).updateContent(anyInt());
 
@@ -153,7 +160,7 @@ public class BluetoothPairingDetailTest {
     }
 
     @Test
-    public void testOnScanningStateChanged_restartScanAfterInitialScanning() {
+    public void onScanningStateChanged_restartScanAfterInitialScanning() {
         mFragment.mAvailableDevicesCategory = mAvailableDevicesCategory;
         mFragment.mFooterPreference = mFooterPreference;
         mFragment.mDeviceListGroup = mAvailableDevicesCategory;
@@ -207,5 +214,16 @@ public class BluetoothPairingDetailTest {
         mFragment.onBluetoothStateChanged(BluetoothAdapter.STATE_ON);
 
         verify(mFragment).showBluetoothTurnedOnToast();
+    }
+
+    @Test
+    public void onConnectionStateChanged_connected_finish() {
+        mFragment.mSelectedDevice = mBluetoothDevice;
+        doReturn(mBluetoothDevice).when(mCachedBluetoothDevice).getDevice();
+
+        mFragment.onConnectionStateChanged(mCachedBluetoothDevice,
+                BluetoothAdapter.STATE_CONNECTED);
+
+        verify(mFragment).finish();
     }
 }
