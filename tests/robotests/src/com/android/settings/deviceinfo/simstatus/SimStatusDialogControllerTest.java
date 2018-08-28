@@ -178,7 +178,7 @@ public class SimStatusDialogControllerTest {
     }
 
     @Test
-    public void initialize_updateDataStateWithPowerOff_shouldUpdateSettingAndResetSignalStrength() {
+    public void initialize_updateServiceStateWithPowerOff_shouldUpdateTextAndResetSignalStrength() {
         when(mServiceState.getState()).thenReturn(ServiceState.STATE_POWER_OFF);
         when(mPersistableBundle.getBoolean(
                 CarrierConfigManager.KEY_SHOW_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL)).thenReturn(true);
@@ -188,6 +188,33 @@ public class SimStatusDialogControllerTest {
         final String offServiceText = mContext.getString(R.string.radioInfo_service_off);
         verify(mDialog).setText(SERVICE_STATE_VALUE_ID, offServiceText);
         verify(mDialog).setText(SIGNAL_STRENGTH_VALUE_ID, "0");
+    }
+
+    @Test
+    public void initialize_updateVoiceDataOutOfService_shouldUpdateSettingAndResetSignalStrength() {
+        when(mServiceState.getState()).thenReturn(ServiceState.STATE_OUT_OF_SERVICE);
+        when(mServiceState.getDataRegState()).thenReturn(ServiceState.STATE_OUT_OF_SERVICE);
+        when(mPersistableBundle.getBoolean(
+                CarrierConfigManager.KEY_SHOW_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL)).thenReturn(true);
+
+        mController.initialize();
+
+        final String offServiceText = mContext.getString(R.string.radioInfo_service_out);
+        verify(mDialog).setText(SERVICE_STATE_VALUE_ID, offServiceText);
+        verify(mDialog).setText(SIGNAL_STRENGTH_VALUE_ID, "0");
+    }
+
+    @Test
+    public void initialize_updateVoiceOutOfServiceDataInService_shouldUpdateTextToBeInService() {
+        when(mServiceState.getState()).thenReturn(ServiceState.STATE_OUT_OF_SERVICE);
+        when(mServiceState.getDataRegState()).thenReturn(ServiceState.STATE_IN_SERVICE);
+        when(mPersistableBundle.getBoolean(
+                CarrierConfigManager.KEY_SHOW_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL)).thenReturn(true);
+
+        mController.initialize();
+
+        final String inServiceText = mContext.getString(R.string.radioInfo_service_in);
+        verify(mDialog).setText(SERVICE_STATE_VALUE_ID, inServiceText);
     }
 
     @Test
@@ -203,6 +230,27 @@ public class SimStatusDialogControllerTest {
 
         final String signalStrengthString =
             mContext.getString(R.string.sim_signal_strength, signalDbm, signalAsu);
+        verify(mDialog).setText(SIGNAL_STRENGTH_VALUE_ID, signalStrengthString);
+    }
+
+    @Test
+    public void initialize_updateVoiceOutOfServiceDataInService_shouldUpdateSignalStrengthTo50() {
+        when(mServiceState.getState()).thenReturn(ServiceState.STATE_OUT_OF_SERVICE);
+        when(mServiceState.getDataRegState()).thenReturn(ServiceState.STATE_IN_SERVICE);
+        when(mPersistableBundle.getBoolean(
+                CarrierConfigManager.KEY_SHOW_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL)).thenReturn(true);
+
+        final int signalDbm = 50;
+        final int signalAsu = 50;
+        doReturn(signalDbm).when(mController).getDbm(mSignalStrength);
+        doReturn(signalAsu).when(mController).getAsuLevel(mSignalStrength);
+        when(mPersistableBundle.getBoolean(
+                CarrierConfigManager.KEY_SHOW_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL)).thenReturn(true);
+
+        mController.initialize();
+
+        final String signalStrengthString =
+                mContext.getString(R.string.sim_signal_strength, signalDbm, signalAsu);
         verify(mDialog).setText(SIGNAL_STRENGTH_VALUE_ID, signalStrengthString);
     }
 
