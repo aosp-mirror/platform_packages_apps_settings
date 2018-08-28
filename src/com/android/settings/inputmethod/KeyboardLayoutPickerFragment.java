@@ -22,9 +22,9 @@ import android.hardware.input.InputManager;
 import android.hardware.input.InputManager.InputDeviceListener;
 import android.hardware.input.KeyboardLayout;
 import android.os.Bundle;
-import android.support.v7.preference.CheckBoxPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.CheckBoxPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import android.view.InputDevice;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;

@@ -26,7 +26,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;

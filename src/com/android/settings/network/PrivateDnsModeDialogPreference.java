@@ -29,7 +29,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.provider.Settings;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import android.system.Os;
 import android.text.Editable;
 import android.text.TextWatcher;

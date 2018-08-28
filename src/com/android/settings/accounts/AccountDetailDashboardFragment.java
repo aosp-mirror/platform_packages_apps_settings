@@ -21,8 +21,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;

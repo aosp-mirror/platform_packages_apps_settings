@@ -20,7 +20,7 @@ import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.widget.TimePicker;

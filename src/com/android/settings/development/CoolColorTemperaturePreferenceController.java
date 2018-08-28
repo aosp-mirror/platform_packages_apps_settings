@@ -18,9 +18,9 @@ package com.android.settings.development;
 
 import android.content.Context;
 import android.os.SystemProperties;
-import android.support.annotation.VisibleForTesting;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.Preference;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.SwitchPreference;
+import androidx.preference.Preference;
 import android.widget.Toast;
 
 import com.android.settings.R;

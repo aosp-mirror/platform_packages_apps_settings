@@ -15,8 +15,8 @@ package com.android.settings.display;
 
 import android.content.Context;
 import android.provider.Settings;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.Preference;
+import androidx.preference.SwitchPreference;
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;

@@ -8,7 +8,7 @@ import static org.mockito.Mockito.spy;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.support.v4.graphics.drawable.IconCompat;
+import androidx.core.graphics.drawable.IconCompat;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

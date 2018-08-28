@@ -26,7 +26,7 @@ import android.content.Loader;
 import android.os.BatteryStats;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import android.text.BidiFormatter;
 import android.text.format.Formatter;
 import android.util.SparseArray;

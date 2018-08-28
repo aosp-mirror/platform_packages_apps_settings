@@ -19,7 +19,7 @@ package com.android.settings.gestures;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.R;

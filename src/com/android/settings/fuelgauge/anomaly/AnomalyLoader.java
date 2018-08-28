@@ -21,7 +21,7 @@ import android.content.pm.PackageManager;
 import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.UserManager;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import android.util.Log;
 
 import com.android.internal.os.BatteryStatsHelper;

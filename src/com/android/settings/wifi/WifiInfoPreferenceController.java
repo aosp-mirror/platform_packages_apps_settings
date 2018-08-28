@@ -23,9 +23,9 @@ import android.content.IntentFilter;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.provider.Settings;
-import android.support.v4.text.BidiFormatter;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.core.text.BidiFormatter;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.settings.R;

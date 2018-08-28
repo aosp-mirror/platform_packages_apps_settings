@@ -27,7 +27,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import android.view.View;
 import android.widget.TextView;
 

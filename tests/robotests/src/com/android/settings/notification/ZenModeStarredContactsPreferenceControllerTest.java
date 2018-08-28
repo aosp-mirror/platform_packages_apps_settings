@@ -29,8 +29,8 @@ import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.preference.ListPreference;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.ListPreference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;

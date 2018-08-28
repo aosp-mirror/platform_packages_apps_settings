@@ -22,7 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;

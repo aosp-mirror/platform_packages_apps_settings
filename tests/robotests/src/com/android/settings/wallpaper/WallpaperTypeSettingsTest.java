@@ -10,7 +10,7 @@ import static org.robolectric.RuntimeEnvironment.application;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 

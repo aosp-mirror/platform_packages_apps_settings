@@ -32,11 +32,11 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.Preference.OnPreferenceChangeListener;
-import android.support.v7.preference.PreferenceGroup;
-import android.support.v7.preference.PreferenceScreen;
-import android.support.v7.preference.TwoStatePreference;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.TwoStatePreference;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;

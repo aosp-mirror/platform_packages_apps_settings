@@ -25,7 +25,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;

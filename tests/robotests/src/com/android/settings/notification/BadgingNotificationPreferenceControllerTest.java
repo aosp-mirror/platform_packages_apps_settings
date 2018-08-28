@@ -29,9 +29,9 @@ import static org.mockito.Mockito.when;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
-import android.support.v7.preference.TwoStatePreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.search.InlinePayload;
 import com.android.settings.search.InlineSwitchPayload;

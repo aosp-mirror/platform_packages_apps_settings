@@ -19,7 +19,7 @@ package com.android.settings.fuelgauge.batterytip;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserHandle;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.IconDrawableFactory;
 import android.view.LayoutInflater;
 import android.view.View;

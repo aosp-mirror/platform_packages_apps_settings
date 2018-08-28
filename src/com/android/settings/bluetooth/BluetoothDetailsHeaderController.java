@@ -18,8 +18,8 @@ package com.android.settings.bluetooth;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.v14.preference.PreferenceFragment;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.PreferenceFragment;
+import androidx.preference.PreferenceScreen;
 import android.util.Pair;
 
 import com.android.internal.annotations.VisibleForTesting;

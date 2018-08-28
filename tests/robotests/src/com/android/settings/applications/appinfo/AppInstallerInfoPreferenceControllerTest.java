@@ -35,7 +35,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.UserManager;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

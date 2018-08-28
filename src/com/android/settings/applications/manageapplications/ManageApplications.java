@@ -16,7 +16,7 @@
 
 package com.android.settings.applications.manageapplications;
 
-import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
+import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry
         .FILTER_APPS_ALL;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry
@@ -53,10 +53,10 @@ import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.PreferenceFrameLayout;
-import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Log;

@@ -28,8 +28,8 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.support.v4.text.BidiFormatter;
-import android.support.v7.preference.Preference;
+import androidx.core.text.BidiFormatter;
+import androidx.preference.Preference;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 

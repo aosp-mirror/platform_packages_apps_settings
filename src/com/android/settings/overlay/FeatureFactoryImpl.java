@@ -21,7 +21,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.UserManager;
-import android.support.annotation.Keep;
+import androidx.annotation.Keep;
 
 import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.accounts.AccountFeatureProviderImpl;

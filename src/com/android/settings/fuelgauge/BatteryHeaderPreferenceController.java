@@ -22,9 +22,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
-import android.support.annotation.VisibleForTesting;
-import android.support.v14.preference.PreferenceFragment;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceFragment;
+import androidx.preference.PreferenceScreen;
 import android.widget.TextView;
 
 import com.android.settings.R;

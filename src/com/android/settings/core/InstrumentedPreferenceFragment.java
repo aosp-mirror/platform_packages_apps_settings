@@ -18,8 +18,8 @@ package com.android.settings.core;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.XmlRes;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.annotation.XmlRes;
+import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
 

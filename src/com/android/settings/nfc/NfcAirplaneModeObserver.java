@@ -22,8 +22,8 @@ import android.nfc.NfcAdapter;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 /**
  * NfcAirplaneModeObserver is a helper to manage the Nfc on/off when airplane mode status

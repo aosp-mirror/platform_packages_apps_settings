@@ -18,7 +18,7 @@ package com.android.settings.notification;
 
 import android.app.NotificationChannel;
 import android.content.Context;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;

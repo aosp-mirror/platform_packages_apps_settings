@@ -25,10 +25,10 @@ import android.content.pm.ServiceInfo;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.service.quicksettings.TileService;
-import android.support.annotation.VisibleForTesting;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.SwitchPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import android.util.Log;
 
 import com.android.internal.statusbar.IStatusBarService;

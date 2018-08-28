@@ -38,7 +38,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.ContactsContract.DisplayPhoto;
 import android.provider.MediaStore;
-import android.support.v4.content.FileProvider;
+import androidx.core.content.FileProvider;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
