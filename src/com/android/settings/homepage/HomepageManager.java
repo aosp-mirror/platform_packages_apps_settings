@@ -20,6 +20,7 @@ import android.content.Context;
 import android.widget.BaseAdapter;
 
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +83,11 @@ public class HomepageManager implements CardContentLoader.CardContentLoaderListe
                 cardType);
         if (controller != null) {
             controller.setHomepageCardUpdateListener(this);
-            controller.setLifecycle(mLifecycle);
+            if (controller instanceof LifecycleObserver) {
+                if (mLifecycle != null) {
+                    mLifecycle.addObserver((LifecycleObserver) controller);
+                }
+            }
         }
     }
 

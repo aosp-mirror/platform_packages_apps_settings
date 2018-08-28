@@ -16,11 +16,10 @@
 
 package com.android.settings.homepage;
 
-import com.android.settingslib.core.lifecycle.Lifecycle;
-
 import java.util.List;
 
 //TODO(b/111821137): add test cases
+
 /**
  * Data controller for {@link HomepageCard}.
  */
@@ -38,8 +37,6 @@ public interface HomepageCardController {
     void onPrimaryClick(HomepageCard card);
 
     void onActionClick(HomepageCard card);
-
-    void setLifecycle(Lifecycle lifecycle);
 
     void setHomepageCardUpdateListener(HomepageCardUpdateListener listener);
 }
