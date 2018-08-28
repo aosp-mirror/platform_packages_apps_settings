@@ -115,8 +115,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         }
 
         mDashboardData = new DashboardData.Builder()
-                .setConditions(
-                        conditionManager == null ? null : conditionManager.getDisplayableCards())
                 .setSuggestions(mSuggestionAdapter.getSuggestions())
                 .setCategory(category)
                 .setConditionExpanded(conditionExpanded)
