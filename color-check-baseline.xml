@@ -2141,7 +2141,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/layout/radio_info.xml"
-            line="116"
+            line="110"
             column="13"/>
     </issue>
 
@@ -2157,7 +2157,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/layout/radio_info.xml"
-            line="135"
+            line="129"
             column="13"/>
     </issue>
 
@@ -2173,7 +2173,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/layout/radio_info.xml"
-            line="165"
+            line="175"
             column="13"/>
     </issue>
 
@@ -2189,7 +2189,55 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/layout/radio_info.xml"
-            line="303"
+            line="205"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="            android:background=&quot;#000000&quot; />"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/layout/radio_info.xml"
+            line="232"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="            android:background=&quot;#000000&quot; />"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/layout/radio_info.xml"
+            line="256"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="            android:background=&quot;#000000&quot; />"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/layout/radio_info.xml"
+            line="293"
             column="13"/>
     </issue>
 
@@ -2429,7 +2477,7 @@
         errorLine2="                                                                                                                                                                       ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rXC/strings.xml"
-            line="2531"
+            line="2422"
             column="168"/>
     </issue>
 
@@ -2444,8 +2492,8 @@
         errorLine1="    &lt;string name=&quot;sync_plug&quot; msgid=&quot;3905078969081888738&quot;>&lt;font fgcolor=&quot;#ffffffff&quot;>&quot;Welcome to Google sync!&quot;&lt;/font>&quot; \nA Google approach to syncing data to allow access to your contacts, appointments and more from wherever you are.&quot;&lt;/string>"
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~">
         <location
-            file="res/values-en-rAU/strings.xml"
-            line="2532"
+            file="res/values-en-rCA/strings.xml"
+            line="2423"
             column="64"/>
     </issue>
 
@@ -2460,8 +2508,8 @@
         errorLine1="    &lt;string name=&quot;sync_plug&quot; msgid=&quot;3905078969081888738&quot;>&lt;font fgcolor=&quot;#ffffffff&quot;>&quot;Welcome to Google sync!&quot;&lt;/font>&quot; \nA Google approach to syncing data to allow access to your contacts, appointments and more from wherever you are.&quot;&lt;/string>"
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~">
         <location
-            file="res/values-en-rCA/strings.xml"
-            line="2532"
+            file="res/values-en-rAU/strings.xml"
+            line="2540"
             column="64"/>
     </issue>
 
@@ -2477,7 +2525,7 @@
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rGB/strings.xml"
-            line="2532"
+            line="2540"
             column="64"/>
     </issue>
 
@@ -2493,7 +2541,7 @@
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rIN/strings.xml"
-            line="2532"
+            line="2540"
             column="64"/>
     </issue>
 
@@ -2509,7 +2557,7 @@
         errorLine2="                                   ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/strings.xml"
-            line="5920"
+            line="5927"
             column="36"/>
     </issue>
 
