@@ -67,6 +67,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.users.UserDialogs;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -645,12 +646,12 @@ public class DeviceAdminAdd extends Activity {
     private EnforcedAdmin getAdminEnforcingCantRemoveProfile() {
         // Removing a managed profile is disallowed if DISALLOW_REMOVE_MANAGED_PROFILE
         // is set in the parent rather than the user itself.
-        return RestrictedLockUtils.checkIfRestrictionEnforced(this,
+        return RestrictedLockUtilsInternal.checkIfRestrictionEnforced(this,
                 UserManager.DISALLOW_REMOVE_MANAGED_PROFILE, getParentUserId());
     }
 
     private boolean hasBaseCantRemoveProfileRestriction() {
-        return RestrictedLockUtils.hasBaseUserRestriction(this,
+        return RestrictedLockUtilsInternal.hasBaseUserRestriction(this,
                 UserManager.DISALLOW_REMOVE_MANAGED_PROFILE, getParentUserId());
     }
 

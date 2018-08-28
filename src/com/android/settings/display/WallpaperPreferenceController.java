@@ -28,7 +28,7 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -80,7 +80,7 @@ public class WallpaperPreferenceController extends AbstractPreferenceController 
         final String restriction = DISALLOW_SET_WALLPAPER;
         if (pref != null) {
             pref.setDisabledByAdmin(null);
-            if (RestrictedLockUtils.hasBaseUserRestriction(mContext,
+            if (RestrictedLockUtilsInternal.hasBaseUserRestriction(mContext,
                     restriction, UserHandle.myUserId())) {
                 pref.setEnabled(false);
             } else {

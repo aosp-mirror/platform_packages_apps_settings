@@ -50,6 +50,7 @@ import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmLockPattern;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -240,9 +241,9 @@ public class ResetNetwork extends InstrumentedFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         final UserManager um = UserManager.get(getActivity());
-        final EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(
+        final EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
                 getActivity(), UserManager.DISALLOW_NETWORK_RESET, UserHandle.myUserId());
-        if (!um.isAdminUser() || RestrictedLockUtils.hasBaseUserRestriction(getActivity(),
+        if (!um.isAdminUser() || RestrictedLockUtilsInternal.hasBaseUserRestriction(getActivity(),
                 UserManager.DISALLOW_NETWORK_RESET, UserHandle.myUserId())) {
             return inflater.inflate(R.layout.network_reset_disallowed_screen, null);
         } else if (admin != null) {

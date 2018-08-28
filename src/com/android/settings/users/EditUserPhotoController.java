@@ -53,6 +53,7 @@ import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.drawable.CircleFramedDrawable;
 
 import libcore.io.Streams;
@@ -419,9 +420,9 @@ public class EditUserPhotoController {
             mAction = action;
 
             final int myUserId = UserHandle.myUserId();
-            mAdmin = RestrictedLockUtils.checkIfRestrictionEnforced(context,
+            mAdmin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(context,
                     restriction, myUserId);
-            mIsRestrictedByBase = RestrictedLockUtils.hasBaseUserRestriction(mContext,
+            mIsRestrictedByBase = RestrictedLockUtilsInternal.hasBaseUserRestriction(mContext,
                     restriction, myUserId);
         }
 

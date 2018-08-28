@@ -47,6 +47,7 @@ import com.android.settings.SetupRedactionInterstitial;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 public class RedactionInterstitial extends SettingsActivity {
 
@@ -160,7 +161,7 @@ public class RedactionInterstitial extends SettingsActivity {
 
         private void checkNotificationFeaturesAndSetDisabled(RestrictedRadioButton button,
                 int keyguardNotifications) {
-            EnforcedAdmin admin = RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(
+            EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
                     getActivity(), keyguardNotifications, mUserId);
             button.setDisabledByAdmin(admin);
         }

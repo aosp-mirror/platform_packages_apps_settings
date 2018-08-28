@@ -55,6 +55,7 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.ActionButtonPreference;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -181,10 +182,10 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
     @Override
     public void onResume() {
         if (isAvailable() && !mFinishing) {
-            mAppsControlDisallowedBySystem = RestrictedLockUtils.hasBaseUserRestriction(mActivity,
-                    UserManager.DISALLOW_APPS_CONTROL, mUserId);
-            mAppsControlDisallowedAdmin = RestrictedLockUtils.checkIfRestrictionEnforced(mActivity,
-                    UserManager.DISALLOW_APPS_CONTROL, mUserId);
+            mAppsControlDisallowedBySystem = RestrictedLockUtilsInternal.hasBaseUserRestriction(
+                    mActivity, UserManager.DISALLOW_APPS_CONTROL, mUserId);
+            mAppsControlDisallowedAdmin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
+                    mActivity, UserManager.DISALLOW_APPS_CONTROL, mUserId);
 
             if (!refreshUi()) {
                 setIntentAndFinish(true);
@@ -214,10 +215,11 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
                 return;
             }
             RestrictedLockUtils.EnforcedAdmin admin =
-                    RestrictedLockUtils.checkIfUninstallBlocked(mActivity,
+                    RestrictedLockUtilsInternal.checkIfUninstallBlocked(mActivity,
                             packageName, mUserId);
             boolean uninstallBlockedBySystem = mAppsControlDisallowedBySystem ||
-                    RestrictedLockUtils.hasBaseUserRestriction(mActivity, packageName, mUserId);
+                    RestrictedLockUtilsInternal.hasBaseUserRestriction(mActivity, packageName,
+                            mUserId);
             if (admin != null && !uninstallBlockedBySystem) {
                 RestrictedLockUtils.sendShowAdminSupportDetailsIntent(mActivity, admin);
             } else if ((mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {

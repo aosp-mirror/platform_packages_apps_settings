@@ -28,8 +28,8 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
@@ -57,7 +57,8 @@ public class VerifyAppsOverUsbPreferenceController extends DeveloperOptionsPrefe
     class RestrictedLockUtilsDelegate {
         public EnforcedAdmin checkIfRestrictionEnforced(
                 Context context, String userRestriction, int userId) {
-            return RestrictedLockUtils.checkIfRestrictionEnforced(context, userRestriction, userId);
+            return RestrictedLockUtilsInternal.checkIfRestrictionEnforced(context, userRestriction,
+                    userId);
         }
     }
 

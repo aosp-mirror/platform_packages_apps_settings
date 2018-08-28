@@ -80,6 +80,15 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     }
 
     @Implementation
+    public int[] getProfileIds(@UserIdInt int userHandle, boolean enabledOnly) {
+        int[] ids = new int[mUserProfileInfos.size()];
+        for (int i = 0; i < mUserProfileInfos.size(); i++) {
+            ids[i] = mUserProfileInfos.get(i).id;
+        }
+        return ids;
+    }
+
+    @Implementation
     public int getCredentialOwnerProfile(@UserIdInt int userHandle) {
         return userHandle;
     }

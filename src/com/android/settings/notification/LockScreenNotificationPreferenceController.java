@@ -41,6 +41,7 @@ import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
@@ -246,7 +247,7 @@ public class LockScreenNotificationPreferenceController extends AbstractPreferen
     private void setRestrictedIfNotificationFeaturesDisabled(CharSequence entry,
             CharSequence entryValue, int keyguardNotificationFeatures) {
         RestrictedLockUtils.EnforcedAdmin admin =
-                RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(
+                RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
                         mContext, keyguardNotificationFeatures, UserHandle.myUserId());
         if (admin != null && mLockscreen != null) {
             RestrictedListPreference.RestrictedItem item =
@@ -255,7 +256,7 @@ public class LockScreenNotificationPreferenceController extends AbstractPreferen
         }
         if (mProfileUserId != UserHandle.USER_NULL) {
             RestrictedLockUtils.EnforcedAdmin profileAdmin =
-                    RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(
+                    RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
                             mContext, keyguardNotificationFeatures, mProfileUserId);
             if (profileAdmin != null && mLockscreenProfile != null) {
                 RestrictedListPreference.RestrictedItem item =

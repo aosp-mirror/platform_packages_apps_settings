@@ -17,7 +17,7 @@ package com.android.settings.network;
 
 import static android.os.UserManager.DISALLOW_CONFIG_TETHERING;
 
-import static com.android.settingslib.RestrictedLockUtils.checkIfRestrictionEnforced;
+import static com.android.settingslib.RestrictedLockUtilsInternal.checkIfRestrictionEnforced;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothPan;

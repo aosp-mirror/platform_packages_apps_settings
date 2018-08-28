@@ -47,8 +47,8 @@ import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.AppItem;
-import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoaderCompat;
@@ -264,7 +264,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
     }
 
     private void updatePrefs(boolean restrictBackground, boolean unrestrictData) {
-        final EnforcedAdmin admin = RestrictedLockUtils.checkIfMeteredDataRestricted(
+        final EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfMeteredDataRestricted(
                 getContext(), mPackageName, UserHandle.getUserId(mAppItem.key));
         if (mRestrictBackground != null) {
             mRestrictBackground.setChecked(!restrictBackground);

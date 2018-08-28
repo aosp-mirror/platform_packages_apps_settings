@@ -31,7 +31,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import java.util.List;
 
@@ -105,7 +105,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             mPhonePref.setChecked(
                     !mDefaultGuestRestrictions.getBoolean(UserManager.DISALLOW_OUTGOING_CALLS));
         }
-        if (RestrictedLockUtils.hasBaseUserRestriction(context,
+        if (RestrictedLockUtilsInternal.hasBaseUserRestriction(context,
                 UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId())) {
             removePreference(KEY_REMOVE_USER);
         }

@@ -56,8 +56,8 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 import com.android.settingslib.search.SearchIndexable;
@@ -584,7 +584,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     permittedServices == null || permittedServices.contains(packageName);
             if (!serviceAllowed && !serviceEnabled) {
                 final EnforcedAdmin admin =
-                        RestrictedLockUtils.checkIfAccessibilityServiceDisallowed(
+                        RestrictedLockUtilsInternal.checkIfAccessibilityServiceDisallowed(
                                 getActivity(), packageName, UserHandle.myUserId());
                 if (admin != null) {
                     preference.setDisabledByAdmin(admin);

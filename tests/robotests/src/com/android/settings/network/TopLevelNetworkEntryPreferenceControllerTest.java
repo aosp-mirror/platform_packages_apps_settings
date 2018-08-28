@@ -23,7 +23,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.ShadowRestrictedLockUtils;
+import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 import com.android.settings.wifi.WifiMasterSwitchPreferenceController;
 
 import org.junit.Before;
@@ -36,7 +36,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = ShadowRestrictedLockUtils.class)
+@Config(shadows = ShadowRestrictedLockUtilsInternal.class)
 public class TopLevelNetworkEntryPreferenceControllerTest {
 
     @Mock

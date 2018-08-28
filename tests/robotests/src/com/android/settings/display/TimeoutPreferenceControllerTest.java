@@ -34,7 +34,7 @@ import android.provider.Settings;
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
-import com.android.settings.testutils.shadow.ShadowRestrictedLockUtils;
+import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import org.junit.After;
@@ -78,7 +78,7 @@ public class TimeoutPreferenceControllerTest {
 
     @After
     public void tearDown() {
-          ShadowRestrictedLockUtils.reset();
+          ShadowRestrictedLockUtilsInternal.reset();
     }
 
     @Test
@@ -139,13 +139,13 @@ public class TimeoutPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = ShadowRestrictedLockUtils.class)
+    @Config(shadows = ShadowRestrictedLockUtilsInternal.class)
     public void updateState_selectedTimeoutLargerThanAdminMax_shouldSetSummaryToUpdatedPrefValue() {
         final int profileUserId = UserHandle.myUserId();
         final long allowedTimeout = 480000L; // 8 minutes
         when(mUserManager.getProfiles(profileUserId)).thenReturn(Collections.emptyList());
         ShadowDevicePolicyManager.getShadow().setMaximumTimeToLock(profileUserId, allowedTimeout);
-        ShadowRestrictedLockUtils.setMaximumTimeToLockIsSet(true);
+        ShadowRestrictedLockUtilsInternal.setMaximumTimeToLockIsSet(true);
         final CharSequence[] timeouts = {"15000", "30000", "60000", "120000", "300000", "600000"};
         final CharSequence[] summaries = {"15s", "30s", "1m", "2m", "5m", "10m"};
         // set current timeout to be 10 minutes, which is longer than the allowed 8 minutes

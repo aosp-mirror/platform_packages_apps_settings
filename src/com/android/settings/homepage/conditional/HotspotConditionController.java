@@ -31,6 +31,7 @@ import com.android.settings.R;
 import com.android.settings.TetherSettings;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import java.util.Objects;
 
@@ -75,7 +76,7 @@ public class HotspotConditionController implements ConditionalCardController {
     @Override
     public void onActionClick() {
         final RestrictedLockUtils.EnforcedAdmin admin =
-                RestrictedLockUtils.checkIfRestrictionEnforced(
+                RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
                         mAppContext, UserManager.DISALLOW_CONFIG_TETHERING, UserHandle.myUserId());
         if (admin != null) {
             RestrictedLockUtils.sendShowAdminSupportDetailsIntent(mAppContext, admin);

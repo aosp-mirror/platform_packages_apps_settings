@@ -29,6 +29,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 public class FirmwareVersionDialogController implements View.OnClickListener {
 
@@ -105,9 +106,9 @@ public class FirmwareVersionDialogController implements View.OnClickListener {
 
     @VisibleForTesting
     void initializeAdminPermissions() {
-        mFunDisallowedAdmin = RestrictedLockUtils.checkIfRestrictionEnforced(
+        mFunDisallowedAdmin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
                 mContext, UserManager.DISALLOW_FUN, UserHandle.myUserId());
-        mFunDisallowedBySystem = RestrictedLockUtils.hasBaseUserRestriction(
+        mFunDisallowedBySystem = RestrictedLockUtilsInternal.hasBaseUserRestriction(
                 mContext, UserManager.DISALLOW_FUN, UserHandle.myUserId());
     }
 }
