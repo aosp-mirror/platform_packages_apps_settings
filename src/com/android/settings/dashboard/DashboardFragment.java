@@ -27,9 +27,11 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerListHelper;
@@ -53,7 +55,7 @@ import java.util.Set;
  */
 public abstract class DashboardFragment extends SettingsPreferenceFragment
         implements SettingsBaseActivity.CategoryListener, Indexable,
-        SummaryLoader.SummaryConsumer {
+        SummaryLoader.SummaryConsumer, PreferenceGroup.OnExpandButtonClickListener {
     private static final String TAG = "DashboardFragment";
 
     private final Map<Class, List<AbstractPreferenceController>> mPreferenceControllers =
@@ -207,6 +209,12 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     @Override
     protected abstract int getPreferenceScreenResId();
 
+    @Override
+    public void onExpandButtonClick() {
+        mMetricsFeatureProvider.actionWithSource(getContext(), getMetricsCategory(),
+                MetricsEvent.ACTION_SETTINGS_ADVANCED_BUTTON_EXPAND);
+    }
+
     protected boolean shouldForceRoundedIcon() {
         return false;
     }
@@ -268,6 +276,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         }
         addPreferencesFromResource(resId);
         final PreferenceScreen screen = getPreferenceScreen();
+        screen.setOnExpandButtonClickListener(this);
         mPreferenceControllers.values().stream().flatMap(Collection::stream).forEach(
                 controller -> controller.displayPreference(screen));
     }
