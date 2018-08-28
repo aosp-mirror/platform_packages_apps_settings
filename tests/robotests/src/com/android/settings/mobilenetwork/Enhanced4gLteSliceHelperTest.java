@@ -19,7 +19,9 @@ package com.android.settings.mobilenetwork;
 import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 import static android.app.slice.Slice.HINT_TITLE;
 import static android.app.slice.SliceItem.FORMAT_TEXT;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
@@ -33,12 +35,20 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.telephony.CarrierConfigManager;
 
+import androidx.slice.Slice;
+import androidx.slice.SliceItem;
+import androidx.slice.SliceMetadata;
+import androidx.slice.SliceProvider;
+import androidx.slice.core.SliceAction;
+import androidx.slice.core.SliceQuery;
+import androidx.slice.widget.SliceLiveData;
+
 import com.android.ims.ImsManager;
 import com.android.settings.R;
+import com.android.settings.slices.CustomSliceManager;
 import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settings.slices.SliceBroadcastReceiver;
 import com.android.settings.slices.SlicesFeatureProvider;
-import com.android.settings.slices.CustomSliceManager;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -51,14 +61,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.List;
-
-import androidx.slice.Slice;
-import androidx.slice.SliceItem;
-import androidx.slice.SliceMetadata;
-import androidx.slice.SliceProvider;
-import androidx.slice.core.SliceAction;
-import androidx.slice.core.SliceQuery;
-import androidx.slice.widget.SliceLiveData;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class Enhanced4gLteSliceHelperTest {

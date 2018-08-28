@@ -19,13 +19,13 @@ package com.android.settings.notification;
 import android.app.NotificationManager;
 import android.content.Context;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 public class ZenModeVisEffectsCustomPreferenceController
         extends AbstractZenModePreferenceController {

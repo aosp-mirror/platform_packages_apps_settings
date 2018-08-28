@@ -28,10 +28,10 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
-import com.android.settingslib.RestrictedPreference;
-
 import androidx.core.content.res.TypedArrayUtils;
 import androidx.preference.PreferenceViewHolder;
+
+import com.android.settingslib.RestrictedPreference;
 
 /**
  * Based on android.preference.SeekBarPreference, but uses support preference as base.

@@ -22,15 +22,15 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
+
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.Calendar;
 import java.util.Date;
-
-import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
-import androidx.preference.TwoStatePreference;
 
 public class TimeFormatPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {

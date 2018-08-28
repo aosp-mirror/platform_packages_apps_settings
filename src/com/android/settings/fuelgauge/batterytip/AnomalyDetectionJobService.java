@@ -37,6 +37,9 @@ import android.provider.Settings;
 import android.util.Log;
 import android.util.Pair;
 
+import androidx.annotation.GuardedBy;
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
@@ -50,9 +53,6 @@ import com.android.settingslib.utils.ThreadUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-import androidx.annotation.GuardedBy;
-import androidx.annotation.VisibleForTesting;
 
 /** A JobService to store anomaly data to anomaly database */
 public class AnomalyDetectionJobService extends JobService {

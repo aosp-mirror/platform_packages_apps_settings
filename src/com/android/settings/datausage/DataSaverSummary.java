@@ -21,6 +21,8 @@ import android.provider.SearchIndexableResource;
 import android.telephony.SubscriptionManager;
 import android.widget.Switch;
 
+import androidx.preference.Preference;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -39,8 +41,6 @@ import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.preference.Preference;
 
 @SearchIndexable
 public class DataSaverSummary extends SettingsPreferenceFragment

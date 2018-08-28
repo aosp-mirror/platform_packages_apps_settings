@@ -17,6 +17,7 @@
 package com.android.settings.display;
 
 import static android.provider.Settings.System.SHOW_BATTERY_PERCENT;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;

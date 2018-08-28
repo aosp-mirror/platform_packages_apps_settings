@@ -35,12 +35,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.settings.R;
 
 import java.util.List;
 import java.util.Locale;
-
-import androidx.appcompat.app.AlertDialog;
 
 /**
  * Utility class for creating the dialog that asks users for explicit permission to grant

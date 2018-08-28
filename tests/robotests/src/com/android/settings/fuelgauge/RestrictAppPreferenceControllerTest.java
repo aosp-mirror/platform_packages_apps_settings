@@ -32,6 +32,8 @@ import android.content.Intent;
 import android.os.UserHandle;
 import android.os.UserManager;
 
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
@@ -47,8 +49,6 @@ import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class RestrictAppPreferenceControllerTest {

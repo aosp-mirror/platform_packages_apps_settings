@@ -25,12 +25,12 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceClickListener;
+
 import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.widget.AppPreference;
-
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceClickListener;
 
 public class AccountTypePreference extends AppPreference implements OnPreferenceClickListener {
     /**

@@ -87,6 +87,11 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TabWidget;
 
+import androidx.annotation.StringRes;
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+
 import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.widget.LockPatternUtils;
@@ -96,11 +101,6 @@ import java.net.InetAddress;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-
-import androidx.annotation.StringRes;
-import androidx.fragment.app.Fragment;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
 
 public final class Utils extends com.android.settingslib.Utils {
 

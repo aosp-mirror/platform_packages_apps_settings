@@ -45,6 +45,7 @@ import static com.android.settings.deviceinfo.simstatus.SimStatusDialogControlle
         .SIGNAL_STRENGTH_LABEL_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
         .SIGNAL_STRENGTH_VALUE_ID;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
@@ -65,6 +66,8 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.TelephonyManager;
 import android.telephony.euicc.EuiccManager;
 
+import androidx.lifecycle.LifecycleOwner;
+
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -78,8 +81,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowPackageManager;
 import org.robolectric.util.ReflectionHelpers;
-
-import androidx.lifecycle.LifecycleOwner;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SimStatusDialogControllerTest {

@@ -19,6 +19,8 @@ package com.android.settings.datetime.timezone;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.spy;
 
+import androidx.preference.Preference;
+
 import com.android.settings.datetime.timezone.TimeZoneInfo.Formatter;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -28,8 +30,6 @@ import org.robolectric.RuntimeEnvironment;
 
 import java.util.Date;
 import java.util.Locale;
-
-import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class TimeZoneInfoPreferenceControllerTest {

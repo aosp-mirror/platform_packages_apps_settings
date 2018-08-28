@@ -31,6 +31,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.TrustedCredentialsSettings.CertHolder;
 import com.android.settingslib.RestrictedLockUtils;
@@ -39,8 +41,6 @@ import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.IntConsumer;
-
-import androidx.appcompat.app.AlertDialog;
 
 class TrustedCredentialsDialogBuilder extends AlertDialog.Builder {
     public interface DelegateInterface {

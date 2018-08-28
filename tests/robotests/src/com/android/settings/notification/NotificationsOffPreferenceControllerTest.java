@@ -17,7 +17,9 @@
 package com.android.settings.notification;
 
 import static android.app.NotificationManager.IMPORTANCE_NONE;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -28,6 +30,8 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.os.UserManager;
 
+import androidx.preference.Preference;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -37,8 +41,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
-
-import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class NotificationsOffPreferenceControllerTest {

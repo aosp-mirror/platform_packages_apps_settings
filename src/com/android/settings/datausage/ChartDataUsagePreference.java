@@ -25,13 +25,13 @@ import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
 import android.util.SparseIntArray;
 
-import com.android.settings.R;
-import com.android.settings.Utils;
-import com.android.settings.widget.UsageView;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
+
+import com.android.settings.R;
+import com.android.settings.Utils;
+import com.android.settings.widget.UsageView;
 
 public class ChartDataUsagePreference extends Preference {
 

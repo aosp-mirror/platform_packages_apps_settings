@@ -19,13 +19,13 @@ package com.android.settings.biometrics.face;
 import android.content.Context;
 import android.content.Intent;
 
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.utils.AnnotationSpan;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.widget.FooterPreference;
-
-import androidx.preference.Preference;
 
 /**
  * Footer for face settings showing the help text and help link.

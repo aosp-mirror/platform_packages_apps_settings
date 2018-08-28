@@ -18,11 +18,11 @@ package com.android.settings.testutils.shadow;
 
 import android.app.Activity;
 
+import androidx.loader.app.LoaderManager;
+
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadows.ShadowActivity;
-
-import androidx.loader.app.LoaderManager;
 
 /*
  * Shadow for {@link Activity} that has LoadManager accessors.

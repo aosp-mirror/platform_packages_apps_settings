@@ -19,14 +19,14 @@ package com.android.settings.development.featureflags;
 import android.content.Context;
 import android.util.FeatureFlagUtils;
 
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 
 import java.util.Map;
-
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceScreen;
 
 public class FeatureFlagsPreferenceController extends BasePreferenceController
         implements LifecycleObserver, OnStart {

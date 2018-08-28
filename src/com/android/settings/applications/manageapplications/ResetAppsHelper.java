@@ -34,11 +34,11 @@ import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.webkit.IWebViewUpdateService;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.settings.R;
 
 import java.util.List;
-
-import androidx.appcompat.app.AlertDialog;
 
 public class ResetAppsHelper implements DialogInterface.OnClickListener,
         DialogInterface.OnDismissListener {

@@ -22,13 +22,13 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.PowerManager;
 
+import androidx.annotation.IntDef;
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.Utils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-
-import androidx.annotation.IntDef;
-import androidx.annotation.VisibleForTesting;
 
 /**
  * Use this broadcastReceiver to listen to the battery change, and it will invoke

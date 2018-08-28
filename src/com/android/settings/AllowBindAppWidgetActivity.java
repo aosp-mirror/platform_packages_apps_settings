@@ -29,10 +29,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.CheckBox;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
-
-import androidx.appcompat.app.AlertDialog;
 
 /**
  * This activity is displayed when an app launches the BIND_APPWIDGET intent. This allows apps

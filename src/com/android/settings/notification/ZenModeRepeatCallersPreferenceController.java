@@ -21,13 +21,13 @@ import android.content.Context;
 import android.provider.Settings;
 import android.util.Log;
 
-import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.R;
-import com.android.settingslib.core.lifecycle.Lifecycle;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
+
+import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.R;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class ZenModeRepeatCallersPreferenceController extends AbstractZenModePreferenceController
         implements Preference.OnPreferenceChangeListener {

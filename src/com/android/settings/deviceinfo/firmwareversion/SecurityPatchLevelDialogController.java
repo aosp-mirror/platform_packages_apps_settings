@@ -24,10 +24,10 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settingslib.DeviceInfoUtils;
-
-import androidx.annotation.VisibleForTesting;
 
 public class SecurityPatchLevelDialogController implements View.OnClickListener {
 

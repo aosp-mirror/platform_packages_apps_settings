@@ -30,10 +30,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.Locale;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
+
+import java.util.Locale;
 
 /**
  * {@link Activity} that displays regulatory information for the "Regulatory information"

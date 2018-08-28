@@ -20,11 +20,11 @@ import android.content.Context;
 import android.net.wifi.WifiConfiguration;
 import android.util.Log;
 
-import com.android.settings.widget.ValidatedEditTextPreference;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
+
+import com.android.settings.widget.ValidatedEditTextPreference;
 
 public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreferenceController
         implements ValidatedEditTextPreference.Validator {

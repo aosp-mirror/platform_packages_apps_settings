@@ -19,16 +19,16 @@ package com.android.settings.development;
 import android.content.Context;
 import android.text.format.Formatter;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.applications.ProcStatsData;
 import com.android.settings.applications.ProcessStatsBase;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 import com.android.settingslib.utils.ThreadUtils;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 public class MemoryUsagePreferenceController extends DeveloperOptionsPreferenceController implements
         PreferenceControllerMixin {

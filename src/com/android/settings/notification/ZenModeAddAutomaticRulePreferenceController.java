@@ -19,12 +19,12 @@ package com.android.settings.notification;
 import android.content.Context;
 import android.content.Intent;
 
-import com.android.settings.utils.ZenServiceListing;
-import com.android.settingslib.core.lifecycle.Lifecycle;
-
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+
+import com.android.settings.utils.ZenServiceListing;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class ZenModeAddAutomaticRulePreferenceController extends
         AbstractZenModeAutomaticRulePreferenceController implements

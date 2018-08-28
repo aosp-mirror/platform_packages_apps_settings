@@ -23,6 +23,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.viewpager.widget.PagerAdapter;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -31,8 +33,6 @@ import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.Locale;
-
-import androidx.viewpager.widget.PagerAdapter;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class RtlCompatibleViewPagerTest {

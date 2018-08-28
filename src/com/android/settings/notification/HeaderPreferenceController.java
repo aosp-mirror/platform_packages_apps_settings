@@ -25,16 +25,16 @@ import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.view.View;
 
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
 
 public class HeaderPreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver {

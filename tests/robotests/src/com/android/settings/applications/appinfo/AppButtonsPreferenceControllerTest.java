@@ -42,6 +42,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.UserManager;
 
+import androidx.fragment.app.Fragment;
+
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -62,8 +64,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.stubbing.Answer;
 import org.robolectric.util.ReflectionHelpers;
-
-import androidx.fragment.app.Fragment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class AppButtonsPreferenceControllerTest {

@@ -23,6 +23,9 @@ import android.os.Bundle;
 import android.os.storage.VolumeRecord;
 import android.widget.Button;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
+
 import com.android.settings.R;
 import com.android.settings.deviceinfo.PrivateVolumeForget.ForgetConfirmFragment;
 import com.android.settings.testutils.Robolectric;
@@ -35,9 +38,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.FragmentActivity;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowStorageManager.class, SettingsShadowResourcesImpl.class})

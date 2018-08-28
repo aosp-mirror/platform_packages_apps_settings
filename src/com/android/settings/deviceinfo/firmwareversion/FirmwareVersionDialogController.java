@@ -25,10 +25,10 @@ import android.os.UserManager;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settingslib.RestrictedLockUtils;
-
-import androidx.annotation.VisibleForTesting;
 
 public class FirmwareVersionDialogController implements View.OnClickListener {
 

@@ -22,10 +22,10 @@ import android.net.Uri;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
 
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-
-import androidx.preference.Preference;
 
 public class ZenModeBehaviorFooterPreferenceController extends AbstractZenModePreferenceController {
 

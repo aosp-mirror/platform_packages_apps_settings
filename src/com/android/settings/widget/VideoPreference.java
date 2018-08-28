@@ -29,11 +29,11 @@ import android.view.TextureView;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.android.settings.R;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
+
+import com.android.settings.R;
 
 /**
  * A full width preference that hosts a MP4 video.

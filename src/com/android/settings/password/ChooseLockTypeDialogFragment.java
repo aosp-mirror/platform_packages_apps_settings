@@ -31,6 +31,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog.Builder;
+import androidx.fragment.app.Fragment;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
@@ -39,9 +42,6 @@ import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment
 import com.android.setupwizardlib.util.WizardManagerHelper;
 
 import java.util.List;
-
-import androidx.appcompat.app.AlertDialog.Builder;
-import androidx.fragment.app.Fragment;
 
 /**
  * A dialog fragment similar to {@link ChooseLockGeneric} where the user can select from a few

@@ -20,13 +20,13 @@ import android.app.usage.StorageStatsManager;
 import android.content.Context;
 import android.os.storage.VolumeInfo;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
 import com.android.settingslib.utils.AsyncLoaderCompat;
 
 import java.io.IOException;
-
-import androidx.annotation.VisibleForTesting;
 
 public class VolumeSizesLoader extends AsyncLoaderCompat<PrivateStorageInfo> {
     private StorageVolumeProvider mVolumeProvider;

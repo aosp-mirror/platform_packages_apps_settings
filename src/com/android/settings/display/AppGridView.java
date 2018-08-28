@@ -30,13 +30,13 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
 
 public class AppGridView extends GridView {
     public AppGridView(Context context) {

@@ -15,24 +15,15 @@
 package com.android.settings.development.autofill;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.provider.Settings;
-import android.text.BidiFormatter;
 import android.text.InputType;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.Slog;
-import android.view.Display;
 import android.view.View;
-import android.view.autofill.AutofillManager;
 import android.widget.EditText;
 
-import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settingslib.CustomEditTextPreferenceCompat;
-
-import java.text.NumberFormat;
 
 /**
  * Base class for Autofill integer properties that are backed by

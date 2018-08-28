@@ -23,9 +23,9 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 
-import java.util.Locale;
-
 import androidx.viewpager.widget.ViewPager;
+
+import java.util.Locale;
 
 /**
  * A {@link ViewPager} that's aware of RTL changes when used with FragmentPagerAdapter.

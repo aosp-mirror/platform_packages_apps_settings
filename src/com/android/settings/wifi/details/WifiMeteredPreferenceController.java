@@ -21,12 +21,12 @@ import android.content.Context;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 
-import com.android.settings.core.BasePreferenceController;
-import com.android.settingslib.core.AbstractPreferenceController;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.DropDownPreference;
 import androidx.preference.Preference;
+
+import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 /**
  * {@link AbstractPreferenceController} that controls whether the wifi network is metered or not

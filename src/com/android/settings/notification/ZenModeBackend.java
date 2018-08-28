@@ -28,9 +28,9 @@ import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
 import android.util.Log;
 
-import com.android.settings.R;
-
 import androidx.annotation.VisibleForTesting;
+
+import com.android.settings.R;
 
 public class ZenModeBackend {
     @VisibleForTesting

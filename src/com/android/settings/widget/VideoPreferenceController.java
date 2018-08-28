@@ -18,12 +18,12 @@ package com.android.settings.widget;
 
 import android.content.Context;
 
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
-
-import androidx.preference.PreferenceScreen;
 
 public class VideoPreferenceController extends BasePreferenceController implements
         LifecycleObserver, OnResume, OnPause {

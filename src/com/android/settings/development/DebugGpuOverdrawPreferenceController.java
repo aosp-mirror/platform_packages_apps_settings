@@ -21,13 +21,13 @@ import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.view.ThreadedRenderer;
 
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 import com.android.settingslib.development.SystemPropPoker;
-
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
 
 public class DebugGpuOverdrawPreferenceController extends
         DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener,

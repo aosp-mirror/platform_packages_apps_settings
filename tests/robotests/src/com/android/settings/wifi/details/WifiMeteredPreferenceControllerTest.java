@@ -16,11 +16,14 @@
 package com.android.settings.wifi.details;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
 import android.net.wifi.WifiConfiguration;
+
+import androidx.preference.DropDownPreference;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -30,8 +33,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.robolectric.RuntimeEnvironment;
-
-import androidx.preference.DropDownPreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class WifiMeteredPreferenceControllerTest {

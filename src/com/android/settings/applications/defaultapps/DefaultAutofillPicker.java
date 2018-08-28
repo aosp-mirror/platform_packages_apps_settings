@@ -34,14 +34,16 @@ import android.service.autofill.AutofillServiceInfo;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
+
 import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceClickListener;
+
 import com.android.internal.content.PackageMonitor;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.CandidateInfo;
+
 import java.util.ArrayList;
 import java.util.List;
 

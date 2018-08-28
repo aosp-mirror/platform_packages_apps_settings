@@ -23,6 +23,8 @@ import android.icu.text.LocaleDisplayNames;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
@@ -35,8 +37,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-
-import androidx.annotation.VisibleForTesting;
 
 /**
  * Render a list of regions into a list view.

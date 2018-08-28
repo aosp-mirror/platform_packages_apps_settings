@@ -19,12 +19,12 @@ package com.android.settings.connecteddevice.usb;
 import android.content.Context;
 import android.hardware.usb.UsbPort;
 
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.widget.RadioButtonPreference;
-
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
 
 /**
  * This class controls the radio buttons for switching between

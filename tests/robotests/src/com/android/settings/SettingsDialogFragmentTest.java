@@ -22,6 +22,8 @@ import static org.mockito.Mockito.when;
 
 import android.app.Dialog;
 
+import androidx.fragment.app.Fragment;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -30,8 +32,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-
-import androidx.fragment.app.Fragment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SettingsDialogFragmentTest {

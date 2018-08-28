@@ -16,12 +16,12 @@ package com.android.settings.display;
 import android.content.Context;
 import android.provider.Settings;
 
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
+
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
-
-import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
 
 public class ShowOperatorNamePreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {

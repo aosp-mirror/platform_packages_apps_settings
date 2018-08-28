@@ -20,11 +20,11 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.widget.ToggleSwitch;
 import com.android.settingslib.RestrictedLockUtils;
-
-import androidx.preference.PreferenceViewHolder;
 
 public class NotificationSwitchBarPreference extends LayoutPreference {
     private ToggleSwitch mSwitch;

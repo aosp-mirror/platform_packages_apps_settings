@@ -18,9 +18,9 @@ package com.android.settings.backup;
 
 import android.content.Context;
 
-import com.android.settings.core.BasePreferenceController;
-
 import androidx.preference.Preference;
+
+import com.android.settings.core.BasePreferenceController;
 
 public class DataManagementPreferenceController extends BasePreferenceController {
     private PrivacySettingsConfigData mPSCD;

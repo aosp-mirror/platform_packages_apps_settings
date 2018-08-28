@@ -22,6 +22,10 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.IconDrawableFactory;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.AppLaunchSettings;
@@ -31,10 +35,6 @@ import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
 import java.util.ArrayList;
 import java.util.Map;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceScreen;
 
 public class DomainAppPreferenceController extends BasePreferenceController implements
         ApplicationsState.Callbacks {

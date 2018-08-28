@@ -28,6 +28,8 @@ import android.content.pm.PackageManager;
 import android.text.TextUtils;
 import android.webkit.UserPackage;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
@@ -35,8 +37,6 @@ import com.android.settingslib.applications.DefaultAppInfo;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
 
 public class WebViewAppPicker extends DefaultAppPickerFragment {
     private WebViewUpdateServiceWrapper mWebViewUpdateServiceWrapper;

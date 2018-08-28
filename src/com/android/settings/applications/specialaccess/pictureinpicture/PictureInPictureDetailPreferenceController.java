@@ -22,11 +22,11 @@ import android.content.pm.PackageManager;
 import android.os.UserHandle;
 import android.util.Log;
 
-import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.applications.appinfo.AppInfoPreferenceControllerBase;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
+
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.applications.appinfo.AppInfoPreferenceControllerBase;
 
 public class PictureInPictureDetailPreferenceController extends AppInfoPreferenceControllerBase {
 

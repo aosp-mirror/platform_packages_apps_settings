@@ -19,11 +19,11 @@ package com.android.settings.notification;
 import android.app.NotificationManager.Policy;
 import android.content.Context;
 
-import com.android.settings.R;
-import com.android.settingslib.core.lifecycle.Lifecycle;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+
+import com.android.settings.R;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class ZenFooterPreferenceController extends AbstractZenModePreferenceController {
 

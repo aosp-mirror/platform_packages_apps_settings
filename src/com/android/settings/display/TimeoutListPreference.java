@@ -26,13 +26,13 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
+import androidx.appcompat.app.AlertDialog.Builder;
+
 import com.android.settings.R;
 import com.android.settings.RestrictedListPreference;
 import com.android.settingslib.RestrictedLockUtils;
 
 import java.util.ArrayList;
-
-import androidx.appcompat.app.AlertDialog.Builder;
 
 
 public class TimeoutListPreference extends RestrictedListPreference {

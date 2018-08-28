@@ -24,6 +24,9 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.Utils;
 import com.android.settings.core.TogglePreferenceController;
@@ -34,9 +37,6 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 public class VisiblePatternProfilePreferenceController extends TogglePreferenceController
         implements LifecycleObserver, OnResume {

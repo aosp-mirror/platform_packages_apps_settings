@@ -19,9 +19,9 @@ package com.android.settings.accessibility;
 import android.content.Context;
 import android.provider.Settings;
 
-import com.android.settings.core.TogglePreferenceController;
-
 import androidx.annotation.VisibleForTesting;
+
+import com.android.settings.core.TogglePreferenceController;
 
 public class ColorInversionPreferenceController extends TogglePreferenceController {
     @VisibleForTesting

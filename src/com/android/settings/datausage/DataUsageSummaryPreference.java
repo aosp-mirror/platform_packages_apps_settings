@@ -33,6 +33,10 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
@@ -42,10 +46,6 @@ import com.android.settingslib.utils.StringUtil;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 
 /**
  * Provides a summary of data usage.

@@ -16,10 +16,10 @@ package com.android.settings.enterprise;
 
 import android.content.Context;
 
-import com.android.settings.R;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
+
+import com.android.settings.R;
 
 public class CaCertsCurrentUserPreferenceController extends CaCertsPreferenceControllerBase {
 

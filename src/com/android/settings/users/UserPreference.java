@@ -25,13 +25,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.settings.R;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
 
 import java.util.Comparator;
-
-import androidx.preference.PreferenceViewHolder;
 
 public class UserPreference extends RestrictedPreference {
     private static final int ALPHA_ENABLED = 255;

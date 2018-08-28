@@ -25,6 +25,8 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.provider.Settings;
 
+import androidx.lifecycle.LifecycleOwner;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.ToggleSwitch;
@@ -38,8 +40,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
-
-import androidx.lifecycle.LifecycleOwner;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class LocationSwitchBarControllerTest {

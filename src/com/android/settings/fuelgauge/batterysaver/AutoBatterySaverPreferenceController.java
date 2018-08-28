@@ -18,11 +18,11 @@ package com.android.settings.fuelgauge.batterysaver;
 import android.content.Context;
 import android.provider.Settings;
 
-import com.android.settings.core.TogglePreferenceController;
-import com.android.settingslib.fuelgauge.BatterySaverUtils;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
+
+import com.android.settings.core.TogglePreferenceController;
+import com.android.settingslib.fuelgauge.BatterySaverUtils;
 
 /**
  * Controller that update whether to turn on battery saver automatically

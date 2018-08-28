@@ -23,6 +23,11 @@ import android.hardware.input.InputManager;
 import android.hardware.input.KeyboardLayout;
 import android.view.InputDevice;
 
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
+
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
@@ -31,11 +36,6 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-
-import androidx.fragment.app.Fragment;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
 
 public class KeyboardLayoutPickerController extends BasePreferenceController implements

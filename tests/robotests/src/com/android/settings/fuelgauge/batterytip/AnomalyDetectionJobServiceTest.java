@@ -19,7 +19,9 @@ package com.android.settings.fuelgauge.batterytip;
 import static android.os.StatsDimensionsValue.FLOAT_VALUE_TYPE;
 import static android.os.StatsDimensionsValue.INT_VALUE_TYPE;
 import static android.os.StatsDimensionsValue.TUPLE_VALUE_TYPE;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyInt;

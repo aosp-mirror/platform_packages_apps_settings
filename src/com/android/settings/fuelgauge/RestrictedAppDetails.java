@@ -25,6 +25,11 @@ import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.util.SparseLongArray;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.CheckBoxPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -45,11 +50,6 @@ import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.CheckBoxPreference;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
 
 /**
  * Fragment to show a list of anomaly apps, where user could handle these anomalies

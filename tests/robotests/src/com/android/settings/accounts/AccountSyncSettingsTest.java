@@ -23,6 +23,8 @@ import android.accounts.Account;
 import android.content.Context;
 import android.os.UserHandle;
 
+import androidx.fragment.app.FragmentActivity;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowContentResolver;
 
@@ -32,8 +34,6 @@ import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
-
-import androidx.fragment.app.FragmentActivity;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowContentResolver.class})

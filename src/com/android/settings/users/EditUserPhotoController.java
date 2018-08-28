@@ -48,6 +48,9 @@ import android.widget.ImageView;
 import android.widget.ListPopupWindow;
 import android.widget.TextView;
 
+import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
+
 import com.android.settings.R;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.drawable.CircleFramedDrawable;
@@ -62,9 +65,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.core.content.FileProvider;
-import androidx.fragment.app.Fragment;
 
 public class EditUserPhotoController {
     private static final String TAG = "EditUserPhotoController";

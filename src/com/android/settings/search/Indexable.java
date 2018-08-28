@@ -19,11 +19,11 @@ package com.android.settings.search;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
+import androidx.annotation.Keep;
+
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;
-
-import androidx.annotation.Keep;
 
 /**
  * Interface for classes whose instances can provide data for indexing.

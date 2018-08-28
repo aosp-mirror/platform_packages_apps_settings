@@ -18,11 +18,11 @@ package com.android.settings.datetime.timezone;
 
 import android.content.Context;
 
+import androidx.preference.Preference;
+
 import com.android.settings.core.BasePreferenceController;
 
 import com.google.common.base.Objects;
-
-import androidx.preference.Preference;
 
 public abstract class BaseTimeZonePreferenceController extends BasePreferenceController {
     private OnPreferenceClickListener mOnClickListener;

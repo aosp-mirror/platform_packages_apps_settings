@@ -14,10 +14,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneFactory;
-
-import androidx.appcompat.app.AlertDialog;
 
 /**
  * Radio Band Mode Selection Class

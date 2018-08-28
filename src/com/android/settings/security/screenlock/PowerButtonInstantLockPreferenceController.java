@@ -20,15 +20,15 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.text.TextUtils;
 
+import androidx.preference.Preference;
+import androidx.preference.TwoStatePreference;
+
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.security.trustagent.TrustAgentManager;
 import com.android.settingslib.core.AbstractPreferenceController;
-
-import androidx.preference.Preference;
-import androidx.preference.TwoStatePreference;
 
 public class PowerButtonInstantLockPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {

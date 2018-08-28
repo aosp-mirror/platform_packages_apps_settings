@@ -29,6 +29,10 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.net.Uri;
 
+import androidx.slice.Slice;
+import androidx.slice.SliceMetadata;
+import androidx.slice.SliceViewManager;
+
 import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -40,10 +44,6 @@ import org.robolectric.Robolectric;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.slice.Slice;
-import androidx.slice.SliceMetadata;
-import androidx.slice.SliceViewManager;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DeviceIndexUpdateJobServiceTest {

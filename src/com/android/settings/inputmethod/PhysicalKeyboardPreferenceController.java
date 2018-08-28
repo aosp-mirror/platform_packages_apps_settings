@@ -20,6 +20,8 @@ import android.content.Context;
 import android.hardware.input.InputManager;
 import android.icu.text.ListFormatter;
 
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment.HardKeyboardDeviceInfo;
@@ -31,8 +33,6 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.preference.Preference;
 
 
 public class PhysicalKeyboardPreferenceController extends AbstractPreferenceController

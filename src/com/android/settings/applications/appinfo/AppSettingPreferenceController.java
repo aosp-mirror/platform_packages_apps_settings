@@ -23,9 +23,9 @@ import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.text.TextUtils;
 
-import com.android.settings.overlay.FeatureFactory;
-
 import androidx.preference.Preference;
+
+import com.android.settings.overlay.FeatureFactory;
 
 public class AppSettingPreferenceController extends AppInfoPreferenceControllerBase {
 

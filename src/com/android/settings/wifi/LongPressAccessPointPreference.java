@@ -17,11 +17,11 @@ package com.android.settings.wifi;
 
 import android.content.Context;
 
-import com.android.settingslib.wifi.AccessPoint;
-import com.android.settingslib.wifi.AccessPointPreference;
-
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceViewHolder;
+
+import com.android.settingslib.wifi.AccessPoint;
+import com.android.settingslib.wifi.AccessPointPreference;
 
 public class LongPressAccessPointPreference extends AccessPointPreference {
 

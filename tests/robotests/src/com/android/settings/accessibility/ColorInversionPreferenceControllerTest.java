@@ -18,10 +18,13 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.ColorInversionPreferenceController.OFF;
 import static com.android.settings.accessibility.ColorInversionPreferenceController.ON;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.provider.Settings;
+
+import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -31,8 +34,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-
-import androidx.preference.SwitchPreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ColorInversionPreferenceControllerTest {

@@ -23,6 +23,13 @@ import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.view.View;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.DropDownPreference;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.telephony.SmsUsageMonitor;
 import com.android.settings.R;
@@ -42,13 +49,6 @@ import com.android.settingslib.widget.FooterPreference;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.DropDownPreference;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.PreferenceViewHolder;
 
 @SearchIndexable
 public class PremiumSmsAccess extends EmptyTextSettings

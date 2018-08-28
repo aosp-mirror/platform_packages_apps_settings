@@ -21,9 +21,9 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.ArraySet;
 
-import java.util.Objects;
-
 import androidx.annotation.VisibleForTesting;
+
+import java.util.Objects;
 
 /**
  * Model class stores app info(e.g. package name, type..) that used in battery tip

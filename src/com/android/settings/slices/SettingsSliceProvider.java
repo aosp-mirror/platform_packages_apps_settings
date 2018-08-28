@@ -32,6 +32,10 @@ import android.util.KeyValueListParser;
 import android.util.Log;
 import android.util.Pair;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.slice.Slice;
+import androidx.slice.SliceProvider;
+
 import com.android.settings.bluetooth.BluetoothSliceBuilder;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.flashlight.FlashlightSliceBuilder;
@@ -39,7 +43,6 @@ import com.android.settings.location.LocationSliceBuilder;
 import com.android.settings.mobilenetwork.Enhanced4gLteSliceHelper;
 import com.android.settings.notification.ZenModeSliceBuilder;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.core.BasePreferenceController;
 import com.android.settings.wifi.WifiSlice;
 import com.android.settings.wifi.calling.WifiCallingSliceHelper;
 import com.android.settingslib.SliceBroadcastRelay;
@@ -55,10 +58,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
 import java.util.concurrent.ConcurrentHashMap;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.slice.Slice;
-import androidx.slice.SliceProvider;
 
 /**
  * A {@link SliceProvider} for Settings to enabled inline results in system apps.

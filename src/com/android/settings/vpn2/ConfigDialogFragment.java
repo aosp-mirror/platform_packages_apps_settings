@@ -31,13 +31,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnProfile;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-
-import androidx.appcompat.app.AlertDialog;
 
 /**
  * Fragment wrapper around a {@link ConfigDialog}.

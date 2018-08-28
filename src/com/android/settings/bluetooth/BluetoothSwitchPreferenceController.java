@@ -18,6 +18,8 @@ package com.android.settings.bluetooth;
 import android.content.Context;
 import android.view.View;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -30,8 +32,6 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 import com.android.settingslib.widget.FooterPreference;
-
-import androidx.annotation.VisibleForTesting;
 
 /**
  * PreferenceController to update of bluetooth state. All behavior except managing the footer text

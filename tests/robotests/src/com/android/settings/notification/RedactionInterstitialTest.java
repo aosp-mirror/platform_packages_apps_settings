@@ -4,7 +4,9 @@ import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTI
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS;
 import static android.provider.Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS;
 import static android.provider.Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.robolectric.Robolectric.buildActivity;
 
 import android.content.ContentResolver;

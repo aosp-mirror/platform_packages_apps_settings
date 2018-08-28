@@ -24,14 +24,14 @@ import android.util.Log;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothPairingDialogFragment.BluetoothPairingDialogListener;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfile;
 
 import java.util.Locale;
-
-import androidx.annotation.VisibleForTesting;
 
 /**
  * A controller used by {@link BluetoothPairingDialog} to manage connection state while we try to

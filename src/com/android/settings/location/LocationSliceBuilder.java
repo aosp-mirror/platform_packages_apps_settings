@@ -18,6 +18,7 @@
 package com.android.settings.location;
 
 import static android.provider.SettingsSlicesContract.KEY_LOCATION;
+
 import static androidx.slice.builders.ListBuilder.ICON_IMAGE;
 
 import android.annotation.ColorInt;
@@ -28,17 +29,17 @@ import android.content.Intent;
 import android.net.Uri;
 import android.provider.SettingsSlicesContract;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.R;
-import com.android.settings.SubSettings;
-import com.android.settings.Utils;
-import com.android.settings.slices.SliceBuilderUtils;
-
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.ListBuilder.RowBuilder;
 import androidx.slice.builders.SliceAction;
+
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.R;
+import com.android.settings.SubSettings;
+import com.android.settings.Utils;
+import com.android.settings.slices.SliceBuilderUtils;
 
 /**
  * Utility class to build an intent-based Location Slice.

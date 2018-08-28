@@ -21,7 +21,9 @@ import static com.android.settings.accessibility.VibrationPreferenceFragment.KEY
 import static com.android.settings.accessibility.VibrationPreferenceFragment.KEY_INTENSITY_MEDIUM;
 import static com.android.settings.accessibility.VibrationPreferenceFragment.KEY_INTENSITY_OFF;
 import static com.android.settings.accessibility.VibrationPreferenceFragment.KEY_INTENSITY_ON;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 

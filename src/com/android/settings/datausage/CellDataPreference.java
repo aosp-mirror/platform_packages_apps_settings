@@ -32,6 +32,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Checkable;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog.Builder;
+import androidx.core.content.res.TypedArrayUtils;
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -39,11 +44,6 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.CustomDialogPreferenceCompat;
 
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.appcompat.app.AlertDialog.Builder;
-import androidx.core.content.res.TypedArrayUtils;
-import androidx.preference.PreferenceViewHolder;
 
 public class CellDataPreference extends CustomDialogPreferenceCompat implements TemplatePreference {
 

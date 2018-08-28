@@ -17,6 +17,7 @@
 package com.android.settings.deviceinfo;
 
 import static com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -30,6 +31,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.ArrayMap;
+
+import androidx.fragment.app.FragmentActivity;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -52,9 +56,6 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import androidx.fragment.app.FragmentActivity;
-import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowConnectivityManager.class, ShadowUserManager.class})

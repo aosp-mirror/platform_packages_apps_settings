@@ -24,11 +24,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.android.settings.R;
-import com.android.settings.SetupRedactionInterstitial;
-
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.android.settings.R;
+import com.android.settings.SetupRedactionInterstitial;
 
 /**
  * Setup Wizard's version of ChooseLockPattern screen. It inherits the logic and basic structure

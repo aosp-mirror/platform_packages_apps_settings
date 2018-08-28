@@ -22,11 +22,11 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 
-import com.android.settings.R;
-
 import androidx.core.content.res.TypedArrayUtils;
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.PreferenceViewHolder;
+
+import com.android.settings.R;
 
 /**
  * Check box preference with check box replaced by radio button.

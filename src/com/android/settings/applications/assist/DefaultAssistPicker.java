@@ -29,6 +29,8 @@ import android.speech.RecognitionService;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.app.AssistUtils;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -38,8 +40,6 @@ import com.android.settingslib.widget.CandidateInfo;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
 
 public class DefaultAssistPicker extends DefaultAppPickerFragment {
 

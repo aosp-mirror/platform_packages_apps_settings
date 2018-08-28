@@ -26,11 +26,11 @@ import android.service.notification.ConditionProviderService;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.android.settings.R;
-import com.android.settingslib.core.AbstractPreferenceController;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+
+import com.android.settings.R;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
 

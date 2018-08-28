@@ -28,11 +28,11 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
-import com.android.settings.widget.DotsPageIndicator;
-import com.android.settings.widget.LabeledSeekBar;
-
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
+
+import com.android.settings.widget.DotsPageIndicator;
+import com.android.settings.widget.LabeledSeekBar;
 
 /**
  * Preference fragment shows a preview and a seek bar to adjust a specific settings.

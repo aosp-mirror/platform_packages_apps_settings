@@ -27,6 +27,8 @@ import android.os.SystemClock;
 import android.text.format.Formatter;
 import android.util.SparseIntArray;
 
+import androidx.annotation.WorkerThread;
+
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.Utils;
 import com.android.settings.overlay.FeatureFactory;
@@ -34,8 +36,6 @@ import com.android.settings.widget.UsageView;
 import com.android.settingslib.R;
 import com.android.settingslib.utils.PowerUtil;
 import com.android.settingslib.utils.StringUtil;
-
-import androidx.annotation.WorkerThread;
 
 public class BatteryInfo {
 

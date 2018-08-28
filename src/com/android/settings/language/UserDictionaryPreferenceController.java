@@ -19,15 +19,15 @@ package com.android.settings.language;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.inputmethod.UserDictionaryList;
 import com.android.settings.inputmethod.UserDictionaryListPreferenceController;
 import com.android.settings.inputmethod.UserDictionarySettings;
 
 import java.util.TreeSet;
-
-import androidx.fragment.app.Fragment;
-import androidx.preference.Preference;
 
 public class UserDictionaryPreferenceController extends BasePreferenceController {
 

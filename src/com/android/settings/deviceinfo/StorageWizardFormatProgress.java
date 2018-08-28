@@ -17,6 +17,7 @@
 package com.android.settings.deviceinfo;
 
 import static android.os.storage.VolumeInfo.TYPE_PRIVATE;
+
 import static com.android.settings.deviceinfo.StorageSettings.TAG;
 
 import android.content.Intent;

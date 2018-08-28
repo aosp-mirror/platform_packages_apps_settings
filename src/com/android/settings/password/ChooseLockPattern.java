@@ -32,6 +32,8 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient;
 import com.android.internal.widget.LockPatternUtils;
@@ -53,8 +55,6 @@ import com.google.android.collect.Lists;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import androidx.fragment.app.Fragment;
 
 /**
  * If the user has a lock pattern set already, makes them confirm the existing one.

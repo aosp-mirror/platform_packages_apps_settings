@@ -38,13 +38,13 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.settings.R;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import androidx.appcompat.app.AlertDialog;
 
 public class SimDialogActivity extends Activity {
     private static String TAG = "SimDialogActivity";

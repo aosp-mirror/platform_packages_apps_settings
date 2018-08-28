@@ -21,9 +21,9 @@ import android.provider.Settings;
 import android.util.KeyValueListParser;
 import android.util.Log;
 
-import java.time.Duration;
-
 import androidx.annotation.VisibleForTesting;
+
+import java.time.Duration;
 
 /**
  * Class to store the policy for battery tips, which comes from

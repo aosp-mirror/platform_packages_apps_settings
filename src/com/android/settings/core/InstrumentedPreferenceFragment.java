@@ -21,15 +21,15 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.XmlRes;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.survey.SurveyMixin;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settingslib.core.lifecycle.ObservablePreferenceFragment;
-
-import androidx.annotation.XmlRes;
-import androidx.preference.PreferenceScreen;
 
 /**
  * Instrumented fragment that logs visibility state.

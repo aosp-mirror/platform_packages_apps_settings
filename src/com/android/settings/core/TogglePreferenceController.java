@@ -15,11 +15,11 @@ package com.android.settings.core;
 
 import android.content.Context;
 
-import com.android.settings.slices.SliceData;
-import com.android.settings.widget.MasterSwitchPreference;
-
 import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
+
+import com.android.settings.slices.SliceData;
+import com.android.settings.widget.MasterSwitchPreference;
 
 /**
  * Abstract class that consolidates logic for updating toggle controllers.

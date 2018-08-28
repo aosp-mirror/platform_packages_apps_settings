@@ -22,11 +22,11 @@ import android.print.PrintManager;
 import android.print.PrintServicesLoader;
 import android.printservice.PrintServiceInfo;
 
+import androidx.loader.content.Loader;
+
 import com.android.internal.util.Preconditions;
 
 import java.util.List;
-
-import androidx.loader.content.Loader;
 
 /**
  * Loader for the list of print services. Can be parametrized to select a subset.

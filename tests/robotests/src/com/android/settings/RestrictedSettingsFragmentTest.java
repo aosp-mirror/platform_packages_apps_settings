@@ -22,6 +22,8 @@ import static org.mockito.Mockito.verify;
 
 import android.app.Activity;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -29,8 +31,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import androidx.appcompat.app.AlertDialog;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class RestrictedSettingsFragmentTest {

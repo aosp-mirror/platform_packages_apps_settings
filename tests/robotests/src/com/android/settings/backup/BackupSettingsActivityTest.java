@@ -17,6 +17,7 @@
 package com.android.settings.backup;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.isA;
@@ -29,6 +30,10 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.UserHandle;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -50,10 +55,6 @@ import org.robolectric.annotation.Resetter;
 import org.robolectric.shadows.ShadowPackageManager;
 
 import java.util.List;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {BackupSettingsActivityTest.ShadowBackupSettingsHelper.class,

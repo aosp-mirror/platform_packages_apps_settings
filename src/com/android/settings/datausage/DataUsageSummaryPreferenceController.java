@@ -29,6 +29,10 @@ import android.text.format.Formatter;
 import android.util.Log;
 import android.util.RecurrenceRule;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -41,10 +45,6 @@ import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.net.DataUsageController;
 
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * This is the controller for the top of the data usage screen that retrieves carrier data from the

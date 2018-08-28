@@ -34,15 +34,15 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+
 import com.android.settings.R;
 import com.android.settingslib.Utils;
 import com.android.settingslib.drawable.CircleFramedDrawable;
 
 import java.io.File;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.annotation.VisibleForTesting;
-import androidx.fragment.app.Fragment;
 
 /**
  * This class encapsulates a Dialog for editing the user nickname and photo.

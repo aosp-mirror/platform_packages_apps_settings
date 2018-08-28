@@ -18,10 +18,10 @@ package com.android.settings.users;
 import android.content.Context;
 import android.provider.Settings;
 
+import androidx.preference.Preference;
+
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.RestrictedSwitchPreference;
-
-import androidx.preference.Preference;
 
 public class AddUserWhenLockedPreferenceController extends TogglePreferenceController {
 

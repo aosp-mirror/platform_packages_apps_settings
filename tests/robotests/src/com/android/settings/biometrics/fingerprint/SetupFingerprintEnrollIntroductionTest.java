@@ -17,6 +17,7 @@
 package com.android.settings.biometrics.fingerprint;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.robolectric.RuntimeEnvironment.application;
 
 import android.app.KeyguardManager;
@@ -29,7 +30,8 @@ import android.widget.Button;
 import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricEnrollIntroduction;
-import com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollIntroductionTest.ShadowStorageManagerWrapper;
+import com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollIntroductionTest
+        .ShadowStorageManagerWrapper;
 import com.android.settings.password.SetupChooseLockGeneric.SetupChooseLockGenericFragment;
 import com.android.settings.password.SetupSkipDialog;
 import com.android.settings.password.StorageManagerWrapper;

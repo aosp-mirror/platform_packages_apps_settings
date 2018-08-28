@@ -20,6 +20,7 @@ import static android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PASSWORD;
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_FACE;
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_SOMETHING;
+
 import static com.android.internal.util.Preconditions.checkNotNull;
 
 import android.annotation.Nullable;
@@ -34,10 +35,10 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.UserManager;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.Utils;
-
-import androidx.annotation.VisibleForTesting;
 
 /**
  * Business logic for {@link SetNewPasswordActivity}.

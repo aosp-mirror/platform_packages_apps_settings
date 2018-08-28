@@ -24,14 +24,14 @@ import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.widget.DatePicker;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.Calendar;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 
 public class DatePreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, DatePickerDialog.OnDateSetListener {

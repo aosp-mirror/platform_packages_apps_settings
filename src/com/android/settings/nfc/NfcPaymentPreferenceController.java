@@ -29,6 +29,11 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 
+import androidx.appcompat.app.AlertDialog.Builder;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.nfc.PaymentBackend.PaymentAppInfo;
@@ -37,11 +42,6 @@ import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import java.util.List;
-
-import androidx.appcompat.app.AlertDialog.Builder;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.PreferenceViewHolder;
 
 public class NfcPaymentPreferenceController extends BasePreferenceController implements
         PaymentBackend.Callback, View.OnClickListener, NfcPaymentPreference.Listener,

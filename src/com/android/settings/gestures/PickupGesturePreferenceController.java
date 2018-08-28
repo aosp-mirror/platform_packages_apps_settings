@@ -27,8 +27,6 @@ import android.text.TextUtils;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 
-import androidx.annotation.VisibleForTesting;
-
 public class PickupGesturePreferenceController extends GesturePreferenceController {
 
     private static final int ON = 1;

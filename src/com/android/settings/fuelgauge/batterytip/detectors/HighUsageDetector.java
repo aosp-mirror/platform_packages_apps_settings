@@ -20,6 +20,8 @@ import android.content.Context;
 import android.os.BatteryStats;
 import android.text.format.DateUtils;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.fuelgauge.BatteryInfo;
@@ -34,8 +36,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-import androidx.annotation.VisibleForTesting;
 
 /**
  * Detector whether to show summary tip. This detector should be executed as the last
