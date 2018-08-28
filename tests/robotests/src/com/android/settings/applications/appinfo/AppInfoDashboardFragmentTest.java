@@ -91,7 +91,9 @@ public final class AppInfoDashboardFragmentTest {
         doReturn(mActivity).when(mFragment).getActivity();
         doReturn(mShadowContext).when(mFragment).getContext();
         doReturn(mPackageManager).when(mActivity).getPackageManager();
+        when(mUserManager.isAdminUser()).thenReturn(true);
 
+        ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
         // Default to not considering any apps to be instant (individual tests can override this).
         ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
                 (InstantAppDataProvider) (i -> false));
@@ -102,7 +104,7 @@ public final class AppInfoDashboardFragmentTest {
         when(mDevicePolicyManager.packageHasActiveAdmins(nullable(String.class))).thenReturn(false);
         when(mUserManager.getUsers().size()).thenReturn(2);
         ReflectionHelpers.setField(mFragment, "mDpm", mDevicePolicyManager);
-        ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
+
         final ApplicationInfo info = new ApplicationInfo();
         info.enabled = true;
         final AppEntry appEntry = mock(AppEntry.class);
@@ -118,7 +120,6 @@ public final class AppInfoDashboardFragmentTest {
         when(mDevicePolicyManager.packageHasActiveAdmins(nullable(String.class))).thenReturn(false);
         when(mUserManager.getUsers().size()).thenReturn(2);
         ReflectionHelpers.setField(mFragment, "mDpm", mDevicePolicyManager);
-        ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
         final ApplicationInfo info = new ApplicationInfo();
         info.flags = ApplicationInfo.FLAG_INSTALLED;
         info.enabled = true;
@@ -217,7 +218,6 @@ public final class AppInfoDashboardFragmentTest {
         final PackageInfo packageInfo = mock(PackageInfo.class);
 
         ReflectionHelpers.setField(mFragment, "mDpm", mDevicePolicyManager);
-        ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
         ReflectionHelpers.setField(mFragment, "mPackageInfo", packageInfo);
 
         assertThat(mFragment.shouldShowUninstallForAll(appEntry)).isFalse();
@@ -258,7 +258,6 @@ public final class AppInfoDashboardFragmentTest {
         userInfos.add(new UserInfo(userID1, "User1", UserInfo.FLAG_PRIMARY));
         userInfos.add(new UserInfo(userID2, "yue", UserInfo.FLAG_GUEST));
         when(mUserManager.getUsers(true)).thenReturn(userInfos);
-        ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
         final ApplicationInfo appInfo = new ApplicationInfo();
         appInfo.flags = ApplicationInfo.FLAG_INSTALLED;
         when(mPackageManager.getApplicationInfoAsUser(
@@ -282,7 +281,6 @@ public final class AppInfoDashboardFragmentTest {
         userInfos.add(new UserInfo(userID1, "User1", UserInfo.FLAG_PRIMARY));
         userInfos.add(new UserInfo(userID2, "yue", UserInfo.FLAG_GUEST));
         when(mUserManager.getUsers(true)).thenReturn(userInfos);
-        ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
         final ApplicationInfo appInfo = new ApplicationInfo();
         appInfo.flags = ApplicationInfo.FLAG_INSTALLED;
         when(mPackageManager.getApplicationInfoAsUser(

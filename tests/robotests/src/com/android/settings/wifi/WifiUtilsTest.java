@@ -29,7 +29,7 @@ public class WifiUtilsTest {
     @Test
     public void testSSID() {
         assertThat(WifiUtils.isSSIDTooLong("123")).isFalse();
-        assertThat(WifiUtils.isSSIDTooLong("☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎")).isTrue();
+        assertThat(WifiUtils.isSSIDTooLong("☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎")).isTrue();
 
         assertThat(WifiUtils.isSSIDTooShort("123")).isFalse();
         assertThat(WifiUtils.isSSIDTooShort("")).isTrue();
