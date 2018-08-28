@@ -44,7 +44,7 @@ public class HomepageCard {
     private final String mName;
     @CardType
     private final int mCardType;
-    private final double mScore;
+    private final double mRankingScore;
     private final String mSliceUri;
     private final int mCategory;
     private final String mLocalizedToLocale;
@@ -58,8 +58,8 @@ public class HomepageCard {
     private final int mIconResId;
     private final String mCardAction;
     private final long mExpireTimeMS;
-    private final Drawable mDrawable;
-    private final boolean mSupportHalfWidth;
+    private final Drawable mIconDrawable;
+    private final boolean mIsHalfWidth;
 
     String getName() {
         return mName;
@@ -69,8 +69,8 @@ public class HomepageCard {
         return mCardType;
     }
 
-    double getScore() {
-        return mScore;
+    double getRankingScore() {
+        return mRankingScore;
     }
 
     String getTextSliceUri() {
@@ -129,18 +129,18 @@ public class HomepageCard {
         return mExpireTimeMS;
     }
 
-    Drawable getDrawable() {
-        return mDrawable;
+    Drawable getIconDrawable() {
+        return mIconDrawable;
     }
 
-    boolean getSupportHalfWidth() {
-        return mSupportHalfWidth;
+    boolean isHalfWidth() {
+        return mIsHalfWidth;
     }
 
     HomepageCard(Builder builder) {
         mName = builder.mName;
         mCardType = builder.mCardType;
-        mScore = builder.mScore;
+        mRankingScore = builder.mRankingScore;
         mSliceUri = builder.mSliceUri;
         mCategory = builder.mCategory;
         mLocalizedToLocale = builder.mLocalizedToLocale;
@@ -154,8 +154,8 @@ public class HomepageCard {
         mIconResId = builder.mIconResId;
         mCardAction = builder.mCardAction;
         mExpireTimeMS = builder.mExpireTimeMS;
-        mDrawable = builder.mDrawable;
-        mSupportHalfWidth = builder.mSupportHalfWidth;
+        mIconDrawable = builder.mIconDrawable;
+        mIsHalfWidth = builder.mIsHalfWidth;
     }
 
     @Override
@@ -182,7 +182,7 @@ public class HomepageCard {
     static class Builder {
         private String mName;
         private int mCardType;
-        private double mScore;
+        private double mRankingScore;
         private String mSliceUri;
         private int mCategory;
         private String mLocalizedToLocale;
@@ -196,8 +196,8 @@ public class HomepageCard {
         private int mIconResId;
         private String mCardAction;
         private long mExpireTimeMS;
-        private Drawable mDrawable;
-        private boolean mSupportHalfWidth;
+        private Drawable mIconDrawable;
+        private boolean mIsHalfWidth;
 
         public Builder setName(String name) {
             mName = name;
@@ -209,8 +209,8 @@ public class HomepageCard {
             return this;
         }
 
-        public Builder setScore(double score) {
-            mScore = score;
+        public Builder setRankingScore(double rankingScore) {
+            mRankingScore = rankingScore;
             return this;
         }
 
@@ -279,13 +279,13 @@ public class HomepageCard {
             return this;
         }
 
-        public Builder setDrawable(Drawable drawable) {
-            mDrawable = drawable;
+        public Builder setIconDrawable(Drawable iconDrawable) {
+            mIconDrawable = iconDrawable;
             return this;
         }
 
-        public Builder setSupportHalfWidth(boolean supportHalfWidth) {
-            mSupportHalfWidth = supportHalfWidth;
+        public Builder setIsHalfWidth(boolean isHalfWidth) {
+            mIsHalfWidth = isHalfWidth;
             return this;
         }
 

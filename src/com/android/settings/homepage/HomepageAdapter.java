@@ -56,7 +56,8 @@ public class HomepageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int cardType) {
-        final HomepageCardRenderer renderer = mControllerRendererPool.getRenderer(mContext, cardType);
+        final HomepageCardRenderer renderer = mControllerRendererPool.getRenderer(mContext,
+                cardType);
         final int viewType = renderer.getViewType();
         final View view = LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false);
 
@@ -66,7 +67,8 @@ public class HomepageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         final int cardType = mHomepageCards.get(position).getCardType();
-        final HomepageCardRenderer renderer = mControllerRendererPool.getRenderer(mContext, cardType);
+        final HomepageCardRenderer renderer = mControllerRendererPool.getRenderer(mContext,
+                cardType);
 
         renderer.bindView(holder, mHomepageCards.get(position));
     }
