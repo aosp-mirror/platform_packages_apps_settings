@@ -23,7 +23,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.icu.text.ListFormatter;
 import android.net.wifi.WifiConfiguration;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 import android.util.Log;
 
 import com.android.settings.R;

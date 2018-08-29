@@ -21,8 +21,8 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 import android.nfc.NfcAdapter;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
-import android.support.v14.preference.SwitchPreference;
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowNfcAdapter;

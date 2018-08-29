@@ -18,7 +18,7 @@ package com.android.settings.fuelgauge.batterytip.actions;
 
 import android.app.AppOpsManager;
 import android.content.Context;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto;

@@ -19,7 +19,7 @@ package com.android.settings.graph;
 
 import android.annotation.Nullable;
 import android.content.Context;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
@@ -31,8 +31,8 @@ import com.android.settingslib.R;
  * An extension of LinearLayout that automatically switches to vertical
  * orientation when it can't fit its child views horizontally.
  *
- * Main logic in this class comes from {@link android.support.v7.widget.ButtonBarLayout}.
- * Compared with {@link android.support.v7.widget.ButtonBarLayout}, this layout won't reverse
+ * Main logic in this class comes from {@link androidx.appcompat.widget.ButtonBarLayout}.
+ * Compared with {@link androidx.appcompat.widget.ButtonBarLayout}, this layout won't reverse
  * children's order and won't update the minimum height
  */
 public class BottomLabelLayout extends LinearLayout {
