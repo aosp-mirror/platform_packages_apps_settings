@@ -17,6 +17,7 @@
 package com.android.settings.homepage;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -189,5 +190,13 @@ public class CardDatabaseHelper extends SQLiteOpenHelper {
             sCardDatabaseHelper = new CardDatabaseHelper(context.getApplicationContext());
         }
         return sCardDatabaseHelper;
+    }
+
+    Cursor getAllContextualCards() {
+        final SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(CARD_TABLE, null /* columns */, null /* selection */,
+                null /* selectionArgs */, null /* groupBy */, null /* having */,
+                null /* orderBy */);
+        return cursor;
     }
 }
