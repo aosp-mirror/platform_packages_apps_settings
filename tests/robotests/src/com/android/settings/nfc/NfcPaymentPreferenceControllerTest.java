@@ -17,12 +17,15 @@
 package com.android.settings.nfc;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.nfc.PaymentBackend.PaymentAppInfo;
@@ -36,8 +39,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
-
-import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class NfcPaymentPreferenceControllerTest {

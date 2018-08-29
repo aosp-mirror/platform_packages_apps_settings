@@ -28,15 +28,15 @@ import android.icu.text.ListFormatter;
 import android.provider.Contacts;
 import android.provider.ContactsContract;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 public class ZenModeStarredContactsPreferenceController extends
         AbstractZenModePreferenceController implements Preference.OnPreferenceClickListener {

@@ -20,12 +20,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.android.controller.ComponentController;
 import org.robolectric.util.ReflectionHelpers;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 /**
  * Controller class for driving fragment lifecycles, similar to {@link ActivityController}.

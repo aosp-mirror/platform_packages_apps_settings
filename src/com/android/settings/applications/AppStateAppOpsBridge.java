@@ -29,6 +29,8 @@ import android.util.ArrayMap;
 import android.util.Log;
 import android.util.SparseArray;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
@@ -37,8 +39,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import androidx.annotation.VisibleForTesting;
 
 /*
  * Connects app ops info to the ApplicationsState. Makes use of AppOpsManager to

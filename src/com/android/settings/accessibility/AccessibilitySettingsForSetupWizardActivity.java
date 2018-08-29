@@ -20,14 +20,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.accessibility.AccessibilityEvent;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.search.actionbar.SearchMenuController;
 import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settingslib.core.instrumentation.Instrumentable;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
 
 public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivity {
 

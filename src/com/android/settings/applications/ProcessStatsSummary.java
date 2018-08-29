@@ -21,6 +21,9 @@ import android.os.Bundle;
 import android.text.format.Formatter;
 import android.text.format.Formatter.BytesResult;
 
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceClickListener;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SummaryPreference;
@@ -28,9 +31,6 @@ import com.android.settings.Utils;
 import com.android.settings.applications.ProcStatsData.MemInfo;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.SummaryLoader;
-
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceClickListener;
 
 public class ProcessStatsSummary extends ProcessStatsBase implements OnPreferenceClickListener {
 

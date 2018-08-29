@@ -19,11 +19,11 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.preference.Preference;
+
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-
-import androidx.preference.Preference;
 
 /**
  * Maintain and update saved bluetooth devices(bonded but not connected)

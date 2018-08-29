@@ -22,11 +22,11 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 
-import com.android.settings.R;
-
 import androidx.annotation.StringRes;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
+
+import com.android.settings.R;
 
 public class ActionButtonPreference extends Preference {
 

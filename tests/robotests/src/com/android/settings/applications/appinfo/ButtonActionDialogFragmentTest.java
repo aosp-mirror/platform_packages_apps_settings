@@ -16,6 +16,7 @@
 package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
@@ -23,6 +24,9 @@ import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.content.DialogInterface;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -37,9 +41,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowAlertDialogCompat.class, SettingsShadowResourcesImpl.class})

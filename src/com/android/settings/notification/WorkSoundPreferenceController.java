@@ -31,6 +31,15 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.TwoStatePreference;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.DefaultRingtonePreference;
 import com.android.settings.R;
@@ -44,15 +53,6 @@ import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.FragmentManager;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.TwoStatePreference;
 
 public class WorkSoundPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, OnPreferenceChangeListener, LifecycleObserver,

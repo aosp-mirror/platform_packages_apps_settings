@@ -23,6 +23,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.fragment.app.Fragment;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.overlay.FeatureFactory;
@@ -31,8 +33,6 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.ObservableFragment;
 import com.android.settingslib.core.lifecycle.ObservablePreferenceFragment;
 import com.android.settingslib.core.lifecycle.events.OnCreateOptionsMenu;
-
-import androidx.fragment.app.Fragment;
 
 public class SearchMenuController implements LifecycleObserver, OnCreateOptionsMenu {
 

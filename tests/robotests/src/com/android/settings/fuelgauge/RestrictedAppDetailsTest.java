@@ -17,6 +17,7 @@
 package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
@@ -29,6 +30,11 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.util.IconDrawableFactory;
 import android.util.SparseLongArray;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.preference.CheckBoxPreference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceManager;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
@@ -56,11 +62,6 @@ import org.robolectric.annotation.Config;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.preference.CheckBoxPreference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceManager;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowAlertDialogCompat.class, SettingsShadowResourcesImpl.class})

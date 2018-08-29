@@ -22,6 +22,9 @@ import android.os.Bundle;
 import android.os.SystemProperties;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.core.SubSettingLauncher;
@@ -36,9 +39,6 @@ import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 
 /**
  * Update the bluetooth devices. It gets bluetooth event from {@link LocalBluetoothManager} using

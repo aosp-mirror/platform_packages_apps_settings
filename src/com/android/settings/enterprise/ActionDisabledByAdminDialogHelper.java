@@ -32,6 +32,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.Utils;
@@ -40,9 +43,6 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import java.util.Objects;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.appcompat.app.AlertDialog;
 
 /**
  * Helper class for {@link ActionDisabledByAdminDialog} which sets up the dialog.

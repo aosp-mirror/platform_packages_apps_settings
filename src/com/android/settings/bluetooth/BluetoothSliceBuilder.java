@@ -27,18 +27,18 @@ import android.content.IntentFilter;
 import android.net.Uri;
 import android.provider.SettingsSlicesContract;
 
+import androidx.core.graphics.drawable.IconCompat;
+import androidx.slice.Slice;
+import androidx.slice.builders.ListBuilder;
+import androidx.slice.builders.ListBuilder.RowBuilder;
+import androidx.slice.builders.SliceAction;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.connecteddevice.BluetoothDashboardFragment;
 import com.android.settings.slices.SliceBroadcastReceiver;
 import com.android.settings.slices.SliceBuilderUtils;
-
-import androidx.core.graphics.drawable.IconCompat;
-import androidx.slice.Slice;
-import androidx.slice.builders.ListBuilder;
-import androidx.slice.builders.ListBuilder.RowBuilder;
-import androidx.slice.builders.SliceAction;
 
 /**
  * Utility class to build a Bluetooth Slice, and handle all associated actions.

@@ -26,16 +26,16 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.android.settings.users.RestrictedProfileSettings;
-import com.android.settingslib.license.LicenseHtmlLoaderCompat;
-
-import java.io.File;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.FragmentActivity;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
+
+import com.android.settings.users.RestrictedProfileSettings;
+import com.android.settingslib.license.LicenseHtmlLoaderCompat;
+
+import java.io.File;
 
 /**
  * The "dialog" that shows from "License" in the Settings app.

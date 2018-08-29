@@ -20,6 +20,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 
+import androidx.preference.SwitchPreference;
+
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -30,8 +32,6 @@ import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-
-import androidx.preference.SwitchPreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowPrivacySettingsUtils.class})

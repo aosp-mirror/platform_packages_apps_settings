@@ -27,6 +27,9 @@ import android.provider.Settings;
 import android.service.notification.ConditionProviderService;
 import android.service.notification.ZenModeConfig;
 
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -36,9 +39,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import androidx.fragment.app.Fragment;
-import androidx.preference.Preference;
 
 abstract public class AbstractZenModeAutomaticRulePreferenceController extends
         AbstractZenModePreferenceController implements PreferenceControllerMixin {

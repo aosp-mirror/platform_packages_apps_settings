@@ -19,6 +19,9 @@ package com.android.settings.fuelgauge.batterysaver;
 import android.content.Context;
 import android.os.PowerManager;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.fuelgauge.BatterySaverReceiver;
 import com.android.settings.widget.TwoStateButtonPreference;
@@ -26,9 +29,6 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 import com.android.settingslib.fuelgauge.BatterySaverUtils;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 /**
  * Controller to update the battery saver button

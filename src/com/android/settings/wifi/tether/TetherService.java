@@ -40,10 +40,10 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
 
 public class TetherService extends Service {
     private static final String TAG = "TetherService";

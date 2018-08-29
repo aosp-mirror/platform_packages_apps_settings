@@ -17,8 +17,10 @@
 package com.android.settings.notification;
 
 import static android.app.NotificationManager.IMPORTANCE_NONE;
+
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
@@ -32,6 +34,9 @@ import android.content.Context;
 import android.os.UserManager;
 import android.view.View;
 
+import androidx.fragment.app.FragmentActivity;
+import androidx.preference.PreferenceFragmentCompat;
+
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -41,9 +46,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.shadows.ShadowApplication;
-
-import androidx.fragment.app.FragmentActivity;
-import androidx.preference.PreferenceFragmentCompat;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class HeaderPreferenceControllerTest {

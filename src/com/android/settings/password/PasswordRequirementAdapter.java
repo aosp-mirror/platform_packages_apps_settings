@@ -21,10 +21,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.settings.R;
 import com.android.settings.password.PasswordRequirementAdapter.PasswordRequirementViewHolder;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Used in {@link ChooseLockPassword} to show password requirements.

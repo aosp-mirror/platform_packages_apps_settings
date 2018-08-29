@@ -16,11 +16,11 @@
 
 package com.android.settings.testutils.shadow;
 
-import org.robolectric.annotation.Implementation;
-import org.robolectric.annotation.Implements;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
 
 /**
  * Override the {@link #setTargetFragment(Fragment, int)} to skip an illegal state exception

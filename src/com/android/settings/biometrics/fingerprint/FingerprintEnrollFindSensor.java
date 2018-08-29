@@ -22,14 +22,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.Nullable;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricEnrollSidecar.Listener;
 import com.android.settings.password.ChooseLockSettingsHelper;
-
-import androidx.annotation.Nullable;
 
 /**
  * Activity explaining the fingerprint sensor location for fingerprint enrollment.

@@ -17,6 +17,7 @@
 package com.android.settings.network;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -26,6 +27,10 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
+
+import androidx.lifecycle.LifecycleOwner;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -40,10 +45,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-
-import androidx.lifecycle.LifecycleOwner;
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class AirplaneModePreferenceControllerTest {

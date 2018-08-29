@@ -23,12 +23,12 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import androidx.fragment.app.Fragment;
+
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
-
-import androidx.fragment.app.Fragment;
 
 public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivity {
 

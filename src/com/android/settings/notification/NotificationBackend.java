@@ -38,6 +38,8 @@ import android.text.format.DateUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settingslib.R;
 import com.android.settingslib.Utils;
 import com.android.settingslib.utils.StringUtil;
@@ -46,8 +48,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import androidx.annotation.VisibleForTesting;
 
 public class NotificationBackend {
     private static final String TAG = "NotificationBackend";

@@ -41,6 +41,12 @@ import android.util.ArrayMap;
 import android.util.Log;
 import android.util.SparseArray;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceClickListener;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.AccessiblePreferenceCategory;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -61,12 +67,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceClickListener;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceScreen;
 
 public class AccountPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, AuthenticatorHelper.OnAccountsUpdateListener,

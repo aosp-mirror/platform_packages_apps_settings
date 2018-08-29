@@ -32,6 +32,11 @@ import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.View;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -41,11 +46,6 @@ import com.android.settings.widget.EmptyTextSettings;
 import com.android.settingslib.applications.ServiceListing;
 
 import java.util.List;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
 public abstract class ManagedServiceSettings extends EmptyTextSettings {
     private static final String TAG = "ManagedServiceSettings";

@@ -25,13 +25,13 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.widget.Toast;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settings.widget.SwitchWidgetController;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.WirelessUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-
-import androidx.annotation.VisibleForTesting;
 
 /**
  * BluetoothEnabler is a helper to manage the Bluetooth on/off checkbox

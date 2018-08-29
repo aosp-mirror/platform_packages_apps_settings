@@ -24,16 +24,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.widget.RadioButtonPreference;
 
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 /**
  * Fragment for choosing default network scorer.

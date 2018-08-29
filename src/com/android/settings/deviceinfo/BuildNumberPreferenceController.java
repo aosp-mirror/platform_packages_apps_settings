@@ -29,6 +29,10 @@ import android.text.TextUtils;
 import android.util.Pair;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -42,10 +46,6 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
-
-import androidx.fragment.app.Fragment;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 public class BuildNumberPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin, LifecycleObserver, OnResume {

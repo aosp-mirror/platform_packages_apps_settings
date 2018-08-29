@@ -26,12 +26,12 @@ import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settings.Settings.PrivacySettingsActivity;
 
 import java.net.URISyntaxException;
-
-import androidx.annotation.VisibleForTesting;
 
 /**
  * Helper class for {@link BackupSettingsActivity} that interacts with {@link IBackupManager}.

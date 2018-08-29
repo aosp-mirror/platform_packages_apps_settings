@@ -26,13 +26,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settingslib.utils.StringUtil;
 
 import java.util.List;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Adapter for the high usage app list

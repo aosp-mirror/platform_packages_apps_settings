@@ -22,10 +22,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 
+import androidx.slice.Slice;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-
-import androidx.slice.Slice;
 
 
 /**

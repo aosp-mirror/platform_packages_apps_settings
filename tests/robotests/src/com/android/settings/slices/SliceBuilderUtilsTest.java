@@ -17,6 +17,7 @@
 package com.android.settings.slices;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
@@ -31,6 +32,13 @@ import android.net.Uri;
 import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
 import android.util.Pair;
+
+import androidx.core.graphics.drawable.IconCompat;
+import androidx.slice.Slice;
+import androidx.slice.SliceMetadata;
+import androidx.slice.SliceProvider;
+import androidx.slice.core.SliceAction;
+import androidx.slice.widget.SliceLiveData;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -47,13 +55,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.robolectric.RuntimeEnvironment;
-
-import androidx.core.graphics.drawable.IconCompat;
-import androidx.slice.Slice;
-import androidx.slice.SliceMetadata;
-import androidx.slice.SliceProvider;
-import androidx.slice.core.SliceAction;
-import androidx.slice.widget.SliceLiveData;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SliceBuilderUtilsTest {

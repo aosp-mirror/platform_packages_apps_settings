@@ -24,6 +24,8 @@ import android.nfc.NfcAdapter;
 import android.provider.Settings;
 import android.provider.Settings.Global;
 
+import androidx.preference.SwitchPreference;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowNfcAdapter;
 
@@ -34,8 +36,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
-
-import androidx.preference.SwitchPreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowNfcAdapter.class})

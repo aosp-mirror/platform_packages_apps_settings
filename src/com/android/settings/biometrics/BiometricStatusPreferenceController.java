@@ -21,12 +21,12 @@ import android.content.Intent;
 import android.os.UserHandle;
 import android.os.UserManager;
 
+import androidx.preference.Preference;
+
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
-
-import androidx.preference.Preference;
 
 public abstract class BiometricStatusPreferenceController extends BasePreferenceController {
 

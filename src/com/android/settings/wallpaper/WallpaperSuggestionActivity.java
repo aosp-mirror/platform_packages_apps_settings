@@ -23,11 +23,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
-
-import androidx.annotation.VisibleForTesting;
 
 public class WallpaperSuggestionActivity extends Activity {
 

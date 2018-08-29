@@ -30,10 +30,10 @@ import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 
-import com.android.settings.R;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
+
+import com.android.settings.R;
 
 public class ApnPreference extends Preference implements
         CompoundButton.OnCheckedChangeListener, OnClickListener {

@@ -31,12 +31,12 @@ import android.os.UserManager;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settingslib.RestrictedLockUtils;
-
-import androidx.appcompat.app.AlertDialog;
 
 /**
  * Base class for settings screens that should be pin protected when in restricted mode or

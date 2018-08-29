@@ -18,6 +18,7 @@ package com.android.settings.deviceinfo.imei;
 
 import static android.telephony.TelephonyManager.PHONE_TYPE_CDMA;
 import static android.telephony.TelephonyManager.PHONE_TYPE_GSM;
+
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -28,6 +29,11 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.os.UserManager;
 import android.telephony.TelephonyManager;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -40,11 +46,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ImeiInfoPreferenceControllerTest {

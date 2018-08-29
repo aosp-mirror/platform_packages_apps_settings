@@ -19,12 +19,12 @@ package com.android.settings.display;
 import android.content.Context;
 import android.text.TextUtils;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.internal.app.ColorDisplayController;
 import com.android.settings.core.SliderPreferenceController;
 import com.android.settings.widget.SeekBarPreference;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 public class NightDisplayIntensityPreferenceController extends SliderPreferenceController {
 

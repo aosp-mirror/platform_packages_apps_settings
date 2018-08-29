@@ -21,6 +21,9 @@ import android.app.AppOpsManager;
 import android.content.Context;
 import android.os.UserManager;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.InstrumentedPreferenceFragment;
@@ -28,9 +31,6 @@ import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryTipUtils;
 
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 
 /**
  * Controller to change and update the smart battery toggle

@@ -28,14 +28,14 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import androidx.core.app.NotificationCompat;
+
 import com.android.internal.telephony.IccCardConstants;
 import com.android.settings.R;
 import com.android.settings.Settings.SimSettingsActivity;
 import com.android.settings.Utils;
 
 import java.util.List;
-
-import androidx.core.app.NotificationCompat;
 
 public class SimSelectNotification extends BroadcastReceiver {
     private static final String TAG = "SimSelectNotification";

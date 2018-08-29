@@ -20,13 +20,13 @@ import android.content.Context;
 import android.os.SystemProperties;
 import android.provider.Settings;
 
-import com.android.internal.app.LocalePicker;
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.development.DeveloperOptionsPreferenceController;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
+
+import com.android.internal.app.LocalePicker;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 public class RtlLayoutPreferenceController extends DeveloperOptionsPreferenceController implements
         Preference.OnPreferenceChangeListener, PreferenceControllerMixin {

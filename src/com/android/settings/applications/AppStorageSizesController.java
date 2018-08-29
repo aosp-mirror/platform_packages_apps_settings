@@ -19,12 +19,12 @@ package com.android.settings.applications;
 import android.content.Context;
 import android.text.format.Formatter;
 
-import com.android.internal.util.Preconditions;
-import com.android.settingslib.applications.StorageStatsSource;
-
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.preference.Preference;
+
+import com.android.internal.util.Preconditions;
+import com.android.settingslib.applications.StorageStatsSource;
 
 /**
  * Handles setting the sizes for the app info screen.

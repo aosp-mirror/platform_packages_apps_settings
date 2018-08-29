@@ -27,6 +27,10 @@ import android.text.BidiFormatter;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -42,10 +46,6 @@ import com.android.settingslib.search.SearchIndexable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
 
 @SearchIndexable
 public class NetworkDashboardFragment extends DashboardFragment implements

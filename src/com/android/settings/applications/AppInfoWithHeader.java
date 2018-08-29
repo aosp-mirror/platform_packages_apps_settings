@@ -23,10 +23,10 @@ import android.os.Bundle;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 
+import androidx.preference.Preference;
+
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
-
-import androidx.preference.Preference;
 
 public abstract class AppInfoWithHeader extends AppInfoBase {
 

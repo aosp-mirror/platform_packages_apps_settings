@@ -18,9 +18,9 @@ package com.android.settings.biometrics.face;
 
 import android.content.Context;
 
-import com.android.settings.core.BasePreferenceController;
-
 import androidx.preference.Preference;
+
+import com.android.settings.core.BasePreferenceController;
 
 /**
  * Preference controller which allows the user to update their enrolled face.

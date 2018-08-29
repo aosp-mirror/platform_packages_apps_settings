@@ -51,6 +51,12 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.loader.app.LoaderManager.LoaderCallbacks;
+import androidx.loader.content.Loader;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
@@ -65,12 +71,6 @@ import com.android.settingslib.net.UidDetailProvider;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.loader.app.LoaderManager.LoaderCallbacks;
-import androidx.loader.content.Loader;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
 
 /**
  * Panel showing data usage history across various networks, including options

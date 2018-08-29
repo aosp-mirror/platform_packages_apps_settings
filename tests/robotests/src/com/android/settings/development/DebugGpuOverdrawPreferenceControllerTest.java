@@ -17,12 +17,16 @@
 package com.android.settings.development;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.SystemProperties;
 import android.view.ThreadedRenderer;
+
+import androidx.preference.ListPreference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -33,9 +37,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-
-import androidx.preference.ListPreference;
-import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DebugGpuOverdrawPreferenceControllerTest {

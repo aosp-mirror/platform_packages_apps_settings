@@ -36,6 +36,10 @@ import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
 
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.BasePreferenceController;
@@ -55,10 +59,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
-
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 /**
  * Abstract class for audio switcher controller to notify subclass

@@ -17,11 +17,11 @@ package com.android.settings.deviceinfo;
 
 import android.content.Context;
 
+import androidx.preference.Preference;
+
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.DeviceInfoUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
-
-import androidx.preference.Preference;
 
 public class KernelVersionPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin {

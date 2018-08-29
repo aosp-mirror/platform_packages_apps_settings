@@ -21,6 +21,8 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 import android.os.UserManager;
 
+import androidx.lifecycle.LifecycleOwner;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -31,8 +33,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-
-import androidx.lifecycle.LifecycleOwner;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowUserManager.class)

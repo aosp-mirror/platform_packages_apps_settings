@@ -18,6 +18,10 @@ package com.android.settings.connecteddevice;
 import android.content.Context;
 import android.content.pm.PackageManager;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.bluetooth.SavedBluetoothDeviceUpdater;
 import com.android.settings.connecteddevice.dock.DockUpdater;
@@ -27,10 +31,6 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 public class PreviouslyConnectedDevicePreferenceController extends BasePreferenceController
         implements LifecycleObserver, OnStart, OnStop, DevicePreferenceCallback {

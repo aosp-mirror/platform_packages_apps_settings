@@ -25,13 +25,13 @@ import android.content.IntentSender;
 import android.os.Bundle;
 import android.os.UserManager;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
+
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.setupwizardlib.util.WizardManagerHelper;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.fragment.app.Fragment;
 
 public final class ChooseLockSettingsHelper {
 

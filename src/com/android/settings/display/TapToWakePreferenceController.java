@@ -16,11 +16,11 @@ package com.android.settings.display;
 import android.content.Context;
 import android.provider.Settings;
 
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
-
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
+
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 public class TapToWakePreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin, Preference.OnPreferenceChangeListener {

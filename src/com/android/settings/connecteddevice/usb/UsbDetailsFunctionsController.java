@@ -20,15 +20,15 @@ import android.content.Context;
 import android.hardware.usb.UsbManager;
 import android.hardware.usb.UsbPort;
 
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.widget.RadioButtonPreference;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
 
 /**
  * This class controls the radio buttons for choosing between different USB functions.

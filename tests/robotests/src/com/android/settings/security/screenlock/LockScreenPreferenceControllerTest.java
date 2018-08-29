@@ -18,16 +18,24 @@ package com.android.settings.security.screenlock;
 
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
+
 import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
+
 import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
 import static com.android.settings.core.BasePreferenceController.DISABLED_FOR_USER;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.UserManager;
+
+import androidx.lifecycle.LifecycleOwner;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -41,10 +49,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
-
-import androidx.lifecycle.LifecycleOwner;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class LockScreenPreferenceControllerTest {

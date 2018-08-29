@@ -50,7 +50,9 @@ public interface DeviceIndexFeatureProvider {
     // When the device language changes, re-index so Slices trigger in device language.
     Locale LANGUAGE = Locale.getDefault();
 
-    boolean isIndexingEnabled();
+    default boolean isIndexingEnabled() {
+        return false;
+    }
 
     void index(Context context, CharSequence title, Uri sliceUri, Uri launchUri,
             List<String> keywords);

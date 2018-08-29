@@ -24,18 +24,18 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
+import androidx.annotation.WorkerThread;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.settings.R;
 import com.android.settings.datetime.timezone.BaseTimeZonePicker.OnListItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.VisibleForTesting;
-import androidx.annotation.WorkerThread;
-import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Used with {@class BaseTimeZonePicker}. It renders text in each item into list view. A list of

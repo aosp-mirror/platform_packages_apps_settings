@@ -25,6 +25,8 @@ import static org.mockito.Mockito.verify;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.loader.app.LoaderManager;
+
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowDashboardFragment;
@@ -38,8 +40,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
 import java.util.List;
-
-import androidx.loader.app.LoaderManager;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowDashboardFragment.class)

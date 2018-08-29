@@ -21,13 +21,13 @@ import android.app.IActivityManager;
 import android.content.Context;
 import android.os.RemoteException;
 
-import com.android.settings.R;
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.development.DeveloperOptionsPreferenceController;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
+
+import com.android.settings.R;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 public class BackgroundProcessLimitPreferenceController extends
         DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener,

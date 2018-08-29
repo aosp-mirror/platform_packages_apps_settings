@@ -24,14 +24,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.AttributeSet;
 
-import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-
 import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.ListPreference;
 import androidx.preference.ListPreferenceDialogFragmentCompat;
+
+import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 public class CustomListPreference extends ListPreference {
 

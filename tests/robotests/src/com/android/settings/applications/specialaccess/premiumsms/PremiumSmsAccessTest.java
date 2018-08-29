@@ -24,7 +24,6 @@ import android.content.Context;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.telephony.SmsUsageMonitor;
-import com.android.settings.applications.specialaccess.premiumsms.PremiumSmsAccess;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 

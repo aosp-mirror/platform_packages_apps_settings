@@ -33,6 +33,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceScreen;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
@@ -43,10 +47,6 @@ import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.io.IOException;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
-import androidx.preference.PreferenceScreen;
 
 public class RemoveAccountPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, OnClickListener {

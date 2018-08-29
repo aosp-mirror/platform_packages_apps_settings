@@ -79,6 +79,8 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.ims.ImsConfig;
 import com.android.ims.ImsException;
 import com.android.ims.ImsManager;
@@ -89,8 +91,6 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
-
-import androidx.appcompat.app.AlertDialog;
 
 public class RadioInfo extends Activity {
     private static final String TAG = "RadioInfo";

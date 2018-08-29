@@ -33,13 +33,13 @@ import android.widget.RelativeLayout.LayoutParams;
 import android.widget.Switch;
 import android.widget.VideoView;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.R;
-import com.android.settings.widget.SwitchBar;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
+
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.R;
+import com.android.settings.widget.SwitchBar;
 
 public class ToggleScreenMagnificationPreferenceFragment extends
         ToggleFeaturePreferenceFragment implements SwitchBar.OnSwitchChangeListener {

@@ -33,6 +33,9 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.TelephonyProperties;
 import com.android.settings.R;
@@ -44,9 +47,6 @@ import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 @SearchIndexable
 public class SimSettings extends RestrictedSettingsFragment implements Indexable {

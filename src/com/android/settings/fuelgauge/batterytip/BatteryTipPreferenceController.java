@@ -19,6 +19,11 @@ package com.android.settings.fuelgauge.batterytip;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.InstrumentedPreferenceFragment;
@@ -32,11 +37,6 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceScreen;
 
 /**
  * Controller in charge of the battery tip group

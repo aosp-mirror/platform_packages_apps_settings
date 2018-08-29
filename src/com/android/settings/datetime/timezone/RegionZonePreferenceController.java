@@ -18,9 +18,9 @@ package com.android.settings.datetime.timezone;
 
 import android.content.Context;
 
-import com.android.settings.R;
-
 import androidx.preference.Preference;
+
+import com.android.settings.R;
 
 public class RegionZonePreferenceController extends BaseTimeZonePreferenceController {
     private static final String PREFERENCE_KEY = "region_zone";

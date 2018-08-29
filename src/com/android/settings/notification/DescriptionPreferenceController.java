@@ -19,9 +19,9 @@ package com.android.settings.notification;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.android.settings.core.PreferenceControllerMixin;
-
 import androidx.preference.Preference;
+
+import com.android.settings.core.PreferenceControllerMixin;
 
 public class DescriptionPreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin {

@@ -17,6 +17,7 @@
 package com.android.settings.applications.defaultapps;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -27,6 +28,8 @@ import android.content.pm.PackageManager;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.view.autofill.AutofillManager;
+
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -39,8 +42,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
-
-import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DefaultAutofillPreferenceControllerTest {

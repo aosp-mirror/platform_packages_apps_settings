@@ -18,10 +18,10 @@ package com.android.settings.notification;
 
 import android.content.Context;
 
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
-
-import androidx.preference.Preference;
 
 public class DeletedChannelsPreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin {

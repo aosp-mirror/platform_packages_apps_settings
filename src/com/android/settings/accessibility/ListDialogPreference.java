@@ -30,9 +30,9 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 
-import com.android.settingslib.CustomDialogPreferenceCompat;
-
 import androidx.appcompat.app.AlertDialog.Builder;
+
+import com.android.settingslib.CustomDialogPreferenceCompat;
 
 /**
  * Abstract dialog preference that displays a set of values and optional titles.

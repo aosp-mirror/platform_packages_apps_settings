@@ -38,6 +38,9 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
+
 import com.android.internal.widget.LockPatternUtils;
 import com.android.org.bouncycastle.asn1.ASN1InputStream;
 import com.android.org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
@@ -48,8 +51,6 @@ import com.android.settings.vpn2.VpnUtils;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.FragmentActivity;
 import sun.security.util.ObjectIdentifier;
 import sun.security.x509.AlgorithmId;
 

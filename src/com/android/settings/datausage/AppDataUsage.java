@@ -36,6 +36,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
@@ -48,12 +54,6 @@ import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoaderCompat;
 import com.android.settingslib.net.UidDetail;
 import com.android.settingslib.net.UidDetailProvider;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.Loader;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 
 public class AppDataUsage extends DataUsageBase implements Preference.OnPreferenceChangeListener,
         DataSaverBackend.Listener {

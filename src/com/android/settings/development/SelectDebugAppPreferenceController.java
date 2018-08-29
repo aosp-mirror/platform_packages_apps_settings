@@ -26,12 +26,12 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.provider.Settings;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 
 public class SelectDebugAppPreferenceController extends DeveloperOptionsPreferenceController
         implements PreferenceControllerMixin, OnActivityResultListener {

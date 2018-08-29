@@ -29,6 +29,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -42,9 +45,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.DialogFragment;
 
 public class RunningServiceDetails extends InstrumentedFragment
         implements RunningState.OnRefreshUiListener {

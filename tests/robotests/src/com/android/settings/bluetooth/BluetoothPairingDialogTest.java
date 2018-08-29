@@ -16,6 +16,7 @@
 package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.junit.Assert.fail;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doNothing;
@@ -35,6 +36,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
@@ -48,8 +51,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-
-import androidx.appcompat.app.AlertDialog;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowAlertDialogCompat.class, SettingsShadowResourcesImpl.class})

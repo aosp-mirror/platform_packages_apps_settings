@@ -18,11 +18,11 @@ package com.android.settings.network;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 public class ProxyPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {

@@ -29,6 +29,7 @@ import static android.os.storage.StorageVolume.ScopedAccessProviderContract
         .TABLE_PERMISSIONS_COL_PACKAGE;
 import static android.os.storage.StorageVolume.ScopedAccessProviderContract
         .TABLE_PERMISSIONS_COL_VOLUME_UUID;
+
 import static com.android.settings.applications.AppStateDirectoryAccessBridge.DEBUG;
 import static com.android.settings.applications.AppStateDirectoryAccessBridge.VERBOSE;
 
@@ -46,6 +47,12 @@ import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.util.Pair;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.widget.EntityHeaderController;
@@ -58,12 +65,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
 /**
  * Detailed settings for an app's directory access permissions (A.K.A Scoped Directory Access).

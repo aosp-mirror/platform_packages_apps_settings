@@ -17,6 +17,7 @@
 package com.android.settings.datausage;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
@@ -28,6 +29,8 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.Drawable;
 import android.util.ArraySet;
 
+import androidx.preference.Preference;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -36,8 +39,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-
-import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class AppPrefLoaderTest {

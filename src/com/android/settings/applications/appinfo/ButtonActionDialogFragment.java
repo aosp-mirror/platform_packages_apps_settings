@@ -20,16 +20,16 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+import androidx.annotation.IntDef;
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-
-import androidx.annotation.IntDef;
-import androidx.annotation.VisibleForTesting;
-import androidx.appcompat.app.AlertDialog;
 
 /**
  * Fragment to show the dialog for uninstall or forcestop. This fragment uses function in

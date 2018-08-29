@@ -20,6 +20,8 @@ import android.content.Context;
 import android.provider.SearchIndexableResource;
 import android.service.notification.ConditionProviderService;
 
+import androidx.fragment.app.Fragment;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -32,8 +34,6 @@ import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.fragment.app.Fragment;
 
 @SearchIndexable
 public class ZenModeAutomationSettings extends ZenModeSettingsBase {

@@ -18,9 +18,12 @@ package com.android.settings.wifi;
 
 import static android.content.Context.NETWORK_SCORE_SERVICE;
 import static android.provider.Settings.Global.USE_OPEN_WIFI_PACKAGE;
+
 import static com.android.settings.wifi.UseOpenWifiPreferenceController
         .REQUEST_CODE_OPEN_WIFI_AUTOMATICALLY;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -34,6 +37,10 @@ import android.content.Intent;
 import android.net.NetworkScoreManager;
 import android.net.NetworkScorerAppData;
 import android.provider.Settings;
+
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -54,10 +61,6 @@ import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.fragment.app.Fragment;
-import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class UseOpenWifiPreferenceControllerTest {

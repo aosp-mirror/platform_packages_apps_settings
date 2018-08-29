@@ -28,15 +28,15 @@ import android.os.UserManager;
 import android.service.oemlock.OemLockManager;
 import android.telephony.TelephonyManager;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 public class OemUnlockPreferenceController extends DeveloperOptionsPreferenceController implements
         Preference.OnPreferenceChangeListener, PreferenceControllerMixin, OnActivityResultListener {

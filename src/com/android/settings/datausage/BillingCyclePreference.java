@@ -21,12 +21,12 @@ import android.os.Bundle;
 import android.os.RemoteException;
 import android.util.AttributeSet;
 
+import androidx.preference.Preference;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.datausage.CellDataPreference.DataStateListener;
-
-import androidx.preference.Preference;
 
 public class BillingCyclePreference extends Preference implements TemplatePreference {
 

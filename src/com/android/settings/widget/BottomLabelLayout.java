@@ -23,9 +23,9 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.android.settingslib.R;
-
 import androidx.annotation.VisibleForTesting;
+
+import com.android.settingslib.R;
 
 /**
  * An extension of LinearLayout that automatically switches to vertical

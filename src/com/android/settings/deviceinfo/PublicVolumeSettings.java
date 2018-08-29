@@ -35,6 +35,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
@@ -44,9 +47,6 @@ import com.android.settings.deviceinfo.StorageSettings.UnmountTask;
 
 import java.io.File;
 import java.util.Objects;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 /**
  * Panel showing summary and actions for a {@link VolumeInfo#TYPE_PUBLIC}

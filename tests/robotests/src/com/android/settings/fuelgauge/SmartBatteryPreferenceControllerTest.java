@@ -24,6 +24,8 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
 
+import androidx.preference.SwitchPreference;
+
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -33,8 +35,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-
-import androidx.preference.SwitchPreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SmartBatteryPreferenceControllerTest {

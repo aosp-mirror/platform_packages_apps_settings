@@ -33,12 +33,12 @@ import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.internal.net.VpnProfile;
 import com.android.settings.R;
 
 import java.net.InetAddress;
-
-import androidx.appcompat.app.AlertDialog;
 
 /**
  * Dialog showing information about a VPN configuration. The dialog

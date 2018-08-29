@@ -25,6 +25,11 @@ import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
@@ -34,11 +39,6 @@ import com.android.settingslib.core.lifecycle.events.OnStart;
 import java.util.List;
 import java.util.Locale;
 import java.util.TreeSet;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 public class UserDictionaryListPreferenceController extends BasePreferenceController implements
         LifecycleObserver, OnStart {

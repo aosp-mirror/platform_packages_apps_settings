@@ -17,7 +17,9 @@
 package com.android.settings.fuelgauge;
 
 import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
@@ -39,6 +41,11 @@ import android.graphics.drawable.Drawable;
 import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.UserHandle;
+
+import androidx.fragment.app.FragmentActivity;
+import androidx.loader.app.LoaderManager;
+import androidx.preference.Preference;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
@@ -67,11 +74,6 @@ import org.mockito.stubbing.Answer;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
-
-import androidx.fragment.app.FragmentActivity;
-import androidx.loader.app.LoaderManager;
-import androidx.preference.Preference;
-import androidx.recyclerview.widget.RecyclerView;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowEntityHeaderController.class, ShadowActivityManager.class})

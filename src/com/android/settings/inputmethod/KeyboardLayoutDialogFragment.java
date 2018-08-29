@@ -35,17 +35,17 @@ import android.widget.CheckedTextView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.loader.app.LoaderManager.LoaderCallbacks;
+import androidx.loader.content.AsyncTaskLoader;
+import androidx.loader.content.Loader;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.loader.app.LoaderManager.LoaderCallbacks;
-import androidx.loader.content.AsyncTaskLoader;
-import androidx.loader.content.Loader;
 
 public class KeyboardLayoutDialogFragment extends InstrumentedDialogFragment
         implements InputDeviceListener, LoaderCallbacks<KeyboardLayoutDialogFragment.Keyboards> {

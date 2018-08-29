@@ -30,15 +30,15 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.settings.R;
 import com.android.settings.deviceinfo.StorageSettings.UnmountTask;
 import com.android.settingslib.Utils;
 
 import java.io.File;
 import java.io.IOException;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 
 /**
  * Preference line representing a single {@link VolumeInfo}, possibly including

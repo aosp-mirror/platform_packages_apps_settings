@@ -35,16 +35,16 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.preference.DropDownPreference;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
 
 import java.util.List;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.preference.DropDownPreference;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
 
 public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListener,
         Preference.OnPreferenceChangeListener {

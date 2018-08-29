@@ -19,6 +19,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 
+import androidx.preference.SwitchPreference;
+
 import com.android.settings.slices.SliceData;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -26,8 +28,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-
-import androidx.preference.SwitchPreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class TogglePreferenceControllerTest {

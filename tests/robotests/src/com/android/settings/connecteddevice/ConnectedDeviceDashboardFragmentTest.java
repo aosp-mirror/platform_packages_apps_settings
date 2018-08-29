@@ -19,7 +19,9 @@ import static com.android.settings.connecteddevice.ConnectedDeviceDashboardFragm
         .KEY_AVAILABLE_DEVICES;
 import static com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment
         .KEY_CONNECTED_DEVICES;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 

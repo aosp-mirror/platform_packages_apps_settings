@@ -17,6 +17,7 @@
 package com.android.settings.biometrics.fingerprint;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.robolectric.RuntimeEnvironment.application;
 
 import android.app.Activity;

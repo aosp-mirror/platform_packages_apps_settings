@@ -22,9 +22,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
 import android.util.Log;
 
-import java.util.Locale;
-
 import androidx.annotation.VisibleForTesting;
+
+import java.util.Locale;
 
 /**
  * Defines the schema for the Slices database.

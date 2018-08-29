@@ -20,14 +20,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 
 /**
  * Controller that shows received files

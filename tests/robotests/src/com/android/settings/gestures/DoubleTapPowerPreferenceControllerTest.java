@@ -17,9 +17,11 @@
 package com.android.settings.gestures;
 
 import static android.provider.Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED;
+
 import static com.android.settings.gestures.DoubleTapPowerPreferenceController.OFF;
 import static com.android.settings.gestures.DoubleTapPowerPreferenceController.ON;
 import static com.android.settings.gestures.DoubleTapPowerPreferenceController.isSuggestionComplete;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.ContentResolver;

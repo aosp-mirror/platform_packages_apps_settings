@@ -17,6 +17,7 @@
 package com.android.settings.applications.defaultapps;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
@@ -35,6 +36,8 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.os.UserManager;
 
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -49,8 +52,6 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DefaultBrowserPreferenceControllerTest {

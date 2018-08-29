@@ -21,9 +21,9 @@ import android.content.DialogInterface;
 import android.content.pm.PackageInfo;
 import android.os.Bundle;
 
-import com.android.settings.R;
-
 import androidx.appcompat.app.AlertDialog;
+
+import com.android.settings.R;
 
 /**
  * UI for managing the connection controlled by an app.

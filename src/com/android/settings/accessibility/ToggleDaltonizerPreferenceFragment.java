@@ -23,6 +23,9 @@ import android.provider.Settings;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Switch;
 
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -32,9 +35,6 @@ import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
 
 @SearchIndexable
 public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceFragment

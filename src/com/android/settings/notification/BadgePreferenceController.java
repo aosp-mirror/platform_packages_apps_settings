@@ -21,10 +21,10 @@ import static android.provider.Settings.Secure.NOTIFICATION_BADGING;
 import android.content.Context;
 import android.provider.Settings;
 
+import androidx.preference.Preference;
+
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedSwitchPreference;
-
-import androidx.preference.Preference;
 
 public class BadgePreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {

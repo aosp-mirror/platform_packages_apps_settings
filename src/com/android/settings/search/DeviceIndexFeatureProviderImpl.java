@@ -22,11 +22,6 @@ import java.util.List;
 public class DeviceIndexFeatureProviderImpl implements DeviceIndexFeatureProvider {
 
     @Override
-    public boolean isIndexingEnabled() {
-        return false;
-    }
-
-    @Override
     public void index(Context context, CharSequence title, Uri sliceUri, Uri launchUri,
             List<String> keywords) {
         // Not enabled by default.

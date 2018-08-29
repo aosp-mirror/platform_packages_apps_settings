@@ -27,15 +27,15 @@ import android.os.ServiceManager;
 import android.service.quicksettings.TileService;
 import android.util.Log;
 
-import com.android.internal.statusbar.IStatusBarService;
-import com.android.settings.core.BasePreferenceController;
-
-import java.util.List;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
+
+import com.android.internal.statusbar.IStatusBarService;
+import com.android.settings.core.BasePreferenceController;
+
+import java.util.List;
 
 public class DevelopmentTilePreferenceController extends BasePreferenceController {
 

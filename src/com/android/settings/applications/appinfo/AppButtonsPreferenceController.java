@@ -40,6 +40,10 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.IWebViewUpdateService;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceScreen;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -62,10 +66,6 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.fragment.app.Fragment;
-import androidx.preference.PreferenceScreen;
 
 /**
  * Controller to control the uninstall button and forcestop button. All fragments that use

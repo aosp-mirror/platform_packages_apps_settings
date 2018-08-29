@@ -49,6 +49,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+
 import com.android.internal.annotations.GuardedBy;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.net.LegacyVpnInfo;
@@ -69,10 +73,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
 
 /**
  * Settings screen listing VPNs. Configured VPNs and networks managed by apps

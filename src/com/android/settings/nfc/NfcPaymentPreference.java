@@ -19,10 +19,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.util.AttributeSet;
 
-import com.android.settingslib.CustomDialogPreferenceCompat;
-
 import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.preference.PreferenceViewHolder;
+
+import com.android.settingslib.CustomDialogPreferenceCompat;
 
 public class NfcPaymentPreference extends CustomDialogPreferenceCompat {
 

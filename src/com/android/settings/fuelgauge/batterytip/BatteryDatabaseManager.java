@@ -39,14 +39,14 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.SparseLongArray;
 
+import androidx.annotation.VisibleForTesting;
+
+import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.ActionColumns;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-
-import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.ActionColumns;
-
-import androidx.annotation.VisibleForTesting;
 
 /**
  * Database manager for battery data. Now it only contains anomaly data stored in {@link AppInfo}.

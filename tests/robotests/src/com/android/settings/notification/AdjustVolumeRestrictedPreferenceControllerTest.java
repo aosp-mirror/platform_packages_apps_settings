@@ -17,6 +17,7 @@
 package com.android.settings.notification;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doCallRealMethod;
@@ -28,6 +29,8 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.os.UserManager;
 
+import androidx.preference.Preference;
+
 import com.android.settings.accounts.AccountRestrictionHelper;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedPreference;
@@ -38,8 +41,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-
-import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class AdjustVolumeRestrictedPreferenceControllerTest {

@@ -23,14 +23,14 @@ import android.content.res.Resources;
 import android.icu.text.ListFormatter;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settingslib.applications.PermissionsSummaryHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 
 public class AppPermissionPreferenceController extends AppInfoPreferenceControllerBase {
 

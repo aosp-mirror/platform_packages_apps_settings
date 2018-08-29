@@ -17,7 +17,9 @@
 package com.android.settings.notification;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
@@ -29,6 +31,8 @@ import android.app.NotificationManager;
 import android.app.NotificationManager.Policy;
 import android.content.Context;
 
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -39,8 +43,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
-
-import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ZenModePreferenceControllerTest {

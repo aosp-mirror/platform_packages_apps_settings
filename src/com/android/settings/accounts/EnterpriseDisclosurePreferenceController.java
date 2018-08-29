@@ -18,14 +18,14 @@ package com.android.settings.accounts;
 
 import android.content.Context;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.FooterPreferenceMixinCompat;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.PreferenceScreen;
 
 public class EnterpriseDisclosurePreferenceController extends BasePreferenceController {
 

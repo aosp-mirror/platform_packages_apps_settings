@@ -22,9 +22,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.UserManager;
 
-import com.android.internal.widget.LockPatternUtils;
-
 import androidx.fragment.app.Fragment;
+
+import com.android.internal.widget.LockPatternUtils;
 
 /**
  * An invisible retained worker fragment to track the AsyncWork that saves (and optionally

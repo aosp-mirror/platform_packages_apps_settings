@@ -16,11 +16,11 @@
 
 package com.android.settings.applications.manageapplications;
 
+import androidx.annotation.StringRes;
+
 import com.android.settingslib.applications.ApplicationsState;
 
 import java.util.Objects;
-
-import androidx.annotation.StringRes;
 
 /**
  * Data model for a displayable app filter.

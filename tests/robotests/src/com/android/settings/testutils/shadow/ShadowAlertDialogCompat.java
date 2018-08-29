@@ -19,6 +19,8 @@ package com.android.settings.testutils.shadow;
 import android.annotation.SuppressLint;
 import android.view.View;
 
+import androidx.appcompat.app.AlertDialog;
+
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
@@ -29,8 +31,6 @@ import org.robolectric.shadows.ShadowDialog;
 import org.robolectric.util.ReflectionHelpers;
 
 import javax.annotation.Nullable;
-
-import androidx.appcompat.app.AlertDialog;
 
 /* Robolectric shadow for the androidx alert dialog. */
 @Implements(AlertDialog.class)

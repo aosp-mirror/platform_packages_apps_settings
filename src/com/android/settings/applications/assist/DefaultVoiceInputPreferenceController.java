@@ -22,6 +22,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.text.TextUtils;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.internal.app.AssistUtils;
 import com.android.settings.applications.defaultapps.DefaultAppPreferenceController;
 import com.android.settingslib.applications.DefaultAppInfo;
@@ -31,9 +34,6 @@ import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.List;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 public class DefaultVoiceInputPreferenceController extends DefaultAppPreferenceController
         implements LifecycleObserver, OnResume, OnPause {

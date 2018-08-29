@@ -29,6 +29,8 @@ import android.provider.Settings;
 import android.util.ArrayMap;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.widget.CandidateInfo;
@@ -37,8 +39,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-
-import androidx.annotation.VisibleForTesting;
 
 /**
  * Fragment for changing vibration settings.

@@ -36,6 +36,12 @@ import android.view.ViewGroup;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceClickListener;
+import androidx.preference.PreferenceScreen;
+
 import com.android.ims.ImsConfig;
 import com.android.ims.ImsManager;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -45,12 +51,6 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.widget.SwitchBar;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceClickListener;
-import androidx.preference.PreferenceScreen;
 
 /**
  * This is the inner class of {@link WifiCallingSettings} fragment.

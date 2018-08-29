@@ -1,6 +1,7 @@
 package com.android.settings.testutils.shadow;
 
 import static android.util.TypedValue.TYPE_REFERENCE;
+
 import static org.robolectric.RuntimeEnvironment.application;
 import static org.robolectric.shadow.api.Shadow.directlyOn;
 
@@ -16,6 +17,10 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.util.TypedValue;
+
+import androidx.annotation.ArrayRes;
+import androidx.annotation.ColorRes;
+import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 
@@ -36,10 +41,6 @@ import org.w3c.dom.Node;
 
 import java.util.List;
 import java.util.Map;
-
-import androidx.annotation.ArrayRes;
-import androidx.annotation.ColorRes;
-import androidx.annotation.Nullable;
 
 /**
  * Shadow Resources and Theme classes to handle resource references that Robolectric shadows cannot

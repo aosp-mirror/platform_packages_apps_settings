@@ -20,11 +20,11 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.os.UserManager;
 
-import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.applications.AppStateInstallAppsBridge;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
+
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.applications.AppStateInstallAppsBridge;
 
 public class ExternalSourceDetailPreferenceController extends AppInfoPreferenceControllerBase {
 

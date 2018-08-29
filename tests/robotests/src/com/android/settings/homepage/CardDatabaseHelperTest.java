@@ -63,7 +63,6 @@ public class CardDatabaseHelperTest {
                 CardDatabaseHelper.CardColumns.SCORE,
                 CardDatabaseHelper.CardColumns.SLICE_URI,
                 CardDatabaseHelper.CardColumns.CATEGORY,
-                CardDatabaseHelper.CardColumns.AVAILABILITY_URI,
                 CardDatabaseHelper.CardColumns.LOCALIZED_TO_LOCALE,
                 CardDatabaseHelper.CardColumns.PACKAGE_NAME,
                 CardDatabaseHelper.CardColumns.APP_VERSION,
@@ -75,6 +74,7 @@ public class CardDatabaseHelperTest {
                 CardDatabaseHelper.CardColumns.ICON_RES_ID,
                 CardDatabaseHelper.CardColumns.CARD_ACTION,
                 CardDatabaseHelper.CardColumns.EXPIRE_TIME_MS,
+                CardDatabaseHelper.CardColumns.SUPPORT_HALF_WIDTH,
         };
 
         assertThat(columnNames).isEqualTo(expectedNames);

@@ -53,6 +53,8 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
@@ -62,8 +64,6 @@ import com.android.settings.password.ConfirmLockPattern;
 import com.android.settingslib.RestrictedLockUtils;
 
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
 
 /**
  * Confirm and execute a reset of the device to a clean "just out of the box"

@@ -20,7 +20,9 @@ import static com.android.settings.applications.appinfo.AppInfoDashboardFragment
 import static com.android.settings.applications.appinfo.AppInfoDashboardFragment
         .UNINSTALL_ALL_USERS_MENU;
 import static com.android.settings.applications.appinfo.AppInfoDashboardFragment.UNINSTALL_UPDATES;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doNothing;

@@ -34,10 +34,14 @@ import android.text.format.DateUtils;
 import android.util.Log;
 import android.util.SparseLongArray;
 
+import androidx.annotation.IntDef;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
+import androidx.annotation.WorkerThread;
+
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.internal.util.ArrayUtils;
-import com.android.settings.R;
 import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
 import com.android.settings.fuelgauge.batterytip.AnomalyInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryDatabaseManager;
@@ -52,12 +56,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import androidx.annotation.IntDef;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.annotation.VisibleForTesting;
-import androidx.annotation.WorkerThread;
 
 /**
  * Utils for battery operation

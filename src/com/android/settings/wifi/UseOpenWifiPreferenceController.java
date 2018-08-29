@@ -14,6 +14,11 @@ import android.os.Looper;
 import android.provider.Settings;
 import android.text.TextUtils;
 
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
+
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -23,11 +28,6 @@ import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.List;
-
-import androidx.fragment.app.Fragment;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
 /**
  * {@link AbstractPreferenceController} that controls whether a user wants to enable the "use open

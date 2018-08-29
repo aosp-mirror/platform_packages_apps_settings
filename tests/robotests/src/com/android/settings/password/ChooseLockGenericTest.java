@@ -28,11 +28,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings.Global;
 
+import androidx.fragment.app.FragmentActivity;
+
 import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
-
-import androidx.fragment.app.FragmentActivity;
 
 import org.junit.After;
 import org.junit.Test;

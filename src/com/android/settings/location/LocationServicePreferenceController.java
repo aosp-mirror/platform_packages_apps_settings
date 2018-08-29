@@ -21,6 +21,11 @@ import android.location.SettingInjectorService;
 import android.os.UserHandle;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.Utils;
 import com.android.settings.widget.RestrictedAppPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -29,11 +34,6 @@ import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
 
 public class LocationServicePreferenceController extends LocationBasePreferenceController
         implements LifecycleObserver, OnResume, OnPause {

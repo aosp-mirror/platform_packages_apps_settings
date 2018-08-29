@@ -22,6 +22,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 
+import androidx.preference.Preference;
+
 import com.android.internal.app.ColorDisplayController;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -34,8 +36,6 @@ import com.android.settingslib.search.SearchIndexable;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.preference.Preference;
 
 /**
  * Settings screen for Night display.

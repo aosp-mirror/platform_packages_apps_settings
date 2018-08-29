@@ -18,11 +18,11 @@ package com.android.settings.fuelgauge;
 import android.content.Context;
 import android.provider.Settings;
 
-import com.android.settings.core.BasePreferenceController;
-import com.android.settings.overlay.FeatureFactory;
-
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
+
+import com.android.settings.core.BasePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
 
 /**
  * Controller to change and update the auto restriction toggle

@@ -17,12 +17,15 @@
 package com.android.settings.dream;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
@@ -37,8 +40,6 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.util.ReflectionHelpers;
-
-import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class StartNowPreferenceControllerTest {

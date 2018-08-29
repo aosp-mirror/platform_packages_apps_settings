@@ -16,17 +16,16 @@
 
 package com.android.settings.bluetooth;
 
-import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.text.TextUtils;
-
-import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
+
+import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class BluetoothDeviceRenamePreferenceController extends
         BluetoothDeviceNamePreferenceController {

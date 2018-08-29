@@ -25,12 +25,12 @@ import android.widget.Checkable;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 
-import com.android.settings.R;
-import com.android.settings.SettingsActivity;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
+
+import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 
 
 public class TtsEnginePreference extends Preference {

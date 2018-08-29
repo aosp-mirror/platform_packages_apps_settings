@@ -23,12 +23,12 @@ import android.os.SystemProperties;
 import android.os.storage.IStorageManager;
 import android.text.TextUtils;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 
 public class FileEncryptionPreferenceController extends DeveloperOptionsPreferenceController
         implements PreferenceControllerMixin {

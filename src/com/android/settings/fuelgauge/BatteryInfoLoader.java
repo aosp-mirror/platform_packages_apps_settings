@@ -17,10 +17,10 @@ package com.android.settings.fuelgauge;
 
 import android.content.Context;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settingslib.utils.AsyncLoaderCompat;
-
-import androidx.annotation.VisibleForTesting;
 
 /**
  * Loader that can be used by classes to load BatteryInfo in a background thread. This loader will

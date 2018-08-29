@@ -23,9 +23,9 @@ import android.content.Context;
 import android.os.UserHandle;
 import android.provider.Settings;
 
-import com.android.settings.core.TogglePreferenceController;
-
 import androidx.preference.Preference;
+
+import com.android.settings.core.TogglePreferenceController;
 
 /**
  * Preference controller for Face settings page controlling the ability to unlock the phone

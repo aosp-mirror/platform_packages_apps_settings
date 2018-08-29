@@ -35,6 +35,8 @@ import android.util.Log;
 import android.util.Slog;
 import android.util.Xml;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settingslib.RestrictedLockUtils;
 
@@ -44,8 +46,6 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
 
 
 /** A manager for trust agent state. */

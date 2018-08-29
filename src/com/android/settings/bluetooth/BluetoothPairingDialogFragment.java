@@ -34,12 +34,12 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.appcompat.app.AlertDialog;
 
 /**
  * A dialogFragment used by {@link BluetoothPairingDialog} to create an appropriately styled dialog

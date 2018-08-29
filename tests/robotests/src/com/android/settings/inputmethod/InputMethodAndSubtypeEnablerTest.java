@@ -17,11 +17,14 @@
 package com.android.settings.inputmethod;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -31,8 +34,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
-
-import androidx.fragment.app.FragmentActivity;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class InputMethodAndSubtypeEnablerTest {

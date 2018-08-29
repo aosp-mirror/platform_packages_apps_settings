@@ -24,12 +24,12 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.media.AudioManager;
 
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settingslib.Utils;
 import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.HearingAidProfile;
-
-import androidx.preference.Preference;
 
 /**
  * This class which allows switching between A2dp-connected & HAP-connected BT devices.

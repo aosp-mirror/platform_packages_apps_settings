@@ -186,10 +186,6 @@ public class DateTimeSettings extends DashboardFragment implements
         public List<SearchIndexableResource> getXmlResourcesToIndex(
                 Context context, boolean enabled) {
             List<SearchIndexableResource> result = new ArrayList<>();
-            // Remove data/time settings from search in demo mode
-            if (UserManager.isDeviceInDemoMode(context)) {
-                return result;
-            }
 
             SearchIndexableResource sir = new SearchIndexableResource(context);
             sir.xmlResId = R.xml.date_time_prefs;

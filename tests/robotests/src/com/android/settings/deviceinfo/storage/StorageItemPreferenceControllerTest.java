@@ -19,7 +19,9 @@ import static com.android.settings.applications.manageapplications.ManageApplica
 import static com.android.settings.applications.manageapplications.ManageApplications
         .EXTRA_WORK_ONLY;
 import static com.android.settings.utils.FileSizeFormatter.MEGABYTE_IN_BYTES;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.eq;
@@ -37,6 +39,12 @@ import android.os.storage.VolumeInfo;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -60,12 +68,6 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class StorageItemPreferenceControllerTest {

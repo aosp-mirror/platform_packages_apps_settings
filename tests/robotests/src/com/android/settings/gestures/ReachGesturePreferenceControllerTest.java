@@ -25,10 +25,8 @@ import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
-import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -37,7 +35,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ReachGesturePreferenceControllerTest {

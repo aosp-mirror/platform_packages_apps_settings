@@ -25,11 +25,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.textservice.SpellCheckerInfo;
 
-import com.android.settings.CustomListPreference;
-import com.android.settings.R;
-
 import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.preference.PreferenceViewHolder;
+
+import com.android.settings.CustomListPreference;
+import com.android.settings.R;
 
 /**
  * Spell checker service preference.

@@ -30,10 +30,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
-
-import androidx.appcompat.app.AlertDialog;
 
 /**
  * Helper class for displaying dialogs related to user settings.

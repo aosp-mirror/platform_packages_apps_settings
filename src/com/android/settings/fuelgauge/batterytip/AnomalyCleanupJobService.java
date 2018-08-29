@@ -24,12 +24,12 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.concurrent.TimeUnit;
-
-import androidx.annotation.VisibleForTesting;
 
 /** A JobService to clean up obsolete data in anomaly database */
 public class AnomalyCleanupJobService extends JobService {

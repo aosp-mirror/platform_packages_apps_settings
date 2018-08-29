@@ -17,7 +17,9 @@
 package com.android.settings.shortcut;
 
 import static com.android.settings.shortcut.CreateShortcutPreferenceController.SHORTCUT_ID_PREFIX;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.eq;

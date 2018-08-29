@@ -20,13 +20,13 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.os.UserHandle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.VisibleForTesting;
 
 /**
  * A controller for ChooseLockGeneric, and other similar classes which shows a list of possible

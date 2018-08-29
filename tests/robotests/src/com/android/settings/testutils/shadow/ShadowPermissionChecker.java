@@ -20,15 +20,15 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.text.TextUtils;
 
+import androidx.annotation.NonNull;
+import androidx.core.content.PermissionChecker;
+
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-
-import androidx.annotation.NonNull;
-import androidx.core.content.PermissionChecker;
 
 /**
  * This class provides shadow for API that is not supported in current roboletric

@@ -26,14 +26,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.security.OwnerInfoPreferenceController.OwnerInfoCallback;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
 
 public class OwnerInfoSettings extends InstrumentedDialogFragment implements OnClickListener {
 

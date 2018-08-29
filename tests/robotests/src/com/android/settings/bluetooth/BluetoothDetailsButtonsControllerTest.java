@@ -17,6 +17,7 @@
 package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
@@ -26,6 +27,9 @@ import static org.mockito.Mockito.when;
 
 import android.view.View;
 import android.widget.Button;
+
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -38,9 +42,6 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = SettingsShadowBluetoothDevice.class)

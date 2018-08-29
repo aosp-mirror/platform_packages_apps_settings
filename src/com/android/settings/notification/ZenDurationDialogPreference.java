@@ -20,10 +20,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.util.AttributeSet;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.settingslib.CustomDialogPreferenceCompat;
 import com.android.settingslib.notification.ZenDurationDialog;
-
-import androidx.appcompat.app.AlertDialog;
 
 public class ZenDurationDialogPreference extends CustomDialogPreferenceCompat {
 

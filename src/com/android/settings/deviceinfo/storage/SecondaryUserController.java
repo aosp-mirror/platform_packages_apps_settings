@@ -22,6 +22,12 @@ import android.graphics.drawable.Drawable;
 import android.os.UserManager;
 import android.util.SparseArray;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.deviceinfo.StorageItemPreference;
@@ -29,12 +35,6 @@ import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceScreen;
 
 /**
  * SecondaryUserController controls the preferences on the Storage screen which had to do with

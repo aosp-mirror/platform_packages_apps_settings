@@ -19,6 +19,7 @@ package com.android.settings.homepage;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -26,8 +27,9 @@ import androidx.annotation.VisibleForTesting;
  * Defines the schema for the Homepage Cards database.
  */
 public class CardDatabaseHelper extends SQLiteOpenHelper {
+    private static final String TAG = "CardDatabaseHelper";
     private static final String DATABASE_NAME = "homepage_cards.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     public static final String CARD_TABLE = "cards";
 
@@ -56,11 +58,6 @@ public class CardDatabaseHelper extends SQLiteOpenHelper {
          * Category of the card. The value is between 0 to 3.
          */
         String CATEGORY = "category";
-
-        /**
-         * URI decides the card can be shown.
-         */
-        String AVAILABILITY_URI = "availability_uri";
 
         /**
          * Keep the card last display's locale.
@@ -108,7 +105,7 @@ public class CardDatabaseHelper extends SQLiteOpenHelper {
         String ICON_RES_ID = "icon_res_id";
 
         /**
-         * PendingIntent for for custom view card candidate. Do action when user press card.
+         * Key value mapping to Intent in Settings. Do action when user presses card.
          */
         String CARD_ACTION = "card_action";
 
@@ -116,6 +113,11 @@ public class CardDatabaseHelper extends SQLiteOpenHelper {
          * Expire time of the card. The unit of the value is mini-second.
          */
         String EXPIRE_TIME_MS = "expire_time_ms";
+
+        /**
+         * Decide the card display full-length width or half-width in screen.
+         */
+        String SUPPORT_HALF_WIDTH = "support_half_width";
     }
 
     private static final String CREATE_CARD_TABLE =
@@ -135,8 +137,6 @@ public class CardDatabaseHelper extends SQLiteOpenHelper {
                     " >= 0 AND " +
                     CardColumns.CATEGORY +
                     " <= 3), " +
-                    CardColumns.AVAILABILITY_URI +
-                    " TEXT, " +
                     CardColumns.LOCALIZED_TO_LOCALE +
                     " TEXT, " +
                     CardColumns.PACKAGE_NAME +
@@ -156,9 +156,11 @@ public class CardDatabaseHelper extends SQLiteOpenHelper {
                     CardColumns.ICON_RES_ID +
                     " INTEGER DEFAULT 0, " +
                     CardColumns.CARD_ACTION +
-                    " TEXT, " +
+                    " INTEGER, " +
                     CardColumns.EXPIRE_TIME_MS +
-                    " INTEGER " +
+                    " INTEGER, " +
+                    CardColumns.SUPPORT_HALF_WIDTH +
+                    " INTEGER DEFAULT 0 " +
                     ");";
 
     public CardDatabaseHelper(Context context) {
@@ -173,6 +175,7 @@ public class CardDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion < newVersion) {
+            Log.d(TAG, "Reconstructing DB from " + oldVersion + " to " + newVersion);
             db.execSQL("DROP TABLE IF EXISTS " + CARD_TABLE);
             onCreate(db);
         }

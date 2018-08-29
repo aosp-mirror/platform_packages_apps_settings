@@ -19,10 +19,10 @@ package com.android.settings.deletionhelper;
 import android.app.Dialog;
 import android.os.Bundle;
 
-import com.android.settings.R;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
+
+import com.android.settings.R;
 
 /**
  * Fragment to warn the user about activating the storage manager.

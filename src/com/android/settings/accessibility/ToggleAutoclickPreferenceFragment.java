@@ -24,6 +24,8 @@ import android.provider.Settings;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Switch;
 
+import androidx.preference.Preference;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -34,8 +36,6 @@ import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.preference.Preference;
 
 /**
  * Fragment for preference screen for settings related to Automatically click after mouse stops

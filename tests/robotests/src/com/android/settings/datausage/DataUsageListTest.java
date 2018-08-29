@@ -17,6 +17,7 @@
 package com.android.settings.datausage;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -29,6 +30,8 @@ import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.provider.Settings;
 
+import androidx.fragment.app.FragmentActivity;
+
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.NetworkPolicyEditor;
@@ -39,8 +42,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.util.ReflectionHelpers;
-
-import androidx.fragment.app.FragmentActivity;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DataUsageListTest {

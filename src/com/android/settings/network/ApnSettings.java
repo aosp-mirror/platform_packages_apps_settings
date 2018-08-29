@@ -50,6 +50,9 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.TelephonyIntents;
@@ -61,9 +64,6 @@ import com.android.settings.RestrictedSettingsFragment;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import java.util.ArrayList;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
 
 public class ApnSettings extends RestrictedSettingsFragment implements
         Preference.OnPreferenceChangeListener {

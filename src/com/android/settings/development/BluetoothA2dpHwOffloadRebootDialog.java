@@ -21,12 +21,12 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.PowerManager;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentManager;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.FragmentManager;
 
 public class BluetoothA2dpHwOffloadRebootDialog extends InstrumentedDialogFragment
         implements DialogInterface.OnClickListener {

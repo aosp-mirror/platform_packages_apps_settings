@@ -29,12 +29,12 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.concurrent.TimeUnit;
-
-import androidx.annotation.VisibleForTesting;
 
 /** A JobService check whether to update the anomaly config periodically */
 public class AnomalyConfigJobService extends JobService {

@@ -22,11 +22,11 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 
-import com.android.settings.R;
-import com.android.settings.applications.LayoutPreference;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.core.content.res.TypedArrayUtils;
+
+import com.android.settings.R;
+import com.android.settings.applications.LayoutPreference;
 
 /**
  * Preference that presents a button with two states(On vs Off)

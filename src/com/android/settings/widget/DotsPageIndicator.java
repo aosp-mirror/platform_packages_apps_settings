@@ -34,11 +34,11 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.Interpolator;
 
+import androidx.viewpager.widget.ViewPager;
+
 import com.android.settings.R;
 
 import java.util.Arrays;
-
-import androidx.viewpager.widget.ViewPager;
 
 /**
  * Custom pager indicator for use with a {@code ViewPager}.

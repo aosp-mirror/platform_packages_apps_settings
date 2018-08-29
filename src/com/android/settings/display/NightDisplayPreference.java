@@ -17,11 +17,11 @@ package com.android.settings.display;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import androidx.preference.SwitchPreference;
+
 import com.android.internal.app.ColorDisplayController;
 
 import java.time.LocalTime;
-
-import androidx.preference.SwitchPreference;
 
 public class NightDisplayPreference extends SwitchPreference
         implements ColorDisplayController.Callback {

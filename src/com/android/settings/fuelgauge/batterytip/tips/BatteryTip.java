@@ -21,15 +21,15 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.SparseIntArray;
 
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-
 import androidx.annotation.IdRes;
 import androidx.annotation.IntDef;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
+
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /**
  * Base model for a battery tip(e.g. suggest user to turn on battery saver)

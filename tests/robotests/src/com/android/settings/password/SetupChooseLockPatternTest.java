@@ -17,6 +17,7 @@
 package com.android.settings.password;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.robolectric.RuntimeEnvironment.application;
 
 import android.content.ComponentName;
@@ -24,6 +25,9 @@ import android.content.pm.PackageManager;
 import android.os.UserHandle;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
 
 import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LockPatternView.Cell;
@@ -49,9 +53,6 @@ import org.robolectric.util.ReflectionHelpers;
 import org.robolectric.util.ReflectionHelpers.ClassParameter;
 
 import java.util.Arrays;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.FragmentActivity;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {

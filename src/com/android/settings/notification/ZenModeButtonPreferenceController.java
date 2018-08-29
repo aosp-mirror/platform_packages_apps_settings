@@ -21,14 +21,14 @@ import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-
-import androidx.fragment.app.FragmentManager;
-import androidx.preference.Preference;
 
 public class ZenModeButtonPreferenceController extends AbstractZenModePreferenceController
         implements PreferenceControllerMixin {

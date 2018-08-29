@@ -17,11 +17,14 @@
 package com.android.settings.biometrics.fingerprint;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.robolectric.RuntimeEnvironment.application;
 
 import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.widget.Button;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
 import com.android.settings.password.ChooseLockSettingsHelper;
@@ -40,8 +43,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
-
-import androidx.appcompat.app.AlertDialog;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {

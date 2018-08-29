@@ -23,6 +23,11 @@ import android.os.SystemProperties;
 import android.text.BidiFormatter;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceGroup;
+
 import com.android.settings.R;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settingslib.bluetooth.BluetoothCallback;
@@ -32,11 +37,6 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import java.util.Collection;
 import java.util.WeakHashMap;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceGroup;
 
 /**
  * Parent class for settings fragments that contain a list of Bluetooth
@@ -192,6 +192,8 @@ public abstract class DeviceListPreferenceFragment extends
             preference = new BluetoothDevicePreference(getPrefContext(), cachedDevice,
                     mShowDevicesWithoutNames);
             preference.setKey(key);
+            //Set hideSecondTarget is true if it's bonded device.
+            preference.hideSecondTarget(true);
             mDeviceListGroup.addPreference(preference);
         } else {
             // Tell the preference it is being re-used in case there is new info in the

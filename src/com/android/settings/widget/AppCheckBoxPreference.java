@@ -23,10 +23,10 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.settings.R;
-
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.PreferenceViewHolder;
+
+import com.android.settings.R;
 
 /**
  * {@link CheckBoxPreference} that used only to display app

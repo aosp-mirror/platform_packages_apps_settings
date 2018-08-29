@@ -33,6 +33,14 @@ import android.util.ArraySet;
 import android.util.Log;
 import android.util.Pair;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.core.graphics.drawable.IconCompat;
+import androidx.slice.Slice;
+import androidx.slice.builders.ListBuilder;
+import androidx.slice.builders.ListBuilder.InputRangeBuilder;
+import androidx.slice.builders.ListBuilder.RowBuilder;
+import androidx.slice.builders.SliceAction;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -45,19 +53,10 @@ import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.core.graphics.drawable.IconCompat;
-import androidx.slice.Slice;
-import androidx.slice.builders.ListBuilder;
-import androidx.slice.builders.ListBuilder.InputRangeBuilder;
-import androidx.slice.builders.ListBuilder.RowBuilder;
-import androidx.slice.builders.SliceAction;
 
 
 /**

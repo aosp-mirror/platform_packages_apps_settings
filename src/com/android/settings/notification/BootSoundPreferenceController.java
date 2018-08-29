@@ -19,13 +19,13 @@ package com.android.settings.notification;
 import android.content.Context;
 import android.os.SystemProperties;
 
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
+
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 public class BootSoundPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {

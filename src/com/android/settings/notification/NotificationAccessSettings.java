@@ -26,8 +26,12 @@ import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
-
 import android.widget.Toast;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -39,10 +43,6 @@ import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
 
 /**
  * Settings screen for managing notification listener permissions

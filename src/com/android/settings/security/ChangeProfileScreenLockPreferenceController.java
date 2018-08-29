@@ -23,12 +23,12 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.text.TextUtils;
 
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.password.ChooseLockGeneric;
-
-import androidx.preference.Preference;
 
 public class ChangeProfileScreenLockPreferenceController extends
         ChangeScreenLockPreferenceController {

@@ -29,13 +29,13 @@ import android.os.Message;
 import android.os.Vibrator;
 import android.text.TextUtils;
 
+import androidx.lifecycle.OnLifecycleEvent;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.Objects;
-
-import androidx.lifecycle.OnLifecycleEvent;
 
 public class RingVolumePreferenceController extends VolumeSeekBarPreferenceController {
 

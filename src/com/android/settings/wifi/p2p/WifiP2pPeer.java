@@ -22,10 +22,10 @@ import android.net.wifi.p2p.WifiP2pDevice;
 import android.text.TextUtils;
 import android.widget.ImageView;
 
-import com.android.settings.R;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
+
+import com.android.settings.R;
 
 public class WifiP2pPeer extends Preference {
 

@@ -29,6 +29,10 @@ import android.provider.SearchIndexableResource;
 import android.util.SparseArray;
 import android.view.View;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -53,10 +57,6 @@ import com.android.settingslib.search.SearchIndexable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.Loader;
 
 @SearchIndexable
 public class StorageDashboardFragment extends DashboardFragment

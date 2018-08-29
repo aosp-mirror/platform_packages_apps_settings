@@ -28,6 +28,10 @@ import android.view.View;
 import android.widget.Checkable;
 import android.widget.TextView;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
@@ -35,10 +39,6 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
 
 public class HighPowerDetail extends InstrumentedDialogFragment implements OnClickListener,
         View.OnClickListener {

@@ -18,13 +18,13 @@ package com.android.settings.nfc;
 import android.content.Context;
 import android.nfc.NfcAdapter;
 
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
-
-import androidx.preference.PreferenceScreen;
 
 public class AndroidBeamPreferenceController extends BasePreferenceController
         implements LifecycleObserver, OnResume, OnPause {

@@ -29,9 +29,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.android.settings.R;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.ObservableFragment;
 import com.android.settingslib.core.lifecycle.ObservablePreferenceFragment;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;

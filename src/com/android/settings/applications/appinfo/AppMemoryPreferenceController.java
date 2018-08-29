@@ -22,6 +22,9 @@ import android.content.pm.PackageInfo;
 import android.os.AsyncTask;
 import android.text.format.Formatter;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.applications.ProcStatsData;
@@ -33,9 +36,6 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 public class AppMemoryPreferenceController extends BasePreferenceController
         implements LifecycleObserver, OnResume {

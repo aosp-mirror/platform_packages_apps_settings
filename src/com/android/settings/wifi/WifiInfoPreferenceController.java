@@ -25,6 +25,10 @@ import android.net.wifi.WifiManager;
 import android.provider.Settings;
 import android.text.TextUtils;
 
+import androidx.core.text.BidiFormatter;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -33,10 +37,6 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
-
-import androidx.core.text.BidiFormatter;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 /**
  * {@link PreferenceControllerMixin} that updates MAC/IP address.

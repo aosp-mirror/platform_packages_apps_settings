@@ -688,16 +688,6 @@ public class SettingsActivity extends SettingsBaseActivity
                         && !Utils.isMonkeyRunning(), isAdmin)
                 || somethingChanged;
 
-        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
-                        Settings.NetworkDashboardActivity.class.getName()),
-                !UserManager.isDeviceInDemoMode(this), isAdmin)
-                || somethingChanged;
-
-        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
-                        Settings.DateTimeSettingsActivity.class.getName()),
-                !UserManager.isDeviceInDemoMode(this), isAdmin)
-                || somethingChanged;
-
         final boolean showDev = DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(this)
                 && !Utils.isMonkeyRunning();
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,

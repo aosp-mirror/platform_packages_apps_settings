@@ -25,14 +25,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.widget.FooterPreference;
-
-import androidx.annotation.VisibleForTesting;
 
 /**
  * BluetoothPairingDetail is a page to scan bluetooth devices and pair them.
@@ -152,7 +152,7 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
 
                 addDeviceCategory(mAvailableDevicesCategory,
                         R.string.bluetooth_preference_found_media_devices,
-                        BluetoothDeviceFilter.UNBONDED_DEVICE_FILTER, mInitialScanStarted);
+                        BluetoothDeviceFilter.ALL_FILTER, mInitialScanStarted);
                 updateFooterPreference(mFooterPreference);
                 mAlwaysDiscoverable.start();
                 enableScanning();
@@ -186,6 +186,17 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
                     && bondState == BluetoothDevice.BOND_NONE) {
                 // If currently selected device failed to bond, restart scanning
                 enableScanning();
+            }
+        }
+    }
+
+    @Override
+    public void onConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state) {
+        if (mSelectedDevice != null) {
+            BluetoothDevice device = cachedDevice.getDevice();
+            if (device != null && mSelectedDevice.equals(device)
+                && state == BluetoothAdapter.STATE_CONNECTED) {
+                finish();
             }
         }
     }

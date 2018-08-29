@@ -20,7 +20,9 @@ import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_OFF;
 import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_OPPORTUNISTIC;
 import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_PROVIDER_HOSTNAME;
 import static android.provider.Settings.Global.PRIVATE_DNS_MODE;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -35,6 +37,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowOs;
@@ -47,8 +51,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
-
-import androidx.appcompat.app.AlertDialog;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowOs.class)

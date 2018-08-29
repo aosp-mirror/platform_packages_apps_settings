@@ -17,6 +17,7 @@
 package com.android.settings.flashlight;
 
 import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
+
 import static androidx.slice.builders.ListBuilder.ICON_IMAGE;
 
 import android.annotation.ColorInt;
@@ -34,16 +35,16 @@ import android.provider.Settings.Secure;
 import android.provider.SettingsSlicesContract;
 import android.util.Log;
 
-import com.android.settings.R;
-import com.android.settings.Utils;
-import com.android.settings.slices.SettingsSliceProvider;
-import com.android.settings.slices.SliceBroadcastReceiver;
-
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.ListBuilder.RowBuilder;
 import androidx.slice.builders.SliceAction;
+
+import com.android.settings.R;
+import com.android.settings.Utils;
+import com.android.settings.slices.SettingsSliceProvider;
+import com.android.settings.slices.SliceBroadcastReceiver;
 
 
 /**

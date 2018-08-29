@@ -17,6 +17,7 @@
 package com.android.settings.accounts;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -29,6 +30,11 @@ import android.content.Context;
 import android.content.SyncAdapterType;
 import android.graphics.drawable.ColorDrawable;
 import android.os.UserHandle;
+
+import androidx.fragment.app.FragmentActivity;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -45,11 +51,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-
-import androidx.fragment.app.FragmentActivity;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class,
