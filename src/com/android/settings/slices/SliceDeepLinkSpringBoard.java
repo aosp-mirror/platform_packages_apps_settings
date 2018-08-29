@@ -16,7 +16,6 @@ package com.android.settings.slices;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -26,7 +25,6 @@ import com.android.settings.bluetooth.BluetoothSliceBuilder;
 import com.android.settings.location.LocationSliceBuilder;
 import com.android.settings.notification.ZenModeSliceBuilder;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.wifi.WifiSlice;
 
 import java.net.URISyntaxException;
 

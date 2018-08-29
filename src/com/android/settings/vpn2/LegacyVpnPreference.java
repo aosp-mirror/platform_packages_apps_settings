@@ -22,10 +22,10 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
 
+import androidx.preference.Preference;
+
 import com.android.internal.net.VpnProfile;
 import com.android.settings.R;
-
-import androidx.preference.Preference;
 
 /**
  * {@link androidx.preference.Preference} tracks the underlying legacy vpn profile and

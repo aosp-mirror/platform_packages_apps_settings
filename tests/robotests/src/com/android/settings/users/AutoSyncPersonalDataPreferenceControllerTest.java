@@ -16,6 +16,7 @@
 package com.android.settings.users;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.when;
@@ -23,6 +24,10 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.pm.UserInfo;
 import android.os.UserManager;
+
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -35,10 +40,6 @@ import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.fragment.app.Fragment;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class AutoSyncPersonalDataPreferenceControllerTest {

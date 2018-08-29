@@ -18,10 +18,10 @@ package com.android.settings.backup;
 
 import android.content.Context;
 
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-
-import androidx.preference.Preference;
 
 public class BackupDataPreferenceController extends BasePreferenceController {
     private PrivacySettingsConfigData mPSCD;

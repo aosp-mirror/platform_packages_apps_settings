@@ -27,8 +27,6 @@ import android.content.IntentFilter;
 import android.os.PowerManager;
 
 import com.android.settings.fuelgauge.BatterySaverReceiver;
-import com.android.settings.homepage.conditional.BatterySaverConditionController;
-import com.android.settings.homepage.conditional.ConditionManager;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;

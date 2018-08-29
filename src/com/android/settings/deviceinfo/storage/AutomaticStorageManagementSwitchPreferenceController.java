@@ -21,6 +21,10 @@ import android.content.Context;
 import android.os.SystemProperties;
 import android.provider.Settings;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.FragmentManager;
+import androidx.preference.PreferenceScreen;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.deletionhelper.ActivationWarningFragment;
@@ -32,10 +36,6 @@ import com.android.settingslib.Utils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnResume;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.fragment.app.FragmentManager;
-import androidx.preference.PreferenceScreen;
 
 public class AutomaticStorageManagementSwitchPreferenceController extends
         BasePreferenceController implements LifecycleObserver, OnResume,

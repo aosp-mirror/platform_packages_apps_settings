@@ -21,10 +21,10 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 
+import androidx.preference.Preference;
+
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
-
-import androidx.preference.Preference;
 
 public abstract class RingtonePreferenceControllerBase extends AbstractPreferenceController
         implements PreferenceControllerMixin {

@@ -21,14 +21,14 @@ import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.ToggleSwitch;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 public abstract class ToggleFeaturePreferenceFragment extends SettingsPreferenceFragment {
 

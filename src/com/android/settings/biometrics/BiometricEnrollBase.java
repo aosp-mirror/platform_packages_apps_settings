@@ -16,8 +16,6 @@
 
 package com.android.settings.biometrics;
 
-import static android.app.Activity.RESULT_FIRST_USER;
-
 import android.annotation.Nullable;
 import android.content.Intent;
 import android.content.res.Resources;

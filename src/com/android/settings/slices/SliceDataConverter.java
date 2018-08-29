@@ -39,6 +39,8 @@ import android.util.Log;
 import android.util.Xml;
 import android.view.accessibility.AccessibilityManager;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.AccessibilitySlicePreferenceController;
@@ -60,8 +62,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import androidx.annotation.VisibleForTesting;
 
 /**
  * Converts all Slice sources into {@link SliceData}.

@@ -16,6 +16,7 @@
 package com.android.settings.accessibility;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
+
 import static com.android.internal.accessibility.AccessibilityShortcutController
         .COLOR_INVERSION_COMPONENT_NAME;
 import static com.android.internal.accessibility.AccessibilityShortcutController
@@ -38,6 +39,9 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.accessibility.AccessibilityManager;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+
 import com.android.internal.accessibility.AccessibilityShortcutController;
 import com.android.internal.accessibility.AccessibilityShortcutController
         .ToggleableFrameworkFeatureInfo;
@@ -52,9 +56,6 @@ import com.android.settingslib.widget.CandidateInfo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 /**
  * Fragment for picking accessibility shortcut service

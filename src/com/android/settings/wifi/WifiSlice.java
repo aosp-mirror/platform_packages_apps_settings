@@ -32,19 +32,18 @@ import android.net.wifi.WifiSsid;
 import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.R;
-import com.android.settings.SubSettings;
-import com.android.settings.Utils;
-import com.android.settings.slices.CustomSliceable;
-import com.android.settings.slices.SliceBroadcastReceiver;
-import com.android.settings.slices.SliceBuilderUtils;
-
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.ListBuilder.RowBuilder;
 import androidx.slice.builders.SliceAction;
+
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.R;
+import com.android.settings.SubSettings;
+import com.android.settings.Utils;
+import com.android.settings.slices.CustomSliceable;
+import com.android.settings.slices.SliceBuilderUtils;
 
 /**
  * Utility class to build a Wifi Slice, and handle all associated actions.

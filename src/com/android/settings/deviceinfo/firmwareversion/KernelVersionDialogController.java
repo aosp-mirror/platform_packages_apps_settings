@@ -16,10 +16,10 @@
 
 package com.android.settings.deviceinfo.firmwareversion;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settingslib.DeviceInfoUtils;
-
-import androidx.annotation.VisibleForTesting;
 
 public class KernelVersionDialogController {
 

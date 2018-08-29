@@ -26,6 +26,10 @@ import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.text.TextUtils;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
@@ -35,10 +39,6 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
 
 public class ThemePreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin, Preference.OnPreferenceChangeListener {

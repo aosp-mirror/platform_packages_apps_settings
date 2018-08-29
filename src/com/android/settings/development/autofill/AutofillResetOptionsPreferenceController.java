@@ -18,18 +18,16 @@ package com.android.settings.development.autofill;
 
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.res.Resources;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.autofill.AutofillManager;
 import android.widget.Toast;
 
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
-
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
 
 public final class AutofillResetOptionsPreferenceController
         extends DeveloperOptionsPreferenceController

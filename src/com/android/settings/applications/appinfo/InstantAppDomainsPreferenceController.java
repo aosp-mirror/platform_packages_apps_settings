@@ -19,13 +19,13 @@ package com.android.settings.applications.appinfo;
 import android.content.Context;
 import android.content.pm.PackageManager;
 
+import androidx.preference.Preference;
+
 import com.android.settings.Utils;
 import com.android.settings.applications.AppDomainsPreference;
 import com.android.settingslib.applications.AppUtils;
 
 import java.util.Set;
-
-import androidx.preference.Preference;
 
 public class InstantAppDomainsPreferenceController extends AppInfoPreferenceControllerBase {
 

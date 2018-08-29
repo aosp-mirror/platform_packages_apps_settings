@@ -32,6 +32,9 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardAdapter.DashboardItemHolder;
@@ -47,9 +50,6 @@ import com.android.settingslib.utils.IconCache;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder> implements
     LifecycleObserver, OnSaveInstanceState {

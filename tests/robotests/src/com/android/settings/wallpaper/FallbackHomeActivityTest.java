@@ -17,7 +17,6 @@
 package com.android.settings.wallpaper;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.when;
 
 import android.annotation.NonNull;
 import android.annotation.Nullable;
@@ -29,7 +28,6 @@ import android.os.Handler;
 import com.android.settings.FallbackHome;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

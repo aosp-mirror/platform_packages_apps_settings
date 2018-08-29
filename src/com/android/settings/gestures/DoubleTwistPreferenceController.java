@@ -26,10 +26,10 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.text.TextUtils;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
-
-import androidx.annotation.VisibleForTesting;
 
 public class DoubleTwistPreferenceController extends GesturePreferenceController {
 

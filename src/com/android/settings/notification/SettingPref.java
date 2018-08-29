@@ -24,12 +24,12 @@ import android.provider.Settings.Global;
 import android.provider.Settings.Secure;
 import android.provider.Settings.System;
 
-import com.android.settings.SettingsPreferenceFragment;
-
 import androidx.preference.DropDownPreference;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.TwoStatePreference;
+
+import com.android.settings.SettingsPreferenceFragment;
 
 /** Helper to manage a two-state or dropdown preference bound to a global or system setting. */
 public class SettingPref {

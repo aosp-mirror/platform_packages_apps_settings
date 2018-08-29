@@ -20,12 +20,12 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
-
-import androidx.annotation.VisibleForTesting;
 
 /** Provides a dialog for changing the display name of a remote bluetooth device. */
 public class RemoteDeviceNameDialogFragment extends BluetoothNameDialogFragment {

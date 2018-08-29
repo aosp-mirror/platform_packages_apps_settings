@@ -29,13 +29,13 @@ import android.util.ArraySet;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 
+import androidx.preference.Preference;
+
 import com.android.settingslib.applications.DefaultAppInfo;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
-import androidx.preference.Preference;
 
 public class DefaultBrowserPreferenceController extends DefaultAppPreferenceController {
 

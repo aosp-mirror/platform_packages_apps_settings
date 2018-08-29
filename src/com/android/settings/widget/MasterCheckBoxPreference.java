@@ -22,10 +22,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.settings.R;
 import com.android.settingslib.TwoTargetPreference;
-
-import androidx.preference.PreferenceViewHolder;
 
 /**
  * A custom preference that provides inline checkbox. It has a mandatory field for title, and

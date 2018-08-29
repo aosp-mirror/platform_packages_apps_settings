@@ -24,10 +24,6 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 
-import com.android.settings.homepage.conditional.ConditionListener;
-import com.android.settings.homepage.conditional.ConditionManager;
-import com.android.settings.homepage.conditional.ConditionalCard;
-import com.android.settings.homepage.conditional.ConditionalCardController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;

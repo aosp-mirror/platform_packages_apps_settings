@@ -42,13 +42,13 @@ import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
 import android.widget.Toast;
 
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneFactory;
 import com.android.internal.telephony.TelephonyIntents;
-
-import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
 
 /**
  * Implements the preference screen to enable/disable ICC lock and

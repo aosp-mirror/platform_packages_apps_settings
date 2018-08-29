@@ -33,20 +33,19 @@ import android.content.pm.PackageManager;
 import android.os.RemoteException;
 import android.view.DisplayCutout;
 
+import androidx.preference.ListPreference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.AdditionalMatchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import androidx.preference.ListPreference;
-import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class EmulateDisplayCutoutPreferenceControllerTest {

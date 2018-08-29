@@ -20,11 +20,11 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.app.ColorDisplayController;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-
-import androidx.annotation.VisibleForTesting;
 
 public class ColorModePreferenceController extends BasePreferenceController {
     private static final String TAG = "ColorModePreference";

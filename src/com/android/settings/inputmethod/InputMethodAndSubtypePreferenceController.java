@@ -18,14 +18,14 @@ package com.android.settings.inputmethod;
 
 import android.content.Context;
 
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 import com.android.settingslib.inputmethod.InputMethodAndSubtypeEnablerManagerCompat;
-
-import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceScreen;
 
 public class InputMethodAndSubtypePreferenceController extends BasePreferenceController implements
         LifecycleObserver, OnStart, OnStop {

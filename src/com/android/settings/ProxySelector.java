@@ -38,11 +38,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.SettingsPreferenceFragment.SettingsDialogFragment;
 import com.android.settings.core.InstrumentedFragment;
-
-import androidx.appcompat.app.AlertDialog;
 
 public class ProxySelector extends InstrumentedFragment implements DialogCreatable {
     private static final String TAG = "ProxySelector";

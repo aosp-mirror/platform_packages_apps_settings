@@ -16,9 +16,12 @@
 package com.android.settings.applications.managedomainurls;
 
 import static android.provider.Settings.Global.ENABLE_EPHEMERAL_FEATURE;
+
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 

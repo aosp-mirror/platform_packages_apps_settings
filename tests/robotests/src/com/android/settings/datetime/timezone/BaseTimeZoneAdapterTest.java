@@ -18,6 +18,8 @@ package com.android.settings.datetime.timezone;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Test;
@@ -28,8 +30,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-
-import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class BaseTimeZoneAdapterTest {

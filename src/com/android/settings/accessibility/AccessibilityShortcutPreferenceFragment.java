@@ -28,6 +28,9 @@ import android.provider.Settings;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Switch;
 
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
+
 import com.android.internal.accessibility.AccessibilityShortcutController;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -35,9 +38,6 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 import com.android.settingslib.search.SearchIndexable;
-
-import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
 
 /**
  * Settings page for accessibility shortcut

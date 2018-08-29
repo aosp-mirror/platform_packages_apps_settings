@@ -24,13 +24,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.android.settings.R;
-import com.android.settings.Utils;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.core.content.res.TypedArrayUtils;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
+
+import com.android.settings.R;
+import com.android.settings.Utils;
 
 public class LayoutPreference extends Preference {
 

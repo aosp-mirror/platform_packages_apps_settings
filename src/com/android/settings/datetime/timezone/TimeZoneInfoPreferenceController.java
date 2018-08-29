@@ -25,13 +25,13 @@ import android.icu.util.Calendar;
 import android.icu.util.TimeZone;
 import android.icu.util.TimeZoneTransition;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settingslib.widget.FooterPreference;
 
 import java.util.Date;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 
 public class TimeZoneInfoPreferenceController extends BaseTimeZonePreferenceController {
 

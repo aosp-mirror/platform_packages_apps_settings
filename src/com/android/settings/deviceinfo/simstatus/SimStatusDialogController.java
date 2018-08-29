@@ -44,6 +44,9 @@ import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settingslib.DeviceInfoUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -53,9 +56,6 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.Utils;
 
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.VisibleForTesting;
 
 public class SimStatusDialogController implements LifecycleObserver, OnResume, OnPause {
 

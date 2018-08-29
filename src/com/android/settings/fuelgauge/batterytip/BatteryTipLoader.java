@@ -18,6 +18,8 @@ package com.android.settings.fuelgauge.batterytip;
 
 import android.content.Context;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.fuelgauge.BatteryInfo;
 import com.android.settings.fuelgauge.BatteryUtils;
@@ -36,8 +38,6 @@ import com.android.settingslib.utils.AsyncLoaderCompat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
 
 /**
  * Loader to compute and return a battery tip list. It will always return a full length list even

@@ -19,11 +19,14 @@ package com.android.settings.notification;
 import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_ALARMS;
 import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_REPEAT_CALLERS;
 import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_SCREEN_ON;
+
 import static com.android.settings.notification.ZenOnboardingActivity.ALWAYS_SHOW_THRESHOLD;
 import static com.android.settings.notification.ZenOnboardingActivity
         .PREF_KEY_SUGGESTION_FIRST_DISPLAY_TIME;
 import static com.android.settings.notification.ZenOnboardingActivity.isSuggestionComplete;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;

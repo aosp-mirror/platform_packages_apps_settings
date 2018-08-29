@@ -19,12 +19,12 @@ package com.android.settings.accessibility;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import androidx.preference.ListPreference;
+
 import com.android.internal.app.LocalePicker;
 import com.android.settings.R;
 
 import java.util.List;
-
-import androidx.preference.ListPreference;
 
 /**
  * List preference that allows the user to pick a locale from the list of

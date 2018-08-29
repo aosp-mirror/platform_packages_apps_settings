@@ -21,11 +21,11 @@ import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.widget.ProgressBar;
 
-import com.android.settings.R;
-import com.android.settings.utils.FileSizeFormatter;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
+
+import com.android.settings.R;
+import com.android.settings.utils.FileSizeFormatter;
 
 public class StorageItemPreference extends Preference {
     public int userHandle;

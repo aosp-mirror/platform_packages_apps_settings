@@ -28,14 +28,14 @@ import android.os.UserManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
 
 /**
  * BluetoothSettings is the Settings screen for Bluetooth configuration and

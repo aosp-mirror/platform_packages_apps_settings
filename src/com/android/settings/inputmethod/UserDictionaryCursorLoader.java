@@ -22,12 +22,12 @@ import android.database.MatrixCursor;
 import android.provider.UserDictionary;
 import android.util.ArraySet;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.loader.content.CursorLoader;
+
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.loader.content.CursorLoader;
 
 public class UserDictionaryCursorLoader extends CursorLoader {
 

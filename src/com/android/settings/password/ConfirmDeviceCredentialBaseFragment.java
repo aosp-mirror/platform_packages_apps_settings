@@ -46,15 +46,15 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
+
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.fingerprint.FingerprintUiHelper;
 import com.android.settings.core.InstrumentedFragment;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentManager;
 
 /**
  * Base fragment to be shared for PIN/Pattern/Password confirmation fragments.

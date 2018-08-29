@@ -23,12 +23,12 @@ import android.os.Bundle;
 import android.os.UserManager;
 import android.view.Menu;
 
-import com.android.internal.os.BatteryStatsHelper;
-import com.android.settings.dashboard.DashboardFragment;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
+
+import com.android.internal.os.BatteryStatsHelper;
+import com.android.settings.dashboard.DashboardFragment;
 
 /**
  * Common base class for things that need to show the battery usage graph.

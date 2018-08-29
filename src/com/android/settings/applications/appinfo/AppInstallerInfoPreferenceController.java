@@ -20,12 +20,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.UserManager;
 
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppStoreUtil;
 import com.android.settingslib.applications.AppUtils;
-
-import androidx.preference.Preference;
 
 public class AppInstallerInfoPreferenceController extends AppInfoPreferenceControllerBase {
 

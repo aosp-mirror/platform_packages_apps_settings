@@ -23,8 +23,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 
-import com.android.settings.homepage.conditional.AbnormalRingerConditionController;
-import com.android.settings.homepage.conditional.ConditionManager;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;

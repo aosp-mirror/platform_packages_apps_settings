@@ -11,6 +11,8 @@ import android.speech.tts.TtsEngines;
 import android.util.Log;
 import android.widget.Checkable;
 
+import androidx.preference.PreferenceCategory;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -22,8 +24,6 @@ import com.android.settingslib.search.SearchIndexable;
 
 import java.util.Arrays;
 import java.util.List;
-
-import androidx.preference.PreferenceCategory;
 
 @SearchIndexable
 public class TtsEnginePreferenceFragment extends SettingsPreferenceFragment

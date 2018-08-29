@@ -17,6 +17,7 @@
 package com.android.settings.deviceinfo;
 
 import static android.content.pm.PackageManager.EXTRA_MOVE_ID;
+
 import static com.android.settings.deviceinfo.StorageSettings.TAG;
 
 import android.content.Context;

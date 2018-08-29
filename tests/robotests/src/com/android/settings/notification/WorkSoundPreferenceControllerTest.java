@@ -17,6 +17,7 @@
 package com.android.settings.notification;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
@@ -30,6 +31,11 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.telephony.TelephonyManager;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.TwoStatePreference;
+
 import com.android.settings.DefaultRingtonePreference;
 import com.android.settings.R;
 import com.android.settings.RingtonePreference;
@@ -40,11 +46,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.TwoStatePreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class WorkSoundPreferenceControllerTest {

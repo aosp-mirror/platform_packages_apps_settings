@@ -19,13 +19,13 @@ package com.android.settings.display;
 import android.app.UiModeManager;
 import android.content.Context;
 
-import com.android.settings.R;
-import com.android.settings.core.BasePreferenceController;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+
+import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 
 public class DarkUIPreferenceController extends BasePreferenceController
         implements Preference.OnPreferenceChangeListener {

@@ -20,7 +20,6 @@ import static android.provider.Settings.Secure.DOZE_REACH_GESTURE;
 
 import android.annotation.UserIdInt;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;

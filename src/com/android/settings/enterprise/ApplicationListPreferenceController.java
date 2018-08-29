@@ -20,6 +20,9 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.util.IconDrawableFactory;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.UserAppInfo;
@@ -28,9 +31,6 @@ import com.android.settings.widget.AppPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 /**
  * PreferenceController that builds a dynamic list of applications provided by

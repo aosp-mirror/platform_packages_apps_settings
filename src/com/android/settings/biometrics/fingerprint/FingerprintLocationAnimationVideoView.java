@@ -29,9 +29,9 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 
-import com.android.settings.R;
-
 import androidx.annotation.VisibleForTesting;
+
+import com.android.settings.R;
 
 /**
  * A view containing a VideoView for showing the user how to enroll a fingerprint

@@ -26,11 +26,11 @@ import android.view.View;
 import android.widget.CheckedTextView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog.Builder;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.CustomDialogPreferenceCompat;
-
-import androidx.appcompat.app.AlertDialog.Builder;
 
 public class BugreportPreference extends CustomDialogPreferenceCompat {
 

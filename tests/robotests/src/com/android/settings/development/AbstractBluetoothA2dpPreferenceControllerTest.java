@@ -18,6 +18,7 @@ package com.android.settings.development;
 
 import static com.android.settings.development.AbstractBluetoothA2dpPreferenceController
         .STREAMING_LABEL_ID;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -30,6 +31,10 @@ import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothCodecConfig;
 import android.content.Context;
 
+import androidx.lifecycle.LifecycleOwner;
+import androidx.preference.ListPreference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -39,10 +44,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-
-import androidx.lifecycle.LifecycleOwner;
-import androidx.preference.ListPreference;
-import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class AbstractBluetoothA2dpPreferenceControllerTest {

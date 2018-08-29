@@ -20,11 +20,11 @@ import android.content.Context;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.BasePreferenceController;
-
-import androidx.preference.Preference;
 
 /**
  * Controller for the remove button.

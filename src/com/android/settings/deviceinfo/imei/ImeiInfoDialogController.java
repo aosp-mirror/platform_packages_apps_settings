@@ -27,13 +27,13 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.TtsSpan;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.R;
 
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.VisibleForTesting;
 
 public class ImeiInfoDialogController {
 

@@ -19,12 +19,12 @@ package com.android.settings.security.screenlock;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 
+import androidx.preference.Preference;
+import androidx.preference.TwoStatePreference;
+
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
-
-import androidx.preference.Preference;
-import androidx.preference.TwoStatePreference;
 
 public class PatternVisiblePreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {

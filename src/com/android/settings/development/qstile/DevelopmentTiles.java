@@ -34,12 +34,12 @@ import android.view.View;
 import android.view.WindowManagerGlobal;
 import android.widget.Toast;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.app.LocalePicker;
 import com.android.internal.statusbar.IStatusBarService;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.development.SystemPropPoker;
-
-import androidx.annotation.VisibleForTesting;
 
 public abstract class DevelopmentTiles extends TileService {
     private static final String TAG = "DevelopmentTiles";

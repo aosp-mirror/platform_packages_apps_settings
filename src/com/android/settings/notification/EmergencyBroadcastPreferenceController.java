@@ -21,13 +21,13 @@ import android.content.pm.PackageManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+
 import com.android.settings.accounts.AccountRestrictionHelper;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 
 /**
  * Base class for preference controller that handles preference that enforce adjust volume

@@ -18,6 +18,7 @@ package com.android.settings.development;
 
 import static com.android.settings.development.HardwareOverlaysPreferenceController
         .SURFACE_FLINGER_READ_CODE;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.eq;
@@ -32,6 +33,9 @@ import android.content.Context;
 import android.os.IBinder;
 import android.os.RemoteException;
 
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowParcel;
 
@@ -42,9 +46,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
-
-import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class HardwareOverlaysPreferenceControllerTest {

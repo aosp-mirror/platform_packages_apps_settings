@@ -17,6 +17,8 @@ package com.android.settings.wifi;
 
 import android.content.Context;
 
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.MasterSwitchController;
@@ -29,8 +31,6 @@ import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
-
-import androidx.preference.PreferenceScreen;
 
 public class WifiMasterSwitchPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, SummaryUpdater.OnSummaryChangeListener,

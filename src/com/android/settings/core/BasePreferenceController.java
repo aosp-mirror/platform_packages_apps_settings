@@ -19,6 +19,9 @@ import android.content.IntentFilter;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.slices.SliceData;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -28,9 +31,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 /**
  * Abstract class to consolidate utility between preference controllers and act as an interface

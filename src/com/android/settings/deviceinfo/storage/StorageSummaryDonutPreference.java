@@ -26,13 +26,13 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.DonutView;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 
 /**
  * StorageSummaryDonutPreference is a preference which summarizes the used and remaining storage left

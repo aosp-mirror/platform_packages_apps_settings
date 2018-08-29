@@ -18,6 +18,7 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.accessibilityservice.AccessibilityServiceInfo;

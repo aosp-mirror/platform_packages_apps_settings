@@ -30,6 +30,10 @@ import android.util.Pair;
 import android.util.TypedValue;
 import android.widget.ImageView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
@@ -37,10 +41,6 @@ import com.android.settings.widget.GearPreference;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 
 /**
  * BluetoothDevicePreference is the preference type used to display each remote

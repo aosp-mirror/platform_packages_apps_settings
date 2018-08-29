@@ -20,6 +20,10 @@ import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.DeviceInfoUtils;
@@ -27,10 +31,6 @@ import com.android.settingslib.DeviceInfoUtils;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
-
-import androidx.fragment.app.Fragment;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 public class DeviceModelPreferenceController extends BasePreferenceController {
 

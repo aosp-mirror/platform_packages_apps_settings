@@ -20,11 +20,11 @@ package com.android.settings.backup;
 import android.content.Context;
 import android.content.Intent;
 
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 public class BackupSettingsPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {

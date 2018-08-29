@@ -21,11 +21,11 @@ import android.database.ContentObserver;
 import android.net.Uri;
 import android.provider.Settings;
 
+import androidx.annotation.MainThread;
+
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.List;
-
-import androidx.annotation.MainThread;
 
 public abstract class AssistSettingObserver extends ContentObserver {
 

@@ -36,13 +36,13 @@ import android.text.style.RelativeSizeSpan;
 import android.util.AttributeSet;
 import android.view.View;
 
+import androidx.annotation.ColorRes;
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
 
 import java.util.Locale;
-
-import androidx.annotation.ColorRes;
-import androidx.annotation.VisibleForTesting;
 
 /**
  * DonutView represents a donut graph. It visualizes a certain percentage of fullness with a

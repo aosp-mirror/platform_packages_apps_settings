@@ -41,6 +41,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.preference.Preference;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -51,9 +54,6 @@ import com.google.android.collect.Lists;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.preference.Preference;
 
 public class AccountSyncSettings extends AccountPreferenceBase {
 

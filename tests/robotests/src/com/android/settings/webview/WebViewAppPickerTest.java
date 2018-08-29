@@ -17,7 +17,9 @@
 package com.android.settings.webview;
 
 import static android.provider.Settings.ACTION_WEBVIEW_SETTINGS;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
@@ -40,6 +42,8 @@ import android.content.pm.UserInfo;
 import android.os.UserManager;
 import android.webkit.UserPackage;
 
+import androidx.fragment.app.FragmentActivity;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.RadioButtonPreference;
 import com.android.settingslib.applications.DefaultAppInfo;
@@ -56,8 +60,6 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.Arrays;
 import java.util.Collections;
-
-import androidx.fragment.app.FragmentActivity;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class WebViewAppPickerTest {

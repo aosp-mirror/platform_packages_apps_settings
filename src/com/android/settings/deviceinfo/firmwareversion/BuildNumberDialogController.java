@@ -19,9 +19,9 @@ package com.android.settings.deviceinfo.firmwareversion;
 import android.os.Build;
 import android.text.BidiFormatter;
 
-import com.android.settings.R;
-
 import androidx.annotation.VisibleForTesting;
+
+import com.android.settings.R;
 
 public class BuildNumberDialogController {
 

@@ -52,6 +52,7 @@ import static com.android.settings.applications.manageapplications.ManageApplica
         .LIST_TYPE_USAGE_ACCESS;
 import static com.android.settings.applications.manageapplications.ManageApplications
         .LIST_TYPE_WRITE_SETTINGS;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

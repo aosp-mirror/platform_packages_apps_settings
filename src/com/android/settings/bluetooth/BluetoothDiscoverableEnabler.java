@@ -26,10 +26,10 @@ import android.os.Handler;
 import android.os.SystemProperties;
 import android.util.Log;
 
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settingslib.bluetooth.BluetoothDiscoverableTimeoutReceiver;
-
-import androidx.preference.Preference;
 
 /**
  * BluetoothDiscoverableEnabler is a helper to manage the "Discoverable"

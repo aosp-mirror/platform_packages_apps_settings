@@ -17,6 +17,7 @@
 package com.android.settings.fuelgauge.batterysaver;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
@@ -24,6 +25,8 @@ import static org.mockito.Mockito.spy;
 import android.content.Context;
 import android.os.PowerManager;
 import android.widget.Button;
+
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.TwoStateButtonPreference;
@@ -37,8 +40,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowPowerManager;
 import org.robolectric.util.ReflectionHelpers;
-
-import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowPowerManager.class)

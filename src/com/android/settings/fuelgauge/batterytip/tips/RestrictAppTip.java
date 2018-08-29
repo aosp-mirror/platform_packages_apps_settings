@@ -22,6 +22,8 @@ import android.icu.text.ListFormatter;
 import android.os.Parcel;
 import android.util.Pair;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -30,8 +32,6 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
 
 /**
  * Tip to suggest user to restrict some bad apps

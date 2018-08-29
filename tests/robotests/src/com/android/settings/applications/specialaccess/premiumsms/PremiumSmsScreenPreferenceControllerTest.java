@@ -17,7 +17,9 @@
 package com.android.settings.applications.specialaccess.premiumsms;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;

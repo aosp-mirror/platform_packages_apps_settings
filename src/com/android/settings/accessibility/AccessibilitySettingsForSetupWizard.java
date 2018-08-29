@@ -24,13 +24,13 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.accessibility.AccessibilityManager;
 
+import androidx.preference.Preference;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
 import java.util.List;
-
-import androidx.preference.Preference;
 
 /**
  * Activity with the accessibility settings specific to Setup Wizard.

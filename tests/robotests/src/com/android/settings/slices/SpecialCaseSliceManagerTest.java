@@ -28,14 +28,14 @@ import android.content.IntentFilter;
 import android.net.Uri;
 import android.provider.SettingsSlicesContract;
 
+import androidx.slice.Slice;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-
-import androidx.slice.Slice;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SpecialCaseSliceManagerTest {

@@ -16,6 +16,7 @@
 package com.android.settings.connecteddevice;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -28,6 +29,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.text.BidiFormatter;
 import android.text.TextUtils;
+
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.bluetooth.AlwaysDiscoverable;
@@ -51,8 +54,6 @@ import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowBluetoothPan.class, ShadowBluetoothAdapter.class})

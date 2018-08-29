@@ -35,10 +35,10 @@ import android.util.SparseIntArray;
 import android.util.TypedValue;
 import android.view.View;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settingslib.R;
-
-import androidx.annotation.VisibleForTesting;
 
 public class UsageGraph extends View {
 

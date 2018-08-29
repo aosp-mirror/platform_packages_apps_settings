@@ -26,6 +26,8 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 
+import androidx.preference.PreferenceGroup;
+
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsImpl;
 import com.android.settings.R;
@@ -40,8 +42,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-
-import androidx.preference.PreferenceGroup;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class BatteryAppListPreferenceControllerTest {

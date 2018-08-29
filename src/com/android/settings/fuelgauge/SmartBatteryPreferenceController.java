@@ -21,11 +21,11 @@ import android.content.Context;
 import android.provider.Settings;
 import android.text.TextUtils;
 
-import com.android.settings.core.BasePreferenceController;
-import com.android.settings.overlay.FeatureFactory;
-
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
+
+import com.android.settings.core.BasePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
 
 /**
  * Controller to change and update the smart battery toggle

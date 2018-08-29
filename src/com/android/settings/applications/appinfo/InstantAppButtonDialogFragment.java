@@ -22,12 +22,12 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.overlay.FeatureFactory;
-
-import androidx.appcompat.app.AlertDialog;
 
 /**
  * Fragment to show the dialog for clearing the instant app.

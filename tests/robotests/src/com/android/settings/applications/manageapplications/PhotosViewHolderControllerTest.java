@@ -17,6 +17,7 @@
 package com.android.settings.applications.manageapplications;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.nullable;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -29,6 +30,8 @@ import android.text.format.Formatter;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import androidx.fragment.app.Fragment;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.StorageStatsSource;
 
@@ -40,8 +43,6 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-
-import androidx.fragment.app.Fragment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class PhotosViewHolderControllerTest {

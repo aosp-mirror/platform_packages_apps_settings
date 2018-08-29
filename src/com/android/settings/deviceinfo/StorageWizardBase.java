@@ -18,6 +18,7 @@ package com.android.settings.deviceinfo;
 
 import static android.os.storage.DiskInfo.EXTRA_DISK_ID;
 import static android.os.storage.VolumeInfo.EXTRA_VOLUME_ID;
+
 import static com.android.settings.deviceinfo.StorageSettings.TAG;
 
 import android.annotation.LayoutRes;
@@ -39,6 +40,8 @@ import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.fragment.app.FragmentActivity;
+
 import com.android.settings.R;
 import com.android.settingslib.Utils;
 import com.android.setupwizardlib.GlifLayout;
@@ -46,8 +49,6 @@ import com.android.setupwizardlib.GlifLayout;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Objects;
-
-import androidx.fragment.app.FragmentActivity;
 
 public abstract class StorageWizardBase extends FragmentActivity {
     protected static final String EXTRA_FORMAT_FORGET_UUID = "format_forget_uuid";

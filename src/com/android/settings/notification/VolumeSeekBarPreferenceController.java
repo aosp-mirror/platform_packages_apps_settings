@@ -18,13 +18,13 @@ package com.android.settings.notification;
 
 import android.content.Context;
 
-import com.android.settings.notification.VolumeSeekBarPreference.Callback;
-import com.android.settingslib.core.lifecycle.Lifecycle;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.PreferenceScreen;
+
+import com.android.settings.notification.VolumeSeekBarPreference.Callback;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 /**
  * Base class for preference controller that handles VolumeSeekBarPreference

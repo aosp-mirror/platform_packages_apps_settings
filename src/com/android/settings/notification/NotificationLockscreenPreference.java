@@ -30,13 +30,13 @@ import android.widget.CompoundButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog.Builder;
+
 import com.android.settings.R;
 import com.android.settings.RestrictedListPreference;
 import com.android.settings.Utils;
 import com.android.settingslib.RestrictedLockUtils;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AlertDialog.Builder;
 
 public class NotificationLockscreenPreference extends RestrictedListPreference {
 

@@ -25,13 +25,13 @@ import android.net.Uri;
 import android.os.Binder;
 import android.util.Pair;
 
+import androidx.slice.Slice;
+
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.SlicesDatabaseHelper.IndexColumns;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.slice.Slice;
 
 /**
  * Class used to map a {@link Uri} from {@link SettingsSliceProvider} to a Slice.

@@ -17,6 +17,7 @@
 package com.android.settings.development;
 
 import static com.android.settings.development.KeepActivitiesPreferenceController.SETTING_VALUE_OFF;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -27,6 +28,9 @@ import android.content.Context;
 import android.os.RemoteException;
 import android.provider.Settings;
 
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -35,9 +39,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-
-import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class KeepActivitiesPreferenceControllerTest {

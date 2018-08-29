@@ -19,13 +19,13 @@ package com.android.settings.development;
 import android.content.Context;
 import android.os.SystemProperties;
 
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.development.DeveloperOptionsPreferenceController;
-import com.android.settingslib.development.SystemPropPoker;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
+
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.development.DeveloperOptionsPreferenceController;
+import com.android.settingslib.development.SystemPropPoker;
 
 public class ForceMSAAPreferenceController extends DeveloperOptionsPreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {

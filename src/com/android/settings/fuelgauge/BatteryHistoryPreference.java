@@ -21,13 +21,13 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 
-import com.android.internal.os.BatteryStatsHelper;
-import com.android.settings.R;
-import com.android.settings.widget.UsageView;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
+
+import com.android.internal.os.BatteryStatsHelper;
+import com.android.settings.R;
+import com.android.settings.widget.UsageView;
 
 /**
  * Custom preference for displaying power consumption as a bar and an icon on the left for the

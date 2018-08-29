@@ -21,12 +21,12 @@ import android.content.SharedPreferences;
 import android.provider.Settings;
 import android.util.SparseArray;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 
 import java.util.concurrent.TimeUnit;
-
-import androidx.annotation.VisibleForTesting;
 
 public class CachedStorageValuesHelper {
 

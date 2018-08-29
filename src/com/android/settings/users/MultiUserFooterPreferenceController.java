@@ -18,13 +18,13 @@ package com.android.settings.users;
 
 import android.content.Context;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.FooterPreferenceMixinCompat;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 
 public class MultiUserFooterPreferenceController extends BasePreferenceController {
 

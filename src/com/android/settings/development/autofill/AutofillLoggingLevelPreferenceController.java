@@ -22,12 +22,12 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.autofill.AutofillManager;
 
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
-
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
 
 public final class AutofillLoggingLevelPreferenceController
         extends DeveloperOptionsPreferenceController

@@ -29,13 +29,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
-
-import androidx.annotation.VisibleForTesting;
 
 public class ZenOnboardingActivity extends Activity {
 

@@ -32,6 +32,10 @@ import android.provider.SettingsSlicesContract;
 import android.util.Log;
 import android.util.SparseArray;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
 import com.android.settings.R;
@@ -44,10 +48,6 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 
 public class VpnPreferenceController extends AbstractPreferenceController

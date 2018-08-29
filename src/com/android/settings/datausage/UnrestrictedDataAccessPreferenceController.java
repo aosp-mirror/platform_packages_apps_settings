@@ -19,6 +19,10 @@ import android.app.Application;
 import android.content.Context;
 import android.os.UserHandle;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.AppStateBaseBridge;
@@ -37,10 +41,6 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.TreeSet;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 
 public class UnrestrictedDataAccessPreferenceController extends BasePreferenceController implements

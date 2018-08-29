@@ -21,6 +21,8 @@ import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.service.vr.VrListenerService;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
@@ -31,8 +33,6 @@ import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
 
 @SearchIndexable
 public class VrListenerSettings extends ManagedServiceSettings {

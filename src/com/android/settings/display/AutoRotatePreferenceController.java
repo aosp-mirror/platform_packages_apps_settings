@@ -16,6 +16,8 @@ package com.android.settings.display;
 import android.content.Context;
 import android.text.TextUtils;
 
+import androidx.preference.Preference;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.view.RotationPolicy;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -25,8 +27,6 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
-
-import androidx.preference.Preference;
 
 public class AutoRotatePreferenceController extends TogglePreferenceController implements
         PreferenceControllerMixin, Preference.OnPreferenceChangeListener, LifecycleObserver,

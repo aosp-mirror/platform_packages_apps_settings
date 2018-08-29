@@ -25,6 +25,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+
 import com.android.internal.app.procstats.ProcessStats;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -34,9 +37,6 @@ import com.android.settings.applications.ProcStatsData.MemInfo;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
 
 public class ProcessStatsUi extends ProcessStatsBase {
     static final String TAG = "ProcessStatsUi";

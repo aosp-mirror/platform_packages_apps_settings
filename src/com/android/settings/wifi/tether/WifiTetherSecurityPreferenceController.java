@@ -3,10 +3,10 @@ package com.android.settings.wifi.tether;
 import android.content.Context;
 import android.net.wifi.WifiConfiguration;
 
-import com.android.settings.R;
-
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
+
+import com.android.settings.R;
 
 public class WifiTetherSecurityPreferenceController extends WifiTetherBasePreferenceController {
 

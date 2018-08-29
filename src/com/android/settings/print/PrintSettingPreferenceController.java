@@ -25,6 +25,9 @@ import android.print.PrintJobInfo;
 import android.print.PrintManager;
 import android.printservice.PrintServiceInfo;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.RestrictedPreference;
@@ -33,9 +36,6 @@ import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import java.util.List;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 /**
  * {@link BasePreferenceController} for Print settings.

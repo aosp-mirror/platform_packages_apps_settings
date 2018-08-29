@@ -27,11 +27,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 
-import java.util.List;
-
 import androidx.core.view.ViewCompat;
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import androidx.customview.widget.ExploreByTouchHelper;
+
+import java.util.List;
 
 /**
  * LabeledSeekBar represent a seek bar assigned with labeled, discrete values.

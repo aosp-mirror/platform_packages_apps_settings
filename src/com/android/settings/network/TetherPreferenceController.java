@@ -16,6 +16,7 @@
 package com.android.settings.network;
 
 import static android.os.UserManager.DISALLOW_CONFIG_TETHERING;
+
 import static com.android.settingslib.RestrictedLockUtils.checkIfRestrictionEnforced;
 
 import android.bluetooth.BluetoothAdapter;
@@ -33,6 +34,10 @@ import android.os.Handler;
 import android.os.UserHandle;
 import android.provider.Settings;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.TetherSettings;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -46,10 +51,6 @@ import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.concurrent.atomic.AtomicReference;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 public class TetherPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin, LifecycleObserver, OnCreate, OnResume, OnPause, OnDestroy {

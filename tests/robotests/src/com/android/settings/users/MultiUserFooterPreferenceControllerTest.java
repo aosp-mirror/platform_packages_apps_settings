@@ -18,6 +18,7 @@ package com.android.settings.users;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
 import static com.android.settings.core.BasePreferenceController.DISABLED_FOR_USER;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;

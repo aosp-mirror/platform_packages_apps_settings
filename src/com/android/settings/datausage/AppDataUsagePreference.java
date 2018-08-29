@@ -18,13 +18,13 @@ import android.content.Context;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.settings.widget.AppPreference;
 import com.android.settingslib.AppItem;
 import com.android.settingslib.net.UidDetail;
 import com.android.settingslib.net.UidDetailProvider;
 import com.android.settingslib.utils.ThreadUtils;
-
-import androidx.preference.PreferenceViewHolder;
 
 public class AppDataUsagePreference extends AppPreference {
 

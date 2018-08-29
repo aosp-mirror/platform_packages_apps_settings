@@ -19,9 +19,9 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
-import com.android.settings.R;
-
 import androidx.annotation.VisibleForTesting;
+
+import com.android.settings.R;
 
 /**
  * A {@link FrameLayout} with customizable aspect ratio.

@@ -31,6 +31,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.internal.app.LocalePicker;
 import com.android.internal.app.LocaleStore;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -40,9 +43,6 @@ import com.android.settings.RestrictedSettingsFragment;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Drag-and-drop editor for the user-ordered locale lists.

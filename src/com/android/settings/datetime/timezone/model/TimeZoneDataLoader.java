@@ -19,10 +19,10 @@ package com.android.settings.datetime.timezone.model;
 import android.content.Context;
 import android.os.Bundle;
 
-import com.android.settingslib.utils.AsyncLoaderCompat;
-
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
+
+import com.android.settingslib.utils.AsyncLoaderCompat;
 
 public class TimeZoneDataLoader extends AsyncLoaderCompat<TimeZoneData> {
 

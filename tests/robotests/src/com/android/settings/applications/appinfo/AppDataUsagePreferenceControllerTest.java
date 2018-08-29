@@ -17,6 +17,7 @@
 package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
@@ -33,6 +34,9 @@ import android.net.ConnectivityManager;
 import android.net.INetworkStatsSession;
 import android.os.Bundle;
 
+import androidx.loader.app.LoaderManager;
+import androidx.preference.Preference;
+
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.datausage.AppDataUsage;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -45,9 +49,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
-
-import androidx.loader.app.LoaderManager;
-import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class AppDataUsagePreferenceControllerTest {

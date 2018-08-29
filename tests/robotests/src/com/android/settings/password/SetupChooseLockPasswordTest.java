@@ -17,12 +17,15 @@
 package com.android.settings.password;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.robolectric.RuntimeEnvironment.application;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
 import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
@@ -47,8 +50,6 @@ import org.robolectric.shadows.ShadowDialog;
 
 import java.util.Collections;
 import java.util.List;
-
-import androidx.appcompat.app.AlertDialog;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {

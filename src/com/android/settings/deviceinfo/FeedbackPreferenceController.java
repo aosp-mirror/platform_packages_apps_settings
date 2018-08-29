@@ -19,12 +19,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.DeviceInfoUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
-
-import androidx.fragment.app.Fragment;
-import androidx.preference.Preference;
 
 public class FeedbackPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin {

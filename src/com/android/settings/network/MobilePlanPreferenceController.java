@@ -19,6 +19,7 @@ import static android.content.Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT;
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static android.os.UserHandle.myUserId;
 import static android.os.UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS;
+
 import static com.android.settingslib.RestrictedLockUtils.hasBaseUserRestriction;
 
 import android.content.ActivityNotFoundException;
@@ -34,6 +35,8 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.Utils;
@@ -43,8 +46,6 @@ import com.android.settingslib.core.lifecycle.events.OnCreate;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 
 import java.util.List;
-
-import androidx.preference.Preference;
 
 
 public class MobilePlanPreferenceController extends AbstractPreferenceController

@@ -24,12 +24,12 @@ import android.os.Looper;
 import android.util.AttributeSet;
 import android.view.Display;
 
+import androidx.preference.SwitchPreference;
+
 import com.android.settings.R;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.preference.SwitchPreference;
 
 public class ColorModePreference extends SwitchPreference implements DisplayListener {
 

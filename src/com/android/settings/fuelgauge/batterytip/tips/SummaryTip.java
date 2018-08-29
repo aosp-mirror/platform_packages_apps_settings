@@ -20,11 +20,11 @@ import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-
-import androidx.annotation.VisibleForTesting;
 
 /**
  * Tip to show general summary about battery life

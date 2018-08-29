@@ -32,6 +32,10 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.IconDrawableFactory;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
+
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
@@ -42,10 +46,6 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 
 import java.util.List;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
 public class TrustAgentsPreferenceController extends BasePreferenceController
         implements Preference.OnPreferenceChangeListener, LifecycleObserver, OnStart {

@@ -18,10 +18,10 @@ import android.content.Context;
 import android.os.UserManager;
 import android.util.AttributeSet;
 
+import androidx.preference.PreferenceCategory;
+
 import com.android.settings.SelfAvailablePreference;
 import com.android.settings.Utils;
-
-import androidx.preference.PreferenceCategory;
 
 /**
  * A PreferenceCategory that is only visible when the device has a work profile.

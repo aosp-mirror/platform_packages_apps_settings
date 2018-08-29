@@ -19,12 +19,12 @@ import android.content.Context;
 import android.os.SystemProperties;
 import android.text.TextUtils;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 public class FccEquipmentIdPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin {

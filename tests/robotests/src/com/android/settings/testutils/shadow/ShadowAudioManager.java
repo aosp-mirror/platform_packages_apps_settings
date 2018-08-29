@@ -24,6 +24,7 @@ import static android.media.AudioManager.STREAM_NOTIFICATION;
 import static android.media.AudioManager.STREAM_RING;
 import static android.media.AudioManager.STREAM_SYSTEM;
 import static android.media.AudioManager.STREAM_VOICE_CALL;
+
 import static org.robolectric.RuntimeEnvironment.application;
 
 import android.media.AudioDeviceCallback;

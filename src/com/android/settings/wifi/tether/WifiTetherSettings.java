@@ -30,6 +30,8 @@ import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -44,8 +46,6 @@ import com.android.settingslib.search.SearchIndexable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
 
 @SearchIndexable
 public class WifiTetherSettings extends RestrictedDashboardFragment

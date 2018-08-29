@@ -20,9 +20,9 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 
-import com.android.settings.core.BasePreferenceController;
-
 import androidx.preference.Preference;
+
+import com.android.settings.core.BasePreferenceController;
 
 public class InstantAppAccountPreferenceController extends BasePreferenceController {
 

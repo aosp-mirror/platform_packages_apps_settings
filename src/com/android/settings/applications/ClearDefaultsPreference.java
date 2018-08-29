@@ -33,13 +33,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.android.settings.R;
-import com.android.settingslib.applications.AppUtils;
-import com.android.settingslib.applications.ApplicationsState;
-
 import androidx.core.content.res.TypedArrayUtils;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
+
+import com.android.settings.R;
+import com.android.settingslib.applications.AppUtils;
+import com.android.settingslib.applications.ApplicationsState;
 
 public class ClearDefaultsPreference extends Preference {
 

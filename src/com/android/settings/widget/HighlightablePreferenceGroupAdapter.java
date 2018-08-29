@@ -30,15 +30,15 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 
-import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceGroupAdapter;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 
 public class HighlightablePreferenceGroupAdapter extends PreferenceGroupAdapter {
 

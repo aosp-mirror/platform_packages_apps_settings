@@ -25,9 +25,9 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 
-import com.android.internal.hardware.AmbientDisplayConfiguration;
-
 import androidx.annotation.VisibleForTesting;
+
+import com.android.internal.hardware.AmbientDisplayConfiguration;
 
 public class DoubleTapScreenPreferenceController extends GesturePreferenceController {
 

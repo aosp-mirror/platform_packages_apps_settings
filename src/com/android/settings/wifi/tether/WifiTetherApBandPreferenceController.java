@@ -21,11 +21,11 @@ import android.content.res.Resources;
 import android.net.wifi.WifiConfiguration;
 import android.util.Log;
 
-import com.android.settings.R;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
+
+import com.android.settings.R;
 
 public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferenceController {
 

@@ -21,6 +21,10 @@ import android.net.Uri;
 import android.os.UserHandle;
 import android.provider.Settings;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.TwoStatePreference;
+
 import com.android.internal.app.AssistUtils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -31,10 +35,6 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.Arrays;
 import java.util.List;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.TwoStatePreference;
 
 public class AssistScreenshotPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener,

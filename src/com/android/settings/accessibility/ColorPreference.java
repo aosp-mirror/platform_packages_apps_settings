@@ -26,9 +26,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.settings.R;
-
 import androidx.preference.PreferenceViewHolder;
+
+import com.android.settings.R;
 
 /**
  * Grid preference that allows the user to pick a color from a predefined set of

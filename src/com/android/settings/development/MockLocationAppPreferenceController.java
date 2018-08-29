@@ -28,13 +28,13 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.text.TextUtils;
 
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 import java.util.List;
-
-import androidx.preference.Preference;
 
 public class MockLocationAppPreferenceController extends DeveloperOptionsPreferenceController
         implements PreferenceControllerMixin, OnActivityResultListener {

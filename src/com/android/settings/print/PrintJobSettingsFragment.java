@@ -35,13 +35,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.preference.Preference;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
 import java.text.DateFormat;
-
-import androidx.preference.Preference;
 
 /**
  * Fragment for management of a print job.

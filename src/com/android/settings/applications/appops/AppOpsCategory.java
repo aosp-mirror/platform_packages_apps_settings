@@ -34,15 +34,15 @@ import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.android.settings.R;
-import com.android.settings.applications.appops.AppOpsState.AppOpEntry;
-
-import java.util.List;
-
 import androidx.fragment.app.ListFragment;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.AsyncTaskLoader;
 import androidx.loader.content.Loader;
+
+import com.android.settings.R;
+import com.android.settings.applications.appops.AppOpsState.AppOpEntry;
+
+import java.util.List;
 
 public class AppOpsCategory extends ListFragment implements
         LoaderManager.LoaderCallbacks<List<AppOpEntry>> {

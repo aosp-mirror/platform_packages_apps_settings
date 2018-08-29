@@ -40,12 +40,12 @@ import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.settings.R;
 import com.android.settingslib.wifi.AccessPoint;
 
 import java.io.IOException;
-
-import androidx.appcompat.app.AlertDialog;
 
 class WriteWifiConfigToNfcDialog extends AlertDialog
         implements TextWatcher, View.OnClickListener, CompoundButton.OnCheckedChangeListener {

@@ -20,10 +20,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 
-import com.android.settings.R;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
+
+import com.android.settings.R;
 
 public class SpinnerPreference extends Preference implements CycleAdapter.SpinnerInterface {
 

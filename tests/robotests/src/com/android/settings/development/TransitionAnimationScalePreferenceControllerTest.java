@@ -20,6 +20,7 @@ import static com.android.settings.development.TransitionAnimationScalePreferenc
         .DEFAULT_VALUE;
 import static com.android.settings.development.TransitionAnimationScalePreferenceController
         .TRANSITION_ANIMATION_SCALE_SELECTOR;
+
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -27,6 +28,9 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.os.RemoteException;
 import android.view.IWindowManager;
+
+import androidx.preference.ListPreference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -38,9 +42,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
-
-import androidx.preference.ListPreference;
-import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class TransitionAnimationScalePreferenceControllerTest {

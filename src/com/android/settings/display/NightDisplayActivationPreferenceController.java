@@ -22,13 +22,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.internal.app.ColorDisplayController;
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.TogglePreferenceController;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 public class NightDisplayActivationPreferenceController extends TogglePreferenceController {
 

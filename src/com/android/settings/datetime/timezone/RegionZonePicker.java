@@ -23,6 +23,9 @@ import android.icu.util.TimeZone;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.datetime.timezone.model.FilteredCountryTimeZones;
@@ -35,9 +38,6 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.TreeSet;
-
-import androidx.annotation.Nullable;
-import androidx.annotation.VisibleForTesting;
 
 /**
  * Given a region, render a list of time zone {@class TimeZoneInfo} into a list view.

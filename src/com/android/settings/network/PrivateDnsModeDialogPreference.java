@@ -40,6 +40,9 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
@@ -49,9 +52,6 @@ import com.android.settingslib.HelpUtils;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.appcompat.app.AlertDialog;
 
 /**
  * Dialog to set the Private DNS

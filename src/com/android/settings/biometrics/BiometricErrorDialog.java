@@ -25,9 +25,9 @@ import android.content.DialogInterface;
 import android.hardware.biometrics.BiometricConstants;
 import android.os.Bundle;
 
-import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-
 import androidx.appcompat.app.AlertDialog;
+
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 /**
  * Abstract dialog, shown when an error occurs during biometric enrollment.

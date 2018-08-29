@@ -17,11 +17,14 @@
 package com.android.settings.widget;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.anyBoolean;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import androidx.preference.PreferenceScreen;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,8 +33,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-
-import androidx.preference.PreferenceScreen;
 
 @RunWith(RobolectricTestRunner.class)
 public class VideoPreferenceControllerTest {

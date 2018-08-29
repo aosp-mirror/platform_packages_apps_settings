@@ -17,6 +17,7 @@
 package com.android.settings.datausage;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyString;
@@ -29,6 +30,8 @@ import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.net.NetworkPolicyManager;
+
+import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -46,8 +49,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
-
-import androidx.fragment.app.FragmentActivity;
 
 @Config(shadows = {
     SettingsShadowResourcesImpl.class,

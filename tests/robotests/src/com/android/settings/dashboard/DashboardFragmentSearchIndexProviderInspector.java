@@ -18,6 +18,8 @@ package com.android.settings.dashboard;
 
 import android.content.Context;
 
+import androidx.fragment.app.Fragment;
+
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerListHelper;
 import com.android.settings.search.DatabaseIndexingUtils;
@@ -27,8 +29,6 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.List;
-
-import androidx.fragment.app.Fragment;
 
 public class DashboardFragmentSearchIndexProviderInspector {
 

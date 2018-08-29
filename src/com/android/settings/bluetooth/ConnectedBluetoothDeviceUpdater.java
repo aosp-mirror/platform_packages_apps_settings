@@ -21,11 +21,11 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.util.Log;
 
+import androidx.preference.Preference;
+
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-
-import androidx.preference.Preference;
 
 /**
  * Controller to maintain connected bluetooth devices

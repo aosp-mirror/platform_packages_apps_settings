@@ -20,10 +20,10 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.settings.R;
 import com.android.settingslib.RestrictedPreference;
-
-import androidx.preference.PreferenceViewHolder;
 
 /**
  * A preference with a Gear on the side

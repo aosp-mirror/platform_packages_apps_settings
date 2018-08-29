@@ -24,14 +24,14 @@ import android.os.Looper;
 import android.os.Vibrator;
 import android.provider.Settings;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 public abstract class VibrationIntensityPreferenceController extends BasePreferenceController
         implements LifecycleObserver, OnStart, OnStop {

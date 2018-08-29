@@ -38,10 +38,10 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
-
-import androidx.appcompat.app.AlertDialog;
 
 public class SimPreferenceDialog extends Activity {
 

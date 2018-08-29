@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -30,6 +31,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings.Global;
 import android.view.View;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -43,10 +49,6 @@ import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SettingsActivityTest {
