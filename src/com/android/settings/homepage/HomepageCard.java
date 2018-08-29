@@ -65,79 +65,79 @@ public class HomepageCard {
         return mName;
     }
 
-    int getCardType() {
+    public int getCardType() {
         return mCardType;
     }
 
-    double getRankingScore() {
+    public double getRankingScore() {
         return mRankingScore;
     }
 
-    String getTextSliceUri() {
+    public String getTextSliceUri() {
         return mSliceUri;
     }
 
-    Uri getSliceUri() {
+    public Uri getSliceUri() {
         return Uri.parse(mSliceUri);
     }
 
-    int getCategory() {
+    public int getCategory() {
         return mCategory;
     }
 
-    String getLocalizedToLocale() {
+    public String getLocalizedToLocale() {
         return mLocalizedToLocale;
     }
 
-    String getPackageName() {
+    public String getPackageName() {
         return mPackageName;
     }
 
-    String getAppVersion() {
+    public String getAppVersion() {
         return mAppVersion;
     }
 
-    String getTitleResName() {
+    public String getTitleResName() {
         return mTitleResName;
     }
 
-    String getTitleText() {
+    public String getTitleText() {
         return mTitleText;
     }
 
-    String getSummaryResName() {
+    public String getSummaryResName() {
         return mSummaryResName;
     }
 
-    String getSummaryText() {
+    public String getSummaryText() {
         return mSummaryText;
     }
 
-    String getIconResName() {
+    public String getIconResName() {
         return mIconResName;
     }
 
-    int getIconResId() {
+    public int getIconResId() {
         return mIconResId;
     }
 
-    int getCardAction() {
+    public int getCardAction() {
         return mCardAction;
     }
 
-    long getExpireTimeMS() {
+    public long getExpireTimeMS() {
         return mExpireTimeMS;
     }
 
-    Drawable getIconDrawable() {
+    public Drawable getIconDrawable() {
         return mIconDrawable;
     }
 
-    boolean isHalfWidth() {
+    public boolean isHalfWidth() {
         return mIsHalfWidth;
     }
 
-    HomepageCard(Builder builder) {
+    public HomepageCard(Builder builder) {
         mName = builder.mName;
         mCardType = builder.mCardType;
         mRankingScore = builder.mRankingScore;
@@ -179,7 +179,7 @@ public class HomepageCard {
         return TextUtils.equals(mName, that.mName);
     }
 
-    static class Builder {
+    public static class Builder {
         private String mName;
         private int mCardType;
         private double mRankingScore;

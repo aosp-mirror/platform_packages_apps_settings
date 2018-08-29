@@ -18,8 +18,6 @@ package com.android.settings.homepage;
 
 import java.util.List;
 
-//TODO(b/111821137): add test cases
-
 /**
  * Data controller for {@link HomepageCard}.
  */
