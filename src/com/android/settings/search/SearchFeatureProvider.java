@@ -32,6 +32,7 @@ import com.android.settingslib.search.SearchIndexableResources;
 public interface SearchFeatureProvider {
 
     Intent SEARCH_UI_INTENT = new Intent("com.android.settings.action.SETTINGS_SEARCH");
+    int REQUEST_CODE = 0;
 
     /**
      * Ensures the caller has necessary privilege to launch search result page.
@@ -65,7 +66,7 @@ public interface SearchFeatureProvider {
             FeatureFactory.getFactory(
                     activity.getApplicationContext()).getSlicesFeatureProvider()
                     .indexSliceDataAsync(activity.getApplicationContext());
-            activity.startActivityForResult(intent, 0 /* requestCode */);
+            activity.startActivityForResult(intent, REQUEST_CODE);
         });
     }
 }

@@ -63,6 +63,7 @@ import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollFindSensor;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.search.SearchFeatureProvider;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedPreference;
@@ -132,10 +133,14 @@ public class ChooseLockGeneric extends SettingsActivity {
 
         @VisibleForTesting
         static final int CONFIRM_EXISTING_REQUEST = 100;
-        private static final int ENABLE_ENCRYPTION_REQUEST = 101;
-        private static final int CHOOSE_LOCK_REQUEST = 102;
-        private static final int CHOOSE_LOCK_BEFORE_FINGERPRINT_REQUEST = 103;
-        private static final int SKIP_FINGERPRINT_REQUEST = 104;
+        @VisibleForTesting
+        static final int ENABLE_ENCRYPTION_REQUEST = 101;
+        @VisibleForTesting
+        static final int CHOOSE_LOCK_REQUEST = 102;
+        @VisibleForTesting
+        static final int CHOOSE_LOCK_BEFORE_FINGERPRINT_REQUEST = 103;
+        @VisibleForTesting
+        static final int SKIP_FINGERPRINT_REQUEST = 104;
 
         private ChooseLockSettingsHelper mChooseLockSettingsHelper;
         private DevicePolicyManager mDPM;
@@ -401,6 +406,8 @@ public class ChooseLockGeneric extends SettingsActivity {
                             resultCode == RESULT_FINISHED ? RESULT_OK : resultCode, data);
                     finish();
                 }
+            } else if (requestCode == SearchFeatureProvider.REQUEST_CODE) {
+                return;
             } else {
                 getActivity().setResult(Activity.RESULT_CANCELED);
                 finish();
