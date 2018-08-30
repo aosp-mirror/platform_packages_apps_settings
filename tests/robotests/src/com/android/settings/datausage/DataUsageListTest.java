@@ -31,10 +31,12 @@ import android.os.Bundle;
 import android.provider.Settings;
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.preference.PreferenceManager;
 
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.NetworkPolicyEditor;
+import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -68,7 +70,11 @@ public class DataUsageListTest {
 
     @Test
     public void resumePause_shouldListenUnlistenDataStateChange() {
-        mDataUsageList.onAttach(mContext);
+        ReflectionHelpers.setField(
+                mDataUsageList, "mVisibilityLoggerMixin", mock(VisibilityLoggerMixin.class));
+        ReflectionHelpers.setField(
+                mDataUsageList, "mPreferenceManager", mock(PreferenceManager.class));
+
         mDataUsageList.onResume();
 
         verify(mListener).setListener(true, mDataUsageList.mSubId, mContext);
