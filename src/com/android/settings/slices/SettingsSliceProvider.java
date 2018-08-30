@@ -20,6 +20,7 @@ import static android.Manifest.permission.READ_SEARCH_INDEXABLES;
 
 import android.app.slice.SliceManager;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
@@ -36,6 +37,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.slice.Slice;
 import androidx.slice.SliceProvider;
 
+import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothSliceBuilder;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.flashlight.FlashlightSliceBuilder;
@@ -113,6 +115,8 @@ public class SettingsSliceProvider extends SliceProvider {
     public static final String EXTRA_SLICE_PLATFORM_DEFINED =
             "com.android.settings.slice.extra.platform";
 
+    private static final KeyValueListParser KEY_VALUE_LIST_PARSER = new KeyValueListParser(',');
+
     @VisibleForTesting
     CustomSliceManager mCustomSliceManager;
 
@@ -125,13 +129,10 @@ public class SettingsSliceProvider extends SliceProvider {
     @VisibleForTesting
     Map<Uri, SliceData> mSliceDataCache;
 
-    private final KeyValueListParser mParser;
-
     final Set<Uri> mRegisteredUris = new ArraySet<>();
 
     public SettingsSliceProvider() {
         super(READ_SEARCH_INDEXABLES);
-        mParser = new KeyValueListParser(',');
     }
 
     @Override
@@ -151,6 +152,7 @@ public class SettingsSliceProvider extends SliceProvider {
                     SliceDeepLinkSpringBoard.parse(
                             intent.getData(), getContext().getPackageName()));
         } catch (URISyntaxException e) {
+            Log.e(TAG, "Uri syntax error, can't map intent to uri.", e);
             return null;
         }
     }
@@ -319,7 +321,31 @@ public class SettingsSliceProvider extends SliceProvider {
         final List<String> keys = mSlicesDatabaseAccessor.getSliceKeys(isPlatformUri);
         descendants.addAll(buildUrisFromKeys(keys, authority));
         descendants.addAll(getSpecialCaseUris(isPlatformUri));
+        grantWhitelistedPackagePermissions(getContext(), descendants);
         return descendants;
+    }
+
+    @VisibleForTesting
+    static void grantWhitelistedPackagePermissions(Context context, List<Uri> descendants) {
+        if (descendants == null) {
+            Log.d(TAG, "No descendants to grant permission with, skipping.");
+        }
+        final String[] whitelistPackages =
+                context.getResources().getStringArray(R.array.slice_whitelist_package_names);
+        if (whitelistPackages == null || whitelistPackages.length == 0) {
+            Log.d(TAG, "No packages to whitelist, skipping.");
+            return;
+        } else {
+            Log.d(TAG, String.format(
+                    "Whitelisting %d uris to %d pkgs.",
+                    descendants.size(), whitelistPackages.length));
+        }
+        final SliceManager sliceManager = context.getSystemService(SliceManager.class);
+        for (Uri descendant : descendants) {
+            for (String toPackage : whitelistPackages) {
+                sliceManager.grantSlicePermission(toPackage, descendant);
+            }
+        }
     }
 
     private List<Uri> buildUrisFromKeys(List<String> keys, String authority) {
@@ -428,7 +454,7 @@ public class SettingsSliceProvider extends SliceProvider {
         final Set<String> set = new ArraySet<>();
 
         try {
-            mParser.setString(value);
+            KEY_VALUE_LIST_PARSER.setString(value);
         } catch (IllegalArgumentException e) {
             Log.e(TAG, "Bad Settings Slices Whitelist flags", e);
             return set;
