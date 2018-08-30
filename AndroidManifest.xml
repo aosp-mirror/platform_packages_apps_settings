@@ -2897,8 +2897,7 @@
         <activity
             android:name="Settings$WifiCallingSettingsActivity"
             android:label="@string/wifi_calling_settings_title"
-            android:taskAffinity="com.android.settings"
-            android:parentActivityName="Settings">
+            android:taskAffinity="com.android.settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.WIFI_CALLING_SETTINGS" />
