@@ -40,6 +40,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceCategory;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -55,7 +56,7 @@ import com.android.settingslib.net.ChartDataLoaderCompat;
 import com.android.settingslib.net.UidDetail;
 import com.android.settingslib.net.UidDetailProvider;
 
-public class AppDataUsage extends DataUsageBase implements Preference.OnPreferenceChangeListener,
+public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceChangeListener,
         DataSaverBackend.Listener {
 
     private static final String TAG = "AppDataUsage";
@@ -137,7 +138,6 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
                 addUid(mAppItem.uids.keyAt(i));
             }
         }
-        addPreferencesFromResource(R.xml.app_data_usage);
 
         mTotalUsage = findPreference(KEY_TOTAL_USAGE);
         mForegroundUsage = findPreference(KEY_FOREGROUND_USAGE);
@@ -256,6 +256,16 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
             return true;
         }
         return super.onPreferenceTreeClick(preference);
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.app_data_usage;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
     }
 
     @VisibleForTesting
