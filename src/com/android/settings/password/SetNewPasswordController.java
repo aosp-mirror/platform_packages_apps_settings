@@ -115,7 +115,7 @@ final class SetNewPasswordController {
         if (mPackageManager.hasSystemFeature(PackageManager.FEATURE_FACE)
                 && mFaceManager != null
                 && mFaceManager.isHardwareDetected()
-                && !mFaceManager.hasEnrolledFaces(mTargetUserId)
+                && !mFaceManager.hasEnrolledTemplates(mTargetUserId)
                 && !isFaceDisabledByAdmin()) {
             extras = getFaceChooseLockExtras();
         } else if (mPackageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)
