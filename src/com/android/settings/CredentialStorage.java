@@ -106,11 +106,18 @@ public final class CredentialStorage extends FragmentActivity {
     private static final int CONFIRM_CLEAR_SYSTEM_CREDENTIAL_REQUEST = 2;
 
     private final KeyStore mKeyStore = KeyStore.getInstance();
+    private LockPatternUtils mUtils;
 
     /**
      * When non-null, the bundle containing credentials to install.
      */
     private Bundle mInstallBundle;
+
+    @Override
+    protected void onCreate(Bundle savedState) {
+        super.onCreate(savedState);
+        mUtils = new LockPatternUtils(this);
+    }
 
     @Override
     protected void onResume() {
@@ -160,7 +167,7 @@ public final class CredentialStorage extends FragmentActivity {
                 return;
             }
             case UNLOCKED: {
-                if (isActivePasswordQualityInsufficient()) {
+                if (!mUtils.isSecure(UserHandle.myUserId())) {
                     final ConfigureKeyGuardDialog dialog = new ConfigureKeyGuardDialog();
                     dialog.show(getSupportFragmentManager(), ConfigureKeyGuardDialog.TAG);
                     return;
@@ -179,7 +186,7 @@ public final class CredentialStorage extends FragmentActivity {
      * case after unlocking with an old-style password).
      */
     private void ensureKeyGuard() {
-        if (isActivePasswordQualityInsufficient()) {
+        if (!mUtils.isSecure(UserHandle.myUserId())) {
             // key guard not setup, doing so will initialize keystore
             final ConfigureKeyGuardDialog dialog = new ConfigureKeyGuardDialog();
             dialog.show(getSupportFragmentManager(), ConfigureKeyGuardDialog.TAG);
@@ -192,16 +199,6 @@ public final class CredentialStorage extends FragmentActivity {
             return;
         }
         finish();
-    }
-
-    /**
-     * Returns true if the currently set key guard violates our minimum quality requirements.
-     */
-    private boolean isActivePasswordQualityInsufficient() {
-        final int credentialOwner =
-                UserManager.get(this).getCredentialOwnerProfile(UserHandle.myUserId());
-        final int quality = new LockPatternUtils(this).getActivePasswordQuality(credentialOwner);
-        return (quality >= MIN_PASSWORD_QUALITY);
     }
 
     private boolean isHardwareBackedKey(byte[] keyData) {
@@ -350,7 +347,7 @@ public final class CredentialStorage extends FragmentActivity {
         protected Boolean doInBackground(Void... unused) {
 
             // Clear all the users credentials could have been installed in for this user.
-            new LockPatternUtils(CredentialStorage.this).resetKeyStore(UserHandle.myUserId());
+            mUtils.resetKeyStore(UserHandle.myUserId());
 
             try {
                 final KeyChainConnection keyChainConnection = KeyChain.bind(CredentialStorage.this);
