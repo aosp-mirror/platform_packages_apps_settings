@@ -23,7 +23,7 @@ import android.os.UserManager;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 public class HotspotConditionCard implements ConditionalCard {
 
@@ -42,7 +42,7 @@ public class HotspotConditionCard implements ConditionalCard {
 
     @Override
     public CharSequence getActionText() {
-        if (RestrictedLockUtils.hasBaseUserRestriction(mAppContext,
+        if (RestrictedLockUtilsInternal.hasBaseUserRestriction(mAppContext,
                 UserManager.DISALLOW_CONFIG_TETHERING, UserHandle.myUserId())) {
             return null;
         }

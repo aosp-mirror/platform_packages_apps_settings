@@ -53,6 +53,7 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import java.security.UnrecoverableKeyException;
 import java.util.ArrayList;
@@ -137,11 +138,12 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
 
             final String restriction = UserManager.DISALLOW_CONFIG_CREDENTIALS;
             final int myUserId = UserHandle.myUserId();
-            if (!RestrictedLockUtils.hasBaseUserRestriction(getContext(), restriction, myUserId)) {
+            if (!RestrictedLockUtilsInternal.hasBaseUserRestriction(getContext(), restriction,
+                    myUserId)) {
                 DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
                     @Override public void onClick(DialogInterface dialog, int id) {
-                        final EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(
-                                getContext(), restriction, myUserId);
+                        final EnforcedAdmin admin = RestrictedLockUtilsInternal
+                                .checkIfRestrictionEnforced(getContext(), restriction, myUserId);
                         if (admin != null) {
                             RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(),
                                     admin);

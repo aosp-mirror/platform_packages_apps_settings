@@ -19,7 +19,7 @@ import android.annotation.UserIdInt;
 import android.content.Context;
 
 import com.android.settings.AccessiblePreferenceCategory;
-import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 
 import java.util.ArrayList;
@@ -51,7 +51,8 @@ public class AccountRestrictionHelper {
     }
 
     public boolean hasBaseUserRestriction(String userRestriction, @UserIdInt int userId) {
-        return RestrictedLockUtils.hasBaseUserRestriction(mContext, userRestriction, userId);
+        return RestrictedLockUtilsInternal.hasBaseUserRestriction(mContext, userRestriction,
+                userId);
     }
 
     public AccessiblePreferenceCategory createAccessiblePreferenceCategory(Context context) {

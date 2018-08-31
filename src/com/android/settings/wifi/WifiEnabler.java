@@ -35,8 +35,8 @@ import androidx.annotation.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.widget.SwitchWidgetController;
-import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.WirelessUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
@@ -162,12 +162,12 @@ public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListene
                 mSwitchWidget.setEnabled(true);
         }
 
-        if (RestrictedLockUtils.hasBaseUserRestriction(mContext,
+        if (RestrictedLockUtilsInternal.hasBaseUserRestriction(mContext,
                 UserManager.DISALLOW_CONFIG_TETHERING, UserHandle.myUserId())) {
             mSwitchWidget.setEnabled(false);
         } else {
-            final EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(mContext,
-                UserManager.DISALLOW_CONFIG_TETHERING, UserHandle.myUserId());
+            final EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
+                    mContext, UserManager.DISALLOW_CONFIG_TETHERING, UserHandle.myUserId());
             mSwitchWidget.setDisabledByAdmin(admin);
         }
     }

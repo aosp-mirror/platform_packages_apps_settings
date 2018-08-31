@@ -35,6 +35,7 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.wifi.WifiConfigUiBase;
 import com.android.settings.wifi.WifiDialog;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.wifi.AccessPoint;
 
@@ -108,7 +109,7 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
             case Menu.FIRST:
                 if (!mWifiDetailPreferenceController.canModifyNetwork()) {
                     RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(),
-                            RestrictedLockUtils.getDeviceOwner(getContext()));
+                            RestrictedLockUtilsInternal.getDeviceOwner(getContext()));
                 } else {
                     showDialog(WIFI_DIALOG_ID);
                 }

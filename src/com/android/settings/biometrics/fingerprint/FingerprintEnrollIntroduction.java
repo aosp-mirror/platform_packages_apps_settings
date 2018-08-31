@@ -31,7 +31,7 @@ import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollIntroduction;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.HelpUtils;
-import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.setupwizardlib.span.LinkSpan;
 
 public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
@@ -48,7 +48,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected boolean isDisabledByAdmin() {
-        return RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(
+        return RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
                 this, DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT, mUserId) != null;
     }
 

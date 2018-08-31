@@ -51,7 +51,7 @@ import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.widget.MasterCheckBoxPreference;
-import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -113,7 +113,7 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
         mPkgInfo = findPackageInfo(mPkg, mUid);
 
         mUserId = UserHandle.getUserId(mUid);
-        mSuspendedAppsAdmin = RestrictedLockUtils.checkIfApplicationIsSuspended(
+        mSuspendedAppsAdmin = RestrictedLockUtilsInternal.checkIfApplicationIsSuspended(
                 mContext, mPkg, mUserId);
 
         loadChannel();

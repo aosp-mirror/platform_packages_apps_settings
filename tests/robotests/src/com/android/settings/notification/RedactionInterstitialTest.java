@@ -22,7 +22,7 @@ import com.android.settings.notification.RedactionInterstitial.RedactionIntersti
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
-import com.android.settings.testutils.shadow.ShadowRestrictedLockUtils;
+import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
@@ -39,7 +39,7 @@ import org.robolectric.annotation.Config;
         SettingsShadowResourcesImpl.class,
         SettingsShadowResources.SettingsShadowTheme.class,
         ShadowUtils.class,
-        ShadowRestrictedLockUtils.class,
+        ShadowRestrictedLockUtilsInternal.class,
         ShadowUserManager.class,
 })
 public class RedactionInterstitialTest {
@@ -49,7 +49,7 @@ public class RedactionInterstitialTest {
     @After
     public void tearDown() {
         ShadowUserManager.getShadow().reset();
-        ShadowRestrictedLockUtils.reset();
+        ShadowRestrictedLockUtilsInternal.reset();
     }
 
     @Test
@@ -85,7 +85,7 @@ public class RedactionInterstitialTest {
     @Test
     public void primaryUserUnredactedRestrictionTest() {
         setupSettings(1 /* show */, 1 /* showUnredacted */);
-        ShadowRestrictedLockUtils.setKeyguardDisabledFeatures(
+        ShadowRestrictedLockUtilsInternal.setKeyguardDisabledFeatures(
                 KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS);
         setupActivity();
 
@@ -97,7 +97,7 @@ public class RedactionInterstitialTest {
     @Test
     public void primaryUserNotificationRestrictionTest() {
         setupSettings(1 /* show */, 1 /* showUnredacted */);
-        ShadowRestrictedLockUtils.setKeyguardDisabledFeatures(
+        ShadowRestrictedLockUtilsInternal.setKeyguardDisabledFeatures(
                 KEYGUARD_DISABLE_SECURE_NOTIFICATIONS);
         setupActivity();
 
@@ -121,7 +121,7 @@ public class RedactionInterstitialTest {
     public void managedProfileUnredactedRestrictionTest() {
         setupSettings(1 /* show */, 1 /* showUnredacted */);
         ShadowUserManager.getShadow().addManagedProfile(UserHandle.myUserId());
-        ShadowRestrictedLockUtils.setKeyguardDisabledFeatures(
+        ShadowRestrictedLockUtilsInternal.setKeyguardDisabledFeatures(
                 KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS);
         setupActivity();
 

@@ -43,6 +43,7 @@ import com.android.settings.datausage.AppStateDataUsageBridge.DataUsageState;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtils;
+import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
@@ -61,6 +62,7 @@ import java.util.ArrayList;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {
         ShadowRestrictedLockUtils.class,
+        ShadowRestrictedLockUtilsInternal.class,
         UnrestrictedDataAccessPreferenceControllerTest.ShadowAppStateBaseBridge.class
 })
 public class UnrestrictedDataAccessPreferenceControllerTest {
@@ -127,7 +129,7 @@ public class UnrestrictedDataAccessPreferenceControllerTest {
 
         final String testPkg1 = "com.example.one";
         final String testPkg2 = "com.example.two";
-        ShadowRestrictedLockUtils.setRestrictedPkgs(testPkg2);
+        ShadowRestrictedLockUtilsInternal.setRestrictedPkgs(testPkg2);
 
         doAnswer((invocation) -> {
             final UnrestrictedDataAccessPreference preference = invocation.getArgument(0);

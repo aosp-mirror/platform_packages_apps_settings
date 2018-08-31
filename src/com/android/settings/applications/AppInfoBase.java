@@ -48,7 +48,7 @@ import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
@@ -107,10 +107,10 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
-        mAppsControlDisallowedAdmin = RestrictedLockUtils.checkIfRestrictionEnforced(getActivity(),
-                UserManager.DISALLOW_APPS_CONTROL, mUserId);
-        mAppsControlDisallowedBySystem = RestrictedLockUtils.hasBaseUserRestriction(getActivity(),
-                UserManager.DISALLOW_APPS_CONTROL, mUserId);
+        mAppsControlDisallowedAdmin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
+                getActivity(), UserManager.DISALLOW_APPS_CONTROL, mUserId);
+        mAppsControlDisallowedBySystem = RestrictedLockUtilsInternal.hasBaseUserRestriction(
+                getActivity(), UserManager.DISALLOW_APPS_CONTROL, mUserId);
 
         if (!refreshUi()) {
             setIntentAndFinish(true, true);

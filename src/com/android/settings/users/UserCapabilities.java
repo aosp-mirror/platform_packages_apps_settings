@@ -25,6 +25,7 @@ import android.provider.Settings;
 
 import com.android.settings.Utils;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 public class UserCapabilities {
     boolean mEnabled = true;
@@ -67,9 +68,9 @@ public class UserCapabilities {
     public void updateAddUserCapabilities(Context context) {
         final UserManager userManager =
                 (UserManager) context.getSystemService(Context.USER_SERVICE);
-        mEnforcedAdmin = RestrictedLockUtils.checkIfRestrictionEnforced(context,
+        mEnforcedAdmin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(context,
                 UserManager.DISALLOW_ADD_USER, UserHandle.myUserId());
-        final boolean hasBaseUserRestriction = RestrictedLockUtils.hasBaseUserRestriction(
+        final boolean hasBaseUserRestriction = RestrictedLockUtilsInternal.hasBaseUserRestriction(
                 context, UserManager.DISALLOW_ADD_USER, UserHandle.myUserId());
         mDisallowAddUserSetByAdmin = mEnforcedAdmin != null && !hasBaseUserRestriction;
         mDisallowAddUser = (mEnforcedAdmin != null || hasBaseUserRestriction);
