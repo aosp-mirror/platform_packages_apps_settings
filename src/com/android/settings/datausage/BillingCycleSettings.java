@@ -52,7 +52,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SearchIndexable
-public class BillingCycleSettings extends DataUsageBase implements
+public class BillingCycleSettings extends DataUsageBaseFragment implements
         Preference.OnPreferenceChangeListener, DataUsageEditController {
 
     private static final String TAG = "BillingCycleSettings";
@@ -105,7 +105,6 @@ public class BillingCycleSettings extends DataUsageBase implements
         Bundle args = getArguments();
         mNetworkTemplate = args.getParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE);
 
-        addPreferencesFromResource(R.xml.billing_cycle);
         mBillingCycle = findPreference(KEY_BILLING_CYCLE);
         mEnableDataWarning = (SwitchPreference) findPreference(KEY_SET_DATA_WARNING);
         mEnableDataWarning.setOnPreferenceChangeListener(this);
@@ -189,6 +188,16 @@ public class BillingCycleSettings extends DataUsageBase implements
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.BILLING_CYCLE;
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.billing_cycle;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
     }
 
     @VisibleForTesting

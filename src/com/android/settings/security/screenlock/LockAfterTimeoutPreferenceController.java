@@ -34,6 +34,7 @@ import com.android.settings.display.TimeoutListPreference;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.security.trustagent.TrustAgentManager;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 public class LockAfterTimeoutPreferenceController extends AbstractPreferenceController
@@ -106,7 +107,7 @@ public class LockAfterTimeoutPreferenceController extends AbstractPreferenceCont
         preference.setValue(String.valueOf(currentTimeout));
         if (mDPM != null) {
             final RestrictedLockUtils.EnforcedAdmin admin =
-                    RestrictedLockUtils.checkIfMaximumTimeToLockIsSet(mContext);
+                    RestrictedLockUtilsInternal.checkIfMaximumTimeToLockIsSet(mContext);
             final long adminTimeout =
                     mDPM.getMaximumTimeToLock(null /* admin */, UserHandle.myUserId());
             final long displayTimeout = Math.max(0,

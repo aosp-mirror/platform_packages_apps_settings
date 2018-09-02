@@ -67,6 +67,7 @@ import com.android.settings.widget.SummaryUpdater.OnSummaryChangeListener;
 import com.android.settings.widget.SwitchBarController;
 import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPoint.AccessPointListener;
@@ -578,7 +579,7 @@ public class WifiSettings extends RestrictedSettingsFragment
             WifiConfiguration config = accessPoint.getConfig();
             if (WifiUtils.isNetworkLockedDown(getActivity(), config) && accessPoint.isActive()) {
                 RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getActivity(),
-                        RestrictedLockUtils.getDeviceOwner(getActivity()));
+                        RestrictedLockUtilsInternal.getDeviceOwner(getActivity()));
                 return;
             }
         }

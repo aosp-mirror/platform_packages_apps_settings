@@ -39,6 +39,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import com.google.android.collect.Maps;
 
@@ -167,7 +168,7 @@ public class ChooseAccountPreferenceController extends BasePreferenceController 
             // There's only one provider that matches. If it is disabled by admin show the
             // support dialog otherwise run it.
             final RestrictedLockUtils.EnforcedAdmin admin =
-                    RestrictedLockUtils.checkIfAccountManagementDisabled(
+                    RestrictedLockUtilsInternal.checkIfAccountManagementDisabled(
                             context, mProviderList.get(0).getType(), mUserHandle.getIdentifier());
             if (admin != null) {
                 mActivity.setResult(RESULT_CANCELED,

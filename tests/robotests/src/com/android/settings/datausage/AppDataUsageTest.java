@@ -40,7 +40,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
-import com.android.settings.testutils.shadow.ShadowRestrictedLockUtils;
+import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.AppItem;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -58,7 +58,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {ShadowEntityHeaderController.class, ShadowRestrictedLockUtils.class})
+@Config(shadows = {ShadowEntityHeaderController.class, ShadowRestrictedLockUtilsInternal.class})
 public class AppDataUsageTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -163,7 +163,7 @@ public class AppDataUsageTest {
         ReflectionHelpers.setField(mFragment, "mDataSaverBackend", dataSaverBackend);
         ReflectionHelpers.setField(mFragment.services, "mPolicyManager", networkPolicyManager);
 
-        ShadowRestrictedLockUtils.setRestricted(true);
+        ShadowRestrictedLockUtilsInternal.setRestricted(true);
         doReturn(NetworkPolicyManager.POLICY_NONE).when(networkPolicyManager)
                 .getUidPolicy(testUid);
 

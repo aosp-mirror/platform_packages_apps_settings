@@ -15,10 +15,13 @@
  */
 package com.android.settings.bluetooth;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static android.bluetooth.BluetoothDevice.PAIRING_VARIANT_CONSENT;
 
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
@@ -27,6 +30,7 @@ import android.content.Intent;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothPan;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -39,10 +43,12 @@ import org.robolectric.annotation.Config;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowBluetoothPan.class, ShadowBluetoothAdapter.class})
 public class BluetoothPairingControllerTest {
+    private final static String DEVICE_NAME = "TestName";
     @Mock
     private BluetoothDevice mBluetoothDevice;
     private Context mContext;
     private BluetoothPairingController mBluetoothPairingController;
+    private LocalBluetoothManager mBluetoothManager;
 
     @Before
     public void setUp() {
@@ -51,6 +57,9 @@ public class BluetoothPairingControllerTest {
         mContext = RuntimeEnvironment.application;
         final Intent intent = new Intent();
         intent.putExtra(BluetoothDevice.EXTRA_DEVICE, mBluetoothDevice);
+        mBluetoothManager = Utils.getLocalBtManager(mContext);
+        when(mBluetoothDevice.getAliasName()).thenReturn(DEVICE_NAME);
+        mBluetoothManager.getCachedDeviceManager().addDevice(mBluetoothDevice);
         mBluetoothPairingController = spy(new BluetoothPairingController(intent, mContext));
     }
 
@@ -62,5 +71,10 @@ public class BluetoothPairingControllerTest {
         mBluetoothPairingController.onDialogPositiveClick(null);
 
         verify(mBluetoothDevice).setPhonebookAccessPermission(BluetoothDevice.ACCESS_ALLOWED);
+    }
+
+    @Test
+    public void onGetDeviceName() {
+        assertThat(mBluetoothPairingController.getDeviceName()).isEqualTo(DEVICE_NAME);
     }
 }

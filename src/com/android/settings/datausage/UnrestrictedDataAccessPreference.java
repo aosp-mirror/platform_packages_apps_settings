@@ -13,7 +13,7 @@
  */
 package com.android.settings.datausage;
 
-import static com.android.settingslib.RestrictedLockUtils.checkIfMeteredDataRestricted;
+import static com.android.settingslib.RestrictedLockUtilsInternal.checkIfMeteredDataRestricted;
 
 import android.content.Context;
 import android.os.UserHandle;

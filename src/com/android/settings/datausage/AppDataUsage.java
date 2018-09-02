@@ -40,6 +40,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceCategory;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -47,15 +48,15 @@ import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.AppItem;
-import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoaderCompat;
 import com.android.settingslib.net.UidDetail;
 import com.android.settingslib.net.UidDetailProvider;
 
-public class AppDataUsage extends DataUsageBase implements Preference.OnPreferenceChangeListener,
+public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceChangeListener,
         DataSaverBackend.Listener {
 
     private static final String TAG = "AppDataUsage";
@@ -137,7 +138,6 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
                 addUid(mAppItem.uids.keyAt(i));
             }
         }
-        addPreferencesFromResource(R.xml.app_data_usage);
 
         mTotalUsage = findPreference(KEY_TOTAL_USAGE);
         mForegroundUsage = findPreference(KEY_FOREGROUND_USAGE);
@@ -258,13 +258,23 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
         return super.onPreferenceTreeClick(preference);
     }
 
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.app_data_usage;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
+    }
+
     @VisibleForTesting
     void updatePrefs() {
         updatePrefs(getAppRestrictBackground(), getUnrestrictData());
     }
 
     private void updatePrefs(boolean restrictBackground, boolean unrestrictData) {
-        final EnforcedAdmin admin = RestrictedLockUtils.checkIfMeteredDataRestricted(
+        final EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfMeteredDataRestricted(
                 getContext(), mPackageName, UserHandle.getUserId(mAppItem.key));
         if (mRestrictBackground != null) {
             mRestrictBackground.setChecked(!restrictBackground);

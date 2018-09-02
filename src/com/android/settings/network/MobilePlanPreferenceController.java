@@ -20,7 +20,7 @@ import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static android.os.UserHandle.myUserId;
 import static android.os.UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS;
 
-import static com.android.settingslib.RestrictedLockUtils.hasBaseUserRestriction;
+import static com.android.settingslib.RestrictedLockUtilsInternal.hasBaseUserRestriction;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;

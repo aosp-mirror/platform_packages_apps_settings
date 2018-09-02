@@ -39,6 +39,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -113,7 +114,7 @@ public class TrustAgentManager {
         final List<ResolveInfo> resolveInfos = pm.queryIntentServices(TRUST_AGENT_INTENT,
                 PackageManager.GET_META_DATA);
         final List<ComponentName> enabledTrustAgents = utils.getEnabledTrustAgents(myUserId);
-        final RestrictedLockUtils.EnforcedAdmin admin = RestrictedLockUtils
+        final RestrictedLockUtils.EnforcedAdmin admin = RestrictedLockUtilsInternal
                 .checkIfKeyguardFeaturesDisabled(
                         context, DevicePolicyManager.KEYGUARD_DISABLE_TRUST_AGENTS, myUserId);
 

@@ -50,7 +50,7 @@ import com.android.settings.applications.specialaccess.pictureinpicture
         .PictureInPictureDetailPreferenceController;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -210,10 +210,10 @@ public class AppInfoDashboardFragment extends DashboardFragment
     public void onResume() {
         super.onResume();
         final Activity activity = getActivity();
-        mAppsControlDisallowedAdmin = RestrictedLockUtils.checkIfRestrictionEnforced(activity,
-                UserManager.DISALLOW_APPS_CONTROL, mUserId);
-        mAppsControlDisallowedBySystem = RestrictedLockUtils.hasBaseUserRestriction(activity,
-                UserManager.DISALLOW_APPS_CONTROL, mUserId);
+        mAppsControlDisallowedAdmin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
+                activity, UserManager.DISALLOW_APPS_CONTROL, mUserId);
+        mAppsControlDisallowedBySystem = RestrictedLockUtilsInternal.hasBaseUserRestriction(
+                activity, UserManager.DISALLOW_APPS_CONTROL, mUserId);
 
         if (!refreshUi()) {
             setIntentAndFinish(true, true);
@@ -338,7 +338,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
                 && !mAppsControlDisallowedBySystem
                 && !uninstallUpdateDisabled);
         if (uninstallUpdatesItem.isVisible()) {
-            RestrictedLockUtils.setMenuItemAsDisabledByAdmin(getActivity(),
+            RestrictedLockUtilsInternal.setMenuItemAsDisabledByAdmin(getActivity(),
                     uninstallUpdatesItem, mAppsControlDisallowedAdmin);
         }
     }

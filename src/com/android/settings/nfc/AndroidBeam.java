@@ -38,7 +38,7 @@ import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.HelpUtils;
-import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 public class AndroidBeam extends InstrumentedFragment
         implements SwitchBar.OnSwitchChangeListener {
@@ -68,10 +68,10 @@ public class AndroidBeam extends InstrumentedFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        final EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(
+        final EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
                 getActivity(), UserManager.DISALLOW_OUTGOING_BEAM, UserHandle.myUserId());
         final UserManager um = UserManager.get(getActivity());
-        mBeamDisallowedByBase = RestrictedLockUtils.hasBaseUserRestriction(getActivity(),
+        mBeamDisallowedByBase = RestrictedLockUtilsInternal.hasBaseUserRestriction(getActivity(),
                 UserManager.DISALLOW_OUTGOING_BEAM, UserHandle.myUserId());
         if (!mBeamDisallowedByBase && admin != null) {
             new ActionDisabledByAdminDialogHelper(getActivity())

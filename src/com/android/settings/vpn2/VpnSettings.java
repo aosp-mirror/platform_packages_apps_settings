@@ -63,7 +63,7 @@ import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.widget.GearPreference;
 import com.android.settings.widget.GearPreference.OnGearClickListener;
-import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import com.google.android.collect.Lists;
 
@@ -143,7 +143,7 @@ public class VpnSettings extends RestrictedSettingsFragment implements
         // Disable all actions if VPN configuration has been disallowed
         for (int i = 0; i < menu.size(); i++) {
             if (isUiRestrictedByOnlyAdmin()) {
-                RestrictedLockUtils.setMenuItemAsDisabledByAdmin(getPrefContext(),
+                RestrictedLockUtilsInternal.setMenuItemAsDisabledByAdmin(getPrefContext(),
                         menu.getItem(i), getRestrictionEnforcedAdmin());
             } else {
                 menu.getItem(i).setEnabled(!mUnavailable);

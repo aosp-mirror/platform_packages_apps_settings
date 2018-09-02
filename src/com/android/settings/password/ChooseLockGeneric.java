@@ -64,8 +64,8 @@ import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollFindSensor;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.search.SearchFeatureProvider;
-import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 
 import java.util.List;
@@ -562,7 +562,7 @@ public class ChooseLockGeneric extends SettingsActivity {
             final PreferenceScreen entries = getPreferenceScreen();
 
             int adminEnforcedQuality = mDPM.getPasswordQuality(null, mUserId);
-            EnforcedAdmin enforcedAdmin = RestrictedLockUtils.checkIfPasswordQualityIsSet(
+            EnforcedAdmin enforcedAdmin = RestrictedLockUtilsInternal.checkIfPasswordQualityIsSet(
                     getActivity(), mUserId);
 
             for (ScreenLockType lock : ScreenLockType.values()) {
@@ -813,7 +813,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         // TODO: figure out how to eliminate duplicated code. It's a bit hard due to the async-ness
         private void removeAllFaceForUserAndFinish(final int userId, RemovalTracker tracker) {
             if (mFaceManager != null && mFaceManager.isHardwareDetected()) {
-                if (mFaceManager.hasEnrolledFaces(userId)) {
+                if (mFaceManager.hasEnrolledTemplates(userId)) {
                     mFaceManager.setActiveUser(userId);
                     Face face = new Face(null, 0, 0);
                     mFaceManager.remove(face, userId,

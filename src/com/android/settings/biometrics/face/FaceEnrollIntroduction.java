@@ -28,7 +28,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollIntroduction;
 import com.android.settings.password.ChooseLockSettingsHelper;
-import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.setupwizardlib.span.LinkSpan;
 
 public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
@@ -45,7 +45,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected boolean isDisabledByAdmin() {
-        return RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(
+        return RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
                 this, DevicePolicyManager.KEYGUARD_DISABLE_FACE, mUserId) != null;
     }
 

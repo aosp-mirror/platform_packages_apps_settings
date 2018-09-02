@@ -41,6 +41,7 @@ import com.android.settings.Utils;
 import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminAdd;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import java.util.Objects;
 
@@ -94,7 +95,7 @@ public class ActionDisabledByAdminDialogHelper {
         if (admin == null) {
             return;
         }
-        if (!RestrictedLockUtils.isAdminInCurrentUserOrProfile(mActivity, admin)
+        if (!RestrictedLockUtilsInternal.isAdminInCurrentUserOrProfile(mActivity, admin)
                 || !RestrictedLockUtils.isCurrentUserOrProfile(mActivity, userId)) {
             admin = null;
         } else {
@@ -156,7 +157,7 @@ public class ActionDisabledByAdminDialogHelper {
         }
         final DevicePolicyManager dpm = (DevicePolicyManager) activity.getSystemService(
                 Context.DEVICE_POLICY_SERVICE);
-        if (!RestrictedLockUtils.isAdminInCurrentUserOrProfile(activity,
+        if (!RestrictedLockUtilsInternal.isAdminInCurrentUserOrProfile(activity,
                 enforcedAdmin.component) || !RestrictedLockUtils.isCurrentUserOrProfile(
                 activity, enforcedAdmin.userId)) {
             enforcedAdmin.component = null;

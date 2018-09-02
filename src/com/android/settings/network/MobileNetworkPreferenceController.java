@@ -36,7 +36,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -84,7 +84,7 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
 
     public boolean isUserRestricted() {
         return mIsSecondaryUser ||
-                RestrictedLockUtils.hasBaseUserRestriction(
+                RestrictedLockUtilsInternal.hasBaseUserRestriction(
                         mContext,
                         DISALLOW_CONFIG_MOBILE_NETWORKS,
                         myUserId());
