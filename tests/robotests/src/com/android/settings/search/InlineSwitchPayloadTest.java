@@ -18,6 +18,7 @@
 package com.android.settings.search;
 
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.ContentResolver;

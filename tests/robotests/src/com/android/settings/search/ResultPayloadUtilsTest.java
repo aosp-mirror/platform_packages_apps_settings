@@ -18,6 +18,7 @@
 package com.android.settings.search;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static junit.framework.Assert.fail;
 
 import android.content.Intent;

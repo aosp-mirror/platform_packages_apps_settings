@@ -24,8 +24,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.UserHandle;
 import android.provider.Settings;
-import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.R;

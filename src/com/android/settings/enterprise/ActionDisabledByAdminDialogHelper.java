@@ -26,13 +26,14 @@ import android.graphics.drawable.Drawable;
 import android.os.Process;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.annotation.VisibleForTesting;
 import android.util.IconDrawableFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.DeviceAdminAdd;
 import com.android.settings.R;

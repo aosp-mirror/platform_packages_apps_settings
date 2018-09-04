@@ -18,6 +18,7 @@ package com.android.settings.nfc;
 
 import android.content.Context;
 import android.nfc.NfcAdapter;
+
 import androidx.preference.SwitchPreference;
 
 /**

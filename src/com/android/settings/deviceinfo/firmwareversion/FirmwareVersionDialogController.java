@@ -22,9 +22,10 @@ import android.os.Build;
 import android.os.SystemClock;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.annotation.VisibleForTesting;
 import android.util.Log;
 import android.view.View;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settingslib.RestrictedLockUtils;

@@ -17,6 +17,7 @@
 package com.android.settings.deviceinfo;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.mock;
@@ -27,9 +28,10 @@ import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.provider.SearchIndexableResource;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.deviceinfo.storage.CachedStorageValuesHelper;
 import com.android.settings.deviceinfo.storage.StorageAsyncLoader;

@@ -15,8 +15,9 @@
  */
 package com.android.settings.connecteddevice;
 
-import android.content.pm.PackageManager;
 import android.content.Context;
+import android.content.pm.PackageManager;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;

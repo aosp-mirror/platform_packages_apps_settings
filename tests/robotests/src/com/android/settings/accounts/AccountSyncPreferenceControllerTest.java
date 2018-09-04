@@ -16,6 +16,7 @@
 package com.android.settings.accounts;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.when;
@@ -27,6 +28,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SyncAdapterType;
 import android.os.UserHandle;
+
 import androidx.preference.Preference;
 
 import com.android.settings.R;
@@ -42,7 +44,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 

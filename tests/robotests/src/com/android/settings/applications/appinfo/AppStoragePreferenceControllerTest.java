@@ -17,6 +17,7 @@
 package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -28,6 +29,7 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
+
 import androidx.preference.Preference;
 
 import com.android.settings.applications.AppStorageSettings;

@@ -31,25 +31,20 @@ import static org.mockito.Mockito.when;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.net.wifi.WifiConfiguration;
-import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
-
-import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class HotspotApBandSelectionPreferenceTest {

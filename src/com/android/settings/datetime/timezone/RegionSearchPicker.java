@@ -21,8 +21,9 @@ import android.content.Intent;
 import android.icu.text.Collator;
 import android.icu.text.LocaleDisplayNames;
 import android.os.Bundle;
-import androidx.annotation.VisibleForTesting;
 import android.util.Log;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;

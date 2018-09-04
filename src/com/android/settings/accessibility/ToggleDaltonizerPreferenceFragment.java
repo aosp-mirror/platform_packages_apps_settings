@@ -18,10 +18,11 @@ package com.android.settings.accessibility;
 
 import android.os.Bundle;
 import android.provider.Settings;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Switch;
+
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;

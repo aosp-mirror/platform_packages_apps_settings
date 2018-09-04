@@ -16,6 +16,7 @@
 package com.android.settings.network;
 
 import static android.os.UserManager.DISALLOW_CONFIG_TETHERING;
+
 import static com.android.settingslib.RestrictedLockUtils.checkIfRestrictionEnforced;
 import static com.android.settingslib.RestrictedLockUtils.hasBaseUserRestriction;
 
@@ -33,6 +34,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.provider.Settings;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;

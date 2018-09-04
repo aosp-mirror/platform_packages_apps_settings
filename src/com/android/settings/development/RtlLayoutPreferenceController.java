@@ -19,9 +19,10 @@ package com.android.settings.development;
 import android.content.Context;
 import android.os.SystemProperties;
 import android.provider.Settings;
+
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.SwitchPreference;
 import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
 
 import com.android.internal.app.LocalePicker;
 import com.android.settings.core.PreferenceControllerMixin;

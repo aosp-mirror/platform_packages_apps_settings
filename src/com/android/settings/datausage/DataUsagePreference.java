@@ -19,10 +19,11 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
-import androidx.core.content.res.TypedArrayUtils;
-import androidx.preference.Preference;
 import android.util.AttributeSet;
 import android.util.FeatureFlagUtils;
+
+import androidx.core.content.res.TypedArrayUtils;
+import androidx.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;

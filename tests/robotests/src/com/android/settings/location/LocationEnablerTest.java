@@ -16,7 +16,9 @@
 package com.android.settings.location;
 
 import static android.Manifest.permission.WRITE_SECURE_SETTINGS;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -30,7 +32,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.ActivityManager;
-import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
@@ -39,6 +40,8 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.text.TextUtils;
+
+import androidx.lifecycle.LifecycleOwner;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;

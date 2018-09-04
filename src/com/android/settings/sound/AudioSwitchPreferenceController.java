@@ -37,12 +37,13 @@ import android.media.MediaRouter;
 import android.media.MediaRouter.Callback;
 import android.os.Handler;
 import android.os.Looper;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
+
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;

@@ -18,10 +18,11 @@ package com.android.settings.applications;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceClickListener;
 import android.text.format.Formatter;
 import android.text.format.Formatter.BytesResult;
+
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceClickListener;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;

@@ -45,6 +45,7 @@ import static com.android.settings.deviceinfo.simstatus.SimStatusDialogControlle
         .SIGNAL_STRENGTH_LABEL_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
         .SIGNAL_STRENGTH_VALUE_ID;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
@@ -54,7 +55,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.os.PersistableBundle;
@@ -65,6 +65,8 @@ import android.telephony.SignalStrength;
 import android.telephony.SubscriptionInfo;
 import android.telephony.TelephonyManager;
 import android.telephony.euicc.EuiccManager;
+
+import androidx.lifecycle.LifecycleOwner;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

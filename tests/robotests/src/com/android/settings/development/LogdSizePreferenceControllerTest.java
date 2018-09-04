@@ -20,6 +20,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
 

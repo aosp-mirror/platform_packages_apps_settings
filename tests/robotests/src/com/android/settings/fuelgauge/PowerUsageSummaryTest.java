@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge;
 import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_ADVANCED_BATTERY;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyLong;
@@ -48,7 +49,6 @@ import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.applications.LayoutPreference;
-import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;

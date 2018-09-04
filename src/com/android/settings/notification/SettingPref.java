@@ -22,6 +22,7 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.provider.Settings.Global;
 import android.provider.Settings.System;
+
 import androidx.preference.DropDownPreference;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;

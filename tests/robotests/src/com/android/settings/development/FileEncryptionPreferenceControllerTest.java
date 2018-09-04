@@ -16,8 +16,11 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.FileEncryptionPreferenceController.FILE_ENCRYPTION_PROPERTY_KEY;
+import static com.android.settings.development.FileEncryptionPreferenceController
+        .FILE_ENCRYPTION_PROPERTY_KEY;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.never;
@@ -28,6 +31,7 @@ import android.content.Context;
 import android.os.RemoteException;
 import android.os.SystemProperties;
 import android.os.storage.IStorageManager;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

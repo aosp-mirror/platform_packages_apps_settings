@@ -15,15 +15,16 @@
  */
 package com.android.settings.display;
 
+import static android.provider.Settings.System.SHOW_BATTERY_PERCENT;
+
 import android.content.Context;
 import android.provider.Settings;
+
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
-
-import static android.provider.Settings.System.SHOW_BATTERY_PERCENT;
 
 /**
  * A controller to manage the switch for showing battery percentage in the status bar.

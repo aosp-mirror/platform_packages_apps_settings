@@ -21,8 +21,9 @@ import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
-import androidx.preference.Preference;
 import android.text.TextUtils;
+
+import androidx.preference.Preference;
 
 import com.android.settings.overlay.FeatureFactory;
 

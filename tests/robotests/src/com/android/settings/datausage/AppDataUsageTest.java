@@ -31,10 +31,11 @@ import static org.mockito.Mockito.when;
 import android.content.pm.PackageManager;
 import android.net.NetworkPolicyManager;
 import android.os.Bundle;
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
 import android.util.ArraySet;
 import android.view.View;
+
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

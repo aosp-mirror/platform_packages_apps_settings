@@ -24,8 +24,9 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WifiManager.ActionListener;
 import android.os.Bundle;
-import androidx.annotation.VisibleForTesting;
 import android.util.Log;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.SetupWizardUtils;
 import com.android.settingslib.wifi.AccessPoint;

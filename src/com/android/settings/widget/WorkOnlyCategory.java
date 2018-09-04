@@ -16,8 +16,9 @@ package com.android.settings.widget;
 
 import android.content.Context;
 import android.os.UserManager;
-import androidx.preference.PreferenceCategory;
 import android.util.AttributeSet;
+
+import androidx.preference.PreferenceCategory;
 
 import com.android.settings.SelfAvailablePreference;
 import com.android.settings.Utils;

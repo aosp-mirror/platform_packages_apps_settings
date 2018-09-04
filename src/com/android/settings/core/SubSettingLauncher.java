@@ -22,8 +22,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
-import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;

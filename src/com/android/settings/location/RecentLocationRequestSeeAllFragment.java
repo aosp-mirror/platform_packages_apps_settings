@@ -19,6 +19,7 @@ package com.android.settings.location;
 
 import android.content.Context;
 import android.provider.SearchIndexableResource;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -26,6 +27,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

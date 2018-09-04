@@ -20,9 +20,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.os.LocaleList;
-import androidx.core.view.MotionEventCompat;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -31,11 +28,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
+import androidx.core.view.MotionEventCompat;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.internal.app.LocalePicker;
 import com.android.internal.app.LocaleStore;
-
-import com.android.settings.shortcut.CreateShortcut;
 import com.android.settings.R;
+import com.android.settings.shortcut.CreateShortcut;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;

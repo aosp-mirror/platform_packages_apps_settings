@@ -17,19 +17,17 @@ package com.android.settings.applications.appinfo;
 
 import android.app.AlertDialog;
 import android.app.AppOpsManager;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
-import android.os.UserHandle;
 import android.provider.Settings;
-import androidx.preference.SwitchPreference;
+
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.Preference.OnPreferenceClickListener;
-import android.util.Log;
+import androidx.preference.SwitchPreference;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;

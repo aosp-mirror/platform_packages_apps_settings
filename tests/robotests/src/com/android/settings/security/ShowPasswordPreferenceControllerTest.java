@@ -17,6 +17,7 @@
 package com.android.settings.security;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -24,6 +25,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.os.UserHandle;
 import android.provider.Settings;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

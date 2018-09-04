@@ -52,14 +52,13 @@ import android.os.UserManager;
 import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
-import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 import com.android.settings.testutils.shadow.ShadowPowerWhitelistBackend;
+import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 
 import org.junit.Before;
 import org.junit.Test;

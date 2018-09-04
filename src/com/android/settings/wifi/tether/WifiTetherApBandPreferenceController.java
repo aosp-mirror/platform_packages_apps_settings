@@ -23,8 +23,9 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.icu.text.ListFormatter;
 import android.net.wifi.WifiConfiguration;
-import androidx.preference.Preference;
 import android.util.Log;
+
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.widget.HotspotApBandSelectionPreference;

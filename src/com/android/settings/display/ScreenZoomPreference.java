@@ -17,10 +17,11 @@
 package com.android.settings.display;
 
 import android.content.Context;
-import androidx.core.content.res.TypedArrayUtils;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+
+import androidx.core.content.res.TypedArrayUtils;
+import androidx.preference.Preference;
 
 import com.android.settingslib.display.DisplayDensityUtils;
 

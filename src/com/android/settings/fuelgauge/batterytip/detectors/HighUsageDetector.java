@@ -18,15 +18,16 @@ package com.android.settings.fuelgauge.batterytip.detectors;
 
 import android.content.Context;
 import android.os.BatteryStats;
-import androidx.annotation.VisibleForTesting;
 import android.text.format.DateUtils;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
-import com.android.settings.fuelgauge.BatteryUtils;
-import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
-import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.fuelgauge.BatteryInfo;
+import com.android.settings.fuelgauge.BatteryUtils;
+import com.android.settings.fuelgauge.batterytip.AppInfo;
+import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
 import com.android.settings.fuelgauge.batterytip.HighUsageDataParser;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.HighUsageTip;

@@ -17,6 +17,7 @@
 package com.android.settings.connecteddevice.usb;
 
 import android.content.Context;
+
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;

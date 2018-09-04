@@ -27,6 +27,7 @@ import android.provider.Settings;
 import android.text.TextUtils;
 
 import com.android.settingslib.wrapper.PackageManagerWrapper;
+
 import java.nio.charset.StandardCharsets;
 
 public class WifiUtils {

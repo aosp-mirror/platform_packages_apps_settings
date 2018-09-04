@@ -30,13 +30,14 @@ import android.os.Handler;
 import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings.Secure;
-import androidx.preference.SwitchPreference;
+import android.text.TextUtils;
+import android.view.InputDevice;
+
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
-import android.text.TextUtils;
-import android.view.InputDevice;
+import androidx.preference.SwitchPreference;
 
 import com.android.internal.inputmethod.InputMethodUtils;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;

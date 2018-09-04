@@ -17,6 +17,7 @@
 package com.android.settings.password;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.robolectric.Shadows.shadowOf;
 
 import android.content.ComponentName;

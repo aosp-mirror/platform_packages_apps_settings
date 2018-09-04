@@ -17,6 +17,7 @@
 package com.android.settings.notification;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static junit.framework.Assert.assertEquals;
 
 import android.app.NotificationManager;

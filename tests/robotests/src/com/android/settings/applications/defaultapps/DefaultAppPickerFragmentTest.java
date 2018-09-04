@@ -26,8 +26,9 @@ import static org.mockito.Mockito.when;
 import android.app.Activity;
 import android.content.Context;
 import android.os.UserManager;
-import androidx.preference.PreferenceScreen;
 import android.util.Pair;
+
+import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.testutils.FakeFeatureFactory;

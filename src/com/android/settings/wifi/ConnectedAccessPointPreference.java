@@ -17,9 +17,10 @@
 package com.android.settings.wifi;
 
 import android.content.Context;
+import android.view.View;
+
 import androidx.annotation.DrawableRes;
 import androidx.preference.PreferenceViewHolder;
-import android.view.View;
 
 import com.android.settings.R;
 import com.android.settingslib.wifi.AccessPoint;

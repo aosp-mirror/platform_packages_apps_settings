@@ -31,6 +31,7 @@ import android.net.NetworkRequest;
 import android.net.NetworkScoreManager;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
+
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceScreen;
 

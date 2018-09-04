@@ -16,7 +16,9 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.ShowSurfaceUpdatesPreferenceController.SURFACE_FLINGER_READ_CODE;
+import static com.android.settings.development.ShowSurfaceUpdatesPreferenceController
+        .SURFACE_FLINGER_READ_CODE;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.eq;
@@ -30,8 +32,9 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.os.IBinder;
 import android.os.RemoteException;
-import androidx.preference.SwitchPreference;
+
 import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowParcel;

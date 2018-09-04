@@ -17,8 +17,9 @@ package com.android.settings.applications.appinfo;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.UserManager;
-import androidx.preference.Preference;
 import android.text.TextUtils;
+
+import androidx.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;

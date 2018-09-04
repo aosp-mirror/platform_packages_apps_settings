@@ -26,9 +26,10 @@ import android.os.Bundle;
 import android.os.Process;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.preference.SwitchPreference;
-import androidx.preference.Preference;
 import android.util.Log;
+
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;

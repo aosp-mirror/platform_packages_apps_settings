@@ -10,6 +10,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
+
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
 
@@ -18,7 +19,6 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;

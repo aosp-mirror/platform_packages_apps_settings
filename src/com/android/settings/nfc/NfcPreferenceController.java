@@ -30,8 +30,6 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
-import java.util.List;
-
 public class NfcPreferenceController extends TogglePreferenceController
         implements LifecycleObserver, OnResume, OnPause {
 

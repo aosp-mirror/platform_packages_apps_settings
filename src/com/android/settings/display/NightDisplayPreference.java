@@ -15,8 +15,9 @@
 package com.android.settings.display;
 
 import android.content.Context;
-import androidx.preference.SwitchPreference;
 import android.util.AttributeSet;
+
+import androidx.preference.SwitchPreference;
 
 import com.android.internal.app.ColorDisplayController;
 

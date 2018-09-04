@@ -28,10 +28,11 @@ import android.os.Handler;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;

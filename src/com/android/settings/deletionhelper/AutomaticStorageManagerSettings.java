@@ -20,12 +20,13 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
-import androidx.preference.DropDownPreference;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.preference.DropDownPreference;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;

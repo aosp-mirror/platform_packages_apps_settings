@@ -19,8 +19,9 @@ package com.android.settings.widget;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
-import androidx.preference.PreferenceViewHolder;
 import android.view.View;
+
+import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

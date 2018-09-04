@@ -17,6 +17,7 @@
 package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doReturn;
 
 import android.content.Intent;

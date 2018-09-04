@@ -33,10 +33,11 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.PreferenceScreen;
 import android.util.Log;
 import android.webkit.IWebViewUpdateService;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.Utils;

@@ -18,8 +18,9 @@ package com.android.settings.fuelgauge.anomaly;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import androidx.annotation.IntDef;
 import android.text.TextUtils;
+
+import androidx.annotation.IntDef;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

@@ -17,8 +17,9 @@
 package com.android.settings.testutils.shadow;
 
 import android.content.Context;
-import androidx.cardview.widget.CardView;
 import android.util.AttributeSet;
+
+import androidx.cardview.widget.CardView;
 
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadows.ShadowFrameLayout;

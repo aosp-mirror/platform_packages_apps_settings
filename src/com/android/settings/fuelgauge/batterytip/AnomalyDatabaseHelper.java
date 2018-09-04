@@ -19,8 +19,9 @@ package com.android.settings.fuelgauge.batterytip;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import androidx.annotation.IntDef;
 import android.util.Log;
+
+import androidx.annotation.IntDef;
 
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 

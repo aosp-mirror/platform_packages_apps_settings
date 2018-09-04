@@ -22,7 +22,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
-import androidx.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.util.IconDrawableFactory;
 import android.view.View;
@@ -30,6 +29,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 

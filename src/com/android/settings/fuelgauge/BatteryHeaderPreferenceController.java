@@ -22,10 +22,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
+import android.widget.TextView;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceFragment;
 import androidx.preference.PreferenceScreen;
-import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;

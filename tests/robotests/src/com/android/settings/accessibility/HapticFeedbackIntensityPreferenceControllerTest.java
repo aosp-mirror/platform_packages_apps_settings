@@ -18,8 +18,9 @@ package com.android.settings.accessibility;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
+
+import androidx.lifecycle.LifecycleOwner;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

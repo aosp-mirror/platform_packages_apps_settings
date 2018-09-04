@@ -22,7 +22,6 @@ import android.app.AlarmManager;
 import android.app.ListFragment;
 import android.content.Context;
 import android.os.Bundle;
-import androidx.annotation.VisibleForTesting;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -32,6 +31,8 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;

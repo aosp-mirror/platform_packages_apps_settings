@@ -17,14 +17,12 @@
 package com.android.settings.applications.defaultapps;
 
 import android.content.Context;
-import android.content.pm.ComponentInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-
 import android.util.ArraySet;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-
 import com.android.settingslib.applications.DefaultAppInfo;
 
 import java.util.ArrayList;

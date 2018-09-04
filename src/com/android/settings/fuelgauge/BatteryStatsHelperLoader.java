@@ -17,9 +17,8 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
-import android.os.BatteryStats;
-import android.os.Bundle;
 import android.os.UserManager;
+
 import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.os.BatteryStatsHelper;

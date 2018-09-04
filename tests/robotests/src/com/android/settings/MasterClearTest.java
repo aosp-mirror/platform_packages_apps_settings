@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doNothing;

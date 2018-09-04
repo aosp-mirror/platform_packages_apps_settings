@@ -15,8 +15,9 @@
 package com.android.settings.enterprise;
 
 import android.content.Context;
-import androidx.preference.Preference;
 import android.text.format.DateUtils;
+
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;

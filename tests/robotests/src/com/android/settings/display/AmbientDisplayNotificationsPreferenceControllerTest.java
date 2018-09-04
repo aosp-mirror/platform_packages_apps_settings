@@ -17,7 +17,9 @@
 package com.android.settings.display;
 
 import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION_AMBIENT_DISPLAY;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
@@ -29,6 +31,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.os.UserHandle;
 import android.provider.Settings;
+
 import androidx.preference.SwitchPreference;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;

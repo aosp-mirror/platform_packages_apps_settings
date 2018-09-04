@@ -19,8 +19,6 @@ package com.android.settings;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,6 +27,9 @@ import android.view.accessibility.AccessibilityEvent;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
+
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 
 import com.android.settings.widget.DotsPageIndicator;
 import com.android.settings.widget.LabeledSeekBar;

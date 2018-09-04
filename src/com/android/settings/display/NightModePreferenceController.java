@@ -17,10 +17,11 @@ import static android.content.Context.UI_MODE_SERVICE;
 
 import android.app.UiModeManager;
 import android.content.Context;
+import android.util.Log;
+
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import android.util.Log;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;

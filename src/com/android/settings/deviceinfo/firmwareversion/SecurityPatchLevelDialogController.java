@@ -19,10 +19,11 @@ package com.android.settings.deviceinfo.firmwareversion;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settingslib.DeviceInfoUtils;

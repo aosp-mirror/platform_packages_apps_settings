@@ -21,8 +21,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.Telephony;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 import android.telephony.SubscriptionManager;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -31,6 +29,9 @@ import android.view.View.OnClickListener;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 
