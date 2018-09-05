@@ -16,11 +16,14 @@
 
 package com.android.settings.homepage;
 
+import static com.android.settings.homepage.HomepageAdapter.SPAN_COUNT;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,7 +38,7 @@ public class PersonalSettingsFragment extends InstrumentedFragment {
     private RecyclerView mCardsContainer;
     //TODO(b/113966426): rename
     private HomepageAdapter mHomepageAdapter;
-    private LinearLayoutManager mLayoutManager;
+    private GridLayoutManager mLayoutManager;
     //TODO(b/113966426): rename
     private HomepageManager mHomepageManager;
 
@@ -52,8 +55,8 @@ public class PersonalSettingsFragment extends InstrumentedFragment {
         final View rootView = inflater.inflate(R.layout.settings_homepage,
                 container, false);
         mCardsContainer = (RecyclerView) rootView.findViewById(R.id.card_container);
-        //TODO(b/111822407): May have to swap to GridLayoutManager
-        mLayoutManager = new LinearLayoutManager(getActivity());
+        mLayoutManager = new GridLayoutManager(getActivity(), SPAN_COUNT,
+                LinearLayoutManager.VERTICAL, false /* reverseLayout */);
         mCardsContainer.setLayoutManager(mLayoutManager);
         mHomepageAdapter = new HomepageAdapter(getContext(), mHomepageManager);
         mCardsContainer.setAdapter(mHomepageAdapter);

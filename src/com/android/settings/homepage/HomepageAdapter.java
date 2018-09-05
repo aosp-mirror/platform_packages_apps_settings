@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -28,14 +29,16 @@ import java.util.List;
 
 public class HomepageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements
         HomepageCardUpdateListener {
+    static final int SPAN_COUNT = 2;
 
     private static final String TAG = "HomepageAdapter";
+    private static final int HALF_WIDTH = 1;
+    private static final int FULL_WIDTH = 2;
 
     private final Context mContext;
     private final ControllerRendererPool mControllerRendererPool;
 
     private List<HomepageCard> mHomepageCards;
-    private RecyclerView mRecyclerView;
 
     public HomepageAdapter(Context context, HomepageManager manager) {
         mContext = context;
@@ -81,7 +84,21 @@ public class HomepageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
-        mRecyclerView = recyclerView;
+        final RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+        if (layoutManager instanceof GridLayoutManager) {
+            final GridLayoutManager gridLayoutManager = (GridLayoutManager) layoutManager;
+            gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    final HomepageCard card = mHomepageCards.get(position);
+                    //TODO(b/114009676): may use another field to make decision. still under review.
+                    if (card.isHalfWidth()) {
+                        return HALF_WIDTH;
+                    }
+                    return FULL_WIDTH;
+                }
+            });
+        }
     }
 
     @Override
