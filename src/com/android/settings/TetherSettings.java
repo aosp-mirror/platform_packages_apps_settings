@@ -423,9 +423,6 @@ public class TetherSettings extends RestrictedSettingsFragment
                 startTethering(TETHERING_BLUETOOTH);
             } else {
                 mCm.stopTethering(TETHERING_BLUETOOTH);
-                // No ACTION_TETHER_STATE_CHANGED is fired or bluetooth unless a device is
-                // connected. Need to update state manually.
-                updateState();
             }
         }
 
