@@ -17,6 +17,8 @@
 package com.android.settings.homepage;
 
 import com.android.settings.homepage.HomepageCard.CardType;
+import com.android.settings.homepage.conditional.ConditionHomepageCardController;
+import com.android.settings.homepage.conditional.ConditionHomepageCardRenderer;
 
 import java.util.Set;
 import java.util.TreeSet;
@@ -43,10 +45,10 @@ public class HomepageCardLookupTable {
         }
     }
 
-    private static final Set<HomepageMapping> LOOKUP_TABLE = new TreeSet<HomepageMapping>() {
-            //add(new HomepageMapping(CardType.CONDITIONAL, ConditionHomepageCardController.class,
-                   // ConditionHomepageCardRenderer.class));
-    };
+    private static final Set<HomepageMapping> LOOKUP_TABLE = new TreeSet<HomepageMapping>() {{
+            add(new HomepageMapping(CardType.CONDITIONAL, ConditionHomepageCardController.class,
+                    ConditionHomepageCardRenderer.class));
+    }};
 
     public static Class<? extends HomepageCardController> getCardControllerClass(
             @CardType int cardType) {
