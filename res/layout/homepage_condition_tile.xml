@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!--
      Copyright (C) 2018 The Android Open Source Project
 
@@ -15,8 +14,16 @@
      limitations under the License.
 -->
 
-<androidx.recyclerview.widget.RecyclerView
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/card_container"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/SuggestionConditionStyle"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" />
+    android:layout_height="wrap_content"
+    app:cardUseCompatPadding="true"
+    app:cardElevation="@dimen/condition_card_elevation"
+    app:cardCornerRadius="@dimen/suggestion_card_corner_radius">
+
+    <include layout="@layout/condition_tile"/>
+
+</androidx.cardview.widget.CardView>

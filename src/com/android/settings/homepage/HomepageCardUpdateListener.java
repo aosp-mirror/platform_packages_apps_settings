@@ -26,6 +26,6 @@ import java.util.List;
  * {@link HomepageManager} will notify the listeners registered, {@link HomepageAdapter} in this
  * case.
  */
-interface HomepageCardUpdateListener {
+public interface HomepageCardUpdateListener {
     void onHomepageCardUpdated(int cardType, List<HomepageCard> updateList);
 }

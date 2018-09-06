@@ -21,6 +21,9 @@ import android.util.Log;
 
 import androidx.collection.ArraySet;
 
+import com.android.settings.homepage.conditional.ConditionHomepageCardController;
+import com.android.settings.homepage.conditional.ConditionHomepageCardRenderer;
+
 import java.util.Set;
 
 /**
@@ -80,19 +83,16 @@ public class ControllerRendererPool {
 
     private HomepageCardController createCardController(Context context,
             Class<? extends HomepageCardController> clz) {
-        /*
         if (ConditionHomepageCardController.class == clz) {
             return new ConditionHomepageCardController(context);
         }
-        */
         return null;
     }
 
     private HomepageCardRenderer createCardRenderer(Context context, Class<?> clz) {
-        //if (ConditionHomepageCardRenderer.class == clz) {
-        //    return new ConditionHomepageCardRenderer(context, this /*controllerRendererPool*/);
-        //}
-
+        if (ConditionHomepageCardRenderer.class == clz) {
+            return new ConditionHomepageCardRenderer(context, this /*controllerRendererPool*/);
+        }
         return null;
     }
 

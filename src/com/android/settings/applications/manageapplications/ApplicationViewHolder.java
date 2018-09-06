@@ -73,8 +73,8 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
     static View newView(ViewGroup parent, boolean twoTarget) {
         ViewGroup view = (ViewGroup) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.preference_app, parent, false);
+        final ViewGroup widgetFrame = view.findViewById(android.R.id.widget_frame);
         if (twoTarget) {
-            final ViewGroup widgetFrame = view.findViewById(android.R.id.widget_frame);
             if (widgetFrame != null) {
                LayoutInflater.from(parent.getContext())
                        .inflate(R.layout.preference_widget_master_switch, widgetFrame, true);
@@ -84,6 +84,8 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
                // second to last, before widget frame
                view.addView(divider, view.getChildCount() - 1);
             }
+        } else if (widgetFrame != null) {
+            widgetFrame.setVisibility(View.GONE);
         }
         return view;
     }

@@ -43,9 +43,9 @@ public class SupportDashboardActivity extends Activity implements Indexable {
         SupportFeatureProvider supportFeatureProvider = FeatureFactory.getFactory(this)
                 .getSupportFeatureProvider(this);
 
-        // try to launch support v2 if we have the feature provider
+        // try to launch support if we have the feature provider
         if (supportFeatureProvider != null) {
-          supportFeatureProvider.startSupportV2(this);
+          supportFeatureProvider.startSupport(this);
           finish();
         }
     }
