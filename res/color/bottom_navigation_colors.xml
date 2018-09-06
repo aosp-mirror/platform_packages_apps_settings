@@ -15,8 +15,11 @@
      limitations under the License.
 -->
 
-<androidx.recyclerview.widget.RecyclerView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/card_container"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content" />
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:state_checked="true"
+        android:color="?android:attr/colorAccent" />
+    <item
+        android:state_checked="false"
+        android:color="?android:attr/textColorPrimary" />
+</selector>
