@@ -24,7 +24,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -50,11 +49,10 @@ public class PersonalSettingsFragment extends InstrumentedFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.settings_homepage,
-                container, false);
+        final View rootView = inflater.inflate(R.layout.settings_homepage, container, false);
         mCardsContainer = rootView.findViewById(R.id.card_container);
         mLayoutManager = new GridLayoutManager(getActivity(), SPAN_COUNT,
-                LinearLayoutManager.VERTICAL, false /* reverseLayout */);
+                GridLayoutManager.VERTICAL, false /* reverseLayout */);
         mCardsContainer.setLayoutManager(mLayoutManager);
         mContextualCardsAdapter = new ContextualCardsAdapter(getContext(), mContextualCardManager);
         mCardsContainer.setAdapter(mContextualCardsAdapter);

@@ -37,8 +37,7 @@ public class ContextualCardsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     private final Context mContext;
     private final ControllerRendererPool mControllerRendererPool;
-
-    private List<ContextualCard> mContextualCards;
+    private final List<ContextualCard> mContextualCards;
 
     public ContextualCardsAdapter(Context context, ContextualCardManager manager) {
         mContext = context;
@@ -102,13 +101,14 @@ public class ContextualCardsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     @Override
-    public void onHomepageCardUpdated(int cardType, List<ContextualCard> contextualCards) {
+    public void onContextualCardUpdated(int cardType, List<ContextualCard> contextualCards) {
         //TODO(b/112245748): Should implement a DiffCallback so we can use notifyItemChanged()
         // instead.
         if (contextualCards == null) {
             mContextualCards.clear();
         } else {
-            mContextualCards = contextualCards;
+            mContextualCards.clear();
+            mContextualCards.addAll(contextualCards);
         }
         notifyDataSetChanged();
     }

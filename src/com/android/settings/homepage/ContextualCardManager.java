@@ -28,14 +28,14 @@ import java.util.List;
 /**
  * This is a centralized manager of multiple {@link ContextualCardController}.
  *
- * {@link ContextualCardManager} first loads data from {@link CardContentLoader} and gets back a list of
- * {@link ContextualCard}. All subclasses of {@link ContextualCardController} are loaded here, which
- * will then trigger the {@link ContextualCardController} to load its data and listen to
+ * {@link ContextualCardManager} first loads data from {@link CardContentLoader} and gets back a
+ * list of {@link ContextualCard}. All subclasses of {@link ContextualCardController} are loaded
+ * here, which will then trigger the {@link ContextualCardController} to load its data and listen to
  * corresponding changes. When every single {@link ContextualCardController} updates its data, the
  * data will be passed here, then going through some sorting mechanisms. The
- * {@link ContextualCardController} will end up building a list of {@link ContextualCard} for {@link
- * ContextualCardsAdapter} and {@link BaseAdapter#notifyDataSetChanged()} will be called to get the page
- * refreshed.
+ * {@link ContextualCardController} will end up building a list of {@link ContextualCard} for
+ * {@link ContextualCardsAdapter} and {@link BaseAdapter#notifyDataSetChanged()} will be called to
+ * get the page refreshed.
  */
 public class ContextualCardManager implements CardContentLoader.CardContentLoaderListener,
         ContextualCardUpdateListener {
@@ -48,8 +48,8 @@ public class ContextualCardManager implements CardContentLoader.CardContentLoade
     private final Context mContext;
     private final ControllerRendererPool mControllerRendererPool;
     private final Lifecycle mLifecycle;
+    private final List<ContextualCard> mContextualCards;
 
-    private List<ContextualCard> mContextualCards;
     private ContextualCardUpdateListener mListener;
 
 
@@ -97,7 +97,7 @@ public class ContextualCardManager implements CardContentLoader.CardContentLoade
     }
 
     @Override
-    public void onHomepageCardUpdated(int cardType, List<ContextualCard> updateList) {
+    public void onContextualCardUpdated(int cardType, List<ContextualCard> updateList) {
         //TODO(b/112245748): Should implement a DiffCallback.
         //Keep the old list for comparison.
         final List<ContextualCard> prevCards = mContextualCards;
@@ -115,13 +115,16 @@ public class ContextualCardManager implements CardContentLoader.CardContentLoade
         sortCards();
 
         if (mListener != null) {
-            mListener.onHomepageCardUpdated(ContextualCard.CardType.INVALID, mContextualCards);
+            mListener.onContextualCardUpdated(ContextualCard.CardType.INVALID, mContextualCards);
         }
     }
 
     @Override
     public void onFinishCardLoading(List<ContextualCard> contextualCards) {
-        mContextualCards = contextualCards;
+        mContextualCards.clear();
+        if (contextualCards != null) {
+            mContextualCards.addAll(contextualCards);
+        }
 
         //Force card sorting here in case CardControllers of custom view have nothing to update
         // for the first launch.

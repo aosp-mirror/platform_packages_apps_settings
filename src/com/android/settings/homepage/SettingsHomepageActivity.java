@@ -14,32 +14,31 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.homepage;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.FeatureFlagUtils;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.android.settings.R;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SettingsBaseActivity;
-import com.android.settings.dashboard.DashboardSummary;
-import com.android.settings.homepage.PersonalSettingsFragment;
-import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.search.SearchFeatureProvider;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class SettingsHomepageActivity extends SettingsBaseActivity {
 
+    @VisibleForTesting
+    static final String PERSONAL_SETTINGS_TAG = "personal_settings";
     private static final String ALL_SETTINGS_TAG = "all_settings";
-    private static final String PERSONAL_SETTINGS_TAG = "personal_settings";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,25 +62,31 @@ public class SettingsHomepageActivity extends SettingsBaseActivity {
         navigation.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.homepage_personal_settings:
-                    switchFragment(PersonalSettingsFragment.class.getName(), PERSONAL_SETTINGS_TAG,
+                    switchFragment(new PersonalSettingsFragment(), PERSONAL_SETTINGS_TAG,
                             ALL_SETTINGS_TAG);
                     return true;
 
                 case R.id.homepage_all_settings:
-                    switchFragment(TopLevelSettings.class.getName(), ALL_SETTINGS_TAG,
+                    switchFragment(new TopLevelSettings(), ALL_SETTINGS_TAG,
                             PERSONAL_SETTINGS_TAG);
                     return true;
             }
             return false;
         });
+
+        if (savedInstanceState == null) {
+            // savedInstanceState is null, this is first load.
+            // Default to open contextual cards.
+            switchFragment(new PersonalSettingsFragment(), PERSONAL_SETTINGS_TAG,
+                    ALL_SETTINGS_TAG);
+        }
     }
 
     public static boolean isDynamicHomepageEnabled(Context context) {
         return FeatureFlagUtils.isEnabled(context, FeatureFlags.DYNAMIC_HOMEPAGE);
     }
 
-    private void switchFragment(String fragmentName, String showFragmentTag,
-            String hideFragmentTag) {
+    private void switchFragment(Fragment fragment, String showFragmentTag, String hideFragmentTag) {
         final FragmentManager fragmentManager = getSupportFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
@@ -92,8 +97,7 @@ public class SettingsHomepageActivity extends SettingsBaseActivity {
 
         Fragment showFragment = fragmentManager.findFragmentByTag(showFragmentTag);
         if (showFragment == null) {
-            showFragment = Fragment.instantiate(this, fragmentName, null /* args */);
-            fragmentTransaction.add(R.id.main_content, showFragment, showFragmentTag);
+            fragmentTransaction.add(R.id.main_content, fragment, showFragmentTag);
         } else {
             fragmentTransaction.show(showFragment);
         }
