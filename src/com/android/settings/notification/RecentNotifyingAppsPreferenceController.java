@@ -82,17 +82,6 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
     private Preference mSeeAllPref;
     private Preference mDivider;
 
-    static {
-        SKIP_SYSTEM_PACKAGES.addAll(Arrays.asList(
-                "android",
-                "com.android.phone",
-                "com.android.settings",
-                "com.android.systemui",
-                "com.android.providers.calendar",
-                "com.android.providers.media"
-        ));
-    }
-
     public RecentNotifyingAppsPreferenceController(Context context, NotificationBackend backend,
             Application app, Fragment host) {
         this(context, backend, app == null ? null : ApplicationsState.getInstance(app), host);
@@ -226,6 +215,7 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
                     .setSourceMetricsCategory(
                             MetricsProto.MetricsEvent.MANAGE_APPLICATIONS_NOTIFICATIONS)
                     .toIntent());
+            pref.setEnabled(mNotificationBackend.isBlockable(mContext, appEntry.info));
             pref.setOnPreferenceChangeListener((preference, newValue) -> {
                 boolean blocked = !(Boolean) newValue;
                 mNotificationBackend.setNotificationsEnabledForPackage(
@@ -272,10 +262,6 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
      * Whether or not the app should be included in recent list.
      */
     private boolean shouldIncludePkgInRecents(String pkgName) {
-         if (SKIP_SYSTEM_PACKAGES.contains(pkgName)) {
-            Log.d(TAG, "System package, skipping " + pkgName);
-            return false;
-        }
         final Intent launchIntent = new Intent().addCategory(Intent.CATEGORY_LAUNCHER)
                 .setPackage(pkgName);
 
