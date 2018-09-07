@@ -124,7 +124,7 @@
                 android:value="true" />
         </activity>
 
-        <activity android:name=".SettingsHomepageActivity"
+        <activity android:name=".homepage.SettingsHomepageActivity"
                   android:taskAffinity="com.android.settings.root"
                   android:label="@string/settings_label_launcher"
                   android:theme="@style/Theme.Settings.Home"
@@ -136,7 +136,7 @@
                 android:taskAffinity="com.android.settings.root"
                 android:label="@string/settings_label_launcher"
                 android:launchMode="singleTask"
-                android:targetActivity=".SettingsHomepageActivity">
+                android:targetActivity=".homepage.SettingsHomepageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
