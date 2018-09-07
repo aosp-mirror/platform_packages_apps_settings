@@ -21,77 +21,77 @@ import android.util.Log;
 
 import androidx.collection.ArraySet;
 
-import com.android.settings.homepage.conditional.ConditionHomepageCardController;
-import com.android.settings.homepage.conditional.ConditionHomepageCardRenderer;
+import com.android.settings.homepage.conditional.ConditionContextualCardController;
+import com.android.settings.homepage.conditional.ConditionContextualCardRenderer;
 
 import java.util.Set;
 
 /**
- * This is a fragment scoped singleton holding a set of {@link HomepageCardController} and
- * {@link HomepageCardRenderer}.
+ * This is a fragment scoped singleton holding a set of {@link ContextualCardController} and
+ * {@link ContextualCardRenderer}.
  */
 public class ControllerRendererPool {
 
     private static final String TAG = "ControllerRendererPool";
 
-    private final Set<HomepageCardController> mControllers;
-    private final Set<HomepageCardRenderer> mRenderers;
+    private final Set<ContextualCardController> mControllers;
+    private final Set<ContextualCardRenderer> mRenderers;
 
     public ControllerRendererPool() {
         mControllers = new ArraySet<>();
         mRenderers = new ArraySet<>();
     }
 
-    public <T extends HomepageCardController> T getController(Context context,
-            @HomepageCard.CardType int cardType) {
-        final Class<? extends HomepageCardController> clz =
-                HomepageCardLookupTable.getCardControllerClass(cardType);
-        for (HomepageCardController controller : mControllers) {
+    public <T extends ContextualCardController> T getController(Context context,
+            @ContextualCard.CardType int cardType) {
+        final Class<? extends ContextualCardController> clz =
+                ContextualCardLookupTable.getCardControllerClass(cardType);
+        for (ContextualCardController controller : mControllers) {
             if (controller.getClass() == clz) {
                 Log.d(TAG, "Controller is already there.");
                 return (T) controller;
             }
         }
 
-        final HomepageCardController controller = createCardController(context, clz);
+        final ContextualCardController controller = createCardController(context, clz);
         if (controller != null) {
             mControllers.add(controller);
         }
         return (T) controller;
     }
 
-    public Set<HomepageCardController> getControllers() {
+    public Set<ContextualCardController> getControllers() {
         return mControllers;
     }
 
-    public HomepageCardRenderer getRenderer(Context context, @HomepageCard.CardType int cardType) {
-        final Class<? extends HomepageCardRenderer> clz =
-                HomepageCardLookupTable.getCardRendererClasses(cardType);
-        for (HomepageCardRenderer renderer : mRenderers) {
+    public ContextualCardRenderer getRenderer(Context context, @ContextualCard.CardType int cardType) {
+        final Class<? extends ContextualCardRenderer> clz =
+                ContextualCardLookupTable.getCardRendererClasses(cardType);
+        for (ContextualCardRenderer renderer : mRenderers) {
             if (renderer.getClass() == clz) {
                 Log.d(TAG, "Renderer is already there.");
                 return renderer;
             }
         }
 
-        final HomepageCardRenderer renderer = createCardRenderer(context, clz);
+        final ContextualCardRenderer renderer = createCardRenderer(context, clz);
         if (renderer != null) {
             mRenderers.add(renderer);
         }
         return renderer;
     }
 
-    private HomepageCardController createCardController(Context context,
-            Class<? extends HomepageCardController> clz) {
-        if (ConditionHomepageCardController.class == clz) {
-            return new ConditionHomepageCardController(context);
+    private ContextualCardController createCardController(Context context,
+            Class<? extends ContextualCardController> clz) {
+        if (ConditionContextualCardController.class == clz) {
+            return new ConditionContextualCardController(context);
         }
         return null;
     }
 
-    private HomepageCardRenderer createCardRenderer(Context context, Class<?> clz) {
-        if (ConditionHomepageCardRenderer.class == clz) {
-            return new ConditionHomepageCardRenderer(context, this /*controllerRendererPool*/);
+    private ContextualCardRenderer createCardRenderer(Context context, Class<?> clz) {
+        if (ConditionContextualCardRenderer.class == clz) {
+            return new ConditionContextualCardRenderer(context, this /*controllerRendererPool*/);
         }
         return null;
     }
