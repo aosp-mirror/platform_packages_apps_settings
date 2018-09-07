@@ -27,21 +27,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.homepage.ContextualCard;
 import com.android.settings.homepage.ControllerRendererPool;
-import com.android.settings.homepage.HomepageCard;
-import com.android.settings.homepage.HomepageCardRenderer;
+import com.android.settings.homepage.ContextualCardRenderer;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /**
- * Card renderer for {@link ConditionCard}.
+ * Card renderer for {@link ConditionalContextualCard}.
  */
-public class ConditionHomepageCardRenderer implements HomepageCardRenderer {
+public class ConditionContextualCardRenderer implements ContextualCardRenderer {
 
     private final Context mContext;
     private final ControllerRendererPool mControllerRendererPool;
 
-    public ConditionHomepageCardRenderer(Context context,
+    public ConditionContextualCardRenderer(Context context,
             ControllerRendererPool controllerRendererPool) {
         mContext = context;
         mControllerRendererPool = controllerRendererPool;
@@ -58,9 +58,9 @@ public class ConditionHomepageCardRenderer implements HomepageCardRenderer {
     }
 
     @Override
-    public void bindView(RecyclerView.ViewHolder holder, HomepageCard homepageCard) {
+    public void bindView(RecyclerView.ViewHolder holder, ContextualCard contextualCard) {
         final ConditionalCardHolder view = (ConditionalCardHolder) holder;
-        final ConditionCard card = (ConditionCard) homepageCard;
+        final ConditionalContextualCard card = (ConditionalContextualCard) contextualCard;
         final MetricsFeatureProvider metricsFeatureProvider = FeatureFactory.getFactory(
                 mContext).getMetricsFeatureProvider();
 
@@ -71,7 +71,7 @@ public class ConditionHomepageCardRenderer implements HomepageCardRenderer {
         initializeActionButton(view, card, metricsFeatureProvider);
     }
 
-    private void initializePrimaryClick(ConditionalCardHolder view, ConditionCard card,
+    private void initializePrimaryClick(ConditionalCardHolder view, ConditionalContextualCard card,
             MetricsFeatureProvider metricsFeatureProvider) {
         view.itemView.findViewById(R.id.content).setOnClickListener(
                 v -> {
@@ -83,7 +83,7 @@ public class ConditionHomepageCardRenderer implements HomepageCardRenderer {
                 });
     }
 
-    private void initializeView(ConditionalCardHolder view, ConditionCard card) {
+    private void initializeView(ConditionalCardHolder view, ConditionalContextualCard card) {
         view.icon.setImageDrawable(card.getIconDrawable());
         view.title.setText(card.getTitleText());
         view.summary.setText(card.getSummaryText());
@@ -91,7 +91,7 @@ public class ConditionHomepageCardRenderer implements HomepageCardRenderer {
         setViewVisibility(view.itemView, R.id.divider, false);
     }
 
-    private void initializeActionButton(ConditionalCardHolder view, ConditionCard card,
+    private void initializeActionButton(ConditionalCardHolder view, ConditionalContextualCard card,
             MetricsFeatureProvider metricsFeatureProvider) {
         final CharSequence action = card.getActionText();
         final boolean hasButtons = !TextUtils.isEmpty(action);

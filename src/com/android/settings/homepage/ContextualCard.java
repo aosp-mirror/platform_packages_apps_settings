@@ -25,12 +25,12 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * Data class representing a {@link HomepageCard}.
+ * Data class representing a {@link ContextualCard}.
  */
-public class HomepageCard {
+public class ContextualCard {
 
     /**
-     * Flags indicating the type of the HomepageCard.
+     * Flags indicating the type of the ContextualCard.
      */
     @IntDef({CardType.INVALID, CardType.SLICE, CardType.SUGGESTION, CardType.CONDITIONAL})
     @Retention(RetentionPolicy.SOURCE)
@@ -137,7 +137,7 @@ public class HomepageCard {
         return mIsHalfWidth;
     }
 
-    public HomepageCard(Builder builder) {
+    public ContextualCard(Builder builder) {
         mName = builder.mName;
         mCardType = builder.mCardType;
         mRankingScore = builder.mRankingScore;
@@ -171,10 +171,10 @@ public class HomepageCard {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof HomepageCard)) {
+        if (!(obj instanceof ContextualCard)) {
             return false;
         }
-        final HomepageCard that = (HomepageCard) obj;
+        final ContextualCard that = (ContextualCard) obj;
 
         return TextUtils.equals(mName, that.mName);
     }
@@ -289,8 +289,8 @@ public class HomepageCard {
             return this;
         }
 
-        public HomepageCard build() {
-            return new HomepageCard(this);
+        public ContextualCard build() {
+            return new ContextualCard(this);
         }
     }
 }

@@ -27,39 +27,39 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomepageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements
-        HomepageCardUpdateListener {
+public class ContextualCardsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements
+        ContextualCardUpdateListener {
     static final int SPAN_COUNT = 2;
 
-    private static final String TAG = "HomepageAdapter";
+    private static final String TAG = "ContextualCardsAdapter";
     private static final int HALF_WIDTH = 1;
     private static final int FULL_WIDTH = 2;
 
     private final Context mContext;
     private final ControllerRendererPool mControllerRendererPool;
 
-    private List<HomepageCard> mHomepageCards;
+    private List<ContextualCard> mContextualCards;
 
-    public HomepageAdapter(Context context, HomepageManager manager) {
+    public ContextualCardsAdapter(Context context, ContextualCardManager manager) {
         mContext = context;
-        mHomepageCards = new ArrayList<>();
+        mContextualCards = new ArrayList<>();
         mControllerRendererPool = manager.getControllerRendererPool();
         setHasStableIds(true);
     }
 
     @Override
     public long getItemId(int position) {
-        return mHomepageCards.get(position).hashCode();
+        return mContextualCards.get(position).hashCode();
     }
 
     @Override
     public int getItemViewType(int position) {
-        return mHomepageCards.get(position).getCardType();
+        return mContextualCards.get(position).getCardType();
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int cardType) {
-        final HomepageCardRenderer renderer = mControllerRendererPool.getRenderer(mContext,
+        final ContextualCardRenderer renderer = mControllerRendererPool.getRenderer(mContext,
                 cardType);
         final int viewType = renderer.getViewType();
         final View view = LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false);
@@ -69,16 +69,16 @@ public class HomepageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        final int cardType = mHomepageCards.get(position).getCardType();
-        final HomepageCardRenderer renderer = mControllerRendererPool.getRenderer(mContext,
+        final int cardType = mContextualCards.get(position).getCardType();
+        final ContextualCardRenderer renderer = mControllerRendererPool.getRenderer(mContext,
                 cardType);
 
-        renderer.bindView(holder, mHomepageCards.get(position));
+        renderer.bindView(holder, mContextualCards.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return mHomepageCards.size();
+        return mContextualCards.size();
     }
 
     @Override
@@ -90,7 +90,7 @@ public class HomepageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                 @Override
                 public int getSpanSize(int position) {
-                    final HomepageCard card = mHomepageCards.get(position);
+                    final ContextualCard card = mContextualCards.get(position);
                     //TODO(b/114009676): may use another field to make decision. still under review.
                     if (card.isHalfWidth()) {
                         return HALF_WIDTH;
@@ -102,13 +102,13 @@ public class HomepageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @Override
-    public void onHomepageCardUpdated(int cardType, List<HomepageCard> homepageCards) {
+    public void onHomepageCardUpdated(int cardType, List<ContextualCard> contextualCards) {
         //TODO(b/112245748): Should implement a DiffCallback so we can use notifyItemChanged()
         // instead.
-        if (homepageCards == null) {
-            mHomepageCards.clear();
+        if (contextualCards == null) {
+            mContextualCards.clear();
         } else {
-            mHomepageCards = homepageCards;
+            mContextualCards = contextualCards;
         }
         notifyDataSetChanged();
     }

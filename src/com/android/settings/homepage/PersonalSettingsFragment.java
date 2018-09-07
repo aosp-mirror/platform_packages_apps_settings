@@ -16,7 +16,7 @@
 
 package com.android.settings.homepage;
 
-import static com.android.settings.homepage.HomepageAdapter.SPAN_COUNT;
+import static com.android.settings.homepage.ContextualCardsAdapter.SPAN_COUNT;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -36,17 +36,15 @@ public class PersonalSettingsFragment extends InstrumentedFragment {
     private static final String TAG = "PersonalSettingsFragment";
 
     private RecyclerView mCardsContainer;
-    //TODO(b/113966426): rename
-    private HomepageAdapter mHomepageAdapter;
     private GridLayoutManager mLayoutManager;
-    //TODO(b/113966426): rename
-    private HomepageManager mHomepageManager;
+    private ContextualCardsAdapter mContextualCardsAdapter;
+    private ContextualCardManager mContextualCardManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mHomepageManager = new HomepageManager(getContext(), getSettingsLifecycle());
-        mHomepageManager.startCardContentLoading();
+        mContextualCardManager = new ContextualCardManager(getContext(), getSettingsLifecycle());
+        mContextualCardManager.startCardContentLoading();
     }
 
     @Override
@@ -58,9 +56,9 @@ public class PersonalSettingsFragment extends InstrumentedFragment {
         mLayoutManager = new GridLayoutManager(getActivity(), SPAN_COUNT,
                 LinearLayoutManager.VERTICAL, false /* reverseLayout */);
         mCardsContainer.setLayoutManager(mLayoutManager);
-        mHomepageAdapter = new HomepageAdapter(getContext(), mHomepageManager);
-        mCardsContainer.setAdapter(mHomepageAdapter);
-        mHomepageManager.setListener(mHomepageAdapter);
+        mContextualCardsAdapter = new ContextualCardsAdapter(getContext(), mContextualCardManager);
+        mCardsContainer.setAdapter(mContextualCardsAdapter);
+        mContextualCardManager.setListener(mContextualCardsAdapter);
 
         return rootView;
     }

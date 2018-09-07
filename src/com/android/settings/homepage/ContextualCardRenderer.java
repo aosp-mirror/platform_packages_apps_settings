@@ -21,9 +21,9 @@ import android.view.View;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
- * UI renderer for {@link HomepageCard}.
+ * UI renderer for {@link ContextualCard}.
  */
-public interface HomepageCardRenderer {
+public interface ContextualCardRenderer {
 
     /**
      * The layout type of the controller.
@@ -31,16 +31,16 @@ public interface HomepageCardRenderer {
     int getViewType();
 
     /**
-     * When {@link HomepageAdapter} calls {@link HomepageAdapter#onCreateViewHolder(ViewGroup,
+     * When {@link ContextualCardsAdapter} calls {@link ContextualCardsAdapter#onCreateViewHolder(ViewGroup,
      * int)}, this method will be called to retrieve the corresponding
      * {@link androidx.recyclerview.widget.RecyclerView.ViewHolder}.
      */
     RecyclerView.ViewHolder createViewHolder(View view);
 
     /**
-     * When {@link HomepageAdapter} calls {@link HomepageAdapter#onBindViewHolder(RecyclerView
+     * When {@link ContextualCardsAdapter} calls {@link ContextualCardsAdapter#onBindViewHolder(RecyclerView
      * .ViewHolder, int)}, this method will be called to bind data to the
      * {@link androidx.recyclerview.widget.RecyclerView.ViewHolder}.
      */
-    void bindView(RecyclerView.ViewHolder holder, HomepageCard card);
+    void bindView(RecyclerView.ViewHolder holder, ContextualCard card);
 }

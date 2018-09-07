@@ -16,21 +16,21 @@
 
 package com.android.settings.homepage.conditional;
 
-import com.android.settings.homepage.HomepageCard;
+import com.android.settings.homepage.ContextualCard;
 
 /**
- * Data class representing a {@link ConditionCard}.
+ * Data class representing a conditional {@link ContextualCard}.
  *
- * Use this class to store additional attributes on top of {@link HomepageCard} for
+ * Use this class to store additional attributes on top of {@link ContextualCard} for
  * {@link ConditionalCard}.
  */
-public class ConditionCard extends HomepageCard {
+public class ConditionalContextualCard extends ContextualCard {
 
     private final long mConditionId;
     private final int mMetricsConstant;
     private final CharSequence mActionText;
 
-    private ConditionCard(Builder builder) {
+    private ConditionalContextualCard(Builder builder) {
         super(builder);
 
         mConditionId = builder.mConditionId;
@@ -50,7 +50,7 @@ public class ConditionCard extends HomepageCard {
         return mActionText;
     }
 
-    static class Builder extends HomepageCard.Builder {
+    static class Builder extends ContextualCard.Builder {
 
         private long mConditionId;
         private int mMetricsConstant;
@@ -71,8 +71,8 @@ public class ConditionCard extends HomepageCard {
             return this;
         }
 
-        public ConditionCard build() {
-            return new ConditionCard(this);
+        public ConditionalContextualCard build() {
+            return new ConditionalContextualCard(this);
         }
     }
 }

@@ -19,22 +19,22 @@ package com.android.settings.homepage;
 import java.util.List;
 
 /**
- * Data controller for {@link HomepageCard}.
+ * Data controller for {@link ContextualCard}.
  */
-public interface HomepageCardController {
+public interface ContextualCardController {
 
-    @HomepageCard.CardType
+    @ContextualCard.CardType
     int getCardType();
 
     /**
-     * When data is updated or changed, the new data should be passed to HomepageManager for list
+     * When data is updated or changed, the new data should be passed to ContextualCardManager for list
      * updating.
      */
-    void onDataUpdated(List<HomepageCard> cardList);
+    void onDataUpdated(List<ContextualCard> cardList);
 
-    void onPrimaryClick(HomepageCard card);
+    void onPrimaryClick(ContextualCard card);
 
-    void onActionClick(HomepageCard card);
+    void onActionClick(ContextualCard card);
 
-    void setHomepageCardUpdateListener(HomepageCardUpdateListener listener);
+    void setCardUpdateListener(ContextualCardUpdateListener listener);
 }
