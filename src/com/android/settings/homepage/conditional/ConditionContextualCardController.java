@@ -58,7 +58,7 @@ public class ConditionContextualCardController implements ContextualCardControll
 
     @Override
     public void onDataUpdated(List<ContextualCard> cardList) {
-        mListener.onHomepageCardUpdated(getCardType(), cardList);
+        mListener.onContextualCardUpdated(getCardType(), cardList);
     }
 
     @Override
