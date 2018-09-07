@@ -54,7 +54,7 @@ public class PersonalSettingsFragment extends InstrumentedFragment {
             Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.settings_homepage,
                 container, false);
-        mCardsContainer = (RecyclerView) rootView.findViewById(R.id.card_container);
+        mCardsContainer = rootView.findViewById(R.id.card_container);
         mLayoutManager = new GridLayoutManager(getActivity(), SPAN_COUNT,
                 LinearLayoutManager.VERTICAL, false /* reverseLayout */);
         mCardsContainer.setLayoutManager(mLayoutManager);

@@ -29,6 +29,7 @@ import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.dashboard.DashboardSummary;
 import com.android.settings.homepage.PersonalSettingsFragment;
+import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.SearchFeatureProvider;
 
@@ -58,8 +59,7 @@ public class SettingsHomepageActivity extends SettingsBaseActivity {
         FeatureFactory.getFactory(this).getSearchFeatureProvider()
                 .initSearchToolbar(this, searchButton);
 
-        final BottomNavigationView navigation = (BottomNavigationView) findViewById(
-                R.id.bottom_nav);
+        final BottomNavigationView navigation = findViewById(R.id.bottom_nav);
         navigation.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.homepage_personal_settings:
@@ -68,7 +68,7 @@ public class SettingsHomepageActivity extends SettingsBaseActivity {
                     return true;
 
                 case R.id.homepage_all_settings:
-                    switchFragment(DashboardSummary.class.getName(), ALL_SETTINGS_TAG,
+                    switchFragment(TopLevelSettings.class.getName(), ALL_SETTINGS_TAG,
                             PERSONAL_SETTINGS_TAG);
                     return true;
             }
