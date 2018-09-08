@@ -112,19 +112,22 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
 
         mPkgInfo = findPackageInfo(mPkg, mUid);
 
-        mUserId = UserHandle.getUserId(mUid);
-        mSuspendedAppsAdmin = RestrictedLockUtilsInternal.checkIfApplicationIsSuspended(
-                mContext, mPkg, mUserId);
+        if (mPkgInfo != null) {
+            mUserId = UserHandle.getUserId(mUid);
+            mSuspendedAppsAdmin = RestrictedLockUtilsInternal.checkIfApplicationIsSuspended(
+                    mContext, mPkg, mUserId);
 
-        loadChannel();
-        loadAppRow();
-        loadChannelGroup();
-        collectConfigActivities();
 
-        getSettingsLifecycle().addObserver(use(HeaderPreferenceController.class));
+            loadChannel();
+            loadAppRow();
+            loadChannelGroup();
+            collectConfigActivities();
 
-        for (NotificationPreferenceController controller : mControllers) {
-            controller.onResume(mAppRow, mChannel, mChannelGroup, mSuspendedAppsAdmin);
+            getSettingsLifecycle().addObserver(use(HeaderPreferenceController.class));
+
+            for (NotificationPreferenceController controller : mControllers) {
+                controller.onResume(mAppRow, mChannel, mChannelGroup, mSuspendedAppsAdmin);
+            }
         }
     }
 
