@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings;
+package com.android.settings.display;
 
 import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
@@ -31,6 +31,8 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import androidx.viewpager.widget.PagerAdapter;
+
+import com.android.settings.support.actionbar.HelpResourceProvider;
 
 /**
  * A PagerAdapter used by PreviewSeekBarPreferenceFragment that for showing multiple preview screen
@@ -76,16 +78,12 @@ public class PreviewPagerAdapter extends PagerAdapter {
                 final Context configContext = context.createConfigurationContext(configurations[j]);
                 configContext.getTheme().setTo(context.getTheme());
 
-                final LayoutInflater configInflater = LayoutInflater.from(configContext);
                 final ViewStub sampleViewStub = new ViewStub(configContext);
                 sampleViewStub.setLayoutResource(previewSampleResIds[i]);
                 final int fi = i, fj = j;
-                sampleViewStub.setOnInflateListener(new OnInflateListener() {
-                    @Override
-                    public void onInflate(ViewStub stub, View inflated) {
-                        inflated.setVisibility(stub.getVisibility());
-                        mViewStubInflated[fi][fj] = true;
-                    }
+                sampleViewStub.setOnInflateListener((stub, inflated) -> {
+                    inflated.setVisibility(stub.getVisibility());
+                    mViewStubInflated[fi][fj] = true;
                 });
 
                 mPreviewFrames[p].addView(sampleViewStub);
@@ -94,7 +92,7 @@ public class PreviewPagerAdapter extends PagerAdapter {
     }
 
     @Override
-    public void destroyItem (ViewGroup container, int position, Object object) {
+    public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView((View) object);
     }
 
@@ -164,29 +162,29 @@ public class PreviewPagerAdapter extends PagerAdapter {
             if (visibility == View.VISIBLE) {
                 // Fade in animation.
                 view.animate()
-                .alpha(alpha)
-                .setInterpolator(FADE_IN_INTERPOLATOR)
-                .setDuration(CROSS_FADE_DURATION_MS)
-                .setListener(new PreviewFrameAnimatorListener())
-                .withStartAction(new Runnable() {
-                    @Override
-                    public void run() {
-                        view.setVisibility(visibility);
-                    }
-                });
+                        .alpha(alpha)
+                        .setInterpolator(FADE_IN_INTERPOLATOR)
+                        .setDuration(CROSS_FADE_DURATION_MS)
+                        .setListener(new PreviewFrameAnimatorListener())
+                        .withStartAction(new Runnable() {
+                            @Override
+                            public void run() {
+                                view.setVisibility(visibility);
+                            }
+                        });
             } else {
                 // Fade out animation.
                 view.animate()
-                .alpha(alpha)
-                .setInterpolator(FADE_OUT_INTERPOLATOR)
-                .setDuration(CROSS_FADE_DURATION_MS)
-                .setListener(new PreviewFrameAnimatorListener())
-                .withEndAction(new Runnable() {
-                    @Override
-                    public void run() {
-                        view.setVisibility(visibility);
-                    }
-                });
+                        .alpha(alpha)
+                        .setInterpolator(FADE_OUT_INTERPOLATOR)
+                        .setDuration(CROSS_FADE_DURATION_MS)
+                        .setListener(new PreviewFrameAnimatorListener())
+                        .withEndAction(new Runnable() {
+                            @Override
+                            public void run() {
+                                view.setVisibility(visibility);
+                            }
+                        });
             }
         }
     }

@@ -18,8 +18,7 @@ package com.android.settings.display;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 
-public class ScreenZoomPreferenceFragmentForSetupWizard
-        extends ScreenZoomSettings {
+public class ScreenZoomPreferenceFragmentForSetupWizard extends ScreenZoomSettings {
 
     @Override
     public int getMetricsCategory() {
