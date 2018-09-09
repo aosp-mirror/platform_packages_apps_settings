@@ -123,7 +123,8 @@ public class UsbDetailsPowerRoleController extends UsbDetailsController
 
     @Override
     public boolean isAvailable() {
-        return !Utils.isMonkeyRunning();
+        return !Utils.isMonkeyRunning()
+                && !mUsbBackend.isSinglePowerRoleSupported();
     }
 
     @Override
