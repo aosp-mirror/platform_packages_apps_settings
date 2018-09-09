@@ -73,10 +73,11 @@ public class SettingsActivityTest {
         Global.putInt(mContext.getContentResolver(), Global.DEVICE_PROVISIONED, 0);
         final Intent intent = new Intent(mContext, Settings.class);
         final SettingsActivity activity =
-            Robolectric.buildActivity(SettingsActivity.class, intent).create(Bundle.EMPTY).get();
+                Robolectric.buildActivity(SettingsActivity.class, intent).create(
+                        Bundle.EMPTY).get();
 
         assertThat(activity.findViewById(R.id.search_bar).getVisibility())
-            .isEqualTo(View.INVISIBLE);
+                .isEqualTo(View.INVISIBLE);
     }
 
     @Test
@@ -84,7 +85,8 @@ public class SettingsActivityTest {
         Global.putInt(mContext.getContentResolver(), Global.DEVICE_PROVISIONED, 1);
         final Intent intent = new Intent(mContext, Settings.class);
         final SettingsActivity activity =
-            Robolectric.buildActivity(SettingsActivity.class, intent).create(Bundle.EMPTY).get();
+                Robolectric.buildActivity(SettingsActivity.class, intent).create(
+                        Bundle.EMPTY).get();
 
         assertThat(activity.findViewById(R.id.search_bar).getVisibility()).isEqualTo(View.VISIBLE);
     }
@@ -92,6 +94,7 @@ public class SettingsActivityTest {
     @Test
     public void launchSettingFragment_nullExtraShowFragment_shouldNotCrash() {
         when(mActivity.getSupportFragmentManager()).thenReturn(mFragmentManager);
+        doReturn(mContext.getContentResolver()).when(mActivity).getContentResolver();
         when(mFragmentManager.beginTransaction()).thenReturn(mock(FragmentTransaction.class));
 
         doReturn(RuntimeEnvironment.application.getClassLoader()).when(mActivity).getClassLoader();

@@ -26,7 +26,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 
 import com.android.settings.R;
-import com.android.settings.homepage.HomepageCardUpdateListener;
+import com.android.settings.homepage.ContextualCardUpdateListener;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -41,20 +41,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-public class ConditionHomepageCardControllerTest {
+public class ConditionContextualCardControllerTest {
 
     @Mock
     private ConditionManager mConditionManager;
     @Mock
-    private HomepageCardUpdateListener mListener;
+    private ContextualCardUpdateListener mListener;
     private Context mContext;
-    private ConditionHomepageCardController mController;
+    private ConditionContextualCardController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        mController = spy(new ConditionHomepageCardController(mContext));
+        mController = spy(new ConditionContextualCardController(mContext));
         ReflectionHelpers.setField(mController, "mConditionManager", mConditionManager);
     }
 
@@ -78,7 +78,7 @@ public class ConditionHomepageCardControllerTest {
         final List<ConditionalCard> conditionalCards = new ArrayList<>();
         conditionalCards.add(fakeConditionalCard);
         when(mConditionManager.getDisplayableCards()).thenReturn(conditionalCards);
-        mController.setHomepageCardUpdateListener(mListener);
+        mController.setCardUpdateListener(mListener);
 
         mController.onConditionsChanged();
 

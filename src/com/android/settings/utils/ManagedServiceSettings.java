@@ -117,7 +117,7 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
             CharSequence title = null;
             try {
                 title = mPm.getApplicationInfoAsUser(
-                        service.packageName, 0, getCurrentUser(managedProfileId)).loadLabel(mPm);
+                        service.packageName, 0, UserHandle.myUserId()).loadLabel(mPm);
             } catch (PackageManager.NameNotFoundException e) {
                 // unlikely, as we are iterating over live services.
                 Log.e(TAG, "can't find package name", e);

@@ -31,8 +31,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
+import com.android.settings.homepage.ContextualCard;
 import com.android.settings.homepage.ControllerRendererPool;
-import com.android.settings.homepage.HomepageCard;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -43,20 +43,20 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-public class ConditionHomepageCardRendererTest {
+public class ConditionContextualCardRendererTest {
 
     @Mock
     private ControllerRendererPool mControllerRendererPool;
     @Mock
-    private ConditionHomepageCardController mController;
+    private ConditionContextualCardController mController;
     private Context mContext;
-    private ConditionHomepageCardRenderer mRenderer;
+    private ConditionContextualCardRenderer mRenderer;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        mRenderer = new ConditionHomepageCardRenderer(mContext, mControllerRendererPool);
+        mRenderer = new ConditionContextualCardRenderer(mContext, mControllerRendererPool);
     }
 
     @Test
@@ -68,9 +68,9 @@ public class ConditionHomepageCardRendererTest {
         final RecyclerView.ViewHolder viewHolder = mRenderer.createViewHolder(view);
         final View card = view.findViewById(R.id.content);
         when(mControllerRendererPool.getController(mContext,
-                HomepageCard.CardType.CONDITIONAL)).thenReturn(mController);
+                ContextualCard.CardType.CONDITIONAL)).thenReturn(mController);
 
-        mRenderer.bindView(viewHolder, getHomepageCard());
+        mRenderer.bindView(viewHolder, buildConditionContextualCard());
 
         assertThat(card).isNotNull();
         assertThat(card.hasOnClickListeners()).isTrue();
@@ -85,28 +85,27 @@ public class ConditionHomepageCardRendererTest {
         final RecyclerView.ViewHolder viewHolder = mRenderer.createViewHolder(view);
         final View card = view.findViewById(R.id.content);
         when(mControllerRendererPool.getController(mContext,
-                HomepageCard.CardType.CONDITIONAL)).thenReturn(mController);
+                ContextualCard.CardType.CONDITIONAL)).thenReturn(mController);
 
-        mRenderer.bindView(viewHolder, getHomepageCard());
+        mRenderer.bindView(viewHolder, buildConditionContextualCard());
 
         assertThat(card).isNotNull();
         card.performClick();
 
-        verify(mController).onPrimaryClick(any(HomepageCard.class));
+        verify(mController).onPrimaryClick(any(ContextualCard.class));
     }
 
-    private HomepageCard getHomepageCard() {
-        ConditionCard conditionCard = ((ConditionCard.Builder) new ConditionCard.Builder()
+    private ContextualCard buildConditionContextualCard() {
+        return new ConditionalContextualCard.Builder()
                 .setConditionId(123)
                 .setMetricsConstant(1)
                 .setActionText("test_action")
                 .setName("test_name")
-                .setCardType(HomepageCard.CardType.CONDITIONAL)
+                .setCardType(ContextualCard.CardType.CONDITIONAL)
                 .setTitleText("test_title")
                 .setSummaryText("test_summary")
                 .setIconDrawable(mContext.getDrawable(R.drawable.ic_do_not_disturb_on_24dp))
-                .setIsHalfWidth(true))
+                .setIsHalfWidth(true)
                 .build();
-        return conditionCard;
     }
 }

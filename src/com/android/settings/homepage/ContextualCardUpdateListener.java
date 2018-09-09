@@ -19,22 +19,13 @@ package com.android.settings.homepage;
 import java.util.List;
 
 /**
- * Data controller for {@link HomepageCard}.
+ * When {@link ContextualCardController} detects changes, it will notify the listeners registered.
+ * In our case, {@link ContextualCardManager} gets noticed.
+ *
+ * After the list of {@link ContextualCard} gets updated in{@link ContextualCardManager},
+ * {@link ContextualCardManager} will notify the listeners registered, {@link
+ * ContextualCardsAdapter} in this case.
  */
-public interface HomepageCardController {
-
-    @HomepageCard.CardType
-    int getCardType();
-
-    /**
-     * When data is updated or changed, the new data should be passed to HomepageManager for list
-     * updating.
-     */
-    void onDataUpdated(List<HomepageCard> cardList);
-
-    void onPrimaryClick(HomepageCard card);
-
-    void onActionClick(HomepageCard card);
-
-    void setHomepageCardUpdateListener(HomepageCardUpdateListener listener);
+public interface ContextualCardUpdateListener {
+    void onContextualCardUpdated(int cardType, List<ContextualCard> updateList);
 }

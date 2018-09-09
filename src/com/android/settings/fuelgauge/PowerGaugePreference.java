@@ -58,7 +58,9 @@ public class PowerGaugePreference extends AppPreference {
     private PowerGaugePreference(Context context, AttributeSet attrs, Drawable icon,
             CharSequence contentDescription, BatteryEntry info) {
         super(context, attrs);
-        setIcon(icon != null ? icon : new ColorDrawable(0));
+        if (icon != null) {
+            setIcon(icon);
+        }
         setWidgetLayoutResource(R.layout.preference_widget_summary);
         mInfo = info;
         mContentDescription = contentDescription;

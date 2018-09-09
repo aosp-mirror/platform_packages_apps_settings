@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -184,4 +185,31 @@ public class UserSettingsTest {
 
         assertThat(addUser.isEnabled()).isFalse();
     }
+
+    @Test
+    public void updateUserList_cannotAddUserButCanSwitchUser_shouldNotShowAddUser() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+            Settings.Global.DEVICE_PROVISIONED, 1);
+        final RestrictedPreference addUser = mock(RestrictedPreference.class);
+
+        mUserCapabilities.mCanAddUser = false;
+        mUserCapabilities.mDisallowAddUser = true;
+        mUserCapabilities.mUserSwitcherEnabled = true;
+
+        ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
+        ReflectionHelpers.setField(mFragment, "mUserCaps", mUserCapabilities);
+        ReflectionHelpers.setField(mFragment, "mDefaultIconDrawable", mDefaultIconDrawable);
+        ReflectionHelpers.setField(mFragment, "mAddingUser", false);
+        mFragment.mMePreference = mMePreference;
+        mFragment.mUserListCategory = mock(PreferenceCategory.class);
+        mFragment.mAddUser = addUser;
+
+        doReturn(mock(PreferenceScreen.class)).when(mFragment).getPreferenceScreen();
+
+        mFragment.updateUserList();
+
+        verify(addUser, never()).setVisible(true);
+
+    }
+
 }

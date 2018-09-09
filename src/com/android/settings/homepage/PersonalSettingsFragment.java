@@ -16,12 +16,14 @@
 
 package com.android.settings.homepage;
 
+import static com.android.settings.homepage.ContextualCardsAdapter.SPAN_COUNT;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -33,31 +35,28 @@ public class PersonalSettingsFragment extends InstrumentedFragment {
     private static final String TAG = "PersonalSettingsFragment";
 
     private RecyclerView mCardsContainer;
-    //TODO(b/113966426): rename
-    private HomepageAdapter mHomepageAdapter;
-    private LinearLayoutManager mLayoutManager;
-    //TODO(b/113966426): rename
-    private HomepageManager mHomepageManager;
+    private GridLayoutManager mLayoutManager;
+    private ContextualCardsAdapter mContextualCardsAdapter;
+    private ContextualCardManager mContextualCardManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mHomepageManager = new HomepageManager(getContext(), getSettingsLifecycle());
-        mHomepageManager.startCardContentLoading();
+        mContextualCardManager = new ContextualCardManager(getContext(), getSettingsLifecycle());
+        mContextualCardManager.startCardContentLoading();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.settings_homepage,
-                container, false);
-        mCardsContainer = (RecyclerView) rootView.findViewById(R.id.card_container);
-        //TODO(b/111822407): May have to swap to GridLayoutManager
-        mLayoutManager = new LinearLayoutManager(getActivity());
+        final View rootView = inflater.inflate(R.layout.settings_homepage, container, false);
+        mCardsContainer = rootView.findViewById(R.id.card_container);
+        mLayoutManager = new GridLayoutManager(getActivity(), SPAN_COUNT,
+                GridLayoutManager.VERTICAL, false /* reverseLayout */);
         mCardsContainer.setLayoutManager(mLayoutManager);
-        mHomepageAdapter = new HomepageAdapter(getContext(), mHomepageManager);
-        mCardsContainer.setAdapter(mHomepageAdapter);
-        mHomepageManager.setListener(mHomepageAdapter);
+        mContextualCardsAdapter = new ContextualCardsAdapter(getContext(), mContextualCardManager);
+        mCardsContainer.setAdapter(mContextualCardsAdapter);
+        mContextualCardManager.setListener(mContextualCardsAdapter);
 
         return rootView;
     }

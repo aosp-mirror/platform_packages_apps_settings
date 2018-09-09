@@ -32,7 +32,7 @@ public class CardContentLoader {
     private CardContentLoaderListener mListener;
 
     public interface CardContentLoaderListener {
-        void onFinishCardLoading(List<HomepageCard> homepageCards);
+        void onFinishCardLoading(List<ContextualCard> contextualCards);
     }
 
     public CardContentLoader() {
@@ -42,20 +42,20 @@ public class CardContentLoader {
         mListener = listener;
     }
 
-    private static class CardLoader extends AsyncLoaderCompat<List<HomepageCard>> {
+    private static class CardLoader extends AsyncLoaderCompat<List<ContextualCard>> {
 
         public CardLoader(Context context) {
             super(context);
         }
 
         @Override
-        protected void onDiscardResult(List<HomepageCard> result) {
+        protected void onDiscardResult(List<ContextualCard> result) {
 
         }
 
         @Nullable
         @Override
-        public List<HomepageCard> loadInBackground() {
+        public List<ContextualCard> loadInBackground() {
             return null;
         }
     }
