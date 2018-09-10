@@ -17,10 +17,11 @@
 package com.android.settings.widget;
 
 import android.content.Context;
-import androidx.preference.SwitchPreference;
-import androidx.preference.PreferenceViewHolder;
 import android.text.TextUtils;
 import android.view.View;
+
+import androidx.preference.PreferenceViewHolder;
+import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 

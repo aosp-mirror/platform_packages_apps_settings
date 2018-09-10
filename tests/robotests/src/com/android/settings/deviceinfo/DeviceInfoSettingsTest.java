@@ -19,7 +19,9 @@ package com.android.settings.deviceinfo;
 import static com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY;
 import static com.android.settings.deviceinfo.DeviceInfoSettings.NON_SIM_PREFERENCES_COUNT;
 import static com.android.settings.deviceinfo.DeviceInfoSettings.SIM_PREFERENCES_COUNT;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -30,8 +32,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.preference.PreferenceScreen;
 import android.telephony.TelephonyManager;
+
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.SummaryLoader;

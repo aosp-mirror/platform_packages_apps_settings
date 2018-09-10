@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import static com.android.settings.testutils.ResIdSubject.assertResId;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Intent;

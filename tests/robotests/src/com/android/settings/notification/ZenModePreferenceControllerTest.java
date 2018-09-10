@@ -17,6 +17,7 @@
 package com.android.settings.notification;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
@@ -27,6 +28,7 @@ import static org.mockito.Mockito.when;
 import android.app.NotificationManager;
 import android.app.NotificationManager.Policy;
 import android.content.Context;
+
 import androidx.preference.Preference;
 
 import com.android.settings.R;

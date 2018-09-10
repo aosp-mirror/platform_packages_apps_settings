@@ -16,6 +16,7 @@
 package com.android.settings.accounts;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
@@ -30,6 +31,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
+
 import androidx.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto;

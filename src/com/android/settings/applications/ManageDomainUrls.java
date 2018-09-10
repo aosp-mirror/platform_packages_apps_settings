@@ -23,16 +23,17 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.provider.Settings.Global;
+import android.util.ArraySet;
+import android.view.View;
+
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.SwitchPreference;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.Preference.OnPreferenceClickListener;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceViewHolder;
-import android.util.ArraySet;
-import android.view.View;
+import androidx.preference.SwitchPreference;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;

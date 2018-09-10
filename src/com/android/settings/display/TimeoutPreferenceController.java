@@ -20,8 +20,9 @@ import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
-import androidx.preference.Preference;
 import android.util.Log;
+
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.TimeoutListPreference;

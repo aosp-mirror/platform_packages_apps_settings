@@ -17,8 +17,9 @@
 package com.android.settings.development.featureflags;
 
 import android.content.Context;
-import androidx.preference.PreferenceScreen;
 import android.util.FeatureFlagUtils;
+
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;

@@ -20,8 +20,10 @@ import static android.app.NotificationChannel.DEFAULT_CHANNEL_ID;
 import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 import static android.app.NotificationManager.IMPORTANCE_HIGH;
 import static android.app.NotificationManager.IMPORTANCE_LOW;
+
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
@@ -35,6 +37,7 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.os.UserManager;
 import android.os.Vibrator;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

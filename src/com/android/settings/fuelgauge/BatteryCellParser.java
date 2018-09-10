@@ -17,6 +17,7 @@ package com.android.settings.fuelgauge;
 import android.os.BatteryStats.HistoryItem;
 import android.telephony.ServiceState;
 import android.util.SparseIntArray;
+
 import com.android.settings.Utils;
 import com.android.settings.fuelgauge.BatteryActiveView.BatteryActiveProvider;
 

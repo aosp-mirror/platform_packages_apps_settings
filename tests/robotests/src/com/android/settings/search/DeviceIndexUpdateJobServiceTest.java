@@ -16,7 +16,6 @@ package com.android.settings.search;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -30,6 +29,10 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.net.Uri;
 
+import androidx.slice.Slice;
+import androidx.slice.SliceMetadata;
+import androidx.slice.SliceViewManager;
+
 import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -37,16 +40,10 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 import org.robolectric.Robolectric;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.slice.Slice;
-import androidx.slice.SliceViewManager;
-import androidx.slice.SliceMetadata;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DeviceIndexUpdateJobServiceTest {

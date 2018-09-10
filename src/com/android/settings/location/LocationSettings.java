@@ -21,8 +21,10 @@ import android.content.Context;
 import android.location.SettingInjectorService;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -34,6 +36,7 @@ import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.location.RecentLocationApps;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;

@@ -23,8 +23,6 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.view.View;
@@ -32,12 +30,15 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.settings.R;
 import com.android.settings.deviceinfo.StorageSettings.UnmountTask;
 import com.android.settingslib.Utils;
 
-import java.io.IOException;
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Preference line representing a single {@link VolumeInfo}, possibly including

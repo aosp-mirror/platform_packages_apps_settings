@@ -17,7 +17,6 @@
 package com.android.settings.notification;
 
 import android.app.NotificationManager;
-import androidx.lifecycle.OnLifecycleEvent;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -29,6 +28,8 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.Vibrator;
 import android.text.TextUtils;
+
+import androidx.lifecycle.OnLifecycleEvent;
 
 import com.android.settings.R;
 import com.android.settings.Utils;

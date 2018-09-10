@@ -19,10 +19,11 @@ package com.android.settings.fuelgauge.anomaly;
 import android.content.Context;
 import android.net.Uri;
 import android.provider.Settings;
-import androidx.annotation.VisibleForTesting;
 import android.text.format.DateUtils;
 import android.util.KeyValueListParser;
 import android.util.Log;
+
+import androidx.annotation.VisibleForTesting;
 
 import java.util.Arrays;
 import java.util.Set;

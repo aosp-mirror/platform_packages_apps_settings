@@ -18,9 +18,10 @@ package com.android.settings.wifi.tether;
 
 import android.content.Context;
 import android.net.wifi.WifiConfiguration;
+import android.text.TextUtils;
+
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
-import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.widget.ValidatedEditTextPreference;

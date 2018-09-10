@@ -15,6 +15,8 @@
  */
 package com.android.settings.dashboard.conditional;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.never;
@@ -22,8 +24,6 @@ import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
-import static com.google.common.truth.Truth.assertThat;
 
 import android.content.ComponentName;
 import android.content.Context;

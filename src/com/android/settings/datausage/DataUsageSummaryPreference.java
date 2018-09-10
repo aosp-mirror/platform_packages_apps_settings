@@ -22,8 +22,6 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -34,6 +32,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;

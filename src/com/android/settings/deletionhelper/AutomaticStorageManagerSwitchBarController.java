@@ -20,14 +20,15 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.os.SystemProperties;
 import android.provider.Settings;
-import androidx.preference.Preference;
 import android.widget.Switch;
+
+import androidx.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.util.Preconditions;
 import com.android.settings.widget.SwitchBar;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.Utils;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /** Handles the logic for flipping the storage management toggle on a {@link SwitchBar}. */
 public class AutomaticStorageManagerSwitchBarController

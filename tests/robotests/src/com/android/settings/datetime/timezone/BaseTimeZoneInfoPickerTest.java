@@ -16,6 +16,8 @@
 
 package com.android.settings.datetime.timezone;
 
+import static org.mockito.Mockito.mock;
+
 import android.content.Context;
 import android.icu.util.TimeZone;
 
@@ -34,8 +36,6 @@ import org.robolectric.annotation.Implements;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
-
-import static org.mockito.Mockito.mock;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = { BaseTimeZoneInfoPickerTest.ShadowDataFormat.class })

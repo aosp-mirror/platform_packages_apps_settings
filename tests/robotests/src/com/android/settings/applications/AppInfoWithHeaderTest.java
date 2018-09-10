@@ -17,6 +17,7 @@
 package com.android.settings.applications;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -31,6 +32,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.UserHandle;
+
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 

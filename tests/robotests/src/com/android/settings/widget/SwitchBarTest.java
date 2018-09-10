@@ -17,6 +17,7 @@
 package com.android.settings.widget;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.robolectric.RuntimeEnvironment.application;
 
 import android.content.Context;
@@ -25,8 +26,8 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

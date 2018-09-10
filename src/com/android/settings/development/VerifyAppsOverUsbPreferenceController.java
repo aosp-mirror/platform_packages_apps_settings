@@ -22,6 +22,7 @@ import android.content.pm.ResolveInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 

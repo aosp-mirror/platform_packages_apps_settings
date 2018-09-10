@@ -22,6 +22,7 @@ import static org.mockito.Mockito.when;
 
 import android.app.UiModeManager;
 import android.content.Context;
+
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
 

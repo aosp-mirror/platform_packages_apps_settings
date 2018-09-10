@@ -17,8 +17,9 @@
 package com.android.settings.deviceinfo.firmwareversion;
 
 import android.os.Build;
-import androidx.annotation.VisibleForTesting;
 import android.text.BidiFormatter;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 

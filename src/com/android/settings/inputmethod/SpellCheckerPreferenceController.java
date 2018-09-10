@@ -17,10 +17,11 @@
 package com.android.settings.inputmethod;
 
 import android.content.Context;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.view.textservice.SpellCheckerInfo;
 import android.view.textservice.TextServicesManager;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;

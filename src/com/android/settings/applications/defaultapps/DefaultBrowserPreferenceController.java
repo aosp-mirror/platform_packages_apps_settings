@@ -24,10 +24,11 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
+
+import androidx.preference.Preference;
 
 import com.android.settingslib.applications.DefaultAppInfo;
 

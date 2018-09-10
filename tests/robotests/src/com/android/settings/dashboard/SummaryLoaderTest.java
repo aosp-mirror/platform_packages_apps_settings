@@ -17,6 +17,7 @@
 package com.android.settings.dashboard;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 

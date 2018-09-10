@@ -18,6 +18,7 @@ package com.android.settings.connecteddevice.usb;
 
 import android.content.Context;
 import android.os.Handler;
+
 import androidx.annotation.UiThread;
 
 import com.android.internal.annotations.VisibleForTesting;

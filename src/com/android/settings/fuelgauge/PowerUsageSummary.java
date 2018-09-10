@@ -26,7 +26,6 @@ import android.content.Loader;
 import android.os.BatteryStats;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
-import androidx.annotation.VisibleForTesting;
 import android.text.BidiFormatter;
 import android.text.format.Formatter;
 import android.util.SparseArray;
@@ -36,6 +35,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.widget.TextView;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;

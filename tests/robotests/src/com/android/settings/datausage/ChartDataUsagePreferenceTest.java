@@ -16,6 +16,7 @@
 package com.android.settings.datausage;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -25,8 +26,10 @@ import android.content.Context;
 import android.net.NetworkStatsHistory;
 import android.net.NetworkStatsHistory.Entry;
 import android.util.SparseIntArray;
+
 import com.android.settings.graph.UsageView;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

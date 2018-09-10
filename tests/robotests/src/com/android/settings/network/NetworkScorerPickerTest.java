@@ -16,6 +16,7 @@
 package com.android.settings.network;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
@@ -28,6 +29,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.net.NetworkScoreManager;
 import android.net.NetworkScorerAppData;
+
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 

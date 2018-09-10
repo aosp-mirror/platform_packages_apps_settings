@@ -24,6 +24,7 @@ import android.hardware.usb.UsbPortStatus;
 import android.net.ConnectivityManager;
 import android.os.UserHandle;
 import android.os.UserManager;
+
 import androidx.annotation.VisibleForTesting;
 
 /**

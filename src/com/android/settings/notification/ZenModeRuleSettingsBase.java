@@ -23,10 +23,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.service.notification.ConditionProviderService;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;

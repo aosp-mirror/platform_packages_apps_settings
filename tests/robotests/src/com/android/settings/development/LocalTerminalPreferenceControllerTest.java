@@ -16,7 +16,9 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.LocalTerminalPreferenceController.TERMINAL_APP_PACKAGE;
+import static com.android.settings.development.LocalTerminalPreferenceController
+        .TERMINAL_APP_PACKAGE;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -26,8 +28,9 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserManager;
-import androidx.preference.SwitchPreference;
+
 import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.wrapper.PackageManagerWrapper;

@@ -20,9 +20,10 @@ import static com.android.settings.widget.EntityHeaderController.ActionType;
 
 import android.app.Activity;
 import android.os.Bundle;
-import androidx.preference.Preference;
 import android.util.IconDrawableFactory;
 import android.util.Log;
+
+import androidx.preference.Preference;
 
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;

@@ -17,15 +17,18 @@ package com.android.settings.applications;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
 import android.provider.SearchIndexableResource;
+
+import androidx.annotation.NonNull;
 import androidx.preference.Preference;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
+
 import java.util.ArrayList;
 import java.util.List;
 

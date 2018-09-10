@@ -18,6 +18,7 @@ package com.android.settings.development;
 
 import android.app.UiModeManager;
 import android.content.Context;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;

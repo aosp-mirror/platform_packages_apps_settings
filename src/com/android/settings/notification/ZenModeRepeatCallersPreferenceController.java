@@ -19,10 +19,11 @@ package com.android.settings.notification;
 import android.app.NotificationManager.Policy;
 import android.content.Context;
 import android.provider.Settings;
-import androidx.preference.SwitchPreference;
+import android.util.Log;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import android.util.Log;
+import androidx.preference.SwitchPreference;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;

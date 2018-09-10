@@ -18,9 +18,10 @@ package com.android.settings.fuelgauge.anomaly;
 
 import android.content.Context;
 import android.os.Build;
-import androidx.annotation.VisibleForTesting;
 import android.util.Pair;
 import android.util.SparseIntArray;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.os.BatteryStatsHelper;

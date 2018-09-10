@@ -17,6 +17,7 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.provider.Settings;
+
 import androidx.preference.Preference;
 
 import com.android.settings.R;

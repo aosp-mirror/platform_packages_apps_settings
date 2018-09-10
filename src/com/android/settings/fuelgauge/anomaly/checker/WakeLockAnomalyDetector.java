@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.BatteryStats;
 import android.os.SystemClock;
+
 import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.os.BatterySipper;

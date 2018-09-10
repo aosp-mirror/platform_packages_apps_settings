@@ -16,11 +16,13 @@ package com.android.settings.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 import android.text.TextUtils.TruncateAt;
 import android.util.AttributeSet;
 import android.widget.TextView;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.settings.R;
 
 /**

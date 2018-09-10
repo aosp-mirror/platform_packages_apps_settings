@@ -14,8 +14,9 @@
 package com.android.settings.display;
 
 import android.content.Context;
-import androidx.preference.Preference;
 import android.text.TextUtils;
+
+import androidx.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.view.RotationPolicy;

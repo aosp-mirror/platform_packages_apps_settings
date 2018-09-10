@@ -22,6 +22,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
+
 import androidx.preference.PreferenceFragment;
 import androidx.preference.PreferenceScreen;
 
