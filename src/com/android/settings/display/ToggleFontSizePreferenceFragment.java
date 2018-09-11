@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility;
+package com.android.settings.display;
 
 import android.annotation.Nullable;
 import android.content.ContentResolver;
@@ -24,7 +24,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.PreviewSeekBarPreferenceFragment;
 import com.android.settings.R;
 
 /**
@@ -35,13 +34,20 @@ public class ToggleFontSizePreferenceFragment extends PreviewSeekBarPreferenceFr
     private float[] mValues;
 
     @Override
+    protected int getActivityLayoutResId() {
+        return R.layout.font_size_activity;
+    }
+
+    @Override
+    protected int[] getPreviewSampleResIds() {
+        return new int[]{R.layout.font_size_preview};
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mActivityLayoutResId = R.layout.font_size_activity;
-        mPreviewSampleResIds = new int[]{R.layout.font_size_preview};
-
-        Resources res = getContext().getResources();
+        final Resources res = getContext().getResources();
         final ContentResolver resolver = getContext().getContentResolver();
         // Mark the appropriate item in the preferences list.
         mEntries = res.getStringArray(R.array.entries_font_size);
