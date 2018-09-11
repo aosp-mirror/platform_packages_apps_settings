@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.display;
 
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.SeekBar;
@@ -31,6 +30,8 @@ import android.widget.TextView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.widget.DotsPageIndicator;
 import com.android.settings.widget.LabeledSeekBar;
 
@@ -47,12 +48,6 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
 
     /** Index of the entry corresponding to current value of the settings. */
     protected int mCurrentIndex;
-
-    /** Resource id of the layout for this preference fragment. */
-    protected int mActivityLayoutResId;
-
-    /** Resource id of the layout that defines the contents inside preview screen. */
-    protected int[] mPreviewSampleResIds;
 
     private ViewPager mPreviewPager;
     private PreviewPagerAdapter mPreviewPagerAdapter;
@@ -82,12 +77,7 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
             if (mPreviewPagerAdapter.isAnimating()) {
-                mPreviewPagerAdapter.setAnimationEndAction(new Runnable() {
-                    @Override
-                    public void run() {
-                        commit();
-                    }
-                });
+                mPreviewPagerAdapter.setAnimationEndAction(() -> commit());
             } else {
                 commit();
             }
@@ -102,39 +92,33 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
         final ViewGroup listContainer = root.findViewById(android.R.id.list_container);
         listContainer.removeAllViews();
 
-        final View content = inflater.inflate(mActivityLayoutResId, listContainer, false);
+        final View content = inflater.inflate(getActivityLayoutResId(), listContainer, false);
         listContainer.addView(content);
 
-        mLabel = (TextView) content.findViewById(R.id.current_label);
+        mLabel = content.findViewById(R.id.current_label);
 
         // The maximum SeekBar value always needs to be non-zero. If there's
         // only one available value, we'll handle this by disabling the
         // seek bar.
         final int max = Math.max(1, mEntries.length - 1);
 
-        mSeekBar = (LabeledSeekBar) content.findViewById(R.id.seek_bar);
+        mSeekBar = content.findViewById(R.id.seek_bar);
         mSeekBar.setLabels(mEntries);
         mSeekBar.setMax(max);
 
         mSmaller = content.findViewById(R.id.smaller);
-        mSmaller.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final int progress = mSeekBar.getProgress();
-                if (progress > 0) {
-                    mSeekBar.setProgress(progress - 1, true);
-                }
+        mSmaller.setOnClickListener(v -> {
+            final int progress = mSeekBar.getProgress();
+            if (progress > 0) {
+                mSeekBar.setProgress(progress - 1, true);
             }
         });
 
         mLarger = content.findViewById(R.id.larger);
-        mLarger.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final int progress = mSeekBar.getProgress();
-                if (progress < mSeekBar.getMax()) {
-                    mSeekBar.setProgress(progress + 1, true);
-                }
+        mLarger.setOnClickListener(v -> {
+            final int progress = mSeekBar.getProgress();
+            if (progress < mSeekBar.getMax()) {
+                mSeekBar.setProgress(progress + 1, true);
             }
         });
 
@@ -152,15 +136,16 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
             configurations[i] = createConfig(origConfig, i);
         }
 
-        mPreviewPager = (ViewPager) content.findViewById(R.id.preview_pager);
+        final int[] previews = getPreviewSampleResIds();
+        mPreviewPager = content.findViewById(R.id.preview_pager);
         mPreviewPagerAdapter = new PreviewPagerAdapter(context, isLayoutRtl,
-                mPreviewSampleResIds, configurations);
+                previews, configurations);
         mPreviewPager.setAdapter(mPreviewPagerAdapter);
-        mPreviewPager.setCurrentItem(isLayoutRtl ? mPreviewSampleResIds.length - 1 : 0);
+        mPreviewPager.setCurrentItem(isLayoutRtl ? previews.length - 1 : 0);
         mPreviewPager.addOnPageChangeListener(mPreviewPageChangeListener);
 
-        mPageIndicator = (DotsPageIndicator) content.findViewById(R.id.page_indicator);
-        if (mPreviewSampleResIds.length > 1) {
+        mPageIndicator = content.findViewById(R.id.page_indicator);
+        if (previews.length > 1) {
             mPageIndicator.setViewPager(mPreviewPager);
             mPageIndicator.setVisibility(View.VISIBLE);
             mPageIndicator.setOnPageChangeListener(mPageIndicatorPageChangeListener);
@@ -187,6 +172,12 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
         mSeekBar.setOnSeekBarChangeListener(null);
     }
 
+    /** Resource id of the layout for this preference fragment. */
+    protected abstract int getActivityLayoutResId();
+
+    /** Resource id of the layout that defines the contents inside preview screen. */
+    protected abstract int[] getPreviewSampleResIds();
+
     /**
      * Creates new configuration based on the current position of the SeekBar.
      */
@@ -210,8 +201,8 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
 
     private void setPagerIndicatorContentDescription(int position) {
         mPageIndicator.setContentDescription(
-                getPrefContext().getString(R.string.preview_page_indicator_content_description,
-                        position + 1, mPreviewSampleResIds.length));
+                getString(R.string.preview_page_indicator_content_description,
+                        position + 1, getPreviewSampleResIds().length));
     }
 
     private OnPageChangeListener mPreviewPageChangeListener = new OnPageChangeListener() {
