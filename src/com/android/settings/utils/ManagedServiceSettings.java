@@ -32,11 +32,6 @@ import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.View;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
-
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -46,6 +41,11 @@ import com.android.settings.widget.EmptyTextSettings;
 import com.android.settingslib.applications.ServiceListing;
 
 import java.util.List;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 public abstract class ManagedServiceSettings extends EmptyTextSettings {
     private static final String TAG = "ManagedServiceSettings";
@@ -122,7 +122,7 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
                 // unlikely, as we are iterating over live services.
                 Log.e(TAG, "can't find package name", e);
             }
-            final String finalTitle = title.toString();
+            final CharSequence finalTitle = title;
             final String summary = service.loadLabel(mPm).toString();
             final SwitchPreference pref = new AppSwitchPreference(getPrefContext());
             pref.setPersistent(false);
@@ -143,7 +143,11 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
             }
             pref.setOnPreferenceChangeListener((preference, newValue) -> {
                 final boolean enable = (boolean) newValue;
-                return setEnabled(cn, finalTitle, enable);
+                if (finalTitle != null) {
+                    return setEnabled(cn, finalTitle.toString(), enable);
+                } else {
+                    return setEnabled(cn, null, enable);
+                }
             });
             pref.setKey(cn.flattenToString());
             screen.addPreference(pref);
