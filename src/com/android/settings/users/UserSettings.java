@@ -344,14 +344,18 @@ public class UserSettings extends SettingsPreferenceFragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         int pos = 0;
-        UserManager um = getContext().getSystemService(UserManager.class);
-        boolean allowRemoveUser = !um.hasUserRestriction(UserManager.DISALLOW_REMOVE_USER);
-        boolean canSwitchUsers = um.canSwitchUsers();
-        if (!mUserCaps.mIsAdmin && allowRemoveUser && canSwitchUsers) {
+        final boolean canSwitchUsers = mUserManager.canSwitchUsers();
+        if (!mUserCaps.mIsAdmin && canSwitchUsers) {
             String nickname = mUserManager.getUserName();
             MenuItem removeThisUser = menu.add(0, MENU_REMOVE_USER, pos++,
                     getResources().getString(R.string.user_remove_user_menu, nickname));
             removeThisUser.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+
+            final EnforcedAdmin disallowRemoveUserAdmin =
+                    RestrictedLockUtilsInternal.checkIfRestrictionEnforced(getContext(),
+                            UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId());
+            RestrictedLockUtilsInternal.setMenuItemAsDisabledByAdmin(getContext(), removeThisUser,
+                    disallowRemoveUserAdmin);
         }
         super.onCreateOptionsMenu(menu, inflater);
     }
