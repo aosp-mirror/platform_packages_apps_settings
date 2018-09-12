@@ -61,23 +61,38 @@ public class CardContentProvider extends ContentProvider {
 
     @Override
     public Uri insert(Uri uri, ContentValues values) {
+        final ContentValues[] cvs = {values};
+        bulkInsert(uri, cvs);
+        return uri;
+    }
+
+    @Override
+    public int bulkInsert(Uri uri, ContentValues[] values) {
         final StrictMode.ThreadPolicy oldPolicy = StrictMode.getThreadPolicy();
+        int numInserted = 0;
+        final SQLiteDatabase database = mDBHelper.getWritableDatabase();
+
         try {
             maybeEnableStrictMode();
 
-            final SQLiteDatabase database = mDBHelper.getWritableDatabase();
             final String table = getTableFromMatch(uri);
-            final long ret = database.insert(table, null, values);
-            if (ret != -1) {
-                getContext().getContentResolver().notifyChange(uri, null);
-            } else {
-                Log.e(TAG, "The CardContentProvider insertion failed! Plase check SQLiteDatabase's "
-                        + "message.");
+            database.beginTransaction();
+            for (ContentValues value : values) {
+                long ret = database.insert(table, null, value);
+                if (ret != -1L) {
+                    numInserted++;
+                } else {
+                    Log.e(TAG, "The row " + value.getAsString(CardDatabaseHelper.CardColumns.NAME)
+                            + " insertion failed! Please check your data.");
+                }
             }
+            database.setTransactionSuccessful();
+            getContext().getContentResolver().notifyChange(uri, null);
         } finally {
+            database.endTransaction();
             StrictMode.setThreadPolicy(oldPolicy);
         }
-        return uri;
+        return numInserted;
     }
 
     @Override

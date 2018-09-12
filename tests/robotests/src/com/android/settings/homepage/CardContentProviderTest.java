@@ -72,16 +72,25 @@ public class CardContentProviderTest {
 
     @Test
     public void cardData_insert() {
-        final int cnt_before_instert = getRowCount();
-        mResolver.insert(mUri, insertOneRow());
-        final int cnt_after_instert = getRowCount();
+        final int rowsBeforeInsert = getRowCount();
+        mResolver.insert(mUri, generateOneRow());
+        final int rowsAfterInsert = getRowCount();
 
-        assertThat(cnt_after_instert - cnt_before_instert).isEqualTo(1);
+        assertThat(rowsAfterInsert - rowsBeforeInsert).isEqualTo(1);
+    }
+
+    @Test
+    public void cardData_bulkInsert_twoRows() {
+        final int rowsBeforeInsert = getRowCount();
+        mResolver.bulkInsert(mUri, generateTwoRows());
+        final int rowsAfterInsert = getRowCount();
+
+        assertThat(rowsAfterInsert - rowsBeforeInsert).isEqualTo(2);
     }
 
     @Test
     public void cardData_query() {
-        mResolver.insert(mUri, insertOneRow());
+        mResolver.insert(mUri, generateOneRow());
         final int count = getRowCount();
 
         assertThat(count).isGreaterThan(0);
@@ -89,24 +98,24 @@ public class CardContentProviderTest {
 
     @Test
     public void cardData_delete() {
-        mResolver.insert(mUri, insertOneRow());
-        final int del_count = mResolver.delete(mUri, null, null);
+        mResolver.insert(mUri, generateOneRow());
+        final int delCount = mResolver.delete(mUri, null, null);
 
-        assertThat(del_count).isGreaterThan(0);
+        assertThat(delCount).isGreaterThan(0);
     }
 
     @Test
     public void cardData_update() {
-        mResolver.insert(mUri, insertOneRow());
+        mResolver.insert(mUri, generateOneRow());
 
         final double updatingScore = 0.87;
         final ContentValues values = new ContentValues();
         values.put(CardDatabaseHelper.CardColumns.SCORE, updatingScore);
         final String strWhere = CardDatabaseHelper.CardColumns.NAME + "=?";
         final String[] selectionArgs = {"auto_rotate"};
-        final int update_count = mResolver.update(mUri, values, strWhere, selectionArgs);
+        final int updateCount = mResolver.update(mUri, values, strWhere, selectionArgs);
 
-        assertThat(update_count).isGreaterThan(0);
+        assertThat(updateCount).isGreaterThan(0);
 
         final String[] columns = {CardDatabaseHelper.CardColumns.SCORE};
         final Cursor cr = mResolver.query(mUri, columns, strWhere, selectionArgs, null);
@@ -122,7 +131,7 @@ public class CardContentProviderTest {
         ShadowThreadUtils.setIsMainThread(true);
         ReflectionHelpers.setStaticField(Build.class, "IS_DEBUGGABLE", true);
 
-        mProvider.insert(mUri, insertOneRow());
+        mProvider.insert(mUri, generateOneRow());
 
         verify(mProvider).enableStrictMode();
     }
@@ -164,7 +173,7 @@ public class CardContentProviderTest {
         ShadowThreadUtils.setIsMainThread(false);
         ReflectionHelpers.setStaticField(Build.class, "IS_DEBUGGABLE", true);
 
-        mProvider.insert(mUri, insertOneRow());
+        mProvider.insert(mUri, generateOneRow());
 
         verify(mProvider, never()).enableStrictMode();
     }
@@ -217,10 +226,10 @@ public class CardContentProviderTest {
         mProvider.getTableFromMatch(invalid_Uri);
     }
 
-    private ContentValues insertOneRow() {
+    private ContentValues generateOneRow() {
         final ContentValues values = new ContentValues();
         values.put(CardDatabaseHelper.CardColumns.NAME, "auto_rotate");
-        values.put(CardDatabaseHelper.CardColumns.TYPE, 0);
+        values.put(CardDatabaseHelper.CardColumns.TYPE, 1);
         values.put(CardDatabaseHelper.CardColumns.SCORE, 0.9);
         values.put(CardDatabaseHelper.CardColumns.SLICE_URI,
                 "content://com.android.settings.slices/action/auto_rotate");
@@ -229,6 +238,24 @@ public class CardContentProviderTest {
         values.put(CardDatabaseHelper.CardColumns.APP_VERSION, "1.0.0");
 
         return values;
+    }
+
+    private ContentValues[] generateTwoRows() {
+        final ContentValues[] twoRows = new ContentValues[2];
+        twoRows[0] = generateOneRow();
+
+        final ContentValues values = new ContentValues();
+        values.put(CardDatabaseHelper.CardColumns.NAME, "toggle_airplane");
+        values.put(CardDatabaseHelper.CardColumns.TYPE, 1);
+        values.put(CardDatabaseHelper.CardColumns.SCORE, 0.95);
+        values.put(CardDatabaseHelper.CardColumns.SLICE_URI,
+                "content://com.android.settings.slices/action/toggle_airplane");
+        values.put(CardDatabaseHelper.CardColumns.CATEGORY, 2);
+        values.put(CardDatabaseHelper.CardColumns.PACKAGE_NAME, "com.android.settings");
+        values.put(CardDatabaseHelper.CardColumns.APP_VERSION, "1.0.0");
+        twoRows[1] = values;
+
+        return twoRows;
     }
 
     private int getRowCount() {
