@@ -17,7 +17,6 @@
 package com.android.settings.connecteddevice.usb;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 
 import androidx.annotation.VisibleForTesting;
@@ -66,15 +65,6 @@ public class UsbDetailsFragment extends DashboardFragment {
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.usb_details_fragment;
-    }
-
-    @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        super.onCreatePreferences(savedInstanceState, rootKey);
-    }
-
-    public boolean isConnected() {
-        return mUsbReceiver.isConnected();
     }
 
     @Override
