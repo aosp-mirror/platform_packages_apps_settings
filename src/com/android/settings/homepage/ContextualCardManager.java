@@ -20,6 +20,7 @@ import static com.android.settings.homepage.CardContentLoader.CARD_CONTENT_LOADE
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.BaseAdapter;
 
 import androidx.annotation.NonNull;
@@ -60,12 +61,15 @@ public class ContextualCardManager implements CardContentLoader.CardContentLoade
 
     private ContextualCardUpdateListener mListener;
 
-
     public ContextualCardManager(Context context, Lifecycle lifecycle) {
         mContext = context;
         mLifecycle = lifecycle;
         mContextualCards = new ArrayList<>();
         mControllerRendererPool = new ControllerRendererPool();
+        //for data provided by Settings
+        for (int cardType : SETTINGS_CARDS) {
+            setupController(cardType);
+        }
     }
 
     void loadContextualCards(PersonalSettingsFragment fragment) {
@@ -82,22 +86,19 @@ public class ContextualCardManager implements CardContentLoader.CardContentLoade
                 setupController(card.getCardType());
             }
         }
-
-        //for data provided by Settings
-        for (int cardType : SETTINGS_CARDS) {
-            setupController(cardType);
-        }
     }
 
     private void setupController(int cardType) {
         final ContextualCardController controller = mControllerRendererPool.getController(mContext,
                 cardType);
-        if (controller != null) {
-            controller.setCardUpdateListener(this);
-            if (controller instanceof LifecycleObserver) {
-                if (mLifecycle != null) {
-                    mLifecycle.addObserver((LifecycleObserver) controller);
-                }
+        if (controller == null) {
+            Log.w(TAG, "Cannot find ContextualCardController for type " + cardType);
+            return;
+        }
+        controller.setCardUpdateListener(this);
+        if (controller instanceof LifecycleObserver) {
+            if (mLifecycle != null) {
+                mLifecycle.addObserver((LifecycleObserver) controller);
             }
         }
     }

@@ -96,7 +96,6 @@ public class ConditionContextualCardController implements ContextualCardControll
                             .setActionText(condition.getActionText())
                             .setName(mContext.getPackageName() + "/"
                                     + condition.getTitle().toString())
-                            .setCardType(ContextualCard.CardType.CONDITIONAL)
                             .setTitleText(condition.getTitle().toString())
                             .setSummaryText(condition.getSummary().toString())
                             .setIconDrawable(condition.getIcon())
