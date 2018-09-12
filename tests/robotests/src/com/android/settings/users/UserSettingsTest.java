@@ -212,4 +212,31 @@ public class UserSettingsTest {
 
     }
 
+    @Test
+    public void updateUserList_canAddUserAndSwitchUser_shouldShowAddUser() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+            Settings.Global.DEVICE_PROVISIONED, 1);
+        final RestrictedPreference addUser = mock(RestrictedPreference.class);
+
+        mUserCapabilities.mCanAddUser = true;
+        mUserCapabilities.mDisallowAddUser = false;
+        mUserCapabilities.mUserSwitcherEnabled = true;
+
+        ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
+        ReflectionHelpers.setField(mFragment, "mUserCaps", mUserCapabilities);
+        ReflectionHelpers.setField(mFragment, "mDefaultIconDrawable", mDefaultIconDrawable);
+        ReflectionHelpers.setField(mFragment, "mAddingUser", false);
+        mFragment.mMePreference = mMePreference;
+        mFragment.mUserListCategory = mock(PreferenceCategory.class);
+        mFragment.mAddUser = addUser;
+
+        doReturn(mock(PreferenceScreen.class)).when(mFragment).getPreferenceScreen();
+        doReturn("Test summary").when(mFragment).getString(anyInt(), anyInt());
+
+        mFragment.updateUserList();
+
+        verify(addUser).setVisible(true);
+
+    }
+
 }
