@@ -27,8 +27,8 @@ public interface ContextualCardController {
     int getCardType();
 
     /**
-     * When data is updated or changed, the new data should be passed to ContextualCardManager for list
-     * updating.
+     * When data is updated or changed, the new data should be passed to ContextualCardManager for
+     * list updating.
      */
     void onDataUpdated(List<ContextualCard> cardList);
 

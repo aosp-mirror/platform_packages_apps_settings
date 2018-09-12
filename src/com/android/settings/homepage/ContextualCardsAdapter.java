@@ -27,8 +27,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContextualCardsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements
-        ContextualCardUpdateListener {
+public class ContextualCardsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+        implements ContextualCardUpdateListener {
     static final int SPAN_COUNT = 2;
 
     private static final String TAG = "ContextualCardsAdapter";
