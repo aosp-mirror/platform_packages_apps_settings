@@ -16,8 +16,16 @@
 
 package com.android.settings.homepage;
 
+import static com.android.settings.homepage.CardContentLoader.CARD_CONTENT_LOADER_ID;
+
 import android.content.Context;
+import android.os.Bundle;
 import android.widget.BaseAdapter;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -60,9 +68,12 @@ public class ContextualCardManager implements CardContentLoader.CardContentLoade
         mControllerRendererPool = new ControllerRendererPool();
     }
 
-    void startCardContentLoading() {
-        final CardContentLoader cardContentLoader = new CardContentLoader();
-        cardContentLoader.setListener(this);
+    void startCardContentLoading(PersonalSettingsFragment fragment) {
+        final CardContentLoaderCallbacks cardContentLoaderCallbacks =
+                new CardContentLoaderCallbacks(mContext);
+        cardContentLoaderCallbacks.setListener(this);
+        LoaderManager.getInstance(fragment).initLoader(CARD_CONTENT_LOADER_ID, null /* bundle */,
+                cardContentLoaderCallbacks);
     }
 
     private void loadCardControllers() {
@@ -139,5 +150,44 @@ public class ContextualCardManager implements CardContentLoader.CardContentLoade
 
     public ControllerRendererPool getControllerRendererPool() {
         return mControllerRendererPool;
+    }
+
+
+    static class CardContentLoaderCallbacks implements
+            LoaderManager.LoaderCallbacks<List<ContextualCard>> {
+
+        private Context mContext;
+        private CardContentLoader.CardContentLoaderListener mListener;
+
+        CardContentLoaderCallbacks(Context context) {
+            mContext = context.getApplicationContext();
+        }
+
+        protected void setListener(CardContentLoader.CardContentLoaderListener listener) {
+            mListener = listener;
+        }
+
+        @NonNull
+        @Override
+        public Loader<List<ContextualCard>> onCreateLoader(int id, @Nullable Bundle bundle) {
+            if (id == CARD_CONTENT_LOADER_ID) {
+                return new CardContentLoader(mContext);
+            } else {
+                throw new IllegalArgumentException("Unknown loader id: " + id);
+            }
+        }
+
+        @Override
+        public void onLoadFinished(@NonNull Loader<List<ContextualCard>> loader,
+                List<ContextualCard> contextualCards) {
+            if (mListener != null) {
+                mListener.onFinishCardLoading(contextualCards);
+            }
+        }
+
+        @Override
+        public void onLoaderReset(@NonNull Loader<List<ContextualCard>> loader) {
+
+        }
     }
 }

@@ -17,46 +17,58 @@
 package com.android.settings.homepage;
 
 import android.content.Context;
+import android.database.Cursor;
 
 import androidx.annotation.Nullable;
 
 import com.android.settingslib.utils.AsyncLoaderCompat;
 
+import java.util.ArrayList;
 import java.util.List;
 
-//TODO(b/112521307): Implement this to make it work with the card database.
-public class CardContentLoader {
+public class CardContentLoader extends AsyncLoaderCompat<List<ContextualCard>> {
+    static final int CARD_CONTENT_LOADER_ID = 1;
 
-    private static final String TAG = "CardContentLoader";
-
-    private CardContentLoaderListener mListener;
+    private Context mContext;
 
     public interface CardContentLoaderListener {
         void onFinishCardLoading(List<ContextualCard> contextualCards);
     }
 
-    public CardContentLoader() {
+    CardContentLoader(Context context) {
+        super(context);
+        mContext = context.getApplicationContext();
     }
 
-    void setListener(CardContentLoaderListener listener) {
-        mListener = listener;
+    @Override
+    protected void onDiscardResult(List<ContextualCard> result) {
+
     }
 
-    private static class CardLoader extends AsyncLoaderCompat<List<ContextualCard>> {
-
-        public CardLoader(Context context) {
-            super(context);
+    @Nullable
+    @Override
+    public List<ContextualCard> loadInBackground() {
+        List<ContextualCard> result;
+        try (Cursor cursor = CardDatabaseHelper.getInstance(mContext).getAllContextualCards()) {
+            if (cursor.getCount() == 0) {
+                //TODO(b/113372471): Load Default static cards and return 3 static cards
+                return new ArrayList<>();
+            }
+            result = buildContextualCardList(cursor);
         }
+        return result;
+    }
 
-        @Override
-        protected void onDiscardResult(List<ContextualCard> result) {
-
+    private List<ContextualCard> buildContextualCardList(Cursor cursor) {
+        final List<ContextualCard> result = new ArrayList<>();
+        for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+            final ContextualCard card = new ContextualCard(cursor);
+            if (card.isCustomCard()) {
+                //TODO(b/114688391): Load and generate custom card,then add into list
+            } else {
+                result.add(card);
+            }
         }
-
-        @Nullable
-        @Override
-        public List<ContextualCard> loadInBackground() {
-            return null;
-        }
+        return result;
     }
 }
