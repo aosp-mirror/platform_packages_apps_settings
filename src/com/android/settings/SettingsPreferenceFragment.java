@@ -539,10 +539,6 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         private DialogInterface.OnCancelListener mOnCancelListener;
         private DialogInterface.OnDismissListener mOnDismissListener;
 
-        public SettingsDialogFragment() {
-            /* do nothing */
-        }
-
         public SettingsDialogFragment(DialogCreatable fragment, int dialogId) {
             super(fragment, dialogId);
             if (!(fragment instanceof Fragment)) {
