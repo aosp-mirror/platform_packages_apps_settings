@@ -68,7 +68,7 @@ public class ContextualCardManager implements CardContentLoader.CardContentLoade
         mControllerRendererPool = new ControllerRendererPool();
     }
 
-    void startCardContentLoading(PersonalSettingsFragment fragment) {
+    void loadContextualCards(PersonalSettingsFragment fragment) {
         final CardContentLoaderCallbacks cardContentLoaderCallbacks =
                 new CardContentLoaderCallbacks(mContext);
         cardContentLoaderCallbacks.setListener(this);
@@ -151,7 +151,6 @@ public class ContextualCardManager implements CardContentLoader.CardContentLoade
     public ControllerRendererPool getControllerRendererPool() {
         return mControllerRendererPool;
     }
-
 
     static class CardContentLoaderCallbacks implements
             LoaderManager.LoaderCallbacks<List<ContextualCard>> {

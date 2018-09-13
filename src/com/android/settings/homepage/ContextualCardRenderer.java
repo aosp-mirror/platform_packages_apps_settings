@@ -31,15 +31,15 @@ public interface ContextualCardRenderer {
     int getViewType();
 
     /**
-     * When {@link ContextualCardsAdapter} calls {@link ContextualCardsAdapter#onCreateViewHolder(ViewGroup,
-     * int)}, this method will be called to retrieve the corresponding
+     * When {@link ContextualCardsAdapter} calls {@link ContextualCardsAdapter#onCreateViewHolder},
+     * this method will be called to retrieve the corresponding
      * {@link androidx.recyclerview.widget.RecyclerView.ViewHolder}.
      */
     RecyclerView.ViewHolder createViewHolder(View view);
 
     /**
-     * When {@link ContextualCardsAdapter} calls {@link ContextualCardsAdapter#onBindViewHolder(RecyclerView
-     * .ViewHolder, int)}, this method will be called to bind data to the
+     * When {@link ContextualCardsAdapter} calls {@link ContextualCardsAdapter#onBindViewHolder},
+     * this method will be called to bind data to the
      * {@link androidx.recyclerview.widget.RecyclerView.ViewHolder}.
      */
     void bindView(RecyclerView.ViewHolder holder, ContextualCard card);

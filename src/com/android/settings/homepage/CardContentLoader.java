@@ -19,7 +19,7 @@ package com.android.settings.homepage;
 import android.content.Context;
 import android.database.Cursor;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 
 import com.android.settingslib.utils.AsyncLoaderCompat;
 
@@ -45,28 +45,22 @@ public class CardContentLoader extends AsyncLoaderCompat<List<ContextualCard>> {
 
     }
 
-    @Nullable
+    @NonNull
     @Override
     public List<ContextualCard> loadInBackground() {
-        List<ContextualCard> result;
-        try (Cursor cursor = CardDatabaseHelper.getInstance(mContext).getAllContextualCards()) {
+        final List<ContextualCard> result = new ArrayList<>();
+        try (Cursor cursor = CardDatabaseHelper.getInstance(mContext).getContextualCards()) {
             if (cursor.getCount() == 0) {
                 //TODO(b/113372471): Load Default static cards and return 3 static cards
-                return new ArrayList<>();
+                return result;
             }
-            result = buildContextualCardList(cursor);
-        }
-        return result;
-    }
-
-    private List<ContextualCard> buildContextualCardList(Cursor cursor) {
-        final List<ContextualCard> result = new ArrayList<>();
-        for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-            final ContextualCard card = new ContextualCard(cursor);
-            if (card.isCustomCard()) {
-                //TODO(b/114688391): Load and generate custom card,then add into list
-            } else {
-                result.add(card);
+            for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+                final ContextualCard card = new ContextualCard(cursor);
+                if (card.isCustomCard()) {
+                    //TODO(b/114688391): Load and generate custom card,then add into list
+                } else {
+                    result.add(card);
+                }
             }
         }
         return result;
