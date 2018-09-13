@@ -16,6 +16,8 @@
 
 package com.android.settings.homepage.conditional;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.homepage.ContextualCard;
 
 /**
@@ -38,6 +40,11 @@ public class ConditionalContextualCard extends ContextualCard {
         mActionText = builder.mActionText;
     }
 
+    @Override
+    public int getCardType() {
+        return CardType.CONDITIONAL;
+    }
+
     public long getConditionId() {
         return mConditionId;
     }
@@ -50,7 +57,7 @@ public class ConditionalContextualCard extends ContextualCard {
         return mActionText;
     }
 
-    static class Builder extends ContextualCard.Builder {
+    public static class Builder extends ContextualCard.Builder {
 
         private long mConditionId;
         private int mMetricsConstant;
@@ -69,6 +76,12 @@ public class ConditionalContextualCard extends ContextualCard {
         public Builder setActionText(CharSequence actionText) {
             mActionText = actionText;
             return this;
+        }
+
+        @Override
+        public Builder setCardType(int cardType) {
+            throw new IllegalArgumentException(
+                    "Cannot change card type for " + getClass().getName());
         }
 
         public ConditionalContextualCard build() {
