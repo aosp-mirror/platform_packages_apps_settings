@@ -101,7 +101,7 @@ public class ContextualCardsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     @Override
-    public void onContextualCardUpdated(int cardType, List<ContextualCard> contextualCards) {
+    public void onContextualCardUpdated(List<ContextualCard> contextualCards) {
         //TODO(b/112245748): Should implement a DiffCallback so we can use notifyItemChanged()
         // instead.
         if (contextualCards == null) {

@@ -27,5 +27,5 @@ import java.util.List;
  * ContextualCardsAdapter} in this case.
  */
 public interface ContextualCardUpdateListener {
-    void onContextualCardUpdated(int cardType, List<ContextualCard> updateList);
+    void onContextualCardUpdated(List<ContextualCard> updateList);
 }

@@ -33,10 +33,10 @@ public class ContextualCard {
     /**
      * Flags indicating the type of the ContextualCard.
      */
-    @IntDef({CardType.INVALID, CardType.SLICE, CardType.SUGGESTION, CardType.CONDITIONAL})
+    @IntDef({CardType.DEFAULT, CardType.SLICE, CardType.SUGGESTION, CardType.CONDITIONAL})
     @Retention(RetentionPolicy.SOURCE)
     public @interface CardType {
-        int INVALID = -1;
+        int DEFAULT = 0;
         int SLICE = 1;
         int SUGGESTION = 2;
         int CONDITIONAL = 3;

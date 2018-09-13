@@ -33,6 +33,8 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * This is a centralized manager of multiple {@link ContextualCardController}.
@@ -58,13 +60,15 @@ public class ContextualCardManager implements CardContentLoader.CardContentLoade
     private final ControllerRendererPool mControllerRendererPool;
     private final Lifecycle mLifecycle;
     private final List<ContextualCard> mContextualCards;
+    private final List<LifecycleObserver> mLifecycleObservers;
 
     private ContextualCardUpdateListener mListener;
 
-    public ContextualCardManager(Context context, Lifecycle lifecycle) {
+    public ContextualCardManager(Context context, @NonNull Lifecycle lifecycle) {
         mContext = context;
         mLifecycle = lifecycle;
         mContextualCards = new ArrayList<>();
+        mLifecycleObservers = new ArrayList<>();
         mControllerRendererPool = new ControllerRendererPool();
         //for data provided by Settings
         for (int cardType : SETTINGS_CARDS) {
@@ -81,10 +85,8 @@ public class ContextualCardManager implements CardContentLoader.CardContentLoade
     }
 
     private void loadCardControllers() {
-        if (mContextualCards != null) {
-            for (ContextualCard card : mContextualCards) {
-                setupController(card.getCardType());
-            }
+        for (ContextualCard card : mContextualCards) {
+            setupController(card.getCardType());
         }
     }
 
@@ -96,53 +98,52 @@ public class ContextualCardManager implements CardContentLoader.CardContentLoade
             return;
         }
         controller.setCardUpdateListener(this);
-        if (controller instanceof LifecycleObserver) {
-            if (mLifecycle != null) {
-                mLifecycle.addObserver((LifecycleObserver) controller);
-            }
+        if (controller instanceof LifecycleObserver && !mLifecycleObservers.contains(controller)) {
+            mLifecycleObservers.add((LifecycleObserver) controller);
+            mLifecycle.addObserver((LifecycleObserver) controller);
         }
     }
 
     //TODO(b/111822376): implement sorting mechanism.
-    private void sortCards() {
+    private void sortCards(List<ContextualCard> cards) {
         //take mContextualCards as the source and do the ranking based on the rule.
     }
 
     @Override
-    public void onContextualCardUpdated(int cardType, List<ContextualCard> updateList) {
+    public void onContextualCardUpdated(List<ContextualCard> updateList) {
         //TODO(b/112245748): Should implement a DiffCallback.
         //Keep the old list for comparison.
         final List<ContextualCard> prevCards = mContextualCards;
 
-        //Remove the existing data that matches the certain cardType so as to insert the new data.
-        for (int i = mContextualCards.size() - 1; i >= 0; i--) {
-            if (mContextualCards.get(i).getCardType() == cardType) {
-                mContextualCards.remove(i);
-            }
-        }
+        final Set<Integer> cardTypes = updateList
+                .stream()
+                .map(card -> card.getCardType())
+                .collect(Collectors.toSet());
+        //Remove the existing data that matches the certain cardType before inserting new data.
+        final List<ContextualCard> cardsToKeep = mContextualCards
+                .stream()
+                .filter(card -> !cardTypes.contains(card.getCardType()))
+                .collect(Collectors.toList());
+        final List<ContextualCard> allCards = new ArrayList<>();
+        allCards.addAll(cardsToKeep);
+        allCards.addAll(updateList);
 
-        //Append the new data
-        mContextualCards.addAll(updateList);
+        sortCards(allCards);
 
-        sortCards();
+        //replace with the new data
+        mContextualCards.clear();
+        mContextualCards.addAll(allCards);
+
+        loadCardControllers();
 
         if (mListener != null) {
-            mListener.onContextualCardUpdated(ContextualCard.CardType.INVALID, mContextualCards);
+            mListener.onContextualCardUpdated(mContextualCards);
         }
     }
 
     @Override
     public void onFinishCardLoading(List<ContextualCard> contextualCards) {
-        mContextualCards.clear();
-        if (contextualCards != null) {
-            mContextualCards.addAll(contextualCards);
-        }
-
-        //Force card sorting here in case CardControllers of custom view have nothing to update
-        // for the first launch.
-        sortCards();
-
-        loadCardControllers();
+        onContextualCardUpdated(contextualCards);
     }
 
     void setListener(ContextualCardUpdateListener listener) {
