@@ -18,9 +18,9 @@ package com.android.settings.applications.defaultapps;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -133,8 +133,11 @@ public class DefaultBrowserPreferenceControllerTest {
     @Test
     public void isBrowserDefault_onlyApp_shouldReturnTrue() {
         when(mPackageManager.getDefaultBrowserPackageNameAsUser(anyInt())).thenReturn(null);
+        final List<ResolveInfo> resolveInfos = new ArrayList<>();
+        final String PACKAGE_ONE = "pkg";
+        resolveInfos.add(createResolveInfo(PACKAGE_ONE));
         when(mPackageManager.queryIntentActivitiesAsUser(any(Intent.class), anyInt(), anyInt()))
-                .thenReturn(Collections.singletonList(new ResolveInfo()));
+            .thenReturn(resolveInfos);
 
         assertThat(mController.isBrowserDefault("pkg", 0)).isTrue();
     }
@@ -159,6 +162,15 @@ public class DefaultBrowserPreferenceControllerTest {
             mController.getCandidates(mPackageManager, 0 /* userId */);
 
         assertThat(defaultBrowserInfo.size()).isEqualTo(2);
+    }
+
+    @Test
+    public void getCandidates_shouldQueryActivityWithFlagsEquals0() {
+
+        mController.getCandidates(mPackageManager, 0 /* userId */);
+
+        verify(mPackageManager).queryIntentActivitiesAsUser(
+            any(Intent.class), eq(0) /* flags */, eq(0) /* userId */);
     }
 
     private ResolveInfo createResolveInfo(String packageName) {
