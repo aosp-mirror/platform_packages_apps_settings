@@ -15,12 +15,15 @@
  */
 package com.android.settings.network;
 
+import static android.provider.Settings.ACTION_DATA_USAGE_SETTINGS;
 import static com.android.settings.network.MobilePlanPreferenceController
         .MANAGE_MOBILE_PLAN_DIALOG_ID;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.icu.text.ListFormatter;
 import android.provider.SearchIndexableResource;
 import android.text.BidiFormatter;
@@ -45,6 +48,7 @@ import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.function.BooleanSupplier;
 import java.util.List;
 
 @SearchIndexable
@@ -158,24 +162,32 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         private final WifiMasterSwitchPreferenceController mWifiPreferenceController;
         private final MobileNetworkPreferenceController mMobileNetworkPreferenceController;
         private final TetherPreferenceController mTetherPreferenceController;
+        private final BooleanSupplier mHasDataUsageActivity;
 
         public SummaryProvider(Context context, SummaryLoader summaryLoader) {
             this(context, summaryLoader,
                     new WifiMasterSwitchPreferenceController(context, null),
                     new MobileNetworkPreferenceController(context),
-                    new TetherPreferenceController(context, null /* lifecycle */));
+                    new TetherPreferenceController(context, null /* lifecycle */),
+                    () -> {
+                        final Intent intent = new Intent(ACTION_DATA_USAGE_SETTINGS);
+                        final PackageManager pm = context.getPackageManager();
+                        return intent.resolveActivity(pm) != null;
+                    });
         }
 
         @VisibleForTesting(otherwise = VisibleForTesting.NONE)
         SummaryProvider(Context context, SummaryLoader summaryLoader,
                 WifiMasterSwitchPreferenceController wifiPreferenceController,
                 MobileNetworkPreferenceController mobileNetworkPreferenceController,
-                TetherPreferenceController tetherPreferenceController) {
+                TetherPreferenceController tetherPreferenceController,
+                BooleanSupplier hasDataUsageActivity) {
             mContext = context;
             mSummaryLoader = summaryLoader;
             mWifiPreferenceController = wifiPreferenceController;
             mMobileNetworkPreferenceController = mobileNetworkPreferenceController;
             mTetherPreferenceController = tetherPreferenceController;
+            mHasDataUsageActivity = hasDataUsageActivity;
         }
 
 
@@ -198,7 +210,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
                 if (mMobileNetworkPreferenceController.isAvailable() && !TextUtils.isEmpty(mobileSummary)) {
                     summaries.add(mobileSummary);
                 }
-                if (!TextUtils.isEmpty(dataUsageSummary)) {
+                if (!TextUtils.isEmpty(dataUsageSummary) && mHasDataUsageActivity.getAsBoolean()) {
                     summaries.add(dataUsageSummary);
                 }
                 if (mTetherPreferenceController.isAvailable() && !TextUtils.isEmpty(hotspotSummary)) {

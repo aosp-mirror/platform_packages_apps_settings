@@ -964,9 +964,10 @@ public class UserSettings extends SettingsPreferenceFragment
                 mAddUserWhenLockedPreferenceController.getPreferenceKey());
         mAddUserWhenLockedPreferenceController.updateState(addUserOnLockScreen);
         mMultiUserFooterPreferenceController.updateState(null /* preference */);
+        mAddUser.setVisible(mUserCaps.mCanAddUser && Utils.isDeviceProvisioned(context)
+                && mUserCaps.mUserSwitcherEnabled);
         mUserListCategory.setVisible(mUserCaps.mUserSwitcherEnabled);
         if (!mUserCaps.mUserSwitcherEnabled) {
-            mAddUser.setVisible(false);
             return;
         }
 

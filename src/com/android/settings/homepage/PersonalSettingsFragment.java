@@ -43,7 +43,7 @@ public class PersonalSettingsFragment extends InstrumentedFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContextualCardManager = new ContextualCardManager(getContext(), getSettingsLifecycle());
-        mContextualCardManager.startCardContentLoading();
+        mContextualCardManager.startCardContentLoading(this);
     }
 
     @Override
