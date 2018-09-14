@@ -82,7 +82,7 @@ public class ConditionContextualCardControllerTest {
 
         mController.onConditionsChanged();
 
-        verify(mController).onDataUpdated(any());
+        verify(mListener).onContextualCardUpdated(any());
     }
 
     @Test
@@ -94,7 +94,7 @@ public class ConditionContextualCardControllerTest {
 
         mController.onConditionsChanged();
 
-        verify(mController, never()).onDataUpdated(any());
+        verify(mListener, never()).onContextualCardUpdated(any());
     }
 
     private class FakeConditionalCard implements ConditionalCard {
