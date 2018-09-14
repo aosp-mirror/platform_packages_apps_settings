@@ -189,9 +189,8 @@ public class RecentNotifyingAppsPreferenceControllerTest {
         mController.displayPreference(mScreen);
 
         verify(mCategory).setTitle(R.string.recent_notifications);
-        // Only add app1. app2 is skipped because of the package name, app3 skipped because
-        // it's invalid app.
-        verify(mCategory, times(1)).addPreference(any(Preference.class));
+        // Only add app1 & app2. app3 skipped because it's invalid app.
+        verify(mCategory, times(2)).addPreference(any(Preference.class));
 
         verify(mSeeAllPref).setSummary(null);
         verify(mSeeAllPref).setIcon(R.drawable.ic_chevron_right_24dp);
@@ -244,35 +243,6 @@ public class RecentNotifyingAppsPreferenceControllerTest {
         List<Preference> prefs = prefCaptor.getAllValues();
         assertThat(prefs.get(1).getKey()).isEqualTo(app1.getPackage());
         assertThat(prefs.get(0).getKey()).isEqualTo(app2.getPackage());
-    }
-
-    @Test
-    public void display_hasRecentButNoneDisplayable_showAppInfo() {
-        final List<NotifyingApp> apps = new ArrayList<>();
-        final NotifyingApp app1 = new NotifyingApp()
-                .setPackage("com.android.phone")
-                .setLastNotified(System.currentTimeMillis());
-        final NotifyingApp app2 = new NotifyingApp()
-                .setPackage("com.android.settings")
-                .setLastNotified(System.currentTimeMillis());
-        apps.add(app1);
-        apps.add(app2);
-
-        // app1, app2 are not displayable
-        when(mAppState.getEntry(app1.getPackage(), UserHandle.myUserId()))
-                .thenReturn(mock(ApplicationsState.AppEntry.class));
-        when(mAppState.getEntry(app2.getPackage(), UserHandle.myUserId()))
-                .thenReturn(mock(ApplicationsState.AppEntry.class));
-        when(mPackageManager.resolveActivity(any(Intent.class), anyInt())).thenReturn(
-                new ResolveInfo());
-        when(mBackend.getRecentApps()).thenReturn(apps);
-
-        mController.displayPreference(mScreen);
-
-        verify(mCategory, never()).addPreference(any(Preference.class));
-        verify(mCategory).setTitle(null);
-        verify(mSeeAllPref).setTitle(R.string.notifications_title);
-        verify(mSeeAllPref).setIcon(null);
     }
 
     @Test
