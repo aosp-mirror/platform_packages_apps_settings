@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
  * except in compliance with the License. You may obtain a copy of the License at
@@ -75,18 +75,13 @@ import java.util.List;
 /**
  * Panel showing data usage history across various networks, including options
  * to inspect based on usage cycle and control through {@link NetworkPolicy}.
-
- * Deprecated in favor of {@link DataUsageListV2}
- *
- * @deprecated
  */
-@Deprecated
-public class DataUsageList extends DataUsageBaseFragment {
+public class DataUsageListV2 extends DataUsageBaseFragment {
 
     public static final String EXTRA_SUB_ID = "sub_id";
     public static final String EXTRA_NETWORK_TEMPLATE = "network_template";
 
-    private static final String TAG = "DataUsageList";
+    private static final String TAG = "DataUsageListV2";
     private static final boolean LOGD = false;
 
     private static final String KEY_USAGE_AMOUNT = "usage_amount";
@@ -158,7 +153,7 @@ public class DataUsageList extends DataUsageBaseFragment {
         mHeader = setPinnedHeaderView(R.layout.apps_filter_spinner);
         mHeader.findViewById(R.id.filter_settings).setOnClickListener(btn -> {
             final Bundle args = new Bundle();
-            args.putParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE, mTemplate);
+            args.putParcelable(DataUsageListV2.EXTRA_NETWORK_TEMPLATE, mTemplate);
             new SubSettingLauncher(getContext())
                     .setDestination(BillingCycleSettings.class.getName())
                     .setTitleRes(R.string.billing_cycle)
