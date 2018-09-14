@@ -25,6 +25,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.app.PendingIntent;
 import android.content.Context;
+import android.text.TextUtils;
 
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
@@ -209,9 +210,11 @@ public class SliceTester {
                 continue;
             }
 
-            hasTitle = true;
             for (SliceItem subTitleItem : titleItems) {
-                assertThat(subTitleItem.getText()).isEqualTo(title);
+                if (TextUtils.equals(subTitleItem.getText(), title)) {
+                    hasTitle = true;
+                    assertThat(subTitleItem.getText()).isEqualTo(title);
+                }
             }
         }
         assertThat(hasTitle).isTrue();
