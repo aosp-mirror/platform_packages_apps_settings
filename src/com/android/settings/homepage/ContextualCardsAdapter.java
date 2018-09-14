@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,11 +40,14 @@ public class ContextualCardsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private final Context mContext;
     private final ControllerRendererPool mControllerRendererPool;
     private final List<ContextualCard> mContextualCards;
+    private final LifecycleOwner mLifecycleOwner;
 
-    public ContextualCardsAdapter(Context context, ContextualCardManager manager) {
+    public ContextualCardsAdapter(Context context, LifecycleOwner lifecycleOwner,
+            ContextualCardManager manager) {
         mContext = context;
         mContextualCards = new ArrayList<>();
         mControllerRendererPool = manager.getControllerRendererPool();
+        mLifecycleOwner = lifecycleOwner;
         setHasStableIds(true);
     }
 
@@ -60,7 +64,7 @@ public class ContextualCardsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int cardType) {
         final ContextualCardRenderer renderer = mControllerRendererPool.getRenderer(mContext,
-                cardType);
+                mLifecycleOwner, cardType);
         final int viewType = renderer.getViewType();
         final View view = LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false);
 
@@ -71,7 +75,7 @@ public class ContextualCardsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         final int cardType = mContextualCards.get(position).getCardType();
         final ContextualCardRenderer renderer = mControllerRendererPool.getRenderer(mContext,
-                cardType);
+                mLifecycleOwner, cardType);
 
         renderer.bindView(holder, mContextualCards.get(position));
     }

@@ -19,6 +19,8 @@ package com.android.settings.homepage;
 import com.android.settings.homepage.ContextualCard.CardType;
 import com.android.settings.homepage.conditional.ConditionContextualCardController;
 import com.android.settings.homepage.conditional.ConditionContextualCardRenderer;
+import com.android.settings.homepage.slices.SliceContextualCardController;
+import com.android.settings.homepage.slices.SliceContextualCardRenderer;
 
 import java.util.Set;
 import java.util.TreeSet;
@@ -50,6 +52,9 @@ public class ContextualCardLookupTable {
                 add(new ControllerRendererMapping(CardType.CONDITIONAL,
                         ConditionContextualCardController.class,
                         ConditionContextualCardRenderer.class));
+                add(new ControllerRendererMapping(CardType.SLICE,
+                        SliceContextualCardController.class,
+                        SliceContextualCardRenderer.class));
             }};
 
     public static Class<? extends ContextualCardController> getCardControllerClass(

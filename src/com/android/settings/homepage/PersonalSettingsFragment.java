@@ -54,7 +54,8 @@ public class PersonalSettingsFragment extends InstrumentedFragment {
         mLayoutManager = new GridLayoutManager(getActivity(), SPAN_COUNT,
                 GridLayoutManager.VERTICAL, false /* reverseLayout */);
         mCardsContainer.setLayoutManager(mLayoutManager);
-        mContextualCardsAdapter = new ContextualCardsAdapter(getContext(), mContextualCardManager);
+        mContextualCardsAdapter = new ContextualCardsAdapter(getContext(),
+                this /* lifecycleOwner */, mContextualCardManager);
         mCardsContainer.setAdapter(mContextualCardsAdapter);
         mContextualCardManager.setListener(mContextualCardsAdapter);
 
