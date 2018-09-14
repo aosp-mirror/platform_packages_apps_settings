@@ -114,7 +114,7 @@ public class DeviceNamePreferenceControllerTest {
 
     @Test
     public void setDeviceName_preferenceUpdatedWhenDeviceNameUpdated() {
-        forceAcceptDeviceName();
+        acceptDeviceName(true);
         mController.displayPreference(mScreen);
         mController.onPreferenceChange(mPreference, TESTING_STRING);
 
@@ -123,7 +123,7 @@ public class DeviceNamePreferenceControllerTest {
 
     @Test
     public void setDeviceName_bluetoothNameUpdatedWhenDeviceNameUpdated() {
-        forceAcceptDeviceName();
+        acceptDeviceName(true);
         mController.displayPreference(mScreen);
         mController.onPreferenceChange(mPreference, TESTING_STRING);
 
@@ -132,7 +132,7 @@ public class DeviceNamePreferenceControllerTest {
 
     @Test
     public void setDeviceName_wifiTetherNameUpdatedWhenDeviceNameUpdated() {
-        forceAcceptDeviceName();
+        acceptDeviceName(true);
         mController.displayPreference(mScreen);
         mController.onPreferenceChange(mPreference, TESTING_STRING);
 
@@ -150,21 +150,39 @@ public class DeviceNamePreferenceControllerTest {
 
     @Test
     public void setDeviceName_ignoresIfCancelPressed() {
-        forceAcceptDeviceName();
+        acceptDeviceName(true);
         mController.displayPreference(mScreen);
         mController.onPreferenceChange(mPreference, TESTING_STRING);
 
         assertThat(mBluetoothAdapter.getName()).isEqualTo(TESTING_STRING);
     }
 
-    private void forceAcceptDeviceName() {
+    @Test
+    public void setDeviceName_okInDeviceNameWarningDialog_shouldChangePreferenceText() {
+        acceptDeviceName(true);
+        mController.displayPreference(mScreen);
+        mController.onPreferenceChange(mPreference, TESTING_STRING);
+
+        assertThat(mPreference.getSummary()).isEqualTo(TESTING_STRING);
+    }
+
+    @Test
+    public void setDeviceName_cancelInDeviceNameWarningDialog_shouldNotChangePreferenceText() {
+        acceptDeviceName(false);
+        mController.displayPreference(mScreen);
+        mController.onPreferenceChange(mPreference, TESTING_STRING);
+
+        assertThat(mPreference.getSummary()).isNotEqualTo(TESTING_STRING);
+        assertThat(mPreference.getText()).isEqualTo(mPreference.getSummary());
+    }
+
+    private void acceptDeviceName(boolean accept) {
         mController.setHost(
                 new DeviceNamePreferenceController.DeviceNamePreferenceHost() {
                     @Override
                     public void showDeviceNameWarningDialog(String deviceName) {
-                        mController.confirmDeviceName();
+                        mController.updateDeviceName(accept);
                     }
                 });
     }
-
 }
