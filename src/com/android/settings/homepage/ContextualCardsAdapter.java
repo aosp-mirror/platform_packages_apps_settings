@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ContextualCardsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         implements ContextualCardUpdateListener {
@@ -101,7 +102,8 @@ public class ContextualCardsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     @Override
-    public void onContextualCardUpdated(List<ContextualCard> contextualCards) {
+    public void onContextualCardUpdated(Map<Integer, List<ContextualCard>> cards) {
+        final List<ContextualCard> contextualCards = cards.get(ContextualCard.CardType.DEFAULT);
         //TODO(b/112245748): Should implement a DiffCallback so we can use notifyItemChanged()
         // instead.
         if (contextualCards == null) {

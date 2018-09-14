@@ -16,8 +16,6 @@
 
 package com.android.settings.homepage;
 
-import java.util.List;
-
 /**
  * Data controller for {@link ContextualCard}.
  */
@@ -25,12 +23,6 @@ public interface ContextualCardController {
 
     @ContextualCard.CardType
     int getCardType();
-
-    /**
-     * When data is updated or changed, the new data should be passed to ContextualCardManager for
-     * list updating.
-     */
-    void onDataUpdated(List<ContextualCard> cardList);
 
     void onPrimaryClick(ContextualCard card);
 

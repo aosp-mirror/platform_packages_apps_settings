@@ -18,8 +18,11 @@ package com.android.settings.homepage;
 
 import static com.android.settings.homepage.CardContentLoader.CARD_CONTENT_LOADER_ID;
 
+import static java.util.stream.Collectors.groupingBy;
+
 import android.content.Context;
 import android.os.Bundle;
+import android.util.ArrayMap;
 import android.util.Log;
 import android.widget.BaseAdapter;
 
@@ -33,6 +36,7 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -110,15 +114,12 @@ public class ContextualCardManager implements CardContentLoader.CardContentLoade
     }
 
     @Override
-    public void onContextualCardUpdated(List<ContextualCard> updateList) {
+    public void onContextualCardUpdated(Map<Integer, List<ContextualCard>> updateList) {
         //TODO(b/112245748): Should implement a DiffCallback.
         //Keep the old list for comparison.
         final List<ContextualCard> prevCards = mContextualCards;
 
-        final Set<Integer> cardTypes = updateList
-                .stream()
-                .map(card -> card.getCardType())
-                .collect(Collectors.toSet());
+        final Set<Integer> cardTypes = updateList.keySet();
         //Remove the existing data that matches the certain cardType before inserting new data.
         final List<ContextualCard> cardsToKeep = mContextualCards
                 .stream()
@@ -126,10 +127,10 @@ public class ContextualCardManager implements CardContentLoader.CardContentLoade
                 .collect(Collectors.toList());
         final List<ContextualCard> allCards = new ArrayList<>();
         allCards.addAll(cardsToKeep);
-        allCards.addAll(updateList);
+        allCards.addAll(
+                updateList.values().stream().flatMap(List::stream).collect(Collectors.toList()));
 
         sortCards(allCards);
-
         //replace with the new data
         mContextualCards.clear();
         mContextualCards.addAll(allCards);
@@ -137,13 +138,15 @@ public class ContextualCardManager implements CardContentLoader.CardContentLoade
         loadCardControllers();
 
         if (mListener != null) {
-            mListener.onContextualCardUpdated(mContextualCards);
+            final Map<Integer, List<ContextualCard>> cardsToUpdate = new ArrayMap<>();
+            cardsToUpdate.put(ContextualCard.CardType.DEFAULT, mContextualCards);
+            mListener.onContextualCardUpdated(cardsToUpdate);
         }
     }
 
     @Override
-    public void onFinishCardLoading(List<ContextualCard> contextualCards) {
-        onContextualCardUpdated(contextualCards);
+    public void onFinishCardLoading(List<ContextualCard> cards) {
+        onContextualCardUpdated(cards.stream().collect(groupingBy(ContextualCard::getCardType)));
     }
 
     void setListener(ContextualCardUpdateListener listener) {
