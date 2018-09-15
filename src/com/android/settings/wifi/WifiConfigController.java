@@ -465,8 +465,7 @@ public class WifiConfigController implements TextWatcher,
         } else {
             enabled = ipAndProxyFieldsAreValid();
         }
-        if (mEapCaCertSpinner != null
-                && mView.findViewById(R.id.l_ca_cert).getVisibility() != View.GONE) {
+        if (mAccessPointSecurity == AccessPoint.SECURITY_EAP) {
             String caCertSelection = (String) mEapCaCertSpinner.getSelectedItem();
             if (caCertSelection.equals(mUnspecifiedCertString)) {
                 // Disallow submit if the user has not selected a CA certificate for an EAP network
@@ -482,10 +481,8 @@ public class WifiConfigController implements TextWatcher,
                 enabled = false;
             }
         }
-        if (mEapUserCertSpinner != null
-                && mView.findViewById(R.id.l_user_cert).getVisibility() != View.GONE
-                && ((String) mEapUserCertSpinner.getSelectedItem())
-                       .equals(mUnspecifiedCertString)) {
+        if (mAccessPointSecurity == AccessPoint.SECURITY_EAP
+                && mEapUserCertSpinner.getSelectedItem().equals(mUnspecifiedCertString)) {
             // Disallow submit if the user has not selected a user certificate for an EAP network
             // configuration.
             enabled = false;
