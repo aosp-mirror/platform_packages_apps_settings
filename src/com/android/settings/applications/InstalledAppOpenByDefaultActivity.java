@@ -20,7 +20,7 @@ import android.content.Intent;
 
 import com.android.settings.SettingsActivity;
 
-public class InstalledAppOpenByDefaultPage extends SettingsActivity {
+public class InstalledAppOpenByDefaultActivity extends SettingsActivity {
 
     @Override
     public Intent getIntent() {
