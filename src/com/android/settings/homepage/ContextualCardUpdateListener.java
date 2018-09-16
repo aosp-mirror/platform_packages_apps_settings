@@ -17,15 +17,19 @@
 package com.android.settings.homepage;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * When {@link ContextualCardController} detects changes, it will notify the listeners registered.
- * In our case, {@link ContextualCardManager} gets noticed.
- *
- * After the list of {@link ContextualCard} gets updated in{@link ContextualCardManager},
- * {@link ContextualCardManager} will notify the listeners registered, {@link
- * ContextualCardsAdapter} in this case.
  */
 public interface ContextualCardUpdateListener {
-    void onContextualCardUpdated(int cardType, List<ContextualCard> updateList);
+
+    /**
+     * Called when a set of cards are updated.
+     *
+     * @param cards A map of updates grouped by {@link ContextualCard.CardType}. Values can be
+     *              null, which means all cards from corresponding {@link
+     *              ContextualCard.CardType} are removed.
+     */
+    void onContextualCardUpdated(Map<Integer, List<ContextualCard>> cards);
 }

@@ -137,9 +137,6 @@ public class ActionDisabledByAdminDialogHelper {
             case DevicePolicyManager.POLICY_DISABLE_SCREEN_CAPTURE:
                 titleView.setText(R.string.disabled_by_policy_title_screen_capture);
                 break;
-            case DevicePolicyManager.POLICY_MANDATORY_BACKUPS:
-                titleView.setText(R.string.disabled_by_policy_title_turn_off_backups);
-                break;
             case DevicePolicyManager.POLICY_SUSPEND_PACKAGES:
                 titleView.setText(R.string.disabled_by_policy_title_suspend_packages);
                 break;

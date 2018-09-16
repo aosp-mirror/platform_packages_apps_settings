@@ -111,7 +111,7 @@ public class DefaultBrowserPreferenceController extends DefaultAppPreferenceCont
         final List<ResolveInfo> candidates = new ArrayList<>();
         // Resolve that intent and check that the handleAllWebDataURI boolean is set
         final List<ResolveInfo> list = packageManager.queryIntentActivitiesAsUser(
-            BROWSE_PROBE, PackageManager.MATCH_ALL, userId);
+            BROWSE_PROBE, 0 /* flags */, userId);
         if (list != null) {
             final Set<String> addedPackages = new ArraySet<>();
             for (ResolveInfo info : list) {
@@ -181,13 +181,12 @@ public class DefaultBrowserPreferenceController extends DefaultAppPreferenceCont
      * Whether or not the pkg is the default browser
      */
     public boolean isBrowserDefault(String pkg, int userId) {
-        String defaultPackage = mPackageManager.getDefaultBrowserPackageNameAsUser(userId);
+        final String defaultPackage = mPackageManager.getDefaultBrowserPackageNameAsUser(userId);
         if (defaultPackage != null) {
             return defaultPackage.equals(pkg);
         }
 
-        final List<ResolveInfo> list = mPackageManager.queryIntentActivitiesAsUser(BROWSE_PROBE,
-                PackageManager.MATCH_ALL, userId);
+        final List<ResolveInfo> list = getCandidates(mPackageManager, userId);
         // There is only 1 app, it must be the default browser.
         return list != null && list.size() == 1;
     }

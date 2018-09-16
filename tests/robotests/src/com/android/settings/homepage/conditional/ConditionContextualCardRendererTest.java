@@ -101,7 +101,6 @@ public class ConditionContextualCardRendererTest {
                 .setMetricsConstant(1)
                 .setActionText("test_action")
                 .setName("test_name")
-                .setCardType(ContextualCard.CardType.CONDITIONAL)
                 .setTitleText("test_title")
                 .setSummaryText("test_summary")
                 .setIconDrawable(mContext.getDrawable(R.drawable.ic_do_not_disturb_on_24dp))

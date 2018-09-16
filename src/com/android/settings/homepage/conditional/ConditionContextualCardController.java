@@ -17,6 +17,7 @@
 package com.android.settings.homepage.conditional;
 
 import android.content.Context;
+import android.util.ArrayMap;
 
 import com.android.settings.homepage.ContextualCard;
 import com.android.settings.homepage.ContextualCardController;
@@ -27,6 +28,7 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * This controller triggers the loading of conditional cards and monitors state changes to
@@ -54,11 +56,6 @@ public class ConditionContextualCardController implements ContextualCardControll
     @Override
     public int getCardType() {
         return ContextualCard.CardType.CONDITIONAL;
-    }
-
-    @Override
-    public void onDataUpdated(List<ContextualCard> cardList) {
-        mListener.onContextualCardUpdated(getCardType(), cardList);
     }
 
     @Override
@@ -96,7 +93,6 @@ public class ConditionContextualCardController implements ContextualCardControll
                             .setActionText(condition.getActionText())
                             .setName(mContext.getPackageName() + "/"
                                     + condition.getTitle().toString())
-                            .setCardType(ContextualCard.CardType.CONDITIONAL)
                             .setTitleText(condition.getTitle().toString())
                             .setSummaryText(condition.getSummary().toString())
                             .setIconDrawable(condition.getIcon())
@@ -106,7 +102,9 @@ public class ConditionContextualCardController implements ContextualCardControll
         }
 
         if (mListener != null) {
-            onDataUpdated(conditionCards);
+            final Map<Integer, List<ContextualCard>> conditionalCards = new ArrayMap<>();
+            conditionalCards.put(ContextualCard.CardType.CONDITIONAL, conditionCards);
+            mListener.onContextualCardUpdated(conditionalCards);
         }
     }
 }

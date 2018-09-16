@@ -18,8 +18,12 @@ package com.android.settings.homepage;
 
 import static com.android.settings.homepage.CardContentLoader.CARD_CONTENT_LOADER_ID;
 
+import static java.util.stream.Collectors.groupingBy;
+
 import android.content.Context;
 import android.os.Bundle;
+import android.util.ArrayMap;
+import android.util.Log;
 import android.widget.BaseAdapter;
 
 import androidx.annotation.NonNull;
@@ -32,6 +36,9 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * This is a centralized manager of multiple {@link ContextualCardController}.
@@ -57,18 +64,23 @@ public class ContextualCardManager implements CardContentLoader.CardContentLoade
     private final ControllerRendererPool mControllerRendererPool;
     private final Lifecycle mLifecycle;
     private final List<ContextualCard> mContextualCards;
+    private final List<LifecycleObserver> mLifecycleObservers;
 
     private ContextualCardUpdateListener mListener;
 
-
-    public ContextualCardManager(Context context, Lifecycle lifecycle) {
+    public ContextualCardManager(Context context, @NonNull Lifecycle lifecycle) {
         mContext = context;
         mLifecycle = lifecycle;
         mContextualCards = new ArrayList<>();
+        mLifecycleObservers = new ArrayList<>();
         mControllerRendererPool = new ControllerRendererPool();
+        //for data provided by Settings
+        for (int cardType : SETTINGS_CARDS) {
+            setupController(cardType);
+        }
     }
 
-    void startCardContentLoading(PersonalSettingsFragment fragment) {
+    void loadContextualCards(PersonalSettingsFragment fragment) {
         final CardContentLoaderCallbacks cardContentLoaderCallbacks =
                 new CardContentLoaderCallbacks(mContext);
         cardContentLoaderCallbacks.setListener(this);
@@ -77,71 +89,64 @@ public class ContextualCardManager implements CardContentLoader.CardContentLoade
     }
 
     private void loadCardControllers() {
-        if (mContextualCards != null) {
-            for (ContextualCard card : mContextualCards) {
-                setupController(card.getCardType());
-            }
-        }
-
-        //for data provided by Settings
-        for (int cardType : SETTINGS_CARDS) {
-            setupController(cardType);
+        for (ContextualCard card : mContextualCards) {
+            setupController(card.getCardType());
         }
     }
 
     private void setupController(int cardType) {
         final ContextualCardController controller = mControllerRendererPool.getController(mContext,
                 cardType);
-        if (controller != null) {
-            controller.setCardUpdateListener(this);
-            if (controller instanceof LifecycleObserver) {
-                if (mLifecycle != null) {
-                    mLifecycle.addObserver((LifecycleObserver) controller);
-                }
-            }
+        if (controller == null) {
+            Log.w(TAG, "Cannot find ContextualCardController for type " + cardType);
+            return;
+        }
+        controller.setCardUpdateListener(this);
+        if (controller instanceof LifecycleObserver && !mLifecycleObservers.contains(controller)) {
+            mLifecycleObservers.add((LifecycleObserver) controller);
+            mLifecycle.addObserver((LifecycleObserver) controller);
         }
     }
 
     //TODO(b/111822376): implement sorting mechanism.
-    private void sortCards() {
+    private void sortCards(List<ContextualCard> cards) {
         //take mContextualCards as the source and do the ranking based on the rule.
     }
 
     @Override
-    public void onContextualCardUpdated(int cardType, List<ContextualCard> updateList) {
+    public void onContextualCardUpdated(Map<Integer, List<ContextualCard>> updateList) {
         //TODO(b/112245748): Should implement a DiffCallback.
         //Keep the old list for comparison.
         final List<ContextualCard> prevCards = mContextualCards;
 
-        //Remove the existing data that matches the certain cardType so as to insert the new data.
-        for (int i = mContextualCards.size() - 1; i >= 0; i--) {
-            if (mContextualCards.get(i).getCardType() == cardType) {
-                mContextualCards.remove(i);
-            }
-        }
+        final Set<Integer> cardTypes = updateList.keySet();
+        //Remove the existing data that matches the certain cardType before inserting new data.
+        final List<ContextualCard> cardsToKeep = mContextualCards
+                .stream()
+                .filter(card -> !cardTypes.contains(card.getCardType()))
+                .collect(Collectors.toList());
+        final List<ContextualCard> allCards = new ArrayList<>();
+        allCards.addAll(cardsToKeep);
+        allCards.addAll(
+                updateList.values().stream().flatMap(List::stream).collect(Collectors.toList()));
 
-        //Append the new data
-        mContextualCards.addAll(updateList);
+        sortCards(allCards);
+        //replace with the new data
+        mContextualCards.clear();
+        mContextualCards.addAll(allCards);
 
-        sortCards();
+        loadCardControllers();
 
         if (mListener != null) {
-            mListener.onContextualCardUpdated(ContextualCard.CardType.INVALID, mContextualCards);
+            final Map<Integer, List<ContextualCard>> cardsToUpdate = new ArrayMap<>();
+            cardsToUpdate.put(ContextualCard.CardType.DEFAULT, mContextualCards);
+            mListener.onContextualCardUpdated(cardsToUpdate);
         }
     }
 
     @Override
-    public void onFinishCardLoading(List<ContextualCard> contextualCards) {
-        mContextualCards.clear();
-        if (contextualCards != null) {
-            mContextualCards.addAll(contextualCards);
-        }
-
-        //Force card sorting here in case CardControllers of custom view have nothing to update
-        // for the first launch.
-        sortCards();
-
-        loadCardControllers();
+    public void onFinishCardLoading(List<ContextualCard> cards) {
+        onContextualCardUpdated(cards.stream().collect(groupingBy(ContextualCard::getCardType)));
     }
 
     void setListener(ContextualCardUpdateListener listener) {
@@ -151,7 +156,6 @@ public class ContextualCardManager implements CardContentLoader.CardContentLoade
     public ControllerRendererPool getControllerRendererPool() {
         return mControllerRendererPool;
     }
-
 
     static class CardContentLoaderCallbacks implements
             LoaderManager.LoaderCallbacks<List<ContextualCard>> {

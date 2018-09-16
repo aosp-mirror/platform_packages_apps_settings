@@ -78,6 +78,12 @@ public class NotificationBackend {
         return row;
     }
 
+    public boolean isBlockable(Context context, ApplicationInfo info) {
+        final boolean blocked = getNotificationsBanned(info.packageName, info.uid);
+        final boolean systemApp = isSystemApp(context, info);
+        return !systemApp || (systemApp && blocked);
+    }
+
     public AppRow loadAppRow(Context context, PackageManager pm, PackageInfo app) {
         final AppRow row = loadAppRow(context, pm, app.applicationInfo);
         recordCanBeBlocked(context, pm, app, row);

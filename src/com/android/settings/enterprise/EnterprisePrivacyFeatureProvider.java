@@ -124,9 +124,4 @@ public interface EnterprisePrivacyFeatureProvider {
      * profile (if any).
      */
     int getNumberOfActiveDeviceAdminsForCurrentUserAndManagedProfile();
-
-    /*
-     * Returns whether backups are mandatory.
-     */
-    boolean areBackupsMandatory();
 }
